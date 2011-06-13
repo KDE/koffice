@@ -156,7 +156,7 @@ public:
 
     void saveOasis(KoShapeSavingContext & context) const;
     bool saveOdf(KoDocument::SavingContext & documentContext, const KOdfPageLayoutData &layout);
-    bool loadOasis(const KoXmlElement &element, KoShapeLoadingContext &context);
+    bool loadOasis(const KXmlElement &element, KoShapeLoadingContext &context);
     void loadOdfStyles(KoShapeLoadingContext & context);
     void saveOdfStyles(KoShapeSavingContext & context);
 

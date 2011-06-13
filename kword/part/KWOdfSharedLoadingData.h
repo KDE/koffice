@@ -36,7 +36,7 @@ public:
     explicit KWOdfSharedLoadingData(KWOdfLoader *loader);
 
 protected:
-    virtual void shapeInserted(KoShape *shape, const KoXmlElement &element, KoShapeLoadingContext &context);
+    virtual void shapeInserted(KoShape *shape, const KXmlElement &element, KoShapeLoadingContext &context);
 
 private:
     KWOdfLoader *m_loader;

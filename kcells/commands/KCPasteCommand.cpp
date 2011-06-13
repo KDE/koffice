@@ -51,7 +51,7 @@ public:
     }
     virtual ~PasteCellCommand() {}
 
-    void addXmlElement(const KCCell &cell, const KoXmlElement &element) {
+    void addXmlElement(const KCCell &cell, const KXmlElement &element) {
         add(cell.cellPosition(), m_sheet);
         m_elements.insert(cell, element);
     }
@@ -93,7 +93,7 @@ protected:
     }
 
 private:
-    QHash<KCCell, KoXmlElement> m_elements;
+    QHash<KCCell, KXmlElement> m_elements;
 };
 
 
@@ -195,7 +195,7 @@ bool KCPasteCommand::unknownShiftDirection(const QMimeData *mimeData)
         return false;
     }
 
-    KoXmlElement e = d.documentElement();
+    KXmlElement e = d.documentElement();
     if (!e.namedItem("columns").toElement().isNull()) {
         return false;
     }
@@ -204,7 +204,7 @@ bool KCPasteCommand::unknownShiftDirection(const QMimeData *mimeData)
         return false;
     }
 
-    KoXmlElement c = e.firstChild().toElement();
+    KXmlElement c = e.firstChild().toElement();
     for (; !c.isNull(); c = c.nextSibling().toElement()) {
         if (c.tagName() == "cell") {
             return true;
@@ -271,7 +271,7 @@ bool KCPasteCommand::processXmlData(Element *element, KoXmlDocument *data)
     Q_ASSERT(sheet == m_sheet);
     KCMap *const map = sheet->map();
 
-    const KoXmlElement root = data->documentElement(); // "spreadsheet-snippet"
+    const KXmlElement root = data->documentElement(); // "spreadsheet-snippet"
     if (root.hasAttribute("cut")) {
         const KCRegion cutRegion(root.attribute("cut"), map, sheet);
         if (cutRegion.isValid()) {
@@ -431,7 +431,7 @@ bool KCPasteCommand::processXmlData(Element *element, KoXmlDocument *data)
     // This command will collect as many cell loads as possible in the iteration.
     PasteCellCommand *pasteCellCommand = 0;
 
-    KoXmlElement e = root.firstChild().toElement(); // "columns", "rows" or "cell"
+    KXmlElement e = root.firstChild().toElement(); // "columns", "rows" or "cell"
     for (; !e.isNull(); e = e.nextSibling().toElement()) {
         // If the element is not a cell, unset the pasteCellCommand pointer.
         // If existing, it is attached as child commnand, so no leaking here.
@@ -456,7 +456,7 @@ bool KCPasteCommand::processXmlData(Element *element, KoXmlDocument *data)
             // Set the column style.
             KCColumnFormat columnFormat;
             columnFormat.setSheet(sheet);
-            KoXmlElement c = e.firstChild().toElement();
+            KXmlElement c = e.firstChild().toElement();
             for (; !c.isNull(); c = c.nextSibling().toElement()) {
                 if (c.tagName() != "column") {
                     continue;
@@ -491,7 +491,7 @@ bool KCPasteCommand::processXmlData(Element *element, KoXmlDocument *data)
             // Set the row style.
             KCRowFormat rowFormat;
             rowFormat.setSheet(sheet);
-            KoXmlElement c = e.firstChild().toElement();
+            KXmlElement c = e.firstChild().toElement();
             for (; !c.isNull(); c = c.nextSibling().toElement()) {
                 if (c.tagName() != "row") {
                     continue;

@@ -34,7 +34,7 @@ class KCELLS_EXPORT KCLocalization : public KLocale
 public:
     KCLocalization();
 
-    void load(const KoXmlElement& element);
+    void load(const KXmlElement& element);
     QDomElement save(QDomDocument& doc) const;
     void defaultSystemConfig();
 };

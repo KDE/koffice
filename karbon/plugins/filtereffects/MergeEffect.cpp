@@ -59,7 +59,7 @@ QImage MergeEffect::processImages(const QList<QImage> &images, const KoFilterEff
     return result;
 }
 
-bool MergeEffect::load(const KoXmlElement &element, const KoFilterEffectLoadingContext &)
+bool MergeEffect::load(const KXmlElement &element, const KoFilterEffectLoadingContext &)
 {
     if (element.tagName() != id())
         return false;
@@ -67,7 +67,7 @@ bool MergeEffect::load(const KoXmlElement &element, const KoFilterEffectLoadingC
     int inputCount = inputs().count();
     int inputIndex = 0;
     for (KoXmlNode n = element.firstChild(); !n.isNull(); n = n.nextSibling()) {
-        KoXmlElement node = n.toElement();
+        KXmlElement node = n.toElement();
         if (node.tagName() == "feMergeNode") {
             if (node.hasAttribute("in")) {
                 if (inputIndex < inputCount)

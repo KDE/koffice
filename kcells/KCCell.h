@@ -317,7 +317,7 @@ public:
     /**
      * \ingroup NativeFormat
      */
-    bool load(const KoXmlElement& cell,
+    bool load(const KXmlElement& cell,
               int _xshift, int _yshift,
               Paste::Mode pm = Paste::Normal,
               Paste::Operation op = Paste::OverWrite,
@@ -339,13 +339,13 @@ public:
      * \ingroup NativeFormat
      * Decodes a string into a time value.
      */
-    QTime toTime(const KoXmlElement &element);
+    QTime toTime(const KXmlElement &element);
 
     /**
      * \ingroup NativeFormat
      * Decodes a string into a date value.
      */
-    QDate toDate(const KoXmlElement &element);
+    QDate toDate(const KXmlElement &element);
 
     /**
      * \ingroup OpenDocument
@@ -353,7 +353,7 @@ public:
      * @param element An OASIS XML element
      * @param tableContext The loading context assoiated with the XML element
      */
-    bool loadOdf(const KoXmlElement& element, KCOdfLoadingContext& tableContext, const Styles& autoStyles, const QString& cellStyleName);
+    bool loadOdf(const KXmlElement& element, KCOdfLoadingContext& tableContext, const Styles& autoStyles, const QString& cellStyleName);
 
     /**
      * \ingroup OpenDocument
@@ -588,12 +588,12 @@ protected:
      * Load the text paragraphs from an OASIS XML cell description.
      * @param parent The DOM element representing the cell.
      */
-    void loadOdfCellText(const KoXmlElement& parent, KCOdfLoadingContext& tableContext, const Styles& autoStyles, const QString& cellStyleName);
+    void loadOdfCellText(const KXmlElement& parent, KCOdfLoadingContext& tableContext, const Styles& autoStyles, const QString& cellStyleName);
 
     /**
      * \ingroup OpenDocument
      */
-    void loadOdfObjects(const KoXmlElement& e, KCOdfLoadingContext& tableContext);
+    void loadOdfObjects(const KXmlElement& e, KCOdfLoadingContext& tableContext);
 
 
     /**
@@ -601,7 +601,7 @@ protected:
      */
     void saveOdfAnnotation(KXmlWriter &xmlwriter);
 public:
-    void loadOdfObject(const KoXmlElement& element, KoShapeLoadingContext& shapeContext);
+    void loadOdfObject(const KXmlElement& element, KoShapeLoadingContext& shapeContext);
 private:
     class Private;
     QSharedDataPointer<Private> d;
@@ -609,7 +609,7 @@ private:
     /**
      * \ingroup NativeFormat
      */
-    bool loadCellData(const KoXmlElement &text, Paste::Operation op, const QString &dataType = QString());
+    bool loadCellData(const KXmlElement &text, Paste::Operation op, const QString &dataType = QString());
 
     /**
      * \ingroup NativeFormat

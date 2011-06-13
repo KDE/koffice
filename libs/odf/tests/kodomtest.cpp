@@ -47,7 +47,7 @@ void KoDomTest::initTestCase()
 
 void KoDomTest::testQDom()
 {
-    KoXmlElement docElem = m_doc.documentElement();
+    KXmlElement docElem = m_doc.documentElement();
     //debugElemNS( docElem );
     QCOMPARE(docElem.nodeName(), QString("o:document-content"));
     QCOMPARE(docElem.tagName(), QString("document-content"));
@@ -55,7 +55,7 @@ void KoDomTest::testQDom()
     QCOMPARE(docElem.prefix(), QString("o"));
     QCOMPARE(docElem.namespaceURI(), KoXmlNS_office);
 
-    KoXmlElement elem = KoXml::namedItemNS(docElem, KoXmlNS_office.toUtf8(), "body");
+    KXmlElement elem = KoXml::namedItemNS(docElem, KoXmlNS_office.toUtf8(), "body");
 
     //debugElemNS( elem );
     QCOMPARE(elem.tagName(), QString("body"));
@@ -67,7 +67,7 @@ void KoDomTest::testQDom()
     for (; !n.isNull() ; n = n.nextSibling()) {
         if (!n.isElement())
             continue;
-        KoXmlElement e = n.toElement();
+        KXmlElement e = n.toElement();
         //debugElemNS( e );
         QCOMPARE(e.tagName(), QString("p"));
         QCOMPARE(e.localName(), QString("p"));
@@ -79,30 +79,30 @@ void KoDomTest::testQDom()
 
 void KoDomTest::testKoDom()
 {
-    KoXmlElement docElem = KoXml::namedItemNS(m_doc, KoXmlNS_office.toUtf8(), "document-content");
+    KXmlElement docElem = KoXml::namedItemNS(m_doc, KoXmlNS_office.toUtf8(), "document-content");
     QCOMPARE(docElem.isNull(), false);
     QCOMPARE(docElem.localName(), QString("document-content"));
     QCOMPARE(docElem.namespaceURI(), KoXmlNS_office);
 
-    KoXmlElement body = KoXml::namedItemNS(docElem, KoXmlNS_office.toUtf8(), "body");
+    KXmlElement body = KoXml::namedItemNS(docElem, KoXmlNS_office.toUtf8(), "body");
     QCOMPARE(body.isNull(), false);
     QCOMPARE(body.localName(), QString("body"));
     QCOMPARE(body.namespaceURI(), KoXmlNS_office);
 
-    KoXmlElement p = KoXml::namedItemNS(body, KoXmlNS_text.toUtf8(), "p");
+    KXmlElement p = KoXml::namedItemNS(body, KoXmlNS_text.toUtf8(), "p");
     QCOMPARE(p.isNull(), false);
     QCOMPARE(p.localName(), QString("p"));
     QCOMPARE(p.namespaceURI(), KoXmlNS_text);
 
-    const KoXmlElement officeStyle = KoXml::namedItemNS(docElem, KoXmlNS_office.toUtf8(), "styles");
+    const KXmlElement officeStyle = KoXml::namedItemNS(docElem, KoXmlNS_office.toUtf8(), "styles");
     QCOMPARE(officeStyle.isNull(), false);
 
     // Look for a non-existing element
-    KoXmlElement notexist = KoXml::namedItemNS(body, KoXmlNS_text.toUtf8(), "notexist");
+    KXmlElement notexist = KoXml::namedItemNS(body, KoXmlNS_text.toUtf8(), "notexist");
     QVERIFY(notexist.isNull());
 
     int count = 0;
-    KoXmlElement elem;
+    KXmlElement elem;
     forEachElement(elem, body) {
         QCOMPARE(elem.localName(), QString("p"));
         QCOMPARE(elem.namespaceURI(), KoXmlNS_text);

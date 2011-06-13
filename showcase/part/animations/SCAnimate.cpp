@@ -60,7 +60,7 @@ SCAnimate::~SCAnimate()
         delete m_values;
 }
 
-bool SCAnimate::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
+bool SCAnimate::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
 {
     SCAnimationBase::loadOdf(element, context);
     bool retval = true;

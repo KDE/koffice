@@ -119,7 +119,7 @@ KoFilter::ConversionStatus SvgImport::convert(const QByteArray& from, const QByt
     return KoFilter::OK;
 }
 
-void SvgImport::convert(const KoXmlElement &rootElement)
+void SvgImport::convert(const KXmlElement &rootElement)
 {
     if (! m_document)
         return;

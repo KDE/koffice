@@ -130,7 +130,7 @@ void ArtisticTextShape::saveOdf(KoShapeSavingContext &context) const
     context.xmlWriter().endElement(); // draw:custom-shape
 }
 
-bool ArtisticTextShape::loadOdf( const KoXmlElement & element, KoShapeLoadingContext & context )
+bool ArtisticTextShape::loadOdf( const KXmlElement & element, KoShapeLoadingContext & context )
 {
     QString drawEngine = element.attributeNS( KOdfXmlNS::draw, "engine", "" );
     if ( drawEngine.isEmpty() || drawEngine != "svg:text" )

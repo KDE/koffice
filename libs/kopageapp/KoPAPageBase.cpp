@@ -134,7 +134,7 @@ bool KoPAPageBase::saveOdfPresentationNotes(KoPASavingContext &paContext) const
     return true;
 }
 
-bool KoPAPageBase::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &loadingContext)
+bool KoPAPageBase::loadOdf(const KXmlElement &element, KoShapeLoadingContext &loadingContext)
 {
     KoPALoadingContext &paContext = static_cast<KoPALoadingContext&>(loadingContext);
 
@@ -147,13 +147,13 @@ bool KoPAPageBase::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &l
     styleStack.restore();
 
     // load layers and shapes
-    const KoXmlElement &pageLayerSet = KoXml::namedItemNS(element, KOdfXmlNS::draw, "layer-set");
+    const KXmlElement &pageLayerSet = KoXml::namedItemNS(element, KOdfXmlNS::draw, "layer-set");
 
-    const KoXmlElement &usedPageLayerSet = pageLayerSet.isNull() ? loadingContext.odfLoadingContext().stylesReader().layerSet(): pageLayerSet;
+    const KXmlElement &usedPageLayerSet = pageLayerSet.isNull() ? loadingContext.odfLoadingContext().stylesReader().layerSet(): pageLayerSet;
 
     int layerZIndex = 0;
     bool first = true;
-    KoXmlElement layerElement;
+    KXmlElement layerElement;
     forEachElement (layerElement, usedPageLayerSet) {
         KoShapeLayer * layer = 0;
         if (first) {
@@ -172,7 +172,7 @@ bool KoPAPageBase::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &l
 
     KoShapeLayer *layer = dynamic_cast<KoShapeLayer *>(shapes().first());
     if (layer) {
-        KoXmlElement child;
+        KXmlElement child;
         forEachElement(child, element) {
             kDebug(30010) <<"loading shape" << child.localName();
 
@@ -190,7 +190,7 @@ bool KoPAPageBase::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &l
     return true;
 }
 
-void KoPAPageBase::loadOdfPageTag(const KoXmlElement &element,
+void KoPAPageBase::loadOdfPageTag(const KXmlElement &element,
                                    KoPALoadingContext &loadingContext)
 {
     Q_UNUSED(element);
@@ -201,7 +201,7 @@ void KoPAPageBase::loadOdfPageTag(const KoXmlElement &element,
     }
 }
 
-void KoPAPageBase::loadOdfPageExtra(const KoXmlElement &element, KoPALoadingContext &loadingContext)
+void KoPAPageBase::loadOdfPageExtra(const KXmlElement &element, KoPALoadingContext &loadingContext)
 {
     Q_UNUSED(element);
     Q_UNUSED(loadingContext);

@@ -84,7 +84,7 @@ protected:
     };
 
     /// Reimplemented from KoPageBase
-    virtual void loadOdfPageTag(const KoXmlElement &element, KoPALoadingContext &loadingContext);
+    virtual void loadOdfPageTag(const KXmlElement &element, KoPALoadingContext &loadingContext);
 
     /// Reimplemented from KoPageBase
     virtual void saveOdfPageStyleData(KOdfGenericStyle &style, KoPASavingContext &paContext) const;

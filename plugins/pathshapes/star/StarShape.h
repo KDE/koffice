@@ -109,7 +109,7 @@ public:
     /// reimplemented
     virtual void setSize(const QSizeF &newSize);
     /// reimplemented
-    virtual bool loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context);
+    virtual bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context);
     /// reimplemented
     virtual void saveOdf(KoShapeSavingContext &context) const;
     /// reimplemented

@@ -73,7 +73,7 @@ void KCStyleManager::loadOdfStyleTemplate(KOdfStylesReader& stylesReader, KCMap*
     m_oasisStyles.clear();
 
     // loading default style first
-    const KoXmlElement* defStyle = stylesReader.defaultStyle("table-cell");
+    const KXmlElement* defStyle = stylesReader.defaultStyle("table-cell");
     if (defStyle) {
         kDebug(36003) << "KCStyleManager: Loading default cell style";
         KCConditions conditions;
@@ -87,7 +87,7 @@ void KCStyleManager::loadOdfStyleTemplate(KOdfStylesReader& stylesReader, KCMap*
                 if (n.isElement() &&
                         n.namespaceURI() == KOdfXmlNS::style &&
                         n.localName() == "table-cell-properties") {
-                    KoXmlElement e = n.toElement();
+                    KXmlElement e = n.toElement();
                     if (n.toElement().hasAttributeNS(KOdfXmlNS::style, "decimal-places")) {
                         bool ok;
                         const int precision = n.toElement().attributeNS(KOdfXmlNS::style, "decimal-places").toInt(&ok);
@@ -103,10 +103,10 @@ void KCStyleManager::loadOdfStyleTemplate(KOdfStylesReader& stylesReader, KCMap*
     } else
         resetDefaultStyle();
 
-    QList<KoXmlElement*> customStyles(stylesReader.customStyles("table-cell").values());
+    QList<KXmlElement*> customStyles(stylesReader.customStyles("table-cell").values());
     uint nStyles = customStyles.count();
     for (unsigned int item = 0; item < nStyles; item++) {
-        KoXmlElement* styleElem = customStyles[item];
+        KXmlElement* styleElem = customStyles[item];
         if (!styleElem) continue;
 
         // assume the name assigned by the application
@@ -169,10 +169,10 @@ QDomElement KCStyleManager::save(QDomDocument & doc)
     return styles;
 }
 
-bool KCStyleManager::loadXML(KoXmlElement const & styles)
+bool KCStyleManager::loadXML(KXmlElement const & styles)
 {
     bool ok = true;
-    KoXmlElement e = styles.firstChild().toElement();
+    KXmlElement e = styles.firstChild().toElement();
     while (!e.isNull()) {
         QString name;
         if (e.hasAttribute("name"))
@@ -376,7 +376,7 @@ Styles KCStyleManager::loadOdfAutoStyles(KOdfStylesReader& stylesReader,
                                        const KCValueParser *parser)
 {
     Styles autoStyles;
-    foreach(KoXmlElement* element, stylesReader.autoStyles("table-cell")) {
+    foreach(KXmlElement* element, stylesReader.autoStyles("table-cell")) {
         if (element->hasAttributeNS(KOdfXmlNS::style , "name")) {
             QString name = element->attributeNS(KOdfXmlNS::style , "name" , QString());
             kDebug(36003) << "KCStyleManager: Preloading automatic cell style:" << name;

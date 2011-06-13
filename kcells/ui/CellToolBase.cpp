@@ -2941,17 +2941,17 @@ bool CellToolBase::paste()
         stylesReader.createStyleMap(doc, false);
 
         // from KCellsDoc::loadOdf:
-        KoXmlElement content = doc.documentElement();
-        KoXmlElement realBody(KoXml::namedItemNS(content, KOdfXmlNS::office, "body"));
+        KXmlElement content = doc.documentElement();
+        KXmlElement realBody(KoXml::namedItemNS(content, KOdfXmlNS::office, "body"));
         if (realBody.isNull()) {
             kDebug(36005) << "Invalid OASIS OpenDocument file. No office:body tag found.";
             return false;
         }
-        KoXmlElement body = KoXml::namedItemNS(realBody, KOdfXmlNS::office, "spreadsheet");
+        KXmlElement body = KoXml::namedItemNS(realBody, KOdfXmlNS::office, "spreadsheet");
 
         if (body.isNull()) {
             kError(36005) << "No office:spreadsheet found!" << endl;
-            KoXmlElement childElem;
+            KXmlElement childElem;
             QString localName;
             forEachElement(childElem, realBody) {
                 localName = childElem.localName();

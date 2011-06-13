@@ -37,7 +37,7 @@ public:
     }
     virtual void paintComponent(QPainter &, const KoViewConverter &) { }
     virtual void saveOdf(KoShapeSavingContext &) const {}
-    virtual bool loadOdf(const KoXmlElement &, KoShapeLoadingContext &) {
+    virtual bool loadOdf(const KXmlElement &, KoShapeLoadingContext &) {
         return true;
     }
     KoTextDocumentLayout *layout;

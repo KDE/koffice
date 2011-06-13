@@ -179,7 +179,7 @@ KoTextOnShapeContainer::~KoTextOnShapeContainer()
     if (d->content && d->content->parent() == this) delete d->content;
 }
 
-bool KoTextOnShapeContainer::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
+bool KoTextOnShapeContainer::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
 {
     Q_D(KoTextOnShapeContainer);
     if (d->textShape == 0)
@@ -300,9 +300,9 @@ void KoTextOnShapeContainer::saveOdfChildElements(KoShapeSavingContext &context)
 }
 
 // static
-void KoTextOnShapeContainer::tryWrapShape(KoShape *shape, const KoXmlElement &element, KoShapeLoadingContext &context)
+void KoTextOnShapeContainer::tryWrapShape(KoShape *shape, const KXmlElement &element, KoShapeLoadingContext &context)
 {
-    KoXmlElement text = KoXml::namedItemNS(element, KOdfXmlNS::text, "p");
+    KXmlElement text = KoXml::namedItemNS(element, KOdfXmlNS::text, "p");
     if (!text.isNull()) {
         KoShapeContainer *oldParent = shape->parent();
         KoTextOnShapeContainer *tos = new KoTextOnShapeContainer(shape,

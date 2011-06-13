@@ -45,7 +45,7 @@ SCAnimationLoader::~SCAnimationLoader()
 {
 }
 
-void debugXml(const QString &pos, const KoXmlElement &element)
+void debugXml(const QString &pos, const KXmlElement &element)
 {
     QByteArray array;
     QDomDocument doc;
@@ -54,19 +54,19 @@ void debugXml(const QString &pos, const KoXmlElement &element)
     kDebug() << pos << array;
 }
 
-bool SCAnimationLoader::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
+bool SCAnimationLoader::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
 {
     // have an overall structure for animations each step needs to be in its own QSequentialAnimationGroup subclass
     // use SCAnimationStep for that
-    KoXmlElement stepElement;
+    KXmlElement stepElement;
     forEachElement(stepElement, element) {
         if (stepElement.tagName() == "par" && stepElement.namespaceURI() == KOdfXmlNS::anim) {
             // this creates a new step
             SCAnimationStep *animationStep = new SCAnimationStep();
 
-            KoXmlElement parElement;
+            KXmlElement parElement;
             forEachElement(parElement, stepElement) {
-                KoXmlElement innerParElement;
+                KXmlElement innerParElement;
                 forEachElement(innerParElement, parElement) {
                     if (innerParElement.tagName() == "par" && innerParElement.namespaceURI() == KOdfXmlNS::anim) {
                         loadOdfAnimation(&animationStep, innerParElement, context);
@@ -124,7 +124,7 @@ void SCAnimationLoader::debug(QAbstractAnimation *animation, int level)
     }
 }
 
-bool SCAnimationLoader::loadOdfAnimation(SCAnimationStep **animationStep, const KoXmlElement &element, KoShapeLoadingContext &context)
+bool SCAnimationLoader::loadOdfAnimation(SCAnimationStep **animationStep, const KXmlElement &element, KoShapeLoadingContext &context)
 {
     QString nodeType = element.attributeNS(KOdfXmlNS::presentation, "node-type", "with-previous");
 
@@ -164,7 +164,7 @@ bool SCAnimationLoader::loadOdfAnimation(SCAnimationStep **animationStep, const 
 
     SCShapeAnimation *shapeAnimation = 0;
     // The shape info and create a SCShapeAnimation. If there is
-    KoXmlElement e;
+    KXmlElement e;
     forEachElement(e, element) {
         // TODO add a check that the shape animation is still the correct one
         if (shapeAnimation == 0) {

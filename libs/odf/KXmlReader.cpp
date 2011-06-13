@@ -1240,7 +1240,7 @@ private:
     QHash<QString, QString> attr;
     QHash<KoXmlStringPair, QString> attrNS;
     QString textData;
-    friend class KoXmlElement;
+    friend class KXmlElement;
 };
 
 KoXmlNodeData KoXmlNodeData::null;
@@ -2137,9 +2137,9 @@ KoXmlNode KoXmlNode::namedItemNS(const QString& nsURI, const QString& name) cons
     return KoXmlNode();
 }
 
-KoXmlElement KoXmlNode::toElement() const
+KXmlElement KoXmlNode::toElement() const
 {
-    return isElement() ? KoXmlElement(d) : KoXmlElement();
+    return isElement() ? KXmlElement(d) : KXmlElement();
 }
 
 KoXmlText KoXmlNode::toText() const
@@ -2179,18 +2179,18 @@ QDomNode KoXmlNode::asQDomNode(QDomDocument ownerDoc) const
 
 // ==================================================================
 //
-//         KoXmlElement
+//         KXmlElement
 //
 // ==================================================================
 
 // Creates an empty element
-KoXmlElement::KoXmlElement(): KoXmlNode(new KoXmlNodeData)
+KXmlElement::KXmlElement(): KoXmlNode(new KoXmlNodeData)
 {
     // because referenced also once in KoXmlNode constructor
     d->unref();
 }
 
-KoXmlElement::~KoXmlElement()
+KXmlElement::~KXmlElement()
 {
     if (d)
         if (d != &KoXmlNodeData::null)
@@ -2200,45 +2200,45 @@ KoXmlElement::~KoXmlElement()
 }
 
 // Creates a shallow copy of another element
-KoXmlElement::KoXmlElement(const KoXmlElement& element): KoXmlNode(element.d)
+KXmlElement::KXmlElement(const KXmlElement& element): KoXmlNode(element.d)
 {
 }
 
-KoXmlElement::KoXmlElement(KoXmlNodeData* data): KoXmlNode(data)
+KXmlElement::KXmlElement(KoXmlNodeData* data): KoXmlNode(data)
 {
 }
 
 // Copies another element
-KoXmlElement& KoXmlElement::operator=(const KoXmlElement & element)
+KXmlElement& KXmlElement::operator=(const KXmlElement & element)
 {
     KoXmlNode::operator=(element);
     return *this;
 }
 
-bool KoXmlElement::operator== (const KoXmlElement& element) const
+bool KXmlElement::operator== (const KXmlElement& element) const
 {
     if (isNull() || element.isNull()) return false;
     return (d == element.d);
 }
 
-bool KoXmlElement::operator!= (const KoXmlElement& element) const
+bool KXmlElement::operator!= (const KXmlElement& element) const
 {
     if (isNull() && element.isNull()) return false;
     if (isNull() || element.isNull()) return true;
     return (d != element.d);
 }
 
-QString KoXmlElement::tagName() const
+QString KXmlElement::tagName() const
 {
     return isElement() ? ((KoXmlNodeData*)d)->tagName : QString();
 }
 
-QString KoXmlElement::text() const
+QString KXmlElement::text() const
 {
     return d->text();
 }
 
-QString KoXmlElement::attribute(const QString& name,
+QString KXmlElement::attribute(const QString& name,
                                 const QString& defaultValue) const
 {
     if (!isElement())
@@ -2250,7 +2250,7 @@ QString KoXmlElement::attribute(const QString& name,
     return d->attribute(name, defaultValue);
 }
 
-QString KoXmlElement::attributeNS(const QString& namespaceURI,
+QString KXmlElement::attributeNS(const QString& namespaceURI,
                                   const QString& localName, const QString& defaultValue) const
 {
     if (!isElement())
@@ -2265,7 +2265,7 @@ QString KoXmlElement::attributeNS(const QString& namespaceURI,
 //  return d->attributeNS( namespaceURI, localName, defaultValue );
 }
 
-bool KoXmlElement::hasAttribute(const QString& name) const
+bool KXmlElement::hasAttribute(const QString& name) const
 {
     if (!d->loaded)
         d->loadChildren();
@@ -2273,7 +2273,7 @@ bool KoXmlElement::hasAttribute(const QString& name) const
     return isElement() ? d->hasAttribute(name) : false;
 }
 
-bool KoXmlElement::hasAttributeNS(const QString& namespaceURI,
+bool KXmlElement::hasAttributeNS(const QString& namespaceURI,
                                   const QString& localName) const
 {
     if (!d->loaded)
@@ -2453,17 +2453,17 @@ bool KoXmlDocument::operator!=(const KoXmlDocument& doc) const
     return(d != doc.d);
 }
 
-KoXmlElement KoXmlDocument::documentElement() const
+KXmlElement KoXmlDocument::documentElement() const
 {
     d->loadChildren();
 
     for (KoXmlNodeData* node = d->first; node;) {
         if (node->nodeType == KoXmlNode::ElementNode)
-            return KoXmlElement(node);
+            return KXmlElement(node);
         else node = node->next;
     }
 
-    return KoXmlElement();
+    return KXmlElement();
 }
 
 KoXmlDocumentType KoXmlDocument::doctype() const
@@ -2596,7 +2596,7 @@ bool KoXmlDocument::setContent(const QString& text,
 //
 // ==================================================================
 
-KoXmlElement KoXml::namedItemNS(const KoXmlNode& node, const QString& nsURI,
+KXmlElement KoXml::namedItemNS(const KoXmlNode& node, const QString& nsURI,
                                 const QString& localName)
 {
 #ifdef KOXML_USE_QDOM
@@ -2607,7 +2607,7 @@ KoXmlElement KoXml::namedItemNS(const KoXmlNode& node, const QString& nsURI,
                 n.namespaceURI() == nsURI)
             return n.toElement();
     }
-    return KoXmlElement();
+    return KXmlElement();
 #else
     return node.namedItemNS(nsURI, localName).toElement();
 #endif
@@ -2673,7 +2673,7 @@ QDomNode KoXml::asQDomNode(QDomDocument ownerDoc, const KoXmlNode& node)
 #endif
 }
 
-QDomElement KoXml::asQDomElement(QDomDocument ownerDoc, const KoXmlElement& element)
+QDomElement KoXml::asQDomElement(QDomDocument ownerDoc, const KXmlElement& element)
 {
     return KoXml::asQDomNode(ownerDoc, element).toElement();
 }

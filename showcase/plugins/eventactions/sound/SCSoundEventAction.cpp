@@ -46,9 +46,9 @@ SCSoundEventAction::~SCSoundEventAction()
     delete m_soundData;
 }
 
-bool SCSoundEventAction::loadOdf(const KoXmlElement & element, KoShapeLoadingContext &context)
+bool SCSoundEventAction::loadOdf(const KXmlElement & element, KoShapeLoadingContext &context)
 {
-    KoXmlElement sound = KoXml::namedItemNS(element, KOdfXmlNS::presentation, "sound");
+    KXmlElement sound = KoXml::namedItemNS(element, KOdfXmlNS::presentation, "sound");
 
     bool retval = false;
 

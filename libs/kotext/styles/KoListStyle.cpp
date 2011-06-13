@@ -170,9 +170,9 @@ void KoListStyle::applyStyle(const QTextBlock &block, int level)
     KoList::applyStyle(block, this, level);
 }
 
-void KoListStyle::loadOdf(KoShapeLoadingContext &scontext, const KoXmlElement &style)
+void KoListStyle::loadOdf(KoShapeLoadingContext &scontext, const KXmlElement &style)
 {
-    KoXmlElement styleElem;
+    KXmlElement styleElem;
     forEachElement(styleElem, style) {
         KoListLevelProperties properties;
         properties.loadOdf(scontext, styleElem);

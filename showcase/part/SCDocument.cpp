@@ -128,9 +128,9 @@ void SCDocument::saveOdfDocumentStyles(KoPASavingContext &context)
     }
 }
 
-bool SCDocument::loadOdfEpilogue(const KoXmlElement &body, KoPALoadingContext &context)
+bool SCDocument::loadOdfEpilogue(const KXmlElement &body, KoPALoadingContext &context)
 {
-    const KoXmlElement &presentationSettings(KoXml::namedItemNS(body, KOdfXmlNS::presentation, "settings"));
+    const KXmlElement &presentationSettings(KoXml::namedItemNS(body, KOdfXmlNS::presentation, "settings"));
     if (!presentationSettings.isNull()) {
         m_customSlideShows->loadOdf(presentationSettings, context);
     }
@@ -342,7 +342,7 @@ void SCDocument::setActiveCustomSlideShow(const QString &customSlideShow)
     }
 }
 
-bool SCDocument::loadOdfProlog(const KoXmlElement &body, KoPALoadingContext &context)
+bool SCDocument::loadOdfProlog(const KXmlElement &body, KoPALoadingContext &context)
 {
     return m_declarations->loadOdf(body, context);
 }

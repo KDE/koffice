@@ -106,7 +106,7 @@ namespace KOdf
         QList<QPair<QString,QString> > styleMaps; // conditional formatting, first=condition, second=applyStyleName
     };
 
-    KODF_EXPORT QPair<QString, NumericStyleFormat> loadOdfNumberStyle(const KoXmlElement &parent);
+    KODF_EXPORT QPair<QString, NumericStyleFormat> loadOdfNumberStyle(const KXmlElement &parent);
 
     KODF_EXPORT QString saveOdfDateStyle(KOdfGenericStyles &mainStyles, const QString &format, bool klocaleFormat, const QString &prefix = QString(), const QString &suffix = QString());
     KODF_EXPORT QString saveOdfTimeStyle(KOdfGenericStyles &mainStyles, const QString &format, bool klocaleFormat, const QString &prefix = QString(), const QString &suffix = QString());

@@ -61,7 +61,7 @@ QImage OffsetEffect::processImage(const QImage &image, const KoFilterEffectRende
     return result;
 }
 
-bool OffsetEffect::load(const KoXmlElement &element, const KoFilterEffectLoadingContext &context)
+bool OffsetEffect::load(const KXmlElement &element, const KoFilterEffectLoadingContext &context)
 {
     if (element.tagName() != id())
         return false;

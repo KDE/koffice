@@ -55,9 +55,9 @@ void KoInsets::saveTo(KoShape *shape, const QString &prefix) const
     }
 }
 
-//void KoInsets::saveTo(KoXmlElement &element, const QString &prefix)
+//void KoInsets::saveTo(KXmlElement &element, const QString &prefix)
 
-void KoInsets::fillFrom(const KoXmlElement &element, const QString &ns, const QString &prefix)
+void KoInsets::fillFrom(const KXmlElement &element, const QString &ns, const QString &prefix)
 {
     const qreal margin(KUnit::parseValue(element.attributeNS(ns, prefix)));
     QString marginL = element.attributeNS(ns, prefix + "-left");

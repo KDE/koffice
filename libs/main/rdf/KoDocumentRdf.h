@@ -42,7 +42,7 @@ class KXmlWriter;
 class KoDocument;
 class KoCanvasBase;
 class KoTextEditor;
-class KoXmlElement;
+class KXmlElement;
 
 #include "RdfForward.h"
 #include "KoSemanticStylesheet.h"

@@ -96,7 +96,7 @@ public:
      */
     bool evaluate(const Database& database, int index) const;
 
-    bool loadOdf(const KoXmlElement& element, const KCMap* map);
+    bool loadOdf(const KXmlElement& element, const KCMap* map);
     void saveOdf(KXmlWriter& xmlWriter) const;
 
     bool operator==(const Filter& other) const;

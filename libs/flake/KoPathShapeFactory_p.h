@@ -46,7 +46,7 @@ public:
     KoPathShapeFactory(QObject *parent, const QStringList&);
     ~KoPathShapeFactory() {}
     virtual KoShape *createDefaultShape(KoResourceManager *documentResources = 0) const;
-    bool supports(const KoXmlElement &element, KoShapeLoadingContext &context) const;
+    bool supports(const KXmlElement &element, KoShapeLoadingContext &context) const;
     /// reimplemented
     virtual void newDocumentResourceManager(KoResourceManager *manager);
 };

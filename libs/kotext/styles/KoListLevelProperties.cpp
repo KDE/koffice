@@ -368,7 +368,7 @@ KoListLevelProperties KoListLevelProperties::fromTextList(QTextList *list)
     return llp;
 }
 
-void KoListLevelProperties::loadOdf(KoShapeLoadingContext& scontext, const KoXmlElement& style)
+void KoListLevelProperties::loadOdf(KoShapeLoadingContext& scontext, const KXmlElement& style)
 {
     KOdfLoadingContext &context = scontext.odfLoadingContext();
 
@@ -487,7 +487,7 @@ void KoListLevelProperties::loadOdf(KoShapeLoadingContext& scontext, const KoXml
                 setBulletImage(imageCollection->createImageData(href, store));
             } else {
                 // check if we have an office:binary data element containing the image data
-                const KoXmlElement &binaryData(KoXml::namedItemNS(style, KOdfXmlNS::office, "binary-data"));
+                const KXmlElement &binaryData(KoXml::namedItemNS(style, KOdfXmlNS::office, "binary-data"));
                 if (!binaryData.isNull()) {
                     QImage image;
                     if (image.loadFromData(QByteArray::fromBase64(binaryData.text().toLatin1()))) {
@@ -507,7 +507,7 @@ void KoListLevelProperties::loadOdf(KoShapeLoadingContext& scontext, const KoXml
     if (!displayLevel.isEmpty())
         setDisplayLevel(displayLevel.toInt());
 
-    KoXmlElement property;
+    KXmlElement property;
     forEachElement(property, style) {
         if (property.namespaceURI() != KOdfXmlNS::style)
             continue;

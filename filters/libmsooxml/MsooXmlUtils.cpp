@@ -403,7 +403,7 @@ KoFilter::ConversionStatus Utils::loadThumbnail(QImage& thumbnail, KZip* zip)
 
 //! @return true if @a el has tag name is equal to @a expectedTag or false otherwise;
 //!         on failure optional @a warningPrefix message is prepended to the warning
-static bool checkTag(const KoXmlElement& el, const char* expectedTag, const char* warningPrefix = 0)
+static bool checkTag(const KXmlElement& el, const char* expectedTag, const char* warningPrefix = 0)
 {
     if (el.tagName() != expectedTag) {
         kWarning()
@@ -415,7 +415,7 @@ static bool checkTag(const KoXmlElement& el, const char* expectedTag, const char
 }
 
 //! @return true if @a el has namespace URI is equal to @a expectedNSURI or false otherwise
-static bool checkNsUri(const KoXmlElement& el, const char* expectedNsUri)
+static bool checkNsUri(const KXmlElement& el, const char* expectedNsUri)
 {
     if (el.namespaceURI() != expectedNsUri) {
         kWarning() << "Invalid namespace URI" << el.namespaceURI() << " expected:" << expectedNsUri;
@@ -437,14 +437,14 @@ kDebug() << val;
 KoFilter::ConversionStatus Utils::loadContentTypes(
     const KoXmlDocument& contentTypesXML, QMultiHash<QByteArray, QByteArray>& contentTypes)
 {
-    KoXmlElement typesEl(contentTypesXML.documentElement());
+    KXmlElement typesEl(contentTypesXML.documentElement());
     if (!checkTag(typesEl, "Types", "documentElement")) {
         return KoFilter::WrongFormat;
     }
     if (!checkNsUri(typesEl, Schemas::contentTypes)) {
         return KoFilter::WrongFormat;
     }
-    KoXmlElement e;
+    KXmlElement e;
     forEachElement(e, typesEl) {
         const QString tagName(e.tagName());
         if (!checkNsUri(e, Schemas::contentTypes)) {
@@ -472,8 +472,8 @@ KoFilter::ConversionStatus Utils::loadContentTypes(
 
 KoFilter::ConversionStatus Utils::loadDocumentProperties(const KoXmlDocument& appXML, QMap<QString, QVariant>& properties)
 {
-    KoXmlElement typesEl(appXML.documentElement());
-    KoXmlElement e, elem, element;
+    KXmlElement typesEl(appXML.documentElement());
+    KXmlElement e, elem, element;
     forEachElement(element, typesEl) {
         QVariant v;
         forEachElement(elem, element) {

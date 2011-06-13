@@ -34,7 +34,7 @@ SCAnimateMotion::~SCAnimateMotion()
 {
 }
 
-bool SCAnimateMotion::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
+bool SCAnimateMotion::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
 {
     SCAnimationBase::loadOdf(element, context);
     return false;

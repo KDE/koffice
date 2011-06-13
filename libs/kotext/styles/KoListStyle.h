@@ -217,7 +217,7 @@ public:
      * Load the style from the \a KOdfStyleStack style stack using the
      * OpenDocument format.
      */
-    void loadOdf(KoShapeLoadingContext& context, const KoXmlElement& style = KoXmlElement());
+    void loadOdf(KoShapeLoadingContext& context, const KXmlElement& style = KXmlElement());
 
     /**
      * Save the style to a KOdfGenericStyle object using the OpenDocument format

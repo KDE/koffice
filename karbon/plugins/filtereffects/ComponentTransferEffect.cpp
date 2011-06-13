@@ -186,7 +186,7 @@ qreal ComponentTransferEffect::transferChannel(Channel channel, qreal value) con
     return value;
 }
 
-bool ComponentTransferEffect::load(const KoXmlElement &element, const KoFilterEffectLoadingContext &)
+bool ComponentTransferEffect::load(const KXmlElement &element, const KoFilterEffectLoadingContext &)
 {
     if (element.tagName() != id())
         return false;
@@ -198,7 +198,7 @@ bool ComponentTransferEffect::load(const KoXmlElement &element, const KoFilterEf
     m_data[ChannelA] = Data();
 
     for (KoXmlNode n = element.firstChild(); !n.isNull(); n = n.nextSibling()) {
-        KoXmlElement node = n.toElement();
+        KXmlElement node = n.toElement();
         if (node.tagName() == "feFuncR") {
             loadChannel(ChannelR, node);
         } else if (node.tagName() == "feFuncG") {
@@ -213,7 +213,7 @@ bool ComponentTransferEffect::load(const KoXmlElement &element, const KoFilterEf
     return true;
 }
 
-void ComponentTransferEffect::loadChannel(Channel channel, const KoXmlElement &element)
+void ComponentTransferEffect::loadChannel(Channel channel, const KXmlElement &element)
 {
     QString typeStr = element.attribute("type");
     if (typeStr.isEmpty())

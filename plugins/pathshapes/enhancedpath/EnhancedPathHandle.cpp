@@ -169,7 +169,7 @@ void EnhancedPathHandle::saveOdf(KoShapeSavingContext & context) const
     context.xmlWriter().endElement(); // draw:handle
 }
 
-bool EnhancedPathHandle::loadOdf(const KoXmlElement & element, KoShapeLoadingContext &context)
+bool EnhancedPathHandle::loadOdf(const KXmlElement & element, KoShapeLoadingContext &context)
 {
     if (element.localName() != "handle" || element.namespaceURI() != KOdfXmlNS::draw)
         return false;

@@ -104,7 +104,7 @@ KoShape *TextShapeFactory::createShape(const KProperties *params, KoResourceMana
     return shape;
 }
 
-bool TextShapeFactory::supports(const KoXmlElement & e, KoShapeLoadingContext &context) const
+bool TextShapeFactory::supports(const KXmlElement & e, KoShapeLoadingContext &context) const
 {
     Q_UNUSED(context);
     return (e.localName() == "text-box" && e.namespaceURI() == KOdfXmlNS::draw) ||

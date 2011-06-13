@@ -28,7 +28,7 @@
 class KoInlineObject;
 class KoCanvasBase;
 class QAction;
-class KoXmlElement;
+class KXmlElement;
 class KoShapeLoadingContext;
 
 /**
@@ -69,7 +69,7 @@ public:
      *
      * @returns the variable or 0 if no variable could be created
      */
-    KoInlineObject *createFromOdf(const KoXmlElement &element, KoShapeLoadingContext &context) const;
+    KoInlineObject *createFromOdf(const KXmlElement &element, KoShapeLoadingContext &context) const;
 
 private:
     KoInlineObjectRegistry();

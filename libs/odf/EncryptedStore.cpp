@@ -166,7 +166,7 @@ bool EncryptedStore::init(Mode mode, const QByteArray & appIdentification)
             d->good = false;
             return false;
         }
-        KoXmlElement xmlroot = xmldoc.documentElement();
+        KXmlElement xmlroot = xmldoc.documentElement();
         if (xmlroot.tagName() != "manifest:manifest") {
             KMessage::message(KMessage::Warning, i18n("The manifest file seems to be corrupted. The document could not be opened."));
             dev->close();

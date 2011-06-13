@@ -38,12 +38,12 @@ class KoXmlCDATASection;
 class KoXmlDocumentType;
 class KoXmlDocument;
 class KoXmlNodeData;
-class KoXmlElement;
+class KXmlElement;
 
 /**
 * KoXmlNode represents a node in a DOM tree.
 *
-* KoXmlNode is a base class for KoXmlElement, KoXmlText.
+* KoXmlNode is a base class for KXmlElement, KoXmlText.
 * Often, these subclasses are used for getting the data instead of KoXmlNode.
 * However, as base class, KoXmlNode is very helpful when for example iterating
 * all child nodes within one parent node.
@@ -85,7 +85,7 @@ public:
     virtual bool isDocumentType() const;
 
     virtual void clear();
-    KoXmlElement toElement() const;
+    KXmlElement toElement() const;
     KoXmlText toText() const;
     KoXmlCDATASection toCDATASection() const;
     KoXmlDocument toDocument() const;
@@ -135,22 +135,22 @@ protected:
 };
 
 /**
-* KoXmlElement represents a tag element in a DOM tree.
+* KXmlElement represents a tag element in a DOM tree.
 *
-* KoXmlElement holds information about an XML tag, along with its attributes.
+* KXmlElement holds information about an XML tag, along with its attributes.
 *
 * @author Ariya Hidayat <ariya@kde.org>
 */
 
-class KODF_EXPORT KoXmlElement: public KoXmlNode
+class KODF_EXPORT KXmlElement: public KoXmlNode
 {
 public:
-    KoXmlElement();
-    KoXmlElement(const KoXmlElement& element);
-    KoXmlElement& operator=(const KoXmlElement& element);
-    virtual ~KoXmlElement();
-    bool operator== (const KoXmlElement&) const;
-    bool operator!= (const KoXmlElement&) const;
+    KXmlElement();
+    KXmlElement(const KXmlElement& element);
+    KXmlElement& operator=(const KXmlElement& element);
+    virtual ~KXmlElement();
+    bool operator== (const KXmlElement&) const;
+    bool operator!= (const KXmlElement&) const;
 
     QString tagName() const;
     QString text() const;
@@ -164,7 +164,7 @@ public:
 private:
     friend class KoXmlNode;
     friend class KoXmlDocument;
-    KoXmlElement(KoXmlNodeData*);
+    KXmlElement(KoXmlNodeData*);
 };
 
 /**
@@ -257,7 +257,7 @@ public:
     bool operator!=(const KoXmlDocument&) const;
     virtual ~KoXmlDocument();
 
-    KoXmlElement documentElement() const;
+    KXmlElement documentElement() const;
 
     KoXmlDocumentType doctype() const;
 
@@ -322,7 +322,7 @@ namespace KoXml
  *
  * Note: do *NOT* use getElementsByTagNameNS, it's recursive!
  */
-KODF_EXPORT KoXmlElement namedItemNS(const KoXmlNode& node,
+KODF_EXPORT KXmlElement namedItemNS(const KoXmlNode& node,
                                         const QString& nsURI, const QString& localName);
 
 /**
@@ -352,7 +352,7 @@ KODF_EXPORT QStringList attributeNames(const KoXmlNode& node);
  * 'ownerDoc' as the owner document (QDomDocument instance).
  */
 KODF_EXPORT QDomNode asQDomNode(QDomDocument ownerDoc, const KoXmlNode& node);
-KODF_EXPORT QDomElement asQDomElement(QDomDocument ownerDoc, const KoXmlElement& element);
+KODF_EXPORT QDomElement asQDomElement(QDomDocument ownerDoc, const KXmlElement& element);
 KODF_EXPORT QDomDocument asQDomDocument(QDomDocument ownerDoc, const KoXmlDocument& document);
 
 /*

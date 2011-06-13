@@ -508,7 +508,7 @@ KOdfBorders::BorderData KOdfBorders::bottomBorderData() const
 // ----------------------------------------------------------------
 //                         load and save
 
-void KOdfBorders::loadOdf(const KoXmlElement &style)
+void KOdfBorders::loadOdf(const KXmlElement &style)
 {
     if (style.hasAttributeNS(KOdfXmlNS::fo, "border")) {
         QString border = style.attributeNS(KOdfXmlNS::fo, "border");

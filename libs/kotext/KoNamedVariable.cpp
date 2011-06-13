@@ -43,7 +43,7 @@ void KoNamedVariable::setup()
     setValue(manager()->stringProperty(m_key));
 }
 
-bool KoNamedVariable::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
+bool KoNamedVariable::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
 {
     Q_UNUSED(element);
     Q_UNUSED(context);

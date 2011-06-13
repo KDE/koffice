@@ -73,12 +73,12 @@ public:
     /**
      * \ingroup NativeFormat
      */
-    void loadXmlProtection(const KoXmlElement& element);
+    void loadXmlProtection(const KXmlElement& element);
 
     /**
      * \ingroup OpenDocument
      */
-    void loadOdfProtection(const KoXmlElement& element);
+    void loadOdfProtection(const KXmlElement& element);
 
 private:
     // disable assignment operator

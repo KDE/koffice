@@ -47,7 +47,7 @@ public:
     KoPAPastePage(KoPADocument * doc, KoPAPageBase * activePage);
 
 protected:
-    bool process(const KoXmlElement &body, KOdfStoreReader &odfStore);
+    bool process(const KXmlElement &body, KOdfStoreReader &odfStore);
 
     KoPADocument *m_doc;
     KoPAPageBase *m_activePage;

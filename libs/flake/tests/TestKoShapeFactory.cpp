@@ -98,8 +98,8 @@ void TestKoShapeFactory::testOdfElement()
     QCOMPARE(errorLine, 0);
     QCOMPARE(errorColumn, 0);
 
-    KoXmlElement contentElement = doc.documentElement();
-    KoXmlElement bodyElement = contentElement.firstChild().toElement();
+    KXmlElement contentElement = doc.documentElement();
+    KXmlElement bodyElement = contentElement.firstChild().toElement();
 
     // XXX: When loading is implemented, these no doubt have to be
     // sensibly filled.
@@ -107,11 +107,11 @@ void TestKoShapeFactory::testOdfElement()
     KOdfLoadingContext odfContext(stylesReader, 0);
     KoShapeLoadingContext shapeContext(odfContext, 0);
 
-    KoXmlElement textElement = bodyElement.firstChild().firstChild().toElement();
+    KXmlElement textElement = bodyElement.firstChild().firstChild().toElement();
     QVERIFY(textElement.tagName() == "p");
     QCOMPARE(factory->supports(textElement, shapeContext), false);
 
-    KoXmlElement pathElement = bodyElement.firstChild().lastChild().toElement();
+    KXmlElement pathElement = bodyElement.firstChild().lastChild().toElement();
     QVERIFY(pathElement.tagName() == "path");
     QCOMPARE(factory->supports(pathElement, shapeContext), true);
 

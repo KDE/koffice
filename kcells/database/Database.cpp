@@ -179,7 +179,7 @@ void Database::setFilter(const Filter& filter)
     d->filter = new Filter(filter);
 }
 
-bool Database::loadOdf(const KoXmlElement& element, const KCMap* map)
+bool Database::loadOdf(const KXmlElement& element, const KCMap* map)
 {
     if (element.hasAttributeNS(KOdfXmlNS::table, "name"))
         d->name = element.attributeNS(KOdfXmlNS::table, "name", QString());
@@ -238,7 +238,7 @@ bool Database::loadOdf(const KoXmlElement& element, const KCMap* map)
         if (!ok || d->refreshDelay < 0)
             return false;
     }
-    KoXmlElement child;
+    KXmlElement child;
     forEachElement(child, element) {
         if (child.namespaceURI() != KOdfXmlNS::table)
             continue;

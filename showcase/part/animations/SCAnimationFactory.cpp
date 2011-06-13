@@ -30,7 +30,7 @@
 #include <KOdfXmlNS.h>
 #include <KoShapeLoadingContext.h>
 
-SCAnimationBase * SCAnimationFactory::createAnimationFromOdf(const KoXmlElement &element, KoShapeLoadingContext &context,
+SCAnimationBase * SCAnimationFactory::createAnimationFromOdf(const KXmlElement &element, KoShapeLoadingContext &context,
                                                                SCShapeAnimation *shapeAnimation)
 {
     SCAnimationBase * animation = 0;

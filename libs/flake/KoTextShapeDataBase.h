@@ -27,7 +27,7 @@
 #include <QTextDocument>
 
 class KoTextShapeDataBasePrivate;
-class KoXmlElement;
+class KXmlElement;
 class KoShapeLoadingContext;
 class KoShapeSavingContext;
 
@@ -60,7 +60,7 @@ public:
     /**
     * Load the text from ODF.
     */
-    virtual bool loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context) = 0;
+    virtual bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context) = 0;
 
     /**
     * Save the text to ODF.

@@ -45,7 +45,7 @@ public:
     explicit KoTextOnShapeContainer(KoShape *childShape, KoResourceManager *documentResources = 0);
     virtual ~KoTextOnShapeContainer();
 
-    virtual bool loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context);
+    virtual bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context);
     virtual void saveOdf(KoShapeSavingContext &context) const;
 
     /// different kinds of resizing behavior to determine how to treat text overflow
@@ -100,7 +100,7 @@ public:
      * to know that the text was added you can call parent() on the shape you
      * passed in.
      */
-    static void tryWrapShape(KoShape *shape, const KoXmlElement &element,
+    static void tryWrapShape(KoShape *shape, const KXmlElement &element,
             KoShapeLoadingContext &context);
 
 private:

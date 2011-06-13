@@ -123,7 +123,7 @@ QImage MorphologyEffect::processImage(const QImage &image, const KoFilterEffectR
     return result;
 }
 
-bool MorphologyEffect::load(const KoXmlElement &element, const KoFilterEffectLoadingContext &context)
+bool MorphologyEffect::load(const KXmlElement &element, const KoFilterEffectLoadingContext &context)
 {
     if (element.tagName() != id())
         return false;

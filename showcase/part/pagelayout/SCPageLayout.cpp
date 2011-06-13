@@ -47,7 +47,7 @@ SCPageLayout::~SCPageLayout()
     qDeleteAll(m_placeholders);
 }
 
-bool SCPageLayout::loadOdf(const KoXmlElement &element, const QRectF &pageRect)
+bool SCPageLayout::loadOdf(const KXmlElement &element, const QRectF &pageRect)
 {
     if (element.hasAttributeNS(KOdfXmlNS::style, "display-name")) {
         m_name = element.attributeNS(KOdfXmlNS::style, "display-name");
@@ -56,7 +56,7 @@ bool SCPageLayout::loadOdf(const KoXmlElement &element, const QRectF &pageRect)
         m_name = element.attributeNS(KOdfXmlNS::style, "name");
     }
 
-    KoXmlElement child;
+    KXmlElement child;
     forEachElement(child, element) {
         if (child.tagName() == "placeholder" && child.namespaceURI() == KOdfXmlNS::presentation) {
             SCPlaceholder * placeholder = new SCPlaceholder;

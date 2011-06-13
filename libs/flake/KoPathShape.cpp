@@ -63,7 +63,7 @@ QRectF KoPathShapePrivate::handleRect(const QPointF &p, qreal radius) const
     return QRectF(p.x() - radius, p.y() - radius, 2*radius, 2*radius);
 }
 
-void KoPathShapePrivate::applyViewboxTransformation(const KoXmlElement &element)
+void KoPathShapePrivate::applyViewboxTransformation(const KXmlElement &element)
 {
     Q_Q(KoPathShape);
     // apply viewbox transformation
@@ -122,7 +122,7 @@ void KoPathShape::saveOdf(KoShapeSavingContext & context) const
     context.xmlWriter().endElement();
 }
 
-bool KoPathShape::loadOdf(const KoXmlElement & element, KoShapeLoadingContext &context)
+bool KoPathShape::loadOdf(const KXmlElement & element, KoShapeLoadingContext &context)
 {
     Q_D(KoPathShape);
     loadOdfAttributes(element, context, OdfMandatories | OdfAdditionalAttributes | OdfCommonChildElements);
@@ -190,7 +190,7 @@ QString KoPathShape::saveStyle(KOdfGenericStyle &style, KoShapeSavingContext &co
     return KoShape::saveStyle(style, context);
 }
 
-void KoPathShape::loadStyle(const KoXmlElement & element, KoShapeLoadingContext &context)
+void KoPathShape::loadStyle(const KXmlElement & element, KoShapeLoadingContext &context)
 {
     Q_D(KoPathShape);
     KoShape::loadStyle(element, context);
@@ -204,7 +204,7 @@ void KoPathShape::loadStyle(const KoXmlElement & element, KoShapeLoadingContext 
     }
 }
 
-QRectF KoPathShape::loadOdfViewbox(const KoXmlElement & element) const
+QRectF KoPathShape::loadOdfViewbox(const KXmlElement & element) const
 {
     QRectF viewbox;
 
@@ -1244,7 +1244,7 @@ void updateNodeType(KoPathPoint * point, const QChar & nodeType)
     }
 }
 
-void KoPathShapePrivate::loadNodeTypes(const KoXmlElement &element)
+void KoPathShapePrivate::loadNodeTypes(const KXmlElement &element)
 {
     Q_Q(KoPathShape);
     if (element.hasAttributeNS(KOdfXmlNS::koffice, "nodeTypes")) {

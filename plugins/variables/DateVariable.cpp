@@ -69,7 +69,7 @@ void DateVariable::saveOdf(KoShapeSavingContext & context)
     writer->endElement();
 }
 
-bool DateVariable::loadOdf(const KoXmlElement & element, KoShapeLoadingContext & context)
+bool DateVariable::loadOdf(const KXmlElement & element, KoShapeLoadingContext & context)
 {
     const QString localName(element.localName());
     QString dateFormat = "";

@@ -46,7 +46,7 @@ const char* const ooNS::dc = "http://purl.org/dc/elements/1.1/";
 const char* const ooNS::meta = "http://openoffice.org/2000/meta";
 const char* const ooNS::config = "http://openoffice.org/2001/config";
 
-QString OoUtils::expandWhitespace(const KoXmlElement& tag)
+QString OoUtils::expandWhitespace(const KXmlElement& tag)
 {
     //tags like <text:s text:c="4">
 
@@ -192,10 +192,10 @@ void OoUtils::importTabulators(QDomElement& parentElement, const KOdfStyleStack&
 {
     if (!styleStack.hasChildNode(ooNS::style, "tab-stops"))     // 3.11.10
         return;
-    KoXmlElement tabStops = styleStack.childNode(ooNS::style, "tab-stops");
+    KXmlElement tabStops = styleStack.childNode(ooNS::style, "tab-stops");
     //kDebug(30519) << tabStops.childNodes().count() <<" tab stops in layout.";
     for (KoXmlNode it = tabStops.firstChild(); !it.isNull(); it = it.nextSibling()) {
-        KoXmlElement tabStop = it.toElement();
+        KXmlElement tabStop = it.toElement();
         Q_ASSERT(tabStop.prefix() == "style");
         Q_ASSERT(tabStop.tagName() == "tab-stop");
         QString type = tabStop.attributeNS(ooNS::style, "type", QString());   // left, right, center or char
@@ -402,7 +402,7 @@ void OoUtils::createDocumentInfo(KoXmlDocument &_meta, QDomDocument & docinfo)
         return;
     QDomElement elementDocInfo  = docinfo.documentElement();
 
-    KoXmlElement e = KoXml::namedItemNS(office, ooNS::dc, "creator");
+    KXmlElement e = KoXml::namedItemNS(office, ooNS::dc, "creator");
     if (!e.isNull() && !e.text().isEmpty()) {
         QDomElement author = docinfo.createElement("author");
         QDomElement t = docinfo.createElement("full-name");
@@ -449,7 +449,7 @@ void OoUtils::createDocumentInfo(KoXmlDocument &_meta, QDomDocument & docinfo)
             about = docinfo.createElement("about");
             elementDocInfo.appendChild(about);
         }
-        KoXmlElement tmp = KoXml::namedItemNS(e, ooNS::meta, "keyword");
+        KXmlElement tmp = KoXml::namedItemNS(e, ooNS::meta, "keyword");
         if (!tmp.isNull() && !tmp.text().isEmpty()) {
             QDomElement keyword = docinfo.createElement("keyword");
             about.appendChild(keyword);

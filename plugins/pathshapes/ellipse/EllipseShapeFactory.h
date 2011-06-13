@@ -32,7 +32,7 @@ public:
     explicit EllipseShapeFactory(QObject *parent);
     ~EllipseShapeFactory() {}
     virtual KoShape *createDefaultShape(KoResourceManager *documentResources = 0) const;
-    virtual bool supports(const KoXmlElement &e, KoShapeLoadingContext &context) const;
+    virtual bool supports(const KXmlElement &e, KoShapeLoadingContext &context) const;
     virtual KoShapeConfigWidgetBase *createConfigWidget(KoCanvasBase *canvas);
 };
 

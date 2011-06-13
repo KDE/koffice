@@ -135,7 +135,7 @@ void PageVariable::saveOdf(KoShapeSavingContext &context)
     }
 }
 
-bool PageVariable::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
+bool PageVariable::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
 {
     Q_UNUSED(context);
     const QString localName(element.localName());

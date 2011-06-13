@@ -50,7 +50,7 @@ KoShape *KoPathShapeFactory::createDefaultShape(KoResourceManager *) const
     return path;
 }
 
-bool KoPathShapeFactory::supports(const KoXmlElement & e, KoShapeLoadingContext &context) const
+bool KoPathShapeFactory::supports(const KXmlElement & e, KoShapeLoadingContext &context) const
 {
     Q_UNUSED(context);
     if (e.namespaceURI() == KOdfXmlNS::draw) {

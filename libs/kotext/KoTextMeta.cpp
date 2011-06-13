@@ -76,7 +76,7 @@ void KoTextMeta::saveOdf(KoShapeSavingContext &context)
     kDebug(30015) << "kom.save() done this:" << (void*)this << " d->type:" << d->type;
 }
 
-bool KoTextMeta::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
+bool KoTextMeta::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
 {
     Q_UNUSED(element);
     Q_UNUSED(context);

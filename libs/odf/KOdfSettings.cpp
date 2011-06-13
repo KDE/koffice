@@ -30,7 +30,7 @@ KOdfSettings::KOdfSettings(const KoXmlDocument& doc)
         m_configNsUri(KOdfXmlNS::config)
         , d(0)
 {
-    const KoXmlElement contents = doc.documentElement();
+    const KXmlElement contents = doc.documentElement();
     if (m_settingsElement.isNull())
         kDebug(30003) << " document doesn't have tag 'office:settings'";
 }
@@ -40,7 +40,7 @@ KOdfSettings::KOdfSettings(const KoXmlDocument& doc, const char* officeNSURI, co
         m_configNsUri(configNSURI)
         , d(0)
 {
-    const KoXmlElement contents = doc.documentElement();
+    const KXmlElement contents = doc.documentElement();
     if (m_settingsElement.isNull())
         kDebug(30003) << " document doesn't have tag 'office:settings'";
 }
@@ -52,7 +52,7 @@ KOdfSettings::~KOdfSettings()
 
 KOdfSettings::Items KOdfSettings::itemSet(const QString& itemSetName) const
 {
-    KoXmlElement e;
+    KXmlElement e;
     forEachElement(e, m_settingsElement) {
         if (e.localName() == "config-item-set" &&
                 e.namespaceURI() == m_configNsUri &&
@@ -61,12 +61,12 @@ KOdfSettings::Items KOdfSettings::itemSet(const QString& itemSetName) const
         }
     }
 
-    return Items(KoXmlElement(), this);
+    return Items(KXmlElement(), this);
 }
 
 KOdfSettings::IndexedMap KOdfSettings::Items::indexedMap(const QString& itemMapName) const
 {
-    KoXmlElement configItem;
+    KXmlElement configItem;
     forEachElement(configItem, m_element) {
         if (configItem.localName() == "config-item-map-indexed" &&
                 configItem.namespaceURI() == m_settings->m_configNsUri &&
@@ -74,12 +74,12 @@ KOdfSettings::IndexedMap KOdfSettings::Items::indexedMap(const QString& itemMapN
             return IndexedMap(configItem, m_settings);
         }
     }
-    return IndexedMap(KoXmlElement(), m_settings);
+    return IndexedMap(KXmlElement(), m_settings);
 }
 
 KOdfSettings::NamedMap KOdfSettings::Items::namedMap(const QString& itemMapName) const
 {
-    KoXmlElement configItem;
+    KXmlElement configItem;
     forEachElement(configItem, m_element) {
         if (configItem.localName() == "config-item-map-named" &&
                 configItem.namespaceURI() == m_settings->m_configNsUri &&
@@ -87,13 +87,13 @@ KOdfSettings::NamedMap KOdfSettings::Items::namedMap(const QString& itemMapName)
             return NamedMap(configItem, m_settings);
         }
     }
-    return NamedMap(KoXmlElement(), m_settings);
+    return NamedMap(KXmlElement(), m_settings);
 }
 
 KOdfSettings::Items KOdfSettings::IndexedMap::entry(int entryIndex) const
 {
     int i = 0;
-    KoXmlElement entry;
+    KXmlElement entry;
     forEachElement(entry, m_element) {
         if (entry.localName() == "config-item-map-entry" &&
                 entry.namespaceURI() == m_settings->m_configNsUri) {
@@ -103,12 +103,12 @@ KOdfSettings::Items KOdfSettings::IndexedMap::entry(int entryIndex) const
                 ++i;
         }
     }
-    return Items(KoXmlElement(), m_settings);
+    return Items(KXmlElement(), m_settings);
 }
 
 KOdfSettings::Items KOdfSettings::NamedMap::entry(const QString& entryName) const
 {
-    KoXmlElement entry;
+    KXmlElement entry;
     forEachElement(entry, m_element) {
         if (entry.localName() == "config-item-map-entry" &&
                 entry.namespaceURI() == m_settings->m_configNsUri &&
@@ -116,14 +116,14 @@ KOdfSettings::Items KOdfSettings::NamedMap::entry(const QString& entryName) cons
             return Items(entry, m_settings);
         }
     }
-    return Items(KoXmlElement(), m_settings);
+    return Items(KXmlElement(), m_settings);
 }
 
 // helper method
-QString KOdfSettings::Items::findConfigItem(const KoXmlElement& element,
+QString KOdfSettings::Items::findConfigItem(const KXmlElement& element,
         const QString& item, bool* ok) const
 {
-    KoXmlElement it;
+    KXmlElement it;
     forEachElement(it, element) {
         if (it.localName() == "config-item" &&
                 it.namespaceURI() == m_settings->m_configNsUri &&

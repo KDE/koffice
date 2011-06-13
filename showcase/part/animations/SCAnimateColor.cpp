@@ -34,7 +34,7 @@ SCAnimateColor::~SCAnimateColor()
 {
 }
 
-bool SCAnimateColor::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
+bool SCAnimateColor::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
 {
     SCAnimationBase::loadOdf(element, context);
     return false;

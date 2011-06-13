@@ -59,7 +59,7 @@ class KoFilterEffectStack;
 class KoSnapData;
 class KoShapeConnection;
 class KoShapeConnectionPolicy;
-class KoXmlElement;
+class KXmlElement;
 
 /**
  *
@@ -177,7 +177,7 @@ public:
      *
      * @return false if loading failed
      */
-    virtual bool loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context);
+    virtual bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context);
 
     /**
      * @brief store the shape data as ODF XML.
@@ -948,7 +948,7 @@ protected:
      * @param element element which represents the shape in odf
      * @param attributes a number of OdfAttribute items to state which attributes to load.
      */
-    bool loadOdfAttributes(const KoXmlElement &element, KoShapeLoadingContext &context, int attributes);
+    bool loadOdfAttributes(const KXmlElement &element, KoShapeLoadingContext &context, int attributes);
 
     /**
      * Parses the transformation attribute from the given string
@@ -976,10 +976,10 @@ protected:
      * @param element the xml element to  load the style from
      * @param context the loading context used for loading
      */
-    virtual void loadStyle(const KoXmlElement &element, KoShapeLoadingContext &context);
+    virtual void loadStyle(const KXmlElement &element, KoShapeLoadingContext &context);
 
     /// Loads the stroke style
-    KoShapeBorderBase *loadOdfStroke(const KoXmlElement &element, KoShapeLoadingContext &context) const;
+    KoShapeBorderBase *loadOdfStroke(const KXmlElement &element, KoShapeLoadingContext &context) const;
 
     /// Loads the shadow style
     KoShapeBackground *loadOdfFill(KoShapeLoadingContext &context) const;

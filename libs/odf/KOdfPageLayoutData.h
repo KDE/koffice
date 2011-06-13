@@ -99,7 +99,7 @@ struct KOdfPageLayoutData {
     /**
      * Load this page layout from ODF
      */
-    KODF_EXPORT void loadOdf(const KoXmlElement &style);
+    KODF_EXPORT void loadOdf(const KXmlElement &style);
 
     /**
      * Construct a page layout with the default page size depending on the locale settings,

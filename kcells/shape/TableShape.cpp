@@ -161,7 +161,7 @@ void TableShape::paint(QPainter& painter, const KoViewConverter& converter)
     d->sheetView->paintCells(painter, paintRect, QPointF(0.0, 0.0));
 }
 
-bool TableShape::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
+bool TableShape::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
 {
     //kDebug() << "LOADING TABLE SHAPE";
     if (sheet() && element.namespaceURI() == KOdfXmlNS::table && element.localName() == "table") {

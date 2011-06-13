@@ -45,7 +45,7 @@ namespace KOdf
 // OO spec 2.5.4. p68. Conversion to Qt format: see qdate.html
 // OpenCalcImport::loadFormat has similar code, but slower, intermixed with other stuff,
 // lacking long-textual forms.
-QPair<QString, NumericStyleFormat> loadOdfNumberStyle(const KoXmlElement &parent)
+QPair<QString, NumericStyleFormat> loadOdfNumberStyle(const KXmlElement &parent)
 {
     NumericStyleFormat dataStyle;
 
@@ -75,7 +75,7 @@ QPair<QString, NumericStyleFormat> loadOdfNumberStyle(const KoXmlElement &parent
     //bool negRed = false;
     bool ok = false;
     int i = 0;
-    KoXmlElement e;
+    KXmlElement e;
     QString prefix;
     QString suffix;
     forEachElement(e, parent) {
@@ -266,7 +266,7 @@ QPair<QString, NumericStyleFormat> loadOdfNumberStyle(const KoXmlElement &parent
         //   <style:map style:condition="value()=0" style:apply-style-name="N139P2"/>
         // </number:text-style>
         for (KoXmlNode node(e); !node.isNull(); node = node.nextSibling()) {
-            KoXmlElement elem = node.toElement();
+            KXmlElement elem = node.toElement();
             if (elem.namespaceURI() == KOdfXmlNS::style && elem.localName() == "map") {
                 QString condition, applyStyleName;
                 if (elem.hasAttributeNS(KOdfXmlNS::style, "condition"))

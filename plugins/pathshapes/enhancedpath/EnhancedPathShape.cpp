@@ -385,12 +385,12 @@ void EnhancedPathShape::saveOdf(KoShapeSavingContext &context) const
     }
 }
 
-bool EnhancedPathShape::loadOdf(const KoXmlElement & element, KoShapeLoadingContext &context)
+bool EnhancedPathShape::loadOdf(const KXmlElement & element, KoShapeLoadingContext &context)
 {
     reset();
     loadOdfAttributes(element, context, OdfAdditionalAttributes | OdfCommonChildElements);
 
-    const KoXmlElement enhancedGeometry(KoXml::namedItemNS(element, KOdfXmlNS::draw, "enhanced-geometry" ) );
+    const KXmlElement enhancedGeometry(KoXml::namedItemNS(element, KOdfXmlNS::draw, "enhanced-geometry" ) );
     if (!enhancedGeometry.isNull()) {
         // load the modifiers
         QString modifiers = enhancedGeometry.attributeNS(KOdfXmlNS::draw, "modifiers");
@@ -398,7 +398,7 @@ bool EnhancedPathShape::loadOdf(const KoXmlElement & element, KoShapeLoadingCont
             addModifiers(modifiers);
         }
 
-        KoXmlElement grandChild;
+        KXmlElement grandChild;
         forEachElement(grandChild, enhancedGeometry) {
             if (grandChild.namespaceURI() != KOdfXmlNS::draw)
                 continue;

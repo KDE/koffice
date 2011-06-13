@@ -51,7 +51,7 @@ void SpiralShape::saveOdf(KoShapeSavingContext &context) const
     KoPathShape::saveOdf(context);
 }
 
-bool SpiralShape::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &/*context*/)
+bool SpiralShape::loadOdf(const KXmlElement &element, KoShapeLoadingContext &/*context*/)
 {
     Q_UNUSED(element);
 

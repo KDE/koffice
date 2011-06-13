@@ -87,7 +87,7 @@ public:
     QString declaration(SCDeclarations::Type type) const;
 
     /// reimplemented
-    virtual bool loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context);
+    virtual bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context);
 
     /// reimplemented
     virtual bool displayShape(KoShape *shape) const;
@@ -100,10 +100,10 @@ protected:
     virtual void saveOdfPageStyleData(KOdfGenericStyle &style, KoPASavingContext &paContext) const;
 
     /// reimplemented
-    virtual void loadOdfPageTag(const KoXmlElement &element, KoPALoadingContext &loadingContext);
+    virtual void loadOdfPageTag(const KXmlElement &element, KoPALoadingContext &loadingContext);
 
     /// reimplemented
-    virtual void loadOdfPageExtra(const KoXmlElement &element, KoPALoadingContext &loadingContext);
+    virtual void loadOdfPageExtra(const KXmlElement &element, KoPALoadingContext &loadingContext);
 
     /// reimplemented
     virtual bool saveOdfAnimations(KoPASavingContext &paContext) const;

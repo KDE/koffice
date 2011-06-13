@@ -96,7 +96,7 @@ public:
      *
      * The default implementation is empty
      */
-    virtual void loadOdfSmilAttributes(const KoXmlElement &element);
+    virtual void loadOdfSmilAttributes(const KXmlElement &element);
 
     /**
      * Get the smil:type

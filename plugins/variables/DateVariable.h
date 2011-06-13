@@ -55,7 +55,7 @@ public:
     void saveOdf(KoShapeSavingContext &context);
 
     ///reimplemented
-    virtual bool loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context);
+    virtual bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context);
 
     void readProperties(const KProperties *props);
 

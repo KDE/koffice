@@ -1317,7 +1317,7 @@ void KCCell::saveOdfValue(KXmlWriter &xmlWriter)
     };
 }
 
-bool KCCell::loadOdf(const KoXmlElement& element, KCOdfLoadingContext& tableContext, const Styles& autoStyles, const QString& cellStyleName)
+bool KCCell::loadOdf(const KXmlElement& element, KCOdfLoadingContext& tableContext, const Styles& autoStyles, const QString& cellStyleName)
 {
     static const QString sFormula           = QString::fromLatin1("formula");
     static const QString sValidationName    = QString::fromLatin1("validation-name");
@@ -1580,12 +1580,12 @@ bool KCCell::loadOdf(const KoXmlElement& element, KCOdfLoadingContext& tableCont
     //
     // cell comment/annotation
     //
-    KoXmlElement annotationElement = KoXml::namedItemNS(element, KOdfXmlNS::office, sAnnotation);
+    KXmlElement annotationElement = KoXml::namedItemNS(element, KOdfXmlNS::office, sAnnotation);
     if (!annotationElement.isNull()) {
         QString comment;
         KoXmlNode node = annotationElement.firstChild();
         while (!node.isNull()) {
-            KoXmlElement commentElement = node.toElement();
+            KXmlElement commentElement = node.toElement();
             if (!commentElement.isNull())
                 if (commentElement.localName() == sP && commentElement.namespaceURI() == KOdfXmlNS::text) {
                     if (!comment.isEmpty()) comment.append('\n');
@@ -1604,7 +1604,7 @@ bool KCCell::loadOdf(const KoXmlElement& element, KCOdfLoadingContext& tableCont
 }
 
 // Similar to KoXml::namedItemNS except that children of span tags will be evaluated too.
-KoXmlElement namedItemNSWithSpan(const KoXmlNode& node, const QString &nsURI, const QString &localName)
+KXmlElement namedItemNSWithSpan(const KoXmlNode& node, const QString &nsURI, const QString &localName)
 {
     KoXmlNode n = node.firstChild();
     for (; !n.isNull(); n = n.nextSibling()) {
@@ -1613,21 +1613,21 @@ KoXmlElement namedItemNSWithSpan(const KoXmlNode& node, const QString &nsURI, co
                 return n.toElement();
             }
             if (n.localName() == "span" && n.namespaceURI() == nsURI) {
-                KoXmlElement e = KoXml::namedItemNS(n, nsURI, localName); // not recursive
+                KXmlElement e = KoXml::namedItemNS(n, nsURI, localName); // not recursive
                 if (!e.isNull()) {
                     return e;
                 }
             }
         }
     }
-    return KoXmlElement();
+    return KXmlElement();
 }
 
 // recursively goes through all children of parent and returns true if there is any element
 // in the draw: namespace in this subtree
-static bool findDrawElements(const KoXmlElement& parent)
+static bool findDrawElements(const KXmlElement& parent)
 {
-    KoXmlElement element;
+    KXmlElement element;
     forEachElement(element , parent) {
         if (element.namespaceURI() == KOdfXmlNS::draw)
             return true;
@@ -1637,10 +1637,10 @@ static bool findDrawElements(const KoXmlElement& parent)
     return false;
 }
 
-void KCCell::loadOdfCellText(const KoXmlElement& parent, KCOdfLoadingContext& tableContext, const Styles& autoStyles, const QString& cellStyleName)
+void KCCell::loadOdfCellText(const KXmlElement& parent, KCOdfLoadingContext& tableContext, const Styles& autoStyles, const QString& cellStyleName)
 {
     //Search and load each paragraph of text. Each paragraph is separated by a line break
-    KoXmlElement textParagraphElement;
+    KXmlElement textParagraphElement;
     QString cellText;
 
     bool multipleTextParagraphsFound = false;
@@ -1659,7 +1659,7 @@ void KCCell::loadOdfCellText(const KoXmlElement& parent, KCOdfLoadingContext& ta
             }
 
             // the text:a link could be located within a text:span element
-            KoXmlElement textA = namedItemNSWithSpan(textParagraphElement, KOdfXmlNS::text, "a");
+            KXmlElement textA = namedItemNSWithSpan(textParagraphElement, KOdfXmlNS::text, "a");
             if (!textA.isNull()) {
                 if (textA.hasAttributeNS(KOdfXmlNS::xlink, "href")) {
                     QString link = textA.attributeNS(KOdfXmlNS::xlink, "href", QString());
@@ -1718,7 +1718,7 @@ void KCCell::loadOdfCellText(const KoXmlElement& parent, KCOdfLoadingContext& ta
     }
 }
 
-void KCCell::loadOdfObjects(const KoXmlElement &parent, KCOdfLoadingContext& tableContext)
+void KCCell::loadOdfObjects(const KXmlElement &parent, KCOdfLoadingContext& tableContext)
 {
     // Register additional attributes, that identify shapes anchored in cells.
     // Their dimensions need adjustment after all rows are loaded,
@@ -1733,7 +1733,7 @@ void KCCell::loadOdfObjects(const KoXmlElement &parent, KCOdfLoadingContext& tab
                 KOdfXmlNS::table, "end-y",
                 "table:end-y"));
 
-    KoXmlElement element;
+    KXmlElement element;
     forEachElement(element, parent) {
         if (element.namespaceURI() != KOdfXmlNS::draw)
             continue;
@@ -1742,7 +1742,7 @@ void KCCell::loadOdfObjects(const KoXmlElement &parent, KCOdfLoadingContext& tab
     }
 }
 
-void KCCell::loadOdfObject(const KoXmlElement &element, KoShapeLoadingContext &shapeContext)
+void KCCell::loadOdfObject(const KXmlElement &element, KoShapeLoadingContext &shapeContext)
 {
     KoShape* shape = KoShapeRegistry::instance()->createShapeFromOdf(element, shapeContext);
     if (!shape) {
@@ -1802,7 +1802,7 @@ void KCCell::loadOdfObject(const KoXmlElement &element, KoShapeLoadingContext &s
     shape->setSize(size);
 }
 
-bool KCCell::load(const KoXmlElement & cell, int _xshift, int _yshift,
+bool KCCell::load(const KXmlElement & cell, int _xshift, int _yshift,
                 Paste::Mode mode, Paste::Operation op, bool paste)
 {
     bool ok;
@@ -1829,7 +1829,7 @@ bool KCCell::load(const KoXmlElement & cell, int _xshift, int _yshift,
     //
     // Load formatting information.
     //
-    KoXmlElement formatElement = cell.namedItem("format").toElement();
+    KXmlElement formatElement = cell.namedItem("format").toElement();
     if (!formatElement.isNull() &&
             ((mode == Paste::Normal) || (mode == Paste::KCFormat) || (mode == Paste::NoBorder))) {
         int mergedXCells = 0;
@@ -1870,7 +1870,7 @@ bool KCCell::load(const KoXmlElement & cell, int _xshift, int _yshift,
     //
     // Load the condition section of a cell.
     //
-    KoXmlElement conditionsElement = cell.namedItem("condition").toElement();
+    KXmlElement conditionsElement = cell.namedItem("condition").toElement();
     if (!conditionsElement.isNull()) {
         KCConditions conditions;
         KCMap *const map = sheet()->map();
@@ -1883,7 +1883,7 @@ bool KCCell::load(const KoXmlElement & cell, int _xshift, int _yshift,
         setConditions(KCConditions());
     }
 
-    KoXmlElement validityElement = cell.namedItem("validity").toElement();
+    KXmlElement validityElement = cell.namedItem("validity").toElement();
     if (!validityElement.isNull()) {
         KCValidity validity;
         if (validity.loadXML(this, validityElement))
@@ -1896,7 +1896,7 @@ bool KCCell::load(const KoXmlElement & cell, int _xshift, int _yshift,
     //
     // Load the comment
     //
-    KoXmlElement comment = cell.namedItem("comment").toElement();
+    KXmlElement comment = cell.namedItem("comment").toElement();
     if (!comment.isNull() &&
             (mode == Paste::Normal || mode == Paste::Comment || mode == Paste::NoBorder)) {
         QString t = comment.text();
@@ -1910,7 +1910,7 @@ bool KCCell::load(const KoXmlElement & cell, int _xshift, int _yshift,
     //
     // TODO: make this suck less. We set data twice, in loadCellData, and
     // also here. Not good.
-    KoXmlElement text = cell.namedItem("text").toElement();
+    KXmlElement text = cell.namedItem("text").toElement();
 
     if (!text.isNull() &&
             (mode == Paste::Normal || mode == Paste::Text || mode == Paste::NoBorder || mode == Paste::Result)) {
@@ -1921,7 +1921,7 @@ bool KCCell::load(const KoXmlElement & cell, int _xshift, int _yshift,
         if (cell.hasAttribute("dataType"))     // new docs
             dataType = cell.attribute("dataType");
 
-        KoXmlElement result = cell.namedItem("result").toElement();
+        KXmlElement result = cell.namedItem("result").toElement();
         QString txt = text.text();
         if ((mode == Paste::Result) && (txt[0] == '='))
             // paste text of the element, if we want to paste result
@@ -2005,7 +2005,7 @@ bool KCCell::load(const KoXmlElement & cell, int _xshift, int _yshift,
     return true;
 }
 
-bool KCCell::loadCellData(const KoXmlElement & text, Paste::Operation op, const QString &_dataType)
+bool KCCell::loadCellData(const KXmlElement & text, Paste::Operation op, const QString &_dataType)
 {
     //TODO: use converter()->asString() to generate userInput()
 
@@ -2162,7 +2162,7 @@ bool KCCell::loadCellData(const KoXmlElement & text, Paste::Operation op, const 
     return true;
 }
 
-QTime KCCell::toTime(const KoXmlElement &element)
+QTime KCCell::toTime(const KXmlElement &element)
 {
     //TODO: can't we use tryParseTime (after modification) instead?
     QString t = element.text();
@@ -2180,7 +2180,7 @@ QTime KCCell::toTime(const KoXmlElement &element)
     return value().asTime(sheet()->map()->calculationSettings());
 }
 
-QDate KCCell::toDate(const KoXmlElement &element)
+QDate KCCell::toDate(const KXmlElement &element)
 {
     QString t = element.text();
     int pos;

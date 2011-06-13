@@ -382,7 +382,7 @@ void KoTableCellStyle::setMasterPageName(const QString &name)
     setProperty(MasterPageName, name);
 }
 
-void KoTableCellStyle::loadOdf(const KoXmlElement *element, KOdfLoadingContext &context)
+void KoTableCellStyle::loadOdf(const KXmlElement *element, KOdfLoadingContext &context)
 {
     Q_D(KoTableCellStyle);
     if (element->hasAttributeNS(KOdfXmlNS::style, "display-name"))

@@ -93,7 +93,7 @@ class MagicCurtain : public KoShapeContainer
 {
 public:
     // reimplemented pure virtual calls
-    bool loadOdf(const KoXmlElement&, KoShapeLoadingContext&) { return false; }
+    bool loadOdf(const KXmlElement&, KoShapeLoadingContext&) { return false; }
     void saveOdf(KoShapeSavingContext&) const { }
     void paintComponent(QPainter&, const KoViewConverter&) { }
 
@@ -633,7 +633,7 @@ bool KWDocument::loadOdf(KOdfStoreReader &odfStore)
 bool KWDocument::loadXML(const KoXmlDocument &doc, KOdfStore *store)
 {
     clear();
-    KoXmlElement root = doc.documentElement();
+    KXmlElement root = doc.documentElement();
     KWDLoader loader(this, store);
     bool rc = loader.load(root);
     if (rc)

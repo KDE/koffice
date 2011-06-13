@@ -35,7 +35,7 @@ void ListStyleStack::pop()
     m_stack.pop();
 }
 
-void ListStyleStack::push(const KoXmlElement& style)
+void ListStyleStack::push(const KXmlElement& style)
 {
     m_stack.push(style);
 }
@@ -46,14 +46,14 @@ void ListStyleStack::setInitialLevel(int initialLevel)
     m_initialLevel = initialLevel;
 }
 
-KoXmlElement ListStyleStack::currentListStyle() const
+KXmlElement ListStyleStack::currentListStyle() const
 {
     Q_ASSERT(!m_stack.isEmpty());
     return m_stack.top();
 }
 
-KoXmlElement ListStyleStack::currentListStyleProperties() const
+KXmlElement ListStyleStack::currentListStyleProperties() const
 {
-    KoXmlElement style = currentListStyle();
+    KXmlElement style = currentListStyle();
     return KoXml::namedItemNS(style, ooNS::style, "properties");
 }

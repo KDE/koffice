@@ -48,13 +48,13 @@ KoShape *SCPlaceholderShapeFactory::createDefaultShape(KoResourceManager *) cons
     return new SCPlaceholderShape();
 }
 
-bool SCPlaceholderShapeFactory::supports(const KoXmlElement &e, KoShapeLoadingContext &context) const
+bool SCPlaceholderShapeFactory::supports(const KXmlElement &e, KoShapeLoadingContext &context) const
 {
     Q_UNUSED(context);
     // check parent if placeholder is set to true
     KoXmlNode parent = e.parentNode();
     if (!parent.isNull()) {
-        KoXmlElement element = parent.toElement();
+        KXmlElement element = parent.toElement();
         if (!element.isNull()) {
             bool supported =  element.attributeNS(KOdfXmlNS::presentation, "placeholder", "false") == "true";
             kDebug(33001) << "placeholder:" << supported;

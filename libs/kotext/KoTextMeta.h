@@ -28,7 +28,7 @@ class KoShape;
 class QTextDocument;
 class KoShapeSavingContext;
 class KoShapeLoadingContext;
-class KoXmlElement;
+class KXmlElement;
 
 /**
  * Used to indicate an ODF text:meta container. This is very similar to a KoBookmark
@@ -51,7 +51,7 @@ public:
 
     /// reimplemented from super
     void saveOdf(KoShapeSavingContext &context);
-    bool loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context);
+    bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context);
 
     /// reimplemented from super
     virtual void updatePosition(QTextInlineObject object, const QTextCharFormat &format);

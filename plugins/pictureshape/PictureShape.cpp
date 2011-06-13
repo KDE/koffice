@@ -214,13 +214,13 @@ void PictureShape::saveOdf(KoShapeSavingContext &context) const
     context.addDataCenter(m_imageCollection);
 }
 
-bool PictureShape::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
+bool PictureShape::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
 {
     loadOdfAttributes(element, context, OdfAllAttributes);
     return loadOdfFrame(element, context);
 }
 
-bool PictureShape::loadOdfFrameElement(const KoXmlElement &element, KoShapeLoadingContext &context)
+bool PictureShape::loadOdfFrameElement(const KXmlElement &element, KoShapeLoadingContext &context)
 {
     if (m_imageCollection) {
         const QString href = element.attribute("href");
@@ -231,7 +231,7 @@ bool PictureShape::loadOdfFrameElement(const KoXmlElement &element, KoShapeLoadi
             setUserData(data);
         } else {
             // check if we have an office:binary data element containing the image data
-            const KoXmlElement &binaryData(KoXml::namedItemNS(element, KOdfXmlNS::office, "binary-data"));
+            const KXmlElement &binaryData(KoXml::namedItemNS(element, KOdfXmlNS::office, "binary-data"));
             if (!binaryData.isNull()) {
                 QImage image;
                 if (image.loadFromData(QByteArray::fromBase64(binaryData.text().toLatin1()))) {
@@ -260,7 +260,7 @@ QString PictureShape::saveStyle(KOdfGenericStyle& style, KoShapeSavingContext& c
     return KoShape::saveStyle(style, context);
 }
 
-void PictureShape::loadStyle(const KoXmlElement& element, KoShapeLoadingContext& context)
+void PictureShape::loadStyle(const KXmlElement& element, KoShapeLoadingContext& context)
 {
     KoShape::loadStyle(element, context);
     KOdfStyleStack &styleStack = context.odfLoadingContext().styleStack();

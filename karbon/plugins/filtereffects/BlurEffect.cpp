@@ -307,7 +307,7 @@ QImage BlurEffect::processImage(const QImage &image, const KoFilterEffectRenderC
     return result;
 }
 
-bool BlurEffect::load(const KoXmlElement &element, const KoFilterEffectLoadingContext &context)
+bool BlurEffect::load(const KXmlElement &element, const KoFilterEffectLoadingContext &context)
 {
     if (element.tagName() != id())
         return false;

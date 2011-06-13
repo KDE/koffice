@@ -134,7 +134,7 @@ public:
      * Takes a parsed DOM element and recreates the conditions structure out of
      * it
      */
-    void loadConditions(const KoXmlElement &element, const KCValueParser *parser);
+    void loadConditions(const KXmlElement &element, const KCValueParser *parser);
 
     /**
      * \ingroup NativeFormat
@@ -154,7 +154,7 @@ public:
      * \ingroup OpenDocument
      * Loads the condtional formattings.
      */
-    void loadOdfConditions(const KoXmlElement &element, const KCValueParser *parser, const KCStyleManager* styleManager);
+    void loadOdfConditions(const KXmlElement &element, const KCValueParser *parser, const KCStyleManager* styleManager);
 
     /**
      * \ingroup OpenDocument

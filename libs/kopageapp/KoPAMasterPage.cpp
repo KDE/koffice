@@ -76,7 +76,7 @@ void KoPAMasterPage::saveOdf(KoShapeSavingContext &context) const
     paContext.addMasterPage(this, paContext.mainStyles().insert(pageMaster, "Default"));
 }
 
-void KoPAMasterPage::loadOdfPageTag(const KoXmlElement &element, KoPALoadingContext &loadingContext)
+void KoPAMasterPage::loadOdfPageTag(const KXmlElement &element, KoPALoadingContext &loadingContext)
 {
     KoPAPageBase::loadOdfPageTag(element, loadingContext);
     if (element.hasAttributeNS(KOdfXmlNS::style, "display-name")) {
@@ -86,7 +86,7 @@ void KoPAMasterPage::loadOdfPageTag(const KoXmlElement &element, KoPALoadingCont
     }
     QString pageLayoutName = element.attributeNS(KOdfXmlNS::style, "page-layout-name");
     const KOdfStylesReader &styles = loadingContext.odfLoadingContext().stylesReader();
-    const KoXmlElement* masterPageStyle = styles.findStyle(pageLayoutName);
+    const KXmlElement* masterPageStyle = styles.findStyle(pageLayoutName);
     KOdfPageLayoutData pageLayout;
 
     if (masterPageStyle) {

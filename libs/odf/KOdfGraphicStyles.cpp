@@ -261,7 +261,7 @@ QBrush KOdf::loadOdfGradientStyle(const KOdfStyleStack &styleStack, const KOdfSt
     return loadOdfGradientStyleByName(stylesReader, styleName, size);
 }
 
-qreal percent(const KoXmlElement &element, const QString &ns, const QString &type, const QString &defaultValue, qreal absolute)
+qreal percent(const KXmlElement &element, const QString &ns, const QString &type, const QString &defaultValue, qreal absolute)
 {
     qreal tmp = 0.0;
     QString value = element.attributeNS(ns, type, defaultValue);
@@ -282,7 +282,7 @@ qreal percent(const KoXmlElement &element, const QString &ns, const QString &typ
 
 QBrush KOdf::loadOdfGradientStyleByName(const KOdfStylesReader &stylesReader, const QString &styleName, const QSizeF &size)
 {
-    KoXmlElement* e = stylesReader.drawStyles()[styleName];
+    KXmlElement* e = stylesReader.drawStyles()[styleName];
     if (! e)
         return QBrush();
 
@@ -392,7 +392,7 @@ QBrush KOdf::loadOdfGradientStyleByName(const KOdfStylesReader &stylesReader, co
         QGradientStops stops;
 
         // load stops
-        KoXmlElement colorstop;
+        KXmlElement colorstop;
         forEachElement(colorstop, (*e)) {
             if (colorstop.namespaceURI() == KOdfXmlNS::svg && colorstop.localName() == "stop") {
                 QGradientStop stop;
@@ -426,7 +426,7 @@ QBrush KOdf::loadOdfGradientStyleByName(const KOdfStylesReader &stylesReader, co
             QGradientStops stops;
 
             // load stops
-            KoXmlElement colorstop;
+            KXmlElement colorstop;
             forEachElement(colorstop, (*e)) {
                 if (colorstop.namespaceURI() == KOdfXmlNS::svg && colorstop.localName() == "stop") {
                     QGradientStop stop;
@@ -498,7 +498,7 @@ QBrush KOdf::loadOdfFillStyle(const KOdfStyleStack &styleStack, const QString & 
 
         //type not defined by default
         //try to use style.
-        KoXmlElement* draw = stylesReader.drawStyles()[style];
+        KXmlElement* draw = stylesReader.drawStyles()[style];
         if (draw) {
             kDebug(30003) << "We have a style";
             int angle = 0;
@@ -618,7 +618,7 @@ QPen KOdf::loadOdfStrokeStyle(const KOdfStyleStack &styleStack, const QString & 
                 width = 1;
             }
 
-            KoXmlElement * dashElement = stylesReader.drawStyles()[ dashStyleName ];
+            KXmlElement * dashElement = stylesReader.drawStyles()[ dashStyleName ];
             if (dashElement) {
                 QVector<qreal> dashes;
                 if (dashElement->hasAttributeNS(KOdfXmlNS::draw, "dots1")) {

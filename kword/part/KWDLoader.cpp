@@ -62,7 +62,7 @@ KWDLoader::~KWDLoader()
 {
 }
 
-bool KWDLoader::load(KoXmlElement &root)
+bool KWDLoader::load(KXmlElement &root)
 {
     QTime dt;
     dt.start();
@@ -85,7 +85,7 @@ bool KWDLoader::load(KoXmlElement &root)
 
     KOdfPageLayoutData pgLayout;
     // <PAPER>
-    KoXmlElement paper = root.namedItem("PAPER").toElement();
+    KXmlElement paper = root.namedItem("PAPER").toElement();
     if (!paper.isNull()) {
         pgLayout.format = static_cast<KOdfPageFormat::Format>(paper.attribute("format").toInt());
         pgLayout.orientation = static_cast<KOdfPageFormat::Orientation>(paper.attribute("orientation").toInt());
@@ -181,7 +181,7 @@ bool KWDLoader::load(KoXmlElement &root)
         m_pageStyle.setColumns(columns);
 
         // <PAPERBORDERS>
-        KoXmlElement paperborders = paper.namedItem("PAPERBORDERS").toElement();
+        KXmlElement paperborders = paper.namedItem("PAPERBORDERS").toElement();
         if (!paperborders.isNull()) {
             pgLayout.leftMargin   = paperborders.attribute("left").toDouble();
             pgLayout.topMargin    = paperborders.attribute("top").toDouble();
@@ -205,7 +205,7 @@ bool KWDLoader::load(KoXmlElement &root)
     m_pageManager->pageStyle("Standard").setPageLayout(pgLayout);
 
     // <ATTRIBUTES>
-    KoXmlElement attributes = root.namedItem("ATTRIBUTES").toElement();
+    KXmlElement attributes = root.namedItem("ATTRIBUTES").toElement();
     if (!attributes.isNull()) {
         if (attributes.attribute("processing", "0") == "1") {
             m_pageStyle.setHasMainTextFrame(false); // DTP type document.
@@ -255,8 +255,8 @@ bool KWDLoader::load(KoXmlElement &root)
 
     emit progressUpdate(10);
 
-    KoXmlElement mailmerge = root.namedItem("MAILMERGE").toElement();
-    if (mailmerge != KoXmlElement()) {
+    KXmlElement mailmerge = root.namedItem("MAILMERGE").toElement();
+    if (mailmerge != KXmlElement()) {
         m_slDataBase->load(mailmerge);
     }
 #endif
@@ -264,14 +264,14 @@ bool KWDLoader::load(KoXmlElement &root)
     emit progressUpdate(15);
 
     // Load all styles before the corresponding paragraphs try to use them!
-    KoXmlElement stylesElem = root.namedItem("STYLES").toElement();
+    KXmlElement stylesElem = root.namedItem("STYLES").toElement();
     if (!stylesElem.isNull())
         loadStyleTemplates(stylesElem);
 
     emit progressUpdate(17);
 #if 0
 
-    KoXmlElement frameStylesElem = root.namedItem("FRAMESTYLES").toElement();
+    KXmlElement frameStylesElem = root.namedItem("FRAMESTYLES").toElement();
     if (!frameStylesElem.isNull())
         loadFrameStyleTemplates(frameStylesElem);
     else // load default styles
@@ -279,7 +279,7 @@ bool KWDLoader::load(KoXmlElement &root)
 
     emit progressUpdate(18);
 
-    KoXmlElement tableStylesElem = root.namedItem("TABLESTYLES").toElement();
+    KXmlElement tableStylesElem = root.namedItem("TABLESTYLES").toElement();
     if (!tableStylesElem.isNull())
         loadTableStyleTemplates(tableStylesElem);
     else // load default styles
@@ -291,9 +291,9 @@ bool KWDLoader::load(KoXmlElement &root)
 
     emit progressUpdate(20);
 
-    KoXmlElement bookmark = root.namedItem("BOOKMARKS").toElement();
+    KXmlElement bookmark = root.namedItem("BOOKMARKS").toElement();
     if (!bookmark.isNull()) {
-        KoXmlElement bookmarkitem = root.namedItem("BOOKMARKS").toElement();
+        KXmlElement bookmarkitem = root.namedItem("BOOKMARKS").toElement();
         bookmarkitem = bookmarkitem.firstChild().toElement();
 
         while (!bookmarkitem.isNull()) {
@@ -313,9 +313,9 @@ bool KWDLoader::load(KoXmlElement &root)
     }
 
     QStringList lst;
-    KoXmlElement spellCheckIgnore = root.namedItem("SPELLCHECKIGNORELIST").toElement();
+    KXmlElement spellCheckIgnore = root.namedItem("SPELLCHECKIGNORELIST").toElement();
     if (!spellCheckIgnore.isNull()) {
-        KoXmlElement spellWord = root.namedItem("SPELLCHECKIGNORELIST").toElement();
+        KXmlElement spellWord = root.namedItem("SPELLCHECKIGNORELIST").toElement();
         spellWord = spellWord.firstChild().toElement();
         while (!spellWord.isNull()) {
             if (spellWord.tagName() == "SPELLCHECKIGNOREWORD")
@@ -325,11 +325,11 @@ bool KWDLoader::load(KoXmlElement &root)
     }
     setSpellCheckIgnoreList(lst);
 #endif
-    KoXmlElement pixmaps = root.namedItem("PIXMAPS").toElement();
+    KXmlElement pixmaps = root.namedItem("PIXMAPS").toElement();
     if (pixmaps.isNull())
         pixmaps = root.namedItem("PICTURES").toElement();
     if (! pixmaps.isNull()) {
-        KoXmlElement key;
+        KXmlElement key;
         forEachElement(key, pixmaps) {
             if (! key.isNull() && key.nodeName() != "KEY")
                 continue;
@@ -343,7 +343,7 @@ bool KWDLoader::load(KoXmlElement &root)
     emit progressUpdate(25);
 
 
-    KoXmlElement framesets = root.namedItem("FRAMESETS").toElement();
+    KXmlElement framesets = root.namedItem("FRAMESETS").toElement();
     if (!framesets.isNull())
         loadFrameSets(framesets);
 
@@ -373,14 +373,14 @@ bool KWDLoader::load(KoXmlElement &root)
     return true;
 }
 
-void KWDLoader::loadFrameSets(const KoXmlElement &framesets)
+void KWDLoader::loadFrameSets(const KXmlElement &framesets)
 {
     // <FRAMESET>
     // First prepare progress info
     m_nrItemsToLoad = 0; // total count of items (mostly paragraph and frames)
-    KoXmlElement framesetElem;
+    KXmlElement framesetElem;
     // Workaround the slowness of KoXml's elementsByTagName
-    QList<KoXmlElement> frameSetsList;
+    QList<KXmlElement> frameSetsList;
     forEachElement(framesetElem, framesets) {
         if (framesetElem.tagName() == "FRAMESET") {
             frameSetsList.append(framesetElem);
@@ -389,12 +389,12 @@ void KWDLoader::loadFrameSets(const KoXmlElement &framesets)
     }
 
     m_itemsLoaded = 0;
-    foreach (const KoXmlElement &elem, frameSetsList) {
+    foreach (const KXmlElement &elem, frameSetsList) {
         loadFrameSet(elem);
     }
 }
 
-void KWDLoader::loadFrameSet(const KoXmlElement &framesetElem)
+void KWDLoader::loadFrameSet(const KXmlElement &framesetElem)
 {
     QString fsname = framesetElem.attribute("name");
 
@@ -463,15 +463,15 @@ void KWDLoader::loadFrameSet(const KoXmlElement &framesetElem)
         // Do not break!
     }
     case 2: { // FT_PICTURE
-        KoXmlElement frame = framesetElem.namedItem("FRAME").toElement();
+        KXmlElement frame = framesetElem.namedItem("FRAME").toElement();
         if (frame.isNull())
             return;
-        KoXmlElement image = framesetElem.namedItem("IMAGE").toElement();
+        KXmlElement image = framesetElem.namedItem("IMAGE").toElement();
         if (image.isNull())
             image = framesetElem.namedItem("PICTURE").toElement();
         if (image.isNull())
             return;
-        KoXmlElement key = image.namedItem("KEY").toElement();
+        KXmlElement key = image.namedItem("KEY").toElement();
         if (key.isNull())
             return;
 
@@ -528,7 +528,7 @@ void KWDLoader::loadFrameSet(const KoXmlElement &framesetElem)
     }
 }
 
-void KWDLoader::fill(KWFrameSet *fs, const KoXmlElement &framesetElem)
+void KWDLoader::fill(KWFrameSet *fs, const KXmlElement &framesetElem)
 {
     if (framesetElem.hasAttribute("visible")) {
         bool visible = framesetElem.attribute("visible").toLower() == "true";
@@ -545,11 +545,11 @@ void KWDLoader::fill(KWFrameSet *fs, const KoXmlElement &framesetElem)
 
 }
 
-void KWDLoader::fill(KWTextFrameSet *fs, const KoXmlElement &framesetElem)
+void KWDLoader::fill(KWTextFrameSet *fs, const KXmlElement &framesetElem)
 {
     fill(static_cast<KWFrameSet*>(fs), framesetElem);
     // <FRAME>
-    KoXmlElement frameElem;
+    KXmlElement frameElem;
     forEachElement(frameElem, framesetElem) {
         if (frameElem.tagName() == "FRAME") {
             KoShapeFactoryBase *factory = KoShapeRegistry::instance()->value(TextShape_SHAPEID);
@@ -576,7 +576,7 @@ void KWDLoader::fill(KWTextFrameSet *fs, const KoXmlElement &framesetElem)
 
     // <PARAGRAPH>
     bool firstParag = true;
-    KoXmlElement paragraph;
+    KXmlElement paragraph;
     forEachElement(paragraph, framesetElem) {
         if (paragraph.tagName() == "PARAGRAPH") {
             if (! firstParag) {
@@ -589,7 +589,7 @@ void KWDLoader::fill(KWTextFrameSet *fs, const KoXmlElement &framesetElem)
             Q_ASSERT(styleManager);
 
             firstParag = false;
-            KoXmlElement layout = paragraph.namedItem("LAYOUT").toElement();
+            KXmlElement layout = paragraph.namedItem("LAYOUT").toElement();
             if (!layout.isNull()) {
                 QString styleName = layout.namedItem("NAME").toElement().attribute("value");
                 KoParagraphStyle *style = styleManager->paragraphStyle(styleName);
@@ -634,14 +634,14 @@ void KWDLoader::fill(KWTextFrameSet *fs, const KoXmlElement &framesetElem)
             // re-apply char format after we added the text
             KoCharacterStyle *style = styleManager->characterStyle(
                     cursor.blockCharFormat().intProperty(KoCharacterStyle::StyleId));
-            KoXmlElement formats = paragraph.namedItem("FORMATS").toElement();
+            KXmlElement formats = paragraph.namedItem("FORMATS").toElement();
             if (!formats.isNull()) {
                 KoCharacterStyle defaultStyle;
                 if (style == 0) // parag is not based on any style, just text.
                     style = &defaultStyle;
 
                 QTextBlock block = cursor.block();
-                KoXmlElement format;
+                KXmlElement format;
                 forEachElement(format, formats) {
                     if (format.tagName() != "FORMAT")
                         continue;
@@ -669,16 +669,16 @@ void KWDLoader::fill(KWTextFrameSet *fs, const KoXmlElement &framesetElem)
                     } else if (id == "2") {
                         kWarning(32001) << "File to old, image can not be recovered";
                     } else if (id == "4") {
-                        KoXmlElement variable = format.namedItem("VARIABLE").toElement();
+                        KXmlElement variable = format.namedItem("VARIABLE").toElement();
                         if (variable.isNull()) {
                             kWarning(32001) << "Missing VARIABLE tag";
                             continue;
                         }
-                        KoXmlElement type = variable.namedItem("TYPE").toElement();
+                        KXmlElement type = variable.namedItem("TYPE").toElement();
                         int typeId = type.attribute("type", "1").toInt();
                         switch (typeId) {
                         case 11: { // footnote
-                            KoXmlElement footnote = variable.namedItem("FOOTNOTE").toElement();
+                            KXmlElement footnote = variable.namedItem("FOOTNOTE").toElement();
                             KoInlineNote *note = new KoInlineNote(KoInlineNote::Footnote);
                             note->setLabel(footnote.attribute("value"));
                             note->setAutoNumbering(footnote.attribute("numberingtype", "auto") == "auto");
@@ -695,7 +695,7 @@ void KWDLoader::fill(KWTextFrameSet *fs, const KoXmlElement &framesetElem)
                             break;
                         }
                         case 10: { // note
-                            KoXmlElement footEndNote = variable.namedItem("NOTE").toElement();
+                            KXmlElement footEndNote = variable.namedItem("NOTE").toElement();
 
                             KoInlineNote::Type type = footEndNote.attribute("notetype") == "footnote"
                                         ? KoInlineNote::Footnote : KoInlineNote::Endnote;
@@ -728,7 +728,7 @@ void KWDLoader::fill(KWTextFrameSet *fs, const KoXmlElement &framesetElem)
                     } else if (id == "5") {
                         kWarning(32001) << "File to old, footnote can not be recovered";
                     } else if (id == "6") { // anchor for floating frame.
-                        KoXmlElement anchor = format.namedItem("ANCHOR").toElement();
+                        KXmlElement anchor = format.namedItem("ANCHOR").toElement();
                         if (anchor.isNull()) {
                             kWarning(32001) << "Missing ANCHOR tag";
                             continue;
@@ -756,7 +756,7 @@ void KWDLoader::fill(KWTextFrameSet *fs, const KoXmlElement &framesetElem)
     }
 }
 
-void KWDLoader::fill(KoParagraphStyle *style, const KoXmlElement &layout)
+void KWDLoader::fill(KoParagraphStyle *style, const KXmlElement &layout)
 {
     QString align = layout.namedItem("FLOW").toElement().attribute("align", "auto");
     if (align == "left") {
@@ -771,7 +771,7 @@ void KWDLoader::fill(KoParagraphStyle *style, const KoXmlElement &layout)
         style->setAlignment(Qt::AlignLeft);
     }
 
-    KoXmlElement element = layout.namedItem("INDENTS").toElement();
+    KXmlElement element = layout.namedItem("INDENTS").toElement();
     if (!element.isNull()) {
         style->setTextIndent(element.attribute("first").toDouble());
         style->setLeftMargin(element.attribute("left").toDouble());
@@ -871,7 +871,7 @@ void KWDLoader::fill(KoParagraphStyle *style, const KoXmlElement &layout)
     class BorderConverter
     {
     public:
-        BorderConverter(const KoXmlElement &element) {
+        BorderConverter(const KXmlElement &element) {
             width = element.attribute("width").toInt(),
                     innerWidth = 0.0;
             spacing = 0.0;
@@ -943,7 +943,7 @@ void KWDLoader::fill(KoParagraphStyle *style, const KoXmlElement &layout)
     // OHEAD, OFOOT, IFIRST, ILEFT
 }
 
-QColor KWDLoader::colorFrom(const KoXmlElement &element)
+QColor KWDLoader::colorFrom(const KXmlElement &element)
 {
     QColor color(element.attribute("red").toInt(),
                  element.attribute("green").toInt(),
@@ -951,9 +951,9 @@ QColor KWDLoader::colorFrom(const KoXmlElement &element)
     return color;
 }
 
-void KWDLoader::fill(KoCharacterStyle *style, const KoXmlElement &formatElem)
+void KWDLoader::fill(KoCharacterStyle *style, const KXmlElement &formatElem)
 {
-    KoXmlElement element = formatElem.namedItem("COLOR").toElement();
+    KXmlElement element = formatElem.namedItem("COLOR").toElement();
     if (!element.isNull()) {
         QBrush fg = style->foreground();
         QColor c = colorFrom(element);
@@ -1029,7 +1029,7 @@ void KWDLoader::fill(KoCharacterStyle *style, const KoXmlElement &formatElem)
     //OFFSETFROMBASELINE
 }
 
-void KWDLoader::fill(KWFrame *frame, const KoXmlElement &frameElem)
+void KWDLoader::fill(KWFrame *frame, const KXmlElement &frameElem)
 {
     Q_ASSERT(frame);
     Q_ASSERT(frame->shape());
@@ -1093,7 +1093,7 @@ void KWDLoader::fill(KWFrame *frame, const KoXmlElement &frameElem)
     frame->shape()->setZIndex(zIndex);
 }
 
-void KWDLoader::fill(ImageKey *key, const KoXmlElement &keyElement)
+void KWDLoader::fill(ImageKey *key, const KXmlElement &keyElement)
 {
     key->year = keyElement.attribute("year");
     key->month = keyElement.attribute("month");
@@ -1119,13 +1119,13 @@ void KWDLoader::fill(ImageKey *key, const KoXmlElement &keyElement)
     }
 }
 
-void KWDLoader::loadStyleTemplates(const KoXmlElement &stylesElem)
+void KWDLoader::loadStyleTemplates(const KXmlElement &stylesElem)
 {
     KoStyleManager *styleManager = m_document->resourceManager()->resource(KoText::StyleManager).value<KoStyleManager*>();
 
     Q_ASSERT(styleManager);
 
-    KoXmlElement style;
+    KXmlElement style;
     forEachElement(style, stylesElem) {
         if (style.tagName() != "STYLE")
             continue;
@@ -1145,7 +1145,7 @@ void KWDLoader::loadStyleTemplates(const KoXmlElement &stylesElem)
                 sty->setOutline(true);
         }
 #endif
-        KoXmlElement format = style.namedItem("FORMAT").toElement();
+        KXmlElement format = style.namedItem("FORMAT").toElement();
         if (! format.isNull())
             fill(paragStyle->characterStyle(), format);
     }

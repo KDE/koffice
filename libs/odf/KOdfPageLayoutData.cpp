@@ -67,9 +67,9 @@ KOdfGenericStyle KOdfPageLayoutData::saveOdf() const
     return style;
 }
 
-void KOdfPageLayoutData::loadOdf(const KoXmlElement &style)
+void KOdfPageLayoutData::loadOdf(const KXmlElement &style)
 {
-    KoXmlElement  properties(KoXml::namedItemNS(style, KOdfXmlNS::style,
+    KXmlElement  properties(KoXml::namedItemNS(style, KOdfXmlNS::style,
                                                 "page-layout-properties"));
 
     if (!properties.isNull()) {

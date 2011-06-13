@@ -27,7 +27,7 @@
 #include <QHash>
 #include <QVariant>
 
-class KoXmlElement;
+class KXmlElement;
 class KoPALoadingContext;
 class KoPASavingContext;
 
@@ -55,11 +55,11 @@ public:
 
     /**
      * loadOdfDeclaration
-     * @param KoXmlElement &body
+     * @param KXmlElement &body
      * @param KoPALoadingContext
      * @return bool value
      */
-    bool loadOdf(const KoXmlElement &body, KoPALoadingContext &context);
+    bool loadOdf(const KXmlElement &body, KoPALoadingContext &context);
 
     /**
      * Save presentation:declaration entries

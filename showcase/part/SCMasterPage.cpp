@@ -40,7 +40,7 @@ KoPageApp::PageType SCMasterPage::pageType() const
     return KoPageApp::Slide;
 }
 
-bool SCMasterPage::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
+bool SCMasterPage::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
 {
 #ifndef NWORKAROUND_ODF_BUGS
     KoOdfWorkaround::setFixPresentationPlaceholder(true, context);
@@ -52,7 +52,7 @@ bool SCMasterPage::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &c
     return retval;
 }
 
-void SCMasterPage::loadOdfPageExtra(const KoXmlElement &element, KoPALoadingContext &loadingContext)
+void SCMasterPage::loadOdfPageExtra(const KXmlElement &element, KoPALoadingContext &loadingContext)
 {
     // the layout needs to be loaded after the shapes are already loaded so the initialization of the data works
     SCPageLayout * layout = 0;

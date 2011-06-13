@@ -44,7 +44,7 @@ public:
         return m_name;
     }
 
-    virtual bool loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context);
+    virtual bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context);
     virtual void saveOdf(KoShapeSavingContext &context);
 
 protected:

@@ -102,7 +102,7 @@ SCPageEffect * SCPageEffectFactory::createPageEffect(const Properties &propertie
     return new SCPageEffect(properties.duration, d->id, strategy);
 }
 
-SCPageEffect * SCPageEffectFactory::createPageEffect(const KoXmlElement &element) const
+SCPageEffect * SCPageEffectFactory::createPageEffect(const KXmlElement &element) const
 {
     SCPageEffectStrategy * strategy = 0;
     SCPageEffect * pageEffect = 0;

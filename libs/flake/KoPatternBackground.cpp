@@ -402,7 +402,7 @@ bool KoPatternBackground::loadStyle(KOdfLoadingContext &context, const QSizeF &)
 
     QString styleName = styleStack.property(KOdfXmlNS::draw, "fill-image-name");
 
-    KoXmlElement* e = context.stylesReader().drawStyles()[styleName];
+    KXmlElement* e = context.stylesReader().drawStyles()[styleName];
     if (! e)
         return false;
 

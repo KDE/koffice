@@ -60,9 +60,9 @@ public:
     QSizeF size(const QRectF & objectBound) const;
 
     /// Sets the dom element containing the pattern content
-    void setContent(const KoXmlElement &content);
+    void setContent(const KXmlElement &content);
     /// Return the pattern content element
-    KoXmlElement content() const;
+    KXmlElement content() const;
 
     /// copies the content from the given pattern helper
     void copyContent(const SvgPatternHelper &other);
@@ -80,7 +80,7 @@ private:
     QTransform m_transform;
     QPointF m_position;
     QSizeF m_size;
-    KoXmlElement m_patternContent;
+    KXmlElement m_patternContent;
     QRectF m_patternContentViewbox;
 };
 

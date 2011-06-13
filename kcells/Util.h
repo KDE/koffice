@@ -98,12 +98,12 @@ QDomElement createElement(const QString & tagname, const QPen & pen, QDomDocumen
 /**
  * \ingroup NativeFormat
  */
-QFont       toFont(KoXmlElement & element);
+QFont       toFont(KXmlElement & element);
 
 /**
  * \ingroup NativeFormat
  */
-QPen        toPen(KoXmlElement & element);
+QPen        toPen(KXmlElement & element);
 }
 
 /**

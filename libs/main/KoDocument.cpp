@@ -1731,7 +1731,7 @@ bool KoDocument::loadNativeFormatFromStoreInternal(KOdfStore *store)
         KOdfStoreReader oasisStore(store);
         if (oasisStore.loadAndParse("VersionList.xml", versionInfo, d->lastErrorMessage)) {
             KoXmlNode list = KoXml::namedItemNS(versionInfo, KOdfXmlNS::VL, "version-list");
-            KoXmlElement e;
+            KXmlElement e;
             forEachElement(e, list) {
                 if (e.localName() == "version-entry" && e.namespaceURI() == KOdfXmlNS::VL) {
                     KoVersionInfo version;

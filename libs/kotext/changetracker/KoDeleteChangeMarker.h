@@ -27,7 +27,7 @@
 #include <KoListStyle.h>
 
 class KoChangeTracker;
-class KoXmlElement;
+class KXmlElement;
 
 class QTextDocument;
 
@@ -74,7 +74,7 @@ public:
     ///Return the position of the marker in the document
     int position() const;
 
-    virtual bool loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context);
+    virtual bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context);
     ///reimplemented
     virtual void saveOdf(KoShapeSavingContext &context);
 

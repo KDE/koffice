@@ -1014,7 +1014,7 @@ QBrush KoParagraphStyle::background() const
     return qvariant_cast<QBrush>(variant);
 }
 
-void KoParagraphStyle::loadOdf(const KoXmlElement *element, KoShapeLoadingContext &scontext)
+void KoParagraphStyle::loadOdf(const KXmlElement *element, KoShapeLoadingContext &scontext)
 {
     KOdfLoadingContext &context = scontext.odfLoadingContext();
     const QString name(element->attributeNS(KOdfXmlNS::style, "display-name", QString()));
@@ -1178,10 +1178,10 @@ void KoParagraphStyle::loadOdfProperties(KoShapeLoadingContext &scontext)
         if (stopDistance > 0)
             setTabStopDistance(stopDistance);
     }
-    KoXmlElement tabStops(styleStack.childNode(KOdfXmlNS::style, "tab-stops"));
+    KXmlElement tabStops(styleStack.childNode(KOdfXmlNS::style, "tab-stops"));
     if (!tabStops.isNull()) {     // 3.11.10
         QList<KoText::Tab> tabList;
-        KoXmlElement tabStop;
+        KXmlElement tabStop;
         forEachElement(tabStop, tabStops) {
             Q_ASSERT(tabStop.localName() == "tab-stop");
             // Tab position
@@ -1374,7 +1374,7 @@ void KoParagraphStyle::loadOdfProperties(KoShapeLoadingContext &scontext)
     }
 
     // drop caps
-    KoXmlElement dropCap(styleStack.childNode(KOdfXmlNS::style, "drop-cap"));
+    KXmlElement dropCap(styleStack.childNode(KOdfXmlNS::style, "drop-cap"));
     if (!dropCap.isNull()) {
         setDropCaps(true);
         const QString length = dropCap.attributeNS(KOdfXmlNS::style, "length", QString("1"));

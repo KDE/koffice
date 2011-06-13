@@ -151,7 +151,7 @@ QDomElement KCRowFormat::save(QDomDocument& doc, int yshift) const
     return row;
 }
 
-bool KCRowFormat::load(const KoXmlElement & row, int yshift, Paste::Mode mode)
+bool KCRowFormat::load(const KXmlElement & row, int yshift, Paste::Mode mode)
 {
     Q_ASSERT(d->sheet);
     bool ok;
@@ -185,7 +185,7 @@ bool KCRowFormat::load(const KoXmlElement & row, int yshift, Paste::Mode mode)
             return false;
     }
 
-    KoXmlElement f(row.namedItem("format").toElement());
+    KXmlElement f(row.namedItem("format").toElement());
 
     if (!f.isNull() && (mode == Paste::Normal || mode == Paste::KCFormat || mode == Paste::NoBorder)) {
         KCStyle style;
@@ -401,7 +401,7 @@ QDomElement KCColumnFormat::save(QDomDocument& doc, int xshift) const
     return col;
 }
 
-bool KCColumnFormat::load(const KoXmlElement & col, int xshift, Paste::Mode mode)
+bool KCColumnFormat::load(const KXmlElement & col, int xshift, Paste::Mode mode)
 {
     Q_ASSERT(d->sheet);
     bool ok;
@@ -435,7 +435,7 @@ bool KCColumnFormat::load(const KoXmlElement & col, int xshift, Paste::Mode mode
             return false;
     }
 
-    KoXmlElement f(col.namedItem("format").toElement());
+    KXmlElement f(col.namedItem("format").toElement());
 
     if (!f.isNull() && (mode == Paste::Normal || mode == Paste::KCFormat || mode == Paste::NoBorder)) {
         KCStyle style;

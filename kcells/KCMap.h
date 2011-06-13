@@ -204,12 +204,12 @@ public:
     /**
      * \ingroup OpenDocument
      */
-    bool loadOdf(const KoXmlElement& mymap, KOdfLoadingContext& odfContext);
+    bool loadOdf(const KXmlElement& mymap, KOdfLoadingContext& odfContext);
 
     /**
      * \ingroup NativeFormat
      */
-    bool loadXML(const KoXmlElement& mymap);
+    bool loadXML(const KXmlElement& mymap);
 
     /**
      * \ingroup NativeFormat

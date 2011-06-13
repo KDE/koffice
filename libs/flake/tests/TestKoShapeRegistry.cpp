@@ -70,8 +70,8 @@ void TestKoShapeRegistry::testCreateShapes()
     QCOMPARE(errorLine, 0);
     QCOMPARE(errorColumn, 0);
 
-    KoXmlElement contentElement = doc.documentElement();
-    KoXmlElement bodyElement = contentElement.firstChild().toElement();
+    KXmlElement contentElement = doc.documentElement();
+    KXmlElement bodyElement = contentElement.firstChild().toElement();
 
     KoShapeRegistry * registry = KoShapeRegistry::instance();
 
@@ -84,7 +84,7 @@ void TestKoShapeRegistry::testCreateShapes()
     KoShape * shape = registry->createShapeFromOdf(bodyElement, shapeContext);
     QVERIFY(shape == 0);
 
-    KoXmlElement pathElement = bodyElement.firstChild().firstChild().toElement();
+    KXmlElement pathElement = bodyElement.firstChild().firstChild().toElement();
     shape = registry->createShapeFromOdf(pathElement, shapeContext);
     QVERIFY(shape != 0);
     QVERIFY(shape->shapeId() == KoPathShapeId);
@@ -117,8 +117,8 @@ void TestKoShapeRegistry::testCreateFramedShapes()
     QCOMPARE(errorLine, 0);
     QCOMPARE(errorColumn, 0);
 
-    KoXmlElement contentElement = doc.documentElement();
-    KoXmlElement bodyElement = contentElement.firstChild().toElement();
+    KXmlElement contentElement = doc.documentElement();
+    KXmlElement bodyElement = contentElement.firstChild().toElement();
 
     KoShapeRegistry * registry = KoShapeRegistry::instance();
 
@@ -131,7 +131,7 @@ void TestKoShapeRegistry::testCreateFramedShapes()
     KoShape * shape = registry->createShapeFromOdf(bodyElement, shapeContext);
     QVERIFY(shape == 0);
 
-    KoXmlElement pathElement = bodyElement.firstChild().firstChild().toElement();
+    KXmlElement pathElement = bodyElement.firstChild().firstChild().toElement();
     shape = registry->createShapeFromOdf(pathElement, shapeContext);
     QVERIFY(shape != 0);
     QVERIFY(shape->shapeId() == KoPathShapeId);

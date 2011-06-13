@@ -102,7 +102,7 @@ public:
     virtual bool hitTest(const QPointF &position) const;
 
     virtual void saveOdf(KoShapeSavingContext &context) const;
-    virtual bool loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context);
+    virtual bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context);
 
     /// Removes all subpaths and their points from the path
     void clear();
@@ -433,7 +433,7 @@ protected:
     /// reimplemented
     virtual QString saveStyle(KOdfGenericStyle &style, KoShapeSavingContext &context) const;
     /// reimplemented
-    virtual void loadStyle(const KoXmlElement &element, KoShapeLoadingContext &context);
+    virtual void loadStyle(const KXmlElement &element, KoShapeLoadingContext &context);
 
     /**
      * @brief Add an arc.
@@ -452,7 +452,7 @@ protected:
     int arcToCurve(qreal rx, qreal ry, qreal startAngle, qreal sweepAngle, const QPointF &offset, QPointF *curvePoints) const;
 
     /// Returns the viewbox from the given xml element.
-    QRectF loadOdfViewbox(const KoXmlElement &element) const;
+    QRectF loadOdfViewbox(const KXmlElement &element) const;
 
     /**
      * Get the resize matrix

@@ -79,18 +79,18 @@ bool KWOdfLoader::load(KOdfStoreReader &odfStore)
         updater->setProgress(0);
     }
 
-    KoXmlElement content = odfStore.contentDoc().documentElement();
-    KoXmlElement realBody(KoXml::namedItemNS(content, KOdfXmlNS::office, "body"));
+    KXmlElement content = odfStore.contentDoc().documentElement();
+    KXmlElement realBody(KoXml::namedItemNS(content, KOdfXmlNS::office, "body"));
     if (realBody.isNull()) {
         kError(32001) << "No office:body found!" << endl;
         m_document->setErrorMessage(i18n("Invalid OpenDocument file. No office:body tag found."));
         return false;
     }
 
-    KoXmlElement body = KoXml::namedItemNS(realBody, KOdfXmlNS::office, "text");
+    KXmlElement body = KoXml::namedItemNS(realBody, KOdfXmlNS::office, "text");
     if (body.isNull()) {
         kError(32001) << "No office:text found!" << endl;
-        KoXmlElement childElem;
+        KXmlElement childElem;
         QString localName;
         forEachElement(childElem, realBody)
             localName = childElem.localName();
@@ -106,7 +106,7 @@ bool KWOdfLoader::load(KOdfStoreReader &odfStore)
     // TODO check versions and mimetypes etc.
 
     bool hasMainText = false;
-    KoXmlElement childElem;
+    KXmlElement childElem;
     forEachElement(childElem, body) {
         if (childElem.namespaceURI() == KOdfXmlNS::text
                 && childElem.localName() != "page-sequence"
@@ -147,7 +147,7 @@ bool KWOdfLoader::load(KOdfStoreReader &odfStore)
     m_processingType = (!KoXml::namedItemNS(body, KOdfXmlNS::text, "page-sequence").isNull()) ? DTP : WP;
     m_hasTOC = false;
     m_tabStop = MM_TO_POINT(15);
-    const KoXmlElement *defaultParagStyle = styles.defaultStyle("paragraph");
+    const KXmlElement *defaultParagStyle = styles.defaultStyle("paragraph");
     if (defaultParagStyle) {
         KOdfStyleStack stack;
         stack.push(*defaultParagStyle);
@@ -179,7 +179,7 @@ bool KWOdfLoader::load(KOdfStoreReader &odfStore)
     /*
     // We always needs at least one valid default paragraph style
     KoParagraphStyle *defaultParagraphStyle = m_document->styleManager()->defaultParagraphStyle();
-    //const KoXmlElement *defaultParagraphStyle = context.stylesReader().defaultStyle("paragraph");
+    //const KXmlElement *defaultParagraphStyle = context.stylesReader().defaultStyle("paragraph");
     //if(! defaultParagraphStyle) {
     KoParagraphStyle *parastyle = new KoParagraphStyle();
     parastyle->setName("Standard");
@@ -194,10 +194,10 @@ bool KWOdfLoader::load(KOdfStoreReader &odfStore)
 #endif
 
     // load text:page-sequence
-    KoXmlElement pageSequence = KoXml::namedItemNS(body, KOdfXmlNS::text, "page-sequence");
+    KXmlElement pageSequence = KoXml::namedItemNS(body, KOdfXmlNS::text, "page-sequence");
     if (! pageSequence.isNull()) {
         KWPageManager *pageManager = m_document->pageManager();
-        KoXmlElement page;
+        KXmlElement page;
         forEachElement(page, pageSequence) {
             if (page.namespaceURI() == KOdfXmlNS::text && page.localName() == "page") {
                 QString master = page.attributeNS(KOdfXmlNS::text, "master-page-name", QString());
@@ -267,7 +267,7 @@ void KWOdfLoader::loadMasterPageStyles(KOdfLoadingContext &context, bool hasMain
     //TODO probably we should introduce more logic to handle the "standard" even
     //in faulty documents. See also bugreport #129585 as example.
     const KOdfStylesReader &styles = context.stylesReader();
-    QHashIterator<QString, KoXmlElement *> it(styles.masterPages());
+    QHashIterator<QString, KXmlElement *> it(styles.masterPages());
     while (it.hasNext()) {
         it.next();
         Q_ASSERT(! it.key().isEmpty());
@@ -275,8 +275,8 @@ void KWOdfLoader::loadMasterPageStyles(KOdfLoadingContext &context, bool hasMain
         bool alreadyExists = masterPage.isValid();
         if (!alreadyExists)
             masterPage = KWPageStyle(it.key());
-        const KoXmlElement *masterNode = it.value();
-        const KoXmlElement *masterPageStyle = masterNode ? styles.findStyle(masterNode->attributeNS(KOdfXmlNS::style, "page-layout-name", QString())) : 0;
+        const KXmlElement *masterNode = it.value();
+        const KXmlElement *masterPageStyle = masterNode ? styles.findStyle(masterNode->attributeNS(KOdfXmlNS::style, "page-layout-name", QString())) : 0;
         if (masterPageStyle) {
             masterPage.loadOdf(context, *masterNode, *masterPageStyle, m_document->resourceManager());
             loadHeaderFooter(context, masterPage, *masterNode, LoadHeader);
@@ -289,7 +289,7 @@ void KWOdfLoader::loadMasterPageStyles(KOdfLoadingContext &context, bool hasMain
 }
 
 // helper function to create a KWTextFrameSet for a header/footer.
-void KWOdfLoader::loadHeaderFooterFrame(KOdfLoadingContext &context, const KWPageStyle &pageStyle, const KoXmlElement &elem, KWord::TextFrameSetType fsType)
+void KWOdfLoader::loadHeaderFooterFrame(KOdfLoadingContext &context, const KWPageStyle &pageStyle, const KXmlElement &elem, KWord::TextFrameSetType fsType)
 {
     KWTextFrameSet *fs = new KWTextFrameSet(m_document, fsType);
     fs->setPageStyle(pageStyle);
@@ -317,13 +317,13 @@ void KWOdfLoader::loadHeaderFooterFrame(KOdfLoadingContext &context, const KWPag
 }
 
 //1.6: KWOasisLoader::loadOasisHeaderFooter
-void KWOdfLoader::loadHeaderFooter(KOdfLoadingContext &context, KWPageStyle &pageStyle, const KoXmlElement &masterPage, HFLoadType headerFooter)
+void KWOdfLoader::loadHeaderFooter(KOdfLoadingContext &context, KWPageStyle &pageStyle, const KXmlElement &masterPage, HFLoadType headerFooter)
 {
     // The actual content of the header/footer.
-    KoXmlElement elem = KoXml::namedItemNS(masterPage, KOdfXmlNS::style, headerFooter == LoadHeader ? "header" : "footer");
+    KXmlElement elem = KoXml::namedItemNS(masterPage, KOdfXmlNS::style, headerFooter == LoadHeader ? "header" : "footer");
     // The two additional elements <style:header-left> and <style:footer-left> specifies if defined that even and odd pages
     // should be displayed different. If they are missing, the conent of odd and even (aka left and right) pages are the same.
-    KoXmlElement leftElem = KoXml::namedItemNS(masterPage, KOdfXmlNS::style, headerFooter == LoadHeader ? "header-left" : "footer-left");
+    KXmlElement leftElem = KoXml::namedItemNS(masterPage, KOdfXmlNS::style, headerFooter == LoadHeader ? "header-left" : "footer-left");
     // Used in KWPageStyle to determine if, and what kind of header/footer to use.
     KWord::HeaderFooterType hfType = elem.isNull() ? KWord::HFTypeNone : leftElem.isNull() ? KWord::HFTypeUniform : KWord::HFTypeEvenOdd;
 

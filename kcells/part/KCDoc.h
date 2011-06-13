@@ -113,7 +113,7 @@ public:
     /**
      * \ingroup OpenDocument
      */
-    void loadOdfCalculationSettings(const KoXmlElement& body);
+    void loadOdfCalculationSettings(const KXmlElement& body);
 
 
     virtual int supportedSpecialFormats() const;
@@ -190,7 +190,7 @@ private:
     /**
      * \ingroup NativeFormat
      */
-    void loadPaper(KoXmlElement const & paper);
+    void loadPaper(KXmlElement const & paper);
 };
 
 #endif /* KSPREAD_DOC */

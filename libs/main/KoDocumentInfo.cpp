@@ -192,7 +192,7 @@ bool KoDocumentInfo::saveOasisAuthorInfo(KXmlWriter &xmlWriter)
 
 bool KoDocumentInfo::loadOasisAuthorInfo(const KoXmlNode& metaDoc)
 {
-    KoXmlElement e = KoXml::namedItemNS(metaDoc, KOdfXmlNS::dc, "creator");
+    KXmlElement e = KoXml::namedItemNS(metaDoc, KOdfXmlNS::dc, "creator");
     if (!e.isNull() && !e.text().isEmpty())
         setAuthorInfo("creator", e.text());
 
@@ -201,7 +201,7 @@ bool KoDocumentInfo::loadOasisAuthorInfo(const KoXmlNode& metaDoc)
         if (!n.isElement())
             continue;
 
-        KoXmlElement e = n.toElement();
+        KXmlElement e = n.toElement();
         if (!(e.namespaceURI() == KOdfXmlNS::meta &&
                 e.localName() == "user-defined" && !e.text().isEmpty()))
             continue;
@@ -213,11 +213,11 @@ bool KoDocumentInfo::loadOasisAuthorInfo(const KoXmlNode& metaDoc)
     return true;
 }
 
-bool KoDocumentInfo::loadAuthorInfo(const KoXmlElement& e)
+bool KoDocumentInfo::loadAuthorInfo(const KXmlElement& e)
 {
     KoXmlNode n = e.namedItem("author").firstChild();
     for (; !n.isNull(); n = n.nextSibling()) {
-        KoXmlElement e = n.toElement();
+        KXmlElement e = n.toElement();
         if (e.isNull())
             continue;
 
@@ -281,7 +281,7 @@ bool KoDocumentInfo::saveOasisAboutInfo(KXmlWriter &xmlWriter)
 bool KoDocumentInfo::loadOasisAboutInfo(const KoXmlNode& metaDoc)
 {
     QStringList keywords;
-    KoXmlElement e;
+    KXmlElement e;
     forEachElement(e, metaDoc) {
         QString tag(e.localName());
         if (! m_aboutTags.contains(tag))
@@ -293,11 +293,11 @@ bool KoDocumentInfo::loadOasisAboutInfo(const KoXmlNode& metaDoc)
                 keywords << e.text().trimmed();
         } else if (tag == "title" || tag == "description" || tag == "subject"
                    || tag == "date" || tag == "language") {
-            KoXmlElement e  = KoXml::namedItemNS(metaDoc, KOdfXmlNS::dc, tag.toLatin1().constData());
+            KXmlElement e  = KoXml::namedItemNS(metaDoc, KOdfXmlNS::dc, tag.toLatin1().constData());
             if (!e.isNull() && !e.text().isEmpty())
                 setAboutInfo(tag, e.text().trimmed());
         } else {
-            KoXmlElement e  = KoXml::namedItemNS(metaDoc, KOdfXmlNS::meta, tag.toLatin1().constData());
+            KXmlElement e  = KoXml::namedItemNS(metaDoc, KOdfXmlNS::meta, tag.toLatin1().constData());
             if (!e.isNull() && !e.text().isEmpty())
                 setAboutInfo(tag, e.text().trimmed());
         }
@@ -308,10 +308,10 @@ bool KoDocumentInfo::loadOasisAboutInfo(const KoXmlNode& metaDoc)
     return true;
 }
 
-bool KoDocumentInfo::loadAboutInfo(const KoXmlElement& e)
+bool KoDocumentInfo::loadAboutInfo(const KXmlElement& e)
 {
     KoXmlNode n = e.namedItem("about").firstChild();
-    KoXmlElement tmp;
+    KXmlElement tmp;
     for (; !n.isNull(); n = n.nextSibling()) {
         tmp = n.toElement();
         if (tmp.isNull())

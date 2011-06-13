@@ -84,7 +84,7 @@ public:
      * @param element element which represents the shape in odf.
      * @return false if loading failed.
      */
-    virtual bool loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context);
+    virtual bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context);
 
     /**
      * From KoShape reimplemented method to store the TextShape data as ODF.
@@ -108,13 +108,13 @@ public:
     void setPageProvider(KoPageProvider *provider) { m_pageProvider = provider; }
 
     /// reimplemented
-    virtual bool loadOdfFrame(const KoXmlElement &element, KoShapeLoadingContext &context);
+    virtual bool loadOdfFrame(const KXmlElement &element, KoShapeLoadingContext &context);
 
 protected:
-    virtual bool loadOdfFrameElement(const KoXmlElement &element, KoShapeLoadingContext &context);
+    virtual bool loadOdfFrameElement(const KXmlElement &element, KoShapeLoadingContext &context);
 
     /// reimplemented
-    virtual void loadStyle(const KoXmlElement &element, KoShapeLoadingContext &context);
+    virtual void loadStyle(const KXmlElement &element, KoShapeLoadingContext &context);
 
     /// reimplemented
     virtual QString saveStyle(KOdfGenericStyle &style, KoShapeSavingContext &context) const;

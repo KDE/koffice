@@ -38,7 +38,7 @@ class QTextCursor;
 class QTextTable;
 class QRect;
 class KoBookmarkManager;
-class KoXmlElement;
+class KXmlElement;
 class KoXmlNode;
 
 /**
@@ -63,7 +63,7 @@ public:
      * \param element the element to test for richtext
      * \return \p true if rich text was detected
      */
-    static bool containsRichText(const KoXmlElement &element);
+    static bool containsRichText(const KXmlElement &element);
 
     /**
     * Constructor.
@@ -85,7 +85,7 @@ public:
     * This method got called e.g. at the \a KoTextShapeData::loadOdf() method if a TextShape
     * instance likes to load an ODF element.
     */
-    void loadBody(const KoXmlElement &element, QTextCursor &cursor);
+    void loadBody(const KXmlElement &element, QTextCursor &cursor);
 
 signals:
 
@@ -100,33 +100,33 @@ private:
     /**
     * Load the paragraph from the \p element into the \p cursor .
     */
-    void loadParagraph(const KoXmlElement &element, QTextCursor &cursor);
+    void loadParagraph(const KXmlElement &element, QTextCursor &cursor);
 
     /**
     * Load the heading from the \p element into the \p cursor .
     */
-    void loadHeading(const KoXmlElement &element, QTextCursor &cursor);
+    void loadHeading(const KXmlElement &element, QTextCursor &cursor);
 
     /**
     * Load delete changes that result in a merge into the cursor
     * Returns the next Node to be processed
     */
-    KoXmlNode loadDeleteMerges(const KoXmlElement &element, QString *generatedXmlString);
+    KoXmlNode loadDeleteMerges(const KXmlElement &element, QString *generatedXmlString);
 
     /**
     * Load the list from the \p element into the \p cursor .
     */
-    void loadList(const KoXmlElement &element, QTextCursor &cursor);
+    void loadList(const KXmlElement &element, QTextCursor &cursor);
 
     /**
     * Load a list-item into the cursor
     */
-    void loadListItem(KoXmlElement &e, QTextCursor &cursor, int level);
+    void loadListItem(KXmlElement &e, QTextCursor &cursor, int level);
 
     /**
     * Load the section from the \p element into the \p cursor .
     */
-    void loadSection(const KoXmlElement &element, QTextCursor &cursor);
+    void loadSection(const KXmlElement &element, QTextCursor &cursor);
 
 
     /**
@@ -138,7 +138,7 @@ private:
     /**
     * Load the span from the \p element into the \p cursor .
     */
-    void loadSpan(const KoXmlElement &element, QTextCursor &cursor, bool *leadingSpace);
+    void loadSpan(const KXmlElement &element, QTextCursor &cursor, bool *leadingSpace);
 
     /**
     * Load the deleted change within a \p or a \h and store it in the Delete Change Marker
@@ -148,7 +148,7 @@ private:
     /**
     * Load the contents of delta:merge. Called from loadSpan
     */
-    void loadMerge(const KoXmlElement &element, QTextCursor &cursor);
+    void loadMerge(const KXmlElement &element, QTextCursor &cursor);
 
     /**
     * Load the deleted change outside of a \p or a \h and store it in the Delete Change Marker
@@ -160,37 +160,37 @@ private:
      *
      * The table and its contents are placed in a new shape.
      */
-    void loadTable(const KoXmlElement &element, QTextCursor& cursor);
+    void loadTable(const KXmlElement &element, QTextCursor& cursor);
 
     /**
      * Loads a table column
      */
-    void loadTableColumn(KoXmlElement &element, QTextTable *table, int &columns);
+    void loadTableColumn(KXmlElement &element, QTextTable *table, int &columns);
 
     /**
      * Loads a table-row into the cursor
      */
-    void loadTableRow(KoXmlElement &element, QTextTable *table, QList<QRect> &spanStore, QTextCursor &cursor, int &rows);
+    void loadTableRow(KXmlElement &element, QTextTable *table, QList<QRect> &spanStore, QTextCursor &cursor, int &rows);
 
     /**
      * Loads a table-cell into the cursor
      */
-    void loadTableCell(KoXmlElement &element, QTextTable *table, QList<QRect> &spanStore, QTextCursor &cursor, int &currentCell);
+    void loadTableCell(KXmlElement &element, QTextTable *table, QList<QRect> &spanStore, QTextCursor &cursor, int &currentCell);
 
     /**
      * Load a note \p element into the \p cursor.
      */
-    void loadNote(const KoXmlElement &element, QTextCursor& cursor);
+    void loadNote(const KXmlElement &element, QTextCursor& cursor);
 
     /**
     * Load the shape element \p element into the \p cursor .
     */
-    void loadShape(const KoXmlElement &element, QTextCursor& cursor);
+    void loadShape(const KXmlElement &element, QTextCursor& cursor);
 
     /**
     * Load the table of content element \p element into the \p cursor .
     */
-    void loadTableOfContents(const KoXmlElement &element, QTextCursor& cursor);
+    void loadTableOfContents(const KXmlElement &element, QTextCursor& cursor);
 
     /**
     * This is called in loadBody before reading the body starts.
@@ -210,7 +210,7 @@ private:
     /**
     * Store the delete changes in the deleteChangeTable. Will be processed when "change" is encountered
     */
-    void storeDeleteChanges(KoXmlElement &tag);
+    void storeDeleteChanges(KXmlElement &tag);
 
     /**
     * This is called in case of a paragraph or a header split.

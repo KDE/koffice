@@ -33,7 +33,7 @@ void GreyscaleFilterEffect::save(KXmlWriter& /*writer*/)
 {
 }
 
-bool GreyscaleFilterEffect::load(const KoXmlElement& /*element*/, const KoFilterEffectLoadingContext& /*context*/)
+bool GreyscaleFilterEffect::load(const KXmlElement& /*element*/, const KoFilterEffectLoadingContext& /*context*/)
 {
     return true;
 }

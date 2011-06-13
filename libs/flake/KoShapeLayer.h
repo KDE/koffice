@@ -45,7 +45,7 @@ public:
     virtual bool hitTest(const QPointF &position) const;
     virtual QRectF boundingRect() const;
     virtual void saveOdf(KoShapeSavingContext & context) const;
-    virtual bool loadOdf(const KoXmlElement & element, KoShapeLoadingContext &context);
+    virtual bool loadOdf(const KXmlElement & element, KoShapeLoadingContext &context);
 
 private:
     Q_DECLARE_PRIVATE(KoShapeLayer)

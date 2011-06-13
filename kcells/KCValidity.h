@@ -113,7 +113,7 @@ public:
      * \ingroup NativeFormat
      * Loads validity checks.
      */
-    bool loadXML(KCCell* const cell, const KoXmlElement& validityElement);
+    bool loadXML(KCCell* const cell, const KXmlElement& validityElement);
 
     /**
      * \ingroup NativeFormat
@@ -172,7 +172,7 @@ public:
         return !operator==(other);
     }
 
-    static QHash<QString, KoXmlElement> preloadValidities(const KoXmlElement& body);
+    static QHash<QString, KXmlElement> preloadValidities(const KXmlElement& body);
 
 private:
     /**

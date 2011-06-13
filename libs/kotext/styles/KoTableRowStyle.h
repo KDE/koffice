@@ -35,7 +35,7 @@ class KOdfStyleStack;
 class KOdfGenericStyle;
 class KOdfGenericStyles;
 class KOdfLoadingContext;
-class KoXmlElement;
+class KXmlElement;
 
 /**
  * A container for all properties for the table row style.
@@ -129,7 +129,7 @@ public:
      * @param context the odf loading context
      * @param element the element containing the
      */
-    void loadOdf(const KoXmlElement *element, KOdfLoadingContext &context);
+    void loadOdf(const KXmlElement *element, KOdfLoadingContext &context);
 
     void saveOdf(KOdfGenericStyle &style);
 

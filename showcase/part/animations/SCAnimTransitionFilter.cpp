@@ -30,7 +30,7 @@ SCAnimTransitionFilter::~SCAnimTransitionFilter()
 {
 }
 
-bool SCAnimTransitionFilter::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
+bool SCAnimTransitionFilter::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
 {
     SCAnimationBase::loadOdf(element, context);
     return true;

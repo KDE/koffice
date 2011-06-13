@@ -56,26 +56,26 @@ private:
     void saveAnimations(KXmlWriter* content);
 
     //Objects' functions
-    void appendPicture(KXmlWriter* content, const KoXmlElement& objectElement);
-    void appendLine(KXmlWriter* content, const KoXmlElement& objectElement);
-    void appendRectangle(KXmlWriter* content, const KoXmlElement& objectElement);
-    void appendEllipse(KXmlWriter* content, const KoXmlElement& objectElement);
-    void appendTextBox(KXmlWriter* content, const    KoXmlElement& objectElement);
-    void appendParagraph(KXmlWriter* content, const    KoXmlElement& objectElement);
-    void appendText(KXmlWriter* content, const    KoXmlElement& objectElement);
-    void appendPie(KXmlWriter* content, const KoXmlElement& objectElement);
-    void appendGroupObject(KXmlWriter* content, const KoXmlElement& objectElement);
-    void appendPoly(KXmlWriter* content, const KoXmlElement& objectElement, bool polygon);
-    void appendPolygon(KXmlWriter* content, const KoXmlElement& objectElement);
-    void appendAutoform(KXmlWriter* content, const KoXmlElement& objectElement);
-    void appendArrow(KXmlWriter* content, const KoXmlElement& objectElement);
-    void appendFreehand(KXmlWriter* content, const KoXmlElement& objectElement);
-    void appendBezier(KXmlWriter* content, const KoXmlElement& objectElement);
+    void appendPicture(KXmlWriter* content, const KXmlElement& objectElement);
+    void appendLine(KXmlWriter* content, const KXmlElement& objectElement);
+    void appendRectangle(KXmlWriter* content, const KXmlElement& objectElement);
+    void appendEllipse(KXmlWriter* content, const KXmlElement& objectElement);
+    void appendTextBox(KXmlWriter* content, const    KXmlElement& objectElement);
+    void appendParagraph(KXmlWriter* content, const    KXmlElement& objectElement);
+    void appendText(KXmlWriter* content, const    KXmlElement& objectElement);
+    void appendPie(KXmlWriter* content, const KXmlElement& objectElement);
+    void appendGroupObject(KXmlWriter* content, const KXmlElement& objectElement);
+    void appendPoly(KXmlWriter* content, const KXmlElement& objectElement, bool polygon);
+    void appendPolygon(KXmlWriter* content, const KXmlElement& objectElement);
+    void appendAutoform(KXmlWriter* content, const KXmlElement& objectElement);
+    void appendArrow(KXmlWriter* content, const KXmlElement& objectElement);
+    void appendFreehand(KXmlWriter* content, const KXmlElement& objectElement);
+    void appendBezier(KXmlWriter* content, const KXmlElement& objectElement);
 
-    const QString getPictureNameFromKey(const KoXmlElement& key);
-    void set2DGeometry(KXmlWriter* content, const KoXmlElement& objectElement);
+    const QString getPictureNameFromKey(const KXmlElement& key);
+    void set2DGeometry(KXmlWriter* content, const KXmlElement& objectElement);
     QString rotateValue(double val);
-    void exportAnimation(const KoXmlElement& objectElement, int indentLevel);
+    void exportAnimation(const KXmlElement& objectElement, int indentLevel);
 
     //The next functions are used to correctly export arcs, pies and chords
     //And they were obteined from the 1.6 sources
@@ -84,20 +84,20 @@ private:
     void setMinMax(double &min_x, double &min_y, double &max_x, double &max_y, QPointF point);
 
     //Styles functions
-    const QString createPageStyle(const KoXmlElement& page);
-    const QString createGradientStyle(const KoXmlElement& page);
-    const QString createGraphicStyle(const KoXmlElement& page);
+    const QString createPageStyle(const KXmlElement& page);
+    const QString createGradientStyle(const KXmlElement& page);
+    const QString createGraphicStyle(const KXmlElement& page);
     const QString createPageLayout();//we use more than one tag, better load them from m_mainDoc
-    const QString createMasterPageStyle(const KoXmlNode & objects, const KoXmlElement & masterBackground);  //same as above
+    const QString createMasterPageStyle(const KoXmlNode & objects, const KXmlElement & masterBackground);  //same as above
     const QString createOpacityGradientStyle(int opacity);
     const QString createMarkerStyle(int markerType);
     const QString createStrokeDashStyle(int strokeStyle);
     const QString createHatchStyle(int brushStyle, QString fillColor);
-    const QString createParagraphStyle(const KoXmlElement& element);
-    const QString createTextStyle(const KoXmlElement& element);
-    const QString createListStyle(const KoXmlElement& element);
+    const QString createParagraphStyle(const KXmlElement& element);
+    const QString createTextStyle(const KXmlElement& element);
+    const QString createListStyle(const KXmlElement& element);
 
-    QString convertBorder(const KoXmlElement& border);
+    QString convertBorder(const KXmlElement& border);
 
     KoXmlDocument m_mainDoc;//from KPR
     KoXmlDocument m_documentInfo;//from KPR

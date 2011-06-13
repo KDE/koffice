@@ -35,7 +35,7 @@ void WatermarkFilterEffect::save(KXmlWriter& /*writer*/)
 {
 }
 
-bool WatermarkFilterEffect::load(const KoXmlElement& /*element*/, const KoFilterEffectLoadingContext& /*context*/)
+bool WatermarkFilterEffect::load(const KXmlElement& /*element*/, const KoFilterEffectLoadingContext& /*context*/)
 {
     return true;
 }

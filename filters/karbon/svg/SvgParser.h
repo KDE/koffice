@@ -46,7 +46,7 @@ public:
     virtual ~SvgParser();
 
     /// Parses a svg fragment, returning the list of top level child shapes
-    QList<KoShape*> parseSvg(const KoXmlElement &e, QSizeF * fragmentSize = 0);
+    QList<KoShape*> parseSvg(const KXmlElement &e, QSizeF * fragmentSize = 0);
 
     /// Sets the initial xml base directory (the directory form where the file is read)
     void setXmlBaseDir(const QString &baseDir);
@@ -59,24 +59,24 @@ protected:
     typedef QMap<QString, QString> SvgStyles;
 
     /// Parses a container element, returning a list of child shapes
-    QList<KoShape*> parseContainer(const KoXmlElement &);
+    QList<KoShape*> parseContainer(const KXmlElement &);
     /// Parses a use element, returning a list of child shapes
-    QList<KoShape*> parseUse(const KoXmlElement &);
+    QList<KoShape*> parseUse(const KXmlElement &);
     /// Parses definitions for later use
-    void parseDefs(const KoXmlElement &);
+    void parseDefs(const KXmlElement &);
     /// Parses style attributes, applying them to the given shape
-    void parseStyle(KoShape *, const KoXmlElement &);
+    void parseStyle(KoShape *, const KXmlElement &);
     void parseStyle(KoShape *, const SvgStyles &);
     /// Parses a single style attribute
     void parsePA(SvgGraphicsContext *, const QString &, const QString &);
     /// Parses a gradient element
-    bool parseGradient(const KoXmlElement &, const KoXmlElement &referencedBy = KoXmlElement());
+    bool parseGradient(const KXmlElement &, const KXmlElement &referencedBy = KXmlElement());
     /// Parses gradient color stops
-    void parseColorStops(QGradient *, const KoXmlElement &);
+    void parseColorStops(QGradient *, const KXmlElement &);
     /// Parses a pattern element
-    void parsePattern(SvgPatternHelper &pattern, const KoXmlElement &);
+    void parsePattern(SvgPatternHelper &pattern, const KXmlElement &);
     /// Parses a filter element
-    bool parseFilter(const KoXmlElement &, const KoXmlElement &referencedBy = KoXmlElement());
+    bool parseFilter(const KXmlElement &, const KXmlElement &referencedBy = KXmlElement());
     /// Parses a length attribute
     double parseUnit(const QString &, bool horiz = false, bool vert = false, QRectF bbox = QRectF());
     /// parses a length attribute in x-direction
@@ -92,15 +92,15 @@ protected:
     /// Parses a viewbox attribute into an rectangle
     QRectF parseViewBox(QString viewbox);
 
-    void setupTransform(const KoXmlElement &);
-    void updateContext(const KoXmlElement &);
+    void setupTransform(const KXmlElement &);
+    void updateContext(const KXmlElement &);
     void addGraphicContext();
     void removeGraphicContext();
 
     /// Creates an object from the given xml element
-    KoShape * createObject(const KoXmlElement &, const SvgStyles &style = SvgStyles());
+    KoShape * createObject(const KXmlElement &, const SvgStyles &style = SvgStyles());
     /// Create text object from the given xml element
-    KoShape * createText(const KoXmlElement &, const QList<KoShape*> & shapes);
+    KoShape * createText(const KXmlElement &, const QList<KoShape*> & shapes);
     /// Parses font attributes
     void parseFont(const SvgStyles &styles);
     /// find object with given id in document
@@ -117,7 +117,7 @@ protected:
     SvgFilterHelper* findFilter(const QString &id, const QString &href = 0);
 
     /// Creates style map from given xml element
-    SvgStyles collectStyles(const KoXmlElement &);
+    SvgStyles collectStyles(const KXmlElement &);
     /// Merges two style elements, returning the merged style
     SvgStyles mergeStyles(const SvgStyles &, const SvgStyles &);
 
@@ -146,7 +146,7 @@ protected:
     void applyFilter(KoShape * shape);
 
     /// Returns inherited attribute value for specified element
-    QString inheritedAttribute(const QString &attributeName, const KoXmlElement &e);
+    QString inheritedAttribute(const QString &attributeName, const KXmlElement &e);
 
 private:
     QSizeF m_documentSize;
@@ -154,7 +154,7 @@ private:
     QMap<QString, SvgGradientHelper>  m_gradients;
     QMap<QString, SvgPatternHelper> m_patterns;
     QMap<QString, SvgFilterHelper> m_filters;
-    QMap<QString, KoXmlElement>     m_defs;
+    QMap<QString, KXmlElement>     m_defs;
     QStringList m_fontAttributes; ///< font related attributes
     QStringList m_styleAttributes; ///< style related attributes
     KoResourceManager *m_documentResourceManager;

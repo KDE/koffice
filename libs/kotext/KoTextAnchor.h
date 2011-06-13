@@ -27,7 +27,7 @@
 
 class KoShape;
 class KoTextAnchorPrivate;
-class KoXmlElement;
+class KXmlElement;
 class KoShapeLoadingContext;
 
 /**
@@ -133,7 +133,7 @@ public:
     void setOffset(const QPointF &offset);
 
     /// Load the additional attributes.
-    bool loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context);
+    bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context);
     /// Save the additional attributes.
     void saveOdf(KoShapeSavingContext &context);
 

@@ -100,8 +100,8 @@ public:
     /// return the type of note.
     Type type() const;
 
-    virtual bool loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context);
-    bool loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context, KoStyleManager *styleManager, KoChangeTracker *changeTracker);
+    virtual bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context);
+    bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context, KoStyleManager *styleManager, KoChangeTracker *changeTracker);
 
     ///reimplemented
     void saveOdf(KoShapeSavingContext &context);

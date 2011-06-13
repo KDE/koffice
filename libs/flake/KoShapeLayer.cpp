@@ -69,7 +69,7 @@ void KoShapeLayer::saveOdf(KoShapeSavingContext &context) const
     }
 }
 
-bool KoShapeLayer::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
+bool KoShapeLayer::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
 {
     // set layer name
     setName(element.attributeNS(KOdfXmlNS::draw, "name"));

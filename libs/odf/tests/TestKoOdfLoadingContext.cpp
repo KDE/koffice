@@ -115,15 +115,15 @@ void TestKoOdfLoadingContext::testFillStyleStack()
     QVERIFY(readStore.loadAndParse(errorMessage) == true);
     KOdfLoadingContext context(readStore.styles(), readStore.store());
 
-    KoXmlElement content = readStore.contentDoc().documentElement();
-    KoXmlElement realBody(KoXml::namedItemNS(content, KOdfXmlNS::office, "body"));
+    KXmlElement content = readStore.contentDoc().documentElement();
+    KXmlElement realBody(KoXml::namedItemNS(content, KOdfXmlNS::office, "body"));
 
     QVERIFY(realBody.isNull() == false);
 
-    KoXmlElement body = KoXml::namedItemNS(realBody, KOdfXmlNS::office, "text");
+    KXmlElement body = KoXml::namedItemNS(realBody, KOdfXmlNS::office, "text");
     QVERIFY(body.isNull() == false);
 
-    KoXmlElement tag;
+    KXmlElement tag;
     forEachElement(tag, body) {
         //tz: So now that I have a test the fails I can go on implementing the solution
         QCOMPARE(tag.localName(), QString("rect"));

@@ -34,7 +34,7 @@ class KoInlineTextObjectManager;
 class KoInlineObjectPrivate;
 class KoShapeSavingContext;
 class KoTextInlineRdf;
-class KoXmlElement;
+class KXmlElement;
 class KoShapeLoadingContext;
 class KoTextPage;
 
@@ -211,7 +211,7 @@ public:
      *
      * @return false if loading failed
      */
-    virtual bool loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context) =  0;
+    virtual bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context) =  0;
 
     void setDocument(QTextDocument *doc);
     QTextDocument *document() const;

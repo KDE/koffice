@@ -56,10 +56,10 @@ QString DatabaseManager::createUniqueName() const
     return "database-" + QString::number(Private::s_id++);
 }
 
-bool DatabaseManager::loadOdf(const KoXmlElement& body)
+bool DatabaseManager::loadOdf(const KXmlElement& body)
 {
     const KoXmlNode databaseRanges = KoXml::namedItemNS(body, KOdfXmlNS::table, "database-ranges");
-    KoXmlElement element;
+    KXmlElement element;
     forEachElement(element, databaseRanges) {
         if (element.namespaceURI() != KOdfXmlNS::table)
             continue;

@@ -23,7 +23,7 @@
 class QString;
 class QRectF;
 class QPainter;
-class KoXmlElement;
+class KXmlElement;
 class KoShape;
 class KoShapeLoadingContext;
 class KoShapeSavingContext;
@@ -57,7 +57,7 @@ public:
 
     virtual void saveOdf(KoShapeSavingContext &context);
 
-    virtual bool loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context);
+    virtual bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context);
 
     virtual void init(KoResourceManager *documentResources);
 

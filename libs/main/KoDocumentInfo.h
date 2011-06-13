@@ -140,7 +140,7 @@ private:
      * @param e the element to load from
      * @return true if success
      */
-    bool loadAboutInfo(const KoXmlElement& e);
+    bool loadAboutInfo(const KXmlElement& e);
 
     /**
      * Save the information about the document to a KOffice-1.3 file
@@ -161,7 +161,7 @@ private:
      * @param e the element to load from
      * @return true if success
      */
-    bool loadAuthorInfo(const KoXmlElement& e);
+    bool loadAuthorInfo(const KXmlElement& e);
 
     /**
      * Save the information about the author to a KOffice-1.3 file

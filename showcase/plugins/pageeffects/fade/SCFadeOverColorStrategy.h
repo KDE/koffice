@@ -46,7 +46,7 @@ public:
     virtual void saveOdfSmilAttributes(KOdfGenericStyle & style) const;
 
     // reimplemented
-    virtual void loadOdfSmilAttributes(const KoXmlElement & element);
+    virtual void loadOdfSmilAttributes(const KXmlElement & element);
 
 private:
     QColor m_fadeColor;

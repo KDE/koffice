@@ -59,7 +59,7 @@ KoTextLocator* KoTextReference::locator()
     return dynamic_cast<KoTextLocator*>(manager()->inlineTextObject(m_indexId));
 }
 
-bool KoTextReference::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
+bool KoTextReference::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
 {
     Q_UNUSED(element);
     Q_UNUSED(context);

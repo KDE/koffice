@@ -38,7 +38,7 @@ public:
     virtual ~SCPlaceholderShape();
 
     virtual void paint(QPainter &painter, const KoViewConverter &converter);
-    virtual bool loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context);
+    virtual bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context);
     virtual void saveOdf(KoShapeSavingContext &context) const;
 
     KoShape *createShape(KoResourceManager *documentResources);

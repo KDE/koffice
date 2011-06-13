@@ -63,7 +63,7 @@ TableShapeFactory::~TableShapeFactory()
 {
 }
 
-bool TableShapeFactory::supports(const KoXmlElement &element, KoShapeLoadingContext &context) const
+bool TableShapeFactory::supports(const KXmlElement &element, KoShapeLoadingContext &context) const
 {
     Q_UNUSED(context);
     return (element.namespaceURI() == KOdfXmlNS::table && element.localName() == "table");

@@ -43,7 +43,7 @@ KoShape *ArtisticTextShapeFactory::createDefaultShape(KoResourceManager *) const
     return text;
 }
 
-bool ArtisticTextShapeFactory::supports(const KoXmlElement & e, KoShapeLoadingContext &context) const
+bool ArtisticTextShapeFactory::supports(const KXmlElement & e, KoShapeLoadingContext &context) const
 {
     Q_UNUSED(context);
     if (!(e.localName() == "custom-shape" && e.namespaceURI() == KOdfXmlNS::draw)) {

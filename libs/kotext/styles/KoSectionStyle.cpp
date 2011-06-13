@@ -249,7 +249,7 @@ QBrush KoSectionStyle::background() const
     return qvariant_cast<QBrush>(variant);
 }
 
-void KoSectionStyle::loadOdf(const KoXmlElement *element, KOdfLoadingContext &context)
+void KoSectionStyle::loadOdf(const KXmlElement *element, KOdfLoadingContext &context)
 {
     if (element->hasAttributeNS(KOdfXmlNS::style, "display-name"))
         d->name = element->attributeNS(KOdfXmlNS::style, "display-name", QString());

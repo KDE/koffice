@@ -98,7 +98,7 @@ public:
         friend class KOdfSettings;
         friend class IndexedMap;
         friend class NamedMap;
-        Items(const KoXmlElement& elem, const KOdfSettings* settings)
+        Items(const KXmlElement& elem, const KOdfSettings* settings)
                 : m_element(elem), m_settings(settings) {}
     public:
         bool isNull() const {
@@ -131,9 +131,9 @@ public:
         /// @internal
         QString findConfigItem(const QString &item, bool *ok) const;
         /// @internal
-        QString findConfigItem(const KoXmlElement &element, const QString &item, bool *ok) const;
+        QString findConfigItem(const KXmlElement &element, const QString &item, bool *ok) const;
 
-        KoXmlElement m_element;
+        KXmlElement m_element;
         const KOdfSettings* m_settings;
     };
 
@@ -145,16 +145,16 @@ public:
             return m_element.isNull();
         }
     protected:
-        Map(const KoXmlElement &elem, const KOdfSettings *settings)
+        Map(const KXmlElement &elem, const KOdfSettings *settings)
                 : m_element(elem), m_settings(settings) {}
-        const KoXmlElement m_element;
+        const KXmlElement m_element;
         const KOdfSettings *m_settings;
     };
 
     class KODF_EXPORT IndexedMap : public Map
     {
         friend class Items;
-        IndexedMap(const KoXmlElement& elem, const KOdfSettings* settings)
+        IndexedMap(const KXmlElement& elem, const KOdfSettings* settings)
                 : Map(elem, settings) {}
       public:
         /// Returns an entry in an indexed map
@@ -164,7 +164,7 @@ public:
     class KODF_EXPORT NamedMap : public Map
     {
         friend class Items;
-        NamedMap(const KoXmlElement &elem, const KOdfSettings *settings)
+        NamedMap(const KXmlElement &elem, const KOdfSettings *settings)
                 : Map(elem, settings) {}
       public:
         /// Returns an entry in a named map
@@ -175,7 +175,7 @@ private:
     friend class Items;
     friend class IndexedMap;
     friend class NamedMap;
-    const KoXmlElement m_settingsElement;
+    const KXmlElement m_settingsElement;
     const QString m_configNsUri;
 
     class Private;

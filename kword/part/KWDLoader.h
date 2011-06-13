@@ -55,7 +55,7 @@ public:
      * @param root the root node from an xml document of the kword file format upto 1.4
      * @return return true on success, false on failure
      */
-    bool load(KoXmlElement &root);
+    bool load(KXmlElement &root);
 
 signals:
     /**
@@ -73,27 +73,27 @@ private:
 
 
     /// find and load all framesets
-    void loadFrameSets(const KoXmlElement &framesets);
+    void loadFrameSets(const KXmlElement &framesets);
     /// load one frameset
-    void loadFrameSet(const KoXmlElement &framesetElem);
+    void loadFrameSet(const KXmlElement &framesetElem);
     /// fill the data of fs with the info from the element
-    void fill(KWFrameSet *fs, const KoXmlElement &element);
+    void fill(KWFrameSet *fs, const KXmlElement &element);
     /// fill the data of fs with the info from the element
-    void fill(KWTextFrameSet *fs, const KoXmlElement &framesetElem);
+    void fill(KWTextFrameSet *fs, const KXmlElement &framesetElem);
     /// fill the data of style with the info from the element
-    void fill(KoParagraphStyle *style, const KoXmlElement &layoutElem);
-    void fill(KoCharacterStyle *style, const KoXmlElement &formatElem);
-    void fill(KWFrame *frame, const KoXmlElement &frameElem);
-    void fill(ImageKey *key, const KoXmlElement &keyElement);
+    void fill(KoParagraphStyle *style, const KXmlElement &layoutElem);
+    void fill(KoCharacterStyle *style, const KXmlElement &formatElem);
+    void fill(KWFrame *frame, const KXmlElement &frameElem);
+    void fill(ImageKey *key, const KXmlElement &keyElement);
 
     void insertAnchors();
     void insertNotes();
 
     // load the document wide styles
-    void loadStyleTemplates(const KoXmlElement &styles);
+    void loadStyleTemplates(const KXmlElement &styles);
 
     // helper method. Gets the color from an element assuming there are 'red','green', 'blue' attributes on it.
-    QColor colorFrom(const KoXmlElement &element);
+    QColor colorFrom(const KXmlElement &element);
 
 private:
     KWDocument *m_document;

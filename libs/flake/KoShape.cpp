@@ -198,14 +198,14 @@ void KoShapePrivate::removeConnection(KoShapeConnection *connection)
     // TODO remove from shapeManager ?
 }
 
-void KoShapePrivate::loadOdfGluePoints(const KoXmlElement &gluePoints)
+void KoShapePrivate::loadOdfGluePoints(const KXmlElement &gluePoints)
 {
     // defaults expect 4 to be there. The subclass should provide those, but if it
     // didn't, make sure we don't have issues with our numbering.
     connectors.resize(4);
     connectorPolicies.resize(4);
 
-    KoXmlElement element;
+    KXmlElement element;
     forEachElement (element, gluePoints) {
         if (element.namespaceURI() != KOdfXmlNS::draw || element.localName() != "glue-point")
             continue;
@@ -1022,7 +1022,7 @@ bool KoShape::isEditable() const
 }
 
 // loading & saving methods
-bool KoShape::loadOdf(const KoXmlElement &, KoShapeLoadingContext &)
+bool KoShape::loadOdf(const KXmlElement &, KoShapeLoadingContext &)
 {
     kWarning(30006) << "Warning; empty KoShape::loadOdf called, reimplement for load to work";
     return true;
@@ -1100,7 +1100,7 @@ QString KoShape::saveStyle(KOdfGenericStyle &style, KoShapeSavingContext &contex
     return context.mainStyles().insert(style, context.isSet(KoShapeSavingContext::PresentationShape) ? "pr" : "gr");
 }
 
-void KoShape::loadStyle(const KoXmlElement &element, KoShapeLoadingContext &context)
+void KoShape::loadStyle(const KXmlElement &element, KoShapeLoadingContext &context)
 {
     Q_D(KoShape);
 
@@ -1128,7 +1128,7 @@ void KoShape::loadStyle(const KoXmlElement &element, KoShapeLoadingContext &cont
     setContentProtected(protect.contains("content"));
 }
 
-bool KoShape::loadOdfAttributes(const KoXmlElement &element, KoShapeLoadingContext &context, int attributes)
+bool KoShape::loadOdfAttributes(const KXmlElement &element, KoShapeLoadingContext &context, int attributes)
 {
     Q_D(KoShape);
     if (attributes & OdfPosition) {
@@ -1212,7 +1212,7 @@ bool KoShape::loadOdfAttributes(const KoXmlElement &element, KoShapeLoadingConte
     }
 
     if (attributes & OdfCommonChildElements) {
-        const KoXmlElement eventActionsElement(KoXml::namedItemNS(element, KOdfXmlNS::office, "event-listeners"));
+        const KXmlElement eventActionsElement(KoXml::namedItemNS(element, KOdfXmlNS::office, "event-listeners"));
         if (!eventActionsElement.isNull()) {
             d->eventActions = KoEventActionRegistry::instance()->createEventActionsFromOdf(eventActionsElement, context);
         }
@@ -1252,7 +1252,7 @@ KoShapeBackground *KoShape::loadOdfFill(KoShapeLoadingContext &context) const
     return bg;
 }
 
-KoShapeBorderBase *KoShape::loadOdfStroke(const KoXmlElement &element, KoShapeLoadingContext &context) const
+KoShapeBorderBase *KoShape::loadOdfStroke(const KXmlElement &element, KoShapeLoadingContext &context) const
 {
     KOdfStyleStack &styleStack = context.odfLoadingContext().styleStack();
     KOdfStylesReader &stylesReader = context.odfLoadingContext().stylesReader();

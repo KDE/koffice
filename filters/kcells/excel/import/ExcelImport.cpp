@@ -160,7 +160,7 @@ public:
     void processRow(Sheet* isheet, unsigned row, KCSheet* osheet);
     void processCell(Cell* icell, KCCell ocell);
     void processCellObjects(Cell* icell, KCCell ocell);
-    void processEmbeddedObjects(const KoXmlElement& rootElement, KOdfStore* store);
+    void processEmbeddedObjects(const KXmlElement& rootElement, KOdfStore* store);
     void processNumberFormats();
 
     QString convertHeaderFooter(const QString& xlsHeader);
@@ -408,7 +408,7 @@ void ExcelImport::Private::processMetaData()
     // edittime
 }
 
-void ExcelImport::Private::processEmbeddedObjects(const KoXmlElement& rootElement, KOdfStore* store)
+void ExcelImport::Private::processEmbeddedObjects(const KXmlElement& rootElement, KOdfStore* store)
 {
     // save styles to xml
     KXmlWriter *stylesXml = beginMemoryXmlWriter("office:styles");
@@ -435,17 +435,17 @@ void ExcelImport::Private::processEmbeddedObjects(const KoXmlElement& rootElemen
     KOdfLoadingContext odfContext(odfStyles, store);
     KoShapeLoadingContext shapeContext(odfContext, outputDoc->resourceManager());
 
-    KoXmlElement sheetElement;
+    KXmlElement sheetElement;
     forEachElement(sheetElement, rootElement) {
         Q_ASSERT(sheetElement.namespaceURI() == KOdfXmlNS::table && sheetElement.localName() == "table");
         int sheetId = sheetElement.attributeNS(KOdfXmlNS::table, "id").toInt();
         KCSheet* sheet = outputDoc->map()->sheet(sheetId);
 
-        KoXmlElement cellElement;
+        KXmlElement cellElement;
         forEachElement(cellElement, sheetElement) {
             Q_ASSERT(cellElement.namespaceURI() == KOdfXmlNS::table);
             if (cellElement.localName() == "shapes") {
-                KoXmlElement element;
+                KXmlElement element;
                 forEachElement(element, cellElement) {
                     sheet->loadOdfObject(element, shapeContext);
                 }
@@ -455,7 +455,7 @@ void ExcelImport::Private::processEmbeddedObjects(const KoXmlElement& rootElemen
                 int col = cellElement.attributeNS(KOdfXmlNS::table, "column").toInt();
                 KCCell cell(sheet, col, row);
 
-                KoXmlElement element;
+                KXmlElement element;
                 forEachElement(element, cellElement) {
                     cell.loadOdfObject(element, shapeContext);
                 }

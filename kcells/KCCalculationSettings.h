@@ -60,7 +60,7 @@ public:
     /**
      * \ingroup OpenDocument
      */
-    void loadOdf(const KoXmlElement& body);
+    void loadOdf(const KXmlElement& body);
 
     /**
      * \ingroup OpenDocument

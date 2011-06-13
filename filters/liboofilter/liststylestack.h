@@ -43,7 +43,7 @@ public:
     /**
      * Pushes the new list-style onto the stack.
      */
-    void push(const KoXmlElement& style);
+    void push(const KXmlElement& style);
 
     /// @return true if we're inside a list (i.e. the stack isn't empty)
     bool hasListStyle() const {
@@ -52,7 +52,7 @@ public:
 
     /// @return currently applicable list style, i.e. the one on top of the stack
     /// Most list-level properties are the attributes of that element.
-    KoXmlElement currentListStyle() const;
+    KXmlElement currentListStyle() const;
 
     /**
      * @return the style:properties for the currently applicable list style.
@@ -60,7 +60,7 @@ public:
      * like text:min-label-width, text:space-before, and style:font-name
      * are the attributes of that element.
      */
-    KoXmlElement currentListStyleProperties() const;
+    KXmlElement currentListStyleProperties() const;
 
     /**
      * Set the initial level of the list, i.e. of item at the bottom of the stack.
@@ -81,7 +81,7 @@ public:
 
 
 private:
-    Q3ValueStack<KoXmlElement> m_stack;
+    Q3ValueStack<KXmlElement> m_stack;
     int m_initialLevel;
 
 };

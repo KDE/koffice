@@ -95,7 +95,7 @@ int KoDeleteChangeMarker::position() const
     return textPosition();
 }
 
-bool KoDeleteChangeMarker::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
+bool KoDeleteChangeMarker::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
 {
     Q_UNUSED(element)
     Q_UNUSED(context);

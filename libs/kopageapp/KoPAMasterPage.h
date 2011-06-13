@@ -64,7 +64,7 @@ public:
 
 protected:
     /// Reimplemented from KoPageBase
-    virtual void loadOdfPageTag(const KoXmlElement &element, KoPALoadingContext &loadingContext);
+    virtual void loadOdfPageTag(const KXmlElement &element, KoPALoadingContext &loadingContext);
 
     /// reimplemented
     virtual QPixmap generateThumbnail(const QSize &size = QSize(512, 512));

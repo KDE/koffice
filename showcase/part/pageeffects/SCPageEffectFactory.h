@@ -67,7 +67,7 @@ public:
      *
      * @param element The element containing the information for creating the page effect
      */
-    SCPageEffect * createPageEffect(const KoXmlElement &element) const;
+    SCPageEffect * createPageEffect(const KXmlElement &element) const;
 
     /**
      * Get the id of the page effect

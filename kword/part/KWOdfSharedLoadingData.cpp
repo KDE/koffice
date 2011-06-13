@@ -48,7 +48,7 @@ KWOdfSharedLoadingData::KWOdfSharedLoadingData(KWOdfLoader *loader)
             KOdfXmlNS::text, "anchor-page-number", "text:anchor-page-number"));
 }
 
-void KWOdfSharedLoadingData::shapeInserted(KoShape *shape, const KoXmlElement &element, KoShapeLoadingContext &context)
+void KWOdfSharedLoadingData::shapeInserted(KoShape *shape, const KXmlElement &element, KoShapeLoadingContext &context)
 {
     int pageNumber = -1;
     if (shape->hasAdditionalAttribute("text:anchor-type")) {
@@ -63,7 +63,7 @@ void KWOdfSharedLoadingData::shapeInserted(KoShape *shape, const KoXmlElement &e
 
     //kDebug(32001) << "text:anchor-type =" << shape->additionalAttribute("text:anchor-type") << shape->additionalAttribute("text:anchor-page-number") << pageNumber;
     shape->removeAdditionalAttribute("text:anchor-type");
-    const KoXmlElement *style = 0;
+    const KXmlElement *style = 0;
     if (element.hasAttributeNS(KOdfXmlNS::draw, "style-name")) {
         style = context.odfLoadingContext().stylesReader().findStyle(
                     element.attributeNS(KOdfXmlNS::draw, "style-name"), "graphic",
@@ -89,7 +89,7 @@ void KWOdfSharedLoadingData::shapeInserted(KoShape *shape, const KoXmlElement &e
                 return; // done
         }
 
-        KoXmlElement textBox(KoXml::namedItemNS(element, KOdfXmlNS::draw, "text-box"));
+        KXmlElement textBox(KoXml::namedItemNS(element, KOdfXmlNS::draw, "text-box"));
         if (frame && !textBox.isNull()) {
             QString nextFrame = textBox.attributeNS(KOdfXmlNS::draw, "chain-next-name");
             if (! nextFrame.isEmpty()) {

@@ -64,7 +64,7 @@ public:
     virtual void saveOdf(KoShapeSavingContext &context) const = 0;
 
     /// reimplemented
-    virtual bool loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context);
+    virtual bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context);
 
 
     /// @return the layout of the page
@@ -233,7 +233,7 @@ protected:
      * @param element the page element
      * @param paContext the pageapp loading context
      */
-    virtual void loadOdfPageTag(const KoXmlElement &element, KoPALoadingContext &loadingContext);
+    virtual void loadOdfPageTag(const KXmlElement &element, KoPALoadingContext &loadingContext);
 
     /**
      * @brief Load extra page data
@@ -244,7 +244,7 @@ protected:
      * @param element the page element
      * @param paContext the pageapp loading context
      */
-    virtual void loadOdfPageExtra(const KoXmlElement &element, KoPALoadingContext &loadingContext);
+    virtual void loadOdfPageExtra(const KXmlElement &element, KoPALoadingContext &loadingContext);
 
     /**
      * Create thumbnail for the page

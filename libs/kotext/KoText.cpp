@@ -168,9 +168,9 @@ QTextDocument *KoText::loadOpenDocument(const QString &filename, QTextDocument *
         return 0;
     }
 
-    KoXmlElement content = odfReadStore.contentDoc().documentElement();
-    KoXmlElement realBody(KoXml::namedItemNS(content, KOdfXmlNS::office, "body"));
-    KoXmlElement body = KoXml::namedItemNS(realBody, KOdfXmlNS::office, "text");
+    KXmlElement content = odfReadStore.contentDoc().documentElement();
+    KXmlElement realBody(KoXml::namedItemNS(content, KOdfXmlNS::office, "body"));
+    KXmlElement body = KoXml::namedItemNS(realBody, KOdfXmlNS::office, "text");
 
     if (document == 0)
         document = new QTextDocument;

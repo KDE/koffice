@@ -151,14 +151,14 @@ bool KarbonImport::parseRoot(QIODevice* io)
 
 bool KarbonImport::convert(const KoXmlDocument &document)
 {
-    KoXmlElement doc = document.documentElement();
+    KXmlElement doc = document.documentElement();
 
     bool success = loadXML(doc);
 
     KOdfPageLayoutData pageLayout;
 
     // <PAPER>
-    KoXmlElement paper = doc.namedItem("PAPER").toElement();
+    KXmlElement paper = doc.namedItem("PAPER").toElement();
     if (!paper.isNull()) {
         pageLayout.format = static_cast<KOdfPageFormat::Format>(getAttribute(paper, "format", 0));
         pageLayout.orientation = static_cast<KOdfPageFormat::Orientation>(getAttribute(paper, "orientation", 0));
@@ -175,7 +175,7 @@ bool KarbonImport::convert(const KoXmlDocument &document)
         pageLayout.height = getAttribute(doc, "height", 841.891);
     }
 
-    KoXmlElement borders = paper.namedItem("PAPERBORDERS").toElement();
+    KXmlElement borders = paper.namedItem("PAPERBORDERS").toElement();
     if (!borders.isNull()) {
         if (borders.hasAttribute("left"))
             pageLayout.leftMargin = borders.attribute("left").toDouble();
@@ -192,7 +192,7 @@ bool KarbonImport::convert(const KoXmlDocument &document)
     return success;
 }
 
-double KarbonImport::getAttribute(KoXmlElement &element, const char *attributeName, double defaultValue)
+double KarbonImport::getAttribute(KXmlElement &element, const char *attributeName, double defaultValue)
 {
     QString value = element.attribute(attributeName);
     if (! value.isEmpty())
@@ -201,7 +201,7 @@ double KarbonImport::getAttribute(KoXmlElement &element, const char *attributeNa
         return defaultValue;
 }
 
-int KarbonImport::getAttribute(KoXmlElement &element, const char *attributeName, int defaultValue)
+int KarbonImport::getAttribute(KXmlElement &element, const char *attributeName, int defaultValue)
 {
     QString value = element.attribute(attributeName);
     if (! value.isEmpty())
@@ -210,7 +210,7 @@ int KarbonImport::getAttribute(KoXmlElement &element, const char *attributeName,
         return defaultValue;
 }
 
-bool KarbonImport::loadXML(const KoXmlElement& doc)
+bool KarbonImport::loadXML(const KXmlElement& doc)
 {
     if (doc.attribute("mime") != "application/x-karbon" || doc.attribute("syntaxVersion") != "0.1")
         return false;
@@ -226,7 +226,7 @@ bool KarbonImport::loadXML(const KoXmlElement& doc)
 
     KoShapeLayer * defaulLayer = m_document->layers().first();
 
-    KoXmlElement e;
+    KXmlElement e;
     forEachElement(e, doc) {
         if (e.tagName() == "LAYER") {
             KoShapeLayer * layer = new KoShapeLayer();
@@ -244,11 +244,11 @@ bool KarbonImport::loadXML(const KoXmlElement& doc)
     return true;
 }
 
-void KarbonImport::loadGroup(KoShapeContainer * parent, const KoXmlElement &element)
+void KarbonImport::loadGroup(KoShapeContainer * parent, const KXmlElement &element)
 {
     QList<KoShape*> shapes;
 
-    KoXmlElement e;
+    KXmlElement e;
     forEachElement(e, element) {
         KoShape * shape = 0;
         if (e.tagName() == "COMPOSITE" || e.tagName() == "PATH") {
@@ -307,13 +307,13 @@ void KarbonImport::loadGroup(KoShapeContainer * parent, const KoXmlElement &elem
     loadCommon(parent, element);
 }
 
-void KarbonImport::loadStyle(KoShape * shape, const KoXmlElement &element)
+void KarbonImport::loadStyle(KoShape * shape, const KXmlElement &element)
 {
     // reset fill and stroke first
     shape->setBorder(0);
     shape->setBackground(0);
 
-    KoXmlElement e;
+    KXmlElement e;
     forEachElement(e, element) {
         if (e.tagName() == "STROKE") {
             loadStroke(shape, e);
@@ -323,7 +323,7 @@ void KarbonImport::loadStyle(KoShape * shape, const KoXmlElement &element)
     }
 }
 
-QColor KarbonImport::loadColor(const KoXmlElement &element)
+QColor KarbonImport::loadColor(const KXmlElement &element)
 {
     enum ColorSpace {
         rgb  = 0,  // the RGB colorspace (red, green and blue components)
@@ -372,7 +372,7 @@ QColor KarbonImport::loadColor(const KoXmlElement &element)
     return color;
 }
 
-QBrush KarbonImport::loadGradient(KoShape * shape, const KoXmlElement &element)
+QBrush KarbonImport::loadGradient(KoShape * shape, const KXmlElement &element)
 {
     enum GradientType { linear = 0, radial = 1, conic  = 2 };
     enum GradientSpread { none = 0, reflect = 1, repeat  = 2 };
@@ -436,7 +436,7 @@ QBrush KarbonImport::loadGradient(KoShape * shape, const KoXmlElement &element)
     QGradientStops stops;
 
     // load stops
-    KoXmlElement colorstop;
+    KXmlElement colorstop;
     forEachElement(colorstop, element) {
         if (colorstop.tagName() == "COLORSTOP") {
             QColor color = loadColor(colorstop.firstChild().toElement());
@@ -464,7 +464,7 @@ QBrush KarbonImport::loadGradient(KoShape * shape, const KoXmlElement &element)
     return gradientBrush;
 }
 
-void KarbonImport::loadPattern(KoShape * shape, const KoXmlElement &element)
+void KarbonImport::loadPattern(KoShape * shape, const KXmlElement &element)
 {
     QPointF origin;
     origin.setX(element.attribute("originX", "0.0").toDouble());
@@ -500,11 +500,11 @@ void KarbonImport::loadPattern(KoShape * shape, const KoXmlElement &element)
     }
 }
 
-QVector<qreal> KarbonImport::loadDashes(const KoXmlElement& element)
+QVector<qreal> KarbonImport::loadDashes(const KXmlElement& element)
 {
     QVector<qreal> dashes;
 
-    KoXmlElement e;
+    KXmlElement e;
     forEachElement(e, element) {
         if (e.tagName() == "DASH") {
             double value = qMax(0.0, e.attribute("l", "0.0").toDouble());
@@ -514,7 +514,7 @@ QVector<qreal> KarbonImport::loadDashes(const KoXmlElement& element)
     return dashes;
 }
 
-void KarbonImport::loadStroke(KoShape * shape, const KoXmlElement &element)
+void KarbonImport::loadStroke(KoShape * shape, const KXmlElement &element)
 {
     KoLineBorder * border = new KoLineBorder();
 
@@ -541,7 +541,7 @@ void KarbonImport::loadStroke(KoShape * shape, const KoXmlElement &element)
 
     bool hasStroke = false;
 
-    KoXmlElement e;
+    KXmlElement e;
     forEachElement(e, element) {
         if (e.tagName() == "COLOR") {
             border->setColor(loadColor(e));
@@ -570,11 +570,11 @@ void KarbonImport::loadStroke(KoShape * shape, const KoXmlElement &element)
         delete border;
 }
 
-void KarbonImport::loadFill(KoShape * shape, const KoXmlElement &element)
+void KarbonImport::loadFill(KoShape * shape, const KXmlElement &element)
 {
     QBrush fill;
 
-    KoXmlElement e;
+    KXmlElement e;
     forEachElement(e, element) {
         if (e.tagName() == "COLOR") {
             KoColorBackground * newFill = new KoColorBackground(loadColor(e));
@@ -591,7 +591,7 @@ void KarbonImport::loadFill(KoShape * shape, const KoXmlElement &element)
     }
 }
 
-void KarbonImport::loadCommon(KoShape * shape, const KoXmlElement &element)
+void KarbonImport::loadCommon(KoShape * shape, const KXmlElement &element)
 {
     if (! element.attribute("ID").isEmpty())
         shape->setName(element.attribute("ID"));
@@ -608,7 +608,7 @@ void KarbonImport::loadCommon(KoShape * shape, const KoXmlElement &element)
     shape->applyAbsoluteTransformation(m_mirrorMatrix);
 }
 
-KoShape * KarbonImport::loadPath(const KoXmlElement &element)
+KoShape * KarbonImport::loadPath(const KXmlElement &element)
 {
     KoPathShape * path = new KoPathShape();
 
@@ -621,13 +621,13 @@ KoShape * KarbonImport::loadPath(const KoXmlElement &element)
 
     path->setFillRule(element.attribute("fillRule") == 0 ? Qt::OddEvenFill : Qt::WindingFill);
 
-    KoXmlElement child;
+    KXmlElement child;
     forEachElement(child, element) {
         // backward compatibility for karbon before koffice 1.3.x
         if (child.tagName() == "PATH") {
             KoPathShape * subpath = new KoPathShape();
 
-            KoXmlElement segment;
+            KXmlElement segment;
             forEachElement(segment, child) {
                 if (segment.tagName() == "MOVE") {
                     subpath->moveTo(QPointF(segment.attribute("x").toDouble(), segment.attribute("y").toDouble()));
@@ -655,7 +655,7 @@ KoShape * KarbonImport::loadPath(const KoXmlElement &element)
     return path;
 }
 
-KoShape * KarbonImport::loadEllipse(const KoXmlElement &element)
+KoShape * KarbonImport::loadEllipse(const KXmlElement &element)
 {
     EllipseShape * ellipse = new EllipseShape();
 
@@ -683,7 +683,7 @@ KoShape * KarbonImport::loadEllipse(const KoXmlElement &element)
     return ellipse;
 }
 
-KoShape * KarbonImport::loadRect(const KoXmlElement &element)
+KoShape * KarbonImport::loadRect(const KXmlElement &element)
 {
     RectangleShape * rect = new RectangleShape();
 
@@ -707,7 +707,7 @@ KoShape * KarbonImport::loadRect(const KoXmlElement &element)
     return rect;
 }
 
-KoShape * KarbonImport::loadPolyline(const KoXmlElement &element)
+KoShape * KarbonImport::loadPolyline(const KXmlElement &element)
 {
     KoPathShape * polyline = new KoPathShape();
 
@@ -738,7 +738,7 @@ KoShape * KarbonImport::loadPolyline(const KoXmlElement &element)
     return polyline;
 }
 
-KoShape * KarbonImport::loadPolygon(const KoXmlElement &element)
+KoShape * KarbonImport::loadPolygon(const KXmlElement &element)
 {
     KoPathShape * polygon = new KoPathShape();
 
@@ -774,7 +774,7 @@ KoShape * KarbonImport::loadPolygon(const KoXmlElement &element)
     return polygon;
 }
 
-KoShape * KarbonImport::loadSinus(const KoXmlElement &element)
+KoShape * KarbonImport::loadSinus(const KXmlElement &element)
 {
     KoPathShape * sinus = new KoPathShape();
 
@@ -867,7 +867,7 @@ KoShape * KarbonImport::loadSinus(const KoXmlElement &element)
     return sinus;
 }
 
-KoShape * KarbonImport::loadSpiral(const KoXmlElement &element)
+KoShape * KarbonImport::loadSpiral(const KXmlElement &element)
 {
     enum SpiralType { round, rectangular };
 
@@ -947,7 +947,7 @@ KoShape * KarbonImport::loadSpiral(const KoXmlElement &element)
     return spiral;
 }
 
-KoShape * KarbonImport::loadStar(const KoXmlElement &element)
+KoShape * KarbonImport::loadStar(const KXmlElement &element)
 {
     enum StarType { star_outline, spoke, wheel, polygon, framed_star, star, gear };
 
@@ -1145,7 +1145,7 @@ KoShape * KarbonImport::loadStar(const KoXmlElement &element)
     return starShape;
 }
 
-KoShape * KarbonImport::loadImage(const KoXmlElement &element)
+KoShape * KarbonImport::loadImage(const KXmlElement &element)
 {
     QString fname = element.attribute("fname");
     QTransform m(element.attribute("m11", "1.0").toDouble(),
@@ -1176,7 +1176,7 @@ KoShape * KarbonImport::loadImage(const KoXmlElement &element)
     return picture;
 }
 
-KoShape * KarbonImport::loadText(const KoXmlElement &element)
+KoShape * KarbonImport::loadText(const KXmlElement &element)
 {
     QFont font;
     font.setFamily(element.attribute("family", "Times"));
@@ -1206,7 +1206,7 @@ KoShape * KarbonImport::loadText(const KoXmlElement &element)
     textShape->setText(text);
     textShape->setTextAnchor(static_cast<ArtisticTextShape::TextAnchor>(alignment));
 
-    KoXmlElement e = element.firstChild().toElement();
+    KXmlElement e = element.firstChild().toElement();
     if (e.tagName() == "PATH") {
         // as long as there is no text on path support, just try to get a transformation
         // if the path is only a single line

@@ -65,7 +65,7 @@ void SCPageEffectStrategy::saveOdfSmilAttributes(KOdfGenericStyle &style) const
     }
 }
 
-void SCPageEffectStrategy::loadOdfSmilAttributes(const KoXmlElement &element)
+void SCPageEffectStrategy::loadOdfSmilAttributes(const KXmlElement &element)
 {
     Q_UNUSED(element);
 }

@@ -351,7 +351,7 @@ QString TextShape::saveStyle(KOdfGenericStyle &style, KoShapeSavingContext &cont
     return KoShape::saveStyle(style, context);
 }
 
-void TextShape::loadStyle(const KoXmlElement &element, KoShapeLoadingContext &context)
+void TextShape::loadStyle(const KXmlElement &element, KoShapeLoadingContext &context)
 {
     KoShape::loadStyle(element, context);
     KOdfStyleStack &styleStack = context.odfLoadingContext().styleStack();
@@ -372,13 +372,13 @@ void TextShape::loadStyle(const KoXmlElement &element, KoShapeLoadingContext &co
     m_textShapeData->setVerticalAlignment(alignment);
 }
 
-bool TextShape::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
+bool TextShape::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
 {
     m_textShapeData->document()->setUndoRedoEnabled(false);
     loadOdfAttributes(element, context, OdfAllAttributes);
 
     // load the (text) style of the frame
-    const KoXmlElement *style = 0;
+    const KXmlElement *style = 0;
     if (element.hasAttributeNS(KOdfXmlNS::draw, "style-name")) {
         style = context.odfLoadingContext().stylesReader().findStyle(
                     element.attributeNS(KOdfXmlNS::draw, "style-name"), "graphic",
@@ -412,11 +412,11 @@ bool TextShape::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &cont
     return answer;
 }
 
-bool TextShape::loadOdfFrame(const KoXmlElement &element, KoShapeLoadingContext &context)
+bool TextShape::loadOdfFrame(const KXmlElement &element, KoShapeLoadingContext &context)
 {
     // if the loadOdfFrame from the base class for draw:text-box failes check for table:table
     if (!KoFrameShape::loadOdfFrame(element, context)) {
-        const KoXmlElement &frameElement(KoXml::namedItemNS(element, KOdfXmlNS::table, "table"));
+        const KXmlElement &frameElement(KoXml::namedItemNS(element, KOdfXmlNS::table, "table"));
         if (frameElement.isNull()) {
             return false;
         } else {
@@ -426,7 +426,7 @@ bool TextShape::loadOdfFrame(const KoXmlElement &element, KoShapeLoadingContext 
     return true;
 }
 
-bool TextShape::loadOdfFrameElement(const KoXmlElement &element, KoShapeLoadingContext &context)
+bool TextShape::loadOdfFrameElement(const KXmlElement &element, KoShapeLoadingContext &context)
 {
     return m_textShapeData->loadOdf(element, context, 0, this);
 }

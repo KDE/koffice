@@ -33,7 +33,7 @@ void MonoFilterEffect::save(KXmlWriter& /*writer*/)
 {
 }
 
-bool MonoFilterEffect::load(const KoXmlElement& /*element*/, const KoFilterEffectLoadingContext& /*context*/)
+bool MonoFilterEffect::load(const KXmlElement& /*element*/, const KoFilterEffectLoadingContext& /*context*/)
 {
     return true;
 }

@@ -61,7 +61,7 @@ KoShapePaste::~KoShapePaste()
     delete d;
 }
 
-bool KoShapePaste::process(const KoXmlElement & body, KOdfStoreReader & odfStore)
+bool KoShapePaste::process(const KXmlElement & body, KOdfStoreReader & odfStore)
 {
     d->pastedShapes.clear();
     KOdfLoadingContext loadingContext(odfStore.styles(), odfStore.store());
@@ -90,7 +90,7 @@ bool KoShapePaste::process(const KoXmlElement & body, KOdfStoreReader & odfStore
     }
 
     // TODO if this is a text create a text shape and load the text inside the new shape.
-    KoXmlElement element;
+    KXmlElement element;
     forEachElement(element, body) {
         kDebug(30006) << "loading shape" << element.localName();
 

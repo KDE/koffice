@@ -123,7 +123,7 @@ public:
     virtual bool loadOdfDocumentStyles(KoPALoadingContext &context);
 
     /// reimplemented
-    virtual bool loadOdfProlog(const KoXmlElement &body, KoPALoadingContext &context);
+    virtual bool loadOdfProlog(const KXmlElement &body, KoPALoadingContext &context);
 
     /**
      * Get the page type used in the document
@@ -170,7 +170,7 @@ protected:
     virtual const char *odfTagName(bool withNamespace);
 
     /// reimplemented
-    virtual bool loadOdfEpilogue(const KoXmlElement &body, KoPALoadingContext &context);
+    virtual bool loadOdfEpilogue(const KXmlElement &body, KoPALoadingContext &context);
 
     /// reimplemented
     virtual bool saveOdfProlog(KoPASavingContext &paContext);

@@ -80,11 +80,11 @@ bool KCValidity::isEmpty() const
     return d->restriction == None;
 }
 
-bool KCValidity::loadXML(KCCell* const cell, const KoXmlElement& validityElement)
+bool KCValidity::loadXML(KCCell* const cell, const KXmlElement& validityElement)
 {
     KCValueParser *const parser = cell->sheet()->map()->parser();
     bool ok = false;
-    KoXmlElement param = validityElement.namedItem("param").toElement();
+    KXmlElement param = validityElement.namedItem("param").toElement();
     if (!param.isNull()) {
         if (param.hasAttribute("cond")) {
             d->cond = (KCConditional::Type) param.attribute("cond").toInt(&ok);
@@ -124,36 +124,36 @@ bool KCValidity::loadXML(KCCell* const cell, const KoXmlElement& validityElement
             d->listValidity = param.attribute("listvalidity").split(';', QString::SkipEmptyParts);
         }
     }
-    KoXmlElement inputTitle = validityElement.namedItem("inputtitle").toElement();
+    KXmlElement inputTitle = validityElement.namedItem("inputtitle").toElement();
     if (!inputTitle.isNull()) {
         d->titleInfo = inputTitle.text();
     }
-    KoXmlElement inputMessage = validityElement.namedItem("inputmessage").toElement();
+    KXmlElement inputMessage = validityElement.namedItem("inputmessage").toElement();
     if (!inputMessage.isNull()) {
         d->messageInfo = inputMessage.text();
     }
 
-    KoXmlElement titleElement = validityElement.namedItem("title").toElement();
+    KXmlElement titleElement = validityElement.namedItem("title").toElement();
     if (!titleElement.isNull()) {
         d->title = titleElement.text();
     }
-    KoXmlElement messageElement = validityElement.namedItem("message").toElement();
+    KXmlElement messageElement = validityElement.namedItem("message").toElement();
     if (!messageElement.isNull()) {
         d->message = messageElement.text();
     }
-    KoXmlElement timeMinElement = validityElement.namedItem("timemin").toElement();
+    KXmlElement timeMinElement = validityElement.namedItem("timemin").toElement();
     if (!timeMinElement.isNull()) {
         d->minValue = parser->tryParseTime(timeMinElement.text());
     }
-    KoXmlElement timeMaxElement = validityElement.namedItem("timemax").toElement();
+    KXmlElement timeMaxElement = validityElement.namedItem("timemax").toElement();
     if (!timeMaxElement.isNull()) {
         d->maxValue = parser->tryParseTime(timeMaxElement.text());
     }
-    KoXmlElement dateMinElement = validityElement.namedItem("datemin").toElement();
+    KXmlElement dateMinElement = validityElement.namedItem("datemin").toElement();
     if (!dateMinElement.isNull()) {
         d->minValue = parser->tryParseTime(dateMinElement.text());
     }
-    KoXmlElement dateMaxElement = validityElement.namedItem("datemax").toElement();
+    KXmlElement dateMaxElement = validityElement.namedItem("datemax").toElement();
     if (!dateMaxElement.isNull()) {
         d->maxValue = parser->tryParseTime(dateMaxElement.text());
     }
@@ -232,7 +232,7 @@ QDomElement KCValidity::saveXML(QDomDocument& doc, const KCValueConverter *conve
 void KCValidity::loadOdfValidation(KCCell* const cell, const QString& validationName,
                                  KCOdfLoadingContext& tableContext)
 {
-    KoXmlElement element = tableContext.validities.value(validationName);
+    KXmlElement element = tableContext.validities.value(validationName);
     KCValidity validity;
     if (element.hasAttributeNS(KOdfXmlNS::table, "condition")) {
         QString valExpression = element.attributeNS(KOdfXmlNS::table, "condition", QString());
@@ -333,7 +333,7 @@ void KCValidity::loadOdfValidation(KCCell* const cell, const QString& validation
         //todo what is it ?
     }
 
-    KoXmlElement help = KoXml::namedItemNS(element, KOdfXmlNS::table, "help-message");
+    KXmlElement help = KoXml::namedItemNS(element, KOdfXmlNS::table, "help-message");
     if (!help.isNull()) {
         if (help.hasAttributeNS(KOdfXmlNS::table, "title")) {
             kDebug(36003) << "help.attribute( table:title ) :" << help.attributeNS(KOdfXmlNS::table, "title", QString());
@@ -343,14 +343,14 @@ void KCValidity::loadOdfValidation(KCCell* const cell, const QString& validation
             kDebug(36003) << "help.attribute( table:display ) :" << help.attributeNS(KOdfXmlNS::table, "display", QString());
             setDisplayValidationInformation(((help.attributeNS(KOdfXmlNS::table, "display", QString()) == "true") ? true : false));
         }
-        KoXmlElement attrText = KoXml::namedItemNS(help, KOdfXmlNS::text, "p");
+        KXmlElement attrText = KoXml::namedItemNS(help, KOdfXmlNS::text, "p");
         if (!attrText.isNull()) {
             kDebug(36003) << "help text :" << attrText.text();
             setMessageInfo(attrText.text());
         }
     }
 
-    KoXmlElement error = KoXml::namedItemNS(element, KOdfXmlNS::table, "error-message");
+    KXmlElement error = KoXml::namedItemNS(element, KOdfXmlNS::table, "error-message");
     if (!error.isNull()) {
         if (error.hasAttributeNS(KOdfXmlNS::table, "title"))
             setTitle(error.attributeNS(KOdfXmlNS::table, "title", QString()));
@@ -370,7 +370,7 @@ void KCValidity::loadOdfValidation(KCCell* const cell, const QString& validation
             kDebug(36003) << " display message :" << error.attributeNS(KOdfXmlNS::table, "display", QString());
             setDisplayMessage((error.attributeNS(KOdfXmlNS::table, "display", QString()) == "true"));
         }
-        KoXmlElement attrText = KoXml::namedItemNS(error, KOdfXmlNS::text, "p");
+        KXmlElement attrText = KoXml::namedItemNS(error, KOdfXmlNS::text, "p");
         if (!attrText.isNull())
             setMessage(attrText.text());
     }
@@ -736,13 +736,13 @@ bool KCValidity::operator==(const KCValidity& other) const
 }
 
 // static
-QHash<QString, KoXmlElement> KCValidity::preloadValidities(const KoXmlElement& body)
+QHash<QString, KXmlElement> KCValidity::preloadValidities(const KXmlElement& body)
 {
-    QHash<QString, KoXmlElement> validities;
+    QHash<QString, KXmlElement> validities;
     KoXmlNode validation = KoXml::namedItemNS(body, KOdfXmlNS::table, "content-validations");
     kDebug() << "validation.isNull?" << validation.isNull();
     if (!validation.isNull()) {
-        KoXmlElement element;
+        KXmlElement element;
         forEachElement(element, validation) {
             if (element.tagName() ==  "content-validation" && element.namespaceURI() == KOdfXmlNS::table) {
                 const QString name = element.attributeNS(KOdfXmlNS::table, "name", QString());

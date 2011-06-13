@@ -52,9 +52,9 @@ public:
     QSizeF size(const QRectF & objectBound) const;
 
     /// Sets the dom element containing the filter
-    void setContent(const KoXmlElement &content);
+    void setContent(const KXmlElement &content);
     /// Return the filer element
-    KoXmlElement content() const;
+    KXmlElement content() const;
 
     static QPointF toUserSpace(const QPointF &position, const QRectF &objectBound);
     static QSizeF toUserSpace(const QSizeF &size, const QRectF &objectBound);
@@ -63,7 +63,7 @@ private:
     Units m_primitiveUnits;
     QPointF m_position;
     QSizeF m_size;
-    KoXmlElement m_filterContent;
+    KXmlElement m_filterContent;
 };
 
 #endif // SVGFILTERHELPER_H

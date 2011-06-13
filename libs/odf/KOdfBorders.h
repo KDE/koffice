@@ -30,7 +30,7 @@
 
 class KOdfGenericStyle;
 class KOdfBordersPrivate;
-class KoXmlElement;
+class KXmlElement;
 
 /**
  * A container for all properties of a generic border as defined by ODF.
@@ -145,7 +145,7 @@ public:
      *
      * @param style  the element containing the style to read from
      */
-    void loadOdf(const KoXmlElement &style);
+    void loadOdf(const KXmlElement &style);
 
     void saveOdf(KOdfGenericStyle &style) const;
 

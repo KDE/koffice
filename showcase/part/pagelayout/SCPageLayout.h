@@ -28,7 +28,7 @@ class QPixmap;
 class SCPlaceholder;
 class KoPALoadingContext;
 class KoPASavingContext;
-class KoXmlElement;
+class KXmlElement;
 
 class SCPageLayout
 {
@@ -48,7 +48,7 @@ public:
      * @param
      * @return 
      */
-    bool loadOdf(const KoXmlElement &element, const QRectF &pageRect);
+    bool loadOdf(const KXmlElement &element, const QRectF &pageRect);
 
     /**
      * save the page layout to odf

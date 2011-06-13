@@ -86,7 +86,7 @@ public:
     Private()
             : showStatusBar(true), merge(false), maxRecentFiles(10) {}
 
-    qreal getAttribute(KoXmlElement &element, const char *attributeName, qreal defaultValue)
+    qreal getAttribute(KXmlElement &element, const char *attributeName, qreal defaultValue)
     {
         QString value = element.attribute(attributeName);
         if (! value.isEmpty())
@@ -95,7 +95,7 @@ public:
             return defaultValue;
     }
 
-    int getAttribute(KoXmlElement &element, const char *attributeName, int defaultValue)
+    int getAttribute(KXmlElement &element, const char *attributeName, int defaultValue)
     {
         QString value = element.attribute(attributeName);
         if (! value.isEmpty())
@@ -202,12 +202,12 @@ bool KarbonPart::loadOdf(KOdfStoreReader &odfStore)
 {
     kDebug(38000) << "Start loading OASIS document..." /*<< doc.toString()*/;
 
-    KoXmlElement contents = odfStore.contentDoc().documentElement();
+    KXmlElement contents = odfStore.contentDoc().documentElement();
     kDebug(38000) << "Start loading OASIS document..." << contents.text();
     kDebug(38000) << "Start loading OASIS contents..." << contents.lastChild().localName();
     kDebug(38000) << "Start loading OASIS contents..." << contents.lastChild().namespaceURI();
     kDebug(38000) << "Start loading OASIS contents..." << contents.lastChild().isElement();
-    KoXmlElement body(KoXml::namedItemNS(contents, KOdfXmlNS::office, "body"));
+    KXmlElement body(KoXml::namedItemNS(contents, KOdfXmlNS::office, "body"));
     if (body.isNull()) {
         kDebug(38000) << "No office:body found!";
         setErrorMessage(i18n("Invalid OASIS document. No office:body tag found."));
@@ -221,14 +221,14 @@ bool KarbonPart::loadOdf(KOdfStoreReader &odfStore)
         return false;
     }
 
-    KoXmlElement page(KoXml::namedItemNS(body, KOdfXmlNS::draw, "page"));
+    KXmlElement page(KoXml::namedItemNS(body, KOdfXmlNS::draw, "page"));
     if (page.isNull()) {
         kDebug(38000) << "No office:drawing found!";
         setErrorMessage(i18n("Invalid OASIS document. No draw:page tag found."));
         return false;
     }
 
-    KoXmlElement * master = 0;
+    KXmlElement * master = 0;
     if (odfStore.styles().masterPages().contains("Standard"))
         master = odfStore.styles().masterPages().value("Standard");
     else if (odfStore.styles().masterPages().contains("Default"))
@@ -238,7 +238,7 @@ bool KarbonPart::loadOdf(KOdfStoreReader &odfStore)
 
     if (master) {
         const QString pageStyleName = master->attributeNS(KOdfXmlNS::style, "page-layout-name", QString());
-        const KoXmlElement *style = odfStore.styles().findStyle(pageStyleName);
+        const KXmlElement *style = odfStore.styles().findStyle(pageStyleName);
         if (style) {
             KOdfPageLayoutData layout;
             layout.loadOdf(*style);

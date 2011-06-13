@@ -730,7 +730,7 @@ void KoCharacterStyle::loadOdf(KoShapeLoadingContext &scontext)
     if (styleStack.hasProperty(KOdfXmlNS::style, "font-name")) {
         // This font name is a reference to a font face declaration.
         KOdfStylesReader &stylesReader = context.stylesReader();
-        const KoXmlElement *fontFace = stylesReader.findStyle(styleStack.property(KOdfXmlNS::style, "font-name"));
+        const KXmlElement *fontFace = stylesReader.findStyle(styleStack.property(KOdfXmlNS::style, "font-name"));
         if (fontFace != 0)
             fontName = fontFace->attributeNS(KOdfXmlNS::svg, "font-family", "");
     }

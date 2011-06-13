@@ -71,12 +71,12 @@ public:
     void updateAllNamedAreas();
 
     /// \ingroup OpenDocument
-    void loadOdf(const KoXmlElement& body);
+    void loadOdf(const KXmlElement& body);
     /// \ingroup OpenDocument
     void saveOdf(KXmlWriter& xmlWriter) const;
 
     /// \ingroup NativeFormat
-    void loadXML(const KoXmlElement& element);
+    void loadXML(const KXmlElement& element);
     /// \ingroup NativeFormat
     QDomElement saveXML(QDomDocument& doc) const;
 

@@ -119,7 +119,7 @@ public:
     const Filter& filter() const;
     void setFilter(const Filter& filter);
 
-    bool loadOdf(const KoXmlElement& element, const KCMap* map);
+    bool loadOdf(const KXmlElement& element, const KCMap* map);
     void saveOdf(KXmlWriter& xmlWriter) const;
 
     void operator=(const Database& other);

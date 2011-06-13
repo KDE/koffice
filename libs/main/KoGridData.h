@@ -29,7 +29,7 @@ class QRectF;
 class KoViewConverter;
 class KXmlWriter;
 class KToggleAction;
-class KoXmlElement;
+class KXmlElement;
 class KoXmlDocument;
 
 /**

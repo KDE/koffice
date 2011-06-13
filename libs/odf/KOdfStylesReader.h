@@ -54,7 +54,7 @@ public:
      * @param name the style name
      * @return the dom element representing the style, or QString::null if it wasn't found.
      */
-    const KoXmlElement* findStyle(const QString &name) const;
+    const KXmlElement* findStyle(const QString &name) const;
 
     /**
      * Looks up a style:style by name.
@@ -63,7 +63,7 @@ public:
      * @param family the style family (for a style:style, use 0 otherwise)
      * @return the dom element representing the style, or QString::null if it wasn't found.
      */
-    const KoXmlElement* findStyle(const QString &name, const QString &family) const;
+    const KXmlElement* findStyle(const QString &name, const QString &family) const;
 
     /**
      * Looks up a style:style by name.
@@ -76,55 +76,55 @@ public:
      *
      * @return the dom element representing the style, or QString::null if it wasn't found.
      */
-    const KoXmlElement* findStyle(const QString &name, const QString &family, bool stylesDotXml) const;
+    const KXmlElement* findStyle(const QString &name, const QString &family, bool stylesDotXml) const;
 
     /// Similar to findStyle but for custom styles only.
-    const KoXmlElement *findStyleCustomStyle(const QString &name, const QString &family) const;
+    const KXmlElement *findStyleCustomStyle(const QString &name, const QString &family) const;
 
     /**
      * Similar to findStyle but for auto-styles only.
      * \note Searches in styles.xml only!
      * \see findStyle()
      */
-    const KoXmlElement *findAutoStyleStyle(const QString &name, const QString &family) const;
+    const KXmlElement *findAutoStyleStyle(const QString &name, const QString &family) const;
 
     /**
      * Similar to findStyle but for auto-styles only.
      * \note Searches in content.xml only!
      * \see findStyle()
      */
-    const KoXmlElement *findContentAutoStyle(const QString &name, const QString &family) const;
+    const KXmlElement *findContentAutoStyle(const QString &name, const QString &family) const;
 
     /// @return the default style for a given family ("graphic","paragraph","table" etc.)
     /// Returns 0 if no default style for this family is available
-    KoXmlElement *defaultStyle(const QString &family) const;
+    KXmlElement *defaultStyle(const QString &family) const;
 
     /// @return the office:style element
-    KoXmlElement officeStyle() const;
+    KXmlElement officeStyle() const;
 
     /// @return the draw:layer-set element
-    KoXmlElement layerSet() const;
+    KXmlElement layerSet() const;
 
     /// @return master pages ("style:master-page" elements), hashed by name
-    QHash<QString, KoXmlElement*> masterPages() const;
+    QHash<QString, KXmlElement*> masterPages() const;
 
     /// @return all presentation page layouts ("presentation-page-layout" elements), hashed by name
-    QHash<QString, KoXmlElement*> presentationPageLayouts() const;
+    QHash<QString, KXmlElement*> presentationPageLayouts() const;
 
     /// @return draw styles, hashed by name
-    QHash<QString, KoXmlElement*> drawStyles() const;
+    QHash<QString, KXmlElement*> drawStyles() const;
 
     /// @return all custom styles ("style:style" elements) for a given family, hashed by name
-    QHash<QString, KoXmlElement*> customStyles(const QString& family) const;
+    QHash<QString, KXmlElement*> customStyles(const QString& family) const;
 
     /**
      * Returns all auto-styles defined in styles.xml, if \p stylesDotXml is \c true ,
      * or all in content.xml, if \p stylesDotXml is \c false .
      * \return all auto-styles ("style:style" elements) for a given family, hashed by name
      */
-    QHash<QString, KoXmlElement*> autoStyles(const QString& family, bool stylesDotXml = false) const;
+    QHash<QString, KXmlElement*> autoStyles(const QString& family, bool stylesDotXml = false) const;
 
-    typedef QHash<QString, QPair<KOdf::NumericStyleFormat, KoXmlElement*> > DataFormatsMap;
+    typedef QHash<QString, QPair<KOdf::NumericStyleFormat, KXmlElement*> > DataFormatsMap;
     /// Value (date/time/number...) formats found while parsing styles. Used e.g. for fields.
     /// Key: format name. Value:
     DataFormatsMap dataFormats() const;
@@ -136,10 +136,10 @@ private:
         AutomaticInStyles   ///< auto-style located in styles.xml
     };
     /// Add styles to styles map
-    void insertStyles(const KoXmlElement &styles, TypeAndLocation typeAndLocation = CustomInStyles);
+    void insertStyles(const KXmlElement &styles, TypeAndLocation typeAndLocation = CustomInStyles);
 
-    void insertOfficeStyles(const KoXmlElement &styles);
-    void insertStyle(const KoXmlElement &style, TypeAndLocation typeAndLocation);
+    void insertOfficeStyles(const KXmlElement &styles);
+    void insertStyle(const KXmlElement &style, TypeAndLocation typeAndLocation);
 
     KOdfStylesReader(const KOdfStylesReader &);   // forbidden
     KOdfStylesReader& operator=(const KOdfStylesReader &);   // forbidden

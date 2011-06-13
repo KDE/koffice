@@ -82,12 +82,12 @@ KCCalculationSettings::~KCCalculationSettings()
     delete d;
 }
 
-void KCCalculationSettings::loadOdf(const KoXmlElement& body)
+void KCCalculationSettings::loadOdf(const KXmlElement& body)
 {
     KoXmlNode settings = KoXml::namedItemNS(body, KOdfXmlNS::table, "calculation-settings");
     kDebug() << "Calculation settings found?" << !settings.isNull();
     if (!settings.isNull()) {
-        KoXmlElement element = settings.toElement();
+        KXmlElement element = settings.toElement();
         if (element.hasAttributeNS(KOdfXmlNS::table,  "case-sensitive")) {
             d->caseSensitiveComparisons = true;
             QString value = element.attributeNS(KOdfXmlNS::table, "case-sensitive", "true");

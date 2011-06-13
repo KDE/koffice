@@ -1272,7 +1272,7 @@ void KCSheet::checkContentDirection(QString const & name)
         setLayoutDirection(Qt::LeftToRight);
 }
 
-bool KCSheet::loadSheetStyleFormat(KoXmlElement *style)
+bool KCSheet::loadSheetStyleFormat(KXmlElement *style)
 {
     QString hleft, hmiddle, hright;
     QString fleft, fmiddle, fright;
@@ -1302,7 +1302,7 @@ bool KCSheet::loadSheetStyleFormat(KoXmlElement *style)
     //TODO implement it under kcells
     KoXmlNode headerleft = KoXml::namedItemNS(*style, KOdfXmlNS::style, "header-left");
     if (!headerleft.isNull()) {
-        KoXmlElement e = headerleft.toElement();
+        KXmlElement e = headerleft.toElement();
         if (e.hasAttributeNS(KOdfXmlNS::style, "display"))
             kDebug(36003) << "header.hasAttribute( style:display ) :" << e.hasAttributeNS(KOdfXmlNS::style, "display");
         else
@@ -1311,7 +1311,7 @@ bool KCSheet::loadSheetStyleFormat(KoXmlElement *style)
     //TODO implement it under kcells
     KoXmlNode footerleft = KoXml::namedItemNS(*style, KOdfXmlNS::style, "footer-left");
     if (!footerleft.isNull()) {
-        KoXmlElement e = footerleft.toElement();
+        KXmlElement e = footerleft.toElement();
         if (e.hasAttributeNS(KOdfXmlNS::style, "display"))
             kDebug(36003) << "footer.hasAttribute( style:display ) :" << e.hasAttributeNS(KOdfXmlNS::style, "display");
         else
@@ -1355,11 +1355,11 @@ void KCSheet::replaceMacro(QString & text, const QString & old, const QString & 
 QString KCSheet::getPart(const KoXmlNode & part)
 {
     QString result;
-    KoXmlElement e = KoXml::namedItemNS(part, KOdfXmlNS::text, "p");
+    KXmlElement e = KoXml::namedItemNS(part, KOdfXmlNS::text, "p");
     while (!e.isNull()) {
         QString text = e.text();
 
-        KoXmlElement macro = KoXml::namedItemNS(e, KOdfXmlNS::text, "time");
+        KXmlElement macro = KoXml::namedItemNS(e, KOdfXmlNS::text, "time");
         if (!macro.isNull())
             replaceMacro(text, macro.text(), "<time>");
 
@@ -1397,7 +1397,7 @@ QString KCSheet::getPart(const KoXmlNode & part)
     return result;
 }
 
-void KCSheet::loadColumnNodes(const KoXmlElement& parent,
+void KCSheet::loadColumnNodes(const KXmlElement& parent,
                             int& indexCol,
                             int& maxColumn,
                             KOdfLoadingContext& odfContext,
@@ -1407,7 +1407,7 @@ void KCSheet::loadColumnNodes(const KoXmlElement& parent,
 {
     KoXmlNode node = parent.firstChild();
     while (!node.isNull()) {
-        KoXmlElement elem = node.toElement();
+        KXmlElement elem = node.toElement();
         if (!elem.isNull() && elem.namespaceURI() == KOdfXmlNS::table) {
             if (elem.localName() == "table-column") {
                 loadColumnFormat(elem, odfContext.stylesReader(), indexCol, columnStyleRegions, columnStyles);
@@ -1420,7 +1420,7 @@ void KCSheet::loadColumnNodes(const KoXmlElement& parent,
     }
 }
 
-void KCSheet::loadRowNodes(const KoXmlElement& parent,
+void KCSheet::loadRowNodes(const KXmlElement& parent,
                             int& rowIndex,
                             int& maxColumn,
                             KCOdfLoadingContext& tableContext,
@@ -1432,7 +1432,7 @@ void KCSheet::loadRowNodes(const KoXmlElement& parent,
 {
     KoXmlNode node = parent.firstChild();
     while (!node.isNull()) {
-        KoXmlElement elem = node.toElement();
+        KXmlElement elem = node.toElement();
         if (!elem.isNull() && elem.namespaceURI() == KOdfXmlNS::table) {
             if (elem.localName() == "table-row") {
                 int columnMaximal = loadRowFormat(elem, rowIndex, tableContext,
@@ -1449,7 +1449,7 @@ void KCSheet::loadRowNodes(const KoXmlElement& parent,
 }
 
 
-bool KCSheet::loadOdf(const KoXmlElement& sheetElement,
+bool KCSheet::loadOdf(const KXmlElement& sheetElement,
                     KCOdfLoadingContext& tableContext,
                     const Styles& autoStyles,
                     const QHash<QString, KCConditions>& conditionalStyles)
@@ -1466,11 +1466,11 @@ bool KCSheet::loadOdf(const KoXmlElement& sheetElement,
     if (sheetElement.hasAttributeNS(KOdfXmlNS::table, "style-name")) {
         QString stylename = sheetElement.attributeNS(KOdfXmlNS::table, "style-name", QString());
         //kDebug(36003)<<" style of table :"<<stylename;
-        const KoXmlElement *style = odfContext.stylesReader().findStyle(stylename, "table");
+        const KXmlElement *style = odfContext.stylesReader().findStyle(stylename, "table");
         Q_ASSERT(style);
         //kDebug(36003)<<" style :"<<style;
         if (style) {
-            KoXmlElement properties(KoXml::namedItemNS(*style, KOdfXmlNS::style, "table-properties"));
+            KXmlElement properties(KoXml::namedItemNS(*style, KOdfXmlNS::style, "table-properties"));
             if (!properties.isNull()) {
                 if (properties.hasAttributeNS(KOdfXmlNS::table, "display")) {
                     bool visible = (properties.attributeNS(KOdfXmlNS::table, "display", QString()) == "true" ? true : false);
@@ -1480,14 +1480,14 @@ bool KCSheet::loadOdf(const KoXmlElement& sheetElement,
             if (style->hasAttributeNS(KOdfXmlNS::style, "master-page-name")) {
                 QString masterPageStyleName = style->attributeNS(KOdfXmlNS::style, "master-page-name", QString());
                 //kDebug()<<"style->attribute( style:master-page-name ) :"<<masterPageStyleName;
-                KoXmlElement *masterStyle = odfContext.stylesReader().masterPages()[masterPageStyleName];
+                KXmlElement *masterStyle = odfContext.stylesReader().masterPages()[masterPageStyleName];
                 //kDebug()<<"stylesReader.styles()[masterPageStyleName] :"<<masterStyle;
                 if (masterStyle) {
                     loadSheetStyleFormat(masterStyle);
                     if (masterStyle->hasAttributeNS(KOdfXmlNS::style, "page-layout-name")) {
                         QString masterPageLayoutStyleName = masterStyle->attributeNS(KOdfXmlNS::style, "page-layout-name", QString());
                         //kDebug(36003)<<"masterPageLayoutStyleName :"<<masterPageLayoutStyleName;
-                        const KoXmlElement *masterLayoutStyle = odfContext.stylesReader().findStyle(masterPageLayoutStyleName);
+                        const KXmlElement *masterLayoutStyle = odfContext.stylesReader().findStyle(masterPageLayoutStyleName);
                         if (masterLayoutStyle) {
                             //kDebug(36003)<<"masterLayoutStyle :"<<masterLayoutStyle;
                             KOdfStyleStack styleStack;
@@ -1500,7 +1500,7 @@ bool KCSheet::loadOdf(const KoXmlElement& sheetElement,
             }
 
             if (style->hasChildNodes() ) {
-                KoXmlElement element;
+                KXmlElement element;
                 forEachElement(element, properties) {
                     if (element.nodeName() == "style:background-image") {
                         QString imagePath = element.attributeNS(KOdfXmlNS::xlink, "href");
@@ -1617,7 +1617,7 @@ bool KCSheet::loadOdf(const KoXmlElement& sheetElement,
     // First load all style information for rows, columns and cells
     while (!rowNode.isNull() && rowIndex <= KS_rowMax) {
         //kDebug(36003) << " rowIndex :" << rowIndex << " indexCol :" << indexCol;
-        KoXmlElement rowElement = rowNode.toElement();
+        KXmlElement rowElement = rowNode.toElement();
         if (!rowElement.isNull()) {
             // slightly faster
             KoXml::load(rowElement);
@@ -1653,7 +1653,7 @@ bool KCSheet::loadOdf(const KoXmlElement& sheetElement,
                     // The <table:shapes> element contains all graphic shapes
                     // with an anchor on the table this element is a child of.
                     KoShapeLoadingContext* shapeLoadingContext = tableContext.shapeContext;
-                    KoXmlElement element;
+                    KXmlElement element;
                     forEachElement(element, rowElement) {
                         if (element.namespaceURI() != KOdfXmlNS::draw)
                             continue;
@@ -1704,7 +1704,7 @@ bool KCSheet::loadOdf(const KoXmlElement& sheetElement,
     return true;
 }
 
-void KCSheet::loadOdfObject(const KoXmlElement& element, KoShapeLoadingContext& shapeContext)
+void KCSheet::loadOdfObject(const KXmlElement& element, KoShapeLoadingContext& shapeContext)
 {
     KoShape* shape = KoShapeRegistry::instance()->createShapeFromOdf(element, shapeContext);
     if (!shape)
@@ -1823,11 +1823,11 @@ void KCSheet::loadOdfMasterLayoutPage(KOdfStyleStack &styleStack)
 }
 
 
-bool KCSheet::loadColumnFormat(const KoXmlElement& column,
+bool KCSheet::loadColumnFormat(const KXmlElement& column,
                              const KOdfStylesReader& stylesReader, int & indexCol,
                              QHash<QString, QRegion>& columnStyleRegions, IntervalMap<QString>& columnStyles)
 {
-//   kDebug(36003)<<"bool KCSheet::loadColumnFormat(const KoXmlElement& column, const KOdfStylesReader& stylesReader, unsigned int & indexCol ) index Col :"<<indexCol;
+//   kDebug(36003)<<"bool KCSheet::loadColumnFormat(const KXmlElement& column, const KOdfStylesReader& stylesReader, unsigned int & indexCol ) index Col :"<<indexCol;
 
     bool isNonDefaultColumn = false;
 
@@ -1864,7 +1864,7 @@ bool KCSheet::loadColumnFormat(const KoXmlElement& column,
     KOdfStyleStack styleStack;
     if (column.hasAttributeNS(KOdfXmlNS::table, "style-name")) {
         QString str = column.attributeNS(KOdfXmlNS::table, "style-name", QString());
-        const KoXmlElement *style = stylesReader.findStyle(str, "table-column");
+        const KXmlElement *style = stylesReader.findStyle(str, "table-column");
         if (style) {
             styleStack.push(*style);
             isNonDefaultColumn = true;
@@ -1962,7 +1962,7 @@ void KCSheet::loadOdfInsertStyles(const Styles& autoStyles,
     }
 }
 
-int KCSheet::loadRowFormat(const KoXmlElement& row, int &rowIndex,
+int KCSheet::loadRowFormat(const KXmlElement& row, int &rowIndex,
                           KCOdfLoadingContext& tableContext,
                           QHash<QString, QRegion>& rowStyleRegions,
                           QHash<QString, QRegion>& cellStyleRegions,
@@ -1981,14 +1981,14 @@ int KCSheet::loadRowFormat(const KoXmlElement& row, int &rowIndex,
     static const QString sCoveredTableCell      = QString::fromLatin1("covered-table-cell");
     static const QString sNumberColumnsRepeated = QString::fromLatin1("number-columns-repeated");
 
-//    kDebug(36003)<<"KCSheet::loadRowFormat( const KoXmlElement& row, int &rowIndex,const KOdfStylesReader& stylesReader, bool isLast )***********";
+//    kDebug(36003)<<"KCSheet::loadRowFormat( const KXmlElement& row, int &rowIndex,const KOdfStylesReader& stylesReader, bool isLast )***********";
     KOdfLoadingContext& odfContext = tableContext.odfContext;
     bool isNonDefaultRow = false;
 
     KOdfStyleStack styleStack;
     if (row.hasAttributeNS(KOdfXmlNS::table, sStyleName)) {
         QString str = row.attributeNS(KOdfXmlNS::table, sStyleName, QString());
-        const KoXmlElement *style = odfContext.stylesReader().findStyle(str, "table-row");
+        const KXmlElement *style = odfContext.stylesReader().findStyle(str, "table-row");
         if (style) {
             styleStack.push(*style);
             isNonDefaultRow = true;
@@ -2067,7 +2067,7 @@ int KCSheet::loadRowFormat(const KoXmlElement& row, int &rowIndex,
     int columnMaximal = 0;
     const int endRow = qMin(rowIndex + number - 1, KS_rowMax);
 
-    KoXmlElement cellElement;
+    KXmlElement cellElement;
     forEachElement(cellElement, row) {
         if (cellElement.namespaceURI() != KOdfXmlNS::table)
             continue;
@@ -2310,7 +2310,7 @@ void KCSheet::convertPart(const QString & part, KXmlWriter & xmlWriter) const
                     addText(text, xmlWriter);
                     //text:p><text:date style:data-style-name="N2" text:date-value="2005-10-02">02/10/2005</text:date>, <text:time>10:20:12</text:time></text:p> "add style" => create new style
 #if 0 //FIXME
-                    KoXmlElement t = dd.createElement("text:date");
+                    KXmlElement t = dd.createElement("text:date");
                     t.setAttribute("text:date-value", "0-00-00");
                     // todo: "style:data-style-name", "N2"
                     t.appendChild(dd.createTextNode(QDate::currentDate().toString()));
@@ -2866,7 +2866,7 @@ void KCSheet::saveOdfCells(KXmlWriter& xmlWriter, KOdfGenericStyles &mainStyles,
     }
 }
 
-bool KCSheet::loadXML(const KoXmlElement& sheet)
+bool KCSheet::loadXML(const KXmlElement& sheet)
 {
     bool ok = false;
     QString sname = sheetName();
@@ -2992,7 +2992,7 @@ bool KCSheet::loadXML(const KoXmlElement& sheet)
     }
 
     // Load the paper layout
-    KoXmlElement paper = sheet.namedItem("paper").toElement();
+    KXmlElement paper = sheet.namedItem("paper").toElement();
     if (!paper.isNull()) {
         KOdfPageLayoutData pageLayout;
         pageLayout.format = KOdfPageFormat::formatFromString(paper.attribute("format"));
@@ -3000,7 +3000,7 @@ bool KCSheet::loadXML(const KoXmlElement& sheet)
                                  ? KOdfPageFormat::Portrait : KOdfPageFormat::Landscape;
 
         // <borders>
-        KoXmlElement borders = paper.namedItem("borders").toElement();
+        KXmlElement borders = paper.namedItem("borders").toElement();
         if (!borders.isNull()) {
             pageLayout.leftMargin   = MM_TO_POINT(borders.attribute("left").toFloat());
             pageLayout.rightMargin  = MM_TO_POINT(borders.attribute("right").toFloat());
@@ -3012,28 +3012,28 @@ bool KCSheet::loadXML(const KoXmlElement& sheet)
         QString hleft, hright, hcenter;
         QString fleft, fright, fcenter;
         // <head>
-        KoXmlElement head = paper.namedItem("head").toElement();
+        KXmlElement head = paper.namedItem("head").toElement();
         if (!head.isNull()) {
-            KoXmlElement left = head.namedItem("left").toElement();
+            KXmlElement left = head.namedItem("left").toElement();
             if (!left.isNull())
                 hleft = left.text();
-            KoXmlElement center = head.namedItem("center").toElement();
+            KXmlElement center = head.namedItem("center").toElement();
             if (!center.isNull())
                 hcenter = center.text();
-            KoXmlElement right = head.namedItem("right").toElement();
+            KXmlElement right = head.namedItem("right").toElement();
             if (!right.isNull())
                 hright = right.text();
         }
         // <foot>
-        KoXmlElement foot = paper.namedItem("foot").toElement();
+        KXmlElement foot = paper.namedItem("foot").toElement();
         if (!foot.isNull()) {
-            KoXmlElement left = foot.namedItem("left").toElement();
+            KXmlElement left = foot.namedItem("left").toElement();
             if (!left.isNull())
                 fleft = left.text();
-            KoXmlElement center = foot.namedItem("center").toElement();
+            KXmlElement center = foot.namedItem("center").toElement();
             if (!center.isNull())
                 fcenter = center.text();
-            KoXmlElement right = foot.namedItem("right").toElement();
+            KXmlElement right = foot.namedItem("right").toElement();
             if (!right.isNull())
                 fright = right.text();
         }
@@ -3041,7 +3041,7 @@ bool KCSheet::loadXML(const KoXmlElement& sheet)
     }
 
     // load print range
-    KoXmlElement printrange = sheet.namedItem("printrange-rect").toElement();
+    KXmlElement printrange = sheet.namedItem("printrange-rect").toElement();
     if (!printrange.isNull()) {
         int left = printrange.attribute("left-rect").toInt();
         int right = printrange.attribute("right-rect").toInt();
@@ -3087,7 +3087,7 @@ bool KCSheet::loadXML(const KoXmlElement& sheet)
     // Load the cells
     KoXmlNode n = sheet.firstChild();
     while (!n.isNull()) {
-        KoXmlElement e = n.toElement();
+        KXmlElement e = n.toElement();
         if (!e.isNull()) {
             QString tagName = e.tagName();
             if (tagName == "cell")
@@ -3131,7 +3131,7 @@ bool KCSheet::loadXML(const KoXmlElement& sheet)
     }
 
     // load print repeat columns
-    KoXmlElement printrepeatcolumns = sheet.namedItem("printrepeatcolumns").toElement();
+    KXmlElement printrepeatcolumns = sheet.namedItem("printrepeatcolumns").toElement();
     if (!printrepeatcolumns.isNull()) {
         int left = printrepeatcolumns.attribute("left").toInt();
         int right = printrepeatcolumns.attribute("right").toInt();
@@ -3139,7 +3139,7 @@ bool KCSheet::loadXML(const KoXmlElement& sheet)
     }
 
     // load print repeat rows
-    KoXmlElement printrepeatrows = sheet.namedItem("printrepeatrows").toElement();
+    KXmlElement printrepeatrows = sheet.namedItem("printrepeatrows").toElement();
     if (!printrepeatrows.isNull()) {
         int top = printrepeatrows.attribute("top").toInt();
         int bottom = printrepeatrows.attribute("bottom").toInt();

@@ -25,7 +25,7 @@
 #include <QRectF>
 
 class KXmlWriter;
-class KoXmlElement;
+class KXmlElement;
 
 class SCPlaceholder
 {
@@ -40,7 +40,7 @@ public:
      * we need to pass the page size in case the placeholder is saved in absolute values so it 
      * can be converted to relative ones.
      */
-    bool loadOdf(const KoXmlElement &element, const QRectF &pageSize);
+    bool loadOdf(const KXmlElement &element, const QRectF &pageSize);
     void saveOdf(KXmlWriter &xmlWriter);
 
     QString presentationObject();
@@ -80,7 +80,7 @@ public:
     static bool comparePosition(const SCPlaceholder &p1, const SCPlaceholder &p2);
 
 private:
-    qreal percent(const KoXmlElement &element, const char * type, qreal absolute);
+    qreal percent(const KXmlElement &element, const char * type, qreal absolute);
 
     QString m_presentationObject;
     /**

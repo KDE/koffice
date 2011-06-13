@@ -90,7 +90,7 @@ void PresentationVariable::saveOdf(KoShapeSavingContext & context)
     writer->endElement();
 }
 
-bool PresentationVariable::loadOdf(const KoXmlElement & element, KoShapeLoadingContext & context)
+bool PresentationVariable::loadOdf(const KXmlElement & element, KoShapeLoadingContext & context)
 {
     Q_UNUSED(context);
     const QString localName(element.localName());

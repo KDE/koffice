@@ -59,9 +59,9 @@ class OdfCollectionLoader : public QObject
         QTimer* m_loadingTimer;
         KOdfLoadingContext* m_loadingContext;
         KoShapeLoadingContext* m_shapeLoadingContext;
-        KoXmlElement m_body;
-        KoXmlElement m_page;
-        KoXmlElement m_shape;
+        KXmlElement m_body;
+        KXmlElement m_page;
+        KXmlElement m_shape;
         QList<KoShape*> m_shapeList;
         QString m_path;
         QStringList m_fileList;

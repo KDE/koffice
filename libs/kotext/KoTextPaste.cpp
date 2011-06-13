@@ -61,7 +61,7 @@ KoTextPaste::~KoTextPaste()
     delete d;
 }
 
-bool KoTextPaste::process(const KoXmlElement &body, KOdfStoreReader &odfStore)
+bool KoTextPaste::process(const KXmlElement &body, KOdfStoreReader &odfStore)
 {
     bool ok = true;
     KOdfLoadingContext loadingContext(odfStore.styles(), odfStore.store());
@@ -70,7 +70,7 @@ bool KoTextPaste::process(const KoXmlElement &body, KOdfStoreReader &odfStore)
     KoTextLoader loader(context);
 
     kDebug(30015) << "text paste";
-    loader.loadBody(body, d->cursor);   // now let's load the body from the ODF KoXmlElement.
+    loader.loadBody(body, d->cursor);   // now let's load the body from the ODF KXmlElement.
 
 #ifdef SHOULD_BUILD_RDF
     // RDF: Grab RDF metadata from ODF file if present & load it into rdfModel

@@ -26,7 +26,7 @@
 
 class KoShape;
 class KoTextBlockData;
-class KoXmlElement;
+class KXmlElement;
 class KoShapeLoadingContext;
 class KoShapeSavingContext;
 class SCAnimationCache;
@@ -38,7 +38,7 @@ public:
     SCShapeAnimation(KoShape *shape, KoTextBlockData *textBlockData);
     virtual ~SCShapeAnimation();
 
-    bool loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context);
+    bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context);
     virtual bool saveOdf(KoPASavingContext &paContext, bool startStep, bool startSubStep) const;
 
     KoShape * shape() const;

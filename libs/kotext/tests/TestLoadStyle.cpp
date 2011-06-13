@@ -85,9 +85,9 @@ QTextDocument *TestLoadStyle::documentFromOdt(const QString &odt)
         qDebug() << "Parsing error : " << error;
     }
 
-    KoXmlElement content = odfReadStore.contentDoc().documentElement();
-    KoXmlElement realBody(KoXml::namedItemNS(content, KOdfXmlNS::office, "body"));
-    KoXmlElement body = KoXml::namedItemNS(realBody, KOdfXmlNS::office, "text");
+    KXmlElement content = odfReadStore.contentDoc().documentElement();
+    KXmlElement realBody(KoXml::namedItemNS(content, KOdfXmlNS::office, "body"));
+    KXmlElement body = KoXml::namedItemNS(realBody, KOdfXmlNS::office, "text");
 
     KoStyleManager *styleManager = new KoStyleManager;
     KoChangeTracker *changeTracker = new KoChangeTracker;

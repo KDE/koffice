@@ -78,8 +78,8 @@ bool compareLayouts(const SCPageLayout * p1, const SCPageLayout * p2)
 
 bool SCPageLayouts::loadOdf(KoPALoadingContext &context)
 {
-    QHash<QString, KoXmlElement*> layouts = context.odfLoadingContext().stylesReader().presentationPageLayouts();
-    QHash<QString, KoXmlElement*>::iterator it(layouts.begin());
+    QHash<QString, KXmlElement*> layouts = context.odfLoadingContext().stylesReader().presentationPageLayouts();
+    QHash<QString, KXmlElement*>::iterator it(layouts.begin());
 
     // TODO need to use the correct page size
     // we should check which layouts are already loaded
@@ -148,8 +148,8 @@ SCPageLayout *SCPageLayouts::pageLayout(const QString &name, KoPALoadingContext 
 {
     SCPageLayout *pageLayout = 0;
 
-    QHash<QString, KoXmlElement*> layouts = loadingContext.odfLoadingContext().stylesReader().presentationPageLayouts();
-    QHash<QString, KoXmlElement*>::iterator it(layouts.find(name));
+    QHash<QString, KXmlElement*> layouts = loadingContext.odfLoadingContext().stylesReader().presentationPageLayouts();
+    QHash<QString, KXmlElement*>::iterator it(layouts.find(name));
 
     if (it != layouts.end()) { // Found the xmlelement
         pageLayout = new SCPageLayout();

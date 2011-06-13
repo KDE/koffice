@@ -103,7 +103,7 @@ public:
     /// @return true if this bookmark has selection (type is StartBookmark of EndBookmark)
     bool hasSelection() const;
 
-    virtual bool loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context);
+    virtual bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context);
 
 private:
     Q_DECLARE_PRIVATE(KoBookmark)

@@ -20,7 +20,7 @@
 #ifndef KPRANIMATIONFACTORY_H
 #define KPRANIMATIONFACTORY_H
 
-class KoXmlElement;
+class KXmlElement;
 class KoShapeLoadingContext;
 class SCAnimationBase;
 class SCShapeAnimation;
@@ -28,7 +28,7 @@ class SCShapeAnimation;
 class SCAnimationFactory
 {
 public:
-    static SCAnimationBase *createAnimationFromOdf(const KoXmlElement &element, KoShapeLoadingContext &context,
+    static SCAnimationBase *createAnimationFromOdf(const KXmlElement &element, KoShapeLoadingContext &context,
                                                     SCShapeAnimation *shapeAnimation);
 };
 

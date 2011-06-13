@@ -414,13 +414,13 @@ KCConditional KCConditions::loadOdfCondition(const QString &conditionValue, cons
     return newCondition;
 }
 
-void KCConditions::loadOdfConditions(const KoXmlElement &element, const KCValueParser *parser, const KCStyleManager *styleManager)
+void KCConditions::loadOdfConditions(const KXmlElement &element, const KCValueParser *parser, const KCStyleManager *styleManager)
 {
     kDebug(36003) << "Loading conditional styles";
     KoXmlNode node(element);
 
     while (!node.isNull()) {
-        KoXmlElement elementItem = node.toElement();
+        KXmlElement elementItem = node.toElement();
         if (elementItem.tagName() == "map" && elementItem.namespaceURI() == KOdfXmlNS::style) {
             QString conditionValue = elementItem.attributeNS(KOdfXmlNS::style, "condition", QString());
             QString applyStyleName;
@@ -510,11 +510,11 @@ void KCConditions::loadOdfValidationValue(const QStringList &listVal, KCConditio
     newCondition.value2 = parser->parse(listVal[1]);
 }
 
-void KCConditions::loadConditions(const KoXmlElement &element, const KCValueParser *parser)
+void KCConditions::loadConditions(const KXmlElement &element, const KCValueParser *parser)
 {
     KCConditional newCondition;
 
-    KoXmlElement conditionElement;
+    KXmlElement conditionElement;
     forEachElement(conditionElement, element) {
         if (!conditionElement.hasAttribute("cond"))
             continue;

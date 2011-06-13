@@ -258,7 +258,7 @@ QPointF StarShape::computeCenter() const
     return center / static_cast<qreal>(m_cornerCount);
 }
 
-bool StarShape::loadOdf(const KoXmlElement & element, KoShapeLoadingContext & context)
+bool StarShape::loadOdf(const KXmlElement & element, KoShapeLoadingContext & context)
 {
     bool loadAsCustomShape = false;
 

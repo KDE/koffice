@@ -62,15 +62,15 @@ bool KOdfPasteBase::paste(KOdf::DocumentType documentType, const QByteArray &byt
         return false;
     }
 
-    KoXmlElement content = odfStore.contentDoc().documentElement();
-    KoXmlElement realBody(KoXml::namedItemNS(content, KOdfXmlNS::office, "body"));
+    KXmlElement content = odfStore.contentDoc().documentElement();
+    KXmlElement realBody(KoXml::namedItemNS(content, KOdfXmlNS::office, "body"));
 
     if (realBody.isNull()) {
         kWarning(30002) << "No body tag found";
         return false;
     }
 
-    KoXmlElement body = KoXml::namedItemNS(realBody, KOdfXmlNS::office, KOdf::bodyContentElement(documentType, false));
+    KXmlElement body = KoXml::namedItemNS(realBody, KOdfXmlNS::office, KOdf::bodyContentElement(documentType, false));
 
     if (body.isNull()) {
         kWarning(30002) << "No" << KOdf::bodyContentElement(documentType, true) << "tag found";

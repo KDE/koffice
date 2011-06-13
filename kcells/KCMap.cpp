@@ -502,7 +502,7 @@ static void fixupStyle(KoCharacterStyle* style)
     style->copyProperties(format);
 }
 
-bool KCMap::loadOdf(const KoXmlElement& body, KOdfLoadingContext& odfContext)
+bool KCMap::loadOdf(const KXmlElement& body, KOdfLoadingContext& odfContext)
 {
     d->isLoading = true;
     loadingInfo()->setFileFormat(KCLoadingInfo::OpenDocument);
@@ -534,7 +534,7 @@ bool KCMap::loadOdf(const KoXmlElement& body, KOdfLoadingContext& odfContext)
 
 
     // load default column style
-    const KoXmlElement* defaultColumnStyle = odfContext.stylesReader().defaultStyle("table-column");
+    const KXmlElement* defaultColumnStyle = odfContext.stylesReader().defaultStyle("table-column");
     if (defaultColumnStyle) {
 //       kDebug() <<"style:default-style style:family=\"table-column\"";
         KOdfStyleStack styleStack;
@@ -550,7 +550,7 @@ bool KCMap::loadOdf(const KoXmlElement& body, KOdfLoadingContext& odfContext)
     }
 
     // load default row style
-    const KoXmlElement* defaultRowStyle = odfContext.stylesReader().defaultStyle("table-row");
+    const KXmlElement* defaultRowStyle = odfContext.stylesReader().defaultStyle("table-row");
     if (defaultRowStyle) {
 //       kDebug() <<"style:default-style style:family=\"table-row\"";
         KOdfStyleStack styleStack;
@@ -581,7 +581,7 @@ bool KCMap::loadOdf(const KoXmlElement& body, KOdfLoadingContext& odfContext)
 
     d->overallRowCount = 0;
     while (!sheetNode.isNull()) {
-        KoXmlElement sheetElement = sheetNode.toElement();
+        KXmlElement sheetElement = sheetNode.toElement();
         if (!sheetElement.isNull()) {
             //kDebug()<<"  KCMap::loadOdf tableElement is not null";
             //kDebug()<<"tableElement.nodeName() :"<<sheetElement.nodeName();
@@ -612,7 +612,7 @@ bool KCMap::loadOdf(const KoXmlElement& body, KOdfLoadingContext& odfContext)
     // load the sheet
     sheetNode = body.firstChild();
     while (!sheetNode.isNull()) {
-        KoXmlElement sheetElement = sheetNode.toElement();
+        KXmlElement sheetElement = sheetNode.toElement();
         if (!sheetElement.isNull()) {
             // make it slightly faster
             KoXml::load(sheetElement);
@@ -651,7 +651,7 @@ bool KCMap::loadOdf(const KoXmlElement& body, KOdfLoadingContext& odfContext)
 }
 
 
-bool KCMap::loadXML(const KoXmlElement& mymap)
+bool KCMap::loadXML(const KXmlElement& mymap)
 {
     d->isLoading = true;
     loadingInfo()->setFileFormat(KCLoadingInfo::NativeFormat);
@@ -669,7 +669,7 @@ bool KCMap::loadXML(const KoXmlElement& mymap)
         return false;
     }
     while (!n.isNull()) {
-        KoXmlElement e = n.toElement();
+        KXmlElement e = n.toElement();
         if (!e.isNull() && e.tagName() == "table") {
             KCSheet *t = addNewSheet();
             if (!t->loadXML(e)) {

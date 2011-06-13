@@ -57,7 +57,7 @@ KoShape *EllipseShapeFactory::createDefaultShape(KoResourceManager *) const
     return ellipse;
 }
 
-bool EllipseShapeFactory::supports(const KoXmlElement &e, KoShapeLoadingContext &context) const
+bool EllipseShapeFactory::supports(const KXmlElement &e, KoShapeLoadingContext &context) const
 {
     Q_UNUSED(context);
     return (e.localName() == "ellipse" || e.localName() == "circle")

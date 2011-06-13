@@ -146,7 +146,7 @@ public:
 
     /// returns true if this shapeFactory is able to load the ODF type
     /// started at argument element. ('draw:line' / 'draw:frame' / etc)
-    virtual bool supports(const KoXmlElement &element, KoShapeLoadingContext &context) const = 0;
+    virtual bool supports(const KXmlElement &element, KoShapeLoadingContext &context) const = 0;
 
     /**
      * The hidden boolean requests if the shape should be hidden in the

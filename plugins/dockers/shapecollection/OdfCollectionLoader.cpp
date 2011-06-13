@@ -253,8 +253,8 @@ void OdfCollectionLoader::loadNativeFile(const QString& path)
     // tz: not sure if that is 100% correct what if an image is loaded in the collection it needs a image collection
     m_shapeLoadingContext = new KoShapeLoadingContext(*m_loadingContext, 0);
 
-    KoXmlElement content = m_odfStore->contentDoc().documentElement();
-    KoXmlElement realBody ( KoXml::namedItemNS( content, KOdfXmlNS::office, "body" ) );
+    KXmlElement content = m_odfStore->contentDoc().documentElement();
+    KXmlElement realBody ( KoXml::namedItemNS( content, KOdfXmlNS::office, "body" ) );
 
     if (realBody.isNull()) {
         kError() << "No body tag found!" << endl;

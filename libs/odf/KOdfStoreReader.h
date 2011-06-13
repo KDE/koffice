@@ -28,7 +28,7 @@ class QXmlStreamReader;
 class KOdfStore;
 class KOdfStylesReader;
 class KoXmlDocument;
-class KoXmlElement;
+class KXmlElement;
 
 /**
  * Helper class around KOdfStore for reading out ODF files.

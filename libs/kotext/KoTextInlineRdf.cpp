@@ -138,7 +138,7 @@ KoTextInlineRdf::~KoTextInlineRdf()
     delete d;
 }
 
-bool KoTextInlineRdf::loadOdf(const KoXmlElement &e)
+bool KoTextInlineRdf::loadOdf(const KXmlElement &e)
 {
     d->id = e.attribute("id", QString());
     d->subject = e.attributeNS(KOdfXmlNS::xhtml, "about");

@@ -23,13 +23,13 @@
 #include <QColor>
 
 #include <kdebug.h>
-const QString Filterkpr2odf::createPageStyle(const KoXmlElement& page)
+const QString Filterkpr2odf::createPageStyle(const KXmlElement& page)
 {
     KOdfGenericStyle style(KOdfGenericStyle::DrawingPageStyle, "drawing-page");
 
     bool useMasterBackground = false;
     if (page.nodeName() == "PAGE") {
-        KoXmlElement backMaster = page.namedItem("BACKMASTER").toElement();
+        KXmlElement backMaster = page.namedItem("BACKMASTER").toElement();
         if (!backMaster.isNull()) {
             style.addProperty("presentation:background-visible", backMaster.attribute("displayBackground", "1") == "1");
             style.addProperty("presentation:background-objects-visible", backMaster.attribute("displayMasterPageObject", "1") == "1");
@@ -50,10 +50,10 @@ const QString Filterkpr2odf::createPageStyle(const KoXmlElement& page)
 
     if (!useMasterBackground) {
         //it is not an empty page let's keep loading
-        KoXmlElement backType = page.namedItem("BACKTYPE").toElement();
+        KXmlElement backType = page.namedItem("BACKTYPE").toElement();
         if (backType.isNull() || backType.attribute("value") == "0") {
             //it's some form of color, plain or a gradient
-            KoXmlElement bcType = page.namedItem("BCTYPE").toElement();
+            KXmlElement bcType = page.namedItem("BCTYPE").toElement();
             if (bcType.isNull() || bcType.attribute("value") == "0") {
                 //background is a plain color
                 QString color = page.namedItem("BACKCOLOR1").toElement().attribute("color");
@@ -70,7 +70,7 @@ const QString Filterkpr2odf::createPageStyle(const KoXmlElement& page)
         } else {
             //it's a picture instead
             QString pictureName = getPictureNameFromKey(page.namedItem("BACKPICTUREKEY").toElement());
-            KoXmlElement backView = page.namedItem("BACKVIEW").toElement();
+            KXmlElement backView = page.namedItem("BACKVIEW").toElement();
             style.addProperty("draw:fill", "bitmap");
 
             //The image is specified by a draw:fill-image style in draw:fill-image-name
@@ -99,7 +99,7 @@ const QString Filterkpr2odf::createPageStyle(const KoXmlElement& page)
     }
 
     //Add the duration of the page effect
-    KoXmlElement pageDuration = page.namedItem("PGTIMER").toElement();
+    KXmlElement pageDuration = page.namedItem("PGTIMER").toElement();
     if (!pageDuration.isNull()) {
         QTime time;
         time = time.addSecs(pageDuration.attribute("timer", "0").toInt());
@@ -109,7 +109,7 @@ const QString Filterkpr2odf::createPageStyle(const KoXmlElement& page)
 
     //Add the page effect
     //Enum: PageEffect
-    KoXmlElement pageEffect = page.namedItem("PGEFFECT").toElement();
+    KXmlElement pageEffect = page.namedItem("PGEFFECT").toElement();
     if (!pageEffect.isNull()) {
         QString effectName("none");  //we default to none
         int effect = pageEffect.attribute("value", "0").toInt();
@@ -244,7 +244,7 @@ const QString Filterkpr2odf::createPageStyle(const KoXmlElement& page)
         style.addProperty("presentation:transition-style", effectName);
 
         //Add the sound
-        KoXmlElement soundEffect = page.namedItem("PGSOUNDEFFECT").toElement();
+        KXmlElement soundEffect = page.namedItem("PGSOUNDEFFECT").toElement();
         if (!soundEffect.isNull() && soundEffect.attribute("soundEffect") != "0") {
             //As this is a "complex" tag we add it "manually"
             QBuffer buffer;
@@ -266,7 +266,7 @@ const QString Filterkpr2odf::createPageStyle(const KoXmlElement& page)
     return m_styles.insert(style, "dp");
 }
 
-const QString Filterkpr2odf::createGradientStyle(const KoXmlElement& gradientElement)
+const QString Filterkpr2odf::createGradientStyle(const KXmlElement& gradientElement)
 {
     KOdfGenericStyle style(KOdfGenericStyle::GradientStyle);
 
@@ -277,26 +277,26 @@ const QString Filterkpr2odf::createGradientStyle(const KoXmlElement& gradientEle
     //Check whether the gradient belongs to a page or to an object
     int type = 1;//we default to 1
     if (gradientElement.nodeName() == "PAGE" || gradientElement.nodeName() == "MASTERPAGE") {
-        KoXmlElement backColor1 = gradientElement.namedItem("BACKCOLOR1").toElement();
+        KXmlElement backColor1 = gradientElement.namedItem("BACKCOLOR1").toElement();
         if (!backColor1.isNull()) {
             style.addAttribute("draw:start-color", backColor1.attribute("color"));
         } else {
             style.addAttribute("draw:end-color", "#ffffff");
         }
 
-        KoXmlElement backColor2 = gradientElement.namedItem("BACKCOLOR2").toElement();
+        KXmlElement backColor2 = gradientElement.namedItem("BACKCOLOR2").toElement();
         if (!backColor2.isNull()) {
             style.addAttribute("draw:end-color", backColor2.attribute("color"));
         } else {
             style.addAttribute("draw:end-color", "#ffffff");
         }
 
-        KoXmlElement bcType = gradientElement.namedItem("BCTYPE").toElement();
+        KXmlElement bcType = gradientElement.namedItem("BCTYPE").toElement();
         if (!bcType.isNull()) {
             type = bcType.attribute("value").toInt();
         }
 
-        KoXmlElement bGradient = gradientElement.namedItem("BGRADIENT").toElement();
+        KXmlElement bGradient = gradientElement.namedItem("BGRADIENT").toElement();
         if (!bGradient.isNull()) {
             if (bGradient.attribute("unbalanced") == "0") {
                 style.addAttribute("draw:cx", "50%");
@@ -367,8 +367,8 @@ const QString Filterkpr2odf::createGradientStyle(const KoXmlElement& gradientEle
 const QString Filterkpr2odf::createPageLayout()
 {
     //Create the page-layout that is: paper, header and footer sizes
-    KoXmlElement paper = m_mainDoc.namedItem("DOC").namedItem("PAPER").toElement();
-    KoXmlElement paperBorders = paper.namedItem("PAPERBORDERS").toElement();
+    KXmlElement paper = m_mainDoc.namedItem("DOC").namedItem("PAPER").toElement();
+    KXmlElement paperBorders = paper.namedItem("PAPERBORDERS").toElement();
 
     //page-layout-properties
     KOdfGenericStyle style(KOdfGenericStyle::PageLayoutStyle);
@@ -399,10 +399,10 @@ const QString Filterkpr2odf::createPageLayout()
     return m_styles.insert(style, "pm");
 }
 
-const QString Filterkpr2odf::createMasterPageStyle(const KoXmlNode & objects, const KoXmlElement & masterBackground)
+const QString Filterkpr2odf::createMasterPageStyle(const KoXmlNode & objects, const KXmlElement & masterBackground)
 {
-    //KoXmlElement header( m_mainDoc.namedItem( "DOC" ).namedItem( "HEADER" ).toElement() );
-    //KoXmlElement footer( m_mainDoc.namedItem( "DOC" ).namedItem( "FOOTER" ).toElement() );
+    //KXmlElement header( m_mainDoc.namedItem( "DOC" ).namedItem( "HEADER" ).toElement() );
+    //KXmlElement footer( m_mainDoc.namedItem( "DOC" ).namedItem( "FOOTER" ).toElement() );
 
     // set that we work on master
     m_sticky = true;
@@ -426,11 +426,11 @@ const QString Filterkpr2odf::createMasterPageStyle(const KoXmlNode & objects, co
     return m_styles.insert(style, "Default");
 }
 //TODO: load the tags still missing
-const QString Filterkpr2odf::createGraphicStyle(const KoXmlElement& element)
+const QString Filterkpr2odf::createGraphicStyle(const KXmlElement& element)
 {
     //A graphic style is wiely used by a broad type of objects, hence can have many different properties
     KOdfGenericStyle style(KOdfGenericStyle::GraphicAutoStyle, "graphic");
-    KoXmlElement textObject(element.namedItem("TEXTOBJ").toElement());
+    KXmlElement textObject(element.namedItem("TEXTOBJ").toElement());
     if (!textObject.isNull()) {
         if (textObject.hasAttribute("verticalAlign")) {
             QString textAligment = textObject.attribute("verticalAlign");
@@ -454,7 +454,7 @@ const QString Filterkpr2odf::createGraphicStyle(const KoXmlElement& element)
         }
     }
 
-    KoXmlElement pen = element.namedItem("PEN").toElement();
+    KXmlElement pen = element.namedItem("PEN").toElement();
     if (!pen.isNull()) {
         style.addPropertyPt("svg:stroke-width", pen.attribute("width").toDouble());
         style.addProperty("svg:stroke-color", pen.attribute("color"));
@@ -490,16 +490,16 @@ const QString Filterkpr2odf::createGraphicStyle(const KoXmlElement& element)
     }
 
     //We now define what's the object filled with, we "default" to a brush if both attributes are present
-    KoXmlElement brush = element.namedItem("BRUSH").toElement();
-    KoXmlElement fillType = element.namedItem("FILLTYPE").toElement();
+    KXmlElement brush = element.namedItem("BRUSH").toElement();
+    KXmlElement fillType = element.namedItem("FILLTYPE").toElement();
 
     int fillTypeValue = 0;
     if (! fillType.isNull()) {
         fillTypeValue = fillType.attribute("value").toInt();
     }
 
-    KoXmlElement gradient = element.namedItem("GRADIENT").toElement();
-    KoXmlElement filename = element.namedItem("FILENAME").toElement();
+    KXmlElement gradient = element.namedItem("GRADIENT").toElement();
+    KXmlElement filename = element.namedItem("FILENAME").toElement();
     bool isConnection = filename.attribute("value").startsWith("Connections");
     QString fill;
     if (!brush.isNull() && !isConnection && fillTypeValue == 0) {
@@ -543,7 +543,7 @@ const QString Filterkpr2odf::createGraphicStyle(const KoXmlElement& element)
         style.addProperty("draw:fill", fill);
     }
 
-    KoXmlElement lineBegin = element.namedItem("LINEBEGIN").toElement();
+    KXmlElement lineBegin = element.namedItem("LINEBEGIN").toElement();
     if (!lineBegin.isNull()) {
         style.addProperty("draw:marker-start-width", "0.25cm");
 
@@ -551,7 +551,7 @@ const QString Filterkpr2odf::createGraphicStyle(const KoXmlElement& element)
         style.addProperty("draw:marker-start", createMarkerStyle(markerStyle));
     }
 
-    KoXmlElement lineEnd = element.namedItem("LINEEND").toElement();
+    KXmlElement lineEnd = element.namedItem("LINEEND").toElement();
     if (!lineEnd.isNull()) {
         style.addProperty("draw:marker-end-width", "0.25cm");
 
@@ -559,7 +559,7 @@ const QString Filterkpr2odf::createGraphicStyle(const KoXmlElement& element)
         style.addProperty("draw:marker-end", createMarkerStyle(markerStyle));
     }
 
-    KoXmlElement shadow = element.namedItem("SHADOW").toElement();
+    KXmlElement shadow = element.namedItem("SHADOW").toElement();
     if (!shadow.isNull()) {
         style.addProperty("draw:shadow", "visible");
         style.addProperty("draw:shadow-color", shadow.attribute("color"));
@@ -608,7 +608,7 @@ const QString Filterkpr2odf::createGraphicStyle(const KoXmlElement& element)
     }
 
     //If what we're loading is the style for an image and some form of mirror, luminance, greyscale... is applied to it we must load it in the GrpahicStyle
-    KoXmlElement pictureSettings = element.namedItem("PICTURESETTINGS").toElement();
+    KXmlElement pictureSettings = element.namedItem("PICTURESETTINGS").toElement();
     if (!pictureSettings.isNull()) {
         int mirrorType = pictureSettings.attribute("mirrorType", "0").toInt();
         QString mirror;
@@ -846,7 +846,7 @@ const QString Filterkpr2odf::createHatchStyle(int brushStyle, QString fillColor)
     return m_styles.insert(style, "hs");
 }
 
-const QString Filterkpr2odf::createParagraphStyle(const KoXmlElement& element)
+const QString Filterkpr2odf::createParagraphStyle(const KXmlElement& element)
 {
     KOdfGenericStyle style(KOdfGenericStyle::ParagraphAutoStyle, "paragraph");
 
@@ -872,7 +872,7 @@ const QString Filterkpr2odf::createParagraphStyle(const KoXmlElement& element)
         style.addProperty("fo:text-align", textAlign);
     }
 
-    KoXmlElement indents = element.namedItem("INDENTS").toElement();
+    KXmlElement indents = element.namedItem("INDENTS").toElement();
     if (!indents.isNull()) {
         QString marginLeft = QString("%1pt").arg(indents.attribute("left").toDouble());
         QString marginRight = QString("%1pt").arg(indents.attribute("right").toDouble());
@@ -889,7 +889,7 @@ const QString Filterkpr2odf::createParagraphStyle(const KoXmlElement& element)
         }
     }
 
-    KoXmlElement offsets = element.namedItem("OFFSETS").toElement();
+    KXmlElement offsets = element.namedItem("OFFSETS").toElement();
     if (!offsets.isNull()) {
         if (offsets.hasAttribute("before")) {
             style.addPropertyPt("fo:margin-top", offsets.attribute("before").toDouble());
@@ -899,7 +899,7 @@ const QString Filterkpr2odf::createParagraphStyle(const KoXmlElement& element)
         }
     }
 
-    KoXmlElement lineSpacing = element.namedItem("LINESPACING").toElement();
+    KXmlElement lineSpacing = element.namedItem("LINESPACING").toElement();
     if (!lineSpacing.isNull()) {
         QString type = lineSpacing.attribute("type");
         QString lineHeight;
@@ -930,10 +930,10 @@ const QString Filterkpr2odf::createParagraphStyle(const KoXmlElement& element)
         }
     }
 
-    KoXmlElement leftBorder = element.namedItem("LEFTBORDER").toElement();
-    KoXmlElement rightBorder = element.namedItem("RIGHTBORDER").toElement();
-    KoXmlElement topBorder = element.namedItem("TOPBORDER").toElement();
-    KoXmlElement bottomBorder = element.namedItem("BOTTOMBORDER").toElement();
+    KXmlElement leftBorder = element.namedItem("LEFTBORDER").toElement();
+    KXmlElement rightBorder = element.namedItem("RIGHTBORDER").toElement();
+    KXmlElement topBorder = element.namedItem("TOPBORDER").toElement();
+    KXmlElement bottomBorder = element.namedItem("BOTTOMBORDER").toElement();
     if (!leftBorder.isNull()) {
         style.addProperty("fo:border-left", convertBorder(leftBorder));
     }
@@ -950,7 +950,7 @@ const QString Filterkpr2odf::createParagraphStyle(const KoXmlElement& element)
     return m_styles.insert(style, "P");
 }
 
-QString Filterkpr2odf::convertBorder(const KoXmlElement& border)
+QString Filterkpr2odf::convertBorder(const KXmlElement& border)
 {
     QString style;
     int styleInt = border.attribute("style").toInt();
@@ -966,7 +966,7 @@ QString Filterkpr2odf::convertBorder(const KoXmlElement& border)
     return QString("%1 %2 %3").arg(width).arg(style).arg(color.name());
 }
 
-const QString Filterkpr2odf::createTextStyle(const KoXmlElement& element)
+const QString Filterkpr2odf::createTextStyle(const KXmlElement& element)
 {
     KOdfGenericStyle style(KOdfGenericStyle::TextAutoStyle, "text");
 
@@ -1061,7 +1061,7 @@ const QString Filterkpr2odf::createTextStyle(const KoXmlElement& element)
     return m_styles.insert(style, "T");
 }
 
-const QString Filterkpr2odf::createListStyle(const KoXmlElement& element)
+const QString Filterkpr2odf::createListStyle(const KXmlElement& element)
 {
     KOdfGenericStyle style(KOdfGenericStyle::ListAutoStyle);
 
@@ -1073,7 +1073,7 @@ const QString Filterkpr2odf::createListStyle(const KoXmlElement& element)
             0x27A2  // box -> right-pointing triangle
                                              };
 
-    KoXmlElement counter = element.namedItem("COUNTER").toElement();
+    KXmlElement counter = element.namedItem("COUNTER").toElement();
 
     QBuffer buffer;
     buffer.open(QIODevice::WriteOnly);

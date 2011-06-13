@@ -41,7 +41,7 @@ KoPAPastePage::KoPAPastePage(KoPADocument * doc, KoPAPageBase * activePage)
 {
 }
 
-bool KoPAPastePage::process(const KoXmlElement &body, KOdfStoreReader &odfStore)
+bool KoPAPastePage::process(const KXmlElement &body, KOdfStoreReader &odfStore)
 {
     KOdfLoadingContext loadingContext(odfStore.styles(), odfStore.store(), m_doc->componentData());
     KoPALoadingContext paContext(loadingContext, m_doc->resourceManager());

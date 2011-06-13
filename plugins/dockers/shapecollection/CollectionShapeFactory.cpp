@@ -73,15 +73,15 @@ KoShape *CollectionShapeFactory::createDefaultShape(KoResourceManager *documentR
             return 0;
         }
 
-        KoXmlElement content = odfStore.contentDoc().documentElement();
-        KoXmlElement realBody( KoXml::namedItemNS( content, KOdfXmlNS::office, "body" ) );
+        KXmlElement content = odfStore.contentDoc().documentElement();
+        KXmlElement realBody( KoXml::namedItemNS( content, KOdfXmlNS::office, "body" ) );
 
         if ( realBody.isNull() ) {
             kError() << "No body tag found!" << endl;
             return 0;
         }
 
-        KoXmlElement body = KoXml::namedItemNS( realBody, KOdfXmlNS::office, KOdf::bodyContentElement( KOdf::TextDocument, false ) );
+        KXmlElement body = KoXml::namedItemNS( realBody, KOdfXmlNS::office, KOdf::bodyContentElement( KOdf::TextDocument, false ) );
 
         if ( body.isNull() ) {
             kError() << "No" << KOdf::bodyContentElement(KOdf::TextDocument, true ) << "tag found!" << endl;
@@ -91,7 +91,7 @@ KoShape *CollectionShapeFactory::createDefaultShape(KoResourceManager *documentR
         KOdfLoadingContext loadingContext(odfStore.styles(), odfStore.store());
         KoShapeLoadingContext context(loadingContext, documentResources);
 
-        KoXmlElement element;
+        KXmlElement element;
 
         forEachElement(element, body)
         {
@@ -107,7 +107,7 @@ KoShape *CollectionShapeFactory::createDefaultShape(KoResourceManager *documentR
     return shape;
 }
 
-bool CollectionShapeFactory::supports(const KoXmlElement &e, KoShapeLoadingContext &context) const
+bool CollectionShapeFactory::supports(const KXmlElement &e, KoShapeLoadingContext &context) const
 {
     Q_UNUSED(e);
     Q_UNUSED(context);

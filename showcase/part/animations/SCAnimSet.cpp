@@ -44,7 +44,7 @@ SCAnimSet::~SCAnimSet()
 {
 }
 
-bool SCAnimSet::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
+bool SCAnimSet::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
 {
     bool retval = false;
 

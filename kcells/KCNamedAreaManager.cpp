@@ -169,12 +169,12 @@ void KCNamedAreaManager::updateAllNamedAreas()
     }
 }
 
-void KCNamedAreaManager::loadOdf(const KoXmlElement& body)
+void KCNamedAreaManager::loadOdf(const KXmlElement& body)
 {
     KoXmlNode namedAreas = KoXml::namedItemNS(body, KOdfXmlNS::table, "named-expressions");
     if (!namedAreas.isNull()) {
         kDebug(36003) << "Loading named areas...";
-        KoXmlElement element;
+        KXmlElement element;
         forEachElement(element, namedAreas) {
             if (element.namespaceURI() != KOdfXmlNS::table)
                 continue;
@@ -232,9 +232,9 @@ void KCNamedAreaManager::saveOdf(KXmlWriter& xmlWriter) const
     xmlWriter.endElement();
 }
 
-void KCNamedAreaManager::loadXML(const KoXmlElement& parent)
+void KCNamedAreaManager::loadXML(const KXmlElement& parent)
 {
-    KoXmlElement element;
+    KXmlElement element;
     forEachElement(element, parent) {
         if (element.tagName() == "reference") {
             KCSheet* sheet = 0;
@@ -244,15 +244,15 @@ void KCNamedAreaManager::loadXML(const KoXmlElement& parent)
             int right = 0;
             int top = 0;
             int bottom = 0;
-            KoXmlElement sheetName = element.namedItem("tabname").toElement();
+            KXmlElement sheetName = element.namedItem("tabname").toElement();
             if (!sheetName.isNull())
                 sheet = d->map->findSheet(sheetName.text());
             if (!sheet)
                 continue;
-            KoXmlElement referenceName = element.namedItem("refname").toElement();
+            KXmlElement referenceName = element.namedItem("refname").toElement();
             if (!referenceName.isNull())
                 refname = referenceName.text();
-            KoXmlElement rect = element.namedItem("rect").toElement();
+            KXmlElement rect = element.namedItem("rect").toElement();
             if (!rect.isNull()) {
                 bool ok;
                 if (rect.hasAttribute("left-rect"))

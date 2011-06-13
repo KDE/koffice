@@ -196,7 +196,7 @@ void KCStyle::loadAttributes(const QList<KCSharedSubStyle>& subStyles)
     }
 }
 
-void KCStyle::loadOdfStyle(KOdfStylesReader& stylesReader, const KoXmlElement& element,
+void KCStyle::loadOdfStyle(KOdfStylesReader& stylesReader, const KXmlElement& element,
                          KCConditions& conditions, const KCStyleManager* styleManager,
                          const KCValueParser *parser)
 {
@@ -210,7 +210,7 @@ void KCStyle::loadOdfStyle(KOdfStylesReader& stylesReader, const KoXmlElement& e
     styleStack.setTypeProperties("paragraph");
     loadOdfParagraphProperties(stylesReader, styleStack);
 
-    KoXmlElement e;
+    KXmlElement e;
     forEachElement(e, element) {
         if (e.namespaceURI() == KOdfXmlNS::style && e.localName() == "map")
             conditions.loadOdfConditions(e, parser, styleManager);
@@ -221,7 +221,7 @@ void KCStyle::loadOdfStyle(KOdfStylesReader& stylesReader, const KoXmlElement& e
 
 typedef QPair<QString,QString> StringPair;
 
-void KCStyle::loadOdfDataStyle(KOdfStylesReader& stylesReader, const KoXmlElement& element,
+void KCStyle::loadOdfDataStyle(KOdfStylesReader& stylesReader, const KXmlElement& element,
                              KCConditions& conditions, const KCStyleManager* styleManager,
                              const KCValueParser *parser)
 {
@@ -237,7 +237,7 @@ void KCStyle::loadOdfDataStyle(KOdfStylesReader &stylesReader, const QString &st
     if (stylesReader.dataFormats().contains(styleName)) {
         KCStyle* theStyle = this;
 
-        QPair<KOdf::NumericStyleFormat, KoXmlElement*> dataStylePair = stylesReader.dataFormats()[styleName];
+        QPair<KOdf::NumericStyleFormat, KXmlElement*> dataStylePair = stylesReader.dataFormats()[styleName];
 
         const KOdf::NumericStyleFormat& dataStyle = dataStylePair.first;
         const QList<QPair<QString,QString> > styleMaps = dataStyle.styleMaps;
@@ -469,7 +469,7 @@ void KCStyle::loadOdfTableCellProperties(KOdfStylesReader& stylesReader, const K
     if (styleStack.hasProperty(KOdfXmlNS::draw, "style-name")) {
         kDebug(36003) << " style name :" << styleStack.property(KOdfXmlNS::draw, "style-name");
 
-        const KoXmlElement * style = stylesReader.findStyle(styleStack.property(KOdfXmlNS::draw, "style-name"), "graphic");
+        const KXmlElement * style = stylesReader.findStyle(styleStack.property(KOdfXmlNS::draw, "style-name"), "graphic");
         kDebug(36003) << " style :" << style;
         if (style) {
             KOdfStyleStack drawStyleStack;
@@ -548,7 +548,7 @@ void KCStyle::loadOdfTextProperties(KOdfStylesReader& stylesReader, const KOdfSt
     if (styleStack.hasProperty(KOdfXmlNS::style, "font-name")) {
         QString fontName = styleStack.property(KOdfXmlNS::style, "font-name");
         kDebug(36003) << "\t\t style:font-name:" << fontName;
-        const KoXmlElement * style = stylesReader.findStyle(fontName);
+        const KXmlElement * style = stylesReader.findStyle(fontName);
         // TODO: sanity check that it is a font-face style?
         kDebug(36003) << "\t\t\t style:" <<  style;
         if (style) {
@@ -1605,7 +1605,7 @@ void KCStyle::saveXML(QDomDocument& doc, QDomElement& format, const KCStyleManag
     }
 }
 
-bool KCStyle::loadXML(KoXmlElement& format, Paste::Mode mode)
+bool KCStyle::loadXML(KXmlElement& format, Paste::Mode mode)
 {
     if (format.hasAttribute("style-name")) {
         // Simply set the style name and we are done.
@@ -1729,7 +1729,7 @@ bool KCStyle::loadXML(KoXmlElement& format, Paste::Mode mode)
     }
 
     if (type() == AUTO) {
-        KoXmlElement fontElement = format.namedItem("font").toElement();
+        KXmlElement fontElement = format.namedItem("font").toElement();
         if (!fontElement.isNull()) {
             QFont font(KCells::NativeFormat::toFont(fontElement));
             setFontFamily(font.family());
@@ -1786,50 +1786,50 @@ bool KCStyle::loadXML(KoXmlElement& format, Paste::Mode mode)
         setBackgroundBrush(brush);
     }
 
-    KoXmlElement pen = format.namedItem("pen").toElement();
+    KXmlElement pen = format.namedItem("pen").toElement();
     if (!pen.isNull()) {
         setFontColor(KCells::NativeFormat::toPen(pen).color());
     }
 
     if (mode != Paste::NoBorder) {
-        KoXmlElement left = format.namedItem("left-border").toElement();
+        KXmlElement left = format.namedItem("left-border").toElement();
         if (!left.isNull()) {
-            KoXmlElement pen = left.namedItem("pen").toElement();
+            KXmlElement pen = left.namedItem("pen").toElement();
             if (!pen.isNull())
                 setLeftBorderPen(KCells::NativeFormat::toPen(pen));
         }
 
-        KoXmlElement top = format.namedItem("top-border").toElement();
+        KXmlElement top = format.namedItem("top-border").toElement();
         if (!top.isNull()) {
-            KoXmlElement pen = top.namedItem("pen").toElement();
+            KXmlElement pen = top.namedItem("pen").toElement();
             if (!pen.isNull())
                 setTopBorderPen(KCells::NativeFormat::toPen(pen));
         }
 
-        KoXmlElement right = format.namedItem("right-border").toElement();
+        KXmlElement right = format.namedItem("right-border").toElement();
         if (!right.isNull()) {
-            KoXmlElement pen = right.namedItem("pen").toElement();
+            KXmlElement pen = right.namedItem("pen").toElement();
             if (!pen.isNull())
                 setRightBorderPen(KCells::NativeFormat::toPen(pen));
         }
 
-        KoXmlElement bottom = format.namedItem("bottom-border").toElement();
+        KXmlElement bottom = format.namedItem("bottom-border").toElement();
         if (!bottom.isNull()) {
-            KoXmlElement pen = bottom.namedItem("pen").toElement();
+            KXmlElement pen = bottom.namedItem("pen").toElement();
             if (!pen.isNull())
                 setBottomBorderPen(KCells::NativeFormat::toPen(pen));
         }
 
-        KoXmlElement fallDiagonal = format.namedItem("fall-diagonal").toElement();
+        KXmlElement fallDiagonal = format.namedItem("fall-diagonal").toElement();
         if (!fallDiagonal.isNull()) {
-            KoXmlElement pen = fallDiagonal.namedItem("pen").toElement();
+            KXmlElement pen = fallDiagonal.namedItem("pen").toElement();
             if (!pen.isNull())
                 setFallDiagonalPen(KCells::NativeFormat::toPen(pen));
         }
 
-        KoXmlElement goUpDiagonal = format.namedItem("up-diagonal").toElement();
+        KXmlElement goUpDiagonal = format.namedItem("up-diagonal").toElement();
         if (!goUpDiagonal.isNull()) {
-            KoXmlElement pen = goUpDiagonal.namedItem("pen").toElement();
+            KXmlElement pen = goUpDiagonal.namedItem("pen").toElement();
             if (!pen.isNull())
                 setGoUpDiagonalPen(KCells::NativeFormat::toPen(pen));
         }
@@ -2752,7 +2752,7 @@ QString KCCustomStyle::saveOdf(KOdfGenericStyle& style, KOdfGenericStyles &mainS
     return mainStyles.insert(style, "custom-style");
 }
 
-void KCCustomStyle::loadOdf(KOdfStylesReader& stylesReader, const KoXmlElement& style,
+void KCCustomStyle::loadOdf(KOdfStylesReader& stylesReader, const KXmlElement& style,
                           const QString& name, KCConditions& conditions,
                           const KCStyleManager* styleManager, const KCValueParser *parser)
 {
@@ -2783,7 +2783,7 @@ void KCCustomStyle::save(QDomDocument& doc, QDomElement& styles, const KCStyleMa
     styles.appendChild(style);
 }
 
-bool KCCustomStyle::loadXML(KoXmlElement const & style, QString const & name)
+bool KCCustomStyle::loadXML(KXmlElement const & style, QString const & name)
 {
     setName(name);
 
@@ -2798,7 +2798,7 @@ bool KCCustomStyle::loadXML(KoXmlElement const & style, QString const & name)
     if (!ok)
         return false;
 
-    KoXmlElement f(style.namedItem("format").toElement());
+    KXmlElement f(style.namedItem("format").toElement());
     if (!f.isNull())
         if (!KCStyle::loadXML(f))
             return false;

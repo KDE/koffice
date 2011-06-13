@@ -24,7 +24,7 @@
 
 #include <QtCore/QDebug>
 
-class KoXmlElement;
+class KXmlElement;
 class KoShape;
 
 /**
@@ -72,9 +72,9 @@ public:
             right + other.right);
     }
 
-    //void saveTo(KoXmlElement &element, const QString &prefix);
+    //void saveTo(KXmlElement &element, const QString &prefix);
     void saveTo(KoShape *shape, const QString &prefix) const;
-    void fillFrom(const KoXmlElement &element, const QString &NS, const QString &attributePrefix);
+    void fillFrom(const KXmlElement &element, const QString &NS, const QString &attributePrefix);
 
     qreal top;     ///< Top inset
     qreal bottom;  ///< Bottom inset

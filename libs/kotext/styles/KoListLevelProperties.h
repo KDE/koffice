@@ -158,7 +158,7 @@ public:
     /**
      * Load the properties from the \p style using the OpenDocument format.
      */
-    void loadOdf(KoShapeLoadingContext& scontext, const KoXmlElement& style);
+    void loadOdf(KoShapeLoadingContext& scontext, const KXmlElement& style);
 
     /**
      * Save the properties of the style using the OpenDocument format

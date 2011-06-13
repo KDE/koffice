@@ -84,11 +84,11 @@ void KoShapeGroup::saveOdf(KoShapeSavingContext & context) const
     context.xmlWriter().endElement();
 }
 
-bool KoShapeGroup::loadOdf(const KoXmlElement & element, KoShapeLoadingContext &context)
+bool KoShapeGroup::loadOdf(const KXmlElement & element, KoShapeLoadingContext &context)
 {
     loadOdfAttributes(element, context, OdfMandatories | OdfAdditionalAttributes | OdfCommonChildElements);
 
-    KoXmlElement child;
+    KXmlElement child;
     QMap<KoShapeLayer*, int> usedLayers;
     forEachElement(child, element) {
         KoShape * shape = KoShapeRegistry::instance()->createShapeFromOdf(child, context);

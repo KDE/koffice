@@ -92,13 +92,13 @@ public:
     /// reimplemented from KoFilterEffect
     virtual QImage processImage(const QImage &image, const KoFilterEffectRenderContext &context) const;
     /// reimplemented from KoFilterEffect
-    virtual bool load(const KoXmlElement &element, const KoFilterEffectLoadingContext &context);
+    virtual bool load(const KXmlElement &element, const KoFilterEffectLoadingContext &context);
     /// reimplemented from KoFilterEffect
     virtual void save(KXmlWriter &writer);
 
 private:
     /// loads channel transfer function from given xml element
-    void loadChannel(Channel channel, const KoXmlElement &element);
+    void loadChannel(Channel channel, const KXmlElement &element);
 
     /// saves channel transfer function to given xml writer
     void saveChannel(Channel channel, KXmlWriter &writer);

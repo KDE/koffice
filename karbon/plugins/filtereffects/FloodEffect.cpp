@@ -51,7 +51,7 @@ QImage FloodEffect::processImage(const QImage &image, const KoFilterEffectRender
     return result;
 }
 
-bool FloodEffect::load(const KoXmlElement &element, const KoFilterEffectLoadingContext &)
+bool FloodEffect::load(const KXmlElement &element, const KoFilterEffectLoadingContext &)
 {
     if (element.tagName() != id())
         return false;

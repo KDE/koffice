@@ -160,12 +160,12 @@ void KoInlineNote::paint(QPainter &painter, QPaintDevice *pd, const QRectF &rect
     layout.draw(&painter, rect.topLeft());
 }
 
-bool KoInlineNote::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
+bool KoInlineNote::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
 {
     return loadOdf(element, context, 0, 0);
 }
 
-bool KoInlineNote::loadOdf(const KoXmlElement & element, KoShapeLoadingContext &context, KoStyleManager *styleManager, KoChangeTracker *changeTracker)
+bool KoInlineNote::loadOdf(const KXmlElement & element, KoShapeLoadingContext &context, KoStyleManager *styleManager, KoChangeTracker *changeTracker)
 {
     QTextDocument *document = new QTextDocument();
     QTextCursor cursor(document);
@@ -193,7 +193,7 @@ bool KoInlineNote::loadOdf(const KoXmlElement & element, KoShapeLoadingContext &
         d->id = element.attributeNS(KOdfXmlNS::text, "id");
         for (KoXmlNode node = element.firstChild(); !node.isNull(); node = node.nextSibling()) {
             setAutoNumbering(false);
-            KoXmlElement ts = node.toElement();
+            KXmlElement ts = node.toElement();
             if (ts.namespaceURI() != KOdfXmlNS::text)
                 continue;
             if (ts.localName() == "note-body") {

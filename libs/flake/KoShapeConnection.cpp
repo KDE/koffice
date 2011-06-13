@@ -542,7 +542,7 @@ void KoShapeConnection::setEndPoint(KoShape *shape, int gluePointIndex)
     d->foul();
 }
 
-bool KoShapeConnection::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
+bool KoShapeConnection::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
 {
     QString type = element.attributeNS(KOdfXmlNS::draw, "type", "standard");
     delete d->connectionStrategy;

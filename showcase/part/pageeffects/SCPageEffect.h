@@ -33,7 +33,7 @@ class QGraphicsView;
 class KXmlWriter;
 class KOdfGenericStyle;
 class SCPageEffectStrategy;
-class KoXmlElement;
+class KXmlElement;
 
 /**
  * This is the base class for all page effects.
@@ -162,7 +162,7 @@ public:
      * Only generic data is loaded here. e.g. the duration of the effect
      * is loaded here
      */
-    void loadOdf(const KoXmlElement &element);
+    void loadOdf(const KXmlElement &element);
 
 protected:
     int m_duration;

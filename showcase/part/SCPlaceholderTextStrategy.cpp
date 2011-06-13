@@ -119,7 +119,7 @@ void SCPlaceholderTextStrategy::saveOdf(KoShapeSavingContext &context)
     SCPlaceholderStrategy::saveOdf(context);
 }
 
-bool SCPlaceholderTextStrategy::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
+bool SCPlaceholderTextStrategy::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
 {
 kDebug();
     if (KoTextSharedLoadingData *textSharedData = dynamic_cast<KoTextSharedLoadingData *>(context.sharedData(KOTEXT_SHARED_LOADING_ID))) {
@@ -136,7 +136,7 @@ kDebug();
 
         const QString styleName = element.attributeNS(KOdfXmlNS::presentation, "style-name");
         if (!styleName.isEmpty()) {
-            const KoXmlElement *style = context.odfLoadingContext().stylesReader().findStyle(styleName, "presentation", context.odfLoadingContext().useStylesAutoStyles());
+            const KXmlElement *style = context.odfLoadingContext().stylesReader().findStyle(styleName, "presentation", context.odfLoadingContext().useStylesAutoStyles());
 
             if (style) {
                 KoParagraphStyle paragraphStyle;

@@ -173,7 +173,7 @@ protected:
      * @param shape a shape that has finished loading.
      * @param element the xml element that represents the shape being inserted.
      */
-    virtual void shapeInserted(KoShape *shape, const KoXmlElement &element, KoShapeLoadingContext &context);
+    virtual void shapeInserted(KoShape *shape, const KXmlElement &element, KoShapeLoadingContext &context);
 
 private:
     enum StyleType {
@@ -181,52 +181,52 @@ private:
         StylesDotXml = 2
     };
     // helper functions for loading of paragraph styles
-    void addParagraphStyles(KoShapeLoadingContext &context, QList<KoXmlElement*> styleElements, int styleTypes,
+    void addParagraphStyles(KoShapeLoadingContext &context, QList<KXmlElement*> styleElements, int styleTypes,
                             KoStyleManager *styleManager = 0);
-    QList<QPair<QString, KoParagraphStyle *> > loadParagraphStyles(KoShapeLoadingContext &context, QList<KoXmlElement*> styleElements,
+    QList<QPair<QString, KoParagraphStyle *> > loadParagraphStyles(KoShapeLoadingContext &context, QList<KXmlElement*> styleElements,
             int styleTypes, KoStyleManager *manager = 0);
 
-    void addDefaultParagraphStyle(KoShapeLoadingContext &context, const KoXmlElement *styleElem, const KoXmlElement *appDefault, KoStyleManager *styleManager);
+    void addDefaultParagraphStyle(KoShapeLoadingContext &context, const KXmlElement *styleElem, const KXmlElement *appDefault, KoStyleManager *styleManager);
 
     // helper functions for loading of character styles
-    void addCharacterStyles(KoShapeLoadingContext &context, QList<KoXmlElement*> styleElements, int styleTypes,
+    void addCharacterStyles(KoShapeLoadingContext &context, QList<KXmlElement*> styleElements, int styleTypes,
                             KoStyleManager *styleManager = 0);
     struct OdfCharStyle {
         QString odfName;
         QString parentStyle;
         KoCharacterStyle *style;
     };
-    QList<OdfCharStyle> loadCharacterStyles(KoShapeLoadingContext &context, QList<KoXmlElement*> styleElements, KoStyleManager *sm);
+    QList<OdfCharStyle> loadCharacterStyles(KoShapeLoadingContext &context, QList<KXmlElement*> styleElements, KoStyleManager *sm);
 
     // helper functions for loading of list styles
-    void addListStyles(KoShapeLoadingContext &context, QList<KoXmlElement*> styleElements, int styleTypes,
+    void addListStyles(KoShapeLoadingContext &context, QList<KXmlElement*> styleElements, int styleTypes,
                        KoStyleManager *styleManager = 0);
-    QList<QPair<QString, KoListStyle *> > loadListStyles(KoShapeLoadingContext &context, QList<KoXmlElement*> styleElements, KoStyleManager *styleManager);
+    QList<QPair<QString, KoListStyle *> > loadListStyles(KoShapeLoadingContext &context, QList<KXmlElement*> styleElements, KoStyleManager *styleManager);
 
     // helper functions for loading of table styles
-    void addTableStyles(KOdfLoadingContext &context, QList<KoXmlElement*> styleElements, int styleTypes,
+    void addTableStyles(KOdfLoadingContext &context, QList<KXmlElement*> styleElements, int styleTypes,
                        KoStyleManager *styleManager = 0);
-    QList<QPair<QString, KoTableStyle *> > loadTableStyles(KOdfLoadingContext &context, QList<KoXmlElement*> styleElements);
+    QList<QPair<QString, KoTableStyle *> > loadTableStyles(KOdfLoadingContext &context, QList<KXmlElement*> styleElements);
 
     // helper functions for loading of table column styles
-    void addTableColumnStyles(KOdfLoadingContext &context, QList<KoXmlElement*> styleElements, int styleTypes,
+    void addTableColumnStyles(KOdfLoadingContext &context, QList<KXmlElement*> styleElements, int styleTypes,
                        KoStyleManager *styleManager = 0);
-    QList<QPair<QString, KoTableColumnStyle *> > loadTableColumnStyles(KOdfLoadingContext &context, QList<KoXmlElement*> styleElements);
+    QList<QPair<QString, KoTableColumnStyle *> > loadTableColumnStyles(KOdfLoadingContext &context, QList<KXmlElement*> styleElements);
 
     // helper functions for loading of table row styles
-    void addTableRowStyles(KOdfLoadingContext &context, QList<KoXmlElement*> styleElements, int styleTypes,
+    void addTableRowStyles(KOdfLoadingContext &context, QList<KXmlElement*> styleElements, int styleTypes,
                        KoStyleManager *styleManager = 0);
-    QList<QPair<QString, KoTableRowStyle *> > loadTableRowStyles(KOdfLoadingContext &context, QList<KoXmlElement*> styleElements);
+    QList<QPair<QString, KoTableRowStyle *> > loadTableRowStyles(KOdfLoadingContext &context, QList<KXmlElement*> styleElements);
 
     // helper functions for loading of table cell styles
-    void addTableCellStyles(KOdfLoadingContext &context, QList<KoXmlElement*> styleElements, int styleTypes,
+    void addTableCellStyles(KOdfLoadingContext &context, QList<KXmlElement*> styleElements, int styleTypes,
                        KoStyleManager *styleManager = 0);
-    QList<QPair<QString, KoTableCellStyle *> > loadTableCellStyles(KOdfLoadingContext &context, QList<KoXmlElement*> styleElements);
+    QList<QPair<QString, KoTableCellStyle *> > loadTableCellStyles(KOdfLoadingContext &context, QList<KXmlElement*> styleElements);
 
     // helper functions for loading of section styles
-    void addSectionStyles(KOdfLoadingContext &context, QList<KoXmlElement*> styleElements, int styleTypes,
+    void addSectionStyles(KOdfLoadingContext &context, QList<KXmlElement*> styleElements, int styleTypes,
                        KoStyleManager *styleManager = 0);
-    QList<QPair<QString, KoSectionStyle *> > loadSectionStyles(KOdfLoadingContext &context, QList<KoXmlElement*> styleElements);
+    QList<QPair<QString, KoSectionStyle *> > loadSectionStyles(KOdfLoadingContext &context, QList<KXmlElement*> styleElements);
 
     void addOutlineStyle(KoShapeLoadingContext & context, KoStyleManager *styleManager);
 

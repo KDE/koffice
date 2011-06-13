@@ -80,7 +80,7 @@ const KOdfPageLayoutData &KoPAPage::pageLayout() const
     return m_masterPage->pageLayout();
 }
 
-void KoPAPage::loadOdfPageTag(const KoXmlElement &element, KoPALoadingContext &loadingContext)
+void KoPAPage::loadOdfPageTag(const KXmlElement &element, KoPALoadingContext &loadingContext)
 {
     QString master = element.attributeNS (KOdfXmlNS::draw, "master-page-name");
     KoPAMasterPage *masterPage = loadingContext.masterPageByName(master);

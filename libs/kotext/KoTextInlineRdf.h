@@ -33,7 +33,7 @@ class KoTextInlineRdf;
 class RdfSemanticItem;
 class RdfFoaF;
 class KoTextEditor;
-class KoXmlElement;
+class KXmlElement;
 
 /**
  * @short Store information from xhtml:property etc which are for inline Rdf
@@ -96,7 +96,7 @@ public:
      */
     static void attach(KoTextInlineRdf *inlineRdf, QTextCursor &cursor);
 
-    bool loadOdf(const KoXmlElement &element);
+    bool loadOdf(const KXmlElement &element);
     bool saveOdf(KoShapeSavingContext &context, KXmlWriter *writer);
 
     /**

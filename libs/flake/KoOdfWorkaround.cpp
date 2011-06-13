@@ -45,7 +45,7 @@ void KoOdfWorkaround::fixPenWidth(QPen & pen, KoShapeLoadingContext &context)
     }
 }
 
-void KoOdfWorkaround::fixEnhancedPath(QString & path, const KoXmlElement &element, KoShapeLoadingContext &context)
+void KoOdfWorkaround::fixEnhancedPath(QString & path, const KXmlElement &element, KoShapeLoadingContext &context)
 {
     if (context.odfLoadingContext().generatorType() == KOdfLoadingContext::OpenOffice) {
         if (path.isEmpty() && element.attributeNS(KOdfXmlNS::draw, "type", "") == "ellipse") {
@@ -54,7 +54,7 @@ void KoOdfWorkaround::fixEnhancedPath(QString & path, const KoXmlElement &elemen
     }
 }
 
-void KoOdfWorkaround::fixEnhancedPathPolarHandlePosition(QString &position, const KoXmlElement &element, KoShapeLoadingContext &context)
+void KoOdfWorkaround::fixEnhancedPathPolarHandlePosition(QString &position, const KXmlElement &element, KoShapeLoadingContext &context)
 {
     if (context.odfLoadingContext().generatorType() == KOdfLoadingContext::OpenOffice) {
         if (element.hasAttributeNS(KOdfXmlNS::draw, "handle-polar")) {
@@ -66,7 +66,7 @@ void KoOdfWorkaround::fixEnhancedPathPolarHandlePosition(QString &position, cons
     }
 }
 
-QColor KoOdfWorkaround::fixMissingFillColor(const KoXmlElement &element, KoShapeLoadingContext &context)
+QColor KoOdfWorkaround::fixMissingFillColor(const KXmlElement &element, KoShapeLoadingContext &context)
 {
     // Default to an invalid color
     QColor color;
@@ -87,8 +87,8 @@ QColor KoOdfWorkaround::fixMissingFillColor(const KoXmlElement &element, KoShape
                 color = QColor(styleStack.property(KOdfXmlNS::draw, "fill-color"));
             } else if (!hasStyle || (!styleStack.hasProperty(KOdfXmlNS::draw, "fill")
                                     && !styleStack.hasProperty(KOdfXmlNS::draw, "fill-color"))) {
-                KoXmlElement plotAreaElement = element.parentNode().toElement();
-                KoXmlElement chartElement = plotAreaElement.parentNode().toElement();
+                KXmlElement plotAreaElement = element.parentNode().toElement();
+                KXmlElement chartElement = plotAreaElement.parentNode().toElement();
 
                 if (element.tagName() == "wall") {
                     if (chartElement.hasAttributeNS(KOdfXmlNS::chart, "class")) {
@@ -120,7 +120,7 @@ QColor KoOdfWorkaround::fixMissingFillColor(const KoXmlElement &element, KoShape
     return color;
 }
 
-bool KoOdfWorkaround::fixMissingStroke(QPen &pen, const KoXmlElement &element, KoShapeLoadingContext &context, const KoShape *shape)
+bool KoOdfWorkaround::fixMissingStroke(QPen &pen, const KXmlElement &element, KoShapeLoadingContext &context, const KoShape *shape)
 {
     bool fixed = false;
 
@@ -140,8 +140,8 @@ bool KoOdfWorkaround::fixMissingStroke(QPen &pen, const KoXmlElement &element, K
                 fixed = true;
                 pen.setColor(Qt::black);
             } else if (!hasStyle) {
-                KoXmlElement plotAreaElement = element.parentNode().toElement();
-                KoXmlElement chartElement = plotAreaElement.parentNode().toElement();
+                KXmlElement plotAreaElement = element.parentNode().toElement();
+                KXmlElement chartElement = plotAreaElement.parentNode().toElement();
 
                 if (element.tagName() == "series") {
                     if (chartElement.hasAttributeNS(KOdfXmlNS::chart, "class")) {
@@ -177,7 +177,7 @@ bool KoOdfWorkaround::fixMissingStroke(QPen &pen, const KoXmlElement &element, K
     return fixed;
 }
 
-bool KoOdfWorkaround::fixMissingStyle_DisplayLabel(const KoXmlElement &element, KoShapeLoadingContext &context)
+bool KoOdfWorkaround::fixMissingStyle_DisplayLabel(const KXmlElement &element, KoShapeLoadingContext &context)
 {
     Q_UNUSED(element);
     // If no axis style is specified, OpenOffice.org hides the axis' data labels

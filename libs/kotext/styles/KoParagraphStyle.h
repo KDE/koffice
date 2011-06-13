@@ -34,7 +34,7 @@
 #include <QTextFormat>
 
 class KoCharacterStyle;
-class KoXmlElement;
+class KXmlElement;
 class KoListStyle;
 class QTextBlock;
 class KOdfStyleStack;
@@ -540,7 +540,7 @@ public:
      * @param context the odf loading context
      * @param element the element containing the
      */
-    void loadOdf(const KoXmlElement *element, KoShapeLoadingContext &context);
+    void loadOdf(const KXmlElement *element, KoShapeLoadingContext &context);
 
     void saveOdf(KOdfGenericStyle &style, KOdfGenericStyles &mainStyles);
 

@@ -93,12 +93,12 @@ QSizeF SvgPatternHelper::size(const QRectF & objectBound) const
     }
 }
 
-void SvgPatternHelper::setContent(const KoXmlElement &content)
+void SvgPatternHelper::setContent(const KXmlElement &content)
 {
     m_patternContent = content;
 }
 
-KoXmlElement SvgPatternHelper::content() const
+KXmlElement SvgPatternHelper::content() const
 {
     return m_patternContent;
 }

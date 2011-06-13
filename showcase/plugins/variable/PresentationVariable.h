@@ -49,7 +49,7 @@ public:
     void saveOdf(KoShapeSavingContext &context);
 
     ///reimplemented
-    bool loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context);
+    bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context);
 
 protected:
     void positionChanged();

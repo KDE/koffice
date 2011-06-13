@@ -25,7 +25,7 @@
 
 class QMimeData;
 class KOdfStoreReader;
-class KoXmlElement;
+class KXmlElement;
 
 /**
  * This is a helper class to help you paste odf snippets.
@@ -44,7 +44,7 @@ public:
     bool paste(KOdf::DocumentType documentType, const QByteArray &data);
 
 protected:
-    virtual bool process(const KoXmlElement &body, KOdfStoreReader &odfStore) = 0;
+    virtual bool process(const KXmlElement &body, KOdfStoreReader &odfStore) = 0;
 };
 
 #endif /* KOODFPASTE_H */

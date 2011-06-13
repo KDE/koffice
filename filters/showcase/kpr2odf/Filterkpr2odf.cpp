@@ -169,7 +169,7 @@ KoFilter::ConversionStatus Filterkpr2odf::convert(const QByteArray& from, const 
 //TODO: improve createImageList and createSoundList so that only save the _used_ sounds and images
 void Filterkpr2odf::createImageList(KOdfStore* output, KOdfStore* input, KXmlWriter* manifest)
 {
-    KoXmlElement key(m_mainDoc.namedItem("DOC").namedItem("PICTURES").firstChild().toElement());
+    KXmlElement key(m_mainDoc.namedItem("DOC").namedItem("PICTURES").firstChild().toElement());
     if (key.isNull()) {
         return;
     }
@@ -212,7 +212,7 @@ void Filterkpr2odf::createImageList(KOdfStore* output, KOdfStore* input, KXmlWri
 
 void Filterkpr2odf::createSoundList(KOdfStore* output, KOdfStore* input, KXmlWriter* manifest)
 {
-    KoXmlElement file(m_mainDoc.namedItem("DOC").namedItem("SOUNDS").firstChild().toElement());
+    KXmlElement file(m_mainDoc.namedItem("DOC").namedItem("SOUNDS").firstChild().toElement());
     if (file.isNull())
         return;
 
@@ -263,8 +263,8 @@ void Filterkpr2odf::convertContent(KXmlWriter* content)
     m_pageHeight = paper.toElement().attribute("ptHeight").toFloat();
 
     //Go to the first background, there might be missing backgrounds
-    KoXmlElement pageBackground = backgrounds.firstChild().toElement();
-    KoXmlElement masterBackground = backgrounds.namedItem("MASTERPAGE").toElement();
+    KXmlElement pageBackground = backgrounds.firstChild().toElement();
+    KXmlElement masterBackground = backgrounds.namedItem("MASTERPAGE").toElement();
     //Parse pages
     //create the master page style
     const QString masterPageStyleName = createMasterPageStyle(objects, masterBackground);
@@ -313,7 +313,7 @@ void Filterkpr2odf::convertContent(KXmlWriter* content)
     content->startElement("presentation:settings");
 
     //Load whether the presentation ends or it's in an infinite loop
-    KoXmlElement infinitLoop(m_mainDoc.namedItem("DOC").namedItem("INFINITLOOP").toElement());
+    KXmlElement infinitLoop(m_mainDoc.namedItem("DOC").namedItem("INFINITLOOP").toElement());
     if (!infinitLoop.isNull()) {
         bool value = infinitLoop.attribute("value", "0") == "1";
         content->addAttribute("presentation:endless", (value) ? "true" : "false");
@@ -321,21 +321,21 @@ void Filterkpr2odf::convertContent(KXmlWriter* content)
 
     //Specify whether the effects can be started automatically or
     //ignore any previous order and start them manually
-    KoXmlElement manualSwitch = m_mainDoc.namedItem("DOC").namedItem("MANUALSWITCH").toElement();
+    KXmlElement manualSwitch = m_mainDoc.namedItem("DOC").namedItem("MANUALSWITCH").toElement();
     if (!manualSwitch.isNull()) {
         bool value = manualSwitch.attribute("value", "0") == "1";
         content->addAttribute("presentation:force-manual", (value) ? "true" : "false");
     }
 
     //Store the default show
-    KoXmlElement customSlideShowDefault = m_mainDoc.namedItem("DOC").namedItem("DEFAULTCUSTOMSLIDESHOWNAME").toElement();
+    KXmlElement customSlideShowDefault = m_mainDoc.namedItem("DOC").namedItem("DEFAULTCUSTOMSLIDESHOWNAME").toElement();
     if (!customSlideShowDefault.isNull()) {
         content->addAttribute("presentation:show", customSlideShowDefault.attribute("name"));
     }
 
     //Now store all the shows
-    KoXmlElement customSlideShowConfig = m_mainDoc.namedItem("DOC").namedItem("CUSTOMSLIDESHOWCONFIG").toElement();
-    for (KoXmlElement customSlideShow = customSlideShowConfig.firstChild().toElement(); !customSlideShow.isNull();
+    KXmlElement customSlideShowConfig = m_mainDoc.namedItem("DOC").namedItem("CUSTOMSLIDESHOWCONFIG").toElement();
+    for (KXmlElement customSlideShow = customSlideShowConfig.firstChild().toElement(); !customSlideShow.isNull();
             customSlideShow = customSlideShow.nextSibling().toElement()) {
         content->startElement("presentation:show");
         content->addAttribute("presentation:name", customSlideShow.attribute("name"));
@@ -362,7 +362,7 @@ void Filterkpr2odf::convertObjects(KXmlWriter* content, const KoXmlNode& objects
             continue; // object not on current page
 
         //Now define what kind of object is
-        KoXmlElement objectElement = object.toElement();
+        KXmlElement objectElement = object.toElement();
 
         bool sticky = objectElement.attribute("sticky", "0").toInt() == 1;
         if (sticky != m_sticky) {
@@ -441,7 +441,7 @@ void Filterkpr2odf::convertObjects(KXmlWriter* content, const KoXmlNode& objects
     }//for
 }
 
-void Filterkpr2odf::appendPicture(KXmlWriter* content, const KoXmlElement& objectElement)
+void Filterkpr2odf::appendPicture(KXmlWriter* content, const KXmlElement& objectElement)
 {
     content->startElement("draw:frame");
     set2DGeometry(content, objectElement);  //sizes mostly
@@ -458,13 +458,13 @@ void Filterkpr2odf::appendPicture(KXmlWriter* content, const KoXmlElement& objec
     //NOTE: the effects seem to not be portable
 }
 
-void Filterkpr2odf::appendLine(KXmlWriter* content, const KoXmlElement& objectElement)
+void Filterkpr2odf::appendLine(KXmlWriter* content, const KXmlElement& objectElement)
 {
     content->startElement("draw:line");
     content->addAttribute("draw:style-name", createGraphicStyle(objectElement));
 
-    KoXmlElement orig = objectElement.namedItem("ORIG").toElement();
-    KoXmlElement size = objectElement.namedItem("SIZE").toElement();
+    KXmlElement orig = objectElement.namedItem("ORIG").toElement();
+    KXmlElement size = objectElement.namedItem("SIZE").toElement();
 
     QRectF r(orig.attribute("x").toDouble(),
              orig.attribute("y").toDouble() - m_pageHeight * (m_currentPage - 1),
@@ -477,7 +477,7 @@ void Filterkpr2odf::appendLine(KXmlWriter* content, const KoXmlElement& objectEl
     double y2 = 0.0;
     QPointF center(r.width() / 2, r.height() / 2);
 
-    KoXmlElement lineType = objectElement.namedItem("LINETYPE").toElement();
+    KXmlElement lineType = objectElement.namedItem("LINETYPE").toElement();
     int type = 0;
     if (!lineType.isNull()) {
         type = lineType.attribute("value").toInt();
@@ -506,7 +506,7 @@ void Filterkpr2odf::appendLine(KXmlWriter* content, const KoXmlElement& objectEl
         break;
     }
 
-    KoXmlElement angle = objectElement.namedItem("ANGLE").toElement();
+    KXmlElement angle = objectElement.namedItem("ANGLE").toElement();
     if (!angle.isNull()) {
         double angInRad = -angle.attribute("value").toDouble() * M_PI / 180.0;
         QMatrix m(cos(angInRad), -sin(angInRad), sin(angInRad), cos(angInRad), 0, 0);
@@ -533,7 +533,7 @@ void Filterkpr2odf::appendLine(KXmlWriter* content, const KoXmlElement& objectEl
     content->addAttributePt("svg:x2", x2);
     content->addAttributePt("svg:y2", y2);
 
-    KoXmlElement name = objectElement.namedItem("OBJECTNAME").toElement();
+    KXmlElement name = objectElement.namedItem("OBJECTNAME").toElement();
     QString nameString = name.attribute("objectName");
     if (!nameString.isNull()) {
         content->addAttribute("draw:name", nameString);
@@ -541,7 +541,7 @@ void Filterkpr2odf::appendLine(KXmlWriter* content, const KoXmlElement& objectEl
     content->endElement();//draw:line
 }
 
-void Filterkpr2odf::appendRectangle(KXmlWriter* content, const KoXmlElement& objectElement)
+void Filterkpr2odf::appendRectangle(KXmlWriter* content, const KXmlElement& objectElement)
 {
     content->startElement("draw:rect");
 
@@ -549,12 +549,12 @@ void Filterkpr2odf::appendRectangle(KXmlWriter* content, const KoXmlElement& obj
 
     set2DGeometry(content, objectElement);
 
-    KoXmlElement size = objectElement.namedItem("SIZE").toElement();
+    KXmlElement size = objectElement.namedItem("SIZE").toElement();
     double width = size.attribute("width").toDouble();
     double height = size.attribute("height").toDouble();
 
     //<RNDS x="75" y="75"/>
-    const KoXmlElement rnds = objectElement.namedItem("RNDS").toElement();
+    const KXmlElement rnds = objectElement.namedItem("RNDS").toElement();
     if (!rnds.isNull()) {
         if (rnds.hasAttribute("x") && rnds.hasAttribute("y")) {
             int x = rnds.attribute("x").toInt();
@@ -567,9 +567,9 @@ void Filterkpr2odf::appendRectangle(KXmlWriter* content, const KoXmlElement& obj
     content->endElement();//draw:rect
 }
 
-void Filterkpr2odf::appendEllipse(KXmlWriter* content, const KoXmlElement& objectElement)
+void Filterkpr2odf::appendEllipse(KXmlWriter* content, const KXmlElement& objectElement)
 {
-    KoXmlElement size = objectElement.namedItem("SIZE").toElement();
+    KXmlElement size = objectElement.namedItem("SIZE").toElement();
     double width = size.attribute("width").toDouble();
     double height = size.attribute("height").toDouble();
 
@@ -580,17 +580,17 @@ void Filterkpr2odf::appendEllipse(KXmlWriter* content, const KoXmlElement& objec
     content->endElement();//draw:circle or draw:ellipse
 }
 
-void Filterkpr2odf::appendTextBox(KXmlWriter* content, const KoXmlElement& objectElement)
+void Filterkpr2odf::appendTextBox(KXmlWriter* content, const KXmlElement& objectElement)
 {
     content->startElement("draw:frame");
     set2DGeometry(content, objectElement);
     content->addAttribute("draw:style-name", createGraphicStyle(objectElement));
 
     content->startElement("draw:text-box");
-    KoXmlElement textObject = objectElement.namedItem("TEXTOBJ").toElement();
+    KXmlElement textObject = objectElement.namedItem("TEXTOBJ").toElement();
 
     //export every paragraph
-    for (KoXmlElement paragraph = textObject.firstChild().toElement(); !paragraph.isNull(); paragraph = paragraph.nextSibling().toElement()) {
+    for (KXmlElement paragraph = textObject.firstChild().toElement(); !paragraph.isNull(); paragraph = paragraph.nextSibling().toElement()) {
         appendParagraph(content, paragraph);
     }
 
@@ -598,9 +598,9 @@ void Filterkpr2odf::appendTextBox(KXmlWriter* content, const KoXmlElement& objec
     content->endElement();//draw:frame
 }
 
-void Filterkpr2odf::appendParagraph(KXmlWriter* content, const KoXmlElement& objectElement)
+void Filterkpr2odf::appendParagraph(KXmlWriter* content, const KXmlElement& objectElement)
 {
-    KoXmlElement counter = objectElement.namedItem("COUNTER").toElement();
+    KXmlElement counter = objectElement.namedItem("COUNTER").toElement();
     if (!counter.isNull()) { //it's part of a list
         content->startElement("text:numbered-paragraph");
         content->addAttribute("text:style-name", createListStyle(objectElement));
@@ -610,7 +610,7 @@ void Filterkpr2odf::appendParagraph(KXmlWriter* content, const KoXmlElement& obj
     content->startElement("text:p", false);  //false: we should not indent the inner tags
     content->addAttribute("text:style-name", createParagraphStyle(objectElement));
     //convert every text element
-    for (KoXmlElement text = objectElement.firstChild().toElement(); !text.isNull();  text = text.nextSibling().toElement()) {
+    for (KXmlElement text = objectElement.firstChild().toElement(); !text.isNull();  text = text.nextSibling().toElement()) {
         if (text.nodeName() == "TEXT") { //only TEXT children are relevant
             appendText(content, text);
         }
@@ -622,7 +622,7 @@ void Filterkpr2odf::appendParagraph(KXmlWriter* content, const KoXmlElement& obj
     }
 }
 
-void Filterkpr2odf::appendText(KXmlWriter* content, const KoXmlElement& objectElement)
+void Filterkpr2odf::appendText(KXmlWriter* content, const KXmlElement& objectElement)
 {
     //Avoid the creation of so many unneded text:span
     static QString lastStyle;
@@ -657,33 +657,33 @@ void Filterkpr2odf::appendText(KXmlWriter* content, const KoXmlElement& objectEl
     }
 }
 
-void Filterkpr2odf::appendPie(KXmlWriter* content, const KoXmlElement& objectElement)
+void Filterkpr2odf::appendPie(KXmlWriter* content, const KXmlElement& objectElement)
 {
     //NOTE: we cannot use set2dGeometry becuse we have to convert the
     //given size and origen into the real ones before saving them
 
-    KoXmlElement size = objectElement.namedItem("SIZE").toElement();
+    KXmlElement size = objectElement.namedItem("SIZE").toElement();
     double width = size.attribute("width").toDouble();
     double height = size.attribute("height").toDouble();
 
-    KoXmlElement pieAngle = objectElement.namedItem("PIEANGLE").toElement();
+    KXmlElement pieAngle = objectElement.namedItem("PIEANGLE").toElement();
     int startAngle = 45; //default value take it into kppieobject
     if (!pieAngle.isNull()) {
         startAngle = (pieAngle.attribute("value").toInt()) / 16;
     }
 
-    KoXmlElement pieLength = objectElement.namedItem("PIELENGTH").toElement();
+    KXmlElement pieLength = objectElement.namedItem("PIELENGTH").toElement();
     int endAngle = 90 + startAngle; //default
     if (!pieLength.isNull()) {
         endAngle = pieLength.attribute("value").toInt() / 16 + startAngle;
     }
 
     //rotation
-    KoXmlElement angle = objectElement.namedItem("ANGLE").toElement();
+    KXmlElement angle = objectElement.namedItem("ANGLE").toElement();
     int rotationAngleValue = angle.attribute("value").toDouble() / 16.0;
 
     //Type of the enclosure of the circle/ellipse
-    KoXmlElement pie = objectElement.namedItem("PIETYPE").toElement();
+    KXmlElement pie = objectElement.namedItem("PIETYPE").toElement();
     QString kind;
     //Enum: PieType
     int pieType = pie.attribute("value", "0").toInt();  //We didn't find the type, we set "section" by default
@@ -699,7 +699,7 @@ void Filterkpr2odf::appendPie(KXmlWriter* content, const KoXmlElement& objectEle
         break;
     }
 
-    KoXmlElement orig = objectElement.namedItem("ORIG").toElement();
+    KXmlElement orig = objectElement.namedItem("ORIG").toElement();
     double x = orig.attribute("x").toDouble();
     double y = orig.attribute("y").toDouble();
     y -= m_pageHeight * (m_currentPage - 1);
@@ -709,7 +709,7 @@ void Filterkpr2odf::appendPie(KXmlWriter* content, const KoXmlElement& objectEle
     getRealSizeAndOrig(realSize, realOrig, startAngle, endAngle, rotationAngleValue, pieType);
 
     content->startElement((width == height) ? "draw:circle" : "draw:ellipse");
-    KoXmlElement name = objectElement.namedItem("OBJECTNAME").toElement();
+    KXmlElement name = objectElement.namedItem("OBJECTNAME").toElement();
     QString nameStr = name.attribute("objectName");
     if (!nameStr.isEmpty()) {
         content->addAttribute("draw:name", nameStr);
@@ -985,20 +985,20 @@ void Filterkpr2odf::setMinMax(double &min_x, double &min_y,
     }
 }
 
-void Filterkpr2odf::appendGroupObject(KXmlWriter* content, const KoXmlElement& objectElement)
+void Filterkpr2odf::appendGroupObject(KXmlWriter* content, const KXmlElement& objectElement)
 {
     content->startElement("draw:g");
 
     set2DGeometry(content, objectElement);
     content->addAttribute("draw:style-name", createGraphicStyle(objectElement));
 
-    KoXmlElement objects = objectElement.namedItem("OBJECTS").toElement();
+    KXmlElement objects = objectElement.namedItem("OBJECTS").toElement();
     convertObjects(content, objects);
 
     content->endElement();//draw:g
 }
 
-void Filterkpr2odf::appendPoly(KXmlWriter* content, const KoXmlElement& objectElement, bool polygon)
+void Filterkpr2odf::appendPoly(KXmlWriter* content, const KXmlElement& objectElement, bool polygon)
 {
     //The function was written so to add polygon and polyline because it's basically the same,
     //only the name is changed and I didn't want to copy&paste
@@ -1007,9 +1007,9 @@ void Filterkpr2odf::appendPoly(KXmlWriter* content, const KoXmlElement& objectEl
     content->addAttribute("draw:style-name", createGraphicStyle(objectElement));
 
     set2DGeometry(content, objectElement);
-    KoXmlElement points = objectElement.namedItem("POINTS").toElement();
+    KXmlElement points = objectElement.namedItem("POINTS").toElement();
     if (!points.isNull()) {
-        KoXmlElement point = points.firstChild().toElement();
+        KXmlElement point = points.firstChild().toElement();
         QString listOfPoints;
 
         //No white spaces allowed before the first element
@@ -1049,14 +1049,14 @@ void Filterkpr2odf::appendPoly(KXmlWriter* content, const KoXmlElement& objectEl
     content->endElement();//draw:polygon or draw:polyline
 }
 
-void Filterkpr2odf::appendPolygon(KXmlWriter* content, const KoXmlElement& objectElement)
+void Filterkpr2odf::appendPolygon(KXmlWriter* content, const KXmlElement& objectElement)
 {
     content->startElement("draw:regular-polygon");
 
     set2DGeometry(content, objectElement);
     content->addAttribute("draw:style-name", createGraphicStyle(objectElement));
 
-    KoXmlElement settings = objectElement.namedItem("SETTINGS").toElement();
+    KXmlElement settings = objectElement.namedItem("SETTINGS").toElement();
     int corners = settings.attribute("cornersValue").toInt();
     content->addAttribute("draw:corners", corners);
     bool concavePolygon = settings.attribute("checkConcavePolygon", "0") == "1";
@@ -1070,7 +1070,7 @@ void Filterkpr2odf::appendPolygon(KXmlWriter* content, const KoXmlElement& objec
     content->endElement();//draw:regular-polygon
 }
 
-void Filterkpr2odf::appendAutoform(KXmlWriter* content, const KoXmlElement& objectElement)
+void Filterkpr2odf::appendAutoform(KXmlWriter* content, const KXmlElement& objectElement)
 {
     QString fileName = objectElement.namedItem("FILENAME").toElement().attribute("value");
     if (fileName.contains("Arrow")) {
@@ -1081,7 +1081,7 @@ void Filterkpr2odf::appendAutoform(KXmlWriter* content, const KoXmlElement& obje
 
     QString d;
 
-    KoXmlElement size = objectElement.namedItem("SIZE").toElement();
+    KXmlElement size = objectElement.namedItem("SIZE").toElement();
     double width = size.attribute("width").toDouble();
     double height = size.attribute("height").toDouble();
 
@@ -1168,11 +1168,11 @@ void Filterkpr2odf::appendAutoform(KXmlWriter* content, const KoXmlElement& obje
     content->endElement();//draw:path
 }
 
-void Filterkpr2odf::appendArrow(KXmlWriter* content, const KoXmlElement& objectElement)
+void Filterkpr2odf::appendArrow(KXmlWriter* content, const KXmlElement& objectElement)
 {
     //NOTE: we cannot use set2dGeometry neither here
 
-    KoXmlElement name = objectElement.namedItem("OBJECTNAME").toElement();
+    KXmlElement name = objectElement.namedItem("OBJECTNAME").toElement();
     content->startElement("draw:custom-shape");
     QString nameStr = name.attribute("objectName");
     if (!nameStr.isEmpty()) {
@@ -1183,7 +1183,7 @@ void Filterkpr2odf::appendArrow(KXmlWriter* content, const KoXmlElement& objectE
     content->addAttribute("svg:x", "0pt");
     content->addAttribute("svg:y", "0pt");
 
-    KoXmlElement size = objectElement.namedItem("SIZE").toElement();
+    KXmlElement size = objectElement.namedItem("SIZE").toElement();
     double width = size.attribute("width").toDouble();
     double height = size.attribute("height").toDouble();
     content->addAttributePt("svg:width", width);
@@ -1209,7 +1209,7 @@ void Filterkpr2odf::appendArrow(KXmlWriter* content, const KoXmlElement& objectE
         rotateAngle = 135;
     }
 
-    KoXmlElement orig = objectElement.namedItem("ORIG").toElement();
+    KXmlElement orig = objectElement.namedItem("ORIG").toElement();
     double x = orig.attribute("x").toDouble();
     double y = orig.attribute("y").toDouble();
     y -= m_pageHeight * (m_currentPage - 1);
@@ -1253,16 +1253,16 @@ void Filterkpr2odf::appendArrow(KXmlWriter* content, const KoXmlElement& objectE
     content->endElement();//draw:custom-shape
 }
 
-void Filterkpr2odf::appendFreehand(KXmlWriter* content, const KoXmlElement& objectElement)
+void Filterkpr2odf::appendFreehand(KXmlWriter* content, const KXmlElement& objectElement)
 {
     content->startElement("draw:path");
 
     content->addAttribute("draw:style-name", createGraphicStyle(objectElement));
     set2DGeometry(content, objectElement);
 
-    KoXmlElement points = objectElement.namedItem("POINTS").toElement();
+    KXmlElement points = objectElement.namedItem("POINTS").toElement();
     if (!points.isNull()) {
-        KoXmlElement point = points.firstChild().toElement();
+        KXmlElement point = points.firstChild().toElement();
         QString d;
 
         int tmpX = (int)(point.attribute("point_x", "0").toDouble() * 10000);
@@ -1290,21 +1290,21 @@ void Filterkpr2odf::appendFreehand(KXmlWriter* content, const KoXmlElement& obje
     content->endElement();//draw:path
 }
 
-void Filterkpr2odf::appendBezier(KXmlWriter* content, const KoXmlElement& objectElement)
+void Filterkpr2odf::appendBezier(KXmlWriter* content, const KXmlElement& objectElement)
 {
     content->startElement("draw:path");
 
     content->addAttribute("draw:style-name", createGraphicStyle(objectElement));
     set2DGeometry(content, objectElement);
 
-    KoXmlElement points = objectElement.namedItem("POINTS").toElement();
+    KXmlElement points = objectElement.namedItem("POINTS").toElement();
     if (!points.isNull()) {
         QString d;
 
-        KoXmlElement point1 = points.firstChild().toElement();
-        KoXmlElement point2 = point1.nextSibling().toElement();
-        KoXmlElement point3 = point2.nextSibling().toElement();
-        KoXmlElement point4 = point3.nextSibling().toElement();
+        KXmlElement point1 = points.firstChild().toElement();
+        KXmlElement point2 = point1.nextSibling().toElement();
+        KXmlElement point3 = point2.nextSibling().toElement();
+        KXmlElement point4 = point3.nextSibling().toElement();
 
         int maxX = 0;
         int maxY = 0;
@@ -1350,27 +1350,27 @@ void Filterkpr2odf::appendBezier(KXmlWriter* content, const KoXmlElement& object
     content->endElement();//draw:path
 }
 
-const QString Filterkpr2odf::getPictureNameFromKey(const KoXmlElement& key)
+const QString Filterkpr2odf::getPictureNameFromKey(const KXmlElement& key)
 {
     return key.attribute("msec") + key.attribute("second") + key.attribute("minute")
            + key.attribute("hour") + key.attribute("day") + key.attribute("month")
            + key.attribute("year") + key.attribute("filename");
 }
 
-void Filterkpr2odf::set2DGeometry(KXmlWriter* content, const KoXmlElement& objectElement)
+void Filterkpr2odf::set2DGeometry(KXmlWriter* content, const KXmlElement& objectElement)
 {
     //This function sets the needed geometry-related attributes
     //for any object that is passed to it
 
-    KoXmlElement name = objectElement.namedItem("OBJECTNAME").toElement();
+    KXmlElement name = objectElement.namedItem("OBJECTNAME").toElement();
 
     QString nameStr = name.attribute("objectName");
     if (!nameStr.isEmpty()) {
         content->addAttribute("draw:name", nameStr);
     }
 
-    KoXmlElement size = objectElement.namedItem("SIZE").toElement();
-    KoXmlElement orig = objectElement.namedItem("ORIG").toElement();
+    KXmlElement size = objectElement.namedItem("SIZE").toElement();
+    KXmlElement orig = objectElement.namedItem("ORIG").toElement();
 
     double y = orig.attribute("y").toDouble();
     y -= m_pageHeight * (m_currentPage - 1);
@@ -1383,7 +1383,7 @@ void Filterkpr2odf::set2DGeometry(KXmlWriter* content, const KoXmlElement& objec
     content->addAttributePt("svg:width", s.width());
     content->addAttributePt("svg:height", s.height());
 
-    KoXmlElement angle = objectElement.namedItem("ANGLE").toElement();
+    KXmlElement angle = objectElement.namedItem("ANGLE").toElement();
     if (!angle.isNull()) {
         double angInRad = -angle.attribute("value").toDouble() * M_PI / 180.0;
         QMatrix m(cos(angInRad), -sin(angInRad), sin(angInRad), cos(angInRad), 0, 0);
@@ -1416,9 +1416,9 @@ QString Filterkpr2odf::rotateValue(double val)
     return str;
 }
 
-void Filterkpr2odf::exportAnimation(const KoXmlElement& objectElement, int indentLevel)
+void Filterkpr2odf::exportAnimation(const KXmlElement& objectElement, int indentLevel)
 {
-    KoXmlElement effects = objectElement.namedItem("EFFECTS").toElement();
+    KXmlElement effects = objectElement.namedItem("EFFECTS").toElement();
     if (!effects.isNull()) {
         QBuffer animationsBuffer;
         animationsBuffer.open(QIODevice::WriteOnly);
@@ -1511,14 +1511,14 @@ void Filterkpr2odf::exportAnimation(const KoXmlElement& objectElement, int inden
             animationsWriter.addAttribute("presentation:speed", speed);
         }
 
-        KoXmlElement timer = objectElement.namedItem("TIMER").toElement();
+        KXmlElement timer = objectElement.namedItem("TIMER").toElement();
         if (timer.hasAttribute("appearTimer") && (timer.attribute("appearTimer") != "1")) {
             QTime time;
             time = time.addSecs(timer.attribute("timer").toInt());
             animationsWriter.addAttribute("presentation:delay", time.toString("'PT'hh'H'mm'M'ss'S'"));
         }
 
-        KoXmlElement appearSoundEffect = objectElement.namedItem("APPEARSOUNDEFFECT").toElement();
+        KXmlElement appearSoundEffect = objectElement.namedItem("APPEARSOUNDEFFECT").toElement();
         if (appearSoundEffect.attribute("appearSoundFileName") == "1") {
             animationsWriter.startElement("presentation:sound");
             animationsWriter.addAttribute("xlink:href", m_sounds[ appearSoundEffect.attribute("appearSoundFileName")]);
@@ -1529,7 +1529,7 @@ void Filterkpr2odf::exportAnimation(const KoXmlElement& objectElement, int inden
         }
         animationsWriter.endElement();//presentation:show-shape
 
-        KoXmlElement presnum = objectElement.namedItem("PRESNUM").toElement();
+        KXmlElement presnum = objectElement.namedItem("PRESNUM").toElement();
         int presnumValue = presnum.attribute("value", "0").toInt();
 
         QString animationsContents = QString::fromUtf8(animationsBuffer.buffer(),
@@ -1540,7 +1540,7 @@ void Filterkpr2odf::exportAnimation(const KoXmlElement& objectElement, int inden
         m_pageAnimations.insert(presnumValue, effectList);
     }//if !effects.isNull()
 
-    KoXmlElement disappear = objectElement.namedItem("DISAPPEAR").toElement();
+    KXmlElement disappear = objectElement.namedItem("DISAPPEAR").toElement();
     if (!disappear.isNull() && (disappear.attribute("doit") == "1"))
         //in KPR the effect it's saved and not displayed unless doit is set to 1
     {
@@ -1634,14 +1634,14 @@ void Filterkpr2odf::exportAnimation(const KoXmlElement& objectElement, int inden
             animationsWriter.addAttribute("presentation:speed", speed);
         }
 
-        KoXmlElement timer = objectElement.namedItem("TIMER").toElement();
+        KXmlElement timer = objectElement.namedItem("TIMER").toElement();
         if (timer.hasAttribute("disappearTimer") && (timer.attribute("disappearTimer") != "1")) {
             QTime time;
             time = time.addSecs(timer.attribute("timer").toInt());
             animationsWriter.addAttribute("presentation:delay", time.toString("'PT'hh'H'mm'M'ss'S'"));
         }
 
-        KoXmlElement appearSoundEffect = objectElement.namedItem("DISAPPEARSOUNDEFFECT").toElement();
+        KXmlElement appearSoundEffect = objectElement.namedItem("DISAPPEARSOUNDEFFECT").toElement();
         if (appearSoundEffect.attribute("disappearSoundEffect") == "1") {
             animationsWriter.startElement("presentation:sound");
             animationsWriter.addAttribute("xlink:href", m_sounds[ appearSoundEffect.attribute("disappearSoundFileName")]);

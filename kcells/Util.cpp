@@ -109,7 +109,7 @@ QDomElement KCells::NativeFormat::createElement(const QString & tagname, const Q
     return e;
 }
 
-QFont KCells::NativeFormat::toFont(KoXmlElement & element)
+QFont KCells::NativeFormat::toFont(KXmlElement & element)
 {
     QFont f;
     f.setFamily(element.attribute("family"));
@@ -147,7 +147,7 @@ QFont KCells::NativeFormat::toFont(KoXmlElement & element)
     return f;
 }
 
-QPen KCells::NativeFormat::toPen(KoXmlElement & element)
+QPen KCells::NativeFormat::toPen(KXmlElement & element)
 {
     bool ok;
     QPen p;

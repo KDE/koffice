@@ -341,7 +341,7 @@ public:
      * \ingroup NativeFormat
      * Loads the sheet and all it's children in XML format
      */
-    bool loadXML(const KoXmlElement&);
+    bool loadXML(const KXmlElement&);
 
     /**
      * \ingroup NativeFormat
@@ -366,7 +366,7 @@ public:
     /**
      * \ingroup OpenDocument
      */
-    bool loadOdf(const KoXmlElement& sheet,
+    bool loadOdf(const KXmlElement& sheet,
                  KCOdfLoadingContext& odfContext,
                  const Styles& autoStyles,
                  const QHash<QString, KCConditions>& conditionalStyles);
@@ -396,7 +396,7 @@ public:
      */
     void saveOdfSettings(KXmlWriter &settingsWriter) const;
 
-    void loadOdfObject(const KoXmlElement& element, KoShapeLoadingContext& shapeContext);
+    void loadOdfObject(const KXmlElement& element, KoShapeLoadingContext& shapeContext);
     //
     //END Methods related to the OpenDocument file format
     //
@@ -840,11 +840,11 @@ protected:
     //BEGIN Methods related to the OpenDocument file format
     //
 
-    void loadColumnNodes(const KoXmlElement& parent, int& indexCol,
+    void loadColumnNodes(const KXmlElement& parent, int& indexCol,
                             int& maxColumn, KOdfLoadingContext& odfContext,
                             QHash<QString, QRegion>& columnStyleRegions,
                             IntervalMap<QString>& columnStyles);
-    void loadRowNodes(const KoXmlElement& parent, int& rowIndex,
+    void loadRowNodes(const KXmlElement& parent, int& rowIndex,
                             int& maxColumn, KCOdfLoadingContext& tableContext,
                             QHash<QString, QRegion>& rowStyleRegions,
                             QHash<QString, QRegion>& cellStyleRegions,
@@ -854,7 +854,7 @@ protected:
     /**
      * \ingroup OpenDocument
      */
-    int loadRowFormat(const KoXmlElement& row, int &rowIndex,
+    int loadRowFormat(const KXmlElement& row, int &rowIndex,
                        KCOdfLoadingContext& odfContext,
                        QHash<QString, QRegion>& rowStyleRegions,
                        QHash<QString, QRegion>& cellStyleRegions,
@@ -866,7 +866,7 @@ protected:
      * Loads the properties of a column from a table:table-column element in an OASIS XML file
      * defaultColumnCellStyles is a map from column indicies to the default cell style for that column
      */
-    bool loadColumnFormat(const KoXmlElement& row,
+    bool loadColumnFormat(const KXmlElement& row,
                           const KOdfStylesReader& stylesReader, int & indexCol,
                           QHash<QString, QRegion>& columnStyleRegions,
                           IntervalMap<QString>& columnStyles);
@@ -888,7 +888,7 @@ protected:
     /**
      * \ingroup OpenDocument
      */
-    bool loadSheetStyleFormat(KoXmlElement *style);
+    bool loadSheetStyleFormat(KXmlElement *style);
 
     /**
      * \ingroup OpenDocument

@@ -35,7 +35,7 @@ class QString;
 class QTextDocumentFragment;
 class QTextList;
 class KoDeleteChangeMarker;
-class KoXmlElement;
+class KXmlElement;
 class KoChangeTrackerElement;
 class KoFormatChangeInformation;
 class KoDeletedRowColumnDataStore;
@@ -106,7 +106,7 @@ public:
     /// Load/save methods
     bool saveInlineChange(int changeId, KOdfGenericChange &change);
 
-    void loadOdfChanges(const KoXmlElement &element);
+    void loadOdfChanges(const KXmlElement &element);
     int loadedChangeId(QString odfId);
 
     static QTextDocumentFragment generateDeleteFragment(QTextCursor &cursor, KoDeleteChangeMarker *marker);

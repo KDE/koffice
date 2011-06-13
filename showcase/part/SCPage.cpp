@@ -120,7 +120,7 @@ SCPageLayout * SCPage::layout() const
     return placeholders().layout();
 }
 
-bool SCPage::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
+bool SCPage::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
 {
     if (!KoPAPageBase::loadOdf(element, context)) {
         return false;
@@ -128,17 +128,17 @@ bool SCPage::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context
     SCPageApplicationData * data = dynamic_cast<SCPageApplicationData *>(applicationData());
     Q_ASSERT(data);
 
-    KoXmlElement animation = KoXml::namedItemNS(element, KOdfXmlNS::anim, "par");
+    KXmlElement animation = KoXml::namedItemNS(element, KOdfXmlNS::anim, "par");
 
     bool loadOldTransition = true;
     if (!animation.isNull()) {
-        KoXmlElement animationElement;
+        KXmlElement animationElement;
         forEachElement(animationElement, animation) {
             if (animationElement.namespaceURI() == KOdfXmlNS::anim) {
                 if (animationElement.tagName() == "par") {
                     QString begin(animationElement.attributeNS(KOdfXmlNS::smil, "begin"));
                     if (begin.endsWith("begin")) {
-                        KoXmlElement transitionElement(KoXml::namedItemNS(animationElement, KOdfXmlNS::anim, "transitionFilter"));
+                        KXmlElement transitionElement(KoXml::namedItemNS(animationElement, KOdfXmlNS::anim, "transitionFilter"));
                         data->setPageEffect(SCPageEffectRegistry::instance()->createPageEffect(transitionElement));
                         kDebug() << "XXXXXXX found page transition";
                         loadOldTransition = false;
@@ -163,7 +163,7 @@ bool SCPage::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context
 
     if (loadOldTransition) {
         KOdfStylesReader &stylesReader = context.odfLoadingContext().stylesReader();
-        const KoXmlElement * styleElement = stylesReader.findContentAutoStyle(element.attributeNS(KOdfXmlNS::draw, "style-name"), "drawing-page");
+        const KXmlElement * styleElement = stylesReader.findContentAutoStyle(element.attributeNS(KOdfXmlNS::draw, "style-name"), "drawing-page");
         if (styleElement) {
 #ifndef KOXML_USE_QDOM
             KoXmlNode node = styleElement->namedItemNS(KOdfXmlNS::style, "drawing-page-properties");
@@ -228,7 +228,7 @@ void SCPage::saveOdfPageStyleData(KOdfGenericStyle &style, KoPASavingContext &pa
     }
 }
 
-void SCPage::loadOdfPageTag(const KoXmlElement &element, KoPALoadingContext &loadingContext)
+void SCPage::loadOdfPageTag(const KXmlElement &element, KoPALoadingContext &loadingContext)
 {
     KoPAPage::loadOdfPageTag(element, loadingContext);
 
@@ -265,7 +265,7 @@ void SCPage::loadOdfPageTag(const KoXmlElement &element, KoPALoadingContext &loa
     }
 }
 
-void SCPage::loadOdfPageExtra(const KoXmlElement &element, KoPALoadingContext &loadingContext)
+void SCPage::loadOdfPageExtra(const KXmlElement &element, KoPALoadingContext &loadingContext)
 {
     // the layout needs to be loaded after the shapes are already loaded so the initialization of the data works
     SCPageLayout * layout = 0;

@@ -50,7 +50,7 @@ KoShape *PictureShapeFactory::createDefaultShape(KoResourceManager *documentReso
     return defaultShape;
 }
 
-bool PictureShapeFactory::supports(const KoXmlElement &e, KoShapeLoadingContext &context) const
+bool PictureShapeFactory::supports(const KXmlElement &e, KoShapeLoadingContext &context) const
 {
     Q_UNUSED(e);
     Q_UNUSED(context);

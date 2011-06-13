@@ -40,11 +40,11 @@ SCDeclarations::~SCDeclarations()
 {
 }
 
-bool SCDeclarations::loadOdf(const KoXmlElement &body, KoPALoadingContext &context)
+bool SCDeclarations::loadOdf(const KXmlElement &body, KoPALoadingContext &context)
 {
     Q_UNUSED(context);
 
-    KoXmlElement element;
+    KXmlElement element;
     forEachElement(element, body) {
         if (element.namespaceURI() == KOdfXmlNS::presentation) {
             if (element.tagName() == "header-decl") {

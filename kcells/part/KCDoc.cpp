@@ -291,7 +291,7 @@ bool KCDoc::loadXML(const KoXmlDocument& doc, KOdfStore*)
 
     d->spellListIgnoreAll.clear();
     // <spreadsheet>
-    KoXmlElement spread = doc.documentElement();
+    KXmlElement spread = doc.documentElement();
 
     if (spread.attribute("mime") != "application/x-kcells" && spread.attribute("mime") != "application/vnd.kde.kcells") {
         setErrorMessage(i18n("Invalid document. Expected mimetype application/x-kcells or application/vnd.kde.kcells, got %1" , spread.attribute("mime")));
@@ -313,13 +313,13 @@ bool KCDoc::loadXML(const KoXmlDocument& doc, KOdfStore*)
     }
 
     // <locale>
-    KoXmlElement loc = spread.namedItem("locale").toElement();
+    KXmlElement loc = spread.namedItem("locale").toElement();
     if (!loc.isNull())
         static_cast<KCLocalization*>(map()->calculationSettings()->locale())->load(loc);
 
     if (updater) updater->setProgress(5);
 
-    KoXmlElement defaults = spread.namedItem("defaults").toElement();
+    KXmlElement defaults = spread.namedItem("defaults").toElement();
     if (!defaults.isNull()) {
         double dim = defaults.attribute("row-height").toDouble(&ok);
         if (!ok)
@@ -334,9 +334,9 @@ bool KCDoc::loadXML(const KoXmlDocument& doc, KOdfStore*)
         map()->setDefaultColumnWidth(dim);
     }
 
-    KoXmlElement ignoreAll = spread.namedItem("SPELLCHECKIGNORELIST").toElement();
+    KXmlElement ignoreAll = spread.namedItem("SPELLCHECKIGNORELIST").toElement();
     if (!ignoreAll.isNull()) {
-        KoXmlElement spellWord = spread.namedItem("SPELLCHECKIGNORELIST").toElement();
+        KXmlElement spellWord = spread.namedItem("SPELLCHECKIGNORELIST").toElement();
 
         spellWord = spellWord.firstChild().toElement();
         while (!spellWord.isNull()) {
@@ -352,7 +352,7 @@ bool KCDoc::loadXML(const KoXmlDocument& doc, KOdfStore*)
     qDeleteAll(map()->sheetList());
     map()->sheetList().clear();
 
-    KoXmlElement styles = spread.namedItem("styles").toElement();
+    KXmlElement styles = spread.namedItem("styles").toElement();
     if (!styles.isNull()) {
         if (!map()->styleManager()->loadXML(styles)) {
             setErrorMessage(i18n("Styles cannot be loaded."));
@@ -361,7 +361,7 @@ bool KCDoc::loadXML(const KoXmlDocument& doc, KOdfStore*)
     }
 
     // <map>
-    KoXmlElement mymap = spread.namedItem("map").toElement();
+    KXmlElement mymap = spread.namedItem("map").toElement();
     if (mymap.isNull()) {
         setErrorMessage(i18n("Invalid document. No map tag."));
         return false;
@@ -371,13 +371,13 @@ bool KCDoc::loadXML(const KoXmlDocument& doc, KOdfStore*)
     }
 
     // named areas
-    const KoXmlElement areaname = spread.namedItem("areaname").toElement();
+    const KXmlElement areaname = spread.namedItem("areaname").toElement();
     if (!areaname.isNull())
         map()->namedAreaManager()->loadXML(areaname);
 
     //Backwards compatibility with older versions for paper layout
     if (map()->syntaxVersion() < 1) {
-        KoXmlElement paper = spread.namedItem("paper").toElement();
+        KXmlElement paper = spread.namedItem("paper").toElement();
         if (!paper.isNull()) {
             loadPaper(paper);
         }
@@ -385,7 +385,7 @@ bool KCDoc::loadXML(const KoXmlDocument& doc, KOdfStore*)
 
     if (updater) updater->setProgress(85);
 
-    KoXmlElement element(spread.firstChild().toElement());
+    KXmlElement element(spread.firstChild().toElement());
     while (!element.isNull()) {
         QString tagName(element.tagName());
 
@@ -406,7 +406,7 @@ bool KCDoc::loadXML(const KoXmlDocument& doc, KOdfStore*)
     return true;
 }
 
-void KCDoc::loadPaper(KoXmlElement const & paper)
+void KCDoc::loadPaper(KXmlElement const & paper)
 {
     KOdfPageLayoutData pageLayout;
     pageLayout.format = KOdfPageFormat::formatFromString(paper.attribute("format"));
@@ -414,7 +414,7 @@ void KCDoc::loadPaper(KoXmlElement const & paper)
                              ? KOdfPageFormat::Portrait : KOdfPageFormat::Landscape;
 
     // <borders>
-    KoXmlElement borders = paper.namedItem("borders").toElement();
+    KXmlElement borders = paper.namedItem("borders").toElement();
     if (!borders.isNull()) {
         pageLayout.leftMargin   = MM_TO_POINT(borders.attribute("left").toFloat());
         pageLayout.rightMargin  = MM_TO_POINT(borders.attribute("right").toFloat());
@@ -430,28 +430,28 @@ void KCDoc::loadPaper(KoXmlElement const & paper)
     QString hleft, hright, hcenter;
     QString fleft, fright, fcenter;
     // <head>
-    KoXmlElement head = paper.namedItem("head").toElement();
+    KXmlElement head = paper.namedItem("head").toElement();
     if (!head.isNull()) {
-        KoXmlElement left = head.namedItem("left").toElement();
+        KXmlElement left = head.namedItem("left").toElement();
         if (!left.isNull())
             hleft = left.text();
-        KoXmlElement center = head.namedItem("center").toElement();
+        KXmlElement center = head.namedItem("center").toElement();
         if (!center.isNull())
             hcenter = center.text();
-        KoXmlElement right = head.namedItem("right").toElement();
+        KXmlElement right = head.namedItem("right").toElement();
         if (!right.isNull())
             hright = right.text();
     }
     // <foot>
-    KoXmlElement foot = paper.namedItem("foot").toElement();
+    KXmlElement foot = paper.namedItem("foot").toElement();
     if (!foot.isNull()) {
-        KoXmlElement left = foot.namedItem("left").toElement();
+        KXmlElement left = foot.namedItem("left").toElement();
         if (!left.isNull())
             fleft = left.text();
-        KoXmlElement center = foot.namedItem("center").toElement();
+        KXmlElement center = foot.namedItem("center").toElement();
         if (!center.isNull())
             fcenter = center.text();
-        KoXmlElement right = foot.namedItem("right").toElement();
+        KXmlElement right = foot.namedItem("right").toElement();
         if (!right.isNull())
             fright = right.text();
     }

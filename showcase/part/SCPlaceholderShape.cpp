@@ -57,7 +57,7 @@ void SCPlaceholderShape::paint(QPainter &painter, const KoViewConverter &convert
     }
 }
 
-bool SCPlaceholderShape::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
+bool SCPlaceholderShape::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
 {
     loadOdfAttributes(element, context, OdfAllAttributes);
 #ifndef NWORKAROUND_ODF_BUGS

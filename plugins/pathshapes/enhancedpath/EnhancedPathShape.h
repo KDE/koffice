@@ -109,7 +109,7 @@ protected:
     // from KoShape
     virtual void saveOdf(KoShapeSavingContext &context) const;
     // from KoShape
-    virtual bool loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context);
+    virtual bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context);
     // from KoParameterShape
     virtual void moveHandleAction(int handleId, const QPointF &point, Qt::KeyboardModifiers modifiers = Qt::NoModifier);
     // from KoParameterShape

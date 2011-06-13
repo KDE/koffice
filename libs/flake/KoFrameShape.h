@@ -23,7 +23,7 @@
 #include "flake_export.h"
 
 class KoShapeLoadingContext;
-class KoXmlElement;
+class KXmlElement;
 
 /**
  * @brief Base class for shapes that are saved as a part of a draw:frame.
@@ -44,7 +44,7 @@ class KoXmlElement;
  * the object supports. The loading of the frame element is done in the loadOdfFrameElement.
  *
  * @code
- * bool PictureShape::loadOdf(const KoXmlElement & element, KoShapeLoadingContext &context)
+ * bool PictureShape::loadOdf(const KXmlElement & element, KoShapeLoadingContext &context)
  * {
  *     loadOdfAttributes(element, context, OdfAllAttributes);
  *     return loadOdfFrame(element, context);
@@ -74,7 +74,7 @@ public:
     *
     * @return false if loading failed
     */
-    virtual bool loadOdfFrame(const KoXmlElement &element, KoShapeLoadingContext &context);
+    virtual bool loadOdfFrame(const KXmlElement &element, KoShapeLoadingContext &context);
 
 protected:
 
@@ -83,7 +83,7 @@ protected:
     * e.g. the draw:image element.
     * @return false if loading failed
     */
-    virtual bool loadOdfFrameElement(const KoXmlElement &element, KoShapeLoadingContext &context) = 0;
+    virtual bool loadOdfFrameElement(const KXmlElement &element, KoShapeLoadingContext &context) = 0;
 
 private:
     class Private;

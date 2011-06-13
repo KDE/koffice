@@ -39,7 +39,7 @@ public:
     virtual ~AbstractCondition() {}
     enum Type { And, Or, Condition };
     virtual Type type() const = 0;
-    virtual bool loadOdf(const KoXmlElement& element) = 0;
+    virtual bool loadOdf(const KXmlElement& element) = 0;
     virtual void saveOdf(KXmlWriter& xmlWriter) = 0;
     virtual bool evaluate(const Database& database, int index) const = 0;
     virtual bool isEmpty() const = 0;
@@ -62,7 +62,7 @@ public:
     virtual Type type() const {
         return AbstractCondition::And;
     }
-    virtual bool loadOdf(const KoXmlElement& parent);
+    virtual bool loadOdf(const KXmlElement& parent);
     virtual void saveOdf(KXmlWriter& xmlWriter) {
         if (!list.count())
             return;
@@ -130,7 +130,7 @@ public:
     virtual Type type() const {
         return AbstractCondition::Or;
     }
-    virtual bool loadOdf(const KoXmlElement& element);
+    virtual bool loadOdf(const KXmlElement& element);
     virtual void saveOdf(KXmlWriter& xmlWriter) {
         if (!list.count())
             return;
@@ -217,7 +217,7 @@ public:
     virtual Type type() const {
         return AbstractCondition::Condition;
     }
-    virtual bool loadOdf(const KoXmlElement& element) {
+    virtual bool loadOdf(const KXmlElement& element) {
         if (element.hasAttributeNS(KOdfXmlNS::table, "field-number")) {
             bool ok = false;
             fieldNumber = element.attributeNS(KOdfXmlNS::table, "field-number", QString()).toInt(&ok);
@@ -421,9 +421,9 @@ Filter::And::And(const And& other)
     }
 }
 
-bool Filter::And::loadOdf(const KoXmlElement& parent)
+bool Filter::And::loadOdf(const KXmlElement& parent)
 {
-    KoXmlElement element;
+    KXmlElement element;
     AbstractCondition* condition;
     forEachElement(element, parent) {
         if (element.namespaceURI() != KOdfXmlNS::table)
@@ -457,9 +457,9 @@ Filter::Or::Or(const Or& other)
     }
 }
 
-bool Filter::Or::loadOdf(const KoXmlElement& parent)
+bool Filter::Or::loadOdf(const KXmlElement& parent)
 {
-    KoXmlElement element;
+    KXmlElement element;
     AbstractCondition* condition;
     forEachElement(element, parent) {
         if (element.namespaceURI() != KOdfXmlNS::table)
@@ -635,7 +635,7 @@ bool Filter::evaluate(const Database& database, int index) const
     return d->condition ? d->condition->evaluate(database, index) : true;
 }
 
-bool Filter::loadOdf(const KoXmlElement& element, const KCMap* map)
+bool Filter::loadOdf(const KXmlElement& element, const KCMap* map)
 {
     if (element.hasAttributeNS(KOdfXmlNS::table, "target-range-address")) {
         const QString address = element.attributeNS(KOdfXmlNS::table, "target-range-address", QString());
@@ -661,7 +661,7 @@ bool Filter::loadOdf(const KoXmlElement& element, const KCMap* map)
         else
             d->displayDuplicates = true;
     }
-    KoXmlElement conditionElement;
+    KXmlElement conditionElement;
     forEachElement(conditionElement, element) {
         if (conditionElement.localName() == "filter-and") {
             d->condition = new And();

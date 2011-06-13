@@ -46,7 +46,7 @@ public:
 
 protected:
     /// reimplemented
-    virtual bool process(const KoXmlElement &body, KOdfStoreReader &odfStore);
+    virtual bool process(const KXmlElement &body, KOdfStoreReader &odfStore);
 
 private:
     class Private;

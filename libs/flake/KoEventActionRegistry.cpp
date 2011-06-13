@@ -110,12 +110,12 @@ void KoEventActionRegistry::init()
                                      config);
 }
 
-QSet<KoEventAction*> KoEventActionRegistry::createEventActionsFromOdf(const KoXmlElement & e, KoShapeLoadingContext & context) const
+QSet<KoEventAction*> KoEventActionRegistry::createEventActionsFromOdf(const KXmlElement & e, KoShapeLoadingContext & context) const
 {
     QSet<KoEventAction *> eventActions;
 
     if (e.namespaceURI() == KOdfXmlNS::office && e.tagName() == "event-listeners") {
-        KoXmlElement element;
+        KXmlElement element;
         forEachElement(element, e) {
             if (element.tagName() == "event-listener") {
                 if (element.namespaceURI() == KOdfXmlNS::presentation) {

@@ -153,8 +153,8 @@ static QString normalizeFullPath(QString s)
 QString KOdfStoreReader::mimeForPath(const KoXmlDocument &doc, const QString &_fullPath)
 {
     QString fullPath = normalizeFullPath(_fullPath);
-    KoXmlElement docElem = doc.documentElement();
-    KoXmlElement elem;
+    KXmlElement docElem = doc.documentElement();
+    KXmlElement elem;
     forEachElement(elem, docElem) {
         if (elem.localName() == "file-entry" && elem.namespaceURI() == KOdfXmlNS::manifest) {
             if (normalizeFullPath(elem.attributeNS(KOdfXmlNS::manifest, "full-path", QString())) == fullPath)

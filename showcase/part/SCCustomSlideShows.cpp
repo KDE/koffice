@@ -142,11 +142,11 @@ void SCCustomSlideShows::saveOdf(KoPASavingContext &context)
     }
 }
 
-void SCCustomSlideShows::loadOdf(const KoXmlElement &presentationSettings, KoPALoadingContext &context)
+void SCCustomSlideShows::loadOdf(const KXmlElement &presentationSettings, KoPALoadingContext &context)
 {
     m_customSlideShows.clear();
 
-    KoXmlElement element;
+    KXmlElement element;
     forEachElement(element, presentationSettings) {
         if (element.tagName() == "show" && element.namespaceURI() == KOdfXmlNS::presentation) {
             if (element.hasAttributeNS(KOdfXmlNS::presentation, "name") && element.hasAttributeNS(KOdfXmlNS::presentation, "pages")) {

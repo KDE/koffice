@@ -75,41 +75,41 @@ private:
     KoXmlDocument   m_meta;
     KoXmlDocument   m_settings;
 
-    QHash<QString, KoXmlElement*>   m_styles;
+    QHash<QString, KXmlElement*>   m_styles;
     QHash<QString, KCStyle*> m_defaultStyles;
     QHash<QString, QString*>        m_formats;
-    QMap<QString, KoXmlElement> m_validationList;
+    QMap<QString, KXmlElement> m_validationList;
 
     QStringList          m_namedAreas;
 
     int  readMetaData();
     bool parseBody(int numOfTables);
-    void insertStyles(KoXmlElement const & element);
+    void insertStyles(KXmlElement const & element);
     bool createStyleMap(KoXmlDocument const & styles);
-    bool readRowFormat(KoXmlElement & rowNode, KoXmlElement * rowStyle,
+    bool readRowFormat(KXmlElement & rowNode, KXmlElement * rowStyle,
                        KCSheet * table, int & row, int & number, bool last);
-    bool readColLayouts(KoXmlElement & content, KCSheet * table);
-    bool readRowsAndCells(KoXmlElement & content, KCSheet * table);
-    bool readCells(KoXmlElement & rowNode, KCSheet  * table, int row, int & columns);
+    bool readColLayouts(KXmlElement & content, KCSheet * table);
+    bool readRowsAndCells(KXmlElement & content, KCSheet * table);
+    bool readCells(KXmlElement & rowNode, KCSheet  * table, int row, int & columns);
     void convertFormula(QString & text, QString const & f) const;
-    void loadFontStyle(KCStyle * layout, KoXmlElement const * font) const;
-    void readInStyle(KCStyle * layout, KoXmlElement const & style);
-    void loadStyleProperties(KCStyle * layout, KoXmlElement const & property) const;
+    void loadFontStyle(KCStyle * layout, KXmlElement const * font) const;
+    void readInStyle(KCStyle * layout, KXmlElement const & style);
+    void loadStyleProperties(KCStyle * layout, KXmlElement const & property) const;
     void loadBorder(KCStyle * layout, QString const & borderDef, bPos pos) const;
     void loadTableMasterStyle(KCSheet * table, QString const & stylename);
-    QString * loadFormat(KoXmlElement * element,
+    QString * loadFormat(KXmlElement * element,
                          KCFormat::Type & formatType,
                          QString name);
     void checkForNamedAreas(QString & formula) const;
-    void loadOasisCellValidation(const KoXmlElement&body, const KCValueParser *parser);
+    void loadOasisCellValidation(const KXmlElement&body, const KCValueParser *parser);
     void loadOasisValidation(KCValidity val, const QString& validationName, const KCValueParser *parser);
     void loadOasisValidationCondition(KCValidity val, QString &valExpression, const KCValueParser *parser);
-    void loadOasisAreaName(const KoXmlElement&body);
+    void loadOasisAreaName(const KXmlElement&body);
     void loadOasisMasterLayoutPage(KCSheet * table, KOdfStyleStack &styleStack);
     void loadOasisValidationValue(KCValidity val, const QStringList &listVal, const KCValueParser *parser);
     QString translatePar(QString & par) const;
-    void loadCondition(const KCCell& cell, const KoXmlElement &property);
-    void loadOasisCondition(const KCCell& cell, const KoXmlElement &property);
+    void loadCondition(const KCCell& cell, const KXmlElement &property);
+    void loadOasisCondition(const KCCell& cell, const KXmlElement &property);
     void loadOasisConditionValue(const QString &styleCondition, KCConditional &newCondition, const KCValueParser *parser);
     void loadOasisCondition(QString &valExpression, KCConditional &newCondition, const KCValueParser *parser);
     KoFilter::ConversionStatus loadAndParse(KoXmlDocument& doc, const QString& fileName, KOdfStore *m_store);

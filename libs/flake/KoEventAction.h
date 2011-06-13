@@ -25,7 +25,7 @@
 class KoShapeLoadingContext;
 class KoShapeSavingContext;
 class KoToolBase;
-class KoXmlElement;
+class KXmlElement;
 
 /**
  * This is the base class for actions that are executed on events.
@@ -76,7 +76,7 @@ public:
      *
      * @return false if loading failed
      */
-    virtual bool loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context) = 0;
+    virtual bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context) = 0;
 
     /**
      * Store the action as ODF.

@@ -54,7 +54,7 @@ public:
      * Loads databases.
      * \ingroup OpenDocument
      */
-    bool loadOdf(const KoXmlElement& element);
+    bool loadOdf(const KXmlElement& element);
 
     /**
      * Saves databases.

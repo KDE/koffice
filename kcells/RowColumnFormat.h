@@ -48,8 +48,8 @@ public:
     void setSheet(KCSheet* sheet);
 
     QDomElement save(QDomDocument&, int yshift = 0) const;
-    bool load(const KoXmlElement& row, int yshift = 0, Paste::Mode mode = Paste::Normal);
-    bool loadOdf(const KoXmlElement& row, KoXmlElement * rowStyle);
+    bool load(const KXmlElement& row, int yshift = 0, Paste::Mode mode = Paste::Normal);
+    bool loadOdf(const KXmlElement& row, KXmlElement * rowStyle);
 
     /**
      * \return the row's height
@@ -133,7 +133,7 @@ public:
     void setSheet(KCSheet* sheet);
 
     QDomElement save(QDomDocument&, int xshift = 0) const;
-    bool load(const KoXmlElement& row, int xshift = 0, Paste::Mode mode = Paste::Normal);
+    bool load(const KXmlElement& row, int xshift = 0, Paste::Mode mode = Paste::Normal);
 
     /**
      * \return the column's width

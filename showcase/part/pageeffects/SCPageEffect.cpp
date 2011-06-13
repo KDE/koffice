@@ -116,6 +116,6 @@ void SCPageEffect::saveOdfSmilAttributes(KOdfGenericStyle &style) const
     return m_strategy->saveOdfSmilAttributes(style);
 }
 
-void SCPageEffect::loadOdf(const KoXmlElement &)
+void SCPageEffect::loadOdf(const KXmlElement &)
 {
 }

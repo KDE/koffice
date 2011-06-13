@@ -369,7 +369,7 @@ void KoTextAnchor::saveOdf(KoShapeSavingContext &context)
     }
 }
 
-bool KoTextAnchor::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
+bool KoTextAnchor::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
 {
     Q_D(KoTextAnchor);
     d->distance = shape()->position();

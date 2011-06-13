@@ -46,7 +46,7 @@ int SCAnimationBase::duration() const
     return m_duration;
 }
 
-bool SCAnimationBase::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
+bool SCAnimationBase::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
 {
     Q_UNUSED(context)
     m_begin = SCDurationParser::durationMs(element.attributeNS(KOdfXmlNS::smil, "begin"));

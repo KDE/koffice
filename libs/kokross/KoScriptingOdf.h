@@ -63,7 +63,7 @@ public:
     /** Return the KoXmlDocument instance this reader operates on. */
     KoXmlDocument doc() const;
     /** Return the current element. */
-    KoXmlElement currentElement() const;
+    KXmlElement currentElement() const;
 
 public slots:
 
@@ -190,16 +190,16 @@ protected:
     /** Emit the onElement signal above. */
     void emitOnElement();
     /** Set the current element. */
-    void setCurrentElement(const KoXmlElement &elem);
+    void setCurrentElement(const KXmlElement &elem);
     /** Set the level. */
     void setLevel(int level);
     /** Element-handler. */
-    virtual void handleElement(KoXmlElement &elem, int level = 0);
+    virtual void handleElement(KXmlElement &elem, int level = 0);
 
 private:
     KoScriptingOdfStore *m_store;
     KoXmlDocument m_doc;
-    KoXmlElement m_currentElement;
+    KXmlElement m_currentElement;
     int m_level;
     QString m_filter;
     QRegExp m_filterRegExp;

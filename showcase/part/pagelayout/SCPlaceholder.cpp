@@ -36,7 +36,7 @@ SCPlaceholder::~SCPlaceholder()
 {
 }
 
-bool SCPlaceholder::loadOdf(const KoXmlElement &element, const QRectF &pageSize)
+bool SCPlaceholder::loadOdf(const KXmlElement &element, const QRectF &pageSize)
 {
     if (element.hasAttributeNS(KOdfXmlNS::presentation, "object")) {
         m_presentationObject = element.attributeNS(KOdfXmlNS::presentation, "object");
@@ -103,7 +103,7 @@ void SCPlaceholder::fix(const QRectF &rect)
     }
 }
 
-qreal SCPlaceholder::percent(const KoXmlElement &element, const char * type, qreal absolute)
+qreal SCPlaceholder::percent(const KXmlElement &element, const char * type, qreal absolute)
 {
     qreal tmp = 0.0;
     QString value = element.attributeNS(KOdfXmlNS::svg, type, QString("0%"));

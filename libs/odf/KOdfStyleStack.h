@@ -93,7 +93,7 @@ public:
     /**
      * Pushes the new style onto the stack.
      */
-    void push(const KoXmlElement& style);
+    void push(const KXmlElement& style);
 
     /**
      * Check if any of the styles on the stack has an attribute called 'localName'
@@ -130,7 +130,7 @@ public:
      * in the namespace 'nsURI' starting on top of the stack,
      * and return it.
      */
-    KoXmlElement childNode(const QString &nsURI, const QString &localName) const;
+    KXmlElement childNode(const QString &nsURI, const QString &localName) const;
 
     /**
      * Special case for the current font size, due to special handling of fo:font-size="115%".
@@ -161,7 +161,7 @@ public:
     void setTypeProperties(const char* typeProperties);
 
 private:
-    bool isUserStyle(const KoXmlElement& e, const QString& family) const;
+    bool isUserStyle(const KXmlElement& e, const QString& family) const;
 
     inline bool hasProperty(const QString &nsURI, const QString &localName, const QString *detail) const;
 
@@ -174,7 +174,7 @@ private:
      * We use QValueList instead of QValueStack because we need access to all styles
      * not only the top one.
      */
-    QList<KoXmlElement> m_stack;
+    QList<KXmlElement> m_stack;
 
     QString m_propertiesTagName;
 

@@ -65,7 +65,7 @@ public:
      * @param masterStyles
      * @param context
      */
-    QList<KoPAPageBase *> loadOdfMasterPages(const QHash<QString, KoXmlElement*> masterStyles, KoPALoadingContext &context);
+    QList<KoPAPageBase *> loadOdfMasterPages(const QHash<QString, KXmlElement*> masterStyles, KoPALoadingContext &context);
 
     /**
      * Save pages
@@ -237,7 +237,7 @@ protected:
      *
      * The default implementation is empty
      */
-    virtual bool loadOdfProlog(const KoXmlElement &body, KoPALoadingContext &context);
+    virtual bool loadOdfProlog(const KXmlElement &body, KoPALoadingContext &context);
 
 
     /**
@@ -245,7 +245,7 @@ protected:
      *
      * The default implementation is empty
      */
-    virtual bool loadOdfEpilogue(const KoXmlElement &body, KoPALoadingContext &context);
+    virtual bool loadOdfEpilogue(const KXmlElement &body, KoPALoadingContext &context);
 
     /**
      * Save the prolog
@@ -324,7 +324,7 @@ private:
      * @param body
      * @param context
      */
-    QList<KoPAPageBase *> loadOdfPages(const KoXmlElement &body, KoPALoadingContext &context);
+    QList<KoPAPageBase *> loadOdfPages(const KXmlElement &body, KoPALoadingContext &context);
 
 
 private:

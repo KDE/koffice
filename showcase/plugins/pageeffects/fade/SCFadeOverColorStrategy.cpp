@@ -95,7 +95,7 @@ void SCFadeOverColorStrategy::saveOdfSmilAttributes(KOdfGenericStyle & style) co
     style.addProperty("smil:fadeColor", m_fadeColor.name());
 }
 
-void SCFadeOverColorStrategy::loadOdfSmilAttributes(const KoXmlElement & element)
+void SCFadeOverColorStrategy::loadOdfSmilAttributes(const KXmlElement & element)
 {
     // use black as default
     m_fadeColor.setNamedColor(element.attributeNS(KOdfXmlNS::smil, "fadeColor", "#000000"));

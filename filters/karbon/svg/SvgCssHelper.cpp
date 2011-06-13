@@ -38,7 +38,7 @@ class CssSelectorBase
 public:
     virtual ~CssSelectorBase() {}
     /// Matches the given element
-    virtual bool match(const KoXmlElement &) = 0;
+    virtual bool match(const KXmlElement &) = 0;
     /// Returns string representation of selector
     virtual QString toString() const { return QString(); }
     /**
@@ -52,7 +52,7 @@ public:
 class UniversalSelector : public CssSelectorBase
 {
 public:
-    virtual bool match(const KoXmlElement &)
+    virtual bool match(const KXmlElement &)
     {
         // matches always
         return true;
@@ -71,7 +71,7 @@ public:
     : m_type(type)
     {
     }
-    virtual bool match(const KoXmlElement &e)
+    virtual bool match(const KXmlElement &e)
     {
         return e.tagName() == m_type;
     }
@@ -98,7 +98,7 @@ public:
         if (id.startsWith('#'))
             m_id = id.mid(1);
     }
-    virtual bool match(const KoXmlElement &e)
+    virtual bool match(const KXmlElement &e)
     {
         return e.attribute("id") == m_id;
     }
@@ -149,7 +149,7 @@ public:
         }
     }
 
-    virtual bool match(const KoXmlElement &e)
+    virtual bool match(const KXmlElement &e)
     {
         switch(m_type) {
             case Exists:
@@ -213,7 +213,7 @@ public:
     {
     }
 
-    virtual bool match(const KoXmlElement &e)
+    virtual bool match(const KXmlElement &e)
     {
         if (m_pseudoClass == ":first-child") {
             KoXmlNode parent = e.parentNode();
@@ -256,7 +256,7 @@ public:
         qDeleteAll(m_selectors);
     }
 
-    virtual bool match(const KoXmlElement &e)
+    virtual bool match(const KXmlElement &e)
     {
         foreach(CssSelectorBase *s, m_selectors) {
             if (!s->match(e))
@@ -405,7 +405,7 @@ public:
         return str;
     }
 
-    virtual bool match(const KoXmlElement &e)
+    virtual bool match(const KXmlElement &e)
     {
         int selectorCount = m_selectors.count();
         int combinatorCount = m_combinators.length();
@@ -413,7 +413,7 @@ public:
         if (selectorCount-combinatorCount != 1)
             return false;
 
-        KoXmlElement currentElement = e;
+        KXmlElement currentElement = e;
 
         // match in reverse order
         for(int i = 0; i < selectorCount; ++i) {
@@ -446,7 +446,7 @@ public:
                 KoXmlNode parent = currentElement.parentNode();
                 if (parent.isNull())
                     return false;
-                KoXmlElement parentElement = parent.toElement();
+                KXmlElement parentElement = parent.toElement();
                 if (next->match(parentElement)) {
                     currentElement = parentElement;
                 } else {
@@ -458,7 +458,7 @@ public:
                     neighbor = neighbor.previousSibling();
                 if (neighbor.isNull() || !neighbor.isElement())
                     return false;
-                KoXmlElement neighborElement = neighbor.toElement();
+                KXmlElement neighborElement = neighbor.toElement();
                 if (next->match(neighborElement)) {
                     currentElement = neighborElement;
                 } else {
@@ -624,7 +624,7 @@ SvgCssHelper::~SvgCssHelper()
     delete d;
 }
 
-void SvgCssHelper::parseStylesheet(const KoXmlElement &e)
+void SvgCssHelper::parseStylesheet(const KXmlElement &e)
 {
     QString data;
 
@@ -667,7 +667,7 @@ void SvgCssHelper::parseStylesheet(const KoXmlElement &e)
     }
 }
 
-QStringList SvgCssHelper::matchStyles(const KoXmlElement &element) const
+QStringList SvgCssHelper::matchStyles(const KXmlElement &element) const
 {
     QMap<int, QString> prioritizedRules;
     // match rules to element

@@ -382,12 +382,12 @@ KoShape *ItemStore::createShapeFromPaste(const QByteArray &bytes)
         {
         }
 
-        bool process(const KoXmlElement &body, KOdfStoreReader &odfStore)
+        bool process(const KXmlElement &body, KOdfStoreReader &odfStore)
         {
             KOdfLoadingContext loadingContext(odfStore.styles(), odfStore.store());
             KoShapeLoadingContext context(loadingContext, m_shapeController->resourceManager());
 
-            KoXmlElement element;
+            KXmlElement element;
             forEachElement(element, body) {
                 m_shape = KoShapeRegistry::instance()->createShapeFromOdf(element, context);
                 if (m_shape)

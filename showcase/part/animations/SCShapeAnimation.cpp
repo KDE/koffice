@@ -40,7 +40,7 @@ SCShapeAnimation::~SCShapeAnimation()
 {
 }
 
-bool SCShapeAnimation::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
+bool SCShapeAnimation::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
 {
     Q_UNUSED(element);
     Q_UNUSED(context);

@@ -92,7 +92,7 @@ bool KCProtectableObject::showPasswordDialog(QWidget* parent, Mode mode, const Q
     return true;
 }
 
-void KCProtectableObject::loadXmlProtection(const KoXmlElement& element)
+void KCProtectableObject::loadXmlProtection(const KXmlElement& element)
 {
     if (element.hasAttribute("protected")) {
         const QString passwd = element.attribute("protected");
@@ -101,7 +101,7 @@ void KCProtectableObject::loadXmlProtection(const KoXmlElement& element)
     }
 }
 
-void KCProtectableObject::loadOdfProtection(const KoXmlElement& element)
+void KCProtectableObject::loadOdfProtection(const KXmlElement& element)
 {
     if (element.hasAttributeNS(KOdfXmlNS::table, "protection-key")) {
         QString p = element.attributeNS(KOdfXmlNS::table, "protection-key", QString());

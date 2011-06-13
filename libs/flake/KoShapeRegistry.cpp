@@ -48,7 +48,7 @@ public:
     void insertFactory(KoShapeFactoryBase *factory);
     void init(KoShapeRegistry *q);
 
-    KoShape *createShapeInternal(const KoXmlElement &fullElement, KoShapeLoadingContext &context, const KoXmlElement &element) const;
+    KoShape *createShapeInternal(const KXmlElement &fullElement, KoShapeLoadingContext &context, const KXmlElement &element) const;
 
 
     // Map namespace,tagname to priority:factory
@@ -134,7 +134,7 @@ void KoShapeRegistry::Private::insertFactory(KoShapeFactoryBase *factory)
     }
 }
 
-KoShape * KoShapeRegistry::createShapeFromOdf(const KoXmlElement & e, KoShapeLoadingContext & context) const
+KoShape * KoShapeRegistry::createShapeFromOdf(const KXmlElement & e, KoShapeLoadingContext & context) const
 {
     kDebug(30006) << "Going to check for" << e.namespaceURI() << ":" << e.tagName();
 
@@ -143,7 +143,7 @@ KoShape * KoShapeRegistry::createShapeFromOdf(const KoXmlElement & e, KoShapeLoa
     // application and we only want to create a shape from the
     // embedded element. The very first shape we create is accepted.
     if (e.tagName() == "frame" && e.namespaceURI() == KOdfXmlNS::draw) {
-        KoXmlElement element;
+        KXmlElement element;
         forEachElement(element, e) {
             // Check for draw:object
             if (element.tagName() == "object" && element.namespaceURI() == KOdfXmlNS::draw && element.hasChildNodes()) {
@@ -206,9 +206,9 @@ KoShape * KoShapeRegistry::createShapeFromOdf(const KoXmlElement & e, KoShapeLoa
     return shape;
 }
 
-KoShape *KoShapeRegistry::Private::createShapeInternal(const KoXmlElement &fullElement,
+KoShape *KoShapeRegistry::Private::createShapeInternal(const KXmlElement &fullElement,
                                                        KoShapeLoadingContext &context,
-                                                       const KoXmlElement &element) const
+                                                       const KXmlElement &element) const
 {
     // Pair of namespace, tagname
     QPair<QString, QString> p = QPair<QString, QString>(element.namespaceURI(), element.tagName());

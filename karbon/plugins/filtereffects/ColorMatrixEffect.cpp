@@ -200,7 +200,7 @@ QImage ColorMatrixEffect::processImage(const QImage &image, const KoFilterEffect
     return result;
 }
 
-bool ColorMatrixEffect::load(const KoXmlElement &element, const KoFilterEffectLoadingContext &)
+bool ColorMatrixEffect::load(const KXmlElement &element, const KoFilterEffectLoadingContext &)
 {
     if (element.tagName() != id())
         return false;

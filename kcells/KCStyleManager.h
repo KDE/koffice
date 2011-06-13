@@ -53,7 +53,7 @@ public:
     ~KCStyleManager();
 
     QDomElement save(QDomDocument & doc);
-    bool loadXML(KoXmlElement const & styles);
+    bool loadXML(KXmlElement const & styles);
 
     void saveOdf(KOdfGenericStyles &mainStyles);
     void loadOdfStyleTemplate(KOdfStylesReader& stylesReader, KCMap* map = 0);

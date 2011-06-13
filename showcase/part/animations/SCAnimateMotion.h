@@ -28,7 +28,7 @@ public:
     SCAnimateMotion(SCShapeAnimation *shapeAnimation);
     virtual ~SCAnimateMotion();
 
-    virtual bool loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context);
+    virtual bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context);
     virtual bool saveOdf(KoPASavingContext &paContext) const;
     virtual void init(SCAnimationCache *animationCache, int step);
 

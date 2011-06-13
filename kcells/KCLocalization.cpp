@@ -28,7 +28,7 @@ KCLocalization::KCLocalization()
     insertCatalog("koffice");
 }
 
-void KCLocalization::load(const KoXmlElement& element)
+void KCLocalization::load(const KXmlElement& element)
 {
     if (element.hasAttribute("weekStartsMonday")) {
         QString c = element.attribute("weekStartsMonday");

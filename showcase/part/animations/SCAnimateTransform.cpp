@@ -34,7 +34,7 @@ SCAnimateTransform::~SCAnimateTransform()
 {
 }
 
-bool SCAnimateTransform::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
+bool SCAnimateTransform::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
 {
     SCAnimationBase::loadOdf(element, context);
     return true;

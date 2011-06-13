@@ -47,7 +47,7 @@ KoShape *KarbonCalligraphicShapeFactory::createDefaultShape(KoResourceManager *)
     return path;
 }
 
-bool KarbonCalligraphicShapeFactory::supports(const KoXmlElement & e, KoShapeLoadingContext &context) const
+bool KarbonCalligraphicShapeFactory::supports(const KXmlElement & e, KoShapeLoadingContext &context) const
 {
     Q_UNUSED(e);
     Q_UNUSED(context);

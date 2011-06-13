@@ -347,16 +347,16 @@ KoFormatChangeInformation *KoChangeTracker::formatChangeInformation(int formatCh
     return d->changeInformation.value(formatChangeId);
 }
 
-void KoChangeTracker::loadOdfChanges(const KoXmlElement& element)
+void KoChangeTracker::loadOdfChanges(const KXmlElement& element)
 {
     if (element.namespaceURI() == KOdfXmlNS::text) {
-        KoXmlElement tag;
+        KXmlElement tag;
         forEachElement(tag, element) {
             if (! tag.isNull()) {
                 const QString localName = tag.localName();
                 if (localName == "changed-region") {
                     KoChangeTrackerElement *changeElement = 0;
-                    KoXmlElement region;
+                    KXmlElement region;
                     forEachElement(region, tag) {
                         if (!region.isNull()) {
                             if (region.localName() == "insertion") {
@@ -366,18 +366,18 @@ void KoChangeTracker::loadOdfChanges(const KoXmlElement& element)
                             } else if (region.localName() == "deletion") {
                                 changeElement = new KoChangeTrackerElement(tag.attributeNS(KOdfXmlNS::text,"id"),KOdfGenericChange::DeleteChange);
                             }
-                            KoXmlElement metadata = region.namedItemNS(KOdfXmlNS::office,"change-info").toElement();
+                            KXmlElement metadata = region.namedItemNS(KOdfXmlNS::office,"change-info").toElement();
                             if (!metadata.isNull()) {
-                                KoXmlElement date = metadata.namedItem("dc:date").toElement();
+                                KXmlElement date = metadata.namedItem("dc:date").toElement();
                                 if (!date.isNull()) {
                                     changeElement->setDate(date.text());
                                 }
-                                KoXmlElement creator = metadata.namedItem("dc:creator").toElement();
+                                KXmlElement creator = metadata.namedItem("dc:creator").toElement();
                                 if (!date.isNull()) {
                                     changeElement->setCreator(creator.text());
                                 }
                                 //TODO load comments
-/*                              KoXmlElement extra = metadata.namedItem("dc-").toElement();
+/*                              KXmlElement extra = metadata.namedItem("dc-").toElement();
                                 if (!date.isNull()) {
                                     kDebug() << "creator: " << creator.text();
                                     changeElement->setCreator(creator.text());
@@ -393,7 +393,7 @@ void KoChangeTracker::loadOdfChanges(const KoXmlElement& element)
         }
     } else {
         //This is the ODF 1.2 Change Format
-        KoXmlElement tag;
+        KXmlElement tag;
         forEachElement(tag, element) {
             if (! tag.isNull()) {
                 const QString localName = tag.localName();
@@ -402,13 +402,13 @@ void KoChangeTracker::loadOdfChanges(const KoXmlElement& element)
                     //Set the change element as an insertion element for now
                     //Will be changed to the correct type when actual changes referencing this change-id are encountered
                     changeElement = new KoChangeTrackerElement(tag.attributeNS(KOdfXmlNS::delta,"change-id"),KOdfGenericChange::InsertChange);
-                    KoXmlElement metadata = tag.namedItemNS(KOdfXmlNS::delta,"change-info").toElement();
+                    KXmlElement metadata = tag.namedItemNS(KOdfXmlNS::delta,"change-info").toElement();
                     if (!metadata.isNull()) {
-                           KoXmlElement date = metadata.namedItem("dc:date").toElement();
+                           KXmlElement date = metadata.namedItem("dc:date").toElement();
                            if (!date.isNull()) {
                                 changeElement->setDate(date.text());
                             }
-                            KoXmlElement creator = metadata.namedItem("dc:creator").toElement();
+                            KXmlElement creator = metadata.namedItem("dc:creator").toElement();
                             if (!creator.isNull()) {
                                 changeElement->setCreator(creator.text());
                             }

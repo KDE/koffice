@@ -51,7 +51,7 @@ public:
 
 namespace OoUtils
 {
-QString expandWhitespace(const KoXmlElement& tag);
+QString expandWhitespace(const KXmlElement& tag);
 
 bool parseBorder(const QString & tag, double * width, int * style, QColor * color);
 

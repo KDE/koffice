@@ -148,7 +148,7 @@ void SCPlaceholderStrategy::saveOdf(KoShapeSavingContext &context)
     writer.addCompleteElement(m_placeholderData->m_xmlElement);
 }
 
-bool SCPlaceholderStrategy::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
+bool SCPlaceholderStrategy::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
 {
     Q_UNUSED(element);
     Q_UNUSED(context);

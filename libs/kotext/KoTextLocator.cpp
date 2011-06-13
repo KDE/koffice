@@ -165,7 +165,7 @@ void KoTextLocator::removeListener(KoTextReference *reference)
     d->listeners.removeAll(reference);
 }
 
-bool KoTextLocator::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
+bool KoTextLocator::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
 {
     Q_UNUSED(element);
     Q_UNUSED(context);

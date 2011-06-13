@@ -200,7 +200,7 @@ void KarbonDocument::saveOasis(KoShapeSavingContext &context) const
     context.xmlWriter().endElement(); // draw:page
 }
 
-bool KarbonDocument::loadOasis(const KoXmlElement &element, KoShapeLoadingContext &context)
+bool KarbonDocument::loadOasis(const KXmlElement &element, KoShapeLoadingContext &context)
 {
     // load text styles used by text shapes
     loadOdfStyles(context);
@@ -210,10 +210,10 @@ bool KarbonDocument::loadOasis(const KoXmlElement &element, KoShapeLoadingContex
     qDeleteAll(d->objects);
     d->objects.clear();
 
-    const KoXmlElement & pageLayerSet = KoXml::namedItemNS(element, KOdfXmlNS::draw, "layer-set");
-    const KoXmlElement & usedPageLayerSet = pageLayerSet.isNull() ? context.odfLoadingContext().stylesReader().layerSet() : pageLayerSet;
+    const KXmlElement & pageLayerSet = KoXml::namedItemNS(element, KOdfXmlNS::draw, "layer-set");
+    const KXmlElement & usedPageLayerSet = pageLayerSet.isNull() ? context.odfLoadingContext().stylesReader().layerSet() : pageLayerSet;
 
-    KoXmlElement layerElement;
+    KXmlElement layerElement;
     forEachElement(layerElement, usedPageLayerSet) {
         KoShapeLayer * l = new KoShapeLayer();
         if (l->loadOdf(layerElement, context))
@@ -226,7 +226,7 @@ bool KarbonDocument::loadOasis(const KoXmlElement &element, KoShapeLoadingContex
     if (d->layers.count() == 0)
         defaultLayer = new KoShapeLayer();
 
-    KoXmlElement child;
+    KXmlElement child;
     forEachElement(child, element) {
         kDebug(38000) << "loading shape" << child.localName();
 
@@ -249,9 +249,9 @@ bool KarbonDocument::loadOasis(const KoXmlElement &element, KoShapeLoadingContex
         insertLayer(defaultLayer);
 
     KOdfStylesReader & styleReader = context.odfLoadingContext().stylesReader();
-    QHash<QString, KoXmlElement*> masterPages = styleReader.masterPages();
+    QHash<QString, KXmlElement*> masterPages = styleReader.masterPages();
 
-    KoXmlElement * master = 0;
+    KXmlElement * master = 0;
     if( masterPages.contains( "Standard" ) )
         master = masterPages.value( "Standard" );
     else if( masterPages.contains( "Default" ) )
@@ -263,7 +263,7 @@ bool KarbonDocument::loadOasis(const KoXmlElement &element, KoShapeLoadingContex
         context.odfLoadingContext().setUseStylesAutoStyles( true );
 
         QList<KoShape*> masterPageShapes;
-        KoXmlElement child;
+        KXmlElement child;
         forEachElement(child, (*master)) {
             kDebug(38000) <<"loading master page shape" << child.localName();
             KoShape * shape = KoShapeRegistry::instance()->createShapeFromOdf( child, context );

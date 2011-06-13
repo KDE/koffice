@@ -29,7 +29,7 @@ class KoViewConverter;
 class KXmlWriter;
 class KoFilterEffectRenderContext;
 class KoFilterEffectLoadingContext;
-class KoXmlElement;
+class KXmlElement;
 
 #include "flake_export.h"
 #include <QtCore/QList>
@@ -141,7 +141,7 @@ public:
      * @param context the loading context providing additional data
      * @return true if loading was successful, else false
      */
-    virtual bool load(const KoXmlElement &element, const KoFilterEffectLoadingContext &context) = 0;
+    virtual bool load(const KXmlElement &element, const KoFilterEffectLoadingContext &context) = 0;
 
     /**
      * Writes custom data to given xml element.

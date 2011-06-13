@@ -118,15 +118,15 @@ bool KoPADocument::loadOdf(KOdfStoreReader &odfStore)
     KOdfLoadingContext loadingContext(odfStore.styles(), odfStore.store(), componentData());
     KoPALoadingContext paContext(loadingContext, resourceManager());
 
-    KoXmlElement content = odfStore.contentDoc().documentElement();
-    KoXmlElement realBody (KoXml::namedItemNS(content, KOdfXmlNS::office, "body"));
+    KXmlElement content = odfStore.contentDoc().documentElement();
+    KXmlElement realBody (KoXml::namedItemNS(content, KOdfXmlNS::office, "body"));
 
     if (realBody.isNull()) {
         kError(30010) << "No body tag found!" << endl;
         return false;
     }
 
-    KoXmlElement body = KoXml::namedItemNS(realBody, KOdfXmlNS::office, odfTagName(false));
+    KXmlElement body = KoXml::namedItemNS(realBody, KOdfXmlNS::office, odfTagName(false));
 
     if (body.isNull()) {
         kError(30010) << "No office:" << odfTagName(false) << " tag found!" << endl;
@@ -232,12 +232,12 @@ bool KoPADocument::saveOdf(SavingContext &documentContext)
     return paContext.saveDataCenter(documentContext.odfStore.store(), documentContext.odfStore.manifestWriter());
 }
 
-QList<KoPAPageBase *> KoPADocument::loadOdfMasterPages(const QHash<QString, KoXmlElement*> masterStyles, KoPALoadingContext &context)
+QList<KoPAPageBase *> KoPADocument::loadOdfMasterPages(const QHash<QString, KXmlElement*> masterStyles, KoPALoadingContext &context)
 {
     context.odfLoadingContext().setUseStylesAutoStyles(true);
     QList<KoPAPageBase *> masterPages;
 
-    QHash<QString, KoXmlElement*>::const_iterator it(masterStyles.constBegin());
+    QHash<QString, KXmlElement*>::const_iterator it(masterStyles.constBegin());
     for (; it != masterStyles.constEnd(); ++it)
     {
         kDebug(30010) << "Master:" << it.key();
@@ -250,14 +250,14 @@ QList<KoPAPageBase *> KoPADocument::loadOdfMasterPages(const QHash<QString, KoXm
     return masterPages;
 }
 
-QList<KoPAPageBase *> KoPADocument::loadOdfPages(const KoXmlElement &body, KoPALoadingContext &context)
+QList<KoPAPageBase *> KoPADocument::loadOdfPages(const KXmlElement &body, KoPALoadingContext &context)
 {
     if (d->masterPages.isEmpty()) { // we require at least one master page. Auto create one if the doc was faulty.
         d->masterPages << newMasterPage();
     }
 
     QList<KoPAPageBase *> pages;
-    KoXmlElement element;
+    KXmlElement element;
     forEachElement(element, body) {
         if (element.tagName() == "page" && element.namespaceURI() == KOdfXmlNS::draw) {
             KoPAPage *page = newPage(static_cast<KoPAMasterPage*>(d->masterPages.first()));
@@ -268,14 +268,14 @@ QList<KoPAPageBase *> KoPADocument::loadOdfPages(const KoXmlElement &body, KoPAL
     return pages;
 }
 
-bool KoPADocument::loadOdfEpilogue(const KoXmlElement &body, KoPALoadingContext &context)
+bool KoPADocument::loadOdfEpilogue(const KXmlElement &body, KoPALoadingContext &context)
 {
     Q_UNUSED(body);
     Q_UNUSED(context);
     return true;
 }
 
-bool KoPADocument::loadOdfProlog(const KoXmlElement &body, KoPALoadingContext &context)
+bool KoPADocument::loadOdfProlog(const KXmlElement &body, KoPALoadingContext &context)
 {
     Q_UNUSED(body);
     Q_UNUSED(context);

@@ -216,13 +216,13 @@ KoTextPage* KoTextShapeData::page() const
     return d->textpage;
 }
 
-bool KoTextShapeData::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context, KoDocumentRdfBase *rdfData, KoShape *shape)
+bool KoTextShapeData::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context, KoDocumentRdfBase *rdfData, KoShape *shape)
 {
     Q_UNUSED(rdfData);
     KoTextLoader loader(context, shape);
 
     QTextCursor cursor(document());
-    loader.loadBody(element, cursor);   // now let's load the body from the ODF KoXmlElement.
+    loader.loadBody(element, cursor);   // now let's load the body from the ODF KXmlElement.
     KoTextEditor *editor = KoTextDocument(document()).textEditor();
     if (editor) // at one point we have to get the position from the odf doc instead.
         editor->setPosition(0);

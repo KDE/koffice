@@ -74,11 +74,11 @@ private:
 
     void loadSettings(const KoXmlDocument &settings);
     void loadMasterPageStyles(KOdfLoadingContext& context, bool hasMainTextFS);
-    void loadHeaderFooter(KOdfLoadingContext &context, KWPageStyle &pageStyle, const KoXmlElement &masterPageStyle, HFLoadType headerFooter);
+    void loadHeaderFooter(KOdfLoadingContext &context, KWPageStyle &pageStyle, const KXmlElement &masterPageStyle, HFLoadType headerFooter);
     void loadFinished(KOdfLoadingContext &context, QTextCursor &cursor);
 
     /// helper function to create a KWTextFrameSet+KWTextFrame for a header/footer.
-    void loadHeaderFooterFrame(KOdfLoadingContext &context, const KWPageStyle &pageStyle, const KoXmlElement &elem, KWord::TextFrameSetType fsType);
+    void loadHeaderFooterFrame(KOdfLoadingContext &context, const KWPageStyle &pageStyle, const KXmlElement &elem, KWord::TextFrameSetType fsType);
 
 private:
     /// The KWord document.

@@ -22,7 +22,7 @@
 
 #include "flake_export.h"
 
-class KoXmlElement;
+class KXmlElement;
 class KoShape;
 class KoShapeLoadingContext;
 class QPen;
@@ -54,18 +54,18 @@ namespace KoOdfWorkaround
      * OpenOffice < 3.0 does not store the draw:enhanced-path for draw:type="ellipse"
      * Add the path needed for the ellipse
      */
-    FLAKE_EXPORT void fixEnhancedPath(QString &path, const KoXmlElement &element, KoShapeLoadingContext &context);
+    FLAKE_EXPORT void fixEnhancedPath(QString &path, const KXmlElement &element, KoShapeLoadingContext &context);
 
     /**
      * OpenOffice interchanges the position coordinates for polar handles.
      * According to the specification the first coordinate is the angle, the
      * second coordinates is the radius. OpenOffice does it the other way around.
      */
-    FLAKE_EXPORT void fixEnhancedPathPolarHandlePosition(QString &position, const KoXmlElement &element, KoShapeLoadingContext &context);
+    FLAKE_EXPORT void fixEnhancedPathPolarHandlePosition(QString &position, const KXmlElement &element, KoShapeLoadingContext &context);
 
-    FLAKE_EXPORT bool   fixMissingStroke(QPen &pen, const KoXmlElement &element, KoShapeLoadingContext &context, const KoShape *shape = 0);
-    FLAKE_EXPORT QColor fixMissingFillColor(const KoXmlElement &element, KoShapeLoadingContext &context);
-    FLAKE_EXPORT bool   fixMissingStyle_DisplayLabel(const KoXmlElement &element, KoShapeLoadingContext &context);
+    FLAKE_EXPORT bool   fixMissingStroke(QPen &pen, const KXmlElement &element, KoShapeLoadingContext &context, const KoShape *shape = 0);
+    FLAKE_EXPORT QColor fixMissingFillColor(const KXmlElement &element, KoShapeLoadingContext &context);
+    FLAKE_EXPORT bool   fixMissingStyle_DisplayLabel(const KXmlElement &element, KoShapeLoadingContext &context);
 
     FLAKE_EXPORT KoColorBackground *fixBackgroundColor(const KoShape *shape, KoShapeLoadingContext &context);
 

@@ -27,7 +27,7 @@
 
 class KoShape;
 class KarbonDocument;
-class KoXmlElement;
+class KXmlElement;
 
 class SvgImport : public KoFilter
 {
@@ -42,7 +42,7 @@ public:
 protected:
 
     /// The main entry point for the conversion
-    void convert(const KoXmlElement &rootElement);
+    void convert(const KXmlElement &rootElement);
 
     /// Builds the document from the given shapes list
     void buildDocument(const QList<KoShape*> &toplevelShapes, const QList<KoShape*> &shapes);

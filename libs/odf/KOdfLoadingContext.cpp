@@ -91,12 +91,12 @@ void KOdfLoadingContext::setManifestFile(const QString& fileName) {
     (void)oasisStore.loadAndParse(fileName, d->manifestDoc, dummy);
 }
 
-void KOdfLoadingContext::fillStyleStack(const KoXmlElement& object, const QString &nsURI, const QString &attrName, const QString &family)
+void KOdfLoadingContext::fillStyleStack(const KXmlElement& object, const QString &nsURI, const QString &attrName, const QString &family)
 {
     // find all styles associated with an object and push them on the stack
     if (object.hasAttributeNS(nsURI, attrName)) {
         const QString styleName = object.attributeNS(nsURI, attrName);
-        const KoXmlElement * style = d->stylesReader.findStyle(styleName, family, d->useStylesAutoStyles);
+        const KXmlElement * style = d->stylesReader.findStyle(styleName, family, d->useStylesAutoStyles);
 
         if (style)
             addStyles(style, family, d->useStylesAutoStyles);
@@ -105,7 +105,7 @@ void KOdfLoadingContext::fillStyleStack(const KoXmlElement& object, const QStrin
     }
 }
 
-void KOdfLoadingContext::addStyles(const KoXmlElement* style, const QString &family, bool usingStylesAutoStyles)
+void KOdfLoadingContext::addStyles(const KXmlElement* style, const QString &family, bool usingStylesAutoStyles)
 {
     Q_ASSERT(style);
     if (!style) return;
@@ -113,7 +113,7 @@ void KOdfLoadingContext::addStyles(const KoXmlElement* style, const QString &fam
     // this recursive function is necessary as parent styles can have parents themselves
     const QString parentStyleName = style->attributeNS(KOdfXmlNS::style, "parent-style-name");
     if (!parentStyleName.isEmpty()) {
-        const KoXmlElement* parentStyle = d->stylesReader.findStyle(parentStyleName, family, usingStylesAutoStyles);
+        const KXmlElement* parentStyle = d->stylesReader.findStyle(parentStyleName, family, usingStylesAutoStyles);
 
         if (parentStyle)
             addStyles(parentStyle, family, usingStylesAutoStyles);
@@ -121,14 +121,14 @@ void KOdfLoadingContext::addStyles(const KoXmlElement* style, const QString &fam
             kWarning(32500) << "Parent style not found: " << family << parentStyleName << usingStylesAutoStyles;
             //we are handling a non compliant odf file. let's at the very least load the application default, and the eventual odf default
             if (!family.isEmpty()) {
-                const KoXmlElement* def = d->stylesReader.defaultStyle(family);
+                const KXmlElement* def = d->stylesReader.defaultStyle(family);
                 if (def) {   // then, the default style for this family
                     d->styleStack.push(*def);
                 }
             }
         }
     } else if (!family.isEmpty()) {
-        const KoXmlElement* def = d->stylesReader.defaultStyle(family);
+        const KXmlElement* def = d->stylesReader.defaultStyle(family);
         if (def) {   // then, the default style for this family
             d->styleStack.push(*def);
         }
@@ -158,7 +158,7 @@ void KOdfLoadingContext::parseGenerator() const
         if (oasisStore.loadAndParse("meta.xml", metaDoc, errorMsg)) {
             KoXmlNode meta   = KoXml::namedItemNS(metaDoc, KOdfXmlNS::office, "document-meta");
             KoXmlNode office = KoXml::namedItemNS(meta, KOdfXmlNS::office, "meta");
-            KoXmlElement generator = KoXml::namedItemNS(office, KOdfXmlNS::meta, "generator");
+            KXmlElement generator = KoXml::namedItemNS(office, KOdfXmlNS::meta, "generator");
             if (!generator.isNull()) {
                 d->generator = generator.text();
                 if (d->generator.startsWith("KOffice")) {

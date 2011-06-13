@@ -159,7 +159,7 @@ bool KoBookmark::hasSelection() const
     return d->selection;
 }
 
-bool KoBookmark::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
+bool KoBookmark::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
 {
     Q_UNUSED(element);
     Q_UNUSED(context);

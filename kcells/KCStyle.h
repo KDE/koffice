@@ -166,9 +166,9 @@ public:
     void setParentName(const QString& name);
 
 
-    bool loadXML(KoXmlElement& format, Paste::Mode pm = Paste::Normal);
+    bool loadXML(KXmlElement& format, Paste::Mode pm = Paste::Normal);
     void saveXML(QDomDocument& doc, QDomElement& format, const KCStyleManager* styleManager) const;
-    void loadOdfStyle(KOdfStylesReader& stylesReader, const KoXmlElement& element,
+    void loadOdfStyle(KOdfStylesReader& stylesReader, const KXmlElement& element,
                       KCConditions& conditions, const KCStyleManager* styleManager,
                       const KCValueParser *parser);
     void loadOdfDataStyle(KOdfStylesReader& stylesReader, const QString& dataStyleName,
@@ -244,7 +244,7 @@ protected:
     void saveOdfStyle(const QSet<Key>& subStyles, KOdfGenericStyle &style,
                       KOdfGenericStyles &mainStyles, const KCStyleManager* manager) const;
 
-    void loadOdfDataStyle(KOdfStylesReader& stylesReader, const KoXmlElement& element,
+    void loadOdfDataStyle(KOdfStylesReader& stylesReader, const KXmlElement& element,
                           KCConditions& conditions, const KCStyleManager* styleManager,
                           const KCValueParser *parser);
     void loadOdfParagraphProperties(KOdfStylesReader& stylesReader, const KOdfStyleStack& element);
@@ -398,7 +398,7 @@ public:
     void setName(QString const & name);
     QString const & name() const;
 
-    bool loadXML(KoXmlElement const & style, QString const & name);
+    bool loadXML(KXmlElement const & style, QString const & name);
     void save(QDomDocument & doc, QDomElement & styles, const KCStyleManager* styleManager);
 
     /**
@@ -408,7 +408,7 @@ public:
      * @param style the DOM element defining the style
      * @param name the style's new name
      */
-    void loadOdf(KOdfStylesReader& stylesReader, const KoXmlElement& style,
+    void loadOdf(KOdfStylesReader& stylesReader, const KXmlElement& style,
                  const QString& name, KCConditions& conditions,
                  const KCStyleManager* styleManager, const KCValueParser *parser);
 

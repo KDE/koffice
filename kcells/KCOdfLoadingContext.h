@@ -40,7 +40,7 @@ public:
 public:
     KOdfLoadingContext& odfContext;
     KoShapeLoadingContext* shapeContext;
-    QHash<QString, KoXmlElement> validities;
+    QHash<QString, KXmlElement> validities;
 };
 
 #endif // KSPREAD_ODF_LOADING_CONTEXT

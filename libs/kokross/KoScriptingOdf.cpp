@@ -47,9 +47,9 @@ KoScriptingOdfReader::~KoScriptingOdfReader()
 
 void KoScriptingOdfReader::start()
 {
-    KoXmlElement elem = m_doc.documentElement();
+    KXmlElement elem = m_doc.documentElement();
     handleElement(elem);
-    setCurrentElement(KoXmlElement());
+    setCurrentElement(KXmlElement());
     setLevel(0);
 }
 
@@ -74,7 +74,7 @@ KoXmlDocument KoScriptingOdfReader::doc() const
     return m_doc;
 }
 
-KoXmlElement KoScriptingOdfReader::currentElement() const
+KXmlElement KoScriptingOdfReader::currentElement() const
 {
     return m_currentElement;
 }
@@ -154,7 +154,7 @@ void KoScriptingOdfReader::emitOnElement()
 emit onElement();
 }
 
-void KoScriptingOdfReader::setCurrentElement(const KoXmlElement &elem)
+void KoScriptingOdfReader::setCurrentElement(const KXmlElement &elem)
 {
     m_currentElement = elem;
 }
@@ -164,7 +164,7 @@ void KoScriptingOdfReader::setLevel(int level)
     m_level = level;
 }
 
-void KoScriptingOdfReader::handleElement(KoXmlElement &elem, int level)
+void KoScriptingOdfReader::handleElement(KXmlElement &elem, int level)
 {
     bool ok = m_filter.isNull();
     if (! ok) {
@@ -179,7 +179,7 @@ void KoScriptingOdfReader::handleElement(KoXmlElement &elem, int level)
         emitOnElement();
     }
     level++;
-    KoXmlElement e;
+    KXmlElement e;
     forEachElement(e, elem)
         handleElement(e, level); // recursive
 }
@@ -187,8 +187,8 @@ void KoScriptingOdfReader::handleElement(KoXmlElement &elem, int level)
 KoScriptingOdfManifestReader::KoScriptingOdfManifestReader(KoScriptingOdfStore *store, const KoXmlDocument &doc)
     : KoScriptingOdfReader(store, doc)
 {
-    KoXmlElement elem = doc.documentElement();
-    KoXmlElement e;
+    KXmlElement elem = doc.documentElement();
+    KXmlElement e;
     forEachElement(e, elem)
         if (e.tagName() == "manifest:file-entry")
             m_entries << QPair<QString,QString>(e.attribute("manifest:media-type"), e.attribute("manifest:full-path"));
@@ -204,7 +204,7 @@ QStringList KoScriptingOdfManifestReader::paths(const QString &type)
 }
 
 #ifndef NDEBUG
-void dumpElem(KoXmlElement elem, int level=0)
+void dumpElem(KXmlElement elem, int level=0)
 {
     QString prefix;
     for (int i = 0; i < level; ++i)
@@ -215,7 +215,7 @@ void dumpElem(KoXmlElement elem, int level=0)
         kDebug(32010)  << QString("%1    %2 = %3").arg(prefix).arg(s).arg(elem.attribute(s));
 #endif
     level++;
-    KoXmlElement e;
+    KXmlElement e;
     forEachElement(e, elem)
         dumpElem(e,level);
 }
