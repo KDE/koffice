@@ -293,7 +293,7 @@ static QDataStream& operator>>(QDataStream& s, KXmlPackedItem& item)
 // bigger value will be better in term of speed, but use more memory
 #define ITEMS_FULL  (1*256)
 
-// LZF stuff is wrapper in KoLZF
+// LZF stuff is wrapper in KLZF
 #ifdef KOXML_COMPRESS
 #ifdef KOXMLVECTOR_USE_LZF
 
@@ -521,14 +521,14 @@ static int lzff_decompress(const void* input, int length, void* output, int maxo
     return op - (quint8*)output;
 }
 
-class KoLZF
+class KLZF
 {
 public:
     static QByteArray compress(const QByteArray&);
     static void decompress(const QByteArray&, QByteArray&);
 };
 
-QByteArray KoLZF::compress(const QByteArray& input)
+QByteArray KLZF::compress(const QByteArray& input)
 {
     const void* const in_data = (const void*) input.constData();
     unsigned int in_len = (unsigned int)input.size();
@@ -568,7 +568,7 @@ QByteArray KoLZF::compress(const QByteArray& input)
 }
 
 // will not squeeze output
-void KoLZF::decompress(const QByteArray& input, QByteArray& output)
+void KLZF::decompress(const QByteArray& input, QByteArray& output)
 {
     // read out first how big is the uncompressed size
     unsigned int unpack_size = 0;
@@ -635,7 +635,7 @@ protected:
 
         bufferStartIndex = startIndex[loc];
 #ifdef KOXMLVECTOR_USE_LZF
-        KoLZF::decompress(blocks[loc], bufferData);
+        KLZF::decompress(blocks[loc], bufferData);
 #else
         bufferData = blocks[loc];
 #endif
@@ -655,7 +655,7 @@ protected:
 
         startIndex.append(bufferStartIndex);
 #ifdef KOXMLVECTOR_USE_LZF
-        blocks.append(KoLZF::compress(buffer.data()));
+        blocks.append(KLZF::compress(buffer.data()));
 #else
         blocks.append(buffer.data());
 #endif
