@@ -23,15 +23,15 @@
 #include <KXmlWriter.h>
 #include <KDebug>
 
-class KoFontFacePrivate : public QSharedData
+class KOdfFontDataPrivate : public QSharedData
 {
 public:
-    KoFontFacePrivate(const QString &_name)
+    KOdfFontDataPrivate(const QString &_name)
     : name(_name), pitch(KOdfFontData::VariablePitch)
     {
     }
 
-    ~KoFontFacePrivate()
+    ~KOdfFontDataPrivate()
     {
     }
 
@@ -57,7 +57,7 @@ public:
 
 
 KOdfFontData::KOdfFontData(const QString &_name)
- : d(new KoFontFacePrivate(_name))
+ : d(new KOdfFontDataPrivate(_name))
 {
 }
 

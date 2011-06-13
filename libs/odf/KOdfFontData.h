@@ -27,7 +27,7 @@
 #include "kodf_export.h"
 
 class KXmlWriter;
-class KoFontFacePrivate;
+class KOdfFontDataPrivate;
 
 /**
  * @brief Represents font style.
@@ -89,7 +89,7 @@ public:
     void saveOdf(KXmlWriter *xmlWriter) const;
 
 private:
-    QSharedDataPointer<KoFontFacePrivate> d;
+    QSharedDataPointer<KOdfFontDataPrivate> d;
 };
 
 #endif /* KOFONTFACE_H */
