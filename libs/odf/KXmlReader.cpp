@@ -277,7 +277,7 @@ static QDataStream& operator>>(QDataStream& s, KXmlPackedItem& item)
 
 // ==================================================================
 //
-//         KoXmlVector
+//         KXmlVector
 //
 // ==================================================================
 
@@ -603,7 +603,7 @@ void KLZF::decompress(const QByteArray& input, QByteArray& output)
 #endif
 
 template <typename T>
-class KoXmlVector
+class KXmlVector
 {
 private:
     unsigned totalItems;
@@ -665,7 +665,7 @@ protected:
     }
 
 public:
-    inline KoXmlVector(): totalItems(0), bufferStartIndex(0) {};
+    inline KXmlVector(): totalItems(0), bufferStartIndex(0) {};
 
     void clear() {
         totalItems = 0;
@@ -703,7 +703,7 @@ public:
     // WARNING: use the return value as soon as possible
     // it may be invalid if another function is invoked
     const T &operator[](int i) const {
-        ((KoXmlVector*)this)->fetchItem((unsigned)i);
+        ((KXmlVector*)this)->fetchItem((unsigned)i);
         return bufferItems[i - bufferStartIndex];
     }
 
@@ -724,7 +724,7 @@ public:
 // ==================================================================
 
 #ifdef KOXML_COMPRESS
-typedef KoXmlVector<KXmlPackedItem> KoXmlPackedGroup;
+typedef KXmlVector<KXmlPackedItem> KoXmlPackedGroup;
 #else
 typedef QVector<KXmlPackedItem> KoXmlPackedGroup;
 #endif
