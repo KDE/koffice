@@ -634,7 +634,7 @@ void SvgCssHelper::parseStylesheet(const KXmlElement &e)
             KoXmlCDATASection cdata = c.toCDATASection();
             data = cdata.data().simplified();
         } else if (c.isText()) {
-            KoXmlText text = c.toText();
+            KXmlText text = c.toText();
             data = text.data().simplified();
         }
     }

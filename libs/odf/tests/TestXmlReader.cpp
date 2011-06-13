@@ -491,7 +491,7 @@ void TestXmlReader::testText()
     QCOMPARE(KoXml::childNodesCount(helloNode), 0);
 
     // "Hello" text
-    KoXmlText helloText;
+    KXmlText helloText;
     helloText = helloNode.toText();
     QCOMPARE(helloText.nodeName(), QString("#text"));
     QCOMPARE(helloText.isNull(), false);
@@ -502,7 +502,7 @@ void TestXmlReader::testText()
     QCOMPARE(KoXml::childNodesCount(helloText), 0);
 
     // shared copy of the text
-    KoXmlText hello2Text;
+    KXmlText hello2Text;
     hello2Text = helloText;
     QCOMPARE(hello2Text.isNull(), false);
     QCOMPARE(hello2Text.isElement(), false);
@@ -527,7 +527,7 @@ void TestXmlReader::testText()
     QCOMPARE(boldElement.prefix().isNull(), true);
 
     // "world" text
-    KoXmlText worldText;
+    KXmlText worldText;
     worldText = boldElement.firstChild().toText();
     QCOMPARE(worldText.isNull(), false);
     QCOMPARE(worldText.isElement(), false);
@@ -584,7 +584,7 @@ void TestXmlReader::testCDATA()
     QCOMPARE(helloNode.isDocument(), false);
 
     // "Hello" text
-    KoXmlText helloText;
+    KXmlText helloText;
     helloText = helloNode.toText();
     QCOMPARE(helloText.isNull(), false);
     QCOMPARE(helloText.isElement(), false);

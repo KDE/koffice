@@ -953,7 +953,7 @@ void OoWriterImport::parseSpanOrSimilar(QDomDocument& doc, const KXmlElement& pa
         const QString localName(ts.localName());
         const QString ns = ts.namespaceURI();
         const bool isTextNS = ns == ooNS::text;
-        KoXmlText t(node.toText());
+        KXmlText t(node.toText());
 
         bool shouldWriteFormat = false; // By default no <FORMAT> element should be written
 

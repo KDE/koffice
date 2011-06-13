@@ -33,7 +33,7 @@ class QString;
 class QXmlStreamReader;
 
 class KXmlNode;
-class KoXmlText;
+class KXmlText;
 class KoXmlCDATASection;
 class KoXmlDocumentType;
 class KXmlDocument;
@@ -43,7 +43,7 @@ class KXmlElement;
 /**
 * KXmlNode represents a node in a DOM tree.
 *
-* KXmlNode is a base class for KXmlElement, KoXmlText.
+* KXmlNode is a base class for KXmlElement, KXmlText.
 * Often, these subclasses are used for getting the data instead of KXmlNode.
 * However, as base class, KXmlNode is very helpful when for example iterating
 * all child nodes within one parent node.
@@ -86,7 +86,7 @@ public:
 
     virtual void clear();
     KXmlElement toElement() const;
-    KoXmlText toText() const;
+    KXmlText toText() const;
     KoXmlCDATASection toCDATASection() const;
     KXmlDocument toDocument() const;
 
@@ -168,16 +168,16 @@ private:
 };
 
 /**
-* KoXmlText represents a text in a DOM tree.
+* KXmlText represents a text in a DOM tree.
 * @author Ariya Hidayat <ariya@kde.org>
 */
-class KODF_EXPORT KoXmlText: public KXmlNode
+class KODF_EXPORT KXmlText: public KXmlNode
 {
 public:
-    KoXmlText();
-    KoXmlText(const KoXmlText& text);
-    KoXmlText& operator=(const KoXmlText& text);
-    virtual ~KoXmlText();
+    KXmlText();
+    KXmlText(const KXmlText& text);
+    KXmlText& operator=(const KXmlText& text);
+    virtual ~KXmlText();
 
     QString data() const;
     void setData(const QString& data);
@@ -187,14 +187,14 @@ private:
     friend class KXmlNode;
     friend class KoXmlCDATASection;
     friend class KXmlDocument;
-    KoXmlText(KXmlNodeData*);
+    KXmlText(KXmlNodeData*);
 };
 
 /**
 * KoXmlCDATASection represents a CDATA section in a DOM tree.
 * @author Ariya Hidayat <ariya@kde.org>
 */
-class KODF_EXPORT KoXmlCDATASection: public KoXmlText
+class KODF_EXPORT KoXmlCDATASection: public KXmlText
 {
 public:
     KoXmlCDATASection();

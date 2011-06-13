@@ -2142,9 +2142,9 @@ KXmlElement KXmlNode::toElement() const
     return isElement() ? KXmlElement(d) : KXmlElement();
 }
 
-KoXmlText KXmlNode::toText() const
+KXmlText KXmlNode::toText() const
 {
-    return isText() ? KoXmlText(d) : KoXmlText();
+    return isText() ? KXmlText(d) : KXmlText();
 }
 
 KoXmlCDATASection KXmlNode::toCDATASection() const
@@ -2284,17 +2284,17 @@ bool KXmlElement::hasAttributeNS(const QString& namespaceURI,
 
 // ==================================================================
 //
-//         KoXmlText
+//         KXmlText
 //
 // ==================================================================
 
-KoXmlText::KoXmlText(): KXmlNode(new KXmlNodeData)
+KXmlText::KXmlText(): KXmlNode(new KXmlNodeData)
 {
     // because referenced also once in KXmlNode constructor
     d->unref();
 }
 
-KoXmlText::~KoXmlText()
+KXmlText::~KXmlText()
 {
     if (d)
         if (d != &KXmlNodeData::null)
@@ -2303,25 +2303,25 @@ KoXmlText::~KoXmlText()
     d = 0;
 }
 
-KoXmlText::KoXmlText(const KoXmlText& text): KXmlNode(text.d)
+KXmlText::KXmlText(const KXmlText& text): KXmlNode(text.d)
 {
 }
 
-KoXmlText::KoXmlText(KXmlNodeData* data): KXmlNode(data)
+KXmlText::KXmlText(KXmlNodeData* data): KXmlNode(data)
 {
 }
 
-bool KoXmlText::isText() const
+bool KXmlText::isText() const
 {
     return true;
 }
 
-QString KoXmlText::data() const
+QString KXmlText::data() const
 {
     return d->data();
 }
 
-KoXmlText& KoXmlText::operator=(const KoXmlText & element)
+KXmlText& KXmlText::operator=(const KXmlText & element)
 {
     KXmlNode::operator=(element);
     return *this;
@@ -2333,13 +2333,13 @@ KoXmlText& KoXmlText::operator=(const KoXmlText & element)
 //
 // ==================================================================
 
-KoXmlCDATASection::KoXmlCDATASection(): KoXmlText()
+KoXmlCDATASection::KoXmlCDATASection(): KXmlText()
 {
     d->nodeType = KXmlNode::CDATASectionNode;
 }
 
 KoXmlCDATASection::KoXmlCDATASection(const KoXmlCDATASection& cdata)
-        : KoXmlText(cdata)
+        : KXmlText(cdata)
 {
     *this = cdata;
 }
@@ -2351,7 +2351,7 @@ KoXmlCDATASection::~KoXmlCDATASection()
 }
 
 KoXmlCDATASection::KoXmlCDATASection(KXmlNodeData* cdata):
-        KoXmlText(cdata)
+        KXmlText(cdata)
 {
 }
 
