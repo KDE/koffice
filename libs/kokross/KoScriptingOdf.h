@@ -163,7 +163,7 @@ public slots:
     //bool isCDATASection() const { return m_currentElement.isCDATASection(); }
     //bool isDocument() const { return m_currentElement.isDocument(); }
     //QString toText() const { return m_currentElement.toText().data(); }
-    //KoXmlCDATASection toCDATASection() const;
+    //KXmlCDATASection toCDATASection() const;
 
     /**
     * Return true if the current element has child nodes. Please note, that

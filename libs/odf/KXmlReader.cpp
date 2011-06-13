@@ -2147,9 +2147,9 @@ KXmlText KXmlNode::toText() const
     return isText() ? KXmlText(d) : KXmlText();
 }
 
-KoXmlCDATASection KXmlNode::toCDATASection() const
+KXmlCDATASection KXmlNode::toCDATASection() const
 {
-    return isCDATASection() ? KoXmlCDATASection(d) : KoXmlCDATASection();
+    return isCDATASection() ? KXmlCDATASection(d) : KXmlCDATASection();
 }
 
 KXmlDocument KXmlNode::toDocument() const
@@ -2329,38 +2329,38 @@ KXmlText& KXmlText::operator=(const KXmlText & element)
 
 // ==================================================================
 //
-//         KoXmlCDATASection
+//         KXmlCDATASection
 //
 // ==================================================================
 
-KoXmlCDATASection::KoXmlCDATASection(): KXmlText()
+KXmlCDATASection::KXmlCDATASection(): KXmlText()
 {
     d->nodeType = KXmlNode::CDATASectionNode;
 }
 
-KoXmlCDATASection::KoXmlCDATASection(const KoXmlCDATASection& cdata)
+KXmlCDATASection::KXmlCDATASection(const KXmlCDATASection& cdata)
         : KXmlText(cdata)
 {
     *this = cdata;
 }
 
-KoXmlCDATASection::~KoXmlCDATASection()
+KXmlCDATASection::~KXmlCDATASection()
 {
     d->unref();
     d = 0;
 }
 
-KoXmlCDATASection::KoXmlCDATASection(KXmlNodeData* cdata):
+KXmlCDATASection::KXmlCDATASection(KXmlNodeData* cdata):
         KXmlText(cdata)
 {
 }
 
-bool KoXmlCDATASection::isCDATASection() const
+bool KXmlCDATASection::isCDATASection() const
 {
     return true;
 }
 
-KoXmlCDATASection& KoXmlCDATASection::operator=(const KoXmlCDATASection & cdata)
+KXmlCDATASection& KXmlCDATASection::operator=(const KXmlCDATASection & cdata)
 {
     KXmlNode::operator=(cdata);
     return *this;

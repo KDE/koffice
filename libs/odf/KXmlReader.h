@@ -34,7 +34,7 @@ class QXmlStreamReader;
 
 class KXmlNode;
 class KXmlText;
-class KoXmlCDATASection;
+class KXmlCDATASection;
 class KoXmlDocumentType;
 class KXmlDocument;
 class KXmlNodeData;
@@ -87,7 +87,7 @@ public:
     virtual void clear();
     KXmlElement toElement() const;
     KXmlText toText() const;
-    KoXmlCDATASection toCDATASection() const;
+    KXmlCDATASection toCDATASection() const;
     KXmlDocument toDocument() const;
 
     virtual QString nodeName() const;
@@ -185,29 +185,29 @@ public:
 
 private:
     friend class KXmlNode;
-    friend class KoXmlCDATASection;
+    friend class KXmlCDATASection;
     friend class KXmlDocument;
     KXmlText(KXmlNodeData*);
 };
 
 /**
-* KoXmlCDATASection represents a CDATA section in a DOM tree.
+* KXmlCDATASection represents a CDATA section in a DOM tree.
 * @author Ariya Hidayat <ariya@kde.org>
 */
-class KODF_EXPORT KoXmlCDATASection: public KXmlText
+class KODF_EXPORT KXmlCDATASection: public KXmlText
 {
 public:
-    KoXmlCDATASection();
-    KoXmlCDATASection(const KoXmlCDATASection& cdata);
-    KoXmlCDATASection& operator=(const KoXmlCDATASection& cdata);
-    virtual ~KoXmlCDATASection();
+    KXmlCDATASection();
+    KXmlCDATASection(const KXmlCDATASection& cdata);
+    KXmlCDATASection& operator=(const KXmlCDATASection& cdata);
+    virtual ~KXmlCDATASection();
 
     virtual bool isCDATASection() const;
 
 private:
     friend class KXmlNode;
     friend class KXmlDocument;
-    KoXmlCDATASection(KXmlNodeData*);
+    KXmlCDATASection(KXmlNodeData*);
 };
 
 /**

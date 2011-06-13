@@ -605,7 +605,7 @@ void TestXmlReader::testCDATA()
 
     // CDATA section for "world!"
     // Note: isText() is also true for CDATA
-    KoXmlCDATASection worldCDATA;
+    KXmlCDATASection worldCDATA;
     worldCDATA = worldNode.toCDATASection();
     QCOMPARE(worldCDATA.nodeName(), QString("#cdata-section"));
     QCOMPARE(worldCDATA.isNull(), false);
