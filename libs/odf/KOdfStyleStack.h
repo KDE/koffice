@@ -181,8 +181,8 @@ private:
     QString m_styleNSURI;
     QString m_foNSURI;
 
-    class KoStyleStackPrivate;
-    KoStyleStackPrivate * const d;
+    class KOdfStyleStackPrivate;
+    KOdfStyleStackPrivate * const d;
 
     // forbidden
     void operator=(const KOdfStyleStack&);

@@ -26,7 +26,7 @@
 
 //#define DEBUG_STYLESTACK
 
-class KOdfStyleStack::KoStyleStackPrivate
+class KOdfStyleStack::KOdfStyleStackPrivate
 {
 };
 
