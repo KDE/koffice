@@ -719,7 +719,7 @@ public:
 
 // ==================================================================
 //
-//         KoXmlPackedDocument
+//         KXmlPackedDocument
 //
 // ==================================================================
 
@@ -734,7 +734,7 @@ typedef QVector<KXmlPackedItem> KoXmlPackedGroup;
 #define GROUP_GROW_SHIFT 3
 #define GROUP_GROW_SIZE (1 << GROUP_GROW_SHIFT)
 
-class KoXmlPackedDocument
+class KXmlPackedDocument
 {
 public:
     bool processNamespace;
@@ -905,7 +905,7 @@ public:
     }
 
 public:
-    KoXmlPackedDocument(): processNamespace(false), currentDepth(0) {
+    KXmlPackedDocument(): processNamespace(false), currentDepth(0) {
         clear();
     }
 
@@ -1024,7 +1024,7 @@ public:
         items.squeeze();
     }
 
-    KoXmlPackedDocument(): processNamespace(false), elementDepth(0) {
+    KXmlPackedDocument(): processNamespace(false), elementDepth(0) {
     }
 
 #endif
@@ -1045,10 +1045,10 @@ namespace {
     };
 
     /// @param inText if true this is a subtree under a text:p or text:h
-    void parseElement(QXmlStreamReader &xml, KoXmlPackedDocument &doc, bool inText);
+    void parseElement(QXmlStreamReader &xml, KXmlPackedDocument &doc, bool inText);
 
     // parse one element as if this were a standalone xml document
-    ParseError parseDocument(QXmlStreamReader &xml, KoXmlPackedDocument &doc) {
+    ParseError parseDocument(QXmlStreamReader &xml, KXmlPackedDocument &doc) {
         doc.clear();
         ParseError error;
         xml.readNext();
@@ -1084,7 +1084,7 @@ namespace {
         return error;
     }
 
-    void parseElementContents(QXmlStreamReader &xml, KoXmlPackedDocument &doc, bool inText)
+    void parseElementContents(QXmlStreamReader &xml, KXmlPackedDocument &doc, bool inText)
     {
         xml.readNext();
         bool appendWhitespace = false;
@@ -1131,7 +1131,7 @@ namespace {
         }
     }
 
-    void parseElement(QXmlStreamReader &xml, KoXmlPackedDocument &doc, bool inText) {
+    void parseElement(QXmlStreamReader &xml, KXmlPackedDocument &doc, bool inText) {
         // reader.tokenType() is now QXmlStreamReader::StartElement
         doc.addElement(xml.qualifiedName().toString(),
                        fixNamespace(xml.namespaceUri().toString()));
@@ -1217,7 +1217,7 @@ public:
     void setData(const QString& data);
 
     // reference from within the packed doc
-    KoXmlPackedDocument* packedDoc;
+    KXmlPackedDocument* packedDoc;
     unsigned long nodeIndex;
 
     // for document node
@@ -1436,7 +1436,7 @@ bool KoXmlNodeData::setContent(QXmlStreamReader* reader, QString* errorMsg, int*
     if (!reader) return false;
 
     delete packedDoc;
-    packedDoc = new KoXmlPackedDocument;
+    packedDoc = new KXmlPackedDocument;
     packedDoc->processNamespace = reader->namespaceProcessing();
 
     ParseError error = parseDocument(*reader, *packedDoc);
@@ -1692,7 +1692,7 @@ void KoXmlNodeData::unloadChildren()
 #ifdef KOXML_COMPACT
 
 
-static QDomNode itemAsQDomNode(QDomDocument ownerDoc, KoXmlPackedDocument* packedDoc,
+static QDomNode itemAsQDomNode(QDomDocument ownerDoc, KXmlPackedDocument* packedDoc,
                                unsigned nodeDepth, unsigned nodeIndex)
 {
     // sanity check
@@ -1782,7 +1782,7 @@ QDomNode KoXmlNodeData::asQDomNode(QDomDocument ownerDoc) const
 
 #else
 
-static QDomNode itemAsQDomNode(QDomDocument ownerDoc, KoXmlPackedDocument* packedDoc,
+static QDomNode itemAsQDomNode(QDomDocument ownerDoc, KXmlPackedDocument* packedDoc,
                                unsigned nodeIndex)
 {
     // sanity check
