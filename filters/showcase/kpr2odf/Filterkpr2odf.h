@@ -52,7 +52,7 @@ private:
     void createImageList(KOdfStore* output, KOdfStore* input, KXmlWriter* manifest);
     void createSoundList(KOdfStore* output, KOdfStore* input, KXmlWriter* manifest);
     void convertContent(KXmlWriter* content);
-    void convertObjects(KXmlWriter* content, const KoXmlNode& objects);
+    void convertObjects(KXmlWriter* content, const KXmlNode& objects);
     void saveAnimations(KXmlWriter* content);
 
     //Objects' functions
@@ -88,7 +88,7 @@ private:
     const QString createGradientStyle(const KXmlElement& page);
     const QString createGraphicStyle(const KXmlElement& page);
     const QString createPageLayout();//we use more than one tag, better load them from m_mainDoc
-    const QString createMasterPageStyle(const KoXmlNode & objects, const KXmlElement & masterBackground);  //same as above
+    const QString createMasterPageStyle(const KXmlNode & objects, const KXmlElement & masterBackground);  //same as above
     const QString createOpacityGradientStyle(int opacity);
     const QString createMarkerStyle(int markerType);
     const QString createStrokeDashStyle(int strokeStyle);

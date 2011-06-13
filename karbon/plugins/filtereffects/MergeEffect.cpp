@@ -66,7 +66,7 @@ bool MergeEffect::load(const KXmlElement &element, const KoFilterEffectLoadingCo
 
     int inputCount = inputs().count();
     int inputIndex = 0;
-    for (KoXmlNode n = element.firstChild(); !n.isNull(); n = n.nextSibling()) {
+    for (KXmlNode n = element.firstChild(); !n.isNull(); n = n.nextSibling()) {
         KXmlElement node = n.toElement();
         if (node.tagName() == "feMergeNode") {
             if (node.hasAttribute("in")) {

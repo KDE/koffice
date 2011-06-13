@@ -194,7 +194,7 @@ void OoUtils::importTabulators(QDomElement& parentElement, const KOdfStyleStack&
         return;
     KXmlElement tabStops = styleStack.childNode(ooNS::style, "tab-stops");
     //kDebug(30519) << tabStops.childNodes().count() <<" tab stops in layout.";
-    for (KoXmlNode it = tabStops.firstChild(); !it.isNull(); it = it.nextSibling()) {
+    for (KXmlNode it = tabStops.firstChild(); !it.isNull(); it = it.nextSibling()) {
         KXmlElement tabStop = it.toElement();
         Q_ASSERT(tabStop.prefix() == "style");
         Q_ASSERT(tabStop.tagName() == "tab-stop");
@@ -395,8 +395,8 @@ void OoUtils::importTextPosition(const QString& text_position, QString& value, Q
 
 void OoUtils::createDocumentInfo(KXmlDocument &_meta, QDomDocument & docinfo)
 {
-    KoXmlNode meta   = KoXml::namedItemNS(_meta, ooNS::office, "document-meta");
-    KoXmlNode office = KoXml::namedItemNS(meta, ooNS::office, "meta");
+    KXmlNode meta   = KoXml::namedItemNS(_meta, ooNS::office, "document-meta");
+    KXmlNode office = KoXml::namedItemNS(meta, ooNS::office, "meta");
 
     if (office.isNull())
         return;

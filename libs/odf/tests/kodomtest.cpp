@@ -63,7 +63,7 @@ void KoDomTest::testQDom()
     QCOMPARE(elem.prefix(), QString("o"));
     QCOMPARE(elem.namespaceURI(), KoXmlNS_office);
 
-    KoXmlNode n = elem.firstChild();
+    KXmlNode n = elem.firstChild();
     for (; !n.isNull() ; n = n.nextSibling()) {
         if (!n.isElement())
             continue;

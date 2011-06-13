@@ -216,11 +216,11 @@ public:
     virtual bool match(const KXmlElement &e)
     {
         if (m_pseudoClass == ":first-child") {
-            KoXmlNode parent = e.parentNode();
+            KXmlNode parent = e.parentNode();
             if (parent.isNull()) {
                 return false;
             }
-            KoXmlNode firstChild = parent.firstChild();
+            KXmlNode firstChild = parent.firstChild();
             while(!firstChild.isElement() || firstChild.isNull()) {
                 firstChild = firstChild.nextSibling();
             }
@@ -430,7 +430,7 @@ public:
             if (combinator == ' ') {
                 bool matched = false;
                 // descendant combinator
-                KoXmlNode parent = currentElement.parentNode();
+                KXmlNode parent = currentElement.parentNode();
                 while(!parent.isNull()) {
                     currentElement = parent.toElement();
                     if (next->match(currentElement)) {
@@ -443,7 +443,7 @@ public:
                     return false;
             } else if (combinator == '>') {
                 // child selector
-                KoXmlNode parent = currentElement.parentNode();
+                KXmlNode parent = currentElement.parentNode();
                 if (parent.isNull())
                     return false;
                 KXmlElement parentElement = parent.toElement();
@@ -453,7 +453,7 @@ public:
                     return false;
                 }
             } else if (combinator == '+') {
-                KoXmlNode neighbor = currentElement.previousSibling();
+                KXmlNode neighbor = currentElement.previousSibling();
                 while(!neighbor.isNull() && !neighbor.isElement())
                     neighbor = neighbor.previousSibling();
                 if (neighbor.isNull() || !neighbor.isElement())
@@ -629,7 +629,7 @@ void SvgCssHelper::parseStylesheet(const KXmlElement &e)
     QString data;
 
     if (e.hasChildNodes()) {
-        KoXmlNode c = e.firstChild();
+        KXmlNode c = e.firstChild();
         if (c.isCDATASection()) {
             KoXmlCDATASection cdata = c.toCDATASection();
             data = cdata.data().simplified();

@@ -570,7 +570,7 @@ bool KCMap::loadOdf(const KXmlElement& body, KOdfLoadingContext& odfContext)
         loadOdfProtection(body);
     }
 
-    KoXmlNode sheetNode = KoXml::namedItemNS(body, KOdfXmlNS::table, "table");
+    KXmlNode sheetNode = KoXml::namedItemNS(body, KOdfXmlNS::table, "table");
 
     if (sheetNode.isNull()) {
         // We need at least one sheet !
@@ -661,7 +661,7 @@ bool KCMap::loadXML(const KXmlElement& mymap)
     const QPointF offset(mymap.attribute("xOffset").toDouble(), mymap.attribute("yOffset").toDouble());
     loadingInfo()->setScrollingOffset(findSheet(activeSheet), offset);
 
-    KoXmlNode n = mymap.firstChild();
+    KXmlNode n = mymap.firstChild();
     if (n.isNull()) {
         // We need at least one sheet !
         doc()->setErrorMessage(i18n("This document has no sheets (tables)."));

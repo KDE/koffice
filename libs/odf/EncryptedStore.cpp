@@ -178,7 +178,7 @@ bool EncryptedStore::init(Mode mode, const QByteArray & appIdentification)
 
         if (xmlroot.hasChildNodes()) {
             QCA::Base64 base64decoder(QCA::Decode);
-            KoXmlNode xmlnode = xmlroot.firstChild();
+            KXmlNode xmlnode = xmlroot.firstChild();
             while (!xmlnode.isNull()) {
                 // Search for files
                 if (!xmlnode.isElement() || xmlnode.toElement().tagName() != "manifest:file-entry" || !xmlnode.toElement().hasAttribute("manifest:full-path") || !xmlnode.hasChildNodes()) {
@@ -202,7 +202,7 @@ bool EncryptedStore::init(Mode mode, const QByteArray & appIdentification)
                 }
 
                 // Find the embedded encryption-data block
-                KoXmlNode xmlencnode = xmlnode.firstChild();
+                KXmlNode xmlencnode = xmlnode.firstChild();
                 while (!xmlencnode.isNull() && (!xmlencnode.isElement() || xmlencnode.toElement().tagName() != "manifest:encryption-data" || !xmlencnode.hasChildNodes())) {
                     xmlencnode = xmlencnode.nextSibling();
                 }
@@ -236,7 +236,7 @@ bool EncryptedStore::init(Mode mode, const QByteArray & appIdentification)
                     }
                 }
 
-                KoXmlNode xmlencattr = xmlencnode.firstChild();
+                KXmlNode xmlencattr = xmlencnode.firstChild();
                 bool algorithmFound = false;
                 bool keyDerivationFound = false;
                 // Search all data about encrption

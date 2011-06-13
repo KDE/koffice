@@ -1583,7 +1583,7 @@ bool KCCell::loadOdf(const KXmlElement& element, KCOdfLoadingContext& tableConte
     KXmlElement annotationElement = KoXml::namedItemNS(element, KOdfXmlNS::office, sAnnotation);
     if (!annotationElement.isNull()) {
         QString comment;
-        KoXmlNode node = annotationElement.firstChild();
+        KXmlNode node = annotationElement.firstChild();
         while (!node.isNull()) {
             KXmlElement commentElement = node.toElement();
             if (!commentElement.isNull())
@@ -1604,9 +1604,9 @@ bool KCCell::loadOdf(const KXmlElement& element, KCOdfLoadingContext& tableConte
 }
 
 // Similar to KoXml::namedItemNS except that children of span tags will be evaluated too.
-KXmlElement namedItemNSWithSpan(const KoXmlNode& node, const QString &nsURI, const QString &localName)
+KXmlElement namedItemNSWithSpan(const KXmlNode& node, const QString &nsURI, const QString &localName)
 {
-    KoXmlNode n = node.firstChild();
+    KXmlNode n = node.firstChild();
     for (; !n.isNull(); n = n.nextSibling()) {
         if (n.isElement()) {
             if (n.localName() == localName && n.namespaceURI() == nsURI) {

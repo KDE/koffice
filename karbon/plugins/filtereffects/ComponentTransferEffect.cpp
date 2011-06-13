@@ -197,7 +197,7 @@ bool ComponentTransferEffect::load(const KXmlElement &element, const KoFilterEff
     m_data[ChannelB] = Data();
     m_data[ChannelA] = Data();
 
-    for (KoXmlNode n = element.firstChild(); !n.isNull(); n = n.nextSibling()) {
+    for (KXmlNode n = element.firstChild(); !n.isNull(); n = n.nextSibling()) {
         KXmlElement node = n.toElement();
         if (node.tagName() == "feFuncR") {
             loadChannel(ChannelR, node);

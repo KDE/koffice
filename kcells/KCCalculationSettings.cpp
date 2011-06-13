@@ -84,7 +84,7 @@ KCCalculationSettings::~KCCalculationSettings()
 
 void KCCalculationSettings::loadOdf(const KXmlElement& body)
 {
-    KoXmlNode settings = KoXml::namedItemNS(body, KOdfXmlNS::table, "calculation-settings");
+    KXmlNode settings = KoXml::namedItemNS(body, KOdfXmlNS::table, "calculation-settings");
     kDebug() << "Calculation settings found?" << !settings.isNull();
     if (!settings.isNull()) {
         KXmlElement element = settings.toElement();

@@ -149,7 +149,7 @@ KoShape * KoShapeRegistry::createShapeFromOdf(const KXmlElement & e, KoShapeLoad
             if (element.tagName() == "object" && element.namespaceURI() == KOdfXmlNS::draw && element.hasChildNodes()) {
                 // Loop through the elements and find the first one
                 // that is handled by any shape.
-                KoXmlNode n = element.firstChild();
+                KXmlNode n = element.firstChild();
                 for (; !n.isNull(); n = n.nextSibling()) {
                     if (n.isElement()) {
                         shape = d->createShapeInternal(e, context, n.toElement());

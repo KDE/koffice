@@ -1276,11 +1276,11 @@ bool KCSheet::loadSheetStyleFormat(KXmlElement *style)
 {
     QString hleft, hmiddle, hright;
     QString fleft, fmiddle, fright;
-    KoXmlNode header = KoXml::namedItemNS(*style, KOdfXmlNS::style, "header");
+    KXmlNode header = KoXml::namedItemNS(*style, KOdfXmlNS::style, "header");
 
     if (!header.isNull()) {
         kDebug(36003) << "Header exists";
-        KoXmlNode part = KoXml::namedItemNS(header, KOdfXmlNS::style, "region-left");
+        KXmlNode part = KoXml::namedItemNS(header, KOdfXmlNS::style, "region-left");
         if (!part.isNull()) {
             hleft = getPart(part);
             kDebug(36003) << "Header left:" << hleft;
@@ -1300,7 +1300,7 @@ bool KCSheet::loadSheetStyleFormat(KXmlElement *style)
         hleft.append(getPart(header));
     }
     //TODO implement it under kcells
-    KoXmlNode headerleft = KoXml::namedItemNS(*style, KOdfXmlNS::style, "header-left");
+    KXmlNode headerleft = KoXml::namedItemNS(*style, KOdfXmlNS::style, "header-left");
     if (!headerleft.isNull()) {
         KXmlElement e = headerleft.toElement();
         if (e.hasAttributeNS(KOdfXmlNS::style, "display"))
@@ -1309,7 +1309,7 @@ bool KCSheet::loadSheetStyleFormat(KXmlElement *style)
             kDebug(36003) << "header left doesn't has attribute  style:display";
     }
     //TODO implement it under kcells
-    KoXmlNode footerleft = KoXml::namedItemNS(*style, KOdfXmlNS::style, "footer-left");
+    KXmlNode footerleft = KoXml::namedItemNS(*style, KOdfXmlNS::style, "footer-left");
     if (!footerleft.isNull()) {
         KXmlElement e = footerleft.toElement();
         if (e.hasAttributeNS(KOdfXmlNS::style, "display"))
@@ -1318,10 +1318,10 @@ bool KCSheet::loadSheetStyleFormat(KXmlElement *style)
             kDebug(36003) << "footer left doesn't has attribute  style:display";
     }
 
-    KoXmlNode footer = KoXml::namedItemNS(*style, KOdfXmlNS::style, "footer");
+    KXmlNode footer = KoXml::namedItemNS(*style, KOdfXmlNS::style, "footer");
 
     if (!footer.isNull()) {
-        KoXmlNode part = KoXml::namedItemNS(footer, KOdfXmlNS::style, "region-left");
+        KXmlNode part = KoXml::namedItemNS(footer, KOdfXmlNS::style, "region-left");
         if (!part.isNull()) {
             fleft = getPart(part);
             kDebug(36003) << "Footer left:" << fleft;
@@ -1352,7 +1352,7 @@ void KCSheet::replaceMacro(QString & text, const QString & old, const QString & 
         text = text.replace(n, old.length(), newS);
 }
 
-QString KCSheet::getPart(const KoXmlNode & part)
+QString KCSheet::getPart(const KXmlNode & part)
 {
     QString result;
     KXmlElement e = KoXml::namedItemNS(part, KOdfXmlNS::text, "p");
@@ -1405,7 +1405,7 @@ void KCSheet::loadColumnNodes(const KXmlElement& parent,
                             IntervalMap<QString>& columnStyles
                             )
 {
-    KoXmlNode node = parent.firstChild();
+    KXmlNode node = parent.firstChild();
     while (!node.isNull()) {
         KXmlElement elem = node.toElement();
         if (!elem.isNull() && elem.namespaceURI() == KOdfXmlNS::table) {
@@ -1430,7 +1430,7 @@ void KCSheet::loadRowNodes(const KXmlElement& parent,
                             const Styles& autoStyles
                             )
 {
-    KoXmlNode node = parent.firstChild();
+    KXmlNode node = parent.firstChild();
     while (!node.isNull()) {
         KXmlElement elem = node.toElement();
         if (!elem.isNull() && elem.namespaceURI() == KOdfXmlNS::table) {
@@ -1609,7 +1609,7 @@ bool KCSheet::loadOdf(const KXmlElement& sheetElement,
     int rowIndex = 1;
     int indexCol = 1;
     int maxColumn = 1;
-    KoXmlNode rowNode = sheetElement.firstChild();
+    KXmlNode rowNode = sheetElement.firstChild();
     // Some spreadsheet programs may support more rows than
     // KCells so limit the number of repeated rows.
     // FIXME POSSIBLE DATA LOSS!
@@ -3085,7 +3085,7 @@ bool KCSheet::loadXML(const KXmlElement& sheet)
     }
 
     // Load the cells
-    KoXmlNode n = sheet.firstChild();
+    KXmlNode n = sheet.firstChild();
     while (!n.isNull()) {
         KXmlElement e = n.toElement();
         if (!e.isNull()) {

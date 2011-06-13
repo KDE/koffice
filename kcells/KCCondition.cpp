@@ -417,7 +417,7 @@ KCConditional KCConditions::loadOdfCondition(const QString &conditionValue, cons
 void KCConditions::loadOdfConditions(const KXmlElement &element, const KCValueParser *parser, const KCStyleManager *styleManager)
 {
     kDebug(36003) << "Loading conditional styles";
-    KoXmlNode node(element);
+    KXmlNode node(element);
 
     while (!node.isNull()) {
         KXmlElement elementItem = node.toElement();

@@ -137,7 +137,7 @@ KoFilterEffectStack * FilterEffectResource::toFilterStack() const
     KoFilterEffectRegistry * registry = KoFilterEffectRegistry::instance();
 
     // create the filter effects and add them to the shape
-    for (KoXmlNode n = e.firstChild(); !n.isNull(); n = n.nextSibling()) {
+    for (KXmlNode n = e.firstChild(); !n.isNull(); n = n.nextSibling()) {
         KXmlElement primitive = n.toElement();
         KoFilterEffect * filterEffect = registry->createFilterEffectFromXml(primitive, context);
         if (!filterEffect) {

@@ -32,7 +32,7 @@ class QTextDecoder;
 class QString;
 class QXmlStreamReader;
 
-class KoXmlNode;
+class KXmlNode;
 class KoXmlText;
 class KoXmlCDATASection;
 class KoXmlDocumentType;
@@ -41,21 +41,21 @@ class KXmlNodeData;
 class KXmlElement;
 
 /**
-* KoXmlNode represents a node in a DOM tree.
+* KXmlNode represents a node in a DOM tree.
 *
-* KoXmlNode is a base class for KXmlElement, KoXmlText.
-* Often, these subclasses are used for getting the data instead of KoXmlNode.
-* However, as base class, KoXmlNode is very helpful when for example iterating
+* KXmlNode is a base class for KXmlElement, KoXmlText.
+* Often, these subclasses are used for getting the data instead of KXmlNode.
+* However, as base class, KXmlNode is very helpful when for example iterating
 * all child nodes within one parent node.
 *
-* KoXmlNode implements an explicit sharing, a node shares its data with
+* KXmlNode implements an explicit sharing, a node shares its data with
 * other copies (if exist).
 *
 * XXX: DO NOT ADD CONVENIENCE API HERE BECAUSE THIS CLASS MUST REMAIN COMPATIBLE WITH QDOMNODE!
 *
 * @author Ariya Hidayat <ariya@kde.org>
 */
-class KODF_EXPORT KoXmlNode
+class KODF_EXPORT KXmlNode
 {
 public:
 
@@ -69,14 +69,14 @@ public:
         DocumentTypeNode
     };
 
-    KoXmlNode();
-    KoXmlNode(const KoXmlNode& node);
-    KoXmlNode& operator=(const KoXmlNode& node);
-    bool operator== (const KoXmlNode&) const;
-    bool operator!= (const KoXmlNode&) const;
-    virtual ~KoXmlNode();
+    KXmlNode();
+    KXmlNode(const KXmlNode& node);
+    KXmlNode& operator=(const KXmlNode& node);
+    bool operator== (const KXmlNode&) const;
+    bool operator!= (const KXmlNode&) const;
+    virtual ~KXmlNode();
 
-    virtual KoXmlNode::NodeType nodeType() const;
+    virtual KXmlNode::NodeType nodeType() const;
     virtual bool isNull() const;
     virtual bool isElement() const;
     virtual bool isText() const;
@@ -96,13 +96,13 @@ public:
     virtual QString localName() const;
 
     KXmlDocument ownerDocument() const;
-    KoXmlNode parentNode() const;
+    KXmlNode parentNode() const;
 
     bool hasChildNodes() const;
-    KoXmlNode firstChild() const;
-    KoXmlNode lastChild() const;
-    KoXmlNode nextSibling() const;
-    KoXmlNode previousSibling() const;
+    KXmlNode firstChild() const;
+    KXmlNode lastChild() const;
+    KXmlNode nextSibling() const;
+    KXmlNode previousSibling() const;
 
     // equivalent to node.childNodes().count() if node is a QDomNode instance
     int childNodesCount() const;
@@ -111,8 +111,8 @@ public:
     QStringList attributeNames() const;
     QList<QPair<QString, QString> > attributeNSNames() const;
 
-    KoXmlNode namedItem(const QString& name) const;
-    KoXmlNode namedItemNS(const QString& nsURI, const QString& name) const;
+    KXmlNode namedItem(const QString& name) const;
+    KXmlNode namedItemNS(const QString& nsURI, const QString& name) const;
 
     /**
     * Loads all child nodes (if any) of this node. Normally you do not need
@@ -131,7 +131,7 @@ public:
 
 protected:
     KXmlNodeData* d;
-    KoXmlNode(KXmlNodeData*);
+    KXmlNode(KXmlNodeData*);
 };
 
 /**
@@ -142,7 +142,7 @@ protected:
 * @author Ariya Hidayat <ariya@kde.org>
 */
 
-class KODF_EXPORT KXmlElement: public KoXmlNode
+class KODF_EXPORT KXmlElement: public KXmlNode
 {
 public:
     KXmlElement();
@@ -162,7 +162,7 @@ public:
     bool hasAttributeNS(const QString& namespaceURI, const QString& localName) const;
 
 private:
-    friend class KoXmlNode;
+    friend class KXmlNode;
     friend class KXmlDocument;
     KXmlElement(KXmlNodeData*);
 };
@@ -171,7 +171,7 @@ private:
 * KoXmlText represents a text in a DOM tree.
 * @author Ariya Hidayat <ariya@kde.org>
 */
-class KODF_EXPORT KoXmlText: public KoXmlNode
+class KODF_EXPORT KoXmlText: public KXmlNode
 {
 public:
     KoXmlText();
@@ -184,7 +184,7 @@ public:
     virtual bool isText() const;
 
 private:
-    friend class KoXmlNode;
+    friend class KXmlNode;
     friend class KoXmlCDATASection;
     friend class KXmlDocument;
     KoXmlText(KXmlNodeData*);
@@ -205,7 +205,7 @@ public:
     virtual bool isCDATASection() const;
 
 private:
-    friend class KoXmlNode;
+    friend class KXmlNode;
     friend class KXmlDocument;
     KoXmlCDATASection(KXmlNodeData*);
 };
@@ -218,7 +218,7 @@ private:
 * @author Ariya Hidayat <ariya@kde.org>
 */
 
-class KODF_EXPORT KoXmlDocumentType: public KoXmlNode
+class KODF_EXPORT KoXmlDocumentType: public KXmlNode
 {
 public:
     KoXmlDocumentType();
@@ -229,7 +229,7 @@ public:
     QString name() const;
 
 private:
-    friend class KoXmlNode;
+    friend class KXmlNode;
     friend class KXmlDocument;
     KoXmlDocumentType(KXmlNodeData*);
 };
@@ -247,7 +247,7 @@ private:
 * @author Ariya Hidayat <ariya@kde.org>
 */
 
-class KODF_EXPORT KXmlDocument: public KoXmlNode
+class KODF_EXPORT KXmlDocument: public KXmlNode
 {
 public:
     KXmlDocument();
@@ -280,7 +280,7 @@ public:
                     QString *errorMsg = 0, int *errorLine = 0, int *errorColumn = 0);
 
 private:
-    friend class KoXmlNode;
+    friend class KXmlNode;
     KoXmlDocumentType dt;
     KXmlDocument(KXmlNodeData*);
 };
@@ -322,36 +322,36 @@ namespace KoXml
  *
  * Note: do *NOT* use getElementsByTagNameNS, it's recursive!
  */
-KODF_EXPORT KXmlElement namedItemNS(const KoXmlNode& node,
+KODF_EXPORT KXmlElement namedItemNS(const KXmlNode& node,
                                         const QString& nsURI, const QString& localName);
 
 /**
  * Explicitly load child nodes of specified node, up to given depth.
  * This function has no effect if QDom is used.
  */
-KODF_EXPORT void load(KoXmlNode& node, int depth = 1);
+KODF_EXPORT void load(KXmlNode& node, int depth = 1);
 
 /**
  * Unload child nodes of specified node.
  * This function has no effect if QDom is used.
  */
-KODF_EXPORT void unload(KoXmlNode& node);
+KODF_EXPORT void unload(KXmlNode& node);
 
 /**
  * Get the number of child nodes of specified node.
  */
-KODF_EXPORT int childNodesCount(const KoXmlNode& node);
+KODF_EXPORT int childNodesCount(const KXmlNode& node);
 
 /**
  * Return the name of all attributes of specified node.
  */
-KODF_EXPORT QStringList attributeNames(const KoXmlNode& node);
+KODF_EXPORT QStringList attributeNames(const KXmlNode& node);
 
 /**
  * Convert KoXml classes to the corresponding QDom classes, which has
  * 'ownerDoc' as the owner document (QDomDocument instance).
  */
-KODF_EXPORT QDomNode asQDomNode(QDomDocument ownerDoc, const KoXmlNode& node);
+KODF_EXPORT QDomNode asQDomNode(QDomDocument ownerDoc, const KXmlNode& node);
 KODF_EXPORT QDomElement asQDomElement(QDomDocument ownerDoc, const KXmlElement& element);
 KODF_EXPORT QDomDocument asQDomDocument(QDomDocument ownerDoc, const KXmlDocument& document);
 
@@ -384,7 +384,7 @@ KODF_EXPORT bool setDocument(KXmlDocument& doc, QIODevice* device,
  * }
  */
 #define forEachElement( elem, parent ) \
-    for ( KoXmlNode _node = parent.firstChild(); !_node.isNull(); _node = _node.nextSibling() ) \
+    for ( KXmlNode _node = parent.firstChild(); !_node.isNull(); _node = _node.nextSibling() ) \
         if ( ( elem = _node.toElement() ).isNull() ) {} else
 
 

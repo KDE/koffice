@@ -264,7 +264,7 @@ public:
 
     // Common methods
     void writeAttributes(QTextStream &outputXmlStream, KXmlElement &element);
-    void writeNode(QTextStream &outputXmlStream, KoXmlNode &node, bool writeOnlyChildren = false);
+    void writeNode(QTextStream &outputXmlStream, KXmlNode &node, bool writeOnlyChildren = false);
     void removeLeavingContentStart(QTextStream &outputXmlStream, KXmlElement &element, QString &changeId, int endIdCounter);
     void removeLeavingContentEnd(QTextStream &outputXmlStream, int endIdCounter);
     void insertAroundContent(QTextStream &outputXmlStream, KXmlElement &element, QString &changeId);
@@ -1760,7 +1760,7 @@ void KoTextWriter::Private::handleParagraphOrHeaderMerge(QTextStream &outputXmlS
     writeAttributes(outputXmlStream, firstChildElement);
     outputXmlStream << ">";
 
-    for (KoXmlNode node = firstChildElement.firstChild(); !node.isNull(); node = node.nextSibling()) {
+    for (KXmlNode node = firstChildElement.firstChild(); !node.isNull(); node = node.nextSibling()) {
         if (node.isElement() && node.toElement().localName() == "removed-content" && node.nextSibling().isNull()) {
             outputXmlStream << "<delta:merge delta:removal-change-idref=\"" << changeId << "\">";
             outputXmlStream << "<delta:leading-partial-content>";
@@ -1779,7 +1779,7 @@ void KoTextWriter::Private::handleParagraphOrHeaderMerge(QTextStream &outputXmlS
     }
     outputXmlStream << "</delta:intermediate-content>";
 
-    for (KoXmlNode node = mergeEndElement.firstChild(); !node.isNull(); node = node.nextSibling()) {
+    for (KXmlNode node = mergeEndElement.firstChild(); !node.isNull(); node = node.nextSibling()) {
         if (node.isElement() && node.toElement().localName() == "removed-content" && node.previousSibling().isNull()) {
             outputXmlStream << "<delta:trailing-partial-content>";
             outputXmlStream << "<text:" << mergeEndElement.localName();
@@ -2291,7 +2291,7 @@ void KoTextWriter::Private::writeAttributes(QTextStream &outputXmlStream, KXmlEl
     }
 }
 
-void KoTextWriter::Private::writeNode(QTextStream &outputXmlStream, KoXmlNode &node, bool writeOnlyChildren)
+void KoTextWriter::Private::writeNode(QTextStream &outputXmlStream, KXmlNode &node, bool writeOnlyChildren)
 {
     if (node.isText()) {
         outputXmlStream  << node.toText().data();
@@ -2307,7 +2307,7 @@ void KoTextWriter::Private::writeNode(QTextStream &outputXmlStream, KoXmlNode &n
             outputXmlStream << ">";
         }
 
-        for (KoXmlNode node = element.firstChild(); !node.isNull(); node = node.nextSibling()) {
+        for (KXmlNode node = element.firstChild(); !node.isNull(); node = node.nextSibling()) {
             writeNode(outputXmlStream, node);
         }
 

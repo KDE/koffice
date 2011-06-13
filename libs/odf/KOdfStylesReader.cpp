@@ -98,7 +98,7 @@ void KOdfStylesReader::createStyleMap(const KXmlDocument& doc, bool stylesDotXml
 
     //kDebug(30003) <<"Reading in master styles";
 
-    KoXmlNode masterStyles = KoXml::namedItemNS(docElement, KOdfXmlNS::office, "master-styles");
+    KXmlNode masterStyles = KoXml::namedItemNS(docElement, KOdfXmlNS::office, "master-styles");
     if (!masterStyles.isNull()) {
         KXmlElement master;
         forEachElement(master, masterStyles) {

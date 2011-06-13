@@ -39,7 +39,7 @@ class QTextTable;
 class QRect;
 class KoBookmarkManager;
 class KXmlElement;
-class KoXmlNode;
+class KXmlNode;
 
 /**
  * The KoTextLoader loads is use to load text for one and only one textdocument or shape
@@ -111,7 +111,7 @@ private:
     * Load delete changes that result in a merge into the cursor
     * Returns the next Node to be processed
     */
-    KoXmlNode loadDeleteMerges(const KXmlElement &element, QString *generatedXmlString);
+    KXmlNode loadDeleteMerges(const KXmlElement &element, QString *generatedXmlString);
 
     /**
     * Load the list from the \p element into the \p cursor .

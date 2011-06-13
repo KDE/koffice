@@ -484,7 +484,7 @@ void SvgParser::parseColorStops(QGradient *gradient, const KXmlElement &e)
     QGradientStops stops;
     QColor c;
 
-    for (KoXmlNode n = e.firstChild(); !n.isNull(); n = n.nextSibling()) {
+    for (KXmlNode n = e.firstChild(); !n.isNull(); n = n.nextSibling()) {
         KXmlElement stop = n.toElement();
         if (stop.tagName() == "stop") {
             float offset;
@@ -1279,7 +1279,7 @@ void SvgParser::applyFilter(KoShape * shape)
     QMap<QString, KoFilterEffect*> inputs;
 
     // create the filter effects and add them to the shape
-    for (KoXmlNode n = content.firstChild(); !n.isNull(); n = n.nextSibling()) {
+    for (KXmlNode n = content.firstChild(); !n.isNull(); n = n.nextSibling()) {
         KXmlElement primitive = n.toElement();
         KoFilterEffect * filterEffect = registry->createFilterEffectFromXml(primitive, context);
         if (!filterEffect) {
@@ -1508,7 +1508,7 @@ QList<KoShape*> SvgParser::parseContainer(const KXmlElement &e)
     // are we parsing a switch container
     bool isSwitch = e.tagName() == "switch";
 
-    for (KoXmlNode n = e.firstChild(); !n.isNull(); n = n.nextSibling()) {
+    for (KXmlNode n = e.firstChild(); !n.isNull(); n = n.nextSibling()) {
         KXmlElement b = n.toElement();
         if (b.isNull())
             continue;
@@ -1608,7 +1608,7 @@ QList<KoShape*> SvgParser::parseContainer(const KXmlElement &e)
 
 void SvgParser::parseDefs(const KXmlElement &e)
 {
-    for (KoXmlNode n = e.firstChild(); !n.isNull(); n = n.nextSibling()) {
+    for (KXmlNode n = e.firstChild(); !n.isNull(); n = n.nextSibling()) {
         KXmlElement b = n.toElement();
         if (b.isNull())
             continue;
@@ -1679,7 +1679,7 @@ KoShape * SvgParser::createText(const KXmlElement &b, const QList<KoShape*> & sh
         KoPathShape * path = 0;
         bool pathInDocument = false;
 
-        for (KoXmlNode n = b.firstChild(); !n.isNull(); n = n.nextSibling()) {
+        for (KXmlNode n = b.firstChild(); !n.isNull(); n = n.nextSibling()) {
             KXmlElement e = n.toElement();
             if (e.isNull()) {
                 content += n.toText().data();
@@ -2046,7 +2046,7 @@ KoShape * SvgParser::createShape(const QString &shapeID)
 
 QString SvgParser::inheritedAttribute(const QString &attributeName, const KXmlElement &e)
 {
-    KoXmlNode parent = e.parentNode();
+    KXmlNode parent = e.parentNode();
     while(!parent.isNull()) {
         KXmlElement currentElement = parent.toElement();
         if (currentElement.hasAttribute(attributeName)) {

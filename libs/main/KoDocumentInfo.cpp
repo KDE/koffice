@@ -73,8 +73,8 @@ bool KoDocumentInfo::load(const KXmlDocument& doc)
 
 bool KoDocumentInfo::loadOasis(const KXmlDocument& metaDoc)
 {
-    KoXmlNode t = KoXml::namedItemNS(metaDoc, KOdfXmlNS::office, "document-meta");
-    KoXmlNode office = KoXml::namedItemNS(t, KOdfXmlNS::office, "meta");
+    KXmlNode t = KoXml::namedItemNS(metaDoc, KOdfXmlNS::office, "document-meta");
+    KXmlNode office = KoXml::namedItemNS(t, KOdfXmlNS::office, "meta");
 
     if (office.isNull())
         return false;
@@ -190,13 +190,13 @@ bool KoDocumentInfo::saveOasisAuthorInfo(KXmlWriter &xmlWriter)
     return true;
 }
 
-bool KoDocumentInfo::loadOasisAuthorInfo(const KoXmlNode& metaDoc)
+bool KoDocumentInfo::loadOasisAuthorInfo(const KXmlNode& metaDoc)
 {
     KXmlElement e = KoXml::namedItemNS(metaDoc, KOdfXmlNS::dc, "creator");
     if (!e.isNull() && !e.text().isEmpty())
         setAuthorInfo("creator", e.text());
 
-    KoXmlNode n = metaDoc.firstChild();
+    KXmlNode n = metaDoc.firstChild();
     for (; !n.isNull(); n = n.nextSibling()) {
         if (!n.isElement())
             continue;
@@ -215,7 +215,7 @@ bool KoDocumentInfo::loadOasisAuthorInfo(const KoXmlNode& metaDoc)
 
 bool KoDocumentInfo::loadAuthorInfo(const KXmlElement& e)
 {
-    KoXmlNode n = e.namedItem("author").firstChild();
+    KXmlNode n = e.namedItem("author").firstChild();
     for (; !n.isNull(); n = n.nextSibling()) {
         KXmlElement e = n.toElement();
         if (e.isNull())
@@ -278,7 +278,7 @@ bool KoDocumentInfo::saveOasisAboutInfo(KXmlWriter &xmlWriter)
     return true;
 }
 
-bool KoDocumentInfo::loadOasisAboutInfo(const KoXmlNode& metaDoc)
+bool KoDocumentInfo::loadOasisAboutInfo(const KXmlNode& metaDoc)
 {
     QStringList keywords;
     KXmlElement e;
@@ -310,7 +310,7 @@ bool KoDocumentInfo::loadOasisAboutInfo(const KoXmlNode& metaDoc)
 
 bool KoDocumentInfo::loadAboutInfo(const KXmlElement& e)
 {
-    KoXmlNode n = e.namedItem("about").firstChild();
+    KXmlNode n = e.namedItem("about").firstChild();
     KXmlElement tmp;
     for (; !n.isNull(); n = n.nextSibling()) {
         tmp = n.toElement();

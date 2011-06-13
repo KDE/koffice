@@ -156,8 +156,8 @@ void KOdfLoadingContext::parseGenerator() const
         KOdfStoreReader oasisStore(d->store);
         QString errorMsg;
         if (oasisStore.loadAndParse("meta.xml", metaDoc, errorMsg)) {
-            KoXmlNode meta   = KoXml::namedItemNS(metaDoc, KOdfXmlNS::office, "document-meta");
-            KoXmlNode office = KoXml::namedItemNS(meta, KOdfXmlNS::office, "meta");
+            KXmlNode meta   = KoXml::namedItemNS(metaDoc, KOdfXmlNS::office, "document-meta");
+            KXmlNode office = KoXml::namedItemNS(meta, KOdfXmlNS::office, "meta");
             KXmlElement generator = KoXml::namedItemNS(office, KOdfXmlNS::meta, "generator");
             if (!generator.isNull()) {
                 d->generator = generator.text();

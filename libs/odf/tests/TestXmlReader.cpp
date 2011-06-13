@@ -90,7 +90,7 @@ void TestXmlReader::testNode()
     QCOMPARE(errorColumn, 0);
 
     // null node
-    KoXmlNode node1;
+    KXmlNode node1;
     QCOMPARE(node1.nodeName(), QString());
     QCOMPARE(node1.isNull(), true);
     QCOMPARE(node1.isElement(), false);
@@ -105,13 +105,13 @@ void TestXmlReader::testNode()
     QCOMPARE(node1.nextSibling().isNull(), true);
 
     // compare with another null node
-    KoXmlNode node2;
+    KXmlNode node2;
     QCOMPARE(node2.isNull(), true);
     QCOMPARE(node1 == node2, true);
     QCOMPARE(node1 != node2, false);
 
     // a node which is a document
-    KoXmlNode node3 = doc;
+    KXmlNode node3 = doc;
     QCOMPARE(node3.nodeName(), QString("#document"));
     QCOMPARE(node3.isNull(), false);
     QCOMPARE(node3.isElement(), false);
@@ -150,7 +150,7 @@ void TestXmlReader::testNode()
     QCOMPARE(node1 != node3, false);
 
     // a node which is an element for <earth>
-    KoXmlNode node4 = doc.firstChild();
+    KXmlNode node4 = doc.firstChild();
     QCOMPARE(node4.isNull(), false);
     QCOMPARE(node4.isElement(), true);
     QCOMPARE(node4.isText(), false);
@@ -171,7 +171,7 @@ void TestXmlReader::testNode()
     QCOMPARE(KoXml::childNodesCount(node4), 0);
 
     // a node which is an element for <continents>
-    KoXmlNode node5 = doc.firstChild().firstChild();
+    KXmlNode node5 = doc.firstChild().firstChild();
     QCOMPARE(node5.nodeName(), QString("continents"));
     QCOMPARE(node5.isNull(), false);
     QCOMPARE(node5.isElement(), true);
@@ -199,7 +199,7 @@ void TestXmlReader::testNode()
     QCOMPARE(invalidDoc.isDocument(), false);
 
     // node for <europe> using namedItem() function
-    KoXmlNode europeNode = continentsElement.namedItem(QString("europe"));
+    KXmlNode europeNode = continentsElement.namedItem(QString("europe"));
     QCOMPARE(europeNode.nodeName(), QString("europe"));
     QCOMPARE(europeNode.isNull(), false);
     QCOMPARE(europeNode.isElement(), true);
@@ -209,7 +209,7 @@ void TestXmlReader::testNode()
     QCOMPARE(europeNode.ownerDocument() == doc, true);
 
     // search non-existing node
-    KoXmlNode fooNode = continentsElement.namedItem(QString("foobar"));
+    KXmlNode fooNode = continentsElement.namedItem(QString("foobar"));
     QCOMPARE(fooNode.isNull(), true);
     QCOMPARE(fooNode.isElement(), false);
     QCOMPARE(fooNode.isText(), false);
@@ -367,7 +367,7 @@ void TestXmlReader::testElement()
     QCOMPARE(dummyElement != rootElement, true);
 
     // check for plain null node converted to element
-    KoXmlNode dummyNode;
+    KXmlNode dummyNode;
     dummyElement = dummyNode.toElement();
     QCOMPARE(dummyElement.isNull(), true);
     QCOMPARE(dummyElement.isElement(), false);
@@ -480,7 +480,7 @@ void TestXmlReader::testText()
     QCOMPARE(parElement.text(), QString("Hello world"));
 
     // node for "Hello"
-    KoXmlNode helloNode;
+    KXmlNode helloNode;
     helloNode = parElement.firstChild();
     QCOMPARE(helloNode.nodeName(), QString("#text"));
     QCOMPARE(helloNode.isNull(), false);
@@ -576,7 +576,7 @@ void TestXmlReader::testCDATA()
     QCOMPARE(parElement.text(), QString("Hello world"));
 
     // node for "Hello"
-    KoXmlNode helloNode;
+    KXmlNode helloNode;
     helloNode = parElement.firstChild();
     QCOMPARE(helloNode.isNull(), false);
     QCOMPARE(helloNode.isElement(), false);
@@ -594,7 +594,7 @@ void TestXmlReader::testCDATA()
 
     // node for CDATA "world!"
     // Note: isText() is also true for CDATA
-    KoXmlNode worldNode;
+    KXmlNode worldNode;
     worldNode = helloNode.nextSibling();
     QCOMPARE(worldNode.nodeName(), QString("#cdata-section"));
     QCOMPARE(worldNode.isNull(), false);
@@ -1180,7 +1180,7 @@ void TestXmlReader::testSimpleXML()
     QCOMPARE(rootElement.prefix().isNull(), true);
 
     // node <mercurius>
-    KoXmlNode firstPlanetNode;
+    KXmlNode firstPlanetNode;
     firstPlanetNode = rootElement.firstChild();
     QCOMPARE(firstPlanetNode.isNull(), false);
     QCOMPARE(firstPlanetNode.isElement(), true);
@@ -1209,7 +1209,7 @@ void TestXmlReader::testSimpleXML()
     QCOMPARE(firstPlanetElement.prefix().isNull(), true);
 
     // node <venus>
-    KoXmlNode secondPlanetNode;
+    KXmlNode secondPlanetNode;
     secondPlanetNode = firstPlanetNode.nextSibling();
     QCOMPARE(secondPlanetNode.isNull(), false);
     QCOMPARE(secondPlanetNode.isElement(), true);
@@ -1431,7 +1431,7 @@ void TestXmlReader::testSimpleOpenDocumentText()
     QCOMPARE(stylesElement.localName(), QString("automatic-styles"));
 
     // also same <office:automatic-styles>, but without namedItemNS
-    KoXmlNode styles2Element;
+    KXmlNode styles2Element;
     styles2Element = contentElement.firstChild().toElement();
     QCOMPARE(styles2Element.isNull(), false);
     QCOMPARE(styles2Element.isElement(), true);
@@ -1906,7 +1906,7 @@ void TestXmlReader::testSimpleOpenDocumentPresentation()
     QCOMPARE(stylesElement.localName(), QString("automatic-styles"));
 
     // also same <office:automatic-styles>, but without namedItemNS
-    KoXmlNode styles2Element;
+    KXmlNode styles2Element;
     styles2Element = scriptsElement.nextSibling().toElement();
     QCOMPARE(styles2Element.isNull(), false);
     QCOMPARE(styles2Element.isElement(), true);

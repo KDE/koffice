@@ -265,7 +265,7 @@ QPair<QString, NumericStyleFormat> loadOdfNumberStyle(const KXmlElement &parent)
         //   <style:map style:condition="value()&lt;0" style:apply-style-name="N139P1"/>
         //   <style:map style:condition="value()=0" style:apply-style-name="N139P2"/>
         // </number:text-style>
-        for (KoXmlNode node(e); !node.isNull(); node = node.nextSibling()) {
+        for (KXmlNode node(e); !node.isNull(); node = node.nextSibling()) {
             KXmlElement elem = node.toElement();
             if (elem.namespaceURI() == KOdfXmlNS::style && elem.localName() == "map") {
                 QString condition, applyStyleName;

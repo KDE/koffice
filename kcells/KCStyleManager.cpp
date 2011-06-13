@@ -82,7 +82,7 @@ void KCStyleManager::loadOdfStyleTemplate(KOdfStylesReader& stylesReader, KCMap*
         if (map) {
             // Load the default precision to be used, if the (default) cell style
             // is set to arbitrary precision.
-            KoXmlNode n = defStyle->firstChild();
+            KXmlNode n = defStyle->firstChild();
             while (!n.isNull()) {
                 if (n.isElement() &&
                         n.namespaceURI() == KOdfXmlNS::style &&

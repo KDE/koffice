@@ -399,7 +399,7 @@ const QString Filterkpr2odf::createPageLayout()
     return m_styles.insert(style, "pm");
 }
 
-const QString Filterkpr2odf::createMasterPageStyle(const KoXmlNode & objects, const KXmlElement & masterBackground)
+const QString Filterkpr2odf::createMasterPageStyle(const KXmlNode & objects, const KXmlElement & masterBackground)
 {
     //KXmlElement header( m_mainDoc.namedItem( "DOC" ).namedItem( "HEADER" ).toElement() );
     //KXmlElement footer( m_mainDoc.namedItem( "DOC" ).namedItem( "FOOTER" ).toElement() );

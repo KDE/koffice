@@ -255,11 +255,11 @@ void Filterkpr2odf::convertContent(KXmlWriter* content)
     content->startElement(KOdf::bodyContentElement(KOdf::PresentationDocument, true));
 
     //We search all this here so that we can make the search just once
-    KoXmlNode titles = m_mainDoc.namedItem("DOC").namedItem("PAGETITLES");
-    KoXmlNode notes = m_mainDoc.namedItem("DOC").namedItem("PAGENOTES");
-    KoXmlNode backgrounds = m_mainDoc.namedItem("DOC").namedItem("BACKGROUND");
-    KoXmlNode objects = m_mainDoc.namedItem("DOC").namedItem("OBJECTS");
-    KoXmlNode paper = m_mainDoc.namedItem("DOC").namedItem("PAPER");
+    KXmlNode titles = m_mainDoc.namedItem("DOC").namedItem("PAGETITLES");
+    KXmlNode notes = m_mainDoc.namedItem("DOC").namedItem("PAGENOTES");
+    KXmlNode backgrounds = m_mainDoc.namedItem("DOC").namedItem("BACKGROUND");
+    KXmlNode objects = m_mainDoc.namedItem("DOC").namedItem("OBJECTS");
+    KXmlNode paper = m_mainDoc.namedItem("DOC").namedItem("PAPER");
     m_pageHeight = paper.toElement().attribute("ptHeight").toFloat();
 
     //Go to the first background, there might be missing backgrounds
@@ -270,8 +270,8 @@ void Filterkpr2odf::convertContent(KXmlWriter* content)
     const QString masterPageStyleName = createMasterPageStyle(objects, masterBackground);
     //The pages are all stored inside PAGETITLES
     //and all notes in PAGENOTES
-    KoXmlNode title = titles.firstChild();
-    KoXmlNode note = notes.firstChild();
+    KXmlNode title = titles.firstChild();
+    KXmlNode note = notes.firstChild();
     for (; !title.isNull() && !note.isNull();
             title = title.nextSibling(), note = note.nextSibling()) {
         //Every page is a draw:page
@@ -349,11 +349,11 @@ void Filterkpr2odf::convertContent(KXmlWriter* content)
     content->endDocument();
 }
 
-void Filterkpr2odf::convertObjects(KXmlWriter* content, const KoXmlNode& objects)
+void Filterkpr2odf::convertObjects(KXmlWriter* content, const KXmlNode& objects)
 {
     //We search through all the objects' nodes because
     //we are not sure if they are saved in order
-    for (KoXmlNode object = objects.firstChild(); !object.isNull(); object = object.nextSibling()) {
+    for (KXmlNode object = objects.firstChild(); !object.isNull(); object = object.nextSibling()) {
         float y = object.namedItem("ORIG").toElement().attribute("y").toFloat();
 
         //We check if the y is on the current page

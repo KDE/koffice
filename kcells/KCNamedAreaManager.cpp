@@ -171,7 +171,7 @@ void KCNamedAreaManager::updateAllNamedAreas()
 
 void KCNamedAreaManager::loadOdf(const KXmlElement& body)
 {
-    KoXmlNode namedAreas = KoXml::namedItemNS(body, KOdfXmlNS::table, "named-expressions");
+    KXmlNode namedAreas = KoXml::namedItemNS(body, KOdfXmlNS::table, "named-expressions");
     if (!namedAreas.isNull()) {
         kDebug(36003) << "Loading named areas...";
         KXmlElement element;

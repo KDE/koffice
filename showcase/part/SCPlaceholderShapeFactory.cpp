@@ -52,7 +52,7 @@ bool SCPlaceholderShapeFactory::supports(const KXmlElement &e, KoShapeLoadingCon
 {
     Q_UNUSED(context);
     // check parent if placeholder is set to true
-    KoXmlNode parent = e.parentNode();
+    KXmlNode parent = e.parentNode();
     if (!parent.isNull()) {
         KXmlElement element = parent.toElement();
         if (!element.isNull()) {

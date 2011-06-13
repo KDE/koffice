@@ -930,7 +930,7 @@ protected:
     /**
      * \ingroup OpenDocument
      */
-    QString getPart(const KoXmlNode & part);
+    QString getPart(const KXmlNode & part);
 
     /**
      * \ingroup OpenDocument

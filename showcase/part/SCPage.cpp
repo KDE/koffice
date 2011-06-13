@@ -166,9 +166,9 @@ bool SCPage::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
         const KXmlElement * styleElement = stylesReader.findContentAutoStyle(element.attributeNS(KOdfXmlNS::draw, "style-name"), "drawing-page");
         if (styleElement) {
 #ifndef KOXML_USE_QDOM
-            KoXmlNode node = styleElement->namedItemNS(KOdfXmlNS::style, "drawing-page-properties");
+            KXmlNode node = styleElement->namedItemNS(KOdfXmlNS::style, "drawing-page-properties");
 #else
-        KoXmlNode node; // XXX!!!
+        KXmlNode node; // XXX!!!
 #endif
             if (node.isElement()) {
 
@@ -256,9 +256,9 @@ void SCPage::loadOdfPageTag(const KXmlElement &element, KoPALoadingContext &load
     m_pageProperties = pageProperties;
 
 #ifndef KOXML_USE_QDOM
-    KoXmlNode node = element.namedItemNS(KOdfXmlNS::presentation, "notes");
+    KXmlNode node = element.namedItemNS(KOdfXmlNS::presentation, "notes");
 #else
-    KoXmlNode node; //XXX!!!
+    KXmlNode node; //XXX!!!
 #endif
     if (node.isElement()) {
         d->pageNotes->loadOdf(node.toElement(), loadingContext);

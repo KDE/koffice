@@ -58,7 +58,7 @@ QString DatabaseManager::createUniqueName() const
 
 bool DatabaseManager::loadOdf(const KXmlElement& body)
 {
-    const KoXmlNode databaseRanges = KoXml::namedItemNS(body, KOdfXmlNS::table, "database-ranges");
+    const KXmlNode databaseRanges = KoXml::namedItemNS(body, KOdfXmlNS::table, "database-ranges");
     KXmlElement element;
     forEachElement(element, databaseRanges) {
         if (element.namespaceURI() != KOdfXmlNS::table)

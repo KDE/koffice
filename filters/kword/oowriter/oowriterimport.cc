@@ -181,7 +181,7 @@ void OoWriterImport::createStyles(QDomDocument& doc)
     QDomElement stylesElem = doc.createElement("STYLES");
     doc.documentElement().appendChild(stylesElem);
 
-    KoXmlNode fixedStyles = KoXml::namedItemNS(m_stylesDoc.documentElement(), ooNS::office, "styles");
+    KXmlNode fixedStyles = KoXml::namedItemNS(m_stylesDoc.documentElement(), ooNS::office, "styles");
     Q_ASSERT(!fixedStyles.isNull());
     KXmlElement e;
     forEachElement(e, fixedStyles) {
@@ -461,8 +461,8 @@ void OoWriterImport::prepareDocument(QDomDocument& mainDocument, QDomElement& fr
     // Now create VARIABLESETTINGS, mostly from meta.xml
     QDomElement varSettings = mainDocument.createElement("VARIABLESETTINGS");
     docElement.appendChild(varSettings);
-    KoXmlNode meta   = KoXml::namedItemNS(m_meta, ooNS::office, "document-meta");
-    KoXmlNode office = KoXml::namedItemNS(meta, ooNS::office, "meta");
+    KXmlNode meta   = KoXml::namedItemNS(m_meta, ooNS::office, "document-meta");
+    KXmlNode office = KoXml::namedItemNS(meta, ooNS::office, "meta");
     if (!office.isNull()) {
         KXmlElement date = KoXml::namedItemNS(office, ooNS::dc, "date");
         if (!date.isNull() && !date.text().isEmpty()) {
@@ -543,7 +543,7 @@ void OoWriterImport::createDocumentInfo(QDomDocument &docinfo)
 bool OoWriterImport::createStyleMap(const KXmlDocument & styles, QDomDocument& doc)
 {
     KXmlElement docElement  = styles.documentElement();
-    KoXmlNode docStyles   = KoXml::namedItemNS(docElement, ooNS::office, "document-styles");
+    KXmlNode docStyles   = KoXml::namedItemNS(docElement, ooNS::office, "document-styles");
 
     if (docElement.hasAttributeNS(ooNS::office, "version")) {
         bool ok = true;
@@ -560,7 +560,7 @@ bool OoWriterImport::createStyleMap(const KXmlDocument & styles, QDomDocument& d
         }
     }
 
-    KoXmlNode fontStyles = KoXml::namedItemNS(docElement, ooNS::office, "font-decls");
+    KXmlNode fontStyles = KoXml::namedItemNS(docElement, ooNS::office, "font-decls");
 
     if (!fontStyles.isNull()) {
         kDebug(30518) << "Starting reading in font-decl...";
@@ -571,7 +571,7 @@ bool OoWriterImport::createStyleMap(const KXmlDocument & styles, QDomDocument& d
 
     kDebug(30518) << "Starting reading in office:automatic-styles";
 
-    KoXmlNode autoStyles = KoXml::namedItemNS(docElement, ooNS::office, "automatic-styles");
+    KXmlNode autoStyles = KoXml::namedItemNS(docElement, ooNS::office, "automatic-styles");
     if (!autoStyles.isNull()) {
         insertStyles(autoStyles.toElement(), doc);
     } else
@@ -580,7 +580,7 @@ bool OoWriterImport::createStyleMap(const KXmlDocument & styles, QDomDocument& d
 
     kDebug(30518) << "Reading in master styles";
 
-    KoXmlNode masterStyles = KoXml::namedItemNS(docElement, ooNS::office, "master-styles");
+    KXmlNode masterStyles = KoXml::namedItemNS(docElement, ooNS::office, "master-styles");
 
     if (!masterStyles.isNull()) {
 
@@ -598,7 +598,7 @@ bool OoWriterImport::createStyleMap(const KXmlDocument & styles, QDomDocument& d
 
     kDebug(30518) << "Starting reading in office:styles";
 
-    KoXmlNode fixedStyles = KoXml::namedItemNS(docElement, ooNS::office, "styles");
+    KXmlNode fixedStyles = KoXml::namedItemNS(docElement, ooNS::office, "styles");
 
     if (!fixedStyles.isNull())
         insertStyles(fixedStyles.toElement(), doc);
@@ -947,7 +947,7 @@ void OoWriterImport::parseSpanOrSimilar(QDomDocument& doc, const KXmlElement& pa
 {
     // Parse every child node of the parent
     // Can't use forEachElement here since we also care about text nodes
-    for (KoXmlNode node(parent.firstChild()); !node.isNull(); node = node.nextSibling()) {
+    for (KXmlNode node(parent.firstChild()); !node.isNull(); node = node.nextSibling()) {
         KXmlElement ts(node.toElement());
         QString textData;
         const QString localName(ts.localName());

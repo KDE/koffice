@@ -132,7 +132,7 @@ bool OpenCalcImport::readRowFormat(KXmlElement & rowNode, KXmlElement * rowStyle
     if (rowNode.isNull())
         return false;
 
-    KoXmlNode node;
+    KXmlNode node;
     if (rowStyle) {
         node = rowStyle->firstChild();
         kDebug(30518) << "RowStyle:" << rowStyle << "," << rowStyle->tagName();
@@ -325,7 +325,7 @@ bool OpenCalcImport::readCells(KXmlElement & rowNode, KCSheet  * table, int row,
     int spanR = 1;
     //KCCell* defCell = table->defaultCell();
 
-    KoXmlNode cellNode = KoXml::namedItemNS(rowNode, ooNS::table, "table-cell");
+    KXmlNode cellNode = KoXml::namedItemNS(rowNode, ooNS::table, "table-cell");
 
     while (!cellNode.isNull()) {
         spanR = 1; spanC = 1;
@@ -376,7 +376,7 @@ bool OpenCalcImport::readCells(KXmlElement & rowNode, KCSheet  * table, int row,
         KXmlElement annotation = KoXml::namedItemNS(e, ooNS::office, "annotation");
         if (!annotation.isNull()) {
             QString comment;
-            KoXmlNode node = annotation.firstChild();
+            KXmlNode node = annotation.firstChild();
             while (!node.isNull()) {
                 KXmlElement commentElement = node.toElement();
                 if (!commentElement.isNull())
@@ -419,7 +419,7 @@ bool OpenCalcImport::readCells(KXmlElement & rowNode, KCSheet  * table, int row,
             }
             if (st) {
                 kDebug(30518) << "Style: adapting";
-                KoXmlNode node = st->firstChild();
+                KXmlNode node = st->firstChild();
                 bool foundValidation = false;
                 while (!node.isNull()) {
                     KXmlElement property = node.toElement();
@@ -757,7 +757,7 @@ bool OpenCalcImport::readRowsAndCells(KXmlElement & content, KCSheet * table)
     //KCCell cell;
     //KCCell cellDest;
     //KCCell defCell = table->defaultCell();
-    KoXmlNode rowNode = KoXml::namedItemNS(content, ooNS::table, "table-row");
+    KXmlNode rowNode = KoXml::namedItemNS(content, ooNS::table, "table-row");
 
     while (!rowNode.isNull()) {
         bool collapsed = false;
@@ -828,7 +828,7 @@ bool OpenCalcImport::readColLayouts(KXmlElement & content, KCSheet * table)
 {
     kDebug(30518) << "Reading in columns...";
 
-    KoXmlNode colLayout = KoXml::namedItemNS(content, ooNS::table, "table-column");
+    KXmlNode colLayout = KoXml::namedItemNS(content, ooNS::table, "table-column");
     int column = 1;
 
     while (!colLayout.isNull()) {
@@ -895,7 +895,7 @@ bool OpenCalcImport::readColLayouts(KXmlElement & content, KCSheet * table)
             kDebug(30518) << "Col Style:" << style;
         }
 
-        KoXmlNode node;
+        KXmlNode node;
 
         if (colStyle)
             node = colStyle->firstChild();
@@ -957,7 +957,7 @@ void replaceMacro(QString & text, QString const & old, QString const & newS)
         text = text.replace(n, old.length(), newS);
 }
 
-QString getPart(KoXmlNode const & part)
+QString getPart(KXmlNode const & part)
 {
     QString result;
     KXmlElement e = KoXml::namedItemNS(part, ooNS::text, "p");
@@ -1014,7 +1014,7 @@ void OpenCalcImport::loadTableMasterStyle(KCSheet * table,
         return;
     }
 
-    KoXmlNode header = KoXml::namedItemNS(*style, ooNS::style, "header");
+    KXmlNode header = KoXml::namedItemNS(*style, ooNS::style, "header");
     kDebug(30518) << "Style header";
 
     QString hleft, hmiddle, hright;
@@ -1022,7 +1022,7 @@ void OpenCalcImport::loadTableMasterStyle(KCSheet * table,
 
     if (!header.isNull()) {
         kDebug(30518) << "Header exists";
-        KoXmlNode part = KoXml::namedItemNS(header, ooNS::style, "region-left");
+        KXmlNode part = KoXml::namedItemNS(header, ooNS::style, "region-left");
         if (!part.isNull()) {
             hleft = getPart(part);
             kDebug(30518) << "Header left:" << hleft;
@@ -1040,10 +1040,10 @@ void OpenCalcImport::loadTableMasterStyle(KCSheet * table,
         }
     }
 
-    KoXmlNode footer = KoXml::namedItemNS(*style, ooNS::style, "footer");
+    KXmlNode footer = KoXml::namedItemNS(*style, ooNS::style, "footer");
 
     if (!footer.isNull()) {
-        KoXmlNode part = KoXml::namedItemNS(footer, ooNS::style, "region-left");
+        KXmlNode part = KoXml::namedItemNS(footer, ooNS::style, "region-left");
         if (!part.isNull()) {
             fleft = getPart(part);
             kDebug(30518) << "Footer left:" << fleft;
@@ -1187,7 +1187,7 @@ void OpenCalcImport::loadOasisMasterLayoutPage(KCSheet * table, KOdfStyleStack &
 bool OpenCalcImport::parseBody(int numOfTables)
 {
     KXmlElement content = m_content.documentElement();
-    KoXmlNode body = KoXml::namedItemNS(content, ooNS::office, "body");
+    KXmlNode body = KoXml::namedItemNS(content, ooNS::office, "body");
 
     if (body.isNull())
         return false;
@@ -1196,7 +1196,7 @@ bool OpenCalcImport::parseBody(int numOfTables)
     loadOasisCellValidation(body.toElement(), m_doc->map()->parser());
 
     KCSheet * table;
-    KoXmlNode sheet = KoXml::namedItemNS(body, ooNS::table, "table");
+    KXmlNode sheet = KoXml::namedItemNS(body, ooNS::table, "table");
 
     kDebug() << " sheet :" << sheet.isNull();
     if (sheet.isNull())
@@ -1262,7 +1262,7 @@ bool OpenCalcImport::parseBody(int numOfTables)
             QString style = t.attributeNS(ooNS::table, "style-name", QString());
             KXmlElement * tableStyle = m_styles[ style ];
 
-            KoXmlNode node;
+            KXmlNode node;
 
             if (tableStyle)
                 node = tableStyle->firstChild();
@@ -1363,7 +1363,7 @@ void OpenCalcImport::insertStyles(KXmlElement const & element)
 
 void OpenCalcImport::loadOasisAreaName(const KXmlElement&body)
 {
-    KoXmlNode namedAreas = KoXml::namedItemNS(body, ooNS::table, "named-expressions");
+    KXmlNode namedAreas = KoXml::namedItemNS(body, ooNS::table, "named-expressions");
     if (!namedAreas.isNull()) {
         KXmlElement e;
         forEachElement(e, namedAreas) {
@@ -1392,7 +1392,7 @@ void OpenCalcImport::loadOasisAreaName(const KXmlElement&body)
 
 void OpenCalcImport::loadOasisCellValidation(const KXmlElement&body, const KCValueParser *parser)
 {
-    KoXmlNode validation = KoXml::namedItemNS(body, ooNS::table, "content-validations");
+    KXmlNode validation = KoXml::namedItemNS(body, ooNS::table, "content-validations");
     if (!validation.isNull()) {
         KXmlElement element;
         forEachElement(element, validation) {
@@ -1933,7 +1933,7 @@ void OpenCalcImport::readInStyle(KCStyle * layout, KXmlElement const & style)
 bool OpenCalcImport::createStyleMap(KXmlDocument const & styles)
 {
     KXmlElement content  = styles.documentElement();
-    KoXmlNode docStyles   = KoXml::namedItemNS(content, ooNS::office, "document-styles");
+    KXmlNode docStyles   = KoXml::namedItemNS(content, ooNS::office, "document-styles");
 
     if (content.hasAttributeNS(ooNS::office, "version")) {
         bool ok = true;
@@ -1949,7 +1949,7 @@ bool OpenCalcImport::createStyleMap(KXmlDocument const & styles)
         }
     }
 
-    KoXmlNode fontStyles = KoXml::namedItemNS(content, ooNS::office, "font-decls");
+    KXmlNode fontStyles = KoXml::namedItemNS(content, ooNS::office, "font-decls");
 
     if (!fontStyles.isNull()) {
         kDebug(30518) << "Starting reading in font-decl...";
@@ -1960,7 +1960,7 @@ bool OpenCalcImport::createStyleMap(KXmlDocument const & styles)
 
     kDebug(30518) << "Starting reading in auto:styles";
 
-    KoXmlNode autoStyles = KoXml::namedItemNS(content, ooNS::office, "automatic-styles");
+    KXmlNode autoStyles = KoXml::namedItemNS(content, ooNS::office, "automatic-styles");
     if (!autoStyles.isNull())
         insertStyles(autoStyles.toElement());
     else
@@ -1969,7 +1969,7 @@ bool OpenCalcImport::createStyleMap(KXmlDocument const & styles)
 
     kDebug(30518) << "Reading in master styles";
 
-    KoXmlNode masterStyles = KoXml::namedItemNS(content, ooNS::office, "master-styles");
+    KXmlNode masterStyles = KoXml::namedItemNS(content, ooNS::office, "master-styles");
 
     if (masterStyles.isNull()) {
         kDebug(30518) << "Nothing found";
@@ -1988,11 +1988,11 @@ bool OpenCalcImport::createStyleMap(KXmlDocument const & styles)
 
     kDebug(30518) << "Starting reading in office:styles";
 
-    KoXmlNode fixedStyles = KoXml::namedItemNS(content, ooNS::office, "styles");
+    KXmlNode fixedStyles = KoXml::namedItemNS(content, ooNS::office, "styles");
 
     kDebug(30518) << "Reading in default styles";
 
-    KoXmlNode def = KoXml::namedItemNS(fixedStyles, ooNS::style, "default-style");
+    KXmlNode def = KoXml::namedItemNS(fixedStyles, ooNS::style, "default-style");
     kDebug() << " def !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! :" << def.isNull();
     while (!def.isNull()) {
         KXmlElement e = def.toElement();
@@ -2240,8 +2240,8 @@ int OpenCalcImport::readMetaData()
     int result = 5;
     KoDocumentInfo * docInfo          = m_doc->documentInfo();
 
-    KoXmlNode meta   = KoXml::namedItemNS(m_meta, ooNS::office, "document-meta");
-    KoXmlNode office = KoXml::namedItemNS(meta, ooNS::office, "meta");
+    KXmlNode meta   = KoXml::namedItemNS(m_meta, ooNS::office, "document-meta");
+    KXmlNode office = KoXml::namedItemNS(meta, ooNS::office, "meta");
 
     if (office.isNull())
         return 2;

@@ -135,10 +135,10 @@ public:
     QMap<QString, QString> removeLeavingContentChangeIdMap;
     QVector<QString> nameSpacesList;
     bool deleteMergeStarted;
-    void copyRemoveLeavingContentStart(const KoXmlNode &node, QTextStream &xmlStream);
-    void copyRemoveLeavingContentEnd(const KoXmlNode &node, QTextStream &xmlStream);
-    void copyInsertAroundContent(const KoXmlNode &node, QTextStream &xmlStream);
-    void copyNode(const KoXmlNode &node, QTextStream &xmlStream, bool copyOnlyChildren = false);
+    void copyRemoveLeavingContentStart(const KXmlNode &node, QTextStream &xmlStream);
+    void copyRemoveLeavingContentEnd(const KXmlNode &node, QTextStream &xmlStream);
+    void copyInsertAroundContent(const KXmlNode &node, QTextStream &xmlStream);
+    void copyNode(const KXmlNode &node, QTextStream &xmlStream, bool copyOnlyChildren = false);
     void copyTagStart(const KXmlElement &element, QTextStream &xmlStream, bool ignoreChangeAttributes = false);
     void copyTagEnd(const KXmlElement &element, QTextStream &xmlStream);
 
@@ -152,7 +152,7 @@ public:
 
     // For Loading of list item splits
     bool checkForListItemSplit(const KXmlElement &element);
-    KoXmlNode loadListItemSplit(const KXmlElement &element, QString *generatedXmlString);
+    KXmlNode loadListItemSplit(const KXmlElement &element, QString *generatedXmlString);
 
     explicit Private(KoShapeLoadingContext &context, KoShape *s)
             : context(context),
@@ -221,7 +221,7 @@ bool KoTextLoader::containsRichText(const KXmlElement &element)
             return true;
 
         // if any of this nodes children are elements, we're dealing with richtext (exceptions: text:s (space character) and text:tab (tab character)
-        for (KoXmlNode n = textParagraphElement.firstChild(); !n.isNull(); n = n.nextSibling()) {
+        for (KXmlNode n = textParagraphElement.firstChild(); !n.isNull(); n = n.nextSibling()) {
             const KXmlElement e = n.toElement();
             if (!e.isNull() && (e.namespaceURI() != KOdfXmlNS::text
                 || (e.localName() != "s" // space
@@ -457,7 +457,7 @@ void KoTextLoader::loadBody(const KXmlElement &bodyElem, QTextCursor &cursor)
         startBody(KoXml::childNodesCount(bodyElem));
 
         KXmlElement tag;
-        for ( KoXmlNode _node = bodyElem.firstChild(); !_node.isNull(); _node = _node.nextSibling() ) \
+        for ( KXmlNode _node = bodyElem.firstChild(); !_node.isNull(); _node = _node.nextSibling() ) \
         if ( ( tag = _node.toElement() ).isNull() ) {
             //Don't do anything
         } else {
@@ -703,9 +703,9 @@ void KoTextLoader::loadBody(const KXmlElement &bodyElem, QTextCursor &cursor)
     cursor.endEditBlock();
 }
 
-KoXmlNode KoTextLoader::loadDeleteMerges(const KXmlElement& elem, QString *generatedXmlString)
+KXmlNode KoTextLoader::loadDeleteMerges(const KXmlElement& elem, QString *generatedXmlString)
 {
-    KoXmlNode lastProcessedNode = elem;
+    KXmlNode lastProcessedNode = elem;
     d->nameSpacesList.clear();
 
     QString generatedXml;
@@ -743,7 +743,7 @@ KoXmlNode KoTextLoader::loadDeleteMerges(const KXmlElement& elem, QString *gener
     return lastProcessedNode.previousSibling();
 }
 
-void KoTextLoader::Private::copyRemoveLeavingContentStart(const KoXmlNode &node, QTextStream &xmlStream)
+void KoTextLoader::Private::copyRemoveLeavingContentStart(const KXmlNode &node, QTextStream &xmlStream)
 {
     KXmlElement element = node.firstChild().toElement();
     QString changeEndId = node.toElement().attributeNS(KOdfXmlNS::delta, "end-element-idref");
@@ -794,7 +794,7 @@ void KoTextLoader::Private::copyRemoveLeavingContentStart(const KoXmlNode &node,
     }
 }
 
-void KoTextLoader::Private::copyRemoveLeavingContentEnd(const KoXmlNode &node, QTextStream &xmlStream)
+void KoTextLoader::Private::copyRemoveLeavingContentEnd(const KXmlNode &node, QTextStream &xmlStream)
 {
     QString changeEndId = node.toElement().attributeNS(KOdfXmlNS::delta, "end-element-id");
     QString nodeName = removeLeavingContentMap.value(changeEndId);
@@ -828,12 +828,12 @@ void KoTextLoader::Private::copyRemoveLeavingContentEnd(const KoXmlNode &node, Q
     xmlStream << "</" << nodeName << ">";
 }
 
-void KoTextLoader::Private::copyInsertAroundContent(const KoXmlNode &node, QTextStream &xmlStream)
+void KoTextLoader::Private::copyInsertAroundContent(const KXmlNode &node, QTextStream &xmlStream)
 {
     copyNode(node, xmlStream, true);
 }
 
-void KoTextLoader::Private::copyNode(const KoXmlNode &node, QTextStream &xmlStream, bool copyOnlyChildren)
+void KoTextLoader::Private::copyNode(const KXmlNode &node, QTextStream &xmlStream, bool copyOnlyChildren)
 {
     if (node.isText()) {
         xmlStream << node.toText().data();
@@ -843,7 +843,7 @@ void KoTextLoader::Private::copyNode(const KoXmlNode &node, QTextStream &xmlStre
             copyTagStart(element, xmlStream);
         }
 
-        for ( KoXmlNode node = element.firstChild(); !node.isNull(); node = node.nextSibling() ) {
+        for ( KXmlNode node = element.firstChild(); !node.isNull(); node = node.nextSibling() ) {
             KXmlElement childElement;
             bool isElementNode = node.isElement();
             if (isElementNode)
@@ -1105,7 +1105,7 @@ void KoTextLoader::loadList(const KXmlElement &element, QTextCursor &cursor)
     KXmlDocument doc;
     QXmlStreamReader reader;
 
-    for ( KoXmlNode _node = element.firstChild(); !_node.isNull(); _node = _node.nextSibling() ) \
+    for ( KXmlNode _node = element.firstChild(); !_node.isNull(); _node = _node.nextSibling() ) \
     if ( ( e = _node.toElement() ).isNull() ) {
         //Don't do anything
     } else {
@@ -1284,9 +1284,9 @@ bool KoTextLoader::Private::checkForListItemSplit(const KXmlElement &element)
     return isSplitListItem;
 }
 
-KoXmlNode KoTextLoader::Private::loadListItemSplit(const KXmlElement &elem, QString *generatedXmlString)
+KXmlNode KoTextLoader::Private::loadListItemSplit(const KXmlElement &elem, QString *generatedXmlString)
 {
-    KoXmlNode lastProcessedNode = elem;
+    KXmlNode lastProcessedNode = elem;
 
     nameSpacesList.clear();
     nameSpacesList.append(KOdfXmlNS::split);
@@ -1464,7 +1464,7 @@ void KoTextLoader::loadSpan(const KXmlElement &element, QTextCursor &cursor, boo
     if (d->loadSpanLevel++ == 0)
         d->loadSpanInitialPos = cursor.position();
 
-    for (KoXmlNode node = element.firstChild(); !node.isNull(); node = node.nextSibling()) {
+    for (KXmlNode node = element.firstChild(); !node.isNull(); node = node.nextSibling()) {
         KXmlElement ts = node.toElement();
         const QString localName(ts.localName());
         const bool isTextNS = ts.namespaceURI() == KOdfXmlNS::text;
@@ -1768,7 +1768,7 @@ void KoTextLoader::loadMerge(const KXmlElement &element, QTextCursor &cursor)
     QString changeId = element.attributeNS(KOdfXmlNS::delta, "removal-change-idref");
     int deleteStartPosition = cursor.position();
 
-    for (KoXmlNode node = element.firstChild(); !node.isNull(); node = node.nextSibling()) {
+    for (KXmlNode node = element.firstChild(); !node.isNull(); node = node.nextSibling()) {
         KXmlElement ts = node.toElement();
         const QString localName(ts.localName());
         const bool isDeltaNS = ts.namespaceURI() == KOdfXmlNS::delta;

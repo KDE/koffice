@@ -739,7 +739,7 @@ bool KCValidity::operator==(const KCValidity& other) const
 QHash<QString, KXmlElement> KCValidity::preloadValidities(const KXmlElement& body)
 {
     QHash<QString, KXmlElement> validities;
-    KoXmlNode validation = KoXml::namedItemNS(body, KOdfXmlNS::table, "content-validations");
+    KXmlNode validation = KoXml::namedItemNS(body, KOdfXmlNS::table, "content-validations");
     kDebug() << "validation.isNull?" << validation.isNull();
     if (!validation.isNull()) {
         KXmlElement element;

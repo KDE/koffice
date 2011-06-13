@@ -126,7 +126,7 @@ private:
      * @param metaDoc a reference to the information node
      * @return true if success
      */
-    bool loadOasisAboutInfo(const KoXmlNode& metaDoc);
+    bool loadOasisAboutInfo(const KXmlNode& metaDoc);
 
     /**
      * Save the information about the document to an OASIS file
@@ -154,7 +154,7 @@ private:
      * @param metaDoc a reference to the information node
      * @return true if success
      */
-    bool loadOasisAuthorInfo(const KoXmlNode& metaDoc);
+    bool loadOasisAuthorInfo(const KXmlNode& metaDoc);
 
     /**
      * Load the information about the document from a KOffice-1.3 file

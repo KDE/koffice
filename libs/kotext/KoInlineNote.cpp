@@ -191,7 +191,7 @@ bool KoInlineNote::loadOdf(const KXmlElement & element, KoShapeLoadingContext &c
         }
 
         d->id = element.attributeNS(KOdfXmlNS::text, "id");
-        for (KoXmlNode node = element.firstChild(); !node.isNull(); node = node.nextSibling()) {
+        for (KXmlNode node = element.firstChild(); !node.isNull(); node = node.nextSibling()) {
             setAutoNumbering(false);
             KXmlElement ts = node.toElement();
             if (ts.namespaceURI() != KOdfXmlNS::text)
