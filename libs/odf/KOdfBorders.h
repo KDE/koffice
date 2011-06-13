@@ -29,7 +29,7 @@
 #include <QSharedData>
 
 class KOdfGenericStyle;
-class KoBorderPrivate;
+class KOdfBordersPrivate;
 class KoXmlElement;
 
 /**
@@ -157,7 +157,7 @@ public:
     static QString odfBorderStyleString(BorderStyle borderstyle);
 
 private:
-    QSharedDataPointer<KoBorderPrivate> d;
+    QSharedDataPointer<KOdfBordersPrivate> d;
 };
 
 #endif

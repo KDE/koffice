@@ -30,11 +30,11 @@
 #include <KOdfGenericStyle.h>
 
 
-class KoBorderPrivate : public QSharedData
+class KOdfBordersPrivate : public QSharedData
 {
 public:
-    KoBorderPrivate();
-    ~KoBorderPrivate();
+    KOdfBordersPrivate();
+    ~KOdfBordersPrivate();
 
     KOdfBorders::BorderData leftBorder;
     KOdfBorders::BorderData topBorder;
@@ -42,11 +42,11 @@ public:
     KOdfBorders::BorderData bottomBorder;
 };
 
-KoBorderPrivate::KoBorderPrivate()
+KOdfBordersPrivate::KOdfBordersPrivate()
 {
 }
 
-KoBorderPrivate::~KoBorderPrivate()
+KOdfBordersPrivate::~KOdfBordersPrivate()
 {
 }
 
@@ -62,7 +62,7 @@ KOdfBorders::BorderData::BorderData()
 // ----------------------------------------------------------------
 
 KOdfBorders::KOdfBorders()
-    : d(new KoBorderPrivate)
+    : d(new KOdfBordersPrivate)
 {
 }
 
