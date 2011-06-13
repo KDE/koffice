@@ -48,10 +48,10 @@ public:
     mutable bool metaXmlParsed;
     bool useStylesAutoStyles;
 
-    KoXmlDocument manifestDoc;
+    KXmlDocument manifestDoc;
 
     KOdfStylesReader defaultStylesReader;
-    KoXmlDocument doc; // the doc needs to be kept around so it is possible to access the styles
+    KXmlDocument doc; // the doc needs to be kept around so it is possible to access the styles
 };
 
 KOdfLoadingContext::KOdfLoadingContext(KOdfStylesReader &stylesReader, KOdfStore* store, const KComponentData &componentData)
@@ -152,7 +152,7 @@ void KOdfLoadingContext::parseGenerator() const
         d->store->leaveDirectory();
 
     if (d->store->hasFile("meta.xml")) {
-        KoXmlDocument metaDoc;
+        KXmlDocument metaDoc;
         KOdfStoreReader oasisStore(d->store);
         QString errorMsg;
         if (oasisStore.loadAndParse("meta.xml", metaDoc, errorMsg)) {
@@ -218,7 +218,7 @@ KOdfStyleStack &KOdfLoadingContext::styleStack() const
     return d->styleStack;
 }
 
-const KoXmlDocument &KOdfLoadingContext::manifestDocument() const
+const KXmlDocument &KOdfLoadingContext::manifestDocument() const
 {
     return d->manifestDoc;
 }

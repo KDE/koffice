@@ -88,7 +88,7 @@ void TestKoShapeFactory::testOdfElement()
     xmlstream << "</office:document-content>";
     xmldevice.close();
 
-    KoXmlDocument doc;
+    KXmlDocument doc;
     QString errorMsg;
     int errorLine = 0;
     int errorColumn = 0;

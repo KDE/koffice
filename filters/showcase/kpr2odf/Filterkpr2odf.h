@@ -99,8 +99,8 @@ private:
 
     QString convertBorder(const KXmlElement& border);
 
-    KoXmlDocument m_mainDoc;//from KPR
-    KoXmlDocument m_documentInfo;//from KPR
+    KXmlDocument m_mainDoc;//from KPR
+    KXmlDocument m_documentInfo;//from KPR
 
     QHash< int, QList<QString> > m_pageAnimations;//stores the animations, needed a hash to be able to sort them
 

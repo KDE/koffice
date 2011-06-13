@@ -60,7 +60,7 @@ KoDocumentInfo::~KoDocumentInfo()
 {
 }
 
-bool KoDocumentInfo::load(const KoXmlDocument& doc)
+bool KoDocumentInfo::load(const KXmlDocument& doc)
 {
     if (!loadAboutInfo(doc.documentElement()))
         return false;
@@ -71,7 +71,7 @@ bool KoDocumentInfo::load(const KoXmlDocument& doc)
     return true;
 }
 
-bool KoDocumentInfo::loadOasis(const KoXmlDocument& metaDoc)
+bool KoDocumentInfo::loadOasis(const KXmlDocument& metaDoc)
 {
     KoXmlNode t = KoXml::namedItemNS(metaDoc, KOdfXmlNS::office, "document-meta");
     KoXmlNode office = KoXml::namedItemNS(t, KOdfXmlNS::office, "meta");

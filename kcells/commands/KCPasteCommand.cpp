@@ -187,7 +187,7 @@ bool KCPasteCommand::unknownShiftDirection(const QMimeData *mimeData)
     QString errorMsg;
     int errorLine;
     int errorColumn;
-    KoXmlDocument d;
+    KXmlDocument d;
     if (!d.setContent(byteArray, false, &errorMsg, &errorLine, &errorColumn)) {
         // an error occurred
         kDebug() << "An error occurred."
@@ -224,7 +224,7 @@ bool KCPasteCommand::mainProcessing()
         if (m_firstrun) { // apply
             // First, prepare the data ONCE for all region elements.
             if (m_mimeData->hasFormat("application/x-kcells-snippet")) {
-                m_xmlDocument = new KoXmlDocument();
+                m_xmlDocument = new KXmlDocument();
                 const QByteArray data = m_mimeData->data("application/x-kcells-snippet");
                 kDebug(36005) << "Parsing" << data.size() << "bytes";
                 QString errorMsg;
@@ -264,7 +264,7 @@ bool KCPasteCommand::postProcessing()
     return KCAbstractRegionCommand::postProcessing();
 }
 
-bool KCPasteCommand::processXmlData(Element *element, KoXmlDocument *data)
+bool KCPasteCommand::processXmlData(Element *element, KXmlDocument *data)
 {
     const QRect pasteArea = element->rect();
     KCSheet *const sheet = element->sheet();

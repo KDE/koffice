@@ -164,7 +164,7 @@ using namespace MSOOXML;
 
 //-----------------------------------------
 
-KoFilter::ConversionStatus Utils::loadAndParse(QIODevice* io, KoXmlDocument& doc,
+KoFilter::ConversionStatus Utils::loadAndParse(QIODevice* io, KXmlDocument& doc,
         QString& errorMessage, const QString & fileName)
 {
     errorMessage.clear();
@@ -184,7 +184,7 @@ KoFilter::ConversionStatus Utils::loadAndParse(QIODevice* io, KoXmlDocument& doc
     return KoFilter::OK;
 }
 
-KoFilter::ConversionStatus Utils::loadAndParse(KoXmlDocument& doc, const KZip* zip,
+KoFilter::ConversionStatus Utils::loadAndParse(KXmlDocument& doc, const KZip* zip,
         QString& errorMessage, const QString& fileName)
 {
     errorMessage.clear();
@@ -435,7 +435,7 @@ kDebug() << val;
 }
 
 KoFilter::ConversionStatus Utils::loadContentTypes(
-    const KoXmlDocument& contentTypesXML, QMultiHash<QByteArray, QByteArray>& contentTypes)
+    const KXmlDocument& contentTypesXML, QMultiHash<QByteArray, QByteArray>& contentTypes)
 {
     KXmlElement typesEl(contentTypesXML.documentElement());
     if (!checkTag(typesEl, "Types", "documentElement")) {
@@ -470,7 +470,7 @@ KoFilter::ConversionStatus Utils::loadContentTypes(
     return KoFilter::OK;
 }
 
-KoFilter::ConversionStatus Utils::loadDocumentProperties(const KoXmlDocument& appXML, QMap<QString, QVariant>& properties)
+KoFilter::ConversionStatus Utils::loadDocumentProperties(const KXmlDocument& appXML, QMap<QString, QVariant>& properties)
 {
     KXmlElement typesEl(appXML.documentElement());
     KXmlElement e, elem, element;

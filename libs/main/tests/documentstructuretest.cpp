@@ -66,7 +66,7 @@ static KoDocumentInfo *loadDocumentInfo(const QString &odt)
 {
     KOdfStore *store = KOdfStore::createStore(odt, KOdfStore::Read, "", KOdfStore::Zip);
     KOdfStoreReader odfReadStore(store);
-    KoXmlDocument metaDoc;
+    KXmlDocument metaDoc;
     KoDocumentInfo *documentInfo = new KoDocumentInfo;
     QString error;
     if (!odfReadStore.loadAndParse("meta.xml", metaDoc, error)) {

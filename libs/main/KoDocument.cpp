@@ -1503,7 +1503,7 @@ void KoDocument::setMimeTypeAfterLoading(const QString& mimeType)
 }
 
 // The caller must call store->close() if loadAndParse returns true.
-bool KoDocument::oldLoadAndParse(KOdfStore *store, const QString& filename, KoXmlDocument& doc)
+bool KoDocument::oldLoadAndParse(KOdfStore *store, const QString& filename, KXmlDocument& doc)
 {
     //kDebug(30003) <<"Trying to open" << filename;
 
@@ -1589,7 +1589,7 @@ bool KoDocument::loadNativeFormat(const QString & file_)
         QString errorMsg;
         int errorLine;
         int errorColumn;
-        KoXmlDocument doc;
+        KXmlDocument doc;
         bool res;
         if (doc.setContent(&in, &errorMsg, &errorLine, &errorColumn)) {
             res = loadXML(doc, 0);
@@ -1688,7 +1688,7 @@ bool KoDocument::loadNativeFormatFromStoreInternal(KOdfStore *store)
     } else if (store->hasFile("root")) {   // Fallback to "old" file format (maindoc.xml)
         oasis = false;
 
-        KoXmlDocument doc;
+        KXmlDocument doc;
         bool ok = oldLoadAndParse(store, "root", doc);
         if (ok)
             ok = loadXML(doc, store);
@@ -1705,13 +1705,13 @@ bool KoDocument::loadNativeFormatFromStoreInternal(KOdfStore *store)
     }
 
     if (oasis && store->hasFile("meta.xml")) {
-        KoXmlDocument metaDoc;
+        KXmlDocument metaDoc;
         KOdfStoreReader oasisStore(store);
         if (oasisStore.loadAndParse("meta.xml", metaDoc, d->lastErrorMessage)) {
             d->docInfo->loadOasis(metaDoc);
         }
     } else if (!oasis && store->hasFile("documentinfo.xml")) {
-        KoXmlDocument doc;
+        KXmlDocument doc;
         if (oldLoadAndParse(store, "documentinfo.xml", doc)) {
             d->docInfo->load(doc);
         }
@@ -1727,7 +1727,7 @@ bool KoDocument::loadNativeFormatFromStoreInternal(KOdfStore *store)
         notify->addContext("url", store->urlOfStore().url());
         QTimer::singleShot(0, notify, SLOT(sendEvent()));
 
-        KoXmlDocument versionInfo;
+        KXmlDocument versionInfo;
         KOdfStoreReader oasisStore(store);
         if (oasisStore.loadAndParse("VersionList.xml", versionInfo, d->lastErrorMessage)) {
             KoXmlNode list = KoXml::namedItemNS(versionInfo, KOdfXmlNS::VL, "version-list");
@@ -1756,7 +1756,7 @@ bool KoDocument::loadNativeFormatFromStoreInternal(KOdfStore *store)
 bool KoDocument::loadFromStore(KOdfStore *_store, const QString& url)
 {
     if (_store->open(url)) {
-        KoXmlDocument doc;
+        KXmlDocument doc;
         doc.setContent(_store->device());
         if (!loadXML(doc, _store)) {
             _store->close();

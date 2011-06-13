@@ -45,7 +45,7 @@
 
   Some differences compared to QDom:
 
-  - DOM tree in KoXmlDocument is read-only, you can not modify it. This is
+  - DOM tree in KXmlDocument is read-only, you can not modify it. This is
     sufficient for KOffice since the tree is only accessed when loading
     a document to the application. For saving the document to XML file,
     use KXmlWriter.
@@ -2020,12 +2020,12 @@ QString KoXmlNode::localName() const
     return isElement() ? d->localName : QString();
 }
 
-KoXmlDocument KoXmlNode::ownerDocument() const
+KXmlDocument KoXmlNode::ownerDocument() const
 {
     KoXmlNodeData* node = d;
     while (node->parent) node = node->parent;
 
-    return KoXmlDocument(node);
+    return KXmlDocument(node);
 }
 
 KoXmlNode KoXmlNode::parentNode() const
@@ -2152,12 +2152,12 @@ KoXmlCDATASection KoXmlNode::toCDATASection() const
     return isCDATASection() ? KoXmlCDATASection(d) : KoXmlCDATASection();
 }
 
-KoXmlDocument KoXmlNode::toDocument() const
+KXmlDocument KoXmlNode::toDocument() const
 {
     if (isDocument())
-        return KoXmlDocument(d);
+        return KXmlDocument(d);
 
-    KoXmlDocument newDocument;
+    KXmlDocument newDocument;
     newDocument.d->emptyDocument = false;
     return newDocument;
 }
@@ -2406,16 +2406,16 @@ KoXmlDocumentType& KoXmlDocumentType::operator=(const KoXmlDocumentType & dt)
 
 // ==================================================================
 //
-//         KoXmlDocument
+//         KXmlDocument
 //
 // ==================================================================
 
-KoXmlDocument::KoXmlDocument(): KoXmlNode()
+KXmlDocument::KXmlDocument(): KoXmlNode()
 {
     d->emptyDocument = false;
 }
 
-KoXmlDocument::~KoXmlDocument()
+KXmlDocument::~KXmlDocument()
 {
     if (d)
         if (d != &KoXmlNodeData::null)
@@ -2424,36 +2424,36 @@ KoXmlDocument::~KoXmlDocument()
     d = 0;
 }
 
-KoXmlDocument::KoXmlDocument(KoXmlNodeData* data): KoXmlNode(data)
+KXmlDocument::KXmlDocument(KoXmlNodeData* data): KoXmlNode(data)
 {
     d->emptyDocument = true;
 }
 
 // Creates a copy of another document
-KoXmlDocument::KoXmlDocument(const KoXmlDocument& doc): KoXmlNode(doc.d)
+KXmlDocument::KXmlDocument(const KXmlDocument& doc): KoXmlNode(doc.d)
 {
 }
 
 // Creates a shallow copy of another document
-KoXmlDocument& KoXmlDocument::operator=(const KoXmlDocument & doc)
+KXmlDocument& KXmlDocument::operator=(const KXmlDocument & doc)
 {
     KoXmlNode::operator=(doc);
     return *this;
 }
 
 // Checks if this document and doc are equals
-bool KoXmlDocument::operator==(const KoXmlDocument& doc) const
+bool KXmlDocument::operator==(const KXmlDocument& doc) const
 {
     return(d == doc.d);
 }
 
 // Checks if this document and doc are not equals
-bool KoXmlDocument::operator!=(const KoXmlDocument& doc) const
+bool KXmlDocument::operator!=(const KXmlDocument& doc) const
 {
     return(d != doc.d);
 }
 
-KXmlElement KoXmlDocument::documentElement() const
+KXmlElement KXmlDocument::documentElement() const
 {
     d->loadChildren();
 
@@ -2466,12 +2466,12 @@ KXmlElement KoXmlDocument::documentElement() const
     return KXmlElement();
 }
 
-KoXmlDocumentType KoXmlDocument::doctype() const
+KoXmlDocumentType KXmlDocument::doctype() const
 {
     return dt;
 }
 
-QString KoXmlDocument::nodeName() const
+QString KXmlDocument::nodeName() const
 {
     if (d->emptyDocument)
         return QLatin1String("#document");
@@ -2479,7 +2479,7 @@ QString KoXmlDocument::nodeName() const
         return QString();
 }
 
-void KoXmlDocument::clear()
+void KXmlDocument::clear()
 {
     KoXmlNode::clear();
     d->emptyDocument = false;
@@ -2496,7 +2496,7 @@ namespace {
 
 }
 
-bool KoXmlDocument::setContent(QXmlStreamReader *reader,
+bool KXmlDocument::setContent(QXmlStreamReader *reader,
                                QString* errorMsg, int* errorLine, int* errorColumn)
 {
     if (d->nodeType != KoXmlNode::DocumentNode) {
@@ -2517,13 +2517,13 @@ bool KoXmlDocument::setContent(QXmlStreamReader *reader,
 }
 
 // no namespace processing
-bool KoXmlDocument::setContent(QIODevice* device, QString* errorMsg,
+bool KXmlDocument::setContent(QIODevice* device, QString* errorMsg,
                                int* errorLine, int* errorColumn)
 {
     return setContent(device, false, errorMsg, errorLine, errorColumn);
 }
 
-bool KoXmlDocument::setContent(QIODevice* device, bool namespaceProcessing,
+bool KXmlDocument::setContent(QIODevice* device, bool namespaceProcessing,
                                QString* errorMsg, int* errorLine, int* errorColumn)
 {
     if (d->nodeType != KoXmlNode::DocumentNode) {
@@ -2549,7 +2549,7 @@ bool KoXmlDocument::setContent(QIODevice* device, bool namespaceProcessing,
     return result;
 }
 
-bool KoXmlDocument::setContent(const QByteArray& text, bool namespaceProcessing,
+bool KXmlDocument::setContent(const QByteArray& text, bool namespaceProcessing,
                                QString *errorMsg, int *errorLine, int *errorColumn)
 {
     QBuffer buffer;
@@ -2557,7 +2557,7 @@ bool KoXmlDocument::setContent(const QByteArray& text, bool namespaceProcessing,
     return setContent(&buffer, namespaceProcessing, errorMsg, errorLine, errorColumn);
 }
 
-bool KoXmlDocument::setContent(const QString& text, bool namespaceProcessing,
+bool KXmlDocument::setContent(const QString& text, bool namespaceProcessing,
                                QString *errorMsg, int *errorLine, int *errorColumn)
 {
     if (d->nodeType != KoXmlNode::DocumentNode) {
@@ -2582,7 +2582,7 @@ bool KoXmlDocument::setContent(const QString& text, bool namespaceProcessing,
     return result;
 }
 
-bool KoXmlDocument::setContent(const QString& text,
+bool KXmlDocument::setContent(const QString& text,
                                QString *errorMsg, int *errorLine, int *errorColumn)
 {
     return setContent(text, false, errorMsg, errorLine, errorColumn);
@@ -2678,12 +2678,12 @@ QDomElement KoXml::asQDomElement(QDomDocument ownerDoc, const KXmlElement& eleme
     return KoXml::asQDomNode(ownerDoc, element).toElement();
 }
 
-QDomDocument KoXml::asQDomDocument(QDomDocument ownerDoc, const KoXmlDocument& document)
+QDomDocument KoXml::asQDomDocument(QDomDocument ownerDoc, const KXmlDocument& document)
 {
     return KoXml::asQDomNode(ownerDoc, document).toDocument();
 }
 
-bool KoXml::setDocument(KoXmlDocument& doc, QIODevice* device,
+bool KoXml::setDocument(KXmlDocument& doc, QIODevice* device,
                         bool namespaceProcessing, QString* errorMsg, int* errorLine,
                         int* errorColumn)
 {

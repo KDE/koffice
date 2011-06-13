@@ -235,7 +235,7 @@ bool KWOdfLoader::load(KOdfStoreReader &odfStore)
     return true;
 }
 
-void KWOdfLoader::loadSettings(const KoXmlDocument &settingsDoc)
+void KWOdfLoader::loadSettings(const KXmlDocument &settingsDoc)
 {
     if (settingsDoc.isNull())
         return;

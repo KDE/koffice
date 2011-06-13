@@ -453,7 +453,7 @@ public:
      *  Reimplement this method to load the contents of your KOffice document,
      *  from the XML document. This is for the pre-Oasis file format (maindoc.xml).
      */
-    virtual bool loadXML(const KoXmlDocument & doc, KOdfStore *store) = 0;
+    virtual bool loadXML(const KXmlDocument & doc, KOdfStore *store) = 0;
 
 
     /**
@@ -1001,7 +1001,7 @@ private:
     KoMainWindow *currentShell();
 
     KService::Ptr nativeService();
-    bool oldLoadAndParse(KOdfStore *store, const QString& filename, KoXmlDocument& doc);
+    bool oldLoadAndParse(KOdfStore *store, const QString& filename, KXmlDocument& doc);
     bool loadNativeFormatFromStore(const QString& file);
     bool loadNativeFormatFromStoreInternal(KOdfStore *store);
 

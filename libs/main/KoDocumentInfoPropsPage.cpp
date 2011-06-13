@@ -74,7 +74,7 @@ KoDocumentInfoPropsPage::KoDocumentInfoPropsPage(KPropertiesDialog *props,
 
     // OASIS/OOo file format?
     if (d->m_src->hasFile("meta.xml")) {
-        KoXmlDocument metaDoc;
+        KXmlDocument metaDoc;
         KOdfStoreReader oasisStore(d->m_src);
         QString lastErrorMessage;
         if (oasisStore.loadAndParse("meta.xml", metaDoc, lastErrorMessage)) {
@@ -84,7 +84,7 @@ KoDocumentInfoPropsPage::KoDocumentInfoPropsPage(KPropertiesDialog *props,
     // Old koffice file format?
     else if (d->m_src->hasFile("documentinfo.xml")) {
         if (d->m_src->open("documentinfo.xml")) {
-            KoXmlDocument doc;
+            KXmlDocument doc;
             if (doc.setContent(d->m_src->device()))
                 d->m_info->load(doc);
         }

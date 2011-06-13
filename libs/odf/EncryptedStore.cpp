@@ -157,7 +157,7 @@ bool EncryptedStore::init(Mode mode, const QByteArray & appIdentification)
         }
         QIODevice *dev = (static_cast< const KArchiveFile* >(manifestArchiveEntry))->createDevice();
 
-        KoXmlDocument xmldoc;
+        KXmlDocument xmldoc;
         if (!xmldoc.setContent(dev)) {
             KMessage::message(KMessage::Warning, i18n("The manifest file seems to be corrupted. The document could not be opened."));
             dev->close();

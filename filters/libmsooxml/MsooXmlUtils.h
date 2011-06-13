@@ -212,11 +212,11 @@ MSOOXML_EXPORT bool convertBooleanAttr(const QString& value, bool defaultValue =
  @return status: KoFilter::OK on success or KoFilter::WrongFormat when any unexpected and critical incompatibility occurs.
 */
 //! @todo create whole class keeping the data
-MSOOXML_EXPORT KoFilter::ConversionStatus loadContentTypes(const KoXmlDocument& contentTypesXML,
+MSOOXML_EXPORT KoFilter::ConversionStatus loadContentTypes(const KXmlDocument& contentTypesXML,
         QMultiHash<QByteArray, QByteArray>& contentTypes);
 
 //! Loads content types from "docProps/app.xml"
-MSOOXML_EXPORT KoFilter::ConversionStatus loadDocumentProperties(const KoXmlDocument& appXML, QMap<QString, QVariant>& properties);
+MSOOXML_EXPORT KoFilter::ConversionStatus loadDocumentProperties(const KXmlDocument& appXML, QMap<QString, QVariant>& properties);
 
 //! @return device for file @a fileName of @a zip archive. Status @a status is written on error.
 //! The device is already opened for reading and should be deleted after use.
@@ -225,12 +225,12 @@ MSOOXML_EXPORT QIODevice* openDeviceForFile(const KZip* zip,
         const QString& fileName,
         KoFilter::ConversionStatus& status);
 
-//! QXmlStreamReader-based generic loading/parsing into @a doc KoXmlDocument
-MSOOXML_EXPORT KoFilter::ConversionStatus loadAndParse(QIODevice* io, KoXmlDocument& doc,
+//! QXmlStreamReader-based generic loading/parsing into @a doc KXmlDocument
+MSOOXML_EXPORT KoFilter::ConversionStatus loadAndParse(QIODevice* io, KXmlDocument& doc,
         QString& errorMessage, const QString & fileName);
 
-//! @see KOdfStoreReader::loadAndParse(QIODevice* fileDevice, KoXmlDocument& doc, QString& errorMessage, const QString& fileName)
-MSOOXML_EXPORT KoFilter::ConversionStatus loadAndParse(KoXmlDocument& doc,
+//! @see KOdfStoreReader::loadAndParse(QIODevice* fileDevice, KXmlDocument& doc, QString& errorMessage, const QString& fileName)
+MSOOXML_EXPORT KoFilter::ConversionStatus loadAndParse(KXmlDocument& doc,
         const KZip* zip,
         QString& errorMessage,
         const QString& fileName);

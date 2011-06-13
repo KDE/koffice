@@ -75,7 +75,7 @@ static KoDocumentRdf *loadDocument(const QString &odt)
 
     KOdfStore *store = KOdfStore::createStore(odt, KOdfStore::Read, "", KOdfStore::Zip);
     KOdfStoreReader odfReadStore(store);
-    KoXmlDocument metaDoc;
+    KXmlDocument metaDoc;
     KoDocumentRdf *rdf = new KoDocumentRdf;
     QString error;
     if (!odfReadStore.loadAndParse(error)) {

@@ -153,7 +153,7 @@ QColor KoGuidesData::guidesColor() const
     return d->guidesColor;
 }
 
-bool KoGuidesData::loadOdfSettings(const KoXmlDocument & settingsDoc)
+bool KoGuidesData::loadOdfSettings(const KXmlDocument & settingsDoc)
 {
     d->vertGuideLines.clear();
     d->horzGuideLines.clear();

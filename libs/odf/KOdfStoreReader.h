@@ -27,7 +27,7 @@ class QIODevice;
 class QXmlStreamReader;
 class KOdfStore;
 class KOdfStylesReader;
-class KoXmlDocument;
+class KXmlDocument;
 class KXmlElement;
 
 /**
@@ -66,7 +66,7 @@ public:
      *
      * This gives you the content of the content.xml file
      */
-    KoXmlDocument contentDoc() const;
+    KXmlDocument contentDoc() const;
 
     /**
      * Get the settings document
@@ -75,7 +75,7 @@ public:
      *
      * This gives you the content of the settings.xml file
      */
-    KoXmlDocument settingsDoc() const;
+    KXmlDocument settingsDoc() const;
 
     /**
      * Load and parse
@@ -97,18 +97,18 @@ public:
     /**
      * Load a file from an odf store
      */
-    bool loadAndParse(const QString &fileName, KoXmlDocument &doc, QString &errorMessage);
+    bool loadAndParse(const QString &fileName, KXmlDocument &doc, QString &errorMessage);
 
     /**
      * Load a file and parse from a QIODevice
      * filename argument is just used for debug message
      */
-    static bool loadAndParse(QIODevice *fileDevice, KoXmlDocument &doc, QString &errorMessage, const QString& fileName);
+    static bool loadAndParse(QIODevice *fileDevice, KXmlDocument &doc, QString &errorMessage, const QString& fileName);
 
     /**
      * Get mimetype from full path, using the manifest
      */
-    static QString mimeForPath(const KoXmlDocument &doc, const QString &fullPath);
+    static QString mimeForPath(const KXmlDocument &doc, const QString &fullPath);
 
 private:
     class Private;

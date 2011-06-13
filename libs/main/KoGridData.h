@@ -30,7 +30,7 @@ class KoViewConverter;
 class KXmlWriter;
 class KToggleAction;
 class KXmlElement;
-class KoXmlDocument;
+class KXmlDocument;
 
 /**
  * This class stores application-data for display-grids.
@@ -99,7 +99,7 @@ public:
     void setShowGrid(bool showGrid);
 
     /// Loads grid data from the given setting xml document
-    bool loadOdfSettings(const KoXmlDocument & settingsDoc);
+    bool loadOdfSettings(const KXmlDocument & settingsDoc);
 
     /// Saves grid data to the given settings xml writer
     void saveOdfSettings(KXmlWriter &settingsWriter);

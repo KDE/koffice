@@ -38,7 +38,7 @@ public:
     virtual bool loadOdf(KOdfStoreReader & odfStore);
     virtual bool saveOdf(SavingContext & documentContext);
 
-    virtual bool loadXML(const KoXmlDocument &doc, KOdfStore *store);
+    virtual bool loadXML(const KXmlDocument &doc, KOdfStore *store);
     virtual bool saveFile();
     virtual QDomDocument saveXML();
     virtual bool saveChildren(KOdfStore* /*_store*/) { return true; }

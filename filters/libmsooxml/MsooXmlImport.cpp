@@ -328,13 +328,13 @@ KoFilter::ConversionStatus MsooXmlImport::openFile(KoOdfWriters *writers, QStrin
     RETURN_IF_ERROR( Utils::loadContentTypes(m_contentTypesXML, m_contentTypes) )
 
     static const char *docPropy_core_xml = "docProps/core.xml";
-    KoXmlDocument coreXML;
+    KXmlDocument coreXML;
     if (loadAndParse(docPropy_core_xml, coreXML, errorMessage) == KoFilter::OK) {
         RETURN_IF_ERROR( Utils::loadDocumentProperties(coreXML, m_documentProperties) )
     }
 
     static const char *docPropy_app_xml = "docProps/app.xml";
-    KoXmlDocument appXML;
+    KXmlDocument appXML;
     if (loadAndParse(docPropy_app_xml, appXML, errorMessage) == KoFilter::OK) {
         RETURN_IF_ERROR( Utils::loadDocumentProperties(appXML, m_documentProperties) )
     }
@@ -347,7 +347,7 @@ KoFilter::ConversionStatus MsooXmlImport::openFile(KoOdfWriters *writers, QStrin
     return KoFilter::OK;
 }
 
-KoFilter::ConversionStatus MsooXmlImport::loadAndParse(const QString& filename, KoXmlDocument& doc, QString& errorMessage)
+KoFilter::ConversionStatus MsooXmlImport::loadAndParse(const QString& filename, KXmlDocument& doc, QString& errorMessage)
 {
     return Utils::loadAndParse(doc, m_zip, errorMessage, filename);
 }

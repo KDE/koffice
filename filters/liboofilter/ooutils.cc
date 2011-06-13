@@ -393,7 +393,7 @@ void OoUtils::importTextPosition(const QString& text_position, QString& value, Q
         value = "0";
 }
 
-void OoUtils::createDocumentInfo(KoXmlDocument &_meta, QDomDocument & docinfo)
+void OoUtils::createDocumentInfo(KXmlDocument &_meta, QDomDocument & docinfo)
 {
     KoXmlNode meta   = KoXml::namedItemNS(_meta, ooNS::office, "document-meta");
     KoXmlNode office = KoXml::namedItemNS(meta, ooNS::office, "meta");
@@ -458,7 +458,7 @@ void OoUtils::createDocumentInfo(KoXmlDocument &_meta, QDomDocument & docinfo)
     }
 }
 
-KoFilter::ConversionStatus OoUtils::loadAndParse(const QString& fileName, KoXmlDocument& doc, KOdfStore* store)
+KoFilter::ConversionStatus OoUtils::loadAndParse(const QString& fileName, KXmlDocument& doc, KOdfStore* store)
 {
     kDebug(30518) << "loadAndParse: Trying to open" << fileName;
 
@@ -472,7 +472,7 @@ KoFilter::ConversionStatus OoUtils::loadAndParse(const QString& fileName, KoXmlD
 
 }
 
-KoFilter::ConversionStatus OoUtils::loadAndParse(QIODevice* io, KoXmlDocument& doc, const QString & fileName)
+KoFilter::ConversionStatus OoUtils::loadAndParse(QIODevice* io, KXmlDocument& doc, const QString & fileName)
 {
     // Error variables for QDomDocument::setContent
     QString errorMsg;
@@ -489,7 +489,7 @@ KoFilter::ConversionStatus OoUtils::loadAndParse(QIODevice* io, KoXmlDocument& d
     return KoFilter::OK;
 }
 
-KoFilter::ConversionStatus OoUtils::loadAndParse(const QString& filename, KoXmlDocument& doc, KZip* zip)
+KoFilter::ConversionStatus OoUtils::loadAndParse(const QString& filename, KXmlDocument& doc, KZip* zip)
 {
     kDebug(30519) << "Trying to open" << filename;
 

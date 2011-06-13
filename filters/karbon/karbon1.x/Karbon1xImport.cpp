@@ -132,7 +132,7 @@ bool KarbonImport::parseRoot(QIODevice* io)
     int line, col;
     QString errormessage;
 
-    KoXmlDocument inputDoc;
+    KXmlDocument inputDoc;
     const bool parsed = inputDoc.setContent(io, &errormessage, &line, &col);
 
     if (! parsed) {
@@ -149,7 +149,7 @@ bool KarbonImport::parseRoot(QIODevice* io)
     return true;
 }
 
-bool KarbonImport::convert(const KoXmlDocument &document)
+bool KarbonImport::convert(const KXmlDocument &document)
 {
     KXmlElement doc = document.documentElement();
 

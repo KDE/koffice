@@ -99,7 +99,7 @@ void KoPADocument::paintContent(QPainter &painter, const QRect &rect)
     painter.drawPixmap(rect, thumbnail);
 }
 
-bool KoPADocument::loadXML(const KoXmlDocument &doc, KOdfStore *)
+bool KoPADocument::loadXML(const KXmlDocument &doc, KOdfStore *)
 {
     Q_UNUSED(doc);
 
@@ -357,7 +357,7 @@ bool KoPADocument::saveOdfSettings(KOdfStore * store)
     return true;
 }
 
-void KoPADocument::loadOdfSettings( const KoXmlDocument &settingsDoc)
+void KoPADocument::loadOdfSettings( const KXmlDocument &settingsDoc)
 {
     if (settingsDoc.isNull()) {
         return ; // not an error if some file doesn't have settings.xml

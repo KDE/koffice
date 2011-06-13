@@ -71,9 +71,9 @@ private:
     KCDoc *    m_doc;
     KCStyle *  m_defaultStyle;
 
-    KoXmlDocument   m_content;
-    KoXmlDocument   m_meta;
-    KoXmlDocument   m_settings;
+    KXmlDocument   m_content;
+    KXmlDocument   m_meta;
+    KXmlDocument   m_settings;
 
     QHash<QString, KXmlElement*>   m_styles;
     QHash<QString, KCStyle*> m_defaultStyles;
@@ -85,7 +85,7 @@ private:
     int  readMetaData();
     bool parseBody(int numOfTables);
     void insertStyles(KXmlElement const & element);
-    bool createStyleMap(KoXmlDocument const & styles);
+    bool createStyleMap(KXmlDocument const & styles);
     bool readRowFormat(KXmlElement & rowNode, KXmlElement * rowStyle,
                        KCSheet * table, int & row, int & number, bool last);
     bool readColLayouts(KXmlElement & content, KCSheet * table);
@@ -112,7 +112,7 @@ private:
     void loadOasisCondition(const KCCell& cell, const KXmlElement &property);
     void loadOasisConditionValue(const QString &styleCondition, KCConditional &newCondition, const KCValueParser *parser);
     void loadOasisCondition(QString &valExpression, KCConditional &newCondition, const KCValueParser *parser);
-    KoFilter::ConversionStatus loadAndParse(KoXmlDocument& doc, const QString& fileName, KOdfStore *m_store);
+    KoFilter::ConversionStatus loadAndParse(KXmlDocument& doc, const QString& fileName, KOdfStore *m_store);
 
     KoFilter::ConversionStatus openFile();
 };

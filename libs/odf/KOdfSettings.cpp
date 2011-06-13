@@ -25,7 +25,7 @@ class KOdfSettings::Private
 {
 };
 
-KOdfSettings::KOdfSettings(const KoXmlDocument& doc)
+KOdfSettings::KOdfSettings(const KXmlDocument& doc)
         : m_settingsElement(KoXml::namedItemNS(doc.documentElement(), KOdfXmlNS::office, "settings")),
         m_configNsUri(KOdfXmlNS::config)
         , d(0)
@@ -35,7 +35,7 @@ KOdfSettings::KOdfSettings(const KoXmlDocument& doc)
         kDebug(30003) << " document doesn't have tag 'office:settings'";
 }
 
-KOdfSettings::KOdfSettings(const KoXmlDocument& doc, const char* officeNSURI, const char* configNSURI)
+KOdfSettings::KOdfSettings(const KXmlDocument& doc, const char* officeNSURI, const char* configNSURI)
         : m_settingsElement(KoXml::namedItemNS(doc.documentElement(), officeNSURI, "settings")),
         m_configNsUri(configNSURI)
         , d(0)

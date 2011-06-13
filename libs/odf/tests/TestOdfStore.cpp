@@ -44,7 +44,7 @@ void TestOdfStore::testMimeForPath()
         "<manifest:file-entry manifest:media-type=\"application/vnd.oasis.opendocument.text\" manifest:full-path=\"Object 1\"/>\n"
         "</manifest:manifest>";
 
-    KoXmlDocument doc;
+    KXmlDocument doc;
     QString errorMsg;
     int errorLine, errorColumn;
     bool ok = doc.setContent( xml, true /* namespace processing */, &errorMsg, &errorLine, &errorColumn );

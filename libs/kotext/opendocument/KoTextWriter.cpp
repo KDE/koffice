@@ -1429,7 +1429,7 @@ void KoTextWriter::Private::postProcessListItemSplit(int changeId)
     //Now Parse the generatedXML and if successful generate the final output
     QString errorMsg;
     int errorLine, errorColumn;
-    KoXmlDocument doc;
+    KXmlDocument doc;
 
     QXmlStreamReader reader(generatedXmlString);
     reader.setNamespaceProcessing(true);
@@ -1631,7 +1631,7 @@ void KoTextWriter::Private::postProcessDeleteMergeXml()
     //Now Parse the generatedXML and if successful generate the final output
     QString errorMsg;
     int errorLine, errorColumn;
-    KoXmlDocument doc;
+    KXmlDocument doc;
 
     QXmlStreamReader reader(generatedXmlString);
     reader.setNamespaceProcessing(true);

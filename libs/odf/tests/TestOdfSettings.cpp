@@ -38,7 +38,7 @@ private slots:
     void testNamedMap();
 
 private:
-    KoXmlDocument doc;
+    KXmlDocument doc;
     KOdfSettings *settings;
 };
 

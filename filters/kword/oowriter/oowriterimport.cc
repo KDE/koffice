@@ -496,7 +496,7 @@ QDomElement OoWriterImport::createInitialFrame(QDomElement& parentFramesetElem, 
     return frameElementOut;
 }
 
-KoFilter::ConversionStatus OoWriterImport::loadAndParse(const QString& filename, KoXmlDocument& doc)
+KoFilter::ConversionStatus OoWriterImport::loadAndParse(const QString& filename, KXmlDocument& doc)
 {
     return OoUtils::loadAndParse(filename, doc, m_zip);
 }
@@ -540,7 +540,7 @@ void OoWriterImport::createDocumentInfo(QDomDocument &docinfo)
 
 // This mainly fills member variables with the styles.
 // The 'doc' argument is only for footnotes-configuration.
-bool OoWriterImport::createStyleMap(const KoXmlDocument & styles, QDomDocument& doc)
+bool OoWriterImport::createStyleMap(const KXmlDocument & styles, QDomDocument& doc)
 {
     KXmlElement docElement  = styles.documentElement();
     KoXmlNode docStyles   = KoXml::namedItemNS(docElement, ooNS::office, "document-styles");

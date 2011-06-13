@@ -131,7 +131,7 @@ private:
     KoFilter::ConversionStatus openFile(KoOdfWriters *writers, QString& errorMessage);
 
     KoFilter::ConversionStatus loadAndParse(const QString& filename,
-                                            KoXmlDocument& doc, QString& errorMessage);
+                                            KXmlDocument& doc, QString& errorMessage);
 
     KoFilter::ConversionStatus loadAndParseDocumentInternal(
         const QByteArray& contentType, MsooXmlReader *reader, KoOdfWriters *writers,
@@ -146,7 +146,7 @@ private:
     KOdfStore* m_outputStore; //!< output store used for copying files
 
     //! XML from "[Content_Types].xml" file.
-    KoXmlDocument m_contentTypesXML;
+    KXmlDocument m_contentTypesXML;
     //! Content types from m_contentTypesXML: ContentType -> PartName mapping
     QMultiHash<QByteArray, QByteArray> m_contentTypes;
 
@@ -154,7 +154,7 @@ private:
     QMap<QString, QVariant> m_documentProperties;
 
     //! XML with document contents, typically /word/document.xml
-    KoXmlDocument m_documentXML;
+    KXmlDocument m_documentXML;
 
     QMap<QString, QSize> m_imageSizes; //!< collects image sizes to avoid multiple checks
 };

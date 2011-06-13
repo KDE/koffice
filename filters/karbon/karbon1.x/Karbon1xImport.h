@@ -44,7 +44,7 @@ public:
 protected:
     bool parseRoot(QIODevice* io);
 
-    bool convert(const KoXmlDocument &);
+    bool convert(const KXmlDocument &);
     bool loadXML(const KXmlElement& doc);
 
     void loadGroup(KoShapeContainer * parent, const KXmlElement &element);

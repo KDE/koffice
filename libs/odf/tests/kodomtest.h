@@ -32,7 +32,7 @@ private slots:
     void testQDom();
     void testKoDom();
 private:
-    KoXmlDocument m_doc;
+    KXmlDocument m_doc;
 };
 
 #endif

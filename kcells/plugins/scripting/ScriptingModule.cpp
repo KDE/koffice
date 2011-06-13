@@ -156,7 +156,7 @@ QObject* ScriptingModule::createListener(const QString& sheetname, const QString
 
 bool ScriptingModule::fromXML(const QString& xml)
 {
-    KoXmlDocument xmldoc;
+    KXmlDocument xmldoc;
     if (! xmldoc.setContent(xml, true))
         return false;
     return kcellsDoc()->loadXML(xmldoc, 0);

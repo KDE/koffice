@@ -125,7 +125,7 @@ protected:
     Private * const d;
 
     virtual void paintContent(QPainter & painter, const QRect & rect);
-    virtual bool loadXML(const KoXmlDocument& doc, KOdfStore *store);
+    virtual bool loadXML(const KXmlDocument& doc, KOdfStore *store);
     virtual KoView* createViewInstance(QWidget* parent);
 
     virtual void saveOdfViewSettings(KXmlWriter& settingsWriter);
@@ -147,7 +147,7 @@ private:
      * The actual loading takes place in KCMap::loadOdfSettings.
      * @see KCMap::loadOdfSettings
      */
-    void loadOdfSettings(const KoXmlDocument&settingsDoc);
+    void loadOdfSettings(const KXmlDocument&settingsDoc);
 
     /**
      * \ingroup OpenDocument

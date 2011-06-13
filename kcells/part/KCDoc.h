@@ -108,7 +108,7 @@ public:
      * \ingroup NativeFormat
      * Main loading method.
      */
-    virtual bool loadXML(const KoXmlDocument& doc, KOdfStore *store);
+    virtual bool loadXML(const KXmlDocument& doc, KOdfStore *store);
 
     /**
      * \ingroup OpenDocument

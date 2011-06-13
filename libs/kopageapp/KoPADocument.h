@@ -49,7 +49,7 @@ public:
 
     void paintContent(QPainter &painter, const QRect &rect);
 
-    bool loadXML(const KoXmlDocument &doc, KOdfStore *store);
+    bool loadXML(const KXmlDocument &doc, KOdfStore *store);
     bool loadOdf(KOdfStoreReader &odfStore);
 
     bool saveOdf(SavingContext &documentContext);
@@ -269,7 +269,7 @@ protected:
     /**
      * Load settings
      */
-    void loadOdfSettings(const KoXmlDocument &settingsDoc);
+    void loadOdfSettings(const KXmlDocument &settingsDoc);
 
     /**
      * This function is called by at the end of addShape. This is used

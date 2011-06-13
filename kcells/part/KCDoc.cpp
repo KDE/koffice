@@ -281,7 +281,7 @@ bool KCDoc::loadChildren(KOdfStore* _store)
 }
 
 
-bool KCDoc::loadXML(const KoXmlDocument& doc, KOdfStore*)
+bool KCDoc::loadXML(const KXmlDocument& doc, KOdfStore*)
 {
     QPointer<KoUpdater> updater;
     if (progressUpdater()) {

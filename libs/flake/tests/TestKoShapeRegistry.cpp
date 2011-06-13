@@ -60,7 +60,7 @@ void TestKoShapeRegistry::testCreateShapes()
     xmlstream << "</office:document-content>";
     xmldevice.close();
 
-    KoXmlDocument doc;
+    KXmlDocument doc;
     QString errorMsg;
     int errorLine = 0;
     int errorColumn = 0;
@@ -107,7 +107,7 @@ void TestKoShapeRegistry::testCreateFramedShapes()
     xmlstream << "</office:document-content>";
     xmldevice.close();
 
-    KoXmlDocument doc;
+    KXmlDocument doc;
     QString errorMsg;
     int errorLine = 0;
     int errorColumn = 0;

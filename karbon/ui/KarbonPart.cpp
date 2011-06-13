@@ -193,7 +193,7 @@ void KarbonPart::openTemplate(const KUrl &url)
         setOutputMimeType("application/vnd.oasis.opendocument.graphics");
 }
 
-bool KarbonPart::loadXML(const KoXmlDocument&, KOdfStore*)
+bool KarbonPart::loadXML(const KXmlDocument&, KOdfStore*)
 {
     return false;
 }
@@ -273,7 +273,7 @@ bool KarbonPart::completeLoading(KOdfStore *store)
     return ok;
 }
 
-void KarbonPart::loadOasisSettings(const KoXmlDocument &settingsDoc)
+void KarbonPart::loadOasisSettings(const KXmlDocument &settingsDoc)
 {
     if (settingsDoc.isNull())
         return ; // not an error if some file doesn't have settings.xml

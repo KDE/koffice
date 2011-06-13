@@ -33,7 +33,7 @@
  * KoScriptingOdfReader
  */
 
-KoScriptingOdfReader::KoScriptingOdfReader(KoScriptingOdfStore *store, const KoXmlDocument &doc)
+KoScriptingOdfReader::KoScriptingOdfReader(KoScriptingOdfStore *store, const KXmlDocument &doc)
     : QObject(store),
     m_store(store),
     m_doc(doc),
@@ -69,7 +69,7 @@ KoScriptingOdfStore *KoScriptingOdfReader::store() const
     return m_store;
 }
 
-KoXmlDocument KoScriptingOdfReader::doc() const
+KXmlDocument KoScriptingOdfReader::doc() const
 {
     return m_doc;
 }
@@ -184,7 +184,7 @@ void KoScriptingOdfReader::handleElement(KXmlElement &elem, int level)
         handleElement(e, level); // recursive
 }
 
-KoScriptingOdfManifestReader::KoScriptingOdfManifestReader(KoScriptingOdfStore *store, const KoXmlDocument &doc)
+KoScriptingOdfManifestReader::KoScriptingOdfManifestReader(KoScriptingOdfStore *store, const KXmlDocument &doc)
     : KoScriptingOdfReader(store, doc)
 {
     KXmlElement elem = doc.documentElement();
@@ -221,13 +221,13 @@ void dumpElem(KXmlElement elem, int level=0)
 }
 #endif
 
-KoScriptingOdfStylesReader::KoScriptingOdfStylesReader(KoScriptingOdfStore *store, const KoXmlDocument &doc)
+KoScriptingOdfStylesReader::KoScriptingOdfStylesReader(KoScriptingOdfStore *store, const KXmlDocument &doc)
     : KoScriptingOdfReader(store, doc)
 {
     //dumpElem( doc.documentElement() );
 }
 
-KoScriptingOdfContentReader::KoScriptingOdfContentReader(KoScriptingOdfStore *store, const KoXmlDocument &doc)
+KoScriptingOdfContentReader::KoScriptingOdfContentReader(KoScriptingOdfStore *store, const KXmlDocument &doc)
     : KoScriptingOdfReader(store, doc)
 {
     //dumpElem( doc.documentElement() );
@@ -355,7 +355,7 @@ QObject *KoScriptingOdfStore::open(const QString &fileName)
     Q_ASSERT(store->device());
 
     //KoOasisStore oasisStore(store);
-    KoXmlDocument doc;
+    KXmlDocument doc;
 
     QString errorMsg;
     int errorLine, errorColumn;

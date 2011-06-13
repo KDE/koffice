@@ -75,7 +75,7 @@ KOdfStylesReader::~KOdfStylesReader()
     delete d;
 }
 
-void KOdfStylesReader::createStyleMap(const KoXmlDocument& doc, bool stylesDotXml)
+void KOdfStylesReader::createStyleMap(const KXmlDocument& doc, bool stylesDotXml)
 {
     const KXmlElement docElement  = doc.documentElement();
     // We used to have the office:version check here, but better let the apps do that

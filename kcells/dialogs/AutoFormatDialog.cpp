@@ -66,7 +66,7 @@ public:
     QList<KCStyle> styles;
 
 public:
-    bool parseXML(const KoXmlDocument& doc);
+    bool parseXML(const KXmlDocument& doc);
 };
 
 AutoFormatDialog::AutoFormatDialog(QWidget* parent, Selection* selection)
@@ -156,7 +156,7 @@ void AutoFormatDialog::slotOk()
 
     QFile file(xml);
     file.open(QIODevice::ReadOnly);
-    KoXmlDocument doc;
+    KXmlDocument doc;
     doc.setContent(&file);
     file.close();
 
@@ -178,7 +178,7 @@ void AutoFormatDialog::slotOk()
     accept();
 }
 
-bool AutoFormatDialog::Private::parseXML(const KoXmlDocument& doc)
+bool AutoFormatDialog::Private::parseXML(const KXmlDocument& doc)
 {
     styles.clear();
     for (int i = 0; i < 16; ++i)

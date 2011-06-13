@@ -36,7 +36,7 @@ class KoXmlNode;
 class KoXmlText;
 class KoXmlCDATASection;
 class KoXmlDocumentType;
-class KoXmlDocument;
+class KXmlDocument;
 class KoXmlNodeData;
 class KXmlElement;
 
@@ -88,14 +88,14 @@ public:
     KXmlElement toElement() const;
     KoXmlText toText() const;
     KoXmlCDATASection toCDATASection() const;
-    KoXmlDocument toDocument() const;
+    KXmlDocument toDocument() const;
 
     virtual QString nodeName() const;
     virtual QString namespaceURI() const;
     virtual QString prefix() const;
     virtual QString localName() const;
 
-    KoXmlDocument ownerDocument() const;
+    KXmlDocument ownerDocument() const;
     KoXmlNode parentNode() const;
 
     bool hasChildNodes() const;
@@ -163,7 +163,7 @@ public:
 
 private:
     friend class KoXmlNode;
-    friend class KoXmlDocument;
+    friend class KXmlDocument;
     KXmlElement(KoXmlNodeData*);
 };
 
@@ -186,7 +186,7 @@ public:
 private:
     friend class KoXmlNode;
     friend class KoXmlCDATASection;
-    friend class KoXmlDocument;
+    friend class KXmlDocument;
     KoXmlText(KoXmlNodeData*);
 };
 
@@ -206,7 +206,7 @@ public:
 
 private:
     friend class KoXmlNode;
-    friend class KoXmlDocument;
+    friend class KXmlDocument;
     KoXmlCDATASection(KoXmlNodeData*);
 };
 
@@ -230,32 +230,32 @@ public:
 
 private:
     friend class KoXmlNode;
-    friend class KoXmlDocument;
+    friend class KXmlDocument;
     KoXmlDocumentType(KoXmlNodeData*);
 };
 
 
 /**
-* KoXmlDocument represents an XML document, structured in a DOM tree.
+* KXmlDocument represents an XML document, structured in a DOM tree.
 *
-* KoXmlDocument is designed to be memory efficient. Unlike QDomDocument from
-* Qt's XML module, KoXmlDocument does not store all nodes in the DOM tree.
+* KXmlDocument is designed to be memory efficient. Unlike QDomDocument from
+* Qt's XML module, KXmlDocument does not store all nodes in the DOM tree.
 * Some nodes will be loaded and parsed on-demand only.
 *
-* KoXmlDocument is read-only, you can not modify its content.
+* KXmlDocument is read-only, you can not modify its content.
 *
 * @author Ariya Hidayat <ariya@kde.org>
 */
 
-class KODF_EXPORT KoXmlDocument: public KoXmlNode
+class KODF_EXPORT KXmlDocument: public KoXmlNode
 {
 public:
-    KoXmlDocument();
-    KoXmlDocument(const KoXmlDocument& node);
-    KoXmlDocument& operator=(const KoXmlDocument& node);
-    bool operator==(const KoXmlDocument&) const;
-    bool operator!=(const KoXmlDocument&) const;
-    virtual ~KoXmlDocument();
+    KXmlDocument();
+    KXmlDocument(const KXmlDocument& node);
+    KXmlDocument& operator=(const KXmlDocument& node);
+    bool operator==(const KXmlDocument&) const;
+    bool operator!=(const KXmlDocument&) const;
+    virtual ~KXmlDocument();
 
     KXmlElement documentElement() const;
 
@@ -282,7 +282,7 @@ public:
 private:
     friend class KoXmlNode;
     KoXmlDocumentType dt;
-    KoXmlDocument(KoXmlNodeData*);
+    KXmlDocument(KoXmlNodeData*);
 };
 
 /**
@@ -353,7 +353,7 @@ KODF_EXPORT QStringList attributeNames(const KoXmlNode& node);
  */
 KODF_EXPORT QDomNode asQDomNode(QDomDocument ownerDoc, const KoXmlNode& node);
 KODF_EXPORT QDomElement asQDomElement(QDomDocument ownerDoc, const KXmlElement& element);
-KODF_EXPORT QDomDocument asQDomDocument(QDomDocument ownerDoc, const KoXmlDocument& document);
+KODF_EXPORT QDomDocument asQDomDocument(QDomDocument ownerDoc, const KXmlDocument& document);
 
 /*
  * Load an XML document from specified device to a document. You can of
@@ -364,7 +364,7 @@ KODF_EXPORT QDomDocument asQDomDocument(QDomDocument ownerDoc, const KoXmlDocume
  *
  * Note: it is assumed that the XML uses UTF-8 encoding.
  */
-KODF_EXPORT bool setDocument(KoXmlDocument& doc, QIODevice* device,
+KODF_EXPORT bool setDocument(KXmlDocument& doc, QIODevice* device,
                                 bool namespaceProcessing, QString* errorMsg = 0,
                                 int* errorLine = 0, int* errorColumn = 0);
 }

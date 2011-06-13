@@ -272,7 +272,7 @@ bool KCDocBase::loadOdf(KOdfStoreReader & odfStore)
     return true;
 }
 
-void KCDocBase::loadOdfSettings(const KoXmlDocument&settingsDoc)
+void KCDocBase::loadOdfSettings(const KXmlDocument&settingsDoc)
 {
     KOdfSettings settings(settingsDoc);
     KOdfSettings::Items viewSettings = settings.itemSet("view-settings");
@@ -319,7 +319,7 @@ void KCDocBase::paintContent(QPainter &, const QRect &)
 {
 }
 
-bool KCDocBase::loadXML(const KoXmlDocument &, KOdfStore *)
+bool KCDocBase::loadXML(const KXmlDocument &, KOdfStore *)
 {
     return false;
 }

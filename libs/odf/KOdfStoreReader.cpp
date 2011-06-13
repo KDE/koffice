@@ -42,9 +42,9 @@ public:
     KOdfStore * store;
     KOdfStylesReader stylesReader;
     // it is needed to keep the stylesDoc around so that you can access the styles
-    KoXmlDocument stylesDoc;
-    KoXmlDocument contentDoc;
-    KoXmlDocument settingsDoc;
+    KXmlDocument stylesDoc;
+    KXmlDocument contentDoc;
+    KXmlDocument settingsDoc;
 };
 
 KOdfStoreReader::KOdfStoreReader(KOdfStore *store)
@@ -67,12 +67,12 @@ KOdfStylesReader &KOdfStoreReader::styles()
     return d->stylesReader;
 }
 
-KoXmlDocument KOdfStoreReader::contentDoc() const
+KXmlDocument KOdfStoreReader::contentDoc() const
 {
     return d->contentDoc;
 }
 
-KoXmlDocument KOdfStoreReader::settingsDoc() const
+KXmlDocument KOdfStoreReader::settingsDoc() const
 {
     return d->settingsDoc;
 }
@@ -99,7 +99,7 @@ bool KOdfStoreReader::loadAndParse(QString &errorMessage)
     return true;
 }
 
-bool KOdfStoreReader::loadAndParse(const QString &fileName, KoXmlDocument &doc, QString &errorMessage)
+bool KOdfStoreReader::loadAndParse(const QString &fileName, KXmlDocument &doc, QString &errorMessage)
 {
     //kDebug(30003) <<"loadAndParse: Trying to open" << fileName;
     if (!d->store) {
@@ -119,7 +119,7 @@ bool KOdfStoreReader::loadAndParse(const QString &fileName, KoXmlDocument &doc, 
     return ok;
 }
 
-bool KOdfStoreReader::loadAndParse(QIODevice *fileDevice, KoXmlDocument &doc, QString &errorMessage, const QString &fileName)
+bool KOdfStoreReader::loadAndParse(QIODevice *fileDevice, KXmlDocument &doc, QString &errorMessage, const QString &fileName)
 {
     // Error variables for QDomDocument::setContent
     QString errorMsg;
@@ -150,7 +150,7 @@ static QString normalizeFullPath(QString s)
     return s;
 }
 
-QString KOdfStoreReader::mimeForPath(const KoXmlDocument &doc, const QString &_fullPath)
+QString KOdfStoreReader::mimeForPath(const KXmlDocument &doc, const QString &_fullPath)
 {
     QString fullPath = normalizeFullPath(_fullPath);
     KXmlElement docElem = doc.documentElement();

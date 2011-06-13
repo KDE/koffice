@@ -27,7 +27,7 @@
 #include "Global.h"
 
 class QMimeData;
-class KoXmlDocument;
+class KXmlDocument;
 
 /**
  * \ingroup Commands
@@ -82,7 +82,7 @@ protected:
     /**
      * Creates sub-commands for the region \p element by parsing XML \p data.
      */
-    bool processXmlData(Element *element, KoXmlDocument *data);
+    bool processXmlData(Element *element, KXmlDocument *data);
 
     /**
      * Creates sub-commands for the region \p element by parsing plain text.
@@ -91,7 +91,7 @@ protected:
 
 private:
     const QMimeData *   m_mimeData;
-    KoXmlDocument *     m_xmlDocument;
+    KXmlDocument *     m_xmlDocument;
     InsertionMode       m_insertMode;
     Paste::Mode         m_pasteMode;
     Paste::Operation    m_operation;

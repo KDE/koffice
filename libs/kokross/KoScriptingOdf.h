@@ -55,13 +55,13 @@ class KoScriptingOdfReader : public QObject
     Q_OBJECT
 public:
     /** Constructor. */
-    explicit KoScriptingOdfReader(KoScriptingOdfStore *store, const KoXmlDocument &doc);
+    explicit KoScriptingOdfReader(KoScriptingOdfStore *store, const KXmlDocument &doc);
     /** Destructor. */
     virtual ~KoScriptingOdfReader();
     /** Return the KoScriptingOdfStore instance this reader belongs to. */
     KoScriptingOdfStore *store() const;
-    /** Return the KoXmlDocument instance this reader operates on. */
-    KoXmlDocument doc() const;
+    /** Return the KXmlDocument instance this reader operates on. */
+    KXmlDocument doc() const;
     /** Return the current element. */
     KXmlElement currentElement() const;
 
@@ -198,7 +198,7 @@ protected:
 
 private:
     KoScriptingOdfStore *m_store;
-    KoXmlDocument m_doc;
+    KXmlDocument m_doc;
     KXmlElement m_currentElement;
     int m_level;
     QString m_filter;
@@ -225,7 +225,7 @@ class KoScriptingOdfManifestReader : public KoScriptingOdfReader
     Q_OBJECT
 public:
     /** Constructor. */
-    KoScriptingOdfManifestReader(KoScriptingOdfStore *store, const KoXmlDocument &doc);
+    KoScriptingOdfManifestReader(KoScriptingOdfStore *store, const KXmlDocument &doc);
     /** Destructor. */
     virtual ~KoScriptingOdfManifestReader() {}
 
@@ -270,7 +270,7 @@ class KoScriptingOdfStylesReader : public KoScriptingOdfReader
     Q_OBJECT
 public:
     /** Constructor. */
-    KoScriptingOdfStylesReader(KoScriptingOdfStore *store, const KoXmlDocument &doc);
+    KoScriptingOdfStylesReader(KoScriptingOdfStore *store, const KXmlDocument &doc);
     /** Destructor. */
     virtual ~KoScriptingOdfStylesReader() {}
 public slots:
@@ -285,7 +285,7 @@ class KoScriptingOdfContentReader : public KoScriptingOdfReader
     Q_OBJECT
 public:
     /** Constructor. */
-    KoScriptingOdfContentReader(KoScriptingOdfStore *store, const KoXmlDocument &doc);
+    KoScriptingOdfContentReader(KoScriptingOdfStore *store, const KXmlDocument &doc);
     /** Destructor. */
     virtual ~KoScriptingOdfContentReader() {}
 public slots:

@@ -496,7 +496,7 @@ void KoTextLoader::loadBody(const KXmlElement &bodyElem, QTextCursor &cursor)
                         //Parse and Load the generated xml
                         QString errorMsg;
                         int errorLine, errorColumn;
-                        KoXmlDocument doc;
+                        KXmlDocument doc;
 
                         QXmlStreamReader reader(generatedXmlString);
                         reader.setNamespaceProcessing(true);
@@ -577,7 +577,7 @@ void KoTextLoader::loadBody(const KXmlElement &bodyElem, QTextCursor &cursor)
                             //Parse and Load the generated xml
                             QString errorMsg;
                             int errorLine, errorColumn;
-                            KoXmlDocument doc;
+                            KXmlDocument doc;
 
                             QXmlStreamReader reader(generatedXmlString);
                             reader.setNamespaceProcessing(true);
@@ -614,7 +614,7 @@ void KoTextLoader::loadBody(const KXmlElement &bodyElem, QTextCursor &cursor)
                             //Parse and Load the generated xml
                             QString errorMsg;
                             int errorLine, errorColumn;
-                            KoXmlDocument doc;
+                            KXmlDocument doc;
 
                             QXmlStreamReader reader(generatedXmlString);
                             reader.setNamespaceProcessing(true);
@@ -638,7 +638,7 @@ void KoTextLoader::loadBody(const KXmlElement &bodyElem, QTextCursor &cursor)
                             //Parse and Load the generated xml
                             QString errorMsg;
                             int errorLine, errorColumn;
-                            KoXmlDocument doc;
+                            KXmlDocument doc;
 
                             QXmlStreamReader reader(generatedXmlString);
                             reader.setNamespaceProcessing(true);
@@ -1102,7 +1102,7 @@ void KoTextLoader::loadList(const KXmlElement &element, QTextCursor &cursor)
     QList<KXmlElement> childElementsList;
 
     QString generatedXmlString;
-    KoXmlDocument doc;
+    KXmlDocument doc;
     QXmlStreamReader reader;
 
     for ( KoXmlNode _node = element.firstChild(); !_node.isNull(); _node = _node.nextSibling() ) \

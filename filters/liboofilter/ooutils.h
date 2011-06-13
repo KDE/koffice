@@ -81,15 +81,15 @@ void importUnderline(const QString& text_underline, QString& underline, QString&
 // to kword/kpresenter's value/relativetextsize
 void importTextPosition(const QString& text_position, QString& value, QString& relativetextsize);
 
-void createDocumentInfo(KoXmlDocument &_meta, QDomDocument & docinfo);
-KoFilter::ConversionStatus loadAndParse(const QString& filename, KoXmlDocument& doc, KZip* zip);
-KoFilter::ConversionStatus loadAndParse(const QString& filename, KoXmlDocument& doc, KOdfStore* store);
+void createDocumentInfo(KXmlDocument &_meta, QDomDocument & docinfo);
+KoFilter::ConversionStatus loadAndParse(const QString& filename, KXmlDocument& doc, KZip* zip);
+KoFilter::ConversionStatus loadAndParse(const QString& filename, KXmlDocument& doc, KOdfStore* store);
 
 /// Load an OASIS thumbnail
 KoFilter::ConversionStatus loadThumbnail(QImage& thumbnail, KZip* zip);
 
 // Internal
-KoFilter::ConversionStatus loadAndParse(QIODevice* io, KoXmlDocument& doc, const QString & fileName);
+KoFilter::ConversionStatus loadAndParse(QIODevice* io, KXmlDocument& doc, const QString & fileName);
 }
 
 #endif /* OOUTILS_H */

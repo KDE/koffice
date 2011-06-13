@@ -154,7 +154,7 @@ void KoGridData::paintGrid(QPainter &painter, const KoViewConverter &converter, 
     };
 }
 
-bool KoGridData::loadOdfSettings(const KoXmlDocument & settingsDoc)
+bool KoGridData::loadOdfSettings(const KXmlDocument & settingsDoc)
 {
     KOdfSettings settings(settingsDoc);
     KOdfSettings::Items viewSettings = settings.itemSet("ooo:view-settings");

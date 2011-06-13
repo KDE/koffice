@@ -67,7 +67,7 @@ public:
      * @param metaDoc the QDomDocument with the metaInformation
      * @return true if success
      */
-    bool loadOasis(const KoXmlDocument& metaDoc);
+    bool loadOasis(const KXmlDocument& metaDoc);
 
     /**
      * Save the KoDocumentInfo to an OASIS document
@@ -81,7 +81,7 @@ public:
      * @param doc the QDomDocument to load from
      * @return true if success
      */
-    bool load(const KoXmlDocument& doc);
+    bool load(const KXmlDocument& doc);
 
     /**
      * Save the KoDocumentInfo to an KOffice-1.3 DomDocument

@@ -30,7 +30,7 @@ class KoViewConverter;
 class QRectF;
 class QColor;
 class KXmlWriter;
-class KoXmlDocument;
+class KXmlDocument;
 
 /**
  * XXX
@@ -98,7 +98,7 @@ public:
     QColor guidesColor() const;
 
     /// Loads guide lines from the given setting xml document
-    bool loadOdfSettings(const KoXmlDocument &settingsDoc);
+    bool loadOdfSettings(const KXmlDocument &settingsDoc);
 
     /// Saves guide lines to the given settings xml writer
     void saveOdfSettings(KXmlWriter &settingsWriter);

@@ -83,7 +83,7 @@ void TestXmlReader::testNode()
     xmlstream << "</earth>";
     xmldevice.close();
 
-    KoXmlDocument doc;
+    KXmlDocument doc;
     QCOMPARE(doc.setContent(&xmldevice, &errorMsg, &errorLine, &errorColumn), true);
     QCOMPARE(errorMsg.isEmpty(), true);
     QCOMPARE(errorLine, 0);
@@ -123,7 +123,7 @@ void TestXmlReader::testNode()
     QCOMPARE(KoXml::childNodesCount(node3), 1);
 
     // convert to document and the compare
-    KoXmlDocument doc2 = node3.toDocument();
+    KXmlDocument doc2 = node3.toDocument();
     QCOMPARE(doc2.nodeName(), QString("#document"));
     QCOMPARE(doc2.isNull(), false);
     QCOMPARE(doc2.isDocument(), true);
@@ -192,7 +192,7 @@ void TestXmlReader::testNode()
     QCOMPARE(continentsElement.ownerDocument() == doc, true);
 
     // and it doesn't make sense to convert that node to document
-    KoXmlDocument invalidDoc = node5.toDocument();
+    KXmlDocument invalidDoc = node5.toDocument();
     QCOMPARE(invalidDoc.isNull(), true);
     QCOMPARE(invalidDoc.isElement(), false);
     QCOMPARE(invalidDoc.isText(), false);
@@ -235,7 +235,7 @@ void TestXmlReader::testElement()
     xmlstream << "</html>";
     xmldevice.close();
 
-    KoXmlDocument doc;
+    KXmlDocument doc;
     QCOMPARE(doc.setContent(&xmldevice, &errorMsg, &errorLine, &errorColumn), true);
     QCOMPARE(errorMsg.isEmpty(), true);
     QCOMPARE(errorLine, 0);
@@ -392,7 +392,7 @@ void TestXmlReader::testAttributes()
     xmlstream << "</p>";
     xmldevice.close();
 
-    KoXmlDocument doc;
+    KXmlDocument doc;
     QCOMPARE(doc.setContent(&xmldevice, &errorMsg, &errorLine, &errorColumn), true);
     QCOMPARE(errorMsg.isEmpty(), true);
     QCOMPARE(errorLine, 0);
@@ -456,7 +456,7 @@ void TestXmlReader::testText()
     xmlstream << "</p>";
     xmldevice.close();
 
-    KoXmlDocument doc;
+    KXmlDocument doc;
     QCOMPARE(doc.setContent(&xmldevice, &errorMsg, &errorLine, &errorColumn), true);
     QCOMPARE(errorMsg.isEmpty(), true);
     QCOMPARE(errorLine, 0);
@@ -552,7 +552,7 @@ void TestXmlReader::testCDATA()
     xmlstream << "</p>";
     xmldevice.close();
 
-    KoXmlDocument doc;
+    KXmlDocument doc;
     QCOMPARE(doc.setContent(&xmldevice, &errorMsg, &errorLine, &errorColumn), true);
     QCOMPARE(errorMsg.isEmpty(), true);
     QCOMPARE(errorLine, 0);
@@ -632,7 +632,7 @@ void TestXmlReader::testDocument()
     xmlstream << "</koffice>";
     xmldevice.close();
 
-    KoXmlDocument doc;
+    KXmlDocument doc;
 
     // empty document
     QCOMPARE(doc.nodeName(), QString());
@@ -690,7 +690,7 @@ void TestXmlReader::testDocument()
     QCOMPARE(doc.nextSibling().isNull(), true);
 
     // assigned from another empty document
-    doc = KoXmlDocument();
+    doc = KXmlDocument();
     QCOMPARE(doc.nodeName(), QString());
     QCOMPARE(doc.nodeName().isEmpty(), true);
     QCOMPARE(doc.isNull(), true);
@@ -717,7 +717,7 @@ void TestXmlReader::testDocumentType()
     xmldevice.close();
 
     // empty document
-    KoXmlDocument doc;
+    KXmlDocument doc;
     QCOMPARE(doc.nodeName(), QString());
     QCOMPARE(doc.isNull(), true);
     QCOMPARE(doc.isElement(), false);
@@ -800,7 +800,7 @@ void TestXmlReader::testNamespace()
     xmlstream << "</document>";
     xmldevice.close();
 
-    KoXmlDocument doc;
+    KXmlDocument doc;
     KXmlElement rootElement;
     KXmlElement bookElement;
     KXmlElement bookTitleElement;
@@ -965,7 +965,7 @@ void TestXmlReader::testParseQString()
     xmlText +=  "</book>";
     xmlText +=  "</document>";
 
-    KoXmlDocument doc;
+    KXmlDocument doc;
     KXmlElement rootElement;
     KXmlElement bookElement;
     KXmlElement bookTitleElement;
@@ -1096,7 +1096,7 @@ void TestXmlReader::testUnload()
     xmlstream << "</earth>";
     xmldevice.close();
 
-    KoXmlDocument doc;
+    KXmlDocument doc;
     QCOMPARE(doc.setContent(&xmldevice, &errorMsg, &errorLine, &errorColumn), true);
     QCOMPARE(errorMsg.isEmpty(), true);
     QCOMPARE(errorLine, 0);
@@ -1162,7 +1162,7 @@ void TestXmlReader::testSimpleXML()
     xmlstream << "</solarsystem>";
     xmldevice.close();
 
-    KoXmlDocument doc;
+    KXmlDocument doc;
     QCOMPARE(doc.setContent(&xmldevice, &errorMsg, &errorLine, &errorColumn), true);
     QCOMPARE(errorMsg.isEmpty(), true);
     QCOMPARE(errorLine, 0);
@@ -1258,7 +1258,7 @@ void TestXmlReader::testRootError()
     xmlstream << "<earth></earth><moon></moon>";
     xmldevice.close();
 
-    KoXmlDocument doc;
+    KXmlDocument doc;
     QCOMPARE(doc.setContent(&xmldevice, &errorMsg, &errorLine, &errorColumn), false);
     QCOMPARE(errorMsg.isEmpty(), false);
     QCOMPARE(errorMsg, QString("Extra content at end of document."));
@@ -1278,7 +1278,7 @@ void TestXmlReader::testMismatchedTag()
     xmlstream << "<earth></e>";
     xmldevice.close();
 
-    KoXmlDocument doc;
+    KXmlDocument doc;
     QCOMPARE(doc.setContent(&xmldevice, &errorMsg, &errorLine, &errorColumn), false);
     QCOMPARE(errorMsg.isEmpty(), false);
     QCOMPARE(errorMsg, QString("Opening and ending tag mismatch."));
@@ -1306,7 +1306,7 @@ void TestXmlReader::testConvertQDomElement()
     xmlstream << "</solarsystem>";
     xmldevice.close();
 
-    KoXmlDocument doc;
+    KXmlDocument doc;
     QCOMPARE(doc.setContent(&xmldevice, &errorMsg, &errorLine, &errorColumn), true);
     QCOMPARE(errorMsg.isEmpty(), true);
     QCOMPARE(errorLine, 0);
@@ -1391,7 +1391,7 @@ void TestXmlReader::testSimpleOpenDocumentText()
     xmlstream << "</office:document-content>";
     xmldevice.close();
 
-    KoXmlDocument doc;
+    KXmlDocument doc;
     QCOMPARE(doc.setContent(&xmldevice, true, &errorMsg, &errorLine, &errorColumn), true);
     QCOMPARE(errorMsg.isEmpty(), true);
     QCOMPARE(errorLine, 0);
@@ -1549,7 +1549,7 @@ void TestXmlReader::testWhitespace()
     xmlstream << "</office:document-content>";
     xmldevice.close();
 
-    KoXmlDocument doc;
+    KXmlDocument doc;
     QCOMPARE(doc.setContent(&xmldevice, true, &errorMsg, &errorLine, &errorColumn), true);
     QCOMPARE(errorMsg.isEmpty(), true);
     QCOMPARE(errorLine, 0);
@@ -1624,7 +1624,7 @@ void TestXmlReader::testSimpleOpenDocumentSpreadsheet()
     xmlstream << "</office:document-content>";
     xmldevice.close();
 
-    KoXmlDocument doc;
+    KXmlDocument doc;
     QCOMPARE(doc.setContent(&xmldevice, true, &errorMsg, &errorLine, &errorColumn), true);
     QCOMPARE(errorMsg.isEmpty(), true);
     QCOMPARE(errorLine, 0);
@@ -1848,7 +1848,7 @@ void TestXmlReader::testSimpleOpenDocumentPresentation()
     xmlstream << "</office:document-content>";
     xmldevice.close();
 
-    KoXmlDocument doc;
+    KXmlDocument doc;
     QCOMPARE(doc.setContent(&xmldevice, true, &errorMsg, &errorLine, &errorColumn), true);
     QCOMPARE(errorMsg.isEmpty(), true);
     QCOMPARE(errorLine, 0);
@@ -2130,7 +2130,7 @@ void TestXmlReader::testSimpleOpenDocumentFormula()
     xmlstream << "</math:math>";
     xmldevice.close();
 
-    KoXmlDocument doc;
+    KXmlDocument doc;
     QCOMPARE(doc.setContent(&xmldevice, true, &errorMsg, &errorLine, &errorColumn), true);
     QCOMPARE(errorMsg.isEmpty(), true);
     QCOMPARE(errorLine, 0);
@@ -2333,7 +2333,7 @@ void TestXmlReader::testLargeOpenDocumentSpreadsheet()
     xmldevice.seek(0);
 #endif
 
-    KoXmlDocument doc;
+    KXmlDocument doc;
 
     timer.start();
     QCOMPARE(doc.setContent(&xmldevice, true, &errorMsg, &errorLine, &errorColumn), true);
@@ -2346,7 +2346,7 @@ void TestXmlReader::testLargeOpenDocumentSpreadsheet()
         return;
     }
 
-    printf("Large spreadsheet: KoXmlDocument parsing time is %d ms\n", timer.elapsed());
+    printf("Large spreadsheet: KXmlDocument parsing time is %d ms\n", timer.elapsed());
 
     // release memory taken by the XML document content
     //xmlstream.setDevice( 0 );
@@ -2472,7 +2472,7 @@ void TestXmlReader::testExternalOpenDocumentSpreadsheet(const QString& filename)
     QTime timer;
     timer.start();
 
-    KoXmlDocument doc;
+    KXmlDocument doc;
 
     QCOMPARE(KoXml::setDocument(doc, &xmlfile, true, &errorMsg, &errorLine, &errorColumn), true);
     QCOMPARE(errorMsg.isEmpty(), true);

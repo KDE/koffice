@@ -113,7 +113,7 @@ KoFilterEffectStack * FilterEffectResource::toFilterStack() const
         return 0;
 
     QByteArray data = m_data.toByteArray();
-    KoXmlDocument doc;
+    KXmlDocument doc;
     doc.setContent(data);
     KXmlElement e = doc.documentElement();
 

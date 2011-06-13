@@ -1930,7 +1930,7 @@ void OpenCalcImport::readInStyle(KCStyle * layout, KXmlElement const & style)
     }
 }
 
-bool OpenCalcImport::createStyleMap(KoXmlDocument const & styles)
+bool OpenCalcImport::createStyleMap(KXmlDocument const & styles)
 {
     KXmlElement content  = styles.documentElement();
     KoXmlNode docStyles   = KoXml::namedItemNS(content, ooNS::office, "document-styles");
@@ -2342,7 +2342,7 @@ KoFilter::ConversionStatus OpenCalcImport::openFile()
     loadAndParse(m_content, "content.xml", store);
     kDebug(30518) << "Opened";
 
-    KoXmlDocument styles;
+    KXmlDocument styles;
     kDebug(30518) << "file content.xml loaded";
 
     loadAndParse(styles, "styles.xml", store);
@@ -2360,7 +2360,7 @@ KoFilter::ConversionStatus OpenCalcImport::openFile()
     return KoFilter::OK;
 }
 
-KoFilter::ConversionStatus OpenCalcImport::loadAndParse(KoXmlDocument& doc, const QString& fileName, KOdfStore *m_store)
+KoFilter::ConversionStatus OpenCalcImport::loadAndParse(KXmlDocument& doc, const QString& fileName, KOdfStore *m_store)
 {
     return OoUtils::loadAndParse(fileName, doc, m_store);
 }

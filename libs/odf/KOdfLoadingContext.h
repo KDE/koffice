@@ -67,7 +67,7 @@ public:
 
     KOdfStyleStack &styleStack() const;
 
-    const KoXmlDocument &manifestDocument() const;
+    const KXmlDocument &manifestDocument() const;
 
     /// Return the <meta:generator> of the document, e.g. "KOffice/1.4.0a"
     QString generator() const;

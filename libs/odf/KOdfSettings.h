@@ -74,12 +74,12 @@ public:
     /**
      * Normal KOdfSettings constructor, for an OASIS settings.xml
      */
-    explicit KOdfSettings(const KoXmlDocument &doc);
+    explicit KOdfSettings(const KXmlDocument &doc);
 
     /**
      * KOdfSettings constructor for an OpenOffice-1.1 file
      */
-    KOdfSettings(const KoXmlDocument &doc, const char *officeNsUri, const char *configNsUri);
+    KOdfSettings(const KXmlDocument &doc, const char *officeNsUri, const char *configNsUri);
 
     ~KOdfSettings();
 

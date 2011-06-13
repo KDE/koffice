@@ -92,7 +92,7 @@ KoFilter::ConversionStatus SvgImport::convert(const QByteArray& from, const QByt
     int line, col;
     QString errormessage;
 
-    KoXmlDocument inputDoc;
+    KXmlDocument inputDoc;
 
     const bool parsed = inputDoc.setContent(in, &errormessage, &line, &col);
 

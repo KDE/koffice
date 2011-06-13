@@ -64,9 +64,9 @@ private:
     void createDocumentInfo(QDomDocument &docinfo);
     void createDocumentContent(QDomDocument &doccontent, QDomElement& mainFramesetElement);
     void parseBodyOrSimilar(QDomDocument &doc, const KXmlElement& parent, QDomElement& currentFramesetElement);
-    KoFilter::ConversionStatus loadAndParse(const QString& filename, KoXmlDocument& doc);
+    KoFilter::ConversionStatus loadAndParse(const QString& filename, KXmlDocument& doc);
     KoFilter::ConversionStatus openFile();
-    bool createStyleMap(const KoXmlDocument & styles, QDomDocument& doc);
+    bool createStyleMap(const KXmlDocument & styles, QDomDocument& doc);
     void insertStyles(const KXmlElement& element, QDomDocument& doc);
     void importDateTimeStyle(const KXmlElement& parent);
     void fillStyleStack(const KXmlElement& object, const char* nsURI, const QString& attrName);
@@ -90,10 +90,10 @@ private:
                             const QString& tableName, const QVector<double> & columnLefts, uint& row, uint& column);
     static QString kWordStyleName(const QString& ooStyleName);
 
-    KoXmlDocument   m_content;
-    KoXmlDocument   m_meta;
-    KoXmlDocument   m_settings;
-    KoXmlDocument   m_stylesDoc;
+    KXmlDocument   m_content;
+    KXmlDocument   m_meta;
+    KXmlDocument   m_settings;
+    KXmlDocument   m_stylesDoc;
 
     Q3Dict<KXmlElement>   m_styles;
     Q3Dict<KXmlElement>   m_masterPages;

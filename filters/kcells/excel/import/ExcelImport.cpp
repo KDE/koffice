@@ -191,7 +191,7 @@ public:
     QMap<QString,QString> manifestEntries;
 
     KXmlWriter* beginMemoryXmlWriter(const char* docElement);
-    KoXmlDocument endMemoryXmlWriter(KXmlWriter* writer);
+    KXmlDocument endMemoryXmlWriter(KXmlWriter* writer);
 };
 
 ExcelImport::ExcelImport(QObject* parent, const QVariantList&)
@@ -325,7 +325,7 @@ KoFilter::ConversionStatus ExcelImport::convert(const QByteArray& from, const QB
 
     KOdfStore *store = KOdfStore::createStore(&storeBuffer, KOdfStore::Read);
 
-    KoXmlDocument xmlDoc = d->endMemoryXmlWriter(d->shapesXml);
+    KXmlDocument xmlDoc = d->endMemoryXmlWriter(d->shapesXml);
     d->processEmbeddedObjects(xmlDoc.documentElement(), store);
 
     // sheet background images
@@ -414,7 +414,7 @@ void ExcelImport::Private::processEmbeddedObjects(const KXmlElement& rootElement
     KXmlWriter *stylesXml = beginMemoryXmlWriter("office:styles");
     shapeStyles->saveOdfStyles(KOdfGenericStyles::DocumentAutomaticStyles, stylesXml);
 
-    KoXmlDocument stylesDoc = endMemoryXmlWriter(stylesXml);
+    KXmlDocument stylesDoc = endMemoryXmlWriter(stylesXml);
 
     // Register additional attributes, that identify shapes anchored in cells.
     // Their dimensions need adjustment after all rows are loaded,
@@ -1335,7 +1335,7 @@ KXmlWriter* ExcelImport::Private::beginMemoryXmlWriter(const char* docElement)
     return xml;
 }
 
-KoXmlDocument ExcelImport::Private::endMemoryXmlWriter(KXmlWriter* writer)
+KXmlDocument ExcelImport::Private::endMemoryXmlWriter(KXmlWriter* writer)
 {
     writer->endElement();
     writer->endDocument();
@@ -1343,7 +1343,7 @@ KoXmlDocument ExcelImport::Private::endMemoryXmlWriter(KXmlWriter* writer)
     
 
     b->seek(0);
-    KoXmlDocument doc;
+    KXmlDocument doc;
     QString errorMsg; int errorLine, errorColumn;
     if (!doc.setContent(b, true, &errorMsg, &errorLine, &errorColumn)) {
         kDebug() << errorMsg << errorLine << errorColumn;
@@ -1375,7 +1375,7 @@ void ExcelImport::Private::processNumberFormats()
     KXmlWriter *stylesXml = beginMemoryXmlWriter("office:styles");
     dataStyles->saveOdfStyles(KOdfGenericStyles::DocumentAutomaticStyles, stylesXml);
 
-    KoXmlDocument stylesDoc = endMemoryXmlWriter(stylesXml);
+    KXmlDocument stylesDoc = endMemoryXmlWriter(stylesXml);
 
     KOdfStylesReader odfStyles;
     odfStyles.createStyleMap(stylesDoc, false);

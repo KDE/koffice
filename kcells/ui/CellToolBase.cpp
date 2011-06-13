@@ -2924,7 +2924,7 @@ bool CellToolBase::paste()
         KOdfStore * store = KOdfStore::createStore(&buffer, KOdfStore::Read);
 
         KOdfStoreReader odfStore(store);
-        KoXmlDocument doc;
+        KXmlDocument doc;
         QString errorMessage;
         bool ok = odfStore.loadAndParse("content.xml", doc, errorMessage);
         if (!ok) {
@@ -2933,7 +2933,7 @@ bool CellToolBase::paste()
         }
 
         KOdfStylesReader stylesReader;
-        KoXmlDocument stylesDoc;
+        KXmlDocument stylesDoc;
         (void)odfStore.loadAndParse("styles.xml", stylesDoc, errorMessage);
         // Load styles from style.xml
         stylesReader.createStyleMap(stylesDoc, true);
