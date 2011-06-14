@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoCopyController.h"
+#include "KCopyController.h"
 
 #include <KoToolBase.h>
 #include <KCanvasBase.h>
@@ -31,7 +31,7 @@
 class KoCopyControllerPrivate
 {
 public:
-    KoCopyControllerPrivate(KoCopyController *p, KCanvasBase *c, QAction *a);
+    KoCopyControllerPrivate(KCopyController *p, KCanvasBase *c, QAction *a);
 
     // request to start the actual copy
     void copy();
@@ -49,13 +49,13 @@ public:
      */
     void hasSelection(bool selection);
 
-    KoCopyController *parent;
+    KCopyController *parent;
     KCanvasBase *canvas;
     QAction *action;
     bool appHasSelection;
 };
 
-KoCopyControllerPrivate::KoCopyControllerPrivate(KoCopyController *p, KCanvasBase *c, QAction *a)
+KoCopyControllerPrivate::KoCopyControllerPrivate(KCopyController *p, KCanvasBase *c, QAction *a)
     : parent(p),
     canvas(c),
     action(a)
@@ -90,8 +90,8 @@ void KoCopyControllerPrivate::hasSelection(bool selection)
 }
 
 
-// KoCopyController
-KoCopyController::KoCopyController(KCanvasBase *canvas, QAction *copyAction)
+// KCopyController
+KCopyController::KCopyController(KCanvasBase *canvas, QAction *copyAction)
     : QObject(copyAction),
     d(new KoCopyControllerPrivate(this, canvas, copyAction))
 {
@@ -100,9 +100,9 @@ KoCopyController::KoCopyController(KCanvasBase *canvas, QAction *copyAction)
     d->hasSelection(false);
 }
 
-KoCopyController::~KoCopyController()
+KCopyController::~KCopyController()
 {
     delete d;
 }
 
-#include <KoCopyController.moc>
+#include <KCopyController.moc>

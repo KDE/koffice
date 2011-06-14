@@ -53,7 +53,7 @@
 // koffice libs includes
 #include <KoBookmark.h>
 #include <KCanvasController.h>
-#include <KoCopyController.h>
+#include <KCopyController.h>
 #include <KoCutController.h>
 #include <kofficeversion.h>
 #include <KoFind.h>
@@ -378,7 +378,7 @@ void KWView::setupActions()
     action = actionCollection()->addAction(KStandardAction::Cut,  "edit_cut", 0, 0);
     new KoCutController(m_canvas, action);
     action = actionCollection()->addAction(KStandardAction::Copy,  "edit_copy", 0, 0);
-    new KoCopyController(m_canvas, action);
+    new KCopyController(m_canvas, action);
     action = actionCollection()->addAction(KStandardAction::Paste,  "edit_paste", 0, 0);
     new KoPasteController(m_canvas, action);
 

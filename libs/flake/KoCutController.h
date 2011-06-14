@@ -19,7 +19,7 @@
 #ifndef KOCUTCONTROLLER_H
 #define KOCUTCONTROLLER_H
 
-#include "KoCopyController.h"
+#include "KCopyController.h"
 #include "flake_export.h"
 
 /**
@@ -29,7 +29,7 @@
  * Additionally; when the tool does not allow copying (KoToolBase::hasSelection() returns false)
  * the signal copyRequested will be emitted for applications to connect to.
  */
-class FLAKE_EXPORT KoCutController : public KoCopyController
+class FLAKE_EXPORT KoCutController : public KCopyController
 {
     Q_OBJECT
 public:

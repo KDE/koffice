@@ -34,7 +34,7 @@ class KoCopyControllerPrivate;
  * Additionally; when the tool does not allow copying (KoToolBase::hasSelection() returns false)
  * the signal copyRequested will be emitted for applications to connect to.
  */
-class FLAKE_EXPORT KoCopyController : public QObject
+class FLAKE_EXPORT KCopyController : public QObject
 {
     Q_OBJECT
 public:
@@ -44,8 +44,8 @@ public:
      * @param copyAction the action that we will listen to and respond to when it is activated.  Additionally, the
      *     action is used as a parent for the QObject for memory management purposes.
      */
-    KoCopyController(KCanvasBase *canvas, QAction *copyAction);
-    virtual ~KoCopyController();
+    KCopyController(KCanvasBase *canvas, QAction *copyAction);
+    virtual ~KCopyController();
 
 signals:
     /// emitted when the user pressed copy and the current tool had no selection.

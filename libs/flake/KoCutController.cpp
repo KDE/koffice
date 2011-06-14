@@ -22,7 +22,7 @@
 #include <QAction>
 
 KoCutController::KoCutController(KCanvasBase *canvas, QAction *cutAction)
-    : KoCopyController(canvas, cutAction)
+    : KCopyController(canvas, cutAction)
 {
     disconnect(cutAction, SIGNAL(triggered()), this, SLOT(copy())); // countering the super
     connect(cutAction, SIGNAL(triggered()), this, SLOT(cut()));

@@ -55,7 +55,7 @@
 #include <KoDrag.h>
 #include <KoShapeDeleteCommand.h>
 #include <KoCutController.h>
-#include <KoCopyController.h>
+#include <KCopyController.h>
 #include <KoFilterManager.h>
 
 #include "KoPADocumentStructureDocker.h"
@@ -265,7 +265,7 @@ void KoPAView::initActions()
     KAction *action = actionCollection()->addAction(KStandardAction::Cut, "edit_cut", 0, 0);
     new KoCutController(kopaCanvas(), action);
     action = actionCollection()->addAction(KStandardAction::Copy, "edit_copy", 0, 0);
-    new KoCopyController(kopaCanvas(), action);
+    new KCopyController(kopaCanvas(), action);
     d->editPaste = actionCollection()->addAction(KStandardAction::Paste, "edit_paste", proxyObject, SLOT(editPaste()));
     connect(QApplication::clipboard(), SIGNAL(dataChanged()), this, SLOT(clipboardDataChanged()));
     connect(d->canvas->toolProxy(), SIGNAL(toolChanged(const QString&)), this, SLOT(clipboardDataChanged()));
