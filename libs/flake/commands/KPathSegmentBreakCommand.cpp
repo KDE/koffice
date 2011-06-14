@@ -18,11 +18,11 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoPathSegmentBreakCommand_p.h"
+#include "KPathSegmentBreakCommand_p.h"
 #include <klocale.h>
 #include <math.h>
 
-KoPathSegmentBreakCommand::KoPathSegmentBreakCommand(const KPathPointData & pointData, QUndoCommand *parent)
+KPathSegmentBreakCommand::KPathSegmentBreakCommand(const KPathPointData & pointData, QUndoCommand *parent)
         : QUndoCommand(parent)
         , m_pointData(pointData)
         , m_startIndex(-1, -1)
@@ -40,11 +40,11 @@ KoPathSegmentBreakCommand::KoPathSegmentBreakCommand(const KPathPointData & poin
     setText(i18n("Break Subpath"));
 }
 
-KoPathSegmentBreakCommand::~KoPathSegmentBreakCommand()
+KPathSegmentBreakCommand::~KPathSegmentBreakCommand()
 {
 }
 
-void KoPathSegmentBreakCommand::redo()
+void KPathSegmentBreakCommand::redo()
 {
     QUndoCommand::redo();
     // a repaint before is needed as the shape can shrink during the break
@@ -62,7 +62,7 @@ void KoPathSegmentBreakCommand::redo()
     }
 }
 
-void KoPathSegmentBreakCommand::undo()
+void KPathSegmentBreakCommand::undo()
 {
     QUndoCommand::undo();
     if (m_startIndex.first != -1) {

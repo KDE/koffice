@@ -126,7 +126,7 @@ set(flake_SRCS
     commands/KPathPointTypeCommand.cpp
     commands/KPathPointRemoveCommand.cpp
     commands/KPathPointInsertCommand.cpp
-    commands/KoPathSegmentBreakCommand.cpp
+    commands/KPathSegmentBreakCommand.cpp
     commands/KPathBreakAtPointCommand.cpp
     commands/KoPathSegmentTypeCommand.cpp
     commands/KPathCombineCommand.cpp

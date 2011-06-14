@@ -35,7 +35,7 @@
 #include "commands/KPathPointRemoveCommand.h"
 #include "commands/KoPathSegmentTypeCommand.h"
 #include "commands/KPathBreakAtPointCommand_p.h"
-#include "commands/KoPathSegmentBreakCommand_p.h"
+#include "commands/KPathSegmentBreakCommand_p.h"
 #include "commands/KParameterToPathCommand.h"
 #include "commands/KoSubpathJoinCommand_p.h"
 #include "commands/KPathPointMergeCommand.h"
@@ -388,7 +388,7 @@ void KoPathTool::breakAtSegment()
     if (m_pointSelection.objectCount() == 1 && m_pointSelection.size() == 2) {
         QList<KPathPointData> segments(m_pointSelection.selectedSegmentsData());
         if (segments.size() == 1) {
-            d->canvas->addCommand(new KoPathSegmentBreakCommand(segments.at(0)));
+            d->canvas->addCommand(new KPathSegmentBreakCommand(segments.at(0)));
             updateActions();
         }
     }
