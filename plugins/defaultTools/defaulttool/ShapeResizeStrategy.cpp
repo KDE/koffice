@@ -25,7 +25,7 @@
 #include <KPointerEvent.h>
 #include <KCanvasBase.h>
 #include <KResourceManager.h>
-#include <commands/KoShapeSizeCommand.h>
+#include <commands/KShapeSizeCommand.h>
 #include <commands/KoShapeTransformCommand.h>
 #include <KoSnapGuide.h>
 #include <KoToolBase.h>
@@ -229,7 +229,7 @@ QUndoCommand *ShapeResizeStrategy::createCommand(QUndoCommand *parent)
         transformations << m_selectedShapes[i]->transformation();
     }
     QUndoCommand *cmd = new QUndoCommand(i18n("Resize"), parent);
-    new KoShapeSizeCommand(m_selectedShapes, m_startSizes, newSizes, cmd);
+    new KShapeSizeCommand(m_selectedShapes, m_startSizes, newSizes, cmd);
     new KoShapeTransformCommand(m_selectedShapes, m_oldTransforms, transformations, cmd);
     return cmd;
 }

@@ -29,7 +29,7 @@
 #include <KShapeManager.h>
 #include <KSelection.h>
 #include <commands/KShapeMoveCommand.h>
-#include <commands/KoShapeSizeCommand.h>
+#include <commands/KShapeSizeCommand.h>
 #include <commands/KoShapeTransformCommand.h>
 #include <KoPositionSelector.h>
 #include "SelectionDecorator.h"
@@ -225,7 +225,7 @@ void DefaultToolWidget::sizeHasChanged()
         m_tool->repaintDecorations();
         selection->applyAbsoluteTransformation( resizeMatrix );
         QUndoCommand * cmd = new QUndoCommand(i18n("Resize"));
-        new KoShapeSizeCommand( selectedShapes, oldSizes, newSizes, cmd );
+        new KShapeSizeCommand( selectedShapes, oldSizes, newSizes, cmd );
         new KoShapeTransformCommand( selectedShapes, oldState, newState, cmd );
         m_tool->canvas()->addCommand( cmd );
         updateSize();

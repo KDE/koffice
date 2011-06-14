@@ -18,18 +18,18 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoShapeSizeCommand.h"
+#include "KShapeSizeCommand.h"
 
 #include <klocale.h>
 
-class KoShapeSizeCommand::Private
+class KShapeSizeCommand::Private
 {
 public:
     QList<KShape*> shapes;
     QList<QSizeF> previousSizes, newSizes;
 };
 
-KoShapeSizeCommand::KoShapeSizeCommand(const QList<KShape*> &shapes, const QList<QSizeF> &previousSizes, const QList<QSizeF> &newSizes, QUndoCommand *parent)
+KShapeSizeCommand::KShapeSizeCommand(const QList<KShape*> &shapes, const QList<QSizeF> &previousSizes, const QList<QSizeF> &newSizes, QUndoCommand *parent)
         : QUndoCommand(parent),
         d(new Private())
 {
@@ -42,12 +42,12 @@ KoShapeSizeCommand::KoShapeSizeCommand(const QList<KShape*> &shapes, const QList
     setText(i18n("Resize Shapes"));
 }
 
-KoShapeSizeCommand::~KoShapeSizeCommand()
+KShapeSizeCommand::~KShapeSizeCommand()
 {
     delete d;
 }
 
-void KoShapeSizeCommand::redo()
+void KShapeSizeCommand::redo()
 {
     QUndoCommand::redo();
     int i = 0;
@@ -58,7 +58,7 @@ void KoShapeSizeCommand::redo()
     }
 }
 
-void KoShapeSizeCommand::undo()
+void KShapeSizeCommand::undo()
 {
     QUndoCommand::undo();
     int i = 0;

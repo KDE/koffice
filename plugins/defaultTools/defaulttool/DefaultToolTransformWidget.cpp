@@ -28,7 +28,7 @@
 #include <KShapeManager.h>
 #include <KSelection.h>
 #include <commands/KShapeMoveCommand.h>
-#include <commands/KoShapeSizeCommand.h>
+#include <commands/KShapeSizeCommand.h>
 #include <commands/KoShapeTransformCommand.h>
 #include "SelectionDecorator.h"
 

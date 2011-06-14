@@ -25,7 +25,7 @@
 #include <KShape.h>
 #include <KShapeKeepAspectRatioCommand.h>
 #include <KShapeMoveCommand.h>
-#include <KoShapeSizeCommand.h>
+#include <KShapeSizeCommand.h>
 #include <KShapeLockCommand.h>
 
 #include <kdebug.h>
@@ -261,7 +261,7 @@ QUndoCommand *KWFrameGeometry::createCommand(QUndoCommand *parent)
     KShape *shape = m_frame->shape();
     if (!qFuzzyCompare(m_originalSize.width(), shape->size().width())
             || !qFuzzyCompare(m_originalSize.height(), shape->size().height())) {
-        new KoShapeSizeCommand(QList<KShape*>() << shape, QList<QSizeF>() << m_originalSize,
+        new KShapeSizeCommand(QList<KShape*>() << shape, QList<QSizeF>() << m_originalSize,
             QList<QSizeF>() << shape->size(), parent);
     }
     if (!qFuzzyCompare(m_originalPosition.x(), shape->position().x())

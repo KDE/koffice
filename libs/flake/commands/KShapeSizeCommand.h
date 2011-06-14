@@ -31,7 +31,7 @@
 class KShape;
 
 /// The undo / redo command for shape sizing.
-class FLAKE_EXPORT KoShapeSizeCommand : public QUndoCommand
+class FLAKE_EXPORT KShapeSizeCommand : public QUndoCommand
 {
 public:
     /**
@@ -41,9 +41,9 @@ public:
      * @param newSizes the new sizes; in a list with a member for each shape
      * @param parent the parent command used for macro commands
      */
-    KoShapeSizeCommand(const QList<KShape*> &shapes, const QList<QSizeF> &previousSizes,
+    KShapeSizeCommand(const QList<KShape*> &shapes, const QList<QSizeF> &previousSizes,
             const QList<QSizeF> &newSizes, QUndoCommand *parent = 0);
-    ~KoShapeSizeCommand();
+    ~KShapeSizeCommand();
 
     /// redo the command
     void redo();
