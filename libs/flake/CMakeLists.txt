@@ -134,7 +134,7 @@ set(flake_SRCS
     commands/KoSubpathRemoveCommand.cpp
     commands/KoSubpathJoinCommand.cpp
     commands/KParameterHandleMoveCommand.cpp
-    commands/KoParameterToPathCommand.cpp
+    commands/KParameterToPathCommand.cpp
     commands/KoShapeTransformCommand.cpp
     commands/KoPathFillRuleCommand.cpp
     commands/KoShapeShadowCommand.cpp
@@ -202,7 +202,7 @@ install(
     FILES
     commands/KEventActionAddCommand.h
     commands/KEventActionRemoveCommand.h
-    commands/KoParameterToPathCommand.h
+    commands/KParameterToPathCommand.h
     commands/KoPathCombineCommand.h
     commands/KoPathControlPointMoveCommand.h
     commands/KoPathFillRuleCommand.h

@@ -80,7 +80,7 @@
 #include <KoShapeDeleteCommand.h>
 #include <KoShapeBorderCommand.h>
 #include <KoShapeBackgroundCommand.h>
-#include <KoParameterToPathCommand.h>
+#include <KParameterToPathCommand.h>
 #include <KoSelection.h>
 #include <KoZoomAction.h>
 #include <KoZoomHandler.h>
@@ -694,10 +694,10 @@ void KarbonView::booleanOperation(KarbonBooleanCommand::BooleanOperation operati
         QUndoCommand * macro = new QUndoCommand(i18n("Boolean Operation"));
         KParameterShape * paramShape = dynamic_cast<KParameterShape*>(paths[0]);
         if (paramShape && paramShape->isParametricShape())
-            new KoParameterToPathCommand(paramShape, macro);
+            new KParameterToPathCommand(paramShape, macro);
         paramShape = dynamic_cast<KParameterShape*>(paths[1]);
         if (paramShape && paramShape->isParametricShape())
-            new KoParameterToPathCommand(paramShape, macro);
+            new KParameterToPathCommand(paramShape, macro);
         new KarbonBooleanCommand(part(), paths[0], paths[1], operation, macro);
         new KoShapeDeleteCommand(part(), paths[0], macro);
         new KoShapeDeleteCommand(part(), paths[1], macro);

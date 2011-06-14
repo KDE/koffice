@@ -36,7 +36,7 @@
 #include "commands/KoPathSegmentTypeCommand.h"
 #include "commands/KoPathBreakAtPointCommand_p.h"
 #include "commands/KoPathSegmentBreakCommand_p.h"
-#include "commands/KoParameterToPathCommand.h"
+#include "commands/KParameterToPathCommand.h"
 #include "commands/KoSubpathJoinCommand_p.h"
 #include "commands/KoPathPointMergeCommand.h"
 #include "KParameterShape.h"
@@ -317,7 +317,7 @@ void KoPathTool::convertToPath()
             shapesToConvert.append(parameterShape);
     }
     if (shapesToConvert.count())
-        d->canvas->addCommand(new KoParameterToPathCommand(shapesToConvert));
+        d->canvas->addCommand(new KParameterToPathCommand(shapesToConvert));
     updateOptionsWidget();
 }
 

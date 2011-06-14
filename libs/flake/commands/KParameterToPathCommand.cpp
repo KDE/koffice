@@ -18,7 +18,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoParameterToPathCommand.h"
+#include "KParameterToPathCommand.h"
 #include "KParameterShape.h"
 #include <klocale.h>
 
@@ -34,7 +34,7 @@ public:
     QList<KoPathShape*> copies;
 };
 
-KoParameterToPathCommand::KoParameterToPathCommand(KParameterShape *shape, QUndoCommand *parent)
+KParameterToPathCommand::KParameterToPathCommand(KParameterShape *shape, QUndoCommand *parent)
     : QUndoCommand(parent),
     d(new KoParameterToPathCommandPrivate())
 {
@@ -43,7 +43,7 @@ KoParameterToPathCommand::KoParameterToPathCommand(KParameterShape *shape, QUndo
     setText(i18n("Convert to Path"));
 }
 
-KoParameterToPathCommand::KoParameterToPathCommand(const QList<KParameterShape*> &shapes, QUndoCommand *parent)
+KParameterToPathCommand::KParameterToPathCommand(const QList<KParameterShape*> &shapes, QUndoCommand *parent)
     : QUndoCommand(parent),
     d(new KoParameterToPathCommandPrivate())
 {
@@ -52,12 +52,12 @@ KoParameterToPathCommand::KoParameterToPathCommand(const QList<KParameterShape*>
     setText(i18n("Convert to Path"));
 }
 
-KoParameterToPathCommand::~KoParameterToPathCommand()
+KParameterToPathCommand::~KParameterToPathCommand()
 {
     delete d;
 }
 
-void KoParameterToPathCommand::redo()
+void KParameterToPathCommand::redo()
 {
     QUndoCommand::redo();
     for (int i = 0; i < d->shapes.size(); ++i) {
@@ -68,7 +68,7 @@ void KoParameterToPathCommand::redo()
     }
 }
 
-void KoParameterToPathCommand::undo()
+void KParameterToPathCommand::undo()
 {
     QUndoCommand::undo();
     for (int i = 0; i < d->shapes.size(); ++i) {

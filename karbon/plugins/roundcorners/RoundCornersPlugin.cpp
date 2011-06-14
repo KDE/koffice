@@ -36,7 +36,7 @@
 #include <KoShapeManager.h>
 #include <KoPathShape.h>
 #include <KParameterShape.h>
-#include <KoParameterToPathCommand.h>
+#include <KParameterToPathCommand.h>
 #include <KoUnitDoubleSpinBox.h>
 
 #include <kpluginfactory.h>
@@ -89,7 +89,7 @@ void RoundCornersPlugin::slotRoundCorners()
     // convert to path before if we have a parametric shape
     KParameterShape * ps = dynamic_cast<KParameterShape*>(shape);
     if (ps && ps->isParametricShape())
-        new KoParameterToPathCommand(ps, cmd);
+        new KParameterToPathCommand(ps, cmd);
 
     new RoundCornersCommand(path, m_roundCornersDlg->radius(), cmd);
     canvasController->canvas()->addCommand(cmd);
