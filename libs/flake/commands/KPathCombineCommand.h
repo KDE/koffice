@@ -29,7 +29,7 @@
 class KoShapeControllerBase;
 
 /// The undo / redo command for combining two or more paths into one
-class FLAKE_EXPORT KoPathCombineCommand : public QUndoCommand
+class FLAKE_EXPORT KPathCombineCommand : public QUndoCommand
 {
 public:
     /**
@@ -38,8 +38,8 @@ public:
      * @param paths the list of paths to combine
      * @param parent the parent command used for macro commands
      */
-    KoPathCombineCommand(KoShapeControllerBase *controller, const QList<KoPathShape*> &paths, QUndoCommand *parent = 0);
-    virtual ~KoPathCombineCommand();
+    KPathCombineCommand(KoShapeControllerBase *controller, const QList<KoPathShape*> &paths, QUndoCommand *parent = 0);
+    virtual ~KPathCombineCommand();
     /// redo the command
     void redo();
     /// revert the actions done in redo

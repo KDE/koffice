@@ -18,12 +18,12 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoPathCombineCommand.h"
+#include "KPathCombineCommand.h"
 #include "KoShapeControllerBase.h"
 #include "KoShapeContainer.h"
 #include <klocale.h>
 
-class KoPathCombineCommand::Private
+class KPathCombineCommand::Private
 {
 public:
     Private(KoShapeControllerBase *c, const QList<KoPathShape*> &p)
@@ -50,7 +50,7 @@ public:
     bool isCombined;
 };
 
-KoPathCombineCommand::KoPathCombineCommand(KoShapeControllerBase *controller,
+KPathCombineCommand::KPathCombineCommand(KoShapeControllerBase *controller,
         const QList<KoPathShape*> &paths, QUndoCommand *parent)
 : QUndoCommand(parent)
 , d(new Private(controller, paths))
@@ -68,12 +68,12 @@ KoPathCombineCommand::KoPathCombineCommand(KoShapeControllerBase *controller,
     }
 }
 
-KoPathCombineCommand::~KoPathCombineCommand()
+KPathCombineCommand::~KPathCombineCommand()
 {
     delete d;
 }
 
-void KoPathCombineCommand::redo()
+void KPathCombineCommand::redo()
 {
     QUndoCommand::redo();
 
@@ -97,7 +97,7 @@ void KoPathCombineCommand::redo()
     }
 }
 
-void KoPathCombineCommand::undo()
+void KPathCombineCommand::undo()
 {
     if (! d->paths.size())
         return;
