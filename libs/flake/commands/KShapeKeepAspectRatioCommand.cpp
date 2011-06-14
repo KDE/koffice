@@ -18,7 +18,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoShapeKeepAspectRatioCommand.h"
+#include "KShapeKeepAspectRatioCommand.h"
 
 #include <KLocale>
 
@@ -33,7 +33,7 @@ public:
 };
 
 
-KoShapeKeepAspectRatioCommand::KoShapeKeepAspectRatioCommand(const QList<KShape*>& shapes,
+KShapeKeepAspectRatioCommand::KShapeKeepAspectRatioCommand(const QList<KShape*>& shapes,
         const QList<bool>& oldKeepAspectRatio,
         const QList<bool>& newKeepAspectRatio,
         QUndoCommand* parent)
@@ -45,11 +45,11 @@ KoShapeKeepAspectRatioCommand::KoShapeKeepAspectRatioCommand(const QList<KShape*
     d->newKeepAspectRatio = newKeepAspectRatio;
 }
 
-KoShapeKeepAspectRatioCommand::~KoShapeKeepAspectRatioCommand()
+KShapeKeepAspectRatioCommand::~KShapeKeepAspectRatioCommand()
 {
 }
 
-void KoShapeKeepAspectRatioCommand::redo()
+void KShapeKeepAspectRatioCommand::redo()
 {
     QUndoCommand::redo();
     for (int i = 0; i < d->shapes.count(); ++i) {
@@ -57,7 +57,7 @@ void KoShapeKeepAspectRatioCommand::redo()
     }
 }
 
-void KoShapeKeepAspectRatioCommand::undo()
+void KShapeKeepAspectRatioCommand::undo()
 {
     QUndoCommand::undo();
     for (int i = 0; i < d->shapes.count(); ++i) {

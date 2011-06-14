@@ -23,7 +23,7 @@
 #include "frames/KWTextFrameSet.h"
 
 #include <KShape.h>
-#include <KoShapeKeepAspectRatioCommand.h>
+#include <KShapeKeepAspectRatioCommand.h>
 #include <KoShapeMoveCommand.h>
 #include <KoShapeSizeCommand.h>
 #include <KoShapeLockCommand.h>

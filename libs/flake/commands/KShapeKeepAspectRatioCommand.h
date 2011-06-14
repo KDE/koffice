@@ -32,7 +32,7 @@ class KoShapeKeepAspectRatioCommandPrivate;
 /**
  * Command that changes the keepAspectRatio property of a set of KShape instances
  */
-class FLAKE_EXPORT KoShapeKeepAspectRatioCommand : public QUndoCommand
+class FLAKE_EXPORT KShapeKeepAspectRatioCommand : public QUndoCommand
 {
 public:
     /**
@@ -42,8 +42,8 @@ public:
      * @param newKeepAspectRatio the new settings
      * @param parent the parent command
      */
-    KoShapeKeepAspectRatioCommand(const QList<KShape*> &shapes, const QList<bool> &oldKeepAspectRatio, const QList<bool> &newKeepAspectRatio, QUndoCommand* parent = 0);
-    ~KoShapeKeepAspectRatioCommand();
+    KShapeKeepAspectRatioCommand(const QList<KShape*> &shapes, const QList<bool> &oldKeepAspectRatio, const QList<bool> &newKeepAspectRatio, QUndoCommand* parent = 0);
+    ~KShapeKeepAspectRatioCommand();
 
     /// Execute the command
     virtual void redo();
