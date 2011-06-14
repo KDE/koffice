@@ -28,7 +28,7 @@ class QPainterPath;
 class KOdfGenericStyle;
 class KoShapeSavingContext;
 class KOdfLoadingContext;
-class KoShapeBackgroundPrivate;
+class KShapeBackgroundPrivate;
 
 /**
  * This is the base class for shape backgrounds.
@@ -71,8 +71,8 @@ public:
     int useCount() const;
 
 protected:
-    KShapeBackground(KoShapeBackgroundPrivate &);
-    KoShapeBackgroundPrivate *d_ptr;
+    KShapeBackground(KShapeBackgroundPrivate &);
+    KShapeBackgroundPrivate *d_ptr;
 
 private:
     Q_DECLARE_PRIVATE(KShapeBackground)

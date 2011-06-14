@@ -37,7 +37,7 @@
 #include <QtGui/QBrush>
 #include <QtGui/QPainter>
 
-class KPatternBackgroundPrivate : public KoShapeBackgroundPrivate
+class KPatternBackgroundPrivate : public KShapeBackgroundPrivate
 {
 public:
     KPatternBackgroundPrivate()

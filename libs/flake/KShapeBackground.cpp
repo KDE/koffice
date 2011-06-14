@@ -20,17 +20,17 @@
 #include "KShapeBackground.h"
 #include "KShapeBackground_p.h"
 
-KoShapeBackgroundPrivate::KoShapeBackgroundPrivate()
+KShapeBackgroundPrivate::KShapeBackgroundPrivate()
     : refCount(0)
 {
 }
-KShapeBackground::KShapeBackground(KoShapeBackgroundPrivate &dd)
+KShapeBackground::KShapeBackground(KShapeBackgroundPrivate &dd)
     :d_ptr(&dd)
 {
 }
 
 KShapeBackground::KShapeBackground()
-    : d_ptr(new KoShapeBackgroundPrivate())
+    : d_ptr(new KShapeBackgroundPrivate())
 {
 }
 

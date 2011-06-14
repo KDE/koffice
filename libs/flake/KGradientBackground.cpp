@@ -31,7 +31,7 @@
 #include <QtGui/QBrush>
 #include <QtGui/QPainter>
 
-class KGradientBackgroundPrivate : public KoShapeBackgroundPrivate
+class KGradientBackgroundPrivate : public KShapeBackgroundPrivate
 {
 public:
     KGradientBackgroundPrivate() : gradient(0) {};
