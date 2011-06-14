@@ -27,10 +27,10 @@
 #include <limits.h>
 
 
-class KoShapeReorderCommandPrivate
+class KShapeReorderCommandPrivate
 {
 public:
-    KoShapeReorderCommandPrivate(const QList<KShape*> &s, QList<int> &ni)
+    KShapeReorderCommandPrivate(const QList<KShape*> &s, QList<int> &ni)
         : shapes(s), newIndexes(ni)
     {
     }
@@ -42,7 +42,7 @@ public:
 
 KShapeReorderCommand::KShapeReorderCommand(const QList<KShape*> &shapes, QList<int> &newIndexes, QUndoCommand *parent)
     : QUndoCommand(parent),
-    d(new KoShapeReorderCommandPrivate(shapes, newIndexes))
+    d(new KShapeReorderCommandPrivate(shapes, newIndexes))
 {
     Q_ASSERT(shapes.count() == newIndexes.count());
     foreach (KShape *shape, shapes)

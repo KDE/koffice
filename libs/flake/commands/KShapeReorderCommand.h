@@ -29,7 +29,7 @@
 
 class KShape;
 class KShapeManager;
-class KoShapeReorderCommandPrivate;
+class KShapeReorderCommandPrivate;
 
 /// This command allows you to change the zIndex of a number of shapes.
 class FLAKE_EXPORT KShapeReorderCommand : public QUndoCommand
@@ -71,7 +71,7 @@ public:
     void undo();
 
 private:
-    KoShapeReorderCommandPrivate *d;
+    KShapeReorderCommandPrivate *d;
 };
 
 #endif
