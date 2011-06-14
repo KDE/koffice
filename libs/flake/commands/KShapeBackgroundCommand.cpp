@@ -18,13 +18,13 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoShapeBackgroundCommand.h"
+#include "KShapeBackgroundCommand.h"
 #include "KShape.h"
 #include "KShapeBackground.h"
 
 #include <klocale.h>
 
-class KoShapeBackgroundCommand::Private
+class KShapeBackgroundCommand::Private
 {
 public:
     Private() {
@@ -59,7 +59,7 @@ public:
     QList<KShapeBackground*> newFills;
 };
 
-KoShapeBackgroundCommand::KoShapeBackgroundCommand(const QList<KShape*> &shapes, KShapeBackground * fill,
+KShapeBackgroundCommand::KShapeBackgroundCommand(const QList<KShape*> &shapes, KShapeBackground * fill,
         QUndoCommand *parent)
         : QUndoCommand(parent)
         , d(new Private())
@@ -73,7 +73,7 @@ KoShapeBackgroundCommand::KoShapeBackgroundCommand(const QList<KShape*> &shapes,
     setText(i18n("Set Background"));
 }
 
-KoShapeBackgroundCommand::KoShapeBackgroundCommand(KShape * shape, KShapeBackground * fill, QUndoCommand *parent)
+KShapeBackgroundCommand::KShapeBackgroundCommand(KShape * shape, KShapeBackground * fill, QUndoCommand *parent)
         : QUndoCommand(parent)
         , d(new Private())
 {
@@ -84,7 +84,7 @@ KoShapeBackgroundCommand::KoShapeBackgroundCommand(KShape * shape, KShapeBackgro
     setText(i18n("Set Background"));
 }
 
-KoShapeBackgroundCommand::KoShapeBackgroundCommand(const QList<KShape*> &shapes, const QList<KShapeBackground*> &fills, QUndoCommand *parent)
+KShapeBackgroundCommand::KShapeBackgroundCommand(const QList<KShape*> &shapes, const QList<KShapeBackground*> &fills, QUndoCommand *parent)
         : QUndoCommand(parent)
         , d(new Private())
 {
@@ -99,7 +99,7 @@ KoShapeBackgroundCommand::KoShapeBackgroundCommand(const QList<KShape*> &shapes,
     setText(i18n("Set Background"));
 }
 
-void KoShapeBackgroundCommand::redo()
+void KShapeBackgroundCommand::redo()
 {
     QUndoCommand::redo();
     QList<KShapeBackground*>::iterator brushIt = d->newFills.begin();
@@ -110,7 +110,7 @@ void KoShapeBackgroundCommand::redo()
     }
 }
 
-void KoShapeBackgroundCommand::undo()
+void KShapeBackgroundCommand::undo()
 {
     QUndoCommand::undo();
     QList<KShapeBackground*>::iterator brushIt = d->oldFills.begin();
@@ -121,7 +121,7 @@ void KoShapeBackgroundCommand::undo()
     }
 }
 
-KoShapeBackgroundCommand::~KoShapeBackgroundCommand()
+KShapeBackgroundCommand::~KShapeBackgroundCommand()
 {
     delete d;
 }

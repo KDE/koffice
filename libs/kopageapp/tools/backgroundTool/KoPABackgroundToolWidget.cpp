@@ -27,7 +27,7 @@
 #include <KPatternBackground.h>
 #include <KCanvasBase.h>
 #include <KoShapeController.h>
-#include <KoShapeBackgroundCommand.h>
+#include <KShapeBackgroundCommand.h>
 
 #include "KoPABackgroundTool.h"
 #include "KoPageApp.h"
@@ -111,7 +111,7 @@ void KoPABackgroundToolWidget::setBackgroundImage()
                 }
                 bg->setRepeat(repeat);
 
-                new KoShapeBackgroundCommand(page, bg, cmd);
+                new KShapeBackgroundCommand(page, bg, cmd);
                 m_tool->canvas()->addCommand(cmd);
             }
         }

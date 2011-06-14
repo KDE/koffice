@@ -79,7 +79,7 @@
 #include <KoShapeCreateCommand.h>
 #include <KoShapeDeleteCommand.h>
 #include <KoShapeBorderCommand.h>
-#include <KoShapeBackgroundCommand.h>
+#include <KShapeBackgroundCommand.h>
 #include <KParameterToPathCommand.h>
 #include <KSelection.h>
 #include <KoZoomAction.h>
@@ -373,7 +373,7 @@ void KarbonView::dropEvent(QDropEvent *e)
             d->canvas->addCommand(new KoShapeBorderCommand(selectedShapes, borders, 0));
         } else {
             KColorBackground * fill = new KColorBackground(color);
-            d->canvas->addCommand(new KoShapeBackgroundCommand(selection->selectedShapes(), fill, 0));
+            d->canvas->addCommand(new KShapeBackgroundCommand(selection->selectedShapes(), fill, 0));
         }
     }
 }
@@ -1201,7 +1201,7 @@ void KarbonView::applyFillToSelection()
         return;
 
     KShape * shape = selection->firstSelectedShape();
-    d->canvas->addCommand(new KoShapeBackgroundCommand(selection->selectedShapes(), shape->background()));
+    d->canvas->addCommand(new KShapeBackgroundCommand(selection->selectedShapes(), shape->background()));
 }
 
 void KarbonView::applyStrokeToSelection()

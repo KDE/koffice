@@ -31,7 +31,7 @@ class KShape;
 class KShapeBackground;
 
 /// The undo / redo command for setting the shape background
-class FLAKE_EXPORT KoShapeBackgroundCommand : public QUndoCommand
+class FLAKE_EXPORT KShapeBackgroundCommand : public QUndoCommand
 {
 public:
     /**
@@ -40,7 +40,7 @@ public:
      * @param fill the new shape background
      * @param parent the parent command used for macro commands
      */
-    KoShapeBackgroundCommand(const QList<KShape*> &shapes, KShapeBackground *fill, QUndoCommand *parent = 0);
+    KShapeBackgroundCommand(const QList<KShape*> &shapes, KShapeBackground *fill, QUndoCommand *parent = 0);
 
     /**
     * Command to set a new shape background.
@@ -48,7 +48,7 @@ public:
     * @param fill the new shape background
     * @param parent the parent command used for macro commands
     */
-    KoShapeBackgroundCommand(KShape *shape, KShapeBackground *fill, QUndoCommand *parent = 0);
+    KShapeBackgroundCommand(KShape *shape, KShapeBackground *fill, QUndoCommand *parent = 0);
 
     /**
      * Command to set new shape backgrounds.
@@ -56,9 +56,9 @@ public:
      * @param fills the new backgrounds, one for each shape
      * @param parent the parent command used for macro commands
      */
-    KoShapeBackgroundCommand(const QList<KShape*> &shapes, const QList<KShapeBackground*> &fills, QUndoCommand *parent = 0);
+    KShapeBackgroundCommand(const QList<KShape*> &shapes, const QList<KShapeBackground*> &fills, QUndoCommand *parent = 0);
 
-    virtual ~KoShapeBackgroundCommand();
+    virtual ~KShapeBackgroundCommand();
     /// redo the command
     void redo();
     /// revert the actions done in redo

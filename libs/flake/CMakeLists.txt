@@ -108,7 +108,7 @@ set(flake_SRCS
     KoPluginLoader.cpp
     commands/KoShapeGroupCommand.cpp
     commands/KShapeAlignCommand.cpp
-    commands/KoShapeBackgroundCommand.cpp
+    commands/KShapeBackgroundCommand.cpp
     commands/KoShapeBorderCommand.cpp
     commands/KoShapeCreateCommand.cpp
     commands/KoShapeDeleteCommand.cpp
@@ -214,7 +214,7 @@ install(
     commands/KPathSegmentTypeCommand.h
     commands/KPathSeparateCommand.h
     commands/KShapeAlignCommand.h
-    commands/KoShapeBackgroundCommand.h
+    commands/KShapeBackgroundCommand.h
     commands/KoShapeBorderCommand.h
     commands/KoShapeCreateCommand.h
     commands/KoShapeDeleteCommand.h
