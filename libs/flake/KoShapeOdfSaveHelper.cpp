@@ -18,7 +18,7 @@
  */
 
 #include "KoShapeOdfSaveHelper.h"
-#include "KoDragOdfSaveHelper_p.h"
+#include "KDragOdfSaveHelper_p.h"
 
 #include <KXmlWriter.h>
 #include <KOdf.h>
@@ -34,7 +34,7 @@ public:
 };
 
 KoShapeOdfSaveHelper::KoShapeOdfSaveHelper(QList<KoShape *> shapes)
-        : KoDragOdfSaveHelper(*(new KoShapeOdfSaveHelperPrivate(shapes)))
+        : KDragOdfSaveHelper(*(new KoShapeOdfSaveHelperPrivate(shapes)))
 {
 }
 

@@ -20,7 +20,7 @@
 #ifndef KOSHAPEODFSAVEHELPER_H
 #define KOSHAPEODFSAVEHELPER_H
 
-#include "KoDragOdfSaveHelper.h"
+#include "KDragOdfSaveHelper.h"
 #include "flake_export.h"
 
 class KoShape;
@@ -31,7 +31,7 @@ class KoShapeOdfSaveHelperPrivate;
  *
  * The shapes are saved in an office:text document.
  */
-class FLAKE_EXPORT KoShapeOdfSaveHelper : public KoDragOdfSaveHelper
+class FLAKE_EXPORT KoShapeOdfSaveHelper : public KDragOdfSaveHelper
 {
 public:
     /**

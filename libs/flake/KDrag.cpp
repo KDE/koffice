@@ -19,7 +19,7 @@
  */
 
 #include "KDrag.h"
-#include "KoDragOdfSaveHelper.h"
+#include "KDragOdfSaveHelper.h"
 
 #include <QApplication>
 #include <QBuffer>
@@ -55,7 +55,7 @@ KDrag::~KDrag()
     delete d;
 }
 
-bool KDrag::setOdf(const char *mimeType, KoDragOdfSaveHelper &helper)
+bool KDrag::setOdf(const char *mimeType, KDragOdfSaveHelper &helper)
 {
     struct Finally {
         Finally(KOdfStore *s) : store(s) { }

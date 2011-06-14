@@ -20,7 +20,7 @@
 #ifndef KOTEXTODFSAVEHELPER_H
 #define KOTEXTODFSAVEHELPER_H
 
-#include <KoDragOdfSaveHelper.h>
+#include <KDragOdfSaveHelper.h>
 
 #include "kotext_export.h"
 
@@ -31,7 +31,7 @@ namespace Soprano
     class Model;
 }
 
-class KOTEXT_EXPORT KoTextOdfSaveHelper : public KoDragOdfSaveHelper
+class KOTEXT_EXPORT KoTextOdfSaveHelper : public KDragOdfSaveHelper
 {
 public:
     KoTextOdfSaveHelper(KoTextShapeData * shapeData, int from, int to);

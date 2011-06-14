@@ -17,28 +17,28 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoDragOdfSaveHelper.h"
-#include "KoDragOdfSaveHelper_p.h"
+#include "KDragOdfSaveHelper.h"
+#include "KDragOdfSaveHelper_p.h"
 
-KoDragOdfSaveHelper::KoDragOdfSaveHelper()
+KDragOdfSaveHelper::KDragOdfSaveHelper()
         : d_ptr(new KoDragOdfSaveHelperPrivate())
 {
 }
 
-KoDragOdfSaveHelper::KoDragOdfSaveHelper(KoDragOdfSaveHelperPrivate &dd)
+KDragOdfSaveHelper::KDragOdfSaveHelper(KoDragOdfSaveHelperPrivate &dd)
         : d_ptr(&dd)
 {
 }
 
-KoDragOdfSaveHelper::~KoDragOdfSaveHelper()
+KDragOdfSaveHelper::~KDragOdfSaveHelper()
 {
     delete d_ptr;
 }
 
-KoShapeSavingContext *KoDragOdfSaveHelper::context(KXmlWriter * bodyWriter, KOdfGenericStyles & mainStyles,
+KoShapeSavingContext *KDragOdfSaveHelper::context(KXmlWriter * bodyWriter, KOdfGenericStyles & mainStyles,
         KOdfEmbeddedDocumentSaver & embeddedSaver)
 {
-    Q_D(KoDragOdfSaveHelper);
+    Q_D(KDragOdfSaveHelper);
     Q_ASSERT(d->context == 0);
     d->context = new KoShapeSavingContext(*bodyWriter, mainStyles, embeddedSaver);
     return d->context;

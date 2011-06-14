@@ -78,7 +78,7 @@ set(flake_SRCS
     KoPatternBackground.cpp
     KoShapeConfigWidgetBase.cpp
     KDrag.cpp
-    KoDragOdfSaveHelper.cpp
+    KDragOdfSaveHelper.cpp
     KoShapeOdfSaveHelper.cpp
     KoShapePaste.cpp
     KoSnapGuide.cpp
@@ -244,7 +244,7 @@ install(
     KDockFactoryBase.h
     KDockRegistry.h
     KDrag.h
-    KoDragOdfSaveHelper.h
+    KDragOdfSaveHelper.h
     KEventActionFactoryBase.h
     KoEventAction.h
     KEventActionRegistry.h

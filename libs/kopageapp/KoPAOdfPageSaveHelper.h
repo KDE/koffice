@@ -20,7 +20,7 @@
 #ifndef KOPAODFPAGESAVEHELPER_H
 #define KOPAODFPAGESAVEHELPER_H
 
-#include <KoDragOdfSaveHelper.h>
+#include <KDragOdfSaveHelper.h>
 
 #include <QList>
 
@@ -29,7 +29,7 @@
 class KoPADocument;
 class KoPAPageBase;
 
-class KOPAGEAPP_TEST_EXPORT KoPAOdfPageSaveHelper : public KoDragOdfSaveHelper
+class KOPAGEAPP_TEST_EXPORT KoPAOdfPageSaveHelper : public KDragOdfSaveHelper
 {
 public:
     /**

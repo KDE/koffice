@@ -25,13 +25,13 @@
 class QMimeData;
 class QString;
 class QByteArray;
-class KoDragOdfSaveHelper;
+class KDragOdfSaveHelper;
 class KoDragPrivate;
 
 /**
  * Class for simplifying adding a odf to the clip board
  *
- * For saving the odf a KoDragOdfSaveHelper class is used.
+ * For saving the odf a KDragOdfSaveHelper class is used.
  * It implements the writing of the body of the document. The
  * setOdf takes care of saving styles and all the other
  * common stuff.
@@ -50,7 +50,7 @@ public:
      * @param mimeType used for creating the odf document
      * @param helper helper for saving the body of the odf document
      */
-    bool setOdf(const char *mimeType, KoDragOdfSaveHelper &helper);
+    bool setOdf(const char *mimeType, KDragOdfSaveHelper &helper);
 
     /**
      * Add additional mimeTypes

@@ -31,7 +31,7 @@ class KoTextOdfSaveHelper;
 /**
  * Class for simplifying adding a odf text with tracked changes to the clip board
  *
- * For saving the odf a KoDragOdfSaveHelper class is used.
+ * For saving the odf a KDragOdfSaveHelper class is used.
  * It implements the writing of the body of the document. The
  * setOdf takes care of saving styles and tracked changes and all the other
  * common stuff.

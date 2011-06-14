@@ -27,11 +27,11 @@
 class KXmlWriter;
 class KoDragOdfSaveHelperPrivate;
 
-class FLAKE_EXPORT KoDragOdfSaveHelper
+class FLAKE_EXPORT KDragOdfSaveHelper
 {
 public:
-    KoDragOdfSaveHelper();
-    virtual ~KoDragOdfSaveHelper();
+    KDragOdfSaveHelper();
+    virtual ~KDragOdfSaveHelper();
 
     /**
      * Create and return the context used for saving
@@ -39,7 +39,7 @@ public:
      * If you need a special context for saving you can reimplent this function.
      * The default implementation return a KoShapeSavingContext.
      *
-     * The returned context is valid as long as the KoDragOdfSaveHelper is existing
+     * The returned context is valid as long as the KDragOdfSaveHelper is existing
      */
     virtual KoShapeSavingContext *context(KXmlWriter *bodyWriter, KOdfGenericStyles &mainStyles, KOdfEmbeddedDocumentSaver &embeddedSaver);
 
@@ -52,12 +52,12 @@ public:
 
 protected:
     /// constructor
-    KoDragOdfSaveHelper(KoDragOdfSaveHelperPrivate &);
+    KDragOdfSaveHelper(KoDragOdfSaveHelperPrivate &);
 
     KoDragOdfSaveHelperPrivate *d_ptr;
 
 private:
-    Q_DECLARE_PRIVATE(KoDragOdfSaveHelper)
+    Q_DECLARE_PRIVATE(KDragOdfSaveHelper)
 };
 
 #endif /* KODRAGODFSAVEHELPER_H */
