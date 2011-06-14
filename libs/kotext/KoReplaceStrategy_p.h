@@ -30,7 +30,7 @@
 // We mean it.
 //
 
-#include "KoFindStrategyBase_p.h"
+#include "KFindStrategyBase_p.h"
 
 class QWidget;
 class KReplaceDialog;
@@ -38,7 +38,7 @@ class KReplaceDialog;
 /**
  * Stratagy used for implementing replace
  */
-class KoReplaceStrategy : public KoFindStrategyBase
+class KoReplaceStrategy : public KFindStrategyBase
 {
 public:
     KoReplaceStrategy(QWidget *parent);

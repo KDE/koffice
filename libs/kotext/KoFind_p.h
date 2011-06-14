@@ -80,7 +80,7 @@ private:
     KoResourceManager *m_provider;
     KFindStrategy m_findStrategy; /// strategy used for find
     KoReplaceStrategy m_replaceStrategy; /// strategy used for replace
-    KoFindStrategyBase *m_strategy; /// the current strategy used
+    KFindStrategyBase *m_strategy; /// the current strategy used
 
     QTextDocument *m_document;
     QTextDocument *m_startDocument;

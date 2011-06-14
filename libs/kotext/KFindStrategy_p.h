@@ -30,14 +30,14 @@
 // We mean it.
 //
 
-#include "KoFindStrategyBase_p.h"
+#include "KFindStrategyBase_p.h"
 
 class QWidget;
 
 /**
  * Stratagy used for implementing find
  */
-class KFindStrategy : public KoFindStrategyBase
+class KFindStrategy : public KFindStrategyBase
 {
 public:
     KFindStrategy(QWidget *parent);

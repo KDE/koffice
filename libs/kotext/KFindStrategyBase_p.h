@@ -38,11 +38,11 @@ class FindDirection;
  * Abstract base class for the different strategies
  * find and replace in KoFind.
  */
-class KoFindStrategyBase
+class KFindStrategyBase
 {
 public:
-    KoFindStrategyBase() {}
-    virtual ~KoFindStrategyBase() {}
+    KFindStrategyBase() {}
+    virtual ~KFindStrategyBase() {}
 
     /**
      * Get the find dialog
