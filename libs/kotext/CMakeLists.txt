@@ -39,7 +39,7 @@ set(kotext_LIB_SRCS
     KoTextShapeSavingContext.cpp
     KoBookmark.cpp
     KoBookmarkManager.cpp
-    KoInlineNote.cpp
+    KInlineNote.cpp
     FindDirection_p.cpp
     KFindStrategy.cpp
     KoReplaceStrategy.cpp

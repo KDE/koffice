@@ -17,7 +17,7 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#include "KoInlineNote.h"
+#include "KInlineNote.h"
 
 #include <KXmlReader.h>
 #include <KXmlWriter.h>
@@ -41,87 +41,87 @@
 #include <QDateTime>
 #include <QWeakPointer>
 
-class KoInlineNote::Private
+class KInlineNote::Private
 {
 public:
-    Private(KoInlineNote::Type t) : autoNumbering(false), type(t) {}
+    Private(KInlineNote::Type t) : autoNumbering(false), type(t) {}
     QTextDocumentFragment text;
     QString label;
     QString id;
     QString author;
     QDateTime date;
     bool autoNumbering;
-    KoInlineNote::Type type;
+    KInlineNote::Type type;
     QWeakPointer<KoStyleManager> styleManager;
 };
 
-KoInlineNote::KoInlineNote(Type type)
+KInlineNote::KInlineNote(Type type)
     : d(new Private(type))
 {
 }
 
-KoInlineNote::~KoInlineNote()
+KInlineNote::~KInlineNote()
 {
     delete d;
 }
 
-void KoInlineNote::setText(const QTextDocumentFragment &text)
+void KInlineNote::setText(const QTextDocumentFragment &text)
 {
     d->text = text;
 }
 
-void KoInlineNote::setText(const QString &text)
+void KInlineNote::setText(const QString &text)
 {
     setText(QTextDocumentFragment::fromPlainText(text));
 }
 
-void KoInlineNote::setLabel(const QString &text)
+void KInlineNote::setLabel(const QString &text)
 {
     d->label = text;
 }
 
-void KoInlineNote::setId(const QString &id)
+void KInlineNote::setId(const QString &id)
 {
     d->id = id;
 }
 
-QTextDocumentFragment KoInlineNote::text() const
+QTextDocumentFragment KInlineNote::text() const
 {
     return d->text;
 }
 
-QString KoInlineNote::label() const
+QString KInlineNote::label() const
 {
     return d->label;
 }
 
-QString KoInlineNote::id() const
+QString KInlineNote::id() const
 {
     return d->id;
 }
 
-bool KoInlineNote::autoNumbering() const
+bool KInlineNote::autoNumbering() const
 {
     return d->autoNumbering;
 }
 
-void KoInlineNote::setAutoNumbering(bool on)
+void KInlineNote::setAutoNumbering(bool on)
 {
     d->autoNumbering = on;
 }
 
-KoInlineNote::Type KoInlineNote::type() const
+KInlineNote::Type KInlineNote::type() const
 {
     return d->type;
 }
 
-void KoInlineNote::updatePosition(QTextInlineObject object, const QTextCharFormat &format)
+void KInlineNote::updatePosition(QTextInlineObject object, const QTextCharFormat &format)
 {
     Q_UNUSED(object);
     Q_UNUSED(format);
 }
 
-void KoInlineNote::resize(QTextInlineObject object, const QTextCharFormat &format, QPaintDevice *pd)
+void KInlineNote::resize(QTextInlineObject object, const QTextCharFormat &format, QPaintDevice *pd)
 {
     if (d->label.isEmpty())
         return;
@@ -132,7 +132,7 @@ void KoInlineNote::resize(QTextInlineObject object, const QTextCharFormat &forma
     object.setDescent(fm.descent());
 }
 
-void KoInlineNote::paint(QPainter &painter, QPaintDevice *pd, const QRectF &rect, QTextInlineObject object, const QTextCharFormat &format)
+void KInlineNote::paint(QPainter &painter, QPaintDevice *pd, const QRectF &rect, QTextInlineObject object, const QTextCharFormat &format)
 {
     Q_UNUSED(object);
 
@@ -160,12 +160,12 @@ void KoInlineNote::paint(QPainter &painter, QPaintDevice *pd, const QRectF &rect
     layout.draw(&painter, rect.topLeft());
 }
 
-bool KoInlineNote::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
+bool KInlineNote::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
 {
     return loadOdf(element, context, 0, 0);
 }
 
-bool KoInlineNote::loadOdf(const KXmlElement & element, KoShapeLoadingContext &context, KoStyleManager *styleManager, KoChangeTracker *changeTracker)
+bool KInlineNote::loadOdf(const KXmlElement & element, KoShapeLoadingContext &context, KoStyleManager *styleManager, KoChangeTracker *changeTracker)
 {
     QTextDocument *document = new QTextDocument();
     QTextCursor cursor(document);
@@ -222,7 +222,7 @@ bool KoInlineNote::loadOdf(const KXmlElement & element, KoShapeLoadingContext &c
     return true;
 }
 
-void KoInlineNote::saveOdf(KoShapeSavingContext & context)
+void KInlineNote::saveOdf(KoShapeSavingContext & context)
 {
     KXmlWriter *writer = &context.xmlWriter();
     QTextDocument *document = new QTextDocument();

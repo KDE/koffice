@@ -36,7 +36,7 @@ class KoCharacterStyle;
 class QColor;
 class KoShape;
 class KOdfStore;
-class KoInlineNote;
+class KInlineNote;
 
 /// KWDocument delegates to this class the loading of (old style) KWD documents
 class KWDLoader : public QObject
@@ -113,7 +113,7 @@ private:
     QList<AnchorData> m_anchors;
 
     struct NotesData {
-        KoInlineNote *note;
+        KInlineNote *note;
         QString frameSetName;
     };
     QList<NotesData> m_notes;

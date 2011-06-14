@@ -32,7 +32,7 @@ class QTextDocumentFragment;
  * This object is an inline object, which means it is anchored in the text-flow and it can hold note info.
  * Typical notes that use this are Footnotes, Endnotes and Annotations (also known as comments).
  */
-class KOTEXT_EXPORT KoInlineNote : public KoInlineObject
+class KOTEXT_EXPORT KInlineNote : public KoInlineObject
 {
 public:
     /// The type of note specifies how the application will use the text from the note.
@@ -46,9 +46,9 @@ public:
      * Construct a new note to be inserted in the text using KoTextSelectionHandler::insertInlineObject() for example.
      * @param type the type of note, which specifies how the application will use the text from the new note.
      */
-    KoInlineNote(Type type);
+    KInlineNote(Type type);
     // destructor
-    virtual ~KoInlineNote();
+    virtual ~KInlineNote();
 
     /**
      * Set the text that backs this note.

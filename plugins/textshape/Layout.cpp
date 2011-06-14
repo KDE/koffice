@@ -39,7 +39,7 @@
 #include <KoStyleManager.h>
 #include <KoTextBlockData.h>
 #include <KoTextBlockBorderData.h>
-#include <KoInlineNote.h>
+#include <KInlineNote.h>
 #include <KoInlineTextObjectManager.h>
 #include <KoShape.h>
 #include <KUnit.h>
@@ -1923,8 +1923,8 @@ qreal Layout::findFootnote(const QTextLine &line, int *oldLength)
         c1.setPosition(m_block.position() + pos);
         pos = text.indexOf(QChar(0xFFFC), pos + 1);
         c1.setPosition(c1.position() + 1, QTextCursor::KeepAnchor);
-        KoInlineNote *note = dynamic_cast<KoInlineNote*>(m_parent->inlineTextObjectManager()->inlineTextObject(c1));
-        if (note && note->type() == KoInlineNote::Footnote) {
+        KInlineNote *note = dynamic_cast<KInlineNote*>(m_parent->inlineTextObjectManager()->inlineTextObject(c1));
+        if (note && note->type() == KInlineNote::Footnote) {
             QTextBlock footnoteBlock = m_textShape->footnoteDocument()->begin();
             bool alreadyPresent = false;
             while (footnoteBlock.isValid()) {

@@ -26,7 +26,7 @@
 
 // koffice
 #include <KoShapeRegistry.h>
-#include <KoInlineNote.h>
+#include <KInlineNote.h>
 #include <KoShapeFactoryBase.h>
 #include <KoShapeContainer.h>
 #include <KoStyleManager.h>
@@ -679,7 +679,7 @@ void KWDLoader::fill(KWTextFrameSet *fs, const KXmlElement &framesetElem)
                         switch (typeId) {
                         case 11: { // footnote
                             KXmlElement footnote = variable.namedItem("FOOTNOTE").toElement();
-                            KoInlineNote *note = new KoInlineNote(KoInlineNote::Footnote);
+                            KInlineNote *note = new KInlineNote(KInlineNote::Footnote);
                             note->setLabel(footnote.attribute("value"));
                             note->setAutoNumbering(footnote.attribute("numberingtype", "auto") == "auto");
                             note->setText(i18n("Unable to locate footnote text"));
@@ -697,9 +697,9 @@ void KWDLoader::fill(KWTextFrameSet *fs, const KXmlElement &framesetElem)
                         case 10: { // note
                             KXmlElement footEndNote = variable.namedItem("NOTE").toElement();
 
-                            KoInlineNote::Type type = footEndNote.attribute("notetype") == "footnote"
-                                        ? KoInlineNote::Footnote : KoInlineNote::Endnote;
-                            KoInlineNote *note = new KoInlineNote(type);
+                            KInlineNote::Type type = footEndNote.attribute("notetype") == "footnote"
+                                        ? KInlineNote::Footnote : KInlineNote::Endnote;
+                            KInlineNote *note = new KInlineNote(type);
                             note->setLabel(footEndNote.attribute("value"));
                             note->setAutoNumbering(footEndNote.attribute("numberingtype", "auto") == "auto");
                             note->setText(i18n("Unable to locate note-text"));

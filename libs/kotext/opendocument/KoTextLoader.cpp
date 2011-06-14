@@ -29,7 +29,7 @@
 #include <KoTextMeta.h>
 #include <KoBookmark.h>
 #include <KoBookmarkManager.h>
-#include <KoInlineNote.h>
+#include <KInlineNote.h>
 #include <KoInlineTextObjectManager.h>
 #include "KoList.h"
 #include <KOdfLoadingContext.h>
@@ -1387,7 +1387,7 @@ void KoTextLoader::loadNote(const KXmlElement &noteElem, QTextCursor &cursor)
     kDebug(32500) << "Loading a text:note element.";
     KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(cursor.block().document()->documentLayout());
     if (layout) {
-        KoInlineNote *note = new KoInlineNote(KoInlineNote::Footnote);
+        KInlineNote *note = new KInlineNote(KInlineNote::Footnote);
         if (note->loadOdf(noteElem, d->context, d->styleManager, d->changeTracker)) {
             KoInlineTextObjectManager *textObjectManager = layout->inlineTextObjectManager();
             textObjectManager->insertInlineObject(cursor, note, cursor.charFormat());

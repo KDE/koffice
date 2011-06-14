@@ -40,7 +40,7 @@
 #include <KoTextDocumentLayout.h>
 #include <KoInlineTextObjectManager.h>
 #include <KoBookmark.h>
-#include <KoInlineNote.h>
+#include <KInlineNote.h>
 
 #define PARAGRAPH_BORDER_DEBUG
 
@@ -137,11 +137,11 @@ QString KoTextDebug::inlineObjectAttributes(const QTextCharFormat &textFormat)
                 attrs.append(" type=\"bookmark-unknown\"");
             }
             attrs.append(QString(" name=\"%1\"").arg(bookmark->name()));
-        } else if (KoInlineNote *note = dynamic_cast<KoInlineNote *>(inlineObject)) {
+        } else if (KInlineNote *note = dynamic_cast<KInlineNote *>(inlineObject)) {
             attrs.append(QString(" id=\"%1\"").arg(note->id()));
-            if (note->type() == KoInlineNote::Footnote) {
+            if (note->type() == KInlineNote::Footnote) {
                 attrs.append(" type=\"footnote\"");
-            } else if (note->type() == KoInlineNote::Endnote) {
+            } else if (note->type() == KInlineNote::Endnote) {
                 attrs.append(" type=\"endnote\"");
             }
             attrs.append(QString(" label=\"%1\"").arg(note->label()));
