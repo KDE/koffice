@@ -356,7 +356,7 @@ void ConnectCurve::paint(QPainter &painter, const KoViewConverter &converter)
 
         QTransform mapper;
         mapper.scale(qMax(scaleX, 1E-4), qMax(scaleY, 1E-4));
-        static_cast<KoPathShapePrivate*>(shape.priv())->map(mapper);
+        static_cast<KPathShapePrivate*>(shape.priv())->map(mapper);
         needsResize = false;
     }
 

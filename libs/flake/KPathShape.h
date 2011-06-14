@@ -33,7 +33,7 @@
 
 class KPathShape;
 class KPathPoint;
-class KoPathShapePrivate;
+class KPathShapePrivate;
 
 typedef QPair<int, int> KoPathPointIndex;
 
@@ -428,7 +428,7 @@ public:
 
 protected:
     /// constructor \internal
-    KPathShape(KoPathShapePrivate &);
+    KPathShape(KPathShapePrivate &);
 
     /// reimplemented
     virtual QString saveStyle(KOdfGenericStyle &style, KoShapeSavingContext &context) const;

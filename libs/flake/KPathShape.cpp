@@ -52,18 +52,18 @@ static bool qIsNaNPoint(const QPointF &p) {
 }
 #endif
 
-KoPathShapePrivate::KoPathShapePrivate(KPathShape *q)
+KPathShapePrivate::KPathShapePrivate(KPathShape *q)
     : KoShapePrivate(q),
     fillRule(Qt::OddEvenFill)
 {
 }
 
-QRectF KoPathShapePrivate::handleRect(const QPointF &p, qreal radius) const
+QRectF KPathShapePrivate::handleRect(const QPointF &p, qreal radius) const
 {
     return QRectF(p.x() - radius, p.y() - radius, 2*radius, 2*radius);
 }
 
-void KoPathShapePrivate::applyViewboxTransformation(const KXmlElement &element)
+void KPathShapePrivate::applyViewboxTransformation(const KXmlElement &element)
 {
     Q_Q(KPathShape);
     // apply viewbox transformation
@@ -93,11 +93,11 @@ void KoPathShapePrivate::applyViewboxTransformation(const KXmlElement &element)
 
 /////////////////////////
 KPathShape::KPathShape()
-    :KoShape(*(new KoPathShapePrivate(this)))
+    :KoShape(*(new KPathShapePrivate(this)))
 {
 }
 
-KPathShape::KPathShape(KoPathShapePrivate &dd)
+KPathShape::KPathShape(KPathShapePrivate &dd)
     : KoShape(dd)
 {
 }
@@ -244,7 +244,7 @@ void KPathShape::paint(QPainter &painter, const KoViewConverter &converter)
 }
 
 #ifndef NDEBUG
-void KoPathShapePrivate::paintDebug(QPainter &painter)
+void KPathShapePrivate::paintDebug(QPainter &painter)
 {
     Q_Q(KPathShape);
     KoSubpathList::const_iterator pathIt(q->m_subpaths.constBegin());
@@ -282,7 +282,7 @@ void KoPathShapePrivate::paintDebug(QPainter &painter)
     kDebug(30006) << "nop =" << i;
 }
 
-void KoPathShapePrivate::debugPath() const
+void KPathShapePrivate::debugPath() const
 {
     Q_Q(const KPathShape);
     KoSubpathList::const_iterator pathIt(q->m_subpaths.constBegin());
@@ -599,7 +599,7 @@ QPointF KPathShape::normalize()
     return tl;
 }
 
-void KoPathShapePrivate::map(const QTransform &matrix)
+void KPathShapePrivate::map(const QTransform &matrix)
 {
     Q_Q(KPathShape);
     KoSubpathList::const_iterator pathIt(q->m_subpaths.constBegin());
@@ -611,7 +611,7 @@ void KoPathShapePrivate::map(const QTransform &matrix)
     }
 }
 
-void KoPathShapePrivate::updateLast(KPathPoint **lastPoint)
+void KPathShapePrivate::updateLast(KPathPoint **lastPoint)
 {
     Q_Q(KPathShape);
     // check if we are about to add a new point to a closed subpath
@@ -1088,7 +1088,7 @@ bool KPathShape::separate(QList<KPathShape*> & separatedPaths)
     return true;
 }
 
-void KoPathShapePrivate::closeSubpath(KoSubpath *subpath)
+void KPathShapePrivate::closeSubpath(KoSubpath *subpath)
 {
     if (! subpath)
         return;
@@ -1097,7 +1097,7 @@ void KoPathShapePrivate::closeSubpath(KoSubpath *subpath)
     subpath->first()->setProperty(KPathPoint::CloseSubpath);
 }
 
-void KoPathShapePrivate::closeMergeSubpath(KoSubpath *subpath)
+void KPathShapePrivate::closeMergeSubpath(KoSubpath *subpath)
 {
     if (! subpath || subpath->size() < 2)
         return;
@@ -1124,7 +1124,7 @@ void KoPathShapePrivate::closeMergeSubpath(KoSubpath *subpath)
     }
 }
 
-KoSubpath *KoPathShapePrivate::subPath(int subpathIndex) const
+KoSubpath *KPathShapePrivate::subPath(int subpathIndex) const
 {
     Q_Q(const KPathShape);
     if (subpathIndex < 0 || subpathIndex >= q->m_subpaths.size())
@@ -1209,7 +1209,7 @@ char nodeType(const KPathPoint * point)
     }
 }
 
-QString KoPathShapePrivate::nodeTypes() const
+QString KPathShapePrivate::nodeTypes() const
 {
     Q_Q(const KPathShape);
     QString types;
@@ -1244,7 +1244,7 @@ void updateNodeType(KPathPoint * point, const QChar & nodeType)
     }
 }
 
-void KoPathShapePrivate::loadNodeTypes(const KXmlElement &element)
+void KPathShapePrivate::loadNodeTypes(const KXmlElement &element)
 {
     Q_Q(KPathShape);
     if (element.hasAttributeNS(KOdfXmlNS::koffice, "nodeTypes")) {

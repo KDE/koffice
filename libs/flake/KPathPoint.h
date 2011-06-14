@@ -265,7 +265,7 @@ public:
 protected:
     friend class KoPointGroup;
     friend class KPathShape;
-    friend class KoPathShapePrivate;
+    friend class KPathShapePrivate;
     void removeFromGroup();
     void addToGroup(KoPointGroup *pointGroup);
     KoPointGroup * group();

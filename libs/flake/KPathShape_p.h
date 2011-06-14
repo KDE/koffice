@@ -33,10 +33,10 @@
 
 #include "KoShape_p.h"
 
-class KoPathShapePrivate : public KoShapePrivate
+class KPathShapePrivate : public KoShapePrivate
 {
 public:
-    KoPathShapePrivate(KPathShape *q);
+    KPathShapePrivate(KPathShape *q);
 
     QRectF handleRect(const QPointF &p, qreal radius) const;
     /// Applies the viewbox transformation defined in the given element

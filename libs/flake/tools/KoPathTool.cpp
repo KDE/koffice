@@ -664,7 +664,7 @@ void KoPathTool::keyPressEvent(QKeyEvent *event)
         case Qt::Key_D:
             if (m_pointSelection.objectCount() == 1) {
                 QList<KPathPointData> selectedPoints = m_pointSelection.selectedPointsData();
-                KoPathShapePrivate *p = static_cast<KoPathShapePrivate*>(selectedPoints[0].pathShape->priv());
+                KPathShapePrivate *p = static_cast<KPathShapePrivate*>(selectedPoints[0].pathShape->priv());
                 p->debugPath();
             }
             break;
