@@ -30,7 +30,7 @@ class KShape;
 class KShapeBorderBase;
 
 /// The undo / redo command for setting the shape border
-class FLAKE_EXPORT KoShapeBorderCommand : public QUndoCommand
+class FLAKE_EXPORT KShapeBorderCommand : public QUndoCommand
 {
 public:
     /**
@@ -39,7 +39,7 @@ public:
      * @param border the new border, the same for all given shapes
      * @param parent the parent command used for macro commands
      */
-    KoShapeBorderCommand(const QList<KShape*> &shapes, KShapeBorderBase *border, QUndoCommand *parent = 0);
+    KShapeBorderCommand(const QList<KShape*> &shapes, KShapeBorderBase *border, QUndoCommand *parent = 0);
 
     /**
      * Command to set new shape borders.
@@ -47,7 +47,7 @@ public:
      * @param borders the new borders, one for each shape
      * @param parent the parent command used for macro commands
      */
-    KoShapeBorderCommand(const QList<KShape*> &shapes, const QList<KShapeBorderBase*> &borders, QUndoCommand *parent = 0);
+    KShapeBorderCommand(const QList<KShape*> &shapes, const QList<KShapeBorderBase*> &borders, QUndoCommand *parent = 0);
 
     /**
      * Command to set a new shape border.
@@ -55,9 +55,9 @@ public:
      * @param border the new border
      * @param parent the parent command used for macro commands
      */
-    KoShapeBorderCommand(KShape* shape, KShapeBorderBase *border, QUndoCommand *parent = 0);
+    KShapeBorderCommand(KShape* shape, KShapeBorderBase *border, QUndoCommand *parent = 0);
 
-    virtual ~KoShapeBorderCommand();
+    virtual ~KShapeBorderCommand();
     /// redo the command
     void redo();
     /// revert the actions done in redo

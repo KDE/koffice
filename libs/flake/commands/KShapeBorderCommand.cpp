@@ -18,13 +18,13 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoShapeBorderCommand.h"
+#include "KShapeBorderCommand.h"
 #include "KShape.h"
 #include "KShapeBorderBase.h"
 
 #include <klocale.h>
 
-class KoShapeBorderCommand::Private
+class KShapeBorderCommand::Private
 {
 public:
     Private() {}
@@ -55,7 +55,7 @@ public:
     QList<KShapeBorderBase*> newBorders; ///< the new borders to set
 };
 
-KoShapeBorderCommand::KoShapeBorderCommand(const QList<KShape*> &shapes, KShapeBorderBase *border, QUndoCommand *parent)
+KShapeBorderCommand::KShapeBorderCommand(const QList<KShape*> &shapes, KShapeBorderBase *border, QUndoCommand *parent)
     : QUndoCommand(parent)
     , d(new Private())
 {
@@ -70,7 +70,7 @@ KoShapeBorderCommand::KoShapeBorderCommand(const QList<KShape*> &shapes, KShapeB
     setText(i18n("Set Border"));
 }
 
-KoShapeBorderCommand::KoShapeBorderCommand(const QList<KShape*> &shapes,
+KShapeBorderCommand::KShapeBorderCommand(const QList<KShape*> &shapes,
         const QList<KShapeBorderBase*> &borders,
         QUndoCommand *parent)
         : QUndoCommand(parent)
@@ -89,7 +89,7 @@ KoShapeBorderCommand::KoShapeBorderCommand(const QList<KShape*> &shapes,
     setText(i18n("Set Border"));
 }
 
-KoShapeBorderCommand::KoShapeBorderCommand(KShape* shape, KShapeBorderBase *border, QUndoCommand *parent)
+KShapeBorderCommand::KShapeBorderCommand(KShape* shape, KShapeBorderBase *border, QUndoCommand *parent)
         : QUndoCommand(parent)
         , d(new Private())
 {
@@ -100,12 +100,12 @@ KoShapeBorderCommand::KoShapeBorderCommand(KShape* shape, KShapeBorderBase *bord
     setText(i18n("Set Border"));
 }
 
-KoShapeBorderCommand::~KoShapeBorderCommand()
+KShapeBorderCommand::~KShapeBorderCommand()
 {
     delete d;
 }
 
-void KoShapeBorderCommand::redo()
+void KShapeBorderCommand::redo()
 {
     QUndoCommand::redo();
     QList<KShapeBorderBase*>::iterator borderIt = d->newBorders.begin();
@@ -117,7 +117,7 @@ void KoShapeBorderCommand::redo()
     }
 }
 
-void KoShapeBorderCommand::undo()
+void KShapeBorderCommand::undo()
 {
     QUndoCommand::undo();
     QList<KShapeBorderBase*>::iterator borderIt = d->oldBorders.begin();

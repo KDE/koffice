@@ -21,7 +21,7 @@
 #include <MockShapes.h>
 #include "KShapeBorderBase.h"
 #include "KLineBorder.h"
-#include "KoShapeBorderCommand.h"
+#include "KShapeBorderCommand.h"
 
 void TestShapeBorderCommand::refCounting()
 {
@@ -35,7 +35,7 @@ void TestShapeBorderCommand::refCounting()
     QCOMPARE(whiteBorder->useCount(), 1);
 
     // old border is white, new border is black
-    QUndoCommand *cmd1 = new KoShapeBorderCommand(shape1, blackBorder);
+    QUndoCommand *cmd1 = new KShapeBorderCommand(shape1, blackBorder);
     cmd1->redo();
     QVERIFY(shape1->border() == blackBorder);
 
@@ -44,7 +44,7 @@ void TestShapeBorderCommand::refCounting()
     QVERIFY(shape1->border() == whiteBorder);
 
     // old border is white, new border is red
-    QUndoCommand *cmd2 = new KoShapeBorderCommand(shape1, redBorder);
+    QUndoCommand *cmd2 = new KShapeBorderCommand(shape1, redBorder);
     cmd2->redo();
     QVERIFY(shape1->border() == redBorder);
 
