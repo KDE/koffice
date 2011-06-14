@@ -24,7 +24,7 @@
 #include <KOdf.h>
 #include <KoShape.h>
 
-class KoShapeOdfSaveHelperPrivate : public KoDragOdfSaveHelperPrivate
+class KoShapeOdfSaveHelperPrivate : public KDragOdfSaveHelperPrivate
 {
 public:
     KoShapeOdfSaveHelperPrivate(QList<KoShape *> shapes)

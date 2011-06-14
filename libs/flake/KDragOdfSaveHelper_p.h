@@ -32,11 +32,11 @@
 //
 
 
-class KoDragOdfSaveHelperPrivate
+class KDragOdfSaveHelperPrivate
 {
 public:
-    KoDragOdfSaveHelperPrivate() : context(0) { }
-    ~KoDragOdfSaveHelperPrivate()
+    KDragOdfSaveHelperPrivate() : context(0) { }
+    ~KDragOdfSaveHelperPrivate()
     {
         delete context;
     }

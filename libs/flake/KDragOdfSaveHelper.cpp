@@ -21,11 +21,11 @@
 #include "KDragOdfSaveHelper_p.h"
 
 KDragOdfSaveHelper::KDragOdfSaveHelper()
-        : d_ptr(new KoDragOdfSaveHelperPrivate())
+        : d_ptr(new KDragOdfSaveHelperPrivate())
 {
 }
 
-KDragOdfSaveHelper::KDragOdfSaveHelper(KoDragOdfSaveHelperPrivate &dd)
+KDragOdfSaveHelper::KDragOdfSaveHelper(KDragOdfSaveHelperPrivate &dd)
         : d_ptr(&dd)
 {
 }

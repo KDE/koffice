@@ -25,7 +25,7 @@
 #include "flake_export.h"
 
 class KXmlWriter;
-class KoDragOdfSaveHelperPrivate;
+class KDragOdfSaveHelperPrivate;
 
 class FLAKE_EXPORT KDragOdfSaveHelper
 {
@@ -52,9 +52,9 @@ public:
 
 protected:
     /// constructor
-    KDragOdfSaveHelper(KoDragOdfSaveHelperPrivate &);
+    KDragOdfSaveHelper(KDragOdfSaveHelperPrivate &);
 
-    KoDragOdfSaveHelperPrivate *d_ptr;
+    KDragOdfSaveHelperPrivate *d_ptr;
 
 private:
     Q_DECLARE_PRIVATE(KDragOdfSaveHelper)
