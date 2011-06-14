@@ -44,7 +44,7 @@
 #include "ShapeDeleter_p.h"
 #include "KoShapeShadow.h"
 #include "KoEventAction.h"
-#include "KoEventActionRegistry.h"
+#include "KEventActionRegistry.h"
 #include "KoOdfWorkaround.h"
 #include "KoFilterEffectStack.h"
 
@@ -1214,7 +1214,7 @@ bool KoShape::loadOdfAttributes(const KXmlElement &element, KoShapeLoadingContex
     if (attributes & OdfCommonChildElements) {
         const KXmlElement eventActionsElement(KoXml::namedItemNS(element, KOdfXmlNS::office, "event-listeners"));
         if (!eventActionsElement.isNull()) {
-            d->eventActions = KoEventActionRegistry::instance()->createEventActionsFromOdf(eventActionsElement, context);
+            d->eventActions = KEventActionRegistry::instance()->createEventActionsFromOdf(eventActionsElement, context);
         }
         // load glue points (connection points)
         d->loadOdfGluePoints(element);

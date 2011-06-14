@@ -35,17 +35,17 @@ class KXmlElement;
  *
  * It creates the event actions when loaded from odf.
  */
-class FLAKE_EXPORT KoEventActionRegistry
+class FLAKE_EXPORT KEventActionRegistry
 {
 public:
     class Singleton;
 
-    ~KoEventActionRegistry();
+    ~KEventActionRegistry();
 
     /**
-     * Return an instance of the KoEventActionRegistry
+     * Return an instance of the KEventActionRegistry
      */
-    static KoEventActionRegistry *instance();
+    static KEventActionRegistry *instance();
 
     /**
      * Create action events for the elements given
@@ -73,9 +73,9 @@ public:
     QList<KEventActionFactoryBase *> scriptEventActions();
 
 private:
-    KoEventActionRegistry();
-    KoEventActionRegistry(const KoEventActionRegistry &);
-    KoEventActionRegistry operator=(const KoEventActionRegistry &);
+    KEventActionRegistry();
+    KEventActionRegistry(const KEventActionRegistry &);
+    KEventActionRegistry operator=(const KEventActionRegistry &);
 
     void init();
 

@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KoEventActionRegistry.h"
+#include "KEventActionRegistry.h"
 
 #include <QHash>
 #include <KoPluginLoader.h>
@@ -29,19 +29,19 @@
 #include "KEventActionFactoryBase.h"
 #include "KoEventAction.h"
 
-class KoEventActionRegistry::Singleton
+class KEventActionRegistry::Singleton
 {
 public:
     Singleton()
             : initDone(false) {}
 
-    KoEventActionRegistry q;
+    KEventActionRegistry q;
     bool initDone;
 };
 
-K_GLOBAL_STATIC(KoEventActionRegistry::Singleton, singleton)
+K_GLOBAL_STATIC(KEventActionRegistry::Singleton, singleton)
 
-class KoEventActionRegistry::Private
+class KEventActionRegistry::Private
 {
 public:
     QHash<QString, KEventActionFactoryBase*> presentationEventActionFactories;
@@ -49,9 +49,9 @@ public:
     QHash<QString, KEventActionFactoryBase*> scriptEventActionFactories;
 };
 
-KoEventActionRegistry * KoEventActionRegistry::instance()
+KEventActionRegistry * KEventActionRegistry::instance()
 {
-    KoEventActionRegistry * registry = &(singleton->q);
+    KEventActionRegistry * registry = &(singleton->q);
     if (! singleton->initDone) {
         singleton->initDone = true;
         registry->init();
@@ -59,17 +59,17 @@ KoEventActionRegistry * KoEventActionRegistry::instance()
     return registry;
 }
 
-KoEventActionRegistry::KoEventActionRegistry()
+KEventActionRegistry::KEventActionRegistry()
         : d(new Private())
 {
 }
 
-KoEventActionRegistry::~KoEventActionRegistry()
+KEventActionRegistry::~KEventActionRegistry()
 {
     delete d;
 }
 
-void KoEventActionRegistry::addPresentationEventAction(KEventActionFactoryBase * factory)
+void KEventActionRegistry::addPresentationEventAction(KEventActionFactoryBase * factory)
 {
     const QString & action = factory->action();
     if (! action.isEmpty()) {
@@ -78,22 +78,22 @@ void KoEventActionRegistry::addPresentationEventAction(KEventActionFactoryBase *
     }
 }
 
-void KoEventActionRegistry::addScriptEventAction(KEventActionFactoryBase * factory)
+void KEventActionRegistry::addScriptEventAction(KEventActionFactoryBase * factory)
 {
     d->scriptEventActionFactories.insert(factory->id(), factory);
 }
 
-QList<KEventActionFactoryBase *> KoEventActionRegistry::presentationEventActions()
+QList<KEventActionFactoryBase *> KEventActionRegistry::presentationEventActions()
 {
     return d->presentationEventActionFactories.values();
 }
 
-QList<KEventActionFactoryBase *> KoEventActionRegistry::scriptEventActions()
+QList<KEventActionFactoryBase *> KEventActionRegistry::scriptEventActions()
 {
     return d->scriptEventActionFactories.values();
 }
 
-void KoEventActionRegistry::init()
+void KEventActionRegistry::init()
 {
     KoPluginLoader::PluginsConfig config;
     config.whiteList = "PresentationEventActionPlugins";
@@ -110,7 +110,7 @@ void KoEventActionRegistry::init()
                                      config);
 }
 
-QSet<KoEventAction*> KoEventActionRegistry::createEventActionsFromOdf(const KXmlElement & e, KoShapeLoadingContext & context) const
+QSet<KoEventAction*> KEventActionRegistry::createEventActionsFromOdf(const KXmlElement & e, KoShapeLoadingContext & context) const
 {
     QSet<KoEventAction *> eventActions;
 
