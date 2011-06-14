@@ -33,12 +33,12 @@
 class QTextTableCellFormat;
 class QTextDocumentFragment;
 
-class KoDeletedCellData
+class KDeletedCellData
 {
 public:
-    KoDeletedCellData(int rowNumber, int columnNumber);
+    KDeletedCellData(int rowNumber, int columnNumber);
 
-    ~KoDeletedCellData();
+    ~KDeletedCellData();
 
     int rowNumber();
 

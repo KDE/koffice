@@ -23,7 +23,7 @@
 #include <QTextTable>
 
 #include "KoDeletedColumnData_p.h"
-#include "KoDeletedCellData_p.h"
+#include "KDeletedCellData_p.h"
 #include <KoTableColumnAndRowStyleManager.h>
 
 KoDeletedColumnData::KoDeletedColumnData(QTextTable *table, int columnNumber)
@@ -36,7 +36,7 @@ KoDeletedColumnData::KoDeletedColumnData(QTextTable *table, int columnNumber)
 
 KoDeletedColumnData::~KoDeletedColumnData()
 {
-    KoDeletedCellData *cellData;
+    KDeletedCellData *cellData;
     foreach (cellData, deleted_cells) {
         delete cellData;
     }
@@ -57,7 +57,7 @@ KoTableColumnStyle KoDeletedColumnData::columnStyle()
     return column_style;
 }
 
-const QVector<KoDeletedCellData *>& KoDeletedColumnData::deletedCells()
+const QVector<KDeletedCellData *>& KoDeletedColumnData::deletedCells()
 {
     return deleted_cells;
 }
@@ -68,7 +68,7 @@ void KoDeletedColumnData::storeDeletedCells(QTextTable *table)
     int rows = table->rows();
 
     for (int i=0; i < rows; i++) {
-        KoDeletedCellData *cellData = new KoDeletedCellData(i, column_number);
+        KDeletedCellData *cellData = new KDeletedCellData(i, column_number);
         QTextTableCell cell = table->cellAt(i, column_number);
         cursor.setPosition(cell.firstCursorPosition().position());
         cursor.setPosition(cell.lastCursorPosition().position(), QTextCursor::KeepAnchor);

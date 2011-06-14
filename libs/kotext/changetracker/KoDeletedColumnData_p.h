@@ -33,7 +33,7 @@
 #include <QVector>
 #include <styles/KoTableColumnStyle.h>
 
-class KoDeletedCellData;
+class KDeletedCellData;
 class QTextTable;
 
 class KoDeletedColumnData
@@ -47,14 +47,14 @@ public:
 
     KoTableColumnStyle columnStyle();
 
-    const QVector<KoDeletedCellData *>& deletedCells();
+    const QVector<KDeletedCellData *>& deletedCells();
 
 private:
     int column_number;
 
     KoTableColumnStyle column_style;
 
-    QVector<KoDeletedCellData *> deleted_cells;
+    QVector<KDeletedCellData *> deleted_cells;
 
     void storeDeletedCells(QTextTable *table);
 

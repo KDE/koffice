@@ -20,44 +20,44 @@
 #include <QTextTableCellFormat>
 #include <QTextDocumentFragment>
 
-#include "KoDeletedCellData_p.h"
+#include "KDeletedCellData_p.h"
 
-KoDeletedCellData::KoDeletedCellData(int rowNumber, int columnNumber)
+KDeletedCellData::KDeletedCellData(int rowNumber, int columnNumber)
 {
     this->row_number = rowNumber;
     this->column_number = columnNumber;
 }
 
-KoDeletedCellData::~KoDeletedCellData()
+KDeletedCellData::~KDeletedCellData()
 {
 }
 
-int KoDeletedCellData::rowNumber()
+int KDeletedCellData::rowNumber()
 {
     return row_number;
 }
 
-int KoDeletedCellData::columnNumber()
+int KDeletedCellData::columnNumber()
 {
     return column_number;
 }
 
-void KoDeletedCellData::setCellFormat(const QTextTableCellFormat &cellFormat)
+void KDeletedCellData::setCellFormat(const QTextTableCellFormat &cellFormat)
 {
     this->cell_format = cellFormat;
 }
 
-const QTextTableCellFormat& KoDeletedCellData::cellFormat()
+const QTextTableCellFormat& KDeletedCellData::cellFormat()
 {
     return this->cell_format;
 }
 
-void KoDeletedCellData::setCellContent(const QTextDocumentFragment &cellContent)
+void KDeletedCellData::setCellContent(const QTextDocumentFragment &cellContent)
 {
     this->cell_content = cellContent;
 }
 
-const QTextDocumentFragment& KoDeletedCellData::cellContent()
+const QTextDocumentFragment& KDeletedCellData::cellContent()
 {
     return this->cell_content;
 }
