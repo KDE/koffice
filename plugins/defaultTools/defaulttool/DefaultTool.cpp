@@ -1027,25 +1027,25 @@ void DefaultTool::selectionAlign(KShapeAlignCommand::Align align)
 
 void DefaultTool::selectionBringToFront()
 {
-    selectionReorder(KoShapeReorderCommand::BringToFront);
+    selectionReorder(KShapeReorderCommand::BringToFront);
 }
 
 void DefaultTool::selectionMoveUp()
 {
-    selectionReorder(KoShapeReorderCommand::RaiseShape);
+    selectionReorder(KShapeReorderCommand::RaiseShape);
 }
 
 void DefaultTool::selectionMoveDown()
 {
-    selectionReorder(KoShapeReorderCommand::LowerShape);
+    selectionReorder(KShapeReorderCommand::LowerShape);
 }
 
 void DefaultTool::selectionSendToBack()
 {
-    selectionReorder(KoShapeReorderCommand::SendToBack);
+    selectionReorder(KShapeReorderCommand::SendToBack);
 }
 
-void DefaultTool::selectionReorder(KoShapeReorderCommand::MoveShapeType order)
+void DefaultTool::selectionReorder(KShapeReorderCommand::MoveShapeType order)
 {
     KSelection* selection = canvas()->shapeManager()->selection();
     if (! selection)
@@ -1059,7 +1059,7 @@ void DefaultTool::selectionReorder(KoShapeReorderCommand::MoveShapeType order)
     if (editableShapes.count() < 1)
         return;
 
-    QUndoCommand *cmd = KoShapeReorderCommand::createCommand(editableShapes, canvas()->shapeManager(), order);
+    QUndoCommand *cmd = KShapeReorderCommand::createCommand(editableShapes, canvas()->shapeManager(), order);
     canvas()->addCommand(cmd);
 }
 

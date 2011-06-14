@@ -19,7 +19,7 @@
 
 #include "TestShapeReorderCommand.h"
 #include <MockShapes.h>
-#include <KoShapeReorderCommand.h>
+#include <KShapeReorderCommand.h>
 #include <KShapeManager.h>
 
 #include <kcomponentdata.h>
@@ -59,7 +59,7 @@ void TestShapeReorderCommand::testBringToFront()
     QList<KShape*> selectedShapes;
     selectedShapes.append(&shape1);
 
-    QUndoCommand * cmd = KoShapeReorderCommand::createCommand(selectedShapes, &manager, KoShapeReorderCommand::BringToFront);
+    QUndoCommand * cmd = KShapeReorderCommand::createCommand(selectedShapes, &manager, KShapeReorderCommand::BringToFront);
     cmd->redo();
 
     qSort(shapes.begin(), shapes.end(), KShape::compareShapeZIndex);
@@ -96,7 +96,7 @@ void TestShapeReorderCommand::testSendToBack()
     QList<KShape*> selectedShapes;
     selectedShapes.append(&shape3);
 
-    QUndoCommand * cmd = KoShapeReorderCommand::createCommand(selectedShapes, &manager, KoShapeReorderCommand::SendToBack);
+    QUndoCommand * cmd = KShapeReorderCommand::createCommand(selectedShapes, &manager, KShapeReorderCommand::SendToBack);
     cmd->redo();
 
     qSort(shapes.begin(), shapes.end(), KShape::compareShapeZIndex);
@@ -133,7 +133,7 @@ void TestShapeReorderCommand::testMoveUp()
     QList<KShape*> selectedShapes;
     selectedShapes.append(&shape1);
 
-    QUndoCommand * cmd = KoShapeReorderCommand::createCommand(selectedShapes, &manager, KoShapeReorderCommand::RaiseShape);
+    QUndoCommand * cmd = KShapeReorderCommand::createCommand(selectedShapes, &manager, KShapeReorderCommand::RaiseShape);
     cmd->redo();
 
     qSort(shapes.begin(), shapes.end(), KShape::compareShapeZIndex);
@@ -170,7 +170,7 @@ void TestShapeReorderCommand::testMoveDown()
     QList<KShape*> selectedShapes;
     selectedShapes.append(&shape2);
 
-    QUndoCommand * cmd = KoShapeReorderCommand::createCommand(selectedShapes, &manager, KoShapeReorderCommand::LowerShape);
+    QUndoCommand * cmd = KShapeReorderCommand::createCommand(selectedShapes, &manager, KShapeReorderCommand::LowerShape);
     cmd->redo();
 
     qSort(shapes.begin(), shapes.end(), KShape::compareShapeZIndex);
@@ -218,7 +218,7 @@ void TestShapeReorderCommand::testMoveUpOverlapping()
     QList<KShape*> selectedShapes;
     selectedShapes.append(&shape1);
     
-    QUndoCommand * cmd = KoShapeReorderCommand::createCommand(selectedShapes, &manager, KoShapeReorderCommand::RaiseShape);
+    QUndoCommand * cmd = KShapeReorderCommand::createCommand(selectedShapes, &manager, KShapeReorderCommand::RaiseShape);
     cmd->redo();
     delete cmd;
     
@@ -267,7 +267,7 @@ void TestShapeReorderCommand::testMoveDownOverlapping()
     QList<KShape*> selectedShapes;
     selectedShapes.append(&shape5);
     
-    QUndoCommand * cmd = KoShapeReorderCommand::createCommand(selectedShapes, &manager, KoShapeReorderCommand::LowerShape);
+    QUndoCommand * cmd = KShapeReorderCommand::createCommand(selectedShapes, &manager, KShapeReorderCommand::LowerShape);
     cmd->redo();
     delete cmd;
     
@@ -313,7 +313,7 @@ void TestShapeReorderCommand::testSendToBackChildren()
     QList<KShape*> selectedShapes;
     selectedShapes.append(&shape3);
     
-    QUndoCommand * cmd = KoShapeReorderCommand::createCommand(selectedShapes, &manager, KoShapeReorderCommand::SendToBack);
+    QUndoCommand * cmd = KShapeReorderCommand::createCommand(selectedShapes, &manager, KShapeReorderCommand::SendToBack);
     cmd->redo();
     delete cmd;
     
@@ -328,7 +328,7 @@ void TestShapeReorderCommand::testSendToBackChildren()
     selectedShapes.clear();
     selectedShapes.append(&shape2);
     
-    cmd = KoShapeReorderCommand::createCommand(selectedShapes, &manager, KoShapeReorderCommand::SendToBack);
+    cmd = KShapeReorderCommand::createCommand(selectedShapes, &manager, KShapeReorderCommand::SendToBack);
     cmd->redo();
     delete cmd;
     
@@ -343,7 +343,7 @@ void TestShapeReorderCommand::testSendToBackChildren()
     selectedShapes.clear();
     selectedShapes.append(&shape1);
     
-    cmd = KoShapeReorderCommand::createCommand(selectedShapes, &manager, KoShapeReorderCommand::SendToBack);
+    cmd = KShapeReorderCommand::createCommand(selectedShapes, &manager, KShapeReorderCommand::SendToBack);
     cmd->redo();
     delete cmd;
     

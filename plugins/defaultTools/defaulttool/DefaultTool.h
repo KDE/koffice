@@ -25,7 +25,7 @@
 #include <KInteractionTool.h>
 #include <KoFlake.h>
 #include <commands/KShapeAlignCommand.h>
-#include <commands/KoShapeReorderCommand.h>
+#include <commands/KShapeReorderCommand.h>
 
 #include <QPolygonF>
 #include <QTime>
@@ -135,7 +135,7 @@ private:
     qreal rotationOfHandle(KoFlake::SelectionHandle handle, bool useEdgeRotation);
 
     void selectionAlign(KShapeAlignCommand::Align align);
-    void selectionReorder(KoShapeReorderCommand::MoveShapeType order);
+    void selectionReorder(KShapeReorderCommand::MoveShapeType order);
     bool moveSelection(int direction, Qt::KeyboardModifiers modifiers);
 
     /// Returns selection rectangle adjusted by handle proximity threshold

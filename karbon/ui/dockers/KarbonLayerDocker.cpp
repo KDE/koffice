@@ -36,7 +36,7 @@
 #include <KSelection.h>
 #include <KShapeCreateCommand.h>
 #include <KShapeDeleteCommand.h>
-#include <KoShapeReorderCommand.h>
+#include <KShapeReorderCommand.h>
 #include <KShapeLayer.h>
 #include <KShapeGroup.h>
 
@@ -336,7 +336,7 @@ void KarbonLayerDocker::raiseItem()
 
         cmd = new KarbonLayerReorderCommand(&m_part->document(), selectedLayers, KarbonLayerReorderCommand::RaiseLayer);
     } else if (selectedShapes.count()) {
-        cmd = KoShapeReorderCommand::createCommand(selectedShapes, canvas->shapeManager(), KoShapeReorderCommand::RaiseShape);
+        cmd = KShapeReorderCommand::createCommand(selectedShapes, canvas->shapeManager(), KShapeReorderCommand::RaiseShape);
     }
 
     if (cmd) {
@@ -370,7 +370,7 @@ void KarbonLayerDocker::lowerItem()
 
         cmd = new KarbonLayerReorderCommand(&m_part->document(), selectedLayers, KarbonLayerReorderCommand::LowerLayer);
     } else if (selectedShapes.count()) {
-        cmd = KoShapeReorderCommand::createCommand(selectedShapes, canvas->shapeManager(), KoShapeReorderCommand::LowerShape);
+        cmd = KShapeReorderCommand::createCommand(selectedShapes, canvas->shapeManager(), KShapeReorderCommand::LowerShape);
     }
 
     if (cmd) {

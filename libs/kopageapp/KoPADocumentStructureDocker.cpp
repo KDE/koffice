@@ -36,7 +36,7 @@
 #include <KDrag.h>
 #include <KShapeCreateCommand.h>
 #include <KShapeDeleteCommand.h>
-#include <KoShapeReorderCommand.h>
+#include <KShapeReorderCommand.h>
 #include <KShapeLayer.h>
 #include <KShapePaste.h>
 
@@ -399,9 +399,9 @@ void KoPADocumentStructureDocker::raiseItem()
     }
     else if(selectedShapes.count())
     {
-        cmd = KoShapeReorderCommand::createCommand(selectedShapes,
+        cmd = KShapeReorderCommand::createCommand(selectedShapes,
                 KoToolManager::instance()->activeCanvasController()->canvas()->shapeManager(),
-                KoShapeReorderCommand::RaiseShape);
+                KShapeReorderCommand::RaiseShape);
     }
 
     if(cmd)
@@ -433,9 +433,9 @@ void KoPADocumentStructureDocker::lowerItem()
     }
     else if(selectedShapes.count())
     {
-        cmd = KoShapeReorderCommand::createCommand(selectedShapes,
+        cmd = KShapeReorderCommand::createCommand(selectedShapes,
                 KoToolManager::instance()->activeCanvasController()->canvas()->shapeManager(),
-                KoShapeReorderCommand::LowerShape);
+                KShapeReorderCommand::LowerShape);
     }
 
     if(cmd)

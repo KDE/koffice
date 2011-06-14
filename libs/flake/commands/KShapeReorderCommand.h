@@ -32,7 +32,7 @@ class KShapeManager;
 class KoShapeReorderCommandPrivate;
 
 /// This command allows you to change the zIndex of a number of shapes.
-class FLAKE_EXPORT KoShapeReorderCommand : public QUndoCommand
+class FLAKE_EXPORT KShapeReorderCommand : public QUndoCommand
 {
 public:
     /**
@@ -42,8 +42,8 @@ public:
      *  this list naturally must have the same amount of items as the shapes set.
      * @param parent the parent command used for macro commands
      */
-    KoShapeReorderCommand(const QList<KShape*> &shapes, QList<int> &newIndexes, QUndoCommand *parent = 0);
-    ~KoShapeReorderCommand();
+    KShapeReorderCommand(const QList<KShape*> &shapes, QList<int> &newIndexes, QUndoCommand *parent = 0);
+    ~KShapeReorderCommand();
 
     /// An enum for defining what kind of reordering to use.
     enum MoveShapeType  {
@@ -54,7 +54,7 @@ public:
     };
 
     /**
-     * Create a new KoShapeReorderCommand by calculating the new indexes required to move the shapes
+     * Create a new KShapeReorderCommand by calculating the new indexes required to move the shapes
      * according to the move parameter.
      * @param shapes all the shapes that should be moved.
      * @param manager the shapeManager that contains all the shapes that could have their indexes changed.
@@ -62,7 +62,7 @@ public:
      * @param parent the parent command for grouping purposes.
      * @return command for reording the shapes or 0 if no reordering happend
      */
-    static KoShapeReorderCommand *createCommand(const QList<KShape*> &shapes, KShapeManager *manager,
+    static KShapeReorderCommand *createCommand(const QList<KShape*> &shapes, KShapeManager *manager,
             MoveShapeType move, QUndoCommand *parent = 0);
 
     /// redo the command

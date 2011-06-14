@@ -1026,9 +1026,9 @@ void KWView::toggleSnapToGrid()
     m_document->gridData().setSnapToGrid(m_snapToGrid); // for persistency
 }
 
-void KWView::adjustZOrderOfSelectedFrames(KoShapeReorderCommand::MoveShapeType direction)
+void KWView::adjustZOrderOfSelectedFrames(KShapeReorderCommand::MoveShapeType direction)
 {
-    QUndoCommand *cmd = KoShapeReorderCommand::createCommand(
+    QUndoCommand *cmd = KShapeReorderCommand::createCommand(
             m_canvas->shapeManager()->selection()->selectedShapes(),
             m_canvas->shapeManager(), direction);
     m_document->addCommand(cmd);

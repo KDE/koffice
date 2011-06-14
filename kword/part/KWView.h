@@ -27,7 +27,7 @@
 #include <KoView.h>
 #include <KoViewConverter.h>
 #include <KoZoomHandler.h>
-#include <KoShapeReorderCommand.h>
+#include <KShapeReorderCommand.h>
 
 #include <QWidget>
 
@@ -134,19 +134,19 @@ private slots:
     void toggleSnapToGrid();
     /** Move the selected frame above maximum 1 frame that is in front of it. */
     void raiseFrame() {
-        adjustZOrderOfSelectedFrames(KoShapeReorderCommand::RaiseShape);
+        adjustZOrderOfSelectedFrames(KShapeReorderCommand::RaiseShape);
     }
     /** Move the selected frame behind maximum 1 frame that is behind it */
     void lowerFrame() {
-        adjustZOrderOfSelectedFrames(KoShapeReorderCommand::LowerShape);
+        adjustZOrderOfSelectedFrames(KShapeReorderCommand::LowerShape);
     }
     /** Move the selected frame(s) to be in the front most position. */
     void bringToFront() {
-        adjustZOrderOfSelectedFrames(KoShapeReorderCommand::BringToFront);
+        adjustZOrderOfSelectedFrames(KShapeReorderCommand::BringToFront);
     }
     /** Move the selected frame(s) to be behind all other frames */
     void sendToBack() {
-        adjustZOrderOfSelectedFrames(KoShapeReorderCommand::SendToBack);
+        adjustZOrderOfSelectedFrames(KShapeReorderCommand::SendToBack);
     }
     /// turns the border display on/off
     void toggleViewFrameBorders(bool on);
@@ -201,7 +201,7 @@ private slots:
 
 private:
     /// helper method for the raiseFrame/lowerFrame/bringToFront/sendToBack methods
-    void adjustZOrderOfSelectedFrames(KoShapeReorderCommand::MoveShapeType direction);
+    void adjustZOrderOfSelectedFrames(KShapeReorderCommand::MoveShapeType direction);
 
     /// loops over the selected shapes and returns the frames that go with them.
     QList<KWFrame*> selectedFrames() const;

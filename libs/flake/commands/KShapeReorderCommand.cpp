@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoShapeReorderCommand.h"
+#include "KShapeReorderCommand.h"
 #include "KShape.h"
 #include "KShapeManager.h"
 #include "KShapeContainer.h"
@@ -40,7 +40,7 @@ public:
     QList<int> newIndexes;
 };
 
-KoShapeReorderCommand::KoShapeReorderCommand(const QList<KShape*> &shapes, QList<int> &newIndexes, QUndoCommand *parent)
+KShapeReorderCommand::KShapeReorderCommand(const QList<KShape*> &shapes, QList<int> &newIndexes, QUndoCommand *parent)
     : QUndoCommand(parent),
     d(new KoShapeReorderCommandPrivate(shapes, newIndexes))
 {
@@ -51,12 +51,12 @@ KoShapeReorderCommand::KoShapeReorderCommand(const QList<KShape*> &shapes, QList
     setText(i18n("Reorder Shapes"));
 }
 
-KoShapeReorderCommand::~KoShapeReorderCommand()
+KShapeReorderCommand::~KShapeReorderCommand()
 {
     delete d;
 }
 
-void KoShapeReorderCommand::redo()
+void KShapeReorderCommand::redo()
 {
     QUndoCommand::redo();
     for (int i = 0; i < d->shapes.count(); i++) {
@@ -66,7 +66,7 @@ void KoShapeReorderCommand::redo()
     }
 }
 
-void KoShapeReorderCommand::undo()
+void KShapeReorderCommand::undo()
 {
     QUndoCommand::undo();
     for (int i = 0; i < d->shapes.count(); i++) {
@@ -76,7 +76,7 @@ void KoShapeReorderCommand::undo()
     }
 }
 
-static void prepare(KShape *s, QMap<KShape*, QList<KShape*> > &newOrder, KShapeManager *manager, KoShapeReorderCommand::MoveShapeType move)
+static void prepare(KShape *s, QMap<KShape*, QList<KShape*> > &newOrder, KShapeManager *manager, KShapeReorderCommand::MoveShapeType move)
 {
     KShapeContainer *parent = s->parent();
     QMap<KShape*, QList<KShape*> >::iterator it(newOrder.find(parent));
@@ -100,20 +100,20 @@ static void prepare(KShape *s, QMap<KShape*, QList<KShape*> > &newOrder, KShapeM
     if (index != -1) {
         shapes.removeAt(index);
         switch (move) {
-        case KoShapeReorderCommand::BringToFront:
+        case KShapeReorderCommand::BringToFront:
             index = shapes.size();
             break;
-        case KoShapeReorderCommand::RaiseShape:
+        case KShapeReorderCommand::RaiseShape:
             if (index < shapes.size()) {
                 ++index;
             }
             break;
-        case KoShapeReorderCommand::LowerShape:
+        case KShapeReorderCommand::LowerShape:
             if (index > 0) {
                 --index;
             }
             break;
-        case KoShapeReorderCommand::SendToBack:
+        case KShapeReorderCommand::SendToBack:
             index = 0;
             break;
         }
@@ -122,7 +122,7 @@ static void prepare(KShape *s, QMap<KShape*, QList<KShape*> > &newOrder, KShapeM
 }
 
 // static
-KoShapeReorderCommand *KoShapeReorderCommand::createCommand(const QList<KShape*> &shapes, KShapeManager *manager, MoveShapeType move, QUndoCommand *parent)
+KShapeReorderCommand *KShapeReorderCommand::createCommand(const QList<KShape*> &shapes, KShapeManager *manager, MoveShapeType move, QUndoCommand *parent)
 {
     QList<int> newIndexes;
     QList<KShape*> changedShapes;
@@ -177,5 +177,5 @@ KoShapeReorderCommand *KoShapeReorderCommand::createCommand(const QList<KShape*>
         }
     }
     Q_ASSERT(changedShapes.count() == newIndexes.count());
-    return new KoShapeReorderCommand(changedShapes, newIndexes, parent);
+    return new KShapeReorderCommand(changedShapes, newIndexes, parent);
 }
