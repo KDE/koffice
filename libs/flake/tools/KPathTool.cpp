@@ -44,7 +44,7 @@
 #include "KPathPointRubberSelectStrategy_p.h"
 #include "KPathSegmentChangeStrategy_p.h"
 #include "PathToolOptionWidget_p.h"
-#include "KoSnapGuide.h"
+#include "KSnapGuide.h"
 
 #include <KAction>
 #include <KIcon>

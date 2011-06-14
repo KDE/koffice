@@ -28,7 +28,7 @@
 #include <KShapeContainerModel.h>
 #include <KResourceManager.h>
 #include <commands/KShapeMoveCommand.h>
-#include <KoSnapGuide.h>
+#include <KSnapGuide.h>
 #include <KPointerEvent.h>
 #include <KoToolBase.h>
 #include <KLocale>

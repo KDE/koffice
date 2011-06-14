@@ -32,7 +32,7 @@
 //
 
 
-#include "KoSnapGuide.h"
+#include "KSnapGuide.h"
 
 #include <QtCore/QPointF>
 #include <QtGui/QPainterPath>
@@ -44,13 +44,13 @@ class KoViewConverter;
 class KoSnapStrategy
 {
 public:
-    KoSnapStrategy(KoSnapGuide::Strategy type);
+    KoSnapStrategy(KSnapGuide::Strategy type);
     virtual ~KoSnapStrategy() {};
 
     virtual bool snap(const QPointF &mousePosition, KoSnapProxy * proxy, qreal maxSnapDistance) = 0;
 
     /// returns the strategies type
-    KoSnapGuide::Strategy type() const;
+    KSnapGuide::Strategy type() const;
 
     static qreal squareDistance(const QPointF &p1, const QPointF &p2);
     static qreal scalarProduct(const QPointF &p1, const QPointF &p2);
@@ -66,7 +66,7 @@ protected:
     void setSnappedPosition(const QPointF &position);
 
 private:
-    KoSnapGuide::Strategy m_snapType;
+    KSnapGuide::Strategy m_snapType;
     QPointF m_snappedPosition;
 };
 

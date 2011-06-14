@@ -36,14 +36,14 @@
 
 #include <QtGui/QWidget>
 
-class KoSnapGuide;
+class KSnapGuide;
 class QShowEvent;
 
 class SnapGuideConfigWidget : public QWidget
 {
     Q_OBJECT
 public:
-    explicit SnapGuideConfigWidget(KoSnapGuide *snapGuide, QWidget *parent = 0);
+    explicit SnapGuideConfigWidget(KSnapGuide *snapGuide, QWidget *parent = 0);
     ~SnapGuideConfigWidget();
 
 private slots:
@@ -58,7 +58,7 @@ protected:
 private:
 
     Ui_SnapGuideConfigWidget widget;
-    KoSnapGuide *m_snapGuide;
+    KSnapGuide *m_snapGuide;
 };
 
 #endif // SNAPGUIDECONFIGWIDGET_H

@@ -23,7 +23,7 @@
 #include "KShapeController.h"
 #include "KCanvasController.h"
 #include "KoViewConverter.h"
-#include "KoSnapGuide.h"
+#include "KSnapGuide.h"
 #include "SnapGuideConfigWidget_p.h"
 
 #include <KGlobal>
@@ -49,7 +49,7 @@ public:
     KShapeController *shapeController;
     KResourceManager *resourceManager;
     KCanvasController *controller;
-    KoSnapGuide *snapGuide;
+    KSnapGuide *snapGuide;
     bool readWrite;
 };
 
@@ -58,7 +58,7 @@ KCanvasBase::KCanvasBase(KShapeControllerBase *shapeControllerBase)
 {
     d->resourceManager = new KResourceManager();
     d->shapeController = new KShapeController(this, shapeControllerBase);
-    d->snapGuide = new KoSnapGuide(this);
+    d->snapGuide = new KSnapGuide(this);
 }
 
 KCanvasBase::~KCanvasBase()
@@ -98,7 +98,7 @@ void KCanvasBase::clipToDocument(const KShape *, QPointF &) const
 {
 }
 
-KoSnapGuide * KCanvasBase::snapGuide() const
+KSnapGuide * KCanvasBase::snapGuide() const
 {
     return d->snapGuide;
 }

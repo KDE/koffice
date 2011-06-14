@@ -18,7 +18,7 @@
  */
 
 #include "GuidesToolOptionWidget.h"
-#include <KoSnapGuide.h>
+#include <KSnapGuide.h>
 
 #include <KLocale>
 

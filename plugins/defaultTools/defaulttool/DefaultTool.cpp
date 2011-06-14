@@ -50,7 +50,7 @@
 #include <commands/KShapeMoveCommand.h>
 #include <commands/KShapeGroupCommand.h>
 #include <commands/KShapeUngroupCommand.h>
-#include <KoSnapGuide.h>
+#include <KSnapGuide.h>
 
 #include <KDebug>
 

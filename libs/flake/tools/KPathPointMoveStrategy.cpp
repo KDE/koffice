@@ -25,7 +25,7 @@
 #include "commands/KPathPointMoveCommand.h"
 #include "KPathTool_p.h"
 #include "KPathToolSelection_p.h"
-#include "KoSnapGuide.h"
+#include "KSnapGuide.h"
 #include "KCanvasBase.h"
 
 KPathPointMoveStrategy::KPathPointMoveStrategy(KPathTool *tool, const QPointF &pos)

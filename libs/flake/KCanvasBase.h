@@ -45,7 +45,7 @@ class KShapeController;
 class KShapeControllerBase;
 class KCanvasController;
 class KShape;
-class KoSnapGuide;
+class KSnapGuide;
 class KGuidesData;
 
 /**
@@ -203,7 +203,7 @@ public:
     /**
      * Returns the snap guide of the canvas
      */
-    KoSnapGuide *snapGuide() const;
+    KSnapGuide *snapGuide() const;
 
     /**
      * This factory method creates a new widget for the user to change

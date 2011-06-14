@@ -33,7 +33,7 @@ KShapeRubberSelectStrategy::KShapeRubberSelectStrategy(KoToolBase *tool, const Q
     : KInteractionStrategy(*(new KShapeRubberSelectStrategyPrivate(tool)))
 {
     Q_D(KShapeRubberSelectStrategy);
-    d->snapGuide->enableSnapStrategies(KoSnapGuide::GridSnapping);
+    d->snapGuide->enableSnapStrategies(KSnapGuide::GridSnapping);
     d->snapGuide->enableSnapping(useSnapToGrid);
 
     d->selectRect = QRectF(d->snapGuide->snap(clicked, 0), QSizeF(0, 0));

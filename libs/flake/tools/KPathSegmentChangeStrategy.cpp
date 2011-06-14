@@ -21,7 +21,7 @@
 #include "KPathShape.h"
 #include "KPathPoint.h"
 #include "KPathTool_p.h"
-#include "KoSnapGuide.h"
+#include "KSnapGuide.h"
 #include "commands/KPathControlPointMoveCommand.h"
 #include "commands/KPathSegmentTypeCommand.h"
 #include <KCanvasBase.h>

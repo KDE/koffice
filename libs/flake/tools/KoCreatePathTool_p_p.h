@@ -125,7 +125,7 @@ class AngleSnapStrategy : public KoSnapStrategy
 {
 public:
     AngleSnapStrategy(qreal angleStep)
-    : KoSnapStrategy(KoSnapGuide::CustomSnapping), m_angleStep(angleStep), m_active(false)
+    : KoSnapStrategy(KSnapGuide::CustomSnapping), m_angleStep(angleStep), m_active(false)
     {
     }
 

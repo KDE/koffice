@@ -33,14 +33,14 @@
 
 
 #include "KInteractionStrategy_p.h"
-#include "KoSnapGuide.h"
+#include "KSnapGuide.h"
 
 class KShapeRubberSelectStrategyPrivate : public KInteractionStrategyPrivate
 {
 public:
     KShapeRubberSelectStrategyPrivate(KoToolBase *owner)
         : KInteractionStrategyPrivate(owner),
-        snapGuide(new KoSnapGuide(owner->canvas()))
+        snapGuide(new KSnapGuide(owner->canvas()))
     {
     }
 
@@ -60,7 +60,7 @@ public:
 
     QRectF selectRect;
     QPointF lastPos;
-    KoSnapGuide *snapGuide;
+    KSnapGuide *snapGuide;
 };
 
 #endif

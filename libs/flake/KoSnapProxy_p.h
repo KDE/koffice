@@ -31,7 +31,7 @@
 //
 
 
-class KoSnapGuide;
+class KSnapGuide;
 class KShape;
 class KPathSegment;
 class KCanvasBase;
@@ -46,7 +46,7 @@ class KCanvasBase;
 class KoSnapProxy
 {
 public:
-    KoSnapProxy(KoSnapGuide *snapGuide);
+    KoSnapProxy(KSnapGuide *snapGuide);
 
     /// returns list of points in given rectangle in document coordinates
     QList<QPointF> pointsInRect(const QRectF &rect);
@@ -67,7 +67,7 @@ public:
     KCanvasBase *canvas();
 
 private:
-    KoSnapGuide *m_snapGuide;
+    KSnapGuide *m_snapGuide;
 };
 
 #endif

@@ -18,13 +18,13 @@
  */
 
 #include "KoSnapProxy_p.h"
-#include "KoSnapGuide.h"
+#include "KSnapGuide.h"
 #include "KCanvasBase.h"
 #include "KShapeManager.h"
 #include "KPathShape.h"
 #include "KPathPoint.h"
 
-KoSnapProxy::KoSnapProxy(KoSnapGuide *snapGuide)
+KoSnapProxy::KoSnapProxy(KSnapGuide *snapGuide)
         : m_snapGuide(snapGuide)
 {
 }

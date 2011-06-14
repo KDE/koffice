@@ -44,9 +44,9 @@ class KCanvasBase;
  * The snap guide does not know anything about the specific snapping target. This
  * is handled by the different snapping strategies which are derived from KoSnapStrategy.
  * Snapping strategies can be enabled/disabled by passing a mask of corresponding
- * snapping ids to KoSnapGuide::enableSnapStrategies. There can be one or more snapping
+ * snapping ids to KSnapGuide::enableSnapStrategies. There can be one or more snapping
  * strategies enabled at the same time. The best result (with the nearest distance to the
- * original position) is then returned to the caller of KoSnapGuide::snap.
+ * original position) is then returned to the caller of KSnapGuide::snap.
  *
  * The snap guide is part of the KCanvasBase class and thus can be accessed by any tool
  * or application via the canvas pointer.
@@ -54,7 +54,7 @@ class KCanvasBase;
  * widget in guiutils.
  *
  */
-class FLAKE_EXPORT KoSnapGuide
+class FLAKE_EXPORT KSnapGuide
 {
 public:
     /// the different possible snap Strategies
@@ -72,9 +72,9 @@ public:
     Q_DECLARE_FLAGS(Strategies, Strategy)
 
     /// Creates the snap guide to work on the given canvas
-    KoSnapGuide(KCanvasBase *canvas);
+    KSnapGuide(KCanvasBase *canvas);
 
-    virtual ~KoSnapGuide();
+    virtual ~KSnapGuide();
 
     /// snaps the mouse position, returns if mouse was snapped
     QPointF snap(const QPointF &mousePosition, Qt::KeyboardModifiers modifiers);
@@ -95,7 +95,7 @@ public:
     void enableSnapStrategies(Strategies strategies);
 
     /// returns the enabled snap strategies
-    KoSnapGuide::Strategies enabledSnapStrategies() const;
+    KSnapGuide::Strategies enabledSnapStrategies() const;
 
     /**
      * Adds a custom snap strategy
@@ -140,6 +140,6 @@ private:
     Private * const d;
 };
 
-Q_DECLARE_OPERATORS_FOR_FLAGS(KoSnapGuide::Strategies)
+Q_DECLARE_OPERATORS_FOR_FLAGS(KSnapGuide::Strategies)
 
 #endif // KOSNAPGUIDE_H

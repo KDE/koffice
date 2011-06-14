@@ -27,7 +27,7 @@
 #include <KResourceManager.h>
 #include <commands/KShapeSizeCommand.h>
 #include <commands/KShapeTransformCommand.h>
-#include <KoSnapGuide.h>
+#include <KSnapGuide.h>
 #include <KoToolBase.h>
 
 #include <klocale.h>

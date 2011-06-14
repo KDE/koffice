@@ -81,7 +81,7 @@ set(flake_SRCS
     KDragOdfSaveHelper.cpp
     KShapeOdfSaveHelper.cpp
     KShapePaste.cpp
-    KoSnapGuide.cpp
+    KSnapGuide.cpp
     KoSnapProxy.cpp
     KoSnapStrategy.cpp
     SnapGuideConfigWidget.cpp
@@ -292,7 +292,7 @@ install(
     KShapeUserData.h
     KSharedLoadingData.h
     KSharedSavingData.h
-    KoSnapGuide.h
+    KSnapGuide.h
     KoToolBase.h
     KoToolFactoryBase.h
     KoToolManager.h

@@ -100,7 +100,7 @@
 #include <KCutController.h>
 #include <KCopyController.h>
 #include <KPasteController.h>
-#include <KoSnapGuide.h>
+#include <KSnapGuide.h>
 #include <KShapeFactoryBase.h>
 #include <KShapeRegistry.h>
 #include <KImageCollection.h>
@@ -720,8 +720,8 @@ void KarbonView::pathSnapToGrid()
     // enable grid snapping
     part()->gridData().setSnapToGrid(true);
 
-    KoSnapGuide snapGuide(d->canvas);
-    snapGuide.enableSnapStrategies(KoSnapGuide::GridSnapping);
+    KSnapGuide snapGuide(d->canvas);
+    snapGuide.enableSnapStrategies(KSnapGuide::GridSnapping);
     snapGuide.setSnapDistance(INT_MAX);
 
     foreach(KShape* shape, selectedShapes) {

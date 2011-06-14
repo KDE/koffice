@@ -26,7 +26,7 @@
 #include <KoToolBase.h>
 #include <KCanvasBase.h>
 #include <KoViewConverter.h>
-#include <KoSnapGuide.h>
+#include <KSnapGuide.h>
 
 #include <QLineF>
 #include <KDebug>

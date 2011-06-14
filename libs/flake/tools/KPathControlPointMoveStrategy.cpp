@@ -20,7 +20,7 @@
 
 #include "KPathControlPointMoveStrategy_p.h"
 #include "KCanvasBase.h"
-#include "KoSnapGuide.h"
+#include "KSnapGuide.h"
 
 #include "KPathTool_p.h"
 #include "commands/KPathControlPointMoveCommand.h"

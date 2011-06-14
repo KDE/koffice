@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoSnapGuide.h"
+#include "KSnapGuide.h"
 #include "KoSnapProxy_p.h"
 #include "KoSnapStrategy_p.h"
 
@@ -32,7 +32,7 @@
 #include <math.h>
 
 
-class KoSnapGuide::Private
+class KSnapGuide::Private
 {
 public:
     Private(KCanvasBase *parentCanvas)
@@ -54,14 +54,14 @@ public:
     QList<KoSnapStrategy*> strategies;
     KoSnapStrategy *currentStrategy;
 
-    KoSnapGuide::Strategies usedStrategies;
+    KSnapGuide::Strategies usedStrategies;
     bool active;
     int snapDistance;
     QList<KPathPoint*> ignoredPoints;
     QList<KShape*> ignoredShapes;
 };
 
-KoSnapGuide::KoSnapGuide(KCanvasBase *canvas)
+KSnapGuide::KSnapGuide(KCanvasBase *canvas)
     : d(new Private(canvas))
 {
     d->strategies.append(new GridSnapStrategy());
@@ -73,32 +73,32 @@ KoSnapGuide::KoSnapGuide(KCanvasBase *canvas)
     d->strategies.append(new LineGuideSnapStrategy());
 }
 
-KoSnapGuide::~KoSnapGuide()
+KSnapGuide::~KSnapGuide()
 {
     delete d;
 }
 
-void KoSnapGuide::setEditedShape(KShape *shape)
+void KSnapGuide::setEditedShape(KShape *shape)
 {
     d->editedShape = shape;
 }
 
-KShape *KoSnapGuide::editedShape() const
+KShape *KSnapGuide::editedShape() const
 {
     return d->editedShape;
 }
 
-void KoSnapGuide::enableSnapStrategies(Strategies strategies)
+void KSnapGuide::enableSnapStrategies(Strategies strategies)
 {
     d->usedStrategies = strategies;
 }
 
-KoSnapGuide::Strategies KoSnapGuide::enabledSnapStrategies() const
+KSnapGuide::Strategies KSnapGuide::enabledSnapStrategies() const
 {
     return d->usedStrategies;
 }
 
-bool KoSnapGuide::addCustomSnapStrategy(KoSnapStrategy *customStrategy)
+bool KSnapGuide::addCustomSnapStrategy(KoSnapStrategy *customStrategy)
 {
     if (!customStrategy || customStrategy->type() != CustomSnapping)
         return false;
@@ -107,27 +107,27 @@ bool KoSnapGuide::addCustomSnapStrategy(KoSnapStrategy *customStrategy)
     return true;
 }
 
-void KoSnapGuide::enableSnapping(bool on)
+void KSnapGuide::enableSnapping(bool on)
 {
     d->active = on;
 }
 
-bool KoSnapGuide::isSnapping() const
+bool KSnapGuide::isSnapping() const
 {
     return d->active;
 }
 
-void KoSnapGuide::setSnapDistance(int distance)
+void KSnapGuide::setSnapDistance(int distance)
 {
     d->snapDistance = qAbs(distance);
 }
 
-int KoSnapGuide::snapDistance() const
+int KSnapGuide::snapDistance() const
 {
     return d->snapDistance;
 }
 
-QPointF KoSnapGuide::snap(const QPointF &mousePosition, Qt::KeyboardModifiers modifiers)
+QPointF KSnapGuide::snap(const QPointF &mousePosition, Qt::KeyboardModifiers modifiers)
 {
     d->currentStrategy = 0;
 
@@ -162,7 +162,7 @@ QPointF KoSnapGuide::snap(const QPointF &mousePosition, Qt::KeyboardModifiers mo
     return d->currentStrategy->snappedPosition();
 }
 
-QRectF KoSnapGuide::boundingRect()
+QRectF KSnapGuide::boundingRect()
 {
     QRectF rect;
 
@@ -174,7 +174,7 @@ QRectF KoSnapGuide::boundingRect()
     }
 }
 
-void KoSnapGuide::paint(QPainter &painter, const KoViewConverter &converter)
+void KSnapGuide::paint(QPainter &painter, const KoViewConverter &converter)
 {
     if (! d->currentStrategy || ! d->active)
         return;
@@ -194,32 +194,32 @@ void KoSnapGuide::paint(QPainter &painter, const KoViewConverter &converter)
     painter.drawPath(decoration);
 }
 
-KCanvasBase *KoSnapGuide::canvas() const
+KCanvasBase *KSnapGuide::canvas() const
 {
     return d->canvas;
 }
 
-void KoSnapGuide::setIgnoredPathPoints(const QList<KPathPoint*> &ignoredPoints)
+void KSnapGuide::setIgnoredPathPoints(const QList<KPathPoint*> &ignoredPoints)
 {
     d->ignoredPoints = ignoredPoints;
 }
 
-QList<KPathPoint*> KoSnapGuide::ignoredPathPoints() const
+QList<KPathPoint*> KSnapGuide::ignoredPathPoints() const
 {
     return d->ignoredPoints;
 }
 
-void KoSnapGuide::setIgnoredShapes(const QList<KShape*> &ignoredShapes)
+void KSnapGuide::setIgnoredShapes(const QList<KShape*> &ignoredShapes)
 {
     d->ignoredShapes = ignoredShapes;
 }
 
-QList<KShape*> KoSnapGuide::ignoredShapes() const
+QList<KShape*> KSnapGuide::ignoredShapes() const
 {
     return d->ignoredShapes;
 }
 
-void KoSnapGuide::reset()
+void KSnapGuide::reset()
 {
     d->currentStrategy = 0;
     d->editedShape = 0;
