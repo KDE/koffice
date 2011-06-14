@@ -25,7 +25,7 @@
 
 #define ConvolveMatrixEffectId "feConvolveMatrix"
 
-class KoFilterEffectLoadingContext;
+class KFilterEffectLoadingContext;
 
 /// A convolve matrix effect
 class ConvolveMatrixEffect : public KFilterEffect
@@ -85,7 +85,7 @@ public:
     /// reimplemented from KFilterEffect
     virtual QImage processImage(const QImage &image, const KoFilterEffectRenderContext &context) const;
     /// reimplemented from KFilterEffect
-    virtual bool load(const KXmlElement &element, const KoFilterEffectLoadingContext &context);
+    virtual bool load(const KXmlElement &element, const KFilterEffectLoadingContext &context);
     /// reimplemented from KFilterEffect
     virtual void save(KXmlWriter &writer);
 

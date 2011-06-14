@@ -19,7 +19,7 @@
 
 #include "MorphologyEffect.h"
 #include "KoFilterEffectRenderContext.h"
-#include "KoFilterEffectLoadingContext.h"
+#include "KFilterEffectLoadingContext.h"
 #include "KoViewConverter.h"
 #include "KXmlWriter.h"
 #include "KXmlReader.h"
@@ -123,7 +123,7 @@ QImage MorphologyEffect::processImage(const QImage &image, const KoFilterEffectR
     return result;
 }
 
-bool MorphologyEffect::load(const KXmlElement &element, const KoFilterEffectLoadingContext &context)
+bool MorphologyEffect::load(const KXmlElement &element, const KFilterEffectLoadingContext &context)
 {
     if (element.tagName() != id())
         return false;

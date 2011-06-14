@@ -27,17 +27,17 @@ class QString;
 class QPointF;
 
 /// This class provides a loading context for filter effects
-class FLAKE_EXPORT KoFilterEffectLoadingContext
+class FLAKE_EXPORT KFilterEffectLoadingContext
 {
 public:
     /**
     * Constructs a new filter effect loading context
     * @param basePath the xml document base path
     */
-    KoFilterEffectLoadingContext(const QString &basePath);
+    KFilterEffectLoadingContext(const QString &basePath);
 
     /// Destructor
-    virtual ~KoFilterEffectLoadingContext();
+    virtual ~KFilterEffectLoadingContext();
 
     /**
      * Sets the bounding box of the shape a filter is loaded for.

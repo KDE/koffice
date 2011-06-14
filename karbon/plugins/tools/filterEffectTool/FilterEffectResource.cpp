@@ -21,7 +21,7 @@
 #include <KFilterEffect.h>
 #include <KoFilterEffectStack.h>
 #include <KoFilterEffectRegistry.h>
-#include <KoFilterEffectLoadingContext.h>
+#include <KFilterEffectLoadingContext.h>
 #include <KXmlWriter.h>
 
 #include <KDebug>
@@ -132,7 +132,7 @@ KoFilterEffectStack * FilterEffectResource::toFilterStack() const
     filterRegion.setHeight(fromPercentage(e.attribute("height", "1.2")));
     filterStack->setClipRect(filterRegion);
 
-    KoFilterEffectLoadingContext context(QString(""));
+    KFilterEffectLoadingContext context(QString(""));
 
     KoFilterEffectRegistry * registry = KoFilterEffectRegistry::instance();
 

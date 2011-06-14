@@ -125,7 +125,7 @@ QImage BlendEffect::processImages(const QList<QImage> &images, const KoFilterEff
     return result;
 }
 
-bool BlendEffect::load(const KXmlElement &element, const KoFilterEffectLoadingContext &)
+bool BlendEffect::load(const KXmlElement &element, const KFilterEffectLoadingContext &)
 {
     if (element.tagName() != id())
         return false;

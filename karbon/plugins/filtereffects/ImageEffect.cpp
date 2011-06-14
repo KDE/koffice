@@ -19,7 +19,7 @@
 
 #include "ImageEffect.h"
 #include "KoFilterEffectRenderContext.h"
-#include "KoFilterEffectLoadingContext.h"
+#include "KFilterEffectLoadingContext.h"
 #include "KoViewConverter.h"
 #include "KXmlWriter.h"
 #include "KXmlReader.h"
@@ -58,7 +58,7 @@ QImage ImageEffect::processImage(const QImage &image, const KoFilterEffectRender
     return result;
 }
 
-bool ImageEffect::load(const KXmlElement &element, const KoFilterEffectLoadingContext &context)
+bool ImageEffect::load(const KXmlElement &element, const KFilterEffectLoadingContext &context)
 {
     if (element.tagName() != id())
         return false;

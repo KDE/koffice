@@ -31,7 +31,7 @@ public:
     virtual ~WatermarkFilterEffect();
 
     virtual void save(KXmlWriter& writer);
-    virtual bool load(const KXmlElement& element, const KoFilterEffectLoadingContext& context);
+    virtual bool load(const KXmlElement& element, const KFilterEffectLoadingContext& context);
     virtual QImage processImage(const QImage& image, const KoFilterEffectRenderContext& context) const;
 };
 

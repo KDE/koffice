@@ -19,7 +19,7 @@
 
 #include "ConvolveMatrixEffect.h"
 #include "KoFilterEffectRenderContext.h"
-#include "KoFilterEffectLoadingContext.h"
+#include "KFilterEffectLoadingContext.h"
 #include "KoViewConverter.h"
 #include "KXmlWriter.h"
 #include "KXmlReader.h"
@@ -234,7 +234,7 @@ QImage ConvolveMatrixEffect::processImage(const QImage &image, const KoFilterEff
     return result;
 }
 
-bool ConvolveMatrixEffect::load(const KXmlElement &element, const KoFilterEffectLoadingContext &/*context*/)
+bool ConvolveMatrixEffect::load(const KXmlElement &element, const KFilterEffectLoadingContext &/*context*/)
 {
     if (element.tagName() != id())
         return false;

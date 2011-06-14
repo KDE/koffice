@@ -51,7 +51,7 @@
 #include <KoFilterEffectRegistry.h>
 #include <KFilterEffect.h>
 #include "KoFilterEffectStack.h"
-#include "KoFilterEffectLoadingContext.h"
+#include "KFilterEffectLoadingContext.h"
 
 #include <KDebug>
 
@@ -1261,7 +1261,7 @@ void SvgParser::applyFilter(KoShape * shape)
     objectFilterRegion.setTopLeft(SvgUtil::userSpaceToObject(filterRegion.topLeft(), bound));
     objectFilterRegion.setSize(SvgUtil::userSpaceToObject(filterRegion.size(), bound));
 
-    KoFilterEffectLoadingContext context(gc->xmlBaseDir.isEmpty() ? m_xmlBaseDir : gc->xmlBaseDir);
+    KFilterEffectLoadingContext context(gc->xmlBaseDir.isEmpty() ? m_xmlBaseDir : gc->xmlBaseDir);
     context.setShapeBoundingBox(bound);
     // enable units conversion
     context.enableFilterUnitsConversion(filter->filterUnits() == SvgFilterHelper::UserSpaceOnUse);

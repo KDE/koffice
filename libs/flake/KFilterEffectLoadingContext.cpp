@@ -17,14 +17,14 @@
 * Boston, MA 02110-1301, USA.
 */
 
-#include "KoFilterEffectLoadingContext.h"
+#include "KFilterEffectLoadingContext.h"
 
 #include <QtCore/QString>
 #include <QtCore/QRectF>
 #include <QtCore/QFileInfo>
 #include <QtCore/QDir>
 
-class KoFilterEffectLoadingContext::Private
+class KFilterEffectLoadingContext::Private
 {
 public:
     Private()
@@ -36,33 +36,33 @@ public:
     bool convertFilterPrimitiveUnits;
 };
 
-KoFilterEffectLoadingContext::KoFilterEffectLoadingContext(const QString &basePath)
+KFilterEffectLoadingContext::KFilterEffectLoadingContext(const QString &basePath)
     : d(new Private())
 {
     d->basePath = basePath;
 }
 
-KoFilterEffectLoadingContext::~KoFilterEffectLoadingContext()
+KFilterEffectLoadingContext::~KFilterEffectLoadingContext()
 {
     delete d;
 }
 
-void KoFilterEffectLoadingContext::setShapeBoundingBox(const QRectF &shapeBound)
+void KFilterEffectLoadingContext::setShapeBoundingBox(const QRectF &shapeBound)
 {
     d->shapeBound = shapeBound;
 }
 
-void KoFilterEffectLoadingContext::enableFilterUnitsConversion(bool enable)
+void KFilterEffectLoadingContext::enableFilterUnitsConversion(bool enable)
 {
     d->convertFilterUnits = enable;
 }
 
-void KoFilterEffectLoadingContext::enableFilterPrimitiveUnitsConversion(bool enable)
+void KFilterEffectLoadingContext::enableFilterPrimitiveUnitsConversion(bool enable)
 {
     d->convertFilterPrimitiveUnits = enable;
 }
 
-QPointF KoFilterEffectLoadingContext::convertFilterUnits(const QPointF &value) const
+QPointF KFilterEffectLoadingContext::convertFilterUnits(const QPointF &value) const
 {
     if (!d->convertFilterUnits)
         return value;
@@ -70,7 +70,7 @@ QPointF KoFilterEffectLoadingContext::convertFilterUnits(const QPointF &value) c
     return QPointF(convertFilterUnitsX(value.x()), convertFilterUnitsY(value.y()));
 }
 
-qreal KoFilterEffectLoadingContext::convertFilterUnitsX(qreal value) const
+qreal KFilterEffectLoadingContext::convertFilterUnitsX(qreal value) const
 {
     if (!d->convertFilterUnits)
         return value;
@@ -78,7 +78,7 @@ qreal KoFilterEffectLoadingContext::convertFilterUnitsX(qreal value) const
     return value / d->shapeBound.width();
 }
 
-qreal KoFilterEffectLoadingContext::convertFilterUnitsY(qreal value) const
+qreal KFilterEffectLoadingContext::convertFilterUnitsY(qreal value) const
 {
     if (!d->convertFilterUnits)
         return value;
@@ -86,7 +86,7 @@ qreal KoFilterEffectLoadingContext::convertFilterUnitsY(qreal value) const
     return value / d->shapeBound.height();
 }
 
-QPointF KoFilterEffectLoadingContext::convertFilterPrimitiveUnits(const QPointF &value) const
+QPointF KFilterEffectLoadingContext::convertFilterPrimitiveUnits(const QPointF &value) const
 {
     if (!d->convertFilterPrimitiveUnits)
         return value;
@@ -94,7 +94,7 @@ QPointF KoFilterEffectLoadingContext::convertFilterPrimitiveUnits(const QPointF 
     return QPointF(convertFilterPrimitiveUnitsX(value.x()), convertFilterPrimitiveUnitsY(value.y()));
 }
 
-qreal KoFilterEffectLoadingContext::convertFilterPrimitiveUnitsX(qreal value) const
+qreal KFilterEffectLoadingContext::convertFilterPrimitiveUnitsX(qreal value) const
 {
     if (!d->convertFilterPrimitiveUnits)
         return value;
@@ -102,7 +102,7 @@ qreal KoFilterEffectLoadingContext::convertFilterPrimitiveUnitsX(qreal value) co
     return value / d->shapeBound.width();
 }
 
-qreal KoFilterEffectLoadingContext::convertFilterPrimitiveUnitsY(qreal value) const
+qreal KFilterEffectLoadingContext::convertFilterPrimitiveUnitsY(qreal value) const
 {
     if (!d->convertFilterPrimitiveUnits)
         return value;
@@ -110,7 +110,7 @@ qreal KoFilterEffectLoadingContext::convertFilterPrimitiveUnitsY(qreal value) co
     return value / d->shapeBound.height();
 }
 
-QString KoFilterEffectLoadingContext::pathFromHref(const QString &href) const
+QString KFilterEffectLoadingContext::pathFromHref(const QString &href) const
 {
     QFileInfo info(href);
     if (! info.isRelative())

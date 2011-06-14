@@ -51,7 +51,7 @@ KoFilterEffectRegistry* KoFilterEffectRegistry::instance()
     return s_instance;
 }
 
-KFilterEffect * KoFilterEffectRegistry::createFilterEffectFromXml(const KXmlElement & element, const KoFilterEffectLoadingContext &context)
+KFilterEffect * KoFilterEffectRegistry::createFilterEffectFromXml(const KXmlElement & element, const KFilterEffectLoadingContext &context)
 {
     KFilterEffectFactoryBase * factory = get(element.tagName());
     if (!factory)

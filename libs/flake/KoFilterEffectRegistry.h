@@ -28,7 +28,7 @@
 #include "flake_export.h"
 
 class KXmlElement;
-class KoFilterEffectLoadingContext;
+class KFilterEffectLoadingContext;
 
 class FLAKE_EXPORT KoFilterEffectRegistry : public QObject, public KoGenericRegistry<KFilterEffectFactoryBase*>
 {
@@ -48,7 +48,7 @@ public:
      * @param element the xml element to load form
      * @return the created filter effect if successful, otherwise returns 0
      */
-    KFilterEffect *createFilterEffectFromXml(const KXmlElement &element, const KoFilterEffectLoadingContext &context);
+    KFilterEffect *createFilterEffectFromXml(const KXmlElement &element, const KFilterEffectLoadingContext &context);
 
 private:
     KoFilterEffectRegistry();

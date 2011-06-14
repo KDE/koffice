@@ -19,7 +19,7 @@
 
 #include "OffsetEffect.h"
 #include "KoFilterEffectRenderContext.h"
-#include "KoFilterEffectLoadingContext.h"
+#include "KFilterEffectLoadingContext.h"
 #include "KoViewConverter.h"
 #include "KXmlWriter.h"
 #include "KXmlReader.h"
@@ -61,7 +61,7 @@ QImage OffsetEffect::processImage(const QImage &image, const KoFilterEffectRende
     return result;
 }
 
-bool OffsetEffect::load(const KXmlElement &element, const KoFilterEffectLoadingContext &context)
+bool OffsetEffect::load(const KXmlElement &element, const KFilterEffectLoadingContext &context)
 {
     if (element.tagName() != id())
         return false;

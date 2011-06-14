@@ -186,7 +186,7 @@ qreal ComponentTransferEffect::transferChannel(Channel channel, qreal value) con
     return value;
 }
 
-bool ComponentTransferEffect::load(const KXmlElement &element, const KoFilterEffectLoadingContext &)
+bool ComponentTransferEffect::load(const KXmlElement &element, const KFilterEffectLoadingContext &)
 {
     if (element.tagName() != id())
         return false;
