@@ -140,7 +140,7 @@ public:
         m_angleStep = qAbs(angleStep);
     }
 
-    virtual bool snap(const QPointF &mousePosition, KoSnapProxy * proxy, qreal maxSnapDistance)
+    virtual bool snap(const QPointF &mousePosition, KSnapProxy * proxy, qreal maxSnapDistance)
     {
         Q_UNUSED(proxy);
 

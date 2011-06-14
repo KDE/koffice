@@ -18,7 +18,7 @@
  */
 
 #include "KoSnapStrategy_p.h"
-#include "KoSnapProxy_p.h"
+#include "KSnapProxy_p.h"
 #include "KSnapGuide.h"
 #include <KPathShape.h>
 #include <KPathPoint.h>
@@ -69,7 +69,7 @@ OrthogonalSnapStrategy::OrthogonalSnapStrategy()
 {
 }
 
-bool OrthogonalSnapStrategy::snap(const QPointF &mousePosition, KoSnapProxy * proxy, qreal maxSnapDistance)
+bool OrthogonalSnapStrategy::snap(const QPointF &mousePosition, KSnapProxy * proxy, qreal maxSnapDistance)
 {
     QPointF horzSnap, vertSnap;
     qreal minVertDist = HUGE_VAL;
@@ -135,7 +135,7 @@ NodeSnapStrategy::NodeSnapStrategy()
 {
 }
 
-bool NodeSnapStrategy::snap(const QPointF &mousePosition, KoSnapProxy * proxy, qreal maxSnapDistance)
+bool NodeSnapStrategy::snap(const QPointF &mousePosition, KSnapProxy * proxy, qreal maxSnapDistance)
 {
     qreal maxDistance = maxSnapDistance * maxSnapDistance;
     qreal minDistance = HUGE_VAL;
@@ -173,7 +173,7 @@ ExtensionSnapStrategy::ExtensionSnapStrategy()
 {
 }
 
-bool ExtensionSnapStrategy::snap(const QPointF &mousePosition, KoSnapProxy * proxy, qreal maxSnapDistance)
+bool ExtensionSnapStrategy::snap(const QPointF &mousePosition, KSnapProxy * proxy, qreal maxSnapDistance)
 {
     qreal maxDistance = maxSnapDistance * maxSnapDistance;
     qreal minDistances[2] = { HUGE_VAL, HUGE_VAL };
@@ -361,7 +361,7 @@ IntersectionSnapStrategy::IntersectionSnapStrategy()
 {
 }
 
-bool IntersectionSnapStrategy::snap(const QPointF &mousePosition, KoSnapProxy *proxy, qreal maxSnapDistance)
+bool IntersectionSnapStrategy::snap(const QPointF &mousePosition, KSnapProxy *proxy, qreal maxSnapDistance)
 {
     qreal maxDistance = maxSnapDistance * maxSnapDistance;
     qreal minDistance = HUGE_VAL;
@@ -410,7 +410,7 @@ GridSnapStrategy::GridSnapStrategy()
 {
 }
 
-bool GridSnapStrategy::snap(const QPointF &mousePosition, KoSnapProxy *proxy, qreal maxSnapDistance)
+bool GridSnapStrategy::snap(const QPointF &mousePosition, KSnapProxy *proxy, qreal maxSnapDistance)
 {
     if (! proxy->canvas()->snapToGrid())
         return false;
@@ -473,7 +473,7 @@ BoundingBoxSnapStrategy::BoundingBoxSnapStrategy()
 {
 }
 
-bool BoundingBoxSnapStrategy::snap(const QPointF &mousePosition, KoSnapProxy *proxy, qreal maxSnapDistance)
+bool BoundingBoxSnapStrategy::snap(const QPointF &mousePosition, KSnapProxy *proxy, qreal maxSnapDistance)
 {
     qreal maxDistance = maxSnapDistance * maxSnapDistance;
     qreal minDistance = HUGE_VAL;
@@ -558,7 +558,7 @@ LineGuideSnapStrategy::LineGuideSnapStrategy()
 {
 }
 
-bool LineGuideSnapStrategy::snap(const QPointF &mousePosition, KoSnapProxy * proxy, qreal maxSnapDistance)
+bool LineGuideSnapStrategy::snap(const QPointF &mousePosition, KSnapProxy * proxy, qreal maxSnapDistance)
 {
     KGuidesData * guidesData = proxy->canvas()->guidesData();
     if (! guidesData || ! guidesData->showGuideLines())

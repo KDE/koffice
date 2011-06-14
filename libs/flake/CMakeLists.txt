@@ -82,7 +82,7 @@ set(flake_SRCS
     KShapeOdfSaveHelper.cpp
     KShapePaste.cpp
     KSnapGuide.cpp
-    KoSnapProxy.cpp
+    KSnapProxy.cpp
     KoSnapStrategy.cpp
     SnapGuideConfigWidget.cpp
     KShapeShadow.cpp

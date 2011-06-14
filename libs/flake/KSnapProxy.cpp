@@ -17,19 +17,19 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoSnapProxy_p.h"
+#include "KSnapProxy_p.h"
 #include "KSnapGuide.h"
 #include "KCanvasBase.h"
 #include "KShapeManager.h"
 #include "KPathShape.h"
 #include "KPathPoint.h"
 
-KoSnapProxy::KoSnapProxy(KSnapGuide *snapGuide)
+KSnapProxy::KSnapProxy(KSnapGuide *snapGuide)
         : m_snapGuide(snapGuide)
 {
 }
 
-QList<QPointF> KoSnapProxy::pointsInRect(const QRectF &rect)
+QList<QPointF> KSnapProxy::pointsInRect(const QRectF &rect)
 {
     QList<QPointF> points;
     QList<KShape*> shapes = shapesInRect(rect);
@@ -43,7 +43,7 @@ QList<QPointF> KoSnapProxy::pointsInRect(const QRectF &rect)
     return points;
 }
 
-QList<KShape*> KoSnapProxy::shapesInRect(const QRectF &rect, bool omitEditedShape)
+QList<KShape*> KSnapProxy::shapesInRect(const QRectF &rect, bool omitEditedShape)
 {
     QList<KShape*> shapes = m_snapGuide->canvas()->shapeManager()->shapesAt(rect);
     foreach(KShape * shape, m_snapGuide->ignoredShapes()) {
@@ -59,7 +59,7 @@ QList<KShape*> KoSnapProxy::shapesInRect(const QRectF &rect, bool omitEditedShap
     return shapes;
 }
 
-QList<QPointF> KoSnapProxy::pointsFromShape(KShape *shape)
+QList<QPointF> KSnapProxy::pointsFromShape(KShape *shape)
 {
     QList<QPointF> snapPoints;
     // no snapping to hidden shapes
@@ -95,7 +95,7 @@ QList<QPointF> KoSnapProxy::pointsFromShape(KShape *shape)
     return snapPoints;
 }
 
-QList<KPathSegment> KoSnapProxy::segmentsInRect(const QRectF &rect)
+QList<KPathSegment> KSnapProxy::segmentsInRect(const QRectF &rect)
 {
     QList<KShape*> shapes = shapesInRect(rect, true);
     QList<KPathPoint*> ignoredPoints = m_snapGuide->ignoredPathPoints();
@@ -120,7 +120,7 @@ QList<KPathSegment> KoSnapProxy::segmentsInRect(const QRectF &rect)
     return segments;
 }
 
-QList<KShape*> KoSnapProxy::shapes(bool omitEditedShape)
+QList<KShape*> KSnapProxy::shapes(bool omitEditedShape)
 {
     QList<KShape*> allShapes = m_snapGuide->canvas()->shapeManager()->shapes();
     QList<KShape*> filteredShapes;
@@ -141,7 +141,7 @@ QList<KShape*> KoSnapProxy::shapes(bool omitEditedShape)
     return filteredShapes;
 }
 
-KCanvasBase *KoSnapProxy::canvas()
+KCanvasBase *KSnapProxy::canvas()
 {
     return m_snapGuide->canvas();
 }

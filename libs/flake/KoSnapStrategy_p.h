@@ -38,7 +38,7 @@
 #include <QtGui/QPainterPath>
 
 class KPathPoint;
-class KoSnapProxy;
+class KSnapProxy;
 class KoViewConverter;
 
 class KoSnapStrategy
@@ -47,7 +47,7 @@ public:
     KoSnapStrategy(KSnapGuide::Strategy type);
     virtual ~KoSnapStrategy() {};
 
-    virtual bool snap(const QPointF &mousePosition, KoSnapProxy * proxy, qreal maxSnapDistance) = 0;
+    virtual bool snap(const QPointF &mousePosition, KSnapProxy * proxy, qreal maxSnapDistance) = 0;
 
     /// returns the strategies type
     KSnapGuide::Strategy type() const;
@@ -75,7 +75,7 @@ class OrthogonalSnapStrategy : public KoSnapStrategy
 {
 public:
     OrthogonalSnapStrategy();
-    virtual bool snap(const QPointF &mousePosition, KoSnapProxy * proxy, qreal maxSnapDistance);
+    virtual bool snap(const QPointF &mousePosition, KSnapProxy * proxy, qreal maxSnapDistance);
     virtual QPainterPath decoration(const KoViewConverter &converter) const;
 private:
     QLineF m_hLine;
@@ -87,7 +87,7 @@ class NodeSnapStrategy : public KoSnapStrategy
 {
 public:
     NodeSnapStrategy();
-    virtual bool snap(const QPointF &mousePosition, KoSnapProxy * proxy, qreal maxSnapDistance);
+    virtual bool snap(const QPointF &mousePosition, KSnapProxy * proxy, qreal maxSnapDistance);
     virtual QPainterPath decoration(const KoViewConverter &converter) const;
 };
 
@@ -96,7 +96,7 @@ class ExtensionSnapStrategy : public KoSnapStrategy
 {
 public:
     ExtensionSnapStrategy();
-    virtual bool snap(const QPointF &mousePosition, KoSnapProxy * proxy, qreal maxSnapDistance);
+    virtual bool snap(const QPointF &mousePosition, KSnapProxy * proxy, qreal maxSnapDistance);
     virtual QPainterPath decoration(const KoViewConverter &converter) const;
 private:
     qreal project(const QPointF &lineStart , const QPointF &lineEnd, const QPointF &point);
@@ -110,7 +110,7 @@ class IntersectionSnapStrategy : public KoSnapStrategy
 {
 public:
     IntersectionSnapStrategy();
-    virtual bool snap(const QPointF &mousePosition, KoSnapProxy * proxy, qreal maxSnapDistance);
+    virtual bool snap(const QPointF &mousePosition, KSnapProxy * proxy, qreal maxSnapDistance);
     virtual QPainterPath decoration(const KoViewConverter &converter) const;
 };
 
@@ -119,7 +119,7 @@ class GridSnapStrategy : public KoSnapStrategy
 {
 public:
     GridSnapStrategy();
-    virtual bool snap(const QPointF &mousePosition, KoSnapProxy * proxy, qreal maxSnapDistance);
+    virtual bool snap(const QPointF &mousePosition, KSnapProxy * proxy, qreal maxSnapDistance);
     virtual QPainterPath decoration(const KoViewConverter &converter) const;
 };
 
@@ -128,7 +128,7 @@ class BoundingBoxSnapStrategy : public KoSnapStrategy
 {
 public:
     BoundingBoxSnapStrategy();
-    virtual bool snap(const QPointF &mousePosition, KoSnapProxy * proxy, qreal maxSnapDistance);
+    virtual bool snap(const QPointF &mousePosition, KSnapProxy * proxy, qreal maxSnapDistance);
     virtual QPainterPath decoration(const KoViewConverter &converter) const;
 private:
     qreal squareDistanceToLine(const QPointF &lineA, const QPointF &lineB, const QPointF &point, QPointF &pointOnLine);
@@ -140,7 +140,7 @@ class LineGuideSnapStrategy : public KoSnapStrategy
 {
 public:
     LineGuideSnapStrategy();
-    virtual bool snap(const QPointF &mousePosition, KoSnapProxy * proxy, qreal maxSnapDistance);
+    virtual bool snap(const QPointF &mousePosition, KSnapProxy * proxy, qreal maxSnapDistance);
     virtual QPainterPath decoration(const KoViewConverter &converter) const;
 private:
     int m_orientation;

@@ -18,7 +18,7 @@
  */
 
 #include "KSnapGuide.h"
-#include "KoSnapProxy_p.h"
+#include "KSnapProxy_p.h"
 #include "KoSnapStrategy_p.h"
 
 #include <KPathShape.h>
@@ -134,7 +134,7 @@ QPointF KSnapGuide::snap(const QPointF &mousePosition, Qt::KeyboardModifiers mod
     if (! d->active || (modifiers & Qt::ShiftModifier))
         return mousePosition;
 
-    KoSnapProxy proxy(this);
+    KSnapProxy proxy(this);
 
     qreal minDistance = HUGE_VAL;
 

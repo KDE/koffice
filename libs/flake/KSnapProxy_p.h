@@ -43,10 +43,10 @@ class KCanvasBase;
 /**
  * This class provides access to different shape related snap targets to snap strategies.
  */
-class KoSnapProxy
+class KSnapProxy
 {
 public:
-    KoSnapProxy(KSnapGuide *snapGuide);
+    KSnapProxy(KSnapGuide *snapGuide);
 
     /// returns list of points in given rectangle in document coordinates
     QList<QPointF> pointsInRect(const QRectF &rect);
