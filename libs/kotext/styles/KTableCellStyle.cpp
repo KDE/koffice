@@ -39,28 +39,28 @@
 #include <KOdfXmlNS.h>
 #include <KXmlWriter.h>
 
-KoTableCellStylePrivate::KoTableCellStylePrivate()
+KTableCellStylePrivate::KTableCellStylePrivate()
     : parentStyle(0)
     , next(0)
 {
 }
 
-KoTableCellStylePrivate::~KoTableCellStylePrivate()
+KTableCellStylePrivate::~KTableCellStylePrivate()
 {
 }
 
-void KoTableCellStylePrivate::setProperty(int key, const QVariant &value)
+void KTableCellStylePrivate::setProperty(int key, const QVariant &value)
 {
     stylesPrivate.add(key, value);
 }
 
 KTableCellStyle::KTableCellStyle(QObject *parent)
-    : KTableBorderStyle(*new KoTableCellStylePrivate(), parent)
+    : KTableBorderStyle(*new KTableCellStylePrivate(), parent)
 {
 }
 
 KTableCellStyle::KTableCellStyle(const QTextTableCellFormat &format, QObject *parent)
-    : KTableBorderStyle(*new KoTableCellStylePrivate(), format, parent)
+    : KTableBorderStyle(*new KTableCellStylePrivate(), format, parent)
 {
     Q_D(KTableCellStyle);
     d->stylesPrivate = format.properties();
@@ -550,7 +550,7 @@ void KTableCellStyle::loadOdfProperties(KOdfStyleStack &styleStack)
 void KTableCellStyle::copyProperties(const KTableCellStyle *style)
 {
     Q_D(KTableCellStyle);
-    const KoTableCellStylePrivate *styleD = static_cast<const KoTableCellStylePrivate*>(style->d_func());
+    const KTableCellStylePrivate *styleD = static_cast<const KTableCellStylePrivate*>(style->d_func());
 
     d->stylesPrivate = styleD->stylesPrivate;
     setName(style->name()); // make sure we emit property change
@@ -569,14 +569,14 @@ KTableCellStyle *KTableCellStyle::clone(QObject *parent)
 bool KTableCellStyle::operator==(const KTableCellStyle &other) const
 {
     Q_D(const KTableCellStyle);
-    const KoTableCellStylePrivate *otherD = static_cast<const KoTableCellStylePrivate*>(other.d_func());
+    const KTableCellStylePrivate *otherD = static_cast<const KTableCellStylePrivate*>(other.d_func());
     return otherD->stylesPrivate == d->stylesPrivate;
 }
 
 void KTableCellStyle::removeDuplicates(const KTableCellStyle &other)
 {
     Q_D(KTableCellStyle);
-    const KoTableCellStylePrivate *otherD = static_cast<const KoTableCellStylePrivate*>(other.d_func());
+    const KTableCellStylePrivate *otherD = static_cast<const KTableCellStylePrivate*>(other.d_func());
     d->stylesPrivate.removeDuplicates(otherD->stylesPrivate);
 }
 

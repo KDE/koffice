@@ -35,11 +35,11 @@
 
 #include "KTableBorderStyle_p.h"
 
-class KoTableCellStylePrivate : public KTableBorderStylePrivate
+class KTableCellStylePrivate : public KTableBorderStylePrivate
 {
 public:
-    KoTableCellStylePrivate();
-    virtual ~KoTableCellStylePrivate();
+    KTableCellStylePrivate();
+    virtual ~KTableCellStylePrivate();
 
     void setProperty(int key, const QVariant &value);
 

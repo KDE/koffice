@@ -42,7 +42,7 @@ class KOdfStyleStack;
 class KOdfGenericStyle;
 class KOdfGenericStyles;
 class KOdfLoadingContext;
-class KoTableCellStylePrivate;
+class KTableCellStylePrivate;
 class KXmlElement;
 
 /**
