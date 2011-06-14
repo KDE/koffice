@@ -59,7 +59,7 @@
 #include <KoTextEditingPlugin.h>
 #include <KoTextEditingRegistry.h>
 #include <KInlineTextObjectManager.h>
-#include <KoStyleManager.h>
+#include <KStyleManager.h>
 #include <KoTextOdfSaveHelper.h>
 #include <KoTextDrag.h>
 #include <KoTextDocument.h>
@@ -722,7 +722,7 @@ void TextTool::setShapeData(KoTextShapeData *data)
                 doc->setUndoRedoEnabled(false); // removes undo history
                 KoTextDocument document(doc);
                 document.clearText();
-                KoStyleManager *styleManager = document.styleManager();
+                KStyleManager *styleManager = document.styleManager();
                 if (styleManager) {
                     QTextBlock block = doc->begin();
                     styleManager->defaultParagraphStyle()->applyStyle(block);
@@ -1400,7 +1400,7 @@ void TextTool::updateStyleManager()
 {
     KoTextEditor *textEditor = m_textEditor.data();
     Q_ASSERT(textEditor);
-    KoStyleManager *styleManager = KoTextDocument(textEditor->document()).styleManager();
+    KStyleManager *styleManager = KoTextDocument(textEditor->document()).styleManager();
     emit styleManagerChanged(styleManager);
     m_changeTracker = KoTextDocument(textEditor->document()).changeTracker();
 }
@@ -1588,13 +1588,13 @@ QWidget *TextTool::createOptionWidget()
     SimpleTableWidget *stw = new SimpleTableWidget(this, 0);
     widget->addTab(stw, i18n("Table"));
 
-    connect(this, SIGNAL(styleManagerChanged(KoStyleManager *)), ssw, SLOT(setStyleManager(KoStyleManager *)));
+    connect(this, SIGNAL(styleManagerChanged(KStyleManager *)), ssw, SLOT(setStyleManager(KStyleManager *)));
     connect(this, SIGNAL(blockChanged(const QTextBlock&)), ssw, SLOT(setCurrentBlock(const QTextBlock&)));
     connect(this, SIGNAL(charFormatChanged(const QTextCharFormat &)), ssw, SLOT(setCurrentFormat(const QTextCharFormat &)));
 
     connect(ssw, SIGNAL(doneWithFocus()), this, SLOT(returnFocusToCanvas()));
 
-    connect(this, SIGNAL(styleManagerChanged(KoStyleManager *)), styles, SLOT(setStyleManager(KoStyleManager *)));
+    connect(this, SIGNAL(styleManagerChanged(KStyleManager *)), styles, SLOT(setStyleManager(KStyleManager *)));
     connect(this, SIGNAL(charFormatChanged(const QTextCharFormat &)),
             styles, SLOT(setCurrentFormat(const QTextCharFormat &)));
     connect(this, SIGNAL(blockFormatChanged(const QTextBlockFormat &)),
@@ -2024,7 +2024,7 @@ void TextTool::showStyleManager()
     KoTextEditor *textEditor = m_textEditor.data();
     if (textEditor == 0)
         return;
-    KoStyleManager *styleManager = KoTextDocument(textEditor->document()).styleManager();
+    KStyleManager *styleManager = KoTextDocument(textEditor->document()).styleManager();
     Q_ASSERT(styleManager);
     if (!styleManager)
         return;  //don't crash
@@ -2309,7 +2309,7 @@ void TextTool::debugTextDocument()
         CHARSPERLINE = 80;
     const int CHARPOSITION = 278301935;
     KoTextDocument document(textEditor->document());
-    KoStyleManager *styleManager = document.styleManager();
+    KStyleManager *styleManager = document.styleManager();
     KInlineTextObjectManager *inlineManager = document.inlineTextObjectManager();
 
     QTextBlock block = textEditor->document()->begin();
@@ -2411,7 +2411,7 @@ void TextTool::debugTextStyles()
     if (textEditor == 0)
         return;
     KoTextDocument document(textEditor->document());
-    KoStyleManager *styleManager = document.styleManager();
+    KStyleManager *styleManager = document.styleManager();
 
     QSet<int> seenStyles;
 

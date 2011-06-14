@@ -40,7 +40,7 @@ class KXmlElement;
 /**
  * A container for all properties for the table column style.
  *
- * Named column styles are stored in the KoStyleManager and automatic ones in the
+ * Named column styles are stored in the KStyleManager and automatic ones in the
  * KoTableColumnAndRowStyleManager.
  *
  * The style has a property 'StyleId' with an integer as value. The integer value
@@ -48,7 +48,7 @@ class KXmlElement;
  *
  * TODO: Make this class implicitly shared.
  *
- * @see KoStyleManager, KoTableRowAndColumnStyleManager
+ * @see KStyleManager, KoTableRowAndColumnStyleManager
  */
 class KOTEXT_EXPORT KoTableColumnStyle
 {

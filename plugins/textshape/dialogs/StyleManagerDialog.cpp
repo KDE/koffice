@@ -48,7 +48,7 @@ void StyleManagerDialog::reject()
     deleteLater();
 }
 
-void StyleManagerDialog::setStyleManager(KoStyleManager *sm)
+void StyleManagerDialog::setStyleManager(KStyleManager *sm)
 {
     m_styleManagerWidget->setStyleManager(sm);
 }

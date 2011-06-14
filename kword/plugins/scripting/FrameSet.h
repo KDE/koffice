@@ -28,7 +28,7 @@
 #include "Frame.h"
 
 #include <KShapeRegistry.h>
-#include <KoStyleManager.h>
+#include <KStyleManager.h>
 
 #include <KWTextFrame.h>
 #include <KWFrameSet.h>

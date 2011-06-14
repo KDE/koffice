@@ -27,7 +27,7 @@
 #include <KoTextWriter.h>
 #include <KoTextDocument.h>
 #include "changetracker/KChangeTracker.h"
-#include "styles/KoStyleManager.h"
+#include "styles/KStyleManager.h"
 
 #include <KDebug>
 
@@ -52,7 +52,7 @@ public:
     QDateTime date;
     bool autoNumbering;
     KInlineNote::Type type;
-    QWeakPointer<KoStyleManager> styleManager;
+    QWeakPointer<KStyleManager> styleManager;
 };
 
 KInlineNote::KInlineNote(Type type)
@@ -165,7 +165,7 @@ bool KInlineNote::loadOdf(const KXmlElement &element, KShapeLoadingContext &cont
     return loadOdf(element, context, 0, 0);
 }
 
-bool KInlineNote::loadOdf(const KXmlElement & element, KShapeLoadingContext &context, KoStyleManager *styleManager, KChangeTracker *changeTracker)
+bool KInlineNote::loadOdf(const KXmlElement & element, KShapeLoadingContext &context, KStyleManager *styleManager, KChangeTracker *changeTracker)
 {
     QTextDocument *document = new QTextDocument();
     QTextCursor cursor(document);

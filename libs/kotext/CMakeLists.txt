@@ -56,7 +56,7 @@ set(kotext_LIB_SRCS
     styles/Styles_p.cpp
     styles/KCharacterStyle.cpp
     styles/KParagraphStyle.cpp
-    styles/KoStyleManager.cpp
+    styles/KStyleManager.cpp
     styles/KListStyle.cpp
     styles/KListLevelProperties.cpp
     styles/ChangeFollower.cpp
@@ -150,7 +150,7 @@ install(
     styles/KoTableCellStyle.h
     styles/KoTableFormat.h
     styles/KSectionStyle.h
-    styles/KoStyleManager.h
+    styles/KStyleManager.h
     changetracker/KChangeTracker.h
     changetracker/KChangeTrackerElement.h
     changetracker/KDeleteChangeMarker.h

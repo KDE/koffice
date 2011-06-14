@@ -40,10 +40,10 @@ class KXmlElement;
 /**
  * A container for all properties for the table row style.
  * Each table column in the main text is based on a table row style.
- * Row styles are stored (besides in the KoStyleManager) in the KoTableColumnAndRowStyleManager.
+ * Row styles are stored (besides in the KStyleManager) in the KoTableColumnAndRowStyleManager.
  * The style has a property 'StyleId' with an integer as value.  The integer value corresponds to the styleId() output of
  * a specific KoTableRowStyle.
- * @see KoStyleManager
+ * @see KStyleManager
  * @see KoTableRowAndColumnStyleManager
  */
 class KOTEXT_EXPORT KoTableRowStyle

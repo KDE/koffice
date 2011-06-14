@@ -23,7 +23,7 @@
 #include "ParagraphBulletsNumbers.h"
 #include "ParagraphDecorations.h"
 
-#include <KoStyleManager.h>
+#include <KStyleManager.h>
 #include <KParagraphStyle.h>
 
 ParagraphGeneral::ParagraphGeneral(QWidget *parent)

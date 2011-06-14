@@ -21,7 +21,7 @@
  * Boston, MA 02110-1301, USA.
  */
 #include "KoTableRowStyle.h"
-#include "KoStyleManager.h"
+#include "KStyleManager.h"
 #include <KOdfGenericStyle.h>
 #include <KOdfGenericStyles.h>
 #include "Styles_p.h"

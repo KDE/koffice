@@ -26,7 +26,7 @@
 #include <QTextBlock>
 
 class TextTool;
-class KoStyleManager;
+class KStyleManager;
 
 class SimpleStyleWidget : public QWidget
 {
@@ -36,7 +36,7 @@ public:
 
 public slots:
     void setCurrentBlock(const QTextBlock &block);
-    void setStyleManager(KoStyleManager *sm);
+    void setStyleManager(KStyleManager *sm);
     void setCurrentFormat(const QTextCharFormat& format);
 
 signals:
@@ -58,7 +58,7 @@ private:
     void fillListsCombobox();
 
     Ui::SimpleStyleWidget widget;
-    KoStyleManager *m_styleManager;
+    KStyleManager *m_styleManager;
     bool m_blockSignals;
     bool m_comboboxHasBidiItems;
     QTextBlock m_currentBlock;

@@ -59,7 +59,7 @@
 #include "changetracker/KChangeTrackerElement.h"
 #include "changetracker/KDeleteChangeMarker.h"
 #include <KFormatChangeInformation_p.h>
-#include "styles/KoStyleManager.h"
+#include "styles/KStyleManager.h"
 #include "styles/KParagraphStyle.h"
 #include "styles/KCharacterStyle.h"
 #include "styles/KListStyle.h"
@@ -115,7 +115,7 @@ public:
     // This hash keeps all the lists that have the same style in one KoList.
     QHash<KListStyle *, KoList *> lists;
 
-    KoStyleManager *styleManager;
+    KStyleManager *styleManager;
 
     KChangeTracker *changeTracker;
 
@@ -410,7 +410,7 @@ KoTextLoader::KoTextLoader(KShapeLoadingContext &context, KShape *shape)
     if (!d->textSharedData) {
         d->textSharedData = new KoTextSharedLoadingData();
         KResourceManager *rm = context.documentResourceManager();
-        KoStyleManager *styleManager = rm->resource(KoText::StyleManager).value<KoStyleManager*>();
+        KStyleManager *styleManager = rm->resource(KoText::StyleManager).value<KStyleManager*>();
         d->textSharedData->loadOdfStyles(context, styleManager);
         if (!sharedData) {
             context.addSharedData(KOTEXT_SHARED_LOADING_ID, d->textSharedData);

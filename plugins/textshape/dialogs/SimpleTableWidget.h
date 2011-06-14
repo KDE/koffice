@@ -26,7 +26,7 @@
 #include <QTextBlock>
 
 class TextTool;
-class KoStyleManager;
+class KStyleManager;
 
 class SimpleTableWidget : public QWidget
 {
@@ -35,11 +35,11 @@ public:
     explicit SimpleTableWidget(TextTool *tool, QWidget *parent = 0);
 
 public slots:
-    void setStyleManager(KoStyleManager *sm);
+    void setStyleManager(KStyleManager *sm);
 
 private:
     Ui::SimpleTableWidget widget;
-    KoStyleManager *m_styleManager;
+    KStyleManager *m_styleManager;
     bool m_blockSignals;
     bool m_comboboxHasBidiItems;
     QTextBlock m_currentBlock;

@@ -25,7 +25,7 @@
 #include "KoTextDocument.h"
 #include "KoTextEditor.h"
 #include "KoTextDocumentLayout.h"
-#include "styles/KoStyleManager.h"
+#include "styles/KStyleManager.h"
 #include "styles/KParagraphStyle.h"
 #include "KDeleteChangeMarker.h"
 
@@ -121,7 +121,7 @@ void KoTextShapeData::setDocument(QTextDocument *document, bool transferOwnershi
     if (d->document->isEmpty() && d->document->allFormats().count() == 2) {
         // apply app default style for first parag
         KoTextDocument doc(d->document);
-        KoStyleManager *sm = doc.styleManager();
+        KStyleManager *sm = doc.styleManager();
         if (sm)
             sm->defaultParagraphStyle()->applyStyle(document->begin());
     }

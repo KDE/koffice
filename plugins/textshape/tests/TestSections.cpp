@@ -1,6 +1,6 @@
 #include "TestSections.h"
 
-#include <KoStyleManager.h>
+#include <KStyleManager.h>
 #include <KoTextDocument.h>
 #include <KSectionStyle.h>
 
@@ -44,7 +44,7 @@ void TestSections::initTest(const KSectionStyle *sectionStyle)
     m_layout->setLayout(m_textLayout);
 
     // Style manager.
-    m_styleManager = new KoStyleManager();
+    m_styleManager = new KStyleManager();
     Q_ASSERT(m_styleManager);
     KoTextDocument(m_doc).setStyleManager(m_styleManager);
 

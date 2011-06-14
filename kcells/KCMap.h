@@ -36,7 +36,7 @@
 class KOdfStore;
 class KOdfLoadingContext;
 class KOdfEmbeddedDocumentSaver;
-class KoStyleManager;
+class KStyleManager;
 class KResourceManager;
 
 class KCompletion;
@@ -137,9 +137,9 @@ public:
     KCStyleManager* styleManager() const;
 
     /**
-     * @return the KoStyleManager of this Document
+     * @return the KStyleManager of this Document
      */
-    KoStyleManager* textStyleManager() const;
+    KStyleManager* textStyleManager() const;
 
     /**
      * @return the value parser of this Document

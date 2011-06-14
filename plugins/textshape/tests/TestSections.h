@@ -10,7 +10,7 @@
 
 class KoTextDocumentLayout;
 class KSectionStyle;
-class KoStyleManager;
+class KStyleManager;
 class QTextDocument;
 class QTextFrame;
 
@@ -53,7 +53,7 @@ private:
     QTextDocument *m_doc;
     QTextTable *m_table;
     KoTextDocumentLayout *m_layout;
-    KoStyleManager *m_styleManager;
+    KStyleManager *m_styleManager;
     Layout *m_textLayout;
     MockTextShape *m_shape;
 

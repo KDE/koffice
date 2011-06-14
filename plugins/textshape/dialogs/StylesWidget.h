@@ -28,7 +28,7 @@
 
 #include <ui_StylesWidget.h>
 
-class KoStyleManager;
+class KStyleManager;
 class KParagraphStyle;
 class KCharacterStyle;
 class StylesModel;
@@ -44,7 +44,7 @@ public:
     void setCanvas(KCanvasBase *canvas) { m_canvasBase = canvas; }
 
 public slots:
-    void setStyleManager(KoStyleManager *sm);
+    void setStyleManager(KStyleManager *sm);
     void setCurrentFormat(const QTextBlockFormat &format);
     void setCurrentFormat(const QTextCharFormat &format);
     void deleteStyleClicked();
@@ -70,7 +70,7 @@ signals:
 
 private:
     Ui::StylesWidget widget;
-    KoStyleManager *m_styleManager;
+    KStyleManager *m_styleManager;
 
     QTextBlockFormat m_currentBlockFormat;
     QTextCharFormat m_currentCharFormat;

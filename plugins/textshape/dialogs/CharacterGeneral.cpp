@@ -26,7 +26,7 @@
 #include "FontDecorations.h"
 #include "FormattingPreview.h"
 
-#include <KoStyleManager.h>
+#include <KStyleManager.h>
 #include <KCharacterStyle.h>
 
 #include "kdebug.h"

@@ -21,8 +21,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoStyleManager.h"
-#include "KoStyleManager_p.h"
+#include "KStyleManager.h"
+#include "KStyleManager_p.h"
 #include "KParagraphStyle.h"
 #include "KCharacterStyle.h"
 #include "KListStyle.h"
@@ -100,7 +100,7 @@ void KoStyleManagerPrivate::requestUpdateForChildren(KParagraphStyle *style)
     }
 }
 
-void KoStyleManagerPrivate::requestFireUpdate(KoStyleManager *q)
+void KoStyleManagerPrivate::requestFireUpdate(KStyleManager *q)
 {
     if (updateTriggered)
         return;
@@ -122,7 +122,7 @@ void KoStyleManagerPrivate::updateAlteredStyles()
 
 // ---------------------------------------------------
 
-KoStyleManager::KoStyleManager(QObject *parent)
+KStyleManager::KStyleManager(QObject *parent)
         : QObject(parent), d(new KoStyleManagerPrivate())
 {
     d->defaultParagraphStyle = new KParagraphStyle(this);
@@ -142,12 +142,12 @@ KoStyleManager::KoStyleManager(QObject *parent)
     d->defaultListStyle->setLevelProperties(llp);
 }
 
-KoStyleManager::~KoStyleManager()
+KStyleManager::~KStyleManager()
 {
     delete d;
 }
 
-void KoStyleManager::saveOdf(KOdfGenericStyles& mainStyles)
+void KStyleManager::saveOdf(KOdfGenericStyles& mainStyles)
 {
     // saveOdfDefaultStyles
     KOdfGenericStyle defStyle(KOdfGenericStyle::ParagraphStyle, "paragraph");
@@ -267,7 +267,7 @@ void KoStyleManager::saveOdf(KOdfGenericStyles& mainStyles)
     }
 }
 
-void KoStyleManager::add(KCharacterStyle *style)
+void KStyleManager::add(KCharacterStyle *style)
 {
     if (d->charStyles.key(style, -1) != -1)
         return;
@@ -279,7 +279,7 @@ void KoStyleManager::add(KCharacterStyle *style)
     emit styleAdded(style);
 }
 
-void KoStyleManager::add(KParagraphStyle *style)
+void KStyleManager::add(KParagraphStyle *style)
 {
     if (d->paragStyles.key(style, -1) != -1)
         return;
@@ -314,7 +314,7 @@ void KoStyleManager::add(KParagraphStyle *style)
     emit styleAdded(style);
 }
 
-void KoStyleManager::add(KListStyle *style)
+void KStyleManager::add(KListStyle *style)
 {
     if (d->listStyles.key(style, -1) != -1)
         return;
@@ -324,7 +324,7 @@ void KoStyleManager::add(KListStyle *style)
     emit styleAdded(style);
 }
 
-void KoStyleManager::addAutomaticListStyle(KListStyle *style)
+void KStyleManager::addAutomaticListStyle(KListStyle *style)
 {
     if (d->automaticListStyles.key(style, -1) != -1)
         return;
@@ -332,7 +332,7 @@ void KoStyleManager::addAutomaticListStyle(KListStyle *style)
     d->automaticListStyles.insert(d->s_stylesNumber++, style);
 }
 
-void KoStyleManager::add(KoTableStyle *style)
+void KStyleManager::add(KoTableStyle *style)
 {
     if (d->tableStyles.key(style, -1) != -1)
         return;
@@ -342,7 +342,7 @@ void KoStyleManager::add(KoTableStyle *style)
     emit styleAdded(style);
 }
 
-void KoStyleManager::add(KoTableColumnStyle *style)
+void KStyleManager::add(KoTableColumnStyle *style)
 {
     if (d->tableColumnStyles.key(style, -1) != -1)
         return;
@@ -351,7 +351,7 @@ void KoStyleManager::add(KoTableColumnStyle *style)
     emit styleAdded(style);
 }
 
-void KoStyleManager::add(KoTableRowStyle *style)
+void KStyleManager::add(KoTableRowStyle *style)
 {
     if (d->tableRowStyles.key(style, -1) != -1)
         return;
@@ -360,7 +360,7 @@ void KoStyleManager::add(KoTableRowStyle *style)
     emit styleAdded(style);
 }
 
-void KoStyleManager::add(KoTableCellStyle *style)
+void KStyleManager::add(KoTableCellStyle *style)
 {
     if (d->tableCellStyles.key(style, -1) != -1)
         return;
@@ -370,7 +370,7 @@ void KoStyleManager::add(KoTableCellStyle *style)
     emit styleAdded(style);
 }
 
-void KoStyleManager::add(KSectionStyle *style)
+void KStyleManager::add(KSectionStyle *style)
 {
     if (d->sectionStyles.key(style, -1) != -1)
         return;
@@ -380,60 +380,60 @@ void KoStyleManager::add(KSectionStyle *style)
     emit styleAdded(style);
 }
 
-void KoStyleManager::remove(KCharacterStyle *style)
+void KStyleManager::remove(KCharacterStyle *style)
 {
     if (d->charStyles.remove(style->styleId()))
         emit styleRemoved(style);
 }
 
-void KoStyleManager::remove(KParagraphStyle *style)
+void KStyleManager::remove(KParagraphStyle *style)
 {
     if (d->paragStyles.remove(style->styleId()))
         emit styleRemoved(style);
 }
 
-void KoStyleManager::remove(KListStyle *style)
+void KStyleManager::remove(KListStyle *style)
 {
     if (d->listStyles.remove(style->styleId()))
         emit styleRemoved(style);
 }
 
-void KoStyleManager::remove(KoTableStyle *style)
+void KStyleManager::remove(KoTableStyle *style)
 {
     if (d->tableStyles.remove(style->styleId()))
         emit styleRemoved(style);
 }
 
-void KoStyleManager::remove(KoTableColumnStyle *style)
+void KStyleManager::remove(KoTableColumnStyle *style)
 {
     if (d->tableColumnStyles.remove(style->styleId()))
         emit styleRemoved(style);
 }
 
-void KoStyleManager::remove(KoTableRowStyle *style)
+void KStyleManager::remove(KoTableRowStyle *style)
 {
     if (d->tableRowStyles.remove(style->styleId()))
         emit styleRemoved(style);
 }
 
-void KoStyleManager::remove(KoTableCellStyle *style)
+void KStyleManager::remove(KoTableCellStyle *style)
 {
     if (d->tableCellStyles.remove(style->styleId()))
         emit styleRemoved(style);
 }
 
-void KoStyleManager::remove(KSectionStyle *style)
+void KStyleManager::remove(KSectionStyle *style)
 {
     if (d->sectionStyles.remove(style->styleId()))
         emit styleRemoved(style);
 }
 
-void KoStyleManager::remove(ChangeFollower *cf)
+void KStyleManager::remove(ChangeFollower *cf)
 {
     d->documentUpdaterProxies.removeAll(cf);
 }
 
-void KoStyleManager::alteredStyle(const KParagraphStyle *style)
+void KStyleManager::alteredStyle(const KParagraphStyle *style)
 {
     Q_ASSERT(style);
     int id = style->styleId();
@@ -453,7 +453,7 @@ void KoStyleManager::alteredStyle(const KParagraphStyle *style)
     }
 }
 
-void KoStyleManager::alteredStyle(const KCharacterStyle *style)
+void KStyleManager::alteredStyle(const KCharacterStyle *style)
 {
     Q_ASSERT(style);
     int id = style->styleId();
@@ -470,7 +470,7 @@ void KoStyleManager::alteredStyle(const KCharacterStyle *style)
     d->requestFireUpdate(this);
 }
 
-void KoStyleManager::alteredStyle(const KListStyle *style)
+void KStyleManager::alteredStyle(const KListStyle *style)
 {
     Q_ASSERT(style);
     int id = style->styleId();
@@ -483,7 +483,7 @@ void KoStyleManager::alteredStyle(const KListStyle *style)
     d->requestFireUpdate(this);
 }
 
-void KoStyleManager::alteredStyle(const KoTableStyle *style)
+void KStyleManager::alteredStyle(const KoTableStyle *style)
 {
     Q_ASSERT(style);
     int id = style->styleId();
@@ -496,7 +496,7 @@ void KoStyleManager::alteredStyle(const KoTableStyle *style)
     d->requestFireUpdate(this);
 }
 
-void KoStyleManager::alteredStyle(const KoTableColumnStyle *style)
+void KStyleManager::alteredStyle(const KoTableColumnStyle *style)
 {
     Q_ASSERT(style);
     int id = style->styleId();
@@ -509,7 +509,7 @@ void KoStyleManager::alteredStyle(const KoTableColumnStyle *style)
     d->requestFireUpdate(this);
 }
 
-void KoStyleManager::alteredStyle(const KoTableRowStyle *style)
+void KStyleManager::alteredStyle(const KoTableRowStyle *style)
 {
     Q_ASSERT(style);
     int id = style->styleId();
@@ -522,7 +522,7 @@ void KoStyleManager::alteredStyle(const KoTableRowStyle *style)
     d->requestFireUpdate(this);
 }
 
-void KoStyleManager::alteredStyle(const KoTableCellStyle *style)
+void KStyleManager::alteredStyle(const KoTableCellStyle *style)
 {
     Q_ASSERT(style);
     int id = style->styleId();
@@ -535,7 +535,7 @@ void KoStyleManager::alteredStyle(const KoTableCellStyle *style)
     d->requestFireUpdate(this);
 }
 
-void KoStyleManager::alteredStyle(const KSectionStyle *style)
+void KStyleManager::alteredStyle(const KSectionStyle *style)
 {
     Q_ASSERT(style);
     int id = style->styleId();
@@ -548,7 +548,7 @@ void KoStyleManager::alteredStyle(const KSectionStyle *style)
     d->requestFireUpdate(this);
 }
 
-void KoStyleManager::add(QTextDocument *document)
+void KStyleManager::add(QTextDocument *document)
 {
     foreach(ChangeFollower *cf, d->documentUpdaterProxies) {
         if (cf->document() == document) {
@@ -559,7 +559,7 @@ void KoStyleManager::add(QTextDocument *document)
     d->documentUpdaterProxies.append(cf);
 }
 
-void KoStyleManager::remove(QTextDocument *document)
+void KStyleManager::remove(QTextDocument *document)
 {
     foreach(ChangeFollower *cf, d->documentUpdaterProxies) {
         if (cf->document() == document) {
@@ -569,22 +569,22 @@ void KoStyleManager::remove(QTextDocument *document)
     }
 }
 
-KCharacterStyle *KoStyleManager::characterStyle(int id) const
+KCharacterStyle *KStyleManager::characterStyle(int id) const
 {
     return d->charStyles.value(id);
 }
 
-KParagraphStyle *KoStyleManager::paragraphStyle(int id) const
+KParagraphStyle *KStyleManager::paragraphStyle(int id) const
 {
     return d->paragStyles.value(id);
 }
 
-KListStyle *KoStyleManager::listStyle(int id) const
+KListStyle *KStyleManager::listStyle(int id) const
 {
     return d->listStyles.value(id);
 }
 
-KListStyle *KoStyleManager::listStyle(int id, bool *automatic) const
+KListStyle *KStyleManager::listStyle(int id, bool *automatic) const
 {
     if (KListStyle *style = listStyle(id)) {
         *automatic = false;
@@ -602,32 +602,32 @@ KListStyle *KoStyleManager::listStyle(int id, bool *automatic) const
     return style;
 }
 
-KoTableStyle *KoStyleManager::tableStyle(int id) const
+KoTableStyle *KStyleManager::tableStyle(int id) const
 {
     return d->tableStyles.value(id);
 }
 
-KoTableColumnStyle *KoStyleManager::tableColumnStyle(int id) const
+KoTableColumnStyle *KStyleManager::tableColumnStyle(int id) const
 {
     return d->tableColumnStyles.value(id);
 }
 
-KoTableRowStyle *KoStyleManager::tableRowStyle(int id) const
+KoTableRowStyle *KStyleManager::tableRowStyle(int id) const
 {
     return d->tableRowStyles.value(id);
 }
 
-KoTableCellStyle *KoStyleManager::tableCellStyle(int id) const
+KoTableCellStyle *KStyleManager::tableCellStyle(int id) const
 {
     return d->tableCellStyles.value(id);
 }
 
-KSectionStyle *KoStyleManager::sectionStyle(int id) const
+KSectionStyle *KStyleManager::sectionStyle(int id) const
 {
     return d->sectionStyles.value(id);
 }
 
-KCharacterStyle *KoStyleManager::characterStyle(const QString &name) const
+KCharacterStyle *KStyleManager::characterStyle(const QString &name) const
 {
     foreach(KCharacterStyle *style, d->charStyles) {
         if (style->name() == name)
@@ -636,7 +636,7 @@ KCharacterStyle *KoStyleManager::characterStyle(const QString &name) const
     return 0;
 }
 
-KParagraphStyle *KoStyleManager::paragraphStyle(const QString &name) const
+KParagraphStyle *KStyleManager::paragraphStyle(const QString &name) const
 {
     foreach(KParagraphStyle *style, d->paragStyles) {
         if (style->name() == name)
@@ -645,7 +645,7 @@ KParagraphStyle *KoStyleManager::paragraphStyle(const QString &name) const
     return 0;
 }
 
-KListStyle *KoStyleManager::listStyle(const QString &name) const
+KListStyle *KStyleManager::listStyle(const QString &name) const
 {
     foreach(KListStyle *style, d->listStyles) {
         if (style->name() == name)
@@ -654,7 +654,7 @@ KListStyle *KoStyleManager::listStyle(const QString &name) const
     return 0;
 }
 
-KoTableStyle *KoStyleManager::tableStyle(const QString &name) const
+KoTableStyle *KStyleManager::tableStyle(const QString &name) const
 {
     foreach(KoTableStyle *style, d->tableStyles) {
         if (style->name() == name)
@@ -663,7 +663,7 @@ KoTableStyle *KoStyleManager::tableStyle(const QString &name) const
     return 0;
 }
 
-KoTableColumnStyle *KoStyleManager::tableColumnStyle(const QString &name) const
+KoTableColumnStyle *KStyleManager::tableColumnStyle(const QString &name) const
 {
     foreach(KoTableColumnStyle *style, d->tableColumnStyles) {
         if (style->name() == name)
@@ -672,7 +672,7 @@ KoTableColumnStyle *KoStyleManager::tableColumnStyle(const QString &name) const
     return 0;
 }
 
-KoTableRowStyle *KoStyleManager::tableRowStyle(const QString &name) const
+KoTableRowStyle *KStyleManager::tableRowStyle(const QString &name) const
 {
     foreach(KoTableRowStyle *style, d->tableRowStyles) {
         if (style->name() == name)
@@ -681,7 +681,7 @@ KoTableRowStyle *KoStyleManager::tableRowStyle(const QString &name) const
     return 0;
 }
 
-KoTableCellStyle *KoStyleManager::tableCellStyle(const QString &name) const
+KoTableCellStyle *KStyleManager::tableCellStyle(const QString &name) const
 {
     foreach(KoTableCellStyle *style, d->tableCellStyles) {
         if (style->name() == name)
@@ -690,7 +690,7 @@ KoTableCellStyle *KoStyleManager::tableCellStyle(const QString &name) const
     return 0;
 }
 
-KSectionStyle *KoStyleManager::sectionStyle(const QString &name) const
+KSectionStyle *KStyleManager::sectionStyle(const QString &name) const
 {
     foreach(KSectionStyle *style, d->sectionStyles) {
         if (style->name() == name)
@@ -699,17 +699,17 @@ KSectionStyle *KoStyleManager::sectionStyle(const QString &name) const
     return 0;
 }
 
-KParagraphStyle *KoStyleManager::defaultParagraphStyle() const
+KParagraphStyle *KStyleManager::defaultParagraphStyle() const
 {
     return d->defaultParagraphStyle;
 }
 
-KListStyle *KoStyleManager::defaultListStyle() const
+KListStyle *KStyleManager::defaultListStyle() const
 {
     return d->defaultListStyle;
 }
 
-void KoStyleManager::setOutlineStyle(KListStyle* listStyle)
+void KStyleManager::setOutlineStyle(KListStyle* listStyle)
 {
     if (d->outlineStyle && d->outlineStyle->parent() == this)
         delete d->outlineStyle;
@@ -717,54 +717,54 @@ void KoStyleManager::setOutlineStyle(KListStyle* listStyle)
     d->outlineStyle = listStyle;
 }
 
-KListStyle *KoStyleManager::outlineStyle() const
+KListStyle *KStyleManager::outlineStyle() const
 {
     return d->outlineStyle;
 }
 
-QList<KCharacterStyle*> KoStyleManager::characterStyles() const
+QList<KCharacterStyle*> KStyleManager::characterStyles() const
 {
     return d->charStyles.values();
 }
 
-QList<KParagraphStyle*> KoStyleManager::paragraphStyles() const
+QList<KParagraphStyle*> KStyleManager::paragraphStyles() const
 {
     return d->paragStyles.values();
 }
 
-QList<KListStyle*> KoStyleManager::listStyles() const
+QList<KListStyle*> KStyleManager::listStyles() const
 {
     return d->listStyles.values();
 }
 
-QList<KoTableStyle*> KoStyleManager::tableStyles() const
+QList<KoTableStyle*> KStyleManager::tableStyles() const
 {
     return d->tableStyles.values();
 }
 
-QList<KoTableColumnStyle*> KoStyleManager::tableColumnStyles() const
+QList<KoTableColumnStyle*> KStyleManager::tableColumnStyles() const
 {
     return d->tableColumnStyles.values();
 }
 
-QList<KoTableRowStyle*> KoStyleManager::tableRowStyles() const
+QList<KoTableRowStyle*> KStyleManager::tableRowStyles() const
 {
     return d->tableRowStyles.values();
 }
 
-QList<KoTableCellStyle*> KoStyleManager::tableCellStyles() const
+QList<KoTableCellStyle*> KStyleManager::tableCellStyles() const
 {
     return d->tableCellStyles.values();
 }
 
-QList<KSectionStyle*> KoStyleManager::sectionStyles() const
+QList<KSectionStyle*> KStyleManager::sectionStyles() const
 {
     return d->sectionStyles.values();
 }
 
-KoStyleManagerPrivate *KoStyleManager::priv()
+KoStyleManagerPrivate *KStyleManager::priv()
 {
     return d;
 }
 
-#include <KoStyleManager.moc>
+#include <KStyleManager.moc>

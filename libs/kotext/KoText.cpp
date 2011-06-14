@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
  */
 #include "KoText.h"
-#include "styles/KoStyleManager.h"
-#include "styles/KoStyleManager.h"
+#include "styles/KStyleManager.h"
+#include "styles/KStyleManager.h"
 #include "changetracker/KChangeTracker.h"
 #include "KoTextShapeData.h"
 #include "KoTextDocumentLayout.h"
@@ -176,9 +176,9 @@ QTextDocument *KoText::loadOpenDocument(const QString &filename, QTextDocument *
         document = new QTextDocument;
 
     KoTextDocument doc(document);
-    KoStyleManager *styleManager = doc.styleManager();
+    KStyleManager *styleManager = doc.styleManager();
     if (styleManager == 0) {
-        styleManager = new KoStyleManager;
+        styleManager = new KStyleManager;
         doc.setStyleManager(styleManager);
     }
     KChangeTracker *changeTracker = doc.changeTracker();

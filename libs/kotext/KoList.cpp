@@ -23,7 +23,7 @@
 #include "styles/KListLevelProperties.h"
 #include "KoTextBlockData.h"
 #include "styles/KParagraphStyle.h"
-#include "styles/KoStyleManager.h"
+#include "styles/KStyleManager.h"
 
 #include <KDebug>
 
@@ -161,7 +161,7 @@ void KoList::remove(const QTextBlock &block)
 void KoList::setStyle(KListStyle *style)
 {
     if (style == 0) {
-        KoStyleManager *styleManager = KoTextDocument(d->document).styleManager();
+        KStyleManager *styleManager = KoTextDocument(d->document).styleManager();
         Q_ASSERT(styleManager);
         style = styleManager->defaultListStyle();
     }

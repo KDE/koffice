@@ -27,7 +27,7 @@
 #include "KWDocument.h"
 
 #include <KoTextShapeData.h>
-#include <KoStyleManager.h>
+#include <KStyleManager.h>
 #include <KParagraphStyle.h>
 #include <KoTextDocument.h>
 #include <KoTextEditor.h>
@@ -54,7 +54,7 @@ KWTextFrameSet::KWTextFrameSet(const KWDocument *doc)
     if (m_kwordDocument) {
         KoTextDocument doc(m_document);
         doc.setInlineTextObjectManager(m_kwordDocument->inlineTextObjectManager());
-        KoStyleManager *styleManager = m_kwordDocument->resourceManager()->resource(KoText::StyleManager).value<KoStyleManager*>();
+        KStyleManager *styleManager = m_kwordDocument->resourceManager()->resource(KoText::StyleManager).value<KStyleManager*>();
         Q_ASSERT(styleManager);
         doc.setStyleManager(styleManager);
         KChangeTracker *changeTracker = m_kwordDocument->resourceManager()->resource(KoText::ChangeTracker).value<KChangeTracker*>();
@@ -80,7 +80,7 @@ KWTextFrameSet::KWTextFrameSet(const KWDocument *doc, KWord::TextFrameSetType ty
     if (m_kwordDocument) {
         KoTextDocument doc(m_document);
         doc.setInlineTextObjectManager(m_kwordDocument->inlineTextObjectManager());
-        KoStyleManager *styleManager = m_kwordDocument->resourceManager()->resource(KoText::StyleManager).value<KoStyleManager*>();
+        KStyleManager *styleManager = m_kwordDocument->resourceManager()->resource(KoText::StyleManager).value<KStyleManager*>();
         doc.setStyleManager(styleManager);
         KChangeTracker *changeTracker = m_kwordDocument->resourceManager()->resource(KoText::ChangeTracker).value<KChangeTracker*>();
         doc.setChangeTracker(changeTracker);
@@ -150,7 +150,7 @@ void KWTextFrameSet::setupFrame(KWFrame *frame)
         m_document->setDocumentLayout(new KWTextDocumentLayout(this));
         if (m_kwordDocument) {
             KoTextDocument doc(m_document);
-            KoStyleManager *styleManager = m_kwordDocument->resourceManager()->resource(KoText::StyleManager).value<KoStyleManager*>();
+            KStyleManager *styleManager = m_kwordDocument->resourceManager()->resource(KoText::StyleManager).value<KStyleManager*>();
             doc.setStyleManager(styleManager);
             KChangeTracker *changeTracker = m_kwordDocument->resourceManager()->resource(KoText::ChangeTracker).value<KChangeTracker*>();
             doc.setChangeTracker(changeTracker);

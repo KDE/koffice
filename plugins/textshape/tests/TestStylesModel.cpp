@@ -3,7 +3,7 @@
 
 #include <QDebug>
 
-#include <KoStyleManager.h>
+#include <KStyleManager.h>
 #include <KParagraphStyle.h>
 #include <KCharacterStyle.h>
 #include "../dialogs/StylesModel.h"
@@ -22,13 +22,13 @@ private slots:
 
 private:
     void fillManager();
-    KoStyleManager *manager;
+    KStyleManager *manager;
 };
 
 class MockModel : public StylesModel
 {
 public:
-    MockModel(KoStyleManager *manager, QObject *parent = 0)
+    MockModel(KStyleManager *manager, QObject *parent = 0)
             : StylesModel(manager, parent) { }
 
     void publicRecalculate() {
@@ -44,7 +44,7 @@ public:
 
 void TestStylesModel::init()
 {
-    manager = new KoStyleManager();
+    manager = new KStyleManager();
 }
 
 void TestStylesModel::cleanup()

@@ -2,7 +2,7 @@
 #include "../TableLayout.h"
 #include "../TableLayoutData.h"
 
-#include <KoStyleManager.h>
+#include <KStyleManager.h>
 #include <KParagraphStyle.h>
 #include <KoTableColumnAndRowStyleManager.h>
 #include <KoTextDocument.h>
@@ -57,7 +57,7 @@ void TestTableLayout::initTest(int rows, int columns,
     m_layout->setLayout(m_textLayout);
 
     // Style manager.
-    m_styleManager = new KoStyleManager();
+    m_styleManager = new KStyleManager();
     Q_ASSERT(m_styleManager);
     KoTextDocument(m_doc).setStyleManager(m_styleManager);
 

@@ -53,7 +53,7 @@
 #include <KoToolManager.h>
 #include <KShapeRegistry.h>
 #include <KShapeFactoryBase.h>
-#include <KoStyleManager.h>
+#include <KStyleManager.h>
 #include <KResourceManager.h>
 #include <KInteractionTool.h>
 #include <KInlineTextObjectManager.h>
@@ -529,7 +529,7 @@ void KWDocument::initEmpty()
     appendPage("Standard");
 
     Q_ASSERT(resourceManager()->hasResource(KoText::StyleManager));
-    KoStyleManager *styleManager = resourceManager()->resource(KoText::StyleManager).value<KoStyleManager*>();
+    KStyleManager *styleManager = resourceManager()->resource(KoText::StyleManager).value<KStyleManager*>();
     Q_ASSERT(styleManager);
 
     QTextDocument document;
@@ -611,7 +611,7 @@ bool KWDocument::loadOdf(KOdfStoreReader &odfStore)
     if (rc) {
         if (m_loadingTemplate) {
             Q_ASSERT(resourceManager()->hasResource(KoText::StyleManager));
-            KoStyleManager *styleManager = resourceManager()->resource(KoText::StyleManager).value<KoStyleManager*>();
+            KStyleManager *styleManager = resourceManager()->resource(KoText::StyleManager).value<KStyleManager*>();
             Q_ASSERT(styleManager);
             foreach (KParagraphStyle *style, styleManager->paragraphStyles()) {
                 QString name = style->name();

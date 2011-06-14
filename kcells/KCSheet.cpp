@@ -58,7 +58,7 @@
 #include <KXmlWriter.h>
 #include <KOdfStore.h>
 #include <KoText.h>
-#include <KoStyleManager.h>
+#include <KStyleManager.h>
 #include <KoTextSharedLoadingData.h>
 #include <KParagraphStyle.h>
 #include <KoUpdater.h>

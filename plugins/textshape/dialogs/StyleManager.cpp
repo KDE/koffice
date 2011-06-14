@@ -21,7 +21,7 @@
 
 #include "StylesWidget.h"
 
-#include <KoStyleManager.h>
+#include <KStyleManager.h>
 #include <KParagraphStyle.h>
 #include <KCharacterStyle.h>
 
@@ -68,7 +68,7 @@ StyleManager::~StyleManager()
 {
 }
 
-void StyleManager::setStyleManager(KoStyleManager *sm)
+void StyleManager::setStyleManager(KStyleManager *sm)
 {
     Q_ASSERT(sm);
     if (m_styleManager == sm)
@@ -85,7 +85,7 @@ void StyleManager::setStyleManager(KoStyleManager *sm)
     connect(sm, SIGNAL(styleRemoved(KCharacterStyle*)), this, SLOT(removeCharacterStyle(KCharacterStyle*)));
 
     // don't operate on the origs since user might cancel later.
-    m_shadowStyleManager = new KoStyleManager(this);
+    m_shadowStyleManager = new KStyleManager(this);
     QHash<KParagraphStyle*, KParagraphStyle*> cloneMapper; // orig -> clone
     QSet<int> seenCharStyles;
 

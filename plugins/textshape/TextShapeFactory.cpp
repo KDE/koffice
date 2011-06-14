@@ -27,7 +27,7 @@
 #include <KoTextDocument.h>
 #include <KoTextShapeData.h>
 #include <KOdfXmlNS.h>
-#include <KoStyleManager.h>
+#include <KStyleManager.h>
 #include <KResourceManager.h>
 #include <KInlineTextObjectManager.h>
 #include <changetracker/KChangeTracker.h>
@@ -69,7 +69,7 @@ KShape *TextShapeFactory::createDefaultShape(KResourceManager *documentResources
         if (itom)
             document.setInlineTextObjectManager(itom);
 
-        KoStyleManager *styleManager = documentResources->resource(KoText::StyleManager).value<KoStyleManager*>();
+        KStyleManager *styleManager = documentResources->resource(KoText::StyleManager).value<KStyleManager*>();
         if (styleManager)
             document.setStyleManager(styleManager);
         KPageProvider *pp = static_cast<KPageProvider *>(documentResources->resource(KoText::PageProvider).value<void*>());
@@ -128,7 +128,7 @@ void TextShapeFactory::newDocumentResourceManager(KResourceManager *manager)
 void TextShapeFactory::createStylemanager(KResourceManager *manager)
 {
     QVariant variant;
-    variant.setValue(new KoStyleManager(manager));
+    variant.setValue(new KStyleManager(manager));
     manager->setResource(KoText::StyleManager, variant);
 }
 

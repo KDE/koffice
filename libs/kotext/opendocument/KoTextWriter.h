@@ -25,7 +25,7 @@
 class KShapeSavingContext;
 class KXmlWriter;
 class KoTextDocumentLayout;
-class KoStyleManager;
+class KStyleManager;
 class QTextDocument;
 class QTextTable;
 
@@ -62,9 +62,9 @@ public:
      * @param styleManager The used style manager
      * @param context The saving context
      */
-    static QString saveParagraphStyle(const QTextBlock &block, KoStyleManager *styleManager, KShapeSavingContext &context);
+    static QString saveParagraphStyle(const QTextBlock &block, KStyleManager *styleManager, KShapeSavingContext &context);
 
-    static QString saveParagraphStyle(const QTextBlockFormat &blockFormat, const QTextCharFormat &charFormat, KoStyleManager *styleManager, KShapeSavingContext &context);
+    static QString saveParagraphStyle(const QTextBlockFormat &blockFormat, const QTextCharFormat &charFormat, KStyleManager *styleManager, KShapeSavingContext &context);
 
     /**
      * Writes the portion of document contained within 'from' and 'to'

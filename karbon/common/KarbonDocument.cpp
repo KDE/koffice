@@ -49,7 +49,7 @@
 #include <KImageCollection.h>
 #include <KDataCenterBase.h>
 #include <KoText.h>
-#include <KoStyleManager.h>
+#include <KStyleManager.h>
 #include <KoTextSharedLoadingData.h>
 
 #include <ktemporaryfile.h>
@@ -398,7 +398,7 @@ bool KarbonDocument::saveOdf(KoDocument::SavingContext &documentContext, const K
 
 void KarbonDocument::loadOdfStyles(KShapeLoadingContext & context)
 {
-    KoStyleManager *styleManager = resourceManager()->resource(KoText::StyleManager).value<KoStyleManager*>();
+    KStyleManager *styleManager = resourceManager()->resource(KoText::StyleManager).value<KStyleManager*>();
 
     if (! styleManager)
         return;
@@ -413,7 +413,7 @@ void KarbonDocument::loadOdfStyles(KShapeLoadingContext & context)
 
 void KarbonDocument::saveOdfStyles(KShapeSavingContext & context)
 {
-    KoStyleManager * styleManager = dynamic_cast<KoStyleManager*>(dataCenterMap()["StyleManager"]);
+    KStyleManager * styleManager = dynamic_cast<KStyleManager*>(dataCenterMap()["StyleManager"]);
     if (! styleManager)
         return;
 

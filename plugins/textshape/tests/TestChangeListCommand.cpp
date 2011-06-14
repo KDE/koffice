@@ -4,7 +4,7 @@
 
 #include <KListStyle.h>
 #include <KListLevelProperties.h>
-#include <KoStyleManager.h>
+#include <KStyleManager.h>
 #include <KoTextDocument.h>
 
 #include <TextTool.h>
@@ -18,7 +18,7 @@
 void TestChangeListCommand::addList()
 {
     QTextDocument doc;
-    KoTextDocument(&doc).setStyleManager(new KoStyleManager);
+    KoTextDocument(&doc).setStyleManager(new KStyleManager);
     TextTool *tool = new TextTool(new MockCanvas);
     QTextCursor cursor(&doc);
     cursor.insertText("Root\nparag1\nparag2\nparag3\nparag4\n");
@@ -57,7 +57,7 @@ void TestChangeListCommand::addList()
 void TestChangeListCommand::addListWithLevel2()
 {
     QTextDocument doc;
-    KoTextDocument(&doc).setStyleManager(new KoStyleManager);
+    KoTextDocument(&doc).setStyleManager(new KStyleManager);
     TextTool *tool = new TextTool(new MockCanvas);
     QTextCursor cursor(&doc);
     cursor.insertText("Root\nparag1\nparag2\nparag3\nparag4\n");
@@ -93,7 +93,7 @@ void TestChangeListCommand::addListWithLevel2()
 void TestChangeListCommand::removeList()
 {
     QTextDocument doc;
-    KoTextDocument(&doc).setStyleManager(new KoStyleManager);
+    KoTextDocument(&doc).setStyleManager(new KStyleManager);
     TextTool *tool = new TextTool(new MockCanvas);
     QTextCursor cursor(&doc);
     cursor.insertText("Root\nparag1\nparag2\nparag3\nparag4\n");
@@ -142,7 +142,7 @@ void TestChangeListCommand::removeList()
 void TestChangeListCommand::joinList()
 {
     QTextDocument doc;
-    KoTextDocument(&doc).setStyleManager(new KoStyleManager);
+    KoTextDocument(&doc).setStyleManager(new KStyleManager);
     TextTool *tool = new TextTool(new MockCanvas);
     QTextCursor cursor(&doc);
     cursor.insertText("Root\nparag1\nparag2\nparag3\nparag4\n");
@@ -176,7 +176,7 @@ void TestChangeListCommand::joinList2()
 {
     // test usecase of joining with the one before and the one after based on similar styles.
     QTextDocument doc;
-    KoTextDocument(&doc).setStyleManager(new KoStyleManager);
+    KoTextDocument(&doc).setStyleManager(new KStyleManager);
     TextTool *tool = new TextTool(new MockCanvas);
     QTextCursor cursor(&doc);
     cursor.insertText("Root\nparag1\nparag2\nparag3\nparag4");
@@ -235,7 +235,7 @@ void TestChangeListCommand::splitList()
     // now I change parag 'B' to '1.a'  then C should have 1.1 as a numbering. I.e. we should split an existing list.
 
     QTextDocument doc;
-    KoTextDocument(&doc).setStyleManager(new KoStyleManager);
+    KoTextDocument(&doc).setStyleManager(new KStyleManager);
     TextTool *tool = new TextTool(new MockCanvas);
     QTextCursor cursor(&doc);
     cursor.insertText("Root\nparagA\nparagB\nparagC");

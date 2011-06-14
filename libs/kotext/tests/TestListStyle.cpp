@@ -23,7 +23,7 @@
 #include "styles/KListLevelProperties.h"
 #include "KoTextBlockBorderData.h"
 #include "KoTextDocument.h"
-#include "styles/KoStyleManager.h"
+#include "styles/KStyleManager.h"
 
 #include <QTextDocument>
 #include <QTextCursor>
@@ -48,7 +48,7 @@ void TestListStyle::testListStyle()
 
     QTextDocument doc;
     KoTextDocument kodoc(&doc);
-    kodoc.setStyleManager(new KoStyleManager);
+    kodoc.setStyleManager(new KStyleManager);
     QTextCursor cursor(&doc);
     cursor.insertText("foo\nbar\nBaz\n");
     QTextBlock block = doc.begin();

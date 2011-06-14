@@ -21,7 +21,7 @@ class KoTableStyle;
 class KoTableColumnStyle;
 class KoTableRowStyle;
 class KoTableCellStyle;
-class KoStyleManager;
+class KStyleManager;
 class KoTableColumnAndRowStyleManager;
 class QTextDocument;
 class QTextTable;
@@ -104,7 +104,7 @@ private:
     QTextDocument *m_doc;
     QTextTable *m_table;
     KoTextDocumentLayout *m_layout;
-    KoStyleManager *m_styleManager;
+    KStyleManager *m_styleManager;
     KoTableColumnAndRowStyleManager m_tableColumnAndRowStyleManager;
     Layout *m_textLayout;
     MockTextShape *m_shape;

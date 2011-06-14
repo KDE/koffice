@@ -97,7 +97,7 @@ KoFilter::ConversionStatus DocxXmlStylesReader::read(MSOOXML::MsooXmlReaderConte
     }
 //! @todo expect other namespaces too...
 
-//! @todo use KoStyleManager::saveOdfDefaultStyles()
+//! @todo use KStyleManager::saveOdfDefaultStyles()
     qDeleteAll(m_defaultStyles);
     m_defaultStyles.clear();
 

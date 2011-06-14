@@ -23,7 +23,7 @@
 #include "styles/KParagraphStyle.h"
 #include "styles/KCharacterStyle.h"
 #include "styles/KListStyle.h"
-#include "styles/KoStyleManager.h"
+#include "styles/KStyleManager.h"
 #include "KoTextBlockData.h"
 #include "KoTextBlockBorderData.h"
 #include "KInlineTextObjectManager.h"

@@ -39,7 +39,7 @@
 #include <KShapeSavingContext.h>
 #include <KOdfXmlNS.h>
 #include <KXmlWriter.h>
-#include <KoStyleManager.h>
+#include <KStyleManager.h>
 #include <KShapeLoadingContext.h>
 #include <KoTextSharedLoadingData.h>
 #include <KParagraphStyle.h>
@@ -97,7 +97,7 @@ public:
     KCNamedAreaManager* namedAreaManager;
     KCRecalcManager* recalcManager;
     KCStyleManager* styleManager;
-    KoStyleManager* textStyleManager;
+    KStyleManager* textStyleManager;
 
     KCApplicationSettings* applicationSettings;
     KCCalculationSettings* calculationSettings;
@@ -137,7 +137,7 @@ KCMap::KCMap(KCDocBase* doc, int syntaxVersion)
     d->namedAreaManager = new KCNamedAreaManager(this);
     d->recalcManager = new KCRecalcManager(this);
     d->styleManager = new KCStyleManager();
-    d->textStyleManager = new KoStyleManager(this);
+    d->textStyleManager = new KStyleManager(this);
 
     d->applicationSettings = new KCApplicationSettings();
     d->calculationSettings = new KCCalculationSettings();
@@ -274,7 +274,7 @@ KCStyleManager* KCMap::styleManager() const
     return d->styleManager;
 }
 
-KoStyleManager* KCMap::textStyleManager() const
+KStyleManager* KCMap::textStyleManager() const
 {
     return d->textStyleManager;
 }

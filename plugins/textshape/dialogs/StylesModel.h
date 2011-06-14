@@ -23,7 +23,7 @@
 #include <QMultiHash>
 #include <QIcon>
 
-class KoStyleManager;
+class KStyleManager;
 class KParagraphStyle;
 class KCharacterStyle;
 class QSignalMapper;
@@ -33,7 +33,7 @@ class StylesModel : public QAbstractItemModel
     Q_OBJECT
 
 public:
-    explicit StylesModel(KoStyleManager *styleManager, QObject *parent = 0);
+    explicit StylesModel(KStyleManager *styleManager, QObject *parent = 0);
     ~StylesModel();
 
     virtual QModelIndex index(int row, int column, const QModelIndex &parent) const;
@@ -50,7 +50,7 @@ public:
     KParagraphStyle *paragraphStyleForIndex(const QModelIndex &index) const;
     KCharacterStyle *characterStyleForIndex(const QModelIndex &index) const;
 
-    void setStyleManager(KoStyleManager *manager);
+    void setStyleManager(KStyleManager *manager);
 
 signals:
     /// emitted on recalculate
@@ -89,7 +89,7 @@ private:
     QModelIndex indexForStyle(int styleId);
     QModelIndex parent(int needle, const QList<int> &haystack) const;
 
-    KoStyleManager *m_styleManager;
+    KStyleManager *m_styleManager;
 
     int m_currentParagraphStyle;
     int m_currentCharacterStyle;

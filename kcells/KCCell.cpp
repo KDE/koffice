@@ -82,7 +82,7 @@
 #include <KXmlWriter.h>
 
 #include <KoTextLoader.h>
-#include <KoStyleManager.h>
+#include <KStyleManager.h>
 #include <KoTextSharedLoadingData.h>
 #include <KoTextDocument.h>
 #include <KoTextWriter.h>

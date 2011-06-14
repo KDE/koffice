@@ -28,7 +28,7 @@
 
 class QPainter;
 class KoViewConverter;
-class KoStyleManager;
+class KStyleManager;
 class KWTextFrameSet;
 class MockTextShape;
 class QTextDocument;
@@ -59,7 +59,7 @@ private:
     KWTextDocumentLayout *layout;
     QTextLayout *blockLayout;
     QString loremIpsum;
-    KoStyleManager *styleManager;
+    KStyleManager *styleManager;
 };
 
 #endif

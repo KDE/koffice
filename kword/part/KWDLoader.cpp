@@ -29,7 +29,7 @@
 #include <KInlineNote.h>
 #include <KShapeFactoryBase.h>
 #include <KShapeContainer.h>
-#include <KoStyleManager.h>
+#include <KStyleManager.h>
 #include <KParagraphStyle.h>
 #include <KCharacterStyle.h>
 #include <KListStyle.h>
@@ -585,7 +585,7 @@ void KWDLoader::fill(KWTextFrameSet *fs, const KXmlElement &framesetElem)
                 cursor.insertBlock(emptyTbf, emptyCf);
             }
 
-            KoStyleManager *styleManager = m_document->resourceManager()->resource(KoText::StyleManager).value<KoStyleManager*>();
+            KStyleManager *styleManager = m_document->resourceManager()->resource(KoText::StyleManager).value<KStyleManager*>();
             Q_ASSERT(styleManager);
 
             firstParag = false;
@@ -1121,7 +1121,7 @@ void KWDLoader::fill(ImageKey *key, const KXmlElement &keyElement)
 
 void KWDLoader::loadStyleTemplates(const KXmlElement &stylesElem)
 {
-    KoStyleManager *styleManager = m_document->resourceManager()->resource(KoText::StyleManager).value<KoStyleManager*>();
+    KStyleManager *styleManager = m_document->resourceManager()->resource(KoText::StyleManager).value<KStyleManager*>();
 
     Q_ASSERT(styleManager);
 

@@ -22,7 +22,7 @@
 #include "CharacterGeneral.h"
 #include "StyleManager.h"
 
-#include <KoStyleManager.h>
+#include <KStyleManager.h>
 #include <KCharacterStyle.h>
 #include <KParagraphStyle.h>
 #include <KCanvasBase.h>
@@ -80,7 +80,7 @@ void StylesWidget::setEmbedded(bool embed)
     widget.stylesView->expandAll();
 }
 
-void StylesWidget::setStyleManager(KoStyleManager *sm)
+void StylesWidget::setStyleManager(KStyleManager *sm)
 {
     m_styleManager = sm;
     m_stylesModel->setStyleManager(sm);

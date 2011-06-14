@@ -26,7 +26,7 @@
 #include "KListStyle.h"
 #include "KoTextBlockData.h"
 #include "KoTextDocumentLayout.h"
-#include "KoStyleManager.h"
+#include "KStyleManager.h"
 #include "KListLevelProperties.h"
 #include "KoTextSharedLoadingData.h"
 #include <KShapeLoadingContext.h>
@@ -100,7 +100,7 @@ KParagraphStyle *KParagraphStyle::fromBlock(const QTextBlock &block, QObject *pa
     KParagraphStyle *answer = new KParagraphStyle(blockFormat, cursor.blockCharFormat(), parent);
 
     int listStyleId = blockFormat.intProperty(ListStyleId);
-    KoStyleManager *sm = KoTextDocument(block.document()).styleManager();
+    KStyleManager *sm = KoTextDocument(block.document()).styleManager();
     if (KListStyle *listStyle = sm->listStyle(listStyleId)) {
         answer->setListStyle(listStyle->clone(answer));
     } else if (block.textList()) {

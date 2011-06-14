@@ -35,7 +35,7 @@
 
 #include "KoTextDocument.h"
 #include "styles/KParagraphStyle.h"
-#include "styles/KoStyleManager.h"
+#include "styles/KStyleManager.h"
 #include "changetracker/KChangeTracker.h"
 
 #include <KLocale>

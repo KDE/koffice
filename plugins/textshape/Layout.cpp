@@ -36,7 +36,7 @@
 #include <KoTableStyle.h>
 #include <KoTableRowStyle.h>
 #include <KoTableColumnAndRowStyleManager.h>
-#include <KoStyleManager.h>
+#include <KStyleManager.h>
 #include <KoTextBlockData.h>
 #include <KoTextBlockBorderData.h>
 #include <KInlineNote.h>

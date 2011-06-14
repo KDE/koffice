@@ -46,7 +46,7 @@ class KXmlElement;
  * it is based on a section style this is indecated that it has a property 'StyleId'
  * with an integer as value.  The integer value corresponds to the styleId() output of
  * a specific KSectionStyle.
- * @see KoStyleManager
+ * @see KStyleManager
  */
 class KOTEXT_EXPORT KSectionStyle : public QObject
 {

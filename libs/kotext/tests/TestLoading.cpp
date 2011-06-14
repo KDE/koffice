@@ -26,7 +26,7 @@
 #include <QtScript>
 #include <QtTest>
 
-#include <KoStyleManager.h>
+#include <KStyleManager.h>
 #include <KOdfStylesReader.h>
 #include <KOdfStore.h>
 #include <KOdfStylesReader.h>
@@ -49,7 +49,7 @@
 #include <KoTableStyle.h>
 #include <KoTableCellStyle.h>
 #include <KoTextDocumentLayout.h>
-#include <KoStyleManager.h>
+#include <KStyleManager.h>
 #include <KCharacterStyle.h>
 #include <KParagraphStyle.h>
 #include <KoText.h>
@@ -1048,7 +1048,7 @@ QString TestLoading::documentToOdt(QTextDocument *document)
     KXmlWriter xmlWriter(&contentTmpFile, 1);
 
     KOdfGenericStyles mainStyles;
-    KoStyleManager *styleMan = KoTextDocument(document).styleManager();
+    KStyleManager *styleMan = KoTextDocument(document).styleManager();
     Q_UNUSED(styleMan);
     KOdfEmbeddedDocumentSaver embeddedSaver;
 
@@ -1081,7 +1081,7 @@ QString TestLoading::documentToOdt(QTextDocument *document)
         KoTextDocumentLayout *layout = new KoTextDocumentLayout(textShapeData->document());
         textShapeData->document()->setDocumentLayout(layout);
         layout->setInlineTextObjectManager(new KInlineTextObjectManager(layout)); // required while saving
-        KoStyleManager *styleManager = new KoStyleManager;
+        KStyleManager *styleManager = new KStyleManager;
         KoTextDocument(textShapeData->document()).setStyleManager(styleManager);
     }
     KChangeTracker* changeTracker = new KChangeTracker;

@@ -32,7 +32,7 @@
 #include <KShapeSavingContext.h>
 
 #include <KoTextShapeData.h>
-#include <KoStyleManager.h>
+#include <KStyleManager.h>
 #include <KParagraphStyle.h>
 #include <KShapeGroup.h>
 #include <KShapeLayer.h>
@@ -209,7 +209,7 @@ bool KWOdfWriter::save(KOdfWriteStore &odfStore, KOdfEmbeddedDocumentSaver &embe
     KOdfGenericChanges changes;
 
     // Save the named styles
-    KoStyleManager *styleManager = m_document->resourceManager()->resource(KoText::StyleManager).value<KoStyleManager*>();
+    KStyleManager *styleManager = m_document->resourceManager()->resource(KoText::StyleManager).value<KStyleManager*>();
     styleManager->saveOdf(mainStyles);
 
     // TODO get the pagestyle for the first page and store that as 'style:default-page-layout'

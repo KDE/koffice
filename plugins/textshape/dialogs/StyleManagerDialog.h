@@ -22,7 +22,7 @@
 #include <KDialog>
 
 class StyleManager;
-class KoStyleManager;
+class KStyleManager;
 class KUnit;
 
 class StyleManagerDialog : public KDialog
@@ -32,7 +32,7 @@ public:
     explicit StyleManagerDialog(QWidget *parent);
     ~StyleManagerDialog();
 
-    void setStyleManager(KoStyleManager *sm);
+    void setStyleManager(KStyleManager *sm);
 
     void setUnit(const KUnit &unit);
 

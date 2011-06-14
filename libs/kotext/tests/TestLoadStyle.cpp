@@ -29,7 +29,7 @@
 #include <KOdfLoadingContext.h>
 #include <KOdfXmlNS.h>
 #include <KoTextDocumentLayout.h>
-#include <KoStyleManager.h>
+#include <KStyleManager.h>
 #include <KCharacterStyle.h>
 #include <KParagraphStyle.h>
 #include <KoText.h>
@@ -89,7 +89,7 @@ QTextDocument *TestLoadStyle::documentFromOdt(const QString &odt)
     KXmlElement realBody(KoXml::namedItemNS(content, KOdfXmlNS::office, "body"));
     KXmlElement body = KoXml::namedItemNS(realBody, KOdfXmlNS::office, "text");
 
-    KoStyleManager *styleManager = new KoStyleManager;
+    KStyleManager *styleManager = new KStyleManager;
     KChangeTracker *changeTracker = new KChangeTracker;
 
     KOdfLoadingContext odfLoadingContext(odfReadStore.styles(), odfReadStore.store(), *componentData);
@@ -135,7 +135,7 @@ void TestLoadStyle::testLoadStyle()
     //qDebug() << cursor.charFormat().property(KCharacterStyle::StyleId).toInt();
 
     KoTextDocument textDoc(document);
-    KoStyleManager *sm = textDoc.styleManager();
+    KStyleManager *sm = textDoc.styleManager();
     KCharacterStyle *myStyle = sm->characterStyle("MyStyle");
     QVERIFY(myStyle);
     //qDebug() << myStyle->styleId();

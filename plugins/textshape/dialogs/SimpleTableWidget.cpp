@@ -40,7 +40,7 @@ SimpleTableWidget::SimpleTableWidget(TextTool *tool, QWidget *parent)
     widget.splitCells->setDefaultAction(tool->action("split_tablecells"));
 }
 
-void SimpleTableWidget::setStyleManager(KoStyleManager *sm)
+void SimpleTableWidget::setStyleManager(KStyleManager *sm)
 {
     m_styleManager = sm;
 }

@@ -40,7 +40,7 @@ public:
     KoStyleManagerPrivate();
     ~KoStyleManagerPrivate();
     void refreshUnsetStoreFor(int key);
-    void requestFireUpdate(KoStyleManager *q);
+    void requestFireUpdate(KStyleManager *q);
     void updateAlteredStyles(); // slot for the QTimer::singleshot
 
     /// recursively add all char styles under \a ps

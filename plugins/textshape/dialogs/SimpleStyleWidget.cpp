@@ -189,7 +189,7 @@ void SimpleStyleWidget::setCurrentBlock(const QTextBlock &block)
     }
 }
 
-void SimpleStyleWidget::setStyleManager(KoStyleManager *sm)
+void SimpleStyleWidget::setStyleManager(KStyleManager *sm)
 {
     m_styleManager = sm;
 }

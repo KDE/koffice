@@ -50,7 +50,7 @@
 #include <KXmlReader.h>
 #include <KOdfStoreReader.h>
 #include <KOdfWriteStore.h>
-#include <KoStyleManager.h>
+#include <KStyleManager.h>
 #include <KOdfXmlNS.h>
 #include <kcomponentdata.h>
 #include <QTemporaryFile>

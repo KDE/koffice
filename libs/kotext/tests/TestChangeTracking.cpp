@@ -24,7 +24,7 @@
 #include <QtScript>
 #include <QtTest>
 
-#include <KoStyleManager.h>
+#include <KStyleManager.h>
 #include <KOdfStylesReader.h>
 #include <KOdfStore.h>
 #include <KOdfStylesReader.h>
@@ -47,7 +47,7 @@
 #include <KoTableStyle.h>
 #include <KoTableCellStyle.h>
 #include <KoTextDocumentLayout.h>
-#include <KoStyleManager.h>
+#include <KStyleManager.h>
 #include <KCharacterStyle.h>
 #include <KParagraphStyle.h>
 #include <KoText.h>
@@ -100,7 +100,7 @@ QTextDocument *TestChangeTracking::documentFromOdt(const QString &odt, const QSt
     KXmlElement realBody(KoXml::namedItemNS(content, KOdfXmlNS::office, "body"));
     KXmlElement body = KoXml::namedItemNS(realBody, KOdfXmlNS::office, "text");
 
-    KoStyleManager *styleManager = new KoStyleManager;
+    KStyleManager *styleManager = new KStyleManager;
     KChangeTracker *changeTracker = new KChangeTracker;
     if (changeFormat == "DeltaXML")
         changeTracker->setSaveFormat(KChangeTracker::DELTAXML);
@@ -158,7 +158,7 @@ QString TestChangeTracking::documentToOdt(QTextDocument *document)
     KXmlWriter xmlWriter(&contentTmpFile, 1);
 
     KOdfGenericStyles mainStyles;
-    KoStyleManager *styleMan = KoTextDocument(document).styleManager();
+    KStyleManager *styleMan = KoTextDocument(document).styleManager();
     Q_UNUSED(styleMan);
     KOdfEmbeddedDocumentSaver embeddedSaver;
 
@@ -191,7 +191,7 @@ QString TestChangeTracking::documentToOdt(QTextDocument *document)
         KoTextDocumentLayout *layout = new KoTextDocumentLayout(textShapeData->document());
         textShapeData->document()->setDocumentLayout(layout);
         layout->setInlineTextObjectManager(new KInlineTextObjectManager(layout)); // required while saving
-        KoStyleManager *styleManager = new KoStyleManager;
+        KStyleManager *styleManager = new KStyleManager;
         KoTextDocument(textShapeData->document()).setStyleManager(styleManager);
     }
 

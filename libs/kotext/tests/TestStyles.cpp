@@ -20,8 +20,8 @@
 #include "TestStyles.h"
 
 #include <styles/KParagraphStyle.h>
-#include <styles/KoStyleManager.h>
-#include <styles/KoStyleManager_p.h>
+#include <styles/KStyleManager.h>
+#include <styles/KStyleManager_p.h>
 #include <styles/KCharacterStyle.h>
 #include <KDebug>
 #include <QTextDocument>
@@ -288,7 +288,7 @@ void TestStyles::testUnapplyStyle()
 
 void TestStyles::testChangeManagedStyle()
 {
-    KoStyleManager manager;
+    KStyleManager manager;
     KParagraphStyle *p1 = new KParagraphStyle(&manager);
     p1->setName("Headers");
 
@@ -331,7 +331,7 @@ void TestStyles::testModifiedParag()
     // if the user modified some paragraph properties on a block and the style is later
     // changed I expect the modified properties on the block to not be lost.
 
-    KoStyleManager manager;
+    KStyleManager manager;
     KParagraphStyle *defaultStyle = manager.defaultParagraphStyle();
     defaultStyle->setLineHeightPercent(140);
 

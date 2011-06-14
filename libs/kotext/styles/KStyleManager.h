@@ -48,7 +48,7 @@ class KoStyleManagerPrivate;
  * Manages all character, paragraph, table and table cell styles for any number
  * of documents.
  */
-class KOTEXT_EXPORT KoStyleManager : public QObject
+class KOTEXT_EXPORT KStyleManager : public QObject
 {
     Q_OBJECT
 public:
@@ -56,12 +56,12 @@ public:
      * Create a new style manager.
      * @param parent pass a parent to use qobject memory management
      */
-    explicit KoStyleManager(QObject *parent = 0);
+    explicit KStyleManager(QObject *parent = 0);
 
     /**
      * Destructor.
      */
-    virtual ~KoStyleManager();
+    virtual ~KStyleManager();
 
     // load is not needed as it is done in KoTextSharedLoadingData
 
@@ -425,6 +425,6 @@ private:
     Q_PRIVATE_SLOT(d, void updateAlteredStyles())
 };
 
-Q_DECLARE_METATYPE(KoStyleManager*)
+Q_DECLARE_METATYPE(KStyleManager*)
 
 #endif

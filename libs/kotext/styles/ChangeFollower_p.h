@@ -30,7 +30,7 @@
 // We mean it.
 //
 
-#include "KoStyleManager.h"
+#include "KStyleManager.h"
 
 #include <QObject>
 #include <QTextDocument>
@@ -48,15 +48,15 @@ public:
     /**
      * Create a new ChangeFollower that can update the document with
      * any changes made in the styles managed by the style manager.
-     * This class is created by the KoStyleManager to proxy for a document.
+     * This class is created by the KStyleManager to proxy for a document.
      * The reason this is a proxy class instead of simply a couple of methods
-     * inside KoStyleManager is for memory management. A stylemanager can
+     * inside KStyleManager is for memory management. A stylemanager can
      * maintain a lot of documents and these documents can be deleted without
      * telling the styleManager.  We use the QObject principle of children
      * getting deleted when the parant gets deleted to track the document, which
      * we use as the parant document.
      */
-    ChangeFollower(QTextDocument *parent, KoStyleManager *manager);
+    ChangeFollower(QTextDocument *parent, KStyleManager *manager);
 
     /// Destructor, called when the parent is deleted.
     ~ChangeFollower();
@@ -78,7 +78,7 @@ public:
 
 private:
     QTextDocument *m_document;
-    QWeakPointer<KoStyleManager> m_styleManager;
+    QWeakPointer<KStyleManager> m_styleManager;
 };
 
 #endif

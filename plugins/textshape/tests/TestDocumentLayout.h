@@ -32,7 +32,7 @@
 
 class QPainter;
 class KoViewConverter;
-class KoStyleManager;
+class KStyleManager;
 class QTextDocument;
 class QTextLayout;
 
@@ -109,7 +109,7 @@ private:
     KoTextDocumentLayout *m_layout;
     QTextLayout *m_blockLayout;
     QString m_loremIpsum;
-    KoStyleManager *m_styleManager;
+    KStyleManager *m_styleManager;
     Layout *m_textLayout;
 };
 

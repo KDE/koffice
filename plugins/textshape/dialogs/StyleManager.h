@@ -24,7 +24,7 @@
 
 #include <QWidget>
 
-class KoStyleManager;
+class KStyleManager;
 class KParagraphStyle;
 class KCharacterStyle;
 
@@ -35,7 +35,7 @@ public:
     StyleManager(QWidget *parent = 0);
     ~StyleManager();
 
-    void setStyleManager(KoStyleManager *sm);
+    void setStyleManager(KStyleManager *sm);
 
     void setUnit(const KUnit &unit);
 
@@ -67,8 +67,8 @@ private:
     void setCharacterStyle(KCharacterStyle *style, bool canDelete, bool partOfParag);
 
     Ui::StyleManager widget;
-    KoStyleManager *m_styleManager;
-    KoStyleManager *m_shadowStyleManager;
+    KStyleManager *m_styleManager;
+    KStyleManager *m_shadowStyleManager;
 
     QHash<KParagraphStyle*, int> m_shadowParagraphStyles; // shadow to orig Id
     QHash<KCharacterStyle*, int> m_shadowCharacterStyles; // shadow to orig Id

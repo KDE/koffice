@@ -38,7 +38,7 @@
 #include "KShape.h"
 #include "KoVariable.h"
 #include "KInlineTextObjectManager.h"
-#include "styles/KoStyleManager.h"
+#include "styles/KStyleManager.h"
 #include "styles/KCharacterStyle.h"
 #include "styles/KParagraphStyle.h"
 #include "styles/KListStyle.h"
@@ -187,7 +187,7 @@ public:
     KXmlWriter *writer;
 
     KoTextDocumentLayout *layout;
-    KoStyleManager *styleManager;
+    KStyleManager *styleManager;
     KChangeTracker *changeTracker;
     KDocumentRdfBase *rdfData;
     QTextDocument *document;
@@ -576,14 +576,14 @@ KoTextWriter::~KoTextWriter()
     delete d;
 }
 
-QString KoTextWriter::saveParagraphStyle(const QTextBlock &block, KoStyleManager *styleManager, KShapeSavingContext &context)
+QString KoTextWriter::saveParagraphStyle(const QTextBlock &block, KStyleManager *styleManager, KShapeSavingContext &context)
 {
     QTextBlockFormat blockFormat = block.blockFormat();
     QTextCharFormat charFormat = QTextCursor(block).blockCharFormat();
     return saveParagraphStyle(blockFormat, charFormat, styleManager, context);
 }
 
-QString KoTextWriter::saveParagraphStyle(const QTextBlockFormat &blockFormat, const QTextCharFormat &charFormat, KoStyleManager * styleManager, KShapeSavingContext &context)
+QString KoTextWriter::saveParagraphStyle(const QTextBlockFormat &blockFormat, const QTextCharFormat &charFormat, KStyleManager * styleManager, KShapeSavingContext &context)
 {
     KParagraphStyle *defaultParagraphStyle = styleManager->defaultParagraphStyle();
     KParagraphStyle *originalParagraphStyle = styleManager->paragraphStyle(blockFormat.intProperty(KParagraphStyle::StyleId));

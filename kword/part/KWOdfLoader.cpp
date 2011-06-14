@@ -39,7 +39,7 @@
 #include <KShapeFactoryBase.h>
 #include <KoTextShapeData.h>
 #include <KShapeLoadingContext.h>
-#include <KoStyleManager.h>
+#include <KStyleManager.h>
 #include <KOdfLoadingContext.h>
 #include <KoUpdater.h>
 #include <KoProgressUpdater.h>
@@ -127,7 +127,7 @@ bool KWOdfLoader::load(KOdfStoreReader &odfStore)
     // Load all styles before the corresponding paragraphs try to use them!
     KWOdfSharedLoadingData *sharedData = new KWOdfSharedLoadingData(this);
     sc.addSharedData(KOTEXT_SHARED_LOADING_ID, sharedData);
-    KoStyleManager *styleManager = m_document->resourceManager()->resource(KoText::StyleManager).value<KoStyleManager*>();
+    KStyleManager *styleManager = m_document->resourceManager()->resource(KoText::StyleManager).value<KStyleManager*>();
     Q_ASSERT(styleManager);
     sharedData->loadOdfStyles(sc, styleManager);
 
@@ -303,7 +303,7 @@ void KWOdfLoader::loadHeaderFooterFrame(KOdfLoadingContext &context, const KWPag
 
     KShapeLoadingContext ctxt(context, m_document->resourceManager());
     KWOdfSharedLoadingData *sharedData = new KWOdfSharedLoadingData(this);
-    KoStyleManager *styleManager = m_document->resourceManager()->resource(KoText::StyleManager).value<KoStyleManager*>();
+    KStyleManager *styleManager = m_document->resourceManager()->resource(KoText::StyleManager).value<KStyleManager*>();
     Q_ASSERT(styleManager);
     sharedData->loadOdfStyles(ctxt, styleManager);
     ctxt.addSharedData(KOTEXT_SHARED_LOADING_ID, sharedData);

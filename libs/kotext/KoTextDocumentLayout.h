@@ -33,7 +33,7 @@
 
 class KoTextDocumentLayout;
 class KShape;
-class KoStyleManager;
+class KStyleManager;
 class QTextLayout;
 class KInlineTextObjectManager;
 class KoViewConverter;

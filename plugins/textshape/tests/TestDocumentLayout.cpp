@@ -22,7 +22,7 @@
 #include <KParagraphStyle.h>
 #include <KListStyle.h>
 #include <KListLevelProperties.h>
-#include <KoStyleManager.h>
+#include <KStyleManager.h>
 #include <KoTextBlockData.h>
 #include <KoTextBlockBorderData.h>
 #include <KoTextDocument.h>
@@ -59,7 +59,7 @@ void TestDocumentLayout::initForNewTest(const QString &initText)
     m_doc->setDefaultFont(QFont("Sans Serif", 12, QFont::Normal, false)); //do it manually since we do not load the appDefaultStyle
     m_textLayout = new Layout(m_layout);
     m_layout->setLayout(m_textLayout);
-    m_styleManager = new KoStyleManager();
+    m_styleManager = new KStyleManager();
     KoTextDocument(m_doc).setStyleManager(m_styleManager);
 
     QTextBlock block = m_doc->begin();

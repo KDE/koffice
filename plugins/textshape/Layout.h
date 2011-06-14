@@ -32,7 +32,7 @@
 #include <QHash>
 #include <QWeakPointer>
 
-class KoStyleManager;
+class KStyleManager;
 class KoTextBlockData;
 class KoTextShapeData;
 class TextShape;
@@ -136,7 +136,7 @@ private:
     void updateFrameStack();
 
 private:
-    KoStyleManager *m_styleManager;
+    KStyleManager *m_styleManager;
 
     KChangeTracker *m_changeTracker;
 

@@ -46,7 +46,7 @@ class KOdfGenericStyle;
  * In a document the instances of QTextCharFormat which are based on a
  * KCharacterStyle have a property StyleId with an integer as value which
  * equals styleId() of that style.
- * @see KoStyleManager
+ * @see KStyleManager
  */
 class KOTEXT_EXPORT KCharacterStyle : public QObject
 {

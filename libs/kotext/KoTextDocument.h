@@ -27,7 +27,7 @@
 
 #include "KoList.h"
 
-class KoStyleManager;
+class KStyleManager;
 class KInlineTextObjectManager;
 class KUndoStack;
 class KoTextEditor;
@@ -61,10 +61,10 @@ public:
     void setTextEditor(KoTextEditor *textEditor);
 
     /// Sets the style manager that defines the named styles in the document
-    void setStyleManager(KoStyleManager *styleManager);
+    void setStyleManager(KStyleManager *styleManager);
 
     /// Returns the style manager
-    KoStyleManager *styleManager() const;
+    KStyleManager *styleManager() const;
 
     /// Sets the change tracker of the document
     void setChangeTracker(KChangeTracker *changeTracker);

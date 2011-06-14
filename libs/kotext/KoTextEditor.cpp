@@ -34,7 +34,7 @@
 #include "changetracker/KDeleteChangeMarker.h"
 #include "styles/KCharacterStyle.h"
 #include "styles/KParagraphStyle.h"
-#include "styles/KoStyleManager.h"
+#include "styles/KStyleManager.h"
 #include "styles/KoTableCellStyle.h"
 #include "styles/KoTableColumnStyle.h"
 #include "styles/KoTableRowStyle.h"
@@ -684,7 +684,7 @@ void KoTextEditor::setStyle(KParagraphStyle *style)
     const int start = qMin(position(), anchor());
     const int end = qMax(position(), anchor());
     QTextBlock block = d->document->findBlock(start);
-    KoStyleManager *styleManager = KoTextDocument(d->document).styleManager();
+    KStyleManager *styleManager = KoTextDocument(d->document).styleManager();
     while (block.isValid() && block.position() <= end) { // now loop over all blocks
         QTextBlockFormat bf = block.blockFormat();
         if (styleManager) {
@@ -701,7 +701,7 @@ void KoTextEditor::setStyle(KParagraphStyle *style)
 void KoTextEditor::setDefaultFormat()
 {
     d->updateState(KoTextEditorPrivate::Format, i18n("Set default format"));
-    if (KoStyleManager *styleManager = KoTextDocument(d->document).styleManager()) {
+    if (KStyleManager *styleManager = KoTextDocument(d->document).styleManager()) {
         KCharacterStyle *defaultCharStyle = styleManager->defaultParagraphStyle()->characterStyle();
         QTextCharFormat format;
         defaultCharStyle->applyStyle(format);
@@ -1173,7 +1173,7 @@ void KoTextEditor::newLine()
     if (d->caret.hasSelection())
         d->deleteInlineObjects();
     KoTextDocument koDocument(d->document);
-    KoStyleManager *styleManager = koDocument.styleManager();
+    KStyleManager *styleManager = koDocument.styleManager();
     KParagraphStyle *nextStyle = 0;
     KParagraphStyle *currentStyle = 0;
     if (styleManager) {

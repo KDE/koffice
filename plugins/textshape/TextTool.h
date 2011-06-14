@@ -40,7 +40,7 @@ class KCharacterStyle;
 class KoColor;
 class KoColorPopupAction;
 class KParagraphStyle;
-class KoStyleManager;
+class KStyleManager;
 class KoTextEditingPlugin;
 class KoTextEditor;
 class UndoTextCommand;
@@ -143,7 +143,7 @@ public slots:
 
 signals:
     /// emitted every time a different styleManager is set.
-    void styleManagerChanged(KoStyleManager *manager);
+    void styleManagerChanged(KStyleManager *manager);
     /// emitted every time a caret move leads to a different character format being under the caret
     void charFormatChanged(const QTextCharFormat &format);
     /// emitted every time a caret move leads to a different paragraph format being under the caret

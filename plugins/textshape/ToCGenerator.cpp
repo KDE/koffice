@@ -27,7 +27,7 @@
 #include <KShape.h>
 #include <KoTextDocument.h>
 #include <KoTextBlockData.h>
-#include <KoStyleManager.h>
+#include <KStyleManager.h>
 
 #include <QTextFrame>
 #include <QTimer>
@@ -69,7 +69,7 @@ void ToCGenerator::generate()
     QTextFrameFormat tocFormat = m_ToCFrame->frameFormat();
     QTextDocument *doc = m_ToCFrame->document();
     KoTextDocument koDocument(doc);
-    KoStyleManager *styleManager = koDocument.styleManager();
+    KStyleManager *styleManager = koDocument.styleManager();
     QList<KParagraphStyle *> paragStyle;
 
     QTextCursor cursor = m_ToCFrame->lastCursorPosition();

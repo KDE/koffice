@@ -35,7 +35,7 @@
 
 #include <QTextCursor>
 #include <QTextDocument>
-#include <KoStyleManager.h>
+#include <KStyleManager.h>
 #include <KoTextDocument.h>
 #include <KParagraphStyle.h>
 

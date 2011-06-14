@@ -29,7 +29,7 @@
 
 // #define DEBUG_CHANGES
 
-ChangeFollower::ChangeFollower(QTextDocument *parent, KoStyleManager *manager)
+ChangeFollower::ChangeFollower(QTextDocument *parent, KStyleManager *manager)
         : QObject(parent),
         m_document(parent),
         m_styleManager(manager)
@@ -38,7 +38,7 @@ ChangeFollower::ChangeFollower(QTextDocument *parent, KoStyleManager *manager)
 
 ChangeFollower::~ChangeFollower()
 {
-    KoStyleManager *sm = m_styleManager.data();
+    KStyleManager *sm = m_styleManager.data();
     if (sm)
         sm->remove(this);
 }
@@ -48,7 +48,7 @@ void ChangeFollower::processUpdates(const QMap<int, QMap<int, QVariant> > &chang
 #ifdef DEBUG_CHANGES
     kDebug(32500) << "styles changed;" << changedStyles.keys();
 #endif
-    KoStyleManager *sm = m_styleManager.data();
+    KStyleManager *sm = m_styleManager.data();
     if (!sm) {
         // since the stylemanager would be the one calling this method, I doubt this
         // will ever happen.  But better safe than sorry..

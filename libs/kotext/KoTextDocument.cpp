@@ -28,7 +28,7 @@
 
 #include "KoTextDocument.h"
 #include "KoTextEditor.h"
-#include "styles/KoStyleManager.h"
+#include "styles/KStyleManager.h"
 #include "KInlineTextObjectManager.h"
 #include "KoTextDocumentLayout.h"
 #include "styles/KParagraphStyle.h"
@@ -78,7 +78,7 @@ KoTextEditor* KoTextDocument::textEditor()
     return resource.value<KoTextEditor *>();
 }
 
-void KoTextDocument::setStyleManager(KoStyleManager *sm)
+void KoTextDocument::setStyleManager(KStyleManager *sm)
 {
     QVariant v;
     v.setValue(sm);
@@ -98,10 +98,10 @@ void KoTextDocument::setInlineTextObjectManager(KInlineTextObjectManager *manage
         lay->setInlineTextObjectManager(manager);
 }
 
-KoStyleManager *KoTextDocument::styleManager() const
+KStyleManager *KoTextDocument::styleManager() const
 {
     QVariant resource = m_document->resource(KoTextDocument::StyleManager, StyleManagerURL);
-    return resource.value<KoStyleManager *>();
+    return resource.value<KStyleManager *>();
 }
 
 void KoTextDocument::setChangeTracker(KChangeTracker *changeTracker)

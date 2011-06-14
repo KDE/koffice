@@ -31,7 +31,7 @@
 #include <KoTextSharedLoadingData.h>
 #include <KoTextDocumentLayout.h>
 #include <KInlineTextObjectManager.h>
-#include <KoStyleManager.h>
+#include <KStyleManager.h>
 #include <KOdfXmlNS.h>
 #include <KoProgressUpdater.h>
 #include <KoUpdater.h>
@@ -136,7 +136,7 @@ bool KoPADocument::loadOdf(KOdfStoreReader &odfStore)
     // Load text styles before the corresponding text shapes try to use them!
     KoTextSharedLoadingData * sharedData = new KoTextSharedLoadingData();
     paContext.addSharedData(KOTEXT_SHARED_LOADING_ID, sharedData);
-    KoStyleManager *styleManager = resourceManager()->resource(KoText::StyleManager).value<KoStyleManager*>();
+    KStyleManager *styleManager = resourceManager()->resource(KoText::StyleManager).value<KStyleManager*>();
 
     sharedData->loadOdfStyles(paContext, styleManager);
 
@@ -376,7 +376,7 @@ void KoPADocument::loadOdfSettings( const KXmlDocument &settingsDoc)
 
 void KoPADocument::saveOdfDocumentStyles(KoPASavingContext &context)
 {
-    KoStyleManager *styleManager = resourceManager()->resource(KoText::StyleManager).value<KoStyleManager*>();
+    KStyleManager *styleManager = resourceManager()->resource(KoText::StyleManager).value<KStyleManager*>();
     Q_ASSERT(styleManager);
     styleManager->saveOdf(context.mainStyles());
 }

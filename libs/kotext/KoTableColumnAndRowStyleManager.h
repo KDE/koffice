@@ -33,7 +33,7 @@ class QTextTable;
 /**
  * Manages all column and row styles for a single table.
  *
- * It's not managing the lifetime of named styles, which is the job of the KoStyleManager,
+ * It's not managing the lifetime of named styles, which is the job of the KStyleManager,
  * so you should still register such styles in the styleManager too.
  *
  * The main purpose of this manager is simply to keep track of which styles are in

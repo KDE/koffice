@@ -41,7 +41,7 @@
 #include <KoTextEditor.h>
 #include <KoTextDocumentLayout.h>
 #include <KoTextWriter.h>
-#include <KoStyleManager.h>
+#include <KStyleManager.h>
 #include <KXmlReader.h>
 #include <KOdfXmlNS.h>
 
@@ -107,7 +107,7 @@ void SCPlaceholderTextStrategy::saveOdf(KShapeSavingContext &context)
     if (m_textShape) {
         KoTextShapeData *shapeData = qobject_cast<KoTextShapeData*>(m_textShape->userData());
         if (shapeData) {
-            KoStyleManager *styleManager = KoTextDocument(shapeData->document()).styleManager();
+            KStyleManager *styleManager = KoTextDocument(shapeData->document()).styleManager();
             if (styleManager) {
                 QTextBlockFormat bf = shapeData->document()->begin().blockFormat();
                 KParagraphStyle *ps = styleManager->paragraphStyle(bf.property(KParagraphStyle::StyleId).toInt());

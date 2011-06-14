@@ -3,7 +3,7 @@
 #include <KParagraphStyle.h>
 #include <KListStyle.h>
 #include <KListLevelProperties.h>
-#include <KoStyleManager.h>
+#include <KStyleManager.h>
 #include <KoTextBlockData.h>
 
 #include <QtGui>

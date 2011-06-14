@@ -21,14 +21,14 @@
 #include <QDebug>
 #include <QSignalMapper>
 
-#include <KoStyleManager.h>
+#include <KStyleManager.h>
 #include <KParagraphStyle.h>
 #include <KCharacterStyle.h>
 
 #include <KIcon>
 #include <KDebug>
 
-StylesModel::StylesModel(KoStyleManager *manager, QObject *parent)
+StylesModel::StylesModel(KStyleManager *manager, QObject *parent)
         : QAbstractItemModel(parent),
         m_styleManager(0),
         m_currentParagraphStyle(0),
@@ -344,7 +344,7 @@ KCharacterStyle *StylesModel::characterStyleForIndex(const QModelIndex &index) c
     return m_styleManager->characterStyle(index.internalId());
 }
 
-void StylesModel::setStyleManager(KoStyleManager *sm)
+void StylesModel::setStyleManager(KStyleManager *sm)
 {
     if (sm == m_styleManager)
         return;

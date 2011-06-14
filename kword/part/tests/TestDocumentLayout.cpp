@@ -27,7 +27,7 @@
 #include <KParagraphStyle.h>
 #include <KListStyle.h>
 #include <KoTextBlockData.h>
-#include <KoStyleManager.h>
+#include <KStyleManager.h>
 #include <KoTextDocument.h>
 #include <MockShapes.h>
 #include <KoTextAnchor.h>
@@ -154,7 +154,7 @@ void TestDocumentLayout::initForNewTest(const QString &initText)
     Q_ASSERT(doc);
     layout = dynamic_cast<KWTextDocumentLayout*>(doc->documentLayout());
     Q_ASSERT(layout);
-    styleManager = new KoStyleManager();
+    styleManager = new KStyleManager();
     KoTextDocument(doc).setStyleManager(styleManager);
 
     QTextBlock block = doc->begin();

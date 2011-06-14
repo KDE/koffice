@@ -24,7 +24,7 @@
 
 class KShapeLoadingContext;
 class KChangeTracker;
-class KoStyleManager;
+class KStyleManager;
 
 class QTextDocumentFragment;
 
@@ -101,7 +101,7 @@ public:
     Type type() const;
 
     virtual bool loadOdf(const KXmlElement &element, KShapeLoadingContext &context);
-    bool loadOdf(const KXmlElement &element, KShapeLoadingContext &context, KoStyleManager *styleManager, KChangeTracker *changeTracker);
+    bool loadOdf(const KXmlElement &element, KShapeLoadingContext &context, KStyleManager *styleManager, KChangeTracker *changeTracker);
 
     ///reimplemented
     void saveOdf(KShapeSavingContext &context);
