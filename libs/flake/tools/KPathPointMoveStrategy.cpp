@@ -19,7 +19,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoPathPointMoveStrategy_p.h"
+#include "KPathPointMoveStrategy_p.h"
 #include "KInteractionStrategy_p.h"
 
 #include "commands/KPathPointMoveCommand.h"
@@ -28,18 +28,18 @@
 #include "KoSnapGuide.h"
 #include "KCanvasBase.h"
 
-KoPathPointMoveStrategy::KoPathPointMoveStrategy(KoPathTool *tool, const QPointF &pos)
+KPathPointMoveStrategy::KPathPointMoveStrategy(KoPathTool *tool, const QPointF &pos)
     : KInteractionStrategy(*(new KInteractionStrategyPrivate(tool))),
     m_originalPosition(pos),
     m_tool(tool)
 {
 }
 
-KoPathPointMoveStrategy::~KoPathPointMoveStrategy()
+KPathPointMoveStrategy::~KPathPointMoveStrategy()
 {
 }
 
-void KoPathPointMoveStrategy::handleMouseMove(const QPointF &mouseLocation, Qt::KeyboardModifiers modifiers)
+void KPathPointMoveStrategy::handleMouseMove(const QPointF &mouseLocation, Qt::KeyboardModifiers modifiers)
 {
     m_tool->canvas()->updateCanvas(m_tool->canvas()->snapGuide()->boundingRect());
     QPointF newPosition = m_tool->canvas()->snapGuide()->snap(mouseLocation, modifiers);
@@ -62,7 +62,7 @@ void KoPathPointMoveStrategy::handleMouseMove(const QPointF &mouseLocation, Qt::
     m_move = move;
 }
 
-QUndoCommand* KoPathPointMoveStrategy::createCommand(QUndoCommand *parent)
+QUndoCommand* KPathPointMoveStrategy::createCommand(QUndoCommand *parent)
 {
     m_tool->canvas()->updateCanvas(m_tool->canvas()->snapGuide()->boundingRect());
 

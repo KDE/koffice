@@ -43,11 +43,11 @@ class KCanvasBase;
 /**
  * @brief Strategy for moving points of a path shape.
  */
-class KoPathPointMoveStrategy : public KInteractionStrategy
+class KPathPointMoveStrategy : public KInteractionStrategy
 {
 public:
-    KoPathPointMoveStrategy(KoPathTool *tool, const QPointF &pos);
-    virtual ~KoPathPointMoveStrategy();
+    KPathPointMoveStrategy(KoPathTool *tool, const QPointF &pos);
+    virtual ~KPathPointMoveStrategy();
     virtual void handleMouseMove(const QPointF &mouseLocation, Qt::KeyboardModifiers modifiers);
     virtual QUndoCommand *createCommand(QUndoCommand *parent = 0);
 

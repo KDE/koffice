@@ -22,7 +22,7 @@
 
 #include "KoPathToolHandle_p.h"
 #include "KoPathTool_p.h"
-#include "KoPathPointMoveStrategy_p.h"
+#include "KPathPointMoveStrategy_p.h"
 #include "KPathControlPointMoveStrategy_p.h"
 #include "KoSelection.h"
 #include "commands/KoPathPointTypeCommand_p.h"
@@ -101,7 +101,7 @@ KInteractionStrategy * PointHandle::handleMousePress(KoPointerEvent *event)
         // TODO remove canvas from call ?
         if (m_activePointType == KPathPoint::Node) {
             QPointF startPoint = m_activePoint->parent()->shapeToDocument(m_activePoint->point());
-            return new KoPathPointMoveStrategy(m_tool, startPoint);
+            return new KPathPointMoveStrategy(m_tool, startPoint);
         } else {
             KoPathShape * pathShape = m_activePoint->parent();
             KPathPointData pd(pathShape, pathShape->pathPointIndex(m_activePoint));
