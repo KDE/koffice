@@ -35,11 +35,11 @@
 
 class KoShapeGroup;
 
-class KSelectionPrivate : public KoShapePrivate
+class KSelectionPrivate : public KShapePrivate
 {
 public:
     KSelectionPrivate(KSelection *parent)
-        : KoShapePrivate(parent), eventTriggered(false), activeLayer(0), q(parent) {}
+        : KShapePrivate(parent), eventTriggered(false), activeLayer(0), q(parent) {}
     QList<KShape*> selectedShapes;
     bool eventTriggered;
 

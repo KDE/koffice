@@ -54,7 +54,7 @@ class KoShapeControllerBase;
 class KDataCenterBase;
 class KoShapeShadow;
 class KEventAction;
-class KoShapePrivate;
+class KShapePrivate;
 class KFilterEffectStack;
 class KoSnapData;
 class KoShapeConnection;
@@ -906,17 +906,17 @@ public:
      * \internal
      * Returns the private object for use within the flake lib
      */
-    KoShapePrivate *priv();
+    KShapePrivate *priv();
 
     /**
      * \internal
      * Returns the private object for use within the flake lib
      */
-    const KoShapePrivate *priv() const;
+    const KShapePrivate *priv() const;
 
 protected:
     /// constructor
-    KShape(KoShapePrivate &);
+    KShape(KShapePrivate &);
 
     /* ** loading saving helper methods */
     /// attributes from ODF 1.1 chapter 9.2.15 Common Drawing Shape Attributes
@@ -996,7 +996,7 @@ protected:
     /// return the current matrix that contains the rotation/scale/position of this shape
     QTransform transform() const;
 
-    KoShapePrivate *d_ptr;
+    KShapePrivate *d_ptr;
 
 private:
     Q_DECLARE_PRIVATE(KShape)

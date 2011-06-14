@@ -69,7 +69,7 @@
 
 #include <limits>
 
-KoShapePrivate::KoShapePrivate(KShape *shape)
+KShapePrivate::KShapePrivate(KShape *shape)
     : size(50, 50),
     parent(0),
     userData(0),
@@ -101,7 +101,7 @@ KoShapePrivate::KoShapePrivate(KShape *shape)
     connectorPolicies.append(KoShapeConnectionPolicy(KoFlake::EscapeLeft, Qt::AlignLeft));
 }
 
-KoShapePrivate::~KoShapePrivate()
+KShapePrivate::~KShapePrivate()
 {
     Q_Q(KShape);
     if (parent)
@@ -123,7 +123,7 @@ KoShapePrivate::~KoShapePrivate()
     qDeleteAll(eventActions);
 }
 
-void KoShapePrivate::shapeChanged(KShape::ChangeType type)
+void KShapePrivate::shapeChanged(KShape::ChangeType type)
 {
     Q_Q(KShape);
     if (editBlockDepth > 0 && ( type == KShape::PositionChanged
@@ -141,7 +141,7 @@ void KoShapePrivate::shapeChanged(KShape::ChangeType type)
         shape->shapeChanged(type, q);
 }
 
-void KoShapePrivate::updateBorder()
+void KShapePrivate::updateBorder()
 {
     Q_Q(KShape);
     if (border == 0)
@@ -163,17 +163,17 @@ void KoShapePrivate::updateBorder()
                 inner.width() + insets.left + insets.right, insets.bottom));
 }
 
-void KoShapePrivate::addShapeManager(KoShapeManager *manager)
+void KShapePrivate::addShapeManager(KoShapeManager *manager)
 {
     shapeManagers.insert(manager);
 }
 
-void KoShapePrivate::removeShapeManager(KoShapeManager *manager)
+void KShapePrivate::removeShapeManager(KoShapeManager *manager)
 {
     shapeManagers.remove(manager);
 }
 // static
-QString KoShapePrivate::getStyleProperty(const char *property, KoShapeLoadingContext &context)
+QString KShapePrivate::getStyleProperty(const char *property, KoShapeLoadingContext &context)
 {
     KOdfStyleStack &styleStack = context.odfLoadingContext().styleStack();
     QString value;
@@ -185,20 +185,20 @@ QString KoShapePrivate::getStyleProperty(const char *property, KoShapeLoadingCon
     return value;
 }
 
-void KoShapePrivate::addConnection(KoShapeConnection *connection)
+void KShapePrivate::addConnection(KoShapeConnection *connection)
 {
     connections.append(connection);
     foreach (KoShapeManager *sm, shapeManagers)
         sm->priv()->addShapeConnection(connection);
 }
 
-void KoShapePrivate::removeConnection(KoShapeConnection *connection)
+void KShapePrivate::removeConnection(KoShapeConnection *connection)
 {
     connections.removeAll(connection);
     // TODO remove from shapeManager ?
 }
 
-void KoShapePrivate::loadOdfGluePoints(const KXmlElement &gluePoints)
+void KShapePrivate::loadOdfGluePoints(const KXmlElement &gluePoints)
 {
     // defaults expect 4 to be there. The subclass should provide those, but if it
     // didn't, make sure we don't have issues with our numbering.
@@ -266,20 +266,20 @@ void KoShapePrivate::loadOdfGluePoints(const KXmlElement &gluePoints)
 
 // ======== KShape
 KShape::KShape()
-        : d_ptr(new KoShapePrivate(this))
+        : d_ptr(new KShapePrivate(this))
 {
     notifyChanged();
 }
 
 KShape::KShape(const QColor &color)
-        : d_ptr(new KoShapePrivate(this))
+        : d_ptr(new KShapePrivate(this))
 {
     d_ptr->fill = new KColorBackground(color);
     notifyChanged();
 }
 
 
-KShape::KShape(KoShapePrivate &dd)
+KShape::KShape(KShapePrivate &dd)
     : d_ptr(&dd)
 {
 }
@@ -1225,7 +1225,7 @@ bool KShape::loadOdfAttributes(const KXmlElement &element, KoShapeLoadingContext
 
 KoShapeBackground *KShape::loadOdfFill(KoShapeLoadingContext &context) const
 {
-    QString fill = KoShapePrivate::getStyleProperty("fill", context);
+    QString fill = KShapePrivate::getStyleProperty("fill", context);
     KoShapeBackground *bg = 0;
     if (fill == "solid" || fill == "hatch") {
         bg = new KColorBackground();
@@ -1257,7 +1257,7 @@ KoShapeBorderBase *KShape::loadOdfStroke(const KXmlElement &element, KoShapeLoad
     KOdfStyleStack &styleStack = context.odfLoadingContext().styleStack();
     KOdfStylesReader &stylesReader = context.odfLoadingContext().stylesReader();
 
-    QString stroke = KoShapePrivate::getStyleProperty("stroke", context);
+    QString stroke = KShapePrivate::getStyleProperty("stroke", context);
     if (stroke == "solid" || stroke == "dash") {
         QPen pen = KOdf::loadOdfStrokeStyle(styleStack, stroke, stylesReader);
 
@@ -1302,10 +1302,10 @@ KoShapeBorderBase *KShape::loadOdfStroke(const KXmlElement &element, KoShapeLoad
     return 0;
 }
 
-KoShapeShadow *KoShapePrivate::loadOdfShadow(KoShapeLoadingContext &context) const
+KoShapeShadow *KShapePrivate::loadOdfShadow(KoShapeLoadingContext &context) const
 {
     KOdfStyleStack &styleStack = context.odfLoadingContext().styleStack();
-    QString shadowStyle = KoShapePrivate::getStyleProperty("shadow", context);
+    QString shadowStyle = KShapePrivate::getStyleProperty("shadow", context);
     if (shadowStyle == "visible" || shadowStyle == "hidden") {
         KoShapeShadow *shadow = new KoShapeShadow();
         QColor shadowColor(styleStack.property(KOdfXmlNS::draw, "shadow-color"));
@@ -1667,13 +1667,13 @@ void KShape::setToolDelegates(const QSet<KShape*> &delegates)
     d->toolDelegates = delegates;
 }
 
-KoShapePrivate *KShape::priv()
+KShapePrivate *KShape::priv()
 {
     Q_D(KShape);
     return d;
 }
 
-const KoShapePrivate *KShape::priv() const
+const KShapePrivate *KShape::priv() const
 {
     Q_D(const KShape);
     return d;

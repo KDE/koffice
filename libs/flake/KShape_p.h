@@ -34,11 +34,11 @@
 #include "KShape.h"
 #include "KoShapeConnectionPolicy.h"
 
-class KoShapePrivate
+class KShapePrivate
 {
 public:
-    KoShapePrivate(KShape *shape);
-    virtual ~KoShapePrivate();
+    KShapePrivate(KShape *shape);
+    virtual ~KShapePrivate();
     /**
      * Notify the shape that a change was done. To be used by inheriting shapes.
      * @param type the change type

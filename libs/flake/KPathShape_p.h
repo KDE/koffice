@@ -33,7 +33,7 @@
 
 #include "KShape_p.h"
 
-class KPathShapePrivate : public KoShapePrivate
+class KPathShapePrivate : public KShapePrivate
 {
 public:
     KPathShapePrivate(KPathShape *q);

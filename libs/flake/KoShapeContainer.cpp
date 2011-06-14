@@ -29,7 +29,7 @@
 #include <QPainterPath>
 
 KoShapeContainerPrivate::KoShapeContainerPrivate(KoShapeContainer *q)
-    : KoShapePrivate(q),
+    : KShapePrivate(q),
     model(0)
 {
 }

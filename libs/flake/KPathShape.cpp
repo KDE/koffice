@@ -53,7 +53,7 @@ static bool qIsNaNPoint(const QPointF &p) {
 #endif
 
 KPathShapePrivate::KPathShapePrivate(KPathShape *q)
-    : KoShapePrivate(q),
+    : KShapePrivate(q),
     fillRule(Qt::OddEvenFill)
 {
 }

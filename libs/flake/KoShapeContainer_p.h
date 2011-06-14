@@ -35,7 +35,7 @@
 
 class KoShapeContainerModel;
 
-class KoShapeContainerPrivate : public KoShapePrivate
+class KoShapeContainerPrivate : public KShapePrivate
 {
 public:
     KoShapeContainerPrivate(KoShapeContainer *q);

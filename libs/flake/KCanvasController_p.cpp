@@ -154,7 +154,7 @@ void Viewport::handleDragEnterEvent(QDragEnterEvent *event)
 
         if (m_draggedShape->shapeId().isEmpty())
             m_draggedShape->setShapeId(factory->id());
-        m_draggedShape->setZIndex(KoShapePrivate::MaxZIndex);
+        m_draggedShape->setZIndex(KShapePrivate::MaxZIndex);
 
         m_parent->canvas()->shapeManager()->addShape(m_draggedShape);
     }
@@ -168,7 +168,7 @@ void Viewport::handleDragEnterEvent(QDragEnterEvent *event)
                 Q_ASSERT(0); // hmm hmm, when does this happen?
             }
             m_draggedShape = shapes.first();
-            m_draggedShape->setZIndex(KoShapePrivate::MaxZIndex);
+            m_draggedShape->setZIndex(KShapePrivate::MaxZIndex);
             event->setDropAction(Qt::CopyAction);
             event->accept();
         }
