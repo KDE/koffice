@@ -18,7 +18,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoShapeShearCommand.h"
+#include "KShapeShearCommand.h"
 #include "KShape.h"
 
 #include <klocale.h>
@@ -33,7 +33,7 @@ public:
     QList<qreal> newShearYs;
 };
 
-KoShapeShearCommand::KoShapeShearCommand(const QList<KShape*> &shapes, const QList<qreal> &previousShearXs, const QList<qreal> &previousShearYs, const QList<qreal> &newShearXs, const QList<qreal> &newShearYs, QUndoCommand *parent)
+KShapeShearCommand::KShapeShearCommand(const QList<KShape*> &shapes, const QList<qreal> &previousShearXs, const QList<qreal> &previousShearYs, const QList<qreal> &newShearXs, const QList<qreal> &newShearYs, QUndoCommand *parent)
     : QUndoCommand(parent),
     d(new KoShapeShearCommandPrivate())
 {
@@ -51,12 +51,12 @@ KoShapeShearCommand::KoShapeShearCommand(const QList<KShape*> &shapes, const QLi
     setText(i18n("Shear Shapes"));
 }
 
-KoShapeShearCommand::~KoShapeShearCommand()
+KShapeShearCommand::~KShapeShearCommand()
 {
     delete d;
 }
 
-void KoShapeShearCommand::redo()
+void KShapeShearCommand::redo()
 {
     QUndoCommand::redo();
     for (int i = 0; i < d->shapes.count(); i++) {
@@ -66,7 +66,7 @@ void KoShapeShearCommand::redo()
     }
 }
 
-void KoShapeShearCommand::undo()
+void KShapeShearCommand::undo()
 {
     QUndoCommand::undo();
     for (int i = 0; i < d->shapes.count(); i++) {

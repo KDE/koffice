@@ -30,7 +30,7 @@ class KShape;
 class KoShapeShearCommandPrivate;
 
 /// The undo / redo command for shape shearing.
-class FLAKE_EXPORT KoShapeShearCommand : public QUndoCommand
+class FLAKE_EXPORT KShapeShearCommand : public QUndoCommand
 {
 public:
     /**
@@ -45,9 +45,9 @@ public:
      * @param newShearYs a list with the same amount of items as shapes with the new values.
      * @param parent the parent command used for macro commands
      */
-    KoShapeShearCommand(const QList<KShape*> &shapes, const QList<qreal> &previousShearXs, const QList<qreal> &previousShearYs, const QList<qreal> &newShearXs, const QList<qreal> &newShearYs, QUndoCommand *parent = 0);
+    KShapeShearCommand(const QList<KShape*> &shapes, const QList<qreal> &previousShearXs, const QList<qreal> &previousShearYs, const QList<qreal> &newShearXs, const QList<qreal> &newShearYs, QUndoCommand *parent = 0);
 
-    ~KoShapeShearCommand();
+    ~KShapeShearCommand();
     /// redo the command
     void redo();
     /// revert the actions done in redo

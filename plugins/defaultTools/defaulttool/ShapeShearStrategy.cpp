@@ -28,7 +28,7 @@
 #include <KPointerEvent.h>
 #include <KShapeManager.h>
 #include <KResourceManager.h>
-#include <commands/KoShapeShearCommand.h>
+#include <commands/KShapeShearCommand.h>
 #include <commands/KShapeMoveCommand.h>
 #include <commands/KoShapeTransformCommand.h>
 
