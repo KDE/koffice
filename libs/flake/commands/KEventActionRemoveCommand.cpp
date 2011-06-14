@@ -23,15 +23,15 @@
 #include "KoShape.h"
 #include "KoEventAction.h"
 
-class KoEventActionRemoveCommandPrivate
+class KEventActionRemoveCommandPrivate
 {
 public:
-    KoEventActionRemoveCommandPrivate(KoShape *s, KoEventAction *e)
+    KEventActionRemoveCommandPrivate(KoShape *s, KoEventAction *e)
         : shape(s), eventAction(e), deleteEventAction(false)
     {
     }
 
-    ~KoEventActionRemoveCommandPrivate()
+    ~KEventActionRemoveCommandPrivate()
     {
         if (deleteEventAction)
             delete eventAction;
@@ -44,7 +44,7 @@ public:
 
 KEventActionRemoveCommand::KEventActionRemoveCommand(KoShape *shape, KoEventAction *eventAction, QUndoCommand *parent)
     : QUndoCommand(parent),
-    d(new KoEventActionRemoveCommandPrivate(shape, eventAction))
+    d(new KEventActionRemoveCommandPrivate(shape, eventAction))
 {
 }
 
