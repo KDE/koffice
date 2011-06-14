@@ -263,7 +263,7 @@ KoView *KWDocument::createViewInstance(QWidget *parent)
             continue;
         KWTextFrameSet *tfs = dynamic_cast<KWTextFrameSet*>(fs);
         if (tfs && tfs->textFrameSetType() == KWord::MainTextFrameSet) {
-            KoSelection *selection = view->kwcanvas()->shapeManager()->selection();
+            KSelection *selection = view->kwcanvas()->shapeManager()->selection();
             selection->select(fs->frames().first()->shape());
 
             KoToolManager::instance()->switchToolRequested(

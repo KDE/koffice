@@ -27,7 +27,7 @@
 #include <KoToolManager.h>
 #include <KCanvasBase.h>
 #include <KCanvasController.h>
-#include <KoSelection.h>
+#include <KSelection.h>
 #include <KoShapeLayer.h>
 #include <KoShapeGroup.h>
 #include <KoShapeUngroupCommand.h>
@@ -187,7 +187,7 @@ QVariant KoPADocumentModel::data(const QModelIndex &index, int role) const
         case ActiveRole:
         {
             KCanvasController * canvasController = KoToolManager::instance()->activeCanvasController();
-            KoSelection * selection = canvasController->canvas()->shapeManager()->selection();
+            KSelection * selection = canvasController->canvas()->shapeManager()->selection();
             if(! selection)
                 return false;
 
@@ -261,7 +261,7 @@ bool KoPADocumentModel::setData(const QModelIndex &index, const QVariant &value,
             /* if (value.toBool())
             {
                 KCanvasController * canvasController = KoToolManager::instance()->activeCanvasController();
-                KoSelection * selection = canvasController->canvas()->shapeManager()->selection();
+                KSelection * selection = canvasController->canvas()->shapeManager()->selection();
 
                 KoShapeLayer *layer = dynamic_cast<KoShapeLayer*>(shape);
                 if(layer && selection) {

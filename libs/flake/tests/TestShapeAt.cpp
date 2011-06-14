@@ -22,7 +22,7 @@
 
 #include <kdebug.h>
 #include <KoShapeManager.h>
-#include <KoSelection.h>
+#include <KSelection.h>
 #include <KLineBorder.h>
 #include <KoShapeShadow.h>
 

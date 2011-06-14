@@ -27,7 +27,7 @@
 #include "KoShapeRegistry.h"
 #include "KoShapeController.h"
 #include "KoShapeManager.h"
-#include "KoSelection.h"
+#include "KSelection.h"
 #include "KCanvasBase.h"
 #include "KoShapeLayer.h"
 #include "KoShapePaste.h"
@@ -103,7 +103,7 @@ void Viewport::handleDragEnterEvent(QDragEnterEvent *event)
         return;
 
     // only allow dropping when active layer is editable
-    KoSelection *selection = m_parent->canvas()->shapeManager()->selection();
+    KSelection *selection = m_parent->canvas()->shapeManager()->selection();
     KoShapeLayer *activeLayer = selection->activeLayer();
     if (activeLayer && (!activeLayer->isEditable() || activeLayer->isGeometryProtected()))
         return;
@@ -189,7 +189,7 @@ void Viewport::handleDropEvent(QDropEvent *event)
     QUndoCommand * cmd = m_parent->canvas()->shapeController()->addShape(m_draggedShape);
     if (cmd) {
         m_parent->canvas()->addCommand(cmd);
-        KoSelection *selection = m_parent->canvas()->shapeManager()->selection();
+        KSelection *selection = m_parent->canvas()->shapeManager()->selection();
 
         // repaint selection before selecting newly create shape
         foreach(KoShape * shape, selection->selectedShapes())

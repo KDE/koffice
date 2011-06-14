@@ -26,7 +26,7 @@
 #include <KCanvasBase.h>
 #include <KoShapeManager.h>
 #include <KoShapeController.h>
-#include <KoSelection.h>
+#include <KSelection.h>
 #include <KoToolManager.h>
 
 #include "SCPlaceholderShape.h"

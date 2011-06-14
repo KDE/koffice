@@ -33,7 +33,7 @@
 #include <KCanvasBase.h>
 #include <KCanvasController.h>
 #include <KoShapeControllerBase.h>
-#include <KoSelection.h>
+#include <KSelection.h>
 #include <KoShapeCreateCommand.h>
 #include <KoShapeDeleteCommand.h>
 #include <KoShapeReorderCommand.h>
@@ -237,7 +237,7 @@ void KarbonLayerDocker::itemClicked(const QModelIndex &index)
     if (! canvasController)
         return;
 
-    KoSelection *selection = canvasController->canvas()->shapeManager()->selection();
+    KSelection *selection = canvasController->canvas()->shapeManager()->selection();
     if (! selection)
         return;
 

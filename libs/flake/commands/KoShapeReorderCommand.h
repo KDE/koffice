@@ -20,7 +20,7 @@
 #ifndef KOSHAPEREORDERCOMMAND_H
 #define KOSHAPEREORDERCOMMAND_H
 
-#include "KoSelection.h"
+#include "KSelection.h"
 
 #include "flake_export.h"
 

@@ -21,8 +21,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KoSelection.h"
-#include "KoSelection_p.h"
+#include "KSelection.h"
+#include "KSelection_p.h"
 #include "KoShapeContainer.h"
 #include "KoShapeGroup.h"
 #include "KPointerEvent.h"
@@ -109,19 +109,19 @@ void KoSelectionPrivate::deselectGroupChildren(KoShapeGroup *group)
 
 ////////////
 
-KoSelection::KoSelection(QObject *parent)
+KSelection::KSelection(QObject *parent)
     : QObject(parent),
     KoShape(*(new KoSelectionPrivate(this)))
 {
 }
 
-KoSelection::~KoSelection()
+KSelection::~KSelection()
 {
 }
 
-void KoSelection::select(KoShape *shape, bool recursive)
+void KSelection::select(KoShape *shape, bool recursive)
 {
-    Q_D(KoSelection);
+    Q_D(KSelection);
     Q_ASSERT(shape != this);
     Q_ASSERT(shape);
     if (!shape->isSelectable() || !shape->isVisible(true))
@@ -184,9 +184,9 @@ void KoSelection::select(KoShape *shape, bool recursive)
     d->requestSelectionChangedEvent();
 }
 
-void KoSelection::deselect(KoShape *shape, bool recursive)
+void KSelection::deselect(KoShape *shape, bool recursive)
 {
-    Q_D(KoSelection);
+    Q_D(KSelection);
     if (! d->selectedShapes.contains(shape))
         return;
 
@@ -212,9 +212,9 @@ void KoSelection::deselect(KoShape *shape, bool recursive)
     d->requestSelectionChangedEvent();
 }
 
-void KoSelection::deselectAll()
+void KSelection::deselectAll()
 {
-    Q_D(KoSelection);
+    Q_D(KSelection);
     // reset the transformation matrix of the selection
     setTransformation(QTransform());
 
@@ -224,9 +224,9 @@ void KoSelection::deselectAll()
     d->requestSelectionChangedEvent();
 }
 
-int KoSelection::count() const
+int KSelection::count() const
 {
-    Q_D(const KoSelection);
+    Q_D(const KSelection);
     int count = 0;
     foreach(KoShape *shape, d->selectedShapes)
         if (dynamic_cast<KoShapeGroup*>(shape) == 0)
@@ -234,9 +234,9 @@ int KoSelection::count() const
     return count;
 }
 
-bool KoSelection::hitTest(const QPointF &position) const
+bool KSelection::hitTest(const QPointF &position) const
 {
-    Q_D(const KoSelection);
+    Q_D(const KSelection);
     if (count() > 1) {
         QRectF bb(boundingRect());
         return bb.contains(position);
@@ -246,9 +246,9 @@ bool KoSelection::hitTest(const QPointF &position) const
         return false;
     }
 }
-void KoSelection::updateSizeAndPosition()
+void KSelection::updateSizeAndPosition()
 {
-    Q_D(KoSelection);
+    Q_D(KSelection);
     QRectF bb = d->sizeRect();
     QTransform matrix = absoluteTransformation(0);
     setSize(bb.size());
@@ -256,14 +256,14 @@ void KoSelection::updateSizeAndPosition()
     setPosition(p);
 }
 
-QRectF KoSelection::boundingRect() const
+QRectF KSelection::boundingRect() const
 {
     return absoluteTransformation(0).mapRect(QRectF(QPointF(), size()));
 }
 
-const QList<KoShape*> KoSelection::selectedShapes(KoFlake::SelectionType strip) const
+const QList<KoShape*> KSelection::selectedShapes(KoFlake::SelectionType strip) const
 {
-    Q_D(const KoSelection);
+    Q_D(const KSelection);
     QList<KoShape*> answer;
     // strip the child objects when there is also a parent included.
     bool doStripping = strip == KoFlake::StrippedSelection;
@@ -288,9 +288,9 @@ const QList<KoShape*> KoSelection::selectedShapes(KoFlake::SelectionType strip) 
     return answer;
 }
 
-bool KoSelection::isSelected(const KoShape *shape) const
+bool KSelection::isSelected(const KoShape *shape) const
 {
-    Q_D(const KoSelection);
+    Q_D(const KSelection);
     if (shape == this)
         return true;
 
@@ -302,7 +302,7 @@ bool KoSelection::isSelected(const KoShape *shape) const
     return false;
 }
 
-KoShape *KoSelection::firstSelectedShape(KoFlake::SelectionType strip) const
+KoShape *KSelection::firstSelectedShape(KoFlake::SelectionType strip) const
 {
     QList<KoShape*> set = selectedShapes(strip);
     if (set.isEmpty())
@@ -310,17 +310,17 @@ KoShape *KoSelection::firstSelectedShape(KoFlake::SelectionType strip) const
     return *(set.begin());
 }
 
-void KoSelection::setActiveLayer(KoShapeLayer *layer)
+void KSelection::setActiveLayer(KoShapeLayer *layer)
 {
-    Q_D(KoSelection);
+    Q_D(KSelection);
     d->activeLayer = layer;
     emit currentLayerChanged(layer);
 }
 
-KoShapeLayer* KoSelection::activeLayer() const
+KoShapeLayer* KSelection::activeLayer() const
 {
-    Q_D(const KoSelection);
+    Q_D(const KSelection);
     return d->activeLayer;
 }
 
-#include <KoSelection.moc>
+#include <KSelection.moc>

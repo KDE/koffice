@@ -30,7 +30,7 @@
 #include <KoShapeController.h>
 #include <KoToolProxy.h>
 #include <KoShapeManager.h>
-#include <KoSelection.h>
+#include <KSelection.h>
 
 #include <klocale.h>
 #include <kdebug.h>

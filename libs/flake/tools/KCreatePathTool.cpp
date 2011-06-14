@@ -25,7 +25,7 @@
 #include "KPointerEvent.h"
 #include "KPathShape.h"
 #include "KLineBorder.h"
-#include "KoSelection.h"
+#include "KSelection.h"
 #include "commands/KPathPointMergeCommand.h"
 #include "SnapGuideConfigWidget_p.h"
 
@@ -346,7 +346,7 @@ void KCreatePathTool::addPathShape(KPathShape *pathShape)
 
     QUndoCommand *cmd = canvas()->shapeController()->addShape(pathShape);
     if (cmd) {
-        KoSelection *selection = canvas()->shapeManager()->selection();
+        KSelection *selection = canvas()->shapeManager()->selection();
         selection->deselectAll();
         selection->select(pathShape);
         if (startShape)

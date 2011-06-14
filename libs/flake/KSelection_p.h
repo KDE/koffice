@@ -38,7 +38,7 @@ class KoShapeGroup;
 class KoSelectionPrivate : public KoShapePrivate
 {
 public:
-    KoSelectionPrivate(KoSelection *parent)
+    KoSelectionPrivate(KSelection *parent)
         : KoShapePrivate(parent), eventTriggered(false), activeLayer(0), q(parent) {}
     QList<KoShape*> selectedShapes;
     bool eventTriggered;
@@ -53,7 +53,7 @@ public:
 
     QRectF sizeRect();
 
-    KoSelection *q;
+    KSelection *q;
     QRectF globalBound;
 };
 

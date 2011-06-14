@@ -28,7 +28,7 @@
 #include <KCanvasController.h>
 #include <KoShapeManager.h>
 #include <KoShape.h>
-#include <KoSelection.h>
+#include <KSelection.h>
 #include <KLineBorder.h>
 
 #include <KLocale>

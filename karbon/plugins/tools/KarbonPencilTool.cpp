@@ -27,7 +27,7 @@
 #include <KCanvasBase.h>
 #include <KoShapeController.h>
 #include <KoShapeManager.h>
-#include <KoSelection.h>
+#include <KSelection.h>
 #include <KResourceManager.h>
 #include <KoColor.h>
 #include <KPathPoint.h>
@@ -295,7 +295,7 @@ void KarbonPencilTool::finish(bool closePath)
 
     QUndoCommand * cmd = canvas()->shapeController()->addShape(path);
     if (cmd) {
-        KoSelection *selection = canvas()->shapeManager()->selection();
+        KSelection *selection = canvas()->shapeManager()->selection();
         selection->deselectAll();
         selection->select(path);
 

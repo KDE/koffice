@@ -56,7 +56,7 @@
 #include <KCanvasBase.h>
 #include <KCanvasController.h>
 #include <KPointerEvent.h>
-#include <KoSelection.h>
+#include <KSelection.h>
 #include <KoShapeManager.h>
 #include <KoViewConverter.h>
 

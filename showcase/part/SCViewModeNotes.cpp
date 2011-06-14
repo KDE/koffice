@@ -27,7 +27,7 @@
 
 #include <KResourceManager.h>
 #include <KoRuler.h>
-#include <KoSelection.h>
+#include <KSelection.h>
 #include <KoShapeLayer.h>
 #include <KoShapeManager.h>
 #include <KoText.h>
@@ -190,7 +190,7 @@ void SCViewModeNotes::updateActivePage(KoPAPageBase *page)
 
     m_view->updatePageNavigationActions();
 
-    KoSelection *selection = m_canvas->shapeManager()->selection();
+    KSelection *selection = m_canvas->shapeManager()->selection();
     selection->select(notes->textShape());
     selection->setActiveLayer(layer);
     QString tool = KoToolManager::instance()->preferredToolForSelection(selection->selectedShapes());

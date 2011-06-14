@@ -21,7 +21,7 @@
 #ifndef KOSHAPEMOVECOMMAND_H
 #define KOSHAPEMOVECOMMAND_H
 
-#include "KoSelection.h"
+#include "KSelection.h"
 
 #include "flake_export.h"
 

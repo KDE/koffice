@@ -96,7 +96,7 @@ public:
 
     QList<KoShape *> shapes;
     QList<KoShape *> additionalShapes; // these are shapes that are only handled for updates
-    KoSelection *selection;
+    KSelection *selection;
     KCanvasBase *canvas;
     KRTree<KoShape *> tree;
     KRTree<KoShapeConnection *> connectionTree;

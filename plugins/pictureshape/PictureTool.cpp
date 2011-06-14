@@ -31,7 +31,7 @@
 
 #include <KCanvasBase.h>
 #include <KImageCollection.h>
-#include <KoSelection.h>
+#include <KSelection.h>
 #include <KoShapeManager.h>
 #include <KPointerEvent.h>
 

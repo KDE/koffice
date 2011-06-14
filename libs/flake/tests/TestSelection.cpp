@@ -20,12 +20,12 @@
 #include "TestSelection.h"
 #include <MockShapes.h>
 
-#include <KoSelection.h>
+#include <KSelection.h>
 #include <kdebug.h>
 
 void TestSelection::testSelectedShapes()
 {
-    KoSelection selection;
+    KSelection selection;
     MockShape shape1;
     MockShape shape2;
     MockShape shape3;
@@ -93,7 +93,7 @@ void TestSelection::testSelectedShapes()
 
 void TestSelection::testSize()
 {
-    KoSelection selection;
+    KSelection selection;
 
     MockShape shape1;
     shape1.setSize( QSizeF( 100, 100 ) );

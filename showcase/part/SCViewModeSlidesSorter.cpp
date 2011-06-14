@@ -28,7 +28,7 @@
 
 #include <KResourceManager.h>
 #include <KoRuler.h>
-#include <KoSelection.h>
+#include <KSelection.h>
 #include <KoShapeLayer.h>
 #include <KoShapeManager.h>
 #include <KoText.h>

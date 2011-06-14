@@ -40,7 +40,7 @@
 
 #include <KCanvasBase.h>
 #include <KPointerEvent.h>
-#include <KoSelection.h>
+#include <KSelection.h>
 #include <KoShapeManager.h>
 
 #include "AutoFillStrategy.h"

@@ -39,7 +39,7 @@
 #include <KoToolProxy.h>
 #include <KoShapeManagerPaintingStrategy.h>
 #include <KCanvasController.h>
-#include <KoSelection.h>
+#include <KSelection.h>
 
 #include <kdebug.h>
 #include <klocale.h>
@@ -309,7 +309,7 @@ void KarbonCanvas::updateSizeAndOffset()
             // tell canvas controller the new document size in pixel
             controller->setDocumentSize(viewRect.size().toSize(), true);
             // make sure the actual selection is visible
-            KoSelection * selection = d->shapeManager->selection();
+            KSelection * selection = d->shapeManager->selection();
             if (selection->count())
                 controller->ensureVisible(d->zoomHandler.documentToView(selection->boundingRect()));
         }

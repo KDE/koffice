@@ -26,7 +26,7 @@
 #include <KoFlake.h>
 #include <QPainter>
 
-class KoSelection;
+class KSelection;
 
 /**
  * The SelectionDecorator is used to paint extra user-interface items on top of a selection.
@@ -53,7 +53,7 @@ public:
      * set the selection that is to be painted.
      * @param selection the current selection.
      */
-    void setSelection(KoSelection *selection);
+    void setSelection(KSelection *selection);
 
     /**
      * set the radius of the selection handles
@@ -71,7 +71,7 @@ private:
     bool m_rotationHandles, m_shearHandles;
     KoFlake::SelectionHandle m_arrows;
     static KoFlake::Position m_hotPosition;
-    KoSelection *m_selection;
+    KSelection *m_selection;
     int m_handleRadius;
 };
 

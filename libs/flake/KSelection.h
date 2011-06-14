@@ -49,14 +49,14 @@ class KoSelectionPrivate;
  * A selection, however, should not be selectable. We need to think
  * a little about the interaction here.
  */
-class FLAKE_EXPORT KoSelection : public QObject, public KoShape
+class FLAKE_EXPORT KSelection : public QObject, public KoShape
 {
     Q_OBJECT
 
 public:
 
-    KoSelection(QObject *parent = 0);
-    virtual ~KoSelection();
+    KSelection(QObject *parent = 0);
+    virtual ~KSelection();
 
     /**
      * Adds a shape to the selection.
@@ -143,7 +143,7 @@ signals:
 
 private:
     Q_PRIVATE_SLOT(d_func(), void selectionChangedEvent())
-    Q_DECLARE_PRIVATE_D(KoShape::d_ptr, KoSelection)
+    Q_DECLARE_PRIVATE_D(KoShape::d_ptr, KSelection)
 };
 
 #endif

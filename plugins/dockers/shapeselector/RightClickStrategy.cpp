@@ -25,7 +25,7 @@
 #include <KoShapeContainerModel.h>
 
 #include <KoShapeManager.h>
-#include <KoSelection.h>
+#include <KSelection.h>
 #include <KPointerEvent.h>
 
 #include <QMenu>

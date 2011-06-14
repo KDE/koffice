@@ -29,14 +29,14 @@ class QTimer;
 class QTextDocument;
 class KResourceManager;
 class KoAction;
-class KoSelection;
+class KSelection;
 class KWDocument;
 
 class KWStatistics : public QWidget
 {
     Q_OBJECT
 public:
-    KWStatistics(KWDocument *m_document, KoSelection *selection = 0, QWidget *parent = 0);
+    KWStatistics(KWDocument *m_document, KSelection *selection = 0, QWidget *parent = 0);
 
 private slots:
     void updateResource(int which);
@@ -53,7 +53,7 @@ private:
     Ui::KWStatisticsDocker widgetDocker;
     KResourceManager *m_resourceManager;
     KoAction *m_action;
-    KoSelection *m_selection;
+    KSelection *m_selection;
     KWDocument *m_document;
     QTextDocument *m_textDocument;
     QTimer *m_timer;

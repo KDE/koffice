@@ -444,7 +444,7 @@ void KarbonPart::addShape(KoShape* shape)
     if (layer) {
         d->document.insertLayer(layer);
         if (canvasController) {
-            KoSelection *selection = canvasController->canvas()->shapeManager()->selection();
+            KSelection *selection = canvasController->canvas()->shapeManager()->selection();
             selection->setActiveLayer(layer);
         }
     } else {

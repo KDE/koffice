@@ -24,7 +24,7 @@
 #include "KPathTool_p.h"
 #include "KPathPointMoveStrategy_p.h"
 #include "KPathControlPointMoveStrategy_p.h"
-#include "KoSelection.h"
+#include "KSelection.h"
 #include "commands/KPathPointTypeCommand_p.h"
 #include "KParameterChangeStrategy_p.h"
 #include "KParameterShape.h"

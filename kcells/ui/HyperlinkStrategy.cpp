@@ -24,7 +24,7 @@
 #include "Util.h"
 
 #include <KCanvasBase.h>
-#include <KoSelection.h>
+#include <KSelection.h>
 #include <KoShapeManager.h>
 #include <KoToolBase.h>
 

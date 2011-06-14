@@ -47,7 +47,7 @@
 #include <KCanvasBase.h>
 #include <KoShapeController.h>
 #include <KoColor.h>
-#include <KoSelection.h>
+#include <KSelection.h>
 #include <KoShapeManager.h>
 #include <KPointerEvent.h>
 #include <KoVariable.h>
@@ -864,7 +864,7 @@ void TextTool::mousePressEvent(KPointerEvent *event)
         return;
     if (event->button() != Qt::RightButton)
         updateSelectedShape(event->point);
-    KoSelection *selection = canvas()->shapeManager()->selection();
+    KSelection *selection = canvas()->shapeManager()->selection();
     if (!selection->isSelected(m_textShape) && m_textShape->isSelectable()) {
         selection->deselectAll();
         selection->select(m_textShape);
@@ -2144,7 +2144,7 @@ void TextTool::jumpToText()
 void TextTool::shapeAddedToCanvas()
 {
     if (m_textShape) {
-        KoSelection *selection = canvas()->shapeManager()->selection();
+        KSelection *selection = canvas()->shapeManager()->selection();
         KoShape *shape = selection->firstSelectedShape();
         if (shape != m_textShape && canvas()->shapeManager()->shapes().contains(m_textShape)) {
             // this situation applies when someone, not us, changed the selection by selecting another

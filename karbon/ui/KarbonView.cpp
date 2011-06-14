@@ -81,7 +81,7 @@
 #include <KoShapeBorderCommand.h>
 #include <KoShapeBackgroundCommand.h>
 #include <KParameterToPathCommand.h>
-#include <KoSelection.h>
+#include <KSelection.h>
 #include <KoZoomAction.h>
 #include <KoZoomHandler.h>
 #include <KPathShape.h>
@@ -349,7 +349,7 @@ void KarbonView::dropEvent(QDropEvent *e)
     //Accepts QColor - from Color Manager's KColorPatch
     QColor color = KColorMimeData::fromMimeData(e->mimeData());
     if (color.isValid()) {
-        KoSelection * selection = d->canvas->shapeManager()->selection();
+        KSelection * selection = d->canvas->shapeManager()->selection();
         if (! selection)
             return;
 
@@ -513,7 +513,7 @@ void KarbonView::selectionDuplicate()
 
 void KarbonView::editSelectAll()
 {
-    KoSelection* selection = d->canvas->shapeManager()->selection();
+    KSelection* selection = d->canvas->shapeManager()->selection();
     if (! selection)
         return;
 
@@ -530,7 +530,7 @@ void KarbonView::editSelectAll()
 
 void KarbonView::editDeselectAll()
 {
-    KoSelection* selection = d->canvas->shapeManager()->selection();
+    KSelection* selection = d->canvas->shapeManager()->selection();
     if (selection)
         selection->deselectAll();
 
@@ -584,7 +584,7 @@ void KarbonView::selectionDistributeVerticalTop()
 
 void KarbonView::selectionDistribute(KoShapeDistributeCommand::Distribute distribute)
 {
-    KoSelection* selection = d->canvas->shapeManager()->selection();
+    KSelection* selection = d->canvas->shapeManager()->selection();
     if (! selection)
         return;
 
@@ -603,7 +603,7 @@ void KarbonView::closePath()
 
 void KarbonView::combinePath()
 {
-    KoSelection* selection = d->canvas->shapeManager()->selection();
+    KSelection* selection = d->canvas->shapeManager()->selection();
     if (! selection)
         return;
 
@@ -627,7 +627,7 @@ void KarbonView::combinePath()
 
 void KarbonView::separatePath()
 {
-    KoSelection* selection = d->canvas->shapeManager()->selection();
+    KSelection* selection = d->canvas->shapeManager()->selection();
     if (! selection)
         return;
 
@@ -675,7 +675,7 @@ void KarbonView::excludePaths()
 
 void KarbonView::booleanOperation(KarbonBooleanCommand::BooleanOperation operation)
 {
-    KoSelection* selection = d->canvas->shapeManager()->selection();
+    KSelection* selection = d->canvas->shapeManager()->selection();
     if (! selection)
         return;
 
@@ -707,7 +707,7 @@ void KarbonView::booleanOperation(KarbonBooleanCommand::BooleanOperation operati
 
 void KarbonView::pathSnapToGrid()
 {
-    KoSelection* selection = d->canvas->shapeManager()->selection();
+    KSelection* selection = d->canvas->shapeManager()->selection();
     if (! selection)
         return;
 
@@ -764,7 +764,7 @@ void KarbonView::viewModeChanged(bool outlineMode)
 
 void KarbonView::zoomSelection()
 {
-    KoSelection* selection = d->canvas->shapeManager()->selection();
+    KSelection* selection = d->canvas->shapeManager()->selection();
     if (! selection)
         return;
 
@@ -1081,7 +1081,7 @@ void KarbonView::selectionChanged()
 {
     if (!shell())
         return;
-    KoSelection *selection = d->canvas->shapeManager()->selection();
+    KSelection *selection = d->canvas->shapeManager()->selection();
     int count = selection->selectedShapes(KoFlake::FullSelection).count();
 
     d->closePath->setEnabled(false);
@@ -1171,7 +1171,7 @@ void KarbonView::updateUnit(const KUnit &unit)
 
 QList<KPathShape*> KarbonView::selectedPathShapes()
 {
-    KoSelection* selection = d->canvas->shapeManager()->selection();
+    KSelection* selection = d->canvas->shapeManager()->selection();
     if (! selection)
         return QList<KPathShape*>();
 
@@ -1196,7 +1196,7 @@ KoPrintJob * KarbonView::createPrintJob()
 
 void KarbonView::applyFillToSelection()
 {
-    KoSelection *selection = d->canvas->shapeManager()->selection();
+    KSelection *selection = d->canvas->shapeManager()->selection();
     if (! selection->count())
         return;
 
@@ -1206,7 +1206,7 @@ void KarbonView::applyFillToSelection()
 
 void KarbonView::applyStrokeToSelection()
 {
-    KoSelection *selection = d->canvas->shapeManager()->selection();
+    KSelection *selection = d->canvas->shapeManager()->selection();
     if (! selection->count())
         return;
 

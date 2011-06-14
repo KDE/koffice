@@ -28,7 +28,7 @@
 #include "KoShapeManager.h"
 #include "KResourceManager.h"
 #include "KoViewConverter.h"
-#include "KoSelection.h"
+#include "KSelection.h"
 #include "KPointerEvent.h"
 #include "commands/KPathPointTypeCommand_p.h"
 #include "commands/KPathPointInsertCommand.h"

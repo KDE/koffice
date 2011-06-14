@@ -42,7 +42,7 @@
 #include "commands/KCStyleCommand.h"
 
 #include <KoShapeManager.h>
-#include <KoSelection.h>
+#include <KSelection.h>
 
 /************************************************
  *

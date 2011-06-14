@@ -76,7 +76,7 @@ public:
     }
 
 private:
-    KoSelection *m_selection;
+    KSelection *m_selection;
 };
 
 class DefaultTool::GuideLine
@@ -797,7 +797,7 @@ QStringList DefaultTool::supportedPasteMimeTypes() const
     return list;
 }
 
-KoSelection *DefaultTool::koSelection()
+KSelection *DefaultTool::koSelection()
 {
     Q_ASSERT(canvas());
     Q_ASSERT(canvas()->shapeManager());
@@ -934,7 +934,7 @@ void DefaultTool::selectionAlignVerticalBottom()
 
 void DefaultTool::selectionGroup()
 {
-    KoSelection* selection = koSelection();
+    KSelection* selection = koSelection();
     if (! selection)
         return;
 
@@ -954,7 +954,7 @@ void DefaultTool::selectionGroup()
 
 void DefaultTool::selectionUngroup()
 {
-    KoSelection* selection = canvas()->shapeManager()->selection();
+    KSelection* selection = canvas()->shapeManager()->selection();
     if (! selection)
         return;
 
@@ -993,7 +993,7 @@ void DefaultTool::selectionUngroup()
 
 void DefaultTool::selectionAlign(KoShapeAlignCommand::Align align)
 {
-    KoSelection* selection = canvas()->shapeManager()->selection();
+    KSelection* selection = canvas()->shapeManager()->selection();
     if (! selection)
         return;
 
@@ -1047,7 +1047,7 @@ void DefaultTool::selectionSendToBack()
 
 void DefaultTool::selectionReorder(KoShapeReorderCommand::MoveShapeType order)
 {
-    KoSelection* selection = canvas()->shapeManager()->selection();
+    KSelection* selection = canvas()->shapeManager()->selection();
     if (! selection)
         return;
 
@@ -1087,7 +1087,7 @@ KInteractionStrategy *DefaultTool::createStrategy(KPointerEvent *event)
     m_moveCommand = 0;
 
     KoShapeManager *shapeManager = canvas()->shapeManager();
-    KoSelection *select = shapeManager->selection();
+    KSelection *select = shapeManager->selection();
     bool insideSelection;
     KoFlake::SelectionHandle handle = handleAt(event->point, &insideSelection);
 
@@ -1225,7 +1225,7 @@ KInteractionStrategy *DefaultTool::createStrategy(KPointerEvent *event)
 
 void DefaultTool::updateActions()
 {
-    KoSelection * selection(koSelection());
+    KSelection * selection(koSelection());
     if (!selection) {
         action("object_order_front")->setEnabled(false);
         action("object_order_raise")->setEnabled(false);

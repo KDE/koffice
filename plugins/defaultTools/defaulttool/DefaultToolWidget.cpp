@@ -27,7 +27,7 @@
 #include <KCanvasBase.h>
 #include <KResourceManager.h>
 #include <KoShapeManager.h>
-#include <KoSelection.h>
+#include <KSelection.h>
 #include <commands/KoShapeMoveCommand.h>
 #include <commands/KoShapeSizeCommand.h>
 #include <commands/KoShapeTransformCommand.h>
@@ -67,7 +67,7 @@ DefaultToolWidget::DefaultToolWidget( KInteractionTool* tool,
     connect( widthSpinBox, SIGNAL( editingFinished() ), this, SLOT( sizeHasChanged() ) );
     connect( heightSpinBox, SIGNAL( editingFinished() ), this, SLOT( sizeHasChanged() ) );
 
-    KoSelection * selection = m_tool->canvas()->shapeManager()->selection();
+    KSelection * selection = m_tool->canvas()->shapeManager()->selection();
     connect( selection, SIGNAL( selectionChanged() ), this, SLOT( updatePosition() ) );
     connect( selection, SIGNAL( selectionChanged() ), this, SLOT( updateSize() ) );
     KoShapeManager * manager = m_tool->canvas()->shapeManager();
@@ -92,7 +92,7 @@ void DefaultToolWidget::updatePosition()
     QPointF selPosition( 0, 0 );
     KoFlake::Position position = positionSelector->position();
 
-    KoSelection * selection = m_tool->canvas()->shapeManager()->selection();
+    KSelection * selection = m_tool->canvas()->shapeManager()->selection();
     if( selection->count() )
         selPosition = selection->absolutePosition( position );
 
@@ -115,7 +115,7 @@ void DefaultToolWidget::updatePosition()
 
 void DefaultToolWidget::positionHasChanged()
 {
-    KoSelection * selection = m_tool->canvas()->shapeManager()->selection();
+    KSelection * selection = m_tool->canvas()->shapeManager()->selection();
     if( ! selection->count() )
         return;
 
@@ -142,7 +142,7 @@ void DefaultToolWidget::positionHasChanged()
 void DefaultToolWidget::updateSize()
 {
     QSizeF selSize( 0, 0 );
-    KoSelection * selection = m_tool->canvas()->shapeManager()->selection();
+    KSelection * selection = m_tool->canvas()->shapeManager()->selection();
     uint selectionCount = selection->count();
     if( selectionCount )
         selSize = selection->boundingRect().size();
@@ -167,7 +167,7 @@ void DefaultToolWidget::sizeHasChanged()
 
     QSizeF newSize( widthSpinBox->value(), heightSpinBox->value() );
 
-    KoSelection *selection = m_tool->canvas()->shapeManager()->selection();
+    KSelection *selection = m_tool->canvas()->shapeManager()->selection();
     QRectF rect = selection->boundingRect();
 
     if( aspectButton->keepAspectRatio() )
@@ -261,7 +261,7 @@ void DefaultToolWidget::aspectButtonToggled(bool keepAspect)
 {
     if (m_blockSignals)
         return;
-    KoSelection * selection = m_tool->canvas()->shapeManager()->selection();
+    KSelection * selection = m_tool->canvas()->shapeManager()->selection();
     foreach (KoShape *shape, selection->selectedShapes(KoFlake::TopLevelSelection)) {
         shape->setKeepAspectRatio(keepAspect);
     }

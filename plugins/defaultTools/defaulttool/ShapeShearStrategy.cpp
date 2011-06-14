@@ -42,7 +42,7 @@ ShapeShearStrategy::ShapeShearStrategy(KoToolBase *tool, const QPointF &clicked,
 : KInteractionStrategy(tool)
 , m_start(clicked)
 {
-    KoSelection *sel = tool->canvas()->shapeManager()->selection();
+    KSelection *sel = tool->canvas()->shapeManager()->selection();
     QList<KoShape*> selectedShapes = sel->selectedShapes(KoFlake::StrippedSelection);
     foreach (KoShape *shape, selectedShapes) {
         if (!shape->isEditable())
@@ -171,7 +171,7 @@ QUndoCommand* ShapeShearStrategy::createCommand(QUndoCommand *parent)
         newTransforms << shape->transformation();
     KoShapeTransformCommand *cmd = new KoShapeTransformCommand(m_selectedShapes, m_oldTransforms, newTransforms, parent);
     cmd->setText(i18n("Shear"));
-    KoSelection * sel = tool()->canvas()->shapeManager()->selection();
+    KSelection * sel = tool()->canvas()->shapeManager()->selection();
     new SelectionTransformCommand(sel, m_initialSelectionMatrix, sel->transformation(), cmd);
     return cmd;
 }

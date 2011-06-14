@@ -29,7 +29,7 @@
 #include <KCanvasBase.h>
 #include <KoShapeController.h>
 #include <KoShapeManager.h>
-#include <KoSelection.h>
+#include <KSelection.h>
 #include <KarbonCurveFit.h>
 #include <KColorBackground.h>
 #include <KResourceManager.h>
@@ -335,7 +335,7 @@ void KarbonCalligraphyTool::activate(ToolActivation, const QSet<KoShape*> &)
 void KarbonCalligraphyTool::deactivate()
 {
     if (m_lastShape && canvas()->shapeManager()->shapes().contains(m_lastShape)) {
-        KoSelection *selection = canvas()->shapeManager()->selection();
+        KSelection *selection = canvas()->shapeManager()->selection();
         selection->deselectAll();
         selection->select(m_lastShape);
     }
@@ -461,7 +461,7 @@ void KarbonCalligraphyTool::updateSelectedPath()
 {
     KPathShape *oldSelectedPath = m_selectedPath; // save old value
 
-    KoSelection *selection = canvas()->shapeManager()->selection();
+    KSelection *selection = canvas()->shapeManager()->selection();
 
     // null pointer if it the selection isn't a KPathShape
     // or if the selection is empty

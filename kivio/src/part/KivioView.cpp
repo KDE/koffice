@@ -24,7 +24,7 @@
 #include <kactionmenu.h>
 
 #include <KoShapeManager.h>
-#include <KoSelection.h>
+#include <KSelection.h>
 #include <KoPACanvas.h>
 
 #include "KivioDocument.h"

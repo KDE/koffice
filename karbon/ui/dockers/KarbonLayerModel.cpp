@@ -29,7 +29,7 @@
 #include <KCanvasBase.h>
 #include <KCanvasController.h>
 #include <KoShapeControllerBase.h>
-#include <KoSelection.h>
+#include <KSelection.h>
 #include <KoZoomHandler.h>
 #include <KoShapeLayer.h>
 #include <KoShapeGroup.h>
@@ -182,7 +182,7 @@ QVariant KarbonLayerModel::data(const QModelIndex &index, int role) const
     case Qt::SizeHintRole: return shape->size();
     case ActiveRole: {
         KCanvasController * canvasController = KoToolManager::instance()->activeCanvasController();
-        KoSelection * selection = canvasController->canvas()->shapeManager()->selection();
+        KSelection * selection = canvasController->canvas()->shapeManager()->selection();
         if (! selection)
             return false;
 
@@ -245,7 +245,7 @@ bool KarbonLayerModel::setData(const QModelIndex &index, const QVariant &value, 
         // fall through
     case ActiveRole: {
         KCanvasController * canvasController = KoToolManager::instance()->activeCanvasController();
-        KoSelection * selection = canvasController->canvas()->shapeManager()->selection();
+        KSelection * selection = canvasController->canvas()->shapeManager()->selection();
 
         KoShapeLayer *layer = dynamic_cast<KoShapeLayer*>(shape);
         if (layer && selection)

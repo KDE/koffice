@@ -27,7 +27,7 @@
 #include <KCanvasBase.h>
 #include <KoToolBase.h>
 #include <KoShape.h>
-#include <KoSelection.h>
+#include <KSelection.h>
 #include <KoShapeManager.h>
 
 #include <QBuffer>

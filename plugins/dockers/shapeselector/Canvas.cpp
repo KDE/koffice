@@ -31,7 +31,7 @@
 #include <KoShapeManager.h>
 #include <KoShapeRegistry.h>
 #include <KPointerEvent.h>
-#include <KoSelection.h>
+#include <KSelection.h>
 #include <KoShapeFactoryBase.h> // for the mimetype defines etc
 
 #include <QApplication>

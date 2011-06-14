@@ -22,7 +22,7 @@
 
 #include "KoShapeManager.h"
 #include "KoShapeManager_p.h"
-#include "KoSelection.h"
+#include "KSelection.h"
 #include "KoToolManager.h"
 #include "KPointerEvent.h"
 #include "KCanvasBase.h"
@@ -46,7 +46,7 @@
 #include <kdebug.h>
 
 KoShapeManagerPrivate::KoShapeManagerPrivate(KoShapeManager *shapeManager, KCanvasBase *c)
-    : selection(new KoSelection(shapeManager)),
+    : selection(new KSelection(shapeManager)),
     canvas(c),
     tree(4, 2),
     connectionTree(4, 2),
@@ -588,7 +588,7 @@ QList<KoShape*> KoShapeManager::topLevelShapes() const
     return shapes;
 }
 
-KoSelection *KoShapeManager::selection() const
+KSelection *KoShapeManager::selection() const
 {
     return d->selection;
 }

@@ -34,7 +34,7 @@ class KPointerEvent;
  * (mouse down till mouse release)
  * This is the strategy that detects the user selecting an item that can be inserted
  * onto a KOffice canvas.
- * itemSelected will be emitted after the canvas' KoSelection has been updated to
+ * itemSelected will be emitted after the canvas' KSelection has been updated to
  * select the appropriate shape.
  */
 class SelectStrategy : public QObject, public InteractionStrategy

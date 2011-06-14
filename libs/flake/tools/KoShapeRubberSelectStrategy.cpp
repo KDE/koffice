@@ -26,7 +26,7 @@
 #include <QPainter>
 
 #include "KoShapeManager.h"
-#include "KoSelection.h"
+#include "KSelection.h"
 #include "KCanvasBase.h"
 
 KoShapeRubberSelectStrategy::KoShapeRubberSelectStrategy(KoToolBase *tool, const QPointF &clicked, bool useSnapToGrid)
@@ -102,7 +102,7 @@ void KoShapeRubberSelectStrategy::finishInteraction(Qt::KeyboardModifiers modifi
 {
     Q_D(KoShapeRubberSelectStrategy);
     Q_UNUSED(modifiers);
-    KoSelection * selection = d->tool->canvas()->shapeManager()->selection();
+    KSelection * selection = d->tool->canvas()->shapeManager()->selection();
     QList<KoShape *> shapes(d->tool->canvas()->shapeManager()->shapesAt(d->selectRect));
     foreach(KoShape * shape, shapes) {
         if (!(shape->isSelectable() && shape->isVisible()))

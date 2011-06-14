@@ -21,7 +21,7 @@
 #include <KoShapeShadow.h>
 #include <KCanvasBase.h>
 #include <KoShapeManager.h>
-#include <KoSelection.h>
+#include <KSelection.h>
 #include <KoToolManager.h>
 #include <KCanvasController.h>
 #include <KoShadowConfigWidget.h>
@@ -79,7 +79,7 @@ void ShadowDocker::selectionChanged()
     if ( ! d->canvas )
         return;
 
-    KoSelection *selection = d->canvas->shapeManager()->selection();
+    KSelection *selection = d->canvas->shapeManager()->selection();
     KoShape * shape = selection->firstSelectedShape();
     d->widget->setEnabled( shape != 0 );
 
@@ -115,7 +115,7 @@ void ShadowDocker::setCanvas( KCanvasBase *canvas )
 
 void ShadowDocker::shadowChanged()
 {
-    KoSelection *selection = d->canvas->shapeManager()->selection();
+    KSelection *selection = d->canvas->shapeManager()->selection();
     KoShape * shape = selection->firstSelectedShape();
     if ( ! shape )
         return;

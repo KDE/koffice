@@ -26,7 +26,7 @@
 #include "KoToolRegistry.h"
 #include "KoToolProxy.h"
 #include "KoToolProxy_p.h"
-#include "KoSelection.h"
+#include "KSelection.h"
 #include "KCanvasController.h"
 #include "KCanvasController_p.h"
 #include "KoShape.h"
@@ -300,7 +300,7 @@ void KoToolManager::Private::postSwitchTool(bool temporary)
     if (canvasData->activeTool
             && canvasData->activeTool->canvas()
             && canvasData->activeTool->canvas()->shapeManager()) {
-        KoSelection *selection = canvasData->activeTool->canvas()->shapeManager()->selection();
+        KSelection *selection = canvasData->activeTool->canvas()->shapeManager()->selection();
         Q_ASSERT(selection);
 
         foreach(KoShape *shape, selection->selectedShapes()) {

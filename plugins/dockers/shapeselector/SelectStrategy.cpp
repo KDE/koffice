@@ -26,7 +26,7 @@
 #include <KoShape.h>
 #include <KProperties.h>
 #include <KoShapeManager.h>
-#include <KoSelection.h>
+#include <KSelection.h>
 #include <KPointerEvent.h>
 
 #include <KDebug>

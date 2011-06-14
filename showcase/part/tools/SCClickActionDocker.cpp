@@ -32,7 +32,7 @@
 #include <KoPACanvas.h>
 #include <SCDocument.h>
 #include <KCanvasBase.h>
-#include <KoSelection.h>
+#include <KSelection.h>
 #include <KoShapeController.h>
 #include <KoShapeManager.h>
 #include <KEventAction.h>
@@ -75,7 +75,7 @@ void SCClickActionDocker::selectionChanged()
 {
     if(! m_canvas)
         return;
-    KoSelection *selection = m_canvas->shapeManager()->selection();
+    KSelection *selection = m_canvas->shapeManager()->selection();
     KoShape *shape = selection->firstSelectedShape();
 
     if (shape) {

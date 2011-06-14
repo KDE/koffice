@@ -23,20 +23,20 @@
 #include <QtGui/QUndoCommand>
 #include <QtGui/QTransform>
 
-class KoSelection;
+class KSelection;
 class KoShape;
 
 class SelectionTransformCommand : public QUndoCommand
 {
 public:
-    SelectionTransformCommand(KoSelection * selection, const QTransform &oldTransformation, const QTransform &newTransformation, QUndoCommand * parent = 0);
+    SelectionTransformCommand(KSelection * selection, const QTransform &oldTransformation, const QTransform &newTransformation, QUndoCommand * parent = 0);
 
     /// reimplemented from QUndoCommand
     virtual void redo();
     /// reimplemented from QUndoCommand
     virtual void undo();
 private:
-    KoSelection * m_selection;
+    KSelection * m_selection;
     QList<KoShape*> m_selectedShapes;
     QTransform m_oldTransformation;
     QTransform m_newTransformation;

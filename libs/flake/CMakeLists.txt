@@ -28,7 +28,7 @@ set(flake_SRCS
     KPathPoint.cpp
     KPathPointData.cpp
     KPathSegment.cpp
-    KoSelection.cpp
+    KSelection.cpp
     KoShape.cpp
     KoShapeConnection.cpp
     KoShapeConnectionPolicy.cpp
@@ -279,7 +279,7 @@ install(
     KPostscriptPaintDevice.h
     KResourceManager.h
     KRTree.h
-    KoSelection.h
+    KSelection.h
     KoShapeApplicationData.h
     KoShapeBackground.h
     KoShapeBorderBase.h

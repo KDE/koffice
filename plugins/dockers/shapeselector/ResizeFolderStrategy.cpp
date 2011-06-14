@@ -21,7 +21,7 @@
 #include "Canvas.h"
 
 #include <KoShapeManager.h>
-#include <KoSelection.h>
+#include <KSelection.h>
 #include <KPointerEvent.h>
 
 ResizeFolderStrategy::ResizeFolderStrategy(Canvas *canvas, FolderShape *clickedFolder, KPointerEvent &event)

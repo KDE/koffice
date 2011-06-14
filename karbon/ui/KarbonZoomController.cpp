@@ -27,7 +27,7 @@
 #include <KoZoomHandler.h>
 #include <KResourceManager.h>
 #include <KoShapeManager.h>
-#include <KoSelection.h>
+#include <KSelection.h>
 
 #include <KActionCollection>
 #include <KLocale>
@@ -131,7 +131,7 @@ void KarbonZoomController::setZoom(KoZoomMode::Mode mode, qreal zoom)
 
     // now calculate the preferred center in document coordinates
     QPointF docCenter = d->zoomHandler->viewToDocument(preferredCenter - documentOrigin);
-    KoSelection * selection = d->canvas->shapeManager()->selection();
+    KSelection * selection = d->canvas->shapeManager()->selection();
     if( selection->count()) {
         docCenter = selection->boundingRect().center();
     }

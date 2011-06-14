@@ -28,7 +28,7 @@
 
 class QTimer;
 class QTextDocument;
-class KoSelection;
+class KSelection;
 class KWDocument;
 
 /**
@@ -63,7 +63,7 @@ private:
     int m_lastCursorPosition;
     bool m_autoUpdate;
     KWDocument *m_document;
-    KoSelection *m_selection;
+    KSelection *m_selection;
     QTimer *m_timer;
     QTextDocument *m_textDocument;
     KoRdfSemanticTree m_rdfSemanticTree;

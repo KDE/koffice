@@ -20,7 +20,7 @@
 #include "KoToolManager_p.h"
 
 #include <KoShapeManager.h>
-#include <KoSelection.h>
+#include <KSelection.h>
 #include <KoToolFactoryBase.h>
 #include <QToolButton>
 #include <kicon.h>

@@ -34,7 +34,7 @@ class KoShapeBackground;
  */
 namespace KoFlake
 {
-    /// the selection type for KoSelection::selectedObjects()
+    /// the selection type for KSelection::selectedObjects()
     enum SelectionType {
         FullSelection,      ///< Create a list of all user-shapes in the selection. This excludes KoShapeGroup grouping objects that may be selected.
         StrippedSelection,  ///< Create a stripped list, without children if the container is also in the list.

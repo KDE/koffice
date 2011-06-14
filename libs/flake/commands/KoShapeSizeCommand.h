@@ -21,7 +21,7 @@
 #ifndef KOSHAPESIZECOMMAND_H
 #define KOSHAPESIZECOMMAND_H
 
-#include "KoSelection.h"
+#include "KSelection.h"
 
 #include "flake_export.h"
 
