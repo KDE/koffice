@@ -197,7 +197,7 @@ QVariant KCBindingModel::data(const QModelIndex& index, int role) const
     const KCSheet* sheet = m_region.firstSheet();
     const KCValue value = sheet->cellStorage()->value(offset.x() + index.column(),
                         offset.y() + index.row());
-    // KoChart::KCValue is either:
+    // KChart::KCValue is either:
     //  - a double (interpreted as a value)
     //  - a QString (interpreted as a label)
     //  - a QDateTime (interpreted as a date/time value)

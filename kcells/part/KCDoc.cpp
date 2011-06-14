@@ -99,9 +99,9 @@
 #include "KCBindingModel.h"
 
 // D-Bus
-#include "interfaces/MapAdaptor.h"
-#include "interfaces/SheetAdaptor.h"
-#include <KoChartInterface.h>
+#include "../interfaces/MapAdaptor.h"
+#include "../interfaces/SheetAdaptor.h"
+#include "../interfaces/KChartInterface.h"
 #include <QtDBus/QtDBus>
 
 // ui

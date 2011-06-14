@@ -16,13 +16,11 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KOCHART_INTERFACE
-#define KOCHART_INTERFACE
-
+#ifndef KCHART_INTERFACE
+#define KCHART_INTERFACE
 
 #include <QtPlugin>
 #include <Qt>
-
 
 #define ChartShapeId "ChartShape"
 
@@ -30,7 +28,7 @@ class QAbstractItemModel;
 class QString;
 
 
-namespace KoChart
+namespace KChart
 {
 
 /**
@@ -45,7 +43,7 @@ public:
      * Sets the SheetAccessModel to be used by this chart. Use this method if
      * you want to embed the ChartShape into a spreadsheet.
      *
-     * See kspread/SheetAccessModel.h for details.
+     * See kcells/KCSheetAccessModel.h for details.
      */
     virtual void setSheetAccessModel(QAbstractItemModel* model) = 0;
 
@@ -58,15 +56,15 @@ public:
      * @param dataDirection      orientation of a data set. Qt::Horizontal means a row is
      *                           to be interpreted as one data set, columns with Qt::Vertical.
      */
-    virtual void reset(const QString& region,
+    virtual void reset(const QString &region,
                        bool firstRowIsLabel,
                        bool firstColumnIsLabel,
                        Qt::Orientation dataDirection) = 0;
 };
 
-} // namespace KoChart
+} // namespace KChart
 
-Q_DECLARE_INTERFACE(KoChart::ChartInterface, "org.koffice.KoChart.ChartInterface:1.0")
+Q_DECLARE_INTERFACE(KChart::ChartInterface, "org.kde.KChart.ChartInterface:1.0")
 
-#endif // KOCHART_INTERFACE
+#endif // KCHART_INTERFACE
 

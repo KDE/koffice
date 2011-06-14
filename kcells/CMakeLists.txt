@@ -310,3 +310,8 @@ install( PROGRAMS  kcells.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
 install( FILES  kcells.kcfg DESTINATION ${KCFG_INSTALL_DIR} )
 install( FILES  kcells_plugin.desktop DESTINATION ${SERVICETYPES_INSTALL_DIR})
 install( FILES  kcellsrc DESTINATION ${CONFIG_INSTALL_DIR})
+install( FILES
+        interfaces/KChartInterface.h
+        interfaces/KChartModel.h
+        DESTINATION ${INCLUDE_INSTALL_DIR} COMPONENT Devel)
+

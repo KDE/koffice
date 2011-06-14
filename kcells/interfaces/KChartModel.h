@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KO_CHART_MODEL
-#define KO_CHART_MODEL
+#ifndef KCHART_MODEL
+#define KCHART_MODEL
 
 
 #include <QtCore/QHash>
@@ -30,7 +30,7 @@ class QAbstractItemModel;
 class QRect;
 
 
-namespace KoChart {
+namespace KChart {
 
 /**
 * Item data role used to retrieve the string representing the data area
@@ -81,9 +81,9 @@ public:
     virtual bool isCellRegionValid(const QString& regionName) const = 0;
 };
 
-} // Namespace KoChart
+} // Namespace KChart
 
-Q_DECLARE_INTERFACE(KoChart::ChartModel, "org.koffice.KoChart.ChartModel:1.0")
+Q_DECLARE_INTERFACE(KChart::ChartModel, "org.kde.KChart.ChartModel:1.0")
 
-#endif // KO_CHART_MODEL
+#endif // KCHART_MODEL
 

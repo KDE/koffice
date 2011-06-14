@@ -23,7 +23,7 @@
 
 #include "KCRegion.h"
 
-#include <KoChartModel.h>
+#include "interfaces/KChartModel.h"
 
 #include <QAbstractTableModel>
 
@@ -32,10 +32,10 @@ class KCBinding;
 /**
  * A model for a cell range acting as data source.
  */
-class KCBindingModel : public QAbstractTableModel, public KoChart::ChartModel
+class KCBindingModel : public QAbstractTableModel, public KChart::ChartModel
 {
     Q_OBJECT
-    Q_INTERFACES(KoChart::ChartModel)
+    Q_INTERFACES(KChart::ChartModel)
 public:
     explicit KCBindingModel(KCBinding* binding, QObject *parent = 0);
 
@@ -45,7 +45,7 @@ public:
     virtual int columnCount(const QModelIndex& parent = QModelIndex()) const;
     virtual QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const;
 
-    // KoChart::ChartModel interface
+    // KChart::ChartModel interface
     virtual QHash<QString, QVector<QRect> > cellRegion() const;
     virtual bool setCellRegion(const QString& regionName);
     virtual bool isCellRegionValid(const QString& regionName) const;
