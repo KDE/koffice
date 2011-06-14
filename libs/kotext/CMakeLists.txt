@@ -31,7 +31,7 @@ set(kotext_LIB_SRCS
     KInlineObject.cpp
     KoVariable.cpp
     KoVariableManager.cpp
-    KoNamedVariable.cpp
+    KNamedVariable.cpp
     KoTextLocator.cpp
     KoTextReference.cpp
     KoTextAnchor.cpp

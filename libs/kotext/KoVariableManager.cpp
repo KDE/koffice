@@ -18,7 +18,7 @@
  */
 #include "KoVariableManager.h"
 #include "KInlineTextObjectManager.h"
-#include "KoNamedVariable_p.h"
+#include "KNamedVariable_p.h"
 
 class KoVariableManagerPrivate
 {
@@ -85,7 +85,7 @@ KoVariable *KoVariableManager::createVariable(const QString &name) const
     int key = d->variableMapping.value(name);
     if (key == 0)
         return 0;
-    return new KoNamedVariable(static_cast<KInlineObject::Property>(key), name);
+    return new KNamedVariable(static_cast<KInlineObject::Property>(key), name);
 }
 
 QList<QString> KoVariableManager::variables() const

@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoNamedVariable_p.h"
+#include "KNamedVariable_p.h"
 #include "KInlineTextObjectManager.h"
 #include <KProperties.h>
 
@@ -25,25 +25,25 @@
 #include <KoShapeLoadingContext.h> // for usage in Q_UNUSED
 #include <KoShapeSavingContext.h> // for usage in Q_UNUSED
 
-KoNamedVariable::KoNamedVariable(Property key, const QString &name)
+KNamedVariable::KNamedVariable(Property key, const QString &name)
         : KoVariable(true),
         m_name(name),
         m_key(key)
 {
 }
 
-void KoNamedVariable::propertyChanged(Property property, const QVariant &value)
+void KNamedVariable::propertyChanged(Property property, const QVariant &value)
 {
     if (property == m_key)
         setValue(qvariant_cast<QString>(value));
 }
 
-void KoNamedVariable::setup()
+void KNamedVariable::setup()
 {
     setValue(manager()->stringProperty(m_key));
 }
 
-bool KoNamedVariable::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
+bool KNamedVariable::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
 {
     Q_UNUSED(element);
     Q_UNUSED(context);
@@ -51,7 +51,7 @@ bool KoNamedVariable::loadOdf(const KXmlElement &element, KoShapeLoadingContext 
     return false;
 }
 
-void KoNamedVariable::saveOdf(KoShapeSavingContext &context)
+void KNamedVariable::saveOdf(KoShapeSavingContext &context)
 {
     Q_UNUSED(context);
     // TODO
