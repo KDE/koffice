@@ -29,7 +29,7 @@
  * Additionally; when the tool does not allow copying (KoToolBase::hasSelection() returns false)
  * the signal copyRequested will be emitted for applications to connect to.
  */
-class FLAKE_EXPORT KoCutController : public KCopyController
+class FLAKE_EXPORT KCutController : public KCopyController
 {
     Q_OBJECT
 public:
@@ -39,7 +39,7 @@ public:
      * @param cutAction the action that we will listen to and respond to when it is activated.  Additionally, the
      *     action is used as a parent for the QObject for memory management purposes.
      */
-    KoCutController(KCanvasBase *canvas, QAction *cutAction);
+    KCutController(KCanvasBase *canvas, QAction *cutAction);
 };
 
 #endif

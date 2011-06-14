@@ -54,7 +54,7 @@
 #include <KoBookmark.h>
 #include <KCanvasController.h>
 #include <KCopyController.h>
-#include <KoCutController.h>
+#include <KCutController.h>
 #include <kofficeversion.h>
 #include <KoFind.h>
 #include <KoImageSelectionWidget.h>
@@ -376,7 +376,7 @@ void KWView::setupActions()
 
     // -------------- Edit actions
     action = actionCollection()->addAction(KStandardAction::Cut,  "edit_cut", 0, 0);
-    new KoCutController(m_canvas, action);
+    new KCutController(m_canvas, action);
     action = actionCollection()->addAction(KStandardAction::Copy,  "edit_copy", 0, 0);
     new KCopyController(m_canvas, action);
     action = actionCollection()->addAction(KStandardAction::Paste,  "edit_paste", 0, 0);

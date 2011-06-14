@@ -97,7 +97,7 @@
 #include <KoDockerManager.h>
 #include <KoShapeLayer.h>
 #include <KColorBackground.h>
-#include <KoCutController.h>
+#include <KCutController.h>
 #include <KCopyController.h>
 #include <KoPasteController.h>
 #include <KoSnapGuide.h>
@@ -817,7 +817,7 @@ void KarbonView::initActions()
 
     // edit ----->
     QAction *action = actionCollection()->addAction(KStandardAction::Cut,  "edit_cut", 0, 0);
-    new KoCutController(d->canvas, action);
+    new KCutController(d->canvas, action);
     action = actionCollection()->addAction(KStandardAction::Copy,  "edit_copy", 0, 0);
     new KCopyController(d->canvas, action);
     action = actionCollection()->addAction(KStandardAction::Paste,  "edit_paste", 0, 0);

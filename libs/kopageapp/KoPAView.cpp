@@ -54,7 +54,7 @@
 #include <KoRulerController.h>
 #include <KoDrag.h>
 #include <KoShapeDeleteCommand.h>
-#include <KoCutController.h>
+#include <KCutController.h>
 #include <KCopyController.h>
 #include <KoFilterManager.h>
 
@@ -263,7 +263,7 @@ void KoPAView::initGUI()
 void KoPAView::initActions()
 {
     KAction *action = actionCollection()->addAction(KStandardAction::Cut, "edit_cut", 0, 0);
-    new KoCutController(kopaCanvas(), action);
+    new KCutController(kopaCanvas(), action);
     action = actionCollection()->addAction(KStandardAction::Copy, "edit_copy", 0, 0);
     new KCopyController(kopaCanvas(), action);
     d->editPaste = actionCollection()->addAction(KStandardAction::Paste, "edit_paste", proxyObject, SLOT(editPaste()));

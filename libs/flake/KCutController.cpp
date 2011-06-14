@@ -17,11 +17,11 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoCutController.h"
+#include "KCutController.h"
 
 #include <QAction>
 
-KoCutController::KoCutController(KCanvasBase *canvas, QAction *cutAction)
+KCutController::KCutController(KCanvasBase *canvas, QAction *cutAction)
     : KCopyController(canvas, cutAction)
 {
     disconnect(cutAction, SIGNAL(triggered()), this, SLOT(copy())); // countering the super
