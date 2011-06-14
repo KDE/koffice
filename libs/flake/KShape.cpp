@@ -29,7 +29,7 @@
 #include "KPointerEvent.h"
 #include "KoInsets.h"
 #include "KoShapeBorderBase.h"
-#include "KoShapeBackground.h"
+#include "KShapeBackground.h"
 #include "KColorBackground.h"
 #include "KGradientBackground.h"
 #include "KPatternBackground.h"
@@ -789,7 +789,7 @@ QSet<KEventAction *> KShape::eventActions() const
     return d->eventActions;
 }
 
-void KShape::setBackground(KoShapeBackground *fill)
+void KShape::setBackground(KShapeBackground *fill)
 {
     Q_D(KShape);
     if (d->fill)
@@ -800,7 +800,7 @@ void KShape::setBackground(KoShapeBackground *fill)
     d->shapeChanged(BackgroundChanged);
 }
 
-KoShapeBackground * KShape::background() const
+KShapeBackground * KShape::background() const
 {
     Q_D(const KShape);
     return d->fill;
@@ -1050,7 +1050,7 @@ QString KShape::saveStyle(KOdfGenericStyle &style, KoShapeSavingContext &context
     if (s)
         s->fillStyle(style, context);
 
-    KoShapeBackground *bg = background();
+    KShapeBackground *bg = background();
     if (bg) {
         bg->fillStyle(style, context);
     }
@@ -1223,10 +1223,10 @@ bool KShape::loadOdfAttributes(const KXmlElement &element, KoShapeLoadingContext
     return true;
 }
 
-KoShapeBackground *KShape::loadOdfFill(KoShapeLoadingContext &context) const
+KShapeBackground *KShape::loadOdfFill(KoShapeLoadingContext &context) const
 {
     QString fill = KShapePrivate::getStyleProperty("fill", context);
-    KoShapeBackground *bg = 0;
+    KShapeBackground *bg = 0;
     if (fill == "solid" || fill == "hatch") {
         bg = new KColorBackground();
     } else if (fill == "gradient") {

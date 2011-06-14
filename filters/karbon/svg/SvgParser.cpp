@@ -2037,7 +2037,7 @@ KShape * SvgParser::createShape(const QString &shapeID)
     delete oldBorder;
 
     // reset fill
-    KoShapeBackground * oldFill = shape->background();
+    KShapeBackground * oldFill = shape->background();
     shape->setBackground(0);
     delete oldFill;
 

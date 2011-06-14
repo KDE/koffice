@@ -17,47 +17,47 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoShapeBackground.h"
-#include "KoShapeBackground_p.h"
+#include "KShapeBackground.h"
+#include "KShapeBackground_p.h"
 
 KoShapeBackgroundPrivate::KoShapeBackgroundPrivate()
     : refCount(0)
 {
 }
-KoShapeBackground::KoShapeBackground(KoShapeBackgroundPrivate &dd)
+KShapeBackground::KShapeBackground(KoShapeBackgroundPrivate &dd)
     :d_ptr(&dd)
 {
 }
 
-KoShapeBackground::KoShapeBackground()
+KShapeBackground::KShapeBackground()
     : d_ptr(new KoShapeBackgroundPrivate())
 {
 }
 
-KoShapeBackground::~KoShapeBackground()
+KShapeBackground::~KShapeBackground()
 {
     delete d_ptr;
 }
 
-bool KoShapeBackground::hasTransparency() const
+bool KShapeBackground::hasTransparency() const
 {
     return false;
 }
 
-bool KoShapeBackground::ref()
+bool KShapeBackground::ref()
 {
-    Q_D(KoShapeBackground);
+    Q_D(KShapeBackground);
     return d->refCount.ref();
 }
 
-bool KoShapeBackground::deref()
+bool KShapeBackground::deref()
 {
-    Q_D(KoShapeBackground);
+    Q_D(KShapeBackground);
     return d->refCount.deref();
 }
 
-int KoShapeBackground::useCount() const
+int KShapeBackground::useCount() const
 {
-    Q_D(const KoShapeBackground);
+    Q_D(const KShapeBackground);
     return d->refCount;
 }

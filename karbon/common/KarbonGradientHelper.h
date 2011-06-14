@@ -25,7 +25,7 @@
 
 class KShape;
 class QGradient;
-class KoShapeBackground;
+class KShapeBackground;
 
 namespace KarbonGradientHelper
 {

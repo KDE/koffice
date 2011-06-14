@@ -25,9 +25,9 @@
 void TestShapeBackgroundCommand::refCounting()
 {
     MockShape * shape1 = new MockShape();
-    KoShapeBackground * whiteFill = new KColorBackground(QColor(Qt::white));
-    KoShapeBackground * blackFill = new KColorBackground(QColor(Qt::black));
-    KoShapeBackground * redFill = new KColorBackground(QColor(Qt::red));
+    KShapeBackground * whiteFill = new KColorBackground(QColor(Qt::white));
+    KShapeBackground * blackFill = new KColorBackground(QColor(Qt::black));
+    KShapeBackground * redFill = new KColorBackground(QColor(Qt::red));
 
     shape1->setBackground(whiteFill);
     QVERIFY(shape1->background() == whiteFill);

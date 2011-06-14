@@ -27,7 +27,7 @@
 #include <QBrush>
 
 class KShape;
-class KoShapeBackground;
+class KShapeBackground;
 
 /// The undo / redo command for setting the shape transparency
 class FLAKE_EXPORT KoShapeTransparencyCommand : public QUndoCommand

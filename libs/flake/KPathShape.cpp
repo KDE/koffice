@@ -29,7 +29,7 @@
 #include "KoShapeSavingContext.h"
 #include "KoShapeLoadingContext.h"
 #include "KoShapeShadow.h"
-#include "KoShapeBackground.h"
+#include "KShapeBackground.h"
 #include "KoShapeContainer.h"
 #include "KFilterEffectStack.h"
 #include "KoTextOnShapeContainer.h"

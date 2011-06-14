@@ -53,7 +53,7 @@ struct Finalizer {
 #include <KParagraphStyle.h>
 #include <KPostscriptPaintDevice.h>
 #include <KSelection.h>
-#include <KoShapeBackground.h>
+#include <KShapeBackground.h>
 #include <KoShapeLoadingContext.h>
 #include <KoShapeManager.h>
 #include <KoShapeSavingContext.h>

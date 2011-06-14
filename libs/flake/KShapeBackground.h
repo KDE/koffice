@@ -35,11 +35,11 @@ class KoShapeBackgroundPrivate;
  * Derived classes are used to paint the background of
  * a shape within a given painter path.
  */
-class FLAKE_EXPORT KoShapeBackground
+class FLAKE_EXPORT KShapeBackground
 {
 public:
-    KoShapeBackground();
-    virtual ~KoShapeBackground();
+    KShapeBackground();
+    virtual ~KShapeBackground();
 
     /// Paints the background using the given fill path
     virtual void paint(QPainter &painter, const QPainterPath &fillPath) const = 0;
@@ -71,11 +71,11 @@ public:
     int useCount() const;
 
 protected:
-    KoShapeBackground(KoShapeBackgroundPrivate &);
+    KShapeBackground(KoShapeBackgroundPrivate &);
     KoShapeBackgroundPrivate *d_ptr;
 
 private:
-    Q_DECLARE_PRIVATE(KoShapeBackground)
+    Q_DECLARE_PRIVATE(KShapeBackground)
 };
 
 #endif // KOSHAPEBACKGROUND_H

@@ -28,7 +28,7 @@
 #include <KXmlReader.h>
 #include <KUnit.h>
 #include <KPathShapeLoader.h>
-#include <KoShapeBackground.h>
+#include <KShapeBackground.h>
 
 #include <KLocale>
 

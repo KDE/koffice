@@ -33,7 +33,7 @@
 #include <KoShapeLayer.h>
 #include <KoShapeRegistry.h>
 #include <KOdfStyleStack.h>
-#include <KoShapeBackground.h>
+#include <KShapeBackground.h>
 
 KoPAPageBase::KoPAPageBase()
 : KoShapeContainer(new KoPAPageContainerModel())
@@ -117,7 +117,7 @@ QString KoPAPageBase::saveOdfPageStyle(KoPASavingContext &paContext) const
 
 void KoPAPageBase::saveOdfPageStyleData(KOdfGenericStyle &style, KoPASavingContext &paContext) const
 {
-    KoShapeBackground * bg = background();
+    KShapeBackground * bg = background();
     if(bg)
         bg->fillStyle(style, paContext);
 }

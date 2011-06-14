@@ -19,7 +19,7 @@
 
 #include "KoShapeTransparencyCommand.h"
 #include "KShape.h"
-#include "KoShapeBackground.h"
+#include "KShapeBackground.h"
 
 #include <klocale.h>
 

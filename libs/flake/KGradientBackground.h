@@ -20,7 +20,7 @@
 #ifndef KOGRADIENTBACKGROUND_H
 #define KOGRADIENTBACKGROUND_H
 
-#include "KoShapeBackground.h"
+#include "KShapeBackground.h"
 #include "flake_export.h"
 
 #include <QtGui/QTransform>
@@ -29,7 +29,7 @@
 class KGradientBackgroundPrivate;
 
 /// A gradient shape background
-class FLAKE_EXPORT KGradientBackground : public KoShapeBackground
+class FLAKE_EXPORT KGradientBackground : public KShapeBackground
 {
 public:
     /**
@@ -71,11 +71,11 @@ public:
     /// Assignment operator
     KGradientBackground& operator=(const KGradientBackground &rhs);
 
-    /// reimplemented from KoShapeBackground
+    /// reimplemented from KShapeBackground
     virtual void paint(QPainter &painter, const QPainterPath &fillPath) const;
-    /// reimplemented from KoShapeBackground
+    /// reimplemented from KShapeBackground
     virtual void fillStyle(KOdfGenericStyle &style, KoShapeSavingContext &context);
-    /// reimplemented from KoShapeBackground
+    /// reimplemented from KShapeBackground
     virtual bool loadStyle(KOdfLoadingContext &context, const QSizeF &shapeSize);
 
 private:

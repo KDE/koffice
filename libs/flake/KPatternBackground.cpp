@@ -18,7 +18,7 @@
  */
 
 #include "KPatternBackground.h"
-#include "KoShapeBackground_p.h"
+#include "KShapeBackground_p.h"
 #include "KoShapeSavingContext.h"
 #include "KImageData.h"
 #include "KImageCollection.h"
@@ -131,7 +131,7 @@ public:
 
 
 KPatternBackground::KPatternBackground(KImageCollection * imageCollection)
-        : KoShapeBackground(*(new KPatternBackgroundPrivate()))
+        : KShapeBackground(*(new KPatternBackgroundPrivate()))
 {
     Q_D(KPatternBackground);
     d->imageCollection = imageCollection;
