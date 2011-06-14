@@ -29,7 +29,7 @@
 
 #include <QTimer>
 
-QRectF KoSelectionPrivate::sizeRect()
+QRectF KSelectionPrivate::sizeRect()
 {
     bool first = true;
     QRectF bb;
@@ -62,7 +62,7 @@ QRectF KoSelectionPrivate::sizeRect()
     return bb;
 }
 
-void KoSelectionPrivate::requestSelectionChangedEvent()
+void KSelectionPrivate::requestSelectionChangedEvent()
 {
     if (eventTriggered)
         return;
@@ -70,13 +70,13 @@ void KoSelectionPrivate::requestSelectionChangedEvent()
     QTimer::singleShot(0, q, SLOT(selectionChangedEvent()));
 }
 
-void KoSelectionPrivate::selectionChangedEvent()
+void KSelectionPrivate::selectionChangedEvent()
 {
     eventTriggered = false;
     emit q->selectionChanged();
 }
 
-void KoSelectionPrivate::selectGroupChildren(KoShapeGroup *group)
+void KSelectionPrivate::selectGroupChildren(KoShapeGroup *group)
 {
     if (! group)
         return;
@@ -92,7 +92,7 @@ void KoSelectionPrivate::selectGroupChildren(KoShapeGroup *group)
     }
 }
 
-void KoSelectionPrivate::deselectGroupChildren(KoShapeGroup *group)
+void KSelectionPrivate::deselectGroupChildren(KoShapeGroup *group)
 {
     if (! group)
         return;
@@ -111,7 +111,7 @@ void KoSelectionPrivate::deselectGroupChildren(KoShapeGroup *group)
 
 KSelection::KSelection(QObject *parent)
     : QObject(parent),
-    KoShape(*(new KoSelectionPrivate(this)))
+    KoShape(*(new KSelectionPrivate(this)))
 {
 }
 

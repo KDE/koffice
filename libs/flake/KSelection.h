@@ -34,7 +34,7 @@
 #include "flake_export.h"
 
 class KoShapeLayer;
-class KoSelectionPrivate;
+class KSelectionPrivate;
 
 /**
  * A selection is a shape that contains a number of references
