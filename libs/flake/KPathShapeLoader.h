@@ -23,7 +23,7 @@
 #include "flake_export.h"
 
 class KPathShape;
-class KoPathShapeLoaderPrivate;
+class KPathShapeLoaderPrivate;
 class QString;
 
 /**
@@ -44,7 +44,7 @@ public:
     void parseSvg(const QString &svgInputData, bool process = false);
 
 private:
-    KoPathShapeLoaderPrivate* const d;
+    KPathShapeLoaderPrivate* const d;
 };
 
 #endif // _KOPATHSHAPELOADER_H_

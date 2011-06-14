@@ -22,10 +22,10 @@
 #include <math.h>
 #include <kdebug.h>
 
-class KoPathShapeLoaderPrivate
+class KPathShapeLoaderPrivate
 {
 public:
-    KoPathShapeLoaderPrivate(KPathShape * p) : path(p) {
+    KPathShapeLoaderPrivate(KPathShape * p) : path(p) {
         Q_ASSERT(path);
         path->clear();
     }
@@ -50,7 +50,7 @@ public:
     QPointF lastPoint;
 };
 
-void KoPathShapeLoaderPrivate::parseSvg(const QString &s, bool process)
+void KPathShapeLoaderPrivate::parseSvg(const QString &s, bool process)
 {
     if (!s.isEmpty()) {
         QString d = s;
@@ -327,7 +327,7 @@ void KoPathShapeLoaderPrivate::parseSvg(const QString &s, bool process)
 }
 
 // parses the coord into number and forwards to the next token
-const char * KoPathShapeLoaderPrivate::getCoord(const char *ptr, qreal &number)
+const char * KPathShapeLoaderPrivate::getCoord(const char *ptr, qreal &number)
 {
     int integer, exponent;
     qreal decimal, frac;
@@ -389,7 +389,7 @@ const char * KoPathShapeLoaderPrivate::getCoord(const char *ptr, qreal &number)
 // For each bezier found a svgToCurve call is done.
 // Adapted from Niko's code in kdelibs/kdecore/svgicons.
 // Maybe this can serve in some shared lib? (Rob)
-void KoPathShapeLoaderPrivate::calculateArc(bool relative, qreal &curx, qreal &cury, qreal angle, qreal x, qreal y, qreal r1, qreal r2, bool largeArcFlag, bool sweepFlag)
+void KPathShapeLoaderPrivate::calculateArc(bool relative, qreal &curx, qreal &cury, qreal angle, qreal x, qreal y, qreal r1, qreal r2, bool largeArcFlag, bool sweepFlag)
 {
     qreal sin_th, cos_th;
     qreal a00, a01, a10, a11;
@@ -524,7 +524,7 @@ void KoPathShapeLoaderPrivate::calculateArc(bool relative, qreal &curx, qreal &c
         cury += y;
 }
 
-void KoPathShapeLoaderPrivate::svgMoveTo(qreal x1, qreal y1, bool abs)
+void KPathShapeLoaderPrivate::svgMoveTo(qreal x1, qreal y1, bool abs)
 {
     if (abs)
         lastPoint = QPointF(x1, y1);
@@ -533,7 +533,7 @@ void KoPathShapeLoaderPrivate::svgMoveTo(qreal x1, qreal y1, bool abs)
     path->moveTo(lastPoint);
 }
 
-void KoPathShapeLoaderPrivate::svgLineTo(qreal x1, qreal y1, bool abs)
+void KPathShapeLoaderPrivate::svgLineTo(qreal x1, qreal y1, bool abs)
 {
     if (abs)
         lastPoint = QPointF(x1, y1);
@@ -543,7 +543,7 @@ void KoPathShapeLoaderPrivate::svgLineTo(qreal x1, qreal y1, bool abs)
     path->lineTo(lastPoint);
 }
 
-void KoPathShapeLoaderPrivate::svgLineToHorizontal(qreal x, bool abs)
+void KPathShapeLoaderPrivate::svgLineToHorizontal(qreal x, bool abs)
 {
     if (abs)
         lastPoint.setX(x);
@@ -553,7 +553,7 @@ void KoPathShapeLoaderPrivate::svgLineToHorizontal(qreal x, bool abs)
     path->lineTo(lastPoint);
 }
 
-void KoPathShapeLoaderPrivate::svgLineToVertical(qreal y, bool abs)
+void KPathShapeLoaderPrivate::svgLineToVertical(qreal y, bool abs)
 {
     if (abs)
         lastPoint.setY(y);
@@ -563,7 +563,7 @@ void KoPathShapeLoaderPrivate::svgLineToVertical(qreal y, bool abs)
     path->lineTo(lastPoint);
 }
 
-void KoPathShapeLoaderPrivate::svgCurveToCubic(qreal x1, qreal y1, qreal x2, qreal y2, qreal x, qreal y, bool abs)
+void KPathShapeLoaderPrivate::svgCurveToCubic(qreal x1, qreal y1, qreal x2, qreal y2, qreal x, qreal y, bool abs)
 {
     QPointF p1, p2;
     if (abs) {
@@ -579,7 +579,7 @@ void KoPathShapeLoaderPrivate::svgCurveToCubic(qreal x1, qreal y1, qreal x2, qre
     path->curveTo(p1, p2, lastPoint);
 }
 
-void KoPathShapeLoaderPrivate::svgCurveToCubicSmooth(qreal x, qreal y, qreal x2, qreal y2, bool abs)
+void KPathShapeLoaderPrivate::svgCurveToCubicSmooth(qreal x, qreal y, qreal x2, qreal y2, bool abs)
 {
     Q_UNUSED(x);
     Q_UNUSED(y);
@@ -589,7 +589,7 @@ void KoPathShapeLoaderPrivate::svgCurveToCubicSmooth(qreal x, qreal y, qreal x2,
     // TODO implement
 }
 
-void KoPathShapeLoaderPrivate::svgCurveToQuadratic(qreal x, qreal y, qreal x1, qreal y1, bool abs)
+void KPathShapeLoaderPrivate::svgCurveToQuadratic(qreal x, qreal y, qreal x1, qreal y1, bool abs)
 {
     Q_UNUSED(x);
     Q_UNUSED(y);
@@ -599,7 +599,7 @@ void KoPathShapeLoaderPrivate::svgCurveToQuadratic(qreal x, qreal y, qreal x1, q
     // TODO implement
 }
 
-void KoPathShapeLoaderPrivate::svgCurveToQuadraticSmooth(qreal x, qreal y, bool abs)
+void KPathShapeLoaderPrivate::svgCurveToQuadraticSmooth(qreal x, qreal y, bool abs)
 {
     Q_UNUSED(x);
     Q_UNUSED(y);
@@ -607,7 +607,7 @@ void KoPathShapeLoaderPrivate::svgCurveToQuadraticSmooth(qreal x, qreal y, bool 
     // TODO implement
 }
 
-void KoPathShapeLoaderPrivate::svgArcTo(qreal x, qreal y, qreal r1, qreal r2, qreal angle, bool largeArcFlag, bool sweepFlag, bool abs)
+void KPathShapeLoaderPrivate::svgArcTo(qreal x, qreal y, qreal r1, qreal r2, qreal angle, bool largeArcFlag, bool sweepFlag, bool abs)
 {
     Q_UNUSED(x);
     Q_UNUSED(y);
@@ -620,13 +620,13 @@ void KoPathShapeLoaderPrivate::svgArcTo(qreal x, qreal y, qreal r1, qreal r2, qr
     // TODO implement
 }
 
-void KoPathShapeLoaderPrivate::svgClosePath()
+void KPathShapeLoaderPrivate::svgClosePath()
 {
     path->closeMerge();
 }
 
 KPathShapeLoader::KPathShapeLoader(KPathShape *path)
-    : d(new KoPathShapeLoaderPrivate(path))
+    : d(new KPathShapeLoaderPrivate(path))
 {
 }
 
