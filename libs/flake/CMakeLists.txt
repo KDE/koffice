@@ -165,7 +165,7 @@ set(flake_SRCS
     tools/KInteractionTool.cpp
     tools/KInteractionStrategy.cpp
     tools/KCreateShapesTool.cpp
-    tools/KoCreateShapesToolFactory.cpp
+    tools/KCreateShapesToolFactory.cpp
     tools/KoShapeRubberSelectStrategy.cpp
     tools/KoPathSegmentChangeStrategy.cpp
 )

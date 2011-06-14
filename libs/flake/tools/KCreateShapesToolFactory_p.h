@@ -18,28 +18,32 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoCreateShapesToolFactory_p.h"
-#include "KCreateShapesTool.h"
+#ifndef KOCREATESHAPESTOOLFACTORY_H
+#define KOCREATESHAPESTOOLFACTORY_H
 
-#include <klocale.h>
+//
+//  W A R N I N G
+//  -------------
+//
+// This file is not part of the Flake API.  It exists purely as an
+// implementation detail.  This header file may change from version to
+// version without notice, or even be removed.
+//
+// We mean it.
+//
 
-#include <QColor>
-#include <QRectF>
-#include <QPixmap>
 
-KoCreateShapesToolFactory::KoCreateShapesToolFactory(QObject *parent)
-        : KoToolFactoryBase(parent, KoCreateShapesTool_ID)
+#include "KoToolFactoryBase.h"
+
+/// The factory for the KCreateShapesTool
+class KCreateShapesToolFactory : public KoToolFactoryBase
 {
-    setToolTip(i18n("Create object"));
-    setToolType(mainToolType());
-    setPriority(1);
-}
+public:
+    /// Constructor
+    KCreateShapesToolFactory(QObject *parent);
+    /// Destructor
+    ~KCreateShapesToolFactory();
 
-KoCreateShapesToolFactory::~KoCreateShapesToolFactory()
-{
-}
-
-KoToolBase* KoCreateShapesToolFactory::createTool(KCanvasBase *canvas)
-{
-    return new KCreateShapesTool(canvas);
-}
+    KoToolBase* createTool(KCanvasBase *canvas);
+};
+#endif
