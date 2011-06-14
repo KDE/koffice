@@ -30,7 +30,7 @@
 #include <KDebug>
 #include <QBuffer>
 
-KoImageDataPrivate::KoImageDataPrivate(KImageData *q)
+KImageDataPrivate::KImageDataPrivate(KImageData *q)
     : collection(0),
     errorCode(KImageData::Success),
     key(0),
@@ -43,7 +43,7 @@ KoImageDataPrivate::KoImageDataPrivate(KImageData *q)
     QObject::connect(&cleanCacheTimer, SIGNAL(timeout()), q, SLOT(cleanupImageCache()));
 }
 
-KoImageDataPrivate::~KoImageDataPrivate()
+KImageDataPrivate::~KImageDataPrivate()
 {
     if (collection)
         collection->removeOnKey(key);
@@ -51,12 +51,12 @@ KoImageDataPrivate::~KoImageDataPrivate()
 }
 
 // called from the collection
-bool KoImageDataPrivate::saveData(QIODevice &device)
+bool KImageDataPrivate::saveData(QIODevice &device)
 {
     switch (dataStoreState) {
-    case KoImageDataPrivate::StateEmpty:
+    case KImageDataPrivate::StateEmpty:
         return false;
-    case KoImageDataPrivate::StateNotLoaded:
+    case KImageDataPrivate::StateNotLoaded:
         // spool directly.
         Q_ASSERT(temporaryFile); // otherwise the collection should not have called this
         if (temporaryFile) {
@@ -82,8 +82,8 @@ bool KoImageDataPrivate::saveData(QIODevice &device)
             temporaryFile->close();
         }
         return true;
-    case KoImageDataPrivate::StateImageLoaded:
-    case KoImageDataPrivate::StateImageOnly: {
+    case KImageDataPrivate::StateImageLoaded:
+    case KImageDataPrivate::StateImageOnly: {
         // save image
         QBuffer buffer;
         QImageWriter writer(&buffer, suffix.toLatin1());
@@ -95,7 +95,7 @@ bool KoImageDataPrivate::saveData(QIODevice &device)
     return false;
 }
 
-void KoImageDataPrivate::setSuffix(const QString &name)
+void KImageDataPrivate::setSuffix(const QString &name)
 {
     QRegExp rx("\\.([^/]+$)");
     if (rx.indexIn(name) != -1) {
@@ -103,7 +103,7 @@ void KoImageDataPrivate::setSuffix(const QString &name)
     }
 }
 
-void KoImageDataPrivate::copyToTemporary(QIODevice &device)
+void KImageDataPrivate::copyToTemporary(QIODevice &device)
 {
     delete temporaryFile;
     temporaryFile = new KTemporaryFile();
@@ -125,22 +125,22 @@ void KoImageDataPrivate::copyToTemporary(QIODevice &device)
             bytes -= temporaryFile->write(buf, bytes);
         } while (bytes > 0);
     }
-    key = KoImageDataPrivate::generateKey(md5.result());
+    key = KImageDataPrivate::generateKey(md5.result());
     temporaryFile->close();
 
     QFileInfo fi(*temporaryFile);
     dataStoreState = StateNotLoaded;
 }
 
-void KoImageDataPrivate::cleanupImageCache()
+void KImageDataPrivate::cleanupImageCache()
 {
-    if (dataStoreState == KoImageDataPrivate::StateImageLoaded) {
+    if (dataStoreState == KImageDataPrivate::StateImageLoaded) {
         image = QImage();
-        dataStoreState = KoImageDataPrivate::StateNotLoaded;
+        dataStoreState = KImageDataPrivate::StateNotLoaded;
     }
 }
 
-void KoImageDataPrivate::clear()
+void KImageDataPrivate::clear()
 {
     errorCode = KImageData::Success;
     dataStoreState = StateEmpty;
@@ -150,7 +150,7 @@ void KoImageDataPrivate::clear()
     image = QImage();
 }
 
-qint64 KoImageDataPrivate::generateKey(const QByteArray &bytes)
+qint64 KImageDataPrivate::generateKey(const QByteArray &bytes)
 {
     qint64 answer = 1;
     const int max = qMin(8, bytes.count());

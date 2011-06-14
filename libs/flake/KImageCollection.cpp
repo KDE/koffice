@@ -35,13 +35,13 @@ class KImageCollection::Private
 public:
     ~Private()
     {
-        foreach(KoImageDataPrivate *id, images)
+        foreach(KImageDataPrivate *id, images)
             id->collection = 0;
     }
 
-    QMap<qint64, KoImageDataPrivate*> images;
+    QMap<qint64, KImageDataPrivate*> images;
     // an extra map to find all dataObjects based on the key of a store.
-    QMap<QByteArray, KoImageDataPrivate*> storeImages;
+    QMap<QByteArray, KImageDataPrivate*> storeImages;
 };
 
 KImageCollection::KImageCollection(QObject *parent)
@@ -67,7 +67,7 @@ bool KImageCollection::completeSaving(KOdfStore *store, KXmlWriter *manifestWrit
     QMap<qint64, QString> images(context->imagesToSave());
     QMap<qint64, QString>::iterator it(images.begin());
 
-    QMap<qint64, KoImageDataPrivate *>::iterator dataIt(d->images.begin());
+    QMap<qint64, KImageDataPrivate *>::iterator dataIt(d->images.begin());
 
     while (it != images.end()) {
         if (dataIt == d->images.end()) {
@@ -77,7 +77,7 @@ bool KImageCollection::completeSaving(KOdfStore *store, KXmlWriter *manifestWrit
             break;
         }
         else if (dataIt.key() == it.key()) {
-            KoImageDataPrivate *imageData = dataIt.value();
+            KImageDataPrivate *imageData = dataIt.value();
             if (imageData->imageLocation.isValid()) {
                 // TODO store url
                 Q_ASSERT(0); // not impleented yet
@@ -130,7 +130,7 @@ KImageData *KImageCollection::createExternalImageData(const QUrl &url)
 
     QCryptographicHash md5(QCryptographicHash::Md5);
     md5.addData(url.toEncoded());
-    qint64 key = KoImageDataPrivate::generateKey(md5.result());
+    qint64 key = KImageDataPrivate::generateKey(md5.result());
     if (d->images.contains(key))
         return new KImageData(d->images.value(key));
     KImageData *data = new KImageData();
@@ -168,7 +168,7 @@ KImageData *KImageCollection::createImageData(const QByteArray &imageData)
 {
     QCryptographicHash md5(QCryptographicHash::Md5);
     md5.addData(imageData);
-    qint64 key = KoImageDataPrivate::generateKey(md5.result());
+    qint64 key = KImageDataPrivate::generateKey(md5.result());
     if (d->images.contains(key))
         return new KImageData(d->images.value(key));
     KImageData *data = new KImageData();
@@ -181,7 +181,7 @@ KImageData *KImageCollection::createImageData(const QByteArray &imageData)
 
 KImageData *KImageCollection::cacheImage(KImageData *data)
 {
-    QMap<qint64, KoImageDataPrivate*>::const_iterator it(d->images.constFind(data->key()));
+    QMap<qint64, KImageDataPrivate*>::const_iterator it(d->images.constFind(data->key()));
     if (it == d->images.constEnd()) {
         d->images.insert(data->key(), data->priv());
         data->priv()->collection = this;

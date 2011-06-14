@@ -53,7 +53,7 @@ KImageData::KImageData(const KImageData &imageData)
         d->refCount.ref();
 }
 
-KImageData::KImageData(KoImageDataPrivate *priv)
+KImageData::KImageData(KImageDataPrivate *priv)
     : d(priv)
 {
     d->refCount.ref();
@@ -77,7 +77,7 @@ QPixmap KImageData::pixmap(const QSize &size)
     }
     if (d->pixmap.isNull() || d->pixmap.size() != wantedSize) {
         switch (d->dataStoreState) {
-        case KoImageDataPrivate::StateEmpty: {
+        case KImageDataPrivate::StateEmpty: {
             d->pixmap = QPixmap(1, 1);
             QPainter p(&d->pixmap);
             p.setPen(QPen(Qt::gray));
@@ -85,11 +85,11 @@ QPixmap KImageData::pixmap(const QSize &size)
             p.end();
             break;
         }
-        case KoImageDataPrivate::StateNotLoaded:
+        case KImageDataPrivate::StateNotLoaded:
             image(); // forces load
             // fall through
-        case KoImageDataPrivate::StateImageLoaded:
-        case KoImageDataPrivate::StateImageOnly:
+        case KImageDataPrivate::StateImageLoaded:
+        case KImageDataPrivate::StateImageOnly:
             if (!d->image.isNull()) {
                 // create pixmap from image.
                 // this is the highest quality and lowest memory usage way of doing the conversion.
@@ -97,7 +97,7 @@ QPixmap KImageData::pixmap(const QSize &size)
             }
         }
 
-        if (d->dataStoreState == KoImageDataPrivate::StateImageLoaded) {
+        if (d->dataStoreState == KImageDataPrivate::StateImageLoaded) {
             if (d->cleanCacheTimer.isActive())
                 d->cleanCacheTimer.stop();
             // schedule an auto-unload of the big QImage in a second.
@@ -134,7 +134,7 @@ QSizeF KImageData::imageSize()
 
 QImage KImageData::image() const
 {
-    if (d->dataStoreState == KoImageDataPrivate::StateNotLoaded) {
+    if (d->dataStoreState == KImageDataPrivate::StateNotLoaded) {
         // load image
         if (d->temporaryFile) {
             d->temporaryFile->open();
@@ -146,7 +146,7 @@ QImage KImageData::image() const
                 d->errorCode = OpenFailed;
         }
         if (d->errorCode == Success)
-            d->dataStoreState = KoImageDataPrivate::StateImageLoaded;
+            d->dataStoreState = KImageDataPrivate::StateImageLoaded;
     }
     return d->image;
 }
@@ -167,7 +167,7 @@ void KImageData::setImage(const QImage &image, KImageCollection *collection)
         delete other;
     } else {
         if (d == 0) {
-            d = new KoImageDataPrivate(this);
+            d = new KImageDataPrivate(this);
             d->refCount.ref();
         }
         delete d->temporaryFile;
@@ -188,7 +188,7 @@ void KImageData::setImage(const QImage &image, KImageCollection *collection)
             d->copyToTemporary(buffer);
         } else {
             d->image = image;
-            d->dataStoreState = KoImageDataPrivate::StateImageOnly;
+            d->dataStoreState = KImageDataPrivate::StateImageOnly;
 
             QByteArray ba;
             QBuffer buffer(&ba);
@@ -196,7 +196,7 @@ void KImageData::setImage(const QImage &image, KImageCollection *collection)
             image.save(&buffer, "PNG"); // use .png for images we get as QImage
             QCryptographicHash md5(QCryptographicHash::Md5);
             md5.addData(ba);
-            d->key = KoImageDataPrivate::generateKey(md5.result());
+            d->key = KImageDataPrivate::generateKey(md5.result());
         }
     }
 }
@@ -216,7 +216,7 @@ void KImageData::setExternalImage(const QUrl &location, KImageCollection *collec
         delete other;
     } else {
         if (d == 0) {
-            d = new KoImageDataPrivate(this);
+            d = new KImageDataPrivate(this);
             d->refCount.ref();
         } else {
             d->clear();
@@ -225,8 +225,8 @@ void KImageData::setExternalImage(const QUrl &location, KImageCollection *collec
         d->setSuffix(location.toEncoded());
         QCryptographicHash md5(QCryptographicHash::Md5);
         md5.addData(location.toEncoded());
-        d->key = KoImageDataPrivate::generateKey(md5.result());
-        d->dataStoreState = KoImageDataPrivate::StateNotLoaded;
+        d->key = KImageDataPrivate::generateKey(md5.result());
+        d->dataStoreState = KImageDataPrivate::StateNotLoaded;
     }
 }
 
@@ -241,7 +241,7 @@ void KImageData::setImage(const QString &url, KOdfStore *store, KImageCollection
         delete other;
     } else {
         if (d == 0) {
-            d = new KoImageDataPrivate(this);
+            d = new KImageDataPrivate(this);
             d->refCount.ref();
         } else {
             d->clear();
@@ -262,8 +262,8 @@ void KImageData::setImage(const QString &url, KOdfStore *store, KImageCollection
                 if (d->image.loadFromData(data)) {
                     QCryptographicHash md5(QCryptographicHash::Md5);
                     md5.addData(data);
-                    d->key = KoImageDataPrivate::generateKey(md5.result());
-                    d->dataStoreState = KoImageDataPrivate::StateImageOnly;
+                    d->key = KImageDataPrivate::generateKey(md5.result());
+                    d->dataStoreState = KImageDataPrivate::StateImageOnly;
                     return;
                 }
             }
@@ -291,7 +291,7 @@ void KImageData::setImage(const QByteArray &imageData, KImageCollection *collect
         delete other;
     } else {
         if (d == 0) {
-            d = new KoImageDataPrivate(this);
+            d = new KImageDataPrivate(this);
             d->refCount.ref();
         }
         delete d->temporaryFile;
@@ -306,7 +306,7 @@ void KImageData::setImage(const QByteArray &imageData, KImageCollection *collect
                 d->errorCode = OpenFailed;
             }
             d->image = image;
-            d->dataStoreState = KoImageDataPrivate::StateImageOnly;
+            d->dataStoreState = KImageDataPrivate::StateImageOnly;
         }
         if (imageData.size() > MAX_MEMORY_IMAGESIZE
                 || d->errorCode == OpenFailed) {
@@ -319,13 +319,13 @@ void KImageData::setImage(const QByteArray &imageData, KImageCollection *collect
         }
         QCryptographicHash md5(QCryptographicHash::Md5);
         md5.addData(imageData);
-        d->key = KoImageDataPrivate::generateKey(md5.result());
+        d->key = KImageDataPrivate::generateKey(md5.result());
     }
 }
 
 bool KImageData::isValid() const
 {
-    return d && d->dataStoreState != KoImageDataPrivate::StateEmpty
+    return d && d->dataStoreState != KImageDataPrivate::StateEmpty
         && d->errorCode == Success;
 }
 

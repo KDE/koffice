@@ -33,7 +33,7 @@ class QImage;
 class QSizeF;
 class QUrl;
 class KImageCollection;
-class KoImageDataPrivate;
+class KImageDataPrivate;
 class KOdfStore;
 
 /**
@@ -127,16 +127,16 @@ public:
     bool isValid() const;
 
     /// \internal
-    KoImageDataPrivate *priv() { return d; }
+    KImageDataPrivate *priv() { return d; }
 
 protected:
     friend class KImageCollection;
 
     /// \internal
-    KImageData(KoImageDataPrivate *priv);
+    KImageData(KImageDataPrivate *priv);
 
 private:
-    KoImageDataPrivate *d;
+    KImageDataPrivate *d;
     Q_PRIVATE_SLOT(d, void cleanupImageCache())
 };
 

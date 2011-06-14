@@ -46,11 +46,11 @@
 class KImageCollection;
 class KTemporaryFile;
 
-class KoImageDataPrivate
+class KImageDataPrivate
 {
 public:
-    KoImageDataPrivate(KImageData *q);
-    virtual ~KoImageDataPrivate();
+    KImageDataPrivate(KImageData *q);
+    virtual ~KImageDataPrivate();
 
     /**
      * Save the image data to the param device.
