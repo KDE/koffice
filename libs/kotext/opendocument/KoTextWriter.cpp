@@ -492,7 +492,7 @@ int KoTextWriter::Private::openTagRegion(int position, ElementType elementType, 
                             && elementType == KoTextWriter::Private::ParagraphOrHeader) {
             KFormatChangeInformation *formatChangeInformation = changeTracker->formatChangeInformation(changeId);
             if (formatChangeInformation && formatChangeInformation->formatType() == KFormatChangeInformation::eParagraphStyleChange) {
-                KoParagraphStyleChangeInformation *paraStyleChangeInformation = static_cast<KoParagraphStyleChangeInformation *>(formatChangeInformation);
+                KParagraphStyleChangeInformation *paraStyleChangeInformation = static_cast<KParagraphStyleChangeInformation *>(formatChangeInformation);
                 QString styleName = saveParagraphStyle(paraStyleChangeInformation->previousBlockFormat(), QTextCharFormat());
                 QString attributeChangeRecord = changeTransTable.value(changeId) + QString(",") + QString("modify")
                                                                                  + QString(",") + QString("text:style-name")

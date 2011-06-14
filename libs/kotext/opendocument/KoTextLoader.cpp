@@ -317,7 +317,7 @@ void KoTextLoader::Private::openChangeRegion(const KXmlElement& element)
             }
         }
 
-        KoParagraphStyleChangeInformation *paragraphChangeInformation = new KoParagraphStyleChangeInformation();
+        KParagraphStyleChangeInformation *paragraphChangeInformation = new KParagraphStyleChangeInformation();
         paragraphChangeInformation->setPreviousBlockFormat(blockFormat);
         changeTracker->setFormatChangeInformation(changeId, paragraphChangeInformation);
     } else if((element.localName() == "list-item") && attributeChange.isValid) {

@@ -62,10 +62,10 @@ private:
     QTextCharFormat previousTextCharFormat;
 };
 
-class KoParagraphStyleChangeInformation : public KoTextStyleChangeInformation
+class KParagraphStyleChangeInformation : public KoTextStyleChangeInformation
 {
 public:
-    KoParagraphStyleChangeInformation();
+    KParagraphStyleChangeInformation();
     void setPreviousBlockFormat(QTextBlockFormat &oldFormat);
     QTextBlockFormat& previousBlockFormat();
 private:

@@ -44,17 +44,17 @@ QTextCharFormat& KoTextStyleChangeInformation::previousCharFormat()
     return this->previousTextCharFormat;
 }
 
-KoParagraphStyleChangeInformation::KoParagraphStyleChangeInformation():
+KParagraphStyleChangeInformation::KParagraphStyleChangeInformation():
                                    KoTextStyleChangeInformation(KFormatChangeInformation::eParagraphStyleChange)
 {
 }
 
-void KoParagraphStyleChangeInformation::setPreviousBlockFormat(QTextBlockFormat &previousFormat)
+void KParagraphStyleChangeInformation::setPreviousBlockFormat(QTextBlockFormat &previousFormat)
 {
     this->previousTextBlockFormat = previousFormat;
 }
 
-QTextBlockFormat& KoParagraphStyleChangeInformation::previousBlockFormat()
+QTextBlockFormat& KParagraphStyleChangeInformation::previousBlockFormat()
 {
     return this->previousTextBlockFormat;
 }
