@@ -19,7 +19,7 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KoShapePaste.h"
+#include "KShapePaste.h"
 
 #include <kdebug.h>
 #include <klocale.h>
@@ -41,7 +41,7 @@
 #include <KConfig>
 #include <KConfigGroup>
 
-class KoShapePaste::Private
+class KShapePaste::Private
 {
 public:
     Private(KCanvasBase *cb, KShapeLayer *l) : canvas(cb), layer(l) {}
@@ -51,17 +51,17 @@ public:
     QList<KShape*> pastedShapes;
 };
 
-KoShapePaste::KoShapePaste(KCanvasBase *canvas, KShapeLayer *layer)
+KShapePaste::KShapePaste(KCanvasBase *canvas, KShapeLayer *layer)
         : d(new Private(canvas, layer))
 {
 }
 
-KoShapePaste::~KoShapePaste()
+KShapePaste::~KShapePaste()
 {
     delete d;
 }
 
-bool KoShapePaste::process(const KXmlElement & body, KOdfStoreReader & odfStore)
+bool KShapePaste::process(const KXmlElement & body, KOdfStoreReader & odfStore)
 {
     d->pastedShapes.clear();
     KOdfLoadingContext loadingContext(odfStore.styles(), odfStore.store());
@@ -141,7 +141,7 @@ bool KoShapePaste::process(const KXmlElement & body, KOdfStoreReader & odfStore)
     return true;
 }
 
-QList<KShape*> KoShapePaste::pastedShapes() const
+QList<KShape*> KShapePaste::pastedShapes() const
 {
     return d->pastedShapes;
 }

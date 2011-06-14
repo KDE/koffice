@@ -33,7 +33,7 @@ class KShape;
 /**
  * Class for pasting shapes to the document
  */
-class FLAKE_EXPORT KoShapePaste : public KOdfPasteBase
+class FLAKE_EXPORT KShapePaste : public KOdfPasteBase
 {
 public:
     /**
@@ -42,8 +42,8 @@ public:
      * @param canvas The canvas on which the paste is done
      * @param parentLayer The layer on which the shapes will be pasted
      */
-    KoShapePaste(KCanvasBase *canvas, KShapeLayer *parentLayer);
-    virtual ~KoShapePaste();
+    KShapePaste(KCanvasBase *canvas, KShapeLayer *parentLayer);
+    virtual ~KShapePaste();
 
     QList<KShape*> pastedShapes() const;
 

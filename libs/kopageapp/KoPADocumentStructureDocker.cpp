@@ -38,7 +38,7 @@
 #include <KShapeDeleteCommand.h>
 #include <KoShapeReorderCommand.h>
 #include <KShapeLayer.h>
-#include <KoShapePaste.h>
+#include <KShapePaste.h>
 
 #include <KMenu>
 #include <klocale.h>
@@ -677,7 +677,7 @@ void KoPADocumentStructureDocker::editPaste()
         // Paste Shapes or Layers
         KCanvasBase* canvas = KoToolManager::instance()->activeCanvasController()->canvas();
         KShapeManager * shapeManager = canvas->shapeManager();
-        KoShapePaste paste(canvas, shapeManager->selection()->activeLayer());
+        KShapePaste paste(canvas, shapeManager->selection()->activeLayer());
         paste.paste(KOdf::TextDocument, data);
 
     } else {

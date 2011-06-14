@@ -41,7 +41,7 @@
 #include <KShapeController.h>
 #include <KShapeManager.h>
 #include <KShapeGroup.h>
-#include <KoShapePaste.h>
+#include <KShapePaste.h>
 #include <KShapeOdfSaveHelper.h>
 #include <KDrag.h>
 #include <KCanvasBase.h>
@@ -778,7 +778,7 @@ bool DefaultTool::paste()
     bool success = false;
     if (data->hasFormat(KOdf::mimeType(KOdf::TextDocument))) {
         KShapeManager * shapeManager = canvas()->shapeManager();
-        KoShapePaste paste(canvas(), shapeManager->selection()->activeLayer());
+        KShapePaste paste(canvas(), shapeManager->selection()->activeLayer());
         success = paste.paste(KOdf::TextDocument, data);
         if (success) {
             shapeManager->selection()->deselectAll();

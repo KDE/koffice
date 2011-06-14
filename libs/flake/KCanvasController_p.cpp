@@ -30,7 +30,7 @@
 #include "KSelection.h"
 #include "KCanvasBase.h"
 #include "KShapeLayer.h"
-#include "KoShapePaste.h"
+#include "KShapePaste.h"
 
 #include <KProperties.h>
 
@@ -160,7 +160,7 @@ void Viewport::handleDragEnterEvent(QDragEnterEvent *event)
     }
     else if (data->hasFormat(KOdf::mimeType(KOdf::TextDocument))) {
         KShapeManager *sm = m_parent->canvas()->shapeManager();
-        KoShapePaste paste(m_parent->canvas(), sm->selection()->activeLayer());
+        KShapePaste paste(m_parent->canvas(), sm->selection()->activeLayer());
         if (paste.paste(KOdf::TextDocument, data)) {
             QList<KShape *> shapes = paste.pastedShapes();
             Q_ASSERT(!shapes.isEmpty());
