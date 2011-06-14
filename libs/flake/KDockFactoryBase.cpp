@@ -19,10 +19,10 @@
 
 #include "KDockFactoryBase.h"
 
-class KoDockFactoryBasePrivate
+class KDockFactoryBasePrivate
 {
 public:
-    KoDockFactoryBasePrivate() {
+    KDockFactoryBasePrivate() {
         collapsable = true;
         defaultCollapsed = false;
         defaultDockPosition = KDockFactoryBase::DockRight;
@@ -34,7 +34,7 @@ public:
 
 KDockFactoryBase::KDockFactoryBase(QObject *parent, const QString &dockerid)
     : QObject(parent),
-    d_ptr(new KoDockFactoryBasePrivate)
+    d_ptr(new KDockFactoryBasePrivate)
 {
     Q_D(KDockFactoryBase);
     d->id = dockerid;

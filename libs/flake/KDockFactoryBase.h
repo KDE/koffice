@@ -27,7 +27,7 @@
 #include "flake_export.h"
 
 class QDockWidget;
-class KoDockFactoryBasePrivate;
+class KDockFactoryBasePrivate;
 
 /**
  * Base class for factories used to create new dock widgets.
@@ -81,7 +81,7 @@ protected:
     void setIsCollapsable(bool collapsable);
     void setDefaultCollapsed(bool collapsed);
 
-    KoDockFactoryBasePrivate *d_ptr;
+    KDockFactoryBasePrivate *d_ptr;
 
 private:
     Q_DECLARE_PRIVATE(KDockFactoryBase)
