@@ -24,12 +24,12 @@
 #include "SpiralShape.h"
 #include <ui_SpiralShapeConfigWidget.h>
 
-#include <KoShapeConfigWidgetBase.h>
+#include <KShapeConfigWidgetBase.h>
 
 class SpiralShapeConfigCommand;
 class KCanvasBase;
 
-class SpiralShapeConfigWidget : public KoShapeConfigWidgetBase
+class SpiralShapeConfigWidget : public KShapeConfigWidgetBase
 {
     Q_OBJECT
 public:

@@ -45,15 +45,15 @@ class QUndoCommand;
  * the param shape.  After the user ok-ed the dialog the save() will be called
  * to allow the widget to apply all settings from the widget to the shape.
  */
-class FLAKE_EXPORT KoShapeConfigWidgetBase : public QWidget
+class FLAKE_EXPORT KShapeConfigWidgetBase : public QWidget
 {
     Q_OBJECT
 public:
     /**
      * Default constructor
      */
-    KoShapeConfigWidgetBase();
-    virtual ~KoShapeConfigWidgetBase();
+    KShapeConfigWidgetBase();
+    virtual ~KShapeConfigWidgetBase();
 
     /**
      * Open the argument shape by interpreting the data and setting that data on this

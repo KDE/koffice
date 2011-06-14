@@ -20,7 +20,7 @@
 #include "PathToolOptionWidget_p.h"
 #include "KPathTool_p.h"
 #include "../KoShapeRegistry.h"
-#include "../KoShapeConfigWidgetBase.h"
+#include "../KShapeConfigWidgetBase.h"
 #include "../KCanvasBase.h"
 
 #include <KAction>
@@ -61,7 +61,7 @@ void PathToolOptionWidget::setSelectionType(Type type)
         widget.stackedWidget->setCurrentIndex(1);
 }
 
-void PathToolOptionWidget::setShapePropertiesWidget(KoShapeConfigWidgetBase *propWidget)
+void PathToolOptionWidget::setShapePropertiesWidget(KShapeConfigWidgetBase *propWidget)
 {
     delete m_shapePropertiesWidget;
     if (widget.propertiesBox->layout() == 0) {
@@ -90,7 +90,7 @@ void PathToolOptionWidget::setSelectedPath(KPathShape *path)
         return;
     KoShapeFactoryBase *factory = KoShapeRegistry::instance()->value(path->pathShapeId());
     if (factory) {
-        KoShapeConfigWidgetBase *w = factory->createConfigWidget(m_tool->canvas());
+        KShapeConfigWidgetBase *w = factory->createConfigWidget(m_tool->canvas());
         setShapePropertiesWidget(w);
         if (w) {
             w->setUnit(m_tool->canvas()->unit());

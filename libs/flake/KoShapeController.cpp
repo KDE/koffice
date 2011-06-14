@@ -28,7 +28,7 @@
 #include "commands/KoShapeCreateCommand.h"
 #include "commands/KoShapeDeleteCommand.h"
 #include "KCanvasBase.h"
-#include "KoShapeConfigWidgetBase.h"
+#include "KShapeConfigWidgetBase.h"
 #include "KoShapeFactoryBase.h"
 #include "KShape.h"
 #include "KoShapeRegistry.h"

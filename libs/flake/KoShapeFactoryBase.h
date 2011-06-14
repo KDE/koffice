@@ -33,7 +33,7 @@
 
 class KShape;
 class KProperties;
-class KoShapeConfigWidgetBase;
+class KShapeConfigWidgetBase;
 class KoShapeLoadingContext;
 class KDataCenterBase;
 class KResourceManager;
@@ -101,7 +101,7 @@ public:
     KoShapeFactoryBase(QObject *parent, const QString &id, const QString &name);
     virtual ~KoShapeFactoryBase();
 
-    virtual KoShapeConfigWidgetBase *createConfigWidget(KCanvasBase *canvas) {
+    virtual KShapeConfigWidgetBase *createConfigWidget(KCanvasBase *canvas) {
         Q_UNUSED(canvas);
         return 0;
     }

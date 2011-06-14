@@ -23,13 +23,13 @@
 
 #include <ui_StarShapeConfigWidget.h>
 
-#include <KoShapeConfigWidgetBase.h>
+#include <KShapeConfigWidgetBase.h>
 
 class StarShape;
 class KCanvasBase;
 class StarShapeConfigCommand;
 
-class StarShapeConfigWidget : public KoShapeConfigWidgetBase
+class StarShapeConfigWidget : public KShapeConfigWidgetBase
 {
     Q_OBJECT
 public:

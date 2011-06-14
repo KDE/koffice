@@ -33,7 +33,7 @@ public:
     ~EllipseShapeFactory() {}
     virtual KShape *createDefaultShape(KResourceManager *documentResources = 0) const;
     virtual bool supports(const KXmlElement &e, KoShapeLoadingContext &context) const;
-    virtual KoShapeConfigWidgetBase *createConfigWidget(KCanvasBase *canvas);
+    virtual KShapeConfigWidgetBase *createConfigWidget(KCanvasBase *canvas);
 };
 
 #endif /* KOELLIPSESHAPEFACTORY_H */

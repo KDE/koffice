@@ -25,12 +25,12 @@
 #include "EllipseShapeConfigCommand.h"
 #include <ui_EllipseShapeConfigWidget.h>
 
-#include <KoShapeConfigWidgetBase.h>
+#include <KShapeConfigWidgetBase.h>
 #include <QTime>
 #include <QWeakPointer>
 
 
-class EllipseShapeConfigWidget : public KoShapeConfigWidgetBase
+class EllipseShapeConfigWidget : public KShapeConfigWidgetBase
 {
     Q_OBJECT
 public:

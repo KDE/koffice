@@ -20,7 +20,7 @@
 #ifndef PICTURESHAPECONFIGWIDGET_H
 #define PICTURESHAPECONFIGWIDGET_H
 
-#include <KoShapeConfigWidgetBase.h>
+#include <KShapeConfigWidgetBase.h>
 #include <kurl.h>
 #include <QtGui/QWidget>
 
@@ -34,13 +34,13 @@ public:
     PictureShapeConfigWidget();
     ~PictureShapeConfigWidget();
 
-    /// reimplemented from KoShapeConfigWidgetBase
+    /// reimplemented from KShapeConfigWidgetBase
     virtual void open(KShape *shape);
-    /// reimplemented from KoShapeConfigWidgetBase
+    /// reimplemented from KShapeConfigWidgetBase
     virtual void save();
-    /// reimplemented from KoShapeConfigWidgetBase
+    /// reimplemented from KShapeConfigWidgetBase
     virtual bool showOnShapeCreate();
-    /// reimplemented from KoShapeConfigWidgetBase
+    /// reimplemented from KShapeConfigWidgetBase
     virtual bool showOnShapeSelect();
 
 private:

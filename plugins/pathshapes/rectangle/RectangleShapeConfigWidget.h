@@ -23,13 +23,13 @@
 
 #include <ui_RectangleShapeConfigWidget.h>
 
-#include <KoShapeConfigWidgetBase.h>
+#include <KShapeConfigWidgetBase.h>
 
 class RectangleShape;
 class RectangleShapeConfigCommand;
 class KCanvasBase;
 
-class RectangleShapeConfigWidget : public KoShapeConfigWidgetBase
+class RectangleShapeConfigWidget : public KShapeConfigWidgetBase
 {
     Q_OBJECT
 public:

@@ -17,30 +17,30 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoShapeConfigWidgetBase.h"
+#include "KShapeConfigWidgetBase.h"
 
-KoShapeConfigWidgetBase::KoShapeConfigWidgetBase()
+KShapeConfigWidgetBase::KShapeConfigWidgetBase()
         : m_resourceManager(0)
 {
 }
 
-KoShapeConfigWidgetBase::~KoShapeConfigWidgetBase()
+KShapeConfigWidgetBase::~KShapeConfigWidgetBase()
 {
 }
 
-void KoShapeConfigWidgetBase::setUnit(const KUnit &unit)
+void KShapeConfigWidgetBase::setUnit(const KUnit &unit)
 {
     Q_UNUSED(unit);
 }
 
-void KoShapeConfigWidgetBase::setResourceManager(KResourceManager *rm)
+void KShapeConfigWidgetBase::setResourceManager(KResourceManager *rm)
 {
     m_resourceManager = rm;
 }
 
-KResourceManager *KoShapeConfigWidgetBase::resourceManager() const
+KResourceManager *KShapeConfigWidgetBase::resourceManager() const
 {
     return m_resourceManager;
 }
 
-#include <KoShapeConfigWidgetBase.moc>
+#include <KShapeConfigWidgetBase.moc>
