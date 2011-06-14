@@ -19,7 +19,7 @@
 #include "KWOutlineShape.h"
 #include "KWFrame.h"
 
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 #include <KoSelection.h>
 #include <KoShapeGroup.h>
 #include <KoShapeManager.h>
@@ -68,7 +68,7 @@ KWOutlineShape::~KWOutlineShape()
 {
 }
 
-void KWOutlineShape::paintDecorations(QPainter &painter, const KoViewConverter &converter, const KoCanvasBase *canvas)
+void KWOutlineShape::paintDecorations(QPainter &painter, const KoViewConverter &converter, const KCanvasBase *canvas)
 {
     if (! canvas->shapeManager()->selection()->isSelected(this))
         return;

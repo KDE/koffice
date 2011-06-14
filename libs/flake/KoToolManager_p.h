@@ -44,7 +44,7 @@
 
 class KoToolFactoryBase;
 class KoShapeManager;
-class KoCanvasBase;
+class KCanvasBase;
 class KoToolBase;
 class KoShape;
 class KoToolManager;
@@ -92,7 +92,7 @@ public:
      * @param canvas which canvas the proxy is associated with; whenever a new tool is selected for that canvas,
      *        the proxy gets an update.
      */
-    void registerToolProxy(KoToolProxy *proxy, KoCanvasBase *canvas);
+    void registerToolProxy(KoToolProxy *proxy, KCanvasBase *canvas);
 
     void switchToolByShortcut(QKeyEvent *event);
 
@@ -103,7 +103,7 @@ public:
 
     QHash<KoToolBase*, int> uniqueToolIds; // for the changedTool signal
     QHash<KoCanvasController*, QList<CanvasData*> > canvasses;
-    QHash<KoCanvasBase*, KoToolProxy*> proxies;
+    QHash<KCanvasBase*, KoToolProxy*> proxies;
 
     CanvasData *canvasData; // data about the active canvas.
 
@@ -132,7 +132,7 @@ public:
     QString activationShapeId() const;
     /// wrapper around KoToolFactoryBase::priority();
     int priority() const;
-    KoToolBase *createTool(KoCanvasBase *canvas) const;
+    KoToolBase *createTool(KCanvasBase *canvas) const;
     int uniqueId() const {
         return m_uniqueId;
     }
@@ -141,7 +141,7 @@ public:
     /// wrapper around KoToolFactoryBase::inputDeviceAgnostic()
     bool inputDeviceAgnostic() const;
     /// returns true if the factory will create a tool, false if it decided to not create one in createTool().
-    bool canCreateTool(KoCanvasBase *canvas) const;
+    bool canCreateTool(KCanvasBase *canvas) const;
 
 signals:
     /// emitted when one of the generated buttons was pressed.

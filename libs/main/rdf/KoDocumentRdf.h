@@ -40,7 +40,7 @@ class QDomDocument;
 class KOdfStore;
 class KXmlWriter;
 class KoDocument;
-class KoCanvasBase;
+class KCanvasBase;
 class KoTextEditor;
 class KXmlElement;
 
@@ -161,7 +161,7 @@ public:
     /** The destructor */
     ~KoDocumentRdf();
 
-    static KoDocumentRdf *fromResourceManager(KoCanvasBase *host);
+    static KoDocumentRdf *fromResourceManager(KCanvasBase *host);
 
     /**
      * Document containing this Rdf
@@ -389,8 +389,8 @@ public:
      */
     void expandStatements(Soprano::Model *model);
 
-    KAction* createInsertSemanticObjectReferenceAction(KoCanvasBase *host);
-    QList<KAction*> createInsertSemanticObjectNewActions(KoCanvasBase *host);
+    KAction* createInsertSemanticObjectReferenceAction(KCanvasBase *host);
+    QList<KAction*> createInsertSemanticObjectNewActions(KCanvasBase *host);
 
     /**
      * Collect together the semantic item, stylehseet, xmlid of the
@@ -452,7 +452,7 @@ public:
      * If the current tool is not something that you can get a
      * texteditor for, make sure it is and return a TextEditor.
      */
-    static KoTextEditor *ensureTextTool(KoCanvasBase *host);
+    static KoTextEditor *ensureTextTool(KCanvasBase *host);
     /**
      * Switch to the text tool. Useful in cases like the docinfo dialog
      * where you don't actually have a pointer to the canvas but you

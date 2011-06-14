@@ -19,7 +19,7 @@
 
 #include "ShadowDocker.h"
 #include <KoShapeShadow.h>
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 #include <KoShapeManager.h>
 #include <KoSelection.h>
 #include <KoToolManager.h>
@@ -38,7 +38,7 @@ public:
     {}
     KoShapeShadow shadow;
     KoShadowConfigWidget * widget;
-    KoCanvasBase * canvas;
+    KCanvasBase * canvas;
     QSpacerItem *spacer;
     QGridLayout *layout;
 };
@@ -100,7 +100,7 @@ void ShadowDocker::selectionChanged()
     d->widget->setShadowColor( shadow->color() );
 }
 
-void ShadowDocker::setCanvas( KoCanvasBase *canvas )
+void ShadowDocker::setCanvas( KCanvasBase *canvas )
 {
     d->canvas = canvas;
     if ( canvas )

@@ -26,7 +26,7 @@
 #include <QString>
 #include <QPair>
 
-class KoCanvasBase;
+class KCanvasBase;
 class GuidesTransaction;
 class InsertGuidesToolOptionWidget;
 class GuidesToolOptionWidget;
@@ -36,7 +36,7 @@ class GuidesTool : public KoToolBase
     Q_OBJECT
 
 public:
-    explicit GuidesTool(KoCanvasBase *canvas);
+    explicit GuidesTool(KCanvasBase *canvas);
     virtual ~GuidesTool();
     /// reimplemented form KoToolBase
     virtual void paint(QPainter &painter, const KoViewConverter &converter);

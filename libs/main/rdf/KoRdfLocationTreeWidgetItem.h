@@ -25,7 +25,7 @@
 #include "KoRdfSemanticTreeWidgetItem.h"
 #include "KoRdfCalendarEventTreeWidgetItem.h"
 
-class KoCanvasBase;
+class KCanvasBase;
 
 /**
  * @short Display location (lat/long) semantic data with a context menu tailored
@@ -46,8 +46,8 @@ public:
     /**** inherited and reimplemented... **/
 
     KoRdfLocation *semanticObject() const;
-    virtual QList<KAction *> actions(QWidget *parent, KoCanvasBase *host = 0);
-    virtual void insert(KoCanvasBase *host);
+    virtual QList<KAction *> actions(QWidget *parent, KCanvasBase *host = 0);
+    virtual void insert(KCanvasBase *host);
 
 public slots:
     void showInViewer();

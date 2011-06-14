@@ -64,7 +64,7 @@ void ArtisticTextShape::paint(QPainter &painter, const KoViewConverter &converte
         background()->paint( painter, outline() );
 }
 
-void ArtisticTextShape::paintDecorations(QPainter &/*painter*/, const KoViewConverter &/*converter*/, const KoCanvasBase * /*canvas*/)
+void ArtisticTextShape::paintDecorations(QPainter &/*painter*/, const KoViewConverter &/*converter*/, const KCanvasBase * /*canvas*/)
 {
 }
 

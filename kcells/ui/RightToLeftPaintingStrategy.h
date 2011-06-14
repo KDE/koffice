@@ -22,7 +22,7 @@
 
 #include <KoShapeManagerPaintingStrategy.h>
 
-class KoCanvasBase;
+class KCanvasBase;
 
 
 /**
@@ -30,7 +30,7 @@ class KoCanvasBase;
 class RightToLeftPaintingStrategy : public KoShapeManagerPaintingStrategy
 {
 public:
-    RightToLeftPaintingStrategy(KoShapeManager *shapeManager, KoCanvasBase *canvas);
+    RightToLeftPaintingStrategy(KoShapeManager *shapeManager, KCanvasBase *canvas);
     virtual ~RightToLeftPaintingStrategy();
 
     /**

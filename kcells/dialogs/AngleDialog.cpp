@@ -31,7 +31,7 @@
 #include <klocale.h>
 #include <knuminput.h>
 
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 
 #include "KCCell.h"
 #include "ui/Selection.h"

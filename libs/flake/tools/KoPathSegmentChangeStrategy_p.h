@@ -38,7 +38,7 @@
 #include <QtCore/QPointF>
 
 class KoPathTool;
-class KoCanvasBase;
+class KCanvasBase;
 class KoPathShape;
 
 /**

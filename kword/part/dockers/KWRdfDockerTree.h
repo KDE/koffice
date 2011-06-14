@@ -53,7 +53,7 @@ public:
 
     void setDocumentRdf(KoDocumentRdf *rdf);
     /// reimplemented from KoCanvasObserver
-    virtual void setCanvas(KoCanvasBase *canvas);
+    virtual void setCanvas(KCanvasBase *canvas);
 
     // for dropping
     bool dropMimeData(QTreeWidgetItem *parent, int index, const
@@ -75,7 +75,7 @@ protected:
 
 private:
     KoDocumentRdf *m_rdf;
-    KoCanvasBase *m_canvas;
+    KCanvasBase *m_canvas;
 };
 
 #endif

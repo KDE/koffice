@@ -26,7 +26,7 @@
 
 #include <QList>
 
-class KoCanvasBase;
+class KCanvasBase;
 class KoShape;
 class KoShapeControllerBase;
 class QUndoCommand;
@@ -49,7 +49,7 @@ public:
      * @param canvas the canvas this controller works for.
      * @param shapeController the application provided shapeControllerBase that we can call.
      */
-    KoShapeController(KoCanvasBase *canvas, KoShapeControllerBase *shapeController);
+    KoShapeController(KCanvasBase *canvas, KoShapeControllerBase *shapeController);
     /// destructor
     ~KoShapeController();
 
@@ -99,7 +99,7 @@ public:
      * shape-set (typically a document). The resource manager contains
      * document wide resources * such as variable managers, the image
      * collection and others.
-     * @see KoCanvasBase::resourceManager()
+     * @see KCanvasBase::resourceManager()
      */
     KoResourceManager *resourceManager() const;
 

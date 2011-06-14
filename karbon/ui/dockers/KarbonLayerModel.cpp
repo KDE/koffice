@@ -26,7 +26,7 @@
 #include <KoShapeBorderBase.h>
 #include <KoShapeContainer.h>
 #include <KoToolManager.h>
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 #include <KoCanvasController.h>
 #include <KoShapeControllerBase.h>
 #include <KoSelection.h>

@@ -26,7 +26,7 @@ class InsertSemanticObjectCreateAction : public InsertSemanticObjectActionBase
 {
     Q_OBJECT
 public:
-    InsertSemanticObjectCreateAction(KoCanvasBase *canvas, KoDocumentRdf *rdf, const QString &name);
+    InsertSemanticObjectCreateAction(KCanvasBase *canvas, KoDocumentRdf *rdf, const QString &name);
     virtual ~InsertSemanticObjectCreateAction();
 
 private slots:

@@ -19,7 +19,7 @@
 
 #include "KoSnapProxy_p.h"
 #include "KoSnapGuide.h"
-#include "KoCanvasBase.h"
+#include "KCanvasBase.h"
 #include "KoShapeManager.h"
 #include "KoPathShape.h"
 #include "KoPathPoint.h"
@@ -141,7 +141,7 @@ QList<KoShape*> KoSnapProxy::shapes(bool omitEditedShape)
     return filteredShapes;
 }
 
-KoCanvasBase *KoSnapProxy::canvas()
+KCanvasBase *KoSnapProxy::canvas()
 {
     return m_snapGuide->canvas();
 }

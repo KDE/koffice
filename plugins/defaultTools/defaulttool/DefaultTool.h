@@ -52,7 +52,7 @@ public:
      * and handled by interaction strategies of type KInteractionStrategy.
      * @param canvas the canvas this tool will be working for.
      */
-    explicit DefaultTool(KoCanvasBase *canvas);
+    explicit DefaultTool(KCanvasBase *canvas);
     virtual ~DefaultTool();
 
     enum CanvasResource {

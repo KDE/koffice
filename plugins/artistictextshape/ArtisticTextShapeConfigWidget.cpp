@@ -29,7 +29,7 @@
 #include <KoCanvasController.h>
 #include <KoToolManager.h>
 #include <KoShapeManager.h>
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 
 ArtisticTextShapeConfigWidget::ArtisticTextShapeConfigWidget()
     : m_shape(0), m_canvas(0), m_anchorGroup(0)
@@ -71,7 +71,7 @@ void ArtisticTextShapeConfigWidget::blockChildSignals( bool block )
     m_anchorGroup->blockSignals( block );
 }
 
-void ArtisticTextShapeConfigWidget::initializeFromShape(ArtisticTextShape *shape, KoCanvasBase *canvas)
+void ArtisticTextShapeConfigWidget::initializeFromShape(ArtisticTextShape *shape, KCanvasBase *canvas)
 {
     m_shape = shape;
     m_canvas = canvas;

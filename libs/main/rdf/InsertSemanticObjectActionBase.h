@@ -23,14 +23,14 @@
 #include "RdfForward.h"
 #include <KAction>
 
-class KoCanvasBase;
+class KCanvasBase;
 class KoTextEditor;
 
 class InsertSemanticObjectActionBase : public KAction
 {
     Q_OBJECT
 public:
-    InsertSemanticObjectActionBase(KoCanvasBase *canvas,
+    InsertSemanticObjectActionBase(KCanvasBase *canvas,
                                    KoDocumentRdf *rdf,
                                    const QString &name);
     virtual ~InsertSemanticObjectActionBase();
@@ -40,7 +40,7 @@ private slots:
 
 protected:
     KoTextEditor *editor() const;
-    KoCanvasBase *m_canvas;
+    KCanvasBase *m_canvas;
     KoDocumentRdf *m_rdf;
 };
 

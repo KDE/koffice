@@ -24,7 +24,7 @@
 #include "ZoomHandler.h"
 #include "ShapeSelector.h"
 
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 #include <KoShapeControllerBase.h>
 
 #include <QList>
@@ -44,33 +44,33 @@ class QMenu;
  * then to implement a flake canvas. Much like any KOffice application does.
  * This class is the widget that is the main canvas as shown by the docker.
  */
-class Canvas : public QWidget, public KoCanvasBase
+class Canvas : public QWidget, public KCanvasBase
 {
     Q_OBJECT
 public:
     /// constructor
     explicit Canvas(ShapeSelector *parent, ItemStore *itemStore);
-    /// implementing KoCanvasBase
+    /// implementing KCanvasBase
     virtual void gridSize(qreal *horizontal, qreal *vertical) const;
-    /// implementing KoCanvasBase
+    /// implementing KCanvasBase
     virtual bool snapToGrid() const { return false; }
-    /// implementing KoCanvasBase
+    /// implementing KCanvasBase
     virtual void addCommand(QUndoCommand *command);
-    /// implementing KoCanvasBase
+    /// implementing KCanvasBase
     virtual KoShapeManager * shapeManager() const;
-    /// implementing KoCanvasBase
+    /// implementing KCanvasBase
     virtual void updateCanvas(const QRectF &rc);
-    /// implementing KoCanvasBase
+    /// implementing KCanvasBase
     virtual KoToolProxy *toolProxy() const { return 0; }
-    /// implementing KoCanvasBase
+    /// implementing KCanvasBase
     virtual const KoViewConverter * viewConverter() const { return &m_converter; }
-    /// implementing KoCanvasBase
+    /// implementing KCanvasBase
     virtual QWidget *canvasWidget();
-    /// implementing KoCanvasBase
+    /// implementing KCanvasBase
     virtual KUnit unit() const { return KUnit(KUnit::Millimeter); }
-    /// implementing KoCanvasBase
+    /// implementing KCanvasBase
     virtual void updateInputMethodInfo() {}
-    /// implementing KoCanvasBase
+    /// implementing KCanvasBase
     virtual const QWidget* canvasWidget() const { return 0; }
     ItemStore *itemStore() const { return m_parent->itemStore(); }
 

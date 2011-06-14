@@ -22,10 +22,10 @@
 #include "KInteractionTool_p.h"
 #include "KoToolBase_p.h"
 #include "KoPointerEvent.h"
-#include "KoCanvasBase.h"
+#include "KCanvasBase.h"
 #include "KPanTool_p.h"
 
-KInteractionTool::KInteractionTool(KoCanvasBase *canvas)
+KInteractionTool::KInteractionTool(KCanvasBase *canvas)
     : KoToolBase(*(new KInteractionToolPrivate(this, canvas)))
 {
 }

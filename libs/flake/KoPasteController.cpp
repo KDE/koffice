@@ -19,7 +19,7 @@
 
 #include "KoPasteController.h"
 
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 #include <KoToolProxy.h>
 
 #include <KDebug>
@@ -29,7 +29,7 @@
 
 class KoPasteController::Private {
 public:
-    Private(KoPasteController *p, KoCanvasBase *c, QAction *a) : parent(p), canvas(c), action(a) {
+    Private(KoPasteController *p, KCanvasBase *c, QAction *a) : parent(p), canvas(c), action(a) {
     }
 
     void paste() {
@@ -58,11 +58,11 @@ public:
     }
 
     KoPasteController *parent;
-    KoCanvasBase *canvas;
+    KCanvasBase *canvas;
     QAction *action;
 };
 
-KoPasteController::KoPasteController(KoCanvasBase *canvas, QAction *pasteAction)
+KoPasteController::KoPasteController(KCanvasBase *canvas, QAction *pasteAction)
     : QObject(pasteAction),
     d(new Private(this, canvas, pasteAction))
 {

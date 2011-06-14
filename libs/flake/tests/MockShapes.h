@@ -21,7 +21,7 @@
 #define MOCKSHAPES_H
 
 #include <KoShapeGroup.h>
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 #include <KoShapeControllerBase.h>
 #include <KoShapeContainerModel.h>
 #include <QPainter>
@@ -66,11 +66,11 @@ class MockGroup : public KoShapeGroup
 
 class KoToolProxy;
 
-class MockCanvas : public KoCanvasBase
+class MockCanvas : public KCanvasBase
 {
 public:
     MockCanvas()
-            : KoCanvasBase(0) {}
+            : KCanvasBase(0) {}
     ~MockCanvas() {}
 
     void gridSize(qreal *, qreal *) const {}

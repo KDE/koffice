@@ -29,7 +29,7 @@
 
 #include "commands/DataManipulators.h"
 
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 
 #include <kcombobox.h>
 #include <kdebug.h>

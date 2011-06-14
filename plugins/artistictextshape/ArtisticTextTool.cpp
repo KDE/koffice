@@ -23,7 +23,7 @@
 #include "DetachTextFromPathCommand.h"
 #include "ArtisticTextShapeConfigWidget.h"
 
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 #include <KoSelection.h>
 #include <KoShapeManager.h>
 #include <KoPointerEvent.h>
@@ -170,7 +170,7 @@ class ArtisticTextTool::RemoveTextRangeCommand : public QUndoCommand
 
 
 
-ArtisticTextTool::ArtisticTextTool(KoCanvasBase *canvas)
+ArtisticTextTool::ArtisticTextTool(KCanvasBase *canvas)
     : KoToolBase(canvas), m_currentShape(0), m_path(0), m_tmpPath(0), m_textCursor( -1 ), m_showCursor( true )
 {
     m_attachPath  = new QAction(KIcon("artistictext-attach-path"), i18n("Attach Path"), this);
@@ -477,8 +477,8 @@ QMap<QString, QWidget *> ArtisticTextTool::createOptionWidgets()
     if (m_currentShape) {
         configWidget->initializeFromShape(m_currentShape, canvas());
     }
-    connect(this, SIGNAL(shapeSelected(ArtisticTextShape *, KoCanvasBase *)), 
-            configWidget, SLOT(initializeFromShape(ArtisticTextShape *, KoCanvasBase *)));
+    connect(this, SIGNAL(shapeSelected(ArtisticTextShape *, KCanvasBase *)), 
+            configWidget, SLOT(initializeFromShape(ArtisticTextShape *, KCanvasBase *)));
     connect(canvas()->shapeManager(), SIGNAL(selectionContentChanged()),
             configWidget, SLOT(updateWidget()));
             

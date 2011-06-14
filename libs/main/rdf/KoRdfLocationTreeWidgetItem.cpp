@@ -43,7 +43,7 @@ QString KoRdfLocationTreeWidgetItem::uIObjectName() const
     return i18n("Location Information");
 }
 
-QList<KAction *> KoRdfLocationTreeWidgetItem::actions(QWidget *parent, KoCanvasBase *host)
+QList<KAction *> KoRdfLocationTreeWidgetItem::actions(QWidget *parent, KCanvasBase *host)
 {
     QList<KAction *> m_actions;
     KAction *action = 0;
@@ -70,7 +70,7 @@ KoRdfLocation *KoRdfLocationTreeWidgetItem::semanticObject() const
     return m_semanticObject;
 }
 
-void KoRdfLocationTreeWidgetItem::insert(KoCanvasBase *host)
+void KoRdfLocationTreeWidgetItem::insert(KCanvasBase *host)
 {
     semanticObject()->insert(host);
 }

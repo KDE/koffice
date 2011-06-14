@@ -24,7 +24,7 @@
 #include "KoSnapGuide.h"
 #include "commands/KoPathControlPointMoveCommand.h"
 #include "commands/KoPathSegmentTypeCommand.h"
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 #include <KLocale>
 #include <limits>
 

@@ -44,7 +44,7 @@
 #include <KoShapePaste.h>
 #include <KoShapeOdfSaveHelper.h>
 #include <KoDrag.h>
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 #include <KoResourceManager.h>
 #include <KoShapeRubberSelectStrategy.h>
 #include <commands/KoShapeMoveCommand.h>
@@ -120,7 +120,7 @@ private:
 };
 
 
-DefaultTool::DefaultTool(KoCanvasBase *canvas)
+DefaultTool::DefaultTool(KCanvasBase *canvas)
     : KInteractionTool(canvas),
     m_lastHandle(KoFlake::NoHandle),
     m_hotPosition(KoFlake::TopLeftCorner),

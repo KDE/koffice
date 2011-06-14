@@ -36,7 +36,7 @@
 
 #include "Global.h"
 
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 
 #include <QList>
 #include <QWidget>
@@ -61,7 +61,7 @@ class KCView;
 /**
  * The scrollable area showing the cells.
  */
-class KCELLS_EXPORT KCCanvas : public QWidget, public KoCanvasBase
+class KCELLS_EXPORT KCCanvas : public QWidget, public KCanvasBase
 {
     friend class KCColumnHeader;
     friend class KCRowHeader;
@@ -76,31 +76,31 @@ public:
 
     KCView* view() const;
 
-    /// reimplemented method from KoCanvasBase
+    /// reimplemented method from KCanvasBase
     virtual QWidget* canvasWidget() {
         return this;
     }
-    /// reimplemented method from KoCanvasBase
+    /// reimplemented method from KCanvasBase
     virtual const QWidget* canvasWidget() const {
         return this;
     }
-    /// reimplemented method from KoCanvasBase
+    /// reimplemented method from KCanvasBase
     virtual void gridSize(qreal* horizontal, qreal* vertical) const;
-    /// reimplemented method from KoCanvasBase
+    /// reimplemented method from KCanvasBase
     virtual bool snapToGrid() const;
-    /// reimplemented method from KoCanvasBase
+    /// reimplemented method from KCanvasBase
     virtual void addCommand(QUndoCommand* command);
-    /// reimplemented method from KoCanvasBase
+    /// reimplemented method from KCanvasBase
     virtual KoShapeManager* shapeManager() const;
-    /// reimplemented method from KoCanvasBase
+    /// reimplemented method from KCanvasBase
     virtual void updateCanvas(const QRectF& rc);
-    /// reimplemented method from KoCanvasBase
+    /// reimplemented method from KCanvasBase
     virtual KoToolProxy* toolProxy() const;
-    /// reimplemented method from KoCanvasBase
+    /// reimplemented method from KCanvasBase
     virtual KUnit unit() const;
-    /// reimplemented method from KoCanvasBase
+    /// reimplemented method from KCanvasBase
     virtual void updateInputMethodInfo();
-    /// reimplemented method from KoCanvasBase
+    /// reimplemented method from KCanvasBase
     virtual const KoViewConverter* viewConverter() const;
 
 

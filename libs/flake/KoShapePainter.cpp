@@ -21,7 +21,7 @@
 
 #include "KoShapePainter.h"
 
-#include "KoCanvasBase.h"
+#include "KCanvasBase.h"
 #include "KoShapeManager.h"
 #include "KoShapeManagerPaintingStrategy.h"
 #include "KoShape.h"
@@ -35,11 +35,11 @@
 #include <QtGui/QImage>
 #include <QtGui/QPainter>
 
-class SimpleCanvas : public KoCanvasBase
+class SimpleCanvas : public KCanvasBase
 {
 public:
     SimpleCanvas()
-        : KoCanvasBase(0), m_shapeManager(new KoShapeManager(this))
+        : KCanvasBase(0), m_shapeManager(new KoShapeManager(this))
     {
     }
 

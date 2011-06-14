@@ -24,7 +24,7 @@
 #include "KoToolBase_p.h"
 #include "KoPathShape_p.h"
 #include "KoPathToolHandle_p.h"
-#include "KoCanvasBase.h"
+#include "KCanvasBase.h"
 #include "KoShapeManager.h"
 #include "KoResourceManager.h"
 #include "KoViewConverter.h"
@@ -74,7 +74,7 @@ qreal squaredDistance(const QPointF p1, const QPointF &p2)
     return dx*dx + dy*dy;
 }
 
-KoPathTool::KoPathTool(KoCanvasBase *canvas)
+KoPathTool::KoPathTool(KCanvasBase *canvas)
         : KoToolBase(canvas),
         m_activeHandle(0),
         m_handleRadius(3),

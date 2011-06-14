@@ -39,7 +39,7 @@ public:
      * @param cutAction the action that we will listen to and respond to when it is activated.  Additionally, the
      *     action is used as a parent for the QObject for memory management purposes.
      */
-    KoCutController(KoCanvasBase *canvas, QAction *cutAction);
+    KoCutController(KCanvasBase *canvas, QAction *cutAction);
 };
 
 #endif

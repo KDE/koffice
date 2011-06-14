@@ -22,9 +22,9 @@
 #include "StarShape.h"
 #include "StarShapeConfigCommand.h"
 
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 
-StarShapeConfigWidget::StarShapeConfigWidget(KoCanvasBase *canvas)
+StarShapeConfigWidget::StarShapeConfigWidget(KCanvasBase *canvas)
     : m_canvas(canvas),
     m_blocking(false)
 {

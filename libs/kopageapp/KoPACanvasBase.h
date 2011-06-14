@@ -21,7 +21,7 @@
 #define KOPACANVASBASE_H
 
 #include <QList>
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 
 #include "kopageapp_export.h"
 
@@ -29,7 +29,7 @@ class KoPAViewBase;
 class KoPADocument;
 
 /// Widget that shows a KoPAPage
-class KOPAGEAPP_EXPORT KoPACanvasBase : public KoCanvasBase
+class KOPAGEAPP_EXPORT KoPACanvasBase : public KCanvasBase
 {
 
 public:
@@ -54,7 +54,7 @@ public:
     /// reimplemented method
     virtual KoShapeManager * shapeManager() const;
     KoShapeManager * masterShapeManager() const;
-    /// reimplemented from KoCanvasBase
+    /// reimplemented from KCanvasBase
     virtual KGuidesData * guidesData();
 
     KoToolProxy * toolProxy() const;

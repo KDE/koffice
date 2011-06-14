@@ -22,7 +22,7 @@
 
 #include <sonnet/backgroundchecker.h>
 
-class KoCanvasBase;
+class KCanvasBase;
 
 class KCRegion;
 
@@ -37,7 +37,7 @@ public:
     /**
      * Constructor.
      */
-    KCSpellCheckCommand(const KCRegion &region, KoCanvasBase* canvasBase);
+    KCSpellCheckCommand(const KCRegion &region, KCanvasBase* canvasBase);
 
     /**
      * Destructor.

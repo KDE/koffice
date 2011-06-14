@@ -18,7 +18,7 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include "KoCanvasBase.h"
+#include "KCanvasBase.h"
 #include "KoResourceManager.h"
 #include "KoShapeController.h"
 #include "KoCanvasController.h"
@@ -31,7 +31,7 @@
 #include <KSharedPtr>
 #include <KSharedConfig>
 
-class KoCanvasBase::Private
+class KCanvasBase::Private
 {
 public:
     Private() : shapeController(0),
@@ -53,7 +53,7 @@ public:
     bool readWrite;
 };
 
-KoCanvasBase::KoCanvasBase(KoShapeControllerBase *shapeControllerBase)
+KCanvasBase::KCanvasBase(KoShapeControllerBase *shapeControllerBase)
         : d(new Private())
 {
     d->resourceManager = new KoResourceManager();
@@ -61,64 +61,64 @@ KoCanvasBase::KoCanvasBase(KoShapeControllerBase *shapeControllerBase)
     d->snapGuide = new KoSnapGuide(this);
 }
 
-KoCanvasBase::~KoCanvasBase()
+KCanvasBase::~KCanvasBase()
 {
     delete d;
 }
 
 
-KoShapeController *KoCanvasBase::shapeController() const
+KoShapeController *KCanvasBase::shapeController() const
 {
     return d->shapeController;
 }
 
-KoResourceManager *KoCanvasBase::resourceManager() const
+KoResourceManager *KCanvasBase::resourceManager() const
 {
     return d->resourceManager;
 }
 
-void KoCanvasBase::ensureVisible(const QRectF &rect)
+void KCanvasBase::ensureVisible(const QRectF &rect)
 {
     if (d->controller && d->controller->canvas())
         d->controller->ensureVisible(
                 d->controller->canvas()->viewConverter()->documentToView(rect));
 }
 
-void KoCanvasBase::setCanvasController(KoCanvasController *controller)
+void KCanvasBase::setCanvasController(KoCanvasController *controller)
 {
     d->controller = controller;
 }
 
-KoCanvasController *KoCanvasBase::canvasController() const
+KoCanvasController *KCanvasBase::canvasController() const
 {
     return d->controller;
 }
 
-void KoCanvasBase::clipToDocument(const KoShape *, QPointF &) const
+void KCanvasBase::clipToDocument(const KoShape *, QPointF &) const
 {
 }
 
-KoSnapGuide * KoCanvasBase::snapGuide() const
+KoSnapGuide * KCanvasBase::snapGuide() const
 {
     return d->snapGuide;
 }
 
-KGuidesData * KoCanvasBase::guidesData()
+KGuidesData * KCanvasBase::guidesData()
 {
     return 0;
 }
 
-QWidget *KoCanvasBase::createSnapGuideConfigWidget() const
+QWidget *KCanvasBase::createSnapGuideConfigWidget() const
 {
     return new SnapGuideConfigWidget(d->snapGuide);
 }
 
-void KoCanvasBase::setReadWrite(bool readWrite)
+void KCanvasBase::setReadWrite(bool readWrite)
 {
     d->readWrite = readWrite;
 }
 
-bool KoCanvasBase::isReadWrite() const
+bool KCanvasBase::isReadWrite() const
 {
     return d->readWrite;
 }

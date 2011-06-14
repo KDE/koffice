@@ -26,7 +26,7 @@
 #include "KCSheet.h"
 #include "Selection.h"
 
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 
 #include <KAction>
 #include <KIcon>

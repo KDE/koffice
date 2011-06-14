@@ -31,7 +31,7 @@ class TableTool : public CellToolBase
     Q_OBJECT
 
 public:
-    explicit TableTool(KoCanvasBase* canvas);
+    explicit TableTool(KCanvasBase* canvas);
     ~TableTool();
 
     virtual void repaintDecorations();

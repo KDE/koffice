@@ -20,7 +20,7 @@
 #ifndef KOCANVASOBSERVERBASE_H
 #define KOCANVASOBSERVERBASE_H
 
-class KoCanvasBase;
+class KCanvasBase;
 
 #include "flake_export.h"
 
@@ -35,7 +35,7 @@ class FLAKE_EXPORT KoCanvasObserverBase
 public:
     KoCanvasObserverBase();
     virtual ~KoCanvasObserverBase();
-    virtual void setCanvas(KoCanvasBase *canvas) = 0;
+    virtual void setCanvas(KCanvasBase *canvas) = 0;
 
 };
 

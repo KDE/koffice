@@ -23,7 +23,7 @@
 #include "SelectionTransformCommand.h"
 
 #include <KInteractionTool.h>
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 #include <KoSelection.h>
 #include <KoPointerEvent.h>
 #include <KoShapeManager.h>

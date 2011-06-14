@@ -53,7 +53,7 @@
 #include <krun.h>
 #include <KSelectAction>
 
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 #include <KoCanvasController.h>
 #include <KoPointerEvent.h>
 #include <KoSelection.h>
@@ -83,7 +83,7 @@ public:
     KCCanvas* canvas;
 };
 
-KCCellTool::KCCellTool(KoCanvasBase* canvas)
+KCCellTool::KCCellTool(KCanvasBase* canvas)
         : CellToolBase(canvas)
         , d(new Private)
 {

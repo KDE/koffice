@@ -24,7 +24,7 @@
 #include <KoParameterShape.h>
 #include <KLineBorder.h>
 #include <KoPointerEvent.h>
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 #include <KoShapeController.h>
 #include <KoShapeManager.h>
 #include <KoSelection.h>
@@ -54,7 +54,7 @@ qreal squareDistance(const QPointF &p1, const QPointF &p2)
     return dx*dx + dy*dy;
 }
 
-KarbonPencilTool::KarbonPencilTool(KoCanvasBase *canvas)
+KarbonPencilTool::KarbonPencilTool(KCanvasBase *canvas)
         : KoToolBase(canvas),  m_mode(ModeCurve), m_optimizeRaw(false)
         , m_optimizeCurve(false), m_combineAngle(15.0), m_fittingError(5.0)
         , m_close(false), m_shape(0)

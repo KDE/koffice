@@ -26,7 +26,7 @@
 #include <QList>
 
 class KInlineObject;
-class KoCanvasBase;
+class KCanvasBase;
 class QAction;
 class KXmlElement;
 class KoShapeLoadingContext;
@@ -61,7 +61,7 @@ public:
      *  actions as a parent (for memory management purposes) as well.
      * @see KInlineTextObjectManager::createInsertVariableActions()
      */
-    QList<QAction*> createInsertVariableActions(KoCanvasBase *host) const;
+    QList<QAction*> createInsertVariableActions(KCanvasBase *host) const;
 
     /**
      * Use the element to find out which variable plugin can load it, and returns the loaded

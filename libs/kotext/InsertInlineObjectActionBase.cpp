@@ -24,11 +24,11 @@
 #include "KoTextEditor.h"
 
 #include <KoToolProxy.h>
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 
 #include <KDebug>
 
-InsertInlineObjectActionBase::InsertInlineObjectActionBase(KoCanvasBase *canvas, const QString &name)
+InsertInlineObjectActionBase::InsertInlineObjectActionBase(KCanvasBase *canvas, const QString &name)
         : KAction(name, canvas->canvasWidget()),
         m_canvas(canvas)
 {

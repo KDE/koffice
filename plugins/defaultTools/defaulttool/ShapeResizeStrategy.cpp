@@ -23,7 +23,7 @@
 
 #include <KoShapeManager.h>
 #include <KoPointerEvent.h>
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 #include <KoResourceManager.h>
 #include <commands/KoShapeSizeCommand.h>
 #include <commands/KoShapeTransformCommand.h>

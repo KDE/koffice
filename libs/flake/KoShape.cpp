@@ -300,7 +300,7 @@ void KoShape::paint(QPainter &painter, const KoViewConverter &converter)
     }
 }
 
-void KoShape::paintDecorations(QPainter &, const KoViewConverter &, const KoCanvasBase *)
+void KoShape::paintDecorations(QPainter &, const KoViewConverter &, const KCanvasBase *)
 {
 }
 

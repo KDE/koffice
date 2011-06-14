@@ -28,7 +28,7 @@
 class QComboBox;
 class QUndoCommand;
 class KoPAViewBase;
-class KoCanvasBase;
+class KCanvasBase;
 class SCSoundCollection;
 
 /**
@@ -50,12 +50,12 @@ private slots:
     void selectionChanged();
 
     /// reimplemented
-    virtual void setCanvas(KoCanvasBase *canvas);
+    virtual void setCanvas(KCanvasBase *canvas);
 
 private:
     KoPAViewBase *m_view;
     SCSoundCollection *m_soundCollection;
-    KoCanvasBase *m_canvas;
+    KCanvasBase *m_canvas;
     QComboBox *m_cbPlaySound; // TODO remove when the embedded widgets are ok
     QMap<QString, QWidget *> m_eventActionWidgets;
 };

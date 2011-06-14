@@ -30,9 +30,9 @@ public:
     explicit ChangeTrackingToolFactory(QObject *parent);
     ~ChangeTrackingToolFactory();
 
-    KoToolBase * createTool(KoCanvasBase *canvas);
+    KoToolBase * createTool(KCanvasBase *canvas);
 
-    virtual bool canCreateTool(KoCanvasBase* canvas) const;
+    virtual bool canCreateTool(KCanvasBase* canvas) const;
 };
 
 #endif

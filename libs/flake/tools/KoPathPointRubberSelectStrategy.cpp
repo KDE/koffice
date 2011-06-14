@@ -21,7 +21,7 @@
 #include "KoPathPointRubberSelectStrategy_p.h"
 #include "KoShapeRubberSelectStrategy_p.h"
 
-#include "KoCanvasBase.h"
+#include "KCanvasBase.h"
 #include "KoPathTool_p.h"
 #include "KoPathToolSelection_p.h"
 

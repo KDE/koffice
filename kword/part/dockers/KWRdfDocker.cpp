@@ -71,7 +71,7 @@ KWRdfDocker::~KWRdfDocker()
 {
 }
 
-void KWRdfDocker::setCanvas(KoCanvasBase *canvas)
+void KWRdfDocker::setCanvas(KCanvasBase *canvas)
 {
     //kDebug(30015) << "canvas:" << canvas;
     m_canvas = canvas;

@@ -1202,7 +1202,7 @@ bool KoRuler::removeHotSpot(int id)
     return false;
 }
 
-void KoRuler::createGuideToolConnection(KoCanvasBase *canvas)
+void KoRuler::createGuideToolConnection(KCanvasBase *canvas)
 {
     Q_ASSERT(canvas);
     KoToolBase *tool = KoToolManager::instance()->toolById(canvas, QLatin1String("GuidesTool_ID"));

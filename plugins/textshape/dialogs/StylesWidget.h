@@ -32,7 +32,7 @@ class KoStyleManager;
 class KParagraphStyle;
 class KoCharacterStyle;
 class StylesModel;
-class KoCanvasBase;
+class KCanvasBase;
 
 class StylesWidget : public QWidget
 {
@@ -41,7 +41,7 @@ public:
     explicit StylesWidget(QWidget *parent = 0);
 
     void setEmbedded(bool embed);
-    void setCanvas(KoCanvasBase *canvas) { m_canvasBase = canvas; }
+    void setCanvas(KCanvasBase *canvas) { m_canvasBase = canvas; }
 
 public slots:
     void setStyleManager(KoStyleManager *sm);
@@ -77,7 +77,7 @@ private:
     StylesModel *m_stylesModel;
     bool m_blockSignals;
     bool m_isEmbedded;
-    KoCanvasBase *m_canvasBase;
+    KCanvasBase *m_canvasBase;
 };
 
 #endif

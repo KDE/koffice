@@ -19,7 +19,7 @@
 
 #include "KoToolBase.h"
 #include "KoToolBase_p.h"
-#include "KoCanvasBase.h"
+#include "KCanvasBase.h"
 #include "KoPointerEvent.h"
 #include "KoResourceManager.h"
 #include "KoViewConverter.h"
@@ -28,7 +28,7 @@
 #include <kactioncollection.h>
 #include <QWidget>
 
-KoToolBase::KoToolBase(KoCanvasBase *canvas)
+KoToolBase::KoToolBase(KCanvasBase *canvas)
     : d_ptr(new KoToolBasePrivate(this, canvas))
 {
     Q_D(KoToolBase);
@@ -215,7 +215,7 @@ void KoToolBase::setPopupActionList(const QList<QAction*> &list)
     d->popupActionList = list;
 }
 
-KoCanvasBase * KoToolBase::canvas() const
+KCanvasBase * KoToolBase::canvas() const
 {
     Q_D(const KoToolBase);
     return d->canvas;

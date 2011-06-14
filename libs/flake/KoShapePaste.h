@@ -26,7 +26,7 @@
 
 #include <QList>
 
-class KoCanvasBase;
+class KCanvasBase;
 class KoShapeLayer;
 class KoShape;
 
@@ -42,7 +42,7 @@ public:
      * @param canvas The canvas on which the paste is done
      * @param parentLayer The layer on which the shapes will be pasted
      */
-    KoShapePaste(KoCanvasBase *canvas, KoShapeLayer *parentLayer);
+    KoShapePaste(KCanvasBase *canvas, KoShapeLayer *parentLayer);
     virtual ~KoShapePaste();
 
     QList<KoShape*> pastedShapes() const;

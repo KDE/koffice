@@ -35,7 +35,7 @@ public:
      * Constructor for animation tool
      * @param canvas the canvas this tool will be working for.
      */
-    explicit SCAnimationTool(KoCanvasBase *canvas);
+    explicit SCAnimationTool(KCanvasBase *canvas);
     virtual ~SCAnimationTool();
 
 public:

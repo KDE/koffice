@@ -60,7 +60,7 @@ class TextTool : public KoToolBase
 {
     Q_OBJECT
 public:
-    explicit TextTool(KoCanvasBase *canvas);
+    explicit TextTool(KCanvasBase *canvas);
 #ifndef NDEBUG
     explicit TextTool(MockCanvas *canvas);
 #endif

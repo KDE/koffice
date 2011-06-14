@@ -19,7 +19,7 @@
  */
 
 #include "KoPathControlPointMoveStrategy_p.h"
-#include "KoCanvasBase.h"
+#include "KCanvasBase.h"
 #include "KoSnapGuide.h"
 
 #include "KoPathTool_p.h"

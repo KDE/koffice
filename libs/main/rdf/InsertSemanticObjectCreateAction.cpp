@@ -20,7 +20,7 @@
 #include "InsertSemanticObjectCreateAction.h"
 #include "KoDocumentRdf.h"
 
-#include "KoCanvasBase.h"
+#include "KCanvasBase.h"
 #include "KoToolProxy.h"
 #include "KoTextEditor.h"
 
@@ -31,7 +31,7 @@
 #include <QVBoxLayout>
 
 InsertSemanticObjectCreateAction::InsertSemanticObjectCreateAction(
-    KoCanvasBase *canvas,
+    KCanvasBase *canvas,
     KoDocumentRdf *rdf,
     const QString &name)
         : InsertSemanticObjectActionBase(canvas, rdf, name),

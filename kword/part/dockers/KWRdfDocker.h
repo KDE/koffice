@@ -46,8 +46,8 @@ public:
     explicit KWRdfDocker();
     ~KWRdfDocker();
     /// reimplemented from KoCanvasObserver
-    virtual void setCanvas(KoCanvasBase *canvas);
-    KoCanvasBase *canvas();
+    virtual void setCanvas(KCanvasBase *canvas);
+    KCanvasBase *canvas();
 
 private slots:
     void updateDataForced();
@@ -59,7 +59,7 @@ private slots:
     void resourceChanged(int key, const QVariant &value);
 
 private:
-    KoCanvasBase *m_canvas;
+    KCanvasBase *m_canvas;
     int m_lastCursorPosition;
     bool m_autoUpdate;
     KWDocument *m_document;

@@ -31,7 +31,7 @@
 class KoCreateShapesToolPrivate : public KInteractionToolPrivate
 {
 public:
-    KoCreateShapesToolPrivate(KoToolBase *qq, KoCanvasBase *canvas)
+    KoCreateShapesToolPrivate(KoToolBase *qq, KCanvasBase *canvas)
         : KInteractionToolPrivate(qq, canvas),
         newShapeProperties(0)
     {
@@ -41,7 +41,7 @@ public:
     KProperties *newShapeProperties;
 };
 
-KoCreateShapesTool::KoCreateShapesTool(KoCanvasBase *canvas)
+KoCreateShapesTool::KoCreateShapesTool(KCanvasBase *canvas)
     : KInteractionTool(*(new KoCreateShapesToolPrivate(this, canvas)))
 {
 }

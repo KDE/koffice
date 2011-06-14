@@ -53,7 +53,7 @@ bool SpiralShapeFactory::supports(const KXmlElement & e, KoShapeLoadingContext &
     return false;
 }
 
-KoShapeConfigWidgetBase *SpiralShapeFactory::createConfigWidget(KoCanvasBase *canvas)
+KoShapeConfigWidgetBase *SpiralShapeFactory::createConfigWidget(KCanvasBase *canvas)
 {
     return new SpiralShapeConfigWidget(canvas);
 }

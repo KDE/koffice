@@ -480,7 +480,7 @@ void KoRdfCalendarEvent::exportToFile(const QString &fileNameConst) const
 #endif
 }
 
-void KoRdfCalendarEvent::importFromData(const QByteArray &ba, KoDocumentRdf *_rdf, KoCanvasBase *host)
+void KoRdfCalendarEvent::importFromData(const QByteArray &ba, KoDocumentRdf *_rdf, KCanvasBase *host)
 {
     Q_D (KoRdfCalendarEvent);
 #ifdef KDEPIMLIBS_FOUND

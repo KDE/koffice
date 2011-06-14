@@ -28,7 +28,7 @@
 #include <KoTextDocumentLayout.h>
 #include <KInlineTextObjectManager.h>
 #include <KoTextAnchor.h>
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 #include <KoShapeController.h>
 
 #include <QWeakPointer>

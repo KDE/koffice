@@ -38,7 +38,7 @@
 #include "KoPathPoint.h"
 #include "KoPathPointData.h"
 #include "KoPathPointMergeCommand.h"
-#include "KoCanvasBase.h"
+#include "KCanvasBase.h"
 #include "KoParameterShape.h"
 #include "KoViewConverter.h"
 #include "KoShapeManager.h"
@@ -87,7 +87,7 @@ struct PathConnectionPoint {
     }
 
     // checks if the path and point are still valid
-    void validate(KoCanvasBase *canvas)
+    void validate(KCanvasBase *canvas)
     {
         // no point in validating an already invalid state
         if (!isValid()) {
@@ -193,7 +193,7 @@ private:
 class KoCreatePathToolPrivate : public KoToolBasePrivate {
     KoCreatePathTool * const q;
 public:
-    KoCreatePathToolPrivate(KoCreatePathTool * const qq, KoCanvasBase* canvas)
+    KoCreatePathToolPrivate(KoCreatePathTool * const qq, KCanvasBase* canvas)
         : KoToolBasePrivate(qq, canvas),
         q(qq),
         shape(0),

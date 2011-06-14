@@ -50,7 +50,7 @@ public:
      * Constructor.
      * @param canvas the canvas this tool works on.
      */
-    explicit KPanTool(KoCanvasBase *canvas);
+    explicit KPanTool(KCanvasBase *canvas);
 
     /// reimplemented from superclass
     virtual bool wantsAutoScroll() const;

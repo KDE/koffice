@@ -59,7 +59,7 @@ public:
     /**
      * Constructor.
      */
-    CellToolBase(KoCanvasBase* canvas);
+    CellToolBase(KCanvasBase* canvas);
 
     /**
      * Destructor.

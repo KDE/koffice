@@ -25,7 +25,7 @@
 #include "KoRdfSemanticTreeWidgetItem.h"
 #include "KoRdfFoaFTreeWidgetItem.h"
 
-class KoCanvasBase;
+class KCanvasBase;
 
 /**
  * @short Display ical/vevent semantic data with a context menu tailored
@@ -45,8 +45,8 @@ public:
     // inherited and reimplemented...
 
     KoRdfCalendarEvent *semanticObject() const;
-    virtual QList<KAction *> actions(QWidget *parent, KoCanvasBase *host = 0);
-    virtual void insert(KoCanvasBase *host);
+    virtual QList<KAction *> actions(QWidget *parent, KCanvasBase *host = 0);
+    virtual void insert(KCanvasBase *host);
 
 public slots:
     void saveToKCal();

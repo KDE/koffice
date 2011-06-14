@@ -27,13 +27,13 @@
 #include <KoShapeConfigWidgetBase.h>
 
 class SpiralShapeConfigCommand;
-class KoCanvasBase;
+class KCanvasBase;
 
 class SpiralShapeConfigWidget : public KoShapeConfigWidgetBase
 {
     Q_OBJECT
 public:
-    SpiralShapeConfigWidget(KoCanvasBase *canvas);
+    SpiralShapeConfigWidget(KCanvasBase *canvas);
     /// reimplemented
     virtual void open(KoShape *shape);
 
@@ -46,7 +46,7 @@ private:
     Ui::SpiralShapeConfigWidget widget;
     SpiralShape *m_spiral;
 
-    KoCanvasBase *m_canvas;
+    KCanvasBase *m_canvas;
     SpiralShapeConfigCommand *m_command;
     bool m_blocking;
     QTime m_time;

@@ -34,7 +34,7 @@
 
 #include <karbonui_export.h>
 
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 
 #include <QtGui/QWidget>
 #include <QtCore/QList>
@@ -51,7 +51,7 @@ class QWheelEvent;
 class QTabletEvent;
 class QResizeEvent;
 
-class KarbonCanvas: public QWidget, public KoCanvasBase
+class KarbonCanvas: public QWidget, public KCanvasBase
 {
     Q_OBJECT
 
@@ -59,31 +59,31 @@ public:
     explicit KarbonCanvas(KarbonPart *p);
     virtual ~KarbonCanvas();
 
-    /// reimplemented from KoCanvasBase
+    /// reimplemented from KCanvasBase
     virtual void gridSize(qreal *horizontal, qreal *vertical) const;
-    /// reimplemented from KoCanvasBase
+    /// reimplemented from KCanvasBase
     virtual bool snapToGrid() const;
-    /// reimplemented from KoCanvasBase
+    /// reimplemented from KCanvasBase
     virtual KUnit unit() const;
-    /// reimplemented from KoCanvasBase
+    /// reimplemented from KCanvasBase
     void addCommand(QUndoCommand *command);
-    /// reimplemented from KoCanvasBase
+    /// reimplemented from KCanvasBase
     KoShapeManager *shapeManager() const;
-    /// reimplemented from KoCanvasBase
+    /// reimplemented from KCanvasBase
     const KoViewConverter *viewConverter() const;
-    /// reimplemented from KoCanvasBase
+    /// reimplemented from KCanvasBase
     KoToolProxy * toolProxy() const;
-    /// reimplemented from KoCanvasBase
+    /// reimplemented from KCanvasBase
     virtual QPoint documentOrigin() const;
-    /// reimplemented from KoCanvasBase
+    /// reimplemented from KCanvasBase
     QWidget *canvasWidget();
-    /// reimplemented from KoCanvasBase
+    /// reimplemented from KCanvasBase
     const QWidget *canvasWidget() const;
-    /// reimplemented from KoCanvasBase
+    /// reimplemented from KCanvasBase
     void updateCanvas(const QRectF& rc);
-    /// reimplemented from KoCanvasBase
+    /// reimplemented from KCanvasBase
     virtual void updateInputMethodInfo();
-    /// reimplemented from KoCanvasBase
+    /// reimplemented from KCanvasBase
     virtual KGuidesData * guidesData();
     /// Enables/disables showing page margins
     void setShowPageMargins(bool on);

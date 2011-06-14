@@ -45,7 +45,7 @@ public:
     /// reimplemented from KoShape
     void paint(QPainter &painter, const KoViewConverter &converter);
     /// reimplemented from KoShape
-    void paintDecorations(QPainter &painter, const KoViewConverter &converter, const KoCanvasBase *canvas);
+    void paintDecorations(QPainter &painter, const KoViewConverter &converter, const KCanvasBase *canvas);
     /// reimplemented from KoShape
     QPainterPath outline() const;
     /// reimplemented

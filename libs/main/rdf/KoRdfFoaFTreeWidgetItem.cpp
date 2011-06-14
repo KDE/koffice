@@ -58,12 +58,12 @@ KoRdfFoaF *KoRdfFoaFTreeWidgetItem::foaf() const
     return m_foaf;
 }
 
-void KoRdfFoaFTreeWidgetItem::insert(KoCanvasBase *host)
+void KoRdfFoaFTreeWidgetItem::insert(KCanvasBase *host)
 {
     foaf()->insert(host);
 }
 
-QList<KAction *> KoRdfFoaFTreeWidgetItem::actions(QWidget *parent, KoCanvasBase *host)
+QList<KAction *> KoRdfFoaFTreeWidgetItem::actions(QWidget *parent, KCanvasBase *host)
 {
     QList<KAction *> m_actions;
     KAction *action = 0;

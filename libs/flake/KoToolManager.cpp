@@ -33,7 +33,7 @@
 #include "KoShapeLayer.h"
 #include "KoShapeRegistry.h"
 #include "KoShapeManager.h"
-#include "KoCanvasBase.h"
+#include "KCanvasBase.h"
 #include "KoPointerEvent.h"
 #include "tools/KoCreateShapesTool.h"
 #include "tools/KoZoomTool_p.h"
@@ -315,7 +315,7 @@ void KoToolManager::Private::postSwitchTool(bool temporary)
 
     Q_ASSERT(canvasData->canvas);
     if (canvasData->canvas->canvas()) {
-        KoCanvasBase *canvas = canvasData->canvas->canvas();
+        KCanvasBase *canvas = canvasData->canvas->canvas();
         // Caller of postSwitchTool expect this to be called to update the selected tool
         KoToolProxy *tp = proxies.value(canvas);
         if (tp)
@@ -664,7 +664,7 @@ void KoToolManager::Private::switchInputDevice(const KInputDevice &device)
     emit q->changedCanvas(canvasData ? canvasData->canvas->canvas() : 0);
 }
 
-void KoToolManager::Private::registerToolProxy(KoToolProxy *proxy, KoCanvasBase *canvas)
+void KoToolManager::Private::registerToolProxy(KoToolProxy *proxy, KCanvasBase *canvas)
 {
     proxies.insert(canvas, proxy);
     foreach(KoCanvasController *controller, canvasses.keys()) {
@@ -713,7 +713,7 @@ KoToolManager::~KoToolManager()
     delete d;
 }
 
-QList<KoToolManager::Button> KoToolManager::createToolList(KoCanvasBase *canvas) const
+QList<KoToolManager::Button> KoToolManager::createToolList(KCanvasBase *canvas) const
 {
     QList<KoToolManager::Button> answer;
     foreach(ToolHelper *tool, d->tools) {
@@ -800,7 +800,7 @@ void KoToolManager::switchToolRequested(const QString & id)
     d->switchTool(id, false);
 }
 
-KoCreateShapesTool * KoToolManager::shapeCreatorTool(KoCanvasBase *canvas) const
+KoCreateShapesTool * KoToolManager::shapeCreatorTool(KCanvasBase *canvas) const
 {
     Q_ASSERT(canvas);
     foreach(KoCanvasController *controller, d->canvasses.keys()) {
@@ -815,7 +815,7 @@ KoCreateShapesTool * KoToolManager::shapeCreatorTool(KoCanvasBase *canvas) const
     return 0;
 }
 
-KoToolBase *KoToolManager::toolById(KoCanvasBase *canvas, const QString &id) const
+KoToolBase *KoToolManager::toolById(KCanvasBase *canvas, const QString &id) const
 {
     Q_ASSERT(canvas);
     foreach(KoCanvasController *controller, d->canvasses.keys()) {

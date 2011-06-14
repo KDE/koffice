@@ -33,7 +33,7 @@ class ArtisticTextTool : public KoToolBase
 {
     Q_OBJECT
 public:
-    explicit ArtisticTextTool(KoCanvasBase *canvas);
+    explicit ArtisticTextTool(KCanvasBase *canvas);
     ~ArtisticTextTool();
 
     /// reimplemented
@@ -69,7 +69,7 @@ private slots:
     void textChanged();
     
 signals:
-    void shapeSelected(ArtisticTextShape *shape, KoCanvasBase *canvas);
+    void shapeSelected(ArtisticTextShape *shape, KCanvasBase *canvas);
     
 private:
     class AddTextRangeCommand;

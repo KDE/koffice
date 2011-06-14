@@ -35,7 +35,7 @@ class QWheelEvent;
 class QTabletEvent;
 class KoToolSelection;
 class KoToolBase;
-class KoCanvasBase;
+class KCanvasBase;
 class KoCanvasController;
 class KoToolProxyPrivate;
 class QInputMethodEvent;
@@ -59,7 +59,7 @@ public:
      * @param canvas Each canvas has 1 toolProxy. Pass the parent here.
      * @param parent a parent QObject for memory management purposes.
      */
-    explicit KoToolProxy(KoCanvasBase *canvas, QObject *parent = 0);
+    explicit KoToolProxy(KCanvasBase *canvas, QObject *parent = 0);
     ~KoToolProxy();
 
     /// Forwarded to the current KoToolBase

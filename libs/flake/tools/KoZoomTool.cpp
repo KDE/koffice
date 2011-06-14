@@ -23,13 +23,13 @@
 #include "KoZoomStrategy_p.h"
 #include "KoZoomToolWidget_p.h"
 #include "KoPointerEvent.h"
-#include "KoCanvasBase.h"
+#include "KCanvasBase.h"
 #include "KoCanvasController.h"
 
 #include <kstandarddirs.h>
 #include <kdebug.h>
 
-KoZoomTool::KoZoomTool(KoCanvasBase *canvas)
+KoZoomTool::KoZoomTool(KCanvasBase *canvas)
         : KInteractionTool(canvas),
         m_temporary(false), m_zoomInMode(true)
 {

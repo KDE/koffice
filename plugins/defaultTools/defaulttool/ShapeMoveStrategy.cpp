@@ -22,7 +22,7 @@
 #include "ShapeMoveStrategy.h"
 #include "SelectionDecorator.h"
 
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 #include <KoShapeManager.h>
 #include <KoShapeContainer.h>
 #include <KoShapeContainerModel.h>

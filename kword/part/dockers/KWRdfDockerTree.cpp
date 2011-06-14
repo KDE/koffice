@@ -51,7 +51,7 @@ void KWRdfDockerTree::setDocumentRdf(KoDocumentRdf *rdf)
     m_rdf = rdf;
 }
 
-void KWRdfDockerTree::setCanvas(KoCanvasBase *canvas)
+void KWRdfDockerTree::setCanvas(KCanvasBase *canvas)
 {
     m_canvas = canvas;
 }

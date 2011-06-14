@@ -24,7 +24,7 @@
 #include <QObject>
 
 class QAction;
-class KoCanvasBase;
+class KCanvasBase;
 
 /**
  * This class takes care of the paste actions integration into flake.
@@ -43,7 +43,7 @@ public:
      * @param pasteAction the action that we will listen to and respond to when it is activated.  Additionally, the
      *     action is used as a parent for the QObject for memory management purposes.
      */
-    KoPasteController(KoCanvasBase *canvas, QAction *pasteAction);
+    KoPasteController(KCanvasBase *canvas, QAction *pasteAction);
     ~KoPasteController();
 
 signals:

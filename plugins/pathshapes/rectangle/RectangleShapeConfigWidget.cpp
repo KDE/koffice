@@ -22,9 +22,9 @@
 #include "RectangleShape.h"
 #include "RectangleShapeConfigCommand.h"
 
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 
-RectangleShapeConfigWidget::RectangleShapeConfigWidget(KoCanvasBase *canvas)
+RectangleShapeConfigWidget::RectangleShapeConfigWidget(KCanvasBase *canvas)
     : m_canvas(canvas),
     m_command(0),
     m_blocking(false)

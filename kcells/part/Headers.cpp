@@ -1399,7 +1399,7 @@ void KCColumnHeader::toolChanged(const QString& toolId)
  *
  ****************************************************************/
 
-KCSelectAllButton::KCSelectAllButton(KoCanvasBase* canvasBase, Selection* selection)
+KCSelectAllButton::KCSelectAllButton(KCanvasBase* canvasBase, Selection* selection)
         : QWidget(canvasBase->canvasWidget())
         , m_canvasBase(canvasBase)
         , m_selection(selection)

@@ -26,7 +26,7 @@ class CalendarTool : public KCCellTool
 {
     Q_OBJECT
 public:
-    explicit CalendarTool(KoCanvasBase* canvas);
+    explicit CalendarTool(KCanvasBase* canvas);
     ~CalendarTool();
 
 public Q_SLOTS:

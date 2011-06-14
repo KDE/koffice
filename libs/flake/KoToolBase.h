@@ -28,7 +28,7 @@
 #include "flake_export.h"
 
 class KoShape;
-class KoCanvasBase;
+class KCanvasBase;
 class KoPointerEvent;
 class KoViewConverter;
 class KoToolSelection;
@@ -70,7 +70,7 @@ public:
      * Constructor, normally only called by the factory (see KoToolFactoryBase)
      * @param canvas the canvas interface this tool will work for.
      */
-    explicit KoToolBase(KoCanvasBase *canvas);
+    explicit KoToolBase(KCanvasBase *canvas);
     virtual ~KoToolBase();
 
     /**
@@ -252,7 +252,7 @@ public:
     QList<QAction*> popupActionList() const;
 
     /// Returns the canvas the tool is working on
-    KoCanvasBase *canvas() const;
+    KCanvasBase *canvas() const;
 
     /**
      * Calling this will turn the tool into a read/write or a read-only tool.

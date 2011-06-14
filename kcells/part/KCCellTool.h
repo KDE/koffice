@@ -33,7 +33,7 @@ class KCELLS_EXPORT KCCellTool : public CellToolBase
     Q_OBJECT
 
 public:
-    explicit KCCellTool(KoCanvasBase* canvas);
+    explicit KCCellTool(KCanvasBase* canvas);
     ~KCCellTool();
 
     virtual void paint(QPainter &painter, const KoViewConverter &converter);

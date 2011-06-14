@@ -45,7 +45,7 @@
 
 Canvas::Canvas(ShapeSelector *parent, ItemStore *itemStore)
     : QWidget(parent),
-    KoCanvasBase(itemStore->shapeController()),
+    KCanvasBase(itemStore->shapeController()),
     m_parent(parent),
     m_currentStrategy(0),
     m_zoomIndex(1),

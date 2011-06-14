@@ -21,7 +21,7 @@
 #include "KoPathTool_p.h"
 #include "../KoShapeRegistry.h"
 #include "../KoShapeConfigWidgetBase.h"
-#include "../KoCanvasBase.h"
+#include "../KCanvasBase.h"
 
 #include <KAction>
 

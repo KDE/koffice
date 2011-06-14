@@ -103,7 +103,7 @@
 #include "dialogs/ValidityDialog.h"
 
 // KOffice
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 #include <KoCanvasController.h>
 #include <KoResourceManager.h>
 #include <KoColor.h>
@@ -145,7 +145,7 @@
 #include "KCSheetModel.h"
 #endif
 
-CellToolBase::CellToolBase(KoCanvasBase* canvas)
+CellToolBase::CellToolBase(KCanvasBase* canvas)
         : KInteractionTool(canvas)
         , d(new Private(this))
 {

@@ -28,7 +28,7 @@
 class QPaintEvent;
 class KarbonFillStyleWidget;
 class KarbonStrokeStyleWidget;
-class KoCanvasBase;
+class KCanvasBase;
 
 /// This is a small widget used on the statusbar, to display fill/stroke colors etc.
 class KarbonSmallStylePreview : public QWidget
@@ -44,7 +44,7 @@ signals:
 
 private slots:
     void selectionChanged();
-    void canvasChanged(const KoCanvasBase *canvas);
+    void canvasChanged(const KCanvasBase *canvas);
 
 private:
     KarbonFillStyleWidget * m_fillFrame;

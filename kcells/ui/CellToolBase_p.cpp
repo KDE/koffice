@@ -63,7 +63,7 @@
 #include "ui/SheetView.h"
 
 // KOffice
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 #include <KoCanvasController.h>
 #include <KoResourceManager.h>
 #include <KoViewConverter.h>

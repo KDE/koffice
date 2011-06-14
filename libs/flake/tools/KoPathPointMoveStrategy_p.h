@@ -38,7 +38,7 @@
 
 
 class KoPathTool;
-class KoCanvasBase;
+class KCanvasBase;
 
 /**
  * @brief Strategy for moving points of a path shape.

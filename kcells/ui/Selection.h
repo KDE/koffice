@@ -30,7 +30,7 @@
 
 #include <KCRegion.h>
 
-class KoCanvasBase;
+class KCanvasBase;
 
 class CellEditor;
 
@@ -61,7 +61,7 @@ public:
      * Creates a new selection with (1,1) as initial location.
      * @param canvasBase the canvas interface
      */
-    explicit Selection(KoCanvasBase* canvasBase);
+    explicit Selection(KCanvasBase* canvasBase);
 
     /**
      * Copy Constructor.
@@ -78,7 +78,7 @@ public:
     /**
      * \return the canvas this selection works for.
      */
-    KoCanvasBase* canvas() const;
+    KCanvasBase* canvas() const;
 
     /**
      * Sets the selection to @p point

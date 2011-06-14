@@ -23,7 +23,7 @@
 #include "KarbonSmallStylePreview.h"
 #include <KarbonGradientHelper.h>
 #include <KGradientBackground.h>
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 #include <KoToolManager.h>
 #include <KoCanvasController.h>
 #include <KoShapeManager.h>
@@ -208,8 +208,8 @@ KarbonSmallStylePreview::KarbonSmallStylePreview(QWidget* parent)
 
     setLayout(layout);
 
-    connect(KoToolManager::instance(), SIGNAL(changedCanvas(const KoCanvasBase *)),
-            this, SLOT(canvasChanged(const KoCanvasBase *)));
+    connect(KoToolManager::instance(), SIGNAL(changedCanvas(const KCanvasBase *)),
+            this, SLOT(canvasChanged(const KCanvasBase *)));
     connect(m_strokeFrame, SIGNAL(clicked()), this, SIGNAL(strokeApplied()));
     connect(m_fillFrame, SIGNAL(clicked()), this, SIGNAL(fillApplied()));
 }
@@ -218,7 +218,7 @@ KarbonSmallStylePreview::~KarbonSmallStylePreview()
 {
 }
 
-void KarbonSmallStylePreview::canvasChanged(const KoCanvasBase *canvas)
+void KarbonSmallStylePreview::canvasChanged(const KCanvasBase *canvas)
 {
     if (canvas) {
         connect(canvas->shapeManager(), SIGNAL(selectionChanged()),

@@ -189,7 +189,7 @@ void KInlineTextObjectManager::removeProperty(KInlineObject::Property key)
     m_properties.remove(key);
 }
 
-QList<QAction*> KInlineTextObjectManager::createInsertVariableActions(KoCanvasBase *host) const
+QList<QAction*> KInlineTextObjectManager::createInsertVariableActions(KCanvasBase *host) const
 {
     QList<QAction *> answer = KInlineObjectRegistry::instance()->createInsertVariableActions(host);
     int i = 0;

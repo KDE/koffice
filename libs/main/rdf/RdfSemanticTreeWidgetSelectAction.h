@@ -27,7 +27,7 @@ class RdfSemanticTreeWidgetSelectAction : public RdfSemanticTreeWidgetAction
 {
     KoRdfSemanticItem* si;
 public:
-    RdfSemanticTreeWidgetSelectAction(QWidget *parent, KoCanvasBase *canvas,
+    RdfSemanticTreeWidgetSelectAction(QWidget *parent, KCanvasBase *canvas,
             KoRdfSemanticItem *si, QString name = QString("Select"));
     virtual ~RdfSemanticTreeWidgetSelectAction();
     virtual void activated();

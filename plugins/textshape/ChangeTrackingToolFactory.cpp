@@ -21,7 +21,7 @@
 #include "ChangeTrackingTool.h"
 #include "TextShape.h"
 
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 #include <KoShapeController.h>
 #include <KoResourceManager.h>
 
@@ -41,12 +41,12 @@ ChangeTrackingToolFactory::~ChangeTrackingToolFactory()
 {
 }
 
-KoToolBase * ChangeTrackingToolFactory::createTool(KoCanvasBase *canvas)
+KoToolBase * ChangeTrackingToolFactory::createTool(KCanvasBase *canvas)
 {
     return new ChangeTrackingTool(canvas);
 }
 
-bool ChangeTrackingToolFactory::canCreateTool(KoCanvasBase* canvas) const
+bool ChangeTrackingToolFactory::canCreateTool(KCanvasBase* canvas) const
 {
     if (canvas->shapeController()->resourceManager() && canvas->shapeController()->resourceManager()->hasResource(KoText::ChangeTracker))
         return true;

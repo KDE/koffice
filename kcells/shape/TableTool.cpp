@@ -38,7 +38,7 @@
 #include <kfiledialog.h>
 #include <kpagedialog.h>
 
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 #include <KoPointerEvent.h>
 #include <KoSelection.h>
 #include <KoShapeManager.h>
@@ -66,7 +66,7 @@ public:
 };
 
 
-TableTool::TableTool(KoCanvasBase* canvas)
+TableTool::TableTool(KCanvasBase* canvas)
         : CellToolBase(canvas)
         , d(new Private)
 {

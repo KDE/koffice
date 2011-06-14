@@ -25,7 +25,7 @@
 #include "KInputDevice.h"
 #include "KoToolManager_p.h"
 #include "KoToolSelection.h"
-#include "KoCanvasBase.h"
+#include "KCanvasBase.h"
 #include "KoCanvasController.h"
 #include "KoShapeManager.h"
 #include "KoSelection.h"
@@ -97,7 +97,7 @@ bool KoToolProxyPrivate::isActiveLayerEditable()
     return true;
 }
 
-KoToolProxy::KoToolProxy(KoCanvasBase *canvas, QObject *parent)
+KoToolProxy::KoToolProxy(KCanvasBase *canvas, QObject *parent)
         : QObject(parent),
         d(new KoToolProxyPrivate(this))
 {

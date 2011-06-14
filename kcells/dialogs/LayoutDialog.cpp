@@ -56,7 +56,7 @@
 #include <kmessagebox.h>
 #include <knumvalidator.h>
 
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 #include <KoUnitDoubleSpinBox.h>
 
 #include "KCCalculationSettings.h"

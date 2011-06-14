@@ -57,7 +57,7 @@ public:
      * Constructor for the tool that allows you to create new paths by hand.
      * @param canvas the canvas this tool will be working for.
      */
-    explicit KoCreatePathTool(KoCanvasBase *canvas);
+    explicit KoCreatePathTool(KCanvasBase *canvas);
     virtual ~KoCreatePathTool();
 
     /// reimplemented

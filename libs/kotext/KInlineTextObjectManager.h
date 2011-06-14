@@ -28,7 +28,7 @@
 #include <QHash>
 #include <QTextCharFormat>
 
-class KoCanvasBase;
+class KCanvasBase;
 class KoTextLocator;
 class QAction;
 
@@ -133,7 +133,7 @@ public:
      *  actions as a parent (for memory management purposes) as well.
      * @see KoVariableManager
      */
-    QList<QAction*> createInsertVariableActions(KoCanvasBase *host) const;
+    QList<QAction*> createInsertVariableActions(KCanvasBase *host) const;
 
     QList<KoTextLocator*> textLocators() const;
 

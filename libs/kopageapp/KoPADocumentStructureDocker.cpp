@@ -476,7 +476,7 @@ void KoPADocumentStructureDocker::extractSelectedLayersAndShapes(QList<KoPAPageB
     }
 }
 
-void KoPADocumentStructureDocker::setCanvas(KoCanvasBase* canvas)
+void KoPADocumentStructureDocker::setCanvas(KCanvasBase* canvas)
 {
     KoPACanvas * c = dynamic_cast<KoPACanvas*> (canvas);
     if (c) {
@@ -675,7 +675,7 @@ void KoPADocumentStructureDocker::editPaste()
 
     if (data->hasFormat(KOdf::mimeType(KOdf::TextDocument))) {
         // Paste Shapes or Layers
-        KoCanvasBase* canvas = KoToolManager::instance()->activeCanvasController()->canvas();
+        KCanvasBase* canvas = KoToolManager::instance()->activeCanvasController()->canvas();
         KoShapeManager * shapeManager = canvas->shapeManager();
         KoShapePaste paste(canvas, shapeManager->selection()->activeLayer());
         paste.paste(KOdf::TextDocument, data);

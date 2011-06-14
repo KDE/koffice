@@ -42,7 +42,7 @@
 #include <kmessagebox.h>
 #include <KStandardGuiItem>
 
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 
 // KCells
 #include "KCLocalization.h"

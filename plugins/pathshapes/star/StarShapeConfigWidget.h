@@ -26,14 +26,14 @@
 #include <KoShapeConfigWidgetBase.h>
 
 class StarShape;
-class KoCanvasBase;
+class KCanvasBase;
 class StarShapeConfigCommand;
 
 class StarShapeConfigWidget : public KoShapeConfigWidgetBase
 {
     Q_OBJECT
 public:
-    StarShapeConfigWidget(KoCanvasBase *canvas);
+    StarShapeConfigWidget(KCanvasBase *canvas);
     /// reimplemented
     virtual void open(KoShape *shape);
     /// reimplemented
@@ -49,7 +49,7 @@ private:
     Ui::StarShapeConfigWidget widget;
     StarShape * m_star;
 
-    KoCanvasBase *m_canvas;
+    KCanvasBase *m_canvas;
     StarShapeConfigCommand *m_command;
     bool m_blocking;
     QTime m_time;

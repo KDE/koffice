@@ -26,7 +26,7 @@
 #include "KoPathTool_p.h"
 #include "KoPathToolSelection_p.h"
 #include "KoSnapGuide.h"
-#include "KoCanvasBase.h"
+#include "KCanvasBase.h"
 
 KoPathPointMoveStrategy::KoPathPointMoveStrategy(KoPathTool *tool, const QPointF &pos)
     : KInteractionStrategy(*(new KInteractionStrategyPrivate(tool))),

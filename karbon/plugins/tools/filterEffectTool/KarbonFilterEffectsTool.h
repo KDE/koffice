@@ -38,7 +38,7 @@ public:
         MoveBottom
     };
 
-    explicit KarbonFilterEffectsTool(KoCanvasBase *canvas);
+    explicit KarbonFilterEffectsTool(KCanvasBase *canvas);
     virtual ~KarbonFilterEffectsTool();
 
     /// reimplemented from KoToolBase

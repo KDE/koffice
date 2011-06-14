@@ -27,7 +27,7 @@
 #include <QSizeF>
 #include <QTransform>
 
-class KoCanvasBase;
+class KCanvasBase;
 class KoToolBase;
 class KoShape;
 

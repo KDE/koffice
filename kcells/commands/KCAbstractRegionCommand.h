@@ -24,7 +24,7 @@
 
 #include "KCRegion.h"
 
-class KoCanvasBase;
+class KCanvasBase;
 
 class KCSheet;
 
@@ -66,7 +66,7 @@ public:
      * \return \c false if the command fails, was already executed once or is not approved
      * \see setRegisterUndo, isApproved
      */
-    virtual bool execute(KoCanvasBase* canvas = 0);
+    virtual bool execute(KCanvasBase* canvas = 0);
 
     /**
      * Executes the actual operation.

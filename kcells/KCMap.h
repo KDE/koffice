@@ -349,7 +349,7 @@ public:
      * document. The resource manager contains
      * document wide resources * such as variable managers, the image
      * collection and others.
-     * @see KoCanvasBase::resourceManager()
+     * @see KCanvasBase::resourceManager()
      */
     KoResourceManager *resourceManager() const;
 public Q_SLOTS:

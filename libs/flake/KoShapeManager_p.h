@@ -24,7 +24,7 @@
 class KoShapeManagerPrivate
 {
 public:
-    KoShapeManagerPrivate(KoShapeManager *shapeManager, KoCanvasBase *c);
+    KoShapeManagerPrivate(KoShapeManager *shapeManager, KCanvasBase *c);
     ~KoShapeManagerPrivate();
 
     /**
@@ -97,7 +97,7 @@ public:
     QList<KoShape *> shapes;
     QList<KoShape *> additionalShapes; // these are shapes that are only handled for updates
     KoSelection *selection;
-    KoCanvasBase *canvas;
+    KCanvasBase *canvas;
     KoRTree<KoShape *> tree;
     KoRTree<KoShapeConnection *> connectionTree;
 

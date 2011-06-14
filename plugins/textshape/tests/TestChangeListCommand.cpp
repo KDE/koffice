@@ -8,7 +8,7 @@
 #include <KoTextDocument.h>
 
 #include <TextTool.h>
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 
 #include <QTextDocument>
 #include <QTextCursor>

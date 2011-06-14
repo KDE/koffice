@@ -20,7 +20,7 @@
 
 #include "ChangeTrackingTool.h"
 
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 #include <KoChangeTracker.h>
 #include <KoPointerEvent.h>
 #include <KoSelection.h>
@@ -52,7 +52,7 @@
 #include <QVBoxLayout>
 #include <QVector>
 
-ChangeTrackingTool::ChangeTrackingTool(KoCanvasBase* canvas): KoToolBase(canvas),
+ChangeTrackingTool::ChangeTrackingTool(KCanvasBase* canvas): KoToolBase(canvas),
     m_disableShowChangesOnExit(false),
     m_textEditor(0),
     m_textShapeData(0),

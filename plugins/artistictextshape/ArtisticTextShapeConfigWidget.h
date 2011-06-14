@@ -35,7 +35,7 @@ public:
 
 public slots:
     /// initializes widget from given shape
-    void initializeFromShape(ArtisticTextShape *shape, KoCanvasBase *canvas);
+    void initializeFromShape(ArtisticTextShape *shape, KCanvasBase *canvas);
 
     /// updates the widget form the current one
     void updateWidget();
@@ -47,7 +47,7 @@ private:
     void blockChildSignals(bool block);
     Ui::ArtisticTextShapeConfigWidget widget;
     ArtisticTextShape * m_shape;
-    KoCanvasBase * m_canvas;
+    KCanvasBase * m_canvas;
     QButtonGroup * m_anchorGroup;
 };
 

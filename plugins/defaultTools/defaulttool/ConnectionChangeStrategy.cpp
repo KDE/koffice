@@ -24,7 +24,7 @@
 #include <KoShapeManager.h>
 #include <KoShape.h>
 #include <KoToolBase.h>
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 #include <KoViewConverter.h>
 #include <KoSnapGuide.h>
 

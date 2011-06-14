@@ -84,7 +84,7 @@ public:
 };
 
 KarbonCanvas::KarbonCanvas(KarbonPart *p)
-        : QWidget() , KoCanvasBase(p), d(new KarbonCanvasPrivate())
+        : QWidget() , KCanvasBase(p), d(new KarbonCanvasPrivate())
 {
     d->part = p;
     d->document = &p->document();

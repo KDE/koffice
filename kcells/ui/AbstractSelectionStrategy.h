@@ -24,7 +24,7 @@
 
 #include <Qt>
 
-class KoCanvasBase;
+class KCanvasBase;
 
 class CellToolBase;
 class Selection;
@@ -64,7 +64,7 @@ public:
      * to check
      * \return \c true if there is a size grip; \c false otherwise.
      */
-    static bool hitTestSelectionSizeGrip(KoCanvasBase *canvas, Selection *selection,
+    static bool hitTestSelectionSizeGrip(KCanvasBase *canvas, Selection *selection,
                                          const QPointF &position);
 
     /**
@@ -76,7 +76,7 @@ public:
      * to check
      * \return \c true if there is a size grip; \c false otherwise.
      */
-    static bool hitTestReferenceSizeGrip(KoCanvasBase *canvas, Selection *selection,
+    static bool hitTestReferenceSizeGrip(KCanvasBase *canvas, Selection *selection,
                                          const QPointF &position);
 
 protected:

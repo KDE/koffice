@@ -362,7 +362,7 @@ public:
     QMap<QString, Section*> sections;
     ToolBoxLayout *layout;
     QButtonGroup *buttonGroup;
-    KoCanvasBase *canvas;
+    KCanvasBase *canvas;
     QHash<QToolButton*, QString> visibilityCodes;
     bool floating;
 };
@@ -470,7 +470,7 @@ void KoToolBox::setCurrentLayer(const KoCanvasController *canvas, const KoShapeL
     }
 }
 
-void KoToolBox::setCanvas(KoCanvasBase *canvas)
+void KoToolBox::setCanvas(KCanvasBase *canvas)
 {
     d->canvas = canvas;
 }
@@ -545,7 +545,7 @@ KoToolBoxDocker::KoToolBoxDocker(KoToolBox *toolBox)
     setTitleBarWidget(titleBar);
 }
 
-void KoToolBoxDocker::setCanvas(KoCanvasBase *canvas)
+void KoToolBoxDocker::setCanvas(KCanvasBase *canvas)
 {
     m_toolBox->setCanvas(canvas);
 }

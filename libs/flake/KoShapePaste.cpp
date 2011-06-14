@@ -27,7 +27,7 @@
 #include <KOdfLoadingContext.h>
 #include <KOdfStoreReader.h>
 
-#include "KoCanvasBase.h"
+#include "KCanvasBase.h"
 #include "KoShapeController.h"
 #include "KoShape.h"
 #include "KoShapeLayer.h"
@@ -44,14 +44,14 @@
 class KoShapePaste::Private
 {
 public:
-    Private(KoCanvasBase *cb, KoShapeLayer *l) : canvas(cb), layer(l) {}
+    Private(KCanvasBase *cb, KoShapeLayer *l) : canvas(cb), layer(l) {}
 
-    KoCanvasBase *canvas;
+    KCanvasBase *canvas;
     KoShapeLayer *layer;
     QList<KoShape*> pastedShapes;
 };
 
-KoShapePaste::KoShapePaste(KoCanvasBase *canvas, KoShapeLayer *layer)
+KoShapePaste::KoShapePaste(KCanvasBase *canvas, KoShapeLayer *layer)
         : d(new Private(canvas, layer))
 {
 }

@@ -33,7 +33,7 @@
 #include <kaction.h>
 #include <QString>
 
-class KoCanvasBase;
+class KCanvasBase;
 class KInlineObject;
 
 /**
@@ -43,7 +43,7 @@ class InsertInlineObjectActionBase : public KAction
 {
     Q_OBJECT
 public:
-    InsertInlineObjectActionBase(KoCanvasBase *canvas, const QString &name);
+    InsertInlineObjectActionBase(KCanvasBase *canvas, const QString &name);
     virtual ~InsertInlineObjectActionBase();
 
 private slots:
@@ -52,7 +52,7 @@ private slots:
 protected:
     virtual KInlineObject *createInlineObject() = 0;
 
-    KoCanvasBase *m_canvas;
+    KCanvasBase *m_canvas;
 };
 
 #endif

@@ -23,7 +23,7 @@
 #include "KCSheet.h"
 #include "Util.h"
 
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 #include <KoSelection.h>
 #include <KoShapeManager.h>
 #include <KoToolBase.h>

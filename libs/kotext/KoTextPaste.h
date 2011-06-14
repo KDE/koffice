@@ -25,7 +25,7 @@
 
 class QTextCursor;
 class KoTextShapeData;
-class KoCanvasBase;
+class KCanvasBase;
 
 #include <QSharedPointer>
 namespace Soprano
@@ -41,7 +41,7 @@ public:
      * valid for the lifetime of the object.
      */
     KoTextPaste(KoTextShapeData *shapeData, QTextCursor &cursor,
-                KoCanvasBase *canvas, Soprano::Model *rdfModel);
+                KCanvasBase *canvas, Soprano::Model *rdfModel);
     virtual ~KoTextPaste();
 
 protected:

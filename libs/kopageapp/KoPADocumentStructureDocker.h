@@ -61,7 +61,7 @@ public:
     explicit KoPADocumentStructureDocker(KoDocumentSectionView::DisplayMode mode, KoPageApp::PageType pageType, QWidget* parent = 0);
     virtual ~KoPADocumentStructureDocker();
 
-    virtual void setCanvas(KoCanvasBase* canvas);
+    virtual void setCanvas(KCanvasBase* canvas);
     void setActivePage(KoPAPageBase *page);
     void setMasterMode(bool master);
 

@@ -28,7 +28,7 @@
 
 #include <KoDataCenterBase.h>
 
-class KoCanvasBase;
+class KCanvasBase;
 class KoResourceManager;
 class QTextDocument;
 class KOdfStore;
@@ -69,7 +69,7 @@ public:
      * Note that this method can return either a valid KoDocumentRdf
      * pointer or a NULL pointer if there is no Rdf for the canvas.
      */
-    static KoDocumentRdfBase *fromResourceManager(KoCanvasBase *host);
+    static KoDocumentRdfBase *fromResourceManager(KCanvasBase *host);
     virtual void linkToResourceManager(KoResourceManager *rm);
 
     virtual void updateInlineRdfStatements(QTextDocument *qdoc);

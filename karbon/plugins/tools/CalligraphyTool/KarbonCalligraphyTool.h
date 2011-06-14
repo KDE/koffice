@@ -34,7 +34,7 @@ class KarbonCalligraphyTool : public KoToolBase
 {
     Q_OBJECT
 public:
-    explicit KarbonCalligraphyTool(KoCanvasBase *canvas);
+    explicit KarbonCalligraphyTool(KCanvasBase *canvas);
     ~KarbonCalligraphyTool();
 
     void paint(QPainter &painter, const KoViewConverter &converter);

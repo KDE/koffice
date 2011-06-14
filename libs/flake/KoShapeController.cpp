@@ -27,7 +27,7 @@
 #include "KoSelection.h"
 #include "commands/KoShapeCreateCommand.h"
 #include "commands/KoShapeDeleteCommand.h"
-#include "KoCanvasBase.h"
+#include "KCanvasBase.h"
 #include "KoShapeConfigWidgetBase.h"
 #include "KoShapeFactoryBase.h"
 #include "KoShape.h"
@@ -51,7 +51,7 @@ public:
         delete dummyRm;
     }
 
-    KoCanvasBase *canvas;
+    KCanvasBase *canvas;
     KoShapeControllerBase *shapeController;
     KoResourceManager *dummyRm; // only used when there is no shapeController
 
@@ -66,7 +66,7 @@ public:
     }
 };
 
-KoShapeController::KoShapeController(KoCanvasBase *canvas, KoShapeControllerBase *shapeController)
+KoShapeController::KoShapeController(KCanvasBase *canvas, KoShapeControllerBase *shapeController)
         : d(new Private())
 {
     d->canvas = canvas;

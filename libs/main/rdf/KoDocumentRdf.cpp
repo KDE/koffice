@@ -31,7 +31,7 @@
 #include <KXmlReader.h>
 #include <KXmlWriter.h>
 #include <KOdfStorageDevice.h>
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 #include <KoToolProxy.h>
 #include <KoResourceManager.h>
 #include <KoTextEditor.h>
@@ -86,7 +86,7 @@ Soprano::Model *KoDocumentRdf::model() const
     return d->model;
 }
 
-KoDocumentRdf *KoDocumentRdf::fromResourceManager(KoCanvasBase *host)
+KoDocumentRdf *KoDocumentRdf::fromResourceManager(KCanvasBase *host)
 {
     KoResourceManager *rm = host->resourceManager();
     if (!rm->hasResource(KoText::DocumentRdf)) {
@@ -846,14 +846,14 @@ void KoDocumentRdf::expandStatements(Soprano::Model *model)
     expandStatementsToIncludeOtherPredicates(model);
 }
 
-KAction *KoDocumentRdf::createInsertSemanticObjectReferenceAction(KoCanvasBase *host)
+KAction *KoDocumentRdf::createInsertSemanticObjectReferenceAction(KCanvasBase *host)
 {
     KAction *ret = new InsertSemanticObjectReferenceAction(host, this, i18n("Reference"));
     RDEBUG << "createInsertSemanticObjectReferenceAction";
     return ret;
 }
 
-QList<KAction*> KoDocumentRdf::createInsertSemanticObjectNewActions(KoCanvasBase *host)
+QList<KAction*> KoDocumentRdf::createInsertSemanticObjectNewActions(KCanvasBase *host)
 {
     QList<KAction*> ret;
     foreach (const QString &klass,  KoRdfSemanticItem::classNames()) {
@@ -1457,7 +1457,7 @@ void KoDocumentRdf::setUserStyleSheetList(const QString& className,const QList<K
 
 #define TextTool_ID "TextToolFactory_ID"
 
-KoTextEditor *KoDocumentRdf::ensureTextTool(KoCanvasBase *host)
+KoTextEditor *KoDocumentRdf::ensureTextTool(KCanvasBase *host)
 {
     KoToolManager::instance()->switchToolRequested(TextTool_ID);
     KoTextEditor *ret = qobject_cast<KoTextEditor*>(host->toolProxy()->selection());

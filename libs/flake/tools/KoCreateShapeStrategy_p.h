@@ -38,7 +38,7 @@
 #include <QPointF>
 #include <QPainterPath>
 
-class KoCanvasBase;
+class KCanvasBase;
 class KoCreateShapesTool;
 
 /**

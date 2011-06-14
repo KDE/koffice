@@ -29,7 +29,7 @@ class PictureTool : public KoToolBase
 {
     Q_OBJECT
 public:
-    explicit PictureTool(KoCanvasBase* canvas);
+    explicit PictureTool(KCanvasBase* canvas);
 
     /// reimplemented from KoToolBase
     virtual void paint(QPainter&, const KoViewConverter&) {}

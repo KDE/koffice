@@ -28,7 +28,7 @@
 #include <KoTextEditor.h>
 #include <KoTextAnchor.h>
 #include <KInlineTextObjectManager.h>
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 #include <KoShapeController.h>
 #include <KoShapeContainer.h>
 #include <KoDeleteChangeMarker.h>
@@ -41,7 +41,7 @@
 #include <QtAlgorithms>
 #include <QList>
 
-ShowChangesCommand::ShowChangesCommand(bool showChanges, QTextDocument *document, KoCanvasBase *canvas, QUndoCommand *parent) :
+ShowChangesCommand::ShowChangesCommand(bool showChanges, QTextDocument *document, KCanvasBase *canvas, QUndoCommand *parent) :
     TextCommandBase (parent),
     m_document(document),
     m_first(true),

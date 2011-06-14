@@ -40,7 +40,7 @@
 #include "KoPathToolSelection_p.h"
 
 class QButtonGroup;
-class KoCanvasBase;
+class KCanvasBase;
 class KInteractionStrategy;
 class KoPathToolHandle;
 class PathToolOptionWidget;
@@ -52,7 +52,7 @@ class FLAKE_TEST_EXPORT KoPathTool : public KoToolBase
 {
     Q_OBJECT
 public:
-    explicit KoPathTool(KoCanvasBase *canvas);
+    explicit KoPathTool(KCanvasBase *canvas);
     ~KoPathTool();
 
     /// reimplemented

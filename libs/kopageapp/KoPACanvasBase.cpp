@@ -60,7 +60,7 @@ public:
 };
 
 KoPACanvasBase::KoPACanvasBase(KoPADocument * doc)
-    : KoCanvasBase(doc)
+    : KCanvasBase(doc)
     , d(new Private(doc))
 {
     d->shapeManager = new KoShapeManager(this);

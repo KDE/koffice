@@ -39,7 +39,7 @@
 class KInteractionToolPrivate : public KoToolBasePrivate
 {
 public:
-    KInteractionToolPrivate(KoToolBase *qq, KoCanvasBase *canvas)
+    KInteractionToolPrivate(KoToolBase *qq, KCanvasBase *canvas)
         : KoToolBasePrivate(qq, canvas),
         currentStrategy(0)
     {

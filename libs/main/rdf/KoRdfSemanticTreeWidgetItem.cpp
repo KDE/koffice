@@ -21,7 +21,7 @@
 #include "KoDocumentRdf.h"
 #include "KoDocumentRdf_p.h"
 
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 #include <KoToolProxy.h>
 #include <KoResourceManager.h>
 #include <KoTextEditor.h>
@@ -42,14 +42,14 @@ class RdfSemanticTreeWidgetApplyStylesheet : public RdfSemanticTreeWidgetAction
 
 public:
 
-    RdfSemanticTreeWidgetApplyStylesheet(QWidget *parent, KoCanvasBase *canvas,
+    RdfSemanticTreeWidgetApplyStylesheet(QWidget *parent, KCanvasBase *canvas,
             const QString &name, KoRdfSemanticItem *si, KoSemanticStylesheet *ss = 0);
     virtual ~RdfSemanticTreeWidgetApplyStylesheet();
     virtual void activated();
 };
 
 RdfSemanticTreeWidgetApplyStylesheet::RdfSemanticTreeWidgetApplyStylesheet(QWidget *parent,
-        KoCanvasBase *canvas, const QString &name, KoRdfSemanticItem* si, KoSemanticStylesheet *ss )
+        KCanvasBase *canvas, const QString &name, KoRdfSemanticItem* si, KoSemanticStylesheet *ss )
             : RdfSemanticTreeWidgetAction(parent, canvas, name)
             , si(si)
             , ss(ss)
@@ -86,13 +86,13 @@ KoRdfSemanticTreeWidgetItem::~KoRdfSemanticTreeWidgetItem()
 {
 }
 
-KAction *KoRdfSemanticTreeWidgetItem::createAction(QWidget *parent, KoCanvasBase *host, const QString  &text)
+KAction *KoRdfSemanticTreeWidgetItem::createAction(QWidget *parent, KCanvasBase *host, const QString  &text)
 {
     return new RdfSemanticTreeWidgetAction(parent, host, text);
 }
 
 void KoRdfSemanticTreeWidgetItem::addApplyStylesheetActions(QWidget *parent,
-        QList<KAction *> &actions, KoCanvasBase *host)
+        QList<KAction *> &actions, KCanvasBase *host)
 {
     if (!host) {
         return;
@@ -143,14 +143,14 @@ void KoRdfSemanticTreeWidgetItem::addApplyStylesheetActions(QWidget *parent,
     topMenu->addAction(action);
 }
 
-QList<KAction *> KoRdfSemanticTreeWidgetItem::actions(QWidget *parent, KoCanvasBase *host)
+QList<KAction *> KoRdfSemanticTreeWidgetItem::actions(QWidget *parent, KCanvasBase *host)
 {
     Q_UNUSED(parent);
     Q_UNUSED(host);
     return QList<KAction *>();
 }
 
-void KoRdfSemanticTreeWidgetItem::insert(KoCanvasBase *host)
+void KoRdfSemanticTreeWidgetItem::insert(KCanvasBase *host)
 {
     Q_UNUSED(host);
     kDebug(30015) << "KoRdfSemanticTreeWidgetItem::insert";

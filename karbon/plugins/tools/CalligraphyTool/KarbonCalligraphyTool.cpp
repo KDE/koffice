@@ -26,7 +26,7 @@
 #include <KLineBorder.h>
 #include <KoPointerEvent.h>
 #include <KoPathPoint.h>
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 #include <KoShapeController.h>
 #include <KoShapeManager.h>
 #include <KoSelection.h>
@@ -48,7 +48,7 @@ using std::pow;
 using std::sqrt;
 
 
-KarbonCalligraphyTool::KarbonCalligraphyTool(KoCanvasBase *canvas)
+KarbonCalligraphyTool::KarbonCalligraphyTool(KCanvasBase *canvas)
         : KoToolBase(canvas), m_shape(0), m_angle(0),
         m_selectedPath(0), m_isDrawing(false), m_speed(0, 0), m_lastShape(0)
 {

@@ -28,7 +28,7 @@
 
 #include <QString>
 
-class KoCanvasBase;
+class KCanvasBase;
 class KProperties;
 class KoCreateShapesToolPrivate;
 
@@ -44,7 +44,7 @@ public:
      * Create a new tool; typically not called by applications, only by the KoToolManager
      * @param canvas the canvas this tool works for.
      */
-    explicit KoCreateShapesTool(KoCanvasBase *canvas);
+    explicit KoCreateShapesTool(KCanvasBase *canvas);
     /// destructor
     virtual ~KoCreateShapesTool();
     virtual void mouseReleaseEvent(KoPointerEvent *event);

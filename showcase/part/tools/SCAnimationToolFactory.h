@@ -30,7 +30,7 @@ public:
     SCAnimationToolFactory(QObject *parent);
     ~SCAnimationToolFactory();
 
-    bool canCreateTool(KoCanvasBase *canvas) const;
-    KoToolBase* createTool(KoCanvasBase *canvas);
+    bool canCreateTool(KCanvasBase *canvas) const;
+    KoToolBase* createTool(KCanvasBase *canvas);
 };
 #endif

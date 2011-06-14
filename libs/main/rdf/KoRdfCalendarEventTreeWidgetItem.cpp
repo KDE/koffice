@@ -43,7 +43,7 @@ QString KoRdfCalendarEventTreeWidgetItem::uIObjectName() const
     return i18n("Calendar Event");
 }
 
-QList<KAction *> KoRdfCalendarEventTreeWidgetItem::actions(QWidget *parent, KoCanvasBase* host)
+QList<KAction *> KoRdfCalendarEventTreeWidgetItem::actions(QWidget *parent, KCanvasBase* host)
 {
     QList<KAction *> m_actions;
     KAction* action = 0;
@@ -69,7 +69,7 @@ KoRdfCalendarEvent *KoRdfCalendarEventTreeWidgetItem::semanticObject() const
     return m_semanticObject;
 }
 
-void KoRdfCalendarEventTreeWidgetItem::insert(KoCanvasBase *host)
+void KoRdfCalendarEventTreeWidgetItem::insert(KCanvasBase *host)
 {
     semanticObject()->insert(host);
 }

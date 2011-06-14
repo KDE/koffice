@@ -27,13 +27,13 @@
 
 class RectangleShape;
 class RectangleShapeConfigCommand;
-class KoCanvasBase;
+class KCanvasBase;
 
 class RectangleShapeConfigWidget : public KoShapeConfigWidgetBase
 {
     Q_OBJECT
 public:
-    RectangleShapeConfigWidget(KoCanvasBase *canvas);
+    RectangleShapeConfigWidget(KCanvasBase *canvas);
     /// reimplemented
     virtual void open(KoShape *shape);
     /// reimplemented
@@ -48,7 +48,7 @@ private:
     Ui::RectangleShapeConfigWidget widget;
     RectangleShape *m_rectangle;
 
-    KoCanvasBase *m_canvas;
+    KCanvasBase *m_canvas;
     RectangleShapeConfigCommand *m_command;
     bool m_blocking;
     QTime m_time;

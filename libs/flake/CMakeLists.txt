@@ -12,7 +12,7 @@ add_subdirectory(pics)
 
 set(flake_SRCS
     KoFlake.cpp
-    KoCanvasBase.cpp
+    KCanvasBase.cpp
     KoResourceManager.cpp
     KoCanvasObserverBase.cpp
     KoCanvasSupervisor.cpp
@@ -233,7 +233,7 @@ install(
     commands/KoShapeUngroupCommand.h
     commands/KoSubpathRemoveCommand.h
     flake_export.h
-    KoCanvasBase.h
+    KCanvasBase.h
     KoCanvasController.h
     KoCanvasObserverBase.h
     KoCanvasSupervisor.h

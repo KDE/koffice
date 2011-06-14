@@ -24,7 +24,7 @@
 #include "KoShape.h"
 #include "KoShapeRegistry.h"
 #include "KoShapeManager.h"
-#include "KoCanvasBase.h"
+#include "KCanvasBase.h"
 #include "KoSelection.h"
 #include "KoShapeFactoryBase.h"
 #include "KoShapeController.h"

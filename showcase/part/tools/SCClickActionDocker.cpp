@@ -31,7 +31,7 @@
 
 #include <KoPACanvas.h>
 #include <SCDocument.h>
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 #include <KoSelection.h>
 #include <KoShapeController.h>
 #include <KoShapeManager.h>
@@ -107,7 +107,7 @@ void SCClickActionDocker::selectionChanged()
     }
 }
 
-void SCClickActionDocker::setCanvas(KoCanvasBase *canvas)
+void SCClickActionDocker::setCanvas(KCanvasBase *canvas)
 {
     m_canvas = canvas;
 

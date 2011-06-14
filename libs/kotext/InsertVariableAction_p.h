@@ -33,7 +33,7 @@
 
 #include "InsertInlineObjectActionBase_p.h"
 
-class KoCanvasBase;
+class KCanvasBase;
 class KProperties;
 class KInlineObjectFactoryBase;
 struct KoInlineObjectTemplate;
@@ -41,7 +41,7 @@ struct KoInlineObjectTemplate;
 class InsertVariableAction : public InsertInlineObjectActionBase
 {
 public:
-    InsertVariableAction(KoCanvasBase *base, KInlineObjectFactoryBase *factory, const KoInlineObjectTemplate &templ);
+    InsertVariableAction(KCanvasBase *base, KInlineObjectFactoryBase *factory, const KoInlineObjectTemplate &templ);
 
 private:
     virtual KInlineObject *createInlineObject();

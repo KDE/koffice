@@ -37,7 +37,7 @@ class KWFrame;
 class KWGui;
 class KWCanvas;
 
-class KoCanvasBase;
+class KCanvasBase;
 class KoZoomController;
 class KoRdfSemanticItem;
 class KActionMenu;

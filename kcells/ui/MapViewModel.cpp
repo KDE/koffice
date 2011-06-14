@@ -27,7 +27,7 @@
 
 #include "interfaces/ReadWriteTableModel.h"
 
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 #include <KoShapeManager.h>
 
 #include <KAction>
@@ -39,13 +39,13 @@ class MapViewModel::Private
 {
 public:
     KCSheet* activeSheet;
-    KoCanvasBase *canvas;
+    KCanvasBase *canvas;
     KXMLGUIClient *xmlGuiClient;
     QActionGroup *gotoSheetActionGroup;
 };
 
 
-MapViewModel::MapViewModel(KCMap *map, KoCanvasBase *canvas, KXMLGUIClient *xmlGuiClient)
+MapViewModel::MapViewModel(KCMap *map, KCanvasBase *canvas, KXMLGUIClient *xmlGuiClient)
         : KCMapModel(map)
         , d(new Private)
 {

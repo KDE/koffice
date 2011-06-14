@@ -45,7 +45,7 @@
 
 KWCanvas::KWCanvas(const QString &viewMode, KWDocument *document, KWView *view, KWGui *parent)
         : QWidget(parent),
-        KoCanvasBase(document),
+        KCanvasBase(document),
         m_document(document),
         m_toolProxy(new KoToolProxy(this, this)),
         m_view(view),

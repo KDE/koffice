@@ -49,7 +49,7 @@ public:
     // inherited and reimplemented...
 
     virtual void exportToFile(const QString &fileName = QString()) const;
-    virtual void importFromData(const QByteArray &ba, KoDocumentRdf *rdf = 0, KoCanvasBase *host = 0);
+    virtual void importFromData(const QByteArray &ba, KoDocumentRdf *rdf = 0, KCanvasBase *host = 0);
     virtual QWidget *createEditor(QWidget *parent);
     virtual void updateFromEditorData();
     virtual KoRdfSemanticTreeWidgetItem *createQTreeWidgetItem(QTreeWidgetItem *parent = 0);

@@ -25,7 +25,7 @@
 #include "Selection.h"
 #include "KCSheet.h"
 
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 #include <KoSelection.h>
 #include <KoShapeManager.h>
 
@@ -91,7 +91,7 @@ void AbstractSelectionStrategy::finishInteraction(Qt::KeyboardModifiers modifier
 }
 
 // static
-bool AbstractSelectionStrategy::hitTestSelectionSizeGrip(KoCanvasBase *canvas,
+bool AbstractSelectionStrategy::hitTestSelectionSizeGrip(KCanvasBase *canvas,
         Selection *selection,
         const QPointF &position)
 {
@@ -126,7 +126,7 @@ bool AbstractSelectionStrategy::hitTestSelectionSizeGrip(KoCanvasBase *canvas,
 }
 
 // static
-bool AbstractSelectionStrategy::hitTestReferenceSizeGrip(KoCanvasBase *canvas,
+bool AbstractSelectionStrategy::hitTestReferenceSizeGrip(KCanvasBase *canvas,
         Selection *selection,
         const QPointF &position)
 {

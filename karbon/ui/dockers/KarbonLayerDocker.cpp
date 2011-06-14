@@ -30,7 +30,7 @@
 #include <KoShapeBorderBase.h>
 #include <KoShapeContainer.h>
 #include <KoToolManager.h>
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 #include <KoCanvasController.h>
 #include <KoShapeControllerBase.h>
 #include <KoSelection.h>
@@ -324,7 +324,7 @@ void KarbonLayerDocker::raiseItem()
     // separate selected layers and selected shapes
     extractSelectedLayersAndShapes(selectedLayers, selectedShapes, true);
 
-    KoCanvasBase* canvas = KoToolManager::instance()->activeCanvasController()->canvas();
+    KCanvasBase* canvas = KoToolManager::instance()->activeCanvasController()->canvas();
 
     QUndoCommand *cmd = 0;
 
@@ -358,7 +358,7 @@ void KarbonLayerDocker::lowerItem()
     // separate selected layers and selected shapes
     extractSelectedLayersAndShapes(selectedLayers, selectedShapes, true);
 
-    KoCanvasBase* canvas = KoToolManager::instance()->activeCanvasController()->canvas();
+    KCanvasBase* canvas = KoToolManager::instance()->activeCanvasController()->canvas();
 
     QUndoCommand *cmd = 0;
 

@@ -23,7 +23,7 @@
 #include <KarbonCanvas.h>
 #include <KoZoomAction.h>
 #include <KoCanvasController.h>
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 #include <KoZoomHandler.h>
 #include <KoResourceManager.h>
 #include <KoShapeManager.h>

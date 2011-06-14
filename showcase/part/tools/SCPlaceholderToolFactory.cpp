@@ -36,7 +36,7 @@ SCPlaceholderToolFactory::~SCPlaceholderToolFactory()
 {
 }
 
-KoToolBase * SCPlaceholderToolFactory::createTool(KoCanvasBase *canvas)
+KoToolBase * SCPlaceholderToolFactory::createTool(KCanvasBase *canvas)
 {
     return new SCPlaceholderTool(canvas);
 }

@@ -21,7 +21,7 @@
 
 #include <QAction>
 
-KoCutController::KoCutController(KoCanvasBase *canvas, QAction *cutAction)
+KoCutController::KoCutController(KCanvasBase *canvas, QAction *cutAction)
     : KoCopyController(canvas, cutAction)
 {
     disconnect(cutAction, SIGNAL(triggered()), this, SLOT(copy())); // countering the super

@@ -20,10 +20,10 @@
 #include "RdfSemanticTreeWidgetAction.h"
 #include <KoTextEditor.h>
 #include <KoToolProxy.h>
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 
 RdfSemanticTreeWidgetAction::RdfSemanticTreeWidgetAction(QWidget *parent,
-        KoCanvasBase *canvas, const QString &name)
+        KCanvasBase *canvas, const QString &name)
         : KAction(name, parent)
         , m_canvas(canvas)
 {

@@ -21,7 +21,7 @@
 #include "KInlineObjectFactoryBase.h"
 #include "InsertVariableAction_p.h"
 
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 #include <KInlineObject.h>
 #include <KXmlReader.h>
 #include <KoPluginLoader.h>
@@ -71,7 +71,7 @@ KInlineObjectRegistry* KInlineObjectRegistry::instance()
     return s_instance;
 }
 
-QList<QAction*> KInlineObjectRegistry::createInsertVariableActions(KoCanvasBase *host) const
+QList<QAction*> KInlineObjectRegistry::createInsertVariableActions(KCanvasBase *host) const
 {
     QList<QAction*> answer;
     foreach (const QString &key, keys()) {

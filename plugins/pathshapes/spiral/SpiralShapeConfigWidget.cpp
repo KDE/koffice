@@ -22,9 +22,9 @@
 #include "SpiralShapeConfigCommand.h"
 #include <klocale.h>
 
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 
-SpiralShapeConfigWidget::SpiralShapeConfigWidget(KoCanvasBase *canvas)
+SpiralShapeConfigWidget::SpiralShapeConfigWidget(KCanvasBase *canvas)
     : m_canvas(canvas),
     m_blocking(false)
 {

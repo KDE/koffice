@@ -49,11 +49,11 @@ class KoSnapGuide;
 class KGuidesData;
 
 /**
- * KoCanvasBase is the interface actual application canvas classes
+ * KCanvasBase is the interface actual application canvas classes
  * should implement. Flake tools know about the canvas, so they can
  * do things like scroll, redraw, set a cursor etc.
  */
-class FLAKE_EXPORT KoCanvasBase
+class FLAKE_EXPORT KCanvasBase
 {
 
 public:
@@ -63,8 +63,8 @@ public:
      * @param shapeControllerBase the implementation of the shapeController that the
      *   application provides to allow shapes to be added in multiple views.
      */
-    explicit KoCanvasBase(KoShapeControllerBase *shapeControllerBase);
-    virtual ~KoCanvasBase();
+    explicit KCanvasBase(KoShapeControllerBase *shapeControllerBase);
+    virtual ~KCanvasBase();
 
 public:
 
@@ -243,7 +243,7 @@ public:
 
 private:
     // we need a KoShapeControllerBase so that it can work
-    KoCanvasBase();
+    KCanvasBase();
 
     class Private;
     Private * const d;

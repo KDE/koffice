@@ -43,12 +43,12 @@
 class QWidget;
 class KAction;
 class KoToolBase;
-class KoCanvasBase;
+class KCanvasBase;
 
 class KoToolBasePrivate
 {
 public:
-    KoToolBasePrivate(KoToolBase *qq, KoCanvasBase *canvas_)
+    KoToolBasePrivate(KoToolBase *qq, KCanvasBase *canvas_)
         : currentCursor(Qt::ArrowCursor),
         q(qq),
         canvas(canvas_),
@@ -74,7 +74,7 @@ public:
     QList<QAction*> popupActionList;
     QSet<KAction*> readOnlyActions;
     KoToolBase *q;
-    KoCanvasBase *canvas; ///< the canvas interface this tool will work for.
+    KCanvasBase *canvas; ///< the canvas interface this tool will work for.
     bool readWrite;
     bool isInTextMode;
     bool createdOptionWidgets;

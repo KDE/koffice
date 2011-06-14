@@ -33,7 +33,7 @@
 class QPaintEvent;
 
 class KoViewConverter;
-class KoCanvasBase;
+class KCanvasBase;
 class KoRulerPrivate;
 
 /**
@@ -211,7 +211,7 @@ public slots:
      * the guide tool to draw and position the guide line.
      * @param canvas the canvas that has had the KoToolManager create the tool for previously.
      */
-    void createGuideToolConnection(KoCanvasBase *canvas);
+    void createGuideToolConnection(KCanvasBase *canvas);
 
 signals:
     /**

@@ -48,7 +48,7 @@ public:
     /// reimplemented
     void paint(QPainter &painter, const KoViewConverter &converter);
     /// reimplemented to be empty (this shape is fully printing)
-    void paintDecorations(QPainter &painter, const KoViewConverter &converter, const KoCanvasBase *canvas);
+    void paintDecorations(QPainter &painter, const KoViewConverter &converter, const KCanvasBase *canvas);
     /// reimplemented
     virtual void saveOdf(KoShapeSavingContext & context) const;
     /// reimplemented

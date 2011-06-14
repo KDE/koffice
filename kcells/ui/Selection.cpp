@@ -23,7 +23,7 @@
 
 #include <kdebug.h>
 
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 
 #include "KCCell.h"
 #include "KCCellStorage.h"
@@ -99,7 +99,7 @@ public:
     int activeSubRegionStart; // the start of a referenced sub-region
     int activeSubRegionLength; // the length of a referenced sub-region
 
-    KoCanvasBase* canvasBase;
+    KCanvasBase* canvasBase;
     bool referenceMode : 1;
     KCRegion formerSelection; // for reference selection mode
     KCRegion oldSelection; // for select all
@@ -109,7 +109,7 @@ public:
   class Selection
 ****************************************************************************/
 
-Selection::Selection(KoCanvasBase* canvasBase)
+Selection::Selection(KCanvasBase* canvasBase)
         : KoToolSelection(0)
         , KCRegion(1, 1)
         , d(new Private())
@@ -135,7 +135,7 @@ Selection::~Selection()
     delete d;
 }
 
-KoCanvasBase* Selection::canvas() const
+KCanvasBase* Selection::canvas() const
 {
     return d->canvasBase;
 }

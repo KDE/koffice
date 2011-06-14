@@ -21,7 +21,7 @@
 
 #include <QPainter>
 
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 #include <KoCanvasController.h>
 #include <KoShape.h>
 #include <KoShapeManager.h>
@@ -30,11 +30,11 @@
 class RightToLeftPaintingStrategy::Private
 {
 public:
-    KoCanvasBase *canvas;
+    KCanvasBase *canvas;
 };
 
 
-RightToLeftPaintingStrategy::RightToLeftPaintingStrategy(KoShapeManager *shapeManager, KoCanvasBase *canvas)
+RightToLeftPaintingStrategy::RightToLeftPaintingStrategy(KoShapeManager *shapeManager, KCanvasBase *canvas)
         : KoShapeManagerPaintingStrategy(shapeManager)
         , d(new Private)
 {

@@ -26,7 +26,7 @@ class SCPlaceholderTool : public KoToolBase
 {
     Q_OBJECT
 public:
-    SCPlaceholderTool(KoCanvasBase *canvas);
+    SCPlaceholderTool(KCanvasBase *canvas);
     virtual ~SCPlaceholderTool();
 
     virtual void paint(QPainter &painter, const KoViewConverter &converter);

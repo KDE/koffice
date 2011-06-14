@@ -23,7 +23,7 @@
 #include "DefaultToolTransformWidget.h"
 
 #include <KInteractionTool.h>
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 #include <KoResourceManager.h>
 #include <KoShapeManager.h>
 #include <KoSelection.h>

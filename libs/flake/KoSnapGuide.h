@@ -32,9 +32,9 @@ class KoSnapStrategy;
 class KoShape;
 class KoPathPoint;
 class KoViewConverter;
-class KoCanvasBase;
+class KCanvasBase;
 class QPainter;
-class KoCanvasBase;
+class KCanvasBase;
 
 /**
  * This class is the place where all the snapping (i.e. snap to grid) is handled.
@@ -48,7 +48,7 @@ class KoCanvasBase;
  * strategies enabled at the same time. The best result (with the nearest distance to the
  * original position) is then returned to the caller of KoSnapGuide::snap.
  *
- * The snap guide is part of the KoCanvasBase class and thus can be accessed by any tool
+ * The snap guide is part of the KCanvasBase class and thus can be accessed by any tool
  * or application via the canvas pointer.
  * For letting the user manage which snap stratgies to enable, there is a snap guide config
  * widget in guiutils.
@@ -72,7 +72,7 @@ public:
     Q_DECLARE_FLAGS(Strategies, Strategy)
 
     /// Creates the snap guide to work on the given canvas
-    KoSnapGuide(KoCanvasBase *canvas);
+    KoSnapGuide(KCanvasBase *canvas);
 
     virtual ~KoSnapGuide();
 
@@ -118,7 +118,7 @@ public:
     int snapDistance() const;
 
     /// returns the canvas the snap guide is working on
-    KoCanvasBase *canvas() const;
+    KCanvasBase *canvas() const;
 
     /// Sets a list of path points to ignore
     void setIgnoredPathPoints(const QList<KoPathPoint*> &ignoredPoints);

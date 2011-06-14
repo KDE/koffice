@@ -44,7 +44,7 @@
 #include "commands/ChangeTrackedDeleteCommand.h"
 #include "commands/DeleteCommand.h"
 
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 #include <KoShapeController.h>
 #include <KoColor.h>
 #include <KoSelection.h>
@@ -98,7 +98,7 @@ static bool hit(const QKeySequence &input, KStandardShortcut::StandardShortcut s
     return false;
 }
 
-TextTool::TextTool(KoCanvasBase *canvas)
+TextTool::TextTool(KCanvasBase *canvas)
         : KoToolBase(canvas),
         m_textShape(0),
         m_textShapeData(0),

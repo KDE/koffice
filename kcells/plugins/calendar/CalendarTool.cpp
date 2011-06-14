@@ -26,7 +26,7 @@
 #include <part/KCDoc.h>
 #include <KCValue.h>
 
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 
 #include <KCalendarSystem>
 #include <KMessageBox>
@@ -37,7 +37,7 @@ public:
 };
 
 
-CalendarTool::CalendarTool(KoCanvasBase* canvas)
+CalendarTool::CalendarTool(KCanvasBase* canvas)
         : KCCellTool(canvas)
         , d(new Private)
 {

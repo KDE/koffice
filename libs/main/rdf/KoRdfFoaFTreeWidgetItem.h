@@ -24,7 +24,7 @@
 #include "KoRdfFoaF.h"
 #include "KoRdfSemanticTreeWidgetItem.h"
 
-class KoCanvasBase;
+class KCanvasBase;
 
 /**
  * @short Display Contact/FOAF semantic data with a context menu tailored
@@ -43,8 +43,8 @@ public:
     // inherited and reimplemented...
 
     KoRdfFoaF *foaf() const;
-    virtual QList<KAction *> actions(QWidget *parent, KoCanvasBase *host = 0);
-    virtual void insert(KoCanvasBase *host);
+    virtual QList<KAction *> actions(QWidget *parent, KCanvasBase *host = 0);
+    virtual void insert(KCanvasBase *host);
 
 public slots:
     void importSelectedSemanticViewContact();

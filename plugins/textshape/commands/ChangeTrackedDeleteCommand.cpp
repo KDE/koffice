@@ -34,7 +34,7 @@
 #include <KAction>
 #include <KoTextAnchor.h>
 #include <KoDeleteChangeMarker.h>
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 #include <KoShapeController.h>
 #include <KoList.h>
 #include <KParagraphStyle.h>

@@ -37,7 +37,7 @@
 #include "KoCreatePathTool_p_p.h"
 
 
-KoCreatePathTool::KoCreatePathTool(KoCanvasBase *canvas)
+KoCreatePathTool::KoCreatePathTool(KCanvasBase *canvas)
         : KoToolBase(*(new KoCreatePathToolPrivate(this, canvas)))
 {
 }

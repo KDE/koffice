@@ -38,12 +38,12 @@ KoPABackgroundToolFactory::~KoPABackgroundToolFactory()
 {
 }
 
-KoToolBase * KoPABackgroundToolFactory::createTool(KoCanvasBase *canvas)
+KoToolBase * KoPABackgroundToolFactory::createTool(KCanvasBase *canvas)
 {
     return new KoPABackgroundTool(canvas);
 }
 
-bool KoPABackgroundToolFactory::canCreateTool(KoCanvasBase *canvas) const
+bool KoPABackgroundToolFactory::canCreateTool(KCanvasBase *canvas) const
 {
     KoPACanvas *paCanvas = dynamic_cast<KoPACanvas *>(canvas);
     return paCanvas != 0; // we only work in KoPACanvas

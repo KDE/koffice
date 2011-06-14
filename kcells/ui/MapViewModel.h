@@ -22,7 +22,7 @@
 
 #include "KCMapModel.h"
 
-class KoCanvasBase;
+class KCanvasBase;
 class KoShape;
 
 class KXMLGUIClient;
@@ -37,7 +37,7 @@ class MapViewModel : public KCMapModel
 {
     Q_OBJECT
 public:
-    MapViewModel(KCMap *map, KoCanvasBase *canvas, KXMLGUIClient *xmlGuiClient);
+    MapViewModel(KCMap *map, KCanvasBase *canvas, KXMLGUIClient *xmlGuiClient);
     virtual ~MapViewModel();
 
     // QAbstractItemModel interface

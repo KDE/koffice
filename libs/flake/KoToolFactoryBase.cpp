@@ -125,7 +125,7 @@ bool KoToolFactoryBase::inputDeviceAgnostic() const
     return d->inputDeviceAgnostic;
 }
 
-bool KoToolFactoryBase::canCreateTool(KoCanvasBase *) const
+bool KoToolFactoryBase::canCreateTool(KCanvasBase *) const
 {
     return true;
 }

@@ -44,7 +44,7 @@ struct Finalizer {
 #include "Layout.h"
 //#include "TextLayerShape.h"
 
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 #include <KoResourceManager.h>
 #include <KoChangeTracker.h>
 #include <KInlineTextObjectManager.h>
@@ -212,7 +212,7 @@ void TextShape::shapeChanged(ChangeType type, KoShape *shape)
     }
 }
 
-void TextShape::paintDecorations(QPainter &painter, const KoViewConverter &converter, const KoCanvasBase *canvas)
+void TextShape::paintDecorations(QPainter &painter, const KoViewConverter &converter, const KCanvasBase *canvas)
 {
     bool showTextFrames = canvas->resourceManager()->boolResource(KoText::ShowTextFrames);
 

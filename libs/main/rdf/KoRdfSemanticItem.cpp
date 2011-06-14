@@ -25,7 +25,7 @@
 #include <KoTextInlineRdf.h>
 #include <KoTextRdfCore.h>
 #include <KoTextEditor.h>
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 #include <KoToolProxy.h>
 #include <KoBookmark.h>
 #include <KoTextMeta.h>
@@ -196,7 +196,7 @@ void KoRdfSemanticItem::setRdfType(const QString &t)
     m->addStatement(linkingSubject(), pred, Node::createResourceNode(t), context());
 }
 
-void KoRdfSemanticItem::importFromDataComplete(const QByteArray &ba, KoDocumentRdf *rdf, KoCanvasBase *host)
+void KoRdfSemanticItem::importFromDataComplete(const QByteArray &ba, KoDocumentRdf *rdf, KCanvasBase *host)
 {
     Q_UNUSED(ba);
 
@@ -240,7 +240,7 @@ void KoRdfSemanticItem::exportToMime(QMimeData *md) const
     Q_UNUSED(md);
 }
 
-void KoRdfSemanticItem::insert(KoCanvasBase *host)
+void KoRdfSemanticItem::insert(KCanvasBase *host)
 {
     kDebug(30015) << "insert...";
     KoTextEditor *editor = KoDocumentRdf::ensureTextTool(host);

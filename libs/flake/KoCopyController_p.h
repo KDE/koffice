@@ -34,13 +34,13 @@
 
 #include "KoCopyController.h"
 
-class KoCanvasBase;
+class KCanvasBase;
 class QAction;
 
 class KoCopyControllerPrivate
 {
 public:
-    KoCopyControllerPrivate(KoCopyController *p, KoCanvasBase *c, QAction *a);
+    KoCopyControllerPrivate(KoCopyController *p, KCanvasBase *c, QAction *a);
 
     // request to start the actual copy
     void copy();
@@ -48,7 +48,7 @@ public:
     void selectionChanged(bool hasSelection);
 
     KoCopyController *parent;
-    KoCanvasBase *canvas;
+    KCanvasBase *canvas;
     QAction *action;
     bool appHasSelection;
 };

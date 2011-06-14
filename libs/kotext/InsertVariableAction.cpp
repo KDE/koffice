@@ -22,13 +22,13 @@
 #include "KoVariable.h"
 #include "KInlineObjectFactoryBase.h"
 
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 #include <kpagedialog.h>
 
 #include <KLocale>
 #include <QLayout>
 
-InsertVariableAction::InsertVariableAction(KoCanvasBase *base, KInlineObjectFactoryBase *factory, const KoInlineObjectTemplate &templ)
+InsertVariableAction::InsertVariableAction(KCanvasBase *base, KInlineObjectFactoryBase *factory, const KoInlineObjectTemplate &templ)
         : InsertInlineObjectActionBase(base, templ.name)
         , m_factory(factory)
         , m_templateId(templ.id)

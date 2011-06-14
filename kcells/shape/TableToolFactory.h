@@ -31,7 +31,7 @@ public:
     explicit TableToolFactory(QObject* parent);
     ~TableToolFactory();
 
-    KoToolBase* createTool(KoCanvasBase* canvas);
+    KoToolBase* createTool(KCanvasBase* canvas);
 };
 
 #endif // KSPREAD_TABLE_TOOL_FACTORY

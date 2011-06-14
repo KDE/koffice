@@ -29,13 +29,13 @@
 #include <KFileDialog>
 #include <KIO/Job>
 
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 #include <KImageCollection.h>
 #include <KoSelection.h>
 #include <KoShapeManager.h>
 #include <KoPointerEvent.h>
 
-PictureTool::PictureTool( KoCanvasBase* canvas )
+PictureTool::PictureTool( KCanvasBase* canvas )
     : KoToolBase( canvas ),
       m_pictureshape(0)
 {

@@ -25,7 +25,7 @@
 #include "KoSelection.h"
 #include "KoToolManager.h"
 #include "KoPointerEvent.h"
-#include "KoCanvasBase.h"
+#include "KCanvasBase.h"
 #include "KoShapeContainer.h"
 #include "KoShapeBorderBase.h"
 #include "KoToolProxy.h"
@@ -45,7 +45,7 @@
 #include <QtCore/qmath.h>
 #include <kdebug.h>
 
-KoShapeManagerPrivate::KoShapeManagerPrivate(KoShapeManager *shapeManager, KoCanvasBase *c)
+KoShapeManagerPrivate::KoShapeManagerPrivate(KoShapeManager *shapeManager, KCanvasBase *c)
     : selection(new KoSelection(shapeManager)),
     canvas(c),
     tree(4, 2),
@@ -136,7 +136,7 @@ void KoShapeManagerPrivate::update(const QRectF &rect, const KoShape *shape, boo
 }
 
 
-KoShapeManager::KoShapeManager(KoCanvasBase *canvas, const QList<KoShape *> &shapes, QObject *parent)
+KoShapeManager::KoShapeManager(KCanvasBase *canvas, const QList<KoShape *> &shapes, QObject *parent)
         : QObject(parent),
         d(new KoShapeManagerPrivate(this, canvas))
 {
@@ -145,7 +145,7 @@ KoShapeManager::KoShapeManager(KoCanvasBase *canvas, const QList<KoShape *> &sha
     setShapes(shapes);
 }
 
-KoShapeManager::KoShapeManager(KoCanvasBase *canvas, QObject *parent)
+KoShapeManager::KoShapeManager(KCanvasBase *canvas, QObject *parent)
         : QObject(parent),
         d(new KoShapeManagerPrivate(this, canvas))
 {

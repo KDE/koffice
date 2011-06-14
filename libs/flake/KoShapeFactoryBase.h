@@ -37,7 +37,7 @@ class KoShapeConfigWidgetBase;
 class KoShapeLoadingContext;
 class KoDataCenterBase;
 class KoResourceManager;
-class KoCanvasBase;
+class KCanvasBase;
 
 #define SHAPETEMPLATE_MIMETYPE "application/x-flake-shapetemplate"
 #define SHAPEID_MIMETYPE "application/x-flake-shapeId"
@@ -101,7 +101,7 @@ public:
     KoShapeFactoryBase(QObject *parent, const QString &id, const QString &name);
     virtual ~KoShapeFactoryBase();
 
-    virtual KoShapeConfigWidgetBase *createConfigWidget(KoCanvasBase *canvas) {
+    virtual KoShapeConfigWidgetBase *createConfigWidget(KCanvasBase *canvas) {
         Q_UNUSED(canvas);
         return 0;
     }

@@ -105,7 +105,7 @@ void KWCopyShape::paint(QPainter &painter, const KoViewConverter &converter)
     }
 }
 
-void KWCopyShape::paintDecorations(QPainter &painter, const KoViewConverter &converter, const KoCanvasBase *canvas)
+void KWCopyShape::paintDecorations(QPainter &painter, const KoViewConverter &converter, const KCanvasBase *canvas)
 {
     if (m_original)
         m_original->paintDecorations(painter, converter, canvas);

@@ -24,7 +24,7 @@
 #include "InsertGuidesToolOptionWidget.h"
 
 #include <KoPointerEvent.h>
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 #include <KoCanvasController.h>
 #include <KoResourceManager.h>
 #include <KoViewConverter.h>
@@ -35,7 +35,7 @@
 
 #include <QtGui/QPainter>
 
-GuidesTool::GuidesTool(KoCanvasBase *canvas)
+GuidesTool::GuidesTool(KCanvasBase *canvas)
     : KoToolBase(canvas),
     m_orientation(Qt::Horizontal),
     m_index(-1),

@@ -31,7 +31,7 @@ class KarbonPencilTool : public KoToolBase
 {
     Q_OBJECT
 public:
-    explicit KarbonPencilTool(KoCanvasBase *canvas);
+    explicit KarbonPencilTool(KCanvasBase *canvas);
     ~KarbonPencilTool();
 
     void paint(QPainter &painter, const KoViewConverter &converter);

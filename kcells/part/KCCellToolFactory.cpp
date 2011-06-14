@@ -38,7 +38,7 @@ KCCellToolFactory::~KCCellToolFactory()
 {
 }
 
-KoToolBase* KCCellToolFactory::createTool(KoCanvasBase* canvas)
+KoToolBase* KCCellToolFactory::createTool(KCanvasBase* canvas)
 {
     return new KCCellTool(canvas);
 }

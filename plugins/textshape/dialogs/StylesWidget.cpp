@@ -25,7 +25,7 @@
 #include <KoStyleManager.h>
 #include <KoCharacterStyle.h>
 #include <KParagraphStyle.h>
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 
 #include <KDebug>
 #include <KInputDialog>

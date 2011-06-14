@@ -44,7 +44,7 @@ public:
         setPriority(5);
     }
     ~MyToolFactory() {}
-    KoToolBase *createTool(KoCanvasBase *canvas);
+    KoToolBase *createTool(KCanvasBase *canvas);
 };
 K_PLUGIN_FACTORY(MyToolFactoryFactory, registerPlugin<MyToolFactory>();)
 K_EXPORT_PLUGIN(MyToolFactoryFactory("MyTool"))
@@ -72,7 +72,7 @@ public:
      * @return a new KoToolBase instance, or zero if the tool doesn't want to show up.
      * @see canCreateTool()
      */
-    virtual KoToolBase *createTool(KoCanvasBase *canvas) = 0;
+    virtual KoToolBase *createTool(KCanvasBase *canvas) = 0;
 
     /**
      * Returns true if this factory will create a tool instance when called with the same canvas in createTool()
@@ -80,7 +80,7 @@ public:
      * @param canvas the canvas that the new tool will work on. Should be passed
      *    to the constructor of the tool.
      */
-    virtual bool canCreateTool(KoCanvasBase *canvas) const;
+    virtual bool canCreateTool(KCanvasBase *canvas) const;
 
     /**
      * return the id for the tool this factory creates.

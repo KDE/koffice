@@ -31,7 +31,7 @@
 
 class QToolButton;
 class KoCanvasController;
-class KoCanvasBase;
+class KCanvasBase;
 class KoShapeLayer;
 
 /**
@@ -90,7 +90,7 @@ public slots:
     void setButtonsVisible(const KoCanvasController *canvas, const QList<QString> &codes);
 
     /// set the canvas this docker should listen to for changes.
-    void setCanvas(KoCanvasBase *canvas);
+    void setCanvas(KCanvasBase *canvas);
 
     /// Set the orientation of the layout to @p orientation
     void setOrientation(Qt::Orientation orientation);
@@ -117,7 +117,7 @@ public:
     KoToolBoxDocker(KoToolBox *toolBox);
 
     /// reimplemented from KoCanvasObserverBase
-    virtual void setCanvas(KoCanvasBase *canvas);
+    virtual void setCanvas(KCanvasBase *canvas);
 
 protected slots:
     void updateToolBoxOrientation(Qt::DockWidgetArea area);

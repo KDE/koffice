@@ -36,7 +36,7 @@
 #include <knuminput.h>
 
 // KOffice
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 #include <KUnit.h>
 #include <KoUnitDoubleSpinBox.h>
 

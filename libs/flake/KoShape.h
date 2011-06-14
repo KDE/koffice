@@ -47,7 +47,7 @@ class KoShapeUserData;
 class KoViewConverter;
 class KoShapeApplicationData;
 class KoShapeSavingContext;
-class KoCanvasBase;
+class KCanvasBase;
 class KoShapeLoadingContext;
 class KOdfGenericStyle;
 class KoShapeControllerBase;
@@ -167,7 +167,7 @@ public:
      * @param canvas the canvas that requested this paint.  This can be used to retrieve canvas specific properties
      *      like selection and get a reference to the KoResourceManager.
      */
-    virtual void paintDecorations(QPainter &painter, const KoViewConverter &converter, const KoCanvasBase *canvas);
+    virtual void paintDecorations(QPainter &painter, const KoViewConverter &converter, const KCanvasBase *canvas);
 
     /**
      * Load a shape from odf

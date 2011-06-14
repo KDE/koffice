@@ -34,7 +34,7 @@
 class KoSnapGuide;
 class KoShape;
 class KoPathSegment;
-class KoCanvasBase;
+class KCanvasBase;
 
 #include <QtCore/QList>
 #include <QtCore/QPointF>
@@ -64,7 +64,7 @@ public:
     QList<KoShape*> shapes(bool omitEditedShape = false);
 
     /// returns canvas we are working on
-    KoCanvasBase *canvas();
+    KCanvasBase *canvas();
 
 private:
     KoSnapGuide *m_snapGuide;

@@ -28,7 +28,7 @@
 #include "KoCanvasController_p.h"
 #include "KoShape.h"
 #include "KoViewConverter.h"
-#include "KoCanvasBase.h"
+#include "KCanvasBase.h"
 #include "KoCanvasObserverBase.h"
 #include "KoCanvasSupervisor.h"
 #include "KoToolManager_p.h"
@@ -220,7 +220,7 @@ void KoCanvasController::resizeEvent(QResizeEvent *resizeEvent)
     d->setDocumentOffset();
 }
 
-void KoCanvasController::setCanvas(KoCanvasBase *canvas)
+void KoCanvasController::setCanvas(KCanvasBase *canvas)
 {
     Q_ASSERT(canvas); // param is not null
     if (d->canvas) {
@@ -239,7 +239,7 @@ void KoCanvasController::setCanvas(KoCanvasBase *canvas)
     QTimer::singleShot(0, this, SLOT(activate()));
 }
 
-KoCanvasBase* KoCanvasController::canvas() const
+KCanvasBase* KoCanvasController::canvas() const
 {
     return d->canvas;
 }

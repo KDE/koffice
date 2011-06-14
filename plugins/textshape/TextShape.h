@@ -51,7 +51,7 @@ public:
     /// reimplemented
     void paintComponent(QPainter &painter, const KoViewConverter &converter);
     /// reimplemented
-    void paintDecorations(QPainter &painter, const KoViewConverter &converter, const KoCanvasBase *canvas);
+    void paintDecorations(QPainter &painter, const KoViewConverter &converter, const KCanvasBase *canvas);
     /// reimplemented
     virtual void waitUntilReady(const KoViewConverter &converter, bool asynchronous) const;
 

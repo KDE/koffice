@@ -40,7 +40,7 @@
 #include "KoPAMasterPageDocker.h"
 #include "KoPABackgroundToolWidget.h"
 
-KoPABackgroundTool::KoPABackgroundTool(KoCanvasBase *canvas)
+KoPABackgroundTool::KoPABackgroundTool(KCanvasBase *canvas)
 : KoToolBase(canvas)
 {
     m_view = static_cast<KoPACanvasBase *>(canvas)->koPAView();

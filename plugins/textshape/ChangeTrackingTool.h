@@ -22,7 +22,7 @@
 
 #include <KoToolBase.h>
 
-class KoCanvasBase;
+class KCanvasBase;
 class KoPointerEvent;
 class KoTextEditor;
 class KoTextShapeData;
@@ -43,7 +43,7 @@ class ChangeTrackingTool : public KoToolBase
 {
     Q_OBJECT
 public:
-    ChangeTrackingTool(KoCanvasBase *canvas);
+    ChangeTrackingTool(KCanvasBase *canvas);
 
     ~ChangeTrackingTool();
 
@@ -73,7 +73,7 @@ private:
     bool m_disableShowChangesOnExit;
     KoTextEditor *m_textEditor;
     KoTextShapeData *m_textShapeData;
-    KoCanvasBase *m_canvas;
+    KCanvasBase *m_canvas;
     TextShape *m_textShape;
     TrackedChangeModel *m_model;
     TrackedChangeManager *m_trackedChangeManager;

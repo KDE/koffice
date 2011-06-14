@@ -20,7 +20,7 @@
 #include "KoDocumentRdfBase.h"
 #include "../KoDocument.h"
 #include <KoResourceManager.h>
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 #include <KoText.h>
 #include <KXmlWriter.h>
 #include <KOdfStorageDevice.h>
@@ -38,7 +38,7 @@ Soprano::Model *KoDocumentRdfBase::model() const
     return 0;
 }
 
-KoDocumentRdfBase *KoDocumentRdfBase::fromResourceManager(KoCanvasBase *host)
+KoDocumentRdfBase *KoDocumentRdfBase::fromResourceManager(KCanvasBase *host)
 {
     KoResourceManager *rm = host->resourceManager();
     if (!rm->hasResource(KoText::DocumentRdf)) {

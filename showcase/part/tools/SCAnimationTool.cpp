@@ -32,7 +32,7 @@
 #include "SCPageEffectDocker.h"
 #include "SCClickActionDocker.h"
 
-SCAnimationTool::SCAnimationTool(KoCanvasBase *canvas)
+SCAnimationTool::SCAnimationTool(KCanvasBase *canvas)
     : KoToolBase(canvas)
 {
 }

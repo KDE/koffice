@@ -26,7 +26,7 @@
 #include <KDebug>
 
 #include <KoZoomHandler.h>
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 #include <KoCanvasController.h>
 
 class KoZoomController::Private

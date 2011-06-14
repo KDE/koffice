@@ -43,7 +43,7 @@ class KInteractionToolPrivate;
     class MyTool : public KInteractionTool
     {
     public:
-        MyTool::MyTool(KoCanvasBase *canvas) : KInteractionTool(canvas) { }
+        MyTool::MyTool(KCanvasBase *canvas) : KInteractionTool(canvas) { }
 
         KInteractionStrategy *MyTool::createStrategy(KoPointerEvent *event) {
             return new MyStrategy(this, m_canvas, event->point);
@@ -61,7 +61,7 @@ public:
      * and handled by interaction strategies of type KInteractionStrategy.
      * @param canvas the canvas this tool will be working for.
      */
-    explicit KInteractionTool(KoCanvasBase *canvas);
+    explicit KInteractionTool(KCanvasBase *canvas);
     virtual ~KInteractionTool();
 
 public:

@@ -46,7 +46,7 @@ public:
 
     virtual void paint(QPainter &, const KoViewConverter &) { }
 
-    virtual void paintDecorations(QPainter &, const KoViewConverter &, const KoCanvasBase *) { }
+    virtual void paintDecorations(QPainter &, const KoViewConverter &, const KCanvasBase *) { }
 
     virtual bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
     {

@@ -23,7 +23,7 @@
 #include <QObject>
 #include <KAction>
 
-class KoCanvasBase;
+class KCanvasBase;
 class KoTextEditor;
 
 class RdfSemanticTreeWidgetAction : public KAction
@@ -31,14 +31,14 @@ class RdfSemanticTreeWidgetAction : public KAction
     Q_OBJECT
 
 public:
-    RdfSemanticTreeWidgetAction(QWidget *parent, KoCanvasBase *canvas, const QString &name);
+    RdfSemanticTreeWidgetAction(QWidget *parent, KCanvasBase *canvas, const QString &name);
     virtual ~RdfSemanticTreeWidgetAction();
 
 public slots:
     virtual void activated();
 
 protected:
-    KoCanvasBase *m_canvas;
+    KCanvasBase *m_canvas;
     KoTextEditor* editor();
 };
 

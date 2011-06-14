@@ -38,7 +38,7 @@
 
 #include <QCursor>
 
-class KoCanvasBase;
+class KCanvasBase;
 class KoCanvasController;
 
 /// \internal
@@ -49,7 +49,7 @@ public:
      * Create a new tool; typically not called by applications, only by the KoToolManager
      * @param canvas the canvas this tool works for.
      */
-    explicit KoZoomTool(KoCanvasBase *canvas);
+    explicit KoZoomTool(KCanvasBase *canvas);
     /// reimplemented method
     virtual void wheelEvent(KoPointerEvent *event);
     /// reimplemented method

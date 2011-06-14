@@ -28,7 +28,7 @@
 
 #include "commands/DataManipulators.h"
 
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 
 #include <KMessageBox>
 #include <sonnet/dialog.h>
@@ -37,7 +37,7 @@
 class KCSpellCheckCommand::Private
 {
 public:
-    KoCanvasBase* canvasBase;
+    KCanvasBase* canvasBase;
     int index;
     KCRegion region;
     KCCell currentCell;
@@ -48,7 +48,7 @@ public:
     QUndoCommand* command;
 };
 
-KCSpellCheckCommand::KCSpellCheckCommand(const KCRegion &region, KoCanvasBase* canvasBase)
+KCSpellCheckCommand::KCSpellCheckCommand(const KCRegion &region, KCanvasBase* canvasBase)
         : BackgroundChecker(canvasBase->canvasWidget())
         , d(new Private)
 {

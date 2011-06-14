@@ -31,7 +31,7 @@
 #include "RdfForward.h"
 #include "KoSemanticStylesheet.h"
 
-class KoCanvasBase;
+class KCanvasBase;
 class QTreeWidgetItem;
 class KoRdfSemanticItemPrivate;
 
@@ -126,7 +126,7 @@ protected:
      * shown to the user.
      *
      */
-    virtual void importFromDataComplete(const QByteArray &ba, KoDocumentRdf *rdf = 0, KoCanvasBase *host = 0);
+    virtual void importFromDataComplete(const QByteArray &ba, KoDocumentRdf *rdf = 0, KCanvasBase *host = 0);
 
     friend class KoSemanticStylesheetsEditor;
     friend class KoSemanticStylesheet;
@@ -197,7 +197,7 @@ public:
      * the default stylesheet to insert a representation of the
      * SemanticItem.
      */
-    virtual void insert(KoCanvasBase *host);
+    virtual void insert(KCanvasBase *host);
 
     /**
      * Export the SemanticItem to MimeData. This mehtod is used by
@@ -226,7 +226,7 @@ public:
      * This method calls also insert() which links the semanticItem with the
      * KoDocumentRdf object m_rdf.
      */
-    virtual void importFromData(const QByteArray &ba, KoDocumentRdf *rdf = 0, KoCanvasBase *host = 0) = 0;
+    virtual void importFromData(const QByteArray &ba, KoDocumentRdf *rdf = 0, KCanvasBase *host = 0) = 0;
 
     /**
      * A simple description of the semantic item that can be shown to the user

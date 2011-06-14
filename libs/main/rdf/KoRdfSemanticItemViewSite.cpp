@@ -20,7 +20,7 @@
 #include "KoRdfSemanticItemViewSite.h"
 #include "KoDocumentRdf.h"
 #include "KoDocumentRdf_p.h"
-#include "KoCanvasBase.h"
+#include "KCanvasBase.h"
 #include "KoToolProxy.h"
 #include "KoResourceManager.h"
 #include "KoText.h"
@@ -163,7 +163,7 @@ void KoRdfSemanticItemViewSite::selectRange(KoResourceManager *provider, int sta
     }
 }
 
-void KoRdfSemanticItemViewSite::select(KoCanvasBase *host)
+void KoRdfSemanticItemViewSite::select(KCanvasBase *host)
 {
     Q_ASSERT(d->m_semItem);
     Q_ASSERT(d->m_semItem->documentRdf());

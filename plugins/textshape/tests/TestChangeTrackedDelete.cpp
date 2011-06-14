@@ -2,7 +2,7 @@
 #include "tests/MockShapes.h"
 #include "../commands/ChangeTrackedDeleteCommand.h"
 #include <TextTool.h>
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 #include <KoTextEditor.h>
 #include <KoTextDocument.h>
 #include <QTextDocument>

@@ -29,7 +29,7 @@
 #include <QAbstractScrollArea>
 
 class KoShape;
-class KoCanvasBase;
+class KCanvasBase;
 class KoView;
 
 /**
@@ -89,19 +89,19 @@ public:
      * Set the new canvas to be shown as a child
      * Calling this will emit canvasRemoved() if there was a canvas before, and will emit
      * canvasSet() with the new canvas.
-     * @param canvas the new canvas. The KoCanvasBase::canvas() will be called to retrieve the
+     * @param canvas the new canvas. The KCanvasBase::canvas() will be called to retrieve the
      *        actual widget which will then be added as child of this one.
      */
-    void setCanvas(KoCanvasBase *canvas);
+    void setCanvas(KCanvasBase *canvas);
     /**
      * Return the currently set canvas
      * @return the currently set canvas
      */
-    KoCanvasBase *canvas() const;
+    KCanvasBase *canvas() const;
 
     /**
      * Change the actual canvas widget used by the current canvas. This allows the canvas widget
-     * to be changed while keeping the current KoCanvasBase canvas and its associated resources as
+     * to be changed while keeping the current KCanvasBase canvas and its associated resources as
      * they are. This might be used, for example, to switch from a QWidget to a QGLWidget canvas.
      * @param widget the new canvas widget.
      */

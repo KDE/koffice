@@ -82,7 +82,7 @@
 
 KCCanvas::KCCanvas(KCView *view)
         : QWidget(view),
-        KoCanvasBase(0),
+        KCanvasBase(0),
         m_view(view),
         m_doc(view ? view->doc() : 0)
 {

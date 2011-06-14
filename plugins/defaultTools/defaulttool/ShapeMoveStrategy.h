@@ -27,7 +27,7 @@
 #include <QPointF>
 #include <QList>
 
-class KoCanvasBase;
+class KCanvasBase;
 class KoToolBase;
 class KoShape;
 

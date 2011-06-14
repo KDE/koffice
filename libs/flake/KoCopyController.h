@@ -24,7 +24,7 @@
 #include <QObject>
 
 class QAction;
-class KoCanvasBase;
+class KCanvasBase;
 class KoCopyControllerPrivate;
 
 /**
@@ -44,7 +44,7 @@ public:
      * @param copyAction the action that we will listen to and respond to when it is activated.  Additionally, the
      *     action is used as a parent for the QObject for memory management purposes.
      */
-    KoCopyController(KoCanvasBase *canvas, QAction *copyAction);
+    KoCopyController(KCanvasBase *canvas, QAction *copyAction);
     virtual ~KoCopyController();
 
 signals:

@@ -25,7 +25,7 @@
 #include "KWDocument.h"
 #include "kword_export.h"
 
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 
 #include "KWViewMode.h"
 
@@ -44,7 +44,7 @@ class KoToolProxy;
  * the screen as well as the interaction with the user via mouse
  * and keyboard. There is one per view.
  */
-class KWORD_TEST_EXPORT KWCanvas : public QWidget, public KoCanvasBase
+class KWORD_TEST_EXPORT KWCanvas : public QWidget, public KCanvasBase
 {
     Q_OBJECT
 
@@ -63,7 +63,7 @@ public:
     /// ask the widget to set the size this canvas takes to display all content
     void updateSize();
 
-    // KoCanvasBase interface methods.
+    // KCanvasBase interface methods.
     /// reimplemented method from superclass
     virtual void gridSize(qreal *horizontal, qreal *vertical) const;
     /// reimplemented method from superclass

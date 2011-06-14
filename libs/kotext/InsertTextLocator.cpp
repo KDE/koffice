@@ -20,12 +20,12 @@
 #include "InsertTextLocator_p.h"
 #include "KoTextEditor.h"
 
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 #include <KoToolProxy.h>
 
 #include <KLocale>
 
-InsertTextLocator::InsertTextLocator(KoCanvasBase *canvas)
+InsertTextLocator::InsertTextLocator(KCanvasBase *canvas)
         : InsertInlineObjectActionBase(canvas, i18n("Index Reference"))
 {
 }

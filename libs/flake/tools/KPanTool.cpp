@@ -22,7 +22,7 @@
 #include "KPanTool_p.h"
 #include "KoToolBase_p.h"
 #include "KoPointerEvent.h"
-#include "KoCanvasBase.h"
+#include "KCanvasBase.h"
 #include "KoCanvasController.h"
 #include "KoViewConverter.h"
 
@@ -30,7 +30,7 @@
 #include <QScrollBar>
 #include <kdebug.h>
 
-KPanTool::KPanTool(KoCanvasBase *canvas)
+KPanTool::KPanTool(KCanvasBase *canvas)
         : KoToolBase(canvas),
         m_controller(0),
         m_temporary(false)

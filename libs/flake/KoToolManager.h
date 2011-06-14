@@ -29,7 +29,7 @@
 #include <QList>
 
 class KoCanvasController;
-class KoCanvasBase;
+class KCanvasBase;
 class KoToolBase;
 class KoCreateShapesTool;
 class KActionCollection;
@@ -134,7 +134,7 @@ public:
      *    who's tool you want.
      * @see addController()
      */
-    KoCreateShapesTool *shapeCreatorTool(KoCanvasBase *canvas) const;
+    KoCreateShapesTool *shapeCreatorTool(KCanvasBase *canvas) const;
 
     /**
      * Returns the tool that is able to add/edit guides for this param canvas.
@@ -142,7 +142,7 @@ public:
      *    who's tool you want.
      * @see addController()
      */
-    KoToolBase *toolById(KoCanvasBase *canvas, const QString &id) const;
+    KoToolBase *toolById(KCanvasBase *canvas, const QString &id) const;
 
     /// @return the currently active pointing device
     KInputDevice currentInputDevice() const;
@@ -168,7 +168,7 @@ public:
      * @returns a list of Buttons.
      * This is a factory method for buttons and meta information on the button to better display the button.
      */
-    QList<Button> createToolList(KoCanvasBase *canvas) const;
+    QList<Button> createToolList(KCanvasBase *canvas) const;
 
     /// Request tool activation for the given canvas controller
     void requestToolActivation(KoCanvasController *controller);
@@ -227,7 +227,7 @@ signals:
      * Emitted whenever the active canvas changed.
      * @param canvas the new activated canvas (might be 0)
      */
-    void changedCanvas(const KoCanvasBase *canvas);
+    void changedCanvas(const KCanvasBase *canvas);
 
     /**
      * Emitted whenever the active tool changes the status text.

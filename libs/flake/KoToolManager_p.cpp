@@ -63,7 +63,7 @@ QString ToolHelper::toolTip() const
     return m_toolFactory->toolTip();
 }
 
-KoToolBase *ToolHelper::createTool(KoCanvasBase *canvas) const
+KoToolBase *ToolHelper::createTool(KCanvasBase *canvas) const
 {
     if (! canCreateTool(canvas))
         return 0;
@@ -92,7 +92,7 @@ bool ToolHelper::inputDeviceAgnostic() const
     return m_toolFactory->inputDeviceAgnostic();
 }
 
-bool ToolHelper::canCreateTool(KoCanvasBase *canvas) const
+bool ToolHelper::canCreateTool(KCanvasBase *canvas) const
 {
     return m_toolFactory->canCreateTool(canvas);
 }

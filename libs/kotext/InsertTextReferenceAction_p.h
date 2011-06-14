@@ -40,7 +40,7 @@ class KInlineTextObjectManager;
 class InsertTextReferenceAction : public InsertInlineObjectActionBase
 {
 public:
-    InsertTextReferenceAction(KoCanvasBase *canvas, const KInlineTextObjectManager *manager);
+    InsertTextReferenceAction(KCanvasBase *canvas, const KInlineTextObjectManager *manager);
 
 private:
     virtual KInlineObject *createInlineObject();

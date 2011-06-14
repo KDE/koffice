@@ -40,13 +40,13 @@ SCAnimationToolFactory::~SCAnimationToolFactory()
 {
 }
 
-bool SCAnimationToolFactory::canCreateTool(KoCanvasBase *canvas) const
+bool SCAnimationToolFactory::canCreateTool(KCanvasBase *canvas) const
 {
     KoPACanvas *paCanvas =dynamic_cast<KoPACanvas *>(canvas);
     return paCanvas!=0; // we only work in Showcase
 }
 
-KoToolBase* SCAnimationToolFactory::createTool(KoCanvasBase *canvas)
+KoToolBase* SCAnimationToolFactory::createTool(KCanvasBase *canvas)
 {
     return new SCAnimationTool(canvas);
 }

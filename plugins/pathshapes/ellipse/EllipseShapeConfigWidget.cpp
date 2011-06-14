@@ -20,11 +20,11 @@
 
 #include "EllipseShapeConfigWidget.h"
 #include "EllipseShapeConfigCommand.h"
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 
 #include <klocale.h>
 
-EllipseShapeConfigWidget::EllipseShapeConfigWidget(KoCanvasBase *canvas)
+EllipseShapeConfigWidget::EllipseShapeConfigWidget(KCanvasBase *canvas)
     : m_canvas(canvas),
     m_blocking(false)
 {

@@ -20,9 +20,9 @@
 #include "InsertSemanticObjectActionBase.h"
 #include <KoTextEditor.h>
 #include <KoToolProxy.h>
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 
-InsertSemanticObjectActionBase::InsertSemanticObjectActionBase(KoCanvasBase *canvas,
+InsertSemanticObjectActionBase::InsertSemanticObjectActionBase(KCanvasBase *canvas,
         KoDocumentRdf *rdf,
         const QString &name)
         : KAction(name, canvas->canvasWidget()),

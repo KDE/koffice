@@ -24,7 +24,7 @@
 #include <KoPathShape.h>
 #include <KoPathPoint.h>
 #include <KoViewConverter.h>
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 #include <KoShapeManager.h>
 
 #include <QtGui/QPainter>
@@ -35,7 +35,7 @@
 class KoSnapGuide::Private
 {
 public:
-    Private(KoCanvasBase *parentCanvas)
+    Private(KCanvasBase *parentCanvas)
         : canvas(parentCanvas), editedShape(0), currentStrategy(0),
         active(true),
         snapDistance(10)
@@ -48,7 +48,7 @@ public:
         strategies.clear();
     }
 
-    KoCanvasBase *canvas;
+    KCanvasBase *canvas;
     KoShape *editedShape;
 
     QList<KoSnapStrategy*> strategies;
@@ -61,7 +61,7 @@ public:
     QList<KoShape*> ignoredShapes;
 };
 
-KoSnapGuide::KoSnapGuide(KoCanvasBase *canvas)
+KoSnapGuide::KoSnapGuide(KCanvasBase *canvas)
     : d(new Private(canvas))
 {
     d->strategies.append(new GridSnapStrategy());
@@ -194,7 +194,7 @@ void KoSnapGuide::paint(QPainter &painter, const KoViewConverter &converter)
     painter.drawPath(decoration);
 }
 
-KoCanvasBase *KoSnapGuide::canvas() const
+KCanvasBase *KoSnapGuide::canvas() const
 {
     return d->canvas;
 }

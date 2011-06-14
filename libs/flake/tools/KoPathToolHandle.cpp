@@ -28,7 +28,7 @@
 #include "commands/KoPathPointTypeCommand_p.h"
 #include "KoParameterChangeStrategy_p.h"
 #include "KoParameterShape.h"
-#include "KoCanvasBase.h"
+#include "KCanvasBase.h"
 #include "KoResourceManager.h"
 #include "KoShapeManager.h"
 #include "KoViewConverter.h"

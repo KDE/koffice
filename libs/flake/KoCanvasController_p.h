@@ -43,7 +43,7 @@ public:
     void activate();
 
     KoCanvasController *q;
-    KoCanvasBase * canvas;
+    KCanvasBase * canvas;
     CanvasMode canvasMode;
     int margin; // The viewport margin around the document // TODO can we remove this one? The viewport has a copy...
     QSize documentSize;

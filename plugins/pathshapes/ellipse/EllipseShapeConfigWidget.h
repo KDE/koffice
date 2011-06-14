@@ -34,7 +34,7 @@ class EllipseShapeConfigWidget : public KoShapeConfigWidgetBase
 {
     Q_OBJECT
 public:
-    EllipseShapeConfigWidget(KoCanvasBase *canvas);
+    EllipseShapeConfigWidget(KCanvasBase *canvas);
     /// reimplemented
     virtual void open(KoShape *shape);
 
@@ -48,7 +48,7 @@ private:
     Ui::EllipseShapeConfigWidget widget;
     EllipseShape *m_ellipse;
 
-    KoCanvasBase *m_canvas;
+    KCanvasBase *m_canvas;
     EllipseShapeConfigCommand *m_command;
     bool m_blocking;
     QTime m_time;

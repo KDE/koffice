@@ -25,7 +25,7 @@
 #include "KFilterEffectFactoryBase.h"
 #include "KFilterEffectRegistry.h"
 #include "KFilterEffectConfigWidgetBase.h"
-#include "KoCanvasBase.h"
+#include "KCanvasBase.h"
 #include "KoResourceManager.h"
 #include "KoShapeManager.h"
 #include "KoSelection.h"
@@ -194,7 +194,7 @@ public:
     KoShape * currentShape;
 };
 
-KarbonFilterEffectsTool::KarbonFilterEffectsTool(KoCanvasBase *canvas)
+KarbonFilterEffectsTool::KarbonFilterEffectsTool(KCanvasBase *canvas)
         : KInteractionTool(canvas), d(new Private())
 {
     connect(canvas->shapeManager(), SIGNAL(selectionChanged()),

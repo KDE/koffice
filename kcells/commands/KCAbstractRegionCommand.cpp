@@ -26,7 +26,7 @@
 #include <klocale.h>
 #include <kpassivepopup.h>
 
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 
 #include "KCCell.h"
 #include "KCCellStorage.h"
@@ -68,7 +68,7 @@ KCAbstractRegionCommand::~KCAbstractRegionCommand()
 {
 }
 
-bool KCAbstractRegionCommand::execute(KoCanvasBase* canvas)
+bool KCAbstractRegionCommand::execute(KCanvasBase* canvas)
 {
     if (!m_firstrun)
         return false;

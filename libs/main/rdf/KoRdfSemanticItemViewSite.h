@@ -24,7 +24,7 @@
 #include "RdfForward.h"
 #include <Soprano/Soprano>
 
-class KoCanvasBase;
+class KCanvasBase;
 class KoResourceManager;
 
 class KoRdfSemanticItemViewSitePrivate;
@@ -102,7 +102,7 @@ public:
     /**
      * Select this view of the semantic item in the document.
      */
-    void select(KoCanvasBase *canvas);
+    void select(KCanvasBase *canvas);
 
 private:
 

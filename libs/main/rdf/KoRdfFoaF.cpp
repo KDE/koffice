@@ -265,7 +265,7 @@ void KoRdfFoaF::exportToFile(const QString &fileNameConst) const
 #endif
 }
 
-void KoRdfFoaF::importFromData(const QByteArray &ba, KoDocumentRdf *_rdf, KoCanvasBase *host)
+void KoRdfFoaF::importFromData(const QByteArray &ba, KoDocumentRdf *_rdf, KCanvasBase *host)
 {
     Q_D (KoRdfFoaF);
 #ifdef KDEPIMLIBS_FOUND

@@ -29,7 +29,7 @@
 #include <QString>
 #include <QTimer>
 
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 
 #include <kdebug.h>
 #include <kdialog.h>

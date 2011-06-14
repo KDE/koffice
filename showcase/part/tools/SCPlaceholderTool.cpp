@@ -23,7 +23,7 @@
 #include <QPainter>
 #include <klocale.h>
 
-#include <KoCanvasBase.h>
+#include <KCanvasBase.h>
 #include <KoShapeManager.h>
 #include <KoShapeController.h>
 #include <KoSelection.h>
@@ -31,7 +31,7 @@
 
 #include "SCPlaceholderShape.h"
 
-SCPlaceholderTool::SCPlaceholderTool(KoCanvasBase *canvas)
+SCPlaceholderTool::SCPlaceholderTool(KCanvasBase *canvas)
 : KoToolBase(canvas)
 {
 }
