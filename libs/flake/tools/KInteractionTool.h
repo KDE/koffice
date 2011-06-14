@@ -45,7 +45,7 @@ class KInteractionToolPrivate;
     public:
         MyTool::MyTool(KCanvasBase *canvas) : KInteractionTool(canvas) { }
 
-        KInteractionStrategy *MyTool::createStrategy(KoPointerEvent *event) {
+        KInteractionStrategy *MyTool::createStrategy(KPointerEvent *event) {
             return new MyStrategy(this, m_canvas, event->point);
         }
     };
@@ -67,9 +67,9 @@ public:
 public:
     virtual void paint(QPainter &painter, const KoViewConverter &converter);
 
-    virtual void mousePressEvent(KoPointerEvent *event);
-    virtual void mouseMoveEvent(KoPointerEvent *event);
-    virtual void mouseReleaseEvent(KoPointerEvent *event);
+    virtual void mousePressEvent(KPointerEvent *event);
+    virtual void mouseMoveEvent(KPointerEvent *event);
+    virtual void mouseReleaseEvent(KPointerEvent *event);
 
     virtual void keyPressEvent(QKeyEvent *event);
     virtual void keyReleaseEvent(QKeyEvent *event);
@@ -86,7 +86,7 @@ protected:
      * Reimplement this factory method to create your strategy to be used for mouse interaction.
      * @returns a new strategy, or 0 when there is nothing to do.
      */
-    virtual KInteractionStrategy *createStrategy(KoPointerEvent *event) = 0;
+    virtual KInteractionStrategy *createStrategy(KPointerEvent *event) = 0;
 
 private:
     KInteractionTool(const KInteractionTool&);

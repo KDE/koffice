@@ -46,17 +46,17 @@ void SCPlaceholderTool::paint(QPainter &painter, const KoViewConverter &converte
     Q_UNUSED(converter);
 }
 
-void SCPlaceholderTool::mousePressEvent(KoPointerEvent *event)
+void SCPlaceholderTool::mousePressEvent(KPointerEvent *event)
 {
     Q_UNUSED(event);
 }
 
-void SCPlaceholderTool::mouseMoveEvent(KoPointerEvent *event)
+void SCPlaceholderTool::mouseMoveEvent(KPointerEvent *event)
 {
     Q_UNUSED(event);
 }
 
-void SCPlaceholderTool::mouseReleaseEvent(KoPointerEvent *event)
+void SCPlaceholderTool::mouseReleaseEvent(KPointerEvent *event)
 {
     Q_UNUSED(event);
 }

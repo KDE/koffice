@@ -29,7 +29,7 @@
 
 class KoShape;
 class KCanvasBase;
-class KoPointerEvent;
+class KPointerEvent;
 class KoViewConverter;
 class KoToolSelection;
 class KoToolBasePrivate;
@@ -125,7 +125,7 @@ public:
      * Implementors should call event->ignore() if they do not actually use the event.
      * @param event state and reason of this mouse or stylus press
      */
-    virtual void mousePressEvent(KoPointerEvent *event) = 0;
+    virtual void mousePressEvent(KPointerEvent *event) = 0;
 
     /**
      * Called when (one of) the mouse or stylus buttons is double clicked.
@@ -133,21 +133,21 @@ public:
      * Default implementation ignores this event.
      * @param event state and reason of this mouse or stylus press
      */
-    virtual void mouseDoubleClickEvent(KoPointerEvent *event);
+    virtual void mouseDoubleClickEvent(KPointerEvent *event);
 
     /**
      * Called when the mouse or stylus moved over the canvas.
      * Implementors should call event->ignore() if they do not actually use the event.
      * @param event state and reason of this mouse or stylus move
      */
-    virtual void mouseMoveEvent(KoPointerEvent *event) = 0;
+    virtual void mouseMoveEvent(KPointerEvent *event) = 0;
 
     /**
      * Called when (one of) the mouse or stylus buttons is released.
      * Implementors should call event->ignore() if they do not actually use the event.
      * @param event state and reason of this mouse or stylus release
      */
-    virtual void mouseReleaseEvent(KoPointerEvent *event) = 0;
+    virtual void mouseReleaseEvent(KPointerEvent *event) = 0;
 
     /**
      * Called when a key is pressed.
@@ -170,7 +170,7 @@ public:
      * Implementors should call event->ignore() if they do not actually use the event
      * @param event state of this wheel event
      */
-    virtual void wheelEvent(KoPointerEvent *event);
+    virtual void wheelEvent(KPointerEvent *event);
 
     /**
      * This method is used to query a set of properties of the tool to be

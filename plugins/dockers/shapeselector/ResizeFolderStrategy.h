@@ -25,7 +25,7 @@
 
 class Canvas;
 class FolderShape;
-class KoPointerEvent;
+class KPointerEvent;
 
 /**
  * A strategy for handling dragging the mouse to resize a folder.
@@ -38,7 +38,7 @@ class KoPointerEvent;
 class ResizeFolderStrategy : public InteractionStrategy
 {
 public:
-    ResizeFolderStrategy(Canvas *canvas, FolderShape *clickedFolder, KoPointerEvent &event);
+    ResizeFolderStrategy(Canvas *canvas, FolderShape *clickedFolder, KPointerEvent &event);
 
     virtual void handleMouseMove(const QPointF &mouseLocation, Qt::KeyboardModifiers modifiers);
 

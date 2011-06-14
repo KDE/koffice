@@ -32,7 +32,7 @@
 #include "KoResourceManager.h"
 #include "KoShapeManager.h"
 #include "KoViewConverter.h"
-#include "KoPointerEvent.h"
+#include "KPointerEvent.h"
 #include <QtGui/QPainter>
 
 KPathToolHandle::KPathToolHandle(KPathTool *tool)
@@ -76,7 +76,7 @@ void PointHandle::repaint() const
     m_tool->repaint(m_activePoint->boundingRect(!active));
 }
 
-KInteractionStrategy * PointHandle::handleMousePress(KoPointerEvent *event)
+KInteractionStrategy * PointHandle::handleMousePress(KPointerEvent *event)
 {
     if ((event->button() & Qt::LeftButton) == 0)
         return 0;
@@ -166,7 +166,7 @@ void ParameterHandle::repaint() const
     m_tool->repaint(m_parameterShape->shapeToDocument(QRectF(m_parameterShape->handlePosition(m_handleId), QSize(1, 1))));
 }
 
-KInteractionStrategy * ParameterHandle::handleMousePress(KoPointerEvent *event)
+KInteractionStrategy * ParameterHandle::handleMousePress(KPointerEvent *event)
 {
     if (event->button() & Qt::LeftButton) {
         KPathToolSelection * selection = dynamic_cast<KPathToolSelection*>(m_tool->selection());

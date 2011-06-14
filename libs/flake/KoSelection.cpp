@@ -25,7 +25,7 @@
 #include "KoSelection_p.h"
 #include "KoShapeContainer.h"
 #include "KoShapeGroup.h"
-#include "KoPointerEvent.h"
+#include "KPointerEvent.h"
 
 #include <QTimer>
 

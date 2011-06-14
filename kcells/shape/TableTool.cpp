@@ -39,7 +39,7 @@
 #include <kpagedialog.h>
 
 #include <KCanvasBase.h>
-#include <KoPointerEvent.h>
+#include <KPointerEvent.h>
 #include <KoSelection.h>
 #include <KoShapeManager.h>
 

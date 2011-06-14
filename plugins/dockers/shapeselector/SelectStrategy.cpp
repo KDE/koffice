@@ -27,13 +27,13 @@
 #include <KProperties.h>
 #include <KoShapeManager.h>
 #include <KoSelection.h>
-#include <KoPointerEvent.h>
+#include <KPointerEvent.h>
 
 #include <KDebug>
 #include <QMouseEvent>
 #include <QDrag>
 
-SelectStrategy::SelectStrategy(Canvas *canvas, KoShape *clickedShape, KoPointerEvent &event)
+SelectStrategy::SelectStrategy(Canvas *canvas, KoShape *clickedShape, KPointerEvent &event)
     : m_canvas(canvas), m_clickedShape(clickedShape)
 {
     const bool deselectAll = event.button() == Qt::LeftButton

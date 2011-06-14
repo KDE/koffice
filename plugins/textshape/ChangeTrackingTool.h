@@ -23,7 +23,7 @@
 #include <KoToolBase.h>
 
 class KCanvasBase;
-class KoPointerEvent;
+class KPointerEvent;
 class KoTextEditor;
 class KoTextShapeData;
 class KoViewConverter;
@@ -47,9 +47,9 @@ public:
 
     ~ChangeTrackingTool();
 
-    virtual void mouseReleaseEvent(KoPointerEvent* event);
-    virtual void mouseMoveEvent(KoPointerEvent* event);
-    virtual void mousePressEvent(KoPointerEvent* event);
+    virtual void mouseReleaseEvent(KPointerEvent* event);
+    virtual void mouseMoveEvent(KPointerEvent* event);
+    virtual void mousePressEvent(KPointerEvent* event);
     virtual void paint(QPainter& painter, const KoViewConverter& converter);
     virtual void keyPressEvent(QKeyEvent* event);
     virtual void activate(ToolActivation toolActivation, const QSet<KoShape*> &shapes);

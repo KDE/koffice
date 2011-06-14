@@ -26,7 +26,7 @@
 #include <QLabel>
 #include <QPainter>
 
-#include <KoPointerEvent.h>
+#include <KPointerEvent.h>
 #include <KoPACanvas.h>
 #include <KoViewConverter.h>
 #include "SCPageEffectDocker.h"
@@ -57,17 +57,17 @@ void SCAnimationTool::activate(ToolActivation toolActivation, const QSet<KoShape
     Q_UNUSED(shapes);
 }
 
-void SCAnimationTool::mousePressEvent(KoPointerEvent *event)
+void SCAnimationTool::mousePressEvent(KPointerEvent *event)
 {
     event->ignore();
 }
 
-void SCAnimationTool::mouseMoveEvent(KoPointerEvent *event)
+void SCAnimationTool::mouseMoveEvent(KPointerEvent *event)
 {
     Q_UNUSED(event);
 }
 
-void SCAnimationTool::mouseReleaseEvent(KoPointerEvent *event)
+void SCAnimationTool::mouseReleaseEvent(KPointerEvent *event)
 {
     Q_UNUSED(event);
 }

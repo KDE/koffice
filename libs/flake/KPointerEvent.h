@@ -32,13 +32,13 @@ class QWheelEvent;
 #include "flake_export.h"
 
 /**
- * KoPointerEvent is a synthetic event that can be built from a mouse
+ * KPointerEvent is a synthetic event that can be built from a mouse
  * or a tablet event. In addition to always providing tools with tablet
- * pressure characteristics, KoPointerEvent has both the original
+ * pressure characteristics, KPointerEvent has both the original
  * (canvas based) position as well as the normalized position, that is,
  * the position of the event _in_ the document coordinates.
  */
-class FLAKE_EXPORT KoPointerEvent
+class FLAKE_EXPORT KPointerEvent
 {
 public:
     /**
@@ -47,7 +47,7 @@ public:
      * @param event the mouse event that is the base of this event.
      * @param point the zoomed point in the normal coordinate system.
      */
-    KoPointerEvent(QMouseEvent *event, const QPointF &point);
+    KPointerEvent(QMouseEvent *event, const QPointF &point);
 
     /**
      * Constructor.
@@ -55,7 +55,7 @@ public:
      * @param event the tablet event that is the base of this event.
      * @param point the zoomed point in the normal coordinate system.
      */
-    KoPointerEvent(QTabletEvent *event, const QPointF &point);
+    KPointerEvent(QTabletEvent *event, const QPointF &point);
 
     /**
      * Constructor.
@@ -63,11 +63,11 @@ public:
      * @param event the tablet event that is the base of this event.
      * @param point the zoomed point in the normal coordinate system.
      */
-    KoPointerEvent(QWheelEvent *event, const QPointF &point);
+    KPointerEvent(QWheelEvent *event, const QPointF &point);
 
-    KoPointerEvent(KoPointerEvent *event, const QPointF& point);
+    KPointerEvent(KPointerEvent *event, const QPointF& point);
 
-    ~KoPointerEvent();
+    ~KPointerEvent();
 
     /**
      * For classes that are handed this event, you can choose to accept (default) this event.

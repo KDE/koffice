@@ -35,7 +35,7 @@
 
 #include <KoShape.h>
 #include <KoShapeManager.h>
-#include <KoPointerEvent.h>
+#include <KPointerEvent.h>
 #include <KEventAction.h>
 #include <KoPACanvas.h>
 #include <KoTextShapeData.h>
@@ -95,7 +95,7 @@ void SCPresentationTool::paint(QPainter &painter, const KoViewConverter &convert
     Q_UNUSED(converter);
 }
 
-void SCPresentationTool::mousePressEvent(KoPointerEvent *event)
+void SCPresentationTool::mousePressEvent(KPointerEvent *event)
 {
     if (event->button() & Qt::LeftButton) {
         event->accept();
@@ -126,12 +126,12 @@ void SCPresentationTool::mousePressEvent(KoPointerEvent *event)
     }
 }
 
-void SCPresentationTool::mouseDoubleClickEvent(KoPointerEvent *event)
+void SCPresentationTool::mouseDoubleClickEvent(KPointerEvent *event)
 {
     Q_UNUSED(event);
 }
 
-void SCPresentationTool::mouseMoveEvent(KoPointerEvent *event)
+void SCPresentationTool::mouseMoveEvent(KPointerEvent *event)
 {
     KoShape * shape = canvas()->shapeManager()->shapeAt(event->point);
 
@@ -144,7 +144,7 @@ void SCPresentationTool::mouseMoveEvent(KoPointerEvent *event)
     setCursor(Qt::ArrowCursor);
 }
 
-void SCPresentationTool::mouseReleaseEvent(KoPointerEvent *event)
+void SCPresentationTool::mouseReleaseEvent(KPointerEvent *event)
 {
     Q_UNUSED(event);
 }
@@ -193,7 +193,7 @@ void SCPresentationTool::keyReleaseEvent(QKeyEvent *event)
     Q_UNUSED(event);
 }
 
-void SCPresentationTool::wheelEvent(KoPointerEvent * event)
+void SCPresentationTool::wheelEvent(KPointerEvent * event)
 {
     Q_UNUSED(event);
 }
@@ -287,7 +287,7 @@ bool SCPresentationTool::eventFilter(QObject *obj, QEvent * event)
     return false;
 }
 
-bool SCPresentationTool::checkHyperlink(KoPointerEvent *event, KoShape *shape, QString &hyperLink)
+bool SCPresentationTool::checkHyperlink(KPointerEvent *event, KoShape *shape, QString &hyperLink)
 {
     if (!shape) {
         return false;

@@ -47,7 +47,7 @@
 #define YBORDER_WIDTH  35
 #define XBORDER_HEIGHT 20
 
-class KoPointerEvent;
+class KPointerEvent;
 class KoZoomHandler;
 
 class KCColumnHeader;

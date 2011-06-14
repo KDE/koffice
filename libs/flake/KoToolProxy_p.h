@@ -35,7 +35,7 @@
 #include <QTimer>
 #include <QPointF>
 
-class KoPointerEvent;
+class KPointerEvent;
 class KoToolBase;
 class KCanvasController;
 class KoToolProxy;
@@ -47,7 +47,7 @@ public:
 
     void timeout(); // Auto scroll the canvas
 
-    void checkAutoScroll(const KoPointerEvent &event);
+    void checkAutoScroll(const KPointerEvent &event);
 
     void selectionChanged(bool newSelection);
 

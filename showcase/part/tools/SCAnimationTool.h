@@ -47,10 +47,10 @@ public slots:
 
 public: // Events
 
-    virtual void mousePressEvent(KoPointerEvent *event);
-    virtual void mouseMoveEvent(KoPointerEvent *event);
-    virtual void mouseReleaseEvent(KoPointerEvent *event);
-//    virtual void mouseDoubleClickEvent(KoPointerEvent *event);
+    virtual void mousePressEvent(KPointerEvent *event);
+    virtual void mouseMoveEvent(KPointerEvent *event);
+    virtual void mouseReleaseEvent(KPointerEvent *event);
+//    virtual void mouseDoubleClickEvent(KPointerEvent *event);
 
 //    virtual void keyPressEvent(QKeyEvent *event);
 

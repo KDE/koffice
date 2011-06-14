@@ -23,7 +23,7 @@
 #include "GuidesToolOptionWidget.h"
 #include "InsertGuidesToolOptionWidget.h"
 
-#include <KoPointerEvent.h>
+#include <KPointerEvent.h>
 #include <KCanvasBase.h>
 #include <KCanvasController.h>
 #include <KoResourceManager.h>
@@ -129,7 +129,7 @@ void GuidesTool::deactivate()
     m_mode = None;
 }
 
-void GuidesTool::mousePressEvent(KoPointerEvent *event)
+void GuidesTool::mousePressEvent(KPointerEvent *event)
 {
     GuideLine line = guideLineAtPosition(event->point);
     if (line.second >= 0) {
@@ -138,7 +138,7 @@ void GuidesTool::mousePressEvent(KoPointerEvent *event)
     }
 }
 
-void GuidesTool::mouseMoveEvent(KoPointerEvent *event)
+void GuidesTool::mouseMoveEvent(KPointerEvent *event)
 {
     if (m_mode == None) {
         setCursor(Qt::ArrowCursor);
@@ -159,7 +159,7 @@ void GuidesTool::mouseMoveEvent(KoPointerEvent *event)
     }
 }
 
-void GuidesTool::mouseReleaseEvent(KoPointerEvent *event)
+void GuidesTool::mouseReleaseEvent(KPointerEvent *event)
 {
     Q_UNUSED(event);
 
@@ -187,7 +187,7 @@ void GuidesTool::mouseReleaseEvent(KoPointerEvent *event)
         emit done();
 }
 
-void GuidesTool::mouseDoubleClickEvent(KoPointerEvent *event)
+void GuidesTool::mouseDoubleClickEvent(KPointerEvent *event)
 {
     KGuidesData *guidesData = canvas()->guidesData();
     if (!guidesData) {

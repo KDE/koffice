@@ -21,7 +21,7 @@
 
 #include "KCreateShapesTool.h"
 #include "KInteractionTool_p.h"
-#include "KoPointerEvent.h"
+#include "KPointerEvent.h"
 #include "KInteractionStrategy.h"
 #include "KCreateShapeStrategy_p.h"
 
@@ -56,7 +56,7 @@ void KCreateShapesTool::paint(QPainter &painter, const KoViewConverter &converte
         currentStrategy()->paint(painter, converter);
 }
 
-void KCreateShapesTool::mouseReleaseEvent(KoPointerEvent *event)
+void KCreateShapesTool::mouseReleaseEvent(KPointerEvent *event)
 {
     KInteractionTool::mouseReleaseEvent(event);
     emit KoToolBase::done();
@@ -91,7 +91,7 @@ KProperties const * KCreateShapesTool::shapeProperties()
     return d->newShapeProperties;
 }
 
-KInteractionStrategy *KCreateShapesTool::createStrategy(KoPointerEvent *event)
+KInteractionStrategy *KCreateShapesTool::createStrategy(KPointerEvent *event)
 {
     return new KCreateShapeStrategy(this, event->point);
 }

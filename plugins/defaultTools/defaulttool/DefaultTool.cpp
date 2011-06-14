@@ -33,7 +33,7 @@
 #include "guidestool/GuidesTool.h"
 #include "guidestool/GuidesToolFactory.h" // for the ID
 
-#include <KoPointerEvent.h>
+#include <KPointerEvent.h>
 #include <KoShapeConnection.h>
 #include <KoToolSelection.h>
 #include <KoToolManager.h>
@@ -508,13 +508,13 @@ void DefaultTool::paint(QPainter &painter, const KoViewConverter &converter)
     painter.restore();
 }
 
-void DefaultTool::mousePressEvent(KoPointerEvent *event)
+void DefaultTool::mousePressEvent(KPointerEvent *event)
 {
     KInteractionTool::mousePressEvent(event);
     updateCursor();
 }
 
-void DefaultTool::mouseMoveEvent(KoPointerEvent *event)
+void DefaultTool::mouseMoveEvent(KPointerEvent *event)
 {
     KInteractionTool::mouseMoveEvent(event);
     if (currentStrategy() == 0 && koSelection()->count() > 0) {
@@ -615,13 +615,13 @@ QRectF DefaultTool::handlesSize()
     return bound;
 }
 
-void DefaultTool::mouseReleaseEvent(KoPointerEvent *event)
+void DefaultTool::mouseReleaseEvent(KPointerEvent *event)
 {
     KInteractionTool::mouseReleaseEvent(event);
     updateCursor();
 }
 
-void DefaultTool::mouseDoubleClickEvent(KoPointerEvent *event)
+void DefaultTool::mouseDoubleClickEvent(KPointerEvent *event)
 {
     if (event->button() != Qt::LeftButton)
         return;
@@ -1080,7 +1080,7 @@ void DefaultTool::resourceChanged(int key, const QVariant & res)
     }
 }
 
-KInteractionStrategy *DefaultTool::createStrategy(KoPointerEvent *event)
+KInteractionStrategy *DefaultTool::createStrategy(KPointerEvent *event)
 {
     // reset the move by keys when a new strategy is created otherwise we might change the
     // command after a new command was added. This happend when you where faster than the timer.

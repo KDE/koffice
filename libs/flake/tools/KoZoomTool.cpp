@@ -22,7 +22,7 @@
 #include "KoZoomTool_p.h"
 #include "KoZoomStrategy_p.h"
 #include "KoZoomToolWidget_p.h"
-#include "KoPointerEvent.h"
+#include "KPointerEvent.h"
 #include "KCanvasBase.h"
 #include "KCanvasController.h"
 
@@ -40,13 +40,13 @@ KoZoomTool::KoZoomTool(KCanvasBase *canvas)
     m_outCursor = QCursor(outPixmap, 4, 4);
 }
 
-void KoZoomTool::wheelEvent(KoPointerEvent *event)
+void KoZoomTool::wheelEvent(KPointerEvent *event)
 {
     // Let KCanvasController handle this
     event->ignore();
 }
 
-void KoZoomTool::mouseReleaseEvent(KoPointerEvent *event)
+void KoZoomTool::mouseReleaseEvent(KPointerEvent *event)
 {
     KInteractionTool::mouseReleaseEvent(event);
     if (m_temporary) {
@@ -54,7 +54,7 @@ void KoZoomTool::mouseReleaseEvent(KoPointerEvent *event)
     }
 }
 
-void KoZoomTool::mouseMoveEvent(KoPointerEvent *event)
+void KoZoomTool::mouseMoveEvent(KPointerEvent *event)
 {
     updateCursor(event->modifiers() & Qt::ControlModifier);
 
@@ -85,12 +85,12 @@ void KoZoomTool::activate(ToolActivation toolActivation, const QSet<KoShape*> &)
     updateCursor(false);
 }
 
-void KoZoomTool::mouseDoubleClickEvent(KoPointerEvent *event)
+void KoZoomTool::mouseDoubleClickEvent(KPointerEvent *event)
 {
     mousePressEvent(event);
 }
 
-KInteractionStrategy *KoZoomTool::createStrategy(KoPointerEvent *event)
+KInteractionStrategy *KoZoomTool::createStrategy(KPointerEvent *event)
 {
     KoZoomStrategy *zs = new KoZoomStrategy(this, m_controller, event->point);
     if (event->button() == Qt::RightButton) {

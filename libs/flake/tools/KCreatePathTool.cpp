@@ -22,7 +22,7 @@
 #include "KCreatePathTool_p.h"
 
 #include "KoShapeController.h"
-#include "KoPointerEvent.h"
+#include "KPointerEvent.h"
 #include "KPathShape.h"
 #include "KLineBorder.h"
 #include "KoSelection.h"
@@ -114,7 +114,7 @@ void KCreatePathTool::paintPath(KPathShape& pathShape, QPainter &painter, const 
     }
 }
 
-void KCreatePathTool::mousePressEvent(KoPointerEvent *event)
+void KCreatePathTool::mousePressEvent(KPointerEvent *event)
 {
     Q_D(KCreatePathTool);
 
@@ -189,7 +189,7 @@ void KCreatePathTool::mousePressEvent(KoPointerEvent *event)
         d->angleSnapStrategy->setStartPoint(d->activePoint->point());
 }
 
-void KCreatePathTool::mouseDoubleClickEvent(KoPointerEvent *event)
+void KCreatePathTool::mouseDoubleClickEvent(KPointerEvent *event)
 {
     Q_D(KCreatePathTool);
 
@@ -204,7 +204,7 @@ void KCreatePathTool::mouseDoubleClickEvent(KoPointerEvent *event)
     }
 }
 
-void KCreatePathTool::mouseMoveEvent(KoPointerEvent *event)
+void KCreatePathTool::mouseMoveEvent(KPointerEvent *event)
 {
     Q_D(KCreatePathTool);
 
@@ -253,7 +253,7 @@ void KCreatePathTool::mouseMoveEvent(KoPointerEvent *event)
     canvas()->updateCanvas(canvas()->snapGuide()->boundingRect());
 }
 
-void KCreatePathTool::mouseReleaseEvent(KoPointerEvent *event)
+void KCreatePathTool::mouseReleaseEvent(KPointerEvent *event)
 {
     Q_D(KCreatePathTool);
 

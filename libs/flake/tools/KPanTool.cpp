@@ -21,7 +21,7 @@
 
 #include "KPanTool_p.h"
 #include "KoToolBase_p.h"
-#include "KoPointerEvent.h"
+#include "KPointerEvent.h"
 #include "KCanvasBase.h"
 #include "KCanvasController.h"
 #include "KoViewConverter.h"
@@ -42,14 +42,14 @@ bool KPanTool::wantsAutoScroll() const
     return false;
 }
 
-void KPanTool::mousePressEvent(KoPointerEvent *event)
+void KPanTool::mousePressEvent(KPointerEvent *event)
 {
     m_lastPosition = documentToViewport(event->point);
     event->accept();
     setCursor(QCursor(Qt::ClosedHandCursor));
 }
 
-void KPanTool::mouseMoveEvent(KoPointerEvent *event)
+void KPanTool::mouseMoveEvent(KPointerEvent *event)
 {
     Q_ASSERT(m_controller);
     if (event->buttons() == 0)
@@ -63,7 +63,7 @@ void KPanTool::mouseMoveEvent(KoPointerEvent *event)
     m_lastPosition = actualPosition;
 }
 
-void KPanTool::mouseReleaseEvent(KoPointerEvent *event)
+void KPanTool::mouseReleaseEvent(KPointerEvent *event)
 {
     event->accept();
     setCursor(QCursor(Qt::OpenHandCursor));
@@ -104,7 +104,7 @@ void KPanTool::activate(ToolActivation toolActivation, const QSet<KoShape*> &)
     setCursor(QCursor(Qt::OpenHandCursor));
 }
 
-void KPanTool::customMoveEvent(KoPointerEvent * event)
+void KPanTool::customMoveEvent(KPointerEvent * event)
 {
     m_controller->pan(QPoint(-event->x(), -event->y()));
     event->accept();

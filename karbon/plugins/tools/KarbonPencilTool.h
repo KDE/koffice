@@ -37,9 +37,9 @@ public:
     void paint(QPainter &painter, const KoViewConverter &converter);
     void repaintDecorations();
 
-    void mousePressEvent(KoPointerEvent *event) ;
-    void mouseMoveEvent(KoPointerEvent *event);
-    void mouseReleaseEvent(KoPointerEvent *event);
+    void mousePressEvent(KPointerEvent *event) ;
+    void mouseMoveEvent(KPointerEvent *event);
+    void mouseReleaseEvent(KPointerEvent *event);
     void keyPressEvent(QKeyEvent *event);
 
     virtual void activate(ToolActivation toolActivation, const QSet<KoShape*> &shapes);

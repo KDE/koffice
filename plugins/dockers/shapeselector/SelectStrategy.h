@@ -25,7 +25,7 @@
 
 class Canvas;
 class KoShape;
-class KoPointerEvent;
+class KPointerEvent;
 
 /**
  * A strategy for handling a left click on a selectable shape.
@@ -41,7 +41,7 @@ class SelectStrategy : public QObject, public InteractionStrategy
 {
     Q_OBJECT
 public:
-    SelectStrategy(Canvas *canvas, KoShape *clickedShape, KoPointerEvent &event);
+    SelectStrategy(Canvas *canvas, KoShape *clickedShape, KPointerEvent &event);
 
     virtual void handleMouseMove(const QPointF &mouseLocation, Qt::KeyboardModifiers modifiers);
     virtual void finishInteraction(Qt::KeyboardModifiers modifiers);

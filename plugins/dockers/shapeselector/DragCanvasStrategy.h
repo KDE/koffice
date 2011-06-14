@@ -22,7 +22,7 @@
 #include "InteractionStrategy.h"
 
 class Canvas;
-class KoPointerEvent;
+class KPointerEvent;
 
 /**
  * A strategy for handling dragging the mouse to drag the canvas around.
@@ -35,7 +35,7 @@ class KoPointerEvent;
 class DragCanvasStrategy : public InteractionStrategy
 {
 public:
-    DragCanvasStrategy(Canvas *canvas, KoPointerEvent &event);
+    DragCanvasStrategy(Canvas *canvas, KPointerEvent &event);
 
     virtual void handleMouseMove(const QPointF &mouseLocation, Qt::KeyboardModifiers modifiers);
 

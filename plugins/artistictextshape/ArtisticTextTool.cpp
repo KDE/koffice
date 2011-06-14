@@ -26,7 +26,7 @@
 #include <KCanvasBase.h>
 #include <KoSelection.h>
 #include <KoShapeManager.h>
-#include <KoPointerEvent.h>
+#include <KPointerEvent.h>
 #include <KPathShape.h>
 #include <KoShapeController.h>
 #include <KoShapeContainer.h>
@@ -227,7 +227,7 @@ void ArtisticTextTool::paint( QPainter &painter, const KoViewConverter &converte
     painter.restore();
 }
 
-void ArtisticTextTool::mousePressEvent( KoPointerEvent *event )
+void ArtisticTextTool::mousePressEvent( KPointerEvent *event )
 {
     ArtisticTextShape *hit = 0;
     QRectF roi( event->point, QSizeF(1,1) );
@@ -269,7 +269,7 @@ void ArtisticTextTool::mousePressEvent( KoPointerEvent *event )
     event->ignore();
 }
 
-void ArtisticTextTool::mouseMoveEvent( KoPointerEvent *event )
+void ArtisticTextTool::mouseMoveEvent( KPointerEvent *event )
 {
     m_tmpPath = 0;
     ArtisticTextShape *textShape = 0;
@@ -299,7 +299,7 @@ void ArtisticTextTool::mouseMoveEvent( KoPointerEvent *event )
         setCursor( QCursor( Qt::ArrowCursor ) );
 }
 
-void ArtisticTextTool::mouseReleaseEvent( KoPointerEvent *event )
+void ArtisticTextTool::mouseReleaseEvent( KPointerEvent *event )
 {
     Q_UNUSED(event);
     m_path = m_tmpPath;

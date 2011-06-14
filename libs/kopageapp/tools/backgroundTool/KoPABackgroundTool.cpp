@@ -33,7 +33,7 @@
 #include <KoResourceManager.h>
 #include <KoPAView.h>
 #include <KoPAPageBase.h> // this is needed to make setResource work correctly
-#include <KoPointerEvent.h>
+#include <KPointerEvent.h>
 #include <KoShapeManager.h>
 #include <KoSelection.h>
 
@@ -73,17 +73,17 @@ void KoPABackgroundTool::deactivate()
     canvas()->resourceManager()->clearResource(KoPageApp::CurrentPage);
 }
 
-void KoPABackgroundTool::mousePressEvent(KoPointerEvent *event)
+void KoPABackgroundTool::mousePressEvent(KPointerEvent *event)
 {
     event->ignore();
 }
 
-void KoPABackgroundTool::mouseMoveEvent(KoPointerEvent *event)
+void KoPABackgroundTool::mouseMoveEvent(KPointerEvent *event)
 {
     event->ignore();
 }
 
-void KoPABackgroundTool::mouseReleaseEvent(KoPointerEvent *event)
+void KoPABackgroundTool::mouseReleaseEvent(KPointerEvent *event)
 {
     event->ignore();
 }

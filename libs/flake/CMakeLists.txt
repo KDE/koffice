@@ -52,7 +52,7 @@ set(flake_SRCS
     KoShapeUserData.cpp
     KoPointGroup.cpp
     KParameterShape.cpp
-    KoPointerEvent.cpp
+    KPointerEvent.cpp
     KoShapeController.cpp
     KoToolSelection.cpp
     KoShapeLayer.cpp
@@ -275,7 +275,7 @@ install(
     KPathShapeLoader.h
     KPatternBackground.h
     KoPluginLoader.h
-    KoPointerEvent.h
+    KPointerEvent.h
     KoPostscriptPaintDevice.h
     KoResourceManager.h
     KoRTree.h

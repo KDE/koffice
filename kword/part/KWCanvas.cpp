@@ -28,7 +28,7 @@
 
 // koffice libs includes
 #include <KoShapeManager.h>
-#include <KoPointerEvent.h>
+#include <KPointerEvent.h>
 #include <KoToolManager.h>
 #include <KCanvasController.h>
 #include <KoToolProxy.h>

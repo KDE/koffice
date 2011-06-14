@@ -33,7 +33,7 @@
 #include <kdebug.h>
 #include <kcursor.h>
 
-#include <KoPointerEvent.h>
+#include <KPointerEvent.h>
 #include <KCanvasController.h>
 #include <KoPageApp.h>
 #include <KoPACanvas.h>
@@ -92,28 +92,28 @@ void SCViewModePresentation::tabletEvent(QTabletEvent *event, const QPointF &poi
 
 void SCViewModePresentation::mousePressEvent(QMouseEvent *event, const QPointF &point)
 {
-    KoPointerEvent ev(event, point);
+    KPointerEvent ev(event, point);
 
     m_tool->mousePressEvent(&ev);
 }
 
 void SCViewModePresentation::mouseDoubleClickEvent(QMouseEvent *event, const QPointF &point)
 {
-    KoPointerEvent ev(event, point);
+    KPointerEvent ev(event, point);
 
     m_tool->mouseDoubleClickEvent(&ev);
 }
 
 void SCViewModePresentation::mouseMoveEvent(QMouseEvent *event, const QPointF &point)
 {
-    KoPointerEvent ev(event, point);
+    KPointerEvent ev(event, point);
 
     m_tool->mouseMoveEvent(&ev);
 }
 
 void SCViewModePresentation::mouseReleaseEvent(QMouseEvent *event, const QPointF &point)
 {
-    KoPointerEvent ev(event, point);
+    KPointerEvent ev(event, point);
 
     m_tool->mouseReleaseEvent(&ev);
 }
@@ -130,7 +130,7 @@ void SCViewModePresentation::keyReleaseEvent(QKeyEvent *event)
 
 void SCViewModePresentation::wheelEvent(QWheelEvent * event, const QPointF &point)
 {
-    KoPointerEvent ev(event, point);
+    KPointerEvent ev(event, point);
 
     m_tool->wheelEvent(&ev);
 }

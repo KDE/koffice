@@ -39,9 +39,9 @@ public:
 
     void paint(QPainter &painter, const KoViewConverter &converter);
 
-    void mousePressEvent(KoPointerEvent *event) ;
-    void mouseMoveEvent(KoPointerEvent *event);
-    void mouseReleaseEvent(KoPointerEvent *event);
+    void mousePressEvent(KPointerEvent *event) ;
+    void mouseMoveEvent(KPointerEvent *event);
+    void mouseReleaseEvent(KPointerEvent *event);
 
     QWidget *createOptionWidget();
     virtual void activate(ToolActivation toolActivation, const QSet<KoShape*> &shapes);
@@ -65,9 +65,9 @@ private slots:
     void updateSelectedPath();
 
 private:
-    void addPoint(KoPointerEvent *event);
+    void addPoint(KPointerEvent *event);
     // auxiliary function that sets m_angle
-    void setAngle(KoPointerEvent *event);
+    void setAngle(KPointerEvent *event);
     // auxiliary functions to calculate the dynamic parameters
     // returns the new point and sets speed to the speed
     QPointF calculateNewPoint(const QPointF &mousePos, QPointF *speed);

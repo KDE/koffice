@@ -26,7 +26,7 @@
 
 #include <Qt>
 
-class KoPointerEvent;
+class KPointerEvent;
 class KoViewConverter;
 class KInteractionStrategyPrivate;
 class KoToolBase;

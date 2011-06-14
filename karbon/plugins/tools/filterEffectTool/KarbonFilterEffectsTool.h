@@ -46,7 +46,7 @@ public:
     /// reimplemented from KoToolBase
     virtual void repaintDecorations();
     /// reimplemented from KoToolBase
-    virtual void mouseMoveEvent(KoPointerEvent *event);
+    virtual void mouseMoveEvent(KPointerEvent *event);
 
     /// reimplemented from KoToolBase
     virtual void activate(ToolActivation toolActivation, const QSet<KoShape*> &shapes);
@@ -55,7 +55,7 @@ protected:
     /// reimplemented from KoToolBase
     virtual QMap<QString, QWidget *> createOptionWidgets();
     /// reimplemented from KoToolBase
-    virtual KInteractionStrategy *createStrategy(KoPointerEvent *event);
+    virtual KInteractionStrategy *createStrategy(KPointerEvent *event);
 private slots:
     void editFilter();
     void filterChanged();

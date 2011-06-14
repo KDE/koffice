@@ -39,11 +39,11 @@ public:
     ///Reimplemented from KoToolBase
     virtual void deactivate();
     ///Reimplemented from KoToolBase
-    virtual void mousePressEvent(KoPointerEvent *event);
+    virtual void mousePressEvent(KPointerEvent *event);
     ///Reimplemented from KoToolBase
-    virtual void mouseMoveEvent(KoPointerEvent *event);
+    virtual void mouseMoveEvent(KPointerEvent *event);
     ///Reimplemented from KoToolBase
-    virtual void mouseReleaseEvent(KoPointerEvent *event);
+    virtual void mouseReleaseEvent(KPointerEvent *event);
 
     KoPAViewBase * view() const;
 

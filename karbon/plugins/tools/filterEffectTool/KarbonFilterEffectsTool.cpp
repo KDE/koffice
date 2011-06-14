@@ -37,7 +37,7 @@
 #include "FilterRegionEditStrategy.h"
 #include "KoResourceServerAdapter.h"
 #include "KoResourceSelector.h"
-#include <KoPointerEvent.h>
+#include <KPointerEvent.h>
 
 #include <KComboBox>
 #include <KLocale>
@@ -262,7 +262,7 @@ void KarbonFilterEffectsTool::activate(ToolActivation toolActivation, const QSet
     d->fillConfigSelector(d->currentShape, this);
 }
 
-void KarbonFilterEffectsTool::mouseMoveEvent(KoPointerEvent *event)
+void KarbonFilterEffectsTool::mouseMoveEvent(KPointerEvent *event)
 {
     if (currentStrategy()) {
         KInteractionTool::mouseMoveEvent(event);
@@ -287,7 +287,7 @@ void KarbonFilterEffectsTool::mouseMoveEvent(KoPointerEvent *event)
     }
 }
 
-KInteractionStrategy *KarbonFilterEffectsTool::createStrategy(KoPointerEvent *event)
+KInteractionStrategy *KarbonFilterEffectsTool::createStrategy(KPointerEvent *event)
 {
     EditMode mode = d->editModeFromMousePosition(event->point, this);
     if (mode == None)

@@ -33,7 +33,7 @@ class KoShape;
 class KoSelection;
 class KoViewConverter;
 class KCanvasBase;
-class KoPointerEvent;
+class KPointerEvent;
 class KoShapeManagerPaintingStrategy;
 class KoShapeConnection;
 class KoShapeManagerPrivate;
@@ -163,7 +163,7 @@ public:
      * for that shape, or switch to the default tool if there is no shape at the position.
      * @param event the event that holds the point where to look for a shape.
      */
-    void suggestChangeTool(KoPointerEvent *event);
+    void suggestChangeTool(KPointerEvent *event);
 
     /**
      * Paint a shape

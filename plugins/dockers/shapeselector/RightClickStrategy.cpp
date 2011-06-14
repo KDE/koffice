@@ -26,7 +26,7 @@
 
 #include <KoShapeManager.h>
 #include <KoSelection.h>
-#include <KoPointerEvent.h>
+#include <KPointerEvent.h>
 
 #include <QMenu>
 #include <QAction>
@@ -36,7 +36,7 @@
 
 #include <KLocale>
 
-RightClickStrategy::RightClickStrategy(Canvas *canvas, KoShape *clickedShape, KoPointerEvent &event)
+RightClickStrategy::RightClickStrategy(Canvas *canvas, KoShape *clickedShape, KPointerEvent &event)
     : m_canvas(canvas),
     m_clickedShape(clickedShape)
 {

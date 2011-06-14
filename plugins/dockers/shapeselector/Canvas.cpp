@@ -30,7 +30,7 @@
 
 #include <KoShapeManager.h>
 #include <KoShapeRegistry.h>
-#include <KoPointerEvent.h>
+#include <KPointerEvent.h>
 #include <KoSelection.h>
 #include <KoShapeFactoryBase.h> // for the mimetype defines etc
 
@@ -117,7 +117,7 @@ void Canvas::resetDocumentOffset()
 // event handlers
 void Canvas::mousePressEvent(QMouseEvent *event)
 {
-    KoPointerEvent pe(event, m_displayOffset + m_converter.viewToDocument(event->pos()));
+    KPointerEvent pe(event, m_displayOffset + m_converter.viewToDocument(event->pos()));
     m_lastPoint = pe.point;
     KoShape *clickedShape = 0;
     foreach(KoShape *shape, shapeManager()->shapesAt(QRectF(pe.point, QSizeF(1,1)))) {

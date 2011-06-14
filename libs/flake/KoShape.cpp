@@ -26,7 +26,7 @@
 #include "KoShapeLayer.h"
 #include "KoShapeContainerModel.h"
 #include "KoSelection.h"
-#include "KoPointerEvent.h"
+#include "KPointerEvent.h"
 #include "KoInsets.h"
 #include "KoShapeBorderBase.h"
 #include "KoShapeBackground.h"

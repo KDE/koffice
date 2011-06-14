@@ -23,7 +23,7 @@
 
 class Canvas;
 class FolderShape;
-class KoPointerEvent;
+class KPointerEvent;
 
 /**
  * A strategy for handling dragging the mouse to drag a folder around.
@@ -36,7 +36,7 @@ class KoPointerEvent;
 class MoveFolderStrategy : public InteractionStrategy
 {
 public:
-    MoveFolderStrategy(Canvas *canvas, FolderShape *clickedFolder, KoPointerEvent &event);
+    MoveFolderStrategy(Canvas *canvas, FolderShape *clickedFolder, KPointerEvent &event);
 
     virtual void handleMouseMove(const QPointF &mouseLocation, Qt::KeyboardModifiers modifiers);
     virtual void cancelInteraction();

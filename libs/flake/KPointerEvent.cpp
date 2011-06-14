@@ -20,12 +20,12 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KoPointerEvent.h"
+#include "KPointerEvent.h"
 #include <QTabletEvent>
 #include <QMouseEvent>
 #include <QWheelEvent>
 
-class KoPointerEvent::Private
+class KPointerEvent::Private
 {
 public:
     Private()
@@ -42,7 +42,7 @@ public:
     int rotationX, rotationY, rotationZ;
 };
 
-KoPointerEvent::KoPointerEvent(QMouseEvent *ev, const QPointF &pnt)
+KPointerEvent::KPointerEvent(QMouseEvent *ev, const QPointF &pnt)
         : point(pnt),
         m_event(ev),
         d(new Private())
@@ -51,7 +51,7 @@ KoPointerEvent::KoPointerEvent(QMouseEvent *ev, const QPointF &pnt)
     d->mouseEvent = ev;
 }
 
-KoPointerEvent::KoPointerEvent(QTabletEvent *ev, const QPointF &pnt)
+KPointerEvent::KPointerEvent(QTabletEvent *ev, const QPointF &pnt)
         : point(pnt),
         m_event(ev),
         d(new Private())
@@ -60,7 +60,7 @@ KoPointerEvent::KoPointerEvent(QTabletEvent *ev, const QPointF &pnt)
     d->tabletEvent = ev;
 }
 
-KoPointerEvent::KoPointerEvent(QWheelEvent *ev, const QPointF &pnt)
+KPointerEvent::KPointerEvent(QWheelEvent *ev, const QPointF &pnt)
         : point(pnt),
         m_event(ev),
         d(new Private())
@@ -69,7 +69,7 @@ KoPointerEvent::KoPointerEvent(QWheelEvent *ev, const QPointF &pnt)
     d->wheelEvent = ev;
 }
 
-KoPointerEvent::KoPointerEvent(KoPointerEvent *event, const QPointF &point)
+KPointerEvent::KPointerEvent(KPointerEvent *event, const QPointF &point)
     : point(point)
     , m_event(event->m_event)
     , d(new Private(*(event->d)))
@@ -77,12 +77,12 @@ KoPointerEvent::KoPointerEvent(KoPointerEvent *event, const QPointF &point)
     Q_ASSERT(m_event);
 }
 
-KoPointerEvent::~KoPointerEvent()
+KPointerEvent::~KPointerEvent()
 {
     delete d;
 }
 
-Qt::MouseButton KoPointerEvent::button() const
+Qt::MouseButton KPointerEvent::button() const
 {
     if (d->mouseEvent)
         return d->mouseEvent->button();
@@ -92,7 +92,7 @@ Qt::MouseButton KoPointerEvent::button() const
         return Qt::NoButton;
 }
 
-Qt::MouseButtons KoPointerEvent::buttons() const
+Qt::MouseButtons KPointerEvent::buttons() const
 {
     if (d->mouseEvent)
         return d->mouseEvent->buttons();
@@ -103,7 +103,7 @@ Qt::MouseButtons KoPointerEvent::buttons() const
     return Qt::NoButton;
 }
 
-QPoint KoPointerEvent::globalPos() const
+QPoint KPointerEvent::globalPos() const
 {
     if (d->mouseEvent)
         return d->mouseEvent->globalPos();
@@ -115,7 +115,7 @@ QPoint KoPointerEvent::globalPos() const
         return d->globalPos;
 }
 
-QPoint KoPointerEvent::pos() const
+QPoint KPointerEvent::pos() const
 {
     if (d->mouseEvent)
         return d->mouseEvent->pos();
@@ -127,7 +127,7 @@ QPoint KoPointerEvent::pos() const
         return d->pos;
 }
 
-qreal KoPointerEvent::pressure() const
+qreal KPointerEvent::pressure() const
 {
     if (d->tabletEvent)
         return d->tabletEvent->pressure();
@@ -135,7 +135,7 @@ qreal KoPointerEvent::pressure() const
         return 0.5;
 }
 
-qreal KoPointerEvent::rotation() const
+qreal KPointerEvent::rotation() const
 {
     if (d->tabletEvent)
         return d->tabletEvent->rotation();
@@ -143,7 +143,7 @@ qreal KoPointerEvent::rotation() const
         return 0.0;
 }
 
-qreal KoPointerEvent::tangentialPressure() const
+qreal KPointerEvent::tangentialPressure() const
 {
     if (d->tabletEvent)
         return d->tabletEvent->tangentialPressure();
@@ -151,7 +151,7 @@ qreal KoPointerEvent::tangentialPressure() const
         return 0.0;
 }
 
-int KoPointerEvent::x() const
+int KPointerEvent::x() const
 {
     if (d->tabletEvent)
         return d->tabletEvent->x();
@@ -163,7 +163,7 @@ int KoPointerEvent::x() const
         return pos().x();
 }
 
-int KoPointerEvent::xTilt() const
+int KPointerEvent::xTilt() const
 {
     if (d->tabletEvent)
         return d->tabletEvent->xTilt();
@@ -171,7 +171,7 @@ int KoPointerEvent::xTilt() const
         return 0;
 }
 
-int KoPointerEvent::y() const
+int KPointerEvent::y() const
 {
     if (d->tabletEvent)
         return d->tabletEvent->y();
@@ -183,7 +183,7 @@ int KoPointerEvent::y() const
         return pos().y();
 }
 
-int KoPointerEvent::yTilt() const
+int KPointerEvent::yTilt() const
 {
     if (d->tabletEvent)
         return d->tabletEvent->yTilt();
@@ -191,7 +191,7 @@ int KoPointerEvent::yTilt() const
         return 0;
 }
 
-int KoPointerEvent::z() const
+int KPointerEvent::z() const
 {
     if (d->tabletEvent)
         return d->tabletEvent->z();
@@ -199,7 +199,7 @@ int KoPointerEvent::z() const
         return 0;
 }
 
-int KoPointerEvent::delta() const
+int KPointerEvent::delta() const
 {
     if (d->wheelEvent)
         return d->wheelEvent->delta();
@@ -207,22 +207,22 @@ int KoPointerEvent::delta() const
         return 0;
 }
 
-int KoPointerEvent::rotationX() const
+int KPointerEvent::rotationX() const
 {
     return d->rotationX;
 }
 
-int KoPointerEvent::rotationY() const
+int KPointerEvent::rotationY() const
 {
     return d->rotationY;
 }
 
-int KoPointerEvent::rotationZ() const
+int KPointerEvent::rotationZ() const
 {
     return d->rotationZ;
 }
 
-Qt::Orientation KoPointerEvent::orientation() const
+Qt::Orientation KPointerEvent::orientation() const
 {
     if (d->wheelEvent)
         return d->wheelEvent->orientation();
@@ -230,12 +230,12 @@ Qt::Orientation KoPointerEvent::orientation() const
         return Qt::Horizontal;
 }
 
-void KoPointerEvent::setTabletButton(Qt::MouseButton button)
+void KPointerEvent::setTabletButton(Qt::MouseButton button)
 {
     d->tabletButton = button;
 }
 
-Qt::KeyboardModifiers KoPointerEvent::modifiers() const
+Qt::KeyboardModifiers KPointerEvent::modifiers() const
 {
     if (d->tabletEvent)
         return d->tabletEvent->modifiers();

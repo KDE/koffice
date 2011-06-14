@@ -23,7 +23,7 @@
 #include <KPathShape.h>
 #include <KParameterShape.h>
 #include <KLineBorder.h>
-#include <KoPointerEvent.h>
+#include <KPointerEvent.h>
 #include <KCanvasBase.h>
 #include <KoShapeController.h>
 #include <KoShapeManager.h>
@@ -104,7 +104,7 @@ void KarbonPencilTool::repaintDecorations()
 {
 }
 
-void KarbonPencilTool::mousePressEvent(KoPointerEvent *event)
+void KarbonPencilTool::mousePressEvent(KPointerEvent *event)
 {
     if (! m_shape) {
         m_shape = new KPathShape();
@@ -121,7 +121,7 @@ void KarbonPencilTool::mousePressEvent(KoPointerEvent *event)
     }
 }
 
-void KarbonPencilTool::mouseMoveEvent(KoPointerEvent *event)
+void KarbonPencilTool::mouseMoveEvent(KPointerEvent *event)
 {
     if (event->buttons() & Qt::LeftButton)
         addPoint(event->point);
@@ -140,7 +140,7 @@ void KarbonPencilTool::mouseMoveEvent(KoPointerEvent *event)
     }
 }
 
-void KarbonPencilTool::mouseReleaseEvent(KoPointerEvent *event)
+void KarbonPencilTool::mouseReleaseEvent(KPointerEvent *event)
 {
     if (! m_shape)
         return;

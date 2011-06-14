@@ -21,7 +21,7 @@
 #include "KInteractionTool.h"
 #include "KInteractionTool_p.h"
 #include "KoToolBase_p.h"
-#include "KoPointerEvent.h"
+#include "KPointerEvent.h"
 #include "KCanvasBase.h"
 #include "KPanTool_p.h"
 
@@ -41,7 +41,7 @@ void KInteractionTool::paint(QPainter &painter, const KoViewConverter &converter
         d->currentStrategy->paint(painter, converter);
 }
 
-void KInteractionTool::mousePressEvent(KoPointerEvent *event)
+void KInteractionTool::mousePressEvent(KPointerEvent *event)
 {
     Q_D(KInteractionTool);
     if (d->currentStrategy) { // possible if the user presses an extra mouse button
@@ -53,7 +53,7 @@ void KInteractionTool::mousePressEvent(KoPointerEvent *event)
         event->ignore();
 }
 
-void KInteractionTool::mouseMoveEvent(KoPointerEvent *event)
+void KInteractionTool::mouseMoveEvent(KPointerEvent *event)
 {
     Q_D(KInteractionTool);
     d->lastPoint = event->point;
@@ -63,7 +63,7 @@ void KInteractionTool::mouseMoveEvent(KoPointerEvent *event)
         event->ignore();
 }
 
-void KInteractionTool::mouseReleaseEvent(KoPointerEvent *event)
+void KInteractionTool::mouseReleaseEvent(KPointerEvent *event)
 {
     Q_D(KInteractionTool);
     if (d->currentStrategy) {

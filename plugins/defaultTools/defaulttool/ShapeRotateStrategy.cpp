@@ -25,7 +25,7 @@
 #include <KInteractionTool.h>
 #include <KCanvasBase.h>
 #include <KoSelection.h>
-#include <KoPointerEvent.h>
+#include <KPointerEvent.h>
 #include <KoShapeManager.h>
 #include <KoResourceManager.h>
 #include <commands/KoShapeTransformCommand.h>

@@ -33,7 +33,7 @@
 #include <kdebug.h>
 
 #include <KoPACanvas.h>
-#include <KoPointerEvent.h>
+#include <KPointerEvent.h>
 
 #include "SCPresentationDrawWidget.h"
 

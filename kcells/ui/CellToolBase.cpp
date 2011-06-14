@@ -111,7 +111,7 @@
 #include <KOdfLoadingContext.h>
 #include <KOdfStoreReader.h>
 #include <KOdfStylesReader.h>
-#include <KoPointerEvent.h>
+#include <KPointerEvent.h>
 #include <KoSelection.h>
 #include <KoShape.h>
 #include <KoShapeManager.h>
@@ -882,12 +882,12 @@ void CellToolBase::paintSelection(QPainter &painter, const QRectF &paintRect)
     d->paintSelection(painter, paintRect);
 }
 
-void CellToolBase::mousePressEvent(KoPointerEvent* event)
+void CellToolBase::mousePressEvent(KPointerEvent* event)
 {
     KInteractionTool::mousePressEvent(event);
 }
 
-void CellToolBase::mouseMoveEvent(KoPointerEvent* event)
+void CellToolBase::mouseMoveEvent(KPointerEvent* event)
 {
     // Special handling for drag'n'drop.
     if (DragAndDropStrategy *const strategy = dynamic_cast<DragAndDropStrategy*>(currentStrategy())) {
@@ -962,13 +962,13 @@ void CellToolBase::mouseMoveEvent(KoPointerEvent* event)
     KInteractionTool::mouseMoveEvent(event);
 }
 
-void CellToolBase::mouseReleaseEvent(KoPointerEvent* event)
+void CellToolBase::mouseReleaseEvent(KPointerEvent* event)
 {
     KInteractionTool::mouseReleaseEvent(event);
     scrollToCell(selection()->cursor());
 }
 
-void CellToolBase::mouseDoubleClickEvent(KoPointerEvent* event)
+void CellToolBase::mouseDoubleClickEvent(KPointerEvent* event)
 {
     Q_UNUSED(event)
     cancelCurrentStrategy();
@@ -1138,7 +1138,7 @@ QWidget* CellToolBase::createOptionWidget()
     return d->optionWidget;
 }
 
-KInteractionStrategy* CellToolBase::createStrategy(KoPointerEvent* event)
+KInteractionStrategy* CellToolBase::createStrategy(KPointerEvent* event)
 {
     // Get info about where the event occurred.
     QPointF position = event->point - offset(); // the shape offset, not the scrolling one.

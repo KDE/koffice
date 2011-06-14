@@ -22,9 +22,9 @@
 
 #include <KoShapeManager.h>
 #include <KoSelection.h>
-#include <KoPointerEvent.h>
+#include <KPointerEvent.h>
 
-ResizeFolderStrategy::ResizeFolderStrategy(Canvas *canvas, FolderShape *clickedFolder, KoPointerEvent &event)
+ResizeFolderStrategy::ResizeFolderStrategy(Canvas *canvas, FolderShape *clickedFolder, KPointerEvent &event)
     : m_canvas(canvas), m_folder(clickedFolder)
 {
     Q_ASSERT(m_canvas);

@@ -54,7 +54,7 @@
 #include <KoShapeManager.h>
 #include <KoToolProxy.h>
 #include <KoZoomHandler.h>
-#include <KoPointerEvent.h>
+#include <KPointerEvent.h>
 
 // KCells
 #include "KCDoc.h"
@@ -159,7 +159,7 @@ void KCCanvas::showContextMenu(const QPoint& globalPos)
 
 void KCCanvas::mouseReleaseEvent(QMouseEvent* event)
 {
-//    KoPointerEvent pev(event, QPointF());
+//    KPointerEvent pev(event, QPointF());
 //    mouseReleased(&pev);
 
     QPointF documentPosition;
@@ -181,7 +181,7 @@ void KCCanvas::mouseReleaseEvent(QMouseEvent* event)
 
 void KCCanvas::mouseMoveEvent(QMouseEvent* event)
 {
-//    KoPointerEvent pev(event, QPointF());
+//    KPointerEvent pev(event, QPointF());
 //    mouseMoved(&pev);
 
     QPointF documentPosition;
@@ -203,7 +203,7 @@ void KCCanvas::mouseMoveEvent(QMouseEvent* event)
 
 void KCCanvas::mouseDoubleClickEvent(QMouseEvent* event)
 {
-//    KoPointerEvent pev(event, QPointF());
+//    KPointerEvent pev(event, QPointF());
 //    mouseDoubleClicked(&pev);
 
     QPointF documentPosition;

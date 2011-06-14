@@ -21,7 +21,7 @@
 #include "KoToolProxy_p.h"
 
 #include "KoToolBase.h"
-#include "KoPointerEvent.h"
+#include "KPointerEvent.h"
 #include "KInputDevice.h"
 #include "KoToolManager_p.h"
 #include "KoToolSelection.h"
@@ -61,11 +61,11 @@ void KoToolProxyPrivate::timeout() // Auto scroll the canvas
     scrollEdgePoint += moved;
 
     QMouseEvent event(QEvent::MouseMove, scrollEdgePoint, Qt::LeftButton, Qt::LeftButton, 0);
-    KoPointerEvent ev(&event, controller->canvas()->viewConverter()->viewToDocument(scrollEdgePoint));
+    KPointerEvent ev(&event, controller->canvas()->viewConverter()->viewToDocument(scrollEdgePoint));
     activeTool->mouseMoveEvent(&ev);
 }
 
-void KoToolProxyPrivate::checkAutoScroll(const KoPointerEvent &event)
+void KoToolProxyPrivate::checkAutoScroll(const KPointerEvent &event)
 {
     if (controller == 0) return;
     if (!activeTool) return;
@@ -139,7 +139,7 @@ void KoToolProxy::tabletEvent(QTabletEvent *event, const QPointF &point)
     KInputDevice id(event->device(), event->pointerType(), event->uniqueId());
     KoToolManager::instance()->priv()->switchInputDevice(id);
 
-    KoPointerEvent ev(event, point);
+    KPointerEvent ev(event, point);
     switch (event->type()) {
     case QEvent::TabletPress:
         ev.setTabletButton(Qt::LeftButton);
@@ -177,7 +177,7 @@ void KoToolProxy::mousePressEvent(QMouseEvent *event, const QPointF &point)
     if (d->tabletPressed) // refuse to send a press unless there was a release first.
         return;
 
-    KoPointerEvent ev(event, point);
+    KPointerEvent ev(event, point);
     if (d->activeTool)
         d->activeTool->mousePressEvent(&ev);
     else
@@ -194,7 +194,7 @@ void KoToolProxy::mouseDoubleClickEvent(QMouseEvent *event, const QPointF &point
         return;
     }
 
-    KoPointerEvent ev(event, point);
+    KPointerEvent ev(event, point);
     d->activeTool->mouseDoubleClickEvent(&ev);
     if (! event->isAccepted() && event->button() == Qt::LeftButton)
         d->activeTool->canvas()->shapeManager()->suggestChangeTool(&ev);
@@ -213,7 +213,7 @@ void KoToolProxy::mouseMoveEvent(QMouseEvent *event, const QPointF &point)
         return;
     }
 
-    KoPointerEvent ev(event, point);
+    KPointerEvent ev(event, point);
     d->activeTool->mouseMoveEvent(&ev);
 
     d->checkAutoScroll(ev);
@@ -226,7 +226,7 @@ void KoToolProxy::mouseReleaseEvent(QMouseEvent *event, const QPointF &point)
     KoToolManager::instance()->priv()->switchInputDevice(id);
     d->scrollTimer.stop();
 
-    KoPointerEvent ev(event, point);
+    KPointerEvent ev(event, point);
     if (d->activeTool) {
         d->activeTool->mouseReleaseEvent(&ev);
 
@@ -273,7 +273,7 @@ void KoToolProxy::keyReleaseEvent(QKeyEvent *event)
 
 void KoToolProxy::wheelEvent(QWheelEvent *event, const QPointF &point)
 {
-    KoPointerEvent ev(event, point);
+    KPointerEvent ev(event, point);
     if (d->activeTool)
         d->activeTool->wheelEvent(&ev);
     else

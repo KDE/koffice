@@ -33,7 +33,7 @@
 #include <KImageCollection.h>
 #include <KoSelection.h>
 #include <KoShapeManager.h>
-#include <KoPointerEvent.h>
+#include <KPointerEvent.h>
 
 PictureTool::PictureTool( KCanvasBase* canvas )
     : KoToolBase( canvas ),
@@ -104,7 +104,7 @@ void PictureTool::setImageData(KJob *job)
     canvas()->addCommand(cmd);
 }
 
-void PictureTool::mouseDoubleClickEvent( KoPointerEvent *event )
+void PictureTool::mouseDoubleClickEvent( KPointerEvent *event )
 {
     if (canvas()->shapeManager()->shapeAt(event->point) != m_pictureshape) {
         event->ignore(); // allow the event to be used by another

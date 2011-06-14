@@ -34,13 +34,13 @@ public:
     /// reimplemented from KoToolBase
     virtual void paint(QPainter&, const KoViewConverter&) {}
     /// reimplemented from KoToolBase
-    virtual void mousePressEvent(KoPointerEvent*) {}
+    virtual void mousePressEvent(KPointerEvent*) {}
     /// reimplemented from superclass
-    virtual void mouseDoubleClickEvent(KoPointerEvent *event);
+    virtual void mouseDoubleClickEvent(KPointerEvent *event);
     /// reimplemented from KoToolBase
-    virtual void mouseMoveEvent(KoPointerEvent*) {}
+    virtual void mouseMoveEvent(KPointerEvent*) {}
     /// reimplemented from KoToolBase
-    virtual void mouseReleaseEvent(KoPointerEvent*) {}
+    virtual void mouseReleaseEvent(KPointerEvent*) {}
 
     /// reimplemented from KoToolBase
     virtual void activate(ToolActivation toolActivation, const QSet<KoShape*> &shapes);

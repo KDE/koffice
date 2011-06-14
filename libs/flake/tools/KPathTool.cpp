@@ -29,7 +29,7 @@
 #include "KoResourceManager.h"
 #include "KoViewConverter.h"
 #include "KoSelection.h"
-#include "KoPointerEvent.h"
+#include "KPointerEvent.h"
 #include "commands/KPathPointTypeCommand_p.h"
 #include "commands/KPathPointInsertCommand.h"
 #include "commands/KPathPointRemoveCommand.h"
@@ -457,7 +457,7 @@ void KPathTool::repaintDecorations()
     updateOptionsWidget();
 }
 
-void KPathTool::mousePressEvent(KoPointerEvent *event)
+void KPathTool::mousePressEvent(KPointerEvent *event)
 {
     // we are moving if we hit a point and use the left mouse button
     event->ignore();
@@ -488,7 +488,7 @@ void KPathTool::mousePressEvent(KoPointerEvent *event)
     }
 }
 
-void KPathTool::mouseMoveEvent(KoPointerEvent *event)
+void KPathTool::mouseMoveEvent(KPointerEvent *event)
 {
     if (event->button() & Qt::RightButton)
         return;
@@ -600,7 +600,7 @@ void KPathTool::mouseMoveEvent(KoPointerEvent *event)
         emit statusTextChanged(i18n("Press B to break path at selected segments."));
 }
 
-void KPathTool::mouseReleaseEvent(KoPointerEvent *event)
+void KPathTool::mouseReleaseEvent(KPointerEvent *event)
 {
     Q_D(KoToolBase);
     if (m_currentStrategy) {
@@ -702,7 +702,7 @@ void KPathTool::keyReleaseEvent(QKeyEvent *event)
     event->accept();
 }
 
-void KPathTool::mouseDoubleClickEvent(KoPointerEvent *event)
+void KPathTool::mouseDoubleClickEvent(KPointerEvent *event)
 {
     Q_D(KoToolBase);
     event->ignore();

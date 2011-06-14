@@ -19,9 +19,9 @@
 #include "DragCanvasStrategy.h"
 #include "Canvas.h"
 
-#include <KoPointerEvent.h>
+#include <KPointerEvent.h>
 
-DragCanvasStrategy::DragCanvasStrategy(Canvas *canvas, KoPointerEvent &event)
+DragCanvasStrategy::DragCanvasStrategy(Canvas *canvas, KPointerEvent &event)
     : m_canvas(canvas), m_lastPosition(event.point)
 {
 }

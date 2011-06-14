@@ -70,10 +70,10 @@ public:
     void paintReferenceSelection(QPainter &painter, const QRectF &paintRect);
     void paintSelection(QPainter &painter, const QRectF &paintRect);
 
-    virtual void mousePressEvent(KoPointerEvent* event);
-    virtual void mouseMoveEvent(KoPointerEvent* event);
-    virtual void mouseReleaseEvent(KoPointerEvent* event);
-    virtual void mouseDoubleClickEvent(KoPointerEvent* event);
+    virtual void mousePressEvent(KPointerEvent* event);
+    virtual void mouseMoveEvent(KPointerEvent* event);
+    virtual void mouseReleaseEvent(KPointerEvent* event);
+    virtual void mouseDoubleClickEvent(KPointerEvent* event);
     virtual void keyPressEvent(QKeyEvent* event);
     virtual void inputMethodEvent(QInputMethodEvent * event);
 
@@ -104,7 +104,7 @@ protected:
     void init();
     virtual QWidget* createOptionWidget();
     void applyUserInput(const QString &userInput, bool expandMatrix = false);
-    virtual KInteractionStrategy* createStrategy(KoPointerEvent* event);
+    virtual KInteractionStrategy* createStrategy(KPointerEvent* event);
 
     /**
      * The shape offset in document coordinates.

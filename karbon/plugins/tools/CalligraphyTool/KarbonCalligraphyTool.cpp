@@ -24,7 +24,7 @@
 #include <KPathShape.h>
 #include <KoShapeGroup.h>
 #include <KLineBorder.h>
-#include <KoPointerEvent.h>
+#include <KPointerEvent.h>
 #include <KPathPoint.h>
 #include <KCanvasBase.h>
 #include <KoShapeController.h>
@@ -89,7 +89,7 @@ void KarbonCalligraphyTool::paint(QPainter &painter,
     painter.restore();
 }
 
-void KarbonCalligraphyTool::mousePressEvent(KoPointerEvent *event)
+void KarbonCalligraphyTool::mousePressEvent(KPointerEvent *event)
 {
     if (m_isDrawing)
         return;
@@ -104,7 +104,7 @@ void KarbonCalligraphyTool::mousePressEvent(KoPointerEvent *event)
     //addPoint( event );
 }
 
-void KarbonCalligraphyTool::mouseMoveEvent(KoPointerEvent *event)
+void KarbonCalligraphyTool::mouseMoveEvent(KPointerEvent *event)
 {
     if (! m_isDrawing)
         return;
@@ -112,7 +112,7 @@ void KarbonCalligraphyTool::mouseMoveEvent(KoPointerEvent *event)
     addPoint(event);
 }
 
-void KarbonCalligraphyTool::mouseReleaseEvent(KoPointerEvent *event)
+void KarbonCalligraphyTool::mouseReleaseEvent(KPointerEvent *event)
 {
     if (! m_isDrawing)
         return;
@@ -153,7 +153,7 @@ void KarbonCalligraphyTool::mouseReleaseEvent(KoPointerEvent *event)
     m_shape = 0;
 }
 
-void KarbonCalligraphyTool::addPoint(KoPointerEvent *event)
+void KarbonCalligraphyTool::addPoint(KPointerEvent *event)
 {
     if (m_pointCount == 0) {
         if (m_usePath && m_selectedPath)
@@ -190,7 +190,7 @@ void KarbonCalligraphyTool::addPoint(KoPointerEvent *event)
         m_speed = QPointF(0, 0); // following path
 }
 
-void KarbonCalligraphyTool::setAngle(KoPointerEvent *event)
+void KarbonCalligraphyTool::setAngle(KPointerEvent *event)
 {
     if (! m_useAngle) {
         m_angle = (360 - m_customAngle + 90) / 180.0 * M_PI;

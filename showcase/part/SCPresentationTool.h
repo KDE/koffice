@@ -47,13 +47,13 @@ public:
 
     void paint(QPainter &painter, const KoViewConverter &converter);
 
-    void mousePressEvent(KoPointerEvent *event);
-    void mouseDoubleClickEvent(KoPointerEvent *event);
-    void mouseMoveEvent(KoPointerEvent *event);
-    void mouseReleaseEvent(KoPointerEvent *event);
+    void mousePressEvent(KPointerEvent *event);
+    void mouseDoubleClickEvent(KPointerEvent *event);
+    void mouseMoveEvent(KPointerEvent *event);
+    void mouseReleaseEvent(KPointerEvent *event);
     void keyPressEvent(QKeyEvent *event);
     void keyReleaseEvent(QKeyEvent *event);
-    void wheelEvent(KoPointerEvent * event);
+    void wheelEvent(KPointerEvent * event);
 
     SCPresentationStrategyBase *strategy();
     SCViewModePresentation &viewModePresentation();
@@ -77,7 +77,7 @@ private:
      * @param shape the shape fhich is searched for hyperlink
      * @param hyperLink the string which is filled with hyperlink url
      */
-    bool checkHyperlink(KoPointerEvent *event, KoShape * shape, QString &hyperLink);
+    bool checkHyperlink(KPointerEvent *event, KoShape * shape, QString &hyperLink);
 
     /**
      * Runs url string defined inside hyperlink

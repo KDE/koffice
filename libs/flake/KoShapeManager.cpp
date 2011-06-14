@@ -24,7 +24,7 @@
 #include "KoShapeManager_p.h"
 #include "KoSelection.h"
 #include "KoToolManager.h"
-#include "KoPointerEvent.h"
+#include "KPointerEvent.h"
 #include "KCanvasBase.h"
 #include "KoShapeContainer.h"
 #include "KoShapeBorderBase.h"
@@ -593,7 +593,7 @@ KoSelection *KoShapeManager::selection() const
     return d->selection;
 }
 
-void KoShapeManager::suggestChangeTool(KoPointerEvent *event)
+void KoShapeManager::suggestChangeTool(KPointerEvent *event)
 {
     QList<KoShape*> shapes;
 

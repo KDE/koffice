@@ -22,7 +22,7 @@
 #include "SelectionDecorator.h"
 
 #include <KoShapeManager.h>
-#include <KoPointerEvent.h>
+#include <KPointerEvent.h>
 #include <KCanvasBase.h>
 #include <KoResourceManager.h>
 #include <commands/KoShapeSizeCommand.h>

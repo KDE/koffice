@@ -34,7 +34,7 @@
 #include "KoShapeRegistry.h"
 #include "KoShapeManager.h"
 #include "KCanvasBase.h"
-#include "KoPointerEvent.h"
+#include "KPointerEvent.h"
 #include "tools/KCreateShapesTool.h"
 #include "tools/KoZoomTool_p.h"
 #include "tools/KPanTool_p.h"

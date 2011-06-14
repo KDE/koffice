@@ -51,11 +51,11 @@ public:
      */
     explicit KoZoomTool(KCanvasBase *canvas);
     /// reimplemented method
-    virtual void wheelEvent(KoPointerEvent *event);
+    virtual void wheelEvent(KPointerEvent *event);
     /// reimplemented method
-    virtual void mouseReleaseEvent(KoPointerEvent *event);
+    virtual void mouseReleaseEvent(KPointerEvent *event);
     /// reimplemented method
-    virtual void mouseMoveEvent(KoPointerEvent *event);
+    virtual void mouseMoveEvent(KPointerEvent *event);
     /// reimplemented method
     virtual void keyPressEvent(QKeyEvent *event);
     /// reimplemented method
@@ -63,7 +63,7 @@ public:
     /// reimplemented method
     virtual void activate(ToolActivation toolActivation, const QSet<KoShape*> &shapes);
     /// reimplemented method
-    virtual void mouseDoubleClickEvent(KoPointerEvent *event);
+    virtual void mouseDoubleClickEvent(KPointerEvent *event);
 
     void setCanvasController(KCanvasController *controller) {
         m_controller = controller;
@@ -75,7 +75,7 @@ protected:
     QWidget *createOptionWidget();
 
 private:
-    virtual KInteractionStrategy *createStrategy(KoPointerEvent *event);
+    virtual KInteractionStrategy *createStrategy(KPointerEvent *event);
 
     void updateCursor(bool swap);
 

@@ -55,11 +55,11 @@ public:
     /// reimplemented from superclass
     virtual bool wantsAutoScroll() const;
     /// reimplemented from superclass
-    virtual void mousePressEvent(KoPointerEvent *event);
+    virtual void mousePressEvent(KPointerEvent *event);
     /// reimplemented from superclass
-    virtual void mouseMoveEvent(KoPointerEvent *event);
+    virtual void mouseMoveEvent(KPointerEvent *event);
     /// reimplemented from superclass
-    virtual void mouseReleaseEvent(KoPointerEvent *event);
+    virtual void mouseReleaseEvent(KPointerEvent *event);
     /// reimplemented from superclass
     virtual void keyPressEvent(QKeyEvent *event);
     /// reimplemented from superclass
@@ -67,7 +67,7 @@ public:
     /// reimplemented from superclass
     virtual void activate(ToolActivation toolActivation, const QSet<KoShape*> &shapes);
     /// reimplemented method
-    virtual void customMoveEvent(KoPointerEvent *event);
+    virtual void customMoveEvent(KPointerEvent *event);
 
     /// set the canvasController this tool works on.
     void setCanvasController(KCanvasController *controller) {

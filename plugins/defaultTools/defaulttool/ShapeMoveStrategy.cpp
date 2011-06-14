@@ -29,7 +29,7 @@
 #include <KoResourceManager.h>
 #include <commands/KoShapeMoveCommand.h>
 #include <KoSnapGuide.h>
-#include <KoPointerEvent.h>
+#include <KPointerEvent.h>
 #include <KoToolBase.h>
 #include <KLocale>
 

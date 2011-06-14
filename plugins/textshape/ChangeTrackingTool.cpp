@@ -22,7 +22,7 @@
 
 #include <KCanvasBase.h>
 #include <KChangeTracker.h>
-#include <KoPointerEvent.h>
+#include <KPointerEvent.h>
 #include <KoSelection.h>
 #include <KoShapeManager.h>
 #include <KoTextDocument.h>
@@ -75,12 +75,12 @@ ChangeTrackingTool::~ChangeTrackingTool()
     delete m_model;
 }
 
-void ChangeTrackingTool::mouseReleaseEvent(KoPointerEvent* event)
+void ChangeTrackingTool::mouseReleaseEvent(KPointerEvent* event)
 {
     event->ignore();
 }
 
-void ChangeTrackingTool::mouseMoveEvent(KoPointerEvent* event)
+void ChangeTrackingTool::mouseMoveEvent(KPointerEvent* event)
 {
     updateSelectedShape(event->point);
     int position = pointToPosition(event->point);
@@ -98,7 +98,7 @@ void ChangeTrackingTool::mouseMoveEvent(KoPointerEvent* event)
     }
 }
 
-void ChangeTrackingTool::mousePressEvent(KoPointerEvent* event)
+void ChangeTrackingTool::mousePressEvent(KPointerEvent* event)
 {
     int position = pointToPosition(event->point);
     QTextCursor cursor(m_textShapeData->document());

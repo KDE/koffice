@@ -49,7 +49,7 @@
 #include <KoColor.h>
 #include <KoSelection.h>
 #include <KoShapeManager.h>
-#include <KoPointerEvent.h>
+#include <KPointerEvent.h>
 #include <KoVariable.h>
 #include <KColorBackground.h>
 #include <KOdf.h>
@@ -858,7 +858,7 @@ int TextTool::pointToPosition(const QPointF &point) const
     return caretPos;
 }
 
-void TextTool::mousePressEvent(KoPointerEvent *event)
+void TextTool::mousePressEvent(KPointerEvent *event)
 {
     if (m_textEditor.isNull())
         return;
@@ -927,7 +927,7 @@ void TextTool::mousePressEvent(KoPointerEvent *event)
         paste();
 }
 
-void TextTool::mouseDoubleClickEvent(KoPointerEvent *event)
+void TextTool::mouseDoubleClickEvent(KPointerEvent *event)
 {
     if (canvas()->shapeManager()->shapeAt(event->point) != m_textShape) {
         event->ignore(); // allow the event to be used by another
@@ -944,7 +944,7 @@ void TextTool::mouseDoubleClickEvent(KoPointerEvent *event)
     updateSelectionHandler();
 }
 
-void TextTool::mouseMoveEvent(KoPointerEvent *event)
+void TextTool::mouseMoveEvent(KPointerEvent *event)
 {
     if (m_textEditor.isNull())
         return;
@@ -992,7 +992,7 @@ void TextTool::mouseMoveEvent(KoPointerEvent *event)
     updateSelectionHandler();
 }
 
-void TextTool::mouseReleaseEvent(KoPointerEvent *event)
+void TextTool::mouseReleaseEvent(KPointerEvent *event)
 {
     event->ignore();
     editingPluginEvents();

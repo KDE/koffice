@@ -41,13 +41,13 @@ public:
     /// reimplemented form KoToolBase
     virtual void paint(QPainter &painter, const KoViewConverter &converter);
     /// reimplemented form KoToolBase
-    virtual void mousePressEvent(KoPointerEvent *event);
+    virtual void mousePressEvent(KPointerEvent *event);
     /// reimplemented form KoToolBase
-    virtual void mouseMoveEvent(KoPointerEvent *event);
+    virtual void mouseMoveEvent(KPointerEvent *event);
     /// reimplemented form KoToolBase
-    virtual void mouseReleaseEvent(KoPointerEvent *event);
+    virtual void mouseReleaseEvent(KPointerEvent *event);
     /// reimplemented form KoToolBase
-    virtual void mouseDoubleClickEvent(KoPointerEvent *event);
+    virtual void mouseDoubleClickEvent(KPointerEvent *event);
     /// reimplemented form KoToolBase
     virtual void repaintDecorations();
     /// reimplemented form KoToolBase

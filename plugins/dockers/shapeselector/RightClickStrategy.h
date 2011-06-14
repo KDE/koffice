@@ -23,7 +23,7 @@
 
 class Canvas;
 class KoShape;
-class KoPointerEvent;
+class KPointerEvent;
 
 /**
  * A strategy for handling a right click
@@ -35,7 +35,7 @@ class KoPointerEvent;
 class RightClickStrategy : public InteractionStrategy
 {
 public:
-    RightClickStrategy(Canvas *canvas, KoShape *clickedShape, KoPointerEvent &event);
+    RightClickStrategy(Canvas *canvas, KoShape *clickedShape, KPointerEvent &event);
 
     virtual void handleMouseMove(const QPointF &mouseLocation, Qt::KeyboardModifiers modifiers);
     virtual void finishInteraction(Qt::KeyboardModifiers modifiers);

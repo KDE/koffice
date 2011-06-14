@@ -20,7 +20,7 @@
 #include "KoToolBase.h"
 #include "KoToolBase_p.h"
 #include "KCanvasBase.h"
-#include "KoPointerEvent.h"
+#include "KPointerEvent.h"
 #include "KoResourceManager.h"
 #include "KoViewConverter.h"
 
@@ -66,7 +66,7 @@ bool KoToolBase::wantsAutoScroll() const
     return true;
 }
 
-void KoToolBase::mouseDoubleClickEvent(KoPointerEvent *event)
+void KoToolBase::mouseDoubleClickEvent(KPointerEvent *event)
 {
     event->ignore();
 }
@@ -81,7 +81,7 @@ void KoToolBase::keyReleaseEvent(QKeyEvent *e)
     e->ignore();
 }
 
-void KoToolBase::wheelEvent(KoPointerEvent * e)
+void KoToolBase::wheelEvent(KPointerEvent * e)
 {
     e->ignore();
 }
