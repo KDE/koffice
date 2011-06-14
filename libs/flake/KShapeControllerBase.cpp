@@ -22,10 +22,10 @@
 #include "KResourceManager.h"
 #include "KoShapeRegistry.h"
 
-class KoShapeControllerBasePrivate
+class KShapeControllerBasePrivate
 {
 public:
-    KoShapeControllerBasePrivate()
+    KShapeControllerBasePrivate()
         : resourceManager(new KResourceManager())
     {
         KoShapeRegistry *registry = KoShapeRegistry::instance();
@@ -35,7 +35,7 @@ public:
         }
     }
 
-    ~KoShapeControllerBasePrivate()
+    ~KShapeControllerBasePrivate()
     {
         delete resourceManager;
     }
@@ -44,7 +44,7 @@ public:
 };
 
 KShapeControllerBase::KShapeControllerBase()
-    : d(new KoShapeControllerBasePrivate())
+    : d(new KShapeControllerBasePrivate())
 {
 }
 

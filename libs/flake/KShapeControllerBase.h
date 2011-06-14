@@ -27,7 +27,7 @@
 
 class KShape;
 class QString;
-class KoShapeControllerBasePrivate;
+class KShapeControllerBasePrivate;
 class KResourceManager;
 
 /**
@@ -66,7 +66,7 @@ public:
     virtual KResourceManager *resourceManager() const;
 
 private:
-    KoShapeControllerBasePrivate * d;
+    KShapeControllerBasePrivate * d;
 };
 
 #endif
