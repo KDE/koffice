@@ -32,7 +32,7 @@ KFilterEffect * OffsetEffectFactory::createFilterEffect() const
     return new OffsetEffect();
 }
 
-KoFilterEffectConfigWidgetBase * OffsetEffectFactory::createConfigWidget() const
+KFilterEffectConfigWidgetBase * OffsetEffectFactory::createConfigWidget() const
 {
     return new OffsetEffectConfigWidget();
 }

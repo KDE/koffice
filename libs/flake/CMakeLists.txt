@@ -100,7 +100,7 @@ set(flake_SRCS
     KoFilterEffectStack.cpp
     KoFilterEffectFactoryBase.cpp
     KoFilterEffectRegistry.cpp
-    KoFilterEffectConfigWidgetBase.cpp
+    KFilterEffectConfigWidgetBase.cpp
     KoFilterEffectRenderContext.cpp
     KoFilterEffectLoadingContext.cpp
     KoTextOnShapeContainer.cpp
@@ -248,7 +248,7 @@ install(
     KEventActionFactoryBase.h
     KoEventAction.h
     KEventActionRegistry.h
-    KoFilterEffectConfigWidgetBase.h
+    KFilterEffectConfigWidgetBase.h
     KoFilterEffectFactoryBase.h
     KFilterEffect.h
     KoFilterEffectLoadingContext.h

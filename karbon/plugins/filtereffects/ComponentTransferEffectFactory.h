@@ -29,7 +29,7 @@ class ComponentTransferEffectFactory : public KoFilterEffectFactoryBase
 public:
     explicit ComponentTransferEffectFactory(QObject *parent);
     virtual KFilterEffect * createFilterEffect() const;
-    virtual KoFilterEffectConfigWidgetBase * createConfigWidget() const;
+    virtual KFilterEffectConfigWidgetBase * createConfigWidget() const;
 };
 
 #endif // COMPONENTTRANSFEREFFECTFACTORY_H

@@ -20,19 +20,19 @@
 #ifndef BLUREFFECTCONFIGWIDGET_H
 #define BLUREFFECTCONFIGWIDGET_H
 
-#include "KoFilterEffectConfigWidgetBase.h"
+#include "KFilterEffectConfigWidgetBase.h"
 
 class KFilterEffect;
 class BlurEffect;
 class KDoubleNumInput;
 
-class BlurEffectConfigWidget : public KoFilterEffectConfigWidgetBase
+class BlurEffectConfigWidget : public KFilterEffectConfigWidgetBase
 {
     Q_OBJECT
 public:
     BlurEffectConfigWidget(QWidget *parent = 0);
 
-    /// reimplemented from KoFilterEffectConfigWidgetBase
+    /// reimplemented from KFilterEffectConfigWidgetBase
     virtual bool editFilterEffect(KFilterEffect * filterEffect);
 
 private slots:

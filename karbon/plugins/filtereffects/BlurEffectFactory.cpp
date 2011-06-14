@@ -33,7 +33,7 @@ KFilterEffect * BlurEffectFactory::createFilterEffect() const
     return new BlurEffect();
 }
 
-KoFilterEffectConfigWidgetBase * BlurEffectFactory::createConfigWidget() const
+KFilterEffectConfigWidgetBase * BlurEffectFactory::createConfigWidget() const
 {
     return new BlurEffectConfigWidget();
 }

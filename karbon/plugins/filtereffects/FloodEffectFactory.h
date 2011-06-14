@@ -29,7 +29,7 @@ class FloodEffectFactory : public KoFilterEffectFactoryBase
 public:
     explicit FloodEffectFactory(QObject *parent);
     virtual KFilterEffect * createFilterEffect() const;
-    virtual KoFilterEffectConfigWidgetBase * createConfigWidget() const;
+    virtual KFilterEffectConfigWidgetBase * createConfigWidget() const;
 };
 
 #endif // FLOODEFFECTFACTORY_H

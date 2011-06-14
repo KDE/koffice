@@ -20,7 +20,7 @@
 #ifndef COLORMATRIXEFFECTCONFIGWIDGET_H
 #define COLORMATRIXEFFECTCONFIGWIDGET_H
 
-#include "KoFilterEffectConfigWidgetBase.h"
+#include "KFilterEffectConfigWidgetBase.h"
 
 class ColorMatrixEffect;
 class KFilterEffect;
@@ -29,13 +29,13 @@ class QStackedWidget;
 class KDoubleNumInput;
 class MatrixDataModel;
 
-class ColorMatrixEffectConfigWidget : public KoFilterEffectConfigWidgetBase
+class ColorMatrixEffectConfigWidget : public KFilterEffectConfigWidgetBase
 {
     Q_OBJECT
 public:
     ColorMatrixEffectConfigWidget(QWidget *parent = 0);
 
-    /// reimplemented from KoFilterEffectConfigWidgetBase
+    /// reimplemented from KFilterEffectConfigWidgetBase
     virtual bool editFilterEffect(KFilterEffect * filterEffect);
 
 private slots:

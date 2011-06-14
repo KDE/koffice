@@ -33,7 +33,7 @@ KFilterEffect * FloodEffectFactory::createFilterEffect() const
     return new FloodEffect();
 }
 
-KoFilterEffectConfigWidgetBase * FloodEffectFactory::createConfigWidget() const
+KFilterEffectConfigWidgetBase * FloodEffectFactory::createConfigWidget() const
 {
     return new FloodEffectConfigWidget();
 }

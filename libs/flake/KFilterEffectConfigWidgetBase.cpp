@@ -17,28 +17,9 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOFILTEREFFECTCONFIGWIDGETBASE_H
-#define KOFILTEREFFECTCONFIGWIDGETBASE_H
+#include "KFilterEffectConfigWidgetBase.h"
 
-#include "flake_export.h"
-#include <QtGui/QWidget>
-
-class KFilterEffect;
-
-/// Base class for filter effects config widgets
-class FLAKE_EXPORT KoFilterEffectConfigWidgetBase : public QWidget
+KFilterEffectConfigWidgetBase::KFilterEffectConfigWidgetBase(QWidget *parent)
+: QWidget(parent)
 {
-    Q_OBJECT
-public:
-    KoFilterEffectConfigWidgetBase(QWidget *parent = 0);
-    virtual ~KoFilterEffectConfigWidgetBase() {};
-
-    /// Sets the filter effect to be edited by the config widget
-    virtual bool editFilterEffect(KFilterEffect *filterEffect) = 0;
-
-signals:
-    /// Is emitted when the filter effect has changed
-    void filterChanged();
-};
-
-#endif // KOFILTEREFFECTCONFIGWIDGETBASE_H
+}

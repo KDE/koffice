@@ -20,19 +20,19 @@
 #ifndef BLENDEFFECTCONFIGWIDGET_H
 #define BLENDEFFECTCONFIGWIDGET_H
 
-#include "KoFilterEffectConfigWidgetBase.h"
+#include "KFilterEffectConfigWidgetBase.h"
 
 class BlendEffect;
 class KFilterEffect;
 class KComboBox;
 
-class BlendEffectConfigWidget : public KoFilterEffectConfigWidgetBase
+class BlendEffectConfigWidget : public KFilterEffectConfigWidgetBase
 {
     Q_OBJECT
 public:
     BlendEffectConfigWidget(QWidget *parent = 0);
 
-    /// reimplemented from KoFilterEffectConfigWidgetBase
+    /// reimplemented from KFilterEffectConfigWidgetBase
     virtual bool editFilterEffect(KFilterEffect * filterEffect);
 
 private slots:

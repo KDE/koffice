@@ -29,7 +29,7 @@ class MergeEffectFactory : public KoFilterEffectFactoryBase
 public:
     explicit MergeEffectFactory(QObject *parent);
     virtual KFilterEffect * createFilterEffect() const;
-    virtual KoFilterEffectConfigWidgetBase * createConfigWidget() const;
+    virtual KFilterEffectConfigWidgetBase * createConfigWidget() const;
 };
 
 #endif // MERGEEFFECTFACTORY_H

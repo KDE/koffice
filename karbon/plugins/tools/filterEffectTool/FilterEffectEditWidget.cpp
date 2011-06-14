@@ -28,7 +28,7 @@
 #include "KoFilterEffectRegistry.h"
 #include "KFilterEffect.h"
 #include "KoFilterEffectStack.h"
-#include "KoFilterEffectConfigWidgetBase.h"
+#include "KFilterEffectConfigWidgetBase.h"
 #include "KoShape.h"
 #include "KoCanvasBase.h"
 #include "KoResourceModel.h"
@@ -419,7 +419,7 @@ void FilterEffectEditWidget::addWidgetForItem(ConnectionSource item)
 
     m_currentItem = item;
 
-    KoFilterEffectConfigWidgetBase * currentPanel = 0;
+    KFilterEffectConfigWidgetBase * currentPanel = 0;
 
     if (! filterEffect) {
         if (item.type() != ConnectionSource::Effect) {
@@ -446,7 +446,7 @@ void FilterEffectEditWidget::addWidgetForItem(ConnectionSource item)
         connect(currentPanel, SIGNAL(filterChanged()), this, SLOT(filterChanged()));
     }
 
-    currentPanel = qobject_cast<KoFilterEffectConfigWidgetBase*>(configStack->widget(0));
+    currentPanel = qobject_cast<KFilterEffectConfigWidgetBase*>(configStack->widget(0));
     if (currentPanel)
         currentPanel->editFilterEffect(filterEffect);
 }

@@ -33,7 +33,7 @@ KFilterEffect * ComponentTransferEffectFactory::createFilterEffect() const
     return new ComponentTransferEffect();
 }
 
-KoFilterEffectConfigWidgetBase * ComponentTransferEffectFactory::createConfigWidget() const
+KFilterEffectConfigWidgetBase * ComponentTransferEffectFactory::createConfigWidget() const
 {
     return new ComponentTransferEffectConfigWidget();
 }

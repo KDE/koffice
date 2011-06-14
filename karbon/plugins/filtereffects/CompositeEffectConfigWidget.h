@@ -20,7 +20,7 @@
 #ifndef COMPOSITEEFFECTCONFIGWIDGET_H
 #define COMPOSITEEFFECTCONFIGWIDGET_H
 
-#include "KoFilterEffectConfigWidgetBase.h"
+#include "KFilterEffectConfigWidgetBase.h"
 
 class KFilterEffect;
 class CompositeEffect;
@@ -28,13 +28,13 @@ class KDoubleNumInput;
 class KComboBox;
 class QStackedWidget;
 
-class CompositeEffectConfigWidget : public KoFilterEffectConfigWidgetBase
+class CompositeEffectConfigWidget : public KFilterEffectConfigWidgetBase
 {
     Q_OBJECT
 public:
     CompositeEffectConfigWidget(QWidget *parent = 0);
 
-    /// reimplemented from KoFilterEffectConfigWidgetBase
+    /// reimplemented from KFilterEffectConfigWidgetBase
     virtual bool editFilterEffect(KFilterEffect * filterEffect);
 
 private slots:

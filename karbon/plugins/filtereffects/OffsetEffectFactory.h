@@ -29,7 +29,7 @@ class OffsetEffectFactory : public KoFilterEffectFactoryBase
 public:
     explicit OffsetEffectFactory(QObject *parent);
     virtual KFilterEffect * createFilterEffect() const;
-    virtual KoFilterEffectConfigWidgetBase * createConfigWidget() const;
+    virtual KFilterEffectConfigWidgetBase * createConfigWidget() const;
 };
 
 #endif // OFFSETEFFECTFACTORY_H

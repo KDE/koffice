@@ -24,7 +24,7 @@
 #include <QObject>
 
 class KFilterEffect;
-class KoFilterEffectConfigWidgetBase;
+class KFilterEffectConfigWidgetBase;
 
 /// API docs go here
 class FLAKE_EXPORT KoFilterEffectFactoryBase : public QObject
@@ -63,7 +63,7 @@ public:
      * This method should be implemented by factories to create a filter effect config widget.
      * @return the filter effect options widget
      */
-    virtual KoFilterEffectConfigWidgetBase *createConfigWidget() const = 0;
+    virtual KFilterEffectConfigWidgetBase *createConfigWidget() const = 0;
 
 private:
     class Private;

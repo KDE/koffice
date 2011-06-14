@@ -29,7 +29,7 @@ class ImageEffectFactory : public KoFilterEffectFactoryBase
 public:
     explicit ImageEffectFactory(QObject *parent);
     virtual KFilterEffect * createFilterEffect() const;
-    virtual KoFilterEffectConfigWidgetBase * createConfigWidget() const;
+    virtual KFilterEffectConfigWidgetBase * createConfigWidget() const;
 };
 
 #endif // IMAGEEFFECTFACTORY_H

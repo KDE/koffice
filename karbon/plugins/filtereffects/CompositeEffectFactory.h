@@ -29,7 +29,7 @@ class CompositeEffectFactory : public KoFilterEffectFactoryBase
 public:
     explicit CompositeEffectFactory(QObject *parent);
     virtual KFilterEffect * createFilterEffect() const;
-    virtual KoFilterEffectConfigWidgetBase * createConfigWidget() const;
+    virtual KFilterEffectConfigWidgetBase * createConfigWidget() const;
 };
 
 #endif // COMPOSITEEFFECTFACTORY_H

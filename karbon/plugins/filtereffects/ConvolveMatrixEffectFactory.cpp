@@ -33,7 +33,7 @@ KFilterEffect * ConvolveMatrixEffectFactory::createFilterEffect() const
     return new ConvolveMatrixEffect();
 }
 
-KoFilterEffectConfigWidgetBase * ConvolveMatrixEffectFactory::createConfigWidget() const
+KFilterEffectConfigWidgetBase * ConvolveMatrixEffectFactory::createConfigWidget() const
 {
     return new ConvolveMatrixEffectConfigWidget();
 }

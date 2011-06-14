@@ -20,7 +20,7 @@
 #ifndef COMPONENTTRANSFEREFFECTCONFIGWIDGET_H
 #define COMPONENTTRANSFEREFFECTCONFIGWIDGET_H
 
-#include "KoFilterEffectConfigWidgetBase.h"
+#include "KFilterEffectConfigWidgetBase.h"
 #include "ComponentTransferEffect.h"
 
 class KFilterEffect;
@@ -29,13 +29,13 @@ class KComboBox;
 class KLineEdit;
 class QStackedWidget;
 
-class ComponentTransferEffectConfigWidget : public KoFilterEffectConfigWidgetBase
+class ComponentTransferEffectConfigWidget : public KFilterEffectConfigWidgetBase
 {
     Q_OBJECT
 public:
     ComponentTransferEffectConfigWidget(QWidget *parent = 0);
 
-    /// reimplemented from KoFilterEffectConfigWidgetBase
+    /// reimplemented from KFilterEffectConfigWidgetBase
     virtual bool editFilterEffect(KFilterEffect * filterEffect);
 
 private slots:

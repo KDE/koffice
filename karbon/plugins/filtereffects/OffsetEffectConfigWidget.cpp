@@ -28,7 +28,7 @@
 const qreal OffsetLimit = 100.0;
 
 OffsetEffectConfigWidget::OffsetEffectConfigWidget(QWidget *parent)
-        : KoFilterEffectConfigWidgetBase(parent), m_effect(0)
+        : KFilterEffectConfigWidgetBase(parent), m_effect(0)
 {
     QGridLayout * g = new QGridLayout(this);
 

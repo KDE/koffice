@@ -29,7 +29,7 @@ class BlendEffectFactory : public KoFilterEffectFactoryBase
 public:
     explicit BlendEffectFactory(QObject *parent);
     virtual KFilterEffect * createFilterEffect() const;
-    virtual KoFilterEffectConfigWidgetBase * createConfigWidget() const;
+    virtual KFilterEffectConfigWidgetBase * createConfigWidget() const;
 };
 
 #endif // BLENDEFFECTFACTORY_H

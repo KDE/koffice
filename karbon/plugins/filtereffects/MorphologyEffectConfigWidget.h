@@ -20,20 +20,20 @@
 #ifndef MORPHOLOGYEFFECTCONFIGWIDGET_H
 #define MORPHOLOGYEFFECTCONFIGWIDGET_H
 
-#include "KoFilterEffectConfigWidgetBase.h"
+#include "KFilterEffectConfigWidgetBase.h"
 
 class KFilterEffect;
 class MorphologyEffect;
 class KDoubleNumInput;
 class QButtonGroup;
 
-class MorphologyEffectConfigWidget : public KoFilterEffectConfigWidgetBase
+class MorphologyEffectConfigWidget : public KFilterEffectConfigWidgetBase
 {
     Q_OBJECT
 public:
     MorphologyEffectConfigWidget(QWidget *parent = 0);
 
-    /// reimplemented from KoFilterEffectConfigWidgetBase
+    /// reimplemented from KFilterEffectConfigWidgetBase
     virtual bool editFilterEffect(KFilterEffect * filterEffect);
 
 private slots:

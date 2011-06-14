@@ -33,7 +33,7 @@ KFilterEffect * CompositeEffectFactory::createFilterEffect() const
     return new CompositeEffect();
 }
 
-KoFilterEffectConfigWidgetBase * CompositeEffectFactory::createConfigWidget() const
+KFilterEffectConfigWidgetBase * CompositeEffectFactory::createConfigWidget() const
 {
     return new CompositeEffectConfigWidget();
 }

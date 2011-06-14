@@ -33,7 +33,7 @@ KFilterEffect * BlendEffectFactory::createFilterEffect() const
     return new BlendEffect();
 }
 
-KoFilterEffectConfigWidgetBase * BlendEffectFactory::createConfigWidget() const
+KFilterEffectConfigWidgetBase * BlendEffectFactory::createConfigWidget() const
 {
     return new BlendEffectConfigWidget();
 }

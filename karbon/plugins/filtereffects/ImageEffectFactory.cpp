@@ -32,7 +32,7 @@ KFilterEffect * ImageEffectFactory::createFilterEffect() const
     return new ImageEffect();
 }
 
-KoFilterEffectConfigWidgetBase * ImageEffectFactory::createConfigWidget() const
+KFilterEffectConfigWidgetBase * ImageEffectFactory::createConfigWidget() const
 {
     return new ImageEffectConfigWidget();
 }

@@ -24,7 +24,7 @@
 #include "KoFilterEffectStack.h"
 #include "KoFilterEffectFactoryBase.h"
 #include "KoFilterEffectRegistry.h"
-#include "KoFilterEffectConfigWidgetBase.h"
+#include "KFilterEffectConfigWidgetBase.h"
 #include "KoCanvasBase.h"
 #include "KoResourceManager.h"
 #include "KoShapeManager.h"
@@ -190,7 +190,7 @@ public:
     KDoubleNumInput * posW;
     KDoubleNumInput * posH;
     KFilterEffect * currentEffect;
-    KoFilterEffectConfigWidgetBase * currentPanel;
+    KFilterEffectConfigWidgetBase * currentPanel;
     KoShape * currentShape;
 };
 

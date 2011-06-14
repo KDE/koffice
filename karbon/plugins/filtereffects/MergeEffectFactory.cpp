@@ -33,7 +33,7 @@ KFilterEffect * MergeEffectFactory::createFilterEffect() const
     return new MergeEffect();
 }
 
-KoFilterEffectConfigWidgetBase * MergeEffectFactory::createConfigWidget() const
+KFilterEffectConfigWidgetBase * MergeEffectFactory::createConfigWidget() const
 {
     return new MergeEffectConfigWidget();
 }

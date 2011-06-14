@@ -20,19 +20,19 @@
 #ifndef OFFSETEFFECTCONFIGWIDGET_H
 #define OFFSETEFFECTCONFIGWIDGET_H
 
-#include "KoFilterEffectConfigWidgetBase.h"
+#include "KFilterEffectConfigWidgetBase.h"
 
 class KFilterEffect;
 class OffsetEffect;
 class KDoubleNumInput;
 
-class OffsetEffectConfigWidget : public KoFilterEffectConfigWidgetBase
+class OffsetEffectConfigWidget : public KFilterEffectConfigWidgetBase
 {
     Q_OBJECT
 public:
     OffsetEffectConfigWidget(QWidget *parent = 0);
 
-    /// reimplemented from KoFilterEffectConfigWidgetBase
+    /// reimplemented from KFilterEffectConfigWidgetBase
     virtual bool editFilterEffect(KFilterEffect * filterEffect);
 
 private slots:

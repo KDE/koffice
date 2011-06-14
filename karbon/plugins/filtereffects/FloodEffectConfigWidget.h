@@ -20,19 +20,19 @@
 #ifndef FLOODEFFECTCONFIGWIDGET_H
 #define FLOODEFFECTCONFIGWIDGET_H
 
-#include "KoFilterEffectConfigWidgetBase.h"
+#include "KFilterEffectConfigWidgetBase.h"
 
 class KFilterEffect;
 class FloodEffect;
 class KoColorPopupAction;
 
-class FloodEffectConfigWidget : public KoFilterEffectConfigWidgetBase
+class FloodEffectConfigWidget : public KFilterEffectConfigWidgetBase
 {
     Q_OBJECT
 public:
     FloodEffectConfigWidget(QWidget *parent = 0);
 
-    /// reimplemented from KoFilterEffectConfigWidgetBase
+    /// reimplemented from KFilterEffectConfigWidgetBase
     virtual bool editFilterEffect(KFilterEffect * filterEffect);
 
 private slots:

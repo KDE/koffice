@@ -33,7 +33,7 @@ KFilterEffect * MorphologyEffectFactory::createFilterEffect() const
     return new MorphologyEffect();
 }
 
-KoFilterEffectConfigWidgetBase * MorphologyEffectFactory::createConfigWidget() const
+KFilterEffectConfigWidgetBase * MorphologyEffectFactory::createConfigWidget() const
 {
     return new MorphologyEffectConfigWidget();
 }

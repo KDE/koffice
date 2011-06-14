@@ -33,7 +33,7 @@ KFilterEffect * ColorMatrixEffectFactory::createFilterEffect() const
     return new ColorMatrixEffect();
 }
 
-KoFilterEffectConfigWidgetBase * ColorMatrixEffectFactory::createConfigWidget() const
+KFilterEffectConfigWidgetBase * ColorMatrixEffectFactory::createConfigWidget() const
 {
     return new ColorMatrixEffectConfigWidget();
 }

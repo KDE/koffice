@@ -34,7 +34,7 @@
 const qreal ValueStep = 0.1;
 
 ComponentTransferEffectConfigWidget::ComponentTransferEffectConfigWidget(QWidget *parent)
-        : KoFilterEffectConfigWidgetBase(parent), m_effect(0)
+        : KFilterEffectConfigWidgetBase(parent), m_effect(0)
         , m_currentChannel(ComponentTransferEffect::ChannelR)
 {
     QGridLayout * g = new QGridLayout(this);

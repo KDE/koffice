@@ -20,19 +20,19 @@
 #ifndef IMAGEEFFECTCONFIGWIDGET_H
 #define IMAGEEFFECTCONFIGWIDGET_H
 
-#include "KoFilterEffectConfigWidgetBase.h"
+#include "KFilterEffectConfigWidgetBase.h"
 
 class KFilterEffect;
 class ImageEffect;
 class QLabel;
 
-class ImageEffectConfigWidget : public KoFilterEffectConfigWidgetBase
+class ImageEffectConfigWidget : public KFilterEffectConfigWidgetBase
 {
     Q_OBJECT
 public:
     ImageEffectConfigWidget(QWidget *parent = 0);
 
-    /// reimplemented from KoFilterEffectConfigWidgetBase
+    /// reimplemented from KFilterEffectConfigWidgetBase
     virtual bool editFilterEffect(KFilterEffect * filterEffect);
 
 private slots:
