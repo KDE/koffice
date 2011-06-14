@@ -20,9 +20,9 @@
 #ifndef KPRPAGELAYOUTDOCKERFACTORY_H
 #define KPRPAGELAYOUTDOCKERFACTORY_H
 
-#include <KoDockFactoryBase.h>
+#include <KDockFactoryBase.h>
 
-class SCPageLayoutDockerFactory : public KoDockFactoryBase
+class SCPageLayoutDockerFactory : public KDockFactoryBase
 {
 public:
     SCPageLayoutDockerFactory(QObject *parent = 0);

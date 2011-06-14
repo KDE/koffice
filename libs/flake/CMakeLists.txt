@@ -18,7 +18,7 @@ set(flake_SRCS
     KCanvasSupervisor.cpp
     KCutController.cpp
     KCopyController.cpp
-    KoDockFactoryBase.cpp
+    KDockFactoryBase.cpp
     KoDockRegistry.cpp
     KDataCenterBase.cpp
     KoInsets.cpp
@@ -241,7 +241,7 @@ install(
     KCopyController.h
     KCutController.h
     KDataCenterBase.h
-    KoDockFactoryBase.h
+    KDockFactoryBase.h
     KoDockRegistry.h
     KoDrag.h
     KoDragOdfSaveHelper.h

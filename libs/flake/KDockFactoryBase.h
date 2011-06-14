@@ -34,7 +34,7 @@ class KoDockFactoryBasePrivate;
  * @see KoDockRegistry
  * @see KCanvasObserverBase
  */
-class FLAKE_EXPORT KoDockFactoryBase : public QObject
+class FLAKE_EXPORT KDockFactoryBase : public QObject
 {
     Q_OBJECT
 public:
@@ -53,8 +53,8 @@ public:
      * @param dockerId a string that identifies the type of docker for purposes like storing
      *  and restoring the state and position between restarts.
      */
-    KoDockFactoryBase(QObject *parent, const QString &dockerId);
-    virtual ~KoDockFactoryBase();
+    KDockFactoryBase(QObject *parent, const QString &dockerId);
+    virtual ~KDockFactoryBase();
 
     /// @return the id of the dock widget used in docker management.
     QString id() const;
@@ -84,7 +84,7 @@ protected:
     KoDockFactoryBasePrivate *d_ptr;
 
 private:
-    Q_DECLARE_PRIVATE(KoDockFactoryBase)
+    Q_DECLARE_PRIVATE(KDockFactoryBase)
 };
 
 #endif

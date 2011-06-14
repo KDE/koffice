@@ -61,7 +61,7 @@ enum ButtonIds
 };
 
 KoPADocumentStructureDockerFactory::KoPADocumentStructureDockerFactory(KoDocumentSectionView::DisplayMode mode, KoPageApp::PageType pageType)
-    : KoDockFactoryBase(0, "document section view"),
+    : KDockFactoryBase(0, "document section view"),
     m_mode(mode),
     m_pageType(pageType)
 {

@@ -22,7 +22,7 @@
 #ifndef KOKROSS_KOSCRIPTINGDOCKER_H
 #define KOKROSS_KOSCRIPTINGDOCKER_H
 
-#include <KoDockFactoryBase.h>
+#include <KDockFactoryBase.h>
 
 #include <QDockWidget>
 #include <QPointer>
@@ -40,7 +40,7 @@ class QAction;
 * The KoScriptingDockerFactory class implements a factory to
 * create \a KoScriptingDocker instances.
 */
-class KoScriptingDockerFactory : public KoDockFactoryBase
+class KoScriptingDockerFactory : public KDockFactoryBase
 {
 public:
 

@@ -20,11 +20,11 @@
 #ifndef KWRDFDOCKERFACTORY_H
 #define KWRDFDOCKERFACTORY_H
 
-#include <KoDockFactoryBase.h>
+#include <KDockFactoryBase.h>
 
 class KWView;
 
-class KWRdfDockerFactory : public KoDockFactoryBase
+class KWRdfDockerFactory : public KDockFactoryBase
 {
 public:
     KWRdfDockerFactory(KWView *view);

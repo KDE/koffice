@@ -21,7 +21,7 @@
 #ifndef KOTOOLBOXFACTORY_H
 #define KOTOOLBOXFACTORY_H
 
-#include <KoDockFactoryBase.h>
+#include <KDockFactoryBase.h>
 #include "komain_export.h"
 
 #include <QString>
@@ -29,7 +29,7 @@
 
 class KCanvasController;
 
-class KOMAIN_EXPORT KoToolBoxFactory : public KoDockFactoryBase
+class KOMAIN_EXPORT KoToolBoxFactory : public KDockFactoryBase
 {
 public:
     explicit KoToolBoxFactory(KCanvasController *canvas, const QString &appName);

@@ -23,7 +23,7 @@
 #include <QDockWidget>
 
 ShapeSelectorFactory::ShapeSelectorFactory(QObject *parent)
-    : KoDockFactoryBase(parent, "ShapeSelector")
+    : KDockFactoryBase(parent, "ShapeSelector")
 {
 }
 

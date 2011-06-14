@@ -62,7 +62,7 @@ enum ButtonIds {
 };
 
 KarbonLayerDockerFactory::KarbonLayerDockerFactory(QObject *parent)
-    : KoDockFactoryBase(parent, "Layer View")
+    : KDockFactoryBase(parent, "Layer View")
 {
 }
 

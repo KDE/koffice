@@ -20,11 +20,11 @@
 #ifndef SHADOWDOCKERFACTORY_H
 #define SHADOWDOCKERFACTORY_H
 
-#include <KoDockFactoryBase.h>
+#include <KDockFactoryBase.h>
 #include <QtGui/QDockWidget>
 
 /// the factory which creates the shadow docker
-class ShadowDockerFactory : public KoDockFactoryBase
+class ShadowDockerFactory : public KDockFactoryBase
 {
     Q_OBJECT
 public:

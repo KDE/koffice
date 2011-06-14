@@ -20,12 +20,12 @@
 #ifndef SHAPESELECTORFACTORY_H
 #define SHAPESELECTORFACTORY_H
 
-#include <KoDockFactoryBase.h>
+#include <KDockFactoryBase.h>
 
 /**
  * The factory used for creating the shape ShapeSelector as a dockFactory
  */
-class ShapeSelectorFactory : public KoDockFactoryBase
+class ShapeSelectorFactory : public KDockFactoryBase
 {
     Q_OBJECT
 public:

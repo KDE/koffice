@@ -28,7 +28,7 @@
 #include "KoDocument.h"
 #include "KoMainWindow.h"
 #include "KoViewAdaptor.h"
-#include "KoDockFactoryBase.h"
+#include "KDockFactoryBase.h"
 
 #include <kactioncollection.h>
 #include <kglobalsettings.h>
@@ -161,7 +161,7 @@ KoView::KoView(KoDocument *document, QWidget *parent)
 
     // add all plugins.
     foreach(const QString & docker, KoDockRegistry::instance()->keys()) {
-        KoDockFactoryBase *factory = KoDockRegistry::instance()->value(docker);
+        KDockFactoryBase *factory = KoDockRegistry::instance()->value(docker);
         if (shell())
             shell()->createDockWidget(factory);
     }

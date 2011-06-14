@@ -19,7 +19,7 @@
  * Boston, MA 02110-1301, USA.
  */
 #include "KoDockerManager.h"
-#include "KoDockFactoryBase.h"
+#include "KDockFactoryBase.h"
 
 #include <kglobal.h>
 #include <klocale.h>
@@ -32,11 +32,11 @@
 #include "KoView.h"
 #include "KoMainWindow.h"
 
-class ToolDockerFactory : public KoDockFactoryBase
+class ToolDockerFactory : public KDockFactoryBase
 {
 public:
     ToolDockerFactory(const QString &name, QObject *parent = 0)
-        : KoDockFactoryBase(parent, name)
+        : KDockFactoryBase(parent, name)
     {
         setDefaultDockPosition(DockRight);
     }

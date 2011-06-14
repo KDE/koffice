@@ -24,7 +24,7 @@
 #include "KWCanvas.h"
 
 KWRdfDockerFactory::KWRdfDockerFactory(KWView *view)
-    : KoDockFactoryBase(view, "Rdf")
+    : KDockFactoryBase(view, "Rdf")
 {
     setDefaultDockPosition(DockMinimized);
     m_view = view;

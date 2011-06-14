@@ -22,7 +22,7 @@
 
 #include <QDockWidget>
 #include <QHash>
-#include <KoDockFactoryBase.h>
+#include <KDockFactoryBase.h>
 #include <KCanvasObserverBase.h>
 #include <KoDocumentSectionView.h>
 #include <KoPageApp.h>
@@ -41,7 +41,7 @@ namespace KParts
     class Part;
 }
 
-class KoPADocumentStructureDockerFactory : public KoDockFactoryBase
+class KoPADocumentStructureDockerFactory : public KDockFactoryBase
 {
 public:
     explicit KoPADocumentStructureDockerFactory(KoDocumentSectionView::DisplayMode mode, KoPageApp::PageType pageType = KoPageApp::Page);

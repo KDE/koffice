@@ -21,7 +21,7 @@
 #include "ShadowDocker.h"
 
 ShadowDockerFactory::ShadowDockerFactory(QObject *parent)
-    : KoDockFactoryBase(parent, "Shadow Properties")
+    : KDockFactoryBase(parent, "Shadow Properties")
 {
     setDefaultDockPosition(DockMinimized);
 }

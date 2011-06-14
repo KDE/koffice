@@ -32,7 +32,7 @@ class KoMainWindowPrivate;
 class KoDocument;
 class KoView;
 class KoPrintJob;
-class KoDockFactoryBase;
+class KDockFactoryBase;
 class KRecentFilesAction;
 class QDockWidget;
 class QLabel;
@@ -162,7 +162,7 @@ public:
      * @param factory the factory used to create the dock widget if needed
      * @return the dock widget specified by @p factory (may be 0)
      */
-    QDockWidget* createDockWidget(KoDockFactoryBase* factory);
+    QDockWidget* createDockWidget(KDockFactoryBase* factory);
 
     /// Return the list of dock widgets belonging to this main window.
     QList<QDockWidget*> dockWidgets();

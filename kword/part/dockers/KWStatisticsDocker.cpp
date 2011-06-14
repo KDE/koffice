@@ -57,7 +57,7 @@ void KWStatisticsDocker::setView(KWView *view)
 }
 
 KWStatisticsDockerFactory::KWStatisticsDockerFactory(KWView *view)
-    : KoDockFactoryBase(view, "Statistics")
+    : KDockFactoryBase(view, "Statistics")
 {
     setDefaultDockPosition(DockMinimized);
     m_view = view;

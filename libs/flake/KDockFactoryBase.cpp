@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KoDockFactoryBase.h"
+#include "KDockFactoryBase.h"
 
 class KoDockFactoryBasePrivate
 {
@@ -25,66 +25,66 @@ public:
     KoDockFactoryBasePrivate() {
         collapsable = true;
         defaultCollapsed = false;
-        defaultDockPosition = KoDockFactoryBase::DockRight;
+        defaultDockPosition = KDockFactoryBase::DockRight;
     }
     QString id;
     bool collapsable, defaultCollapsed;
-    KoDockFactoryBase::DockPosition defaultDockPosition;
+    KDockFactoryBase::DockPosition defaultDockPosition;
 };
 
-KoDockFactoryBase::KoDockFactoryBase(QObject *parent, const QString &dockerid)
+KDockFactoryBase::KDockFactoryBase(QObject *parent, const QString &dockerid)
     : QObject(parent),
     d_ptr(new KoDockFactoryBasePrivate)
 {
-    Q_D(KoDockFactoryBase);
+    Q_D(KDockFactoryBase);
     d->id = dockerid;
 }
 
-KoDockFactoryBase::~KoDockFactoryBase()
+KDockFactoryBase::~KDockFactoryBase()
 {
-    Q_D(KoDockFactoryBase);
+    Q_D(KDockFactoryBase);
     delete d;
 }
 
-void KoDockFactoryBase::setDefaultDockPosition(DockPosition pos)
+void KDockFactoryBase::setDefaultDockPosition(DockPosition pos)
 {
-    Q_D(KoDockFactoryBase);
+    Q_D(KDockFactoryBase);
     d->defaultDockPosition = pos;
 }
 
-void KoDockFactoryBase::setIsCollapsable(bool collapsable)
+void KDockFactoryBase::setIsCollapsable(bool collapsable)
 {
-    Q_D(KoDockFactoryBase);
+    Q_D(KDockFactoryBase);
     d->collapsable = collapsable;
 }
 
-void KoDockFactoryBase::setDefaultCollapsed(bool collapsed)
+void KDockFactoryBase::setDefaultCollapsed(bool collapsed)
 {
-    Q_D(KoDockFactoryBase);
+    Q_D(KDockFactoryBase);
     d->defaultCollapsed = collapsed;
 }
 
-QString KoDockFactoryBase::id() const
+QString KDockFactoryBase::id() const
 {
-    Q_D(const KoDockFactoryBase);
+    Q_D(const KDockFactoryBase);
     return d->id;
 }
 
-KoDockFactoryBase::DockPosition KoDockFactoryBase::defaultDockPosition() const
+KDockFactoryBase::DockPosition KDockFactoryBase::defaultDockPosition() const
 {
-    Q_D(const KoDockFactoryBase);
+    Q_D(const KDockFactoryBase);
     return d->defaultDockPosition;
 }
 
-bool KoDockFactoryBase::isCollapsable() const
+bool KDockFactoryBase::isCollapsable() const
 {
-    Q_D(const KoDockFactoryBase);
+    Q_D(const KDockFactoryBase);
     return d->collapsable;
 }
 
-bool KoDockFactoryBase::isDefaultCollapsed() const
+bool KDockFactoryBase::isDefaultCollapsed() const
 {
-    Q_D(const KoDockFactoryBase);
+    Q_D(const KDockFactoryBase);
     return d->defaultCollapsed;
 }
 

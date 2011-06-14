@@ -31,7 +31,7 @@ public:
 };
 
 KoToolBoxFactory::KoToolBoxFactory(KCanvasController *canvas, const QString& title)
-    : KoDockFactoryBase(canvas, "ToolBox"),
+    : KDockFactoryBase(canvas, "ToolBox"),
     d(new Private())
 {
     setDefaultDockPosition(DockLeft);

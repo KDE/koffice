@@ -22,7 +22,7 @@
 #include "SCPageLayoutDocker.h"
 
 SCPageLayoutDockerFactory::SCPageLayoutDockerFactory(QObject *parent)
-    : KoDockFactoryBase(parent, "SlideLayout")
+    : KDockFactoryBase(parent, "SlideLayout")
 {
 }
 

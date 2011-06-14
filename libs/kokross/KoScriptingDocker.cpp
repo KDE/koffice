@@ -40,7 +40,7 @@
  */
 
 KoScriptingDockerFactory::KoScriptingDockerFactory(QWidget *parent, KoScriptingModule *module, Kross::Action *action)
-    : KoDockFactoryBase(parent, action ? action->name() : "Scripting"),
+    : KDockFactoryBase(parent, action ? action->name() : "Scripting"),
     m_parent(parent),
     m_module(module),
     m_action(action)
