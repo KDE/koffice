@@ -105,7 +105,7 @@ void SCPlaceholderShape::initStrategy(KResourceManager *documentResources)
     }
 }
 
-KoShapeUserData * SCPlaceholderShape::userData() const
+KShapeUserData * SCPlaceholderShape::userData() const
 {
     Q_ASSERT(m_strategy);
     return m_strategy ? m_strategy->userData() : 0;

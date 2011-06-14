@@ -35,7 +35,7 @@
 #include "KPatternBackground.h"
 #include "KShapeManager.h"
 #include "KShapeManager_p.h"
-#include "KoShapeUserData.h"
+#include "KShapeUserData.h"
 #include "KShapeApplicationData.h"
 #include "KShapeSavingContext.h"
 #include "KShapeLoadingContext.h"
@@ -637,14 +637,14 @@ void KShape::notifyChanged()
     }
 }
 
-void KShape::setUserData(KoShapeUserData *userData)
+void KShape::setUserData(KShapeUserData *userData)
 {
     Q_D(KShape);
     delete d->userData;
     d->userData = userData;
 }
 
-KoShapeUserData *KShape::userData() const
+KShapeUserData *KShape::userData() const
 {
     Q_D(const KShape);
     return d->userData;

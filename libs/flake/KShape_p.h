@@ -84,7 +84,7 @@ public:
     KShapeContainer *parent;
     QSet<KShapeManager *> shapeManagers;
     QSet<KShape *> toolDelegates;
-    KoShapeUserData *userData;
+    KShapeUserData *userData;
     KShapeApplicationData *appData;
     KShapeBackground * fill; ///< Stands for the background color / fill etc.
     KShapeBorderBase *border; ///< points to a border, or 0 if there is no border

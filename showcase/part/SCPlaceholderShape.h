@@ -44,7 +44,7 @@ public:
     KShape *createShape(KResourceManager *documentResources);
 
     virtual void initStrategy(KResourceManager *documentResources);
-    KoShapeUserData * userData() const;
+    KShapeUserData * userData() const;
 private:
     SCPlaceholderStrategy * m_strategy;
 };

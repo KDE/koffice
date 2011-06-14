@@ -43,7 +43,7 @@ class KShapeContainer;
 class KShapeBorderBase;
 class KShapeBackground;
 class KShapeManager;
-class KoShapeUserData;
+class KShapeUserData;
 class KoViewConverter;
 class KShapeApplicationData;
 class KShapeSavingContext;
@@ -604,11 +604,11 @@ public:
      * shape should be accessible outside the plugin.
      * @param userData the new user data, or 0 to delete the current one.
      */
-    void setUserData(KoShapeUserData *userData);
+    void setUserData(KShapeUserData *userData);
     /**
      * Return the current userData.
      */
-    KoShapeUserData *userData() const;
+    KShapeUserData *userData() const;
 
     /**
      * Set a data object on the shape to be used by an application.

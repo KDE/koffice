@@ -49,7 +49,7 @@ set(flake_SRCS
     KoToolFactoryBase.cpp
     KPathShapeFactory.cpp
     KShapeFactoryBase.cpp
-    KoShapeUserData.cpp
+    KShapeUserData.cpp
     KPointGroup.cpp
     KParameterShape.cpp
     KPointerEvent.cpp
@@ -289,7 +289,7 @@ install(
     KShapePaste.h
     KShapeRegistry.h
     KShapeSavingContext.h
-    KoShapeUserData.h
+    KShapeUserData.h
     KoSharedLoadingData.h
     KoSharedSavingData.h
     KoSnapGuide.h

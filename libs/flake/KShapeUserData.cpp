@@ -17,13 +17,13 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoShapeUserData.h"
+#include "KShapeUserData.h"
 
-KoShapeUserData::KoShapeUserData(QObject *parent)
+KShapeUserData::KShapeUserData(QObject *parent)
     : QObject(parent)
 {
 }
 
-KoShapeUserData::~KoShapeUserData()
+KShapeUserData::~KShapeUserData()
 {
 }

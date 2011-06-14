@@ -24,7 +24,7 @@
 
 /**
  * The KoShapeAppliationData class is used to associate application specific data with a shape.
- * See also the KoShapeUserData class that is specifically set for the benefit of shapes and tools.
+ * See also the KShapeUserData class that is specifically set for the benefit of shapes and tools.
  *
  * KoShapeAppliationData provides an abstract interface for container classes
  * that are used to associate application-specific data with shapes in KShape

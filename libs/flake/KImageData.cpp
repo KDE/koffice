@@ -46,7 +46,7 @@ KImageData::KImageData()
 }
 
 KImageData::KImageData(const KImageData &imageData)
-    : KoShapeUserData(),
+    : KShapeUserData(),
     d(imageData.d)
 {
     if (d)

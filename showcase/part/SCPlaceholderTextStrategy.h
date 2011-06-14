@@ -39,7 +39,7 @@ public:
 
     virtual void init(KResourceManager *documentResources);
 
-    virtual KoShapeUserData * userData() const;
+    virtual KShapeUserData * userData() const;
 
 protected:
     SCPlaceholderTextStrategy(const QString &presentationClass);

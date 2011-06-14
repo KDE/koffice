@@ -25,7 +25,7 @@
 
 #include <QSize>
 
-#include <KoShapeUserData.h>
+#include <KShapeUserData.h>
 
 class QIODevice;
 class QPixmap;
@@ -43,13 +43,13 @@ class KOdfStore;
  * lower-resolution data to be shown this class will actually be the backing store of
  * the image data and it can create a pre-rendered QPixmap without deminishing the backing-store
  * data.
- * This class inherits from KoShapeUserData which means you can set it on any KShape using
+ * This class inherits from KShapeUserData which means you can set it on any KShape using
  * KShape::setUserData() and get it using KShape::userData().  The pictureshape plugin
  * uses this class to show its image data.
  * Such plugins are suggested to not make a copy of the pixmap data, but use the fact that this
  * image data caches one for every request to pixmap()
  */
-class FLAKE_EXPORT KImageData : public KoShapeUserData
+class FLAKE_EXPORT KImageData : public KShapeUserData
 {
     Q_OBJECT
 public:

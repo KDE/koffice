@@ -27,7 +27,7 @@ class KXmlElement;
 class KShape;
 class KShapeLoadingContext;
 class KShapeSavingContext;
-class KoShapeUserData;
+class KShapeUserData;
 class KoViewConverter;
 class PlaceholderData;
 class KResourceManager;
@@ -61,7 +61,7 @@ public:
 
     virtual void init(KResourceManager *documentResources);
 
-    virtual KoShapeUserData * userData() const;
+    virtual KShapeUserData * userData() const;
 
 protected:
     /**

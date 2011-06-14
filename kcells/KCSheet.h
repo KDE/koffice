@@ -32,7 +32,7 @@
 #include <KoDocument.h>
 #include <KOdfSettings.h> // for KOdfSettings::NamedMap
 #include <KShapeControllerBase.h>
-#include <KoShapeUserData.h>
+#include <KShapeUserData.h>
 #include <KXmlReader.h>
 
 #include "KCCell.h"
@@ -86,7 +86,7 @@ template<typename T> class IntervalMap;
 /**
  * A sheet contains several cells.
  */
-class KCELLS_EXPORT KCSheet : public KoShapeUserData, public KShapeControllerBase,
+class KCELLS_EXPORT KCSheet : public KShapeUserData, public KShapeControllerBase,
         public KCProtectableObject
 {
     Q_OBJECT

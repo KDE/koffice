@@ -171,7 +171,7 @@ void SCPlaceholderTextStrategy::init(KResourceManager *documentResources)
     m_textShape = factory->createShape(&props, documentResources);
 }
 
-KoShapeUserData * SCPlaceholderTextStrategy::userData() const
+KShapeUserData * SCPlaceholderTextStrategy::userData() const
 {
     return m_textShape ? m_textShape->userData() : 0;
 }

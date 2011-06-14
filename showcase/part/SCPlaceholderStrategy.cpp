@@ -164,7 +164,7 @@ void SCPlaceholderStrategy::init(KResourceManager *)
 {
 }
 
-KoShapeUserData * SCPlaceholderStrategy::userData() const
+KShapeUserData * SCPlaceholderStrategy::userData() const
 {
     return 0;
 }

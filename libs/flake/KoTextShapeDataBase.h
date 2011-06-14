@@ -22,7 +22,7 @@
 
 #include "flake_export.h"
 
-#include "KoShapeUserData.h"
+#include "KShapeUserData.h"
 #include "KoInsets.h"
 #include <QTextDocument>
 
@@ -34,7 +34,7 @@ class KShapeSavingContext;
 /**
  * \internal
  */
-class FLAKE_EXPORT KoTextShapeDataBase : public KoShapeUserData
+class FLAKE_EXPORT KoTextShapeDataBase : public KShapeUserData
 {
     Q_OBJECT
 public:

@@ -25,9 +25,9 @@
 #include "flake_export.h"
 
 /**
- * The KoShapeUserData class is used to associate custom data with a shape.
+ * The KShapeUserData class is used to associate custom data with a shape.
  *
- *  KoShapeUserData provides an abstract interface for container classes
+ *  KShapeUserData provides an abstract interface for container classes
  *  that are used to associate application-specific user data with shapes in KShape
  *  Generally, subclasses of this class provide functions to allow data to
  *  be stored and retrieved, and instances are attached to KShape using
@@ -42,13 +42,13 @@
  *  <code>qobject_cast<MyData*> (shape->userData())</code> to work which is useful in an environment
  *  where classes from plugins may not be castable using a static_cast or a dynamic_cast
  */
-class FLAKE_EXPORT KoShapeUserData : public QObject
+class FLAKE_EXPORT KShapeUserData : public QObject
 {
     Q_OBJECT
 public:
     /// Constructor
-    KoShapeUserData(QObject *parent = 0);
-    virtual ~KoShapeUserData();
+    KShapeUserData(QObject *parent = 0);
+    virtual ~KShapeUserData();
 };
 
 #endif
