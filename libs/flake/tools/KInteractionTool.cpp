@@ -26,7 +26,7 @@
 #include "KoPanTool_p.h"
 
 KInteractionTool::KInteractionTool(KoCanvasBase *canvas)
-    : KoToolBase(*(new KoInteractionToolPrivate(this, canvas)))
+    : KoToolBase(*(new KInteractionToolPrivate(this, canvas)))
 {
 }
 
@@ -123,7 +123,7 @@ void KInteractionTool::cancelCurrentStrategy()
     }
 }
 
-KInteractionTool::KInteractionTool(KoInteractionToolPrivate &dd)
+KInteractionTool::KInteractionTool(KInteractionToolPrivate &dd)
     : KoToolBase(dd)
 {
 }

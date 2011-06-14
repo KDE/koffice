@@ -36,16 +36,16 @@
 #include "KoToolBase_p.h"
 #include "KInteractionStrategy.h"
 
-class KoInteractionToolPrivate : public KoToolBasePrivate
+class KInteractionToolPrivate : public KoToolBasePrivate
 {
 public:
-    KoInteractionToolPrivate(KoToolBase *qq, KoCanvasBase *canvas)
+    KInteractionToolPrivate(KoToolBase *qq, KoCanvasBase *canvas)
         : KoToolBasePrivate(qq, canvas),
         currentStrategy(0)
     {
     }
 
-    ~KoInteractionToolPrivate() {
+    ~KInteractionToolPrivate() {
         delete currentStrategy;
     }
 

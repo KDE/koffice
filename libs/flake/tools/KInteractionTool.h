@@ -26,7 +26,7 @@
 #include "flake_export.h"
 
 class KInteractionStrategy;
-class KoInteractionToolPrivate;
+class KInteractionToolPrivate;
 
 #define KoInteractionTool_ID "InteractionTool"
 
@@ -76,7 +76,7 @@ public:
 
 protected:
     /// \internal
-    KInteractionTool(KoInteractionToolPrivate &dd);
+    KInteractionTool(KInteractionToolPrivate &dd);
 
     KInteractionStrategy *currentStrategy(); ///< the strategy that is 'in progress'
     /// Cancels the current strategy and deletes it.
