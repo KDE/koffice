@@ -133,7 +133,7 @@ set(flake_SRCS
     commands/KoPathSeparateCommand.cpp
     commands/KoSubpathRemoveCommand.cpp
     commands/KoSubpathJoinCommand.cpp
-    commands/KoParameterHandleMoveCommand.cpp
+    commands/KParameterHandleMoveCommand.cpp
     commands/KoParameterToPathCommand.cpp
     commands/KoShapeTransformCommand.cpp
     commands/KoPathFillRuleCommand.cpp

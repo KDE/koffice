@@ -41,7 +41,7 @@
 class KoParameterShape;
 
 /// The undo / redo command for changing a parameter
-class KoParameterHandleMoveCommand : public QUndoCommand
+class KParameterHandleMoveCommand : public QUndoCommand
 {
 public:
     /**
@@ -53,8 +53,8 @@ public:
      * @param keyModifiers the key modifiers used while moving.
      * @param parent the parent command if this is a compound undo command.
      */
-    KoParameterHandleMoveCommand(KoParameterShape *shape, int handleId, const QPointF &startPoint, const QPointF &endPoint, Qt::KeyboardModifiers keyModifiers, QUndoCommand *parent = 0);
-    virtual ~KoParameterHandleMoveCommand();
+    KParameterHandleMoveCommand(KoParameterShape *shape, int handleId, const QPointF &startPoint, const QPointF &endPoint, Qt::KeyboardModifiers keyModifiers, QUndoCommand *parent = 0);
+    virtual ~KParameterHandleMoveCommand();
 
     /// redo the command
     void redo();

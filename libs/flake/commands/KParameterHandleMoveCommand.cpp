@@ -19,11 +19,11 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoParameterHandleMoveCommand_p.h"
+#include "KParameterHandleMoveCommand_p.h"
 #include "KoParameterShape.h"
 #include <klocale.h>
 
-KoParameterHandleMoveCommand::KoParameterHandleMoveCommand(KoParameterShape *shape, int handleId, const QPointF &startPoint, const QPointF &endPoint, Qt::KeyboardModifiers keyModifiers, QUndoCommand *parent)
+KParameterHandleMoveCommand::KParameterHandleMoveCommand(KoParameterShape *shape, int handleId, const QPointF &startPoint, const QPointF &endPoint, Qt::KeyboardModifiers keyModifiers, QUndoCommand *parent)
         : QUndoCommand(parent)
         , m_shape(shape)
         , m_handleId(handleId)
@@ -34,12 +34,12 @@ KoParameterHandleMoveCommand::KoParameterHandleMoveCommand(KoParameterShape *sha
     setText(i18n("Change Parameter"));
 }
 
-KoParameterHandleMoveCommand::~KoParameterHandleMoveCommand()
+KParameterHandleMoveCommand::~KParameterHandleMoveCommand()
 {
 }
 
 /// redo the command
-void KoParameterHandleMoveCommand::redo()
+void KParameterHandleMoveCommand::redo()
 {
     QUndoCommand::redo();
     m_shape->update();
@@ -48,7 +48,7 @@ void KoParameterHandleMoveCommand::redo()
 }
 
 /// revert the actions done in redo
-void KoParameterHandleMoveCommand::undo()
+void KParameterHandleMoveCommand::undo()
 {
     QUndoCommand::undo();
     m_shape->update();
