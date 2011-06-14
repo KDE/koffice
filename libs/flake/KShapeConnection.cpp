@@ -45,7 +45,7 @@
 class ConnectLines : public ConnectStrategy
 {
   public:
-    ConnectLines(KoShapeConnectionPrivate *qq, KShapeConnection::ConnectionType type)
+    ConnectLines(KShapeConnectionPrivate *qq, KShapeConnection::ConnectionType type)
         : ConnectStrategy(qq, type) { }
     virtual ~ConnectLines() { }
 
@@ -72,7 +72,7 @@ class ConnectLines : public ConnectStrategy
 class ConnectCurve : public ConnectStrategy
 {
   public:
-    ConnectCurve(KoShapeConnectionPrivate *qq)
+    ConnectCurve(KShapeConnectionPrivate *qq)
         : ConnectStrategy(qq, KShapeConnection::Curve),
         needsResize(true)
     {
@@ -122,7 +122,7 @@ private:
     Pos m_pos;
 };
 
-KoShapeConnectionPrivate::KoShapeConnectionPrivate(KShapeConnection *qq, KShape *from, int gp1, KShape *to, int gp2)
+KShapeConnectionPrivate::KShapeConnectionPrivate(KShapeConnection *qq, KShape *from, int gp1, KShape *to, int gp2)
     : q(qq),
     shape1(from),
     shape2(to),
@@ -139,7 +139,7 @@ KoShapeConnectionPrivate::KoShapeConnectionPrivate(KShapeConnection *qq, KShape 
         zIndex = qMax(zIndex, shape2->zIndex() + 1);
 }
 
-KoShapeConnectionPrivate::KoShapeConnectionPrivate(KShapeConnection *qq, KShape *from, int gp1, const QPointF &ep)
+KShapeConnectionPrivate::KShapeConnectionPrivate(KShapeConnection *qq, KShape *from, int gp1, const QPointF &ep)
     : q(qq),
     shape1(from),
     shape2(0),
@@ -156,7 +156,7 @@ KoShapeConnectionPrivate::KoShapeConnectionPrivate(KShapeConnection *qq, KShape 
         zIndex = shape1->zIndex() + 1;
 }
 
-QPointF KoShapeConnectionPrivate::resolveStartPoint() const
+QPointF KShapeConnectionPrivate::resolveStartPoint() const
 {
     QPointF a(startPoint);
     if (!hasDummyShape && shape1) {
@@ -167,7 +167,7 @@ QPointF KoShapeConnectionPrivate::resolveStartPoint() const
     return a;
 }
 
-QPointF KoShapeConnectionPrivate::resolveEndPoint() const
+QPointF KShapeConnectionPrivate::resolveEndPoint() const
 {
 
     QPointF b(endPoint);
@@ -179,7 +179,7 @@ QPointF KoShapeConnectionPrivate::resolveEndPoint() const
     return b;
 }
 
-QPainterPath KoShapeConnectionPrivate::createConnectionPath(const QPointF &from, const QPointF &to) const
+QPainterPath KShapeConnectionPrivate::createConnectionPath(const QPointF &from, const QPointF &to) const
 {
     KShape *shape = shape1;
     if (shape == 0)
@@ -214,7 +214,7 @@ QPainterPath KoShapeConnectionPrivate::createConnectionPath(const QPointF &from,
     return path;
 }
 
-QLineF KoShapeConnectionPrivate::calculateShapeFalloutPrivate(const QPointF &begin, bool start) const
+QLineF KShapeConnectionPrivate::calculateShapeFalloutPrivate(const QPointF &begin, bool start) const
 {
     QPointF a(begin);
     QPointF b(a);
@@ -394,12 +394,12 @@ void ConnectCurve::saveOdf(KoShapeSavingContext &context) const
 ////////
 
 KShapeConnection::KShapeConnection()
-    : d(new KoShapeConnectionPrivate(this, 0, 0, QPointF(100, 100)))
+    : d(new KShapeConnectionPrivate(this, 0, 0, QPointF(100, 100)))
 {
 }
 
 KShapeConnection::KShapeConnection(KShape *from, int gp1, KShape *to, int gp2)
-    : d(new KoShapeConnectionPrivate(this, from, gp1, to, gp2))
+    : d(new KShapeConnectionPrivate(this, from, gp1, to, gp2))
 {
     Q_ASSERT(from);
     Q_ASSERT(to);
@@ -408,14 +408,14 @@ KShapeConnection::KShapeConnection(KShape *from, int gp1, KShape *to, int gp2)
 }
 
 KShapeConnection::KShapeConnection(KShape* from, int gluePointIndex, const QPointF &endPoint)
-: d(new KoShapeConnectionPrivate(this, from, gluePointIndex, endPoint))
+: d(new KShapeConnectionPrivate(this, from, gluePointIndex, endPoint))
 {
     Q_ASSERT(from);
     d->shape1->priv()->addConnection(this);
 }
 
 KShapeConnection::KShapeConnection(KShape *from, KShape *to, int gp2)
-    : d(new KoShapeConnectionPrivate(this, from, 0, to, gp2))
+    : d(new KShapeConnectionPrivate(this, from, 0, to, gp2))
 {
     Q_ASSERT(from);
     Q_ASSERT(to);
@@ -650,7 +650,7 @@ void KShapeConnection::saveOdf(KoShapeSavingContext &context) const
     context.xmlWriter().endElement();
 }
 
-KoShapeConnectionPrivate *KShapeConnection::priv()
+KShapeConnectionPrivate *KShapeConnection::priv()
 {
     return d;
 }

@@ -30,7 +30,7 @@ class KoViewConverter;
 class KXmlElement;
 class KoShapeLoadingContext;
 class KoShapeSavingContext;
-class KoShapeConnectionPrivate;
+class KShapeConnectionPrivate;
 
 /**
  * The shapeConnection class represents a connection between two shapes.
@@ -196,10 +196,10 @@ public:
     void update() const;
 
     /// \internal
-    KoShapeConnectionPrivate * priv();
+    KShapeConnectionPrivate * priv();
 
 private:
-    KoShapeConnectionPrivate * const d;
+    KShapeConnectionPrivate * const d;
 };
 
 /*

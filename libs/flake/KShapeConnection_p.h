@@ -26,7 +26,7 @@
 class ConnectStrategy
 {
 public:
-    ConnectStrategy(KoShapeConnectionPrivate *qq, KShapeConnection::ConnectionType type)
+    ConnectStrategy(KShapeConnectionPrivate *qq, KShapeConnection::ConnectionType type)
         : q(qq),
         m_dirty(true),
         m_type(type)
@@ -47,18 +47,18 @@ public:
     void wipe() { m_dirty = false; }
 
 protected:
-    KoShapeConnectionPrivate *q;
+    KShapeConnectionPrivate *q;
     mutable bool m_dirty;
 
 private:
     const KShapeConnection::ConnectionType m_type;
 };
 
-class KoShapeConnectionPrivate
+class KShapeConnectionPrivate
 {
 public:
-    KoShapeConnectionPrivate(KShapeConnection *qq, KShape *from, int gp1, KShape *to, int gp2);
-    KoShapeConnectionPrivate(KShapeConnection *qq, KShape *from, int gp1, const QPointF &ep);
+    KShapeConnectionPrivate(KShapeConnection *qq, KShape *from, int gp1, KShape *to, int gp2);
+    KShapeConnectionPrivate(KShapeConnection *qq, KShape *from, int gp1, const QPointF &ep);
 
     /// return the start point or the point from the shape connector if that exists
     QPointF resolveStartPoint() const;
