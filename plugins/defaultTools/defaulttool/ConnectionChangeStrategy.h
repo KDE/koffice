@@ -28,7 +28,7 @@
 #include <QList>
 #include <QPointF>
 
-class KoShapeConnection;
+class KShapeConnection;
 class KShape;
 
 /**
@@ -47,7 +47,7 @@ public:
      * @param canvas the canvas interface which will supply things like a selection object
      * @param clicked the initial point that the user depressed (in pt).
      */
-    ConnectionChangeStrategy(KoToolBase *tool, KoShapeConnection* connection, const QPointF &clicked, Type type);
+    ConnectionChangeStrategy(KoToolBase *tool, KShapeConnection* connection, const QPointF &clicked, Type type);
     virtual ~ConnectionChangeStrategy() {}
 
     void handleMouseMove(const QPointF &mouseLocation, Qt::KeyboardModifiers modifiers);
@@ -64,7 +64,7 @@ private:
     Connection findConnectionForPoint(const QPointF &point) const;
 
 
-    KoShapeConnection *m_connection;
+    KShapeConnection *m_connection;
     Type m_type;
     QPointF m_origPoint;
 

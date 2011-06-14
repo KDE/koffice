@@ -50,14 +50,14 @@ public:
 
     /**
      * Add a connection to the list of connections of this shape.
-     * This is typically called only from the constructor of the KoShapeConnection class.
+     * This is typically called only from the constructor of the KShapeConnection class.
      */
-    void addConnection(KoShapeConnection *connection);
+    void addConnection(KShapeConnection *connection);
     /**
      * Remove a connection to the list of connections of this shape.
-     * This is typically called only from the destructor of the KoShapeConnection class.
+     * This is typically called only from the destructor of the KShapeConnection class.
      */
-    void removeConnection(KoShapeConnection *connection);
+    void removeConnection(KShapeConnection *connection);
 
     void loadOdfGluePoints(const KXmlElement &gluePoints);
 
@@ -97,7 +97,7 @@ public:
     KFilterEffectStack *filterEffectStack; ///< stack of filter effects applied to the shape
     qreal transparency; ///< the shapes transparency
 
-    QList<KoShapeConnection*> connections;
+    QList<KShapeConnection*> connections;
 
     static const int MaxZIndex = 32767;
     int zIndex : 16; // keep maxZIndex in sync!

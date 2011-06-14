@@ -30,7 +30,7 @@ set(flake_SRCS
     KPathSegment.cpp
     KSelection.cpp
     KShape.cpp
-    KoShapeConnection.cpp
+    KShapeConnection.cpp
     KoShapeConnectionPolicy.cpp
     KoShapeControllerBase.cpp
     KShapeApplicationData.cpp
@@ -286,7 +286,7 @@ install(
     KShapeBorderFactoryBase.h
     KShapeBorderRegistry.h
     KShapeConfigWidgetBase.h
-    KoShapeConnection.h
+    KShapeConnection.h
     KoShapeConnectionPolicy.h
     KoShapeContainerDefaultModel.h
     KoShapeContainer.h

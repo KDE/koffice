@@ -35,7 +35,7 @@ class KoViewConverter;
 class KCanvasBase;
 class KPointerEvent;
 class KoShapeManagerPaintingStrategy;
-class KoShapeConnection;
+class KShapeConnection;
 class KoShapeManagerPrivate;
 
 class QPainter;
@@ -139,7 +139,7 @@ public:
      */
     KShape *shapeAt(const QPointF &position, KoFlake::ShapeSelection selection = KoFlake::ShapeOnTop, bool omitHiddenShapes = true);
 
-    KoShapeConnection *connectionAt(const QPointF &position);
+    KShapeConnection *connectionAt(const QPointF &position);
 
     /**
      * Returns the shapes which intersects the specific rect in the document.
@@ -184,7 +184,7 @@ public:
      */
     void setPaintingStrategy(KoShapeManagerPaintingStrategy *strategy);
 
-    QPolygonF routeConnection(KoShapeConnection *connection);
+    QPolygonF routeConnection(KShapeConnection *connection);
 
     /**
      * \internal

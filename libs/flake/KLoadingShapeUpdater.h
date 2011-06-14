@@ -31,7 +31,7 @@ class KShape;
  * As soon as the shape you depend on is loaded the method update is called.
  * Then you can setup the data you need.
  *
- * @see KoShapeConnection
+ * @see KShapeConnection
  * @see KoShapeLoadingContext::updateShape
  */
 class FLAKE_EXPORT KLoadingShapeUpdater

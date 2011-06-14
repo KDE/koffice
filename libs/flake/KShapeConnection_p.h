@@ -18,7 +18,7 @@
  */
 #ifndef KOSHAPECONNECTION_P_H
 #define KOSHAPECONNECTION_P_H
-#include "KoShapeConnection.h"
+#include "KShapeConnection.h"
 
 #include <QStringList>
 #include <QPainterPath>
@@ -26,14 +26,14 @@
 class ConnectStrategy
 {
 public:
-    ConnectStrategy(KoShapeConnectionPrivate *qq, KoShapeConnection::ConnectionType type)
+    ConnectStrategy(KoShapeConnectionPrivate *qq, KShapeConnection::ConnectionType type)
         : q(qq),
         m_dirty(true),
         m_type(type)
     {
     }
     virtual ~ConnectStrategy() { }
-    KoShapeConnection::ConnectionType type() const { return m_type; }
+    KShapeConnection::ConnectionType type() const { return m_type; }
 
     virtual void paint(QPainter &painter, const KoViewConverter &converter) = 0;
     virtual void setSkew(const QStringList &values) {
@@ -51,14 +51,14 @@ protected:
     mutable bool m_dirty;
 
 private:
-    const KoShapeConnection::ConnectionType m_type;
+    const KShapeConnection::ConnectionType m_type;
 };
 
 class KoShapeConnectionPrivate
 {
 public:
-    KoShapeConnectionPrivate(KoShapeConnection *qq, KShape *from, int gp1, KShape *to, int gp2);
-    KoShapeConnectionPrivate(KoShapeConnection *qq, KShape *from, int gp1, const QPointF &ep);
+    KoShapeConnectionPrivate(KShapeConnection *qq, KShape *from, int gp1, KShape *to, int gp2);
+    KoShapeConnectionPrivate(KShapeConnection *qq, KShape *from, int gp1, const QPointF &ep);
 
     /// return the start point or the point from the shape connector if that exists
     QPointF resolveStartPoint() const;
@@ -74,7 +74,7 @@ public:
 
     QLineF calculateShapeFalloutPrivate(const QPointF &begin, bool start) const;
 
-    KoShapeConnection *q;
+    KShapeConnection *q;
     KShape *shape1;
     KShape *shape2;
     int gluePointIndex1;

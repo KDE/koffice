@@ -33,7 +33,7 @@
 class KInteractionStrategy;
 class KoShapeMoveCommand;
 class KSelection;
-class KoShapeConnection;
+class KShapeConnection;
 
 /**
  * The default tool (associated with the arrow icon) implements the default
@@ -174,7 +174,7 @@ private:
 
     class GuideLine;
     GuideLine * m_guideLine;
-    QList<KoShapeConnection*> m_selectedConnections;
+    QList<KShapeConnection*> m_selectedConnections;
 };
 
 #endif

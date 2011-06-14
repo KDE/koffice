@@ -44,7 +44,7 @@ public:
      * Add a shape connection to the manager so it can be taken into account for drawing purposes.
      * Note that this is typically called by the shape instance only.
      */
-    void addShapeConnection(KoShapeConnection *connection);
+    void addShapeConnection(KShapeConnection *connection);
 
     /**
      * Request a repaint to be queued.
@@ -60,7 +60,7 @@ public:
      */
     void update(const QRectF &rect, const KShape *shape = 0, bool selectionHandles = false);
 
-    QPolygonF routeConnection(KoShapeConnection *connection, const QPointF &from, const QPointF &to);
+    QPolygonF routeConnection(KShapeConnection *connection, const QPointF &from, const QPointF &to);
 
     class DetectCollision
     {
@@ -99,7 +99,7 @@ public:
     KSelection *selection;
     KCanvasBase *canvas;
     KRTree<KShape *> tree;
-    KRTree<KoShapeConnection *> connectionTree;
+    KRTree<KShapeConnection *> connectionTree;
 
     QSet<KShape *> aggregate4update;
     QHash<KShape*, int> shapeIndexesBeforeUpdate;

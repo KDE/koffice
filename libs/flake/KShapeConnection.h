@@ -35,16 +35,16 @@ class KoShapeConnectionPrivate;
 /**
  * The shapeConnection class represents a connection between two shapes.
  * In order to create a visible connection between any two shapes of any kind you can
- * create a new KoShapeConnection passing the two shapes that it connects.
+ * create a new KShapeConnection passing the two shapes that it connects.
  * Each KShape instance can have a number of connection points, also called glue points, each
  * of which can be used to start or end a connection.  Consider an shape in the form of a man.
  * You would call KShape::addConnectionPoint() with a point where his hand is.  If you have a
  * pet with a similarly added connection point adding a connection is a simple case of
  * @code
-   new KoShapeConnection(man, 0, dog, 0);
+   new KShapeConnection(man, 0, dog, 0);
    @endcode
  */
-class FLAKE_EXPORT KoShapeConnection
+class FLAKE_EXPORT KShapeConnection
 {
 public:
     /// the visual type of connection
@@ -65,7 +65,7 @@ public:
     };
 
     /// default constructor for a connector between two points only
-    KoShapeConnection();
+    KShapeConnection();
 
     /**
      * Constructor for the connection between two shapes.
@@ -77,7 +77,7 @@ public:
      * @param to is the shape for the endpoint.
      * @param gluePointIndex2 The point to connect to is found via the index in the list of connectors on the end shape.
      */
-    explicit KoShapeConnection(KShape *from, int gluePointIndex1, KShape *to, int gluePointIndex2);
+    explicit KShapeConnection(KShape *from, int gluePointIndex1, KShape *to, int gluePointIndex2);
     /**
      * Constructor for connection between a shape and a fixed point.
      * The connection will be added to the shape. Note that we refer to the gluePoints by index
@@ -88,10 +88,10 @@ public:
      * @param gluePointIndex The point to connect to is found via the index in the list of of connectors on the originating shape.
      * @param endPoint Fixed point on the canvas where the connection is anchored.
      */
-    explicit KoShapeConnection(KShape* from, int gluePointIndex, const QPointF &endPoint);
+    explicit KShapeConnection(KShape* from, int gluePointIndex, const QPointF &endPoint);
 
-    explicit KoShapeConnection(KShape *from, KShape *to, int gluePointIndex2 = 0);
-    ~KoShapeConnection();
+    explicit KShapeConnection(KShape *from, KShape *to, int gluePointIndex2 = 0);
+    ~KShapeConnection();
 
     /**
      * @brief Paint the connection.
@@ -151,7 +151,7 @@ public:
      * @param c1 the first connection
      * @param c2 the second connection
      */
-    static bool compareConnectionZIndex(KoShapeConnection*c1, KoShapeConnection *c2);
+    static bool compareConnectionZIndex(KShapeConnection*c1, KShapeConnection *c2);
 
     /**
      * Return a bounding rectangle in which this connection is completely present.

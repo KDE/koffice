@@ -19,10 +19,10 @@
 
 #include "ConnectionChangeCommand.h"
 
-#include<KoShapeConnection.h>
+#include<KShapeConnection.h>
 #include<KShape.h>
 
-ConnectionChangeCommand::ConnectionChangeCommand(KoShapeConnection *connection, const ConnectionHook &previousStart, const ConnectionHook &newStart, const ConnectionHook &previousEnd, const ConnectionHook &newEnd, QUndoCommand *parent)
+ConnectionChangeCommand::ConnectionChangeCommand(KShapeConnection *connection, const ConnectionHook &previousStart, const ConnectionHook &newStart, const ConnectionHook &previousEnd, const ConnectionHook &newEnd, QUndoCommand *parent)
     : QUndoCommand(parent),
     m_type(StartAndEnd),
     m_connection(connection),
@@ -34,7 +34,7 @@ ConnectionChangeCommand::ConnectionChangeCommand(KoShapeConnection *connection, 
     Q_ASSERT(connection);
 }
 
-ConnectionChangeCommand::ConnectionChangeCommand(KoShapeConnection *connection, Type type, const ConnectionHook &previousHook, const ConnectionHook &newHook, QUndoCommand *parent)
+ConnectionChangeCommand::ConnectionChangeCommand(KShapeConnection *connection, Type type, const ConnectionHook &previousHook, const ConnectionHook &newHook, QUndoCommand *parent)
     : QUndoCommand(parent),
     m_type(type),
     m_connection(connection),

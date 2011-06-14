@@ -21,7 +21,7 @@
 #include <MockShapes.h>
 
 #include <KoShapeManager.h>
-#include <KoShapeConnection.h>
+#include <KShapeConnection.h>
 #include <kdebug.h>
 
 void TestConnection::testRouteSimple()
@@ -34,7 +34,7 @@ void TestConnection::testRouteSimple()
     shape1.setSize(100, 200);
     manager.addShape(&shape1);
 
-    KoShapeConnection connection;
+    KShapeConnection connection;
     connection.setStartPoint(&shape1, 0);
     connection.setEndPoint(150, 300);
 

@@ -34,7 +34,7 @@
 #include "guidestool/GuidesToolFactory.h" // for the ID
 
 #include <KPointerEvent.h>
-#include <KoShapeConnection.h>
+#include <KShapeConnection.h>
 #include <KoToolSelection.h>
 #include <KoToolManager.h>
 #include <KGuidesData.h>
@@ -498,7 +498,7 @@ void DefaultTool::paint(QPainter &painter, const KoViewConverter &converter)
     painter.save();
     painter.setPen(QPen(Qt::black)); // TODO make configurable
     painter.setBrush(QBrush(Qt::red));
-    foreach (KoShapeConnection *connection, m_selectedConnections) {
+    foreach (KShapeConnection *connection, m_selectedConnections) {
         QPointF center = converter.documentToView(connection->startPoint());
         for (int i = 0 ; i < 2; ++i) {
             painter.drawEllipse(center, 3, 3); // TODO is that 3 correct?
@@ -603,7 +603,7 @@ QRectF DefaultTool::handlesSize()
     QRectF bound = koSelection()->boundingRect();
 
     // repaint connections too
-    foreach (KoShapeConnection *connection, m_selectedConnections) {
+    foreach (KShapeConnection *connection, m_selectedConnections) {
         bound = bound.unite(connection->boundingRect());
     }
 
@@ -1158,7 +1158,7 @@ KInteractionStrategy *DefaultTool::createStrategy(KPointerEvent *event)
     const KoViewConverter *viewConverter = canvas()->viewConverter();
     if (viewConverter)
         clickDistance = viewConverter->viewToDocumentX(clickDistance);
-    foreach (KoShapeConnection *connection, m_selectedConnections) {
+    foreach (KShapeConnection *connection, m_selectedConnections) {
         QLineF distance1(event->point, connection->startPoint());
         if (distance1.length() < clickDistance)
             return new ConnectionChangeStrategy(this, connection, event->point,
@@ -1170,7 +1170,7 @@ KInteractionStrategy *DefaultTool::createStrategy(KPointerEvent *event)
     }
 
     if (selectMultiple) {
-        KoShapeConnection *connection = shapeManager->connectionAt(event->point);
+        KShapeConnection *connection = shapeManager->connectionAt(event->point);
         if (connection && m_selectedConnections.contains(connection)) {
             repaintDecorations();
             m_selectedConnections.removeAll(connection);
@@ -1181,7 +1181,7 @@ KInteractionStrategy *DefaultTool::createStrategy(KPointerEvent *event)
     KShape *shape = shapeManager->shapeAt(event->point, selectNextInStack ? KoFlake::NextUnselected : KoFlake::ShapeOnTop);
 
     if (!shape && handle == KoFlake::NoHandle) {
-        KoShapeConnection *connection = shapeManager->connectionAt(event->point);
+        KShapeConnection *connection = shapeManager->connectionAt(event->point);
         if (connection) { // clicked on a shape-to-shape connector
             if (!selectMultiple && (select->count() > 0 || !m_selectedConnections.isEmpty())) {
                 repaintDecorations();

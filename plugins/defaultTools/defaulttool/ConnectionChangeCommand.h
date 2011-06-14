@@ -20,7 +20,7 @@
 #include <QUndoCommand>
 #include <QPointF>
 
-class KoShapeConnection;
+class KShapeConnection;
 class KShape;
 
 /**
@@ -33,7 +33,7 @@ struct ConnectionHook {
     QPointF point;
 };
 
-/// command to undo/redo changes to a KoShapeConnection;
+/// command to undo/redo changes to a KShapeConnection;
 class ConnectionChangeCommand : public QUndoCommand
 {
 public:
@@ -42,11 +42,11 @@ public:
         StartOnly,
         EndOnly
     };
-    ConnectionChangeCommand(KoShapeConnection *connection,
+    ConnectionChangeCommand(KShapeConnection *connection,
         const ConnectionHook &previousStart, const ConnectionHook &newStart,
         const ConnectionHook &previousEnd, const ConnectionHook &newEnd, QUndoCommand *parent);
 
-    ConnectionChangeCommand(KoShapeConnection *connection, Type type,
+    ConnectionChangeCommand(KShapeConnection *connection, Type type,
         const ConnectionHook &previousHook, const ConnectionHook &newHook, QUndoCommand *parent);
 
     /// redo the command
@@ -55,6 +55,6 @@ public:
     virtual void undo();
 private:
     Type m_type;
-    KoShapeConnection *m_connection;
+    KShapeConnection *m_connection;
     ConnectionHook m_previousStart, m_newStart, m_previousEnd, m_newEnd;
 };

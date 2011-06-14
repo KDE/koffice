@@ -39,7 +39,7 @@ class KoShapeLayer;
 class KOdfStore;
 class KoSharedSavingData;
 class KoShapeSavingContextPrivate;
-class KoShapeConnection;
+class KShapeConnection;
 
 /**
  * The set of data for the ODF file format used during saving of a shape.
@@ -277,7 +277,7 @@ public:
      */
     QTransform shapeOffset(const KShape *shape) const;
 
-    void addForWriting(const QList<KoShapeConnection*> &connections);
+    void addForWriting(const QList<KShapeConnection*> &connections);
 
     void writeConnectors();
 

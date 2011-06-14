@@ -185,14 +185,14 @@ QString KShapePrivate::getStyleProperty(const char *property, KoShapeLoadingCont
     return value;
 }
 
-void KShapePrivate::addConnection(KoShapeConnection *connection)
+void KShapePrivate::addConnection(KShapeConnection *connection)
 {
     connections.append(connection);
     foreach (KoShapeManager *sm, shapeManagers)
         sm->priv()->addShapeConnection(connection);
 }
 
-void KShapePrivate::removeConnection(KoShapeConnection *connection)
+void KShapePrivate::removeConnection(KShapeConnection *connection)
 {
     connections.removeAll(connection);
     // TODO remove from shapeManager ?

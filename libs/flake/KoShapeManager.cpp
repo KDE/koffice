@@ -31,8 +31,8 @@
 #include "KoToolProxy.h"
 #include "KoShapeManagerPaintingStrategy.h"
 #include "KoShapeShadow.h"
-#include "KoShapeConnection.h"
-#include "KoShapeConnection_p.h"
+#include "KShapeConnection.h"
+#include "KShapeConnection_p.h"
 #include "KoShapeLayer.h"
 #include "KFilterEffect.h"
 #include "KFilterEffectStack.h"
@@ -76,7 +76,7 @@ void KoShapeManagerPrivate::updateTree()
         strategy->adapt(shape, br);
         tree.insert(br, shape);
 
-        foreach (KoShapeConnection *connection, shape->priv()->connections) {
+        foreach (KShapeConnection *connection, shape->priv()->connections) {
             connectionTree.remove(connection);
             connectionTree.insert(connection->boundingRect(), connection);
         }
@@ -114,7 +114,7 @@ void KoShapeManagerPrivate::paintGroup(KoShapeGroup *group, QPainter &painter, c
     }
 }
 
-void KoShapeManagerPrivate::addShapeConnection(KoShapeConnection *connection)
+void KoShapeManagerPrivate::addShapeConnection(KShapeConnection *connection)
 {
     connectionTree.insert(connection->boundingRect(), connection);
 }
@@ -128,7 +128,7 @@ void KoShapeManagerPrivate::update(const QRectF &rect, const KShape *shape, bool
     }
 
     if (selectionHandles) {
-        foreach (KoShapeConnection *connection, shape->priv()->connections) {
+        foreach (KShapeConnection *connection, shape->priv()->connections) {
             canvas->updateCanvas(connection->boundingRect());
             connection->priv()->foul();
         }
@@ -185,7 +185,7 @@ void KoShapeManager::addShape(KShape *shape, Repaint repaint)
     if (d->shapes.contains(shape))
         return;
     shape->priv()->addShapeManager(this);
-    foreach (KoShapeConnection *connection, shape->priv()->connections) {
+    foreach (KShapeConnection *connection, shape->priv()->connections) {
         d->connectionTree.insert(connection->boundingRect(), connection);
     }
     d->shapes.append(shape);
@@ -258,7 +258,7 @@ void KoShapeManager::paint(QPainter &painter, const KoViewConverter &converter, 
     painter.setPen(Qt::NoPen);  // painters by default have a black stroke, lets turn that off.
     painter.setBrush(Qt::NoBrush);
 
-    QList<KoShapeConnection*> sortedConnections;
+    QList<KShapeConnection*> sortedConnections;
     QList<KShape*> unsortedShapes;
     if (painter.hasClipping()) {
         QRectF rect = converter.viewToDocument(painter.clipRegion().boundingRect());
@@ -296,8 +296,8 @@ void KoShapeManager::paint(QPainter &painter, const KoViewConverter &converter, 
     }
 
     qSort(sortedShapes.begin(), sortedShapes.end(), KShape::compareShapeZIndex);
-    qSort(sortedConnections.begin(), sortedConnections.end(), KoShapeConnection::compareConnectionZIndex);
-    QList<KoShapeConnection*>::iterator connectionIterator = sortedConnections.begin();
+    qSort(sortedConnections.begin(), sortedConnections.end(), KShapeConnection::compareConnectionZIndex);
+    QList<KShapeConnection*>::iterator connectionIterator = sortedConnections.begin();
 
     foreach (KShape *shape, sortedShapes) {
         if (shape->parent() != 0 && shape->parent()->isClipped(shape))
@@ -474,13 +474,13 @@ void KoShapeManager::paintShape(KShape *shape, QPainter &painter, const KoViewCo
     }
 }
 
-KoShapeConnection *KoShapeManager::connectionAt(const QPointF &position)
+KShapeConnection *KoShapeManager::connectionAt(const QPointF &position)
 {
     d->updateTree();
-    QList<KoShapeConnection*> sortedConnections(d->connectionTree.contains(position));
+    QList<KShapeConnection*> sortedConnections(d->connectionTree.contains(position));
     if (sortedConnections.isEmpty())
         return 0;
-    qSort(sortedConnections.begin(), sortedConnections.end(), KoShapeConnection::compareConnectionZIndex);
+    qSort(sortedConnections.begin(), sortedConnections.end(), KShapeConnection::compareConnectionZIndex);
     return sortedConnections.first();
 }
 
@@ -627,7 +627,7 @@ void KoShapeManager::setPaintingStrategy(KoShapeManagerPaintingStrategy *strateg
     d->strategy = strategy;
 }
 
-QPolygonF KoShapeManager::routeConnection(KoShapeConnection *connection)
+QPolygonF KoShapeManager::routeConnection(KShapeConnection *connection)
 {
     return d->routeConnection(connection, connection->startPoint(), connection->endPoint());
 }
@@ -707,7 +707,7 @@ inline ko_NodeIndex::ko_NodeIndex(const ko_Node &node)
     y = node.y;
 }
 
-QPolygonF KoShapeManagerPrivate::routeConnection(KoShapeConnection *connection, const QPointF &from, const QPointF &to)
+QPolygonF KoShapeManagerPrivate::routeConnection(KShapeConnection *connection, const QPointF &from, const QPointF &to)
 {
     QHash<ko_NodeIndex, ko_Node> nodes;
 

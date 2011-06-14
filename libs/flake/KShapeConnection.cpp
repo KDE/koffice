@@ -16,8 +16,8 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#include "KoShapeConnection.h"
-#include "KoShapeConnection_p.h"
+#include "KShapeConnection.h"
+#include "KShapeConnection_p.h"
 #include "KShape.h"
 #include "KShape_p.h"
 #include "KoShapeManager.h"
@@ -45,7 +45,7 @@
 class ConnectLines : public ConnectStrategy
 {
   public:
-    ConnectLines(KoShapeConnectionPrivate *qq, KoShapeConnection::ConnectionType type)
+    ConnectLines(KoShapeConnectionPrivate *qq, KShapeConnection::ConnectionType type)
         : ConnectStrategy(qq, type) { }
     virtual ~ConnectLines() { }
 
@@ -73,7 +73,7 @@ class ConnectCurve : public ConnectStrategy
 {
   public:
     ConnectCurve(KoShapeConnectionPrivate *qq)
-        : ConnectStrategy(qq, KoShapeConnection::Curve),
+        : ConnectStrategy(qq, KShapeConnection::Curve),
         needsResize(true)
     {
     }
@@ -104,7 +104,7 @@ public:
         Second
     };
 
-    ConnectionLoaderUpdater(KoShapeConnection *connectionShape, Pos pos)
+    ConnectionLoaderUpdater(KShapeConnection *connectionShape, Pos pos)
         : m_connectionShape(connectionShape), m_pos(pos)
     {
     }
@@ -118,11 +118,11 @@ public:
     }
 
 private:
-    KoShapeConnection *m_connectionShape;
+    KShapeConnection *m_connectionShape;
     Pos m_pos;
 };
 
-KoShapeConnectionPrivate::KoShapeConnectionPrivate(KoShapeConnection *qq, KShape *from, int gp1, KShape *to, int gp2)
+KoShapeConnectionPrivate::KoShapeConnectionPrivate(KShapeConnection *qq, KShape *from, int gp1, KShape *to, int gp2)
     : q(qq),
     shape1(from),
     shape2(to),
@@ -139,7 +139,7 @@ KoShapeConnectionPrivate::KoShapeConnectionPrivate(KoShapeConnection *qq, KShape
         zIndex = qMax(zIndex, shape2->zIndex() + 1);
 }
 
-KoShapeConnectionPrivate::KoShapeConnectionPrivate(KoShapeConnection *qq, KShape *from, int gp1, const QPointF &ep)
+KoShapeConnectionPrivate::KoShapeConnectionPrivate(KShapeConnection *qq, KShape *from, int gp1, const QPointF &ep)
     : q(qq),
     shape1(from),
     shape2(0),
@@ -299,10 +299,10 @@ void ConnectLines::recalc() const
     QPointF point1(q->resolveStartPoint());
     QPointF point2(q->resolveEndPoint());
     switch (type()) {
-    case KoShapeConnection::EdgedLinesOutside:
+    case KShapeConnection::EdgedLinesOutside:
         m_path = q->createConnectionPath(point1, point2);
         break;
-    case KoShapeConnection::EdgedLines: {
+    case KShapeConnection::EdgedLines: {
         // shoot out a bit and then a direct line.
         QLineF fallOut1(calculateShape1Fallout());
         m_path.moveTo(fallOut1.p1());
@@ -312,7 +312,7 @@ void ConnectLines::recalc() const
         m_path.lineTo(fallOut2.p2());
         break;
     }
-    case KoShapeConnection::Straight:
+    case KShapeConnection::Straight:
         m_path.moveTo(q->resolveStartPoint());
         m_path.lineTo(q->resolveEndPoint());
         break;
@@ -393,12 +393,12 @@ void ConnectCurve::saveOdf(KoShapeSavingContext &context) const
 
 ////////
 
-KoShapeConnection::KoShapeConnection()
+KShapeConnection::KShapeConnection()
     : d(new KoShapeConnectionPrivate(this, 0, 0, QPointF(100, 100)))
 {
 }
 
-KoShapeConnection::KoShapeConnection(KShape *from, int gp1, KShape *to, int gp2)
+KShapeConnection::KShapeConnection(KShape *from, int gp1, KShape *to, int gp2)
     : d(new KoShapeConnectionPrivate(this, from, gp1, to, gp2))
 {
     Q_ASSERT(from);
@@ -407,14 +407,14 @@ KoShapeConnection::KoShapeConnection(KShape *from, int gp1, KShape *to, int gp2)
     d->shape2->priv()->addConnection(this);
 }
 
-KoShapeConnection::KoShapeConnection(KShape* from, int gluePointIndex, const QPointF &endPoint)
+KShapeConnection::KShapeConnection(KShape* from, int gluePointIndex, const QPointF &endPoint)
 : d(new KoShapeConnectionPrivate(this, from, gluePointIndex, endPoint))
 {
     Q_ASSERT(from);
     d->shape1->priv()->addConnection(this);
 }
 
-KoShapeConnection::KoShapeConnection(KShape *from, KShape *to, int gp2)
+KShapeConnection::KShapeConnection(KShape *from, KShape *to, int gp2)
     : d(new KoShapeConnectionPrivate(this, from, 0, to, gp2))
 {
     Q_ASSERT(from);
@@ -423,7 +423,7 @@ KoShapeConnection::KoShapeConnection(KShape *from, KShape *to, int gp2)
     d->shape2->priv()->addConnection(this);
 }
 
-KoShapeConnection::~KoShapeConnection()
+KShapeConnection::~KShapeConnection()
 {
     if (d->shape1)
         d->shape1->priv()->removeConnection(this);
@@ -432,7 +432,7 @@ KoShapeConnection::~KoShapeConnection()
     delete d;
 }
 
-void KoShapeConnection::paint(QPainter &painter, const KoViewConverter &converter)
+void KShapeConnection::paint(QPainter &painter, const KoViewConverter &converter)
 {
     if (d->connectionStrategy == 0)
         return;
@@ -440,38 +440,38 @@ void KoShapeConnection::paint(QPainter &painter, const KoViewConverter &converte
     d->connectionStrategy->paint(painter, converter);
 }
 
-KShape *KoShapeConnection::shape1() const
+KShape *KShapeConnection::shape1() const
 {
     return d->shape1;
 }
 
-KShape *KoShapeConnection::shape2() const
+KShape *KShapeConnection::shape2() const
 {
     return d->shape2;
 }
 
-int KoShapeConnection::zIndex() const
+int KShapeConnection::zIndex() const
 {
     return d->zIndex;
 }
 
-void KoShapeConnection::setZIndex(int index)
+void KShapeConnection::setZIndex(int index)
 {
     d->zIndex = index;
     d->foul();
 }
 
-int KoShapeConnection::gluePointIndex1() const
+int KShapeConnection::gluePointIndex1() const
 {
     return d->gluePointIndex1;
 }
 
-int KoShapeConnection::gluePointIndex2() const
+int KShapeConnection::gluePointIndex2() const
 {
     return d->gluePointIndex2;
 }
 
-QPointF KoShapeConnection::startPoint() const
+QPointF KShapeConnection::startPoint() const
 {
     if (d->shape1) {
         QList<QPointF> points(d->shape1->connectionPoints());
@@ -481,7 +481,7 @@ QPointF KoShapeConnection::startPoint() const
     return d->startPoint;
 }
 
-QPointF KoShapeConnection::endPoint() const
+QPointF KShapeConnection::endPoint() const
 {
     if (d->shape2) {
         QList<QPointF> points(d->shape2->connectionPoints());
@@ -491,24 +491,24 @@ QPointF KoShapeConnection::endPoint() const
     return d->endPoint;
 }
 
-QRectF KoShapeConnection::boundingRect() const
+QRectF KShapeConnection::boundingRect() const
 {
     return d->connectionStrategy->boundingRect();
 }
 
-void KoShapeConnection::setStartPoint(const QPointF &point)
+void KShapeConnection::setStartPoint(const QPointF &point)
 {
     d->startPoint = point;
     d->foul();
 }
 
-void KoShapeConnection::setEndPoint(const QPointF &point)
+void KShapeConnection::setEndPoint(const QPointF &point)
 {
     d->endPoint = point;
     d->foul();
 }
 
-void KoShapeConnection::setStartPoint(KShape *shape, int gluePointIndex)
+void KShapeConnection::setStartPoint(KShape *shape, int gluePointIndex)
 {
     if (d->shape1) {
         d->shape1->priv()->removeConnection(this);
@@ -525,7 +525,7 @@ void KoShapeConnection::setStartPoint(KShape *shape, int gluePointIndex)
     d->foul();
 }
 
-void KoShapeConnection::setEndPoint(KShape *shape, int gluePointIndex)
+void KShapeConnection::setEndPoint(KShape *shape, int gluePointIndex)
 {
     if (d->shape2) {
         d->shape2->priv()->removeConnection(this);
@@ -542,7 +542,7 @@ void KoShapeConnection::setEndPoint(KShape *shape, int gluePointIndex)
     d->foul();
 }
 
-bool KoShapeConnection::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
+bool KShapeConnection::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
 {
     QString type = element.attributeNS(KOdfXmlNS::draw, "type", "standard");
     delete d->connectionStrategy;
@@ -610,7 +610,7 @@ bool KoShapeConnection::loadOdf(const KXmlElement &element, KoShapeLoadingContex
     return true;
 }
 
-void KoShapeConnection::saveOdf(KoShapeSavingContext &context) const
+void KShapeConnection::saveOdf(KoShapeSavingContext &context) const
 {
     if (d->connectionStrategy == 0)
         return;
@@ -650,25 +650,25 @@ void KoShapeConnection::saveOdf(KoShapeSavingContext &context) const
     context.xmlWriter().endElement();
 }
 
-KoShapeConnectionPrivate *KoShapeConnection::priv()
+KoShapeConnectionPrivate *KShapeConnection::priv()
 {
     return d;
 }
 
 //static
-bool KoShapeConnection::compareConnectionZIndex(KoShapeConnection *c1, KoShapeConnection *c2)
+bool KShapeConnection::compareConnectionZIndex(KShapeConnection *c1, KShapeConnection *c2)
 {
     return c1->zIndex() < c2->zIndex();
 }
 
-KoShapeConnection::ConnectionType KoShapeConnection::type() const
+KShapeConnection::ConnectionType KShapeConnection::type() const
 {
     if (d->connectionStrategy)
         return d->connectionStrategy->type();
     return EdgedLinesOutside;
 }
 
-void KoShapeConnection::setType(ConnectionType newType)
+void KShapeConnection::setType(ConnectionType newType)
 {
     if (type() == newType)
         return;
@@ -680,7 +680,7 @@ void KoShapeConnection::setType(ConnectionType newType)
     d->foul();
 }
 
-void KoShapeConnection::update() const
+void KShapeConnection::update() const
 {
     KShape *shape = d->shape1;
     if (shape == 0)
