@@ -27,7 +27,7 @@
 #include <KShapeContainer.h>
 #include <KShapeContainerModel.h>
 #include <KResourceManager.h>
-#include <commands/KoShapeMoveCommand.h>
+#include <commands/KShapeMoveCommand.h>
 #include <KoSnapGuide.h>
 #include <KPointerEvent.h>
 #include <KoToolBase.h>
@@ -105,7 +105,7 @@ QUndoCommand* ShapeMoveStrategy::createCommand(QUndoCommand *parent)
     tool()->canvas()->snapGuide()->reset();
     if (m_diff.x() == 0 && m_diff.y() == 0)
         return 0;
-    return new KoShapeMoveCommand(m_selectedShapes, m_previousPositions, m_newPositions, parent);
+    return new KShapeMoveCommand(m_selectedShapes, m_previousPositions, m_newPositions, parent);
 }
 
 void ShapeMoveStrategy::paint( QPainter &painter, const KoViewConverter &converter)

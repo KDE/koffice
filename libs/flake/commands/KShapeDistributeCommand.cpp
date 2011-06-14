@@ -35,7 +35,7 @@ public:
     qreal getAvailableSpace(KShape *first, KShape *last, qreal extent, const QRectF &boundingRect);
 
     Distribute distribute;
-    KoShapeMoveCommand *command;
+    KShapeMoveCommand *command;
 };
 
 KShapeDistributeCommand::KShapeDistributeCommand(const QList<KShape*> &shapes, Distribute distribute, const QRectF &boundingRect, QUndoCommand *parent)
@@ -123,7 +123,7 @@ KShapeDistributeCommand::KShapeDistributeCommand(const QList<KShape*> &shapes, D
         newPositions  << position + delta;
         pos += step;
     }
-    d->command = new KoShapeMoveCommand(sortedPos.values(), previousPositions, newPositions);
+    d->command = new KShapeMoveCommand(sortedPos.values(), previousPositions, newPositions);
 
     setText(i18n("Distribute Shapes"));
 }

@@ -47,7 +47,7 @@
 #include <KCanvasBase.h>
 #include <KResourceManager.h>
 #include <KoShapeRubberSelectStrategy.h>
-#include <commands/KoShapeMoveCommand.h>
+#include <commands/KShapeMoveCommand.h>
 #include <commands/KShapeGroupCommand.h>
 #include <commands/KoShapeUngroupCommand.h>
 #include <KoSnapGuide.h>
@@ -704,7 +704,7 @@ bool DefaultTool::moveSelection(int direction, Qt::KeyboardModifiers modifiers)
                 m_moveCommand->setNewPositions(newPos);
                 m_moveCommand->redo();
             } else {
-                m_moveCommand = new KoShapeMoveCommand(shapes, prevPos, newPos);
+                m_moveCommand = new KShapeMoveCommand(shapes, prevPos, newPos);
                 canvas()->addCommand(m_moveCommand);
             }
             m_lastUsedMoveCommand = QTime::currentTime();

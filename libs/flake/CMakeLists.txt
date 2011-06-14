@@ -114,7 +114,7 @@ set(flake_SRCS
     commands/KShapeDeleteCommand.cpp
     commands/KShapeDistributeCommand.cpp
     commands/KShapeLockCommand.cpp
-    commands/KoShapeMoveCommand.cpp
+    commands/KShapeMoveCommand.cpp
     commands/KoShapeShearCommand.cpp
     commands/KoShapeSizeCommand.cpp
     commands/KoShapeUngroupCommand.cpp
@@ -220,7 +220,7 @@ install(
     commands/KShapeGroupCommand.h
     commands/KShapeKeepAspectRatioCommand.h
     commands/KShapeLockCommand.h
-    commands/KoShapeMoveCommand.h
+    commands/KShapeMoveCommand.h
     commands/KoShapeRenameCommand.h
     commands/KoShapeReorderCommand.h
     commands/KoShapeShearCommand.h

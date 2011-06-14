@@ -30,7 +30,7 @@
 class KWPage;
 class KWPageManager;
 class KWDocument;
-class KoShapeMoveCommand;
+class KShapeMoveCommand;
 
 /// The undo / redo command for inserting a new page in a kword document.
 class KWORD_TEST_EXPORT KWPageInsertCommand : public QUndoCommand

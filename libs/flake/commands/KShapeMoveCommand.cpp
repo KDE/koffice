@@ -18,18 +18,18 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoShapeMoveCommand.h"
+#include "KShapeMoveCommand.h"
 
 #include <klocale.h>
 
-class KoShapeMoveCommand::Private
+class KShapeMoveCommand::Private
 {
 public:
     QList<KShape*> shapes;
     QList<QPointF> previousPositions, newPositions;
 };
 
-KoShapeMoveCommand::KoShapeMoveCommand(const QList<KShape*> &shapes, QList<QPointF> &previousPositions, QList<QPointF> &newPositions, QUndoCommand *parent)
+KShapeMoveCommand::KShapeMoveCommand(const QList<KShape*> &shapes, QList<QPointF> &previousPositions, QList<QPointF> &newPositions, QUndoCommand *parent)
         : QUndoCommand(parent),
         d(new Private())
 {
@@ -42,12 +42,12 @@ KoShapeMoveCommand::KoShapeMoveCommand(const QList<KShape*> &shapes, QList<QPoin
     setText(i18n("Move Shapes"));
 }
 
-KoShapeMoveCommand::~KoShapeMoveCommand()
+KShapeMoveCommand::~KShapeMoveCommand()
 {
     delete d;
 }
 
-void KoShapeMoveCommand::redo()
+void KShapeMoveCommand::redo()
 {
     QUndoCommand::redo();
     for (int i = 0; i < d->shapes.count(); i++) {
@@ -57,7 +57,7 @@ void KoShapeMoveCommand::redo()
     }
 }
 
-void KoShapeMoveCommand::undo()
+void KShapeMoveCommand::undo()
 {
     QUndoCommand::undo();
     for (int i = 0; i < d->shapes.count(); i++) {
@@ -68,7 +68,7 @@ void KoShapeMoveCommand::undo()
 }
 
 /// update newPositions list with new postions.
-void KoShapeMoveCommand::setNewPositions(QList<QPointF> newPositions)
+void KShapeMoveCommand::setNewPositions(QList<QPointF> newPositions)
 {
     d->newPositions = newPositions;
 }

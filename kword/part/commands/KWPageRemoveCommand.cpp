@@ -24,7 +24,7 @@
 #include "KWPage.h"
 #include "frames/KWFrame.h"
 
-#include <KoShapeMoveCommand.h>
+#include <KShapeMoveCommand.h>
 
 #include <KLocale>
 
@@ -85,7 +85,7 @@ KWPageRemoveCommand::KWPageRemoveCommand(KWDocument *document, KWPage page, QUnd
         }
     }
     if (! shapesToMove.isEmpty())
-        new KoShapeMoveCommand(shapesToMove, previousPositions, newPositions, this);
+        new KShapeMoveCommand(shapesToMove, previousPositions, newPositions, this);
 }
 
 KWPageRemoveCommand::~KWPageRemoveCommand()

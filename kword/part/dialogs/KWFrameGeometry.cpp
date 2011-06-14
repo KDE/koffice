@@ -24,7 +24,7 @@
 
 #include <KShape.h>
 #include <KShapeKeepAspectRatioCommand.h>
-#include <KoShapeMoveCommand.h>
+#include <KShapeMoveCommand.h>
 #include <KoShapeSizeCommand.h>
 #include <KShapeLockCommand.h>
 
@@ -266,7 +266,7 @@ QUndoCommand *KWFrameGeometry::createCommand(QUndoCommand *parent)
     }
     if (!qFuzzyCompare(m_originalPosition.x(), shape->position().x())
             || !qFuzzyCompare(m_originalPosition.y(), shape->position().y())) {
-        new KoShapeMoveCommand(QList<KShape*>() << shape, QList<QPointF>() << m_originalPosition,
+        new KShapeMoveCommand(QList<KShape*>() << shape, QList<QPointF>() << m_originalPosition,
             QList<QPointF>() << shape->position(), parent);
     }
     if (m_originalGeometryLock != shape->isGeometryProtected()) {

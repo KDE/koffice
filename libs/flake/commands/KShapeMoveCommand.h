@@ -32,7 +32,7 @@
 class KShape;
 
 /// The undo / redo command for shape moving.
-class FLAKE_EXPORT KoShapeMoveCommand : public QUndoCommand
+class FLAKE_EXPORT KShapeMoveCommand : public QUndoCommand
 {
 public:
     /**
@@ -44,9 +44,9 @@ public:
      *  this list naturally must have the same amount of items as the shapes set.
      * @param parent the parent command used for macro commands
      */
-    KoShapeMoveCommand(const QList<KShape*> &shapes, QList<QPointF> &previousPositions, QList<QPointF> &newPositions,
+    KShapeMoveCommand(const QList<KShape*> &shapes, QList<QPointF> &previousPositions, QList<QPointF> &newPositions,
                        QUndoCommand *parent = 0);
-    ~KoShapeMoveCommand();
+    ~KShapeMoveCommand();
     /// redo the command
     void redo();
     /// revert the actions done in redo

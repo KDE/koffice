@@ -26,7 +26,7 @@
 #include <QUndoCommand>
 
 class KWDocument;
-class KoShapeMoveCommand;
+class KShapeMoveCommand;
 class KWTextFrameSet;
 
 /// The undo / redo command for removing a page in a kword document.

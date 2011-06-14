@@ -21,7 +21,7 @@
 #include "KShapeAlignCommand.h"
 #include "KShape.h"
 #include "KShapeGroup.h"
-#include "commands/KoShapeMoveCommand.h"
+#include "commands/KShapeMoveCommand.h"
 
 #include <klocale.h>
 // #include <kdebug.h>
@@ -33,7 +33,7 @@ public:
     ~Private() {
         delete command;
     }
-    KoShapeMoveCommand *command;
+    KShapeMoveCommand *command;
 };
 
 KShapeAlignCommand::KShapeAlignCommand(const QList<KShape*> &shapes, Align align, const QRectF &boundingRect, QUndoCommand *parent)
@@ -79,7 +79,7 @@ KShapeAlignCommand::KShapeAlignCommand(const QList<KShape*> &shapes, Align align
 //kDebug(30006) <<"-> moving" <<  position.x() <<"," << position.y() <<" to" <<
 //        (position + delta).x() << ", " << (position+delta).y() << endl;
     }
-    d->command = new KoShapeMoveCommand(shapes, previousPositions, newPositions);
+    d->command = new KShapeMoveCommand(shapes, previousPositions, newPositions);
 
     setText(i18n("Align Shapes"));
 }

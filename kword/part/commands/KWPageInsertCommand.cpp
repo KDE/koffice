@@ -27,7 +27,7 @@
 #include "frames/KWFrameSet.h"
 #include "frames/KWFrame.h"
 
-#include <KoShapeMoveCommand.h>
+#include <KShapeMoveCommand.h>
 #include <KParagraphStyle.h>
 #include <QTextBlock>
 #include <QTextDocument>
@@ -57,7 +57,7 @@ public:
     int pageNumber;
     QString masterPageName;
     bool pageCreated;
-    KoShapeMoveCommand *shapeMoveCommand;
+    KShapeMoveCommand *shapeMoveCommand;
 
     // the page we inserted. This will only be valid when the page is added to the document.
     KWPage page;
@@ -106,7 +106,7 @@ void KWPageInsertCommand::redo()
         }
 
         if (shapes.count() > 0)
-            d->shapeMoveCommand = new KoShapeMoveCommand(shapes, previousPositions, newPositions);
+            d->shapeMoveCommand = new KShapeMoveCommand(shapes, previousPositions, newPositions);
     } else { // we inserted it before, lets do so again.
         d->pageData.pageNumber = d->pageNumber;
         d->document->pageManager()->priv()->insertPage(d->pageData);

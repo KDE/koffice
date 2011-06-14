@@ -28,7 +28,7 @@
 #include <KResourceManager.h>
 #include <KShapeManager.h>
 #include <KSelection.h>
-#include <commands/KoShapeMoveCommand.h>
+#include <commands/KShapeMoveCommand.h>
 #include <commands/KoShapeSizeCommand.h>
 #include <commands/KoShapeTransformCommand.h>
 #include <KoPositionSelector.h>
@@ -135,7 +135,7 @@ void DefaultToolWidget::positionHasChanged()
         newPositions.append( shape->position() + moveBy );
     }
     selection->setPosition( selection->position() + moveBy );
-    m_tool->canvas()->addCommand( new KoShapeMoveCommand( selectedShapes, oldPositions, newPositions ) );
+    m_tool->canvas()->addCommand( new KShapeMoveCommand( selectedShapes, oldPositions, newPositions ) );
     updatePosition();
 }
 

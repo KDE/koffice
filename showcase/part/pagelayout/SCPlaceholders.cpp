@@ -22,7 +22,7 @@
 #include <KShape.h>
 #include <KShapeContainer.h>
 #include <KShapeLayer.h>
-#include <KoShapeMoveCommand.h>
+#include <KShapeMoveCommand.h>
 #include <KoShapeSizeCommand.h>
 #include <KShapeDeleteCommand.h>
 #include <KShapeCreateCommand.h>
@@ -93,7 +93,7 @@ void SCPlaceholders::setLayout(SCPageLayout * layout, KoPADocument * document, c
             oldPosition.append(it->shape->position());
             newPosition.append(rect.topLeft());
             new KoShapeSizeCommand(modifiedShape, oldSize, newSize, cmd);
-            new KoShapeMoveCommand(modifiedShape, oldPosition, newPosition, cmd);
+            new KShapeMoveCommand(modifiedShape, oldPosition, newPosition, cmd);
         }
         else {
             // remove no longer used placeholders

@@ -22,7 +22,7 @@
 #define KOSHAPEDISTRIBUTECOMMAND_H
 
 
-#include "commands/KoShapeMoveCommand.h"
+#include "commands/KShapeMoveCommand.h"
 
 #include "flake_export.h"
 

@@ -29,7 +29,7 @@
 #include <KShapeManager.h>
 #include <KResourceManager.h>
 #include <commands/KoShapeShearCommand.h>
-#include <commands/KoShapeMoveCommand.h>
+#include <commands/KShapeMoveCommand.h>
 #include <commands/KoShapeTransformCommand.h>
 
 #include <QPointF>

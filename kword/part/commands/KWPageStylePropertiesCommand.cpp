@@ -27,7 +27,7 @@
 #include "commands/KWPageInsertCommand.h"
 #include "commands/KWFrameDeleteCommand.h"
 
-#include <KoShapeMoveCommand.h>
+#include <KShapeMoveCommand.h>
 
 #include <KLocale>
 #include <KDebug>
@@ -76,7 +76,7 @@ KWPageStylePropertiesCommand::KWPageStylePropertiesCommand(KWDocument *document,
             }
         }
         if (shapes.count() > 0)
-            new KoShapeMoveCommand(shapes, previousPositions, newPositions, this);
+            new KShapeMoveCommand(shapes, previousPositions, newPositions, this);
     }
 
     // figure out which pages change.
@@ -126,7 +126,7 @@ KWPageStylePropertiesCommand::KWPageStylePropertiesCommand(KWDocument *document,
         }
     }
     if (shapes.count() > 0)
-        new KoShapeMoveCommand(shapes, previousPositions, newPositions, this);
+        new KShapeMoveCommand(shapes, previousPositions, newPositions, this);
 
     if (page.pageNumber() % 2 == 0 && newLayout.leftMargin < 0)
         new KWPageInsertCommand(m_document, page.pageNumber(), QString(), this);
