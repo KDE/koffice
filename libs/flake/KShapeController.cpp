@@ -26,7 +26,7 @@
 #include "KoShapeLayer.h"
 #include "KSelection.h"
 #include "commands/KShapeCreateCommand.h"
-#include "commands/KoShapeDeleteCommand.h"
+#include "commands/KShapeDeleteCommand.h"
 #include "KCanvasBase.h"
 #include "KShapeConfigWidgetBase.h"
 #include "KoShapeFactoryBase.h"
@@ -85,12 +85,12 @@ QUndoCommand* KShapeController::addShape(KShape *shape, QUndoCommand *parent)
 
 QUndoCommand* KShapeController::removeShape(KShape *shape, QUndoCommand *parent)
 {
-    return new KoShapeDeleteCommand(d->shapeController, shape, parent);
+    return new KShapeDeleteCommand(d->shapeController, shape, parent);
 }
 
 QUndoCommand* KShapeController::removeShapes(const QList<KShape*> &shapes, QUndoCommand *parent)
 {
-    return new KoShapeDeleteCommand(d->shapeController, shapes, parent);
+    return new KShapeDeleteCommand(d->shapeController, shapes, parent);
 }
 
 void KShapeController::setShapeControllerBase(KShapeControllerBase* shapeControllerBase)

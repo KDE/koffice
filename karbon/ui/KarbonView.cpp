@@ -77,7 +77,7 @@
 #include <KShapeContainer.h>
 #include <KoShapeGroup.h>
 #include <KShapeCreateCommand.h>
-#include <KoShapeDeleteCommand.h>
+#include <KShapeDeleteCommand.h>
 #include <KShapeBorderCommand.h>
 #include <KShapeBackgroundCommand.h>
 #include <KParameterToPathCommand.h>
@@ -699,8 +699,8 @@ void KarbonView::booleanOperation(KarbonBooleanCommand::BooleanOperation operati
         if (paramShape && paramShape->isParametricShape())
             new KParameterToPathCommand(paramShape, macro);
         new KarbonBooleanCommand(part(), paths[0], paths[1], operation, macro);
-        new KoShapeDeleteCommand(part(), paths[0], macro);
-        new KoShapeDeleteCommand(part(), paths[1], macro);
+        new KShapeDeleteCommand(part(), paths[0], macro);
+        new KShapeDeleteCommand(part(), paths[1], macro);
         d->canvas->addCommand(macro);
     }
 }

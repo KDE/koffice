@@ -21,7 +21,7 @@
 #include "frames/KWFrame.h"
 #include "frames/KWFrameSet.h"
 
-#include <KoShapeDeleteCommand.h>
+#include <KShapeDeleteCommand.h>
 
 #include <KLocale>
 
@@ -30,7 +30,7 @@ KWFrameDeleteCommand::KWFrameDeleteCommand(KShapeControllerBase *shapeController
         m_frame(frame),
         m_frameSet(frame->frameSet())
 {
-    new KoShapeDeleteCommand(shapeController, frame->shape(), this);
+    new KShapeDeleteCommand(shapeController, frame->shape(), this);
 }
 
 void KWFrameDeleteCommand::redo()

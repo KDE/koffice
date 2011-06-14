@@ -18,13 +18,13 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoShapeDeleteCommand.h"
+#include "KShapeDeleteCommand.h"
 #include "KShapeContainer.h"
 #include "KShapeControllerBase.h"
 
 #include <klocale.h>
 
-class KoShapeDeleteCommand::Private
+class KShapeDeleteCommand::Private
 {
 public:
     Private(KShapeControllerBase *c)
@@ -46,7 +46,7 @@ public:
     bool deleteShapes;  ///< shows if shapes should be deleted when deleting the command
 };
 
-KoShapeDeleteCommand::KoShapeDeleteCommand(KShapeControllerBase *controller, KShape *shape, QUndoCommand *parent)
+KShapeDeleteCommand::KShapeDeleteCommand(KShapeControllerBase *controller, KShape *shape, QUndoCommand *parent)
         : QUndoCommand(parent),
         d(new Private(controller))
 {
@@ -56,7 +56,7 @@ KoShapeDeleteCommand::KoShapeDeleteCommand(KShapeControllerBase *controller, KSh
     setText(i18n("Delete Shape"));
 }
 
-KoShapeDeleteCommand::KoShapeDeleteCommand(KShapeControllerBase *controller, const QList<KShape*> &shapes,
+KShapeDeleteCommand::KShapeDeleteCommand(KShapeControllerBase *controller, const QList<KShape*> &shapes,
         QUndoCommand *parent)
         : QUndoCommand(parent),
         d(new Private(controller))
@@ -69,12 +69,12 @@ KoShapeDeleteCommand::KoShapeDeleteCommand(KShapeControllerBase *controller, con
     setText(i18n("Delete Shapes"));
 }
 
-KoShapeDeleteCommand::~KoShapeDeleteCommand()
+KShapeDeleteCommand::~KShapeDeleteCommand()
 {
     delete d;
 }
 
-void KoShapeDeleteCommand::redo()
+void KShapeDeleteCommand::redo()
 {
     QUndoCommand::redo();
     if (! d->controller)
@@ -89,7 +89,7 @@ void KoShapeDeleteCommand::redo()
     d->deleteShapes = true;
 }
 
-void KoShapeDeleteCommand::undo()
+void KShapeDeleteCommand::undo()
 {
     QUndoCommand::undo();
     if (! d->controller)

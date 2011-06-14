@@ -35,7 +35,7 @@
 #include <KShapeControllerBase.h>
 #include <KSelection.h>
 #include <KShapeCreateCommand.h>
-#include <KoShapeDeleteCommand.h>
+#include <KShapeDeleteCommand.h>
 #include <KoShapeReorderCommand.h>
 #include <KoShapeLayer.h>
 #include <KoShapeGroup.h>
@@ -300,13 +300,13 @@ void KarbonLayerDocker::deleteItem()
                 deleteShapes += layer->shapes();
                 deleteShapes.append(layer);
             }
-            cmd = new KoShapeDeleteCommand(m_part, deleteShapes);
+            cmd = new KShapeDeleteCommand(m_part, deleteShapes);
             cmd->setText(i18n("Delete Layer"));
         } else {
             KMessageBox::error(0L, i18n("Could not delete all layers. At least one layer is required."), i18n("Error deleting layers"));
         }
     } else if (selectedShapes.count()) {
-        cmd = new KoShapeDeleteCommand(m_part, selectedShapes);
+        cmd = new KShapeDeleteCommand(m_part, selectedShapes);
     }
 
     if (cmd) {

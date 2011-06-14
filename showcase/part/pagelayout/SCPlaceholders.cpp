@@ -24,7 +24,7 @@
 #include <KoShapeLayer.h>
 #include <KoShapeMoveCommand.h>
 #include <KoShapeSizeCommand.h>
-#include <KoShapeDeleteCommand.h>
+#include <KShapeDeleteCommand.h>
 #include <KShapeCreateCommand.h>
 #include <KoPADocument.h>
 #include <KoTextShapeData.h>
@@ -102,7 +102,7 @@ void SCPlaceholders::setLayout(SCPageLayout * layout, KoPADocument * document, c
                 // this is done as it gets deleted by shapeRemoved
                 Placeholders::iterator next(it);
                 ++next;
-                new KoShapeDeleteCommand(document, it->shape, cmd);
+                new KShapeDeleteCommand(document, it->shape, cmd);
             }
         }
         it = next;

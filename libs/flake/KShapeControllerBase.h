@@ -33,7 +33,7 @@ class KResourceManager;
 /**
  * The shape controller is an abstract interface that the applications class
  * that controls the shapes should implement.  This tends to be the document.
- * @see KoShapeDeleteCommand, KShapeCreateCommand
+ * @see KShapeDeleteCommand, KShapeCreateCommand
  */
 class FLAKE_EXPORT KShapeControllerBase
 {

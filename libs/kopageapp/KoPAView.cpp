@@ -53,7 +53,7 @@
 #include <KoRuler.h>
 #include <KoRulerController.h>
 #include <KDrag.h>
-#include <KoShapeDeleteCommand.h>
+#include <KShapeDeleteCommand.h>
 #include <KCutController.h>
 #include <KCopyController.h>
 #include <KoFilterManager.h>

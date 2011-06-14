@@ -35,7 +35,7 @@
 #include <KoPAOdfPageSaveHelper.h>
 #include <KDrag.h>
 #include <KShapeCreateCommand.h>
-#include <KoShapeDeleteCommand.h>
+#include <KShapeDeleteCommand.h>
 #include <KoShapeReorderCommand.h>
 #include <KoShapeLayer.h>
 #include <KoShapePaste.h>
@@ -354,7 +354,7 @@ void KoPADocumentStructureDocker::deleteItem()
                 deleteShapes += page->shapes();
                 deleteShapes.append(page);
             }
-            cmd = new KoShapeDeleteCommand(m_doc, deleteShapes);
+            cmd = new KShapeDeleteCommand(m_doc, deleteShapes);
             cmd->setText(i18n("Delete Layer"));
         }
         else
@@ -364,7 +364,7 @@ void KoPADocumentStructureDocker::deleteItem()
     }
     else if(selectedShapes.count())
     {
-        cmd = new KoShapeDeleteCommand(m_doc, selectedShapes);
+        cmd = new KShapeDeleteCommand(m_doc, selectedShapes);
     }
     else if (!selectedPages.isEmpty() && selectedPages.count() < m_doc->pages().count()) {
         cmd = new KoPAPageDeleteCommand(m_doc, selectedPages);
