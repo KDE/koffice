@@ -20,15 +20,15 @@
 
 #include <MockShapes.h>
 #include "KoShapeBorderBase.h"
-#include "KoLineBorder.h"
+#include "KLineBorder.h"
 #include "KoShapeBorderCommand.h"
 
 void TestShapeBorderCommand::refCounting()
 {
     MockShape * shape1 = new MockShape();
-    KoShapeBorderBase * whiteBorder = new KoLineBorder(1.0, QColor(Qt::white));
-    KoShapeBorderBase * blackBorder = new KoLineBorder(1.0, QColor(Qt::black));
-    KoShapeBorderBase * redBorder = new KoLineBorder(1.0, QColor(Qt::red));
+    KoShapeBorderBase * whiteBorder = new KLineBorder(1.0, QColor(Qt::white));
+    KoShapeBorderBase * blackBorder = new KLineBorder(1.0, QColor(Qt::black));
+    KoShapeBorderBase * redBorder = new KLineBorder(1.0, QColor(Qt::red));
 
     shape1->setBorder(whiteBorder);
     QVERIFY(shape1->border() == whiteBorder);

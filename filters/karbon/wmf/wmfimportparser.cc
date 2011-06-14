@@ -22,7 +22,7 @@
 #include <KarbonDocument.h>
 
 #include <KoPathShape.h>
-#include <KoLineBorder.h>
+#include <KLineBorder.h>
 #include <KoShapeLayer.h>
 #include <KImageData.h>
 #include <KImageCollection.h>
@@ -528,7 +528,7 @@ void WMFImportParser::appendPen(KoShape& obj)
 {
     double width = mPen.width() * mScaleX;
 
-    KoLineBorder * border = new KoLineBorder(((width < 0.99) ? 1 : width), mPen.color());
+    KLineBorder * border = new KLineBorder(((width < 0.99) ? 1 : width), mPen.color());
     border->setLineStyle(mPen.style(), mPen.dashPattern());
     border->setCapStyle(mPen.capStyle());
     border->setJoinStyle(mPen.joinStyle());

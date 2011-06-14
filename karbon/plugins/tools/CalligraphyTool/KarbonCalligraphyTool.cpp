@@ -23,7 +23,7 @@
 
 #include <KoPathShape.h>
 #include <KoShapeGroup.h>
-#include <KoLineBorder.h>
+#include <KLineBorder.h>
 #include <KoPointerEvent.h>
 #include <KoPathPoint.h>
 #include <KoCanvasBase.h>

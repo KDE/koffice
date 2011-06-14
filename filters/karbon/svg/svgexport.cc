@@ -43,7 +43,7 @@
 #include <KoFilterChain.h>
 #include <KoShapeLayer.h>
 #include <KoPathShape.h>
-#include <KoLineBorder.h>
+#include <KLineBorder.h>
 #include <KoColorBackground.h>
 #include <KGradientBackground.h>
 #include <KoPatternBackground.h>
@@ -563,7 +563,7 @@ void SvgExport::getFill(KoShape * shape, QTextStream *stream)
 
 void SvgExport::getStroke(KoShape *shape, QTextStream *stream)
 {
-    const KoLineBorder * line = dynamic_cast<const KoLineBorder*>(shape->border());
+    const KLineBorder * line = dynamic_cast<const KLineBorder*>(shape->border());
     if (! line)
         return;
 

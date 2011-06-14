@@ -32,7 +32,7 @@
 #include <KUnit.h>
 
 class KoShape;
-class KoLineBorder;
+class KLineBorder;
 class KUndoStack;
 class KImageCollection;
 class KOdfDocumentBase;

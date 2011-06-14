@@ -40,7 +40,7 @@
 
 class KoPathShape;
 class KoPathPoint;
-class KoLineBorder;
+class KLineBorder;
 
 class KoCreatePathToolPrivate;
 

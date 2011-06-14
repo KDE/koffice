@@ -20,7 +20,7 @@
 #include "enhancedpath/EnhancedPathShapeFactory.h"
 #include "enhancedpath/EnhancedPathShape.h"
 
-#include <KoLineBorder.h>
+#include <KLineBorder.h>
 #include <KProperties.h>
 #include <KOdfXmlNS.h>
 #include <KXmlReader.h>
@@ -52,7 +52,7 @@ EnhancedPathShapeFactory::EnhancedPathShapeFactory(QObject *parent)
 KoShape *EnhancedPathShapeFactory::createDefaultShape(KoResourceManager *) const
 {
     EnhancedPathShape *shape = new EnhancedPathShape(QRectF(0, 0, 100, 100));
-    shape->setBorder(new KoLineBorder(1.0));
+    shape->setBorder(new KLineBorder(1.0));
     shape->setShapeId(KoPathShapeId);
 
     shape->addModifiers("35");
@@ -88,7 +88,7 @@ KoShape *EnhancedPathShapeFactory::createShape(const KProperties *params, KoReso
         return 0;
 
     shape->setShapeId(KoPathShapeId);
-    shape->setBorder(new KoLineBorder(1.0));
+    shape->setBorder(new KLineBorder(1.0));
     shape->addModifiers(params->stringProperty("modifiers"));
 
     ListType handles = params->property("handles").toList();

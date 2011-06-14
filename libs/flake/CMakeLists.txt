@@ -70,7 +70,7 @@ set(flake_SRCS
     KoShapeBorderBase.cpp
     KoShapeBorderFactoryBase.cpp
     KoShapeBorderRegistry.cpp
-    KoLineBorder.cpp
+    KLineBorder.cpp
     KoLineBorderFactory.cpp
     KoShapeBackground.cpp
     KoColorBackground.cpp
@@ -263,7 +263,7 @@ install(
     KImageData.h
     KInputDevice.h
     KoInsets.h
-    KoLineBorder.h
+    KLineBorder.h
     KoLoadingShapeUpdater.h
     KoOdfWorkaround.h
     KoParameterShape.h

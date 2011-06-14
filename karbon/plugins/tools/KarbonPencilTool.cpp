@@ -22,7 +22,7 @@
 
 #include <KoPathShape.h>
 #include <KoParameterShape.h>
-#include <KoLineBorder.h>
+#include <KLineBorder.h>
 #include <KoPointerEvent.h>
 #include <KoCanvasBase.h>
 #include <KoShapeController.h>
@@ -392,9 +392,9 @@ void KarbonPencilTool::setDelta(double delta)
         m_combineAngle = delta;
 }
 
-KoLineBorder * KarbonPencilTool::currentBorder()
+KLineBorder * KarbonPencilTool::currentBorder()
 {
-    KoLineBorder *border = new KoLineBorder();
+    KLineBorder *border = new KLineBorder();
     border->setColor(canvas()->resourceManager()->foregroundColor());
     return border;
 }

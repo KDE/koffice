@@ -21,7 +21,7 @@
 #ifndef SVGGRAPHICCONTEXT_H
 #define SVGGRAPHICCONTEXT_H
 
-#include <KoLineBorder.h>
+#include <KLineBorder.h>
 
 #include <QFont>
 
@@ -56,7 +56,7 @@ public:
 
     StyleType    strokeType;///< the current stroke type
     QString      strokeId;  ///< the current stroke id (used for gradient strokes)
-    KoLineBorder stroke;    ///< the current stroke
+    KLineBorder stroke;    ///< the current stroke
 
     QString filterId;       ///< the current filter id
     qreal opacity;          ///< the shapes opacity

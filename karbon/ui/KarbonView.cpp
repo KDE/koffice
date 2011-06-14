@@ -62,7 +62,7 @@
 #include "KarbonDocumentMergeCommand.h"
 
 #include <KoMainWindow.h>
-#include <KoLineBorder.h>
+#include <KLineBorder.h>
 #include <KoCanvasController.h>
 #include <KoResourceManager.h>
 #include <KoFilterManager.h>
@@ -360,13 +360,13 @@ void KarbonView::dropEvent(QDropEvent *e)
             QList<KoShapeBorderBase*> borders;
             QList<KoShape*> selectedShapes = selection->selectedShapes();
             foreach(KoShape * shape, selectedShapes) {
-                KoLineBorder * border = dynamic_cast<KoLineBorder*>(shape->border());
-                KoLineBorder * newBorder = 0;
+                KLineBorder * border = dynamic_cast<KLineBorder*>(shape->border());
+                KLineBorder * newBorder = 0;
                 if (border) {
-                    newBorder = new KoLineBorder(*border);
+                    newBorder = new KLineBorder(*border);
                     newBorder->setColor(color);
                 } else {
-                    newBorder = new KoLineBorder(1.0, color);
+                    newBorder = new KLineBorder(1.0, color);
                 }
                 borders.append(newBorder);
             }

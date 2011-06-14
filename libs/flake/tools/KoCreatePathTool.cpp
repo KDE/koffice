@@ -24,7 +24,7 @@
 #include "KoShapeController.h"
 #include "KoPointerEvent.h"
 #include "KoPathShape.h"
-#include "KoLineBorder.h"
+#include "KLineBorder.h"
 #include "KoSelection.h"
 #include "commands/KoPathPointMergeCommand.h"
 #include "SnapGuideConfigWidget_p.h"
@@ -162,7 +162,7 @@ void KoCreatePathTool::mousePressEvent(KoPointerEvent *event)
         d->shape=pathShape;
         pathShape->setShapeId(KoPathShapeId);
 
-        KoLineBorder *border = new KoLineBorder(); // TODO properties fill from KoResourceManager ?
+        KLineBorder *border = new KLineBorder(); // TODO properties fill from KoResourceManager ?
         border->setColor(canvas()->resourceManager()->foregroundColor());
 
         pathShape->setBorder(border);

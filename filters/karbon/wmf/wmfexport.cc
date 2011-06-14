@@ -26,7 +26,7 @@
 #include <kdebug.h>
 #include <kpluginfactory.h>
 #include <KoFilterChain.h>
-#include <KoLineBorder.h>
+#include <KLineBorder.h>
 #include <KoShape.h>
 #include <KoShapeContainer.h>
 #include <KoColorBackground.h>
@@ -153,7 +153,7 @@ void WmfExport::paintShape(KoShape * shape)
 
 QPen WmfExport::getPen(const KoShapeBorderBase * stroke)
 {
-    const KoLineBorder * lineBorder = dynamic_cast<const KoLineBorder*>(stroke);
+    const KLineBorder * lineBorder = dynamic_cast<const KLineBorder*>(stroke);
     if (! lineBorder)
         return QPen(Qt::NoPen);
 

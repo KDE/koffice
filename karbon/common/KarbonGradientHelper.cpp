@@ -20,7 +20,7 @@
 #include "KarbonGradientHelper.h"
 
 #include <KoShape.h>
-#include <KoLineBorder.h>
+#include <KLineBorder.h>
 #include <KGradientBackground.h>
 
 #include <QtGui/QGradient>

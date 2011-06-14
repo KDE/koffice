@@ -23,7 +23,7 @@
 #include <kdebug.h>
 #include <KoShapeManager.h>
 #include <KoSelection.h>
-#include <KoLineBorder.h>
+#include <KLineBorder.h>
 #include <KoShapeShadow.h>
 
 #include <kcomponentdata.h>
@@ -114,7 +114,7 @@ void TestShapeAt::testShadow()
     shape.setSize(bbox.size());
     QCOMPARE(shape.boundingRect(), bbox);
 
-    KoLineBorder *border = new KoLineBorder();
+    KLineBorder *border = new KLineBorder();
     border->setLineWidth(20); // which means the shape grows 10 in all directions.
     shape.setBorder(border);
     KoInsets borderInsets;

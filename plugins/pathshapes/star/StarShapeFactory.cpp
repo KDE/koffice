@@ -22,7 +22,7 @@
 #include "star/StarShapeConfigWidget.h"
 
 #include <KoShapeFactoryBase.h>
-#include <KoLineBorder.h>
+#include <KLineBorder.h>
 #include <KProperties.h>
 #include <KOdfXmlNS.h>
 #include <KXmlReader.h>
@@ -110,7 +110,7 @@ KoShape *StarShapeFactory::createDefaultShape(KoResourceManager *) const
 {
     StarShape *star = new StarShape();
 
-    star->setBorder(new KoLineBorder(1.0));
+    star->setBorder(new KLineBorder(1.0));
     star->setShapeId(KoPathShapeId);
 
     return star;
@@ -128,7 +128,7 @@ KoShape *StarShapeFactory::createShape(const KProperties *params, KoResourceMana
     star->setTipRadius(params->doubleProperty("tipRadius", 50.0));
     star->setBaseRoundness(params->doubleProperty("baseRoundness", 0.0));
     star->setTipRoundness(params->doubleProperty("tipRoundness", 0.0));
-    star->setBorder(new KoLineBorder(1.0));
+    star->setBorder(new KLineBorder(1.0));
     star->setShapeId(KoPathShapeId);
     QVariant v;
     if (params->property("background", v))

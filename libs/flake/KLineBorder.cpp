@@ -19,7 +19,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoLineBorder.h"
+#include "KLineBorder.h"
 #include "KoViewConverter.h"
 #include "KoShape.h"
 #include "KoShapeSavingContext.h"
@@ -33,7 +33,7 @@
 
 #include <math.h>
 
-class KoLineBorder::Private
+class KLineBorder::Private
 {
 public:
     QColor color;
@@ -41,7 +41,7 @@ public:
     QBrush brush;
 };
 
-KoLineBorder::KoLineBorder()
+KLineBorder::KLineBorder()
         : d(new Private())
 {
     d->color = QColor(Qt::black);
@@ -50,7 +50,7 @@ KoLineBorder::KoLineBorder()
     d->pen.setWidthF(1.0);
 }
 
-KoLineBorder::KoLineBorder(qreal lineWidth, const QColor &color)
+KLineBorder::KLineBorder(qreal lineWidth, const QColor &color)
         : d(new Private())
 {
     d->pen.setWidthF(qMax(qreal(0.0), lineWidth));
@@ -58,12 +58,12 @@ KoLineBorder::KoLineBorder(qreal lineWidth, const QColor &color)
     d->color = color;
 }
 
-KoLineBorder::~KoLineBorder()
+KLineBorder::~KLineBorder()
 {
     delete d;
 }
 
-KoLineBorder &KoLineBorder::operator = (const KoLineBorder &rhs)
+KLineBorder &KLineBorder::operator = (const KLineBorder &rhs)
 {
     if (this == &rhs)
         return *this;
@@ -75,7 +75,7 @@ KoLineBorder &KoLineBorder::operator = (const KoLineBorder &rhs)
     return *this;
 }
 
-void KoLineBorder::saveOdf(KOdfGenericStyle &style, KoShapeSavingContext &context) const
+void KLineBorder::saveOdf(KOdfGenericStyle &style, KoShapeSavingContext &context) const
 {
     QPen pen = d->pen;
     if (d->brush.gradient())
@@ -85,7 +85,7 @@ void KoLineBorder::saveOdf(KOdfGenericStyle &style, KoShapeSavingContext &contex
     KOdf::saveOdfStrokeStyle(style, context.mainStyles(), pen);
 }
 
-void KoLineBorder::borderInsets(KoInsets &insets) const
+void KLineBorder::borderInsets(KoInsets &insets) const
 {
     qreal lineWidth = d->pen.widthF();
     if (lineWidth < 0)
@@ -103,12 +103,12 @@ void KoLineBorder::borderInsets(KoInsets &insets) const
     insets.right = lineWidth;
 }
 
-bool KoLineBorder::hasTransparency() const
+bool KLineBorder::hasTransparency() const
 {
     return d->color.alpha() > 0;
 }
 
-void KoLineBorder::paint(KoShape *shape, QPainter &painter, const KoViewConverter &converter)
+void KLineBorder::paint(KoShape *shape, QPainter &painter, const KoViewConverter &converter)
 {
     KoShape::applyConversion(painter, converter);
 
@@ -123,7 +123,7 @@ void KoLineBorder::paint(KoShape *shape, QPainter &painter, const KoViewConverte
         painter.strokePath(shape->outline(), pen);
 }
 
-void KoLineBorder::paint(KoShape *shape, QPainter &painter, const KoViewConverter &converter, const QColor &color)
+void KLineBorder::paint(KoShape *shape, QPainter &painter, const KoViewConverter &converter, const QColor &color)
 {
     KoShape::applyConversion(painter, converter);
 
@@ -135,57 +135,57 @@ void KoLineBorder::paint(KoShape *shape, QPainter &painter, const KoViewConverte
     }
 }
 
-void KoLineBorder::setCapStyle(Qt::PenCapStyle style)
+void KLineBorder::setCapStyle(Qt::PenCapStyle style)
 {
     d->pen.setCapStyle(style);
 }
 
-Qt::PenCapStyle KoLineBorder::capStyle() const
+Qt::PenCapStyle KLineBorder::capStyle() const
 {
     return d->pen.capStyle();
 }
 
-void KoLineBorder::setJoinStyle(Qt::PenJoinStyle style)
+void KLineBorder::setJoinStyle(Qt::PenJoinStyle style)
 {
     d->pen.setJoinStyle(style);
 }
 
-Qt::PenJoinStyle KoLineBorder::joinStyle() const
+Qt::PenJoinStyle KLineBorder::joinStyle() const
 {
     return d->pen.joinStyle();
 }
 
-void KoLineBorder::setLineWidth(qreal lineWidth)
+void KLineBorder::setLineWidth(qreal lineWidth)
 {
     d->pen.setWidthF(qMax(qreal(0.0), lineWidth));
 }
 
-qreal KoLineBorder::lineWidth() const
+qreal KLineBorder::lineWidth() const
 {
     return d->pen.widthF();
 }
 
-void KoLineBorder::setMiterLimit(qreal miterLimit)
+void KLineBorder::setMiterLimit(qreal miterLimit)
 {
     d->pen.setMiterLimit(miterLimit);
 }
 
-qreal KoLineBorder::miterLimit() const
+qreal KLineBorder::miterLimit() const
 {
     return d->pen.miterLimit();
 }
 
-QColor KoLineBorder::color() const
+QColor KLineBorder::color() const
 {
     return d->color;
 }
 
-void KoLineBorder::setColor(const QColor &color)
+void KLineBorder::setColor(const QColor &color)
 {
     d->color = color;
 }
 
-void KoLineBorder::setLineStyle(Qt::PenStyle style, const QVector<qreal> &dashes)
+void KLineBorder::setLineStyle(Qt::PenStyle style, const QVector<qreal> &dashes)
 {
     if (style < Qt::CustomDashLine)
         d->pen.setStyle(style);
@@ -193,32 +193,32 @@ void KoLineBorder::setLineStyle(Qt::PenStyle style, const QVector<qreal> &dashes
         d->pen.setDashPattern(dashes);
 }
 
-Qt::PenStyle KoLineBorder::lineStyle() const
+Qt::PenStyle KLineBorder::lineStyle() const
 {
     return d->pen.style();
 }
 
-QVector<qreal> KoLineBorder::lineDashes() const
+QVector<qreal> KLineBorder::lineDashes() const
 {
     return d->pen.dashPattern();
 }
 
-void KoLineBorder::setDashOffset(qreal dashOffset)
+void KLineBorder::setDashOffset(qreal dashOffset)
 {
     d->pen.setDashOffset(dashOffset);
 }
 
-qreal KoLineBorder::dashOffset() const
+qreal KLineBorder::dashOffset() const
 {
     return d->pen.dashOffset();
 }
 
-void KoLineBorder::setLineBrush(const QBrush &brush)
+void KLineBorder::setLineBrush(const QBrush &brush)
 {
     d->brush = brush;
 }
 
-QBrush KoLineBorder::lineBrush() const
+QBrush KLineBorder::lineBrush() const
 {
     return d->brush;
 }

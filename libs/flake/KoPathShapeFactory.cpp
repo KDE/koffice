@@ -18,7 +18,7 @@
  */
 #include "KoPathShapeFactory_p.h"
 #include "KoPathShape.h"
-#include "KoLineBorder.h"
+#include "KLineBorder.h"
 #include "KImageCollection.h"
 #include "KoResourceManager.h"
 #include "KoShapeLoadingContext.h"
@@ -46,7 +46,7 @@ KoShape *KoPathShapeFactory::createDefaultShape(KoResourceManager *) const
     path->curveTo(QPointF(0, 120), QPointF(50, 120), QPointF(50, 50));
     path->curveTo(QPointF(50, -20), QPointF(100, -20), QPointF(100, 50));
     path->normalize();
-    path->setBorder(new KoLineBorder(1.0));
+    path->setBorder(new KLineBorder(1.0));
     return path;
 }
 

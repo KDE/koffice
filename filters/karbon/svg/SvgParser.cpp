@@ -1190,7 +1190,7 @@ void SvgParser::applyStrokeStyle(KoShape * shape)
         double lineWidth = gc->stroke.lineWidth();
         QVector<qreal> dashes = gc->stroke.lineDashes();
 
-        KoLineBorder * border = new KoLineBorder(gc->stroke);
+        KLineBorder * border = new KLineBorder(gc->stroke);
 
         // apply line width to dashes and dash offset
         if (dashes.count() && lineWidth > 0.0) {
@@ -1219,7 +1219,7 @@ void SvgParser::applyStrokeStyle(KoShape * shape)
                 delete convertedGradient;
                 brush.setTransform(gradient->transform() * gc->matrix * shape->transformation().inverted());
             }
-            KoLineBorder * border = new KoLineBorder(gc->stroke);
+            KLineBorder * border = new KLineBorder(gc->stroke);
             border->setLineBrush(brush);
             border->setLineStyle(Qt::SolidLine, QVector<qreal>());
             shape->setBorder(border);

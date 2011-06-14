@@ -20,7 +20,7 @@
  */
 #include "KoResourceManager.h"
 #include "KoShape.h"
-#include "KoLineBorder.h"
+#include "KLineBorder.h"
 
 #include <QVariant>
 #include <QMetaObject>

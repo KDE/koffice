@@ -21,7 +21,7 @@
 #include <MockShapes.h>
 #include <KoShapeGroup.h>
 #include <KoShapeGroupCommand.h>
-#include <KoLineBorder.h>
+#include <KLineBorder.h>
 #include <KoShapeShadow.h>
 #include <QtGui/QUndoCommand>
 
@@ -77,7 +77,7 @@ void TestShapeGroupCommand::init()
     strokeShape2->setPosition( QPointF(25,25) );
 
     strokeGroup = new KoShapeGroup();
-    strokeGroup->setBorder( new KoLineBorder( 2.0f ) );
+    strokeGroup->setBorder( new KLineBorder( 2.0f ) );
     strokeGroup->setShadow( new KoShapeShadow() );
 }
 

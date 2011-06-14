@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 #include "KoLineBorderFactory_p.h"
-#include "KoLineBorder.h"
+#include "KLineBorder.h"
 
 #include <KLocale>
 
@@ -28,6 +28,6 @@ KoLineBorderFactory::KoLineBorderFactory(QObject *parent)
 
 KoShapeBorderBase *KoLineBorderFactory::createBorder(KoShape *) const
 {
-    return new KoLineBorder();
+    return new KLineBorder();
 }
 

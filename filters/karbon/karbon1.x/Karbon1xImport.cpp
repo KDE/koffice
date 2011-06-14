@@ -34,7 +34,7 @@
 #include <KoPathShapeLoader.h>
 #include <KoShapeGroup.h>
 #include <commands/KoShapeGroupCommand.h>
-#include <KoLineBorder.h>
+#include <KLineBorder.h>
 #include <pathshapes/ellipse/EllipseShape.h>
 #include <pathshapes/rectangle/RectangleShape.h>
 #include <pathshapes/star/StarShape.h>
@@ -516,7 +516,7 @@ QVector<qreal> KarbonImport::loadDashes(const KXmlElement& element)
 
 void KarbonImport::loadStroke(KoShape * shape, const KXmlElement &element)
 {
-    KoLineBorder * border = new KoLineBorder();
+    KLineBorder * border = new KLineBorder();
 
     switch (element.attribute("lineCap", "0").toUShort()) {
     case 1:

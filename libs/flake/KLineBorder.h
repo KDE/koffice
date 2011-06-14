@@ -37,22 +37,22 @@ class KoViewConverter;
 /**
  * A border for shapes that draws a single line around the object.
  */
-class FLAKE_EXPORT KoLineBorder : public KoShapeBorderBase
+class FLAKE_EXPORT KLineBorder : public KoShapeBorderBase
 {
 public:
     /// Constructor for a thin line in black
-    KoLineBorder();
+    KLineBorder();
 
     /**
      * Constructor for a lineBorder
      * @param lineWidth the width, in pt
      * @param color the color we draw the outline in.
      */
-    explicit KoLineBorder(qreal lineWidth, const QColor &color = Qt::black);
-    virtual ~KoLineBorder();
+    explicit KLineBorder(qreal lineWidth, const QColor &color = Qt::black);
+    virtual ~KLineBorder();
 
     /// Assignment operator
-    KoLineBorder& operator = (const KoLineBorder &rhs);
+    KLineBorder& operator = (const KLineBorder &rhs);
 
     /// Sets the lines cap style
     void setCapStyle(Qt::PenCapStyle style);

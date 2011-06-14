@@ -24,7 +24,7 @@
 #include <KoShapeManagerPaintingStrategy.h>
 
 class KoShapeManager;
-class KoLineBorder;
+class KLineBorder;
 
 class KARBONCOMMON_EXPORT KarbonOutlinePaintingStrategy : public KoShapeManagerPaintingStrategy
 {
@@ -34,7 +34,7 @@ public:
     /// reimplemented from KoShapeManagerPaintingStrategy
     virtual void paint(KoShape * shape, QPainter &painter, const KoViewConverter &converter, bool forPrint);
 private:
-    KoLineBorder * m_border;
+    KLineBorder * m_border;
 };
 
 #endif // KARBONOUTLINEPAINTINGSTRATEGY_H

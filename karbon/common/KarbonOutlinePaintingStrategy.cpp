@@ -20,18 +20,18 @@
 #include "KarbonOutlinePaintingStrategy.h"
 #include <KoShapeManager.h>
 #include <KoShape.h>
-#include <KoLineBorder.h>
+#include <KLineBorder.h>
 
 #include <QPainter>
 
-class OutlineStroke : public KoLineBorder
+class OutlineStroke : public KLineBorder
 {
 public:
     OutlineStroke()
             : m_pen(Qt::black) {
     }
 
-    using KoLineBorder::paint;
+    using KLineBorder::paint;
 
     virtual void paint(KoShape *shape, QPainter &painter, const KoViewConverter &converter) {
         KoShape::applyConversion(painter, converter);

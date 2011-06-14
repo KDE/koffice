@@ -20,7 +20,7 @@
 #include "EllipseShapeFactory.h"
 #include "EllipseShape.h"
 #include "EllipseShapeConfigWidget.h"
-#include <KoLineBorder.h>
+#include <KLineBorder.h>
 #include <KOdfXmlNS.h>
 #include <KXmlReader.h>
 #include <KGradientBackground.h>
@@ -45,7 +45,7 @@ KoShape *EllipseShapeFactory::createDefaultShape(KoResourceManager *) const
 {
     EllipseShape *ellipse = new EllipseShape();
 
-    ellipse->setBorder(new KoLineBorder(1.0));
+    ellipse->setBorder(new KLineBorder(1.0));
     ellipse->setShapeId(KoPathShapeId);
 
     QRadialGradient *gradient = new QRadialGradient(QPointF(0.5,0.5), 0.5, QPointF(0.25,0.25));
