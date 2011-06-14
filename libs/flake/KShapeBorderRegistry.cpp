@@ -16,16 +16,16 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#include "KoShapeBorderRegistry.h"
+#include "KShapeBorderRegistry.h"
 #include <KoPluginLoader.h>
 
 #include <KGlobal>
 
-KoShapeBorderRegistry::KoShapeBorderRegistry()
+KShapeBorderRegistry::KShapeBorderRegistry()
 {
 }
 
-void KoShapeBorderRegistry::init()
+void KShapeBorderRegistry::init()
 {
     KoPluginLoader::PluginsConfig config;
     config.whiteList = "FlakeBorderPlugins";
@@ -39,17 +39,17 @@ void KoShapeBorderRegistry::init()
 }
 
 
-KoShapeBorderRegistry::~KoShapeBorderRegistry()
+KShapeBorderRegistry::~KShapeBorderRegistry()
 {
 }
 
-KoShapeBorderRegistry* KoShapeBorderRegistry::instance()
+KShapeBorderRegistry* KShapeBorderRegistry::instance()
 {
-    K_GLOBAL_STATIC(KoShapeBorderRegistry, s_instance)
+    K_GLOBAL_STATIC(KShapeBorderRegistry, s_instance)
     if (!s_instance.exists()) {
         s_instance->init();
     }
     return s_instance;
 }
 
-#include <KoShapeBorderRegistry.moc>
+#include <KShapeBorderRegistry.moc>

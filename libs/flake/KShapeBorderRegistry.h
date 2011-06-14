@@ -27,23 +27,23 @@
 
 #include <QObject>
 
-class FLAKE_EXPORT KoShapeBorderRegistry : public QObject,  public KGenericRegistry<KShapeBorderFactoryBase*>
+class FLAKE_EXPORT KShapeBorderRegistry : public QObject,  public KGenericRegistry<KShapeBorderFactoryBase*>
 {
     Q_OBJECT
 
 public:
-    ~KoShapeBorderRegistry();
+    ~KShapeBorderRegistry();
 
     /**
-     * Return an instance of the KoShapeBorderRegistry
+     * Return an instance of the KShapeBorderRegistry
      * Creates an instance if that has never happened before and returns the singleton instance.
      */
-    static KoShapeBorderRegistry *instance();
+    static KShapeBorderRegistry *instance();
 
 private:
-    KoShapeBorderRegistry();
-    KoShapeBorderRegistry(const KoShapeBorderRegistry&);
-    KoShapeBorderRegistry operator=(const KoShapeBorderRegistry&);
+    KShapeBorderRegistry();
+    KShapeBorderRegistry(const KShapeBorderRegistry&);
+    KShapeBorderRegistry operator=(const KShapeBorderRegistry&);
     void init();
 
     class Private;
