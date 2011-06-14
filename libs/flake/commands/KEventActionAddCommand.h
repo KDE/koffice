@@ -28,11 +28,11 @@ class KEventAction;
 class KEventActionAddCommandPrivate;
 
 /// API docs go here
-class FLAKE_EXPORT KoEventActionAddCommand : public QUndoCommand
+class FLAKE_EXPORT KEventActionAddCommand : public QUndoCommand
 {
 public:
-    KoEventActionAddCommand(KoShape *shape, KEventAction *eventAction, QUndoCommand *parent = 0);
-    virtual ~KoEventActionAddCommand();
+    KEventActionAddCommand(KoShape *shape, KEventAction *eventAction, QUndoCommand *parent = 0);
+    virtual ~KEventActionAddCommand();
 
     /// redo the command
     virtual void redo();

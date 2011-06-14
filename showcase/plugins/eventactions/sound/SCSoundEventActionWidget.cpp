@@ -25,7 +25,7 @@
 #include <klocale.h>
 
 
-#include <KoEventActionAddCommand.h>
+#include <KEventActionAddCommand.h>
 #include <KEventActionRemoveCommand.h>
 #include <SCEventActionData.h>
 #include <SCSoundCollection.h>
@@ -101,7 +101,7 @@ void SCSoundEventActionWidget::soundComboChanged()
         SCSoundEventAction * eventAction = new SCSoundEventAction();
         eventAction->setSoundData(soundData);
         m_eventAction = eventAction;
-        new KoEventActionAddCommand(m_shape, eventAction, cmd);
+        new KEventActionAddCommand(m_shape, eventAction, cmd);
     }
 
     emit(addCommand(cmd));
