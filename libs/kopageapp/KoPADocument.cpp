@@ -450,7 +450,7 @@ void KoPADocument::addShape(KShape * shape)
     if(!shape)
         return;
 
-    // the KoShapeController sets the active layer as parent
+    // the KShapeController sets the active layer as parent
     KoPAPageBase * page(pageByShape(shape));
 
     foreach(KoView *view, views())

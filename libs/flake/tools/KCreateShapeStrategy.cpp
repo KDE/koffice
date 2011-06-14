@@ -27,7 +27,7 @@
 #include "KCanvasBase.h"
 #include "KSelection.h"
 #include "KoShapeFactoryBase.h"
-#include "KoShapeController.h"
+#include "KShapeController.h"
 
 #include <QPainter>
 

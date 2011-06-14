@@ -20,7 +20,7 @@
 
 #include "KCanvasBase.h"
 #include "KResourceManager.h"
-#include "KoShapeController.h"
+#include "KShapeController.h"
 #include "KCanvasController.h"
 #include "KoViewConverter.h"
 #include "KoSnapGuide.h"
@@ -46,7 +46,7 @@ public:
         delete resourceManager;
         delete snapGuide;
     }
-    KoShapeController *shapeController;
+    KShapeController *shapeController;
     KResourceManager *resourceManager;
     KCanvasController *controller;
     KoSnapGuide *snapGuide;
@@ -57,7 +57,7 @@ KCanvasBase::KCanvasBase(KoShapeControllerBase *shapeControllerBase)
         : d(new Private())
 {
     d->resourceManager = new KResourceManager();
-    d->shapeController = new KoShapeController(this, shapeControllerBase);
+    d->shapeController = new KShapeController(this, shapeControllerBase);
     d->snapGuide = new KoSnapGuide(this);
 }
 
@@ -67,7 +67,7 @@ KCanvasBase::~KCanvasBase()
 }
 
 
-KoShapeController *KCanvasBase::shapeController() const
+KShapeController *KCanvasBase::shapeController() const
 {
     return d->shapeController;
 }

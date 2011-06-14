@@ -25,7 +25,7 @@
 #include "KShape_p.h"
 #include "KoShapeFactoryBase.h" // for the SHAPE mimetypes
 #include "KoShapeRegistry.h"
-#include "KoShapeController.h"
+#include "KShapeController.h"
 #include "KoShapeManager.h"
 #include "KSelection.h"
 #include "KCanvasBase.h"

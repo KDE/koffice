@@ -27,7 +27,7 @@
 #include "KPathPointData.h"
 #include "flake_export.h"
 
-class KoShapeController;
+class KShapeController;
 class KPathPointRemoveCommandPrivate;
 
 /// The undo / redo command for removing path points.
@@ -45,7 +45,7 @@ public:
      * @param shapeController shape controller in charge
      * @param parent the parent command used for macro commands
      */
-    static QUndoCommand *createCommand(const QList<KPathPointData> &pointDataList, KoShapeController *shapeController, QUndoCommand *parent = 0);
+    static QUndoCommand *createCommand(const QList<KPathPointData> &pointDataList, KShapeController *shapeController, QUndoCommand *parent = 0);
 
     /**
      * @brief Command to remove a points from path shapes

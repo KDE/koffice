@@ -103,7 +103,7 @@ enum DocumentResource {
  * notified when a Resource changes (is set).
  * The properties come from the KoCanvasResource::CanvasResource enum or the
  * KoDocumentResource::DocumentResource depending on which manager you got.
- * See KCanvasBase::resourceManager KoShapeController::resourceManager
+ * See KCanvasBase::resourceManager KShapeController::resourceManager
  *
  * The manager can contain all sorts of variable types and there are accessors
  * for the most common ones.  All variables are always stored inside a QVariant

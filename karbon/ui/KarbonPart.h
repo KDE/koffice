@@ -68,11 +68,11 @@ public:
     /// reimplemented form KoDocument
     virtual bool saveOdf(SavingContext &documentContext);
 
-    /// implemented from KoShapeController
+    /// implemented from KShapeController
     virtual void addShape(KShape* shape);
-    /// implemented from KoShapeController
+    /// implemented from KShapeController
     virtual void removeShape(KShape* shape);
-    /// implemented from KoShapeController
+    /// implemented from KShapeController
     virtual QMap<QString, KDataCenterBase*> dataCenterMap() const;
 
     /// Gives access to document content

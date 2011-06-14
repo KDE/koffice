@@ -23,7 +23,7 @@
 #include "KShape.h"
 #include "KoShapeGroup.h"
 #include "KShapeContainer.h"
-#include "KoShapeController.h"
+#include "KShapeController.h"
 
 #include <klocale.h>
 
@@ -42,7 +42,7 @@ QUndoCommand * KoShapeGroupCommand::createCommand(KoShapeGroup *container, const
 }
 
 //static
-QUndoCommand * KoShapeGroupCommand::createCommand(const QList<KShape *> &shapes, KoShapeController *shapeController, QUndoCommand *parent)
+QUndoCommand * KoShapeGroupCommand::createCommand(const QList<KShape *> &shapes, KShapeController *shapeController, QUndoCommand *parent)
 {
     KoShapeGroup *container = new KoShapeGroup();
     QUndoCommand *addShapeCommand = parent;

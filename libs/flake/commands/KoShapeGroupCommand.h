@@ -30,7 +30,7 @@ class KShape;
 class KoShapeGroup;
 class KShapeContainer;
 class KoShapeGroupCommandPrivate;
-class KoShapeController;
+class KShapeController;
 
 /// The undo / redo command for grouping shapes
 class FLAKE_EXPORT KoShapeGroupCommand : public QUndoCommand
@@ -58,7 +58,7 @@ public:
      * @param shapeController a shape controller where the new group shape can be added to.
      * @param shapes a list of all the shapes that should be grouped.
      */
-    static QUndoCommand *createCommand(const QList<KShape *> &shapes, KoShapeController *shapeController, QUndoCommand *parent = 0);
+    static QUndoCommand *createCommand(const QList<KShape *> &shapes, KShapeController *shapeController, QUndoCommand *parent = 0);
 
     /**
      * Command to group a set of shapes into a predefined container.

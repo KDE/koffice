@@ -28,7 +28,7 @@
 #include <KoShapeManager.h>
 #include <KPointerEvent.h>
 #include <KPathShape.h>
-#include <KoShapeController.h>
+#include <KShapeController.h>
 #include <KShapeContainer.h>
 #include <KLineBorder.h>
 

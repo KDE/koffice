@@ -164,7 +164,7 @@ bool KoPAViewModeNormal::masterMode()
 
 void KoPAViewModeNormal::addShape(KShape *shape)
 {
-    // the KoShapeController sets the active layer as parent
+    // the KShapeController sets the active layer as parent
     KoPAPageBase * page(m_view->kopaDocument()->pageByShape(shape));
 
     bool isMaster = dynamic_cast<KoPAMasterPage*>(page) != 0;

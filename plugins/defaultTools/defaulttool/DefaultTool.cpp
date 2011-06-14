@@ -38,7 +38,7 @@
 #include <KoToolSelection.h>
 #include <KoToolManager.h>
 #include <KGuidesData.h>
-#include <KoShapeController.h>
+#include <KShapeController.h>
 #include <KoShapeManager.h>
 #include <KoShapeGroup.h>
 #include <KoShapePaste.h>

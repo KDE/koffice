@@ -28,7 +28,7 @@
 #include <KOdfStoreReader.h>
 
 #include "KCanvasBase.h"
-#include "KoShapeController.h"
+#include "KShapeController.h"
 #include "KShape.h"
 #include "KoShapeLayer.h"
 #include "KoShapeLoadingContext.h"

@@ -22,7 +22,7 @@
 #include "TextShape.h"
 
 #include <KCanvasBase.h>
-#include <KoShapeController.h>
+#include <KShapeController.h>
 #include <KResourceManager.h>
 
 #include <klocale.h>

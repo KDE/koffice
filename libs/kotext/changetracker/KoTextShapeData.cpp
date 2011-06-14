@@ -52,7 +52,7 @@
 #include <KoTextAnchor.h>
 #include <KInlineTextObjectManager.h>
 #include <KCanvasBase.h>
-#include <KoShapeController.h>
+#include <KShapeController.h>
 #include <KShapeContainer.h>
 #include <KUndoStack>
 #include <QUndoCommand>

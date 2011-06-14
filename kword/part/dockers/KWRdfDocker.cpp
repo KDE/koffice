@@ -27,7 +27,7 @@
 #include "frames/KWTextFrameSet.h"
 
 #include <KoTextEditor.h>
-#include <KoShapeController.h>
+#include <KShapeController.h>
 #include <KoToolProxy.h>
 #include <KoShapeManager.h>
 #include <KSelection.h>

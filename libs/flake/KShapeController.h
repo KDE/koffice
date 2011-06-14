@@ -41,7 +41,7 @@ class KResourceManager;
  * from this class for maintaining the list of shapes in the document. So no tool gets
  * to access the application directly.
  */
-class FLAKE_EXPORT KoShapeController
+class FLAKE_EXPORT KShapeController
 {
 public:
     /**
@@ -49,9 +49,9 @@ public:
      * @param canvas the canvas this controller works for.
      * @param shapeController the application provided shapeControllerBase that we can call.
      */
-    KoShapeController(KCanvasBase *canvas, KoShapeControllerBase *shapeController);
+    KShapeController(KCanvasBase *canvas, KoShapeControllerBase *shapeController);
     /// destructor
-    ~KoShapeController();
+    ~KShapeController();
 
     /**
      * @brief Add a shape to the document.

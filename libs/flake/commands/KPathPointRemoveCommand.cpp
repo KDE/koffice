@@ -21,7 +21,7 @@
 #include "KPathPointRemoveCommand.h"
 #include "KoSubpathRemoveCommand.h"
 #include "KoShapeControllerBase.h"
-#include "KoShapeController.h"
+#include "KShapeController.h"
 #include <klocale.h>
 
 class KPathPointRemoveCommandPrivate
@@ -39,7 +39,7 @@ public:
 
 QUndoCommand *KPathPointRemoveCommand::createCommand(
     const QList<KPathPointData> &pointDataList,
-    KoShapeController *shapeController,
+    KShapeController *shapeController,
     QUndoCommand *parent)
 {
     /*

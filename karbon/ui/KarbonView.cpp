@@ -73,7 +73,7 @@
 #include <KoStandardAction.h>
 #include <KoToolProxy.h>
 #include <KoShapeManager.h>
-#include <KoShapeController.h>
+#include <KShapeController.h>
 #include <KShapeContainer.h>
 #include <KoShapeGroup.h>
 #include <KoShapeCreateCommand.h>

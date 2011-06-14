@@ -29,7 +29,7 @@
 #include <KInlineTextObjectManager.h>
 #include <KoTextAnchor.h>
 #include <KCanvasBase.h>
-#include <KoShapeController.h>
+#include <KShapeController.h>
 
 #include <QWeakPointer>
 

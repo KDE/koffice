@@ -176,7 +176,7 @@ public:
 
     /**
      * Fetch the current resourceManager.
-     * See KoShapeController::resourceManager() for more details.
+     * See KShapeController::resourceManager() for more details.
      */
     KResourceManager *resourceManager() const;
     /**

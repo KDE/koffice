@@ -65,7 +65,7 @@
 #include <KResourceManager.h>
 #include <KSelection.h>
 #include <KShapeContainer.h>
-#include <KoShapeController.h>
+#include <KShapeController.h>
 #include <KoShapeCreateCommand.h>
 #include <KoShapeFactoryBase.h>
 #include <KoShapeGroupCommand.h>

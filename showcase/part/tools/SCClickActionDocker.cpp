@@ -33,7 +33,7 @@
 #include <SCDocument.h>
 #include <KCanvasBase.h>
 #include <KSelection.h>
-#include <KoShapeController.h>
+#include <KShapeController.h>
 #include <KoShapeManager.h>
 #include <KEventAction.h>
 #include <KEventActionFactoryBase.h>

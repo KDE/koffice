@@ -26,7 +26,7 @@
 #include <KImageCollection.h>
 #include <KPatternBackground.h>
 #include <KCanvasBase.h>
-#include <KoShapeController.h>
+#include <KShapeController.h>
 #include <KShapeBackgroundCommand.h>
 
 #include "KoPABackgroundTool.h"

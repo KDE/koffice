@@ -41,7 +41,7 @@
 #include <KoZoomHandler.h>
 #include <KoStandardAction.h>
 #include <KoToolBoxFactory.h>
-#include <KoShapeController.h>
+#include <KShapeController.h>
 #include <KoShapeManager.h>
 #include <KoZoomAction.h>
 #include <KoZoomController.h>

@@ -24,7 +24,7 @@
 #include <KCanvasBase.h>
 #include <KoShapeLoadingContext.h>
 #include <KoShapeControllerBase.h>
-#include <KoShapeController.h>
+#include <KShapeController.h>
 #include "KoTextShapeData.h"
 #include "opendocument/KoTextLoader.h"
 

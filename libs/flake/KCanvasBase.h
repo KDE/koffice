@@ -41,7 +41,7 @@ class KResourceManager;
 class KoShapeManager;
 class KoToolProxy;
 class KoViewConverter;
-class KoShapeController;
+class KShapeController;
 class KoShapeControllerBase;
 class KCanvasController;
 class KShape;
@@ -176,7 +176,7 @@ public:
      * @code
      *   canvasBase->shapeController()->resourceManager();
      * @endcode
-     * @see KoShapeController::resourceManager()
+     * @see KShapeController::resourceManager()
      */
     KResourceManager *resourceManager() const;
 
@@ -184,7 +184,7 @@ public:
      * Return the shape controller for this canvas.
      * A shape controller is used to create or delete shapes and show the relevant dialogs to the user.
      */
-    KoShapeController *shapeController() const;
+    KShapeController *shapeController() const;
 
     /**
      * Return the canvas controller for this canvas.

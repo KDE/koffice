@@ -19,7 +19,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoShapeController.h"
+#include "KShapeController.h"
 #include "KoShapeControllerBase.h"
 #include "KoShapeRegistry.h"
 #include "KoShapeManager.h"
@@ -36,7 +36,7 @@
 #include <kpagedialog.h>
 #include <klocale.h>
 
-class KoShapeController::Private
+class KShapeController::Private
 {
 public:
     Private()
@@ -66,39 +66,39 @@ public:
     }
 };
 
-KoShapeController::KoShapeController(KCanvasBase *canvas, KoShapeControllerBase *shapeController)
+KShapeController::KShapeController(KCanvasBase *canvas, KoShapeControllerBase *shapeController)
         : d(new Private())
 {
     d->canvas = canvas;
     d->shapeController = shapeController;
 }
 
-KoShapeController::~KoShapeController()
+KShapeController::~KShapeController()
 {
     delete d;
 }
 
-QUndoCommand* KoShapeController::addShape(KShape *shape, QUndoCommand *parent)
+QUndoCommand* KShapeController::addShape(KShape *shape, QUndoCommand *parent)
 {
     return d->addShape(shape, parent);
 }
 
-QUndoCommand* KoShapeController::removeShape(KShape *shape, QUndoCommand *parent)
+QUndoCommand* KShapeController::removeShape(KShape *shape, QUndoCommand *parent)
 {
     return new KoShapeDeleteCommand(d->shapeController, shape, parent);
 }
 
-QUndoCommand* KoShapeController::removeShapes(const QList<KShape*> &shapes, QUndoCommand *parent)
+QUndoCommand* KShapeController::removeShapes(const QList<KShape*> &shapes, QUndoCommand *parent)
 {
     return new KoShapeDeleteCommand(d->shapeController, shapes, parent);
 }
 
-void KoShapeController::setShapeControllerBase(KoShapeControllerBase* shapeControllerBase)
+void KShapeController::setShapeControllerBase(KoShapeControllerBase* shapeControllerBase)
 {
     d->shapeController = shapeControllerBase;
 }
 
-KResourceManager *KoShapeController::resourceManager() const
+KResourceManager *KShapeController::resourceManager() const
 {
     if (!d->shapeController) {
         if (!d->dummyRm) {

@@ -21,7 +21,7 @@
 
 #include "KCreatePathTool_p.h"
 
-#include "KoShapeController.h"
+#include "KShapeController.h"
 #include "KPointerEvent.h"
 #include "KPathShape.h"
 #include "KLineBorder.h"

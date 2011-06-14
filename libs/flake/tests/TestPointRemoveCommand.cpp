@@ -21,7 +21,7 @@
 #include <QPainterPath>
 #include "KPathShape.h"
 #include "KPathPointRemoveCommand.h"
-#include "KoShapeController.h"
+#include "KShapeController.h"
 #include <MockShapes.h>
 
 void TestPointRemoveCommand::redoUndoPointRemove()
@@ -56,7 +56,7 @@ void TestPointRemoveCommand::redoUndoPointRemove()
     QPainterPath ppath2Org = path2.outline();
 
     MockShapeController mockController;
-    KoShapeController shapeController(0, &mockController);
+    KShapeController shapeController(0, &mockController);
 
     QUndoCommand *cmd = KPathPointRemoveCommand::createCommand(pd, &shapeController);
     cmd->redo();
@@ -105,7 +105,7 @@ void TestPointRemoveCommand::redoUndoSubpathRemove()
     QPainterPath ppath1Org = path1.outline();
 
     MockShapeController mockController;
-    KoShapeController shapeController(0, &mockController);
+    KShapeController shapeController(0, &mockController);
 
     QUndoCommand *cmd1 = KPathPointRemoveCommand::createCommand(pd, &shapeController);
     cmd1->redo();
@@ -173,7 +173,7 @@ void TestPointRemoveCommand::redoUndoShapeRemove()
     MockShapeController mockController;
     mockController.addShape(path1);
     mockController.addShape(path2);
-    KoShapeController shapeController(0, &mockController);
+    KShapeController shapeController(0, &mockController);
 
     QUndoCommand *cmd = KPathPointRemoveCommand::createCommand(pd, &shapeController);
     cmd->redo();
@@ -233,7 +233,7 @@ void TestPointRemoveCommand::redoUndo()
     pd.append(KPathPointData(path2, path2->pathPointIndex(point22)));
     pd.append(KPathPointData(path1, path1->pathPointIndex(point14)));
 
-    KoShapeController shapeController(0, &mockController);
+    KShapeController shapeController(0, &mockController);
 
     QPainterPath ppath1Org = path1->outline();
     QPainterPath ppath2Org = path2->outline();
