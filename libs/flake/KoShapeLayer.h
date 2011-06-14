@@ -40,7 +40,7 @@ public:
      * Constructor with custom model
      * @param model the custom modem
      */
-    KoShapeLayer(KoShapeContainerModel *model);
+    KoShapeLayer(KShapeContainerModel *model);
 
     virtual bool hitTest(const QPointF &position) const;
     virtual QRectF boundingRect() const;

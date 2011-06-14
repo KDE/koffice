@@ -23,7 +23,7 @@
 #include <KoShapeGroup.h>
 #include <KCanvasBase.h>
 #include <KoShapeControllerBase.h>
-#include <KoShapeContainerModel.h>
+#include <KShapeContainerModel.h>
 #include <QPainter>
 
 #include "kdebug.h"
@@ -44,7 +44,7 @@ public:
 class MockContainer : public KShapeContainer
 {
 public:
-    MockContainer(KoShapeContainerModel *model) : KShapeContainer(model), paintedCount(0) {}
+    MockContainer(KShapeContainerModel *model) : KShapeContainer(model), paintedCount(0) {}
     MockContainer() : paintedCount(0) {}
     void paintComponent(QPainter &painter, const KoViewConverter &converter) {
         Q_UNUSED(painter);
@@ -116,7 +116,7 @@ private:
     QSet<KShape * > m_shapes;
 };
 
-class MockContainerModel : public KoShapeContainerModel
+class MockContainerModel : public KShapeContainerModel
 {
 public:
     MockContainerModel() {

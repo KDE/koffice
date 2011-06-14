@@ -21,14 +21,14 @@
 #ifndef KOSHAPECONTAINERDEFAULTMODEL_H
 #define KOSHAPECONTAINERDEFAULTMODEL_H
 
-#include "KoShapeContainerModel.h"
+#include "KShapeContainerModel.h"
 
 #include "flake_export.h"
 
 /**
- * A default implementation of the KoShapeContainerModel.
+ * A default implementation of the KShapeContainerModel.
  */
-class FLAKE_EXPORT KShapeContainerDefaultModel : public KoShapeContainerModel
+class FLAKE_EXPORT KShapeContainerDefaultModel : public KShapeContainerModel
 {
 public:
     KShapeContainerDefaultModel();

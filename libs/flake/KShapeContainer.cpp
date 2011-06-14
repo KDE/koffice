@@ -19,7 +19,7 @@
  */
 #include "KShapeContainer.h"
 #include "KShapeContainer_p.h"
-#include "KoShapeContainerModel.h"
+#include "KShapeContainerModel.h"
 #include "KShapeBorderBase.h"
 #include "KShapeContainerDefaultModel.h"
 #include "KoShapeSavingContext.h"
@@ -44,7 +44,7 @@ KShapeContainer::KShapeContainer()
 {
 }
 
-KShapeContainer::KShapeContainer(KoShapeContainerModel *model)
+KShapeContainer::KShapeContainer(KShapeContainerModel *model)
         : KShape(*(new KoShapeContainerPrivate(this)))
 {
     Q_D(KShapeContainer);
@@ -230,7 +230,7 @@ QList<KShape*> KShapeContainer::shapes() const
     return d->model->shapes();
 }
 
-KoShapeContainerModel *KShapeContainer::model() const
+KShapeContainerModel *KShapeContainer::model() const
 {
     Q_D(const KShapeContainer);
     return d->model;

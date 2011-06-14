@@ -35,7 +35,7 @@ set(flake_SRCS
     KoShapeControllerBase.cpp
     KShapeApplicationData.cpp
     KShapeContainer.cpp
-    KoShapeContainerModel.cpp
+    KShapeContainerModel.cpp
     KShapeContainerDefaultModel.cpp
     KoShapeGroup.cpp
     KoShapeManagerPaintingStrategy.cpp
@@ -290,7 +290,7 @@ install(
     KShapeConnectionPolicy.h
     KShapeContainerDefaultModel.h
     KShapeContainer.h
-    KoShapeContainerModel.h
+    KShapeContainerModel.h
     KoShapeControllerBase.h
     KoShapeController.h
     KoShapeFactoryBase.h

@@ -19,7 +19,7 @@
 #ifndef KOTEXTSHAPECONTAINERMODEL_H
 #define KOTEXTSHAPECONTAINERMODEL_H
 
-#include <KoShapeContainerModel.h>
+#include <KShapeContainerModel.h>
 #include <KShapeContainer.h>
 
 #include "kotext_export.h"
@@ -31,36 +31,36 @@ class KoTextAnchor;
  * All anchored frames are children of the text shape, and they get positioned
  * by the text layouter (only KWord at this time).
  */
-class KOTEXT_EXPORT KoTextShapeContainerModel : public KoShapeContainerModel
+class KOTEXT_EXPORT KoTextShapeContainerModel : public KShapeContainerModel
 {
 public:
     /// constructor
     KoTextShapeContainerModel();
     ~KoTextShapeContainerModel();
 
-    /// reimplemented from KoShapeContainerModel
+    /// reimplemented from KShapeContainerModel
     virtual void add(KShape *child);
-    /// reimplemented from KoShapeContainerModel
+    /// reimplemented from KShapeContainerModel
     virtual void remove(KShape *child);
-    /// reimplemented from KoShapeContainerModel
+    /// reimplemented from KShapeContainerModel
     virtual void setClipped(const KShape *child, bool clipping);
-    /// reimplemented from KoShapeContainerModel
+    /// reimplemented from KShapeContainerModel
     virtual bool isClipped(const KShape *child) const;
-    /// reimplemented from KoShapeContainerModel
+    /// reimplemented from KShapeContainerModel
     virtual int count() const;
-    /// reimplemented from KoShapeContainerModel
+    /// reimplemented from KShapeContainerModel
     virtual QList<KShape*> shapes() const;
-    /// reimplemented from KoShapeContainerModel
+    /// reimplemented from KShapeContainerModel
     virtual void containerChanged(KShapeContainer *container, KShape::ChangeType type);
-    /// reimplemented from KoShapeContainerModel
+    /// reimplemented from KShapeContainerModel
     virtual void proposeMove(KShape *child, QPointF &move);
-    /// reimplemented from KoShapeContainerModel
+    /// reimplemented from KShapeContainerModel
     virtual void childChanged(KShape *child, KShape::ChangeType type);
-    /// reimplemented from KoShapeContainerModel
+    /// reimplemented from KShapeContainerModel
     virtual bool isChildLocked(const KShape *child) const;
-    /// reimplemented from KoShapeContainerModel
+    /// reimplemented from KShapeContainerModel
     virtual void setInheritsTransform(const KShape *shape, bool inherit);
-    /// reimplemented from KoShapeContainerModel
+    /// reimplemented from KShapeContainerModel
     virtual bool inheritsTransform(const KShape *shape) const;
 
     /// each child that is added due to being anchored in the text has an anchor; register it for rules based placement.

@@ -96,7 +96,7 @@ class KXmlElement;
  * <ol><li>The most general is KShape::shapeChanged().<br>
  * a virtual method that you can use to check various changed to your shape made by tools or otherwise.</li>
  * <li>for shape hierarchies the parent may receive a notification when a child was modified.
- *  This is done though KoShapeContainerModel::childChanged()</li>
+ *  This is done though KShapeContainerModel::childChanged()</li>
  * <li>any shape that is at a similar position as another shape there is collision detection.
  * You can register your shape to be sensitive to any changes like moving or whatever to
  * <b>other</b> shapes that intersect yours.

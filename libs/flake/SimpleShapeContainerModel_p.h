@@ -31,10 +31,10 @@
 //
 
 
-#include "KoShapeContainerModel.h"
+#include "KShapeContainerModel.h"
 
 /// \internal
-class SimpleShapeContainerModel: public KoShapeContainerModel
+class SimpleShapeContainerModel: public KShapeContainerModel
 {
 public:
     SimpleShapeContainerModel() {}

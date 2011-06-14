@@ -33,7 +33,7 @@
 
 #include "KShape_p.h"
 
-class KoShapeContainerModel;
+class KShapeContainerModel;
 
 class KoShapeContainerPrivate : public KShapePrivate
 {
@@ -41,7 +41,7 @@ public:
     KoShapeContainerPrivate(KShapeContainer *q);
     virtual ~KoShapeContainerPrivate();
 
-    KoShapeContainerModel *model;
+    KShapeContainerModel *model;
 };
 
 #endif

@@ -24,7 +24,7 @@
 #include "KShape_p.h"
 #include "KShapeContainer.h"
 #include "KoShapeLayer.h"
-#include "KoShapeContainerModel.h"
+#include "KShapeContainerModel.h"
 #include "KSelection.h"
 #include "KPointerEvent.h"
 #include "KoInsets.h"
@@ -553,7 +553,7 @@ void KShape::update() const
         // also ask update for children which inherit transform
         const KShapeContainer *me = dynamic_cast<const KShapeContainer*>(this);
         if (me && me->model()) {
-            KoShapeContainerModel *model = me->model();
+            KShapeContainerModel *model = me->model();
             foreach (KShape *shape, model->shapes()) {
                 if (model->inheritsTransform(shape))
                     shape->update();

@@ -17,25 +17,25 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoShapeContainerModel.h"
+#include "KShapeContainerModel.h"
 
 #include "KShapeContainer.h"
 
-KoShapeContainerModel::KoShapeContainerModel()
+KShapeContainerModel::KShapeContainerModel()
 {
 }
 
-KoShapeContainerModel::~KoShapeContainerModel()
+KShapeContainerModel::~KShapeContainerModel()
 {
 }
 
-void KoShapeContainerModel::proposeMove(KShape *child, QPointF &move)
+void KShapeContainerModel::proposeMove(KShape *child, QPointF &move)
 {
     Q_UNUSED(child);
     Q_UNUSED(move);
 }
 
-void KoShapeContainerModel::childChanged(KShape *child, KShape::ChangeType type)
+void KShapeContainerModel::childChanged(KShape *child, KShape::ChangeType type)
 {
     Q_UNUSED(type);
     KShapeContainer * parent = child->parent();

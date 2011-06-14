@@ -154,7 +154,7 @@ void KoTextShapeContainerModel::childChanged(KShape *child, KShape::ChangeType t
             lay->interruptLayout();
         data->fireResizeEvent();
     }
-    KoShapeContainerModel::childChanged( child, type );
+    KShapeContainerModel::childChanged( child, type );
 }
 
 void KoTextShapeContainerModel::addAnchor(KoTextAnchor *anchor)

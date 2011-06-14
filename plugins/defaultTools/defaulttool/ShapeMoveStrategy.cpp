@@ -25,7 +25,7 @@
 #include <KCanvasBase.h>
 #include <KoShapeManager.h>
 #include <KShapeContainer.h>
-#include <KoShapeContainerModel.h>
+#include <KShapeContainerModel.h>
 #include <KResourceManager.h>
 #include <commands/KoShapeMoveCommand.h>
 #include <KoSnapGuide.h>

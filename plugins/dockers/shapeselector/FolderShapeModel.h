@@ -19,11 +19,11 @@
 #ifndef FOLDERSHAPEMODEL_H
 #define FOLDERSHAPEMODEL_H
 
-#include <KoShapeContainerModel.h>
+#include <KShapeContainerModel.h>
 
 class FolderShape;
 
-class FolderShapeModel : public KoShapeContainerModel
+class FolderShapeModel : public KShapeContainerModel
 {
 public:
     FolderShapeModel(FolderShape *parent);
@@ -45,9 +45,9 @@ public:
     virtual int count() const;
     /// returns content items added earlier
     virtual QList<KShape *> shapes() const;
-    /// reimplemented from KoShapeContainerModel
+    /// reimplemented from KShapeContainerModel
     virtual void containerChanged(KShapeContainer *container, KShape::ChangeType type);
-    /// reimplemented from KoShapeContainerModel
+    /// reimplemented from KShapeContainerModel
     virtual void childChanged(KShape *child, KShape::ChangeType type);
 
     /// called by the folder shape to allow us to reorganize the items in the folder

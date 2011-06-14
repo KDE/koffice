@@ -37,14 +37,14 @@ class KShapeContainer;
  * for the KShapeContainer.
  * @see KShapeContainer, KShapeContainerDefaultModel
  */
-class FLAKE_EXPORT KoShapeContainerModel
+class FLAKE_EXPORT KShapeContainerModel
 {
 public:
     /// default constructor
-    KoShapeContainerModel();
+    KShapeContainerModel();
 
     /// destructor
-    virtual ~KoShapeContainerModel();
+    virtual ~KShapeContainerModel();
 
     /**
      * Add a shape to this models store.

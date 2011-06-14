@@ -22,7 +22,7 @@
 #include "Canvas.h"
 #include "IconShape.h"
 #include "FolderBorder.h"
-#include <KoShapeContainerModel.h>
+#include <KShapeContainerModel.h>
 
 #include <KoShapeManager.h>
 #include <KSelection.h>

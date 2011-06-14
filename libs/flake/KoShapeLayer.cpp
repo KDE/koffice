@@ -33,7 +33,7 @@ KoShapeLayer::KoShapeLayer()
     setSelectable(false);
 }
 
-KoShapeLayer::KoShapeLayer(KoShapeContainerModel *model)
+KoShapeLayer::KoShapeLayer(KShapeContainerModel *model)
         : KShapeContainer(model)
 {
     setSelectable(false);

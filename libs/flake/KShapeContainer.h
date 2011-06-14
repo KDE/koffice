@@ -28,7 +28,7 @@
 #include "flake_export.h"
 
 class QPainter;
-class KoShapeContainerModel;
+class KShapeContainerModel;
 class KoShapeContainerPrivate;
 
 /**
@@ -57,7 +57,7 @@ class KoShapeContainerPrivate;
  *
  * <p>Maintaining the list of children can be done using the supplied methods
  * addChild() and removeChild(). However, they only forward their requests to the
- * data model KoShapeContainerModel and if you provide a custom implementation
+ * data model KShapeContainerModel and if you provide a custom implementation
  * of that model any means can be used to maintain a list of children, as long as
  * you will take care to register them with the appropriate shape manager.
  *
@@ -82,7 +82,7 @@ public:
      * container normally has (like clipping).  Use the default constructor in those cases.
      * @param model the custom model to be used for maintaining the list of children.
      */
-    explicit KShapeContainer(KoShapeContainerModel *model);
+    explicit KShapeContainer(KShapeContainerModel *model);
 
     /**
      * Destructor for the shape container.
@@ -196,7 +196,7 @@ public:
     /**
      * return the model for this container
      */
-    KoShapeContainerModel *model() const;
+    KShapeContainerModel *model() const;
 
     virtual void saveOdfChildElements(KoShapeSavingContext &context) const;
 

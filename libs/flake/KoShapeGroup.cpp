@@ -19,7 +19,7 @@
  */
 
 #include "KoShapeGroup.h"
-#include "KoShapeContainerModel.h"
+#include "KShapeContainerModel.h"
 #include "KoShapeLayer.h"
 #include "SimpleShapeContainerModel_p.h"
 #include "KoShapeSavingContext.h"
