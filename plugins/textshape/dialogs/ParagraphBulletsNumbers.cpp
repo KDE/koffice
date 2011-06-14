@@ -21,7 +21,7 @@
 #include "ParagraphBulletsNumbers.h"
 
 #include <KoParagraphStyle.h>
-#include <KoListLevelProperties.h>
+#include <KListLevelProperties.h>
 
 #include <KDebug>
 #include <KCharSelect>
@@ -74,7 +74,7 @@ void ParagraphBulletsNumbers::setDisplay(KoParagraphStyle *style, int level)
         return;
     }
 
-    KoListLevelProperties llp = listStyle->levelProperties(level);
+    KListLevelProperties llp = listStyle->levelProperties(level);
     m_previousLevel = llp.level();
     widget.prefix->setText(llp.listItemPrefix());
     widget.suffix->setText(llp.listItemSuffix());
@@ -124,7 +124,7 @@ void ParagraphBulletsNumbers::save(KoParagraphStyle *savingStyle)
         savingStyle->setListStyle(listStyle);
     }
     KoListStyle *listStyle = savingStyle->listStyle();
-    KoListLevelProperties llp = listStyle->levelProperties(widget.depth->value());
+    KListLevelProperties llp = listStyle->levelProperties(widget.depth->value());
     llp.setStyle(style);
     llp.setLevel(widget.depth->value());
     llp.setDisplayLevel(widget.levels->value());

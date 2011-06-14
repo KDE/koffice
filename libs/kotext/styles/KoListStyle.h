@@ -29,7 +29,7 @@
 
 #include <KXmlReader.h>
 
-class KoListLevelProperties;
+class KListLevelProperties;
 class KoShapeLoadingContext;
 class KOdfGenericStyle;
 
@@ -37,7 +37,7 @@ class KOdfGenericStyle;
  * This class groups all styling-options for lists.
  * See KoParagraphStyle::setListStyle()
  * The list-style represents several list-levels, where each level is represented by the
- * KoListLevelProperties class. The top most list level is 1.
+ * KListLevelProperties class. The top most list level is 1.
  *
  * list level1
  *   list level2
@@ -170,14 +170,14 @@ public:
      * Adding level properties for lower levels will have the effect that the counter of that level will be displayed
      * in the specified format instead of being inherited from the list style at the higher level.
      */
-    KoListLevelProperties levelProperties(int level) const;
+    KListLevelProperties levelProperties(int level) const;
 
     /**
      * Set the properties for a level.
      * @param properties the new properties for the level, including the level number.
      * @see level()
      */
-    void setLevelProperties(const KoListLevelProperties &properties);
+    void setLevelProperties(const KListLevelProperties &properties);
 
     /**
      * @return if there are the properties for a level set.
@@ -237,7 +237,7 @@ private:
     friend class ChangeListCommand;
     friend class ChangeListLevelCommand;
 
-    void refreshLevelProperties(const KoListLevelProperties &properties);
+    void refreshLevelProperties(const KListLevelProperties &properties);
 
     class Private;
     Private * const d;

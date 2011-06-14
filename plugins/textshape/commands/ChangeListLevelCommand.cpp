@@ -24,7 +24,7 @@
 #include <KoTextDocument.h>
 #include <KoList.h>
 #include "TextTool.h"
-#include <KoListLevelProperties.h>
+#include <KListLevelProperties.h>
 #include <KLocale>
 #include <kdebug.h>
 
@@ -92,7 +92,7 @@ void ChangeListLevelCommand::redo()
     else {
         for (int i = 0; i < m_blocks.size(); ++i) {
             if (!m_lists.value(i)->style()->hasLevelProperties(m_levels.value(i))) {
-                KoListLevelProperties llp = m_lists.value(i)->style()->levelProperties(m_levels.value(i));
+                KListLevelProperties llp = m_lists.value(i)->style()->levelProperties(m_levels.value(i));
                 llp.setIndent((m_levels.value(i)-1) * 20); //TODO make this configurable
                 m_lists.value(i)->style()->setLevelProperties(llp);
             }

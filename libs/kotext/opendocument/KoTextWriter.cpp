@@ -42,7 +42,7 @@
 #include "styles/KoCharacterStyle.h"
 #include "styles/KoParagraphStyle.h"
 #include "styles/KoListStyle.h"
-#include "styles/KoListLevelProperties.h"
+#include "styles/KListLevelProperties.h"
 #include "styles/KoTableCellStyle.h"
 #include "KoTextDocumentLayout.h"
 #include "KoTextBlockData.h"
@@ -703,7 +703,7 @@ QHash<QTextList *, QString> KoTextWriter::Private::saveListStyles(QTextBlock blo
         } else {
             if (listStyles.contains(textList))
                 continue;
-            KoListLevelProperties llp = KoListLevelProperties::fromTextList(textList);
+            KListLevelProperties llp = KListLevelProperties::fromTextList(textList);
             KOdfGenericStyle style(KOdfGenericStyle::ListAutoStyle);
             KoListStyle listStyle;
             listStyle.setLevelProperties(llp);

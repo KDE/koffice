@@ -26,7 +26,7 @@
 
 #include <KOdfGenericStyle.h>
 #include <styles/KoCharacterStyle.h>
-#include <styles/KoListLevelProperties.h>
+#include <styles/KListLevelProperties.h>
 
 #include "MsooXmlReader.h"
 #include "MsooXmlUtils.h"

@@ -26,7 +26,7 @@
 #include "KoParagraphStyle.h"
 #include "KoCharacterStyle.h"
 #include "KoListStyle.h"
-#include "KoListLevelProperties.h"
+#include "KListLevelProperties.h"
 #include "KoTableStyle.h"
 #include "KoTableColumnStyle.h"
 #include "KoTableRowStyle.h"
@@ -134,7 +134,7 @@ KoStyleManager::KoStyleManager(QObject *parent)
     charStyle->setForeground(QBrush(Qt::black));
 
     d->defaultListStyle = new KoListStyle(this);
-    KoListLevelProperties llp;
+    KListLevelProperties llp;
     llp.setLevel(1);
     llp.setStartValue(1);
     llp.setStyle(KoListStyle::DecimalItem);

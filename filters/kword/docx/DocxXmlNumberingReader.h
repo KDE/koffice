@@ -25,7 +25,7 @@
 #define DOCXXMLNUMBERINGREADER_H
 
 #include <KOdfGenericStyle.h>
-#include <KoListLevelProperties.h>
+#include <KListLevelProperties.h>
 #include <QMap>
 
 #include "DocxXmlDocumentReader.h"

@@ -39,7 +39,7 @@ ChangeListCommand::ChangeListCommand(const QTextCursor &cursor, KoListStyle::Sty
     KoListStyle listStyle;
 
     foreach (int lev, levels) {
-        KoListLevelProperties llp;
+        KListLevelProperties llp;
         llp.setLevel(lev);
         llp.setStyle(style);
         if (KoListStyle::isNumberingStyle(style)) {
@@ -85,11 +85,11 @@ void ChangeListCommand::extractTextBlocks(const QTextCursor &cursor, int level)
     while (block.isValid() && ((block.position() < selectionEnd) || oneOf)) {
         m_blocks.append(block);
         if (block.textList()) {
-            m_formerProperties.insert((m_blocks.size() - 1), KoListLevelProperties::fromTextList(block.textList()));
+            m_formerProperties.insert((m_blocks.size() - 1), KListLevelProperties::fromTextList(block.textList()));
             m_levels.insert((m_blocks.size() - 1), detectLevel(block, level));
         }
         else {
-            KoListLevelProperties prop;
+            KListLevelProperties prop;
             prop.setStyle(KoListStyle::None);
             m_formerProperties.insert((m_blocks.size() - 1), prop);
             m_levels.insert((m_blocks.size() - 1), level);
@@ -112,7 +112,7 @@ int ChangeListCommand::detectLevel(const QTextBlock &block, int givenLevel)
     return 1;
 }
 
-bool ChangeListCommand::formatsEqual(const KoListLevelProperties &llp, const QTextListFormat &format)
+bool ChangeListCommand::formatsEqual(const KListLevelProperties &llp, const QTextListFormat &format)
 {
     if (m_flags & MergeExactly) {
         QTextListFormat listFormat;
@@ -136,7 +136,7 @@ void ChangeListCommand::initList(KoListStyle *listStyle)
         QTextBlock prev = m_blocks.value(0).previous();
         bool isMergeable = true;
         foreach (int lev, levels) {
-            KoListLevelProperties llp = listStyle->levelProperties(lev);
+            KListLevelProperties llp = listStyle->levelProperties(lev);
             // checks format compatibility
             isMergeable = (isMergeable && prev.isValid() && prev.textList() && (formatsEqual(llp, prev.textList()->format())));
         }
@@ -148,7 +148,7 @@ void ChangeListCommand::initList(KoListStyle *listStyle)
             isMergeable = true;
             QTextBlock next = m_blocks.value(m_blocks.size()-1).next();
             foreach (int lev, levels) {
-                KoListLevelProperties llp = listStyle->levelProperties(lev);
+                KListLevelProperties llp = listStyle->levelProperties(lev);
                 isMergeable = (isMergeable && next.isValid() && next.textList() && (formatsEqual(llp, next.textList()->format())));
             }
             if (isMergeable)

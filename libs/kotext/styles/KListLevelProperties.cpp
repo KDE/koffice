@@ -20,7 +20,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoListLevelProperties.h"
+#include "KListLevelProperties.h"
 #include "Styles_p.h"
 
 #include <float.h>
@@ -36,7 +36,7 @@
 #include <KImageCollection.h>
 #include <KImageData.h>
 
-class KoListLevelProperties::Private
+class KListLevelProperties::Private
 {
 public:
     StylePrivate stylesPrivate;
@@ -46,38 +46,38 @@ public:
     }
 };
 
-KoListLevelProperties::KoListLevelProperties()
+KListLevelProperties::KListLevelProperties()
         : d(new Private())
 {
 }
 
-KoListLevelProperties::KoListLevelProperties(const KoListLevelProperties &other)
+KListLevelProperties::KListLevelProperties(const KListLevelProperties &other)
         : d(new Private())
 {
     d->copy(other.d);
 }
 
-KoListLevelProperties::~KoListLevelProperties()
+KListLevelProperties::~KListLevelProperties()
 {
     delete d;
 }
 
-int KoListLevelProperties::styleId() const
+int KListLevelProperties::styleId() const
 {
     return propertyInt(KoListStyle::StyleId);
 }
 
-void KoListLevelProperties::setStyleId(int id)
+void KListLevelProperties::setStyleId(int id)
 {
     setProperty(KoListStyle::StyleId, id);
 }
 
-void KoListLevelProperties::setProperty(int key, const QVariant &value)
+void KListLevelProperties::setProperty(int key, const QVariant &value)
 {
     d->stylesPrivate.add(key, value);
 }
 
-int KoListLevelProperties::propertyInt(int key) const
+int KListLevelProperties::propertyInt(int key) const
 {
     QVariant variant = d->stylesPrivate.value(key);
     if (variant.isNull())
@@ -85,7 +85,7 @@ int KoListLevelProperties::propertyInt(int key) const
     return variant.toInt();
 }
 
-uint KoListLevelProperties::propertyUInt(int key) const
+uint KListLevelProperties::propertyUInt(int key) const
 {
     QVariant variant = d->stylesPrivate.value(key);
     if (variant.isNull())
@@ -93,7 +93,7 @@ uint KoListLevelProperties::propertyUInt(int key) const
     return variant.toUInt();
 }
 
-qulonglong KoListLevelProperties::propertyULongLong(int key) const
+qulonglong KListLevelProperties::propertyULongLong(int key) const
 {
     QVariant variant = d->stylesPrivate.value(key);
     if (variant.isNull())
@@ -101,7 +101,7 @@ qulonglong KoListLevelProperties::propertyULongLong(int key) const
     return variant.toULongLong();
 }
 
-qreal KoListLevelProperties::propertyDouble(int key) const
+qreal KListLevelProperties::propertyDouble(int key) const
 {
     QVariant variant = d->stylesPrivate.value(key);
     if (variant.isNull())
@@ -109,7 +109,7 @@ qreal KoListLevelProperties::propertyDouble(int key) const
     return variant.toDouble();
 }
 
-bool KoListLevelProperties::propertyBoolean(int key) const
+bool KListLevelProperties::propertyBoolean(int key) const
 {
     QVariant variant = d->stylesPrivate.value(key);
     if (variant.isNull())
@@ -117,7 +117,7 @@ bool KoListLevelProperties::propertyBoolean(int key) const
     return variant.toBool();
 }
 
-QString KoListLevelProperties::propertyString(int key) const
+QString KListLevelProperties::propertyString(int key) const
 {
     QVariant variant = d->stylesPrivate.value(key);
     if (variant.isNull())
@@ -125,7 +125,7 @@ QString KoListLevelProperties::propertyString(int key) const
     return qvariant_cast<QString>(variant);
 }
 
-QColor KoListLevelProperties::propertyColor(int key) const
+QColor KListLevelProperties::propertyColor(int key) const
 {
     QVariant variant = d->stylesPrivate.value(key);
     if (variant.isNull())
@@ -133,7 +133,7 @@ QColor KoListLevelProperties::propertyColor(int key) const
     return qvariant_cast<QColor>(variant);
 }
 
-void KoListLevelProperties::applyStyle(QTextListFormat &format) const
+void KListLevelProperties::applyStyle(QTextListFormat &format) const
 {
     QList<int> keys = d->stylesPrivate.keys();
     for (int i = 0; i < keys.count(); i++) {
@@ -142,173 +142,173 @@ void KoListLevelProperties::applyStyle(QTextListFormat &format) const
     }
 }
 
-bool KoListLevelProperties::operator==(const KoListLevelProperties &other) const
+bool KListLevelProperties::operator==(const KListLevelProperties &other) const
 {
     return d->stylesPrivate == other.d->stylesPrivate;
 }
 
-bool KoListLevelProperties::operator!=(const KoListLevelProperties &other) const
+bool KListLevelProperties::operator!=(const KListLevelProperties &other) const
 {
     return d->stylesPrivate != other.d->stylesPrivate;
 }
 
-void KoListLevelProperties::setListItemPrefix(const QString &prefix)
+void KListLevelProperties::setListItemPrefix(const QString &prefix)
 {
     setProperty(KoListStyle::ListItemPrefix, prefix);
 }
 
-QString KoListLevelProperties::listItemPrefix() const
+QString KListLevelProperties::listItemPrefix() const
 {
     return propertyString(KoListStyle::ListItemPrefix);
 }
 
-void KoListLevelProperties::setStyle(KoListStyle::Style style)
+void KListLevelProperties::setStyle(KoListStyle::Style style)
 {
     setProperty(QTextListFormat::ListStyle, (int) style);
 }
 
-KoListStyle::Style KoListLevelProperties::style() const
+KoListStyle::Style KListLevelProperties::style() const
 {
     return static_cast<KoListStyle::Style>(propertyInt(QTextListFormat::ListStyle));
 }
 
-void KoListLevelProperties::setListItemSuffix(const QString &suffix)
+void KListLevelProperties::setListItemSuffix(const QString &suffix)
 {
     setProperty(KoListStyle::ListItemSuffix, suffix);
 }
 
-QString KoListLevelProperties::listItemSuffix() const
+QString KListLevelProperties::listItemSuffix() const
 {
     return propertyString(KoListStyle::ListItemSuffix);
 }
 
-void KoListLevelProperties::setStartValue(int value)
+void KListLevelProperties::setStartValue(int value)
 {
     setProperty(KoListStyle::StartValue, value);
 }
 
-int KoListLevelProperties::startValue() const
+int KListLevelProperties::startValue() const
 {
     return propertyInt(KoListStyle::StartValue);
 }
 
-void KoListLevelProperties::setLevel(int value)
+void KListLevelProperties::setLevel(int value)
 {
     setProperty(KoListStyle::Level, value);
 }
 
-int KoListLevelProperties::level() const
+int KListLevelProperties::level() const
 {
     return propertyInt(KoListStyle::Level);
 }
 
-void KoListLevelProperties::setDisplayLevel(int level)
+void KListLevelProperties::setDisplayLevel(int level)
 {
     setProperty(KoListStyle::DisplayLevel, level);
 }
 
-int KoListLevelProperties::displayLevel() const
+int KListLevelProperties::displayLevel() const
 {
     return propertyInt(KoListStyle::DisplayLevel);
 }
 
-void KoListLevelProperties::setCharacterStyleId(int id)
+void KListLevelProperties::setCharacterStyleId(int id)
 {
     setProperty(KoListStyle::CharacterStyleId, id);
 }
 
-int KoListLevelProperties::characterStyleId() const
+int KListLevelProperties::characterStyleId() const
 {
     return propertyInt(KoListStyle::CharacterStyleId);
 }
 
-void KoListLevelProperties::setBulletCharacter(QChar character)
+void KListLevelProperties::setBulletCharacter(QChar character)
 {
     setProperty(KoListStyle::BulletCharacter, (int) character.unicode());
 }
 
-QChar KoListLevelProperties::bulletCharacter() const
+QChar KListLevelProperties::bulletCharacter() const
 {
     return propertyInt(KoListStyle::BulletCharacter);
 }
 
-void KoListLevelProperties::setBulletColor(QColor color)
+void KListLevelProperties::setBulletColor(QColor color)
 {
     setProperty(KoListStyle::BulletColor, color);
 }
 
-QColor KoListLevelProperties::bulletColor() const
+QColor KListLevelProperties::bulletColor() const
 {
     return propertyColor(KoListStyle::BulletColor);
 }
 
-void KoListLevelProperties::setRelativeBulletSize(int percent)
+void KListLevelProperties::setRelativeBulletSize(int percent)
 {
     setProperty(KoListStyle::BulletSize, percent);
 }
 
-int KoListLevelProperties::relativeBulletSize() const
+int KListLevelProperties::relativeBulletSize() const
 {
     return propertyInt(KoListStyle::BulletSize);
 }
 
-void KoListLevelProperties::setAlignment(Qt::Alignment align)
+void KListLevelProperties::setAlignment(Qt::Alignment align)
 {
     setProperty(KoListStyle::Alignment, static_cast<int>(align));
 }
 
-Qt::Alignment KoListLevelProperties::alignment() const
+Qt::Alignment KListLevelProperties::alignment() const
 {
     return static_cast<Qt::Alignment>(propertyInt(KoListStyle::Alignment));
 }
 
-void KoListLevelProperties::setMinimumWidth(qreal width)
+void KListLevelProperties::setMinimumWidth(qreal width)
 {
     setProperty(KoListStyle::MinimumWidth, width);
 }
 
-qreal KoListLevelProperties::minimumWidth() const
+qreal KListLevelProperties::minimumWidth() const
 {
     return propertyDouble(KoListStyle::MinimumWidth);
 }
 
-void KoListLevelProperties::setWidth(qreal width)
+void KListLevelProperties::setWidth(qreal width)
 {
     setProperty(KoListStyle::Width, width);
 }
 
-qreal KoListLevelProperties::width() const
+qreal KListLevelProperties::width() const
 {
     return propertyDouble(KoListStyle::Width);
 }
 
-void KoListLevelProperties::setHeight(qreal height)
+void KListLevelProperties::setHeight(qreal height)
 {
     setProperty(KoListStyle::Height, height);
 }
 
-qreal KoListLevelProperties::height() const
+qreal KListLevelProperties::height() const
 {
     return propertyDouble(KoListStyle::Height);
 }
 
-void KoListLevelProperties::setBulletImage(KImageData *imageData)
+void KListLevelProperties::setBulletImage(KImageData *imageData)
 {
     setProperty(KoListStyle::BulletImageKey, imageData->key());
 }
 
-KoListLevelProperties & KoListLevelProperties::operator=(const KoListLevelProperties & other)
+KListLevelProperties & KListLevelProperties::operator=(const KListLevelProperties & other)
 {
     d->copy(other.d);
     return *this;
 }
 
-void KoListLevelProperties::setListId(KoListStyle::ListIdType listId)
+void KListLevelProperties::setListId(KoListStyle::ListIdType listId)
 {
     setProperty(KoListStyle::ListId, listId);
 }
 
-KoListStyle::ListIdType KoListLevelProperties::listId() const
+KoListStyle::ListIdType KListLevelProperties::listId() const
 {
     if (sizeof(KoListStyle::ListIdType) == sizeof(uint))
         return propertyUInt(KoListStyle::ListId);
@@ -316,50 +316,50 @@ KoListStyle::ListIdType KoListLevelProperties::listId() const
         return propertyULongLong(KoListStyle::ListId);
 }
 
-bool KoListLevelProperties::letterSynchronization() const
+bool KListLevelProperties::letterSynchronization() const
 {
     return propertyBoolean(KoListStyle::LetterSynchronization);
 }
 
-void KoListLevelProperties::setLetterSynchronization(bool on)
+void KListLevelProperties::setLetterSynchronization(bool on)
 {
     setProperty(KoListStyle::LetterSynchronization, on);
 }
 
-void KoListLevelProperties::setContinueNumbering(bool enable)
+void KListLevelProperties::setContinueNumbering(bool enable)
 {
     setProperty(KoListStyle::ContinueNumbering, enable);
 }
 
-bool KoListLevelProperties::continueNumbering() const
+bool KListLevelProperties::continueNumbering() const
 {
     return propertyBoolean(KoListStyle::ContinueNumbering);
 }
 
-void KoListLevelProperties::setIndent(qreal value)
+void KListLevelProperties::setIndent(qreal value)
 {
     setProperty(KoListStyle::Indent, value);
 }
 
-qreal KoListLevelProperties::indent() const
+qreal KListLevelProperties::indent() const
 {
     return propertyDouble(KoListStyle::Indent);
 }
 
-void KoListLevelProperties::setMinimumDistance(qreal value)
+void KListLevelProperties::setMinimumDistance(qreal value)
 {
     setProperty(KoListStyle::MinimumDistance, value);
 }
 
-qreal KoListLevelProperties::minimumDistance() const
+qreal KListLevelProperties::minimumDistance() const
 {
     return propertyDouble(KoListStyle::MinimumDistance);
 }
 
 // static
-KoListLevelProperties KoListLevelProperties::fromTextList(QTextList *list)
+KListLevelProperties KListLevelProperties::fromTextList(QTextList *list)
 {
-    KoListLevelProperties llp;
+    KListLevelProperties llp;
     if (!list) {
         llp.setStyle(KoListStyle::None);
         return llp;
@@ -368,7 +368,7 @@ KoListLevelProperties KoListLevelProperties::fromTextList(QTextList *list)
     return llp;
 }
 
-void KoListLevelProperties::loadOdf(KoShapeLoadingContext& scontext, const KXmlElement& style)
+void KListLevelProperties::loadOdf(KoShapeLoadingContext& scontext, const KXmlElement& style)
 {
     KOdfLoadingContext &context = scontext.odfLoadingContext();
 
@@ -554,7 +554,7 @@ static QString toPoint(qreal number)
     return str;
 }
 
-void KoListLevelProperties::saveOdf(KXmlWriter *writer) const
+void KListLevelProperties::saveOdf(KXmlWriter *writer) const
 {
     bool isNumber = false;
     switch (d->stylesPrivate.value(QTextListFormat::ListStyle).toInt()) {

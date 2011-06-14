@@ -39,7 +39,7 @@
 #include "styles/KoParagraphStyle.h"
 #include "styles/KoCharacterStyle.h"
 #include "styles/KoListStyle.h"
-#include "styles/KoListLevelProperties.h"
+#include "styles/KListLevelProperties.h"
 #include "styles/KoTableStyle.h"
 #include "styles/KoTableColumnStyle.h"
 #include "styles/KoTableRowStyle.h"

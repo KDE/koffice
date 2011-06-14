@@ -24,7 +24,7 @@
 #include "TextCommandBase.h"
 #include <KoListStyle.h>
 #include <KoList.h>
-#include <KoListLevelProperties.h>
+#include <KListLevelProperties.h>
 
 #include <QTextBlock>
 #include <QList>
@@ -91,14 +91,14 @@ private:
     void extractTextBlocks(const QTextCursor &cursor, int level);
     int detectLevel(const QTextBlock &block, int givenLevel);
     void initList(KoListStyle *style);
-    bool formatsEqual(const KoListLevelProperties &llp, const QTextListFormat &format);
+    bool formatsEqual(const KListLevelProperties &llp, const QTextListFormat &format);
 
     int m_flags;
     bool m_first;
 
     QList<QTextBlock> m_blocks;
-    QHash<int, KoListLevelProperties> m_formerProperties;
-    QHash<int, KoListLevelProperties> m_newProperties;
+    QHash<int, KListLevelProperties> m_formerProperties;
+    QHash<int, KListLevelProperties> m_newProperties;
     QHash<int, int> m_levels;
     QHash<int, KoList*> m_list;
     QHash<int, KoList*> m_oldList;

@@ -35,15 +35,15 @@ class KImageData;
 /**
  * Properties per list level.
  */
-class KOTEXT_EXPORT KoListLevelProperties
+class KOTEXT_EXPORT KListLevelProperties
 {
 public:
     /// Constructor
-    explicit KoListLevelProperties();
+    explicit KListLevelProperties();
     /// Copy constructor
-    KoListLevelProperties(const KoListLevelProperties &other);
+    KListLevelProperties(const KListLevelProperties &other);
     /// Destructor
-    ~KoListLevelProperties();
+    ~KListLevelProperties();
 
     /// each style has a unique ID (non persistent) given out by the styleManager
     int styleId() const;
@@ -140,14 +140,14 @@ public:
     /// returns the minimum distance between the counter and text
     qreal minimumDistance() const;
 
-    bool operator==(const KoListLevelProperties &other) const;
-    bool operator!=(const KoListLevelProperties &other) const;
-    KoListLevelProperties & operator=(const KoListLevelProperties &other);
+    bool operator==(const KListLevelProperties &other) const;
+    bool operator!=(const KListLevelProperties &other) const;
+    KListLevelProperties & operator=(const KListLevelProperties &other);
 
     /**
-     * Create a KoListLevelProperties object from a QTextList instance.
+     * Create a KListLevelProperties object from a QTextList instance.
      */
-    static KoListLevelProperties fromTextList(QTextList *list);
+    static KListLevelProperties fromTextList(QTextList *list);
 
     /**
      * Apply this style to a QTextListFormat by copying all properties from this style

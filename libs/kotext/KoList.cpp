@@ -20,7 +20,7 @@
 
 #include "KoList.h"
 #include "KoTextDocument.h"
-#include "styles/KoListLevelProperties.h"
+#include "styles/KListLevelProperties.h"
 #include "KoTextBlockData.h"
 #include "styles/KoParagraphStyle.h"
 #include "styles/KoStyleManager.h"
@@ -177,7 +177,7 @@ void KoList::setStyle(KoListStyle *style)
         QTextList *textList = d->textLists.value(i).data();
         if (!textList)
             continue;
-        KoListLevelProperties properties = d->style->levelProperties(i+1);
+        KListLevelProperties properties = d->style->levelProperties(i+1);
         if (properties.listId())
             d->textListIds[i] = properties.listId();
         QTextListFormat format;

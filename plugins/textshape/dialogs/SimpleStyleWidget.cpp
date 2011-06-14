@@ -107,7 +107,7 @@ void SimpleStyleWidget::fillListsCombobox()
         pixmap.fill(Qt::transparent);
         QPainter p(&pixmap);
         KoListStyle listStyle;
-        KoListLevelProperties llp = listStyle.levelProperties(1);
+        KListLevelProperties llp = listStyle.levelProperties(1);
         llp.setStyle(item.style);
         if (KoListStyle::isNumberingStyle(item.style)) {
             llp.setStartValue(1);

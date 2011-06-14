@@ -25,7 +25,7 @@
 #include <KoSharedLoadingData.h>
 
 #include <QList>
-#include "styles/KoListLevelProperties.h"
+#include "styles/KListLevelProperties.h"
 #include "kotext_export.h"
 
 class QString;

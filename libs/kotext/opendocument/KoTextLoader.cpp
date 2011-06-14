@@ -63,7 +63,7 @@
 #include "styles/KoParagraphStyle.h"
 #include "styles/KoCharacterStyle.h"
 #include "styles/KoListStyle.h"
-#include "styles/KoListLevelProperties.h"
+#include "styles/KListLevelProperties.h"
 #include "styles/KoTableStyle.h"
 #include "styles/KoTableColumnStyle.h"
 #include "styles/KoTableCellStyle.h"
@@ -1211,7 +1211,7 @@ void KoTextLoader::loadListItem(KXmlElement &e, QTextCursor &cursor, int level)
 
     if (!current.textList()) {
         if (!d->currentList->style()->hasLevelProperties(level)) {
-            KoListLevelProperties llp;
+            KListLevelProperties llp;
             // Look if one of the lower levels are defined to we can copy over that level.
             for(int i = level - 1; i >= 0; --i) {
                 if(d->currentList->style()->hasLevelProperties(i)) {

@@ -20,7 +20,7 @@
  */
 
 #include "KoListStyle.h"
-#include "KoListLevelProperties.h"
+#include "KListLevelProperties.h"
 #include "KoTextBlockData.h"
 #include "KoParagraphStyle.h"
 #include "KoList.h"
@@ -41,7 +41,7 @@ public:
 
     QString name;
     int styleId;
-    QMap<int, KoListLevelProperties> levels;
+    QMap<int, KListLevelProperties> levels;
 };
 
 KoListStyle::KoListStyle(QObject *parent)
@@ -114,18 +114,18 @@ void KoListStyle::setStyleId(int id)
     }
 }
 
-KoListLevelProperties KoListStyle::levelProperties(int level) const
+KListLevelProperties KoListStyle::levelProperties(int level) const
 {
     if (d->levels.contains(level))
         return d->levels.value(level);
 
     level = qMax(1, level);
     if (d->levels.count()) {
-        KoListLevelProperties llp = d->levels.begin().value();
+        KListLevelProperties llp = d->levels.begin().value();
         llp.setLevel(level);
         return llp;
     }
-    KoListLevelProperties llp;
+    KListLevelProperties llp;
     llp.setLevel(level);
     if (d->styleId)
         llp.setStyleId(d->styleId);
@@ -134,23 +134,23 @@ KoListLevelProperties KoListStyle::levelProperties(int level) const
 
 QTextListFormat KoListStyle::listFormat(int level) const
 {
-    KoListLevelProperties llp = levelProperties(level);
+    KListLevelProperties llp = levelProperties(level);
     QTextListFormat format;
     llp.applyStyle(format);
     return format;
 }
 
-void KoListStyle::setLevelProperties(const KoListLevelProperties &properties)
+void KoListStyle::setLevelProperties(const KListLevelProperties &properties)
 {
     int level = qMax(1, properties.level());
     refreshLevelProperties(properties);
     emit styleChanged(level);
 }
 
-void KoListStyle::refreshLevelProperties(const KoListLevelProperties &properties)
+void KoListStyle::refreshLevelProperties(const KListLevelProperties &properties)
 {
     int level = qMax(1, properties.level());
-    KoListLevelProperties llp = properties;
+    KListLevelProperties llp = properties;
     llp.setLevel(level);
     d->levels.insert(level, llp);
 }
@@ -174,7 +174,7 @@ void KoListStyle::loadOdf(KoShapeLoadingContext &scontext, const KXmlElement &st
 {
     KXmlElement styleElem;
     forEachElement(styleElem, style) {
-        KoListLevelProperties properties;
+        KListLevelProperties properties;
         properties.loadOdf(scontext, styleElem);
         if (d->styleId)
             properties.setStyleId(d->styleId);
@@ -182,7 +182,7 @@ void KoListStyle::loadOdf(KoShapeLoadingContext &scontext, const KXmlElement &st
     }
 
     if (d->levels.isEmpty()) {
-        KoListLevelProperties llp;
+        KListLevelProperties llp;
         llp.setLevel(1);
         llp.setStartValue(1);
         llp.setStyle(KoListStyle::DecimalItem);
@@ -199,7 +199,7 @@ void KoListStyle::saveOdf(KOdfGenericStyle &style)
     QBuffer buffer;
     buffer.open(QIODevice::WriteOnly);
     KXmlWriter elementWriter(&buffer);    // TODO pass indentation level
-    QMapIterator<int, KoListLevelProperties> it(d->levels);
+    QMapIterator<int, KListLevelProperties> it(d->levels);
     while (it.hasNext()) {
         it.next();
         it.value().saveOdf(&elementWriter);

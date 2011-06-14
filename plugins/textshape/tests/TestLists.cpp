@@ -2,7 +2,7 @@
 
 #include <KoParagraphStyle.h>
 #include <KoListStyle.h>
-#include <KoListLevelProperties.h>
+#include <KListLevelProperties.h>
 #include <KoStyleManager.h>
 #include <KoTextBlockData.h>
 
@@ -19,7 +19,7 @@ void TestDocumentLayout::testBasicList()
     QVERIFY(block.isValid());
 
     KoListStyle listStyle;
-    KoListLevelProperties level1;
+    KListLevelProperties level1;
     level1.setStyle(KoListStyle::DiscItem);
     listStyle.setLevelProperties(level1);
     style.setListStyle(&listStyle);
@@ -65,7 +65,7 @@ void TestDocumentLayout::testNumberedList()
     block = block.next();
 
     KoListStyle listStyle;
-    KoListLevelProperties llp;
+    KListLevelProperties llp;
     llp.setStyle(KoListStyle::DecimalItem);
     listStyle.setLevelProperties(llp);
     style.setListStyle(&listStyle);
@@ -166,7 +166,7 @@ void TestDocumentLayout::testInterruptedLists()
 
     KoParagraphStyle style;
     KoListStyle listStyle;
-    KoListLevelProperties llp = listStyle.levelProperties(1);
+    KListLevelProperties llp = listStyle.levelProperties(1);
     llp.setStyle(KoListStyle::DecimalItem);
     llp.setStartValue(1);
     llp.setListItemSuffix(".");
@@ -247,7 +247,7 @@ void TestDocumentLayout::testNestedLists()
     m_styleManager->add(&h4);
 
     KoListStyle listStyle;
-    KoListLevelProperties llp1;
+    KListLevelProperties llp1;
     llp1.setStartValue(1);
     llp1.setStyle(KoListStyle::DecimalItem);
 
@@ -255,7 +255,7 @@ void TestDocumentLayout::testNestedLists()
     h1.setListStyle(&listStyle);
 
     KoListStyle listStyle2;
-    KoListLevelProperties llp2;
+    KListLevelProperties llp2;
     llp2.setStartValue(1);
     llp2.setStyle(KoListStyle::DecimalItem);
     llp2.setLevel(2);
@@ -265,7 +265,7 @@ void TestDocumentLayout::testNestedLists()
     h2.setListStyle(&listStyle2);
     // purpusfully leave this one out, as it should default to the only known one: // h2.setListLevel(2);
 
-    KoListLevelProperties llp3;
+    KListLevelProperties llp3;
     llp3.setStartValue(1);
     llp3.setStyle(KoListStyle::DecimalItem);
     llp3.setLevel(3);
@@ -277,7 +277,7 @@ void TestDocumentLayout::testNestedLists()
     h3.setListLevel(3);
 
     KoListStyle listStyle4;
-    KoListLevelProperties llp4;
+    KListLevelProperties llp4;
     llp4.setStartValue(1);
     llp4.setStyle(KoListStyle::DecimalItem);
     llp4.setLevel(4);
@@ -349,7 +349,7 @@ void TestDocumentLayout::testNestedPrefixedLists()
     m_styleManager->add(&h2);
 
     KoListStyle listStyle;
-    KoListLevelProperties llp1;
+    KListLevelProperties llp1;
     llp1.setStartValue(1);
     llp1.setStyle(KoListStyle::DecimalItem);
     llp1.setListItemPrefix("Main");
@@ -357,7 +357,7 @@ void TestDocumentLayout::testNestedPrefixedLists()
 
     listStyle.setLevelProperties(llp1);
 
-    KoListLevelProperties llp2;
+    KListLevelProperties llp2;
     llp2.setStartValue(1);
     llp2.setStyle(KoListStyle::DecimalItem);
     llp2.setLevel(2);
@@ -408,7 +408,7 @@ void TestDocumentLayout::testAutoRestartList()
     m_styleManager->add(&h2);
 
     KoListStyle listStyle;
-    KoListLevelProperties llp = listStyle.levelProperties(1);
+    KListLevelProperties llp = listStyle.levelProperties(1);
     llp.setStyle(KoListStyle::DecimalItem);
     llp.setStartValue(1);
     llp.setListItemSuffix(".");
@@ -416,7 +416,7 @@ void TestDocumentLayout::testAutoRestartList()
     h1.setListStyle(&listStyle);
 
     KoListStyle listStyle2;
-    KoListLevelProperties llp2 = listStyle2.levelProperties(2);
+    KListLevelProperties llp2 = listStyle2.levelProperties(2);
     llp2.setStyle(KoListStyle::DecimalItem);
     llp2.setStartValue(1);
     llp2.setDisplayLevel(2);
@@ -489,7 +489,7 @@ void TestDocumentLayout::testRestartNumbering()
     KoParagraphStyle h1;
     m_styleManager->add(&h1);
     KoListStyle listStyle;
-    KoListLevelProperties llp;
+    KListLevelProperties llp;
     llp.setStyle(KoListStyle::DecimalItem);
     llp.setStartValue(1);
     listStyle.setLevelProperties(llp);
@@ -530,7 +530,7 @@ void TestDocumentLayout::testRightToLeftList()
     h1.setTextProgressionDirection(KoText::RightLeftTopBottom);
     m_styleManager->add(&h1);
     KoListStyle listStyle;
-    KoListLevelProperties llp = listStyle.levelProperties(1);
+    KListLevelProperties llp = listStyle.levelProperties(1);
     llp.setStyle(KoListStyle::DecimalItem);
     listStyle.setLevelProperties(llp);
     h1.setListStyle(&listStyle);
@@ -567,7 +567,7 @@ void TestDocumentLayout::testLetterSynchronization()
     KoParagraphStyle h1;
     m_styleManager->add(&h1);
     KoListStyle listStyle;
-    KoListLevelProperties llp;
+    KListLevelProperties llp;
     llp.setStyle(KoListStyle::AlphaLowerItem);
     llp.setLetterSynchronization(true);
     llp.setStartValue(25);
@@ -601,7 +601,7 @@ void TestDocumentLayout::testInvalidateLists()
 
     //KoParagraphStyle style;
     KoListStyle listStyle;
-    KoListLevelProperties llp;
+    KListLevelProperties llp;
     llp.setStyle(KoListStyle::DecimalItem);
     listStyle.setLevelProperties(llp);
     //style.setListStyle(&listStyle);
@@ -647,7 +647,7 @@ void TestDocumentLayout::testCenteredItems()
     initForNewTest("ListItem\nListItem\nListItem");
 
     KoListStyle listStyle;
-    KoListLevelProperties llp;
+    KListLevelProperties llp;
     llp.setStyle(KoListStyle::DecimalItem);
     listStyle.setLevelProperties(llp);
 
@@ -704,7 +704,7 @@ void TestDocumentLayout::testMultiLevel()
 {
     initForNewTest("ListItem1\n");
     KoListStyle listStyle;
-    KoListLevelProperties llp;
+    KListLevelProperties llp;
     llp.setStyle(KoListStyle::DecimalItem);
     llp.setLevel(3);
     llp.setDisplayLevel(4); // we won't show a .0 at the end so this is truncated to 3

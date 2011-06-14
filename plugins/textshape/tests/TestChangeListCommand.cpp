@@ -3,7 +3,7 @@
 #include "../commands/ChangeListCommand.h"
 
 #include <KoListStyle.h>
-#include <KoListLevelProperties.h>
+#include <KListLevelProperties.h>
 #include <KoStyleManager.h>
 #include <KoTextDocument.h>
 
@@ -66,7 +66,7 @@ void TestChangeListCommand::addListWithLevel2()
     cursor.setPosition(block.position());
 
     KoListStyle style;
-    KoListLevelProperties llp;
+    KListLevelProperties llp;
     llp.setLevel(2);
     llp.setDisplayLevel(2);
     llp.setStyle(KoListStyle::DiscItem);
@@ -147,7 +147,7 @@ void TestChangeListCommand::joinList()
     QTextCursor cursor(&doc);
     cursor.insertText("Root\nparag1\nparag2\nparag3\nparag4\n");
     KoListStyle style;
-    KoListLevelProperties llp;
+    KListLevelProperties llp;
     llp.setLevel(1);
     llp.setStyle(KoListStyle::DiscItem);
     style.setLevelProperties(llp);
@@ -181,7 +181,7 @@ void TestChangeListCommand::joinList2()
     QTextCursor cursor(&doc);
     cursor.insertText("Root\nparag1\nparag2\nparag3\nparag4");
     KoListStyle style;
-    KoListLevelProperties llp1;
+    KListLevelProperties llp1;
     llp1.setLevel(1);
     llp1.setStyle(KoListStyle::DiscItem);
     style.setLevelProperties(llp1);
@@ -189,7 +189,7 @@ void TestChangeListCommand::joinList2()
     style.applyStyle(block); // apply on parag2
 
     KoListStyle style2;
-    KoListLevelProperties llp;
+    KListLevelProperties llp;
     llp.setLevel(1);
     llp.setStyle(KoListStyle::DecimalItem);
     llp.setListItemSuffix(".");
@@ -244,7 +244,7 @@ void TestChangeListCommand::splitList()
     style.applyStyle(block); // apply on parag2
 
     KoListStyle style2;
-    KoListLevelProperties llp = style2.levelProperties(2);
+    KListLevelProperties llp = style2.levelProperties(2);
     style2.setLevelProperties(llp);
     block = block.next();
     style2.applyStyle(block);

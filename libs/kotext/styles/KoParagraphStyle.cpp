@@ -27,7 +27,7 @@
 #include "KoTextBlockData.h"
 #include "KoTextDocumentLayout.h"
 #include "KoStyleManager.h"
-#include "KoListLevelProperties.h"
+#include "KListLevelProperties.h"
 #include "KoTextSharedLoadingData.h"
 #include <KoShapeLoadingContext.h>
 #include <KOdfGenericStyle.h>
@@ -104,7 +104,7 @@ KoParagraphStyle *KoParagraphStyle::fromBlock(const QTextBlock &block, QObject *
     if (KoListStyle *listStyle = sm->listStyle(listStyleId)) {
         answer->setListStyle(listStyle->clone(answer));
     } else if (block.textList()) {
-        KoListLevelProperties llp = KoListLevelProperties::fromTextList(block.textList());
+        KListLevelProperties llp = KListLevelProperties::fromTextList(block.textList());
         KoListStyle *listStyle = new KoListStyle(answer);
         listStyle->setLevelProperties(llp);
         answer->setListStyle(listStyle);

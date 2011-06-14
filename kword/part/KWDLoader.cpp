@@ -33,7 +33,7 @@
 #include <KoParagraphStyle.h>
 #include <KoCharacterStyle.h>
 #include <KoListStyle.h>
-#include <KoListLevelProperties.h>
+#include <KListLevelProperties.h>
 #include <KoTextShapeData.h>
 #include <KoTextAnchor.h>
 #include <KoTextDocumentLayout.h>
@@ -824,7 +824,7 @@ void KWDLoader::fill(KoParagraphStyle *style, const KXmlElement &layout)
         KoListStyle *orig = style->listStyle();
         KoListStyle *lstyle = orig ? orig : new KoListStyle(style);
 
-        KoListLevelProperties llp = lstyle->levelProperties(element.attribute("depth").toInt() + 1);
+        KListLevelProperties llp = lstyle->levelProperties(element.attribute("depth").toInt() + 1);
 
         int type = element.attribute("type").toInt();
         switch (type) {

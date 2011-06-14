@@ -2436,7 +2436,7 @@ void TextTool::debugTextStyles()
             kDebug(32500) << "  +- ListStyle: " << ls->styleId() << ls->name()
                 << (ls == styleManager->defaultListStyle() ? "[Default]":"");
             foreach (int level, ls->listLevels()) {
-                KoListLevelProperties llp = ls->levelProperties(level);
+                KListLevelProperties llp = ls->levelProperties(level);
                 kDebug(32500) << "  |  level" << llp.level() << " style (enum):" << llp.style();
                 if (llp.bulletCharacter().unicode() != 0) {
                     kDebug(32500) << "  |  bullet" << llp.bulletCharacter();

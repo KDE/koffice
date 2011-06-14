@@ -20,7 +20,7 @@
 
 #include "styles/KoParagraphStyle.h"
 #include "styles/KoListStyle.h"
-#include "styles/KoListLevelProperties.h"
+#include "styles/KListLevelProperties.h"
 #include "KoTextBlockBorderData.h"
 #include "KoTextDocument.h"
 #include "styles/KoStyleManager.h"
@@ -31,11 +31,11 @@
 void TestListStyle::testListStyle()
 {
     KoListStyle ls;
-    KoListLevelProperties llp = ls.levelProperties(2);
+    KListLevelProperties llp = ls.levelProperties(2);
     QCOMPARE(llp.level(), 2);
 
     llp.setStyle(KoListStyle::AlphaLowerItem);
-    KoListLevelProperties llp2 = ls.levelProperties(2);
+    KListLevelProperties llp2 = ls.levelProperties(2);
     QVERIFY(llp2.style() != llp.style());
 
     ls.setLevelProperties(llp);
@@ -71,21 +71,21 @@ void TestListStyle::testListStyle()
     QCOMPARE(format.intProperty(QTextListFormat::ListStyle), (int)(KoListStyle::AlphaLowerItem));
 
     // getting a properties without setting it doesn't change the list.
-    KoListLevelProperties l4 = ls.levelProperties(4);
+    KListLevelProperties l4 = ls.levelProperties(4);
     QCOMPARE(l4.level(), 4);
     QCOMPARE(l4.displayLevel(), 0); // default
     l4.setDisplayLevel(3);
     QCOMPARE(l4.displayLevel(), 3);
     QCOMPARE(ls.hasLevelProperties(4), false);
 
-    KoListLevelProperties anotherL4 = ls.levelProperties(4);
+    KListLevelProperties anotherL4 = ls.levelProperties(4);
     QCOMPARE(anotherL4.level(), 4);
     QCOMPARE(anotherL4.displayLevel(), 0); // default
     QCOMPARE(ls.hasLevelProperties(4), false);
 
     QCOMPARE(ls.hasLevelProperties(5), false);
     // new levels are a copy of the existing level.
-    KoListLevelProperties l5 = ls.levelProperties(5);
+    KListLevelProperties l5 = ls.levelProperties(5);
     QCOMPARE(l5.displayLevel(), 0);
     QCOMPARE(l5.style(), KoListStyle::AlphaLowerItem);
     QCOMPARE(l5.indent(), 0.);
