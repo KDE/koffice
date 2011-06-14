@@ -24,7 +24,7 @@
 
 #include <KShape.h>
 
-class KoShapeKeepAspectRatioCommandPrivate
+class KShapeKeepAspectRatioCommandPrivate
 {
 public:
     QList<KShape*> shapes;
@@ -38,7 +38,7 @@ KShapeKeepAspectRatioCommand::KShapeKeepAspectRatioCommand(const QList<KShape*>&
         const QList<bool>& newKeepAspectRatio,
         QUndoCommand* parent)
         : QUndoCommand(i18n("Keep Aspect Ratio"), parent),
-        d(new KoShapeKeepAspectRatioCommandPrivate())
+        d(new KShapeKeepAspectRatioCommandPrivate())
 {
     d->shapes = shapes;
     d->oldKeepAspectRatio = oldKeepAspectRatio;

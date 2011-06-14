@@ -27,7 +27,7 @@
 #include "flake_export.h"
 
 class KShape;
-class KoShapeKeepAspectRatioCommandPrivate;
+class KShapeKeepAspectRatioCommandPrivate;
 
 /**
  * Command that changes the keepAspectRatio property of a set of KShape instances
@@ -51,7 +51,7 @@ public:
     virtual void undo();
 
 private:
-    KoShapeKeepAspectRatioCommandPrivate *d;
+    KShapeKeepAspectRatioCommandPrivate *d;
 };
 
 #endif
