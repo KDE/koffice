@@ -29,7 +29,7 @@
 #include <KSelection.h>
 #include <commands/KShapeMoveCommand.h>
 #include <commands/KShapeSizeCommand.h>
-#include <commands/KoShapeTransformCommand.h>
+#include <commands/KShapeTransformCommand.h>
 #include "SelectionDecorator.h"
 
 #include <QSize>
@@ -103,7 +103,7 @@ void DefaultToolTransformWidget::rotationChanged()
     foreach( KShape* shape, selectedShapes )
         newTransforms << shape->transformation();
 
-    KoShapeTransformCommand * cmd = new KoShapeTransformCommand( selectedShapes, oldTransforms, newTransforms );
+    KShapeTransformCommand * cmd = new KShapeTransformCommand( selectedShapes, oldTransforms, newTransforms );
     cmd->setText( i18n("Rotate") );
     m_tool->canvas()->addCommand( cmd );
 }
@@ -136,7 +136,7 @@ void DefaultToolTransformWidget::shearXChanged()
     foreach( KShape* shape, selectedShapes )
         newTransforms << shape->transformation();
 
-    KoShapeTransformCommand * cmd = new KoShapeTransformCommand( selectedShapes, oldTransforms, newTransforms );
+    KShapeTransformCommand * cmd = new KShapeTransformCommand( selectedShapes, oldTransforms, newTransforms );
     cmd->setText( i18n("Shear X") );
     m_tool->canvas()->addCommand( cmd );
 }
@@ -169,7 +169,7 @@ void DefaultToolTransformWidget::shearYChanged()
     foreach( KShape* shape, selectedShapes )
         newTransforms << shape->transformation();
 
-    KoShapeTransformCommand * cmd = new KoShapeTransformCommand( selectedShapes, oldTransforms, newTransforms );
+    KShapeTransformCommand * cmd = new KShapeTransformCommand( selectedShapes, oldTransforms, newTransforms );
     cmd->setText( i18n("Shear Y") );
     m_tool->canvas()->addCommand( cmd );
 }
@@ -206,7 +206,7 @@ void DefaultToolTransformWidget::scaleXChanged()
     foreach( KShape* shape, selectedShapes )
         newTransforms << shape->transformation();
 
-    KoShapeTransformCommand * cmd = new KoShapeTransformCommand( selectedShapes, oldTransforms, newTransforms );
+    KShapeTransformCommand * cmd = new KShapeTransformCommand( selectedShapes, oldTransforms, newTransforms );
     cmd->setText( i18n("Scale") );
     m_tool->canvas()->addCommand( cmd );
 }
@@ -238,7 +238,7 @@ void DefaultToolTransformWidget::scaleYChanged()
     foreach( KShape* shape, selectedShapes )
         newTransforms << shape->transformation();
 
-    KoShapeTransformCommand * cmd = new KoShapeTransformCommand( selectedShapes, oldTransforms, newTransforms );
+    KShapeTransformCommand * cmd = new KShapeTransformCommand( selectedShapes, oldTransforms, newTransforms );
     cmd->setText( i18n("Scale") );
     m_tool->canvas()->addCommand( cmd );
 }
@@ -265,7 +265,7 @@ void DefaultToolTransformWidget::resetTransformations()
     foreach( KShape* shape, selectedShapes )
         newTransforms << shape->transformation();
 
-    KoShapeTransformCommand * cmd = new KoShapeTransformCommand( selectedShapes, oldTransforms, newTransforms );
+    KShapeTransformCommand * cmd = new KShapeTransformCommand( selectedShapes, oldTransforms, newTransforms );
     cmd->setText( i18n("Reset Transformations") );
     m_tool->canvas()->addCommand( cmd );
 }

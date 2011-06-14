@@ -28,7 +28,7 @@
 #include <KPointerEvent.h>
 #include <KShapeManager.h>
 #include <KResourceManager.h>
-#include <commands/KoShapeTransformCommand.h>
+#include <commands/KShapeTransformCommand.h>
 
 #include <QPointF>
 #include <math.h>
@@ -130,7 +130,7 @@ QUndoCommand* ShapeRotateStrategy::createCommand(QUndoCommand *parent)
     foreach (KShape* shape, m_selectedShapes)
         newTransforms << shape->transformation();
 
-    KoShapeTransformCommand *cmd = new KoShapeTransformCommand(m_selectedShapes, m_oldTransforms, newTransforms, parent);
+    KShapeTransformCommand *cmd = new KShapeTransformCommand(m_selectedShapes, m_oldTransforms, newTransforms, parent);
     cmd->setText(i18n("Rotate"));
     KSelection * sel = tool()->canvas()->shapeManager()->selection();
     new SelectionTransformCommand(sel, m_initialSelectionMatrix, sel->transformation(), cmd);

@@ -30,7 +30,7 @@
 #include <KResourceManager.h>
 #include <commands/KShapeShearCommand.h>
 #include <commands/KShapeMoveCommand.h>
-#include <commands/KoShapeTransformCommand.h>
+#include <commands/KShapeTransformCommand.h>
 
 #include <QPointF>
 
@@ -169,7 +169,7 @@ QUndoCommand* ShapeShearStrategy::createCommand(QUndoCommand *parent)
     QList<QTransform> newTransforms;
     foreach(KShape* shape, m_selectedShapes)
         newTransforms << shape->transformation();
-    KoShapeTransformCommand *cmd = new KoShapeTransformCommand(m_selectedShapes, m_oldTransforms, newTransforms, parent);
+    KShapeTransformCommand *cmd = new KShapeTransformCommand(m_selectedShapes, m_oldTransforms, newTransforms, parent);
     cmd->setText(i18n("Shear"));
     KSelection * sel = tool()->canvas()->shapeManager()->selection();
     new SelectionTransformCommand(sel, m_initialSelectionMatrix, sel->transformation(), cmd);

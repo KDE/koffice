@@ -30,7 +30,7 @@ class QTransform;
 /**
  * A command to transform a selection of shapes with the same transformation.
  */
-class FLAKE_EXPORT KoShapeTransformCommand : public QUndoCommand
+class FLAKE_EXPORT KShapeTransformCommand : public QUndoCommand
 {
 public:
 
@@ -43,8 +43,8 @@ public:
      * @see KShape::transformation()
      * @see KShape::setTransformation()
      */
-    KoShapeTransformCommand(const QList<KShape*> &shapes, const QList<QTransform> &oldState, const QList<QTransform> &newState, QUndoCommand * parent = 0);
-    ~KoShapeTransformCommand();
+    KShapeTransformCommand(const QList<KShape*> &shapes, const QList<QTransform> &oldState, const QList<QTransform> &newState, QUndoCommand * parent = 0);
+    ~KShapeTransformCommand();
     /// redo the command
     void redo();
     /// revert the actions done in redo

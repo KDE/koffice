@@ -135,7 +135,7 @@ set(flake_SRCS
     commands/KoSubpathJoinCommand.cpp
     commands/KParameterHandleMoveCommand.cpp
     commands/KParameterToPathCommand.cpp
-    commands/KoShapeTransformCommand.cpp
+    commands/KShapeTransformCommand.cpp
     commands/KPathFillRuleCommand.cpp
     commands/KShapeShadowCommand.cpp
     commands/KPathReverseCommand.cpp
@@ -225,7 +225,7 @@ install(
     commands/KShapeReorderCommand.h
     commands/KShapeShearCommand.h
     commands/KShapeSizeCommand.h
-    commands/KoShapeTransformCommand.h
+    commands/KShapeTransformCommand.h
     commands/KoShapeTransparencyCommand.h
     commands/KoShapeUngroupCommand.h
     commands/KoSubpathRemoveCommand.h

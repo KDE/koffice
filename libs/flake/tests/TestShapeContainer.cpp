@@ -25,7 +25,7 @@
 #include <QUndoCommand>
 #include <KShapeGroupCommand.h>
 #include <KoShapeUngroupCommand.h>
-#include <KoShapeTransformCommand.h>
+#include <KShapeTransformCommand.h>
 #include <KShapeGroup.h>
 #include <KSelection.h>
 
@@ -146,8 +146,8 @@ void TestShapeContainer::testScaling()
         oldPositions.append(transformShapes.at(i)->absolutePosition(KoFlake::TopLeftCorner));
     }
 
-    KoShapeTransformCommand* transformCommand;
-    transformCommand = new KoShapeTransformCommand(transformShapes, oldTransformations, newTransformations);
+    KShapeTransformCommand* transformCommand;
+    transformCommand = new KShapeTransformCommand(transformShapes, oldTransformations, newTransformations);
     transformCommand->redo();
 
     for (int i=0; i< transformShapes.size(); i++) {
@@ -213,8 +213,8 @@ void TestShapeContainer::testScaling2()
         oldPositions.append(transformShapes.at(i)->absolutePosition(KoFlake::TopLeftCorner));
     }
 
-    KoShapeTransformCommand* transformCommand;
-    transformCommand = new KoShapeTransformCommand(transformShapes, oldTransformations, newTransformations);
+    KShapeTransformCommand* transformCommand;
+    transformCommand = new KShapeTransformCommand(transformShapes, oldTransformations, newTransformations);
     transformCommand->redo();
 
 

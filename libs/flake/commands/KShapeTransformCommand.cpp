@@ -18,7 +18,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoShapeTransformCommand.h"
+#include "KShapeTransformCommand.h"
 #include "KShape.h"
 
 #include <QList>
@@ -26,7 +26,7 @@
 
 #include <KDebug>
 
-class KoShapeTransformCommand::Private
+class KShapeTransformCommand::Private
 {
 public:
     Private(const QList<KShape*> &list) : shapes(list) { }
@@ -35,7 +35,7 @@ public:
     QList<QTransform> newState;
 };
 
-KoShapeTransformCommand::KoShapeTransformCommand(const QList<KShape*> &shapes, const QList<QTransform> &oldState, const QList<QTransform> &newState, QUndoCommand * parent)
+KShapeTransformCommand::KShapeTransformCommand(const QList<KShape*> &shapes, const QList<QTransform> &oldState, const QList<QTransform> &newState, QUndoCommand * parent)
         : QUndoCommand(parent),
         d(new Private(shapes))
 {
@@ -45,12 +45,12 @@ KoShapeTransformCommand::KoShapeTransformCommand(const QList<KShape*> &shapes, c
     d->newState = newState;
 }
 
-KoShapeTransformCommand::~KoShapeTransformCommand()
+KShapeTransformCommand::~KShapeTransformCommand()
 {
     delete d;
 }
 
-void KoShapeTransformCommand::redo()
+void KShapeTransformCommand::redo()
 {
     QUndoCommand::redo();
 
@@ -63,7 +63,7 @@ void KoShapeTransformCommand::redo()
     }
 }
 
-void KoShapeTransformCommand::undo()
+void KShapeTransformCommand::undo()
 {
     QUndoCommand::undo();
 
