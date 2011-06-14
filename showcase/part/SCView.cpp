@@ -59,7 +59,7 @@
 #include <KoPADocumentStructureDocker.h>
 #include <KoPAPageInsertCommand.h>
 #include <KoDocumentInfo.h>
-#include <KoShapeRegistry.h>
+#include <KShapeRegistry.h>
 #include <KShapeLayer.h>
 
 #include <QtGui/QDesktopWidget>

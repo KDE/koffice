@@ -34,7 +34,7 @@
 #include "KShapeLoadingContext.h"
 #include "KShapeManager.h"
 #include "KShapeControllerBase.h"
-#include "KoShapeRegistry.h"
+#include "KShapeRegistry.h"
 #include "commands/KShapeCreateCommand.h"
 
 #include <KGlobal>
@@ -94,7 +94,7 @@ bool KShapePaste::process(const KXmlElement & body, KOdfStoreReader & odfStore)
     forEachElement(element, body) {
         kDebug(30006) << "loading shape" << element.localName();
 
-        KShape * shape = KoShapeRegistry::instance()->createShapeFromOdf(element, context);
+        KShape * shape = KShapeRegistry::instance()->createShapeFromOdf(element, context);
         if (shape) {
             if (!cmd)
                 cmd = new QUndoCommand(i18n("Paste Shapes"));

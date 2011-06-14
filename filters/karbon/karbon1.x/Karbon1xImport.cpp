@@ -48,7 +48,7 @@
 #include <KColorBackground.h>
 #include <KGradientBackground.h>
 #include <KShapeFactoryBase.h>
-#include <KoShapeRegistry.h>
+#include <KShapeRegistry.h>
 
 #include <KDebug>
 #include <KPluginFactory>
@@ -1263,7 +1263,7 @@ int KarbonImport::nextZIndex()
 
 KShape * KarbonImport::createShape(const QString &shapeID) const
 {
-    KShapeFactoryBase * factory = KoShapeRegistry::instance()->get(shapeID);
+    KShapeFactoryBase * factory = KShapeRegistry::instance()->get(shapeID);
     if (! factory) {
         kWarning() << "Could not find factory for shape id" << shapeID;
         return 0;

@@ -39,17 +39,17 @@ class KShapeLoadingContext;
  * or rather, of the factories that applications can use to create flake
  * shape objects.
  */
-class FLAKE_EXPORT KoShapeRegistry : public QObject,  public KGenericRegistry<KShapeFactoryBase*>
+class FLAKE_EXPORT KShapeRegistry : public QObject,  public KGenericRegistry<KShapeFactoryBase*>
 {
     Q_OBJECT
 public:
-    ~KoShapeRegistry();
+    ~KShapeRegistry();
 
     /**
-     * Return an instance of the KoShapeRegistry
+     * Return an instance of the KShapeRegistry
      * Creates an instance if that has never happened before and returns the singleton instance.
      */
-    static KoShapeRegistry *instance();
+    static KShapeRegistry *instance();
 
     /**
      * Add shape factory for a shape that is not a plugin
@@ -71,9 +71,9 @@ public:
     KShape *createShapeFromOdf(const KXmlElement &element, KShapeLoadingContext &context) const;
 
 private:
-    KoShapeRegistry();
-    KoShapeRegistry(const KoShapeRegistry&);
-    KoShapeRegistry operator=(const KoShapeRegistry&);
+    KShapeRegistry();
+    KShapeRegistry(const KShapeRegistry&);
+    KShapeRegistry operator=(const KShapeRegistry&);
 
     class Private;
     Private *d;

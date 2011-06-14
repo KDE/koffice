@@ -30,7 +30,7 @@
 #include <KGradientBackground.h>
 #include <KPatternBackground.h>
 #include <KShapeFactoryBase.h>
-#include <KoShapeRegistry.h>
+#include <KShapeRegistry.h>
 
 #include <pathshapes/rectangle/RectangleShape.h>
 #include <pathshapes/ellipse/EllipseShape.h>
@@ -605,7 +605,7 @@ double WMFImportParser::scaleH(int height)
 
 KShape * WMFImportParser::createShape(const QString &shapeID)
 {
-    KShapeFactoryBase * factory = KoShapeRegistry::instance()->get(shapeID);
+    KShapeFactoryBase * factory = KShapeRegistry::instance()->get(shapeID);
     if (! factory) {
         kWarning(30514) << "Could not find factory for shape id" << shapeID;
         return 0;

@@ -30,7 +30,7 @@
 #include <KarbonPart.h>
 
 #include <KShape.h>
-#include <KoShapeRegistry.h>
+#include <KShapeRegistry.h>
 #include <KShapeFactoryBase.h>
 #include <KShapeLayer.h>
 #include <KShapeContainer.h>
@@ -2018,7 +2018,7 @@ QString SvgParser::absoluteFilePath(const QString &href, const QString &xmlBase)
 
 KShape * SvgParser::createShape(const QString &shapeID)
 {
-    KShapeFactoryBase * factory = KoShapeRegistry::instance()->get(shapeID);
+    KShapeFactoryBase * factory = KShapeRegistry::instance()->get(shapeID);
     if (! factory) {
         kWarning(30514) << "Could not find factory for shape id" << shapeID;
         return 0;

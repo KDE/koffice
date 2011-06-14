@@ -21,7 +21,7 @@
 
 #include "KShapeController.h"
 #include "KShapeControllerBase.h"
-#include "KoShapeRegistry.h"
+#include "KShapeRegistry.h"
 #include "KShapeManager.h"
 #include "KShapeLayer.h"
 #include "KSelection.h"
@@ -31,7 +31,7 @@
 #include "KShapeConfigWidgetBase.h"
 #include "KShapeFactoryBase.h"
 #include "KShape.h"
-#include "KoShapeRegistry.h"
+#include "KShapeRegistry.h"
 
 #include <kpagedialog.h>
 #include <klocale.h>
@@ -103,7 +103,7 @@ KResourceManager *KShapeController::resourceManager() const
     if (!d->shapeController) {
         if (!d->dummyRm) {
             d->dummyRm = new KResourceManager();
-            KoShapeRegistry *registry = KoShapeRegistry::instance();
+            KShapeRegistry *registry = KShapeRegistry::instance();
             foreach (const QString &id, registry->keys()) {
                 KShapeFactoryBase *shapeFactory = registry->value(id);
                 shapeFactory->newDocumentResourceManager(d->dummyRm);

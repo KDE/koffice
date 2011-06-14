@@ -20,7 +20,7 @@
 #include "SCPicturesImport.h"
 
 #include <KShapeFactoryBase.h>
-#include <KoShapeRegistry.h>
+#include <KShapeRegistry.h>
 #include <KShapeLayer.h>
 #include <KImageData.h>
 #include <KImageCollection.h>
@@ -41,7 +41,7 @@ SCPicturesImport::SCPicturesImport()
 
 void SCPicturesImport::import(SCView *view)
 {
-    m_factory = KoShapeRegistry::instance()->value("PictureShape");
+    m_factory = KShapeRegistry::instance()->value("PictureShape");
     Q_ASSERT(m_factory);
     if (m_factory) {
         m_urls = KFileDialog::getOpenUrls(KUrl(), "image/png image/jpeg image/gif");

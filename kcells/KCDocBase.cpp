@@ -38,7 +38,7 @@
 #include <KOdfWriteStore.h>
 #include <KoProgressUpdater.h>
 #include <KResourceManager.h>
-#include <KoShapeRegistry.h>
+#include <KShapeRegistry.h>
 #include <KoShapeSavingContext.h>
 #include <KOdfStorageDevice.h>
 #include <KoUpdater.h>
@@ -68,7 +68,7 @@ KCDocBase::KCDocBase(QWidget *parentWidget, QObject* parent, bool singleViewMode
     // Document Url for FILENAME function and page header/footer.
     d->map->calculationSettings()->setFileName(url().prettyUrl());
 
-    KoShapeRegistry *registry = KoShapeRegistry::instance();
+    KShapeRegistry *registry = KShapeRegistry::instance();
     foreach (const QString &id, registry->keys()) {
         KShapeFactoryBase *shapeFactory = registry->value(id);
         shapeFactory->newDocumentResourceManager(d->resourceManager);

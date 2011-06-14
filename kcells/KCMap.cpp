@@ -43,7 +43,7 @@
 #include <KShapeLoadingContext.h>
 #include <KoTextSharedLoadingData.h>
 #include <KParagraphStyle.h>
-#include <KoShapeRegistry.h>
+#include <KShapeRegistry.h>
 
 #include "KCApplicationSettings.h"
 #include "KCBindingManager.h"

@@ -31,7 +31,7 @@
 #include <KOdfPageLayoutData.h>
 #include <KOdfLoadingContext.h>
 #include <KShapeLayer.h>
-#include <KoShapeRegistry.h>
+#include <KShapeRegistry.h>
 #include <KOdfStyleStack.h>
 #include <KShapeBackground.h>
 
@@ -176,7 +176,7 @@ bool KoPAPageBase::loadOdf(const KXmlElement &element, KShapeLoadingContext &loa
         forEachElement(child, element) {
             kDebug(30010) <<"loading shape" << child.localName();
 
-            KShape *shape = KoShapeRegistry::instance()->createShapeFromOdf(child, loadingContext);
+            KShape *shape = KShapeRegistry::instance()->createShapeFromOdf(child, loadingContext);
             if (shape) {
                 if(!shape->parent()) {
                     layer->addShape(shape);

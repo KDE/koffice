@@ -38,7 +38,7 @@
 #include <KShapeContainer.h>
 #include <KShapeFactoryBase.h>
 #include <KShapeLoadingContext.h>
-#include <KoShapeRegistry.h>
+#include <KShapeRegistry.h>
 #include <KoTableColumnAndRowStyleManager.h>
 #include <KoTextAnchor.h>
 #include <KoTextBlockData.h>
@@ -2118,7 +2118,7 @@ void KoTextLoader::loadTableCell(KXmlElement &rowTag, QTextTable *tbl, QList<QRe
 
 void KoTextLoader::loadShape(const KXmlElement &element, QTextCursor &cursor)
 {
-    KShape *shape = KoShapeRegistry::instance()->createShapeFromOdf(element, d->context);
+    KShape *shape = KShapeRegistry::instance()->createShapeFromOdf(element, d->context);
     if (!shape) {
         kDebug(32500) << "shape '" << element.localName() << "' unhandled";
         return;

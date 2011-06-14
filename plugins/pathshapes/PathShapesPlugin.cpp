@@ -17,7 +17,7 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#include <KoShapeRegistry.h>
+#include <KShapeRegistry.h>
 #include <KShapeFactoryBase.h>
 
 #include "PathShapesPlugin.h"
@@ -34,11 +34,11 @@ K_EXPORT_PLUGIN(PathShapesPluginFactory("PathShapes"))
 PathShapesPlugin::PathShapesPlugin(QObject *parent, const QVariantList&)
     : QObject(parent)
 {
-    KoShapeRegistry::instance()->add(new StarShapeFactory(parent));
-    KoShapeRegistry::instance()->add(new RectangleShapeFactory(parent));
-    KoShapeRegistry::instance()->add(new EllipseShapeFactory(parent));
-    KoShapeRegistry::instance()->add(new SpiralShapeFactory(parent));
-    KoShapeRegistry::instance()->add(new EnhancedPathShapeFactory(parent));
+    KShapeRegistry::instance()->add(new StarShapeFactory(parent));
+    KShapeRegistry::instance()->add(new RectangleShapeFactory(parent));
+    KShapeRegistry::instance()->add(new EllipseShapeFactory(parent));
+    KShapeRegistry::instance()->add(new SpiralShapeFactory(parent));
+    KShapeRegistry::instance()->add(new EnhancedPathShapeFactory(parent));
 }
 
 #include <PathShapesPlugin.moc>

@@ -406,7 +406,7 @@ public:
      * to their respective shape factories. In most cases they do not have
      * a special tool for editing them.
      * This function returns the specific shape id for finding the shape
-     * factory from KoShapeRegistry. The default KoPathShapeId is returned
+     * factory from KShapeRegistry. The default KoPathShapeId is returned
      * from KShape::shapeId() so that the generic path editing tool gets
      * activated when the shape is selected.
      *

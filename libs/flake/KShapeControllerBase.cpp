@@ -20,7 +20,7 @@
 
 #include "KShapeControllerBase.h"
 #include "KResourceManager.h"
-#include "KoShapeRegistry.h"
+#include "KShapeRegistry.h"
 
 class KShapeControllerBasePrivate
 {
@@ -28,7 +28,7 @@ public:
     KShapeControllerBasePrivate()
         : resourceManager(new KResourceManager())
     {
-        KoShapeRegistry *registry = KoShapeRegistry::instance();
+        KShapeRegistry *registry = KShapeRegistry::instance();
         foreach (const QString &id, registry->keys()) {
             KShapeFactoryBase *shapeFactory = registry->value(id);
             shapeFactory->newDocumentResourceManager(resourceManager);

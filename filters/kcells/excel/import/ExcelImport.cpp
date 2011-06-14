@@ -44,7 +44,7 @@
 #include <KOdf.h>
 #include <KOdfXmlNS.h>
 #include <KShapeLoadingContext.h>
-#include <KoShapeRegistry.h>
+#include <KShapeRegistry.h>
 #include <KOdfStylesReader.h>
 #include <KOdfLoadingContext.h>
 #include <KShape.h>

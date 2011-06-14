@@ -20,7 +20,7 @@
 #include "defaulttool/DefaultToolFactory.h"
 #include "guidestool/GuidesToolFactory.h"
 
-#include <KoShapeRegistry.h>
+#include <KShapeRegistry.h>
 #include <KoToolRegistry.h>
 
 #include <kpluginfactory.h>

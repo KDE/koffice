@@ -60,7 +60,7 @@
 #include <KoToolManager.h>
 #include <KShapeManager.h>
 #include <KShapeLayer.h>
-#include <KoShapeRegistry.h>
+#include <KShapeRegistry.h>
 #include <KResourceManager.h>
 #include <KOdfStorageDevice.h>
 #include <KShapePainter.h>

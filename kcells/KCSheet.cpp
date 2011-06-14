@@ -50,7 +50,7 @@
 #include <KResourceManager.h>
 #include <KShapeLoadingContext.h>
 #include <KShapeManager.h>
-#include <KoShapeRegistry.h>
+#include <KShapeRegistry.h>
 #include <KoShapeSavingContext.h>
 #include <KOdfStyleStack.h>
 #include <KUnit.h>
@@ -265,7 +265,7 @@ KCSheet::KCSheet(const KCSheet &other)
     KShape* shape;
     const QList<KShape*> shapes = other.d->shapes;
     for (int i = 0; i < shapes.count(); ++i) {
-        shape = KoShapeRegistry::instance()->value(shapes[i]->shapeId())->createDefaultShapeAndInit(0);
+        shape = KShapeRegistry::instance()->value(shapes[i]->shapeId())->createDefaultShapeAndInit(0);
         shape->copySettings(shapes[i]);
         addShape(shape);
     }
@@ -1706,7 +1706,7 @@ bool KCSheet::loadOdf(const KXmlElement& sheetElement,
 
 void KCSheet::loadOdfObject(const KXmlElement& element, KShapeLoadingContext& shapeContext)
 {
-    KShape* shape = KoShapeRegistry::instance()->createShapeFromOdf(element, shapeContext);
+    KShape* shape = KShapeRegistry::instance()->createShapeFromOdf(element, shapeContext);
     if (!shape)
         return;
     addShape(shape);

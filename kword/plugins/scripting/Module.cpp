@@ -92,7 +92,7 @@ void Module::removePage(int pageNumber)
 QStringList Module::shapeKeys()
 {
     QStringList keys;
-    foreach(const QString &key, KoShapeRegistry::instance()->keys())
+    foreach(const QString &key, KShapeRegistry::instance()->keys())
        keys.append(key);
     return keys;
 }

@@ -27,7 +27,7 @@
 
 #include <KShapeManager.h>
 #include <KProperties.h>
-#include <KoShapeRegistry.h>
+#include <KShapeRegistry.h>
 #include <KOdfPasteBase.h>
 #include <KOdfStoreReader.h>
 #include <KOdfStoreReader.h>
@@ -325,8 +325,8 @@ QRectF ItemStore::loadShapeTypes()
         s_itemStorePrivate()->addFolder(mainFolder);
     }
 
-    foreach (const QString &id, KoShapeRegistry::instance()->keys()) {
-        KShapeFactoryBase *factory = KoShapeRegistry::instance()->value(id);
+    foreach (const QString &id, KShapeRegistry::instance()->keys()) {
+        KShapeFactoryBase *factory = KShapeRegistry::instance()->value(id);
         if (factory->isHidden())
             continue;
         bool oneAdded=false;
@@ -389,7 +389,7 @@ KShape *ItemStore::createShapeFromPaste(const QByteArray &bytes)
 
             KXmlElement element;
             forEachElement(element, body) {
-                m_shape = KoShapeRegistry::instance()->createShapeFromOdf(element, context);
+                m_shape = KShapeRegistry::instance()->createShapeFromOdf(element, context);
                 if (m_shape)
                     return true;
             }

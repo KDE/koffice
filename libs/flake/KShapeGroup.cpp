@@ -26,7 +26,7 @@
 #include "KShapeLoadingContext.h"
 #include "KXmlWriter.h"
 #include "KXmlReader.h"
-#include "KoShapeRegistry.h"
+#include "KShapeRegistry.h"
 #include "KShapeBorderBase.h"
 #include "KoShapeShadow.h"
 
@@ -91,7 +91,7 @@ bool KShapeGroup::loadOdf(const KXmlElement & element, KShapeLoadingContext &con
     KXmlElement child;
     QMap<KShapeLayer*, int> usedLayers;
     forEachElement(child, element) {
-        KShape * shape = KoShapeRegistry::instance()->createShapeFromOdf(child, context);
+        KShape * shape = KShapeRegistry::instance()->createShapeFromOdf(child, context);
         if (shape) {
             KShapeLayer *layer = dynamic_cast<KShapeLayer*>(shape->parent());
             if (layer) {

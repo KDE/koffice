@@ -20,7 +20,7 @@
 #include "KoTextOnShapeContainer.h"
 #include "KShapeContainer_p.h"
 #include "SimpleShapeContainerModel_p.h"
-#include "KoShapeRegistry.h"
+#include "KShapeRegistry.h"
 #include "KShapeFactoryBase.h"
 #include "KoTextShapeDataBase.h"
 
@@ -153,7 +153,7 @@ KoTextOnShapeContainer::KoTextOnShapeContainer(KShape *childShape, KResourceMana
 
     QSet<KShape*> delegates;
     delegates << childShape;
-    KShapeFactoryBase *factory = KoShapeRegistry::instance()->get("TextShapeID");
+    KShapeFactoryBase *factory = KShapeRegistry::instance()->get("TextShapeID");
     if (factory) { // not installed, thats too bad, but allowed
         d->textShape = factory->createDefaultShape(documentResources);
         Q_ASSERT(d->textShape); // would be a bug in the text shape;

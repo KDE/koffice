@@ -51,7 +51,7 @@
 #include <KShapeContainer.h>
 #include <KOdfWriteStore.h>
 #include <KoToolManager.h>
-#include <KoShapeRegistry.h>
+#include <KShapeRegistry.h>
 #include <KShapeFactoryBase.h>
 #include <KoStyleManager.h>
 #include <KResourceManager.h>
@@ -883,7 +883,7 @@ void KWDocument::updatePagesForStyle(const KWPageStyle &style, bool delayed)
 void KWDocument::showStartUpWidget(KoMainWindow *parent, bool alwaysShow)
 {
     // print error if kotext not available
-    if (KoShapeRegistry::instance()->value(TextShape_SHAPEID) == 0)
+    if (KShapeRegistry::instance()->value(TextShape_SHAPEID) == 0)
         // need to wait 1 event since exiting here would not work.
         QTimer::singleShot(0, this, SLOT(showErrorAndDie()));
     else

@@ -37,7 +37,7 @@
 
 #include <KoPASavingContext.h>
 #include <KShapeLoadingContext.h>
-#include <KoShapeRegistry.h>
+#include <KShapeRegistry.h>
 #include <KoToolRegistry.h>
 #include <KOdfXmlNS.h>
 #include <KXmlWriter.h>
@@ -359,12 +359,12 @@ void SCDocument::showStartUpWidget(KoMainWindow * parent, bool alwaysShow)
     KShapeFactoryBase * factory;
 
     // TODO: Uncomment i18n calls after release of 2.3
-    factory = KoShapeRegistry::instance()->value("TextShapeID");
+    factory = KShapeRegistry::instance()->value("TextShapeID");
     if (!factory) {
         m_errorMessage = /*i18n(*/ "Can not find needed text component, Showcase will quit now." /*)*/;
         error = true;
     }
-    factory = KoShapeRegistry::instance()->value("PictureShape");
+    factory = KShapeRegistry::instance()->value("PictureShape");
     if (!factory) {
         m_errorMessage = /*i18n(*/ "Can not find needed picture component, Showcase will quit now." /*)*/;
         error = true;

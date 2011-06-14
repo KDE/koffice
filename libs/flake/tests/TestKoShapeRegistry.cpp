@@ -29,7 +29,7 @@
 #include <KOdfLoadingContext.h>
 #include <KOdfStylesReader.h>
 
-#include "KoShapeRegistry.h"
+#include "KShapeRegistry.h"
 #include "KShape.h"
 #include "KPathShape.h"
 #include "KShapeLoadingContext.h"
@@ -40,7 +40,7 @@
 
 void TestKoShapeRegistry::testGetKoShapeRegistryInstance()
 {
-    KoShapeRegistry * registry = KoShapeRegistry::instance();
+    KShapeRegistry * registry = KShapeRegistry::instance();
     QVERIFY(registry != 0);
 }
 
@@ -73,7 +73,7 @@ void TestKoShapeRegistry::testCreateShapes()
     KXmlElement contentElement = doc.documentElement();
     KXmlElement bodyElement = contentElement.firstChild().toElement();
 
-    KoShapeRegistry * registry = KoShapeRegistry::instance();
+    KShapeRegistry * registry = KShapeRegistry::instance();
 
     // XXX: When loading is implemented, these no doubt have to be
     // sensibly filled.
@@ -120,7 +120,7 @@ void TestKoShapeRegistry::testCreateFramedShapes()
     KXmlElement contentElement = doc.documentElement();
     KXmlElement bodyElement = contentElement.firstChild().toElement();
 
-    KoShapeRegistry * registry = KoShapeRegistry::instance();
+    KShapeRegistry * registry = KShapeRegistry::instance();
 
     // XXX: When loading is implemented, these no doubt have to be
     // sensibly filled.

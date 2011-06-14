@@ -177,7 +177,7 @@ public:
     KResourceManager *documentResourceManager() const;
 
 private:
-    // to allow only the KoShapeRegistry access to the KShapeControllerBase
+    // to allow only the KShapeRegistry access to the KShapeControllerBase
     class Private;
     Private * const d;
 };

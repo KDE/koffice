@@ -71,7 +71,7 @@
 #include <KShapeGroupCommand.h>
 #include <KShape.h>
 #include <KShapeManager.h>
-#include <KoShapeRegistry.h>
+#include <KShapeRegistry.h>
 #include <KoStandardAction.h>
 #include <KoTextAnchor.h>
 #include <KoTextDocument.h>
@@ -1336,7 +1336,7 @@ void KWView::createTextOnShape()
 
 void KWView::insertTextShape()
 {
-    KShapeFactoryBase *factory = KoShapeRegistry::instance()->value(TextShape_SHAPEID);
+    KShapeFactoryBase *factory = KShapeRegistry::instance()->value(TextShape_SHAPEID);
     Q_ASSERT(factory);
     KShape *shape = factory->createDefaultShape(m_document->resourceManager());
     if (m_currentPage.isValid())

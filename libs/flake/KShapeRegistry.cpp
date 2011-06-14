@@ -19,7 +19,7 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#include "KoShapeRegistry.h"
+#include "KShapeRegistry.h"
 #include "KPathShapeFactory_p.h"
 #include "KShapeLoadingContext.h"
 #include "KoShapeSavingContext.h"
@@ -42,11 +42,11 @@
 #include <KDebug>
 #include <KGlobal>
 
-class KoShapeRegistry::Private
+class KShapeRegistry::Private
 {
 public:
     void insertFactory(KShapeFactoryBase *factory);
-    void init(KoShapeRegistry *q);
+    void init(KShapeRegistry *q);
 
     KShape *createShapeInternal(const KXmlElement &fullElement, KShapeLoadingContext &context, const KXmlElement &element) const;
 
@@ -55,17 +55,17 @@ public:
     QHash<QPair<QString, QString>, QMultiMap<int, KShapeFactoryBase*> > factoryMap;
 };
 
-KoShapeRegistry::KoShapeRegistry()
+KShapeRegistry::KShapeRegistry()
         : d(new Private())
 {
 }
 
-KoShapeRegistry::~KoShapeRegistry()
+KShapeRegistry::~KShapeRegistry()
 {
     delete d;
 }
 
-void KoShapeRegistry::Private::init(KoShapeRegistry *q)
+void KShapeRegistry::Private::init(KShapeRegistry *q)
 {
     KoPluginLoader::PluginsConfig config;
     config.whiteList = "FlakePlugins";
@@ -93,22 +93,22 @@ void KoShapeRegistry::Private::init(KoShapeRegistry *q)
     }
 }
 
-KoShapeRegistry* KoShapeRegistry::instance()
+KShapeRegistry* KShapeRegistry::instance()
 {
-    K_GLOBAL_STATIC(KoShapeRegistry, s_instance)
+    K_GLOBAL_STATIC(KShapeRegistry, s_instance)
     if (!s_instance.exists()) {
         s_instance->d->init(s_instance);
     }
     return s_instance;
 }
 
-void KoShapeRegistry::addFactory(KShapeFactoryBase * factory)
+void KShapeRegistry::addFactory(KShapeFactoryBase * factory)
 {
     add(factory);
     d->insertFactory(factory);
 }
 
-void KoShapeRegistry::Private::insertFactory(KShapeFactoryBase *factory)
+void KShapeRegistry::Private::insertFactory(KShapeFactoryBase *factory)
 {
     const QList<QPair<QString, QStringList> > odfElements(factory->odfElements());
 
@@ -134,7 +134,7 @@ void KoShapeRegistry::Private::insertFactory(KShapeFactoryBase *factory)
     }
 }
 
-KShape * KoShapeRegistry::createShapeFromOdf(const KXmlElement & e, KShapeLoadingContext & context) const
+KShape * KShapeRegistry::createShapeFromOdf(const KXmlElement & e, KShapeLoadingContext & context) const
 {
     kDebug(30006) << "Going to check for" << e.namespaceURI() << ":" << e.tagName();
 
@@ -206,7 +206,7 @@ KShape * KoShapeRegistry::createShapeFromOdf(const KXmlElement & e, KShapeLoadin
     return shape;
 }
 
-KShape *KoShapeRegistry::Private::createShapeInternal(const KXmlElement &fullElement,
+KShape *KShapeRegistry::Private::createShapeInternal(const KXmlElement &fullElement,
                                                        KShapeLoadingContext &context,
                                                        const KXmlElement &element) const
 {
@@ -269,4 +269,4 @@ KShape *KoShapeRegistry::Private::createShapeInternal(const KXmlElement &fullEle
     return 0;
 }
 
-#include <KoShapeRegistry.moc>
+#include <KShapeRegistry.moc>

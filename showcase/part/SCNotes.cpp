@@ -27,7 +27,7 @@
 #include <KShape.h>
 #include <KShapeFactoryBase.h>
 #include <KShapeLayer.h>
-#include <KoShapeRegistry.h>
+#include <KShapeRegistry.h>
 #include <KoShapeSavingContext.h>
 #include <KUnit.h>
 #include <KOdfXmlNS.h>
@@ -67,7 +67,7 @@ SCNotes::SCNotes(SCPage *page, SCDocument * document)
     addShape(layer);
 
     // All sizes and positions are hardcoded for now
-    KShapeFactoryBase *factory = KoShapeRegistry::instance()->value("TextShapeID");
+    KShapeFactoryBase *factory = KShapeRegistry::instance()->value("TextShapeID");
     Q_ASSERT(factory);
     m_textShape = factory->createDefaultShape(m_doc->resourceManager());
     m_textShape->setGeometryProtected(true);
@@ -75,7 +75,7 @@ SCNotes::SCNotes(SCPage *page, SCDocument * document)
     m_textShape->setPosition(QPointF(62.22, 374.46));
     m_textShape->setSize(QSizeF(489.57, 356.37));
 
-    factory = KoShapeRegistry::instance()->value("PictureShape");
+    factory = KShapeRegistry::instance()->value("PictureShape");
     Q_ASSERT(factory);
     m_thumbnailShape = factory->createDefaultShape(m_doc->resourceManager());
     m_thumbnailShape->setGeometryProtected(true);
@@ -139,7 +139,7 @@ bool SCNotes::loadOdf(const KXmlElement &element, KShapeLoadingContext &context)
             delete helper;
         }
         else /* if (child.tagName() == "frame") */ {
-            KShape *shape = KoShapeRegistry::instance()->createShapeFromOdf(child, context);
+            KShape *shape = KShapeRegistry::instance()->createShapeFromOdf(child, context);
             if (shape) {
                 if (shape->shapeId() == "TextShapeID" &&
                         child.hasAttributeNS(KOdfXmlNS::presentation, "class")) {

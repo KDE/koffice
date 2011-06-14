@@ -29,7 +29,7 @@
 #include "ShapeSelector.h"
 
 #include <KShapeManager.h>
-#include <KoShapeRegistry.h>
+#include <KShapeRegistry.h>
 #include <KPointerEvent.h>
 #include <KSelection.h>
 #include <KShapeFactoryBase.h> // for the mimetype defines etc

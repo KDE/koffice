@@ -19,7 +19,7 @@
 
 #include "PathToolOptionWidget_p.h"
 #include "KPathTool_p.h"
-#include "../KoShapeRegistry.h"
+#include "../KShapeRegistry.h"
 #include "../KShapeConfigWidgetBase.h"
 #include "../KCanvasBase.h"
 
@@ -88,7 +88,7 @@ void PathToolOptionWidget::setSelectedPath(KPathShape *path)
     setShapePropertiesWidget(0);
     if (path == 0)
         return;
-    KShapeFactoryBase *factory = KoShapeRegistry::instance()->value(path->pathShapeId());
+    KShapeFactoryBase *factory = KShapeRegistry::instance()->value(path->pathShapeId());
     if (factory) {
         KShapeConfigWidgetBase *w = factory->createConfigWidget(m_tool->canvas());
         setShapePropertiesWidget(w);

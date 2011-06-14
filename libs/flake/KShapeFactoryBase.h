@@ -84,7 +84,7 @@ public:
 @endcode
 
  * After you created the factory you should create a plugin that can announce the factory to the
- * KoShapeRegistry.  See the KoPluginLoader as well.
+ * KShapeRegistry.  See the KoPluginLoader as well.
  */
 class FLAKE_EXPORT KShapeFactoryBase : public QObject
 {

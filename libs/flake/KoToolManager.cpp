@@ -31,7 +31,7 @@
 #include "KCanvasController_p.h"
 #include "KShape.h"
 #include "KShapeLayer.h"
-#include "KoShapeRegistry.h"
+#include "KShapeRegistry.h"
 #include "KShapeManager.h"
 #include "KCanvasBase.h"
 #include "KPointerEvent.h"
@@ -139,7 +139,7 @@ CanvasData *KoToolManager::Private::createCanvasData(KCanvasController *controll
     }
     KCreateShapesTool *createTool = dynamic_cast<KCreateShapesTool*>(toolsHash.value(KoCreateShapesTool_ID));
     Q_ASSERT(createTool);
-    QString id = KoShapeRegistry::instance()->keys()[0];
+    QString id = KShapeRegistry::instance()->keys()[0];
     createTool->setShapeId(id);
 
     CanvasData *cd = new CanvasData(controller, device);
@@ -161,7 +161,7 @@ void KoToolManager::Private::setup()
     if (tools.size() > 0)
         return;
 
-    KoShapeRegistry::instance();
+    KShapeRegistry::instance();
     KoToolRegistry *registry = KoToolRegistry::instance();
     foreach(const QString & id, registry->keys()) {
         ToolHelper *t = new ToolHelper(registry->value(id));

@@ -24,7 +24,7 @@
 #include <KOdfLoadingContext.h>
 #include <KOdfXmlNS.h>
 #include <KShape.h>
-#include <KoShapeRegistry.h>
+#include <KShapeRegistry.h>
 #include <KShapeLoadingContext.h>
 #include <KoFilterManager.h>
 #include <KOdf.h>
@@ -88,7 +88,7 @@ void OdfCollectionLoader::load()
 void OdfCollectionLoader::loadShape()
 {
     //kDebug() << m_shape.tagName();
-    KShape * shape = KoShapeRegistry::instance()->createShapeFromOdf(m_shape, *m_shapeLoadingContext);
+    KShape * shape = KShapeRegistry::instance()->createShapeFromOdf(m_shape, *m_shapeLoadingContext);
 
     if (shape) {
         if (!shape->parent()) {

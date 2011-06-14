@@ -74,7 +74,7 @@
 
 #include <KShape.h>
 #include <KShapeLoadingContext.h>
-#include <KoShapeRegistry.h>
+#include <KShapeRegistry.h>
 #include <KOdfStyleStack.h>
 #include <KOdfXmlNS.h>
 #include <KXmlReader.h>
@@ -1744,7 +1744,7 @@ void KCCell::loadOdfObjects(const KXmlElement &parent, KCOdfLoadingContext& tabl
 
 void KCCell::loadOdfObject(const KXmlElement &element, KShapeLoadingContext &shapeContext)
 {
-    KShape* shape = KoShapeRegistry::instance()->createShapeFromOdf(element, shapeContext);
+    KShape* shape = KShapeRegistry::instance()->createShapeFromOdf(element, shapeContext);
     if (!shape) {
         kDebug(36003) << "Unable to load shape.";
         return;

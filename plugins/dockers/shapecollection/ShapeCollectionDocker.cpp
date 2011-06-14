@@ -24,7 +24,7 @@
 #include "CollectionShapeFactory.h"
 
 #include <KShapeFactoryBase.h>
-#include <KoShapeRegistry.h>
+#include <KShapeRegistry.h>
 #include <KCanvasController.h>
 #include <KoToolManager.h>
 #include <KCreateShapesTool.h>
@@ -225,8 +225,8 @@ void ShapeCollectionDocker::loadDefaultShapes()
     KConfigGroup cfg = KGlobal::config()->group("KoShapeCollection");
     quickShapes = cfg.readEntry("QuickShapes", quickShapes);
 
-    foreach(const QString & id, KoShapeRegistry::instance()->keys()) {
-        KShapeFactoryBase *factory = KoShapeRegistry::instance()->value(id);
+    foreach(const QString & id, KShapeRegistry::instance()->keys()) {
+        KShapeFactoryBase *factory = KShapeRegistry::instance()->value(id);
         // don't show hidden factories
         if (factory->isHidden()) {
             continue;
@@ -498,7 +498,7 @@ void ShapeCollectionDocker::onLoadingFinished()
         CollectionShapeFactory* factory =
                 new CollectionShapeFactory(this,
                 loader->collectionPath() + shape->name(), shape);
-        KoShapeRegistry::instance()->add(loader->collectionPath() + shape->name(), factory);
+        KShapeRegistry::instance()->add(loader->collectionPath() + shape->name(), factory);
     }
 
     CollectionItemModel* model = m_modelMap[loader->collectionPath()];
@@ -537,8 +537,8 @@ void ShapeCollectionDocker::removeCollection(const QString& id)
         QList<KoCollectionItem> list = model->shapeTemplateList();
         foreach(const KoCollectionItem & temp, list)
         {
-            KShapeFactoryBase* factory = KoShapeRegistry::instance()->get(temp.id);
-            KoShapeRegistry::instance()->remove(temp.id);
+            KShapeFactoryBase* factory = KShapeRegistry::instance()->get(temp.id);
+            KShapeRegistry::instance()->remove(temp.id);
             delete factory;
         }
 

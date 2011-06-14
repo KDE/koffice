@@ -29,7 +29,7 @@
 #include <klocale.h>
 #include <KShape.h>
 #include <KShapeFactoryBase.h>
-#include <KoShapeRegistry.h>
+#include <KShapeRegistry.h>
 #include <KoShapeSavingContext.h>
 #include <KShapeLoadingContext.h>
 #include <KXmlWriter.h>
@@ -117,7 +117,7 @@ SCPlaceholderStrategy::~SCPlaceholderStrategy()
 KShape *SCPlaceholderStrategy::createShape(KResourceManager *rm)
 {
     KShape * shape = 0;
-    KShapeFactoryBase * factory = KoShapeRegistry::instance()->value(m_placeholderData->m_shapeId);
+    KShapeFactoryBase * factory = KShapeRegistry::instance()->value(m_placeholderData->m_shapeId);
     if (factory) {
         shape = factory->createDefaultShape(rm);
     }

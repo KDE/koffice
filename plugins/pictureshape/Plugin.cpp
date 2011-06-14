@@ -21,7 +21,7 @@
 #include "PictureToolFactory.h"
 
 #include <KoToolRegistry.h>
-#include <KoShapeRegistry.h>
+#include <KShapeRegistry.h>
 
 #include <kpluginfactory.h>
 
@@ -32,7 +32,7 @@ K_EXPORT_PLUGIN(PluginFactory("PictureShape"))
 Plugin::Plugin(QObject *parent, const QVariantList &)
     : QObject(parent)
 {
-    KoShapeRegistry::instance()->add( new PictureShapeFactory(parent) );
+    KShapeRegistry::instance()->add( new PictureShapeFactory(parent) );
     KoToolRegistry::instance()->add( new PictureToolFactory(parent) );
 }
 

@@ -22,7 +22,7 @@
 #include "KoShapeRubberSelectStrategy_p.h"
 #include "KCreateShapesTool.h"
 #include "KShape.h"
-#include "KoShapeRegistry.h"
+#include "KShapeRegistry.h"
 #include "KShapeManager.h"
 #include "KCanvasBase.h"
 #include "KSelection.h"
@@ -37,7 +37,7 @@ KCreateShapeStrategy::KCreateShapeStrategy(KCreateShapesTool *tool, const QPoint
         : KoShapeRubberSelectStrategy(tool, clicked, tool->canvas()->snapToGrid())
 {
     KCreateShapesTool *parent = static_cast<KCreateShapesTool*>(d_ptr->tool);
-    KShapeFactoryBase *factory = KoShapeRegistry::instance()->value(parent->shapeId());
+    KShapeFactoryBase *factory = KShapeRegistry::instance()->value(parent->shapeId());
     if (factory) {
         const KProperties *props = parent->shapeProperties();
         KShape *shape;
@@ -57,7 +57,7 @@ QUndoCommand* KCreateShapeStrategy::createCommand(QUndoCommand *parentCommand)
 {
     Q_D(KoShapeRubberSelectStrategy);
     KCreateShapesTool *parent = static_cast<KCreateShapesTool*>(d_ptr->tool);
-    KShapeFactoryBase *factory = KoShapeRegistry::instance()->value(parent->shapeId());
+    KShapeFactoryBase *factory = KShapeRegistry::instance()->value(parent->shapeId());
     if (! factory) {
         kWarning(30006) << "Application requested a shape that is not registered" << parent->shapeId();
         return 0;

@@ -102,7 +102,7 @@
 #include <KPasteController.h>
 #include <KoSnapGuide.h>
 #include <KShapeFactoryBase.h>
-#include <KoShapeRegistry.h>
+#include <KShapeRegistry.h>
 #include <KImageCollection.h>
 #include <KImageData.h>
 
@@ -436,7 +436,7 @@ void KarbonView::fileImportGraphic()
             KMessageBox::error(0, i18n("Could not load image."), i18n("Import graphic"), 0);
             return;
         }
-        KShapeFactoryBase * factory = KoShapeRegistry::instance()->get("PictureShape");
+        KShapeFactoryBase * factory = KShapeRegistry::instance()->get("PictureShape");
         if (!factory) {
             KMessageBox::error(0, i18n("Could not create image shape."), i18n("Import graphic"), 0);
             return;

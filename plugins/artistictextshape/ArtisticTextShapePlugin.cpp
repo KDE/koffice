@@ -21,7 +21,7 @@
 #include "ArtisticTextShapeFactory.h"
 #include "ArtisticTextToolFactory.h"
 
-#include <KoShapeRegistry.h>
+#include <KShapeRegistry.h>
 #include <KoToolRegistry.h>
 
 #include <kpluginfactory.h>
@@ -32,7 +32,7 @@ K_EXPORT_PLUGIN(ArtisticTextShapePluginFactory("ArtisticTextShape"))
 ArtisticTextShapePlugin::ArtisticTextShapePlugin( QObject * parent, const QVariantList & )
     : QObject(parent)
 {
-    KoShapeRegistry::instance()->add( new ArtisticTextShapeFactory( parent ) );
+    KShapeRegistry::instance()->add( new ArtisticTextShapeFactory( parent ) );
     KoToolRegistry::instance()->add( new ArtisticTextToolFactory( parent ) );
 }
 

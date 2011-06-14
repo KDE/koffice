@@ -45,7 +45,7 @@ set(flake_SRCS
     KoToolBase.cpp
     KCanvasController.cpp
     KCanvasController_p.cpp
-    KoShapeRegistry.cpp
+    KShapeRegistry.cpp
     KoToolFactoryBase.cpp
     KPathShapeFactory.cpp
     KShapeFactoryBase.cpp
@@ -287,7 +287,7 @@ install(
     KShapeManagerPaintingStrategy.h
     KShapeOdfSaveHelper.h
     KShapePaste.h
-    KoShapeRegistry.h
+    KShapeRegistry.h
     KoShapeSavingContext.h
     KoShapeUserData.h
     KoSharedLoadingData.h

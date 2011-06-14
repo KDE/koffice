@@ -25,7 +25,7 @@
 #include "frames/KWTextFrame.h"
 
 // koffice
-#include <KoShapeRegistry.h>
+#include <KShapeRegistry.h>
 #include <KInlineNote.h>
 #include <KShapeFactoryBase.h>
 #include <KShapeContainer.h>
@@ -486,7 +486,7 @@ void KWDLoader::loadFrameSet(const KXmlElement &framesetElem)
         fill(fs, framesetElem);
         fs->setName(fsname);
 
-        KShapeFactoryBase *factory = KoShapeRegistry::instance()->value("PictureShape");
+        KShapeFactoryBase *factory = KShapeRegistry::instance()->value("PictureShape");
         Q_ASSERT(factory);
         KShape *shape = factory->createDefaultShape(m_document->resourceManager());
         shape->setKeepAspectRatio(image.attribute("keepAspectRatio", "true") == "true");
@@ -552,7 +552,7 @@ void KWDLoader::fill(KWTextFrameSet *fs, const KXmlElement &framesetElem)
     KXmlElement frameElem;
     forEachElement(frameElem, framesetElem) {
         if (frameElem.tagName() == "FRAME") {
-            KShapeFactoryBase *factory = KoShapeRegistry::instance()->value(TextShape_SHAPEID);
+            KShapeFactoryBase *factory = KShapeRegistry::instance()->value(TextShape_SHAPEID);
             Q_ASSERT(factory);
             KShape *shape = factory->createDefaultShape(m_document->resourceManager());
             KWTextFrame *frame = new KWTextFrame(shape, fs);

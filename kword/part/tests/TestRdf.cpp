@@ -46,7 +46,7 @@
 #include "KWAboutData.h"
 #include <KoApplication.h>
 #include <KXmlWriter.h>
-#include <KoShapeRegistry.h>
+#include <KShapeRegistry.h>
 #include <KXmlReader.h>
 #include <KOdfStoreReader.h>
 #include <KOdfWriteStore.h>

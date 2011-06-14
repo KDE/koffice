@@ -42,7 +42,7 @@
 #include <KResourceManager.h>
 #include <KShapeLoadingContext.h>
 #include <KShapeLayer.h>
-#include <KoShapeRegistry.h>
+#include <KShapeRegistry.h>
 #include <KOdfStorageDevice.h>
 #include <KOdfWriteStore.h>
 #include <KOdfEmbeddedDocumentSaver.h>
@@ -230,7 +230,7 @@ bool KarbonDocument::loadOasis(const KXmlElement &element, KShapeLoadingContext 
     forEachElement(child, element) {
         kDebug(38000) << "loading shape" << child.localName();
 
-        KShape * shape = KoShapeRegistry::instance()->createShapeFromOdf(child, context);
+        KShape * shape = KShapeRegistry::instance()->createShapeFromOdf(child, context);
         if (shape)
             d->objects.append(shape);
     }
@@ -266,7 +266,7 @@ bool KarbonDocument::loadOasis(const KXmlElement &element, KShapeLoadingContext 
         KXmlElement child;
         forEachElement(child, (*master)) {
             kDebug(38000) <<"loading master page shape" << child.localName();
-            KShape * shape = KoShapeRegistry::instance()->createShapeFromOdf( child, context );
+            KShape * shape = KShapeRegistry::instance()->createShapeFromOdf( child, context );
             if( shape )
                 masterPageShapes.append( shape );
         }

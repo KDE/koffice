@@ -29,7 +29,7 @@
 #include <KOdfStore.h>
 #include <KOdfStoreReader.h>
 #include <KOdfXmlNS.h>
-#include <KoShapeRegistry.h>
+#include <KShapeRegistry.h>
 
 #include <kdebug.h>
 
@@ -95,7 +95,7 @@ KShape *CollectionShapeFactory::createDefaultShape(KResourceManager *documentRes
 
         forEachElement(element, body)
         {
-            KShape * shape = KoShapeRegistry::instance()->createShapeFromOdf( element, context );
+            KShape * shape = KShapeRegistry::instance()->createShapeFromOdf( element, context );
             if ( shape ) {
                 delete data;
                 return shape;

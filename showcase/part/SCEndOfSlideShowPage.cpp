@@ -22,7 +22,7 @@
 #include <klocale.h>
 #include <KShapeLayer.h>
 #include <KShapeFactoryBase.h>
-#include <KoShapeRegistry.h>
+#include <KShapeRegistry.h>
 #include <KColorBackground.h>
 #include <KoTextShapeData.h>
 #include <QTextCursor>
@@ -56,7 +56,7 @@ SCEndOfSlideShowPage::SCEndOfSlideShowPage(const QRectF &screenRect, SCDocument 
     KShapeLayer* layer = new KShapeLayer;
     addShape(layer);
 
-    KShapeFactoryBase *factory = KoShapeRegistry::instance()->value("TextShapeID");
+    KShapeFactoryBase *factory = KShapeRegistry::instance()->value("TextShapeID");
     Q_ASSERT(factory);
     if (factory) {
         KShape * textShape = factory->createDefaultShape();
