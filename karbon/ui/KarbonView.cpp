@@ -88,7 +88,7 @@
 #include <KPathPointData.h>
 #include <KPathCombineCommand.h>
 #include <KoPathSeparateCommand.h>
-#include <KoPathReverseCommand.h>
+#include <KPathReverseCommand.h>
 #include <KPathPointMoveCommand.h>
 #include <KoToolBoxFactory.h>
 #include <KParameterShape.h>
@@ -650,7 +650,7 @@ void KarbonView::reversePath()
 {
     QList<KoPathShape*> paths = selectedPathShapes();
     if (paths.size())
-        d->canvas->addCommand(new KoPathReverseCommand(paths));
+        d->canvas->addCommand(new KPathReverseCommand(paths));
 }
 
 void KarbonView::intersectPaths()

@@ -138,7 +138,7 @@ set(flake_SRCS
     commands/KoShapeTransformCommand.cpp
     commands/KPathFillRuleCommand.cpp
     commands/KoShapeShadowCommand.cpp
-    commands/KoPathReverseCommand.cpp
+    commands/KPathReverseCommand.cpp
     commands/KEventActionAddCommand.cpp
     commands/KEventActionRemoveCommand.cpp
     commands/KoShapeRenameCommand.cpp
@@ -210,7 +210,7 @@ install(
     commands/KPathPointMergeCommand.h
     commands/KPathPointMoveCommand.h
     commands/KPathPointRemoveCommand.h
-    commands/KoPathReverseCommand.h
+    commands/KPathReverseCommand.h
     commands/KoPathSegmentTypeCommand.h
     commands/KoPathSeparateCommand.h
     commands/KoShapeAlignCommand.h

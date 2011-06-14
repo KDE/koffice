@@ -17,11 +17,11 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoPathReverseCommand.h"
+#include "KPathReverseCommand.h"
 #include "KoPathShape.h"
 #include <klocale.h>
 
-class KoPathReverseCommand::Private
+class KPathReverseCommand::Private
 {
 public:
     Private(const QList<KoPathShape*> &p)
@@ -44,26 +44,26 @@ public:
     QList<KoPathShape*> paths;
 };
 
-KoPathReverseCommand::KoPathReverseCommand(const QList<KoPathShape*> &paths, QUndoCommand *parent)
+KPathReverseCommand::KPathReverseCommand(const QList<KoPathShape*> &paths, QUndoCommand *parent)
         : QUndoCommand(parent),
         d(new Private(paths))
 {
     setText(i18n("Reverse Paths"));
 }
 
-KoPathReverseCommand::~KoPathReverseCommand()
+KPathReverseCommand::~KPathReverseCommand()
 {
     delete d;
 }
 
-void KoPathReverseCommand::redo()
+void KPathReverseCommand::redo()
 {
     QUndoCommand::redo();
 
     d->reverse();
 }
 
-void KoPathReverseCommand::undo()
+void KPathReverseCommand::undo()
 {
     QUndoCommand::undo();
 
