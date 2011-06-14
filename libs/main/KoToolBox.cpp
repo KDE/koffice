@@ -24,7 +24,7 @@
 #include <KoCanvasController.h>
 #include <KoToolManager.h>
 #include <KoShapeLayer.h>
-#include <KoInteractionTool.h>
+#include <KInteractionTool.h>
 
 #include <KDebug>
 #include <QLayout>

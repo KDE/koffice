@@ -22,7 +22,7 @@
 #include "SelectionDecorator.h"
 #include "SelectionTransformCommand.h"
 
-#include <KoInteractionTool.h>
+#include <KInteractionTool.h>
 #include <KoCanvasBase.h>
 #include <KoSelection.h>
 #include <KoPointerEvent.h>

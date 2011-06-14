@@ -22,7 +22,7 @@
 #ifndef KOCREATESHAPESTOOL_H
 #define KOCREATESHAPESTOOL_H
 
-#include "KoInteractionTool.h"
+#include "KInteractionTool.h"
 
 #include "flake_export.h"
 
@@ -37,7 +37,7 @@ class KoCreateShapesToolPrivate;
 /**
  * A tool to create shapes with.
  */
-class FLAKE_EXPORT KoCreateShapesTool : public KoInteractionTool
+class FLAKE_EXPORT KoCreateShapesTool : public KInteractionTool
 {
 public:
     /**

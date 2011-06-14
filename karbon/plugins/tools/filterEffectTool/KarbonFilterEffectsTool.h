@@ -20,12 +20,12 @@
 #ifndef KARBONFILTEREFFECTSTOOL_H
 #define KARBONFILTEREFFECTSTOOL_H
 
-#include "KoInteractionTool.h"
+#include "KInteractionTool.h"
 
 class KoResource;
 class KInteractionStrategy;
 
-class KarbonFilterEffectsTool : public KoInteractionTool
+class KarbonFilterEffectsTool : public KInteractionTool
 {
     Q_OBJECT
 public:

@@ -23,7 +23,7 @@
 
 #include <KoToolFactoryBase.h>
 
-/// Factory for the KoInteractionTool
+/// Factory for the KInteractionTool
 class DefaultToolFactory : public KoToolFactoryBase {
 public:
     /// constructor

@@ -31,7 +31,7 @@ class KoToolBase;
 class KoShape;
 
 /**
- * A strategy for the KoInteractionTool.
+ * A strategy for the KInteractionTool.
  * This strategy is invoked when the user starts a resize of a selection of objects,
  * the stategy will then resize the objects interactively and provide a command afterwards.
  */

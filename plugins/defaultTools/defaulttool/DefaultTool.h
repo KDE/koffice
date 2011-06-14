@@ -22,7 +22,7 @@
 #ifndef DEFAULTTOOL_H
 #define DEFAULTTOOL_H
 
-#include <KoInteractionTool.h>
+#include <KInteractionTool.h>
 #include <KoFlake.h>
 #include <commands/KoShapeAlignCommand.h>
 #include <commands/KoShapeReorderCommand.h>
@@ -43,7 +43,7 @@ class KoShapeConnection;
  * <p>Note that the implementation of those different strategies are delegated
  * to the InteractionStrategy class and its subclasses.
  */
-class DefaultTool : public KoInteractionTool
+class DefaultTool : public KInteractionTool
 {
     Q_OBJECT
 public:

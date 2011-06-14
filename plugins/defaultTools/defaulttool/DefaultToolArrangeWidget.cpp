@@ -20,10 +20,10 @@
 
 #include "DefaultToolArrangeWidget.h"
 
-#include <KoInteractionTool.h>
+#include <KInteractionTool.h>
 #include <KAction>
 
-DefaultToolArrangeWidget::DefaultToolArrangeWidget( KoInteractionTool* tool,
+DefaultToolArrangeWidget::DefaultToolArrangeWidget( KInteractionTool* tool,
                                     QWidget* parent ) : QWidget( parent )
 {
     m_tool = tool;

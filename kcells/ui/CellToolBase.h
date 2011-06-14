@@ -29,7 +29,7 @@
 #ifndef KSPREAD_CELL_TOOL_BASE
 #define KSPREAD_CELL_TOOL_BASE
 
-#include <KoInteractionTool.h>
+#include <KInteractionTool.h>
 
 #include <KCCell.h>
 #include <kcells_export.h>
@@ -43,7 +43,7 @@ class CellEditorBase;
 /**
  * Abstract tool providing actions acting on cell ranges.
  */
-class KCELLS_EXPORT CellToolBase : public KoInteractionTool
+class KCELLS_EXPORT CellToolBase : public KInteractionTool
 {
     Q_OBJECT
 

@@ -162,7 +162,7 @@ set(flake_SRCS
     tools/KoZoomStrategy.cpp
     tools/KoPanTool.cpp
     tools/KoPanToolFactory.cpp
-    tools/KoInteractionTool.cpp
+    tools/KInteractionTool.cpp
     tools/KInteractionStrategy.cpp
     tools/KoCreateShapesTool.cpp
     tools/KoCreateShapesToolFactory.cpp
@@ -321,7 +321,7 @@ install(
     KoViewConverter.h
     tools/KoCreateShapesTool.h
     tools/KInteractionStrategy.h
-    tools/KoInteractionTool.h
+    tools/KInteractionTool.h
     tools/KoShapeRubberSelectStrategy.h
     DESTINATION
     ${INCLUDE_INSTALL_DIR} COMPONENT Devel

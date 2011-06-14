@@ -35,11 +35,11 @@ class QPointF;
 class QPainter;
 
 /**
- * Abstract interface to define what actions a KoInteractionTool can do based on
+ * Abstract interface to define what actions a KInteractionTool can do based on
  * the Strategy design pattern.
  * e.g, move, select, transform.
 
- * KInteractionStrategy is a Strategy baseclass for the KoInteractionTool and it
+ * KInteractionStrategy is a Strategy baseclass for the KInteractionTool and it
  * defines the behavior in case the user clicks or drags the input device.
  * The strategy is created in the createPolicy() function which defines the
  * resulting behavior and initiates a move or a resize, for example.

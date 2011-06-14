@@ -25,12 +25,12 @@
 
 #include <QMenu>
 
-class KoInteractionTool;
+class KInteractionTool;
 
 class DefaultToolTransformWidget : public QMenu, Ui::DefaultToolTransformWidget {
     Q_OBJECT
 public:
-    explicit DefaultToolTransformWidget(KoInteractionTool* tool, QWidget *parent = 0);
+    explicit DefaultToolTransformWidget(KInteractionTool* tool, QWidget *parent = 0);
 
     /// Sets the unit used by the unit aware child widgets
     void setUnit(const KUnit &unit);
@@ -45,7 +45,7 @@ private slots:
     void resetTransformations();
 
 private:
-    KoInteractionTool* m_tool;
+    KInteractionTool* m_tool;
 };
 
 #endif

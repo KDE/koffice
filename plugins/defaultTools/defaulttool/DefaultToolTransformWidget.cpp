@@ -22,7 +22,7 @@
 
 #include "DefaultToolTransformWidget.h"
 
-#include <KoInteractionTool.h>
+#include <KInteractionTool.h>
 #include <KoCanvasBase.h>
 #include <KoResourceManager.h>
 #include <KoShapeManager.h>
@@ -40,7 +40,7 @@
 #include <QList>
 #include <QTransform>
 
-DefaultToolTransformWidget::DefaultToolTransformWidget( KoInteractionTool* tool,
+DefaultToolTransformWidget::DefaultToolTransformWidget( KInteractionTool* tool,
                                     QWidget* parent )
     : QMenu(parent)
 {

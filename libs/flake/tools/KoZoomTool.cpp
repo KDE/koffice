@@ -30,7 +30,7 @@
 #include <kdebug.h>
 
 KoZoomTool::KoZoomTool(KoCanvasBase *canvas)
-        : KoInteractionTool(canvas),
+        : KInteractionTool(canvas),
         m_temporary(false), m_zoomInMode(true)
 {
     QPixmap inPixmap, outPixmap;
@@ -48,7 +48,7 @@ void KoZoomTool::wheelEvent(KoPointerEvent *event)
 
 void KoZoomTool::mouseReleaseEvent(KoPointerEvent *event)
 {
-    KoInteractionTool::mouseReleaseEvent(event);
+    KInteractionTool::mouseReleaseEvent(event);
     if (m_temporary) {
         emit KoToolBase::done();
     }
@@ -76,7 +76,7 @@ void KoZoomTool::keyReleaseEvent(QKeyEvent *event)
 
     updateCursor(event->modifiers() & Qt::ControlModifier);
 
-    KoInteractionTool::keyReleaseEvent(event);
+    KInteractionTool::keyReleaseEvent(event);
 }
 
 void KoZoomTool::activate(ToolActivation toolActivation, const QSet<KoShape*> &)

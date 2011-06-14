@@ -146,7 +146,7 @@
 #endif
 
 CellToolBase::CellToolBase(KoCanvasBase* canvas)
-        : KoInteractionTool(canvas)
+        : KInteractionTool(canvas)
         , d(new Private(this))
 {
     d->cellEditor = 0;
@@ -884,24 +884,24 @@ void CellToolBase::paintSelection(QPainter &painter, const QRectF &paintRect)
 
 void CellToolBase::mousePressEvent(KoPointerEvent* event)
 {
-    KoInteractionTool::mousePressEvent(event);
+    KInteractionTool::mousePressEvent(event);
 }
 
 void CellToolBase::mouseMoveEvent(KoPointerEvent* event)
 {
     // Special handling for drag'n'drop.
     if (DragAndDropStrategy *const strategy = dynamic_cast<DragAndDropStrategy*>(currentStrategy())) {
-        // FIXME Stefan: QDrag*Event and QDropEvent are not handled by KoInteractionTool YET:
+        // FIXME Stefan: QDrag*Event and QDropEvent are not handled by KInteractionTool YET:
         // Cancel the strategy after the drag has started.
         if (strategy->dragStarted()) {
             cancelCurrentStrategy();
         }
-        KoInteractionTool::mouseMoveEvent(event);
+        KInteractionTool::mouseMoveEvent(event);
         return;
     }
     // Indicators are not necessary if there's a strategy.
     if (currentStrategy()) {
-        return KoInteractionTool::mouseMoveEvent(event);
+        return KInteractionTool::mouseMoveEvent(event);
     }
 
     KCSheet *const sheet = selection()->activeSheet();
@@ -917,7 +917,7 @@ void CellToolBase::mouseMoveEvent(KoPointerEvent* event)
         } else {
             setCursor(Qt::SizeFDiagCursor);
         }
-        return KoInteractionTool::mouseMoveEvent(event);
+        return KInteractionTool::mouseMoveEvent(event);
     }
 
     // Hand cursor, if the selected area was hit.
@@ -927,7 +927,7 @@ void CellToolBase::mouseMoveEvent(KoPointerEvent* event)
             const QRect range = (*it)->rect();
             if (sheet->cellCoordinatesToDocument(range).contains(position)) {
                 setCursor(Qt::PointingHandCursor);
-                return KoInteractionTool::mouseMoveEvent(event);
+                return KInteractionTool::mouseMoveEvent(event);
             }
         }
     }
@@ -953,18 +953,18 @@ void CellToolBase::mouseMoveEvent(KoPointerEvent* event)
         }
         if (!url.isEmpty()) {
             setCursor(Qt::PointingHandCursor);
-            return KoInteractionTool::mouseMoveEvent(event);
+            return KInteractionTool::mouseMoveEvent(event);
         }
     }
 
     // Reset to normal cursor.
     setCursor(Qt::ArrowCursor);
-    KoInteractionTool::mouseMoveEvent(event);
+    KInteractionTool::mouseMoveEvent(event);
 }
 
 void CellToolBase::mouseReleaseEvent(KoPointerEvent* event)
 {
-    KoInteractionTool::mouseReleaseEvent(event);
+    KInteractionTool::mouseReleaseEvent(event);
     scrollToCell(selection()->cursor());
 }
 

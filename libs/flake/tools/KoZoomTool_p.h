@@ -34,7 +34,7 @@
 //
 
 
-#include "KoInteractionTool.h"
+#include "KInteractionTool.h"
 
 #include <QCursor>
 
@@ -42,7 +42,7 @@ class KoCanvasBase;
 class KoCanvasController;
 
 /// \internal
-class KoZoomTool : public KoInteractionTool
+class KoZoomTool : public KInteractionTool
 {
 public:
     /**

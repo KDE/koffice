@@ -20,7 +20,7 @@
  */
 
 #include "KoCreateShapesTool.h"
-#include "KoInteractionTool_p.h"
+#include "KInteractionTool_p.h"
 #include "KoPointerEvent.h"
 #include "KInteractionStrategy.h"
 #include "KoCreateShapeStrategy_p.h"
@@ -42,7 +42,7 @@ public:
 };
 
 KoCreateShapesTool::KoCreateShapesTool(KoCanvasBase *canvas)
-    : KoInteractionTool(*(new KoCreateShapesToolPrivate(this, canvas)))
+    : KInteractionTool(*(new KoCreateShapesToolPrivate(this, canvas)))
 {
 }
 
@@ -58,7 +58,7 @@ void KoCreateShapesTool::paint(QPainter &painter, const KoViewConverter &convert
 
 void KoCreateShapesTool::mouseReleaseEvent(KoPointerEvent *event)
 {
-    KoInteractionTool::mouseReleaseEvent(event);
+    KInteractionTool::mouseReleaseEvent(event);
     emit KoToolBase::done();
 }
 

@@ -26,12 +26,12 @@
 
 #include <QWidget>
 
-class KoInteractionTool;
+class KInteractionTool;
 
 class DefaultToolWidget : public QWidget, Ui::DefaultToolWidget {
     Q_OBJECT
 public:
-    explicit DefaultToolWidget(KoInteractionTool* tool, QWidget *parent = 0);
+    explicit DefaultToolWidget(KInteractionTool* tool, QWidget *parent = 0);
 
     /// Sets the unit used by the unit aware child widgets
     void setUnit(const KUnit &unit);
@@ -46,7 +46,7 @@ private slots:
     void aspectButtonToggled(bool keepAspect);
 
 private:
-    KoInteractionTool* m_tool;
+    KInteractionTool* m_tool;
     bool m_blockSignals;
 };
 

@@ -195,7 +195,7 @@ public:
 };
 
 KarbonFilterEffectsTool::KarbonFilterEffectsTool(KoCanvasBase *canvas)
-        : KoInteractionTool(canvas), d(new Private())
+        : KInteractionTool(canvas), d(new Private())
 {
     connect(canvas->shapeManager(), SIGNAL(selectionChanged()),
             this, SLOT(selectionChanged()));
@@ -265,7 +265,7 @@ void KarbonFilterEffectsTool::activate(ToolActivation toolActivation, const QSet
 void KarbonFilterEffectsTool::mouseMoveEvent(KoPointerEvent *event)
 {
     if (currentStrategy()) {
-        KoInteractionTool::mouseMoveEvent(event);
+        KInteractionTool::mouseMoveEvent(event);
     } else {
         EditMode mode = d->editModeFromMousePosition(event->point, this);
         switch(mode) {

@@ -41,7 +41,7 @@ namespace KoFlake
         TopLevelSelection   ///< Create a list, much like the StrippedSelection, but have the KoShapeGroup instead of all of its children if one is selected.
     };
 
-    /// Enum determining which handle is meant, used in KoInteractionTool
+    /// Enum determining which handle is meant, used in KInteractionTool
     enum SelectionHandle {
         TopMiddleHandle,    ///< The handle that is at the top - center of a selection
         TopRightHandle,     ///< The handle that is at the top - right of  a selection

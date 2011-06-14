@@ -55,7 +55,7 @@
 #include <KoShapeFactoryBase.h>
 #include <KoStyleManager.h>
 #include <KoResourceManager.h>
-#include <KoInteractionTool.h>
+#include <KInteractionTool.h>
 #include <KInlineTextObjectManager.h>
 #include <KoDocumentInfo.h>
 #include <KoCharacterStyle.h>

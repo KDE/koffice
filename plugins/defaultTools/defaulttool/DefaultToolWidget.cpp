@@ -23,7 +23,7 @@
 #include "DefaultToolWidget.h"
 #include "DefaultTool.h"
 
-#include <KoInteractionTool.h>
+#include <KInteractionTool.h>
 #include <KoCanvasBase.h>
 #include <KoResourceManager.h>
 #include <KoShapeManager.h>
@@ -44,7 +44,7 @@
 #include <QList>
 #include <QTransform>
 
-DefaultToolWidget::DefaultToolWidget( KoInteractionTool* tool,
+DefaultToolWidget::DefaultToolWidget( KInteractionTool* tool,
                                     QWidget* parent )
     : QWidget( parent ),
     m_tool(tool),

@@ -40,10 +40,10 @@ class KoInteractionToolPrivate;
  * strategy where all the real interaction code is placed.
  * A tool can then become as simple as this;
  * @code
-    class MyTool : public KoInteractionTool
+    class MyTool : public KInteractionTool
     {
     public:
-        MyTool::MyTool(KoCanvasBase *canvas) : KoInteractionTool(canvas) { }
+        MyTool::MyTool(KoCanvasBase *canvas) : KInteractionTool(canvas) { }
 
         KInteractionStrategy *MyTool::createStrategy(KoPointerEvent *event) {
             return new MyStrategy(this, m_canvas, event->point);
@@ -52,7 +52,7 @@ class KoInteractionToolPrivate;
  * @endcode
  * Whereas your strategy (MyStrategy in the example) will contain the interaction code.
  */
-class FLAKE_EXPORT KoInteractionTool : public KoToolBase
+class FLAKE_EXPORT KInteractionTool : public KoToolBase
 {
     Q_OBJECT
 public:
@@ -61,8 +61,8 @@ public:
      * and handled by interaction strategies of type KInteractionStrategy.
      * @param canvas the canvas this tool will be working for.
      */
-    explicit KoInteractionTool(KoCanvasBase *canvas);
-    virtual ~KoInteractionTool();
+    explicit KInteractionTool(KoCanvasBase *canvas);
+    virtual ~KInteractionTool();
 
 public:
     virtual void paint(QPainter &painter, const KoViewConverter &converter);
@@ -76,7 +76,7 @@ public:
 
 protected:
     /// \internal
-    KoInteractionTool(KoInteractionToolPrivate &dd);
+    KInteractionTool(KoInteractionToolPrivate &dd);
 
     KInteractionStrategy *currentStrategy(); ///< the strategy that is 'in progress'
     /// Cancels the current strategy and deletes it.
@@ -89,10 +89,10 @@ protected:
     virtual KInteractionStrategy *createStrategy(KoPointerEvent *event) = 0;
 
 private:
-    KoInteractionTool(const KoInteractionTool&);
-    KoInteractionTool& operator=(const KoInteractionTool&);
+    KInteractionTool(const KInteractionTool&);
+    KInteractionTool& operator=(const KInteractionTool&);
 
-    Q_DECLARE_PRIVATE(KoInteractionTool)
+    Q_DECLARE_PRIVATE(KInteractionTool)
 };
 
 #endif /* KOINTERACTIONTOOL_H */

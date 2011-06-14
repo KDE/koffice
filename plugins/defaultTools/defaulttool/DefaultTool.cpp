@@ -121,7 +121,7 @@ private:
 
 
 DefaultTool::DefaultTool(KoCanvasBase *canvas)
-    : KoInteractionTool(canvas),
+    : KInteractionTool(canvas),
     m_lastHandle(KoFlake::NoHandle),
     m_hotPosition(KoFlake::TopLeftCorner),
     m_mouseWasInsideHandles(false),
@@ -480,7 +480,7 @@ void DefaultTool::updateCursor()
 
 void DefaultTool::paint(QPainter &painter, const KoViewConverter &converter)
 {
-    KoInteractionTool::paint(painter, converter);
+    KInteractionTool::paint(painter, converter);
     if (currentStrategy() == 0 && koSelection()->count() > 0) {
         SelectionDecorator decorator(m_mouseWasInsideHandles ? m_lastHandle : KoFlake::NoHandle,
                  true, true);
@@ -510,13 +510,13 @@ void DefaultTool::paint(QPainter &painter, const KoViewConverter &converter)
 
 void DefaultTool::mousePressEvent(KoPointerEvent *event)
 {
-    KoInteractionTool::mousePressEvent(event);
+    KInteractionTool::mousePressEvent(event);
     updateCursor();
 }
 
 void DefaultTool::mouseMoveEvent(KoPointerEvent *event)
 {
-    KoInteractionTool::mouseMoveEvent(event);
+    KInteractionTool::mouseMoveEvent(event);
     if (currentStrategy() == 0 && koSelection()->count() > 0) {
         QRectF bound = handlesSize();
         if (bound.contains(event->point)) {
@@ -617,7 +617,7 @@ QRectF DefaultTool::handlesSize()
 
 void DefaultTool::mouseReleaseEvent(KoPointerEvent *event)
 {
-    KoInteractionTool::mouseReleaseEvent(event);
+    KInteractionTool::mouseReleaseEvent(event);
     updateCursor();
 }
 
@@ -716,7 +716,7 @@ bool DefaultTool::moveSelection(int direction, Qt::KeyboardModifiers modifiers)
 
 void DefaultTool::keyPressEvent(QKeyEvent *event)
 {
-    KoInteractionTool::keyPressEvent(event);
+    KInteractionTool::keyPressEvent(event);
     if (currentStrategy() == 0) {
         switch (event->key()) {
         case Qt::Key_Left:
