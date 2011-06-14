@@ -18,10 +18,10 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoSubpathJoinCommand_p.h"
+#include "KSubpathJoinCommand_p.h"
 #include <klocale.h>
 
-KoSubpathJoinCommand::KoSubpathJoinCommand(const KPathPointData &pointData1, const KPathPointData &pointData2, QUndoCommand *parent)
+KSubpathJoinCommand::KSubpathJoinCommand(const KPathPointData &pointData1, const KPathPointData &pointData2, QUndoCommand *parent)
         : QUndoCommand(parent)
         , m_pointData1(pointData1)
         , m_pointData2(pointData2)
@@ -62,11 +62,11 @@ KoSubpathJoinCommand::KoSubpathJoinCommand(const KPathPointData &pointData1, con
     m_oldProperties2 = point2->properties();
 }
 
-KoSubpathJoinCommand::~KoSubpathJoinCommand()
+KSubpathJoinCommand::~KSubpathJoinCommand()
 {
 }
 
-void KoSubpathJoinCommand::redo()
+void KSubpathJoinCommand::redo()
 {
     QUndoCommand::redo();
     KPathShape * pathShape = m_pointData1.pathShape;
@@ -107,7 +107,7 @@ void KoSubpathJoinCommand::redo()
     pathShape->update();
 }
 
-void KoSubpathJoinCommand::undo()
+void KSubpathJoinCommand::undo()
 {
     QUndoCommand::undo();
     KPathShape * pathShape = m_pointData1.pathShape;

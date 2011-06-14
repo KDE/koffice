@@ -37,7 +37,7 @@
 #include "commands/KPathBreakAtPointCommand_p.h"
 #include "commands/KPathSegmentBreakCommand_p.h"
 #include "commands/KParameterToPathCommand.h"
-#include "commands/KoSubpathJoinCommand_p.h"
+#include "commands/KSubpathJoinCommand_p.h"
 #include "commands/KPathPointMergeCommand.h"
 #include "KParameterShape.h"
 #include "KPathPoint.h"
@@ -335,7 +335,7 @@ void KPathTool::joinPoints()
                 !pathShape->isClosedSubpath(pd2.pointIndex.first) &&
                 (pd2.pointIndex.second == 0 ||
                  pd2.pointIndex.second == pathShape->subpathPointCount(pd2.pointIndex.first) - 1)) {
-            KoSubpathJoinCommand *cmd = new KoSubpathJoinCommand(pd1, pd2);
+            KSubpathJoinCommand *cmd = new KSubpathJoinCommand(pd1, pd2);
             d->canvas->addCommand(cmd);
         }
         updateActions();

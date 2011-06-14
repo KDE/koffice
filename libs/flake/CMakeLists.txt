@@ -132,7 +132,7 @@ set(flake_SRCS
     commands/KPathCombineCommand.cpp
     commands/KPathSeparateCommand.cpp
     commands/KoSubpathRemoveCommand.cpp
-    commands/KoSubpathJoinCommand.cpp
+    commands/KSubpathJoinCommand.cpp
     commands/KParameterHandleMoveCommand.cpp
     commands/KParameterToPathCommand.cpp
     commands/KShapeTransformCommand.cpp

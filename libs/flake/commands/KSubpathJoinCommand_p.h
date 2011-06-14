@@ -39,7 +39,7 @@
 #include "KPathPointData.h"
 
 /// The undo / redo command for joining two subpath end points
-class KoSubpathJoinCommand : public QUndoCommand
+class KSubpathJoinCommand : public QUndoCommand
 {
 public:
     /**
@@ -51,8 +51,8 @@ public:
      * @param pointData2 the data of the second point to join
      * @param parent the parent command used for macro commands
      */
-    KoSubpathJoinCommand(const KPathPointData &pointData1, const KPathPointData &pointData2, QUndoCommand *parent = 0);
-    ~KoSubpathJoinCommand();
+    KSubpathJoinCommand(const KPathPointData &pointData1, const KPathPointData &pointData2, QUndoCommand *parent = 0);
+    ~KSubpathJoinCommand();
 
     /// redo the command
     void redo();
