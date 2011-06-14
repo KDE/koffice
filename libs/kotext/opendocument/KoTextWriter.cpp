@@ -553,7 +553,7 @@ KoTextWriter::KoTextWriter(KShapeSavingContext &context, KDocumentRdfBase *rdfDa
     : d(new Private(context))
 {
     d->rdfData = rdfData;
-    KoSharedSavingData *sharedData = context.sharedData(KOTEXT_SHARED_SAVING_ID);
+    KSharedSavingData *sharedData = context.sharedData(KOTEXT_SHARED_SAVING_ID);
     if (sharedData) {
         d->sharedData = dynamic_cast<KoTextSharedSavingData *>(sharedData);
     }

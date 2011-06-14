@@ -1055,7 +1055,7 @@ QString TestLoading::documentToOdt(QTextDocument *document)
     KOdfGenericChanges changes;
     KShapeSavingContext context(xmlWriter, mainStyles, embeddedSaver);
 
-    KoSharedSavingData *sharedData = context.sharedData(KOTEXT_SHARED_SAVING_ID);
+    KSharedSavingData *sharedData = context.sharedData(KOTEXT_SHARED_SAVING_ID);
     KoTextSharedSavingData *textSharedData = 0;
     if (sharedData) {
         textSharedData = dynamic_cast<KoTextSharedSavingData *>(sharedData);

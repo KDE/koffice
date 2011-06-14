@@ -21,7 +21,7 @@ the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
 #ifndef KOTEXTSHAREDSAVINGDATA_H
 #define KOTEXTSHAREDSAVINGDATA_H
 
-#include <KoSharedSavingData.h>
+#include <KSharedSavingData.h>
 #include "kotext_export.h"
 
 #include <QMap>
@@ -35,7 +35,7 @@ namespace Soprano
 class Model;
 }
 
-class KOTEXT_EXPORT KoTextSharedSavingData : public KoSharedSavingData
+class KOTEXT_EXPORT KoTextSharedSavingData : public KSharedSavingData
 {
 public:
     KoTextSharedSavingData();

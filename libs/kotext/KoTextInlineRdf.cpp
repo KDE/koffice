@@ -159,7 +159,7 @@ bool KoTextInlineRdf::saveOdf(KShapeSavingContext &context, KXmlWriter *writer)
 {
     kDebug(30015) << " this:" << (void*)this << " xmlid:" << d->id;
     QString oldID = d->id;
-    KoSharedSavingData *sharedData = context.sharedData(KOTEXT_SHARED_SAVING_ID);
+    KSharedSavingData *sharedData = context.sharedData(KOTEXT_SHARED_SAVING_ID);
     KoTextSharedSavingData *textSharedData = 0;
     if (sharedData) {
         textSharedData = dynamic_cast<KoTextSharedSavingData *>(sharedData);

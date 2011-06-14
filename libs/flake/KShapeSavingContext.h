@@ -37,7 +37,7 @@ class KOdfEmbeddedDocumentSaver;
 class KImageData;
 class KShapeLayer;
 class KOdfStore;
-class KoSharedSavingData;
+class KSharedSavingData;
 class KShapeSavingContextPrivate;
 class KShapeConnection;
 
@@ -237,9 +237,9 @@ public:
      *
      * You get an assertion when the id is already existing.
      *
-     * @see KoSharedSavingData
+     * @see KSharedSavingData
      */
-    void addSharedData(const QString &id, KoSharedSavingData *data);
+    void addSharedData(const QString &id, KSharedSavingData *data);
 
     /**
      * Get the shared data.
@@ -249,7 +249,7 @@ public:
      * @param id The id used to identify the shared data.
      * @return The shared data for the id or 0 if there is no shared data for the id.
      */
-    KoSharedSavingData *sharedData(const QString &id) const;
+    KSharedSavingData *sharedData(const QString &id) const;
 
     /*
      * Add an offset that will be applied to the shape position when saved

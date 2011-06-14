@@ -17,12 +17,21 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KoSharedSavingData.h"
+#ifndef KOSHAREDSAVINGDATA_H
+#define KOSHAREDSAVINGDATA_H
 
-KoSharedSavingData::KoSharedSavingData()
-{
-}
+#include "flake_export.h"
 
-KoSharedSavingData::~KoSharedSavingData()
+/**
+ * The KSharedSavingData class is used to share data between shapes during saving.
+ * These data can be added to the KShapeSavingContext using KShapeSavingContext::addSharedData().
+ * A different shape can then get the data from the context using KShapeSavingContext::sharedData().
+ */
+class FLAKE_EXPORT KSharedSavingData
 {
-}
+public:
+    KSharedSavingData();
+    virtual ~KSharedSavingData();
+};
+
+#endif /* KOSHAREDSAVINGDATA_H */

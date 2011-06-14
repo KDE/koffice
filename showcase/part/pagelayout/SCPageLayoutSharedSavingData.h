@@ -20,7 +20,7 @@
 #ifndef KPRPAGELAYOUTSHAREDSAVINGDATA_H
 #define KPRPAGELAYOUTSHAREDSAVINGDATA_H
 
-#include <KoSharedSavingData.h>
+#include <KSharedSavingData.h>
 #include <QMap>
 #include <QString>
 
@@ -28,7 +28,7 @@ class SCPageLayout;
 
 #define KPR_PAGE_LAYOUT_SHARED_SAVING_ID "SCPageLayoutSharedSavingId"
 
-class SCPageLayoutSharedSavingData : public KoSharedSavingData
+class SCPageLayoutSharedSavingData : public KSharedSavingData
 {
 public:
     SCPageLayoutSharedSavingData();

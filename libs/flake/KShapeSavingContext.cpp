@@ -46,7 +46,7 @@ public:
     QSet<KDataCenterBase *> dataCenter;
     int drawId;
     int subId;
-    QMap<QString, KoSharedSavingData*> sharedData;
+    QMap<QString, KSharedSavingData*> sharedData;
     QMap<qint64, QString> imageNames;
     int imageId;
     QMap<QString, QImage> images;
@@ -263,9 +263,9 @@ bool KShapeSavingContext::saveDataCenter(KOdfStore *store, KXmlWriter* manifestW
     return ok;
 }
 
-void KShapeSavingContext::addSharedData(const QString &id, KoSharedSavingData * data)
+void KShapeSavingContext::addSharedData(const QString &id, KSharedSavingData * data)
 {
-    QMap<QString, KoSharedSavingData*>::iterator it(d->sharedData.find(id));
+    QMap<QString, KSharedSavingData*>::iterator it(d->sharedData.find(id));
     // data will not be overwritten
     if (it == d->sharedData.end()) {
         d->sharedData.insert(id, data);
@@ -275,10 +275,10 @@ void KShapeSavingContext::addSharedData(const QString &id, KoSharedSavingData * 
     }
 }
 
-KoSharedSavingData * KShapeSavingContext::sharedData(const QString &id) const
+KSharedSavingData * KShapeSavingContext::sharedData(const QString &id) const
 {
-    KoSharedSavingData * data = 0;
-    QMap<QString, KoSharedSavingData*>::const_iterator it(d->sharedData.constFind(id));
+    KSharedSavingData * data = 0;
+    QMap<QString, KSharedSavingData*>::const_iterator it(d->sharedData.constFind(id));
     if (it != d->sharedData.constEnd()) {
         data = it.value();
     }
