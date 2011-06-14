@@ -90,7 +90,7 @@ set(flake_SRCS
     KoSharedLoadingData.cpp
     KoViewConverter.cpp
     KoEventAction.cpp
-    KoEventActionFactoryBase.cpp
+    KEventActionFactoryBase.cpp
     KoEventActionRegistry.cpp
     KoImageData.cpp
     KoImageData_p.cpp
@@ -245,7 +245,7 @@ install(
     KoDockRegistry.h
     KoDrag.h
     KoDragOdfSaveHelper.h
-    KoEventActionFactoryBase.h
+    KEventActionFactoryBase.h
     KoEventAction.h
     KoEventActionRegistry.h
     KoFilterEffectConfigWidgetBase.h

@@ -36,7 +36,7 @@
 #include <KoShapeController.h>
 #include <KoShapeManager.h>
 #include <KoEventAction.h>
-#include <KoEventActionFactoryBase.h>
+#include <KEventActionFactoryBase.h>
 #include <KoEventActionRegistry.h>
 #include <SCEventActionWidget.h>
 #include "SCSoundData.h"
@@ -59,8 +59,8 @@ SCClickActionDocker::SCClickActionDocker(QWidget* parent, Qt::WindowFlags flags)
     m_cbPlaySound = new QComboBox();
     //layout->addWidget(m_cbPlaySound);
 
-    QList<KoEventActionFactoryBase *> factories = KoEventActionRegistry::instance()->presentationEventActions();
-    foreach (KoEventActionFactoryBase * factory, factories) {
+    QList<KEventActionFactoryBase *> factories = KoEventActionRegistry::instance()->presentationEventActions();
+    foreach (KEventActionFactoryBase * factory, factories) {
         QWidget * optionWidget = factory->createOptionWidget();
         layout->addWidget(optionWidget);
         m_eventActionWidgets.insert(factory->id(), optionWidget);

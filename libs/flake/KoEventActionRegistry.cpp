@@ -26,7 +26,7 @@
 
 #include <KXmlReader.h>
 #include <KOdfXmlNS.h>
-#include "KoEventActionFactoryBase.h"
+#include "KEventActionFactoryBase.h"
 #include "KoEventAction.h"
 
 class KoEventActionRegistry::Singleton
@@ -44,9 +44,9 @@ K_GLOBAL_STATIC(KoEventActionRegistry::Singleton, singleton)
 class KoEventActionRegistry::Private
 {
 public:
-    QHash<QString, KoEventActionFactoryBase*> presentationEventActionFactories;
-    QHash<QString, KoEventActionFactoryBase*> presentationEventActions;
-    QHash<QString, KoEventActionFactoryBase*> scriptEventActionFactories;
+    QHash<QString, KEventActionFactoryBase*> presentationEventActionFactories;
+    QHash<QString, KEventActionFactoryBase*> presentationEventActions;
+    QHash<QString, KEventActionFactoryBase*> scriptEventActionFactories;
 };
 
 KoEventActionRegistry * KoEventActionRegistry::instance()
@@ -69,7 +69,7 @@ KoEventActionRegistry::~KoEventActionRegistry()
     delete d;
 }
 
-void KoEventActionRegistry::addPresentationEventAction(KoEventActionFactoryBase * factory)
+void KoEventActionRegistry::addPresentationEventAction(KEventActionFactoryBase * factory)
 {
     const QString & action = factory->action();
     if (! action.isEmpty()) {
@@ -78,17 +78,17 @@ void KoEventActionRegistry::addPresentationEventAction(KoEventActionFactoryBase 
     }
 }
 
-void KoEventActionRegistry::addScriptEventAction(KoEventActionFactoryBase * factory)
+void KoEventActionRegistry::addScriptEventAction(KEventActionFactoryBase * factory)
 {
     d->scriptEventActionFactories.insert(factory->id(), factory);
 }
 
-QList<KoEventActionFactoryBase *> KoEventActionRegistry::presentationEventActions()
+QList<KEventActionFactoryBase *> KoEventActionRegistry::presentationEventActions()
 {
     return d->presentationEventActionFactories.values();
 }
 
-QList<KoEventActionFactoryBase *> KoEventActionRegistry::scriptEventActions()
+QList<KEventActionFactoryBase *> KoEventActionRegistry::scriptEventActions()
 {
     return d->scriptEventActionFactories.values();
 }
@@ -120,7 +120,7 @@ QSet<KoEventAction*> KoEventActionRegistry::createEventActionsFromOdf(const KXml
             if (element.tagName() == "event-listener") {
                 if (element.namespaceURI() == KOdfXmlNS::presentation) {
                     QString action(element.attributeNS(KOdfXmlNS::presentation, "action", QString()));
-                    QHash<QString, KoEventActionFactoryBase *>::const_iterator it(d->presentationEventActions.find(action));
+                    QHash<QString, KEventActionFactoryBase *>::const_iterator it(d->presentationEventActions.find(action));
 
                     if (it != d->presentationEventActions.constEnd()) {
                         KoEventAction * eventAction = it.value()->createEventAction();

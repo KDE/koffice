@@ -23,7 +23,7 @@
 #include "SCSoundEventActionWidget.h"
 
 SCSoundEventActionFactory::SCSoundEventActionFactory()
-: KoEventActionFactoryBase(SCSoundEventActionId, "sound")
+: KEventActionFactoryBase(SCSoundEventActionId, "sound")
 {
 }
 
