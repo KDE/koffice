@@ -18,12 +18,12 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoPanToolFactory_p.h"
+#include "KPanToolFactory_p.h"
 #include "KPanTool_p.h"
 
 #include <klocale.h>
 
-KoPanToolFactory::KoPanToolFactory(QObject *parent)
+KPanToolFactory::KPanToolFactory(QObject *parent)
         : KoToolFactoryBase(parent, KoPanTool_ID)
 {
     setToolTip(i18n("Pan"));
@@ -33,7 +33,7 @@ KoPanToolFactory::KoPanToolFactory(QObject *parent)
     setActivationShapeId("flake/always");
 }
 
-KoToolBase* KoPanToolFactory::createTool(KoCanvasBase *canvas)
+KoToolBase* KPanToolFactory::createTool(KoCanvasBase *canvas)
 {
     return new KPanTool(canvas);
 }

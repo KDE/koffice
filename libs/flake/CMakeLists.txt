@@ -161,7 +161,7 @@ set(flake_SRCS
     tools/KoZoomToolWidget.cpp
     tools/KoZoomStrategy.cpp
     tools/KPanTool.cpp
-    tools/KoPanToolFactory.cpp
+    tools/KPanToolFactory.cpp
     tools/KInteractionTool.cpp
     tools/KInteractionStrategy.cpp
     tools/KoCreateShapesTool.cpp

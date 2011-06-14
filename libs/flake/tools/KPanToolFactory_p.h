@@ -36,11 +36,11 @@
 #include "KoToolFactoryBase.h"
 
 /// Factory for the KPanTool
-class KoPanToolFactory : public KoToolFactoryBase
+class KPanToolFactory : public KoToolFactoryBase
 {
 public:
     /// constructor
-    KoPanToolFactory(QObject *parent);
+    KPanToolFactory(QObject *parent);
 
     KoToolBase *createTool(KoCanvasBase *canvas);
 };

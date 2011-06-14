@@ -28,7 +28,7 @@
 #include "tools/KoZoomTool_p.h"
 #include "tools/KoZoomToolFactory_p.h"
 #include "tools/KPanTool_p.h"
-#include "tools/KoPanToolFactory_p.h"
+#include "tools/KPanToolFactory_p.h"
 
 #include <KoPluginLoader.h>
 
@@ -56,7 +56,7 @@ void KoToolRegistry::init()
     add(new KoCreateShapesToolFactory(this));
     add(new KoPathToolFactory(this));
     add(new KoZoomToolFactory(this));
-    add(new KoPanToolFactory(this));
+    add(new KPanToolFactory(this));
 }
 
 KoToolRegistry::~KoToolRegistry()
