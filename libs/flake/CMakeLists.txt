@@ -71,7 +71,7 @@ set(flake_SRCS
     KoShapeBorderFactoryBase.cpp
     KoShapeBorderRegistry.cpp
     KLineBorder.cpp
-    KoLineBorderFactory.cpp
+    KLineBorderFactory.cpp
     KoShapeBackground.cpp
     KoColorBackground.cpp
     KGradientBackground.cpp

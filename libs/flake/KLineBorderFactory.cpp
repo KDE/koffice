@@ -16,30 +16,18 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#ifndef KOLINEBORDERFACTORY_H
-#define KOLINEBORDERFACTORY_H
+#include "KLineBorderFactory_p.h"
+#include "KLineBorder.h"
 
-//
-//  W A R N I N G
-//  -------------
-//
-// This file is not part of the Flake API.  It exists purely as an
-// implementation detail.  This header file may change from version to
-// version without notice, or even be removed.
-//
-// We mean it.
-//
+#include <KLocale>
 
-
-#include "KoShapeBorderFactoryBase.h"
-
-class KoLineBorderFactory : public KoShapeBorderFactoryBase
+KLineBorderFactory::KLineBorderFactory(QObject *parent)
+        : KoShapeBorderFactoryBase(parent, "LineBorder")
 {
-public:
-    KoLineBorderFactory(QObject *parent);
+}
 
-    /// reimplemented
-    virtual KoShapeBorderBase *createBorder(KoShape *targetShape) const;
-};
+KoShapeBorderBase *KLineBorderFactory::createBorder(KoShape *) const
+{
+    return new KLineBorder();
+}
 
-#endif
