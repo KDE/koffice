@@ -34,11 +34,11 @@
 #include <QList>
 #include <QMap>
 
-class KOTEXT_TEST_EXPORT KoStyleManagerPrivate
+class KOTEXT_TEST_EXPORT KStyleManagerPrivate
 {
 public:
-    KoStyleManagerPrivate();
-    ~KoStyleManagerPrivate();
+    KStyleManagerPrivate();
+    ~KStyleManagerPrivate();
     void refreshUnsetStoreFor(int key);
     void requestFireUpdate(KStyleManager *q);
     void updateAlteredStyles(); // slot for the QTimer::singleshot

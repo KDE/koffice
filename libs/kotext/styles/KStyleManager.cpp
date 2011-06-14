@@ -44,9 +44,9 @@
 #include <klocale.h>
 
 // static
-int KoStyleManagerPrivate::s_stylesNumber = 100;
+int KStyleManagerPrivate::s_stylesNumber = 100;
 
-KoStyleManagerPrivate::KoStyleManagerPrivate()
+KStyleManagerPrivate::KStyleManagerPrivate()
     : updateTriggered(false),
     defaultParagraphStyle(0),
     defaultListStyle(0),
@@ -54,12 +54,12 @@ KoStyleManagerPrivate::KoStyleManagerPrivate()
 {
 }
 
-KoStyleManagerPrivate::~KoStyleManagerPrivate()
+KStyleManagerPrivate::~KStyleManagerPrivate()
 {
     qDeleteAll(automaticListStyles);
 }
 
-void KoStyleManagerPrivate::refreshUnsetStoreFor(int key)
+void KStyleManagerPrivate::refreshUnsetStoreFor(int key)
 {
     QMap<int, QVariant> keys;
     KParagraphStyle *parag = paragStyles.value(key);
@@ -88,7 +88,7 @@ void KoStyleManagerPrivate::refreshUnsetStoreFor(int key)
     unsetStore.insert(key, keys);
 }
 
-void KoStyleManagerPrivate::requestUpdateForChildren(KParagraphStyle *style)
+void KStyleManagerPrivate::requestUpdateForChildren(KParagraphStyle *style)
 {
     const int charId = style->characterStyle()->styleId();
     if (!updateQueue.contains(charId))
@@ -100,7 +100,7 @@ void KoStyleManagerPrivate::requestUpdateForChildren(KParagraphStyle *style)
     }
 }
 
-void KoStyleManagerPrivate::requestFireUpdate(KStyleManager *q)
+void KStyleManagerPrivate::requestFireUpdate(KStyleManager *q)
 {
     if (updateTriggered)
         return;
@@ -108,7 +108,7 @@ void KoStyleManagerPrivate::requestFireUpdate(KStyleManager *q)
     updateTriggered = true;
 }
 
-void KoStyleManagerPrivate::updateAlteredStyles()
+void KStyleManagerPrivate::updateAlteredStyles()
 {
     foreach (ChangeFollower *cf, documentUpdaterProxies) {
         cf->processUpdates(updateQueue);
@@ -123,7 +123,7 @@ void KoStyleManagerPrivate::updateAlteredStyles()
 // ---------------------------------------------------
 
 KStyleManager::KStyleManager(QObject *parent)
-        : QObject(parent), d(new KoStyleManagerPrivate())
+        : QObject(parent), d(new KStyleManagerPrivate())
 {
     d->defaultParagraphStyle = new KParagraphStyle(this);
     d->defaultParagraphStyle->setName("[No Paragraph Style]");
@@ -762,7 +762,7 @@ QList<KSectionStyle*> KStyleManager::sectionStyles() const
     return d->sectionStyles.values();
 }
 
-KoStyleManagerPrivate *KStyleManager::priv()
+KStyleManagerPrivate *KStyleManager::priv()
 {
     return d;
 }

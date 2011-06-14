@@ -42,7 +42,7 @@ class KXmlWriter;
 class ChangeFollower;
 class KOdfGenericStyles;
 class KoTextShapeData;
-class KoStyleManagerPrivate;
+class KStyleManagerPrivate;
 
 /**
  * Manages all character, paragraph, table and table cell styles for any number
@@ -333,7 +333,7 @@ public:
     QList<KSectionStyle*> sectionStyles() const;
 
     /// \internal
-    KoStyleManagerPrivate *priv();
+    KStyleManagerPrivate *priv();
 
 signals:
     void styleAdded(KParagraphStyle*);
@@ -420,7 +420,7 @@ private:
     KListStyle *listStyle(int id, bool *automatic) const;
 
 private:
-    KoStyleManagerPrivate *d;
+    KStyleManagerPrivate *d;
 
     Q_PRIVATE_SLOT(d, void updateAlteredStyles())
 };
