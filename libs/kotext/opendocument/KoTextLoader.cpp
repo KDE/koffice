@@ -400,7 +400,7 @@ KoTextLoader::KoTextLoader(KShapeLoadingContext &context, KShape *shape)
         : QObject()
         , d(new Private(context, shape))
 {
-    KoSharedLoadingData *sharedData = context.sharedData(KOTEXT_SHARED_LOADING_ID);
+    KSharedLoadingData *sharedData = context.sharedData(KOTEXT_SHARED_LOADING_ID);
     if (sharedData) {
         d->textSharedData = dynamic_cast<KoTextSharedLoadingData *>(sharedData);
     }

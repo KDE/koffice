@@ -17,12 +17,12 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KoSharedLoadingData.h"
+#include "KSharedLoadingData.h"
 
-KoSharedLoadingData::KoSharedLoadingData()
+KSharedLoadingData::KSharedLoadingData()
 {
 }
 
-KoSharedLoadingData::~KoSharedLoadingData()
+KSharedLoadingData::~KSharedLoadingData()
 {
 }

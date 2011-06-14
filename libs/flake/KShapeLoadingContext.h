@@ -34,7 +34,7 @@ class KShape;
 class KShapeControllerBase;
 class KLoadingShapeUpdater;
 class KImageCollection;
-class KoSharedLoadingData;
+class KSharedLoadingData;
 class KResourceManager;
 
 /**
@@ -140,19 +140,19 @@ public:
      *
      * You get an assertion when the id is already existing.
      *
-     * @see KoSharedLoadingData
+     * @see KSharedLoadingData
      */
-    void addSharedData(const QString &id, KoSharedLoadingData *data);
+    void addSharedData(const QString &id, KSharedLoadingData *data);
 
     /**
      * Get the shared data.
      *
-     * @see KoSharedLoadingData
+     * @see KSharedLoadingData
      *
      * @param id The id used to identify the shared data.
      * @return The shared data for the id or 0 if there is no shared data for the id.
      */
-    KoSharedLoadingData *sharedData(const QString &id) const;
+    KSharedLoadingData *sharedData(const QString &id) const;
 
     /**
      * @brief Add an additional attribute that should be loaded during shape loading

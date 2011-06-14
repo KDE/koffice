@@ -22,7 +22,7 @@
 #ifndef KOTEXTSHAREDLOADINGDATA_H
 #define KOTEXTSHAREDLOADINGDATA_H
 
-#include <KoSharedLoadingData.h>
+#include <KSharedLoadingData.h>
 
 #include <QList>
 #include "styles/KListLevelProperties.h"
@@ -50,7 +50,7 @@ class KShapeLoadingContext;
  * When a text shape is loaded it checks if the KoTextSharedLoadingData is already there.
  * If not it is created.
  */
-class KOTEXT_EXPORT KoTextSharedLoadingData : public KoSharedLoadingData
+class KOTEXT_EXPORT KoTextSharedLoadingData : public KSharedLoadingData
 {
     friend class KoTextLoader;
 public:

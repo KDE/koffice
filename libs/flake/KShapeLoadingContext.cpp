@@ -21,7 +21,7 @@
 #include "KShapeLoadingContext.h"
 #include "KShape.h"
 #include "KShapeContainer.h"
-#include "KoSharedLoadingData.h"
+#include "KSharedLoadingData.h"
 #include "KShapeControllerBase.h"
 #include "KImageCollection.h"
 #include "KResourceManager.h"
@@ -46,7 +46,7 @@ public:
     {
     }
     ~Private() {
-        foreach(KoSharedLoadingData * data, sharedData) {
+        foreach(KSharedLoadingData * data, sharedData) {
             delete data;
         }
     }
@@ -54,7 +54,7 @@ public:
     QMap<QString, KShapeLayer*> layers;
     QMap<QString, KShape*> drawIds;
     QMap<QString, QPair<KShape *, QVariant> > subIds;
-    QMap<QString, KoSharedLoadingData*> sharedData;
+    QMap<QString, KSharedLoadingData*> sharedData;
     int zIndex;
     QMap<QString, KLoadingShapeUpdater*> updaterById;
     QMap<KShape *, KLoadingShapeUpdater*> updaterByShape;
@@ -148,9 +148,9 @@ void KShapeLoadingContext::setZIndex(int index)
     d->zIndex = index;
 }
 
-void KShapeLoadingContext::addSharedData(const QString & id, KoSharedLoadingData * data)
+void KShapeLoadingContext::addSharedData(const QString & id, KSharedLoadingData * data)
 {
-    QMap<QString, KoSharedLoadingData*>::iterator it(d->sharedData.find(id));
+    QMap<QString, KSharedLoadingData*>::iterator it(d->sharedData.find(id));
     // data will not be overwritten
     if (it == d->sharedData.end()) {
         d->sharedData.insert(id, data);
@@ -160,10 +160,10 @@ void KShapeLoadingContext::addSharedData(const QString & id, KoSharedLoadingData
     }
 }
 
-KoSharedLoadingData * KShapeLoadingContext::sharedData(const QString & id) const
+KSharedLoadingData * KShapeLoadingContext::sharedData(const QString & id) const
 {
-    KoSharedLoadingData * data = 0;
-    QMap<QString, KoSharedLoadingData*>::const_iterator it(d->sharedData.find(id));
+    KSharedLoadingData * data = 0;
+    QMap<QString, KSharedLoadingData*>::const_iterator it(d->sharedData.find(id));
     if (it != d->sharedData.constEnd()) {
         data = it.value();
     }

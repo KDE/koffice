@@ -87,7 +87,7 @@ set(flake_SRCS
     SnapGuideConfigWidget.cpp
     KShapeShadow.cpp
     KoSharedSavingData.cpp
-    KoSharedLoadingData.cpp
+    KSharedLoadingData.cpp
     KoViewConverter.cpp
     KEventAction.cpp
     KEventActionFactoryBase.cpp
@@ -290,7 +290,7 @@ install(
     KShapeRegistry.h
     KShapeSavingContext.h
     KShapeUserData.h
-    KoSharedLoadingData.h
+    KSharedLoadingData.h
     KoSharedSavingData.h
     KoSnapGuide.h
     KoToolBase.h

@@ -244,7 +244,7 @@ public:
     /**
      * Get the shared data.
      *
-     * @see KoSharedLoadingData
+     * @see KSharedLoadingData
      *
      * @param id The id used to identify the shared data.
      * @return The shared data for the id or 0 if there is no shared data for the id.
