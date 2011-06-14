@@ -39,18 +39,18 @@
 class KoPathShape;
 
 /// the base command for commands altering a path shape
-class KoPathBaseCommand : public QUndoCommand
+class KPathBaseCommand : public QUndoCommand
 {
 public:
     /**
      * @param parent the parent command used for macro commands
      */
-    explicit KoPathBaseCommand(QUndoCommand *parent = 0);
+    explicit KPathBaseCommand(QUndoCommand *parent = 0);
 
     /** initialize the base command with a single shape
      * @param parent the parent command used for macro commands
      */
-    explicit KoPathBaseCommand(KoPathShape *shape, QUndoCommand *parent = 0);
+    explicit KPathBaseCommand(KoPathShape *shape, QUndoCommand *parent = 0);
 
 protected:
     /**

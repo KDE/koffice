@@ -18,21 +18,21 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoPathBaseCommand_p.h"
+#include "KPathBaseCommand_p.h"
 #include "KoPathShape.h"
 
-KoPathBaseCommand::KoPathBaseCommand(QUndoCommand *parent)
+KPathBaseCommand::KPathBaseCommand(QUndoCommand *parent)
         : QUndoCommand(parent)
 {
 }
 
-KoPathBaseCommand::KoPathBaseCommand(KoPathShape *shape, QUndoCommand *parent)
+KPathBaseCommand::KPathBaseCommand(KoPathShape *shape, QUndoCommand *parent)
         : QUndoCommand(parent)
 {
     m_shapes.insert(shape);
 }
 
-void KoPathBaseCommand::repaint(bool normalizeShapes)
+void KPathBaseCommand::repaint(bool normalizeShapes)
 {
     foreach(KoPathShape *shape, m_shapes) {
         if (normalizeShapes)

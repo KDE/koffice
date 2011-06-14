@@ -120,7 +120,7 @@ set(flake_SRCS
     commands/KoShapeUngroupCommand.cpp
     commands/KoShapeReorderCommand.cpp
     commands/KoShapeKeepAspectRatioCommand.cpp
-    commands/KoPathBaseCommand.cpp
+    commands/KPathBaseCommand.cpp
     commands/KoPathPointMoveCommand.cpp
     commands/KoPathControlPointMoveCommand.cpp
     commands/KoPathPointTypeCommand.cpp

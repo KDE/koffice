@@ -26,7 +26,7 @@ KoPathPointTypeCommand::KoPathPointTypeCommand(
     const QList<KoPathPointData> & pointDataList,
     PointType pointType,
     QUndoCommand *parent)
-        : KoPathBaseCommand(parent)
+        : KPathBaseCommand(parent)
         , m_pointType(pointType)
 {
     QList<KoPathPointData>::const_iterator it(pointDataList.begin());
