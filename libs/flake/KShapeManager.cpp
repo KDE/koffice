@@ -45,7 +45,7 @@
 #include <QtCore/qmath.h>
 #include <kdebug.h>
 
-KoShapeManagerPrivate::KoShapeManagerPrivate(KShapeManager *shapeManager, KCanvasBase *c)
+KShapeManagerPrivate::KShapeManagerPrivate(KShapeManager *shapeManager, KCanvasBase *c)
     : selection(new KSelection(shapeManager)),
     canvas(c),
     tree(4, 2),
@@ -55,11 +55,11 @@ KoShapeManagerPrivate::KoShapeManagerPrivate(KShapeManager *shapeManager, KCanva
 {
 }
 
-KoShapeManagerPrivate::~KoShapeManagerPrivate() {
+KShapeManagerPrivate::~KShapeManagerPrivate() {
     delete strategy;
 }
 
-void KoShapeManagerPrivate::updateTree()
+void KShapeManagerPrivate::updateTree()
 {
     // for detecting collisions between shapes.
     DetectCollision detector;
@@ -95,7 +95,7 @@ void KoShapeManagerPrivate::updateTree()
     }
 }
 
-void KoShapeManagerPrivate::paintGroup(KShapeGroup *group, QPainter &painter, const KoViewConverter &converter, bool forPrint)
+void KShapeManagerPrivate::paintGroup(KShapeGroup *group, QPainter &painter, const KoViewConverter &converter, bool forPrint)
 {
     QList<KShape*> shapes = group->shapes();
     qSort(shapes.begin(), shapes.end(), KShape::compareShapeZIndex);
@@ -114,12 +114,12 @@ void KoShapeManagerPrivate::paintGroup(KShapeGroup *group, QPainter &painter, co
     }
 }
 
-void KoShapeManagerPrivate::addShapeConnection(KShapeConnection *connection)
+void KShapeManagerPrivate::addShapeConnection(KShapeConnection *connection)
 {
     connectionTree.insert(connection->boundingRect(), connection);
 }
 
-void KoShapeManagerPrivate::update(const QRectF &rect, const KShape *shape, bool selectionHandles)
+void KShapeManagerPrivate::update(const QRectF &rect, const KShape *shape, bool selectionHandles)
 {
     canvas->updateCanvas(rect);
     if (selectionHandles && selection->isSelected(shape)) {
@@ -138,7 +138,7 @@ void KoShapeManagerPrivate::update(const QRectF &rect, const KShape *shape, bool
 
 KShapeManager::KShapeManager(KCanvasBase *canvas, const QList<KShape *> &shapes, QObject *parent)
         : QObject(parent),
-        d(new KoShapeManagerPrivate(this, canvas))
+        d(new KShapeManagerPrivate(this, canvas))
 {
     Q_ASSERT(d->canvas); // not optional.
     connect(d->selection, SIGNAL(selectionChanged()), this, SIGNAL(selectionChanged()));
@@ -147,7 +147,7 @@ KShapeManager::KShapeManager(KCanvasBase *canvas, const QList<KShape *> &shapes,
 
 KShapeManager::KShapeManager(KCanvasBase *canvas, QObject *parent)
         : QObject(parent),
-        d(new KoShapeManagerPrivate(this, canvas))
+        d(new KShapeManagerPrivate(this, canvas))
 {
     Q_ASSERT(d->canvas); // not optional.
     connect(d->selection, SIGNAL(selectionChanged()), this, SIGNAL(selectionChanged()));
@@ -206,7 +206,7 @@ void KShapeManager::addShape(KShape *shape, Repaint repaint)
         }
     }
 
-    KoShapeManagerPrivate::DetectCollision detector;
+    KShapeManagerPrivate::DetectCollision detector;
     detector.detect(d->tree, shape, shape->zIndex());
     detector.fireSignals();
 }
@@ -224,7 +224,7 @@ void KShapeManager::addAdditional(KShape *shape)
 
 void KShapeManager::remove(KShape *shape)
 {
-    KoShapeManagerPrivate::DetectCollision detector;
+    KShapeManagerPrivate::DetectCollision detector;
     detector.detect(d->tree, shape, shape->zIndex());
     detector.fireSignals();
 
@@ -707,7 +707,7 @@ inline ko_NodeIndex::ko_NodeIndex(const ko_Node &node)
     y = node.y;
 }
 
-QPolygonF KoShapeManagerPrivate::routeConnection(KShapeConnection *connection, const QPointF &from, const QPointF &to)
+QPolygonF KShapeManagerPrivate::routeConnection(KShapeConnection *connection, const QPointF &from, const QPointF &to)
 {
     QHash<ko_NodeIndex, ko_Node> nodes;
 
@@ -814,7 +814,7 @@ QPolygonF KoShapeManagerPrivate::routeConnection(KShapeConnection *connection, c
     }
 }
 
-KoShapeManagerPrivate *KShapeManager::priv()
+KShapeManagerPrivate *KShapeManager::priv()
 {
     return d;
 }

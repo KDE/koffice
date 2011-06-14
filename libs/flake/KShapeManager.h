@@ -36,7 +36,7 @@ class KCanvasBase;
 class KPointerEvent;
 class KShapeManagerPaintingStrategy;
 class KShapeConnection;
-class KoShapeManagerPrivate;
+class KShapeManagerPrivate;
 
 class QPainter;
 class QPointF;
@@ -190,17 +190,17 @@ public:
      * \internal
      * Returns the private object for use within the flake lib
      */
-    KoShapeManagerPrivate *priv();
+    KShapeManagerPrivate *priv();
 
 signals:
-    friend class KoShapeManagerPrivate;
+    friend class KShapeManagerPrivate;
     /// emitted when the selection is changed
     void selectionChanged();
     /// emitted when an object in the selection is changed (moved/rotated etc)
     void selectionContentChanged();
 
 private:
-    KoShapeManagerPrivate * const d;
+    KShapeManagerPrivate * const d;
     Q_PRIVATE_SLOT(d, void updateTree())
 };
 

@@ -21,11 +21,11 @@
 #include "KShapeGroup.h"
 #include <KRTree.h>
 
-class KoShapeManagerPrivate
+class KShapeManagerPrivate
 {
 public:
-    KoShapeManagerPrivate(KShapeManager *shapeManager, KCanvasBase *c);
-    ~KoShapeManagerPrivate();
+    KShapeManagerPrivate(KShapeManager *shapeManager, KCanvasBase *c);
+    ~KShapeManagerPrivate();
 
     /**
      * Update the tree when there are shapes in m_aggregate4update. This is done so not all
