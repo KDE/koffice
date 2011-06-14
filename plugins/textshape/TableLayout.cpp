@@ -23,7 +23,7 @@
 #include "TableLayoutData.h"
 
 #include <KoTableStyle.h>
-#include <KoTableBorderStyle.h>
+#include <KTableBorderStyle.h>
 #include <KoTableCellStyle.h>
 #include <KoTableColumnStyle.h>
 #include <KoTableRowStyle.h>
@@ -340,7 +340,7 @@ void TableLayout::drawBackground(QPainter *painter, const KoTextDocumentLayout::
                 // This is an actual cell we want to draw, and not a covered one.
                 QTextTableCellFormat tfm(tableCell.format().toTableCellFormat());
                 QRectF bRect(cellBoundingRect(tableCell,tfm));
-                QVariant background(tfm.property(KoTableBorderStyle::CellBackgroundBrush));
+                QVariant background(tfm.property(KTableBorderStyle::CellBackgroundBrush));
                 if (!background.isNull()) {
                     painter->fillRect(bRect, qvariant_cast<QBrush>(background));
                 }
@@ -421,7 +421,7 @@ void TableLayout::drawBorders(QPainter *painter, QVector<QLineF> *accuBlankBorde
             if (row == tableCell.row() && column == tableCell.column()) {
                 // This is an actual cell we want to draw, and not a covered one.
                 QTextTableCellFormat tfm(tableCell.format().toTableCellFormat());
-                KoTableBorderStyle cellStyle(tfm);
+                KTableBorderStyle cellStyle(tfm);
 
                 QRectF bRect = cellBoundingRect(tableCell,tfm);
                 if (collapsing) {
@@ -441,7 +441,7 @@ void TableLayout::drawBorders(QPainter *painter, QVector<QLineF> *accuBlankBorde
                             QRectF belowBRect = cellBoundingRect(tableCellBelow, belowTfm);
                             qreal x = qMax(bRect.x(), belowBRect.x());
                             qreal x2 = qMin(bRect.right(), belowBRect.right());
-                            KoTableBorderStyle cellBelowStyle(belowTfm);
+                            KTableBorderStyle cellBelowStyle(belowTfm);
                             cellStyle.drawSharedHorizontalBorder(*painter, cellBelowStyle, x, bRect.bottom(), x2 - x, accuBlankBorders);
                             c = tableCellBelow.column() + belowTfm.tableCellColumnSpan();
                         }
@@ -463,7 +463,7 @@ void TableLayout::drawBorders(QPainter *painter, QVector<QLineF> *accuBlankBorde
                             QRectF rightBRect = cellBoundingRect(tableCellRight, rightTfm);
                             qreal y = qMax(bRect.y(), rightBRect.y());
                             qreal y2 = qMin(bRect.bottom(), rightBRect.bottom());
-                            KoTableBorderStyle cellBelowRight(rightTfm);
+                            KTableBorderStyle cellBelowRight(rightTfm);
                             cellStyle.drawSharedVerticalBorder(*painter, cellBelowRight, bRect.right(), y, y2-y, accuBlankBorders);
                             r = tableCellRight.row() + rightTfm.tableCellRowSpan();
                         }

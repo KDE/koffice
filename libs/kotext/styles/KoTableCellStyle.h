@@ -22,7 +22,7 @@
 #ifndef KOTABLECELLSTYLE_H
 #define KOTABLECELLSTYLE_H
 
-#include "KoTableBorderStyle.h"
+#include "KTableBorderStyle.h"
 #include "KoText.h"
 #include "kotext_export.h"
 
@@ -53,7 +53,7 @@ class KXmlElement;
  * a specific KoTableCellStyle.
  * @see KStyleManager
  */
-class KOTEXT_EXPORT KoTableCellStyle : public KoTableBorderStyle
+class KOTEXT_EXPORT KoTableCellStyle : public KTableBorderStyle
 {
     Q_OBJECT
 public:

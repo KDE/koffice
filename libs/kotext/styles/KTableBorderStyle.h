@@ -27,7 +27,7 @@
 
 class KoTableBorderStylePrivate;
 
-class KOTEXT_EXPORT KoTableBorderStyle : public QObject
+class KOTEXT_EXPORT KTableBorderStyle : public QObject
 {
     Q_OBJECT
 public:
@@ -90,11 +90,11 @@ public:
 
 
     /// Constructor
-    KoTableBorderStyle(QObject *parent = 0);
-    /// Creates a KoTableBorderStyle with the given table cell format, and \a parent
-    KoTableBorderStyle(const QTextTableCellFormat &tableCellFormat, QObject *parent = 0);
+    KTableBorderStyle(QObject *parent = 0);
+    /// Creates a KTableBorderStyle with the given table cell format, and \a parent
+    KTableBorderStyle(const QTextTableCellFormat &tableCellFormat, QObject *parent = 0);
     /// Destructor
-    ~KoTableBorderStyle();
+    ~KTableBorderStyle();
 
     /// returns if the borderstyle needs to be specially drawn
     bool isDrawn(BorderStyle style) const;
@@ -172,7 +172,7 @@ public:
      * @w the width.
      * @blanks a painterpath where blank borders should be added to.
      */
-    void drawSharedHorizontalBorder(QPainter &painter, const KoTableBorderStyle &styleBelow,  qreal x, qreal y, qreal w, QVector<QLineF> *blanks = 0) const;
+    void drawSharedHorizontalBorder(QPainter &painter, const KTableBorderStyle &styleBelow,  qreal x, qreal y, qreal w, QVector<QLineF> *blanks = 0) const;
 
     /**
      * Paint the bottom border.
@@ -206,7 +206,7 @@ public:
      * @h the height.
      * @blanks a painterpath where blank borders should be added to.
      */
-    void drawSharedVerticalBorder(QPainter &painter, const KoTableBorderStyle &styleRight,  qreal x, qreal y, qreal h, QVector<QLineF> *blanks = 0) const;
+    void drawSharedVerticalBorder(QPainter &painter, const KTableBorderStyle &styleRight,  qreal x, qreal y, qreal h, QVector<QLineF> *blanks = 0) const;
 
     /**
      * Paint the rightmost border.
@@ -225,14 +225,14 @@ public:
     qreal bottomBorderWidth() const;
 
 protected:
-    KoTableBorderStyle(KoTableBorderStylePrivate &dd, const QTextTableCellFormat &format, QObject *parent);
-    KoTableBorderStyle(KoTableBorderStylePrivate &dd, QObject *parent);
+    KTableBorderStyle(KoTableBorderStylePrivate &dd, const QTextTableCellFormat &format, QObject *parent);
+    KTableBorderStyle(KoTableBorderStylePrivate &dd, QObject *parent);
     KoTableBorderStylePrivate *d_ptr;
 
 private:
     void init(const QTextTableCellFormat &format);
 
-    Q_DECLARE_PRIVATE(KoTableBorderStyle)
+    Q_DECLARE_PRIVATE(KTableBorderStyle)
 };
 
 #endif // KOTABLEBORDERSTYLE_H

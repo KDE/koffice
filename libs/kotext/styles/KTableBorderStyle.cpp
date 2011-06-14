@@ -20,66 +20,66 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#include "KoTableBorderStyle.h"
+#include "KTableBorderStyle.h"
 
-#include "KoTableBorderStyle_p.h"
+#include "KTableBorderStyle_p.h"
 
 #include <QPainter>
 
 KoTableBorderStylePrivate::KoTableBorderStylePrivate()
 {
-    edges[KoTableBorderStyle::Top].spacing = 0;
-    borderstyle[KoTableBorderStyle::Top] = KoTableBorderStyle::BorderNone;
+    edges[KTableBorderStyle::Top].spacing = 0;
+    borderstyle[KTableBorderStyle::Top] = KTableBorderStyle::BorderNone;
 
-    edges[KoTableBorderStyle::Left].spacing = 0;
-    borderstyle[KoTableBorderStyle::Left] = KoTableBorderStyle::BorderNone;
+    edges[KTableBorderStyle::Left].spacing = 0;
+    borderstyle[KTableBorderStyle::Left] = KTableBorderStyle::BorderNone;
 
-    edges[KoTableBorderStyle::Bottom].spacing = 0;
-    borderstyle[KoTableBorderStyle::Bottom] = KoTableBorderStyle::BorderNone;
+    edges[KTableBorderStyle::Bottom].spacing = 0;
+    borderstyle[KTableBorderStyle::Bottom] = KTableBorderStyle::BorderNone;
 
-    edges[KoTableBorderStyle::Right].spacing = 0;
-    borderstyle[KoTableBorderStyle::Right] = KoTableBorderStyle::BorderNone;
+    edges[KTableBorderStyle::Right].spacing = 0;
+    borderstyle[KTableBorderStyle::Right] = KTableBorderStyle::BorderNone;
 
-    edges[KoTableBorderStyle::TopLeftToBottomRight].spacing = 0;
-    borderstyle[KoTableBorderStyle::TopLeftToBottomRight] = KoTableBorderStyle::BorderNone;
+    edges[KTableBorderStyle::TopLeftToBottomRight].spacing = 0;
+    borderstyle[KTableBorderStyle::TopLeftToBottomRight] = KTableBorderStyle::BorderNone;
 
-    edges[KoTableBorderStyle::BottomLeftToTopRight].spacing = 0;
-    borderstyle[KoTableBorderStyle::BottomLeftToTopRight] = KoTableBorderStyle::BorderNone;
+    edges[KTableBorderStyle::BottomLeftToTopRight].spacing = 0;
+    borderstyle[KTableBorderStyle::BottomLeftToTopRight] = KTableBorderStyle::BorderNone;
 }
 
 KoTableBorderStylePrivate::~KoTableBorderStylePrivate()
 {
 }
 
-KoTableBorderStyle::KoTableBorderStyle(QObject *parent)
+KTableBorderStyle::KTableBorderStyle(QObject *parent)
     : QObject(parent)
     , d_ptr(new KoTableBorderStylePrivate())
 {
 }
 
-KoTableBorderStyle::KoTableBorderStyle(const QTextTableCellFormat &format, QObject *parent)
+KTableBorderStyle::KTableBorderStyle(const QTextTableCellFormat &format, QObject *parent)
     : QObject(parent)
     , d_ptr(new KoTableBorderStylePrivate())
 {
     init(format);
 }
 
-KoTableBorderStyle::KoTableBorderStyle(KoTableBorderStylePrivate &dd, const QTextTableCellFormat &format, QObject *parent)
+KTableBorderStyle::KTableBorderStyle(KoTableBorderStylePrivate &dd, const QTextTableCellFormat &format, QObject *parent)
     : QObject(parent)
     , d_ptr(&dd)
 {
     init(format);
 }
 
-KoTableBorderStyle::KoTableBorderStyle(KoTableBorderStylePrivate &dd, QObject *parent)
+KTableBorderStyle::KTableBorderStyle(KoTableBorderStylePrivate &dd, QObject *parent)
     : QObject(parent)
     , d_ptr(&dd)
 {
 }
 
-void KoTableBorderStyle::init(const QTextTableCellFormat &format)
+void KTableBorderStyle::init(const QTextTableCellFormat &format)
 {
-    Q_D(KoTableBorderStyle);
+    Q_D(KTableBorderStyle);
 
     d->edges[Top].outerPen = format.penProperty(TopBorderOuterPen);
     d->edges[Top].spacing = format.doubleProperty(TopBorderSpacing);
@@ -112,13 +112,13 @@ void KoTableBorderStyle::init(const QTextTableCellFormat &format)
     d->borderstyle[BottomLeftToTopRight] = BorderStyle(format.intProperty(BottomLeftToTopRightBorderStyle));
 }
 
-KoTableBorderStyle::~KoTableBorderStyle()
+KTableBorderStyle::~KTableBorderStyle()
 {
     delete d_ptr;
 }
 
 
-bool KoTableBorderStyle::isDrawn(BorderStyle style) const
+bool KTableBorderStyle::isDrawn(BorderStyle style) const
 {
     if (style == BorderWave)
         return true;
@@ -130,7 +130,7 @@ bool KoTableBorderStyle::isDrawn(BorderStyle style) const
 }
 
 
-void KoTableBorderStyle::drawHorizontalWave(BorderStyle style, QPainter &painter, qreal x, qreal w, qreal t) const
+void KTableBorderStyle::drawHorizontalWave(BorderStyle style, QPainter &painter, qreal x, qreal w, qreal t) const
 {
     QPen pen = painter.pen();
     const qreal linewidth = pen.width();
@@ -151,7 +151,7 @@ void KoTableBorderStyle::drawHorizontalWave(BorderStyle style, QPainter &painter
 }
 
 
-void KoTableBorderStyle::drawVerticalWave(BorderStyle style, QPainter &painter, qreal y, qreal h, qreal t) const
+void KTableBorderStyle::drawVerticalWave(BorderStyle style, QPainter &painter, qreal y, qreal h, qreal t) const
 {
     QPen pen = painter.pen();
     const qreal linewidth = pen.width();
@@ -171,9 +171,9 @@ void KoTableBorderStyle::drawVerticalWave(BorderStyle style, QPainter &painter, 
     }
 }
 
-void KoTableBorderStyle::setEdge(Side side, BorderStyle style, qreal width, QColor color)
+void KTableBorderStyle::setEdge(Side side, BorderStyle style, qreal width, QColor color)
 {
-    Q_D(KoTableBorderStyle);
+    Q_D(KTableBorderStyle);
 
     KoTableBorderStylePrivate::Edge edge;
     qreal innerWidth = 0;
@@ -242,9 +242,9 @@ void KoTableBorderStyle::setEdge(Side side, BorderStyle style, qreal width, QCol
     d->borderstyle[side] = style;
 }
 
-void KoTableBorderStyle::setEdgeDoubleBorderValues(Side side, qreal innerWidth, qreal space)
+void KTableBorderStyle::setEdgeDoubleBorderValues(Side side, qreal innerWidth, qreal space)
 {
-    Q_D(KoTableBorderStyle);
+    Q_D(KTableBorderStyle);
 
     qreal totalWidth = d->edges[side].outerPen.widthF() + d->edges[side].spacing + d->edges[side].innerPen.widthF();
     if (d->edges[side].innerPen.widthF() > 0.0) {
@@ -254,9 +254,9 @@ void KoTableBorderStyle::setEdgeDoubleBorderValues(Side side, qreal innerWidth, 
     }
 }
 
-bool KoTableBorderStyle::hasBorders() const
+bool KTableBorderStyle::hasBorders() const
 {
-    Q_D(const KoTableBorderStyle);
+    Q_D(const KTableBorderStyle);
 
     for (int i = Top; i <= BottomLeftToTopRight; i++)
         if (d->edges[i].outerPen.widthF() > 0.0)
@@ -264,9 +264,9 @@ bool KoTableBorderStyle::hasBorders() const
     return false;
 }
 
-void KoTableBorderStyle::paintBorders(QPainter &painter, const QRectF &bounds, QVector<QLineF> *accumulatedBlankBorders) const
+void KTableBorderStyle::paintBorders(QPainter &painter, const QRectF &bounds, QVector<QLineF> *accumulatedBlankBorders) const
 {
-    Q_D(const KoTableBorderStyle);
+    Q_D(const KTableBorderStyle);
 
     QRectF innerBounds = bounds;
 
@@ -352,9 +352,9 @@ void KoTableBorderStyle::paintBorders(QPainter &painter, const QRectF &bounds, Q
     }
 }
 
-void KoTableBorderStyle::paintDiagonalBorders(QPainter &painter, const QRectF &bounds) const
+void KTableBorderStyle::paintDiagonalBorders(QPainter &painter, const QRectF &bounds) const
 {
-    Q_D(const KoTableBorderStyle);
+    Q_D(const KTableBorderStyle);
 
     if (d->edges[TopLeftToBottomRight].outerPen.widthF() > 0) {
         QPen diagonalPen = d->edges[TopLeftToBottomRight].outerPen;
@@ -388,9 +388,9 @@ void KoTableBorderStyle::paintDiagonalBorders(QPainter &painter, const QRectF &b
     }
 }
 
-void KoTableBorderStyle::drawTopHorizontalBorder(QPainter &painter, qreal x, qreal y, qreal w, QVector<QLineF> *accumulatedBlankBorders) const
+void KTableBorderStyle::drawTopHorizontalBorder(QPainter &painter, qreal x, qreal y, qreal w, QVector<QLineF> *accumulatedBlankBorders) const
 {
-    Q_D(const KoTableBorderStyle);
+    Q_D(const KTableBorderStyle);
 
     qreal t=y;
     if (d->edges[Top].outerPen.widthF() > 0) {
@@ -422,9 +422,9 @@ void KoTableBorderStyle::drawTopHorizontalBorder(QPainter &painter, qreal x, qre
     }
 }
 
-void KoTableBorderStyle::drawSharedHorizontalBorder(QPainter &painter, const KoTableBorderStyle &styleBelow,  qreal x, qreal y, qreal w, QVector<QLineF> *accumulatedBlankBorders) const
+void KTableBorderStyle::drawSharedHorizontalBorder(QPainter &painter, const KTableBorderStyle &styleBelow,  qreal x, qreal y, qreal w, QVector<QLineF> *accumulatedBlankBorders) const
 {
-    Q_D(const KoTableBorderStyle);
+    Q_D(const KTableBorderStyle);
     const KoTableBorderStylePrivate *styleBelowD = static_cast<const KoTableBorderStylePrivate*>(styleBelow.d_func());
 
     bool paintThis = true;
@@ -476,9 +476,9 @@ void KoTableBorderStyle::drawSharedHorizontalBorder(QPainter &painter, const KoT
     }
 }
 
-void KoTableBorderStyle::drawBottomHorizontalBorder(QPainter &painter, qreal x, qreal y, qreal w, QVector<QLineF> *accumulatedBlankBorders) const
+void KTableBorderStyle::drawBottomHorizontalBorder(QPainter &painter, qreal x, qreal y, qreal w, QVector<QLineF> *accumulatedBlankBorders) const
 {
-    Q_D(const KoTableBorderStyle);
+    Q_D(const KTableBorderStyle);
 
     qreal t=y;
     if (d->edges[Bottom].outerPen.widthF() > 0) {
@@ -511,9 +511,9 @@ void KoTableBorderStyle::drawBottomHorizontalBorder(QPainter &painter, qreal x, 
     }
 }
 
-void KoTableBorderStyle::drawLeftmostVerticalBorder(QPainter &painter, qreal x, qreal y, qreal h, QVector<QLineF> *accumulatedBlankBorders) const
+void KTableBorderStyle::drawLeftmostVerticalBorder(QPainter &painter, qreal x, qreal y, qreal h, QVector<QLineF> *accumulatedBlankBorders) const
 {
-    Q_D(const KoTableBorderStyle);
+    Q_D(const KTableBorderStyle);
 
     qreal thisWidth = d->edges[Left].outerPen.widthF() + d->edges[Left].spacing + d->edges[Left].innerPen.widthF();
     qreal l = x - thisWidth / 2.0;
@@ -548,9 +548,9 @@ void KoTableBorderStyle::drawLeftmostVerticalBorder(QPainter &painter, qreal x, 
     }
 }
 
-void KoTableBorderStyle::drawSharedVerticalBorder(QPainter &painter, const KoTableBorderStyle &styleRight,  qreal x, qreal y, qreal h, QVector<QLineF> *accumulatedBlankBorders) const
+void KTableBorderStyle::drawSharedVerticalBorder(QPainter &painter, const KTableBorderStyle &styleRight,  qreal x, qreal y, qreal h, QVector<QLineF> *accumulatedBlankBorders) const
 {
-    Q_D(const KoTableBorderStyle);
+    Q_D(const KTableBorderStyle);
     const KoTableBorderStylePrivate *styleRightD = static_cast<const KoTableBorderStylePrivate*>(styleRight.d_func());
 
     // First determine which style "wins" by comparing total width
@@ -620,9 +620,9 @@ void KoTableBorderStyle::drawSharedVerticalBorder(QPainter &painter, const KoTab
     }
 }
 
-void KoTableBorderStyle::drawRightmostVerticalBorder(QPainter &painter, qreal x, qreal y, qreal h, QVector<QLineF> *accumulatedBlankBorders) const
+void KTableBorderStyle::drawRightmostVerticalBorder(QPainter &painter, qreal x, qreal y, qreal h, QVector<QLineF> *accumulatedBlankBorders) const
 {
-    Q_D(const KoTableBorderStyle);
+    Q_D(const KTableBorderStyle);
 
     qreal thisWidth = d->edges[Right].outerPen.widthF() + d->edges[Right].spacing + d->edges[Right].innerPen.widthF();
     qreal l = x - thisWidth / 2.0;
@@ -657,33 +657,33 @@ void KoTableBorderStyle::drawRightmostVerticalBorder(QPainter &painter, qreal x,
     }
 }
 
-qreal KoTableBorderStyle::leftBorderWidth() const
+qreal KTableBorderStyle::leftBorderWidth() const
 {
-    Q_D(const KoTableBorderStyle);
+    Q_D(const KTableBorderStyle);
 
     const KoTableBorderStylePrivate::Edge &edge = d->edges[Left];
     return edge.spacing + edge.innerPen.widthF() + edge.outerPen.widthF();
 }
 
-qreal KoTableBorderStyle::rightBorderWidth() const
+qreal KTableBorderStyle::rightBorderWidth() const
 {
-    Q_D(const KoTableBorderStyle);
+    Q_D(const KTableBorderStyle);
 
     const KoTableBorderStylePrivate::Edge &edge = d->edges[Right];
     return edge.spacing + edge.innerPen.widthF() + edge.outerPen.widthF();
 }
 
-qreal KoTableBorderStyle::topBorderWidth() const
+qreal KTableBorderStyle::topBorderWidth() const
 {
-    Q_D(const KoTableBorderStyle);
+    Q_D(const KTableBorderStyle);
 
     const KoTableBorderStylePrivate::Edge &edge = d->edges[Top];
     return edge.spacing + edge.innerPen.widthF() + edge.outerPen.widthF();
 }
 
-qreal KoTableBorderStyle::bottomBorderWidth() const
+qreal KTableBorderStyle::bottomBorderWidth() const
 {
-    Q_D(const KoTableBorderStyle);
+    Q_D(const KTableBorderStyle);
 
     const KoTableBorderStylePrivate::Edge &edge = d->edges[Bottom];
     return edge.spacing + edge.innerPen.widthF() + edge.outerPen.widthF();

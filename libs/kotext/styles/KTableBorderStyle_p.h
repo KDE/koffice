@@ -33,7 +33,7 @@
 // We mean it.
 //
 
-#include "KoTableBorderStyle.h"
+#include "KTableBorderStyle.h"
 
 class KoTableBorderStylePrivate
 {
@@ -50,7 +50,7 @@ public:
     virtual ~KoTableBorderStylePrivate();
 
     Edge edges[6];
-    KoTableBorderStyle::BorderStyle borderstyle[6];
+    KTableBorderStyle::BorderStyle borderstyle[6];
 };
 
 #endif // KOTABLEBORDERSTYLE_P_H

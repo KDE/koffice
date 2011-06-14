@@ -33,7 +33,7 @@
 // We mean it.
 //
 
-#include "KoTableBorderStyle_p.h"
+#include "KTableBorderStyle_p.h"
 
 class KoTableCellStylePrivate : public KoTableBorderStylePrivate
 {
