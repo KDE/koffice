@@ -30,7 +30,7 @@
 #include <KSelection.h>
 #include <KShapeLayer.h>
 #include <KShapeGroup.h>
-#include <KoShapeUngroupCommand.h>
+#include <KShapeUngroupCommand.h>
 #include <KShapeRenameCommand.h>
 #include <KoZoomHandler.h>
 
@@ -497,7 +497,7 @@ bool KoPADocumentModel::dropMimeData(const QMimeData * data, Qt::DropAction acti
             cmd->setText(i18n("Reparent shapes"));
 
             foreach(KShape * shape, toplevelShapes)
-                new KoShapeUngroupCommand(shape->parent(), QList<KShape*>() << shape, QList<KShape*>(), cmd);
+                new KShapeUngroupCommand(shape->parent(), QList<KShape*>() << shape, QList<KShape*>(), cmd);
 
             new KShapeGroupCommand(group, toplevelShapes, cmd);
             KCanvasController * canvasController = KoToolManager::instance()->activeCanvasController();
@@ -530,7 +530,7 @@ bool KoPADocumentModel::dropMimeData(const QMimeData * data, Qt::DropAction acti
 
                     clipped.append(shape->parent()->isClipped(shape));
                     inheritsTransform.append(shape->parent()->inheritsTransform(shape));
-                    new KoShapeUngroupCommand(shape->parent(), QList<KShape*>() << shape, QList<KShape*>(), cmd);
+                    new KShapeUngroupCommand(shape->parent(), QList<KShape*>() << shape, QList<KShape*>(), cmd);
                 }
                 // shapes are dropped on a container, so add them to the container
                 new KShapeGroupCommand(container, toplevelShapes, clipped, inheritsTransform, cmd);

@@ -29,7 +29,7 @@
 #include <QPair>
 
 /// The undo / redo command for ungrouping shapes
-class FLAKE_EXPORT KoShapeUngroupCommand : public KShapeGroupCommand
+class FLAKE_EXPORT KShapeUngroupCommand : public KShapeGroupCommand
 {
 public:
     /**
@@ -38,7 +38,7 @@ public:
      * @param shapes a list of all the shapes that should be ungrouped.
      * @param parent the parent command used for macro commands
      */
-    KoShapeUngroupCommand(KShapeContainer *container, const QList<KShape *> &shapes,
+    KShapeUngroupCommand(KShapeContainer *container, const QList<KShape *> &shapes,
                           const QList<KShape *> &topLevelShapes = QList<KShape*>(), QUndoCommand *parent = 0);
     /// redo the command
     void redo();

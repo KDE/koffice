@@ -24,7 +24,7 @@
 #include <KShape.h>
 #include <QUndoCommand>
 #include <KShapeGroupCommand.h>
-#include <KoShapeUngroupCommand.h>
+#include <KShapeUngroupCommand.h>
 #include <KShapeTransformCommand.h>
 #include <KShapeGroup.h>
 #include <KSelection.h>
@@ -157,7 +157,7 @@ void TestShapeContainer::testScaling()
     }
 
     transformShapes.takeLast();
-    KoShapeUngroupCommand* ungroupCmd = new KoShapeUngroupCommand(group, transformShapes);
+    KShapeUngroupCommand* ungroupCmd = new KShapeUngroupCommand(group, transformShapes);
     ungroupCmd->redo();
 
     for (int i=0; i< transformShapes.size(); i++) {

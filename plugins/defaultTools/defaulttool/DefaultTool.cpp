@@ -49,7 +49,7 @@
 #include <KShapeRubberSelectStrategy.h>
 #include <commands/KShapeMoveCommand.h>
 #include <commands/KShapeGroupCommand.h>
-#include <commands/KoShapeUngroupCommand.h>
+#include <commands/KShapeUngroupCommand.h>
 #include <KoSnapGuide.h>
 
 #include <KDebug>
@@ -981,7 +981,7 @@ void DefaultTool::selectionUngroup()
                 // re-add children to document correctly, so the doc can notice them as toplevels
                 canvas()->shapeController()->addShape(shape, cmd);
             }
-            new KoShapeUngroupCommand(group, group->shapes(),
+            new KShapeUngroupCommand(group, group->shapes(),
                     group->parent()? QList<KShape*>(): canvas()->shapeManager()->topLevelShapes(),
                     cmd);
         }

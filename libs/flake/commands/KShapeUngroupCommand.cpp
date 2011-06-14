@@ -18,13 +18,13 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoShapeUngroupCommand.h"
+#include "KShapeUngroupCommand.h"
 #include "KShapeGroupCommand_p.h"
 #include "KShapeContainer.h"
 
 #include <klocale.h>
 
-KoShapeUngroupCommand::KoShapeUngroupCommand(KShapeContainer *container, const QList<KShape *> &shapes,
+KShapeUngroupCommand::KShapeUngroupCommand(KShapeContainer *container, const QList<KShape *> &shapes,
         const QList<KShape*> &topLevelShapes, QUndoCommand *parent)
     : KShapeGroupCommand(*(new KShapeGroupCommandPrivate(container, shapes)), parent)
 {
@@ -57,7 +57,7 @@ KoShapeUngroupCommand::KoShapeUngroupCommand(KShapeContainer *container, const Q
     setText(i18n("Ungroup Shapes"));
 }
 
-void KoShapeUngroupCommand::redo()
+void KShapeUngroupCommand::redo()
 {
     KShapeGroupCommand::undo();
     if (d->oldAncestorsZIndex.count()) {
@@ -68,7 +68,7 @@ void KoShapeUngroupCommand::redo()
     }
 }
 
-void KoShapeUngroupCommand::undo()
+void KShapeUngroupCommand::undo()
 {
     KShapeGroupCommand::redo();
     if (d->oldAncestorsZIndex.count()) {

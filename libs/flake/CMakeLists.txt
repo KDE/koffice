@@ -117,7 +117,7 @@ set(flake_SRCS
     commands/KShapeMoveCommand.cpp
     commands/KShapeShearCommand.cpp
     commands/KShapeSizeCommand.cpp
-    commands/KoShapeUngroupCommand.cpp
+    commands/KShapeUngroupCommand.cpp
     commands/KShapeReorderCommand.cpp
     commands/KShapeKeepAspectRatioCommand.cpp
     commands/KPathBaseCommand.cpp
@@ -227,7 +227,7 @@ install(
     commands/KShapeSizeCommand.h
     commands/KShapeTransformCommand.h
     commands/KShapeTransparencyCommand.h
-    commands/KoShapeUngroupCommand.h
+    commands/KShapeUngroupCommand.h
     commands/KoSubpathRemoveCommand.h
     flake_export.h
     KCanvasBase.h
