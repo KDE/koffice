@@ -58,7 +58,7 @@
 #include "changetracker/KoChangeTracker.h"
 #include "changetracker/KoChangeTrackerElement.h"
 #include "changetracker/KoDeleteChangeMarker.h"
-#include <KoFormatChangeInformation_p.h>
+#include <KFormatChangeInformation_p.h>
 #include "styles/KoStyleManager.h"
 #include "styles/KoParagraphStyle.h"
 #include "styles/KoCharacterStyle.h"

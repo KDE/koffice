@@ -34,7 +34,7 @@
 #include <QTextCharFormat>
 #include <QTextBlockFormat>
 
-class KoFormatChangeInformation
+class KFormatChangeInformation
 {
 public:
     typedef enum {
@@ -43,19 +43,19 @@ public:
         eListItemNumberingChange
     } FormatChangeType;
 
-    KoFormatChangeInformation::FormatChangeType formatType();
+    KFormatChangeInformation::FormatChangeType formatType();
 
 protected:
-    KoFormatChangeInformation(KoFormatChangeInformation::FormatChangeType formatChangeType);
+    KFormatChangeInformation(KFormatChangeInformation::FormatChangeType formatChangeType);
 
 private:
-    KoFormatChangeInformation::FormatChangeType formatChangeType;
+    KFormatChangeInformation::FormatChangeType formatChangeType;
 };
 
-class KoTextStyleChangeInformation : public KoFormatChangeInformation
+class KoTextStyleChangeInformation : public KFormatChangeInformation
 {
 public:
-    KoTextStyleChangeInformation(KoFormatChangeInformation::FormatChangeType formatChangeType = KoFormatChangeInformation::eTextStyleChange);
+    KoTextStyleChangeInformation(KFormatChangeInformation::FormatChangeType formatChangeType = KFormatChangeInformation::eTextStyleChange);
     void setPreviousCharFormat(QTextCharFormat &oldFormat);
     QTextCharFormat& previousCharFormat();
 private:
@@ -72,7 +72,7 @@ private:
     QTextBlockFormat previousTextBlockFormat;
 };
 
-class KoListItemNumChangeInformation : public KoFormatChangeInformation
+class KoListItemNumChangeInformation : public KFormatChangeInformation
 {
 public:
     typedef enum {

@@ -17,20 +17,20 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoFormatChangeInformation_p.h"
+#include "KFormatChangeInformation_p.h"
 
-KoFormatChangeInformation::KoFormatChangeInformation(KoFormatChangeInformation::FormatChangeType formatChangeType)
+KFormatChangeInformation::KFormatChangeInformation(KFormatChangeInformation::FormatChangeType formatChangeType)
 {
     this->formatChangeType = formatChangeType;
 }
 
-KoFormatChangeInformation::FormatChangeType KoFormatChangeInformation::formatType()
+KFormatChangeInformation::FormatChangeType KFormatChangeInformation::formatType()
 {
     return formatChangeType;
 }
 
-KoTextStyleChangeInformation::KoTextStyleChangeInformation(KoFormatChangeInformation::FormatChangeType formatChangeType):
-                              KoFormatChangeInformation(formatChangeType)
+KoTextStyleChangeInformation::KoTextStyleChangeInformation(KFormatChangeInformation::FormatChangeType formatChangeType):
+                              KFormatChangeInformation(formatChangeType)
 {
 }
 
@@ -45,7 +45,7 @@ QTextCharFormat& KoTextStyleChangeInformation::previousCharFormat()
 }
 
 KoParagraphStyleChangeInformation::KoParagraphStyleChangeInformation():
-                                   KoTextStyleChangeInformation(KoFormatChangeInformation::eParagraphStyleChange)
+                                   KoTextStyleChangeInformation(KFormatChangeInformation::eParagraphStyleChange)
 {
 }
 
@@ -60,7 +60,7 @@ QTextBlockFormat& KoParagraphStyleChangeInformation::previousBlockFormat()
 }
 
 KoListItemNumChangeInformation::KoListItemNumChangeInformation(KoListItemNumChangeInformation::ListItemNumChangeType type):
-                                                               KoFormatChangeInformation(KoFormatChangeInformation::eListItemNumberingChange),
+                                                               KFormatChangeInformation(KFormatChangeInformation::eListItemNumberingChange),
                                                                eSubType(type)
 {
 }

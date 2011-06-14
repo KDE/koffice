@@ -18,7 +18,7 @@
  */
 
 #include "KoChangeTracker.h"
-#include "KoFormatChangeInformation_p.h"
+#include "KFormatChangeInformation_p.h"
 #include "KoDeleteChangeMarker.h"
 
 //KOffice includes
@@ -33,7 +33,7 @@
 #include <KoListStyle.h>
 #include <KoParagraphStyle.h>
 #include <KoStyleManager.h>
-#include <KoFormatChangeInformation_p.h>
+#include <KFormatChangeInformation_p.h>
 #include <KoDeletedRowColumnDataStore_p.h>
 
 //KDE includes
@@ -75,7 +75,7 @@ public:
     QHash<int, int> parents;
     QHash<int, KoChangeTrackerElement *> changes;
     QHash<QString, int> loadedChanges;
-    QHash<int, KoFormatChangeInformation *> changeInformation;
+    QHash<int, KFormatChangeInformation *> changeInformation;
     QList<int> saveChanges;
     QList<int> acceptedRejectedChanges;
     int changeId;
@@ -337,12 +337,12 @@ bool KoChangeTracker::saveInlineChange(int changeId, KOdfGenericChange &change)
     return true;
 }
 
-void KoChangeTracker::setFormatChangeInformation(int formatChangeId, KoFormatChangeInformation *formatInformation)
+void KoChangeTracker::setFormatChangeInformation(int formatChangeId, KFormatChangeInformation *formatInformation)
 {
     d->changeInformation.insert(formatChangeId, formatInformation);
 }
 
-KoFormatChangeInformation *KoChangeTracker::formatChangeInformation(int formatChangeId)
+KFormatChangeInformation *KoChangeTracker::formatChangeInformation(int formatChangeId)
 {
     return d->changeInformation.value(formatChangeId);
 }

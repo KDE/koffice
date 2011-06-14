@@ -37,7 +37,7 @@ class QTextList;
 class KoDeleteChangeMarker;
 class KXmlElement;
 class KoChangeTrackerElement;
-class KoFormatChangeInformation;
+class KFormatChangeInformation;
 class KoDeletedRowColumnDataStore;
 
 class KOTEXT_EXPORT KoChangeTracker : public QObject
@@ -68,8 +68,8 @@ public:
     int insertChangeId(const QString &title, int existingChangeId);
     int deleteChangeId(const QString &title, const QTextDocumentFragment &selection, int existingChangeId);
 
-    void setFormatChangeInformation(int formatChangeId, KoFormatChangeInformation *formatInformation);
-    KoFormatChangeInformation *formatChangeInformation(int formatChangeId);
+    void setFormatChangeInformation(int formatChangeId, KFormatChangeInformation *formatInformation);
+    KFormatChangeInformation *formatChangeInformation(int formatChangeId);
 
     KoChangeTrackerElement* elementById(int id);
     bool removeById(int id, bool freeMemory = true);
