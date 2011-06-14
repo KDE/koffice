@@ -27,7 +27,7 @@
 #include "KXmlWriter.h"
 #include "KXmlReader.h"
 #include "KoShapeRegistry.h"
-#include "KoShapeBorderBase.h"
+#include "KShapeBorderBase.h"
 #include "KoShapeShadow.h"
 
 #include <QPainter>
@@ -136,7 +136,7 @@ void KoShapeGroup::shapeChanged(ChangeType type, KShape *shape)
     switch (type) {
     case KShape::BorderChanged:
     {
-        KoShapeBorderBase *stroke = border();
+        KShapeBorderBase *stroke = border();
         if (stroke) {
             if (stroke->deref())
                 delete stroke;

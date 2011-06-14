@@ -2032,7 +2032,7 @@ KShape * SvgParser::createShape(const QString &shapeID)
     shape->setTransformation(QTransform());
 
     // reset border
-    KoShapeBorderBase * oldBorder = shape->border();
+    KShapeBorderBase * oldBorder = shape->border();
     shape->setBorder(0);
     delete oldBorder;
 

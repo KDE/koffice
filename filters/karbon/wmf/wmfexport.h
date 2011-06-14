@@ -27,7 +27,7 @@
 class KoWmfWrite;
 class KarbonDocument;
 class KShape;
-class KoShapeBorderBase;
+class KShapeBorderBase;
 class QPainterPath;
 
 class WmfExport : public KoFilter
@@ -44,7 +44,7 @@ private:
     void paintDocument(KarbonDocument& document);
     void paintShape(KShape * shape);
 
-    QPen getPen(const KoShapeBorderBase *stroke);
+    QPen getPen(const KShapeBorderBase *stroke);
 
     // coordinate transformation
     // scale to wmf size

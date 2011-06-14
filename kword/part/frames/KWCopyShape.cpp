@@ -22,7 +22,7 @@
 #include "KWPageTextInfo.h"
 #include "KWPageManager.h"
 
-#include <KoShapeBorderBase.h>
+#include <KShapeBorderBase.h>
 #include <KoViewConverter.h>
 #include <KoTextShapeData.h>
 #include <KoShapeContainer.h>

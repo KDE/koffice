@@ -20,7 +20,7 @@
 #include "KoShapeContainer.h"
 #include "KoShapeContainer_p.h"
 #include "KoShapeContainerModel.h"
-#include "KoShapeBorderBase.h"
+#include "KShapeBorderBase.h"
 #include "KoShapeContainerDefaultModel.h"
 #include "KoShapeSavingContext.h"
 

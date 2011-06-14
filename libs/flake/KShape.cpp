@@ -28,7 +28,7 @@
 #include "KSelection.h"
 #include "KPointerEvent.h"
 #include "KoInsets.h"
-#include "KoShapeBorderBase.h"
+#include "KShapeBorderBase.h"
 #include "KShapeBackground.h"
 #include "KColorBackground.h"
 #include "KGradientBackground.h"
@@ -929,13 +929,13 @@ bool KShape::collisionDetection()
     return d->detectCollision;
 }
 
-KoShapeBorderBase *KShape::border() const
+KShapeBorderBase *KShape::border() const
 {
     Q_D(const KShape);
     return d->border;
 }
 
-void KShape::setBorder(KoShapeBorderBase *border)
+void KShape::setBorder(KShapeBorderBase *border)
 {
     Q_D(KShape);
     if (border)
@@ -1039,7 +1039,7 @@ QString KShape::saveStyle(KOdfGenericStyle &style, KoShapeSavingContext &context
 {
     Q_D(const KShape);
     // and fill the style
-    KoShapeBorderBase *b = border();
+    KShapeBorderBase *b = border();
     if (b) {
         b->saveOdf(style, context);
     }
@@ -1252,7 +1252,7 @@ KShapeBackground *KShape::loadOdfFill(KoShapeLoadingContext &context) const
     return bg;
 }
 
-KoShapeBorderBase *KShape::loadOdfStroke(const KXmlElement &element, KoShapeLoadingContext &context) const
+KShapeBorderBase *KShape::loadOdfStroke(const KXmlElement &element, KoShapeLoadingContext &context) const
 {
     KOdfStyleStack &styleStack = context.odfLoadingContext().styleStack();
     KOdfStylesReader &stylesReader = context.odfLoadingContext().stylesReader();

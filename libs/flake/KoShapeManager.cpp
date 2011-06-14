@@ -27,7 +27,7 @@
 #include "KPointerEvent.h"
 #include "KCanvasBase.h"
 #include "KoShapeContainer.h"
-#include "KoShapeBorderBase.h"
+#include "KShapeBorderBase.h"
 #include "KoToolProxy.h"
 #include "KoShapeManagerPaintingStrategy.h"
 #include "KoShapeShadow.h"

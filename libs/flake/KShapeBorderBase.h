@@ -39,11 +39,11 @@ class QPainter;
  * and preferred behavior, to have one instance of a border that is reused on several
  * objects.
  */
-class FLAKE_EXPORT KoShapeBorderBase
+class FLAKE_EXPORT KShapeBorderBase
 {
 public:
-    KoShapeBorderBase();
-    virtual ~KoShapeBorderBase();
+    KShapeBorderBase();
+    virtual ~KShapeBorderBase();
 
     /**
      * @brief store the border settings as a style.

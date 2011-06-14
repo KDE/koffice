@@ -20,7 +20,7 @@
 
 #include "KoShapeShadow.h"
 #include "KoShapeSavingContext.h"
-#include "KoShapeBorderBase.h"
+#include "KShapeBorderBase.h"
 #include "KShape.h"
 #include "KoInsets.h"
 #include "KPathShape.h"

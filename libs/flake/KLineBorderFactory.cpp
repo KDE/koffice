@@ -26,7 +26,7 @@ KLineBorderFactory::KLineBorderFactory(QObject *parent)
 {
 }
 
-KoShapeBorderBase *KLineBorderFactory::createBorder(KShape *) const
+KShapeBorderBase *KLineBorderFactory::createBorder(KShape *) const
 {
     return new KLineBorder();
 }

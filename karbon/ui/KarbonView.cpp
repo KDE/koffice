@@ -357,7 +357,7 @@ void KarbonView::dropEvent(QDropEvent *e)
             return;
 
         if (d->canvas->resourceManager()->intResource(KoCanvasResource::ActiveStyleType) == KoFlake::Foreground) {
-            QList<KoShapeBorderBase*> borders;
+            QList<KShapeBorderBase*> borders;
             QList<KShape*> selectedShapes = selection->selectedShapes();
             foreach(KShape * shape, selectedShapes) {
                 KLineBorder * border = dynamic_cast<KLineBorder*>(shape->border());

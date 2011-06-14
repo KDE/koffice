@@ -22,7 +22,7 @@
 #include "KShape_p.h"
 #include "KoShapeManager.h"
 #include "KoShapeManager_p.h"
-#include "KoShapeBorderBase.h"
+#include "KShapeBorderBase.h"
 #include "KoViewConverter.h"
 #include "KPathShape.h"
 #include "KPathShape_p.h"

@@ -151,7 +151,7 @@ void WmfExport::paintShape(KShape * shape)
     }
 }
 
-QPen WmfExport::getPen(const KoShapeBorderBase * stroke)
+QPen WmfExport::getPen(const KShapeBorderBase * stroke)
 {
     const KLineBorder * lineBorder = dynamic_cast<const KLineBorder*>(stroke);
     if (! lineBorder)

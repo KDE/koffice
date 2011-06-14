@@ -19,7 +19,7 @@
 #ifndef FOLDERBORDER_H
 #define FOLDERBORDER_H
 
-#include <KoShapeBorderBase.h>
+#include <KShapeBorderBase.h>
 
 /**
  * The shapeselector allows multiple 'folders' and this is the border to show the edges.
@@ -27,7 +27,7 @@
  * more folders the FolderShape gets a FolderBorder assigned to it which draws the outline
  * and the title of the folder shape.
  */
-class FolderBorder : public KoShapeBorderBase
+class FolderBorder : public KShapeBorderBase
 {
 public:
     FolderBorder();

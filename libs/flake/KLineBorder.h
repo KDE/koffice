@@ -23,7 +23,7 @@
 #define KOLINEBORDER_H
 
 #include "KoInsets.h"
-#include "KoShapeBorderBase.h"
+#include "KShapeBorderBase.h"
 
 #include <QtGui/QBrush>
 
@@ -37,7 +37,7 @@ class KoViewConverter;
 /**
  * A border for shapes that draws a single line around the object.
  */
-class FLAKE_EXPORT KLineBorder : public KoShapeBorderBase
+class FLAKE_EXPORT KLineBorder : public KShapeBorderBase
 {
 public:
     /// Constructor for a thin line in black

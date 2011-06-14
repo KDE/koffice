@@ -26,7 +26,7 @@
 #include "KoShapeManagerPaintingStrategy.h"
 #include "KShape.h"
 #include "KoViewConverter.h"
-#include "KoShapeBorderBase.h"
+#include "KShapeBorderBase.h"
 #include "KoShapeGroup.h"
 #include "KoShapeContainer.h"
 

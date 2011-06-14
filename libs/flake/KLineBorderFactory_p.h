@@ -39,7 +39,7 @@ public:
     KLineBorderFactory(QObject *parent);
 
     /// reimplemented
-    virtual KoShapeBorderBase *createBorder(KShape *targetShape) const;
+    virtual KShapeBorderBase *createBorder(KShape *targetShape) const;
 };
 
 #endif

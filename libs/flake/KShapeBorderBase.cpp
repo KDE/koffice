@@ -17,38 +17,38 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoShapeBorderBase.h"
+#include "KShapeBorderBase.h"
 
 #include <QAtomicInt>
 
-class KoShapeBorderBase::Private
+class KShapeBorderBase::Private
 {
 public:
     Private() : refCount(0) { }
     QAtomicInt refCount;
 };
 
-KoShapeBorderBase::KoShapeBorderBase()
+KShapeBorderBase::KShapeBorderBase()
         : d(new Private())
 {
 }
 
-KoShapeBorderBase::~KoShapeBorderBase()
+KShapeBorderBase::~KShapeBorderBase()
 {
     delete d;
 }
 
-bool KoShapeBorderBase::ref()
+bool KShapeBorderBase::ref()
 {
     return d->refCount.ref();
 }
 
-bool KoShapeBorderBase::deref()
+bool KShapeBorderBase::deref()
 {
     return d->refCount.deref();
 }
 
-int KoShapeBorderBase::useCount() const
+int KShapeBorderBase::useCount() const
 {
     return d->refCount;
 }
