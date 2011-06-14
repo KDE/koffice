@@ -36,18 +36,18 @@
 #include "KPathShape.h"
 
 /**
- * @brief A KoPointGroup represents points in a path that should be treated as one
+ * @brief A KPointGroup represents points in a path that should be treated as one
  *
  * In svg it is possible when you use a close and the create a new subpath not using
  * a moveTo that the new subpath starts at the same point as the last subpath. As
  * every point can only have 2 control points we have this class to group points
  * together which should be handled as one in e.g. a move.
  */
-class KoPointGroup
+class KPointGroup
 {
 public:
-    KoPointGroup() {}
-    ~KoPointGroup() {}
+    KPointGroup() {}
+    ~KPointGroup() {}
 
     /**
      * @brief Add a point to the group

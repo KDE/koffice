@@ -50,7 +50,7 @@ set(flake_SRCS
     KPathShapeFactory.cpp
     KoShapeFactoryBase.cpp
     KoShapeUserData.cpp
-    KoPointGroup.cpp
+    KPointGroup.cpp
     KParameterShape.cpp
     KPointerEvent.cpp
     KoShapeController.cpp

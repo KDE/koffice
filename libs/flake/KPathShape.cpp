@@ -22,7 +22,7 @@
 #include "KPathShape.h"
 #include "KPathShape_p.h"
 #include "KPathPoint.h"
-#include "KoPointGroup_p.h"
+#include "KPointGroup_p.h"
 #include "KoShapeBorderBase.h"
 #include "KoViewConverter.h"
 #include "KPathShapeLoader.h"
@@ -624,9 +624,9 @@ void KPathShapePrivate::updateLast(KPathPoint **lastPoint)
         // ... and make it a normal point
         newLastPoint->setProperties(KPathPoint::Normal);
         // make a point group of the first point and its clone
-        KoPointGroup * group = subpathStart->group();
+        KPointGroup * group = subpathStart->group();
         if (group == 0) {
-            group = new KoPointGroup();
+            group = new KPointGroup();
             group->add(subpathStart);
         }
         group->add(newLastPoint);

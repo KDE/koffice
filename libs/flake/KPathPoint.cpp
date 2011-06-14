@@ -21,7 +21,7 @@
 
 #include "KPathPoint.h"
 #include "KPathShape.h"
-#include "KoPointGroup_p.h"
+#include "KPointGroup_p.h"
 
 #include <KDebug>
 #include <QtGui/QPainter>
@@ -47,7 +47,7 @@ public:
     QPointF controlPoint1;
     QPointF controlPoint2;
     PointProperties properties;
-    KoPointGroup * pointGroup;
+    KPointGroup * pointGroup;
     bool activeControlPoint1;
     bool activeControlPoint2;
 };
@@ -394,7 +394,7 @@ void KPathPoint::removeFromGroup()
     d->pointGroup = 0;
 }
 
-void KPathPoint::addToGroup(KoPointGroup *pointGroup)
+void KPathPoint::addToGroup(KPointGroup *pointGroup)
 {
     if (d->pointGroup && d->pointGroup != pointGroup) {
         //TODO error message as this should not happen
@@ -428,7 +428,7 @@ KPathShape * KPathPoint::parent() const
     return d->shape;
 }
 
-KoPointGroup * KPathPoint::group()
+KPointGroup * KPathPoint::group()
 {
     return d->pointGroup;
 }

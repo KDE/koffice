@@ -29,7 +29,7 @@ class QPointF;
 class QTransform;
 class QRectF;
 class QPainter;
-class KoPointGroup;
+class KPointGroup;
 
 /**
  * @brief A KPathPoint represents a point in a path.
@@ -263,12 +263,12 @@ public:
     bool isSmooth(KPathPoint *previous, KPathPoint *next) const;
 
 protected:
-    friend class KoPointGroup;
+    friend class KPointGroup;
     friend class KPathShape;
     friend class KPathShapePrivate;
     void removeFromGroup();
-    void addToGroup(KoPointGroup *pointGroup);
-    KoPointGroup * group();
+    void addToGroup(KPointGroup *pointGroup);
+    KPointGroup * group();
 private:
     class Private;
     Private * const d;

@@ -19,16 +19,16 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KoPointGroup_p.h"
+#include "KPointGroup_p.h"
 #include "KPathPoint.h"
 
-void KoPointGroup::add(KPathPoint * point)
+void KPointGroup::add(KPathPoint * point)
 {
     m_points.insert(point);
     point->addToGroup(this);
 }
 
-void KoPointGroup::remove(KPathPoint * point)
+void KPointGroup::remove(KPathPoint * point)
 {
     if (m_points.remove(point)) {
         point->removeFromGroup();
@@ -40,7 +40,7 @@ void KoPointGroup::remove(KPathPoint * point)
     }
 }
 
-void KoPointGroup::map(const QTransform &matrix)
+void KPointGroup::map(const QTransform &matrix)
 {
     QSet<KPathPoint *>::iterator it = m_points.begin();
     for (; it != m_points.end(); ++it) {
