@@ -25,7 +25,7 @@
 
 class QAction;
 class KCanvasBase;
-class KoCopyControllerPrivate;
+class KCopyControllerPrivate;
 
 /**
  * This class takes care of the copy actions integration into flake.
@@ -58,8 +58,8 @@ private:
     Q_PRIVATE_SLOT(d, void hasSelection(bool selection))
 
 protected:
-    friend class KoCopyControllerPrivate;
-    KoCopyControllerPrivate * const d;
+    friend class KCopyControllerPrivate;
+    KCopyControllerPrivate * const d;
 };
 
 #endif

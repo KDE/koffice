@@ -27,11 +27,11 @@
 #include <KDebug>
 #include <QAction>
 
-// KoCopyControllerPrivate
-class KoCopyControllerPrivate
+// KCopyControllerPrivate
+class KCopyControllerPrivate
 {
 public:
-    KoCopyControllerPrivate(KCopyController *p, KCanvasBase *c, QAction *a);
+    KCopyControllerPrivate(KCopyController *p, KCanvasBase *c, QAction *a);
 
     // request to start the actual copy
     void copy();
@@ -55,7 +55,7 @@ public:
     bool appHasSelection;
 };
 
-KoCopyControllerPrivate::KoCopyControllerPrivate(KCopyController *p, KCanvasBase *c, QAction *a)
+KCopyControllerPrivate::KCopyControllerPrivate(KCopyController *p, KCanvasBase *c, QAction *a)
     : parent(p),
     canvas(c),
     action(a)
@@ -63,7 +63,7 @@ KoCopyControllerPrivate::KoCopyControllerPrivate(KCopyController *p, KCanvasBase
     appHasSelection = false;
 }
 
-void KoCopyControllerPrivate::copy()
+void KCopyControllerPrivate::copy()
 {
     if (canvas->toolProxy()->selection() && canvas->toolProxy()->selection()->hasSelection())
         // means the copy can be done by a flake tool
@@ -72,17 +72,17 @@ void KoCopyControllerPrivate::copy()
         emit parent->copyRequested();
 }
 
-void KoCopyControllerPrivate::cut()
+void KCopyControllerPrivate::cut()
 {
     canvas->toolProxy()->cut();
 }
 
-void KoCopyControllerPrivate::selectionChanged(bool hasSelection)
+void KCopyControllerPrivate::selectionChanged(bool hasSelection)
 {
     action->setEnabled(appHasSelection || hasSelection);
 }
 
-void KoCopyControllerPrivate::hasSelection(bool selection)
+void KCopyControllerPrivate::hasSelection(bool selection)
 {
     appHasSelection = selection;
     action->setEnabled(appHasSelection ||
@@ -93,7 +93,7 @@ void KoCopyControllerPrivate::hasSelection(bool selection)
 // KCopyController
 KCopyController::KCopyController(KCanvasBase *canvas, QAction *copyAction)
     : QObject(copyAction),
-    d(new KoCopyControllerPrivate(this, canvas, copyAction))
+    d(new KCopyControllerPrivate(this, canvas, copyAction))
 {
     connect(canvas->toolProxy(), SIGNAL(selectionChanged(bool)), this, SLOT(selectionChanged(bool)));
     connect(copyAction, SIGNAL(triggered()), this, SLOT(copy()));

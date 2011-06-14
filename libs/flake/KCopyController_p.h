@@ -37,10 +37,10 @@
 class KCanvasBase;
 class QAction;
 
-class KoCopyControllerPrivate
+class KCopyControllerPrivate
 {
 public:
-    KoCopyControllerPrivate(KCopyController *p, KCanvasBase *c, QAction *a);
+    KCopyControllerPrivate(KCopyController *p, KCanvasBase *c, QAction *a);
 
     // request to start the actual copy
     void copy();
