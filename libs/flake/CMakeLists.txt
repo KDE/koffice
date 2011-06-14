@@ -22,7 +22,7 @@ set(flake_SRCS
     KDockRegistry.cpp
     KDataCenterBase.cpp
     KoInsets.cpp
-    KoPasteController.cpp
+    KPasteController.cpp
     KGuidesData.cpp
     KoPathShape.cpp
     KoPathPoint.cpp
@@ -267,7 +267,7 @@ install(
     KLoadingShapeUpdater.h
     KoOdfWorkaround.h
     KParameterShape.h
-    KoPasteController.h
+    KPasteController.h
     KoPathPointData.h
     KoPathPoint.h
     KoPathSegment.h

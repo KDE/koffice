@@ -323,7 +323,7 @@ QHash<QString, KAction*> KoToolProxy::actions() const
 
 void KoToolProxy::cut()
 {
-    // TODO maybe move checking the active layer to KoPasteController ?
+    // TODO maybe move checking the active layer to KPasteController ?
     if (d->activeTool && d->isActiveLayerEditable())
         d->activeTool->cut();
 }
@@ -336,7 +336,7 @@ void KoToolProxy::copy() const
 
 bool KoToolProxy::paste()
 {
-    // TODO maybe move checking the active layer to KoPasteController ?
+    // TODO maybe move checking the active layer to KPasteController ?
     if (d->activeTool && d->isActiveLayerEditable())
         return d->activeTool->paste();
     return false;

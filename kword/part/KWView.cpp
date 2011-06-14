@@ -60,7 +60,7 @@
 #include <KoImageSelectionWidget.h>
 #include <KInlineTextObjectManager.h>
 #include <KoMainWindow.h>
-#include <KoPasteController.h>
+#include <KPasteController.h>
 #include <KoPathShape.h> // for KoPathShapeId
 #include <KoResourceManager.h>
 #include <KoSelection.h>
@@ -380,7 +380,7 @@ void KWView::setupActions()
     action = actionCollection()->addAction(KStandardAction::Copy,  "edit_copy", 0, 0);
     new KCopyController(m_canvas, action);
     action = actionCollection()->addAction(KStandardAction::Paste,  "edit_paste", 0, 0);
-    new KoPasteController(m_canvas, action);
+    new KPasteController(m_canvas, action);
 
     action  = new KAction(i18n("Statistics"), this);
     actionCollection()->addAction("file_statistics", action);

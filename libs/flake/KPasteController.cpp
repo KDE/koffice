@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoPasteController.h"
+#include "KPasteController.h"
 
 #include <KCanvasBase.h>
 #include <KoToolProxy.h>
@@ -27,9 +27,9 @@
 #include <QClipboard>
 #include <QAction>
 
-class KoPasteController::Private {
+class KPasteController::Private {
 public:
-    Private(KoPasteController *p, KCanvasBase *c, QAction *a) : parent(p), canvas(c), action(a) {
+    Private(KPasteController *p, KCanvasBase *c, QAction *a) : parent(p), canvas(c), action(a) {
     }
 
     void paste() {
@@ -57,12 +57,12 @@ public:
         action->setEnabled(canPaste);
     }
 
-    KoPasteController *parent;
+    KPasteController *parent;
     KCanvasBase *canvas;
     QAction *action;
 };
 
-KoPasteController::KoPasteController(KCanvasBase *canvas, QAction *pasteAction)
+KPasteController::KPasteController(KCanvasBase *canvas, QAction *pasteAction)
     : QObject(pasteAction),
     d(new Private(this, canvas, pasteAction))
 {
@@ -74,9 +74,9 @@ KoPasteController::KoPasteController(KCanvasBase *canvas, QAction *pasteAction)
     connect(pasteAction, SIGNAL(triggered()), this, SLOT(paste()));
 }
 
-KoPasteController::~KoPasteController()
+KPasteController::~KPasteController()
 {
     delete d;
 }
 
-#include <KoPasteController.moc>
+#include <KPasteController.moc>

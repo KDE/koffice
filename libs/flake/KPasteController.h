@@ -33,7 +33,7 @@ class KCanvasBase;
  * Additionally; when the tool does not allow pasting (KoToolBase::hasSelection() returns false)
  * the signal pasteRequested will be emitted for applications to connect to.
  */
-class FLAKE_EXPORT KoPasteController : public QObject
+class FLAKE_EXPORT KPasteController : public QObject
 {
     Q_OBJECT
 public:
@@ -43,8 +43,8 @@ public:
      * @param pasteAction the action that we will listen to and respond to when it is activated.  Additionally, the
      *     action is used as a parent for the QObject for memory management purposes.
      */
-    KoPasteController(KCanvasBase *canvas, QAction *pasteAction);
-    ~KoPasteController();
+    KPasteController(KCanvasBase *canvas, QAction *pasteAction);
+    ~KPasteController();
 
 signals:
     /// emitted when the user pressed paste and the current tool had no selection.

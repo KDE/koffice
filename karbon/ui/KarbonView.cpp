@@ -99,7 +99,7 @@
 #include <KColorBackground.h>
 #include <KCutController.h>
 #include <KCopyController.h>
-#include <KoPasteController.h>
+#include <KPasteController.h>
 #include <KoSnapGuide.h>
 #include <KoShapeFactoryBase.h>
 #include <KoShapeRegistry.h>
@@ -821,7 +821,7 @@ void KarbonView::initActions()
     action = actionCollection()->addAction(KStandardAction::Copy,  "edit_copy", 0, 0);
     new KCopyController(d->canvas, action);
     action = actionCollection()->addAction(KStandardAction::Paste,  "edit_paste", 0, 0);
-    new KoPasteController(d->canvas, action);
+    new KPasteController(d->canvas, action);
     actionCollection()->addAction(KStandardAction::SelectAll,  "edit_select_all", this, SLOT(editSelectAll()));
     actionCollection()->addAction(KStandardAction::Deselect,  "edit_deselect_all", this, SLOT(editDeselectAll()));
 

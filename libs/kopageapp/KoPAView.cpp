@@ -878,7 +878,7 @@ void KoPAView::clipboardDataChanged()
 
     if (data)
     {
-        // TODO see if we can use the KoPasteController instead of having to add this feature in each koffice app.
+        // TODO see if we can use the KPasteController instead of having to add this feature in each koffice app.
         QStringList mimeTypes = d->canvas->toolProxy()->supportedPasteMimeTypes();
         mimeTypes << KOdf::mimeType(KOdf::GraphicsDocument);
         mimeTypes << KOdf::mimeType(KOdf::PresentationDocument);
