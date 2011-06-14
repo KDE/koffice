@@ -147,7 +147,7 @@ set(flake_SRCS
     tools/KCreatePathTool.cpp
     tools/KCreatePathToolFactory.cpp
     tools/KCreateShapeStrategy.cpp
-    tools/KoPathToolFactory.cpp
+    tools/KPathToolFactory.cpp
     tools/KPathTool.cpp
     tools/KoPathToolSelection.cpp
     tools/KoPathToolHandle.cpp

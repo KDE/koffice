@@ -17,29 +17,32 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoPathToolFactory_p.h"
-#include "KPathTool_p.h"
-#include "KPathShape.h"
+#ifndef KOPATHTOOLFACTORY_H
+#define KOPATHTOOLFACTORY_H
 
-#include <klocale.h>
+//
+//  W A R N I N G
+//  -------------
+//
+// This file is not part of the Flake API.  It exists purely as an
+// implementation detail.  This header file may change from version to
+// version without notice, or even be removed.
+//
+// We mean it.
+//
 
-KoPathToolFactory::KoPathToolFactory(QObject *parent)
-        : KoToolFactoryBase(parent, "PathToolFactoryId")
+
+#include <KoToolFactoryBase.h>
+
+/// Factory for the KPathTool
+class KPathToolFactory : public KoToolFactoryBase
 {
-    setToolTip(i18n("Path editing tool"));
-    setToolType(dynamicToolType());
-    setIcon("editpath");
-    setPriority(2);
-    setActivationShapeId(KoPathShapeId);
-}
+    Q_OBJECT
+public:
+    KPathToolFactory(QObject *parent);
+    ~KPathToolFactory();
 
-KoPathToolFactory::~KoPathToolFactory()
-{
-}
+    KoToolBase *createTool(KCanvasBase *canvas);
+};
 
-KoToolBase * KoPathToolFactory::createTool(KCanvasBase *canvas)
-{
-    return new KPathTool(canvas);
-}
-
-#include <KoPathToolFactory_p.moc>
+#endif
