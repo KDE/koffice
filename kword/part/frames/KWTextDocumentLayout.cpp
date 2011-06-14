@@ -30,7 +30,7 @@
 #include "Outline.h"
 
 #include <KoTextShapeData.h>
-#include <KoShapeContainer.h>
+#include <KShapeContainer.h>
 #include <KInlineTextObjectManager.h>
 #include <KoTextAnchor.h>
 #include <KDebug>

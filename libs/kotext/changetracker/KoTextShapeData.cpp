@@ -53,7 +53,7 @@
 #include <KInlineTextObjectManager.h>
 #include <KCanvasBase.h>
 #include <KoShapeController.h>
-#include <KoShapeContainer.h>
+#include <KShapeContainer.h>
 #include <KUndoStack>
 #include <QUndoCommand>
 

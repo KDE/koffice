@@ -33,7 +33,7 @@
 #include <QPainter>
 
 KoShapeGroup::KoShapeGroup()
-        : KoShapeContainer(new SimpleShapeContainerModel())
+        : KShapeContainer(new SimpleShapeContainerModel())
 {
     setSize(QSizeF(0, 0));
 }

@@ -21,7 +21,7 @@
 #include "TestShapePainting.h"
 
 #include <QtGui>
-#include "KoShapeContainer.h"
+#include "KShapeContainer.h"
 #include "KoShapeManager.h"
 #include <MockShapes.h>
 

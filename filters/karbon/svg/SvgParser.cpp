@@ -33,7 +33,7 @@
 #include <KoShapeRegistry.h>
 #include <KoShapeFactoryBase.h>
 #include <KoShapeLayer.h>
-#include <KoShapeContainer.h>
+#include <KShapeContainer.h>
 #include <KoShapeGroup.h>
 #include <KPathShape.h>
 #include <KResourceManager.h>
@@ -191,7 +191,7 @@ KShape * SvgParser::findObject(const QString &name, const QList<KShape*> & shape
         if (shape->name() == name)
             return shape;
 
-        KShape * resultShape = findObject(name, dynamic_cast<KoShapeContainer*>(shape));
+        KShape * resultShape = findObject(name, dynamic_cast<KShapeContainer*>(shape));
         if (resultShape)
             return resultShape;
     }
@@ -199,7 +199,7 @@ KShape * SvgParser::findObject(const QString &name, const QList<KShape*> & shape
     return 0;
 }
 
-KShape * SvgParser::findObject(const QString &name, KoShapeContainer * group)
+KShape * SvgParser::findObject(const QString &name, KShapeContainer * group)
 {
     if (! group)
         return 0L;
@@ -208,7 +208,7 @@ KShape * SvgParser::findObject(const QString &name, KoShapeContainer * group)
         if (shape->name() == name)
             return shape;
 
-        KoShapeContainer * container = dynamic_cast<KoShapeContainer*>(shape);
+        KShapeContainer * container = dynamic_cast<KShapeContainer*>(shape);
         if (container) {
             KShape * resultShape = findObject(name, container);
             if (resultShape)

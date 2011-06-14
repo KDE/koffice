@@ -66,14 +66,14 @@ class KoShapeContainerPrivate;
  * and the width of the individual columns gets too small, the model can choose to
  * remove a child or add one when the width allows another column.
  */
-class FLAKE_EXPORT KoShapeContainer : public KShape
+class FLAKE_EXPORT KShapeContainer : public KShape
 {
 public:
 
     /**
      * Default constructor; this constructs a container a default model that does what you expect.
      */
-    KoShapeContainer();
+    KShapeContainer();
 
     /**
      * Constructor with custom model to be used for maintaining the list of children.
@@ -82,13 +82,13 @@ public:
      * container normally has (like clipping).  Use the default constructor in those cases.
      * @param model the custom model to be used for maintaining the list of children.
      */
-    explicit KoShapeContainer(KoShapeContainerModel *model);
+    explicit KShapeContainer(KoShapeContainerModel *model);
 
     /**
      * Destructor for the shape container.
      * All children will be orphaned by calling a KShape::setParent(0)
      */
-    virtual ~KoShapeContainer();
+    virtual ~KShapeContainer();
 
     /**
      * Add a child to this container.
@@ -210,12 +210,12 @@ protected:
     virtual void shapeCountChanged() { }
 
     /// constructor
-    KoShapeContainer(KoShapeContainerPrivate &);
+    KShapeContainer(KoShapeContainerPrivate &);
 
 private:
     void shapeChanged(ChangeType type, KShape *shape);
 
-    Q_DECLARE_PRIVATE(KoShapeContainer)
+    Q_DECLARE_PRIVATE(KShapeContainer)
 };
 
 #endif

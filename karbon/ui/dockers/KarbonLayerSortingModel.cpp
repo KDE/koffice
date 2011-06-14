@@ -21,7 +21,7 @@
 #include "KarbonDocument.h"
 #include <KShape.h>
 #include <KoShapeLayer.h>
-#include <KoShapeContainer.h>
+#include <KShapeContainer.h>
 
 KarbonLayerSortingModel::KarbonLayerSortingModel(QObject * parent)
         : QSortFilterProxyModel(parent)
@@ -54,8 +54,8 @@ bool KarbonLayerSortingModel::lessThan(const QModelIndex &left, const QModelInde
             return m_document->layerPos(leftLayer) < m_document->layerPos(rightLayer);
         } else {
             if (leftShape->zIndex() == rightShape->zIndex()) {
-                KoShapeContainer * leftParent = leftShape->parent();
-                KoShapeContainer * rightParent = rightShape->parent();
+                KShapeContainer * leftParent = leftShape->parent();
+                KShapeContainer * rightParent = rightShape->parent();
                 if (leftParent && leftParent == rightParent) {
                     QList<KShape*> children = leftParent->shapes();
                     return children.indexOf(leftShape) < children.indexOf(rightShape);

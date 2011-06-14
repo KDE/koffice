@@ -30,7 +30,7 @@
 #include "KoShapeLoadingContext.h"
 #include "KoShapeShadow.h"
 #include "KShapeBackground.h"
-#include "KoShapeContainer.h"
+#include "KShapeContainer.h"
 #include "KFilterEffectStack.h"
 #include "KoTextOnShapeContainer.h"
 

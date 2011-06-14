@@ -23,7 +23,7 @@
 #include <QtTest/QtTest>
 
 class KShape;
-class KoShapeContainer;
+class KShapeContainer;
 
 class TestPosition : public QObject
 {
@@ -48,7 +48,7 @@ private:
 
     // vars
     KShape *shape1, *shape2, *childShape1, *childShape2;
-    KoShapeContainer *container, *container2;
+    KShapeContainer *container, *container2;
 };
 
 #endif

@@ -27,15 +27,15 @@
 #include <QList>
 #include <QPointF>
 
-class KoShapeContainer;
+class KShapeContainer;
 
 /**
  * The interface for the container model.
  * This class has no implementation, but only pure virtual methods. You can find a
  * fully implemented model using KoShapeContainerDefaultModel.  Extending this
  * class and implementing all methods allows you to implement a custom data-backend
- * for the KoShapeContainer.
- * @see KoShapeContainer, KoShapeContainerDefaultModel
+ * for the KShapeContainer.
+ * @see KShapeContainer, KoShapeContainerDefaultModel
  */
 class FLAKE_EXPORT KoShapeContainerModel
 {
@@ -142,7 +142,7 @@ public:
      * @param container the actual container that changed.
      * @param type this enum shows which change the container has had.
      */
-    virtual void containerChanged(KoShapeContainer *container, KShape::ChangeType type) = 0;
+    virtual void containerChanged(KShapeContainer *container, KShape::ChangeType type) = 0;
 
     /**
      * This method is called when the user tries to move a shape that is a shape of the

@@ -23,7 +23,7 @@
 
 class KWFrame;
 class KoShapeControllerBase;
-class KoShapeContainer;
+class KShapeContainer;
 class KWOutlineShape;
 
 /// The undo / redo command for creating a custom-runaround outline for an existing shape
@@ -41,7 +41,7 @@ public:
 private:
     KoShapeControllerBase *m_controller;
     KWFrame *m_frame;
-    KoShapeContainer *m_container;
+    KShapeContainer *m_container;
     KWOutlineShape *m_path;
     bool m_deleteOnExit;
 };

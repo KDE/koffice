@@ -19,7 +19,7 @@
  */
 
 #include "KoShapeDeleteCommand.h"
-#include "KoShapeContainer.h"
+#include "KShapeContainer.h"
 #include "KoShapeControllerBase.h"
 
 #include <klocale.h>
@@ -42,7 +42,7 @@ public:
 
     KoShapeControllerBase *controller; ///< the shape controller to use for removing/readding
     QList<KShape*> shapes; ///< the list of shapes to delete
-    QList<KoShapeContainer*> oldParents; ///< the old parents of the shapes
+    QList<KShapeContainer*> oldParents; ///< the old parents of the shapes
     bool deleteShapes;  ///< shows if shapes should be deleted when deleting the command
 };
 

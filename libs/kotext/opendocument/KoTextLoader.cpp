@@ -35,7 +35,7 @@
 #include <KOdfLoadingContext.h>
 #include <KOdfStylesReader.h>
 #include <KProperties.h>
-#include <KoShapeContainer.h>
+#include <KShapeContainer.h>
 #include <KoShapeFactoryBase.h>
 #include <KoShapeLoadingContext.h>
 #include <KoShapeRegistry.h>

@@ -18,7 +18,7 @@
  */
 
 #include "KoTextOnShapeContainer.h"
-#include "KoShapeContainer_p.h"
+#include "KShapeContainer_p.h"
 #include "SimpleShapeContainerModel_p.h"
 #include "KoShapeRegistry.h"
 #include "KoShapeFactoryBase.h"
@@ -34,7 +34,7 @@
 class KoTextOnShapeContainerPrivate : public KoShapeContainerPrivate
 {
 public:
-    KoTextOnShapeContainerPrivate(KoShapeContainer *q);
+    KoTextOnShapeContainerPrivate(KShapeContainer *q);
     virtual ~KoTextOnShapeContainerPrivate();
 
     KShape *content; // the original shape
@@ -46,7 +46,7 @@ class KoTextOnShapeContainerModel : public SimpleShapeContainerModel
 {
 public:
     KoTextOnShapeContainerModel(KoTextOnShapeContainer *qq, KoTextOnShapeContainerPrivate *containerData);
-    virtual void containerChanged(KoShapeContainer *container, KShape::ChangeType type);
+    virtual void containerChanged(KShapeContainer *container, KShape::ChangeType type);
     virtual void proposeMove(KShape *child, QPointF &move);
     virtual void childChanged(KShape *child, KShape::ChangeType type);
     bool inheritsTransform(const KShape *) const {
@@ -59,7 +59,7 @@ public:
 };
 
 // KoTextOnShapeContainerPrivate
-KoTextOnShapeContainerPrivate::KoTextOnShapeContainerPrivate(KoShapeContainer *q)
+KoTextOnShapeContainerPrivate::KoTextOnShapeContainerPrivate(KShapeContainer *q)
     : KoShapeContainerPrivate(q),
     content(0),
     textShape(0),
@@ -81,7 +81,7 @@ KoTextOnShapeContainerModel::KoTextOnShapeContainerModel(KoTextOnShapeContainer 
 {
 }
 
-void KoTextOnShapeContainerModel::containerChanged(KoShapeContainer *container, KShape::ChangeType type)
+void KoTextOnShapeContainerModel::containerChanged(KShapeContainer *container, KShape::ChangeType type)
 {
 #ifdef QT_NO_DEBUG
     Q_UNUSED(container);
@@ -131,7 +131,7 @@ void KoTextOnShapeContainerModel::childChanged(KShape *child, KShape::ChangeType
 
 /// KoTextOnShapeContainer
 KoTextOnShapeContainer::KoTextOnShapeContainer(KShape *childShape, KResourceManager *documentResources)
-    : KoShapeContainer(*(new KoTextOnShapeContainerPrivate(this)))
+    : KShapeContainer(*(new KoTextOnShapeContainerPrivate(this)))
 {
     Q_D(KoTextOnShapeContainer);
     Q_ASSERT(childShape);
@@ -304,7 +304,7 @@ void KoTextOnShapeContainer::tryWrapShape(KShape *shape, const KXmlElement &elem
 {
     KXmlElement text = KoXml::namedItemNS(element, KOdfXmlNS::text, "p");
     if (!text.isNull()) {
-        KoShapeContainer *oldParent = shape->parent();
+        KShapeContainer *oldParent = shape->parent();
         KoTextOnShapeContainer *tos = new KoTextOnShapeContainer(shape,
                 context.documentResourceManager());
         if (!tos->loadOdf(element, context)) {

@@ -22,7 +22,7 @@
 #include "../frames/KWFrame.h"
 
 #include <KoShapeControllerBase.h>
-#include <KoShapeContainer.h>
+#include <KShapeContainer.h>
 
 #include <KLocale>
 

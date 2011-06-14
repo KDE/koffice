@@ -28,13 +28,13 @@
 #include <KOdfXmlNS.h>
 
 KoShapeLayer::KoShapeLayer()
-        : KoShapeContainer(new SimpleShapeContainerModel())
+        : KShapeContainer(new SimpleShapeContainerModel())
 {
     setSelectable(false);
 }
 
 KoShapeLayer::KoShapeLayer(KoShapeContainerModel *model)
-        : KoShapeContainer(model)
+        : KShapeContainer(model)
 {
     setSelectable(false);
 }

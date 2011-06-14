@@ -48,7 +48,7 @@
 #include <KoShapeManager.h>
 #include <KoTextDocument.h>
 #include <KoTextAnchor.h>
-#include <KoShapeContainer.h>
+#include <KShapeContainer.h>
 #include <KOdfWriteStore.h>
 #include <KoToolManager.h>
 #include <KoShapeRegistry.h>
@@ -89,7 +89,7 @@
 // this class will be added to all views and be hidden by default.
 // during loading any frames we find will be added here and only when they are positioned properly will
 // those frames be re-shown.
-class MagicCurtain : public KoShapeContainer
+class MagicCurtain : public KShapeContainer
 {
 public:
     // reimplemented pure virtual calls
@@ -195,7 +195,7 @@ void KWDocument::addShape(KShape *shape)
         }
         // since we auto-decorate we can expect someone to add a shape that has
         // as a child an already existing shape we previous decorated with a frame.
-        recurseFrameRemovalOn(dynamic_cast<KoShapeContainer*>(shape), m_commandBeingAdded);
+        recurseFrameRemovalOn(dynamic_cast<KShapeContainer*>(shape), m_commandBeingAdded);
     }
     Q_ASSERT(frame->frameSet());
     addFrameSet(frame->frameSet());
@@ -206,7 +206,7 @@ void KWDocument::addShape(KShape *shape)
     }
 }
 
-void KWDocument::recurseFrameRemovalOn(KoShapeContainer *container, QUndoCommand *parent)
+void KWDocument::recurseFrameRemovalOn(KShapeContainer *container, QUndoCommand *parent)
 {
     if (container == 0)
         return;
@@ -219,7 +219,7 @@ void KWDocument::recurseFrameRemovalOn(KoShapeContainer *container, QUndoCommand
             else
                 addCommand(cmd);
         }
-        recurseFrameRemovalOn(dynamic_cast<KoShapeContainer*>(shape), parent);
+        recurseFrameRemovalOn(dynamic_cast<KShapeContainer*>(shape), parent);
     }
 }
 

@@ -24,7 +24,7 @@
 #include <qtest_kde.h>
 
 #include <KoTextShapeData.h>
-#include <KoShapeContainer.h>
+#include <KShapeContainer.h>
 
 class QPainter;
 class KoViewConverter;

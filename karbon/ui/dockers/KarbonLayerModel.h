@@ -24,7 +24,7 @@
 
 class KarbonDocument;
 class KShape;
-class KoShapeContainer;
+class KShapeContainer;
 class QAbstractItemModel;
 class KoViewConverter;
 
@@ -64,14 +64,14 @@ private:
     /// Creates a thumbnail image with the specified size from the given shape
     QImage createThumbnail(KShape* shape, const QSize &thumbSize) const;
     /// Returns the child shape with the given index from the parent shape
-    KShape * childFromIndex(KoShapeContainer *parent, int row) const;
+    KShape * childFromIndex(KShapeContainer *parent, int row) const;
     /// Returns the zero based index of a child shape within its parent shape
-    int indexFromChild(KoShapeContainer *parent, KShape *child) const;
+    int indexFromChild(KShapeContainer *parent, KShape *child) const;
     /// Returns the parent model index from the given child shape
     QModelIndex parentIndexFromShape(const KShape * child) const;
 
     /// Recursively locks childs of the specified shape container
-    void lockRecursively(KoShapeContainer *container, bool lock);
+    void lockRecursively(KShapeContainer *container, bool lock);
 
     KarbonDocument *m_document; ///< the underlying data structure
 };

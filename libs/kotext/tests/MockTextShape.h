@@ -23,9 +23,9 @@
 
 #include <KoTextShapeData.h>
 #include <KoTextDocumentLayout.h>
-#include <KoShapeContainer.h>
+#include <KShapeContainer.h>
 
-class MockTextShape : public KoShapeContainer
+class MockTextShape : public KShapeContainer
 {
 public:
     MockTextShape() {

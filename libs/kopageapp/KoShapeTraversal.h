@@ -21,7 +21,7 @@
 #define KOSHAPETRAVERSAL_H
 
 class KShape;
-class KoShapeContainer;
+class KShapeContainer;
 class QString;
 
 /**
@@ -80,9 +80,9 @@ public:
     static KShape * last(KShape * current);
 
 private:
-    static KShape * nextShapeStep(const KShape * current, const KoShapeContainer * parent);
+    static KShape * nextShapeStep(const KShape * current, const KShapeContainer * parent);
 
-    static KShape * previousShapeStep(const KShape * current, const KoShapeContainer * parent);
+    static KShape * previousShapeStep(const KShape * current, const KShapeContainer * parent);
 };
 
 #endif /* KOSHAPETRAVERSAL_H */

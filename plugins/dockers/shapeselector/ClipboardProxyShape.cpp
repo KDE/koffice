@@ -19,7 +19,7 @@
 #include "ClipboardProxyShape.h"
 #include "ZoomHandler.h"
 
-#include <KoShapeContainer.h>
+#include <KShapeContainer.h>
 #include <KShapeBorderBase.h>
 
 #include <QPainter>
@@ -34,7 +34,7 @@ ClipboardProxyShape::ClipboardProxyShape(KShape*clipboardItem, const QByteArray 
 
 static void deleteShape(KShape *shape)
 {
-    KoShapeContainer *container = dynamic_cast<KoShapeContainer*>(shape);
+    KShapeContainer *container = dynamic_cast<KShapeContainer*>(shape);
     if (container) {
         foreach(KShape *shape, container->shapes())
             deleteShape(shape);

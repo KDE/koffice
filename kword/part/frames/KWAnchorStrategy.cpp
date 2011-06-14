@@ -23,7 +23,7 @@
 #include "KWDocument.h"
 #include "KWFrame.h"
 
-#include <KoShapeContainer.h>
+#include <KShapeContainer.h>
 #include <KoTextShapeData.h>
 
 #include <QTextBlock>
@@ -50,7 +50,7 @@ KWAnchorStrategy::~KWAnchorStrategy()
 bool KWAnchorStrategy::checkState(KoTextDocumentLayout::LayoutState *state, int startOfBlock, int startOfBlockText, KWTextFrameSet *frameSet)
 {
     if (m_anchor->shape()->parent() == 0) { // it should be parented to our current shape
-        KoShapeContainer *sc = dynamic_cast<KoShapeContainer*>(state->shape);
+        KShapeContainer *sc = dynamic_cast<KShapeContainer*>(state->shape);
         if (sc == 0) {
             kWarning(32002) << "Failed to attach the anchored shape to a text shape...";
             return false;

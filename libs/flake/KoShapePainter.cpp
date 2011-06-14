@@ -28,7 +28,7 @@
 #include "KoViewConverter.h"
 #include "KShapeBorderBase.h"
 #include "KoShapeGroup.h"
-#include "KoShapeContainer.h"
+#include "KShapeContainer.h"
 
 #include <KUnit.h>
 

@@ -20,7 +20,7 @@
 #define KOTEXTSHAPECONTAINERMODEL_H
 
 #include <KoShapeContainerModel.h>
-#include <KoShapeContainer.h>
+#include <KShapeContainer.h>
 
 #include "kotext_export.h"
 
@@ -51,7 +51,7 @@ public:
     /// reimplemented from KoShapeContainerModel
     virtual QList<KShape*> shapes() const;
     /// reimplemented from KoShapeContainerModel
-    virtual void containerChanged(KoShapeContainer *container, KShape::ChangeType type);
+    virtual void containerChanged(KShapeContainer *container, KShape::ChangeType type);
     /// reimplemented from KoShapeContainerModel
     virtual void proposeMove(KShape *child, QPointF &move);
     /// reimplemented from KoShapeContainerModel

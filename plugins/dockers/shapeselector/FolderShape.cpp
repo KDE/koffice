@@ -28,13 +28,13 @@
 #include <QPainter>
 
 FolderShape::FolderShape()
-    : KoShapeContainer(new FolderShapeModel(this))
+    : KShapeContainer(new FolderShapeModel(this))
 {
 }
 
 void FolderShape::setSize(const QSizeF &size)
 {
-    KoShapeContainer::setSize(size);
+    KShapeContainer::setSize(size);
     static_cast<FolderShapeModel*>(model())->folderResized();
 }
 

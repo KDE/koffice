@@ -25,7 +25,7 @@ KWRemoveFrameClipCommand::KWRemoveFrameClipCommand(const QList<KWFrame*> &frames
     :KWClipFrameCommand(frames, document, parent)
 {
     foreach (KWFrame *frame, frames) {
-        KoShapeContainer *c = frame->shape()->parent();
+        KShapeContainer *c = frame->shape()->parent();
         Q_ASSERT(c);
         m_clipShapes << c;
     }

@@ -39,7 +39,7 @@ class QPainter;
 class QRectF;
 class QPainterPath;
 
-class KoShapeContainer;
+class KShapeContainer;
 class KShapeBorderBase;
 class KShapeBackground;
 class KoShapeManager;
@@ -486,13 +486,13 @@ public:
      * Returns the parent, or 0 if there is no parent.
      * @return the parent, or 0 if there is no parent.
      */
-    KoShapeContainer *parent() const;
+    KShapeContainer *parent() const;
 
     /**
      * Set the parent of this shape.
      * @param parent the new parent of this shape. Can be 0 if the shape has no parent anymore.
      */
-    void setParent(KoShapeContainer *parent);
+    void setParent(KShapeContainer *parent);
 
     /**
      * Request a repaint to be queued.

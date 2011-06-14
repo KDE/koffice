@@ -416,8 +416,8 @@ void KWOdfWriter::addShapeToTree(KShape *shape)
     if (! dynamic_cast<KoShapeGroup*>(shape) && ! dynamic_cast<KoShapeLayer*>(shape))
         m_shapeTree.insert(shape->boundingRect(), shape);
 
-    // add the children of a KoShapeContainer
-    KoShapeContainer *container = dynamic_cast<KoShapeContainer*>(shape);
+    // add the children of a KShapeContainer
+    KShapeContainer *container = dynamic_cast<KShapeContainer*>(shape);
     if (container) {
         foreach(KShape *containerShape, container->shapes()) {
             addShapeToTree(containerShape);

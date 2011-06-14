@@ -27,7 +27,7 @@
 #include <KOdf.h>
 #include <KOdfPageLayoutData.h>
 #include <KShape.h>
-#include <KoShapeContainer.h>
+#include <KShapeContainer.h>
 #include <KoShapeLayer.h>
 #include <KPathShape.h>
 #include <KResourceManager.h>
@@ -244,7 +244,7 @@ bool KarbonImport::loadXML(const KXmlElement& doc)
     return true;
 }
 
-void KarbonImport::loadGroup(KoShapeContainer * parent, const KXmlElement &element)
+void KarbonImport::loadGroup(KShapeContainer * parent, const KXmlElement &element)
 {
     QList<KShape*> shapes;
 
@@ -601,7 +601,7 @@ void KarbonImport::loadCommon(KShape * shape, const KXmlElement &element)
     if (!trafo.isEmpty())
         shape->applyAbsoluteTransformation(KOdf::loadTransformation(trafo));
 
-    if (dynamic_cast<KoShapeContainer*>(shape))
+    if (dynamic_cast<KShapeContainer*>(shape))
         return;
 
     // apply mirroring

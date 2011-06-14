@@ -30,7 +30,7 @@
 #include <KInlineTextObjectManager.h>
 #include <KCanvasBase.h>
 #include <KoShapeController.h>
-#include <KoShapeContainer.h>
+#include <KShapeContainer.h>
 #include <KDeleteChangeMarker.h>
 
 #include <KAction>
@@ -150,11 +150,11 @@ void ShowChangesCommand::checkAndAddAnchoredShapes(int position, int length)
                 continue;
            
             KoTextDocumentLayout *lay = qobject_cast<KoTextDocumentLayout*>(m_document->documentLayout());
-            KoShapeContainer *container = dynamic_cast<KoShapeContainer *>(lay->shapeForPosition(i));
+            KShapeContainer *container = dynamic_cast<KShapeContainer *>(lay->shapeForPosition(i));
             
             // a very ugly hack. Since this class is going away soon, it should be okay
             if (!container)
-                container = dynamic_cast<KoShapeContainer *>((lay->shapes()).at(0));
+                container = dynamic_cast<KShapeContainer *>((lay->shapes()).at(0));
 
             if (container) {
                 container->addShape(anchor->shape());

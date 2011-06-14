@@ -134,7 +134,7 @@ QList<KShape*> KoTextShapeContainerModel::shapes() const
     return answer;
 }
 
-void KoTextShapeContainerModel::containerChanged(KoShapeContainer *container, KShape::ChangeType type)
+void KoTextShapeContainerModel::containerChanged(KShapeContainer *container, KShape::ChangeType type)
 {
     Q_UNUSED(container);
     Q_UNUSED(type);

@@ -36,7 +36,7 @@
 #include <KShapeBackground.h>
 
 KoPAPageBase::KoPAPageBase()
-: KoShapeContainer(new KoPAPageContainerModel())
+: KShapeContainer(new KoPAPageContainerModel())
 {
     // Add a default layer
     KoShapeLayer* layer = new KoShapeLayer;
@@ -215,7 +215,7 @@ QSizeF KoPAPageBase::size() const
 
 QRectF KoPAPageBase::boundingRect() const
 {
-    //return KoShapeContainer::boundingRect();
+    //return KShapeContainer::boundingRect();
     return contentRect().united(QRectF(QPointF(0, 0), size()));
 }
 

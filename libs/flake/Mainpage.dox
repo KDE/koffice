@@ -55,7 +55,7 @@
  *
  *
  * Use KShape as a base object for any application-specific graphical
- * content, and extend KoShapeContainer for objects that can contain other shapes.
+ * content, and extend KShapeContainer for objects that can contain other shapes.
  *
  * KShape is the base class for all flake objects. Flake shapes extend it
  * to allow themselves to be manipulated by the tools. The content of such a

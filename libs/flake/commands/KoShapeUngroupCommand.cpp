@@ -20,11 +20,11 @@
 
 #include "KoShapeUngroupCommand.h"
 #include "KoShapeGroupCommand_p.h"
-#include "KoShapeContainer.h"
+#include "KShapeContainer.h"
 
 #include <klocale.h>
 
-KoShapeUngroupCommand::KoShapeUngroupCommand(KoShapeContainer *container, const QList<KShape *> &shapes,
+KoShapeUngroupCommand::KoShapeUngroupCommand(KShapeContainer *container, const QList<KShape *> &shapes,
         const QList<KShape*> &topLevelShapes, QUndoCommand *parent)
     : KoShapeGroupCommand(*(new KoShapeGroupCommandPrivate(container, shapes)), parent)
 {

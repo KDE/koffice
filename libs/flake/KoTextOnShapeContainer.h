@@ -20,7 +20,7 @@
 #ifndef KOTEXTONSHAPECONTAINER_H
 #define KOTEXTONSHAPECONTAINER_H
 
-#include "KoShapeContainer.h"
+#include "KShapeContainer.h"
 
 #include "flake_export.h"
 
@@ -32,7 +32,7 @@ class KResourceManager;
  * Adding this container as a parent to any shape will allow you to add text
  * on top of that shape in the form of the decorator (design) pattern.
  */
-class FLAKE_EXPORT KoTextOnShapeContainer : public KoShapeContainer
+class FLAKE_EXPORT KoTextOnShapeContainer : public KShapeContainer
 {
 public:
     /**

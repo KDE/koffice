@@ -22,7 +22,7 @@
 #ifndef KOTEXTSHAPE_H
 #define KOTEXTSHAPE_H
 
-#include <KoShapeContainer.h>
+#include <KShapeContainer.h>
 #include <KFrameShape.h>
 #include <KoTextShapeData.h>
 
@@ -42,7 +42,7 @@ class KImageCollection;
  * The Text shape is capable of drawing structured text.
  * @see KoTextShapeData
  */
-class TextShape : public KoShapeContainer, public KFrameShape
+class TextShape : public KShapeContainer, public KFrameShape
 {
 public:
     TextShape();

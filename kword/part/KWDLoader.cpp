@@ -28,7 +28,7 @@
 #include <KoShapeRegistry.h>
 #include <KInlineNote.h>
 #include <KoShapeFactoryBase.h>
-#include <KoShapeContainer.h>
+#include <KShapeContainer.h>
 #include <KoStyleManager.h>
 #include <KParagraphStyle.h>
 #include <KCharacterStyle.h>
@@ -1175,7 +1175,7 @@ void KWDLoader::insertAnchors()
         if (fs->frames().count() == 0)  continue;
         KWFrame *frame = fs->frames().first();
         frame->shape()->setPosition(QPointF(0, 0));
-        KoShapeContainer *container = dynamic_cast<KoShapeContainer*>(anchor.textShape);
+        KShapeContainer *container = dynamic_cast<KShapeContainer*>(anchor.textShape);
         Q_ASSERT(container);
         if (! container) continue;
         container->addShape(frame->shape());   // attach here & avoid extra layouts

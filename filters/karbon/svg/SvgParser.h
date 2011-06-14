@@ -35,7 +35,7 @@
 #include <QtCore/QStack>
 
 class KShape;
-class KoShapeContainer;
+class KShapeContainer;
 class KoShapeGroup;
 class KResourceManager;
 
@@ -106,7 +106,7 @@ protected:
     /// find object with given id in document
     KShape * findObject(const QString &name);
     /// find object with given id in given group
-    KShape * findObject(const QString &name, KoShapeContainer *);
+    KShape * findObject(const QString &name, KShapeContainer *);
     /// find object with given if in given shape list
     KShape * findObject(const QString &name, const QList<KShape*> & shapes);
     /// find gradient with given id in gradient map

@@ -41,10 +41,10 @@ public:
     int paintedCount;
 };
 
-class MockContainer : public KoShapeContainer
+class MockContainer : public KShapeContainer
 {
 public:
-    MockContainer(KoShapeContainerModel *model) : KoShapeContainer(model), paintedCount(0) {}
+    MockContainer(KoShapeContainerModel *model) : KShapeContainer(model), paintedCount(0) {}
     MockContainer() : paintedCount(0) {}
     void paintComponent(QPainter &painter, const KoViewConverter &converter) {
         Q_UNUSED(painter);
@@ -151,7 +151,7 @@ public:
         return m_children;
     }
     /// reimplemented
-    void containerChanged(KoShapeContainer *, KShape::ChangeType) {
+    void containerChanged(KShapeContainer *, KShape::ChangeType) {
         m_containerChangedCalled++;
     }
     /// reimplemented

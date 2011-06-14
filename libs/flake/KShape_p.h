@@ -81,7 +81,7 @@ public:
     QVector<QPointF> connectors; ///< glue points in percent of size [0..1]
     QVector<KShapeConnectionPolicy> connectorPolicies;
 
-    KoShapeContainer *parent;
+    KShapeContainer *parent;
     QSet<KoShapeManager *> shapeManagers;
     QSet<KShape *> toolDelegates;
     KoShapeUserData *userData;

@@ -168,7 +168,7 @@ void SvgExport::saveLayer(KoShapeLayer * layer)
     qSort(sortedShapes.begin(), sortedShapes.end(), KShape::compareShapeZIndex);
 
     foreach(KShape * shape, sortedShapes) {
-        KoShapeContainer * container = dynamic_cast<KoShapeContainer*>(shape);
+        KShapeContainer * container = dynamic_cast<KShapeContainer*>(shape);
         if (container)
             saveGroup(container);
         else
@@ -179,7 +179,7 @@ void SvgExport::saveLayer(KoShapeLayer * layer)
     *m_body << "</g>" << endl;
 }
 
-void SvgExport::saveGroup(KoShapeContainer * group)
+void SvgExport::saveGroup(KShapeContainer * group)
 {
     printIndentation(m_body, m_indent++);
     *m_body << "<g" << getID(group);
@@ -191,7 +191,7 @@ void SvgExport::saveGroup(KoShapeContainer * group)
     qSort(sortedShapes.begin(), sortedShapes.end(), KShape::compareShapeZIndex);
 
     foreach(KShape * shape, sortedShapes) {
-        KoShapeContainer * container = dynamic_cast<KoShapeContainer*>(shape);
+        KShapeContainer * container = dynamic_cast<KShapeContainer*>(shape);
         if (container)
             saveGroup(container);
         else

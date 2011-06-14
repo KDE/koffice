@@ -26,7 +26,7 @@
 #include "KOdfStyleStack.h"
 #include "KOdfLoadingContext.h"
 
-#include <KoShapeContainer.h>
+#include <KShapeContainer.h>
 #include <KXmlWriter.h>
 #include <KXmlReader.h>
 #include <KOdfXmlNS.h>
@@ -75,7 +75,7 @@ public:
     }
 
     /// as multiple shapes can hold 1 text flow; the anchored shape can be moved between containers and thus models
-    void setContainer(KoShapeContainer *container)
+    void setContainer(KShapeContainer *container)
     {
         Q_Q(KoTextAnchor);
         if (container == 0) {
@@ -208,7 +208,7 @@ void KoTextAnchor::updatePosition(QTextInlineObject object, const QTextCharForma
     Q_UNUSED(format);
     Q_D(KoTextAnchor);
     d->format = format;
-    d->setContainer(dynamic_cast<KoShapeContainer*>(shapeForPosition(d->document, d->positionInDocument)));
+    d->setContainer(dynamic_cast<KShapeContainer*>(shapeForPosition(d->document, d->positionInDocument)));
 }
 
 void KoTextAnchor::resize(QTextInlineObject object, const QTextCharFormat &format, QPaintDevice *pd)

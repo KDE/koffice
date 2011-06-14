@@ -28,7 +28,7 @@
 
 class KShape;
 class KoShapeGroup;
-class KoShapeContainer;
+class KShapeContainer;
 class KoShapeGroupCommandPrivate;
 class KoShapeController;
 
@@ -65,12 +65,12 @@ public:
      * @param container the container to group the shapes under.
      * @param shapes a list of all the shapes that should be grouped.
      * @param clipped a list of the same length as the shapes list with one bool for each shape.
-     *      See KoShapeContainer::isClipped()
+     *      See KShapeContainer::isClipped()
      * @param inheritTransform a list of the same length as the shapes list with one bool for each shape.
-     *      See KoShapeContainer::inheritsTransform()
+     *      See KShapeContainer::inheritsTransform()
      * @param parent the parent command used for macro commands
      */
-    KoShapeGroupCommand(KoShapeContainer *container, const QList<KShape *> &shapes,
+    KoShapeGroupCommand(KShapeContainer *container, const QList<KShape *> &shapes,
             const QList<bool> &clipped, const QList<bool> &inheritTransform, QUndoCommand *parent = 0);
     /**
      * Command to group a set of shapes into a predefined container.

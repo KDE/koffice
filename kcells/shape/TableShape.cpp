@@ -27,7 +27,7 @@
 #include <kdebug.h>
 
 #include <KOdfLoadingContext.h>
-#include <KoShapeContainer.h>
+#include <KShapeContainer.h>
 #include <KoShapeLoadingContext.h>
 #include <KoShapeSavingContext.h>
 #include <KOdfXmlNS.h>

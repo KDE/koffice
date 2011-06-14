@@ -19,7 +19,7 @@
 
 #include "KoShapeContainerModel.h"
 
-#include "KoShapeContainer.h"
+#include "KShapeContainer.h"
 
 KoShapeContainerModel::KoShapeContainerModel()
 {
@@ -38,10 +38,10 @@ void KoShapeContainerModel::proposeMove(KShape *child, QPointF &move)
 void KoShapeContainerModel::childChanged(KShape *child, KShape::ChangeType type)
 {
     Q_UNUSED(type);
-    KoShapeContainer * parent = child->parent();
+    KShapeContainer * parent = child->parent();
     Q_ASSERT(parent);
     // propagate the change up the hierarchy
-    KoShapeContainer * grandparent = parent->parent();
+    KShapeContainer * grandparent = parent->parent();
     if (grandparent) {
         grandparent->model()->childChanged(parent, KShape::ChildChanged);
     }

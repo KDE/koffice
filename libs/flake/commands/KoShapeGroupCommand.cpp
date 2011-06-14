@@ -22,7 +22,7 @@
 #include "KoShapeGroupCommand_p.h"
 #include "KShape.h"
 #include "KoShapeGroup.h"
-#include "KoShapeContainer.h"
+#include "KShapeContainer.h"
 #include "KoShapeController.h"
 
 #include <klocale.h>
@@ -54,7 +54,7 @@ QUndoCommand * KoShapeGroupCommand::createCommand(const QList<KShape *> &shapes,
     return cmd;
 }
 
-KoShapeGroupCommandPrivate::KoShapeGroupCommandPrivate(KoShapeContainer *c, const QList<KShape *> &s, const QList<bool> &clip, const QList<bool> &it)
+KoShapeGroupCommandPrivate::KoShapeGroupCommandPrivate(KShapeContainer *c, const QList<KShape *> &s, const QList<bool> &clip, const QList<bool> &it)
     : shapes(s),
     clipped(clip),
     inheritTransform(it),
@@ -63,7 +63,7 @@ KoShapeGroupCommandPrivate::KoShapeGroupCommandPrivate(KoShapeContainer *c, cons
 }
 
 
-KoShapeGroupCommand::KoShapeGroupCommand(KoShapeContainer *container, const QList<KShape *> &shapes, const QList<bool> &clipped, const QList<bool> &inheritTransform, QUndoCommand *parent)
+KoShapeGroupCommand::KoShapeGroupCommand(KShapeContainer *container, const QList<KShape *> &shapes, const QList<bool> &clipped, const QList<bool> &inheritTransform, QUndoCommand *parent)
     : QUndoCommand(parent),
     d(new KoShapeGroupCommandPrivate(container,shapes, clipped, inheritTransform))
 {

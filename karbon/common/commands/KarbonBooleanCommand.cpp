@@ -20,7 +20,7 @@
 #include "KarbonBooleanCommand.h"
 #include <KoShapeControllerBase.h>
 #include <KPathShape.h>
-#include <KoShapeContainer.h>
+#include <KShapeContainer.h>
 #include <KoShapeGroup.h>
 #include <KoShapeGroupCommand.h>
 
@@ -47,7 +47,7 @@ public:
     KPathShape * pathA;
     KPathShape * pathB;
     KPathShape * resultingPath;
-    KoShapeContainer * resultParent;
+    KShapeContainer * resultParent;
     QUndoCommand * resultParentCmd;
     BooleanOperation operation;
     bool isExecuted;

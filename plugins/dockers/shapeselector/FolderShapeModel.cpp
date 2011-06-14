@@ -19,7 +19,7 @@
 #include "FolderShapeModel.h"
 #include "FolderShape.h"
 
-#include <KoShapeContainer.h>
+#include <KShapeContainer.h>
 #include <KDebug>
 
 FolderShapeModel::FolderShapeModel(FolderShape *parent)
@@ -65,7 +65,7 @@ QList<KShape *> FolderShapeModel::shapes() const
     return m_icons;
 }
 
-void FolderShapeModel::containerChanged(KoShapeContainer *, KShape::ChangeType)
+void FolderShapeModel::containerChanged(KShapeContainer *, KShape::ChangeType)
 {
 }
 

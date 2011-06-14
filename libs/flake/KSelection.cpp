@@ -23,7 +23,7 @@
 
 #include "KSelection.h"
 #include "KSelection_p.h"
-#include "KoShapeContainer.h"
+#include "KShapeContainer.h"
 #include "KoShapeGroup.h"
 #include "KPointerEvent.h"
 
@@ -140,7 +140,7 @@ void KSelection::select(KShape *shape, bool recursive)
 
     if (recursive) {
         // recursively select all parents and their children upwards the hierarchy
-        KoShapeContainer *parent = shape->parent();
+        KShapeContainer *parent = shape->parent();
         while (parent) {
             KoShapeGroup *parentGroup = dynamic_cast<KoShapeGroup*>(parent);
             if (! parentGroup) break;
@@ -268,7 +268,7 @@ const QList<KShape*> KSelection::selectedShapes(KoFlake::SelectionType strip) co
     // strip the child objects when there is also a parent included.
     bool doStripping = strip == KoFlake::StrippedSelection;
     foreach(KShape *shape, d->selectedShapes) {
-        KoShapeContainer *container = shape->parent();
+        KShapeContainer *container = shape->parent();
         if (strip != KoFlake::TopLevelSelection && dynamic_cast<KoShapeGroup*>(shape))
             // since a KoShapeGroup
             // guarentees all its children are selected at the same time as itself

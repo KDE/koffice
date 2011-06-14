@@ -74,7 +74,7 @@
 #include <KoToolProxy.h>
 #include <KoShapeManager.h>
 #include <KoShapeController.h>
-#include <KoShapeContainer.h>
+#include <KShapeContainer.h>
 #include <KoShapeGroup.h>
 #include <KoShapeCreateCommand.h>
 #include <KoShapeDeleteCommand.h>
@@ -1121,7 +1121,7 @@ void KarbonView::selectionChanged()
         d->pathSnapToGrid->setEnabled(selectedPaths > 0);
         // if only one shape selected, set its parent layer as the active layer
         if (count == 1) {
-            KoShapeContainer * parent = selection->selectedShapes().first()->parent();
+            KShapeContainer * parent = selection->selectedShapes().first()->parent();
             while (parent) {
                 if (parent->parent())
                     parent = parent->parent();

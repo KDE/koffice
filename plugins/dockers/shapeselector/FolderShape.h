@@ -19,7 +19,7 @@
 #ifndef FOLDERSHAPE_H
 #define FOLDERSHAPE_H
 
-#include <KoShapeContainer.h>
+#include <KShapeContainer.h>
 
 #include <QDomDocument>
 
@@ -30,15 +30,15 @@
  * In the startup phase there is only one folder, which has no border. If the user adds
  * more folders multiple FolderShape items get created.
  * A FolderShape represents one 'book', which is essentially a collection of items the
- * user can drag to his koffice document to insert.  This class inherits KoShapeContainer
+ * user can drag to his koffice document to insert.  This class inherits KShapeContainer
  * and the items to insert are the IconShape or GroupShape or ClipboardProxyShape.
  */
-class FolderShape : public KoShapeContainer
+class FolderShape : public KShapeContainer
 {
 public:
     FolderShape();
 
-    /// reimplemented from KoShapeContainer
+    /// reimplemented from KShapeContainer
     virtual void setSize(const QSizeF &size);
 
     /// save the contents of the folder to an XML based QDomDocument

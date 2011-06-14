@@ -38,15 +38,15 @@
 class KoShapeGroupCommandPrivate
 {
 public:
-    KoShapeGroupCommandPrivate(KoShapeContainer *container, const QList<KShape *> &shapes, const QList<bool> &clipped = QList<bool>(), const QList<bool> &inheritTransform = QList<bool>());
+    KoShapeGroupCommandPrivate(KShapeContainer *container, const QList<KShape *> &shapes, const QList<bool> &clipped = QList<bool>(), const QList<bool> &inheritTransform = QList<bool>());
     void init(QUndoCommand *q);
     QRectF containerBoundingRect();
 
     QList<KShape*> shapes; ///<list of shapes to be grouped
     QList<bool> clipped; ///< list of booleans to specify the shape of the same index to be clipped
     QList<bool> inheritTransform; ///< list of booleans to specify the shape of the same index to inherit transform
-    KoShapeContainer *container; ///< the container where the grouping should be for.
-    QList<KoShapeContainer*> oldParents; ///< the old parents of the shapes
+    KShapeContainer *container; ///< the container where the grouping should be for.
+    QList<KShapeContainer*> oldParents; ///< the old parents of the shapes
     QList<bool> oldClipped; ///< if the shape was clipped in the old parent
     QList<bool> oldInheritTransform; ///< if the shape was inheriting transform in the old parent
     QList<int> oldZIndex; ///< the old z-index of the shapes

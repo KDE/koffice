@@ -29,7 +29,7 @@
 #include <QtGui/QMatrix>
 
 class KShape;
-class KoShapeContainer;
+class KShapeContainer;
 
 class KarbonImport : public KoFilter
 {
@@ -47,7 +47,7 @@ protected:
     bool convert(const KXmlDocument &);
     bool loadXML(const KXmlElement& doc);
 
-    void loadGroup(KoShapeContainer * parent, const KXmlElement &element);
+    void loadGroup(KShapeContainer * parent, const KXmlElement &element);
     void loadStyle(KShape * shape, const KXmlElement &element);
     void loadCommon(KShape * shape, const KXmlElement &element);
     void loadStroke(KShape * shape, const KXmlElement &element);

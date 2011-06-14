@@ -23,7 +23,7 @@
 
 #include <KCSheet.h>
 
-#include <KoShapeContainer.h>
+#include <KShapeContainer.h>
 #include <KoTextDocumentLayout.h>
 #include <KoTextShapeData.h>
 
@@ -94,7 +94,7 @@ void TablePageManager::preparePage(int page)
     const int masterIndex = textShapes.indexOf(d->master);
     if (masterIndex < 0)
         return;  // huh?
-    KoShapeContainer* const textShape = dynamic_cast<KoShapeContainer*>(textShapes.value(masterIndex + page - 1));
+    KShapeContainer* const textShape = dynamic_cast<KShapeContainer*>(textShapes.value(masterIndex + page - 1));
     if (textShape) {
         TableShape* const shape = new TableShape(d->master->columns(), d->master->rows());
         const TableShape* predecessor = d->pages[page - 1];

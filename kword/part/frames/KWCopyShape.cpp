@@ -25,7 +25,7 @@
 #include <KShapeBorderBase.h>
 #include <KoViewConverter.h>
 #include <KoTextShapeData.h>
-#include <KoShapeContainer.h>
+#include <KShapeContainer.h>
 #include <KoShapeLoadingContext.h> //for Q_UNUSED
 
 #include <QPainter>
@@ -75,7 +75,7 @@ void KWCopyShape::paint(QPainter &painter, const KoViewConverter &converter)
     }
 
     //paint all child shapes
-    KoShapeContainer *container = dynamic_cast<KoShapeContainer*>(m_original);
+    KShapeContainer *container = dynamic_cast<KShapeContainer*>(m_original);
     if (container) {
         if (!container->shapeCount()) {
             return;

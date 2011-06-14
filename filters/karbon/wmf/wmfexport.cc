@@ -28,7 +28,7 @@
 #include <KoFilterChain.h>
 #include <KLineBorder.h>
 #include <KShape.h>
-#include <KoShapeContainer.h>
+#include <KShapeContainer.h>
 #include <KColorBackground.h>
 #include <KGradientBackground.h>
 #include <KPatternBackground.h>
@@ -102,7 +102,7 @@ void WmfExport::paintDocument(KarbonDocument& document)
 
     // Export layers.
     foreach(KShape * shape, shapes) {
-        if (dynamic_cast<KoShapeContainer*>(shape))
+        if (dynamic_cast<KShapeContainer*>(shape))
             continue;
         paintShape(shape);
     }

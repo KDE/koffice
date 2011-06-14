@@ -29,7 +29,7 @@
 #include <KPointerEvent.h>
 #include <KPathShape.h>
 #include <KoShapeController.h>
-#include <KoShapeContainer.h>
+#include <KShapeContainer.h>
 #include <KLineBorder.h>
 
 #include <KLocale>

@@ -24,7 +24,7 @@
 #include <QString>
 #include <QPixmap>
 
-#include <KoShapeContainer.h>
+#include <KShapeContainer.h>
 // #include <KXmlReader.h>
 
 #include "KoPageApp.h"
@@ -47,7 +47,7 @@ class KoPASavingContext;
  * A Page contains KoShapeLayer shapes as direct children. The layers than can
  * contain all the different shapes.
  */
-class KOPAGEAPP_EXPORT KoPAPageBase : public KoShapeContainer
+class KOPAGEAPP_EXPORT KoPAPageBase : public KShapeContainer
 {
 public:
     explicit KoPAPageBase();

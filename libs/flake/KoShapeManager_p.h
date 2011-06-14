@@ -69,7 +69,7 @@ public:
         void detect(KRTree<KShape *> &tree, KShape *s, int prevZIndex) {
             foreach(KShape *shape, tree.intersects(s->boundingRect())) {
                 bool isChild = false;
-                KoShapeContainer *parent = s->parent();
+                KShapeContainer *parent = s->parent();
                 while (parent && !isChild) {
                     if (parent == shape)
                         isChild = true;

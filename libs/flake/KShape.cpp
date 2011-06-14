@@ -22,7 +22,7 @@
 
 #include "KShape.h"
 #include "KShape_p.h"
-#include "KoShapeContainer.h"
+#include "KShapeContainer.h"
 #include "KoShapeLayer.h"
 #include "KoShapeContainerModel.h"
 #include "KSelection.h"
@@ -430,7 +430,7 @@ QTransform KShape::absoluteTransformation(const KoViewConverter *converter) cons
     Q_D(const KShape);
     QTransform matrix;
     // apply parents matrix to inherit any transformations done there.
-    KoShapeContainer * container = d->parent;
+    KShapeContainer * container = d->parent;
     if (container) {
         if (container->inheritsTransform(this)) {
             // We do need to pass the converter here, otherwise the parent's
@@ -519,12 +519,12 @@ bool KShape::compareShapeZIndex(KShape *s1, KShape *s2)
     return index1 < index2;
 }
 
-void KShape::setParent(KoShapeContainer *parent)
+void KShape::setParent(KShapeContainer *parent)
 {
     Q_D(KShape);
     if (d->parent == parent)
         return;
-    KoShapeContainer *oldParent = d->parent;
+    KShapeContainer *oldParent = d->parent;
     d->parent = 0; // avoids recursive removing
     if (oldParent)
         oldParent->removeShape(this);
@@ -551,7 +551,7 @@ void KShape::update() const
             manager->priv()->update(rect, this, true);
 
         // also ask update for children which inherit transform
-        const KoShapeContainer *me = dynamic_cast<const KoShapeContainer*>(this);
+        const KShapeContainer *me = dynamic_cast<const KShapeContainer*>(this);
         if (me && me->model()) {
             KoShapeContainerModel *model = me->model();
             foreach (KShape *shape, model->shapes()) {
@@ -827,7 +827,7 @@ bool KShape::isVisible(bool recursive) const
     if (recursive && ! d->visible)
         return false;
 
-    KoShapeContainer * parentShape = parent();
+    KShapeContainer * parentShape = parent();
     while (parentShape) {
         if (! parentShape->isVisible())
             return false;
@@ -887,7 +887,7 @@ bool KShape::isContentProtected() const
     return d->protectContent;
 }
 
-KoShapeContainer *KShape::parent() const
+KShapeContainer *KShape::parent() const
 {
     Q_D(const KShape);
     return d->parent;

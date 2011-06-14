@@ -20,7 +20,7 @@
 #ifndef KOSHAPEGROUP_H
 #define KOSHAPEGROUP_H
 
-#include "KoShapeContainer.h"
+#include "KShapeContainer.h"
 
 #include <QList>
 
@@ -41,7 +41,7 @@ class KoShapeLoadingContext;
  * <p>Note that while this object is also a shape, it is not actually visible and the user
  * can't interact with it.
  */
-class FLAKE_EXPORT KoShapeGroup : public KoShapeContainer
+class FLAKE_EXPORT KoShapeGroup : public KShapeContainer
 {
 public:
     /// Constructor

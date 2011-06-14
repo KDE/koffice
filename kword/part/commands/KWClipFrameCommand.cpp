@@ -23,12 +23,12 @@
 #include "../KWView.h"
 #include "../frames/KWFrame.h"
 
-#include <KoShapeContainer.h>
+#include <KShapeContainer.h>
 #include <KoShapeManager.h>
 
 #include <KLocale>
 
-class KWFrameClipper : public KoShapeContainer
+class KWFrameClipper : public KShapeContainer
 {
 public:
     void paintComponent(QPainter &, const KoViewConverter &) {}
@@ -56,7 +56,7 @@ void KWClipFrameCommand::redo()
     bool createClipShapes = m_clipShapes.count() != m_frames.count();
     for (int i = 0; i < m_frames.count(); ++i) {
         KWFrame *frame = m_frames.at(i);
-        KoShapeContainer *container;
+        KShapeContainer *container;
         if (createClipShapes) {
             container = new KWFrameClipper();
             m_clipShapes.append(container);
@@ -84,7 +84,7 @@ void KWClipFrameCommand::undo()
 
     for (int i = 0; i < m_frames.count(); ++i) {
         KWFrame *frame = m_frames.at(i);
-        KoShapeContainer *container = m_clipShapes.at(i);
+        KShapeContainer *container = m_clipShapes.at(i);
         Q_ASSERT(frame->shape()->parent() == container);
         QPointF pos = frame->shape()->absolutePosition();
         frame->shape()->setParent(0);

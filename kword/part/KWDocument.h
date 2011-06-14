@@ -43,7 +43,7 @@ class KWFrameSet;
 class MagicCurtain;
 
 class KInlineTextObjectManager;
-class KoShapeContainer;
+class KShapeContainer;
 
 class KLocalizedString;
 class QIODevice;
@@ -227,7 +227,7 @@ private:
     void saveConfig();
 
     /// remove the KWFrame 'applicationData' from shapes that the container holds
-    void recurseFrameRemovalOn(KoShapeContainer *container, QUndoCommand *parent);
+    void recurseFrameRemovalOn(KShapeContainer *container, QUndoCommand *parent);
 
 private:
     QList<KWFrameSet*> m_frameSets;

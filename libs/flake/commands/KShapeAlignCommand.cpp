@@ -48,7 +48,7 @@ KShapeAlignCommand::KShapeAlignCommand(const QList<KShape*> &shapes, Align align
     foreach(KShape *shape, shapes) {
 //   if (dynamic_cast<KoShapeGroup*> (shape))
 //       kDebug(30006) <<"Found Group";
-//   else if (dynamic_cast<KoShapeContainer*> (shape))
+//   else if (dynamic_cast<KShapeContainer*> (shape))
 //       kDebug(30006) <<"Found Container";
 //   else
 //       kDebug(30006) <<"Found shape";

@@ -20,7 +20,7 @@
 #ifndef __KOSHAPELAYER_H__
 #define __KOSHAPELAYER_H__
 
-#include "KoShapeContainer.h"
+#include "KShapeContainer.h"
 #include "flake_export.h"
 
 class KoShapeLayerPrivate;
@@ -31,7 +31,7 @@ class KoShapeLayerPrivate;
  * in a document.
  * A layer is always invisible and unselectable.
  */
-class FLAKE_EXPORT KoShapeLayer : public KoShapeContainer
+class FLAKE_EXPORT KoShapeLayer : public KShapeContainer
 {
 public:
     /// The default constructor

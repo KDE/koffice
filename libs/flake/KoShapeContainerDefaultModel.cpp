@@ -21,7 +21,7 @@
 
 #include "KoShapeContainerDefaultModel.h"
 
-#include "KoShapeContainer.h"
+#include "KShapeContainer.h"
 
 class KoShapeContainerDefaultModel::Private
 {
@@ -85,7 +85,7 @@ void KoShapeContainerDefaultModel::add(KShape *child)
 
 void KoShapeContainerDefaultModel::proposeMove(KShape *shape, QPointF &move)
 {
-    KoShapeContainer *parent = shape->parent();
+    KShapeContainer *parent = shape->parent();
     bool allowedToMove = true;
     while (allowedToMove && parent) {
         allowedToMove = parent->isEditable();
@@ -144,7 +144,7 @@ bool KoShapeContainerDefaultModel::isChildLocked(const KShape *child) const
     return child->isGeometryProtected();
 }
 
-void KoShapeContainerDefaultModel::containerChanged(KoShapeContainer *, KShape::ChangeType)
+void KoShapeContainerDefaultModel::containerChanged(KShapeContainer *, KShape::ChangeType)
 {
 }
 

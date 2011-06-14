@@ -17,8 +17,8 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#include "KoShapeContainer.h"
-#include "KoShapeContainer_p.h"
+#include "KShapeContainer.h"
+#include "KShapeContainer_p.h"
 #include "KoShapeContainerModel.h"
 #include "KShapeBorderBase.h"
 #include "KoShapeContainerDefaultModel.h"
@@ -28,7 +28,7 @@
 #include <QPainter>
 #include <QPainterPath>
 
-KoShapeContainerPrivate::KoShapeContainerPrivate(KoShapeContainer *q)
+KoShapeContainerPrivate::KoShapeContainerPrivate(KShapeContainer *q)
     : KShapePrivate(q),
     model(0)
 {
@@ -39,35 +39,35 @@ KoShapeContainerPrivate::~KoShapeContainerPrivate()
     delete model;
 }
 
-KoShapeContainer::KoShapeContainer()
+KShapeContainer::KShapeContainer()
     : KShape(*(new KoShapeContainerPrivate(this)))
 {
 }
 
-KoShapeContainer::KoShapeContainer(KoShapeContainerModel *model)
+KShapeContainer::KShapeContainer(KoShapeContainerModel *model)
         : KShape(*(new KoShapeContainerPrivate(this)))
 {
-    Q_D(KoShapeContainer);
+    Q_D(KShapeContainer);
     d->model = model;
 }
 
-KoShapeContainer::KoShapeContainer(KoShapeContainerPrivate &dd)
+KShapeContainer::KShapeContainer(KoShapeContainerPrivate &dd)
     : KShape(dd)
 {
 }
 
-KoShapeContainer::~KoShapeContainer()
+KShapeContainer::~KShapeContainer()
 {
-    Q_D(KoShapeContainer);
+    Q_D(KShapeContainer);
     if (d->model) {
         foreach(KShape *shape, d->model->shapes())
             shape->setParent(0);
     }
 }
 
-void KoShapeContainer::addShape(KShape *shape)
+void KShapeContainer::addShape(KShape *shape)
 {
-    Q_D(KoShapeContainer);
+    Q_D(KShapeContainer);
     Q_ASSERT(shape);
     if (shape->parent() == this && shapes().contains(shape))
         return;
@@ -80,9 +80,9 @@ void KoShapeContainer::addShape(KShape *shape)
     shapeCountChanged();
 }
 
-void KoShapeContainer::removeShape(KShape *shape)
+void KShapeContainer::removeShape(KShape *shape)
 {
-    Q_D(KoShapeContainer);
+    Q_D(KShapeContainer);
     Q_ASSERT(shape);
     if (d->model == 0)
         return;
@@ -90,55 +90,55 @@ void KoShapeContainer::removeShape(KShape *shape)
     shape->setParent(0);
     shapeCountChanged();
 
-    KoShapeContainer * grandparent = parent();
+    KShapeContainer * grandparent = parent();
     if (grandparent) {
         grandparent->model()->childChanged(this, KShape::ChildChanged);
     }
 }
 
-int  KoShapeContainer::shapeCount() const
+int  KShapeContainer::shapeCount() const
 {
-    Q_D(const KoShapeContainer);
+    Q_D(const KShapeContainer);
     if (d->model == 0)
         return 0;
     return d->model->count();
 }
 
-bool KoShapeContainer::isChildLocked(const KShape *child) const
+bool KShapeContainer::isChildLocked(const KShape *child) const
 {
-    Q_D(const KoShapeContainer);
+    Q_D(const KShapeContainer);
     if (d->model == 0)
         return false;
     return d->model->isChildLocked(child);
 }
 
-void KoShapeContainer::setClipped(const KShape *child, bool clipping)
+void KShapeContainer::setClipped(const KShape *child, bool clipping)
 {
-    Q_D(KoShapeContainer);
+    Q_D(KShapeContainer);
     if (d->model == 0)
         return;
     d->model->setClipped(child, clipping);
 }
 
-void KoShapeContainer::setInheritsTransform(const KShape *shape, bool inherit)
+void KShapeContainer::setInheritsTransform(const KShape *shape, bool inherit)
 {
-    Q_D(KoShapeContainer);
+    Q_D(KShapeContainer);
     if (d->model == 0)
         return;
     d->model->setInheritsTransform(shape, inherit);
 }
 
-bool KoShapeContainer::inheritsTransform(const KShape *shape) const
+bool KShapeContainer::inheritsTransform(const KShape *shape) const
 {
-    Q_D(const KoShapeContainer);
+    Q_D(const KShapeContainer);
     if (d->model == 0)
         return false;
     return d->model->inheritsTransform(shape);
 }
 
-void KoShapeContainer::paint(QPainter &painter, const KoViewConverter &converter)
+void KShapeContainer::paint(QPainter &painter, const KoViewConverter &converter)
 {
-    Q_D(KoShapeContainer);
+    Q_D(KShapeContainer);
     painter.save();
     paintComponent(painter, converter);
     painter.restore();
@@ -171,7 +171,7 @@ void KoShapeContainer::paint(QPainter &painter, const KoViewConverter &converter
 
 
     foreach(KShape *shape, sortedObjects) {
-        //kDebug(30006) <<"KoShapeContainer::painting shape:" << shape->shapeId() <<"," << shape->boundingRect();
+        //kDebug(30006) <<"KShapeContainer::painting shape:" << shape->shapeId() <<"," << shape->boundingRect();
         if (!shape->isVisible())
             continue;
         if (!isClipped(shape))  // the shapeManager will have to draw those, or else we can't do clipRects
@@ -194,14 +194,14 @@ void KoShapeContainer::paint(QPainter &painter, const KoViewConverter &converter
     }
 }
 
-void KoShapeContainer::paintComponent(QPainter &, const KoViewConverter &)
+void KShapeContainer::paintComponent(QPainter &, const KoViewConverter &)
 {
     // empty
 }
 
-void KoShapeContainer::shapeChanged(ChangeType type, KShape *shape)
+void KShapeContainer::shapeChanged(ChangeType type, KShape *shape)
 {
-    Q_D(KoShapeContainer);
+    Q_D(KShapeContainer);
     Q_UNUSED(shape);
     if (d->model == 0)
         return;
@@ -213,30 +213,30 @@ void KoShapeContainer::shapeChanged(ChangeType type, KShape *shape)
         shape->notifyChanged();
 }
 
-bool KoShapeContainer::isClipped(const KShape *child) const
+bool KShapeContainer::isClipped(const KShape *child) const
 {
-    Q_D(const KoShapeContainer);
+    Q_D(const KShapeContainer);
     if (d->model == 0) // throw exception??
         return false;
     return d->model->isClipped(child);
 }
 
-QList<KShape*> KoShapeContainer::shapes() const
+QList<KShape*> KShapeContainer::shapes() const
 {
-    Q_D(const KoShapeContainer);
+    Q_D(const KShapeContainer);
     if (d->model == 0)
         return QList<KShape*>();
 
     return d->model->shapes();
 }
 
-KoShapeContainerModel *KoShapeContainer::model() const
+KoShapeContainerModel *KShapeContainer::model() const
 {
-    Q_D(const KoShapeContainer);
+    Q_D(const KShapeContainer);
     return d->model;
 }
 
-void KoShapeContainer::saveOdfChildElements(KoShapeSavingContext &context) const
+void KShapeContainer::saveOdfChildElements(KoShapeSavingContext &context) const
 {
     Q_UNUSED(context);
 }

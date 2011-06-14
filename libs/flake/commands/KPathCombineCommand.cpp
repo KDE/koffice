@@ -20,7 +20,7 @@
 
 #include "KPathCombineCommand.h"
 #include "KoShapeControllerBase.h"
-#include "KoShapeContainer.h"
+#include "KShapeContainer.h"
 #include <klocale.h>
 
 class KPathCombineCommand::Private
@@ -44,9 +44,9 @@ public:
 
     KoShapeControllerBase *controller;
     QList<KPathShape*> paths;
-    QList<KoShapeContainer*> oldParents;
+    QList<KShapeContainer*> oldParents;
     KPathShape *combinedPath;
-    KoShapeContainer *combinedPathParent;
+    KShapeContainer *combinedPathParent;
     bool isCombined;
 };
 
@@ -83,7 +83,7 @@ void KPathCombineCommand::redo()
     d->isCombined = true;
 
     if (d->controller) {
-        QList<KoShapeContainer*>::iterator parentIt = d->oldParents.begin();
+        QList<KShapeContainer*>::iterator parentIt = d->oldParents.begin();
         foreach(KPathShape* p, d->paths) {
             d->controller->removeShape(p);
             if (*parentIt)
@@ -108,7 +108,7 @@ void KPathCombineCommand::undo()
         d->controller->removeShape(d->combinedPath);
         if (d->combinedPath->parent())
             d->combinedPath->parent()->removeShape(d->combinedPath);
-        QList<KoShapeContainer*>::iterator parentIt = d->oldParents.begin();
+        QList<KShapeContainer*>::iterator parentIt = d->oldParents.begin();
         foreach(KPathShape* p, d->paths) {
             d->controller->addShape(p);
             p->setParent(*parentIt);

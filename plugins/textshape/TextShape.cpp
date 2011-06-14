@@ -81,7 +81,7 @@ struct Finalizer {
 
 
 TextShape::TextShape()
-    : KoShapeContainer(new KoTextShapeContainerModel()),
+    : KShapeContainer(new KoTextShapeContainerModel()),
     KFrameShape(KOdfXmlNS::draw, "text-box"),
     m_footnotes(0),
     m_demoText(false),

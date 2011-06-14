@@ -46,7 +46,7 @@ public:
     /// returns content items added earlier
     virtual QList<KShape *> shapes() const;
     /// reimplemented from KoShapeContainerModel
-    virtual void containerChanged(KoShapeContainer *container, KShape::ChangeType type);
+    virtual void containerChanged(KShapeContainer *container, KShape::ChangeType type);
     /// reimplemented from KoShapeContainerModel
     virtual void childChanged(KShape *child, KShape::ChangeType type);
 

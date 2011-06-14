@@ -24,7 +24,7 @@
 
 #include <KoShapeManager.h>
 #include <KShapeBorderBase.h>
-#include <KoShapeContainer.h>
+#include <KShapeContainer.h>
 #include <KoToolManager.h>
 #include <KCanvasBase.h>
 #include <KCanvasController.h>
@@ -75,7 +75,7 @@ int KarbonLayerModel::rowCount(const QModelIndex &parent) const
     Q_ASSERT(parent.model() == this);
     Q_ASSERT(parent.internalPointer());
 
-    KoShapeContainer *parentShape = dynamic_cast<KoShapeContainer*>((KShape*)parent.internalPointer());
+    KShapeContainer *parentShape = dynamic_cast<KShapeContainer*>((KShape*)parent.internalPointer());
     if (! parentShape)
         return 0;
 
@@ -106,7 +106,7 @@ QModelIndex KarbonLayerModel::index(int row, int column, const QModelIndex &pare
     Q_ASSERT(parent.model() == this);
     Q_ASSERT(parent.internalPointer());
 
-    KoShapeContainer *parentShape = dynamic_cast<KoShapeContainer*>((KShape*)parent.internalPointer());
+    KShapeContainer *parentShape = dynamic_cast<KShapeContainer*>((KShape*)parent.internalPointer());
     if (! parentShape)
         return QModelIndex();
 
@@ -137,7 +137,7 @@ QModelIndex KarbonLayerModel::parent(const QModelIndex &child) const
         return QModelIndex();
 
     // get the children's parent shape
-    KoShapeContainer *parentShape = childShape->parent();
+    KShapeContainer *parentShape = childShape->parent();
     if (! parentShape)
         return QModelIndex();
 
@@ -147,7 +147,7 @@ QModelIndex KarbonLayerModel::parent(const QModelIndex &child) const
         return createIndex(m_document->layers().indexOf(parentLayer), 0, parentShape);
 
     // get the grandparent to determine the row of the parent shape
-    KoShapeContainer *grandParentShape = parentShape->parent();
+    KShapeContainer *grandParentShape = parentShape->parent();
     if (! grandParentShape)
         return QModelIndex();
 
@@ -196,7 +196,7 @@ QVariant KarbonLayerModel::data(const QModelIndex &index, int role) const
     case AspectRatioRole: {
         QTransform matrix = shape->absoluteTransformation(0);
         QRectF bbox = matrix.mapRect(shape->outline().boundingRect());
-        KoShapeContainer *container = dynamic_cast<KoShapeContainer*>(shape);
+        KShapeContainer *container = dynamic_cast<KShapeContainer*>(shape);
         if (container) {
             bbox = QRectF();
             foreach(KShape* shape, container->shapes())
@@ -221,7 +221,7 @@ Qt::ItemFlags KarbonLayerModel::flags(const QModelIndex &index) const
     Q_ASSERT(index.internalPointer());
 
     Qt::ItemFlags flags = Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsDragEnabled | Qt::ItemIsEditable;
-    //if( dynamic_cast<KoShapeContainer*>( (KShape*)index.internalPointer() ) )
+    //if( dynamic_cast<KShapeContainer*>( (KShape*)index.internalPointer() ) )
     flags |= Qt::ItemIsDropEnabled;
     return flags;
 }
@@ -280,7 +280,7 @@ void KarbonLayerModel::setProperties(KShape* shape, const PropertyList &properti
     shape->setVisible(newVisibleState);
     shape->setGeometryProtected(newLockedState);
 
-    KoShapeContainer * container = dynamic_cast<KoShapeContainer*>(shape);
+    KShapeContainer * container = dynamic_cast<KShapeContainer*>(shape);
     if (container)
         lockRecursively(container, newLockedState);
     else
@@ -290,7 +290,7 @@ void KarbonLayerModel::setProperties(KShape* shape, const PropertyList &properti
         shape->update();
 }
 
-void KarbonLayerModel::lockRecursively(KoShapeContainer *container, bool lock)
+void KarbonLayerModel::lockRecursively(KShapeContainer *container, bool lock)
 {
     if (!container)
        return;
@@ -302,7 +302,7 @@ void KarbonLayerModel::lockRecursively(KoShapeContainer *container, bool lock)
     }
 
     foreach(KShape *shape, container->shapes()) {
-        KoShapeContainer * shapeContainer = dynamic_cast<KoShapeContainer*>(shape);
+        KShapeContainer * shapeContainer = dynamic_cast<KShapeContainer*>(shape);
         if (shapeContainer) {
             lockRecursively(shapeContainer, lock);
         } else {
@@ -322,7 +322,7 @@ QImage KarbonLayerModel::createThumbnail(KShape* shape, const QSize &thumbSize) 
     QList<KShape*> shapes;
 
     shapes.append(shape);
-    KoShapeContainer * container = dynamic_cast<KoShapeContainer*>(shape);
+    KShapeContainer * container = dynamic_cast<KShapeContainer*>(shape);
     if (container)
         shapes.append(container->shapes());
 
@@ -342,12 +342,12 @@ QImage KarbonLayerModel::createThumbnail(KShape* shape, const QSize &thumbSize) 
     return thumb;
 }
 
-KShape * KarbonLayerModel::childFromIndex(KoShapeContainer *parent, int row) const
+KShape * KarbonLayerModel::childFromIndex(KShapeContainer *parent, int row) const
 {
     return parent->shapes().at(row);
 }
 
-int KarbonLayerModel::indexFromChild(KoShapeContainer *parent, KShape *child) const
+int KarbonLayerModel::indexFromChild(KShapeContainer *parent, KShape *child) const
 {
     return parent->shapes().indexOf(child);
 }
@@ -425,7 +425,7 @@ bool KarbonLayerModel::dropMimeData(const QMimeData * data, Qt::DropAction actio
     // remove shapes having its parent in the list
     // and separate the layers
     foreach(KShape * shape, shapes) {
-        KoShapeContainer * parent = shape->parent();
+        KShapeContainer * parent = shape->parent();
         bool hasParentInList = false;
         while (parent) {
             if (shapes.contains(parent)) {
@@ -449,7 +449,7 @@ bool KarbonLayerModel::dropMimeData(const QMimeData * data, Qt::DropAction actio
         return false;
     }
     KShape *shape = static_cast<KShape*>(parent.internalPointer());
-    KoShapeContainer * container = dynamic_cast<KoShapeContainer*>(shape);
+    KShapeContainer * container = dynamic_cast<KShapeContainer*>(shape);
     if (container) {
         KoShapeGroup * group = dynamic_cast<KoShapeGroup*>(container);
         if (group) {
@@ -538,7 +538,7 @@ QModelIndex KarbonLayerModel::parentIndexFromShape(const KShape * child) const
         return QModelIndex();
 
     // get the children's parent shape
-    KoShapeContainer *parentShape = child->parent();
+    KShapeContainer *parentShape = child->parent();
     if (! parentShape)
         return QModelIndex();
 
@@ -548,7 +548,7 @@ QModelIndex KarbonLayerModel::parentIndexFromShape(const KShape * child) const
         return createIndex(m_document->layers().indexOf(parentLayer), 0, parentShape);
 
     // get the grandparent to determine the row of the parent shape
-    KoShapeContainer *grandParentShape = parentShape->parent();
+    KShapeContainer *grandParentShape = parentShape->parent();
     if (! grandParentShape)
         return QModelIndex();
 

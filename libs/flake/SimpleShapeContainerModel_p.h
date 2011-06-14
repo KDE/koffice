@@ -57,7 +57,7 @@ public:
     QList<KShape*> shapes() const {
         return QList<KShape*>(m_members);
     }
-    void containerChanged(KoShapeContainer *, KShape::ChangeType) { }
+    void containerChanged(KShapeContainer *, KShape::ChangeType) { }
     bool isChildLocked(const KShape *child) const {
         Q_ASSERT(child->parent());
         return child->isGeometryProtected() || child->parent()->isGeometryProtected();

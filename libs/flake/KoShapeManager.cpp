@@ -26,7 +26,7 @@
 #include "KoToolManager.h"
 #include "KPointerEvent.h"
 #include "KCanvasBase.h"
-#include "KoShapeContainer.h"
+#include "KShapeContainer.h"
 #include "KShapeBorderBase.h"
 #include "KoToolProxy.h"
 #include "KoShapeManagerPaintingStrategy.h"
@@ -197,8 +197,8 @@ void KoShapeManager::addShape(KShape *shape, Repaint repaint)
         shape->update();
     }
 
-    // add the children of a KoShapeContainer
-    KoShapeContainer *container = dynamic_cast<KoShapeContainer*>(shape);
+    // add the children of a KShapeContainer
+    KShapeContainer *container = dynamic_cast<KShapeContainer*>(shape);
 
     if (container) {
         foreach (KShape *containerShape, container->shapes()) {
@@ -235,8 +235,8 @@ void KoShapeManager::remove(KShape *shape)
     d->tree.remove(shape);
     d->shapes.removeAll(shape);
 
-    // remove the children of a KoShapeContainer
-    KoShapeContainer *container = dynamic_cast<KoShapeContainer*>(shape);
+    // remove the children of a KShapeContainer
+    KShapeContainer *container = dynamic_cast<KShapeContainer*>(shape);
     if (container) {
         foreach (KShape *containerShape, container->shapes()) {
             remove(containerShape);
@@ -277,7 +277,7 @@ void KoShapeManager::paint(QPainter &painter, const KoViewConverter &converter, 
             continue;
         bool addShapeToList = true;
         // check if one of the shapes ancestors have filter effects
-        KoShapeContainer *parent = shape->parent();
+        KShapeContainer *parent = shape->parent();
         while (parent) {
             // parent must be part of the shape manager to be taken into account
             if (!d->shapes.contains(parent))
@@ -562,7 +562,7 @@ void KoShapeManager::notifyShapeChanged(KShape *shape)
     d->aggregate4update.insert(shape);
     d->shapeIndexesBeforeUpdate.insert(shape, shape->zIndex());
 
-    KoShapeContainer *container = dynamic_cast<KoShapeContainer*>(shape);
+    KShapeContainer *container = dynamic_cast<KShapeContainer*>(shape);
     if (container) {
         foreach(KShape *child, container->shapes())
             notifyShapeChanged(child);

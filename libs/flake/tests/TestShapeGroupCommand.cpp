@@ -179,7 +179,7 @@ void TestShapeGroupCommand::testSublevelGroup()
     expectedOrder << sublevelShape2 << sublevelShape1;
     QCOMPARE(childOrder, expectedOrder); 
     // check that the group has the zIndex/parent of its added top shape 
-    QCOMPARE(toplevelGroup->parent(), static_cast<KoShapeContainer*>(0));
+    QCOMPARE(toplevelGroup->parent(), static_cast<KShapeContainer*>(0));
     QCOMPARE(toplevelGroup->zIndex(), 1);
 }
 

@@ -25,7 +25,7 @@
 
 class KWFrame;
 class KWDocument;
-class KoShapeContainer;
+class KShapeContainer;
 
 /// The undo / redo command for making a frame 'clipped'.
 class KWClipFrameCommand : public QUndoCommand
@@ -42,7 +42,7 @@ public:
 protected:
     KWDocument *m_document;
     QList<KWFrame*> m_frames;
-    QList<KoShapeContainer*> m_clipShapes;
+    QList<KShapeContainer*> m_clipShapes;
     bool m_ownClipShapes;
 };
 

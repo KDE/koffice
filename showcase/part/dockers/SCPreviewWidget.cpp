@@ -22,7 +22,7 @@
 #include <QPainter>
 #include <QMouseEvent>
 #include <KoShapePainter.h>
-#include <KoShapeContainer.h>
+#include <KShapeContainer.h>
 #include <KoPAMasterPage.h>
 #include <KoZoomHandler.h>
 

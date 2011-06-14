@@ -20,7 +20,7 @@
 #include "SCPlaceholders.h"
 
 #include <KShape.h>
-#include <KoShapeContainer.h>
+#include <KShapeContainer.h>
 #include <KoShapeLayer.h>
 #include <KoShapeMoveCommand.h>
 #include <KoShapeSizeCommand.h>
@@ -185,7 +185,7 @@ void SCPlaceholders::add(const QList<KShape *> &shapes)
         if (!presentationClass.isNull()) {
             m_placeholders.get<1>().insert(Placeholder(presentationClass, shape, placeholder == "true"));
         }
-        KoShapeContainer* container = dynamic_cast<KoShapeContainer*>(shape);
+        KShapeContainer* container = dynamic_cast<KShapeContainer*>(shape);
         if (container) {
             add(container->shapes());
         }

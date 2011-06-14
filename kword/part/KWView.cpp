@@ -64,7 +64,7 @@
 #include <KPathShape.h> // for KoPathShapeId
 #include <KResourceManager.h>
 #include <KSelection.h>
-#include <KoShapeContainer.h>
+#include <KShapeContainer.h>
 #include <KoShapeController.h>
 #include <KoShapeCreateCommand.h>
 #include <KoShapeFactoryBase.h>
@@ -112,7 +112,7 @@ static KWFrame *frameForShape(KShape *shape)
 
     KWFrame *answer = dynamic_cast<KWFrame*>(shape->applicationData());
     if (answer == 0) { // this may be a clipping shape containing the frame-shape
-        KoShapeContainer *container = dynamic_cast<KoShapeContainer*>(shape);
+        KShapeContainer *container = dynamic_cast<KShapeContainer*>(shape);
         if (container && container->shapeCount() == 1) {
             answer = dynamic_cast<KWFrame*>(container->shapes()[0]->applicationData());
         }
@@ -1108,7 +1108,7 @@ void KWView::inlineFrame()
     selection->select(frameForAnchor->shape());
 
     QPointF absPos = targetShape->absolutePosition();
-    targetShape->setParent(static_cast<KoShapeContainer*>(frameForAnchor->shape()));
+    targetShape->setParent(static_cast<KShapeContainer*>(frameForAnchor->shape()));
     targetShape->setAbsolutePosition(absPos);
 
     QString tool = KoToolManager::instance()->preferredToolForSelection(selection->selectedShapes());
@@ -1230,7 +1230,7 @@ void KWView::createCustomOutline()
     KSelection *selection = m_canvas->shapeManager()->selection();
     selection->deselectAll();
     foreach (KWFrame *frame, frames) {
-        KoShapeContainer *group = frame->shape()->parent();
+        KShapeContainer *group = frame->shape()->parent();
         if (group)
             selection->select(group);
     }

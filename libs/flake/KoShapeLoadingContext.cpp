@@ -20,7 +20,7 @@
 
 #include "KoShapeLoadingContext.h"
 #include "KShape.h"
-#include "KoShapeContainer.h"
+#include "KShapeContainer.h"
 #include "KoSharedLoadingData.h"
 #include "KoShapeControllerBase.h"
 #include "KImageCollection.h"

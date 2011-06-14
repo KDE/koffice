@@ -20,7 +20,7 @@
 
 #include "KoShapeCreateCommand.h"
 #include "KShape.h"
-#include "KoShapeContainer.h"
+#include "KShapeContainer.h"
 #include "KoShapeControllerBase.h"
 
 #include <klocale.h>
@@ -41,7 +41,7 @@ public:
 
     KoShapeControllerBase *controller;
     KShape *shape;
-    KoShapeContainer *shapeParent;
+    KShapeContainer *shapeParent;
     bool deleteShape;
 };
 
