@@ -17,13 +17,13 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoShapeShadowCommand.h"
+#include "KShapeShadowCommand.h"
 #include "KShape.h"
 #include "KShapeShadow.h"
 
 #include <klocale.h>
 
-class KoShapeShadowCommand::Private
+class KShapeShadowCommand::Private
 {
 public:
     Private() {}
@@ -53,7 +53,7 @@ public:
     QList<KShapeShadow*> newShadows; ///< the new shadows to set
 };
 
-KoShapeShadowCommand::KoShapeShadowCommand(const QList<KShape*> &shapes, KShapeShadow *shadow,  QUndoCommand *parent)
+KShapeShadowCommand::KShapeShadowCommand(const QList<KShape*> &shapes, KShapeShadow *shadow,  QUndoCommand *parent)
     : QUndoCommand(parent)
     , d(new Private())
 {
@@ -67,7 +67,7 @@ KoShapeShadowCommand::KoShapeShadowCommand(const QList<KShape*> &shapes, KShapeS
     setText(i18n("Set Shadow"));
 }
 
-KoShapeShadowCommand::KoShapeShadowCommand(const QList<KShape*> &shapes, const QList<KShapeShadow*> &shadows, QUndoCommand *parent)
+KShapeShadowCommand::KShapeShadowCommand(const QList<KShape*> &shapes, const QList<KShapeShadow*> &shadows, QUndoCommand *parent)
     : QUndoCommand(parent)
     , d(new Private())
 {
@@ -84,7 +84,7 @@ KoShapeShadowCommand::KoShapeShadowCommand(const QList<KShape*> &shapes, const Q
     setText(i18n("Set Shadow"));
 }
 
-KoShapeShadowCommand::KoShapeShadowCommand(KShape* shape, KShapeShadow *shadow, QUndoCommand *parent)
+KShapeShadowCommand::KShapeShadowCommand(KShape* shape, KShapeShadow *shadow, QUndoCommand *parent)
     : QUndoCommand(parent)
     , d(new Private())
 {
@@ -95,12 +95,12 @@ KoShapeShadowCommand::KoShapeShadowCommand(KShape* shape, KShapeShadow *shadow, 
     setText(i18n("Set Shadow"));
 }
 
-KoShapeShadowCommand::~KoShapeShadowCommand()
+KShapeShadowCommand::~KShapeShadowCommand()
 {
     delete d;
 }
 
-void KoShapeShadowCommand::redo()
+void KShapeShadowCommand::redo()
 {
     QUndoCommand::redo();
     int shapeCount = d->shapes.count();
@@ -112,7 +112,7 @@ void KoShapeShadowCommand::redo()
     }
 }
 
-void KoShapeShadowCommand::undo()
+void KShapeShadowCommand::undo()
 {
     QUndoCommand::undo();
     int shapeCount = d->shapes.count();

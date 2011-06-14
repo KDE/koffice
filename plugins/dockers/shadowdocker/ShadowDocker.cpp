@@ -25,7 +25,7 @@
 #include <KoToolManager.h>
 #include <KCanvasController.h>
 #include <KoShadowConfigWidget.h>
-#include <KoShapeShadowCommand.h>
+#include <KShapeShadowCommand.h>
 #include <KLocale>
 #include <QtGui/QSpacerItem>
 #include <QtGui/QGridLayout>
@@ -124,7 +124,7 @@ void ShadowDocker::shadowChanged()
     newShadow->setVisible(d->widget->shadowVisible());
     newShadow->setColor( d->widget->shadowColor() );
     newShadow->setOffset( d->widget->shadowOffset() );
-    d->canvas->addCommand( new KoShapeShadowCommand( selection->selectedShapes(), newShadow ) );
+    d->canvas->addCommand( new KShapeShadowCommand( selection->selectedShapes(), newShadow ) );
 }
 
 void ShadowDocker::locationChanged(Qt::DockWidgetArea area)

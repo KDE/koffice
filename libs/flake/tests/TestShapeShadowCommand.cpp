@@ -20,7 +20,7 @@
 
 #include <MockShapes.h>
 #include "KShapeShadow.h"
-#include "KoShapeShadowCommand.h"
+#include "KShapeShadowCommand.h"
 
 void TestShapeShadowCommand::refCounting()
 {
@@ -34,7 +34,7 @@ void TestShapeShadowCommand::refCounting()
     QCOMPARE(shadow1->useCount(), 1);
 
     // old shadow1, new shadow2
-    QUndoCommand *cmd1 = new KoShapeShadowCommand(shape1, shadow2);
+    QUndoCommand *cmd1 = new KShapeShadowCommand(shape1, shadow2);
     cmd1->redo();
     QVERIFY(shape1->shadow() == shadow2);
 
@@ -43,7 +43,7 @@ void TestShapeShadowCommand::refCounting()
     QVERIFY(shape1->shadow() == shadow1);
 
     // old shadow1, new shadow3
-    QUndoCommand *cmd2 = new KoShapeShadowCommand(shape1, shadow3);
+    QUndoCommand *cmd2 = new KShapeShadowCommand(shape1, shadow3);
     cmd2->redo();
     QVERIFY(shape1->shadow() == shadow3);
 

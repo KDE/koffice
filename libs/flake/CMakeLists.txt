@@ -137,7 +137,7 @@ set(flake_SRCS
     commands/KParameterToPathCommand.cpp
     commands/KoShapeTransformCommand.cpp
     commands/KPathFillRuleCommand.cpp
-    commands/KoShapeShadowCommand.cpp
+    commands/KShapeShadowCommand.cpp
     commands/KPathReverseCommand.cpp
     commands/KEventActionAddCommand.cpp
     commands/KEventActionRemoveCommand.cpp
@@ -329,7 +329,7 @@ install(
 
     commands/KEventActionAddCommand.h
     commands/KEventActionRemoveCommand.h
-    commands/KoShapeShadowCommand.h
+    commands/KShapeShadowCommand.h
 
     DESTINATION
     ${INCLUDE_INSTALL_DIR}/private COMPONENT Devel

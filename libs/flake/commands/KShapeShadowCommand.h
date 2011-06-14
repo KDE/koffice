@@ -28,7 +28,7 @@ class KShape;
 class KShapeShadow;
 
 /// The undo / redo command for setting the shape shadow
-class FLAKE_EXPORT KoShapeShadowCommand : public QUndoCommand
+class FLAKE_EXPORT KShapeShadowCommand : public QUndoCommand
 {
 public:
     /**
@@ -37,7 +37,7 @@ public:
      * @param shadow the new shadow, the same for all given shapes
      * @param parent the parent command used for macro commands
      */
-    KoShapeShadowCommand(const QList<KShape*> & shapes, KShapeShadow *shadow, QUndoCommand *parent = 0);
+    KShapeShadowCommand(const QList<KShape*> & shapes, KShapeShadow *shadow, QUndoCommand *parent = 0);
 
     /**
      * Command to set new shape shadows.
@@ -45,7 +45,7 @@ public:
      * @param shadows the new shadows, one for each shape
      * @param parent the parent command used for macro commands
      */
-    KoShapeShadowCommand(const QList<KShape*> &shapes, const QList<KShapeShadow*> &shadows, QUndoCommand *parent = 0);
+    KShapeShadowCommand(const QList<KShape*> &shapes, const QList<KShapeShadow*> &shadows, QUndoCommand *parent = 0);
 
     /**
      * Command to set a new shape shadow.
@@ -53,9 +53,9 @@ public:
      * @param shadow the new shadow
      * @param parent the parent command used for macro commands
      */
-    KoShapeShadowCommand(KShape *shape, KShapeShadow *shadow, QUndoCommand *parent = 0);
+    KShapeShadowCommand(KShape *shape, KShapeShadow *shadow, QUndoCommand *parent = 0);
 
-    virtual ~KoShapeShadowCommand();
+    virtual ~KShapeShadowCommand();
     /// redo the command
     void redo();
     /// revert the actions done in redo
