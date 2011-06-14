@@ -13,7 +13,7 @@
 #include <KoDeleteChangeMarker.h>
 #include <QTextDocumentFragment>
 #include <KInlineTextObjectManager.h>
-#include <KoChangeTrackerElement.h>
+#include <KChangeTrackerElement.h>
 #include <KoCharacterStyle.h>
 #include <KChangeTracker.h>
 

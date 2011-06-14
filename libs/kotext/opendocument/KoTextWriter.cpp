@@ -60,7 +60,7 @@
 
 #include <opendocument/KoTextSharedSavingData.h>
 #include <changetracker/KChangeTracker.h>
-#include <changetracker/KoChangeTrackerElement.h>
+#include <changetracker/KChangeTrackerElement.h>
 #include <changetracker/KoDeleteChangeMarker.h>
 #include <KFormatChangeInformation_p.h>
 #include <KOdfGenericChange.h>

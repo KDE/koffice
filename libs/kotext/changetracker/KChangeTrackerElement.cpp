@@ -17,13 +17,13 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoChangeTrackerElement.h"
+#include "KChangeTrackerElement.h"
 #include "KoDeleteChangeMarker.h"
 #include <QTextDocumentFragment>
 
 #include <KDebug>
 
-class KoChangeTrackerElement::Private
+class KChangeTrackerElement::Private
 {
 public:
     Private() {}
@@ -46,7 +46,7 @@ public:
     bool valid;
 };
 
-KoChangeTrackerElement::KoChangeTrackerElement(const QString& title, KOdfGenericChange::Type type)
+KChangeTrackerElement::KChangeTrackerElement(const QString& title, KOdfGenericChange::Type type)
     :d(new Private())
 {
     d->title = title;
@@ -56,12 +56,12 @@ KoChangeTrackerElement::KoChangeTrackerElement(const QString& title, KOdfGeneric
     d->marker = NULL;
 }
 
-KoChangeTrackerElement::KoChangeTrackerElement()
+KChangeTrackerElement::KChangeTrackerElement()
     :d(new Private())
 {
 }
 
-KoChangeTrackerElement::KoChangeTrackerElement(const KoChangeTrackerElement& other)
+KChangeTrackerElement::KChangeTrackerElement(const KChangeTrackerElement& other)
     :d(new Private())
 {
     d->title = other.d->title;
@@ -77,147 +77,147 @@ KoChangeTrackerElement::KoChangeTrackerElement(const KoChangeTrackerElement& oth
     d->valid = other.d->valid;
 }
 
-KoChangeTrackerElement::~KoChangeTrackerElement()
+KChangeTrackerElement::~KChangeTrackerElement()
 {
     delete d;
 }
 
-void KoChangeTrackerElement::setEnabled(bool enabled)
+void KChangeTrackerElement::setEnabled(bool enabled)
 {
     d->enabled = enabled;
 }
 
-bool KoChangeTrackerElement::isEnabled() const
+bool KChangeTrackerElement::isEnabled() const
 {
     return d->enabled;
 }
 
-void KoChangeTrackerElement::setAcceptedRejected(bool set)
+void KChangeTrackerElement::setAcceptedRejected(bool set)
 {
     d->acceptedRejected = set;
 }
 
-bool KoChangeTrackerElement::acceptedRejected() const
+bool KChangeTrackerElement::acceptedRejected() const
 {
     return d->acceptedRejected;
 }
 
-void KoChangeTrackerElement::setValid(bool valid)
+void KChangeTrackerElement::setValid(bool valid)
 {
     d->valid = valid;
 }
 
-bool KoChangeTrackerElement::isValid() const
+bool KChangeTrackerElement::isValid() const
 {
     return d->valid;
 }
 
-void KoChangeTrackerElement::setChangeType(KOdfGenericChange::Type type)
+void KChangeTrackerElement::setChangeType(KOdfGenericChange::Type type)
 {
     d->type = type;
 }
 
-KOdfGenericChange::Type KoChangeTrackerElement::changeType() const
+KOdfGenericChange::Type KChangeTrackerElement::changeType() const
 {
     return d->type;
 }
 
-void KoChangeTrackerElement::setChangeTitle(const QString& title)
+void KChangeTrackerElement::setChangeTitle(const QString& title)
 {
     d->title = title;
 }
 
-QString KoChangeTrackerElement::changeTitle() const
+QString KChangeTrackerElement::changeTitle() const
 {
     return d->title;
 }
 
-void KoChangeTrackerElement::setChangeFormat(const QTextFormat &format)
+void KChangeTrackerElement::setChangeFormat(const QTextFormat &format)
 {
     d->changeFormat = format;
 }
 
-QTextFormat KoChangeTrackerElement::changeFormat() const
+QTextFormat KChangeTrackerElement::changeFormat() const
 {
     return d->changeFormat;
 }
 
-void KoChangeTrackerElement::setPrevFormat(const QTextFormat &format)
+void KChangeTrackerElement::setPrevFormat(const QTextFormat &format)
 {
     d->prevFormat = format;
 }
 
-QTextFormat KoChangeTrackerElement::prevFormat() const
+QTextFormat KChangeTrackerElement::prevFormat() const
 {
     return d->prevFormat;
 }
 
-bool KoChangeTrackerElement::hasCreator() const
+bool KChangeTrackerElement::hasCreator() const
 {
     return !d->creator.isEmpty();
 }
 
-void KoChangeTrackerElement::setCreator(const QString& creator)
+void KChangeTrackerElement::setCreator(const QString& creator)
 {
     d->creator = creator;
 }
 
-QString KoChangeTrackerElement::creator() const
+QString KChangeTrackerElement::creator() const
 {
     return d->creator;
 }
 
-bool KoChangeTrackerElement::hasDate() const
+bool KChangeTrackerElement::hasDate() const
 {
     return !d->date.isEmpty();
 }
 
-void KoChangeTrackerElement::setDate(const QString& date)
+void KChangeTrackerElement::setDate(const QString& date)
 {
     d->date = date;
 }
 
-QString KoChangeTrackerElement::date() const
+QString KChangeTrackerElement::date() const
 {
     return d->date;
 }
 
-bool KoChangeTrackerElement::hasExtraMetaData() const
+bool KChangeTrackerElement::hasExtraMetaData() const
 {
     return !d->extraMetaData.isEmpty();
 }
 
-void KoChangeTrackerElement::setExtraMetaData(const QString& metaData)
+void KChangeTrackerElement::setExtraMetaData(const QString& metaData)
 {
     d->extraMetaData = metaData;
 }
 
-QString KoChangeTrackerElement::extraMetaData() const
+QString KChangeTrackerElement::extraMetaData() const
 {
     return d->extraMetaData;
 }
 
-bool KoChangeTrackerElement::hasDeleteData() const
+bool KChangeTrackerElement::hasDeleteData() const
 {
     return !d->deleteFragment.isEmpty();
 }
 
-void KoChangeTrackerElement::setDeleteData(const QTextDocumentFragment& fragment)
+void KChangeTrackerElement::setDeleteData(const QTextDocumentFragment& fragment)
 {
     d->deleteFragment = fragment;
 }
 
-QTextDocumentFragment KoChangeTrackerElement::deleteData() const
+QTextDocumentFragment KChangeTrackerElement::deleteData() const
 {
     return d->deleteFragment;
 }
 
-void KoChangeTrackerElement::setDeleteChangeMarker(KoDeleteChangeMarker *marker)
+void KChangeTrackerElement::setDeleteChangeMarker(KoDeleteChangeMarker *marker)
 {
     d->marker = marker;
 }
 
-KoDeleteChangeMarker *KoChangeTrackerElement::deleteChangeMarker()
+KoDeleteChangeMarker *KChangeTrackerElement::deleteChangeMarker()
 {
     return d->marker;
 }

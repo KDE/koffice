@@ -30,7 +30,7 @@
 #include "KoTextLocator.h"
 #include "KoTextOdfSaveHelper.h"
 #include "changetracker/KChangeTracker.h"
-#include "changetracker/KoChangeTrackerElement.h"
+#include "changetracker/KChangeTrackerElement.h"
 #include "changetracker/KoDeleteChangeMarker.h"
 #include "styles/KoCharacterStyle.h"
 #include "styles/KParagraphStyle.h"

@@ -32,7 +32,7 @@
 #include <KoShape.h>
 
 #include <KChangeTracker.h>
-#include <KoChangeTrackerElement.h>
+#include <KChangeTrackerElement.h>
 #include <KOdfGenericChange.h>
 
 #include <QTextDocument>
@@ -372,7 +372,7 @@ void TableLayout::drawBackground(QPainter *painter, const KoTextDocumentLayout::
         for (int row = 0; row < m_table->rows(); ++row) {
             for (int column = 0; column < m_table->columns(); ++column) {
                 QTextTableCell tableCell = m_table->cellAt(row, column);
-                KoChangeTrackerElement *changeElement = changeTracker->elementById(tableCell.format().property(KoCharacterStyle::ChangeTrackerId).toInt());
+                KChangeTrackerElement *changeElement = changeTracker->elementById(tableCell.format().property(KoCharacterStyle::ChangeTrackerId).toInt());
                 if (!changeElement) {
                     //Check For table changes
                     changeElement = changeTracker->elementById(m_table->format().property(KoCharacterStyle::ChangeTrackerId).toInt());

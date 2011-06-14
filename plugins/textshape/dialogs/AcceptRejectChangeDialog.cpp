@@ -19,7 +19,7 @@
 
 #include "AcceptRejectChangeDialog.h"
 #include <KChangeTracker.h>
-#include <KoChangeTrackerElement.h>
+#include <KChangeTrackerElement.h>
 
 AcceptRejectChangeDialog::AcceptRejectChangeDialog(KChangeTracker *changeTracker, int changeId)
 {

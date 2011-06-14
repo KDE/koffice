@@ -30,7 +30,7 @@ class TextTool;
 class QTextDocument;
 class QTextCursor;
 class QTextDocumentFragment;
-class KoChangeTrackerElement;
+class KChangeTrackerElement;
 class KoDeleteChangeMarker;
 class KInlineTextObjectManager;
 

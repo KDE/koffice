@@ -27,7 +27,7 @@
 #include <TextTool.h>
 #include <klocale.h>
 #include <KChangeTracker.h>
-#include <KoChangeTrackerElement.h>
+#include <KChangeTrackerElement.h>
 #include <KoTextDocument.h>
 #include <KoTextDocumentLayout.h>
 #include <KInlineTextObjectManager.h>
@@ -287,7 +287,7 @@ void ChangeTrackedDeleteCommand::deleteSelection(QTextCursor &selection)
     selection.setPosition(selectionEnd, QTextCursor::KeepAnchor);
     QTextDocumentFragment deletedFragment;
     changeId = KoTextDocument(document).changeTracker()->deleteChangeId(i18n("Deletion"), deletedFragment, 0);
-    KoChangeTrackerElement *element = KoTextDocument(document).changeTracker()->elementById(changeId);
+    KChangeTrackerElement *element = KoTextDocument(document).changeTracker()->elementById(changeId);
     deleteChangemarker = new KoDeleteChangeMarker(KoTextDocument(document).changeTracker());
     deleteChangemarker->setChangeId(changeId);
     element->setDeleteChangeMarker(deleteChangemarker);
@@ -447,7 +447,7 @@ void ChangeTrackedDeleteCommand::removeChangeElement(int changeId)
 {
     QTextDocument *document = m_tool->m_textEditor.data()->document();
     KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(document->documentLayout());
-    KoChangeTrackerElement *element = KoTextDocument(document).changeTracker()->elementById(changeId);
+    KChangeTrackerElement *element = KoTextDocument(document).changeTracker()->elementById(changeId);
     KoDeleteChangeMarker *marker = element->deleteChangeMarker();
     layout->inlineTextObjectManager()->removeInlineObject(marker);
     KoTextDocument(document).changeTracker()->removeById(changeId);

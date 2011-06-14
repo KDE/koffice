@@ -56,7 +56,7 @@
 #include "KoTextInlineRdf.h"
 
 #include "changetracker/KChangeTracker.h"
-#include "changetracker/KoChangeTrackerElement.h"
+#include "changetracker/KChangeTrackerElement.h"
 #include "changetracker/KoDeleteChangeMarker.h"
 #include <KFormatChangeInformation_p.h>
 #include "styles/KoStyleManager.h"
@@ -288,7 +288,7 @@ void KoTextLoader::Private::openChangeRegion(const KXmlElement& element)
 
     changeTransTable.insert(id, changeId);
 
-    KoChangeTrackerElement *changeElement = changeTracker->elementById(changeId);
+    KChangeTrackerElement *changeElement = changeTracker->elementById(changeId);
     changeElement->setEnabled(true);
 
     if ((element.localName() == "remove-leaving-content-start")) {
@@ -531,7 +531,7 @@ void KoTextLoader::loadBody(const KXmlElement &bodyElem, QTextCursor &cursor)
                                 d->changeTracker->setParent(changeId, d->changeStack.top());
                             KoDeleteChangeMarker *deleteChangemarker = new KoDeleteChangeMarker(d->changeTracker);
                             deleteChangemarker->setChangeId(changeId);
-                            KoChangeTrackerElement *changeElement = d->changeTracker->elementById(changeId);
+                            KChangeTrackerElement *changeElement = d->changeTracker->elementById(changeId);
                             changeElement->setDeleteChangeMarker(deleteChangemarker);
                             changeElement->setEnabled(true);
                             KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(cursor.block().document()->documentLayout());
@@ -915,7 +915,7 @@ void KoTextLoader::loadDeleteChangeOutsidePorH(QString id, QTextCursor &cursor)
     int changeId = d->changeTracker->loadedChangeId(id);
 
     if (changeId) {
-        KoChangeTrackerElement *changeElement = d->changeTracker->elementById(changeId);
+        KChangeTrackerElement *changeElement = d->changeTracker->elementById(changeId);
         KXmlElement element = d->deleteChangeTable.value(id);
 
         //Call loadBody with this element
@@ -1512,7 +1512,7 @@ void KoTextLoader::loadSpan(const KXmlElement &element, QTextCursor &cursor, boo
                     d->changeTracker->setParent(changeId, d->changeStack.top());
                 KoDeleteChangeMarker *deleteChangemarker = new KoDeleteChangeMarker(d->changeTracker);
                 deleteChangemarker->setChangeId(changeId);
-                KoChangeTrackerElement *changeElement = d->changeTracker->elementById(changeId);
+                KChangeTrackerElement *changeElement = d->changeTracker->elementById(changeId);
                 changeElement->setDeleteChangeMarker(deleteChangemarker);
                 changeElement->setEnabled(true);
                 KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(cursor.block().document()->documentLayout());
@@ -1724,7 +1724,7 @@ void KoTextLoader::loadDeleteChangeWithinPorH(QString id, QTextCursor &cursor)
     QTextBlockFormat blockFormat = cursor.block().blockFormat();
 
     if (changeId) {
-        KoChangeTrackerElement *changeElement = d->changeTracker->elementById(changeId);
+        KChangeTrackerElement *changeElement = d->changeTracker->elementById(changeId);
         KXmlElement element = d->deleteChangeTable.value(id);
         KXmlElement tag;
         forEachElement(tag, element) {
@@ -1807,7 +1807,7 @@ KoDeleteChangeMarker * KoTextLoader::Private::insertDeleteChangeMarker(QTextCurs
     if (changeId) {
         KoDeleteChangeMarker *deleteChangemarker = new KoDeleteChangeMarker(changeTracker);
         deleteChangemarker->setChangeId(changeId);
-        KoChangeTrackerElement *changeElement = changeTracker->elementById(changeId);
+        KChangeTrackerElement *changeElement = changeTracker->elementById(changeId);
         changeElement->setDeleteChangeMarker(deleteChangemarker);
         changeElement->setEnabled(true);
         changeElement->setChangeType(KOdfGenericChange::DeleteChange);
@@ -1827,7 +1827,7 @@ bool KoTextLoader::Private::checkForDeleteMerge(QTextCursor &cursor, const QStri
 
     int changeId = changeTracker->loadedChangeId(id);
     if (changeId) {
-        KoChangeTrackerElement *changeElement = changeTracker->elementById(changeId);
+        KChangeTrackerElement *changeElement = changeTracker->elementById(changeId);
         //Check if this change is at the beginning of the block and if there is a
         //delete-change at the end of the previous block with the same change-id
         //If both the conditions are true, then merge both these deletions.
@@ -1870,7 +1870,7 @@ void KoTextLoader::Private::processDeleteChange(QTextCursor &cursor)
     foreach (marker, markersList) {
         int changeId = marker->changeId();
 
-        KoChangeTrackerElement *changeElement = changeTracker->elementById(changeId);
+        KChangeTrackerElement *changeElement = changeTracker->elementById(changeId);
         QPair<int, int> rangeValue = deleteChangeMarkerMap.value(marker);
         int startPosition = rangeValue.first;
         int endPosition = rangeValue.second;

@@ -36,7 +36,7 @@ class QTextDocumentFragment;
 class QTextList;
 class KoDeleteChangeMarker;
 class KXmlElement;
-class KoChangeTrackerElement;
+class KChangeTrackerElement;
 class KFormatChangeInformation;
 class KoDeletedRowColumnDataStore;
 
@@ -71,11 +71,11 @@ public:
     void setFormatChangeInformation(int formatChangeId, KFormatChangeInformation *formatInformation);
     KFormatChangeInformation *formatChangeInformation(int formatChangeId);
 
-    KoChangeTrackerElement* elementById(int id);
+    KChangeTrackerElement* elementById(int id);
     bool removeById(int id, bool freeMemory = true);
 
     //Returns all the deleted changes
-    int deletedChanges(QVector<KoChangeTrackerElement *> &deleteVector) const;
+    int deletedChanges(QVector<KChangeTrackerElement *> &deleteVector) const;
 
     int allChangeIds(QVector<int> &changesVector) const;
 

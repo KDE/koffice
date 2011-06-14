@@ -25,7 +25,7 @@
 #include <KoTextDocumentLayout.h>
 
 #include <KChangeTracker.h>
-#include <KoChangeTrackerElement.h>
+#include <KChangeTrackerElement.h>
 #include <KoCharacterStyle.h>
 #include <KoDeleteChangeMarker.h>
 

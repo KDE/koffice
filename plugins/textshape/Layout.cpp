@@ -45,7 +45,7 @@
 #include <KUnit.h>
 #include <KoTextDocument.h>
 #include <KChangeTracker.h>
-#include <KoChangeTrackerElement.h>
+#include <KChangeTrackerElement.h>
 #include <KOdfGenericChange.h>
 #include <KoTextBlockPaintStrategyBase.h>
 #include <KImageData.h>
@@ -1222,7 +1222,7 @@ void Layout::drawFrame(QTextFrame *frame, QPainter *painter, const KoTextDocumen
                     QTextCharFormat format = currentFragment.charFormat();
                     int changeId = format.intProperty(KoCharacterStyle::ChangeTrackerId);
                     if (changeId && m_changeTracker && m_changeTracker->displayChanges()) {
-                        KoChangeTrackerElement *changeElement = m_changeTracker->elementById(changeId);
+                        KChangeTrackerElement *changeElement = m_changeTracker->elementById(changeId);
                         switch(changeElement->changeType()) {
                             case (KOdfGenericChange::InsertChange):
                             format.setBackground(QBrush(m_changeTracker->insertionBgColor()));

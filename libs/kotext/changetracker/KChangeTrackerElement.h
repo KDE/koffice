@@ -31,22 +31,22 @@ class QTextDocumentFragment;
 class KoDeleteChangeMarker;
 
 
-class KOTEXT_EXPORT KoChangeTrackerElement
+class KOTEXT_EXPORT KChangeTrackerElement
 {
 public:
 
-    KoChangeTrackerElement(const QString &title, KOdfGenericChange::Type type);
+    KChangeTrackerElement(const QString &title, KOdfGenericChange::Type type);
 
-    KoChangeTrackerElement();
+    KChangeTrackerElement();
 
-    KoChangeTrackerElement(const KoChangeTrackerElement &other);
+    KChangeTrackerElement(const KChangeTrackerElement &other);
 
-    ~KoChangeTrackerElement();
+    ~KChangeTrackerElement();
 
     void setEnabled(bool enabled);
     bool isEnabled() const;
 
-    ///This flag is used when a change is accepted or rejected. When set, the change becomes transparent to functions like KChangeTracker::isParent,... The KoChangeTrackerElement behaves like it has been destroyed. This is not done because of the undo/redo. A KoChangeTrackerElement can only be destroyed when its accept/reject command is destroyed.
+    ///This flag is used when a change is accepted or rejected. When set, the change becomes transparent to functions like KChangeTracker::isParent,... The KChangeTrackerElement behaves like it has been destroyed. This is not done because of the undo/redo. A KChangeTrackerElement can only be destroyed when its accept/reject command is destroyed.
     void setAcceptedRejected(bool set);
     bool acceptedRejected() const;
 

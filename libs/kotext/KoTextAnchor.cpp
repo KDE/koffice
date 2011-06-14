@@ -40,7 +40,7 @@
 #include <KDebug>
 
 #include "changetracker/KChangeTracker.h"
-#include "changetracker/KoChangeTrackerElement.h"
+#include "changetracker/KChangeTrackerElement.h"
 #include "styles/KoCharacterStyle.h"
 #include "KoTextDocument.h"
 #include <KOdfGenericChanges.h>
@@ -265,7 +265,7 @@ void KoTextAnchor::paint(QPainter &painter, QPaintDevice *, const QRectF &rect, 
     if (!changeTracker)
         return;
 
-    KoChangeTrackerElement *changeElement = changeTracker->elementById(changeId);
+    KChangeTrackerElement *changeElement = changeTracker->elementById(changeId);
     if (changeElement && changeElement->changeType() == KOdfGenericChange::DeleteChange) {
         changePen.setColor(changeTracker->deletionBgColor());
         drawChangeRect = true;

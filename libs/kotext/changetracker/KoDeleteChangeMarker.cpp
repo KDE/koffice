@@ -26,7 +26,7 @@
 #include <KoTextShapeSavingContext.h>
 #include <KoShapeLoadingContext.h>
 #include <opendocument/KoTextSharedSavingData.h>
-#include "KoChangeTrackerElement.h"
+#include "KChangeTrackerElement.h"
 #include "KChangeTracker.h"
 
 //KDE includes

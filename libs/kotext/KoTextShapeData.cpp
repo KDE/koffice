@@ -50,7 +50,7 @@
 #include "opendocument/KoTextWriter.h"
 
 #include <KChangeTracker.h>
-#include <KoChangeTrackerElement.h>
+#include <KChangeTrackerElement.h>
 #include <KoTextAnchor.h>
 #include <KInlineTextObjectManager.h>
 #include <KCanvasBase.h>
@@ -252,7 +252,7 @@ void InsertDeleteChangesCommand::redo()
     insertDeleteChanges();
 }
 
-static bool isPositionLessThan(KoChangeTrackerElement *element1, KoChangeTrackerElement *element2)
+static bool isPositionLessThan(KChangeTrackerElement *element1, KChangeTrackerElement *element2)
 {
     return element1->deleteChangeMarker()->position() < element2->deleteChangeMarker()->position();
 }
@@ -260,11 +260,11 @@ static bool isPositionLessThan(KoChangeTrackerElement *element1, KoChangeTracker
 void InsertDeleteChangesCommand::insertDeleteChanges()
 {
     int numAddedChars = 0;
-    QVector<KoChangeTrackerElement *> elementVector;
+    QVector<KChangeTrackerElement *> elementVector;
     KoTextDocument(m_document).changeTracker()->deletedChanges(elementVector);
     qSort(elementVector.begin(), elementVector.end(), isPositionLessThan);
 
-    foreach (KoChangeTrackerElement *element, elementVector) {
+    foreach (KChangeTrackerElement *element, elementVector) {
         if (element->isValid() && element->deleteChangeMarker()) {
             QTextCursor caret(element->deleteChangeMarker()->document());
             caret.setPosition(element->deleteChangeMarker()->position() + numAddedChars +  1);
@@ -300,11 +300,11 @@ void RemoveDeleteChangesCommand::redo()
 void RemoveDeleteChangesCommand::removeDeleteChanges()
 {
     int numDeletedChars = 0;
-    QVector<KoChangeTrackerElement *> elementVector;
+    QVector<KChangeTrackerElement *> elementVector;
     KoTextDocument(m_document).changeTracker()->deletedChanges(elementVector);
     qSort(elementVector.begin(), elementVector.end(), isPositionLessThan);
 
-    foreach(KoChangeTrackerElement *element, elementVector) {
+    foreach(KChangeTrackerElement *element, elementVector) {
         if (element->isValid() && element->deleteChangeMarker()) {
             QTextCursor caret(element->deleteChangeMarker()->document());
             QTextCharFormat f;

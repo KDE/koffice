@@ -25,7 +25,7 @@
 #include <KOdfGenericChange.h>
 #include <KInlineTextObjectManager.h>
 #include <changetracker/KChangeTracker.h>
-#include <changetracker/KoChangeTrackerElement.h>
+#include <changetracker/KChangeTrackerElement.h>
 #include <styles/KoCharacterStyle.h>
 
 #include <QHash>

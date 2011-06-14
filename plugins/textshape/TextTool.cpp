@@ -66,7 +66,7 @@
 #include <KoTextEditor.h>
 #include <KoGlobal.h>
 #include <KChangeTracker.h>
-#include <KoChangeTrackerElement.h>
+#include <KChangeTrackerElement.h>
 #include <KoBookmark.h>
 #include <KoBookmarkManager.h>
 
@@ -520,7 +520,7 @@ void TextTool::showChangeTip()
     QTextCursor c(textEditor->document());
     c.setPosition(m_changeTipCursorPos);
     if (m_changeTracker && m_changeTracker->containsInlineChanges(c.charFormat())) {
-        KoChangeTrackerElement *element = m_changeTracker->elementById(c.charFormat().property(KoCharacterStyle::ChangeTrackerId).toInt());
+        KChangeTrackerElement *element = m_changeTracker->elementById(c.charFormat().property(KoCharacterStyle::ChangeTrackerId).toInt());
         if (element->isEnabled()) {
             QString changeType;
             if (element->changeType() == KOdfGenericChange::InsertChange)
