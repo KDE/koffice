@@ -32,9 +32,9 @@ public:
     MergeEffect();
 
     /// reimplemented from KFilterEffect
-    virtual QImage processImage(const QImage &image, const KoFilterEffectRenderContext &context) const;
+    virtual QImage processImage(const QImage &image, const KFilterEffectRenderContext &context) const;
     /// reimplemented from KFilterEffect
-    virtual QImage processImages(const QList<QImage> &images, const KoFilterEffectRenderContext &context) const;
+    virtual QImage processImages(const QList<QImage> &images, const KFilterEffectRenderContext &context) const;
     /// reimplemented from KFilterEffect
     virtual bool load(const KXmlElement &element, const KFilterEffectLoadingContext &context);
     /// reimplemented from KFilterEffect

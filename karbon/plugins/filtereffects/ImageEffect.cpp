@@ -18,7 +18,7 @@
  */
 
 #include "ImageEffect.h"
-#include "KoFilterEffectRenderContext.h"
+#include "KFilterEffectRenderContext.h"
 #include "KFilterEffectLoadingContext.h"
 #include "KoViewConverter.h"
 #include "KXmlWriter.h"
@@ -48,7 +48,7 @@ void ImageEffect::setImage(const QImage &image)
     m_image = image;
 }
 
-QImage ImageEffect::processImage(const QImage &image, const KoFilterEffectRenderContext &context) const
+QImage ImageEffect::processImage(const QImage &image, const KFilterEffectRenderContext &context) const
 {
     QImage result(image.size(), QImage::Format_ARGB32_Premultiplied);
     result.fill(qRgba(0, 0, 0, 0));

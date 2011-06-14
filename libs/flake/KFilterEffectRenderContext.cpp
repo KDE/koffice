@@ -17,13 +17,13 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoFilterEffectRenderContext.h"
+#include "KFilterEffectRenderContext.h"
 #include "KoViewConverter.h"
 
 #include <QtCore/QRectF>
 #include <QtGui/QTransform>
 
-class KoFilterEffectRenderContext::Private
+class KFilterEffectRenderContext::Private
 {
 public:
     Private(const KoViewConverter &viewConverter)
@@ -35,47 +35,47 @@ public:
     const KoViewConverter & converter;
 };
 
-KoFilterEffectRenderContext::KoFilterEffectRenderContext(const KoViewConverter &converter)
+KFilterEffectRenderContext::KFilterEffectRenderContext(const KoViewConverter &converter)
 : d(new Private(converter))
 {
 }
 
-KoFilterEffectRenderContext::~KoFilterEffectRenderContext()
+KFilterEffectRenderContext::~KFilterEffectRenderContext()
 {
     delete d;
 }
 
-QRectF KoFilterEffectRenderContext::filterRegion() const
+QRectF KFilterEffectRenderContext::filterRegion() const
 {
     return d->filterRegion;
 }
 
-void KoFilterEffectRenderContext::setFilterRegion(const QRectF &filterRegion)
+void KFilterEffectRenderContext::setFilterRegion(const QRectF &filterRegion)
 {
     d->filterRegion = filterRegion;
 }
 
-void KoFilterEffectRenderContext::setShapeBoundingBox(const QRectF &bound)
+void KFilterEffectRenderContext::setShapeBoundingBox(const QRectF &bound)
 {
     d->shapeBound = bound;
 }
 
-QPointF KoFilterEffectRenderContext::toUserSpace(const QPointF &value) const
+QPointF KFilterEffectRenderContext::toUserSpace(const QPointF &value) const
 {
     return QPointF(value.x()*d->shapeBound.width(), value.y()*d->shapeBound.height());
 }
 
-qreal KoFilterEffectRenderContext::toUserSpaceX(qreal value) const
+qreal KFilterEffectRenderContext::toUserSpaceX(qreal value) const
 {
     return value * d->shapeBound.width();
 }
 
-qreal KoFilterEffectRenderContext::toUserSpaceY(qreal value) const
+qreal KFilterEffectRenderContext::toUserSpaceY(qreal value) const
 {
     return value * d->shapeBound.height();
 }
 
-const KoViewConverter * KoFilterEffectRenderContext::viewConverter() const
+const KoViewConverter * KFilterEffectRenderContext::viewConverter() const
 {
     return &d->converter;
 }

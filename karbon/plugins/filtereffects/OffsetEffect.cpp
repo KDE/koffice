@@ -18,7 +18,7 @@
  */
 
 #include "OffsetEffect.h"
-#include "KoFilterEffectRenderContext.h"
+#include "KFilterEffectRenderContext.h"
 #include "KFilterEffectLoadingContext.h"
 #include "KoViewConverter.h"
 #include "KXmlWriter.h"
@@ -43,7 +43,7 @@ void OffsetEffect::setOffset(const QPointF &offset)
     m_offset = offset;
 }
 
-QImage OffsetEffect::processImage(const QImage &image, const KoFilterEffectRenderContext &context) const
+QImage OffsetEffect::processImage(const QImage &image, const KFilterEffectRenderContext &context) const
 {
     if (m_offset.x() == 0.0 && m_offset.y() == 0.0)
         return image;

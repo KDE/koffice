@@ -19,7 +19,7 @@
 
 #include "ComponentTransferEffect.h"
 #include "ColorChannelConversion.h"
-#include <KoFilterEffectRenderContext.h>
+#include <KFilterEffectRenderContext.h>
 #include <KXmlWriter.h>
 #include <KXmlReader.h>
 #include <KLocale>
@@ -101,7 +101,7 @@ qreal ComponentTransferEffect::offset(Channel channel) const
     return m_data[channel].offset;
 }
 
-QImage ComponentTransferEffect::processImage(const QImage &image, const KoFilterEffectRenderContext &context) const
+QImage ComponentTransferEffect::processImage(const QImage &image, const KFilterEffectRenderContext &context) const
 {
     QImage result = image;
 

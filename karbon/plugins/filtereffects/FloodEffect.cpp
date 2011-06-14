@@ -18,7 +18,7 @@
  */
 
 #include "FloodEffect.h"
-#include "KoFilterEffectRenderContext.h"
+#include "KFilterEffectRenderContext.h"
 #include "KoViewConverter.h"
 #include "KXmlWriter.h"
 #include "KXmlReader.h"
@@ -42,7 +42,7 @@ void FloodEffect::setFloodColor(const QColor &color)
     m_color = color;
 }
 
-QImage FloodEffect::processImage(const QImage &image, const KoFilterEffectRenderContext &context) const
+QImage FloodEffect::processImage(const QImage &image, const KFilterEffectRenderContext &context) const
 {
     QImage result = image;
     QPainter painter(&result);

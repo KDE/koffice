@@ -18,7 +18,7 @@
  */
 
 #include "WatermarkFilterEffect.h"
-#include <KoFilterEffectRenderContext.h>
+#include <KFilterEffectRenderContext.h>
 #include <kcolorutils.h>
 #include <QColor>
 
@@ -40,7 +40,7 @@ bool WatermarkFilterEffect::load(const KXmlElement& /*element*/, const KFilterEf
     return true;
 }
 
-QImage WatermarkFilterEffect::processImage(const QImage& image, const KoFilterEffectRenderContext& context) const
+QImage WatermarkFilterEffect::processImage(const QImage& image, const KFilterEffectRenderContext& context) const
 {
     QImage result = image;
     QRgb* pixel = reinterpret_cast<QRgb*>( result.bits() );

@@ -19,7 +19,7 @@
 
 #include "BlendEffect.h"
 #include "ColorChannelConversion.h"
-#include <KoFilterEffectRenderContext.h>
+#include <KFilterEffectRenderContext.h>
 #include <KXmlWriter.h>
 #include <KXmlReader.h>
 #include <KLocale>
@@ -44,13 +44,13 @@ void BlendEffect::setBlendMode(BlendMode blendMode)
     m_blendMode = blendMode;
 }
 
-QImage BlendEffect::processImage(const QImage &image, const KoFilterEffectRenderContext &context) const
+QImage BlendEffect::processImage(const QImage &image, const KFilterEffectRenderContext &context) const
 {
     Q_UNUSED(context);
     return image;
 }
 
-QImage BlendEffect::processImages(const QList<QImage> &images, const KoFilterEffectRenderContext &context) const
+QImage BlendEffect::processImages(const QList<QImage> &images, const KFilterEffectRenderContext &context) const
 {
     int imageCount = images.count();
     if (!imageCount)

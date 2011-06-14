@@ -27,7 +27,7 @@ class QRect;
 class QRectF;
 class KoViewConverter;
 class KXmlWriter;
-class KoFilterEffectRenderContext;
+class KFilterEffectRenderContext;
 class KFilterEffectLoadingContext;
 class KXmlElement;
 
@@ -126,14 +126,14 @@ public:
      * @param image the image the filter should be applied to
      * @param context the render context providing additional data
      */
-    virtual QImage processImage(const QImage &image, const KoFilterEffectRenderContext &context) const = 0;
+    virtual QImage processImage(const QImage &image, const KFilterEffectRenderContext &context) const = 0;
 
     /**
     * Apply the effect on a list of images.
     * @param images the images the filter should be applied to
     * @param context the render context providing additional data
     */
-    virtual QImage processImages(const QList<QImage> &images, const KoFilterEffectRenderContext &context) const;
+    virtual QImage processImages(const QList<QImage> &images, const KFilterEffectRenderContext &context) const;
 
     /**
      * Loads data from given xml element.

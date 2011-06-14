@@ -33,14 +33,14 @@ MergeEffect::MergeEffect()
     setMaximalInputCount(INT_MAX);
 }
 
-QImage MergeEffect::processImage(const QImage &image, const KoFilterEffectRenderContext &/*context*/) const
+QImage MergeEffect::processImage(const QImage &image, const KFilterEffectRenderContext &/*context*/) const
 {
     Q_UNUSED(image);
 
     return image;
 }
 
-QImage MergeEffect::processImages(const QList<QImage> &images, const KoFilterEffectRenderContext &/*context*/) const
+QImage MergeEffect::processImages(const QList<QImage> &images, const KFilterEffectRenderContext &/*context*/) const
 {
     int imageCount = images.count();
     if (!imageCount)

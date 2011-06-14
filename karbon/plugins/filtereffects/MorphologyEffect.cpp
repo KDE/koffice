@@ -18,7 +18,7 @@
  */
 
 #include "MorphologyEffect.h"
-#include "KoFilterEffectRenderContext.h"
+#include "KFilterEffectRenderContext.h"
 #include "KFilterEffectLoadingContext.h"
 #include "KoViewConverter.h"
 #include "KXmlWriter.h"
@@ -54,7 +54,7 @@ void MorphologyEffect::setMorphologyOperator(Operator op)
     m_operator = op;
 }
 
-QImage MorphologyEffect::processImage(const QImage &image, const KoFilterEffectRenderContext &context) const
+QImage MorphologyEffect::processImage(const QImage &image, const KFilterEffectRenderContext &context) const
 {
     QImage result = image;
 

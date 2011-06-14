@@ -18,7 +18,7 @@
  */
 
 #include "GreyscaleFilterEffect.h"
-#include <KoFilterEffectRenderContext.h>
+#include <KFilterEffectRenderContext.h>
 
 GreyscaleFilterEffect::GreyscaleFilterEffect()
 : KFilterEffect(GreyscaleFilterEffectId, "Grayscale effect")
@@ -38,7 +38,7 @@ bool GreyscaleFilterEffect::load(const KXmlElement& /*element*/, const KFilterEf
     return true;
 }
 
-QImage GreyscaleFilterEffect::processImage(const QImage& image, const KoFilterEffectRenderContext& context) const
+QImage GreyscaleFilterEffect::processImage(const QImage& image, const KFilterEffectRenderContext& context) const
 {
     QImage result = image;
     QRgb* pixel = reinterpret_cast<QRgb*>( result.bits() );

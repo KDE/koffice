@@ -27,11 +27,11 @@ class QPointF;
 class KoViewConverter;
 
 /// This class provides the render context for filter effects
-class FLAKE_EXPORT KoFilterEffectRenderContext
+class FLAKE_EXPORT KFilterEffectRenderContext
 {
 public:
-    KoFilterEffectRenderContext(const KoViewConverter &converter);
-    ~KoFilterEffectRenderContext();
+    KFilterEffectRenderContext(const KoViewConverter &converter);
+    ~KFilterEffectRenderContext();
 
     /// Returns the filter region the filter is applied to
     QRectF filterRegion() const;

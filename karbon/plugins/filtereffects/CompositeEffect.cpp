@@ -19,7 +19,7 @@
 
 #include "CompositeEffect.h"
 #include "ColorChannelConversion.h"
-#include <KoFilterEffectRenderContext.h>
+#include <KFilterEffectRenderContext.h>
 #include <KoViewConverter.h>
 #include <KXmlWriter.h>
 #include <KXmlReader.h>
@@ -57,12 +57,12 @@ void CompositeEffect::setArithmeticValues(qreal * values)
     memcpy(m_k, values, 4*sizeof(qreal));
 }
 
-QImage CompositeEffect::processImage(const QImage &image, const KoFilterEffectRenderContext &) const
+QImage CompositeEffect::processImage(const QImage &image, const KFilterEffectRenderContext &) const
 {
     return image;
 }
 
-QImage CompositeEffect::processImages(const QList<QImage> &images, const KoFilterEffectRenderContext &context) const
+QImage CompositeEffect::processImages(const QList<QImage> &images, const KFilterEffectRenderContext &context) const
 {
     int imageCount = images.count();
     if (!imageCount)

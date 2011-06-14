@@ -31,7 +31,7 @@ public:
     virtual ~MonoFilterEffect();
     virtual void save(KXmlWriter& writer);
     virtual bool load(const KXmlElement& element, const KFilterEffectLoadingContext& context);
-    virtual QImage processImage(const QImage& image, const KoFilterEffectRenderContext& context) const;
+    virtual QImage processImage(const QImage& image, const KFilterEffectRenderContext& context) const;
 };
 
 #endif // MONOFILTEREFFECT_H

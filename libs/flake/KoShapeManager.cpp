@@ -36,7 +36,7 @@
 #include "KoShapeLayer.h"
 #include "KFilterEffect.h"
 #include "KoFilterEffectStack.h"
-#include "KoFilterEffectRenderContext.h"
+#include "KFilterEffectRenderContext.h"
 #include "KoShapeBackground.h"
 #include <KoRTree.h>
 
@@ -425,7 +425,7 @@ void KoShapeManager::paintShape(KoShape *shape, QPainter &painter, const KoViewC
         imageBuffers.insert("SourceGraphic", sourceGraphic);
         imageBuffers.insert(QString(), sourceGraphic);
 
-        KoFilterEffectRenderContext renderContext(converter);
+        KFilterEffectRenderContext renderContext(converter);
         renderContext.setShapeBoundingBox(shapeBound);
 
         QImage result;

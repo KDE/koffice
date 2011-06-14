@@ -18,7 +18,7 @@
  */
 
 #include "BlurEffect.h"
-#include "KoFilterEffectRenderContext.h"
+#include "KFilterEffectRenderContext.h"
 #include "KFilterEffectLoadingContext.h"
 #include "KoViewConverter.h"
 #include "KXmlWriter.h"
@@ -289,7 +289,7 @@ void BlurEffect::setDeviation(const QPointF &deviation)
     m_deviation.setY(qMax(qreal(0.0), deviation.y()));
 }
 
-QImage BlurEffect::processImage(const QImage &image, const KoFilterEffectRenderContext &context) const
+QImage BlurEffect::processImage(const QImage &image, const KFilterEffectRenderContext &context) const
 {
     if (m_deviation.x() == 0.0 || m_deviation.y() == 0.0)
         return image;

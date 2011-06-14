@@ -18,7 +18,7 @@
  */
 
 #include "ConvolveMatrixEffect.h"
-#include "KoFilterEffectRenderContext.h"
+#include "KFilterEffectRenderContext.h"
 #include "KFilterEffectLoadingContext.h"
 #include "KoViewConverter.h"
 #include "KXmlWriter.h"
@@ -122,7 +122,7 @@ void ConvolveMatrixEffect::enablePreserveAlpha(bool on)
     m_preserveAlpha = on;
 }
 
-QImage ConvolveMatrixEffect::processImage(const QImage &image, const KoFilterEffectRenderContext &context) const
+QImage ConvolveMatrixEffect::processImage(const QImage &image, const KFilterEffectRenderContext &context) const
 {
     QImage result = image;
 

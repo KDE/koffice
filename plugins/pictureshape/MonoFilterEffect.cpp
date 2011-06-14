@@ -18,7 +18,7 @@
  */
 
 #include "MonoFilterEffect.h"
-#include <KoFilterEffectRenderContext.h>
+#include <KFilterEffectRenderContext.h>
 
 MonoFilterEffect::MonoFilterEffect()
 : KFilterEffect(MonoFilterEffectId, "Mono Effect")
@@ -38,7 +38,7 @@ bool MonoFilterEffect::load(const KXmlElement& /*element*/, const KFilterEffectL
     return true;
 }
 
-QImage MonoFilterEffect::processImage(const QImage& image, const KoFilterEffectRenderContext& context) const
+QImage MonoFilterEffect::processImage(const QImage& image, const KFilterEffectRenderContext& context) const
 {
     QImage result = image;
     QRgb* pixel = reinterpret_cast<QRgb*>( result.bits() );

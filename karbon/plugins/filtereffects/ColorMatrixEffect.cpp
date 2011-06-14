@@ -19,7 +19,7 @@
 
 #include "ColorMatrixEffect.h"
 #include "ColorChannelConversion.h"
-#include <KoFilterEffectRenderContext.h>
+#include <KFilterEffectRenderContext.h>
 #include <KXmlWriter.h>
 #include <KXmlReader.h>
 #include <KLocale>
@@ -152,7 +152,7 @@ void ColorMatrixEffect::setLuminanceAlpha()
     m_matrix[18] = 0.0;
 }
 
-QImage ColorMatrixEffect::processImage(const QImage &image, const KoFilterEffectRenderContext &context) const
+QImage ColorMatrixEffect::processImage(const QImage &image, const KFilterEffectRenderContext &context) const
 {
     QImage result = image;
 
