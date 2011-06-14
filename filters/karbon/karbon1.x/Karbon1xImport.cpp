@@ -33,7 +33,7 @@
 #include <KResourceManager.h>
 #include <KPathShapeLoader.h>
 #include <KShapeGroup.h>
-#include <commands/KoShapeGroupCommand.h>
+#include <commands/KShapeGroupCommand.h>
 #include <KLineBorder.h>
 #include <pathshapes/ellipse/EllipseShape.h>
 #include <pathshapes/rectangle/RectangleShape.h>
@@ -296,7 +296,7 @@ void KarbonImport::loadGroup(KShapeContainer * parent, const KXmlElement &elemen
 
     KShapeGroup * g = dynamic_cast<KShapeGroup*>(parent);
     if (g) {
-        KoShapeGroupCommand cmd(g, shapes);
+        KShapeGroupCommand cmd(g, shapes);
         cmd.redo();
     } else {
         foreach(KShape * shape, shapes) {

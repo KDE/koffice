@@ -68,7 +68,7 @@
 #include <KShapeController.h>
 #include <KShapeCreateCommand.h>
 #include <KShapeFactoryBase.h>
-#include <KoShapeGroupCommand.h>
+#include <KShapeGroupCommand.h>
 #include <KShape.h>
 #include <KoShapeManager.h>
 #include <KoShapeRegistry.h>

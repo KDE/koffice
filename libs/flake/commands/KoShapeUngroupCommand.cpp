@@ -19,14 +19,14 @@
  */
 
 #include "KoShapeUngroupCommand.h"
-#include "KoShapeGroupCommand_p.h"
+#include "KShapeGroupCommand_p.h"
 #include "KShapeContainer.h"
 
 #include <klocale.h>
 
 KoShapeUngroupCommand::KoShapeUngroupCommand(KShapeContainer *container, const QList<KShape *> &shapes,
         const QList<KShape*> &topLevelShapes, QUndoCommand *parent)
-    : KoShapeGroupCommand(*(new KoShapeGroupCommandPrivate(container, shapes)), parent)
+    : KShapeGroupCommand(*(new KoShapeGroupCommandPrivate(container, shapes)), parent)
 {
     QList<KShape*> orderdShapes(shapes);
     qSort(orderdShapes.begin(), orderdShapes.end(), KShape::compareShapeZIndex);
@@ -59,7 +59,7 @@ KoShapeUngroupCommand::KoShapeUngroupCommand(KShapeContainer *container, const Q
 
 void KoShapeUngroupCommand::redo()
 {
-    KoShapeGroupCommand::undo();
+    KShapeGroupCommand::undo();
     if (d->oldAncestorsZIndex.count()) {
         int zIndex = d->container->zIndex() + d->oldZIndex.count() - 1;
         for (QList<QPair<KShape*, int> >::const_iterator it(d->oldAncestorsZIndex.constBegin()); it != d->oldAncestorsZIndex.constEnd(); ++it) {
@@ -70,7 +70,7 @@ void KoShapeUngroupCommand::redo()
 
 void KoShapeUngroupCommand::undo()
 {
-    KoShapeGroupCommand::redo();
+    KShapeGroupCommand::redo();
     if (d->oldAncestorsZIndex.count()) {
         for (QList<QPair<KShape*, int> >::const_iterator it(d->oldAncestorsZIndex.constBegin()); it != d->oldAncestorsZIndex.constEnd(); ++it) {
             it->first->setZIndex(it->second);

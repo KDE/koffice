@@ -38,7 +38,7 @@
 #include <KPathShape.h>
 #include <KResourceManager.h>
 #include <KPathShapeLoader.h>
-#include <commands/KoShapeGroupCommand.h>
+#include <commands/KShapeGroupCommand.h>
 #include <KUnit.h>
 #include <KImageData.h>
 #include <KImageCollection.h>
@@ -1438,7 +1438,7 @@ void SvgParser::addToGroup(QList<KShape*> shapes, KShapeGroup * group)
     if (! group)
         return;
 
-    KoShapeGroupCommand cmd(group, shapes);
+    KShapeGroupCommand cmd(group, shapes);
     cmd.redo();
 }
 

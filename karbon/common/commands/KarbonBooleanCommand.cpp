@@ -22,7 +22,7 @@
 #include <KPathShape.h>
 #include <KShapeContainer.h>
 #include <KShapeGroup.h>
-#include <KoShapeGroupCommand.h>
+#include <KShapeGroupCommand.h>
 
 #include <klocale.h>
 
@@ -109,7 +109,7 @@ void KarbonBooleanCommand::redo()
         KShapeGroup * group = dynamic_cast<KShapeGroup*>(d->pathA->parent());
         if (group) {
             QList<KShape*> children;
-            d->resultParentCmd = new KoShapeGroupCommand(group, children << d->resultingPath, this);
+            d->resultParentCmd = new KShapeGroupCommand(group, children << d->resultingPath, this);
         }
     }
 

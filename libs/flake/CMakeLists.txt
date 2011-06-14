@@ -106,7 +106,7 @@ set(flake_SRCS
     KoTextOnShapeContainer.cpp
     KoTextShapeDataBase.cpp
     KoPluginLoader.cpp
-    commands/KoShapeGroupCommand.cpp
+    commands/KShapeGroupCommand.cpp
     commands/KShapeAlignCommand.cpp
     commands/KShapeBackgroundCommand.cpp
     commands/KShapeBorderCommand.cpp
@@ -217,7 +217,7 @@ install(
     commands/KShapeCreateCommand.h
     commands/KShapeDeleteCommand.h
     commands/KShapeDistributeCommand.h
-    commands/KoShapeGroupCommand.h
+    commands/KShapeGroupCommand.h
     commands/KoShapeKeepAspectRatioCommand.h
     commands/KoShapeLockCommand.h
     commands/KoShapeMoveCommand.h

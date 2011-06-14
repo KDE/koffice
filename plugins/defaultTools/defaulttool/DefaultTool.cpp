@@ -48,7 +48,7 @@
 #include <KResourceManager.h>
 #include <KoShapeRubberSelectStrategy.h>
 #include <commands/KoShapeMoveCommand.h>
-#include <commands/KoShapeGroupCommand.h>
+#include <commands/KShapeGroupCommand.h>
 #include <commands/KoShapeUngroupCommand.h>
 #include <KoSnapGuide.h>
 
@@ -949,7 +949,7 @@ void DefaultTool::selectionGroup()
     }
     if (groupedShapes.count() < 2)
         return;
-    canvas()->addCommand(KoShapeGroupCommand::createCommand(groupedShapes, canvas()->shapeController()));
+    canvas()->addCommand(KShapeGroupCommand::createCommand(groupedShapes, canvas()->shapeController()));
 }
 
 void DefaultTool::selectionUngroup()

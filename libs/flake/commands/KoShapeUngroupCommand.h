@@ -21,7 +21,7 @@
 #ifndef KOSHAPEUNGROUPCOMMAND_H
 #define KOSHAPEUNGROUPCOMMAND_H
 
-#include "KoShapeGroupCommand.h"
+#include "KShapeGroupCommand.h"
 
 #include "flake_export.h"
 
@@ -29,7 +29,7 @@
 #include <QPair>
 
 /// The undo / redo command for ungrouping shapes
-class FLAKE_EXPORT KoShapeUngroupCommand : public KoShapeGroupCommand
+class FLAKE_EXPORT KoShapeUngroupCommand : public KShapeGroupCommand
 {
 public:
     /**

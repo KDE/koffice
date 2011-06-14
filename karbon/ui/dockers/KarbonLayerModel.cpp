@@ -33,7 +33,7 @@
 #include <KoZoomHandler.h>
 #include <KoShapeLayer.h>
 #include <KShapeGroup.h>
-#include <KoShapeGroupCommand.h>
+#include <KShapeGroupCommand.h>
 #include <KoShapeUngroupCommand.h>
 
 #include <klocale.h>
@@ -467,7 +467,7 @@ bool KarbonLayerModel::dropMimeData(const QMimeData * data, Qt::DropAction actio
             foreach(KShape * shape, toplevelShapes)
             new KoShapeUngroupCommand(shape->parent(), QList<KShape*>() << shape, QList<KShape*>(), cmd);
 
-            new KoShapeGroupCommand(group, toplevelShapes, cmd);
+            new KShapeGroupCommand(group, toplevelShapes, cmd);
             KCanvasController * canvasController = KoToolManager::instance()->activeCanvasController();
             canvasController->canvas()->addCommand(cmd);
 
@@ -499,7 +499,7 @@ bool KarbonLayerModel::dropMimeData(const QMimeData * data, Qt::DropAction actio
                 }
 
                 // shapes are dropped on a container, so add them to the container
-                new KoShapeGroupCommand(container, toplevelShapes, clipped, inheritsTransform, cmd);
+                new KShapeGroupCommand(container, toplevelShapes, clipped, inheritsTransform, cmd);
                 KCanvasController * canvasController = KoToolManager::instance()->activeCanvasController();
                 canvasController->canvas()->addCommand(cmd);
 

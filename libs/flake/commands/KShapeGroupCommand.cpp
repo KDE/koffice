@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoShapeGroupCommand.h"
-#include "KoShapeGroupCommand_p.h"
+#include "KShapeGroupCommand.h"
+#include "KShapeGroupCommand_p.h"
 #include "KShape.h"
 #include "KShapeGroup.h"
 #include "KShapeContainer.h"
@@ -28,7 +28,7 @@
 #include <klocale.h>
 
 // static
-QUndoCommand * KoShapeGroupCommand::createCommand(KShapeGroup *container, const QList<KShape *> &shapes, QUndoCommand *parent)
+QUndoCommand * KShapeGroupCommand::createCommand(KShapeGroup *container, const QList<KShape *> &shapes, QUndoCommand *parent)
 {
     QList<KShape*> orderedShapes(shapes);
     qSort(orderedShapes.begin(), orderedShapes.end(), KShape::compareShapeZIndex);
@@ -38,11 +38,11 @@ QUndoCommand * KoShapeGroupCommand::createCommand(KShapeGroup *container, const 
         container->setZIndex(top->zIndex());
     }
 
-    return new KoShapeGroupCommand(container, orderedShapes, parent);
+    return new KShapeGroupCommand(container, orderedShapes, parent);
 }
 
 //static
-QUndoCommand * KoShapeGroupCommand::createCommand(const QList<KShape *> &shapes, KShapeController *shapeController, QUndoCommand *parent)
+QUndoCommand * KShapeGroupCommand::createCommand(const QList<KShape *> &shapes, KShapeController *shapeController, QUndoCommand *parent)
 {
     KShapeGroup *container = new KShapeGroup();
     QUndoCommand *addShapeCommand = parent;
@@ -63,7 +63,7 @@ KoShapeGroupCommandPrivate::KoShapeGroupCommandPrivate(KShapeContainer *c, const
 }
 
 
-KoShapeGroupCommand::KoShapeGroupCommand(KShapeContainer *container, const QList<KShape *> &shapes, const QList<bool> &clipped, const QList<bool> &inheritTransform, QUndoCommand *parent)
+KShapeGroupCommand::KShapeGroupCommand(KShapeContainer *container, const QList<KShape *> &shapes, const QList<bool> &clipped, const QList<bool> &inheritTransform, QUndoCommand *parent)
     : QUndoCommand(parent),
     d(new KoShapeGroupCommandPrivate(container,shapes, clipped, inheritTransform))
 {
@@ -72,7 +72,7 @@ KoShapeGroupCommand::KoShapeGroupCommand(KShapeContainer *container, const QList
     d->init(this);
 }
 
-KoShapeGroupCommand::KoShapeGroupCommand(KShapeGroup *container, const QList<KShape *> &shapes, QUndoCommand *parent)
+KShapeGroupCommand::KShapeGroupCommand(KShapeGroup *container, const QList<KShape *> &shapes, QUndoCommand *parent)
     : QUndoCommand(parent),
     d(new KoShapeGroupCommandPrivate(container,shapes))
 {
@@ -83,12 +83,12 @@ KoShapeGroupCommand::KoShapeGroupCommand(KShapeGroup *container, const QList<KSh
     d->init(this);
 }
 
-KoShapeGroupCommand::~KoShapeGroupCommand()
+KShapeGroupCommand::~KShapeGroupCommand()
 {
     delete d;
 }
 
-KoShapeGroupCommand::KoShapeGroupCommand(KoShapeGroupCommandPrivate &dd, QUndoCommand *parent)
+KShapeGroupCommand::KShapeGroupCommand(KoShapeGroupCommandPrivate &dd, QUndoCommand *parent)
     : QUndoCommand(parent),
     d(&dd)
 {
@@ -110,7 +110,7 @@ void KoShapeGroupCommandPrivate::init(QUndoCommand *q)
     }
 }
 
-void KoShapeGroupCommand::redo()
+void KShapeGroupCommand::redo()
 {
     QUndoCommand::redo();
 
@@ -161,7 +161,7 @@ void KoShapeGroupCommand::redo()
     }
 }
 
-void KoShapeGroupCommand::undo()
+void KShapeGroupCommand::undo()
 {
     QUndoCommand::undo();
 

@@ -33,12 +33,12 @@ class KoShapeGroupCommandPrivate;
 class KShapeController;
 
 /// The undo / redo command for grouping shapes
-class FLAKE_EXPORT KoShapeGroupCommand : public QUndoCommand
+class FLAKE_EXPORT KShapeGroupCommand : public QUndoCommand
 {
 public:
     /**
      * Create command to group a set of shapes into a predefined container.
-     * This uses the KoShapeGroupCommand(KShapeGroup *container, const QList<KShape *> &shapes, QUndoCommand *parent = 0);
+     * This uses the KShapeGroupCommand(KShapeGroup *container, const QList<KShape *> &shapes, QUndoCommand *parent = 0);
      * constructor.
      * The createCommand will make sure that the group will have the z-index and the parent of the top most shape in the group.
      *
@@ -50,7 +50,7 @@ public:
 
     /**
      * Create command to group a set of shapes into a KShapeGroup, which is added to the controller.
-     * This uses the KoShapeGroupCommand(KShapeGroup *container, const QList<KShape *> &shapes, QUndoCommand *parent = 0);
+     * This uses the KShapeGroupCommand(KShapeGroup *container, const QList<KShape *> &shapes, QUndoCommand *parent = 0);
      * constructor.
      * The createCommand will make sure that the group will have the z-index and the parent of the top most shape in the group.
      *
@@ -70,7 +70,7 @@ public:
      *      See KShapeContainer::inheritsTransform()
      * @param parent the parent command used for macro commands
      */
-    KoShapeGroupCommand(KShapeContainer *container, const QList<KShape *> &shapes,
+    KShapeGroupCommand(KShapeContainer *container, const QList<KShape *> &shapes,
             const QList<bool> &clipped, const QList<bool> &inheritTransform, QUndoCommand *parent = 0);
     /**
      * Command to group a set of shapes into a predefined container.
@@ -79,8 +79,8 @@ public:
      * @param parent the parent command if the resulting command is a compound undo command.
      * @param shapes a list of all the shapes that should be grouped.
      */
-    KoShapeGroupCommand(KShapeGroup *container, const QList<KShape *> &shapes, QUndoCommand *parent = 0);
-    virtual ~KoShapeGroupCommand();
+    KShapeGroupCommand(KShapeGroup *container, const QList<KShape *> &shapes, QUndoCommand *parent = 0);
+    virtual ~KShapeGroupCommand();
     /// redo the command
     virtual void redo();
     /// revert the actions done in redo
@@ -88,7 +88,7 @@ public:
 
 protected:
     KoShapeGroupCommandPrivate *d;
-    KoShapeGroupCommand(KoShapeGroupCommandPrivate &, QUndoCommand *parent);
+    KShapeGroupCommand(KoShapeGroupCommandPrivate &, QUndoCommand *parent);
 };
 
 #endif
