@@ -29,7 +29,7 @@ class KoStyleManager;
 class QTextDocument;
 class QTextTable;
 
-class KoChangeTracker;
+class KChangeTracker;
 class KoDocumentRdfBase;
 
 #include <QTextBlock>

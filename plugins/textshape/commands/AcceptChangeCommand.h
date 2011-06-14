@@ -24,7 +24,7 @@
 
 #include <QPair>
 
-class KoChangeTracker;
+class KChangeTracker;
 
 class QTextDocument;
 
@@ -46,7 +46,7 @@ private:
     int m_changeId;
     QList<QPair<int, int> > m_changeRanges;
     QTextDocument *m_document;
-    KoChangeTracker *m_changeTracker;
+    KChangeTracker *m_changeTracker;
 };
 
 #endif // ACCEPTCHANGECOMMAND_H

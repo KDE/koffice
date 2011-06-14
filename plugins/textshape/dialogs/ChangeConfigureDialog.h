@@ -20,7 +20,7 @@
 #define __CHANGE_CONFIGURE_DIALOG_H__
 
 #include <QtGui>
-#include <KoChangeTracker.h>
+#include <KChangeTracker.h>
 
 class ColorDisplayLabel : public QLabel
 {
@@ -50,14 +50,14 @@ class ChangeConfigureDialog:public QDialog
     } ChangeType;
 
 public:
-    ChangeConfigureDialog(const QColor &insertionColor, const QColor &deletionColor, const QColor &formatChangeColor, const QString &authorName, KoChangeTracker::ChangeSaveFormat changeSaveFormat, QWidget *parent = 0);
+    ChangeConfigureDialog(const QColor &insertionColor, const QColor &deletionColor, const QColor &formatChangeColor, const QString &authorName, KChangeTracker::ChangeSaveFormat changeSaveFormat, QWidget *parent = 0);
     ~ChangeConfigureDialog();
 
     QColor insertionBgColor() const;
     QColor deletionBgColor() const;
     QColor formatChangeBgColor() const;
     QString authorName() const;
-    KoChangeTracker::ChangeSaveFormat saveFormat() const;
+    KChangeTracker::ChangeSaveFormat saveFormat() const;
 
 private:
     Ui::ChangeConfigureDialog ui;

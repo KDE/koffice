@@ -30,7 +30,7 @@
 #include <KoStyleManager.h>
 #include <KoResourceManager.h>
 #include <KInlineTextObjectManager.h>
-#include <changetracker/KoChangeTracker.h>
+#include <changetracker/KChangeTracker.h>
 #include <KImageCollection.h>
 #include <KoShapeLoadingContext.h>
 
@@ -75,7 +75,7 @@ KoShape *TextShapeFactory::createDefaultShape(KoResourceManager *documentResourc
         KPageProvider *pp = static_cast<KPageProvider *>(documentResources->resource(KoText::PageProvider).value<void*>());
         if (pp)
             text->setPageProvider(pp);
-            KoChangeTracker *changeTracker = documentResources->resource(KoText::ChangeTracker).value<KoChangeTracker*>();
+            KChangeTracker *changeTracker = documentResources->resource(KoText::ChangeTracker).value<KChangeTracker*>();
         if (changeTracker)
             document.setChangeTracker(changeTracker);
 

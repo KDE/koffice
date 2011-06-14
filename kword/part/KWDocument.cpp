@@ -63,7 +63,7 @@
 #include <KListStyle.h>
 #include <KListLevelProperties.h>
 #include <KoTextShapeData.h>
-#include <KoChangeTracker.h>
+#include <KChangeTracker.h>
 
 #include <rdf/KoDocumentRdfBase.h>
 #ifdef SHOULD_BUILD_RDF
@@ -158,7 +158,7 @@ KWDocument::KWDocument(QWidget *parentWidget, QObject *parent, bool singleViewMo
     }
 
     QVariant variant;
-    variant.setValue(new KoChangeTracker(resourceManager()));
+    variant.setValue(new KChangeTracker(resourceManager()));
     resourceManager()->setResource(KoText::ChangeTracker, variant);
 
     connect(documentInfo(), SIGNAL(infoUpdated(const QString &, const QString &)),

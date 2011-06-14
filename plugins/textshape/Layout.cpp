@@ -44,7 +44,7 @@
 #include <KoShape.h>
 #include <KUnit.h>
 #include <KoTextDocument.h>
-#include <KoChangeTracker.h>
+#include <KChangeTracker.h>
 #include <KoChangeTrackerElement.h>
 #include <KOdfGenericChange.h>
 #include <KoTextBlockPaintStrategyBase.h>

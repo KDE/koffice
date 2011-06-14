@@ -40,7 +40,7 @@ class KoChangeTrackerElement;
 class KFormatChangeInformation;
 class KoDeletedRowColumnDataStore;
 
-class KOTEXT_EXPORT KoChangeTracker : public QObject
+class KOTEXT_EXPORT KChangeTracker : public QObject
 {
     Q_OBJECT
 public:
@@ -51,9 +51,9 @@ public:
         DELTAXML
     }ChangeSaveFormat;
 
-    KoChangeTracker(QObject *parent = 0);
+    KChangeTracker(QObject *parent = 0);
 
-    ~KoChangeTracker();
+    ~KChangeTracker();
 
     void setRecordChanges(bool enabled);
     bool recordChanges() const;
@@ -125,6 +125,6 @@ private:
     Private* const d;
 };
 
-Q_DECLARE_METATYPE(KoChangeTracker*)
+Q_DECLARE_METATYPE(KChangeTracker*)
 
 #endif

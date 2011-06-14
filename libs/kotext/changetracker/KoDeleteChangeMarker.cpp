@@ -27,7 +27,7 @@
 #include <KoShapeLoadingContext.h>
 #include <opendocument/KoTextSharedSavingData.h>
 #include "KoChangeTrackerElement.h"
-#include "KoChangeTracker.h"
+#include "KChangeTracker.h"
 
 //KDE includes
 #include <kdebug.h>
@@ -52,14 +52,14 @@ class KoDeleteChangeMarker::Private
 public:
     Private() {}
 
-    KoChangeTracker *changeTracker;
+    KChangeTracker *changeTracker;
     QString text;
     int id;
     QString deleteChangeXml;
     QHash<KListStyle::ListIdType, KListStyle *> deletedListStyles;
 };
 
-KoDeleteChangeMarker::KoDeleteChangeMarker(KoChangeTracker* changeTracker)
+KoDeleteChangeMarker::KoDeleteChangeMarker(KChangeTracker* changeTracker)
         : d(new Private())
 {
     d->changeTracker = changeTracker;
@@ -129,7 +129,7 @@ void KoDeleteChangeMarker::updatePosition(QTextInlineObject object, const QTextC
 void KoDeleteChangeMarker::saveOdf(KoShapeSavingContext &context)
 {
     KOdfGenericChange change;
-    if (d->changeTracker->saveFormat() == KoChangeTracker::ODF_1_2) {
+    if (d->changeTracker->saveFormat() == KChangeTracker::ODF_1_2) {
         change.setChangeFormat(KOdfGenericChange::ODF_1_2);
     } else {
         change.setChangeFormat(KOdfGenericChange::DELTAXML);

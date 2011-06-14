@@ -61,7 +61,7 @@
 #include <kstandarddirs.h>
 
 #include <KOdfGenericChanges.h>
-#include <KoChangeTracker.h>
+#include <KChangeTracker.h>
 
 typedef KoText::Tab KoTextTab;
 // because in a QtScript, I don't seem to be able to use a namespaced type
@@ -1084,7 +1084,7 @@ QString TestLoading::documentToOdt(QTextDocument *document)
         KoStyleManager *styleManager = new KoStyleManager;
         KoTextDocument(textShapeData->document()).setStyleManager(styleManager);
     }
-    KoChangeTracker* changeTracker = new KoChangeTracker;
+    KChangeTracker* changeTracker = new KChangeTracker;
     KoTextDocument(textShapeData->document()).setChangeTracker(changeTracker);
 
     textShapeData->saveOdf(context, 0);

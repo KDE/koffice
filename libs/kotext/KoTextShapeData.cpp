@@ -49,7 +49,7 @@
 #include "opendocument/KoTextLoader.h"
 #include "opendocument/KoTextWriter.h"
 
-#include <KoChangeTracker.h>
+#include <KChangeTracker.h>
 #include <KoChangeTrackerElement.h>
 #include <KoTextAnchor.h>
 #include <KInlineTextObjectManager.h>
@@ -271,8 +271,8 @@ void InsertDeleteChangesCommand::insertDeleteChanges()
             QTextCharFormat f = caret.charFormat();
             f.clearProperty(KoCharacterStyle::InlineInstanceId);
             caret.setCharFormat(f);
-            KoChangeTracker::insertDeleteFragment(caret, element->deleteChangeMarker());
-            numAddedChars += KoChangeTracker::fragmentLength(element->deleteData());
+            KChangeTracker::insertDeleteFragment(caret, element->deleteChangeMarker());
+            numAddedChars += KChangeTracker::fragmentLength(element->deleteData());
         }
     }
 }
@@ -310,10 +310,10 @@ void RemoveDeleteChangesCommand::removeDeleteChanges()
             QTextCharFormat f;
             int deletePosition = element->deleteChangeMarker()->position() + 1 - numDeletedChars;
             caret.setPosition(deletePosition);
-            int deletedLength = KoChangeTracker::fragmentLength(element->deleteData());
+            int deletedLength = KChangeTracker::fragmentLength(element->deleteData());
             caret.setPosition(deletePosition + deletedLength, QTextCursor::KeepAnchor);
             caret.removeSelectedText();
-            numDeletedChars += KoChangeTracker::fragmentLength(element->deleteData());
+            numDeletedChars += KChangeTracker::fragmentLength(element->deleteData());
         }
     }
 }
@@ -324,15 +324,15 @@ void KoTextShapeData::saveOdf(KoShapeSavingContext &context, KoDocumentRdfBase *
     InsertDeleteChangesCommand *insertCommand = new InsertDeleteChangesCommand(document());
     RemoveDeleteChangesCommand *removeCommand = new RemoveDeleteChangesCommand(document());
 
-    KoChangeTracker *changeTracker = KoTextDocument(document()).changeTracker();
-    KoChangeTracker::ChangeSaveFormat changeSaveFormat;
+    KChangeTracker *changeTracker = KoTextDocument(document()).changeTracker();
+    KChangeTracker::ChangeSaveFormat changeSaveFormat;
     if (changeTracker) {
         changeSaveFormat = changeTracker->saveFormat();
-        if (!changeTracker->displayChanges() && (changeSaveFormat == KoChangeTracker::DELTAXML)) {
+        if (!changeTracker->displayChanges() && (changeSaveFormat == KChangeTracker::DELTAXML)) {
             KoTextDocument(document()).textEditor()->addCommand(insertCommand, false);
         }
 
-        if (changeTracker->displayChanges() && (changeSaveFormat == KoChangeTracker::ODF_1_2)) {
+        if (changeTracker->displayChanges() && (changeSaveFormat == KChangeTracker::ODF_1_2)) {
             KoTextDocument(document()).textEditor()->addCommand(removeCommand, false);
         }
     }
@@ -342,12 +342,12 @@ void KoTextShapeData::saveOdf(KoShapeSavingContext &context, KoDocumentRdfBase *
 
     if (changeTracker) {
         changeSaveFormat = changeTracker->saveFormat();
-        if (!changeTracker->displayChanges() && (changeSaveFormat == KoChangeTracker::DELTAXML)) {
+        if (!changeTracker->displayChanges() && (changeSaveFormat == KChangeTracker::DELTAXML)) {
             insertCommand->undo();
             delete insertCommand;
         }
 
-        if (changeTracker->displayChanges() && (changeSaveFormat == KoChangeTracker::ODF_1_2)) {
+        if (changeTracker->displayChanges() && (changeSaveFormat == KChangeTracker::ODF_1_2)) {
             removeCommand->undo();
             delete removeCommand;
         }

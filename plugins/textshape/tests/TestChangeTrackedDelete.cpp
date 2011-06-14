@@ -15,7 +15,7 @@
 #include <KInlineTextObjectManager.h>
 #include <KoChangeTrackerElement.h>
 #include <KoCharacterStyle.h>
-#include <KoChangeTracker.h>
+#include <KChangeTracker.h>
 
 TestChangeTrackedDelete::TestChangeTrackedDelete()
 {

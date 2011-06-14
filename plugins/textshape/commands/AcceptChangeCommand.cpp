@@ -22,7 +22,7 @@
 #include <KOdfGenericChange.h>
 #include <KoTextDocument.h>
 
-#include <changetracker/KoChangeTracker.h>
+#include <changetracker/KChangeTracker.h>
 #include <changetracker/KoChangeTrackerElement.h>
 #include <styles/KoCharacterStyle.h>
 

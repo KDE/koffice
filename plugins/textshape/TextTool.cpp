@@ -65,7 +65,7 @@
 #include <KoTextDocument.h>
 #include <KoTextEditor.h>
 #include <KoGlobal.h>
-#include <KoChangeTracker.h>
+#include <KChangeTracker.h>
 #include <KoChangeTrackerElement.h>
 #include <KoBookmark.h>
 #include <KoBookmarkManager.h>
@@ -501,7 +501,7 @@ TextTool::TextTool(MockCanvas *canvas)  // constructor for our unit tests;
     layout->setInlineTextObjectManager(inlineManager);
     document->setDocumentLayout(layout);
     m_textEditor = new KoTextEditor(document);
-    m_changeTracker = new KoChangeTracker();
+    m_changeTracker = new KChangeTracker();
     KoTextDocument(document).setChangeTracker(m_changeTracker);
     KoTextDocument(document).setUndoStack(new KUndoStack());
     KoTextDocument(document).setTextEditor(m_textEditor.data());
@@ -1939,7 +1939,7 @@ void TextTool::configureChangeTracking()
         deletionBgColor = m_changeTracker->deletionBgColor();
         formatChangeBgColor = m_changeTracker->formatChangeBgColor();
         QString authorName = m_changeTracker->authorName();
-        KoChangeTracker::ChangeSaveFormat changeSaveFormat = m_changeTracker->saveFormat();
+        KChangeTracker::ChangeSaveFormat changeSaveFormat = m_changeTracker->saveFormat();
 
         ChangeConfigureDialog changeDialog(insertionBgColor, deletionBgColor, formatChangeBgColor, authorName, changeSaveFormat, canvas()->canvasWidget());
 
@@ -2260,7 +2260,7 @@ void TextTool::readConfig()
     if (m_changeTracker) {
         QColor bgColor, defaultColor;
         QString changeAuthor;
-        int changeSaveFormat = KoChangeTracker::DELTAXML;
+        int changeSaveFormat = KChangeTracker::DELTAXML;
         KConfigGroup interface = KoGlobal::kofficeConfig()->group("Change-Tracking");
         if (interface.exists()) {
             bgColor = interface.readEntry("insertionBgColor", defaultColor);
@@ -2277,7 +2277,7 @@ void TextTool::readConfig()
                 m_changeTracker->setAuthorName(changeAuthor);
             }
             changeSaveFormat = interface.readEntry("changeSaveFormat", changeSaveFormat);
-            m_changeTracker->setSaveFormat((KoChangeTracker::ChangeSaveFormat)(changeSaveFormat));
+            m_changeTracker->setSaveFormat((KChangeTracker::ChangeSaveFormat)(changeSaveFormat));
         }
     }
 }

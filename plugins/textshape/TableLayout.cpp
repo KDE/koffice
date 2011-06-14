@@ -31,7 +31,7 @@
 #include <KoTextDocumentLayout.h>
 #include <KoShape.h>
 
-#include <KoChangeTracker.h>
+#include <KChangeTracker.h>
 #include <KoChangeTrackerElement.h>
 #include <KOdfGenericChange.h>
 
@@ -367,7 +367,7 @@ void TableLayout::drawBackground(QPainter *painter, const KoTextDocumentLayout::
     }
 
     // Draw a background to indicate a change-type
-    KoChangeTracker *changeTracker = KoTextDocument(m_table->document()).changeTracker();
+    KChangeTracker *changeTracker = KoTextDocument(m_table->document()).changeTracker();
     if (changeTracker && changeTracker->displayChanges()) {
         for (int row = 0; row < m_table->rows(); ++row) {
             for (int column = 0; column < m_table->columns(); ++column) {

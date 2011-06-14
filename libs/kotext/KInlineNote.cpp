@@ -26,7 +26,7 @@
 #include <KoTextLoader.h>
 #include <KoTextWriter.h>
 #include <KoTextDocument.h>
-#include "changetracker/KoChangeTracker.h"
+#include "changetracker/KChangeTracker.h"
 #include "styles/KoStyleManager.h"
 
 #include <KDebug>
@@ -165,7 +165,7 @@ bool KInlineNote::loadOdf(const KXmlElement &element, KoShapeLoadingContext &con
     return loadOdf(element, context, 0, 0);
 }
 
-bool KInlineNote::loadOdf(const KXmlElement & element, KoShapeLoadingContext &context, KoStyleManager *styleManager, KoChangeTracker *changeTracker)
+bool KInlineNote::loadOdf(const KXmlElement & element, KoShapeLoadingContext &context, KoStyleManager *styleManager, KChangeTracker *changeTracker)
 {
     QTextDocument *document = new QTextDocument();
     QTextCursor cursor(document);

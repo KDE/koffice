@@ -20,7 +20,7 @@
 #ifndef __KoChangeTrackerDisabledRAII_h__
 #define __KoChangeTrackerDisabledRAII_h__
 
-class KoChangeTracker;
+class KChangeTracker;
 
 /**
  * @short Disable a change tracker and automatically reset it when
@@ -33,17 +33,17 @@ class KoChangeTracker;
  * than just text substitution.
  *
  * @author Ben Martin <ben.martin@kogmbh.com>
- * @see KoChangeTracker
+ * @see KChangeTracker
  *
  */
 class KoChangeTrackerDisabledRAII
 {
 public:
-    KoChangeTrackerDisabledRAII(KoChangeTracker *changeTracker);
+    KoChangeTrackerDisabledRAII(KChangeTracker *changeTracker);
     ~KoChangeTrackerDisabledRAII();
 
 private:
-    KoChangeTracker *m_changeTracker;
+    KChangeTracker *m_changeTracker;
     bool m_oldval;
 };
 

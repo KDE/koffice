@@ -23,7 +23,7 @@
 #include "kotext_export.h"
 
 class KoShapeLoadingContext;
-class KoChangeTracker;
+class KChangeTracker;
 class KoStyleManager;
 
 class QTextDocumentFragment;
@@ -101,7 +101,7 @@ public:
     Type type() const;
 
     virtual bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context);
-    bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context, KoStyleManager *styleManager, KoChangeTracker *changeTracker);
+    bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context, KoStyleManager *styleManager, KChangeTracker *changeTracker);
 
     ///reimplemented
     void saveOdf(KoShapeSavingContext &context);

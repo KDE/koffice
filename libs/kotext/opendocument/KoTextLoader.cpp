@@ -55,7 +55,7 @@
 #include <KXmlReader.h>
 #include "KoTextInlineRdf.h"
 
-#include "changetracker/KoChangeTracker.h"
+#include "changetracker/KChangeTracker.h"
 #include "changetracker/KoChangeTrackerElement.h"
 #include "changetracker/KoDeleteChangeMarker.h"
 #include <KFormatChangeInformation_p.h>
@@ -117,7 +117,7 @@ public:
 
     KoStyleManager *styleManager;
 
-    KoChangeTracker *changeTracker;
+    KChangeTracker *changeTracker;
 
     KoShape *shape;
 
@@ -1754,7 +1754,7 @@ void KoTextLoader::loadDeleteChangeWithinPorH(QString id, QTextCursor &cursor)
         cursor.mergeCharFormat(format);
 
         //Get the QTextDocumentFragment from the selection and store it in the changeElement
-        QTextDocumentFragment deletedFragment = KoChangeTracker::generateDeleteFragment(cursor, changeElement->deleteChangeMarker());
+        QTextDocumentFragment deletedFragment = KChangeTracker::generateDeleteFragment(cursor, changeElement->deleteChangeMarker());
         changeElement->setDeleteData(deletedFragment);
 
         //Now Remove this from the document. Will be re-inserted whenever changes have to be seen
@@ -1879,7 +1879,7 @@ void KoTextLoader::Private::processDeleteChange(QTextCursor &cursor)
         cursor.setPosition(endPosition, QTextCursor::KeepAnchor);
 
         //Get the QTextDocumentFragment from the selection and store it in the changeElement
-        QTextDocumentFragment deletedFragment = KoChangeTracker::generateDeleteFragment(cursor, changeElement->deleteChangeMarker());
+        QTextDocumentFragment deletedFragment = KChangeTracker::generateDeleteFragment(cursor, changeElement->deleteChangeMarker());
         changeElement->setDeleteData(deletedFragment);
 
         cursor.removeSelectedText();

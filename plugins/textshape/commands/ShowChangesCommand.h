@@ -25,7 +25,7 @@
 #include <QObject>
 #include <QList>
 
-class KoChangeTracker;
+class KChangeTracker;
 class KoDeleteChangeMarker;
 class KoTextEditor;
 class KCanvasBase;
@@ -57,7 +57,7 @@ private:
     void checkAndRemoveAnchoredShapes(int position, int length);
 
     QTextDocument *m_document;
-    KoChangeTracker *m_changeTracker;
+    KChangeTracker *m_changeTracker;
     KoTextEditor *m_textEditor;
     bool m_first;
     bool m_showChanges;

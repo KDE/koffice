@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoChangeTracker.h"
+#include "KChangeTracker.h"
 #include "KFormatChangeInformation_p.h"
 #include "KoDeleteChangeMarker.h"
 
@@ -55,7 +55,7 @@
 #include <QTextDocumentFragment>
 #include <QTextList>
 
-class KoChangeTracker::Private
+class KChangeTracker::Private
 {
 public:
     Private()
@@ -83,65 +83,65 @@ public:
     bool displayChanges;
     QColor insertionBgColor, deletionBgColor, formatChangeBgColor;
     QString changeAuthorName;
-    KoChangeTracker::ChangeSaveFormat changeSaveFormat;
+    KChangeTracker::ChangeSaveFormat changeSaveFormat;
     KoDeletedRowColumnDataStore *deletedRowColumnData;
 
     static bool checkListDeletion(QTextList *list, const QTextCursor &cursor);
 };
 
-KoChangeTracker::KoChangeTracker(QObject *parent)
+KChangeTracker::KChangeTracker(QObject *parent)
     : QObject(parent),
     d(new Private())
 {
     d->changeId = 1;
 }
 
-KoChangeTracker::~KoChangeTracker()
+KChangeTracker::~KChangeTracker()
 {
     delete d;
 }
 
-void KoChangeTracker::setRecordChanges(bool enabled)
+void KChangeTracker::setRecordChanges(bool enabled)
 {
     d->recordChanges = enabled;
 }
 
-bool KoChangeTracker::recordChanges() const
+bool KChangeTracker::recordChanges() const
 {
     return d->recordChanges;
 }
 
-void KoChangeTracker::setDisplayChanges(bool enabled)
+void KChangeTracker::setDisplayChanges(bool enabled)
 {
     d->displayChanges = enabled;
 }
 
-bool KoChangeTracker::displayChanges() const
+bool KChangeTracker::displayChanges() const
 {
     return d->displayChanges;
 }
 
-QString KoChangeTracker::authorName()
+QString KChangeTracker::authorName()
 {
     return d->changeAuthorName;
 }
 
-void KoChangeTracker::setAuthorName(const QString &authorName)
+void KChangeTracker::setAuthorName(const QString &authorName)
 {
     d->changeAuthorName = authorName;
 }
 
-KoChangeTracker::ChangeSaveFormat KoChangeTracker::saveFormat()
+KChangeTracker::ChangeSaveFormat KChangeTracker::saveFormat()
 {
     return d->changeSaveFormat;
 }
 
-void KoChangeTracker::setSaveFormat(ChangeSaveFormat saveFormat)
+void KChangeTracker::setSaveFormat(ChangeSaveFormat saveFormat)
 {
     d->changeSaveFormat = saveFormat;
 }
 
-int KoChangeTracker::formatChangeId(const QString &title, const QTextFormat &format, const QTextFormat &prevFormat, int existingChangeId)
+int KChangeTracker::formatChangeId(const QString &title, const QTextFormat &format, const QTextFormat &prevFormat, int existingChangeId)
 {
     if ( existingChangeId ) {
         d->children.insert(existingChangeId, d->changeId);
@@ -163,7 +163,7 @@ int KoChangeTracker::formatChangeId(const QString &title, const QTextFormat &for
     return d->changeId++;
 }
 
-int KoChangeTracker::insertChangeId(const QString &title, int existingChangeId)
+int KChangeTracker::insertChangeId(const QString &title, int existingChangeId)
 {
     if ( existingChangeId ) {
         d->children.insert(existingChangeId, d->changeId);
@@ -183,7 +183,7 @@ int KoChangeTracker::insertChangeId(const QString &title, int existingChangeId)
     return d->changeId++;
 }
 
-int KoChangeTracker::deleteChangeId(const QString &title, const QTextDocumentFragment &selection, int existingChangeId)
+int KChangeTracker::deleteChangeId(const QString &title, const QTextDocumentFragment &selection, int existingChangeId)
 {
     if ( existingChangeId ) {
         d->children.insert(existingChangeId, d->changeId);
@@ -203,7 +203,7 @@ int KoChangeTracker::deleteChangeId(const QString &title, const QTextDocumentFra
     return d->changeId++;
 }
 
-KoChangeTrackerElement* KoChangeTracker::elementById(int id)
+KoChangeTrackerElement* KChangeTracker::elementById(int id)
 {
     if (isDuplicateChangeId(id)) {
         id = originalChangeId(id);
@@ -211,7 +211,7 @@ KoChangeTrackerElement* KoChangeTracker::elementById(int id)
     return d->changes.value(id);
 }
 
-bool KoChangeTracker::removeById(int id, bool freeMemory)
+bool KChangeTracker::removeById(int id, bool freeMemory)
 {
     if (freeMemory) {
       KoChangeTrackerElement *temp = d->changes.value(id);
@@ -220,7 +220,7 @@ bool KoChangeTracker::removeById(int id, bool freeMemory)
     return d->changes.remove(id);
 }
 
-bool KoChangeTracker::containsInlineChanges(const QTextFormat &format)
+bool KChangeTracker::containsInlineChanges(const QTextFormat &format)
 {
     if (format.property(KoCharacterStyle::ChangeTrackerId).toInt())
         return true;
@@ -228,7 +228,7 @@ bool KoChangeTracker::containsInlineChanges(const QTextFormat &format)
     return false;
 }
 
-int KoChangeTracker::mergeableId(KOdfGenericChange::Type type, const QString &title, int existingId) const
+int KChangeTracker::mergeableId(KOdfGenericChange::Type type, const QString &title, int existingId) const
 {
     if (!existingId || !d->changes.value(existingId))
         return 0;
@@ -241,14 +241,14 @@ int KoChangeTracker::mergeableId(KOdfGenericChange::Type type, const QString &ti
         return 0;
 }
 
-int KoChangeTracker::split(int changeId)
+int KChangeTracker::split(int changeId)
 {
     KoChangeTrackerElement *element = new KoChangeTrackerElement(*d->changes.value(changeId));
     d->changes.insert(d->changeId, element);
     return d->changeId++;
 }
 
-bool KoChangeTracker::isParent(int testedParentId, int testedChildId) const
+bool KChangeTracker::isParent(int testedParentId, int testedChildId) const
 {
     if ((testedParentId == testedChildId) && !d->acceptedRejectedChanges.contains(testedParentId))
         return true;
@@ -258,7 +258,7 @@ bool KoChangeTracker::isParent(int testedParentId, int testedChildId) const
         return false;
 }
 
-void KoChangeTracker::setParent(int child, int parent)
+void KChangeTracker::setParent(int child, int parent)
 {
     if (!d->children.values(parent).contains(child)) {
         d->children.insert(parent, child);
@@ -268,7 +268,7 @@ void KoChangeTracker::setParent(int child, int parent)
     }
 }
 
-int KoChangeTracker::parent(int changeId) const
+int KChangeTracker::parent(int changeId) const
 {
     if (!d->parents.contains(changeId))
         return 0;
@@ -277,7 +277,7 @@ int KoChangeTracker::parent(int changeId) const
     return d->parents.value(changeId);
 }
 
-int KoChangeTracker::createDuplicateChangeId(int existingChangeId)
+int KChangeTracker::createDuplicateChangeId(int existingChangeId)
 {
     int duplicateChangeId = d->changeId;
     d->changeId++;
@@ -287,13 +287,13 @@ int KoChangeTracker::createDuplicateChangeId(int existingChangeId)
     return duplicateChangeId;
 }
 
-bool KoChangeTracker::isDuplicateChangeId(int duplicateChangeId)
+bool KChangeTracker::isDuplicateChangeId(int duplicateChangeId)
 {
     bool isDuplicate = d->duplicateIds.values().contains(duplicateChangeId);
     return isDuplicate;
 }
 
-int KoChangeTracker::originalChangeId(int duplicateChangeId)
+int KChangeTracker::originalChangeId(int duplicateChangeId)
 {
     int originalChangeId = 0;
     QMultiHash<int, int>::const_iterator i = d->duplicateIds.constBegin();
@@ -309,7 +309,7 @@ int KoChangeTracker::originalChangeId(int duplicateChangeId)
     return originalChangeId;
 }
 
-void KoChangeTracker::acceptRejectChange(int changeId, bool set)
+void KChangeTracker::acceptRejectChange(int changeId, bool set)
 {
     if (set) {
         if (!d->acceptedRejectedChanges.contains(changeId))
@@ -323,7 +323,7 @@ void KoChangeTracker::acceptRejectChange(int changeId, bool set)
     d->changes.value(changeId)->setAcceptedRejected(set);
 }
 
-bool KoChangeTracker::saveInlineChange(int changeId, KOdfGenericChange &change)
+bool KChangeTracker::saveInlineChange(int changeId, KOdfGenericChange &change)
 {
     if (!d->changes.contains(changeId))
         return false;
@@ -337,17 +337,17 @@ bool KoChangeTracker::saveInlineChange(int changeId, KOdfGenericChange &change)
     return true;
 }
 
-void KoChangeTracker::setFormatChangeInformation(int formatChangeId, KFormatChangeInformation *formatInformation)
+void KChangeTracker::setFormatChangeInformation(int formatChangeId, KFormatChangeInformation *formatInformation)
 {
     d->changeInformation.insert(formatChangeId, formatInformation);
 }
 
-KFormatChangeInformation *KoChangeTracker::formatChangeInformation(int formatChangeId)
+KFormatChangeInformation *KChangeTracker::formatChangeInformation(int formatChangeId)
 {
     return d->changeInformation.value(formatChangeId);
 }
 
-void KoChangeTracker::loadOdfChanges(const KXmlElement& element)
+void KChangeTracker::loadOdfChanges(const KXmlElement& element)
 {
     if (element.namespaceURI() == KOdfXmlNS::text) {
         KXmlElement tag;
@@ -422,12 +422,12 @@ void KoChangeTracker::loadOdfChanges(const KXmlElement& element)
     }
 }
 
-int KoChangeTracker::loadedChangeId(QString odfId)
+int KChangeTracker::loadedChangeId(QString odfId)
 {
     return d->loadedChanges.value(odfId);
 }
 
-int KoChangeTracker::deletedChanges(QVector<KoChangeTrackerElement *> &deleteVector) const
+int KChangeTracker::deletedChanges(QVector<KoChangeTrackerElement *> &deleteVector) const
 {
     int numAppendedItems = 0;
     foreach (KoChangeTrackerElement *element, d->changes.values()) {
@@ -440,7 +440,7 @@ int KoChangeTracker::deletedChanges(QVector<KoChangeTrackerElement *> &deleteVec
     return numAppendedItems;
 }
 
-int KoChangeTracker::allChangeIds(QVector<int> &changesVector) const
+int KChangeTracker::allChangeIds(QVector<int> &changesVector) const
 {
     int numAppendedItems = 0;
     foreach (int changeId, d->changes.keys()) {
@@ -451,37 +451,37 @@ int KoChangeTracker::allChangeIds(QVector<int> &changesVector) const
     return numAppendedItems;
 }
 
-QColor KoChangeTracker::insertionBgColor() const
+QColor KChangeTracker::insertionBgColor() const
 {
     return d->insertionBgColor;
 }
 
-QColor KoChangeTracker::deletionBgColor() const
+QColor KChangeTracker::deletionBgColor() const
 {
     return d->deletionBgColor;
 }
 
-QColor KoChangeTracker::formatChangeBgColor() const
+QColor KChangeTracker::formatChangeBgColor() const
 {
     return d->formatChangeBgColor;
 }
 
-void KoChangeTracker::setInsertionBgColor(const QColor& bgColor)
+void KChangeTracker::setInsertionBgColor(const QColor& bgColor)
 {
     d->insertionBgColor = bgColor;
 }
 
-void KoChangeTracker::setDeletionBgColor(const QColor& bgColor)
+void KChangeTracker::setDeletionBgColor(const QColor& bgColor)
 {
     d->deletionBgColor = bgColor;
 }
 
-void KoChangeTracker::setFormatChangeBgColor(const QColor& bgColor)
+void KChangeTracker::setFormatChangeBgColor(const QColor& bgColor)
 {
     d->formatChangeBgColor = bgColor;
 }
 
-KoDeletedRowColumnDataStore *KoChangeTracker::deletedRowColumnData()
+KoDeletedRowColumnDataStore *KChangeTracker::deletedRowColumnData()
 {
     return d->deletedRowColumnData;
 }
@@ -499,7 +499,7 @@ static KListStyle::ListIdType ListId(const QTextListFormat &format)
     return listId;
 }
 
-QTextDocumentFragment KoChangeTracker::generateDeleteFragment(QTextCursor &cursor, KoDeleteChangeMarker *marker)
+QTextDocumentFragment KChangeTracker::generateDeleteFragment(QTextCursor &cursor, KoDeleteChangeMarker *marker)
 {
     int changeId = marker->changeId();
     QTextCursor editCursor(cursor);
@@ -581,7 +581,7 @@ QTextDocumentFragment KoChangeTracker::generateDeleteFragment(QTextCursor &curso
     return cursor.selection();
 }
 
-bool KoChangeTracker::Private::checkListDeletion(QTextList *list, const QTextCursor &cursor)
+bool KChangeTracker::Private::checkListDeletion(QTextList *list, const QTextCursor &cursor)
 {
     int startOfList = (list->item(0).position() - 1);
     int endOfList = list->item(list->count() -1).position() + list->item(list->count() -1).length() - 1;
@@ -602,7 +602,7 @@ bool KoChangeTracker::Private::checkListDeletion(QTextList *list, const QTextCur
     }
 }
 
-void KoChangeTracker::insertDeleteFragment(QTextCursor &cursor, KoDeleteChangeMarker *marker)
+void KChangeTracker::insertDeleteFragment(QTextCursor &cursor, KoDeleteChangeMarker *marker)
 {
     QTextDocumentFragment fragment =  KoTextDocument(cursor.document()).changeTracker()->elementById(marker->changeId())->deleteData();
     QTextDocument tempDoc;
@@ -732,7 +732,7 @@ void KoChangeTracker::insertDeleteFragment(QTextCursor &cursor, KoDeleteChangeMa
     }
 }
 
-int KoChangeTracker::fragmentLength(QTextDocumentFragment fragment)
+int KChangeTracker::fragmentLength(QTextDocumentFragment fragment)
 {
     QTextDocument tempDoc;
     QTextCursor tempCursor(&tempDoc);
@@ -776,4 +776,4 @@ int KoChangeTracker::fragmentLength(QTextDocumentFragment fragment)
     return length;
 }
 
-#include <KoChangeTracker.moc>
+#include <KChangeTracker.moc>

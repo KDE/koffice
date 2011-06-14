@@ -35,7 +35,7 @@
 
 class TextEditingPluginContainer;
 class InsertCharacter;
-class KoChangeTracker;
+class KChangeTracker;
 class KoCharacterStyle;
 class KoColor;
 class KoColorPopupAction;
@@ -297,7 +297,7 @@ private:
     TextShape *m_textShape;
     KoTextShapeData *m_textShapeData;
     QWeakPointer<KoTextEditor> m_textEditor;
-    KoChangeTracker *m_changeTracker;
+    KChangeTracker *m_changeTracker;
     bool m_allowActions;
     bool m_allowAddUndoCommand;
     bool m_trackChanges;

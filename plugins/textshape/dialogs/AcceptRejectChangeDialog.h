@@ -23,7 +23,7 @@
 #include <QtGui>
 #include <ui_AcceptRejectChangeDialog.h>
 
-class KoChangeTracker;
+class KChangeTracker;
 
 class AcceptRejectChangeDialog:public QDialog
 {
@@ -36,7 +36,7 @@ class AcceptRejectChangeDialog:public QDialog
             eChangeRejected
         }AcceptRejectResult;
 
-        AcceptRejectChangeDialog(KoChangeTracker *changeTracker, int changeId);
+        AcceptRejectChangeDialog(KChangeTracker *changeTracker, int changeId);
         ~AcceptRejectChangeDialog();
         
     private:

@@ -21,7 +21,7 @@
 #include <iostream>
 #include "ShowChangesCommand.h"
 
-#include <KoChangeTracker.h>
+#include <KChangeTracker.h>
 #include <KoChangeTrackerElement.h>
 #include <KoTextDocument.h>
 #include <KoTextDocumentLayout.h>
@@ -128,9 +128,9 @@ void ShowChangesCommand::insertDeletedChanges()
             f.clearProperty(KoCharacterStyle::InlineInstanceId);
             caret.setCharFormat(f);
             int insertPosition = caret.position();
-            KoChangeTracker::insertDeleteFragment(caret, element->deleteChangeMarker());
-            checkAndAddAnchoredShapes(insertPosition, KoChangeTracker::fragmentLength(element->deleteData()));
-            numAddedChars += KoChangeTracker::fragmentLength(element->deleteData());
+            KChangeTracker::insertDeleteFragment(caret, element->deleteChangeMarker());
+            checkAndAddAnchoredShapes(insertPosition, KChangeTracker::fragmentLength(element->deleteData()));
+            numAddedChars += KChangeTracker::fragmentLength(element->deleteData());
         }
     }
 }
@@ -179,11 +179,11 @@ void ShowChangesCommand::removeDeletedChanges()
             QTextCharFormat f;
             int deletePosition = element->deleteChangeMarker()->position() + 1 - numDeletedChars;
             caret.setPosition(deletePosition);
-            int deletedLength = KoChangeTracker::fragmentLength(element->deleteData());
+            int deletedLength = KChangeTracker::fragmentLength(element->deleteData());
             caret.setPosition(deletePosition + deletedLength, QTextCursor::KeepAnchor);
-            checkAndRemoveAnchoredShapes(deletePosition, KoChangeTracker::fragmentLength(element->deleteData()));
+            checkAndRemoveAnchoredShapes(deletePosition, KChangeTracker::fragmentLength(element->deleteData()));
             caret.removeSelectedText();
-            numDeletedChars += KoChangeTracker::fragmentLength(element->deleteData());
+            numDeletedChars += KChangeTracker::fragmentLength(element->deleteData());
         }
     }
 }

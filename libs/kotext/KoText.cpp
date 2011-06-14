@@ -20,7 +20,7 @@
 #include "KoText.h"
 #include "styles/KoStyleManager.h"
 #include "styles/KoStyleManager.h"
-#include "changetracker/KoChangeTracker.h"
+#include "changetracker/KChangeTracker.h"
 #include "KoTextShapeData.h"
 #include "KoTextDocumentLayout.h"
 #include "KInlineTextObjectManager.h"
@@ -181,9 +181,9 @@ QTextDocument *KoText::loadOpenDocument(const QString &filename, QTextDocument *
         styleManager = new KoStyleManager;
         doc.setStyleManager(styleManager);
     }
-    KoChangeTracker *changeTracker = doc.changeTracker();
+    KChangeTracker *changeTracker = doc.changeTracker();
     if (changeTracker == 0) {
-        changeTracker = new KoChangeTracker;
+        changeTracker = new KChangeTracker;
         doc.setChangeTracker(changeTracker);
     }
 

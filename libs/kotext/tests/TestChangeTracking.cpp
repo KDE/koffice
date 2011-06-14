@@ -59,7 +59,7 @@
 #include <kstandarddirs.h>
 
 #include <KOdfGenericChanges.h>
-#include <KoChangeTracker.h>
+#include <KChangeTracker.h>
 #include <KoDeleteChangeMarker.h>
 #include <KoChangeTrackerElement.h>
 
@@ -101,11 +101,11 @@ QTextDocument *TestChangeTracking::documentFromOdt(const QString &odt, const QSt
     KXmlElement body = KoXml::namedItemNS(realBody, KOdfXmlNS::office, "text");
 
     KoStyleManager *styleManager = new KoStyleManager;
-    KoChangeTracker *changeTracker = new KoChangeTracker;
+    KChangeTracker *changeTracker = new KChangeTracker;
     if (changeFormat == "DeltaXML")
-        changeTracker->setSaveFormat(KoChangeTracker::DELTAXML);
+        changeTracker->setSaveFormat(KChangeTracker::DELTAXML);
     else
-        changeTracker->setSaveFormat(KoChangeTracker::ODF_1_2);
+        changeTracker->setSaveFormat(KChangeTracker::ODF_1_2);
 
 
     KOdfLoadingContext odfLoadingContext(odfReadStore.styles(), odfReadStore.store(), *componentData);

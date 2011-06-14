@@ -36,7 +36,7 @@
 #include <KInlineTextObjectManager.h>
 #include <KoTextSharedLoadingData.h>
 #include <KoTextDocument.h>
-#include <KoChangeTracker.h>
+#include <KChangeTracker.h>
 
 #include <kstandarddirs.h>
 #include <KDebug>
@@ -90,7 +90,7 @@ QTextDocument *TestLoadStyle::documentFromOdt(const QString &odt)
     KXmlElement body = KoXml::namedItemNS(realBody, KOdfXmlNS::office, "text");
 
     KoStyleManager *styleManager = new KoStyleManager;
-    KoChangeTracker *changeTracker = new KoChangeTracker;
+    KChangeTracker *changeTracker = new KChangeTracker;
 
     KOdfLoadingContext odfLoadingContext(odfReadStore.styles(), odfReadStore.store(), *componentData);
     KoShapeLoadingContext shapeLoadingContext(odfLoadingContext, 0);

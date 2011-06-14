@@ -36,7 +36,7 @@ class KoStyleManager;
 class KoTextBlockData;
 class KoTextShapeData;
 class TextShape;
-class KoChangeTracker;
+class KChangeTracker;
 class KImageCollection;
 class ToCGenerator;
 
@@ -138,7 +138,7 @@ private:
 private:
     KoStyleManager *m_styleManager;
 
-    KoChangeTracker *m_changeTracker;
+    KChangeTracker *m_changeTracker;
 
     qreal m_y;
     QTextBlock m_block;

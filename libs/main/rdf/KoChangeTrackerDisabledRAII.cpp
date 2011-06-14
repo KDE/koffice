@@ -18,9 +18,9 @@
 */
 
 #include "KoChangeTrackerDisabledRAII.h"
-#include <changetracker/KoChangeTracker.h>
+#include <changetracker/KChangeTracker.h>
 
-KoChangeTrackerDisabledRAII::KoChangeTrackerDisabledRAII(KoChangeTracker *changeTracker)
+KoChangeTrackerDisabledRAII::KoChangeTrackerDisabledRAII(KChangeTracker *changeTracker)
         : m_changeTracker(changeTracker),
         m_oldval(true)
 {

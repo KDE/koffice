@@ -18,10 +18,10 @@
  */
 
 #include "AcceptRejectChangeDialog.h"
-#include <KoChangeTracker.h>
+#include <KChangeTracker.h>
 #include <KoChangeTrackerElement.h>
 
-AcceptRejectChangeDialog::AcceptRejectChangeDialog(KoChangeTracker *changeTracker, int changeId)
+AcceptRejectChangeDialog::AcceptRejectChangeDialog(KChangeTracker *changeTracker, int changeId)
 {
     ui.setupUi(this);
     ui.authorNameLineEdit->setText(changeTracker->elementById(changeId)->creator());

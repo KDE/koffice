@@ -26,7 +26,7 @@
 #include <QTextFormat>
 #include <KListStyle.h>
 
-class KoChangeTracker;
+class KChangeTracker;
 class KXmlElement;
 
 class QTextDocument;
@@ -49,7 +49,7 @@ public:
     static const QString RDFDeleteChangeContext;
     /****************************************************************************************************************/
 
-    KoDeleteChangeMarker(KoChangeTracker *changeTracker);
+    KoDeleteChangeMarker(KChangeTracker *changeTracker);
 
     virtual ~KoDeleteChangeMarker();
 

@@ -21,7 +21,7 @@
 #include "ChangeTrackingTool.h"
 
 #include <KCanvasBase.h>
-#include <KoChangeTracker.h>
+#include <KChangeTracker.h>
 #include <KoPointerEvent.h>
 #include <KoSelection.h>
 #include <KoShapeManager.h>

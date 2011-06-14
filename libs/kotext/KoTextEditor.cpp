@@ -29,7 +29,7 @@
 #include "KoTextDrag.h"
 #include "KoTextLocator.h"
 #include "KoTextOdfSaveHelper.h"
-#include "changetracker/KoChangeTracker.h"
+#include "changetracker/KChangeTracker.h"
 #include "changetracker/KoChangeTrackerElement.h"
 #include "changetracker/KoDeleteChangeMarker.h"
 #include "styles/KoCharacterStyle.h"
@@ -382,7 +382,7 @@ void KoTextEditor::registerTrackedChange(QTextCursor &selection, KOdfGenericChan
             int selectionEnd = qMax(checker.anchor(), checker.position());
 
             checker.setPosition(selectionBegin);
-            KoChangeTracker *changeTracker = KoTextDocument(d->document).changeTracker();
+            KChangeTracker *changeTracker = KoTextDocument(d->document).changeTracker();
             if (!checker.atBlockStart()) {
                 int changeId = checker.charFormat().property(KoCharacterStyle::ChangeTrackerId).toInt();
                 if (changeId && changeTracker->elementById(changeId)->changeType() == changeType)
@@ -952,7 +952,7 @@ void KoTextEditor::insertTable(int rows, int columns)
     tableFormat.setWidth(QTextLength(QTextLength::PercentageLength, 100));
     tableFormat.setMargin(5);
 
-    KoChangeTracker *changeTracker = KoTextDocument(d->document).changeTracker();
+    KChangeTracker *changeTracker = KoTextDocument(d->document).changeTracker();
     if (changeTracker && changeTracker->recordChanges()) {
         QTextCharFormat charFormat = d->caret.charFormat();
         QTextBlockFormat blockFormat = d->caret.blockFormat();
@@ -997,7 +997,7 @@ void KoTextEditor::insertTableRowAbove()
     QTextTable *table = d->caret.currentTable();
     if (table) {
         int changeId = 0;
-        KoChangeTracker *changeTracker = KoTextDocument(d->document).changeTracker();
+        KChangeTracker *changeTracker = KoTextDocument(d->document).changeTracker();
         if (changeTracker && changeTracker->recordChanges()) {
             QString title(i18n("Insert Row Above"));
             changeId = changeTracker->insertChangeId(title, 0);
@@ -1011,7 +1011,7 @@ void KoTextEditor::insertTableRowBelow()
     QTextTable *table = d->caret.currentTable();
     if (table) {
         int changeId = 0;
-        KoChangeTracker *changeTracker = KoTextDocument(d->document).changeTracker();
+        KChangeTracker *changeTracker = KoTextDocument(d->document).changeTracker();
         if (changeTracker && changeTracker->recordChanges()) {
             QString title(i18n("Insert Row Above"));
             changeId = changeTracker->insertChangeId(title, 0);
@@ -1025,7 +1025,7 @@ void KoTextEditor::insertTableColumnLeft()
     QTextTable *table = d->caret.currentTable();
     if (table) {
         int changeId = 0;
-        KoChangeTracker *changeTracker = KoTextDocument(d->document).changeTracker();
+        KChangeTracker *changeTracker = KoTextDocument(d->document).changeTracker();
         if (changeTracker && changeTracker->recordChanges()) {
             QString title(i18n("Insert Column Left"));
             changeId = changeTracker->insertChangeId(title, 0);
@@ -1039,7 +1039,7 @@ void KoTextEditor::insertTableColumnRight()
     QTextTable *table = d->caret.currentTable();
     if (table) {
         int changeId = 0;
-        KoChangeTracker *changeTracker = KoTextDocument(d->document).changeTracker();
+        KChangeTracker *changeTracker = KoTextDocument(d->document).changeTracker();
         if (changeTracker && changeTracker->recordChanges()) {
             QString title(i18n("Insert Column Right"));
             changeId = changeTracker->insertChangeId(title, 0);
@@ -1053,7 +1053,7 @@ void KoTextEditor::deleteTableColumn()
     QTextTable *table = d->caret.currentTable();
     if (table) {
         int changeId = 0;
-        KoChangeTracker *changeTracker = KoTextDocument(d->document).changeTracker();
+        KChangeTracker *changeTracker = KoTextDocument(d->document).changeTracker();
         if (changeTracker && changeTracker->recordChanges()) {
             QString title(i18n("Delete Column"));
             changeId = changeTracker->deleteChangeId(title, QTextDocumentFragment(), 0);
@@ -1067,7 +1067,7 @@ void KoTextEditor::deleteTableRow()
 {
     QTextTable *table = d->caret.currentTable();
     if (table) {
-        KoChangeTracker *changeTracker = KoTextDocument(d->document).changeTracker();
+        KChangeTracker *changeTracker = KoTextDocument(d->document).changeTracker();
         int changeId = 0;
         if (changeTracker && changeTracker->recordChanges()) {
             QString title(i18n("Delete Row"));

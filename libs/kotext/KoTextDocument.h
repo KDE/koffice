@@ -31,7 +31,7 @@ class KoStyleManager;
 class KInlineTextObjectManager;
 class KUndoStack;
 class KoTextEditor;
-class KoChangeTracker;
+class KChangeTracker;
 
 /**
  * KoTextDocument provides an easy mechanism to set and access the
@@ -67,10 +67,10 @@ public:
     KoStyleManager *styleManager() const;
 
     /// Sets the change tracker of the document
-    void setChangeTracker(KoChangeTracker *changeTracker);
+    void setChangeTracker(KChangeTracker *changeTracker);
 
     ///Returns the change tracker of the document
-    KoChangeTracker *changeTracker() const;
+    KChangeTracker *changeTracker() const;
 
     ///Sets the global undo stack
     void setUndoStack(KUndoStack *undoStack);

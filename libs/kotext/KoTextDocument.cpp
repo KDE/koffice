@@ -32,7 +32,7 @@
 #include "KInlineTextObjectManager.h"
 #include "KoTextDocumentLayout.h"
 #include "styles/KParagraphStyle.h"
-#include "changetracker/KoChangeTracker.h"
+#include "changetracker/KChangeTracker.h"
 #include "KoList.h"
 #include <KUndoStack>
 
@@ -104,17 +104,17 @@ KoStyleManager *KoTextDocument::styleManager() const
     return resource.value<KoStyleManager *>();
 }
 
-void KoTextDocument::setChangeTracker(KoChangeTracker *changeTracker)
+void KoTextDocument::setChangeTracker(KChangeTracker *changeTracker)
 {
     QVariant v;
     v.setValue(changeTracker);
     m_document->addResource(KoTextDocument::ChangeTrackerResource, ChangeTrackerURL, v);
 }
 
-KoChangeTracker *KoTextDocument::changeTracker() const
+KChangeTracker *KoTextDocument::changeTracker() const
 {
     QVariant resource = m_document->resource(KoTextDocument::ChangeTrackerResource, ChangeTrackerURL);
-    return resource.value<KoChangeTracker *>();
+    return resource.value<KChangeTracker *>();
 }
 
 void KoTextDocument::setHeadingList(KoList *headingList)

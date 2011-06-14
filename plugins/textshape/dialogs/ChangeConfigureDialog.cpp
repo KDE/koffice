@@ -48,7 +48,7 @@ void ColorDisplayLabel::setColor(const QColor &color)
     labelColor = color;
 }
 
-ChangeConfigureDialog::ChangeConfigureDialog(const QColor &insertionColor, const QColor &deletionColor, const QColor &formatChangeColor, const QString &authorName, KoChangeTracker::ChangeSaveFormat changeSaveFormat, QWidget *parent)
+ChangeConfigureDialog::ChangeConfigureDialog(const QColor &insertionColor, const QColor &deletionColor, const QColor &formatChangeColor, const QString &authorName, KChangeTracker::ChangeSaveFormat changeSaveFormat, QWidget *parent)
     :QDialog(parent)
 {
     ui.setupUi(this);
@@ -56,7 +56,7 @@ ChangeConfigureDialog::ChangeConfigureDialog(const QColor &insertionColor, const
     ui.deletionColorDisplayLabel->setColor(deletionColor);
     ui.formatColorDisplayLabel->setColor(formatChangeColor);
     ui.authorNameLineEdit->setText(authorName);
-    if (changeSaveFormat == KoChangeTracker::ODF_1_2) {
+    if (changeSaveFormat == KChangeTracker::ODF_1_2) {
         ui.odf12RadioButton->setChecked(true);
     } else {
         ui.deltaXmlRadioButton->setChecked(true);
@@ -72,12 +72,12 @@ QString ChangeConfigureDialog::authorName() const
     return ui.authorNameLineEdit->text();
 }
 
-KoChangeTracker::ChangeSaveFormat ChangeConfigureDialog::saveFormat() const
+KChangeTracker::ChangeSaveFormat ChangeConfigureDialog::saveFormat() const
 {
     if (ui.odf12RadioButton->isChecked()) {
-        return KoChangeTracker::ODF_1_2;
+        return KChangeTracker::ODF_1_2;
     } else {
-        return KoChangeTracker::DELTAXML;
+        return KChangeTracker::DELTAXML;
     }
 }
 
