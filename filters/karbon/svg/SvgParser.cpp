@@ -46,7 +46,7 @@
 #include <pathshapes/ellipse/EllipseShape.h>
 #include <plugins/artistictextshape/ArtisticTextShape.h>
 #include <KoColorBackground.h>
-#include <KoGradientBackground.h>
+#include <KGradientBackground.h>
 #include <KoPatternBackground.h>
 #include <KFilterEffectRegistry.h>
 #include <KFilterEffect.h>
@@ -1077,13 +1077,13 @@ void SvgParser::applyFillStyle(KoShape * shape)
     case SvgGraphicsContext::Gradient: {
         SvgGradientHelper * gradient = findGradient(gc->fillId);
         if (gradient) {
-            KoGradientBackground * bg = 0;
+            KGradientBackground * bg = 0;
             if (gradient->gradientUnits() == SvgGradientHelper::ObjectBoundingBox) {
-                bg = new KoGradientBackground(*gradient->gradient());
+                bg = new KGradientBackground(*gradient->gradient());
                 bg->setTransform(gradient->transform());
             } else {
                 QGradient *convertedGradient = SvgGradientHelper::convertGradient(gradient->gradient(), shape->size());
-                bg = new KoGradientBackground(*convertedGradient);
+                bg = new KGradientBackground(*convertedGradient);
                 delete convertedGradient;
                 QTransform invShapematrix = shape->transformation().inverted();
                 bg->setTransform(gradient->transform() * gc->matrix * invShapematrix);

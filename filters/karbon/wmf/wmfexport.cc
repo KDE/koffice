@@ -30,7 +30,7 @@
 #include <KoShape.h>
 #include <KoShapeContainer.h>
 #include <KoColorBackground.h>
-#include <KoGradientBackground.h>
+#include <KGradientBackground.h>
 #include <KoPatternBackground.h>
 
 /*
@@ -133,7 +133,7 @@ void WmfExport::paintShape(KoShape * shape)
         KoColorBackground * cbg = dynamic_cast<KoColorBackground*>(shape->background());
         if (cbg)
             fill = QBrush(cbg->color(), cbg->style());
-        KoGradientBackground * gbg = dynamic_cast<KoGradientBackground*>(shape->background());
+        KGradientBackground * gbg = dynamic_cast<KGradientBackground*>(shape->background());
         if (gbg) {
             fill = QBrush(*gbg->gradient());
             fill.setTransform(gbg->transform());

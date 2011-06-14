@@ -23,7 +23,7 @@
 #include <KoLineBorder.h>
 #include <KOdfXmlNS.h>
 #include <KXmlReader.h>
-#include <KoGradientBackground.h>
+#include <KGradientBackground.h>
 #include <KoShapeLoadingContext.h>
 
 #include <klocale.h>
@@ -52,7 +52,7 @@ KoShape *EllipseShapeFactory::createDefaultShape(KoResourceManager *) const
     gradient->setCoordinateMode(QGradient::ObjectBoundingMode);
     gradient->setColorAt(0.0, Qt::white);
     gradient->setColorAt(1.0, Qt::green);
-    ellipse->setBackground(new KoGradientBackground(gradient));
+    ellipse->setBackground(new KGradientBackground(gradient));
 
     return ellipse;
 }

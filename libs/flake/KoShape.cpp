@@ -31,7 +31,7 @@
 #include "KoShapeBorderBase.h"
 #include "KoShapeBackground.h"
 #include "KoColorBackground.h"
-#include "KoGradientBackground.h"
+#include "KGradientBackground.h"
 #include "KoPatternBackground.h"
 #include "KoShapeManager.h"
 #include "KoShapeManager_p.h"
@@ -1232,7 +1232,7 @@ KoShapeBackground *KoShape::loadOdfFill(KoShapeLoadingContext &context) const
     } else if (fill == "gradient") {
         QGradient *gradient = new QLinearGradient();
         gradient->setCoordinateMode(QGradient::ObjectBoundingMode);
-        bg = new KoGradientBackground(gradient);
+        bg = new KGradientBackground(gradient);
     } else if (fill == "bitmap") {
         bg = new KoPatternBackground(context.imageCollection());
 #ifndef NWORKAROUND_ODF_BUGS

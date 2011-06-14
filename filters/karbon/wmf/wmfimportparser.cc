@@ -27,7 +27,7 @@
 #include <KoImageData.h>
 #include <KoImageCollection.h>
 #include <KoColorBackground.h>
-#include <KoGradientBackground.h>
+#include <KGradientBackground.h>
 #include <KoPatternBackground.h>
 #include <KoShapeFactoryBase.h>
 #include <KoShapeRegistry.h>
@@ -556,7 +556,7 @@ void WMFImportParser::appendBrush(KoShape& obj)
     case Qt::LinearGradientPattern:
     case Qt::RadialGradientPattern:
     case Qt::ConicalGradientPattern: {
-        KoGradientBackground * bg = new KoGradientBackground(*mBrush.gradient());
+        KGradientBackground * bg = new KGradientBackground(*mBrush.gradient());
         bg->setTransform(mBrush.transform());
         obj.setBackground(bg);
         break;

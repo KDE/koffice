@@ -29,23 +29,23 @@
 class KoGradientBackgroundPrivate;
 
 /// A gradient shape background
-class FLAKE_EXPORT KoGradientBackground : public KoShapeBackground
+class FLAKE_EXPORT KGradientBackground : public KoShapeBackground
 {
 public:
     /**
      * Creates new gradient background from given gradient.
      * The background takes ownership of the given gradient.
      */
-    explicit KoGradientBackground(QGradient *gradient, const QTransform &matrix = QTransform());
+    explicit KGradientBackground(QGradient *gradient, const QTransform &matrix = QTransform());
 
     /**
      * Create new gradient background from the given gradient.
      * A clone of the given gradient is used.
      */
-    explicit KoGradientBackground(const QGradient &gradient, const QTransform &matrix = QTransform());
+    explicit KGradientBackground(const QGradient &gradient, const QTransform &matrix = QTransform());
 
     /// Destroys the background
-    virtual ~KoGradientBackground();
+    virtual ~KGradientBackground();
 
     /// Sets the transform matrix
     void setTransform(const QTransform &matrix);
@@ -69,7 +69,7 @@ public:
     const QGradient *gradient() const;
 
     /// Assignment operator
-    KoGradientBackground& operator=(const KoGradientBackground &rhs);
+    KGradientBackground& operator=(const KGradientBackground &rhs);
 
     /// reimplemented from KoShapeBackground
     virtual void paint(QPainter &painter, const QPainterPath &fillPath) const;
@@ -79,7 +79,7 @@ public:
     virtual bool loadStyle(KOdfLoadingContext &context, const QSizeF &shapeSize);
 
 private:
-    Q_DECLARE_PRIVATE(KoGradientBackground)
+    Q_DECLARE_PRIVATE(KGradientBackground)
 };
 
 #endif // KOGRADIENTBACKGROUND_H

@@ -74,7 +74,7 @@ set(flake_SRCS
     KoLineBorderFactory.cpp
     KoShapeBackground.cpp
     KoColorBackground.cpp
-    KoGradientBackground.cpp
+    KGradientBackground.cpp
     KoPatternBackground.cpp
     KoShapeConfigWidgetBase.cpp
     KoDrag.cpp
@@ -257,7 +257,7 @@ install(
     KFilterEffectStack.h
     KoFlake.h
     KFrameShape.h
-    KoGradientBackground.h
+    KGradientBackground.h
     KoGuidesData.h
     KoImageCollection.h
     KoImageData.h

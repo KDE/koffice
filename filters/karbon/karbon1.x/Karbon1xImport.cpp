@@ -46,7 +46,7 @@
 #include <KoZoomHandler.h>
 #include <KoPatternBackground.h>
 #include <KoColorBackground.h>
-#include <KoGradientBackground.h>
+#include <KGradientBackground.h>
 #include <KoShapeFactoryBase.h>
 #include <KoShapeRegistry.h>
 
@@ -582,7 +582,7 @@ void KarbonImport::loadFill(KoShape * shape, const KXmlElement &element)
         }
         if (e.tagName() == "GRADIENT") {
             QBrush brush = loadGradient(shape, e);
-            KoGradientBackground * newFill = new KoGradientBackground(*brush.gradient());
+            KGradientBackground * newFill = new KGradientBackground(*brush.gradient());
             newFill->setTransform(brush.transform());
             shape->setBackground(newFill);
         } else if (e.tagName() == "PATTERN") {

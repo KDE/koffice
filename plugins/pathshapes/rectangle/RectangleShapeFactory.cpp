@@ -23,7 +23,7 @@
 #include "KoLineBorder.h"
 #include <KOdfXmlNS.h>
 #include <KXmlReader.h>
-#include <KoGradientBackground.h>
+#include <KGradientBackground.h>
 #include <KoShapeLoadingContext.h>
 
 #include <klocale.h>
@@ -50,7 +50,7 @@ KoShape *RectangleShapeFactory::createDefaultShape(KoResourceManager *) const
 
     gradient->setColorAt(0.0, Qt::white);
     gradient->setColorAt(1.0, Qt::green);
-    rect->setBackground(new KoGradientBackground(gradient));
+    rect->setBackground(new KGradientBackground(gradient));
 
     return rect;
 }

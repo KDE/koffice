@@ -22,7 +22,7 @@
 
 #include "KarbonSmallStylePreview.h"
 #include <KarbonGradientHelper.h>
-#include <KoGradientBackground.h>
+#include <KGradientBackground.h>
 #include <KoCanvasBase.h>
 #include <KoToolManager.h>
 #include <KoCanvasController.h>
@@ -80,7 +80,7 @@ protected:
         if (m_fill) {
             m_checkerPainter.paint(painter, rect());
 
-            KoGradientBackground * gradientFill = dynamic_cast<KoGradientBackground*>(m_fill);
+            KGradientBackground * gradientFill = dynamic_cast<KGradientBackground*>(m_fill);
             if (gradientFill) {
                 const QGradient * gradient = gradientFill->gradient();
                 QGradient * defGradient = KarbonGradientHelper::defaultGradient(gradient->type(), gradient->spread(), gradient->stops());

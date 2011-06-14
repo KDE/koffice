@@ -45,7 +45,7 @@
 #include <KoPathShape.h>
 #include <KoLineBorder.h>
 #include <KoColorBackground.h>
-#include <KoGradientBackground.h>
+#include <KGradientBackground.h>
 #include <KoPatternBackground.h>
 #include <plugins/artistictextshape/ArtisticTextShape.h>
 #include <pathshapes/rectangle/RectangleShape.h>
@@ -540,7 +540,7 @@ void SvgExport::getFill(KoShape * shape, QTextStream *stream)
         if (cbg->color().alphaF() < 1.0)
             *stream << " fill-opacity=\"" << cbg->color().alphaF() << "\"";
     }
-    KoGradientBackground * gbg = dynamic_cast<KoGradientBackground*>(shape->background());
+    KGradientBackground * gbg = dynamic_cast<KGradientBackground*>(shape->background());
     if (gbg) {
         *stream << " fill=\"";
         getGradient(gbg->gradient(), gbg->transform());

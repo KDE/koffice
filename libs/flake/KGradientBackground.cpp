@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoGradientBackground.h"
+#include "KGradientBackground.h"
 #include "KoShapeBackground_p.h"
 #include "KoFlake.h"
 #include <KOdfStyleStack.h>
@@ -43,45 +43,45 @@ public:
     QTransform matrix;
 };
 
-KoGradientBackground::KoGradientBackground(QGradient * gradient, const QTransform &matrix)
+KGradientBackground::KGradientBackground(QGradient * gradient, const QTransform &matrix)
     : KoShapeBackground(*(new KoGradientBackgroundPrivate()))
 {
-    Q_D(KoGradientBackground);
+    Q_D(KGradientBackground);
     d->gradient = gradient;
     d->matrix = matrix;
     Q_ASSERT(d->gradient);
     Q_ASSERT(d->gradient->coordinateMode() == QGradient::ObjectBoundingMode);
 }
 
-KoGradientBackground::KoGradientBackground(const QGradient & gradient, const QTransform &matrix)
+KGradientBackground::KGradientBackground(const QGradient & gradient, const QTransform &matrix)
     : KoShapeBackground(*(new KoGradientBackgroundPrivate()))
 {
-    Q_D(KoGradientBackground);
+    Q_D(KGradientBackground);
     d->gradient = KoFlake::cloneGradient(&gradient);
     d->matrix = matrix;
     Q_ASSERT(d->gradient);
     Q_ASSERT(d->gradient->coordinateMode() == QGradient::ObjectBoundingMode);
 }
 
-KoGradientBackground::~KoGradientBackground()
+KGradientBackground::~KGradientBackground()
 {
 }
 
-void KoGradientBackground::setTransform(const QTransform &matrix)
+void KGradientBackground::setTransform(const QTransform &matrix)
 {
-    Q_D(KoGradientBackground);
+    Q_D(KGradientBackground);
     d->matrix = matrix;
 }
 
-QTransform KoGradientBackground::transform() const
+QTransform KGradientBackground::transform() const
 {
-    Q_D(const KoGradientBackground);
+    Q_D(const KGradientBackground);
     return d->matrix;
 }
 
-void KoGradientBackground::setGradient(QGradient * gradient)
+void KGradientBackground::setGradient(QGradient * gradient)
 {
-    Q_D(KoGradientBackground);
+    Q_D(KGradientBackground);
     delete d->gradient;
 
     d->gradient = gradient;
@@ -89,9 +89,9 @@ void KoGradientBackground::setGradient(QGradient * gradient)
     Q_ASSERT(d->gradient->coordinateMode() == QGradient::ObjectBoundingMode);
 }
 
-void KoGradientBackground::setGradient(const QGradient &gradient)
+void KGradientBackground::setGradient(const QGradient &gradient)
 {
-    Q_D(KoGradientBackground);
+    Q_D(KGradientBackground);
     delete d->gradient;
 
     d->gradient = KoFlake::cloneGradient(&gradient);
@@ -99,15 +99,15 @@ void KoGradientBackground::setGradient(const QGradient &gradient)
     Q_ASSERT(d->gradient->coordinateMode() == QGradient::ObjectBoundingMode);
 }
 
-const QGradient * KoGradientBackground::gradient() const
+const QGradient * KGradientBackground::gradient() const
 {
-    Q_D(const KoGradientBackground);
+    Q_D(const KGradientBackground);
     return d->gradient;
 }
 
-KoGradientBackground &KoGradientBackground::operator = (const KoGradientBackground &rhs)
+KGradientBackground &KGradientBackground::operator = (const KGradientBackground &rhs)
 {
-    Q_D(KoGradientBackground);
+    Q_D(KGradientBackground);
     if (this == &rhs)
         return *this;
 
@@ -122,9 +122,9 @@ KoGradientBackground &KoGradientBackground::operator = (const KoGradientBackgrou
     return *this;
 }
 
-void KoGradientBackground::paint(QPainter &painter, const QPainterPath &fillPath) const
+void KGradientBackground::paint(QPainter &painter, const QPainterPath &fillPath) const
 {
-    Q_D(const KoGradientBackground);
+    Q_D(const KGradientBackground);
     QBrush brush(*d->gradient);
     brush.setTransform(d->matrix);
 
@@ -132,17 +132,17 @@ void KoGradientBackground::paint(QPainter &painter, const QPainterPath &fillPath
     painter.drawPath(fillPath);
 }
 
-void KoGradientBackground::fillStyle(KOdfGenericStyle &style, KoShapeSavingContext &context)
+void KGradientBackground::fillStyle(KOdfGenericStyle &style, KoShapeSavingContext &context)
 {
-    Q_D(KoGradientBackground);
+    Q_D(KGradientBackground);
     QBrush brush(*d->gradient);
     brush.setTransform(d->matrix);
     KOdf::saveOdfFillStyle(style, context.mainStyles(), brush);
 }
 
-bool KoGradientBackground::loadStyle(KOdfLoadingContext &context, const QSizeF &shapeSize)
+bool KGradientBackground::loadStyle(KOdfLoadingContext &context, const QSizeF &shapeSize)
 {
-    Q_D(KoGradientBackground);
+    Q_D(KGradientBackground);
     KOdfStyleStack &styleStack = context.styleStack();
     if (! styleStack.hasProperty(KOdfXmlNS::draw, "fill"))
         return false;
