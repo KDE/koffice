@@ -125,7 +125,7 @@ public:
 
     /**
      * Create a list of actions that can be used to plug into a menu, for example.
-     * This method internally uses KoInlineObjectRegistry::createInsertVariableActions() but extends
+     * This method internally uses KInlineObjectRegistry::createInsertVariableActions() but extends
      * the list with all registered variable-names.
      * Each of thse actions, when executed, will insert the relevant variable in the current text-position.
      * The actions assume that the text tool is selected, if thats not the case then they will silently fail.

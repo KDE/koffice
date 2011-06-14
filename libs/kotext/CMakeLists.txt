@@ -22,7 +22,7 @@ set(kotext_LIB_SRCS
 
     KoInlineTextObjectManager.cpp
     KInlineObjectFactoryBase.cpp
-    KoInlineObjectRegistry.cpp
+    KInlineObjectRegistry.cpp
     InsertInlineObjectActionBase.cpp
     InsertVariableAction.cpp
     InsertNamedVariableAction.cpp
@@ -119,7 +119,7 @@ install(
     KoTextEditingFactory.h
     KoTextEditingPlugin.h
     KoTextEditingRegistry.h
-    KoInlineObjectRegistry.h
+    KInlineObjectRegistry.h
     KInlineObjectFactoryBase.h
     KoBookmark.h
     KoBookmarkManager.h

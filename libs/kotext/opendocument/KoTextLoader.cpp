@@ -50,7 +50,7 @@
 #include <KUnit.h>
 #include <KoVariable.h>
 #include <KoVariableManager.h>
-#include <KoInlineObjectRegistry.h>
+#include <KInlineObjectRegistry.h>
 #include <KOdfXmlNS.h>
 #include <KXmlReader.h>
 #include "KoTextInlineRdf.h"
@@ -653,7 +653,7 @@ void KoTextLoader::loadBody(const KXmlElement &bodyElem, QTextCursor &cursor)
                     } else if (localName == "table-of-content") {
                         loadTableOfContents(tag, cursor);
                     } else {
-                        KInlineObject *obj = KoInlineObjectRegistry::instance()->createFromOdf(tag, d->context);
+                        KInlineObject *obj = KInlineObjectRegistry::instance()->createFromOdf(tag, d->context);
                         if (obj) {
                             KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(cursor.block().document()->documentLayout());
                             if (layout) {
@@ -1674,7 +1674,7 @@ void KoTextLoader::loadSpan(const KXmlElement &element, QTextCursor &cursor, boo
         } else if (isDrawNS) {
             loadShape(ts, cursor);
         } else {
-            KInlineObject *obj = KoInlineObjectRegistry::instance()->createFromOdf(ts, d->context);
+            KInlineObject *obj = KInlineObjectRegistry::instance()->createFromOdf(ts, d->context);
 
             if (obj) {
                 KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(cursor.block().document()->documentLayout());

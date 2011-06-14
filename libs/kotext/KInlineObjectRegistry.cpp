@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoInlineObjectRegistry.h"
+#include "KInlineObjectRegistry.h"
 #include "KInlineObjectFactoryBase.h"
 #include "InsertVariableAction_p.h"
 
@@ -29,16 +29,16 @@
 #include <KDebug>
 #include <KGlobal>
 
-class KoInlineObjectRegistry::Private
+class KInlineObjectRegistry::Private
 {
 public:
     void insertFactory(KInlineObjectFactoryBase *factory);
-    void init(KoInlineObjectRegistry *q);
+    void init(KInlineObjectRegistry *q);
 
     QHash<QPair<QString, QString>, KInlineObjectFactoryBase *> factories;
 };
 
-void KoInlineObjectRegistry::Private::init(KoInlineObjectRegistry *q)
+void KInlineObjectRegistry::Private::init(KInlineObjectRegistry *q)
 {
     KoPluginLoader::PluginsConfig config;
     config.whiteList = "TextInlinePlugins";
@@ -62,16 +62,16 @@ void KoInlineObjectRegistry::Private::init(KoInlineObjectRegistry *q)
     }
 }
 
-KoInlineObjectRegistry* KoInlineObjectRegistry::instance()
+KInlineObjectRegistry* KInlineObjectRegistry::instance()
 {
-    K_GLOBAL_STATIC(KoInlineObjectRegistry, s_instance)
+    K_GLOBAL_STATIC(KInlineObjectRegistry, s_instance)
     if (!s_instance.exists()) {
         s_instance->d->init(s_instance);
     }
     return s_instance;
 }
 
-QList<QAction*> KoInlineObjectRegistry::createInsertVariableActions(KoCanvasBase *host) const
+QList<QAction*> KInlineObjectRegistry::createInsertVariableActions(KoCanvasBase *host) const
 {
     QList<QAction*> answer;
     foreach (const QString &key, keys()) {
@@ -90,7 +90,7 @@ QList<QAction*> KoInlineObjectRegistry::createInsertVariableActions(KoCanvasBase
     return answer;
 }
 
-KInlineObject *KoInlineObjectRegistry::createFromOdf(const KXmlElement &element, KoShapeLoadingContext &context) const
+KInlineObject *KInlineObjectRegistry::createFromOdf(const KXmlElement &element, KoShapeLoadingContext &context) const
 {
     kDebug(32500) << "Going to check for" << element.namespaceURI() << ":" << element.tagName();
 
@@ -107,14 +107,14 @@ KInlineObject *KoInlineObjectRegistry::createFromOdf(const KXmlElement &element,
     return object;
 }
 
-KoInlineObjectRegistry::~KoInlineObjectRegistry()
+KInlineObjectRegistry::~KInlineObjectRegistry()
 {
     delete d;
 }
 
-KoInlineObjectRegistry::KoInlineObjectRegistry()
+KInlineObjectRegistry::KInlineObjectRegistry()
         : d(new Private())
 {
 }
 
-#include <KoInlineObjectRegistry.moc>
+#include <KInlineObjectRegistry.moc>

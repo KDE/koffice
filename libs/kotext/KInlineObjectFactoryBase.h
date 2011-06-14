@@ -45,7 +45,7 @@ struct KOTEXT_EXPORT KoInlineObjectTemplate {
  * allow the creation of the inlineObject from that plugin.
  * The factory additionally has information to allow showing a menu entry for user
  * access to the object-type.
- * @see KoInlineObjectRegistry
+ * @see KInlineObjectRegistry
  */
 class KOTEXT_EXPORT KInlineObjectFactoryBase : public QObject
 {

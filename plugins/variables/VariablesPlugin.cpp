@@ -23,7 +23,7 @@
 #include "InfoVariableFactory.h"
 #include <kpluginfactory.h>
 
-#include <KoInlineObjectRegistry.h>
+#include <KInlineObjectRegistry.h>
 
 K_PLUGIN_FACTORY(VariablesPluginFactory, registerPlugin<VariablesPlugin>();)
 K_EXPORT_PLUGIN(VariablesPluginFactory("VariablesPlugin"))
@@ -31,9 +31,9 @@ K_EXPORT_PLUGIN(VariablesPluginFactory("VariablesPlugin"))
 VariablesPlugin::VariablesPlugin(QObject *parent, const QVariantList&)
         : QObject(parent)
 {
-    KoInlineObjectRegistry::instance()->add(new PageVariableFactory(parent));
-    KoInlineObjectRegistry::instance()->add(new DateVariableFactory(parent));
-    KoInlineObjectRegistry::instance()->add(new InfoVariableFactory(parent));
+    KInlineObjectRegistry::instance()->add(new PageVariableFactory(parent));
+    KInlineObjectRegistry::instance()->add(new DateVariableFactory(parent));
+    KInlineObjectRegistry::instance()->add(new InfoVariableFactory(parent));
 }
 
 #include <VariablesPlugin.moc>

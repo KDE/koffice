@@ -38,17 +38,17 @@ class KoShapeLoadingContext;
  * @see KInlineObject
  * @see KoVariable
  */
-class KOTEXT_EXPORT KoInlineObjectRegistry : public QObject,  public KGenericRegistry<KInlineObjectFactoryBase*>
+class KOTEXT_EXPORT KInlineObjectRegistry : public QObject,  public KGenericRegistry<KInlineObjectFactoryBase*>
 {
     Q_OBJECT
 public:
-    ~KoInlineObjectRegistry();
+    ~KInlineObjectRegistry();
 
     /**
-     * Return an instance of the KoInlineObjectRegistry
+     * Return an instance of the KInlineObjectRegistry
      * Creates an instance if that has never happened before and returns the singleton instance.
      */
-    static KoInlineObjectRegistry *instance();
+    static KInlineObjectRegistry *instance();
 
     /**
      * Create a list of actions that can be used to plug into a menu, for example.
@@ -72,9 +72,9 @@ public:
     KInlineObject *createFromOdf(const KXmlElement &element, KoShapeLoadingContext &context) const;
 
 private:
-    KoInlineObjectRegistry();
-    KoInlineObjectRegistry(const KoInlineObjectRegistry&);
-    KoInlineObjectRegistry operator=(const KoInlineObjectRegistry&);
+    KInlineObjectRegistry();
+    KInlineObjectRegistry(const KInlineObjectRegistry&);
+    KInlineObjectRegistry operator=(const KInlineObjectRegistry&);
 
     class Private;
     Private *d;

@@ -23,7 +23,7 @@
 */
 #include "Plugin.h"
 #include <kpluginfactory.h>
-#include <KoInlineObjectRegistry.h>
+#include <KInlineObjectRegistry.h>
 #include "PresentationVariableFactory.h"
 
 
@@ -33,7 +33,7 @@ K_EXPORT_PLUGIN(PluginFactory("kprvariables"))
 Plugin::Plugin(QObject *parent, const QVariantList &)
     : QObject(parent)
 {
-    KoInlineObjectRegistry::instance()->add(new PresentationVariableFactory());
+    KInlineObjectRegistry::instance()->add(new PresentationVariableFactory());
 }
 
 #include "Plugin.moc"
