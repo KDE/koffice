@@ -25,7 +25,7 @@
 #include <KoShapeMoveCommand.h>
 #include <KoShapeSizeCommand.h>
 #include <KoShapeDeleteCommand.h>
-#include <KoShapeCreateCommand.h>
+#include <KShapeCreateCommand.h>
 #include <KoPADocument.h>
 #include <KoTextShapeData.h>
 #include "SCPageLayout.h"
@@ -123,7 +123,7 @@ void SCPlaceholders::setLayout(SCPageLayout * layout, KoPADocument * document, c
              shape->setParent(layer);
              shape->setShapeId(SCPlaceholderShapeId);
              applyStyle(shape, itPlaceholder.key(), styles);
-             new KoShapeCreateCommand(document, shape, cmd);
+             new KShapeCreateCommand(document, shape, cmd);
         }
     }
     document->addCommand(cmd);

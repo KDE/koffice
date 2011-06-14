@@ -35,7 +35,7 @@
 #include "KoShapeManager.h"
 #include "KShapeControllerBase.h"
 #include "KoShapeRegistry.h"
-#include "commands/KoShapeCreateCommand.h"
+#include "commands/KShapeCreateCommand.h"
 
 #include <KGlobal>
 #include <KConfig>

@@ -110,7 +110,7 @@ set(flake_SRCS
     commands/KShapeAlignCommand.cpp
     commands/KShapeBackgroundCommand.cpp
     commands/KShapeBorderCommand.cpp
-    commands/KoShapeCreateCommand.cpp
+    commands/KShapeCreateCommand.cpp
     commands/KoShapeDeleteCommand.cpp
     commands/KoShapeDistributeCommand.cpp
     commands/KoShapeLockCommand.cpp
@@ -216,7 +216,7 @@ install(
     commands/KShapeAlignCommand.h
     commands/KShapeBackgroundCommand.h
     commands/KShapeBorderCommand.h
-    commands/KoShapeCreateCommand.h
+    commands/KShapeCreateCommand.h
     commands/KoShapeDeleteCommand.h
     commands/KoShapeDistributeCommand.h
     commands/KoShapeGroupCommand.h

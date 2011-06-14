@@ -34,7 +34,7 @@
 #include <KoShapeOdfSaveHelper.h>
 #include <KoPAOdfPageSaveHelper.h>
 #include <KDrag.h>
-#include <KoShapeCreateCommand.h>
+#include <KShapeCreateCommand.h>
 #include <KoShapeDeleteCommand.h>
 #include <KoShapeReorderCommand.h>
 #include <KoShapeLayer.h>
@@ -325,7 +325,7 @@ void KoPADocumentStructureDocker::addLayer()
                 qSort(layers.begin(), layers.end(), KShape::compareShapeZIndex);
                 layer->setZIndex(layers.last()->zIndex() + 1);
             }
-            QUndoCommand *cmd = new KoShapeCreateCommand(m_doc, layer, 0);
+            QUndoCommand *cmd = new KShapeCreateCommand(m_doc, layer, 0);
             cmd->setText(i18n("Create Layer"));
             m_doc->addCommand(cmd);
             m_model->update();

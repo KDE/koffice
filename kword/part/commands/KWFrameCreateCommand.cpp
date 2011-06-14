@@ -21,7 +21,7 @@
 #include "frames/KWFrame.h"
 #include "frames/KWFrameSet.h"
 
-#include <KoShapeCreateCommand.h>
+#include <KShapeCreateCommand.h>
 
 #include <KLocale>
 
@@ -30,7 +30,7 @@ KWFrameCreateCommand::KWFrameCreateCommand(KShapeControllerBase *shapeController
         m_frame(frame),
         m_frameSet(frame->frameSet())
 {
-    new KoShapeCreateCommand(shapeController, frame->shape(), this);
+    new KShapeCreateCommand(shapeController, frame->shape(), this);
 }
 
 void KWFrameCreateCommand::redo()

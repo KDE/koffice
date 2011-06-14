@@ -34,7 +34,7 @@
 #include <KCanvasController.h>
 #include <KShapeControllerBase.h>
 #include <KSelection.h>
-#include <KoShapeCreateCommand.h>
+#include <KShapeCreateCommand.h>
 #include <KoShapeDeleteCommand.h>
 #include <KoShapeReorderCommand.h>
 #include <KoShapeLayer.h>
@@ -276,7 +276,7 @@ void KarbonLayerDocker::addLayer()
         KoShapeLayer* layer = new KoShapeLayer();
         layer->setName(name);
         KCanvasController* canvasController = KoToolManager::instance()->activeCanvasController();
-        QUndoCommand *cmd = new KoShapeCreateCommand(m_part, layer, 0);
+        QUndoCommand *cmd = new KShapeCreateCommand(m_part, layer, 0);
         cmd->setText(i18n("Create Layer"));
         canvasController->canvas()->addCommand(cmd);
         m_model->update();

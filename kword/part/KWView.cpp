@@ -66,7 +66,7 @@
 #include <KSelection.h>
 #include <KShapeContainer.h>
 #include <KShapeController.h>
-#include <KoShapeCreateCommand.h>
+#include <KShapeCreateCommand.h>
 #include <KoShapeFactoryBase.h>
 #include <KoShapeGroupCommand.h>
 #include <KShape.h>
@@ -1293,7 +1293,7 @@ void KWView::insertImage()
             shape->setZIndex(zIndex+1);
         }
 
-        KoShapeCreateCommand *cmd = new KoShapeCreateCommand(m_document, shape);
+        KShapeCreateCommand *cmd = new KShapeCreateCommand(m_document, shape);
         KSelection *selection = m_canvas->shapeManager()->selection();
         selection->deselectAll();
         selection->select(shape);

@@ -18,14 +18,14 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoShapeCreateCommand.h"
+#include "KShapeCreateCommand.h"
 #include "KShape.h"
 #include "KShapeContainer.h"
 #include "KShapeControllerBase.h"
 
 #include <klocale.h>
 
-class KoShapeCreateCommand::Private
+class KShapeCreateCommand::Private
 {
 public:
     Private(KShapeControllerBase *c, KShape *s)
@@ -45,19 +45,19 @@ public:
     bool deleteShape;
 };
 
-KoShapeCreateCommand::KoShapeCreateCommand(KShapeControllerBase *controller, KShape *shape, QUndoCommand *parent)
+KShapeCreateCommand::KShapeCreateCommand(KShapeControllerBase *controller, KShape *shape, QUndoCommand *parent)
         : QUndoCommand(parent),
         d(new Private(controller, shape))
 {
     setText(i18n("Create Shape"));
 }
 
-KoShapeCreateCommand::~KoShapeCreateCommand()
+KShapeCreateCommand::~KShapeCreateCommand()
 {
     delete d;
 }
 
-void KoShapeCreateCommand::redo()
+void KShapeCreateCommand::redo()
 {
     QUndoCommand::redo();
     Q_ASSERT(d->shape);
@@ -70,7 +70,7 @@ void KoShapeCreateCommand::redo()
     d->deleteShape = false;
 }
 
-void KoShapeCreateCommand::undo()
+void KShapeCreateCommand::undo()
 {
     QUndoCommand::undo();
     Q_ASSERT(d->shape);

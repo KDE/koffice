@@ -27,7 +27,7 @@ class KShape;
 class KShapeControllerBase;
 
 /// The undo / redo command for creating shapes
-class FLAKE_EXPORT KoShapeCreateCommand : public QUndoCommand
+class FLAKE_EXPORT KShapeCreateCommand : public QUndoCommand
 {
 public:
     /**
@@ -36,9 +36,9 @@ public:
      * @param shape the shape thats just been created.
      * @param parent the parent command used for macro commands
      */
-    KoShapeCreateCommand(KShapeControllerBase *controller, KShape *shape,
+    KShapeCreateCommand(KShapeControllerBase *controller, KShape *shape,
                          QUndoCommand *parent = 0);
-    virtual ~KoShapeCreateCommand();
+    virtual ~KShapeCreateCommand();
     /// redo the command
     void redo();
     /// revert the actions done in redo

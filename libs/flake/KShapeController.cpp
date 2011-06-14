@@ -25,7 +25,7 @@
 #include "KoShapeManager.h"
 #include "KoShapeLayer.h"
 #include "KSelection.h"
-#include "commands/KoShapeCreateCommand.h"
+#include "commands/KShapeCreateCommand.h"
 #include "commands/KoShapeDeleteCommand.h"
 #include "KCanvasBase.h"
 #include "KShapeConfigWidgetBase.h"
@@ -62,7 +62,7 @@ public:
             shape->setParent(canvas->shapeManager()->selection()->activeLayer());
         }
 
-        return new KoShapeCreateCommand(shapeController, shape, parent);
+        return new KShapeCreateCommand(shapeController, shape, parent);
     }
 };
 
