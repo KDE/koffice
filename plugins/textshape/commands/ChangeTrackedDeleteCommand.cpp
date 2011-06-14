@@ -41,7 +41,7 @@
 #include <KoTextOdfSaveHelper.h>
 #include <KoTextDrag.h>
 #include <KOdf.h>
-#include <rdf/KoDocumentRdfBase.h>
+#include <KDocumentRdfBase.h>
 #include <QTextDocumentFragment>
 #include <QUndoCommand>
 
@@ -163,7 +163,7 @@ void ChangeTrackedDeleteCommand::handleListItemDelete(QTextCursor &selection)
     KoTextOdfSaveHelper saveHelper(m_tool->m_textShapeData, from, to);
     KoTextDrag drag;
 
-    if (KoDocumentRdfBase *rdf = KoDocumentRdfBase::fromResourceManager(m_tool->canvas())) {
+    if (KDocumentRdfBase *rdf = KDocumentRdfBase::fromResourceManager(m_tool->canvas())) {
         saveHelper.setRdfModel(rdf->model());
     }
     drag.setOdf(KOdf::mimeType(KOdf::TextDocument), saveHelper);

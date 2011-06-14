@@ -21,7 +21,7 @@
 #define KO_DOCUMENT_Rdf_H
 
 #include "komain_export.h"
-#include "KoDocumentRdfBase.h"
+#include "KDocumentRdfBase.h"
 
 #include <KDataCenterBase.h>
 #include <kconfig.h>
@@ -147,7 +147,7 @@ class KoDocumentRdfPrivate;
  * expand the soprano::model to add Rdf statements which refer to any
  * subject in the Rdf submodel you pass in.
  */
-class KOMAIN_EXPORT KoDocumentRdf : public KoDocumentRdfBase
+class KOMAIN_EXPORT KoDocumentRdf : public KDocumentRdfBase
 {
     Q_OBJECT
 public:

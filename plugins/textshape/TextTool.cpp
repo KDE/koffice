@@ -87,7 +87,7 @@
 #include <QTextDocumentFragment>
 #include <QToolTip>
 
-#include <rdf/KoDocumentRdfBase.h>
+#include <KDocumentRdfBase.h>
 
 static bool hit(const QKeySequence &input, KStandardShortcut::StandardShortcut shortcut)
 {
@@ -779,7 +779,7 @@ void TextTool::copy() const
     KoTextOdfSaveHelper saveHelper(m_textShapeData, from, to);
     KoTextDrag drag;
 
-    if (KoDocumentRdfBase *rdf = KoDocumentRdfBase::fromResourceManager(canvas())) {
+    if (KDocumentRdfBase *rdf = KDocumentRdfBase::fromResourceManager(canvas())) {
         saveHelper.setRdfModel(rdf->model());
     }
     drag.setOdf(KOdf::mimeType(KOdf::TextDocument), saveHelper);

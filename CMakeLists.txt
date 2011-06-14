@@ -273,8 +273,6 @@ set(FLAKE_INCLUDES ${CMAKE_SOURCE_DIR}/libs/flake
 
 # KoText depends on flake
 set(KOTEXT_INCLUDES ${CMAKE_SOURCE_DIR}/libs/kotext
-                    # this one should not be here, its needed for rdf stuff right now...
-                   ${CMAKE_SOURCE_DIR}/libs/main
                    ${CMAKE_BINARY_DIR}/libs/kotext
                    ${CMAKE_SOURCE_DIR}/libs/kotext/changetracker
                    ${CMAKE_SOURCE_DIR}/libs/kotext/styles

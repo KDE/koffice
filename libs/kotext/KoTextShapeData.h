@@ -33,7 +33,7 @@ class KoShapeLoadingContext;
 class KoShapeSavingContext;
 class KoTextShapeDataPrivate;
 class KoTextPage;
-class KoDocumentRdfBase;
+class KDocumentRdfBase;
 
 /**
  * The data store that is held by each TextShape instance.
@@ -137,7 +137,7 @@ public:
     * @see the @a KoTextLoader::loadBody() method which got called by this method
     * to load the ODF.
     */
-    bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context, KoDocumentRdfBase *rdfData, KoShape *shape = 0);
+    bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context, KDocumentRdfBase *rdfData, KoShape *shape = 0);
 
     /**
     * Load the TextShape from ODF.
@@ -151,7 +151,7 @@ public:
     * Store the TextShape data as ODF.
     * @see TextShape::saveOdf()
     */
-    void saveOdf(KoShapeSavingContext &context, KoDocumentRdfBase *rdfData, int from = 0, int to = -1) const;
+    void saveOdf(KoShapeSavingContext &context, KDocumentRdfBase *rdfData, int from = 0, int to = -1) const;
 
     /**
     * Store the TextShape data as ODF.

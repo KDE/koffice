@@ -65,7 +65,7 @@
 #include <KoTextShapeData.h>
 #include <KChangeTracker.h>
 
-#include <rdf/KoDocumentRdfBase.h>
+#include <KDocumentRdfBase.h>
 #ifdef SHOULD_BUILD_RDF
 #include <rdf/KoDocumentRdf.h>
 #endif

@@ -51,6 +51,7 @@ set(kotext_LIB_SRCS
     KoTableColumnAndRowStyleManager.cpp
     KoTextInlineRdf.cpp
     KoTextMeta.cpp
+    KDocumentRdfBase.cpp
 
     styles/Styles_p.cpp
     styles/KCharacterStyle.cpp

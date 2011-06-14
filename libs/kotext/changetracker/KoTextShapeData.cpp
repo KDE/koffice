@@ -216,7 +216,7 @@ KoTextPage* KoTextShapeData::page() const
     return d->textpage;
 }
 
-bool KoTextShapeData::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context, KoDocumentRdfBase *rdfData, KoShape *shape)
+bool KoTextShapeData::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context, KDocumentRdfBase *rdfData, KoShape *shape)
 {
     Q_UNUSED(rdfData);
     KoTextLoader loader(context, shape);
@@ -317,7 +317,7 @@ void RemoveDeleteChangesCommand::removeDeleteChanges()
     }
 }
 
-void KoTextShapeData::saveOdf(KoShapeSavingContext &context, KoDocumentRdfBase *rdfData, int from, int to) const
+void KoTextShapeData::saveOdf(KoShapeSavingContext &context, KDocumentRdfBase *rdfData, int from, int to) const
 {
     Q_D(const KoTextShapeData);
     InsertDeleteChangesCommand *insertCommand = new InsertDeleteChangesCommand(document());

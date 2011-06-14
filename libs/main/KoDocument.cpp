@@ -30,11 +30,11 @@
 #include "KoFilterManager.h"
 #include "KoDocumentInfo.h"
 #include "KCanvasController.h"
-#include "rdf/KoDocumentRdfBase.h"
 #ifdef SHOULD_BUILD_RDF
 #include "rdf/KoDocumentRdf.h"
 #endif
 #include "KOdfStylesReader.h"
+#include <KDocumentRdfBase.h>
 #include "KOdfStoreReader.h"
 #include "KOdfWriteStore.h"
 #include "KOdfEmbeddedDocumentSaver.h"
@@ -155,7 +155,7 @@ public:
 #ifdef SHOULD_BUILD_RDF
     KoDocumentRdf *docRdf;
 #else
-    KoDocumentRdfBase *docRdf;
+    KDocumentRdfBase *docRdf;
 #endif
     KoProgressUpdater *progressUpdater;
     QTextStream *profileStream;
@@ -791,7 +791,7 @@ KoDocumentRdf *KoDocument::documentRdf() const
     return 0;
 }
 
-KoDocumentRdfBase *KoDocument::documentRdfBase() const
+KDocumentRdfBase *KoDocument::documentRdfBase() const
 {
     return d->docRdf;
 }

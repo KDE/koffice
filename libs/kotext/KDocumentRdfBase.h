@@ -20,7 +20,7 @@
 #ifndef KO_DOCUMENT_Rdf_Base_H
 #define KO_DOCUMENT_Rdf_Base_H
 
-#include "komain_export.h"
+#include "kotext_export.h"
 
 #include <QtCore/QObject>
 #include <QtCore/QMap>
@@ -33,7 +33,6 @@ class KoResourceManager;
 class QTextDocument;
 class KOdfStore;
 class KXmlWriter;
-class KoDocument;
 
 namespace Soprano
 {
@@ -48,12 +47,12 @@ namespace Soprano
  * because the base class interface is here and will be valid, even
  * if impotent when Soprano support is not built.
  */
-class KOMAIN_EXPORT KoDocumentRdfBase : public QObject, public KDataCenterBase
+class KOTEXT_EXPORT KDocumentRdfBase : public QObject, public KDataCenterBase
 {
     Q_OBJECT
 
 public:
-    KoDocumentRdfBase(KoDocument *parent);
+    KDocumentRdfBase(QObject *parent = 0);
 
     /**
      * Get the Soprano::Model that contains all the Rdf
@@ -69,7 +68,7 @@ public:
      * Note that this method can return either a valid KoDocumentRdf
      * pointer or a NULL pointer if there is no Rdf for the canvas.
      */
-    static KoDocumentRdfBase *fromResourceManager(KCanvasBase *host);
+    static KDocumentRdfBase *fromResourceManager(KCanvasBase *host);
     virtual void linkToResourceManager(KoResourceManager *rm);
 
     virtual void updateInlineRdfStatements(QTextDocument *qdoc);

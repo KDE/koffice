@@ -59,7 +59,7 @@ enum CanvasResource {
     ///  used by the text plugin whenever the alternative selection anchor-position is changed
     SelectedTextAnchor = 3344189,
     /** The KoDocumentRdf for the document,
-     this will be a KoDocumentRdfBase when Soprano support is not compiled in. */
+     this will be a KDocumentRdfBase when Soprano support is not compiled in. */
     DocumentRdf
 };
 

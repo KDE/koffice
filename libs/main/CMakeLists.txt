@@ -77,7 +77,6 @@ set(komain_LIB_SRCS
     KoTemplatesPane.cpp
     KoTemplateTree.cpp
 
-    rdf/KoDocumentRdfBase.cpp
     rdf/KoDocumentRdfEditWidgetBase.cpp
 
     ActionJob_p.cpp
@@ -197,7 +196,6 @@ install( FILES
     KoProgressBar.h
     KoUpdater.h
     KoStandardAction.h
-    rdf/KoDocumentRdfBase.h
     komain_export.h
 DESTINATION ${INCLUDE_INSTALL_DIR} COMPONENT Devel)
 

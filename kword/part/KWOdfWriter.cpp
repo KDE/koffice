@@ -41,7 +41,7 @@
 #include <KoTextSharedSavingData.h>
 
 #include <KOdfStorageDevice.h>
-#include <rdf/KoDocumentRdfBase.h>
+#include <KDocumentRdfBase.h>
 
 #include <QBuffer>
 #include <QTextCursor>
@@ -337,7 +337,7 @@ bool KWOdfWriter::save(KOdfWriteStore &odfStore, KOdfEmbeddedDocumentSaver &embe
 
     // update references to xml:id to be to new xml:id
     // in the external Rdf
-    if (KoDocumentRdfBase *rdf = m_document->documentRdfBase()) {
+    if (KDocumentRdfBase *rdf = m_document->documentRdfBase()) {
         QMap<QString, QString> m = sharedData->getRdfIdMapping();
         rdf->updateXmlIdReferences(m);
     }

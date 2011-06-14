@@ -23,7 +23,7 @@
 #include "KWGui.h"
 #include "KWCanvas.h"
 #include "KWDocument.h"
-#include <rdf/KoDocumentRdfBase.h>
+#include <KDocumentRdfBase.h>
 #ifdef SHOULD_BUILD_RDF
 #include <rdf/KoDocumentRdf.h>
 #include <rdf/KoSemanticStylesheetsEditor.h>

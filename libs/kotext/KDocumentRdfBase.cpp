@@ -17,60 +17,60 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KoDocumentRdfBase.h"
-#include "../KoDocument.h"
+#include "KDocumentRdfBase.h"
+#include "KoTextSopranoRdfModel_p.h"
+#include "KoText.h"
+
 #include <KoResourceManager.h>
 #include <KCanvasBase.h>
-#include <KoText.h>
 #include <KXmlWriter.h>
 #include <KOdfStorageDevice.h>
 
-#include "KoTextSopranoRdfModel_p.h"
 #include <kdebug.h>
 
-KoDocumentRdfBase::KoDocumentRdfBase(KoDocument *parent)
+KDocumentRdfBase::KDocumentRdfBase(QObject *parent)
         : QObject(parent)
 {
 }
 
-Soprano::Model *KoDocumentRdfBase::model() const
+Soprano::Model *KDocumentRdfBase::model() const
 {
     return 0;
 }
 
-KoDocumentRdfBase *KoDocumentRdfBase::fromResourceManager(KCanvasBase *host)
+KDocumentRdfBase *KDocumentRdfBase::fromResourceManager(KCanvasBase *host)
 {
     KoResourceManager *rm = host->resourceManager();
     if (!rm->hasResource(KoText::DocumentRdf)) {
         return 0;
     }
-    return static_cast<KoDocumentRdfBase*>(rm->resource(KoText::DocumentRdf).value<void*>());
+    return static_cast<KDocumentRdfBase*>(rm->resource(KoText::DocumentRdf).value<void*>());
 }
 
-void KoDocumentRdfBase::linkToResourceManager(KoResourceManager *rm)
+void KDocumentRdfBase::linkToResourceManager(KoResourceManager *rm)
 {
     QVariant variant;
     variant.setValue<void*>(this);
     rm->setResource(KoText::DocumentRdf, variant);
 }
 
-void KoDocumentRdfBase::updateInlineRdfStatements(QTextDocument *qdoc)
+void KDocumentRdfBase::updateInlineRdfStatements(QTextDocument *qdoc)
 {
     Q_UNUSED(qdoc);
 }
 
-void KoDocumentRdfBase::updateXmlIdReferences(const QMap<QString, QString> &m)
+void KDocumentRdfBase::updateXmlIdReferences(const QMap<QString, QString> &m)
 {
     Q_UNUSED(m);
 }
 
-bool KoDocumentRdfBase::loadOasis(KOdfStore *store)
+bool KDocumentRdfBase::loadOasis(KOdfStore *store)
 {
     Q_UNUSED(store);
     return true;
 }
 
-bool KoDocumentRdfBase::saveOasis(KOdfStore *store, KXmlWriter *manifestWriter)
+bool KDocumentRdfBase::saveOasis(KOdfStore *store, KXmlWriter *manifestWriter)
 {
     Q_UNUSED(store);
     Q_UNUSED(manifestWriter);

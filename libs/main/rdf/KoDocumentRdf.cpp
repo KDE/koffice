@@ -69,7 +69,7 @@ KoDocumentRdfPrivate::~KoDocumentRdfPrivate()
 
 
 KoDocumentRdf::KoDocumentRdf(KoDocument *parent)
-        : KoDocumentRdfBase(parent)
+        : KDocumentRdfBase(parent)
         , d (new KoDocumentRdfPrivate())
 {
     d->prefixMapping = new KoRdfPrefixMapping(this);

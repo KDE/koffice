@@ -48,6 +48,7 @@
 #include "KoTextBlockData.h"
 #include "KoTextDocument.h"
 #include "KoTextInlineRdf.h"
+#include "../KDocumentRdfBase.h"
 
 #include "KoTextMeta.h"
 #include "KoBookmark.h"
@@ -65,7 +66,6 @@
 #include <KFormatChangeInformation_p.h>
 #include <KOdfGenericChange.h>
 #include <KOdfGenericChanges.h>
-#include <rdf/KoDocumentRdfBase.h>
 
 #ifdef SHOULD_BUILD_RDF
 #include <Soprano/Soprano>
@@ -189,7 +189,7 @@ public:
     KoTextDocumentLayout *layout;
     KoStyleManager *styleManager;
     KChangeTracker *changeTracker;
-    KoDocumentRdfBase *rdfData;
+    KDocumentRdfBase *rdfData;
     QTextDocument *document;
 
     QStack<int> changeStack;
@@ -549,7 +549,7 @@ void KoTextWriter::Private::closeTagRegion(int changeId)
     return;
 }
 
-KoTextWriter::KoTextWriter(KoShapeSavingContext &context, KoDocumentRdfBase *rdfData)
+KoTextWriter::KoTextWriter(KoShapeSavingContext &context, KDocumentRdfBase *rdfData)
     : d(new Private(context))
 {
     d->rdfData = rdfData;

@@ -48,7 +48,7 @@ class KoMainWindow;
 class KoView;
 class KoDocumentInfo;
 class KoDocumentRdf;
-class KoDocumentRdfBase;
+class KDocumentRdfBase;
 class KoOpenPane;
 class KUndoStack;
 class KoTextEditor;
@@ -565,7 +565,7 @@ public:
      * @return the Rdf metadata for this document.
      * @see KoDocumentRdf
      */
-    KoDocumentRdfBase *documentRdfBase() const;
+    KDocumentRdfBase *documentRdfBase() const;
 
     /**
      * @return the object to report progress to.
