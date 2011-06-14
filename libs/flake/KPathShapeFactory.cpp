@@ -16,7 +16,7 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#include "KoPathShapeFactory_p.h"
+#include "KPathShapeFactory_p.h"
 #include "KPathShape.h"
 #include "KLineBorder.h"
 #include "KImageCollection.h"
@@ -28,7 +28,7 @@
 #include <KXmlReader.h>
 #include <KOdfXmlNS.h>
 
-KoPathShapeFactory::KoPathShapeFactory(QObject *parent, const QStringList&)
+KPathShapeFactory::KPathShapeFactory(QObject *parent, const QStringList&)
         : KoShapeFactoryBase(parent, KoPathShapeId, i18n("Simple path shape"))
 {
     setToolTip(i18n("A simple path shape"));
@@ -39,7 +39,7 @@ KoPathShapeFactory::KoPathShapeFactory(QObject *parent, const QStringList&)
     setLoadingPriority(0);
 }
 
-KoShape *KoPathShapeFactory::createDefaultShape(KoResourceManager *) const
+KoShape *KPathShapeFactory::createDefaultShape(KoResourceManager *) const
 {
     KPathShape* path = new KPathShape();
     path->moveTo(QPointF(0, 50));
@@ -50,7 +50,7 @@ KoShape *KoPathShapeFactory::createDefaultShape(KoResourceManager *) const
     return path;
 }
 
-bool KoPathShapeFactory::supports(const KXmlElement & e, KoShapeLoadingContext &context) const
+bool KPathShapeFactory::supports(const KXmlElement & e, KoShapeLoadingContext &context) const
 {
     Q_UNUSED(context);
     if (e.namespaceURI() == KOdfXmlNS::draw) {
@@ -67,7 +67,7 @@ bool KoPathShapeFactory::supports(const KXmlElement & e, KoShapeLoadingContext &
     return false;
 }
 
-void KoPathShapeFactory::newDocumentResourceManager(KoResourceManager *manager)
+void KPathShapeFactory::newDocumentResourceManager(KoResourceManager *manager)
 {
     // as we need an image collection for the pattern background
     // we want to make sure that there is always an image collection

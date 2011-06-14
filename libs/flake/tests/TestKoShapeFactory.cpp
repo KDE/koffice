@@ -22,7 +22,7 @@
 #include <KOdfLoadingContext.h>
 #include <KOdfStylesReader.h>
 #include <KoShapeLoadingContext.h>
-#include <KoPathShapeFactory_p.h>
+#include <KPathShapeFactory_p.h>
 #include <KoShape.h>
 #include <KoShapeFactoryBase.h>
 #include <KOdfXmlNS.h>
@@ -30,7 +30,7 @@
 
 void TestKoShapeFactory::testCreateFactory()
 {
-    KoShapeFactoryBase * factory = new KoPathShapeFactory(0, QStringList());
+    KoShapeFactoryBase * factory = new KPathShapeFactory(0, QStringList());
     QVERIFY(factory != 0);
     delete factory;
 }
@@ -41,14 +41,14 @@ void TestKoShapeFactory::testSupportsKoXmlElement()
 
 void TestKoShapeFactory::testPriority()
 {
-    KoShapeFactoryBase * factory = new KoPathShapeFactory(0, QStringList());
+    KoShapeFactoryBase * factory = new KPathShapeFactory(0, QStringList());
     QVERIFY(factory->loadingPriority() == 0);
     delete factory;
 }
 
 void TestKoShapeFactory::testCreateDefaultShape()
 {
-    KoShapeFactoryBase * factory = new KoPathShapeFactory(0, QStringList());
+    KoShapeFactoryBase * factory = new KPathShapeFactory(0, QStringList());
     KoShape *shape = factory->createDefaultShape();
     QVERIFY(shape != 0);
     delete shape;
@@ -57,7 +57,7 @@ void TestKoShapeFactory::testCreateDefaultShape()
 
 void TestKoShapeFactory::testCreateShape()
 {
-    KoShapeFactoryBase * factory = new KoPathShapeFactory(0, QStringList());
+    KoShapeFactoryBase * factory = new KPathShapeFactory(0, QStringList());
     KoShape *shape = factory->createShape(0);
     QVERIFY(shape != 0);
     delete shape;
@@ -66,7 +66,7 @@ void TestKoShapeFactory::testCreateShape()
 
 void TestKoShapeFactory::testOdfElement()
 {
-    KoShapeFactoryBase * factory = new KoPathShapeFactory(0, QStringList());
+    KoShapeFactoryBase * factory = new KPathShapeFactory(0, QStringList());
     QVERIFY(factory->odfElements().front().second.contains("path"));
     QVERIFY(factory->odfElements().front().second.contains("line"));
     QVERIFY(factory->odfElements().front().second.contains("polyline"));

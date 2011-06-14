@@ -39,12 +39,12 @@
 #include "KXmlReader.h"
 
 /// Factory for path shapes.
-class FLAKE_TEST_EXPORT KoPathShapeFactory : public KoShapeFactoryBase
+class FLAKE_TEST_EXPORT KPathShapeFactory : public KoShapeFactoryBase
 {
 public:
     /// constructor
-    KoPathShapeFactory(QObject *parent, const QStringList&);
-    ~KoPathShapeFactory() {}
+    KPathShapeFactory(QObject *parent, const QStringList&);
+    ~KPathShapeFactory() {}
     virtual KoShape *createDefaultShape(KoResourceManager *documentResources = 0) const;
     bool supports(const KXmlElement &element, KoShapeLoadingContext &context) const;
     /// reimplemented

@@ -20,7 +20,7 @@
  * Boston, MA 02110-1301, USA.
  */
 #include "KoShapeRegistry.h"
-#include "KoPathShapeFactory_p.h"
+#include "KPathShapeFactory_p.h"
 #include "KoShapeLoadingContext.h"
 #include "KoShapeSavingContext.h"
 #include "KoShapeGroup.h"
@@ -81,7 +81,7 @@ void KoShapeRegistry::Private::init(KoShapeRegistry *q)
                                      config);
 
     // Also add our hard-coded basic shape
-    q->add(new KoPathShapeFactory(q, QStringList()));
+    q->add(new KPathShapeFactory(q, QStringList()));
 
     // Now all shape factories are registered with us, determine their
     // assocated odf tagname & priority and prepare ourselves for

@@ -47,7 +47,7 @@ set(flake_SRCS
     KCanvasController_p.cpp
     KoShapeRegistry.cpp
     KoToolFactoryBase.cpp
-    KoPathShapeFactory.cpp
+    KPathShapeFactory.cpp
     KoShapeFactoryBase.cpp
     KoShapeUserData.cpp
     KoPointGroup.cpp
