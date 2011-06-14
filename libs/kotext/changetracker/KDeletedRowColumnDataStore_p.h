@@ -37,7 +37,7 @@ class KoDeletedRowData;
 class KDeletedColumnData;
 class QTextTable;
 
-class KoDeletedRowColumnDataStore
+class KDeletedRowColumnDataStore
 {
 public:
     typedef enum {
@@ -46,9 +46,9 @@ public:
         eUnknownDeleteType
     } DeleteType;
 
-    KoDeletedRowColumnDataStore();
+    KDeletedRowColumnDataStore();
 
-    ~KoDeletedRowColumnDataStore();
+    ~KDeletedRowColumnDataStore();
 
     KoDeletedRowData *addDeletedRow(QTextTable *table, int rowNumber, int changeId);
 

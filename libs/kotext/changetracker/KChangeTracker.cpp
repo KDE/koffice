@@ -34,7 +34,7 @@
 #include <KParagraphStyle.h>
 #include <KoStyleManager.h>
 #include <KFormatChangeInformation_p.h>
-#include <KoDeletedRowColumnDataStore_p.h>
+#include <KDeletedRowColumnDataStore_p.h>
 
 //KDE includes
 #include <KDebug>
@@ -66,7 +66,7 @@ public:
         deletionBgColor(255,185,185),
         formatChangeBgColor(195,195,255)
     {
-        deletedRowColumnData = new KoDeletedRowColumnDataStore();
+        deletedRowColumnData = new KDeletedRowColumnDataStore();
     }
     ~Private() { }
 
@@ -84,7 +84,7 @@ public:
     QColor insertionBgColor, deletionBgColor, formatChangeBgColor;
     QString changeAuthorName;
     KChangeTracker::ChangeSaveFormat changeSaveFormat;
-    KoDeletedRowColumnDataStore *deletedRowColumnData;
+    KDeletedRowColumnDataStore *deletedRowColumnData;
 
     static bool checkListDeletion(QTextList *list, const QTextCursor &cursor);
 };
@@ -481,7 +481,7 @@ void KChangeTracker::setFormatChangeBgColor(const QColor& bgColor)
     d->formatChangeBgColor = bgColor;
 }
 
-KoDeletedRowColumnDataStore *KChangeTracker::deletedRowColumnData()
+KDeletedRowColumnDataStore *KChangeTracker::deletedRowColumnData()
 {
     return d->deletedRowColumnData;
 }

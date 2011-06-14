@@ -76,7 +76,7 @@ set(kotext_LIB_SRCS
     changetracker/KChangeTrackerElement.cpp
     changetracker/KDeleteChangeMarker.cpp
     changetracker/KFormatChangeInformation.cpp
-    changetracker/KoDeletedRowColumnDataStore.cpp
+    changetracker/KDeletedRowColumnDataStore.cpp
     changetracker/KoDeletedRowData.cpp
     changetracker/KDeletedColumnData.cpp
     changetracker/KDeletedCellData.cpp

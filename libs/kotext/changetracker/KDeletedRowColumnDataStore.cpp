@@ -17,19 +17,19 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoDeletedRowColumnDataStore_p.h"
+#include "KDeletedRowColumnDataStore_p.h"
 #include "KoDeletedRowData_p.h"
 #include "KDeletedColumnData_p.h"
 
-KoDeletedRowColumnDataStore::KoDeletedRowColumnDataStore()
+KDeletedRowColumnDataStore::KDeletedRowColumnDataStore()
 {
 }
 
-KoDeletedRowColumnDataStore::~KoDeletedRowColumnDataStore()
+KDeletedRowColumnDataStore::~KDeletedRowColumnDataStore()
 {
 }
 
-KoDeletedRowData *KoDeletedRowColumnDataStore::addDeletedRow(QTextTable *table, int rowNumber, int changeId)
+KoDeletedRowData *KDeletedRowColumnDataStore::addDeletedRow(QTextTable *table, int rowNumber, int changeId)
 {
     KoDeletedRowData *deletedRowData = new KoDeletedRowData(table, rowNumber);
     deletedRowDataMap.insert(changeId, deletedRowData);
@@ -42,7 +42,7 @@ KoDeletedRowData *KoDeletedRowColumnDataStore::addDeletedRow(QTextTable *table, 
     return deletedRowData;
 }
 
-KDeletedColumnData *KoDeletedRowColumnDataStore::addDeletedColumn(QTextTable *table, int columnNumber, int changeId)
+KDeletedColumnData *KDeletedRowColumnDataStore::addDeletedColumn(QTextTable *table, int columnNumber, int changeId)
 {
     KDeletedColumnData *deletedColumnData = new KDeletedColumnData(table, columnNumber);
     deletedColumnDataMap.insert(changeId, deletedColumnData);
@@ -55,31 +55,31 @@ KDeletedColumnData *KoDeletedRowColumnDataStore::addDeletedColumn(QTextTable *ta
     return deletedColumnData;
 }
 
-const QVector<int> *KoDeletedRowColumnDataStore::deletedRowColumnChangeIds(QTextTable *table)
+const QVector<int> *KDeletedRowColumnDataStore::deletedRowColumnChangeIds(QTextTable *table)
 {
     return tableChangeIdsMap.value(table, NULL);
 }
 
-KoDeletedRowColumnDataStore::DeleteType KoDeletedRowColumnDataStore::deleteType(int changeId)
+KDeletedRowColumnDataStore::DeleteType KDeletedRowColumnDataStore::deleteType(int changeId)
 {
-    KoDeletedRowColumnDataStore::DeleteType retValue;
+    KDeletedRowColumnDataStore::DeleteType retValue;
     if (deletedRowDataMap.value(changeId, NULL)) {
-        retValue = KoDeletedRowColumnDataStore::eDeletedRow;
+        retValue = KDeletedRowColumnDataStore::eDeletedRow;
     } else if(deletedColumnDataMap.value(changeId, NULL)) {
-        retValue = KoDeletedRowColumnDataStore::eDeletedColumn;
+        retValue = KDeletedRowColumnDataStore::eDeletedColumn;
     } else {
-        retValue = KoDeletedRowColumnDataStore::eUnknownDeleteType;
+        retValue = KDeletedRowColumnDataStore::eUnknownDeleteType;
     }
 
     return retValue;
 }
 
-KoDeletedRowData *KoDeletedRowColumnDataStore::deletedRowData(int changeId)
+KoDeletedRowData *KDeletedRowColumnDataStore::deletedRowData(int changeId)
 {
     return deletedRowDataMap.value(changeId, NULL);
 }
 
-KDeletedColumnData *KoDeletedRowColumnDataStore::deletedColumnData(int changeId)
+KDeletedColumnData *KDeletedRowColumnDataStore::deletedColumnData(int changeId)
 {
     return deletedColumnDataMap.value(changeId, NULL);
 }
