@@ -24,7 +24,7 @@
 #include "flake_export.h"
 
 class KShape;
-class KoShapeOdfSaveHelperPrivate;
+class KShapeOdfSaveHelperPrivate;
 
 /**
  * Save helper for saving shapes to odf.

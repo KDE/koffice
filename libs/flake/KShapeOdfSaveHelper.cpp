@@ -24,17 +24,17 @@
 #include <KOdf.h>
 #include <KShape.h>
 
-class KoShapeOdfSaveHelperPrivate : public KDragOdfSaveHelperPrivate
+class KShapeOdfSaveHelperPrivate : public KDragOdfSaveHelperPrivate
 {
 public:
-    KoShapeOdfSaveHelperPrivate(QList<KShape *> shapes)
+    KShapeOdfSaveHelperPrivate(QList<KShape *> shapes)
     : shapes(shapes) {}
 
     QList<KShape *> shapes;
 };
 
 KShapeOdfSaveHelper::KShapeOdfSaveHelper(QList<KShape *> shapes)
-        : KDragOdfSaveHelper(*(new KoShapeOdfSaveHelperPrivate(shapes)))
+        : KDragOdfSaveHelper(*(new KShapeOdfSaveHelperPrivate(shapes)))
 {
 }
 
