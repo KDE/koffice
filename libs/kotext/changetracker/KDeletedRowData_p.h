@@ -36,12 +36,12 @@
 class KDeletedCellData;
 class QTextTable;
 
-class KoDeletedRowData
+class KDeletedRowData
 {
 public:
-    KoDeletedRowData(QTextTable *table, int rowNumber);
+    KDeletedRowData(QTextTable *table, int rowNumber);
 
-    ~KoDeletedRowData();
+    ~KDeletedRowData();
 
     int rowNumber();
 

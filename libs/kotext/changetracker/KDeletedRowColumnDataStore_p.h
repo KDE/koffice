@@ -33,7 +33,7 @@
 #include <QVector>
 #include <QMap>
 
-class KoDeletedRowData;
+class KDeletedRowData;
 class KDeletedColumnData;
 class QTextTable;
 
@@ -50,7 +50,7 @@ public:
 
     ~KDeletedRowColumnDataStore();
 
-    KoDeletedRowData *addDeletedRow(QTextTable *table, int rowNumber, int changeId);
+    KDeletedRowData *addDeletedRow(QTextTable *table, int rowNumber, int changeId);
 
     KDeletedColumnData *addDeletedColumn(QTextTable *table, int columnNumber, int changeId);
 
@@ -58,7 +58,7 @@ public:
 
     DeleteType deleteType(int changeId);
 
-    KoDeletedRowData *deletedRowData(int changeId);
+    KDeletedRowData *deletedRowData(int changeId);
 
     KDeletedColumnData *deletedColumnData(int changeId);
 
@@ -66,7 +66,7 @@ private:
 
     QMap<QTextTable *, QVector<int> *> tableChangeIdsMap;
 
-    QMap<int, KoDeletedRowData *> deletedRowDataMap;
+    QMap<int, KDeletedRowData *> deletedRowDataMap;
 
     QMap<int, KDeletedColumnData *> deletedColumnDataMap;
 };

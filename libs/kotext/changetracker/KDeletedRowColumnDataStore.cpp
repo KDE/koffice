@@ -18,7 +18,7 @@
  */
 
 #include "KDeletedRowColumnDataStore_p.h"
-#include "KoDeletedRowData_p.h"
+#include "KDeletedRowData_p.h"
 #include "KDeletedColumnData_p.h"
 
 KDeletedRowColumnDataStore::KDeletedRowColumnDataStore()
@@ -29,9 +29,9 @@ KDeletedRowColumnDataStore::~KDeletedRowColumnDataStore()
 {
 }
 
-KoDeletedRowData *KDeletedRowColumnDataStore::addDeletedRow(QTextTable *table, int rowNumber, int changeId)
+KDeletedRowData *KDeletedRowColumnDataStore::addDeletedRow(QTextTable *table, int rowNumber, int changeId)
 {
-    KoDeletedRowData *deletedRowData = new KoDeletedRowData(table, rowNumber);
+    KDeletedRowData *deletedRowData = new KDeletedRowData(table, rowNumber);
     deletedRowDataMap.insert(changeId, deletedRowData);
     QVector<int> *tableChangeIds = tableChangeIdsMap.value(table, NULL);
     if (!tableChangeIds) {
@@ -74,7 +74,7 @@ KDeletedRowColumnDataStore::DeleteType KDeletedRowColumnDataStore::deleteType(in
     return retValue;
 }
 
-KoDeletedRowData *KDeletedRowColumnDataStore::deletedRowData(int changeId)
+KDeletedRowData *KDeletedRowColumnDataStore::deletedRowData(int changeId)
 {
     return deletedRowDataMap.value(changeId, NULL);
 }
