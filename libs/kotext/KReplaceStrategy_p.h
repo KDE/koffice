@@ -38,11 +38,11 @@ class KReplaceDialog;
 /**
  * Stratagy used for implementing replace
  */
-class KoReplaceStrategy : public KFindStrategyBase
+class KReplaceStrategy : public KFindStrategyBase
 {
 public:
-    KoReplaceStrategy(QWidget *parent);
-    virtual ~KoReplaceStrategy();
+    KReplaceStrategy(QWidget *parent);
+    virtual ~KReplaceStrategy();
 
     /// reimplmented
     KFindDialog *dialog();

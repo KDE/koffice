@@ -33,7 +33,7 @@
 //
 
 #include "KFindStrategy_p.h"
-#include "KoReplaceStrategy_p.h"
+#include "KReplaceStrategy_p.h"
 #include "FindDirection_p.h"
 
 #include <QTextCursor>
@@ -79,7 +79,7 @@ private:
 
     KoResourceManager *m_provider;
     KFindStrategy m_findStrategy; /// strategy used for find
-    KoReplaceStrategy m_replaceStrategy; /// strategy used for replace
+    KReplaceStrategy m_replaceStrategy; /// strategy used for replace
     KFindStrategyBase *m_strategy; /// the current strategy used
 
     QTextDocument *m_document;

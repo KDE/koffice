@@ -42,7 +42,7 @@ set(kotext_LIB_SRCS
     KInlineNote.cpp
     FindDirection_p.cpp
     KFindStrategy.cpp
-    KoReplaceStrategy.cpp
+    KReplaceStrategy.cpp
     KoFind_p.cpp
     KoFind.cpp
     KoTextDebug.cpp

@@ -18,7 +18,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoReplaceStrategy_p.h"
+#include "KReplaceStrategy_p.h"
 
 #include <QTextCursor>
 #include <QTextDocument>
@@ -29,30 +29,30 @@
 
 #include "FindDirection_p.h"
 
-KoReplaceStrategy::KoReplaceStrategy(QWidget * parent)
+KReplaceStrategy::KReplaceStrategy(QWidget * parent)
         : m_dialog(new KReplaceDialog(parent))
         , m_replaced(0)
 {
     m_dialog->setOptions(KFind::FromCursor);
 }
 
-KoReplaceStrategy::~KoReplaceStrategy()
+KReplaceStrategy::~KReplaceStrategy()
 {
     if (m_dialog->parent()==0)
         delete m_dialog;
 }
 
-KFindDialog *KoReplaceStrategy::dialog()
+KFindDialog *KReplaceStrategy::dialog()
 {
     return m_dialog;
 }
 
-void KoReplaceStrategy::reset()
+void KReplaceStrategy::reset()
 {
     m_replaced = 0;
 }
 
-void KoReplaceStrategy::displayFinalDialog()
+void KReplaceStrategy::displayFinalDialog()
 {
     if (m_replaced == 0) {
         KMessageBox::information(m_dialog->parentWidget(), i18n("Found no match\n\nNo text was replaced"));
@@ -64,7 +64,7 @@ void KoReplaceStrategy::displayFinalDialog()
     reset();
 }
 
-bool KoReplaceStrategy::foundMatch(QTextCursor &cursor, FindDirection *findDirection)
+bool KReplaceStrategy::foundMatch(QTextCursor &cursor, FindDirection *findDirection)
 {
     bool replace = true;
     if ((m_dialog->options() & KReplaceDialog::PromptOnReplace) != 0) {
