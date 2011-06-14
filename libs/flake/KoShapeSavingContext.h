@@ -32,7 +32,7 @@
 class KoShape;
 class KXmlWriter;
 class KOdfGenericStyles;
-class KoDataCenterBase;
+class KDataCenterBase;
 class KOdfEmbeddedDocumentSaver;
 class KImageData;
 class KoShapeLayer;
@@ -212,12 +212,12 @@ public:
     /**
      * Add data center
      */
-    void addDataCenter(KoDataCenterBase *dataCenter);
+    void addDataCenter(KDataCenterBase *dataCenter);
 
     /**
      * Save the data centers
      *
-     * This calls KoDataCenterBase::completeSaving()
+     * This calls KDataCenterBase::completeSaving()
      * @returns false if an error occurred, which typically cancels the save.
      */
     bool saveDataCenter(KOdfStore *store, KXmlWriter *manifestWriter);

@@ -22,7 +22,7 @@
 #include "flake_export.h"
 
 #include <QObject>
-#include <KoDataCenterBase.h>
+#include <KDataCenterBase.h>
 
 class QImage;
 class QUrl;
@@ -33,7 +33,7 @@ class KImageData;
  * An collection of KImageData objects to allow loading and saving them all together to the KOdfStore.
  * It also makes sure that if the same image is added to the collection that they share the internal data structure.
  */
-class FLAKE_EXPORT KImageCollection : public QObject, public KoDataCenterBase
+class FLAKE_EXPORT KImageCollection : public QObject, public KDataCenterBase
 {
     Q_OBJECT
 public:

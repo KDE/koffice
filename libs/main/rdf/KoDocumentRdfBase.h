@@ -26,7 +26,7 @@
 #include <QtCore/QMap>
 #include <QtCore/QString>
 
-#include <KoDataCenterBase.h>
+#include <KDataCenterBase.h>
 
 class KCanvasBase;
 class KoResourceManager;
@@ -48,7 +48,7 @@ namespace Soprano
  * because the base class interface is here and will be valid, even
  * if impotent when Soprano support is not built.
  */
-class KOMAIN_EXPORT KoDocumentRdfBase : public QObject, public KoDataCenterBase
+class KOMAIN_EXPORT KoDocumentRdfBase : public QObject, public KDataCenterBase
 {
     Q_OBJECT
 

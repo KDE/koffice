@@ -45,7 +45,7 @@ class KoShapeSavingContext;
 class KoShapeLayer;
 class KImageCollection;
 class KOdfStore;
-class KoDataCenterBase;
+class KDataCenterBase;
 class KoResourceManager;
 
 /**
@@ -200,12 +200,12 @@ public:
     KImageCollection * imageCollection();
 
     /// Returns the documents data centers
-    QMap<QString, KoDataCenterBase*> dataCenterMap() const;
+    QMap<QString, KDataCenterBase*> dataCenterMap() const;
 
     /// Sets the data centers to be used by this document
-    void useExternalDataCenterMap(QMap<QString, KoDataCenterBase*> dataCenters);
+    void useExternalDataCenterMap(QMap<QString, KDataCenterBase*> dataCenters);
 
-    void addToDataCenterMap(const QString &key, KoDataCenterBase* dataCenter);
+    void addToDataCenterMap(const QString &key, KDataCenterBase* dataCenter);
 
 private:
 

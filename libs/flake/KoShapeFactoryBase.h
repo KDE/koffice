@@ -35,7 +35,7 @@ class KoShape;
 class KProperties;
 class KoShapeConfigWidgetBase;
 class KoShapeLoadingContext;
-class KoDataCenterBase;
+class KDataCenterBase;
 class KoResourceManager;
 class KCanvasBase;
 

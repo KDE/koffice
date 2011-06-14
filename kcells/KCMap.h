@@ -30,7 +30,7 @@
 
 #include "kcells_export.h"
 
-#include <KoDataCenterBase.h>
+#include <KDataCenterBase.h>
 #include <KXmlReader.h>
 
 class KOdfStore;
@@ -73,7 +73,7 @@ class KCValueCalc;
  * The "embedded document".
  * The KCMap holds all the document data.
  */
-class KCELLS_EXPORT KCMap : public QObject, public KoDataCenterBase, public KCProtectableObject
+class KCELLS_EXPORT KCMap : public QObject, public KDataCenterBase, public KCProtectableObject
 {
     Q_OBJECT
 public:
@@ -102,7 +102,7 @@ public:
      */
     bool isReadWrite() const;
 
-    // KoDataCenterBase interface
+    // KDataCenterBase interface
     virtual bool completeLoading(KOdfStore *store);
     virtual bool completeSaving(KOdfStore *store, KXmlWriter *manifestWriter, KoShapeSavingContext * context);
 

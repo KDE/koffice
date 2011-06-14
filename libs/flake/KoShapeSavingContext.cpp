@@ -21,7 +21,7 @@
 */
 
 #include "KoShapeSavingContext.h"
-#include "KoDataCenterBase.h"
+#include "KDataCenterBase.h"
 #include "KoShapeConnection.h"
 #include "KoShapeLayer.h"
 #include "KImageData.h"
@@ -43,7 +43,7 @@ public:
     QMap<const KoShape *, QString> drawIds;
     QMap<const QTextBlockUserData*, QString> subIds;
     QList<KoShapeLayer*> layers;
-    QSet<KoDataCenterBase *> dataCenter;
+    QSet<KDataCenterBase *> dataCenter;
     int drawId;
     int subId;
     QMap<QString, KoSharedSavingData*> sharedData;
@@ -229,7 +229,7 @@ QMap<qint64, QString> KoShapeSavingContext::imagesToSave()
     return d->imageNames;
 }
 
-void KoShapeSavingContext::addDataCenter(KoDataCenterBase * dataCenter)
+void KoShapeSavingContext::addDataCenter(KDataCenterBase * dataCenter)
 {
     d->dataCenter.insert(dataCenter);
 }
@@ -237,7 +237,7 @@ void KoShapeSavingContext::addDataCenter(KoDataCenterBase * dataCenter)
 bool KoShapeSavingContext::saveDataCenter(KOdfStore *store, KXmlWriter* manifestWriter)
 {
     bool ok = true;
-    foreach(KoDataCenterBase *dataCenter, d->dataCenter) {
+    foreach(KDataCenterBase *dataCenter, d->dataCenter) {
         ok = ok && dataCenter->completeSaving(store, manifestWriter, this);
         //kDebug() << "ok" << ok;
     }

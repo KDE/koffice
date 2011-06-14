@@ -18,12 +18,12 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoDataCenterBase.h"
+#include "KDataCenterBase.h"
 
-KoDataCenterBase::KoDataCenterBase()
+KDataCenterBase::KDataCenterBase()
 {
 }
 
-KoDataCenterBase::~KoDataCenterBase()
+KDataCenterBase::~KDataCenterBase()
 {
 }

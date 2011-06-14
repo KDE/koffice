@@ -20,7 +20,7 @@ set(flake_SRCS
     KCopyController.cpp
     KoDockFactoryBase.cpp
     KoDockRegistry.cpp
-    KoDataCenterBase.cpp
+    KDataCenterBase.cpp
     KoInsets.cpp
     KoPasteController.cpp
     KGuidesData.cpp
@@ -240,7 +240,7 @@ install(
     KColorBackground.h
     KCopyController.h
     KCutController.h
-    KoDataCenterBase.h
+    KDataCenterBase.h
     KoDockFactoryBase.h
     KoDockRegistry.h
     KoDrag.h

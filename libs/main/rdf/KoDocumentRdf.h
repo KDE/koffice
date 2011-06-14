@@ -23,7 +23,7 @@
 #include "komain_export.h"
 #include "KoDocumentRdfBase.h"
 
-#include <KoDataCenterBase.h>
+#include <KDataCenterBase.h>
 #include <kconfig.h>
 
 #include <QtCore/QObject>

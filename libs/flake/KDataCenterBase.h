@@ -37,11 +37,11 @@ class KXmlWriter;
  * This abstraction is done so that shapes can get access to any possible type of data center.
  * The KoShapeControllerBase has a method that returns a map of data centers
  */
-class FLAKE_EXPORT KoDataCenterBase
+class FLAKE_EXPORT KDataCenterBase
 {
 public:
-    KoDataCenterBase();
-    virtual ~KoDataCenterBase();
+    KDataCenterBase();
+    virtual ~KDataCenterBase();
 
     /**
      * Load any remaining binary blobs needed

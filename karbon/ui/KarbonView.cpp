@@ -402,7 +402,7 @@ void KarbonView::fileImportGraphic()
     QString currentMimeFilter = dialog ? dialog->currentMimeFilter() : QString();
     delete dialog;
 
-    QMap<QString, KoDataCenterBase*> dataCenters = part()->document().dataCenterMap();
+    QMap<QString, KDataCenterBase*> dataCenters = part()->document().dataCenterMap();
 
     KarbonPart importPart;
     // use data centers of this document for importing

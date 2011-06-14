@@ -54,7 +54,7 @@
 #include <KConfigGroup>
 
 #include <KoApplication.h>
-#include <KoDataCenterBase.h>
+#include <KDataCenterBase.h>
 #include <KoDocumentInfo.h>
 #include <KoMainWindow.h>
 #include <KOdfSettings.h>

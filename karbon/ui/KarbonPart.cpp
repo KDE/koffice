@@ -46,7 +46,7 @@
 #include <KarbonCanvas.h>
 
 #include <KoApplication.h>
-#include <KoDataCenterBase.h>
+#include <KDataCenterBase.h>
 #include <KOdfStylesReader.h>
 #include <KOdfLoadingContext.h>
 #include <KOdfStoreReader.h>
@@ -267,7 +267,7 @@ bool KarbonPart::loadOdf(KOdfStoreReader &odfStore)
 bool KarbonPart::completeLoading(KOdfStore *store)
 {
     bool ok = true;
-    foreach(KoDataCenterBase *dataCenter, dataCenterMap()) {
+    foreach(KDataCenterBase *dataCenter, dataCenterMap()) {
         ok = ok && dataCenter->completeLoading(store);
     }
     return ok;
@@ -487,7 +487,7 @@ void KarbonPart::removeShape(KoShape* shape)
     setModified(true);
 }
 
-QMap<QString, KoDataCenterBase*> KarbonPart::dataCenterMap() const
+QMap<QString, KDataCenterBase*> KarbonPart::dataCenterMap() const
 {
     return d->document.dataCenterMap();
 }
