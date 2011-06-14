@@ -68,7 +68,7 @@ set(flake_SRCS
     KPathShapeLoader.cpp
     ShapeDeleter_p.cpp
     KShapeBorderBase.cpp
-    KoShapeBorderFactoryBase.cpp
+    KShapeBorderFactoryBase.cpp
     KoShapeBorderRegistry.cpp
     KLineBorder.cpp
     KLineBorderFactory.cpp
@@ -283,7 +283,7 @@ install(
     KShapeApplicationData.h
     KShapeBackground.h
     KShapeBorderBase.h
-    KoShapeBorderFactoryBase.h
+    KShapeBorderFactoryBase.h
     KoShapeBorderRegistry.h
     KoShapeConfigWidgetBase.h
     KoShapeConnection.h

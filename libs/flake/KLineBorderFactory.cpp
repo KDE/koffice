@@ -22,7 +22,7 @@
 #include <KLocale>
 
 KLineBorderFactory::KLineBorderFactory(QObject *parent)
-        : KoShapeBorderFactoryBase(parent, "LineBorder")
+        : KShapeBorderFactoryBase(parent, "LineBorder")
 {
 }
 

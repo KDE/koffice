@@ -31,9 +31,9 @@
 //
 
 
-#include "KoShapeBorderFactoryBase.h"
+#include "KShapeBorderFactoryBase.h"
 
-class KLineBorderFactory : public KoShapeBorderFactoryBase
+class KLineBorderFactory : public KShapeBorderFactoryBase
 {
 public:
     KLineBorderFactory(QObject *parent);

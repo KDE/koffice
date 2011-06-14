@@ -17,38 +17,30 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#ifndef KOSHAPEBORDERFACTORY_H
-#define KOSHAPEBORDERFACTORY_H
 
-#include "flake_export.h"
-#include <QObject>
+#include "KShapeBorderFactoryBase.h"
 
-class KShapeBorderBase;
-class KShape;
-
-class FLAKE_EXPORT KoShapeBorderFactoryBase : public QObject
+class KShapeBorderFactoryBase::Private
 {
-    Q_OBJECT
 public:
-
-    KoShapeBorderFactoryBase(QObject *parent, const QString &id);
-    virtual ~KoShapeBorderFactoryBase();
-
-    /**
-     * @param targetShape the shape the border is for
-     * @return a new shape
-     */
-    virtual KShapeBorderBase *createBorder(KShape *targetShape) const = 0;
-
-    /**
-     * return the id for the shape this factory creates.
-     * @return the id for the shape this factory creates.
-     */
-    QString id() const;
-
-private:
-    class Private;
-    Private * const d;
+    Private(const QString &i) : id(i) { }
+    const QString id;
 };
 
-#endif
+KShapeBorderFactoryBase::KShapeBorderFactoryBase(QObject *parent, const QString &id)
+        : QObject(parent),
+        d(new Private(id))
+{
+}
+
+KShapeBorderFactoryBase::~KShapeBorderFactoryBase()
+{
+    delete d;
+}
+
+QString KShapeBorderFactoryBase::id() const
+{
+    return d->id;
+}
+
+#include <KShapeBorderFactoryBase.moc>

@@ -23,11 +23,11 @@
 #include "flake_export.h"
 
 #include <KGenericRegistry.h>
-#include <KoShapeBorderFactoryBase.h>
+#include <KShapeBorderFactoryBase.h>
 
 #include <QObject>
 
-class FLAKE_EXPORT KoShapeBorderRegistry : public QObject,  public KGenericRegistry<KoShapeBorderFactoryBase*>
+class FLAKE_EXPORT KoShapeBorderRegistry : public QObject,  public KGenericRegistry<KShapeBorderFactoryBase*>
 {
     Q_OBJECT
 
