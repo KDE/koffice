@@ -20,7 +20,7 @@
 
 #include "InsertVariableAction_p.h"
 #include "KoVariable.h"
-#include "KoInlineObjectFactoryBase.h"
+#include "KInlineObjectFactoryBase.h"
 
 #include <KoCanvasBase.h>
 #include <kpagedialog.h>
@@ -28,7 +28,7 @@
 #include <KLocale>
 #include <QLayout>
 
-InsertVariableAction::InsertVariableAction(KoCanvasBase *base, KoInlineObjectFactoryBase *factory, const KoInlineObjectTemplate &templ)
+InsertVariableAction::InsertVariableAction(KoCanvasBase *base, KInlineObjectFactoryBase *factory, const KoInlineObjectTemplate &templ)
         : InsertInlineObjectActionBase(base, templ.name)
         , m_factory(factory)
         , m_templateId(templ.id)

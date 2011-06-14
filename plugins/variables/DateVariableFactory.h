@@ -21,9 +21,9 @@
 #ifndef KO_DATE_VARIABLE_FACTORY
 #define KO_DATE_VARIABLE_FACTORY
 
-#include <KoInlineObjectFactoryBase.h>
+#include <KInlineObjectFactoryBase.h>
 
-class DateVariableFactory : public KoInlineObjectFactoryBase
+class DateVariableFactory : public KInlineObjectFactoryBase
 {
 public:
     DateVariableFactory(QObject *parent = 0);

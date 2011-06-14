@@ -29,12 +29,12 @@ class KInlineObject;
 class InlineObjectFactoryPrivate;
 class KProperties;
 
-/// A template used in the KoInlineObjectFactoryBase
+/// A template used in the KInlineObjectFactoryBase
 struct KOTEXT_EXPORT KoInlineObjectTemplate {
     QString id;         ///< The id of the inlineObject
     QString name;       ///< The name to be shown for this template
     /**
-     * The properties which, when passed to the KoInlineObjectFactoryBase::createInlineObject() method
+     * The properties which, when passed to the KInlineObjectFactoryBase::createInlineObject() method
      * result in the object this template represents.
      */
     KProperties *properties;
@@ -47,7 +47,7 @@ struct KOTEXT_EXPORT KoInlineObjectTemplate {
  * access to the object-type.
  * @see KoInlineObjectRegistry
  */
-class KOTEXT_EXPORT KoInlineObjectFactoryBase : public QObject
+class KOTEXT_EXPORT KInlineObjectFactoryBase : public QObject
 {
     Q_OBJECT
 public:
@@ -62,8 +62,8 @@ public:
      * @param parent the parent QObject for memory management usage.
      * @param id a string that will be used internally for referencing the variable-type.
      */
-    KoInlineObjectFactoryBase(QObject *parent, const QString &id, ObjectType type);
-    virtual ~KoInlineObjectFactoryBase();
+    KInlineObjectFactoryBase(QObject *parent, const QString &id, ObjectType type);
+    virtual ~KInlineObjectFactoryBase();
 
     /**
      * Create a new instance of an inline object.

@@ -20,7 +20,7 @@
 #define KOINLINEOBJECTREGISTRY_H
 
 #include <KGenericRegistry.h>
-#include <KoInlineObjectFactoryBase.h>
+#include <KInlineObjectFactoryBase.h>
 #include "kotext_export.h"
 #include <QObject>
 #include <QList>
@@ -33,12 +33,12 @@ class KoShapeLoadingContext;
 
 /**
  * This singleton class keeps a register of all available InlineObject factories.
- * @see KoInlineObjectFactoryBase
+ * @see KInlineObjectFactoryBase
  * @see KoInlineTextObjectManager
  * @see KInlineObject
  * @see KoVariable
  */
-class KOTEXT_EXPORT KoInlineObjectRegistry : public QObject,  public KGenericRegistry<KoInlineObjectFactoryBase*>
+class KOTEXT_EXPORT KoInlineObjectRegistry : public QObject,  public KGenericRegistry<KInlineObjectFactoryBase*>
 {
     Q_OBJECT
 public:

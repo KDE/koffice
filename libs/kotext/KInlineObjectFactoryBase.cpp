@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoInlineObjectFactoryBase.h"
+#include "KInlineObjectFactoryBase.h"
 
 #include <KProperties.h>
 
@@ -41,55 +41,55 @@ public:
     QString odfNameSpace;
     QStringList odfElementNames;
     QList<KoInlineObjectTemplate> templates;
-    KoInlineObjectFactoryBase::ObjectType type;
+    KInlineObjectFactoryBase::ObjectType type;
 };
 
-KoInlineObjectFactoryBase::KoInlineObjectFactoryBase(QObject *parent, const QString &id, ObjectType type)
+KInlineObjectFactoryBase::KInlineObjectFactoryBase(QObject *parent, const QString &id, ObjectType type)
         : QObject(parent)
         , d(new InlineObjectFactoryPrivate(id))
 {
     d->type = type;
 }
 
-KoInlineObjectFactoryBase::~KoInlineObjectFactoryBase()
+KInlineObjectFactoryBase::~KInlineObjectFactoryBase()
 {
     delete d;
 }
 
-QString KoInlineObjectFactoryBase::id() const
+QString KInlineObjectFactoryBase::id() const
 {
     return d->id;
 }
 
-QList<KoInlineObjectTemplate> KoInlineObjectFactoryBase::templates() const
+QList<KoInlineObjectTemplate> KInlineObjectFactoryBase::templates() const
 {
     return d->templates;
 }
 
-void KoInlineObjectFactoryBase::addTemplate(const KoInlineObjectTemplate &params)
+void KInlineObjectFactoryBase::addTemplate(const KoInlineObjectTemplate &params)
 {
     d->templates.append(params);
 }
 
-QStringList KoInlineObjectFactoryBase::odfElementNames() const
+QStringList KInlineObjectFactoryBase::odfElementNames() const
 {
     return d->odfElementNames;
 }
 
-QString KoInlineObjectFactoryBase::odfNameSpace() const
+QString KInlineObjectFactoryBase::odfNameSpace() const
 {
     return d->odfNameSpace;
 }
 
-void KoInlineObjectFactoryBase::setOdfElementNames(const QString & nameSpace, const QStringList &names)
+void KInlineObjectFactoryBase::setOdfElementNames(const QString & nameSpace, const QStringList &names)
 {
     d->odfNameSpace = nameSpace;
     d->odfElementNames = names;
 }
 
-KoInlineObjectFactoryBase::ObjectType KoInlineObjectFactoryBase::type() const
+KInlineObjectFactoryBase::ObjectType KInlineObjectFactoryBase::type() const
 {
     return d->type;
 }
 
-#include <KoInlineObjectFactoryBase.moc>
+#include <KInlineObjectFactoryBase.moc>

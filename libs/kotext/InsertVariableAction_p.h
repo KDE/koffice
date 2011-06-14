@@ -35,18 +35,18 @@
 
 class KoCanvasBase;
 class KProperties;
-class KoInlineObjectFactoryBase;
+class KInlineObjectFactoryBase;
 struct KoInlineObjectTemplate;
 
 class InsertVariableAction : public InsertInlineObjectActionBase
 {
 public:
-    InsertVariableAction(KoCanvasBase *base, KoInlineObjectFactoryBase *factory, const KoInlineObjectTemplate &templ);
+    InsertVariableAction(KoCanvasBase *base, KInlineObjectFactoryBase *factory, const KoInlineObjectTemplate &templ);
 
 private:
     virtual KInlineObject *createInlineObject();
 
-    KoInlineObjectFactoryBase *const m_factory;
+    KInlineObjectFactoryBase *const m_factory;
     const QString m_templateId;
     const KProperties *const m_properties;
     QString m_templateName;

@@ -21,9 +21,9 @@
 #ifndef KO_PAGE_VARIABLE_FACTORY
 #define KO_PAGE_VARIABLE_FACTORY
 
-#include <KoInlineObjectFactoryBase.h>
+#include <KInlineObjectFactoryBase.h>
 
-class PageVariableFactory : public KoInlineObjectFactoryBase
+class PageVariableFactory : public KInlineObjectFactoryBase
 {
 public:
     PageVariableFactory(QObject *parent = 0);

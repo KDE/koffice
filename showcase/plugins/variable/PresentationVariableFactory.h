@@ -25,9 +25,9 @@
 #ifndef PRESENTATION_VARIABLE_FACTORY_H
 #define PRESENTATION_VARIABLE_FACTORY_H
 
-#include <KoInlineObjectFactoryBase.h>
+#include <KInlineObjectFactoryBase.h>
 
-class PresentationVariableFactory : public KoInlineObjectFactoryBase
+class PresentationVariableFactory : public KInlineObjectFactoryBase
 {
 public:
     PresentationVariableFactory(QObject *parent = 0);
