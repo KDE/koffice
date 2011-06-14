@@ -57,7 +57,7 @@
 
 #include "changetracker/KChangeTracker.h"
 #include "changetracker/KChangeTrackerElement.h"
-#include "changetracker/KoDeleteChangeMarker.h"
+#include "changetracker/KDeleteChangeMarker.h"
 #include <KFormatChangeInformation_p.h>
 #include "styles/KoStyleManager.h"
 #include "styles/KParagraphStyle.h"
@@ -143,12 +143,12 @@ public:
     void copyTagEnd(const KXmlElement &element, QTextStream &xmlStream);
 
     //For handling delete changes
-    KoDeleteChangeMarker *insertDeleteChangeMarker(QTextCursor &cursor, const QString &id);
+    KDeleteChangeMarker *insertDeleteChangeMarker(QTextCursor &cursor, const QString &id);
     void processDeleteChange(QTextCursor &cursor);
 
     // For Merging consecutive delete changes into a single change
     bool checkForDeleteMerge(QTextCursor &cursor, const QString &id, int startPosition);
-    QMap<KoDeleteChangeMarker *, QPair<int, int> > deleteChangeMarkerMap;
+    QMap<KDeleteChangeMarker *, QPair<int, int> > deleteChangeMarkerMap;
 
     // For Loading of list item splits
     bool checkForListItemSplit(const KXmlElement &element);
@@ -479,7 +479,7 @@ void KoTextLoader::loadBody(const KXmlElement &bodyElem, QTextCursor &cursor)
                         if(!d->checkForDeleteMerge(cursor, changeId, deleteStartPosition)) {
                             QTextCursor tempCursor(cursor);
                             tempCursor.setPosition(deleteStartPosition);
-                            KoDeleteChangeMarker *marker = d->insertDeleteChangeMarker(tempCursor, changeId);
+                            KDeleteChangeMarker *marker = d->insertDeleteChangeMarker(tempCursor, changeId);
                             d->deleteChangeMarkerMap.insert(marker, QPair<int,int>(deleteStartPosition+1, cursor.position()));
                         }
 
@@ -529,7 +529,7 @@ void KoTextLoader::loadBody(const KXmlElement &bodyElem, QTextCursor &cursor)
                         if (changeId) {
                             if (d->changeStack.count() && (d->changeStack.top() != changeId))
                                 d->changeTracker->setParent(changeId, d->changeStack.top());
-                            KoDeleteChangeMarker *deleteChangemarker = new KoDeleteChangeMarker(d->changeTracker);
+                            KDeleteChangeMarker *deleteChangemarker = new KDeleteChangeMarker(d->changeTracker);
                             deleteChangemarker->setChangeId(changeId);
                             KChangeTrackerElement *changeElement = d->changeTracker->elementById(changeId);
                             changeElement->setDeleteChangeMarker(deleteChangemarker);
@@ -1155,7 +1155,7 @@ void KoTextLoader::loadList(const KXmlElement &element, QTextCursor &cursor)
             if(!d->checkForDeleteMerge(cursor, changeId, deleteStartPosition)) {
                 QTextCursor tempCursor(cursor);
                 tempCursor.setPosition(deleteStartPosition);
-                KoDeleteChangeMarker *marker = d->insertDeleteChangeMarker(tempCursor, changeId);
+                KDeleteChangeMarker *marker = d->insertDeleteChangeMarker(tempCursor, changeId);
                 d->deleteChangeMarkerMap.insert(marker, QPair<int,int>(deleteStartPosition+1, cursor.position()));
             }
         } else {
@@ -1494,7 +1494,7 @@ void KoTextLoader::loadSpan(const KXmlElement &element, QTextCursor &cursor, boo
             if(!d->checkForDeleteMerge(cursor, changeId, deleteStartPosition)) {
                 QTextCursor tempCursor(cursor);
                 tempCursor.setPosition(deleteStartPosition);
-                KoDeleteChangeMarker *marker = d->insertDeleteChangeMarker(tempCursor, changeId);
+                KDeleteChangeMarker *marker = d->insertDeleteChangeMarker(tempCursor, changeId);
                 d->deleteChangeMarkerMap.insert(marker, QPair<int,int>(deleteStartPosition+1, cursor.position()));
             }
             cursor.setCharFormat(cf); // restore the cursor char format
@@ -1510,7 +1510,7 @@ void KoTextLoader::loadSpan(const KXmlElement &element, QTextCursor &cursor, boo
             if (changeId) {
                 if (d->changeStack.count() && (d->changeStack.top() != changeId))
                     d->changeTracker->setParent(changeId, d->changeStack.top());
-                KoDeleteChangeMarker *deleteChangemarker = new KoDeleteChangeMarker(d->changeTracker);
+                KDeleteChangeMarker *deleteChangemarker = new KDeleteChangeMarker(d->changeTracker);
                 deleteChangemarker->setChangeId(changeId);
                 KChangeTrackerElement *changeElement = d->changeTracker->elementById(changeId);
                 changeElement->setDeleteChangeMarker(deleteChangemarker);
@@ -1794,18 +1794,18 @@ void KoTextLoader::loadMerge(const KXmlElement &element, QTextCursor &cursor)
     if(!d->checkForDeleteMerge(cursor, changeId, deleteStartPosition)) {
         QTextCursor tempCursor(cursor);
         tempCursor.setPosition(deleteStartPosition);
-        KoDeleteChangeMarker *marker = d->insertDeleteChangeMarker(tempCursor, changeId);
+        KDeleteChangeMarker *marker = d->insertDeleteChangeMarker(tempCursor, changeId);
         d->deleteChangeMarkerMap.insert(marker, QPair<int,int>(deleteStartPosition+1, cursor.position()));
     }
     d->closeChangeRegion(element);
 }
 
-KoDeleteChangeMarker * KoTextLoader::Private::insertDeleteChangeMarker(QTextCursor &cursor, const QString &id)
+KDeleteChangeMarker * KoTextLoader::Private::insertDeleteChangeMarker(QTextCursor &cursor, const QString &id)
 {
-    KoDeleteChangeMarker *retMarker = NULL;
+    KDeleteChangeMarker *retMarker = NULL;
     int changeId = changeTracker->loadedChangeId(id);
     if (changeId) {
-        KoDeleteChangeMarker *deleteChangemarker = new KoDeleteChangeMarker(changeTracker);
+        KDeleteChangeMarker *deleteChangemarker = new KDeleteChangeMarker(changeTracker);
         deleteChangemarker->setChangeId(changeId);
         KChangeTrackerElement *changeElement = changeTracker->elementById(changeId);
         changeElement->setDeleteChangeMarker(deleteChangemarker);
@@ -1840,7 +1840,7 @@ bool KoTextLoader::Private::checkForDeleteMerge(QTextCursor &cursor, const QStri
             if (!prevChangeId) {
                 KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(cursor.block().document()->documentLayout());
                 KInlineObject *inlineObject = layout ? layout->inlineTextObjectManager()->inlineTextObject(tempCursor.charFormat()) : 0;
-                KoDeleteChangeMarker *deleteChangeMarker = dynamic_cast<KoDeleteChangeMarker *>(inlineObject);
+                KDeleteChangeMarker *deleteChangeMarker = dynamic_cast<KDeleteChangeMarker *>(inlineObject);
                 if (deleteChangeMarker) {
                     prevChangeId = deleteChangeMarker->changeId();
                 }
@@ -1864,9 +1864,9 @@ bool KoTextLoader::Private::checkForDeleteMerge(QTextCursor &cursor, const QStri
 
 void KoTextLoader::Private::processDeleteChange(QTextCursor &cursor)
 {
-    QList<KoDeleteChangeMarker *> markersList = deleteChangeMarkerMap.keys();
+    QList<KDeleteChangeMarker *> markersList = deleteChangeMarkerMap.keys();
 
-    KoDeleteChangeMarker *marker;
+    KDeleteChangeMarker *marker;
     foreach (marker, markersList) {
         int changeId = marker->changeId();
 

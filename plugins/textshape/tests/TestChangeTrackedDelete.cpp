@@ -10,7 +10,7 @@
 #include <KAction>
 #include <KIcon>
 #include <KoTextDocumentLayout.h>
-#include <KoDeleteChangeMarker.h>
+#include <KDeleteChangeMarker.h>
 #include <QTextDocumentFragment>
 #include <KInlineTextObjectManager.h>
 #include <KChangeTrackerElement.h>
@@ -78,7 +78,7 @@ void TestChangeTrackedDelete::testDeleteSelection()
         cursor->setPosition(i);
     }
     cursor->setPosition(3);
-    KoDeleteChangeMarker *testMarker = dynamic_cast<KoDeleteChangeMarker*>(layout->inlineTextObjectManager()->inlineTextObject(*cursor));
+    KDeleteChangeMarker *testMarker = dynamic_cast<KDeleteChangeMarker*>(layout->inlineTextObjectManager()->inlineTextObject(*cursor));
     QTextDocumentFragment deleteData =  KoTextDocument(document).changeTracker()->elementById(testMarker->changeId())->deleteData();
     QCOMPARE(deleteData.toPlainText(), QString("llo Wo"));
     delete textTool;
@@ -105,7 +105,7 @@ void TestChangeTrackedDelete::testPrefixMerge()
         cursor->setPosition(i);
     }
     cursor->setPosition(4);
-    KoDeleteChangeMarker *testMarker = dynamic_cast<KoDeleteChangeMarker*>(layout->inlineTextObjectManager()->inlineTextObject(*cursor));
+    KDeleteChangeMarker *testMarker = dynamic_cast<KDeleteChangeMarker*>(layout->inlineTextObjectManager()->inlineTextObject(*cursor));
     QTextDocumentFragment deleteData =  KoTextDocument(document).changeTracker()->elementById(testMarker->changeId())->deleteData();
     QCOMPARE(deleteData.toPlainText(), QString("lo"));
     delete textTool;
@@ -132,7 +132,7 @@ void TestChangeTrackedDelete::testSuffixMerge()
         cursor->setPosition(i);
     }
     cursor->setPosition(3);
-    KoDeleteChangeMarker *testMarker = dynamic_cast<KoDeleteChangeMarker*>(layout->inlineTextObjectManager()->inlineTextObject(*cursor));
+    KDeleteChangeMarker *testMarker = dynamic_cast<KDeleteChangeMarker*>(layout->inlineTextObjectManager()->inlineTextObject(*cursor));
     QTextDocumentFragment deleteData =  KoTextDocument(document).changeTracker()->elementById(testMarker->changeId())->deleteData();
     QCOMPARE(deleteData.toPlainText(), QString("ll"));
     delete textTool;
@@ -163,7 +163,7 @@ void TestChangeTrackedDelete::testInterMerge()
         cursor->setPosition(i);
     }
     cursor->setPosition(3);
-    KoDeleteChangeMarker *testMarker = dynamic_cast<KoDeleteChangeMarker*>(layout->inlineTextObjectManager()->inlineTextObject(*cursor));
+    KDeleteChangeMarker *testMarker = dynamic_cast<KDeleteChangeMarker*>(layout->inlineTextObjectManager()->inlineTextObject(*cursor));
     QTextDocumentFragment deleteData =  KoTextDocument(document).changeTracker()->elementById(testMarker->changeId())->deleteData();
     QCOMPARE(deleteData.toPlainText(), QString("llo Wor"));
     delete textTool;
@@ -191,7 +191,7 @@ void TestChangeTrackedDelete::testPartialListItemDelete()
     }
 
     cursor->setPosition(47);
-    KoDeleteChangeMarker *testMarker = dynamic_cast<KoDeleteChangeMarker*>(layout->inlineTextObjectManager()->inlineTextObject(*cursor));
+    KDeleteChangeMarker *testMarker = dynamic_cast<KDeleteChangeMarker*>(layout->inlineTextObjectManager()->inlineTextObject(*cursor));
     QTextDocumentFragment deleteData =  KoTextDocument(document).changeTracker()->elementById(testMarker->changeId())->deleteData();
 
     QTextDocument deleteDocument;
@@ -210,10 +210,10 @@ void TestChangeTrackedDelete::testPartialListItemDelete()
 
     QVERIFY(listFound == true);
     QTextList *deletedList = deleteCursor.currentList();
-    bool deletedListStatus = deletedList->format().boolProperty(KoDeleteChangeMarker::DeletedList);
+    bool deletedListStatus = deletedList->format().boolProperty(KDeleteChangeMarker::DeletedList);
     QVERIFY (deletedListStatus == false);
     bool deletedListItemStatus;
-    deletedListItemStatus  = deletedList->item(0).blockFormat().boolProperty(KoDeleteChangeMarker::DeletedListItem);
+    deletedListItemStatus  = deletedList->item(0).blockFormat().boolProperty(KDeleteChangeMarker::DeletedListItem);
     QVERIFY(deletedListItemStatus == false);
     delete textTool;
 }
@@ -240,7 +240,7 @@ void TestChangeTrackedDelete::testListItemDelete()
     }
 
     cursor->setPosition(47);
-    KoDeleteChangeMarker *testMarker = dynamic_cast<KoDeleteChangeMarker*>(layout->inlineTextObjectManager()->inlineTextObject(*cursor));
+    KDeleteChangeMarker *testMarker = dynamic_cast<KDeleteChangeMarker*>(layout->inlineTextObjectManager()->inlineTextObject(*cursor));
     QTextDocumentFragment deleteData =  KoTextDocument(document).changeTracker()->elementById(testMarker->changeId())->deleteData();
 
     QTextDocument deleteDocument;
@@ -259,12 +259,12 @@ void TestChangeTrackedDelete::testListItemDelete()
 
     QVERIFY(listFound == true);
     QTextList *deletedList = deleteCursor.currentList();
-    bool deletedListStatus = deletedList->format().boolProperty(KoDeleteChangeMarker::DeletedList);
+    bool deletedListStatus = deletedList->format().boolProperty(KDeleteChangeMarker::DeletedList);
     QVERIFY (deletedListStatus == false);
     bool deletedListItemStatus;
-    deletedListItemStatus  = deletedList->item(0).blockFormat().boolProperty(KoDeleteChangeMarker::DeletedListItem);
+    deletedListItemStatus  = deletedList->item(0).blockFormat().boolProperty(KDeleteChangeMarker::DeletedListItem);
     QVERIFY(deletedListItemStatus == false);
-    deletedListItemStatus  = deletedList->item(1).blockFormat().boolProperty(KoDeleteChangeMarker::DeletedListItem);
+    deletedListItemStatus  = deletedList->item(1).blockFormat().boolProperty(KDeleteChangeMarker::DeletedListItem);
     QVERIFY(deletedListItemStatus == true);
     delete textTool;
 }
@@ -291,7 +291,7 @@ void TestChangeTrackedDelete::testListDelete()
     }
 
     cursor->setPosition(17);
-    KoDeleteChangeMarker *testMarker = dynamic_cast<KoDeleteChangeMarker*>(layout->inlineTextObjectManager()->inlineTextObject(*cursor));
+    KDeleteChangeMarker *testMarker = dynamic_cast<KDeleteChangeMarker*>(layout->inlineTextObjectManager()->inlineTextObject(*cursor));
     QTextDocumentFragment deleteData =  KoTextDocument(document).changeTracker()->elementById(testMarker->changeId())->deleteData();
 
     QTextDocument deleteDocument;
@@ -310,18 +310,18 @@ void TestChangeTrackedDelete::testListDelete()
 
     QVERIFY(listFound == true);
     QTextList *deletedList = deleteCursor.currentList();
-    bool deletedListStatus = deletedList->format().boolProperty(KoDeleteChangeMarker::DeletedList);
+    bool deletedListStatus = deletedList->format().boolProperty(KDeleteChangeMarker::DeletedList);
     QVERIFY (deletedListStatus == true);
     bool deletedListItemStatus;
-    deletedListItemStatus  = deletedList->item(0).blockFormat().boolProperty(KoDeleteChangeMarker::DeletedListItem);
+    deletedListItemStatus  = deletedList->item(0).blockFormat().boolProperty(KDeleteChangeMarker::DeletedListItem);
     QVERIFY(deletedListItemStatus == true);
-    deletedListItemStatus  = deletedList->item(1).blockFormat().boolProperty(KoDeleteChangeMarker::DeletedListItem);
+    deletedListItemStatus  = deletedList->item(1).blockFormat().boolProperty(KDeleteChangeMarker::DeletedListItem);
     QVERIFY(deletedListItemStatus == true);
-    deletedListItemStatus  = deletedList->item(2).blockFormat().boolProperty(KoDeleteChangeMarker::DeletedListItem);
+    deletedListItemStatus  = deletedList->item(2).blockFormat().boolProperty(KDeleteChangeMarker::DeletedListItem);
     QVERIFY(deletedListItemStatus == true);
-    deletedListItemStatus  = deletedList->item(3).blockFormat().boolProperty(KoDeleteChangeMarker::DeletedListItem);
+    deletedListItemStatus  = deletedList->item(3).blockFormat().boolProperty(KDeleteChangeMarker::DeletedListItem);
     QVERIFY(deletedListItemStatus == true);
-    deletedListItemStatus  = deletedList->item(4).blockFormat().boolProperty(KoDeleteChangeMarker::DeletedListItem);
+    deletedListItemStatus  = deletedList->item(4).blockFormat().boolProperty(KDeleteChangeMarker::DeletedListItem);
     QVERIFY(deletedListItemStatus == true);
     delete textTool;
 }
@@ -348,7 +348,7 @@ void TestChangeTrackedDelete::testTableDelete()
     }
 
     cursor->setPosition(14);
-    KoDeleteChangeMarker *testMarker = dynamic_cast<KoDeleteChangeMarker*>(layout->inlineTextObjectManager()->inlineTextObject(*cursor));
+    KDeleteChangeMarker *testMarker = dynamic_cast<KDeleteChangeMarker*>(layout->inlineTextObjectManager()->inlineTextObject(*cursor));
     QTextDocumentFragment deleteData =  KoTextDocument(document).changeTracker()->elementById(testMarker->changeId())->deleteData();
 
     QTextDocument deleteDocument;

@@ -31,7 +31,7 @@
 #include <KCanvasBase.h>
 #include <KoShapeController.h>
 #include <KoShapeContainer.h>
-#include <KoDeleteChangeMarker.h>
+#include <KDeleteChangeMarker.h>
 
 #include <KAction>
 #include <klocale.h>

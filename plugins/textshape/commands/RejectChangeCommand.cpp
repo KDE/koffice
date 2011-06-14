@@ -27,7 +27,7 @@
 #include <KChangeTracker.h>
 #include <KChangeTrackerElement.h>
 #include <KCharacterStyle.h>
-#include <KoDeleteChangeMarker.h>
+#include <KDeleteChangeMarker.h>
 
 #include <KLocale>
 
@@ -103,7 +103,7 @@ void RejectChangeCommand::redo()
                 QPair<int, int> range = deleteRanges.pop();
                 cursor.setPosition(range.first);
                 cursor.setPosition(range.second, QTextCursor::KeepAnchor);
-                if (dynamic_cast<KoDeleteChangeMarker*>(m_layout->inlineTextObjectManager()->inlineTextObject(cursor))) {
+                if (dynamic_cast<KDeleteChangeMarker*>(m_layout->inlineTextObjectManager()->inlineTextObject(cursor))) {
                     cursor.deleteChar();
                 }
                 else {

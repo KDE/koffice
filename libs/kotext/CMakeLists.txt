@@ -74,7 +74,7 @@ set(kotext_LIB_SRCS
 
     changetracker/KChangeTracker.cpp
     changetracker/KChangeTrackerElement.cpp
-    changetracker/KoDeleteChangeMarker.cpp
+    changetracker/KDeleteChangeMarker.cpp
     changetracker/KFormatChangeInformation.cpp
     changetracker/KoDeletedRowColumnDataStore.cpp
     changetracker/KoDeletedRowData.cpp
@@ -152,7 +152,7 @@ install(
     styles/KoStyleManager.h
     changetracker/KChangeTracker.h
     changetracker/KChangeTrackerElement.h
-    changetracker/KoDeleteChangeMarker.h
+    changetracker/KDeleteChangeMarker.h
     changetracker/KoDeletedRowData.cpp
     changetracker/KoDeletedCellData.cpp
     DESTINATION

@@ -61,7 +61,7 @@
 #include <opendocument/KoTextSharedSavingData.h>
 #include <changetracker/KChangeTracker.h>
 #include <changetracker/KChangeTrackerElement.h>
-#include <changetracker/KoDeleteChangeMarker.h>
+#include <changetracker/KDeleteChangeMarker.h>
 #include <KFormatChangeInformation_p.h>
 #include <KOdfGenericChange.h>
 #include <KOdfGenericChanges.h>
@@ -163,7 +163,7 @@ public:
     void saveChange(QTextCharFormat format);
     void saveChange(int changeId);
     void saveODF12Change(QTextCharFormat format);
-    QString generateDeleteChangeXml(KoDeleteChangeMarker *marker);
+    QString generateDeleteChangeXml(KDeleteChangeMarker *marker);
     int openTagRegion(int position, ElementType elementType, KoTextWriter::TagInformation& tagInformation);
     void closeTagRegion(int changeId);
     QStack<const char *> openedTagStack;
@@ -334,8 +334,8 @@ void KoTextWriter::Private::saveODF12Change(QTextCharFormat format)
         }
     }
 
-    KoDeleteChangeMarker *changeMarker;
-    if (layout && (changeMarker = dynamic_cast<KoDeleteChangeMarker*>(layout->inlineTextObjectManager()->inlineTextObject(format)))) {
+    KDeleteChangeMarker *changeMarker;
+    if (layout && (changeMarker = dynamic_cast<KDeleteChangeMarker*>(layout->inlineTextObjectManager()->inlineTextObject(format)))) {
         if (!savedDeleteChanges.contains(changeMarker->changeId())) {
             QString deleteChangeXml = generateDeleteChangeXml(changeMarker);
             changeMarker->setDeleteChangeXml(deleteChangeXml);
@@ -345,7 +345,7 @@ void KoTextWriter::Private::saveODF12Change(QTextCharFormat format)
     }
 }
 
-QString KoTextWriter::Private::generateDeleteChangeXml(KoDeleteChangeMarker *marker)
+QString KoTextWriter::Private::generateDeleteChangeXml(KDeleteChangeMarker *marker)
 {
     //Create a QTextDocument from the Delete Fragment
     QTextDocument doc;
@@ -817,7 +817,7 @@ void KoTextWriter::Private::saveParagraph(const QTextBlock &block, int from, int
             KInlineObject *inlineObject = layout ? layout->inlineTextObjectManager()->inlineTextObject(charFormat) : 0;
             if (currentFragment.length() == 1 && inlineObject
                     && currentFragment.text()[0].unicode() == QChar::ObjectReplacementCharacter) {
-                if (!dynamic_cast<KoDeleteChangeMarker*>(inlineObject)) {
+                if (!dynamic_cast<KDeleteChangeMarker*>(inlineObject)) {
                     bool saveInlineObject = true;
 
                     if (KoTextMeta* z = dynamic_cast<KoTextMeta*>(inlineObject)) {

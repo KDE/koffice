@@ -19,7 +19,7 @@
 
 #include "TrackedChangeModel.h"
 
-#include <KoDeleteChangeMarker.h>
+#include <KDeleteChangeMarker.h>
 #include <KoTextDocument.h>
 #include <KoTextDocumentLayout.h>
 #include <KOdfGenericChange.h>
@@ -290,7 +290,7 @@ void TrackedChangeModel::setupModelData(QTextDocument* document, ModelItem* pare
             int changeId = format.property(KCharacterStyle::ChangeTrackerId).toInt();
 //            if (m_changeTracker->elementById(changeId) && m_changeTracker->elementById(changeId)->getChangeType() == KOdfGenericChange::deleteChange)
 //                continue;
-            if (KoDeleteChangeMarker *changeMarker = dynamic_cast<KoDeleteChangeMarker*>(m_layout->inlineTextObjectManager()->inlineTextObject(format)))
+            if (KDeleteChangeMarker *changeMarker = dynamic_cast<KDeleteChangeMarker*>(m_layout->inlineTextObjectManager()->inlineTextObject(format)))
                 changeId = changeMarker->changeId();
             if (changeId) {
                 if (changeId != itemStack.top()->itemData().changeId) {

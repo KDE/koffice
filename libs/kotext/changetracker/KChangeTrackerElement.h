@@ -28,7 +28,7 @@
 class QTextFormat;
 class QString;
 class QTextDocumentFragment;
-class KoDeleteChangeMarker;
+class KDeleteChangeMarker;
 
 
 class KOTEXT_EXPORT KChangeTrackerElement
@@ -81,8 +81,8 @@ public:
     void setDeleteData(const QTextDocumentFragment &fragment);
     QTextDocumentFragment deleteData() const;
 
-    void setDeleteChangeMarker(KoDeleteChangeMarker *marker);
-    KoDeleteChangeMarker *deleteChangeMarker();
+    void setDeleteChangeMarker(KDeleteChangeMarker *marker);
+    KDeleteChangeMarker *deleteChangeMarker();
 
 private:
     class Private;

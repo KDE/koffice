@@ -60,7 +60,7 @@
 
 #include <KOdfGenericChanges.h>
 #include <KChangeTracker.h>
-#include <KoDeleteChangeMarker.h>
+#include <KDeleteChangeMarker.h>
 #include <KChangeTrackerElement.h>
 
 TestChangeTracking::TestChangeTracking()

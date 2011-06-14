@@ -18,7 +18,7 @@
  */
 
 #include "KChangeTrackerElement.h"
-#include "KoDeleteChangeMarker.h"
+#include "KDeleteChangeMarker.h"
 #include <QTextDocumentFragment>
 
 #include <KDebug>
@@ -39,7 +39,7 @@ public:
     QString extraMetaData;
     //These two elements are valid for delete changes. Need to move it to a sub-class
     QTextDocumentFragment deleteFragment;
-    KoDeleteChangeMarker *marker;
+    KDeleteChangeMarker *marker;
 
     bool enabled;
     bool acceptedRejected;
@@ -212,12 +212,12 @@ QTextDocumentFragment KChangeTrackerElement::deleteData() const
     return d->deleteFragment;
 }
 
-void KChangeTrackerElement::setDeleteChangeMarker(KoDeleteChangeMarker *marker)
+void KChangeTrackerElement::setDeleteChangeMarker(KDeleteChangeMarker *marker)
 {
     d->marker = marker;
 }
 
-KoDeleteChangeMarker *KChangeTrackerElement::deleteChangeMarker()
+KDeleteChangeMarker *KChangeTrackerElement::deleteChangeMarker()
 {
     return d->marker;
 }

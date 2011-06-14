@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoDeleteChangeMarker.h"
+#include "KDeleteChangeMarker.h"
 
 //KOffice includes
 #include <KoTextDocument.h>
@@ -39,15 +39,15 @@
 #include <QPainter>
 
 /*********************************** ODF Bug Work-around code **********************************************/
-const QString KoDeleteChangeMarker::RDFListName("http://www.koffice.org/list#");
-const QString KoDeleteChangeMarker::RDFListItemName("http://www.koffice.org/list-item#");
-const QString KoDeleteChangeMarker::RDFListValidity("http://www.kofficde.org/list-status#valid");
-const QString KoDeleteChangeMarker::RDFListItemValidity("http://www.koffice.org/list-item-status#valid");
-const QString KoDeleteChangeMarker::RDFListLevel("http://www.koffice.org/list-status#level");
-const QString KoDeleteChangeMarker::RDFDeleteChangeContext("http://www.koffice.org/deleteChangeMetadata");
+const QString KDeleteChangeMarker::RDFListName("http://www.koffice.org/list#");
+const QString KDeleteChangeMarker::RDFListItemName("http://www.koffice.org/list-item#");
+const QString KDeleteChangeMarker::RDFListValidity("http://www.kofficde.org/list-status#valid");
+const QString KDeleteChangeMarker::RDFListItemValidity("http://www.koffice.org/list-item-status#valid");
+const QString KDeleteChangeMarker::RDFListLevel("http://www.koffice.org/list-status#level");
+const QString KDeleteChangeMarker::RDFDeleteChangeContext("http://www.koffice.org/deleteChangeMetadata");
 /***********************************************************************************************************/
 
-class KoDeleteChangeMarker::Private
+class KDeleteChangeMarker::Private
 {
 public:
     Private() {}
@@ -59,50 +59,50 @@ public:
     QHash<KListStyle::ListIdType, KListStyle *> deletedListStyles;
 };
 
-KoDeleteChangeMarker::KoDeleteChangeMarker(KChangeTracker* changeTracker)
+KDeleteChangeMarker::KDeleteChangeMarker(KChangeTracker* changeTracker)
         : d(new Private())
 {
     d->changeTracker = changeTracker;
 }
 
-KoDeleteChangeMarker::~KoDeleteChangeMarker()
+KDeleteChangeMarker::~KDeleteChangeMarker()
 {
     delete d;
 }
 /*
-void KoDeleteChangeMarker::setText (const QString& text)
+void KDeleteChangeMarker::setText (const QString& text)
 {
     d->text = text;
 }
 
-QString KoDeleteChangeMarker::text() const
+QString KDeleteChangeMarker::text() const
 {
     return d->text;
 }
 */
-void KoDeleteChangeMarker::setChangeId (int id)
+void KDeleteChangeMarker::setChangeId (int id)
 {
     d->id = id;
 }
 
-int KoDeleteChangeMarker::changeId() const
+int KDeleteChangeMarker::changeId() const
 {
     return d->id;
 }
 
-int KoDeleteChangeMarker::position() const
+int KDeleteChangeMarker::position() const
 {
     return textPosition();
 }
 
-bool KoDeleteChangeMarker::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
+bool KDeleteChangeMarker::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
 {
     Q_UNUSED(element)
     Q_UNUSED(context);
     return false;
 }
 
-void KoDeleteChangeMarker::paint(QPainter& painter, QPaintDevice *pd, const QRectF &rect, QTextInlineObject object, const QTextCharFormat &format)
+void KDeleteChangeMarker::paint(QPainter& painter, QPaintDevice *pd, const QRectF &rect, QTextInlineObject object, const QTextCharFormat &format)
 {
     Q_UNUSED(painter);
     Q_UNUSED(pd);
@@ -111,7 +111,7 @@ void KoDeleteChangeMarker::paint(QPainter& painter, QPaintDevice *pd, const QRec
     Q_UNUSED(format);
 }
 
-void KoDeleteChangeMarker::resize(QTextInlineObject object, const QTextCharFormat &format, QPaintDevice *pd)
+void KDeleteChangeMarker::resize(QTextInlineObject object, const QTextCharFormat &format, QPaintDevice *pd)
 {
     Q_UNUSED(object);
     Q_UNUSED(format);
@@ -120,13 +120,13 @@ void KoDeleteChangeMarker::resize(QTextInlineObject object, const QTextCharForma
     object.setWidth(0);
 }
 
-void KoDeleteChangeMarker::updatePosition(QTextInlineObject object, const QTextCharFormat &format)
+void KDeleteChangeMarker::updatePosition(QTextInlineObject object, const QTextCharFormat &format)
 {
     Q_UNUSED(object);
     Q_UNUSED(format);
 }
 
-void KoDeleteChangeMarker::saveOdf(KoShapeSavingContext &context)
+void KDeleteChangeMarker::saveOdf(KoShapeSavingContext &context)
 {
     KOdfGenericChange change;
     if (d->changeTracker->saveFormat() == KChangeTracker::ODF_1_2) {
@@ -153,17 +153,17 @@ void KoDeleteChangeMarker::saveOdf(KoShapeSavingContext &context)
     context.xmlWriter().endElement();
 }
 
-void KoDeleteChangeMarker::setDeleteChangeXml(QString &deleteChangeXml)
+void KDeleteChangeMarker::setDeleteChangeXml(QString &deleteChangeXml)
 {
     d->deleteChangeXml = deleteChangeXml;
 }
 
-void KoDeleteChangeMarker::setDeletedListStyle(KListStyle::ListIdType id, KListStyle *style)
+void KDeleteChangeMarker::setDeletedListStyle(KListStyle::ListIdType id, KListStyle *style)
 {
     d->deletedListStyles.insert(id, style);
 }
 
-KListStyle *KoDeleteChangeMarker::deletedListStyle(KListStyle::ListIdType id)
+KListStyle *KDeleteChangeMarker::deletedListStyle(KListStyle::ListIdType id)
 {
     return d->deletedListStyles.value(id);
 }

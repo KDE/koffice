@@ -34,7 +34,7 @@ class QTextFormat;
 class QString;
 class QTextDocumentFragment;
 class QTextList;
-class KoDeleteChangeMarker;
+class KDeleteChangeMarker;
 class KXmlElement;
 class KChangeTrackerElement;
 class KFormatChangeInformation;
@@ -109,8 +109,8 @@ public:
     void loadOdfChanges(const KXmlElement &element);
     int loadedChangeId(QString odfId);
 
-    static QTextDocumentFragment generateDeleteFragment(QTextCursor &cursor, KoDeleteChangeMarker *marker);
-    static void insertDeleteFragment(QTextCursor &cursor, KoDeleteChangeMarker *marker);
+    static QTextDocumentFragment generateDeleteFragment(QTextCursor &cursor, KDeleteChangeMarker *marker);
+    static void insertDeleteFragment(QTextCursor &cursor, KDeleteChangeMarker *marker);
     static int fragmentLength(QTextDocumentFragment fragment);
 
     QString authorName();

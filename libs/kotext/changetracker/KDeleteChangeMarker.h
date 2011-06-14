@@ -31,7 +31,7 @@ class KXmlElement;
 
 class QTextDocument;
 
-class KOTEXT_EXPORT KoDeleteChangeMarker : public KInlineObject
+class KOTEXT_EXPORT KDeleteChangeMarker : public KInlineObject
 {
 public:
 
@@ -49,9 +49,9 @@ public:
     static const QString RDFDeleteChangeContext;
     /****************************************************************************************************************/
 
-    KoDeleteChangeMarker(KChangeTracker *changeTracker);
+    KDeleteChangeMarker(KChangeTracker *changeTracker);
 
-    virtual ~KoDeleteChangeMarker();
+    virtual ~KDeleteChangeMarker();
 
     /**
     * Store the deleted text.

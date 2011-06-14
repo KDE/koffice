@@ -31,7 +31,7 @@
 #include "KoTextOdfSaveHelper.h"
 #include "changetracker/KChangeTracker.h"
 #include "changetracker/KChangeTrackerElement.h"
-#include "changetracker/KoDeleteChangeMarker.h"
+#include "changetracker/KDeleteChangeMarker.h"
 #include "styles/KCharacterStyle.h"
 #include "styles/KParagraphStyle.h"
 #include "styles/KoStyleManager.h"

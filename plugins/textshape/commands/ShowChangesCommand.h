@@ -26,7 +26,7 @@
 #include <QList>
 
 class KChangeTracker;
-class KoDeleteChangeMarker;
+class KDeleteChangeMarker;
 class KoTextEditor;
 class KCanvasBase;
 
