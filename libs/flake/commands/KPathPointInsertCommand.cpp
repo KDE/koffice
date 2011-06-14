@@ -18,7 +18,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoPathPointInsertCommand.h"
+#include "KPathPointInsertCommand.h"
 #include <klocale.h>
 
 class KoPathPointInsertCommandPrivate
@@ -35,7 +35,7 @@ public:
     bool deletePoints;
 };
 
-KoPathPointInsertCommand::KoPathPointInsertCommand(const QList<KPathPointData> &pointDataList, qreal insertPosition, QUndoCommand *parent)
+KPathPointInsertCommand::KPathPointInsertCommand(const QList<KPathPointData> &pointDataList, qreal insertPosition, QUndoCommand *parent)
         : QUndoCommand(parent),
         d(new KoPathPointInsertCommandPrivate())
 {
@@ -75,12 +75,12 @@ KoPathPointInsertCommand::KoPathPointInsertCommand(const QList<KPathPointData> &
     }
 }
 
-KoPathPointInsertCommand::~KoPathPointInsertCommand()
+KPathPointInsertCommand::~KPathPointInsertCommand()
 {
     delete d;
 }
 
-void KoPathPointInsertCommand::redo()
+void KPathPointInsertCommand::redo()
 {
     QUndoCommand::redo();
     for (int i = d->pointDataList.size() - 1; i >= 0; --i) {
@@ -109,7 +109,7 @@ void KoPathPointInsertCommand::redo()
     d->deletePoints = false;
 }
 
-void KoPathPointInsertCommand::undo()
+void KPathPointInsertCommand::undo()
 {
     QUndoCommand::undo();
     for (int i = 0; i < d->pointDataList.size(); ++i) {
@@ -144,7 +144,7 @@ void KoPathPointInsertCommand::undo()
     d->deletePoints = true;
 }
 
-QList<KPathPoint*> KoPathPointInsertCommand::insertedPoints() const
+QList<KPathPoint*> KPathPointInsertCommand::insertedPoints() const
 {
     return d->points;
 }

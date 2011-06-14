@@ -125,7 +125,7 @@ set(flake_SRCS
     commands/KPathControlPointMoveCommand.cpp
     commands/KoPathPointTypeCommand.cpp
     commands/KoPathPointRemoveCommand.cpp
-    commands/KoPathPointInsertCommand.cpp
+    commands/KPathPointInsertCommand.cpp
     commands/KoPathSegmentBreakCommand.cpp
     commands/KPathBreakAtPointCommand.cpp
     commands/KoPathSegmentTypeCommand.cpp
@@ -206,7 +206,7 @@ install(
     commands/KPathCombineCommand.h
     commands/KPathControlPointMoveCommand.h
     commands/KPathFillRuleCommand.h
-    commands/KoPathPointInsertCommand.h
+    commands/KPathPointInsertCommand.h
     commands/KoPathPointMergeCommand.h
     commands/KoPathPointMoveCommand.h
     commands/KoPathPointRemoveCommand.h

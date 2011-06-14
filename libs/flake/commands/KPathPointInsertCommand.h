@@ -31,7 +31,7 @@
 class KoPathPointInsertCommandPrivate;
 
 /// The undo / redo command for inserting path points
-class FLAKE_EXPORT KoPathPointInsertCommand : public QUndoCommand
+class FLAKE_EXPORT KPathPointInsertCommand : public QUndoCommand
 {
 public:
     /**
@@ -45,8 +45,8 @@ public:
      * @param insertPosition the position to insert at [0..1]
      * @param parent the parent command used for macro commands
      */
-    KoPathPointInsertCommand(const QList<KPathPointData> &pointDataList, qreal insertPosition, QUndoCommand *parent = 0);
-    virtual ~KoPathPointInsertCommand();
+    KPathPointInsertCommand(const QList<KPathPointData> &pointDataList, qreal insertPosition, QUndoCommand *parent = 0);
+    virtual ~KPathPointInsertCommand();
 
     /// redo the command
     void redo();

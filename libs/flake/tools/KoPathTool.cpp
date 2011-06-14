@@ -31,7 +31,7 @@
 #include "KoSelection.h"
 #include "KoPointerEvent.h"
 #include "commands/KoPathPointTypeCommand_p.h"
-#include "commands/KoPathPointInsertCommand.h"
+#include "commands/KPathPointInsertCommand.h"
 #include "commands/KoPathPointRemoveCommand.h"
 #include "commands/KoPathSegmentTypeCommand.h"
 #include "commands/KPathBreakAtPointCommand_p.h"
@@ -214,7 +214,7 @@ void KoPathTool::insertPoints()
     if (m_pointSelection.size() > 1) {
         QList<KPathPointData> segments(m_pointSelection.selectedSegmentsData());
         if (!segments.isEmpty()) {
-            KoPathPointInsertCommand *cmd = new KoPathPointInsertCommand(segments, 0.5);
+            KPathPointInsertCommand *cmd = new KPathPointInsertCommand(segments, 0.5);
             d->canvas->addCommand(cmd);
 
             foreach (KPathPoint * p, cmd->insertedPoints()) {
@@ -763,7 +763,7 @@ void KoPathTool::mouseDoubleClickEvent(KoPointerEvent *event)
     if (clickedShape && clickedSegmentStart) {
         QList<KPathPointData> segments;
         segments.append(KPathPointData(clickedShape, clickedShape->pathPointIndex(clickedSegmentStart)));
-        KoPathPointInsertCommand *cmd = new KoPathPointInsertCommand(segments, clickedPointParam);
+        KPathPointInsertCommand *cmd = new KPathPointInsertCommand(segments, clickedPointParam);
         d->canvas->addCommand(cmd);
 
         foreach (KPathPoint * p, cmd->insertedPoints()) {

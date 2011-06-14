@@ -20,7 +20,7 @@
 #include "KarbonPathRefineCommand.h"
 #include <KoPathShape.h>
 #include <KPathPointData.h>
-#include <KoPathPointInsertCommand.h>
+#include <KPathPointInsertCommand.h>
 #include <klocale.h>
 #include <kdebug.h>
 
@@ -71,7 +71,7 @@ void KarbonPathRefineCommand::redo()
                 }
             }
             // create the command and execute it
-            QUndoCommand * cmd = new KoPathPointInsertCommand(pointData, insertPosition, this);
+            QUndoCommand * cmd = new KPathPointInsertCommand(pointData, insertPosition, this);
             cmd->redo();
         }
         d->initialized = true;
