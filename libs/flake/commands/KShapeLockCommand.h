@@ -27,7 +27,7 @@
 #include "flake_export.h"
 
 class KShape;
-class KoShapeLockCommandPrivate;
+class KShapeLockCommandPrivate;
 
 /// The undo / redo command to lock a set of shapes position and size
 class FLAKE_EXPORT KShapeLockCommand : public QUndoCommand
@@ -50,7 +50,7 @@ public:
     virtual void undo();
 
 private:
-    KoShapeLockCommandPrivate *d;
+    KShapeLockCommandPrivate *d;
 };
 
 #endif

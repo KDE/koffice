@@ -23,7 +23,7 @@
 
 #include <klocale.h>
 
-class KoShapeLockCommandPrivate
+class KShapeLockCommandPrivate
 {
 public:
     QList<KShape*> shapes;    /// the shapes to lock
@@ -33,7 +33,7 @@ public:
 
 KShapeLockCommand::KShapeLockCommand(const QList<KShape*> &shapes, const QList<bool> &oldLock, const QList<bool> &newLock, QUndoCommand *parent)
         : QUndoCommand(parent),
-        d(new KoShapeLockCommandPrivate())
+        d(new KShapeLockCommandPrivate())
 {
     d->shapes = shapes;
     d->oldLock = oldLock;
