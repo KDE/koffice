@@ -31,7 +31,7 @@
 
 #include <KoPACanvas.h>
 #include <KoPADocument.h>
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 #include "KoPAView.h"
 #include "SCPage.h"
 #include "SCPageApplicationData.h"

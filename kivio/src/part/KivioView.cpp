@@ -23,7 +23,7 @@
 #include <kactioncollection.h>
 #include <kactionmenu.h>
 
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 #include <KSelection.h>
 #include <KoPACanvas.h>
 

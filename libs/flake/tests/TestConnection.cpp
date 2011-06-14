@@ -20,14 +20,14 @@
 #include "TestConnection.h"
 #include <MockShapes.h>
 
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 #include <KShapeConnection.h>
 #include <kdebug.h>
 
 void TestConnection::testRouteSimple()
 {
     MockCanvas canvas;
-    KoShapeManager manager(&canvas);
+    KShapeManager manager(&canvas);
 
     KShape shape1;
     shape1.setPosition(30, 50);

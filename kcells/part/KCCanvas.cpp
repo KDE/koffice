@@ -51,7 +51,7 @@
 #include <kxmlguifactory.h>
 
 // KOffice
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 #include <KoToolProxy.h>
 #include <KoZoomHandler.h>
 #include <KPointerEvent.h>
@@ -86,7 +86,7 @@ KCCanvas::KCCanvas(KCView *view)
         m_view(view),
         m_doc(view ? view->doc() : 0)
 {
-    m_shapeManager = new KoShapeManager(this, this);
+    m_shapeManager = new KShapeManager(this, this);
     m_toolProxy = new KoToolProxy(this, this);
 
     setAttribute(Qt::WA_OpaquePaintEvent);
@@ -531,7 +531,7 @@ void KCCanvas::addCommand(QUndoCommand* command)
     doc()->addCommand(command);
 }
 
-KoShapeManager* KCCanvas::shapeManager() const
+KShapeManager* KCCanvas::shapeManager() const
 {
     return m_shapeManager;
 }

@@ -90,7 +90,7 @@
 #include <KOdfStoreReader.h>
 #include <KOdfStylesReader.h>
 #include <KShapeController.h>
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 #include <KSelection.h>
 #include <KOdfStore.h>
 #include <KoToolBoxFactory.h>
@@ -1185,7 +1185,7 @@ void KCView::setActiveSheet(KCSheet* sheet, bool updateSheet)
         d->canvas->setLayoutDirection(direction);
         d->horzScrollBar->setLayoutDirection(direction);
         // Replace the painting strategy for painting shapes.
-        KoShapeManager *const shapeManager = d->canvas->shapeManager();
+        KShapeManager *const shapeManager = d->canvas->shapeManager();
         KoShapeManagerPaintingStrategy *paintingStrategy = 0;
         if (direction == Qt::LeftToRight) {
             paintingStrategy = new KoShapeManagerPaintingStrategy(shapeManager);
@@ -1345,7 +1345,7 @@ void KCView::sheetProperties()
         d->horzScrollBar->setLayoutDirection(d->activeSheet->layoutDirection());
         d->columnHeader->update();
         // Replace the painting strategy for painting shapes.
-        KoShapeManager *const shapeManager = d->canvas->shapeManager();
+        KShapeManager *const shapeManager = d->canvas->shapeManager();
         KoShapeManagerPaintingStrategy *paintingStrategy = 0;
         if (d->activeSheet->layoutDirection() == Qt::LeftToRight) {
             paintingStrategy = new KoShapeManagerPaintingStrategy(shapeManager);

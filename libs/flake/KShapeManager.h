@@ -48,7 +48,7 @@ class QRectF;
  *
  * The selection in the different views can be different.
  */
-class FLAKE_EXPORT KoShapeManager : public QObject
+class FLAKE_EXPORT KShapeManager : public QObject
 {
     Q_OBJECT
 
@@ -64,15 +64,15 @@ public:
      * @param canvas the canvas this shape manager is working on.
      * @param parent is a QObject based parent for memory management purposes
      */
-    explicit KoShapeManager(KCanvasBase *canvas, QObject *parent = 0);
+    explicit KShapeManager(KCanvasBase *canvas, QObject *parent = 0);
     /**
      * Constructor that takes a list of shapes, convenience version.
      * @param shapes the shapes to start out with, see also setShapes()
      * @param canvas the canvas this shape manager is working on.
      * @param parent is a QObject based parent for memory management purposes
      */
-    KoShapeManager(KCanvasBase *canvas, const QList<KShape *> &shapes, QObject *parent = 0);
-    virtual ~KoShapeManager();
+    KShapeManager(KCanvasBase *canvas, const QList<KShape *> &shapes, QObject *parent = 0);
+    virtual ~KShapeManager();
 
     /**
      * Remove all previously owned shapes and make the argument list the new shapes
@@ -176,7 +176,7 @@ public:
     void paintShape(KShape *shape, QPainter &painter, const KoViewConverter &converter, bool forPrint);
 
     /**
-     * Set the strategy of the KoShapeManager
+     * Set the strategy of the KShapeManager
      *
      * This can be used to change the behaviour of the painting of the shapes.
      * @param strategy the new strategy. The ownership of the argument \p

@@ -55,7 +55,7 @@ struct Finalizer {
 #include <KSelection.h>
 #include <KShapeBackground.h>
 #include <KShapeLoadingContext.h>
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 #include <KoShapeSavingContext.h>
 #include <KoText.h>
 #include <KoTextDocument.h>

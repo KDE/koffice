@@ -23,7 +23,7 @@
 #include "KarbonCanvas.h"
 #include "KarbonPart.h"
 
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 
 #include <QtGui/QPainter>
 

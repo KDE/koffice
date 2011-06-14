@@ -24,7 +24,7 @@
 #include <KCanvasBase.h>
 #include <KCanvasController.h>
 #include <KShape.h>
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 #include <KoViewConverter.h>
 
 class RightToLeftPaintingStrategy::Private
@@ -34,7 +34,7 @@ public:
 };
 
 
-RightToLeftPaintingStrategy::RightToLeftPaintingStrategy(KoShapeManager *shapeManager, KCanvasBase *canvas)
+RightToLeftPaintingStrategy::RightToLeftPaintingStrategy(KShapeManager *shapeManager, KCanvasBase *canvas)
         : KoShapeManagerPaintingStrategy(shapeManager)
         , d(new Private)
 {

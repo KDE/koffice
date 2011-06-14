@@ -28,7 +28,7 @@
 #include "frames/KWFrame.h"
 
 #include <KoInsets.h>
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 #include "KCanvasBase.h"
 
 #include <QApplication>
@@ -36,7 +36,7 @@
 #include <QTextLayout>
 #include <QTextDocument>
 
-KWPrintingDialog::KWPrintingDialog(KWDocument *document, KoShapeManager *shapeManager, QWidget *parent)
+KWPrintingDialog::KWPrintingDialog(KWDocument *document, KShapeManager *shapeManager, QWidget *parent)
         : KoPrintingDialog(parent),
         m_document(document)
 {

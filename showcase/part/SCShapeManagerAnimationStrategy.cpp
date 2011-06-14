@@ -22,7 +22,7 @@
 
 #include <QPainter>
 #include <KShape.h>
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 #include <KoPAPageBase.h>
 
 #include "SCShapeAnimations.h"
@@ -31,7 +31,7 @@
 #include "SCPageSelectStrategyBase.h"
 #include "kdebug.h"
 
-SCShapeManagerAnimationStrategy::SCShapeManagerAnimationStrategy(KoShapeManager *shapeManager, SCAnimationCache* animationCache,
+SCShapeManagerAnimationStrategy::SCShapeManagerAnimationStrategy(KShapeManager *shapeManager, SCAnimationCache* animationCache,
                                                                     SCPageSelectStrategyBase * strategy)
 : KoShapeManagerPaintingStrategy(shapeManager)
 , m_animationCache(animationCache)

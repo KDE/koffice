@@ -20,8 +20,8 @@
 #include "KShapeConnection_p.h"
 #include "KShape.h"
 #include "KShape_p.h"
-#include "KoShapeManager.h"
-#include "KoShapeManager_p.h"
+#include "KShapeManager.h"
+#include "KShapeManager_p.h"
 #include "KShapeBorderBase.h"
 #include "KoViewConverter.h"
 #include "KPathShape.h"
@@ -688,7 +688,7 @@ void KShapeConnection::update() const
     if (shape == 0)
         return;
     QRectF mySize = boundingRect();
-    foreach (KoShapeManager *shapeManager, shape->priv()->shapeManagers) {
+    foreach (KShapeManager *shapeManager, shape->priv()->shapeManagers) {
         shapeManager->priv()->update(mySize, 0, false);
     }
 }

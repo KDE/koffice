@@ -39,7 +39,7 @@
 #include <KoToolManager.h>
 #include <KGuidesData.h>
 #include <KShapeController.h>
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 #include <KShapeGroup.h>
 #include <KoShapePaste.h>
 #include <KoShapeOdfSaveHelper.h>
@@ -170,7 +170,7 @@ DefaultTool::DefaultTool(KCanvasBase *canvas)
     m_sizeCursors[6] = Qt::SizeHorCursor;
     m_sizeCursors[7] = Qt::SizeFDiagCursor;
 
-    KoShapeManager * manager = canvas->shapeManager();
+    KShapeManager * manager = canvas->shapeManager();
     connect(manager, SIGNAL(selectionChanged()), this, SLOT(updateActions()));
 }
 
@@ -777,7 +777,7 @@ bool DefaultTool::paste()
 
     bool success = false;
     if (data->hasFormat(KOdf::mimeType(KOdf::TextDocument))) {
-        KoShapeManager * shapeManager = canvas()->shapeManager();
+        KShapeManager * shapeManager = canvas()->shapeManager();
         KoShapePaste paste(canvas(), shapeManager->selection()->activeLayer());
         success = paste.paste(KOdf::TextDocument, data);
         if (success) {
@@ -1086,7 +1086,7 @@ KInteractionStrategy *DefaultTool::createStrategy(KPointerEvent *event)
     // command after a new command was added. This happend when you where faster than the timer.
     m_moveCommand = 0;
 
-    KoShapeManager *shapeManager = canvas()->shapeManager();
+    KShapeManager *shapeManager = canvas()->shapeManager();
     KSelection *select = shapeManager->selection();
     bool insideSelection;
     KoFlake::SelectionHandle handle = handleAt(event->point, &insideSelection);

@@ -41,7 +41,7 @@
 #include "commands/KCCommentCommand.h"
 #include "commands/KCStyleCommand.h"
 
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 #include <KSelection.h>
 
 /************************************************

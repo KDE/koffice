@@ -22,7 +22,7 @@
 #include "KShapeController.h"
 #include "KShapeControllerBase.h"
 #include "KoShapeRegistry.h"
-#include "KoShapeManager.h"
+#include "KShapeManager.h"
 #include "KShapeLayer.h"
 #include "KSelection.h"
 #include "commands/KShapeCreateCommand.h"

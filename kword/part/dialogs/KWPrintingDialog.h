@@ -26,13 +26,13 @@
 #include <QMap>
 #include <QRectF>
 
-class KoShapeManager;
+class KShapeManager;
 class KWDocument;
 
 class KWPrintingDialog : public KoPrintingDialog
 {
 public:
-    KWPrintingDialog(KWDocument *document, KoShapeManager *shapeManager, QWidget *parent = 0);
+    KWPrintingDialog(KWDocument *document, KShapeManager *shapeManager, QWidget *parent = 0);
     ~KWPrintingDialog();
 
     virtual QList<QWidget*> createOptionWidgets() const;

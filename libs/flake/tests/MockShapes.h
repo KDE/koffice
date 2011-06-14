@@ -78,7 +78,7 @@ public:
         return false;
     }
     void addCommand(QUndoCommand*) { }
-    KoShapeManager *shapeManager() const  {
+    KShapeManager *shapeManager() const  {
         return 0;
     }
     void updateCanvas(const QRectF&)  {}

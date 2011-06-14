@@ -20,7 +20,7 @@
 #include "TestShapeReorderCommand.h"
 #include <MockShapes.h>
 #include <KoShapeReorderCommand.h>
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 
 #include <kcomponentdata.h>
 
@@ -49,7 +49,7 @@ void TestShapeReorderCommand::testBringToFront()
     shapes.append(&shape3);
 
     MockCanvas canvas;
-    KoShapeManager manager(&canvas, shapes);
+    KShapeManager manager(&canvas, shapes);
 
     qSort(shapes.begin(), shapes.end(), KShape::compareShapeZIndex);
     QCOMPARE(shapes.indexOf(&shape1), 0);
@@ -86,7 +86,7 @@ void TestShapeReorderCommand::testSendToBack()
     shapes.append(&shape3);
 
     MockCanvas canvas;
-    KoShapeManager manager(&canvas, shapes);
+    KShapeManager manager(&canvas, shapes);
 
     qSort(shapes.begin(), shapes.end(), KShape::compareShapeZIndex);
     QCOMPARE(shapes.indexOf(&shape1), 0);
@@ -123,7 +123,7 @@ void TestShapeReorderCommand::testMoveUp()
     shapes.append(&shape3);
 
     MockCanvas canvas;
-    KoShapeManager manager(&canvas, shapes);
+    KShapeManager manager(&canvas, shapes);
 
     qSort(shapes.begin(), shapes.end(), KShape::compareShapeZIndex);
     QCOMPARE(shapes.indexOf(&shape1), 0);
@@ -160,7 +160,7 @@ void TestShapeReorderCommand::testMoveDown()
     shapes.append(&shape3);
 
     MockCanvas canvas;
-    KoShapeManager manager(&canvas, shapes);
+    KShapeManager manager(&canvas, shapes);
 
     qSort(shapes.begin(), shapes.end(), KShape::compareShapeZIndex);
     QCOMPARE(shapes.indexOf(&shape1), 0);
@@ -208,7 +208,7 @@ void TestShapeReorderCommand::testMoveUpOverlapping()
     shapes.append(&shape5);
     
     MockCanvas canvas;
-    KoShapeManager manager(&canvas, shapes);
+    KShapeManager manager(&canvas, shapes);
     
     QVERIFY(shape1.zIndex() < shape2.zIndex());
     QVERIFY(shape2.zIndex() < shape3.zIndex());
@@ -257,7 +257,7 @@ void TestShapeReorderCommand::testMoveDownOverlapping()
     shapes.append(&shape5);
     
     MockCanvas canvas;
-    KoShapeManager manager(&canvas, shapes);
+    KShapeManager manager(&canvas, shapes);
     
     QVERIFY(shape1.zIndex() < shape2.zIndex());
     QVERIFY(shape2.zIndex() < shape3.zIndex());
@@ -302,7 +302,7 @@ void TestShapeReorderCommand::testSendToBackChildren()
     shapes.append(&container);
     
     MockCanvas canvas;
-    KoShapeManager manager(&canvas, shapes);
+    KShapeManager manager(&canvas, shapes);
     
     qSort(shapes.begin(), shapes.end(), KShape::compareShapeZIndex);
     QCOMPARE(shapes.indexOf(&container), 0); // atm the parent is always lower than its children

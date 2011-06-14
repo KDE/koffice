@@ -30,7 +30,7 @@ class KCanvasBase;
 class RightToLeftPaintingStrategy : public KoShapeManagerPaintingStrategy
 {
 public:
-    RightToLeftPaintingStrategy(KoShapeManager *shapeManager, KCanvasBase *canvas);
+    RightToLeftPaintingStrategy(KShapeManager *shapeManager, KCanvasBase *canvas);
     virtual ~RightToLeftPaintingStrategy();
 
     /**

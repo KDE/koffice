@@ -28,7 +28,7 @@
 #include "interfaces/ReadWriteTableModel.h"
 
 #include <KCanvasBase.h>
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 
 #include <KAction>
 #include <KIcon>

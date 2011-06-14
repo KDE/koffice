@@ -43,7 +43,7 @@
 #include "KoToolManager.h"
 
 class KoToolFactoryBase;
-class KoShapeManager;
+class KShapeManager;
 class KCanvasBase;
 class KoToolBase;
 class KShape;
@@ -161,7 +161,7 @@ class Connector : public QObject
 {
     Q_OBJECT
 public:
-    explicit Connector(KoShapeManager *parent);
+    explicit Connector(KShapeManager *parent);
 
 public slots:
     void selectionChanged();
@@ -170,7 +170,7 @@ signals:
     void selectionChanged(QList<KShape*> shape);
 
 private:
-    KoShapeManager *m_shapeManager;
+    KShapeManager *m_shapeManager;
 };
 
 #endif

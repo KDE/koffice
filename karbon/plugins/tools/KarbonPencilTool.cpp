@@ -26,7 +26,7 @@
 #include <KPointerEvent.h>
 #include <KCanvasBase.h>
 #include <KShapeController.h>
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 #include <KSelection.h>
 #include <KResourceManager.h>
 #include <KoColor.h>

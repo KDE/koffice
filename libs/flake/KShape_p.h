@@ -45,8 +45,8 @@ public:
      */
     void shapeChanged(KShape::ChangeType type);
 
-    void addShapeManager(KoShapeManager *manager);
-    void removeShapeManager(KoShapeManager *manager);
+    void addShapeManager(KShapeManager *manager);
+    void removeShapeManager(KShapeManager *manager);
 
     /**
      * Add a connection to the list of connections of this shape.
@@ -82,7 +82,7 @@ public:
     QVector<KShapeConnectionPolicy> connectorPolicies;
 
     KShapeContainer *parent;
-    QSet<KoShapeManager *> shapeManagers;
+    QSet<KShapeManager *> shapeManagers;
     QSet<KShape *> toolDelegates;
     KoShapeUserData *userData;
     KShapeApplicationData *appData;

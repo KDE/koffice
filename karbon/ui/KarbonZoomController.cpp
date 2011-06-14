@@ -26,7 +26,7 @@
 #include <KCanvasBase.h>
 #include <KoZoomHandler.h>
 #include <KResourceManager.h>
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 #include <KSelection.h>
 
 #include <KActionCollection>

@@ -53,7 +53,7 @@
 #include <kfiledialog.h>
 
 #include <KSelection.h>
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 #include <KoMainWindow.h>
 #include <KoPACanvas.h>
 #include <KoPADocumentStructureDocker.h>

@@ -28,7 +28,7 @@
 
 #include <KCanvasController.h>
 #include <KoToolManager.h>
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 #include <KCanvasBase.h>
 
 ArtisticTextShapeConfigWidget::ArtisticTextShapeConfigWidget()

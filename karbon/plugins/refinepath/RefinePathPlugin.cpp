@@ -33,7 +33,7 @@
 #include <KoToolManager.h>
 #include <KCanvasController.h>
 #include <KCanvasBase.h>
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 #include <KSelection.h>
 #include <KPathShape.h>
 #include <KParameterShape.h>

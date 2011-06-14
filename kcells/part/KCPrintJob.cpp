@@ -37,7 +37,7 @@
 
 #include <KoGlobal.h>
 #include <KShape.h>
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 #include <KoZoomHandler.h>
 
 #include <KMessageBox>

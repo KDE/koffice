@@ -27,7 +27,7 @@
 #include "KoToolSelection.h"
 #include "KCanvasBase.h"
 #include "KCanvasController.h"
-#include "KoShapeManager.h"
+#include "KShapeManager.h"
 #include "KSelection.h"
 #include "KShapeLayer.h"
 
@@ -90,7 +90,7 @@ bool KoToolProxyPrivate::isActiveLayerEditable()
     if (!activeTool)
         return false;
 
-    KoShapeManager * shapeManager = activeTool->canvas()->shapeManager();
+    KShapeManager * shapeManager = activeTool->canvas()->shapeManager();
     KShapeLayer * activeLayer = shapeManager->selection()->activeLayer();
     if (activeLayer && !activeLayer->isEditable())
         return false;
@@ -235,7 +235,7 @@ void KoToolProxy::mouseReleaseEvent(QMouseEvent *event, const QPointF &point)
                 && qAbs(d->mouseDownPoint.y() - event->y()) < 5) {
             // we potentially will change the selection
             Q_ASSERT(d->activeTool->canvas());
-            KoShapeManager *manager = d->activeTool->canvas()->shapeManager();
+            KShapeManager *manager = d->activeTool->canvas()->shapeManager();
             Q_ASSERT(manager);
             // only change the selection if that will not lead to losing a complex selection
             if (manager->selection()->count() <= 1) {

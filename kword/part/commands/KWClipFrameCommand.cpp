@@ -24,7 +24,7 @@
 #include "../frames/KWFrame.h"
 
 #include <KShapeContainer.h>
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 
 #include <KLocale>
 

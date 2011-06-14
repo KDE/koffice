@@ -32,7 +32,7 @@
 #include "KShape.h"
 #include "KShapeLayer.h"
 #include "KShapeLoadingContext.h"
-#include "KoShapeManager.h"
+#include "KShapeManager.h"
 #include "KShapeControllerBase.h"
 #include "KoShapeRegistry.h"
 #include "commands/KShapeCreateCommand.h"
@@ -99,7 +99,7 @@ bool KoShapePaste::process(const KXmlElement & body, KOdfStoreReader & odfStore)
             if (!cmd)
                 cmd = new QUndoCommand(i18n("Paste Shapes"));
 
-            KoShapeManager *sm = d->canvas->shapeManager();
+            KShapeManager *sm = d->canvas->shapeManager();
             Q_ASSERT(sm);
             bool done = true;
             do {

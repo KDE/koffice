@@ -22,7 +22,7 @@
 
 #include <QtGui>
 #include "KShapeContainer.h"
-#include "KoShapeManager.h"
+#include "KShapeManager.h"
 #include <MockShapes.h>
 
 #include <kcomponentdata.h>
@@ -45,7 +45,7 @@ void TestShapePainting::testPaintShape()
     QCOMPARE(container.isClipped(&shape2), false);
 
     MockCanvas canvas;
-    KoShapeManager manager(&canvas);
+    KShapeManager manager(&canvas);
     manager.addShape(&container);
     QCOMPARE(manager.shapes().count(), 3);
 
@@ -103,7 +103,7 @@ void TestShapePainting::testPaintHiddenShape()
     second.setVisible(false);
 
     MockCanvas canvas;
-    KoShapeManager manager(&canvas);
+    KShapeManager manager(&canvas);
     manager.addShape(&top);
     QCOMPARE(manager.shapes().count(), 5);
 
@@ -160,7 +160,7 @@ void TestShapePainting::testPaintOrder()
     bottom.addShape(&shape4);
 
     MockCanvas canvas;
-    KoShapeManager manager(&canvas);
+    KShapeManager manager(&canvas);
     manager.addShape(&top);
     manager.addShape(&bottom);
     QCOMPARE(manager.shapes().count(), 6);

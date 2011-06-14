@@ -24,7 +24,7 @@
 #include <KChangeTracker.h>
 #include <KPointerEvent.h>
 #include <KSelection.h>
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 #include <KoTextDocument.h>
 #include <KoTextDocumentLayout.h>
 #include <KoTextEditor.h>

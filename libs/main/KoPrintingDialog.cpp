@@ -21,7 +21,7 @@
 
 #include <KoAction.h>
 #include <KoZoomHandler.h>
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 #include <KShape.h>
 #include <KoProgressBar.h>
 #include <KoUpdater.h>
@@ -176,7 +176,7 @@ public:
     KoAction *action;
     KoPrintingDialog *parent;
     volatile bool stop;
-    KoShapeManager *shapeManager;
+    KShapeManager *shapeManager;
     QPainter *painter;
     QPrinter *printer;
     int index; // index in the pages list.
@@ -227,12 +227,12 @@ KoPrintingDialog::~KoPrintingDialog()
     delete d;
 }
 
-void KoPrintingDialog::setShapeManager(KoShapeManager *sm)
+void KoPrintingDialog::setShapeManager(KShapeManager *sm)
 {
     d->shapeManager = sm;
 }
 
-KoShapeManager *KoPrintingDialog::shapeManager() const
+KShapeManager *KoPrintingDialog::shapeManager() const
 {
     return d->shapeManager;
 }

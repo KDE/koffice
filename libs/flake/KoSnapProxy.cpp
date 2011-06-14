@@ -20,7 +20,7 @@
 #include "KoSnapProxy_p.h"
 #include "KoSnapGuide.h"
 #include "KCanvasBase.h"
-#include "KoShapeManager.h"
+#include "KShapeManager.h"
 #include "KPathShape.h"
 #include "KPathPoint.h"
 

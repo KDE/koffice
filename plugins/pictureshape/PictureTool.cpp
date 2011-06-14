@@ -32,7 +32,7 @@
 #include <KCanvasBase.h>
 #include <KImageCollection.h>
 #include <KSelection.h>
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 #include <KPointerEvent.h>
 
 PictureTool::PictureTool( KCanvasBase* canvas )

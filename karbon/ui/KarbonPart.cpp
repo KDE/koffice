@@ -58,7 +58,7 @@
 #include <KoMainWindow.h>
 #include <KCanvasController.h>
 #include <KoToolManager.h>
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 #include <KShapeLayer.h>
 #include <KoShapeRegistry.h>
 #include <KResourceManager.h>

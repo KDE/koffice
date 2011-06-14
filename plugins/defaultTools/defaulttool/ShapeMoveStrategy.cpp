@@ -23,7 +23,7 @@
 #include "SelectionDecorator.h"
 
 #include <KCanvasBase.h>
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 #include <KShapeContainer.h>
 #include <KShapeContainerModel.h>
 #include <KResourceManager.h>

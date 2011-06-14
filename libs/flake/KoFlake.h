@@ -55,7 +55,7 @@ namespace KoFlake
     };
 
     /**
-     * Used to change the behavior of KoShapeManager::shapeAt()
+     * Used to change the behavior of KShapeManager::shapeAt()
      */
     enum ShapeSelection {
         Selected,   ///< return the first selected with the highest z-ordering (i.e. on top).

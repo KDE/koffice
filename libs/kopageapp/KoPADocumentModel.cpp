@@ -23,7 +23,7 @@
 #include "KoPADocument.h"
 #include "KoPAPageBase.h"
 #include <KoShapePainter.h>
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 #include <KoToolManager.h>
 #include <KCanvasBase.h>
 #include <KCanvasController.h>

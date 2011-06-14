@@ -22,7 +22,7 @@
 #include <KarbonDocument.h>
 #include <KoShapePainter.h>
 
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 #include <KShapeBorderBase.h>
 #include <KShapeContainer.h>
 #include <KoToolManager.h>

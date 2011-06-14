@@ -33,8 +33,8 @@
 #include "KColorBackground.h"
 #include "KGradientBackground.h"
 #include "KPatternBackground.h"
-#include "KoShapeManager.h"
-#include "KoShapeManager_p.h"
+#include "KShapeManager.h"
+#include "KShapeManager_p.h"
 #include "KoShapeUserData.h"
 #include "KShapeApplicationData.h"
 #include "KoShapeSavingContext.h"
@@ -106,7 +106,7 @@ KShapePrivate::~KShapePrivate()
     Q_Q(KShape);
     if (parent)
         parent->removeShape(q);
-    foreach(KoShapeManager *manager, shapeManagers) {
+    foreach(KShapeManager *manager, shapeManagers) {
         manager->remove(q);
         manager->removeAdditional(q);
     }
@@ -163,12 +163,12 @@ void KShapePrivate::updateBorder()
                 inner.width() + insets.left + insets.right, insets.bottom));
 }
 
-void KShapePrivate::addShapeManager(KoShapeManager *manager)
+void KShapePrivate::addShapeManager(KShapeManager *manager)
 {
     shapeManagers.insert(manager);
 }
 
-void KShapePrivate::removeShapeManager(KoShapeManager *manager)
+void KShapePrivate::removeShapeManager(KShapeManager *manager)
 {
     shapeManagers.remove(manager);
 }
@@ -188,7 +188,7 @@ QString KShapePrivate::getStyleProperty(const char *property, KShapeLoadingConte
 void KShapePrivate::addConnection(KShapeConnection *connection)
 {
     connections.append(connection);
-    foreach (KoShapeManager *sm, shapeManagers)
+    foreach (KShapeManager *sm, shapeManagers)
         sm->priv()->addShapeConnection(connection);
 }
 
@@ -547,7 +547,7 @@ void KShape::update() const
     Q_D(const KShape);
     if (!d->shapeManagers.empty()) {
         QRectF rect(boundingRect());
-        foreach(KoShapeManager *manager, d->shapeManagers)
+        foreach(KShapeManager *manager, d->shapeManagers)
             manager->priv()->update(rect, this, true);
 
         // also ask update for children which inherit transform
@@ -567,7 +567,7 @@ void KShape::update(const QRectF &section) const
     Q_D(const KShape);
     if (!d->shapeManagers.empty() && isVisible()) {
         QRectF rect(absoluteTransformation(0).mapRect(section));
-        foreach(KoShapeManager *manager, d->shapeManagers) {
+        foreach(KShapeManager *manager, d->shapeManagers) {
             manager->priv()->update(rect);
         }
     }
@@ -632,7 +632,7 @@ void KShape::copySettings(const KShape *shape)
 void KShape::notifyChanged()
 {
     Q_D(KShape);
-    foreach(KoShapeManager * manager, d->shapeManagers) {
+    foreach(KShapeManager * manager, d->shapeManagers) {
         manager->notifyShapeChanged(this);
     }
 }
@@ -1003,7 +1003,7 @@ void KShape::waitUntilReady(const KoViewConverter &converter, bool asynchronous)
 void KShape::deleteLater()
 {
     Q_D(KShape);
-    foreach(KoShapeManager *manager, d->shapeManagers)
+    foreach(KShapeManager *manager, d->shapeManagers)
         manager->remove(this);
     d->shapeManagers.clear();
     new ShapeDeleter(this);

@@ -24,7 +24,7 @@
 class KoShapeManagerPrivate
 {
 public:
-    KoShapeManagerPrivate(KoShapeManager *shapeManager, KCanvasBase *c);
+    KoShapeManagerPrivate(KShapeManager *shapeManager, KCanvasBase *c);
     ~KoShapeManagerPrivate();
 
     /**
@@ -104,5 +104,5 @@ public:
     QSet<KShape *> aggregate4update;
     QHash<KShape*, int> shapeIndexesBeforeUpdate;
     KoShapeManagerPaintingStrategy *strategy;
-    KoShapeManager *q;
+    KShapeManager *q;
 };

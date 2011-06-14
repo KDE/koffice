@@ -34,7 +34,7 @@
 #include <KCanvasBase.h>
 #include <KSelection.h>
 #include <KShapeController.h>
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 #include <KEventAction.h>
 #include <KEventActionFactoryBase.h>
 #include <KEventActionRegistry.h>

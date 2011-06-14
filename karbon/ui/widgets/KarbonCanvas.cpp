@@ -35,7 +35,7 @@
 #include <KarbonOutlinePaintingStrategy.h>
 
 #include <KoZoomHandler.h>
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 #include <KoToolProxy.h>
 #include <KoShapeManagerPaintingStrategy.h>
 #include <KCanvasController.h>
@@ -69,7 +69,7 @@ public:
         delete shapeManager;
     }
 
-    KoShapeManager* shapeManager;
+    KShapeManager* shapeManager;
     KoZoomHandler zoomHandler;
 
     KoToolProxy *toolProxy;
@@ -89,7 +89,7 @@ KarbonCanvas::KarbonCanvas(KarbonPart *p)
     d->part = p;
     d->document = &p->document();
     d->toolProxy = new KoToolProxy(this);
-    d->shapeManager = new KoShapeManager(this, d->document->shapes());
+    d->shapeManager = new KShapeManager(this, d->document->shapes());
     connect(d->shapeManager, SIGNAL(selectionChanged()), this, SLOT(updateSizeAndOffset()));
 
     setBackgroundRole(QPalette::Base);
@@ -106,7 +106,7 @@ KarbonCanvas::~KarbonCanvas()
     delete d;
 }
 
-KoShapeManager * KarbonCanvas::shapeManager() const
+KShapeManager * KarbonCanvas::shapeManager() const
 {
     return d->shapeManager;
 }

@@ -23,7 +23,7 @@
 #include <QList>
 #include "komain_export.h"
 
-class KoShapeManager;
+class KShapeManager;
 class KShape;
 class KoPrintingDialogPrivate;
 
@@ -74,7 +74,7 @@ public:
      * Set the shape manager that should be used to print.
      * @param sm the shapeManager used for the next page(s)
      */
-    void setShapeManager(KoShapeManager *sm);
+    void setShapeManager(KShapeManager *sm);
     /**
      * Set a list of all the pages that should be used to loop over and print.
      * Note that any calls made to this method after printing started are ignored.
@@ -121,7 +121,7 @@ protected:
      * Retuns the shapeManager as it has been set on the setShapeManager()
      * @see setShapeManager
      */
-    KoShapeManager *shapeManager() const;
+    KShapeManager *shapeManager() const;
 
     /**
      * Return the painter that will be used to print the shape data.

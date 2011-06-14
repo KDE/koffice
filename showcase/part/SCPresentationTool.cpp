@@ -34,7 +34,7 @@
 #include <qurl.h>
 
 #include <KShape.h>
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 #include <KPointerEvent.h>
 #include <KEventAction.h>
 #include <KoPACanvas.h>

@@ -48,7 +48,7 @@
 #include <KShapeController.h>
 #include <KoColor.h>
 #include <KSelection.h>
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 #include <KPointerEvent.h>
 #include <KoVariable.h>
 #include <KColorBackground.h>

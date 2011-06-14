@@ -21,7 +21,7 @@
 #include "ConnectionChangeStrategy.h"
 
 #include <KShapeConnection.h>
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 #include <KShape.h>
 #include <KoToolBase.h>
 #include <KCanvasBase.h>

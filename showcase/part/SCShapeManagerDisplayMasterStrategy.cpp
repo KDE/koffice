@@ -23,7 +23,7 @@
 #include <KoPAPageBase.h>
 #include "SCPageSelectStrategyBase.h"
 
-SCShapeManagerDisplayMasterStrategy::SCShapeManagerDisplayMasterStrategy(KoShapeManager * shapeManager, SCPageSelectStrategyBase * strategy)
+SCShapeManagerDisplayMasterStrategy::SCShapeManagerDisplayMasterStrategy(KShapeManager * shapeManager, SCPageSelectStrategyBase * strategy)
 : KoShapeManagerPaintingStrategy(shapeManager)
 , m_strategy(strategy)
 {

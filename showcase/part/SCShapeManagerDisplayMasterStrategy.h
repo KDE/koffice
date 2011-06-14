@@ -31,7 +31,7 @@ public:
     /**
      * 
      */
-    SCShapeManagerDisplayMasterStrategy(KoShapeManager * shapeManager, SCPageSelectStrategyBase * strategy);
+    SCShapeManagerDisplayMasterStrategy(KShapeManager * shapeManager, SCPageSelectStrategyBase * strategy);
     virtual ~SCShapeManagerDisplayMasterStrategy();
 
     /// reimplemented

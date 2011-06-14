@@ -71,7 +71,7 @@ public:
     /// reimplemented method from superclass
     virtual void addCommand(QUndoCommand *command);
     /// reimplemented method from superclass
-    virtual KoShapeManager *shapeManager() const {
+    virtual KShapeManager *shapeManager() const {
         return m_shapeManager;
     }
     /// reimplemented method from superclass
@@ -177,7 +177,7 @@ private:
                          int inwardsX, int inwardsY) const;
 
     KWDocument *m_document;
-    KoShapeManager *m_shapeManager;
+    KShapeManager *m_shapeManager;
     KoToolProxy * m_toolProxy;
     KWView *m_view;
     KWViewMode *m_viewMode;

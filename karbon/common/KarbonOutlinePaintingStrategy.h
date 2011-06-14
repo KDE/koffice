@@ -23,13 +23,13 @@
 #include "karboncommon_export.h"
 #include <KoShapeManagerPaintingStrategy.h>
 
-class KoShapeManager;
+class KShapeManager;
 class KLineBorder;
 
 class KARBONCOMMON_EXPORT KarbonOutlinePaintingStrategy : public KoShapeManagerPaintingStrategy
 {
 public:
-    KarbonOutlinePaintingStrategy(KoShapeManager * shapeManager);
+    KarbonOutlinePaintingStrategy(KShapeManager * shapeManager);
     ~KarbonOutlinePaintingStrategy();
     /// reimplemented from KoShapeManagerPaintingStrategy
     virtual void paint(KShape * shape, QPainter &painter, const KoViewConverter &converter, bool forPrint);

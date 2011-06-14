@@ -42,7 +42,7 @@
 #include <KoStandardAction.h>
 #include <KoToolBoxFactory.h>
 #include <KShapeController.h>
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 #include <KoZoomAction.h>
 #include <KoZoomController.h>
 #include <KInlineTextObjectManager.h>
@@ -594,13 +594,13 @@ void KoPAView::setMasterMode(bool master)
     d->actionDeletePage->setEnabled(pages.size() > 1);
 }
 
-KoShapeManager* KoPAView::shapeManager() const
+KShapeManager* KoPAView::shapeManager() const
 {
     return d->canvas->shapeManager();
 }
 
 
-KoShapeManager* KoPAView::masterShapeManager() const
+KShapeManager* KoPAView::masterShapeManager() const
 {
     return d->canvas->masterShapeManager();
 }
@@ -657,7 +657,7 @@ void KoPAView::setActivePage(KoPAPageBase* page)
     d->activePage = page;
     shapeManager()->addAdditional(d->activePage);
     QList<KShape*> shapes = page->shapes();
-    shapeManager()->setShapes(shapes, KoShapeManager::AddWithoutRepaint);
+    shapeManager()->setShapes(shapes, KShapeManager::AddWithoutRepaint);
     //Make the top most layer active
     if (!shapes.isEmpty()) {
         KShapeLayer* layer = dynamic_cast<KShapeLayer*>(shapes.last());
@@ -669,7 +669,7 @@ void KoPAView::setActivePage(KoPAPageBase* page)
     if (paPage) {
         KoPAMasterPage * masterPage = paPage->masterPage();
         QList<KShape*> masterShapes = masterPage->shapes();
-        masterShapeManager()->setShapes(masterShapes, KoShapeManager::AddWithoutRepaint);
+        masterShapeManager()->setShapes(masterShapes, KShapeManager::AddWithoutRepaint);
         //Make the top most layer active
         if (!masterShapes.isEmpty()) {
             KShapeLayer* layer = dynamic_cast<KShapeLayer*>(masterShapes.last());

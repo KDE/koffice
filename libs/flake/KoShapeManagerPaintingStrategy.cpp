@@ -21,20 +21,20 @@
 #include "KoShapeManagerPaintingStrategy.h"
 
 #include "KShape.h"
-#include "KoShapeManager.h"
+#include "KShapeManager.h"
 #include <QPainter>
 
 class KoShapeManagerPaintingStrategy::Private
 {
 public:
-    Private(KoShapeManager * manager)
+    Private(KShapeManager * manager)
     : shapeManager(manager)
     {}
 
-    KoShapeManager * shapeManager;
+    KShapeManager * shapeManager;
 };
 
-KoShapeManagerPaintingStrategy::KoShapeManagerPaintingStrategy(KoShapeManager * shapeManager)
+KoShapeManagerPaintingStrategy::KoShapeManagerPaintingStrategy(KShapeManager * shapeManager)
 : d(new KoShapeManagerPaintingStrategy::Private(shapeManager))
 {
 }
@@ -60,12 +60,12 @@ void KoShapeManagerPaintingStrategy::adapt(KShape * shape, QRectF & rect)
     Q_UNUSED(rect);
 }
 
-void KoShapeManagerPaintingStrategy::setShapeManager(KoShapeManager * shapeManager)
+void KoShapeManagerPaintingStrategy::setShapeManager(KShapeManager * shapeManager)
 {
     d->shapeManager = shapeManager;
 }
 
-KoShapeManager * KoShapeManagerPaintingStrategy::shapeManager()
+KShapeManager * KoShapeManagerPaintingStrategy::shapeManager()
 {
     return d->shapeManager;
 }

@@ -23,14 +23,14 @@
 
 #include "flake_export.h"
 
-class KoShapeManager;
+class KShapeManager;
 class KShape;
 class KoViewConverter;
 class QPainter;
 class QRectF;
 
 /**
- * This implements the painting strategy for the KoShapeManager
+ * This implements the painting strategy for the KShapeManager
  *
  * This is done to make it possible to have e.g. animations in kpresenter.
  *
@@ -39,7 +39,7 @@ class QRectF;
 class FLAKE_EXPORT KoShapeManagerPaintingStrategy
 {
 public:
-    KoShapeManagerPaintingStrategy(KoShapeManager *shapeManager);
+    KoShapeManagerPaintingStrategy(KShapeManager *shapeManager);
     virtual ~KoShapeManagerPaintingStrategy();
 
     /**
@@ -67,10 +67,10 @@ public:
      *
      * @param shapeManager The shape manager to use in the painting startegy
      */
-    void setShapeManager(KoShapeManager *shapeManager);
+    void setShapeManager(KShapeManager *shapeManager);
 
 protected:
-    KoShapeManager *shapeManager();
+    KShapeManager *shapeManager();
 
 private:
     class Private;

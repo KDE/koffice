@@ -34,7 +34,7 @@ public:
     : SCShapeAnimationOld(shape, step, Appear)
     {}
 
-    SCAnimationData * animationData(KCanvasBase * canvas, KoShapeManager * shapeManager, const QRectF &pageRect)
+    SCAnimationData * animationData(KCanvasBase * canvas, KShapeManager * shapeManager, const QRectF &pageRect)
     {
         Q_UNUSED(canvas);
         Q_UNUSED(shapeManager);
@@ -75,7 +75,7 @@ public:
     : SCShapeAnimationOld(shape, step, Disappear)
     {}
 
-    SCAnimationData * animationData(KCanvasBase * canvas, KoShapeManager * shapeManager, const QRectF &pageRect)
+    SCAnimationData * animationData(KCanvasBase * canvas, KShapeManager * shapeManager, const QRectF &pageRect)
     {
         Q_UNUSED(canvas);
         Q_UNUSED(shapeManager);

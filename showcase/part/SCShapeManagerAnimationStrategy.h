@@ -28,7 +28,7 @@ class SCPageSelectStrategyBase;
 class SCShapeManagerAnimationStrategy : public KoShapeManagerPaintingStrategy
 {
 public:
-    SCShapeManagerAnimationStrategy(KoShapeManager * shapeManager, SCAnimationCache * animationCache,
+    SCShapeManagerAnimationStrategy(KShapeManager * shapeManager, SCAnimationCache * animationCache,
                                       SCPageSelectStrategyBase * strategy);
     virtual ~SCShapeManagerAnimationStrategy();
 

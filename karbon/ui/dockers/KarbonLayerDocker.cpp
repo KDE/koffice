@@ -26,7 +26,7 @@
 #include <KarbonPart.h>
 #include <KarbonLayerReorderCommand.h>
 
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 #include <KShapeBorderBase.h>
 #include <KShapeContainer.h>
 #include <KoToolManager.h>

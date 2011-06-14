@@ -28,7 +28,7 @@
 #include <QList>
 
 class KShape;
-class KoShapeManager;
+class KShapeManager;
 class KoShapeReorderCommandPrivate;
 
 /// This command allows you to change the zIndex of a number of shapes.
@@ -62,7 +62,7 @@ public:
      * @param parent the parent command for grouping purposes.
      * @return command for reording the shapes or 0 if no reordering happend
      */
-    static KoShapeReorderCommand *createCommand(const QList<KShape*> &shapes, KoShapeManager *manager,
+    static KoShapeReorderCommand *createCommand(const QList<KShape*> &shapes, KShapeManager *manager,
             MoveShapeType move, QUndoCommand *parent = 0);
 
     /// redo the command

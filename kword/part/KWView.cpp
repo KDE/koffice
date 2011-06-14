@@ -70,7 +70,7 @@
 #include <KShapeFactoryBase.h>
 #include <KShapeGroupCommand.h>
 #include <KShape.h>
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 #include <KoShapeRegistry.h>
 #include <KoStandardAction.h>
 #include <KoTextAnchor.h>

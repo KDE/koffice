@@ -28,7 +28,7 @@
 #include <KPathPoint.h>
 #include <KCanvasBase.h>
 #include <KShapeController.h>
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 #include <KSelection.h>
 #include <KarbonCurveFit.h>
 #include <KColorBackground.h>
@@ -120,7 +120,7 @@ void KarbonCalligraphyTool::mouseReleaseEvent(KPointerEvent *event)
     if (m_pointCount == 0) {
         // handle click: select shape (if any)
         if (event->point == m_lastPoint) {
-            KoShapeManager *shapeManager = canvas()->shapeManager();
+            KShapeManager *shapeManager = canvas()->shapeManager();
             KShape *selectedShape = shapeManager->shapeAt(event->point);
             if (selectedShape != 0) {
                 shapeManager->selection()->deselectAll();

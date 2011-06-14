@@ -91,7 +91,7 @@ public:
     /// reimplemented method from KCanvasBase
     virtual void addCommand(QUndoCommand* command);
     /// reimplemented method from KCanvasBase
-    virtual KoShapeManager* shapeManager() const;
+    virtual KShapeManager* shapeManager() const;
     /// reimplemented method from KCanvasBase
     virtual void updateCanvas(const QRectF& rc);
     /// reimplemented method from KCanvasBase
@@ -211,7 +211,7 @@ private:
     QPointF m_offset;
 
     // flake
-    KoShapeManager *m_shapeManager;
+    KShapeManager *m_shapeManager;
     KoToolProxy *m_toolProxy;
 };
 

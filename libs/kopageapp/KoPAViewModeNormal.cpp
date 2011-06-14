@@ -24,7 +24,7 @@
 #include <QPainter>
 
 #include <KoToolProxy.h>
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 #include "KoPACanvas.h"
 #include "KoPADocument.h"
 #include "KoPAPage.h"

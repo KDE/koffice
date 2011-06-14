@@ -25,7 +25,7 @@
 #include "KPathShape_p.h"
 #include "KPathToolHandle_p.h"
 #include "KCanvasBase.h"
-#include "KoShapeManager.h"
+#include "KShapeManager.h"
 #include "KResourceManager.h"
 #include "KoViewConverter.h"
 #include "KSelection.h"

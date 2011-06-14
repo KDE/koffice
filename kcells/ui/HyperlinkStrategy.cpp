@@ -25,7 +25,7 @@
 
 #include <KCanvasBase.h>
 #include <KSelection.h>
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 #include <KoToolBase.h>
 
 #include <KMessageBox>

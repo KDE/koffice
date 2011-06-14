@@ -27,7 +27,7 @@
 #include "KWPage.h"
 
 // koffice libs includes
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 #include <KPointerEvent.h>
 #include <KoToolManager.h>
 #include <KCanvasController.h>
@@ -51,7 +51,7 @@ KWCanvas::KWCanvas(const QString &viewMode, KWDocument *document, KWView *view, 
         m_view(view),
         m_viewMode(0)
 {
-    m_shapeManager = new KoShapeManager(this);
+    m_shapeManager = new KShapeManager(this);
     m_viewMode = KWViewMode::create(viewMode, this);
     setFocusPolicy(Qt::StrongFocus);
 

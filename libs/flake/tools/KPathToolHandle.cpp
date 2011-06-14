@@ -30,7 +30,7 @@
 #include "KParameterShape.h"
 #include "KCanvasBase.h"
 #include "KResourceManager.h"
-#include "KoShapeManager.h"
+#include "KShapeManager.h"
 #include "KoViewConverter.h"
 #include "KPointerEvent.h"
 #include <QtGui/QPainter>

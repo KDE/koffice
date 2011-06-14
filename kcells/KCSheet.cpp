@@ -49,7 +49,7 @@
 #include <KShape.h>
 #include <KResourceManager.h>
 #include <KShapeLoadingContext.h>
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 #include <KoShapeRegistry.h>
 #include <KoShapeSavingContext.h>
 #include <KOdfStyleStack.h>

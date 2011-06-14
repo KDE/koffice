@@ -42,7 +42,7 @@ class QPainterPath;
 class KShapeContainer;
 class KShapeBorderBase;
 class KShapeBackground;
-class KoShapeManager;
+class KShapeManager;
 class KoShapeUserData;
 class KoViewConverter;
 class KShapeApplicationData;

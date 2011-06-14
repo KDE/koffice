@@ -24,7 +24,7 @@
 #include "dialogs/KWStatistics.h"
 
 #include <KoToolManager.h>
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 #include <KResourceManager.h>
 
 #include <klocale.h>

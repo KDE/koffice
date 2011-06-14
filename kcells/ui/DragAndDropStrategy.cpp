@@ -28,7 +28,7 @@
 #include <KoToolBase.h>
 #include <KShape.h>
 #include <KSelection.h>
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 
 #include <QBuffer>
 #include <QDomDocument>

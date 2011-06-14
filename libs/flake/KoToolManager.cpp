@@ -32,7 +32,7 @@
 #include "KShape.h"
 #include "KShapeLayer.h"
 #include "KoShapeRegistry.h"
-#include "KoShapeManager.h"
+#include "KShapeManager.h"
 #include "KCanvasBase.h"
 #include "KPointerEvent.h"
 #include "tools/KCreateShapesTool.h"

@@ -44,7 +44,7 @@
 #include <kapplication.h>
 #include <kdebug.h>
 #include <KOdfPageLayoutData.h>
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 #include <KoShapeManagerPaintingStrategy.h>
 #include <KoViewConverter.h>
 #include <KoPAViewMode.h>
@@ -253,7 +253,7 @@ void SCAnimationDirector::updateActivePage(KoPAPageBase * page)
     }
     else {
         QList<KShape*> shapes = page->shapes();
-        m_canvas->shapeManager()->setShapes(shapes, KoShapeManager::AddWithoutRepaint);
+        m_canvas->shapeManager()->setShapes(shapes, KShapeManager::AddWithoutRepaint);
         //Make the top most layer active
         if (!shapes.isEmpty()) {
             KShapeLayer* layer = dynamic_cast<KShapeLayer*>(shapes.last());
@@ -266,7 +266,7 @@ void SCAnimationDirector::updateActivePage(KoPAPageBase * page)
         Q_ASSERT(paPage);
         KoPAMasterPage * masterPage = paPage->masterPage();
         QList<KShape*> masterShapes = masterPage->shapes();
-        m_canvas->masterShapeManager()->setShapes(masterShapes, KoShapeManager::AddWithoutRepaint);
+        m_canvas->masterShapeManager()->setShapes(masterShapes, KShapeManager::AddWithoutRepaint);
         // Make the top most layer active
         if (!masterShapes.isEmpty()) {
             KShapeLayer* layer = dynamic_cast<KShapeLayer*>(masterShapes.last());

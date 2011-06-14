@@ -23,7 +23,7 @@
 #include <QRectF>
 #include <QObject>
 
-class KoShapeManager;
+class KShapeManager;
 class KShape;
 class FolderShape;
 class ClipboardProxyShape;
@@ -74,14 +74,14 @@ public:
     void setClipboardShape(ClipboardProxyShape *shape);
 
     QRectF loadShapeTypes();
-    KoShapeManager *shapeManager() const { return m_shapeManager; }
+    KShapeManager *shapeManager() const { return m_shapeManager; }
 
     static KShape *createShapeFromPaste(const QByteArray &bytes);
 
     KShapeControllerBase *shapeController();
 
 private:
-    KoShapeManager *m_shapeManager;
+    KShapeManager *m_shapeManager;
     Canvas *m_canvas;
 };
 

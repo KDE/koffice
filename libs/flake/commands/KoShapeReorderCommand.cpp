@@ -19,7 +19,7 @@
 
 #include "KoShapeReorderCommand.h"
 #include "KShape.h"
-#include "KoShapeManager.h"
+#include "KShapeManager.h"
 #include "KShapeContainer.h"
 
 #include <klocale.h>
@@ -76,7 +76,7 @@ void KoShapeReorderCommand::undo()
     }
 }
 
-static void prepare(KShape *s, QMap<KShape*, QList<KShape*> > &newOrder, KoShapeManager *manager, KoShapeReorderCommand::MoveShapeType move)
+static void prepare(KShape *s, QMap<KShape*, QList<KShape*> > &newOrder, KShapeManager *manager, KoShapeReorderCommand::MoveShapeType move)
 {
     KShapeContainer *parent = s->parent();
     QMap<KShape*, QList<KShape*> >::iterator it(newOrder.find(parent));
@@ -122,7 +122,7 @@ static void prepare(KShape *s, QMap<KShape*, QList<KShape*> > &newOrder, KoShape
 }
 
 // static
-KoShapeReorderCommand *KoShapeReorderCommand::createCommand(const QList<KShape*> &shapes, KoShapeManager *manager, MoveShapeType move, QUndoCommand *parent)
+KoShapeReorderCommand *KoShapeReorderCommand::createCommand(const QList<KShape*> &shapes, KShapeManager *manager, MoveShapeType move, QUndoCommand *parent)
 {
     QList<int> newIndexes;
     QList<KShape*> changedShapes;

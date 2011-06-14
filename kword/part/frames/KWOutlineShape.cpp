@@ -22,7 +22,7 @@
 #include <KCanvasBase.h>
 #include <KSelection.h>
 #include <KShapeGroup.h>
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 #include <KoViewConverter.h>
 
 #include <KDebug>

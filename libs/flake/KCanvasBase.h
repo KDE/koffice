@@ -38,7 +38,7 @@ class QGraphicsWidget;
 class QUndoCommand;
 
 class KResourceManager;
-class KoShapeManager;
+class KShapeManager;
 class KoToolProxy;
 class KoViewConverter;
 class KShapeController;
@@ -104,7 +104,7 @@ public:
      * return the current shapeManager
      * @return the current shapeManager
      */
-    virtual KoShapeManager *shapeManager() const = 0;
+    virtual KShapeManager *shapeManager() const = 0;
 
     /**
      * Tell the canvas to repaint the specified rectangle. The coordinates

@@ -26,7 +26,7 @@
 #include "KShapeFactoryBase.h" // for the SHAPE mimetypes
 #include "KoShapeRegistry.h"
 #include "KShapeController.h"
-#include "KoShapeManager.h"
+#include "KShapeManager.h"
 #include "KSelection.h"
 #include "KCanvasBase.h"
 #include "KShapeLayer.h"
@@ -159,7 +159,7 @@ void Viewport::handleDragEnterEvent(QDragEnterEvent *event)
         m_parent->canvas()->shapeManager()->addShape(m_draggedShape);
     }
     else if (data->hasFormat(KOdf::mimeType(KOdf::TextDocument))) {
-        KoShapeManager *sm = m_parent->canvas()->shapeManager();
+        KShapeManager *sm = m_parent->canvas()->shapeManager();
         KoShapePaste paste(m_parent->canvas(), sm->selection()->activeLayer());
         if (paste.paste(KOdf::TextDocument, data)) {
             QList<KShape *> shapes = paste.pastedShapes();

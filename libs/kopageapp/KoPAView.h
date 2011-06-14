@@ -36,7 +36,7 @@ class KoPAPageBase;
 class KoPAViewMode;
 class KoPADocumentStructureDocker;
 class KoRuler;
-class KoShapeManager;
+class KShapeManager;
 class KoZoomAction;
 class KoZoomController;
 class KToggleAction;
@@ -87,10 +87,10 @@ public:
     void navigatePage(KoPageApp::PageNavigation pageNavigation);
 
     /// @return the shape manager used for this view
-    KoShapeManager* shapeManager() const;
+    KShapeManager* shapeManager() const;
 
     /// @return the master shape manager used for this view
-    KoShapeManager* masterShapeManager() const;
+    KShapeManager* masterShapeManager() const;
 
     /**
      * @brief Enables/Disables the given actions

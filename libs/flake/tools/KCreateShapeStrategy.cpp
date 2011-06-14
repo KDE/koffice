@@ -23,7 +23,7 @@
 #include "KCreateShapesTool.h"
 #include "KShape.h"
 #include "KoShapeRegistry.h"
-#include "KoShapeManager.h"
+#include "KShapeManager.h"
 #include "KCanvasBase.h"
 #include "KSelection.h"
 #include "KShapeFactoryBase.h"

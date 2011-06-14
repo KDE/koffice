@@ -52,8 +52,8 @@ public:
     /// reimplemented method
     virtual void addCommand(QUndoCommand *command);
     /// reimplemented method
-    virtual KoShapeManager * shapeManager() const;
-    KoShapeManager * masterShapeManager() const;
+    virtual KShapeManager * shapeManager() const;
+    KShapeManager * masterShapeManager() const;
     /// reimplemented from KCanvasBase
     virtual KGuidesData * guidesData();
 

@@ -20,7 +20,7 @@
 #include "FolderShape.h"
 #include "Canvas.h"
 
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 #include <KSelection.h>
 #include <KPointerEvent.h>
 

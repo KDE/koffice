@@ -29,7 +29,7 @@
 #include <KoTextEditor.h>
 #include <KShapeController.h>
 #include <KoToolProxy.h>
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 #include <KSelection.h>
 
 #include <klocale.h>

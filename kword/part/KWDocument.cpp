@@ -45,7 +45,7 @@
 #include "commands/KWPageRemoveCommand.h"
 
 // koffice libs includes
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 #include <KoTextDocument.h>
 #include <KoTextAnchor.h>
 #include <KShapeContainer.h>
@@ -251,14 +251,14 @@ KoView *KWDocument::createViewInstance(QWidget *parent)
 {
     KWView *view = new KWView(m_viewMode, this, parent);
     if (m_magicCurtain)
-        view->kwcanvas()->shapeManager()->addShape(m_magicCurtain, KoShapeManager::AddWithoutRepaint);
+        view->kwcanvas()->shapeManager()->addShape(m_magicCurtain, KShapeManager::AddWithoutRepaint);
 
     bool switchToolCalled = false;
     foreach (KWFrameSet *fs, m_frameSets) {
         if (fs->frameCount() == 0)
             continue;
         foreach (KWFrame *frame, fs->frames())
-            view->kwcanvas()->shapeManager()->addShape(frame->shape(), KoShapeManager::AddWithoutRepaint);
+            view->kwcanvas()->shapeManager()->addShape(frame->shape(), KShapeManager::AddWithoutRepaint);
         if (switchToolCalled)
             continue;
         KWTextFrameSet *tfs = dynamic_cast<KWTextFrameSet*>(fs);

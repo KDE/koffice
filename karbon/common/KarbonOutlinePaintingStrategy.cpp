@@ -18,7 +18,7 @@
  */
 
 #include "KarbonOutlinePaintingStrategy.h"
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 #include <KShape.h>
 #include <KLineBorder.h>
 
@@ -41,7 +41,7 @@ private:
     QPen m_pen;
 };
 
-KarbonOutlinePaintingStrategy::KarbonOutlinePaintingStrategy(KoShapeManager * shapeManager)
+KarbonOutlinePaintingStrategy::KarbonOutlinePaintingStrategy(KShapeManager * shapeManager)
         : KoShapeManagerPaintingStrategy(shapeManager), m_border(new OutlineStroke())
 {
     Q_ASSERT(shapeManager);

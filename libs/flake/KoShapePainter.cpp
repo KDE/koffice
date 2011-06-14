@@ -22,7 +22,7 @@
 #include "KoShapePainter.h"
 
 #include "KCanvasBase.h"
-#include "KoShapeManager.h"
+#include "KShapeManager.h"
 #include "KoShapeManagerPaintingStrategy.h"
 #include "KShape.h"
 #include "KoViewConverter.h"
@@ -39,7 +39,7 @@ class SimpleCanvas : public KCanvasBase
 {
 public:
     SimpleCanvas()
-        : KCanvasBase(0), m_shapeManager(new KoShapeManager(this))
+        : KCanvasBase(0), m_shapeManager(new KShapeManager(this))
     {
     }
 
@@ -65,7 +65,7 @@ public:
     {
     }
 
-    virtual KoShapeManager *shapeManager() const
+    virtual KShapeManager *shapeManager() const
     {
         return m_shapeManager;
     }
@@ -102,7 +102,7 @@ public:
     virtual void updateInputMethodInfo() {}
 
 private:
-    KoShapeManager *m_shapeManager;
+    KShapeManager *m_shapeManager;
 };
 
 class KoShapePainter::Private
@@ -133,7 +133,7 @@ KoShapePainter::~KoShapePainter()
 
 void KoShapePainter::setShapes(const QList<KShape*> &shapes)
 {
-    d->canvas->shapeManager()->setShapes(shapes, KoShapeManager::AddWithoutRepaint);
+    d->canvas->shapeManager()->setShapes(shapes, KShapeManager::AddWithoutRepaint);
 }
 
 void KoShapePainter::paint(QPainter &painter, KoViewConverter &converter)

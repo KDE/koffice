@@ -28,7 +28,7 @@
 #include "SelectStrategy.h"
 #include "ShapeSelector.h"
 
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 #include <KoShapeRegistry.h>
 #include <KPointerEvent.h>
 #include <KSelection.h>
@@ -380,7 +380,7 @@ void Canvas::focusChanged(QWidget *old, QWidget *now)
 }
 
 // getters
-KoShapeManager * Canvas::shapeManager() const
+KShapeManager * Canvas::shapeManager() const
 {
     return itemStore()->shapeManager();
 }

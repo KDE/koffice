@@ -72,7 +72,7 @@
 #include <KoToolManager.h>
 #include <KoStandardAction.h>
 #include <KoToolProxy.h>
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 #include <KShapeController.h>
 #include <KShapeContainer.h>
 #include <KShapeGroup.h>

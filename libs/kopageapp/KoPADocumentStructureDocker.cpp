@@ -27,7 +27,7 @@
 #include "KoPAView.h"
 #include "commands/KoPAPageDeleteCommand.h"
 
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 #include <KoToolManager.h>
 #include <KCanvasController.h>
 #include <KSelection.h>
@@ -676,7 +676,7 @@ void KoPADocumentStructureDocker::editPaste()
     if (data->hasFormat(KOdf::mimeType(KOdf::TextDocument))) {
         // Paste Shapes or Layers
         KCanvasBase* canvas = KoToolManager::instance()->activeCanvasController()->canvas();
-        KoShapeManager * shapeManager = canvas->shapeManager();
+        KShapeManager * shapeManager = canvas->shapeManager();
         KoShapePaste paste(canvas, shapeManager->selection()->activeLayer());
         paste.paste(KOdf::TextDocument, data);
 

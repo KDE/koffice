@@ -41,7 +41,7 @@
 #include "KCanvasBase.h"
 #include "KParameterShape.h"
 #include "KoViewConverter.h"
-#include "KoShapeManager.h"
+#include "KShapeManager.h"
 #include "KResourceManager.h"
 #include "KoSnapStrategy_p.h"
 #include "KoToolBase_p.h"

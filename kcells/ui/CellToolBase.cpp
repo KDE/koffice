@@ -114,7 +114,7 @@
 #include <KPointerEvent.h>
 #include <KSelection.h>
 #include <KShape.h>
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 #include <KOdfStore.h>
 #include <KoViewConverter.h>
 #include <KXmlReader.h>

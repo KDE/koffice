@@ -25,7 +25,7 @@
 
 #include <KCanvasBase.h>
 #include <KSelection.h>
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 #include <KPointerEvent.h>
 #include <KPathShape.h>
 #include <KShapeController.h>
@@ -185,7 +185,7 @@ ArtisticTextTool::ArtisticTextTool(KCanvasBase *canvas)
     m_convertText->setEnabled( false );
     connect( m_convertText, SIGNAL(triggered()), this, SLOT(convertText()) );
 
-    KoShapeManager *manager = canvas->shapeManager();
+    KShapeManager *manager = canvas->shapeManager();
     connect( manager, SIGNAL(selectionContentChanged()), this, SLOT(textChanged()));
 
     setTextMode(true);

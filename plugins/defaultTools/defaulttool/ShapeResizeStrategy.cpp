@@ -21,7 +21,7 @@
 #include "ShapeResizeStrategy.h"
 #include "SelectionDecorator.h"
 
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 #include <KPointerEvent.h>
 #include <KCanvasBase.h>
 #include <KResourceManager.h>

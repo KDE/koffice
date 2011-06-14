@@ -26,7 +26,7 @@
 #include <KInteractionTool.h>
 #include <KCanvasBase.h>
 #include <KResourceManager.h>
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 #include <KSelection.h>
 #include <commands/KoShapeMoveCommand.h>
 #include <commands/KoShapeSizeCommand.h>
@@ -70,7 +70,7 @@ DefaultToolWidget::DefaultToolWidget( KInteractionTool* tool,
     KSelection * selection = m_tool->canvas()->shapeManager()->selection();
     connect( selection, SIGNAL( selectionChanged() ), this, SLOT( updatePosition() ) );
     connect( selection, SIGNAL( selectionChanged() ), this, SLOT( updateSize() ) );
-    KoShapeManager * manager = m_tool->canvas()->shapeManager();
+    KShapeManager * manager = m_tool->canvas()->shapeManager();
     connect( manager, SIGNAL( selectionContentChanged() ), this, SLOT( updatePosition() ) );
     connect( manager, SIGNAL( selectionContentChanged() ), this, SLOT( updateSize() ) );
 

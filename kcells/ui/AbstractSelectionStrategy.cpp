@@ -27,7 +27,7 @@
 
 #include <KCanvasBase.h>
 #include <KSelection.h>
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 
 class AbstractSelectionStrategy::Private
 {

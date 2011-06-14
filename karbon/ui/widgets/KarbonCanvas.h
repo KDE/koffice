@@ -42,7 +42,7 @@
 
 class KarbonPart;
 class KoViewConverter;
-class KoShapeManager;
+class KShapeManager;
 class KoToolProxy;
 class QRectF;
 class QPainter;
@@ -68,7 +68,7 @@ public:
     /// reimplemented from KCanvasBase
     void addCommand(QUndoCommand *command);
     /// reimplemented from KCanvasBase
-    KoShapeManager *shapeManager() const;
+    KShapeManager *shapeManager() const;
     /// reimplemented from KCanvasBase
     const KoViewConverter *viewConverter() const;
     /// reimplemented from KCanvasBase

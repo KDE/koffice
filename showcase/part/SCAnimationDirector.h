@@ -29,7 +29,7 @@ class QPainter;
 class QPaintEvent;
 class KoViewConverter;
 class KShape;
-class KoShapeManager;
+class KShapeManager;
 class KoPACanvas;
 class KoPAPageBase;
 class KoPAView;

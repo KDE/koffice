@@ -32,7 +32,7 @@
 class ShapeSelector;
 class ItemStore;
 class InteractionStrategy;
-class KoShapeManager;
+class KShapeManager;
 class QUndoCommand;
 class QPointF;
 class QAction;
@@ -57,7 +57,7 @@ public:
     /// implementing KCanvasBase
     virtual void addCommand(QUndoCommand *command);
     /// implementing KCanvasBase
-    virtual KoShapeManager * shapeManager() const;
+    virtual KShapeManager * shapeManager() const;
     /// implementing KCanvasBase
     virtual void updateCanvas(const QRectF &rc);
     /// implementing KCanvasBase

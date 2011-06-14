@@ -21,7 +21,7 @@
 #include <MockShapes.h>
 
 #include <kdebug.h>
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 #include <KSelection.h>
 #include <KLineBorder.h>
 #include <KoShapeShadow.h>
@@ -37,7 +37,7 @@ void TestShapeAt::test()
     KComponentData componentData("TestShapeAt");    // we need an instance for that canvas
 
     MockCanvas canvas;
-    KoShapeManager manager(&canvas);
+    KShapeManager manager(&canvas);
     shape1.setPosition(QPointF(100, 100));
     shape1.setSize(QSizeF(50, 50));
     shape1.setZIndex(0);

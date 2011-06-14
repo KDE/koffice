@@ -30,7 +30,7 @@
 #include <KoRuler.h>
 #include <KSelection.h>
 #include <KShapeLayer.h>
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 #include <KoText.h>
 #include <KoToolManager.h>
 #include <KoToolProxy.h>

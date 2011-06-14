@@ -24,7 +24,7 @@
 #include "Canvas.h"
 #include "FolderShape.h"
 
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 #include <KoToolManager.h>
 #include <KSelection.h>
 #include <KCreateShapesTool.h>

@@ -19,7 +19,7 @@
 
 #include "KoToolManager_p.h"
 
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 #include <KSelection.h>
 #include <KoToolFactoryBase.h>
 #include <QToolButton>
@@ -98,7 +98,7 @@ bool ToolHelper::canCreateTool(KCanvasBase *canvas) const
 }
 
 //   ************ Connector **********
-Connector::Connector(KoShapeManager *parent)
+Connector::Connector(KShapeManager *parent)
         : QObject(parent),
         m_shapeManager(parent)
 {

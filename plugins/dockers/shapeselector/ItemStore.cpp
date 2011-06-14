@@ -25,7 +25,7 @@
 #include "FolderBorder.h"
 #include "Canvas.h"
 
-#include <KoShapeManager.h>
+#include <KShapeManager.h>
 #include <KProperties.h>
 #include <KoShapeRegistry.h>
 #include <KOdfPasteBase.h>
@@ -71,10 +71,10 @@ public:
     void removeFolder(FolderShape *folder);
     void addShape(KShape *shape);
     void removeShape(KShape *shape);
-    /// register a KoShapeManager as a user of this store so repaints can be made.
-    void addUser(KoShapeManager *sm);
-    /// remove a KoShapeManager as a user of this store to no longer report repaints to it.
-    void removeUser(KoShapeManager *sm);
+    /// register a KShapeManager as a user of this store so repaints can be made.
+    void addUser(KShapeManager *sm);
+    /// remove a KShapeManager as a user of this store to no longer report repaints to it.
+    void removeUser(KShapeManager *sm);
     void setClipboardShape(ClipboardProxyShape *shape);
 
 private slots:
@@ -83,7 +83,7 @@ private slots:
 public:
     QList<KShape*> shapes;
     QList<FolderShape *> folders;
-    QList<KoShapeManager*> shapeManagers;
+    QList<KShapeManager*> shapeManagers;
     FolderShape *mainFolder;
     ClipboardProxyShape *currentClipboard;
     DummyShapeController shapeController;
@@ -115,7 +115,7 @@ void ItemStorePrivate::addFolder(FolderShape *folder)
     folders.append(folder);
     if (folders.count() > 1)
         mainFolder = 0;
-    foreach (KoShapeManager *sm, shapeManagers)
+    foreach (KShapeManager *sm, shapeManagers)
         sm->addShape(folder);
 }
 
@@ -123,7 +123,7 @@ void ItemStorePrivate::removeFolder(FolderShape *folder)
 {
     Q_ASSERT(folder);
     Q_ASSERT(folder != mainFolder); // can't remove the last folder
-    foreach (KoShapeManager *sm, shapeManagers)
+    foreach (KShapeManager *sm, shapeManagers)
         sm->remove(folder);
     folders.removeAll(folder);
     if (folders.count() == 1)
@@ -134,24 +134,24 @@ void ItemStorePrivate::addShape(KShape *shape)
 {
     if (shapes.contains(shape))
         return;
-    foreach (KoShapeManager *sm, shapeManagers)
+    foreach (KShapeManager *sm, shapeManagers)
         sm->addShape(shape);
     shapes.append(shape);
 }
 
 void ItemStorePrivate::removeShape(KShape *shape)
 {
-    foreach (KoShapeManager *sm, shapeManagers)
+    foreach (KShapeManager *sm, shapeManagers)
         sm->remove(shape);
     shapes.removeAll(shape);
 }
 
-void ItemStorePrivate::addUser(KoShapeManager *sm)
+void ItemStorePrivate::addUser(KShapeManager *sm)
 {
     shapeManagers.append(sm);
 }
 
-void ItemStorePrivate::removeUser(KoShapeManager *sm)
+void ItemStorePrivate::removeUser(KShapeManager *sm)
 {
     if (sm == 0)
         return;
@@ -218,7 +218,7 @@ void ItemStorePrivate::setClipboardShape(ClipboardProxyShape *shape)
 ItemStore::ItemStore(ShapeSelector *parent)
 {
     m_canvas = new Canvas(parent, this);
-    m_shapeManager = new KoShapeManager(m_canvas);
+    m_shapeManager = new KShapeManager(m_canvas);
 
     if (parent) {
         parent->setWidget(m_canvas);
@@ -227,7 +227,7 @@ ItemStore::ItemStore(ShapeSelector *parent)
 
     s_itemStorePrivate()->addUser(m_shapeManager);
     if (s_itemStorePrivate()->shapeManagers.count() > 1) {
-        KoShapeManager *other = s_itemStorePrivate()->shapeManagers.first();
+        KShapeManager *other = s_itemStorePrivate()->shapeManagers.first();
         m_shapeManager->setShapes(other->shapes());
     }
 }
