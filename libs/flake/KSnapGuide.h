@@ -28,7 +28,7 @@
 #include <QtCore/QRectF>
 #include <QtGui/QPainterPath>
 
-class KoSnapStrategy;
+class KSnapStrategy;
 class KShape;
 class KPathPoint;
 class KoViewConverter;
@@ -42,7 +42,7 @@ class KCanvasBase;
  * What this class does is snapping a given position (i.e. mouse position) to various
  * snapping targets like grid, boundbox etc.
  * The snap guide does not know anything about the specific snapping target. This
- * is handled by the different snapping strategies which are derived from KoSnapStrategy.
+ * is handled by the different snapping strategies which are derived from KSnapStrategy.
  * Snapping strategies can be enabled/disabled by passing a mask of corresponding
  * snapping ids to KSnapGuide::enableSnapStrategies. There can be one or more snapping
  * strategies enabled at the same time. The best result (with the nearest distance to the
@@ -103,7 +103,7 @@ public:
      * The snap guide take ownership of the strategy. All custom strategies
      * are destroyed when calling reset().
      */
-    bool addCustomSnapStrategy(KoSnapStrategy *customStrategy);
+    bool addCustomSnapStrategy(KSnapStrategy *customStrategy);
 
     /// enables the snapping guides
     void enableSnapping(bool on);

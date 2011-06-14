@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoSnapStrategy_p.h"
+#include "KSnapStrategy_p.h"
 #include "KSnapProxy_p.h"
 #include "KSnapGuide.h"
 #include <KPathShape.h>
@@ -32,40 +32,40 @@
 #include <math.h>
 
 
-KoSnapStrategy::KoSnapStrategy(KSnapGuide::Strategy type)
+KSnapStrategy::KSnapStrategy(KSnapGuide::Strategy type)
         : m_snapType(type)
 {
 }
 
-QPointF KoSnapStrategy::snappedPosition() const
+QPointF KSnapStrategy::snappedPosition() const
 {
     return m_snappedPosition;
 }
 
-void KoSnapStrategy::setSnappedPosition(const QPointF &position)
+void KSnapStrategy::setSnappedPosition(const QPointF &position)
 {
     m_snappedPosition = position;
 }
 
-KSnapGuide::Strategy KoSnapStrategy::type() const
+KSnapGuide::Strategy KSnapStrategy::type() const
 {
     return m_snapType;
 }
 
-qreal KoSnapStrategy::squareDistance(const QPointF &p1, const QPointF &p2)
+qreal KSnapStrategy::squareDistance(const QPointF &p1, const QPointF &p2)
 {
     qreal dx = p1.x() - p2.x();
     qreal dy = p1.y() - p2.y();
     return dx*dx + dy*dy;
 }
 
-qreal KoSnapStrategy::scalarProduct(const QPointF &p1, const QPointF &p2)
+qreal KSnapStrategy::scalarProduct(const QPointF &p1, const QPointF &p2)
 {
     return p1.x() * p2.x() + p1.y() * p2.y();
 }
 
 OrthogonalSnapStrategy::OrthogonalSnapStrategy()
-        : KoSnapStrategy(KSnapGuide::OrthogonalSnapping)
+        : KSnapStrategy(KSnapGuide::OrthogonalSnapping)
 {
 }
 
@@ -131,7 +131,7 @@ QPainterPath OrthogonalSnapStrategy::decoration(const KoViewConverter &converter
 }
 
 NodeSnapStrategy::NodeSnapStrategy()
-        : KoSnapStrategy(KSnapGuide::NodeSnapping)
+        : KSnapStrategy(KSnapGuide::NodeSnapping)
 {
 }
 
@@ -169,7 +169,7 @@ QPainterPath NodeSnapStrategy::decoration(const KoViewConverter &converter) cons
 }
 
 ExtensionSnapStrategy::ExtensionSnapStrategy()
-        : KoSnapStrategy(KSnapGuide::ExtensionSnapping)
+        : KSnapStrategy(KSnapGuide::ExtensionSnapping)
 {
 }
 
@@ -357,7 +357,7 @@ QPointF ExtensionSnapStrategy::extensionDirection(KPathPoint * point, const QTra
 }
 
 IntersectionSnapStrategy::IntersectionSnapStrategy()
-        : KoSnapStrategy(KSnapGuide::IntersectionSnapping)
+        : KSnapStrategy(KSnapGuide::IntersectionSnapping)
 {
 }
 
@@ -406,7 +406,7 @@ QPainterPath IntersectionSnapStrategy::decoration(const KoViewConverter &convert
 }
 
 GridSnapStrategy::GridSnapStrategy()
-        : KoSnapStrategy(KSnapGuide::GridSnapping)
+        : KSnapStrategy(KSnapGuide::GridSnapping)
 {
 }
 
@@ -469,7 +469,7 @@ QPainterPath GridSnapStrategy::decoration(const KoViewConverter &converter) cons
 }
 
 BoundingBoxSnapStrategy::BoundingBoxSnapStrategy()
-        : KoSnapStrategy(KSnapGuide::BoundingBoxSnapping)
+        : KSnapStrategy(KSnapGuide::BoundingBoxSnapping)
 {
 }
 
@@ -531,7 +531,7 @@ qreal BoundingBoxSnapStrategy::squareDistanceToLine(const QPointF &lineA, const 
     if (diffLength == 0.0f)
         return HUGE_VAL;
     // project mouse position relative to start position on line
-    qreal scalar = KoSnapStrategy::scalarProduct(point - lineA, diff / diffLength);
+    qreal scalar = KSnapStrategy::scalarProduct(point - lineA, diff / diffLength);
     if (scalar < 0.0 || scalar > diffLength)
         return HUGE_VAL;
     // calculate vector between relative mouse position and projected mouse position
@@ -554,7 +554,7 @@ QPainterPath BoundingBoxSnapStrategy::decoration(const KoViewConverter &converte
 }
 
 LineGuideSnapStrategy::LineGuideSnapStrategy()
-        : KoSnapStrategy(KSnapGuide::GuideLineSnapping)
+        : KSnapStrategy(KSnapGuide::GuideLineSnapping)
 {
 }
 

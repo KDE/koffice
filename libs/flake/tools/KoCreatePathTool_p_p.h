@@ -43,7 +43,7 @@
 #include "KoViewConverter.h"
 #include "KShapeManager.h"
 #include "KResourceManager.h"
-#include "KoSnapStrategy_p.h"
+#include "KSnapStrategy_p.h"
 #include "KoToolBase_p.h"
 
 /// Small helper to keep track of a path point and its parent path shape
@@ -121,11 +121,11 @@ inline qreal squareDistance(const QPointF &p1, const QPointF &p2)
     return dx*dx + dy*dy;
 }
 
-class AngleSnapStrategy : public KoSnapStrategy
+class AngleSnapStrategy : public KSnapStrategy
 {
 public:
     AngleSnapStrategy(qreal angleStep)
-    : KoSnapStrategy(KSnapGuide::CustomSnapping), m_angleStep(angleStep), m_active(false)
+    : KSnapStrategy(KSnapGuide::CustomSnapping), m_angleStep(angleStep), m_active(false)
     {
     }
 

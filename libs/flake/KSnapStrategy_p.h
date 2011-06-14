@@ -41,11 +41,11 @@ class KPathPoint;
 class KSnapProxy;
 class KoViewConverter;
 
-class KoSnapStrategy
+class KSnapStrategy
 {
 public:
-    KoSnapStrategy(KSnapGuide::Strategy type);
-    virtual ~KoSnapStrategy() {};
+    KSnapStrategy(KSnapGuide::Strategy type);
+    virtual ~KSnapStrategy() {};
 
     virtual bool snap(const QPointF &mousePosition, KSnapProxy * proxy, qreal maxSnapDistance) = 0;
 
@@ -71,7 +71,7 @@ private:
 };
 
 /// snaps to x- or y-coordinates of path points
-class OrthogonalSnapStrategy : public KoSnapStrategy
+class OrthogonalSnapStrategy : public KSnapStrategy
 {
 public:
     OrthogonalSnapStrategy();
@@ -83,7 +83,7 @@ private:
 };
 
 /// snaps to path points
-class NodeSnapStrategy : public KoSnapStrategy
+class NodeSnapStrategy : public KSnapStrategy
 {
 public:
     NodeSnapStrategy();
@@ -92,7 +92,7 @@ public:
 };
 
 /// snaps extension lines of path shapes
-class ExtensionSnapStrategy : public KoSnapStrategy
+class ExtensionSnapStrategy : public KSnapStrategy
 {
 public:
     ExtensionSnapStrategy();
@@ -106,7 +106,7 @@ private:
 };
 
 /// snaps to intersections of shapes
-class IntersectionSnapStrategy : public KoSnapStrategy
+class IntersectionSnapStrategy : public KSnapStrategy
 {
 public:
     IntersectionSnapStrategy();
@@ -115,7 +115,7 @@ public:
 };
 
 /// snaps to the canvas grid
-class GridSnapStrategy : public KoSnapStrategy
+class GridSnapStrategy : public KSnapStrategy
 {
 public:
     GridSnapStrategy();
@@ -124,7 +124,7 @@ public:
 };
 
 /// snaps to shape bounding boxes
-class BoundingBoxSnapStrategy : public KoSnapStrategy
+class BoundingBoxSnapStrategy : public KSnapStrategy
 {
 public:
     BoundingBoxSnapStrategy();
@@ -136,7 +136,7 @@ private:
 };
 
 /// snaps to line guides
-class LineGuideSnapStrategy : public KoSnapStrategy
+class LineGuideSnapStrategy : public KSnapStrategy
 {
 public:
     LineGuideSnapStrategy();

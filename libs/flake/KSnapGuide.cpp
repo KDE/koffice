@@ -19,7 +19,7 @@
 
 #include "KSnapGuide.h"
 #include "KSnapProxy_p.h"
-#include "KoSnapStrategy_p.h"
+#include "KSnapStrategy_p.h"
 
 #include <KPathShape.h>
 #include <KPathPoint.h>
@@ -51,8 +51,8 @@ public:
     KCanvasBase *canvas;
     KShape *editedShape;
 
-    QList<KoSnapStrategy*> strategies;
-    KoSnapStrategy *currentStrategy;
+    QList<KSnapStrategy*> strategies;
+    KSnapStrategy *currentStrategy;
 
     KSnapGuide::Strategies usedStrategies;
     bool active;
@@ -98,7 +98,7 @@ KSnapGuide::Strategies KSnapGuide::enabledSnapStrategies() const
     return d->usedStrategies;
 }
 
-bool KSnapGuide::addCustomSnapStrategy(KoSnapStrategy *customStrategy)
+bool KSnapGuide::addCustomSnapStrategy(KSnapStrategy *customStrategy)
 {
     if (!customStrategy || customStrategy->type() != CustomSnapping)
         return false;
@@ -141,14 +141,14 @@ QPointF KSnapGuide::snap(const QPointF &mousePosition, Qt::KeyboardModifiers mod
     qreal maxSnapDistance = d->canvas->viewConverter()->viewToDocument(QSizeF(d->snapDistance,
                 d->snapDistance)).width();
 
-    foreach (KoSnapStrategy *strategy, d->strategies) {
+    foreach (KSnapStrategy *strategy, d->strategies) {
         if (d->usedStrategies & strategy->type()
                 || strategy->type() == GridSnapping || strategy->type() == CustomSnapping) {
             if (! strategy->snap(mousePosition, &proxy, maxSnapDistance))
                 continue;
 
             QPointF snapCandidate = strategy->snappedPosition();
-            qreal distance = KoSnapStrategy::squareDistance(snapCandidate, mousePosition);
+            qreal distance = KSnapStrategy::squareDistance(snapCandidate, mousePosition);
             if (distance < minDistance) {
                 d->currentStrategy = strategy;
                 minDistance = distance;
