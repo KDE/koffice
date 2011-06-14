@@ -92,13 +92,13 @@ KShapePrivate::KShapePrivate(KShape *shape)
     editBlockEndShouldEmit(false)
 {
     connectors.append(QPointF(0.5, 0.0));
-    connectorPolicies.append(KoShapeConnectionPolicy(KoFlake::EscapeUp, Qt::AlignTop));
+    connectorPolicies.append(KShapeConnectionPolicy(KoFlake::EscapeUp, Qt::AlignTop));
     connectors.append(QPointF(1.0, 0.5));
-    connectorPolicies.append(KoShapeConnectionPolicy(KoFlake::EscapeRight, Qt::AlignRight));
+    connectorPolicies.append(KShapeConnectionPolicy(KoFlake::EscapeRight, Qt::AlignRight));
     connectors.append(QPointF(0.5, 1.0));
-    connectorPolicies.append(KoShapeConnectionPolicy(KoFlake::EscapeDown, Qt::AlignBottom));
+    connectorPolicies.append(KShapeConnectionPolicy(KoFlake::EscapeDown, Qt::AlignBottom));
     connectors.append(QPointF(0.0, 0.5));
-    connectorPolicies.append(KoShapeConnectionPolicy(KoFlake::EscapeLeft, Qt::AlignLeft));
+    connectorPolicies.append(KShapeConnectionPolicy(KoFlake::EscapeLeft, Qt::AlignLeft));
 }
 
 KShapePrivate::~KShapePrivate()
@@ -214,7 +214,7 @@ void KShapePrivate::loadOdfGluePoints(const KXmlElement &gluePoints)
         if (index < 4) // defaults, also skip malformed 'id's
             continue;
 
-        KoShapeConnectionPolicy policy;
+        KShapeConnectionPolicy policy;
         const QString escape = element.attributeNS(KOdfXmlNS::draw, "escape-direction");
         if (!escape.isEmpty()) {
             if (escape == "horizontal") {
@@ -756,18 +756,18 @@ QList<QPointF> KShape::connectionPoints() const
     return points;
 }
 
-void KShape::setConnectionPolicy(int connectionIndex, const KoShapeConnectionPolicy &policy)
+void KShape::setConnectionPolicy(int connectionIndex, const KShapeConnectionPolicy &policy)
 {
     Q_D(KShape);
     d->connectorPolicies.reserve(connectionIndex);
     d->connectorPolicies.insert(connectionIndex, policy);
 }
 
-KoShapeConnectionPolicy KShape::connectionPolicy(int connectionIndex) const
+KShapeConnectionPolicy KShape::connectionPolicy(int connectionIndex) const
 {
     Q_D(const KShape);
     if (d->connectorPolicies.count() - 1 < connectionIndex)
-        return KoShapeConnectionPolicy();
+        return KShapeConnectionPolicy();
     return d->connectorPolicies.value(connectionIndex);
 }
 

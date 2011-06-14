@@ -58,7 +58,7 @@ class KShapePrivate;
 class KFilterEffectStack;
 class KoSnapData;
 class KShapeConnection;
-class KoShapeConnectionPolicy;
+class KShapeConnectionPolicy;
 class KXmlElement;
 
 /**
@@ -309,8 +309,8 @@ public:
      *   just like the rest of the KShape class uses.
      */
     void addConnectionPoint(const QPointF &point);
-    void setConnectionPolicy(int connectionIndex, const KoShapeConnectionPolicy &policy);
-    KoShapeConnectionPolicy connectionPolicy(int connectionIndex) const;
+    void setConnectionPolicy(int connectionIndex, const KShapeConnectionPolicy &policy);
+    KShapeConnectionPolicy connectionPolicy(int connectionIndex) const;
 
     /**
      * Return a list of the connection points that have been added to this shape.

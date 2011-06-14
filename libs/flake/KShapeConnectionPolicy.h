@@ -27,20 +27,20 @@
 /**
  * Connection point policy used to alter the behavior of connection wiring and shape resizing.
  */
-class FLAKE_EXPORT KoShapeConnectionPolicy
+class FLAKE_EXPORT KShapeConnectionPolicy
 {
 public:
-    KoShapeConnectionPolicy() : data(0) { }
+    KShapeConnectionPolicy() : data(0) { }
 
-    KoShapeConnectionPolicy(KoFlake::EscapeDirection escapeDir, Qt::Alignment alignmentHint = Qt::AlignCenter);
+    KShapeConnectionPolicy(KoFlake::EscapeDirection escapeDir, Qt::Alignment alignmentHint = Qt::AlignCenter);
 
     KoFlake::EscapeDirection escapeDirection() const;
     void setEscapeDirection(KoFlake::EscapeDirection escapeDirection);
     Qt::Alignment alignment() const;
     void setAlignment(Qt::Alignment align);
 
-    bool operator==(const KoShapeConnectionPolicy &p) const { return data == p.data; }
-    bool operator!=(const KoShapeConnectionPolicy &p) const { return data != p.data; }
+    bool operator==(const KShapeConnectionPolicy &p) const { return data == p.data; }
+    bool operator!=(const KShapeConnectionPolicy &p) const { return data != p.data; }
 
 private:
     uint data;

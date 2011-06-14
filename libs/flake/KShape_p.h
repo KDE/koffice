@@ -32,7 +32,7 @@
 
 
 #include "KShape.h"
-#include "KoShapeConnectionPolicy.h"
+#include "KShapeConnectionPolicy.h"
 
 class KShapePrivate
 {
@@ -79,7 +79,7 @@ public:
     QTransform localMatrix; ///< the shapes local transformation matrix
 
     QVector<QPointF> connectors; ///< glue points in percent of size [0..1]
-    QVector<KoShapeConnectionPolicy> connectorPolicies;
+    QVector<KShapeConnectionPolicy> connectorPolicies;
 
     KoShapeContainer *parent;
     QSet<KoShapeManager *> shapeManagers;

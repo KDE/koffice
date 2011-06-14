@@ -17,30 +17,30 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoShapeConnectionPolicy.h"
+#include "KShapeConnectionPolicy.h"
 
 /*
      data is 32 bits, we reserve 8 for the EscapeDirection, the rest goes to align.
 */
 
-KoShapeConnectionPolicy::KoShapeConnectionPolicy(KoFlake::EscapeDirection dir, Qt::Alignment align)
+KShapeConnectionPolicy::KShapeConnectionPolicy(KoFlake::EscapeDirection dir, Qt::Alignment align)
     : data (dir + (align << 8))
 {
     Q_ASSERT(dir == escapeDirection());
     Q_ASSERT(align == alignment());
 }
 
-KoFlake::EscapeDirection KoShapeConnectionPolicy::escapeDirection() const
+KoFlake::EscapeDirection KShapeConnectionPolicy::escapeDirection() const
 {
     return static_cast<KoFlake::EscapeDirection>(data & 0xff);
 }
 
-void KoShapeConnectionPolicy::setEscapeDirection(KoFlake::EscapeDirection escapeDirection)
+void KShapeConnectionPolicy::setEscapeDirection(KoFlake::EscapeDirection escapeDirection)
 {
     data = (data & 0xffffff00) | escapeDirection;
 }
 
-Qt::Alignment KoShapeConnectionPolicy::alignment() const
+Qt::Alignment KShapeConnectionPolicy::alignment() const
 {
     uint answer = data >> 8;
     if (answer == 0)
@@ -48,7 +48,7 @@ Qt::Alignment KoShapeConnectionPolicy::alignment() const
     return static_cast<Qt::Alignment>(answer);
 }
 
-void KoShapeConnectionPolicy::setAlignment(Qt::Alignment align)
+void KShapeConnectionPolicy::setAlignment(Qt::Alignment align)
 {
     data = (data & 0xff) | (align << 8);
 }

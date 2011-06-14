@@ -220,7 +220,7 @@ QLineF KoShapeConnectionPrivate::calculateShapeFalloutPrivate(const QPointF &beg
     QPointF b(a);
 
     KShape *shape = 0;
-    KoShapeConnectionPolicy policy;
+    KShapeConnectionPolicy policy;
     if (start && !hasDummyShape && shape1) {
         shape = shape1;
         policy = shape->connectionPolicy(gluePointIndex1);
