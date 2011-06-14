@@ -21,7 +21,7 @@
 
 #include <KCanvasBase.h>
 #include <KSelection.h>
-#include <KoShapeGroup.h>
+#include <KShapeGroup.h>
 #include <KoShapeManager.h>
 #include <KoViewConverter.h>
 
@@ -35,14 +35,14 @@ KWOutlineShape::KWOutlineShape(KWFrame *frame)
     setShapeId(KoPathShapeId);
     setApplicationData(frame);
 
-    class MyGroup : public KoShapeGroup
+    class MyGroup : public KShapeGroup
     {
     public:
         ~MyGroup() {
             setApplicationData(0); // make sure deleting this will not delete the parent frame.
         }
     };
-    KoShapeGroup *group = new MyGroup();
+    KShapeGroup *group = new MyGroup();
     group->setSize(QSize(1, 1));
     group->setApplicationData(frame);
 

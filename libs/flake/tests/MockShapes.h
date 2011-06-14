@@ -20,7 +20,7 @@
 #ifndef MOCKSHAPES_H
 #define MOCKSHAPES_H
 
-#include <KoShapeGroup.h>
+#include <KShapeGroup.h>
 #include <KCanvasBase.h>
 #include <KShapeControllerBase.h>
 #include <KShapeContainerModel.h>
@@ -56,7 +56,7 @@ public:
     int paintedCount;
 };
 
-class MockGroup : public KoShapeGroup
+class MockGroup : public KShapeGroup
 {
     void paintComponent(QPainter &painter, const KoViewConverter &converter) {
         Q_UNUSED(painter);

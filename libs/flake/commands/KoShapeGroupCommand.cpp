@@ -21,14 +21,14 @@
 #include "KoShapeGroupCommand.h"
 #include "KoShapeGroupCommand_p.h"
 #include "KShape.h"
-#include "KoShapeGroup.h"
+#include "KShapeGroup.h"
 #include "KShapeContainer.h"
 #include "KShapeController.h"
 
 #include <klocale.h>
 
 // static
-QUndoCommand * KoShapeGroupCommand::createCommand(KoShapeGroup *container, const QList<KShape *> &shapes, QUndoCommand *parent)
+QUndoCommand * KoShapeGroupCommand::createCommand(KShapeGroup *container, const QList<KShape *> &shapes, QUndoCommand *parent)
 {
     QList<KShape*> orderedShapes(shapes);
     qSort(orderedShapes.begin(), orderedShapes.end(), KShape::compareShapeZIndex);
@@ -44,7 +44,7 @@ QUndoCommand * KoShapeGroupCommand::createCommand(KoShapeGroup *container, const
 //static
 QUndoCommand * KoShapeGroupCommand::createCommand(const QList<KShape *> &shapes, KShapeController *shapeController, QUndoCommand *parent)
 {
-    KoShapeGroup *container = new KoShapeGroup();
+    KShapeGroup *container = new KShapeGroup();
     QUndoCommand *addShapeCommand = parent;
     if (shapeController)
         addShapeCommand = shapeController->addShape(container, parent);
@@ -72,7 +72,7 @@ KoShapeGroupCommand::KoShapeGroupCommand(KShapeContainer *container, const QList
     d->init(this);
 }
 
-KoShapeGroupCommand::KoShapeGroupCommand(KoShapeGroup *container, const QList<KShape *> &shapes, QUndoCommand *parent)
+KoShapeGroupCommand::KoShapeGroupCommand(KShapeGroup *container, const QList<KShape *> &shapes, QUndoCommand *parent)
     : QUndoCommand(parent),
     d(new KoShapeGroupCommandPrivate(container,shapes))
 {
@@ -114,7 +114,7 @@ void KoShapeGroupCommand::redo()
 {
     QUndoCommand::redo();
 
-    if (dynamic_cast<KoShapeGroup*>(d->container)) {
+    if (dynamic_cast<KShapeGroup*>(d->container)) {
         QRectF bound = d->containerBoundingRect();
         QPointF oldGroupPosition = d->container->absolutePosition(KoFlake::TopLeftCorner);
         d->container->setAbsolutePosition(bound.topLeft(), KoFlake::TopLeftCorner);
@@ -188,7 +188,7 @@ void KoShapeGroupCommand::undo()
         shape->setZIndex(d->oldZIndex[i]);
     }
 
-    if (dynamic_cast<KoShapeGroup*>(d->container)) {
+    if (dynamic_cast<KShapeGroup*>(d->container)) {
         QPointF oldGroupPosition = d->container->absolutePosition(KoFlake::TopLeftCorner);
         if (d->container->shapeCount() > 0) {
             bool boundingRectInitialized = false;

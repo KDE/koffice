@@ -34,7 +34,7 @@
 #include <KShapeFactoryBase.h>
 #include <KoShapeLayer.h>
 #include <KShapeContainer.h>
-#include <KoShapeGroup.h>
+#include <KShapeGroup.h>
 #include <KPathShape.h>
 #include <KResourceManager.h>
 #include <KPathShapeLoader.h>
@@ -1053,7 +1053,7 @@ void SvgParser::parseStyle(KShape *obj, const SvgStyles &styles)
     if (!obj)
         return;
 
-    if (!dynamic_cast<KoShapeGroup*>(obj)) {
+    if (!dynamic_cast<KShapeGroup*>(obj)) {
         applyFillStyle(obj);
         applyStrokeStyle(obj);
     }
@@ -1396,7 +1396,7 @@ QList<KShape*> SvgParser::parseUse(const KXmlElement &e)
                 setupTransform(a);
                 updateContext(a);
 
-                KoShapeGroup * group = new KoShapeGroup();
+                KShapeGroup * group = new KShapeGroup();
                 group->setZIndex(nextZIndex());
 
                 parseStyle(0, styles);
@@ -1431,7 +1431,7 @@ QList<KShape*> SvgParser::parseUse(const KXmlElement &e)
     return shapes;
 }
 
-void SvgParser::addToGroup(QList<KShape*> shapes, KoShapeGroup * group)
+void SvgParser::addToGroup(QList<KShape*> shapes, KShapeGroup * group)
 {
     m_shapes += shapes;
 
@@ -1539,7 +1539,7 @@ QList<KShape*> SvgParser::parseContainer(const KXmlElement &e)
             setupTransform(b);
             updateContext(b);
 
-            KoShapeGroup * group = new KoShapeGroup();
+            KShapeGroup * group = new KShapeGroup();
             group->setZIndex(nextZIndex());
 
             SvgStyles styles = collectStyles(b);

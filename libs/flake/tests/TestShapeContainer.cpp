@@ -26,7 +26,7 @@
 #include <KoShapeGroupCommand.h>
 #include <KoShapeUngroupCommand.h>
 #include <KoShapeTransformCommand.h>
-#include <KoShapeGroup.h>
+#include <KShapeGroup.h>
 #include <KSelection.h>
 
 
@@ -119,7 +119,7 @@ void TestShapeContainer::testScaling()
     groupedShapes.append(shape1);
     groupedShapes.append(shape2);
 
-    KoShapeGroup *group = new KoShapeGroup();
+    KShapeGroup *group = new KShapeGroup();
     QUndoCommand* groupCommand = KoShapeGroupCommand::createCommand(group, groupedShapes);
     groupCommand->redo();
 
@@ -184,7 +184,7 @@ void TestShapeContainer::testScaling2()
     groupedShapes.append(shape1);
     groupedShapes.append(shape2);
 
-    KoShapeGroup *group = new KoShapeGroup();
+    KShapeGroup *group = new KShapeGroup();
     QUndoCommand* groupCommand = KoShapeGroupCommand::createCommand(group, groupedShapes);
     groupCommand->redo();
 

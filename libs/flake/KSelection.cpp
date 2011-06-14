@@ -24,7 +24,7 @@
 #include "KSelection.h"
 #include "KSelection_p.h"
 #include "KShapeContainer.h"
-#include "KoShapeGroup.h"
+#include "KShapeGroup.h"
 #include "KPointerEvent.h"
 
 #include <QTimer>
@@ -41,7 +41,7 @@ QRectF KSelectionPrivate::sizeRect()
     if (!selectedShapes.isEmpty()) {
         QList<KShape*>::const_iterator it = selectedShapes.constBegin();
         for (; it != selectedShapes.constEnd(); ++it) {
-            if (dynamic_cast<KoShapeGroup*>(*it))
+            if (dynamic_cast<KShapeGroup*>(*it))
                 continue;
 
             const QTransform shapeTransform = (*it)->absoluteTransformation(0);
@@ -76,7 +76,7 @@ void KSelectionPrivate::selectionChangedEvent()
     emit q->selectionChanged();
 }
 
-void KSelectionPrivate::selectGroupChildren(KoShapeGroup *group)
+void KSelectionPrivate::selectGroupChildren(KShapeGroup *group)
 {
     if (! group)
         return;
@@ -86,13 +86,13 @@ void KSelectionPrivate::selectGroupChildren(KoShapeGroup *group)
             continue;
         selectedShapes << shape;
 
-        KoShapeGroup *childGroup = dynamic_cast<KoShapeGroup*>(shape);
+        KShapeGroup *childGroup = dynamic_cast<KShapeGroup*>(shape);
         if (childGroup)
             selectGroupChildren(childGroup);
     }
 }
 
-void KSelectionPrivate::deselectGroupChildren(KoShapeGroup *group)
+void KSelectionPrivate::deselectGroupChildren(KShapeGroup *group)
 {
     if (! group)
         return;
@@ -101,7 +101,7 @@ void KSelectionPrivate::deselectGroupChildren(KoShapeGroup *group)
         if (selectedShapes.contains(shape))
             selectedShapes.removeAll(shape);
 
-        KoShapeGroup *childGroup = dynamic_cast<KoShapeGroup*>(shape);
+        KShapeGroup *childGroup = dynamic_cast<KShapeGroup*>(shape);
         if (childGroup)
             deselectGroupChildren(childGroup);
     }
@@ -134,7 +134,7 @@ void KSelection::select(KShape *shape, bool recursive)
         d->selectedShapes << shape;
 
     // automatically recursively select all child shapes downwards in the hierarchy
-    KoShapeGroup *group = dynamic_cast<KoShapeGroup*>(shape);
+    KShapeGroup *group = dynamic_cast<KShapeGroup*>(shape);
     if (group)
         d->selectGroupChildren(group);
 
@@ -142,7 +142,7 @@ void KSelection::select(KShape *shape, bool recursive)
         // recursively select all parents and their children upwards the hierarchy
         KShapeContainer *parent = shape->parent();
         while (parent) {
-            KoShapeGroup *parentGroup = dynamic_cast<KoShapeGroup*>(parent);
+            KShapeGroup *parentGroup = dynamic_cast<KShapeGroup*>(parent);
             if (! parentGroup) break;
             if (! d->selectedShapes.contains(parentGroup)) {
                 d->selectedShapes << parentGroup;
@@ -169,7 +169,7 @@ void KSelection::select(KShape *shape, bool recursive)
             KShape *shape = d->selectedShapes[i];
 
             // don't add the rect of the group rect, as it can be invalid
-            if (dynamic_cast<KoShapeGroup*>(shape)) {
+            if (dynamic_cast<KShapeGroup*>(shape)) {
                 continue;
             }
             const QTransform shapeTransform = shape->absoluteTransformation(0);
@@ -192,13 +192,13 @@ void KSelection::deselect(KShape *shape, bool recursive)
 
     d->selectedShapes.removeAll(shape);
 
-    KoShapeGroup *group = dynamic_cast<KoShapeGroup*>(shape);
+    KShapeGroup *group = dynamic_cast<KShapeGroup*>(shape);
     if (recursive) {
         // recursively find the top group upwards int the hierarchy
-        KoShapeGroup *parentGroup = dynamic_cast<KoShapeGroup*>(shape->parent());
+        KShapeGroup *parentGroup = dynamic_cast<KShapeGroup*>(shape->parent());
         while (parentGroup) {
             group = parentGroup;
-            parentGroup = dynamic_cast<KoShapeGroup*>(parentGroup->parent());
+            parentGroup = dynamic_cast<KShapeGroup*>(parentGroup->parent());
         }
     }
     if (group)
@@ -229,7 +229,7 @@ int KSelection::count() const
     Q_D(const KSelection);
     int count = 0;
     foreach(KShape *shape, d->selectedShapes)
-        if (dynamic_cast<KoShapeGroup*>(shape) == 0)
+        if (dynamic_cast<KShapeGroup*>(shape) == 0)
             ++count;
     return count;
 }
@@ -269,14 +269,14 @@ const QList<KShape*> KSelection::selectedShapes(KoFlake::SelectionType strip) co
     bool doStripping = strip == KoFlake::StrippedSelection;
     foreach(KShape *shape, d->selectedShapes) {
         KShapeContainer *container = shape->parent();
-        if (strip != KoFlake::TopLevelSelection && dynamic_cast<KoShapeGroup*>(shape))
-            // since a KoShapeGroup
+        if (strip != KoFlake::TopLevelSelection && dynamic_cast<KShapeGroup*>(shape))
+            // since a KShapeGroup
             // guarentees all its children are selected at the same time as itself
             // is selected we will only return its children.
             continue;
         bool add = true;
         while (doStripping && add && container) {
-            if (dynamic_cast<KoShapeGroup*>(container) == 0 && d->selectedShapes.contains(container))
+            if (dynamic_cast<KShapeGroup*>(container) == 0 && d->selectedShapes.contains(container))
                 add = false;
             container = container->parent();
         }

@@ -36,7 +36,7 @@
 
 class KShape;
 class KShapeContainer;
-class KoShapeGroup;
+class KShapeGroup;
 class KResourceManager;
 
 class SvgParser
@@ -122,7 +122,7 @@ protected:
     SvgStyles mergeStyles(const SvgStyles &, const SvgStyles &);
 
     /// Adds list of shapes to the given group shape
-    void addToGroup(QList<KShape*> shapes, KoShapeGroup * group);
+    void addToGroup(QList<KShape*> shapes, KShapeGroup * group);
 
     /// Returns the next z-index
     int nextZIndex();

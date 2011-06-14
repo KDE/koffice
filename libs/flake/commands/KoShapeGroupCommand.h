@@ -27,7 +27,7 @@
 #include <QUndoCommand>
 
 class KShape;
-class KoShapeGroup;
+class KShapeGroup;
 class KShapeContainer;
 class KoShapeGroupCommandPrivate;
 class KShapeController;
@@ -38,7 +38,7 @@ class FLAKE_EXPORT KoShapeGroupCommand : public QUndoCommand
 public:
     /**
      * Create command to group a set of shapes into a predefined container.
-     * This uses the KoShapeGroupCommand(KoShapeGroup *container, const QList<KShape *> &shapes, QUndoCommand *parent = 0);
+     * This uses the KoShapeGroupCommand(KShapeGroup *container, const QList<KShape *> &shapes, QUndoCommand *parent = 0);
      * constructor.
      * The createCommand will make sure that the group will have the z-index and the parent of the top most shape in the group.
      *
@@ -46,11 +46,11 @@ public:
      * @param parent the parent command if the resulting command is a compound undo command.
      * @param shapes a list of all the shapes that should be grouped.
      */
-    static QUndoCommand *createCommand(KoShapeGroup *container, const QList<KShape *> &shapes, QUndoCommand *parent = 0);
+    static QUndoCommand *createCommand(KShapeGroup *container, const QList<KShape *> &shapes, QUndoCommand *parent = 0);
 
     /**
-     * Create command to group a set of shapes into a KoShapeGroup, which is added to the controller.
-     * This uses the KoShapeGroupCommand(KoShapeGroup *container, const QList<KShape *> &shapes, QUndoCommand *parent = 0);
+     * Create command to group a set of shapes into a KShapeGroup, which is added to the controller.
+     * This uses the KoShapeGroupCommand(KShapeGroup *container, const QList<KShape *> &shapes, QUndoCommand *parent = 0);
      * constructor.
      * The createCommand will make sure that the group will have the z-index and the parent of the top most shape in the group.
      *
@@ -74,12 +74,12 @@ public:
             const QList<bool> &clipped, const QList<bool> &inheritTransform, QUndoCommand *parent = 0);
     /**
      * Command to group a set of shapes into a predefined container.
-     * Convenience constructor since KoShapeGroup does not allow clipping.
+     * Convenience constructor since KShapeGroup does not allow clipping.
      * @param container the group to group the shapes under.
      * @param parent the parent command if the resulting command is a compound undo command.
      * @param shapes a list of all the shapes that should be grouped.
      */
-    KoShapeGroupCommand(KoShapeGroup *container, const QList<KShape *> &shapes, QUndoCommand *parent = 0);
+    KoShapeGroupCommand(KShapeGroup *container, const QList<KShape *> &shapes, QUndoCommand *parent = 0);
     virtual ~KoShapeGroupCommand();
     /// redo the command
     virtual void redo();

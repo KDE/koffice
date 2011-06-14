@@ -23,7 +23,7 @@
 #include "KPathShapeFactory_p.h"
 #include "KoShapeLoadingContext.h"
 #include "KoShapeSavingContext.h"
-#include "KoShapeGroup.h"
+#include "KShapeGroup.h"
 #include "KoShapeLayer.h"
 #include "KShapeConnection.h"
 #include "KShapeConnection_p.h"
@@ -172,7 +172,7 @@ KShape * KoShapeRegistry::createShapeFromOdf(const KXmlElement & e, KoShapeLoadi
     // Hardwire the group shape into the loading as it should not appear
     // in the shape selector
     else if (e.localName() == "g" && e.namespaceURI() == KOdfXmlNS::draw) {
-        KoShapeGroup * group = new KoShapeGroup();
+        KShapeGroup * group = new KShapeGroup();
 
         context.odfLoadingContext().styleStack().save();
         bool loaded = group->loadOdf(e, context);

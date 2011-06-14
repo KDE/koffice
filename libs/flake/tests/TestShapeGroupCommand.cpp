@@ -19,7 +19,7 @@
 
 #include "TestShapeGroupCommand.h"
 #include <MockShapes.h>
-#include <KoShapeGroup.h>
+#include <KShapeGroup.h>
 #include <KoShapeGroupCommand.h>
 #include <KLineBorder.h>
 #include <KoShapeShadow.h>
@@ -65,8 +65,8 @@ void TestShapeGroupCommand::init()
     extraShape2->setPosition(QPointF(250, 50));
     extraShape2->setSize(QSize(50, 50));
 
-    toplevelGroup = new KoShapeGroup();
-    sublevelGroup = new KoShapeGroup();
+    toplevelGroup = new KShapeGroup();
+    sublevelGroup = new KShapeGroup();
 
     strokeShape1 = new MockShape();
     strokeShape1->setSize( QSizeF(50,50) );
@@ -76,7 +76,7 @@ void TestShapeGroupCommand::init()
     strokeShape2->setSize( QSizeF(50,50) );
     strokeShape2->setPosition( QPointF(25,25) );
 
-    strokeGroup = new KoShapeGroup();
+    strokeGroup = new KShapeGroup();
     strokeGroup->setBorder( new KLineBorder( 2.0f ) );
     strokeGroup->setShadow( new KoShapeShadow() );
 }

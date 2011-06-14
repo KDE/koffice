@@ -25,7 +25,7 @@
 #include <QtCore/QPointer>
 
 class KPathShape;
-class KoShapeGroup;
+class KShapeGroup;
 class KPathPoint;
 class KarbonCalligraphicShape;
 class KarbonCalligraphyOptionWidget;

@@ -20,7 +20,7 @@
 
 #include "KShapeAlignCommand.h"
 #include "KShape.h"
-#include "KoShapeGroup.h"
+#include "KShapeGroup.h"
 #include "commands/KoShapeMoveCommand.h"
 
 #include <klocale.h>
@@ -46,7 +46,7 @@ KShapeAlignCommand::KShapeAlignCommand(const QList<KShape*> &shapes, Align align
     QPointF delta;
     QRectF bRect;
     foreach(KShape *shape, shapes) {
-//   if (dynamic_cast<KoShapeGroup*> (shape))
+//   if (dynamic_cast<KShapeGroup*> (shape))
 //       kDebug(30006) <<"Found Group";
 //   else if (dynamic_cast<KShapeContainer*> (shape))
 //       kDebug(30006) <<"Found Container";

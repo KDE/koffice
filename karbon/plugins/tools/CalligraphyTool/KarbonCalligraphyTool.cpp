@@ -22,7 +22,7 @@
 #include "KarbonCalligraphyOptionWidget.h"
 
 #include <KPathShape.h>
-#include <KoShapeGroup.h>
+#include <KShapeGroup.h>
 #include <KLineBorder.h>
 #include <KPointerEvent.h>
 #include <KPathPoint.h>

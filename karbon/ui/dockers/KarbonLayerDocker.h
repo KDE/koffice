@@ -27,7 +27,7 @@
 class KShapeControllerBase;
 class KShape;
 class KoShapeLayer;
-class KoShapeGroup;
+class KShapeGroup;
 class KarbonLayerModel;
 class KarbonLayerSortingModel;
 class KarbonPart;
@@ -69,7 +69,7 @@ private slots:
     void thumbnailView();
 private:
     void extractSelectedLayersAndShapes(QList<KoShapeLayer*> &layers, QList<KShape*> &shapes, bool addChilds = false);
-    void addChildsRecursive(KoShapeGroup * parent, QList<KShape*> &shapes);
+    void addChildsRecursive(KShapeGroup * parent, QList<KShape*> &shapes);
 
     KShape * shapeFromIndex(const QModelIndex &index);
 

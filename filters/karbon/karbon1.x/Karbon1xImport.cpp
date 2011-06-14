@@ -32,7 +32,7 @@
 #include <KPathShape.h>
 #include <KResourceManager.h>
 #include <KPathShapeLoader.h>
-#include <KoShapeGroup.h>
+#include <KShapeGroup.h>
 #include <commands/KoShapeGroupCommand.h>
 #include <KLineBorder.h>
 #include <pathshapes/ellipse/EllipseShape.h>
@@ -268,7 +268,7 @@ void KarbonImport::loadGroup(KShapeContainer * parent, const KXmlElement &elemen
         } else if (e.tagName() == "STAR") {
             shape = loadStar(e);
         } else if (e.tagName() == "GROUP") {
-            KoShapeGroup * group = new KoShapeGroup();
+            KShapeGroup * group = new KShapeGroup();
             group->setZIndex(nextZIndex());
             loadGroup(group, e);
             shape = group;
@@ -294,7 +294,7 @@ void KarbonImport::loadGroup(KShapeContainer * parent, const KXmlElement &elemen
         m_document->add(shape);
     }
 
-    KoShapeGroup * g = dynamic_cast<KoShapeGroup*>(parent);
+    KShapeGroup * g = dynamic_cast<KShapeGroup*>(parent);
     if (g) {
         KoShapeGroupCommand cmd(g, shapes);
         cmd.redo();

@@ -29,7 +29,7 @@
 #include <KCanvasController.h>
 #include <KSelection.h>
 #include <KoShapeLayer.h>
-#include <KoShapeGroup.h>
+#include <KShapeGroup.h>
 #include <KoShapeUngroupCommand.h>
 #include <KoShapeRenameCommand.h>
 #include <KoZoomHandler.h>
@@ -163,7 +163,7 @@ QVariant KoPADocumentModel::data(const QModelIndex &index, int role) const
                 else if(dynamic_cast<KoShapeLayer*>(shape)) {
                     name = i18n("Layer") + QString(" (%1)").arg(shape->zIndex());
                 }
-                else if(dynamic_cast<KoShapeGroup*>(shape)) {
+                else if(dynamic_cast<KShapeGroup*>(shape)) {
                     name = i18n("Group") + QString(" (%1)").arg(shape->zIndex());
                 }
                 else {
@@ -483,7 +483,7 @@ bool KoPADocumentModel::dropMimeData(const QMimeData * data, Qt::DropAction acti
     KShape *shape = static_cast<KShape*>(parent.internalPointer());
     KShapeContainer * container = dynamic_cast<KShapeContainer*>(shape);
     if(container) {
-        KoShapeGroup * group = dynamic_cast<KoShapeGroup*>(container);
+        KShapeGroup * group = dynamic_cast<KShapeGroup*>(container);
         if(group)
         {
             kDebug(30010) <<"KoPADocumentModel::dropMimeData parent = group";

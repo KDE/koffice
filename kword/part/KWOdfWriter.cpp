@@ -34,7 +34,7 @@
 #include <KoTextShapeData.h>
 #include <KoStyleManager.h>
 #include <KParagraphStyle.h>
-#include <KoShapeGroup.h>
+#include <KShapeGroup.h>
 #include <KoShapeLayer.h>
 
 #include <KOdfGenericChanges.h>
@@ -413,7 +413,7 @@ void KWOdfWriter::calculateZindexOffsets()
 
 void KWOdfWriter::addShapeToTree(KShape *shape)
 {
-    if (! dynamic_cast<KoShapeGroup*>(shape) && ! dynamic_cast<KoShapeLayer*>(shape))
+    if (! dynamic_cast<KShapeGroup*>(shape) && ! dynamic_cast<KoShapeLayer*>(shape))
         m_shapeTree.insert(shape->boundingRect(), shape);
 
     // add the children of a KShapeContainer

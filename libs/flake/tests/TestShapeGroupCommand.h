@@ -22,7 +22,7 @@
 
 #include <QtTest/QtTest>
 
-class KoShapeGroup;
+class KShapeGroup;
 class QUndoCommand;
 class MockShape;
 
@@ -42,7 +42,7 @@ private slots:
     void testGroupStrokeShapes();
 
 private:
-    KoShapeGroup *toplevelGroup, *sublevelGroup, *strokeGroup;
+    KShapeGroup *toplevelGroup, *sublevelGroup, *strokeGroup;
     QUndoCommand *cmd1, *cmd2, *strokeCmd;
     MockShape *toplevelShape1, *toplevelShape2;
     MockShape *sublevelShape1, *sublevelShape2;

@@ -36,9 +36,9 @@ namespace KoFlake
 {
     /// the selection type for KSelection::selectedObjects()
     enum SelectionType {
-        FullSelection,      ///< Create a list of all user-shapes in the selection. This excludes KoShapeGroup grouping objects that may be selected.
+        FullSelection,      ///< Create a list of all user-shapes in the selection. This excludes KShapeGroup grouping objects that may be selected.
         StrippedSelection,  ///< Create a stripped list, without children if the container is also in the list.
-        TopLevelSelection   ///< Create a list, much like the StrippedSelection, but have the KoShapeGroup instead of all of its children if one is selected.
+        TopLevelSelection   ///< Create a list, much like the StrippedSelection, but have the KShapeGroup instead of all of its children if one is selected.
     };
 
     /// Enum determining which handle is meant, used in KInteractionTool

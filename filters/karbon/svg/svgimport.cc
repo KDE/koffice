@@ -31,7 +31,7 @@
 
 #include <KShape.h>
 #include <KoShapeLayer.h>
-#include <KoShapeGroup.h>
+#include <KShapeGroup.h>
 #include <KoFilterChain.h>
 #include <commands/KoShapeUngroupCommand.h>
 #include <KXmlReader.h>
@@ -144,7 +144,7 @@ void SvgImport::buildDocument(const QList<KShape*> &toplevelShapes, const QList<
     // if we have only top level groups, make them layers
     bool onlyTopLevelGroups = true;
     foreach(KShape * shape, toplevelShapes) {
-        if (! dynamic_cast<KoShapeGroup*>(shape) || shape->filterEffectStack()) {
+        if (! dynamic_cast<KShapeGroup*>(shape) || shape->filterEffectStack()) {
             onlyTopLevelGroups = false;
             break;
         }
@@ -162,7 +162,7 @@ void SvgImport::buildDocument(const QList<KShape*> &toplevelShapes, const QList<
     if (onlyTopLevelGroups) {
         foreach(KShape * shape, toplevelShapes) {
             // ungroup toplevel groups
-            KoShapeGroup * group = dynamic_cast<KoShapeGroup*>(shape);
+            KShapeGroup * group = dynamic_cast<KShapeGroup*>(shape);
             QList<KShape*> children = group->shapes();
             KoShapeUngroupCommand cmd(group, children, QList<KShape*>() << group);
             cmd.redo();

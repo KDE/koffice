@@ -61,12 +61,12 @@ public:
     /**
      * Adds a shape to the selection.
      *
-     * If the shape is a KoShapeGroup all of its child shapes are automatically added
+     * If the shape is a KShapeGroup all of its child shapes are automatically added
      * to the selection.
-     * If the shape has no parent or is not a KoShapeGroup, only the given shape is
+     * If the shape has no parent or is not a KShapeGroup, only the given shape is
      * added to the selection.
-     * If the given shape is a child of a KoShapeGroup and recursive selection is enabled
-     * the all parents and their child shapes up to the toplevel KoShapeGroup are added to
+     * If the given shape is a child of a KShapeGroup and recursive selection is enabled
+     * the all parents and their child shapes up to the toplevel KShapeGroup are added to
      * the selection.
      *
      * @param shape the shape to add to the selection
@@ -77,12 +77,12 @@ public:
     /**
      * Removes a selected shape.
      *
-     * If the shape is a KoShapeGroup all of its child shapes are automatically removed
+     * If the shape is a KShapeGroup all of its child shapes are automatically removed
      * from the selection.
-     * If the shape has no parent or is not a KoShapeGroup, only the given shape is
+     * If the shape has no parent or is not a KShapeGroup, only the given shape is
      * removed from the selection.
-     * If the given shape is a child of a KoShapeGroup and recursive selection is enabled
-     * the all parents and their child shape up to the toplevel KoShapeGroup are removed
+     * If the given shape is a child of a KShapeGroup and recursive selection is enabled
+     * the all parents and their child shape up to the toplevel KShapeGroup are removed
      * from the selection.
      *
      * @param shape the shape to remove from the selection

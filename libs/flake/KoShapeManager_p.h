@@ -18,7 +18,7 @@
  */
 
 #include "KShape_p.h"
-#include "KoShapeGroup.h"
+#include "KShapeGroup.h"
 #include <KRTree.h>
 
 class KoShapeManagerPrivate
@@ -38,7 +38,7 @@ public:
      * This is needed for filter effects on group shapes where the filter effect
      * applies to all the children of the group shape at once
      */
-    void paintGroup(KoShapeGroup *group, QPainter &painter, const KoViewConverter &converter, bool forPrint);
+    void paintGroup(KShapeGroup *group, QPainter &painter, const KoViewConverter &converter, bool forPrint);
 
     /**
      * Add a shape connection to the manager so it can be taken into account for drawing purposes.

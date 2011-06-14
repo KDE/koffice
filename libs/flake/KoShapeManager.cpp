@@ -95,7 +95,7 @@ void KoShapeManagerPrivate::updateTree()
     }
 }
 
-void KoShapeManagerPrivate::paintGroup(KoShapeGroup *group, QPainter &painter, const KoViewConverter &converter, bool forPrint)
+void KoShapeManagerPrivate::paintGroup(KShapeGroup *group, QPainter &painter, const KoViewConverter &converter, bool forPrint)
 {
     QList<KShape*> shapes = group->shapes();
     qSort(shapes.begin(), shapes.end(), KShape::compareShapeZIndex);
@@ -103,7 +103,7 @@ void KoShapeManagerPrivate::paintGroup(KoShapeGroup *group, QPainter &painter, c
         // we paint recursively here, so we do not have to check recursively for visibility
         if (!child->isVisible())
             continue;
-        KoShapeGroup *childGroup = dynamic_cast<KoShapeGroup*>(child);
+        KShapeGroup *childGroup = dynamic_cast<KShapeGroup*>(child);
         if (childGroup) {
             paintGroup(childGroup, painter, converter, forPrint);
         } else {
@@ -189,7 +189,7 @@ void KoShapeManager::addShape(KShape *shape, Repaint repaint)
         d->connectionTree.insert(connection->boundingRect(), connection);
     }
     d->shapes.append(shape);
-    if (! dynamic_cast<KoShapeGroup*>(shape) && ! dynamic_cast<KoShapeLayer*>(shape)) {
+    if (! dynamic_cast<KShapeGroup*>(shape) && ! dynamic_cast<KoShapeLayer*>(shape)) {
         QRectF br(shape->boundingRect());
         d->tree.insert(br, shape);
     }
@@ -385,7 +385,7 @@ void KoShapeManager::paintShape(KShape *shape, QPainter &painter, const KoViewCo
             imagePainter.setRenderHint(QPainter::Antialiasing, painter.testRenderHint(QPainter::Antialiasing));
 
             // Paint the shape on the image
-            KoShapeGroup *group = dynamic_cast<KoShapeGroup*>(shape);
+            KShapeGroup *group = dynamic_cast<KShapeGroup*>(shape);
             if (group) {
                 // the childrens matrix contains the groups matrix as well
                 // so we have to compensate for that before painting the children

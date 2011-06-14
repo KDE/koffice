@@ -33,7 +33,7 @@
 
 #include "KShape_p.h"
 
-class KoShapeGroup;
+class KShapeGroup;
 
 class KSelectionPrivate : public KShapePrivate
 {
@@ -46,8 +46,8 @@ public:
     KoShapeLayer *activeLayer;
 
     void requestSelectionChangedEvent();
-    void selectGroupChildren(KoShapeGroup *group);
-    void deselectGroupChildren(KoShapeGroup *group);
+    void selectGroupChildren(KShapeGroup *group);
+    void deselectGroupChildren(KShapeGroup *group);
 
     void selectionChangedEvent();
 

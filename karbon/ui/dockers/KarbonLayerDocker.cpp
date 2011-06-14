@@ -38,7 +38,7 @@
 #include <KShapeDeleteCommand.h>
 #include <KoShapeReorderCommand.h>
 #include <KoShapeLayer.h>
-#include <KoShapeGroup.h>
+#include <KShapeGroup.h>
 
 #include <klocale.h>
 #include <kicon.h>
@@ -414,19 +414,19 @@ void KarbonLayerDocker::extractSelectedLayersAndShapes(
             layers.append(layer);
         } else if (! selectedItems.contains(index.parent())) {
             shapes.append(shape);
-            KoShapeGroup * group = dynamic_cast<KoShapeGroup*>(shape);
+            KShapeGroup * group = dynamic_cast<KShapeGroup*>(shape);
             if (group && addChilds)
                 addChildsRecursive(group, shapes);
         }
     }
 }
 
-void KarbonLayerDocker::addChildsRecursive(KoShapeGroup * parent, QList<KShape*> &shapes)
+void KarbonLayerDocker::addChildsRecursive(KShapeGroup * parent, QList<KShape*> &shapes)
 {
     foreach(KShape * child, parent->shapes()) {
         if (! shapes.contains(child))
             shapes.append(child);
-        KoShapeGroup * group = dynamic_cast<KoShapeGroup*>(child);
+        KShapeGroup * group = dynamic_cast<KShapeGroup*>(child);
         if (group)
             addChildsRecursive(group, shapes);
     }

@@ -32,7 +32,7 @@
 #include <KSelection.h>
 #include <KoZoomHandler.h>
 #include <KoShapeLayer.h>
-#include <KoShapeGroup.h>
+#include <KShapeGroup.h>
 #include <KoShapeGroupCommand.h>
 #include <KoShapeUngroupCommand.h>
 
@@ -170,7 +170,7 @@ QVariant KarbonLayerModel::data(const QModelIndex &index, int role) const
         if (name.isEmpty()) {
             if (dynamic_cast<KoShapeLayer*>(shape))
                 name = i18n("Layer");
-            else if (dynamic_cast<KoShapeGroup*>(shape))
+            else if (dynamic_cast<KShapeGroup*>(shape))
                 name = i18nc("A group of shapes", "Group");
             else
                 name = i18n("Shape");
@@ -451,7 +451,7 @@ bool KarbonLayerModel::dropMimeData(const QMimeData * data, Qt::DropAction actio
     KShape *shape = static_cast<KShape*>(parent.internalPointer());
     KShapeContainer * container = dynamic_cast<KShapeContainer*>(shape);
     if (container) {
-        KoShapeGroup * group = dynamic_cast<KoShapeGroup*>(container);
+        KShapeGroup * group = dynamic_cast<KShapeGroup*>(container);
         if (group) {
             kDebug(38000) << "KarbonLayerModel::dropMimeData parent = group";
             if (! toplevelShapes.count())

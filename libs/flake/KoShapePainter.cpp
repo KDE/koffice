@@ -27,7 +27,7 @@
 #include "KShape.h"
 #include "KoViewConverter.h"
 #include "KShapeBorderBase.h"
-#include "KoShapeGroup.h"
+#include "KShapeGroup.h"
 #include "KShapeContainer.h"
 
 #include <KUnit.h>
@@ -200,7 +200,7 @@ QRectF KoShapePainter::contentRect()
     foreach (KShape *shape, d->canvas->shapeManager()->shapes()) {
         if (!shape->isVisible(true))
             continue;
-        if (dynamic_cast<KoShapeGroup*>(shape))
+        if (dynamic_cast<KShapeGroup*>(shape))
             continue;
 
         QRectF shapeRect = shape->boundingRect();

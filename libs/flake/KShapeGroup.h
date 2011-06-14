@@ -41,13 +41,13 @@ class KoShapeLoadingContext;
  * <p>Note that while this object is also a shape, it is not actually visible and the user
  * can't interact with it.
  */
-class FLAKE_EXPORT KoShapeGroup : public KShapeContainer
+class FLAKE_EXPORT KShapeGroup : public KShapeContainer
 {
 public:
     /// Constructor
-    KoShapeGroup();
+    KShapeGroup();
     /// destructor
-    virtual ~KoShapeGroup();
+    virtual ~KShapeGroup();
     /// This implementation is empty since a group is itself not visible.
     virtual void paintComponent(QPainter &painter, const KoViewConverter &converter);
     /// always returns false since the group itself can't be selected or hit

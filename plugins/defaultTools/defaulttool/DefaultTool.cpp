@@ -40,7 +40,7 @@
 #include <KGuidesData.h>
 #include <KShapeController.h>
 #include <KoShapeManager.h>
-#include <KoShapeGroup.h>
+#include <KShapeGroup.h>
 #include <KoShapePaste.h>
 #include <KoShapeOdfSaveHelper.h>
 #include <KDrag.h>
@@ -972,7 +972,7 @@ void DefaultTool::selectionUngroup()
 
     // add a ungroup command for each found shape container to the macro command
     foreach(KShape *shape, containerSet) {
-        KoShapeGroup *group = dynamic_cast<KoShapeGroup*>(shape);
+        KShapeGroup *group = dynamic_cast<KShapeGroup*>(shape);
         if (group) {
             cmd = cmd ? cmd : new QUndoCommand(i18n("Ungroup shapes"));
             canvas()->shapeController()->removeShape(group, cmd); // removes parent and children.
@@ -1259,7 +1259,7 @@ void DefaultTool::updateActions()
     action("object_group")->setEnabled(editableShapes.count() > 1);
     bool groupShape = false;
     foreach (KShape * shape, editableShapes) {
-        if (dynamic_cast<KoShapeGroup *>(shape)) {
+        if (dynamic_cast<KShapeGroup *>(shape)) {
             groupShape = true;
             break;
         }

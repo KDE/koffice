@@ -75,7 +75,7 @@
 #include <KoShapeManager.h>
 #include <KShapeController.h>
 #include <KShapeContainer.h>
-#include <KoShapeGroup.h>
+#include <KShapeGroup.h>
 #include <KShapeCreateCommand.h>
 #include <KShapeDeleteCommand.h>
 #include <KShapeBorderCommand.h>

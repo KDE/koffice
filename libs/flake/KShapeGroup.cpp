@@ -18,7 +18,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoShapeGroup.h"
+#include "KShapeGroup.h"
 #include "KShapeContainerModel.h"
 #include "KoShapeLayer.h"
 #include "SimpleShapeContainerModel_p.h"
@@ -32,34 +32,34 @@
 
 #include <QPainter>
 
-KoShapeGroup::KoShapeGroup()
+KShapeGroup::KShapeGroup()
         : KShapeContainer(new SimpleShapeContainerModel())
 {
     setSize(QSizeF(0, 0));
 }
 
-KoShapeGroup::~KoShapeGroup()
+KShapeGroup::~KShapeGroup()
 {
 }
 
-void KoShapeGroup::paintComponent(QPainter &painter, const KoViewConverter &converter)
+void KShapeGroup::paintComponent(QPainter &painter, const KoViewConverter &converter)
 {
     Q_UNUSED(painter);
     Q_UNUSED(converter);
 }
 
-bool KoShapeGroup::hitTest(const QPointF &position) const
+bool KShapeGroup::hitTest(const QPointF &position) const
 {
     Q_UNUSED(position);
     return false;
 }
 
-QSizeF KoShapeGroup::size() const
+QSizeF KShapeGroup::size() const
 {
     return QSizeF(0, 0);
 }
 
-void KoShapeGroup::shapeCountChanged()
+void KShapeGroup::shapeCountChanged()
 {
     // TODO: why is this needed here ? the group/ungroup command should take care of this
     QRectF br = boundingRect();
@@ -67,7 +67,7 @@ void KoShapeGroup::shapeCountChanged()
     setSize(br.size());
 }
 
-void KoShapeGroup::saveOdf(KoShapeSavingContext & context) const
+void KShapeGroup::saveOdf(KoShapeSavingContext & context) const
 {
     context.xmlWriter().startElement("draw:g");
     saveOdfAttributes(context, (OdfMandatories ^ OdfLayer) | OdfAdditionalAttributes);
@@ -84,7 +84,7 @@ void KoShapeGroup::saveOdf(KoShapeSavingContext & context) const
     context.xmlWriter().endElement();
 }
 
-bool KoShapeGroup::loadOdf(const KXmlElement & element, KoShapeLoadingContext &context)
+bool KShapeGroup::loadOdf(const KXmlElement & element, KoShapeLoadingContext &context)
 {
     loadOdfAttributes(element, context, OdfMandatories | OdfAdditionalAttributes | OdfCommonChildElements);
 
@@ -130,7 +130,7 @@ bool KoShapeGroup::loadOdf(const KXmlElement & element, KoShapeLoadingContext &c
     return true;
 }
 
-void KoShapeGroup::shapeChanged(ChangeType type, KShape *shape)
+void KShapeGroup::shapeChanged(ChangeType type, KShape *shape)
 {
     Q_UNUSED(shape);
     switch (type) {
