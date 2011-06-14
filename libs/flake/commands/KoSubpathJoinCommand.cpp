@@ -21,7 +21,7 @@
 #include "KoSubpathJoinCommand_p.h"
 #include <klocale.h>
 
-KoSubpathJoinCommand::KoSubpathJoinCommand(const KoPathPointData &pointData1, const KoPathPointData &pointData2, QUndoCommand *parent)
+KoSubpathJoinCommand::KoSubpathJoinCommand(const KPathPointData &pointData1, const KPathPointData &pointData2, QUndoCommand *parent)
         : QUndoCommand(parent)
         , m_pointData1(pointData1)
         , m_pointData2(pointData2)

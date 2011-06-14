@@ -29,15 +29,15 @@
  * Not closed
  * - break from the back of the subpath
  */
-KPathBreakAtPointCommand::KPathBreakAtPointCommand(const QList<KoPathPointData> & pointDataList, QUndoCommand *parent)
+KPathBreakAtPointCommand::KPathBreakAtPointCommand(const QList<KPathPointData> & pointDataList, QUndoCommand *parent)
         : QUndoCommand(parent)
         , m_deletePoints(true)
 {
-    QList<KoPathPointData> sortedPointDataList(pointDataList);
+    QList<KPathPointData> sortedPointDataList(pointDataList);
     qSort(sortedPointDataList);
     setText(i18n("Break Subpath at Points"));
 
-    QList<KoPathPointData>::const_iterator it(sortedPointDataList.constBegin());
+    QList<KPathPointData>::const_iterator it(sortedPointDataList.constBegin());
     for (; it != sortedPointDataList.constEnd(); ++it) {
         KoPathShape * pathShape = it->pathShape;
         KPathPoint * point = pathShape->pointByIndex(it->pointIndex);
@@ -57,9 +57,9 @@ KPathBreakAtPointCommand::KPathBreakAtPointCommand(const QList<KoPathPointData> 
         m_closedIndex.push_back(KoPathPointIndex(-1, 0));
     }
 
-    KoPathPointData last(0, KoPathPointIndex(-1, -1));
+    KPathPointData last(0, KoPathPointIndex(-1, -1));
     for (int i = m_pointDataList.size() - 1; i >= 0; --i) {
-        const KoPathPointData &current = m_pointDataList.at(i);
+        const KPathPointData &current = m_pointDataList.at(i);
 
         if (last.pathShape != current.pathShape || last.pointIndex.first != current.pointIndex.first) {
             last = current;
@@ -82,12 +82,12 @@ KPathBreakAtPointCommand::~KPathBreakAtPointCommand()
 void KPathBreakAtPointCommand::redo()
 {
     QUndoCommand::redo();
-    KoPathPointData last(0, KoPathPointIndex(-1, -1));
+    KPathPointData last(0, KoPathPointIndex(-1, -1));
 
     // offset, needed when path was opened
     int offset = 0;
     for (int i = m_pointDataList.size() - 1; i >= 0; --i) {
-        const KoPathPointData & pd = m_pointDataList.at(i);
+        const KPathPointData & pd = m_pointDataList.at(i);
         KoPathShape * pathShape = pd.pathShape;
 
         KoPathPointIndex pointIndex = pd.pointIndex;
@@ -128,7 +128,7 @@ void KPathBreakAtPointCommand::undo()
     KoPathShape * lastPathShape = 0;
 
     for (int i = 0; i < m_pointDataList.size(); ++i) {
-        const KoPathPointData & pd = m_pointDataList.at(i);
+        const KPathPointData & pd = m_pointDataList.at(i);
         KoPathShape * pathShape = pd.pathShape;
         KoPathPointIndex pointIndex = pd.pointIndex;
         ++pointIndex.second;

@@ -22,7 +22,7 @@
 #include "../KoPathShape.h"
 #include "../tools/KoPathTool_p.h"
 #include "../tools/KoPathToolSelection_p.h"
-#include "../KoPathPointData.h"
+#include "../KPathPointData.h"
 #include <MockShapes.h>
 
 void TestPathTool::koPathPointSelection_selectedSegmentsData()
@@ -68,21 +68,21 @@ void TestPathTool::koPathPointSelection_selectedSegmentsData()
     pps.add(point32, false);
     pps.add(point33, false);
 
-    QList<KoPathPointData> pd2;
-    pd2.append(KoPathPointData(&path1, path1.pathPointIndex(point11)));
-    pd2.append(KoPathPointData(&path1, path1.pathPointIndex(point12)));
-    pd2.append(KoPathPointData(&path1, path1.pathPointIndex(point13)));
-    pd2.append(KoPathPointData(&path1, path1.pathPointIndex(point18)));
-    pd2.append(KoPathPointData(&path1, path1.pathPointIndex(point19)));
-    pd2.append(KoPathPointData(&path2, path2.pathPointIndex(point21)));
-    pd2.append(KoPathPointData(&path2, path2.pathPointIndex(point22)));
-    pd2.append(KoPathPointData(&path3, path3.pathPointIndex(point31)));
-    pd2.append(KoPathPointData(&path3, path3.pathPointIndex(point32)));
-    pd2.append(KoPathPointData(&path3, path3.pathPointIndex(point33)));
+    QList<KPathPointData> pd2;
+    pd2.append(KPathPointData(&path1, path1.pathPointIndex(point11)));
+    pd2.append(KPathPointData(&path1, path1.pathPointIndex(point12)));
+    pd2.append(KPathPointData(&path1, path1.pathPointIndex(point13)));
+    pd2.append(KPathPointData(&path1, path1.pathPointIndex(point18)));
+    pd2.append(KPathPointData(&path1, path1.pathPointIndex(point19)));
+    pd2.append(KPathPointData(&path2, path2.pathPointIndex(point21)));
+    pd2.append(KPathPointData(&path2, path2.pathPointIndex(point22)));
+    pd2.append(KPathPointData(&path3, path3.pathPointIndex(point31)));
+    pd2.append(KPathPointData(&path3, path3.pathPointIndex(point32)));
+    pd2.append(KPathPointData(&path3, path3.pathPointIndex(point33)));
 
     qSort(pd2);
 
-    QList<KoPathPointData> pd1(pps.selectedSegmentsData());
+    QList<KPathPointData> pd1(pps.selectedSegmentsData());
     QVERIFY(pd1 == pd2);
 }
 

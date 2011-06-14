@@ -36,7 +36,7 @@
 
 #include "KCreatePathTool_p.h"
 #include "KPathPoint.h"
-#include "KoPathPointData.h"
+#include "KPathPointData.h"
 #include "KoPathPointMergeCommand.h"
 #include "KCanvasBase.h"
 #include "KParameterShape.h"
@@ -372,15 +372,15 @@ public:
 
         // merge first two points
         if (existingStartPoint) {
-            KoPathPointData pd1(pathShape, pathShape->pathPointIndex(existingStartPoint));
-            KoPathPointData pd2(pathShape, pathShape->pathPointIndex(newStartPoint));
+            KPathPointData pd1(pathShape, pathShape->pathPointIndex(existingStartPoint));
+            KPathPointData pd2(pathShape, pathShape->pathPointIndex(newStartPoint));
             KoPathPointMergeCommand cmd1(pd1, pd2);
             cmd1.redo();
         }
         // merge last two points
         if (existingEndPoint) {
-            KoPathPointData pd3(pathShape, pathShape->pathPointIndex(newEndPoint));
-            KoPathPointData pd4(pathShape, pathShape->pathPointIndex(existingEndPoint));
+            KPathPointData pd3(pathShape, pathShape->pathPointIndex(newEndPoint));
+            KPathPointData pd4(pathShape, pathShape->pathPointIndex(existingEndPoint));
             KoPathPointMergeCommand cmd2(pd3, pd4);
             cmd2.redo();
         }

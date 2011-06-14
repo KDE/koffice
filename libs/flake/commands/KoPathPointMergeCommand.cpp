@@ -20,7 +20,7 @@
 
 #include "KoPathPointMergeCommand.h"
 #include "KPathPoint.h"
-#include "KoPathPointData.h"
+#include "KPathPointData.h"
 #include "KoPathShape.h"
 #include <KLocale>
 #include <QPointF>
@@ -28,7 +28,7 @@
 class KoPathPointMergeCommand::Private
 {
 public:
-    Private(const KoPathPointData &pointData1, const KoPathPointData &pointData2)
+    Private(const KPathPointData &pointData1, const KPathPointData &pointData2)
     : pathShape(pointData1.pathShape)
     , endPoint(pointData1.pointIndex)
     , startPoint(pointData2.pointIndex)
@@ -104,7 +104,7 @@ public:
  * The goal is to merge the point that is ending an open subpath with the one
  * starting the same or another open subpath.
  */
-KoPathPointMergeCommand::KoPathPointMergeCommand(const KoPathPointData &pointData1, const KoPathPointData &pointData2, QUndoCommand *parent)
+KoPathPointMergeCommand::KoPathPointMergeCommand(const KPathPointData &pointData1, const KPathPointData &pointData2, QUndoCommand *parent)
     : QUndoCommand(parent), d(new Private(pointData1, pointData2))
 {
     Q_ASSERT(pointData1.pathShape == pointData2.pathShape);

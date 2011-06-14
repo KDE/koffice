@@ -36,7 +36,7 @@
 #include <QUndoCommand>
 #include <QPointF>
 #include "KPathPoint.h"
-#include "KoPathPointData.h"
+#include "KPathPointData.h"
 
 /// The undo / redo command for joining two subpath end points
 class KoSubpathJoinCommand : public QUndoCommand
@@ -51,7 +51,7 @@ public:
      * @param pointData2 the data of the second point to join
      * @param parent the parent command used for macro commands
      */
-    KoSubpathJoinCommand(const KoPathPointData &pointData1, const KoPathPointData &pointData2, QUndoCommand *parent = 0);
+    KoSubpathJoinCommand(const KPathPointData &pointData1, const KPathPointData &pointData2, QUndoCommand *parent = 0);
     ~KoSubpathJoinCommand();
 
     /// redo the command
@@ -59,8 +59,8 @@ public:
     /// revert the actions done in redo
     void undo();
 private:
-    KoPathPointData m_pointData1;
-    KoPathPointData m_pointData2;
+    KPathPointData m_pointData1;
+    KPathPointData m_pointData2;
     KoPathPointIndex m_splitIndex;
     // the control points have to be stored in document positions
     QPointF m_oldControlPoint1;

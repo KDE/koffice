@@ -35,7 +35,7 @@
 
 #include <QUndoCommand>
 #include "KPathPoint.h"
-#include "KoPathPointData.h"
+#include "KPathPointData.h"
 
 /// The undo / redo command for breaking a subpath by removing the segment
 class KoPathSegmentBreakCommand : public QUndoCommand
@@ -49,7 +49,7 @@ public:
      * @param pointData describing the point
      * @param parent the parent command used for macro commands
      */
-    explicit KoPathSegmentBreakCommand(const KoPathPointData &pointData, QUndoCommand *parent = 0);
+    explicit KoPathSegmentBreakCommand(const KPathPointData &pointData, QUndoCommand *parent = 0);
     ~KoPathSegmentBreakCommand();
 
     /// redo the command
@@ -57,7 +57,7 @@ public:
     /// revert the actions done in redo
     void undo();
 private:
-    KoPathPointData m_pointData;
+    KPathPointData m_pointData;
     KoPathPointIndex m_startIndex;
     bool m_broken;
 };

@@ -38,7 +38,7 @@
 #include "KPathBaseCommand_p.h"
 //#include "KoPathShape.h"
 #include "KPathPoint.h"
-#include "KoPathPointData.h"
+#include "KPathPointData.h"
 #include "flake_export.h"
 
 /// The undo / redo command for changing the path point type.
@@ -59,7 +59,7 @@ public:
      * @param pointType the new point type to set
      * @param parent the parent command used for macro commands
      */
-    KoPathPointTypeCommand(const QList<KoPathPointData> &pointDataList, PointType pointType, QUndoCommand *parent = 0);
+    KoPathPointTypeCommand(const QList<KPathPointData> &pointDataList, PointType pointType, QUndoCommand *parent = 0);
     ~KoPathPointTypeCommand();
 
     /// redo the command
@@ -70,9 +70,9 @@ public:
 private:
     // used for storing the data for undo
     struct PointData {
-        PointData(const KoPathPointData pointData)
+        PointData(const KPathPointData pointData)
                 : m_pointData(pointData) {}
-        KoPathPointData m_pointData;
+        KPathPointData m_pointData;
         // old control points in document coordinates
         QPointF m_oldControlPoint1;
         QPointF m_oldControlPoint2;
@@ -81,7 +81,7 @@ private:
         bool m_hadControlPoint2;
     };
 
-    bool appendPointData(KoPathPointData data);
+    bool appendPointData(KPathPointData data);
     void undoChanges(const QList<PointData> &data);
 
     PointType m_pointType;

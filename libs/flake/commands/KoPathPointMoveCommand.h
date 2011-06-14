@@ -28,7 +28,7 @@
 #include <QPointF>
 
 #include "KoPathShape.h"
-#include "KoPathPointData.h"
+#include "KPathPointData.h"
 
 class KoPathPointMoveCommandPrivate;
 
@@ -42,7 +42,7 @@ public:
      * @param offset the offset by which the point is moved in document coordinates
      * @param parent the parent command used for macro commands
      */
-    KoPathPointMoveCommand(const QList<KoPathPointData> &pointData, const QPointF &offset, QUndoCommand *parent = 0);
+    KoPathPointMoveCommand(const QList<KPathPointData> &pointData, const QPointF &offset, QUndoCommand *parent = 0);
 
     /**
     * Command to move path points.
@@ -50,7 +50,7 @@ public:
     * @param offsets the offsets by which the points are moved in document coordinates
     * @param parent the parent command used for macro commands
     */
-    KoPathPointMoveCommand(const QList<KoPathPointData> &pointData, const QList<QPointF> &offsets, QUndoCommand *parent = 0);
+    KoPathPointMoveCommand(const QList<KPathPointData> &pointData, const QList<QPointF> &offsets, QUndoCommand *parent = 0);
 
     ~KoPathPointMoveCommand();
 

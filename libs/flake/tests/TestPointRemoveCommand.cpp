@@ -47,10 +47,10 @@ void TestPointRemoveCommand::redoUndoPointRemove()
     path2.curveTo(QPointF(50, 100), QPointF(0, 50), QPointF(0, 0));
     path2.closeMerge();
 
-    QList<KoPathPointData> pd;
-    pd.append(KoPathPointData(&path1, path1.pathPointIndex(point1)));
-    pd.append(KoPathPointData(&path1, path1.pathPointIndex(point2)));
-    pd.append(KoPathPointData(&path2, path2.pathPointIndex(point3)));
+    QList<KPathPointData> pd;
+    pd.append(KPathPointData(&path1, path1.pathPointIndex(point1)));
+    pd.append(KPathPointData(&path1, path1.pathPointIndex(point2)));
+    pd.append(KPathPointData(&path2, path2.pathPointIndex(point3)));
 
     QPainterPath ppath1Org = path1.outline();
     QPainterPath ppath2Org = path2.outline();
@@ -95,12 +95,12 @@ void TestPointRemoveCommand::redoUndoSubpathRemove()
     path1.moveTo(QPointF(100, 0));
     path1.lineTo(QPointF(100, 100));
 
-    QList<KoPathPointData> pd;
-    pd.append(KoPathPointData(&path1, path1.pathPointIndex(point11)));
-    pd.append(KoPathPointData(&path1, path1.pathPointIndex(point12)));
-    pd.append(KoPathPointData(&path1, path1.pathPointIndex(point13)));
-    pd.append(KoPathPointData(&path1, path1.pathPointIndex(point14)));
-    pd.append(KoPathPointData(&path1, path1.pathPointIndex(point15)));
+    QList<KPathPointData> pd;
+    pd.append(KPathPointData(&path1, path1.pathPointIndex(point11)));
+    pd.append(KPathPointData(&path1, path1.pathPointIndex(point12)));
+    pd.append(KPathPointData(&path1, path1.pathPointIndex(point13)));
+    pd.append(KPathPointData(&path1, path1.pathPointIndex(point14)));
+    pd.append(KPathPointData(&path1, path1.pathPointIndex(point15)));
 
     QPainterPath ppath1Org = path1.outline();
 
@@ -120,9 +120,9 @@ void TestPointRemoveCommand::redoUndoSubpathRemove()
     QPainterPath ppath1mod = path1.outline();
     QVERIFY(ppath1 == ppath1mod);
 
-    QList<KoPathPointData> pd2;
-    pd2.append(KoPathPointData(&path1, path1.pathPointIndex(point21)));
-    pd2.append(KoPathPointData(&path1, path1.pathPointIndex(point22)));
+    QList<KPathPointData> pd2;
+    pd2.append(KPathPointData(&path1, path1.pathPointIndex(point21)));
+    pd2.append(KPathPointData(&path1, path1.pathPointIndex(point22)));
 
     QUndoCommand *cmd2 = KoPathPointRemoveCommand::createCommand(pd2, &shapeController);
     cmd2->redo();
@@ -158,14 +158,14 @@ void TestPointRemoveCommand::redoUndoShapeRemove()
     path2->curveTo(QPointF(50, 100), QPointF(0, 50), QPointF(0, 0));
     path2->closeMerge();
 
-    QList<KoPathPointData> pd;
-    pd.append(KoPathPointData(path1, path1->pathPointIndex(point12)));
-    pd.append(KoPathPointData(path1, path1->pathPointIndex(point11)));
-    pd.append(KoPathPointData(path1, path1->pathPointIndex(point13)));
-    pd.append(KoPathPointData(path1, path1->pathPointIndex(point15)));
-    pd.append(KoPathPointData(path1, path1->pathPointIndex(point14)));
-    pd.append(KoPathPointData(path2, path2->pathPointIndex(point22)));
-    pd.append(KoPathPointData(path2, path2->pathPointIndex(point21)));
+    QList<KPathPointData> pd;
+    pd.append(KPathPointData(path1, path1->pathPointIndex(point12)));
+    pd.append(KPathPointData(path1, path1->pathPointIndex(point11)));
+    pd.append(KPathPointData(path1, path1->pathPointIndex(point13)));
+    pd.append(KPathPointData(path1, path1->pathPointIndex(point15)));
+    pd.append(KPathPointData(path1, path1->pathPointIndex(point14)));
+    pd.append(KPathPointData(path2, path2->pathPointIndex(point22)));
+    pd.append(KPathPointData(path2, path2->pathPointIndex(point21)));
 
     QPainterPath ppath1Org = path1->outline();
     QPainterPath ppath2Org = path2->outline();
@@ -223,15 +223,15 @@ void TestPointRemoveCommand::redoUndo()
     mockController.addShape(path2);
     mockController.addShape(path3);
 
-    QList<KoPathPointData> pd;
-    pd.append(KoPathPointData(path2, path2->pathPointIndex(point21)));
-    pd.append(KoPathPointData(path1, path1->pathPointIndex(point13)));
-    pd.append(KoPathPointData(path1, path1->pathPointIndex(point11)));
-    pd.append(KoPathPointData(path3, path3->pathPointIndex(point31)));
-    pd.append(KoPathPointData(path1, path1->pathPointIndex(point12)));
-    pd.append(KoPathPointData(path1, path1->pathPointIndex(point15)));
-    pd.append(KoPathPointData(path2, path2->pathPointIndex(point22)));
-    pd.append(KoPathPointData(path1, path1->pathPointIndex(point14)));
+    QList<KPathPointData> pd;
+    pd.append(KPathPointData(path2, path2->pathPointIndex(point21)));
+    pd.append(KPathPointData(path1, path1->pathPointIndex(point13)));
+    pd.append(KPathPointData(path1, path1->pathPointIndex(point11)));
+    pd.append(KPathPointData(path3, path3->pathPointIndex(point31)));
+    pd.append(KPathPointData(path1, path1->pathPointIndex(point12)));
+    pd.append(KPathPointData(path1, path1->pathPointIndex(point15)));
+    pd.append(KPathPointData(path2, path2->pathPointIndex(point22)));
+    pd.append(KPathPointData(path1, path1->pathPointIndex(point14)));
 
     KoShapeController shapeController(0, &mockController);
 
@@ -262,13 +262,13 @@ void TestPointRemoveCommand::redoUndo()
     QPainterPath ppath3mod = path3->outline();
     QVERIFY(ppath3 == ppath3mod);
 
-    QList<KoPathPointData> pd2;
-    pd2.append(KoPathPointData(path1, path1->pathPointIndex(point16)));
-    pd2.append(KoPathPointData(path1, path1->pathPointIndex(point17)));
-    pd2.append(KoPathPointData(path1, path1->pathPointIndex(point18)));
-    pd2.append(KoPathPointData(path1, path1->pathPointIndex(point19)));
-    pd2.append(KoPathPointData(path3, path3->pathPointIndex(point32)));
-    pd2.append(KoPathPointData(path3, path3->pathPointIndex(point33)));
+    QList<KPathPointData> pd2;
+    pd2.append(KPathPointData(path1, path1->pathPointIndex(point16)));
+    pd2.append(KPathPointData(path1, path1->pathPointIndex(point17)));
+    pd2.append(KPathPointData(path1, path1->pathPointIndex(point18)));
+    pd2.append(KPathPointData(path1, path1->pathPointIndex(point19)));
+    pd2.append(KPathPointData(path3, path3->pathPointIndex(point32)));
+    pd2.append(KPathPointData(path3, path3->pathPointIndex(point33)));
 
     QUndoCommand *cmd2 = KoPathPointRemoveCommand::createCommand(pd2, &shapeController);
     cmd2->redo();

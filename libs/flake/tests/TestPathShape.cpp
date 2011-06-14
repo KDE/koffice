@@ -21,7 +21,7 @@
 #include <QPainterPath>
 #include "KoPathShape.h"
 #include "KPathPoint.h"
-#include "KoPathPointData.h"
+#include "KPathPointData.h"
 
 void TestPathShape::close()
 {
@@ -717,18 +717,18 @@ void TestPathShape::addSubpath()
 
 void TestPathShape::koPathPointDataLess()
 {
-    QList<KoPathPointData> v;
-    v.push_back(KoPathPointData((KoPathShape*)1, KoPathPointIndex(1, 1)));
-    v.push_back(KoPathPointData((KoPathShape*)1, KoPathPointIndex(1, 2)));
-    v.push_back(KoPathPointData((KoPathShape*)1, KoPathPointIndex(1, 3)));
-    v.push_back(KoPathPointData((KoPathShape*)1, KoPathPointIndex(1, 6)));
-    v.push_back(KoPathPointData((KoPathShape*)2, KoPathPointIndex(2, 1)));
-    v.push_back(KoPathPointData((KoPathShape*)2, KoPathPointIndex(2, 3)));
-    v.push_back(KoPathPointData((KoPathShape*)2, KoPathPointIndex(3, 3)));
-    v.push_back(KoPathPointData((KoPathShape*)3, KoPathPointIndex(1, 1)));
-    v.push_back(KoPathPointData((KoPathShape*)3, KoPathPointIndex(1, 2)));
+    QList<KPathPointData> v;
+    v.push_back(KPathPointData((KoPathShape*)1, KoPathPointIndex(1, 1)));
+    v.push_back(KPathPointData((KoPathShape*)1, KoPathPointIndex(1, 2)));
+    v.push_back(KPathPointData((KoPathShape*)1, KoPathPointIndex(1, 3)));
+    v.push_back(KPathPointData((KoPathShape*)1, KoPathPointIndex(1, 6)));
+    v.push_back(KPathPointData((KoPathShape*)2, KoPathPointIndex(2, 1)));
+    v.push_back(KPathPointData((KoPathShape*)2, KoPathPointIndex(2, 3)));
+    v.push_back(KPathPointData((KoPathShape*)2, KoPathPointIndex(3, 3)));
+    v.push_back(KPathPointData((KoPathShape*)3, KoPathPointIndex(1, 1)));
+    v.push_back(KPathPointData((KoPathShape*)3, KoPathPointIndex(1, 2)));
 
-    QList<KoPathPointData> l;
+    QList<KPathPointData> l;
     l.push_back(v[8]);
     l.push_back(v[0]);
     l.push_back(v[1]);
@@ -741,8 +741,8 @@ void TestPathShape::koPathPointDataLess()
 
     qSort(l.begin(), l.end());
     for (int i = 0; i < v.size(); ++i) {
-        KoPathPointData ld = l.at(i);
-        KoPathPointData vd = v[i];
+        KPathPointData ld = l.at(i);
+        KPathPointData vd = v[i];
         QVERIFY(ld.pathShape == vd.pathShape);
         QVERIFY(ld.pointIndex.first == vd.pointIndex.first);
         QVERIFY(ld.pointIndex.second == vd.pointIndex.second);

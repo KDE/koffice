@@ -28,7 +28,7 @@
 #include <KLocale>
 #include <limits>
 
-KoPathSegmentChangeStrategy::KoPathSegmentChangeStrategy(KoPathTool *tool, const QPointF &pos, const KoPathPointData &segment, qreal segmentParam)
+KoPathSegmentChangeStrategy::KoPathSegmentChangeStrategy(KoPathTool *tool, const QPointF &pos, const KPathPointData &segment, qreal segmentParam)
 : KInteractionStrategy(tool)
 , m_originalPosition(pos)
 , m_lastPosition(pos)

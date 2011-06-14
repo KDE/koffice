@@ -25,7 +25,7 @@
 #include <QList>
 #include <QPointF>
 #include "KPathPoint.h"
-#include "KoPathPointData.h"
+#include "KPathPointData.h"
 #include "flake_export.h"
 
 class KoPathPointInsertCommandPrivate;
@@ -45,7 +45,7 @@ public:
      * @param insertPosition the position to insert at [0..1]
      * @param parent the parent command used for macro commands
      */
-    KoPathPointInsertCommand(const QList<KoPathPointData> &pointDataList, qreal insertPosition, QUndoCommand *parent = 0);
+    KoPathPointInsertCommand(const QList<KPathPointData> &pointDataList, qreal insertPosition, QUndoCommand *parent = 0);
     virtual ~KoPathPointInsertCommand();
 
     /// redo the command

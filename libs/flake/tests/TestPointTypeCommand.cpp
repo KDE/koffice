@@ -37,10 +37,10 @@ void TestPointTypeCommand::redoUndoSymmetric()
     path2.curveTo(QPointF(50, 100), QPointF(0, 50), QPointF(0, 0));
     path2.closeMerge();
 
-    QList<KoPathPointData> pd;
-    pd.append(KoPathPointData(&path1, path1.pathPointIndex(point1)));
-    pd.append(KoPathPointData(&path1, path1.pathPointIndex(point2)));
-    pd.append(KoPathPointData(&path2, path2.pathPointIndex(point3)));
+    QList<KPathPointData> pd;
+    pd.append(KPathPointData(&path1, path1.pathPointIndex(point1)));
+    pd.append(KPathPointData(&path1, path1.pathPointIndex(point2)));
+    pd.append(KPathPointData(&path2, path2.pathPointIndex(point3)));
 
     QPainterPath ppath1Org = path1.outline();
     QPainterPath ppath2Org = path2.outline();
@@ -80,10 +80,10 @@ void TestPointTypeCommand::redoUndoSmooth()
     path2.curveTo(QPointF(50, 100), QPointF(0, 50), QPointF(0, 0));
     path2.closeMerge();
 
-    QList<KoPathPointData> pd;
-    pd.append(KoPathPointData(&path1, path1.pathPointIndex(point1)));
-    pd.append(KoPathPointData(&path1, path1.pathPointIndex(point2)));
-    pd.append(KoPathPointData(&path2, path2.pathPointIndex(point3)));
+    QList<KPathPointData> pd;
+    pd.append(KPathPointData(&path1, path1.pathPointIndex(point1)));
+    pd.append(KPathPointData(&path1, path1.pathPointIndex(point2)));
+    pd.append(KPathPointData(&path2, path2.pathPointIndex(point3)));
 
     QPainterPath ppath1Org = path1.outline();
     QPainterPath ppath2Org = path2.outline();
@@ -123,10 +123,10 @@ void TestPointTypeCommand::redoUndoCorner()
     path2.curveTo(QPointF(50, 100), QPointF(0, 50), QPointF(0, 0));
     path2.closeMerge();
 
-    QList<KoPathPointData> pd;
-    pd.append(KoPathPointData(&path1, path1.pathPointIndex(point1)));
-    pd.append(KoPathPointData(&path1, path1.pathPointIndex(point2)));
-    pd.append(KoPathPointData(&path2, path2.pathPointIndex(point3)));
+    QList<KPathPointData> pd;
+    pd.append(KPathPointData(&path1, path1.pathPointIndex(point1)));
+    pd.append(KPathPointData(&path1, path1.pathPointIndex(point2)));
+    pd.append(KPathPointData(&path2, path2.pathPointIndex(point3)));
 
     QPainterPath ppath1Org = path1.outline();
     QPainterPath ppath2Org = path2.outline();

@@ -23,7 +23,7 @@
 #include <math.h>
 
 KPathControlPointMoveCommand::KPathControlPointMoveCommand(
-    const KoPathPointData &pointData,
+    const KPathPointData &pointData,
     const QPointF &offset,
     KPathPoint::PointType pointType,
     QUndoCommand *parent)

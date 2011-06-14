@@ -30,18 +30,18 @@ public:
     void applyOffset(qreal factor);
 
     bool undoCalled; // this command stores diffs; so calling undo twice will give wrong results. Guard against that.
-    QMap<KoPathPointData, QPointF > points;
+    QMap<KPathPointData, QPointF > points;
     QSet<KoPathShape*> paths;
 };
 
 
-KoPathPointMoveCommand::KoPathPointMoveCommand(const QList<KoPathPointData> &pointData, const QPointF &offset, QUndoCommand *parent)
+KoPathPointMoveCommand::KoPathPointMoveCommand(const QList<KPathPointData> &pointData, const QPointF &offset, QUndoCommand *parent)
     : QUndoCommand(parent),
     d(new KoPathPointMoveCommandPrivate())
 {
     setText(i18n("Move points"));
 
-    foreach (const KoPathPointData &data, pointData) {
+    foreach (const KPathPointData &data, pointData) {
         if (!d->points.contains(data)) {
             d->points[data] = offset;
             d->paths.insert(data.pathShape);
@@ -49,7 +49,7 @@ KoPathPointMoveCommand::KoPathPointMoveCommand(const QList<KoPathPointData> &poi
     }
 }
 
-KoPathPointMoveCommand::KoPathPointMoveCommand(const QList<KoPathPointData> &pointData, const QList<QPointF> &offsets, QUndoCommand *parent)
+KoPathPointMoveCommand::KoPathPointMoveCommand(const QList<KPathPointData> &pointData, const QList<QPointF> &offsets, QUndoCommand *parent)
     : QUndoCommand(parent),
     d(new KoPathPointMoveCommandPrivate())
 {
@@ -59,7 +59,7 @@ KoPathPointMoveCommand::KoPathPointMoveCommand(const QList<KoPathPointData> &poi
 
     uint dataCount = pointData.count();
     for (uint i = 0; i < dataCount; ++i) {
-        const KoPathPointData & data = pointData[i];
+        const KPathPointData & data = pointData[i];
         if (!d->points.contains(data)) {
             d->points[data] = offsets[i];
             d->paths.insert(data.pathShape);
@@ -99,7 +99,7 @@ void KoPathPointMoveCommandPrivate::applyOffset(qreal factor)
         path->update();
     }
 
-    QMap<KoPathPointData, QPointF>::iterator it(points.begin());
+    QMap<KPathPointData, QPointF>::iterator it(points.begin());
     for (; it != points.end(); ++it) {
         KoPathShape *path = it.key().pathShape;
         // transform offset from document to shape coordinate system

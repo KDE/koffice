@@ -85,7 +85,7 @@
 #include <KoZoomAction.h>
 #include <KoZoomHandler.h>
 #include <KoPathShape.h>
-#include <KoPathPointData.h>
+#include <KPathPointData.h>
 #include <KPathCombineCommand.h>
 #include <KoPathSeparateCommand.h>
 #include <KoPathReverseCommand.h>
@@ -712,7 +712,7 @@ void KarbonView::pathSnapToGrid()
         return;
 
     QList<KoShape*> selectedShapes = selection->selectedShapes();
-    QList<KoPathPointData> points;
+    QList<KPathPointData> points;
     QList<QPointF> offsets;
 
     // store current grid snap state
@@ -744,7 +744,7 @@ void KarbonView::pathSnapToGrid()
 
                 QPointF docPoint = path->shapeToDocument(p->point());
                 QPointF offset = snapGuide.snap(docPoint, 0) - docPoint;
-                points.append(KoPathPointData(path, index));
+                points.append(KPathPointData(path, index));
                 offsets.append(offset);
             }
         }

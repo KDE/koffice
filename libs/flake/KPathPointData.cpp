@@ -1,6 +1,5 @@
 /* This file is part of the KDE project
-   Copyright (C) 2006 Thorsten Zachmann <zachmann@kde.org>
-   Copyright (C) 2007 Thomas Zander <zander@kde.org>
+   Copyright (C) 2007-2011 Thomas Zander <zander@kde.org>
 
    This library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public
@@ -18,28 +17,27 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KOPATHPOINTDATA_H
-#define KOPATHPOINTDATA_H
+#include "KPathPointData.h"
 
-#include "KoPathShape.h"
-
-/**
- * @brief Describe a KPathPoint by a KoPathShape and its indices
- */
-class FLAKE_EXPORT KoPathPointData
+KPathPointData::KPathPointData(KoPathShape *path, const KoPathPointIndex &pointIndex)
+    : pathShape(path),
+    pointIndex(pointIndex)
 {
-public:
-    /// contructor
-    KoPathPointData(KoPathShape *path, const KoPathPointIndex &pointIndex);
+}
 
-    /// operator used for sorting
-    bool operator<(const KoPathPointData &other) const;
-    bool operator==(const KoPathPointData &other) const;
+bool KPathPointData::operator<(const KPathPointData & other) const
+{
+    return pathShape < other.pathShape
+        || (pathShape == other.pathShape
+                && (pointIndex.first < other.pointIndex.first
+                    || (pointIndex.first == other.pointIndex.first
+                        && pointIndex.second < other.pointIndex.second)));
 
-    /// path shape the path point belongs too
-    KoPathShape *pathShape;
-    /// position of the point in the path shape
-    KoPathPointIndex pointIndex;
-};
+}
 
-#endif
+bool KPathPointData::operator==(const KPathPointData & other) const
+{
+    return pathShape == other.pathShape
+        && pointIndex.first == other.pointIndex.first
+        && pointIndex.second == other.pointIndex.second;
+}

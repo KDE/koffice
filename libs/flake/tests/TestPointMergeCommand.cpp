@@ -21,7 +21,7 @@
 #include "KoPathPointMergeCommand.h"
 #include "KoPathShape.h"
 #include "KPathPoint.h"
-#include "KoPathPointData.h"
+#include "KPathPointData.h"
 #include <KDebug>
 
 void TestPointMergeCommand::closeSingleLinePath()
@@ -37,8 +37,8 @@ void TestPointMergeCommand::closeSingleLinePath()
     KoPathPointIndex index1(0,0);
     KoPathPointIndex index2(0,5);
 
-    KoPathPointData pd1(&path1, index1);
-    KoPathPointData pd2(&path1, index2);
+    KPathPointData pd1(&path1, index1);
+    KPathPointData pd2(&path1, index2);
 
     KPathPoint * p1 = path1.pointByIndex(index1);
     KPathPoint * p2 = path1.pointByIndex(index2);
@@ -88,8 +88,8 @@ void TestPointMergeCommand::closeSingleCurvePath()
     KoPathPointIndex index1(0,0);
     KoPathPointIndex index2(0,3);
 
-    KoPathPointData pd1(&path1, index1);
-    KoPathPointData pd2(&path1, index2);
+    KPathPointData pd1(&path1, index1);
+    KPathPointData pd2(&path1, index2);
 
     KPathPoint * p1 = path1.pointByIndex(index1);
     KPathPoint * p2 = path1.pointByIndex(index2);
@@ -149,8 +149,8 @@ void TestPointMergeCommand::connectLineSubpaths()
     KoPathPointIndex index1(0,1);
     KoPathPointIndex index2(1,0);
 
-    KoPathPointData pd1(&path1, index1);
-    KoPathPointData pd2(&path1, index2);
+    KPathPointData pd1(&path1, index1);
+    KPathPointData pd2(&path1, index2);
 
     QCOMPARE(path1.subpathCount(), 2);
     QCOMPARE(path1.pointByIndex(index1)->point(), QPointF(10,0));
@@ -192,8 +192,8 @@ void TestPointMergeCommand::connectCurveSubpaths()
     KoPathPointIndex index1(0,1);
     KoPathPointIndex index2(1,1);
 
-    KoPathPointData pd1(&path1, index1);
-    KoPathPointData pd2(&path1, index2);
+    KPathPointData pd1(&path1, index1);
+    KPathPointData pd2(&path1, index2);
 
     QCOMPARE(path1.subpathCount(), 2);
     QCOMPARE(path1.pointByIndex(index1)->point(), QPointF(20,20));

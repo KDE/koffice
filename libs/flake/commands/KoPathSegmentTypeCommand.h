@@ -25,7 +25,7 @@
 #include <QList>
 #include <QPointF>
 #include "KPathPoint.h"
-#include "KoPathPointData.h"
+#include "KPathPointData.h"
 #include "flake_export.h"
 
 /// The undo / redo command for changing segments to curves/lines
@@ -44,7 +44,7 @@ public:
     * @param segmentType to which the segment should be changed to
     * @param parent the parent command used for macro commands
     */
-    KoPathSegmentTypeCommand(const KoPathPointData &pointData, SegmentType segmentType, QUndoCommand *parent = 0);
+    KoPathSegmentTypeCommand(const KPathPointData &pointData, SegmentType segmentType, QUndoCommand *parent = 0);
 
     /**
      * Command for changing the segment type (curve/line)
@@ -52,7 +52,7 @@ public:
      * @param segmentType to which the segments should be changed to
      * @param parent the parent command used for macro commands
      */
-    KoPathSegmentTypeCommand(const QList<KoPathPointData> &pointDataList, SegmentType segmentType, QUndoCommand *parent = 0);
+    KoPathSegmentTypeCommand(const QList<KPathPointData> &pointDataList, SegmentType segmentType, QUndoCommand *parent = 0);
     ~KoPathSegmentTypeCommand();
 
     /// redo the command
@@ -70,9 +70,9 @@ private:
         KPathPoint::PointProperties m_properties2;
     };
 
-    void initialize(const QList<KoPathPointData> &pointDataList);
+    void initialize(const QList<KPathPointData> &pointDataList);
 
-    QList<KoPathPointData> m_pointDataList;
+    QList<KPathPointData> m_pointDataList;
     QList<SegmentTypeData> m_segmentData;
     SegmentType m_segmentType;
 };

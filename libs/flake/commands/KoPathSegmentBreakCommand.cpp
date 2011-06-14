@@ -22,7 +22,7 @@
 #include <klocale.h>
 #include <math.h>
 
-KoPathSegmentBreakCommand::KoPathSegmentBreakCommand(const KoPathPointData & pointData, QUndoCommand *parent)
+KoPathSegmentBreakCommand::KoPathSegmentBreakCommand(const KPathPointData & pointData, QUndoCommand *parent)
         : QUndoCommand(parent)
         , m_pointData(pointData)
         , m_startIndex(-1, -1)

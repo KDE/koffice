@@ -40,7 +40,7 @@
 
 class KoPathTool;
 class KPathPoint;
-class KoPathPointData;
+class KPathPointData;
 class KoViewConverter;
 class QPainter;
 
@@ -123,14 +123,14 @@ public:
     *
     * This is subject to change
     */
-    QList<KoPathPointData> selectedPointsData() const;
+    QList<KPathPointData> selectedPointsData() const;
 
     /**
     * @brief Get the point data of all selected segments
     *
     * This is subject to change
     */
-    QList<KoPathPointData> selectedSegmentsData() const;
+    QList<KPathPointData> selectedSegmentsData() const;
 
     /// Returns list of selected shapes
     QList<KoPathShape*> selectedShapes() const;

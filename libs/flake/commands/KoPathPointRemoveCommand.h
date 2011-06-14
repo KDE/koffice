@@ -24,7 +24,7 @@
 #include <QUndoCommand>
 #include <QList>
 #include "KPathPoint.h"
-#include "KoPathPointData.h"
+#include "KPathPointData.h"
 #include "flake_export.h"
 
 class KoShapeController;
@@ -45,7 +45,7 @@ public:
      * @param shapeController shape controller in charge
      * @param parent the parent command used for macro commands
      */
-    static QUndoCommand *createCommand(const QList<KoPathPointData> &pointDataList, KoShapeController *shapeController, QUndoCommand *parent = 0);
+    static QUndoCommand *createCommand(const QList<KPathPointData> &pointDataList, KoShapeController *shapeController, QUndoCommand *parent = 0);
 
     /**
      * @brief Command to remove a points from path shapes
@@ -55,7 +55,7 @@ public:
      * @param pointDataList List of point data to remove.
      * @param parent the parent command used for macro commands
      */
-    explicit KoPathPointRemoveCommand(const QList<KoPathPointData> &pointDataList, QUndoCommand *parent = 0);
+    explicit KoPathPointRemoveCommand(const QList<KPathPointData> &pointDataList, QUndoCommand *parent = 0);
     ~KoPathPointRemoveCommand();
 
     /// redo the command

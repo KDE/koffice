@@ -29,13 +29,13 @@ public:
         if (deletePoints)
             qDeleteAll(points);
     }
-    QList<KoPathPointData> pointDataList;
+    QList<KPathPointData> pointDataList;
     QList<KPathPoint*> points;
     QList<QPair<QPointF, QPointF> > controlPoints;
     bool deletePoints;
 };
 
-KoPathPointInsertCommand::KoPathPointInsertCommand(const QList<KoPathPointData> &pointDataList, qreal insertPosition, QUndoCommand *parent)
+KoPathPointInsertCommand::KoPathPointInsertCommand(const QList<KPathPointData> &pointDataList, qreal insertPosition, QUndoCommand *parent)
         : QUndoCommand(parent),
         d(new KoPathPointInsertCommandPrivate())
 {
@@ -46,7 +46,7 @@ KoPathPointInsertCommand::KoPathPointInsertCommand(const QList<KoPathPointData> 
 
     //TODO the list needs to be sorted
 
-    QList<KoPathPointData>::const_iterator it(pointDataList.begin());
+    QList<KPathPointData>::const_iterator it(pointDataList.begin());
     for (; it != pointDataList.end(); ++it) {
         KoPathShape * pathShape = it->pathShape;
 
@@ -84,7 +84,7 @@ void KoPathPointInsertCommand::redo()
 {
     QUndoCommand::redo();
     for (int i = d->pointDataList.size() - 1; i >= 0; --i) {
-        KoPathPointData pointData = d->pointDataList.at(i);
+        KPathPointData pointData = d->pointDataList.at(i);
         KoPathShape * pathShape = pointData.pathShape;
 
         KoPathSegment segment = pathShape->segmentByIndex(pointData.pointIndex);
@@ -113,7 +113,7 @@ void KoPathPointInsertCommand::undo()
 {
     QUndoCommand::undo();
     for (int i = 0; i < d->pointDataList.size(); ++i) {
-        const KoPathPointData &pdBefore = d->pointDataList.at(i);
+        const KPathPointData &pdBefore = d->pointDataList.at(i);
         KoPathShape * pathShape = pdBefore.pathShape;
         KoPathPointIndex piAfter = pdBefore.pointIndex;
         ++piAfter.second;

@@ -23,13 +23,13 @@
 #include <math.h>
 
 KoPathPointTypeCommand::KoPathPointTypeCommand(
-    const QList<KoPathPointData> & pointDataList,
+    const QList<KPathPointData> & pointDataList,
     PointType pointType,
     QUndoCommand *parent)
         : KPathBaseCommand(parent)
         , m_pointType(pointType)
 {
-    QList<KoPathPointData>::const_iterator it(pointDataList.begin());
+    QList<KPathPointData>::const_iterator it(pointDataList.begin());
     for (; it != pointDataList.end(); ++it) {
         KPathPoint *point = it->pathShape->pointByIndex(it->pointIndex);
         if (point) {
@@ -87,7 +87,7 @@ void KoPathPointTypeCommand::redo()
             KPathPoint * prevPoint = path->pointByIndex(prevIndex);
             KPathPoint * nextPoint = path->pointByIndex(nextIndex);
 
-            if (prevPoint && ! point->activeControlPoint1() && appendPointData(KoPathPointData(path, prevIndex))) {
+            if (prevPoint && ! point->activeControlPoint1() && appendPointData(KPathPointData(path, prevIndex))) {
                 KoPathSegment cubic = KoPathSegment(prevPoint, point).toCubic();
                 if (prevPoint->activeControlPoint2()) {
                     prevPoint->setControlPoint2(cubic.first()->controlPoint2());
@@ -95,7 +95,7 @@ void KoPathPointTypeCommand::redo()
                 } else
                     point->setControlPoint1(cubic.second()->controlPoint1());
             }
-            if (nextPoint && ! point->activeControlPoint2() && appendPointData(KoPathPointData(path, nextIndex))) {
+            if (nextPoint && ! point->activeControlPoint2() && appendPointData(KPathPointData(path, nextIndex))) {
                 KoPathSegment cubic = KoPathSegment(point, nextPoint).toCubic();
                 if (nextPoint->activeControlPoint1()) {
                     point->setControlPoint2(cubic.first()->controlPoint2());
@@ -202,7 +202,7 @@ void KoPathPointTypeCommand::undoChanges(const QList<PointData> &data)
     }
 }
 
-bool KoPathPointTypeCommand::appendPointData(KoPathPointData data)
+bool KoPathPointTypeCommand::appendPointData(KPathPointData data)
 {
     KPathPoint *point = data.pathShape->pointByIndex(data.pointIndex);
     if (! point)

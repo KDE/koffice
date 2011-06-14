@@ -32,13 +32,13 @@ public:
         if (deletePoints)
             qDeleteAll(points);
     }
-    QList<KoPathPointData> pointDataList;
+    QList<KPathPointData> pointDataList;
     QList<KPathPoint*> points;
     bool deletePoints;
 };
 
 QUndoCommand *KoPathPointRemoveCommand::createCommand(
-    const QList<KoPathPointData> &pointDataList,
+    const QList<KPathPointData> &pointDataList,
     KoShapeController *shapeController,
     QUndoCommand *parent)
 {
@@ -49,23 +49,23 @@ QUndoCommand *KoPathPointRemoveCommand::createCommand(
      * 3. delete a complete path
      */
 
-    QList<KoPathPointData> sortedPointData(pointDataList);
+    QList<KPathPointData> sortedPointData(pointDataList);
     qSort(sortedPointData);
 
-    KoPathPointData last(0, KoPathPointIndex(-1, -1));
+    KPathPointData last(0, KoPathPointIndex(-1, -1));
     // add last at the end so that the point date before last will also be put in
     // the right places.
     sortedPointData.append(last);
 
-    QList<KoPathPointData> pointsOfSubpath; // points of current subpath
-    QList<KoPathPointData> subpathsOfPath;  // subpaths of current path
-    QList<KoPathPointData> pointsToDelete;  // single points to delete
-    QList<KoPathPointData> subpathToDelete; // single subpaths to delete
+    QList<KPathPointData> pointsOfSubpath; // points of current subpath
+    QList<KPathPointData> subpathsOfPath;  // subpaths of current path
+    QList<KPathPointData> pointsToDelete;  // single points to delete
+    QList<KPathPointData> subpathToDelete; // single subpaths to delete
     QList<KoShape*> shapesToDelete;         // single paths to delete
 
     last = sortedPointData.first();
 
-    QList<KoPathPointData>::const_iterator it(sortedPointData.constBegin());
+    QList<KPathPointData>::const_iterator it(sortedPointData.constBegin());
     for (; it != sortedPointData.constEnd(); ++it) {
         // check if we have come to the next subpath of the same or another path
         if (last.pathShape != it->pathShape || last.pointIndex.first != it->pointIndex.first) {
@@ -106,7 +106,7 @@ QUndoCommand *KoPathPointRemoveCommand::createCommand(
     if (pointsToDelete.size() > 0) {
         new KoPathPointRemoveCommand(pointsToDelete, cmd);
     }
-    foreach(const KoPathPointData & pd, subpathToDelete) {
+    foreach(const KPathPointData & pd, subpathToDelete) {
         new KoSubpathRemoveCommand(pd.pathShape, pd.pointIndex.first, cmd);
     }
     if (shapesToDelete.size() > 0) {
@@ -116,12 +116,12 @@ QUndoCommand *KoPathPointRemoveCommand::createCommand(
     return cmd;
 }
 
-KoPathPointRemoveCommand::KoPathPointRemoveCommand(const QList<KoPathPointData> & pointDataList,
+KoPathPointRemoveCommand::KoPathPointRemoveCommand(const QList<KPathPointData> & pointDataList,
         QUndoCommand *parent)
     : QUndoCommand(parent),
     d(new KoPathPointRemoveCommandPrivate())
 {
-    QList<KoPathPointData>::const_iterator it(pointDataList.begin());
+    QList<KPathPointData>::const_iterator it(pointDataList.begin());
     for (; it != pointDataList.end(); ++it) {
         KPathPoint *point = it->pathShape->pointByIndex(it->pointIndex);
         if (point) {
@@ -144,7 +144,7 @@ void KoPathPointRemoveCommand::redo()
     KoPathShape * lastPathShape = 0;
     int updateBefore = d->pointDataList.size();
     for (int i = d->pointDataList.size() - 1; i >= 0; --i) {
-        const KoPathPointData &pd = d->pointDataList.at(i);
+        const KPathPointData &pd = d->pointDataList.at(i);
         pd.pathShape->update();
         d->points[i] = pd.pathShape->removePoint(pd.pointIndex);
 
@@ -183,7 +183,7 @@ void KoPathPointRemoveCommand::undo()
     QUndoCommand::undo();
     KoPathShape * lastPathShape = 0;
     for (int i = 0; i < d->pointDataList.size(); ++i) {
-        const KoPathPointData &pd = d->pointDataList.at(i);
+        const KPathPointData &pd = d->pointDataList.at(i);
         if (lastPathShape && lastPathShape != pd.pathShape) {
             lastPathShape->normalize();
             lastPathShape->update();

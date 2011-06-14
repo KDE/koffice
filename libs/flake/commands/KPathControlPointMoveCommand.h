@@ -24,7 +24,7 @@
 #include <QUndoCommand>
 #include <QPointF>
 #include "KoPathShape.h"
-#include "KoPathPointData.h"
+#include "KPathPointData.h"
 #include "KPathPoint.h"
 #include "flake_export.h"
 
@@ -39,14 +39,14 @@ public:
      * @param pointType the type of the point to move
      * @param parent the parent command used for macro commands
      */
-    KPathControlPointMoveCommand(const KoPathPointData &pointData, const QPointF &offset,
+    KPathControlPointMoveCommand(const KPathPointData &pointData, const QPointF &offset,
             KPathPoint::PointType pointType, QUndoCommand *parent = 0);
     /// redo the command
     void redo();
     /// revert the actions done in redo
     void undo();
 private:
-    KoPathPointData m_pointData;
+    KPathPointData m_pointData;
     // the offset in shape coordinates
     QPointF m_offset;
     KPathPoint::PointType m_pointType;

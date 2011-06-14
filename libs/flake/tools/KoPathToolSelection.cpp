@@ -24,7 +24,7 @@
 #include "KoPathTool_p.h"
 #include <KParameterShape.h>
 #include <KPathPoint.h>
-#include <KoPathPointData.h>
+#include <KPathPointData.h>
 #include <KoViewConverter.h>
 #include <KCanvasBase.h>
 #include <KoResourceManager.h>
@@ -145,27 +145,27 @@ const QSet<KPathPoint *> & KoPathToolSelection::selectedPoints() const
     return m_selectedPoints;
 }
 
-QList<KoPathPointData> KoPathToolSelection::selectedPointsData() const
+QList<KPathPointData> KoPathToolSelection::selectedPointsData() const
 {
-    QList<KoPathPointData> pointData;
+    QList<KPathPointData> pointData;
     foreach(KPathPoint* p, m_selectedPoints) {
         KoPathShape * pathShape = p->parent();
-        pointData.append(KoPathPointData(pathShape, pathShape->pathPointIndex(p)));
+        pointData.append(KPathPointData(pathShape, pathShape->pathPointIndex(p)));
     }
     return pointData;
 }
 
-QList<KoPathPointData> KoPathToolSelection::selectedSegmentsData() const
+QList<KPathPointData> KoPathToolSelection::selectedSegmentsData() const
 {
-    QList<KoPathPointData> pointData;
+    QList<KPathPointData> pointData;
 
-    QList<KoPathPointData> pd(selectedPointsData());
+    QList<KPathPointData> pd(selectedPointsData());
     qSort(pd);
 
-    KoPathPointData last(0, KoPathPointIndex(-1, -1));
-    KoPathPointData lastSubpathStart(0, KoPathPointIndex(-1, -1));
+    KPathPointData last(0, KoPathPointIndex(-1, -1));
+    KPathPointData lastSubpathStart(0, KoPathPointIndex(-1, -1));
 
-    QList<KoPathPointData>::const_iterator it(pd.constBegin());
+    QList<KPathPointData>::const_iterator it(pd.constBegin());
     for (; it != pd.constEnd(); ++it) {
         if (it->pointIndex.second == 0)
             lastSubpathStart = *it;

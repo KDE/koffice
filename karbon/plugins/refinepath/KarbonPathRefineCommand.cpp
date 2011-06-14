@@ -19,7 +19,7 @@
 
 #include "KarbonPathRefineCommand.h"
 #include <KoPathShape.h>
-#include <KoPathPointData.h>
+#include <KPathPointData.h>
 #include <KoPathPointInsertCommand.h>
 #include <klocale.h>
 #include <kdebug.h>
@@ -55,7 +55,7 @@ void KarbonPathRefineCommand::redo()
         for (uint iteration = 0; iteration < d->insertCount; ++iteration) {
             // in each iteration collect the (iteration+1)th point which starts a segments
             // into which we insert the point of this iteration
-            QList<KoPathPointData> pointData;
+            QList<KPathPointData> pointData;
             // calculate the segment position where to insert the point
             qreal insertPosition = 1.0 / (d->insertCount + 1 - iteration);
             int subpathCount = d->path->subpathCount();
@@ -67,7 +67,7 @@ void KarbonPathRefineCommand::redo()
                     // we only collect the (iteration+1)th point
                     if ((pointIndex + 1) % (iteration + 1) != 0)
                         continue;
-                    pointData.append(KoPathPointData(d->path, KoPathPointIndex(subpathIndex, pointIndex)));
+                    pointData.append(KPathPointData(d->path, KoPathPointIndex(subpathIndex, pointIndex)));
                 }
             }
             // create the command and execute it

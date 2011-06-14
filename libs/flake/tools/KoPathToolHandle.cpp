@@ -104,7 +104,7 @@ KInteractionStrategy * PointHandle::handleMousePress(KoPointerEvent *event)
             return new KoPathPointMoveStrategy(m_tool, startPoint);
         } else {
             KoPathShape * pathShape = m_activePoint->parent();
-            KoPathPointData pd(pathShape, pathShape->pathPointIndex(m_activePoint));
+            KPathPointData pd(pathShape, pathShape->pathPointIndex(m_activePoint));
             return new KPathControlPointMoveStrategy(m_tool, pd, m_activePointType, event->point);
         }
     } else {
@@ -119,8 +119,8 @@ KInteractionStrategy * PointHandle::handleMousePress(KoPointerEvent *event)
         else if (props & KPathPoint::IsSymmetric)
             pointType = KoPathPointTypeCommand::Corner;
 
-        QList<KoPathPointData> pointData;
-        pointData.append(KoPathPointData(m_activePoint->parent(), m_activePoint->parent()->pathPointIndex(m_activePoint)));
+        QList<KPathPointData> pointData;
+        pointData.append(KPathPointData(m_activePoint->parent(), m_activePoint->parent()->pathPointIndex(m_activePoint)));
         m_tool->canvas()->addCommand(new KoPathPointTypeCommand(pointData, pointType));
     }
     return 0;

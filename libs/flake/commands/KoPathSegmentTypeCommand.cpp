@@ -21,16 +21,16 @@
 #include "KoPathSegmentTypeCommand.h"
 #include <klocale.h>
 
-KoPathSegmentTypeCommand::KoPathSegmentTypeCommand(const KoPathPointData & pointData, SegmentType segmentType, QUndoCommand *parent)
+KoPathSegmentTypeCommand::KoPathSegmentTypeCommand(const KPathPointData & pointData, SegmentType segmentType, QUndoCommand *parent)
 : QUndoCommand(parent)
 , m_segmentType(segmentType)
 {
-    QList<KoPathPointData> pointDataList;
+    QList<KPathPointData> pointDataList;
     pointDataList.append(pointData);
     initialize(pointDataList);
 }
 
-KoPathSegmentTypeCommand::KoPathSegmentTypeCommand(const QList<KoPathPointData> & pointDataList, SegmentType segmentType,
+KoPathSegmentTypeCommand::KoPathSegmentTypeCommand(const QList<KPathPointData> & pointDataList, SegmentType segmentType,
         QUndoCommand *parent)
         : QUndoCommand(parent)
         , m_segmentType(segmentType)
@@ -45,7 +45,7 @@ KoPathSegmentTypeCommand::~KoPathSegmentTypeCommand()
 void KoPathSegmentTypeCommand::redo()
 {
     QUndoCommand::redo();
-    QList<KoPathPointData>::const_iterator it(m_pointDataList.constBegin());
+    QList<KPathPointData>::const_iterator it(m_pointDataList.constBegin());
     for (; it != m_pointDataList.constEnd(); ++it) {
         KoPathShape * pathShape = it->pathShape;
         pathShape->update();
@@ -72,7 +72,7 @@ void KoPathSegmentTypeCommand::undo()
 {
     QUndoCommand::undo();
     for (int i = 0; i < m_pointDataList.size(); ++i) {
-        const KoPathPointData & pd = m_pointDataList.at(i);
+        const KPathPointData & pd = m_pointDataList.at(i);
         pd.pathShape->update();
         KoPathSegment segment = pd.pathShape->segmentByIndex(pd.pointIndex);
         const SegmentTypeData segmentData(m_segmentData.at(i));
@@ -95,9 +95,9 @@ void KoPathSegmentTypeCommand::undo()
     }
 }
 
-void KoPathSegmentTypeCommand::initialize(const QList<KoPathPointData> & pointDataList)
+void KoPathSegmentTypeCommand::initialize(const QList<KPathPointData> & pointDataList)
 {
-    QList<KoPathPointData>::const_iterator it(pointDataList.begin());
+    QList<KPathPointData>::const_iterator it(pointDataList.begin());
     for (; it != pointDataList.end(); ++it) {
         KoPathSegment segment = it->pathShape->segmentByIndex(it->pointIndex);
         if (segment.isValid()) {
