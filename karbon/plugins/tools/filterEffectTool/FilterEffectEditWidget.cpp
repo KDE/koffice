@@ -25,7 +25,7 @@
 #include "FilterRemoveCommand.h"
 #include "FilterStackSetCommand.h"
 #include "KoGenericRegistryModel.h"
-#include "KoFilterEffectRegistry.h"
+#include "KFilterEffectRegistry.h"
 #include "KFilterEffect.h"
 #include "KoFilterEffectStack.h"
 #include "KFilterEffectConfigWidgetBase.h"
@@ -60,7 +60,7 @@ FilterEffectEditWidget::FilterEffectEditWidget(QWidget *parent)
     connect(presets, SIGNAL(resourceApplied(KoResource*)),
             this, SLOT(presetSelected(KoResource*)));
 
-    KoGenericRegistryModel<KFilterEffectFactoryBase*> * filterEffectModel = new KoGenericRegistryModel<KFilterEffectFactoryBase*>(KoFilterEffectRegistry::instance());
+    KoGenericRegistryModel<KFilterEffectFactoryBase*> * filterEffectModel = new KoGenericRegistryModel<KFilterEffectFactoryBase*>(KFilterEffectRegistry::instance());
 
     effectSelector->setModel(filterEffectModel);
     removeEffect->setIcon(KIcon("list-remove"));
@@ -155,7 +155,7 @@ void FilterEffectEditWidget::showEvent(QShowEvent * event)
 
 void FilterEffectEditWidget::addSelectedEffect()
 {
-    KoFilterEffectRegistry * registry = KoFilterEffectRegistry::instance();
+    KFilterEffectRegistry * registry = KFilterEffectRegistry::instance();
     KFilterEffectFactoryBase * factory = registry->values()[effectSelector->currentIndex()];
     if (!factory)
         return;
@@ -433,7 +433,7 @@ void FilterEffectEditWidget::addWidgetForItem(ConnectionSource item)
         // when a shape is set and is differs from the previous one
         // get the config widget and insert it into the option widget
 
-        KoFilterEffectRegistry * registry = KoFilterEffectRegistry::instance();
+        KFilterEffectRegistry * registry = KFilterEffectRegistry::instance();
         KFilterEffectFactoryBase * factory = registry->value(filterEffect->id());
         if (!factory)
             return;

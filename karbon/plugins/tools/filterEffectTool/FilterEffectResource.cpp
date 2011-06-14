@@ -20,7 +20,7 @@
 #include "FilterEffectResource.h"
 #include <KFilterEffect.h>
 #include <KoFilterEffectStack.h>
-#include <KoFilterEffectRegistry.h>
+#include <KFilterEffectRegistry.h>
 #include <KFilterEffectLoadingContext.h>
 #include <KXmlWriter.h>
 
@@ -134,7 +134,7 @@ KoFilterEffectStack * FilterEffectResource::toFilterStack() const
 
     KFilterEffectLoadingContext context(QString(""));
 
-    KoFilterEffectRegistry * registry = KoFilterEffectRegistry::instance();
+    KFilterEffectRegistry * registry = KFilterEffectRegistry::instance();
 
     // create the filter effects and add them to the shape
     for (KXmlNode n = e.firstChild(); !n.isNull(); n = n.nextSibling()) {

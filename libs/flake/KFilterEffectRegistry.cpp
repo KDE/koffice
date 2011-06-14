@@ -17,17 +17,17 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoFilterEffectRegistry.h"
+#include "KFilterEffectRegistry.h"
 #include "KFilterEffect.h"
 #include <KoPluginLoader.h>
 #include <KGlobal>
 #include <KXmlReader.h>
 
-KoFilterEffectRegistry::KoFilterEffectRegistry()
+KFilterEffectRegistry::KFilterEffectRegistry()
 {
 }
 
-void KoFilterEffectRegistry::init()
+void KFilterEffectRegistry::init()
 {
     KoPluginLoader::PluginsConfig config;
     config.whiteList = "FilterEffectPlugins";
@@ -38,20 +38,20 @@ void KoFilterEffectRegistry::init()
 }
 
 
-KoFilterEffectRegistry::~KoFilterEffectRegistry()
+KFilterEffectRegistry::~KFilterEffectRegistry()
 {
 }
 
-KoFilterEffectRegistry* KoFilterEffectRegistry::instance()
+KFilterEffectRegistry* KFilterEffectRegistry::instance()
 {
-    K_GLOBAL_STATIC(KoFilterEffectRegistry, s_instance)
+    K_GLOBAL_STATIC(KFilterEffectRegistry, s_instance)
     if (!s_instance.exists()) {
         s_instance->init();
     }
     return s_instance;
 }
 
-KFilterEffect * KoFilterEffectRegistry::createFilterEffectFromXml(const KXmlElement & element, const KFilterEffectLoadingContext &context)
+KFilterEffect * KFilterEffectRegistry::createFilterEffectFromXml(const KXmlElement & element, const KFilterEffectLoadingContext &context)
 {
     KFilterEffectFactoryBase * factory = get(element.tagName());
     if (!factory)
@@ -65,4 +65,4 @@ KFilterEffect * KoFilterEffectRegistry::createFilterEffectFromXml(const KXmlElem
     return 0;
 }
 
-#include <KoFilterEffectRegistry.moc>
+#include <KFilterEffectRegistry.moc>

@@ -30,7 +30,7 @@
 #include "MorphologyEffectFactory.h"
 #include "ConvolveMatrixEffectFactory.h"
 
-#include "KoFilterEffectRegistry.h"
+#include "KFilterEffectRegistry.h"
 
 #include <KPluginFactory>
 
@@ -40,17 +40,17 @@ K_EXPORT_PLUGIN(KarbonFilterEffectsPluginFacory("FilterEffects"))
 KarbonFilterEffectsPlugin::KarbonFilterEffectsPlugin(QObject *parent, const QList<QVariant>&)
         : QObject(parent)
 {
-    KoFilterEffectRegistry::instance()->add(new BlurEffectFactory(parent));
-    KoFilterEffectRegistry::instance()->add(new OffsetEffectFactory(parent));
-    KoFilterEffectRegistry::instance()->add(new MergeEffectFactory(parent));
-    KoFilterEffectRegistry::instance()->add(new ColorMatrixEffectFactory(parent));
-    KoFilterEffectRegistry::instance()->add(new FloodEffectFactory(parent));
-    KoFilterEffectRegistry::instance()->add(new CompositeEffectFactory(parent));
-    KoFilterEffectRegistry::instance()->add(new BlendEffectFactory(parent));
-    KoFilterEffectRegistry::instance()->add(new ComponentTransferEffectFactory(parent));
-    KoFilterEffectRegistry::instance()->add(new ImageEffectFactory(parent));
-    KoFilterEffectRegistry::instance()->add(new MorphologyEffectFactory(parent));
-    KoFilterEffectRegistry::instance()->add(new ConvolveMatrixEffectFactory(parent));
+    KFilterEffectRegistry::instance()->add(new BlurEffectFactory(parent));
+    KFilterEffectRegistry::instance()->add(new OffsetEffectFactory(parent));
+    KFilterEffectRegistry::instance()->add(new MergeEffectFactory(parent));
+    KFilterEffectRegistry::instance()->add(new ColorMatrixEffectFactory(parent));
+    KFilterEffectRegistry::instance()->add(new FloodEffectFactory(parent));
+    KFilterEffectRegistry::instance()->add(new CompositeEffectFactory(parent));
+    KFilterEffectRegistry::instance()->add(new BlendEffectFactory(parent));
+    KFilterEffectRegistry::instance()->add(new ComponentTransferEffectFactory(parent));
+    KFilterEffectRegistry::instance()->add(new ImageEffectFactory(parent));
+    KFilterEffectRegistry::instance()->add(new MorphologyEffectFactory(parent));
+    KFilterEffectRegistry::instance()->add(new ConvolveMatrixEffectFactory(parent));
 }
 
 #include "KarbonFilterEffectsPlugin.moc"

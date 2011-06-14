@@ -48,7 +48,7 @@
 #include <KoColorBackground.h>
 #include <KoGradientBackground.h>
 #include <KoPatternBackground.h>
-#include <KoFilterEffectRegistry.h>
+#include <KFilterEffectRegistry.h>
 #include <KFilterEffect.h>
 #include "KoFilterEffectStack.h"
 #include "KFilterEffectLoadingContext.h"
@@ -1267,7 +1267,7 @@ void SvgParser::applyFilter(KoShape * shape)
     context.enableFilterUnitsConversion(filter->filterUnits() == SvgFilterHelper::UserSpaceOnUse);
     context.enableFilterPrimitiveUnitsConversion(filter->primitiveUnits() == SvgFilterHelper::UserSpaceOnUse);
 
-    KoFilterEffectRegistry * registry = KoFilterEffectRegistry::instance();
+    KFilterEffectRegistry * registry = KFilterEffectRegistry::instance();
 
     KoFilterEffectStack * filterStack = 0;
 

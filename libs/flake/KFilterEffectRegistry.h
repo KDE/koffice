@@ -30,18 +30,18 @@
 class KXmlElement;
 class KFilterEffectLoadingContext;
 
-class FLAKE_EXPORT KoFilterEffectRegistry : public QObject, public KoGenericRegistry<KFilterEffectFactoryBase*>
+class FLAKE_EXPORT KFilterEffectRegistry : public QObject, public KoGenericRegistry<KFilterEffectFactoryBase*>
 {
 Q_OBJECT
 
 public:
-    virtual ~KoFilterEffectRegistry();
+    virtual ~KFilterEffectRegistry();
 
     /**
-    * Return the only instance of KoFilterEffectRegistry.
+    * Return the only instance of KFilterEffectRegistry.
     * Creates an instance on the first call.
     */
-    static KoFilterEffectRegistry *instance();
+    static KFilterEffectRegistry *instance();
 
     /**
      * Creates filter effect from given xml element.
@@ -51,9 +51,9 @@ public:
     KFilterEffect *createFilterEffectFromXml(const KXmlElement &element, const KFilterEffectLoadingContext &context);
 
 private:
-    KoFilterEffectRegistry();
-    KoFilterEffectRegistry(const KoFilterEffectRegistry&);
-    KoFilterEffectRegistry operator=(const KoFilterEffectRegistry&);
+    KFilterEffectRegistry();
+    KFilterEffectRegistry(const KFilterEffectRegistry&);
+    KFilterEffectRegistry operator=(const KFilterEffectRegistry&);
     void init();
 
     class Private;

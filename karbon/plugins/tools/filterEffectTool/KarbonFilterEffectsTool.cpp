@@ -23,7 +23,7 @@
 #include "KFilterEffect.h"
 #include "KoFilterEffectStack.h"
 #include "KFilterEffectFactoryBase.h"
-#include "KoFilterEffectRegistry.h"
+#include "KFilterEffectRegistry.h"
 #include "KFilterEffectConfigWidgetBase.h"
 #include "KoCanvasBase.h"
 #include "KoResourceManager.h"
@@ -104,7 +104,7 @@ public:
             // get the config widget and insert it into the option widget
             currentEffect = filterEffect;
 
-            KoFilterEffectRegistry * registry = KoFilterEffectRegistry::instance();
+            KFilterEffectRegistry * registry = KFilterEffectRegistry::instance();
             KFilterEffectFactoryBase * factory = registry->value(currentEffect->id());
             if (!factory)
                 return;
