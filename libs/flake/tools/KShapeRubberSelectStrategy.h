@@ -29,7 +29,7 @@
 #include "flake_export.h"
 
 class KoToolBase;
-class KoShapeRubberSelectStrategyPrivate;
+class KShapeRubberSelectStrategyPrivate;
 
 /**
  * Implement the rubber band selection of flake objects.
@@ -55,7 +55,7 @@ public:
 
 protected:
     /// constructor
-    KShapeRubberSelectStrategy(KoShapeRubberSelectStrategyPrivate &);
+    KShapeRubberSelectStrategy(KShapeRubberSelectStrategyPrivate &);
 
 private:
     Q_DECLARE_PRIVATE(KShapeRubberSelectStrategy)
