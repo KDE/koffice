@@ -20,14 +20,14 @@
 #ifndef KSPREAD_RIGHTTOLEFT_PAINTING_STRATEGY
 #define KSPREAD_RIGHTTOLEFT_PAINTING_STRATEGY
 
-#include <KoShapeManagerPaintingStrategy.h>
+#include <KShapeManagerPaintingStrategy.h>
 
 class KCanvasBase;
 
 
 /**
  */
-class RightToLeftPaintingStrategy : public KoShapeManagerPaintingStrategy
+class RightToLeftPaintingStrategy : public KShapeManagerPaintingStrategy
 {
 public:
     RightToLeftPaintingStrategy(KShapeManager *shapeManager, KCanvasBase *canvas);

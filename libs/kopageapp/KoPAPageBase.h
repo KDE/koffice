@@ -37,7 +37,7 @@ class KOdfLoadingContext;
 class KOdfGenericStyle;
 class KShape;
 class KoPALoadingContext;
-class KoShapeManagerPaintingStrategy;
+class KShapeManagerPaintingStrategy;
 class KoZoomHandler;
 class KoPASavingContext;
 
@@ -263,7 +263,7 @@ protected:
      *
      * @return 0 which mean use the default strategy
      */
-    virtual KoShapeManagerPaintingStrategy * getPaintingStrategy() const;
+    virtual KShapeManagerPaintingStrategy * getPaintingStrategy() const;
 };
 
 #endif /* KOPAPAGEBASE_H */

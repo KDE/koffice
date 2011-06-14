@@ -24,7 +24,7 @@
 #include "SCPageSelectStrategyBase.h"
 
 SCShapeManagerDisplayMasterStrategy::SCShapeManagerDisplayMasterStrategy(KShapeManager * shapeManager, SCPageSelectStrategyBase * strategy)
-: KoShapeManagerPaintingStrategy(shapeManager)
+: KShapeManagerPaintingStrategy(shapeManager)
 , m_strategy(strategy)
 {
 }
@@ -38,7 +38,7 @@ void SCShapeManagerDisplayMasterStrategy::paint(KShape * shape, QPainter &painte
 {
     if (! dynamic_cast<SCPlaceholderShape *>(shape)) {
         if (m_strategy->page()->displayShape(shape)) {
-            KoShapeManagerPaintingStrategy::paint(shape, painter, converter, forPrint);
+            KShapeManagerPaintingStrategy::paint(shape, painter, converter, forPrint);
         }
     }
 }

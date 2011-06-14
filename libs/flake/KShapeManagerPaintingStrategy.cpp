@@ -18,13 +18,13 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KoShapeManagerPaintingStrategy.h"
+#include "KShapeManagerPaintingStrategy.h"
 
 #include "KShape.h"
 #include "KShapeManager.h"
 #include <QPainter>
 
-class KoShapeManagerPaintingStrategy::Private
+class KShapeManagerPaintingStrategy::Private
 {
 public:
     Private(KShapeManager * manager)
@@ -34,17 +34,17 @@ public:
     KShapeManager * shapeManager;
 };
 
-KoShapeManagerPaintingStrategy::KoShapeManagerPaintingStrategy(KShapeManager * shapeManager)
-: d(new KoShapeManagerPaintingStrategy::Private(shapeManager))
+KShapeManagerPaintingStrategy::KShapeManagerPaintingStrategy(KShapeManager * shapeManager)
+: d(new KShapeManagerPaintingStrategy::Private(shapeManager))
 {
 }
 
-KoShapeManagerPaintingStrategy::~KoShapeManagerPaintingStrategy()
+KShapeManagerPaintingStrategy::~KShapeManagerPaintingStrategy()
 {
     delete d;
 }
 
-void KoShapeManagerPaintingStrategy::paint(KShape * shape, QPainter &painter, const KoViewConverter &converter, bool forPrint)
+void KShapeManagerPaintingStrategy::paint(KShape * shape, QPainter &painter, const KoViewConverter &converter, bool forPrint)
 {
     if (d->shapeManager) {
         painter.save();
@@ -54,18 +54,18 @@ void KoShapeManagerPaintingStrategy::paint(KShape * shape, QPainter &painter, co
     }
 }
 
-void KoShapeManagerPaintingStrategy::adapt(KShape * shape, QRectF & rect)
+void KShapeManagerPaintingStrategy::adapt(KShape * shape, QRectF & rect)
 {
     Q_UNUSED(shape);
     Q_UNUSED(rect);
 }
 
-void KoShapeManagerPaintingStrategy::setShapeManager(KShapeManager * shapeManager)
+void KShapeManagerPaintingStrategy::setShapeManager(KShapeManager * shapeManager)
 {
     d->shapeManager = shapeManager;
 }
 
-KShapeManager * KoShapeManagerPaintingStrategy::shapeManager()
+KShapeManager * KShapeManagerPaintingStrategy::shapeManager()
 {
     return d->shapeManager;
 }

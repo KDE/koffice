@@ -21,11 +21,11 @@
 #ifndef KPRSHAPEMANAGERDISPLAYMASTERSTRATEGY_H
 #define KPRSHAPEMANAGERDISPLAYMASTERSTRATEGY_H
 
-#include <KoShapeManagerPaintingStrategy.h>
+#include <KShapeManagerPaintingStrategy.h>
 
 class SCPageSelectStrategyBase;
 
-class SCShapeManagerDisplayMasterStrategy : public KoShapeManagerPaintingStrategy
+class SCShapeManagerDisplayMasterStrategy : public KShapeManagerPaintingStrategy
 {
 public:
     /**

@@ -45,7 +45,7 @@
 #include <kdebug.h>
 #include <KOdfPageLayoutData.h>
 #include <KShapeManager.h>
-#include <KoShapeManagerPaintingStrategy.h>
+#include <KShapeManagerPaintingStrategy.h>
 #include <KoViewConverter.h>
 #include <KoPAViewMode.h>
 #include <KoPACanvas.h>
@@ -95,8 +95,8 @@ SCAnimationDirector::~SCAnimationDirector()
     // free used resources
     delete m_pageEffectRunner;
     delete m_animationCache;
-    //set the KoShapeManagerPaintingStrategy in the KoShapeManagers
-    m_canvas->shapeManager()->setPaintingStrategy(new KoShapeManagerPaintingStrategy(m_canvas->shapeManager()));
+    //set the KShapeManagerPaintingStrategy in the KoShapeManagers
+    m_canvas->shapeManager()->setPaintingStrategy(new KShapeManagerPaintingStrategy(m_canvas->shapeManager()));
     m_canvas->masterShapeManager()->setPaintingStrategy(new SCShapeManagerDisplayMasterStrategy(m_canvas->masterShapeManager(),
                                                              new SCPageSelectStrategyActive(m_view->kopaCanvas())));
 }

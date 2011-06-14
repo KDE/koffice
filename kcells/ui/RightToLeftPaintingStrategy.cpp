@@ -35,7 +35,7 @@ public:
 
 
 RightToLeftPaintingStrategy::RightToLeftPaintingStrategy(KShapeManager *shapeManager, KCanvasBase *canvas)
-        : KoShapeManagerPaintingStrategy(shapeManager)
+        : KShapeManagerPaintingStrategy(shapeManager)
         , d(new Private)
 {
     d->canvas = canvas;

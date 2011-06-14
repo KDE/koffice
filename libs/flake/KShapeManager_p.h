@@ -103,6 +103,6 @@ public:
 
     QSet<KShape *> aggregate4update;
     QHash<KShape*, int> shapeIndexesBeforeUpdate;
-    KoShapeManagerPaintingStrategy *strategy;
+    KShapeManagerPaintingStrategy *strategy;
     KShapeManager *q;
 };

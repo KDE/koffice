@@ -42,7 +42,7 @@ private:
 };
 
 KarbonOutlinePaintingStrategy::KarbonOutlinePaintingStrategy(KShapeManager * shapeManager)
-        : KoShapeManagerPaintingStrategy(shapeManager), m_border(new OutlineStroke())
+        : KShapeManagerPaintingStrategy(shapeManager), m_border(new OutlineStroke())
 {
     Q_ASSERT(shapeManager);
     shapeManager->setPaintingStrategy(this);

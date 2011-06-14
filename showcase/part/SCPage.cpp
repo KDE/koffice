@@ -367,7 +367,7 @@ bool SCPage::displayShape(KShape *shape) const
     return display;
 }
 
-KoShapeManagerPaintingStrategy * SCPage::getPaintingStrategy() const
+KShapeManagerPaintingStrategy * SCPage::getPaintingStrategy() const
 {
     return new SCShapeManagerDisplayMasterStrategy(0, new SCPageSelectStrategyFixed(this));
 }

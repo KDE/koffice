@@ -37,7 +37,7 @@
 #include <KoZoomHandler.h>
 #include <KShapeManager.h>
 #include <KoToolProxy.h>
-#include <KoShapeManagerPaintingStrategy.h>
+#include <KShapeManagerPaintingStrategy.h>
 #include <KCanvasController.h>
 #include <KSelection.h>
 
@@ -354,7 +354,7 @@ void KarbonCanvas::enableOutlineMode(bool on)
     if (on)
         new KarbonOutlinePaintingStrategy(d->shapeManager);
     else {
-        d->shapeManager->setPaintingStrategy(new KoShapeManagerPaintingStrategy(d->shapeManager));
+        d->shapeManager->setPaintingStrategy(new KShapeManagerPaintingStrategy(d->shapeManager));
     }
 }
 

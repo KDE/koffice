@@ -34,7 +34,7 @@ class KSelection;
 class KoViewConverter;
 class KCanvasBase;
 class KPointerEvent;
-class KoShapeManagerPaintingStrategy;
+class KShapeManagerPaintingStrategy;
 class KShapeConnection;
 class KoShapeManagerPrivate;
 
@@ -182,7 +182,7 @@ public:
      * @param strategy the new strategy. The ownership of the argument \p
      *    strategy will be taken by the shape manager.
      */
-    void setPaintingStrategy(KoShapeManagerPaintingStrategy *strategy);
+    void setPaintingStrategy(KShapeManagerPaintingStrategy *strategy);
 
     QPolygonF routeConnection(KShapeConnection *connection);
 

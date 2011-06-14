@@ -1186,9 +1186,9 @@ void KCView::setActiveSheet(KCSheet* sheet, bool updateSheet)
         d->horzScrollBar->setLayoutDirection(direction);
         // Replace the painting strategy for painting shapes.
         KShapeManager *const shapeManager = d->canvas->shapeManager();
-        KoShapeManagerPaintingStrategy *paintingStrategy = 0;
+        KShapeManagerPaintingStrategy *paintingStrategy = 0;
         if (direction == Qt::LeftToRight) {
-            paintingStrategy = new KoShapeManagerPaintingStrategy(shapeManager);
+            paintingStrategy = new KShapeManagerPaintingStrategy(shapeManager);
         } else {
             paintingStrategy = new RightToLeftPaintingStrategy(shapeManager, d->canvas);
         }
@@ -1346,9 +1346,9 @@ void KCView::sheetProperties()
         d->columnHeader->update();
         // Replace the painting strategy for painting shapes.
         KShapeManager *const shapeManager = d->canvas->shapeManager();
-        KoShapeManagerPaintingStrategy *paintingStrategy = 0;
+        KShapeManagerPaintingStrategy *paintingStrategy = 0;
         if (d->activeSheet->layoutDirection() == Qt::LeftToRight) {
-            paintingStrategy = new KoShapeManagerPaintingStrategy(shapeManager);
+            paintingStrategy = new KShapeManagerPaintingStrategy(shapeManager);
         } else {
             paintingStrategy = new RightToLeftPaintingStrategy(shapeManager, d->canvas);
         }

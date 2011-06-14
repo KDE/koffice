@@ -112,7 +112,7 @@ protected:
     virtual bool saveOdfPresentationNotes(KoPASavingContext &paContext) const;
 
     /// reimplemented
-    virtual KoShapeManagerPaintingStrategy * getPaintingStrategy() const;
+    virtual KShapeManagerPaintingStrategy * getPaintingStrategy() const;
 
 private:
     class Private;

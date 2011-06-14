@@ -29,7 +29,7 @@
 #include "KShapeContainer.h"
 #include "KShapeBorderBase.h"
 #include "KoToolProxy.h"
-#include "KoShapeManagerPaintingStrategy.h"
+#include "KShapeManagerPaintingStrategy.h"
 #include "KoShapeShadow.h"
 #include "KShapeConnection.h"
 #include "KShapeConnection_p.h"
@@ -50,7 +50,7 @@ KoShapeManagerPrivate::KoShapeManagerPrivate(KShapeManager *shapeManager, KCanva
     canvas(c),
     tree(4, 2),
     connectionTree(4, 2),
-    strategy(new KoShapeManagerPaintingStrategy(shapeManager)),
+    strategy(new KShapeManagerPaintingStrategy(shapeManager)),
     q(shapeManager)
 {
 }
@@ -621,7 +621,7 @@ void KShapeManager::suggestChangeTool(KPointerEvent *event)
         KoToolManager::instance()->preferredToolForSelection(shapes2));
 }
 
-void KShapeManager::setPaintingStrategy(KoShapeManagerPaintingStrategy *strategy)
+void KShapeManager::setPaintingStrategy(KShapeManagerPaintingStrategy *strategy)
 {
     delete d->strategy;
     d->strategy = strategy;

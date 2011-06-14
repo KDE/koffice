@@ -23,7 +23,7 @@
 
 #include "KCanvasBase.h"
 #include "KShapeManager.h"
-#include "KoShapeManagerPaintingStrategy.h"
+#include "KShapeManagerPaintingStrategy.h"
 #include "KShape.h"
 #include "KoViewConverter.h"
 #include "KShapeBorderBase.h"
@@ -117,7 +117,7 @@ public:
     SimpleCanvas * canvas;
 };
 
-KoShapePainter::KoShapePainter(KoShapeManagerPaintingStrategy *strategy)
+KoShapePainter::KoShapePainter(KShapeManagerPaintingStrategy *strategy)
     : d(new Private())
 {
     if (strategy) {

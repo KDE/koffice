@@ -33,7 +33,7 @@
 
 SCShapeManagerAnimationStrategy::SCShapeManagerAnimationStrategy(KShapeManager *shapeManager, SCAnimationCache* animationCache,
                                                                     SCPageSelectStrategyBase * strategy)
-: KoShapeManagerPaintingStrategy(shapeManager)
+: KShapeManagerPaintingStrategy(shapeManager)
 , m_animationCache(animationCache)
 , m_strategy(strategy)
 {

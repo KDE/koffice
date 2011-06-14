@@ -280,7 +280,7 @@ QString KoPAPageBase::thumbnailKey() const
      return key;
 }
 
-KoShapeManagerPaintingStrategy * KoPAPageBase::getPaintingStrategy() const
+KShapeManagerPaintingStrategy * KoPAPageBase::getPaintingStrategy() const
 {
     return 0;
 }

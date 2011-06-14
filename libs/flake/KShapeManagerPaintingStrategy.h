@@ -36,11 +36,11 @@ class QRectF;
  *
  * This class implements the default strategy which is normally used.
  */
-class FLAKE_EXPORT KoShapeManagerPaintingStrategy
+class FLAKE_EXPORT KShapeManagerPaintingStrategy
 {
 public:
-    KoShapeManagerPaintingStrategy(KShapeManager *shapeManager);
-    virtual ~KoShapeManagerPaintingStrategy();
+    KShapeManagerPaintingStrategy(KShapeManager *shapeManager);
+    virtual ~KShapeManagerPaintingStrategy();
 
     /**
      * Paint the shape

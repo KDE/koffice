@@ -20,12 +20,12 @@
 #ifndef KPRSHAPEMANAGERANIMATIONSTRATEGY_H
 #define KPRSHAPEMANAGERANIMATIONSTRATEGY_H
 
-#include <KoShapeManagerPaintingStrategy.h>
+#include <KShapeManagerPaintingStrategy.h>
 
 class SCAnimationCache;
 class SCPageSelectStrategyBase;
 
-class SCShapeManagerAnimationStrategy : public KoShapeManagerPaintingStrategy
+class SCShapeManagerAnimationStrategy : public KShapeManagerPaintingStrategy
 {
 public:
     SCShapeManagerAnimationStrategy(KShapeManager * shapeManager, SCAnimationCache * animationCache,
