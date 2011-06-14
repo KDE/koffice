@@ -63,7 +63,7 @@
 #include <KoShapeRegistry.h>
 #include <KResourceManager.h>
 #include <KOdfStorageDevice.h>
-#include <KoShapePainter.h>
+#include <KShapePainter.h>
 
 #include <kconfig.h>
 #include <kconfiggroup.h>
@@ -352,7 +352,7 @@ void KarbonPart::slotDocumentRestored()
 
 void KarbonPart::paintContent(QPainter &painter, const QRect& rect)
 {
-    KoShapePainter shapePainter;
+    KShapePainter shapePainter;
     shapePainter.setShapes(d->document.shapes());
     shapePainter.paint(painter, rect, QRectF(QPointF(), d->document.pageSize()));
 }

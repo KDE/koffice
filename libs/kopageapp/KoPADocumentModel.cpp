@@ -22,7 +22,7 @@
 
 #include "KoPADocument.h"
 #include "KoPAPageBase.h"
-#include <KoShapePainter.h>
+#include <KShapePainter.h>
 #include <KShapeManager.h>
 #include <KoToolManager.h>
 #include <KCanvasBase.h>
@@ -300,7 +300,7 @@ void KoPADocumentModel::setProperties(KShape* shape, const PropertyList &propert
 QImage KoPADocumentModel::createThumbnail(KShape* shape, const QSize &thumbSize) const
 {
     QSize size(thumbSize.width(), thumbSize.height());
-    KoShapePainter shapePainter;
+    KShapePainter shapePainter;
 
     QList<KShape*> shapes;
 

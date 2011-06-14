@@ -33,7 +33,7 @@
 #include <KarbonDocument.h>
 #include <KarbonPart.h>
 
-#include <KoShapePainter.h>
+#include <KShapePainter.h>
 #include <KoFilter.h>
 #include <KoFilterChain.h>
 #include <KoFilterManager.h>
@@ -67,7 +67,7 @@ PngExport::convert(const QByteArray& from, const QByteArray& to)
     if (! karbonPart)
         return KoFilter::WrongFormat;
 
-    KoShapePainter painter;
+    KShapePainter painter;
     painter.setShapes(karbonPart->document().shapes());
 
     // get the bounding rect of the content

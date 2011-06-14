@@ -19,7 +19,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoShapePainter.h"
+#include "KShapePainter.h"
 
 #include "KCanvasBase.h"
 #include "KShapeManager.h"
@@ -105,7 +105,7 @@ private:
     KShapeManager *m_shapeManager;
 };
 
-class KoShapePainter::Private
+class KShapePainter::Private
 {
 public:
     Private()
@@ -117,7 +117,7 @@ public:
     SimpleCanvas * canvas;
 };
 
-KoShapePainter::KoShapePainter(KShapeManagerPaintingStrategy *strategy)
+KShapePainter::KShapePainter(KShapeManagerPaintingStrategy *strategy)
     : d(new Private())
 {
     if (strategy) {
@@ -126,17 +126,17 @@ KoShapePainter::KoShapePainter(KShapeManagerPaintingStrategy *strategy)
     }
 }
 
-KoShapePainter::~KoShapePainter()
+KShapePainter::~KShapePainter()
 {
     delete d;
 }
 
-void KoShapePainter::setShapes(const QList<KShape*> &shapes)
+void KShapePainter::setShapes(const QList<KShape*> &shapes)
 {
     d->canvas->shapeManager()->setShapes(shapes, KShapeManager::AddWithoutRepaint);
 }
 
-void KoShapePainter::paint(QPainter &painter, KoViewConverter &converter)
+void KShapePainter::paint(QPainter &painter, KoViewConverter &converter)
 {
     foreach (KShape *shape, d->canvas->shapeManager()->shapes()) {
         shape->waitUntilReady(converter, false);
@@ -145,7 +145,7 @@ void KoShapePainter::paint(QPainter &painter, KoViewConverter &converter)
     d->canvas->shapeManager()->paint(painter, converter, true);
 }
 
-void KoShapePainter::paint(QPainter &painter, const QRect &painterRect, const QRectF &documentRect)
+void KShapePainter::paint(QPainter &painter, const QRect &painterRect, const QRectF &documentRect)
 {
     if (documentRect.width() == 0.0f || documentRect.height() == 0.0f)
         return;
@@ -184,7 +184,7 @@ void KoShapePainter::paint(QPainter &painter, const QRect &painterRect, const QR
     painter.restore();
 }
 
-void KoShapePainter::paint(QImage &image)
+void KShapePainter::paint(QImage &image)
 {
     if (image.isNull())
         return;
@@ -194,7 +194,7 @@ void KoShapePainter::paint(QImage &image)
     paint(painter, image.rect(), contentRect());
 }
 
-QRectF KoShapePainter::contentRect()
+QRectF KShapePainter::contentRect()
 {
     QRectF bound;
     foreach (KShape *shape, d->canvas->shapeManager()->shapes()) {

@@ -21,7 +21,7 @@
 
 #include <QPainter>
 #include <QMouseEvent>
-#include <KoShapePainter.h>
+#include <KShapePainter.h>
 #include <KShapeContainer.h>
 #include <KoPAMasterPage.h>
 #include <KoZoomHandler.h>

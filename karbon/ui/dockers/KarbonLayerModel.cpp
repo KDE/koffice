@@ -20,7 +20,7 @@
 #include "KarbonLayerModel.h"
 
 #include <KarbonDocument.h>
-#include <KoShapePainter.h>
+#include <KShapePainter.h>
 
 #include <KShapeManager.h>
 #include <KShapeBorderBase.h>
@@ -317,7 +317,7 @@ void KarbonLayerModel::lockRecursively(KShapeContainer *container, bool lock)
 
 QImage KarbonLayerModel::createThumbnail(KShape* shape, const QSize &thumbSize) const
 {
-    KoShapePainter painter;
+    KShapePainter painter;
 
     QList<KShape*> shapes;
 

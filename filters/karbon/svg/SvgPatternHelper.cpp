@@ -21,7 +21,7 @@
 #include "SvgUtil.h"
 
 #include <KoZoomHandler.h>
-#include <KoShapePainter.h>
+#include <KShapePainter.h>
 #include <KShape.h>
 
 #include <QtGui/QPainter>
@@ -145,7 +145,7 @@ QImage SvgPatternHelper::generateImage(const QRectF &objectBound, const QList<KS
     //tilePainter.setRenderHint(QPainter::Antialiasing);
 
     // paint the content into the tile image
-    KoShapePainter shapePainter;
+    KShapePainter shapePainter;
     shapePainter.setShapes(content);
     shapePainter.paint(tilePainter, zoomHandler);
 

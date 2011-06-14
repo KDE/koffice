@@ -40,7 +40,7 @@ set(flake_SRCS
     KShapeGroup.cpp
     KShapeManagerPaintingStrategy.cpp
     KShapeManager.cpp
-    KoShapePainter.cpp
+    KShapePainter.cpp
     KFrameShape.cpp
     KoToolBase.cpp
     KCanvasController.cpp
@@ -320,7 +320,7 @@ install(
     KEventActionFactoryBase.h
     KEventAction.h
     KEventActionRegistry.h
-    KoShapePainter.h
+    KShapePainter.h
     KoTextShapeDataBase.h
     KoTextOnShapeContainer.h
     KoPluginLoader.h

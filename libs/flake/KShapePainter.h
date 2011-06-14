@@ -38,11 +38,11 @@ class QImage;
  * the shapeManager and all its caching every time.  If at all possible use
  * a shapeManager directly and avoid loosing the cache between usages.
  */
-class FLAKE_EXPORT KoShapePainter
+class FLAKE_EXPORT KShapePainter
 {
 public:
-    KoShapePainter(KShapeManagerPaintingStrategy *strategy = 0);
-    ~KoShapePainter();
+    KShapePainter(KShapeManagerPaintingStrategy *strategy = 0);
+    ~KShapePainter();
 
     /**
      * Sets the shapes to be painted.

@@ -22,7 +22,7 @@
 #include <QPainter>
 #include <KDebug>
 
-#include <KoShapePainter.h>
+#include <KShapePainter.h>
 #include <KoShapeSavingContext.h>
 #include <KShapeLayer.h>
 #include <KOdfLoadingContext.h>
@@ -188,7 +188,7 @@ void KoPAPage::paintPage(QPainter &painter, KoZoomHandler &zoomHandler)
 {
     paintBackground(painter, zoomHandler);
 
-    KoShapePainter shapePainter(getPaintingStrategy());
+    KShapePainter shapePainter(getPaintingStrategy());
     if (displayMasterShapes()) {
         shapePainter.setShapes(masterPage()->shapes());
         shapePainter.paint(painter, zoomHandler);

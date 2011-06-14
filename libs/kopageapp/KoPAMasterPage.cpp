@@ -22,7 +22,7 @@
 #include <QBuffer>
 #include <QPainter>
 
-#include <KoShapePainter.h>
+#include <KShapePainter.h>
 #include <KOdfGenericStyle.h>
 #include <KXmlWriter.h>
 #include <KOdfXmlNS.h>
@@ -156,7 +156,7 @@ void KoPAMasterPage::paintPage(QPainter &painter, KoZoomHandler &zoomHandler)
 {
     paintBackground(painter, zoomHandler);
 
-    KoShapePainter shapePainter;
+    KShapePainter shapePainter;
     shapePainter.setShapes(shapes());
     shapePainter.paint(painter, zoomHandler);
 }
