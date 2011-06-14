@@ -18,12 +18,12 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KoPageProvider_p.h"
+#include "KPageProvider_p.h"
 
-KoPageProvider::KoPageProvider()
+KPageProvider::KPageProvider()
 {
 }
 
-KoPageProvider::~KoPageProvider()
+KPageProvider::~KPageProvider()
 {
 }

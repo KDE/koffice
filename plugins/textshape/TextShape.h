@@ -34,7 +34,7 @@
 #define TextShape_SHAPEID "TextShapeID"
 
 class KInlineTextObjectManager;
-class KoPageProvider;
+class KPageProvider;
 class KImageCollection;
 
 /**
@@ -105,7 +105,7 @@ public:
     void markLayoutDone();
 
     // required for kpresenter hack
-    void setPageProvider(KoPageProvider *provider) { m_pageProvider = provider; }
+    void setPageProvider(KPageProvider *provider) { m_pageProvider = provider; }
 
     /// reimplemented
     virtual bool loadOdfFrame(const KXmlElement &element, KoShapeLoadingContext &context);
@@ -128,7 +128,7 @@ private:
     bool m_demoText;
     mutable QMutex m_mutex;
     mutable QWaitCondition m_waiter;
-    KoPageProvider *m_pageProvider;
+    KPageProvider *m_pageProvider;
     KImageCollection *m_imageCollection;
 
     QRegion m_paintRegion;

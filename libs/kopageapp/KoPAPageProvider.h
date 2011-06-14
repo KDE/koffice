@@ -20,12 +20,12 @@
 #ifndef KOPAPAGEPROVIDER_H
 #define KOPAPAGEPROVIDER_H
 
-#include <KoPageProvider_p.h>
+#include <KPageProvider_p.h>
 #include "kopageapp_export.h"
 
 class KoPAPageBase;
 
-class KOPAGEAPP_EXPORT KoPAPageProvider : public KoPageProvider
+class KOPAGEAPP_EXPORT KoPAPageProvider : public KPageProvider
 {
 public:
     KoPAPageProvider();

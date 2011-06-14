@@ -37,11 +37,11 @@ class KoShape;
 class KoTextPage;
 
 /// \internal  this is a hack for kpresenter
-class KOTEXT_EXPORT KoPageProvider
+class KOTEXT_EXPORT KPageProvider
 {
 public:
-    KoPageProvider();
-    virtual ~KoPageProvider();
+    KPageProvider();
+    virtual ~KPageProvider();
 
     /**
      * Get the page number for the given shape

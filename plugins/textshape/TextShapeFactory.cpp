@@ -72,7 +72,7 @@ KoShape *TextShapeFactory::createDefaultShape(KoResourceManager *documentResourc
         KoStyleManager *styleManager = documentResources->resource(KoText::StyleManager).value<KoStyleManager*>();
         if (styleManager)
             document.setStyleManager(styleManager);
-        KoPageProvider *pp = static_cast<KoPageProvider *>(documentResources->resource(KoText::PageProvider).value<void*>());
+        KPageProvider *pp = static_cast<KPageProvider *>(documentResources->resource(KoText::PageProvider).value<void*>());
         if (pp)
             text->setPageProvider(pp);
             KoChangeTracker *changeTracker = documentResources->resource(KoText::ChangeTracker).value<KoChangeTracker*>();
