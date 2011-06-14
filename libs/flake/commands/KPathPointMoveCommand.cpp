@@ -23,10 +23,10 @@
 #include "KPathPoint.h"
 #include <klocale.h>
 
-class KoPathPointMoveCommandPrivate
+class KPathPointMoveCommandPrivate
 {
 public:
-    KoPathPointMoveCommandPrivate() : undoCalled(true) { }
+    KPathPointMoveCommandPrivate() : undoCalled(true) { }
     void applyOffset(qreal factor);
 
     bool undoCalled; // this command stores diffs; so calling undo twice will give wrong results. Guard against that.
@@ -37,7 +37,7 @@ public:
 
 KPathPointMoveCommand::KPathPointMoveCommand(const QList<KPathPointData> &pointData, const QPointF &offset, QUndoCommand *parent)
     : QUndoCommand(parent),
-    d(new KoPathPointMoveCommandPrivate())
+    d(new KPathPointMoveCommandPrivate())
 {
     setText(i18n("Move points"));
 
@@ -51,7 +51,7 @@ KPathPointMoveCommand::KPathPointMoveCommand(const QList<KPathPointData> &pointD
 
 KPathPointMoveCommand::KPathPointMoveCommand(const QList<KPathPointData> &pointData, const QList<QPointF> &offsets, QUndoCommand *parent)
     : QUndoCommand(parent),
-    d(new KoPathPointMoveCommandPrivate())
+    d(new KPathPointMoveCommandPrivate())
 {
     Q_ASSERT(pointData.count() == offsets.count());
 
@@ -92,7 +92,7 @@ void KPathPointMoveCommand::undo()
     d->undoCalled = true;
 }
 
-void KoPathPointMoveCommandPrivate::applyOffset(qreal factor)
+void KPathPointMoveCommandPrivate::applyOffset(qreal factor)
 {
     foreach (KoPathShape *path, paths) {
         // repaint old bounding rect

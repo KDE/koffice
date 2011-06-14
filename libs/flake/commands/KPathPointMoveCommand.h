@@ -30,7 +30,7 @@
 #include "KoPathShape.h"
 #include "KPathPointData.h"
 
-class KoPathPointMoveCommandPrivate;
+class KPathPointMoveCommandPrivate;
 
 /// The undo / redo command for path point moving.
 class FLAKE_EXPORT KPathPointMoveCommand : public QUndoCommand
@@ -60,7 +60,7 @@ public:
     void undo();
 
 private:
-    KoPathPointMoveCommandPrivate *d;
+    KPathPointMoveCommandPrivate *d;
 };
 
 #endif // KOPATHPOINTMOVECOMMAND_H
