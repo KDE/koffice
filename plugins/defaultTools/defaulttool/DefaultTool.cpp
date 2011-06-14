@@ -904,32 +904,32 @@ void DefaultTool::activate(ToolActivation, const QSet<KShape*> &)
 
 void DefaultTool::selectionAlignHorizontalLeft()
 {
-    selectionAlign(KoShapeAlignCommand::HorizontalLeftAlignment);
+    selectionAlign(KShapeAlignCommand::HorizontalLeftAlignment);
 }
 
 void DefaultTool::selectionAlignHorizontalCenter()
 {
-    selectionAlign(KoShapeAlignCommand::HorizontalCenterAlignment);
+    selectionAlign(KShapeAlignCommand::HorizontalCenterAlignment);
 }
 
 void DefaultTool::selectionAlignHorizontalRight()
 {
-    selectionAlign(KoShapeAlignCommand::HorizontalRightAlignment);
+    selectionAlign(KShapeAlignCommand::HorizontalRightAlignment);
 }
 
 void DefaultTool::selectionAlignVerticalTop()
 {
-    selectionAlign(KoShapeAlignCommand::VerticalTopAlignment);
+    selectionAlign(KShapeAlignCommand::VerticalTopAlignment);
 }
 
 void DefaultTool::selectionAlignVerticalCenter()
 {
-    selectionAlign(KoShapeAlignCommand::VerticalCenterAlignment);
+    selectionAlign(KShapeAlignCommand::VerticalCenterAlignment);
 }
 
 void DefaultTool::selectionAlignVerticalBottom()
 {
-    selectionAlign(KoShapeAlignCommand::VerticalBottomAlignment);
+    selectionAlign(KShapeAlignCommand::VerticalBottomAlignment);
 }
 
 void DefaultTool::selectionGroup()
@@ -991,7 +991,7 @@ void DefaultTool::selectionUngroup()
     }
 }
 
-void DefaultTool::selectionAlign(KoShapeAlignCommand::Align align)
+void DefaultTool::selectionAlign(KShapeAlignCommand::Align align)
 {
     KSelection* selection = canvas()->shapeManager()->selection();
     if (! selection)
@@ -1019,7 +1019,7 @@ void DefaultTool::selectionAlign(KoShapeAlignCommand::Align align)
         }
     }
 
-    KoShapeAlignCommand *cmd = new KoShapeAlignCommand(editableShapes, align, bb);
+    KShapeAlignCommand *cmd = new KShapeAlignCommand(editableShapes, align, bb);
 
     canvas()->addCommand(cmd);
     selection->updateSizeAndPosition();

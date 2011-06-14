@@ -107,7 +107,7 @@ set(flake_SRCS
     KoTextShapeDataBase.cpp
     KoPluginLoader.cpp
     commands/KoShapeGroupCommand.cpp
-    commands/KoShapeAlignCommand.cpp
+    commands/KShapeAlignCommand.cpp
     commands/KoShapeBackgroundCommand.cpp
     commands/KoShapeBorderCommand.cpp
     commands/KoShapeCreateCommand.cpp
@@ -213,7 +213,7 @@ install(
     commands/KPathReverseCommand.h
     commands/KPathSegmentTypeCommand.h
     commands/KPathSeparateCommand.h
-    commands/KoShapeAlignCommand.h
+    commands/KShapeAlignCommand.h
     commands/KoShapeBackgroundCommand.h
     commands/KoShapeBorderCommand.h
     commands/KoShapeCreateCommand.h

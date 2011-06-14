@@ -24,7 +24,7 @@
 
 #include <KInteractionTool.h>
 #include <KoFlake.h>
-#include <commands/KoShapeAlignCommand.h>
+#include <commands/KShapeAlignCommand.h>
 #include <commands/KoShapeReorderCommand.h>
 
 #include <QPolygonF>
@@ -134,7 +134,7 @@ private:
     /// Returns rotation angle of given handle of the current selection
     qreal rotationOfHandle(KoFlake::SelectionHandle handle, bool useEdgeRotation);
 
-    void selectionAlign(KoShapeAlignCommand::Align align);
+    void selectionAlign(KShapeAlignCommand::Align align);
     void selectionReorder(KoShapeReorderCommand::MoveShapeType order);
     bool moveSelection(int direction, Qt::KeyboardModifiers modifiers);
 

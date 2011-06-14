@@ -18,7 +18,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoShapeAlignCommand.h"
+#include "KShapeAlignCommand.h"
 #include "KShape.h"
 #include "KoShapeGroup.h"
 #include "commands/KoShapeMoveCommand.h"
@@ -26,7 +26,7 @@
 #include <klocale.h>
 // #include <kdebug.h>
 
-class KoShapeAlignCommand::Private
+class KShapeAlignCommand::Private
 {
 public:
     Private() : command(0) {}
@@ -36,7 +36,7 @@ public:
     KoShapeMoveCommand *command;
 };
 
-KoShapeAlignCommand::KoShapeAlignCommand(const QList<KShape*> &shapes, Align align, const QRectF &boundingRect, QUndoCommand *parent)
+KShapeAlignCommand::KShapeAlignCommand(const QList<KShape*> &shapes, Align align, const QRectF &boundingRect, QUndoCommand *parent)
         : QUndoCommand(parent),
         d(new Private())
 {
@@ -84,18 +84,18 @@ KoShapeAlignCommand::KoShapeAlignCommand(const QList<KShape*> &shapes, Align ali
     setText(i18n("Align Shapes"));
 }
 
-KoShapeAlignCommand::~KoShapeAlignCommand()
+KShapeAlignCommand::~KShapeAlignCommand()
 {
     delete d;
 }
 
-void KoShapeAlignCommand::redo()
+void KShapeAlignCommand::redo()
 {
     QUndoCommand::redo();
     d->command->redo();
 }
 
-void KoShapeAlignCommand::undo()
+void KShapeAlignCommand::undo()
 {
     QUndoCommand::undo();
     d->command->undo();

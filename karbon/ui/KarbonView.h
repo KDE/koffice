@@ -38,7 +38,7 @@
 #include <QPointF>
 #include <kxmlguibuilder.h>
 #include <KUnit.h>
-#include <KoShapeAlignCommand.h>
+#include <KShapeAlignCommand.h>
 #include <KoShapeDistributeCommand.h>
 #include <KoZoomMode.h>
 #include <karbonui_export.h>

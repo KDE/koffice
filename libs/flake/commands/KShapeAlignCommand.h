@@ -30,7 +30,7 @@
 class KShape;
 
 /// The undo / redo command for aligning shapes
-class FLAKE_EXPORT KoShapeAlignCommand : public QUndoCommand
+class FLAKE_EXPORT KShapeAlignCommand : public QUndoCommand
 {
 public:
     /// The different alignment options for this command
@@ -49,8 +49,8 @@ public:
      * @param boundingRect the rect the shape will be aligned in
      * @param parent the parent command used for macro commands
      */
-    KoShapeAlignCommand(const QList<KShape*> &shapes, Align align, const QRectF &boundingRect, QUndoCommand *parent = 0);
-    virtual ~KoShapeAlignCommand();
+    KShapeAlignCommand(const QList<KShape*> &shapes, Align align, const QRectF &boundingRect, QUndoCommand *parent = 0);
+    virtual ~KShapeAlignCommand();
     /// redo the command
     virtual void redo();
     /// revert the actions done in redo
