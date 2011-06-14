@@ -17,12 +17,12 @@
    the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
 */
-#include "KoParameterChangeStrategy_p.h"
+#include "KParameterChangeStrategy_p.h"
 
 #include "KoParameterShape.h"
 #include "commands/KoParameterHandleMoveCommand_p.h"
 
-KoParameterChangeStrategy::KoParameterChangeStrategy(KoToolBase *tool, KoParameterShape *parameterShape, int handleId)
+KParameterChangeStrategy::KParameterChangeStrategy(KoToolBase *tool, KoParameterShape *parameterShape, int handleId)
         : KInteractionStrategy(tool)
         , m_parameterShape(parameterShape)
         , m_handleId(handleId)
@@ -34,18 +34,18 @@ KoParameterChangeStrategy::KoParameterChangeStrategy(KoToolBase *tool, KoParamet
     m_releasePoint = m_startPoint;
 }
 
-KoParameterChangeStrategy::~KoParameterChangeStrategy()
+KParameterChangeStrategy::~KParameterChangeStrategy()
 {
 }
 
-void KoParameterChangeStrategy::handleMouseMove(const QPointF &mouseLocation, Qt::KeyboardModifiers modifiers)
+void KParameterChangeStrategy::handleMouseMove(const QPointF &mouseLocation, Qt::KeyboardModifiers modifiers)
 {
     m_parameterShape->moveHandle(m_handleId, mouseLocation, modifiers);
     m_lastModifierUsed = modifiers;
     m_releasePoint = mouseLocation;
 }
 
-QUndoCommand* KoParameterChangeStrategy::createCommand(QUndoCommand *parent)
+QUndoCommand* KParameterChangeStrategy::createCommand(QUndoCommand *parent)
 {
     KoParameterHandleMoveCommand *cmd = 0;
     // check if handle position changed

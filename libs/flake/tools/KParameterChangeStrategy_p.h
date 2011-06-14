@@ -38,7 +38,7 @@
 class KoParameterShape;
 
 /// Strategy for changing control points of parametric shapes
-class KoParameterChangeStrategy : public KInteractionStrategy
+class KParameterChangeStrategy : public KInteractionStrategy
 {
 public:
     /**
@@ -47,8 +47,8 @@ public:
      * @param parameterShape the parametric shapes the strategy is working on
      * @param handleId the id of the handle to modify
      */
-    KoParameterChangeStrategy(KoToolBase *tool, KoParameterShape *parameterShape, int handleId);
-    virtual ~KoParameterChangeStrategy();
+    KParameterChangeStrategy(KoToolBase *tool, KoParameterShape *parameterShape, int handleId);
+    virtual ~KParameterChangeStrategy();
 
     virtual void handleMouseMove(const QPointF &mouseLocation, Qt::KeyboardModifiers modifiers);
     virtual QUndoCommand* createCommand(QUndoCommand *parent = 0);

@@ -26,7 +26,7 @@
 #include "KoPathControlPointMoveStrategy_p.h"
 #include "KoSelection.h"
 #include "commands/KoPathPointTypeCommand_p.h"
-#include "KoParameterChangeStrategy_p.h"
+#include "KParameterChangeStrategy_p.h"
 #include "KoParameterShape.h"
 #include "KCanvasBase.h"
 #include "KoResourceManager.h"
@@ -172,7 +172,7 @@ KInteractionStrategy * ParameterHandle::handleMousePress(KoPointerEvent *event)
         KoPathToolSelection * selection = dynamic_cast<KoPathToolSelection*>(m_tool->selection());
         if (selection)
             selection->clear();
-        return new KoParameterChangeStrategy(m_tool, m_parameterShape, m_handleId);
+        return new KParameterChangeStrategy(m_tool, m_parameterShape, m_handleId);
     }
     return 0;
 }

@@ -155,7 +155,7 @@ set(flake_SRCS
     tools/KoPathPointRubberSelectStrategy.cpp
     tools/KoPathPointMoveStrategy.cpp
     tools/KoPathControlPointMoveStrategy.cpp
-    tools/KoParameterChangeStrategy.cpp
+    tools/KParameterChangeStrategy.cpp
     tools/KoZoomTool.cpp
     tools/KoZoomToolFactory.cpp
     tools/KoZoomToolWidget.cpp
