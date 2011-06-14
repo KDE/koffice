@@ -33,14 +33,14 @@
 //
 
 
-#include "KoShapeRubberSelectStrategy.h"
+#include "KShapeRubberSelectStrategy.h"
 
 class KPathTool;
 
 /**
  * @brief Strategy to rubber select points of a path shape
  */
-class KPathPointRubberSelectStrategy : public KoShapeRubberSelectStrategy
+class KPathPointRubberSelectStrategy : public KShapeRubberSelectStrategy
 {
 public:
     KPathPointRubberSelectStrategy(KPathTool *tool, const QPointF &clicked);
@@ -50,7 +50,7 @@ public:
 private:
     /// pointer to the path tool
     KPathTool *m_tool;
-    Q_DECLARE_PRIVATE(KoShapeRubberSelectStrategy)
+    Q_DECLARE_PRIVATE(KShapeRubberSelectStrategy)
 };
 
 #endif /* KOPATHPOINTRUBBERSELECTSTRATEGY_H */

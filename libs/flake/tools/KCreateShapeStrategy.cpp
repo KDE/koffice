@@ -19,7 +19,7 @@
  */
 
 #include "KCreateShapeStrategy_p.h"
-#include "KoShapeRubberSelectStrategy_p.h"
+#include "KShapeRubberSelectStrategy_p.h"
 #include "KCreateShapesTool.h"
 #include "KShape.h"
 #include "KShapeRegistry.h"
@@ -34,7 +34,7 @@
 #include <kdebug.h>
 
 KCreateShapeStrategy::KCreateShapeStrategy(KCreateShapesTool *tool, const QPointF &clicked)
-        : KoShapeRubberSelectStrategy(tool, clicked, tool->canvas()->snapToGrid())
+        : KShapeRubberSelectStrategy(tool, clicked, tool->canvas()->snapToGrid())
 {
     KCreateShapesTool *parent = static_cast<KCreateShapesTool*>(d_ptr->tool);
     KShapeFactoryBase *factory = KShapeRegistry::instance()->value(parent->shapeId());
@@ -55,7 +55,7 @@ KCreateShapeStrategy::KCreateShapeStrategy(KCreateShapesTool *tool, const QPoint
 
 QUndoCommand* KCreateShapeStrategy::createCommand(QUndoCommand *parentCommand)
 {
-    Q_D(KoShapeRubberSelectStrategy);
+    Q_D(KShapeRubberSelectStrategy);
     KCreateShapesTool *parent = static_cast<KCreateShapesTool*>(d_ptr->tool);
     KShapeFactoryBase *factory = KShapeRegistry::instance()->value(parent->shapeId());
     if (! factory) {
@@ -91,15 +91,15 @@ QUndoCommand* KCreateShapeStrategy::createCommand(QUndoCommand *parentCommand)
 void KCreateShapeStrategy::finishInteraction(Qt::KeyboardModifiers modifiers)
 {
     Q_UNUSED(modifiers);
-    Q_D(KoShapeRubberSelectStrategy);
+    Q_D(KShapeRubberSelectStrategy);
     d->tool->canvas()->updateCanvas(d->selectedRect());
 }
 
 void KCreateShapeStrategy::paint(QPainter &painter, const KoViewConverter &converter)
 {
-    Q_D(KoShapeRubberSelectStrategy);
+    Q_D(KShapeRubberSelectStrategy);
     if (m_outline.isEmpty())
-        KoShapeRubberSelectStrategy::paint(painter, converter);
+        KShapeRubberSelectStrategy::paint(painter, converter);
     else {
         painter.save();
         painter.setRenderHint(QPainter::Antialiasing, false);
@@ -129,7 +129,7 @@ void KCreateShapeStrategy::paint(QPainter &painter, const KoViewConverter &conve
 
 void KCreateShapeStrategy::handleMouseMove(const QPointF &point, Qt::KeyboardModifiers modifiers)
 {
-    Q_D(KoShapeRubberSelectStrategy);
+    Q_D(KShapeRubberSelectStrategy);
     QPointF p(point);
     if (modifiers & Qt::ControlModifier) { // keep aspect ratio
         QRectF newRect(d->selectRect);
@@ -141,7 +141,7 @@ void KCreateShapeStrategy::handleMouseMove(const QPointF &point, Qt::KeyboardMod
         p = newRect.bottomRight();
     }
 
-    KoShapeRubberSelectStrategy::handleMouseMove(p, modifiers);
+    KShapeRubberSelectStrategy::handleMouseMove(p, modifiers);
     if (! m_outline.isEmpty())
         d->tool->canvas()->updateCanvas(d->selectedRect());
 }

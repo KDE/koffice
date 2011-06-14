@@ -32,7 +32,7 @@
 //
 
 
-#include "KoShapeRubberSelectStrategy.h"
+#include "KShapeRubberSelectStrategy.h"
 
 class KCanvasController;
 class KoZoomTool;
@@ -41,7 +41,7 @@ class KoZoomTool;
  * //internal
  * This is a strategy for the KoZoomTool which will be used to do the actual zooming
  */
-class KoZoomStrategy : public KoShapeRubberSelectStrategy
+class KoZoomStrategy : public KShapeRubberSelectStrategy
 {
 public:
     /**
@@ -62,7 +62,7 @@ private:
     KCanvasController *m_controller;
 
     bool m_forceZoomOut;
-    Q_DECLARE_PRIVATE(KoShapeRubberSelectStrategy)
+    Q_DECLARE_PRIVATE(KShapeRubberSelectStrategy)
 };
 
 #endif

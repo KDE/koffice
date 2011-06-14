@@ -34,7 +34,7 @@ class KoShapeRubberSelectStrategyPrivate;
 /**
  * Implement the rubber band selection of flake objects.
  */
-class FLAKE_EXPORT KoShapeRubberSelectStrategy : public KInteractionStrategy
+class FLAKE_EXPORT KShapeRubberSelectStrategy : public KInteractionStrategy
 {
 public:
     /**
@@ -46,7 +46,7 @@ public:
      * @param clicked the initial point that the user depressed (in pt).
      * @param useSnapToGrid use the snap-to-grid settings while doing the rubberstamp.
      */
-    KoShapeRubberSelectStrategy(KoToolBase *tool, const QPointF &clicked, bool useSnapToGrid = false);
+    KShapeRubberSelectStrategy(KoToolBase *tool, const QPointF &clicked, bool useSnapToGrid = false);
 
     virtual void paint(QPainter &painter, const KoViewConverter &converter);
     virtual void handleMouseMove(const QPointF &mouseLocation, Qt::KeyboardModifiers modifiers);
@@ -55,10 +55,10 @@ public:
 
 protected:
     /// constructor
-    KoShapeRubberSelectStrategy(KoShapeRubberSelectStrategyPrivate &);
+    KShapeRubberSelectStrategy(KoShapeRubberSelectStrategyPrivate &);
 
 private:
-    Q_DECLARE_PRIVATE(KoShapeRubberSelectStrategy)
+    Q_DECLARE_PRIVATE(KShapeRubberSelectStrategy)
 };
 
 #endif /* KODEFRUBBERSELECT_H */

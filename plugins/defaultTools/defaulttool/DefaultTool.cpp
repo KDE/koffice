@@ -46,7 +46,7 @@
 #include <KDrag.h>
 #include <KCanvasBase.h>
 #include <KResourceManager.h>
-#include <KoShapeRubberSelectStrategy.h>
+#include <KShapeRubberSelectStrategy.h>
 #include <commands/KShapeMoveCommand.h>
 #include <commands/KShapeGroupCommand.h>
 #include <commands/KoShapeUngroupCommand.h>
@@ -1203,7 +1203,7 @@ KInteractionStrategy *DefaultTool::createStrategy(KPointerEvent *event)
             select->deselectAll();
             m_selectedConnections.clear();
         }
-        return new KoShapeRubberSelectStrategy(this, event->point);
+        return new KShapeRubberSelectStrategy(this, event->point);
     }
 
     if (select->isSelected(shape)) {

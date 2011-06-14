@@ -33,7 +33,7 @@
 //
 
 
-#include "KoShapeRubberSelectStrategy.h"
+#include "KShapeRubberSelectStrategy.h"
 
 #include <QPointF>
 #include <QPainterPath>
@@ -44,7 +44,7 @@ class KCreateShapesTool;
 /**
  * A strategy for the KCreateShapesTool.
  */
-class KCreateShapeStrategy : public KoShapeRubberSelectStrategy
+class KCreateShapeStrategy : public KShapeRubberSelectStrategy
 {
 public:
     /**
@@ -63,7 +63,7 @@ public:
 private:
     QPainterPath m_outline;
     QRectF m_outlineBoundingRect;
-    Q_DECLARE_PRIVATE(KoShapeRubberSelectStrategy)
+    Q_DECLARE_PRIVATE(KShapeRubberSelectStrategy)
 };
 
 #endif

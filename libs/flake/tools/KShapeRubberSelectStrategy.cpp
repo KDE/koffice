@@ -19,8 +19,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KoShapeRubberSelectStrategy.h"
-#include "KoShapeRubberSelectStrategy_p.h"
+#include "KShapeRubberSelectStrategy.h"
+#include "KShapeRubberSelectStrategy_p.h"
 #include "KoViewConverter.h"
 
 #include <QPainter>
@@ -29,19 +29,19 @@
 #include "KSelection.h"
 #include "KCanvasBase.h"
 
-KoShapeRubberSelectStrategy::KoShapeRubberSelectStrategy(KoToolBase *tool, const QPointF &clicked, bool useSnapToGrid)
+KShapeRubberSelectStrategy::KShapeRubberSelectStrategy(KoToolBase *tool, const QPointF &clicked, bool useSnapToGrid)
     : KInteractionStrategy(*(new KoShapeRubberSelectStrategyPrivate(tool)))
 {
-    Q_D(KoShapeRubberSelectStrategy);
+    Q_D(KShapeRubberSelectStrategy);
     d->snapGuide->enableSnapStrategies(KoSnapGuide::GridSnapping);
     d->snapGuide->enableSnapping(useSnapToGrid);
 
     d->selectRect = QRectF(d->snapGuide->snap(clicked, 0), QSizeF(0, 0));
 }
 
-void KoShapeRubberSelectStrategy::paint(QPainter &painter, const KoViewConverter &converter)
+void KShapeRubberSelectStrategy::paint(QPainter &painter, const KoViewConverter &converter)
 {
-    Q_D(KoShapeRubberSelectStrategy);
+    Q_D(KShapeRubberSelectStrategy);
     painter.setRenderHint(QPainter::Antialiasing, false);
 
     QColor selectColor(Qt::blue);   // TODO make configurable
@@ -57,9 +57,9 @@ void KoShapeRubberSelectStrategy::paint(QPainter &painter, const KoViewConverter
     painter.drawRect(paintRect);
 }
 
-void KoShapeRubberSelectStrategy::handleMouseMove(const QPointF &p, Qt::KeyboardModifiers modifiers)
+void KShapeRubberSelectStrategy::handleMouseMove(const QPointF &p, Qt::KeyboardModifiers modifiers)
 {
-    Q_D(KoShapeRubberSelectStrategy);
+    Q_D(KShapeRubberSelectStrategy);
     QPointF point = d->snapGuide->snap(p, modifiers);
     if ((modifiers & Qt::AltModifier) != 0) {
         d->tool->canvas()->updateCanvas(d->selectedRect());
@@ -98,9 +98,9 @@ void KoShapeRubberSelectStrategy::handleMouseMove(const QPointF &p, Qt::Keyboard
     d->tool->canvas()->updateCanvas(B);
 }
 
-void KoShapeRubberSelectStrategy::finishInteraction(Qt::KeyboardModifiers modifiers)
+void KShapeRubberSelectStrategy::finishInteraction(Qt::KeyboardModifiers modifiers)
 {
-    Q_D(KoShapeRubberSelectStrategy);
+    Q_D(KShapeRubberSelectStrategy);
     Q_UNUSED(modifiers);
     KSelection * selection = d->tool->canvas()->shapeManager()->selection();
     QList<KShape *> shapes(d->tool->canvas()->shapeManager()->shapesAt(d->selectRect));
@@ -113,7 +113,7 @@ void KoShapeRubberSelectStrategy::finishInteraction(Qt::KeyboardModifiers modifi
     d->tool->canvas()->updateCanvas(d->selectedRect());
 }
 
-QUndoCommand *KoShapeRubberSelectStrategy::createCommand(QUndoCommand *)
+QUndoCommand *KShapeRubberSelectStrategy::createCommand(QUndoCommand *)
 {
     return 0;
 }

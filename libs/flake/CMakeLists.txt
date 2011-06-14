@@ -166,7 +166,7 @@ set(flake_SRCS
     tools/KInteractionStrategy.cpp
     tools/KCreateShapesTool.cpp
     tools/KCreateShapesToolFactory.cpp
-    tools/KoShapeRubberSelectStrategy.cpp
+    tools/KShapeRubberSelectStrategy.cpp
     tools/KPathSegmentChangeStrategy.cpp
 )
 
@@ -303,7 +303,7 @@ install(
     tools/KCreateShapesTool.h
     tools/KInteractionStrategy.h
     tools/KInteractionTool.h
-    tools/KoShapeRubberSelectStrategy.h
+    tools/KShapeRubberSelectStrategy.h
     DESTINATION
     ${INCLUDE_INSTALL_DIR} COMPONENT Devel
 )
