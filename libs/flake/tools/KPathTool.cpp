@@ -23,7 +23,7 @@
 #include "KPathTool_p.h"
 #include "KoToolBase_p.h"
 #include "KPathShape_p.h"
-#include "KoPathToolHandle_p.h"
+#include "KPathToolHandle_p.h"
 #include "KCanvasBase.h"
 #include "KoShapeManager.h"
 #include "KoResourceManager.h"

@@ -42,7 +42,7 @@
 class QButtonGroup;
 class KCanvasBase;
 class KInteractionStrategy;
-class KoPathToolHandle;
+class KPathToolHandle;
 class PathToolOptionWidget;
 
 class KAction;
@@ -114,7 +114,7 @@ private slots:
     void activate();
 
 private:
-    KoPathToolHandle *m_activeHandle;       ///< the currently active handle
+    KPathToolHandle *m_activeHandle;       ///< the currently active handle
     int m_handleRadius;    ///< the radius of the control point handles
     uint m_grabSensitivity; ///< the grab sensitivity
     /// the point selection

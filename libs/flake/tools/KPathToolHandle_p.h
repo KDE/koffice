@@ -47,11 +47,11 @@ class KoPointerEvent;
 class QPainter;
 class KPathShape;
 
-class KoPathToolHandle
+class KPathToolHandle
 {
 public:
-    KoPathToolHandle(KPathTool *tool);
-    virtual ~KoPathToolHandle();
+    KPathToolHandle(KPathTool *tool);
+    virtual ~KPathToolHandle();
     virtual void paint(QPainter &painter, const KoViewConverter &converter) = 0;
     virtual void repaint() const = 0;
     virtual KInteractionStrategy * handleMousePress(KoPointerEvent *event) = 0;
@@ -62,7 +62,7 @@ protected:
     KPathTool *m_tool;
 };
 
-class PointHandle : public KoPathToolHandle
+class PointHandle : public KPathToolHandle
 {
 public:
     PointHandle(KPathTool *tool, KPathPoint *activePoint, KPathPoint::PointType activePointType);
@@ -77,7 +77,7 @@ private:
     KPathPoint::PointType m_activePointType;
 };
 
-class ParameterHandle : public KoPathToolHandle
+class ParameterHandle : public KPathToolHandle
 {
 public:
     ParameterHandle(KPathTool *tool, KParameterShape *parameterShape, int handleId);

@@ -20,7 +20,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoPathToolHandle_p.h"
+#include "KPathToolHandle_p.h"
 #include "KPathTool_p.h"
 #include "KPathPointMoveStrategy_p.h"
 #include "KPathControlPointMoveStrategy_p.h"
@@ -35,17 +35,17 @@
 #include "KoPointerEvent.h"
 #include <QtGui/QPainter>
 
-KoPathToolHandle::KoPathToolHandle(KPathTool *tool)
+KPathToolHandle::KPathToolHandle(KPathTool *tool)
         : m_tool(tool)
 {
 }
 
-KoPathToolHandle::~KoPathToolHandle()
+KPathToolHandle::~KPathToolHandle()
 {
 }
 
 PointHandle::PointHandle(KPathTool *tool, KPathPoint *activePoint, KPathPoint::PointType activePointType)
-        : KoPathToolHandle(tool)
+        : KPathToolHandle(tool)
         , m_activePoint(activePoint)
         , m_activePointType(activePointType)
 {
@@ -145,7 +145,7 @@ KPathPoint::PointType PointHandle::activePointType() const
 }
 
 ParameterHandle::ParameterHandle(KPathTool *tool, KParameterShape *parameterShape, int handleId)
-        : KoPathToolHandle(tool)
+        : KPathToolHandle(tool)
         , m_parameterShape(parameterShape)
         , m_handleId(handleId)
 {
