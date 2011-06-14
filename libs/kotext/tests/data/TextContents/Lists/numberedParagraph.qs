@@ -9,10 +9,10 @@ setFormatProperty(listFormat, KListStyle.StartValue, 1);
 setFormatProperty(listFormat, KListStyle.DisplayLevel, 1);
 
 var level1Format = QTextBlockFormat.clone(defaultBlockFormat);
-setFormatProperty(level1Format, KoParagraphStyle.ListLevel, 1);
+setFormatProperty(level1Format, KParagraphStyle.ListLevel, 1);
 
 var level2Format = QTextBlockFormat.clone(defaultBlockFormat);
-setFormatProperty(level2Format, KoParagraphStyle.ListLevel, 2);
+setFormatProperty(level2Format, KParagraphStyle.ListLevel, 2);
 
 cursor.insertBlock(level1Format);
 var list1 = cursor.createList(listFormat);

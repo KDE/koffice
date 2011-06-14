@@ -33,7 +33,7 @@
 
 #include <KoTextShapeData.h>
 #include <KoStyleManager.h>
-#include <KoParagraphStyle.h>
+#include <KParagraphStyle.h>
 #include <KoShapeGroup.h>
 #include <KoShapeLayer.h>
 
@@ -287,7 +287,7 @@ bool KWOdfWriter::save(KOdfWriteStore &odfStore, KOdfEmbeddedDocumentSaver &embe
                     QTextCursor cursor(shapeData->document());
                     QTextBlockFormat tbf;
                     KWPageStyle style = pm->pages().first().pageStyle();
-                    tbf.setProperty(KoParagraphStyle::MasterPageName, m_masterPages.value(style));
+                    tbf.setProperty(KParagraphStyle::MasterPageName, m_masterPages.value(style));
                     cursor.mergeBlockFormat(tbf);
                 }
                 shapeData->saveOdf(context, m_document->documentRdfBase());

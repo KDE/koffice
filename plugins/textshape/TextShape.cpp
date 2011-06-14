@@ -50,7 +50,7 @@ struct Finalizer {
 #include <KInlineTextObjectManager.h>
 #include <KOdfLoadingContext.h>
 #include <KOdfStylesReader.h>
-#include <KoParagraphStyle.h>
+#include <KParagraphStyle.h>
 #include <KoPostscriptPaintDevice.h>
 #include <KoSelection.h>
 #include <KoShapeBackground.h>
@@ -397,7 +397,7 @@ bool TextShape::loadOdf(const KXmlElement &element, KoShapeLoadingContext &conte
     }
 
     if (style) {
-        KoParagraphStyle paragraphStyle;
+        KParagraphStyle paragraphStyle;
         paragraphStyle.loadOdf(style, context);
 
         QTextDocument *document = m_textShapeData->document();

@@ -19,7 +19,7 @@
 
 #include "ParagraphLayout.h"
 
-#include <KoParagraphStyle.h>
+#include <KParagraphStyle.h>
 
 ParagraphLayout::ParagraphLayout(QWidget *parent)
         : QWidget(parent)
@@ -48,7 +48,7 @@ void ParagraphLayout::slotAlignChanged()
 }
 
 
-void ParagraphLayout::setDisplay(KoParagraphStyle *style)
+void ParagraphLayout::setDisplay(KParagraphStyle *style)
 {
     switch (style->alignment()) {
     case Qt::AlignRight: widget.right->setChecked(true); break;
@@ -64,7 +64,7 @@ void ParagraphLayout::setDisplay(KoParagraphStyle *style)
     widget.breakAfter->setChecked(style->breakAfter());
 }
 
-void ParagraphLayout::save(KoParagraphStyle *style)
+void ParagraphLayout::save(KParagraphStyle *style)
 {
     Qt::Alignment align;
     if (widget.right->isChecked())

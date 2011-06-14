@@ -19,7 +19,7 @@
 #ifndef KOTEXTBLOCKBORDERDATA_H
 #define KOTEXTBLOCKBORDERDATA_H
 
-#include "KoParagraphStyle.h"
+#include "KParagraphStyle.h"
 #include <KoInsets.h>
 
 #include <QPen>
@@ -85,9 +85,9 @@ public:
      * @param space the amount of spacing between the outer border and the inner border in case of style being double
      * @param innerWidth the thickness of the inner border-line in case of style being double
      */
-    void setEdge(Side side, const QTextBlockFormat &bf, KoParagraphStyle::Property style,
-                 KoParagraphStyle::Property width, KoParagraphStyle::Property color,
-                 KoParagraphStyle::Property space, KoParagraphStyle::Property innerWidth);
+    void setEdge(Side side, const QTextBlockFormat &bf, KParagraphStyle::Property style,
+                 KParagraphStyle::Property width, KParagraphStyle::Property color,
+                 KParagraphStyle::Property space, KParagraphStyle::Property innerWidth);
 
     /**
      * @return true if there has been at least one border set.

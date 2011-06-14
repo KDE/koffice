@@ -25,7 +25,7 @@
 #include <QWidget>
 #include <QList>
 
-class KoParagraphStyle;
+class KParagraphStyle;
 class KUnit;
 class ParagraphBulletsNumbers;
 class ParagraphIndentSpacing;
@@ -38,20 +38,20 @@ class ParagraphGeneral : public QWidget
 public:
     ParagraphGeneral(QWidget *parent = 0);
 
-    void setStyle(KoParagraphStyle *style, int level = 0);
-    void setParagraphStyles(const QList<KoParagraphStyle*> styles);
-    void setDefaultParagraphStyle(KoParagraphStyle *style);
+    void setStyle(KParagraphStyle *style, int level = 0);
+    void setParagraphStyles(const QList<KParagraphStyle*> styles);
+    void setDefaultParagraphStyle(KParagraphStyle *style);
     void setUnit(const KUnit &unit);
 
     void switchToGeneralTab();
     void hideStyleName(bool hide);
 
 public slots:
-    void save(KoParagraphStyle *style = 0);
+    void save(KParagraphStyle *style = 0);
 
 signals:
     void nameChanged(const QString &name);
-    void styleAltered(const KoParagraphStyle *style);
+    void styleAltered(const KParagraphStyle *style);
 
 private slots:
     void setName(const QString &name);
@@ -69,10 +69,10 @@ private:
     ParagraphBulletsNumbers *m_paragraphBulletsNumbers;
     ParagraphDecorations *m_paragraphDecorations;
 
-    KoParagraphStyle *m_style;
-    QList<KoParagraphStyle*> m_paragraphStyles;
-    KoParagraphStyle *m_defaultParagraphStyle;
-    KoParagraphStyle *m_defaultParagraphStyle2;
+    KParagraphStyle *m_style;
+    QList<KParagraphStyle*> m_paragraphStyles;
+    KParagraphStyle *m_defaultParagraphStyle;
+    KParagraphStyle *m_defaultParagraphStyle2;
 };
 
 #endif

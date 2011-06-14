@@ -21,7 +21,7 @@
 #define FORMATTINGPREVIEW_H
 
 #include <KoCharacterStyle.h>
-#include <KoParagraphStyle.h>
+#include <KParagraphStyle.h>
 
 #include <QFont>
 #include <QFrame>

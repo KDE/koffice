@@ -55,7 +55,7 @@
 #include <KOdf.h>
 #include <KoColorPopupAction.h>
 #include <KoTextDocumentLayout.h>
-#include <KoParagraphStyle.h>
+#include <KParagraphStyle.h>
 #include <KoTextEditingPlugin.h>
 #include <KoTextEditingRegistry.h>
 #include <KInlineTextObjectManager.h>
@@ -1070,7 +1070,7 @@ void TextTool::keyPressEvent(QKeyEvent *event)
         if (!textEditor->hasSelection() && textEditor->block().textList()
             && (textEditor->position() == textEditor->block().position())
             && !(m_actionRecordChanges->isChecked())) {
-            if (!textEditor->blockFormat().boolProperty(KoParagraphStyle::UnnumberedListItem)) {
+            if (!textEditor->blockFormat().boolProperty(KParagraphStyle::UnnumberedListItem)) {
                 // backspace at beginning of numbered list item, makes it unnumbered
                 ListItemNumberingCommand *lin = new ListItemNumberingCommand(textEditor->block(), false);
                 addCommand(lin);
@@ -1182,7 +1182,7 @@ void TextTool::keyPressEvent(QKeyEvent *event)
             repaintCaret();
         QTextBlockFormat format = textEditor->blockFormat();
 
-        KoText::Direction dir = static_cast<KoText::Direction>(format.intProperty(KoParagraphStyle::TextProgressionDirection));
+        KoText::Direction dir = static_cast<KoText::Direction>(format.intProperty(KParagraphStyle::TextProgressionDirection));
         bool isRtl;
         if (dir == KoText::AutoDirection)
             isRtl = textEditor->block().text().isRightToLeft();
@@ -1600,8 +1600,8 @@ QWidget *TextTool::createOptionWidget()
     connect(this, SIGNAL(blockFormatChanged(const QTextBlockFormat &)),
             styles, SLOT(setCurrentFormat(const QTextBlockFormat &)));
 
-    connect(styles, SIGNAL(paragraphStyleSelected(KoParagraphStyle *)),
-            this, SLOT(setStyle(KoParagraphStyle*)));
+    connect(styles, SIGNAL(paragraphStyleSelected(KParagraphStyle *)),
+            this, SLOT(setStyle(KParagraphStyle*)));
     connect(styles, SIGNAL(characterStyleSelected(KoCharacterStyle *)),
             this, SLOT(setStyle(KoCharacterStyle*)));
     connect(styles, SIGNAL(doneWithFocus()), this, SLOT(returnFocusToCanvas()));
@@ -1847,7 +1847,7 @@ void TextTool::setStyle(KoCharacterStyle *style)
     emit charFormatChanged(m_textEditor.data()->charFormat());
 }
 
-void TextTool::setStyle(KoParagraphStyle *style)
+void TextTool::setStyle(KParagraphStyle *style)
 {
     m_textEditor.data()->setStyle(style);
     emit blockFormatChanged(m_textEditor.data()->blockFormat());
@@ -2314,9 +2314,9 @@ void TextTool::debugTextDocument()
 
     QTextBlock block = textEditor->document()->begin();
     for (;block.isValid(); block = block.next()) {
-        QVariant var = block.blockFormat().property(KoParagraphStyle::StyleId);
+        QVariant var = block.blockFormat().property(KParagraphStyle::StyleId);
         if (!var.isNull()) {
-            KoParagraphStyle *ps = styleManager->paragraphStyle(var.toInt());
+            KParagraphStyle *ps = styleManager->paragraphStyle(var.toInt());
             kDebug(32500) << "--- Paragraph Style:" << (ps ? ps->name() : QString()) << var.toInt();
         }
         var = block.charFormat().property(KoCharacterStyle::StyleId);
@@ -2415,7 +2415,7 @@ void TextTool::debugTextStyles()
 
     QSet<int> seenStyles;
 
-    foreach (KoParagraphStyle *style, styleManager->paragraphStyles()) {
+    foreach (KParagraphStyle *style, styleManager->paragraphStyles()) {
         kDebug(32500) << style->styleId() << style->name() << (styleManager->defaultParagraphStyle() == style ? "[Default]" : "");
         if (style->parentStyle())
             kDebug(32500) << "  +- With parent style; " << style->parentStyle()->styleId();

@@ -33,7 +33,7 @@
 #include "changetracker/KoChangeTrackerElement.h"
 #include "changetracker/KoDeleteChangeMarker.h"
 #include "styles/KoCharacterStyle.h"
-#include "styles/KoParagraphStyle.h"
+#include "styles/KParagraphStyle.h"
 #include "styles/KoStyleManager.h"
 #include "styles/KoTableCellStyle.h"
 #include "styles/KoTableColumnStyle.h"
@@ -243,7 +243,7 @@ void KoTextEditorPrivate::runDirectionUpdater()
             KoText::Direction newDirection = KoText::AutoDirection;
             QTextBlockFormat format = block.blockFormat();
             KoText::Direction dir =
-                static_cast<KoText::Direction>(format.intProperty(KoParagraphStyle::TextProgressionDirection));
+                static_cast<KoText::Direction>(format.intProperty(KParagraphStyle::TextProgressionDirection));
 
             if (dir == KoText::AutoDirection || dir == KoText::PerhapsLeftRightTopBottom
                     || dir == KoText::PerhapsRightLeftTopBottom
@@ -255,8 +255,8 @@ void KoTextEditorPrivate::runDirectionUpdater()
                     newDirection = KoText::PerhapsLeftRightTopBottom;
 
                 QTextCursor cursor(block);
-                if (format.property(KoParagraphStyle::TextProgressionDirection).toInt() != newDirection) {
-                    format.setProperty(KoParagraphStyle::TextProgressionDirection, newDirection);
+                if (format.property(KParagraphStyle::TextProgressionDirection).toInt() != newDirection) {
+                    format.setProperty(KParagraphStyle::TextProgressionDirection, newDirection);
                     cursor.setBlockFormat(format); // note that setting this causes a re-layout.
                 }
                 if (!isBidiDocument) {
@@ -678,7 +678,7 @@ void KoTextEditor::setStyle(KoCharacterStyle *style)
     d->updateState(KoTextEditorPrivate::NoOp);
 }
 
-void KoTextEditor::setStyle(KoParagraphStyle *style)
+void KoTextEditor::setStyle(KParagraphStyle *style)
 {
     d->updateState(KoTextEditorPrivate::Format, i18n("Set Paragraph Style"));
     const int start = qMin(position(), anchor());
@@ -688,7 +688,7 @@ void KoTextEditor::setStyle(KoParagraphStyle *style)
     while (block.isValid() && block.position() <= end) { // now loop over all blocks
         QTextBlockFormat bf = block.blockFormat();
         if (styleManager) {
-            KoParagraphStyle *old = styleManager->paragraphStyle(bf.intProperty(KoParagraphStyle::StyleId));
+            KParagraphStyle *old = styleManager->paragraphStyle(bf.intProperty(KParagraphStyle::StyleId));
             if (old)
                 old->unapplyStyle(block);
         }
@@ -1174,10 +1174,10 @@ void KoTextEditor::newLine()
         d->deleteInlineObjects();
     KoTextDocument koDocument(d->document);
     KoStyleManager *styleManager = koDocument.styleManager();
-    KoParagraphStyle *nextStyle = 0;
-    KoParagraphStyle *currentStyle = 0;
+    KParagraphStyle *nextStyle = 0;
+    KParagraphStyle *currentStyle = 0;
     if (styleManager) {
-        int id = d->caret.blockFormat().intProperty(KoParagraphStyle::StyleId);
+        int id = d->caret.blockFormat().intProperty(KParagraphStyle::StyleId);
         currentStyle = styleManager->paragraphStyle(id);
         if (currentStyle == 0) // not a style based parag.  Lets make the next one correct.
             nextStyle = styleManager->defaultParagraphStyle();
@@ -1195,12 +1195,12 @@ void KoTextEditor::newLine()
     }
 
     QTextBlockFormat bf = d->caret.blockFormat();
-    QVariant direction = bf.property(KoParagraphStyle::TextProgressionDirection);
+    QVariant direction = bf.property(KParagraphStyle::TextProgressionDirection);
     bf.clearProperty(QTextFormat::PageBreakPolicy);
-    bf.clearProperty(KoParagraphStyle::ListStartValue);
-    bf.clearProperty(KoParagraphStyle::UnnumberedListItem);
-    bf.clearProperty(KoParagraphStyle::IsListHeader);
-    bf.clearProperty(KoParagraphStyle::MasterPageName);
+    bf.clearProperty(KParagraphStyle::ListStartValue);
+    bf.clearProperty(KParagraphStyle::UnnumberedListItem);
+    bf.clearProperty(KParagraphStyle::IsListHeader);
+    bf.clearProperty(KParagraphStyle::MasterPageName);
     d->caret.insertBlock(bf); // does not inherit list
 
     if (nextStyle) {
@@ -1233,9 +1233,9 @@ void KoTextEditor::newLine()
         default:
             dir = KoText::PerhapsLeftRightTopBottom;
         }
-        bf.setProperty(KoParagraphStyle::TextProgressionDirection, dir);
+        bf.setProperty(KParagraphStyle::TextProgressionDirection, dir);
     } else if (! direction.isNull()) { // then we inherit from the previous paragraph.
-        bf.setProperty(KoParagraphStyle::TextProgressionDirection, direction);
+        bf.setProperty(KParagraphStyle::TextProgressionDirection, direction);
     }
     d->caret.setBlockFormat(bf);
 

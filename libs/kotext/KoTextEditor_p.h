@@ -34,7 +34,7 @@
 #include "KoTextEditor.h"
 
 #include "KoTextDocument.h"
-#include "styles/KoParagraphStyle.h"
+#include "styles/KParagraphStyle.h"
 #include "styles/KoStyleManager.h"
 #include "changetracker/KoChangeTracker.h"
 
@@ -103,7 +103,7 @@ public:
             QTextBlockFormat format = block.blockFormat();
             if (resetProperties) {
                 if (KoTextDocument(editor->document()).styleManager()) {
-                    KoParagraphStyle *old = KoTextDocument(editor->document()).styleManager()->paragraphStyle(block.blockFormat().intProperty(KoParagraphStyle::StyleId));
+                    KParagraphStyle *old = KoTextDocument(editor->document()).styleManager()->paragraphStyle(block.blockFormat().intProperty(KParagraphStyle::StyleId));
                     if (old)
                         old->unapplyStyle(block);
                 }

@@ -164,9 +164,9 @@ qreal KoTextBlockBorderData::inset(Side side) const
 }
 
 void KoTextBlockBorderData::setEdge(Side side, const QTextBlockFormat &bf,
-                                    KoParagraphStyle::Property style, KoParagraphStyle::Property width,
-                                    KoParagraphStyle::Property color, KoParagraphStyle::Property space,
-                                    KoParagraphStyle::Property innerWidth)
+                                    KParagraphStyle::Property style, KParagraphStyle::Property width,
+                                    KParagraphStyle::Property color, KParagraphStyle::Property space,
+                                    KParagraphStyle::Property innerWidth)
 {
 
     Edge edge;

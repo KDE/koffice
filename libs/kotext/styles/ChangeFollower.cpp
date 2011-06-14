@@ -19,7 +19,7 @@
 
 #include "ChangeFollower_p.h"
 #include "KoCharacterStyle.h"
-#include "KoParagraphStyle.h"
+#include "KParagraphStyle.h"
 
 #include <QVector>
 #include <QTextDocument>
@@ -61,8 +61,8 @@ void ChangeFollower::processUpdates(const QMap<int, QMap<int, QVariant> > &chang
     QTextBlock block = cursor.block();
     while (block.isValid()) {
         QTextBlockFormat bf = block.blockFormat();
-        int id = bf.intProperty(KoParagraphStyle::StyleId);
-        KoParagraphStyle *paragStyle = 0;
+        int id = bf.intProperty(KParagraphStyle::StyleId);
+        KParagraphStyle *paragStyle = 0;
         if (id > 0 && changedStyles.contains(id)) {
             paragStyle = sm->paragraphStyle(id);
             Q_ASSERT(paragStyle);

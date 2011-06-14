@@ -59,7 +59,7 @@
 #include <KInlineTextObjectManager.h>
 #include <KoDocumentInfo.h>
 #include <KoCharacterStyle.h>
-#include <KoParagraphStyle.h>
+#include <KParagraphStyle.h>
 #include <KListStyle.h>
 #include <KListLevelProperties.h>
 #include <KoTextShapeData.h>
@@ -537,28 +537,28 @@ void KWDocument::initEmpty()
     doc.setStyleManager(styleManager);
     KoText::loadOpenDocument("/home/zander/work/kde/build-trunk/installed/share/apps/kword/templates/Normal/.source/A4.odt", &document);
 
-    KoParagraphStyle *parag = new KoParagraphStyle();
+    KParagraphStyle *parag = new KParagraphStyle();
     parag->setName(i18n("Head 1"));
     KoCharacterStyle *character = parag->characterStyle();
     character->setFontPointSize(20);
     character->setFontWeight(QFont::Bold);
     styleManager->add(parag);
 
-    parag = new KoParagraphStyle();
+    parag = new KParagraphStyle();
     parag->setName(i18n("Head 2"));
     character = parag->characterStyle();
     character->setFontPointSize(16);
     character->setFontWeight(QFont::Bold);
     styleManager->add(parag);
 
-    parag = new KoParagraphStyle();
+    parag = new KParagraphStyle();
     parag->setName(i18n("Head 3"));
     character = parag->characterStyle();
     character->setFontPointSize(12);
     character->setFontWeight(QFont::Bold);
     styleManager->add(parag);
 
-    parag = new KoParagraphStyle();
+    parag = new KParagraphStyle();
     parag->setName(i18n("Bullet List"));
     KListStyle *list = new KListStyle(parag);
     KListLevelProperties llp = list->levelProperties(0);
@@ -613,7 +613,7 @@ bool KWDocument::loadOdf(KOdfStoreReader &odfStore)
             Q_ASSERT(resourceManager()->hasResource(KoText::StyleManager));
             KoStyleManager *styleManager = resourceManager()->resource(KoText::StyleManager).value<KoStyleManager*>();
             Q_ASSERT(styleManager);
-            foreach (KoParagraphStyle *style, styleManager->paragraphStyles()) {
+            foreach (KParagraphStyle *style, styleManager->paragraphStyles()) {
                 QString name = style->name();
                 QByteArray bytes(name.toAscii());
 
@@ -653,7 +653,7 @@ void KWDocument::endOfLoading() // called by both oasis and oldxml
     QString firstPageMasterName;
     if (mainFrameSet()) {
         QTextBlock block = mainFrameSet()->document()->firstBlock();
-        firstPageMasterName = block.blockFormat().stringProperty(KoParagraphStyle::MasterPageName);
+        firstPageMasterName = block.blockFormat().stringProperty(KParagraphStyle::MasterPageName);
     }
 
     KWPage lastpage = pageManager()->last();
@@ -830,7 +830,7 @@ void KWDocument::requestMoreSpace(KWTextFrameSet *fs)
             if (data) {
                 QTextBlock block = fs->document()->findBlock(data->endPosition() + 1);
                 if (block.isValid()) {
-                    masterPageName = block.blockFormat().stringProperty(KoParagraphStyle::MasterPageName);
+                    masterPageName = block.blockFormat().stringProperty(KParagraphStyle::MasterPageName);
                 }
             }
         }

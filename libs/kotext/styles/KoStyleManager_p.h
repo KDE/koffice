@@ -44,13 +44,13 @@ public:
     void updateAlteredStyles(); // slot for the QTimer::singleshot
 
     /// recursively add all char styles under \a ps
-    void requestUpdateForChildren(KoParagraphStyle *ps);
+    void requestUpdateForChildren(KParagraphStyle *ps);
 
 
     static int s_stylesNumber; // For giving out unique numbers to the styles for referencing
 
     QHash<int, KoCharacterStyle*> charStyles;
-    QHash<int, KoParagraphStyle*> paragStyles;
+    QHash<int, KParagraphStyle*> paragStyles;
     QHash<int, KListStyle*> listStyles;
     QHash<int, KListStyle *> automaticListStyles;
     QHash<int, KoTableStyle *> tableStyles;
@@ -67,7 +67,7 @@ public:
     /// the updateQueue contains a map of (altered) style-ids to a state of the style
     QMap<int, QMap<int, QVariant> > updateQueue;
 
-    KoParagraphStyle *defaultParagraphStyle;
+    KParagraphStyle *defaultParagraphStyle;
     KListStyle *defaultListStyle;
     KListStyle *outlineStyle;
 };

@@ -31,7 +31,7 @@ class KWFrameSet;
 class KWFrame;
 class KWPageManager;
 class KWTextFrameSet;
-class KoParagraphStyle;
+class KParagraphStyle;
 class KoCharacterStyle;
 class QColor;
 class KoShape;
@@ -81,7 +81,7 @@ private:
     /// fill the data of fs with the info from the element
     void fill(KWTextFrameSet *fs, const KXmlElement &framesetElem);
     /// fill the data of style with the info from the element
-    void fill(KoParagraphStyle *style, const KXmlElement &layoutElem);
+    void fill(KParagraphStyle *style, const KXmlElement &layoutElem);
     void fill(KoCharacterStyle *style, const KXmlElement &formatElem);
     void fill(KWFrame *frame, const KXmlElement &frameElem);
     void fill(ImageKey *key, const KXmlElement &keyElement);

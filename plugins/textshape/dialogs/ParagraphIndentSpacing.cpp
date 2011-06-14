@@ -20,7 +20,7 @@
 
 #include "ParagraphIndentSpacing.h"
 
-#include <KoParagraphStyle.h>
+#include <KParagraphStyle.h>
 #include <KDebug>
 
 ParagraphIndentSpacing::ParagraphIndentSpacing(QWidget *parent)
@@ -54,7 +54,7 @@ void ParagraphIndentSpacing::autoTextIndentChanged(int state)
     widget.first->setEnabled(state == Qt::Unchecked);
 }
 
-void ParagraphIndentSpacing::setDisplay(KoParagraphStyle *style)
+void ParagraphIndentSpacing::setDisplay(KParagraphStyle *style)
 {
     m_style = style;
     widget.first->changeValue(style->textIndent());
@@ -65,13 +65,13 @@ void ParagraphIndentSpacing::setDisplay(KoParagraphStyle *style)
     widget.autoTextIndent->setChecked(style->autoTextIndent());
 
     int index;
-    if (style->hasProperty(KoParagraphStyle::FixedLineHeight) && style->lineHeightAbsolute() != 0) {
+    if (style->hasProperty(KParagraphStyle::FixedLineHeight) && style->lineHeightAbsolute() != 0) {
         // this is the strongest; if this is set we don't care what other properties there are.
         index = 5;
-    } else if (style->hasProperty(KoParagraphStyle::LineSpacing) && style->lineSpacing() != 0) {
+    } else if (style->hasProperty(KParagraphStyle::LineSpacing) && style->lineSpacing() != 0) {
         // if LineSpacing is set then percent is ignored.
         index = 4;
-    } else if (style->hasProperty(KoParagraphStyle::PercentLineHeight) && style->lineHeightPercent() != 0) {
+    } else if (style->hasProperty(KParagraphStyle::PercentLineHeight) && style->lineHeightPercent() != 0) {
         int percent = style->lineHeightPercent();
         if (percent == 120)
             index = 0; // single
@@ -165,7 +165,7 @@ void ParagraphIndentSpacing::spacingValueChanged(qreal value)
         emit lineSpacingChanged(value, 0, 0, 0, false);
 }
 
-void ParagraphIndentSpacing::save(KoParagraphStyle *style)
+void ParagraphIndentSpacing::save(KParagraphStyle *style)
 {
     // general note; we have to unset values by setting it to zero instead of removing the item
     // since this dialog may be used on a copy style, which will be applied later. And removing

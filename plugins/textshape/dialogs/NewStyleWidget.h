@@ -24,7 +24,7 @@
 
 #include <QWidget>
 
-class KoParagraphStyle;
+class KParagraphStyle;
 class KoCharacterStyle;
 
 class NewStyleWidget : public QWidget
@@ -34,7 +34,7 @@ public:
     NewStyleWidget(QWidget *parent = 0);
 
 signals:
-    void newParagraphStyle(KoParagraphStyle *style);
+    void newParagraphStyle(KParagraphStyle *style);
     void newCharacterStyle(KoCharacterStyle *style);
     void cancelled();
 

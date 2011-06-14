@@ -20,7 +20,7 @@
 
 #include "ParagraphBulletsNumbers.h"
 
-#include <KoParagraphStyle.h>
+#include <KParagraphStyle.h>
 #include <KListLevelProperties.h>
 
 #include <KDebug>
@@ -64,7 +64,7 @@ int ParagraphBulletsNumbers::addStyle(const Lists::ListStyleItem &lsi)
     return widget.listTypes->count() - 1;
 }
 
-void ParagraphBulletsNumbers::setDisplay(KoParagraphStyle *style, int level)
+void ParagraphBulletsNumbers::setDisplay(KParagraphStyle *style, int level)
 {
     KListStyle *listStyle = style->listStyle();
     widget.listPropertiesPane->setEnabled(listStyle != 0);
@@ -110,7 +110,7 @@ void ParagraphBulletsNumbers::setDisplay(KoParagraphStyle *style, int level)
     recalcPreview();
 }
 
-void ParagraphBulletsNumbers::save(KoParagraphStyle *savingStyle)
+void ParagraphBulletsNumbers::save(KParagraphStyle *savingStyle)
 {
     Q_ASSERT(savingStyle);
     const int currentRow = widget.listTypes->currentRow();

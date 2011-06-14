@@ -7,7 +7,7 @@ setFormatProperty(listFormat1, KListStyle.MinimumWidth, 18);
 setFormatProperty(listFormat1, KListStyle.Indent, 18.);
 
 var unnumberedFormat = QTextBlockFormat.clone(defaultBlockFormat);
-setFormatProperty(unnumberedFormat, KoParagraphStyle.UnnumberedListItem, 1);
+setFormatProperty(unnumberedFormat, KParagraphStyle.UnnumberedListItem, 1);
 
 var list1 = cursor.createList(listFormat1);
 cursor.insertText("Level 1 item", defaultListItemFormat);

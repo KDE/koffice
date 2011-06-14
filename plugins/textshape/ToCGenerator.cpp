@@ -20,7 +20,7 @@
 
 #include "ToCGenerator.h"
 
-#include <KoParagraphStyle.h>
+#include <KParagraphStyle.h>
 #include <KoTextDocumentLayout.h>
 #include <KoTextShapeData.h>
 #include <KoTextPage.h>
@@ -70,14 +70,14 @@ void ToCGenerator::generate()
     QTextDocument *doc = m_ToCFrame->document();
     KoTextDocument koDocument(doc);
     KoStyleManager *styleManager = koDocument.styleManager();
-    QList<KoParagraphStyle *> paragStyle;
+    QList<KParagraphStyle *> paragStyle;
 
     QTextCursor cursor = m_ToCFrame->lastCursorPosition();
     cursor.setPosition(m_ToCFrame->firstPosition(), QTextCursor::KeepAnchor);
     cursor.beginEditBlock();
     // Add the title
     cursor.insertText("Table of Contents"); // TODO i18n
-    KoParagraphStyle *titleStyle = styleManager->paragraphStyle("Contents Heading"); // TODO don't hardcode this!
+    KParagraphStyle *titleStyle = styleManager->paragraphStyle("Contents Heading"); // TODO don't hardcode this!
     if (titleStyle) {
         QTextBlock block = cursor.block();
         titleStyle->applyStyle(block);
@@ -87,13 +87,13 @@ void ToCGenerator::generate()
     // looks for blocks to add in the ToC
     QTextBlock block = doc->begin();
     while (block.isValid()) {
-        int outlineLevel = block.blockFormat().intProperty(KoParagraphStyle::OutlineLevel);
+        int outlineLevel = block.blockFormat().intProperty(KParagraphStyle::OutlineLevel);
 
         if (outlineLevel > 0) {
             cursor.insertBlock();
-            KoParagraphStyle *currentStyle = styleManager->paragraphStyle("Contents "+QString::number(outlineLevel));
+            KParagraphStyle *currentStyle = styleManager->paragraphStyle("Contents "+QString::number(outlineLevel));
             if (currentStyle == 0) {
-                currentStyle = new KoParagraphStyle();
+                currentStyle = new KParagraphStyle();
                 currentStyle->setName("Contents " + QString::number(outlineLevel));
                 currentStyle->setParent(styleManager->paragraphStyle("Standard"));
 

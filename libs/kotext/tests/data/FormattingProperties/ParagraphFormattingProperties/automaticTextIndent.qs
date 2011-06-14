@@ -9,7 +9,7 @@ cursor.setCharFormat(textCharFormat);
 
 var textBlockFormat = QTextBlockFormat.clone(defaultBlockFormat);
 var textBlockFormatAi = new QTextBlockFormat;
-setFormatProperty(textBlockFormat, KoParagraphStyle.AutoTextIndent, true);
+setFormatProperty(textBlockFormat, KParagraphStyle.AutoTextIndent, true);
 
 cursor.setBlockFormat(textBlockFormat);
 cursor.insertText("This is an example of paragraph with font size 20pt, text indent of 1inch (ineffective) and automatic text indent enabled. This should just look, er, big. [P1_20_1in_auto]");
@@ -31,7 +31,7 @@ cursor.insertText("This is an example of paragraph with font size 12pt, text ind
 cursor.insertBlock(defaultBlockFormat);
 cursor.insertBlock(defaultBlockFormat);
 
-setFormatProperty(textBlockFormat, KoParagraphStyle.AutoTextIndent, false);
+setFormatProperty(textBlockFormat, KParagraphStyle.AutoTextIndent, false);
 textBlockFormat.setTextIndent(72 * 1); // 1 inch = 72pt
 cursor.insertBlock(textBlockFormat);
 cursor.insertText("This is an example of paragraph with font size 12pt, text indent of 1inch and automatic text indent disabled. This should visually have 1 inch indentation. [P4_12_1in]");

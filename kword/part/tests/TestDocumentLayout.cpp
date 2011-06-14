@@ -24,7 +24,7 @@
 #include "../frames/KWTextDocumentLayout.h"
 
 #include <MockTextShape.h>
-#include <KoParagraphStyle.h>
+#include <KParagraphStyle.h>
 #include <KListStyle.h>
 #include <KoTextBlockData.h>
 #include <KoStyleManager.h>
@@ -161,7 +161,7 @@ void TestDocumentLayout::initForNewTest(const QString &initText)
     if (initText.length() > 0) {
         QTextCursor cursor(doc);
         cursor.insertText(initText);
-        KoParagraphStyle style;
+        KParagraphStyle style;
         style.setStyleId(101); // needed to do manually since we don't use the stylemanager
         QTextBlock b2 = doc->begin();
         while (b2.isValid()) {

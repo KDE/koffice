@@ -19,7 +19,7 @@
  */
 #include "TestDocumentLayout.h"
 
-#include <KoParagraphStyle.h>
+#include <KParagraphStyle.h>
 #include <KListStyle.h>
 #include <KListLevelProperties.h>
 #include <KoStyleManager.h>
@@ -66,7 +66,7 @@ void TestDocumentLayout::initForNewTest(const QString &initText)
     if (initText.length() > 0) {
         QTextCursor cursor(m_doc);
         cursor.insertText(initText);
-        KoParagraphStyle style;
+        KParagraphStyle style;
         style.setStyleId(101); // needed to do manually since we don't use the stylemanager
         QTextBlock b2 = m_doc->begin();
         while (b2.isValid()) {
@@ -218,13 +218,13 @@ void TestDocumentLayout::testAdvancedLineSpacing()
     initForNewTest("Line1\nLine2\nLine3\nLine4\nLine5\nLine6\nLine7");
     QTextCursor cursor(m_doc);
 
-    KoParagraphStyle style;
+    KParagraphStyle style;
     style.setLineHeightPercent(80);
     QTextBlock block = m_doc->begin();
     style.applyStyle(block);
 
     // check if styles do their work ;)
-    QCOMPARE(block.blockFormat().intProperty(KoParagraphStyle::PercentLineHeight), 80);
+    QCOMPARE(block.blockFormat().intProperty(KParagraphStyle::PercentLineHeight), 80);
 
     block = block.next();
     QVERIFY(block.isValid()); //line2
@@ -239,7 +239,7 @@ void TestDocumentLayout::testAdvancedLineSpacing()
 
     block = block.next();
     QVERIFY(block.isValid()); // line4
-    style.remove(KoParagraphStyle::FixedLineHeight);
+    style.remove(KParagraphStyle::FixedLineHeight);
     style.setMinimumLineHeight(5.0);
     style.applyStyle(block);
 
@@ -247,14 +247,14 @@ void TestDocumentLayout::testAdvancedLineSpacing()
     QVERIFY(block.isValid()); // line5
     style.setMinimumLineHeight(0.0);
     style.setLineSpacing(8.0);
-    style.remove(KoParagraphStyle::PercentLineHeight);
+    style.remove(KParagraphStyle::PercentLineHeight);
     style.applyStyle(block);
 
     block = block.next();
     QVERIFY(block.isValid()); // line6
     style.setLineSpacingFromFont(true);
     style.setLineHeightPercent(100);
-    style.remove(KoParagraphStyle::LineSpacing);
+    style.remove(KParagraphStyle::LineSpacing);
     style.applyStyle(block);
 
     m_layout->layout();
@@ -343,7 +343,7 @@ void TestDocumentLayout::testMultipageMargins()
     initForNewTest("123456789\nparagraph 2\nlksdjflksdjflksdjlkfjsdlkfjsdlk sldkfj lsdkjf lskdjf lsd lfsjd lfk");
     QTextCursor cursor(m_doc);
 
-    KoParagraphStyle h1;
+    KParagraphStyle h1;
     h1.setTopMargin(100.0);
     h1.setBottomMargin(20.0);
     m_styleManager->add(&h1);
@@ -442,15 +442,15 @@ void TestDocumentLayout::testTextAlignments()
 {
     // TODO justified & justified, last line
     initForNewTest("Left\nRight\nﺵﻻﺆﻴﺜﺒ\nﺵﻻﺆﻴﺜﺒ\nLast Line.");
-    KoParagraphStyle start;
+    KParagraphStyle start;
     start.setAlignment(Qt::AlignLeading);
-    KoParagraphStyle end;
+    KParagraphStyle end;
     end.setAlignment(Qt::AlignTrailing);
 
-    KoParagraphStyle startRTL;
+    KParagraphStyle startRTL;
     startRTL.setAlignment(Qt::AlignLeading);
     startRTL.setTextProgressionDirection(KoText::RightLeftTopBottom);
-    KoParagraphStyle endRTL;
+    KParagraphStyle endRTL;
     endRTL.setAlignment(Qt::AlignTrailing);
     endRTL.setTextProgressionDirection(KoText::RightLeftTopBottom);
 
@@ -498,7 +498,7 @@ void TestDocumentLayout::testTextAlignments()
 void TestDocumentLayout::testPageBreak()
 {
     initForNewTest("line\nParag2\nSimple Parag\nLast");
-    KoParagraphStyle style;
+    KParagraphStyle style;
     style.setBreakBefore(true);
     style.setBreakAfter(true);
     QTextBlock block = m_doc->begin();
@@ -600,7 +600,7 @@ void TestDocumentLayout::testParagOffset()
       2) When its in the paragraph-properties, but not in the style (i.e. a manual override)
     */
 
-    KoParagraphStyle h1;
+    KParagraphStyle h1;
     h1.setTopMargin(20);
     h1.setBreakBefore(true);
     m_styleManager->add(&h1);
@@ -647,14 +647,14 @@ void TestDocumentLayout::testParagraphBorders()
     initForNewTest("Paragraph with Borders\nAnother parag\n");
     QTextCursor cursor(m_doc->begin());
     QTextBlockFormat bf = cursor.blockFormat();
-    bf.setProperty(KoParagraphStyle::LeftBorderStyle, KOdfBorders::BorderSolid);
-    bf.setProperty(KoParagraphStyle::TopBorderStyle, KOdfBorders::BorderSolid);
-    bf.setProperty(KoParagraphStyle::BottomBorderStyle, KOdfBorders::BorderSolid);
-    bf.setProperty(KoParagraphStyle::RightBorderStyle, KOdfBorders::BorderSolid);
-    bf.setProperty(KoParagraphStyle::LeftBorderWidth, 8.0);
-    bf.setProperty(KoParagraphStyle::TopBorderWidth, 9.0);
-    bf.setProperty(KoParagraphStyle::BottomBorderWidth, 10.0);
-    bf.setProperty(KoParagraphStyle::RightBorderWidth, 11.0);
+    bf.setProperty(KParagraphStyle::LeftBorderStyle, KOdfBorders::BorderSolid);
+    bf.setProperty(KParagraphStyle::TopBorderStyle, KOdfBorders::BorderSolid);
+    bf.setProperty(KParagraphStyle::BottomBorderStyle, KOdfBorders::BorderSolid);
+    bf.setProperty(KParagraphStyle::RightBorderStyle, KOdfBorders::BorderSolid);
+    bf.setProperty(KParagraphStyle::LeftBorderWidth, 8.0);
+    bf.setProperty(KParagraphStyle::TopBorderWidth, 9.0);
+    bf.setProperty(KParagraphStyle::BottomBorderWidth, 10.0);
+    bf.setProperty(KParagraphStyle::RightBorderWidth, 11.0);
     cursor.setBlockFormat(bf);
 
     m_layout->layout();
@@ -669,10 +669,10 @@ void TestDocumentLayout::testParagraphBorders()
     QVERIFY(qAbs(m_blockLayout->lineAt(0).y() - (9.0 + 14.4 + 10)) < ROUNDING);  // 14.4 is 12 pt font + 20% linespacing
 
     // borders + padding create the total inset.
-    bf.setProperty(KoParagraphStyle::LeftPadding, 5.0);
-    bf.setProperty(KoParagraphStyle::RightPadding, 5.0);
-    bf.setProperty(KoParagraphStyle::TopPadding, 5.0);
-    bf.setProperty(KoParagraphStyle::BottomPadding, 5.0);
+    bf.setProperty(KParagraphStyle::LeftPadding, 5.0);
+    bf.setProperty(KParagraphStyle::RightPadding, 5.0);
+    bf.setProperty(KParagraphStyle::TopPadding, 5.0);
+    bf.setProperty(KParagraphStyle::BottomPadding, 5.0);
     cursor.setBlockFormat(bf);
 
     m_layout->layout();
@@ -699,14 +699,14 @@ void TestDocumentLayout::testParagraphBorders()
     QCOMPARE(borderOutline.right(), 200.);
 
     // qreal borders.  Specify an additional width for each side.
-    bf.setProperty(KoParagraphStyle::LeftBorderStyle, KOdfBorders::BorderDouble);
-    bf.setProperty(KoParagraphStyle::TopBorderStyle, KOdfBorders::BorderDouble);
-    bf.setProperty(KoParagraphStyle::BottomBorderStyle, KOdfBorders::BorderDouble);
-    bf.setProperty(KoParagraphStyle::RightBorderStyle, KOdfBorders::BorderDouble);
-    bf.setProperty(KoParagraphStyle::LeftInnerBorderWidth, 2.0);
-    bf.setProperty(KoParagraphStyle::RightInnerBorderWidth, 2.0);
-    bf.setProperty(KoParagraphStyle::BottomInnerBorderWidth, 2.0);
-    bf.setProperty(KoParagraphStyle::TopInnerBorderWidth, 2.0);
+    bf.setProperty(KParagraphStyle::LeftBorderStyle, KOdfBorders::BorderDouble);
+    bf.setProperty(KParagraphStyle::TopBorderStyle, KOdfBorders::BorderDouble);
+    bf.setProperty(KParagraphStyle::BottomBorderStyle, KOdfBorders::BorderDouble);
+    bf.setProperty(KParagraphStyle::RightBorderStyle, KOdfBorders::BorderDouble);
+    bf.setProperty(KParagraphStyle::LeftInnerBorderWidth, 2.0);
+    bf.setProperty(KParagraphStyle::RightInnerBorderWidth, 2.0);
+    bf.setProperty(KParagraphStyle::BottomInnerBorderWidth, 2.0);
+    bf.setProperty(KParagraphStyle::TopInnerBorderWidth, 2.0);
     cursor.setBlockFormat(bf);
 
     m_layout->layout();
@@ -721,10 +721,10 @@ void TestDocumentLayout::testParagraphBorders()
     QVERIFY(qAbs(m_blockLayout->lineAt(0).y() - (9.0 + 14.4 + 10 + (5.0 + 2.0) * 2)) < ROUNDING);
 
     // and last, make the 2 qreal border have a blank space in the middle.
-    bf.setProperty(KoParagraphStyle::LeftBorderSpacing, 3.0);
-    bf.setProperty(KoParagraphStyle::RightBorderSpacing, 3.0);
-    bf.setProperty(KoParagraphStyle::BottomBorderSpacing, 3.0);
-    bf.setProperty(KoParagraphStyle::TopBorderSpacing, 3.0);
+    bf.setProperty(KParagraphStyle::LeftBorderSpacing, 3.0);
+    bf.setProperty(KParagraphStyle::RightBorderSpacing, 3.0);
+    bf.setProperty(KParagraphStyle::BottomBorderSpacing, 3.0);
+    bf.setProperty(KParagraphStyle::TopBorderSpacing, 3.0);
     cursor.setBlockFormat(bf);
 
     m_layout->layout();
@@ -743,7 +743,7 @@ void TestDocumentLayout::testBorderData()
 {
     initForNewTest("Emtpy\nParagraph with Borders\nAnother parag\n");
 
-    KoParagraphStyle style;
+    KParagraphStyle style;
     m_styleManager->add(&style);
     style.setTopMargin(10);
     KListStyle listStyle;
@@ -820,7 +820,7 @@ void TestDocumentLayout::testDropCaps()
 {
     initForNewTest(m_loremIpsum);
 
-    KoParagraphStyle style;
+    KParagraphStyle style;
     style.setDropCaps(false);
     style.setDropCapsLength(1);
     style.setDropCapsLines(3);

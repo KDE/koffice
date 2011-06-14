@@ -60,7 +60,7 @@
 #include "changetracker/KoDeleteChangeMarker.h"
 #include <KFormatChangeInformation_p.h>
 #include "styles/KoStyleManager.h"
-#include "styles/KoParagraphStyle.h"
+#include "styles/KParagraphStyle.h"
 #include "styles/KoCharacterStyle.h"
 #include "styles/KListStyle.h"
 #include "styles/KListLevelProperties.h"
@@ -311,7 +311,7 @@ void KoTextLoader::Private::openChangeRegion(const KXmlElement& element)
         QTextBlockFormat blockFormat;
         if (attributeChange.attributeName == "text:style-name") {
             QString styleName = attributeChange.attributeValue;
-            KoParagraphStyle *paragraphStyle = textSharedData->paragraphStyle(styleName, stylesDotXml);
+            KParagraphStyle *paragraphStyle = textSharedData->paragraphStyle(styleName, stylesDotXml);
             if (paragraphStyle) {
                 paragraphStyle->applyStyle(blockFormat);
             }
@@ -691,7 +691,7 @@ void KoTextLoader::loadBody(const KXmlElement &bodyElem, QTextCursor &cursor)
     }
 
     if (document->isEmpty() && d->styleManager && !document->begin().blockFormat()
-            .hasProperty(KoParagraphStyle::StyleId)) {
+            .hasProperty(KParagraphStyle::StyleId)) {
         QTextBlock block = document->begin();
         d->styleManager->defaultParagraphStyle()->applyStyle(block);
     }
@@ -944,7 +944,7 @@ void KoTextLoader::loadParagraph(const KXmlElement &element, QTextCursor &cursor
     const QString styleName = element.attributeNS(KOdfXmlNS::text, "style-name",
                                                   QString());
 
-    KoParagraphStyle *paragraphStyle = d->textSharedData->paragraphStyle(styleName, d->stylesDotXml);
+    KParagraphStyle *paragraphStyle = d->textSharedData->paragraphStyle(styleName, d->stylesDotXml);
 
     Q_ASSERT(d->styleManager);
     QTextCharFormat cf = cursor.charFormat(); // store the current cursor char format
@@ -965,7 +965,7 @@ void KoTextLoader::loadParagraph(const KXmlElement &element, QTextCursor &cursor
         // Clear the outline level property. If a default-outline-level was set, it should not
         // be applied when loading a document, only on user action.
 could be true; but the following code has no effect... (TZander)
-        block.blockFormat().clearProperty(KoParagraphStyle::OutlineLevel);
+        block.blockFormat().clearProperty(KParagraphStyle::OutlineLevel);
 */
     }
 
@@ -1003,14 +1003,14 @@ void KoTextLoader::loadHeading(const KXmlElement &element, QTextCursor &cursor)
 {
     Q_ASSERT(d->styleManager);
     int level = qMax(-1, element.attributeNS(KOdfXmlNS::text, "outline-level", "-1").toInt());
-    // This will fallback to the default-outline-level applied by KoParagraphStyle
+    // This will fallback to the default-outline-level applied by KParagraphStyle
 
     QString styleName = element.attributeNS(KOdfXmlNS::text, "style-name", QString());
 
     QTextBlock block = cursor.block();
 
     // Set the paragraph-style on the block
-    KoParagraphStyle *paragraphStyle = d->textSharedData->paragraphStyle(styleName, d->stylesDotXml);
+    KParagraphStyle *paragraphStyle = d->textSharedData->paragraphStyle(styleName, d->stylesDotXml);
     if (!paragraphStyle) {
         kWarning(32500) << "paragraph style " << styleName << " not found";
         paragraphStyle = d->styleManager->defaultParagraphStyle();
@@ -1020,13 +1020,13 @@ void KoTextLoader::loadHeading(const KXmlElement &element, QTextCursor &cursor)
         paragraphStyle->applyStyle(block, d->currentList && !d->currentListStyle);
     }
 
-    if ((block.blockFormat().hasProperty(KoParagraphStyle::OutlineLevel)) && (level == -1)) {
-        level = block.blockFormat().property(KoParagraphStyle::OutlineLevel).toInt();
+    if ((block.blockFormat().hasProperty(KParagraphStyle::OutlineLevel)) && (level == -1)) {
+        level = block.blockFormat().property(KParagraphStyle::OutlineLevel).toInt();
     } else {
         if (level == -1)
             level = 1;
         QTextBlockFormat blockFormat;
-        blockFormat.setProperty(KoParagraphStyle::OutlineLevel, level);
+        blockFormat.setProperty(KParagraphStyle::OutlineLevel, level);
         cursor.mergeBlockFormat(blockFormat);
     }
 
@@ -1204,7 +1204,7 @@ void KoTextLoader::loadListItem(KXmlElement &e, QTextCursor &cursor, int level)
         } else if (e.localName() == "h") {
             loadHeading(e, cursor);
         }
-        blockFormat.setProperty(KoParagraphStyle::ListLevel, level);
+        blockFormat.setProperty(KParagraphStyle::ListLevel, level);
     } else {
         loadBody(e, cursor);
     }
@@ -1229,11 +1229,11 @@ void KoTextLoader::loadListItem(KXmlElement &e, QTextCursor &cursor, int level)
     }
 
     if (listHeader)
-        blockFormat.setProperty(KoParagraphStyle::IsListHeader, true);
+        blockFormat.setProperty(KParagraphStyle::IsListHeader, true);
 
     if (e.hasAttributeNS(KOdfXmlNS::text, "start-value")) {
         int startValue = e.attributeNS(KOdfXmlNS::text, "start-value", QString()).toInt();
-        blockFormat.setProperty(KoParagraphStyle::ListStartValue, startValue);
+        blockFormat.setProperty(KParagraphStyle::ListStartValue, startValue);
     }
 
 
@@ -1245,7 +1245,7 @@ void KoTextLoader::loadListItem(KXmlElement &e, QTextCursor &cursor, int level)
         if (c.block().textList()) // a sublist
             break;
         blockFormat = c.blockFormat();
-        blockFormat.setProperty(listHeader ? KoParagraphStyle::IsListHeader : KoParagraphStyle::UnnumberedListItem, true);
+        blockFormat.setProperty(listHeader ? KParagraphStyle::IsListHeader : KParagraphStyle::UnnumberedListItem, true);
         c.setBlockFormat(blockFormat);
         d->currentList->add(c.block(), level);
     }
@@ -1913,7 +1913,7 @@ void KoTextLoader::loadTable(const KXmlElement &tableElem, QTextCursor &cursor)
     //QVariant masterStyle = tableFormat.property(KoTableStyle::MasterPageName);
     //if (!masterStyle.isNull()) {
     //    QTextBlockFormat textBlockFormat;
-    //    textBlockFormat.setProperty(KoParagraphStyle::MasterPageName,masterStyle);
+    //    textBlockFormat.setProperty(KParagraphStyle::MasterPageName,masterStyle);
     //    cursor.setBlockFormat(textBlockFormat);
     //}
 

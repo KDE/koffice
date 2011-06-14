@@ -51,7 +51,7 @@
 #include <KoTextDocumentLayout.h>
 #include <KoStyleManager.h>
 #include <KoCharacterStyle.h>
-#include <KoParagraphStyle.h>
+#include <KParagraphStyle.h>
 #include <KoText.h>
 #include <KOdfEmbeddedDocumentSaver.h>
 #include <KInlineTextObjectManager.h>
@@ -196,33 +196,33 @@ bool TestLoading::compareBlockFormats(const QTextBlockFormat &actualFormat, cons
     foreach(int id, allPropertyIds) {
         QString key, value;
         switch (id) {
-        case KoParagraphStyle::UnnumberedListItem:
-        case KoParagraphStyle::IsListHeader:
+        case KParagraphStyle::UnnumberedListItem:
+        case KParagraphStyle::IsListHeader:
             if (actualProperty[id].toInt() != static_cast<int>(expectedProperty[id].toBool()))
                 match = false;
             break;
-        case KoParagraphStyle::AutoTextIndent:
-        case KoParagraphStyle::DropCaps:
-        case KoParagraphStyle::DropCapsLines:
-        case KoParagraphStyle::DropCapsLength:
-        case KoParagraphStyle::ListLevel:
+        case KParagraphStyle::AutoTextIndent:
+        case KParagraphStyle::DropCaps:
+        case KParagraphStyle::DropCapsLines:
+        case KParagraphStyle::DropCapsLength:
+        case KParagraphStyle::ListLevel:
             if (actualProperty[id].toInt() != expectedProperty[id].toInt())
                 match = false;
             break;
-        case KoParagraphStyle::LeftBorderWidth:
-        case KoParagraphStyle::TopBorderWidth:
-        case KoParagraphStyle::RightBorderWidth:
-        case KoParagraphStyle::BottomBorderWidth:
-        case KoParagraphStyle::LeftInnerBorderWidth:
-        case KoParagraphStyle::TopInnerBorderWidth:
-        case KoParagraphStyle::RightInnerBorderWidth:
-        case KoParagraphStyle::BottomInnerBorderWidth:
-        case KoParagraphStyle::LeftBorderSpacing:
-        case KoParagraphStyle::TopBorderSpacing:
-        case KoParagraphStyle::RightBorderSpacing:
-        case KoParagraphStyle::BottomBorderSpacing:
-        case KoParagraphStyle::TabStopDistance:
-        case KoParagraphStyle::DropCapsDistance:
+        case KParagraphStyle::LeftBorderWidth:
+        case KParagraphStyle::TopBorderWidth:
+        case KParagraphStyle::RightBorderWidth:
+        case KParagraphStyle::BottomBorderWidth:
+        case KParagraphStyle::LeftInnerBorderWidth:
+        case KParagraphStyle::TopInnerBorderWidth:
+        case KParagraphStyle::RightInnerBorderWidth:
+        case KParagraphStyle::BottomInnerBorderWidth:
+        case KParagraphStyle::LeftBorderSpacing:
+        case KParagraphStyle::TopBorderSpacing:
+        case KParagraphStyle::RightBorderSpacing:
+        case KParagraphStyle::BottomBorderSpacing:
+        case KParagraphStyle::TabStopDistance:
+        case KParagraphStyle::DropCapsDistance:
         case QTextFormat::BlockLeftMargin:
         case QTextFormat::BlockRightMargin:
         case QTextFormat::BlockTopMargin:
@@ -231,7 +231,7 @@ bool TestLoading::compareBlockFormats(const QTextBlockFormat &actualFormat, cons
                 // just checking if it's equal results in floating point errors
                 match = false;
             break;
-        case KoParagraphStyle::TabPositions:
+        case KParagraphStyle::TabPositions:
             if (!compareTabProperties(actualProperty[id], expectedProperty[id]))
                 match = false;
             break;
@@ -736,7 +736,7 @@ static QScriptValue setFormatProperty(QScriptContext *context, QScriptEngine *en
         format->setProperty(id, value);
     } else if (arg.isArray()) {
         switch (id) {
-        case KoParagraphStyle::TabPositions:
+        case KParagraphStyle::TabPositions:
             qvlist.clear();
             tabList.clear();
             qScriptValueToSequence(arg, tabList);

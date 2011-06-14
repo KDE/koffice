@@ -24,7 +24,7 @@
 #include "ParagraphDecorations.h"
 
 #include <KoStyleManager.h>
-#include <KoParagraphStyle.h>
+#include <KParagraphStyle.h>
 
 ParagraphGeneral::ParagraphGeneral(QWidget *parent)
         : QWidget(parent),
@@ -105,7 +105,7 @@ void ParagraphGeneral::horizontalAlignmentChanged(Qt::Alignment align)
     widget.preview->setHorizontalAlign(align);
 }
 
-void ParagraphGeneral::setStyle(KoParagraphStyle *style, int level)
+void ParagraphGeneral::setStyle(KParagraphStyle *style, int level)
 {
     m_style = style;
     if (m_style == 0)
@@ -116,10 +116,10 @@ void ParagraphGeneral::setStyle(KoParagraphStyle *style, int level)
     widget.inheritStyle->clear();
     widget.inheritStyle->addItem(i18nc("Inherit style", "None"));
     widget.inheritStyle->setCurrentIndex(0);
-    foreach (KoParagraphStyle *s, m_paragraphStyles) {
+    foreach (KParagraphStyle *s, m_paragraphStyles) {
         if (s == m_defaultParagraphStyle || s == m_defaultParagraphStyle2)
             continue;
-        KoParagraphStyle *parent = s;
+        KParagraphStyle *parent = s;
         bool ok = true;
         while (ok && parent) {
             ok = parent->styleId() != style->styleId();
@@ -155,7 +155,7 @@ void ParagraphGeneral::setStyle(KoParagraphStyle *style, int level)
     m_blockSignals = false;
 }
 
-void ParagraphGeneral::setParagraphStyles(const QList<KoParagraphStyle*> styles)
+void ParagraphGeneral::setParagraphStyles(const QList<KParagraphStyle*> styles)
 {
     widget.nextStyle->clear();
     m_paragraphStyles = styles;
@@ -167,7 +167,7 @@ void ParagraphGeneral::setParagraphStyles(const QList<KoParagraphStyle*> styles)
             m_defaultParagraphStyle = m_defaultParagraphStyle->parentStyle();
     }
 
-    foreach (KoParagraphStyle *style, m_paragraphStyles) {
+    foreach (KParagraphStyle *style, m_paragraphStyles) {
         if (style == m_defaultParagraphStyle || style == m_defaultParagraphStyle2)
             continue;
         widget.nextStyle->addItem(style->name(), style->styleId());
@@ -179,9 +179,9 @@ void ParagraphGeneral::setUnit(const KUnit &unit)
     m_paragraphIndentSpacing->setUnit(unit);
 }
 
-void ParagraphGeneral::save(KoParagraphStyle *style)
+void ParagraphGeneral::save(KParagraphStyle *style)
 {
-    KoParagraphStyle *savingStyle;
+    KParagraphStyle *savingStyle;
     if (style == 0) {
         if (m_style == 0)
             return;
@@ -202,7 +202,7 @@ void ParagraphGeneral::save(KoParagraphStyle *style)
     if (parentStyleId == 0) {
         m_style->setParentStyle(0);
     } else {
-        foreach(KoParagraphStyle *style, m_paragraphStyles) {
+        foreach(KParagraphStyle *style, m_paragraphStyles) {
             if (style->styleId() == parentStyleId) {
                 m_style->setParentStyle(style);
                 break;
@@ -216,7 +216,7 @@ void ParagraphGeneral::switchToGeneralTab()
     widget.tabs->setCurrentIndex(0);
 }
 
-void ParagraphGeneral::setDefaultParagraphStyle(KoParagraphStyle *style)
+void ParagraphGeneral::setDefaultParagraphStyle(KParagraphStyle *style)
 {
     m_defaultParagraphStyle2 = style;
     setParagraphStyles(m_paragraphStyles);

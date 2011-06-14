@@ -35,7 +35,7 @@ class KOdfGenericStyle;
 
 /**
  * This class groups all styling-options for lists.
- * See KoParagraphStyle::setListStyle()
+ * See KParagraphStyle::setListStyle()
  * The list-style represents several list-levels, where each level is represented by the
  * KListLevelProperties class. The top most list level is 1.
  *

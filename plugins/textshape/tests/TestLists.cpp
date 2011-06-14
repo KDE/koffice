@@ -1,6 +1,6 @@
 #include "TestDocumentLayout.h"
 
-#include <KoParagraphStyle.h>
+#include <KParagraphStyle.h>
 #include <KListStyle.h>
 #include <KListLevelProperties.h>
 #include <KoStyleManager.h>
@@ -12,7 +12,7 @@ void TestDocumentLayout::testBasicList()
 {
     initForNewTest("Base\nListItem\nListItem2: The quick brown fox jums over the lazy dog.\nNormal\nNormal");
 
-    KoParagraphStyle style;
+    KParagraphStyle style;
     QTextBlock block = m_doc->begin();
     style.applyStyle(block);
     block = block.next();
@@ -58,7 +58,7 @@ void TestDocumentLayout::testNumberedList()
 {
     initForNewTest("Base\nListItem1\nListItem2\nListItem3\nListItem4\nListItem5\nListItem6\nListItem6\nListItem7\nListItem8\nListItem9\nListItem10\nListItem11\nListItem12\n");
 
-    KoParagraphStyle style;
+    KParagraphStyle style;
     m_styleManager->add(&style);
     QTextBlock block = m_doc->begin();
     style.applyStyle(block);
@@ -136,12 +136,12 @@ void TestDocumentLayout::testNumberedList()
     QTextCursor cursor(m_doc);
     cursor.setPosition(10); // listItem1
     QTextBlockFormat format = cursor.blockFormat();
-    format.setProperty(KoParagraphStyle::ListStartValue, 4);
+    format.setProperty(KParagraphStyle::ListStartValue, 4);
     cursor.setBlockFormat(format);
 
     cursor.setPosition(40); // listItem4
     format = cursor.blockFormat();
-    format.setProperty(KoParagraphStyle::ListStartValue, 12);
+    format.setProperty(KParagraphStyle::ListStartValue, 12);
     cursor.setBlockFormat(format);
 
     // at this point we start numbering at 4. Have 4, 5, 6, 12, 13, 14, 15 etc
@@ -164,7 +164,7 @@ void TestDocumentLayout::testInterruptedLists()
     initForNewTest("ListItem1\nListItem2\nNormal Parag\nAnother parag\nListItem3\n");
     // expect that normal paragraphs do not break a list (i.e not restart it)
 
-    KoParagraphStyle style;
+    KParagraphStyle style;
     KListStyle listStyle;
     KListLevelProperties llp = listStyle.levelProperties(1);
     llp.setStyle(KListStyle::DecimalItem);
@@ -237,13 +237,13 @@ void TestDocumentLayout::testNestedLists()
 {
     initForNewTest("Root\nplants\nherbs\ncinnamon\ncurry\nroses\nhumans\nFrank\nAnkje\nOther\nSkip\nLastItem");
 
-    KoParagraphStyle h1;
+    KParagraphStyle h1;
     m_styleManager->add(&h1);
-    KoParagraphStyle h2;
+    KParagraphStyle h2;
     m_styleManager->add(&h2);
-    KoParagraphStyle h3;
+    KParagraphStyle h3;
     m_styleManager->add(&h3);
-    KoParagraphStyle h4;
+    KParagraphStyle h4;
     m_styleManager->add(&h4);
 
     KListStyle listStyle;
@@ -343,9 +343,9 @@ void TestDocumentLayout::testNestedPrefixedLists()
      */
     initForNewTest("MMMM\nSSSS\n");
 
-    KoParagraphStyle h1;
+    KParagraphStyle h1;
     m_styleManager->add(&h1);
-    KoParagraphStyle h2;
+    KParagraphStyle h2;
     m_styleManager->add(&h2);
 
     KListStyle listStyle;
@@ -402,9 +402,9 @@ void TestDocumentLayout::testAutoRestartList()
 {
     initForNewTest("Humans\nGandhi\nEinstein\nInventions\nCar\nToilet\nLaboratory\n");
 
-    KoParagraphStyle h1;
+    KParagraphStyle h1;
     m_styleManager->add(&h1);
-    KoParagraphStyle h2;
+    KParagraphStyle h2;
     m_styleManager->add(&h2);
 
     KListStyle listStyle;
@@ -447,9 +447,9 @@ void TestDocumentLayout::testListParagraphIndent()
     // test that the list item is drawn indented on an indented paragraph.
     initForNewTest("Foo\nBar\n");
 
-    KoParagraphStyle h1;
+    KParagraphStyle h1;
     m_styleManager->add(&h1);
-    KoParagraphStyle h2;
+    KParagraphStyle h2;
     m_styleManager->add(&h2);
     h2.setTextIndent(10);
 
@@ -486,7 +486,7 @@ void TestDocumentLayout::testRestartNumbering()
     // create 5 items; restart the 3th. Check numbering.
     initForNewTest("a\nb\na\nb\nc");
 
-    KoParagraphStyle h1;
+    KParagraphStyle h1;
     m_styleManager->add(&h1);
     KListStyle listStyle;
     KListLevelProperties llp;
@@ -505,7 +505,7 @@ void TestDocumentLayout::testRestartNumbering()
     cursor.setPosition(5);
     QCOMPARE(cursor.block().text(), QString("a"));
     QTextBlockFormat format = cursor.blockFormat();
-    format.setProperty(KoParagraphStyle::RestartListNumbering, true);
+    format.setProperty(KParagraphStyle::RestartListNumbering, true);
     cursor.setBlockFormat(format);
 
     m_layout->layout();
@@ -526,7 +526,7 @@ void TestDocumentLayout::testRestartNumbering()
 void TestDocumentLayout::testRightToLeftList()
 {
     initForNewTest("a\nb\nc");
-    KoParagraphStyle h1;
+    KParagraphStyle h1;
     h1.setTextProgressionDirection(KoText::RightLeftTopBottom);
     m_styleManager->add(&h1);
     KListStyle listStyle;
@@ -564,7 +564,7 @@ void TestDocumentLayout::testLetterSynchronization()
     // make numbering be  'y, z, aa, bb, cc'
     initForNewTest("a\nb\na\nb\nc");
 
-    KoParagraphStyle h1;
+    KParagraphStyle h1;
     m_styleManager->add(&h1);
     KListStyle listStyle;
     KListLevelProperties llp;
@@ -599,7 +599,7 @@ void TestDocumentLayout::testInvalidateLists()
 {
     initForNewTest("Base\nListItem1\nListItem2");
 
-    //KoParagraphStyle style;
+    //KParagraphStyle style;
     KListStyle listStyle;
     KListLevelProperties llp;
     llp.setStyle(KListStyle::DecimalItem);
@@ -664,7 +664,7 @@ void TestDocumentLayout::testCenteredItems()
     block = block.next(); // centered RTL text.
     listStyle.applyStyle(block);
     cursor = QTextCursor(block);
-    fmt.setProperty(KoParagraphStyle::TextProgressionDirection, KoText::RightLeftTopBottom);
+    fmt.setProperty(KParagraphStyle::TextProgressionDirection, KoText::RightLeftTopBottom);
     cursor.mergeBlockFormat(fmt);
 
     m_layout->layout();

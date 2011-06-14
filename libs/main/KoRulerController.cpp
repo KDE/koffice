@@ -19,7 +19,7 @@
 
 #include "KoRulerController.h"
 #include "KoText.h"
-#include "styles/KoParagraphStyle.h"
+#include "styles/KParagraphStyle.h"
 
 #include <KoResourceManager.h>
 
@@ -107,7 +107,7 @@ public:
         ruler->setShowTabs(true);
 
         QList<KoRuler::Tab> tabs;
-        QVariant variant = format.property(KoParagraphStyle::TabPositions);
+        QVariant variant = format.property(KParagraphStyle::TabPositions);
         if (! variant.isNull()) {
             foreach(const QVariant &var, qvariant_cast<QList<QVariant> >(variant)) {
                 KoText::Tab textTab = var.value<KoText::Tab>();
@@ -150,7 +150,7 @@ public:
 
         if (originalTabIndex == Unknown || originalTabIndex != originalIndex) {
             originalTabIndex = originalIndex;
-            KoParagraphStyle style(cursor.blockFormat(), cursor.blockCharFormat());
+            KParagraphStyle style(cursor.blockFormat(), cursor.blockCharFormat());
             tabList = style.tabPositions();
 qDebug() << tabList.count();
             if (originalTabIndex >= 0) { // modification
@@ -193,7 +193,7 @@ qDebug() << tabList.count();
             v.setValue(tab);
             list.append(v);
         }
-        bf.setProperty(KoParagraphStyle::TabPositions, list);
+        bf.setProperty(KParagraphStyle::TabPositions, list);
         blockSignals = true;
         cursor.mergeBlockFormat(bf);
         blockSignals = false;

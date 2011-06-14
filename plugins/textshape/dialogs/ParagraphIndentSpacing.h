@@ -26,7 +26,7 @@
 
 #include <QWidget>
 
-class KoParagraphStyle;
+class KParagraphStyle;
 
 class ParagraphIndentSpacing : public QWidget
 {
@@ -34,11 +34,11 @@ class ParagraphIndentSpacing : public QWidget
 public:
     ParagraphIndentSpacing(QWidget *parent);
     // open and display the style
-    void setDisplay(KoParagraphStyle *style);
+    void setDisplay(KParagraphStyle *style);
     void setUnit(const KUnit &unit);
 
     // save widget state to style
-    void save(KoParagraphStyle *style);
+    void save(KParagraphStyle *style);
 
 signals:
     void firstLineMarginChanged(qreal margin);
@@ -56,7 +56,7 @@ private slots:
 private:
     Ui::ParagraphIndentSpacing widget;
 
-    KoParagraphStyle *m_style;
+    KParagraphStyle *m_style;
     bool m_fontMetricsChecked;
 };
 

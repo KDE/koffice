@@ -24,7 +24,7 @@
 
 #include <KAction>
 #include <KoTextBlockData.h>
-#include <KoParagraphStyle.h>
+#include <KParagraphStyle.h>
 #include <KoTextDocumentLayout.h>
 #include <KoZoomHandler.h>
 
@@ -95,7 +95,7 @@ void SimpleStyleWidget::fillListsCombobox()
     textShape.setSize(QSizeF(300, 100));
     KoTextDocumentLayout *layouter = qobject_cast<KoTextDocumentLayout*> (textShape.textShapeData()->document()->documentLayout());
     Q_ASSERT(layouter);
-    KoParagraphStyle ps;
+    KParagraphStyle ps;
     ps.characterStyle()->setFontPointSize(12);
     ps.applyStyle(textShape.textShapeData()->document()->begin());
     foreach(const Lists::ListStyleItem &item, Lists::genericListStyleItems()) {
@@ -217,17 +217,17 @@ void SimpleStyleWidget::directionChangeRequested()
     QTextCursor cursor = m_tool->cursor();
     QTextBlockFormat format;
     KoText::Direction dir = static_cast<KoText::Direction>(m_currentBlock.blockFormat()
-            .intProperty(KoParagraphStyle::TextProgressionDirection));
+            .intProperty(KParagraphStyle::TextProgressionDirection));
     switch (dir) {
     case KoText::PerhapsLeftRightTopBottom:
     case KoText::LeftRightTopBottom:
-        format.setProperty(KoParagraphStyle::TextProgressionDirection, KoText::RightLeftTopBottom);
+        format.setProperty(KParagraphStyle::TextProgressionDirection, KoText::RightLeftTopBottom);
         updateDirection(RTL);
         break;
     case KoText::InheritDirection:
     case KoText::AutoDirection:
         updateDirection(LTR);
-        format.setProperty(KoParagraphStyle::TextProgressionDirection, KoText::LeftRightTopBottom);
+        format.setProperty(KParagraphStyle::TextProgressionDirection, KoText::LeftRightTopBottom);
         break;
     case KoText::PerhapsRightLeftTopBottom:
     case KoText::RightLeftTopBottom: {
@@ -238,7 +238,7 @@ void SimpleStyleWidget::directionChangeRequested()
         cursor.setPosition(start);
         while (cursor.position() <= end) {
             QTextBlockFormat bf = cursor.blockFormat();
-            bf.clearProperty(KoParagraphStyle::TextProgressionDirection);
+            bf.clearProperty(KParagraphStyle::TextProgressionDirection);
             cursor.setBlockFormat(bf);
             if (!cursor.movePosition(QTextCursor::NextBlock))
                 break;

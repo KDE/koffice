@@ -30,7 +30,7 @@
 
 class QString;
 class KOdfLoadingContext;
-class KoParagraphStyle;
+class KParagraphStyle;
 class KoCharacterStyle;
 class KListStyle;
 class KoTableStyle;
@@ -77,7 +77,7 @@ public:
      * @param stylesDotXml If set the styles from styles.xml are use if unset styles from content.xml are used.
      * @return The paragraph style for the given name or 0 if not found
      */
-    KoParagraphStyle *paragraphStyle(const QString &name, bool stylesDotXml) const;
+    KParagraphStyle *paragraphStyle(const QString &name, bool stylesDotXml) const;
 
     /**
      * Get the character style for the given name
@@ -183,7 +183,7 @@ private:
     // helper functions for loading of paragraph styles
     void addParagraphStyles(KoShapeLoadingContext &context, QList<KXmlElement*> styleElements, int styleTypes,
                             KoStyleManager *styleManager = 0);
-    QList<QPair<QString, KoParagraphStyle *> > loadParagraphStyles(KoShapeLoadingContext &context, QList<KXmlElement*> styleElements,
+    QList<QPair<QString, KParagraphStyle *> > loadParagraphStyles(KoShapeLoadingContext &context, QList<KXmlElement*> styleElements,
             int styleTypes, KoStyleManager *manager = 0);
 
     void addDefaultParagraphStyle(KoShapeLoadingContext &context, const KXmlElement *styleElem, const KXmlElement *appDefault, KoStyleManager *styleManager);

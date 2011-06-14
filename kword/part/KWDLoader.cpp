@@ -30,7 +30,7 @@
 #include <KoShapeFactoryBase.h>
 #include <KoShapeContainer.h>
 #include <KoStyleManager.h>
-#include <KoParagraphStyle.h>
+#include <KParagraphStyle.h>
 #include <KoCharacterStyle.h>
 #include <KListStyle.h>
 #include <KListLevelProperties.h>
@@ -592,10 +592,10 @@ void KWDLoader::fill(KWTextFrameSet *fs, const KXmlElement &framesetElem)
             KXmlElement layout = paragraph.namedItem("LAYOUT").toElement();
             if (!layout.isNull()) {
                 QString styleName = layout.namedItem("NAME").toElement().attribute("value");
-                KoParagraphStyle *style = styleManager->paragraphStyle(styleName);
+                KParagraphStyle *style = styleManager->paragraphStyle(styleName);
                 if (!style)
                     style = styleManager->defaultParagraphStyle();
-                KoParagraphStyle paragStyle;  // tmp style
+                KParagraphStyle paragStyle;  // tmp style
                 paragStyle.copyProperties(style);
                 fill(&paragStyle, layout);
 
@@ -756,7 +756,7 @@ void KWDLoader::fill(KWTextFrameSet *fs, const KXmlElement &framesetElem)
     }
 }
 
-void KWDLoader::fill(KoParagraphStyle *style, const KXmlElement &layout)
+void KWDLoader::fill(KParagraphStyle *style, const KXmlElement &layout)
 {
     QString align = layout.namedItem("FLOW").toElement().attribute("align", "auto");
     if (align == "left") {
@@ -1130,9 +1130,9 @@ void KWDLoader::loadStyleTemplates(const KXmlElement &stylesElem)
         if (style.tagName() != "STYLE")
             continue;
         QString styleName = style.namedItem("NAME").toElement().attribute("value");
-        KoParagraphStyle *paragStyle = styleManager->paragraphStyle(styleName);
+        KParagraphStyle *paragStyle = styleManager->paragraphStyle(styleName);
         if (!paragStyle) {
-            paragStyle = new KoParagraphStyle();
+            paragStyle = new KParagraphStyle();
             paragStyle->setName(styleName);
             styleManager->add(paragStyle);
         }
@@ -1155,10 +1155,10 @@ void KWDLoader::loadStyleTemplates(const KXmlElement &stylesElem)
         if (style.tagName() != "STYLE")
             continue;
         QString styleName = style.namedItem("NAME").toElement().attribute("value");
-        KoParagraphStyle *paragStyle = styleManager->paragraphStyle(styleName);
+        KParagraphStyle *paragStyle = styleManager->paragraphStyle(styleName);
         Q_ASSERT(paragStyle);
         QString following = style.namedItem("FOLLOWING").toElement().attribute("name");
-        KoParagraphStyle *next = styleManager->paragraphStyle(following);
+        KParagraphStyle *next = styleManager->paragraphStyle(following);
         if (next)
             paragStyle->setNextStyle(next->styleId());
     }

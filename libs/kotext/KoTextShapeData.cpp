@@ -26,7 +26,7 @@
 #include "KoTextEditor.h"
 #include "KoTextDocumentLayout.h"
 #include "styles/KoStyleManager.h"
-#include "styles/KoParagraphStyle.h"
+#include "styles/KParagraphStyle.h"
 #include "KoDeleteChangeMarker.h"
 
 #include <KDebug>

@@ -31,7 +31,7 @@
 #include <KoTextDocumentLayout.h>
 #include <KoStyleManager.h>
 #include <KoCharacterStyle.h>
-#include <KoParagraphStyle.h>
+#include <KParagraphStyle.h>
 #include <KoText.h>
 #include <KInlineTextObjectManager.h>
 #include <KoTextSharedLoadingData.h>
@@ -127,7 +127,7 @@ void TestLoadStyle::testLoadStyle()
     QCOMPARE(block.text(), QString("The following is a word which uses the named character style MyStyle."));
 
     QTextCursor cursor(block);
-    QCOMPARE(cursor.blockFormat().property(KoParagraphStyle::StyleId).toInt(), 100);
+    QCOMPARE(cursor.blockFormat().property(KParagraphStyle::StyleId).toInt(), 100);
     QCOMPARE(cursor.blockCharFormat().property(KoCharacterStyle::StyleId).toInt(), 101);
     QCOMPARE(cursor.charFormat().property(KoCharacterStyle::StyleId).toInt(), 101);
 

@@ -26,7 +26,7 @@ cursor.insertBlock();
 cursor.insertText("ready to restart from 80.");
 
 var restartFormat = QTextBlockFormat.clone(defaultBlockFormat);
-setFormatProperty(restartFormat, KoParagraphStyle.ListStartValue, 80);
+setFormatProperty(restartFormat, KParagraphStyle.ListStartValue, 80);
 cursor.insertBlock(restartFormat);
 list.add(cursor.block());
 cursor.insertText("test start-value for list");

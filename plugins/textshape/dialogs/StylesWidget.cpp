@@ -24,7 +24,7 @@
 
 #include <KoStyleManager.h>
 #include <KoCharacterStyle.h>
-#include <KoParagraphStyle.h>
+#include <KParagraphStyle.h>
 #include <KoCanvasBase.h>
 
 #include <KDebug>
@@ -91,20 +91,20 @@ void StylesWidget::setCurrentFormat(const QTextBlockFormat &format)
     if (format == m_currentBlockFormat)
         return;
     m_currentBlockFormat = format;
-    int id = m_currentBlockFormat.intProperty(KoParagraphStyle::StyleId);
+    int id = m_currentBlockFormat.intProperty(KParagraphStyle::StyleId);
     bool unchanged = true;
-    KoParagraphStyle *usedStyle = 0;
+    KParagraphStyle *usedStyle = 0;
     if (m_styleManager)
         usedStyle = m_styleManager->paragraphStyle(id);
     if (usedStyle) {
         foreach (int property, m_currentBlockFormat.properties().keys()) {
-            if (property == QTextFormat::ObjectIndex || property == KoParagraphStyle::ListStyleId
-                    || property == KoParagraphStyle::MasterPageName
+            if (property == QTextFormat::ObjectIndex || property == KParagraphStyle::ListStyleId
+                    || property == KParagraphStyle::MasterPageName
                     || property == QTextFormat::PageBreakPolicy)
                 continue;
-            if (property == KoParagraphStyle::OutlineLevel) {
+            if (property == KParagraphStyle::OutlineLevel) {
                 // OutlineLevel itself is not present in the style, but DefaultOutlineLevel is.
-                property = KoParagraphStyle::DefaultOutlineLevel;
+                property = KParagraphStyle::DefaultOutlineLevel;
             }
             QVariant cur(m_currentBlockFormat.property(property));
             QVariant style(usedStyle->value(property));
@@ -220,7 +220,7 @@ void StylesWidget::newStyleClicked()
             style->setName(styleName);
             m_styleManager->add(style);
         } else {
-            KoParagraphStyle *style = new KoParagraphStyle();
+            KParagraphStyle *style = new KParagraphStyle();
             style->setName(styleName);
             m_styleManager->add(style);
         }
@@ -232,12 +232,12 @@ void StylesWidget::deleteStyleClicked()
     QModelIndex index = widget.stylesView->currentIndex();
     Q_ASSERT(index.isValid());
     widget.stylesView->clearSelection();
-    KoParagraphStyle *paragraphStyle = m_stylesModel->paragraphStyleForIndex(index);
+    KParagraphStyle *paragraphStyle = m_stylesModel->paragraphStyleForIndex(index);
     if (paragraphStyle) {
         KoCharacterStyle *s = paragraphStyle->characterStyle();
         m_styleManager->remove(paragraphStyle);
         bool inUse = false;
-        foreach(KoParagraphStyle *ps, m_styleManager->paragraphStyles()) {
+        foreach(KParagraphStyle *ps, m_styleManager->paragraphStyles()) {
             if (ps->characterStyle() == s) {
                 inUse = true;
                 break;
@@ -255,7 +255,7 @@ void StylesWidget::editStyle()
     Q_ASSERT(index.isValid());
 
     QWidget *widget;
-    KoParagraphStyle *paragraphStyle = m_stylesModel->paragraphStyleForIndex(index);
+    KParagraphStyle *paragraphStyle = m_stylesModel->paragraphStyleForIndex(index);
 
     if (paragraphStyle) {
         StyleManager *styleManager = new StyleManager();
@@ -297,7 +297,7 @@ void StylesWidget::applyStyle()
 
 void StylesWidget::applyStyle(const QModelIndex &index)
 {
-    KoParagraphStyle *paragraphStyle = m_stylesModel->paragraphStyleForIndex(index);
+    KParagraphStyle *paragraphStyle = m_stylesModel->paragraphStyleForIndex(index);
     if (paragraphStyle) {
         emit paragraphStyleSelected(paragraphStyle);
         emit doneWithFocus();
@@ -320,7 +320,7 @@ void StylesWidget::setCurrent(const QModelIndex &index)
     bool canDelete = index.isValid();
     if (canDelete) {
         canDelete = !index.parent().isValid();
-        KoParagraphStyle *paragraphStyle = m_stylesModel->paragraphStyleForIndex(index);
+        KParagraphStyle *paragraphStyle = m_stylesModel->paragraphStyleForIndex(index);
         if (!canDelete) // there is one other way its deletable, if its a parag style
             canDelete = paragraphStyle;
         // but not if its the default paragraph style.
@@ -330,7 +330,7 @@ void StylesWidget::setCurrent(const QModelIndex &index)
     widget.deleteStyle->setEnabled(canDelete);
 
     if (index.isValid() && m_isEmbedded) {
-        KoParagraphStyle *paragraphStyle = m_stylesModel->paragraphStyleForIndex(index);
+        KParagraphStyle *paragraphStyle = m_stylesModel->paragraphStyleForIndex(index);
         if (paragraphStyle) {
             emit paragraphStyleSelected(paragraphStyle, canDelete);
             return;

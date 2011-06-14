@@ -23,7 +23,7 @@
 #include <KoTextBlockData.h>
 #include <KoTextDocument.h>
 #include <QTextCursor>
-#include <KoParagraphStyle.h>
+#include <KParagraphStyle.h>
 
 #include <KLocale>
 #include <KDebug>
@@ -104,8 +104,8 @@ int ChangeListCommand::detectLevel(const QTextBlock &block, int givenLevel)
     if (givenLevel != 0)
         return givenLevel;
     if (block.textList()) {
-        if (block.blockFormat().hasProperty(KoParagraphStyle::ListLevel))
-            return block.blockFormat().intProperty(KoParagraphStyle::ListLevel);
+        if (block.blockFormat().hasProperty(KParagraphStyle::ListLevel))
+            return block.blockFormat().intProperty(KParagraphStyle::ListLevel);
         else
             return block.textList()->format().intProperty(KListStyle::Level);
     }
@@ -232,7 +232,7 @@ void ChangeListCommand::redo()
                 listStyle->setLevelProperties(m_newProperties.value(i));
                 QTextCursor cursor(m_blocks.at(i));
                 QTextBlockFormat format = m_blocks.at(i).blockFormat();
-                format.clearProperty(KoParagraphStyle::UnnumberedListItem);
+                format.clearProperty(KParagraphStyle::UnnumberedListItem);
                 cursor.setBlockFormat(format);
             }
             else {
@@ -241,7 +241,7 @@ void ChangeListCommand::redo()
                 m_list.value(i)->add(m_blocks.at(i), m_newProperties.value(i).level());
                 QTextCursor cursor(m_blocks.at(i));
                 QTextBlockFormat format = m_blocks.at(i).blockFormat();
-                format.clearProperty(KoParagraphStyle::UnnumberedListItem);
+                format.clearProperty(KParagraphStyle::UnnumberedListItem);
                 cursor.setBlockFormat(format);
             }
         }

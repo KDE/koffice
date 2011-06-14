@@ -3,7 +3,7 @@
 #include "../TableLayoutData.h"
 
 #include <KoStyleManager.h>
-#include <KoParagraphStyle.h>
+#include <KParagraphStyle.h>
 #include <KoTableColumnAndRowStyleManager.h>
 #include <KoTextDocument.h>
 #include <KoTableCellStyle.h>
@@ -121,7 +121,7 @@ void TestTableLayout::initTest(int rows, int columns,
             }
         }
     }
-    KoParagraphStyle style;
+    KParagraphStyle style;
     style.setStyleId(101); // needed to do manually since we don't use the stylemanager
     QTextBlock b2 = m_doc->begin();
     while (b2.isValid()) {

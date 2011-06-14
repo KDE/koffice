@@ -7,7 +7,7 @@ var list = cursor.createList(listFormat);
 cursor.insertText("This is an example of bulleted list.", defaultListItemFormat);
 
 var unnumberedFormat = QTextBlockFormat.clone(defaultBlockFormat);
-setFormatProperty(unnumberedFormat, KoParagraphStyle.UnnumberedListItem, 1);
+setFormatProperty(unnumberedFormat, KParagraphStyle.UnnumberedListItem, 1);
 cursor.insertBlock();
 cursor.mergeBlockFormat(unnumberedFormat);
 cursor.insertText("This item must not be bulleted.", defaultListItemFormat);

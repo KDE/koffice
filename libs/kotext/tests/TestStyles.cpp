@@ -19,7 +19,7 @@
  */
 #include "TestStyles.h"
 
-#include <styles/KoParagraphStyle.h>
+#include <styles/KParagraphStyle.h>
 #include <styles/KoStyleManager.h>
 #include <styles/KoStyleManager_p.h>
 #include <styles/KoCharacterStyle.h>
@@ -32,11 +32,11 @@
 
 void TestStyles::testStyleInheritance()
 {
-    KoParagraphStyle style1;
+    KParagraphStyle style1;
     style1.setTopMargin(10.0);
     QCOMPARE(style1.topMargin(), 10.0);
 
-    KoParagraphStyle style2;
+    KParagraphStyle style2;
     style2.setParentStyle(&style1);
 
     QCOMPARE(style2.topMargin(), 10.0);
@@ -59,17 +59,17 @@ void TestStyles::testStyleInheritance()
 
 void TestStyles::testChangeParent()
 {
-    KoParagraphStyle style1;
+    KParagraphStyle style1;
     style1.setTopMargin(10);
 
-    KoParagraphStyle style2;
+    KParagraphStyle style2;
     style2.setTopMargin(20);
 
     style2.setParentStyle(&style1);
     QCOMPARE(style1.topMargin(), 10.0);
     QCOMPARE(style2.topMargin(), 20.0);
 
-    KoParagraphStyle style3;
+    KParagraphStyle style3;
     style3.setParentStyle(&style1);
     QCOMPARE(style1.topMargin(), 10.0);
     QCOMPARE(style3.topMargin(), 10.0);
@@ -94,7 +94,7 @@ void TestStyles::testChangeParent()
 
 void TestStyles::testTabsStorage()
 {
-    KoParagraphStyle paragStyle;
+    KParagraphStyle paragStyle;
 
     QList<KoText::Tab> tabs;
     paragStyle.setTabPositions(tabs);
@@ -114,7 +114,7 @@ void TestStyles::testTabsStorage()
 
 void TestStyles::testApplyParagraphStyle()
 {
-    KoParagraphStyle style;
+    KParagraphStyle style;
     style.setStyleId(1001);
 
     QTextBlockFormat format;
@@ -131,11 +131,11 @@ void TestStyles::testApplyParagraphStyle()
 
 void TestStyles::testApplyParagraphStyleWithParent()
 {
-    KoParagraphStyle style1;
+    KParagraphStyle style1;
     style1.setStyleId(1002);
-    KoParagraphStyle style2;
+    KParagraphStyle style2;
     style2.setStyleId(1003);
-    KoParagraphStyle style3;
+    KParagraphStyle style3;
     style3.setStyleId(1004);
 
     style3.setParentStyle(&style2);
@@ -170,7 +170,7 @@ void TestStyles::testApplyParagraphStyleWithParent()
     style1.applyStyle(format);
     QCOMPARE(format.properties().count(), 3);
     QCOMPARE(format.alignment(), Qt::AlignRight);
-    QCOMPARE(format.property(KoParagraphStyle::StyleId).toInt(), 1002);
+    QCOMPARE(format.property(KParagraphStyle::StyleId).toInt(), 1002);
     QCOMPARE(format.leftMargin(), 10.);
     QCOMPARE(format.rightMargin(), 0.);
 
@@ -178,7 +178,7 @@ void TestStyles::testApplyParagraphStyleWithParent()
     style2.applyStyle(format);
     QCOMPARE(format.properties().count(), 4);
     QCOMPARE(format.alignment(), Qt::AlignCenter);
-    QCOMPARE(format.property(KoParagraphStyle::StyleId).toInt(), 1003);
+    QCOMPARE(format.property(KParagraphStyle::StyleId).toInt(), 1003);
     QCOMPARE(format.leftMargin(), 10.);
     QCOMPARE(format.rightMargin(), 20.);
 
@@ -186,22 +186,22 @@ void TestStyles::testApplyParagraphStyleWithParent()
     style3.applyStyle(format);
     QCOMPARE(format.properties().count(), 4);
     QCOMPARE(format.alignment(), Qt::AlignLeft | Qt::AlignAbsolute);
-    QCOMPARE(format.property(KoParagraphStyle::StyleId).toInt(), 1004);
+    QCOMPARE(format.property(KParagraphStyle::StyleId).toInt(), 1004);
     QCOMPARE(format.leftMargin(), 10.);
     QCOMPARE(format.rightMargin(), 20.);
 }
 
 void TestStyles::testCopyParagraphStyle()
 {
-    KoParagraphStyle style1;
-    KoParagraphStyle style2;
+    KParagraphStyle style1;
+    KParagraphStyle style2;
     style2.setParentStyle(&style1);
 
     style1.setLeftMargin(10.);
     style1.setRightMargin(30.);
     style2.setRightMargin(20.);
 
-    KoParagraphStyle newStyle;
+    KParagraphStyle newStyle;
     newStyle.copyProperties(&style2);
     QCOMPARE(newStyle.leftMargin(), 10.);
     QCOMPARE(newStyle.rightMargin(), 20.);
@@ -210,11 +210,11 @@ void TestStyles::testCopyParagraphStyle()
 void TestStyles::testUnapplyStyle()
 {
     // in this test we should avoid testing any of the hardcodedDefaultProperties; see KoCharacterStyle for details!
-    KoParagraphStyle headers;
+    KParagraphStyle headers;
     headers.characterStyle()->setFontOverline(true);
     headers.characterStyle()->setFontWeight(QFont::Bold);
     headers.setAlignment(Qt::AlignCenter);
-    KoParagraphStyle head1;
+    KParagraphStyle head1;
     head1.setParentStyle(&headers);
     head1.setLeftMargin(40);
 
@@ -289,10 +289,10 @@ void TestStyles::testUnapplyStyle()
 void TestStyles::testChangeManagedStyle()
 {
     KoStyleManager manager;
-    KoParagraphStyle *p1 = new KoParagraphStyle(&manager);
+    KParagraphStyle *p1 = new KParagraphStyle(&manager);
     p1->setName("Headers");
 
-    KoParagraphStyle *p2 = new KoParagraphStyle(&manager);
+    KParagraphStyle *p2 = new KParagraphStyle(&manager);
     p2->setName("Head1");
     p2->setParentStyle(p1);
     KoCharacterStyle *charStyle = p1->characterStyle();
@@ -332,10 +332,10 @@ void TestStyles::testModifiedParag()
     // changed I expect the modified properties on the block to not be lost.
 
     KoStyleManager manager;
-    KoParagraphStyle *defaultStyle = manager.defaultParagraphStyle();
+    KParagraphStyle *defaultStyle = manager.defaultParagraphStyle();
     defaultStyle->setLineHeightPercent(140);
 
-    KoParagraphStyle *myStyle = new KoParagraphStyle();
+    KParagraphStyle *myStyle = new KParagraphStyle();
     myStyle->setName("myStyle");
     manager.add(myStyle);
     QCOMPARE(myStyle->parentStyle(), defaultStyle);
@@ -347,17 +347,17 @@ void TestStyles::testModifiedParag()
     manager.add(&doc);
 
     QTextBlockFormat format = block.blockFormat();
-    QCOMPARE(format.property(KoParagraphStyle::StyleId).toInt(), myStyle->styleId());
+    QCOMPARE(format.property(KParagraphStyle::StyleId).toInt(), myStyle->styleId());
 
     // Make the block have a different line spacing compared to the styles.
     QTextBlockFormat lineSpacing;
-    lineSpacing.setProperty(KoParagraphStyle::PercentLineHeight, 200);
+    lineSpacing.setProperty(KParagraphStyle::PercentLineHeight, 200);
     QTextCursor cursor(&doc);
     cursor.mergeBlockFormat(lineSpacing);
 
     format = block.blockFormat();
-    QCOMPARE(format.property(KoParagraphStyle::StyleId).toInt(), myStyle->styleId());
-    QCOMPARE(format.property(KoParagraphStyle::PercentLineHeight).toInt(), 200);
+    QCOMPARE(format.property(KParagraphStyle::StyleId).toInt(), myStyle->styleId());
+    QCOMPARE(format.property(KParagraphStyle::PercentLineHeight).toInt(), 200);
 
     // change something like top-margin on child style and make sure the parag gets updatd.
     myStyle->setTopMargin(33);
@@ -366,8 +366,8 @@ void TestStyles::testModifiedParag()
 
     // check that the block still has the old linespacing we set on the block.
     format = block.blockFormat();
-    QCOMPARE(format.property(KoParagraphStyle::StyleId).toInt(), myStyle->styleId());
-    QCOMPARE(format.property(KoParagraphStyle::PercentLineHeight).toInt(), 200);
+    QCOMPARE(format.property(KParagraphStyle::StyleId).toInt(), myStyle->styleId());
+    QCOMPARE(format.property(KParagraphStyle::PercentLineHeight).toInt(), 200);
     // check that the block got the new top-margin too.
     QCOMPARE(format.property(QTextFormat::BlockTopMargin).toReal(), 33.);
 }

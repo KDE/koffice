@@ -60,7 +60,7 @@
 #include <KoText.h>
 #include <KoStyleManager.h>
 #include <KoTextSharedLoadingData.h>
-#include <KoParagraphStyle.h>
+#include <KParagraphStyle.h>
 #include <KoUpdater.h>
 #include <KoProgressUpdater.h>
 

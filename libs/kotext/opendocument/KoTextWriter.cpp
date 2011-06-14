@@ -40,7 +40,7 @@
 #include "KInlineTextObjectManager.h"
 #include "styles/KoStyleManager.h"
 #include "styles/KoCharacterStyle.h"
-#include "styles/KoParagraphStyle.h"
+#include "styles/KParagraphStyle.h"
 #include "styles/KListStyle.h"
 #include "styles/KListLevelProperties.h"
 #include "styles/KoTableCellStyle.h"
@@ -585,8 +585,8 @@ QString KoTextWriter::saveParagraphStyle(const QTextBlock &block, KoStyleManager
 
 QString KoTextWriter::saveParagraphStyle(const QTextBlockFormat &blockFormat, const QTextCharFormat &charFormat, KoStyleManager * styleManager, KoShapeSavingContext &context)
 {
-    KoParagraphStyle *defaultParagraphStyle = styleManager->defaultParagraphStyle();
-    KoParagraphStyle *originalParagraphStyle = styleManager->paragraphStyle(blockFormat.intProperty(KoParagraphStyle::StyleId));
+    KParagraphStyle *defaultParagraphStyle = styleManager->defaultParagraphStyle();
+    KParagraphStyle *originalParagraphStyle = styleManager->paragraphStyle(blockFormat.intProperty(KParagraphStyle::StyleId));
     if (!originalParagraphStyle)
         originalParagraphStyle = defaultParagraphStyle;
 
@@ -594,8 +594,8 @@ QString KoTextWriter::saveParagraphStyle(const QTextBlockFormat &blockFormat, co
     QString displayName = originalParagraphStyle->name();
     QString internalName = QString(QUrl::toPercentEncoding(displayName, "", " ")).replace('%', '_');
 
-    // we'll convert the blockFormat to a KoParagraphStyle to check for local changes.
-    KoParagraphStyle paragStyle(blockFormat, charFormat);
+    // we'll convert the blockFormat to a KParagraphStyle to check for local changes.
+    KParagraphStyle paragStyle(blockFormat, charFormat);
     if (paragStyle == (*originalParagraphStyle)) { // This is the real, unmodified character style.
         // TODO zachmann: this could use the name of the saved style without saving it again
         // therefore we would need to store that information in the saving context
@@ -719,7 +719,7 @@ void KoTextWriter::Private::saveParagraph(const QTextBlock &block, int from, int
 {
     QTextCursor cursor(block);
     QTextBlockFormat blockFormat = block.blockFormat();
-    const int outlineLevel = blockFormat.intProperty(KoParagraphStyle::OutlineLevel);
+    const int outlineLevel = blockFormat.intProperty(KParagraphStyle::OutlineLevel);
 
     TagInformation blockTagInformation;
     if (outlineLevel > 0) {
@@ -1036,7 +1036,7 @@ int KoTextWriter::Private::checkForListItemChange(const QTextBlock &block)
     int listItemChangeId = checkForBlockChange(listItemBlock);
     while (listItemChangeId) {
         QTextBlock nextBlock = listItemBlock.next();
-        if (!nextBlock.textList() || !nextBlock.blockFormat().boolProperty(KoParagraphStyle::UnnumberedListItem))
+        if (!nextBlock.textList() || !nextBlock.blockFormat().boolProperty(KParagraphStyle::UnnumberedListItem))
             break;
         listItemBlock = nextBlock;
         listItemChangeId = checkForBlockChange(listItemBlock);
@@ -1267,8 +1267,8 @@ QTextBlock& KoTextWriter::Private::saveList(QTextBlock &block, QHash<QTextList *
 
     int headingLevel = 0, numberedParagraphLevel = 0;
     QTextBlockFormat blockFormat = block.blockFormat();
-    headingLevel = blockFormat.intProperty(KoParagraphStyle::OutlineLevel);
-    numberedParagraphLevel = blockFormat.intProperty(KoParagraphStyle::ListLevel);
+    headingLevel = blockFormat.intProperty(KParagraphStyle::OutlineLevel);
+    numberedParagraphLevel = blockFormat.intProperty(KParagraphStyle::ListLevel);
 
     KoTextDocument textDocument(block.document());
     KoList *list = textDocument.list(block);
@@ -1343,12 +1343,12 @@ QTextBlock& KoTextWriter::Private::saveList(QTextBlock &block, QHash<QTextList *
                     }
                 }
 
-                const bool listHeader = blockFormat.boolProperty(KoParagraphStyle::IsListHeader)|| blockFormat.boolProperty(KoParagraphStyle::UnnumberedListItem);
+                const bool listHeader = blockFormat.boolProperty(KParagraphStyle::IsListHeader)|| blockFormat.boolProperty(KParagraphStyle::UnnumberedListItem);
                 int listItemChangeId;
                 TagInformation listItemTagInformation;
                 listItemTagInformation.setTagName(listHeader ? "text:list-header" : "text:list-item");
-                if (block.blockFormat().hasProperty(KoParagraphStyle::ListStartValue)) {
-                    int startValue = block.blockFormat().intProperty(KoParagraphStyle::ListStartValue);
+                if (block.blockFormat().hasProperty(KParagraphStyle::ListStartValue)) {
+                    int startValue = block.blockFormat().intProperty(KParagraphStyle::ListStartValue);
                     listItemTagInformation.addAttribute("text:start-value", startValue);
                 }
                 if (textList == topLevelTextList) {
@@ -1371,7 +1371,7 @@ QTextBlock& KoTextWriter::Private::saveList(QTextBlock &block, QHash<QTextList *
                     // we are generating a text:list-item. Look forward and generate unnumbered list items.
                     while (true) {
                         QTextBlock nextBlock = block.next();
-                        if (!nextBlock.textList() || !nextBlock.blockFormat().boolProperty(KoParagraphStyle::UnnumberedListItem))
+                        if (!nextBlock.textList() || !nextBlock.blockFormat().boolProperty(KParagraphStyle::UnnumberedListItem))
                             break;
                         block = nextBlock;
                         saveParagraph(block, block.position(), block.position() + block.length() - 1);
@@ -1397,8 +1397,8 @@ QTextBlock& KoTextWriter::Private::saveList(QTextBlock &block, QHash<QTextList *
             }
             block = block.next();
             blockFormat = block.blockFormat();
-            headingLevel = blockFormat.intProperty(KoParagraphStyle::OutlineLevel);
-            numberedParagraphLevel = blockFormat.intProperty(KoParagraphStyle::ListLevel);
+            headingLevel = blockFormat.intProperty(KParagraphStyle::OutlineLevel);
+            numberedParagraphLevel = blockFormat.intProperty(KParagraphStyle::ListLevel);
             textList = block.textList();
         } while ((textDocument.list(block) == list) && (KoList::level(block) >= topListLevel));
     }
@@ -1476,7 +1476,7 @@ void KoTextWriter::Private::writeBlocks(QTextDocument *document, int from, int t
     while (block.isValid() && ((to == -1) || (block.position() <= to))) {
         QTextCursor cursor(block);
         QTextFrame *cursorFrame = cursor.currentFrame();
-        int blockOutlineLevel = block.blockFormat().property(KoParagraphStyle::OutlineLevel).toInt();
+        int blockOutlineLevel = block.blockFormat().property(KParagraphStyle::OutlineLevel).toInt();
 
         if (cursorFrame != currentFrame && cursorFrame->format().hasProperty(KoText::TableOfContents)) {
             int frameBegin = cursorFrame->firstPosition();

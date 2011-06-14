@@ -43,7 +43,7 @@
 #include <KOdfLoadingContext.h>
 #include <KoUpdater.h>
 #include <KoProgressUpdater.h>
-#include <KoParagraphStyle.h>
+#include <KParagraphStyle.h>
 
 // KDE + Qt includes
 #include <QTextCursor>
@@ -178,14 +178,14 @@ bool KWOdfLoader::load(KOdfStoreReader &odfStore)
 //#else
     /*
     // We always needs at least one valid default paragraph style
-    KoParagraphStyle *defaultParagraphStyle = m_document->styleManager()->defaultParagraphStyle();
+    KParagraphStyle *defaultParagraphStyle = m_document->styleManager()->defaultParagraphStyle();
     //const KXmlElement *defaultParagraphStyle = context.stylesReader().defaultStyle("paragraph");
     //if(! defaultParagraphStyle) {
-    KoParagraphStyle *parastyle = new KoParagraphStyle();
+    KParagraphStyle *parastyle = new KParagraphStyle();
     parastyle->setName("Standard");
     m_document->styleManager()->add(parastyle);
     context.styleStack().setTypeProperties("paragraph"); // load all style attributes from "style:paragraph-properties"
-    parastyle->loadOasis(context.styleStack()); // load the KoParagraphStyle from the stylestack
+    parastyle->loadOasis(context.styleStack()); // load the KParagraphStyle from the stylestack
     KoCharacterStyle *charstyle = parastyle->characterStyle();
     context.styleStack().setTypeProperties("text"); // load all style attributes from "style:text-properties"
     charstyle->loadOasis(context.styleStack()); // load the KoCharacterStyle from the stylestack

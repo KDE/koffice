@@ -46,7 +46,7 @@ class QTextTableCellFormat;
 class QTextFrameFormat;
 class QTextBlockFormat;
 class QTextStream;
-class KoParagraphStyle;
+class KParagraphStyle;
 class KoCharacterStyle;
 class KoTableStyle;
 class KoTableCellStyle;
@@ -197,7 +197,7 @@ public:
      * @param style the paragraph style from which properties should be fetched.
      * @return the formatted attribute string.
      */
-    static QString paraAttributes(const KoParagraphStyle &style);
+    static QString paraAttributes(const KParagraphStyle &style);
 
     /**
      * Get the properties of the given list format.

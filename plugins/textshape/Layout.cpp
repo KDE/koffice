@@ -30,7 +30,7 @@
 
 #include <KoTextDocumentLayout.h>
 #include <KoTextShapeData.h>
-#include <KoParagraphStyle.h>
+#include <KParagraphStyle.h>
 #include <KoCharacterStyle.h>
 #include <KListStyle.h>
 #include <KoTableStyle.h>
@@ -153,7 +153,7 @@ qreal Layout::y()
 
 qreal Layout::resolveTextIndent()
 {
-    if ((m_block.blockFormat().property(KoParagraphStyle::AutoTextIndent).toBool())) {
+    if ((m_block.blockFormat().property(KParagraphStyle::AutoTextIndent).toBool())) {
         // if auto-text-indent is set,
         // return an indent approximately 3-characters wide as per current font
         QTextCursor blockCursor(m_block);
@@ -191,7 +191,7 @@ bool Layout::addLine(QTextLine &line)
         }
     }
 
-    qreal height = m_format.doubleProperty(KoParagraphStyle::FixedLineHeight);
+    qreal height = m_format.doubleProperty(KParagraphStyle::FixedLineHeight);
     qreal objectHeight = 0.0;
     if (line.textLength() == 1 && m_block.text().at(line.textStart()) == QChar::ObjectReplacementCharacter && line.descent() == 0.0 && line.ascent() == 0.0) {
         // This is an anchor but not an inline anchor so set to some very small hight
@@ -212,7 +212,7 @@ bool Layout::addLine(QTextLine &line)
             }
         }
     } else { // not fixed lineheight
-        const bool useFontProperties = m_format.boolProperty(KoParagraphStyle::LineSpacingFromFont);
+        const bool useFontProperties = m_format.boolProperty(KParagraphStyle::LineSpacingFromFont);
         if (useFontProperties) {
             height = line.height();
         } else {
@@ -288,9 +288,9 @@ bool Layout::addLine(QTextLine &line)
 
     // add linespacing
     if (! useFixedLineHeight) {
-        qreal linespacing = m_format.doubleProperty(KoParagraphStyle::LineSpacing);
+        qreal linespacing = m_format.doubleProperty(KParagraphStyle::LineSpacing);
         if (linespacing == 0.0) { // unset
-            int percent = m_format.intProperty(KoParagraphStyle::PercentLineHeight);
+            int percent = m_format.intProperty(KParagraphStyle::PercentLineHeight);
             if (percent != 0)
                 linespacing = height * ((percent - 100) / 100.0);
             else if (linespacing == 0.0)
@@ -299,7 +299,7 @@ bool Layout::addLine(QTextLine &line)
         height = qMax(height, objectHeight) + linespacing;
     }
 
-    qreal minimum = m_format.doubleProperty(KoParagraphStyle::MinimumLineHeight);
+    qreal minimum = m_format.doubleProperty(KParagraphStyle::MinimumLineHeight);
     if (minimum > 0.0)
         height = qMax(height, minimum);
     if (qAbs(m_y - line.y()) < 0.126) // rounding problems due to Qt-scribe internally using ints.
@@ -420,7 +420,7 @@ bool Layout::nextParag()
     }
     m_format = m_block.blockFormat();
     m_blockData = dynamic_cast<KoTextBlockData*>(m_block.userData());
-    KoText::Direction dir = static_cast<KoText::Direction>(m_format.intProperty(KoParagraphStyle::TextProgressionDirection));
+    KoText::Direction dir = static_cast<KoText::Direction>(m_format.intProperty(KParagraphStyle::TextProgressionDirection));
     if (dir == KoText::InheritDirection)
         dir = m_data->pageDirection();
     if (dir == KoText::AutoDirection)
@@ -437,8 +437,8 @@ bool Layout::nextParag()
         if (styleId > 0 && m_styleManager)
             charStyle = m_styleManager->characterStyle(styleId);
         if (!charStyle && m_styleManager) { // try the one from paragraph style
-            KoParagraphStyle *ps = m_styleManager->paragraphStyle(
-                                       m_format.intProperty(KoParagraphStyle::StyleId));
+            KParagraphStyle *ps = m_styleManager->paragraphStyle(
+                                       m_format.intProperty(KParagraphStyle::StyleId));
             if (ps)
                 charStyle = ps->characterStyle();
         }
@@ -465,7 +465,7 @@ bool Layout::nextParag()
 
     bool pagebreak = m_format.pageBreakPolicy() & QTextFormat::PageBreak_AlwaysBefore;
 
-    const QVariant masterPageName = m_format.property(KoParagraphStyle::MasterPageName);
+    const QVariant masterPageName = m_format.property(KParagraphStyle::MasterPageName);
     if (! masterPageName.isNull() && m_currentMasterPage != masterPageName.toString()) {
         m_currentMasterPage = masterPageName.toString();
         pagebreak = true; // new master-page means new page
@@ -488,7 +488,7 @@ bool Layout::nextParag()
     layout = m_block.layout();
     QTextOption option = layout->textOption();
     option.setWrapMode(m_parent->resizeMethod() == KoTextDocument::NoResize ? QTextOption::WrapAtWordBoundaryOrAnywhere : QTextOption::NoWrap);
-    qreal tabStopDistance =  m_format.property(KoParagraphStyle::TabStopDistance).toDouble();
+    qreal tabStopDistance =  m_format.property(KParagraphStyle::TabStopDistance).toDouble();
     if (tabStopDistance > 0)
         option.setTabStop(tabStopDistance * qt_defaultDpiY() / 72.);
     else
@@ -496,7 +496,7 @@ bool Layout::nextParag()
 
     // tabs
     QList<QTextOption::Tab> tabs;
-    QVariant variant = m_format.property(KoParagraphStyle::TabPositions);
+    QVariant variant = m_format.property(KParagraphStyle::TabPositions);
     if (!variant.isNull()) {
         const qreal tabOffset = x();
         foreach(const QVariant &tv, qvariant_cast<QList<QVariant> >(variant)) {
@@ -535,9 +535,9 @@ bool Layout::nextParag()
     if (formatRanges.count() != layout->additionalFormats().count())
         layout->setAdditionalFormats(formatRanges);
 
-    int dropCaps = m_format.boolProperty(KoParagraphStyle::DropCaps);
-    int dropCapsLength = m_format.intProperty(KoParagraphStyle::DropCapsLength);
-    int dropCapsLines = m_format.intProperty(KoParagraphStyle::DropCapsLines);
+    int dropCaps = m_format.boolProperty(KParagraphStyle::DropCaps);
+    int dropCapsLength = m_format.intProperty(KParagraphStyle::DropCapsLength);
+    int dropCapsLines = m_format.intProperty(KParagraphStyle::DropCapsLines);
     if (dropCaps && dropCapsLength != 0 && dropCapsLines > 1
             && m_dropCapsAffectsNMoreLines == 0 // first line of this para is not affected by a previous drop-cap
             && m_block.length() > 1) {
@@ -555,13 +555,13 @@ bool Layout::nextParag()
         // find out lineHeight for this block.
         QTextBlock::iterator it = m_block.begin();
         QTextFragment lineRepresentative = it.fragment();
-        qreal lineHeight = m_format.doubleProperty(KoParagraphStyle::FixedLineHeight);
+        qreal lineHeight = m_format.doubleProperty(KParagraphStyle::FixedLineHeight);
         qreal dropCapsHeight = 0;
         if (lineHeight == 0) {
             lineHeight = lineRepresentative.charFormat().fontPointSize();
-            qreal linespacing = m_format.doubleProperty(KoParagraphStyle::LineSpacing);
+            qreal linespacing = m_format.doubleProperty(KParagraphStyle::LineSpacing);
             if (linespacing == 0) { // unset
-                int percent = m_format.intProperty(KoParagraphStyle::PercentLineHeight);
+                int percent = m_format.intProperty(KParagraphStyle::PercentLineHeight);
                 if (percent != 0)
                     linespacing = lineHeight * ((percent - 100) / 100.0);
                 else if (linespacing == 0)
@@ -569,14 +569,14 @@ bool Layout::nextParag()
             }
             dropCapsHeight = linespacing * (dropCapsLines-1);
         }
-        const qreal minimum = m_format.doubleProperty(KoParagraphStyle::MinimumLineHeight);
+        const qreal minimum = m_format.doubleProperty(KParagraphStyle::MinimumLineHeight);
         if (minimum > 0.0) {
             lineHeight = qMax(lineHeight, minimum);
         }
 
         dropCapsHeight += lineHeight * dropCapsLines;
 
-        int dropCapsStyleId = m_format.intProperty(KoParagraphStyle::DropCapsTextStyle);
+        int dropCapsStyleId = m_format.intProperty(KParagraphStyle::DropCapsTextStyle);
         KoCharacterStyle *dropCapsCharStyle = 0;
         if (dropCapsStyleId > 0 && m_styleManager) {
             dropCapsCharStyle = m_styleManager->characterStyle(dropCapsStyleId);
@@ -1018,18 +1018,18 @@ void Layout::updateBorders()
     Q_ASSERT(m_data);
     m_borderInsets = m_data->shapeMargins();
     KoTextBlockBorderData border(QRectF(this->x() - resolveTextIndent() - listIndent(), m_y + m_borderInsets.top, width() + resolveTextIndent(), 1));
-    border.setEdge(border.Left, m_format, KoParagraphStyle::LeftBorderStyle,
-                   KoParagraphStyle::LeftBorderWidth, KoParagraphStyle::LeftBorderColor,
-                   KoParagraphStyle::LeftBorderSpacing, KoParagraphStyle::LeftInnerBorderWidth);
-    border.setEdge(border.Right, m_format, KoParagraphStyle::RightBorderStyle,
-                   KoParagraphStyle::RightBorderWidth, KoParagraphStyle::RightBorderColor,
-                   KoParagraphStyle::RightBorderSpacing, KoParagraphStyle::RightInnerBorderWidth);
-    border.setEdge(border.Top, m_format, KoParagraphStyle::TopBorderStyle,
-                   KoParagraphStyle::TopBorderWidth, KoParagraphStyle::TopBorderColor,
-                   KoParagraphStyle::TopBorderSpacing, KoParagraphStyle::TopInnerBorderWidth);
-    border.setEdge(border.Bottom, m_format, KoParagraphStyle::BottomBorderStyle,
-                   KoParagraphStyle::BottomBorderWidth, KoParagraphStyle::BottomBorderColor,
-                   KoParagraphStyle::BottomBorderSpacing, KoParagraphStyle::BottomInnerBorderWidth);
+    border.setEdge(border.Left, m_format, KParagraphStyle::LeftBorderStyle,
+                   KParagraphStyle::LeftBorderWidth, KParagraphStyle::LeftBorderColor,
+                   KParagraphStyle::LeftBorderSpacing, KParagraphStyle::LeftInnerBorderWidth);
+    border.setEdge(border.Right, m_format, KParagraphStyle::RightBorderStyle,
+                   KParagraphStyle::RightBorderWidth, KParagraphStyle::RightBorderColor,
+                   KParagraphStyle::RightBorderSpacing, KParagraphStyle::RightInnerBorderWidth);
+    border.setEdge(border.Top, m_format, KParagraphStyle::TopBorderStyle,
+                   KParagraphStyle::TopBorderWidth, KParagraphStyle::TopBorderColor,
+                   KParagraphStyle::TopBorderSpacing, KParagraphStyle::TopInnerBorderWidth);
+    border.setEdge(border.Bottom, m_format, KParagraphStyle::BottomBorderStyle,
+                   KParagraphStyle::BottomBorderWidth, KParagraphStyle::BottomBorderColor,
+                   KParagraphStyle::BottomBorderSpacing, KParagraphStyle::BottomInnerBorderWidth);
 
     // check if prev parag had a border.
     QTextBlock prev = m_block.previous();
@@ -1064,10 +1064,10 @@ void Layout::updateBorders()
     }
 
     // add padding inside the border
-    m_borderInsets.top += m_format.doubleProperty(KoParagraphStyle::TopPadding);
-    m_borderInsets.left += m_format.doubleProperty(KoParagraphStyle::LeftPadding);
-    m_borderInsets.bottom += m_format.doubleProperty(KoParagraphStyle::BottomPadding);
-    m_borderInsets.right += m_format.doubleProperty(KoParagraphStyle::RightPadding);
+    m_borderInsets.top += m_format.doubleProperty(KParagraphStyle::TopPadding);
+    m_borderInsets.left += m_format.doubleProperty(KParagraphStyle::LeftPadding);
+    m_borderInsets.bottom += m_format.doubleProperty(KParagraphStyle::BottomPadding);
+    m_borderInsets.right += m_format.doubleProperty(KParagraphStyle::RightPadding);
 }
 
 qreal Layout::topMargin()
@@ -1079,8 +1079,8 @@ qreal Layout::topMargin()
             allowMargin = true;
         else if (m_styleManager && m_format.topMargin() > 0) {
             // also allow it when the paragraph has the margin, but the style has a different one.
-            KoParagraphStyle *ps = m_styleManager->paragraphStyle(
-                                       m_format.intProperty(KoParagraphStyle::StyleId));
+            KParagraphStyle *ps = m_styleManager->paragraphStyle(
+                                       m_format.intProperty(KParagraphStyle::StyleId));
             if (ps == 0 || ps->topMargin() != m_format.topMargin())
                 allowMargin = true;
         }
@@ -1598,7 +1598,7 @@ void Layout::decorateParagraph(QPainter *painter, const QTextBlock &block, int s
     QTextOption textOption = layout->textOption();
 
     QTextBlockFormat bf = block.blockFormat();
-    QVariantList tabList = bf.property(KoParagraphStyle::TabPositions).toList();
+    QVariantList tabList = bf.property(KParagraphStyle::TabPositions).toList();
     QFont oldFont = painter->font();
 
     QTextBlock::iterator it;
@@ -1650,8 +1650,8 @@ void Layout::drawListItem(QPainter *painter, const QTextBlock &block, KImageColl
             const int id = listFormat.intProperty(KListStyle::CharacterStyleId);
             KoCharacterStyle *cs = m_styleManager->characterStyle(id);
             if (!cs) {
-                KoParagraphStyle *ps = m_styleManager->paragraphStyle(
-                                       block.blockFormat().intProperty(KoParagraphStyle::StyleId));
+                KParagraphStyle *ps = m_styleManager->paragraphStyle(
+                                       block.blockFormat().intProperty(KParagraphStyle::StyleId));
                 if (ps)
                     cs = ps->characterStyle();
             }

@@ -6,7 +6,7 @@ var tabstop = new KoTextTab;
 tabstop.position = 3 * 72; // 1 in = 72 pts
 tabstop.type = QTextOption.DelimiterTab;
 tabstop.delimiter = ",";
-setFormatProperty(textBlockFormat, KoParagraphStyle.TabPositions, [tabstop]);
+setFormatProperty(textBlockFormat, KParagraphStyle.TabPositions, [tabstop]);
 cursor.setBlockFormat(textBlockFormat);
 cursor.insertText("\tGamgee, Sam");
 cursor.insertBlock(textBlockFormat);
@@ -24,7 +24,7 @@ var tabstop2 = new KoTextTab;
 tabstop2.position = 3 * 72; // 1 in = 72 pts
 tabstop2.type = QTextOption.DelimiterTab;
 tabstop2.delimiter = ".";
-setFormatProperty(textBlockFormat, KoParagraphStyle.TabPositions, [tabstop, tabstop2]);
+setFormatProperty(textBlockFormat, KParagraphStyle.TabPositions, [tabstop, tabstop2]);
 cursor.insertBlock(textBlockFormat);
 cursor.insertText("\t0.322 + 4 = \t4.322");
 cursor.insertBlock(textBlockFormat);

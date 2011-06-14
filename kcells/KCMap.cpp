@@ -42,7 +42,7 @@
 #include <KoStyleManager.h>
 #include <KoShapeLoadingContext.h>
 #include <KoTextSharedLoadingData.h>
-#include <KoParagraphStyle.h>
+#include <KParagraphStyle.h>
 #include <KoShapeRegistry.h>
 
 #include "KCApplicationSettings.h"

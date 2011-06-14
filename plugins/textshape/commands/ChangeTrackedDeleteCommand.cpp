@@ -37,7 +37,7 @@
 #include <KoCanvasBase.h>
 #include <KoShapeController.h>
 #include <KoList.h>
-#include <KoParagraphStyle.h>
+#include <KParagraphStyle.h>
 #include <KoTextOdfSaveHelper.h>
 #include <KoTextDrag.h>
 #include <KOdf.h>
@@ -150,7 +150,7 @@ void ChangeTrackedDeleteCommand::handleListItemDelete(QTextCursor &selection)
     QTextDocument *document = selection.document();
 
     bool numberedListItem = false;
-    if (!selection.blockFormat().boolProperty(KoParagraphStyle::UnnumberedListItem))
+    if (!selection.blockFormat().boolProperty(KParagraphStyle::UnnumberedListItem))
          numberedListItem = true;      
  
     // Mark the complete list-item

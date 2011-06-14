@@ -37,7 +37,7 @@ void ParagraphDecorations::slotBackgroundColorChanged()
     emit backgroundColorChanged(widget.backgroundColor->color());
 }
 
-void ParagraphDecorations::setDisplay(KoParagraphStyle *style)
+void ParagraphDecorations::setDisplay(KParagraphStyle *style)
 {
     m_backgroundColorChanged = false;
     m_backgroundColorReset = style->background().style() == Qt::NoBrush;
@@ -48,7 +48,7 @@ void ParagraphDecorations::setDisplay(KoParagraphStyle *style)
     }
 }
 
-void ParagraphDecorations::save(KoParagraphStyle *style) const
+void ParagraphDecorations::save(KParagraphStyle *style) const
 {
     Q_ASSERT(style);
     if (m_backgroundColorReset)

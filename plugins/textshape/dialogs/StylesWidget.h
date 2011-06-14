@@ -29,7 +29,7 @@
 #include <ui_StylesWidget.h>
 
 class KoStyleManager;
-class KoParagraphStyle;
+class KParagraphStyle;
 class KoCharacterStyle;
 class StylesModel;
 class KoCanvasBase;
@@ -51,7 +51,7 @@ public slots:
 
 signals:
     void doneWithFocus();
-    void paragraphStyleSelected(KoParagraphStyle *paragraphStyle, bool canDelete);
+    void paragraphStyleSelected(KParagraphStyle *paragraphStyle, bool canDelete);
     void characterStyleSelected(KoCharacterStyle *characterStyle, bool canDelete);
 
 private slots:
@@ -65,7 +65,7 @@ private slots:
     void setStylesAreNested(bool on);
 
 signals:
-    void paragraphStyleSelected(KoParagraphStyle *style);
+    void paragraphStyleSelected(KParagraphStyle *style);
     void characterStyleSelected(KoCharacterStyle *style);
 
 private:

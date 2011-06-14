@@ -24,7 +24,7 @@
 #include <QIcon>
 
 class KoStyleManager;
-class KoParagraphStyle;
+class KParagraphStyle;
 class KoCharacterStyle;
 class QSignalMapper;
 
@@ -47,7 +47,7 @@ public:
     virtual bool hasChildren(const QModelIndex &parent) const;
     virtual Qt::ItemFlags flags(const QModelIndex &index) const;
 
-    KoParagraphStyle *paragraphStyleForIndex(const QModelIndex &index) const;
+    KParagraphStyle *paragraphStyleForIndex(const QModelIndex &index) const;
     KoCharacterStyle *characterStyleForIndex(const QModelIndex &index) const;
 
     void setStyleManager(KoStyleManager *manager);
@@ -60,7 +60,7 @@ signals:
 public slots:
     /**
         Sets the paragraph style that is to be marked as the 'active' one.
-        @param styleId the id from KoParagraphStyle::styleId()
+        @param styleId the id from KParagraphStyle::styleId()
         @param unchanged if true the icon will display the paragraph style in the text has no local modifications.
         @return the QModelIndex of the new paragraph style
     */
@@ -73,9 +73,9 @@ public slots:
     void setCurrentCharacterStyle(int styleId, bool unchanged);
 
 private slots:
-    void addParagraphStyle(KoParagraphStyle*, bool recalc = true);
+    void addParagraphStyle(KParagraphStyle*, bool recalc = true);
     void addCharacterStyle(KoCharacterStyle*, bool recalc = true);
-    void removeParagraphStyle(KoParagraphStyle*, bool recalc = true);
+    void removeParagraphStyle(KParagraphStyle*, bool recalc = true);
     void removeCharacterStyle(KoCharacterStyle*, bool recalc = true);
     void updateName(int styleId);
 

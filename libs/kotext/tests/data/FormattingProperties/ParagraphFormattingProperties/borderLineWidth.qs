@@ -1,32 +1,32 @@
 // include("common.qs");
 
 var textBlockFormat = new QTextBlockFormat.clone(defaultBlockFormat);
-setFormatProperty(textBlockFormat, KoParagraphStyle.LeftBorderWidth, 0.0154 * 72);
-setFormatProperty(textBlockFormat, KoParagraphStyle.TopBorderWidth, 0.0154 * 72);
-setFormatProperty(textBlockFormat, KoParagraphStyle.RightBorderWidth, 0.0154 * 72);
-setFormatProperty(textBlockFormat, KoParagraphStyle.BottomBorderWidth, 0.0154 * 72);
-setFormatProperty(textBlockFormat, KoParagraphStyle.LeftBorderStyle, KoParagraphStyle.BorderDouble);
-setFormatProperty(textBlockFormat, KoParagraphStyle.TopBorderStyle, KoParagraphStyle.BorderDouble);
-setFormatProperty(textBlockFormat, KoParagraphStyle.RightBorderStyle, KoParagraphStyle.BorderDouble);
-setFormatProperty(textBlockFormat, KoParagraphStyle.BottomBorderStyle, KoParagraphStyle.BorderDouble);
-setFormatProperty(textBlockFormat, KoParagraphStyle.LeftBorderColor, new QColor("#000000"));
-setFormatProperty(textBlockFormat, KoParagraphStyle.TopBorderColor, new QColor("#000000"));
-setFormatProperty(textBlockFormat, KoParagraphStyle.RightBorderColor, new QColor("#000000"));
-setFormatProperty(textBlockFormat, KoParagraphStyle.BottomBorderColor, new QColor("#000000"));
+setFormatProperty(textBlockFormat, KParagraphStyle.LeftBorderWidth, 0.0154 * 72);
+setFormatProperty(textBlockFormat, KParagraphStyle.TopBorderWidth, 0.0154 * 72);
+setFormatProperty(textBlockFormat, KParagraphStyle.RightBorderWidth, 0.0154 * 72);
+setFormatProperty(textBlockFormat, KParagraphStyle.BottomBorderWidth, 0.0154 * 72);
+setFormatProperty(textBlockFormat, KParagraphStyle.LeftBorderStyle, KParagraphStyle.BorderDouble);
+setFormatProperty(textBlockFormat, KParagraphStyle.TopBorderStyle, KParagraphStyle.BorderDouble);
+setFormatProperty(textBlockFormat, KParagraphStyle.RightBorderStyle, KParagraphStyle.BorderDouble);
+setFormatProperty(textBlockFormat, KParagraphStyle.BottomBorderStyle, KParagraphStyle.BorderDouble);
+setFormatProperty(textBlockFormat, KParagraphStyle.LeftBorderColor, new QColor("#000000"));
+setFormatProperty(textBlockFormat, KParagraphStyle.TopBorderColor, new QColor("#000000"));
+setFormatProperty(textBlockFormat, KParagraphStyle.RightBorderColor, new QColor("#000000"));
+setFormatProperty(textBlockFormat, KParagraphStyle.BottomBorderColor, new QColor("#000000"));
 
 var textBlockFormatAllSides = new QTextBlockFormat.clone(textBlockFormat);
-var innerBorderWidthIds = [KoParagraphStyle.LeftInnerBorderWidth, KoParagraphStyle.TopInnerBorderWidth,
-   KoParagraphStyle.RightInnerBorderWidth, KoParagraphStyle.BottomInnerBorderWidth];
+var innerBorderWidthIds = [KParagraphStyle.LeftInnerBorderWidth, KParagraphStyle.TopInnerBorderWidth,
+   KParagraphStyle.RightInnerBorderWidth, KParagraphStyle.BottomInnerBorderWidth];
 for(var i = 0; i < innerBorderWidthIds.length; i++) {
   setFormatProperty(textBlockFormatAllSides, innerBorderWidthIds[i], 0.01 * 72);
 }
-var borderSpacingIds = [KoParagraphStyle.LeftBorderSpacing, KoParagraphStyle.TopBorderSpacing,
-   KoParagraphStyle.RightBorderSpacing, KoParagraphStyle.BottomBorderSpacing];
+var borderSpacingIds = [KParagraphStyle.LeftBorderSpacing, KParagraphStyle.TopBorderSpacing,
+   KParagraphStyle.RightBorderSpacing, KParagraphStyle.BottomBorderSpacing];
 for(var i = 0; i < borderSpacingIds.length; i++) {
   setFormatProperty(textBlockFormatAllSides, borderSpacingIds[i], 0.02 * 72);
 }
-var borderWidthIds = [KoParagraphStyle.LeftBorderWidth, KoParagraphStyle.TopBorderWidth,
-   KoParagraphStyle.RightBorderWidth, KoParagraphStyle.BottomBorderWidth];
+var borderWidthIds = [KParagraphStyle.LeftBorderWidth, KParagraphStyle.TopBorderWidth,
+   KParagraphStyle.RightBorderWidth, KParagraphStyle.BottomBorderWidth];
 for(var i = 0; i < borderWidthIds.length; i++) {
   setFormatProperty(textBlockFormatAllSides, borderWidthIds[i], 0.01 * 72);
 }
@@ -38,18 +38,18 @@ cursor.insertBlock(defaultBlockFormat);
 cursor.insertBlock(defaultBlockFormat);
 
 
-var innerBorderWidthIds = [KoParagraphStyle.LeftInnerBorderWidth, KoParagraphStyle.TopInnerBorderWidth,
-   KoParagraphStyle.RightInnerBorderWidth, KoParagraphStyle.BottomInnerBorderWidth];
+var innerBorderWidthIds = [KParagraphStyle.LeftInnerBorderWidth, KParagraphStyle.TopInnerBorderWidth,
+   KParagraphStyle.RightInnerBorderWidth, KParagraphStyle.BottomInnerBorderWidth];
 for(var i = 0; i < innerBorderWidthIds.length; i++) {
   setFormatProperty(textBlockFormatAllSides, innerBorderWidthIds[i], 0.03 * 72);
 }
-var borderSpacingIds = [KoParagraphStyle.LeftBorderSpacing, KoParagraphStyle.TopBorderSpacing,
-   KoParagraphStyle.RightBorderSpacing, KoParagraphStyle.BottomBorderSpacing];
+var borderSpacingIds = [KParagraphStyle.LeftBorderSpacing, KParagraphStyle.TopBorderSpacing,
+   KParagraphStyle.RightBorderSpacing, KParagraphStyle.BottomBorderSpacing];
 for(var i = 0; i < borderSpacingIds.length; i++) {
   setFormatProperty(textBlockFormatAllSides, borderSpacingIds[i], 0.02 * 72);
 }
-var borderWidthIds = [KoParagraphStyle.LeftBorderWidth, KoParagraphStyle.TopBorderWidth,
-   KoParagraphStyle.RightBorderWidth, KoParagraphStyle.BottomBorderWidth];
+var borderWidthIds = [KParagraphStyle.LeftBorderWidth, KParagraphStyle.TopBorderWidth,
+   KParagraphStyle.RightBorderWidth, KParagraphStyle.BottomBorderWidth];
 for(var i = 0; i < borderWidthIds.length; i++) {
   setFormatProperty(textBlockFormatAllSides, borderWidthIds[i], 0.01 * 72);
 }
@@ -61,18 +61,18 @@ cursor.insertBlock(defaultBlockFormat);
 cursor.insertBlock(defaultBlockFormat);
 
 
-var innerBorderWidthIds = [KoParagraphStyle.LeftInnerBorderWidth, KoParagraphStyle.TopInnerBorderWidth,
-   KoParagraphStyle.RightInnerBorderWidth, KoParagraphStyle.BottomInnerBorderWidth];
+var innerBorderWidthIds = [KParagraphStyle.LeftInnerBorderWidth, KParagraphStyle.TopInnerBorderWidth,
+   KParagraphStyle.RightInnerBorderWidth, KParagraphStyle.BottomInnerBorderWidth];
 for(var i = 0; i < innerBorderWidthIds.length; i++) {
   setFormatProperty(textBlockFormatAllSides, innerBorderWidthIds[i], 0.01 * 72);
 }
-var borderSpacingIds = [KoParagraphStyle.LeftBorderSpacing, KoParagraphStyle.TopBorderSpacing,
-   KoParagraphStyle.RightBorderSpacing, KoParagraphStyle.BottomBorderSpacing];
+var borderSpacingIds = [KParagraphStyle.LeftBorderSpacing, KParagraphStyle.TopBorderSpacing,
+   KParagraphStyle.RightBorderSpacing, KParagraphStyle.BottomBorderSpacing];
 for(var i = 0; i < borderSpacingIds.length; i++) {
   setFormatProperty(textBlockFormatAllSides, borderSpacingIds[i], 0.02 * 72);
 }
-var borderWidthIds = [KoParagraphStyle.LeftBorderWidth, KoParagraphStyle.TopBorderWidth,
-   KoParagraphStyle.RightBorderWidth, KoParagraphStyle.BottomBorderWidth];
+var borderWidthIds = [KParagraphStyle.LeftBorderWidth, KParagraphStyle.TopBorderWidth,
+   KParagraphStyle.RightBorderWidth, KParagraphStyle.BottomBorderWidth];
 for(var i = 0; i < borderWidthIds.length; i++) {
   setFormatProperty(textBlockFormatAllSides, borderWidthIds[i], 0.03 * 72);
 }
@@ -85,18 +85,18 @@ cursor.insertBlock(defaultBlockFormat);
 
 
 
-var innerBorderWidthIds = [KoParagraphStyle.LeftInnerBorderWidth, KoParagraphStyle.TopInnerBorderWidth,
-   KoParagraphStyle.RightInnerBorderWidth, KoParagraphStyle.BottomInnerBorderWidth];
+var innerBorderWidthIds = [KParagraphStyle.LeftInnerBorderWidth, KParagraphStyle.TopInnerBorderWidth,
+   KParagraphStyle.RightInnerBorderWidth, KParagraphStyle.BottomInnerBorderWidth];
 for(var i = 0; i < innerBorderWidthIds.length; i++) {
   setFormatProperty(textBlockFormatAllSides, innerBorderWidthIds[i], 0.01 * 72);
 }
-var borderSpacingIds = [KoParagraphStyle.LeftBorderSpacing, KoParagraphStyle.TopBorderSpacing,
-   KoParagraphStyle.RightBorderSpacing, KoParagraphStyle.BottomBorderSpacing];
+var borderSpacingIds = [KParagraphStyle.LeftBorderSpacing, KParagraphStyle.TopBorderSpacing,
+   KParagraphStyle.RightBorderSpacing, KParagraphStyle.BottomBorderSpacing];
 for(var i = 0; i < borderSpacingIds.length; i++) {
   setFormatProperty(textBlockFormatAllSides, borderSpacingIds[i], 0.4 * 72);
 }
-var borderWidthIds = [KoParagraphStyle.LeftBorderWidth, KoParagraphStyle.TopBorderWidth,
-   KoParagraphStyle.RightBorderWidth, KoParagraphStyle.BottomBorderWidth];
+var borderWidthIds = [KParagraphStyle.LeftBorderWidth, KParagraphStyle.TopBorderWidth,
+   KParagraphStyle.RightBorderWidth, KParagraphStyle.BottomBorderWidth];
 for(var i = 0; i < borderWidthIds.length; i++) {
   setFormatProperty(textBlockFormatAllSides, borderWidthIds[i], 0.01 * 72);
 }
@@ -110,9 +110,9 @@ cursor.insertBlock(defaultBlockFormat);
 
 
 var textBlockFormatLeftOnly = new QTextBlockFormat.clone(textBlockFormat);
-setFormatProperty(textBlockFormatLeftOnly, KoParagraphStyle.LeftInnerBorderWidth, 0.01 * 72);
-setFormatProperty(textBlockFormatLeftOnly, KoParagraphStyle.LeftBorderSpacing, 0.3 * 72);
-setFormatProperty(textBlockFormatLeftOnly, KoParagraphStyle.LeftBorderWidth, 0.03 * 72);
+setFormatProperty(textBlockFormatLeftOnly, KParagraphStyle.LeftInnerBorderWidth, 0.01 * 72);
+setFormatProperty(textBlockFormatLeftOnly, KParagraphStyle.LeftBorderSpacing, 0.3 * 72);
+setFormatProperty(textBlockFormatLeftOnly, KParagraphStyle.LeftBorderWidth, 0.03 * 72);
 
 cursor.setBlockFormat(textBlockFormatLeftOnly);
 cursor.insertText("This is an example of paragraph with double border. The width of inner line in left side is 0.01 inch, the distance between two line in left side is 0.3 inch, and the width of the outer line in left side is 0.03 inch."); // P5

@@ -632,16 +632,16 @@ void KoTableCellStyle::saveOdf(KOdfGenericStyle &style)
                            odfBorderStyleString(bottomBorderStyle()),
                            bottomBorderColor().name());
     if (leftBorder == rightBorder && leftBorder == topBorder && leftBorder == bottomBorder) {
-        if (leftBorderWidth() > 0 && leftBorderStyle() != KoParagraphStyle::BorderNone)
+        if (leftBorderWidth() > 0 && leftBorderStyle() != KParagraphStyle::BorderNone)
             style.addProperty("fo:border", leftBorder, KOdfGenericStyle::ParagraphType);
     } else {
-        if (leftBorderWidth() > 0 && leftBorderStyle() != KoParagraphStyle::BorderNone)
+        if (leftBorderWidth() > 0 && leftBorderStyle() != KParagraphStyle::BorderNone)
             style.addProperty("fo:border-left", leftBorder, KOdfGenericStyle::ParagraphType);
-        if (rightBorderWidth() > 0 && rightBorderStyle() != KoParagraphStyle::BorderNone)
+        if (rightBorderWidth() > 0 && rightBorderStyle() != KParagraphStyle::BorderNone)
             style.addProperty("fo:border-right", rightBorder, KOdfGenericStyle::ParagraphType);
-        if (topBorderWidth() > 0 && topBorderStyle() != KoParagraphStyle::BorderNone)
+        if (topBorderWidth() > 0 && topBorderStyle() != KParagraphStyle::BorderNone)
             style.addProperty("fo:border-top", topBorder, KOdfGenericStyle::ParagraphType);
-        if (bottomBorderWidth() > 0 && bottomBorderStyle() != KoParagraphStyle::BorderNone)
+        if (bottomBorderWidth() > 0 && bottomBorderStyle() != KParagraphStyle::BorderNone)
             style.addProperty("fo:border-bottom", bottomBorder, KOdfGenericStyle::ParagraphType);
     }
     QString leftBorderLineWidth = QString("%1pt %2pt %3pt").arg(QString::number(leftInnerBorderWidth()),
@@ -659,19 +659,19 @@ void KoTableCellStyle::saveOdf(KOdfGenericStyle &style)
     if (leftBorderLineWidth == rightBorderLineWidth &&
             leftBorderLineWidth == topBorderLineWidth &&
             leftBorderLineWidth == bottomBorderLineWidth &&
-            leftBorderStyle() == KoParagraphStyle::BorderDouble &&
-            rightBorderStyle() == KoParagraphStyle::BorderDouble &&
-            topBorderStyle() == KoParagraphStyle::BorderDouble &&
-            bottomBorderStyle() == KoParagraphStyle::BorderDouble) {
+            leftBorderStyle() == KParagraphStyle::BorderDouble &&
+            rightBorderStyle() == KParagraphStyle::BorderDouble &&
+            topBorderStyle() == KParagraphStyle::BorderDouble &&
+            bottomBorderStyle() == KParagraphStyle::BorderDouble) {
         style.addProperty("style:border-line-width", leftBorderLineWidth, KOdfGenericStyle::ParagraphType);
     } else {
-        if (leftBorderStyle() == KoParagraphStyle::BorderDouble)
+        if (leftBorderStyle() == KParagraphStyle::BorderDouble)
             style.addProperty("style:border-line-width-left", leftBorderLineWidth, KOdfGenericStyle::ParagraphType);
-        if (rightBorderStyle() == KoParagraphStyle::BorderDouble)
+        if (rightBorderStyle() == KParagraphStyle::BorderDouble)
             style.addProperty("style:border-line-width-right", rightBorderLineWidth, KOdfGenericStyle::ParagraphType);
-        if (topBorderStyle() == KoParagraphStyle::BorderDouble)
+        if (topBorderStyle() == KParagraphStyle::BorderDouble)
             style.addProperty("style:border-line-width-top", topBorderLineWidth, KOdfGenericStyle::ParagraphType);
-        if (bottomBorderStyle() == KoParagraphStyle::BorderDouble)
+        if (bottomBorderStyle() == KParagraphStyle::BorderDouble)
             style.addProperty("style:border-line-width-bottom", bottomBorderLineWidth, KOdfGenericStyle::ParagraphType);
     }
 */

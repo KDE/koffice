@@ -25,7 +25,7 @@
 #include <QWidget>
 
 class KoStyleManager;
-class KoParagraphStyle;
+class KParagraphStyle;
 class KoCharacterStyle;
 
 class StyleManager : public QWidget
@@ -43,7 +43,7 @@ public:
     void hideSelector();
 
     /// handle opening a style from the passed in styleManager
-    void setParagraphStyle(KoParagraphStyle *style);
+    void setParagraphStyle(KParagraphStyle *style);
 
 public slots:
     void save();
@@ -51,12 +51,12 @@ public slots:
 private slots:
     void buttonNewPressed();
     void buttonDeletePressed();
-    void addParagraphStyle(KoParagraphStyle*);
+    void addParagraphStyle(KParagraphStyle*);
     void addCharacterStyle(KoCharacterStyle*);
-    void removeParagraphStyle(KoParagraphStyle*);
+    void removeParagraphStyle(KParagraphStyle*);
     void removeCharacterStyle(KoCharacterStyle*);
     /// handle opening a 'cloned' style
-    void setParagraphStyle(KoParagraphStyle *style, bool canDelete);
+    void setParagraphStyle(KParagraphStyle *style, bool canDelete);
     /// handle opening a 'cloned' style
     void setCharacterStyle(KoCharacterStyle *style, bool canDelete);
     // switches between paragraph and character styles
@@ -70,11 +70,11 @@ private:
     KoStyleManager *m_styleManager;
     KoStyleManager *m_shadowStyleManager;
 
-    QHash<KoParagraphStyle*, int> m_shadowParagraphStyles; // shadow to orig Id
+    QHash<KParagraphStyle*, int> m_shadowParagraphStyles; // shadow to orig Id
     QHash<KoCharacterStyle*, int> m_shadowCharacterStyles; // shadow to orig Id
     QSet<int> m_alteredStyles;
 
-    KoParagraphStyle *m_selectedParagStyle;
+    KParagraphStyle *m_selectedParagStyle;
     KoCharacterStyle *m_selectedCharStyle;
 
     bool m_blockSignals;

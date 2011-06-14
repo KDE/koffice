@@ -24,7 +24,7 @@
 
 #include <QWidget>
 
-class KoParagraphStyle;
+class KParagraphStyle;
 
 class ParagraphLayout : public QWidget
 {
@@ -32,9 +32,9 @@ class ParagraphLayout : public QWidget
 public:
     ParagraphLayout(QWidget *parent);
 
-    void setDisplay(KoParagraphStyle *style);
+    void setDisplay(KParagraphStyle *style);
 
-    void save(KoParagraphStyle *style);
+    void save(KParagraphStyle *style);
 
 signals:
     void horizontalAlignmentChanged(Qt::Alignment);

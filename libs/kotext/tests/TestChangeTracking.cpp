@@ -49,7 +49,7 @@
 #include <KoTextDocumentLayout.h>
 #include <KoStyleManager.h>
 #include <KoCharacterStyle.h>
-#include <KoParagraphStyle.h>
+#include <KParagraphStyle.h>
 #include <KoText.h>
 #include <KOdfEmbeddedDocumentSaver.h>
 #include <KInlineTextObjectManager.h>

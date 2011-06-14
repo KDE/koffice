@@ -27,7 +27,7 @@
 
 #include <QWidget>
 
-class KoParagraphStyle;
+class KParagraphStyle;
 
 class ParagraphBulletsNumbers : public QWidget
 {
@@ -35,9 +35,9 @@ class ParagraphBulletsNumbers : public QWidget
 public:
     ParagraphBulletsNumbers(QWidget *parent);
 
-    void setDisplay(KoParagraphStyle *style, int level = 0);
+    void setDisplay(KParagraphStyle *style, int level = 0);
 
-    void save(KoParagraphStyle *style);
+    void save(KParagraphStyle *style);
 
     int addStyle(const Lists::ListStyleItem &lsi);
 

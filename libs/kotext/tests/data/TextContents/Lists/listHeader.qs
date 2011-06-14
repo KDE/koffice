@@ -6,7 +6,7 @@ setFormatProperty(listFormat, KListStyle.ListItemSuffix, ".");
 setFormatProperty(listFormat, KListStyle.StartValue, 1);
 
 var headerFormat = QTextBlockFormat.clone(defaultBlockFormat);
-setFormatProperty(headerFormat, KoParagraphStyle.IsListHeader, 1);
+setFormatProperty(headerFormat, KParagraphStyle.IsListHeader, 1);
 
 var list = cursor.createList(listFormat);
 cursor.mergeBlockFormat(headerFormat);

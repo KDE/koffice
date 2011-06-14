@@ -39,7 +39,7 @@ class KoChangeTracker;
 class KoCharacterStyle;
 class KoColor;
 class KoColorPopupAction;
-class KoParagraphStyle;
+class KParagraphStyle;
 class KoStyleManager;
 class KoTextEditingPlugin;
 class KoTextEditor;
@@ -227,7 +227,7 @@ private slots:
     /// change background color of a selected text
     void setBackgroundColor(const KoColor &color);
     /// set Paragraph style of current selection. Exisiting style will be completely overridden.
-    void setStyle(KoParagraphStyle *syle);
+    void setStyle(KParagraphStyle *syle);
     /// set the characterStyle of the current selection. see above.
     void setStyle(KoCharacterStyle *style);
     /// show dialog with markers (bookmarks, pages)

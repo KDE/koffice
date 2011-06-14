@@ -96,9 +96,9 @@ public slots:
             kWarning(32001) << "TextList.setStyle Invalid ParagraphStyle object";
             return;
         }
-        KoParagraphStyle* ps = s->style();
+        KParagraphStyle* ps = s->style();
         if (! ps) {
-            kWarning(32001) << "TextList.setStyle Invalid KoParagraphStyle object";
+            kWarning(32001) << "TextList.setStyle Invalid KParagraphStyle object";
             return;
         }
         const int count = m_list ? m_list.data()->count() : 0;

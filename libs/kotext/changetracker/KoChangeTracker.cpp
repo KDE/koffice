@@ -31,7 +31,7 @@
 #include <KoTextDocumentLayout.h>
 #include <KoList.h>
 #include <KListStyle.h>
-#include <KoParagraphStyle.h>
+#include <KParagraphStyle.h>
 #include <KoStyleManager.h>
 #include <KFormatChangeInformation_p.h>
 #include <KoDeletedRowColumnDataStore_p.h>
@@ -621,10 +621,10 @@ void KoChangeTracker::insertDeleteFragment(QTextCursor &cursor, KoDeleteChangeMa
 
         tempCursor.setPosition(currentBlock.position());
         QTextList *textList = tempCursor.currentList();
-        int outlineLevel = currentBlock.blockFormat().property(KoParagraphStyle::OutlineLevel).toInt();
+        int outlineLevel = currentBlock.blockFormat().property(KParagraphStyle::OutlineLevel).toInt();
 
         KoList *currentList = KoTextDocument(cursor.document()).list(cursor.block());
-        int docOutlineLevel = cursor.block().blockFormat().property(KoParagraphStyle::OutlineLevel).toInt();
+        int docOutlineLevel = cursor.block().blockFormat().property(KParagraphStyle::OutlineLevel).toInt();
         if (docOutlineLevel) {
             //Even though we got a list, it is actually a list for storing headings. So don't consider it
             currentList = NULL;

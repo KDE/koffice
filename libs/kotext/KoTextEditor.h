@@ -33,7 +33,7 @@
 
 class KoCharacterStyle;
 class KInlineObject;
-class KoParagraphStyle;
+class KParagraphStyle;
 
 class QTextBlock;
 class QTextCharFormat;
@@ -113,7 +113,7 @@ public slots:
 
     void setDefaultFormat();
 
-    void setStyle(KoParagraphStyle *style);
+    void setStyle(KParagraphStyle *style);
 
     void setStyle(KoCharacterStyle *style);
 

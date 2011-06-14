@@ -36,7 +36,7 @@
 #include <KoShapeLoadingContext.h>
 
 #include "styles/KoStyleManager.h"
-#include "styles/KoParagraphStyle.h"
+#include "styles/KParagraphStyle.h"
 #include "styles/KoCharacterStyle.h"
 #include "styles/KListStyle.h"
 #include "styles/KListLevelProperties.h"
@@ -67,7 +67,7 @@ public:
     // within the same family. Therefore we have to keep them separate. The office:styles are
     // added to the autostyles so that only one lookup is needed to get the style. This is
     // about 30% faster than having a special data structure for office:styles.
-    QHash<QString, KoParagraphStyle *> paragraphContentDotXmlStyles;
+    QHash<QString, KParagraphStyle *> paragraphContentDotXmlStyles;
     QHash<QString, KoCharacterStyle *> characterContentDotXmlStyles;
     QHash<QString, KListStyle *> listContentDotXmlStyles;
     QHash<QString, KoTableStyle *> tableContentDotXmlStyles;
@@ -75,7 +75,7 @@ public:
     QHash<QString, KoTableRowStyle *> tableRowContentDotXmlStyles;
     QHash<QString, KoTableCellStyle *> tableCellContentDotXmlStyles;
     QHash<QString, KoSectionStyle *> sectionContentDotXmlStyles;
-    QHash<QString, KoParagraphStyle *> paragraphStylesDotXmlStyles;
+    QHash<QString, KParagraphStyle *> paragraphStylesDotXmlStyles;
     QHash<QString, KoCharacterStyle *> characterStylesDotXmlStyles;
     QHash<QString, KListStyle *> listStylesDotXmlStyles;
     QHash<QString, KoTableStyle *> tableStylesDotXmlStyles;
@@ -84,7 +84,7 @@ public:
     QHash<QString, KoTableCellStyle *> tableCellStylesDotXmlStyles;
     QHash<QString, KoSectionStyle *> sectionStylesDotXmlStyles;
 
-    QList<KoParagraphStyle *> paragraphStylesToDelete;
+    QList<KParagraphStyle *> paragraphStylesToDelete;
     QList<KoCharacterStyle *> characterStylesToDelete;
     QList<KListStyle *> listStylesToDelete;
     QList<KoTableStyle *> tableStylesToDelete;
@@ -92,9 +92,9 @@ public:
     QList<KoTableColumnStyle *> tableColumnStylesToDelete;
     QList<KoTableRowStyle *> tableRowStylesToDelete;
     QList<KoSectionStyle *> sectionStylesToDelete;
-    QHash<QString, KoParagraphStyle*> namedParagraphStyles;
+    QHash<QString, KParagraphStyle*> namedParagraphStyles;
 
-    KoParagraphStyle *applicationDefaultStyle;
+    KParagraphStyle *applicationDefaultStyle;
 };
 
 KoTextSharedLoadingData::KoTextSharedLoadingData()
@@ -183,11 +183,11 @@ void KoTextSharedLoadingData::loadOdfStyles(KoShapeLoadingContext &shapeContext,
 void KoTextSharedLoadingData::addParagraphStyles(KoShapeLoadingContext &context, QList<KXmlElement*> styleElements,
         int styleTypes, KoStyleManager *styleManager)
 {
-    QList<QPair<QString, KoParagraphStyle *> > paragraphStyles(loadParagraphStyles(context, styleElements, styleTypes, styleManager));
+    QList<QPair<QString, KParagraphStyle *> > paragraphStyles(loadParagraphStyles(context, styleElements, styleTypes, styleManager));
 
-    QList<QPair<QString, KoParagraphStyle *> >::iterator it(paragraphStyles.begin());
+    QList<QPair<QString, KParagraphStyle *> >::iterator it(paragraphStyles.begin());
     for (; it != paragraphStyles.end(); ++it) {
-        KoParagraphStyle *style = it->second;
+        KParagraphStyle *style = it->second;
         Q_ASSERT(style);
         if (d->applicationDefaultStyle && style->parentStyle() == 0) {
             Q_ASSERT(d->applicationDefaultStyle != style);
@@ -202,25 +202,25 @@ void KoTextSharedLoadingData::addParagraphStyles(KoShapeLoadingContext &context,
     }
 }
 
-QList<QPair<QString, KoParagraphStyle *> > KoTextSharedLoadingData::loadParagraphStyles(KoShapeLoadingContext &context, QList<KXmlElement*> styleElements,
+QList<QPair<QString, KParagraphStyle *> > KoTextSharedLoadingData::loadParagraphStyles(KoShapeLoadingContext &context, QList<KXmlElement*> styleElements,
         int styleTypes, KoStyleManager *styleManager)
 {
-    QList<QPair<QString, KoParagraphStyle *> > paragraphStyles;
-    QHash<KoParagraphStyle*,QString> nextStyles;
-    QHash<KoParagraphStyle*,QString> parentStyles;
+    QList<QPair<QString, KParagraphStyle *> > paragraphStyles;
+    QHash<KParagraphStyle*,QString> nextStyles;
+    QHash<KParagraphStyle*,QString> parentStyles;
 
     foreach(KXmlElement *styleElem, styleElements) {
         Q_ASSERT(styleElem);
         Q_ASSERT(!styleElem->isNull());
 
         QString name = styleElem->attributeNS(KOdfXmlNS::style, "name");
-        KoParagraphStyle *parastyle = 0;
+        KParagraphStyle *parastyle = 0;
         if (styleManager) {
             QString displayName = styleElem->attributeNS(KOdfXmlNS::style, "display-name", name);
             parastyle = styleManager->paragraphStyle(displayName);
         }
         if (parastyle == 0) {
-            parastyle = new KoParagraphStyle();
+            parastyle = new KParagraphStyle();
             parastyle->loadOdf(styleElem, context);
             QString listStyleName = styleElem->attributeNS(KOdfXmlNS::style, "list-style-name");
             KListStyle *list = listStyle(listStyleName, styleTypes & StylesDotXml);
@@ -234,7 +234,7 @@ QList<QPair<QString, KoParagraphStyle *> > KoTextSharedLoadingData::loadParagrap
             else
                 d->paragraphStylesToDelete.append(parastyle);
         }
-        paragraphStyles.append(QPair<QString, KoParagraphStyle *>(name, parastyle));
+        paragraphStyles.append(QPair<QString, KParagraphStyle *>(name, parastyle));
         d->namedParagraphStyles.insert(name, parastyle);
 
         if (styleElem->hasAttributeNS(KOdfXmlNS::style, "next-style-name"))
@@ -247,13 +247,13 @@ QList<QPair<QString, KoParagraphStyle *> > KoTextSharedLoadingData::loadParagrap
     }
 
     // second pass; resolve all the 'next-style's and parent-style's.
-    foreach (KoParagraphStyle *style, nextStyles.keys()) {
-        KoParagraphStyle *next = d->namedParagraphStyles.value(nextStyles.value(style));
+    foreach (KParagraphStyle *style, nextStyles.keys()) {
+        KParagraphStyle *next = d->namedParagraphStyles.value(nextStyles.value(style));
         if (next && next->styleId() >= 0)
             style->setNextStyle(next->styleId());
     }
-    foreach (KoParagraphStyle *style, parentStyles.keys()) {
-        KoParagraphStyle *parent = d->namedParagraphStyles.value(parentStyles.value(style));
+    foreach (KParagraphStyle *style, parentStyles.keys()) {
+        KParagraphStyle *parent = d->namedParagraphStyles.value(parentStyles.value(style));
         if (parent)
             style->setParentStyle(parent);
     }
@@ -586,7 +586,7 @@ void KoTextSharedLoadingData::addOutlineStyle(KoShapeLoadingContext &context, Ko
     }
 }
 
-KoParagraphStyle *KoTextSharedLoadingData::paragraphStyle(const QString &name, bool stylesDotXml) const
+KParagraphStyle *KoTextSharedLoadingData::paragraphStyle(const QString &name, bool stylesDotXml) const
 {
     return stylesDotXml ? d->paragraphStylesDotXmlStyles.value(name) : d->paragraphContentDotXmlStyles.value(name);
 }

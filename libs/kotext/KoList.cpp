@@ -22,7 +22,7 @@
 #include "KoTextDocument.h"
 #include "styles/KListLevelProperties.h"
 #include "KoTextBlockData.h"
-#include "styles/KoParagraphStyle.h"
+#include "styles/KParagraphStyle.h"
 #include "styles/KoStyleManager.h"
 
 #include <KDebug>
@@ -76,7 +76,7 @@ KoList *KoList::applyStyle(const QTextBlock &block, KListStyle *style, int level
     // Ok, so we are now ready to add the block to another list, but which other list?
     // For headers we always want to continue from any previous header
     // For normal lists we either want to continue an adjecent list or create a new one
-    if (block.blockFormat().hasProperty(KoParagraphStyle::OutlineLevel)) {
+    if (block.blockFormat().hasProperty(KParagraphStyle::OutlineLevel)) {
         for (QTextBlock b = block.previous();b.isValid(); b = b.previous()) {
             list = document.list(b);
             if (list && *list->style() == *style) {
@@ -133,14 +133,14 @@ void KoList::add(const QTextBlock &block, int level)
     QTextCursor cursor(block);
     QTextBlockFormat blockFormat = cursor.blockFormat();
     if (d->style->styleId()) {
-        blockFormat.setProperty(KoParagraphStyle::ListStyleId, d->style->styleId());
+        blockFormat.setProperty(KParagraphStyle::ListStyleId, d->style->styleId());
     } else {
-        blockFormat.clearProperty(KoParagraphStyle::ListStyleId);
+        blockFormat.clearProperty(KParagraphStyle::ListStyleId);
     }
     if (d->type == KoList::TextList) {
-        blockFormat.clearProperty(KoParagraphStyle::ListLevel);
+        blockFormat.clearProperty(KParagraphStyle::ListLevel);
     } else {
-        blockFormat.setProperty(KoParagraphStyle::ListLevel, level);
+        blockFormat.setProperty(KParagraphStyle::ListLevel, level);
     }
     cursor.setBlockFormat(blockFormat);
 
@@ -248,7 +248,7 @@ int KoList::level(const QTextBlock &block)
 {
     if (!block.textList())
         return 0;
-    int l = block.blockFormat().intProperty(KoParagraphStyle::ListLevel);
+    int l = block.blockFormat().intProperty(KParagraphStyle::ListLevel);
     if (!l) { // not a numbered-paragraph
         QTextListFormat format = block.textList()->format();
         l = format.intProperty(KListStyle::Level);

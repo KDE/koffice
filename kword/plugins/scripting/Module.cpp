@@ -189,7 +189,7 @@ QObject* Module::defaultParagraphStyle()
     KoStyleManager *styleManager = kwDoc()->resourceManager()->resource(KoText::StyleManager).value<KoStyleManager*>();
 
     Q_ASSERT(styleManager);
-    KoParagraphStyle* s = styleManager->defaultParagraphStyle();
+    KParagraphStyle* s = styleManager->defaultParagraphStyle();
     return s ? new ParagraphStyle(this, s) : 0;
 }
 
@@ -197,7 +197,7 @@ QObject* Module::paragraphStyle(const QString& name)
 {
     KoStyleManager *styleManager = kwDoc()->resourceManager()->resource(KoText::StyleManager).value<KoStyleManager*>();
     Q_ASSERT(styleManager);
-    KoParagraphStyle* s = styleManager->paragraphStyle(name);
+    KParagraphStyle* s = styleManager->paragraphStyle(name);
     return s ? new ParagraphStyle(this, s) : 0;
 }
 
@@ -205,7 +205,7 @@ QObject* Module::addParagraphStyle(const QString& name)
 {
     KoStyleManager *styleManager = kwDoc()->resourceManager()->resource(KoText::StyleManager).value<KoStyleManager*>();
     Q_ASSERT(styleManager);
-    KoParagraphStyle* s = new KoParagraphStyle();
+    KParagraphStyle* s = new KParagraphStyle();
     s->setName(name);
     styleManager->add(s);
     return new ParagraphStyle(this, s);

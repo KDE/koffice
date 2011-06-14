@@ -19,12 +19,12 @@
  */
 #include "TestBorder.h"
 
-#include "styles/KoParagraphStyle.h"
+#include "styles/KParagraphStyle.h"
 #include "KoTextBlockBorderData.h"
 
 void TestBorder::testBorder()
 {
-    KoParagraphStyle style;
+    KParagraphStyle style;
     style.setLeftBorderWidth(4.0);
     style.setLeftBorderSpacing(2.0);
     style.setLeftInnerBorderWidth(1.0);
@@ -39,12 +39,12 @@ void TestBorder::testBorder()
     data.setParagraphBottom(90);
     QCOMPARE(QRectF(10, 10, 100, 80), data.rect());
 
-    data.setEdge(KoTextBlockBorderData::Left, format, KoParagraphStyle::LeftBorderStyle,
-                 KoParagraphStyle::LeftBorderWidth, KoParagraphStyle::LeftBorderColor,
-                 KoParagraphStyle::LeftBorderSpacing, KoParagraphStyle::LeftInnerBorderWidth);
-    data.setEdge(KoTextBlockBorderData::Top, format, KoParagraphStyle::TopBorderStyle,
-                 KoParagraphStyle::TopBorderWidth, KoParagraphStyle::TopBorderColor,
-                 KoParagraphStyle::TopBorderSpacing, KoParagraphStyle::TopInnerBorderWidth);
+    data.setEdge(KoTextBlockBorderData::Left, format, KParagraphStyle::LeftBorderStyle,
+                 KParagraphStyle::LeftBorderWidth, KParagraphStyle::LeftBorderColor,
+                 KParagraphStyle::LeftBorderSpacing, KParagraphStyle::LeftInnerBorderWidth);
+    data.setEdge(KoTextBlockBorderData::Top, format, KParagraphStyle::TopBorderStyle,
+                 KParagraphStyle::TopBorderWidth, KParagraphStyle::TopBorderColor,
+                 KParagraphStyle::TopBorderSpacing, KParagraphStyle::TopInnerBorderWidth);
 
     QCOMPARE(QRectF(10, 10, 100, 80), data.rect());
     QCOMPARE(7., data.inset(KoTextBlockBorderData::Left));

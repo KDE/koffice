@@ -28,7 +28,7 @@
 #include "frames/KWFrame.h"
 
 #include <KoShapeMoveCommand.h>
-#include <KoParagraphStyle.h>
+#include <KParagraphStyle.h>
 #include <QTextBlock>
 #include <QTextDocument>
 #include <kdebug.h>

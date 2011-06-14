@@ -37,7 +37,7 @@
 #include <QTextDocument>
 #include <KoStyleManager.h>
 #include <KoTextDocument.h>
-#include <KoParagraphStyle.h>
+#include <KParagraphStyle.h>
 
 #include <kdebug.h>
 
@@ -239,7 +239,7 @@ void SCPlaceholders::applyStyle(SCPlaceholderShape * shape, const QString &prese
 
         QTextBlockFormat blockFormat(cursor.blockFormat());
         // TODO check if needed
-        //blockFormat.setProperty(KoParagraphStyle::StyleId, styleManager->defaultParagraphStyle()->styleId());
+        //blockFormat.setProperty(KParagraphStyle::StyleId, styleManager->defaultParagraphStyle()->styleId());
         blockFormat.clearProperty(QTextFormat::ObjectIndex);
         newCursor.setBlockFormat(blockFormat);
 

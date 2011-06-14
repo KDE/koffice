@@ -66,7 +66,7 @@ public:
      * The document this follower is associated with is scanned for
      * text that has one of the changed styles and on those portions of the text
      * the style will be (re)applied.
-     * @param changedStyles a list of styleIds. from KoParagraphStyle::styleId
+     * @param changedStyles a list of styleIds. from KParagraphStyle::styleId
      *      and KoCharacterStyle::styleId followed with a set of keys set on
      *      format due to applying of style (and parents)
      */

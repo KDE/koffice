@@ -47,10 +47,10 @@ class KoShapeLoadingContext;
  * Each paragraph in the main text either is based on a parag style, or its not. Where
  * it is based on a paragraph style this is indecated that it has a property 'StyleId'
  * with an integer as value.  The integer value corresponds to the styleId() output of
- * a specific KoParagraphStyle.
+ * a specific KParagraphStyle.
  * @see KoStyleManager
  */
-class KOTEXT_EXPORT KoParagraphStyle : public QObject
+class KOTEXT_EXPORT KParagraphStyle : public QObject
 {
     Q_OBJECT
 public:
@@ -129,24 +129,24 @@ public:
     };
 
     /// Constructor
-    KoParagraphStyle(QObject *parent = 0);
-    /// Creates a KoParagraphStyle with the given block format, the block character format and \a parent
-    KoParagraphStyle(const QTextBlockFormat &blockFormat, const QTextCharFormat &blockCharFormat, QObject *parent = 0);
+    KParagraphStyle(QObject *parent = 0);
+    /// Creates a KParagraphStyle with the given block format, the block character format and \a parent
+    KParagraphStyle(const QTextBlockFormat &blockFormat, const QTextCharFormat &blockCharFormat, QObject *parent = 0);
     /// Destructor
-    ~KoParagraphStyle();
+    ~KParagraphStyle();
 
-    /// Creates a KoParagraphStyle that represents the formatting of \a block.
-    static KoParagraphStyle *fromBlock(const QTextBlock &block, QObject *parent = 0);
+    /// Creates a KParagraphStyle that represents the formatting of \a block.
+    static KParagraphStyle *fromBlock(const QTextBlock &block, QObject *parent = 0);
 
     /// creates a clone of this style with the specified parent
-    KoParagraphStyle *clone(QObject *parent = 0);
+    KParagraphStyle *clone(QObject *parent = 0);
 
     //  ***** Linespacing
     /**
      * Sets the line height as a percentage of the highest character on that line.
      * A good typographically correct value would be 120%
      * Note that lineSpacing() is added to this.
-     * You should consider doing a remove(KoParagraphStyle::LineSpacing); because if set, it will
+     * You should consider doing a remove(KParagraphStyle::LineSpacing); because if set, it will
      *  be used instead of this value.
      * @see setLineSpacingFromFont
      */
@@ -164,7 +164,7 @@ public:
 
     /**
      * Sets the line height to have a minimum height in pt.
-     * You should consider doing a remove(KoParagraphStyle::FixedLineHeight); because if set, it will
+     * You should consider doing a remove(KParagraphStyle::FixedLineHeight); because if set, it will
      *  be used instead of this value.
      */
     void setMinimumLineHeight(qreal height);
@@ -174,8 +174,8 @@ public:
     /**
      * Sets the space between two lines to be a specific height. The total linespacing will become
      * the line height + this height.  Where the line height is dependent on the font.
-     * You should consider doing a remove(KoParagraphStyle::FixedLineHeight) and a
-     * remove(KoParagraphStyle::PercentLineHeight); because if set, they will be used instead of this value.
+     * You should consider doing a remove(KParagraphStyle::FixedLineHeight) and a
+     * remove(KParagraphStyle::PercentLineHeight); because if set, they will be used instead of this value.
      */
     void setLineSpacing(qreal spacing);
     /// @see setLineSpacing
@@ -397,7 +397,7 @@ public:
     void setTextIndent(qreal margin);
     /// duplicated property from QTextBlockFormat
     qreal textIndent() const;
-    /// Custom KoParagraphStyle property for auto-text-indent
+    /// Custom KParagraphStyle property for auto-text-indent
     void setAutoTextIndent(bool on);
     bool autoTextIndent() const;
 
@@ -407,10 +407,10 @@ public:
     bool nonBreakableLines() const;
 
     /// set the parent style this one inherits its unset properties from.
-    void setParentStyle(KoParagraphStyle *parent);
+    void setParentStyle(KParagraphStyle *parent);
 
     /// return the parent style
-    KoParagraphStyle *parentStyle() const;
+    KParagraphStyle *parentStyle() const;
 
     /// the 'next' style is the one used when the user creates a new paragrap after this one.
     void setNextStyle(int next);
@@ -484,7 +484,7 @@ public:
 
 
     /// copy all the properties from the other style to this style, effectively duplicating it.
-    void copyProperties(const KoParagraphStyle *style);
+    void copyProperties(const KParagraphStyle *style);
 
     void unapplyStyle(const QTextBlock &block) const;
 
@@ -526,13 +526,13 @@ public:
     void remove(int key);
 
     /// Compare the paragraph, character and list properties of this style with the other
-    bool operator==(const KoParagraphStyle &other) const;
+    bool operator==(const KParagraphStyle &other) const;
     /// Compare the paragraph properties of this style with other
-    bool compareParagraphProperties(const KoParagraphStyle &other) const;
+    bool compareParagraphProperties(const KParagraphStyle &other) const;
     /// Compare the character properties of this style with other
-    bool compareCharacterProperties(const KoParagraphStyle &other) const;
+    bool compareCharacterProperties(const KParagraphStyle &other) const;
 
-    void removeDuplicates(const KoParagraphStyle &other);
+    void removeDuplicates(const KParagraphStyle &other);
 
     /**
      * Load the style form the element

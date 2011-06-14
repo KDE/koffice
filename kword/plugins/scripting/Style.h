@@ -21,7 +21,7 @@
 #define SCRIPTING_STYLE_H
 
 #include <QObject>
-#include <KoParagraphStyle.h>
+#include <KParagraphStyle.h>
 #include <KoCharacterStyle.h>
 #include <KListStyle.h>
 
@@ -209,9 +209,9 @@ class ParagraphStyle : public QObject
     Q_ENUMS(Alignment)
     Q_ENUMS(ListStyle)
 public:
-    ParagraphStyle(QObject* parent, KoParagraphStyle* style) : QObject(parent), m_style(style) {}
+    ParagraphStyle(QObject* parent, KParagraphStyle* style) : QObject(parent), m_style(style) {}
     virtual ~ParagraphStyle() {}
-    KoParagraphStyle* style() const {
+    KParagraphStyle* style() const {
         return m_style;
     }
 
@@ -320,7 +320,7 @@ public slots:
     /*TODO simplify border options even more. Propably just deal with a QVariantMap using QMetaEnum's, e.g.
     QVariantMap border() {
         QVariantMap map;
-        for(int i = KoParagraphStyle::HasLeftBorder; i <= KoParagraphStyle::BottomBorderColor; i++)
+        for(int i = KParagraphStyle::HasLeftBorder; i <= KParagraphStyle::BottomBorderColor; i++)
             map.insert("", m_style->property(""));
         return map;
     }
@@ -331,10 +331,10 @@ public slots:
     }
 
     void setBorderStyle(const QRect& rect) {
-        m_style->setLeftBorderStyle((KoParagraphStyle::BorderStyle) r.x());
-        m_style->setTopBorderStyle((KoParagraphStyle::BorderStyle) r.y());
-        m_style->setRightBorderStyle((KoParagraphStyle::BorderStyle) r.width());
-        m_style->setBottomBorderStyle((KoParagraphStyle::BorderStyle) r.height());
+        m_style->setLeftBorderStyle((KParagraphStyle::BorderStyle) r.x());
+        m_style->setTopBorderStyle((KParagraphStyle::BorderStyle) r.y());
+        m_style->setRightBorderStyle((KParagraphStyle::BorderStyle) r.width());
+        m_style->setBottomBorderStyle((KParagraphStyle::BorderStyle) r.height());
     }
 
     QRect borderSpacing() {
@@ -422,7 +422,7 @@ public slots:
     }
 
 private:
-    KoParagraphStyle* m_style;
+    KParagraphStyle* m_style;
 };
 
 }

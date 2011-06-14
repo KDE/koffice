@@ -87,7 +87,7 @@
 #include <KoTextDocument.h>
 #include <KoTextWriter.h>
 #include <KOdfEmbeddedDocumentSaver.h>
-#include <KoParagraphStyle.h>
+#include <KParagraphStyle.h>
 
 #include <kdebug.h>
 

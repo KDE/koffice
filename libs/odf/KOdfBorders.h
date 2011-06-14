@@ -151,7 +151,7 @@ public:
 
 
     // Some public functions used in other places where borders are handled.
-    // Example: KoParagraphStyle
+    // Example: KParagraphStyle
     // FIXME: These places should be made to use KOdfBorders instead.
     static BorderStyle odfBorderStyle(const QString &borderstyle);
     static QString odfBorderStyleString(BorderStyle borderstyle);

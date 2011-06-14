@@ -23,7 +23,7 @@
 #include "../commands/ChangeListCommand.h"
 #include "../TextTool.h"
 
-#include <KoParagraphStyle.h>
+#include <KParagraphStyle.h>
 #include <KoTextDocument.h>
 
 #include <QTextBlock>
@@ -54,7 +54,7 @@ ParagraphSettingsDialog::~ParagraphSettingsDialog()
 
 void ParagraphSettingsDialog::initTabs()
 {
-    KoParagraphStyle *style = KoParagraphStyle::fromBlock(m_cursor->block());
+    KParagraphStyle *style = KParagraphStyle::fromBlock(m_cursor->block());
     m_paragraphGeneral->setStyle(style, KoList::level(m_cursor->block()));
 }
 
@@ -67,7 +67,7 @@ void ParagraphSettingsDialog::slotOk()
 void ParagraphSettingsDialog::slotApply()
 {
     emit startMacro(i18n("Paragraph Settings"));
-    KoParagraphStyle chosenStyle;
+    KParagraphStyle chosenStyle;
     m_paragraphGeneral->save(&chosenStyle);
     QTextBlockFormat format;
     chosenStyle.applyStyle(format);

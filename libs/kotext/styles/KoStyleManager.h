@@ -31,7 +31,7 @@
 
 class QTextDocument;
 class KoCharacterStyle;
-class KoParagraphStyle;
+class KParagraphStyle;
 class KListStyle;
 class KoTableStyle;
 class KoTableColumnStyle;
@@ -77,7 +77,7 @@ public:
     /**
      * Add a new style, automatically giving it a new styleId.
      */
-    void add(KoParagraphStyle *style);
+    void add(KParagraphStyle *style);
     /**
      * Add a new list style, automatically giving it a new styleId.
      */
@@ -110,7 +110,7 @@ public:
     /**
      * Remove a style.
      */
-    void remove(KoParagraphStyle *style);
+    void remove(KParagraphStyle *style);
     /**
      * Remove a list style.
      */
@@ -159,11 +159,11 @@ public:
     /**
      * Return a paragraphStyle by its id.
      * From documents you can retrieve the id out of each QTextBlockFormat
-     * by requesting the KoParagraphStyle::StyleId property.
+     * by requesting the KParagraphStyle::StyleId property.
      * @param id the unique Id to search for.
-     * @see KoParagraphStyle::styleId()
+     * @see KParagraphStyle::styleId()
      */
-    KoParagraphStyle *paragraphStyle(int id) const;
+    KParagraphStyle *paragraphStyle(int id) const;
 
     /**
      * Return a list style by its id.
@@ -229,7 +229,7 @@ public:
      * @param name the name of the style.
      * @see paragraphStyle(id);
      */
-    KoParagraphStyle *paragraphStyle(const QString &name) const;
+    KParagraphStyle *paragraphStyle(const QString &name) const;
 
     /**
      * Returns the first  listStyle ith the param use-visible-name.
@@ -290,7 +290,7 @@ public:
      *
      * All paragraph styles will have this style as a parent, making this the ultimate fall-back.
      */
-    KoParagraphStyle *defaultParagraphStyle() const;
+    KParagraphStyle *defaultParagraphStyle() const;
 
     /**
      * Returns the default list style to be used for lists, headers, paragraphs
@@ -312,7 +312,7 @@ public:
     QList<KoCharacterStyle*> characterStyles() const;
 
     /// return all the paragraphStyles registered.
-    QList<KoParagraphStyle*> paragraphStyles() const;
+    QList<KParagraphStyle*> paragraphStyles() const;
 
     /// return all the listStyles registered.
     QList<KListStyle*> listStyles() const;
@@ -336,7 +336,7 @@ public:
     KoStyleManagerPrivate *priv();
 
 signals:
-    void styleAdded(KoParagraphStyle*);
+    void styleAdded(KParagraphStyle*);
     void styleAdded(KoCharacterStyle*);
     void styleAdded(KListStyle*);
     void styleAdded(KoTableStyle*);
@@ -344,7 +344,7 @@ signals:
     void styleAdded(KoTableRowStyle*);
     void styleAdded(KoTableCellStyle*);
     void styleAdded(KoSectionStyle*);
-    void styleRemoved(KoParagraphStyle*);
+    void styleRemoved(KParagraphStyle*);
     void styleRemoved(KoCharacterStyle*);
     void styleRemoved(KListStyle*);
     void styleRemoved(KoTableStyle*);
@@ -359,7 +359,7 @@ public slots:
      * all documents with the style.
      * Note that successive calls are aggregated.
      */
-    void alteredStyle(const KoParagraphStyle *style);
+    void alteredStyle(const KParagraphStyle *style);
     /**
      * Slot that should be called whenever a style is changed. This will update
      * all documents with the style.

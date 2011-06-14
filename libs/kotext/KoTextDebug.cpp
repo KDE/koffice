@@ -29,7 +29,7 @@
 #include <QTextList>
 #include <QTextStream>
 
-#include "styles/KoParagraphStyle.h"
+#include "styles/KParagraphStyle.h"
 #include "styles/KoCharacterStyle.h"
 #include "styles/KListStyle.h"
 #include "styles/KoTableStyle.h"
@@ -311,7 +311,7 @@ QString KoTextDebug::textAttributes(const QTextCharFormat &textFormat)
     return attrs;
 }
 
-QString KoTextDebug::paraAttributes(const KoParagraphStyle &style)
+QString KoTextDebug::paraAttributes(const KParagraphStyle &style)
 {
     QTextBlockFormat format;
     style.applyStyle(format);
@@ -322,9 +322,9 @@ QString KoTextDebug::paraAttributes(const QTextBlockFormat &blockFormat)
 {
     QString attrs;
     KoStyleManager *styleManager = document ? KoTextDocument(document).styleManager() : 0;
-    if (styleManager && blockFormat.hasProperty(KoParagraphStyle::StyleId)) {
-        int id = blockFormat.intProperty(KoParagraphStyle::StyleId);
-        KoParagraphStyle *paragraphStyle = styleManager->paragraphStyle(id);
+    if (styleManager && blockFormat.hasProperty(KParagraphStyle::StyleId)) {
+        int id = blockFormat.intProperty(KParagraphStyle::StyleId);
+        KParagraphStyle *paragraphStyle = styleManager->paragraphStyle(id);
         attrs.append(" paragraphStyle=\"id:").append(QString::number(id));
         if (paragraphStyle)
             attrs.append(" name:").append(paragraphStyle->name());
@@ -336,86 +336,86 @@ QString KoTextDebug::paraAttributes(const QTextBlockFormat &blockFormat)
         QString key, value;
         switch (id) {
         // the following are 'todo'
-        case KoParagraphStyle::PercentLineHeight:
-        case KoParagraphStyle::FixedLineHeight:
-        case KoParagraphStyle::MinimumLineHeight:
-        case KoParagraphStyle::LineSpacing:
-        case KoParagraphStyle::LineSpacingFromFont:
-        case KoParagraphStyle::AlignLastLine:
-        case KoParagraphStyle::WidowThreshold:
-        case KoParagraphStyle::OrphanThreshold:
-        case KoParagraphStyle::DropCapsTextStyle:
-        case KoParagraphStyle::FollowDocBaseline:
-        case KoParagraphStyle::HasLeftBorder:
-        case KoParagraphStyle::HasTopBorder:
-        case KoParagraphStyle::HasRightBorder:
-        case KoParagraphStyle::HasBottomBorder:
-        case KoParagraphStyle::BorderLineWidth:
-        case KoParagraphStyle::SecondBorderLineWidth:
-        case KoParagraphStyle::DistanceToSecondBorder:
-        case KoParagraphStyle::LeftPadding:
-        case KoParagraphStyle::TopPadding:
-        case KoParagraphStyle::RightPadding:
-        case KoParagraphStyle::BottomPadding:
-        case KoParagraphStyle::LeftBorderColor:
-        case KoParagraphStyle::TopInnerBorderWidth:
-        case KoParagraphStyle::TopBorderSpacing:
-        case KoParagraphStyle::TopBorderStyle:
-        case KoParagraphStyle::TopBorderColor:
-        case KoParagraphStyle::RightInnerBorderWidth:
-        case KoParagraphStyle::RightBorderSpacing:
-        case KoParagraphStyle::RightBorderStyle:
-        case KoParagraphStyle::RightBorderColor:
-        case KoParagraphStyle::BottomInnerBorderWidth:
-        case KoParagraphStyle::BottomBorderSpacing:
-        case KoParagraphStyle::BottomBorderStyle:
-        case KoParagraphStyle::BottomBorderColor:
-        case KoParagraphStyle::ListStyleId:
-        case KoParagraphStyle::ListStartValue:
-        case KoParagraphStyle::RestartListNumbering:
-        case KoParagraphStyle::TextProgressionDirection:
-        case KoParagraphStyle::MasterPageName:
-        case KoParagraphStyle::OutlineLevel:
+        case KParagraphStyle::PercentLineHeight:
+        case KParagraphStyle::FixedLineHeight:
+        case KParagraphStyle::MinimumLineHeight:
+        case KParagraphStyle::LineSpacing:
+        case KParagraphStyle::LineSpacingFromFont:
+        case KParagraphStyle::AlignLastLine:
+        case KParagraphStyle::WidowThreshold:
+        case KParagraphStyle::OrphanThreshold:
+        case KParagraphStyle::DropCapsTextStyle:
+        case KParagraphStyle::FollowDocBaseline:
+        case KParagraphStyle::HasLeftBorder:
+        case KParagraphStyle::HasTopBorder:
+        case KParagraphStyle::HasRightBorder:
+        case KParagraphStyle::HasBottomBorder:
+        case KParagraphStyle::BorderLineWidth:
+        case KParagraphStyle::SecondBorderLineWidth:
+        case KParagraphStyle::DistanceToSecondBorder:
+        case KParagraphStyle::LeftPadding:
+        case KParagraphStyle::TopPadding:
+        case KParagraphStyle::RightPadding:
+        case KParagraphStyle::BottomPadding:
+        case KParagraphStyle::LeftBorderColor:
+        case KParagraphStyle::TopInnerBorderWidth:
+        case KParagraphStyle::TopBorderSpacing:
+        case KParagraphStyle::TopBorderStyle:
+        case KParagraphStyle::TopBorderColor:
+        case KParagraphStyle::RightInnerBorderWidth:
+        case KParagraphStyle::RightBorderSpacing:
+        case KParagraphStyle::RightBorderStyle:
+        case KParagraphStyle::RightBorderColor:
+        case KParagraphStyle::BottomInnerBorderWidth:
+        case KParagraphStyle::BottomBorderSpacing:
+        case KParagraphStyle::BottomBorderStyle:
+        case KParagraphStyle::BottomBorderColor:
+        case KParagraphStyle::ListStyleId:
+        case KParagraphStyle::ListStartValue:
+        case KParagraphStyle::RestartListNumbering:
+        case KParagraphStyle::TextProgressionDirection:
+        case KParagraphStyle::MasterPageName:
+        case KParagraphStyle::OutlineLevel:
             break;
-        case KoParagraphStyle::AutoTextIndent:
+        case KParagraphStyle::AutoTextIndent:
             key = "autotextindent";
             value = properties[id].toBool() ? "true" : "false" ;
             break;
 #ifdef PARAGRAPH_BORDER_DEBUG // because it tends to get annoyingly long :)
-        case KoParagraphStyle::LeftBorderWidth:
+        case KParagraphStyle::LeftBorderWidth:
             key = "border-width-left";
             value = QString::number(properties[id].toDouble()) ;
             break;
-        case KoParagraphStyle::TopBorderWidth:
+        case KParagraphStyle::TopBorderWidth:
             key = "border-width-top";
             value = QString::number(properties[id].toDouble()) ;
             break;
-        case KoParagraphStyle::RightBorderWidth:
+        case KParagraphStyle::RightBorderWidth:
             key = "border-width-right";
             value = QString::number(properties[id].toDouble()) ;
             break;
-        case KoParagraphStyle::BottomBorderWidth:
+        case KParagraphStyle::BottomBorderWidth:
             key = "border-width-bottom";
             value = QString::number(properties[id].toDouble()) ;
             break;
-        case KoParagraphStyle::LeftBorderStyle:
+        case KParagraphStyle::LeftBorderStyle:
             key = "border-style-left";
             value = QString::number(properties[id].toDouble()) ;
             break;
-        case KoParagraphStyle::LeftBorderSpacing:
+        case KParagraphStyle::LeftBorderSpacing:
             key = "inner-border-spacing-left";
             value = QString::number(properties[id].toDouble()) ;
             break;
-        case KoParagraphStyle::LeftInnerBorderWidth:
+        case KParagraphStyle::LeftInnerBorderWidth:
             key = "inner-border-width-left";
             value = QString::number(properties[id].toDouble()) ;
             break;
 #endif
-        case KoParagraphStyle::TabStopDistance:
+        case KParagraphStyle::TabStopDistance:
             key = "tab-stop-distance";
             value = QString::number(properties[id].toDouble());
             break;
-        case KoParagraphStyle::TabPositions:
+        case KParagraphStyle::TabPositions:
             key = "tab-stops";
             value = "";
             foreach(const QVariant & qvtab, qvariant_cast<QList<QVariant> >(properties[id])) {
@@ -435,19 +435,19 @@ QString KoTextDebug::paraAttributes(const QTextBlockFormat &blockFormat)
                 value.append("}, ");
             }
             break;
-        case KoParagraphStyle::DropCaps:
+        case KParagraphStyle::DropCaps:
             key = "drop-caps";
             value = QString::number(properties[id].toBool());
             break;
-        case KoParagraphStyle::DropCapsLines:
+        case KParagraphStyle::DropCapsLines:
             key = "drop-caps-lines";
             value = QString::number(properties[id].toInt());
             break;
-        case KoParagraphStyle::DropCapsLength:
+        case KParagraphStyle::DropCapsLength:
             key = "drop-caps-length";
             value = QString::number(properties[id].toInt());
             break;
-        case KoParagraphStyle::DropCapsDistance:
+        case KParagraphStyle::DropCapsDistance:
             key = "drop-caps-distance";
             value = QString::number(properties[id].toDouble());
             break;
@@ -471,15 +471,15 @@ QString KoTextDebug::paraAttributes(const QTextBlockFormat &blockFormat)
             if (value != "0")
                 key = "block-right-margin";
             break;
-        case KoParagraphStyle::UnnumberedListItem:
+        case KParagraphStyle::UnnumberedListItem:
             key = "unnumbered-list-item";
             value = QString::number(properties[id].toBool());
             break;
-        case KoParagraphStyle::IsListHeader:
+        case KParagraphStyle::IsListHeader:
             key = "list-header";
             value = '1';
             break;
-        case KoParagraphStyle::ListLevel:
+        case KParagraphStyle::ListLevel:
             key = "list-level";
             value = QString::number(properties[id].toInt());
             break;

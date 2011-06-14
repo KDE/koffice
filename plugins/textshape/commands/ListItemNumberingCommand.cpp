@@ -21,7 +21,7 @@
 
 #include <KLocale>
 
-#include <KoParagraphStyle.h>
+#include <KParagraphStyle.h>
 #include <KoTextBlockData.h>
 #include <QTextCursor>
 
@@ -31,7 +31,7 @@ ListItemNumberingCommand::ListItemNumberingCommand(const QTextBlock &block, bool
       m_numbered(numbered),
       m_first(true)
 {
-    m_wasNumbered = !block.blockFormat().boolProperty(KoParagraphStyle::UnnumberedListItem);
+    m_wasNumbered = !block.blockFormat().boolProperty(KParagraphStyle::UnnumberedListItem);
     setText(i18n("Change List Numbering"));
 }
 
@@ -44,9 +44,9 @@ void ListItemNumberingCommand::setNumbered(bool numbered)
     QTextCursor cursor(m_block);
     QTextBlockFormat blockFormat = cursor.blockFormat();
     if (numbered) {
-        blockFormat.clearProperty(KoParagraphStyle::UnnumberedListItem);
+        blockFormat.clearProperty(KParagraphStyle::UnnumberedListItem);
     } else {
-        blockFormat.setProperty(KoParagraphStyle::UnnumberedListItem, true);
+        blockFormat.setProperty(KParagraphStyle::UnnumberedListItem, true);
     }
     cursor.setBlockFormat(blockFormat);
 

@@ -22,7 +22,7 @@
 #include <QSignalMapper>
 
 #include <KoStyleManager.h>
-#include <KoParagraphStyle.h>
+#include <KParagraphStyle.h>
 #include <KoCharacterStyle.h>
 
 #include <KIcon>
@@ -72,7 +72,7 @@ void StylesModel::recalculate()
     QSet<int> treeRoot;
     QHash<int, QList<int> > tree;
 
-    foreach (KoParagraphStyle *style, m_styleManager->paragraphStyles()) {
+    foreach (KParagraphStyle *style, m_styleManager->paragraphStyles()) {
         if (style->parentStyle() == 0) {
             treeRoot.insert(style->styleId());
             continue;
@@ -95,7 +95,7 @@ void StylesModel::recalculate()
                     inserted = true; // already present.
                     break;
                 }
-                KoParagraphStyle *i = m_styleManager->paragraphStyle(*iter);
+                KParagraphStyle *i = m_styleManager->paragraphStyle(*iter);
                 Q_ASSERT(i);
                 if (styleName.compare(i->name(), Qt::CaseInsensitive) > 0) {
                     prevValues.insert(iter, value);
@@ -169,7 +169,7 @@ QModelIndex StylesModel::index(int row, int column, const QModelIndex &parent) c
         return createIndex(row, column, m_styleList[row]);
     }
     int id = (int) parent.internalId();
-    KoParagraphStyle *pstyle = m_styleManager->paragraphStyle(id);
+    KParagraphStyle *pstyle = m_styleManager->paragraphStyle(id);
     if (pstyle == 0) { // that means it has to be a charStyle. Thats easy, there is no hierarchy there.
         if (row >= m_styleList.count())
             return QModelIndex();
@@ -191,7 +191,7 @@ QModelIndex StylesModel::parent(const QModelIndex &child) const
         int id = (int) child.internalId();
         if (m_styleList.contains(id)) // is the root, parent is invalid.
             return QModelIndex();
-        KoParagraphStyle *childStyle = m_styleManager->paragraphStyle(id);
+        KParagraphStyle *childStyle = m_styleManager->paragraphStyle(id);
         if (childStyle && childStyle->parentStyle())
             createIndex(0, 0, childStyle->parentStyle()->styleId());
 
@@ -206,7 +206,7 @@ QModelIndex StylesModel::parent(int needle, const QList<int> &haystack) const
     int row = -1;
     foreach (int id, haystack) {
         row++;
-        KoParagraphStyle *style = m_styleManager->paragraphStyle(id);
+        KParagraphStyle *style = m_styleManager->paragraphStyle(id);
         if (style == 0)
             continue;
         QList<int> children = m_relations.values(id);
@@ -264,7 +264,7 @@ QVariant StylesModel::data(const QModelIndex &index, int role) const
             }
             return QString(QChar(0x25CC));
         }
-        KoParagraphStyle *paragStyle = m_styleManager->paragraphStyle(id);
+        KParagraphStyle *paragStyle = m_styleManager->paragraphStyle(id);
         if (paragStyle)
             return paragStyle->name();
         KoCharacterStyle *characterStyle =  m_styleManager->characterStyle(id);
@@ -334,7 +334,7 @@ void StylesModel::setCurrentCharacterStyle(int styleId, bool unchanged)
     emit dataChanged(newCurrent, newCurrent);
 }
 
-KoParagraphStyle *StylesModel::paragraphStyleForIndex(const QModelIndex &index) const
+KParagraphStyle *StylesModel::paragraphStyleForIndex(const QModelIndex &index) const
 {
     return m_styleManager->paragraphStyle(index.internalId());
 }
@@ -349,9 +349,9 @@ void StylesModel::setStyleManager(KoStyleManager *sm)
     if (sm == m_styleManager)
         return;
     if (m_styleManager) {
-        disconnect(sm, SIGNAL(styleAdded(KoParagraphStyle*)), this, SLOT(addParagraphStyle(KoParagraphStyle*)));
+        disconnect(sm, SIGNAL(styleAdded(KParagraphStyle*)), this, SLOT(addParagraphStyle(KParagraphStyle*)));
         disconnect(sm, SIGNAL(styleAdded(KoCharacterStyle*)), this, SLOT(addCharacterStyle(KoCharacterStyle*)));
-        disconnect(sm, SIGNAL(styleRemoved(KoParagraphStyle*)), this, SLOT(removeParagraphStyle(KoParagraphStyle*)));
+        disconnect(sm, SIGNAL(styleRemoved(KParagraphStyle*)), this, SLOT(removeParagraphStyle(KParagraphStyle*)));
         disconnect(sm, SIGNAL(styleRemoved(KoCharacterStyle*)), this, SLOT(removeCharacterStyle(KoCharacterStyle*)));
     }
     m_styleManager = sm;
@@ -363,10 +363,10 @@ void StylesModel::setStyleManager(KoStyleManager *sm)
 
     connect(sm, SIGNAL(styleAdded(KoCharacterStyle*)), this, SLOT(addCharacterStyle(KoCharacterStyle*)));
     connect(sm, SIGNAL(styleRemoved(KoCharacterStyle*)), this, SLOT(removeCharacterStyle(KoCharacterStyle*)));
-    connect(sm, SIGNAL(styleAdded(KoParagraphStyle*)), this, SLOT(addParagraphStyle(KoParagraphStyle*)));
-    connect(sm, SIGNAL(styleRemoved(KoParagraphStyle*)), this, SLOT(removeParagraphStyle(KoParagraphStyle*)));
+    connect(sm, SIGNAL(styleAdded(KParagraphStyle*)), this, SLOT(addParagraphStyle(KParagraphStyle*)));
+    connect(sm, SIGNAL(styleRemoved(KParagraphStyle*)), this, SLOT(removeParagraphStyle(KParagraphStyle*)));
 
-    foreach(KoParagraphStyle *style, m_styleManager->paragraphStyles())
+    foreach(KParagraphStyle *style, m_styleManager->paragraphStyles())
         addParagraphStyle(style, false);
     foreach(KoCharacterStyle *style, m_styleManager->characterStyles())
         addCharacterStyle(style, false);
@@ -375,7 +375,7 @@ void StylesModel::setStyleManager(KoStyleManager *sm)
 }
 
 // called when the stylemanager adds a style
-void StylesModel::addParagraphStyle(KoParagraphStyle *style, bool recalc)
+void StylesModel::addParagraphStyle(KParagraphStyle *style, bool recalc)
 {
     Q_ASSERT(style);
     if (recalc)
@@ -394,7 +394,7 @@ void StylesModel::addCharacterStyle(KoCharacterStyle *style, bool recalc)
 }
 
 // called when the stylemanager removes a style
-void StylesModel::removeParagraphStyle(KoParagraphStyle *style, bool recalc)
+void StylesModel::removeParagraphStyle(KParagraphStyle *style, bool recalc)
 {
     if (recalc)
         recalculate();

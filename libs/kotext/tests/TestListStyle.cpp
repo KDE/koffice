@@ -18,7 +18,7 @@
  */
 #include "TestListStyle.h"
 
-#include "styles/KoParagraphStyle.h"
+#include "styles/KParagraphStyle.h"
 #include "styles/KListStyle.h"
 #include "styles/KListLevelProperties.h"
 #include "KoTextBlockBorderData.h"

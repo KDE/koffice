@@ -28,7 +28,7 @@
 
 #include <KoTextShapeData.h>
 #include <KoStyleManager.h>
-#include <KoParagraphStyle.h>
+#include <KParagraphStyle.h>
 #include <KoTextDocument.h>
 #include <KoTextEditor.h>
 

@@ -23,7 +23,7 @@
 
 #include <ui_ParagraphDecorations.h>
 
-#include <KoParagraphStyle.h>
+#include <KParagraphStyle.h>
 
 class ParagraphDecorations : public QWidget
 {
@@ -33,8 +33,8 @@ public:
     explicit ParagraphDecorations(QWidget* parent = 0);
     ~ParagraphDecorations() {}
 
-    void setDisplay(KoParagraphStyle *style);
-    void save(KoParagraphStyle *style) const;
+    void setDisplay(KParagraphStyle *style);
+    void save(KParagraphStyle *style) const;
 
 signals:
     void backgroundColorChanged(const QColor&);

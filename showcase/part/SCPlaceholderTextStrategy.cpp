@@ -29,7 +29,7 @@
 #include <KOdfStylesReader.h>
 #include <KOdfGenericStyles.h>
 #include <KXmlWriter.h>
-#include <KoParagraphStyle.h>
+#include <KParagraphStyle.h>
 #include <KoShape.h>
 #include <KoShapeLoadingContext.h>
 #include <KoShapeFactoryBase.h>
@@ -110,7 +110,7 @@ void SCPlaceholderTextStrategy::saveOdf(KoShapeSavingContext &context)
             KoStyleManager *styleManager = KoTextDocument(shapeData->document()).styleManager();
             if (styleManager) {
                 QTextBlockFormat bf = shapeData->document()->begin().blockFormat();
-                KoParagraphStyle *ps = styleManager->paragraphStyle(bf.property(KoParagraphStyle::StyleId).toInt());
+                KParagraphStyle *ps = styleManager->paragraphStyle(bf.property(KParagraphStyle::StyleId).toInt());
                 if (ps && ps != styleManager->defaultParagraphStyle())
                     context.xmlWriter().addAttribute("draw:text-style-name", ps->name());
             }
@@ -139,7 +139,7 @@ kDebug();
             const KXmlElement *style = context.odfLoadingContext().stylesReader().findStyle(styleName, "presentation", context.odfLoadingContext().useStylesAutoStyles());
 
             if (style) {
-                KoParagraphStyle paragraphStyle;
+                KParagraphStyle paragraphStyle;
                 paragraphStyle.loadOdf(style, context);
                 paragraphStyle.applyStyle(block, false); // TODO t.zachmann is the false correct?
             }
@@ -148,7 +148,7 @@ kDebug();
         const QString textStyleName = element.attributeNS(KOdfXmlNS::draw, "text-style-name");
 kDebug() << textStyleName;
         if (!textStyleName.isEmpty()) {
-            KoParagraphStyle *style = textSharedData->paragraphStyle(textStyleName, context.odfLoadingContext().useStylesAutoStyles());
+            KParagraphStyle *style = textSharedData->paragraphStyle(textStyleName, context.odfLoadingContext().useStylesAutoStyles());
 kDebug() << style;
             if (style) {
                 style->applyStyle(block, false); // TODO t.zachmann is the false correct?

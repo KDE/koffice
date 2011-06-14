@@ -22,7 +22,7 @@
 
 #include <KoTextBlockData.h>
 #include <KListStyle.h>
-#include <KoParagraphStyle.h>
+#include <KParagraphStyle.h>
 #include <KoTextDocument.h>
 #include <KoList.h>
 
@@ -271,16 +271,16 @@ void ListItemsHelper::recalculate()
         }
         QTextBlockFormat blockFormat = tb.blockFormat();
 
-        if (blockFormat.boolProperty(KoParagraphStyle::UnnumberedListItem)
-            || blockFormat.boolProperty(KoParagraphStyle::IsListHeader)) {
+        if (blockFormat.boolProperty(KParagraphStyle::UnnumberedListItem)
+            || blockFormat.boolProperty(KParagraphStyle::IsListHeader)) {
             data->setCounterText(QString());
             data->setPartialCounterText(QString());
             continue;
         }
 
-        if (blockFormat.boolProperty(KoParagraphStyle::RestartListNumbering))
+        if (blockFormat.boolProperty(KParagraphStyle::RestartListNumbering))
             index = format.intProperty(KListStyle::StartValue);
-        const int paragIndex = blockFormat.intProperty(KoParagraphStyle::ListStartValue);
+        const int paragIndex = blockFormat.intProperty(KParagraphStyle::ListStartValue);
         if (paragIndex > 0)
             index = paragIndex;
 

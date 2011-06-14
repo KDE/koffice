@@ -7,7 +7,7 @@ tabstop.position = 3 * 72; // 1 in = 72 pts
 tabstop.leaderType = KoCharacterStyle.SingleLine;
 tabstop.leaderStyle = KoCharacterStyle.SolidLine;
 tabstop.leaderText = "$";
-setFormatProperty(textBlockFormat, KoParagraphStyle.TabPositions, [tabstop]);
+setFormatProperty(textBlockFormat, KParagraphStyle.TabPositions, [tabstop]);
 cursor.setBlockFormat(textBlockFormat);
 cursor.insertText("this is (tab)\tan example of paragraph with tab stop at 3in, whose leader line text is \"$\".");
 cursor.insertBlock(defaultBlockFormat);
@@ -15,7 +15,7 @@ cursor.insertBlock(defaultBlockFormat);
 tabstop.leaderType = KoCharacterStyle.SingleLine;
 tabstop.leaderStyle = KoCharacterStyle.SolidLine;
 tabstop.leaderText = "@";
-setFormatProperty(textBlockFormat, KoParagraphStyle.TabPositions, [tabstop]);
+setFormatProperty(textBlockFormat, KParagraphStyle.TabPositions, [tabstop]);
 cursor.setBlockFormat(textBlockFormat);
 cursor.insertText("this is (tab)\tan example of paragraph with tab stop at 3in, whose leader line text is \"@\".");
 cursor.insertBlock(defaultBlockFormat);
@@ -23,7 +23,7 @@ cursor.insertBlock(defaultBlockFormat);
 tabstop.leaderType = KoCharacterStyle.SingleLine;
 tabstop.leaderStyle = KoCharacterStyle.SolidLine;
 tabstop.leaderText = "x";
-setFormatProperty(textBlockFormat, KoParagraphStyle.TabPositions, [tabstop]);
+setFormatProperty(textBlockFormat, KParagraphStyle.TabPositions, [tabstop]);
 cursor.setBlockFormat(textBlockFormat);
 cursor.insertText("this is (tab)\tan example of paragraph with tab stop at 3in, whose leader line text is \"x\".");
 

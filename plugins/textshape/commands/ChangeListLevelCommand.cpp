@@ -19,7 +19,7 @@
 
 #include "ChangeListLevelCommand.h"
 
-#include <KoParagraphStyle.h>
+#include <KParagraphStyle.h>
 #include <KoTextBlockData.h>
 #include <KoTextDocument.h>
 #include <KoList.h>

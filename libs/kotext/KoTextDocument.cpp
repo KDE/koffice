@@ -31,7 +31,7 @@
 #include "styles/KoStyleManager.h"
 #include "KInlineTextObjectManager.h"
 #include "KoTextDocumentLayout.h"
-#include "styles/KoParagraphStyle.h"
+#include "styles/KParagraphStyle.h"
 #include "changetracker/KoChangeTracker.h"
 #include "KoList.h"
 #include <KUndoStack>

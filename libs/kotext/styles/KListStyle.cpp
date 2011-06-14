@@ -22,7 +22,7 @@
 #include "KListStyle.h"
 #include "KListLevelProperties.h"
 #include "KoTextBlockData.h"
-#include "KoParagraphStyle.h"
+#include "KParagraphStyle.h"
 #include "KoList.h"
 
 #include <KOdfStyleStack.h>
