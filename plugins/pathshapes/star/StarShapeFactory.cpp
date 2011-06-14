@@ -21,7 +21,7 @@
 #include "star/StarShape.h"
 #include "star/StarShapeConfigWidget.h"
 
-#include <KoShapeFactoryBase.h>
+#include <KShapeFactoryBase.h>
 #include <KLineBorder.h>
 #include <KProperties.h>
 #include <KOdfXmlNS.h>
@@ -32,7 +32,7 @@
 #include <klocale.h>
 
 StarShapeFactory::StarShapeFactory(QObject *parent)
-    : KoShapeFactoryBase(parent, StarShapeId, i18n("A star shape"))
+    : KShapeFactoryBase(parent, StarShapeId, i18n("A star shape"))
 {
     setToolTip(i18n("A star"));
     setIcon("star");

@@ -88,7 +88,7 @@ void PathToolOptionWidget::setSelectedPath(KPathShape *path)
     setShapePropertiesWidget(0);
     if (path == 0)
         return;
-    KoShapeFactoryBase *factory = KoShapeRegistry::instance()->value(path->pathShapeId());
+    KShapeFactoryBase *factory = KoShapeRegistry::instance()->value(path->pathShapeId());
     if (factory) {
         KShapeConfigWidgetBase *w = factory->createConfigWidget(m_tool->canvas());
         setShapePropertiesWidget(w);

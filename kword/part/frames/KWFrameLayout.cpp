@@ -29,7 +29,7 @@
 #include "KWPageBackground.h"
 
 #include <KoShapeRegistry.h>
-#include <KoShapeFactoryBase.h>
+#include <KShapeFactoryBase.h>
 
 #include <QTextLayout>
 #include <QTextDocument>
@@ -625,7 +625,7 @@ void KWFrameLayout::setup()
 KShape *KWFrameLayout::createTextShape(const KWPage &page)
 {
     Q_ASSERT(page.isValid());
-    KoShapeFactoryBase *factory = KoShapeRegistry::instance()->value(TextShape_SHAPEID);
+    KShapeFactoryBase *factory = KoShapeRegistry::instance()->value(TextShape_SHAPEID);
     Q_ASSERT(factory);
     KResourceManager *rm = 0;
     if (m_document)

@@ -58,7 +58,7 @@ struct FLAKE_EXPORT KoShapeTemplate {
     QString toolTip;    ///< The tooltip text for the template
     QString icon;       ///< Icon name
     /**
-     * The properties which, when passed to the KoShapeFactoryBase::createShape() method
+     * The properties which, when passed to the KShapeFactoryBase::createShape() method
      * result in the shape this template represents.
      */
     KProperties *properties;
@@ -72,10 +72,10 @@ struct FLAKE_EXPORT KoShapeTemplate {
  *
  * An example usage would be:
 @code
-class MyShapeFactory : public KoShapeFactoryBase {
+class MyShapeFactory : public KShapeFactoryBase {
 public:
     MyShapeFactory(QObject *parent)
-        : KoShapeFactoryBase(parent, "MyShape", i18n("My Shape")) {
+        : KShapeFactoryBase(parent, "MyShape", i18n("My Shape")) {
         setToolTip(i18n("A nice shape"));
     }
     ~MyShapeFactory() {}
@@ -86,7 +86,7 @@ public:
  * After you created the factory you should create a plugin that can announce the factory to the
  * KoShapeRegistry.  See the KoPluginLoader as well.
  */
-class FLAKE_EXPORT KoShapeFactoryBase : public QObject
+class FLAKE_EXPORT KShapeFactoryBase : public QObject
 {
     Q_OBJECT
 public:
@@ -98,8 +98,8 @@ public:
      *   shape. See KoToolFactoryBase::activationShapeId()
      * @param name the user visible name of the shape this factory creates.
      */
-    KoShapeFactoryBase(QObject *parent, const QString &id, const QString &name);
-    virtual ~KoShapeFactoryBase();
+    KShapeFactoryBase(QObject *parent, const QString &id, const QString &name);
+    virtual ~KShapeFactoryBase();
 
     virtual KShapeConfigWidgetBase *createConfigWidget(KCanvasBase *canvas) {
         Q_UNUSED(canvas);

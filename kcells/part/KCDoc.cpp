@@ -63,7 +63,7 @@
 #include <KOdfStoreReader.h>
 #include <KOdfWriteStore.h>
 #include <KResourceManager.h>
-#include <KoShapeFactoryBase.h>
+#include <KShapeFactoryBase.h>
 #include <KoShapeManager.h>
 #include <KoShapeRegistry.h>
 #include <KOdfStorageDevice.h>

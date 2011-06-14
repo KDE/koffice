@@ -29,7 +29,7 @@
 #include "commands/KShapeDeleteCommand.h"
 #include "KCanvasBase.h"
 #include "KShapeConfigWidgetBase.h"
-#include "KoShapeFactoryBase.h"
+#include "KShapeFactoryBase.h"
 #include "KShape.h"
 #include "KoShapeRegistry.h"
 
@@ -105,7 +105,7 @@ KResourceManager *KShapeController::resourceManager() const
             d->dummyRm = new KResourceManager();
             KoShapeRegistry *registry = KoShapeRegistry::instance();
             foreach (const QString &id, registry->keys()) {
-                KoShapeFactoryBase *shapeFactory = registry->value(id);
+                KShapeFactoryBase *shapeFactory = registry->value(id);
                 shapeFactory->newDocumentResourceManager(d->dummyRm);
             }
         }

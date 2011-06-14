@@ -25,7 +25,7 @@
 #include <KImageCollection.h>
 #include <KImageData.h>
 #include <KShape.h>
-#include <KoShapeFactoryBase.h>
+#include <KShapeFactoryBase.h>
 #include <KoShapeLayer.h>
 #include <KoShapeRegistry.h>
 #include <KoShapeSavingContext.h>
@@ -67,7 +67,7 @@ SCNotes::SCNotes(SCPage *page, SCDocument * document)
     addShape(layer);
 
     // All sizes and positions are hardcoded for now
-    KoShapeFactoryBase *factory = KoShapeRegistry::instance()->value("TextShapeID");
+    KShapeFactoryBase *factory = KoShapeRegistry::instance()->value("TextShapeID");
     Q_ASSERT(factory);
     m_textShape = factory->createDefaultShape(m_doc->resourceManager());
     m_textShape->setGeometryProtected(true);

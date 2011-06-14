@@ -20,9 +20,9 @@
 #ifndef PICTURESHAPEFACTORY_H
 #define PICTURESHAPEFACTORY_H
 
-#include <KoShapeFactoryBase.h>
+#include <KShapeFactoryBase.h>
 
-class PictureShapeFactory : public KoShapeFactoryBase
+class PictureShapeFactory : public KShapeFactoryBase
 {
     Q_OBJECT
 public:

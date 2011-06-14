@@ -34,7 +34,7 @@
 #include <math.h>
 
 EnhancedPathShapeFactory::EnhancedPathShapeFactory(QObject *parent)
-    : KoShapeFactoryBase(parent, EnhancedPathShapeId, i18n("An enhanced path shape"))
+    : KShapeFactoryBase(parent, EnhancedPathShapeId, i18n("An enhanced path shape"))
 {
     setToolTip(i18n("An enhanced path"));
     setIcon("enhancedpath");

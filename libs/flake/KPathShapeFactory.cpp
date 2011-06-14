@@ -29,7 +29,7 @@
 #include <KOdfXmlNS.h>
 
 KPathShapeFactory::KPathShapeFactory(QObject *parent, const QStringList&)
-        : KoShapeFactoryBase(parent, KoPathShapeId, i18n("Simple path shape"))
+        : KShapeFactoryBase(parent, KoPathShapeId, i18n("Simple path shape"))
 {
     setToolTip(i18n("A simple path shape"));
     setIcon("pathshape");

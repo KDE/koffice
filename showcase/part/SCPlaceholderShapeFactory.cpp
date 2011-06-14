@@ -29,7 +29,7 @@
 #include <kdebug.h>
 
 SCPlaceholderShapeFactory::SCPlaceholderShapeFactory(QObject *parent)
-: KoShapeFactoryBase(parent, SCPlaceholderShapeId, i18n("Placeholder shape"))
+: KShapeFactoryBase(parent, SCPlaceholderShapeId, i18n("Placeholder shape"))
 {
     QStringList elementNames;
     elementNames << "text-box" << "object" << "image";

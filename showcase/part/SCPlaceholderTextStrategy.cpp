@@ -32,7 +32,7 @@
 #include <KParagraphStyle.h>
 #include <KShape.h>
 #include <KoShapeLoadingContext.h>
-#include <KoShapeFactoryBase.h>
+#include <KShapeFactoryBase.h>
 #include <KoShapeRegistry.h>
 #include <KoShapeSavingContext.h>
 #include <KoTextShapeData.h>
@@ -123,7 +123,7 @@ bool SCPlaceholderTextStrategy::loadOdf(const KXmlElement &element, KoShapeLoadi
 {
 kDebug();
     if (KoTextSharedLoadingData *textSharedData = dynamic_cast<KoTextSharedLoadingData *>(context.sharedData(KOTEXT_SHARED_LOADING_ID))) {
-        KoShapeFactoryBase *factory = KoShapeRegistry::instance()->value("TextShapeID");
+        KShapeFactoryBase *factory = KoShapeRegistry::instance()->value("TextShapeID");
         Q_ASSERT(factory);
         m_textShape = factory->createDefaultShape(context.documentResourceManager());
 
@@ -164,7 +164,7 @@ kDebug() << style;
 
 void SCPlaceholderTextStrategy::init(KResourceManager *documentResources)
 {
-    KoShapeFactoryBase *factory = KoShapeRegistry::instance()->value("TextShapeID");
+    KShapeFactoryBase *factory = KoShapeRegistry::instance()->value("TextShapeID");
     Q_ASSERT(factory);
     KProperties props;
     props.setProperty("text", text());

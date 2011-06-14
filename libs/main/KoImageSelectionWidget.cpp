@@ -22,7 +22,7 @@
 
 #include <KImageData.h>
 #include <KImageCollection.h>
-#include <KoShapeFactoryBase.h>
+#include <KShapeFactoryBase.h>
 #include <KoShapeRegistry.h>
 #include <KResourceManager.h>
 #include <KShape.h>
@@ -195,7 +195,7 @@ KShape *KoImageSelectionWidget::selectImageShape(KResourceManager *documentResou
 {
     if (!documentResources || !documentResources->imageCollection())
         return 0;
-    KoShapeFactoryBase *factory = KoShapeRegistry::instance()->value("PictureShape");
+    KShapeFactoryBase *factory = KoShapeRegistry::instance()->value("PictureShape");
     if (!factory) {
         kWarning(30003) << "No picture shape found, installation problem";
         return 0;

@@ -52,7 +52,7 @@
 #include <KOdfWriteStore.h>
 #include <KoToolManager.h>
 #include <KoShapeRegistry.h>
-#include <KoShapeFactoryBase.h>
+#include <KShapeFactoryBase.h>
 #include <KoStyleManager.h>
 #include <KResourceManager.h>
 #include <KInteractionTool.h>

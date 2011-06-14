@@ -61,7 +61,7 @@
  * to allow themselves to be manipulated by the tools. The content of such a
  * shape is independent and based on the model of the data this object represents.
  *
- * If you want to be a supplier of shape objects; create a library with a KoShapeFactoryBase
+ * If you want to be a supplier of shape objects; create a library with a KShapeFactoryBase
  * class and install a .desktop service file with the following content:
  *
 @verbatim

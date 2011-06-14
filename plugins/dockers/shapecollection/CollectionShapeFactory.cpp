@@ -37,7 +37,7 @@
 #include <QBuffer>
 
 CollectionShapeFactory::CollectionShapeFactory(QObject *parent, const QString &id, KShape* shape)
-    : KoShapeFactoryBase(parent, id, shape->name()), m_shape(shape)
+    : KShapeFactoryBase(parent, id, shape->name()), m_shape(shape)
 {
 }
 

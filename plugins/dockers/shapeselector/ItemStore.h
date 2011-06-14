@@ -36,7 +36,7 @@ class Canvas;
  * For every Canvas there is an ItemStore, the itemStore is holding all
  * the data that is shown on the Canvas.
  * This class will load all information from the user preferences and
- * find all the KoShapeFactoryBase objects on the users system to display
+ * find all the KShapeFactoryBase objects on the users system to display
  * in folders.
  *
  * The ItemStore has two modes in which it operates, it either has exactly

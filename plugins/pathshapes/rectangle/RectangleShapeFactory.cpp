@@ -29,7 +29,7 @@
 #include <klocale.h>
 
 RectangleShapeFactory::RectangleShapeFactory(QObject *parent)
-: KoShapeFactoryBase(parent, RectangleShapeId, i18n("Rectangle"))
+: KShapeFactoryBase(parent, RectangleShapeId, i18n("Rectangle"))
 {
     setToolTip(i18n("A rectangle"));
     setIcon("rectangle-shape");

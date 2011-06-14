@@ -20,12 +20,12 @@
 #ifndef KOELLIPSESHAPEFACTORY_H
 #define KOELLIPSESHAPEFACTORY_H
 
-#include "KoShapeFactoryBase.h"
+#include "KShapeFactoryBase.h"
 
 class KShape;
 
 /// Factory for ellipse shapes
-class EllipseShapeFactory : public KoShapeFactoryBase
+class EllipseShapeFactory : public KShapeFactoryBase
 {
 public:
     /// constructor

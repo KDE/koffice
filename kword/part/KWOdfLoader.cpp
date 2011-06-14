@@ -36,7 +36,7 @@
 #include <KXmlReader.h>
 #include <KOdfXmlNS.h>
 #include <KoShapeRegistry.h>
-#include <KoShapeFactoryBase.h>
+#include <KShapeFactoryBase.h>
 #include <KoTextShapeData.h>
 #include <KoShapeLoadingContext.h>
 #include <KoStyleManager.h>

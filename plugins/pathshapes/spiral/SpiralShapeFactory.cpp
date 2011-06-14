@@ -28,7 +28,7 @@
 
 
 SpiralShapeFactory::SpiralShapeFactory(QObject *parent)
-: KoShapeFactoryBase(parent, SpiralShapeId, i18n("Spiral"))
+: KShapeFactoryBase(parent, SpiralShapeId, i18n("Spiral"))
 {
     setToolTip(i18n("A spiral shape"));
     setIcon("spiral-shape");

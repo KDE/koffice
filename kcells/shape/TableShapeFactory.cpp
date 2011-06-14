@@ -52,7 +52,7 @@ TableShapePlugin::TableShapePlugin(QObject * parent, const QVariantList&)
 
 
 TableShapeFactory::TableShapeFactory(QObject* parent)
-        : KoShapeFactoryBase(parent, TableShapeId, i18n("Table"))
+        : KShapeFactoryBase(parent, TableShapeId, i18n("Table"))
 {
     setToolTip(i18n("Table Shape"));
     setIcon("spreadsheetshape");

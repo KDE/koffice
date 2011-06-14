@@ -20,12 +20,12 @@
 #ifndef KORECTANGLESHAPEFACTORY_H
 #define KORECTANGLESHAPEFACTORY_H
 
-#include "KoShapeFactoryBase.h"
+#include "KShapeFactoryBase.h"
 
 class KShape;
 
 /// Factory for path shapes
-class RectangleShapeFactory : public KoShapeFactoryBase
+class RectangleShapeFactory : public KShapeFactoryBase
 {
 public:
     /// constructor

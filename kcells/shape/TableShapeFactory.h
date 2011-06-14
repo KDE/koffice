@@ -23,7 +23,7 @@
 
 #include <QVariantList>
 
-#include <KoShapeFactoryBase.h>
+#include <KShapeFactoryBase.h>
 
 class KShape;
 
@@ -36,7 +36,7 @@ public:
     ~TableShapePlugin() {}
 };
 
-class TableShapeFactory : public KoShapeFactoryBase
+class TableShapeFactory : public KShapeFactoryBase
 {
     Q_OBJECT
 public:

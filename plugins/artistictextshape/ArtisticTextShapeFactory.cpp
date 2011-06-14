@@ -28,7 +28,7 @@
 #include <klocale.h>
 
 ArtisticTextShapeFactory::ArtisticTextShapeFactory(QObject *parent)
-    : KoShapeFactoryBase(parent, ArtisticTextShapeID, i18n("ArtisticTextShape"))
+    : KShapeFactoryBase(parent, ArtisticTextShapeID, i18n("ArtisticTextShape"))
 {
     setToolTip(i18n("A shape which shows a single text line"));
     setIcon( "text" );

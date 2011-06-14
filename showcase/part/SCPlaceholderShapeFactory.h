@@ -20,9 +20,9 @@
 #ifndef KPRPLACEHOLDERSHAPEFACTORY_H
 #define KPRPLACEHOLDERSHAPEFACTORY_H
 
-#include "KoShapeFactoryBase.h"
+#include "KShapeFactoryBase.h"
 
-class SCPlaceholderShapeFactory : public KoShapeFactoryBase
+class SCPlaceholderShapeFactory : public KShapeFactoryBase
 {
 public:
     explicit SCPlaceholderShapeFactory(QObject *parent);

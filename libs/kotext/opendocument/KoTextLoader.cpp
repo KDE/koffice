@@ -36,7 +36,7 @@
 #include <KOdfStylesReader.h>
 #include <KProperties.h>
 #include <KShapeContainer.h>
-#include <KoShapeFactoryBase.h>
+#include <KShapeFactoryBase.h>
 #include <KoShapeLoadingContext.h>
 #include <KoShapeRegistry.h>
 #include <KoTableColumnAndRowStyleManager.h>

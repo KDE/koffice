@@ -30,7 +30,7 @@
 
 
 EllipseShapeFactory::EllipseShapeFactory(QObject *parent)
-    : KoShapeFactoryBase(parent, EllipseShapeId, i18n("Ellipse"))
+    : KShapeFactoryBase(parent, EllipseShapeId, i18n("Ellipse"))
 {
     setToolTip(i18n( "An ellipse"));
     setIcon("ellipse-shape");

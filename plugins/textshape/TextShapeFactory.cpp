@@ -39,7 +39,7 @@
 #include <QTextCursor>
 
 TextShapeFactory::TextShapeFactory(QObject *parent)
-        : KoShapeFactoryBase(parent, TextShape_SHAPEID, i18n("Text"))
+        : KShapeFactoryBase(parent, TextShape_SHAPEID, i18n("Text"))
 {
     setToolTip(i18n("A shape that shows text"));
     QList<QPair<QString, QStringList> > odfElements;

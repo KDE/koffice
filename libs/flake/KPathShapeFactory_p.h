@@ -34,12 +34,12 @@
 
 
 #include "KShape.h"
-#include "KoShapeFactoryBase.h"
+#include "KShapeFactoryBase.h"
 
 #include "KXmlReader.h"
 
 /// Factory for path shapes.
-class FLAKE_TEST_EXPORT KPathShapeFactory : public KoShapeFactoryBase
+class FLAKE_TEST_EXPORT KPathShapeFactory : public KShapeFactoryBase
 {
 public:
     /// constructor

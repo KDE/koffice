@@ -20,13 +20,13 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoShapeFactoryBase.h"
+#include "KShapeFactoryBase.h"
 #include "KShape.h"
 #include <KProperties.h>
 
 #include <kdebug.h>
 
-class KoShapeFactoryBase::Private
+class KShapeFactoryBase::Private
 {
 public:
     Private(const QString &i, const QString &n)
@@ -55,113 +55,113 @@ public:
 };
 
 
-KoShapeFactoryBase::KoShapeFactoryBase(QObject *parent, const QString &id, const QString &name)
+KShapeFactoryBase::KShapeFactoryBase(QObject *parent, const QString &id, const QString &name)
         : QObject(parent),
         d(new Private(id, name))
 {
 }
 
-KoShapeFactoryBase::~KoShapeFactoryBase()
+KShapeFactoryBase::~KShapeFactoryBase()
 {
     delete d;
 }
 
-QString KoShapeFactoryBase::toolTip() const
+QString KShapeFactoryBase::toolTip() const
 {
     return d->tooltip;
 }
 
-QString KoShapeFactoryBase::icon() const
+QString KShapeFactoryBase::icon() const
 {
     return d->iconName;
 }
 
-QString KoShapeFactoryBase::name() const
+QString KShapeFactoryBase::name() const
 {
     return d->name;
 }
 
-QString KoShapeFactoryBase::family() const
+QString KShapeFactoryBase::family() const
 {
     return d->family;
 }
 
-int KoShapeFactoryBase::loadingPriority() const
+int KShapeFactoryBase::loadingPriority() const
 {
     return d->loadingPriority;
 }
 
-QList<QPair<QString, QStringList> > KoShapeFactoryBase::odfElements() const
+QList<QPair<QString, QStringList> > KShapeFactoryBase::odfElements() const
 {
     return d->odfElements;
 }
 
-void KoShapeFactoryBase::addTemplate(const KoShapeTemplate &params)
+void KShapeFactoryBase::addTemplate(const KoShapeTemplate &params)
 {
     KoShapeTemplate tmplate = params;
     tmplate.id = d->id;
     d->templates.append(tmplate);
 }
 
-void KoShapeFactoryBase::setToolTip(const QString & tooltip)
+void KShapeFactoryBase::setToolTip(const QString & tooltip)
 {
     d->tooltip = tooltip;
 }
 
-void KoShapeFactoryBase::setIcon(const QString & iconName)
+void KShapeFactoryBase::setIcon(const QString & iconName)
 {
     d->iconName = iconName;
 }
 
-void KoShapeFactoryBase::setFamily(const QString & family)
+void KShapeFactoryBase::setFamily(const QString & family)
 {
     d->family = family;
 }
 
-QString KoShapeFactoryBase::id() const
+QString KShapeFactoryBase::id() const
 {
     return d->id;
 }
 
-QList<KoShapeTemplate> KoShapeFactoryBase::templates() const
+QList<KoShapeTemplate> KShapeFactoryBase::templates() const
 {
     return d->templates;
 }
 
-void KoShapeFactoryBase::setLoadingPriority(int priority)
+void KShapeFactoryBase::setLoadingPriority(int priority)
 {
     d->loadingPriority = priority;
 }
 
-void KoShapeFactoryBase::setOdfElementNames(const QString & nameSpace, const QStringList & names)
+void KShapeFactoryBase::setOdfElementNames(const QString & nameSpace, const QStringList & names)
 {
     d->odfElements.clear();
     d->odfElements.append(QPair<QString, QStringList>(nameSpace, names));
 }
 
-void KoShapeFactoryBase::setOdfElements(const QList<QPair<QString, QStringList> > &elementNamesList)
+void KShapeFactoryBase::setOdfElements(const QList<QPair<QString, QStringList> > &elementNamesList)
 {
     d->odfElements = elementNamesList;
 }
 
-bool KoShapeFactoryBase::isHidden() const
+bool KShapeFactoryBase::isHidden() const
 {
     return d->hidden;
 }
 
-void KoShapeFactoryBase::setHidden(bool hidden)
+void KShapeFactoryBase::setHidden(bool hidden)
 {
     d->hidden = hidden;
 }
 
-void KoShapeFactoryBase::newDocumentResourceManager(KResourceManager *manager)
+void KShapeFactoryBase::newDocumentResourceManager(KResourceManager *manager)
 {
     Q_UNUSED(manager);
 }
 
-KShape *KoShapeFactoryBase::createShape(const KProperties*, KResourceManager *documentResources) const
+KShape *KShapeFactoryBase::createShape(const KProperties*, KResourceManager *documentResources) const
 {
     return createDefaultShape(documentResources);
 }
 
-#include <KoShapeFactoryBase.moc>
+#include <KShapeFactoryBase.moc>

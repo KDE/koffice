@@ -356,7 +356,7 @@ void SCDocument::showStartUpWidget(KoMainWindow * parent, bool alwaysShow)
 {
     // Go through all (optional) plugins we require and quit if necessary
     bool error = false;
-    KoShapeFactoryBase * factory;
+    KShapeFactoryBase * factory;
 
     // TODO: Uncomment i18n calls after release of 2.3
     factory = KoShapeRegistry::instance()->value("TextShapeID");

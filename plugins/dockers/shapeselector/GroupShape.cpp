@@ -19,12 +19,12 @@
 
 #include "GroupShape.h"
 
-#include <KoShapeFactoryBase.h>
+#include <KShapeFactoryBase.h>
 #include <KCreateShapesTool.h>
 
 #include <QDomElement>
 
-GroupShape::GroupShape(KoShapeFactoryBase *shapeFactory)
+GroupShape::GroupShape(KShapeFactoryBase *shapeFactory)
     : IconShape(shapeFactory->icon())
 {
     m_shapeFactory = shapeFactory;

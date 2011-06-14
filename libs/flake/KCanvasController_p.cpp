@@ -23,7 +23,7 @@
 #include "KCanvasController_p.h"
 #include "KShape.h"
 #include "KShape_p.h"
-#include "KoShapeFactoryBase.h" // for the SHAPE mimetypes
+#include "KShapeFactoryBase.h" // for the SHAPE mimetypes
 #include "KoShapeRegistry.h"
 #include "KShapeController.h"
 #include "KoShapeManager.h"
@@ -132,7 +132,7 @@ void Viewport::handleDragEnterEvent(QDragEnterEvent *event)
 
         // The rest of this method is mostly a copy paste from the KCreateShapeStrategy
         // So, lets remove this again when Zagge adds his new class that does this kind of thing. (KoLoadSave)
-        KoShapeFactoryBase *factory = KoShapeRegistry::instance()->value(id);
+        KShapeFactoryBase *factory = KoShapeRegistry::instance()->value(id);
         if (! factory) {
             kWarning(30006) << "Application requested a shape that is not registered '" <<
             id << "', Ignoring";

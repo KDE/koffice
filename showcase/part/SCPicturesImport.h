@@ -23,7 +23,7 @@
 #include <QObject>
 #include <KUrl>
 
-class KoShapeFactoryBase;
+class KShapeFactoryBase;
 class KoPAPageBase;
 class KoPAMasterPage;
 class SCDocument;
@@ -49,7 +49,7 @@ private:
     KUrl::List m_urls;
     KoPAPageBase *m_currentPage;
     KoPAMasterPage *m_masterPage;
-    KoShapeFactoryBase *m_factory;
+    KShapeFactoryBase *m_factory;
     QUndoCommand *m_cmd;
 };
 

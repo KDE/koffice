@@ -23,7 +23,7 @@
 #include "OdfCollectionLoader.h"
 #include "CollectionShapeFactory.h"
 
-#include <KoShapeFactoryBase.h>
+#include <KShapeFactoryBase.h>
 #include <KoShapeRegistry.h>
 #include <KCanvasController.h>
 #include <KoToolManager.h>
@@ -226,7 +226,7 @@ void ShapeCollectionDocker::loadDefaultShapes()
     quickShapes = cfg.readEntry("QuickShapes", quickShapes);
 
     foreach(const QString & id, KoShapeRegistry::instance()->keys()) {
-        KoShapeFactoryBase *factory = KoShapeRegistry::instance()->value(id);
+        KShapeFactoryBase *factory = KoShapeRegistry::instance()->value(id);
         // don't show hidden factories
         if (factory->isHidden()) {
             continue;
@@ -537,7 +537,7 @@ void ShapeCollectionDocker::removeCollection(const QString& id)
         QList<KoCollectionItem> list = model->shapeTemplateList();
         foreach(const KoCollectionItem & temp, list)
         {
-            KoShapeFactoryBase* factory = KoShapeRegistry::instance()->get(temp.id);
+            KShapeFactoryBase* factory = KoShapeRegistry::instance()->get(temp.id);
             KoShapeRegistry::instance()->remove(temp.id);
             delete factory;
         }

@@ -19,7 +19,7 @@
 
 #include "SCPicturesImport.h"
 
-#include <KoShapeFactoryBase.h>
+#include <KShapeFactoryBase.h>
 #include <KoShapeRegistry.h>
 #include <KoShapeLayer.h>
 #include <KImageData.h>

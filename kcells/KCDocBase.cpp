@@ -70,7 +70,7 @@ KCDocBase::KCDocBase(QWidget *parentWidget, QObject* parent, bool singleViewMode
 
     KoShapeRegistry *registry = KoShapeRegistry::instance();
     foreach (const QString &id, registry->keys()) {
-        KoShapeFactoryBase *shapeFactory = registry->value(id);
+        KShapeFactoryBase *shapeFactory = registry->value(id);
         shapeFactory->newDocumentResourceManager(d->resourceManager);
     }
 

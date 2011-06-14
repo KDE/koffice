@@ -19,11 +19,11 @@
 #ifndef KOCOLLECTIONSHAPEFACTORY_H
 #define KOCOLLECTIONSHAPEFACTORY_H
 
-#include <KoShapeFactoryBase.h>
+#include <KShapeFactoryBase.h>
 
 class KShapeControllerBase;
 
-class CollectionShapeFactory : public KoShapeFactoryBase
+class CollectionShapeFactory : public KShapeFactoryBase
 {
     Q_OBJECT
     public:

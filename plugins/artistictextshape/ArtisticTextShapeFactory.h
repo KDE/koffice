@@ -20,11 +20,11 @@
 #ifndef ARTISTICTEXTSHAPEFACTORY_H
 #define ARTISTICTEXTSHAPEFACTORY_H
 
-#include <KoShapeFactoryBase.h>
+#include <KShapeFactoryBase.h>
 
 class KShape;
 
-class ArtisticTextShapeFactory : public KoShapeFactoryBase
+class ArtisticTextShapeFactory : public KShapeFactoryBase
 {
     Q_OBJECT
 
@@ -33,7 +33,7 @@ public:
     ~ArtisticTextShapeFactory() {}
 
     virtual KShape *createDefaultShape(KResourceManager *documentResources = 0) const;
-    // reimplemented from KoShapeFactoryBase
+    // reimplemented from KShapeFactoryBase
     virtual bool supports(const KXmlElement & e, KoShapeLoadingContext &context) const;
 };
 
