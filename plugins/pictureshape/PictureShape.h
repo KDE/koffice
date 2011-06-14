@@ -22,14 +22,14 @@
 
 #include <QPixmap>
 #include <KoShape.h>
-#include <KoFrameShape.h>
+#include <KFrameShape.h>
 
 #define PICTURESHAPEID "PictureShape"
 
 class KoImageCollection;
 class RenderQueue;
 
-class PictureShape : public KoShape, public KoFrameShape
+class PictureShape : public KoShape, public KFrameShape
 {
 public:
     enum PictureMode {

@@ -51,7 +51,7 @@ class KXmlElement;
  * }
  * @endcode
  */
-class FLAKE_EXPORT KoFrameShape
+class FLAKE_EXPORT KFrameShape
 {
 public:
 
@@ -61,12 +61,12 @@ public:
     * \param xmlNamespace The namespace. E.g. KOdfXmlNS::draw
     * \param tag The element tag-name. E.g. "image"
     */
-    KoFrameShape(const QString &xmlNamespace, const QString &tag);
+    KFrameShape(const QString &xmlNamespace, const QString &tag);
 
     /**
     * Destructor.
     */
-    virtual ~KoFrameShape();
+    virtual ~KFrameShape();
 
     /**
     * Loads the content of the draw:frame element and it's children. This

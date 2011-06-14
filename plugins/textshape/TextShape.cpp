@@ -82,7 +82,7 @@ struct Finalizer {
 
 TextShape::TextShape()
     : KoShapeContainer(new KoTextShapeContainerModel()),
-    KoFrameShape(KOdfXmlNS::draw, "text-box"),
+    KFrameShape(KOdfXmlNS::draw, "text-box"),
     m_footnotes(0),
     m_demoText(false),
     m_pageProvider(0),
@@ -415,7 +415,7 @@ bool TextShape::loadOdf(const KXmlElement &element, KoShapeLoadingContext &conte
 bool TextShape::loadOdfFrame(const KXmlElement &element, KoShapeLoadingContext &context)
 {
     // if the loadOdfFrame from the base class for draw:text-box failes check for table:table
-    if (!KoFrameShape::loadOdfFrame(element, context)) {
+    if (!KFrameShape::loadOdfFrame(element, context)) {
         const KXmlElement &frameElement(KoXml::namedItemNS(element, KOdfXmlNS::table, "table"));
         if (frameElement.isNull()) {
             return false;

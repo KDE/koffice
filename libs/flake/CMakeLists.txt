@@ -41,7 +41,7 @@ set(flake_SRCS
     KoShapeManagerPaintingStrategy.cpp
     KoShapeManager.cpp
     KoShapePainter.cpp
-    KoFrameShape.cpp
+    KFrameShape.cpp
     KoToolBase.cpp
     KoCanvasController.cpp
     KoCanvasController_p.cpp
@@ -256,7 +256,7 @@ install(
     KFilterEffectRenderContext.h
     KFilterEffectStack.h
     KoFlake.h
-    KoFrameShape.h
+    KFrameShape.h
     KoGradientBackground.h
     KoGuidesData.h
     KoImageCollection.h

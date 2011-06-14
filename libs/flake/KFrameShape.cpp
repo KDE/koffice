@@ -17,12 +17,12 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KoFrameShape.h"
+#include "KFrameShape.h"
 
 #include <KXmlReader.h>
 #include <kdebug.h>
 
-class KoFrameShape::Private
+class KFrameShape::Private
 {
 public:
     Private(const QString &ns, const QString &tag)
@@ -33,17 +33,17 @@ public:
     const QString tag;
 };
 
-KoFrameShape::KoFrameShape(const QString &ns, const QString &tag)
+KFrameShape::KFrameShape(const QString &ns, const QString &tag)
         : d(new Private(ns, tag))
 {
 }
 
-KoFrameShape::~KoFrameShape()
+KFrameShape::~KFrameShape()
 {
     delete d;
 }
 
-bool KoFrameShape::loadOdfFrame(const KXmlElement &element, KoShapeLoadingContext &context)
+bool KFrameShape::loadOdfFrame(const KXmlElement &element, KoShapeLoadingContext &context)
 {
     const KXmlElement &frameElement(KoXml::namedItemNS(element, d->ns, d->tag));
     if (frameElement.isNull()) {

@@ -73,7 +73,7 @@ void RenderQueue::updateShape()
 
 //////////////
 PictureShape::PictureShape()
-    : KoFrameShape(KOdfXmlNS::draw, "image"),
+    : KFrameShape(KOdfXmlNS::draw, "image"),
     m_imageCollection(0),
     m_renderQueue(new RenderQueue(this)),
     m_mode(Standard)
