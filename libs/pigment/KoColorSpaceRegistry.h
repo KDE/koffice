@@ -26,7 +26,7 @@
 #include <QtCore/QString>
 #include "pigment_export.h"
 
-#include <KoGenericRegistry.h>
+#include <KGenericRegistry.h>
 #include <KoColorSpace.h>
 #include <KoColorSpaceFactory.h>
 

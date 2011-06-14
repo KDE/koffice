@@ -49,7 +49,7 @@
 #include "KoColorSpace_p.h"
 
 struct KoColorSpaceRegistry::Private {
-    KoGenericRegistry<KoColorSpaceFactory *> colorsSpaceFactoryRegistry;
+    KGenericRegistry<KoColorSpaceFactory *> colorsSpaceFactoryRegistry;
     QHash<QString, KoColorProfile * > profileMap;
     QHash<QString, QString> profileAlias;
     QHash<QString, const KoColorSpace * > csMap;

@@ -21,7 +21,7 @@
 #define _KO_COLOR_SPACE_ENGINE_H_
 
 #include <KoColorConversionTransformationAbstractFactory.h>
-#include <KoGenericRegistry.h>
+#include <KGenericRegistry.h>
 
 /**
  * A KoColorSpaceEngine is a class use to create color conversion
@@ -48,7 +48,7 @@ private:
     Private* const d;
 };
 
-class PIGMENTCMS_EXPORT KoColorSpaceEngineRegistry : public KoGenericRegistry< KoColorSpaceEngine* >
+class PIGMENTCMS_EXPORT KoColorSpaceEngineRegistry : public KGenericRegistry< KoColorSpaceEngine* >
 {
 public:
     KoColorSpaceEngineRegistry();

@@ -20,7 +20,7 @@
 #ifndef KOTEXTEDITINGREGISTRY_H
 #define KOTEXTEDITINGREGISTRY_H
 
-#include <KoGenericRegistry.h>
+#include <KGenericRegistry.h>
 #include <KoTextEditingFactory.h>
 #include <QObject>
 
@@ -34,7 +34,7 @@
  * @see KoTextEditingFactory
  * @see KoTextEditingPlugin
  */
-class KOTEXT_EXPORT KoTextEditingRegistry : public QObject,  public KoGenericRegistry<KoTextEditingFactory*>
+class KOTEXT_EXPORT KoTextEditingRegistry : public QObject,  public KGenericRegistry<KoTextEditingFactory*>
 {
     Q_OBJECT
 public:

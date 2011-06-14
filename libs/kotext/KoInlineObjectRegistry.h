@@ -19,7 +19,7 @@
 #ifndef KOINLINEOBJECTREGISTRY_H
 #define KOINLINEOBJECTREGISTRY_H
 
-#include <KoGenericRegistry.h>
+#include <KGenericRegistry.h>
 #include <KoInlineObjectFactoryBase.h>
 #include "kotext_export.h"
 #include <QObject>
@@ -38,7 +38,7 @@ class KoShapeLoadingContext;
  * @see KoInlineObject
  * @see KoVariable
  */
-class KOTEXT_EXPORT KoInlineObjectRegistry : public QObject,  public KoGenericRegistry<KoInlineObjectFactoryBase*>
+class KOTEXT_EXPORT KoInlineObjectRegistry : public QObject,  public KGenericRegistry<KoInlineObjectFactoryBase*>
 {
     Q_OBJECT
 public:

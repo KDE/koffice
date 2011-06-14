@@ -72,7 +72,7 @@ public:
     bool isRemovable();
 
     /**
-     * Returns the identifier (if defined). KCFunction of the KoGenericRegistry
+     * Returns the identifier (if defined). KCFunction of the KGenericRegistry
      * template, that has to be implemented.
      */
     virtual QString id() const;

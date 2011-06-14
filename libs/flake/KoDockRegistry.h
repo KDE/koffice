@@ -20,7 +20,7 @@
 #ifndef KODOCKREGISTRY_
 #define KODOCKREGISTRY_
 
-#include "KoGenericRegistry.h"
+#include "KGenericRegistry.h"
 #include "KoDockFactoryBase.h"
 #include "flake_export.h"
 
@@ -35,7 +35,7 @@
  *
  * @see KoCanvasObserverBase
  */
-class FLAKE_EXPORT KoDockRegistry : public QObject, public KoGenericRegistry<KoDockFactoryBase*>
+class FLAKE_EXPORT KoDockRegistry : public QObject, public KGenericRegistry<KoDockFactoryBase*>
 {
     Q_OBJECT
 

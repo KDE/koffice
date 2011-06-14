@@ -20,7 +20,7 @@
 #ifndef _KO_COLOR_SPACE_REGISTRY_P_H_
 #define _KO_COLOR_SPACE_REGISTRY_P_H_
 
-#include <KoGenericRegistry.h>
+#include <KGenericRegistry.h>
 
 #include "pigment_export.h"
 
@@ -32,7 +32,7 @@ class KoColorTransformationFactory;
  * that class is for adding new factory use the static method
  * KoColorTransformationFactoryRegistry::add.
  */
-class PIGMENTCMS_EXPORT KoColorTransformationFactoryRegistry : private KoGenericRegistry<KoColorTransformationFactory*>
+class PIGMENTCMS_EXPORT KoColorTransformationFactoryRegistry : private KGenericRegistry<KoColorTransformationFactory*>
 {
     friend class KoColorSpace;
 public:

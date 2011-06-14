@@ -24,7 +24,7 @@
 
 #include "pigment_export.h"
 
-#include <KoGenericRegistry.h>
+#include <KGenericRegistry.h>
 #include <KoID.h>
 
 class QString;
@@ -123,7 +123,7 @@ protected:
 };
 
 class PIGMENTCMS_EXPORT KoHistogramProducerFactoryRegistry
-        : public KoGenericRegistry<KoHistogramProducerFactory*>
+        : public KGenericRegistry<KoHistogramProducerFactory*>
 {
 public:
     virtual ~KoHistogramProducerFactoryRegistry();

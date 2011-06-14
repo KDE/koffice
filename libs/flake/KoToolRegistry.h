@@ -23,7 +23,7 @@
 
 #include <QObject>
 
-#include "KoGenericRegistry.h"
+#include "KGenericRegistry.h"
 #include <KoToolFactoryBase.h>
 #include "flake_export.h"
 
@@ -35,7 +35,7 @@
  * XXX: Make it possible for this class to load not just flake tools,
    but also the app-specific KoToolBase-based tools. (BSAR)
  */
-class FLAKE_EXPORT KoToolRegistry : public QObject, public KoGenericRegistry<KoToolFactoryBase*>
+class FLAKE_EXPORT KoToolRegistry : public QObject, public KGenericRegistry<KoToolFactoryBase*>
 {
     Q_OBJECT
 

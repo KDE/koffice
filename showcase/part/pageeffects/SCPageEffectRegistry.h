@@ -20,13 +20,13 @@
 #ifndef KPRPAGEEFFECTREGISTRY_H
 #define KPRPAGEEFFECTREGISTRY_H
 
-#include <KoGenericRegistry.h>
+#include <KGenericRegistry.h>
 
 #include "SCPageEffectFactory.h"
 
 class SCPageEffect;
 
-class SHOWCASE_EXPORT SCPageEffectRegistry : public KoGenericRegistry<SCPageEffectFactory *>
+class SHOWCASE_EXPORT SCPageEffectRegistry : public KGenericRegistry<SCPageEffectFactory *>
 {
 public:
     class Singleton;

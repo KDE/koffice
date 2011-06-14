@@ -22,7 +22,7 @@
 #define _KO_GENERIC_REGISTRY_MODEL_H_
 
 #include <QtCore/QAbstractListModel>
-#include "KoGenericRegistry.h"
+#include "KGenericRegistry.h"
 
 /**
  * This is a model that you can use to display the content of a registry.
@@ -35,7 +35,7 @@ class KoGenericRegistryModel : public QAbstractListModel
 
 public:
 
-    KoGenericRegistryModel(KoGenericRegistry<T>* registry);
+    KoGenericRegistryModel(KGenericRegistry<T>* registry);
 
     virtual ~KoGenericRegistryModel();
 
@@ -59,12 +59,12 @@ public:
 
 private:
 
-    KoGenericRegistry<T>* m_registry;
+    KGenericRegistry<T>* m_registry;
 };
 
 // -- Implementation --
 template<typename T>
-KoGenericRegistryModel<T>::KoGenericRegistryModel(KoGenericRegistry<T>* registry) : m_registry(registry)
+KoGenericRegistryModel<T>::KoGenericRegistryModel(KGenericRegistry<T>* registry) : m_registry(registry)
 {
 }
 

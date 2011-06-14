@@ -33,7 +33,7 @@
  *
  * Exemple of use:
  * @code
- * class KoMyClassRegistry : public KoGenericRegistry<MyClass*> {
+ * class KoMyClassRegistry : public KGenericRegistry<MyClass*> {
  * public:
  *   static KoMyClassRegistry * instance();
  * private:
@@ -53,11 +53,11 @@
  * @endcode
  */
 template<typename T>
-class KoGenericRegistry
+class KGenericRegistry
 {
 public:
-    KoGenericRegistry() { }
-    virtual ~KoGenericRegistry() { }
+    KGenericRegistry() { }
+    virtual ~KGenericRegistry() { }
 
 public:
     /**

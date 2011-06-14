@@ -23,7 +23,7 @@
 
 #include <QObject>
 
-#include <KoGenericRegistry.h>
+#include <KGenericRegistry.h>
 #include <KXmlReader.h>
 #include <KoShapeFactoryBase.h>
 
@@ -39,7 +39,7 @@ class KoShapeLoadingContext;
  * or rather, of the factories that applications can use to create flake
  * shape objects.
  */
-class FLAKE_EXPORT KoShapeRegistry : public QObject,  public KoGenericRegistry<KoShapeFactoryBase*>
+class FLAKE_EXPORT KoShapeRegistry : public QObject,  public KGenericRegistry<KoShapeFactoryBase*>
 {
     Q_OBJECT
 public:
