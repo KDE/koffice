@@ -19,7 +19,7 @@
  */
 
 #include "KoPanToolFactory_p.h"
-#include "KoPanTool_p.h"
+#include "KPanTool_p.h"
 
 #include <klocale.h>
 
@@ -35,5 +35,5 @@ KoPanToolFactory::KoPanToolFactory(QObject *parent)
 
 KoToolBase* KoPanToolFactory::createTool(KoCanvasBase *canvas)
 {
-    return new KoPanTool(canvas);
+    return new KPanTool(canvas);
 }

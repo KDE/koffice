@@ -43,14 +43,14 @@ class KoCanvasController;
 /**
  * This is the tool that allows you to move the canvas by dragging it and 'panning' around.
  */
-class KoPanTool : public KoToolBase
+class KPanTool : public KoToolBase
 {
 public:
     /**
      * Constructor.
      * @param canvas the canvas this tool works on.
      */
-    explicit KoPanTool(KoCanvasBase *canvas);
+    explicit KPanTool(KoCanvasBase *canvas);
 
     /// reimplemented from superclass
     virtual bool wantsAutoScroll() const;

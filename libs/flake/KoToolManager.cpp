@@ -37,7 +37,7 @@
 #include "KoPointerEvent.h"
 #include "tools/KoCreateShapesTool.h"
 #include "tools/KoZoomTool_p.h"
-#include "tools/KoPanTool_p.h"
+#include "tools/KPanTool_p.h"
 
 // Qt + kde
 #include <QWidget>
@@ -133,7 +133,7 @@ CanvasData *KoToolManager::Private::createCanvasData(KoCanvasController *control
         KoZoomTool *zoomTool = dynamic_cast<KoZoomTool*>(tl);
         if (zoomTool)
             zoomTool->setCanvasController(controller);
-        KoPanTool *panTool = dynamic_cast<KoPanTool*>(tl);
+        KPanTool *panTool = dynamic_cast<KPanTool*>(tl);
         if (panTool)
             panTool->setCanvasController(controller);
     }

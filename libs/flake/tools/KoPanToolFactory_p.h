@@ -35,7 +35,7 @@
 
 #include "KoToolFactoryBase.h"
 
-/// Factory for the KoPanTool
+/// Factory for the KPanTool
 class KoPanToolFactory : public KoToolFactoryBase
 {
 public:

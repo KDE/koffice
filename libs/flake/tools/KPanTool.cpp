@@ -19,7 +19,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoPanTool_p.h"
+#include "KPanTool_p.h"
 #include "KoToolBase_p.h"
 #include "KoPointerEvent.h"
 #include "KoCanvasBase.h"
@@ -30,26 +30,26 @@
 #include <QScrollBar>
 #include <kdebug.h>
 
-KoPanTool::KoPanTool(KoCanvasBase *canvas)
+KPanTool::KPanTool(KoCanvasBase *canvas)
         : KoToolBase(canvas),
         m_controller(0),
         m_temporary(false)
 {
 }
 
-bool KoPanTool::wantsAutoScroll() const
+bool KPanTool::wantsAutoScroll() const
 {
     return false;
 }
 
-void KoPanTool::mousePressEvent(KoPointerEvent *event)
+void KPanTool::mousePressEvent(KoPointerEvent *event)
 {
     m_lastPosition = documentToViewport(event->point);
     event->accept();
     setCursor(QCursor(Qt::ClosedHandCursor));
 }
 
-void KoPanTool::mouseMoveEvent(KoPointerEvent *event)
+void KPanTool::mouseMoveEvent(KoPointerEvent *event)
 {
     Q_ASSERT(m_controller);
     if (event->buttons() == 0)
@@ -63,7 +63,7 @@ void KoPanTool::mouseMoveEvent(KoPointerEvent *event)
     m_lastPosition = actualPosition;
 }
 
-void KoPanTool::mouseReleaseEvent(KoPointerEvent *event)
+void KPanTool::mouseReleaseEvent(KoPointerEvent *event)
 {
     event->accept();
     setCursor(QCursor(Qt::OpenHandCursor));
@@ -71,7 +71,7 @@ void KoPanTool::mouseReleaseEvent(KoPointerEvent *event)
         emit done();
 }
 
-void KoPanTool::keyPressEvent(QKeyEvent *event)
+void KPanTool::keyPressEvent(QKeyEvent *event)
 {
     KoCanvasController *canvasControllerWidget = dynamic_cast<KoCanvasController*>(m_controller);
     if (!canvasControllerWidget) {
@@ -94,7 +94,7 @@ void KoPanTool::keyPressEvent(QKeyEvent *event)
     event->accept();
 }
 
-void KoPanTool::activate(ToolActivation toolActivation, const QSet<KoShape*> &)
+void KPanTool::activate(ToolActivation toolActivation, const QSet<KoShape*> &)
 {
     if (m_controller == 0) {
         emit done();
@@ -104,13 +104,13 @@ void KoPanTool::activate(ToolActivation toolActivation, const QSet<KoShape*> &)
     setCursor(QCursor(Qt::OpenHandCursor));
 }
 
-void KoPanTool::customMoveEvent(KoPointerEvent * event)
+void KPanTool::customMoveEvent(KoPointerEvent * event)
 {
     m_controller->pan(QPoint(-event->x(), -event->y()));
     event->accept();
 }
 
-QPointF KoPanTool::documentToViewport(const QPointF &p)
+QPointF KPanTool::documentToViewport(const QPointF &p)
 {
     Q_D(KoToolBase);
     QPointF viewportPoint = d->canvas->viewConverter()->documentToView(p);
