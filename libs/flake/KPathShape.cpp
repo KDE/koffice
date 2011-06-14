@@ -25,7 +25,7 @@
 #include "KoPointGroup_p.h"
 #include "KoShapeBorderBase.h"
 #include "KoViewConverter.h"
-#include "KoPathShapeLoader.h"
+#include "KPathShapeLoader.h"
 #include "KoShapeSavingContext.h"
 #include "KoShapeLoadingContext.h"
 #include "KoShapeShadow.h"
@@ -160,7 +160,7 @@ bool KPathShape::loadOdf(const KXmlElement & element, KoShapeLoadingContext &con
         if (element.localName() == "polygon")
             close();
     } else { // path loading
-        KoPathShapeLoader loader(this);
+        KPathShapeLoader loader(this);
         loader.parseSvg(element.attributeNS(KOdfXmlNS::svg, "d"), true);
         d->loadNodeTypes(element);
     }

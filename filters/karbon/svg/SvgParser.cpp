@@ -37,7 +37,7 @@
 #include <KoShapeGroup.h>
 #include <KPathShape.h>
 #include <KoResourceManager.h>
-#include <KoPathShapeLoader.h>
+#include <KPathShapeLoader.h>
 #include <commands/KoShapeGroupCommand.h>
 #include <KUnit.h>
 #include <KImageData.h>
@@ -1921,7 +1921,7 @@ KoShape * SvgParser::createObject(const KXmlElement &b, const SvgStyles &style)
         if (path) {
             path->clear();
 
-            KoPathShapeLoader loader(path);
+            KPathShapeLoader loader(path);
             loader.parseSvg(b.attribute("d"), true);
             path->setPosition(path->normalize());
 

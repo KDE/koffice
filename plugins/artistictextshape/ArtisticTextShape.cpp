@@ -27,7 +27,7 @@
 #include <KXmlWriter.h>
 #include <KXmlReader.h>
 #include <KUnit.h>
-#include <KoPathShapeLoader.h>
+#include <KPathShapeLoader.h>
 #include <KoShapeBackground.h>
 
 #include <KLocale>
@@ -172,7 +172,7 @@ bool ArtisticTextShape::loadOdf( const KXmlElement & element, KoShapeLoadingCont
         else if ( pair[0] == "textPathData" )
         {
             KPathShape path;
-            KoPathShapeLoader loader( &path );
+            KPathShapeLoader loader( &path );
             loader.parseSvg( pair[1], true );
             putOnPath( path.outline() );
         }

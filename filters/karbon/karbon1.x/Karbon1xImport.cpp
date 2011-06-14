@@ -31,7 +31,7 @@
 #include <KoShapeLayer.h>
 #include <KPathShape.h>
 #include <KoResourceManager.h>
-#include <KoPathShapeLoader.h>
+#include <KPathShapeLoader.h>
 #include <KoShapeGroup.h>
 #include <commands/KoShapeGroupCommand.h>
 #include <KLineBorder.h>
@@ -614,7 +614,7 @@ KoShape * KarbonImport::loadPath(const KXmlElement &element)
 
     QString data = element.attribute("d");
     if (data.length() > 0) {
-        KoPathShapeLoader loader(path);
+        KPathShapeLoader loader(path);
         loader.parseSvg(data, true);
         path->normalize();
     }

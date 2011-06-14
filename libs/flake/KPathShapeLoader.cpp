@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoPathShapeLoader.h"
+#include "KPathShapeLoader.h"
 #include "KPathShape.h"
 #include <math.h>
 #include <kdebug.h>
@@ -625,17 +625,17 @@ void KoPathShapeLoaderPrivate::svgClosePath()
     path->closeMerge();
 }
 
-KoPathShapeLoader::KoPathShapeLoader(KPathShape *path)
+KPathShapeLoader::KPathShapeLoader(KPathShape *path)
     : d(new KoPathShapeLoaderPrivate(path))
 {
 }
 
-KoPathShapeLoader::~KoPathShapeLoader()
+KPathShapeLoader::~KPathShapeLoader()
 {
     delete d;
 }
 
-void KoPathShapeLoader::parseSvg(const QString &s, bool process)
+void KPathShapeLoader::parseSvg(const QString &s, bool process)
 {
     d->parseSvg(s, process);
 }

@@ -30,11 +30,11 @@ class QString;
  * Parser for svg path data, passed by argument in the parseSvg() method
  * A helper class for parsing path data when loading from svg/odf
  */
-class FLAKE_EXPORT KoPathShapeLoader
+class FLAKE_EXPORT KPathShapeLoader
 {
 public:
-    KoPathShapeLoader(KPathShape *path);
-    ~KoPathShapeLoader();
+    KPathShapeLoader(KPathShape *path);
+    ~KPathShapeLoader();
 
     /**
      * There are two operating modes. By default the parser just delivers unaltered

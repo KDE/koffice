@@ -65,7 +65,7 @@ set(flake_SRCS
     KoShapeSavingContext.cpp
     KoShapeLoadingContext.cpp
     KLoadingShapeUpdater.cpp
-    KoPathShapeLoader.cpp
+    KPathShapeLoader.cpp
     ShapeDeleter_p.cpp
     KoShapeBorderBase.cpp
     KoShapeBorderFactoryBase.cpp
@@ -272,7 +272,7 @@ install(
     KPathPoint.h
     KPathSegment.h
     KPathShape.h
-    KoPathShapeLoader.h
+    KPathShapeLoader.h
     KoPatternBackground.h
     KoPluginLoader.h
     KoPointerEvent.h
