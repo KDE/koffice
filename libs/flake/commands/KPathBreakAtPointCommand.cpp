@@ -18,7 +18,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoPathBreakAtPointCommand_p.h"
+#include "KPathBreakAtPointCommand_p.h"
 #include <klocale.h>
 
 /*
@@ -29,7 +29,7 @@
  * Not closed
  * - break from the back of the subpath
  */
-KoPathBreakAtPointCommand::KoPathBreakAtPointCommand(const QList<KoPathPointData> & pointDataList, QUndoCommand *parent)
+KPathBreakAtPointCommand::KPathBreakAtPointCommand(const QList<KoPathPointData> & pointDataList, QUndoCommand *parent)
         : QUndoCommand(parent)
         , m_deletePoints(true)
 {
@@ -72,14 +72,14 @@ KoPathBreakAtPointCommand::KoPathBreakAtPointCommand(const QList<KoPathPointData
     }
 }
 
-KoPathBreakAtPointCommand::~KoPathBreakAtPointCommand()
+KPathBreakAtPointCommand::~KPathBreakAtPointCommand()
 {
     if (m_deletePoints) {
         qDeleteAll(m_points);
     }
 }
 
-void KoPathBreakAtPointCommand::redo()
+void KPathBreakAtPointCommand::redo()
 {
     QUndoCommand::redo();
     KoPathPointData last(0, KoPathPointIndex(-1, -1));
@@ -122,7 +122,7 @@ void KoPathBreakAtPointCommand::redo()
     m_deletePoints = false;
 }
 
-void KoPathBreakAtPointCommand::undo()
+void KPathBreakAtPointCommand::undo()
 {
     QUndoCommand::undo();
     KoPathShape * lastPathShape = 0;

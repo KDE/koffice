@@ -34,7 +34,7 @@
 #include "commands/KoPathPointInsertCommand.h"
 #include "commands/KoPathPointRemoveCommand.h"
 #include "commands/KoPathSegmentTypeCommand.h"
-#include "commands/KoPathBreakAtPointCommand_p.h"
+#include "commands/KPathBreakAtPointCommand_p.h"
 #include "commands/KoPathSegmentBreakCommand_p.h"
 #include "commands/KParameterToPathCommand.h"
 #include "commands/KoSubpathJoinCommand_p.h"
@@ -376,7 +376,7 @@ void KoPathTool::breakAtPoint()
 {
     Q_D(KoToolBase);
     if (m_pointSelection.hasSelection()) {
-        d->canvas->addCommand(new KoPathBreakAtPointCommand(m_pointSelection.selectedPointsData()));
+        d->canvas->addCommand(new KPathBreakAtPointCommand(m_pointSelection.selectedPointsData()));
         updateActions();
     }
 }
