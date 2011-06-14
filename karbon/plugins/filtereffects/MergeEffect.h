@@ -20,24 +20,24 @@
 #ifndef MERGEEFFECT_H
 #define MERGEEFFECT_H
 
-#include "KoFilterEffect.h"
+#include "KFilterEffect.h"
 #include <QtCore/QPointF>
 
 #define MergeEffectId "feMerge"
 
 /// A gaussian blur effect
-class MergeEffect : public KoFilterEffect
+class MergeEffect : public KFilterEffect
 {
 public:
     MergeEffect();
 
-    /// reimplemented from KoFilterEffect
+    /// reimplemented from KFilterEffect
     virtual QImage processImage(const QImage &image, const KoFilterEffectRenderContext &context) const;
-    /// reimplemented from KoFilterEffect
+    /// reimplemented from KFilterEffect
     virtual QImage processImages(const QList<QImage> &images, const KoFilterEffectRenderContext &context) const;
-    /// reimplemented from KoFilterEffect
+    /// reimplemented from KFilterEffect
     virtual bool load(const KXmlElement &element, const KoFilterEffectLoadingContext &context);
-    /// reimplemented from KoFilterEffect
+    /// reimplemented from KFilterEffect
     virtual void save(KXmlWriter &writer);
 };
 

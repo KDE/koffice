@@ -20,12 +20,12 @@
 #ifndef COMPONENTTRANSFEREFFECT_H
 #define COMPONENTTRANSFEREFFECT_H
 
-#include "KoFilterEffect.h"
+#include "KFilterEffect.h"
 
 #define ComponentTransferEffectId "feComponentTransfer"
 
 /// A component transfer effect
-class ComponentTransferEffect : public KoFilterEffect
+class ComponentTransferEffect : public KFilterEffect
 {
 public:
     /// the different transfer functions
@@ -89,11 +89,11 @@ public:
     /// Returns the offset for the specified channel
     qreal offset(Channel channel) const;
 
-    /// reimplemented from KoFilterEffect
+    /// reimplemented from KFilterEffect
     virtual QImage processImage(const QImage &image, const KoFilterEffectRenderContext &context) const;
-    /// reimplemented from KoFilterEffect
+    /// reimplemented from KFilterEffect
     virtual bool load(const KXmlElement &element, const KoFilterEffectLoadingContext &context);
-    /// reimplemented from KoFilterEffect
+    /// reimplemented from KFilterEffect
     virtual void save(KXmlWriter &writer);
 
 private:

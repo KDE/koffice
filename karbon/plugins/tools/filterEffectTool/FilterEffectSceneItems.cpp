@@ -18,7 +18,7 @@
  */
 
 #include "FilterEffectSceneItems.h"
-#include "KoFilterEffect.h"
+#include "KFilterEffect.h"
 
 #include <QtGui/QPen>
 #include <QtGui/QBrush>
@@ -56,7 +56,7 @@ int ConnectorItem::connectorIndex() const
     return m_index;
 }
 
-KoFilterEffect * ConnectorItem::effect() const
+KFilterEffect * ConnectorItem::effect() const
 {
     if (!parentItem())
         return 0;
@@ -78,7 +78,7 @@ ConnectorItem * ConnectorMimeData::connector() const
 }
 
 
-EffectItemBase::EffectItemBase(KoFilterEffect *effect)
+EffectItemBase::EffectItemBase(KFilterEffect *effect)
         : QGraphicsRectItem(0), m_effect(effect)
 {
     setZValue(1);
@@ -138,7 +138,7 @@ QSizeF EffectItemBase::connectorSize() const
     return ConnectorSize;
 }
 
-KoFilterEffect * EffectItemBase::effect() const
+KFilterEffect * EffectItemBase::effect() const
 {
     return m_effect;
 }
@@ -217,7 +217,7 @@ ConnectorItem * EffectItemBase::connectorAtPosition(const QPointF &scenePosition
     return 0;
 }
 
-DefaultInputItem::DefaultInputItem(const QString &name, KoFilterEffect *effect)
+DefaultInputItem::DefaultInputItem(const QString &name, KFilterEffect *effect)
         : EffectItemBase(effect), m_name(name)
 {
     setRect(0, 0, ItemWidth, 2*ConnectorSize.height());
@@ -232,7 +232,7 @@ DefaultInputItem::DefaultInputItem(const QString &name, KoFilterEffect *effect)
     setBrush(QBrush(g));
 }
 
-EffectItem::EffectItem(KoFilterEffect *effect)
+EffectItem::EffectItem(KFilterEffect *effect)
         : EffectItemBase(effect)
 {
     Q_ASSERT(effect);

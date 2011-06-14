@@ -23,7 +23,7 @@
 #include "flake_export.h"
 #include <QObject>
 
-class KoFilterEffect;
+class KFilterEffect;
 class KoFilterEffectConfigWidgetBase;
 
 /// API docs go here
@@ -57,7 +57,7 @@ public:
     * This method should be implemented by factories to create a filter effect.
     * @return a new filter effect
     */
-    virtual KoFilterEffect *createFilterEffect() const = 0;
+    virtual KFilterEffect *createFilterEffect() const = 0;
 
     /**
      * This method should be implemented by factories to create a filter effect config widget.

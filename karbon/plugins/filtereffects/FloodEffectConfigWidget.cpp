@@ -19,7 +19,7 @@
 
 #include "FloodEffectConfigWidget.h"
 #include "FloodEffect.h"
-#include "KoFilterEffect.h"
+#include "KFilterEffect.h"
 
 #include <KoColorPopupAction.h>
 
@@ -44,7 +44,7 @@ FloodEffectConfigWidget::FloodEffectConfigWidget(QWidget *parent)
     connect(m_actionStopColor, SIGNAL(colorChanged(const KoColor&)), this, SLOT(colorChanged()));
 }
 
-bool FloodEffectConfigWidget::editFilterEffect(KoFilterEffect * filterEffect)
+bool FloodEffectConfigWidget::editFilterEffect(KFilterEffect * filterEffect)
 {
     m_effect = dynamic_cast<FloodEffect*>(filterEffect);
     if (!m_effect)

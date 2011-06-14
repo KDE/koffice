@@ -20,13 +20,13 @@
 #ifndef BLUREFFECT_H
 #define BLUREFFECT_H
 
-#include "KoFilterEffect.h"
+#include "KFilterEffect.h"
 #include <QtCore/QPointF>
 
 #define BlurEffectId "feGaussianBlur"
 
 /// A gaussian blur effect
-class BlurEffect : public KoFilterEffect
+class BlurEffect : public KFilterEffect
 {
 public:
     BlurEffect();
@@ -34,11 +34,11 @@ public:
     QPointF deviation() const;
     void setDeviation(const QPointF &deviation);
 
-    /// reimplemented from KoFilterEffect
+    /// reimplemented from KFilterEffect
     virtual QImage processImage(const QImage &image, const KoFilterEffectRenderContext &context) const;
-    /// reimplemented from KoFilterEffect
+    /// reimplemented from KFilterEffect
     virtual bool load(const KXmlElement &element, const KoFilterEffectLoadingContext &context);
-    /// reimplemented from KoFilterEffect
+    /// reimplemented from KFilterEffect
     virtual void save(KXmlWriter &writer);
 
 private:

@@ -27,7 +27,7 @@
 #include <math.h>
 
 ComponentTransferEffect::ComponentTransferEffect()
-        : KoFilterEffect(ComponentTransferEffectId, i18n("Component transfer"))
+        : KFilterEffect(ComponentTransferEffectId, i18n("Component transfer"))
 {
 }
 

@@ -19,12 +19,12 @@
 
 #include "FilterAddCommand.h"
 #include "KoShape.h"
-#include "KoFilterEffect.h"
+#include "KFilterEffect.h"
 #include "KoFilterEffectStack.h"
 
 #include <KLocale>
 
-FilterAddCommand::FilterAddCommand(KoFilterEffect *filterEffect, KoShape * shape, QUndoCommand *parent)
+FilterAddCommand::FilterAddCommand(KFilterEffect *filterEffect, KoShape * shape, QUndoCommand *parent)
         : QUndoCommand(parent), m_filterEffect(filterEffect), m_shape(shape), m_isAdded(false)
 {
     Q_ASSERT(m_shape);

@@ -22,7 +22,7 @@
 
 #include "KoFilterEffectConfigWidgetBase.h"
 
-class KoFilterEffect;
+class KFilterEffect;
 class MergeEffect;
 
 class MergeEffectConfigWidget : public KoFilterEffectConfigWidgetBase
@@ -32,7 +32,7 @@ public:
     MergeEffectConfigWidget(QWidget *parent = 0);
 
     /// reimplemented from KoFilterEffectConfigWidgetBase
-    virtual bool editFilterEffect(KoFilterEffect * filterEffect);
+    virtual bool editFilterEffect(KFilterEffect * filterEffect);
 
 private slots:
 

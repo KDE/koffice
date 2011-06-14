@@ -25,7 +25,7 @@
 #include <QtCore/QList>
 #include <QtCore/QRectF>
 
-class KoFilterEffect;
+class KFilterEffect;
 class KXmlWriter;
 
 /// This class manages a stack of filter effects
@@ -43,7 +43,7 @@ public:
     *
     * @return the list of filter effects applied on the shape when rendering.
     */
-    QList<KoFilterEffect*> filterEffects() const;
+    QList<KFilterEffect*> filterEffects() const;
 
     /**
     * Returns if the filter effect stack is empty.
@@ -59,7 +59,7 @@ public:
     * @param index the list index to insert the new filter at
     * @param filter the new filter to insert
     */
-    void insertFilterEffect(int index, KoFilterEffect *filter);
+    void insertFilterEffect(int index, KFilterEffect *filter);
 
     /**
     * Appends a new filter at the end of the filter list.
@@ -68,7 +68,7 @@ public:
     *
     * @param filter the new filter to append
     */
-    void appendFilterEffect(KoFilterEffect *filter);
+    void appendFilterEffect(KFilterEffect *filter);
 
     /**
     * Removes the filter with the given index from the filter list.
@@ -84,7 +84,7 @@ public:
      * @param index the index of the filter to take
      * @return the filter effect, of 0 if no filter effect with the given index exists
      */
-    KoFilterEffect* takeFilterEffect(int index);
+    KFilterEffect* takeFilterEffect(int index);
 
     /// Sets the clipping rectangle used for this filter in bounding box units
     void setClipRect(const QRectF &clipRect);

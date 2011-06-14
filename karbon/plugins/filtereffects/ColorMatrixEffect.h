@@ -20,12 +20,12 @@
 #ifndef COLORMATRIXEFFECT_H
 #define COLORMATRIXEFFECT_H
 
-#include "KoFilterEffect.h"
+#include "KFilterEffect.h"
 
 #define ColorMatrixEffectId "feColorMatrix"
 
 /// A color matrix effect
-class ColorMatrixEffect : public KoFilterEffect
+class ColorMatrixEffect : public KFilterEffect
 {
 public:
     enum Type {
@@ -69,11 +69,11 @@ public:
     /// Sets luminance alpha an changes type to LuminanceAlpha
     void setLuminanceAlpha();
 
-    /// reimplemented from KoFilterEffect
+    /// reimplemented from KFilterEffect
     virtual QImage processImage(const QImage &image, const KoFilterEffectRenderContext &context) const;
-    /// reimplemented from KoFilterEffect
+    /// reimplemented from KFilterEffect
     virtual bool load(const KXmlElement &element, const KoFilterEffectLoadingContext &context);
-    /// reimplemented from KoFilterEffect
+    /// reimplemented from KFilterEffect
     virtual void save(KXmlWriter &writer);
 
 private:

@@ -20,7 +20,7 @@
 #include "FilterEffectScene.h"
 #include "FilterEffectSceneItems.h"
 #include "KoShape.h"
-#include "KoFilterEffect.h"
+#include "KFilterEffect.h"
 #include "KoFilterEffectStack.h"
 
 #include <KDebug>
@@ -37,7 +37,7 @@ ConnectionSource::ConnectionSource()
 {
 }
 
-ConnectionSource::ConnectionSource(KoFilterEffect *effect, SourceType type)
+ConnectionSource::ConnectionSource(KFilterEffect *effect, SourceType type)
         : m_type(type), m_effect(effect)
 {
 }
@@ -47,7 +47,7 @@ ConnectionSource::SourceType ConnectionSource::type() const
     return m_type;
 }
 
-KoFilterEffect * ConnectionSource::effect() const
+KFilterEffect * ConnectionSource::effect() const
 {
     return m_effect;
 }
@@ -93,7 +93,7 @@ ConnectionTarget::ConnectionTarget()
 {
 }
 
-ConnectionTarget::ConnectionTarget(KoFilterEffect *effect, int inputIndex)
+ConnectionTarget::ConnectionTarget(KFilterEffect *effect, int inputIndex)
         : m_inputIndex(inputIndex), m_effect(effect)
 {
 }
@@ -103,7 +103,7 @@ int ConnectionTarget::inputIndex() const
     return m_inputIndex;
 }
 
-KoFilterEffect * ConnectionTarget::effect() const
+KFilterEffect * ConnectionTarget::effect() const
 {
     return m_effect;
 }
@@ -135,11 +135,11 @@ void FilterEffectScene::initialize(KoFilterEffectStack *effectStack)
     if (!m_effectStack)
         return;
 
-    QList<KoFilterEffect*> filterEffects = m_effectStack->filterEffects();
+    QList<KFilterEffect*> filterEffects = m_effectStack->filterEffects();
     if (! filterEffects.count())
         return;
 
-    foreach(KoFilterEffect *effect, filterEffects) {
+    foreach(KFilterEffect *effect, filterEffects) {
         createEffectItems(effect);
     }
 
@@ -147,7 +147,7 @@ void FilterEffectScene::initialize(KoFilterEffectStack *effectStack)
     layoutConnections();
 }
 
-void FilterEffectScene::createEffectItems(KoFilterEffect *effect)
+void FilterEffectScene::createEffectItems(KFilterEffect *effect)
 {
     const bool isFirstItem = m_items.count() == 0;
     const QString defaultInput = isFirstItem ? "SourceGraphic" : m_items.last()->outputName();
@@ -289,7 +289,7 @@ QList<ConnectionSource> FilterEffectScene::selectedEffectItems() const
 
         ConnectionSource::SourceType type = ConnectionSource::Effect;
 
-        KoFilterEffect * effect = effectItem->effect();
+        KFilterEffect * effect = effectItem->effect();
         if (dynamic_cast<DefaultInputItem*>(item)) {
             type = ConnectionSource::typeFromString(effectItem->outputName());
         }
@@ -321,8 +321,8 @@ void FilterEffectScene::dropEvent(QGraphicsSceneDragDropEvent * event)
         return;
 
     EffectItemBase * outputParentItem = 0;
-    KoFilterEffect * inputEffect = 0;
-    KoFilterEffect * outputEffect = 0;
+    KFilterEffect * inputEffect = 0;
+    KFilterEffect * outputEffect = 0;
     int inputIndex = 0;
 
     if (dropTargetItem->connectorType() == ConnectorItem::Input) {

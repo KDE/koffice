@@ -28,7 +28,7 @@ ConvolveMatrixEffectFactory::ConvolveMatrixEffectFactory(QObject *parent)
 {
 }
 
-KoFilterEffect * ConvolveMatrixEffectFactory::createFilterEffect() const
+KFilterEffect * ConvolveMatrixEffectFactory::createFilterEffect() const
 {
     return new ConvolveMatrixEffect();
 }

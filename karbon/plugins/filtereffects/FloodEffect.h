@@ -20,7 +20,7 @@
 #ifndef FLOODEFFECT_H
 #define FLOODEFFECT_H
 
-#include "KoFilterEffect.h"
+#include "KFilterEffect.h"
 #include <QtGui/QColor>
 
 #define FloodEffectId "feFlood"
@@ -28,7 +28,7 @@
 class KoFilterEffectLoadingContext;
 
 /// A flood fill effect
-class FloodEffect : public KoFilterEffect
+class FloodEffect : public KFilterEffect
 {
 public:
     FloodEffect();
@@ -36,11 +36,11 @@ public:
     QColor floodColor() const;
     void setFloodColor(const QColor &color);
 
-    /// reimplemented from KoFilterEffect
+    /// reimplemented from KFilterEffect
     virtual QImage processImage(const QImage &image, const KoFilterEffectRenderContext &context) const;
-    /// reimplemented from KoFilterEffect
+    /// reimplemented from KFilterEffect
     virtual bool load(const KXmlElement &element, const KoFilterEffectLoadingContext &context);
-    /// reimplemented from KoFilterEffect
+    /// reimplemented from KFilterEffect
     virtual void save(KXmlWriter &writer);
 
 private:

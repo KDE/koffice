@@ -20,7 +20,7 @@
 #include "KarbonFilterEffectsTool.h"
 
 #include "KoGenericRegistryModel.h"
-#include "KoFilterEffect.h"
+#include "KFilterEffect.h"
 #include "KoFilterEffectStack.h"
 #include "KoFilterEffectFactoryBase.h"
 #include "KoFilterEffectRegistry.h"
@@ -76,19 +76,19 @@ public:
         configSelector->blockSignals(true);
 
         int index = 0;
-        foreach(KoFilterEffect *effect, shape->filterEffectStack()->filterEffects()) {
+        foreach(KFilterEffect *effect, shape->filterEffectStack()->filterEffects()) {
             configSelector->addItem(QString("%1 - ").arg(index) + effect->name());
             index++;
         }
 
         configSelector->blockSignals(false);
 
-        KoFilterEffect * effect = index > 0 ? shape->filterEffectStack()->filterEffects().first() : 0;
+        KFilterEffect * effect = index > 0 ? shape->filterEffectStack()->filterEffects().first() : 0;
 
         addWidgetForEffect(effect, tool);
     }
 
-    void addWidgetForEffect(KoFilterEffect * filterEffect, KarbonFilterEffectsTool * tool)
+    void addWidgetForEffect(KFilterEffect * filterEffect, KarbonFilterEffectsTool * tool)
     {
         // remove current widget if new effect is zero or effect type has changed
         if (!filterEffect || (currentEffect && filterEffect->id() != currentEffect->id())) {
@@ -189,7 +189,7 @@ public:
     KDoubleNumInput * posY;
     KDoubleNumInput * posW;
     KDoubleNumInput * posH;
-    KoFilterEffect * currentEffect;
+    KFilterEffect * currentEffect;
     KoFilterEffectConfigWidgetBase * currentPanel;
     KoShape * currentShape;
 };
@@ -342,8 +342,8 @@ void KarbonFilterEffectsTool::filterSelected(int index)
     if (! d->currentShape || ! d->currentShape->filterEffectStack())
         return;
 
-    KoFilterEffect * effect = 0;
-    QList<KoFilterEffect*> filterEffects = d->currentShape->filterEffectStack()->filterEffects();
+    KFilterEffect * effect = 0;
+    QList<KFilterEffect*> filterEffects = d->currentShape->filterEffectStack()->filterEffects();
     if (index >= 0 && index < filterEffects.count()) {
         effect = filterEffects[index];
     }

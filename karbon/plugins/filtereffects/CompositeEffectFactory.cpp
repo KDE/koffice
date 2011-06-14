@@ -28,7 +28,7 @@ CompositeEffectFactory::CompositeEffectFactory(QObject *parent)
 {
 }
 
-KoFilterEffect * CompositeEffectFactory::createFilterEffect() const
+KFilterEffect * CompositeEffectFactory::createFilterEffect() const
 {
     return new CompositeEffect();
 }

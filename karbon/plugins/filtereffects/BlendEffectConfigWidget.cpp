@@ -19,7 +19,7 @@
 
 #include "BlendEffectConfigWidget.h"
 #include "BlendEffect.h"
-#include "KoFilterEffect.h"
+#include "KFilterEffect.h"
 
 #include <KComboBox>
 #include <KLocale>
@@ -47,7 +47,7 @@ BlendEffectConfigWidget::BlendEffectConfigWidget(QWidget *parent)
     connect(m_mode, SIGNAL(currentIndexChanged(int)), this, SLOT(modeChanged(int)));
 }
 
-bool BlendEffectConfigWidget::editFilterEffect(KoFilterEffect * filterEffect)
+bool BlendEffectConfigWidget::editFilterEffect(KFilterEffect * filterEffect)
 {
     m_effect = dynamic_cast<BlendEffect*>(filterEffect);
     if (!m_effect)

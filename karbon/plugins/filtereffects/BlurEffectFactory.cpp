@@ -28,7 +28,7 @@ BlurEffectFactory::BlurEffectFactory(QObject *parent)
 {
 }
 
-KoFilterEffect * BlurEffectFactory::createFilterEffect() const
+KFilterEffect * BlurEffectFactory::createFilterEffect() const
 {
     return new BlurEffect();
 }

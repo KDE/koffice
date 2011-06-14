@@ -20,11 +20,11 @@
 #ifndef WATERMARKFILTEREFFECT_H
 #define WATERMARKFILTEREFFECT_H
 
-#include <KoFilterEffect.h>
+#include <KFilterEffect.h>
 
 #define WatermarkFilterEffectId "WatermarkFilterEffectId"
 
-class WatermarkFilterEffect : public KoFilterEffect
+class WatermarkFilterEffect : public KFilterEffect
 {
 public:
     WatermarkFilterEffect();

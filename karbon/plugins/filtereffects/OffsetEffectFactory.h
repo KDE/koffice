@@ -22,13 +22,13 @@
 
 #include "KoFilterEffectFactoryBase.h"
 
-class KoFilterEffect;
+class KFilterEffect;
 
 class OffsetEffectFactory : public KoFilterEffectFactoryBase
 {
 public:
     explicit OffsetEffectFactory(QObject *parent);
-    virtual KoFilterEffect * createFilterEffect() const;
+    virtual KFilterEffect * createFilterEffect() const;
     virtual KoFilterEffectConfigWidgetBase * createConfigWidget() const;
 };
 

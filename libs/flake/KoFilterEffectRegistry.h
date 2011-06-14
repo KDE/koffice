@@ -48,7 +48,7 @@ public:
      * @param element the xml element to load form
      * @return the created filter effect if successful, otherwise returns 0
      */
-    KoFilterEffect *createFilterEffectFromXml(const KXmlElement &element, const KoFilterEffectLoadingContext &context);
+    KFilterEffect *createFilterEffectFromXml(const KXmlElement &element, const KoFilterEffectLoadingContext &context);
 
 private:
     KoFilterEffectRegistry();

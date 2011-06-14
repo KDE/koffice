@@ -25,7 +25,7 @@
 #include <QtGui/QDrag>
 #include <QtCore/QMimeData>
 
-class KoFilterEffect;
+class KFilterEffect;
 
 /// Graphics item representing a connector (input/output)
 class ConnectorItem : public QGraphicsEllipseItem
@@ -37,7 +37,7 @@ public:
     void setCenter(const QPointF &position);
     ConnectorType connectorType();
     int connectorIndex() const;
-    KoFilterEffect * effect() const;
+    KFilterEffect * effect() const;
 private:
     ConnectorType m_type;
     int m_index;
@@ -57,7 +57,7 @@ private:
 class EffectItemBase : public QGraphicsRectItem
 {
 public:
-    EffectItemBase(KoFilterEffect *effect);
+    EffectItemBase(KFilterEffect *effect);
 
     /// Returns the position of the output connector
     QPointF outputPosition() const;
@@ -72,7 +72,7 @@ public:
     QSizeF connectorSize() const;
 
     /// Returns the corresponding filter effect
-    KoFilterEffect * effect() const;
+    KFilterEffect * effect() const;
 
 protected:
     void createText(const QString &text);
@@ -89,14 +89,14 @@ private:
     QPointF m_outputPosition;
     QString m_outputName;
     QList<QPointF> m_inputPositions;
-    KoFilterEffect * m_effect;
+    KFilterEffect * m_effect;
 };
 
 /// Graphics item representing a predefined input image
 class DefaultInputItem : public EffectItemBase
 {
 public:
-    DefaultInputItem(const QString &name, KoFilterEffect *effect);
+    DefaultInputItem(const QString &name, KFilterEffect *effect);
 private:
     QString m_name;
 };
@@ -105,10 +105,10 @@ private:
 class EffectItem : public EffectItemBase
 {
 public:
-    EffectItem(KoFilterEffect *effect);
+    EffectItem(KFilterEffect *effect);
 
 private:
-    KoFilterEffect * m_effect;
+    KFilterEffect * m_effect;
 };
 
 /// Graphics item representing an connection between an output and input

@@ -21,7 +21,7 @@
 #include <KoFilterEffectRenderContext.h>
 
 GreyscaleFilterEffect::GreyscaleFilterEffect()
-: KoFilterEffect(GreyscaleFilterEffectId, "Grayscale effect")
+: KFilterEffect(GreyscaleFilterEffectId, "Grayscale effect")
 {
 }
 

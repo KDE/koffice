@@ -51,7 +51,7 @@
 #include <pathshapes/rectangle/RectangleShape.h>
 #include <pathshapes/ellipse/EllipseShape.h>
 #include <KoImageData.h>
-#include "KoFilterEffect.h"
+#include "KFilterEffect.h"
 #include "KoFilterEffectStack.h"
 #include "KXmlWriter.h"
 
@@ -620,7 +620,7 @@ void SvgExport::getEffects(KoShape *shape, QTextStream *stream)
     if (!filterStack)
         return;
 
-    QList<KoFilterEffect*> filterEffects = filterStack->filterEffects();
+    QList<KFilterEffect*> filterEffects = filterStack->filterEffects();
     if (!filterEffects.count())
         return;
 

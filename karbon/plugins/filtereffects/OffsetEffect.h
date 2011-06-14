@@ -20,13 +20,13 @@
 #ifndef OFFSETEFFECT_H
 #define OFFSETEFFECT_H
 
-#include "KoFilterEffect.h"
+#include "KFilterEffect.h"
 #include <QtCore/QPointF>
 
 #define OffsetEffectId "feOffset"
 
 /// An image offset effect
-class OffsetEffect : public KoFilterEffect
+class OffsetEffect : public KFilterEffect
 {
 public:
     OffsetEffect();
@@ -34,11 +34,11 @@ public:
     QPointF offset() const;
     void setOffset(const QPointF &offset);
 
-    /// reimplemented from KoFilterEffect
+    /// reimplemented from KFilterEffect
     virtual QImage processImage(const QImage &image, const KoFilterEffectRenderContext &context) const;
-    /// reimplemented from KoFilterEffect
+    /// reimplemented from KFilterEffect
     virtual bool load(const KXmlElement &element, const KoFilterEffectLoadingContext &context);
-    /// reimplemented from KoFilterEffect
+    /// reimplemented from KFilterEffect
     virtual void save(KXmlWriter &writer);
 
 private:

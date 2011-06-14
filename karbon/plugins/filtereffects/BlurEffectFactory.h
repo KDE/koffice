@@ -22,13 +22,13 @@
 
 #include "KoFilterEffectFactoryBase.h"
 
-class KoFilterEffect;
+class KFilterEffect;
 
 class BlurEffectFactory : public KoFilterEffectFactoryBase
 {
 public:
     explicit BlurEffectFactory(QObject *parent);
-    virtual KoFilterEffect * createFilterEffect() const;
+    virtual KFilterEffect * createFilterEffect() const;
     virtual KoFilterEffectConfigWidgetBase * createConfigWidget() const;
 };
 

@@ -18,7 +18,7 @@
  */
 
 #include "KoFilterEffectStack.h"
-#include "KoFilterEffect.h"
+#include "KFilterEffect.h"
 #include "KXmlWriter.h"
 
 #include <QtCore/QAtomicInt>
@@ -38,7 +38,7 @@ public:
         qDeleteAll(filterEffects);
     }
 
-    QList<KoFilterEffect*> filterEffects;
+    QList<KFilterEffect*> filterEffects;
     QRectF clipRect;
     QAtomicInt refCount;
 };
@@ -53,7 +53,7 @@ KoFilterEffectStack::~KoFilterEffectStack()
     delete d;
 }
 
-QList<KoFilterEffect*> KoFilterEffectStack::filterEffects() const
+QList<KFilterEffect*> KoFilterEffectStack::filterEffects() const
 {
     return d->filterEffects;
 }
@@ -63,13 +63,13 @@ bool KoFilterEffectStack::isEmpty() const
     return d->filterEffects.isEmpty();
 }
 
-void KoFilterEffectStack::insertFilterEffect(int index, KoFilterEffect * filter)
+void KoFilterEffectStack::insertFilterEffect(int index, KFilterEffect * filter)
 {
     if (filter)
         d->filterEffects.insert(index, filter);
 }
 
-void KoFilterEffectStack::appendFilterEffect(KoFilterEffect *filter)
+void KoFilterEffectStack::appendFilterEffect(KFilterEffect *filter)
 {
     if (filter)
         d->filterEffects.append(filter);
@@ -77,11 +77,11 @@ void KoFilterEffectStack::appendFilterEffect(KoFilterEffect *filter)
 
 void KoFilterEffectStack::removeFilterEffect(int index)
 {
-    KoFilterEffect * filter = takeFilterEffect(index);
+    KFilterEffect * filter = takeFilterEffect(index);
     delete filter;
 }
 
-KoFilterEffect* KoFilterEffectStack::takeFilterEffect(int index)
+KFilterEffect* KoFilterEffectStack::takeFilterEffect(int index)
 {
     if (index >= d->filterEffects.size())
         return 0;
@@ -133,7 +133,7 @@ void KoFilterEffectStack::save(KXmlWriter &writer, const QString &filterId)
     writer.addAttribute("width", d->clipRect.width());
     writer.addAttribute("height", d->clipRect.height());
 
-    foreach(KoFilterEffect *effect, d->filterEffects) {
+    foreach(KFilterEffect *effect, d->filterEffects) {
         effect->save(writer);
     }
 
@@ -157,7 +157,7 @@ QSet<QString> KoFilterEffectStack::requiredStandarsInputs() const
     if (d->filterEffects.first()->inputs().contains(""))
         requiredInputs.insert("SourceGraphic");
 
-    foreach(KoFilterEffect *effect, d->filterEffects) {
+    foreach(KFilterEffect *effect, d->filterEffects) {
         foreach(const QString &input, effect->inputs()) {
             if (stdInputs.contains(input))
                 requiredInputs.insert(input);

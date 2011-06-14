@@ -22,7 +22,7 @@
 
 #include "KoFilterEffectConfigWidgetBase.h"
 
-class KoFilterEffect;
+class KFilterEffect;
 class ImageEffect;
 class QLabel;
 
@@ -33,7 +33,7 @@ public:
     ImageEffectConfigWidget(QWidget *parent = 0);
 
     /// reimplemented from KoFilterEffectConfigWidgetBase
-    virtual bool editFilterEffect(KoFilterEffect * filterEffect);
+    virtual bool editFilterEffect(KFilterEffect * filterEffect);
 
 private slots:
     void selectImage();

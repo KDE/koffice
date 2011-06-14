@@ -23,7 +23,7 @@
 #include "KoFilterEffectConfigWidgetBase.h"
 
 class BlendEffect;
-class KoFilterEffect;
+class KFilterEffect;
 class KComboBox;
 
 class BlendEffectConfigWidget : public KoFilterEffectConfigWidgetBase
@@ -33,7 +33,7 @@ public:
     BlendEffectConfigWidget(QWidget *parent = 0);
 
     /// reimplemented from KoFilterEffectConfigWidgetBase
-    virtual bool editFilterEffect(KoFilterEffect * filterEffect);
+    virtual bool editFilterEffect(KFilterEffect * filterEffect);
 
 private slots:
     void modeChanged(int index);

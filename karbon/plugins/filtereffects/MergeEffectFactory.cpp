@@ -28,7 +28,7 @@ MergeEffectFactory::MergeEffectFactory(QObject *parent)
 {
 }
 
-KoFilterEffect * MergeEffectFactory::createFilterEffect() const
+KFilterEffect * MergeEffectFactory::createFilterEffect() const
 {
     return new MergeEffect();
 }

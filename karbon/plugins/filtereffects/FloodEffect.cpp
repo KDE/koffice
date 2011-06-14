@@ -27,7 +27,7 @@
 #include <QtGui/QPainter>
 
 FloodEffect::FloodEffect()
-        : KoFilterEffect(FloodEffectId, i18n("Flood fill"))
+        : KFilterEffect(FloodEffectId, i18n("Flood fill"))
         , m_color(Qt::black)
 {
 }

@@ -19,7 +19,7 @@
 
 #include "ConvolveMatrixEffectConfigWidget.h"
 #include "ConvolveMatrixEffect.h"
-#include "KoFilterEffect.h"
+#include "KFilterEffect.h"
 #include "MatrixDataModel.h"
 
 #include <KLocale>
@@ -92,7 +92,7 @@ ConvolveMatrixEffectConfigWidget::ConvolveMatrixEffectConfigWidget(QWidget *pare
     m_matrixModel = new MatrixDataModel(this);
 }
 
-bool ConvolveMatrixEffectConfigWidget::editFilterEffect(KoFilterEffect * filterEffect)
+bool ConvolveMatrixEffectConfigWidget::editFilterEffect(KFilterEffect * filterEffect)
 {
     m_effect = dynamic_cast<ConvolveMatrixEffect*>(filterEffect);
     if (!m_effect)

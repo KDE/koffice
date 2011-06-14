@@ -19,7 +19,7 @@
 
 #include "ColorMatrixEffectConfigWidget.h"
 #include "ColorMatrixEffect.h"
-#include "KoFilterEffect.h"
+#include "KFilterEffect.h"
 #include "MatrixDataModel.h"
 
 #include <KNumInput>
@@ -90,7 +90,7 @@ ColorMatrixEffectConfigWidget::ColorMatrixEffectConfigWidget(QWidget *parent)
     connect(m_matrixModel, SIGNAL(dataChanged(QModelIndex,QModelIndex)), this, SLOT(matrixChanged()));
 }
 
-bool ColorMatrixEffectConfigWidget::editFilterEffect(KoFilterEffect * filterEffect)
+bool ColorMatrixEffectConfigWidget::editFilterEffect(KFilterEffect * filterEffect)
 {
     m_effect = dynamic_cast<ColorMatrixEffect*>(filterEffect);
     if (!m_effect)

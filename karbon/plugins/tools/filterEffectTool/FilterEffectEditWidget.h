@@ -26,7 +26,7 @@
 
 class KoShape;
 class KoCanvasBase;
-class KoFilterEffect;
+class KFilterEffect;
 class KoFilterEffectStack;
 
 class FilterEffectEditWidget : public QWidget, Ui::FilterEffectEditWidget

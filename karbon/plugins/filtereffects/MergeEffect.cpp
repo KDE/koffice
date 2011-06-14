@@ -27,7 +27,7 @@
 #include <limits.h>
 
 MergeEffect::MergeEffect()
-        : KoFilterEffect(MergeEffectId, i18n("Merge"))
+        : KFilterEffect(MergeEffectId, i18n("Merge"))
 {
     setRequiredInputCount(2);
     setMaximalInputCount(INT_MAX);

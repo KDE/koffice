@@ -18,7 +18,7 @@
  */
 
 #include "KoFilterEffectRegistry.h"
-#include "KoFilterEffect.h"
+#include "KFilterEffect.h"
 #include <KoPluginLoader.h>
 #include <KGlobal>
 #include <KXmlReader.h>
@@ -51,13 +51,13 @@ KoFilterEffectRegistry* KoFilterEffectRegistry::instance()
     return s_instance;
 }
 
-KoFilterEffect * KoFilterEffectRegistry::createFilterEffectFromXml(const KXmlElement & element, const KoFilterEffectLoadingContext &context)
+KFilterEffect * KoFilterEffectRegistry::createFilterEffectFromXml(const KXmlElement & element, const KoFilterEffectLoadingContext &context)
 {
     KoFilterEffectFactoryBase * factory = get(element.tagName());
     if (!factory)
         return 0;
 
-    KoFilterEffect * filterEffect = factory->createFilterEffect();
+    KFilterEffect * filterEffect = factory->createFilterEffect();
     if (filterEffect->load(element, context))
         return filterEffect;
 

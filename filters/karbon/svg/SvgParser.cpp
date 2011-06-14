@@ -49,7 +49,7 @@
 #include <KoGradientBackground.h>
 #include <KoPatternBackground.h>
 #include <KoFilterEffectRegistry.h>
-#include <KoFilterEffect.h>
+#include <KFilterEffect.h>
 #include "KoFilterEffectStack.h"
 #include "KoFilterEffectLoadingContext.h"
 
@@ -1276,12 +1276,12 @@ void SvgParser::applyFilter(KoShape * shape)
     stdInputs << "BackgroundImage" << "BackgroundAlpha";
     stdInputs << "FillPaint" << "StrokePaint";
 
-    QMap<QString, KoFilterEffect*> inputs;
+    QMap<QString, KFilterEffect*> inputs;
 
     // create the filter effects and add them to the shape
     for (KXmlNode n = content.firstChild(); !n.isNull(); n = n.nextSibling()) {
         KXmlElement primitive = n.toElement();
-        KoFilterEffect * filterEffect = registry->createFilterEffectFromXml(primitive, context);
+        KFilterEffect * filterEffect = registry->createFilterEffectFromXml(primitive, context);
         if (!filterEffect) {
             kWarning(30514) << "filter effect" << primitive.tagName() << "is not implemented yet";
             continue;
@@ -1316,7 +1316,7 @@ void SvgParser::applyFilter(KoShape * shape)
                         if (!inputs.contains(input))
                             continue;
 
-                        KoFilterEffect * inputFilter = inputs[input];
+                        KFilterEffect * inputFilter = inputs[input];
                         if (inputFilter)
                             subRegion |= inputFilter->filterRect();
                     }

@@ -32,7 +32,7 @@
 #include <KDebug>
 
 ImageEffect::ImageEffect()
-    : KoFilterEffect(ImageEffectId, i18n("Image"))
+    : KFilterEffect(ImageEffectId, i18n("Image"))
 {
     setRequiredInputCount(0);
     setMaximalInputCount(0);

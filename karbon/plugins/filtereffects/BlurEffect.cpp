@@ -273,7 +273,7 @@ void fastbluralpha(QImage &img, int radius)
 }
 
 BlurEffect::BlurEffect()
-        : KoFilterEffect(BlurEffectId, i18n("Gaussian blur"))
+        : KFilterEffect(BlurEffectId, i18n("Gaussian blur"))
         , m_deviation(0, 0)
 {
 }

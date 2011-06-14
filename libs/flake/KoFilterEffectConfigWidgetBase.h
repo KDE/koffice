@@ -23,7 +23,7 @@
 #include "flake_export.h"
 #include <QtGui/QWidget>
 
-class KoFilterEffect;
+class KFilterEffect;
 
 /// Base class for filter effects config widgets
 class FLAKE_EXPORT KoFilterEffectConfigWidgetBase : public QWidget
@@ -34,7 +34,7 @@ public:
     virtual ~KoFilterEffectConfigWidgetBase() {};
 
     /// Sets the filter effect to be edited by the config widget
-    virtual bool editFilterEffect(KoFilterEffect *filterEffect) = 0;
+    virtual bool editFilterEffect(KFilterEffect *filterEffect) = 0;
 
 signals:
     /// Is emitted when the filter effect has changed

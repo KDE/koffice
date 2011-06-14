@@ -19,7 +19,7 @@
 
 #include "MorphologyEffectConfigWidget.h"
 #include "MorphologyEffect.h"
-#include "KoFilterEffect.h"
+#include "KFilterEffect.h"
 
 #include <KNumInput>
 #include <KLocale>
@@ -60,7 +60,7 @@ MorphologyEffectConfigWidget::MorphologyEffectConfigWidget(QWidget *parent)
     connect(m_radiusY, SIGNAL(valueChanged(double)), this, SLOT(radiusYChanged(double)));
 }
 
-bool MorphologyEffectConfigWidget::editFilterEffect(KoFilterEffect * filterEffect)
+bool MorphologyEffectConfigWidget::editFilterEffect(KFilterEffect * filterEffect)
 {
     m_effect = dynamic_cast<MorphologyEffect*>(filterEffect);
     if (!m_effect)

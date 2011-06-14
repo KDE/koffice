@@ -30,7 +30,7 @@
 #include <cmath>
 
 ConvolveMatrixEffect::ConvolveMatrixEffect()
-        : KoFilterEffect(ConvolveMatrixEffectId, i18n("Convolve Matrix"))
+        : KFilterEffect(ConvolveMatrixEffectId, i18n("Convolve Matrix"))
 {
     setDefaults();
 }

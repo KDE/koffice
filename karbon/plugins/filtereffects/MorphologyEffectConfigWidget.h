@@ -22,7 +22,7 @@
 
 #include "KoFilterEffectConfigWidgetBase.h"
 
-class KoFilterEffect;
+class KFilterEffect;
 class MorphologyEffect;
 class KDoubleNumInput;
 class QButtonGroup;
@@ -34,7 +34,7 @@ public:
     MorphologyEffectConfigWidget(QWidget *parent = 0);
 
     /// reimplemented from KoFilterEffectConfigWidgetBase
-    virtual bool editFilterEffect(KoFilterEffect * filterEffect);
+    virtual bool editFilterEffect(KFilterEffect * filterEffect);
 
 private slots:
     void radiusXChanged(double x);

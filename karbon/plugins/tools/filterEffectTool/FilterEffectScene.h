@@ -26,7 +26,7 @@
 #include <QtCore/QMap>
 
 class KoShape;
-class KoFilterEffect;
+class KFilterEffect;
 class KoFilterEffectStack;
 class QGraphicsItem;
 class EffectItemBase;
@@ -48,34 +48,34 @@ public:
         StrokePaint      ///< StrokePaint predefined input image
     };
     ConnectionSource();
-    ConnectionSource(KoFilterEffect *effect, SourceType type);
+    ConnectionSource(KFilterEffect *effect, SourceType type);
     /// Returns the source type
     SourceType type() const;
     /// Returns the corresponding filter effect, or 0 if type == Effect
-    KoFilterEffect * effect() const;
+    KFilterEffect * effect() const;
 
     static SourceType typeFromString(const QString &str);
     static QString typeToString(SourceType type);
 
 private:
     SourceType m_type;         ///< the source type
-    KoFilterEffect * m_effect; ///< the corresponding effect if type == Effect, 0 otherwise
+    KFilterEffect * m_effect; ///< the corresponding effect if type == Effect, 0 otherwise
 };
 
 class ConnectionTarget
 {
 public:
     ConnectionTarget();
-    ConnectionTarget(KoFilterEffect *effect, int inputIndex);
+    ConnectionTarget(KFilterEffect *effect, int inputIndex);
 
     /// Returns the target input index
     int inputIndex() const;
     /// Returns the corresponding filter effect
-    KoFilterEffect * effect() const;
+    KFilterEffect * effect() const;
 
 private:
     int m_inputIndex;          ///< the index of the input of the target effect
-    KoFilterEffect * m_effect; ///< the target effect
+    KFilterEffect * m_effect; ///< the target effect
 };
 
 class FilterEffectScene : public QGraphicsScene
@@ -101,7 +101,7 @@ protected:
 private slots:
     void selectionChanged();
 private:
-    void createEffectItems(KoFilterEffect *effect);
+    void createEffectItems(KFilterEffect *effect);
     void addSceneItem(QGraphicsItem *item);
     void layoutConnections();
     void layoutEffects();

@@ -28,7 +28,7 @@ FloodEffectFactory::FloodEffectFactory(QObject *parent)
 {
 }
 
-KoFilterEffect * FloodEffectFactory::createFilterEffect() const
+KFilterEffect * FloodEffectFactory::createFilterEffect() const
 {
     return new FloodEffect();
 }

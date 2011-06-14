@@ -20,13 +20,13 @@
 #ifndef COMPOSITEEFFECT_H
 #define COMPOSITEEFFECT_H
 
-#include "KoFilterEffect.h"
+#include "KFilterEffect.h"
 #include <QtGui/QColor>
 
 #define CompositeEffectId "feComposite"
 
 /// A flood fill effect
-class CompositeEffect : public KoFilterEffect
+class CompositeEffect : public KFilterEffect
 {
 public:
     enum Operation {
@@ -52,13 +52,13 @@ public:
     /// Sets the arithmetic values
     void setArithmeticValues(qreal * values);
 
-    /// reimplemented from KoFilterEffect
+    /// reimplemented from KFilterEffect
     virtual QImage processImage(const QImage &image, const KoFilterEffectRenderContext &context) const;
-    /// reimplemented from KoFilterEffect
+    /// reimplemented from KFilterEffect
     virtual QImage processImages(const QList<QImage> &images, const KoFilterEffectRenderContext &context) const;
-    /// reimplemented from KoFilterEffect
+    /// reimplemented from KFilterEffect
     virtual bool load(const KXmlElement &element, const KoFilterEffectLoadingContext &context);
-    /// reimplemented from KoFilterEffect
+    /// reimplemented from KFilterEffect
     virtual void save(KXmlWriter &writer);
 
 private:

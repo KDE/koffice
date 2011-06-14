@@ -27,7 +27,7 @@ ImageEffectFactory::ImageEffectFactory(QObject *parent)
 {
 }
 
-KoFilterEffect * ImageEffectFactory::createFilterEffect() const
+KFilterEffect * ImageEffectFactory::createFilterEffect() const
 {
     return new ImageEffect();
 }

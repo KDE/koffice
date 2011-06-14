@@ -20,11 +20,11 @@
 #ifndef GREYSCALEFILTEREFFECT_H
 #define GREYSCALEFILTEREFFECT_H
 
-#include <KoFilterEffect.h>
+#include <KFilterEffect.h>
 
 #define GreyscaleFilterEffectId "GreyscaleFilterEffectId"
 
-class GreyscaleFilterEffect : public KoFilterEffect
+class GreyscaleFilterEffect : public KFilterEffect
 {
 public:
     GreyscaleFilterEffect();

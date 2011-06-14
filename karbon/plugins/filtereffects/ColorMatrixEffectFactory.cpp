@@ -28,7 +28,7 @@ ColorMatrixEffectFactory::ColorMatrixEffectFactory(QObject *parent)
 {
 }
 
-KoFilterEffect * ColorMatrixEffectFactory::createFilterEffect() const
+KFilterEffect * ColorMatrixEffectFactory::createFilterEffect() const
 {
     return new ColorMatrixEffect();
 }

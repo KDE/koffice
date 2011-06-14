@@ -23,7 +23,7 @@
 #include <QColor>
 
 WatermarkFilterEffect::WatermarkFilterEffect()
-: KoFilterEffect(WatermarkFilterEffectId,"Watermark Effect")
+: KFilterEffect(WatermarkFilterEffectId,"Watermark Effect")
 {
 }
 

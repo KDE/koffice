@@ -28,7 +28,7 @@ ComponentTransferEffectFactory::ComponentTransferEffectFactory(QObject *parent)
 {
 }
 
-KoFilterEffect * ComponentTransferEffectFactory::createFilterEffect() const
+KFilterEffect * ComponentTransferEffectFactory::createFilterEffect() const
 {
     return new ComponentTransferEffect();
 }

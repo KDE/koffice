@@ -20,7 +20,7 @@
 #ifndef CONVOLVEMATRIXEFFECT_H
 #define CONVOLVEMATRIXEFFECT_H
 
-#include "KoFilterEffect.h"
+#include "KFilterEffect.h"
 #include <QtCore/QPointF>
 
 #define ConvolveMatrixEffectId "feConvolveMatrix"
@@ -28,7 +28,7 @@
 class KoFilterEffectLoadingContext;
 
 /// A convolve matrix effect
-class ConvolveMatrixEffect : public KoFilterEffect
+class ConvolveMatrixEffect : public KFilterEffect
 {
 public:
     /// Edge mode, i.e. how the kernel behaves at image edges
@@ -82,11 +82,11 @@ public:
     /// Enables/disables preserving alpha values
     void enablePreserveAlpha(bool on);
 
-    /// reimplemented from KoFilterEffect
+    /// reimplemented from KFilterEffect
     virtual QImage processImage(const QImage &image, const KoFilterEffectRenderContext &context) const;
-    /// reimplemented from KoFilterEffect
+    /// reimplemented from KFilterEffect
     virtual bool load(const KXmlElement &element, const KoFilterEffectLoadingContext &context);
-    /// reimplemented from KoFilterEffect
+    /// reimplemented from KFilterEffect
     virtual void save(KXmlWriter &writer);
 
 private:

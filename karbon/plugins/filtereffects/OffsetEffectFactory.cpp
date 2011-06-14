@@ -27,7 +27,7 @@ OffsetEffectFactory::OffsetEffectFactory(QObject *parent)
 {
 }
 
-KoFilterEffect * OffsetEffectFactory::createFilterEffect() const
+KFilterEffect * OffsetEffectFactory::createFilterEffect() const
 {
     return new OffsetEffect();
 }

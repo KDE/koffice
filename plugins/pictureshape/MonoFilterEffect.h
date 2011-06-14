@@ -20,11 +20,11 @@
 #ifndef MONOFILTEREFFECT_H
 #define MONOFILTEREFFECT_H
 
-#include <KoFilterEffect.h>
+#include <KFilterEffect.h>
 
 #define MonoFilterEffectId "MonoFilterEffectId"
 
-class MonoFilterEffect : public KoFilterEffect
+class MonoFilterEffect : public KFilterEffect
 {
 public:
     MonoFilterEffect();

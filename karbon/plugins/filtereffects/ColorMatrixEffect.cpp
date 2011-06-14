@@ -31,7 +31,7 @@ const int MatrixRows = 4;
 const int MatrixCols = 5;
 
 ColorMatrixEffect::ColorMatrixEffect()
-        : KoFilterEffect(ColorMatrixEffectId, i18n("Color Matrix"))
+        : KFilterEffect(ColorMatrixEffectId, i18n("Color Matrix"))
         , m_type(Matrix)
 {
     setIdentity();

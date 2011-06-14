@@ -28,7 +28,7 @@ MorphologyEffectFactory::MorphologyEffectFactory(QObject *parent)
 {
 }
 
-KoFilterEffect * MorphologyEffectFactory::createFilterEffect() const
+KFilterEffect * MorphologyEffectFactory::createFilterEffect() const
 {
     return new MorphologyEffect();
 }

@@ -19,7 +19,7 @@
 
 #include "MergeEffectConfigWidget.h"
 #include "MergeEffect.h"
-#include "KoFilterEffect.h"
+#include "KFilterEffect.h"
 #include <QtGui/QGridLayout>
 
 MergeEffectConfigWidget::MergeEffectConfigWidget(QWidget *parent)
@@ -30,7 +30,7 @@ MergeEffectConfigWidget::MergeEffectConfigWidget(QWidget *parent)
     setLayout(g);
 }
 
-bool MergeEffectConfigWidget::editFilterEffect(KoFilterEffect * filterEffect)
+bool MergeEffectConfigWidget::editFilterEffect(KFilterEffect * filterEffect)
 {
     m_effect = dynamic_cast<MergeEffect*>(filterEffect);
     if (!m_effect)

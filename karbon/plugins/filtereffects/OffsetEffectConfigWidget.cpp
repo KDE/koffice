@@ -19,7 +19,7 @@
 
 #include "OffsetEffectConfigWidget.h"
 #include "OffsetEffect.h"
-#include "KoFilterEffect.h"
+#include "KFilterEffect.h"
 #include <KNumInput>
 #include <KLocale>
 #include <QtGui/QGridLayout>
@@ -47,7 +47,7 @@ OffsetEffectConfigWidget::OffsetEffectConfigWidget(QWidget *parent)
     connect(m_offsetY, SIGNAL(valueChanged(double)), this, SLOT(offsetChanged(double)));
 }
 
-bool OffsetEffectConfigWidget::editFilterEffect(KoFilterEffect * filterEffect)
+bool OffsetEffectConfigWidget::editFilterEffect(KFilterEffect * filterEffect)
 {
     m_effect = dynamic_cast<OffsetEffect*>(filterEffect);
     if (!m_effect)

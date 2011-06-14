@@ -20,12 +20,12 @@
 #ifndef IMAGEEFFECT_H
 #define IMAGEEFFECT_H
 
-#include "KoFilterEffect.h"
+#include "KFilterEffect.h"
 
 #define ImageEffectId "feImage"
 
 /// An image offset effect
-class ImageEffect : public KoFilterEffect
+class ImageEffect : public KFilterEffect
 {
 public:
     ImageEffect();
@@ -36,11 +36,11 @@ public:
     /// Sets the image
     void setImage(const QImage &image);
 
-    /// reimplemented from KoFilterEffect
+    /// reimplemented from KFilterEffect
     virtual QImage processImage(const QImage &image, const KoFilterEffectRenderContext &context) const;
-    /// reimplemented from KoFilterEffect
+    /// reimplemented from KFilterEffect
     virtual bool load(const KXmlElement &element, const KoFilterEffectLoadingContext &context);
-    /// reimplemented from KoFilterEffect
+    /// reimplemented from KFilterEffect
     virtual void save(KXmlWriter &writer);
 
 private:

@@ -18,13 +18,13 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoFilterEffect.h"
+#include "KFilterEffect.h"
 #include "KXmlWriter.h"
 
 #include <QString>
 #include <QtCore/QRectF>
 
-class KoFilterEffect::Private
+class KFilterEffect::Private
 {
 public:
     Private()
@@ -44,39 +44,39 @@ public:
     int maximalInputCount;
 };
 
-KoFilterEffect::KoFilterEffect(const QString &id, const QString &name)
+KFilterEffect::KFilterEffect(const QString &id, const QString &name)
     : d(new Private)
 {
     d->id = id;
     d->name = name;
 }
 
-KoFilterEffect::~KoFilterEffect()
+KFilterEffect::~KFilterEffect()
 {
     delete d;
 }
 
-QString KoFilterEffect::name() const
+QString KFilterEffect::name() const
 {
     return d->name;
 }
 
-QString KoFilterEffect::id() const
+QString KFilterEffect::id() const
 {
     return d->id;
 }
 
-void KoFilterEffect::setFilterRect(const QRectF &filterRect)
+void KFilterEffect::setFilterRect(const QRectF &filterRect)
 {
     d->filterRect = filterRect;
 }
 
-QRectF KoFilterEffect::filterRect() const
+QRectF KFilterEffect::filterRect() const
 {
     return d->filterRect;
 }
 
-QRectF KoFilterEffect::filterRectForBoundingRect(const QRectF &boundingRect) const
+QRectF KFilterEffect::filterRectForBoundingRect(const QRectF &boundingRect) const
 {
     qreal x = boundingRect.x() + d->filterRect.x() * boundingRect.width();
     qreal y = boundingRect.y() + d->filterRect.y() * boundingRect.height();
@@ -85,69 +85,69 @@ QRectF KoFilterEffect::filterRectForBoundingRect(const QRectF &boundingRect) con
     return QRectF(x, y, w, h);
 }
 
-QList<QString> KoFilterEffect::inputs() const
+QList<QString> KFilterEffect::inputs() const
 {
     return d->inputs;
 }
 
-void KoFilterEffect::addInput(const QString &input)
+void KFilterEffect::addInput(const QString &input)
 {
     if (d->inputs.count() < d->maximalInputCount)
         d->inputs.append(input);
 }
 
-void KoFilterEffect::insertInput(int index, const QString &input)
+void KFilterEffect::insertInput(int index, const QString &input)
 {
     if (d->inputs.count() < d->maximalInputCount)
         d->inputs.insert(index, input);
 }
 
-void KoFilterEffect::setInput(int index, const QString &input)
+void KFilterEffect::setInput(int index, const QString &input)
 {
     if (index < d->inputs.count())
         d->inputs[index] = input;
 }
 
-void KoFilterEffect::removeInput(int index)
+void KFilterEffect::removeInput(int index)
 {
     if (d->inputs.count() > d->requiredInputCount)
         d->inputs.removeAt(index);
 }
 
-void KoFilterEffect::setOutput(const QString &output)
+void KFilterEffect::setOutput(const QString &output)
 {
     d->output = output;
 }
 
-QString KoFilterEffect::output() const
+QString KFilterEffect::output() const
 {
     return d->output;
 }
 
-int KoFilterEffect::requiredInputCount() const
+int KFilterEffect::requiredInputCount() const
 {
     return d->requiredInputCount;
 }
 
-int KoFilterEffect::maximalInputCount() const
+int KFilterEffect::maximalInputCount() const
 {
     return qMax(d->maximalInputCount, d->requiredInputCount);
 }
 
-QImage KoFilterEffect::processImages(const QList<QImage> &images, const KoFilterEffectRenderContext &/*context*/) const
+QImage KFilterEffect::processImages(const QList<QImage> &images, const KoFilterEffectRenderContext &/*context*/) const
 {
     Q_ASSERT(images.count());
     return images.first();
 }
 
-void KoFilterEffect::setRequiredInputCount(int count)
+void KFilterEffect::setRequiredInputCount(int count)
 {
     d->requiredInputCount = qMax(0, count);
     for (int i = d->inputs.count(); i < d->requiredInputCount; ++i)
         d->inputs.append(QString());
 }
 
-void KoFilterEffect::setMaximalInputCount(int count)
+void KFilterEffect::setMaximalInputCount(int count)
 {
     d->maximalInputCount = qMax(0,count);
     if (d->inputs.count() > maximalInputCount()) {
@@ -157,7 +157,7 @@ void KoFilterEffect::setMaximalInputCount(int count)
     }
 }
 
-void KoFilterEffect::saveCommonAttributes(KXmlWriter &writer)
+void KFilterEffect::saveCommonAttributes(KXmlWriter &writer)
 {
     writer.addAttribute("result", output());
     if (requiredInputCount() == 1 && maximalInputCount() == 1 && d->inputs.count() == 1) {

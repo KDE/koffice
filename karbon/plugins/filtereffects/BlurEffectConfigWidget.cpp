@@ -19,7 +19,7 @@
 
 #include "BlurEffectConfigWidget.h"
 #include "BlurEffect.h"
-#include "KoFilterEffect.h"
+#include "KFilterEffect.h"
 
 #include <KNumInput>
 #include <KLocale>
@@ -41,7 +41,7 @@ BlurEffectConfigWidget::BlurEffectConfigWidget(QWidget *parent)
     connect(m_stdDeviation, SIGNAL(valueChanged(double)), this, SLOT(stdDeviationChanged(double)));
 }
 
-bool BlurEffectConfigWidget::editFilterEffect(KoFilterEffect * filterEffect)
+bool BlurEffectConfigWidget::editFilterEffect(KFilterEffect * filterEffect)
 {
     m_effect = dynamic_cast<BlurEffect*>(filterEffect);
     if (!m_effect)

@@ -21,7 +21,7 @@
 #include <KoFilterEffectRenderContext.h>
 
 MonoFilterEffect::MonoFilterEffect()
-: KoFilterEffect(MonoFilterEffectId, "Mono Effect")
+: KFilterEffect(MonoFilterEffectId, "Mono Effect")
 {
 }
 

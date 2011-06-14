@@ -20,12 +20,12 @@
 #ifndef BLENDEFFECT_H
 #define BLENDEFFECT_H
 
-#include "KoFilterEffect.h"
+#include "KFilterEffect.h"
 
 #define BlendEffectId "feBlend"
 
 /// A color matrix effect
-class BlendEffect : public KoFilterEffect
+class BlendEffect : public KFilterEffect
 {
 public:
     enum BlendMode {
@@ -44,13 +44,13 @@ public:
     /// Sets the blend mode
     void setBlendMode(BlendMode blendMode);
 
-    /// reimplemented from KoFilterEffect
+    /// reimplemented from KFilterEffect
     virtual QImage processImage(const QImage &image, const KoFilterEffectRenderContext &context) const;
-    /// reimplemented from KoFilterEffect
+    /// reimplemented from KFilterEffect
     virtual QImage processImages(const QList<QImage> &images, const KoFilterEffectRenderContext &context) const;
-    /// reimplemented from KoFilterEffect
+    /// reimplemented from KFilterEffect
     virtual bool load(const KXmlElement &element, const KoFilterEffectLoadingContext &context);
-    /// reimplemented from KoFilterEffect
+    /// reimplemented from KFilterEffect
     virtual void save(KXmlWriter &writer);
 
 private:

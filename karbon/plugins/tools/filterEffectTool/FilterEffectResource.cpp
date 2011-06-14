@@ -18,7 +18,7 @@
  */
 
 #include "FilterEffectResource.h"
-#include <KoFilterEffect.h>
+#include <KFilterEffect.h>
 #include <KoFilterEffectStack.h>
 #include <KoFilterEffectRegistry.h>
 #include <KoFilterEffectLoadingContext.h>
@@ -139,7 +139,7 @@ KoFilterEffectStack * FilterEffectResource::toFilterStack() const
     // create the filter effects and add them to the shape
     for (KXmlNode n = e.firstChild(); !n.isNull(); n = n.nextSibling()) {
         KXmlElement primitive = n.toElement();
-        KoFilterEffect * filterEffect = registry->createFilterEffectFromXml(primitive, context);
+        KFilterEffect * filterEffect = registry->createFilterEffectFromXml(primitive, context);
         if (!filterEffect) {
             kWarning(38000) << "filter effect" << primitive.tagName() << "is not implemented yet";
             continue;

@@ -18,7 +18,7 @@
  */
 
 #include "FilterInputChangeCommand.h"
-#include "KoFilterEffect.h"
+#include "KFilterEffect.h"
 #include "KoShape.h"
 
 FilterInputChangeCommand::FilterInputChangeCommand(const InputChangeData &data, KoShape *shape, QUndoCommand *parent)

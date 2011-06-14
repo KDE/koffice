@@ -23,7 +23,7 @@
 #include "KoFilterEffectConfigWidgetBase.h"
 #include "ComponentTransferEffect.h"
 
-class KoFilterEffect;
+class KFilterEffect;
 class KDoubleNumInput;
 class KComboBox;
 class KLineEdit;
@@ -36,7 +36,7 @@ public:
     ComponentTransferEffectConfigWidget(QWidget *parent = 0);
 
     /// reimplemented from KoFilterEffectConfigWidgetBase
-    virtual bool editFilterEffect(KoFilterEffect * filterEffect);
+    virtual bool editFilterEffect(KFilterEffect * filterEffect);
 
 private slots:
     void slopeChanged(double slope);

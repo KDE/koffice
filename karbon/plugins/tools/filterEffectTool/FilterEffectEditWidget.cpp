@@ -26,7 +26,7 @@
 #include "FilterStackSetCommand.h"
 #include "KoGenericRegistryModel.h"
 #include "KoFilterEffectRegistry.h"
-#include "KoFilterEffect.h"
+#include "KFilterEffect.h"
 #include "KoFilterEffectStack.h"
 #include "KoFilterEffectConfigWidgetBase.h"
 #include "KoShape.h"
@@ -160,7 +160,7 @@ void FilterEffectEditWidget::addSelectedEffect()
     if (!factory)
         return;
 
-    KoFilterEffect * effect = factory->createFilterEffect();
+    KFilterEffect * effect = factory->createFilterEffect();
     if (!effect)
         return;
 
@@ -186,16 +186,16 @@ void FilterEffectEditWidget::removeSelectedItem()
         return;
 
     QList<InputChangeData> changeData;
-    QList<KoFilterEffect*> filterEffects = m_effects->filterEffects();
+    QList<KFilterEffect*> filterEffects = m_effects->filterEffects();
     int effectIndexToDelete = -1;
 
     const ConnectionSource &item  = selectedItems.first();
-    KoFilterEffect * effect = item.effect();
+    KFilterEffect * effect = item.effect();
     if (item.type() == ConnectionSource::Effect) {
         int effectIndex = filterEffects.indexOf(effect);
         // adjust inputs of all following effects in the stack
         for (int i = effectIndex + 1; i < filterEffects.count(); ++i) {
-            KoFilterEffect * nextEffect = filterEffects[i];
+            KFilterEffect * nextEffect = filterEffects[i];
             QList<QString> inputs = nextEffect->inputs();
             int inputIndex = 0;
             foreach(const QString &input, inputs) {
@@ -243,7 +243,7 @@ void FilterEffectEditWidget::removeSelectedItem()
 
 void FilterEffectEditWidget::connectionCreated(ConnectionSource source, ConnectionTarget target)
 {
-    QList<KoFilterEffect*> filterEffects = m_effects->filterEffects();
+    QList<KFilterEffect*> filterEffects = m_effects->filterEffects();
 
     int targetEffectIndex = filterEffects.indexOf(target.effect());
     if (targetEffectIndex < 0)
@@ -267,7 +267,7 @@ void FilterEffectEditWidget::connectionCreated(ConnectionSource source, Connecti
                 // output is named but if there is an effect with the same
                 // output name, we have to rename the source output
                 for (int i = sourceEffectIndex + 1; i < targetEffectIndex; ++i) {
-                    KoFilterEffect * effect = filterEffects[i];
+                    KFilterEffect * effect = filterEffects[i];
                     if (effect->output() == sourceName) {
                         renameOutput = true;
                         break;
@@ -276,7 +276,7 @@ void FilterEffectEditWidget::connectionCreated(ConnectionSource source, Connecti
             }
             if (renameOutput) {
                 QSet<QString> uniqueOutputNames;
-                foreach(KoFilterEffect *effect, filterEffects) {
+                foreach(KFilterEffect *effect, filterEffects) {
                     uniqueOutputNames.insert(effect->output());
                 }
                 int index = 0;
@@ -289,7 +289,7 @@ void FilterEffectEditWidget::connectionCreated(ConnectionSource source, Connecti
                 source.effect()->setOutput(newOutputName);
                 // adjust following effects
                 for (int i = sourceEffectIndex + 1; i < targetEffectIndex; ++i) {
-                    KoFilterEffect * effect = filterEffects[i];
+                    KFilterEffect * effect = filterEffects[i];
                     int inputIndex = 0;
                     foreach(const QString &input, effect->inputs()) {
                         if (input.isEmpty() && (i == sourceEffectIndex + 1 || input == sourceName)) {
@@ -401,11 +401,11 @@ void FilterEffectEditWidget::presetSelected(KoResource *resource)
 void FilterEffectEditWidget::addWidgetForItem(ConnectionSource item)
 {
     // get the filter effect from the item
-    KoFilterEffect * filterEffect = item.effect();
+    KFilterEffect * filterEffect = item.effect();
     if (item.type() != ConnectionSource::Effect)
         filterEffect = 0;
 
-    KoFilterEffect * currentEffect = m_currentItem.effect();
+    KFilterEffect * currentEffect = m_currentItem.effect();
     if (m_currentItem.type() != ConnectionSource::Effect)
         currentEffect = 0;
 
@@ -472,7 +472,7 @@ void FilterEffectEditWidget::defaultSourceChanged(int index)
     if (m_currentItem.type() == ConnectionSource::Effect)
         return;
 
-    KoFilterEffect * filterEffect = m_currentItem.effect();
+    KFilterEffect * filterEffect = m_currentItem.effect();
     if (!filterEffect)
         return;
 

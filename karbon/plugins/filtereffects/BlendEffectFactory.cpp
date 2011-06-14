@@ -28,7 +28,7 @@ BlendEffectFactory::BlendEffectFactory(QObject *parent)
 {
 }
 
-KoFilterEffect * BlendEffectFactory::createFilterEffect() const
+KFilterEffect * BlendEffectFactory::createFilterEffect() const
 {
     return new BlendEffect();
 }

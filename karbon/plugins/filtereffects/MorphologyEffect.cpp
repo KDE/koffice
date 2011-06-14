@@ -29,7 +29,7 @@
 #include <cmath>
 
 MorphologyEffect::MorphologyEffect()
-        : KoFilterEffect(MorphologyEffectId, i18n("Morphology"))
+        : KFilterEffect(MorphologyEffectId, i18n("Morphology"))
         , m_radius(0,0), m_operator(Erode)
 {
 }

@@ -28,7 +28,7 @@
 #include <QtGui/QPainter>
 
 OffsetEffect::OffsetEffect()
-        : KoFilterEffect(OffsetEffectId, i18n("Offset"))
+        : KFilterEffect(OffsetEffectId, i18n("Offset"))
         , m_offset(0, 0)
 {
 }

@@ -27,7 +27,7 @@
 #include <math.h>
 
 BlendEffect::BlendEffect()
-        : KoFilterEffect(BlendEffectId, i18n("Blend"))
+        : KFilterEffect(BlendEffectId, i18n("Blend"))
         , m_blendMode(Normal)
 {
     setRequiredInputCount(2);

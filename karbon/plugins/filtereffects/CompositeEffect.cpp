@@ -29,7 +29,7 @@
 #include <QtGui/QPainter>
 
 CompositeEffect::CompositeEffect()
-        : KoFilterEffect(CompositeEffectId, i18n("Composite"))
+        : KFilterEffect(CompositeEffectId, i18n("Composite"))
         , m_operation(CompositeOver)
 {
     setRequiredInputCount(2);

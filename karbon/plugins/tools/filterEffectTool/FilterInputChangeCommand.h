@@ -23,18 +23,18 @@
 #include <QtGui/QUndoCommand>
 
 class KoShape;
-class KoFilterEffect;
+class KFilterEffect;
 
 struct InputChangeData {
     InputChangeData()
             : filterEffect(0), inputIndex(-1) {
     }
 
-    InputChangeData(KoFilterEffect *effect, int index, const QString &oldIn, const QString &newIn)
+    InputChangeData(KFilterEffect *effect, int index, const QString &oldIn, const QString &newIn)
             : filterEffect(effect), inputIndex(index), oldInput(oldIn), newInput(newIn) {
     }
 
-    KoFilterEffect * filterEffect;
+    KFilterEffect * filterEffect;
     int inputIndex;
     QString oldInput;
     QString newInput;

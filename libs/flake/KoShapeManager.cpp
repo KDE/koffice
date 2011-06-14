@@ -34,7 +34,7 @@
 #include "KoShapeConnection.h"
 #include "KoShapeConnection_p.h"
 #include "KoShapeLayer.h"
-#include "KoFilterEffect.h"
+#include "KFilterEffect.h"
 #include "KoFilterEffectStack.h"
 #include "KoFilterEffectRenderContext.h"
 #include "KoShapeBackground.h"
@@ -429,9 +429,9 @@ void KoShapeManager::paintShape(KoShape *shape, QPainter &painter, const KoViewC
         renderContext.setShapeBoundingBox(shapeBound);
 
         QImage result;
-        QList<KoFilterEffect*> filterEffects = shape->filterEffectStack()->filterEffects();
+        QList<KFilterEffect*> filterEffects = shape->filterEffectStack()->filterEffects();
         // Filter
-        foreach (KoFilterEffect *filterEffect, filterEffects) {
+        foreach (KFilterEffect *filterEffect, filterEffects) {
             QRectF filterRegion = filterEffect->filterRectForBoundingRect(shapeBound);
             filterRegion = converter.documentToView(filterRegion);
             QRect subRegion = filterRegion.translated(-clippingOffset).toRect();
@@ -461,7 +461,7 @@ void KoShapeManager::paintShape(KoShape *shape, QPainter &painter, const KoViewC
             imageBuffers.insert(filterEffect->output(), result);
         }
 
-        KoFilterEffect *lastEffect = filterEffects.last();
+        KFilterEffect *lastEffect = filterEffects.last();
 
         // Paint the result
         painter.save();

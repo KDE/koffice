@@ -19,7 +19,7 @@
 
 #include "ImageEffectConfigWidget.h"
 #include "ImageEffect.h"
-#include "KoFilterEffect.h"
+#include "KFilterEffect.h"
 #include <KNumInput>
 #include <KFileDialog>
 #include <KLocale>
@@ -44,7 +44,7 @@ ImageEffectConfigWidget::ImageEffectConfigWidget(QWidget *parent)
     connect(button, SIGNAL(clicked()), this, SLOT(selectImage()));
 }
 
-bool ImageEffectConfigWidget::editFilterEffect(KoFilterEffect * filterEffect)
+bool ImageEffectConfigWidget::editFilterEffect(KFilterEffect * filterEffect)
 {
     m_effect = dynamic_cast<ImageEffect*>(filterEffect);
     if (!m_effect)

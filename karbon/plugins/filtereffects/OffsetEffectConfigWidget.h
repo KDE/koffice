@@ -22,7 +22,7 @@
 
 #include "KoFilterEffectConfigWidgetBase.h"
 
-class KoFilterEffect;
+class KFilterEffect;
 class OffsetEffect;
 class KDoubleNumInput;
 
@@ -33,7 +33,7 @@ public:
     OffsetEffectConfigWidget(QWidget *parent = 0);
 
     /// reimplemented from KoFilterEffectConfigWidgetBase
-    virtual bool editFilterEffect(KoFilterEffect * filterEffect);
+    virtual bool editFilterEffect(KFilterEffect * filterEffect);
 
 private slots:
     void offsetChanged(double offset);

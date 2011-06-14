@@ -46,11 +46,11 @@ class KXmlElement;
  * Using object bounding box coordinates internally makes it easy to share effects
  * between shapes or even between users via the filter effect resources.
  */
-class FLAKE_EXPORT KoFilterEffect
+class FLAKE_EXPORT KFilterEffect
 {
 public:
-    KoFilterEffect(const QString &id, const QString &name);
-    virtual ~KoFilterEffect();
+    KFilterEffect(const QString &id, const QString &name);
+    virtual ~KFilterEffect();
 
     /// Returns the user visible name of the filter
     QString name() const;

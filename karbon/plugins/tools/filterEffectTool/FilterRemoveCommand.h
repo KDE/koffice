@@ -23,7 +23,7 @@
 #include <QtGui/QUndoCommand>
 
 class KoShape;
-class KoFilterEffect;
+class KFilterEffect;
 class KoFilterEffectStack;
 
 /// A command do remove a filter effect from a filter effect stack
@@ -38,7 +38,7 @@ public:
     virtual void undo();
 
 private:
-    KoFilterEffect * m_filterEffect;
+    KFilterEffect * m_filterEffect;
     KoFilterEffectStack * m_filterStack;
     KoShape * m_shape;
     bool m_isRemoved;

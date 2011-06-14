@@ -294,7 +294,7 @@ void PictureShape::setMode(PictureShape::PictureMode mode)
 {
     if ( mode != m_mode ) {
         m_mode = mode;
-        KoFilterEffect* filterMode = filterEffectStack()->takeFilterEffect(0);
+        KFilterEffect* filterMode = filterEffectStack()->takeFilterEffect(0);
         delete filterMode;
         switch( mode ) {
             case Greyscale:

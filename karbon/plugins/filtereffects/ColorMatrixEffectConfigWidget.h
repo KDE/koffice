@@ -23,7 +23,7 @@
 #include "KoFilterEffectConfigWidgetBase.h"
 
 class ColorMatrixEffect;
-class KoFilterEffect;
+class KFilterEffect;
 class KComboBox;
 class QStackedWidget;
 class KDoubleNumInput;
@@ -36,7 +36,7 @@ public:
     ColorMatrixEffectConfigWidget(QWidget *parent = 0);
 
     /// reimplemented from KoFilterEffectConfigWidgetBase
-    virtual bool editFilterEffect(KoFilterEffect * filterEffect);
+    virtual bool editFilterEffect(KFilterEffect * filterEffect);
 
 private slots:
     void matrixChanged();

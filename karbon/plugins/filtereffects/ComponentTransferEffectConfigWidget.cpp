@@ -18,7 +18,7 @@
  */
 
 #include "ComponentTransferEffectConfigWidget.h"
-#include "KoFilterEffect.h"
+#include "KFilterEffect.h"
 
 #include <KNumInput>
 #include <KComboBox>
@@ -195,7 +195,7 @@ void ComponentTransferEffectConfigWidget::updateControls()
     m_stack->setCurrentIndex(m_function->currentIndex());
 }
 
-bool ComponentTransferEffectConfigWidget::editFilterEffect(KoFilterEffect * filterEffect)
+bool ComponentTransferEffectConfigWidget::editFilterEffect(KFilterEffect * filterEffect)
 {
     m_effect = dynamic_cast<ComponentTransferEffect*>(filterEffect);
     if (!m_effect)

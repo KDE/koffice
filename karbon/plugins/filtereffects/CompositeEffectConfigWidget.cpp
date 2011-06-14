@@ -19,7 +19,7 @@
 
 #include "CompositeEffectConfigWidget.h"
 #include "CompositeEffect.h"
-#include "KoFilterEffect.h"
+#include "KFilterEffect.h"
 
 #include <KNumInput>
 #include <KComboBox>
@@ -60,7 +60,7 @@ CompositeEffectConfigWidget::CompositeEffectConfigWidget(QWidget *parent)
     connect(m_operation, SIGNAL(currentIndexChanged(int)), this, SLOT(operationChanged(int)));
 }
 
-bool CompositeEffectConfigWidget::editFilterEffect(KoFilterEffect * filterEffect)
+bool CompositeEffectConfigWidget::editFilterEffect(KFilterEffect * filterEffect)
 {
     m_effect = dynamic_cast<CompositeEffect*>(filterEffect);
     if (!m_effect)
