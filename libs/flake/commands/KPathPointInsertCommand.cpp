@@ -21,11 +21,11 @@
 #include "KPathPointInsertCommand.h"
 #include <klocale.h>
 
-class KoPathPointInsertCommandPrivate
+class KPathPointInsertCommandPrivate
 {
 public:
-    KoPathPointInsertCommandPrivate() : deletePoints(true) { }
-    ~KoPathPointInsertCommandPrivate() {
+    KPathPointInsertCommandPrivate() : deletePoints(true) { }
+    ~KPathPointInsertCommandPrivate() {
         if (deletePoints)
             qDeleteAll(points);
     }
@@ -37,7 +37,7 @@ public:
 
 KPathPointInsertCommand::KPathPointInsertCommand(const QList<KPathPointData> &pointDataList, qreal insertPosition, QUndoCommand *parent)
         : QUndoCommand(parent),
-        d(new KoPathPointInsertCommandPrivate())
+        d(new KPathPointInsertCommandPrivate())
 {
     if (insertPosition < 0)
         insertPosition = 0;
