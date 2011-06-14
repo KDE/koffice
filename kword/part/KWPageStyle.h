@@ -244,7 +244,7 @@ public:
     /**
      * Load this page style from ODF
      */
-    void loadOdf(KOdfLoadingContext &context, const KXmlElement &masterNode, const KXmlElement &style, KoResourceManager *documentResources);
+    void loadOdf(KOdfLoadingContext &context, const KXmlElement &masterNode, const KXmlElement &style, KResourceManager *documentResources);
 
     bool operator==(const KWPageStyle &other) const;
     inline bool operator!=(const KWPageStyle &other) const { return ! operator==(other); }

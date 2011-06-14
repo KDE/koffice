@@ -73,7 +73,7 @@ class KoDocumentRdfPrivate;
  * The KoDocumentRdf object is possibly associated with a KoDocument.
  * There does not need to be a KoDocumentRdf for each KoDocument, but
  * if one exists it is a one-to-one relationship. The KoDocumentRdf
- * is also associated with the KoResourceManager of a canvas. You can use
+ * is also associated with the KResourceManager of a canvas. You can use
  * the fromResourceManager() static method to get the KoDocumentRdf
  * which is associated with a canvas, if one exists. Once again,
  * the canvas to KoDocumentRdf is either a 1-1 or 1 to zero relationship.

@@ -62,7 +62,7 @@
 #include <KOdfStylesReader.h>
 #include <KOdfStoreReader.h>
 #include <KOdfWriteStore.h>
-#include <KoResourceManager.h>
+#include <KResourceManager.h>
 #include <KoShapeFactoryBase.h>
 #include <KoShapeManager.h>
 #include <KoShapeRegistry.h>
@@ -121,7 +121,7 @@ public:
     QStringList spellListIgnoreAll;
     SavedDocParts savedDocParts;
     KCSheetAccessModel *sheetAccessModel;
-    KoResourceManager *resourceManager;
+    KResourceManager *resourceManager;
 };
 
 // Make sure an appropriate DTD is available in www/koffice/DTD if changing this value

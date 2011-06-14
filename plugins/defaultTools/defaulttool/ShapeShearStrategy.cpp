@@ -27,7 +27,7 @@
 #include <KCanvasBase.h>
 #include <KPointerEvent.h>
 #include <KoShapeManager.h>
-#include <KoResourceManager.h>
+#include <KResourceManager.h>
 #include <commands/KoShapeShearCommand.h>
 #include <commands/KoShapeMoveCommand.h>
 #include <commands/KoShapeTransformCommand.h>

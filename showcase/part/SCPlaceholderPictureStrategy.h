@@ -27,7 +27,7 @@ class SCPlaceholderPictureStrategy : public SCPlaceholderStrategy
 public:
     virtual ~SCPlaceholderPictureStrategy();
 
-    virtual KoShape *createShape(KoResourceManager *documenResources);
+    virtual KoShape *createShape(KResourceManager *documenResources);
 
 protected:
     /**

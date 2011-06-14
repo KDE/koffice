@@ -49,7 +49,7 @@ EnhancedPathShapeFactory::EnhancedPathShapeFactory(QObject *parent)
     addGearhead();
 }
 
-KoShape *EnhancedPathShapeFactory::createDefaultShape(KoResourceManager *) const
+KoShape *EnhancedPathShapeFactory::createDefaultShape(KResourceManager *) const
 {
     EnhancedPathShape *shape = new EnhancedPathShape(QRectF(0, 0, 100, 100));
     shape->setBorder(new KLineBorder(1.0));
@@ -76,7 +76,7 @@ KoShape *EnhancedPathShapeFactory::createDefaultShape(KoResourceManager *) const
     return shape;
 }
 
-KoShape *EnhancedPathShapeFactory::createShape(const KProperties *params, KoResourceManager *) const
+KoShape *EnhancedPathShapeFactory::createShape(const KProperties *params, KResourceManager *) const
 {
     QRectF viewBox(0, 0, 100, 100);
     QVariant viewboxData;

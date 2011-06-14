@@ -25,7 +25,7 @@
 #include <QVariant>
 
 class KoTextEditingPlugin;
-class KoResourceManager;
+class KResourceManager;
 class TextTool;
 
 /// This class holds on to the text editing plugins.
@@ -57,13 +57,13 @@ public:
         Normal
     };
 
-    static TextEditingPluginContainer *create(KoResourceManager *documentResourceManager, Type init = Normal);
+    static TextEditingPluginContainer *create(KResourceManager *documentResourceManager, Type init = Normal);
 
 private:
     QHash<QString, KoTextEditingPlugin*> m_textEditingPlugins;
     KoTextEditingPlugin *m_spellcheckPlugin;
 
-    TextEditingPluginContainer(KoResourceManager *documentResourceManager);
+    TextEditingPluginContainer(KResourceManager *documentResourceManager);
 };
 
 Q_DECLARE_METATYPE(TextEditingPluginContainer*)

@@ -25,7 +25,7 @@
 #define SCPlaceholderShapeId "SCPlaceholderShapeId"
 
 class SCPlaceholderStrategy;
-class KoResourceManager;
+class KResourceManager;
 
 /**
  * This shape is used as placeholder as long as the shape is not modified
@@ -41,9 +41,9 @@ public:
     virtual bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context);
     virtual void saveOdf(KoShapeSavingContext &context) const;
 
-    KoShape *createShape(KoResourceManager *documentResources);
+    KoShape *createShape(KResourceManager *documentResources);
 
-    virtual void initStrategy(KoResourceManager *documentResources);
+    virtual void initStrategy(KResourceManager *documentResources);
     KoShapeUserData * userData() const;
 private:
     SCPlaceholderStrategy * m_strategy;

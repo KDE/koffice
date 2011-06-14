@@ -36,7 +36,7 @@ class KProperties;
 class KoShapeConfigWidgetBase;
 class KoShapeLoadingContext;
 class KDataCenterBase;
-class KoResourceManager;
+class KResourceManager;
 class KCanvasBase;
 
 #define SHAPETEMPLATE_MIMETYPE "application/x-flake-shapetemplate"
@@ -165,7 +165,7 @@ public:
      * purposes.
      * @param manager the new manager
      */
-    virtual void newDocumentResourceManager(KoResourceManager *manager);
+    virtual void newDocumentResourceManager(KResourceManager *manager);
 
     /**
      * This method should be implemented by factories to create a shape that the user
@@ -178,7 +178,7 @@ public:
      * @return a new shape
      * @see createShape() newDocumentResourceManager()
      */
-    virtual KoShape *createDefaultShape(KoResourceManager *documentResources = 0) const = 0;
+    virtual KoShape *createDefaultShape(KResourceManager *documentResources = 0) const = 0;
 
     /**
      * This method should be implemented by factories to create a shape based on a set of
@@ -192,7 +192,7 @@ public:
      * @see createDefaultShape() newDocumentResourceManager()
      * @see KoShapeTemplate::properties
      */
-    virtual KoShape *createShape(const KProperties *params, KoResourceManager *documentResources = 0) const;
+    virtual KoShape *createShape(const KProperties *params, KResourceManager *documentResources = 0) const;
 
 protected:
 

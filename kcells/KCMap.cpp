@@ -989,7 +989,7 @@ void KCMap::addCommand(QUndoCommand *command)
     emit commandAdded(command);
 }
 
-KoResourceManager* KCMap::resourceManager() const
+KResourceManager* KCMap::resourceManager() const
 {
     if (!doc()) return 0;
     return doc()->resourceManager();

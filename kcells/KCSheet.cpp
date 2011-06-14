@@ -47,7 +47,7 @@
 #include <KOdfStylesReader.h>
 
 #include <KoShape.h>
-#include <KoResourceManager.h>
+#include <KResourceManager.h>
 #include <KoShapeLoadingContext.h>
 #include <KoShapeManager.h>
 #include <KoShapeRegistry.h>
@@ -336,7 +336,7 @@ void KCSheet::deleteShapes()
     d->shapes.clear();
 }
 
-KoResourceManager* KCSheet::resourceManager() const
+KResourceManager* KCSheet::resourceManager() const
 {
     return map()->resourceManager();
 }

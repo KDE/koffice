@@ -20,7 +20,7 @@
 #ifndef KOSHAPECONFIGWIDGETBASE_H
 #define KOSHAPECONFIGWIDGETBASE_H
 
-#include "KoResourceManager.h"
+#include "KResourceManager.h"
 
 #include <QWidget>
 
@@ -71,13 +71,13 @@ public:
     virtual void setUnit(const KUnit &unit);
 
     /// called to set the canvas resource manager of the canvas the user used to insert the new shape.
-    void setResourceManager(KoResourceManager *rm);
+    void setResourceManager(KResourceManager *rm);
 
 protected:
-    KoResourceManager *resourceManager() const;
+    KResourceManager *resourceManager() const;
 
 private:
-    KoResourceManager *m_resourceManager; ///< the resource provider with data for this canvas
+    KResourceManager *m_resourceManager; ///< the resource provider with data for this canvas
 };
 
 #endif

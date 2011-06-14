@@ -43,13 +43,13 @@ public:
     TableShapeFactory(QObject* parent);
     ~TableShapeFactory();
 
-    virtual void newDocumentResourceManager(KoResourceManager *manager);
+    virtual void newDocumentResourceManager(KResourceManager *manager);
     virtual bool supports(const KXmlElement &element, KoShapeLoadingContext &context) const;
 
-    virtual KoShape *createDefaultShape(KoResourceManager *documentResources = 0) const;
+    virtual KoShape *createDefaultShape(KResourceManager *documentResources = 0) const;
 
 public slots:
-    void createMap(KoResourceManager *manager);
+    void createMap(KResourceManager *manager);
 };
 
 #endif // KSPREAD_TABLE_SHAPE_FACTORY

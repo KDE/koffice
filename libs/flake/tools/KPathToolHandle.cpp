@@ -29,7 +29,7 @@
 #include "KParameterChangeStrategy_p.h"
 #include "KParameterShape.h"
 #include "KCanvasBase.h"
-#include "KoResourceManager.h"
+#include "KResourceManager.h"
 #include "KoShapeManager.h"
 #include "KoViewConverter.h"
 #include "KPointerEvent.h"

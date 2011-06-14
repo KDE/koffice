@@ -39,7 +39,7 @@
 #include <QTextCursor>
 
 class KoFind;
-class KoResourceManager;
+class KResourceManager;
 class QAction;
 class QTextDocument;
 class QVariant;
@@ -48,7 +48,7 @@ class QWidget;
 class KoFindPrivate
 {
 public:
-    KoFindPrivate(KoFind *find, KoResourceManager *crp, QWidget *w);
+    KoFindPrivate(KoFind *find, KResourceManager *crp, QWidget *w);
 
     void resourceChanged(int key, const QVariant &variant);
 
@@ -77,7 +77,7 @@ public:
 private:
     void parseSettingsAndFind();
 
-    KoResourceManager *m_provider;
+    KResourceManager *m_provider;
     KFindStrategy m_findStrategy; /// strategy used for find
     KReplaceStrategy m_replaceStrategy; /// strategy used for replace
     KFindStrategyBase *m_strategy; /// the current strategy used

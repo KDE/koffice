@@ -130,7 +130,7 @@ void KoTextOnShapeContainerModel::childChanged(KoShape *child, KoShape::ChangeTy
 }
 
 /// KoTextOnShapeContainer
-KoTextOnShapeContainer::KoTextOnShapeContainer(KoShape *childShape, KoResourceManager *documentResources)
+KoTextOnShapeContainer::KoTextOnShapeContainer(KoShape *childShape, KResourceManager *documentResources)
     : KoShapeContainer(*(new KoTextOnShapeContainerPrivate(this)))
 {
     Q_D(KoTextOnShapeContainer);

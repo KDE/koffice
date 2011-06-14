@@ -33,12 +33,12 @@ void KoShapeConfigWidgetBase::setUnit(const KUnit &unit)
     Q_UNUSED(unit);
 }
 
-void KoShapeConfigWidgetBase::setResourceManager(KoResourceManager *rm)
+void KoShapeConfigWidgetBase::setResourceManager(KResourceManager *rm)
 {
     m_resourceManager = rm;
 }
 
-KoResourceManager *KoShapeConfigWidgetBase::resourceManager() const
+KResourceManager *KoShapeConfigWidgetBase::resourceManager() const
 {
     return m_resourceManager;
 }

@@ -106,7 +106,7 @@ StarShapeFactory::StarShapeFactory(QObject *parent)
     addTemplate(t);
 }
 
-KoShape *StarShapeFactory::createDefaultShape(KoResourceManager *) const
+KoShape *StarShapeFactory::createDefaultShape(KResourceManager *) const
 {
     StarShape *star = new StarShape();
 
@@ -116,7 +116,7 @@ KoShape *StarShapeFactory::createDefaultShape(KoResourceManager *) const
     return star;
 }
 
-KoShape *StarShapeFactory::createShape(const KProperties *params, KoResourceManager *) const
+KoShape *StarShapeFactory::createShape(const KProperties *params, KResourceManager *) const
 {
     StarShape *star = new StarShape();
     if (! star)

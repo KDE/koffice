@@ -37,12 +37,12 @@
 class KoShape;
 class KoShapeContainer;
 class KoShapeGroup;
-class KoResourceManager;
+class KResourceManager;
 
 class SvgParser
 {
 public:
-    SvgParser(KoResourceManager *documentResourceManager);
+    SvgParser(KResourceManager *documentResourceManager);
     virtual ~SvgParser();
 
     /// Parses a svg fragment, returning the list of top level child shapes
@@ -157,7 +157,7 @@ private:
     QMap<QString, KXmlElement>     m_defs;
     QStringList m_fontAttributes; ///< font related attributes
     QStringList m_styleAttributes; ///< style related attributes
-    KoResourceManager *m_documentResourceManager;
+    KResourceManager *m_documentResourceManager;
     QList<KoShape*> m_shapes;
     QList<KoShape*> m_toplevelShapes;
     QString m_xmlBaseDir;

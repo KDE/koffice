@@ -26,7 +26,7 @@
 #include <QScrollBar>
 #include <QListWidget>
 
-#include <KoResourceManager.h>
+#include <KResourceManager.h>
 #include <KoRuler.h>
 #include <KoSelection.h>
 #include <KoShapeLayer.h>

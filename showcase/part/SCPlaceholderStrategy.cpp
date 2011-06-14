@@ -114,7 +114,7 @@ SCPlaceholderStrategy::~SCPlaceholderStrategy()
 {
 }
 
-KoShape *SCPlaceholderStrategy::createShape(KoResourceManager *rm)
+KoShape *SCPlaceholderStrategy::createShape(KResourceManager *rm)
 {
     KoShape * shape = 0;
     KoShapeFactoryBase * factory = KoShapeRegistry::instance()->value(m_placeholderData->m_shapeId);
@@ -160,7 +160,7 @@ QString SCPlaceholderStrategy::text() const
     return i18n(m_placeholderData->m_text);
 }
 
-void SCPlaceholderStrategy::init(KoResourceManager *)
+void SCPlaceholderStrategy::init(KResourceManager *)
 {
 }
 

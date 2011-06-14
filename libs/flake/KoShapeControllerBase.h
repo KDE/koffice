@@ -28,7 +28,7 @@
 class KoShape;
 class QString;
 class KoShapeControllerBasePrivate;
-class KoResourceManager;
+class KResourceManager;
 
 /**
  * The shape controller is an abstract interface that the applications class
@@ -63,7 +63,7 @@ public:
      * collection and others.
      * @see KCanvasBase::resourceManager()
      */
-    virtual KoResourceManager *resourceManager() const;
+    virtual KResourceManager *resourceManager() const;
 
 private:
     KoShapeControllerBasePrivate * d;

@@ -53,7 +53,7 @@ public:
 
     KCanvasBase *canvas;
     KoShapeControllerBase *shapeController;
-    KoResourceManager *dummyRm; // only used when there is no shapeController
+    KResourceManager *dummyRm; // only used when there is no shapeController
 
     QUndoCommand* addShape(KoShape *shape, QUndoCommand *parent) {
         Q_ASSERT(canvas->shapeManager());
@@ -98,11 +98,11 @@ void KoShapeController::setShapeControllerBase(KoShapeControllerBase* shapeContr
     d->shapeController = shapeControllerBase;
 }
 
-KoResourceManager *KoShapeController::resourceManager() const
+KResourceManager *KoShapeController::resourceManager() const
 {
     if (!d->shapeController) {
         if (!d->dummyRm) {
-            d->dummyRm = new KoResourceManager();
+            d->dummyRm = new KResourceManager();
             KoShapeRegistry *registry = KoShapeRegistry::instance();
             foreach (const QString &id, registry->keys()) {
                 KoShapeFactoryBase *shapeFactory = registry->value(id);

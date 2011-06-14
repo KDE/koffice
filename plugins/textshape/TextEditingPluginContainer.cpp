@@ -24,7 +24,7 @@
 
 #include <KDebug>
 
-TextEditingPluginContainer::TextEditingPluginContainer(KoResourceManager *documentResourceManager)
+TextEditingPluginContainer::TextEditingPluginContainer(KResourceManager *documentResourceManager)
     : QObject(documentResourceManager),
     m_spellcheckPlugin(0)
 {
@@ -36,7 +36,7 @@ TextEditingPluginContainer::~TextEditingPluginContainer()
 }
 
 // static
-TextEditingPluginContainer *TextEditingPluginContainer::create(KoResourceManager *documentResourceManager, TextEditingPluginContainer::Type init)
+TextEditingPluginContainer *TextEditingPluginContainer::create(KResourceManager *documentResourceManager, TextEditingPluginContainer::Type init)
 {
     TextEditingPluginContainer *answer = new TextEditingPluginContainer(documentResourceManager);
 

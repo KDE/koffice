@@ -42,7 +42,7 @@ class QTextDocument;
  * The KoCanvasResource contains a set of per-canvas
  * properties, like current foreground color, current background
  * color and more.
- * \sa KoResourceManager KCanvasBase::resourceManager()
+ * \sa KResourceManager KCanvasBase::resourceManager()
  */
 namespace KoCanvasResource
 {
@@ -73,7 +73,7 @@ enum CanvasResource {
 /**
  * The KoDocumentResource contains a set of per-document
  * properties.
- * \sa KoResourceManager KoShapeCollection::resourceManager()
+ * \sa KResourceManager KoShapeCollection::resourceManager()
  */
 namespace KoDocumentResource
 {
@@ -97,7 +97,7 @@ enum DocumentResource {
 }
 
 /**
- * The KoResourceManager contains a set of per-canvas
+ * The KResourceManager contains a set of per-canvas
  * properties, like current foreground color, current background
  * color and more. All tools belonging to the current canvas are
  * notified when a Resource changes (is set).
@@ -120,7 +120,7 @@ enum DocumentResource {
  *  document = static_cast<QTextDocument*>(var.value<void*>());
  * @endcode
  */
-class FLAKE_EXPORT KoResourceManager : public QObject
+class FLAKE_EXPORT KResourceManager : public QObject
 {
     Q_OBJECT
 
@@ -130,8 +130,8 @@ public:
      * Constructor.
      * @param parent the parent QObject, used for memory management.
      */
-    explicit KoResourceManager(QObject *parent = 0);
-    ~KoResourceManager();
+    explicit KResourceManager(QObject *parent = 0);
+    ~KResourceManager();
 
     /**
      * Set a resource of any type.
@@ -284,11 +284,11 @@ public:
      * And the object would create a slot using the normal Qt concepts;
      * @code
      * public slots:
-     *      void createImageCollection(KoResourceManager *manager) {
+     *      void createImageCollection(KResourceManager *manager) {
      *          manager->setImageCollection(new KImageCollection(manager));
      *      }
      * @endcode
-     * Notice that the method is required to take an argumennt of KoResourceManager* and
+     * Notice that the method is required to take an argumennt of KResourceManager* and
      * the name of the method is passed without arguments (which is notably different
      * from usage of the SLOT macro)
      *
@@ -321,8 +321,8 @@ signals:
     void resourceChanged(int key, const QVariant &value);
 
 private:
-    KoResourceManager(const KoResourceManager&);
-    KoResourceManager& operator=(const KoResourceManager&);
+    KResourceManager(const KResourceManager&);
+    KResourceManager& operator=(const KResourceManager&);
 
     class Private;
     Private *const d;

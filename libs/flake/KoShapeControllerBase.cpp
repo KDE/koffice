@@ -19,14 +19,14 @@
 */
 
 #include "KoShapeControllerBase.h"
-#include "KoResourceManager.h"
+#include "KResourceManager.h"
 #include "KoShapeRegistry.h"
 
 class KoShapeControllerBasePrivate
 {
 public:
     KoShapeControllerBasePrivate()
-        : resourceManager(new KoResourceManager())
+        : resourceManager(new KResourceManager())
     {
         KoShapeRegistry *registry = KoShapeRegistry::instance();
         foreach (const QString &id, registry->keys()) {
@@ -40,7 +40,7 @@ public:
         delete resourceManager;
     }
 
-    KoResourceManager *resourceManager;
+    KResourceManager *resourceManager;
 };
 
 KoShapeControllerBase::KoShapeControllerBase()
@@ -53,7 +53,7 @@ KoShapeControllerBase::~KoShapeControllerBase()
     delete d;
 }
 
-KoResourceManager *KoShapeControllerBase::resourceManager() const
+KResourceManager *KoShapeControllerBase::resourceManager() const
 {
     return d->resourceManager;
 }

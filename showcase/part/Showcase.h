@@ -22,12 +22,12 @@
 
 #define TextShape_SHAPEID "TextShapeID"
 
-#include <KoResourceManager.h>
+#include <KResourceManager.h>
 
 /// The showcase-global namespace for all showcase related things.
 namespace Showcase
 {
-    /// Specifies the Showcase specific resources that you can put and get from the KoResourceManager
+    /// Specifies the Showcase specific resources that you can put and get from the KResourceManager
     enum ShowcaseDocumentResources {
         SoundCollection = KoDocumentResource::ShowcaseStart + 1,
         PageLayouts ///< of type SCPageLayouts

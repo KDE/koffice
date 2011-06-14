@@ -30,7 +30,7 @@ class KoShapeSavingContext;
 class KoShapeUserData;
 class KoViewConverter;
 class PlaceholderData;
-class KoResourceManager;
+class KResourceManager;
 
 class SCPlaceholderStrategy
 {
@@ -51,7 +51,7 @@ public:
 
     virtual ~SCPlaceholderStrategy();
 
-    virtual KoShape *createShape(KoResourceManager *documentResources);
+    virtual KoShape *createShape(KResourceManager *documentResources);
 
     virtual void paint(QPainter &painter, const KoViewConverter &converter, const QRectF &rect);
 
@@ -59,7 +59,7 @@ public:
 
     virtual bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context);
 
-    virtual void init(KoResourceManager *documentResources);
+    virtual void init(KResourceManager *documentResources);
 
     virtual KoShapeUserData * userData() const;
 

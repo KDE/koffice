@@ -28,7 +28,7 @@
 #include <kdemacros.h>
 #include <kcomponentdata.h>
 
-#include <KoResourceManager.h>
+#include <KResourceManager.h>
 #include <KoTextEditingPlugin.h>
 #include <KoTextEditingRegistry.h>
 #include <KoTextEditingFactory.h>
@@ -47,7 +47,7 @@ extern "C" KDE_EXPORT int kdemain(int argc, char **argv)
     KApplication a;
 
     KoTextEditingPlugin *thesaurus = 0;
-    KoResourceManager *rm = new KoResourceManager(&a);
+    KResourceManager *rm = new KResourceManager(&a);
 
     foreach (const QString &key, KoTextEditingRegistry::instance()->keys()) {
         KoTextEditingFactory *factory =  KoTextEditingRegistry::instance()->value(key);

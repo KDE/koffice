@@ -754,7 +754,7 @@ void TextTool::updateSelectionHandler()
         }
     }
 
-    KoResourceManager *p = canvas()->resourceManager();
+    KResourceManager *p = canvas()->resourceManager();
     m_allowResourceManagerUpdates = false;
     if (m_textEditor) {
         p->setResource(KoText::CurrentTextPosition, m_textEditor.data()->position());

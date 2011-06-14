@@ -23,7 +23,7 @@
 
 #include <KCanvasBase.h>
 #include <KoToolProxy.h>
-#include <KoResourceManager.h>
+#include <KResourceManager.h>
 #include <KoTextEditor.h>
 
 #include <KActionMenu>

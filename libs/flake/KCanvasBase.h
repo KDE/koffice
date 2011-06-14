@@ -37,7 +37,7 @@
 class QGraphicsWidget;
 class QUndoCommand;
 
-class KoResourceManager;
+class KResourceManager;
 class KoShapeManager;
 class KoToolProxy;
 class KoViewConverter;
@@ -178,7 +178,7 @@ public:
      * @endcode
      * @see KoShapeController::resourceManager()
      */
-    KoResourceManager *resourceManager() const;
+    KResourceManager *resourceManager() const;
 
     /**
      * Return the shape controller for this canvas.

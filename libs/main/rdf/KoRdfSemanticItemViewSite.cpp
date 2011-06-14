@@ -22,7 +22,7 @@
 #include "KoDocumentRdf_p.h"
 #include "KCanvasBase.h"
 #include "KoToolProxy.h"
-#include "KoResourceManager.h"
+#include "KResourceManager.h"
 #include "KoText.h"
 #include "KoTextEditor.h"
 #include <kdebug.h>
@@ -150,7 +150,7 @@ void KoRdfSemanticItemViewSite::reflowUsingCurrentStylesheet(KoTextEditor *edito
     ss->format(d->m_semItem, editor, d->m_xmlid);
 }
 
-void KoRdfSemanticItemViewSite::selectRange(KoResourceManager *provider, int startpos, int endpos)
+void KoRdfSemanticItemViewSite::selectRange(KResourceManager *provider, int startpos, int endpos)
 {
     kDebug(30015) << " startpos:" << startpos << " endpos:" << endpos;
     if (endpos > startpos) {
@@ -169,7 +169,7 @@ void KoRdfSemanticItemViewSite::select(KCanvasBase *host)
     Q_ASSERT(d->m_semItem->documentRdf());
     Q_ASSERT(host);
     KoTextEditor *editor = KoDocumentRdf::ensureTextTool(host);
-    KoResourceManager *provider = host->resourceManager();
+    KResourceManager *provider = host->resourceManager();
     KoDocumentRdf *rdf = d->m_semItem->documentRdf();
     QPair<int, int> p = p = rdf->findExtent(d->m_xmlid);
     int startpos = p.first;

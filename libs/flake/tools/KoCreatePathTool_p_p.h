@@ -42,7 +42,7 @@
 #include "KParameterShape.h"
 #include "KoViewConverter.h"
 #include "KoShapeManager.h"
-#include "KoResourceManager.h"
+#include "KResourceManager.h"
 #include "KoSnapStrategy_p.h"
 #include "KoToolBase_p.h"
 

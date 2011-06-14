@@ -20,7 +20,7 @@
 #ifndef KSPREAD_CANVAS_RESOURCES
 #define KSPREAD_CANVAS_RESOURCES
 
-#include <KoResourceManager.h>
+#include <KResourceManager.h>
 
 /**
  * KCells specific canvas resources

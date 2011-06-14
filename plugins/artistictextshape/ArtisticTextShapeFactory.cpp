@@ -36,7 +36,7 @@ ArtisticTextShapeFactory::ArtisticTextShapeFactory(QObject *parent)
     setOdfElementNames( KOdfXmlNS::draw, QStringList( "custom-shape" ) );
 }
 
-KoShape *ArtisticTextShapeFactory::createDefaultShape(KoResourceManager *) const
+KoShape *ArtisticTextShapeFactory::createDefaultShape(KResourceManager *) const
 {
     ArtisticTextShape * text = new ArtisticTextShape();
     text->setBackground( new KColorBackground( QColor( Qt::black) ) );

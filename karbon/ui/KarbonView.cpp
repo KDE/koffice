@@ -64,7 +64,7 @@
 #include <KoMainWindow.h>
 #include <KLineBorder.h>
 #include <KCanvasController.h>
-#include <KoResourceManager.h>
+#include <KResourceManager.h>
 #include <KoFilterManager.h>
 #include <KoUnitDoubleSpinBox.h>
 #include <KoPageLayoutDialog.h>

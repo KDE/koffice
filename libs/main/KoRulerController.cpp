@@ -21,7 +21,7 @@
 #include "KoText.h"
 #include "styles/KParagraphStyle.h"
 
-#include <KoResourceManager.h>
+#include <KResourceManager.h>
 
 #include <KDebug>
 
@@ -49,7 +49,7 @@ public:
         Unknown = -2,
         NewTab = -1
     };
-    Private(KoRulerController *qq, KoRuler *r, KoResourceManager *crp)
+    Private(KoRulerController *qq, KoRuler *r, KResourceManager *crp)
             : q(qq),
             ruler(r),
             resourceManager(crp),
@@ -232,7 +232,7 @@ qDebug() << tabList.count();
 private:
     KoRulerController *q;
     KoRuler *ruler;
-    KoResourceManager *resourceManager;
+    KResourceManager *resourceManager;
     QWeakPointer<QTextDocument> textDocument;
     QList<KoText::Tab> tabList;
     KoText::Tab currentTab;
@@ -241,7 +241,7 @@ private:
     bool blockSignals;
 };
 
-KoRulerController::KoRulerController(KoRuler *horizontalRuler, KoResourceManager *crp)
+KoRulerController::KoRulerController(KoRuler *horizontalRuler, KResourceManager *crp)
         : QObject(horizontalRuler),
         d(new Private(this, horizontalRuler, crp))
 {

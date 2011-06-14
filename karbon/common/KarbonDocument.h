@@ -46,7 +46,7 @@ class KoShapeLayer;
 class KImageCollection;
 class KOdfStore;
 class KDataCenterBase;
-class KoResourceManager;
+class KResourceManager;
 
 /**
  * All non-visual, static doc info is in here.
@@ -178,11 +178,11 @@ public:
      * Fetch the current resourceManager.
      * See KoShapeController::resourceManager() for more details.
      */
-    KoResourceManager *resourceManager() const;
+    KResourceManager *resourceManager() const;
     /**
      * Set a new resource manager.
      */
-    void setResourceManager(KoResourceManager *rm);
+    void setResourceManager(KResourceManager *rm);
 
     /// Returns the united bounding rectangle of the documents content and the document page
     QRectF boundingRect() const;

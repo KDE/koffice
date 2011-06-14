@@ -40,7 +40,7 @@ PictureShapeFactory::PictureShapeFactory(QObject *parent)
     setLoadingPriority(1);
 }
 
-KoShape *PictureShapeFactory::createDefaultShape(KoResourceManager *documentResources) const
+KoShape *PictureShapeFactory::createDefaultShape(KResourceManager *documentResources) const
 {
     PictureShape * defaultShape = new PictureShape();
     defaultShape->setShapeId(PICTURESHAPEID);
@@ -57,13 +57,13 @@ bool PictureShapeFactory::supports(const KXmlElement &e, KoShapeLoadingContext &
     return e.localName() == "image" && e.namespaceURI() == KOdfXmlNS::draw;
 }
 
-void PictureShapeFactory::newDocumentResourceManager(KoResourceManager *manager)
+void PictureShapeFactory::newDocumentResourceManager(KResourceManager *manager)
 {
     manager->setLazyResourceSlot(KoDocumentResource::ImageCollection,
             this, "createImageCollection");
 }
 
-void PictureShapeFactory::createImageCollection(KoResourceManager *manager)
+void PictureShapeFactory::createImageCollection(KResourceManager *manager)
 {
     manager->setImageCollection(new KImageCollection(manager));
 }

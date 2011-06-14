@@ -33,8 +33,8 @@ public:
     /// constructor
     explicit StarShapeFactory(QObject *parent);
     ~StarShapeFactory() {}
-    virtual KoShape *createDefaultShape(KoResourceManager *documentResources = 0) const;
-    virtual KoShape *createShape(const KProperties *params, KoResourceManager *documentResources = 0) const;
+    virtual KoShape *createDefaultShape(KResourceManager *documentResources = 0) const;
+    virtual KoShape *createShape(const KProperties *params, KResourceManager *documentResources = 0) const;
     virtual bool supports(const KXmlElement &e, KoShapeLoadingContext &context) const;
     virtual KoShapeConfigWidgetBase *createConfigWidget(KCanvasBase *canvas);
 };

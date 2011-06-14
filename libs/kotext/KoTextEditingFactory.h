@@ -26,7 +26,7 @@
 #include "kotext_export.h"
 
 class KoTextEditingPlugin;
-class KoResourceManager;
+class KResourceManager;
 
 /**
  * A factory for text editing plugins. There should be one for each plugin type to
@@ -54,7 +54,7 @@ public:
      * Create a new instance of an text editor plugin.
      * @param documentResourceManager the resources manager that holds all document-wide data.
      */
-    virtual KoTextEditingPlugin *create(KoResourceManager *documentResourceManager) const = 0;
+    virtual KoTextEditingPlugin *create(KResourceManager *documentResourceManager) const = 0;
 
     /**
      * return the id for the plugin this factory creates.

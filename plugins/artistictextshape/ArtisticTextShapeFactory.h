@@ -32,7 +32,7 @@ public:
     explicit ArtisticTextShapeFactory(QObject *parent);
     ~ArtisticTextShapeFactory() {}
 
-    virtual KoShape *createDefaultShape(KoResourceManager *documentResources = 0) const;
+    virtual KoShape *createDefaultShape(KResourceManager *documentResources = 0) const;
     // reimplemented from KoShapeFactoryBase
     virtual bool supports(const KXmlElement & e, KoShapeLoadingContext &context) const;
 };

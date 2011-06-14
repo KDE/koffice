@@ -29,7 +29,7 @@
 #include <KDataCenterBase.h>
 
 class KCanvasBase;
-class KoResourceManager;
+class KResourceManager;
 class QTextDocument;
 class KOdfStore;
 class KXmlWriter;
@@ -69,7 +69,7 @@ public:
      * pointer or a NULL pointer if there is no Rdf for the canvas.
      */
     static KDocumentRdfBase *fromResourceManager(KCanvasBase *host);
-    virtual void linkToResourceManager(KoResourceManager *rm);
+    virtual void linkToResourceManager(KResourceManager *rm);
 
     virtual void updateInlineRdfStatements(QTextDocument *qdoc);
     virtual void updateXmlIdReferences(const QMap<QString, QString> &m);

@@ -32,7 +32,7 @@
 #include <QLabel>
 
 #include <KCanvasController.h>
-#include <KoResourceManager.h>
+#include <KResourceManager.h>
 #include <KColorBackground.h>
 #include <KoFind.h>
 #include <KoTextDocumentLayout.h>

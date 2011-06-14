@@ -25,7 +25,7 @@
 #include <Soprano/Soprano>
 
 class KCanvasBase;
-class KoResourceManager;
+class KResourceManager;
 
 class KoRdfSemanticItemViewSitePrivate;
 
@@ -140,7 +140,7 @@ private:
      * Convenience method to select from startpos to endpos in the
      * document
      */
-    void selectRange(KoResourceManager *provider, int startpos, int endpos);
+    void selectRange(KResourceManager *provider, int startpos, int endpos);
 
 };
 

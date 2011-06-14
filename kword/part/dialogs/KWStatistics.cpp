@@ -24,7 +24,7 @@
 #include "frames/KWFrameSet.h"
 #include "frames/KWTextFrameSet.h"
 
-#include <KoResourceManager.h>
+#include <KResourceManager.h>
 #include <KoExecutePolicy.h>
 #include <KoAction.h>
 #include <KoSelection.h>

@@ -28,7 +28,7 @@
 #include <KoTextShapeData.h>
 #include <KOdfXmlNS.h>
 #include <KoStyleManager.h>
-#include <KoResourceManager.h>
+#include <KResourceManager.h>
 #include <KInlineTextObjectManager.h>
 #include <changetracker/KChangeTracker.h>
 #include <KImageCollection.h>
@@ -58,7 +58,7 @@ TextShapeFactory::TextShapeFactory(QObject *parent)
     addTemplate(t);
 }
 
-KoShape *TextShapeFactory::createDefaultShape(KoResourceManager *documentResources) const
+KoShape *TextShapeFactory::createDefaultShape(KResourceManager *documentResources) const
 {
     TextShape *text = new TextShape();
     if (documentResources) {
@@ -85,7 +85,7 @@ KoShape *TextShapeFactory::createDefaultShape(KoResourceManager *documentResourc
     return text;
 }
 
-KoShape *TextShapeFactory::createShape(const KProperties *params, KoResourceManager *documentResources) const
+KoShape *TextShapeFactory::createShape(const KProperties *params, KResourceManager *documentResources) const
 {
     TextShape *shape = static_cast<TextShape*>(createDefaultShape(documentResources));
     shape->textShapeData()->document()->setUndoRedoEnabled(false);
@@ -111,7 +111,7 @@ bool TextShapeFactory::supports(const KXmlElement & e, KoShapeLoadingContext &co
         (e.localName() == "table" && e.namespaceURI() == KOdfXmlNS::table);
 }
 
-void TextShapeFactory::newDocumentResourceManager(KoResourceManager *manager)
+void TextShapeFactory::newDocumentResourceManager(KResourceManager *manager)
 {
     manager->setLazyResourceSlot(KoDocumentResource::ImageCollection,
             this, "createImageCollection");
@@ -125,32 +125,32 @@ void TextShapeFactory::newDocumentResourceManager(KoResourceManager *manager)
             this, "createEditingPluginContainer");
 }
 
-void TextShapeFactory::createStylemanager(KoResourceManager *manager)
+void TextShapeFactory::createStylemanager(KResourceManager *manager)
 {
     QVariant variant;
     variant.setValue(new KoStyleManager(manager));
     manager->setResource(KoText::StyleManager, variant);
 }
 
-void TextShapeFactory::createTextObjectManager(KoResourceManager *manager)
+void TextShapeFactory::createTextObjectManager(KResourceManager *manager)
 {
     QVariant variant;
     variant.setValue<KInlineTextObjectManager*>(new KInlineTextObjectManager(manager));
     manager->setResource(KoText::InlineTextObjectManager, variant);
 }
 
-void TextShapeFactory::createImageCollection(KoResourceManager *manager)
+void TextShapeFactory::createImageCollection(KResourceManager *manager)
 {
     manager->setImageCollection(new KImageCollection(manager));
 }
 
-void TextShapeFactory::createUndoStack(KoResourceManager *manager)
+void TextShapeFactory::createUndoStack(KResourceManager *manager)
 {
     kWarning(32500) << "No KUndoStack found in the document resource manager, creating a new one";
     manager->setUndoStack(new KUndoStack(manager));
 }
 
-void TextShapeFactory::createEditingPluginContainer(KoResourceManager *manager)
+void TextShapeFactory::createEditingPluginContainer(KResourceManager *manager)
 {
     TextEditingPluginContainer *container = TextEditingPluginContainer::create(manager);
     QVariant variant;

@@ -21,7 +21,7 @@
 
 #include "pagelayout/SCPageLayouts.h"
 #include <KOdfXmlNS.h>
-//#include <KoResourceManager.h>
+//#include <KResourceManager.h>
 #include "Showcase.h"
 #include <KoPALoadingContext.h>
 #include <KoOdfWorkaround.h>

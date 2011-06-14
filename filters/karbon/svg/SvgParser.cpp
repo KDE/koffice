@@ -36,7 +36,7 @@
 #include <KoShapeContainer.h>
 #include <KoShapeGroup.h>
 #include <KPathShape.h>
-#include <KoResourceManager.h>
+#include <KResourceManager.h>
 #include <KPathShapeLoader.h>
 #include <commands/KoShapeGroupCommand.h>
 #include <KUnit.h>
@@ -61,7 +61,7 @@
 #include <QtCore/QDir>
 
 
-SvgParser::SvgParser(KoResourceManager *documentResourceManager)
+SvgParser::SvgParser(KResourceManager *documentResourceManager)
         : m_documentResourceManager(documentResourceManager)
 {
     m_fontAttributes << "font-family" << "font-size" << "font-weight" << "text-decoration";

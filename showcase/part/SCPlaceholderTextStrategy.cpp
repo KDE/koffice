@@ -56,7 +56,7 @@ SCPlaceholderTextStrategy::~SCPlaceholderTextStrategy()
     delete m_textShape;
 }
 
-KoShape *SCPlaceholderTextStrategy::createShape(KoResourceManager *documentResources)
+KoShape *SCPlaceholderTextStrategy::createShape(KResourceManager *documentResources)
 {
     KoShape * shape = SCPlaceholderStrategy::createShape(documentResources);
     if (m_textShape) {
@@ -162,7 +162,7 @@ kDebug() << style;
     return true;
 }
 
-void SCPlaceholderTextStrategy::init(KoResourceManager *documentResources)
+void SCPlaceholderTextStrategy::init(KResourceManager *documentResources)
 {
     KoShapeFactoryBase *factory = KoShapeRegistry::instance()->value("TextShapeID");
     Q_ASSERT(factory);

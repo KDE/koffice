@@ -33,7 +33,7 @@
 #include <KOdfStorageDevice.h>
 #include <KCanvasBase.h>
 #include <KoToolProxy.h>
-#include <KoResourceManager.h>
+#include <KResourceManager.h>
 #include <KoTextEditor.h>
 #include <KInlineObject.h>
 #include <KoTextInlineRdf.h>
@@ -88,7 +88,7 @@ Soprano::Model *KoDocumentRdf::model() const
 
 KoDocumentRdf *KoDocumentRdf::fromResourceManager(KCanvasBase *host)
 {
-    KoResourceManager *rm = host->resourceManager();
+    KResourceManager *rm = host->resourceManager();
     if (!rm->hasResource(KoText::DocumentRdf)) {
         return 0;
     }

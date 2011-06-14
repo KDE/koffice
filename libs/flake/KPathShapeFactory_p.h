@@ -45,10 +45,10 @@ public:
     /// constructor
     KPathShapeFactory(QObject *parent, const QStringList&);
     ~KPathShapeFactory() {}
-    virtual KoShape *createDefaultShape(KoResourceManager *documentResources = 0) const;
+    virtual KoShape *createDefaultShape(KResourceManager *documentResources = 0) const;
     bool supports(const KXmlElement &element, KoShapeLoadingContext &context) const;
     /// reimplemented
-    virtual void newDocumentResourceManager(KoResourceManager *manager);
+    virtual void newDocumentResourceManager(KResourceManager *manager);
 };
 
 #endif

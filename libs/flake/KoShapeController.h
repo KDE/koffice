@@ -30,7 +30,7 @@ class KCanvasBase;
 class KoShape;
 class KoShapeControllerBase;
 class QUndoCommand;
-class KoResourceManager;
+class KResourceManager;
 
 /**
  * Class used by tools to maintain the list of shapes.
@@ -101,7 +101,7 @@ public:
      * collection and others.
      * @see KCanvasBase::resourceManager()
      */
-    KoResourceManager *resourceManager() const;
+    KResourceManager *resourceManager() const;
 
 private:
     class Private;

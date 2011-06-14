@@ -20,7 +20,7 @@
 #ifndef _KARBON_H_
 #define _KARBON_H_
 
-#include "KoResourceManager.h"
+#include "KResourceManager.h"
 
 namespace Karbon
 {

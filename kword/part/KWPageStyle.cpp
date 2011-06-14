@@ -348,7 +348,7 @@ KOdfGenericStyle KWPageStyle::saveOdf() const
     return pageLayout;
 }
 
-void KWPageStyle::loadOdf(KOdfLoadingContext &context, const KXmlElement &masterNode, const KXmlElement &style, KoResourceManager *documentResources)
+void KWPageStyle::loadOdf(KOdfLoadingContext &context, const KXmlElement &masterNode, const KXmlElement &style, KResourceManager *documentResources)
 {
     d->pageLayout.loadOdf(style);
     KXmlElement props = KoXml::namedItemNS(style, KOdfXmlNS::style, "page-layout-properties");

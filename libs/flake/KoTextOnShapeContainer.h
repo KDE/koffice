@@ -25,7 +25,7 @@
 #include "flake_export.h"
 
 class KoTextOnShapeContainerPrivate;
-class KoResourceManager;
+class KResourceManager;
 
 /**
  * Container that is used to wrap a shape with a text on top.
@@ -42,7 +42,7 @@ public:
      *      integrate better into the document. Not passing this will mean that for example
      *      the text styles will not be shared with other shapes.
      */
-    explicit KoTextOnShapeContainer(KoShape *childShape, KoResourceManager *documentResources = 0);
+    explicit KoTextOnShapeContainer(KoShape *childShape, KResourceManager *documentResources = 0);
     virtual ~KoTextOnShapeContainer();
 
     virtual bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context);

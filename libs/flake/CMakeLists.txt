@@ -13,7 +13,7 @@ add_subdirectory(pics)
 set(flake_SRCS
     KoFlake.cpp
     KCanvasBase.cpp
-    KoResourceManager.cpp
+    KResourceManager.cpp
     KCanvasObserverBase.cpp
     KCanvasSupervisor.cpp
     KCutController.cpp
@@ -277,7 +277,7 @@ install(
     KoPluginLoader.h
     KPointerEvent.h
     KPostscriptPaintDevice.h
-    KoResourceManager.h
+    KResourceManager.h
     KoRTree.h
     KoSelection.h
     KoShapeApplicationData.h

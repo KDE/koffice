@@ -51,7 +51,7 @@ class QPainter;
 
 class KOdfGenericStyles;
 class KOdfSettings;
-class KoResourceManager;
+class KResourceManager;
 class KOdfStore;
 class KXmlWriter;
 

@@ -29,7 +29,7 @@ class SCPlaceholderTextStrategy : public SCPlaceholderStrategy
 public:
     virtual ~SCPlaceholderTextStrategy();
 
-    virtual KoShape *createShape(KoResourceManager *documentResources);
+    virtual KoShape *createShape(KResourceManager *documentResources);
 
     virtual void paint(QPainter &painter, const KoViewConverter &converter, const QRectF &rect);
 
@@ -37,7 +37,7 @@ public:
 
     virtual bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context);
 
-    virtual void init(KoResourceManager *documentResources);
+    virtual void init(KResourceManager *documentResources);
 
     virtual KoShapeUserData * userData() const;
 

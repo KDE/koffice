@@ -37,7 +37,7 @@ class KOdfStore;
 class KOdfLoadingContext;
 class KOdfEmbeddedDocumentSaver;
 class KoStyleManager;
-class KoResourceManager;
+class KResourceManager;
 
 class KCompletion;
 
@@ -351,7 +351,7 @@ public:
      * collection and others.
      * @see KCanvasBase::resourceManager()
      */
-    KoResourceManager *resourceManager() const;
+    KResourceManager *resourceManager() const;
 public Q_SLOTS:
     /**
      * \ingroup Damages

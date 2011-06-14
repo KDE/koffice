@@ -20,7 +20,7 @@
 #include "KPathShape.h"
 #include "KLineBorder.h"
 #include "KImageCollection.h"
-#include "KoResourceManager.h"
+#include "KResourceManager.h"
 #include "KoShapeLoadingContext.h"
 
 #include <klocale.h>
@@ -39,7 +39,7 @@ KPathShapeFactory::KPathShapeFactory(QObject *parent, const QStringList&)
     setLoadingPriority(0);
 }
 
-KoShape *KPathShapeFactory::createDefaultShape(KoResourceManager *) const
+KoShape *KPathShapeFactory::createDefaultShape(KResourceManager *) const
 {
     KPathShape* path = new KPathShape();
     path->moveTo(QPointF(0, 50));
@@ -67,7 +67,7 @@ bool KPathShapeFactory::supports(const KXmlElement & e, KoShapeLoadingContext &c
     return false;
 }
 
-void KPathShapeFactory::newDocumentResourceManager(KoResourceManager *manager)
+void KPathShapeFactory::newDocumentResourceManager(KResourceManager *manager)
 {
     // as we need an image collection for the pattern background
     // we want to make sure that there is always an image collection

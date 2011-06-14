@@ -45,7 +45,7 @@
 #include <KoShapeOdfSaveHelper.h>
 #include <KDrag.h>
 #include <KCanvasBase.h>
-#include <KoResourceManager.h>
+#include <KResourceManager.h>
 #include <KoShapeRubberSelectStrategy.h>
 #include <commands/KoShapeMoveCommand.h>
 #include <commands/KoShapeGroupCommand.h>

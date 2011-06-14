@@ -627,7 +627,7 @@ KoShape *KWFrameLayout::createTextShape(const KWPage &page)
     Q_ASSERT(page.isValid());
     KoShapeFactoryBase *factory = KoShapeRegistry::instance()->value(TextShape_SHAPEID);
     Q_ASSERT(factory);
-    KoResourceManager *rm = 0;
+    KResourceManager *rm = 0;
     if (m_document)
         rm = m_document->resourceManager();
     KoShape *shape = factory->createDefaultShape(rm);

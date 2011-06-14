@@ -18,7 +18,7 @@
    the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
    Boston, MA 02110-1301, USA.
  */
-#include "KoResourceManager.h"
+#include "KResourceManager.h"
 #include "KoShape.h"
 #include "KLineBorder.h"
 
@@ -27,17 +27,17 @@
 #include <KUndoStack>
 #include <KDebug>
 
-class KoResourceManager::Private
+class KResourceManager::Private
 {
 public:
-    void fetchLazy(int key, const KoResourceManager *parent) {
+    void fetchLazy(int key, const KResourceManager *parent) {
         Q_ASSERT(lazyResources.contains(key));
         Slot slot = lazyResources.value(key);
         lazyResources.remove(key);
 
-        KoResourceManager *rm = const_cast<KoResourceManager*>(parent);
+        KResourceManager *rm = const_cast<KResourceManager*>(parent);
         slot.object->metaObject()->invokeMethod(slot.object, slot.slot,
-            Qt::DirectConnection, Q_ARG(KoResourceManager *, rm));
+            Qt::DirectConnection, Q_ARG(KResourceManager *, rm));
     }
 
 
@@ -49,19 +49,19 @@ public:
     QHash<int, Slot> lazyResources;
 };
 
-KoResourceManager::KoResourceManager(QObject *parent)
+KResourceManager::KResourceManager(QObject *parent)
         : QObject(parent),
         d(new Private())
 {
     setGrabSensitivity(3);
 }
 
-KoResourceManager::~KoResourceManager()
+KResourceManager::~KResourceManager()
 {
     delete d;
 }
 
-void KoResourceManager::setResource(int key, const QVariant &value)
+void KResourceManager::setResource(int key, const QVariant &value)
 {
     if (d->resources.contains(key)) {
         if (d->resources.value(key) == value)
@@ -74,7 +74,7 @@ void KoResourceManager::setResource(int key, const QVariant &value)
     emit resourceChanged(key, value);
 }
 
-QVariant KoResourceManager::resource(int key) const
+QVariant KResourceManager::resource(int key) const
 {
     if (d->lazyResources.contains(key))
         d->fetchLazy(key, this);
@@ -85,21 +85,21 @@ QVariant KoResourceManager::resource(int key) const
         return d->resources.value(key);
 }
 
-void KoResourceManager::setResource(int key, KoShape *shape)
+void KResourceManager::setResource(int key, KoShape *shape)
 {
     QVariant v;
     v.setValue(shape);
     setResource(key, v);
 }
 
-void KoResourceManager::setResource(int key, const KUnit &unit)
+void KResourceManager::setResource(int key, const KUnit &unit)
 {
     QVariant v;
     v.setValue(unit);
     setResource(key, v);
 }
 
-QColor KoResourceManager::colorResource(int key) const
+QColor KResourceManager::colorResource(int key) const
 {
     if (d->lazyResources.contains(key))
         d->fetchLazy(key, this);
@@ -108,27 +108,27 @@ QColor KoResourceManager::colorResource(int key) const
     return resource(key).value<QColor>();
 }
 
-void KoResourceManager::setForegroundColor(const QColor &color)
+void KResourceManager::setForegroundColor(const QColor &color)
 {
     setResource(KoCanvasResource::ForegroundColor, color);
 }
 
-QColor KoResourceManager::foregroundColor() const
+QColor KResourceManager::foregroundColor() const
 {
     return colorResource(KoCanvasResource::ForegroundColor);
 }
 
-void KoResourceManager::setBackgroundColor(const QColor &color)
+void KResourceManager::setBackgroundColor(const QColor &color)
 {
     setResource(KoCanvasResource::BackgroundColor, color);
 }
 
-QColor KoResourceManager::backgroundColor() const
+QColor KResourceManager::backgroundColor() const
 {
     return colorResource(KoCanvasResource::BackgroundColor);
 }
 
-KoShape *KoResourceManager::koShapeResource(int key) const
+KoShape *KResourceManager::koShapeResource(int key) const
 {
     if (d->lazyResources.contains(key))
         d->fetchLazy(key, this);
@@ -138,7 +138,7 @@ KoShape *KoResourceManager::koShapeResource(int key) const
     return resource(key).value<KoShape *>();
 }
 
-void KoResourceManager::setHandleRadius(int handleRadius)
+void KResourceManager::setHandleRadius(int handleRadius)
 {
     // do not allow arbitrary small handles
     if (handleRadius < 3)
@@ -146,21 +146,21 @@ void KoResourceManager::setHandleRadius(int handleRadius)
     setResource(KoCanvasResource::HandleRadius, QVariant(handleRadius));
 }
 
-int KoResourceManager::handleRadius() const
+int KResourceManager::handleRadius() const
 {
     if (d->resources.contains(KoCanvasResource::HandleRadius))
         return d->resources.value(KoCanvasResource::HandleRadius).toInt();
     return 3; // default value.
 }
 
-KUnit KoResourceManager::unitResource(int key) const
+KUnit KResourceManager::unitResource(int key) const
 {
     if (d->lazyResources.contains(key))
         d->fetchLazy(key, this);
     return resource(key).value<KUnit>();
 }
 
-void KoResourceManager::setGrabSensitivity(int grabSensitivity)
+void KResourceManager::setGrabSensitivity(int grabSensitivity)
 {
     // do not allow arbitrary small handles
     if (grabSensitivity < 1)
@@ -168,12 +168,12 @@ void KoResourceManager::setGrabSensitivity(int grabSensitivity)
     setResource(KoCanvasResource::GrabSensitivity, QVariant(grabSensitivity));
 }
 
-int KoResourceManager::grabSensitivity() const
+int KResourceManager::grabSensitivity() const
 {
     return resource(KoCanvasResource::GrabSensitivity).toInt();
 }
 
-bool KoResourceManager::boolResource(int key) const
+bool KResourceManager::boolResource(int key) const
 {
     if (d->lazyResources.contains(key))
         d->fetchLazy(key, this);
@@ -182,7 +182,7 @@ bool KoResourceManager::boolResource(int key) const
     return d->resources[key].toBool();
 }
 
-int KoResourceManager::intResource(int key) const
+int KResourceManager::intResource(int key) const
 {
     if (d->lazyResources.contains(key))
         d->fetchLazy(key, this);
@@ -191,7 +191,7 @@ int KoResourceManager::intResource(int key) const
     return d->resources[key].toInt();
 }
 
-QString KoResourceManager::stringResource(int key) const
+QString KResourceManager::stringResource(int key) const
 {
     if (d->lazyResources.contains(key))
         d->fetchLazy(key, this);
@@ -202,7 +202,7 @@ QString KoResourceManager::stringResource(int key) const
     return qvariant_cast<QString>(resource(key));
 }
 
-QSizeF KoResourceManager::sizeResource(int key) const
+QSizeF KResourceManager::sizeResource(int key) const
 {
     if (d->lazyResources.contains(key))
         d->fetchLazy(key, this);
@@ -213,12 +213,12 @@ QSizeF KoResourceManager::sizeResource(int key) const
     return qvariant_cast<QSizeF>(resource(key));
 }
 
-bool KoResourceManager::hasResource(int key) const
+bool KResourceManager::hasResource(int key) const
 {
     return d->resources.contains(key) || d->lazyResources.contains(key);
 }
 
-void KoResourceManager::clearResource(int key)
+void KResourceManager::clearResource(int key)
 {
     if (! d->resources.contains(key))
         return;
@@ -227,59 +227,59 @@ void KoResourceManager::clearResource(int key)
     emit resourceChanged(key, empty);
 }
 
-void KoResourceManager::setLazyResourceSlot(int key, QObject *object, const char *slot)
+void KResourceManager::setLazyResourceSlot(int key, QObject *object, const char *slot)
 {
     if (d->resources.contains(key) || d->lazyResources.contains(key))
         return;
-    KoResourceManager::Private::Slot target;
+    KResourceManager::Private::Slot target;
     target.object = object;
     target.slot = slot;
     d->lazyResources.insert(key, target);
 }
 
-KUndoStack *KoResourceManager::undoStack() const
+KUndoStack *KResourceManager::undoStack() const
 {
     if (!hasResource(KoDocumentResource::UndoStack))
         return 0;
     return static_cast<KUndoStack*>(resource(KoDocumentResource::UndoStack).value<void*>());
 }
 
-void KoResourceManager::setUndoStack(KUndoStack *undoStack)
+void KResourceManager::setUndoStack(KUndoStack *undoStack)
 {
     QVariant variant;
     variant.setValue<void*>(undoStack);
     setResource(KoDocumentResource::UndoStack, variant);
 }
 
-KImageCollection *KoResourceManager::imageCollection() const
+KImageCollection *KResourceManager::imageCollection() const
 {
     if (!hasResource(KoDocumentResource::ImageCollection))
         return 0;
     return static_cast<KImageCollection*>(resource(KoDocumentResource::ImageCollection).value<void*>());
 }
 
-void KoResourceManager::setImageCollection(KImageCollection *ic)
+void KResourceManager::setImageCollection(KImageCollection *ic)
 {
     QVariant variant;
     variant.setValue<void*>(ic);
     setResource(KoDocumentResource::ImageCollection, variant);
 }
 
-KOdfDocumentBase *KoResourceManager::odfDocument() const
+KOdfDocumentBase *KResourceManager::odfDocument() const
 {
     if (!hasResource(KoDocumentResource::OdfDocument))
         return 0;
     return static_cast<KOdfDocumentBase*>(resource(KoDocumentResource::OdfDocument).value<void*>());
 }
 
-void KoResourceManager::setOdfDocument(KOdfDocumentBase *currentDocument)
+void KResourceManager::setOdfDocument(KOdfDocumentBase *currentDocument)
 {
     QVariant variant;
     variant.setValue<void*>(currentDocument);
     setResource(KoDocumentResource::OdfDocument, variant);
 }
 
-void KoResourceManager::setTextDocumentList(const QList<QTextDocument *> &allDocuments)
+void KResourceManager::setTextDocumentList(const QList<QTextDocument *> &allDocuments)
 {
     QList<QVariant> list;
     foreach (QTextDocument *doc, allDocuments) {
@@ -290,7 +290,7 @@ void KoResourceManager::setTextDocumentList(const QList<QTextDocument *> &allDoc
     setResource(KoDocumentResource::TextDocuments, list);
 }
 
-QList<QTextDocument *> KoResourceManager::textDocumentList() const
+QList<QTextDocument *> KResourceManager::textDocumentList() const
 {
     QList<QTextDocument*> answer;
     QVariant variant = resource(KoDocumentResource::TextDocuments);
@@ -303,4 +303,4 @@ QList<QTextDocument *> KoResourceManager::textDocumentList() const
     return answer;
 }
 
-#include <KoResourceManager.moc>
+#include <KResourceManager.moc>

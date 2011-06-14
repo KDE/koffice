@@ -37,7 +37,7 @@ static const int CURRENT_SYNTAX_VERSION = 1;
 
 typedef QMap<QString, QDomElement> SavedDocParts;
 
-class KoResourceManager;
+class KResourceManager;
 
 class KCMap;
 class KCSheetAccessModel;
@@ -54,7 +54,7 @@ public:
     QStringList spellListIgnoreAll;
     SavedDocParts savedDocParts;
     KCSheetAccessModel *sheetAccessModel;
-    KoResourceManager *resourceManager;
+    KResourceManager *resourceManager;
 };
 
 #endif // KSPREAD_DOCBASE_P_H

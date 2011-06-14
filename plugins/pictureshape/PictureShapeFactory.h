@@ -29,14 +29,14 @@ public:
     PictureShapeFactory(QObject *parent);
     ~PictureShapeFactory() {}
 
-    virtual KoShape *createDefaultShape(KoResourceManager *documentResources = 0) const;
+    virtual KoShape *createDefaultShape(KResourceManager *documentResources = 0) const;
     virtual bool supports(const KXmlElement &e, KoShapeLoadingContext &context) const;
 
     /// reimplemented
-    virtual void newDocumentResourceManager(KoResourceManager *manager);
+    virtual void newDocumentResourceManager(KResourceManager *manager);
 
 public slots:
-    void createImageCollection(KoResourceManager *manager);
+    void createImageCollection(KResourceManager *manager);
 
 };
 

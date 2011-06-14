@@ -36,7 +36,7 @@
 #include "kcells_export.h"
 
 class KOdfSettings;
-class KoResourceManager;
+class KResourceManager;
 
 class KCMap;
 class KCSheet;
@@ -84,7 +84,7 @@ public:
      * collection and others.
      * @see KCanvasBase::resourceManager()
      */
-    KoResourceManager *resourceManager() const;
+    KResourceManager *resourceManager() const;
 
     KCSheetAccessModel *sheetAccessModel() const;
 

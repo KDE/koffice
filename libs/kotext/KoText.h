@@ -22,7 +22,7 @@
 
 #include "kotext_export.h"
 
-#include <KoResourceManager.h>
+#include <KResourceManager.h>
 
 #include <QtCore/QStringList>
 #include <QtCore/QChar>
@@ -45,7 +45,7 @@ KOTEXT_EXPORT Qt::Alignment valignmentFromString(const QString &align);
 KOTEXT_EXPORT QString valignmentToString(Qt::Alignment align);
 KOTEXT_EXPORT QTextDocument *loadOpenDocument(const QString &filename, QTextDocument *document = 0);
 
-/// This enum contains values to be used as keys in the canvas KoResourceManager
+/// This enum contains values to be used as keys in the canvas KResourceManager
 enum CanvasResource {
     ShowTextFrames =  278622039, ///< boolean that enables painting of frame outlines
     ShowSpaces,         ///< boolean that enables painting of spaces
@@ -92,7 +92,7 @@ enum Direction {
 
 /**
  * Text resources per koffice-document.
- * \sa KoResourceManager KoShapeController::resourceManager()
+ * \sa KResourceManager KoShapeController::resourceManager()
  */
 enum DocumentResource {
     ChangeTracker = KoDocumentResource::KoTextStart + 1, ///< KChangeTracker

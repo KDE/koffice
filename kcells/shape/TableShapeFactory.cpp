@@ -27,7 +27,7 @@
 #include <kpluginfactory.h>
 #include <klocale.h>
 
-#include <KoResourceManager.h>
+#include <KResourceManager.h>
 #include <KoToolRegistry.h>
 #include <KoShapeRegistry.h>
 #include <KoShapeLoadingContext.h>
@@ -69,7 +69,7 @@ bool TableShapeFactory::supports(const KXmlElement &element, KoShapeLoadingConte
     return (element.namespaceURI() == KOdfXmlNS::table && element.localName() == "table");
 }
 
-KoShape *TableShapeFactory::createDefaultShape(KoResourceManager *documentResources) const
+KoShape *TableShapeFactory::createDefaultShape(KResourceManager *documentResources) const
 {
     TableShape *shape = new TableShape();
     shape->setShapeId(TableShapeId);
@@ -80,17 +80,17 @@ KoShape *TableShapeFactory::createDefaultShape(KoResourceManager *documentResour
     return shape;
 }
 
-void TableShapeFactory::newDocumentResourceManager(KoResourceManager *manager)
+void TableShapeFactory::newDocumentResourceManager(KResourceManager *manager)
 {
     manager->setLazyResourceSlot(MapResourceId, this, "createMap");
 }
 
-void TableShapeFactory::createMap(KoResourceManager *manager)
+void TableShapeFactory::createMap(KResourceManager *manager)
 {
     // One spreadsheet map for all inserted tables to allow referencing cells among them.
     QVariant variant;
     KCMap *map = new KCMap();
-    // Make the KoResourceManager manage this KCMap, since we cannot delete it ourselves
+    // Make the KResourceManager manage this KCMap, since we cannot delete it ourselves
     map->setParent(manager);
     variant.setValue<void*>(map);
     manager->setResource(MapResourceId, variant);

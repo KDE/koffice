@@ -30,7 +30,7 @@
 
 //KOffice includes
 #include <KoPACanvas.h>
-#include <KoResourceManager.h>
+#include <KResourceManager.h>
 #include <KoPAView.h>
 #include <KoPAPageBase.h> // this is needed to make setResource work correctly
 #include <KPointerEvent.h>

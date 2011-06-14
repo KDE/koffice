@@ -154,12 +154,12 @@ void KoShapeFactoryBase::setHidden(bool hidden)
     d->hidden = hidden;
 }
 
-void KoShapeFactoryBase::newDocumentResourceManager(KoResourceManager *manager)
+void KoShapeFactoryBase::newDocumentResourceManager(KResourceManager *manager)
 {
     Q_UNUSED(manager);
 }
 
-KoShape *KoShapeFactoryBase::createShape(const KProperties*, KoResourceManager *documentResources) const
+KoShape *KoShapeFactoryBase::createShape(const KProperties*, KResourceManager *documentResources) const
 {
     return createDefaultShape(documentResources);
 }

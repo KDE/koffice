@@ -24,7 +24,7 @@
 #include "KoSharedLoadingData.h"
 #include "KoShapeControllerBase.h"
 #include "KImageCollection.h"
-#include "KoResourceManager.h"
+#include "KResourceManager.h"
 #include "KLoadingShapeUpdater.h"
 
 #include <kdebug.h>
@@ -39,7 +39,7 @@ static QSet<KoShapeLoadingContext::AdditionalAttributeData> s_additionlAttribute
 class KoShapeLoadingContext::Private
 {
 public:
-    Private(KOdfLoadingContext &c, KoResourceManager *resourceManager)
+    Private(KOdfLoadingContext &c, KResourceManager *resourceManager)
             : context(c),
             zIndex(0),
             documentResources(resourceManager)
@@ -58,10 +58,10 @@ public:
     int zIndex;
     QMap<QString, KLoadingShapeUpdater*> updaterById;
     QMap<KoShape *, KLoadingShapeUpdater*> updaterByShape;
-    KoResourceManager *documentResources;
+    KResourceManager *documentResources;
 };
 
-KoShapeLoadingContext::KoShapeLoadingContext(KOdfLoadingContext & context, KoResourceManager *documentResources)
+KoShapeLoadingContext::KoShapeLoadingContext(KOdfLoadingContext & context, KResourceManager *documentResources)
         : d(new Private(context, documentResources))
 {
 }
@@ -180,7 +180,7 @@ QSet<KoShapeLoadingContext::AdditionalAttributeData> KoShapeLoadingContext::addi
     return s_additionlAttributes;
 }
 
-KoResourceManager *KoShapeLoadingContext::documentResourceManager() const
+KResourceManager *KoShapeLoadingContext::documentResourceManager() const
 {
     return d->documentResources;
 }

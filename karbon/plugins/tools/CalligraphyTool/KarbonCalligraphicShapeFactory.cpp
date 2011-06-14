@@ -37,7 +37,7 @@ KarbonCalligraphicShapeFactory::~KarbonCalligraphicShapeFactory()
 {
 }
 
-KoShape *KarbonCalligraphicShapeFactory::createDefaultShape(KoResourceManager *) const
+KoShape *KarbonCalligraphicShapeFactory::createDefaultShape(KResourceManager *) const
 {
     KarbonCalligraphicShape *path = new KarbonCalligraphicShape();
 

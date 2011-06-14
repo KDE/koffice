@@ -31,7 +31,7 @@
 //
 
 
-class KoResourceManager;
+class KResourceManager;
 class KoFindPrivate;
 class QTextCursor;
 class QTextDocument;
@@ -39,7 +39,7 @@ class QTextDocument;
 class FindDirection
 {
 public:
-    FindDirection(KoResourceManager *provider);
+    FindDirection(KResourceManager *provider);
     virtual ~FindDirection();
 
     virtual bool positionReached(const QTextCursor &currentPos, const QTextCursor &endPos) = 0;
@@ -51,13 +51,13 @@ public:
     virtual void nextDocument(QTextDocument *document, KoFindPrivate *findPrivate) = 0;
 
 protected:
-    KoResourceManager *m_provider;
+    KResourceManager *m_provider;
 };
 
 class FindForward : public FindDirection
 {
 public:
-    FindForward(KoResourceManager *provider);
+    FindForward(KResourceManager *provider);
     virtual ~FindForward();
 
     virtual bool positionReached(const QTextCursor &currentPos, const QTextCursor &endPos);
@@ -72,7 +72,7 @@ public:
 class FindBackward : public FindDirection
 {
 public:
-    FindBackward(KoResourceManager *provider);
+    FindBackward(KResourceManager *provider);
     virtual ~FindBackward();
 
     virtual bool positionReached(const QTextCursor &currentPos, const QTextCursor &endPos);

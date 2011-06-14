@@ -36,7 +36,7 @@ public:
     QMap<QString, KoPAPage*> pages;
 };
 
-KoPALoadingContext::KoPALoadingContext(KOdfLoadingContext &context, KoResourceManager *documentResources)
+KoPALoadingContext::KoPALoadingContext(KOdfLoadingContext &context, KResourceManager *documentResources)
 : KoShapeLoadingContext(context, documentResources)
 , d(new Private())
 {

@@ -62,7 +62,7 @@
 #include <KoMainWindow.h>
 #include <KPasteController.h>
 #include <KPathShape.h> // for KoPathShapeId
-#include <KoResourceManager.h>
+#include <KResourceManager.h>
 #include <KoSelection.h>
 #include <KoShapeContainer.h>
 #include <KoShapeController.h>
@@ -1190,7 +1190,7 @@ void KWView::handleDeletePageAction()
 
 void KWView::setShowFormattingChars(bool on)
 {
-    KoResourceManager *rm = m_canvas->resourceManager();
+    KResourceManager *rm = m_canvas->resourceManager();
     rm->setResource(KoText::ShowSpaces, on);
     rm->setResource(KoText::ShowTabs, on);
     rm->setResource(KoText::ShowEnters, on);

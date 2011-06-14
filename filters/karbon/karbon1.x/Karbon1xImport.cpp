@@ -30,7 +30,7 @@
 #include <KoShapeContainer.h>
 #include <KoShapeLayer.h>
 #include <KPathShape.h>
-#include <KoResourceManager.h>
+#include <KResourceManager.h>
 #include <KPathShapeLoader.h>
 #include <KoShapeGroup.h>
 #include <commands/KoShapeGroupCommand.h>

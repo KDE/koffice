@@ -23,7 +23,7 @@
 
 #include <KCanvasBase.h>
 #include <KoShapeController.h>
-#include <KoResourceManager.h>
+#include <KResourceManager.h>
 
 #include <klocale.h>
 

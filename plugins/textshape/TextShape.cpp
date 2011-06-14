@@ -45,7 +45,7 @@ struct Finalizer {
 //#include "TextLayerShape.h"
 
 #include <KCanvasBase.h>
-#include <KoResourceManager.h>
+#include <KResourceManager.h>
 #include <KChangeTracker.h>
 #include <KInlineTextObjectManager.h>
 #include <KOdfLoadingContext.h>

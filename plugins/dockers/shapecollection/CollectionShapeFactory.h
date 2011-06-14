@@ -30,7 +30,7 @@ class CollectionShapeFactory : public KoShapeFactoryBase
         CollectionShapeFactory(QObject *parent, const QString &id, KoShape* shape);
         ~CollectionShapeFactory();
 
-        virtual KoShape *createDefaultShape(KoResourceManager *documentResources = 0) const;
+        virtual KoShape *createDefaultShape(KResourceManager *documentResources = 0) const;
         virtual bool supports(const KXmlElement &e, KoShapeLoadingContext &context) const;
 
     private:

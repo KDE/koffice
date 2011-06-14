@@ -23,7 +23,7 @@
 #include <KFileDialog>
 #include <KUrl>
 #include <KImageCollection.h>
-#include <KoResourceManager.h>
+#include <KResourceManager.h>
 #include <KImageData.h>
 #include <KoShape.h>
 #include <kio/netaccess.h>
@@ -38,7 +38,7 @@ SCPlaceholderPictureStrategy::~SCPlaceholderPictureStrategy()
 {
 }
 
-KoShape *SCPlaceholderPictureStrategy::createShape(KoResourceManager *rm)
+KoShape *SCPlaceholderPictureStrategy::createShape(KResourceManager *rm)
 {
     KoShape * shape = 0;
 

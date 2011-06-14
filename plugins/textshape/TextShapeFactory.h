@@ -35,18 +35,18 @@ public:
     explicit TextShapeFactory(QObject *parent);
     ~TextShapeFactory() {}
 
-    virtual KoShape *createShape(const KProperties *params, KoResourceManager *documentResources = 0) const;
-    virtual KoShape *createDefaultShape(KoResourceManager *documentResources = 0) const;
+    virtual KoShape *createShape(const KProperties *params, KResourceManager *documentResources = 0) const;
+    virtual KoShape *createDefaultShape(KResourceManager *documentResources = 0) const;
     virtual bool supports(const KXmlElement & e, KoShapeLoadingContext &context) const;
 
-    virtual void newDocumentResourceManager(KoResourceManager *manager);
+    virtual void newDocumentResourceManager(KResourceManager *manager);
 
 public slots:
-    void createStylemanager(KoResourceManager *manager);
-    void createTextObjectManager(KoResourceManager *manager);
-    void createImageCollection(KoResourceManager *manager);
-    void createUndoStack(KoResourceManager *manager);
-    void createEditingPluginContainer(KoResourceManager *manager);
+    void createStylemanager(KResourceManager *manager);
+    void createTextObjectManager(KResourceManager *manager);
+    void createImageCollection(KResourceManager *manager);
+    void createUndoStack(KResourceManager *manager);
+    void createEditingPluginContainer(KResourceManager *manager);
 };
 
 #endif
