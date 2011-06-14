@@ -35,7 +35,7 @@
 #include <QPointF>
 #include "KInteractionStrategy.h"
 
-class KoParameterShape;
+class KParameterShape;
 
 /// Strategy for changing control points of parametric shapes
 class KParameterChangeStrategy : public KInteractionStrategy
@@ -47,14 +47,14 @@ public:
      * @param parameterShape the parametric shapes the strategy is working on
      * @param handleId the id of the handle to modify
      */
-    KParameterChangeStrategy(KoToolBase *tool, KoParameterShape *parameterShape, int handleId);
+    KParameterChangeStrategy(KoToolBase *tool, KParameterShape *parameterShape, int handleId);
     virtual ~KParameterChangeStrategy();
 
     virtual void handleMouseMove(const QPointF &mouseLocation, Qt::KeyboardModifiers modifiers);
     virtual QUndoCommand* createCommand(QUndoCommand *parent = 0);
 
 private:
-    KoParameterShape * const m_parameterShape; ///< the parametric shape we are working on
+    KParameterShape * const m_parameterShape; ///< the parametric shape we are working on
     const int m_handleId;                      ///< the id of the control point
     const QPointF m_startPoint;                ///< the starting position of the control point
     Qt::KeyboardModifiers m_lastModifierUsed;

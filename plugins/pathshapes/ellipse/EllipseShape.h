@@ -21,7 +21,7 @@
 #ifndef KOELLIPSESHAPE_H
 #define KOELLIPSESHAPE_H
 
-#include "KoParameterShape.h"
+#include "KParameterShape.h"
 
 #define EllipseShapeId "EllipseShape"
 
@@ -31,7 +31,7 @@
  * of the ellipse shape which can be changed with the setSize
  * method.
  */
-class EllipseShape : public KoParameterShape
+class EllipseShape : public KParameterShape
 {
 public:
     /// the possible ellipse types

@@ -239,7 +239,7 @@ void StarShape::setSize(const QSizeF &newSize)
     m_zoomY *= matrix.m22();
 
     // this transforms the handles
-    KoParameterShape::setSize(newSize);
+    KParameterShape::setSize(newSize);
 
     m_center = computeCenter();
 }

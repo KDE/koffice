@@ -19,10 +19,10 @@
 */
 #include "KParameterChangeStrategy_p.h"
 
-#include "KoParameterShape.h"
+#include "KParameterShape.h"
 #include "commands/KParameterHandleMoveCommand_p.h"
 
-KParameterChangeStrategy::KParameterChangeStrategy(KoToolBase *tool, KoParameterShape *parameterShape, int handleId)
+KParameterChangeStrategy::KParameterChangeStrategy(KoToolBase *tool, KParameterShape *parameterShape, int handleId)
         : KInteractionStrategy(tool)
         , m_parameterShape(parameterShape)
         , m_handleId(handleId)

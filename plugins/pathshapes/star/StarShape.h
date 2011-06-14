@@ -20,7 +20,7 @@
 #ifndef KOSTARSHAPE_H
 #define KOSTARSHAPE_H
 
-#include <KoParameterShape.h>
+#include <KParameterShape.h>
 
 #define StarShapeId "StarShape"
 
@@ -31,7 +31,7 @@
  * like the number of corners, the inner/outer radius
  * and the corner roundness.
  */
-class StarShape : public KoParameterShape
+class StarShape : public KParameterShape
 {
 public:
     StarShape();

@@ -20,7 +20,7 @@
 #ifndef KARBONCALLIGRAPHICSHAPE_H
 #define KARBONCALLIGRAPHICSHAPE_H
 
-#include <KoParameterShape.h>
+#include <KParameterShape.h>
 
 #define KarbonCalligraphicShapeId "KarbonCalligraphicShape"
 
@@ -78,7 +78,7 @@ private:
 //        7--6--5--4   <- pointCount() / 2
 // start  |        |   end    ==> (direction of the stroke)
 //        0--1--2--3
-class KarbonCalligraphicShape : public KoParameterShape
+class KarbonCalligraphicShape : public KParameterShape
 {
 public:
     KarbonCalligraphicShape(qreal caps = 0.0);

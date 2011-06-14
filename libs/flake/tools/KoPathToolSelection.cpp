@@ -22,7 +22,7 @@
 
 #include "KoPathToolSelection_p.h"
 #include "KoPathTool_p.h"
-#include <KoParameterShape.h>
+#include <KParameterShape.h>
 #include <KoPathPoint.h>
 #include <KoPathPointData.h>
 #include <KoViewConverter.h>
@@ -115,7 +115,7 @@ void KoPathToolSelection::selectPoints(const QRectF &rect, bool clearSelection)
 
     blockSignals(true);
     foreach(KoPathShape* shape, m_selectedShapes) {
-        KoParameterShape *parameterShape = dynamic_cast<KoParameterShape*>(shape);
+        KParameterShape *parameterShape = dynamic_cast<KParameterShape*>(shape);
         if (parameterShape && parameterShape->isParametricShape())
             continue;
         foreach(KoPathPoint* point, shape->pointsAt(shape->documentToShape(rect)))
@@ -212,7 +212,7 @@ void KoPathToolSelection::update()
 
     PathShapePointMap::iterator it(m_shapePointMap.begin());
     while (it != m_shapePointMap.end()) {
-        KoParameterShape *parameterShape = dynamic_cast<KoParameterShape*>(it.key());
+        KParameterShape *parameterShape = dynamic_cast<KParameterShape*>(it.key());
         bool isParametricShape = parameterShape && parameterShape->isParametricShape();
         if (! m_selectedShapes.contains(it.key()) || isParametricShape) {
             QSet<KoPathPoint *>::iterator pointIt(it.value().begin());

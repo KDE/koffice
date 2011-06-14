@@ -21,7 +21,7 @@
 #ifndef KORECTANGLESHAPE_H
 #define KORECTANGLESHAPE_H
 
-#include "KoParameterShape.h"
+#include "KParameterShape.h"
 
 #define RectangleShapeId "RectangleShape"
 
@@ -30,7 +30,7 @@
  * The rectangle can have rounded corners, with different corner
  * radii in x- and y-direction.
  */
-class RectangleShape : public KoParameterShape
+class RectangleShape : public KParameterShape
 {
 public:
     RectangleShape();

@@ -35,7 +35,7 @@
 #include <KoSelection.h>
 #include <KoShapeManager.h>
 #include <KoPathShape.h>
-#include <KoParameterShape.h>
+#include <KParameterShape.h>
 #include <KoParameterToPathCommand.h>
 #include <KoUnitDoubleSpinBox.h>
 
@@ -87,7 +87,7 @@ void RoundCornersPlugin::slotRoundCorners()
     QUndoCommand * cmd = new QUndoCommand(i18n("Round Corners"));
 
     // convert to path before if we have a parametric shape
-    KoParameterShape * ps = dynamic_cast<KoParameterShape*>(shape);
+    KParameterShape * ps = dynamic_cast<KParameterShape*>(shape);
     if (ps && ps->isParametricShape())
         new KoParameterToPathCommand(ps, cmd);
 

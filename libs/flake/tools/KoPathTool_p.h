@@ -47,7 +47,7 @@ class PathToolOptionWidget;
 
 class KAction;
 
-/// The tool for editing a KoPathShape or a KoParameterShape
+/// The tool for editing a KoPathShape or a KParameterShape
 class FLAKE_TEST_EXPORT KoPathTool : public KoToolBase
 {
     Q_OBJECT

@@ -27,7 +27,7 @@
 class KoParameterShapePrivate;
 
 /**
- * KoParameterShape is the base class for all parametric shapes
+ * KParameterShape is the base class for all parametric shapes
  * in flake.
  * Parametric shapes are those whose appearance can be completely
  * defined by a few numerical parameters. Rectangle, ellipse and star
@@ -36,18 +36,18 @@ class KoParameterShapePrivate;
  * of control points. These control points can be moved with the mouse
  * on the canvas which changes the shapes parameter values and hence the
  * shapes appearance in realtime.
- * KoParameterShape is derived from the KoPathShape class that means
+ * KParameterShape is derived from the KoPathShape class that means
  * by changing the shape parameters, the underlying path is manipulated.
  * A parametric shape can be converted into a path shape by simply calling
  * the setModified method. This makes the path tool know that it can handle
  * the shape like a path shape, so that modifying the single path points
  * is possible.
  */
-class FLAKE_EXPORT KoParameterShape : public KoPathShape
+class FLAKE_EXPORT KParameterShape : public KoPathShape
 {
 public:
-    KoParameterShape();
-    virtual ~KoParameterShape();
+    KParameterShape();
+    virtual ~KParameterShape();
 
     /**
      * @brief Move handle to point
@@ -137,10 +137,10 @@ protected:
     void setHandles(const QList<QPointF> &handles);
 
     /// constructor
-    KoParameterShape(KoParameterShapePrivate &);
+    KParameterShape(KoParameterShapePrivate &);
 
     /**
-     * @brief Updates the internal state of a KoParameterShape.
+     * @brief Updates the internal state of a KParameterShape.
      *
      * This method is called from moveHandle.
      *
@@ -158,7 +158,7 @@ protected:
     virtual void updatePath(const QSizeF &size) = 0;
 
 private:
-    Q_DECLARE_PRIVATE(KoParameterShape)
+    Q_DECLARE_PRIVATE(KParameterShape)
 };
 
 #endif /* KOPARAMETERSHAPE_H */

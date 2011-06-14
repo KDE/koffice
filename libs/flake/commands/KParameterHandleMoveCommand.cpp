@@ -20,10 +20,10 @@
  */
 
 #include "KParameterHandleMoveCommand_p.h"
-#include "KoParameterShape.h"
+#include "KParameterShape.h"
 #include <klocale.h>
 
-KParameterHandleMoveCommand::KParameterHandleMoveCommand(KoParameterShape *shape, int handleId, const QPointF &startPoint, const QPointF &endPoint, Qt::KeyboardModifiers keyModifiers, QUndoCommand *parent)
+KParameterHandleMoveCommand::KParameterHandleMoveCommand(KParameterShape *shape, int handleId, const QPointF &startPoint, const QPointF &endPoint, Qt::KeyboardModifiers keyModifiers, QUndoCommand *parent)
         : QUndoCommand(parent)
         , m_shape(shape)
         , m_handleId(handleId)

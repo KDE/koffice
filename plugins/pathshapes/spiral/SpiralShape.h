@@ -20,7 +20,7 @@
 #ifndef KOSPIRALSHAPE_H
 #define KOSPIRALSHAPE_H
 
-#include "KoParameterShape.h"
+#include "KParameterShape.h"
 
 #define SpiralShapeId "SpiralShape"
 
@@ -28,7 +28,7 @@
  * This class adds support for the spiral
  * shape.
  */
-class SpiralShape : public KoParameterShape
+class SpiralShape : public KParameterShape
 {
 public:
     /// the possible spiral types

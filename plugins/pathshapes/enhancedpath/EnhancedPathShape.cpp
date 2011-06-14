@@ -109,7 +109,7 @@ void EnhancedPathShape::updatePath(const QSizeF &)
 void EnhancedPathShape::setSize(const QSizeF &newSize)
 {
     // handle offset
-    KoParameterShape::setSize(newSize);
+    KParameterShape::setSize(newSize);
 
     // calculate scaling factors from viewbox size to shape size
     qreal xScale = m_viewBound.width() == 0 ? 1 : newSize.width()/m_viewBound.width();
@@ -124,7 +124,7 @@ void EnhancedPathShape::setSize(const QSizeF &newSize)
 
 QPointF EnhancedPathShape::normalize()
 {
-    QPointF offset = KoParameterShape::normalize();
+    QPointF offset = KParameterShape::normalize();
 
     m_viewBoxOffset -= offset;
 

@@ -23,7 +23,7 @@
 #ifndef KOENHANCEDPATHSHAPE_H
 #define KOENHANCEDPATHSHAPE_H
 
-#include <KoParameterShape.h>
+#include <KParameterShape.h>
 #include <QList>
 #include <QMap>
 #include <QRectF>
@@ -46,7 +46,7 @@ class KoShapeLoadingContext;
  * can be constant values, named variables (identifiers),
  * modifiers, functions or formulae.
 */
-class EnhancedPathShape : public KoParameterShape
+class EnhancedPathShape : public KParameterShape
 {
 public:
     explicit EnhancedPathShape(const QRectF &viewBox);
@@ -71,7 +71,7 @@ public:
 
     // from KoShape
     virtual void setSize(const QSizeF &newSize);
-    // from KoParameterShape
+    // from KParameterShape
     virtual QPointF normalize();
 
     /// Add formula with given name and textual represenation
@@ -110,9 +110,9 @@ protected:
     virtual void saveOdf(KoShapeSavingContext &context) const;
     // from KoShape
     virtual bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context);
-    // from KoParameterShape
+    // from KParameterShape
     virtual void moveHandleAction(int handleId, const QPointF &point, Qt::KeyboardModifiers modifiers = Qt::NoModifier);
-    // from KoParameterShape
+    // from KParameterShape
     virtual void updatePath(const QSizeF &size);
 
 private:

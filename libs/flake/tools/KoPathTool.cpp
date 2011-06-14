@@ -39,7 +39,7 @@
 #include "commands/KoParameterToPathCommand.h"
 #include "commands/KoSubpathJoinCommand_p.h"
 #include "commands/KoPathPointMergeCommand.h"
-#include "KoParameterShape.h"
+#include "KParameterShape.h"
 #include "KoPathPoint.h"
 #include "KoPathPointRubberSelectStrategy_p.h"
 #include "KoPathSegmentChangeStrategy_p.h"
@@ -310,9 +310,9 @@ void KoPathTool::segmentToCurve()
 void KoPathTool::convertToPath()
 {
     Q_D(KoToolBase);
-    QList<KoParameterShape*> shapesToConvert;
+    QList<KParameterShape*> shapesToConvert;
     foreach(KoShape *shape, m_pointSelection.selectedShapes()) {
-        KoParameterShape * parameterShape = dynamic_cast<KoParameterShape*>(shape);
+        KParameterShape * parameterShape = dynamic_cast<KParameterShape*>(shape);
         if (parameterShape && parameterShape->isParametricShape())
             shapesToConvert.append(parameterShape);
     }
@@ -406,7 +406,7 @@ void KoPathTool::paint(QPainter &painter, const KoViewConverter &converter)
         painter.save();
         painter.setTransform(shape->absoluteTransformation(&converter) * painter.transform());
 
-        KoParameterShape * parameterShape = dynamic_cast<KoParameterShape*>(shape);
+        KParameterShape * parameterShape = dynamic_cast<KParameterShape*>(shape);
         if (parameterShape && parameterShape->isParametricShape()) {
             parameterShape->paintHandles(painter, converter, m_handleRadius);
         } else {
@@ -506,7 +506,7 @@ void KoPathTool::mouseMoveEvent(KoPointerEvent *event)
 
     foreach(KoPathShape *shape, m_pointSelection.selectedShapes()) {
         QRectF roi = handleGrabRect(shape->documentToShape(event->point));
-        KoParameterShape * parameterShape = dynamic_cast<KoParameterShape*>(shape);
+        KParameterShape * parameterShape = dynamic_cast<KParameterShape*>(shape);
         if (parameterShape && parameterShape->isParametricShape()) {
             int handleId = parameterShape->handleIdAt(roi);
             if (handleId != -1) {
@@ -725,7 +725,7 @@ void KoPathTool::mouseDoubleClickEvent(KoPointerEvent *event)
     qreal clickedPointParam = 0.0;
 
     foreach(KoPathShape *shape, m_pointSelection.selectedShapes()) {
-        if (dynamic_cast<KoParameterShape*>(shape))
+        if (dynamic_cast<KParameterShape*>(shape))
             continue;
 
         // convert document point to shape coordinates
@@ -790,7 +790,7 @@ bool KoPathTool::segmentAtPoint(const QPointF &point, KoPathShape* &shape, KoPat
     qreal clickedPointParam = 0.0;
 
     foreach(KoPathShape *shape, m_pointSelection.selectedShapes()) {
-        KoParameterShape * parameterShape = dynamic_cast<KoParameterShape*>(shape);
+        KParameterShape * parameterShape = dynamic_cast<KParameterShape*>(shape);
         if (parameterShape && parameterShape->isParametricShape())
             continue;
 
@@ -880,7 +880,7 @@ void KoPathTool::updateOptionsWidget()
     PathToolOptionWidget::Type type = PathToolOptionWidget::PlainType;
     QList<KoPathShape*> selectedShapes = m_pointSelection.selectedShapes();
     foreach(KoPathShape *shape, selectedShapes) {
-        KoParameterShape *parameterShape = dynamic_cast<KoParameterShape*>(shape);
+        KParameterShape *parameterShape = dynamic_cast<KParameterShape*>(shape);
         if (parameterShape && parameterShape->isParametricShape()) {
             type = PathToolOptionWidget::ParametricType;
             m_toolOptionWidget->setSelectedPath(shape);

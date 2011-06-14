@@ -27,7 +27,7 @@
 #include "KoSelection.h"
 #include "commands/KoPathPointTypeCommand_p.h"
 #include "KParameterChangeStrategy_p.h"
-#include "KoParameterShape.h"
+#include "KParameterShape.h"
 #include "KCanvasBase.h"
 #include "KoResourceManager.h"
 #include "KoShapeManager.h"
@@ -144,7 +144,7 @@ KoPathPoint::PointType PointHandle::activePointType() const
     return m_activePointType;
 }
 
-ParameterHandle::ParameterHandle(KoPathTool *tool, KoParameterShape *parameterShape, int handleId)
+ParameterHandle::ParameterHandle(KoPathTool *tool, KParameterShape *parameterShape, int handleId)
         : KoPathToolHandle(tool)
         , m_parameterShape(parameterShape)
         , m_handleId(handleId)

@@ -38,7 +38,7 @@
 #include <QPointF>
 #include "flake_export.h"
 
-class KoParameterShape;
+class KParameterShape;
 
 /// The undo / redo command for changing a parameter
 class KParameterHandleMoveCommand : public QUndoCommand
@@ -47,13 +47,13 @@ public:
     /**
      * Constructor.
      * @param shape the shape this command works on
-     * @param handleId the ID under which the parameterShape knows the handle in KoParameterShape::moveHandle()
+     * @param handleId the ID under which the parameterShape knows the handle in KParameterShape::moveHandle()
      * @param startPoint The old position
      * @param endPoint The new position
      * @param keyModifiers the key modifiers used while moving.
      * @param parent the parent command if this is a compound undo command.
      */
-    KParameterHandleMoveCommand(KoParameterShape *shape, int handleId, const QPointF &startPoint, const QPointF &endPoint, Qt::KeyboardModifiers keyModifiers, QUndoCommand *parent = 0);
+    KParameterHandleMoveCommand(KParameterShape *shape, int handleId, const QPointF &startPoint, const QPointF &endPoint, Qt::KeyboardModifiers keyModifiers, QUndoCommand *parent = 0);
     virtual ~KParameterHandleMoveCommand();
 
     /// redo the command
@@ -61,7 +61,7 @@ public:
     /// revert the actions done in redo
     void undo();
 private:
-    KoParameterShape *m_shape;
+    KParameterShape *m_shape;
     int m_handleId;
     QPointF m_startPoint;
     QPointF m_endPoint;

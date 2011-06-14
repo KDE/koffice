@@ -21,7 +21,7 @@
 #include "KarbonCurveFit.h"
 
 #include <KoPathShape.h>
-#include <KoParameterShape.h>
+#include <KParameterShape.h>
 #include <KLineBorder.h>
 #include <KoPointerEvent.h>
 #include <KCanvasBase.h>
@@ -413,7 +413,7 @@ KoPathPoint* KarbonPencilTool::endPointAtPosition(const QPointF &position)
         KoPathShape * path = dynamic_cast<KoPathShape*>(shape);
         if (!path)
             continue;
-        KoParameterShape *paramShape = dynamic_cast<KoParameterShape*>(shape);
+        KParameterShape *paramShape = dynamic_cast<KParameterShape*>(shape);
         if (paramShape && paramShape->isParametricShape())
             continue;
 

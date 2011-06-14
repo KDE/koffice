@@ -39,7 +39,7 @@
 #include "KoPathPointData.h"
 #include "KoPathPointMergeCommand.h"
 #include "KCanvasBase.h"
-#include "KoParameterShape.h"
+#include "KParameterShape.h"
 #include "KoViewConverter.h"
 #include "KoShapeManager.h"
 #include "KoResourceManager.h"
@@ -267,7 +267,7 @@ public:
             KoPathShape * path = dynamic_cast<KoPathShape*>(shape);
             if (!path)
                 continue;
-            KoParameterShape *paramShape = dynamic_cast<KoParameterShape*>(shape);
+            KParameterShape *paramShape = dynamic_cast<KParameterShape*>(shape);
             if (paramShape && paramShape->isParametricShape())
                 continue;
 

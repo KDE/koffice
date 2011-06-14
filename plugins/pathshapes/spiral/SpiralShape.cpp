@@ -64,12 +64,12 @@ void SpiralShape::setSize(const QSizeF &newSize)
     QTransform matrix(resizeMatrix(newSize));
     m_center = matrix.map(m_center);
     m_radii = matrix.map(m_radii);
-    KoParameterShape::setSize(newSize);
+    KParameterShape::setSize(newSize);
 }
 
 QPointF SpiralShape::normalize()
 {
-    QPointF offset(KoParameterShape::normalize());
+    QPointF offset(KParameterShape::normalize());
     QTransform matrix;
     matrix.translate(-offset.x(), -offset.y());
     m_center = matrix.map(m_center);

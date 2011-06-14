@@ -28,10 +28,10 @@
 
 #include "flake_export.h"
 
-class KoParameterShape;
+class KParameterShape;
 class KoParameterToPathCommandPrivate;
 
-/// The undo / redo command for changing a KoParameterShape into a KoPathShape
+/// The undo / redo command for changing a KParameterShape into a KoPathShape
 class FLAKE_EXPORT KoParameterToPathCommand : public QUndoCommand
 {
 public:
@@ -40,13 +40,13 @@ public:
      * @param shape the shape this command works on
      * @param parent the parent command if this is a compound undo command.
      */
-    explicit KoParameterToPathCommand(KoParameterShape *shape, QUndoCommand *parent = 0);
+    explicit KoParameterToPathCommand(KParameterShape *shape, QUndoCommand *parent = 0);
     /**
      * Constructor.
      * @param shapes the list of shapes this command works on
      * @param parent the parent command if this is a compound undo command.
      */
-    explicit KoParameterToPathCommand(const QList<KoParameterShape*> &shapes, QUndoCommand *parent = 0);
+    explicit KoParameterToPathCommand(const QList<KParameterShape*> &shapes, QUndoCommand *parent = 0);
     virtual ~KoParameterToPathCommand();
 
     /// redo the command

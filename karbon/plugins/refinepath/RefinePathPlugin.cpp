@@ -36,7 +36,7 @@
 #include <KoShapeManager.h>
 #include <KoSelection.h>
 #include <KoPathShape.h>
-#include <KoParameterShape.h>
+#include <KParameterShape.h>
 
 #include <kpluginfactory.h>
 #include <kicon.h>
@@ -75,7 +75,7 @@ void RefinePathPlugin::slotRefinePath()
         return;
 
     // check if it is no parametric shape
-    KoParameterShape * ps = dynamic_cast<KoParameterShape*>(shape);
+    KParameterShape * ps = dynamic_cast<KParameterShape*>(shape);
     if (ps && ps->isParametricShape())
         return;
 

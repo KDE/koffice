@@ -18,29 +18,29 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KoParameterShape.h"
-#include "KoParameterShape_p.h"
+#include "KParameterShape.h"
+#include "KParameterShape_p.h"
 
 #include <QPainter>
 #include <KDebug>
 
-KoParameterShape::KoParameterShape()
+KParameterShape::KParameterShape()
     : KoPathShape(*(new KoParameterShapePrivate(this)))
 {
 }
 
-KoParameterShape::KoParameterShape(KoParameterShapePrivate &dd)
+KParameterShape::KParameterShape(KoParameterShapePrivate &dd)
     : KoPathShape(dd)
 {
 }
 
-KoParameterShape::~KoParameterShape()
+KParameterShape::~KParameterShape()
 {
 }
 
-void KoParameterShape::moveHandle(int handleId, const QPointF & point, Qt::KeyboardModifiers modifiers)
+void KParameterShape::moveHandle(int handleId, const QPointF & point, Qt::KeyboardModifiers modifiers)
 {
-    Q_D(KoParameterShape);
+    Q_D(KParameterShape);
     if (handleId >= d->handles.size()) {
         kWarning(30006) << "handleId out of bounds";
         return;
@@ -56,9 +56,9 @@ void KoParameterShape::moveHandle(int handleId, const QPointF & point, Qt::Keybo
 }
 
 
-int KoParameterShape::handleIdAt(const QRectF & rect) const
+int KParameterShape::handleIdAt(const QRectF & rect) const
 {
-    Q_D(const KoParameterShape);
+    Q_D(const KParameterShape);
     int handle = -1;
 
     for (int i = 0; i < d->handles.size(); ++i) {
@@ -70,15 +70,15 @@ int KoParameterShape::handleIdAt(const QRectF & rect) const
     return handle;
 }
 
-QPointF KoParameterShape::handlePosition(int handleId)
+QPointF KParameterShape::handlePosition(int handleId)
 {
-    Q_D(KoParameterShape);
+    Q_D(KParameterShape);
     return d->handles.value(handleId);
 }
 
-void KoParameterShape::paintHandles(QPainter & painter, const KoViewConverter & converter, int handleRadius)
+void KParameterShape::paintHandles(QPainter & painter, const KoViewConverter & converter, int handleRadius)
 {
-    Q_D(KoParameterShape);
+    Q_D(KParameterShape);
     applyConversion(painter, converter);
 
     QTransform worldMatrix = painter.worldTransform();
@@ -98,9 +98,9 @@ void KoParameterShape::paintHandles(QPainter & painter, const KoViewConverter & 
     }
 }
 
-void KoParameterShape::paintHandle(QPainter & painter, const KoViewConverter & converter, int handleId, int handleRadius)
+void KParameterShape::paintHandle(QPainter & painter, const KoViewConverter & converter, int handleId, int handleRadius)
 {
-    Q_D(KoParameterShape);
+    Q_D(KParameterShape);
     applyConversion(painter, converter);
 
     QTransform worldMatrix = painter.worldTransform();
@@ -114,9 +114,9 @@ void KoParameterShape::paintHandle(QPainter & painter, const KoViewConverter & c
     painter.drawPolygon(poly);
 }
 
-void KoParameterShape::setSize(const QSizeF &newSize)
+void KParameterShape::setSize(const QSizeF &newSize)
 {
-    Q_D(KoParameterShape);
+    Q_D(KParameterShape);
     QTransform matrix(resizeMatrix(newSize));
 
     for (int i = 0; i < d->handles.size(); ++i) {
@@ -126,9 +126,9 @@ void KoParameterShape::setSize(const QSizeF &newSize)
     KoPathShape::setSize(newSize);
 }
 
-QPointF KoParameterShape::normalize()
+QPointF KParameterShape::normalize()
 {
-    Q_D(KoParameterShape);
+    Q_D(KParameterShape);
     QPointF offset(KoPathShape::normalize());
     QTransform matrix;
     matrix.translate(-offset.x(), -offset.y());
@@ -140,33 +140,33 @@ QPointF KoParameterShape::normalize()
     return offset;
 }
 
-bool KoParameterShape::isParametricShape() const
+bool KParameterShape::isParametricShape() const
 {
-    Q_D(const KoParameterShape);
+    Q_D(const KParameterShape);
     return d->parametric;
 }
 
-void KoParameterShape::setParametricShape(bool parametric)
+void KParameterShape::setParametricShape(bool parametric)
 {
-    Q_D(KoParameterShape);
+    Q_D(KParameterShape);
     d->parametric = parametric;
     update();
 }
 
-QList<QPointF> KoParameterShape::handles() const
+QList<QPointF> KParameterShape::handles() const
 {
-    Q_D(const KoParameterShape);
+    Q_D(const KParameterShape);
     return d->handles;
 }
 
-void KoParameterShape::setHandles(const QList<QPointF> &handles)
+void KParameterShape::setHandles(const QList<QPointF> &handles)
 {
-    Q_D(KoParameterShape);
+    Q_D(KParameterShape);
     d->handles = handles;
 }
 
-int KoParameterShape::handleCount() const
+int KParameterShape::handleCount() const
 {
-    Q_D(const KoParameterShape);
+    Q_D(const KParameterShape);
     return d->handles.count();
 }

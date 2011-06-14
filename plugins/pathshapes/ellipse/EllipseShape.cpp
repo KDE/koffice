@@ -145,12 +145,12 @@ void EllipseShape::setSize(const QSizeF &newSize)
     QTransform matrix(resizeMatrix(newSize));
     m_center = matrix.map(m_center);
     m_radii = matrix.map(m_radii);
-    KoParameterShape::setSize(newSize);
+    KParameterShape::setSize(newSize);
 }
 
 QPointF EllipseShape::normalize()
 {
-    QPointF offset(KoParameterShape::normalize());
+    QPointF offset(KParameterShape::normalize());
     QTransform matrix;
     matrix.translate(-offset.x(), -offset.y());
     m_center = matrix.map(m_center);

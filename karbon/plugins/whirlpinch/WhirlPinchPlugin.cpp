@@ -38,7 +38,7 @@
 #include <KCanvasBase.h>
 #include <KoShapeManager.h>
 #include <KoPathShape.h>
-#include <KoParameterShape.h>
+#include <KParameterShape.h>
 #include <KoSelection.h>
 
 #include <kpluginfactory.h>
@@ -83,7 +83,7 @@ void WhirlPinchPlugin::slotWhirlPinch()
         return;
 
     // check if it is no parametric shape
-    KoParameterShape * ps = dynamic_cast<KoParameterShape*>(shape);
+    KParameterShape * ps = dynamic_cast<KParameterShape*>(shape);
     if (ps && ps->isParametricShape())
         return;
 

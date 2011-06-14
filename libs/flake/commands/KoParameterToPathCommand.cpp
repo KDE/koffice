@@ -19,7 +19,7 @@
  */
 
 #include "KoParameterToPathCommand.h"
-#include "KoParameterShape.h"
+#include "KParameterShape.h"
 #include <klocale.h>
 
 class KoParameterToPathCommandPrivate
@@ -30,11 +30,11 @@ public:
     }
     void initialize();
     void copyPath(KoPathShape *destination, KoPathShape *source);
-    QList<KoParameterShape*> shapes;
+    QList<KParameterShape*> shapes;
     QList<KoPathShape*> copies;
 };
 
-KoParameterToPathCommand::KoParameterToPathCommand(KoParameterShape *shape, QUndoCommand *parent)
+KoParameterToPathCommand::KoParameterToPathCommand(KParameterShape *shape, QUndoCommand *parent)
     : QUndoCommand(parent),
     d(new KoParameterToPathCommandPrivate())
 {
@@ -43,7 +43,7 @@ KoParameterToPathCommand::KoParameterToPathCommand(KoParameterShape *shape, QUnd
     setText(i18n("Convert to Path"));
 }
 
-KoParameterToPathCommand::KoParameterToPathCommand(const QList<KoParameterShape*> &shapes, QUndoCommand *parent)
+KoParameterToPathCommand::KoParameterToPathCommand(const QList<KParameterShape*> &shapes, QUndoCommand *parent)
     : QUndoCommand(parent),
     d(new KoParameterToPathCommandPrivate())
 {
@@ -61,7 +61,7 @@ void KoParameterToPathCommand::redo()
 {
     QUndoCommand::redo();
     for (int i = 0; i < d->shapes.size(); ++i) {
-        KoParameterShape *parameterShape = d->shapes.at(i);
+        KParameterShape *parameterShape = d->shapes.at(i);
         parameterShape->update();
         parameterShape->setParametricShape(false);
         parameterShape->update();
@@ -72,7 +72,7 @@ void KoParameterToPathCommand::undo()
 {
     QUndoCommand::undo();
     for (int i = 0; i < d->shapes.size(); ++i) {
-        KoParameterShape * parameterShape = d->shapes.at(i);
+        KParameterShape * parameterShape = d->shapes.at(i);
         parameterShape->update();
         parameterShape->setParametricShape(true);
         d->copyPath(parameterShape, d->copies[i]);
@@ -82,7 +82,7 @@ void KoParameterToPathCommand::undo()
 
 void KoParameterToPathCommandPrivate::initialize()
 {
-    foreach(KoParameterShape *shape, shapes) {
+    foreach(KParameterShape *shape, shapes) {
         KoPathShape *p = new KoPathShape();
         copyPath(p, shape);
         copies.append(p);

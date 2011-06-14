@@ -91,7 +91,7 @@
 #include <KoPathReverseCommand.h>
 #include <KoPathPointMoveCommand.h>
 #include <KoToolBoxFactory.h>
-#include <KoParameterShape.h>
+#include <KParameterShape.h>
 #include <KoRulerController.h>
 #include <KDockRegistry.h>
 #include <KoDockerManager.h>
@@ -613,7 +613,7 @@ void KarbonView::combinePath()
     foreach(KoShape* shape, selectedShapes) {
         KoPathShape *path = dynamic_cast<KoPathShape*>(shape);
         if (path) {
-            KoParameterShape * paramShape = dynamic_cast<KoParameterShape*>(path);
+            KParameterShape * paramShape = dynamic_cast<KParameterShape*>(path);
             if (paramShape && paramShape->isParametricShape())
                 continue;
             paths << path;
@@ -692,10 +692,10 @@ void KarbonView::booleanOperation(KarbonBooleanCommand::BooleanOperation operati
 
     if (paths.size() == 2) {
         QUndoCommand * macro = new QUndoCommand(i18n("Boolean Operation"));
-        KoParameterShape * paramShape = dynamic_cast<KoParameterShape*>(paths[0]);
+        KParameterShape * paramShape = dynamic_cast<KParameterShape*>(paths[0]);
         if (paramShape && paramShape->isParametricShape())
             new KoParameterToPathCommand(paramShape, macro);
-        paramShape = dynamic_cast<KoParameterShape*>(paths[1]);
+        paramShape = dynamic_cast<KParameterShape*>(paths[1]);
         if (paramShape && paramShape->isParametricShape())
             new KoParameterToPathCommand(paramShape, macro);
         new KarbonBooleanCommand(part(), paths[0], paths[1], operation, macro);
@@ -725,7 +725,7 @@ void KarbonView::pathSnapToGrid()
     snapGuide.setSnapDistance(INT_MAX);
 
     foreach(KoShape* shape, selectedShapes) {
-        KoParameterShape * paramShape = dynamic_cast<KoParameterShape*>(shape);
+        KParameterShape * paramShape = dynamic_cast<KParameterShape*>(shape);
         if (paramShape && paramShape->isParametricShape())
             continue;
 
@@ -1100,7 +1100,7 @@ void KarbonView::selectionChanged()
         // check for different shape types for enabling specific actions
         foreach(KoShape* shape, selection->selectedShapes(KoFlake::FullSelection)) {
             if (dynamic_cast<KoPathShape*>(shape)) {
-                KoParameterShape * ps = dynamic_cast<KoParameterShape*>(shape);
+                KParameterShape * ps = dynamic_cast<KParameterShape*>(shape);
                 if (ps && ps->isParametricShape())
                     selectedParametrics++;
                 else

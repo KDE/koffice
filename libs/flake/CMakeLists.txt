@@ -51,7 +51,7 @@ set(flake_SRCS
     KoShapeFactoryBase.cpp
     KoShapeUserData.cpp
     KoPointGroup.cpp
-    KoParameterShape.cpp
+    KParameterShape.cpp
     KoPointerEvent.cpp
     KoShapeController.cpp
     KoToolSelection.cpp
@@ -266,7 +266,7 @@ install(
     KLineBorder.h
     KLoadingShapeUpdater.h
     KoOdfWorkaround.h
-    KoParameterShape.h
+    KParameterShape.h
     KoPasteController.h
     KoPathPointData.h
     KoPathPoint.h

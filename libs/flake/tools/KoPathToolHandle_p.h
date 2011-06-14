@@ -41,7 +41,7 @@
 #include <QList>
 
 class KoPathTool;
-class KoParameterShape;
+class KParameterShape;
 class KoViewConverter;
 class KoPointerEvent;
 class QPainter;
@@ -80,13 +80,13 @@ private:
 class ParameterHandle : public KoPathToolHandle
 {
 public:
-    ParameterHandle(KoPathTool *tool, KoParameterShape *parameterShape, int handleId);
+    ParameterHandle(KoPathTool *tool, KParameterShape *parameterShape, int handleId);
     void paint(QPainter &painter, const KoViewConverter &converter);
     void repaint() const;
     KInteractionStrategy *handleMousePress(KoPointerEvent *event);
     virtual bool check(const QList<KoPathShape*> &selectedShapes);
 protected:
-    KoParameterShape *m_parameterShape;
+    KParameterShape *m_parameterShape;
     int m_handleId;
 };
 

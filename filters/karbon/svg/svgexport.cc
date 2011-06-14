@@ -206,7 +206,7 @@ void SvgExport::saveShape(KoShape * shape)
 {
     KoPathShape * path = dynamic_cast<KoPathShape*>(shape);
     if (path) {
-        KoParameterShape * parameterShape = dynamic_cast<KoParameterShape*>(path);
+        KParameterShape * parameterShape = dynamic_cast<KParameterShape*>(path);
         bool isParametric = parameterShape && parameterShape->isParametricShape();
         if (path->pathShapeId() == RectangleShapeId && isParametric) {
             saveRectangle(static_cast<RectangleShape*>(path));
