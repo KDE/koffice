@@ -24,7 +24,7 @@
 
 #include "commands/KPathPointMoveCommand.h"
 #include "KPathTool_p.h"
-#include "KoPathToolSelection_p.h"
+#include "KPathToolSelection_p.h"
 #include "KoSnapGuide.h"
 #include "KCanvasBase.h"
 
@@ -53,7 +53,7 @@ void KPathPointMoveStrategy::handleMouseMove(const QPointF &mouseLocation, Qt::K
             move.setX(0);
     }
 
-    KoPathToolSelection * selection = dynamic_cast<KoPathToolSelection*>(m_tool->selection());
+    KPathToolSelection * selection = dynamic_cast<KPathToolSelection*>(m_tool->selection());
     if (! selection)
         return;
 
@@ -66,7 +66,7 @@ QUndoCommand* KPathPointMoveStrategy::createCommand(QUndoCommand *parent)
 {
     m_tool->canvas()->updateCanvas(m_tool->canvas()->snapGuide()->boundingRect());
 
-    KoPathToolSelection * selection = dynamic_cast<KoPathToolSelection*>(m_tool->selection());
+    KPathToolSelection * selection = dynamic_cast<KPathToolSelection*>(m_tool->selection());
     if (! selection)
         return 0;
 

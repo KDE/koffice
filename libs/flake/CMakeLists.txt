@@ -149,7 +149,7 @@ set(flake_SRCS
     tools/KCreateShapeStrategy.cpp
     tools/KPathToolFactory.cpp
     tools/KPathTool.cpp
-    tools/KoPathToolSelection.cpp
+    tools/KPathToolSelection.cpp
     tools/KPathToolHandle.cpp
     tools/PathToolOptionWidget.cpp
     tools/KPathPointRubberSelectStrategy.cpp

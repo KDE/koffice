@@ -20,7 +20,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoPathToolSelection_p.h"
+#include "KPathToolSelection_p.h"
 #include "KPathTool_p.h"
 #include <KParameterShape.h>
 #include <KPathPoint.h>
@@ -30,16 +30,16 @@
 #include <KoResourceManager.h>
 #include <QtGui/QPainter>
 
-KoPathToolSelection::KoPathToolSelection(KPathTool * tool)
+KPathToolSelection::KPathToolSelection(KPathTool * tool)
         : m_tool(tool)
 {
 }
 
-KoPathToolSelection::~KoPathToolSelection()
+KPathToolSelection::~KPathToolSelection()
 {
 }
 
-void KoPathToolSelection::paint(QPainter &painter, const KoViewConverter &converter)
+void KPathToolSelection::paint(QPainter &painter, const KoViewConverter &converter)
 {
     int handleRadius = m_tool->canvas()->resourceManager()->handleRadius();
 
@@ -57,7 +57,7 @@ void KoPathToolSelection::paint(QPainter &painter, const KoViewConverter &conver
     }
 }
 
-void KoPathToolSelection::add(KPathPoint * point, bool clear)
+void KPathToolSelection::add(KPathPoint * point, bool clear)
 {
     if (! point)
         return;
@@ -86,7 +86,7 @@ void KoPathToolSelection::add(KPathPoint * point, bool clear)
     }
 }
 
-void KoPathToolSelection::remove(KPathPoint * point)
+void KPathToolSelection::remove(KPathPoint * point)
 {
     if (m_selectedPoints.remove(point)) {
         KPathShape * pathShape = point->parent();
@@ -99,7 +99,7 @@ void KoPathToolSelection::remove(KPathPoint * point)
     m_tool->repaint(point->boundingRect());
 }
 
-void KoPathToolSelection::clear()
+void KPathToolSelection::clear()
 {
     repaint();
     m_selectedPoints.clear();
@@ -107,7 +107,7 @@ void KoPathToolSelection::clear()
     emit selectionChanged();
 }
 
-void KoPathToolSelection::selectPoints(const QRectF &rect, bool clearSelection)
+void KPathToolSelection::selectPoints(const QRectF &rect, bool clearSelection)
 {
     if (clearSelection) {
         clear();
@@ -125,27 +125,27 @@ void KoPathToolSelection::selectPoints(const QRectF &rect, bool clearSelection)
     emit selectionChanged();
 }
 
-int KoPathToolSelection::objectCount() const
+int KPathToolSelection::objectCount() const
 {
     return m_shapePointMap.size();
 }
 
-int KoPathToolSelection::size() const
+int KPathToolSelection::size() const
 {
     return m_selectedPoints.size();
 }
 
-bool KoPathToolSelection::contains(KPathPoint * point)
+bool KPathToolSelection::contains(KPathPoint * point)
 {
     return m_selectedPoints.contains(point);
 }
 
-const QSet<KPathPoint *> & KoPathToolSelection::selectedPoints() const
+const QSet<KPathPoint *> & KPathToolSelection::selectedPoints() const
 {
     return m_selectedPoints;
 }
 
-QList<KPathPointData> KoPathToolSelection::selectedPointsData() const
+QList<KPathPointData> KPathToolSelection::selectedPointsData() const
 {
     QList<KPathPointData> pointData;
     foreach(KPathPoint* p, m_selectedPoints) {
@@ -155,7 +155,7 @@ QList<KPathPointData> KoPathToolSelection::selectedPointsData() const
     return pointData;
 }
 
-QList<KPathPointData> KoPathToolSelection::selectedSegmentsData() const
+QList<KPathPointData> KPathToolSelection::selectedSegmentsData() const
 {
     QList<KPathPointData> pointData;
 
@@ -188,17 +188,17 @@ QList<KPathPointData> KoPathToolSelection::selectedSegmentsData() const
     return pointData;
 }
 
-QList<KPathShape*> KoPathToolSelection::selectedShapes() const
+QList<KPathShape*> KPathToolSelection::selectedShapes() const
 {
     return m_selectedShapes;
 }
 
-void KoPathToolSelection::setSelectedShapes(const QList<KPathShape*> shapes)
+void KPathToolSelection::setSelectedShapes(const QList<KPathShape*> shapes)
 {
     m_selectedShapes = shapes;
 }
 
-void KoPathToolSelection::repaint()
+void KPathToolSelection::repaint()
 {
     update();
     foreach(KPathPoint *p, m_selectedPoints) {
@@ -206,7 +206,7 @@ void KoPathToolSelection::repaint()
     }
 }
 
-void KoPathToolSelection::update()
+void KPathToolSelection::update()
 {
     bool selectionHasChanged = false;
 
@@ -240,9 +240,9 @@ void KoPathToolSelection::update()
         emit selectionChanged();
 }
 
-bool KoPathToolSelection::hasSelection()
+bool KPathToolSelection::hasSelection()
 {
     return !m_selectedPoints.isEmpty();
 }
 
-#include <KoPathToolSelection_p.moc>
+#include <KPathToolSelection_p.moc>

@@ -50,14 +50,14 @@ class QPainter;
 * This class handles the selection of points. It makes sure
 * the canvas is repainted when the selection changes.
 */
-class FLAKE_TEST_EXPORT KoPathToolSelection : public KoToolSelection
+class FLAKE_TEST_EXPORT KPathToolSelection : public KoToolSelection
 {
     Q_OBJECT
 
 public:
-    explicit KoPathToolSelection(KPathTool *tool);
+    explicit KPathToolSelection(KPathTool *tool);
 
-    ~KoPathToolSelection();
+    ~KPathToolSelection();
 
     /// @brief Draw the selected points
     void paint(QPainter &painter, const KoViewConverter &converter);

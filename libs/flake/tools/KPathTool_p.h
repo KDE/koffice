@@ -37,7 +37,7 @@
 
 #include "../KPathShape.h"
 #include "../KoToolBase.h"
-#include "KoPathToolSelection_p.h"
+#include "KPathToolSelection_p.h"
 
 class QButtonGroup;
 class KCanvasBase;
@@ -118,7 +118,7 @@ private:
     int m_handleRadius;    ///< the radius of the control point handles
     uint m_grabSensitivity; ///< the grab sensitivity
     /// the point selection
-    KoPathToolSelection m_pointSelection;
+    KPathToolSelection m_pointSelection;
     // needed for interaction strategy
     QPointF m_lastPoint;
 

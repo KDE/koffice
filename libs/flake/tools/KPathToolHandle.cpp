@@ -57,7 +57,7 @@ void PointHandle::paint(QPainter &painter, const KoViewConverter &converter)
     painter.setTransform(m_activePoint->parent()->absoluteTransformation(&converter) * painter.transform());
     KoShape::applyConversion(painter, converter);
 
-    KoPathToolSelection * selection = dynamic_cast<KoPathToolSelection*>(m_tool->selection());
+    KPathToolSelection * selection = dynamic_cast<KPathToolSelection*>(m_tool->selection());
 
     KPathPoint::PointType type = KPathPoint::Node;
     if (selection && selection->contains(m_activePoint))
@@ -70,7 +70,7 @@ void PointHandle::paint(QPainter &painter, const KoViewConverter &converter)
 void PointHandle::repaint() const
 {
     bool active = false;
-    KoPathToolSelection * selection = dynamic_cast<KoPathToolSelection*>(m_tool->selection());
+    KPathToolSelection * selection = dynamic_cast<KPathToolSelection*>(m_tool->selection());
     if (selection && selection->contains(m_activePoint))
         active = true;
     m_tool->repaint(m_activePoint->boundingRect(!active));
@@ -81,7 +81,7 @@ KInteractionStrategy * PointHandle::handleMousePress(KoPointerEvent *event)
     if ((event->button() & Qt::LeftButton) == 0)
         return 0;
     if ((event->modifiers() & Qt::ShiftModifier) == 0) { // no shift pressed.
-        KoPathToolSelection * selection = dynamic_cast<KoPathToolSelection*>(m_tool->selection());
+        KPathToolSelection * selection = dynamic_cast<KPathToolSelection*>(m_tool->selection());
 
         // control select adds/removes points to/from the selection
         if (event->modifiers() & Qt::ControlModifier) {
@@ -169,7 +169,7 @@ void ParameterHandle::repaint() const
 KInteractionStrategy * ParameterHandle::handleMousePress(KoPointerEvent *event)
 {
     if (event->button() & Qt::LeftButton) {
-        KoPathToolSelection * selection = dynamic_cast<KoPathToolSelection*>(m_tool->selection());
+        KPathToolSelection * selection = dynamic_cast<KPathToolSelection*>(m_tool->selection());
         if (selection)
             selection->clear();
         return new KParameterChangeStrategy(m_tool, m_parameterShape, m_handleId);
