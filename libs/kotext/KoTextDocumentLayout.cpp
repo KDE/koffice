@@ -22,7 +22,7 @@
 #include "KoTextShapeData.h"
 #include "styles/KoParagraphStyle.h"
 #include "styles/KoCharacterStyle.h"
-#include "styles/KoListStyle.h"
+#include "styles/KListStyle.h"
 #include "styles/KoStyleManager.h"
 #include "KoTextBlockData.h"
 #include "KoTextBlockBorderData.h"

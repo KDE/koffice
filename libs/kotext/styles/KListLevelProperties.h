@@ -20,14 +20,14 @@
 #ifndef KOLISTLEVELPROPERTIES_H
 #define KOLISTLEVELPROPERTIES_H
 
-#include "KoListStyle.h"
+#include "KListStyle.h"
 
 #include <QString>
 #include <QChar>
 
 #include <KXmlReader.h>
 
-class KoListStyle;
+class KListStyle;
 class KoShapeLoadingContext;
 class KXmlWriter;
 class KImageData;
@@ -51,9 +51,9 @@ public:
     void setStyleId(int id);
 
     /// set the style to be used for this list-level.
-    void setStyle(KoListStyle::Style style);
+    void setStyle(KListStyle::Style style);
     /// return the used style
-    KoListStyle::Style style() const;
+    KListStyle::Style style() const;
     /// set the string that will be shown before the counter in the list label
     void setListItemPrefix(const QString &prefix);
     /// return the string that will be shown before the counter in the list label
@@ -109,9 +109,9 @@ public:
     /// set the bullet image key (as from the KImageData)
     void setBulletImage(KImageData *imageData);
     /// set the listId used by all list-styles that together make 1 user defined list in an ODF file.
-    void setListId(KoListStyle::ListIdType listId);
+    void setListId(KListStyle::ListIdType listId);
     /// return the listId used by all list-styles that together make 1 user defined list in an ODF file.
-    KoListStyle::ListIdType listId() const;
+    KListStyle::ListIdType listId() const;
     /**
      * For alpha-based lists numbers above the 'z' will increase the value of all characters at the same time.
      * If true; we get the sequence 'aa', 'bb', 'cc'. If false; 'aa', 'ab', 'ac'.

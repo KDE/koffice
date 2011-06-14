@@ -2,7 +2,7 @@
 #include "tests/MockShapes.h"
 #include "../commands/ChangeListCommand.h"
 
-#include <KoListStyle.h>
+#include <KListStyle.h>
 #include <KListLevelProperties.h>
 #include <KoStyleManager.h>
 #include <KoTextDocument.h>
@@ -25,7 +25,7 @@ void TestChangeListCommand::addList()
 
     QTextBlock block = doc.begin().next();
     cursor.setPosition(block.position());
-    ChangeListCommand clc(cursor, KoListStyle::DecimalItem);
+    ChangeListCommand clc(cursor, KListStyle::DecimalItem);
     clc.setTool(tool);
     clc.redo();
 
@@ -38,10 +38,10 @@ void TestChangeListCommand::addList()
     QVERIFY(block.textList() == 0);
 
     QTextListFormat format = tl->format();
-    QCOMPARE(format.intProperty(QTextListFormat::ListStyle), (int) KoListStyle::DecimalItem);
+    QCOMPARE(format.intProperty(QTextListFormat::ListStyle), (int) KListStyle::DecimalItem);
 
     cursor.setPosition(block.position());
-    ChangeListCommand clc2(cursor, KoListStyle::DiscItem);
+    ChangeListCommand clc2(cursor, KListStyle::DiscItem);
     clc2.setTool(tool);
     clc2.redo();
 
@@ -65,11 +65,11 @@ void TestChangeListCommand::addListWithLevel2()
     QTextBlock block = doc.begin().next();
     cursor.setPosition(block.position());
 
-    KoListStyle style;
+    KListStyle style;
     KListLevelProperties llp;
     llp.setLevel(2);
     llp.setDisplayLevel(2);
-    llp.setStyle(KoListStyle::DiscItem);
+    llp.setStyle(KListStyle::DiscItem);
     style.setLevelProperties(llp);
 
     ChangeListCommand clc(cursor, &style, 2);
@@ -85,9 +85,9 @@ void TestChangeListCommand::addListWithLevel2()
     QVERIFY(block.textList() == 0);
 
     QTextListFormat format = tl->format();
-    QCOMPARE(format.intProperty(QTextListFormat::ListStyle), (int) KoListStyle::DiscItem);
-    QCOMPARE(format.intProperty(KoListStyle::DisplayLevel), (int) 2);
-    QCOMPARE(format.intProperty(KoListStyle::Level), (int) 2);
+    QCOMPARE(format.intProperty(QTextListFormat::ListStyle), (int) KListStyle::DiscItem);
+    QCOMPARE(format.intProperty(KListStyle::DisplayLevel), (int) 2);
+    QCOMPARE(format.intProperty(KListStyle::Level), (int) 2);
 }
 
 void TestChangeListCommand::removeList()
@@ -97,7 +97,7 @@ void TestChangeListCommand::removeList()
     TextTool *tool = new TextTool(new MockCanvas);
     QTextCursor cursor(&doc);
     cursor.insertText("Root\nparag1\nparag2\nparag3\nparag4\n");
-    KoListStyle style;
+    KListStyle style;
     QTextBlock block = doc.begin().next();
     while (block.isValid()) {
         style.applyStyle(block);
@@ -105,10 +105,10 @@ void TestChangeListCommand::removeList()
     }
 
     block = doc.begin().next();
-    QVERIFY(block.textList()); // init, we should not have to test KoListStyle here ;)
+    QVERIFY(block.textList()); // init, we should not have to test KListStyle here ;)
 
     cursor.setPosition(block.position());
-    ChangeListCommand clc(cursor, KoListStyle::None);
+    ChangeListCommand clc(cursor, KListStyle::None);
     clc.setTool(tool);
     clc.redo();
 
@@ -124,7 +124,7 @@ void TestChangeListCommand::removeList()
     QVERIFY(block.textList());
 
     cursor.setPosition(block.position());
-    ChangeListCommand clc2(cursor, KoListStyle::None);
+    ChangeListCommand clc2(cursor, KListStyle::None);
     clc2.setTool(tool);
     clc2.redo();
     block = doc.begin();
@@ -146,10 +146,10 @@ void TestChangeListCommand::joinList()
     TextTool *tool = new TextTool(new MockCanvas);
     QTextCursor cursor(&doc);
     cursor.insertText("Root\nparag1\nparag2\nparag3\nparag4\n");
-    KoListStyle style;
+    KListStyle style;
     KListLevelProperties llp;
     llp.setLevel(1);
-    llp.setStyle(KoListStyle::DiscItem);
+    llp.setStyle(KListStyle::DiscItem);
     style.setLevelProperties(llp);
     QTextBlock block = doc.begin().next();
     style.applyStyle(block);
@@ -161,12 +161,12 @@ void TestChangeListCommand::joinList()
 
     block = doc.begin().next();
     QTextList *tl = block.textList();
-    QVERIFY(tl); // init, we should not have to test KoListStyle here ;)
+    QVERIFY(tl); // init, we should not have to test KListStyle here ;)
     block = block.next(); // parag2
     QVERIFY(block.textList() == 0);
 
     cursor.setPosition(block.position());
-    ChangeListCommand clc(cursor, KoListStyle::DiscItem);
+    ChangeListCommand clc(cursor, KListStyle::DiscItem);
     clc.setTool(tool);
     clc.redo();
     QCOMPARE(block.textList(), tl);
@@ -180,18 +180,18 @@ void TestChangeListCommand::joinList2()
     TextTool *tool = new TextTool(new MockCanvas);
     QTextCursor cursor(&doc);
     cursor.insertText("Root\nparag1\nparag2\nparag3\nparag4");
-    KoListStyle style;
+    KListStyle style;
     KListLevelProperties llp1;
     llp1.setLevel(1);
-    llp1.setStyle(KoListStyle::DiscItem);
+    llp1.setStyle(KListStyle::DiscItem);
     style.setLevelProperties(llp1);
     QTextBlock block = doc.begin().next().next();
     style.applyStyle(block); // apply on parag2
 
-    KoListStyle style2;
+    KListStyle style2;
     KListLevelProperties llp;
     llp.setLevel(1);
-    llp.setStyle(KoListStyle::DecimalItem);
+    llp.setStyle(KListStyle::DecimalItem);
     llp.setListItemSuffix(".");
     style2.setLevelProperties(llp);
     block = block.next().next(); // parag4
@@ -200,14 +200,14 @@ void TestChangeListCommand::joinList2()
     // now apply the default 'DiscItem' on 'parag1' expecting it to join with the list already set on 'parag2'
     block = doc.begin().next();
     cursor.setPosition(block.position());
-    ChangeListCommand clc(cursor, KoListStyle::DiscItem);
+    ChangeListCommand clc(cursor, KListStyle::DiscItem);
     clc.setTool(tool);
     clc.redo();
     QTextList *tl = block.textList();
     QVERIFY(tl);
     block = block.next();
     QCOMPARE(tl, block.textList());
-    QCOMPARE(tl->format().intProperty(QTextListFormat::ListStyle), (int) KoListStyle::DiscItem);
+    QCOMPARE(tl->format().intProperty(QTextListFormat::ListStyle), (int) KListStyle::DiscItem);
 
     // now apply the 'DecimalItem' on 'parag3' and expect it to join with the list already set on 'parag4'
     block = doc.findBlock(30);
@@ -217,13 +217,13 @@ void TestChangeListCommand::joinList2()
     block = block.previous(); // parag3
     QVERIFY(block.textList() == 0);
     cursor.setPosition(block.position());
-    ChangeListCommand clc2(cursor, KoListStyle::DecimalItem);
+    ChangeListCommand clc2(cursor, KListStyle::DecimalItem);
     clc2.setTool(tool);
     clc2.redo();
     QVERIFY(block.textList());
     QVERIFY(block.textList() != tl);
     QVERIFY(block.textList() == numberedList);
-    QCOMPARE(numberedList->format().intProperty(QTextListFormat::ListStyle), (int) KoListStyle::DecimalItem);
+    QCOMPARE(numberedList->format().intProperty(QTextListFormat::ListStyle), (int) KListStyle::DecimalItem);
 }
 
 void TestChangeListCommand::splitList()
@@ -240,10 +240,10 @@ void TestChangeListCommand::splitList()
     QTextCursor cursor(&doc);
     cursor.insertText("Root\nparagA\nparagB\nparagC");
     QTextBlock block = doc.begin().next();
-    KoListStyle style;
+    KListStyle style;
     style.applyStyle(block); // apply on parag2
 
-    KoListStyle style2;
+    KListStyle style2;
     KListLevelProperties llp = style2.levelProperties(2);
     style2.setLevelProperties(llp);
     block = block.next();
@@ -262,7 +262,7 @@ void TestChangeListCommand::splitList()
 
     QTextList *tl = paragB.textList();
     cursor.setPosition(paragB.position());
-    ChangeListCommand clc(cursor, KoListStyle::AlphaLowerItem);
+    ChangeListCommand clc(cursor, KListStyle::AlphaLowerItem);
     clc.setTool(tool);
     clc.redo();
 
@@ -272,8 +272,8 @@ void TestChangeListCommand::splitList()
     QVERIFY(newTextList == tl);
     QCOMPARE(paragC.textList(), tl);
 
-    QCOMPARE(tl->format().intProperty(KoListStyle::Level), 2);
-    QCOMPARE(newTextList->format().intProperty(KoListStyle::Level), 2);
+    QCOMPARE(tl->format().intProperty(KListStyle::Level), 2);
+    QCOMPARE(newTextList->format().intProperty(KListStyle::Level), 2);
 }
 
 QTEST_MAIN(TestChangeListCommand)

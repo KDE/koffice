@@ -32,7 +32,7 @@ class QString;
 class KOdfLoadingContext;
 class KoParagraphStyle;
 class KoCharacterStyle;
-class KoListStyle;
+class KListStyle;
 class KoTableStyle;
 class KoTableColumnStyle;
 class KoTableRowStyle;
@@ -105,7 +105,7 @@ public:
      * @param stylesDotXml If set the styles from styles.xml are use if unset styles from content.xml are used.
      * @return The list style for the given name or 0 if not found
      */
-    KoListStyle *listStyle(const QString &name, bool stylesDotXml) const;
+    KListStyle *listStyle(const QString &name, bool stylesDotXml) const;
 
     /**
      * Get the table style for the given name
@@ -201,7 +201,7 @@ private:
     // helper functions for loading of list styles
     void addListStyles(KoShapeLoadingContext &context, QList<KXmlElement*> styleElements, int styleTypes,
                        KoStyleManager *styleManager = 0);
-    QList<QPair<QString, KoListStyle *> > loadListStyles(KoShapeLoadingContext &context, QList<KXmlElement*> styleElements, KoStyleManager *styleManager);
+    QList<QPair<QString, KListStyle *> > loadListStyles(KoShapeLoadingContext &context, QList<KXmlElement*> styleElements, KoStyleManager *styleManager);
 
     // helper functions for loading of table styles
     void addTableStyles(KOdfLoadingContext &context, QList<KXmlElement*> styleElements, int styleTypes,

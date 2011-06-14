@@ -52,14 +52,14 @@
 
 //A convenience function to get a ListIdType from a format
 
-static KoListStyle::ListIdType ListId(const QTextListFormat &format)
+static KListStyle::ListIdType ListId(const QTextListFormat &format)
 {
-    KoListStyle::ListIdType listId;
+    KListStyle::ListIdType listId;
 
-    if (sizeof(KoListStyle::ListIdType) == sizeof(uint))
-        listId = format.property(KoListStyle::ListId).toUInt();
+    if (sizeof(KListStyle::ListIdType) == sizeof(uint))
+        listId = format.property(KListStyle::ListId).toUInt();
     else
-        listId = format.property(KoListStyle::ListId).toULongLong();
+        listId = format.property(KListStyle::ListId).toULongLong();
 
     return listId;
 }
@@ -190,7 +190,7 @@ void ChangeTrackedDeleteCommand::handleListItemDelete(QTextCursor &selection)
         ListItemNumberingCommand *changeNumberingCommand = new ListItemNumberingCommand(selection.block(), false, this);
         changeNumberingCommand->redo();
     } else {
-        ChangeListCommand *changeListCommand = new ChangeListCommand(selection, KoListStyle::None, 0, 
+        ChangeListCommand *changeListCommand = new ChangeListCommand(selection, KListStyle::None, 0, 
                                                                      ChangeListCommand::ModifyExistingList | ChangeListCommand::MergeWithAdjacentList, 
                                                                      this);
         changeListCommand->redo();
@@ -403,7 +403,7 @@ void ChangeTrackedDeleteCommand::updateListIds(QTextCursor &cursor)
         tempCursor.setPosition(currentBlock.position());
         currentList = tempCursor.currentList();
         if (currentList) {
-            KoListStyle::ListIdType listId = ListId(currentList->format());
+            KListStyle::ListIdType listId = ListId(currentList->format());
             m_newListIds.push_back(listId);
         }
     }
@@ -421,7 +421,7 @@ void ChangeTrackedDeleteCommand::updateListChanges()
         tempCursor.setPosition(currentBlock.position());
         currentList = tempCursor.currentList();
         if (currentList) {
-            KoListStyle::ListIdType listId = m_newListIds[newListIdsCounter];
+            KListStyle::ListIdType listId = m_newListIds[newListIdsCounter];
             if (!KoTextDocument(document).list(currentBlock)) {
                 KoList *list = KoTextDocument(document).list(listId);
                 if (list)

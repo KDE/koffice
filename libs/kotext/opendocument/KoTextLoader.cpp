@@ -62,7 +62,7 @@
 #include "styles/KoStyleManager.h"
 #include "styles/KoParagraphStyle.h"
 #include "styles/KoCharacterStyle.h"
-#include "styles/KoListStyle.h"
+#include "styles/KListStyle.h"
 #include "styles/KListLevelProperties.h"
 #include "styles/KoTableStyle.h"
 #include "styles/KoTableColumnStyle.h"
@@ -109,11 +109,11 @@ public:
     QTime dt;
 
     KoList *currentList;
-    KoListStyle *currentListStyle;
+    KListStyle *currentListStyle;
     int currentListLevel;
     // Two lists that follow the same style are considered as one for numbering purposes
     // This hash keeps all the lists that have the same style in one KoList.
-    QHash<KoListStyle *, KoList *> lists;
+    QHash<KListStyle *, KoList *> lists;
 
     KoStyleManager *styleManager;
 
@@ -183,7 +183,7 @@ public:
         kDebug(32500) << "Loading took" << (float)(dt.elapsed()) / 1000 << " seconds";
     }
 
-    KoList *list(const QTextDocument *document, KoListStyle *listStyle);
+    KoList *list(const QTextDocument *document, KListStyle *listStyle);
 
     void openChangeRegion(const KXmlElement &element);
     void closeChangeRegion(const KXmlElement &element);
@@ -385,7 +385,7 @@ void KoTextLoader::Private::splitStack(int id)
     changeStack.push(newId);
 }
 
-KoList *KoTextLoader::Private::list(const QTextDocument *document, KoListStyle *listStyle)
+KoList *KoTextLoader::Private::list(const QTextDocument *document, KListStyle *listStyle)
 {
     if (lists.contains(listStyle))
         return lists[listStyle];
@@ -1031,7 +1031,7 @@ void KoTextLoader::loadHeading(const KXmlElement &element, QTextCursor &cursor)
     }
 
     if (!d->currentList) { // apply <text:outline-style> (if present) only if heading is not within a <text:list>
-        KoListStyle *outlineStyle = d->styleManager->outlineStyle();
+        KListStyle *outlineStyle = d->styleManager->outlineStyle();
         if (outlineStyle) {
             KoList *list = d->list(block.document(), outlineStyle);
             if (!KoTextDocument(block.document()).headingList()) {
@@ -1066,7 +1066,7 @@ void KoTextLoader::loadList(const KXmlElement &element, QTextCursor &cursor)
     const bool numberedParagraph = element.localName() == "numbered-paragraph";
 
     QString styleName = element.attributeNS(KOdfXmlNS::text, "style-name", QString());
-    KoListStyle *listStyle = d->textSharedData->listStyle(styleName, d->stylesDotXml);
+    KListStyle *listStyle = d->textSharedData->listStyle(styleName, d->stylesDotXml);
 
     int level;
 

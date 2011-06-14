@@ -19,7 +19,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoListStyle.h"
+#include "KListStyle.h"
 #include "KListLevelProperties.h"
 #include "KoTextBlockData.h"
 #include "KoParagraphStyle.h"
@@ -34,7 +34,7 @@
 #include <QTextCursor>
 #include <QBuffer>
 
-class KoListStyle::Private
+class KListStyle::Private
 {
 public:
     Private() : styleId(0) { }
@@ -44,17 +44,17 @@ public:
     QMap<int, KListLevelProperties> levels;
 };
 
-KoListStyle::KoListStyle(QObject *parent)
+KListStyle::KListStyle(QObject *parent)
         : QObject(parent), d(new Private())
 {
 }
 
-KoListStyle::~KoListStyle()
+KListStyle::~KListStyle()
 {
     delete d;
 }
 
-bool KoListStyle::operator==(const KoListStyle &other) const
+bool KListStyle::operator==(const KListStyle &other) const
 {
     foreach(int level, d->levels.keys()) {
         if (! other.hasLevelProperties(level))
@@ -69,31 +69,31 @@ bool KoListStyle::operator==(const KoListStyle &other) const
     return true;
 }
 
-bool KoListStyle::operator!=(const KoListStyle &other) const
+bool KListStyle::operator!=(const KListStyle &other) const
 {
-    return !KoListStyle::operator==(other);
+    return !KListStyle::operator==(other);
 }
 
-void KoListStyle::copyProperties(KoListStyle *other)
+void KListStyle::copyProperties(KListStyle *other)
 {
     d->styleId = other->d->styleId;
     d->levels = other->d->levels;
     setName(other->name());
 }
 
-KoListStyle *KoListStyle::clone(QObject *parent)
+KListStyle *KListStyle::clone(QObject *parent)
 {
-    KoListStyle *newStyle = new KoListStyle(parent);
+    KListStyle *newStyle = new KListStyle(parent);
     newStyle->copyProperties(this);
     return newStyle;
 }
 
-QString KoListStyle::name() const
+QString KListStyle::name() const
 {
     return d->name;
 }
 
-void KoListStyle::setName(const QString &name)
+void KListStyle::setName(const QString &name)
 {
     if (d->name == name)
         return;
@@ -101,12 +101,12 @@ void KoListStyle::setName(const QString &name)
     emit nameChanged(d->name);
 }
 
-int KoListStyle::styleId() const
+int KListStyle::styleId() const
 {
     return d->styleId;
 }
 
-void KoListStyle::setStyleId(int id)
+void KListStyle::setStyleId(int id)
 {
     d->styleId = id;
     foreach(int level, d->levels.keys()) {
@@ -114,7 +114,7 @@ void KoListStyle::setStyleId(int id)
     }
 }
 
-KListLevelProperties KoListStyle::levelProperties(int level) const
+KListLevelProperties KListStyle::levelProperties(int level) const
 {
     if (d->levels.contains(level))
         return d->levels.value(level);
@@ -132,7 +132,7 @@ KListLevelProperties KoListStyle::levelProperties(int level) const
     return llp;
 }
 
-QTextListFormat KoListStyle::listFormat(int level) const
+QTextListFormat KListStyle::listFormat(int level) const
 {
     KListLevelProperties llp = levelProperties(level);
     QTextListFormat format;
@@ -140,14 +140,14 @@ QTextListFormat KoListStyle::listFormat(int level) const
     return format;
 }
 
-void KoListStyle::setLevelProperties(const KListLevelProperties &properties)
+void KListStyle::setLevelProperties(const KListLevelProperties &properties)
 {
     int level = qMax(1, properties.level());
     refreshLevelProperties(properties);
     emit styleChanged(level);
 }
 
-void KoListStyle::refreshLevelProperties(const KListLevelProperties &properties)
+void KListStyle::refreshLevelProperties(const KListLevelProperties &properties)
 {
     int level = qMax(1, properties.level());
     KListLevelProperties llp = properties;
@@ -155,22 +155,22 @@ void KoListStyle::refreshLevelProperties(const KListLevelProperties &properties)
     d->levels.insert(level, llp);
 }
 
-bool KoListStyle::hasLevelProperties(int level) const
+bool KListStyle::hasLevelProperties(int level) const
 {
     return d->levels.contains(level);
 }
 
-void KoListStyle::removeLevelProperties(int level)
+void KListStyle::removeLevelProperties(int level)
 {
     d->levels.remove(level);
 }
 
-void KoListStyle::applyStyle(const QTextBlock &block, int level)
+void KListStyle::applyStyle(const QTextBlock &block, int level)
 {
     KoList::applyStyle(block, this, level);
 }
 
-void KoListStyle::loadOdf(KoShapeLoadingContext &scontext, const KXmlElement &style)
+void KListStyle::loadOdf(KoShapeLoadingContext &scontext, const KXmlElement &style)
 {
     KXmlElement styleElem;
     forEachElement(styleElem, style) {
@@ -185,13 +185,13 @@ void KoListStyle::loadOdf(KoShapeLoadingContext &scontext, const KXmlElement &st
         KListLevelProperties llp;
         llp.setLevel(1);
         llp.setStartValue(1);
-        llp.setStyle(KoListStyle::DecimalItem);
+        llp.setStyle(KListStyle::DecimalItem);
         llp.setListItemSuffix(".");
         setLevelProperties(llp);
     }
 }
 
-void KoListStyle::saveOdf(KOdfGenericStyle &style)
+void KListStyle::saveOdf(KOdfGenericStyle &style)
 {
     if (!d->name.isEmpty() && !style.isDefaultStyle()) {
         style.addAttribute("style:display-name", d->name);
@@ -208,16 +208,16 @@ void KoListStyle::saveOdf(KOdfGenericStyle &style)
     style.addChildElement("text-list-level-style-content", elementContents);
 }
 
-bool KoListStyle::isNumberingStyle(int style)
+bool KListStyle::isNumberingStyle(int style)
 {
-    return !(style == KoListStyle::SquareItem || style == KoListStyle::DiscItem
-             || style == KoListStyle::CircleItem || style == KoListStyle::BoxItem
-             || style == KoListStyle::RhombusItem || style == KoListStyle::HeavyCheckMarkItem
-             || style == KoListStyle::BallotXItem || style == KoListStyle::RightArrowItem
-             || style == KoListStyle::RightArrowHeadItem);
+    return !(style == KListStyle::SquareItem || style == KListStyle::DiscItem
+             || style == KListStyle::CircleItem || style == KListStyle::BoxItem
+             || style == KListStyle::RhombusItem || style == KListStyle::HeavyCheckMarkItem
+             || style == KListStyle::BallotXItem || style == KListStyle::RightArrowItem
+             || style == KListStyle::RightArrowHeadItem);
 }
 
-QList<int> KoListStyle::listLevels() const
+QList<int> KListStyle::listLevels() const
 {
     return d->levels.keys();
 }

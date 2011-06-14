@@ -20,7 +20,7 @@
 #ifndef LISTITEMSHELPER_H
 #define LISTITEMSHELPER_H
 
-#include <KoListStyle.h>
+#include <KListStyle.h>
 
 #include <QFont>
 #include <QFontMetricsF>
@@ -31,18 +31,18 @@ namespace Lists
 {
 enum Capitalisation { Lowercase, Uppercase };
 struct ListStyleItem {
-    ListStyleItem(const QString &name_, KoListStyle::Style style_) {
+    ListStyleItem(const QString &name_, KListStyle::Style style_) {
         name = name_;
         style = style_;
     }
-    KoListStyle::Style style;
+    KListStyle::Style style;
     QString name;
 };
 
 QString intToRoman(int n);
 QString intToAlpha(int n, Capitalisation caps, bool letterSynchronization);
-QString intToScript(int n, KoListStyle::Style type);
-QString intToScriptList(int n, KoListStyle::Style type);
+QString intToScript(int n, KListStyle::Style type);
+QString intToScriptList(int n, KListStyle::Style type);
 
 /// return international list items (bullets/arabic/roman)
 QList<ListStyleItem> genericListStyleItems();

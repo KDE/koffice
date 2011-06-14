@@ -177,52 +177,52 @@ QTextListFormat.clone = function(fmt) {
 };
 
 // KOffice specific
-var KoListStyle = {};
+var KListStyle = {};
 i = QTextFormat.UserProperty+1000;
-KoListStyle.ListItemPrefix = i;
-KoListStyle.ListItemSuffix= ++i;
-KoListStyle.StartValue= ++i;
-KoListStyle.Level= ++i;
-KoListStyle.DisplayLevel= ++i;
-KoListStyle.CharacterStyleId= ++i;
-KoListStyle.BulletCharacter= ++i;
-KoListStyle.BulletSize= ++i;
-KoListStyle.Alignment= ++i;
-KoListStyle.MinimumWidth= ++i;
-KoListStyle.ListId= ++i;
-KoListStyle.IsOutline= ++i;
-KoListStyle.LetterSynchronization= ++i;
-KoListStyle.StyleId= ++i;
-KoListStyle.ContinueNumbering= ++i;
-KoListStyle.Indent= ++i;
-KoListStyle.MinimumDistance= ++i;
-KoListStyle.Width= ++i;
-KoListStyle.Height= ++i;
-KoListStyle.BulletImageKey = ++i;
+KListStyle.ListItemPrefix = i;
+KListStyle.ListItemSuffix= ++i;
+KListStyle.StartValue= ++i;
+KListStyle.Level= ++i;
+KListStyle.DisplayLevel= ++i;
+KListStyle.CharacterStyleId= ++i;
+KListStyle.BulletCharacter= ++i;
+KListStyle.BulletSize= ++i;
+KListStyle.Alignment= ++i;
+KListStyle.MinimumWidth= ++i;
+KListStyle.ListId= ++i;
+KListStyle.IsOutline= ++i;
+KListStyle.LetterSynchronization= ++i;
+KListStyle.StyleId= ++i;
+KListStyle.ContinueNumbering= ++i;
+KListStyle.Indent= ++i;
+KListStyle.MinimumDistance= ++i;
+KListStyle.Width= ++i;
+KListStyle.Height= ++i;
+KListStyle.BulletImageKey = ++i;
 
-KoListStyle.SquareItem = QTextListFormat.ListSquare;
-KoListStyle.DiscItem = QTextListFormat.ListDisc;
-KoListStyle.CircleItem = QTextListFormat.ListCircle;
-KoListStyle.DecimalItem = QTextListFormat.ListDecimal;
-KoListStyle.AlphaLowerItem = QTextListFormat.ListLowerAlpha;
-KoListStyle.UpperAlphaItem = QTextListFormat.ListUpperAlpha;
+KListStyle.SquareItem = QTextListFormat.ListSquare;
+KListStyle.DiscItem = QTextListFormat.ListDisc;
+KListStyle.CircleItem = QTextListFormat.ListCircle;
+KListStyle.DecimalItem = QTextListFormat.ListDecimal;
+KListStyle.AlphaLowerItem = QTextListFormat.ListLowerAlpha;
+KListStyle.UpperAlphaItem = QTextListFormat.ListUpperAlpha;
 
 i = 1;
-KoListStyle.None = i++;
-KoListStyle.RomanLowerItem = i++;
-KoListStyle.UpperRomanItem = i++;
-KoListStyle.BoxItem = i++;
-KoListStyle.RhombusItem = i++;
-KoListStyle.HeavyCheckMarkItem = i++;
-KoListStyle.BallotXItem = i++;
-KoListStyle.RightArrowItem = i++;
-KoListStyle.RightArrowHeadItem = i++;
-KoListStyle.CustomCharItem = i++;
+KListStyle.None = i++;
+KListStyle.RomanLowerItem = i++;
+KListStyle.UpperRomanItem = i++;
+KListStyle.BoxItem = i++;
+KListStyle.RhombusItem = i++;
+KListStyle.HeavyCheckMarkItem = i++;
+KListStyle.BallotXItem = i++;
+KListStyle.RightArrowItem = i++;
+KListStyle.RightArrowHeadItem = i++;
+KListStyle.CustomCharItem = i++;
 
 var defaultListItemFormat = QTextCharFormat.clone(defaultTextFormat); // new QTextCharFormat;
 
 var defaultListFormat = new QTextListFormat;
-setFormatProperty(defaultListFormat, KoListStyle.Level, 1);
+setFormatProperty(defaultListFormat, KListStyle.Level, 1);
 
 // Default table formatting
 QTextTableFormat.clone = function(fmt) {

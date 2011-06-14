@@ -2,8 +2,8 @@ include("common.qs");
 
 var listFormat = QTextListFormat.clone(defaultListFormat);
 listFormat.setStyle(QTextListFormat.ListDecimal);
-setFormatProperty(listFormat, KoListStyle.ListItemSuffix, ".");
-setFormatProperty(listFormat, KoListStyle.StartValue, 1);
+setFormatProperty(listFormat, KListStyle.ListItemSuffix, ".");
+setFormatProperty(listFormat, KListStyle.StartValue, 1);
 
 var headerFormat = QTextBlockFormat.clone(defaultBlockFormat);
 setFormatProperty(headerFormat, KoParagraphStyle.IsListHeader, 1);

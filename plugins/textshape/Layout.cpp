@@ -32,7 +32,7 @@
 #include <KoTextShapeData.h>
 #include <KoParagraphStyle.h>
 #include <KoCharacterStyle.h>
-#include <KoListStyle.h>
+#include <KListStyle.h>
 #include <KoTableStyle.h>
 #include <KoTableRowStyle.h>
 #include <KoTableColumnAndRowStyleManager.h>
@@ -432,7 +432,7 @@ bool Layout::nextParag()
     QTextList *textList = m_block.textList();
     if (textList) {
         QTextListFormat format = textList->format();
-        int styleId = format.intProperty(KoListStyle::CharacterStyleId);
+        int styleId = format.intProperty(KListStyle::CharacterStyleId);
         KoCharacterStyle *charStyle = 0;
         if (styleId > 0 && m_styleManager)
             charStyle = m_styleManager->characterStyle(styleId);
@@ -904,7 +904,7 @@ qreal Layout::listIndent()
         return 0;
     qreal indent = 0;
     if (m_block.textList())
-        indent = m_block.textList()->format().doubleProperty(KoListStyle::Indent);
+        indent = m_block.textList()->format().doubleProperty(KListStyle::Indent);
     if (m_isRtl)
         return indent;
     return m_blockData->counterSpacing() + m_blockData->counterWidth() + indent;
@@ -1647,7 +1647,7 @@ void Layout::drawListItem(QPainter *painter, const QTextBlock &block, KImageColl
         QTextCharFormat cf;
         bool filled = false;
         if (m_styleManager) {
-            const int id = listFormat.intProperty(KoListStyle::CharacterStyleId);
+            const int id = listFormat.intProperty(KListStyle::CharacterStyleId);
             KoCharacterStyle *cs = m_styleManager->characterStyle(id);
             if (!cs) {
                 KoParagraphStyle *ps = m_styleManager->paragraphStyle(
@@ -1679,7 +1679,7 @@ void Layout::drawListItem(QPainter *painter, const QTextBlock &block, KImageColl
             layouts.append(format);
             layout.setAdditionalFormats(layouts);
 
-            Qt::Alignment align = static_cast<Qt::Alignment>(listFormat.intProperty(KoListStyle::Alignment));
+            Qt::Alignment align = static_cast<Qt::Alignment>(listFormat.intProperty(KListStyle::Alignment));
             if (align == 0)
                 align = Qt::AlignLeft;
             else if (align != Qt::AlignLeft)
@@ -1702,12 +1702,12 @@ void Layout::drawListItem(QPainter *painter, const QTextBlock &block, KImageColl
             layout.draw(painter, counterPosition);
         }
 
-        KoListStyle::Style listStyle = static_cast<KoListStyle::Style>(listFormat.style());
-        if (listStyle == KoListStyle::SquareItem || listStyle == KoListStyle::DiscItem ||
-                listStyle == KoListStyle::CircleItem || listStyle == KoListStyle::BoxItem ||
-                listStyle == KoListStyle::RhombusItem || listStyle == KoListStyle::CustomCharItem ||
-                listStyle == KoListStyle::HeavyCheckMarkItem || listStyle == KoListStyle::BallotXItem ||
-                listStyle == KoListStyle::RightArrowItem || listStyle == KoListStyle::RightArrowHeadItem
+        KListStyle::Style listStyle = static_cast<KListStyle::Style>(listFormat.style());
+        if (listStyle == KListStyle::SquareItem || listStyle == KListStyle::DiscItem ||
+                listStyle == KListStyle::CircleItem || listStyle == KListStyle::BoxItem ||
+                listStyle == KListStyle::RhombusItem || listStyle == KListStyle::CustomCharItem ||
+                listStyle == KListStyle::HeavyCheckMarkItem || listStyle == KListStyle::BallotXItem ||
+                listStyle == KListStyle::RightArrowItem || listStyle == KListStyle::RightArrowHeadItem
            ) {
             QFontMetricsF fm(cf.font(), m_parent->paintDevice());
 #if 0
@@ -1722,7 +1722,7 @@ void Layout::drawListItem(QPainter *painter, const QTextBlock &block, KImageColl
             painter->drawLine(QLineF(-1, data->counterPosition().y() + fm.height(), 200, data->counterPosition().y() + fm.height()));
 #endif
             painter->save();
-            QColor bulletColor = listFormat.colorProperty(KoListStyle::BulletColor);
+            QColor bulletColor = listFormat.colorProperty(KListStyle::BulletColor);
             if (bulletColor.isValid()) {
                 painter->setBrush(bulletColor);
                 painter->setPen(QPen(bulletColor));
@@ -1733,34 +1733,34 @@ void Layout::drawListItem(QPainter *painter, const QTextBlock &block, KImageColl
 
             qreal width = fm.xHeight();
             qreal y = data->counterPosition().y() + fm.ascent() - fm.xHeight(); // at top of text.
-            int percent = listFormat.intProperty(KoListStyle::BulletSize);
+            int percent = listFormat.intProperty(KListStyle::BulletSize);
             if (percent > 0)
                 width *= percent / 100.0;
             y -= width / 10.; // move it up just slightly
-            qreal x = qMax(qreal(1), data->counterPosition().x() + fm.width(listFormat.stringProperty(KoListStyle::ListItemPrefix)));
+            qreal x = qMax(qreal(1), data->counterPosition().x() + fm.width(listFormat.stringProperty(KListStyle::ListItemPrefix)));
             switch (listStyle) {
-            case KoListStyle::SquareItem: {
+            case KListStyle::SquareItem: {
                 painter->fillRect(QRectF(x, y, width, width), QBrush(bulletColor));
             }
             break;
-            case KoListStyle::DiscItem:
+            case KListStyle::DiscItem:
                 painter->setBrush(bulletColor);
                 // fall through!
-            case KoListStyle::CircleItem: {
+            case KListStyle::CircleItem: {
                 painter->drawEllipse(QRectF(x, y, width, width));
             }
             break;
-            case KoListStyle::BoxItem: {
+            case KListStyle::BoxItem: {
                 painter->drawRect(QRectF(x, y, width, width));
             }
             break;
-            case KoListStyle::RhombusItem: {
+            case KListStyle::RhombusItem: {
                 painter->translate(QPointF(x + (width / 2.0), y));
                 painter->rotate(45.0);
                 painter->fillRect(QRectF(0, 0, width, width), QBrush(bulletColor));
             }
             break;
-            case KoListStyle::RightArrowItem: {
+            case KListStyle::RightArrowItem: {
                 const qreal half = width / 2.0;
                 painter->translate(QPointF(x, y));
                 QPointF points[] = { QPointF(half, 0), QPointF(width, half), QPointF(half, width) };
@@ -1768,28 +1768,28 @@ void Layout::drawListItem(QPainter *painter, const QTextBlock &block, KImageColl
                 painter->drawLine(QLineF(0, half, width, half));
             }
             break;
-            case KoListStyle::RightArrowHeadItem: {
+            case KListStyle::RightArrowHeadItem: {
                 painter->translate(QPointF(x, y));
                 QPointF points[] = { QPointF(0, 0), QPointF(width, width / 2.0), QPointF(0, width) };
                 painter->drawPolyline(points, 3);
             }
             break;
-            case KoListStyle::HeavyCheckMarkItem: {
+            case KListStyle::HeavyCheckMarkItem: {
                 const qreal half = width / 2.0;
                 painter->translate(QPointF(x, y));
                 QPointF points[] = { QPointF(half, half), QPointF(half, width), QPointF(width, 0) };
                 painter->drawPolyline(points, 3);
             }
             break;
-            case KoListStyle::BallotXItem: {
+            case KListStyle::BallotXItem: {
                 painter->translate(QPointF(x, y));
                 painter->drawLine(QLineF(0.0, 0.0, width, width));
                 painter->drawLine(QLineF(0.0, width, width, 0.0));
             }
             break;
-            case KoListStyle::CustomCharItem:
-                if (!QChar(listFormat.intProperty(KoListStyle::BulletCharacter)).isNull()){
-                    painter->drawText(0, 0, QChar(listFormat.intProperty(KoListStyle::BulletCharacter)));
+            case KListStyle::CustomCharItem:
+                if (!QChar(listFormat.intProperty(KListStyle::BulletCharacter)).isNull()){
+                    painter->drawText(0, 0, QChar(listFormat.intProperty(KListStyle::BulletCharacter)));
                 }
                 break;
             default:; // others we ignore.
@@ -1797,13 +1797,13 @@ void Layout::drawListItem(QPainter *painter, const QTextBlock &block, KImageColl
 
             painter->restore();
 
-        } else if (listStyle == KoListStyle::ImageItem && imageCollection) {
+        } else if (listStyle == KListStyle::ImageItem && imageCollection) {
             QFontMetricsF fm(cf.font(), m_parent->paintDevice());
             qreal x = qMax(qreal(1), data->counterPosition().x());
-            qreal width = qMax(listFormat.doubleProperty(KoListStyle::Width), (qreal)1.0);
-            qreal height = qMax(listFormat.doubleProperty(KoListStyle::Height), (qreal)1.0);
+            qreal width = qMax(listFormat.doubleProperty(KListStyle::Width), (qreal)1.0);
+            qreal height = qMax(listFormat.doubleProperty(KListStyle::Height), (qreal)1.0);
             qreal y = data->counterPosition().y() + fm.ascent() - fm.xHeight()/2 - height/2; // centered
-            qint64 key = listFormat.property(KoListStyle::BulletImageKey).value<qint64>();
+            qint64 key = listFormat.property(KListStyle::BulletImageKey).value<qint64>();
             KImageData idata;
             imageCollection->fillFromKey(idata, key);
             painter->drawPixmap(x, y, width, height, idata.pixmap());

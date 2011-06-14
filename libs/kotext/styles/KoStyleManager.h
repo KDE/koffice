@@ -32,7 +32,7 @@
 class QTextDocument;
 class KoCharacterStyle;
 class KoParagraphStyle;
-class KoListStyle;
+class KListStyle;
 class KoTableStyle;
 class KoTableColumnStyle;
 class KoTableRowStyle;
@@ -81,7 +81,7 @@ public:
     /**
      * Add a new list style, automatically giving it a new styleId.
      */
-    void add(KoListStyle *style);
+    void add(KListStyle *style);
     /**
      * Add a new table style, automatically giving it a new styleId.
      */
@@ -114,7 +114,7 @@ public:
     /**
      * Remove a list style.
      */
-    void remove(KoListStyle *style);
+    void remove(KListStyle *style);
     /**
      * Remove a table style.
      */
@@ -168,7 +168,7 @@ public:
     /**
      * Return a list style by its id.
      */
-    KoListStyle *listStyle(int id) const;
+    KListStyle *listStyle(int id) const;
 
     /**
      * Return a tableStyle by its id.
@@ -234,7 +234,7 @@ public:
     /**
      * Returns the first  listStyle ith the param use-visible-name.
      */
-    KoListStyle *listStyle(const QString &name) const;
+    KListStyle *listStyle(const QString &name) const;
 
     /**
      * Return the first tableStyle with the param user-visible-name.
@@ -296,17 +296,17 @@ public:
      * Returns the default list style to be used for lists, headers, paragraphs
      * that do not specify a list-style
      */
-    KoListStyle *defaultListStyle() const;
+    KListStyle *defaultListStyle() const;
 
     /**
      * Sets the outline style to be used for headers that are not specified as lists
      */
-    void setOutlineStyle(KoListStyle *listStyle);
+    void setOutlineStyle(KListStyle *listStyle);
 
     /**
      * Returns the outline style to be used for headers that are not specified as lists
      */
-    KoListStyle *outlineStyle() const;
+    KListStyle *outlineStyle() const;
 
     /// return all the characterStyles registered.
     QList<KoCharacterStyle*> characterStyles() const;
@@ -315,7 +315,7 @@ public:
     QList<KoParagraphStyle*> paragraphStyles() const;
 
     /// return all the listStyles registered.
-    QList<KoListStyle*> listStyles() const;
+    QList<KListStyle*> listStyles() const;
 
     /// return all the tableStyles registered.
     QList<KoTableStyle*> tableStyles() const;
@@ -338,7 +338,7 @@ public:
 signals:
     void styleAdded(KoParagraphStyle*);
     void styleAdded(KoCharacterStyle*);
-    void styleAdded(KoListStyle*);
+    void styleAdded(KListStyle*);
     void styleAdded(KoTableStyle*);
     void styleAdded(KoTableColumnStyle*);
     void styleAdded(KoTableRowStyle*);
@@ -346,7 +346,7 @@ signals:
     void styleAdded(KoSectionStyle*);
     void styleRemoved(KoParagraphStyle*);
     void styleRemoved(KoCharacterStyle*);
-    void styleRemoved(KoListStyle*);
+    void styleRemoved(KListStyle*);
     void styleRemoved(KoTableStyle*);
     void styleRemoved(KoTableColumnStyle*);
     void styleRemoved(KoTableRowStyle*);
@@ -372,7 +372,7 @@ public slots:
      * all documents with the style.
      * Note that successive calls are aggregated.
      */
-    void alteredStyle(const KoListStyle *style);
+    void alteredStyle(const KListStyle *style);
 
     /**
      * Slot that should be called whenever a style is changed. This will update
@@ -414,10 +414,10 @@ private:
     void remove(ChangeFollower *cf);
 
     friend class KoTextSharedLoadingData;
-    void addAutomaticListStyle(KoListStyle *listStyle);
+    void addAutomaticListStyle(KListStyle *listStyle);
     friend class KoTextShapeData;
     friend class KoTextShapeDataPrivate;
-    KoListStyle *listStyle(int id, bool *automatic) const;
+    KListStyle *listStyle(int id, bool *automatic) const;
 
 private:
     KoStyleManagerPrivate *d;

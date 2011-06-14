@@ -20,7 +20,7 @@
 #ifndef KOLIST_H
 #define KOLIST_H
 
-#include "KoListStyle.h"
+#include "KListStyle.h"
 
 #include <QMetaType>
 
@@ -29,7 +29,7 @@ class KoListPrivate;
 /**
  * This class represents an ODF list. An ODF list may have upto 10 levels
  * Each of the levels is represented as a QTextList (QTextList does not support
- * embedded lists). There is always an associated KoListStyle that holds the
+ * embedded lists). There is always an associated KListStyle that holds the
  * styling information for various level of the ODF list.
  */
 class KOTEXT_EXPORT KoList : public QObject
@@ -42,7 +42,7 @@ public:
     };
 
     /// Constructor
-    KoList(const QTextDocument *document, KoListStyle *style, Type type = TextList);
+    KoList(const QTextDocument *document, KListStyle *style, Type type = TextList);
 
     /// Destructor
     ~KoList();
@@ -64,13 +64,13 @@ public:
      * added to that list. If required a new KoList is created.
      * Returns the KoList that this block was added to.
     */
-    static KoList *applyStyle(const QTextBlock &block, KoListStyle *style, int level);
+    static KoList *applyStyle(const QTextBlock &block, KListStyle *style, int level);
 
     /// Sets the style of this list
-    void setStyle(KoListStyle *style);
+    void setStyle(KListStyle *style);
 
     /// Returns the style of this list
-    KoListStyle *style() const;
+    KListStyle *style() const;
 
     /// Return true if this list contains \a textlist
     bool contains(QTextList *textList) const;
@@ -78,7 +78,7 @@ public:
     /// Returns the QTextLists that form this list
     QVector<QWeakPointer<QTextList> > textLists() const;
 
-    QVector<KoListStyle::ListIdType> textListIds() const;
+    QVector<KListStyle::ListIdType> textListIds() const;
 
     void setContinueNumbering(int level, bool enable);
     bool continueNumbering(int level) const;

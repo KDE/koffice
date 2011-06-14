@@ -37,8 +37,8 @@ ParagraphBulletsNumbers::ParagraphBulletsNumbers(QWidget *parent)
 
     foreach(const Lists::ListStyleItem & item, Lists::genericListStyleItems())
         addStyle(item);
-    addStyle(Lists::ListStyleItem(i18n("Custom Bullet"), KoListStyle::CustomCharItem));
-    m_blankCharIndex = addStyle(Lists::ListStyleItem(i18n("No Bullet"), KoListStyle::CustomCharItem));
+    addStyle(Lists::ListStyleItem(i18n("Custom Bullet"), KListStyle::CustomCharItem));
+    m_blankCharIndex = addStyle(Lists::ListStyleItem(i18n("No Bullet"), KListStyle::CustomCharItem));
     foreach(const Lists::ListStyleItem & item, Lists::otherListStyleItems())
         addStyle(item);
 
@@ -66,7 +66,7 @@ int ParagraphBulletsNumbers::addStyle(const Lists::ListStyleItem &lsi)
 
 void ParagraphBulletsNumbers::setDisplay(KoParagraphStyle *style, int level)
 {
-    KoListStyle *listStyle = style->listStyle();
+    KListStyle *listStyle = style->listStyle();
     widget.listPropertiesPane->setEnabled(listStyle != 0);
     widget.customCharacter->setText("-");
     if (listStyle == 0) {
@@ -79,7 +79,7 @@ void ParagraphBulletsNumbers::setDisplay(KoParagraphStyle *style, int level)
     widget.prefix->setText(llp.listItemPrefix());
     widget.suffix->setText(llp.listItemSuffix());
     widget.letterSynchronization->setChecked(llp.letterSynchronization());
-    KoListStyle::Style s = llp.style();
+    KListStyle::Style s = llp.style();
     foreach(int row, m_mapping.keys()) {
         if (m_mapping[row] == s) {
             widget.listTypes->setCurrentRow(row);
@@ -100,7 +100,7 @@ void ParagraphBulletsNumbers::setDisplay(KoParagraphStyle *style, int level)
     widget.depth->setValue(llp.level());
     widget.levels->setValue(llp.displayLevel());
     widget.startValue->setValue(llp.startValue());
-    if (s == KoListStyle::CustomCharItem)
+    if (s == KListStyle::CustomCharItem)
         widget.customCharacter->setText(llp.bulletCharacter());
 
     // *** features not in GUI;
@@ -114,16 +114,16 @@ void ParagraphBulletsNumbers::save(KoParagraphStyle *savingStyle)
 {
     Q_ASSERT(savingStyle);
     const int currentRow = widget.listTypes->currentRow();
-    KoListStyle::Style style = m_mapping[currentRow];
-    if (style == KoListStyle::None) {
+    KListStyle::Style style = m_mapping[currentRow];
+    if (style == KListStyle::None) {
         savingStyle->setListStyle(0);
         return;
     }
     if (savingStyle->listStyle() == 0) {
-        KoListStyle *listStyle = new KoListStyle(savingStyle);
+        KListStyle *listStyle = new KListStyle(savingStyle);
         savingStyle->setListStyle(listStyle);
     }
-    KoListStyle *listStyle = savingStyle->listStyle();
+    KListStyle *listStyle = savingStyle->listStyle();
     KListLevelProperties llp = listStyle->levelProperties(widget.depth->value());
     llp.setStyle(style);
     llp.setLevel(widget.depth->value());
@@ -132,7 +132,7 @@ void ParagraphBulletsNumbers::save(KoParagraphStyle *savingStyle)
     llp.setListItemPrefix(widget.prefix->text());
     llp.setListItemSuffix(widget.suffix->text());
     llp.setLetterSynchronization(widget.letterSynchronization->isVisible() && widget.letterSynchronization->isChecked());
-    if (style == KoListStyle::CustomCharItem)
+    if (style == KListStyle::CustomCharItem)
         llp.setBulletCharacter(currentRow == m_blankCharIndex ? QChar() : widget.customCharacter->text().remove('&').at(0));
 
     Qt::Alignment align;
@@ -152,19 +152,19 @@ void ParagraphBulletsNumbers::save(KoParagraphStyle *savingStyle)
 
 void ParagraphBulletsNumbers::styleChanged(int index)
 {
-    KoListStyle::Style style = m_mapping[index];
+    KListStyle::Style style = m_mapping[index];
     bool showLetterSynchronization = false;
     switch (style) {
-    case KoListStyle::SquareItem:
-    case KoListStyle::DiscItem:
-    case KoListStyle::CircleItem:
-    case KoListStyle::BoxItem:
-    case KoListStyle::CustomCharItem:
-    case KoListStyle::None:
+    case KListStyle::SquareItem:
+    case KListStyle::DiscItem:
+    case KListStyle::CircleItem:
+    case KListStyle::BoxItem:
+    case KListStyle::CustomCharItem:
+    case KListStyle::None:
         widget.countersGroupbox->setVisible(false);
         break;
-    case KoListStyle::AlphaLowerItem:
-    case KoListStyle::UpperAlphaItem:
+    case KListStyle::AlphaLowerItem:
+    case KListStyle::UpperAlphaItem:
         showLetterSynchronization = true;
         widget.countersGroupbox->setVisible(true);
         // fall through
@@ -175,9 +175,9 @@ void ParagraphBulletsNumbers::styleChanged(int index)
         widget.startValue->setValue(value); // surely to trigger a change event.
     }
 
-    widget.customCharPane->setVisible(style == KoListStyle::CustomCharItem && index != m_blankCharIndex);
+    widget.customCharPane->setVisible(style == KListStyle::CustomCharItem && index != m_blankCharIndex);
     widget.letterSynchronization->setVisible(showLetterSynchronization);
-    widget.listPropertiesPane->setEnabled(style != KoListStyle::None);
+    widget.listPropertiesPane->setEnabled(style != KListStyle::None);
     recalcPreview();
 }
 
@@ -199,7 +199,7 @@ void ParagraphBulletsNumbers::customCharButtonPressed()
 
         // also switch to the custom list style.
         foreach(int row, m_mapping.keys()) {
-            if (m_mapping[row] == KoListStyle::CustomCharItem) {
+            if (m_mapping[row] == KListStyle::CustomCharItem) {
                 widget.listTypes->setCurrentRow(row);
                 break;
             }
@@ -215,9 +215,9 @@ void ParagraphBulletsNumbers::recalcPreview()
     // use custom char
     // use type
     const int currentRow = widget.listTypes->currentRow();
-    KoListStyle::Style style = m_mapping[currentRow];
+    KListStyle::Style style = m_mapping[currentRow];
     QString answer;
-    if (style != KoListStyle::None) {
+    if (style != KListStyle::None) {
         QString suffix = widget.suffix->text();
         if (suffix.isEmpty())
             suffix = ".";

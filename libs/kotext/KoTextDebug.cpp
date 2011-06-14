@@ -31,7 +31,7 @@
 
 #include "styles/KoParagraphStyle.h"
 #include "styles/KoCharacterStyle.h"
-#include "styles/KoListStyle.h"
+#include "styles/KListStyle.h"
 #include "styles/KoTableStyle.h"
 #include "styles/KoTableCellStyle.h"
 #include "styles/KoStyleManager.h"
@@ -496,9 +496,9 @@ QString KoTextDebug::listAttributes(const QTextListFormat &listFormat)
 {
     QString attrs;
     KoStyleManager *styleManager = document ? KoTextDocument(document).styleManager() : 0;
-    if (styleManager && listFormat.hasProperty(KoListStyle::StyleId)) {
-        int id = listFormat.intProperty(KoListStyle::StyleId);
-        KoListStyle *listStyle = styleManager->listStyle(id);
+    if (styleManager && listFormat.hasProperty(KListStyle::StyleId)) {
+        int id = listFormat.intProperty(KListStyle::StyleId);
+        KListStyle *listStyle = styleManager->listStyle(id);
         attrs.append(" listStyle=\"id:").append(QString::number(id));
         if (listStyle)
             attrs.append(" name:").append(listStyle->name());
@@ -517,83 +517,83 @@ QString KoTextDebug::listAttributes(const QTextListFormat &listFormat)
             key = "indent";
             value = QString::number(properties[id].toDouble());
             break;
-        case KoListStyle::ListItemPrefix:
+        case KListStyle::ListItemPrefix:
             key = "prefix";
             value = properties[id].toString();
             break;
-        case KoListStyle::ListItemSuffix:
+        case KListStyle::ListItemSuffix:
             key = "suffix";
             value = properties[id].toString();
             break;
-        case KoListStyle::StartValue:
+        case KListStyle::StartValue:
             key = "start-value";
             value = QString::number(properties[id].toInt());
             break;
-        case KoListStyle::Level:
+        case KListStyle::Level:
             key = "level";
             value = QString::number(properties[id].toInt());
             break;
-        case KoListStyle::DisplayLevel:
+        case KListStyle::DisplayLevel:
             key = "display-level";
             value = QString::number(properties[id].toInt());
             break;
-        case KoListStyle::CharacterStyleId:
+        case KListStyle::CharacterStyleId:
             key = "charstyleid";
             value = QString::number(properties[id].toInt());
             break;
-        case KoListStyle::Alignment:
+        case KListStyle::Alignment:
             key = "alignment";
             value = QString::number(properties[id].toInt());
             break;
-        case KoListStyle::BulletSize:
+        case KListStyle::BulletSize:
             key = "bullet-size";
             value = QString::number(properties[id].toInt());
             break;
-        case KoListStyle::BulletCharacter:
+        case KListStyle::BulletCharacter:
             key = "bullet-char";
             value = properties[id].toString();
             break;
-        case KoListStyle::LetterSynchronization:
+        case KListStyle::LetterSynchronization:
             key = "letter-sync";
             value = QString::number(properties[id].toInt());
             break;
-        case KoListStyle::StyleId:
+        case KListStyle::StyleId:
             key = "styleid";
             value = QString::number(properties[id].toInt());
             break;
-        case KoListStyle::ContinueNumbering:
+        case KListStyle::ContinueNumbering:
             key = "continue-numbering";
             value = QString::number(properties[id].toInt());
             break;
-        case KoListStyle::MinimumWidth:
+        case KListStyle::MinimumWidth:
             key = "minimum-width";
             value = QString::number(properties[id].toDouble());
             break;
-        case KoListStyle::ListId:
+        case KListStyle::ListId:
             key = "list-id";
             value = QString::number(properties[id].toInt());
             break;
-        case KoListStyle::IsOutline:
+        case KListStyle::IsOutline:
             key = "is-outline";
             value = properties[id].toBool();
             break;
-        case KoListStyle::Indent:
+        case KListStyle::Indent:
             key = "indent";
             value = QString::number(properties[id].toInt());
             break;
-        case KoListStyle::MinimumDistance:
+        case KListStyle::MinimumDistance:
             key = "minimum-distance";
             value = QString::number(properties[id].toDouble());
             break;
-        case KoListStyle::Width:
+        case KListStyle::Width:
             key = "width";
             value = QString::number(properties[id].toDouble());
             break;
-        case KoListStyle::Height:
+        case KListStyle::Height:
             key = "height";
             value = QString::number(properties[id].toDouble());
             break;
-        case KoListStyle::BulletImageKey:
+        case KListStyle::BulletImageKey:
             key = "bullet-image-key";
             value = QString::number(properties[id].toInt());
             break;

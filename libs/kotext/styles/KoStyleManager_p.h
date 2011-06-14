@@ -51,8 +51,8 @@ public:
 
     QHash<int, KoCharacterStyle*> charStyles;
     QHash<int, KoParagraphStyle*> paragStyles;
-    QHash<int, KoListStyle*> listStyles;
-    QHash<int, KoListStyle *> automaticListStyles;
+    QHash<int, KListStyle*> listStyles;
+    QHash<int, KListStyle *> automaticListStyles;
     QHash<int, KoTableStyle *> tableStyles;
     QHash<int, KoTableColumnStyle *> tableColumnStyles;
     QHash<int, KoTableRowStyle *> tableRowStyles;
@@ -68,8 +68,8 @@ public:
     QMap<int, QMap<int, QVariant> > updateQueue;
 
     KoParagraphStyle *defaultParagraphStyle;
-    KoListStyle *defaultListStyle;
-    KoListStyle *outlineStyle;
+    KListStyle *defaultListStyle;
+    KListStyle *outlineStyle;
 };
 
 #endif

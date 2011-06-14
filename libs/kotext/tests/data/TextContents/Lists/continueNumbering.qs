@@ -2,8 +2,8 @@ include("common.qs");
 
 var listFormat = QTextListFormat.clone(defaultListFormat);
 listFormat.setStyle(QTextListFormat.ListDecimal);
-setFormatProperty(listFormat, KoListStyle.ListItemSuffix, ".");
-setFormatProperty(listFormat, KoListStyle.StartValue, 1);
+setFormatProperty(listFormat, KListStyle.ListItemSuffix, ".");
+setFormatProperty(listFormat, KListStyle.StartValue, 1);
 var list = cursor.createList(listFormat);
 cursor.insertText("how are you doing.", defaultListItemFormat);
 
@@ -26,7 +26,7 @@ cursor.insertBlock();
 cursor.insertText("ready to continue");
 
 var listFormat2 = QTextListFormat.clone(listFormat);
-setFormatProperty(listFormat2, KoListStyle.ContinueNumbering, true);
+setFormatProperty(listFormat2, KListStyle.ContinueNumbering, true);
 var list2 = cursor.insertList(listFormat2);
 cursor.insertText("continue numbering");
 

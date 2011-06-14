@@ -20,7 +20,7 @@
 #include "TestDocumentLayout.h"
 
 #include <KoParagraphStyle.h>
-#include <KoListStyle.h>
+#include <KListStyle.h>
 #include <KListLevelProperties.h>
 #include <KoStyleManager.h>
 #include <KoTextBlockData.h>
@@ -746,9 +746,9 @@ void TestDocumentLayout::testBorderData()
     KoParagraphStyle style;
     m_styleManager->add(&style);
     style.setTopMargin(10);
-    KoListStyle listStyle;
+    KListStyle listStyle;
     KListLevelProperties llp = listStyle.levelProperties(1);
-    llp.setStyle(KoListStyle::DecimalItem);
+    llp.setStyle(KListStyle::DecimalItem);
     listStyle.setLevelProperties(llp);
     style.setListStyle(&listStyle);
     style.setLeftBorderWidth(3);

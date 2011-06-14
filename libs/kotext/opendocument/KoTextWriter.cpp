@@ -41,7 +41,7 @@
 #include "styles/KoStyleManager.h"
 #include "styles/KoCharacterStyle.h"
 #include "styles/KoParagraphStyle.h"
-#include "styles/KoListStyle.h"
+#include "styles/KListStyle.h"
 #include "styles/KListLevelProperties.h"
 #include "styles/KoTableCellStyle.h"
 #include "KoTextDocumentLayout.h"
@@ -665,14 +665,14 @@ QString KoTextWriter::Private::saveCharacterStyle(const QTextCharFormat &charFor
 }
 
 // A convinience function to get a listId from a list-format
-static KoListStyle::ListIdType ListId(const QTextListFormat &format)
+static KListStyle::ListIdType ListId(const QTextListFormat &format)
 {
-    KoListStyle::ListIdType listId;
+    KListStyle::ListIdType listId;
 
-    if (sizeof(KoListStyle::ListIdType) == sizeof(uint))
-        listId = format.property(KoListStyle::ListId).toUInt();
+    if (sizeof(KListStyle::ListIdType) == sizeof(uint))
+        listId = format.property(KListStyle::ListId).toUInt();
     else
-        listId = format.property(KoListStyle::ListId).toULongLong();
+        listId = format.property(KListStyle::ListId).toULongLong();
 
     return listId;
 }
@@ -686,14 +686,14 @@ QHash<QTextList *, QString> KoTextWriter::Private::saveListStyles(QTextBlock blo
         QTextList *textList = block.textList();
         if (!textList)
             continue;
-        KoListStyle::ListIdType listId = ListId(textList->format());
+        KListStyle::ListIdType listId = ListId(textList->format());
         if (KoList *list = KoTextDocument(document).list(listId)) {
             if (generatedLists.contains(list)) {
                 if (!listStyles.contains(textList))
                     listStyles.insert(textList, generatedLists.value(list));
                 continue;
             }
-            KoListStyle *listStyle = list->style();
+            KListStyle *listStyle = list->style();
             bool automatic = listStyle->styleId() == 0;
             KOdfGenericStyle style(automatic ? KOdfGenericStyle::ListAutoStyle : KOdfGenericStyle::ListStyle);
             listStyle->saveOdf(style);
@@ -705,7 +705,7 @@ QHash<QTextList *, QString> KoTextWriter::Private::saveListStyles(QTextBlock blo
                 continue;
             KListLevelProperties llp = KListLevelProperties::fromTextList(textList);
             KOdfGenericStyle style(KOdfGenericStyle::ListAutoStyle);
-            KoListStyle listStyle;
+            KListStyle listStyle;
             listStyle.setLevelProperties(llp);
             listStyle.saveOdf(style);
             QString generatedName = context.mainStyles().insert(style, listStyle.name());
@@ -1316,8 +1316,8 @@ QTextBlock& KoTextWriter::Private::saveList(QTextBlock &block, QHash<QTextList *
         TagInformation listTagInformation;
         listTagInformation.setTagName("text:list");
         listTagInformation.addAttribute("text:style-name", listStyles[textList]);
-        if (textList->format().hasProperty(KoListStyle::ContinueNumbering))
-            listTagInformation.addAttribute("text:continue-numbering",textList->format().boolProperty(KoListStyle::ContinueNumbering) ? "true" : "false");
+        if (textList->format().hasProperty(KListStyle::ContinueNumbering))
+            listTagInformation.addAttribute("text:continue-numbering",textList->format().boolProperty(KListStyle::ContinueNumbering) ? "true" : "false");
 
         listChangeId = openTagRegion(block.position(), KoTextWriter::Private::List, listTagInformation);
     }
@@ -1358,7 +1358,7 @@ QTextBlock& KoTextWriter::Private::saveList(QTextBlock &block, QHash<QTextList *
                     listItemChangeId = openTagRegion(block.position(), KoTextWriter::Private::List, listItemTagInformation);
                 }
 
-                if (KoListStyle::isNumberingStyle(textList->format().style())) {
+                if (KListStyle::isNumberingStyle(textList->format().style())) {
                     if (KoTextBlockData *blockData = dynamic_cast<KoTextBlockData *>(block.userData())) {
                         writer->startElement("text:number", false);
                         writer->addTextSpan(blockData->counterText());

@@ -20,7 +20,7 @@
 #define SIMPLETABLEWIDGET_H
 
 #include <ui_SimpleTableWidget.h>
-#include <KoListStyle.h>
+#include <KListStyle.h>
 
 #include <QWidget>
 #include <QTextBlock>

@@ -292,11 +292,11 @@ void DeleteCommand::updateListChanges()
         tempCursor.setPosition(currentBlock.position());
         currentList = tempCursor.currentList();
         if (currentList) {
-            KoListStyle::ListIdType listId;
-            if (sizeof(KoListStyle::ListIdType) == sizeof(uint))
-                listId = currentList->format().property(KoListStyle::ListId).toUInt();
+            KListStyle::ListIdType listId;
+            if (sizeof(KListStyle::ListIdType) == sizeof(uint))
+                listId = currentList->format().property(KListStyle::ListId).toUInt();
             else
-                listId = currentList->format().property(KoListStyle::ListId).toULongLong();
+                listId = currentList->format().property(KListStyle::ListId).toULongLong();
 
             if (!KoTextDocument(document).list(currentBlock)) {
                 KoList *list = KoTextDocument(document).list(listId);

@@ -395,7 +395,7 @@ void TestChangeTrackedDelete::testTableDelete()
 void TestChangeTrackedDelete::insertSampleList(QTextDocument *document)
 {
     QTextCursor cursor(document);
-    KoList *list = new KoList(document, new KoListStyle());
+    KoList *list = new KoList(document, new KListStyle());
     cursor.insertText("This is a paragraph of text before a list.");
     cursor.insertBlock();
     list->add(cursor.block(), 1);

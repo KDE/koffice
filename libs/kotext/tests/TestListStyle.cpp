@@ -19,7 +19,7 @@
 #include "TestListStyle.h"
 
 #include "styles/KoParagraphStyle.h"
-#include "styles/KoListStyle.h"
+#include "styles/KListStyle.h"
 #include "styles/KListLevelProperties.h"
 #include "KoTextBlockBorderData.h"
 #include "KoTextDocument.h"
@@ -30,21 +30,21 @@
 
 void TestListStyle::testListStyle()
 {
-    KoListStyle ls;
+    KListStyle ls;
     KListLevelProperties llp = ls.levelProperties(2);
     QCOMPARE(llp.level(), 2);
 
-    llp.setStyle(KoListStyle::AlphaLowerItem);
+    llp.setStyle(KListStyle::AlphaLowerItem);
     KListLevelProperties llp2 = ls.levelProperties(2);
     QVERIFY(llp2.style() != llp.style());
 
     ls.setLevelProperties(llp);
     QCOMPARE(llp.level(), 2);
-    QCOMPARE(llp.style(), KoListStyle::AlphaLowerItem);
+    QCOMPARE(llp.style(), KListStyle::AlphaLowerItem);
 
     llp = ls.levelProperties(2);
     QCOMPARE(llp.level(), 2);
-    QCOMPARE(llp.style(), KoListStyle::AlphaLowerItem);
+    QCOMPARE(llp.style(), KListStyle::AlphaLowerItem);
 
     QTextDocument doc;
     KoTextDocument kodoc(&doc);
@@ -56,7 +56,7 @@ void TestListStyle::testListStyle()
     QVERIFY(block.textList());
     QTextList *textList = block.textList();
     QTextListFormat format = textList->format();
-    QCOMPARE(format.intProperty(QTextListFormat::ListStyle), (int)(KoListStyle::AlphaLowerItem));
+    QCOMPARE(format.intProperty(QTextListFormat::ListStyle), (int)(KListStyle::AlphaLowerItem));
 
     block = block.next();
     QVERIFY(block.isValid());
@@ -68,7 +68,7 @@ void TestListStyle::testListStyle()
     QVERIFY(block.textList());
     textList = block.textList();
     format = textList->format();
-    QCOMPARE(format.intProperty(QTextListFormat::ListStyle), (int)(KoListStyle::AlphaLowerItem));
+    QCOMPARE(format.intProperty(QTextListFormat::ListStyle), (int)(KListStyle::AlphaLowerItem));
 
     // getting a properties without setting it doesn't change the list.
     KListLevelProperties l4 = ls.levelProperties(4);
@@ -87,7 +87,7 @@ void TestListStyle::testListStyle()
     // new levels are a copy of the existing level.
     KListLevelProperties l5 = ls.levelProperties(5);
     QCOMPARE(l5.displayLevel(), 0);
-    QCOMPARE(l5.style(), KoListStyle::AlphaLowerItem);
+    QCOMPARE(l5.style(), KListStyle::AlphaLowerItem);
     QCOMPARE(l5.indent(), 0.);
 }
 

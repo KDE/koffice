@@ -194,7 +194,7 @@ KoList *KoTextDocument::list(QTextList *textList) const
     return 0;
 }
 
-KoList *KoTextDocument::list(KoListStyle::ListIdType listId) const
+KoList *KoTextDocument::list(KListStyle::ListIdType listId) const
 {
     foreach(KoList *l, lists()) {
         if (l->textListIds().contains(listId))

@@ -28,7 +28,7 @@
 #include <KLocale>
 #include <KDebug>
 
-ChangeListCommand::ChangeListCommand(const QTextCursor &cursor, KoListStyle::Style style, int level,
+ChangeListCommand::ChangeListCommand(const QTextCursor &cursor, KListStyle::Style style, int level,
                                      ChangeFlags flags, QUndoCommand *parent)
         : TextCommandBase(parent),
         m_flags(flags),
@@ -36,13 +36,13 @@ ChangeListCommand::ChangeListCommand(const QTextCursor &cursor, KoListStyle::Sty
 {
     extractTextBlocks(cursor, level);
     QSet<int> levels = m_levels.values().toSet();
-    KoListStyle listStyle;
+    KListStyle listStyle;
 
     foreach (int lev, levels) {
         KListLevelProperties llp;
         llp.setLevel(lev);
         llp.setStyle(style);
-        if (KoListStyle::isNumberingStyle(style)) {
+        if (KListStyle::isNumberingStyle(style)) {
             llp.setStartValue(1);
             llp.setListItemSuffix(".");
         }
@@ -57,7 +57,7 @@ ChangeListCommand::ChangeListCommand(const QTextCursor &cursor, KoListStyle::Sty
     setText(i18n("Change List"));
 }
 
-ChangeListCommand::ChangeListCommand(const QTextCursor &cursor, KoListStyle *style, int level,
+ChangeListCommand::ChangeListCommand(const QTextCursor &cursor, KListStyle *style, int level,
                                      ChangeFlags flags, QUndoCommand *parent)
         : TextCommandBase(parent),
           m_flags(flags),
@@ -90,7 +90,7 @@ void ChangeListCommand::extractTextBlocks(const QTextCursor &cursor, int level)
         }
         else {
             KListLevelProperties prop;
-            prop.setStyle(KoListStyle::None);
+            prop.setStyle(KListStyle::None);
             m_formerProperties.insert((m_blocks.size() - 1), prop);
             m_levels.insert((m_blocks.size() - 1), level);
         }
@@ -107,7 +107,7 @@ int ChangeListCommand::detectLevel(const QTextBlock &block, int givenLevel)
         if (block.blockFormat().hasProperty(KoParagraphStyle::ListLevel))
             return block.blockFormat().intProperty(KoParagraphStyle::ListLevel);
         else
-            return block.textList()->format().intProperty(KoListStyle::Level);
+            return block.textList()->format().intProperty(KListStyle::Level);
     }
     return 1;
 }
@@ -123,7 +123,7 @@ bool ChangeListCommand::formatsEqual(const KListLevelProperties &llp, const QTex
     }
 }
 
-void ChangeListCommand::initList(KoListStyle *listStyle)
+void ChangeListCommand::initList(KListStyle *listStyle)
 {
     KoTextDocument document(m_blocks.first().document());
 
@@ -161,7 +161,7 @@ void ChangeListCommand::initList(KoListStyle *listStyle)
         m_oldList.insert(i, document.list(m_blocks.at(i)));
         m_newProperties.insert(i, listStyle->levelProperties(m_levels.value(i)));
         // First check if we want to remove a list
-        if (m_newProperties.value(i).style() == KoListStyle::None) {
+        if (m_newProperties.value(i).style() == KListStyle::None) {
             m_actions.insert(i, ChangeListCommand::RemoveList);
             continue;
         }
@@ -208,7 +208,7 @@ void ChangeListCommand::redo()
             if ((m_actions.value(i) == ChangeListCommand::ModifyExisting) || (m_actions.value(i) == ChangeListCommand::CreateNew)
                     || (m_actions.value(i) == ChangeListCommand::MergeList)) {
                 m_list.value(i)->updateStoredList(m_blocks.at(i));
-                KoListStyle *listStyle = m_list.value(i)->style();
+                KListStyle *listStyle = m_list.value(i)->style();
                 listStyle->refreshLevelProperties(m_newProperties.value(i));
                 for (int j = 0; j < m_blocks.at(i).textList()->count(); j++) {
                     if (m_blocks.at(i).textList()->item(j) != m_blocks.at(i)) {
@@ -228,7 +228,7 @@ void ChangeListCommand::redo()
                 KoList::remove(m_blocks.at(i));
             }
             else if (m_actions.value(i) == ChangeListCommand::ModifyExisting) {
-                KoListStyle *listStyle = m_list.value(i)->style();
+                KListStyle *listStyle = m_list.value(i)->style();
                 listStyle->setLevelProperties(m_newProperties.value(i));
                 QTextCursor cursor(m_blocks.at(i));
                 QTextBlockFormat format = m_blocks.at(i).blockFormat();
@@ -258,8 +258,8 @@ void ChangeListCommand::undo()
         // command to undo:
         if (m_actions.value(i) == ChangeListCommand::RemoveList) {
             m_oldList.value(i)->updateStoredList(m_blocks.at(i));
-            if ((m_flags & ModifyExistingList) && (m_formerProperties.value(i).style() != KoListStyle::None)) {
-                KoListStyle *listStyle = m_oldList.value(i)->style();
+            if ((m_flags & ModifyExistingList) && (m_formerProperties.value(i).style() != KListStyle::None)) {
+                KListStyle *listStyle = m_oldList.value(i)->style();
                 listStyle->refreshLevelProperties(m_formerProperties.value(i));
             }
             for (int j = 0; j < m_blocks.at(i).textList()->count(); j++) {
@@ -272,8 +272,8 @@ void ChangeListCommand::undo()
         }
         else if (m_actions.value(i) == ChangeListCommand::ModifyExisting) {
             m_list.value(i)->updateStoredList(m_blocks.at(i));
-            if ((m_flags & ModifyExistingList) && (m_formerProperties.value(i).style() != KoListStyle::None)) {
-                KoListStyle *listStyle = m_oldList.value(i)->style();
+            if ((m_flags & ModifyExistingList) && (m_formerProperties.value(i).style() != KListStyle::None)) {
+                KListStyle *listStyle = m_oldList.value(i)->style();
                 listStyle->refreshLevelProperties(m_formerProperties.value(i));
             }
             for (int j = 0; j < m_blocks.at(i).textList()->count(); j++) {

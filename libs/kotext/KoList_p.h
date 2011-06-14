@@ -32,7 +32,7 @@
 //
 
 #include "KoList.h"
-#include "KoListStyle.h"
+#include "KListStyle.h"
 #include "KoTextBlockData.h"
 
 #include <QTextDocument>
@@ -78,9 +78,9 @@ public:
 
     KoList *q;
     KoList::Type type;
-    KoListStyle *style;
+    KListStyle *style;
     QVector<QWeakPointer<QTextList> > textLists;
-    QVector<KoListStyle::ListIdType> textListIds;
+    QVector<KListStyle::ListIdType> textListIds;
     const QTextDocument *document;
     QMap<int, QVariant> properties;
 };

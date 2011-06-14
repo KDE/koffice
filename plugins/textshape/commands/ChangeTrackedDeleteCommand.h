@@ -22,7 +22,7 @@
 
 #include <QUndoStack>
 #include "TextCommandBase.h"
-#include <KoListStyle.h>
+#include <KListStyle.h>
 #include <QList>
 #include <QTextList>
 
@@ -58,7 +58,7 @@ private:
     bool m_canMerge;
     DeleteMode m_mode;
     QList<int> m_removedElements;
-    QList<KoListStyle::ListIdType> m_newListIds;
+    QList<KListStyle::ListIdType> m_newListIds;
     int m_position, m_length;
     int m_addedChangeElement;
 

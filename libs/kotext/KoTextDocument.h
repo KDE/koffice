@@ -103,7 +103,7 @@ public:
     KoList *list(QTextList *textList) const;
 
     /// Return the KoList that holds \a listId
-    KoList *list(KoListStyle::ListIdType listId) const;
+    KoList *list(KListStyle::ListIdType listId) const;
 
     /// Returns the KInlineTextObjectManager
     KInlineTextObjectManager *inlineTextObjectManager() const;

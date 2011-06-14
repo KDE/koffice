@@ -56,7 +56,7 @@ public:
     QString text;
     int id;
     QString deleteChangeXml;
-    QHash<KoListStyle::ListIdType, KoListStyle *> deletedListStyles;
+    QHash<KListStyle::ListIdType, KListStyle *> deletedListStyles;
 };
 
 KoDeleteChangeMarker::KoDeleteChangeMarker(KoChangeTracker* changeTracker)
@@ -158,12 +158,12 @@ void KoDeleteChangeMarker::setDeleteChangeXml(QString &deleteChangeXml)
     d->deleteChangeXml = deleteChangeXml;
 }
 
-void KoDeleteChangeMarker::setDeletedListStyle(KoListStyle::ListIdType id, KoListStyle *style)
+void KoDeleteChangeMarker::setDeletedListStyle(KListStyle::ListIdType id, KListStyle *style)
 {
     d->deletedListStyles.insert(id, style);
 }
 
-KoListStyle *KoDeleteChangeMarker::deletedListStyle(KoListStyle::ListIdType id)
+KListStyle *KoDeleteChangeMarker::deletedListStyle(KListStyle::ListIdType id)
 {
     return d->deletedListStyles.value(id);
 }

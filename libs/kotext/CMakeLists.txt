@@ -56,7 +56,7 @@ set(kotext_LIB_SRCS
     styles/KoCharacterStyle.cpp
     styles/KoParagraphStyle.cpp
     styles/KoStyleManager.cpp
-    styles/KoListStyle.cpp
+    styles/KListStyle.cpp
     styles/KListLevelProperties.cpp
     styles/ChangeFollower.cpp
     styles/KoTableBorderStyle.cpp
@@ -142,7 +142,7 @@ install(
     KoTextDocumentLayout.h
     styles/KoCharacterStyle.h
     styles/KListLevelProperties.h
-    styles/KoListStyle.h
+    styles/KListStyle.h
     styles/KoParagraphStyle.h
     styles/KoTableColumnStyle.h
     styles/KoTableRowStyle.h

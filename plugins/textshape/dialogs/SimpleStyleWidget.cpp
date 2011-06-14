@@ -38,7 +38,7 @@ SimpleStyleWidget::SimpleStyleWidget(TextTool *tool, QWidget *parent)
         m_comboboxHasBidiItems(false),
         m_tool(tool),
         m_directionButtonState(Auto),
-        m_quickApplyListStyle(KoListStyle::DiscItem)
+        m_quickApplyListStyle(KListStyle::DiscItem)
 {
     widget.setupUi(this);
     widget.bold->setDefaultAction(tool->action("format_bold"));
@@ -99,17 +99,17 @@ void SimpleStyleWidget::fillListsCombobox()
     ps.characterStyle()->setFontPointSize(12);
     ps.applyStyle(textShape.textShapeData()->document()->begin());
     foreach(const Lists::ListStyleItem &item, Lists::genericListStyleItems()) {
-        if (item.style == KoListStyle::None) {
+        if (item.style == KListStyle::None) {
             widget.listType->addItem(item.name, static_cast<int>(item.style));
             continue;
         }
         QPixmap pixmap(16, 16); // can we get the actual size from the style?
         pixmap.fill(Qt::transparent);
         QPainter p(&pixmap);
-        KoListStyle listStyle;
+        KListStyle listStyle;
         KListLevelProperties llp = listStyle.levelProperties(1);
         llp.setStyle(item.style);
-        if (KoListStyle::isNumberingStyle(item.style)) {
+        if (KListStyle::isNumberingStyle(item.style)) {
             llp.setStartValue(1);
         } else {
             p.setRenderHint(QPainter::Antialiasing);
@@ -169,7 +169,7 @@ void SimpleStyleWidget::setCurrentBlock(const QTextBlock &block)
 
     // TODO get style override from the bf and use that for the QTextListFormat
     //QTextBlockFormat bf = block.format();
-    //bf.intProperty(KoListStyle::StyleOverride));
+    //bf.intProperty(KListStyle::StyleOverride));
 
     QTextListFormat format = list->format();
     int style = format.intProperty(QTextListFormat::ListStyle);
@@ -203,9 +203,9 @@ void SimpleStyleWidget::listStyleChanged(int row)
 {
     if (m_blockSignals) return;
 
-    KoListStyle::Style newStyle = static_cast<KoListStyle::Style>(widget.listType->itemData(row).toInt());
+    KListStyle::Style newStyle = static_cast<KListStyle::Style>(widget.listType->itemData(row).toInt());
     m_tool->addCommand(new ChangeListCommand(m_tool->cursor(), newStyle, 0 /* level*/));
-    if (m_quickApplyListStyle != newStyle && newStyle != KoListStyle::None) {
+    if (m_quickApplyListStyle != newStyle && newStyle != KListStyle::None) {
         m_quickApplyListStyle = newStyle;
         widget.listStyleAgain->setIcon(widget.listType->itemIcon(row));
     }

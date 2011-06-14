@@ -23,7 +23,7 @@
  */
 #include "KoParagraphStyle.h"
 #include "KoCharacterStyle.h"
-#include "KoListStyle.h"
+#include "KListStyle.h"
 #include "KoTextBlockData.h"
 #include "KoTextDocumentLayout.h"
 #include "KoStyleManager.h"
@@ -71,7 +71,7 @@ public:
 
     QString name;
     KoCharacterStyle *charStyle;
-    KoListStyle *listStyle;
+    KListStyle *listStyle;
     KoParagraphStyle *parentStyle;
     KoList *list;
     int next;
@@ -101,11 +101,11 @@ KoParagraphStyle *KoParagraphStyle::fromBlock(const QTextBlock &block, QObject *
 
     int listStyleId = blockFormat.intProperty(ListStyleId);
     KoStyleManager *sm = KoTextDocument(block.document()).styleManager();
-    if (KoListStyle *listStyle = sm->listStyle(listStyleId)) {
+    if (KListStyle *listStyle = sm->listStyle(listStyleId)) {
         answer->setListStyle(listStyle->clone(answer));
     } else if (block.textList()) {
         KListLevelProperties llp = KListLevelProperties::fromTextList(block.textList());
-        KoListStyle *listStyle = new KoListStyle(answer);
+        KListStyle *listStyle = new KListStyle(answer);
         listStyle->setLevelProperties(llp);
         answer->setListStyle(listStyle);
     }
@@ -970,12 +970,12 @@ void KoParagraphStyle::setCharacterStyle(KoCharacterStyle *style)
     d->charStyle = style;
 }
 
-KoListStyle *KoParagraphStyle::listStyle() const
+KListStyle *KoParagraphStyle::listStyle() const
 {
     return d->listStyle;
 }
 
-void KoParagraphStyle::setListStyle(KoListStyle *style)
+void KoParagraphStyle::setListStyle(KListStyle *style)
 {
     if (d->listStyle == style)
         return;

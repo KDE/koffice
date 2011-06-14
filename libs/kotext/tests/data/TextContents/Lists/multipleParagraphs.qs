@@ -2,7 +2,7 @@ include("common.qs");
 
 var listFormat = QTextListFormat.clone(defaultListFormat);
 listFormat.setStyle(QTextListFormat.ListDisc);
-setFormatProperty(listFormat, KoListStyle.BulletCharacter, 0x2022);
+setFormatProperty(listFormat, KListStyle.BulletCharacter, 0x2022);
 var list = cursor.createList(listFormat);
 cursor.insertText("This is an example of bulleted list.", defaultListItemFormat);
 

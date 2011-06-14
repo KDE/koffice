@@ -23,7 +23,7 @@
 #include <ui_ParagraphBulletsNumbers.h>
 #include "../ListItemsHelper.h"
 
-#include <KoListStyle.h>
+#include <KListStyle.h>
 
 #include <QWidget>
 
@@ -52,7 +52,7 @@ private slots:
 private:
     Ui::ParagraphBulletsNumbers widget;
 
-    QHash<int, KoListStyle::Style> m_mapping;
+    QHash<int, KListStyle::Style> m_mapping;
     int m_previousLevel;
     int m_blankCharIndex;
 };

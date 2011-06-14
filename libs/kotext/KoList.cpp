@@ -34,7 +34,7 @@
 #include "KoList_p.h"
 
 
-KoList::KoList(const QTextDocument *document, KoListStyle *style, KoList::Type type)
+KoList::KoList(const QTextDocument *document, KListStyle *style, KoList::Type type)
     : QObject(const_cast<QTextDocument *>(document)), d(new KoListPrivate(this, document))
 {
     Q_ASSERT(document);
@@ -54,12 +54,12 @@ QVector<QWeakPointer<QTextList> > KoList::textLists() const
     return d->textLists;
 }
 
-QVector<KoListStyle::ListIdType> KoList::textListIds() const
+QVector<KListStyle::ListIdType> KoList::textListIds() const
 {
     return d->textListIds;
 }
 
-KoList *KoList::applyStyle(const QTextBlock &block, KoListStyle *style, int level)
+KoList *KoList::applyStyle(const QTextBlock &block, KListStyle *style, int level)
 {
     Q_ASSERT(style);
     KoTextDocument document(block.document());
@@ -120,12 +120,12 @@ void KoList::add(const QTextBlock &block, int level)
         QTextCursor cursor(block);
         QTextListFormat format = d->style->listFormat(level);
         if (continueNumbering(level))
-            format.setProperty(KoListStyle::ContinueNumbering, true);
+            format.setProperty(KListStyle::ContinueNumbering, true);
         textList = cursor.createList(format);
-        format.setProperty(KoListStyle::ListId, (KoListStyle::ListIdType)(textList));
+        format.setProperty(KListStyle::ListId, (KListStyle::ListIdType)(textList));
         textList->setFormat(format);
         d->textLists[level-1] = textList;
-        d->textListIds[level-1] = (KoListStyle::ListIdType)textList;
+        d->textListIds[level-1] = (KListStyle::ListIdType)textList;
     } else {
         textList->add(block);
     }
@@ -158,7 +158,7 @@ void KoList::remove(const QTextBlock &block)
     KoListPrivate::invalidate(block);
 }
 
-void KoList::setStyle(KoListStyle *style)
+void KoList::setStyle(KListStyle *style)
 {
     if (style == 0) {
         KoStyleManager *styleManager = KoTextDocument(d->document).styleManager();
@@ -187,7 +187,7 @@ void KoList::setStyle(KoListStyle *style)
     }
 }
 
-KoListStyle *KoList::style() const
+KListStyle *KoList::style() const
 {
     return d->style;
 }
@@ -195,13 +195,13 @@ KoListStyle *KoList::style() const
 void KoList::updateStoredList(const QTextBlock &block)
 {
     if (block.textList()) {
-        int level = block.textList()->format().property(KoListStyle::Level).toInt();
+        int level = block.textList()->format().property(KListStyle::Level).toInt();
         QTextList *textList = block.textList();
         QTextListFormat format = textList->format();
-        format.setProperty(KoListStyle::ListId, (KoListStyle::ListIdType)(textList));
+        format.setProperty(KListStyle::ListId, (KListStyle::ListIdType)(textList));
         textList->setFormat(format);
         d->textLists[level-1] = textList;
-        d->textListIds[level-1] = (KoListStyle::ListIdType)textList;
+        d->textListIds[level-1] = (KListStyle::ListIdType)textList;
     }
 }
 
@@ -226,9 +226,9 @@ void KoList::setContinueNumbering(int level, bool enable)
         return;
     QTextListFormat format = textList->format();
     if (enable) {
-        format.setProperty(KoListStyle::ContinueNumbering, true);
+        format.setProperty(KListStyle::ContinueNumbering, true);
     } else {
-        format.clearProperty(KoListStyle::ContinueNumbering);
+        format.clearProperty(KListStyle::ContinueNumbering);
     }
     textList->setFormat(format);
 }
@@ -251,7 +251,7 @@ int KoList::level(const QTextBlock &block)
     int l = block.blockFormat().intProperty(KoParagraphStyle::ListLevel);
     if (!l) { // not a numbered-paragraph
         QTextListFormat format = block.textList()->format();
-        l = format.intProperty(KoListStyle::Level);
+        l = format.intProperty(KListStyle::Level);
     }
     return l;
 }

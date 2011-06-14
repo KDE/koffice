@@ -20,7 +20,7 @@
 #define SIMPLESTYLEWIDGET_H
 
 #include <ui_SimpleStyleWidget.h>
-#include <KoListStyle.h>
+#include <KListStyle.h>
 
 #include <QWidget>
 #include <QTextBlock>
@@ -64,7 +64,7 @@ private:
     QTextBlock m_currentBlock;
     TextTool *m_tool;
     DirectionButtonState m_directionButtonState;
-    KoListStyle::Style m_quickApplyListStyle;
+    KListStyle::Style m_quickApplyListStyle;
 };
 
 #endif

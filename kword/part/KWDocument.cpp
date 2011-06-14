@@ -60,7 +60,7 @@
 #include <KoDocumentInfo.h>
 #include <KoCharacterStyle.h>
 #include <KoParagraphStyle.h>
-#include <KoListStyle.h>
+#include <KListStyle.h>
 #include <KListLevelProperties.h>
 #include <KoTextShapeData.h>
 #include <KoChangeTracker.h>
@@ -560,9 +560,9 @@ void KWDocument::initEmpty()
 
     parag = new KoParagraphStyle();
     parag->setName(i18n("Bullet List"));
-    KoListStyle *list = new KoListStyle(parag);
+    KListStyle *list = new KListStyle(parag);
     KListLevelProperties llp = list->levelProperties(0);
-    llp.setStyle(KoListStyle::DiscItem);
+    llp.setStyle(KListStyle::DiscItem);
     list->setLevelProperties(llp);
     parag->setListStyle(list);
     styleManager->add(parag);

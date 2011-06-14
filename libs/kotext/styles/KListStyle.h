@@ -55,7 +55,7 @@ class KOdfGenericStyle;
  * the counter wil increase. If you want a paragraph to be on a sub level you do however need to
  * create a new paragraph-style when another listLevel set.
  */
-class  KOTEXT_EXPORT KoListStyle : public QObject
+class  KOTEXT_EXPORT KListStyle : public QObject
 {
     Q_OBJECT
     Q_ENUMS(Style Property)
@@ -143,15 +143,15 @@ public:
 
     /**
      * Constructor
-     * Create a new list style which uses numbered (KoListStyle::ListDecimal) listitems.
+     * Create a new list style which uses numbered (KListStyle::ListDecimal) listitems.
      */
-    explicit KoListStyle(QObject *parent = 0);
+    explicit KListStyle(QObject *parent = 0);
 
     /// Destructor
-    ~KoListStyle();
+    ~KListStyle();
 
     /// creates a clone of this style with the specified parent
-    KoListStyle *clone(QObject *parent = 0);
+    KListStyle *clone(QObject *parent = 0);
 
     /// each style has a unique ID (non persistent) given out by the styleManager
     int styleId() const;
@@ -210,8 +210,8 @@ public:
      */
     void applyStyle(const QTextBlock &block, int level = 0);
 
-    bool operator==(const KoListStyle &other) const;
-    bool operator!=(const KoListStyle &other) const;
+    bool operator==(const KListStyle &other) const;
+    bool operator!=(const KListStyle &other) const;
 
     /**
      * Load the style from the \a KOdfStyleStack style stack using the
@@ -225,7 +225,7 @@ public:
     void saveOdf(KOdfGenericStyle &style);
 
     /// copy all the properties from the other style to this style, effectively duplicating it.
-    void copyProperties(KoListStyle *other);
+    void copyProperties(KListStyle *other);
 
     /// returns true if style is a numbering style
     static bool isNumberingStyle(int style);

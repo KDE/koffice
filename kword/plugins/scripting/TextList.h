@@ -110,8 +110,8 @@ public slots:
 
 #if 0
     void setListStyle(int liststyle) {
-        KoListStyle s;
-        s.setStyle((KoListStyle::Style)liststyle);
+        KListStyle s;
+        s.setStyle((KListStyle::Style)liststyle);
         const int count = m_list ? m_list->count() : 0;
         for (int i = 0; i < count; i++)
             s.applyStyle(m_list->item(i));

@@ -25,7 +25,7 @@
 #include "KoStyleManager_p.h"
 #include "KoParagraphStyle.h"
 #include "KoCharacterStyle.h"
-#include "KoListStyle.h"
+#include "KListStyle.h"
 #include "KListLevelProperties.h"
 #include "KoTableStyle.h"
 #include "KoTableColumnStyle.h"
@@ -133,11 +133,11 @@ KoStyleManager::KoStyleManager(QObject *parent)
     charStyle->setFontFamily(QLatin1String("Sans Serif"));
     charStyle->setForeground(QBrush(Qt::black));
 
-    d->defaultListStyle = new KoListStyle(this);
+    d->defaultListStyle = new KListStyle(this);
     KListLevelProperties llp;
     llp.setLevel(1);
     llp.setStartValue(1);
-    llp.setStyle(KoListStyle::DecimalItem);
+    llp.setStyle(KListStyle::DecimalItem);
     llp.setListItemSuffix(".");
     d->defaultListStyle->setLevelProperties(llp);
 }
@@ -198,7 +198,7 @@ void KoStyleManager::saveOdf(KOdfGenericStyles& mainStyles)
         mainStyles.insert(style, name, KOdfGenericStyles::DontAddNumberToName);
     }
 
-    foreach(KoListStyle *listStyle, d->listStyles) {
+    foreach(KListStyle *listStyle, d->listStyles) {
         if (listStyle == d->defaultListStyle)
             continue;
         QString name(QUrl::toPercentEncoding(QString(listStyle->name()).replace(' ', '_')));
@@ -314,7 +314,7 @@ void KoStyleManager::add(KoParagraphStyle *style)
     emit styleAdded(style);
 }
 
-void KoStyleManager::add(KoListStyle *style)
+void KoStyleManager::add(KListStyle *style)
 {
     if (d->listStyles.key(style, -1) != -1)
         return;
@@ -324,7 +324,7 @@ void KoStyleManager::add(KoListStyle *style)
     emit styleAdded(style);
 }
 
-void KoStyleManager::addAutomaticListStyle(KoListStyle *style)
+void KoStyleManager::addAutomaticListStyle(KListStyle *style)
 {
     if (d->automaticListStyles.key(style, -1) != -1)
         return;
@@ -392,7 +392,7 @@ void KoStyleManager::remove(KoParagraphStyle *style)
         emit styleRemoved(style);
 }
 
-void KoStyleManager::remove(KoListStyle *style)
+void KoStyleManager::remove(KListStyle *style)
 {
     if (d->listStyles.remove(style->styleId()))
         emit styleRemoved(style);
@@ -470,7 +470,7 @@ void KoStyleManager::alteredStyle(const KoCharacterStyle *style)
     d->requestFireUpdate(this);
 }
 
-void KoStyleManager::alteredStyle(const KoListStyle *style)
+void KoStyleManager::alteredStyle(const KListStyle *style)
 {
     Q_ASSERT(style);
     int id = style->styleId();
@@ -579,19 +579,19 @@ KoParagraphStyle *KoStyleManager::paragraphStyle(int id) const
     return d->paragStyles.value(id);
 }
 
-KoListStyle *KoStyleManager::listStyle(int id) const
+KListStyle *KoStyleManager::listStyle(int id) const
 {
     return d->listStyles.value(id);
 }
 
-KoListStyle *KoStyleManager::listStyle(int id, bool *automatic) const
+KListStyle *KoStyleManager::listStyle(int id, bool *automatic) const
 {
-    if (KoListStyle *style = listStyle(id)) {
+    if (KListStyle *style = listStyle(id)) {
         *automatic = false;
         return style;
     }
 
-    KoListStyle *style = d->automaticListStyles.value(id);
+    KListStyle *style = d->automaticListStyles.value(id);
 
     if (style) {
         *automatic = true;
@@ -645,9 +645,9 @@ KoParagraphStyle *KoStyleManager::paragraphStyle(const QString &name) const
     return 0;
 }
 
-KoListStyle *KoStyleManager::listStyle(const QString &name) const
+KListStyle *KoStyleManager::listStyle(const QString &name) const
 {
-    foreach(KoListStyle *style, d->listStyles) {
+    foreach(KListStyle *style, d->listStyles) {
         if (style->name() == name)
             return style;
     }
@@ -704,12 +704,12 @@ KoParagraphStyle *KoStyleManager::defaultParagraphStyle() const
     return d->defaultParagraphStyle;
 }
 
-KoListStyle *KoStyleManager::defaultListStyle() const
+KListStyle *KoStyleManager::defaultListStyle() const
 {
     return d->defaultListStyle;
 }
 
-void KoStyleManager::setOutlineStyle(KoListStyle* listStyle)
+void KoStyleManager::setOutlineStyle(KListStyle* listStyle)
 {
     if (d->outlineStyle && d->outlineStyle->parent() == this)
         delete d->outlineStyle;
@@ -717,7 +717,7 @@ void KoStyleManager::setOutlineStyle(KoListStyle* listStyle)
     d->outlineStyle = listStyle;
 }
 
-KoListStyle *KoStyleManager::outlineStyle() const
+KListStyle *KoStyleManager::outlineStyle() const
 {
     return d->outlineStyle;
 }
@@ -732,7 +732,7 @@ QList<KoParagraphStyle*> KoStyleManager::paragraphStyles() const
     return d->paragStyles.values();
 }
 
-QList<KoListStyle*> KoStyleManager::listStyles() const
+QList<KListStyle*> KoStyleManager::listStyles() const
 {
     return d->listStyles.values();
 }

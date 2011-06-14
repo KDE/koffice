@@ -23,12 +23,12 @@
 
 ListsSpinBox::ListsSpinBox(QWidget *parent)
         : QSpinBox(parent),
-        m_type(KoListStyle::DecimalItem),
+        m_type(KListStyle::DecimalItem),
         m_letterSynchronization(false)
 {
 }
 
-void ListsSpinBox::setCounterType(KoListStyle::Style type)
+void ListsSpinBox::setCounterType(KListStyle::Style type)
 {
     m_type = type;
     update();
@@ -43,30 +43,30 @@ int ListsSpinBox::valueFromText(const QString &text) const
 QString ListsSpinBox::textFromValue(int value) const
 {
     switch (m_type) {
-    case KoListStyle::DecimalItem:
+    case KListStyle::DecimalItem:
         return QString::number(value);
-    case KoListStyle::AlphaLowerItem:
+    case KListStyle::AlphaLowerItem:
         return Lists::intToAlpha(value, Lists::Lowercase, m_letterSynchronization);
-    case KoListStyle::UpperAlphaItem:
+    case KListStyle::UpperAlphaItem:
         return Lists::intToAlpha(value, Lists::Uppercase, m_letterSynchronization);
-    case KoListStyle::RomanLowerItem:
+    case KListStyle::RomanLowerItem:
         return Lists::intToRoman(value);
-    case KoListStyle::UpperRomanItem:
+    case KListStyle::UpperRomanItem:
         return Lists::intToRoman(value).toUpper();
-    case KoListStyle::Bengali:
-    case KoListStyle::Gujarati:
-    case KoListStyle::Gurumukhi:
-    case KoListStyle::Kannada:
-    case KoListStyle::Malayalam:
-    case KoListStyle::Oriya:
-    case KoListStyle::Tamil:
-    case KoListStyle::Telugu:
-    case KoListStyle::Tibetan:
-    case KoListStyle::Thai:
+    case KListStyle::Bengali:
+    case KListStyle::Gujarati:
+    case KListStyle::Gurumukhi:
+    case KListStyle::Kannada:
+    case KListStyle::Malayalam:
+    case KListStyle::Oriya:
+    case KListStyle::Tamil:
+    case KListStyle::Telugu:
+    case KListStyle::Tibetan:
+    case KListStyle::Thai:
         return Lists::intToScript(value, m_type);
-    case KoListStyle::Abjad:
-    case KoListStyle::ArabicAlphabet:
-    case KoListStyle::AbjadMinor:
+    case KListStyle::Abjad:
+    case KListStyle::ArabicAlphabet:
+    case KListStyle::AbjadMinor:
         return Lists::intToScriptList(value, m_type);
     default:  // others we ignore.
         return "X";

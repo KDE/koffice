@@ -35,7 +35,7 @@
 
 class KoCharacterStyle;
 class KXmlElement;
-class KoListStyle;
+class KListStyle;
 class QTextBlock;
 class KOdfStyleStack;
 class KOdfGenericStyle;
@@ -510,18 +510,18 @@ public:
 
     /**
      * Returns the list style for this paragraph style.
-     * @see KoListStyle::isValid()
+     * @see KListStyle::isValid()
      * @see setListStyle()
      * @see removeListStyle()
      */
-    KoListStyle *listStyle() const;
+    KListStyle *listStyle() const;
     /**
      * Set a new liststyle on this paragraph style, making all paragraphs that use this style
      *  automatically be part of the list.
      * @see setListStyle()
      * @see removeListStyle()
      */
-    void setListStyle(KoListStyle *style);
+    void setListStyle(KListStyle *style);
 
     void remove(int key);
 

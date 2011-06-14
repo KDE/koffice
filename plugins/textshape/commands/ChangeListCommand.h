@@ -22,7 +22,7 @@
 #define CHANGELISTCOMMAND
 
 #include "TextCommandBase.h"
-#include <KoListStyle.h>
+#include <KListStyle.h>
 #include <KoList.h>
 #include <KListLevelProperties.h>
 
@@ -52,7 +52,7 @@ public:
      * @param style indicates which style to use.
      * @param parent the parent undo command for macro functionality
      */
-    ChangeListCommand(const QTextCursor &cursor, KoListStyle::Style style, int level = 0,
+    ChangeListCommand(const QTextCursor &cursor, KListStyle::Style style, int level = 0,
                       ChangeFlags flags = ChangeFlags(ModifyExistingList | MergeWithAdjacentList),
                       QUndoCommand *parent = 0);
 
@@ -63,7 +63,7 @@ public:
      * @param exact if true then the actual style 'style' should be set, if false we possibly  merge with another similar style that is near the block
      * @param parent the parent undo command for macro functionality
      */
-    ChangeListCommand(const QTextCursor &cursor, KoListStyle *style, int level = 0,
+    ChangeListCommand(const QTextCursor &cursor, KListStyle *style, int level = 0,
                       ChangeFlags flags = ChangeFlags(ModifyExistingList | MergeWithAdjacentList | MergeExactly),
                       QUndoCommand *parent = 0);
     ~ChangeListCommand();
@@ -90,7 +90,7 @@ private:
     };
     void extractTextBlocks(const QTextCursor &cursor, int level);
     int detectLevel(const QTextBlock &block, int givenLevel);
-    void initList(KoListStyle *style);
+    void initList(KListStyle *style);
     bool formatsEqual(const KListLevelProperties &llp, const QTextListFormat &format);
 
     int m_flags;

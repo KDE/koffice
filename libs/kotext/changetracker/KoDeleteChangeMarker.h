@@ -24,7 +24,7 @@
 
 #include <KInlineObject.h>
 #include <QTextFormat>
-#include <KoListStyle.h>
+#include <KListStyle.h>
 
 class KoChangeTracker;
 class KXmlElement;
@@ -80,9 +80,9 @@ public:
 
     void setDeleteChangeXml(QString &deleteChangeXml);
 
-    KoListStyle *deletedListStyle(KoListStyle::ListIdType id);
+    KListStyle *deletedListStyle(KListStyle::ListIdType id);
 
-    void setDeletedListStyle(KoListStyle::ListIdType, KoListStyle *style);
+    void setDeletedListStyle(KListStyle::ListIdType, KListStyle *style);
 
 protected:
 

@@ -23,7 +23,7 @@
 #include "KoTextShapeData.h"
 #include "KoTextReference_p.h"
 #include "KoTextPage.h"
-#include "styles/KoListStyle.h"
+#include "styles/KListStyle.h"
 
 #include <KoShape.h>
 #include <KoShapeLoadingContext.h>
@@ -63,7 +63,7 @@ public:
             QTextList *list = block.textList();
             if (list) {
                 QTextListFormat lf = list->format();
-                int level = lf.intProperty(KoListStyle::Level);
+                int level = lf.intProperty(KListStyle::Level);
                 if (level == 1) {
                     chapterPosition = block.position();
                     break;

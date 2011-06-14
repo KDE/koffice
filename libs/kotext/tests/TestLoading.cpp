@@ -45,7 +45,7 @@
 #include <KOdfXmlNS.h>
 #include <kcomponentdata.h>
 #include <KoTextDebug_p.h>
-#include <KoListStyle.h>
+#include <KListStyle.h>
 #include <KoTableStyle.h>
 #include <KoTableCellStyle.h>
 #include <KoTextDocumentLayout.h>
@@ -249,15 +249,15 @@ bool TestLoading::compareBlockFormats(const QTextBlockFormat &actualFormat, cons
 bool TestLoading::compareListFormats(const QTextListFormat &actualFormat, const QTextListFormat &expectedFormat)
 {
     QMap<int, QVariant> actualProperties = actualFormat.properties();
-    actualProperties.remove(KoListStyle::StyleId);
-    actualProperties.remove(KoListStyle::MinimumDistance);
-    actualProperties.remove(KoListStyle::ListId);
+    actualProperties.remove(KListStyle::StyleId);
+    actualProperties.remove(KListStyle::MinimumDistance);
+    actualProperties.remove(KListStyle::ListId);
     actualProperties.remove(QTextFormat::ObjectIndex);
 
     QMap<int, QVariant> expectedProperties = expectedFormat.properties();
-    expectedProperties.remove(KoListStyle::StyleId);
-    expectedProperties.remove(KoListStyle::MinimumDistance);
-    expectedProperties.remove(KoListStyle::ListId);
+    expectedProperties.remove(KListStyle::StyleId);
+    expectedProperties.remove(KListStyle::MinimumDistance);
+    expectedProperties.remove(KListStyle::ListId);
     expectedProperties.remove(QTextFormat::ObjectIndex);
 
 
@@ -265,7 +265,7 @@ bool TestLoading::compareListFormats(const QTextListFormat &actualFormat, const 
         static QString resolve(int key) {
             QMetaObject meta;
             if (key >= QTextFormat::UserProperty)
-                meta = KoListStyle::staticMetaObject;
+                meta = KListStyle::staticMetaObject;
             else
                 meta = QTextFormat::staticMetaObject;
             QMetaEnum me = meta.enumerator(meta.indexOfEnumerator("Property"));

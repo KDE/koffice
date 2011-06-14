@@ -30,7 +30,7 @@
 #include <KoTextDocument.h>
 #include <KoTextDocumentLayout.h>
 #include <KoList.h>
-#include <KoListStyle.h>
+#include <KListStyle.h>
 #include <KoParagraphStyle.h>
 #include <KoStyleManager.h>
 #include <KFormatChangeInformation_p.h>
@@ -487,14 +487,14 @@ KoDeletedRowColumnDataStore *KoChangeTracker::deletedRowColumnData()
 }
 
 //A convenience function to get a ListIdType from a format
-static KoListStyle::ListIdType ListId(const QTextListFormat &format)
+static KListStyle::ListIdType ListId(const QTextListFormat &format)
 {
-    KoListStyle::ListIdType listId;
+    KListStyle::ListIdType listId;
 
-    if (sizeof(KoListStyle::ListIdType) == sizeof(uint))
-        listId = format.property(KoListStyle::ListId).toUInt();
+    if (sizeof(KListStyle::ListIdType) == sizeof(uint))
+        listId = format.property(KListStyle::ListId).toUInt();
     else
-        listId = format.property(KoListStyle::ListId).toULongLong();
+        listId = format.property(KListStyle::ListId).toULongLong();
 
     return listId;
 }
@@ -547,7 +547,7 @@ QTextDocumentFragment KoChangeTracker::generateDeleteFragment(QTextCursor &curso
                 QTextListFormat format = editCursor.currentList()->format();
                 format.setProperty(KoDeleteChangeMarker::DeletedList, fullyDeletedList);
                 if (fullyDeletedList) {
-                    KoListStyle::ListIdType listId = ListId(format);
+                    KListStyle::ListIdType listId = ListId(format);
                     KoList *list = KoTextDocument(document).list(currentBlock);
                     marker->setDeletedListStyle(listId, list->style());
                 }
@@ -642,12 +642,12 @@ void KoChangeTracker::insertDeleteFragment(QTextCursor &cursor, KoDeleteChangeMa
         if (textList) {
             if (textList->format().property(KoDeleteChangeMarker::DeletedList).toBool() && !currentList) {
                 //Found a Deleted List in the fragment. Create a new KoList.
-                KoListStyle::ListIdType listId;
-                if (sizeof(KoListStyle::ListIdType) == sizeof(uint))
-                    listId = textList->format().property(KoListStyle::ListId).toUInt();
+                KListStyle::ListIdType listId;
+                if (sizeof(KListStyle::ListIdType) == sizeof(uint))
+                    listId = textList->format().property(KListStyle::ListId).toUInt();
                 else
-                    listId = textList->format().property(KoListStyle::ListId).toULongLong();
-                KoListStyle *style = marker->deletedListStyle(listId);
+                    listId = textList->format().property(KListStyle::ListId).toULongLong();
+                KListStyle *style = marker->deletedListStyle(listId);
                 currentList = new KoList(cursor.document(), style);
             }
 

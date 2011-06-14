@@ -32,7 +32,7 @@
 #include <KoStyleManager.h>
 #include <KoParagraphStyle.h>
 #include <KoCharacterStyle.h>
-#include <KoListStyle.h>
+#include <KListStyle.h>
 #include <KListLevelProperties.h>
 #include <KoTextShapeData.h>
 #include <KoTextAnchor.h>
@@ -613,11 +613,11 @@ void KWDLoader::fill(KWTextFrameSet *fs, const KXmlElement &framesetElem)
                         if (! prev.textList())
                             continue;
                         QTextFormat prevFormat = prev.textList()->format();
-                        if (prevFormat.intProperty(KoListStyle::Level) == level) {
+                        if (prevFormat.intProperty(KListStyle::Level) == level) {
                             if (format == prevFormat)
                                 merge = true;
                             break;
-                        } else if (prevFormat.intProperty(KoListStyle::Level) < level)
+                        } else if (prevFormat.intProperty(KListStyle::Level) < level)
                             break;
                     }
                     if (merge) {
@@ -821,29 +821,29 @@ void KWDLoader::fill(KoParagraphStyle *style, const KXmlElement &layout)
         style->setBreakBefore(true);
     element = layout.namedItem("COUNTER").toElement();
     if (!element.isNull()) {
-        KoListStyle *orig = style->listStyle();
-        KoListStyle *lstyle = orig ? orig : new KoListStyle(style);
+        KListStyle *orig = style->listStyle();
+        KListStyle *lstyle = orig ? orig : new KListStyle(style);
 
         KListLevelProperties llp = lstyle->levelProperties(element.attribute("depth").toInt() + 1);
 
         int type = element.attribute("type").toInt();
         switch (type) {
-        case 1: llp.setStyle(KoListStyle::DecimalItem); break;
-        case 2: llp.setStyle(KoListStyle::AlphaLowerItem); break;
-        case 3: llp.setStyle(KoListStyle::UpperAlphaItem); break;
-        case 4: llp.setStyle(KoListStyle::RomanLowerItem); break;
-        case 5: llp.setStyle(KoListStyle::UpperRomanItem); break;
+        case 1: llp.setStyle(KListStyle::DecimalItem); break;
+        case 2: llp.setStyle(KListStyle::AlphaLowerItem); break;
+        case 3: llp.setStyle(KListStyle::UpperAlphaItem); break;
+        case 4: llp.setStyle(KListStyle::RomanLowerItem); break;
+        case 5: llp.setStyle(KListStyle::UpperRomanItem); break;
         case 6: {
-            llp.setStyle(KoListStyle::CustomCharItem);
+            llp.setStyle(KListStyle::CustomCharItem);
             QChar character(element.attribute("bullet", QString::number('*')).toInt());
             llp.setBulletCharacter(character);
             break;
         }
-        case 8: llp.setStyle(KoListStyle::CircleItem); break;
-        case 9: llp.setStyle(KoListStyle::SquareItem); break;
-        case 10: llp.setStyle(KoListStyle::DiscItem); break;
-        case 11: llp.setStyle(KoListStyle::BoxItem); break;
-        case 7: llp.setStyle(KoListStyle::CustomCharItem);
+        case 8: llp.setStyle(KListStyle::CircleItem); break;
+        case 9: llp.setStyle(KListStyle::SquareItem); break;
+        case 10: llp.setStyle(KListStyle::DiscItem); break;
+        case 11: llp.setStyle(KListStyle::BoxItem); break;
+        case 7: llp.setStyle(KListStyle::CustomCharItem);
             kWarning(32001) << "According to spec COUNTER with type 7 is not supported, ignoring";
             // fall through
         default: {

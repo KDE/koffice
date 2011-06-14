@@ -23,7 +23,7 @@
 #include <QObject>
 #include <KoParagraphStyle.h>
 #include <KoCharacterStyle.h>
-#include <KoListStyle.h>
+#include <KListStyle.h>
 
 namespace Scripting
 {
@@ -227,16 +227,16 @@ public:
     };
 
     enum ListStyle {
-        None = KoListStyle::None,
-        SquareItem = KoListStyle::SquareItem,
-        DiscItem = KoListStyle::DiscItem,
-        CircleItem = KoListStyle::CircleItem,
-        DecimalItem = KoListStyle::DecimalItem,
-        AlphaLowerItem = KoListStyle::AlphaLowerItem,
-        AlphaUpperItem = KoListStyle::UpperAlphaItem,
-        RomanLowerItem = KoListStyle::RomanLowerItem,
-        RomanUpperItem = KoListStyle::UpperRomanItem,
-        BoxItem = KoListStyle::BoxItem
+        None = KListStyle::None,
+        SquareItem = KListStyle::SquareItem,
+        DiscItem = KListStyle::DiscItem,
+        CircleItem = KListStyle::CircleItem,
+        DecimalItem = KListStyle::DecimalItem,
+        AlphaLowerItem = KListStyle::AlphaLowerItem,
+        AlphaUpperItem = KListStyle::UpperAlphaItem,
+        RomanLowerItem = KListStyle::RomanLowerItem,
+        RomanUpperItem = KListStyle::UpperRomanItem,
+        BoxItem = KListStyle::BoxItem
     };
 
 public slots:
@@ -393,17 +393,17 @@ public slots:
     /** Return the style of listitems. */
     int listStyle() const {
         //return m_style->listStyle() ? m_style->listStyle()->style() : 0;
-        KoListStyle liststyle = m_style->listStyle();
+        KListStyle liststyle = m_style->listStyle();
         return liststyle.isValid() ? new ListStyle(this, liststyle) : 0;
     }
 
     /** Set the style of listitems. */
     void setListStyle(int liststyle) {
         if (m_style->listStyle())
-            m_style->listStyle()->setStyle((KoListStyle::Style)liststyle);
+            m_style->listStyle()->setStyle((KListStyle::Style)liststyle);
         else {
-            KoListStyle s;
-            s.setStyle((KoListStyle::Style) liststyle);
+            KListStyle s;
+            s.setStyle((KListStyle::Style) liststyle);
             m_style->setListStyle(s);
         }
     }

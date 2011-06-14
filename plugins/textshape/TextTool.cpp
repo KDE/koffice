@@ -1076,7 +1076,7 @@ void TextTool::keyPressEvent(QKeyEvent *event)
                 addCommand(lin);
             } else {
                 // backspace on numbered, empty parag, removes numbering.
-                ChangeListCommand *clc = new ChangeListCommand(*textEditor->cursor(), KoListStyle::None, 0 /* level */);
+                ChangeListCommand *clc = new ChangeListCommand(*textEditor->cursor(), KListStyle::None, 0 /* level */);
                 addCommand(clc);
             }
         } else if (textEditor->position() > 0 || textEditor->hasSelection()) {
@@ -2393,8 +2393,8 @@ void TextTool::debugTextDocument()
         }
         QTextList *list = block.textList();
         if (list) {
-            if (list->format().hasProperty(KoListStyle::StyleId)) {
-                KoListStyle *ls = styleManager->listStyle(list->format().intProperty(KoListStyle::StyleId));
+            if (list->format().hasProperty(KListStyle::StyleId)) {
+                KListStyle *ls = styleManager->listStyle(list->format().intProperty(KListStyle::StyleId));
                 kDebug(32500) << "   List style applied:" << ls->styleId() << ls->name();
             }
             else
@@ -2431,7 +2431,7 @@ void TextTool::debugTextStyles()
         } else {
             kDebug(32500) << "  +- ERROR; no char style found!" << endl;
         }
-        KoListStyle *ls = style->listStyle();
+        KListStyle *ls = style->listStyle();
         if (ls) { // optional ;)
             kDebug(32500) << "  +- ListStyle: " << ls->styleId() << ls->name()
                 << (ls == styleManager->defaultListStyle() ? "[Default]":"");
@@ -2459,7 +2459,7 @@ void TextTool::debugTextStyles()
     }
 
     first = true;
-    foreach (KoListStyle *style, styleManager->listStyles()) {
+    foreach (KListStyle *style, styleManager->listStyles()) {
         if (seenStyles.contains(style->styleId()))
             continue;
         if (first) {

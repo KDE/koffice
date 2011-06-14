@@ -20,7 +20,7 @@
 #ifndef lISTSSPINBOX_H
 #define lISTSSPINBOX_H
 
-#include <KoListStyle.h>
+#include <KListStyle.h>
 
 #include <QSpinBox>
 
@@ -30,7 +30,7 @@ class ListsSpinBox : public QSpinBox
 public:
     ListsSpinBox(QWidget *parent = 0);
 
-    void setCounterType(KoListStyle::Style type);
+    void setCounterType(KListStyle::Style type);
 
 public slots:
     void setLetterSynchronization(bool on) {
@@ -41,7 +41,7 @@ private:
     virtual int valueFromText(const QString &text) const;
     virtual QString textFromValue(int value) const;
 
-    KoListStyle::Style m_type;
+    KListStyle::Style m_type;
     bool m_letterSynchronization;
 };
 
