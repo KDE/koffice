@@ -27,7 +27,7 @@
 #include "KoPathShape.h"
 #include "KoPathShape_p.h"
 #include "KoPathPoint.h"
-#include "KoLoadingShapeUpdater.h"
+#include "KLoadingShapeUpdater.h"
 
 #include <KXmlReader.h>
 #include <KXmlWriter.h>
@@ -96,7 +96,7 @@ class ConnectCurve : public ConnectStrategy
     void recalc() const;
 };
 
-class ConnectionLoaderUpdater : public KoLoadingShapeUpdater
+class ConnectionLoaderUpdater : public KLoadingShapeUpdater
 {
 public:
     enum Pos {

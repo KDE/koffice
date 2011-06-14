@@ -32,7 +32,7 @@ class KOdfLoadingContext;
 class KoShapeLayer;
 class KoShape;
 class KoShapeControllerBase;
-class KoLoadingShapeUpdater;
+class KLoadingShapeUpdater;
 class KImageCollection;
 class KoSharedLoadingData;
 class KoResourceManager;
@@ -108,7 +108,7 @@ public:
      * call function on the shapeUpdater when the shape with the id shapeid is inserted
      * After that destroy the updater.
      */
-    void updateShape(const QString &id, KoLoadingShapeUpdater *shapeUpdater);
+    void updateShape(const QString &id, KLoadingShapeUpdater *shapeUpdater);
 
     /**
      * this checks if there is an updater for this shape if yes it calls it

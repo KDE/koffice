@@ -17,12 +17,35 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KoLoadingShapeUpdater.h"
+#ifndef KOLOADINGSHAPEUPDATER_H
+#define KOLOADINGSHAPEUPDATER_H
 
-KoLoadingShapeUpdater::KoLoadingShapeUpdater()
-{
-}
+#include "flake_export.h"
 
-KoLoadingShapeUpdater::~KoLoadingShapeUpdater()
+class KoShape;
+
+/**
+ * Reimplement this class when you depend on a shape during loading that is
+ * not yet loaded.
+ *
+ * As soon as the shape you depend on is loaded the method update is called.
+ * Then you can setup the data you need.
+ *
+ * @see KoShapeConnection
+ * @see KoShapeLoadingContext::updateShape
+ */
+class FLAKE_EXPORT KLoadingShapeUpdater
 {
-}
+public:
+    KLoadingShapeUpdater();
+    virtual ~KLoadingShapeUpdater();
+
+    /**
+     * This function is called as soon as shape is loaded.
+     *
+     * @param shape The shape that just got loaded.
+     */
+    virtual void update(KoShape *shape) = 0;
+};
+
+#endif /* KOLOADINGSHAPEUPDATER_H */

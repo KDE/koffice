@@ -64,7 +64,7 @@ set(flake_SRCS
     KoToolProxy.cpp
     KoShapeSavingContext.cpp
     KoShapeLoadingContext.cpp
-    KoLoadingShapeUpdater.cpp
+    KLoadingShapeUpdater.cpp
     KoPathShapeLoader.cpp
     ShapeDeleter_p.cpp
     KoShapeBorderBase.cpp
@@ -264,7 +264,7 @@ install(
     KInputDevice.h
     KoInsets.h
     KLineBorder.h
-    KoLoadingShapeUpdater.h
+    KLoadingShapeUpdater.h
     KoOdfWorkaround.h
     KoParameterShape.h
     KoPasteController.h

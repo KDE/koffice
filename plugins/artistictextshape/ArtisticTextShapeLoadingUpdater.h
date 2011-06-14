@@ -19,11 +19,11 @@
 #ifndef ARTISTICTEXTSHAPELOADINGUPDATER_H
 #define ARTISTICTEXTSHAPELOADINGUPDATER_H
 
-#include <KoLoadingShapeUpdater.h>
+#include <KLoadingShapeUpdater.h>
 
 class ArtisticTextShape;
 
-class ArtisticTextShapeLoadingUpdater : public KoLoadingShapeUpdater
+class ArtisticTextShapeLoadingUpdater : public KLoadingShapeUpdater
 {
 public:
     ArtisticTextShapeLoadingUpdater(ArtisticTextShape * artisticTextShape);
