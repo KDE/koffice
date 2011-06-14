@@ -29,7 +29,7 @@
 class KShape;
 class KShapeGroup;
 class KShapeContainer;
-class KoShapeGroupCommandPrivate;
+class KShapeGroupCommandPrivate;
 class KShapeController;
 
 /// The undo / redo command for grouping shapes
@@ -87,8 +87,8 @@ public:
     virtual void undo();
 
 protected:
-    KoShapeGroupCommandPrivate *d;
-    KShapeGroupCommand(KoShapeGroupCommandPrivate &, QUndoCommand *parent);
+    KShapeGroupCommandPrivate *d;
+    KShapeGroupCommand(KShapeGroupCommandPrivate &, QUndoCommand *parent);
 };
 
 #endif

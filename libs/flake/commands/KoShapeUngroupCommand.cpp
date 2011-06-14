@@ -26,7 +26,7 @@
 
 KoShapeUngroupCommand::KoShapeUngroupCommand(KShapeContainer *container, const QList<KShape *> &shapes,
         const QList<KShape*> &topLevelShapes, QUndoCommand *parent)
-    : KShapeGroupCommand(*(new KoShapeGroupCommandPrivate(container, shapes)), parent)
+    : KShapeGroupCommand(*(new KShapeGroupCommandPrivate(container, shapes)), parent)
 {
     QList<KShape*> orderdShapes(shapes);
     qSort(orderdShapes.begin(), orderdShapes.end(), KShape::compareShapeZIndex);

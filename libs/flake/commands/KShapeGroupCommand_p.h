@@ -35,10 +35,10 @@
 #include <QTransform>
 #include <QPair>
 
-class KoShapeGroupCommandPrivate
+class KShapeGroupCommandPrivate
 {
 public:
-    KoShapeGroupCommandPrivate(KShapeContainer *container, const QList<KShape *> &shapes, const QList<bool> &clipped = QList<bool>(), const QList<bool> &inheritTransform = QList<bool>());
+    KShapeGroupCommandPrivate(KShapeContainer *container, const QList<KShape *> &shapes, const QList<bool> &clipped = QList<bool>(), const QList<bool> &inheritTransform = QList<bool>());
     void init(QUndoCommand *q);
     QRectF containerBoundingRect();
 

@@ -54,7 +54,7 @@ QUndoCommand * KShapeGroupCommand::createCommand(const QList<KShape *> &shapes, 
     return cmd;
 }
 
-KoShapeGroupCommandPrivate::KoShapeGroupCommandPrivate(KShapeContainer *c, const QList<KShape *> &s, const QList<bool> &clip, const QList<bool> &it)
+KShapeGroupCommandPrivate::KShapeGroupCommandPrivate(KShapeContainer *c, const QList<KShape *> &s, const QList<bool> &clip, const QList<bool> &it)
     : shapes(s),
     clipped(clip),
     inheritTransform(it),
@@ -65,7 +65,7 @@ KoShapeGroupCommandPrivate::KoShapeGroupCommandPrivate(KShapeContainer *c, const
 
 KShapeGroupCommand::KShapeGroupCommand(KShapeContainer *container, const QList<KShape *> &shapes, const QList<bool> &clipped, const QList<bool> &inheritTransform, QUndoCommand *parent)
     : QUndoCommand(parent),
-    d(new KoShapeGroupCommandPrivate(container,shapes, clipped, inheritTransform))
+    d(new KShapeGroupCommandPrivate(container,shapes, clipped, inheritTransform))
 {
     Q_ASSERT(d->clipped.count() == d->shapes.count());
     Q_ASSERT(d->inheritTransform.count() == d->shapes.count());
@@ -74,7 +74,7 @@ KShapeGroupCommand::KShapeGroupCommand(KShapeContainer *container, const QList<K
 
 KShapeGroupCommand::KShapeGroupCommand(KShapeGroup *container, const QList<KShape *> &shapes, QUndoCommand *parent)
     : QUndoCommand(parent),
-    d(new KoShapeGroupCommandPrivate(container,shapes))
+    d(new KShapeGroupCommandPrivate(container,shapes))
 {
     for (int i = 0; i < shapes.count(); ++i) {
         d->clipped.append(false);
@@ -88,13 +88,13 @@ KShapeGroupCommand::~KShapeGroupCommand()
     delete d;
 }
 
-KShapeGroupCommand::KShapeGroupCommand(KoShapeGroupCommandPrivate &dd, QUndoCommand *parent)
+KShapeGroupCommand::KShapeGroupCommand(KShapeGroupCommandPrivate &dd, QUndoCommand *parent)
     : QUndoCommand(parent),
     d(&dd)
 {
 }
 
-void KoShapeGroupCommandPrivate::init(QUndoCommand *q)
+void KShapeGroupCommandPrivate::init(QUndoCommand *q)
 {
     foreach(KShape* shape, shapes) {
         oldParents.append(shape->parent());
@@ -212,7 +212,7 @@ void KShapeGroupCommand::undo()
     }
 }
 
-QRectF KoShapeGroupCommandPrivate::containerBoundingRect()
+QRectF KShapeGroupCommandPrivate::containerBoundingRect()
 {
     bool boundingRectInitialized = true;
     QRectF bound;
