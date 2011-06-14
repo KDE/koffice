@@ -41,7 +41,7 @@
 #include "commands/KPathPointMergeCommand.h"
 #include "KParameterShape.h"
 #include "KPathPoint.h"
-#include "KoPathPointRubberSelectStrategy_p.h"
+#include "KPathPointRubberSelectStrategy_p.h"
 #include "KoPathSegmentChangeStrategy_p.h"
 #include "PathToolOptionWidget_p.h"
 #include "KoSnapGuide.h"
@@ -482,7 +482,7 @@ void KoPathTool::mousePressEvent(KoPointerEvent *event)
                 }
                 // start rubberband selection
                 Q_ASSERT(m_currentStrategy == 0);
-                m_currentStrategy = new KoPathPointRubberSelectStrategy(this, event->point);
+                m_currentStrategy = new KPathPointRubberSelectStrategy(this, event->point);
             }
         }
     }
@@ -609,7 +609,7 @@ void KoPathTool::mouseReleaseEvent(KoPointerEvent *event)
         QUndoCommand *command = m_currentStrategy->createCommand();
         if (command)
             d->canvas->addCommand(command);
-        if (hadNoSelection && dynamic_cast<KoPathPointRubberSelectStrategy*>(m_currentStrategy)
+        if (hadNoSelection && dynamic_cast<KPathPointRubberSelectStrategy*>(m_currentStrategy)
                 && !m_pointSelection.hasSelection()) {
             // the click didn't do anything at all. Allow it to be used by others.
             event->ignore();

@@ -18,20 +18,20 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoPathPointRubberSelectStrategy_p.h"
+#include "KPathPointRubberSelectStrategy_p.h"
 #include "KoShapeRubberSelectStrategy_p.h"
 
 #include "KCanvasBase.h"
 #include "KoPathTool_p.h"
 #include "KoPathToolSelection_p.h"
 
-KoPathPointRubberSelectStrategy::KoPathPointRubberSelectStrategy(KoPathTool *tool, const QPointF &clicked)
+KPathPointRubberSelectStrategy::KPathPointRubberSelectStrategy(KoPathTool *tool, const QPointF &clicked)
         : KoShapeRubberSelectStrategy(tool, clicked)
         , m_tool(tool)
 {
 }
 
-void KoPathPointRubberSelectStrategy::finishInteraction(Qt::KeyboardModifiers modifiers)
+void KPathPointRubberSelectStrategy::finishInteraction(Qt::KeyboardModifiers modifiers)
 {
     Q_D(KoShapeRubberSelectStrategy);
     KoPathToolSelection * selection = dynamic_cast<KoPathToolSelection*>(m_tool->selection());

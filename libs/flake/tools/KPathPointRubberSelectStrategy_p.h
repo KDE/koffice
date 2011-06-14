@@ -40,11 +40,11 @@ class KoPathTool;
 /**
  * @brief Strategy to rubber select points of a path shape
  */
-class KoPathPointRubberSelectStrategy : public KoShapeRubberSelectStrategy
+class KPathPointRubberSelectStrategy : public KoShapeRubberSelectStrategy
 {
 public:
-    KoPathPointRubberSelectStrategy(KoPathTool *tool, const QPointF &clicked);
-    virtual ~KoPathPointRubberSelectStrategy() {}
+    KPathPointRubberSelectStrategy(KoPathTool *tool, const QPointF &clicked);
+    virtual ~KPathPointRubberSelectStrategy() {}
     virtual void finishInteraction(Qt::KeyboardModifiers modifiers);
 
 private:
