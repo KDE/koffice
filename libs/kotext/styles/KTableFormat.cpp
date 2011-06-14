@@ -17,40 +17,40 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoTableFormat.h"
-#include "KoTableFormat_p.h"
+#include "KTableFormat.h"
+#include "KTableFormat_p.h"
 
 #include <QVariant>
 #include <QString>
 #include <QBrush>
 
-KoTableFormat::KoTableFormat() :
+KTableFormat::KTableFormat() :
     d(new KoTableFormatPrivate())
 {
 }
 
-KoTableFormat::KoTableFormat(const KoTableFormat &rhs) :
+KTableFormat::KTableFormat(const KTableFormat &rhs) :
     d(rhs.d)
 {
 }
 
-KoTableFormat& KoTableFormat::operator=(const KoTableFormat &rhs)
+KTableFormat& KTableFormat::operator=(const KTableFormat &rhs)
 {
     d = rhs.d;
     return *this;
 }
 
-KoTableFormat::~KoTableFormat()
+KTableFormat::~KTableFormat()
 {
 }
 
-QVariant KoTableFormat::property(int propertyId) const
+QVariant KTableFormat::property(int propertyId) const
 {
     const QVariant value( d->property(propertyId) );
     return value.isNull() ? QVariant() : value;
 }
 
-void KoTableFormat::setProperty(int propertyId, const QVariant &value)
+void KTableFormat::setProperty(int propertyId, const QVariant &value)
 {
     if (!value.isValid()) {
         d->clearProperty(propertyId);
@@ -59,22 +59,22 @@ void KoTableFormat::setProperty(int propertyId, const QVariant &value)
     }
 }
 
-void KoTableFormat::clearProperty(int propertyId)
+void KTableFormat::clearProperty(int propertyId)
 {
     d->clearProperty(propertyId);
 }
 
-bool KoTableFormat::hasProperty(int propertyId) const
+bool KTableFormat::hasProperty(int propertyId) const
 {
     return d->hasProperty(propertyId);
 }
 
-QMap<int, QVariant> KoTableFormat::properties() const
+QMap<int, QVariant> KTableFormat::properties() const
 {
     return d->properties();
 }
 
-bool KoTableFormat::boolProperty(int propertyId) const
+bool KTableFormat::boolProperty(int propertyId) const
 {
     const QVariant prop = d->property(propertyId);
     if (prop.type() != QVariant::Bool) {
@@ -83,7 +83,7 @@ bool KoTableFormat::boolProperty(int propertyId) const
     return prop.toBool();
 }
 
-int KoTableFormat::intProperty(int propertyId) const
+int KTableFormat::intProperty(int propertyId) const
 {
     const QVariant prop = d->property(propertyId);
     if (prop.type() != QVariant::Int) {
@@ -92,7 +92,7 @@ int KoTableFormat::intProperty(int propertyId) const
     return prop.toInt();
 }
 
-qreal KoTableFormat::doubleProperty(int propertyId) const
+qreal KTableFormat::doubleProperty(int propertyId) const
 {
     const QVariant prop = d->property(propertyId);
     if (prop.type() != QVariant::Double) {
@@ -101,7 +101,7 @@ qreal KoTableFormat::doubleProperty(int propertyId) const
     return prop.toDouble();
 }
 
-QString KoTableFormat::stringProperty(int propertyId) const
+QString KTableFormat::stringProperty(int propertyId) const
 {
     const QVariant prop = d->property(propertyId);
     if (prop.type() != QVariant::String) {
@@ -110,7 +110,7 @@ QString KoTableFormat::stringProperty(int propertyId) const
     return prop.toString();
 }
 
-QBrush KoTableFormat::brushProperty(int propertyId) const
+QBrush KTableFormat::brushProperty(int propertyId) const
 {
     const QVariant prop = d->property(propertyId);
     if (prop.type() != QVariant::Brush) {

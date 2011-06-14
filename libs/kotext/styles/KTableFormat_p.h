@@ -37,7 +37,7 @@
 #include <QMap>
 
 /**
- * Shared data class for KoTableFormat.
+ * Shared data class for KTableFormat.
  *
  * This class essentially just wraps StylePrivate and provides a
  * property API.

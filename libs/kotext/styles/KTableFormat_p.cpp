@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoTableFormat_p.h"
+#include "KTableFormat_p.h"
 
 #include <QVariant>
 #include <QMap>

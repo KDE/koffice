@@ -31,7 +31,7 @@ class QString;
 class QBrush;
 
 /**
- * The KoTableFormat class describes a format for a table component such
+ * The KTableFormat class describes a format for a table component such
  * as a row or a column. It is the base class for KoTableColumnFormat and
  * KoTableRowFormat.
  *
@@ -40,17 +40,17 @@ class QBrush;
  *
  * \sa KoTableColumnFormat, KoTableRowFormat
  */
-class KOTEXT_EXPORT KoTableFormat
+class KOTEXT_EXPORT KTableFormat
 {
 public:
     /// Creates a new format of type \c InvalidFormat.
-    KoTableFormat();
+    KTableFormat();
     /// Creates a format with the same attributes as \a rhs.
-    KoTableFormat(const KoTableFormat &rhs);
+    KTableFormat(const KTableFormat &rhs);
     /// Assigns \a rhs to this format and returns a reference to this format.
-    KoTableFormat& operator=(const KoTableFormat &rhs);
+    KTableFormat& operator=(const KTableFormat &rhs);
     /// Destroys this format.
-    ~KoTableFormat();
+    ~KTableFormat();
 
     /// Get property \a propertyId as a QVariant.
     QVariant property(int propertyId) const;
