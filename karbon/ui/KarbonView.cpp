@@ -87,7 +87,7 @@
 #include <KoPathShape.h>
 #include <KPathPointData.h>
 #include <KPathCombineCommand.h>
-#include <KoPathSeparateCommand.h>
+#include <KPathSeparateCommand.h>
 #include <KPathReverseCommand.h>
 #include <KPathPointMoveCommand.h>
 #include <KoToolBoxFactory.h>
@@ -643,7 +643,7 @@ void KarbonView::separatePath()
     }
 
     if (paths.size())
-        d->canvas->addCommand(new KoPathSeparateCommand(part(), paths));
+        d->canvas->addCommand(new KPathSeparateCommand(part(), paths));
 }
 
 void KarbonView::reversePath()

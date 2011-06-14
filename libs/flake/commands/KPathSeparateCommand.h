@@ -29,7 +29,7 @@ class KoPathShape;
 class KoShapeControllerBase;
 
 /// The undo / redo command for separating subpaths into different paths
-class FLAKE_EXPORT KoPathSeparateCommand : public QUndoCommand
+class FLAKE_EXPORT KPathSeparateCommand : public QUndoCommand
 {
 public:
     /**
@@ -38,9 +38,9 @@ public:
      * @param paths the list of paths to separate
      * @param parent the parent command used for macro commands
      */
-    KoPathSeparateCommand(KoShapeControllerBase *controller, const QList<KoPathShape*> &paths,
+    KPathSeparateCommand(KoShapeControllerBase *controller, const QList<KoPathShape*> &paths,
                           QUndoCommand *parent = 0);
-    virtual ~KoPathSeparateCommand();
+    virtual ~KPathSeparateCommand();
     /// redo the command
     void redo();
     /// revert the actions done in redo

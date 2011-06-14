@@ -18,12 +18,12 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoPathSeparateCommand.h"
+#include "KPathSeparateCommand.h"
 #include "KoShapeControllerBase.h"
 #include "KoPathShape.h"
 #include <klocale.h>
 
-class KoPathSeparateCommand::Private
+class KPathSeparateCommand::Private
 {
 public:
     Private(KoShapeControllerBase *c, const QList<KoPathShape*> &p)
@@ -49,19 +49,19 @@ public:
 };
 
 
-KoPathSeparateCommand::KoPathSeparateCommand(KoShapeControllerBase *controller, const QList<KoPathShape*> &paths, QUndoCommand *parent)
+KPathSeparateCommand::KPathSeparateCommand(KoShapeControllerBase *controller, const QList<KoPathShape*> &paths, QUndoCommand *parent)
         : QUndoCommand(parent),
         d(new Private(controller, paths))
 {
     setText(i18n("Separate Paths"));
 }
 
-KoPathSeparateCommand::~KoPathSeparateCommand()
+KPathSeparateCommand::~KPathSeparateCommand()
 {
     delete d;
 }
 
-void KoPathSeparateCommand::redo()
+void KPathSeparateCommand::redo()
 {
     QUndoCommand::redo();
     if (d->separatedPaths.isEmpty()) {
@@ -84,7 +84,7 @@ void KoPathSeparateCommand::redo()
         p->update();
 }
 
-void KoPathSeparateCommand::undo()
+void KPathSeparateCommand::undo()
 {
     QUndoCommand::undo();
     if (d->controller) {
