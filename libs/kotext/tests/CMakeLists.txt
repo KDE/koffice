@@ -22,7 +22,7 @@ target_link_libraries(TestBorder kotext  ${QT_QTTEST_LIBRARY})
 ########### next target ###############
 
 set(TestKoTableColumnAndRowStyleManager_test_SRCS TestKoTableColumnAndRowStyleManager.cpp)
-kde4_add_unit_test(TestKoTableColumnAndRowStyleManager TESTNAME libs-kotext-KoTableColumnAndRowStyleManager ${TestKoTableColumnAndRowStyleManager_test_SRCS})
+kde4_add_unit_test(TestKoTableColumnAndRowStyleManager TESTNAME libs-kotext-KTableColumnAndRowStyleManager ${TestKoTableColumnAndRowStyleManager_test_SRCS})
 target_link_libraries(TestKoTableColumnAndRowStyleManager kotext  ${QT_QTTEST_LIBRARY})
 
 ########### next target ###############

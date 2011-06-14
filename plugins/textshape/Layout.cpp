@@ -35,7 +35,7 @@
 #include <KListStyle.h>
 #include <KoTableStyle.h>
 #include <KoTableRowStyle.h>
-#include <KoTableColumnAndRowStyleManager.h>
+#include <KTableColumnAndRowStyleManager.h>
 #include <KStyleManager.h>
 #include <KoTextBlockData.h>
 #include <KoTextBlockBorderData.h>
@@ -756,12 +756,12 @@ void Layout::handleTableBreak(QTextTableCell &previousCell, QTextTable *table)
 {
     // Get the column and row style manager.
     QTextTableFormat tableFormat = table->format();
-    KoTableColumnAndRowStyleManager *carsManager =
-    reinterpret_cast<KoTableColumnAndRowStyleManager *>(
+    KTableColumnAndRowStyleManager *carsManager =
+    reinterpret_cast<KTableColumnAndRowStyleManager *>(
             tableFormat.property(KoTableStyle::ColumnAndRowStyleManager).value<void *>());
 
     if (!carsManager)
-        carsManager = new KoTableColumnAndRowStyleManager();
+        carsManager = new KTableColumnAndRowStyleManager();
 
     //kDebug(32500) << "[in handle TableBreak]" << m_restartingAfterTableBreak;
 

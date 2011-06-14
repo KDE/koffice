@@ -39,7 +39,7 @@
 #include <KShapeFactoryBase.h>
 #include <KShapeLoadingContext.h>
 #include <KShapeRegistry.h>
-#include <KoTableColumnAndRowStyleManager.h>
+#include <KTableColumnAndRowStyleManager.h>
 #include <KoTextAnchor.h>
 #include <KoTextBlockData.h>
 #include "KoTextDebug_p.h"
@@ -1917,7 +1917,7 @@ void KoTextLoader::loadTable(const KXmlElement &tableElem, QTextCursor &cursor)
     //    cursor.setBlockFormat(textBlockFormat);
     //}
 
-    KoTableColumnAndRowStyleManager *tcarManager = new KoTableColumnAndRowStyleManager;
+    KTableColumnAndRowStyleManager *tcarManager = new KTableColumnAndRowStyleManager;
     tableFormat.setProperty(KoTableStyle::ColumnAndRowStyleManager, QVariant::fromValue(reinterpret_cast<void *>(tcarManager)));
     if (d->changeTracker && d->changeStack.count()) {
         tableFormat.setProperty(KCharacterStyle::ChangeTrackerId, d->changeStack.top());
@@ -1973,7 +1973,7 @@ void KoTextLoader::loadTable(const KXmlElement &tableElem, QTextCursor &cursor)
 
 void KoTextLoader::loadTableColumn(KXmlElement &tblTag, QTextTable *tbl, int &columns)
 {
-    KoTableColumnAndRowStyleManager *tcarManager = reinterpret_cast<KoTableColumnAndRowStyleManager *>
+    KTableColumnAndRowStyleManager *tcarManager = reinterpret_cast<KTableColumnAndRowStyleManager *>
                                                    (tbl->format().property(KoTableStyle::ColumnAndRowStyleManager).value<void *>());
     int rows = tbl->rows();
     int repeatColumn = tblTag.attributeNS(KOdfXmlNS::table, "number-columns-repeated", "1").toInt();
@@ -2001,7 +2001,7 @@ void KoTextLoader::loadTableColumn(KXmlElement &tblTag, QTextTable *tbl, int &co
 
 void KoTextLoader::loadTableRow(KXmlElement &tblTag, QTextTable *tbl, QList<QRect> &spanStore, QTextCursor &cursor, int &rows)
 {
-    KoTableColumnAndRowStyleManager *tcarManager = reinterpret_cast<KoTableColumnAndRowStyleManager *>
+    KTableColumnAndRowStyleManager *tcarManager = reinterpret_cast<KTableColumnAndRowStyleManager *>
                                                    (tbl->format().property(KoTableStyle::ColumnAndRowStyleManager).value<void *>());
 
     int columns = tbl->columns();
@@ -2061,7 +2061,7 @@ void KoTextLoader::loadTableRow(KXmlElement &tblTag, QTextTable *tbl, QList<QRec
 
 void KoTextLoader::loadTableCell(KXmlElement &rowTag, QTextTable *tbl, QList<QRect> &spanStore, QTextCursor &cursor, int &currentCell)
 {
-    KoTableColumnAndRowStyleManager *tcarManager = reinterpret_cast<KoTableColumnAndRowStyleManager *>
+    KTableColumnAndRowStyleManager *tcarManager = reinterpret_cast<KTableColumnAndRowStyleManager *>
                                                    (tbl->format().property(KoTableStyle::ColumnAndRowStyleManager).value<void *>());
     const int currentRow = tbl->rows() - 1;
     QTextTableCell cell = tbl->cellAt(currentRow, currentCell);

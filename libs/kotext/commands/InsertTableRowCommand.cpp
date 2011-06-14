@@ -21,7 +21,7 @@
 #include "InsertTableRowCommand_p.h"
 
 #include <KoTextEditor.h>
-#include "KoTableColumnAndRowStyleManager.h"
+#include "KTableColumnAndRowStyleManager.h"
 
 #include <QTextTableCell>
 #include <QTextTable>
@@ -47,7 +47,7 @@ InsertTableRowCommand::InsertTableRowCommand(KoTextEditor *te, QTextTable *t, bo
 
 void InsertTableRowCommand::undo()
 {
-    KoTableColumnAndRowStyleManager carsManager = KoTableColumnAndRowStyleManager::manager(m_table);
+    KTableColumnAndRowStyleManager carsManager = KTableColumnAndRowStyleManager::manager(m_table);
 
     carsManager.removeRows(m_row, 1);
 
@@ -56,7 +56,7 @@ void InsertTableRowCommand::undo()
 
 void InsertTableRowCommand::redo()
 {
-    KoTableColumnAndRowStyleManager carsManager = KoTableColumnAndRowStyleManager::manager(m_table);
+    KTableColumnAndRowStyleManager carsManager = KTableColumnAndRowStyleManager::manager(m_table);
     if (!m_first) {
         carsManager.insertRows(m_row, 1, m_style);
         QUndoCommand::redo();

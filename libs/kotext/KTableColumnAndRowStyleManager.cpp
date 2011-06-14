@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoTableColumnAndRowStyleManager.h"
+#include "KTableColumnAndRowStyleManager.h"
 
 #include "styles/KoTableColumnStyle.h"
 #include "styles/KoTableRowStyle.h"
@@ -31,7 +31,7 @@
 
 #include <QDebug>
 
-class KoTableColumnAndRowStyleManager::Private : public QSharedData
+class KTableColumnAndRowStyleManager::Private : public QSharedData
 {
 public:
     Private()  { }
@@ -44,35 +44,35 @@ public:
     QVector<KTableCellStyle*> defaultColumnCellStyles;
 };
 
-KoTableColumnAndRowStyleManager::KoTableColumnAndRowStyleManager()
+KTableColumnAndRowStyleManager::KTableColumnAndRowStyleManager()
     : d(new Private())
 {
 }
 
-KoTableColumnAndRowStyleManager::KoTableColumnAndRowStyleManager(const KoTableColumnAndRowStyleManager &rhs)
+KTableColumnAndRowStyleManager::KTableColumnAndRowStyleManager(const KTableColumnAndRowStyleManager &rhs)
     : d(rhs.d)
 {
 }
 
-KoTableColumnAndRowStyleManager &KoTableColumnAndRowStyleManager::operator=(const KoTableColumnAndRowStyleManager &rhs)
+KTableColumnAndRowStyleManager &KTableColumnAndRowStyleManager::operator=(const KTableColumnAndRowStyleManager &rhs)
 {
     d = rhs.d;
 
     return *this;
 }
 
-KoTableColumnAndRowStyleManager::~KoTableColumnAndRowStyleManager()
+KTableColumnAndRowStyleManager::~KTableColumnAndRowStyleManager()
 {
 }
 
-KoTableColumnAndRowStyleManager KoTableColumnAndRowStyleManager::manager(QTextTable *table)
+KTableColumnAndRowStyleManager KTableColumnAndRowStyleManager::manager(QTextTable *table)
 {
     QTextTableFormat tableFormat = table->format();
 
     if (tableFormat.hasProperty(KoTableStyle::ColumnAndRowStyleManager)) {
-        return  tableFormat.property(KoTableStyle::ColumnAndRowStyleManager).value<KoTableColumnAndRowStyleManager>();
+        return  tableFormat.property(KoTableStyle::ColumnAndRowStyleManager).value<KTableColumnAndRowStyleManager>();
     } else {
-        KoTableColumnAndRowStyleManager carsManager;
+        KTableColumnAndRowStyleManager carsManager;
 
         QVariant var;
         var.setValue(carsManager);
@@ -82,7 +82,7 @@ KoTableColumnAndRowStyleManager KoTableColumnAndRowStyleManager::manager(QTextTa
     }
 }
 
-void KoTableColumnAndRowStyleManager::setColumnStyle(int column, const KoTableColumnStyle &columnStyle)
+void KTableColumnAndRowStyleManager::setColumnStyle(int column, const KoTableColumnStyle &columnStyle)
 {
     Q_ASSERT(column >= 0);
 
@@ -100,7 +100,7 @@ void KoTableColumnAndRowStyleManager::setColumnStyle(int column, const KoTableCo
     d->tableColumnStyles.insert(column, columnStyle);
 }
 
-void KoTableColumnAndRowStyleManager::insertColumns(int column, int numberColumns, const KoTableColumnStyle &columnStyle)
+void KTableColumnAndRowStyleManager::insertColumns(int column, int numberColumns, const KoTableColumnStyle &columnStyle)
 {
     Q_ASSERT(column >= 0);
     Q_ASSERT(numberColumns >= 0);
@@ -115,7 +115,7 @@ void KoTableColumnAndRowStyleManager::insertColumns(int column, int numberColumn
     d->tableColumnStyles.insert(column, numberColumns, columnStyle);
 }
 
-void KoTableColumnAndRowStyleManager::removeColumns(int column, int numberColumns)
+void KTableColumnAndRowStyleManager::removeColumns(int column, int numberColumns)
 {
     Q_ASSERT(column >= 0);
     Q_ASSERT(numberColumns >= 0);
@@ -130,7 +130,7 @@ void KoTableColumnAndRowStyleManager::removeColumns(int column, int numberColumn
     d->tableColumnStyles.remove(column, numberColumns);
 }
 
-KoTableColumnStyle KoTableColumnAndRowStyleManager::columnStyle(int column) const
+KoTableColumnStyle KTableColumnAndRowStyleManager::columnStyle(int column) const
 {
     Q_ASSERT(column >= 0);
 
@@ -141,7 +141,7 @@ KoTableColumnStyle KoTableColumnAndRowStyleManager::columnStyle(int column) cons
     return d->tableColumnStyles.value(column);
 }
 
-void KoTableColumnAndRowStyleManager::setRowStyle(int row, const KoTableRowStyle &rowStyle)
+void KTableColumnAndRowStyleManager::setRowStyle(int row, const KoTableRowStyle &rowStyle)
 {
     Q_ASSERT(row >= 0);
 
@@ -159,7 +159,7 @@ void KoTableColumnAndRowStyleManager::setRowStyle(int row, const KoTableRowStyle
     d->tableRowStyles.insert(row, rowStyle);
 }
 
-void KoTableColumnAndRowStyleManager::insertRows(int row, int numberRows, const KoTableRowStyle &rowStyle)
+void KTableColumnAndRowStyleManager::insertRows(int row, int numberRows, const KoTableRowStyle &rowStyle)
 {
     Q_ASSERT(row >= 0);
     Q_ASSERT(numberRows >= 0);
@@ -174,7 +174,7 @@ void KoTableColumnAndRowStyleManager::insertRows(int row, int numberRows, const 
     d->tableRowStyles.insert(row, numberRows, rowStyle);
 }
 
-void KoTableColumnAndRowStyleManager::removeRows(int row, int numberRows)
+void KTableColumnAndRowStyleManager::removeRows(int row, int numberRows)
 {
     Q_ASSERT(row >= 0);
     Q_ASSERT(numberRows >= 0);
@@ -189,7 +189,7 @@ void KoTableColumnAndRowStyleManager::removeRows(int row, int numberRows)
     d->tableRowStyles.remove(row, numberRows);
 }
 
-KoTableRowStyle KoTableColumnAndRowStyleManager::rowStyle(int row) const
+KoTableRowStyle KTableColumnAndRowStyleManager::rowStyle(int row) const
 {
     Q_ASSERT(row >= 0);
 
@@ -200,14 +200,14 @@ KoTableRowStyle KoTableColumnAndRowStyleManager::rowStyle(int row) const
     return d->tableRowStyles.value(row);
 }
 
-KTableCellStyle* KoTableColumnAndRowStyleManager::defaultColumnCellStyle(int column) const
+KTableCellStyle* KTableColumnAndRowStyleManager::defaultColumnCellStyle(int column) const
 {
     Q_ASSERT(column >= 0);
 
     return d->defaultColumnCellStyles.value(column);
 }
 
-void KoTableColumnAndRowStyleManager::setDefaultColumnCellStyle(int column, KTableCellStyle* cellStyle)
+void KTableColumnAndRowStyleManager::setDefaultColumnCellStyle(int column, KTableCellStyle* cellStyle)
 {
     Q_ASSERT(column >= 0);
 
@@ -221,14 +221,14 @@ void KoTableColumnAndRowStyleManager::setDefaultColumnCellStyle(int column, KTab
     d->defaultColumnCellStyles.append(cellStyle);
 }
 
-KTableCellStyle* KoTableColumnAndRowStyleManager::defaultRowCellStyle(int row) const
+KTableCellStyle* KTableColumnAndRowStyleManager::defaultRowCellStyle(int row) const
 {
     Q_ASSERT(row >= 0);
 
     return d->defaultRowCellStyles.value(row);
 }
 
-void KoTableColumnAndRowStyleManager::setDefaultRowCellStyle(int row, KTableCellStyle* cellStyle)
+void KTableColumnAndRowStyleManager::setDefaultRowCellStyle(int row, KTableCellStyle* cellStyle)
 {
     Q_ASSERT(row >= 0);
 

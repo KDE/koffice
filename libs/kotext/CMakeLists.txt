@@ -48,7 +48,7 @@ set(kotext_LIB_SRCS
     KoTextDebug.cpp
     KoTextPage.cpp
     KPageProvider.cpp
-    KoTableColumnAndRowStyleManager.cpp
+    KTableColumnAndRowStyleManager.cpp
     KoTextInlineRdf.cpp
     KoTextMeta.cpp
     KDocumentRdfBase.cpp

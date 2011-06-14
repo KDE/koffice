@@ -4,7 +4,7 @@
 
 #include <KStyleManager.h>
 #include <KParagraphStyle.h>
-#include <KoTableColumnAndRowStyleManager.h>
+#include <KTableColumnAndRowStyleManager.h>
 #include <KoTextDocument.h>
 #include <KTableCellStyle.h>
 #include <KoTableColumnStyle.h>
@@ -79,7 +79,7 @@ void TestTableLayout::initTest(int rows, int columns,
     Q_ASSERT(m_table);
 
     // Column and row style manager.
-    m_tableColumnAndRowStyleManager = KoTableColumnAndRowStyleManager::manager(m_table);
+    m_tableColumnAndRowStyleManager = KTableColumnAndRowStyleManager::manager(m_table);
 
     // Column styles.
     m_defaultColumnStyle.setRelativeColumnWidth(50.0);

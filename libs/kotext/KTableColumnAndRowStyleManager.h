@@ -43,21 +43,21 @@ class QTextTable;
  * TODO:
  *  - Eliminate duplicates.
  */
-class KOTEXT_EXPORT KoTableColumnAndRowStyleManager
+class KOTEXT_EXPORT KTableColumnAndRowStyleManager
 {
 public:
     /// constructor @see getManager for how to create a class the correct way
-    explicit KoTableColumnAndRowStyleManager();
+    explicit KTableColumnAndRowStyleManager();
 
-    virtual ~KoTableColumnAndRowStyleManager();
+    virtual ~KTableColumnAndRowStyleManager();
 
-    /// Convenience function to get the KoTableColumnAndRowStyleManager for a table (or create one)
-    static KoTableColumnAndRowStyleManager manager(QTextTable *table);
+    /// Convenience function to get the KTableColumnAndRowStyleManager for a table (or create one)
+    static KTableColumnAndRowStyleManager manager(QTextTable *table);
 
     /// Constructor
-    KoTableColumnAndRowStyleManager(const KoTableColumnAndRowStyleManager &rhs);
+    KTableColumnAndRowStyleManager(const KTableColumnAndRowStyleManager &rhs);
     /// assign operator
-    KoTableColumnAndRowStyleManager &operator=(const KoTableColumnAndRowStyleManager &rhs);
+    KTableColumnAndRowStyleManager &operator=(const KTableColumnAndRowStyleManager &rhs);
 
     /**
      * Set the column style for the column \a column to \a columnStyle.
@@ -166,6 +166,6 @@ private:
     QExplicitlySharedDataPointer<Private> d;
 };
 
-Q_DECLARE_METATYPE(KoTableColumnAndRowStyleManager)
+Q_DECLARE_METATYPE(KTableColumnAndRowStyleManager)
 
 #endif

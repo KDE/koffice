@@ -22,7 +22,7 @@
 #include <QTextCursor>
 #include <QTextTable>
 
-#include <KoTableColumnAndRowStyleManager.h>
+#include <KTableColumnAndRowStyleManager.h>
 #include "KDeletedRowData_p.h"
 #include "KDeletedCellData_p.h"
 
@@ -30,7 +30,7 @@
 KDeletedRowData::KDeletedRowData(QTextTable *table, int rowNumber)
 {
     this->row_number = rowNumber;
-    KoTableRowStyle rowStyle = KoTableColumnAndRowStyleManager::manager(table).rowStyle(rowNumber);
+    KoTableRowStyle rowStyle = KTableColumnAndRowStyleManager::manager(table).rowStyle(rowNumber);
     setRowStyle(rowStyle);
     storeDeletedCells(table);
 }

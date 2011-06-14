@@ -21,11 +21,11 @@
 
 #include "styles/KoTableColumnStyle.h"
 #include "styles/KoTableRowStyle.h"
-#include "../KoTableColumnAndRowStyleManager.h"
+#include "../KTableColumnAndRowStyleManager.h"
 
 void TestKoTableColumnAndRowStyleManager::testColumns()
 {
-    KoTableColumnAndRowStyleManager manager;
+    KTableColumnAndRowStyleManager manager;
 
     KoTableColumnStyle *style1 = new KoTableColumnStyle();
     KoTableColumnStyle *style2 = new KoTableColumnStyle();
@@ -55,7 +55,7 @@ void TestKoTableColumnAndRowStyleManager::testColumns()
 
 void TestKoTableColumnAndRowStyleManager::testRows()
 {
-    KoTableColumnAndRowStyleManager manager;
+    KTableColumnAndRowStyleManager manager;
 
     KoTableRowStyle *style1 = new KoTableRowStyle();
     KoTableRowStyle *style2 = new KoTableRowStyle();
