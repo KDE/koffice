@@ -23,7 +23,7 @@
 #include "KoSnapGuide.h"
 
 #include "KoPathTool_p.h"
-#include "commands/KoPathControlPointMoveCommand.h"
+#include "commands/KPathControlPointMoveCommand.h"
 
 KoPathControlPointMoveStrategy::KoPathControlPointMoveStrategy(KoPathTool *tool, const KoPathPointData &pointData, KoPathPoint::PointType type, const QPointF &pos)
         : KInteractionStrategy(tool)
@@ -49,7 +49,7 @@ void KoPathControlPointMoveStrategy::handleMouseMove(const QPointF &mouseLocatio
 
     m_move += move;
 
-    KoPathControlPointMoveCommand cmd(m_pointData, move, m_pointType);
+    KPathControlPointMoveCommand cmd(m_pointData, move, m_pointType);
     cmd.redo();
 }
 
@@ -57,7 +57,7 @@ QUndoCommand* KoPathControlPointMoveStrategy::createCommand(QUndoCommand *parent
 {
     QUndoCommand *cmd = 0;
     if (!m_move.isNull()) {
-        cmd = new KoPathControlPointMoveCommand(m_pointData, m_move, m_pointType, parent);
+        cmd = new KPathControlPointMoveCommand(m_pointData, m_move, m_pointType, parent);
         cmd->undo();
     }
     return cmd;

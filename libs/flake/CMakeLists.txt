@@ -122,7 +122,7 @@ set(flake_SRCS
     commands/KoShapeKeepAspectRatioCommand.cpp
     commands/KPathBaseCommand.cpp
     commands/KoPathPointMoveCommand.cpp
-    commands/KoPathControlPointMoveCommand.cpp
+    commands/KPathControlPointMoveCommand.cpp
     commands/KoPathPointTypeCommand.cpp
     commands/KoPathPointRemoveCommand.cpp
     commands/KoPathPointInsertCommand.cpp
@@ -204,7 +204,7 @@ install(
     commands/KEventActionRemoveCommand.h
     commands/KParameterToPathCommand.h
     commands/KPathCombineCommand.h
-    commands/KoPathControlPointMoveCommand.h
+    commands/KPathControlPointMoveCommand.h
     commands/KoPathFillRuleCommand.h
     commands/KoPathPointInsertCommand.h
     commands/KoPathPointMergeCommand.h

@@ -18,11 +18,11 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoPathControlPointMoveCommand.h"
+#include "KPathControlPointMoveCommand.h"
 #include <klocale.h>
 #include <math.h>
 
-KoPathControlPointMoveCommand::KoPathControlPointMoveCommand(
+KPathControlPointMoveCommand::KPathControlPointMoveCommand(
     const KoPathPointData &pointData,
     const QPointF &offset,
     KoPathPoint::PointType pointType,
@@ -41,7 +41,7 @@ KoPathControlPointMoveCommand::KoPathControlPointMoveCommand(
     setText(i18n("Move Control Point"));
 }
 
-void KoPathControlPointMoveCommand::redo()
+void KPathControlPointMoveCommand::redo()
 {
     QUndoCommand::redo();
     KoPathShape * pathShape = m_pointData.pathShape;
@@ -86,7 +86,7 @@ void KoPathControlPointMoveCommand::redo()
     }
 }
 
-void KoPathControlPointMoveCommand::undo()
+void KPathControlPointMoveCommand::undo()
 {
     QUndoCommand::undo();
     m_offset *= -1.0;
