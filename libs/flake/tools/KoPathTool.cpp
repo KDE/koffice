@@ -33,7 +33,7 @@
 #include "commands/KPathPointTypeCommand_p.h"
 #include "commands/KPathPointInsertCommand.h"
 #include "commands/KPathPointRemoveCommand.h"
-#include "commands/KoPathSegmentTypeCommand.h"
+#include "commands/KPathSegmentTypeCommand.h"
 #include "commands/KPathBreakAtPointCommand_p.h"
 #include "commands/KPathSegmentBreakCommand_p.h"
 #include "commands/KParameterToPathCommand.h"
@@ -289,7 +289,7 @@ void KoPathTool::segmentToLine()
     if (m_pointSelection.size() > 1) {
         QList<KPathPointData> segments(m_pointSelection.selectedSegmentsData());
         if (segments.size() > 0) {
-            d->canvas->addCommand(new KoPathSegmentTypeCommand(segments, KoPathSegmentTypeCommand::Line));
+            d->canvas->addCommand(new KPathSegmentTypeCommand(segments, KPathSegmentTypeCommand::Line));
             updateActions();
         }
     }
@@ -301,7 +301,7 @@ void KoPathTool::segmentToCurve()
     if (m_pointSelection.size() > 1) {
         QList<KPathPointData> segments(m_pointSelection.selectedSegmentsData());
         if (segments.size() > 0) {
-            d->canvas->addCommand(new KoPathSegmentTypeCommand(segments, KoPathSegmentTypeCommand::Curve));
+            d->canvas->addCommand(new KPathSegmentTypeCommand(segments, KPathSegmentTypeCommand::Curve));
             updateActions();
         }
     }

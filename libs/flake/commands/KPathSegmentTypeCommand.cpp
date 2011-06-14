@@ -18,10 +18,10 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoPathSegmentTypeCommand.h"
+#include "KPathSegmentTypeCommand.h"
 #include <klocale.h>
 
-KoPathSegmentTypeCommand::KoPathSegmentTypeCommand(const KPathPointData & pointData, SegmentType segmentType, QUndoCommand *parent)
+KPathSegmentTypeCommand::KPathSegmentTypeCommand(const KPathPointData & pointData, SegmentType segmentType, QUndoCommand *parent)
 : QUndoCommand(parent)
 , m_segmentType(segmentType)
 {
@@ -30,7 +30,7 @@ KoPathSegmentTypeCommand::KoPathSegmentTypeCommand(const KPathPointData & pointD
     initialize(pointDataList);
 }
 
-KoPathSegmentTypeCommand::KoPathSegmentTypeCommand(const QList<KPathPointData> & pointDataList, SegmentType segmentType,
+KPathSegmentTypeCommand::KPathSegmentTypeCommand(const QList<KPathPointData> & pointDataList, SegmentType segmentType,
         QUndoCommand *parent)
         : QUndoCommand(parent)
         , m_segmentType(segmentType)
@@ -38,11 +38,11 @@ KoPathSegmentTypeCommand::KoPathSegmentTypeCommand(const QList<KPathPointData> &
     initialize(pointDataList);
 }
 
-KoPathSegmentTypeCommand::~KoPathSegmentTypeCommand()
+KPathSegmentTypeCommand::~KPathSegmentTypeCommand()
 {
 }
 
-void KoPathSegmentTypeCommand::redo()
+void KPathSegmentTypeCommand::redo()
 {
     QUndoCommand::redo();
     QList<KPathPointData>::const_iterator it(m_pointDataList.constBegin());
@@ -68,7 +68,7 @@ void KoPathSegmentTypeCommand::redo()
     }
 }
 
-void KoPathSegmentTypeCommand::undo()
+void KPathSegmentTypeCommand::undo()
 {
     QUndoCommand::undo();
     for (int i = 0; i < m_pointDataList.size(); ++i) {
@@ -95,7 +95,7 @@ void KoPathSegmentTypeCommand::undo()
     }
 }
 
-void KoPathSegmentTypeCommand::initialize(const QList<KPathPointData> & pointDataList)
+void KPathSegmentTypeCommand::initialize(const QList<KPathPointData> & pointDataList)
 {
     QList<KPathPointData>::const_iterator it(pointDataList.begin());
     for (; it != pointDataList.end(); ++it) {

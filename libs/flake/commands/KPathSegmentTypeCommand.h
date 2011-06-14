@@ -29,7 +29,7 @@
 #include "flake_export.h"
 
 /// The undo / redo command for changing segments to curves/lines
-class FLAKE_TEST_EXPORT KoPathSegmentTypeCommand : public QUndoCommand
+class FLAKE_TEST_EXPORT KPathSegmentTypeCommand : public QUndoCommand
 {
 public:
     /// Segment Types
@@ -44,7 +44,7 @@ public:
     * @param segmentType to which the segment should be changed to
     * @param parent the parent command used for macro commands
     */
-    KoPathSegmentTypeCommand(const KPathPointData &pointData, SegmentType segmentType, QUndoCommand *parent = 0);
+    KPathSegmentTypeCommand(const KPathPointData &pointData, SegmentType segmentType, QUndoCommand *parent = 0);
 
     /**
      * Command for changing the segment type (curve/line)
@@ -52,8 +52,8 @@ public:
      * @param segmentType to which the segments should be changed to
      * @param parent the parent command used for macro commands
      */
-    KoPathSegmentTypeCommand(const QList<KPathPointData> &pointDataList, SegmentType segmentType, QUndoCommand *parent = 0);
-    ~KoPathSegmentTypeCommand();
+    KPathSegmentTypeCommand(const QList<KPathPointData> &pointDataList, SegmentType segmentType, QUndoCommand *parent = 0);
+    ~KPathSegmentTypeCommand();
 
     /// redo the command
     void redo();

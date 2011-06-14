@@ -23,7 +23,7 @@
 #include "KoPathTool_p.h"
 #include "KoSnapGuide.h"
 #include "commands/KPathControlPointMoveCommand.h"
-#include "commands/KoPathSegmentTypeCommand.h"
+#include "commands/KPathSegmentTypeCommand.h"
 #include <KCanvasBase.h>
 #include <KLocale>
 #include <limits>
@@ -68,7 +68,7 @@ void KPathSegmentChangeStrategy::handleMouseMove(const QPointF &mouseLocation, Q
 
     if (m_segment.degree() == 1) {
         // line segment is converted to a curve
-        KoPathSegmentTypeCommand cmd(m_pointData1, KoPathSegmentTypeCommand::Curve);
+        KPathSegmentTypeCommand cmd(m_pointData1, KPathSegmentTypeCommand::Curve);
         cmd.redo();
     }
 
@@ -141,7 +141,7 @@ QUndoCommand* KPathSegmentChangeStrategy::createCommand(QUndoCommand *parent)
     if (m_originalSegmentDegree == 1) {
         m_segment.first()->removeControlPoint2();
         m_segment.second()->removeControlPoint1();
-        new KoPathSegmentTypeCommand(m_pointData1, KoPathSegmentTypeCommand::Curve, cmd);
+        new KPathSegmentTypeCommand(m_pointData1, KPathSegmentTypeCommand::Curve, cmd);
     }
 
     if (hasControlPoint2) {

@@ -18,7 +18,7 @@
  */
 
 #include "TestSegmentTypeCommand.h"
-#include "KoPathSegmentTypeCommand.h"
+#include "KPathSegmentTypeCommand.h"
 
 void TestSegmentTypeCommand::changeToCurve()
 {
@@ -33,7 +33,7 @@ void TestSegmentTypeCommand::changeToCurve()
     // get first segment
     KPathSegment s = path.segmentByIndex(KoPathPointIndex(0,0));
 
-    KoPathSegmentTypeCommand cmd(segments, KoPathSegmentTypeCommand::Curve);
+    KPathSegmentTypeCommand cmd(segments, KPathSegmentTypeCommand::Curve);
 
     QVERIFY(!s.first()->activeControlPoint2());
     QVERIFY(!s.second()->activeControlPoint1());
@@ -62,7 +62,7 @@ void TestSegmentTypeCommand::changeToLine()
     // get first segment
     KPathSegment s = path.segmentByIndex(KoPathPointIndex(0,0));
 
-    KoPathSegmentTypeCommand cmd(segments, KoPathSegmentTypeCommand::Line);
+    KPathSegmentTypeCommand cmd(segments, KPathSegmentTypeCommand::Line);
 
     QVERIFY(s.first()->activeControlPoint2());
     QVERIFY(s.second()->activeControlPoint1());
