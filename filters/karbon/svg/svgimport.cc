@@ -30,7 +30,7 @@
 #include <KarbonDocument.h>
 
 #include <KShape.h>
-#include <KoShapeLayer.h>
+#include <KShapeLayer.h>
 #include <KShapeGroup.h>
 #include <KoFilterChain.h>
 #include <commands/KoShapeUngroupCommand.h>
@@ -155,7 +155,7 @@ void SvgImport::buildDocument(const QList<KShape*> &toplevelShapes, const QList<
         m_document->add(shape);
     }
 
-    KoShapeLayer * oldLayer = 0;
+    KShapeLayer * oldLayer = 0;
     if (m_document->layers().count())
         oldLayer = m_document->layers().first();
 
@@ -167,7 +167,7 @@ void SvgImport::buildDocument(const QList<KShape*> &toplevelShapes, const QList<
             KoShapeUngroupCommand cmd(group, children, QList<KShape*>() << group);
             cmd.redo();
 
-            KoShapeLayer * layer = new KoShapeLayer();
+            KShapeLayer * layer = new KShapeLayer();
             foreach(KShape * child, children) {
                 m_document->add(child);
                 layer->addShape(child);
@@ -180,7 +180,7 @@ void SvgImport::buildDocument(const QList<KShape*> &toplevelShapes, const QList<
             delete group;
         }
     } else {
-        KoShapeLayer * layer = new KoShapeLayer();
+        KShapeLayer * layer = new KShapeLayer();
         foreach(KShape * shape, toplevelShapes) {
             m_document->add(shape);
             layer->addShape(shape);

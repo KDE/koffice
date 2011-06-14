@@ -24,7 +24,7 @@
 #include "KoShapeLoadingContext.h"
 #include "KoShapeSavingContext.h"
 #include "KShapeGroup.h"
-#include "KoShapeLayer.h"
+#include "KShapeLayer.h"
 #include "KShapeConnection.h"
 #include "KShapeConnection_p.h"
 
@@ -253,9 +253,9 @@ KShape *KoShapeRegistry::Private::createShapeInternal(const KXmlElement &fullEle
             if (loaded) {
                 // we return the top-level most shape as thats the one that we'll have to
                 // add to the KoShapeManager for painting later (and also to avoid memory leaks)
-                // but don't go past a KoShapeLayer as KShape adds those from the context
+                // but don't go past a KShapeLayer as KShape adds those from the context
                 // during loading and those are already added.
-                while (shape->parent() && dynamic_cast<KoShapeLayer*>(shape->parent()) == 0)
+                while (shape->parent() && dynamic_cast<KShapeLayer*>(shape->parent()) == 0)
                     shape = shape->parent();
                 return shape;
             }

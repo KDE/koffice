@@ -32,7 +32,7 @@
 #include "pageeffects/SCPageEffectRunner.h"
 #include "pageeffects/SCPageEffect.h"
 
-#include <KoShapeLayer.h>
+#include <KShapeLayer.h>
 #include <KoPAMasterPage.h>
 #include <KSelection.h>
 
@@ -256,7 +256,7 @@ void SCAnimationDirector::updateActivePage(KoPAPageBase * page)
         m_canvas->shapeManager()->setShapes(shapes, KoShapeManager::AddWithoutRepaint);
         //Make the top most layer active
         if (!shapes.isEmpty()) {
-            KoShapeLayer* layer = dynamic_cast<KoShapeLayer*>(shapes.last());
+            KShapeLayer* layer = dynamic_cast<KShapeLayer*>(shapes.last());
             m_canvas->shapeManager()->selection()->setActiveLayer(layer);
         }
 
@@ -269,7 +269,7 @@ void SCAnimationDirector::updateActivePage(KoPAPageBase * page)
         m_canvas->masterShapeManager()->setShapes(masterShapes, KoShapeManager::AddWithoutRepaint);
         // Make the top most layer active
         if (!masterShapes.isEmpty()) {
-            KoShapeLayer* layer = dynamic_cast<KoShapeLayer*>(masterShapes.last());
+            KShapeLayer* layer = dynamic_cast<KShapeLayer*>(masterShapes.last());
             m_canvas->masterShapeManager()->selection()->setActiveLayer(layer);
         }
     }

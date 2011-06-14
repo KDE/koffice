@@ -20,7 +20,7 @@
 
 #include "KShapeGroup.h"
 #include "KShapeContainerModel.h"
-#include "KoShapeLayer.h"
+#include "KShapeLayer.h"
 #include "SimpleShapeContainerModel_p.h"
 #include "KoShapeSavingContext.h"
 #include "KoShapeLoadingContext.h"
@@ -89,21 +89,21 @@ bool KShapeGroup::loadOdf(const KXmlElement & element, KoShapeLoadingContext &co
     loadOdfAttributes(element, context, OdfMandatories | OdfAdditionalAttributes | OdfCommonChildElements);
 
     KXmlElement child;
-    QMap<KoShapeLayer*, int> usedLayers;
+    QMap<KShapeLayer*, int> usedLayers;
     forEachElement(child, element) {
         KShape * shape = KoShapeRegistry::instance()->createShapeFromOdf(child, context);
         if (shape) {
-            KoShapeLayer *layer = dynamic_cast<KoShapeLayer*>(shape->parent());
+            KShapeLayer *layer = dynamic_cast<KShapeLayer*>(shape->parent());
             if (layer) {
                 usedLayers[layer]++;
             }
             addShape(shape);
         }
     }
-    KoShapeLayer *parent = 0;
+    KShapeLayer *parent = 0;
     int maxUseCount = 0;
     // find most used layer and use this as parent for the group
-    for (QMap<KoShapeLayer*, int>::const_iterator it(usedLayers.constBegin()); it != usedLayers.constEnd(); ++it) {
+    for (QMap<KShapeLayer*, int>::const_iterator it(usedLayers.constBegin()); it != usedLayers.constEnd(); ++it) {
         if (it.value() > maxUseCount) {
             maxUseCount = it.value();
             parent = it.key();

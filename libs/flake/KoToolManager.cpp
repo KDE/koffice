@@ -30,7 +30,7 @@
 #include "KCanvasController.h"
 #include "KCanvasController_p.h"
 #include "KShape.h"
-#include "KoShapeLayer.h"
+#include "KShapeLayer.h"
 #include "KoShapeRegistry.h"
 #include "KoShapeManager.h"
 #include "KCanvasBase.h"
@@ -465,8 +465,8 @@ void KoToolManager::Private::attachCanvas(KCanvasController *controller)
     connect(connector, SIGNAL(selectionChanged(QList<KShape*>)), q,
             SLOT(selectionChanged(QList<KShape*>)));
     connect(controller->canvas()->shapeManager()->selection(),
-            SIGNAL(currentLayerChanged(const KoShapeLayer*)),
-            q, SLOT(currentLayerChanged(const KoShapeLayer*)));
+            SIGNAL(currentLayerChanged(const KShapeLayer*)),
+            q, SLOT(currentLayerChanged(const KShapeLayer*)));
 
     canvasData->canvas->priv()->activate();
 
@@ -586,7 +586,7 @@ void KoToolManager::Private::selectionChanged(QList<KShape*> shapes)
     emit q->toolCodesSelected(canvasData->canvas, types);
 }
 
-void KoToolManager::Private::currentLayerChanged(const KoShapeLayer *layer)
+void KoToolManager::Private::currentLayerChanged(const KShapeLayer *layer)
 {
     kDebug(30006) << "layer changed to" << layer;
 

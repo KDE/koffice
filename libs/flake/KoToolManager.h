@@ -35,7 +35,7 @@ class KCreateShapesTool;
 class KActionCollection;
 class KShape;
 class QToolButton;
-class KoShapeLayer;
+class KShapeLayer;
 
 /**
  * This class manages the activation and deactivation of tools for
@@ -215,7 +215,7 @@ signals:
      * @param canvas the currently active canvas.
      * @param layer the layer that is selected.
      */
-    void currentLayerChanged(const KCanvasController *canvas, const KoShapeLayer *layer);
+    void currentLayerChanged(const KCanvasController *canvas, const KShapeLayer *layer);
 
     /**
      * Every time a new input device gets used by a tool, this event is emitted.
@@ -247,7 +247,7 @@ private:
     Q_PRIVATE_SLOT(d, void updateCursor(const QCursor &cursor))
     Q_PRIVATE_SLOT(d, void switchBackRequested())
     Q_PRIVATE_SLOT(d, void selectionChanged(QList<KShape*> shapes))
-    Q_PRIVATE_SLOT(d, void currentLayerChanged(const KoShapeLayer *layer))
+    Q_PRIVATE_SLOT(d, void currentLayerChanged(const KShapeLayer *layer))
     Q_PRIVATE_SLOT(d, void switchToolTemporaryRequested(const QString &id))
 
     Private *const d;

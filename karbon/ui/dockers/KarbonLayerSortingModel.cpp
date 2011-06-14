@@ -20,7 +20,7 @@
 #include "KarbonLayerSortingModel.h"
 #include "KarbonDocument.h"
 #include <KShape.h>
-#include <KoShapeLayer.h>
+#include <KShapeLayer.h>
 #include <KShapeContainer.h>
 
 KarbonLayerSortingModel::KarbonLayerSortingModel(QObject * parent)
@@ -48,8 +48,8 @@ bool KarbonLayerSortingModel::lessThan(const QModelIndex &left, const QModelInde
         return false;
 
     if (m_document) {
-        KoShapeLayer * leftLayer = dynamic_cast<KoShapeLayer*>(leftShape);
-        KoShapeLayer * rightLayer = dynamic_cast<KoShapeLayer*>(rightShape);
+        KShapeLayer * leftLayer = dynamic_cast<KShapeLayer*>(leftShape);
+        KShapeLayer * rightLayer = dynamic_cast<KShapeLayer*>(rightShape);
         if (leftLayer && rightLayer) {
             return m_document->layerPos(leftLayer) < m_document->layerPos(rightLayer);
         } else {

@@ -24,7 +24,7 @@
 
 #include <KoShapePainter.h>
 #include <KoShapeSavingContext.h>
-#include <KoShapeLayer.h>
+#include <KShapeLayer.h>
 #include <KOdfLoadingContext.h>
 #include <KOdfStyleStack.h>
 #include <KXmlWriter.h>

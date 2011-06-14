@@ -60,7 +60,7 @@
 #include <KoPAPageInsertCommand.h>
 #include <KoDocumentInfo.h>
 #include <KoShapeRegistry.h>
-#include <KoShapeLayer.h>
+#include <KShapeLayer.h>
 
 #include <QtGui/QDesktopWidget>
 

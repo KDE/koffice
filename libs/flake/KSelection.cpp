@@ -310,14 +310,14 @@ KShape *KSelection::firstSelectedShape(KoFlake::SelectionType strip) const
     return *(set.begin());
 }
 
-void KSelection::setActiveLayer(KoShapeLayer *layer)
+void KSelection::setActiveLayer(KShapeLayer *layer)
 {
     Q_D(KSelection);
     d->activeLayer = layer;
     emit currentLayerChanged(layer);
 }
 
-KoShapeLayer* KSelection::activeLayer() const
+KShapeLayer* KSelection::activeLayer() const
 {
     Q_D(const KSelection);
     return d->activeLayer;

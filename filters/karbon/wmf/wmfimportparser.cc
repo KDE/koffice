@@ -23,7 +23,7 @@
 
 #include <KPathShape.h>
 #include <KLineBorder.h>
-#include <KoShapeLayer.h>
+#include <KShapeLayer.h>
 #include <KImageData.h>
 #include <KImageCollection.h>
 #include <KColorBackground.h>
@@ -55,10 +55,10 @@ bool WMFImportParser::play(KarbonDocument& doc)
     if (! KoWmfRead::play())
         return false;
 
-    KoShapeLayer * layer = 0;
+    KShapeLayer * layer = 0;
     // check if we have to insert a default layer
     if (mDoc->layers().count() == 0) {
-        layer = new KoShapeLayer();
+        layer = new KShapeLayer();
         mDoc->insertLayer(layer);
     } else
         layer = mDoc->layers().first();

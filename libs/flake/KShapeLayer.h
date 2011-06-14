@@ -31,16 +31,16 @@ class KoShapeLayerPrivate;
  * in a document.
  * A layer is always invisible and unselectable.
  */
-class FLAKE_EXPORT KoShapeLayer : public KShapeContainer
+class FLAKE_EXPORT KShapeLayer : public KShapeContainer
 {
 public:
     /// The default constructor
-    KoShapeLayer();
+    KShapeLayer();
     /**
      * Constructor with custom model
      * @param model the custom modem
      */
-    KoShapeLayer(KShapeContainerModel *model);
+    KShapeLayer(KShapeContainerModel *model);
 
     virtual bool hitTest(const QPointF &position) const;
     virtual QRectF boundingRect() const;
@@ -48,7 +48,7 @@ public:
     virtual bool loadOdf(const KXmlElement & element, KoShapeLoadingContext &context);
 
 private:
-    Q_DECLARE_PRIVATE(KoShapeLayer)
+    Q_DECLARE_PRIVATE(KShapeLayer)
 };
 
 #endif // __KOSHAPELAYER_H__

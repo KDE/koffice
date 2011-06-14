@@ -20,7 +20,7 @@
 #include "KarbonDocumentMergeCommand.h"
 #include "KarbonPart.h"
 #include "KarbonDocument.h"
-#include "KoShapeLayer.h"
+#include "KShapeLayer.h"
 #include <KLocale>
 
 class KarbonDocumentMergeCommand::Private
@@ -39,7 +39,7 @@ public:
     }
 
     KarbonPart * targetPart;
-    QList<KoShapeLayer*> layers;
+    QList<KShapeLayer*> layers;
     QList<KShape*> shapes;
     bool hasMerged;
 };
@@ -50,7 +50,7 @@ KarbonDocumentMergeCommand::KarbonDocumentMergeCommand(KarbonPart * targetPart, 
     d->targetPart = targetPart;
     d->layers = sourcePart->document().layers();
     d->shapes = sourcePart->document().shapes();
-    foreach(KoShapeLayer * layer, d->layers) {
+    foreach(KShapeLayer * layer, d->layers) {
         sourcePart->removeShape(layer);
     }
     foreach(KShape * shape, d->shapes) {
@@ -67,7 +67,7 @@ KarbonDocumentMergeCommand::~KarbonDocumentMergeCommand()
 void KarbonDocumentMergeCommand::redo()
 {
     if (!d->hasMerged) {
-        foreach(KoShapeLayer * layer, d->layers) {
+        foreach(KShapeLayer * layer, d->layers) {
             d->targetPart->addShape(layer);
         }
         foreach(KShape * shape, d->shapes) {
@@ -84,7 +84,7 @@ void KarbonDocumentMergeCommand::undo()
     QUndoCommand::undo();
 
     if (d->hasMerged) {
-        foreach(KoShapeLayer * layer, d->layers) {
+        foreach(KShapeLayer * layer, d->layers) {
             d->targetPart->removeShape(layer);
         }
         foreach(KShape * shape, d->shapes) {

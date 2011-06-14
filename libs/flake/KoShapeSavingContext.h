@@ -35,7 +35,7 @@ class KOdfGenericStyles;
 class KDataCenterBase;
 class KOdfEmbeddedDocumentSaver;
 class KImageData;
-class KoShapeLayer;
+class KShapeLayer;
 class KOdfStore;
 class KoSharedSavingData;
 class KoShapeSavingContextPrivate;
@@ -177,7 +177,7 @@ public:
      * Adds a layer to save into a layer-set in styles.xml according to 9.1.2/9.1.3 odf spec
      * @param layer the layer to save
      */
-    void addLayerForSaving(KoShapeLayer *layer);
+    void addLayerForSaving(KShapeLayer *layer);
 
     /**
      * Saves the layers added with addLayerForSaving to the xml writer

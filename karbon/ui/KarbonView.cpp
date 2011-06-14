@@ -95,7 +95,7 @@
 #include <KoRulerController.h>
 #include <KDockRegistry.h>
 #include <KoDockerManager.h>
-#include <KoShapeLayer.h>
+#include <KShapeLayer.h>
 #include <KColorBackground.h>
 #include <KCutController.h>
 #include <KCopyController.h>
@@ -1128,7 +1128,7 @@ void KarbonView::selectionChanged()
                 else
                     break;
             }
-            KoShapeLayer * layer = dynamic_cast<KoShapeLayer*>(parent);
+            KShapeLayer * layer = dynamic_cast<KShapeLayer*>(parent);
             if (layer)
                 selection->setActiveLayer(layer);
         }

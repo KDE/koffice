@@ -30,7 +30,7 @@
 #include <KOdfXmlNS.h>
 #include <KOdfPageLayoutData.h>
 #include <KOdfLoadingContext.h>
-#include <KoShapeLayer.h>
+#include <KShapeLayer.h>
 #include <KoShapeRegistry.h>
 #include <KOdfStyleStack.h>
 #include <KShapeBackground.h>
@@ -39,7 +39,7 @@ KoPAPageBase::KoPAPageBase()
 : KShapeContainer(new KoPAPageContainerModel())
 {
     // Add a default layer
-    KoShapeLayer* layer = new KoShapeLayer;
+    KShapeLayer* layer = new KShapeLayer;
     addShape(layer);
 }
 
@@ -77,7 +77,7 @@ void KoPAPageBase::saveOdfLayers(KoPASavingContext &paContext) const
     QList<KShape*> shapes(this->shapes());
     qSort(shapes.begin(), shapes.end(), KShape::compareShapeZIndex);
     foreach(KShape* shape, shapes) {
-        KoShapeLayer *layer = dynamic_cast<KoShapeLayer*>(shape);
+        KShapeLayer *layer = dynamic_cast<KShapeLayer*>(shape);
         if (layer) {
             paContext.addLayerForSaving(layer);
         }
@@ -155,13 +155,13 @@ bool KoPAPageBase::loadOdf(const KXmlElement &element, KoShapeLoadingContext &lo
     bool first = true;
     KXmlElement layerElement;
     forEachElement (layerElement, usedPageLayerSet) {
-        KoShapeLayer * layer = 0;
+        KShapeLayer * layer = 0;
         if (first) {
             first = false;
-            layer = dynamic_cast<KoShapeLayer *>(shapes().first());
+            layer = dynamic_cast<KShapeLayer *>(shapes().first());
             Q_ASSERT(layer);
         } else {
-            layer = new KoShapeLayer();
+            layer = new KShapeLayer();
             addShape(layer);
         }
         if (layer) {
@@ -170,7 +170,7 @@ bool KoPAPageBase::loadOdf(const KXmlElement &element, KoShapeLoadingContext &lo
         }
     }
 
-    KoShapeLayer *layer = dynamic_cast<KoShapeLayer *>(shapes().first());
+    KShapeLayer *layer = dynamic_cast<KShapeLayer *>(shapes().first());
     if (layer) {
         KXmlElement child;
         forEachElement(child, element) {

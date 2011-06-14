@@ -29,7 +29,7 @@
 #include "KCanvasController.h"
 #include "KoShapeManager.h"
 #include "KSelection.h"
-#include "KoShapeLayer.h"
+#include "KShapeLayer.h"
 
 #include <kdebug.h>
 #include <QTimer>
@@ -91,7 +91,7 @@ bool KoToolProxyPrivate::isActiveLayerEditable()
         return false;
 
     KoShapeManager * shapeManager = activeTool->canvas()->shapeManager();
-    KoShapeLayer * activeLayer = shapeManager->selection()->activeLayer();
+    KShapeLayer * activeLayer = shapeManager->selection()->activeLayer();
     if (activeLayer && !activeLayer->isEditable())
         return false;
     return true;

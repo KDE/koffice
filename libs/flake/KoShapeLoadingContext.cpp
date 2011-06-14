@@ -51,7 +51,7 @@ public:
         }
     }
     KOdfLoadingContext &context;
-    QMap<QString, KoShapeLayer*> layers;
+    QMap<QString, KShapeLayer*> layers;
     QMap<QString, KShape*> drawIds;
     QMap<QString, QPair<KShape *, QVariant> > subIds;
     QMap<QString, KoSharedLoadingData*> sharedData;
@@ -76,12 +76,12 @@ KOdfLoadingContext & KoShapeLoadingContext::odfLoadingContext()
     return d->context;
 }
 
-KoShapeLayer * KoShapeLoadingContext::layer(const QString & layerName)
+KShapeLayer * KoShapeLoadingContext::layer(const QString & layerName)
 {
     return d->layers.value(layerName, 0);
 }
 
-void KoShapeLoadingContext::addLayer(KoShapeLayer * layer, const QString & layerName)
+void KoShapeLoadingContext::addLayer(KShapeLayer * layer, const QString & layerName)
 {
     d->layers[ layerName ] = layer;
 }

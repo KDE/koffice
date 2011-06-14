@@ -43,7 +43,7 @@
 #include <KOdfStylesReader.h>
 #include <KOdfStyleStack.h>
 #include <KOdfGenericStyle.h>
-#include <KoShapeLayer.h>
+#include <KShapeLayer.h>
 #include <KoPALoadingContext.h>
 #include <KoPASavingContext.h>
 

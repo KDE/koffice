@@ -32,7 +32,7 @@
 class QToolButton;
 class KCanvasController;
 class KCanvasBase;
-class KoShapeLayer;
+class KShapeLayer;
 
 /**
  * KoToolBox is a dock widget that can order tools according to type and
@@ -98,7 +98,7 @@ public slots:
     void setFloating(bool v);
 
 private slots:
-    void setCurrentLayer(const KCanvasController *canvas, const KoShapeLayer* newLayer);
+    void setCurrentLayer(const KCanvasController *canvas, const KShapeLayer* newLayer);
 
 protected:
     void paintEvent(QPaintEvent *event);

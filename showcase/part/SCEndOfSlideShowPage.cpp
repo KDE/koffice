@@ -20,7 +20,7 @@
 #include "SCEndOfSlideShowPage.h"
 
 #include <klocale.h>
-#include <KoShapeLayer.h>
+#include <KShapeLayer.h>
 #include <KShapeFactoryBase.h>
 #include <KoShapeRegistry.h>
 #include <KColorBackground.h>
@@ -53,7 +53,7 @@ SCEndOfSlideShowPage::SCEndOfSlideShowPage(const QRectF &screenRect, SCDocument 
     masterPage()->setPageLayout(pageLayout);
     masterPage()->setBackground(new KColorBackground(Qt::black));
 
-    KoShapeLayer* layer = new KoShapeLayer;
+    KShapeLayer* layer = new KShapeLayer;
     addShape(layer);
 
     KShapeFactoryBase *factory = KoShapeRegistry::instance()->value("TextShapeID");

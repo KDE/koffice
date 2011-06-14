@@ -41,7 +41,7 @@
 #include <KoShapeSavingContext.h>
 #include <KResourceManager.h>
 #include <KoShapeLoadingContext.h>
-#include <KoShapeLayer.h>
+#include <KShapeLayer.h>
 #include <KoShapeRegistry.h>
 #include <KOdfStorageDevice.h>
 #include <KOdfWriteStore.h>
@@ -81,7 +81,7 @@ public:
     QSizeF pageSize; ///< the documents page size
 
     QList<KShape*> objects;     ///< The list of all object of the document.
-    QList<KoShapeLayer*> layers; ///< The layers in this document.
+    QList<KShapeLayer*> layers; ///< The layers in this document.
 
     QMap<QString, KDataCenterBase*> dataCenterMap;
     bool hasExternalDataCenterMap;
@@ -92,7 +92,7 @@ KarbonDocument::KarbonDocument()
         : d(new Private)
 {
     // create a layer. we need at least one:
-    insertLayer(new KoShapeLayer());
+    insertLayer(new KShapeLayer());
 }
 
 KarbonDocument::KarbonDocument(const KarbonDocument& document)
@@ -107,7 +107,7 @@ KarbonDocument::~KarbonDocument()
     delete d;
 }
 
-void KarbonDocument::insertLayer(KoShapeLayer* layer)
+void KarbonDocument::insertLayer(KShapeLayer* layer)
 {
     if (!d->layers.contains(layer)) {
         if (d->layers.count()) {
@@ -119,30 +119,30 @@ void KarbonDocument::insertLayer(KoShapeLayer* layer)
     }
 }
 
-void KarbonDocument::removeLayer(KoShapeLayer* layer)
+void KarbonDocument::removeLayer(KShapeLayer* layer)
 {
     d->layers.removeAt(d->layers.indexOf(layer));
     if (d->layers.count() == 0)
-        d->layers.append(new KoShapeLayer());
+        d->layers.append(new KShapeLayer());
 }
 
-bool KarbonDocument::canRaiseLayer(KoShapeLayer* layer)
+bool KarbonDocument::canRaiseLayer(KShapeLayer* layer)
 {
     int pos = d->layers.indexOf(layer);
     return (pos != int(d->layers.count()) - 1 && pos >= 0);
 }
 
-bool KarbonDocument::canLowerLayer(KoShapeLayer* layer)
+bool KarbonDocument::canLowerLayer(KShapeLayer* layer)
 {
     int pos = d->layers.indexOf(layer);
     return (pos > 0);
 }
 
-void KarbonDocument::raiseLayer(KoShapeLayer* layer)
+void KarbonDocument::raiseLayer(KShapeLayer* layer)
 {
     int pos = d->layers.indexOf(layer);
     if (pos != int(d->layers.count()) - 1 && pos >= 0) {
-        KoShapeLayer * layerAbove = d->layers.at(pos + 1);
+        KShapeLayer * layerAbove = d->layers.at(pos + 1);
         int lowerZIndex = layer->zIndex();
         int upperZIndex = layerAbove->zIndex();
         layer->setZIndex(upperZIndex);
@@ -151,11 +151,11 @@ void KarbonDocument::raiseLayer(KoShapeLayer* layer)
     }
 }
 
-void KarbonDocument::lowerLayer(KoShapeLayer* layer)
+void KarbonDocument::lowerLayer(KShapeLayer* layer)
 {
     int pos = d->layers.indexOf(layer);
     if (pos > 0) {
-        KoShapeLayer * layerBelow = d->layers.at(pos - 1);
+        KShapeLayer * layerBelow = d->layers.at(pos - 1);
         int upperZIndex = layer->zIndex();
         int lowerZIndex = layerBelow->zIndex();
         layer->setZIndex(lowerZIndex);
@@ -164,7 +164,7 @@ void KarbonDocument::lowerLayer(KoShapeLayer* layer)
     }
 }
 
-int KarbonDocument::layerPos(KoShapeLayer* layer)
+int KarbonDocument::layerPos(KShapeLayer* layer)
 {
     return d->layers.indexOf(layer);
 }
@@ -187,12 +187,12 @@ void KarbonDocument::saveOasis(KoShapeSavingContext &context) const
     context.xmlWriter().addAttribute("draw:id", "page1");
     context.xmlWriter().addAttribute("draw:master-page-name", "Default");
 
-    foreach(KoShapeLayer *layer, d->layers) {
+    foreach(KShapeLayer *layer, d->layers) {
         context.addLayerForSaving(layer);
     }
     context.saveLayerSet(context.xmlWriter());
 
-    foreach(KoShapeLayer *layer, d->layers) {
+    foreach(KShapeLayer *layer, d->layers) {
         layer->saveOdf(context);
         context.writeConnectors();
     }
@@ -215,16 +215,16 @@ bool KarbonDocument::loadOasis(const KXmlElement &element, KoShapeLoadingContext
 
     KXmlElement layerElement;
     forEachElement(layerElement, usedPageLayerSet) {
-        KoShapeLayer * l = new KoShapeLayer();
+        KShapeLayer * l = new KShapeLayer();
         if (l->loadOdf(layerElement, context))
             insertLayer(l);
     }
 
-    KoShapeLayer * defaultLayer = 0;
+    KShapeLayer * defaultLayer = 0;
 
     // check if we have to insert a default layer
     if (d->layers.count() == 0)
-        defaultLayer = new KoShapeLayer();
+        defaultLayer = new KShapeLayer();
 
     KXmlElement child;
     forEachElement(child, element) {
@@ -239,7 +239,7 @@ bool KarbonDocument::loadOasis(const KXmlElement &element, KoShapeLoadingContext
     foreach(KShape * shape, d->objects) {
         if (! shape->parent()) {
             if (! defaultLayer)
-                defaultLayer = new KoShapeLayer();
+                defaultLayer = new KShapeLayer();
 
             defaultLayer->addShape(shape);
         }
@@ -271,13 +271,13 @@ bool KarbonDocument::loadOasis(const KXmlElement &element, KoShapeLoadingContext
                 masterPageShapes.append( shape );
         }
 
-        KoShapeLayer * masterPageLayer = 0;
+        KShapeLayer * masterPageLayer = 0;
         // add all toplevel shapes to the master page layer
         foreach(KShape * shape, masterPageShapes) {
             d->objects.append( shape );
             if(!shape->parent()) {
                 if( ! masterPageLayer ) {
-                    masterPageLayer = new KoShapeLayer();
+                    masterPageLayer = new KShapeLayer();
                     masterPageLayer->setName(i18n("Master Page"));
                 }
 
@@ -327,7 +327,7 @@ const QList<KShape*> KarbonDocument::shapes() const
     return d->objects;
 }
 
-const QList<KoShapeLayer*> KarbonDocument::layers() const
+const QList<KShapeLayer*> KarbonDocument::layers() const
 {
     return d->layers;
 }

@@ -21,7 +21,7 @@
 
 #include <KShape.h>
 #include <KShapeContainer.h>
-#include <KoShapeLayer.h>
+#include <KShapeLayer.h>
 #include <KoShapeMoveCommand.h>
 #include <KoShapeSizeCommand.h>
 #include <KShapeDeleteCommand.h>
@@ -60,7 +60,7 @@ void SCPlaceholders::setLayout(SCPageLayout * layout, KoPADocument * document, c
     new SCPageLayoutCommand(this, layout, cmd);
 
     Q_ASSERT(!shapes.isEmpty());
-    KoShapeLayer * layer = dynamic_cast<KoShapeLayer*>(shapes[0]);
+    KShapeLayer * layer = dynamic_cast<KShapeLayer*>(shapes[0]);
 
     QMap<QString, QList<QRectF> > placeholders;
     if (layout) {

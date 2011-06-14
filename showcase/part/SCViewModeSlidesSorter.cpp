@@ -29,7 +29,7 @@
 #include <KResourceManager.h>
 #include <KoRuler.h>
 #include <KSelection.h>
-#include <KoShapeLayer.h>
+#include <KShapeLayer.h>
 #include <KoShapeManager.h>
 #include <KoText.h>
 #include <KoToolManager.h>

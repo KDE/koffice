@@ -41,7 +41,7 @@
 
 #include <KoDocument.h>
 #include <KoFilterChain.h>
-#include <KoShapeLayer.h>
+#include <KShapeLayer.h>
 #include <KPathShape.h>
 #include <KLineBorder.h>
 #include <KColorBackground.h>
@@ -149,7 +149,7 @@ void SvgExport::saveDocument(KarbonDocument& document)
     m_indent2++;
 
     // export layers:
-    foreach(KoShapeLayer * layer, document.layers()) {
+    foreach(KShapeLayer * layer, document.layers()) {
         saveLayer(layer);
     }
 
@@ -159,7 +159,7 @@ void SvgExport::saveDocument(KarbonDocument& document)
     *m_body << "</svg>" << endl;
 }
 
-void SvgExport::saveLayer(KoShapeLayer * layer)
+void SvgExport::saveLayer(KShapeLayer * layer)
 {
     printIndentation(m_body, m_indent++);
     *m_body << "<g" << getID(layer) << ">" << endl;

@@ -27,7 +27,7 @@
 
 #include <QClipboard>
 
-#include <KoShapeLayer.h>
+#include <KShapeLayer.h>
 #include <KPathShape.h>
 #include <KDrag.h>
 #include <KOdf.h>
@@ -68,7 +68,7 @@ void TestPACopyPastePage::addShape(KoPAPageBase * page)
 
     QList<KShape*> shapes = page->shapes();
     if (!shapes.isEmpty()) {
-        KoShapeLayer* layer = dynamic_cast<KoShapeLayer*>(shapes.last());
+        KShapeLayer* layer = dynamic_cast<KShapeLayer*>(shapes.last());
         layer->addShape(path);
     }
 }

@@ -26,7 +26,7 @@
 #include <KImageData.h>
 #include <KShape.h>
 #include <KShapeFactoryBase.h>
-#include <KoShapeLayer.h>
+#include <KShapeLayer.h>
 #include <KoShapeRegistry.h>
 #include <KoShapeSavingContext.h>
 #include <KUnit.h>
@@ -63,7 +63,7 @@ SCNotes::SCNotes(SCPage *page, SCDocument * document)
 , m_imageCollection(new KImageCollection())
 {
     // add default layer
-    KoShapeLayer* layer = new KoShapeLayer;
+    KShapeLayer* layer = new KShapeLayer;
     addShape(layer);
 
     // All sizes and positions are hardcoded for now
@@ -110,7 +110,7 @@ void SCNotes::saveOdf(KoShapeSavingContext &context) const
     writer.addAttribute("draw:page-number", static_cast<KoPASavingContext &>(context).page());
     writer.endElement(); // draw:page-thumbnail
 
-    KoShapeLayer* layer = dynamic_cast<KoShapeLayer*>(shapes().last());
+    KShapeLayer* layer = dynamic_cast<KShapeLayer*>(shapes().last());
     foreach (KShape *shape, layer->shapes()) {
         if (shape != m_textShape && shape != m_thumbnailShape) {
             shape->saveOdf(context);
@@ -123,7 +123,7 @@ void SCNotes::saveOdf(KoShapeSavingContext &context) const
 bool SCNotes::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
 {
     KXmlElement child;
-    KoShapeLayer* layer = dynamic_cast<KoShapeLayer*>(shapes().last());
+    KShapeLayer* layer = dynamic_cast<KShapeLayer*>(shapes().last());
 
     forEachElement(child, element) {
         if (child.namespaceURI() != KOdfXmlNS::draw)

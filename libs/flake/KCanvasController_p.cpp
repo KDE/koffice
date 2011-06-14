@@ -29,7 +29,7 @@
 #include "KoShapeManager.h"
 #include "KSelection.h"
 #include "KCanvasBase.h"
-#include "KoShapeLayer.h"
+#include "KShapeLayer.h"
 #include "KoShapePaste.h"
 
 #include <KProperties.h>
@@ -104,7 +104,7 @@ void Viewport::handleDragEnterEvent(QDragEnterEvent *event)
 
     // only allow dropping when active layer is editable
     KSelection *selection = m_parent->canvas()->shapeManager()->selection();
-    KoShapeLayer *activeLayer = selection->activeLayer();
+    KShapeLayer *activeLayer = selection->activeLayer();
     if (activeLayer && (!activeLayer->isEditable() || activeLayer->isGeometryProtected()))
         return;
 

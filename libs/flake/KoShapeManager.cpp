@@ -33,7 +33,7 @@
 #include "KoShapeShadow.h"
 #include "KShapeConnection.h"
 #include "KShapeConnection_p.h"
-#include "KoShapeLayer.h"
+#include "KShapeLayer.h"
 #include "KFilterEffect.h"
 #include "KFilterEffectStack.h"
 #include "KFilterEffectRenderContext.h"
@@ -189,7 +189,7 @@ void KoShapeManager::addShape(KShape *shape, Repaint repaint)
         d->connectionTree.insert(connection->boundingRect(), connection);
     }
     d->shapes.append(shape);
-    if (! dynamic_cast<KShapeGroup*>(shape) && ! dynamic_cast<KoShapeLayer*>(shape)) {
+    if (! dynamic_cast<KShapeGroup*>(shape) && ! dynamic_cast<KShapeLayer*>(shape)) {
         QRectF br(shape->boundingRect());
         d->tree.insert(br, shape);
     }

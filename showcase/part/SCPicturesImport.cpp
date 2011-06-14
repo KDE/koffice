@@ -21,7 +21,7 @@
 
 #include <KShapeFactoryBase.h>
 #include <KoShapeRegistry.h>
-#include <KoShapeLayer.h>
+#include <KShapeLayer.h>
 #include <KImageData.h>
 #include <KImageCollection.h>
 #include <KoPAPage.h>
@@ -105,7 +105,7 @@ void SCPicturesImport::pictureImported(KJob *job)
             shape->setPosition(pos);
 
             KoPAPageBase *page = m_doc->newPage(m_masterPage);
-            KoShapeLayer *layer = dynamic_cast<KoShapeLayer *>(page->shapes().first());
+            KShapeLayer *layer = dynamic_cast<KShapeLayer *>(page->shapes().first());
             if (layer) {
                 layer->addShape(shape);
                 new KoPAPageInsertCommand(m_doc, page, m_currentPage, m_cmd);

@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KoShapeLayer.h"
+#include "KShapeLayer.h"
 #include "SimpleShapeContainerModel_p.h"
 #include "KoShapeSavingContext.h"
 #include "KoShapeLoadingContext.h"
@@ -27,25 +27,25 @@
 #include <KOdfGenericStyles.h>
 #include <KOdfXmlNS.h>
 
-KoShapeLayer::KoShapeLayer()
+KShapeLayer::KShapeLayer()
         : KShapeContainer(new SimpleShapeContainerModel())
 {
     setSelectable(false);
 }
 
-KoShapeLayer::KoShapeLayer(KShapeContainerModel *model)
+KShapeLayer::KShapeLayer(KShapeContainerModel *model)
         : KShapeContainer(model)
 {
     setSelectable(false);
 }
 
-bool KoShapeLayer::hitTest(const QPointF &position) const
+bool KShapeLayer::hitTest(const QPointF &position) const
 {
     Q_UNUSED(position);
     return false;
 }
 
-QRectF KoShapeLayer::boundingRect() const
+QRectF KShapeLayer::boundingRect() const
 {
     QRectF bb;
 
@@ -59,7 +59,7 @@ QRectF KoShapeLayer::boundingRect() const
     return bb;
 }
 
-void KoShapeLayer::saveOdf(KoShapeSavingContext &context) const
+void KShapeLayer::saveOdf(KoShapeSavingContext &context) const
 {
     QList<KShape*> shapes = this->shapes();
     qSort(shapes.begin(), shapes.end(), KShape::compareShapeZIndex);
@@ -69,7 +69,7 @@ void KoShapeLayer::saveOdf(KoShapeSavingContext &context) const
     }
 }
 
-bool KoShapeLayer::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
+bool KShapeLayer::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
 {
     // set layer name
     setName(element.attributeNS(KOdfXmlNS::draw, "name"));

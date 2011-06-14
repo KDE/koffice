@@ -28,7 +28,7 @@
 #include <KResourceManager.h>
 #include <KoRuler.h>
 #include <KSelection.h>
-#include <KoShapeLayer.h>
+#include <KShapeLayer.h>
 #include <KoShapeManager.h>
 #include <KoText.h>
 #include <KoToolManager.h>
@@ -167,7 +167,7 @@ void SCViewModeNotes::updateActivePage(KoPAPageBase *page)
 
     SCNotes *notes = prPage->pageNotes();
     notes->updatePageThumbnail();
-    KoShapeLayer* layer = dynamic_cast<KoShapeLayer*>(notes->shapes().last());
+    KShapeLayer* layer = dynamic_cast<KShapeLayer*>(notes->shapes().last());
 
     KOdfPageLayoutData &layout = notes->pageLayout();
     QSize size(layout.width, layout.height);

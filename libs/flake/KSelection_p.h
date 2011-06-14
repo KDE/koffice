@@ -43,7 +43,7 @@ public:
     QList<KShape*> selectedShapes;
     bool eventTriggered;
 
-    KoShapeLayer *activeLayer;
+    KShapeLayer *activeLayer;
 
     void requestSelectionChangedEvent();
     void selectGroupChildren(KShapeGroup *group);

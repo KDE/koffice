@@ -37,7 +37,7 @@
 #include <KShapeCreateCommand.h>
 #include <KShapeDeleteCommand.h>
 #include <KoShapeReorderCommand.h>
-#include <KoShapeLayer.h>
+#include <KShapeLayer.h>
 #include <KoShapePaste.h>
 
 #include <KMenu>
@@ -254,7 +254,7 @@ void KoPADocumentStructureDocker::itemClicked(const QModelIndex &index)
             // if the newly selected shape is not in the same page as previously
             // selected shape(s), then clear previous selection
             KoPAPageBase *currentPage = m_doc->pageByShape(m_selectedShapes.first());
-            KoShapeLayer *layer = dynamic_cast<KoShapeLayer *>(shape);
+            KShapeLayer *layer = dynamic_cast<KShapeLayer *>(shape);
             if (currentPage != newPageByShape) {
                 m_sectionView->clearSelection();
                 selection->deselectAll();
@@ -271,7 +271,7 @@ void KoPADocumentStructureDocker::itemClicked(const QModelIndex &index)
             }
             else {
                 QList<KoPAPageBase*> selectedPages;
-                QList<KoShapeLayer*> selectedLayers;
+                QList<KShapeLayer*> selectedLayers;
                 QList<KShape*> selectedShapes;
 
                 // separate selected layers and selected shapes
@@ -315,7 +315,7 @@ void KoPADocumentStructureDocker::addLayer()
                                           i18n("New layer"), &ok, this);
     if(ok)
     {
-        KoShapeLayer* layer = new KoShapeLayer();
+        KShapeLayer* layer = new KShapeLayer();
         KoPACanvas * canvas = dynamic_cast<KoPACanvas *>(KoToolManager::instance()->activeCanvasController()->canvas());
         if (canvas) {
             layer->setParent(canvas->koPAView()->activePage());
@@ -336,7 +336,7 @@ void KoPADocumentStructureDocker::addLayer()
 void KoPADocumentStructureDocker::deleteItem()
 {
     QList<KoPAPageBase*> selectedPages;
-    QList<KoShapeLayer*> selectedLayers;
+    QList<KShapeLayer*> selectedLayers;
     QList<KShape*> selectedShapes;
 
     // separate selected layers and selected shapes
@@ -380,7 +380,7 @@ void KoPADocumentStructureDocker::deleteItem()
 void KoPADocumentStructureDocker::raiseItem()
 {
     QList<KoPAPageBase*> selectedPages;
-    QList<KoShapeLayer*> selectedLayers;
+    QList<KShapeLayer*> selectedLayers;
     QList<KShape*> selectedShapes;
 
     // separate selected layers and selected shapes
@@ -391,7 +391,7 @@ void KoPADocumentStructureDocker::raiseItem()
     if(selectedLayers.count())
     {
 //         // check if all layers could be raised
-//         foreach(KoShapeLayer* layer, selectedLayers)
+//         foreach(KShapeLayer* layer, selectedLayers)
 //             if(! m_document->canRaiseLayer(layer))
 //                 return;
 
@@ -414,7 +414,7 @@ void KoPADocumentStructureDocker::raiseItem()
 void KoPADocumentStructureDocker::lowerItem()
 {
     QList<KoPAPageBase*> selectedPages;
-    QList<KoShapeLayer*> selectedLayers;
+    QList<KShapeLayer*> selectedLayers;
     QList<KShape*> selectedShapes;
 
     // separate selected layers and selected shapes
@@ -425,7 +425,7 @@ void KoPADocumentStructureDocker::lowerItem()
     if(selectedLayers.count())
     {
 //         // check if all layers could be raised
-//         foreach(KoShapeLayer* layer, selectedLayers)
+//         foreach(KShapeLayer* layer, selectedLayers)
 //             if(! m_document->canLowerLayer(layer))
 //                 return;
 
@@ -445,7 +445,7 @@ void KoPADocumentStructureDocker::lowerItem()
     }
 }
 
-void KoPADocumentStructureDocker::extractSelectedLayersAndShapes(QList<KoPAPageBase*> &pages, QList<KoShapeLayer*> &layers, QList<KShape*> &shapes)
+void KoPADocumentStructureDocker::extractSelectedLayersAndShapes(QList<KoPAPageBase*> &pages, QList<KShapeLayer*> &layers, QList<KShape*> &shapes)
 {
     pages.clear();
     layers.clear();
@@ -467,7 +467,7 @@ void KoPADocumentStructureDocker::extractSelectedLayersAndShapes(QList<KoPAPageB
             pages.append(page);
         }
         else {
-            KoShapeLayer *layer = dynamic_cast<KoShapeLayer*>(shape);
+            KShapeLayer *layer = dynamic_cast<KShapeLayer*>(shape);
             if(layer)
                 layers.append(layer);
             else if(! selectedItems.contains(index.parent()))
@@ -640,7 +640,7 @@ void KoPADocumentStructureDocker::editCut()
 void KoPADocumentStructureDocker::editCopy()
 {
     QList<KoPAPageBase*> pages;
-    QList<KoShapeLayer*> layers;
+    QList<KShapeLayer*> layers;
     QList<KShape*> shapes;
 
     // separate selected layers and selected shapes

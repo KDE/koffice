@@ -23,7 +23,7 @@
 #include "KoShapeSavingContext.h"
 #include "KDataCenterBase.h"
 #include "KShapeConnection.h"
-#include "KoShapeLayer.h"
+#include "KShapeLayer.h"
 #include "KImageData.h"
 
 #include <KXmlWriter.h>
@@ -42,7 +42,7 @@ public:
     KoShapeSavingContext::ShapeSavingOptions savingOptions;
     QMap<const KShape *, QString> drawIds;
     QMap<const QTextBlockUserData*, QString> subIds;
-    QList<KoShapeLayer*> layers;
+    QList<KShapeLayer*> layers;
     QSet<KDataCenterBase *> dataCenter;
     int drawId;
     int subId;
@@ -159,7 +159,7 @@ QString KoShapeSavingContext::subId(const QTextBlockUserData *subItem, bool inse
     return it.value();
 }
 
-void KoShapeSavingContext::addLayerForSaving(KoShapeLayer *layer)
+void KoShapeSavingContext::addLayerForSaving(KShapeLayer *layer)
 {
     if (layer && ! d->layers.contains(layer))
         d->layers.append(layer);
@@ -169,11 +169,11 @@ void KoShapeSavingContext::saveLayerSet(KXmlWriter &xmlWriter)
 {
     int unnamed = 0;
     QSet<QString> names;
-    foreach(KoShapeLayer *layer, d->layers)
+    foreach(KShapeLayer *layer, d->layers)
         names.insert(layer->name());
 
     xmlWriter.startElement("draw:layer-set");
-    foreach(KoShapeLayer *layer, d->layers) {
+    foreach(KShapeLayer *layer, d->layers) {
         xmlWriter.startElement("draw:layer");
         if (layer->name().isEmpty()) {
             while (true) {

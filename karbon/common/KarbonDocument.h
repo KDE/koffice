@@ -42,7 +42,7 @@
 
 class KShape;
 class KoShapeSavingContext;
-class KoShapeLayer;
+class KShapeLayer;
 class KImageCollection;
 class KOdfStore;
 class KDataCenterBase;
@@ -84,7 +84,7 @@ public:
      * @param layer the layer to check
      * @return true if layer can be raised, else false
      */
-    bool canRaiseLayer(KoShapeLayer* layer);
+    bool canRaiseLayer(KShapeLayer* layer);
 
     /**
      * Checks if specified layer can be lowered.
@@ -95,21 +95,21 @@ public:
      * @param layer the layer to check
      * @return true if layer can be lowered, else false
      */
-    bool canLowerLayer(KoShapeLayer* layer);
+    bool canLowerLayer(KShapeLayer* layer);
 
     /**
      * Raises the layer.
      *
      * @param layer the layer to raise
      */
-    void raiseLayer(KoShapeLayer* layer);
+    void raiseLayer(KShapeLayer* layer);
 
     /**
      * Lowers the layer.
      *
      * @param layer the layer to lower
      */
-    void lowerLayer(KoShapeLayer* layer);
+    void lowerLayer(KShapeLayer* layer);
 
     /**
      * Returns the position of the specified layer.
@@ -117,7 +117,7 @@ public:
      * @param layer the layer to retrieve the position for
      * @return the layer position
      */
-    int layerPos(KoShapeLayer* layer);
+    int layerPos(KShapeLayer* layer);
 
     /**
      * Inserts a new layer.
@@ -126,7 +126,7 @@ public:
      *
      * @param layer the layer to insert
      */
-    void insertLayer(KoShapeLayer* layer);
+    void insertLayer(KShapeLayer* layer);
 
     /**
      * Removes the layer.
@@ -135,7 +135,7 @@ public:
      *
      * @param layer the layer to remove
      */
-    void removeLayer(KoShapeLayer* layer);
+    void removeLayer(KShapeLayer* layer);
 
     /**
      * Returns the list of layers.
@@ -144,7 +144,7 @@ public:
      * resembles a root container which can contain other containers in an
      * arbitrary nesting depth.
      */
-    const QList<KoShapeLayer*> layers() const;
+    const QList<KShapeLayer*> layers() const;
 
     /**
      * Returns the list of all shapes of the document.

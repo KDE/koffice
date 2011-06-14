@@ -31,7 +31,7 @@
 #include <KShapeControllerBase.h>
 #include <KSelection.h>
 #include <KoZoomHandler.h>
-#include <KoShapeLayer.h>
+#include <KShapeLayer.h>
 #include <KShapeGroup.h>
 #include <KShapeGroupCommand.h>
 #include <KoShapeUngroupCommand.h>
@@ -132,7 +132,7 @@ QModelIndex KarbonLayerModel::parent(const QModelIndex &child) const
     return parentIndexFromShape(childShape);
 
     // check if child shape is a layer, and return invalid model index if it is
-    KoShapeLayer *childlayer = dynamic_cast<KoShapeLayer*>(childShape);
+    KShapeLayer *childlayer = dynamic_cast<KShapeLayer*>(childShape);
     if (childlayer)
         return QModelIndex();
 
@@ -142,7 +142,7 @@ QModelIndex KarbonLayerModel::parent(const QModelIndex &child) const
         return QModelIndex();
 
     // check if the parent is a layer
-    KoShapeLayer *parentLayer = dynamic_cast<KoShapeLayer*>(parentShape);
+    KShapeLayer *parentLayer = dynamic_cast<KShapeLayer*>(parentShape);
     if (parentLayer)
         return createIndex(m_document->layers().indexOf(parentLayer), 0, parentShape);
 
@@ -168,7 +168,7 @@ QVariant KarbonLayerModel::data(const QModelIndex &index, int role) const
     case Qt::DisplayRole: {
         QString name = shape->name();
         if (name.isEmpty()) {
-            if (dynamic_cast<KoShapeLayer*>(shape))
+            if (dynamic_cast<KShapeLayer*>(shape))
                 name = i18n("Layer");
             else if (dynamic_cast<KShapeGroup*>(shape))
                 name = i18nc("A group of shapes", "Group");
@@ -186,7 +186,7 @@ QVariant KarbonLayerModel::data(const QModelIndex &index, int role) const
         if (! selection)
             return false;
 
-        KoShapeLayer *layer = dynamic_cast<KoShapeLayer*>(shape);
+        KShapeLayer *layer = dynamic_cast<KShapeLayer*>(shape);
         if (layer)
             return (layer == selection->activeLayer());
         else
@@ -247,7 +247,7 @@ bool KarbonLayerModel::setData(const QModelIndex &index, const QVariant &value, 
         KCanvasController * canvasController = KoToolManager::instance()->activeCanvasController();
         KSelection * selection = canvasController->canvas()->shapeManager()->selection();
 
-        KoShapeLayer *layer = dynamic_cast<KoShapeLayer*>(shape);
+        KShapeLayer *layer = dynamic_cast<KShapeLayer*>(shape);
         if (layer && selection)
             selection->setActiveLayer(layer);
     }
@@ -421,7 +421,7 @@ bool KarbonLayerModel::dropMimeData(const QMimeData * data, Qt::DropAction actio
         return false;
 
     QList<KShape*> toplevelShapes;
-    QList<KoShapeLayer*> layers;
+    QList<KShapeLayer*> layers;
     // remove shapes having its parent in the list
     // and separate the layers
     foreach(KShape * shape, shapes) {
@@ -437,7 +437,7 @@ bool KarbonLayerModel::dropMimeData(const QMimeData * data, Qt::DropAction actio
         if (hasParentInList)
             continue;
 
-        KoShapeLayer * layer = dynamic_cast<KoShapeLayer*>(shape);
+        KShapeLayer * layer = dynamic_cast<KShapeLayer*>(shape);
         if (layer)
             layers.append(layer);
         else
@@ -507,7 +507,7 @@ bool KarbonLayerModel::dropMimeData(const QMimeData * data, Qt::DropAction actio
 
                 emit layoutChanged();
             } else if (layers.count()) {
-                KoShapeLayer * layer = dynamic_cast<KoShapeLayer*>(container);
+                KShapeLayer * layer = dynamic_cast<KShapeLayer*>(container);
                 if (! layer)
                     return false;
 
@@ -533,7 +533,7 @@ QModelIndex KarbonLayerModel::parentIndexFromShape(const KShape * child) const
         return QModelIndex();
 
     // check if child shape is a layer, and return invalid model index if it is
-    const KoShapeLayer *childlayer = dynamic_cast<const KoShapeLayer*>(child);
+    const KShapeLayer *childlayer = dynamic_cast<const KShapeLayer*>(child);
     if (childlayer)
         return QModelIndex();
 
@@ -543,7 +543,7 @@ QModelIndex KarbonLayerModel::parentIndexFromShape(const KShape * child) const
         return QModelIndex();
 
     // check if the parent is a layer
-    KoShapeLayer *parentLayer = dynamic_cast<KoShapeLayer*>(parentShape);
+    KShapeLayer *parentLayer = dynamic_cast<KShapeLayer*>(parentShape);
     if (parentLayer)
         return createIndex(m_document->layers().indexOf(parentLayer), 0, parentShape);
 

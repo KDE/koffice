@@ -55,7 +55,7 @@ set(flake_SRCS
     KPointerEvent.cpp
     KShapeController.cpp
     KoToolSelection.cpp
-    KoShapeLayer.cpp
+    KShapeLayer.cpp
     KPostscriptPaintDevice.cpp
     KInputDevice.cpp
     KoToolManager_p.cpp
@@ -281,7 +281,7 @@ install(
     KShapeFactoryBase.h
     KShapeGroup.h
     KShape.h
-    KoShapeLayer.h
+    KShapeLayer.h
     KoShapeLoadingContext.h
     KoShapeManager.h
     KoShapeManagerPaintingStrategy.h

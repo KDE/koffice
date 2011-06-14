@@ -23,7 +23,7 @@
 
 #include <KCanvasController.h>
 #include <KoToolManager.h>
-#include <KoShapeLayer.h>
+#include <KShapeLayer.h>
 #include <KInteractionTool.h>
 
 #include <KDebug>
@@ -394,8 +394,8 @@ KoToolBox::KoToolBox(KCanvasController *canvas)
 
     connect(KoToolManager::instance(), SIGNAL(changedTool(KCanvasController*, int)),
             this, SLOT(setActiveTool(KCanvasController*, int)));
-    connect(KoToolManager::instance(), SIGNAL(currentLayerChanged(const KCanvasController*,const KoShapeLayer*)),
-            this, SLOT(setCurrentLayer(const KCanvasController*,const KoShapeLayer*)));
+    connect(KoToolManager::instance(), SIGNAL(currentLayerChanged(const KCanvasController*,const KShapeLayer*)),
+            this, SLOT(setCurrentLayer(const KCanvasController*,const KShapeLayer*)));
     connect(KoToolManager::instance(), SIGNAL(toolCodesSelected(const KCanvasController*, QList<QString>)),
             this, SLOT(setButtonsVisible(const KCanvasController*, QList<QString>)));
 }
@@ -458,7 +458,7 @@ void KoToolBox::setButtonsVisible(const KCanvasController *canvas, const QList<Q
     update();
 }
 
-void KoToolBox::setCurrentLayer(const KCanvasController *canvas, const KoShapeLayer *layer)
+void KoToolBox::setCurrentLayer(const KCanvasController *canvas, const KShapeLayer *layer)
 {
     if (canvas->canvas() != d->canvas)
         return;

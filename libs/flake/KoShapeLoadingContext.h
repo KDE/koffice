@@ -29,7 +29,7 @@
 #include "flake_export.h"
 
 class KOdfLoadingContext;
-class KoShapeLayer;
+class KShapeLayer;
 class KShape;
 class KShapeControllerBase;
 class KLoadingShapeUpdater;
@@ -83,9 +83,9 @@ public:
     KOdfLoadingContext &odfLoadingContext();
 
     /// Returns layer referenced by given name
-    KoShapeLayer *layer(const QString &layerName);
+    KShapeLayer *layer(const QString &layerName);
     /// Adds a new layer to be referenced by the given name later
-    void addLayer(KoShapeLayer *layer, const QString &layerName);
+    void addLayer(KShapeLayer *layer, const QString &layerName);
 
     /**
      * remove all layers

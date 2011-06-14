@@ -37,7 +37,7 @@
 #include <KShapeCreateCommand.h>
 #include <KShapeDeleteCommand.h>
 #include <KoShapeReorderCommand.h>
-#include <KoShapeLayer.h>
+#include <KShapeLayer.h>
 #include <KShapeGroup.h>
 
 #include <klocale.h>
@@ -241,13 +241,13 @@ void KarbonLayerDocker::itemClicked(const QModelIndex &index)
     if (! selection)
         return;
 
-    KoShapeLayer * layer = dynamic_cast<KoShapeLayer*>(shape);
+    KShapeLayer * layer = dynamic_cast<KShapeLayer*>(shape);
     if (layer) {
         selection->setActiveLayer(layer);
         return;
     }
 
-    QList<KoShapeLayer*> selectedLayers;
+    QList<KShapeLayer*> selectedLayers;
     QList<KShape*> selectedShapes;
 
     // separate selected layers and selected shapes
@@ -273,7 +273,7 @@ void KarbonLayerDocker::addLayer()
                                          i18n("Enter the name of the new layer:"),
                                          i18n("New layer"), &ok, this);
     if (ok) {
-        KoShapeLayer* layer = new KoShapeLayer();
+        KShapeLayer* layer = new KShapeLayer();
         layer->setName(name);
         KCanvasController* canvasController = KoToolManager::instance()->activeCanvasController();
         QUndoCommand *cmd = new KShapeCreateCommand(m_part, layer, 0);
@@ -285,7 +285,7 @@ void KarbonLayerDocker::addLayer()
 
 void KarbonLayerDocker::deleteItem()
 {
-    QList<KoShapeLayer*> selectedLayers;
+    QList<KShapeLayer*> selectedLayers;
     QList<KShape*> selectedShapes;
 
     // separate selected layers and selected shapes
@@ -296,7 +296,7 @@ void KarbonLayerDocker::deleteItem()
     if (selectedLayers.count()) {
         if (m_part->document().layers().count() > selectedLayers.count()) {
             QList<KShape*> deleteShapes;
-            foreach(KoShapeLayer* layer, selectedLayers) {
+            foreach(KShapeLayer* layer, selectedLayers) {
                 deleteShapes += layer->shapes();
                 deleteShapes.append(layer);
             }
@@ -318,7 +318,7 @@ void KarbonLayerDocker::deleteItem()
 
 void KarbonLayerDocker::raiseItem()
 {
-    QList<KoShapeLayer*> selectedLayers;
+    QList<KShapeLayer*> selectedLayers;
     QList<KShape*> selectedShapes;
 
     // separate selected layers and selected shapes
@@ -330,7 +330,7 @@ void KarbonLayerDocker::raiseItem()
 
     if (selectedLayers.count()) {
         // check if all layers could be raised
-        foreach(KoShapeLayer* layer, selectedLayers)
+        foreach(KShapeLayer* layer, selectedLayers)
         if (! m_part->document().canRaiseLayer(layer))
             return;
 
@@ -352,7 +352,7 @@ void KarbonLayerDocker::raiseItem()
 
 void KarbonLayerDocker::lowerItem()
 {
-    QList<KoShapeLayer*> selectedLayers;
+    QList<KShapeLayer*> selectedLayers;
     QList<KShape*> selectedShapes;
 
     // separate selected layers and selected shapes
@@ -364,7 +364,7 @@ void KarbonLayerDocker::lowerItem()
 
     if (selectedLayers.count()) {
         // check if all layers could be raised
-        foreach(KoShapeLayer* layer, selectedLayers)
+        foreach(KShapeLayer* layer, selectedLayers)
         if (! m_part->document().canLowerLayer(layer))
             return;
 
@@ -384,12 +384,12 @@ void KarbonLayerDocker::lowerItem()
     }
 }
 
-void KarbonLayerDocker::selectLayers(QList<KoShapeLayer*> layers)
+void KarbonLayerDocker::selectLayers(QList<KShapeLayer*> layers)
 {
     QModelIndex root = m_layerView->rootIndex();
     QItemSelectionModel * selModel = m_layerView->selectionModel();
     selModel->clearSelection();
-    foreach(KoShapeLayer * layer, layers) {
+    foreach(KShapeLayer * layer, layers) {
         int layerPos = m_part->document().layerPos(layer);
         QModelIndex child = m_model->index(layerPos, 0);
         selModel->select(m_sortModel->mapFromSource(child), QItemSelectionModel::Select);
@@ -397,7 +397,7 @@ void KarbonLayerDocker::selectLayers(QList<KoShapeLayer*> layers)
 }
 
 void KarbonLayerDocker::extractSelectedLayersAndShapes(
-    QList<KoShapeLayer*> &layers, QList<KShape*> &shapes, bool addChilds)
+    QList<KShapeLayer*> &layers, QList<KShape*> &shapes, bool addChilds)
 {
     layers.clear();
     shapes.clear();
@@ -409,7 +409,7 @@ void KarbonLayerDocker::extractSelectedLayersAndShapes(
     // separate selected layers and selected shapes
     foreach(const QModelIndex & index, selectedItems) {
         KShape *shape = shapeFromIndex(index);
-        KoShapeLayer *layer = dynamic_cast<KoShapeLayer*>(shape);
+        KShapeLayer *layer = dynamic_cast<KShapeLayer*>(shape);
         if (layer) {
             layers.append(layer);
         } else if (! selectedItems.contains(index.parent())) {

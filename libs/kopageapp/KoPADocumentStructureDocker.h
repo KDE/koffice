@@ -28,7 +28,7 @@
 #include <KoPageApp.h>
 
 class KShape;
-class KoShapeLayer;
+class KShapeLayer;
 class KoPADocument;
 class KoPADocumentModel;
 class KoPAPageBase;
@@ -99,7 +99,7 @@ private slots:
     void editPaste(); 
 
 private:
-    void extractSelectedLayersAndShapes(QList<KoPAPageBase*> &pages, QList<KoShapeLayer*> &layers, QList<KShape*> &shapes);
+    void extractSelectedLayersAndShapes(QList<KoPAPageBase*> &pages, QList<KShapeLayer*> &layers, QList<KShape*> &shapes);
     void setViewMode(KoDocumentSectionView::DisplayMode mode);
     QModelIndex getRootIndex(const QModelIndex &index) const;
 

@@ -59,7 +59,7 @@
 #include <KCanvasController.h>
 #include <KoToolManager.h>
 #include <KoShapeManager.h>
-#include <KoShapeLayer.h>
+#include <KShapeLayer.h>
 #include <KoShapeRegistry.h>
 #include <KResourceManager.h>
 #include <KOdfStorageDevice.h>
@@ -440,7 +440,7 @@ void KarbonPart::addShape(KShape* shape)
 {
     KCanvasController* canvasController = KoToolManager::instance()->activeCanvasController();
 
-    KoShapeLayer *layer = dynamic_cast<KoShapeLayer*>(shape);
+    KShapeLayer *layer = dynamic_cast<KShapeLayer*>(shape);
     if (layer) {
         d->document.insertLayer(layer);
         if (canvasController) {
@@ -451,7 +451,7 @@ void KarbonPart::addShape(KShape* shape)
         // only add shape to active layer if it has no parent yet
         if (! shape->parent()) {
             kDebug(38000) << "shape has no parent, adding to the active layer!";
-            KoShapeLayer *activeLayer = 0;
+            KShapeLayer *activeLayer = 0;
             if (canvasController)
                 activeLayer = canvasController->canvas()->shapeManager()->selection()->activeLayer();
             else if (d->document.layers().count())
@@ -474,7 +474,7 @@ void KarbonPart::addShape(KShape* shape)
 
 void KarbonPart::removeShape(KShape* shape)
 {
-    KoShapeLayer *layer = dynamic_cast<KoShapeLayer*>(shape);
+    KShapeLayer *layer = dynamic_cast<KShapeLayer*>(shape);
     if (layer) {
         d->document.removeLayer(layer);
     } else {

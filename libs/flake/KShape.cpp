@@ -23,7 +23,7 @@
 #include "KShape.h"
 #include "KShape_p.h"
 #include "KShapeContainer.h"
-#include "KoShapeLayer.h"
+#include "KShapeLayer.h"
 #include "KShapeContainerModel.h"
 #include "KSelection.h"
 #include "KPointerEvent.h"
@@ -1151,7 +1151,7 @@ bool KShape::loadOdfAttributes(const KXmlElement &element, KoShapeLoadingContext
 
     if (attributes & OdfLayer) {
         if (element.hasAttributeNS(KOdfXmlNS::draw, "layer")) {
-            KoShapeLayer *layer = context.layer(element.attributeNS(KOdfXmlNS::draw, "layer"));
+            KShapeLayer *layer = context.layer(element.attributeNS(KOdfXmlNS::draw, "layer"));
             if (layer) {
                 setParent(layer);
             }
@@ -1433,7 +1433,7 @@ void KShape::saveOdfAttributes(KoShapeSavingContext &context, int attributes) co
     if (attributes & OdfLayer) {
         KShape *parent = d->parent;
         while (parent) {
-            if (dynamic_cast<KoShapeLayer*>(parent)) {
+            if (dynamic_cast<KShapeLayer*>(parent)) {
                 context.xmlWriter().addAttribute("draw:layer", parent->name());
                 break;
             }

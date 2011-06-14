@@ -49,7 +49,7 @@
 #include <KSelection.h>
 #include <KoMainWindow.h>
 #include <KoDockerManager.h>
-#include <KoShapeLayer.h>
+#include <KShapeLayer.h>
 #include <KoRuler.h>
 #include <KoRulerController.h>
 #include <KDrag.h>
@@ -495,7 +495,7 @@ void KoPAView::editSelectAll()
     QList<KShape*> shapes = activePage()->shapes();
 
     foreach(KShape *shape, shapes) {
-        KoShapeLayer *layer = dynamic_cast<KoShapeLayer *>(shape);
+        KShapeLayer *layer = dynamic_cast<KShapeLayer *>(shape);
 
         if (layer) {
             QList<KShape*> layerShapes(layer->shapes());
@@ -660,7 +660,7 @@ void KoPAView::setActivePage(KoPAPageBase* page)
     shapeManager()->setShapes(shapes, KoShapeManager::AddWithoutRepaint);
     //Make the top most layer active
     if (!shapes.isEmpty()) {
-        KoShapeLayer* layer = dynamic_cast<KoShapeLayer*>(shapes.last());
+        KShapeLayer* layer = dynamic_cast<KShapeLayer*>(shapes.last());
         shapeManager()->selection()->setActiveLayer(layer);
     }
 
@@ -672,7 +672,7 @@ void KoPAView::setActivePage(KoPAPageBase* page)
         masterShapeManager()->setShapes(masterShapes, KoShapeManager::AddWithoutRepaint);
         //Make the top most layer active
         if (!masterShapes.isEmpty()) {
-            KoShapeLayer* layer = dynamic_cast<KoShapeLayer*>(masterShapes.last());
+            KShapeLayer* layer = dynamic_cast<KShapeLayer*>(masterShapes.last());
             masterShapeManager()->selection()->setActiveLayer(layer);
         }
     }

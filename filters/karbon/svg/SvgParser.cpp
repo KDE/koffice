@@ -32,7 +32,7 @@
 #include <KShape.h>
 #include <KoShapeRegistry.h>
 #include <KShapeFactoryBase.h>
-#include <KoShapeLayer.h>
+#include <KShapeLayer.h>
 #include <KShapeContainer.h>
 #include <KShapeGroup.h>
 #include <KPathShape.h>

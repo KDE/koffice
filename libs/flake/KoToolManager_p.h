@@ -49,7 +49,7 @@ class KoToolBase;
 class KShape;
 class KoToolManager;
 class KCanvasController;
-class KoShapeLayer;
+class KShapeLayer;
 class ToolHelper;
 class CanvasData;
 class QToolButton;
@@ -74,7 +74,7 @@ public:
     void updateCursor(const QCursor &cursor);
     void switchBackRequested();
     void selectionChanged(QList<KShape*> shapes);
-    void currentLayerChanged(const KoShapeLayer *layer);
+    void currentLayerChanged(const KShapeLayer *layer);
     void switchToolTemporaryRequested(const QString &id);
     CanvasData *createCanvasData(KCanvasController *controller, KInputDevice device);
     bool toolCanBeUsed(const QString &activationShapeId);

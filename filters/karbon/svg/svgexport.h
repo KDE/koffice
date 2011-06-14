@@ -34,7 +34,7 @@
 #include <QtGui/QGradient>
 
 class KarbonDocument;
-class KoShapeLayer;
+class KShapeLayer;
 class KShapeContainer;
 class KShape;
 class KPathShape;
@@ -61,7 +61,7 @@ public:
 
 private:
     void saveDocument(KarbonDocument& document);
-    void saveLayer(KoShapeLayer * layer);
+    void saveLayer(KShapeLayer * layer);
     void saveGroup(KShapeContainer * group);
     void saveShape(KShape * shape);
     void savePath(KPathShape * path);

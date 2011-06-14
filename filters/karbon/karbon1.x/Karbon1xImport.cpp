@@ -28,7 +28,7 @@
 #include <KOdfPageLayoutData.h>
 #include <KShape.h>
 #include <KShapeContainer.h>
-#include <KoShapeLayer.h>
+#include <KShapeLayer.h>
 #include <KPathShape.h>
 #include <KResourceManager.h>
 #include <KPathShapeLoader.h>
@@ -224,12 +224,12 @@ bool KarbonImport::loadXML(const KXmlElement& doc)
     m_mirrorMatrix.scale(1.0, -1.0);
     m_mirrorMatrix.translate(0, -m_document->pageSize().height());
 
-    KoShapeLayer * defaulLayer = m_document->layers().first();
+    KShapeLayer * defaulLayer = m_document->layers().first();
 
     KXmlElement e;
     forEachElement(e, doc) {
         if (e.tagName() == "LAYER") {
-            KoShapeLayer * layer = new KoShapeLayer();
+            KShapeLayer * layer = new KShapeLayer();
             layer->setZIndex(nextZIndex());
             layer->setVisible(e.attribute("visible") == 0 ? false : true);
             loadGroup(layer, e);

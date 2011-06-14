@@ -30,7 +30,7 @@
 #include "KCanvasBase.h"
 #include "KShapeController.h"
 #include "KShape.h"
-#include "KoShapeLayer.h"
+#include "KShapeLayer.h"
 #include "KoShapeLoadingContext.h"
 #include "KoShapeManager.h"
 #include "KShapeControllerBase.h"
@@ -44,14 +44,14 @@
 class KoShapePaste::Private
 {
 public:
-    Private(KCanvasBase *cb, KoShapeLayer *l) : canvas(cb), layer(l) {}
+    Private(KCanvasBase *cb, KShapeLayer *l) : canvas(cb), layer(l) {}
 
     KCanvasBase *canvas;
-    KoShapeLayer *layer;
+    KShapeLayer *layer;
     QList<KShape*> pastedShapes;
 };
 
-KoShapePaste::KoShapePaste(KCanvasBase *canvas, KoShapeLayer *layer)
+KoShapePaste::KoShapePaste(KCanvasBase *canvas, KShapeLayer *layer)
         : d(new Private(canvas, layer))
 {
 }

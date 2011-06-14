@@ -28,7 +28,7 @@
 #include <KCanvasBase.h>
 #include <KCanvasController.h>
 #include <KSelection.h>
-#include <KoShapeLayer.h>
+#include <KShapeLayer.h>
 #include <KShapeGroup.h>
 #include <KoShapeUngroupCommand.h>
 #include <KoShapeRenameCommand.h>
@@ -160,7 +160,7 @@ QVariant KoPADocumentModel::data(const QModelIndex &index, int role) const
                         name = i18n("Page  %1", m_document->pageIndex(dynamic_cast<KoPAPageBase *>(shape)) + 1);
                     }
                 }
-                else if(dynamic_cast<KoShapeLayer*>(shape)) {
+                else if(dynamic_cast<KShapeLayer*>(shape)) {
                     name = i18n("Layer") + QString(" (%1)").arg(shape->zIndex());
                 }
                 else if(dynamic_cast<KShapeGroup*>(shape)) {
@@ -191,7 +191,7 @@ QVariant KoPADocumentModel::data(const QModelIndex &index, int role) const
             if(! selection)
                 return false;
 
-            /* KoShapeLayer *layer = dynamic_cast<KoShapeLayer*>(shape);
+            /* KShapeLayer *layer = dynamic_cast<KShapeLayer*>(shape);
             if(layer)
                 return (layer == selection->activeLayer());
             else */
@@ -263,7 +263,7 @@ bool KoPADocumentModel::setData(const QModelIndex &index, const QVariant &value,
                 KCanvasController * canvasController = KoToolManager::instance()->activeCanvasController();
                 KSelection * selection = canvasController->canvas()->shapeManager()->selection();
 
-                KoShapeLayer *layer = dynamic_cast<KoShapeLayer*>(shape);
+                KShapeLayer *layer = dynamic_cast<KShapeLayer*>(shape);
                 if(layer && selection) {
                     selection->setActiveLayer(layer);
                 }
@@ -429,7 +429,7 @@ bool KoPADocumentModel::dropMimeData(const QMimeData * data, Qt::DropAction acti
     }
 
     QList<KShape*> toplevelShapes;
-    QList<KoShapeLayer*> layers;
+    QList<KShapeLayer*> layers;
     QList<KoPAPageBase *> pages;
     // remove shapes having its parent in the list
     // and separate the layers
@@ -455,7 +455,7 @@ bool KoPADocumentModel::dropMimeData(const QMimeData * data, Qt::DropAction acti
         if(hasParentInList)
             continue;
 
-        KoShapeLayer * layer = dynamic_cast<KoShapeLayer*>(shape);
+        KShapeLayer * layer = dynamic_cast<KShapeLayer*>(shape);
         if(layer)
             layers.append(layer);
         else
@@ -542,7 +542,7 @@ bool KoPADocumentModel::dropMimeData(const QMimeData * data, Qt::DropAction acti
             }
             else if(layers.count())
             {
-                KoShapeLayer * layer = dynamic_cast<KoShapeLayer*>(container);
+                KShapeLayer * layer = dynamic_cast<KShapeLayer*>(container);
                 if(! layer)
                     return false;
 
@@ -570,7 +570,7 @@ QModelIndex KoPADocumentModel::parentIndexFromShape(const KShape * child)
         return QModelIndex();
 
     // check if child shape is a layer, and return invalid model index if it is
-    const KoShapeLayer *childlayer = dynamic_cast<const KoShapeLayer*>(child);
+    const KShapeLayer *childlayer = dynamic_cast<const KShapeLayer*>(child);
     if(childlayer)
         return QModelIndex();
 
@@ -580,7 +580,7 @@ QModelIndex KoPADocumentModel::parentIndexFromShape(const KShape * child)
         return QModelIndex();
 
     // check if the parent is a layer
-    KoShapeLayer *parentLayer = dynamic_cast<KoShapeLayer*>(parentShape);
+    KShapeLayer *parentLayer = dynamic_cast<KShapeLayer*>(parentShape);
 
 
     if(parentLayer) {

@@ -33,7 +33,7 @@
 
 #include "flake_export.h"
 
-class KoShapeLayer;
+class KShapeLayer;
 class KSelectionPrivate;
 
 /**
@@ -122,14 +122,14 @@ public:
      * Sets the currently active layer.
      * @param layer the new active layer
      */
-    void setActiveLayer(KoShapeLayer *layer);
+    void setActiveLayer(KShapeLayer *layer);
 
     /**
      * Returns a currently active layer.
      *
      * @return the currently active layer, or zero if there is none
      */
-    KoShapeLayer *activeLayer() const;
+    KShapeLayer *activeLayer() const;
 
     /// Updates the size and position of the selection
     void updateSizeAndPosition();
@@ -139,7 +139,7 @@ signals:
     void selectionChanged();
 
     /// emitted when the current layer is changed
-    void currentLayerChanged(const KoShapeLayer *layer);
+    void currentLayerChanged(const KShapeLayer *layer);
 
 private:
     Q_PRIVATE_SLOT(d_func(), void selectionChangedEvent())
