@@ -31,7 +31,7 @@ void TestSegmentTypeCommand::changeToCurve()
     segments.append(segment);
 
     // get first segment
-    KoPathSegment s = path.segmentByIndex(KoPathPointIndex(0,0));
+    KPathSegment s = path.segmentByIndex(KoPathPointIndex(0,0));
 
     KoPathSegmentTypeCommand cmd(segments, KoPathSegmentTypeCommand::Curve);
 
@@ -60,7 +60,7 @@ void TestSegmentTypeCommand::changeToLine()
     segments.append(segment);
 
     // get first segment
-    KoPathSegment s = path.segmentByIndex(KoPathPointIndex(0,0));
+    KPathSegment s = path.segmentByIndex(KoPathPointIndex(0,0));
 
     KoPathSegmentTypeCommand cmd(segments, KoPathSegmentTypeCommand::Line);
 

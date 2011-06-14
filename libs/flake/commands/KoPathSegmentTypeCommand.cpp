@@ -50,7 +50,7 @@ void KoPathSegmentTypeCommand::redo()
         KoPathShape * pathShape = it->pathShape;
         pathShape->update();
 
-        KoPathSegment segment = pathShape->segmentByIndex(it->pointIndex);
+        KPathSegment segment = pathShape->segmentByIndex(it->pointIndex);
 
         if (m_segmentType == Curve) {
             // we change type to curve -> set control point positions
@@ -74,7 +74,7 @@ void KoPathSegmentTypeCommand::undo()
     for (int i = 0; i < m_pointDataList.size(); ++i) {
         const KPathPointData & pd = m_pointDataList.at(i);
         pd.pathShape->update();
-        KoPathSegment segment = pd.pathShape->segmentByIndex(pd.pointIndex);
+        KPathSegment segment = pd.pathShape->segmentByIndex(pd.pointIndex);
         const SegmentTypeData segmentData(m_segmentData.at(i));
 
         if (m_segmentType == Line) {
@@ -99,7 +99,7 @@ void KoPathSegmentTypeCommand::initialize(const QList<KPathPointData> & pointDat
 {
     QList<KPathPointData>::const_iterator it(pointDataList.begin());
     for (; it != pointDataList.end(); ++it) {
-        KoPathSegment segment = it->pathShape->segmentByIndex(it->pointIndex);
+        KPathSegment segment = it->pathShape->segmentByIndex(it->pointIndex);
         if (segment.isValid()) {
             if (m_segmentType == Curve) {
                 // don not change segment if already a curve

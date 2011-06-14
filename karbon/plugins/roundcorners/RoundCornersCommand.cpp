@@ -20,7 +20,7 @@
 #include "RoundCornersCommand.h"
 
 #include <KoPathShape.h>
-#include <KoPathSegment.h>
+#include <KPathSegment.h>
 #include <KPathPoint.h>
 
 #include <klocale.h>
@@ -193,16 +193,16 @@ void RoundCornersCommand::roundPath()
         // check if we have sufficient number of points
         if (pointCount < 3) {
             // copy the only segment
-            KoPathSegment s = m_copy->segmentByIndex(KoPathPointIndex(subpathIndex, 0));
+            KPathSegment s = m_copy->segmentByIndex(KoPathPointIndex(subpathIndex, 0));
             m_path->moveTo(m_copy->pointByIndex(KoPathPointIndex(subpathIndex, 0))->point());
             addSegment(m_path, s);
 
             continue;
         }
 
-        KoPathSegment prevSeg = m_copy->segmentByIndex(KoPathPointIndex(subpathIndex, pointCount - 1));
-        KoPathSegment nextSeg = m_copy->segmentByIndex(KoPathPointIndex(subpathIndex, 0));
-        KoPathSegment lastSeg;
+        KPathSegment prevSeg = m_copy->segmentByIndex(KoPathPointIndex(subpathIndex, pointCount - 1));
+        KPathSegment nextSeg = m_copy->segmentByIndex(KoPathPointIndex(subpathIndex, 0));
+        KPathSegment lastSeg;
 
         KPathPoint * currPoint = nextSeg.first();
         KPathPoint * firstPoint = 0;
@@ -217,12 +217,12 @@ void RoundCornersCommand::roundPath()
             // split the previous segment at length - radius
             qreal prevLength = prevSeg.length();
             qreal prevSplit = prevLength > m_radius ? prevSeg.paramAtLength(prevLength - m_radius) : 0.5;
-            QPair<KoPathSegment, KoPathSegment> prevParts = prevSeg.splitAt(prevSplit);
+            QPair<KPathSegment, KPathSegment> prevParts = prevSeg.splitAt(prevSplit);
 
             // split the next segment at radius
             qreal nextLength = nextSeg.length();
             qreal nextSplit = nextLength > m_radius ? nextSeg.paramAtLength(m_radius) : 0.5;
-            QPair<KoPathSegment, KoPathSegment> nextParts = nextSeg.splitAt(nextSplit);
+            QPair<KPathSegment, KPathSegment> nextParts = nextSeg.splitAt(nextSplit);
 
             // calculate smooth tangents
             QPointF P0 = prevParts.first.second()->point();
@@ -264,7 +264,7 @@ void RoundCornersCommand::roundPath()
                 // split the previous segment at length - radius
                 qreal prevLength = prevSeg.length();
                 qreal prevSplit = prevLength > m_radius ? prevSeg.paramAtLength(prevLength - m_radius) : 0.5;
-                QPair<KoPathSegment, KoPathSegment> prevParts = prevSeg.splitAt(prevSplit);
+                QPair<KPathSegment, KPathSegment> prevParts = prevSeg.splitAt(prevSplit);
 
                 // add the remaining part up to the split point of the pervious segment
                 lastPoint = addSegment(m_path, prevParts.first);
@@ -272,7 +272,7 @@ void RoundCornersCommand::roundPath()
                 // split the next segment at radius
                 qreal nextLength = nextSeg.length();
                 qreal nextSplit = nextLength > m_radius ? nextSeg.paramAtLength(m_radius) : 0.5;
-                QPair<KoPathSegment, KoPathSegment> nextParts = nextSeg.splitAt(nextSplit);
+                QPair<KPathSegment, KPathSegment> nextParts = nextSeg.splitAt(nextSplit);
 
                 // calculate smooth tangents
                 QPointF P0 = prevParts.first.second()->point();
@@ -322,7 +322,7 @@ void RoundCornersCommand::roundPath()
     }
 }
 
-KPathPoint * RoundCornersCommand::addSegment(KoPathShape * p, KoPathSegment & s)
+KPathPoint * RoundCornersCommand::addSegment(KoPathShape * p, KPathSegment & s)
 {
     switch (s.degree()) {
     case 1:
@@ -365,7 +365,7 @@ void RoundCornersCommand::copyPath(KoPathShape * dst, KoPathShape * src)
     dst->setTransformation(src->transformation());
 }
 
-QPointF RoundCornersCommand::tangentAtStart(const KoPathSegment &s)
+QPointF RoundCornersCommand::tangentAtStart(const KPathSegment &s)
 {
     QList<QPointF> cp = s.controlPoints();
     QPointF tn = cp[1] - cp.first();
@@ -373,7 +373,7 @@ QPointF RoundCornersCommand::tangentAtStart(const KoPathSegment &s)
     return tn / length;
 }
 
-QPointF RoundCornersCommand::tangentAtEnd(const KoPathSegment &s)
+QPointF RoundCornersCommand::tangentAtEnd(const KPathSegment &s)
 {
     QList<QPointF> cp = s.controlPoints();
     QPointF tn = cp[cp.count()-2] - cp.last();

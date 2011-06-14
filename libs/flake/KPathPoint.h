@@ -277,8 +277,8 @@ private:
 //   /// a KoSubpath contains a path from a moveTo until a close or a new moveTo
 //   typedef QList<KPathPoint *> KoSubpath;
 //   typedef QList<KoSubpath *> KoSubpathList;
-//   /// A KoPathSegment is a pair two neighboring KoPathPoints
-//   typedef QPair<KPathPoint*,KPathPoint*> KoPathSegment;
+//   /// A KPathSegment is a pair two neighboring KoPathPoints
+//   typedef QPair<KPathPoint*,KPathPoint*> KPathSegment;
 //   /// The position of a path point within a path shape
 //   typedef QPair<KoSubpath*, int> KoPointPosition;
 

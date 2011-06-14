@@ -249,8 +249,8 @@ bool ExtensionSnapStrategy::snap(const QPointF &mousePosition, KoSnapProxy * pro
     // near our mouse position which we want to use as the snapped position
     if (minDistances[0] < HUGE_VAL && minDistances[1] < HUGE_VAL) {
         // check if intersection of extension lines is near mouse position
-        KoPathSegment s1(startPoints[0], snappedPoints[0] + snappedPoints[0]-startPoints[0]);
-        KoPathSegment s2(startPoints[1], snappedPoints[1] + snappedPoints[1]-startPoints[1]);
+        KPathSegment s1(startPoints[0], snappedPoints[0] + snappedPoints[0]-startPoints[0]);
+        KPathSegment s2(startPoints[1], snappedPoints[1] + snappedPoints[1]-startPoints[1]);
         QList<QPointF> isects = s1.intersections(s2);
         if (isects.count() == 1 && squareDistance(isects[0], mousePosition) < maxDistance) {
             // add both extension lines
@@ -370,12 +370,12 @@ bool IntersectionSnapStrategy::snap(const QPointF &mousePosition, KoSnapProxy *p
     rect.moveCenter(mousePosition);
     QPointF snappedPoint = mousePosition;
 
-    QList<KoPathSegment> segments = proxy->segmentsInRect(rect);
+    QList<KPathSegment> segments = proxy->segmentsInRect(rect);
     //kDebug() << "found" << segments.count() << "segments in roi";
 
     int segmentCount = segments.count();
     for (int i = 0; i < segmentCount; ++i) {
-        const KoPathSegment &s1 = segments[i];
+        const KPathSegment &s1 = segments[i];
         for (int j = i + 1; j < segmentCount; ++j) {
             QList<QPointF> isects = s1.intersections(segments[j]);
             //kDebug() << isects.count() << "intersections found";

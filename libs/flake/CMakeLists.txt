@@ -27,7 +27,7 @@ set(flake_SRCS
     KoPathShape.cpp
     KPathPoint.cpp
     KPathPointData.cpp
-    KoPathSegment.cpp
+    KPathSegment.cpp
     KoSelection.cpp
     KoShape.cpp
     KoShapeConnection.cpp
@@ -270,7 +270,7 @@ install(
     KPasteController.h
     KPathPointData.h
     KPathPoint.h
-    KoPathSegment.h
+    KPathSegment.h
     KoPathShape.h
     KoPathShapeLoader.h
     KoPatternBackground.h

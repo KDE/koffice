@@ -76,7 +76,7 @@ void KoPathSegmentChangeStrategy::handleMouseMove(const QPointF &mouseLocation, 
 
     if (m_segment.degree() == 2) {
         // interpolate quadratic segment between segment start, mouse position and segment end
-        KoPathSegment ipol = KoPathSegment::interpolate(m_segment.first()->point(),
+        KPathSegment ipol = KPathSegment::interpolate(m_segment.first()->point(),
                                                          localPos,
                                                          m_segment.second()->point(),
                                                          m_segmentParam);

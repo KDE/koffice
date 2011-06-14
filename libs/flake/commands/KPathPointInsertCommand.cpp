@@ -50,7 +50,7 @@ KPathPointInsertCommand::KPathPointInsertCommand(const QList<KPathPointData> &po
     for (; it != pointDataList.end(); ++it) {
         KoPathShape * pathShape = it->pathShape;
 
-        KoPathSegment segment = pathShape->segmentByIndex(it->pointIndex);
+        KPathSegment segment = pathShape->segmentByIndex(it->pointIndex);
 
         // should not happen but to be sure
         if (! segment.isValid())
@@ -58,7 +58,7 @@ KPathPointInsertCommand::KPathPointInsertCommand(const QList<KPathPointData> &po
 
         d->pointDataList.append(*it);
 
-        QPair<KoPathSegment, KoPathSegment> splitSegments = segment.splitAt(insertPosition);
+        QPair<KPathSegment, KPathSegment> splitSegments = segment.splitAt(insertPosition);
 
         KPathPoint * split1 = splitSegments.first.second();
         KPathPoint * split2 = splitSegments.second.first();
@@ -87,7 +87,7 @@ void KPathPointInsertCommand::redo()
         KPathPointData pointData = d->pointDataList.at(i);
         KoPathShape * pathShape = pointData.pathShape;
 
-        KoPathSegment segment = pathShape->segmentByIndex(pointData.pointIndex);
+        KPathSegment segment = pathShape->segmentByIndex(pointData.pointIndex);
 
         ++pointData.pointIndex.second;
 

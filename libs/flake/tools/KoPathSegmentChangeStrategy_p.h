@@ -33,7 +33,7 @@
 
 
 #include "KInteractionStrategy.h"
-#include "KoPathSegment.h"
+#include "KPathSegment.h"
 #include "KPathPointData.h"
 #include <QtCore/QPointF>
 
@@ -60,7 +60,7 @@ private:
     /// pointer to the path tool
     KoPathTool *m_tool;
     KoPathShape *m_path;
-    KoPathSegment m_segment;
+    KPathSegment m_segment;
     qreal m_segmentParam;
     QPointF m_ctrlPoint1Move;
     QPointF m_ctrlPoint2Move;

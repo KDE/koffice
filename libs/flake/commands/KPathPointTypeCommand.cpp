@@ -88,7 +88,7 @@ void KPathPointTypeCommand::redo()
             KPathPoint * nextPoint = path->pointByIndex(nextIndex);
 
             if (prevPoint && ! point->activeControlPoint1() && appendPointData(KPathPointData(path, prevIndex))) {
-                KoPathSegment cubic = KoPathSegment(prevPoint, point).toCubic();
+                KPathSegment cubic = KPathSegment(prevPoint, point).toCubic();
                 if (prevPoint->activeControlPoint2()) {
                     prevPoint->setControlPoint2(cubic.first()->controlPoint2());
                     point->setControlPoint1(cubic.second()->controlPoint1());
@@ -96,7 +96,7 @@ void KPathPointTypeCommand::redo()
                     point->setControlPoint1(cubic.second()->controlPoint1());
             }
             if (nextPoint && ! point->activeControlPoint2() && appendPointData(KPathPointData(path, nextIndex))) {
-                KoPathSegment cubic = KoPathSegment(point, nextPoint).toCubic();
+                KPathSegment cubic = KPathSegment(point, nextPoint).toCubic();
                 if (nextPoint->activeControlPoint1()) {
                     point->setControlPoint2(cubic.first()->controlPoint2());
                     nextPoint->setControlPoint1(cubic.second()->controlPoint1());

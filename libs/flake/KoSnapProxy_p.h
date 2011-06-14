@@ -33,7 +33,7 @@
 
 class KoSnapGuide;
 class KoShape;
-class KoPathSegment;
+class KPathSegment;
 class KCanvasBase;
 
 #include <QtCore/QList>
@@ -58,7 +58,7 @@ public:
     QList<QPointF> pointsFromShape(KoShape *shape);
 
     /// returns list of points in given rectangle in document coordinates
-    QList<KoPathSegment> segmentsInRect(const QRectF &rect);
+    QList<KPathSegment> segmentsInRect(const QRectF &rect);
 
     /// returns list of all shapes
     QList<KoShape*> shapes(bool omitEditedShape = false);

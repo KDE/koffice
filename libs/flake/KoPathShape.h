@@ -27,7 +27,7 @@
 #include <QMap>
 
 #include "KoShape.h"
-#include "KoPathSegment.h"
+#include "KPathSegment.h"
 
 #define KoPathShapeId "KoPathShape"
 
@@ -206,7 +206,7 @@ public:
      * @param rect the rectangle the requested segments are in
      * @return list of segments within the rectangle
      */
-    QList<KoPathSegment> segmentsAt(const QRectF &rect);
+    QList<KPathSegment> segmentsAt(const QRectF &rect);
 
     /**
      * @brief Returns the path point index of a given path point
@@ -236,9 +236,9 @@ public:
      *
      * @param pointIndex index of the first point of the segment
      *
-     * @return Segment containing both points of the segment or KoPathSegment(0, 0) on error e.g. out of bounds
+     * @return Segment containing both points of the segment or KPathSegment(0, 0) on error e.g. out of bounds
      */
-    KoPathSegment segmentByIndex(const KoPathPointIndex &pointIndex) const;
+    KPathSegment segmentByIndex(const KoPathPointIndex &pointIndex) const;
 
     /**
      * @brief Returns the number of points in the path

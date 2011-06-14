@@ -24,7 +24,7 @@
 #include <QtCore/QPointF>
 
 class KoPathShape;
-class KoPathSegment;
+class KPathSegment;
 class KPathPoint;
 
 /// command for rounding corners on a path shape
@@ -41,10 +41,10 @@ public:
 
 private:
     void roundPath();
-    KPathPoint * addSegment(KoPathShape * p, KoPathSegment & s);
+    KPathPoint * addSegment(KoPathShape * p, KPathSegment & s);
     void copyPath(KoPathShape * dst, KoPathShape * src);
-    QPointF tangentAtStart(const KoPathSegment &s);
-    QPointF tangentAtEnd(const KoPathSegment &s);
+    QPointF tangentAtStart(const KPathSegment &s);
+    QPointF tangentAtEnd(const KPathSegment &s);
 
     qreal m_radius;
     KoPathShape * m_path;

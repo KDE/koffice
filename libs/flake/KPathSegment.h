@@ -29,8 +29,8 @@
 class KPathPoint;
 class QTransform;
 
-/// A KoPathSegment consist of two neighboring KoPathPoints
-class FLAKE_EXPORT KoPathSegment
+/// A KPathSegment consist of two neighboring KoPathPoints
+class FLAKE_EXPORT KPathSegment
 {
 public:
     /**
@@ -38,23 +38,23 @@ public:
     * It takes ownership of the path points which do not have a
     * parent path shape set.
     */
-    explicit KoPathSegment(KPathPoint * first = 0, KPathPoint * second = 0);
+    explicit KPathSegment(KPathPoint * first = 0, KPathPoint * second = 0);
 
     /// Constructs segment by copying another segment
-    KoPathSegment(const KoPathSegment &segment);
+    KPathSegment(const KPathSegment &segment);
 
     /// Creates a new line segment
-    KoPathSegment(const QPointF &p0, const QPointF &p1);
+    KPathSegment(const QPointF &p0, const QPointF &p1);
     /// Creates a new quadratic segment
-    KoPathSegment(const QPointF &p0, const QPointF &p1, const QPointF &p2);
+    KPathSegment(const QPointF &p0, const QPointF &p1, const QPointF &p2);
     /// Creates a new cubic segment
-    KoPathSegment(const QPointF &p0, const QPointF &p1, const QPointF &p2, const QPointF &p3);
+    KPathSegment(const QPointF &p0, const QPointF &p1, const QPointF &p2, const QPointF &p3);
 
     /// Assigns segment
-    KoPathSegment& operator=(const KoPathSegment &other);
+    KPathSegment& operator=(const KPathSegment &other);
 
     /// Destroys the path segment
-    ~KoPathSegment();
+    ~KPathSegment();
 
     /// Returns the first point of the segment
     KPathPoint *first() const;
@@ -72,19 +72,19 @@ public:
     bool isValid() const;
 
     /// Compare operator
-    bool operator==(const KoPathSegment &other) const;
+    bool operator==(const KPathSegment &other) const;
 
     /// Returns the degree of the segment: 1 = line, 2 = quadratic, 3 = cubic, -1 = invalid
     int degree() const;
 
     /// Returns list of intersections with the given path segment
-    QList<QPointF> intersections(const KoPathSegment &segment) const;
+    QList<QPointF> intersections(const KPathSegment &segment) const;
 
     /// Returns the convex hull polygon of the segment
     QList<QPointF> convexHull() const;
 
     /// Splits segment at given position returning the two resulting segments
-    QPair<KoPathSegment, KoPathSegment> splitAt(qreal t) const;
+    QPair<KPathSegment, KPathSegment> splitAt(qreal t) const;
 
     /// Returns point at given t
     QPointF pointAt(qreal t) const;
@@ -96,10 +96,10 @@ public:
     QRectF controlPointRect() const;
 
     /// Returns transformed segment
-    KoPathSegment mapped(const QTransform &matrix) const;
+    KPathSegment mapped(const QTransform &matrix) const;
 
     /// Returns cubic bezier curve segment of this segment
-    KoPathSegment toCubic() const;
+    KPathSegment toCubic() const;
 
     /**
      * Returns the length of the path segment
@@ -145,7 +145,7 @@ public:
      * Interpolates quadric bezier curve.
      * @return the interpolated bezier segment
      */
-    static KoPathSegment interpolate(const QPointF &p0, const QPointF &p1, const QPointF &p2, qreal t);
+    static KPathSegment interpolate(const QPointF &p0, const QPointF &p1, const QPointF &p2, qreal t);
 
 private:
     class Private;

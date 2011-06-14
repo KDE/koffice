@@ -663,9 +663,9 @@ QList<KPathPoint*> KoPathShape::pointsAt(const QRectF &r)
     return result;
 }
 
-QList<KoPathSegment> KoPathShape::segmentsAt(const QRectF &r)
+QList<KPathSegment> KoPathShape::segmentsAt(const QRectF &r)
 {
-    QList<KoPathSegment> segments;
+    QList<KPathSegment> segments;
     int subpathCount = m_subpaths.count();
     for (int subpathIndex = 0; subpathIndex < subpathCount; ++subpathIndex) {
         KoSubpath * subpath = m_subpaths[subpathIndex];
@@ -674,7 +674,7 @@ QList<KoPathSegment> KoPathShape::segmentsAt(const QRectF &r)
         for (int pointIndex = 0; pointIndex < pointCount; ++pointIndex) {
             if (pointIndex == (pointCount - 1) && ! subpathClosed)
                 break;
-            KoPathSegment s(subpath->at(pointIndex), subpath->at((pointIndex + 1) % pointCount));
+            KPathSegment s(subpath->at(pointIndex), subpath->at((pointIndex + 1) % pointCount));
             QRectF controlRect = s.controlPointRect();
             if (! r.intersects(controlRect) && ! controlRect.contains(r))
                 continue;
@@ -712,10 +712,10 @@ KPathPoint * KoPathShape::pointByIndex(const KoPathPointIndex &pointIndex) const
     return subpath->at(pointIndex.second);
 }
 
-KoPathSegment KoPathShape::segmentByIndex(const KoPathPointIndex &pointIndex) const
+KPathSegment KoPathShape::segmentByIndex(const KoPathPointIndex &pointIndex) const
 {
     Q_D(const KoPathShape);
-    KoPathSegment segment(0, 0);
+    KPathSegment segment(0, 0);
 
     KoSubpath *subpath = d->subPath(pointIndex.first);
 
@@ -729,7 +729,7 @@ KoPathSegment KoPathShape::segmentByIndex(const KoPathPointIndex &pointIndex) co
             ++index;
 
         if (index < subpath->size()) {
-            segment = KoPathSegment(point, subpath->at(index));
+            segment = KPathSegment(point, subpath->at(index));
         }
     }
     return segment;
