@@ -38,7 +38,7 @@
 
 
 KCreatePathTool::KCreatePathTool(KCanvasBase *canvas)
-        : KoToolBase(*(new KoCreatePathToolPrivate(this, canvas)))
+        : KoToolBase(*(new KCreatePathToolPrivate(this, canvas)))
 {
 }
 

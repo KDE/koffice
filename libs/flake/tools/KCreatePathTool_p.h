@@ -42,7 +42,7 @@ class KoPathShape;
 class KoPathPoint;
 class KLineBorder;
 
-class KoCreatePathToolPrivate;
+class KCreatePathToolPrivate;
 
 #define KoCreatePathTool_ID "CreatePathTool"
 

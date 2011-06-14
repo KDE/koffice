@@ -190,10 +190,10 @@ private:
 };
 
 
-class KoCreatePathToolPrivate : public KoToolBasePrivate {
+class KCreatePathToolPrivate : public KoToolBasePrivate {
     KCreatePathTool * const q;
 public:
-    KoCreatePathToolPrivate(KCreatePathTool * const qq, KCanvasBase* canvas)
+    KCreatePathToolPrivate(KCreatePathTool * const qq, KCanvasBase* canvas)
         : KoToolBasePrivate(qq, canvas),
         q(qq),
         shape(0),
