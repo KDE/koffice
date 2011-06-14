@@ -94,6 +94,7 @@ install(FILES
     KoColorConversionTransformationFactory.h
     KoColorConversionTransformation.h
     KoColor.h
+    KoID.h
     KoColorModelStandardIds.h
     KoColorProfile.h
     KoColorSpaceConstants.h

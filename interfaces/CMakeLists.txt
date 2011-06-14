@@ -2,6 +2,6 @@ project (interfaces)
 
 ########### install files ###############
 
-install(FILES KoGenericRegistry.h KoID.h KoChartInterface.h KoChartModel.h
+install(FILES KoGenericRegistry.h KoChartInterface.h KoChartModel.h
         DESTINATION ${INCLUDE_INSTALL_DIR} COMPONENT Devel)
 
