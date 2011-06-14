@@ -22,7 +22,7 @@
 #include "KInlineObject_p.h"
 
 #include <KoShapeSavingContext.h>
-#include <KoShapeLoadingContext.h>
+#include <KShapeLoadingContext.h>
 #include <KXmlWriter.h>
 #include <KXmlReader.h>
 #include <KoTextInlineRdf.h>
@@ -159,7 +159,7 @@ bool KoBookmark::hasSelection() const
     return d->selection;
 }
 
-bool KoBookmark::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
+bool KoBookmark::loadOdf(const KXmlElement &element, KShapeLoadingContext &context)
 {
     Q_UNUSED(element);
     Q_UNUSED(context);

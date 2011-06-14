@@ -63,7 +63,7 @@ set(flake_SRCS
     KoToolRegistry.cpp
     KoToolProxy.cpp
     KoShapeSavingContext.cpp
-    KoShapeLoadingContext.cpp
+    KShapeLoadingContext.cpp
     KLoadingShapeUpdater.cpp
     KPathShapeLoader.cpp
     ShapeDeleter_p.cpp
@@ -282,7 +282,7 @@ install(
     KShapeGroup.h
     KShape.h
     KShapeLayer.h
-    KoShapeLoadingContext.h
+    KShapeLoadingContext.h
     KoShapeManager.h
     KoShapeManagerPaintingStrategy.h
     KoShapeOdfSaveHelper.h

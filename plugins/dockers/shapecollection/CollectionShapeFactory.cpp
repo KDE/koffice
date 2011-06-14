@@ -23,7 +23,7 @@
 #include <KDrag.h>
 #include <KoShapeOdfSaveHelper.h>
 #include <KOdf.h>
-#include <KoShapeLoadingContext.h>
+#include <KShapeLoadingContext.h>
 #include <KShapeControllerBase.h>
 #include <KOdfLoadingContext.h>
 #include <KOdfStore.h>
@@ -89,7 +89,7 @@ KShape *CollectionShapeFactory::createDefaultShape(KResourceManager *documentRes
         }
 
         KOdfLoadingContext loadingContext(odfStore.styles(), odfStore.store());
-        KoShapeLoadingContext context(loadingContext, documentResources);
+        KShapeLoadingContext context(loadingContext, documentResources);
 
         KXmlElement element;
 
@@ -107,7 +107,7 @@ KShape *CollectionShapeFactory::createDefaultShape(KResourceManager *documentRes
     return shape;
 }
 
-bool CollectionShapeFactory::supports(const KXmlElement &e, KoShapeLoadingContext &context) const
+bool CollectionShapeFactory::supports(const KXmlElement &e, KShapeLoadingContext &context) const
 {
     Q_UNUSED(e);
     Q_UNUSED(context);

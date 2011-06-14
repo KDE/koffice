@@ -23,7 +23,7 @@
 #include "KShapeLayer.h"
 #include "SimpleShapeContainerModel_p.h"
 #include "KoShapeSavingContext.h"
-#include "KoShapeLoadingContext.h"
+#include "KShapeLoadingContext.h"
 #include "KXmlWriter.h"
 #include "KXmlReader.h"
 #include "KoShapeRegistry.h"
@@ -84,7 +84,7 @@ void KShapeGroup::saveOdf(KoShapeSavingContext & context) const
     context.xmlWriter().endElement();
 }
 
-bool KShapeGroup::loadOdf(const KXmlElement & element, KoShapeLoadingContext &context)
+bool KShapeGroup::loadOdf(const KXmlElement & element, KShapeLoadingContext &context)
 {
     loadOdfAttributes(element, context, OdfMandatories | OdfAdditionalAttributes | OdfCommonChildElements);
 

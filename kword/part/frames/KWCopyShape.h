@@ -51,7 +51,7 @@ public:
     /// reimplemented
     virtual void saveOdf(KoShapeSavingContext &context) const;
     /// reimplemented
-    virtual bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context);
+    virtual bool loadOdf(const KXmlElement &element, KShapeLoadingContext &context);
 
     /// policy to determine what to do when the original shape moves
     void setShapeSeriesPlacement(KWord::ShapeSeriesPlacement placement);

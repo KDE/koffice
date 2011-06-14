@@ -22,7 +22,7 @@
 
 #include <KXmlReader.h>
 #include <KOdfXmlNS.h>
-#include <KoShapeLoadingContext.h>
+#include <KShapeLoadingContext.h>
 #include <KoTextBlockData.h>
 
 #include <QVariant>
@@ -54,7 +54,7 @@ void debugXml(const QString &pos, const KXmlElement &element)
     kDebug() << pos << array;
 }
 
-bool SCAnimationLoader::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
+bool SCAnimationLoader::loadOdf(const KXmlElement &element, KShapeLoadingContext &context)
 {
     // have an overall structure for animations each step needs to be in its own QSequentialAnimationGroup subclass
     // use SCAnimationStep for that
@@ -124,7 +124,7 @@ void SCAnimationLoader::debug(QAbstractAnimation *animation, int level)
     }
 }
 
-bool SCAnimationLoader::loadOdfAnimation(SCAnimationStep **animationStep, const KXmlElement &element, KoShapeLoadingContext &context)
+bool SCAnimationLoader::loadOdfAnimation(SCAnimationStep **animationStep, const KXmlElement &element, KShapeLoadingContext &context)
 {
     QString nodeType = element.attributeNS(KOdfXmlNS::presentation, "node-type", "with-previous");
 

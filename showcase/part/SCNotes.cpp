@@ -48,7 +48,7 @@ public:
 
     virtual void paintDecorations(QPainter &, const KoViewConverter &, const KCanvasBase *) { }
 
-    virtual bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
+    virtual bool loadOdf(const KXmlElement &element, KShapeLoadingContext &context)
     {
         return loadOdfAttributes(element, context, OdfAllAttributes);
     }
@@ -120,7 +120,7 @@ void SCNotes::saveOdf(KoShapeSavingContext &context) const
     writer.endElement(); // presentation:notes
 }
 
-bool SCNotes::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
+bool SCNotes::loadOdf(const KXmlElement &element, KShapeLoadingContext &context)
 {
     KXmlElement child;
     KShapeLayer* layer = dynamic_cast<KShapeLayer*>(shapes().last());

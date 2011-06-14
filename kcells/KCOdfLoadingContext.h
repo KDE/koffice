@@ -24,7 +24,7 @@
 
 #include <QHash>
 
-class KoShapeLoadingContext;
+class KShapeLoadingContext;
 
 
 /**
@@ -39,7 +39,7 @@ public:
 
 public:
     KOdfLoadingContext& odfContext;
-    KoShapeLoadingContext* shapeContext;
+    KShapeLoadingContext* shapeContext;
     QHash<QString, KXmlElement> validities;
 };
 

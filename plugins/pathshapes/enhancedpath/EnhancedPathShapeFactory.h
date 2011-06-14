@@ -35,7 +35,7 @@ public:
     ~EnhancedPathShapeFactory() {}
     virtual KShape *createShape(const KProperties *params, KResourceManager *documentResources = 0) const;
     virtual KShape *createDefaultShape(KResourceManager *documentResources = 0) const;
-    virtual bool supports(const KXmlElement &e, KoShapeLoadingContext &context) const;
+    virtual bool supports(const KXmlElement &e, KShapeLoadingContext &context) const;
 private:
     void addCross();
     void addArrow();

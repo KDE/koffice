@@ -102,7 +102,7 @@ public:
     virtual bool hitTest(const QPointF &position) const;
 
     virtual void saveOdf(KoShapeSavingContext &context) const;
-    virtual bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context);
+    virtual bool loadOdf(const KXmlElement &element, KShapeLoadingContext &context);
 
     /// Removes all subpaths and their points from the path
     void clear();
@@ -433,7 +433,7 @@ protected:
     /// reimplemented
     virtual QString saveStyle(KOdfGenericStyle &style, KoShapeSavingContext &context) const;
     /// reimplemented
-    virtual void loadStyle(const KXmlElement &element, KoShapeLoadingContext &context);
+    virtual void loadStyle(const KXmlElement &element, KShapeLoadingContext &context);
 
     /**
      * @brief Add an arc.

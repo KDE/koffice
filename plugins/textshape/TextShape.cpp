@@ -54,7 +54,7 @@ struct Finalizer {
 #include <KPostscriptPaintDevice.h>
 #include <KSelection.h>
 #include <KShapeBackground.h>
-#include <KoShapeLoadingContext.h>
+#include <KShapeLoadingContext.h>
 #include <KoShapeManager.h>
 #include <KoShapeSavingContext.h>
 #include <KoText.h>
@@ -351,7 +351,7 @@ QString TextShape::saveStyle(KOdfGenericStyle &style, KoShapeSavingContext &cont
     return KShape::saveStyle(style, context);
 }
 
-void TextShape::loadStyle(const KXmlElement &element, KoShapeLoadingContext &context)
+void TextShape::loadStyle(const KXmlElement &element, KShapeLoadingContext &context)
 {
     KShape::loadStyle(element, context);
     KOdfStyleStack &styleStack = context.odfLoadingContext().styleStack();
@@ -372,7 +372,7 @@ void TextShape::loadStyle(const KXmlElement &element, KoShapeLoadingContext &con
     m_textShapeData->setVerticalAlignment(alignment);
 }
 
-bool TextShape::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
+bool TextShape::loadOdf(const KXmlElement &element, KShapeLoadingContext &context)
 {
     m_textShapeData->document()->setUndoRedoEnabled(false);
     loadOdfAttributes(element, context, OdfAllAttributes);
@@ -412,7 +412,7 @@ bool TextShape::loadOdf(const KXmlElement &element, KoShapeLoadingContext &conte
     return answer;
 }
 
-bool TextShape::loadOdfFrame(const KXmlElement &element, KoShapeLoadingContext &context)
+bool TextShape::loadOdfFrame(const KXmlElement &element, KShapeLoadingContext &context)
 {
     // if the loadOdfFrame from the base class for draw:text-box failes check for table:table
     if (!KFrameShape::loadOdfFrame(element, context)) {
@@ -426,7 +426,7 @@ bool TextShape::loadOdfFrame(const KXmlElement &element, KoShapeLoadingContext &
     return true;
 }
 
-bool TextShape::loadOdfFrameElement(const KXmlElement &element, KoShapeLoadingContext &context)
+bool TextShape::loadOdfFrameElement(const KXmlElement &element, KShapeLoadingContext &context)
 {
     return m_textShapeData->loadOdf(element, context, 0, this);
 }

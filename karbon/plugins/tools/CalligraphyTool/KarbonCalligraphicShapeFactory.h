@@ -32,7 +32,7 @@ public:
     explicit KarbonCalligraphicShapeFactory(QObject *parent);
     virtual ~KarbonCalligraphicShapeFactory();
     virtual KShape *createDefaultShape(KResourceManager *documentResources = 0) const;
-    virtual bool supports(const KXmlElement & e, KoShapeLoadingContext &context) const;
+    virtual bool supports(const KXmlElement & e, KShapeLoadingContext &context) const;
 };
 
 #endif // KARBONCALLIGRAPHICSHAPEFACTORY_H

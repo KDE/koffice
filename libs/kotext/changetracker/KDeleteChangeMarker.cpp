@@ -24,7 +24,7 @@
 #include <KXmlReader.h>
 #include <KXmlWriter.h>
 #include <KoTextShapeSavingContext.h>
-#include <KoShapeLoadingContext.h>
+#include <KShapeLoadingContext.h>
 #include <opendocument/KoTextSharedSavingData.h>
 #include "KChangeTrackerElement.h"
 #include "KChangeTracker.h"
@@ -95,7 +95,7 @@ int KDeleteChangeMarker::position() const
     return textPosition();
 }
 
-bool KDeleteChangeMarker::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
+bool KDeleteChangeMarker::loadOdf(const KXmlElement &element, KShapeLoadingContext &context)
 {
     Q_UNUSED(element)
     Q_UNUSED(context);

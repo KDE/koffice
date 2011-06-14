@@ -28,7 +28,7 @@ public:
     SCAnimateColor(SCShapeAnimation *shapeAnimation);
     virtual ~SCAnimateColor();
 
-    virtual bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context);
+    virtual bool loadOdf(const KXmlElement &element, KShapeLoadingContext &context);
     virtual bool saveOdf(KoPASavingContext &paContext) const;
     virtual void init(SCAnimationCache *animationCache, int step);
 

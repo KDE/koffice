@@ -34,7 +34,7 @@
 #include <KUnit.h>
 #include <KOdfGenericStyle.h>
 #include <KPostscriptPaintDevice.h>
-#include <KoShapeLoadingContext.h>
+#include <KShapeLoadingContext.h>
 #include "KoTextSharedLoadingData.h"
 
 #include <KDebug>
@@ -720,7 +720,7 @@ int KCharacterStyle::textScale() const
 }
 
 //in 1.6 this was defined in KoTextFormat::load(KoOasisContext &context)
-void KCharacterStyle::loadOdf(KoShapeLoadingContext &scontext)
+void KCharacterStyle::loadOdf(KShapeLoadingContext &scontext)
 {
     KOdfLoadingContext &context = scontext.odfLoadingContext();
     KOdfStyleStack &styleStack = context.styleStack();

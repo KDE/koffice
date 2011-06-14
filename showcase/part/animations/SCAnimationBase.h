@@ -24,7 +24,7 @@
 #include "SCAnimationData.h"
 
 class KXmlElement;
-class KoShapeLoadingContext;
+class KShapeLoadingContext;
 class KoShapeSavingContext;
 class KShape;
 class KoTextBlockData;
@@ -37,7 +37,7 @@ class SCAnimationBase : public QAbstractAnimation, SCAnimationData
 public:
     SCAnimationBase(SCShapeAnimation *shapeAnimation);
     virtual ~SCAnimationBase();
-    virtual bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context);
+    virtual bool loadOdf(const KXmlElement &element, KShapeLoadingContext &context);
     virtual bool saveOdf(KoPASavingContext &paContext) const = 0;
 
     virtual int duration() const;

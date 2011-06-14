@@ -27,7 +27,7 @@
 class KShape;
 class QTextDocument;
 class KoShapeSavingContext;
-class KoShapeLoadingContext;
+class KShapeLoadingContext;
 class KXmlElement;
 
 /**
@@ -51,7 +51,7 @@ public:
 
     /// reimplemented from super
     void saveOdf(KoShapeSavingContext &context);
-    bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context);
+    bool loadOdf(const KXmlElement &element, KShapeLoadingContext &context);
 
     /// reimplemented from super
     virtual void updatePosition(QTextInlineObject object, const QTextCharFormat &format);

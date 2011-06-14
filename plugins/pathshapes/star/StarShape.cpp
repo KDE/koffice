@@ -21,7 +21,7 @@
 #include "StarShape.h"
 
 #include <KPathPoint.h>
-#include <KoShapeLoadingContext.h>
+#include <KShapeLoadingContext.h>
 #include <KoShapeSavingContext.h>
 #include <KoTextOnShapeContainer.h>
 #include <KXmlReader.h>
@@ -258,7 +258,7 @@ QPointF StarShape::computeCenter() const
     return center / static_cast<qreal>(m_cornerCount);
 }
 
-bool StarShape::loadOdf(const KXmlElement & element, KoShapeLoadingContext & context)
+bool StarShape::loadOdf(const KXmlElement & element, KShapeLoadingContext & context)
 {
     bool loadAsCustomShape = false;
 

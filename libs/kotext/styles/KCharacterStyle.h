@@ -34,7 +34,7 @@
 
 class StylePrivate;
 class KOdfStyleStack;
-class KoShapeLoadingContext;
+class KShapeLoadingContext;
 class KOdfGenericStyle;
 
 /**
@@ -317,7 +317,7 @@ public:
      * Load the style from the \a KOdfStyleStack style stack using the
      * OpenDocument format.
      */
-    void loadOdf(KoShapeLoadingContext &context);
+    void loadOdf(KShapeLoadingContext &context);
 
     /**
     * Load the style from the \a KOdfStyleStack style stack using the

@@ -24,8 +24,8 @@
 
 /**
  * The KoSharedLoadingData class is used to share data between shapes during loading.
- * These data can be added to the KoShapeLoadingContext using KoShapeLoadingContext::addSharedData().
- * A different shape can then get the data from the context using KoShapeLoadingContext::sharedData().
+ * These data can be added to the KShapeLoadingContext using KShapeLoadingContext::addSharedData().
+ * A different shape can then get the data from the context using KShapeLoadingContext::sharedData().
  */
 class FLAKE_EXPORT KoSharedLoadingData
 {

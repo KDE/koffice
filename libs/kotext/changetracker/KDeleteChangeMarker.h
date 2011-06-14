@@ -74,7 +74,7 @@ public:
     ///Return the position of the marker in the document
     int position() const;
 
-    virtual bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context);
+    virtual bool loadOdf(const KXmlElement &element, KShapeLoadingContext &context);
     ///reimplemented
     virtual void saveOdf(KoShapeSavingContext &context);
 

@@ -28,7 +28,7 @@
 
 #include <KOdfLoadingContext.h>
 #include <KShapeContainer.h>
-#include <KoShapeLoadingContext.h>
+#include <KShapeLoadingContext.h>
 #include <KoShapeSavingContext.h>
 #include <KOdfXmlNS.h>
 
@@ -161,7 +161,7 @@ void TableShape::paint(QPainter& painter, const KoViewConverter& converter)
     d->sheetView->paintCells(painter, paintRect, QPointF(0.0, 0.0));
 }
 
-bool TableShape::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
+bool TableShape::loadOdf(const KXmlElement &element, KShapeLoadingContext &context)
 {
     //kDebug() << "LOADING TABLE SHAPE";
     if (sheet() && element.namespaceURI() == KOdfXmlNS::table && element.localName() == "table") {

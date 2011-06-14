@@ -134,7 +134,7 @@ bool KoPAPageBase::saveOdfPresentationNotes(KoPASavingContext &paContext) const
     return true;
 }
 
-bool KoPAPageBase::loadOdf(const KXmlElement &element, KoShapeLoadingContext &loadingContext)
+bool KoPAPageBase::loadOdf(const KXmlElement &element, KShapeLoadingContext &loadingContext)
 {
     KoPALoadingContext &paContext = static_cast<KoPALoadingContext&>(loadingContext);
 

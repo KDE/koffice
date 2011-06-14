@@ -24,7 +24,7 @@
 #include <KXmlReader.h>
 #include <KXmlWriter.h>
 #include <KoShapeSavingContext.h>
-#include <KoShapeLoadingContext.h>
+#include <KShapeLoadingContext.h>
 #include <SCSoundData.h>
 #include <SCSoundCollection.h>
 #include <Showcase.h>
@@ -46,7 +46,7 @@ SCSoundEventAction::~SCSoundEventAction()
     delete m_soundData;
 }
 
-bool SCSoundEventAction::loadOdf(const KXmlElement & element, KoShapeLoadingContext &context)
+bool SCSoundEventAction::loadOdf(const KXmlElement & element, KShapeLoadingContext &context)
 {
     KXmlElement sound = KoXml::namedItemNS(element, KOdfXmlNS::presentation, "sound");
 

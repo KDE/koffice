@@ -21,7 +21,7 @@
 #ifndef KOPALOADINGCONTEXT_H
 #define KOPALOADINGCONTEXT_H
 
-#include <KoShapeLoadingContext.h>
+#include <KShapeLoadingContext.h>
 
 #include <QMap>
 
@@ -31,7 +31,7 @@ class KoPAMasterPage;
 class KoPAPage;
 
 /// Context needed for loading the data of a pageapp
-class KOPAGEAPP_EXPORT KoPALoadingContext : public KoShapeLoadingContext
+class KOPAGEAPP_EXPORT KoPALoadingContext : public KShapeLoadingContext
 {
 public:
     /**

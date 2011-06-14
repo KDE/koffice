@@ -32,7 +32,7 @@
 #include <KInlineTextObjectManager.h>
 #include <changetracker/KChangeTracker.h>
 #include <KImageCollection.h>
-#include <KoShapeLoadingContext.h>
+#include <KShapeLoadingContext.h>
 
 #include <klocale.h>
 #include <KUndoStack>
@@ -104,7 +104,7 @@ KShape *TextShapeFactory::createShape(const KProperties *params, KResourceManage
     return shape;
 }
 
-bool TextShapeFactory::supports(const KXmlElement & e, KoShapeLoadingContext &context) const
+bool TextShapeFactory::supports(const KXmlElement & e, KShapeLoadingContext &context) const
 {
     Q_UNUSED(context);
     return (e.localName() == "text-box" && e.namespaceURI() == KOdfXmlNS::draw) ||

@@ -34,7 +34,7 @@ public:
 
     virtual KShape *createDefaultShape(KResourceManager *documentResources = 0) const;
     // reimplemented from KShapeFactoryBase
-    virtual bool supports(const KXmlElement & e, KoShapeLoadingContext &context) const;
+    virtual bool supports(const KXmlElement & e, KShapeLoadingContext &context) const;
 };
 
 #endif // ARTISTICTEXTSHAPEFACTORY_H

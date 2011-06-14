@@ -28,7 +28,7 @@
 #include <KXmlReader.h>
 
 class KListStyle;
-class KoShapeLoadingContext;
+class KShapeLoadingContext;
 class KXmlWriter;
 class KImageData;
 
@@ -158,7 +158,7 @@ public:
     /**
      * Load the properties from the \p style using the OpenDocument format.
      */
-    void loadOdf(KoShapeLoadingContext& scontext, const KXmlElement& style);
+    void loadOdf(KShapeLoadingContext& scontext, const KXmlElement& style);
 
     /**
      * Save the properties of the style using the OpenDocument format

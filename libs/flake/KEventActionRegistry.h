@@ -27,7 +27,7 @@
 
 class KEventAction;
 class KEventActionFactoryBase;
-class KoShapeLoadingContext;
+class KShapeLoadingContext;
 class KXmlElement;
 
 /**
@@ -50,7 +50,7 @@ public:
     /**
      * Create action events for the elements given
      */
-    QSet<KEventAction*> createEventActionsFromOdf(const KXmlElement &element, KoShapeLoadingContext &context) const;
+    QSet<KEventAction*> createEventActionsFromOdf(const KXmlElement &element, KShapeLoadingContext &context) const;
 
     /**
      * Add presentation event action.

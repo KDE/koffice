@@ -27,7 +27,7 @@
 class KShape;
 class QTextDocument;
 class KoShapeSavingContext;
-class KoShapeLoadingContext;
+class KShapeLoadingContext;
 class KoBookmarkPrivate;
 
 /**
@@ -103,7 +103,7 @@ public:
     /// @return true if this bookmark has selection (type is StartBookmark of EndBookmark)
     bool hasSelection() const;
 
-    virtual bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context);
+    virtual bool loadOdf(const KXmlElement &element, KShapeLoadingContext &context);
 
 private:
     Q_DECLARE_PRIVATE(KoBookmark)

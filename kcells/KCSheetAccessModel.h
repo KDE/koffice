@@ -29,7 +29,7 @@ class KCSheet;
 /**
  * @brief Class that can be used by any shape embedded in KCells to access sheet data,
  * without the need to link against KCells. It is available through the KCDoc's data center map,
- * or KoShapeLoadingContext::dataCenterMap() in the process of loading a shape from ODF.
+ * or KShapeLoadingContext::dataCenterMap() in the process of loading a shape from ODF.
  *
  * Essentially, this model is a list of models to access a sheet's data. It contains a single row,
  * and has exactly one sheet model per column. In short, a model containing models.

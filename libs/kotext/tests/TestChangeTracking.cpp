@@ -36,7 +36,7 @@
 #include <KOdfStorageDevice.h>
 #include <KXmlWriter.h>
 #include <KoTextShapeData.h>
-#include <KoShapeLoadingContext.h>
+#include <KShapeLoadingContext.h>
 #include <KOdfLoadingContext.h>
 #include <KoShapeSavingContext.h>
 #include <KOdfGenericStyles.h>
@@ -109,7 +109,7 @@ QTextDocument *TestChangeTracking::documentFromOdt(const QString &odt, const QSt
 
 
     KOdfLoadingContext odfLoadingContext(odfReadStore.styles(), odfReadStore.store(), *componentData);
-    KoShapeLoadingContext shapeLoadingContext(odfLoadingContext, 0);
+    KShapeLoadingContext shapeLoadingContext(odfLoadingContext, 0);
     KoTextSharedLoadingData *textSharedLoadingData = new KoTextSharedLoadingData;
     textSharedLoadingData->loadOdfStyles(shapeLoadingContext, styleManager);
     shapeLoadingContext.addSharedData(KOTEXT_SHARED_LOADING_ID, textSharedLoadingData);

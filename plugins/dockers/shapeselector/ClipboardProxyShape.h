@@ -25,7 +25,7 @@
 
 class QPainter;
 class KoViewConverter;
-class KoShapeLoadingContext;
+class KShapeLoadingContext;
 class KoShapeSavingContext;
 
 #define OASIS_MIME "application/vnd.oasis.opendocument.text"

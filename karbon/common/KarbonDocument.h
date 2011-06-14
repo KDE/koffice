@@ -35,7 +35,7 @@
 #include <QRectF>
 
 #include <karboncommon_export.h>
-#include <KoShapeLoadingContext.h>
+#include <KShapeLoadingContext.h>
 #include <KOdfGenericStyle.h>
 #include <KXmlReader.h>
 #include <KoDocument.h>
@@ -156,8 +156,8 @@ public:
 
     void saveOasis(KoShapeSavingContext & context) const;
     bool saveOdf(KoDocument::SavingContext & documentContext, const KOdfPageLayoutData &layout);
-    bool loadOasis(const KXmlElement &element, KoShapeLoadingContext &context);
-    void loadOdfStyles(KoShapeLoadingContext & context);
+    bool loadOasis(const KXmlElement &element, KShapeLoadingContext &context);
+    void loadOdfStyles(KShapeLoadingContext & context);
     void saveOdfStyles(KoShapeSavingContext & context);
 
     /**

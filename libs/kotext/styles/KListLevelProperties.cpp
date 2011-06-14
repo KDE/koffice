@@ -29,7 +29,7 @@
 
 #include <KOdfXmlNS.h>
 #include <KOdfLoadingContext.h>
-#include <KoShapeLoadingContext.h>
+#include <KShapeLoadingContext.h>
 #include <KXmlWriter.h>
 #include <KUnit.h>
 #include <KoText.h>
@@ -368,7 +368,7 @@ KListLevelProperties KListLevelProperties::fromTextList(QTextList *list)
     return llp;
 }
 
-void KListLevelProperties::loadOdf(KoShapeLoadingContext& scontext, const KXmlElement& style)
+void KListLevelProperties::loadOdf(KShapeLoadingContext& scontext, const KXmlElement& style)
 {
     KOdfLoadingContext &context = scontext.odfLoadingContext();
 

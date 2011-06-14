@@ -22,7 +22,7 @@
 
 #include <KPathShape.h>
 #include <KoShapeSavingContext.h>
-#include <KoShapeLoadingContext.h>
+#include <KShapeLoadingContext.h>
 #include <KOdfXmlNS.h>
 #include <KXmlWriter.h>
 #include <KXmlReader.h>
@@ -130,7 +130,7 @@ void ArtisticTextShape::saveOdf(KoShapeSavingContext &context) const
     context.xmlWriter().endElement(); // draw:custom-shape
 }
 
-bool ArtisticTextShape::loadOdf( const KXmlElement & element, KoShapeLoadingContext & context )
+bool ArtisticTextShape::loadOdf( const KXmlElement & element, KShapeLoadingContext & context )
 {
     QString drawEngine = element.attributeNS( KOdfXmlNS::draw, "engine", "" );
     if ( drawEngine.isEmpty() || drawEngine != "svg:text" )

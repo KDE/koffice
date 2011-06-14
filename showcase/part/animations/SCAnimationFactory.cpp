@@ -28,9 +28,9 @@
 
 #include <KXmlReader.h>
 #include <KOdfXmlNS.h>
-#include <KoShapeLoadingContext.h>
+#include <KShapeLoadingContext.h>
 
-SCAnimationBase * SCAnimationFactory::createAnimationFromOdf(const KXmlElement &element, KoShapeLoadingContext &context,
+SCAnimationBase * SCAnimationFactory::createAnimationFromOdf(const KXmlElement &element, KShapeLoadingContext &context,
                                                                SCShapeAnimation *shapeAnimation)
 {
     SCAnimationBase * animation = 0;

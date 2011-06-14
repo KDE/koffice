@@ -21,7 +21,7 @@
 #include "KLineBorder.h"
 #include "KImageCollection.h"
 #include "KResourceManager.h"
-#include "KoShapeLoadingContext.h"
+#include "KShapeLoadingContext.h"
 
 #include <klocale.h>
 
@@ -50,7 +50,7 @@ KShape *KPathShapeFactory::createDefaultShape(KResourceManager *) const
     return path;
 }
 
-bool KPathShapeFactory::supports(const KXmlElement & e, KoShapeLoadingContext &context) const
+bool KPathShapeFactory::supports(const KXmlElement & e, KShapeLoadingContext &context) const
 {
     Q_UNUSED(context);
     if (e.namespaceURI() == KOdfXmlNS::draw) {

@@ -28,7 +28,7 @@ class KShape;
 class QPainter;
 class KoViewConverter;
 class KXmlElement;
-class KoShapeLoadingContext;
+class KShapeLoadingContext;
 class KoShapeSavingContext;
 class KShapeConnectionPrivate;
 
@@ -175,7 +175,7 @@ public:
     /// Sets shape2 to @p shape and gluePointIndex2 to @p gluePointIndex
     void setEndPoint(KShape *shape, int gluePointIndex);
 
-    bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context);
+    bool loadOdf(const KXmlElement &element, KShapeLoadingContext &context);
 
     /**
      * @brief store the shape data as ODF XML.

@@ -26,7 +26,7 @@
 
 #include <KOdfXmlNS.h>
 #include <KOdfLoadingContext.h>
-#include <KoShapeLoadingContext.h>
+#include <KShapeLoadingContext.h>
 
 #include <KDebug>
 #include <QTextCursor>
@@ -179,7 +179,7 @@ KoTextOnShapeContainer::~KoTextOnShapeContainer()
     if (d->content && d->content->parent() == this) delete d->content;
 }
 
-bool KoTextOnShapeContainer::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
+bool KoTextOnShapeContainer::loadOdf(const KXmlElement &element, KShapeLoadingContext &context)
 {
     Q_D(KoTextOnShapeContainer);
     if (d->textShape == 0)
@@ -300,7 +300,7 @@ void KoTextOnShapeContainer::saveOdfChildElements(KoShapeSavingContext &context)
 }
 
 // static
-void KoTextOnShapeContainer::tryWrapShape(KShape *shape, const KXmlElement &element, KoShapeLoadingContext &context)
+void KoTextOnShapeContainer::tryWrapShape(KShape *shape, const KXmlElement &element, KShapeLoadingContext &context)
 {
     KXmlElement text = KoXml::namedItemNS(element, KOdfXmlNS::text, "p");
     if (!text.isNull()) {

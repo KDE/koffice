@@ -31,7 +31,7 @@
 
 class KShape;
 class KShapeFactoryBase;
-class KoShapeLoadingContext;
+class KShapeLoadingContext;
 
 
 /**
@@ -66,9 +66,9 @@ public:
      *
      * @returns the shape or 0 if no shape could be created. The shape may have as its parent
      *    set a layer which was previously created and stored in the context.
-     * @see KoShapeLoadingContext::layer()
+     * @see KShapeLoadingContext::layer()
      */
-    KShape *createShapeFromOdf(const KXmlElement &element, KoShapeLoadingContext &context) const;
+    KShape *createShapeFromOdf(const KXmlElement &element, KShapeLoadingContext &context) const;
 
 private:
     KoShapeRegistry();

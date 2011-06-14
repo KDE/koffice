@@ -20,7 +20,7 @@
 #include "KShapeLayer.h"
 #include "SimpleShapeContainerModel_p.h"
 #include "KoShapeSavingContext.h"
-#include "KoShapeLoadingContext.h"
+#include "KShapeLoadingContext.h"
 #include <KXmlReader.h>
 #include <KXmlWriter.h>
 #include <KOdfGenericStyle.h>
@@ -69,7 +69,7 @@ void KShapeLayer::saveOdf(KoShapeSavingContext &context) const
     }
 }
 
-bool KShapeLayer::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
+bool KShapeLayer::loadOdf(const KXmlElement &element, KShapeLoadingContext &context)
 {
     // set layer name
     setName(element.attributeNS(KOdfXmlNS::draw, "name"));

@@ -24,7 +24,7 @@
 
 class KXmlElement;
 class KShape;
-class KoShapeLoadingContext;
+class KShapeLoadingContext;
 class QPen;
 class QColor;
 class QString;
@@ -48,33 +48,33 @@ namespace KoOdfWorkaround
      * OpenOffice handles a line with the width of 0 as a cosmetic line but in svg it makes the line invisible.
      * To show it in koffice use a very small line width. However this is not a cosmetic line.
      */
-    FLAKE_EXPORT void fixPenWidth(QPen &pen, KoShapeLoadingContext &context);
+    FLAKE_EXPORT void fixPenWidth(QPen &pen, KShapeLoadingContext &context);
 
     /**
      * OpenOffice < 3.0 does not store the draw:enhanced-path for draw:type="ellipse"
      * Add the path needed for the ellipse
      */
-    FLAKE_EXPORT void fixEnhancedPath(QString &path, const KXmlElement &element, KoShapeLoadingContext &context);
+    FLAKE_EXPORT void fixEnhancedPath(QString &path, const KXmlElement &element, KShapeLoadingContext &context);
 
     /**
      * OpenOffice interchanges the position coordinates for polar handles.
      * According to the specification the first coordinate is the angle, the
      * second coordinates is the radius. OpenOffice does it the other way around.
      */
-    FLAKE_EXPORT void fixEnhancedPathPolarHandlePosition(QString &position, const KXmlElement &element, KoShapeLoadingContext &context);
+    FLAKE_EXPORT void fixEnhancedPathPolarHandlePosition(QString &position, const KXmlElement &element, KShapeLoadingContext &context);
 
-    FLAKE_EXPORT bool   fixMissingStroke(QPen &pen, const KXmlElement &element, KoShapeLoadingContext &context, const KShape *shape = 0);
-    FLAKE_EXPORT QColor fixMissingFillColor(const KXmlElement &element, KoShapeLoadingContext &context);
-    FLAKE_EXPORT bool   fixMissingStyle_DisplayLabel(const KXmlElement &element, KoShapeLoadingContext &context);
+    FLAKE_EXPORT bool   fixMissingStroke(QPen &pen, const KXmlElement &element, KShapeLoadingContext &context, const KShape *shape = 0);
+    FLAKE_EXPORT QColor fixMissingFillColor(const KXmlElement &element, KShapeLoadingContext &context);
+    FLAKE_EXPORT bool   fixMissingStyle_DisplayLabel(const KXmlElement &element, KShapeLoadingContext &context);
 
-    FLAKE_EXPORT KColorBackground *fixBackgroundColor(const KShape *shape, KoShapeLoadingContext &context);
+    FLAKE_EXPORT KColorBackground *fixBackgroundColor(const KShape *shape, KShapeLoadingContext &context);
 
     /**
      * Old versions of ooimpress does not set the placeholder for shapes that should have it set
      * See open office issue http://www.openoffice.org/issues/show_bug.cgi?id=96406
      * And kde bug https://bugs.kde.org/show_bug.cgi?id=185354
      */
-    FLAKE_EXPORT void setFixPresentationPlaceholder(bool fix, KoShapeLoadingContext &context);
+    FLAKE_EXPORT void setFixPresentationPlaceholder(bool fix, KShapeLoadingContext &context);
     FLAKE_EXPORT bool fixPresentationPlaceholder();
     FLAKE_EXPORT void fixPresentationPlaceholder(KShape *shape);
 }

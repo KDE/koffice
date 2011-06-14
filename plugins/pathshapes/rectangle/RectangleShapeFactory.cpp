@@ -24,7 +24,7 @@
 #include <KOdfXmlNS.h>
 #include <KXmlReader.h>
 #include <KGradientBackground.h>
-#include <KoShapeLoadingContext.h>
+#include <KShapeLoadingContext.h>
 
 #include <klocale.h>
 
@@ -55,7 +55,7 @@ KShape *RectangleShapeFactory::createDefaultShape(KResourceManager *) const
     return rect;
 }
 
-bool RectangleShapeFactory::supports(const KXmlElement & e, KoShapeLoadingContext &/*context*/) const
+bool RectangleShapeFactory::supports(const KXmlElement & e, KShapeLoadingContext &/*context*/) const
 {
     Q_UNUSED(e);
     return (e.localName() == "rect" && e.namespaceURI() == KOdfXmlNS::draw);

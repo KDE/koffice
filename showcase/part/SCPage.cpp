@@ -120,7 +120,7 @@ SCPageLayout * SCPage::layout() const
     return placeholders().layout();
 }
 
-bool SCPage::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
+bool SCPage::loadOdf(const KXmlElement &element, KShapeLoadingContext &context)
 {
     if (!KoPAPageBase::loadOdf(element, context)) {
         return false;

@@ -26,7 +26,7 @@
 #include "styles/KListStyle.h"
 
 #include <KShape.h>
-#include <KoShapeLoadingContext.h>
+#include <KShapeLoadingContext.h>
 #include <KoShapeSavingContext.h> // for usage in Q_UNUSED
 
 #include <KDebug>
@@ -165,7 +165,7 @@ void KoTextLocator::removeListener(KoTextReference *reference)
     d->listeners.removeAll(reference);
 }
 
-bool KoTextLocator::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
+bool KoTextLocator::loadOdf(const KXmlElement &element, KShapeLoadingContext &context)
 {
     Q_UNUSED(element);
     Q_UNUSED(context);

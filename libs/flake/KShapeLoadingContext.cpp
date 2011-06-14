@@ -18,7 +18,7 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KoShapeLoadingContext.h"
+#include "KShapeLoadingContext.h"
 #include "KShape.h"
 #include "KShapeContainer.h"
 #include "KoSharedLoadingData.h"
@@ -29,14 +29,14 @@
 
 #include <kdebug.h>
 
-uint qHash(const KoShapeLoadingContext::AdditionalAttributeData & attributeData)
+uint qHash(const KShapeLoadingContext::AdditionalAttributeData & attributeData)
 {
     return qHash(attributeData.name);
 }
 
-static QSet<KoShapeLoadingContext::AdditionalAttributeData> s_additionlAttributes;
+static QSet<KShapeLoadingContext::AdditionalAttributeData> s_additionlAttributes;
 
-class KoShapeLoadingContext::Private
+class KShapeLoadingContext::Private
 {
 public:
     Private(KOdfLoadingContext &c, KResourceManager *resourceManager)
@@ -61,37 +61,37 @@ public:
     KResourceManager *documentResources;
 };
 
-KoShapeLoadingContext::KoShapeLoadingContext(KOdfLoadingContext & context, KResourceManager *documentResources)
+KShapeLoadingContext::KShapeLoadingContext(KOdfLoadingContext & context, KResourceManager *documentResources)
         : d(new Private(context, documentResources))
 {
 }
 
-KoShapeLoadingContext::~KoShapeLoadingContext()
+KShapeLoadingContext::~KShapeLoadingContext()
 {
     delete d;
 }
 
-KOdfLoadingContext & KoShapeLoadingContext::odfLoadingContext()
+KOdfLoadingContext & KShapeLoadingContext::odfLoadingContext()
 {
     return d->context;
 }
 
-KShapeLayer * KoShapeLoadingContext::layer(const QString & layerName)
+KShapeLayer * KShapeLoadingContext::layer(const QString & layerName)
 {
     return d->layers.value(layerName, 0);
 }
 
-void KoShapeLoadingContext::addLayer(KShapeLayer * layer, const QString & layerName)
+void KShapeLoadingContext::addLayer(KShapeLayer * layer, const QString & layerName)
 {
     d->layers[ layerName ] = layer;
 }
 
-void KoShapeLoadingContext::clearLayers()
+void KShapeLoadingContext::clearLayers()
 {
     d->layers.clear();
 }
 
-void KoShapeLoadingContext::addShapeId(KShape * shape, const QString & id)
+void KShapeLoadingContext::addShapeId(KShape * shape, const QString & id)
 {
     d->drawIds.insert(id, shape);
     QMap<QString, KLoadingShapeUpdater*>::iterator it(d->updaterById.find(id));
@@ -101,29 +101,29 @@ void KoShapeLoadingContext::addShapeId(KShape * shape, const QString & id)
     }
 }
 
-KShape * KoShapeLoadingContext::shapeById(const QString &id)
+KShape * KShapeLoadingContext::shapeById(const QString &id)
 {
     return d->drawIds.value(id, 0);
 }
 
-void KoShapeLoadingContext::addShapeSubItemId(KShape *shape, const QVariant &subItem, const QString &id)
+void KShapeLoadingContext::addShapeSubItemId(KShape *shape, const QVariant &subItem, const QString &id)
 {
     d->subIds.insert(id, QPair<KShape *, QVariant>(shape, subItem));
 }
 
-QPair<KShape *, QVariant> KoShapeLoadingContext::shapeSubItemById(const QString &id)
+QPair<KShape *, QVariant> KShapeLoadingContext::shapeSubItemById(const QString &id)
 {
     return d->subIds.value(id);
 }
 
 
 // TODO make sure to remove the shape from the loading context when loading for it failed and it was deleted. This can also happen when the parent is deleted
-void KoShapeLoadingContext::updateShape(const QString & id, KLoadingShapeUpdater * shapeUpdater)
+void KShapeLoadingContext::updateShape(const QString & id, KLoadingShapeUpdater * shapeUpdater)
 {
     d->updaterById.insertMulti(id, shapeUpdater);
 }
 
-void KoShapeLoadingContext::shapeLoaded(KShape * shape)
+void KShapeLoadingContext::shapeLoaded(KShape * shape)
 {
     QMap<KShape*, KLoadingShapeUpdater*>::iterator it(d->updaterByShape.find(shape));
     while (it != d->updaterByShape.end() && it.key() == shape) {
@@ -133,22 +133,22 @@ void KoShapeLoadingContext::shapeLoaded(KShape * shape)
     }
 }
 
-KImageCollection * KoShapeLoadingContext::imageCollection()
+KImageCollection * KShapeLoadingContext::imageCollection()
 {
     return d->documentResources ? d->documentResources->imageCollection() : 0;
 }
 
-int KoShapeLoadingContext::zIndex()
+int KShapeLoadingContext::zIndex()
 {
     return d->zIndex++;
 }
 
-void KoShapeLoadingContext::setZIndex(int index)
+void KShapeLoadingContext::setZIndex(int index)
 {
     d->zIndex = index;
 }
 
-void KoShapeLoadingContext::addSharedData(const QString & id, KoSharedLoadingData * data)
+void KShapeLoadingContext::addSharedData(const QString & id, KoSharedLoadingData * data)
 {
     QMap<QString, KoSharedLoadingData*>::iterator it(d->sharedData.find(id));
     // data will not be overwritten
@@ -160,7 +160,7 @@ void KoShapeLoadingContext::addSharedData(const QString & id, KoSharedLoadingDat
     }
 }
 
-KoSharedLoadingData * KoShapeLoadingContext::sharedData(const QString & id) const
+KoSharedLoadingData * KShapeLoadingContext::sharedData(const QString & id) const
 {
     KoSharedLoadingData * data = 0;
     QMap<QString, KoSharedLoadingData*>::const_iterator it(d->sharedData.find(id));
@@ -170,17 +170,17 @@ KoSharedLoadingData * KoShapeLoadingContext::sharedData(const QString & id) cons
     return data;
 }
 
-void KoShapeLoadingContext::addAdditionalAttributeData(const AdditionalAttributeData & attributeData)
+void KShapeLoadingContext::addAdditionalAttributeData(const AdditionalAttributeData & attributeData)
 {
     s_additionlAttributes.insert(attributeData);
 }
 
-QSet<KoShapeLoadingContext::AdditionalAttributeData> KoShapeLoadingContext::additionalAttributeData()
+QSet<KShapeLoadingContext::AdditionalAttributeData> KShapeLoadingContext::additionalAttributeData()
 {
     return s_additionlAttributes;
 }
 
-KResourceManager *KoShapeLoadingContext::documentResourceManager() const
+KResourceManager *KShapeLoadingContext::documentResourceManager() const
 {
     return d->documentResources;
 }

@@ -90,7 +90,7 @@ QList<QAction*> KInlineObjectRegistry::createInsertVariableActions(KCanvasBase *
     return answer;
 }
 
-KInlineObject *KInlineObjectRegistry::createFromOdf(const KXmlElement &element, KoShapeLoadingContext &context) const
+KInlineObject *KInlineObjectRegistry::createFromOdf(const KXmlElement &element, KShapeLoadingContext &context) const
 {
     kDebug(32500) << "Going to check for" << element.namespaceURI() << ":" << element.tagName();
 

@@ -32,7 +32,7 @@
 #include <kdebug.h>
 #include <KShape.h>
 #include <KoShapeSavingContext.h>
-#include <KoShapeLoadingContext.h>
+#include <KShapeLoadingContext.h>
 #include <KoTextShapeData.h>
 #include <KOdfXmlNS.h>
 #include <KoPATextPage.h>
@@ -90,7 +90,7 @@ void PresentationVariable::saveOdf(KoShapeSavingContext & context)
     writer->endElement();
 }
 
-bool PresentationVariable::loadOdf(const KXmlElement & element, KoShapeLoadingContext & context)
+bool PresentationVariable::loadOdf(const KXmlElement & element, KShapeLoadingContext & context)
 {
     Q_UNUSED(context);
     const QString localName(element.localName());

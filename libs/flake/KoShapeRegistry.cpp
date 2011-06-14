@@ -21,7 +21,7 @@
  */
 #include "KoShapeRegistry.h"
 #include "KPathShapeFactory_p.h"
-#include "KoShapeLoadingContext.h"
+#include "KShapeLoadingContext.h"
 #include "KoShapeSavingContext.h"
 #include "KShapeGroup.h"
 #include "KShapeLayer.h"
@@ -48,7 +48,7 @@ public:
     void insertFactory(KShapeFactoryBase *factory);
     void init(KoShapeRegistry *q);
 
-    KShape *createShapeInternal(const KXmlElement &fullElement, KoShapeLoadingContext &context, const KXmlElement &element) const;
+    KShape *createShapeInternal(const KXmlElement &fullElement, KShapeLoadingContext &context, const KXmlElement &element) const;
 
 
     // Map namespace,tagname to priority:factory
@@ -134,7 +134,7 @@ void KoShapeRegistry::Private::insertFactory(KShapeFactoryBase *factory)
     }
 }
 
-KShape * KoShapeRegistry::createShapeFromOdf(const KXmlElement & e, KoShapeLoadingContext & context) const
+KShape * KoShapeRegistry::createShapeFromOdf(const KXmlElement & e, KShapeLoadingContext & context) const
 {
     kDebug(30006) << "Going to check for" << e.namespaceURI() << ":" << e.tagName();
 
@@ -207,7 +207,7 @@ KShape * KoShapeRegistry::createShapeFromOdf(const KXmlElement & e, KoShapeLoadi
 }
 
 KShape *KoShapeRegistry::Private::createShapeInternal(const KXmlElement &fullElement,
-                                                       KoShapeLoadingContext &context,
+                                                       KShapeLoadingContext &context,
                                                        const KXmlElement &element) const
 {
     // Pair of namespace, tagname

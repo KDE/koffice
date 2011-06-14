@@ -40,7 +40,7 @@
 #include <KOdfXmlNS.h>
 #include <KXmlWriter.h>
 #include <KoStyleManager.h>
-#include <KoShapeLoadingContext.h>
+#include <KShapeLoadingContext.h>
 #include <KoTextSharedLoadingData.h>
 #include <KParagraphStyle.h>
 #include <KoShapeRegistry.h>
@@ -514,7 +514,7 @@ bool KCMap::loadOdf(const KXmlElement& body, KOdfLoadingContext& odfContext)
     tableContext.validities = KCValidity::preloadValidities(body); // table:content-validations
 
     // load text styles for rich-text content and TOS
-    KoShapeLoadingContext shapeContext(tableContext.odfContext, resourceManager());
+    KShapeLoadingContext shapeContext(tableContext.odfContext, resourceManager());
     tableContext.shapeContext = &shapeContext;
     KoTextSharedLoadingData * sharedData = new KoTextSharedLoadingData();
     sharedData->loadOdfStyles(shapeContext, textStyleManager());

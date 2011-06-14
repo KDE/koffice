@@ -22,7 +22,7 @@
 #include "KInlineTextObjectManager.h"
 
 #include <KXmlReader.h> // for usage in Q_UNUSED
-#include <KoShapeLoadingContext.h> // for usage in Q_UNUSED
+#include <KShapeLoadingContext.h> // for usage in Q_UNUSED
 #include <KoShapeSavingContext.h> // for usage in Q_UNUSED
 
 KoTextReference::KoTextReference(int indexId)
@@ -59,7 +59,7 @@ KoTextLocator* KoTextReference::locator()
     return dynamic_cast<KoTextLocator*>(manager()->inlineTextObject(m_indexId));
 }
 
-bool KoTextReference::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
+bool KoTextReference::loadOdf(const KXmlElement &element, KShapeLoadingContext &context)
 {
     Q_UNUSED(element);
     Q_UNUSED(context);

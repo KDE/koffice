@@ -48,7 +48,7 @@ class KoViewConverter;
 class KShapeApplicationData;
 class KoShapeSavingContext;
 class KCanvasBase;
-class KoShapeLoadingContext;
+class KShapeLoadingContext;
 class KOdfGenericStyle;
 class KShapeControllerBase;
 class KDataCenterBase;
@@ -172,12 +172,12 @@ public:
     /**
      * Load a shape from odf
      *
-     * @param context the KoShapeLoadingContext used for loading
+     * @param context the KShapeLoadingContext used for loading
      * @param element element which represents the shape in odf
      *
      * @return false if loading failed
      */
-    virtual bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context);
+    virtual bool loadOdf(const KXmlElement &element, KShapeLoadingContext &context);
 
     /**
      * @brief store the shape data as ODF XML.
@@ -944,11 +944,11 @@ protected:
     /**
      * This method is used during loading of the shape to load common attributes
      *
-     * @param context the KoShapeLoadingContext used for loading
+     * @param context the KShapeLoadingContext used for loading
      * @param element element which represents the shape in odf
      * @param attributes a number of OdfAttribute items to state which attributes to load.
      */
-    bool loadOdfAttributes(const KXmlElement &element, KoShapeLoadingContext &context, int attributes);
+    bool loadOdfAttributes(const KXmlElement &element, KShapeLoadingContext &context, int attributes);
 
     /**
      * Parses the transformation attribute from the given string
@@ -976,13 +976,13 @@ protected:
      * @param element the xml element to  load the style from
      * @param context the loading context used for loading
      */
-    virtual void loadStyle(const KXmlElement &element, KoShapeLoadingContext &context);
+    virtual void loadStyle(const KXmlElement &element, KShapeLoadingContext &context);
 
     /// Loads the stroke style
-    KShapeBorderBase *loadOdfStroke(const KXmlElement &element, KoShapeLoadingContext &context) const;
+    KShapeBorderBase *loadOdfStroke(const KXmlElement &element, KShapeLoadingContext &context) const;
 
     /// Loads the shadow style
-    KShapeBackground *loadOdfFill(KoShapeLoadingContext &context) const;
+    KShapeBackground *loadOdfFill(KShapeLoadingContext &context) const;
 
     /* ** end loading saving */
 

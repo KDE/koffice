@@ -28,7 +28,7 @@
 #include <KOdfXmlNS.h>
 #include <KShape.h>
 #include <KoShapeSavingContext.h>
-#include <KoShapeLoadingContext.h>
+#include <KShapeLoadingContext.h>
 
 #include <kdebug.h>
 
@@ -135,7 +135,7 @@ void PageVariable::saveOdf(KoShapeSavingContext &context)
     }
 }
 
-bool PageVariable::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
+bool PageVariable::loadOdf(const KXmlElement &element, KShapeLoadingContext &context)
 {
     Q_UNUSED(context);
     const QString localName(element.localName());

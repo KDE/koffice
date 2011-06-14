@@ -22,7 +22,7 @@
 
 #include "flake_export.h"
 
-class KoShapeLoadingContext;
+class KShapeLoadingContext;
 class KoShapeSavingContext;
 class KoToolBase;
 class KXmlElement;
@@ -71,12 +71,12 @@ public:
     /**
      * Load action from ODF.
      *
-     * @param context the KoShapeLoadingContext used for loading
+     * @param context the KShapeLoadingContext used for loading
      * @param element element which represents the shape in odf
      *
      * @return false if loading failed
      */
-    virtual bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context) = 0;
+    virtual bool loadOdf(const KXmlElement &element, KShapeLoadingContext &context) = 0;
 
     /**
      * Store the action as ODF.

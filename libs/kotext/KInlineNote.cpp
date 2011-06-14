@@ -160,12 +160,12 @@ void KInlineNote::paint(QPainter &painter, QPaintDevice *pd, const QRectF &rect,
     layout.draw(&painter, rect.topLeft());
 }
 
-bool KInlineNote::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
+bool KInlineNote::loadOdf(const KXmlElement &element, KShapeLoadingContext &context)
 {
     return loadOdf(element, context, 0, 0);
 }
 
-bool KInlineNote::loadOdf(const KXmlElement & element, KoShapeLoadingContext &context, KoStyleManager *styleManager, KChangeTracker *changeTracker)
+bool KInlineNote::loadOdf(const KXmlElement & element, KShapeLoadingContext &context, KoStyleManager *styleManager, KChangeTracker *changeTracker)
 {
     QTextDocument *document = new QTextDocument();
     QTextCursor cursor(document);

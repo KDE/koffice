@@ -84,7 +84,7 @@ void EllipseShape::saveOdf(KoShapeSavingContext &context) const
     }
 }
 
-bool EllipseShape::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
+bool EllipseShape::loadOdf(const KXmlElement &element, KShapeLoadingContext &context)
 {
     QSizeF size;
 

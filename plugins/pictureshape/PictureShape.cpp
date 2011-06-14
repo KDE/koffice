@@ -24,7 +24,7 @@
 #include <KoViewConverter.h>
 #include <KImageCollection.h>
 #include <KImageData.h>
-#include <KoShapeLoadingContext.h>
+#include <KShapeLoadingContext.h>
 #include <KOdfLoadingContext.h>
 #include <KoShapeSavingContext.h>
 #include <KXmlWriter.h>
@@ -214,13 +214,13 @@ void PictureShape::saveOdf(KoShapeSavingContext &context) const
     context.addDataCenter(m_imageCollection);
 }
 
-bool PictureShape::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
+bool PictureShape::loadOdf(const KXmlElement &element, KShapeLoadingContext &context)
 {
     loadOdfAttributes(element, context, OdfAllAttributes);
     return loadOdfFrame(element, context);
 }
 
-bool PictureShape::loadOdfFrameElement(const KXmlElement &element, KoShapeLoadingContext &context)
+bool PictureShape::loadOdfFrameElement(const KXmlElement &element, KShapeLoadingContext &context)
 {
     if (m_imageCollection) {
         const QString href = element.attribute("href");
@@ -260,7 +260,7 @@ QString PictureShape::saveStyle(KOdfGenericStyle& style, KoShapeSavingContext& c
     return KShape::saveStyle(style, context);
 }
 
-void PictureShape::loadStyle(const KXmlElement& element, KoShapeLoadingContext& context)
+void PictureShape::loadStyle(const KXmlElement& element, KShapeLoadingContext& context)
 {
     KShape::loadStyle(element, context);
     KOdfStyleStack &styleStack = context.odfLoadingContext().styleStack();

@@ -29,7 +29,7 @@
 #include "KoStyleManager.h"
 #include "KListLevelProperties.h"
 #include "KoTextSharedLoadingData.h"
-#include <KoShapeLoadingContext.h>
+#include <KShapeLoadingContext.h>
 #include <KOdfGenericStyle.h>
 #include <KOdfGenericStyles.h>
 #include "Styles_p.h"
@@ -1014,7 +1014,7 @@ QBrush KParagraphStyle::background() const
     return qvariant_cast<QBrush>(variant);
 }
 
-void KParagraphStyle::loadOdf(const KXmlElement *element, KoShapeLoadingContext &scontext)
+void KParagraphStyle::loadOdf(const KXmlElement *element, KShapeLoadingContext &scontext)
 {
     KOdfLoadingContext &context = scontext.odfLoadingContext();
     const QString name(element->attributeNS(KOdfXmlNS::style, "display-name", QString()));
@@ -1054,7 +1054,7 @@ void KParagraphStyle::loadOdf(const KXmlElement *element, KoShapeLoadingContext 
     context.styleStack().restore();
 }
 
-void KParagraphStyle::loadOdfProperties(KoShapeLoadingContext &scontext)
+void KParagraphStyle::loadOdfProperties(KShapeLoadingContext &scontext)
 {
     KOdfStyleStack &styleStack = scontext.odfLoadingContext().styleStack();
 

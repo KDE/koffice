@@ -200,7 +200,7 @@ void KWFrame::saveOdf(KoShapeSavingContext &context, const KWPage &page, int pag
     m_shape->removeAdditionalStyleAttribute("koffice:frame-copy-position");
 }
 
-bool KWFrame::loadODf(const KXmlElement &style, KoShapeLoadingContext & /*context */)
+bool KWFrame::loadODf(const KXmlElement &style, KShapeLoadingContext & /*context */)
 {
     frameSet()->setFrameBehavior(KWord::IgnoreContentFrameBehavior);
     KXmlElement properties(KoXml::namedItemNS(style, KOdfXmlNS::style, "graphic-properties"));

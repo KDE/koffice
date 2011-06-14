@@ -129,7 +129,7 @@ public:
         Q_UNUSED(converter);
     }
     virtual void saveOdf(KoShapeSavingContext &) const {}
-    virtual bool loadOdf(const KXmlElement &, KoShapeLoadingContext &) {
+    virtual bool loadOdf(const KXmlElement &, KShapeLoadingContext &) {
         return true;
     }
     KoTextDocumentLayout *layout;

@@ -41,7 +41,7 @@ public:
     void saveOdf(KoShapeSavingContext & context);
 
     ///reimplemented
-    bool loadOdf(const KXmlElement & element, KoShapeLoadingContext & context);
+    bool loadOdf(const KXmlElement & element, KShapeLoadingContext & context);
 
 private:
     KInlineObject::Property m_type;

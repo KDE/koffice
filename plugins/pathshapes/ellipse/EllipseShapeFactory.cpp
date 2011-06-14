@@ -24,7 +24,7 @@
 #include <KOdfXmlNS.h>
 #include <KXmlReader.h>
 #include <KGradientBackground.h>
-#include <KoShapeLoadingContext.h>
+#include <KShapeLoadingContext.h>
 
 #include <klocale.h>
 
@@ -57,7 +57,7 @@ KShape *EllipseShapeFactory::createDefaultShape(KResourceManager *) const
     return ellipse;
 }
 
-bool EllipseShapeFactory::supports(const KXmlElement &e, KoShapeLoadingContext &context) const
+bool EllipseShapeFactory::supports(const KXmlElement &e, KShapeLoadingContext &context) const
 {
     Q_UNUSED(context);
     return (e.localName() == "ellipse" || e.localName() == "circle")

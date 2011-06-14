@@ -47,7 +47,7 @@ public:
     // reimplemented
     virtual void saveOdf(KoShapeSavingContext &context) const;
     // reimplemented
-    virtual bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context);
+    virtual bool loadOdf(const KXmlElement &element, KShapeLoadingContext &context);
     // reimplemented
     virtual void waitUntilReady(const KoViewConverter &converter, bool asynchronous) const;
 
@@ -62,11 +62,11 @@ public:
     PictureMode mode() const;
 
 protected:
-    virtual bool loadOdfFrameElement(const KXmlElement &element, KoShapeLoadingContext &context);
+    virtual bool loadOdfFrameElement(const KXmlElement &element, KShapeLoadingContext &context);
 
     virtual QString saveStyle(KOdfGenericStyle &style, KoShapeSavingContext &context) const;
 
-    virtual void loadStyle(const KXmlElement& element, KoShapeLoadingContext& context);
+    virtual void loadStyle(const KXmlElement& element, KShapeLoadingContext& context);
 
 private:
     KImageCollection *m_imageCollection;

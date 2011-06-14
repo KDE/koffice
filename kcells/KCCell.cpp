@@ -73,7 +73,7 @@
 #include "KCStyleStorage.h"
 
 #include <KShape.h>
-#include <KoShapeLoadingContext.h>
+#include <KShapeLoadingContext.h>
 #include <KoShapeRegistry.h>
 #include <KOdfStyleStack.h>
 #include <KOdfXmlNS.h>
@@ -1723,13 +1723,13 @@ void KCCell::loadOdfObjects(const KXmlElement &parent, KCOdfLoadingContext& tabl
     // Register additional attributes, that identify shapes anchored in cells.
     // Their dimensions need adjustment after all rows are loaded,
     // because the position of the end cell is not always known yet.
-    KoShapeLoadingContext::addAdditionalAttributeData(KoShapeLoadingContext::AdditionalAttributeData(
+    KShapeLoadingContext::addAdditionalAttributeData(KShapeLoadingContext::AdditionalAttributeData(
                 KOdfXmlNS::table, "end-cell-address",
                 "table:end-cell-address"));
-    KoShapeLoadingContext::addAdditionalAttributeData(KoShapeLoadingContext::AdditionalAttributeData(
+    KShapeLoadingContext::addAdditionalAttributeData(KShapeLoadingContext::AdditionalAttributeData(
                 KOdfXmlNS::table, "end-x",
                 "table:end-x"));
-    KoShapeLoadingContext::addAdditionalAttributeData(KoShapeLoadingContext::AdditionalAttributeData(
+    KShapeLoadingContext::addAdditionalAttributeData(KShapeLoadingContext::AdditionalAttributeData(
                 KOdfXmlNS::table, "end-y",
                 "table:end-y"));
 
@@ -1742,7 +1742,7 @@ void KCCell::loadOdfObjects(const KXmlElement &parent, KCOdfLoadingContext& tabl
     }
 }
 
-void KCCell::loadOdfObject(const KXmlElement &element, KoShapeLoadingContext &shapeContext)
+void KCCell::loadOdfObject(const KXmlElement &element, KShapeLoadingContext &shapeContext)
 {
     KShape* shape = KoShapeRegistry::instance()->createShapeFromOdf(element, shapeContext);
     if (!shape) {

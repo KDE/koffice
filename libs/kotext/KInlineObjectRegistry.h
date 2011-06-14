@@ -29,7 +29,7 @@ class KInlineObject;
 class KCanvasBase;
 class QAction;
 class KXmlElement;
-class KoShapeLoadingContext;
+class KShapeLoadingContext;
 
 /**
  * This singleton class keeps a register of all available InlineObject factories.
@@ -69,7 +69,7 @@ public:
      *
      * @returns the variable or 0 if no variable could be created
      */
-    KInlineObject *createFromOdf(const KXmlElement &element, KoShapeLoadingContext &context) const;
+    KInlineObject *createFromOdf(const KXmlElement &element, KShapeLoadingContext &context) const;
 
 private:
     KInlineObjectRegistry();

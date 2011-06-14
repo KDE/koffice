@@ -24,7 +24,7 @@
 #include <KXmlReader.h>
 #include <KXmlWriter.h>
 #include <KOdfXmlNS.h>
-#include <KoShapeLoadingContext.h>
+#include <KShapeLoadingContext.h>
 #include <KoOdfWorkaround.h>
 
 #include <math.h>
@@ -169,7 +169,7 @@ void EnhancedPathHandle::saveOdf(KoShapeSavingContext & context) const
     context.xmlWriter().endElement(); // draw:handle
 }
 
-bool EnhancedPathHandle::loadOdf(const KXmlElement & element, KoShapeLoadingContext &context)
+bool EnhancedPathHandle::loadOdf(const KXmlElement & element, KShapeLoadingContext &context)
 {
     if (element.localName() != "handle" || element.namespaceURI() != KOdfXmlNS::draw)
         return false;

@@ -36,7 +36,7 @@
 #include "animations/SCShapeAnimation.h"
 
 #include <KoPASavingContext.h>
-#include <KoShapeLoadingContext.h>
+#include <KShapeLoadingContext.h>
 #include <KoShapeRegistry.h>
 #include <KoToolRegistry.h>
 #include <KOdfXmlNS.h>
@@ -66,11 +66,11 @@ SCDocument::SCDocument(QWidget* parentWidget, QObject* parent, bool singleViewMo
     setComponentData(SCFactory::componentData(), false);
     setTemplateType("showcase_template");
 
-    KoShapeLoadingContext::addAdditionalAttributeData(KoShapeLoadingContext::AdditionalAttributeData(
+    KShapeLoadingContext::addAdditionalAttributeData(KShapeLoadingContext::AdditionalAttributeData(
                                                        KOdfXmlNS::presentation, "placeholder",
                                                        "presentation:placeholder"));
 
-    KoShapeLoadingContext::addAdditionalAttributeData(KoShapeLoadingContext::AdditionalAttributeData(
+    KShapeLoadingContext::addAdditionalAttributeData(KShapeLoadingContext::AdditionalAttributeData(
                                                        KOdfXmlNS::presentation, "class",
                                                        "presentation:class"));
 

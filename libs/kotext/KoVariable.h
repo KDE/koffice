@@ -31,7 +31,7 @@
 class QTextInlineObject;
 class QTextDocument;
 class KShape;
-class KoShapeLoadingContext;
+class KShapeLoadingContext;
 class KProperties;
 class QWidget;
 class KoVariableManager;

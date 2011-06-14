@@ -28,7 +28,7 @@
 
 class KoTextShapeDataBasePrivate;
 class KXmlElement;
-class KoShapeLoadingContext;
+class KShapeLoadingContext;
 class KoShapeSavingContext;
 
 /**
@@ -60,7 +60,7 @@ public:
     /**
     * Load the text from ODF.
     */
-    virtual bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context) = 0;
+    virtual bool loadOdf(const KXmlElement &element, KShapeLoadingContext &context) = 0;
 
     /**
     * Save the text to ODF.

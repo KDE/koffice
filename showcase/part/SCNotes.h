@@ -42,7 +42,7 @@ public:
     virtual void saveOdf(KoShapeSavingContext &context) const;
 
     /// reimplemented
-    virtual bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context);
+    virtual bool loadOdf(const KXmlElement &element, KShapeLoadingContext &context);
 
     /// reimplemented
     virtual void paintComponent(QPainter&painter, const KoViewConverter &converter);

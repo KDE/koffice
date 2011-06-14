@@ -26,7 +26,7 @@
 #include <KoViewConverter.h>
 #include <KoTextShapeData.h>
 #include <KShapeContainer.h>
-#include <KoShapeLoadingContext.h> //for Q_UNUSED
+#include <KShapeLoadingContext.h> //for Q_UNUSED
 
 #include <QPainter>
 #include <QPainterPath>
@@ -130,7 +130,7 @@ void KWCopyShape::saveOdf(KoShapeSavingContext &context) const
     me->removeAdditionalAttribute("draw:copy-of");
 }
 
-bool KWCopyShape::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
+bool KWCopyShape::loadOdf(const KXmlElement &element, KShapeLoadingContext &context)
 {
     Q_UNUSED(element);
     Q_UNUSED(context);

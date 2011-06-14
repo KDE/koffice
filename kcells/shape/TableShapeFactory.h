@@ -44,7 +44,7 @@ public:
     ~TableShapeFactory();
 
     virtual void newDocumentResourceManager(KResourceManager *manager);
-    virtual bool supports(const KXmlElement &element, KoShapeLoadingContext &context) const;
+    virtual bool supports(const KXmlElement &element, KShapeLoadingContext &context) const;
 
     virtual KShape *createDefaultShape(KResourceManager *documentResources = 0) const;
 

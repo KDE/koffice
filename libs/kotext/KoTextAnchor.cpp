@@ -31,7 +31,7 @@
 #include <KXmlReader.h>
 #include <KOdfXmlNS.h>
 #include <KoShapeSavingContext.h>
-#include <KoShapeLoadingContext.h>
+#include <KShapeLoadingContext.h>
 #include <KUnit.h>
 
 #include <QTextInlineObject>
@@ -369,7 +369,7 @@ void KoTextAnchor::saveOdf(KoShapeSavingContext &context)
     }
 }
 
-bool KoTextAnchor::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
+bool KoTextAnchor::loadOdf(const KXmlElement &element, KShapeLoadingContext &context)
 {
     Q_D(KoTextAnchor);
     d->distance = shape()->position();

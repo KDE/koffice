@@ -27,7 +27,7 @@
 #include "flake_export.h"
 
 class KoShapeSavingContext;
-class KoShapeLoadingContext;
+class KShapeLoadingContext;
 
 /**
  * Provide grouping for shapes.
@@ -57,7 +57,7 @@ public:
     /// reimplemented from KShape
     virtual void saveOdf(KoShapeSavingContext &context) const;
     // reimplemented
-    virtual bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context);
+    virtual bool loadOdf(const KXmlElement &element, KShapeLoadingContext &context);
 
 private:
     void shapeCountChanged();

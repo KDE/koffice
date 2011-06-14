@@ -25,7 +25,7 @@
 #include <KXmlReader.h>
 #include <KXmlWriter.h>
 #include <KOdfXmlNS.h>
-#include <KoShapeLoadingContext.h>
+#include <KShapeLoadingContext.h>
 #include <KoShapeSavingContext.h>
 #include <KOdfLoadingContext.h>
 #include <KOdfStylesReader.h>
@@ -69,7 +69,7 @@ void DateVariable::saveOdf(KoShapeSavingContext & context)
     writer->endElement();
 }
 
-bool DateVariable::loadOdf(const KXmlElement & element, KoShapeLoadingContext & context)
+bool DateVariable::loadOdf(const KXmlElement & element, KShapeLoadingContext & context)
 {
     const QString localName(element.localName());
     QString dateFormat = "";

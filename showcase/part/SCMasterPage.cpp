@@ -40,7 +40,7 @@ KoPageApp::PageType SCMasterPage::pageType() const
     return KoPageApp::Slide;
 }
 
-bool SCMasterPage::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
+bool SCMasterPage::loadOdf(const KXmlElement &element, KShapeLoadingContext &context)
 {
 #ifndef NWORKAROUND_ODF_BUGS
     KoOdfWorkaround::setFixPresentationPlaceholder(true, context);

@@ -32,7 +32,7 @@ class KShape;
  * Then you can setup the data you need.
  *
  * @see KShapeConnection
- * @see KoShapeLoadingContext::updateShape
+ * @see KShapeLoadingContext::updateShape
  */
 class FLAKE_EXPORT KLoadingShapeUpdater
 {

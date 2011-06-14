@@ -25,7 +25,7 @@
 #include <KOdfXmlNS.h>
 #include <KXmlReader.h>
 #include <KColorBackground.h>
-#include <KoShapeLoadingContext.h>
+#include <KShapeLoadingContext.h>
 
 #include <klocale.h>
 
@@ -547,7 +547,7 @@ void EnhancedPathShapeFactory::addGearhead()
     addTemplate(t);
 }
 
-bool EnhancedPathShapeFactory::supports(const KXmlElement & e, KoShapeLoadingContext &context) const
+bool EnhancedPathShapeFactory::supports(const KXmlElement & e, KShapeLoadingContext &context) const
 {
     Q_UNUSED(context);
     return (e.localName() == "custom-shape" && e.namespaceURI() == KOdfXmlNS::draw);

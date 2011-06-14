@@ -35,7 +35,7 @@ class EnhancedPathHandle;
 class EnhancedPathFormula;
 class EnhancedPathParameter;
 class KoShapeSavingContext;
-class KoShapeLoadingContext;
+class KShapeLoadingContext;
 
 /**
  * An enhanced shape is a custom shape which can be defined
@@ -109,7 +109,7 @@ protected:
     // from KShape
     virtual void saveOdf(KoShapeSavingContext &context) const;
     // from KShape
-    virtual bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context);
+    virtual bool loadOdf(const KXmlElement &element, KShapeLoadingContext &context);
     // from KParameterShape
     virtual void moveHandleAction(int handleId, const QPointF &point, Qt::KeyboardModifiers modifiers = Qt::NoModifier);
     // from KParameterShape

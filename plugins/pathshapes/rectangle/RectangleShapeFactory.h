@@ -32,7 +32,7 @@ public:
     explicit RectangleShapeFactory(QObject *parent);
     ~RectangleShapeFactory() {}
     virtual KShape *createDefaultShape(KResourceManager *documentResources = 0) const;
-    virtual bool supports(const KXmlElement &e, KoShapeLoadingContext &context) const;
+    virtual bool supports(const KXmlElement &e, KShapeLoadingContext &context) const;
     virtual KShapeConfigWidgetBase *createConfigWidget(KCanvasBase *canvas);
 };
 

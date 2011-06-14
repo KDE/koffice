@@ -39,7 +39,7 @@ public:
     SCSoundEventAction();
     virtual ~SCSoundEventAction();
 
-    virtual bool loadOdf(const KXmlElement & element, KoShapeLoadingContext &context);
+    virtual bool loadOdf(const KXmlElement & element, KShapeLoadingContext &context);
     virtual void saveOdf(KoShapeSavingContext & context) const;
 
     virtual void start();

@@ -45,7 +45,7 @@ public:
     explicit KoTextOnShapeContainer(KShape *childShape, KResourceManager *documentResources = 0);
     virtual ~KoTextOnShapeContainer();
 
-    virtual bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context);
+    virtual bool loadOdf(const KXmlElement &element, KShapeLoadingContext &context);
     virtual void saveOdf(KoShapeSavingContext &context) const;
 
     /// different kinds of resizing behavior to determine how to treat text overflow
@@ -101,7 +101,7 @@ public:
      * passed in.
      */
     static void tryWrapShape(KShape *shape, const KXmlElement &element,
-            KoShapeLoadingContext &context);
+            KShapeLoadingContext &context);
 
 private:
     Q_DECLARE_PRIVATE(KoTextOnShapeContainer)

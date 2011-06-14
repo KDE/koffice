@@ -31,7 +31,7 @@
 #include <KXmlWriter.h>
 #include <KParagraphStyle.h>
 #include <KShape.h>
-#include <KoShapeLoadingContext.h>
+#include <KShapeLoadingContext.h>
 #include <KShapeFactoryBase.h>
 #include <KoShapeRegistry.h>
 #include <KoShapeSavingContext.h>
@@ -119,7 +119,7 @@ void SCPlaceholderTextStrategy::saveOdf(KoShapeSavingContext &context)
     SCPlaceholderStrategy::saveOdf(context);
 }
 
-bool SCPlaceholderTextStrategy::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
+bool SCPlaceholderTextStrategy::loadOdf(const KXmlElement &element, KShapeLoadingContext &context)
 {
 kDebug();
     if (KoTextSharedLoadingData *textSharedData = dynamic_cast<KoTextSharedLoadingData *>(context.sharedData(KOTEXT_SHARED_LOADING_ID))) {

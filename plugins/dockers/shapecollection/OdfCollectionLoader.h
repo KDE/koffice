@@ -29,7 +29,7 @@
 
 class KOdfStoreReader;
 class KOdfLoadingContext;
-class KoShapeLoadingContext;
+class KShapeLoadingContext;
 class QTimer;
 class KShape;
 class KoFilterManager;
@@ -58,7 +58,7 @@ class OdfCollectionLoader : public QObject
         KOdfStoreReader* m_odfStore;
         QTimer* m_loadingTimer;
         KOdfLoadingContext* m_loadingContext;
-        KoShapeLoadingContext* m_shapeLoadingContext;
+        KShapeLoadingContext* m_shapeLoadingContext;
         KXmlElement m_body;
         KXmlElement m_page;
         KXmlElement m_shape;

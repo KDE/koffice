@@ -38,7 +38,7 @@
 #include "KoShapeUserData.h"
 #include "KShapeApplicationData.h"
 #include "KoShapeSavingContext.h"
-#include "KoShapeLoadingContext.h"
+#include "KShapeLoadingContext.h"
 #include "KoViewConverter.h"
 #include "KLineBorder.h"
 #include "ShapeDeleter_p.h"
@@ -173,7 +173,7 @@ void KShapePrivate::removeShapeManager(KoShapeManager *manager)
     shapeManagers.remove(manager);
 }
 // static
-QString KShapePrivate::getStyleProperty(const char *property, KoShapeLoadingContext &context)
+QString KShapePrivate::getStyleProperty(const char *property, KShapeLoadingContext &context)
 {
     KOdfStyleStack &styleStack = context.odfLoadingContext().styleStack();
     QString value;
@@ -1022,7 +1022,7 @@ bool KShape::isEditable() const
 }
 
 // loading & saving methods
-bool KShape::loadOdf(const KXmlElement &, KoShapeLoadingContext &)
+bool KShape::loadOdf(const KXmlElement &, KShapeLoadingContext &)
 {
     kWarning(30006) << "Warning; empty KShape::loadOdf called, reimplement for load to work";
     return true;
@@ -1100,7 +1100,7 @@ QString KShape::saveStyle(KOdfGenericStyle &style, KoShapeSavingContext &context
     return context.mainStyles().insert(style, context.isSet(KoShapeSavingContext::PresentationShape) ? "pr" : "gr");
 }
 
-void KShape::loadStyle(const KXmlElement &element, KoShapeLoadingContext &context)
+void KShape::loadStyle(const KXmlElement &element, KShapeLoadingContext &context)
 {
     Q_D(KShape);
 
@@ -1128,7 +1128,7 @@ void KShape::loadStyle(const KXmlElement &element, KoShapeLoadingContext &contex
     setContentProtected(protect.contains("content"));
 }
 
-bool KShape::loadOdfAttributes(const KXmlElement &element, KoShapeLoadingContext &context, int attributes)
+bool KShape::loadOdfAttributes(const KXmlElement &element, KShapeLoadingContext &context, int attributes)
 {
     Q_D(KShape);
     if (attributes & OdfPosition) {
@@ -1201,8 +1201,8 @@ bool KShape::loadOdfAttributes(const KXmlElement &element, KoShapeLoadingContext
     }
 
     if (attributes & OdfAdditionalAttributes) {
-        QSet<KoShapeLoadingContext::AdditionalAttributeData> additionalAttributeData = KoShapeLoadingContext::additionalAttributeData();
-        foreach(const KoShapeLoadingContext::AdditionalAttributeData &attributeData, additionalAttributeData) {
+        QSet<KShapeLoadingContext::AdditionalAttributeData> additionalAttributeData = KShapeLoadingContext::additionalAttributeData();
+        foreach(const KShapeLoadingContext::AdditionalAttributeData &attributeData, additionalAttributeData) {
             if (element.hasAttributeNS(attributeData.ns, attributeData.tag)) {
                 QString value = element.attributeNS(attributeData.ns, attributeData.tag);
                 //kDebug(30006) << "load additional attribute" << attributeData.tag << value;
@@ -1223,7 +1223,7 @@ bool KShape::loadOdfAttributes(const KXmlElement &element, KoShapeLoadingContext
     return true;
 }
 
-KShapeBackground *KShape::loadOdfFill(KoShapeLoadingContext &context) const
+KShapeBackground *KShape::loadOdfFill(KShapeLoadingContext &context) const
 {
     QString fill = KShapePrivate::getStyleProperty("fill", context);
     KShapeBackground *bg = 0;
@@ -1252,7 +1252,7 @@ KShapeBackground *KShape::loadOdfFill(KoShapeLoadingContext &context) const
     return bg;
 }
 
-KShapeBorderBase *KShape::loadOdfStroke(const KXmlElement &element, KoShapeLoadingContext &context) const
+KShapeBorderBase *KShape::loadOdfStroke(const KXmlElement &element, KShapeLoadingContext &context) const
 {
     KOdfStyleStack &styleStack = context.odfLoadingContext().styleStack();
     KOdfStylesReader &stylesReader = context.odfLoadingContext().stylesReader();
@@ -1302,7 +1302,7 @@ KShapeBorderBase *KShape::loadOdfStroke(const KXmlElement &element, KoShapeLoadi
     return 0;
 }
 
-KoShapeShadow *KShapePrivate::loadOdfShadow(KoShapeLoadingContext &context) const
+KoShapeShadow *KShapePrivate::loadOdfShadow(KShapeLoadingContext &context) const
 {
     KOdfStyleStack &styleStack = context.odfLoadingContext().styleStack();
     QString shadowStyle = KShapePrivate::getStyleProperty("shadow", context);

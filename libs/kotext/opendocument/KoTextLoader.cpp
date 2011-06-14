@@ -37,7 +37,7 @@
 #include <KProperties.h>
 #include <KShapeContainer.h>
 #include <KShapeFactoryBase.h>
-#include <KoShapeLoadingContext.h>
+#include <KShapeLoadingContext.h>
 #include <KoShapeRegistry.h>
 #include <KoTableColumnAndRowStyleManager.h>
 #include <KoTextAnchor.h>
@@ -95,7 +95,7 @@
 class KoTextLoader::Private
 {
 public:
-    KoShapeLoadingContext &context;
+    KShapeLoadingContext &context;
     KoTextSharedLoadingData *textSharedData;
     // store it here so that you don't need to get it all the time from
     // the KOdfLoadingContext.
@@ -154,7 +154,7 @@ public:
     bool checkForListItemSplit(const KXmlElement &element);
     KXmlNode loadListItemSplit(const KXmlElement &element, QString *generatedXmlString);
 
-    explicit Private(KoShapeLoadingContext &context, KShape *s)
+    explicit Private(KShapeLoadingContext &context, KShape *s)
             : context(context),
             textSharedData(0),
             // stylesDotXml says from where the office:automatic-styles are to be picked from:
@@ -396,7 +396,7 @@ KoList *KoTextLoader::Private::list(const QTextDocument *document, KListStyle *l
 
 /////////////KoTextLoader
 
-KoTextLoader::KoTextLoader(KoShapeLoadingContext &context, KShape *shape)
+KoTextLoader::KoTextLoader(KShapeLoadingContext &context, KShape *shape)
         : QObject()
         , d(new Private(context, shape))
 {

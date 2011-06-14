@@ -32,7 +32,7 @@
 #include <KXmlReader.h>
 #include <KXmlWriter.h>
 #include <KOdfXmlNS.h>
-#include <KoShapeLoadingContext.h>
+#include <KShapeLoadingContext.h>
 #include <KoShapeSavingContext.h>
 #include <KUnit.h>
 
@@ -542,7 +542,7 @@ void KShapeConnection::setEndPoint(KShape *shape, int gluePointIndex)
     d->foul();
 }
 
-bool KShapeConnection::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
+bool KShapeConnection::loadOdf(const KXmlElement &element, KShapeLoadingContext &context)
 {
     QString type = element.attributeNS(KOdfXmlNS::draw, "type", "standard");
     delete d->connectionStrategy;

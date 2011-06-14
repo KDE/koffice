@@ -42,7 +42,7 @@ class KResourceManager;
  * This class holds various variables as well as a context full of variables which all together
  * form the context of a loading operation.
  */
-class FLAKE_EXPORT KoShapeLoadingContext
+class FLAKE_EXPORT KShapeLoadingContext
 {
 public:
     /**
@@ -74,10 +74,10 @@ public:
      * @param context the context created for generic ODF loading.
      * @param documentResources the data of the shape controller.
      */
-    KoShapeLoadingContext(KOdfLoadingContext &context, KResourceManager *documentResources);
+    KShapeLoadingContext(KOdfLoadingContext &context, KResourceManager *documentResources);
 
     /// destructor
-    ~KoShapeLoadingContext();
+    ~KShapeLoadingContext();
 
     /// return the embedded loading context
     KOdfLoadingContext &odfLoadingContext();
@@ -132,7 +132,7 @@ public:
      * of the TextShape. With that the styles only have to be read once and can be used in
      * all shapes that also need them.
      *
-     * The ownership of the added data is passed to the context. The KoShapeLoadingContext will
+     * The ownership of the added data is passed to the context. The KShapeLoadingContext will
      * delete the added data when it is destroyed.
      *
      * Data inserted for a specific id will not be overwritten by calling addSharedData with

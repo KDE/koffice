@@ -64,7 +64,7 @@ public:
     virtual void saveOdf(KoShapeSavingContext &context) const = 0;
 
     /// reimplemented
-    virtual bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context);
+    virtual bool loadOdf(const KXmlElement &element, KShapeLoadingContext &context);
 
 
     /// @return the layout of the page

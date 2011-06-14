@@ -110,7 +110,7 @@ void KEventActionRegistry::init()
                                      config);
 }
 
-QSet<KEventAction*> KEventActionRegistry::createEventActionsFromOdf(const KXmlElement & e, KoShapeLoadingContext & context) const
+QSet<KEventAction*> KEventActionRegistry::createEventActionsFromOdf(const KXmlElement & e, KShapeLoadingContext & context) const
 {
     QSet<KEventAction *> eventActions;
 

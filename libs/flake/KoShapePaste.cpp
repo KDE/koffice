@@ -31,7 +31,7 @@
 #include "KShapeController.h"
 #include "KShape.h"
 #include "KShapeLayer.h"
-#include "KoShapeLoadingContext.h"
+#include "KShapeLoadingContext.h"
 #include "KoShapeManager.h"
 #include "KShapeControllerBase.h"
 #include "KoShapeRegistry.h"
@@ -65,7 +65,7 @@ bool KoShapePaste::process(const KXmlElement & body, KOdfStoreReader & odfStore)
 {
     d->pastedShapes.clear();
     KOdfLoadingContext loadingContext(odfStore.styles(), odfStore.store());
-    KoShapeLoadingContext context(loadingContext, d->canvas->shapeController()->resourceManager());
+    KShapeLoadingContext context(loadingContext, d->canvas->shapeController()->resourceManager());
 
     QList<KShape*> shapes(d->layer ? d->layer->shapes(): d->canvas->shapeManager()->topLevelShapes());
 

@@ -20,7 +20,7 @@
 
 #include "KoTextMeta.h"
 
-#include <KoShapeLoadingContext.h>
+#include <KShapeLoadingContext.h>
 #include <KoShapeSavingContext.h>
 #include <KXmlReader.h>
 #include <KXmlWriter.h>
@@ -76,7 +76,7 @@ void KoTextMeta::saveOdf(KoShapeSavingContext &context)
     kDebug(30015) << "kom.save() done this:" << (void*)this << " d->type:" << d->type;
 }
 
-bool KoTextMeta::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
+bool KoTextMeta::loadOdf(const KXmlElement &element, KShapeLoadingContext &context)
 {
     Q_UNUSED(element);
     Q_UNUSED(context);

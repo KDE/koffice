@@ -87,7 +87,7 @@ public:
     QString declaration(SCDeclarations::Type type) const;
 
     /// reimplemented
-    virtual bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context);
+    virtual bool loadOdf(const KXmlElement &element, KShapeLoadingContext &context);
 
     /// reimplemented
     virtual bool displayShape(KShape *shape) const;

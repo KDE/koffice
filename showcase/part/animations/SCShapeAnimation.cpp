@@ -24,7 +24,7 @@
 
 #include <KXmlReader.h>
 #include <KXmlWriter.h>
-#include <KoShapeLoadingContext.h>
+#include <KShapeLoadingContext.h>
 #include <KoShapeSavingContext.h>
 #include <KoPASavingContext.h>
 
@@ -40,7 +40,7 @@ SCShapeAnimation::~SCShapeAnimation()
 {
 }
 
-bool SCShapeAnimation::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
+bool SCShapeAnimation::loadOdf(const KXmlElement &element, KShapeLoadingContext &context)
 {
     Q_UNUSED(element);
     Q_UNUSED(context);

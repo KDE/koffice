@@ -22,7 +22,7 @@
 #include "SpiralShape.h"
 #include "SpiralShapeConfigWidget.h"
 #include <KLineBorder.h>
-#include <KoShapeLoadingContext.h>
+#include <KShapeLoadingContext.h>
 
 #include <klocale.h>
 
@@ -46,7 +46,7 @@ KShape *SpiralShapeFactory::createDefaultShape(KResourceManager *) const
     return spiral;
 }
 
-bool SpiralShapeFactory::supports(const KXmlElement & e, KoShapeLoadingContext &context) const
+bool SpiralShapeFactory::supports(const KXmlElement & e, KShapeLoadingContext &context) const
 {
     Q_UNUSED(e);
     Q_UNUSED(context);

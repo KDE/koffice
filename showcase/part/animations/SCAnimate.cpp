@@ -34,10 +34,10 @@
 #include <KOdfXmlNS.h>
 #include <KShape.h>
 #include <KXmlReader.h>
-#include <KoShapeLoadingContext.h>
+#include <KShapeLoadingContext.h>
 #include <KoShapeSavingContext.h>
 #include <KoTextBlockData.h>
-#include <KoShapeLoadingContext.h>
+#include <KShapeLoadingContext.h>
 #include <KoShapeSavingContext.h>
 #include <KXmlReader.h>
 #include <KXmlWriter.h>
@@ -60,7 +60,7 @@ SCAnimate::~SCAnimate()
         delete m_values;
 }
 
-bool SCAnimate::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
+bool SCAnimate::loadOdf(const KXmlElement &element, KShapeLoadingContext &context)
 {
     SCAnimationBase::loadOdf(element, context);
     bool retval = true;

@@ -29,7 +29,7 @@
 #include <QString>
 #include <KOdfXmlNS.h>
 #include <KXmlReader.h>
-#include <KoShapeLoadingContext.h>
+#include <KShapeLoadingContext.h>
 #include <KoShapeSavingContext.h>
 #include <KoTextBlockData.h>
 #include "KXmlWriter.h"
@@ -44,7 +44,7 @@ SCAnimSet::~SCAnimSet()
 {
 }
 
-bool SCAnimSet::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
+bool SCAnimSet::loadOdf(const KXmlElement &element, KShapeLoadingContext &context)
 {
     bool retval = false;
 

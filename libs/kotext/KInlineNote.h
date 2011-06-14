@@ -22,7 +22,7 @@
 #include "KInlineObject.h"
 #include "kotext_export.h"
 
-class KoShapeLoadingContext;
+class KShapeLoadingContext;
 class KChangeTracker;
 class KoStyleManager;
 
@@ -100,8 +100,8 @@ public:
     /// return the type of note.
     Type type() const;
 
-    virtual bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context);
-    bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context, KoStyleManager *styleManager, KChangeTracker *changeTracker);
+    virtual bool loadOdf(const KXmlElement &element, KShapeLoadingContext &context);
+    bool loadOdf(const KXmlElement &element, KShapeLoadingContext &context, KoStyleManager *styleManager, KChangeTracker *changeTracker);
 
     ///reimplemented
     void saveOdf(KoShapeSavingContext &context);

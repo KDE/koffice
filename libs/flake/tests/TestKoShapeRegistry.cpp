@@ -32,7 +32,7 @@
 #include "KoShapeRegistry.h"
 #include "KShape.h"
 #include "KPathShape.h"
-#include "KoShapeLoadingContext.h"
+#include "KShapeLoadingContext.h"
 
 #include <KXmlReader.h>
 
@@ -79,7 +79,7 @@ void TestKoShapeRegistry::testCreateShapes()
     // sensibly filled.
     KOdfStylesReader stylesReader;
     KOdfLoadingContext odfContext(stylesReader, 0);
-    KoShapeLoadingContext shapeContext(odfContext, 0);
+    KShapeLoadingContext shapeContext(odfContext, 0);
 
     KShape * shape = registry->createShapeFromOdf(bodyElement, shapeContext);
     QVERIFY(shape == 0);
@@ -126,7 +126,7 @@ void TestKoShapeRegistry::testCreateFramedShapes()
     // sensibly filled.
     KOdfStylesReader stylesReader;
     KOdfLoadingContext odfContext(stylesReader, 0);
-    KoShapeLoadingContext shapeContext(odfContext, 0);
+    KShapeLoadingContext shapeContext(odfContext, 0);
 
     KShape * shape = registry->createShapeFromOdf(bodyElement, shapeContext);
     QVERIFY(shape == 0);

@@ -43,7 +43,7 @@ KFrameShape::~KFrameShape()
     delete d;
 }
 
-bool KFrameShape::loadOdfFrame(const KXmlElement &element, KoShapeLoadingContext &context)
+bool KFrameShape::loadOdfFrame(const KXmlElement &element, KShapeLoadingContext &context)
 {
     const KXmlElement &frameElement(KoXml::namedItemNS(element, d->ns, d->tag));
     if (frameElement.isNull()) {

@@ -27,7 +27,7 @@
 #include "KoViewConverter.h"
 #include "KPathShapeLoader.h"
 #include "KoShapeSavingContext.h"
-#include "KoShapeLoadingContext.h"
+#include "KShapeLoadingContext.h"
 #include "KoShapeShadow.h"
 #include "KShapeBackground.h"
 #include "KShapeContainer.h"
@@ -122,7 +122,7 @@ void KPathShape::saveOdf(KoShapeSavingContext & context) const
     context.xmlWriter().endElement();
 }
 
-bool KPathShape::loadOdf(const KXmlElement & element, KoShapeLoadingContext &context)
+bool KPathShape::loadOdf(const KXmlElement & element, KShapeLoadingContext &context)
 {
     Q_D(KPathShape);
     loadOdfAttributes(element, context, OdfMandatories | OdfAdditionalAttributes | OdfCommonChildElements);
@@ -190,7 +190,7 @@ QString KPathShape::saveStyle(KOdfGenericStyle &style, KoShapeSavingContext &con
     return KShape::saveStyle(style, context);
 }
 
-void KPathShape::loadStyle(const KXmlElement & element, KoShapeLoadingContext &context)
+void KPathShape::loadStyle(const KXmlElement & element, KShapeLoadingContext &context)
 {
     Q_D(KPathShape);
     KShape::loadStyle(element, context);

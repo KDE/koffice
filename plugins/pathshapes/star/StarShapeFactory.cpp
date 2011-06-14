@@ -27,7 +27,7 @@
 #include <KOdfXmlNS.h>
 #include <KXmlReader.h>
 #include <KColorBackground.h>
-#include <KoShapeLoadingContext.h>
+#include <KShapeLoadingContext.h>
 
 #include <klocale.h>
 
@@ -137,7 +137,7 @@ KShape *StarShapeFactory::createShape(const KProperties *params, KResourceManage
     return star;
 }
 
-bool StarShapeFactory::supports(const KXmlElement &e, KoShapeLoadingContext &context) const
+bool StarShapeFactory::supports(const KXmlElement &e, KShapeLoadingContext &context) const
 {
     Q_UNUSED(context);
     if (e.localName() == "regular-polygon" && e.namespaceURI() == KOdfXmlNS::draw)

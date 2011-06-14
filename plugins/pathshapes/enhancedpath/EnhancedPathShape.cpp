@@ -385,7 +385,7 @@ void EnhancedPathShape::saveOdf(KoShapeSavingContext &context) const
     }
 }
 
-bool EnhancedPathShape::loadOdf(const KXmlElement & element, KoShapeLoadingContext &context)
+bool EnhancedPathShape::loadOdf(const KXmlElement & element, KShapeLoadingContext &context)
 {
     reset();
     loadOdfAttributes(element, context, OdfAdditionalAttributes | OdfCommonChildElements);

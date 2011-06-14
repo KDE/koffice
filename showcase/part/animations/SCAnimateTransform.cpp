@@ -20,7 +20,7 @@
 #include "SCAnimateTransform.h"
 
 #include "SCAnimationCache.h"
-#include <KoShapeLoadingContext.h>
+#include <KShapeLoadingContext.h>
 #include <KoShapeSavingContext.h>
 #include <KXmlReader.h>
 
@@ -34,7 +34,7 @@ SCAnimateTransform::~SCAnimateTransform()
 {
 }
 
-bool SCAnimateTransform::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
+bool SCAnimateTransform::loadOdf(const KXmlElement &element, KShapeLoadingContext &context)
 {
     SCAnimationBase::loadOdf(element, context);
     return true;

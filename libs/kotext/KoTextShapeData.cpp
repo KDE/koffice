@@ -39,7 +39,7 @@
 
 #include <KOdfGenericStyle.h>
 #include <KOdfGenericStyles.h>
-#include <KoShapeLoadingContext.h>
+#include <KShapeLoadingContext.h>
 #include <KoShapeSavingContext.h>
 
 #include <KXmlWriter.h>
@@ -217,7 +217,7 @@ KoTextPage* KoTextShapeData::page() const
     return d->textpage;
 }
 
-bool KoTextShapeData::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context, KDocumentRdfBase *rdfData, KShape *shape)
+bool KoTextShapeData::loadOdf(const KXmlElement &element, KShapeLoadingContext &context, KDocumentRdfBase *rdfData, KShape *shape)
 {
     Q_UNUSED(rdfData);
     KoTextLoader loader(context, shape);

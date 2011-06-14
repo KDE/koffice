@@ -170,7 +170,7 @@ void KListStyle::applyStyle(const QTextBlock &block, int level)
     KoList::applyStyle(block, this, level);
 }
 
-void KListStyle::loadOdf(KoShapeLoadingContext &scontext, const KXmlElement &style)
+void KListStyle::loadOdf(KShapeLoadingContext &scontext, const KXmlElement &style)
 {
     KXmlElement styleElem;
     forEachElement(styleElem, style) {

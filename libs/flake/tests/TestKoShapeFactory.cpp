@@ -21,7 +21,7 @@
 
 #include <KOdfLoadingContext.h>
 #include <KOdfStylesReader.h>
-#include <KoShapeLoadingContext.h>
+#include <KShapeLoadingContext.h>
 #include <KPathShapeFactory_p.h>
 #include <KShape.h>
 #include <KShapeFactoryBase.h>
@@ -105,7 +105,7 @@ void TestKoShapeFactory::testOdfElement()
     // sensibly filled.
     KOdfStylesReader stylesReader;
     KOdfLoadingContext odfContext(stylesReader, 0);
-    KoShapeLoadingContext shapeContext(odfContext, 0);
+    KShapeLoadingContext shapeContext(odfContext, 0);
 
     KXmlElement textElement = bodyElement.firstChild().firstChild().toElement();
     QVERIFY(textElement.tagName() == "p");

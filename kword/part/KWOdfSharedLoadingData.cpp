@@ -30,7 +30,7 @@
 
 #include <KoTextShapeData.h>
 #include <KOdfLoadingContext.h>
-#include <KoShapeLoadingContext.h>
+#include <KShapeLoadingContext.h>
 #include <KOdfXmlNS.h>
 
 #include <QTextCursor>
@@ -40,15 +40,15 @@ KWOdfSharedLoadingData::KWOdfSharedLoadingData(KWOdfLoader *loader)
         : KoTextSharedLoadingData()
         , m_loader(loader)
 {
-    KoShapeLoadingContext::addAdditionalAttributeData(
-        KoShapeLoadingContext::AdditionalAttributeData(
+    KShapeLoadingContext::addAdditionalAttributeData(
+        KShapeLoadingContext::AdditionalAttributeData(
             KOdfXmlNS::text, "anchor-type", "text:anchor-type"));
-    KoShapeLoadingContext::addAdditionalAttributeData(
-        KoShapeLoadingContext::AdditionalAttributeData(
+    KShapeLoadingContext::addAdditionalAttributeData(
+        KShapeLoadingContext::AdditionalAttributeData(
             KOdfXmlNS::text, "anchor-page-number", "text:anchor-page-number"));
 }
 
-void KWOdfSharedLoadingData::shapeInserted(KShape *shape, const KXmlElement &element, KoShapeLoadingContext &context)
+void KWOdfSharedLoadingData::shapeInserted(KShape *shape, const KXmlElement &element, KShapeLoadingContext &context)
 {
     int pageNumber = -1;
     if (shape->hasAdditionalAttribute("text:anchor-type")) {

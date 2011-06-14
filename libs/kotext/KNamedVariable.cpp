@@ -22,7 +22,7 @@
 #include <KProperties.h>
 
 #include <KXmlReader.h> // for usage in Q_UNUSED
-#include <KoShapeLoadingContext.h> // for usage in Q_UNUSED
+#include <KShapeLoadingContext.h> // for usage in Q_UNUSED
 #include <KoShapeSavingContext.h> // for usage in Q_UNUSED
 
 KNamedVariable::KNamedVariable(Property key, const QString &name)
@@ -43,7 +43,7 @@ void KNamedVariable::setup()
     setValue(manager()->stringProperty(m_key));
 }
 
-bool KNamedVariable::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
+bool KNamedVariable::loadOdf(const KXmlElement &element, KShapeLoadingContext &context)
 {
     Q_UNUSED(element);
     Q_UNUSED(context);

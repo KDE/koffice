@@ -40,7 +40,7 @@
 #include <KOdfStylesReader.h>
 #include <KoShapeSavingContext.h>
 #include <KResourceManager.h>
-#include <KoShapeLoadingContext.h>
+#include <KShapeLoadingContext.h>
 #include <KShapeLayer.h>
 #include <KoShapeRegistry.h>
 #include <KOdfStorageDevice.h>
@@ -200,7 +200,7 @@ void KarbonDocument::saveOasis(KoShapeSavingContext &context) const
     context.xmlWriter().endElement(); // draw:page
 }
 
-bool KarbonDocument::loadOasis(const KXmlElement &element, KoShapeLoadingContext &context)
+bool KarbonDocument::loadOasis(const KXmlElement &element, KShapeLoadingContext &context)
 {
     // load text styles used by text shapes
     loadOdfStyles(context);
@@ -396,7 +396,7 @@ bool KarbonDocument::saveOdf(KoDocument::SavingContext &documentContext, const K
     return mainStyles.saveOdfStylesDotXml(store, documentContext.odfStore.manifestWriter());
 }
 
-void KarbonDocument::loadOdfStyles(KoShapeLoadingContext & context)
+void KarbonDocument::loadOdfStyles(KShapeLoadingContext & context)
 {
     KoStyleManager *styleManager = resourceManager()->resource(KoText::StyleManager).value<KoStyleManager*>();
 

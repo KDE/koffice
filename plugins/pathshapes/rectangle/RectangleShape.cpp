@@ -45,7 +45,7 @@ RectangleShape::~RectangleShape()
 {
 }
 
-bool RectangleShape::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
+bool RectangleShape::loadOdf(const KXmlElement &element, KShapeLoadingContext &context)
 {
     loadOdfAttributes(element, context, OdfMandatories | OdfGeometry | OdfAdditionalAttributes | OdfCommonChildElements);
 

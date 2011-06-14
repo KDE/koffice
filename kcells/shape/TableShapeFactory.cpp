@@ -30,7 +30,7 @@
 #include <KResourceManager.h>
 #include <KoToolRegistry.h>
 #include <KoShapeRegistry.h>
-#include <KoShapeLoadingContext.h>
+#include <KShapeLoadingContext.h>
 #include <KOdfXmlNS.h>
 
 #include <KCMap.h>
@@ -63,7 +63,7 @@ TableShapeFactory::~TableShapeFactory()
 {
 }
 
-bool TableShapeFactory::supports(const KXmlElement &element, KoShapeLoadingContext &context) const
+bool TableShapeFactory::supports(const KXmlElement &element, KShapeLoadingContext &context) const
 {
     Q_UNUSED(context);
     return (element.namespaceURI() == KOdfXmlNS::table && element.localName() == "table");

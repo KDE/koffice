@@ -25,7 +25,7 @@
 
 #include <KOdfXmlNS.h>
 #include "KShapeControllerBase.h"
-#include <KoShapeLoadingContext.h>
+#include <KShapeLoadingContext.h>
 #include "KImageCollection.h"
 
 #include <klocale.h>
@@ -50,7 +50,7 @@ KShape *PictureShapeFactory::createDefaultShape(KResourceManager *documentResour
     return defaultShape;
 }
 
-bool PictureShapeFactory::supports(const KXmlElement &e, KoShapeLoadingContext &context) const
+bool PictureShapeFactory::supports(const KXmlElement &e, KShapeLoadingContext &context) const
 {
     Q_UNUSED(e);
     Q_UNUSED(context);

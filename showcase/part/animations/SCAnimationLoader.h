@@ -24,7 +24,7 @@
 #include <QList>
 
 class SCAnimationStep;
-class KoShapeLoadingContext;
+class KShapeLoadingContext;
 class KXmlElement;
 class QAbstractAnimation;
 
@@ -34,10 +34,10 @@ public:
     SCAnimationLoader();
     ~SCAnimationLoader();
 
-    bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context);
+    bool loadOdf(const KXmlElement &element, KShapeLoadingContext &context);
     QList<SCAnimationStep *> animations();
 protected:
-    bool loadOdfAnimation(SCAnimationStep **animationStep, const KXmlElement &element, KoShapeLoadingContext &context);
+    bool loadOdfAnimation(SCAnimationStep **animationStep, const KXmlElement &element, KShapeLoadingContext &context);
 
     void debug();
 

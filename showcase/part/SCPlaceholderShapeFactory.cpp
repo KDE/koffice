@@ -24,7 +24,7 @@
 #include <KOdfXmlNS.h>
 #include <KoOdfWorkaround.h>
 #include "SCPlaceholderShape.h"
-#include <KoShapeLoadingContext.h> // for Q_UNUSED
+#include <KShapeLoadingContext.h> // for Q_UNUSED
 
 #include <kdebug.h>
 
@@ -48,7 +48,7 @@ KShape *SCPlaceholderShapeFactory::createDefaultShape(KResourceManager *) const
     return new SCPlaceholderShape();
 }
 
-bool SCPlaceholderShapeFactory::supports(const KXmlElement &e, KoShapeLoadingContext &context) const
+bool SCPlaceholderShapeFactory::supports(const KXmlElement &e, KShapeLoadingContext &context) const
 {
     Q_UNUSED(context);
     // check parent if placeholder is set to true

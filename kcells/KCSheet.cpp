@@ -48,7 +48,7 @@
 
 #include <KShape.h>
 #include <KResourceManager.h>
-#include <KoShapeLoadingContext.h>
+#include <KShapeLoadingContext.h>
 #include <KoShapeManager.h>
 #include <KoShapeRegistry.h>
 #include <KoShapeSavingContext.h>
@@ -1652,7 +1652,7 @@ bool KCSheet::loadOdf(const KXmlElement& sheetElement,
                     // OpenDocument v1.1, 8.3.4 Shapes:
                     // The <table:shapes> element contains all graphic shapes
                     // with an anchor on the table this element is a child of.
-                    KoShapeLoadingContext* shapeLoadingContext = tableContext.shapeContext;
+                    KShapeLoadingContext* shapeLoadingContext = tableContext.shapeContext;
                     KXmlElement element;
                     forEachElement(element, rowElement) {
                         if (element.namespaceURI() != KOdfXmlNS::draw)
@@ -1704,7 +1704,7 @@ bool KCSheet::loadOdf(const KXmlElement& sheetElement,
     return true;
 }
 
-void KCSheet::loadOdfObject(const KXmlElement& element, KoShapeLoadingContext& shapeContext)
+void KCSheet::loadOdfObject(const KXmlElement& element, KShapeLoadingContext& shapeContext)
 {
     KShape* shape = KoShapeRegistry::instance()->createShapeFromOdf(element, shapeContext);
     if (!shape)

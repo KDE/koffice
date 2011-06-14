@@ -33,7 +33,7 @@
 #include <KOdfXmlNS.h>
 #include <KOdfStylesReader.h>
 #include <KOdfLoadingContext.h>
-#include <KoShapeLoadingContext.h>
+#include <KShapeLoadingContext.h>
 
 #include "styles/KoStyleManager.h"
 #include "styles/KParagraphStyle.h"
@@ -107,7 +107,7 @@ KoTextSharedLoadingData::~KoTextSharedLoadingData()
     delete d;
 }
 
-void KoTextSharedLoadingData::addDefaultParagraphStyle(KoShapeLoadingContext &context, const KXmlElement *styleElem, const KXmlElement *appDefault, KoStyleManager *styleManager)
+void KoTextSharedLoadingData::addDefaultParagraphStyle(KShapeLoadingContext &context, const KXmlElement *styleElem, const KXmlElement *appDefault, KoStyleManager *styleManager)
 {
     // first fill with defaultstyles.xml
     const KXmlElement *appDef = context.odfLoadingContext().defaultStylesReader().defaultStyle("paragraph");
@@ -129,7 +129,7 @@ void KoTextSharedLoadingData::addDefaultParagraphStyle(KoShapeLoadingContext &co
         d->applicationDefaultStyle = styleManager->defaultParagraphStyle();
 }
 
-void KoTextSharedLoadingData::loadOdfStyles(KoShapeLoadingContext &shapeContext, KoStyleManager *styleManager)
+void KoTextSharedLoadingData::loadOdfStyles(KShapeLoadingContext &shapeContext, KoStyleManager *styleManager)
 {
     KOdfLoadingContext &context = shapeContext.odfLoadingContext();
 
@@ -180,7 +180,7 @@ void KoTextSharedLoadingData::loadOdfStyles(KoShapeLoadingContext &shapeContext,
     kDebug(32500) << "styles.xml:  paragraph styles" << d->paragraphStylesDotXmlStyles.count() << "character styles" << d->characterStylesDotXmlStyles.count();
 }
 
-void KoTextSharedLoadingData::addParagraphStyles(KoShapeLoadingContext &context, QList<KXmlElement*> styleElements,
+void KoTextSharedLoadingData::addParagraphStyles(KShapeLoadingContext &context, QList<KXmlElement*> styleElements,
         int styleTypes, KoStyleManager *styleManager)
 {
     QList<QPair<QString, KParagraphStyle *> > paragraphStyles(loadParagraphStyles(context, styleElements, styleTypes, styleManager));
@@ -202,7 +202,7 @@ void KoTextSharedLoadingData::addParagraphStyles(KoShapeLoadingContext &context,
     }
 }
 
-QList<QPair<QString, KParagraphStyle *> > KoTextSharedLoadingData::loadParagraphStyles(KoShapeLoadingContext &context, QList<KXmlElement*> styleElements,
+QList<QPair<QString, KParagraphStyle *> > KoTextSharedLoadingData::loadParagraphStyles(KShapeLoadingContext &context, QList<KXmlElement*> styleElements,
         int styleTypes, KoStyleManager *styleManager)
 {
     QList<QPair<QString, KParagraphStyle *> > paragraphStyles;
@@ -261,7 +261,7 @@ QList<QPair<QString, KParagraphStyle *> > KoTextSharedLoadingData::loadParagraph
     return paragraphStyles;
 }
 
-void KoTextSharedLoadingData::addCharacterStyles(KoShapeLoadingContext &context, QList<KXmlElement*> styleElements,
+void KoTextSharedLoadingData::addCharacterStyles(KShapeLoadingContext &context, QList<KXmlElement*> styleElements,
         int styleTypes, KoStyleManager *styleManager)
 {
     QList<OdfCharStyle> characterStyles(loadCharacterStyles(context, styleElements, styleManager));
@@ -292,7 +292,7 @@ void KoTextSharedLoadingData::addCharacterStyles(KoShapeLoadingContext &context,
     }
 }
 
-QList<KoTextSharedLoadingData::OdfCharStyle> KoTextSharedLoadingData::loadCharacterStyles(KoShapeLoadingContext &shapeContext, QList<KXmlElement*> styleElements, KoStyleManager *styleManager)
+QList<KoTextSharedLoadingData::OdfCharStyle> KoTextSharedLoadingData::loadCharacterStyles(KShapeLoadingContext &shapeContext, QList<KXmlElement*> styleElements, KoStyleManager *styleManager)
 {
     QList<OdfCharStyle> characterStyles;
     KOdfLoadingContext &context = shapeContext.odfLoadingContext();
@@ -329,7 +329,7 @@ QList<KoTextSharedLoadingData::OdfCharStyle> KoTextSharedLoadingData::loadCharac
     return characterStyles;
 }
 
-void KoTextSharedLoadingData::addListStyles(KoShapeLoadingContext &context, QList<KXmlElement*> styleElements,
+void KoTextSharedLoadingData::addListStyles(KShapeLoadingContext &context, QList<KXmlElement*> styleElements,
                                             int styleTypes, KoStyleManager *styleManager)
 {
     QList<QPair<QString, KListStyle *> > listStyles(loadListStyles(context, styleElements, styleManager));
@@ -352,7 +352,7 @@ void KoTextSharedLoadingData::addListStyles(KoShapeLoadingContext &context, QLis
     }
 }
 
-QList<QPair<QString, KListStyle *> > KoTextSharedLoadingData::loadListStyles(KoShapeLoadingContext &context, QList<KXmlElement*> styleElements, KoStyleManager *styleManager)
+QList<QPair<QString, KListStyle *> > KoTextSharedLoadingData::loadListStyles(KShapeLoadingContext &context, QList<KXmlElement*> styleElements, KoStyleManager *styleManager)
 {
     QList<QPair<QString, KListStyle *> > listStyles;
 
@@ -575,7 +575,7 @@ QList<QPair<QString, KSectionStyle *> > KoTextSharedLoadingData::loadSectionStyl
     return sectionStyles;
 }
 
-void KoTextSharedLoadingData::addOutlineStyle(KoShapeLoadingContext &context, KoStyleManager *styleManager)
+void KoTextSharedLoadingData::addOutlineStyle(KShapeLoadingContext &context, KoStyleManager *styleManager)
 {
     // outline-styles used e.g. for headers
     KXmlElement outlineStyleElem = KoXml::namedItemNS(context.odfLoadingContext().stylesReader().officeStyle(), KOdfXmlNS::text, "outline-style");
@@ -631,7 +631,7 @@ KSectionStyle *KoTextSharedLoadingData::sectionStyle(const QString &name, bool s
     return stylesDotXml ? d->sectionStylesDotXmlStyles.value(name) : d->sectionContentDotXmlStyles.value(name);
 }
 
-void KoTextSharedLoadingData::shapeInserted(KShape *shape, const KXmlElement &element, KoShapeLoadingContext &/*context*/)
+void KoTextSharedLoadingData::shapeInserted(KShape *shape, const KXmlElement &element, KShapeLoadingContext &/*context*/)
 {
     Q_UNUSED(shape);
     Q_UNUSED(element);

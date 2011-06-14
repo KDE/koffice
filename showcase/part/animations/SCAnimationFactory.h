@@ -21,14 +21,14 @@
 #define KPRANIMATIONFACTORY_H
 
 class KXmlElement;
-class KoShapeLoadingContext;
+class KShapeLoadingContext;
 class SCAnimationBase;
 class SCShapeAnimation;
 
 class SCAnimationFactory
 {
 public:
-    static SCAnimationBase *createAnimationFromOdf(const KXmlElement &element, KoShapeLoadingContext &context,
+    static SCAnimationBase *createAnimationFromOdf(const KXmlElement &element, KShapeLoadingContext &context,
                                                     SCShapeAnimation *shapeAnimation);
 };
 

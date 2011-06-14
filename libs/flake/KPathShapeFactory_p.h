@@ -46,7 +46,7 @@ public:
     KPathShapeFactory(QObject *parent, const QStringList&);
     ~KPathShapeFactory() {}
     virtual KShape *createDefaultShape(KResourceManager *documentResources = 0) const;
-    bool supports(const KXmlElement &element, KoShapeLoadingContext &context) const;
+    bool supports(const KXmlElement &element, KShapeLoadingContext &context) const;
     /// reimplemented
     virtual void newDocumentResourceManager(KResourceManager *manager);
 };

@@ -80,11 +80,11 @@ public:
      * in turn will call the KoTextLoader::loadBody() method that reads the element
      * into a QTextCursor.
      *
-     * @param context the KoShapeLoadingContext used for loading.
+     * @param context the KShapeLoadingContext used for loading.
      * @param element element which represents the shape in odf.
      * @return false if loading failed.
      */
-    virtual bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context);
+    virtual bool loadOdf(const KXmlElement &element, KShapeLoadingContext &context);
 
     /**
      * From KShape reimplemented method to store the TextShape data as ODF.
@@ -108,13 +108,13 @@ public:
     void setPageProvider(KPageProvider *provider) { m_pageProvider = provider; }
 
     /// reimplemented
-    virtual bool loadOdfFrame(const KXmlElement &element, KoShapeLoadingContext &context);
+    virtual bool loadOdfFrame(const KXmlElement &element, KShapeLoadingContext &context);
 
 protected:
-    virtual bool loadOdfFrameElement(const KXmlElement &element, KoShapeLoadingContext &context);
+    virtual bool loadOdfFrameElement(const KXmlElement &element, KShapeLoadingContext &context);
 
     /// reimplemented
-    virtual void loadStyle(const KXmlElement &element, KoShapeLoadingContext &context);
+    virtual void loadStyle(const KXmlElement &element, KShapeLoadingContext &context);
 
     /// reimplemented
     virtual QString saveStyle(KOdfGenericStyle &style, KoShapeSavingContext &context) const;

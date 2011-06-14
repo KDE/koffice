@@ -35,7 +35,7 @@ class KInlineObjectPrivate;
 class KoShapeSavingContext;
 class KoTextInlineRdf;
 class KXmlElement;
-class KoShapeLoadingContext;
+class KShapeLoadingContext;
 class KoTextPage;
 
 /**
@@ -207,11 +207,11 @@ public:
      * Load a variable from odf.
      *
      * @param element element which represents the shape in odf
-     * @param context the KoShapeLoadingContext used for loading
+     * @param context the KShapeLoadingContext used for loading
      *
      * @return false if loading failed
      */
-    virtual bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context) =  0;
+    virtual bool loadOdf(const KXmlElement &element, KShapeLoadingContext &context) =  0;
 
     void setDocument(QTextDocument *doc);
     QTextDocument *document() const;

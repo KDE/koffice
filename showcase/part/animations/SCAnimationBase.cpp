@@ -25,7 +25,7 @@
 #include "KXmlWriter.h"
 #include "SCAnimationCache.h"
 #include "SCShapeAnimation.h"
-#include "KoShapeLoadingContext.h"
+#include "KShapeLoadingContext.h"
 #include "KoTextBlockData.h"
 
 #include <KoPASavingContext.h>
@@ -46,7 +46,7 @@ int SCAnimationBase::duration() const
     return m_duration;
 }
 
-bool SCAnimationBase::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
+bool SCAnimationBase::loadOdf(const KXmlElement &element, KShapeLoadingContext &context)
 {
     Q_UNUSED(context)
     m_begin = SCDurationParser::durationMs(element.attributeNS(KOdfXmlNS::smil, "begin"));

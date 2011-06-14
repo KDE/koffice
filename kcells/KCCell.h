@@ -57,7 +57,7 @@ class KXmlWriter;
 class KOdfGenericStyles;
 class KOdfGenericStyle;
 class KOdfLoadingContext;
-class KoShapeLoadingContext;
+class KShapeLoadingContext;
 
 class KCDoc;
 class KCFormula;
@@ -601,7 +601,7 @@ protected:
      */
     void saveOdfAnnotation(KXmlWriter &xmlwriter);
 public:
-    void loadOdfObject(const KXmlElement& element, KoShapeLoadingContext& shapeContext);
+    void loadOdfObject(const KXmlElement& element, KShapeLoadingContext& shapeContext);
 private:
     class Private;
     QSharedDataPointer<Private> d;

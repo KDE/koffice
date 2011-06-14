@@ -31,7 +31,7 @@
 #include <KOdfPasteBase.h>
 #include <KOdfStoreReader.h>
 #include <KOdfStoreReader.h>
-#include <KoShapeLoadingContext.h>
+#include <KShapeLoadingContext.h>
 #include <KOdfLoadingContext.h>
 #include <KoGlobal.h>
 
@@ -385,7 +385,7 @@ KShape *ItemStore::createShapeFromPaste(const QByteArray &bytes)
         bool process(const KXmlElement &body, KOdfStoreReader &odfStore)
         {
             KOdfLoadingContext loadingContext(odfStore.styles(), odfStore.store());
-            KoShapeLoadingContext context(loadingContext, m_shapeController->resourceManager());
+            KShapeLoadingContext context(loadingContext, m_shapeController->resourceManager());
 
             KXmlElement element;
             forEachElement(element, body) {

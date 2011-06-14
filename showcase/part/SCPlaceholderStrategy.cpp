@@ -31,7 +31,7 @@
 #include <KShapeFactoryBase.h>
 #include <KoShapeRegistry.h>
 #include <KoShapeSavingContext.h>
-#include <KoShapeLoadingContext.h>
+#include <KShapeLoadingContext.h>
 #include <KXmlWriter.h>
 #include <kdebug.h>
 
@@ -148,7 +148,7 @@ void SCPlaceholderStrategy::saveOdf(KoShapeSavingContext &context)
     writer.addCompleteElement(m_placeholderData->m_xmlElement);
 }
 
-bool SCPlaceholderStrategy::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
+bool SCPlaceholderStrategy::loadOdf(const KXmlElement &element, KShapeLoadingContext &context)
 {
     Q_UNUSED(element);
     Q_UNUSED(context);

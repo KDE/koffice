@@ -21,7 +21,7 @@
 #include "SCAnimateColor.h"
 
 #include "SCAnimationCache.h"
-#include <KoShapeLoadingContext.h>
+#include <KShapeLoadingContext.h>
 #include <KoShapeSavingContext.h>
 #include <KXmlReader.h>
 
@@ -34,7 +34,7 @@ SCAnimateColor::~SCAnimateColor()
 {
 }
 
-bool SCAnimateColor::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context)
+bool SCAnimateColor::loadOdf(const KXmlElement &element, KShapeLoadingContext &context)
 {
     SCAnimationBase::loadOdf(element, context);
     return false;

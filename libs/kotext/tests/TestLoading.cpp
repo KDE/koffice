@@ -38,7 +38,7 @@
 #include <KOdfStorageDevice.h>
 #include <KXmlWriter.h>
 #include <KoTextShapeData.h>
-#include <KoShapeLoadingContext.h>
+#include <KShapeLoadingContext.h>
 #include <KOdfLoadingContext.h>
 #include <KoShapeSavingContext.h>
 #include <KOdfGenericStyles.h>

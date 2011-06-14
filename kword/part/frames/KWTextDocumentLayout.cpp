@@ -118,7 +118,7 @@ public:
 private:
     virtual void paint(QPainter&, const KoViewConverter&) {}
     virtual void saveOdf(KoShapeSavingContext &) const { }
-    virtual bool loadOdf(const KXmlElement &, KoShapeLoadingContext &) {
+    virtual bool loadOdf(const KXmlElement &, KShapeLoadingContext &) {
         return false;
     }
 };

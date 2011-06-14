@@ -30,7 +30,7 @@ public:
     SCShapeAnimation * take(int pos);
     int pos(SCShapeAnimation * animation);
 
-    bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context);
+    bool loadOdf(const KXmlElement &element, KShapeLoadingContext &context);
     void saveOdf(KoShapeSavingContext &context) const;
 
 #if REMOVE

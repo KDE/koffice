@@ -37,7 +37,7 @@ public:
 };
 
 KoPALoadingContext::KoPALoadingContext(KOdfLoadingContext &context, KResourceManager *documentResources)
-: KoShapeLoadingContext(context, documentResources)
+: KShapeLoadingContext(context, documentResources)
 , d(new Private())
 {
 }

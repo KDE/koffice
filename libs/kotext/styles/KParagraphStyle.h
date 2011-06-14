@@ -40,7 +40,7 @@ class QTextBlock;
 class KOdfStyleStack;
 class KOdfGenericStyle;
 class KOdfGenericStyles;
-class KoShapeLoadingContext;
+class KShapeLoadingContext;
 
 /**
  * A container for all properties for the paragraph wide style.
@@ -540,7 +540,7 @@ public:
      * @param context the odf loading context
      * @param element the element containing the
      */
-    void loadOdf(const KXmlElement *element, KoShapeLoadingContext &context);
+    void loadOdf(const KXmlElement *element, KShapeLoadingContext &context);
 
     void saveOdf(KOdfGenericStyle &style, KOdfGenericStyles &mainStyles);
 
@@ -575,7 +575,7 @@ private:
      * Load the style from the \a KOdfStyleStack style stack using the
      * OpenDocument format.
      */
-    void loadOdfProperties(KoShapeLoadingContext &scontext);
+    void loadOdfProperties(KShapeLoadingContext &scontext);
     qreal propertyDouble(int key) const;
     int propertyInt(int key) const;
     bool propertyBoolean(int key) const;

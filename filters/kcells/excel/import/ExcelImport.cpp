@@ -43,7 +43,7 @@
 #include <KOdfGenericStyle.h>
 #include <KOdf.h>
 #include <KOdfXmlNS.h>
-#include <KoShapeLoadingContext.h>
+#include <KShapeLoadingContext.h>
 #include <KoShapeRegistry.h>
 #include <KOdfStylesReader.h>
 #include <KOdfLoadingContext.h>
@@ -419,13 +419,13 @@ void ExcelImport::Private::processEmbeddedObjects(const KXmlElement& rootElement
     // Register additional attributes, that identify shapes anchored in cells.
     // Their dimensions need adjustment after all rows are loaded,
     // because the position of the end cell is not always known yet.
-    KoShapeLoadingContext::addAdditionalAttributeData(KoShapeLoadingContext::AdditionalAttributeData(
+    KShapeLoadingContext::addAdditionalAttributeData(KShapeLoadingContext::AdditionalAttributeData(
                 KOdfXmlNS::table, "end-cell-address",
                 "table:end-cell-address"));
-    KoShapeLoadingContext::addAdditionalAttributeData(KoShapeLoadingContext::AdditionalAttributeData(
+    KShapeLoadingContext::addAdditionalAttributeData(KShapeLoadingContext::AdditionalAttributeData(
                 KOdfXmlNS::table, "end-x",
                 "table:end-x"));
-    KoShapeLoadingContext::addAdditionalAttributeData(KoShapeLoadingContext::AdditionalAttributeData(
+    KShapeLoadingContext::addAdditionalAttributeData(KShapeLoadingContext::AdditionalAttributeData(
                 KOdfXmlNS::table, "end-y",
                 "table:end-y"));
 
@@ -433,7 +433,7 @@ void ExcelImport::Private::processEmbeddedObjects(const KXmlElement& rootElement
     KOdfStylesReader odfStyles;
     odfStyles.createStyleMap(stylesDoc, false);
     KOdfLoadingContext odfContext(odfStyles, store);
-    KoShapeLoadingContext shapeContext(odfContext, outputDoc->resourceManager());
+    KShapeLoadingContext shapeContext(odfContext, outputDoc->resourceManager());
 
     KXmlElement sheetElement;
     forEachElement(sheetElement, rootElement) {
