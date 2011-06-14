@@ -29,7 +29,7 @@
 #include "KInlineTextObjectManager.h"
 
 #include <KoInsets.h>
-#include <KoPostscriptPaintDevice.h>
+#include <KPostscriptPaintDevice.h>
 #include <KoShape.h>
 
 #include <kdebug.h>
@@ -138,7 +138,7 @@ public:
     bool scheduled;
     KoTextDocumentLayout *parent;
     KoTextDocument::ResizeMethod resizeMethod;
-    KoPostscriptPaintDevice *paintDevice;
+    KPostscriptPaintDevice *paintDevice;
 };
 
 void KoTextDocumentLayout::Private::adjustSize()
@@ -175,7 +175,7 @@ KoTextDocumentLayout::KoTextDocumentLayout(QTextDocument *doc, KoTextDocumentLay
         m_state(layout),
         d(new Private(this))
 {
-    d->paintDevice = new KoPostscriptPaintDevice();
+    d->paintDevice = new KPostscriptPaintDevice();
     setPaintDevice(d->paintDevice);
     if (m_state == 0)
         m_state = new LayoutStateDummy();

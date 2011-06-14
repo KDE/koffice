@@ -56,7 +56,7 @@ set(flake_SRCS
     KoShapeController.cpp
     KoToolSelection.cpp
     KoShapeLayer.cpp
-    KoPostscriptPaintDevice.cpp
+    KPostscriptPaintDevice.cpp
     KInputDevice.cpp
     KoToolManager_p.cpp
     KoToolManager.cpp
@@ -276,7 +276,7 @@ install(
     KPatternBackground.h
     KoPluginLoader.h
     KPointerEvent.h
-    KoPostscriptPaintDevice.h
+    KPostscriptPaintDevice.h
     KoResourceManager.h
     KoRTree.h
     KoSelection.h

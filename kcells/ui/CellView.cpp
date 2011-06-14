@@ -56,7 +56,7 @@
 #include <KColorUtils>
 
 // KOffice
-#include <KoPostscriptPaintDevice.h>
+#include <KPostscriptPaintDevice.h>
 #include <KoZoomHandler.h>
 
 // KCells
@@ -1035,7 +1035,7 @@ void CellView::paintText(QPainter& painter,
     if (hAlign == KCStyle::Right && !cell.isEmpty() && !d->fittingWidth)
         offsetCellTooShort = 4;
 
-    KoPostscriptPaintDevice device;
+    KPostscriptPaintDevice device;
     const QFontMetricsF fontMetrics(font, &device);
     qreal fontOffset = 0.0;
 
@@ -1535,7 +1535,7 @@ void CellView::makeLayout(SheetView* sheetView, const KCCell& cell)
     // the cell and, if not, maybe rearrange the outtext a bit.
 
     // First, create a device independent font and its metrics.
-    KoPostscriptPaintDevice device;
+    KPostscriptPaintDevice device;
     QFont font(d->style.font(), &device);
     QFontMetricsF fontMetrics(font, &device);
 
@@ -1895,7 +1895,7 @@ void CellView::drawText(QPainter& painter, const QPointF& location, const QStrin
 {
     Q_UNUSED(cell)
 
-    KoPostscriptPaintDevice device;
+    KPostscriptPaintDevice device;
     const QFont font(d->calculateFont(), &device);
     const QFontMetricsF fontMetrics(font, &device);
 

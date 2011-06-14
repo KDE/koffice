@@ -28,7 +28,7 @@
 #include <kpluginfactory.h>
 
 #include <KoFilterChain.h>
-#include <KoPostscriptPaintDevice.h>
+#include <KPostscriptPaintDevice.h>
 
 #include <part/KCDoc.h>
 #include <KCCellStorage.h>
@@ -254,7 +254,7 @@ static unsigned convertColumnWidth(qreal width)
     static qreal factor = -1;
     if (factor == -1) {
         QFont f("Arial", 10);
-        KoPostscriptPaintDevice pd;
+        KPostscriptPaintDevice pd;
         QFontMetricsF fm(f, &pd);
         for (char c = '0'; c <= '9'; c++) {
             factor = qMax(factor, fm.width(c));

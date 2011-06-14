@@ -51,7 +51,7 @@ struct Finalizer {
 #include <KOdfLoadingContext.h>
 #include <KOdfStylesReader.h>
 #include <KParagraphStyle.h>
-#include <KoPostscriptPaintDevice.h>
+#include <KPostscriptPaintDevice.h>
 #include <KoSelection.h>
 #include <KoShapeBackground.h>
 #include <KoShapeLoadingContext.h>
@@ -436,7 +436,7 @@ QTextDocument *TextShape::footnoteDocument()
     if (m_footnotes == 0) {
         m_footnotes = new QTextDocument();
         m_footnotes->setUseDesignMetrics(true);
-        m_footnotes->documentLayout()->setPaintDevice(new KoPostscriptPaintDevice());
+        m_footnotes->documentLayout()->setPaintDevice(new KPostscriptPaintDevice());
         m_footnotes->setDefaultFont(QFont("Sans Serif", 12, QFont::Normal, false));
         m_footnotes->setPageSize(size());
     }

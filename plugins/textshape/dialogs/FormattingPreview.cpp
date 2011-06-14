@@ -20,7 +20,7 @@
 
 #include "FormattingPreview.h"
 
-#include <KoPostscriptPaintDevice.h>
+#include <KPostscriptPaintDevice.h>
 #include <KoZoomHandler.h>
 
 #include <QBrush>
@@ -207,7 +207,7 @@ void FormattingPreview::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event)
 
-    KoPostscriptPaintDevice *paintDevice = new KoPostscriptPaintDevice;
+    KPostscriptPaintDevice *paintDevice = new KPostscriptPaintDevice;
     KoZoomHandler *zoomHandler = new KoZoomHandler;
     zoomHandler->setResolutionToStandard();
     zoomHandler->setZoom(1.0);

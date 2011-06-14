@@ -17,20 +17,20 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoPostscriptPaintDevice.h"
+#include "KPostscriptPaintDevice.h"
 
 #include <limits.h>
 
-KoPostscriptPaintDevice::KoPostscriptPaintDevice()
+KPostscriptPaintDevice::KPostscriptPaintDevice()
 {
 }
 
-QPaintEngine *KoPostscriptPaintDevice::paintEngine() const
+QPaintEngine *KPostscriptPaintDevice::paintEngine() const
 {
     return 0;
 }
 
-int KoPostscriptPaintDevice::metric(QPaintDevice::PaintDeviceMetric metric) const
+int KPostscriptPaintDevice::metric(QPaintDevice::PaintDeviceMetric metric) const
 {
     switch (metric) {
     case QPaintDevice::PdmWidth:

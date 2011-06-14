@@ -41,11 +41,11 @@
  *
  * Note: never try to actually paint on this paint device, since that will noisily crash.
  */
-class FLAKE_EXPORT KoPostscriptPaintDevice : public QPaintDevice
+class FLAKE_EXPORT KPostscriptPaintDevice : public QPaintDevice
 {
 public:
     /// constructor
-    KoPostscriptPaintDevice();
+    KPostscriptPaintDevice();
     /// reimplemented from QPaintDevice
     QPaintEngine *paintEngine() const;
     /// reimplemented from QPaintDevice

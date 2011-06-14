@@ -33,7 +33,7 @@
 #include <KXmlReader.h>
 #include <KUnit.h>
 #include <KOdfGenericStyle.h>
-#include <KoPostscriptPaintDevice.h>
+#include <KPostscriptPaintDevice.h>
 #include <KoShapeLoadingContext.h>
 #include "KoTextSharedLoadingData.h"
 
@@ -1036,7 +1036,7 @@ void KCharacterStyle::loadOdfProperties(KOdfStyleStack &styleStack)
     const QString letterSpacing(styleStack.property(KOdfXmlNS::fo, "letter-spacing"));
     if (!letterSpacing.isEmpty() && letterSpacing != "100") { // 100% doesn't do anything.
         qreal space = KUnit::parseValue(letterSpacing);
-        KoPostscriptPaintDevice ps;
+        KPostscriptPaintDevice ps;
         QFontMetrics fm(font(), &ps);
         setFontLetterSpacing(100+100*space/fm.averageCharWidth());
     }
@@ -1252,7 +1252,7 @@ void KCharacterStyle::saveOdf(KOdfGenericStyle &style)
         } else if (key == QTextCharFormat::FontLetterSpacing) {
             // in Qt letter-spacing is in percent, in ODF its a static value.
             // We are just approximating the conversion here...
-            KoPostscriptPaintDevice ps;
+            KPostscriptPaintDevice ps;
             QFontMetrics fm(font(), &ps);
             const qreal spacing = ((fontLetterSpacing() - 100) * fm.averageCharWidth()) / 100.;
             style.addPropertyPt("fo:letter-spacing", spacing, KOdfGenericStyle::TextType);
