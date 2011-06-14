@@ -31,7 +31,7 @@
 #include <KProperties.h>
 #include <kdebug.h>
 #include <KShape.h>
-#include <KoShapeSavingContext.h>
+#include <KShapeSavingContext.h>
 #include <KShapeLoadingContext.h>
 #include <KoTextShapeData.h>
 #include <KOdfXmlNS.h>
@@ -71,7 +71,7 @@ void PresentationVariable::positionChanged()
     }
 }
 
-void PresentationVariable::saveOdf(KoShapeSavingContext & context)
+void PresentationVariable::saveOdf(KShapeSavingContext & context)
 {
     KXmlWriter *writer = &context.xmlWriter();
     const char * type = "";

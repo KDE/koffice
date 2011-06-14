@@ -41,7 +41,7 @@
 #include <KoDocument.h>
 
 class KShape;
-class KoShapeSavingContext;
+class KShapeSavingContext;
 class KShapeLayer;
 class KImageCollection;
 class KOdfStore;
@@ -154,11 +154,11 @@ public:
      */
     const QList<KShape*> shapes() const;
 
-    void saveOasis(KoShapeSavingContext & context) const;
+    void saveOasis(KShapeSavingContext & context) const;
     bool saveOdf(KoDocument::SavingContext & documentContext, const KOdfPageLayoutData &layout);
     bool loadOasis(const KXmlElement &element, KShapeLoadingContext &context);
     void loadOdfStyles(KShapeLoadingContext & context);
-    void saveOdfStyles(KoShapeSavingContext & context);
+    void saveOdfStyles(KShapeSavingContext & context);
 
     /**
     * Adds an object to the document.

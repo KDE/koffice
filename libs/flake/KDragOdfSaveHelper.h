@@ -20,7 +20,7 @@
 #ifndef KODRAGODFSAVEHELPER_H
 #define KODRAGODFSAVEHELPER_H
 
-#include <KoShapeSavingContext.h>
+#include <KShapeSavingContext.h>
 
 #include "flake_export.h"
 
@@ -37,11 +37,11 @@ public:
      * Create and return the context used for saving
      *
      * If you need a special context for saving you can reimplent this function.
-     * The default implementation return a KoShapeSavingContext.
+     * The default implementation return a KShapeSavingContext.
      *
      * The returned context is valid as long as the KDragOdfSaveHelper is existing
      */
-    virtual KoShapeSavingContext *context(KXmlWriter *bodyWriter, KOdfGenericStyles &mainStyles, KOdfEmbeddedDocumentSaver &embeddedSaver);
+    virtual KShapeSavingContext *context(KXmlWriter *bodyWriter, KOdfGenericStyles &mainStyles, KOdfEmbeddedDocumentSaver &embeddedSaver);
 
     /**
      * This method is called for writing the body of odf document.

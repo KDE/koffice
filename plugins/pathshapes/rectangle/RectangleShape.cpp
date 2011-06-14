@@ -23,7 +23,7 @@
 
 #include <KPathPoint.h>
 #include <KoTextOnShapeContainer.h>
-#include <KoShapeSavingContext.h>
+#include <KShapeSavingContext.h>
 #include <KXmlReader.h>
 #include <KXmlWriter.h>
 #include <KOdfXmlNS.h>
@@ -72,7 +72,7 @@ bool RectangleShape::loadOdf(const KXmlElement &element, KShapeLoadingContext &c
     return true;
 }
 
-void RectangleShape::saveOdf(KoShapeSavingContext & context) const
+void RectangleShape::saveOdf(KShapeSavingContext & context) const
 {
     if (isParametricShape()) {
         context.xmlWriter().startElement("draw:rect");

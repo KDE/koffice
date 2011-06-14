@@ -35,7 +35,7 @@
 #include <KXmlWriter.h>
 #include <KOdfDocumentBase.h>
 #include <KOdfEmbeddedDocumentSaver.h>
-#include "KoShapeSavingContext.h"
+#include "KShapeSavingContext.h"
 #include <opendocument/KoTextSharedSavingData.h>
 
 #include "KoTextOdfSaveHelper.h"
@@ -85,7 +85,7 @@ bool KoTextDrag::setOdf(const char * mimeType, KoTextOdfSaveHelper &helper)
 
     KOdfGenericStyles mainStyles;
     KXmlWriter *bodyWriter = odfStore.bodyWriter();
-    KoShapeSavingContext * context = helper.context(bodyWriter, mainStyles, embeddedSaver);
+    KShapeSavingContext * context = helper.context(bodyWriter, mainStyles, embeddedSaver);
     KOdfGenericChanges changes;
 
     KoSharedSavingData *sharedData = context->sharedData(KOTEXT_SHARED_SAVING_ID);

@@ -52,7 +52,7 @@ public:
     virtual ~DateVariable();
 
     ///reimplemented
-    void saveOdf(KoShapeSavingContext &context);
+    void saveOdf(KShapeSavingContext &context);
 
     ///reimplemented
     virtual bool loadOdf(const KXmlElement &element, KShapeLoadingContext &context);

@@ -47,7 +47,7 @@ public:
     // KShape interface
     virtual void paint(QPainter& painter, const KoViewConverter& converter);
     virtual bool loadOdf(const KXmlElement & element, KShapeLoadingContext &context);
-    virtual void saveOdf(KoShapeSavingContext & context) const;
+    virtual void saveOdf(KShapeSavingContext & context) const;
     virtual void setSize(const QSizeF &size);
 
     /**

@@ -22,7 +22,7 @@
 
 #include <KProperties.h>
 #include <kdebug.h>
-#include <KoShapeSavingContext.h>
+#include <KShapeSavingContext.h>
 #include <KXmlReader.h>
 #include <KXmlWriter.h>
 
@@ -44,7 +44,7 @@ void InfoVariable::propertyChanged(Property property, const QVariant &value)
     }
 }
 
-void InfoVariable::saveOdf(KoShapeSavingContext & context)
+void InfoVariable::saveOdf(KShapeSavingContext & context)
 {
     KXmlWriter *writer = &context.xmlWriter();
     QString nodeName;

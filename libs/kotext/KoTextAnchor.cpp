@@ -30,7 +30,7 @@
 #include <KXmlWriter.h>
 #include <KXmlReader.h>
 #include <KOdfXmlNS.h>
-#include <KoShapeSavingContext.h>
+#include <KShapeSavingContext.h>
 #include <KShapeLoadingContext.h>
 #include <KUnit.h>
 
@@ -298,7 +298,7 @@ void KoTextAnchor::setOffset(const QPointF &offset)
     d->relayout();
 }
 
-void KoTextAnchor::saveOdf(KoShapeSavingContext &context)
+void KoTextAnchor::saveOdf(KShapeSavingContext &context)
 {
     Q_D(KoTextAnchor);
     // the anchor type determines where in the stream the shape is to be saved.

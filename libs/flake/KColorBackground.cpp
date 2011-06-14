@@ -18,7 +18,7 @@
  */
 
 #include "KColorBackground.h"
-#include "KoShapeSavingContext.h"
+#include "KShapeSavingContext.h"
 #include <KOdf.h>
 #include <KOdfLoadingContext.h>
 #include <KOdfXmlNS.h>
@@ -77,7 +77,7 @@ void KColorBackground::paint(QPainter &painter, const QPainterPath &fillPath) co
     painter.drawPath(fillPath);
 }
 
-void KColorBackground::fillStyle(KOdfGenericStyle &style, KoShapeSavingContext &context)
+void KColorBackground::fillStyle(KOdfGenericStyle &style, KShapeSavingContext &context)
 {
     KOdf::saveOdfFillStyle(style, context.mainStyles(), QBrush(d->color, d->style));
 }

@@ -71,7 +71,7 @@
 #include <KOdfXmlNS.h>
 #include <KXmlWriter.h>
 #include <KoZoomHandler.h>
-#include <KoShapeSavingContext.h>
+#include <KShapeSavingContext.h>
 #include <KoUpdater.h>
 #include <KoProgressUpdater.h>
 

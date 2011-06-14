@@ -23,7 +23,7 @@
 
 #include <KXmlReader.h> // for usage in Q_UNUSED
 #include <KShapeLoadingContext.h> // for usage in Q_UNUSED
-#include <KoShapeSavingContext.h> // for usage in Q_UNUSED
+#include <KShapeSavingContext.h> // for usage in Q_UNUSED
 
 KoTextReference::KoTextReference(int indexId)
         : KoVariable(),
@@ -67,7 +67,7 @@ bool KoTextReference::loadOdf(const KXmlElement &element, KShapeLoadingContext &
     return false;
 }
 
-void KoTextReference::saveOdf(KoShapeSavingContext &context)
+void KoTextReference::saveOdf(KShapeSavingContext &context)
 {
     Q_UNUSED(context);
     // TODO

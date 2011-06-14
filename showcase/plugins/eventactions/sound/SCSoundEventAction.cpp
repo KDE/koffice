@@ -23,7 +23,7 @@
 #include <KOdfXmlNS.h>
 #include <KXmlReader.h>
 #include <KXmlWriter.h>
-#include <KoShapeSavingContext.h>
+#include <KShapeSavingContext.h>
 #include <KShapeLoadingContext.h>
 #include <SCSoundData.h>
 #include <SCSoundCollection.h>
@@ -71,7 +71,7 @@ bool SCSoundEventAction::loadOdf(const KXmlElement & element, KShapeLoadingConte
     return retval;
 }
 
-void SCSoundEventAction::saveOdf(KoShapeSavingContext & context) const
+void SCSoundEventAction::saveOdf(KShapeSavingContext & context) const
 {
     context.xmlWriter().startElement("presentation:event-listener");
     context.xmlWriter().addAttribute("script:event-name", "dom:click");

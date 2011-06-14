@@ -39,7 +39,7 @@
 #include <KoProgressUpdater.h>
 #include <KResourceManager.h>
 #include <KShapeRegistry.h>
-#include <KoShapeSavingContext.h>
+#include <KShapeSavingContext.h>
 #include <KOdfStorageDevice.h>
 #include <KoUpdater.h>
 #include <KOdfXmlNS.h>
@@ -143,7 +143,7 @@ bool KCDocBase::saveOdfHelper(SavingContext & documentContext, SaveFlag saveFlag
     KXmlWriter* contentWriter = documentContext.odfStore.contentWriter();
 
     KXmlWriter* bodyWriter = documentContext.odfStore.bodyWriter();
-    KoShapeSavingContext savingContext(*bodyWriter, mainStyles, documentContext.embeddedSaver);
+    KShapeSavingContext savingContext(*bodyWriter, mainStyles, documentContext.embeddedSaver);
 
     //todo fixme just add a element for testing saving content.xml
     bodyWriter->startElement("office:body");

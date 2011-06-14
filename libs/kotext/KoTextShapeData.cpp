@@ -40,7 +40,7 @@
 #include <KOdfGenericStyle.h>
 #include <KOdfGenericStyles.h>
 #include <KShapeLoadingContext.h>
-#include <KoShapeSavingContext.h>
+#include <KShapeSavingContext.h>
 
 #include <KXmlWriter.h>
 
@@ -318,7 +318,7 @@ void RemoveDeleteChangesCommand::removeDeleteChanges()
     }
 }
 
-void KoTextShapeData::saveOdf(KoShapeSavingContext &context, KDocumentRdfBase *rdfData, int from, int to) const
+void KoTextShapeData::saveOdf(KShapeSavingContext &context, KDocumentRdfBase *rdfData, int from, int to) const
 {
     Q_D(const KoTextShapeData);
     InsertDeleteChangesCommand *insertCommand = new InsertDeleteChangesCommand(document());

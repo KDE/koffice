@@ -25,7 +25,7 @@
 
 KoTextShapeSavingContext::KoTextShapeSavingContext(KXmlWriter &xmlWriter, KOdfGenericStyles& mainStyles,
         KOdfEmbeddedDocumentSaver& embeddedSaver, KOdfGenericChanges& changes)
-        : KoShapeSavingContext(xmlWriter, mainStyles, embeddedSaver)
+        : KShapeSavingContext(xmlWriter, mainStyles, embeddedSaver)
     , m_changes(changes)
 {
 }

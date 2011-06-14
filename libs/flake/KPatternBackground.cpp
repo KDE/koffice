@@ -19,7 +19,7 @@
 
 #include "KPatternBackground.h"
 #include "KShapeBackground_p.h"
-#include "KoShapeSavingContext.h"
+#include "KShapeSavingContext.h"
 #include "KImageData.h"
 #include "KImageCollection.h"
 #include <KOdfStyleStack.h>
@@ -328,7 +328,7 @@ void KPatternBackground::paint(QPainter &painter, const QPainterPath &fillPath) 
     painter.restore();
 }
 
-void KPatternBackground::fillStyle(KOdfGenericStyle &style, KoShapeSavingContext &context)
+void KPatternBackground::fillStyle(KOdfGenericStyle &style, KShapeSavingContext &context)
 {
     Q_D(KPatternBackground);
     if (! d->imageData)
@@ -382,7 +382,7 @@ void KPatternBackground::fillStyle(KOdfGenericStyle &style, KoShapeSavingContext
     patternStyle.addAttribute("xlink:href", context.imageHref(d->imageData));
 
     QString patternStyleName = context.mainStyles().insert(patternStyle, "picture");
-    context.mainStyles().insert(style, context.isSet(KoShapeSavingContext::PresentationShape) ? "pr" : "gr");
+    context.mainStyles().insert(style, context.isSet(KShapeSavingContext::PresentationShape) ? "pr" : "gr");
     style.addProperty("draw:fill", "bitmap");
     style.addProperty("draw:fill-image-name", patternStyleName);
 

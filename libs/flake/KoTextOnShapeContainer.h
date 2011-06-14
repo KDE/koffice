@@ -46,7 +46,7 @@ public:
     virtual ~KoTextOnShapeContainer();
 
     virtual bool loadOdf(const KXmlElement &element, KShapeLoadingContext &context);
-    virtual void saveOdf(KoShapeSavingContext &context) const;
+    virtual void saveOdf(KShapeSavingContext &context) const;
 
     /// different kinds of resizing behavior to determine how to treat text overflow
     enum ResizeBehavior {
@@ -85,7 +85,7 @@ public:
      * This method is typically called in the shapes saveOdf() method before closing the
      * xml element it saved into.
      */
-    virtual void saveOdfChildElements(KoShapeSavingContext &context) const;
+    virtual void saveOdfChildElements(KShapeSavingContext &context) const;
 
     /**
      * Try to load text-on-shape from \a element and wrap \a shape with it.

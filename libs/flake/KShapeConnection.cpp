@@ -33,7 +33,7 @@
 #include <KXmlWriter.h>
 #include <KOdfXmlNS.h>
 #include <KShapeLoadingContext.h>
-#include <KoShapeSavingContext.h>
+#include <KShapeSavingContext.h>
 #include <KUnit.h>
 
 #include <KDebug>
@@ -51,7 +51,7 @@ class ConnectLines : public ConnectStrategy
 
     virtual void paint(QPainter &painter, const KoViewConverter &converter);
     virtual void setSkew(const QStringList &values);
-    virtual void saveOdf(KoShapeSavingContext &context) const;
+    virtual void saveOdf(KShapeSavingContext &context) const;
     virtual QRectF boundingRect() const {
         recalc();
         return m_path.boundingRect();
@@ -79,7 +79,7 @@ class ConnectCurve : public ConnectStrategy
     }
 
     virtual void paint(QPainter &painter, const KoViewConverter &converter);
-    virtual void saveOdf(KoShapeSavingContext &context) const;
+    virtual void saveOdf(KShapeSavingContext &context) const;
     virtual QRectF boundingRect() const {
         QPointF start = q->q->startPoint();
         QPointF end = q->q->endPoint();
@@ -327,7 +327,7 @@ void ConnectLines::setSkew(const QStringList &values)
     qDebug() << "skew.." << values;
 }
 
-void ConnectLines::saveOdf(KoShapeSavingContext &context) const
+void ConnectLines::saveOdf(KShapeSavingContext &context) const
 {
     // We should try to save the svg:d
 }
@@ -382,7 +382,7 @@ void ConnectCurve::recalc() const
     m_dirty = false;
 }
 
-void ConnectCurve::saveOdf(KoShapeSavingContext &context) const
+void ConnectCurve::saveOdf(KShapeSavingContext &context) const
 {
     // write the path data
     context.xmlWriter().addAttribute("svg:d", shape.toString());
@@ -610,7 +610,7 @@ bool KShapeConnection::loadOdf(const KXmlElement &element, KShapeLoadingContext 
     return true;
 }
 
-void KShapeConnection::saveOdf(KoShapeSavingContext &context) const
+void KShapeConnection::saveOdf(KShapeSavingContext &context) const
 {
     if (d->connectionStrategy == 0)
         return;

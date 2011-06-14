@@ -34,7 +34,7 @@
 #include <KShapeLoadingContext.h>
 #include <KShapeFactoryBase.h>
 #include <KShapeRegistry.h>
-#include <KoShapeSavingContext.h>
+#include <KShapeSavingContext.h>
 #include <KoTextShapeData.h>
 #include <KoTextSharedLoadingData.h>
 #include <KoTextDocument.h>
@@ -102,7 +102,7 @@ void SCPlaceholderTextStrategy::paint(QPainter &painter, const KoViewConverter &
     }
 }
 
-void SCPlaceholderTextStrategy::saveOdf(KoShapeSavingContext &context)
+void SCPlaceholderTextStrategy::saveOdf(KShapeSavingContext &context)
 {
     if (m_textShape) {
         KoTextShapeData *shapeData = qobject_cast<KoTextShapeData*>(m_textShape->userData());

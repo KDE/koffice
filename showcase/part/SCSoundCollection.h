@@ -49,7 +49,7 @@ public:
      * and have a recognized SCSoundData::storeHref().
      * @return returns true if save was successful (no sounds failed).
      */
-    bool completeSaving(KOdfStore *store, KXmlWriter * manifestWriter, KoShapeSavingContext * context);
+    bool completeSaving(KOdfStore *store, KXmlWriter * manifestWriter, KShapeSavingContext * context);
 
     SCSoundData *findSound(QString title);
 

@@ -44,7 +44,7 @@ class KShapeConnection;
 /**
  * The set of data for the ODF file format used during saving of a shape.
  */
-class FLAKE_EXPORT KoShapeSavingContext
+class FLAKE_EXPORT KShapeSavingContext
 {
 public:
     /// The Style used for saving the shape
@@ -77,9 +77,9 @@ public:
      * @param mainStyles for saving the styles
      * @param embeddedSaver for saving embedded documents
      */
-    KoShapeSavingContext(KXmlWriter &xmlWriter, KOdfGenericStyles &mainStyles,
+    KShapeSavingContext(KXmlWriter &xmlWriter, KOdfGenericStyles &mainStyles,
                          KOdfEmbeddedDocumentSaver &embeddedSaver);
-    virtual ~KoShapeSavingContext();
+    virtual ~KShapeSavingContext();
 
     /**
      * @brief Get the xml writer
@@ -229,7 +229,7 @@ public:
      * styles. With that e.g. the styles only need to be saved once and can be used everywhere
      * without creating them again.
      *
-     * The ownership of the added data is passed to the context. The KoShapeSavingContext will
+     * The ownership of the added data is passed to the context. The KShapeSavingContext will
      * delete the added data when it is destroyed.
      *
      * Data inserted for a specific id will not be overwritten by calling addSharedData with
@@ -285,6 +285,6 @@ private:
     KoShapeSavingContextPrivate *d;
 };
 
-Q_DECLARE_OPERATORS_FOR_FLAGS(KoShapeSavingContext::ShapeSavingOptions)
+Q_DECLARE_OPERATORS_FOR_FLAGS(KShapeSavingContext::ShapeSavingOptions)
 
 #endif // KOSHAPESAVINGCONTEXT_H

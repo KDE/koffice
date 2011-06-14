@@ -24,7 +24,7 @@
 #include "kword_export.h"
 
 #include <KShape.h>
-#include <KoShapeSavingContext.h>
+#include <KShapeSavingContext.h>
 #include <KShapeApplicationData.h>
 
 class KoTextAnchor;
@@ -165,7 +165,7 @@ public:
      * Save the frame as ODF
      * @param context the context for saving.
      */
-    void saveOdf(KoShapeSavingContext &context, const KWPage &page, int pageZIndexOffset = 0) const;
+    void saveOdf(KShapeSavingContext &context, const KWPage &page, int pageZIndexOffset = 0) const;
 
     bool loadODf(const KXmlElement &element, KShapeLoadingContext &context);
 

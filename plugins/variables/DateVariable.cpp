@@ -26,7 +26,7 @@
 #include <KXmlWriter.h>
 #include <KOdfXmlNS.h>
 #include <KShapeLoadingContext.h>
-#include <KoShapeSavingContext.h>
+#include <KShapeSavingContext.h>
 #include <KOdfLoadingContext.h>
 #include <KOdfStylesReader.h>
 
@@ -46,7 +46,7 @@ DateVariable::~DateVariable()
 {
 }
 
-void DateVariable::saveOdf(KoShapeSavingContext & context)
+void DateVariable::saveOdf(KShapeSavingContext & context)
 {
     // TODO support data-style-name
     KXmlWriter *writer = &context.xmlWriter();

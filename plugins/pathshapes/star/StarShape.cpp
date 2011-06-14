@@ -22,7 +22,7 @@
 
 #include <KPathPoint.h>
 #include <KShapeLoadingContext.h>
-#include <KoShapeSavingContext.h>
+#include <KShapeSavingContext.h>
 #include <KoTextOnShapeContainer.h>
 #include <KXmlReader.h>
 #include <KOdfXmlNS.h>
@@ -347,7 +347,7 @@ bool StarShape::loadOdf(const KXmlElement & element, KShapeLoadingContext & cont
     return true;
 }
 
-void StarShape::saveOdf(KoShapeSavingContext & context) const
+void StarShape::saveOdf(KShapeSavingContext & context) const
 {
     if (isParametricShape()) {
         double defaultAngle = defaultAngleRadian();

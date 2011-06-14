@@ -51,7 +51,7 @@
 #include <KOdfLoadingContext.h>
 #include <KOdfStoreReader.h>
 #include <KOdfWriteStore.h>
-#include <KoShapeSavingContext.h>
+#include <KShapeSavingContext.h>
 #include <KXmlWriter.h>
 #include <KOdfXmlNS.h>
 #include <KOdfSettings.h>

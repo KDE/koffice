@@ -40,14 +40,14 @@ public:
     virtual ~KoPAOdfPageSaveHelper();
 
     /// reimplemented
-    virtual KoShapeSavingContext * context(KXmlWriter * bodyWriter, KOdfGenericStyles &mainStyles, KOdfEmbeddedDocumentSaver &embeddedSaver);
+    virtual KShapeSavingContext * context(KXmlWriter * bodyWriter, KOdfGenericStyles &mainStyles, KOdfEmbeddedDocumentSaver &embeddedSaver);
 
     /// reimplemented
     virtual bool writeBody();
 
 private:
     KoPADocument * m_doc;
-    KoShapeSavingContext  *m_context;
+    KShapeSavingContext  *m_context;
     QList<KoPAPageBase *> m_pages;
     QList<KoPAPageBase *> m_masterPages;
 };

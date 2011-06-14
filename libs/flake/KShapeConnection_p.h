@@ -39,7 +39,7 @@ public:
     virtual void setSkew(const QStringList &values) {
         Q_UNUSED(values);
     }
-    virtual void saveOdf(KoShapeSavingContext &context) const = 0;
+    virtual void saveOdf(KShapeSavingContext &context) const = 0;
 
     virtual QRectF boundingRect() const = 0;
 

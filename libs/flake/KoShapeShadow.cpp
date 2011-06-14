@@ -19,7 +19,7 @@
  */
 
 #include "KoShapeShadow.h"
-#include "KoShapeSavingContext.h"
+#include "KShapeSavingContext.h"
 #include "KShapeBorderBase.h"
 #include "KShape.h"
 #include "KoInsets.h"
@@ -51,7 +51,7 @@ KoShapeShadow::~KoShapeShadow()
     delete d;
 }
 
-void KoShapeShadow::fillStyle(KOdfGenericStyle &style, KoShapeSavingContext &context)
+void KoShapeShadow::fillStyle(KOdfGenericStyle &style, KShapeSavingContext &context)
 {
     Q_UNUSED(context);
 

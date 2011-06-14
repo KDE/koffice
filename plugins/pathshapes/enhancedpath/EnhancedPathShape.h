@@ -34,7 +34,7 @@ class EnhancedPathCommand;
 class EnhancedPathHandle;
 class EnhancedPathFormula;
 class EnhancedPathParameter;
-class KoShapeSavingContext;
+class KShapeSavingContext;
 class KShapeLoadingContext;
 
 /**
@@ -107,7 +107,7 @@ public:
 
 protected:
     // from KShape
-    virtual void saveOdf(KoShapeSavingContext &context) const;
+    virtual void saveOdf(KShapeSavingContext &context) const;
     // from KShape
     virtual bool loadOdf(const KXmlElement &element, KShapeLoadingContext &context);
     // from KParameterShape

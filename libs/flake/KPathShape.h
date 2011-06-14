@@ -101,7 +101,7 @@ public:
     virtual void setSize(const QSizeF &size);
     virtual bool hitTest(const QPointF &position) const;
 
-    virtual void saveOdf(KoShapeSavingContext &context) const;
+    virtual void saveOdf(KShapeSavingContext &context) const;
     virtual bool loadOdf(const KXmlElement &element, KShapeLoadingContext &context);
 
     /// Removes all subpaths and their points from the path
@@ -431,7 +431,7 @@ protected:
     KPathShape(KPathShapePrivate &);
 
     /// reimplemented
-    virtual QString saveStyle(KOdfGenericStyle &style, KoShapeSavingContext &context) const;
+    virtual QString saveStyle(KOdfGenericStyle &style, KShapeSavingContext &context) const;
     /// reimplemented
     virtual void loadStyle(const KXmlElement &element, KShapeLoadingContext &context);
 

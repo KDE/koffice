@@ -26,7 +26,7 @@
 
 KoPASavingContext::KoPASavingContext(KXmlWriter &xmlWriter, KOdfGenericStyles &mainStyles,
         KOdfEmbeddedDocumentSaver &embeddedSaver, int page)
-    : KoShapeSavingContext(xmlWriter, mainStyles, embeddedSaver)
+    : KShapeSavingContext(xmlWriter, mainStyles, embeddedSaver)
 , m_page(page)
 , m_masterPageIndex(0)
 , m_clearDrawIds(false)
@@ -56,7 +56,7 @@ QString KoPASavingContext::masterPageName(const KoPAMasterPage * masterPage) con
 
 QString KoPASavingContext::masterPageElementName()
 {
-    if (! isSet(KoShapeSavingContext::UniqueMasterPages)) {
+    if (! isSet(KShapeSavingContext::UniqueMasterPages)) {
         ++m_masterPageIndex;
     }
     return QString("content_%1").arg(m_masterPageIndex);

@@ -21,7 +21,7 @@
 #include "KInlineObject_p.h"
 #include "KoTextDocumentLayout.h"
 #include "KoTextShapeData.h"
-#include "KoShapeSavingContext.h"
+#include "KShapeSavingContext.h"
 #include "KInlineTextObjectManager.h"
 #include "KoTextInlineRdf.h"
 

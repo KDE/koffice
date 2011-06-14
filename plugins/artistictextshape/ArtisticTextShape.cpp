@@ -21,7 +21,7 @@
 #include "ArtisticTextShape.h"
 
 #include <KPathShape.h>
-#include <KoShapeSavingContext.h>
+#include <KShapeSavingContext.h>
 #include <KShapeLoadingContext.h>
 #include <KOdfXmlNS.h>
 #include <KXmlWriter.h>
@@ -68,7 +68,7 @@ void ArtisticTextShape::paintDecorations(QPainter &/*painter*/, const KoViewConv
 {
 }
 
-void ArtisticTextShape::saveOdf(KoShapeSavingContext &context) const
+void ArtisticTextShape::saveOdf(KShapeSavingContext &context) const
 {
     context.xmlWriter().startElement("draw:custom-shape");
     saveOdfAttributes( context, OdfAllAttributes & ~OdfGeometry );

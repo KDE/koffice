@@ -21,7 +21,7 @@
 
 #include "SCAnimationCache.h"
 #include <KShapeLoadingContext.h>
-#include <KoShapeSavingContext.h>
+#include <KShapeSavingContext.h>
 #include <KXmlReader.h>
 
 SCAnimateTransform::SCAnimateTransform(SCShapeAnimation *shapeAnimation)

@@ -24,7 +24,7 @@
 #include "KCGenValidationStyle.h"
 #include "KCSheet.h"
 
-#include <KoShapeSavingContext.h>
+#include <KShapeSavingContext.h>
 
 #include <QMap>
 #include <QMultiHash>
@@ -39,7 +39,7 @@ class KShape;
 class KCOdfSavingContext
 {
 public:
-    KCOdfSavingContext(KoShapeSavingContext& shapeContext)
+    KCOdfSavingContext(KShapeSavingContext& shapeContext)
             : shapeContext(shapeContext) {}
 
     void insertCellAnchoredShape(const KCSheet *sheet, int row, int column, KShape* shape) {
@@ -74,7 +74,7 @@ public:
     }
 
 public:
-    KoShapeSavingContext& shapeContext;
+    KShapeSavingContext& shapeContext;
     KCGenValidationStyles valStyle;
     QMap<int, KCStyle> columnDefaultStyles;
     QMap<int, KCStyle> rowDefaultStyles;

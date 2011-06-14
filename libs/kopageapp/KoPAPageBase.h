@@ -61,7 +61,7 @@ public:
      * @param context the pageapp saving context
      * @return true on success, false otherwise
      */
-    virtual void saveOdf(KoShapeSavingContext &context) const = 0;
+    virtual void saveOdf(KShapeSavingContext &context) const = 0;
 
     /// reimplemented
     virtual bool loadOdf(const KXmlElement &element, KShapeLoadingContext &context);
@@ -186,7 +186,7 @@ protected:
      * @param paContext the pageapp saving context
      * @return true on success, false otherwise
      */
-    void saveOdfShapes(KoShapeSavingContext &context) const;
+    void saveOdfShapes(KShapeSavingContext &context) const;
 
     /**
      * @brief Save animations

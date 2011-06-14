@@ -29,7 +29,7 @@
 #include "frames/KWTextFrame.h"
 #include <KXmlWriter.h>
 #include <KOdfWriteStore.h>
-#include <KoShapeSavingContext.h>
+#include <KShapeSavingContext.h>
 
 #include <KoTextShapeData.h>
 #include <KoStyleManager.h>
@@ -64,7 +64,7 @@ QByteArray KWOdfWriter::serializeHeaderFooter(KOdfEmbeddedDocumentSaver &embedde
     buffer.open(QIODevice::WriteOnly);
     KXmlWriter writer(&buffer);
 
-    KoShapeSavingContext context(writer, mainStyles, embeddedSaver);
+    KShapeSavingContext context(writer, mainStyles, embeddedSaver);
 
     KoTextSharedSavingData *sharedData = new KoTextSharedSavingData;
     sharedData->setGenChanges(changes);
@@ -223,7 +223,7 @@ bool KWOdfWriter::save(KOdfWriteStore &odfStore, KOdfEmbeddedDocumentSaver &embe
     bodyWriter->startElement("office:body");
     bodyWriter->startElement("office:text");
 
-    KoShapeSavingContext context(*tmpBodyWriter, mainStyles, embeddedSaver);
+    KShapeSavingContext context(*tmpBodyWriter, mainStyles, embeddedSaver);
 
     KoTextSharedSavingData *sharedData = new KoTextSharedSavingData;
     sharedData->setGenChanges(changes);

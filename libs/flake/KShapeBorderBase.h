@@ -25,7 +25,7 @@
 
 class KShape;
 class KOdfGenericStyle;
-class KoShapeSavingContext;
+class KShapeSavingContext;
 class KoViewConverter;
 struct KoInsets;
 class QColor;
@@ -53,7 +53,7 @@ public:
      * @param style object
      * @param context used for saving
      */
-    virtual void saveOdf(KOdfGenericStyle &style, KoShapeSavingContext &context) const = 0;
+    virtual void saveOdf(KOdfGenericStyle &style, KShapeSavingContext &context) const = 0;
 
     /**
      * Return a borderInsets object filled with the size inside the shape that this border takes.

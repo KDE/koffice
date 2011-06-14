@@ -135,7 +135,7 @@ public:
     /// Load the additional attributes.
     bool loadOdf(const KXmlElement &element, KShapeLoadingContext &context);
     /// Save the additional attributes.
-    void saveOdf(KoShapeSavingContext &context);
+    void saveOdf(KShapeSavingContext &context);
 
     /**
      * Returns true if the anchored frame is positioned as a big character in the text layout

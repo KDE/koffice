@@ -30,7 +30,7 @@
 #include <KShape.h>
 #include <KShapeFactoryBase.h>
 #include <KShapeRegistry.h>
-#include <KoShapeSavingContext.h>
+#include <KShapeSavingContext.h>
 #include <KShapeLoadingContext.h>
 #include <KXmlWriter.h>
 #include <kdebug.h>
@@ -142,7 +142,7 @@ void SCPlaceholderStrategy::paint(QPainter &painter, const KoViewConverter &conv
     painter.drawRect(rect);
 }
 
-void SCPlaceholderStrategy::saveOdf(KoShapeSavingContext &context)
+void SCPlaceholderStrategy::saveOdf(KShapeSavingContext &context)
 {
     KXmlWriter &writer = context.xmlWriter();
     writer.addCompleteElement(m_placeholderData->m_xmlElement);

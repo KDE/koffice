@@ -27,7 +27,7 @@
 
 class KShape;
 class KOdfGenericStyle;
-class KoShapeSavingContext;
+class KShapeSavingContext;
 class QPainter;
 class KoViewConverter;
 struct KoInsets;
@@ -43,7 +43,7 @@ public:
      * @param style object
      * @param context used for saving
      */
-    void fillStyle(KOdfGenericStyle &style, KoShapeSavingContext &context);
+    void fillStyle(KOdfGenericStyle &style, KShapeSavingContext &context);
 
     /**
      * Paints the shadow of the shape.

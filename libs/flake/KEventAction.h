@@ -23,7 +23,7 @@
 #include "flake_export.h"
 
 class KShapeLoadingContext;
-class KoShapeSavingContext;
+class KShapeSavingContext;
 class KoToolBase;
 class KXmlElement;
 
@@ -81,9 +81,9 @@ public:
     /**
      * Store the action as ODF.
      *
-     * @param context The KoShapeSavingContext used for saving
+     * @param context The KShapeSavingContext used for saving
      */
-    virtual void saveOdf(KoShapeSavingContext &context) const = 0;
+    virtual void saveOdf(KShapeSavingContext &context) const = 0;
 
     /**
      * Start the action.

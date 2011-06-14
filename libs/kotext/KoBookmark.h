@@ -26,7 +26,7 @@
 
 class KShape;
 class QTextDocument;
-class KoShapeSavingContext;
+class KShapeSavingContext;
 class KShapeLoadingContext;
 class KoBookmarkPrivate;
 
@@ -62,7 +62,7 @@ public:
 
     virtual ~KoBookmark();
 
-    void saveOdf(KoShapeSavingContext &context);
+    void saveOdf(KShapeSavingContext &context);
     virtual void updatePosition(QTextInlineObject object, const QTextCharFormat &format);
     virtual void resize(QTextInlineObject object, const QTextCharFormat &format, QPaintDevice *pd);
     virtual void paint(QPainter &painter, QPaintDevice *pd, const QRectF &rect,

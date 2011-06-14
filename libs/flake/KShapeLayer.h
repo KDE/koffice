@@ -44,7 +44,7 @@ public:
 
     virtual bool hitTest(const QPointF &position) const;
     virtual QRectF boundingRect() const;
-    virtual void saveOdf(KoShapeSavingContext & context) const;
+    virtual void saveOdf(KShapeSavingContext & context) const;
     virtual bool loadOdf(const KXmlElement & element, KShapeLoadingContext &context);
 
 private:

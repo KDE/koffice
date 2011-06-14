@@ -27,7 +27,7 @@
 #include <QtGlobal>
 #include "flake_export.h"
 
-class KoShapeSavingContext;
+class KShapeSavingContext;
 class KOdfStore;
 class KXmlWriter;
 
@@ -53,7 +53,7 @@ public:
      * Save any remaining binary blobs
      * @returns false if an error occurred, which typically cancels the save.
      */
-    virtual bool completeSaving(KOdfStore *store, KXmlWriter *manifestWriter, KoShapeSavingContext *context) = 0;
+    virtual bool completeSaving(KOdfStore *store, KXmlWriter *manifestWriter, KShapeSavingContext *context) = 0;
 };
 
 #endif

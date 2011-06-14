@@ -24,7 +24,7 @@
 #include <QSet>
 #include <QString>
 
-#include <KoShapeSavingContext.h>
+#include <KShapeSavingContext.h>
 
 #include "kopageapp_export.h"
 
@@ -34,7 +34,7 @@ class KoPAPage;
 /**
  * Context needed for saving the data of a kopageapp.
  */
-class KOPAGEAPP_EXPORT KoPASavingContext : public KoShapeSavingContext
+class KOPAGEAPP_EXPORT KoPASavingContext : public KShapeSavingContext
 {
 public:
     /**
@@ -76,7 +76,7 @@ public:
      * This makes it possible to save 2 master pages with the same content when
      * the element name is different.
      *
-     * If KoShapeSavingContext::UniqueMasterPages is set duplicate master pages
+     * If KShapeSavingContext::UniqueMasterPages is set duplicate master pages
      * will be merged into one.
      *
      * @return element name

@@ -28,7 +28,7 @@
 #include "KoPageApp.h"
 #include "kopageapp_export.h"
 
-class KoShapeSavingContext;
+class KShapeSavingContext;
 class KoPAPage;
 class KoPAPageBase;
 class KoPAMasterPage;

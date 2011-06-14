@@ -539,7 +539,7 @@ private:
     virtual bool completeLoading(KOdfStore *store);
 
     /// reimplemented
-    virtual bool completeSaving(KOdfStore *store, KXmlWriter *manifestWriter, KoShapeSavingContext *context);
+    virtual bool completeSaving(KOdfStore *store, KXmlWriter *manifestWriter, KShapeSavingContext *context);
 
     KoDocumentRdfPrivate * const d;
 };

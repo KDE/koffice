@@ -18,7 +18,7 @@
  */
 
 #include "SCAnimTransitionFilter.h"
-#include "KoShapeSavingContext.h"
+#include "KShapeSavingContext.h"
 
 
 SCAnimTransitionFilter::SCAnimTransitionFilter(SCShapeAnimation *shapeAnimation)

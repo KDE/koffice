@@ -208,7 +208,7 @@ bool KoTextOnShapeContainer::loadOdf(const KXmlElement &element, KShapeLoadingCo
     return shapeData->loadOdf(element, context);
 }
 
-void KoTextOnShapeContainer::saveOdf(KoShapeSavingContext &context) const
+void KoTextOnShapeContainer::saveOdf(KShapeSavingContext &context) const
 {
     Q_D(const KoTextOnShapeContainer);
     if (d->content)
@@ -286,7 +286,7 @@ Qt::Alignment KoTextOnShapeContainer::textAlignment() const
     return answer;
 }
 
-void KoTextOnShapeContainer::saveOdfChildElements(KoShapeSavingContext &context) const
+void KoTextOnShapeContainer::saveOdfChildElements(KShapeSavingContext &context) const
 {
     Q_D(const KoTextOnShapeContainer);
     if (d->textShape == 0) {

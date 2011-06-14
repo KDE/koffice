@@ -55,7 +55,7 @@ public:
 
     virtual void setup();
     virtual bool loadOdf(const KXmlElement &element, KShapeLoadingContext &context);
-    virtual void saveOdf(KoShapeSavingContext &context);
+    virtual void saveOdf(KShapeSavingContext &context);
 
 protected:
     virtual void positionChanged();

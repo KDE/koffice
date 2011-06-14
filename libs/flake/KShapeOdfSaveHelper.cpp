@@ -41,7 +41,7 @@ KShapeOdfSaveHelper::KShapeOdfSaveHelper(QList<KShape *> shapes)
 bool KShapeOdfSaveHelper::writeBody()
 {
     Q_D(KShapeOdfSaveHelper);
-    d->context->addOption(KoShapeSavingContext::DrawId);
+    d->context->addOption(KShapeSavingContext::DrawId);
 
     KXmlWriter &bodyWriter = d->context->xmlWriter();
     bodyWriter.startElement("office:body");

@@ -45,7 +45,7 @@ public:
     // reimplemented
     virtual void paint(QPainter &painter, const KoViewConverter &converter);
     // reimplemented
-    virtual void saveOdf(KoShapeSavingContext &context) const;
+    virtual void saveOdf(KShapeSavingContext &context) const;
     // reimplemented
     virtual bool loadOdf(const KXmlElement &element, KShapeLoadingContext &context);
     // reimplemented
@@ -64,7 +64,7 @@ public:
 protected:
     virtual bool loadOdfFrameElement(const KXmlElement &element, KShapeLoadingContext &context);
 
-    virtual QString saveStyle(KOdfGenericStyle &style, KoShapeSavingContext &context) const;
+    virtual QString saveStyle(KOdfGenericStyle &style, KShapeSavingContext &context) const;
 
     virtual void loadStyle(const KXmlElement& element, KShapeLoadingContext& context);
 

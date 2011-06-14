@@ -36,7 +36,7 @@ public:
         textShapeData->document()->setDocumentLayout(layout);
     }
     virtual void paintComponent(QPainter &, const KoViewConverter &) { }
-    virtual void saveOdf(KoShapeSavingContext &) const {}
+    virtual void saveOdf(KShapeSavingContext &) const {}
     virtual bool loadOdf(const KXmlElement &, KShapeLoadingContext &) {
         return true;
     }

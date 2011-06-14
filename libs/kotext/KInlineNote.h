@@ -104,7 +104,7 @@ public:
     bool loadOdf(const KXmlElement &element, KShapeLoadingContext &context, KoStyleManager *styleManager, KChangeTracker *changeTracker);
 
     ///reimplemented
-    void saveOdf(KoShapeSavingContext &context);
+    void saveOdf(KShapeSavingContext &context);
 
 protected:
     /// reimplemented

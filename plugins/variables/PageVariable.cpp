@@ -27,7 +27,7 @@
 #include <KProperties.h>
 #include <KOdfXmlNS.h>
 #include <KShape.h>
-#include <KoShapeSavingContext.h>
+#include <KShapeSavingContext.h>
 #include <KShapeLoadingContext.h>
 
 #include <kdebug.h>
@@ -90,7 +90,7 @@ void PageVariable::positionChanged()
     }
 }
 
-void PageVariable::saveOdf(KoShapeSavingContext &context)
+void PageVariable::saveOdf(KShapeSavingContext &context)
 {
     KXmlWriter *writer = &context.xmlWriter();
     switch (m_type) {

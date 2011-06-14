@@ -37,7 +37,7 @@
 #include "KShapeManager_p.h"
 #include "KoShapeUserData.h"
 #include "KShapeApplicationData.h"
-#include "KoShapeSavingContext.h"
+#include "KShapeSavingContext.h"
 #include "KShapeLoadingContext.h"
 #include "KoViewConverter.h"
 #include "KLineBorder.h"
@@ -1028,14 +1028,14 @@ bool KShape::loadOdf(const KXmlElement &, KShapeLoadingContext &)
     return true;
 }
 
-void KShape::saveOdf(KoShapeSavingContext &context) const
+void KShape::saveOdf(KShapeSavingContext &context) const
 {
     Q_D(const KShape);
     // if nothing else; write out my connectors.
     context.addForWriting(d->connections);
 }
 
-QString KShape::saveStyle(KOdfGenericStyle &style, KoShapeSavingContext &context) const
+QString KShape::saveStyle(KOdfGenericStyle &style, KShapeSavingContext &context) const
 {
     Q_D(const KShape);
     // and fill the style
@@ -1058,7 +1058,7 @@ QString KShape::saveStyle(KOdfGenericStyle &style, KoShapeSavingContext &context
         style.addProperty("draw:fill", "none");
     }
 
-    if (context.isSet(KoShapeSavingContext::AutoStyleInStyleXml)) {
+    if (context.isSet(KShapeSavingContext::AutoStyleInStyleXml)) {
         style.setAutoStyleInStylesDotXml(true);
     }
 
@@ -1097,7 +1097,7 @@ QString KShape::saveStyle(KOdfGenericStyle &style, KoShapeSavingContext &context
 
     }
 
-    return context.mainStyles().insert(style, context.isSet(KoShapeSavingContext::PresentationShape) ? "pr" : "gr");
+    return context.mainStyles().insert(style, context.isSet(KShapeSavingContext::PresentationShape) ? "pr" : "gr");
 }
 
 void KShape::loadStyle(const KXmlElement &element, KShapeLoadingContext &context)
@@ -1404,13 +1404,13 @@ QTransform KShape::parseOdfTransform(const QString &transform)
     return matrix;
 }
 
-void KShape::saveOdfAttributes(KoShapeSavingContext &context, int attributes) const
+void KShape::saveOdfAttributes(KShapeSavingContext &context, int attributes) const
 {
     Q_D(const KShape);
     if (attributes & OdfStyle) {
         KOdfGenericStyle style;
         // all items that should be written to 'draw:frame' and any other 'draw:' object that inherits this shape
-        if (context.isSet(KoShapeSavingContext::PresentationShape)) {
+        if (context.isSet(KShapeSavingContext::PresentationShape)) {
             style = KOdfGenericStyle(KOdfGenericStyle::PresentationAutoStyle, "presentation");
             context.xmlWriter().addAttribute("presentation:style-name", saveStyle(style, context));
         } else {
@@ -1420,7 +1420,7 @@ void KShape::saveOdfAttributes(KoShapeSavingContext &context, int attributes) co
     }
 
     if (attributes & OdfId)  {
-        if (context.isSet(KoShapeSavingContext::DrawId)) {
+        if (context.isSet(KShapeSavingContext::DrawId)) {
             context.xmlWriter().addAttribute("draw:id", context.drawId(this));
         }
     }
@@ -1501,7 +1501,7 @@ void KShape::saveOdfAttributes(KoShapeSavingContext &context, int attributes) co
     }
 }
 
-void KShape::saveOdfCommonChildElements(KoShapeSavingContext &context) const
+void KShape::saveOdfCommonChildElements(KShapeSavingContext &context) const
 {
     Q_D(const KShape);
     // save event listeners see ODF 9.2.21 Event Listeners

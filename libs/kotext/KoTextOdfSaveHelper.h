@@ -40,7 +40,7 @@ public:
     /// reimplemented
     virtual bool writeBody();
 
-    virtual KoShapeSavingContext *context(KXmlWriter *bodyWriter, KOdfGenericStyles &mainStyles, KOdfEmbeddedDocumentSaver &embeddedSaver);
+    virtual KShapeSavingContext *context(KXmlWriter *bodyWriter, KOdfGenericStyles &mainStyles, KOdfEmbeddedDocumentSaver &embeddedSaver);
 
     /**
      * The Rdf Model ownership is not taken, you must still delete it,

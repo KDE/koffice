@@ -22,14 +22,14 @@
 
 #include "kotext_export.h"
 
-#include <KoShapeSavingContext.h>
+#include <KShapeSavingContext.h>
 
 class KOdfGenericChanges;
 
 /**
  * The set of data for the ODF file format used during saving of a shape.
  */
-class KOTEXT_EXPORT KoTextShapeSavingContext : public KoShapeSavingContext
+class KOTEXT_EXPORT KoTextShapeSavingContext : public KShapeSavingContext
 {
 public:
 

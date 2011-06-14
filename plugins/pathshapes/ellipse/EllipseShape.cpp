@@ -22,7 +22,7 @@
 #include "EllipseShape.h"
 
 #include <KPathPoint.h>
-#include <KoShapeSavingContext.h>
+#include <KShapeSavingContext.h>
 #include <KXmlReader.h>
 #include <KoTextOnShapeContainer.h>
 #include <KXmlWriter.h>
@@ -52,7 +52,7 @@ EllipseShape::~EllipseShape()
 {
 }
 
-void EllipseShape::saveOdf(KoShapeSavingContext &context) const
+void EllipseShape::saveOdf(KShapeSavingContext &context) const
 {
     if (isParametricShape()) {
         context.xmlWriter().startElement("draw:ellipse");

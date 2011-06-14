@@ -1381,7 +1381,7 @@ bool KoDocumentRdf::completeLoading(KOdfStore *)
     return true;
 }
 
-bool KoDocumentRdf::completeSaving(KOdfStore *, KXmlWriter *, KoShapeSavingContext *)
+bool KoDocumentRdf::completeSaving(KOdfStore *, KXmlWriter *, KShapeSavingContext *)
 {
     return true;
 }

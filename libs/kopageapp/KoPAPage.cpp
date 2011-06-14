@@ -23,7 +23,7 @@
 #include <KDebug>
 
 #include <KShapePainter.h>
-#include <KoShapeSavingContext.h>
+#include <KShapeSavingContext.h>
 #include <KShapeLayer.h>
 #include <KOdfLoadingContext.h>
 #include <KOdfStyleStack.h>
@@ -48,7 +48,7 @@ KoPAPage::~KoPAPage()
 {
 }
 
-void KoPAPage::saveOdf(KoShapeSavingContext &context) const
+void KoPAPage::saveOdf(KShapeSavingContext &context) const
 {
     KoPASavingContext &paContext = static_cast<KoPASavingContext&>(context);
 

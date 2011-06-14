@@ -36,7 +36,7 @@
 #include <KXmlWriter.h>
 #include <KOdfDocumentBase.h>
 #include <KOdfEmbeddedDocumentSaver.h>
-#include "KoShapeSavingContext.h"
+#include "KShapeSavingContext.h"
 
 class KDragPrivate {
 public:
@@ -83,7 +83,7 @@ bool KDrag::setOdf(const char *mimeType, KDragOdfSaveHelper &helper)
 
     KOdfGenericStyles mainStyles;
     KXmlWriter *bodyWriter = odfStore.bodyWriter();
-    KoShapeSavingContext *context = helper.context(bodyWriter, mainStyles, embeddedSaver);
+    KShapeSavingContext *context = helper.context(bodyWriter, mainStyles, embeddedSaver);
 
     if (!helper.writeBody()) {
         return false;

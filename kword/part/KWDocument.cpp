@@ -94,7 +94,7 @@ class MagicCurtain : public KShapeContainer
 public:
     // reimplemented pure virtual calls
     bool loadOdf(const KXmlElement&, KShapeLoadingContext&) { return false; }
-    void saveOdf(KoShapeSavingContext&) const { }
+    void saveOdf(KShapeSavingContext&) const { }
     void paintComponent(QPainter&, const KoViewConverter&) { }
 
     /// add the frame to be hidden

@@ -26,7 +26,7 @@
 #include "KShapeBorderBase.h"
 #include "KoViewConverter.h"
 #include "KPathShapeLoader.h"
-#include "KoShapeSavingContext.h"
+#include "KShapeSavingContext.h"
 #include "KShapeLoadingContext.h"
 #include "KoShapeShadow.h"
 #include "KShapeBackground.h"
@@ -107,7 +107,7 @@ KPathShape::~KPathShape()
     clear();
 }
 
-void KPathShape::saveOdf(KoShapeSavingContext & context) const
+void KPathShape::saveOdf(KShapeSavingContext & context) const
 {
     Q_D(const KPathShape);
     context.xmlWriter().startElement("draw:path");
@@ -182,7 +182,7 @@ bool KPathShape::loadOdf(const KXmlElement & element, KShapeLoadingContext &cont
     return true;
 }
 
-QString KPathShape::saveStyle(KOdfGenericStyle &style, KoShapeSavingContext &context) const
+QString KPathShape::saveStyle(KOdfGenericStyle &style, KShapeSavingContext &context) const
 {
     Q_D(const KPathShape);
     style.addProperty("svg:fill-rule", d->fillRule == Qt::OddEvenFill ? "evenodd" : "nonzero");

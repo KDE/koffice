@@ -29,7 +29,7 @@
 #include <KOdfLoadingContext.h>
 #include <KShapeContainer.h>
 #include <KShapeLoadingContext.h>
-#include <KoShapeSavingContext.h>
+#include <KShapeSavingContext.h>
 #include <KOdfXmlNS.h>
 
 #include <CellView.h>
@@ -203,7 +203,7 @@ bool TableShape::loadOdf(const KXmlElement &element, KShapeLoadingContext &conte
     return false;
 }
 
-void TableShape::saveOdf(KoShapeSavingContext & context) const
+void TableShape::saveOdf(KShapeSavingContext & context) const
 {
     if (!sheet())
         return;

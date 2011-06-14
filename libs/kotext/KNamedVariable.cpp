@@ -23,7 +23,7 @@
 
 #include <KXmlReader.h> // for usage in Q_UNUSED
 #include <KShapeLoadingContext.h> // for usage in Q_UNUSED
-#include <KoShapeSavingContext.h> // for usage in Q_UNUSED
+#include <KShapeSavingContext.h> // for usage in Q_UNUSED
 
 KNamedVariable::KNamedVariable(Property key, const QString &name)
         : KoVariable(true),
@@ -51,7 +51,7 @@ bool KNamedVariable::loadOdf(const KXmlElement &element, KShapeLoadingContext &c
     return false;
 }
 
-void KNamedVariable::saveOdf(KoShapeSavingContext &context)
+void KNamedVariable::saveOdf(KShapeSavingContext &context)
 {
     Q_UNUSED(context);
     // TODO

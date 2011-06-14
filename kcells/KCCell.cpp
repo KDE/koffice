@@ -1204,7 +1204,7 @@ bool KCCell::saveOdf(KXmlWriter& xmlwriter, KOdfGenericStyles &mainStyles,
             sheet()->map()->textStyleManager()->defaultParagraphStyle()->characterStyle()->copyProperties(format);
 
             KOdfEmbeddedDocumentSaver saver;
-            KoShapeSavingContext shapeContext(xmlwriter, mainStyles, saver);
+            KShapeSavingContext shapeContext(xmlwriter, mainStyles, saver);
             KoTextWriter writer(shapeContext);
 
             writer.write(doc.data(), 0);

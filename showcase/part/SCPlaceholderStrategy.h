@@ -26,7 +26,7 @@ class QPainter;
 class KXmlElement;
 class KShape;
 class KShapeLoadingContext;
-class KoShapeSavingContext;
+class KShapeSavingContext;
 class KoShapeUserData;
 class KoViewConverter;
 class PlaceholderData;
@@ -55,7 +55,7 @@ public:
 
     virtual void paint(QPainter &painter, const KoViewConverter &converter, const QRectF &rect);
 
-    virtual void saveOdf(KoShapeSavingContext &context);
+    virtual void saveOdf(KShapeSavingContext &context);
 
     virtual bool loadOdf(const KXmlElement &element, KShapeLoadingContext &context);
 

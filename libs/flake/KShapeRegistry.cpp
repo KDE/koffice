@@ -22,7 +22,7 @@
 #include "KShapeRegistry.h"
 #include "KPathShapeFactory_p.h"
 #include "KShapeLoadingContext.h"
-#include "KoShapeSavingContext.h"
+#include "KShapeSavingContext.h"
 #include "KShapeGroup.h"
 #include "KShapeLayer.h"
 #include "KShapeConnection.h"

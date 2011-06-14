@@ -19,7 +19,7 @@
 
 #include "KShapeLayer.h"
 #include "SimpleShapeContainerModel_p.h"
-#include "KoShapeSavingContext.h"
+#include "KShapeSavingContext.h"
 #include "KShapeLoadingContext.h"
 #include <KXmlReader.h>
 #include <KXmlWriter.h>
@@ -59,7 +59,7 @@ QRectF KShapeLayer::boundingRect() const
     return bb;
 }
 
-void KShapeLayer::saveOdf(KoShapeSavingContext &context) const
+void KShapeLayer::saveOdf(KShapeSavingContext &context) const
 {
     QList<KShape*> shapes = this->shapes();
     qSort(shapes.begin(), shapes.end(), KShape::compareShapeZIndex);

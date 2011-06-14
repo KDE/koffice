@@ -20,7 +20,7 @@
 #include "KImageCollection.h"
 #include "KImageData.h"
 #include "KImageData_p.h"
-#include "KoShapeSavingContext.h"
+#include "KShapeSavingContext.h"
 
 #include <KOdfStorageDevice.h>
 #include <QCryptographicHash>
@@ -62,7 +62,7 @@ bool KImageCollection::completeLoading(KOdfStore *store)
     return true;
 }
 
-bool KImageCollection::completeSaving(KOdfStore *store, KXmlWriter *manifestWriter, KoShapeSavingContext *context)
+bool KImageCollection::completeSaving(KOdfStore *store, KXmlWriter *manifestWriter, KShapeSavingContext *context)
 {
     QMap<qint64, QString> images(context->imagesToSave());
     QMap<qint64, QString>::iterator it(images.begin());

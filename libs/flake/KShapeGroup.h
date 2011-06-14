@@ -26,7 +26,7 @@
 
 #include "flake_export.h"
 
-class KoShapeSavingContext;
+class KShapeSavingContext;
 class KShapeLoadingContext;
 
 /**
@@ -55,7 +55,7 @@ public:
     /// a group in flake doesn't have a size, this funcion just returns QSizeF(0,0)
     virtual QSizeF size() const;
     /// reimplemented from KShape
-    virtual void saveOdf(KoShapeSavingContext &context) const;
+    virtual void saveOdf(KShapeSavingContext &context) const;
     // reimplemented
     virtual bool loadOdf(const KXmlElement &element, KShapeLoadingContext &context);
 

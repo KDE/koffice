@@ -33,7 +33,7 @@ public:
 
     virtual void paint(QPainter &painter, const KoViewConverter &converter, const QRectF &rect);
 
-    virtual void saveOdf(KoShapeSavingContext &context);
+    virtual void saveOdf(KShapeSavingContext &context);
 
     virtual bool loadOdf(const KXmlElement &element, KShapeLoadingContext &context);
 

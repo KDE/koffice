@@ -21,7 +21,7 @@
 #include "KoTextMeta.h"
 
 #include <KShapeLoadingContext.h>
-#include <KoShapeSavingContext.h>
+#include <KShapeSavingContext.h>
 #include <KXmlReader.h>
 #include <KXmlWriter.h>
 #include <KoTextInlineRdf.h>
@@ -53,7 +53,7 @@ KoTextMeta::~KoTextMeta()
     delete d;
 }
 
-void KoTextMeta::saveOdf(KoShapeSavingContext &context)
+void KoTextMeta::saveOdf(KShapeSavingContext &context)
 {
     KXmlWriter &writer = context.xmlWriter();
 

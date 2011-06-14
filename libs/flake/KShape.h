@@ -46,7 +46,7 @@ class KShapeManager;
 class KoShapeUserData;
 class KoViewConverter;
 class KShapeApplicationData;
-class KoShapeSavingContext;
+class KShapeSavingContext;
 class KCanvasBase;
 class KShapeLoadingContext;
 class KOdfGenericStyle;
@@ -185,7 +185,7 @@ public:
      * OpenDocument 9.2 Drawing Shapes.
      * @see saveOdfAttributes
      */
-    virtual void saveOdf(KoShapeSavingContext &context) const;
+    virtual void saveOdf(KShapeSavingContext &context) const;
 
     /**
      * This method can be used while saving the shape as ODF to add the data
@@ -195,14 +195,14 @@ public:
      * @param attributes a number of OdfAttribute items to state which attributes to save.
      * @see saveOdf
      */
-    void saveOdfAttributes(KoShapeSavingContext &context, int attributes) const;
+    void saveOdfAttributes(KShapeSavingContext &context, int attributes) const;
 
     /**
      * This method can be used while saving the shape as Odf to add common child elements
      *
      * The office:event-listeners and draw:glue-point are saved.
      */
-    void saveOdfCommonChildElements(KoShapeSavingContext &context) const;
+    void saveOdfCommonChildElements(KShapeSavingContext &context) const;
 
     /**
      * @brief Scale the shape using the zero-point which is the top-left corner.
@@ -968,7 +968,7 @@ protected:
      * @return the name of the style
      * @see saveOdf
      */
-    virtual QString saveStyle(KOdfGenericStyle &style, KoShapeSavingContext &context) const;
+    virtual QString saveStyle(KOdfGenericStyle &style, KShapeSavingContext &context) const;
 
     /**
      * Loads the stroke and fill style from the given element.

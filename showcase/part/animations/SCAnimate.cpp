@@ -35,10 +35,10 @@
 #include <KShape.h>
 #include <KXmlReader.h>
 #include <KShapeLoadingContext.h>
-#include <KoShapeSavingContext.h>
+#include <KShapeSavingContext.h>
 #include <KoTextBlockData.h>
 #include <KShapeLoadingContext.h>
-#include <KoShapeSavingContext.h>
+#include <KShapeSavingContext.h>
 #include <KXmlReader.h>
 #include <KXmlWriter.h>
 #include <KoPASavingContext.h>

@@ -21,7 +21,7 @@
 #include "KoBookmark.h"
 #include "KInlineObject_p.h"
 
-#include <KoShapeSavingContext.h>
+#include <KShapeSavingContext.h>
 #include <KShapeLoadingContext.h>
 #include <KXmlWriter.h>
 #include <KXmlReader.h>
@@ -66,7 +66,7 @@ KoBookmark::~KoBookmark()
 {
 }
 
-void KoBookmark::saveOdf(KoShapeSavingContext &context)
+void KoBookmark::saveOdf(KShapeSavingContext &context)
 {
     Q_D(KoBookmark);
     KXmlWriter *writer = &context.xmlWriter();

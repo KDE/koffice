@@ -38,7 +38,7 @@
 #include <KOdfXmlNS.h>
 #include <KOdfLoadingContext.h>
 #include <KOdfStylesReader.h>
-#include <KoShapeSavingContext.h>
+#include <KShapeSavingContext.h>
 #include <KResourceManager.h>
 #include <KShapeLoadingContext.h>
 #include <KShapeLayer.h>
@@ -180,7 +180,7 @@ void KarbonDocument::remove(KShape* shape)
     d->objects.removeAt(d->objects.indexOf(shape));
 }
 
-void KarbonDocument::saveOasis(KoShapeSavingContext &context) const
+void KarbonDocument::saveOasis(KShapeSavingContext &context) const
 {
     context.xmlWriter().startElement("draw:page");
     context.xmlWriter().addAttribute("draw:name", "");
@@ -363,7 +363,7 @@ bool KarbonDocument::saveOdf(KoDocument::SavingContext &documentContext, const K
     KOdfGenericStyles mainStyles;
     KXmlWriter * bodyWriter = documentContext.odfStore.bodyWriter();
 
-    KoShapeSavingContext shapeContext(*bodyWriter, mainStyles, documentContext.embeddedSaver);
+    KShapeSavingContext shapeContext(*bodyWriter, mainStyles, documentContext.embeddedSaver);
 
     // save text styles
     saveOdfStyles(shapeContext);
@@ -411,7 +411,7 @@ void KarbonDocument::loadOdfStyles(KShapeLoadingContext & context)
     context.addSharedData(KOTEXT_SHARED_LOADING_ID, sharedData);
 }
 
-void KarbonDocument::saveOdfStyles(KoShapeSavingContext & context)
+void KarbonDocument::saveOdfStyles(KShapeSavingContext & context)
 {
     KoStyleManager * styleManager = dynamic_cast<KoStyleManager*>(dataCenterMap()["StyleManager"]);
     if (! styleManager)

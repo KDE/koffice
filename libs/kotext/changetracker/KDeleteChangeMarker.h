@@ -76,7 +76,7 @@ public:
 
     virtual bool loadOdf(const KXmlElement &element, KShapeLoadingContext &context);
     ///reimplemented
-    virtual void saveOdf(KoShapeSavingContext &context);
+    virtual void saveOdf(KShapeSavingContext &context);
 
     void setDeleteChangeXml(QString &deleteChangeXml);
 

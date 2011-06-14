@@ -25,7 +25,7 @@
 #include <KoTextShapeData.h>
 #include <KoTextPage.h>
 
-class KoShapeSavingContext;
+class KShapeSavingContext;
 
 /**
  * This is a KoVariable for page numbers.
@@ -49,7 +49,7 @@ public:
     void propertyChanged(Property property, const QVariant &value);
 
     /// reimplmented
-    void saveOdf(KoShapeSavingContext & context);
+    void saveOdf(KShapeSavingContext & context);
 
     ///reimplemented
     bool loadOdf(const KXmlElement & element, KShapeLoadingContext & context);

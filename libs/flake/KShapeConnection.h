@@ -29,7 +29,7 @@ class QPainter;
 class KoViewConverter;
 class KXmlElement;
 class KShapeLoadingContext;
-class KoShapeSavingContext;
+class KShapeSavingContext;
 class KShapeConnectionPrivate;
 
 /**
@@ -183,7 +183,7 @@ public:
      * OpenDocument 9.2 Drawing Shapes.
      * @see saveOdfAttributes
      */
-    void saveOdf(KoShapeSavingContext &context) const;
+    void saveOdf(KShapeSavingContext &context) const;
 
     ConnectionType type() const;
     void setType(ConnectionType type);

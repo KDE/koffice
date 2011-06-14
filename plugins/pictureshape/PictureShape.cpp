@@ -26,7 +26,7 @@
 #include <KImageData.h>
 #include <KShapeLoadingContext.h>
 #include <KOdfLoadingContext.h>
-#include <KoShapeSavingContext.h>
+#include <KShapeSavingContext.h>
 #include <KXmlWriter.h>
 #include <KOdfXmlNS.h>
 #include <KOdfStorageDevice.h>
@@ -185,7 +185,7 @@ void PictureShape::waitUntilReady(const KoViewConverter &converter, bool asynchr
     }
 }
 
-void PictureShape::saveOdf(KoShapeSavingContext &context) const
+void PictureShape::saveOdf(KShapeSavingContext &context) const
 {
     // make sure we have a valid image data pointer before saving
     KImageData *imageData = qobject_cast<KImageData*>(userData());
@@ -252,7 +252,7 @@ KImageCollection *PictureShape::imageCollection() const
     return m_imageCollection;
 }
 
-QString PictureShape::saveStyle(KOdfGenericStyle& style, KoShapeSavingContext& context) const
+QString PictureShape::saveStyle(KOdfGenericStyle& style, KShapeSavingContext& context) const
 {
     if (transparency() > 0.0) {
         style.addProperty("draw:image-opacity", QString("%1%").arg((1.0 - transparency()) * 100.0));

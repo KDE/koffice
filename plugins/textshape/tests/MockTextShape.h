@@ -35,7 +35,7 @@ public:
         Q_UNUSED(painter);
         Q_UNUSED(converter);
     }
-    virtual void saveOdf(KoShapeSavingContext &) const {}
+    virtual void saveOdf(KShapeSavingContext &) const {}
     virtual bool loadOdf(const KXmlElement &, KShapeLoadingContext &) {
         return true;
     }

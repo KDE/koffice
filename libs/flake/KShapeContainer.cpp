@@ -22,7 +22,7 @@
 #include "KShapeContainerModel.h"
 #include "KShapeBorderBase.h"
 #include "KShapeContainerDefaultModel.h"
-#include "KoShapeSavingContext.h"
+#include "KShapeSavingContext.h"
 
 #include <QPointF>
 #include <QPainter>
@@ -236,7 +236,7 @@ KShapeContainerModel *KShapeContainer::model() const
     return d->model;
 }
 
-void KShapeContainer::saveOdfChildElements(KoShapeSavingContext &context) const
+void KShapeContainer::saveOdfChildElements(KShapeSavingContext &context) const
 {
     Q_UNUSED(context);
 }

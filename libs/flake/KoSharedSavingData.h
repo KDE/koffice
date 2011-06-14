@@ -24,8 +24,8 @@
 
 /**
  * The KoSharedSavingData class is used to share data between shapes during saving.
- * These data can be added to the KoShapeSavingContext using KoShapeSavingContext::addSharedData().
- * A different shape can then get the data from the context using KoShapeSavingContext::sharedData().
+ * These data can be added to the KShapeSavingContext using KShapeSavingContext::addSharedData().
+ * A different shape can then get the data from the context using KShapeSavingContext::sharedData().
  */
 class FLAKE_EXPORT KoSharedSavingData
 {

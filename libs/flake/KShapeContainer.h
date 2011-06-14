@@ -198,7 +198,7 @@ public:
      */
     KShapeContainerModel *model() const;
 
-    virtual void saveOdfChildElements(KoShapeSavingContext &context) const;
+    virtual void saveOdfChildElements(KShapeSavingContext &context) const;
 
 protected:
     /**

@@ -30,7 +30,7 @@ class QTextDocument;
 class KXmlWriter;
 class KXmlElement;
 class KShapeLoadingContext;
-class KoShapeSavingContext;
+class KShapeSavingContext;
 class KoTextShapeDataPrivate;
 class KoTextPage;
 class KDocumentRdfBase;
@@ -151,13 +151,13 @@ public:
     * Store the TextShape data as ODF.
     * @see TextShape::saveOdf()
     */
-    void saveOdf(KoShapeSavingContext &context, KDocumentRdfBase *rdfData, int from = 0, int to = -1) const;
+    void saveOdf(KShapeSavingContext &context, KDocumentRdfBase *rdfData, int from = 0, int to = -1) const;
 
     /**
     * Store the TextShape data as ODF.
     * Overloaded method provided for your convenience.
     */
-    virtual void saveOdf(KoShapeSavingContext &context, int from = 0, int to  = -1) const {
+    virtual void saveOdf(KShapeSavingContext &context, int from = 0, int to  = -1) const {
         saveOdf(context, 0, from, to);
     }
 

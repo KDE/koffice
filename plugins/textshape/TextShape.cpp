@@ -56,7 +56,7 @@ struct Finalizer {
 #include <KShapeBackground.h>
 #include <KShapeLoadingContext.h>
 #include <KShapeManager.h>
-#include <KoShapeSavingContext.h>
+#include <KShapeSavingContext.h>
 #include <KoText.h>
 #include <KoTextDocument.h>
 #include <KoTextDocumentLayout.h>
@@ -303,7 +303,7 @@ void TextShape::paintDecorations(QPainter &painter, const KoViewConverter &conve
     }
 }
 
-void TextShape::saveOdf(KoShapeSavingContext &context) const
+void TextShape::saveOdf(KShapeSavingContext &context) const
 {
     KXmlWriter &writer = context.xmlWriter();
 
@@ -336,7 +336,7 @@ void TextShape::saveOdf(KoShapeSavingContext &context) const
     writer.endElement(); // draw:frame
 }
 
-QString TextShape::saveStyle(KOdfGenericStyle &style, KoShapeSavingContext &context) const
+QString TextShape::saveStyle(KOdfGenericStyle &style, KShapeSavingContext &context) const
 {
     Qt::Alignment vAlign(m_textShapeData->verticalAlignment());
     QString verticalAlign = "top";

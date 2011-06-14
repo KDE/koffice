@@ -35,7 +35,7 @@ public:
     ~KoPAPage();
 
     /// reimplemented
-    virtual void saveOdf(KoShapeSavingContext &context) const;
+    virtual void saveOdf(KShapeSavingContext &context) const;
 
     /// @return the layout set by the masterpage
     KOdfPageLayoutData &pageLayout();

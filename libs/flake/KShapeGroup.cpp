@@ -22,7 +22,7 @@
 #include "KShapeContainerModel.h"
 #include "KShapeLayer.h"
 #include "SimpleShapeContainerModel_p.h"
-#include "KoShapeSavingContext.h"
+#include "KShapeSavingContext.h"
 #include "KShapeLoadingContext.h"
 #include "KXmlWriter.h"
 #include "KXmlReader.h"
@@ -67,7 +67,7 @@ void KShapeGroup::shapeCountChanged()
     setSize(br.size());
 }
 
-void KShapeGroup::saveOdf(KoShapeSavingContext & context) const
+void KShapeGroup::saveOdf(KShapeSavingContext & context) const
 {
     context.xmlWriter().startElement("draw:g");
     saveOdfAttributes(context, (OdfMandatories ^ OdfLayer) | OdfAdditionalAttributes);

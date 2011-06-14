@@ -90,7 +90,7 @@ void KoPAPageBase::saveOdfLayers(KoPASavingContext &paContext) const
     paContext.clearLayers();
 }
 
-void KoPAPageBase::saveOdfShapes(KoShapeSavingContext &context) const
+void KoPAPageBase::saveOdfShapes(KShapeSavingContext &context) const
 {
     QList<KShape*> shapes(this->shapes());
     QList<KShape*> tlshapes(shapes);
@@ -106,7 +106,7 @@ QString KoPAPageBase::saveOdfPageStyle(KoPASavingContext &paContext) const
 {
     KOdfGenericStyle style(KOdfGenericStyle::DrawingPageAutoStyle, "drawing-page");
 
-    if (paContext.isSet(KoShapeSavingContext::AutoStyleInStyleXml)) {
+    if (paContext.isSet(KShapeSavingContext::AutoStyleInStyleXml)) {
         style.setAutoStyleInStylesDotXml(true);
     }
 

@@ -38,7 +38,7 @@
 #include <KoTextShapeData.h>
 #include <KShapeLoadingContext.h>
 #include <KOdfLoadingContext.h>
-#include <KoShapeSavingContext.h>
+#include <KShapeSavingContext.h>
 #include <KOdfGenericStyles.h>
 #include <KOdfXmlNS.h>
 #include <kcomponentdata.h>
@@ -163,7 +163,7 @@ QString TestChangeTracking::documentToOdt(QTextDocument *document)
     KOdfEmbeddedDocumentSaver embeddedSaver;
 
     KOdfGenericChanges changes;
-    KoShapeSavingContext context(xmlWriter, mainStyles, embeddedSaver);
+    KShapeSavingContext context(xmlWriter, mainStyles, embeddedSaver);
 
     KoSharedSavingData *sharedData = context.sharedData(KOTEXT_SHARED_SAVING_ID);
     KoTextSharedSavingData *textSharedData = 0;

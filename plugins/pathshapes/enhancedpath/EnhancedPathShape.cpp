@@ -30,7 +30,7 @@
 #include <KOdfXmlNS.h>
 #include <KXmlWriter.h>
 #include <KXmlReader.h>
-#include <KoShapeSavingContext.h>
+#include <KShapeSavingContext.h>
 #include <KoTextOnShapeContainer.h>
 #include <KUnit.h>
 #include <KoOdfWorkaround.h>
@@ -329,7 +329,7 @@ void EnhancedPathShape::addCommand(const QString &command, bool triggerUpdate)
         updatePath(size());
 }
 
-void EnhancedPathShape::saveOdf(KoShapeSavingContext &context) const
+void EnhancedPathShape::saveOdf(KShapeSavingContext &context) const
 {
     if (isParametricShape()) {
         context.xmlWriter().startElement("draw:custom-shape");

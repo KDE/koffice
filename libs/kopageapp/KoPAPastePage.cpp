@@ -67,7 +67,7 @@ bool KoPAPastePage::process(const KXmlElement &body, KOdfStoreReader &odfStore)
         KXmlWriter xmlWriter(&buffer);
         KOdfEmbeddedDocumentSaver embeddedSaver;
         KoPASavingContext savingContext(xmlWriter, mainStyles, embeddedSaver, 1);
-        savingContext.addOption(KoShapeSavingContext::UniqueMasterPages);
+        savingContext.addOption(KShapeSavingContext::UniqueMasterPages);
         QList<KoPAPageBase*> emptyList;
         QList<KoPAPageBase*> existingMasterPages = m_doc->pages(true);
         savingContext.setClearDrawIds(true);

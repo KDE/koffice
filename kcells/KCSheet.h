@@ -54,7 +54,7 @@ class KOdfGenericStyles;
 class KOdfSettings;
 class KOdfStylesReader;
 class KShape;
-class KoShapeSavingContext;
+class KShapeSavingContext;
 class KXmlWriter;
 
 class KCCell;

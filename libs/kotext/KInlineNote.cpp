@@ -22,7 +22,7 @@
 #include <KXmlReader.h>
 #include <KXmlWriter.h>
 #include <KOdfXmlNS.h>
-#include <KoShapeSavingContext.h>
+#include <KShapeSavingContext.h>
 #include <KoTextLoader.h>
 #include <KoTextWriter.h>
 #include <KoTextDocument.h>
@@ -222,7 +222,7 @@ bool KInlineNote::loadOdf(const KXmlElement & element, KShapeLoadingContext &con
     return true;
 }
 
-void KInlineNote::saveOdf(KoShapeSavingContext & context)
+void KInlineNote::saveOdf(KShapeSavingContext & context)
 {
     KXmlWriter *writer = &context.xmlWriter();
     QTextDocument *document = new QTextDocument();

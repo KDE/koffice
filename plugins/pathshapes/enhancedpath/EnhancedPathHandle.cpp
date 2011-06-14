@@ -20,7 +20,7 @@
 #include "EnhancedPathHandle.h"
 #include "EnhancedPathShape.h"
 #include "EnhancedPathParameter.h"
-#include <KoShapeSavingContext.h>
+#include <KShapeSavingContext.h>
 #include <KXmlReader.h>
 #include <KXmlWriter.h>
 #include <KOdfXmlNS.h>
@@ -144,7 +144,7 @@ bool EnhancedPathHandle::isPolar() const
     return m_polarX && m_polarY;
 }
 
-void EnhancedPathHandle::saveOdf(KoShapeSavingContext & context) const
+void EnhancedPathHandle::saveOdf(KShapeSavingContext & context) const
 {
     if (! hasPosition())
         return;

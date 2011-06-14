@@ -51,7 +51,7 @@
 #include <KShapeLoadingContext.h>
 #include <KShapeManager.h>
 #include <KShapeRegistry.h>
-#include <KoShapeSavingContext.h>
+#include <KShapeSavingContext.h>
 #include <KOdfStyleStack.h>
 #include <KUnit.h>
 #include <KOdfXmlNS.h>

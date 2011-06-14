@@ -126,7 +126,7 @@ void KDeleteChangeMarker::updatePosition(QTextInlineObject object, const QTextCh
     Q_UNUSED(format);
 }
 
-void KDeleteChangeMarker::saveOdf(KoShapeSavingContext &context)
+void KDeleteChangeMarker::saveOdf(KShapeSavingContext &context)
 {
     KOdfGenericChange change;
     if (d->changeTracker->saveFormat() == KChangeTracker::ODF_1_2) {

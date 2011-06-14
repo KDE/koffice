@@ -25,7 +25,7 @@
 #include <KXmlReader.h>
 #include <KXmlWriter.h>
 #include <KShapeLoadingContext.h>
-#include <KoShapeSavingContext.h>
+#include <KShapeSavingContext.h>
 #include <KoPASavingContext.h>
 
 #include <KoTextBlockData.h>

@@ -32,7 +32,7 @@ class QRectF;
 class KShape;
 class KInlineTextObjectManager;
 class KInlineObjectPrivate;
-class KoShapeSavingContext;
+class KShapeSavingContext;
 class KoTextInlineRdf;
 class KXmlElement;
 class KShapeLoadingContext;
@@ -118,7 +118,7 @@ public:
      * Save this inlineObject as ODF
      * @param context the context for saving.
      */
-    virtual void saveOdf(KoShapeSavingContext &context) = 0;
+    virtual void saveOdf(KShapeSavingContext &context) = 0;
 
     /**
      * Update position of the inline object.

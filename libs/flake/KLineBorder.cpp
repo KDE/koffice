@@ -22,7 +22,7 @@
 #include "KLineBorder.h"
 #include "KoViewConverter.h"
 #include "KShape.h"
-#include "KoShapeSavingContext.h"
+#include "KShapeSavingContext.h"
 
 #include <QPainter>
 #include <QPainterPath>
@@ -75,7 +75,7 @@ KLineBorder &KLineBorder::operator = (const KLineBorder &rhs)
     return *this;
 }
 
-void KLineBorder::saveOdf(KOdfGenericStyle &style, KoShapeSavingContext &context) const
+void KLineBorder::saveOdf(KOdfGenericStyle &style, KShapeSavingContext &context) const
 {
     QPen pen = d->pen;
     if (d->brush.gradient())

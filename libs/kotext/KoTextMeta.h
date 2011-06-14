@@ -26,7 +26,7 @@
 
 class KShape;
 class QTextDocument;
-class KoShapeSavingContext;
+class KShapeSavingContext;
 class KShapeLoadingContext;
 class KXmlElement;
 
@@ -50,7 +50,7 @@ public:
     virtual ~KoTextMeta();
 
     /// reimplemented from super
-    void saveOdf(KoShapeSavingContext &context);
+    void saveOdf(KShapeSavingContext &context);
     bool loadOdf(const KXmlElement &element, KShapeLoadingContext &context);
 
     /// reimplemented from super

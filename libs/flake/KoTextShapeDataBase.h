@@ -29,7 +29,7 @@
 class KoTextShapeDataBasePrivate;
 class KXmlElement;
 class KShapeLoadingContext;
-class KoShapeSavingContext;
+class KShapeSavingContext;
 
 /**
  * \internal
@@ -65,7 +65,7 @@ public:
     /**
     * Save the text to ODF.
     */
-    virtual void saveOdf(KoShapeSavingContext &context, int from = 0, int to  = -1) const = 0;
+    virtual void saveOdf(KShapeSavingContext &context, int from = 0, int to  = -1) const = 0;
 
     /** Sets the vertical alignment of all the text inside the shape. */
     void setVerticalAlignment(Qt::Alignment alignment);

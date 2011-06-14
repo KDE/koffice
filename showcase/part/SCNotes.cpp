@@ -28,7 +28,7 @@
 #include <KShapeFactoryBase.h>
 #include <KShapeLayer.h>
 #include <KShapeRegistry.h>
-#include <KoShapeSavingContext.h>
+#include <KShapeSavingContext.h>
 #include <KUnit.h>
 #include <KOdfXmlNS.h>
 #include <KXmlWriter.h>
@@ -53,7 +53,7 @@ public:
         return loadOdfAttributes(element, context, OdfAllAttributes);
     }
 
-    virtual void saveOdf(KoShapeSavingContext &) const { }
+    virtual void saveOdf(KShapeSavingContext &) const { }
 };
 
 SCNotes::SCNotes(SCPage *page, SCDocument * document)
@@ -97,14 +97,14 @@ KShape *SCNotes::textShape()
     return m_textShape;
 }
 
-void SCNotes::saveOdf(KoShapeSavingContext &context) const
+void SCNotes::saveOdf(KShapeSavingContext &context) const
 {
     KXmlWriter &writer = context.xmlWriter();
     writer.startElement("presentation:notes");
 
-    context.addOption(KoShapeSavingContext::PresentationShape);
+    context.addOption(KShapeSavingContext::PresentationShape);
     m_textShape->saveOdf(context);
-    context.removeOption(KoShapeSavingContext::PresentationShape);
+    context.removeOption(KShapeSavingContext::PresentationShape);
     writer.startElement("draw:page-thumbnail");
     m_thumbnailShape->saveOdfAttributes(context, OdfAllAttributes);
     writer.addAttribute("draw:page-number", static_cast<KoPASavingContext &>(context).page());

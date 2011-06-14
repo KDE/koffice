@@ -24,7 +24,7 @@
 
 class EnhancedPathShape;
 class EnhancedPathParameter;
-class KoShapeSavingContext;
+class KShapeSavingContext;
 class KShapeLoadingContext;
 class KXmlElement;
 
@@ -116,7 +116,7 @@ public:
     void setRadiusRange(EnhancedPathParameter *minRadius, EnhancedPathParameter *maxRadius);
 
     /// save to the given shape saving context
-    void saveOdf(KoShapeSavingContext &context) const;
+    void saveOdf(KShapeSavingContext &context) const;
     /// load handle from given element
     bool loadOdf(const KXmlElement &element, KShapeLoadingContext &context);
 private:

@@ -53,7 +53,7 @@
 #include "KoTextMeta.h"
 #include "KoBookmark.h"
 
-#include <KoShapeSavingContext.h>
+#include <KShapeSavingContext.h>
 #include <KXmlWriter.h>
 #include <KOdfGenericStyle.h>
 #include <KOdfGenericStyles.h>
@@ -128,7 +128,7 @@ class KoTextWriter::TagInformation
 class KoTextWriter::Private
 {
 public:
-    explicit Private(KoShapeSavingContext &context)
+    explicit Private(KShapeSavingContext &context)
     : context(context),
     sharedData(0),
     writer(0),
@@ -182,7 +182,7 @@ public:
     int checkForListChange(const QTextBlock &block);
     int checkForTableRowChange(int position);
     int checkForTableColumnChange(int position);
-    KoShapeSavingContext &context;
+    KShapeSavingContext &context;
     KoTextSharedSavingData *sharedData;
     KXmlWriter *writer;
 
@@ -549,7 +549,7 @@ void KoTextWriter::Private::closeTagRegion(int changeId)
     return;
 }
 
-KoTextWriter::KoTextWriter(KoShapeSavingContext &context, KDocumentRdfBase *rdfData)
+KoTextWriter::KoTextWriter(KShapeSavingContext &context, KDocumentRdfBase *rdfData)
     : d(new Private(context))
 {
     d->rdfData = rdfData;
@@ -576,14 +576,14 @@ KoTextWriter::~KoTextWriter()
     delete d;
 }
 
-QString KoTextWriter::saveParagraphStyle(const QTextBlock &block, KoStyleManager *styleManager, KoShapeSavingContext &context)
+QString KoTextWriter::saveParagraphStyle(const QTextBlock &block, KoStyleManager *styleManager, KShapeSavingContext &context)
 {
     QTextBlockFormat blockFormat = block.blockFormat();
     QTextCharFormat charFormat = QTextCursor(block).blockCharFormat();
     return saveParagraphStyle(blockFormat, charFormat, styleManager, context);
 }
 
-QString KoTextWriter::saveParagraphStyle(const QTextBlockFormat &blockFormat, const QTextCharFormat &charFormat, KoStyleManager * styleManager, KoShapeSavingContext &context)
+QString KoTextWriter::saveParagraphStyle(const QTextBlockFormat &blockFormat, const QTextCharFormat &charFormat, KoStyleManager * styleManager, KShapeSavingContext &context)
 {
     KParagraphStyle *defaultParagraphStyle = styleManager->defaultParagraphStyle();
     KParagraphStyle *originalParagraphStyle = styleManager->paragraphStyle(blockFormat.intProperty(KParagraphStyle::StyleId));
@@ -606,7 +606,7 @@ QString KoTextWriter::saveParagraphStyle(const QTextBlockFormat &blockFormat, co
         }
     } else { // There are manual changes... We'll have to store them then
         KOdfGenericStyle style(KOdfGenericStyle::ParagraphAutoStyle, "paragraph", internalName);
-        if (context.isSet(KoShapeSavingContext::AutoStyleInStyleXml))
+        if (context.isSet(KShapeSavingContext::AutoStyleInStyleXml))
             style.setAutoStyleInStylesDotXml(true);
         if (originalParagraphStyle)
             paragStyle.removeDuplicates(*originalParagraphStyle);
@@ -652,7 +652,7 @@ QString KoTextWriter::Private::saveCharacterStyle(const QTextCharFormat &charFor
         }
     } else { // There are manual changes... We'll have to store them then
         KOdfGenericStyle style(KOdfGenericStyle::ParagraphAutoStyle, "text", originalCharStyle != defaultCharStyle ? internalName : "" /*parent*/);
-        if (context.isSet(KoShapeSavingContext::AutoStyleInStyleXml))
+        if (context.isSet(KShapeSavingContext::AutoStyleInStyleXml))
             style.setAutoStyleInStylesDotXml(true);
         charStyle.removeDuplicates(*originalCharStyle);
         if (!charStyle.isEmpty()) {

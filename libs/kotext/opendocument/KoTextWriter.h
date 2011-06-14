@@ -22,7 +22,7 @@
 
 #include "kotext_export.h"
 
-class KoShapeSavingContext;
+class KShapeSavingContext;
 class KXmlWriter;
 class KoTextDocumentLayout;
 class KoStyleManager;
@@ -45,7 +45,7 @@ public:
     *
     * @param context The context the KoTextWriter is called in
     */
-    explicit KoTextWriter(KoShapeSavingContext &context, KDocumentRdfBase *rdfData = 0);
+    explicit KoTextWriter(KShapeSavingContext &context, KDocumentRdfBase *rdfData = 0);
 
     /**
     * Destructor.
@@ -62,9 +62,9 @@ public:
      * @param styleManager The used style manager
      * @param context The saving context
      */
-    static QString saveParagraphStyle(const QTextBlock &block, KoStyleManager *styleManager, KoShapeSavingContext &context);
+    static QString saveParagraphStyle(const QTextBlock &block, KoStyleManager *styleManager, KShapeSavingContext &context);
 
-    static QString saveParagraphStyle(const QTextBlockFormat &blockFormat, const QTextCharFormat &charFormat, KoStyleManager *styleManager, KoShapeSavingContext &context);
+    static QString saveParagraphStyle(const QTextBlockFormat &blockFormat, const QTextCharFormat &charFormat, KoStyleManager *styleManager, KShapeSavingContext &context);
 
     /**
      * Writes the portion of document contained within 'from' and 'to'

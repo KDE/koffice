@@ -89,9 +89,9 @@ public:
     /**
      * From KShape reimplemented method to store the TextShape data as ODF.
      *
-     * @param context the KoShapeSavingContext used for saving.
+     * @param context the KShapeSavingContext used for saving.
      */
-    virtual void saveOdf(KoShapeSavingContext &context) const;
+    virtual void saveOdf(KShapeSavingContext &context) const;
 
     KoTextShapeData *textShapeData() {
         return m_textShapeData;
@@ -117,7 +117,7 @@ protected:
     virtual void loadStyle(const KXmlElement &element, KShapeLoadingContext &context);
 
     /// reimplemented
-    virtual QString saveStyle(KOdfGenericStyle &style, KoShapeSavingContext &context) const;
+    virtual QString saveStyle(KOdfGenericStyle &style, KShapeSavingContext &context) const;
 
 private:
     void shapeChanged(ChangeType type, KShape *shape);

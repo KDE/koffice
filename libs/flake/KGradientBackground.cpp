@@ -24,7 +24,7 @@
 #include <KOdfXmlNS.h>
 #include <KOdfLoadingContext.h>
 #include <KOdf.h>
-#include <KoShapeSavingContext.h>
+#include <KShapeSavingContext.h>
 
 #include <KDebug>
 
@@ -132,7 +132,7 @@ void KGradientBackground::paint(QPainter &painter, const QPainterPath &fillPath)
     painter.drawPath(fillPath);
 }
 
-void KGradientBackground::fillStyle(KOdfGenericStyle &style, KoShapeSavingContext &context)
+void KGradientBackground::fillStyle(KOdfGenericStyle &style, KShapeSavingContext &context)
 {
     Q_D(KGradientBackground);
     QBrush brush(*d->gradient);

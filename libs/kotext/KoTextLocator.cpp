@@ -27,7 +27,7 @@
 
 #include <KShape.h>
 #include <KShapeLoadingContext.h>
-#include <KoShapeSavingContext.h> // for usage in Q_UNUSED
+#include <KShapeSavingContext.h> // for usage in Q_UNUSED
 
 #include <KDebug>
 #include <QTextDocument>
@@ -173,7 +173,7 @@ bool KoTextLocator::loadOdf(const KXmlElement &element, KShapeLoadingContext &co
     return false;
 }
 
-void KoTextLocator::saveOdf(KoShapeSavingContext &context)
+void KoTextLocator::saveOdf(KShapeSavingContext &context)
 {
     Q_UNUSED(context);
     // TODO

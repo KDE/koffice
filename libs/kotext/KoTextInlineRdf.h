@@ -26,7 +26,7 @@
 #include <QTextTableCell>
 
 class KXmlWriter;
-class KoShapeSavingContext;
+class KShapeSavingContext;
 class KoBookmark;
 class KoTextMeta;
 class KoTextInlineRdf;
@@ -97,7 +97,7 @@ public:
     static void attach(KoTextInlineRdf *inlineRdf, QTextCursor &cursor);
 
     bool loadOdf(const KXmlElement &element);
-    bool saveOdf(KoShapeSavingContext &context, KXmlWriter *writer);
+    bool saveOdf(KShapeSavingContext &context, KXmlWriter *writer);
 
     /**
      * Get the RDF subject for this inline RDF

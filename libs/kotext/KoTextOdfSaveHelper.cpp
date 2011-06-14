@@ -23,7 +23,7 @@
 #include <KOdf.h>
 #include "KoTextShapeData.h"
 #include <KOdfGenericChanges.h>
-#include <KoShapeSavingContext.h>
+#include <KShapeSavingContext.h>
 
 #include <opendocument/KoTextSharedSavingData.h>
 #include "KoTextSopranoRdfModel_p.h"
@@ -37,7 +37,7 @@ struct KoTextOdfSaveHelper::Private {
     {
     }
 
-    KoShapeSavingContext *context;
+    KShapeSavingContext *context;
     KoTextShapeData *shapeData;
 
     int from;
@@ -74,11 +74,11 @@ bool KoTextOdfSaveHelper::writeBody()
     return true;
 }
 
-KoShapeSavingContext * KoTextOdfSaveHelper::context(KXmlWriter * bodyWriter, KOdfGenericStyles & mainStyles, KOdfEmbeddedDocumentSaver & embeddedSaver)
+KShapeSavingContext * KoTextOdfSaveHelper::context(KXmlWriter * bodyWriter, KOdfGenericStyles & mainStyles, KOdfEmbeddedDocumentSaver & embeddedSaver)
 {
 //    Q_ASSERT(d->context == 0);
 
-    d->context = new KoShapeSavingContext(*bodyWriter, mainStyles, embeddedSaver);
+    d->context = new KShapeSavingContext(*bodyWriter, mainStyles, embeddedSaver);
     return d->context;
 }
 

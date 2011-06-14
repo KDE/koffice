@@ -46,7 +46,7 @@ public:
     void setProperties(const KProperties *props);
 
     ///reimplemented
-    void saveOdf(KoShapeSavingContext &context);
+    void saveOdf(KShapeSavingContext &context);
 
     ///reimplemented
     bool loadOdf(const KXmlElement &element, KShapeLoadingContext &context);

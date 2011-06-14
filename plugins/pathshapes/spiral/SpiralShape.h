@@ -70,7 +70,7 @@ public:
 
 protected:
     // reimplemented
-    virtual void saveOdf(KoShapeSavingContext &context) const;
+    virtual void saveOdf(KShapeSavingContext &context) const;
     // reimplemented
     virtual bool loadOdf(const KXmlElement &element, KShapeLoadingContext &context);
 

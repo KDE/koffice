@@ -20,7 +20,7 @@
 #include "SCPlaceholderShape.h"
 #include "SCPlaceholderStrategy.h"
 
-#include <KoShapeSavingContext.h>
+#include <KShapeSavingContext.h>
 #include <KXmlWriter.h>
 #include <KoOdfWorkaround.h>
 
@@ -75,7 +75,7 @@ bool SCPlaceholderShape::loadOdf(const KXmlElement &element, KShapeLoadingContex
     return true;
 }
 
-void SCPlaceholderShape::saveOdf(KoShapeSavingContext &context) const
+void SCPlaceholderShape::saveOdf(KShapeSavingContext &context) const
 {
     KXmlWriter &writer = context.xmlWriter();
     writer.startElement("draw:frame");

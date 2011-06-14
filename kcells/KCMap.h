@@ -104,7 +104,7 @@ public:
 
     // KDataCenterBase interface
     virtual bool completeLoading(KOdfStore *store);
-    virtual bool completeSaving(KOdfStore *store, KXmlWriter *manifestWriter, KoShapeSavingContext * context);
+    virtual bool completeSaving(KOdfStore *store, KXmlWriter *manifestWriter, KShapeSavingContext * context);
 
     /**
      * \return a pointer to the binding manager
@@ -199,7 +199,7 @@ public:
     /**
      * \ingroup OpenDocument
      */
-    bool saveOdf(KXmlWriter & xmlWriter, KoShapeSavingContext & savingContext);
+    bool saveOdf(KXmlWriter & xmlWriter, KShapeSavingContext & savingContext);
 
     /**
      * \ingroup OpenDocument

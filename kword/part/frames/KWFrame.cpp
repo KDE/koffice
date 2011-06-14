@@ -86,7 +86,7 @@ void KWFrame::copySettings(const KWFrame *frame)
     shape()->copySettings(frame->shape());
 }
 
-void KWFrame::saveOdf(KoShapeSavingContext &context, const KWPage &page, int pageZIndexOffset) const
+void KWFrame::saveOdf(KShapeSavingContext &context, const KWPage &page, int pageZIndexOffset) const
 {
     Q_ASSERT(frameSet());
     // frame properties first

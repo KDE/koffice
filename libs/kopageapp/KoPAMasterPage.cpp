@@ -45,7 +45,7 @@ KoPAMasterPage::~KoPAMasterPage()
 {
 }
 
-void KoPAMasterPage::saveOdf(KoShapeSavingContext &context) const
+void KoPAMasterPage::saveOdf(KShapeSavingContext &context) const
 {
     KoPASavingContext &paContext = static_cast<KoPASavingContext&>(context);
 

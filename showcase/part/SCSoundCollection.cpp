@@ -89,7 +89,7 @@ bool SCSoundCollection::completeLoading(KOdfStore *store)
 }
 
 // use a KoSharedSavingData in the context to save which sounds need to be saved
-bool SCSoundCollection::completeSaving(KOdfStore *store, KXmlWriter * manifestWriter, KoShapeSavingContext * context)
+bool SCSoundCollection::completeSaving(KOdfStore *store, KXmlWriter * manifestWriter, KShapeSavingContext * context)
 {
     Q_UNUSED(context);
     foreach (SCSoundData *sound, d->sounds) {

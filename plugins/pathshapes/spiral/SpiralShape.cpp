@@ -20,7 +20,7 @@
 #include "SpiralShape.h"
 
 #include <KPathPoint.h>
-#include <KoShapeSavingContext.h>
+#include <KShapeSavingContext.h>
 #include <KXmlReader.h>
 #include <KXmlWriter.h>
 #include <KOdfXmlNS.h>
@@ -45,7 +45,7 @@ SpiralShape::~SpiralShape()
 {
 }
 
-void SpiralShape::saveOdf(KoShapeSavingContext &context) const
+void SpiralShape::saveOdf(KShapeSavingContext &context) const
 {
     // TODO?
     KPathShape::saveOdf(context);

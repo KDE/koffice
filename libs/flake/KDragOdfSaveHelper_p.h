@@ -41,7 +41,7 @@ public:
         delete context;
     }
 
-    KoShapeSavingContext *context;
+    KShapeSavingContext *context;
 };
 
 #endif

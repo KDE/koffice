@@ -20,7 +20,7 @@
 
 #include "KoTextInlineRdf.h"
 #include "opendocument/KoTextSharedSavingData.h"
-#include <KoShapeSavingContext.h>
+#include <KShapeSavingContext.h>
 
 #include <KXmlReader.h>
 #include <KXmlWriter.h>
@@ -155,7 +155,7 @@ bool KoTextInlineRdf::loadOdf(const KXmlElement &e)
     return true;
 }
 
-bool KoTextInlineRdf::saveOdf(KoShapeSavingContext &context, KXmlWriter *writer)
+bool KoTextInlineRdf::saveOdf(KShapeSavingContext &context, KXmlWriter *writer)
 {
     kDebug(30015) << " this:" << (void*)this << " xmlid:" << d->id;
     QString oldID = d->id;
