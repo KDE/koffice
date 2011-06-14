@@ -21,7 +21,7 @@
 #include "FilterEffectSceneItems.h"
 #include "KoShape.h"
 #include "KFilterEffect.h"
-#include "KoFilterEffectStack.h"
+#include "KFilterEffectStack.h"
 
 #include <KDebug>
 #include <KComboBox>
@@ -123,7 +123,7 @@ FilterEffectScene::~FilterEffectScene()
 {
 }
 
-void FilterEffectScene::initialize(KoFilterEffectStack *effectStack)
+void FilterEffectScene::initialize(KFilterEffectStack *effectStack)
 {
     m_items.clear();
     m_connectionItems.clear();

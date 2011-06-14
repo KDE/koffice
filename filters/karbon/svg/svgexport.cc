@@ -52,7 +52,7 @@
 #include <pathshapes/ellipse/EllipseShape.h>
 #include <KoImageData.h>
 #include "KFilterEffect.h"
-#include "KoFilterEffectStack.h"
+#include "KFilterEffectStack.h"
 #include "KXmlWriter.h"
 
 #include <KPluginFactory>
@@ -616,7 +616,7 @@ void SvgExport::getStroke(KoShape *shape, QTextStream *stream)
 
 void SvgExport::getEffects(KoShape *shape, QTextStream *stream)
 {
-    KoFilterEffectStack * filterStack = shape->filterEffectStack();
+    KFilterEffectStack * filterStack = shape->filterEffectStack();
     if (!filterStack)
         return;
 

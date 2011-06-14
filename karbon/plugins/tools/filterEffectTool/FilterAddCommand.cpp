@@ -20,7 +20,7 @@
 #include "FilterAddCommand.h"
 #include "KoShape.h"
 #include "KFilterEffect.h"
-#include "KoFilterEffectStack.h"
+#include "KFilterEffectStack.h"
 
 #include <KLocale>
 

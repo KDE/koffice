@@ -38,7 +38,7 @@
 #include <QTimer>
 #include <QPixmapCache>
 #include <kdebug.h>
-#include <KoFilterEffectStack.h>
+#include <KFilterEffectStack.h>
 #include "GreyscaleFilterEffect.h"
 #include "MonoFilterEffect.h"
 #include "WatermarkFilterEffect.h"
@@ -79,7 +79,7 @@ PictureShape::PictureShape()
     m_mode(Standard)
 {
     setKeepAspectRatio(true);
-    setFilterEffectStack(new KoFilterEffectStack());
+    setFilterEffectStack(new KFilterEffectStack());
 }
 
 PictureShape::~PictureShape()

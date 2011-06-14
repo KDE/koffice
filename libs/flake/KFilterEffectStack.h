@@ -29,14 +29,14 @@ class KFilterEffect;
 class KXmlWriter;
 
 /// This class manages a stack of filter effects
-class FLAKE_EXPORT KoFilterEffectStack
+class FLAKE_EXPORT KFilterEffectStack
 {
 public:
     /// Creates an empty filter effect stack
-    KoFilterEffectStack();
+    KFilterEffectStack();
 
     /// Destroys the filter effect stack, deleting all filter effects
-    ~KoFilterEffectStack();
+    ~KFilterEffectStack();
 
     /**
     * The first filter of the list is the first to be applied.

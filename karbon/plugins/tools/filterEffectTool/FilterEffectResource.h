@@ -23,7 +23,7 @@
 #include "KoResource.h"
 #include <KXmlReader.h>
 
-class KoFilterEffectStack;
+class KFilterEffectStack;
 
 class FilterEffectResource : public KoResource
 {
@@ -40,10 +40,10 @@ public:
     virtual QString defaultFileExtension() const;
 
     /// Creates resource from given filter effect stack
-    static FilterEffectResource * fromFilterEffectStack(KoFilterEffectStack *filterStack);
+    static FilterEffectResource * fromFilterEffectStack(KFilterEffectStack *filterStack);
 
     /// Creates a new filter stack from this filter resource
-    KoFilterEffectStack * toFilterStack() const;
+    KFilterEffectStack * toFilterStack() const;
 
 private:
     QDomDocument m_data;

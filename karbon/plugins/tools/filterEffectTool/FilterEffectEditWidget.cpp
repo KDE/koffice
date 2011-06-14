@@ -27,7 +27,7 @@
 #include "KoGenericRegistryModel.h"
 #include "KFilterEffectRegistry.h"
 #include "KFilterEffect.h"
-#include "KoFilterEffectStack.h"
+#include "KFilterEffectStack.h"
 #include "KFilterEffectConfigWidgetBase.h"
 #include "KoShape.h"
 #include "KoCanvasBase.h"
@@ -125,7 +125,7 @@ void FilterEffectEditWidget::editShape(KoShape *shape, KoCanvasBase * canvas)
         m_effects = m_shape->filterEffectStack();
     }
     if (!m_effects) {
-        m_effects = new KoFilterEffectStack();
+        m_effects = new KFilterEffectStack();
     }
 
     m_scene->initialize(m_effects);
@@ -377,7 +377,7 @@ void FilterEffectEditWidget::presetSelected(KoResource *resource)
     if (!effectResource)
         return;
 
-    KoFilterEffectStack * filterStack = effectResource->toFilterStack();
+    KFilterEffectStack * filterStack = effectResource->toFilterStack();
     if (!filterStack)
         return;
 

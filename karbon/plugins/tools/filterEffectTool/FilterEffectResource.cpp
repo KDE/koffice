@@ -19,7 +19,7 @@
 
 #include "FilterEffectResource.h"
 #include <KFilterEffect.h>
-#include <KoFilterEffectStack.h>
+#include <KFilterEffectStack.h>
 #include <KFilterEffectRegistry.h>
 #include <KFilterEffectLoadingContext.h>
 #include <KXmlWriter.h>
@@ -83,7 +83,7 @@ QString FilterEffectResource::defaultFileExtension() const
     return QString(".svg");
 }
 
-FilterEffectResource * FilterEffectResource::fromFilterEffectStack(KoFilterEffectStack *filterStack)
+FilterEffectResource * FilterEffectResource::fromFilterEffectStack(KFilterEffectStack *filterStack)
 {
     if (!filterStack)
         return 0;
@@ -106,9 +106,9 @@ FilterEffectResource * FilterEffectResource::fromFilterEffectStack(KoFilterEffec
     return resource;
 }
 
-KoFilterEffectStack * FilterEffectResource::toFilterStack() const
+KFilterEffectStack * FilterEffectResource::toFilterStack() const
 {
-    KoFilterEffectStack * filterStack = new KoFilterEffectStack();
+    KFilterEffectStack * filterStack = new KFilterEffectStack();
     if (!filterStack)
         return 0;
 

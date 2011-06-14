@@ -35,7 +35,7 @@
 #include "KoShapeConnection_p.h"
 #include "KoShapeLayer.h"
 #include "KFilterEffect.h"
-#include "KoFilterEffectStack.h"
+#include "KFilterEffectStack.h"
 #include "KFilterEffectRenderContext.h"
 #include "KoShapeBackground.h"
 #include <KoRTree.h>

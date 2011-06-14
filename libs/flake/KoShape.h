@@ -55,7 +55,7 @@ class KoDataCenterBase;
 class KoShapeShadow;
 class KoEventAction;
 class KoShapePrivate;
-class KoFilterEffectStack;
+class KFilterEffectStack;
 class KoSnapData;
 class KoShapeConnection;
 class KoShapeConnectionPolicy;
@@ -842,10 +842,10 @@ public:
      *
      * @return the list of filter effects applied on the shape when rendering.
      */
-    KoFilterEffectStack *filterEffectStack() const;
+    KFilterEffectStack *filterEffectStack() const;
 
     /// Sets the new filter effect stack, removing the old one
-    void setFilterEffectStack(KoFilterEffectStack *filterEffectStack);
+    void setFilterEffectStack(KFilterEffectStack *filterEffectStack);
 
     /**
      * Set the property collision detection.

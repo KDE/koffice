@@ -31,7 +31,7 @@
 #include "KoShapeShadow.h"
 #include "KoShapeBackground.h"
 #include "KoShapeContainer.h"
-#include "KoFilterEffectStack.h"
+#include "KFilterEffectStack.h"
 #include "KoTextOnShapeContainer.h"
 
 #include <KXmlReader.h>

@@ -46,7 +46,7 @@
 #include "KoEventAction.h"
 #include "KEventActionRegistry.h"
 #include "KoOdfWorkaround.h"
-#include "KoFilterEffectStack.h"
+#include "KFilterEffectStack.h"
 
 #include <KXmlReader.h>
 #include <KXmlWriter.h>
@@ -1618,13 +1618,13 @@ void KoShape::removeAdditionalStyleAttribute(const QString &name)
     d->additionalStyleAttributes.remove(name);
 }
 
-KoFilterEffectStack *KoShape::filterEffectStack() const
+KFilterEffectStack *KoShape::filterEffectStack() const
 {
     Q_D(const KoShape);
     return d->filterEffectStack;
 }
 
-void KoShape::setFilterEffectStack(KoFilterEffectStack *filterEffectStack)
+void KoShape::setFilterEffectStack(KFilterEffectStack *filterEffectStack)
 {
     Q_D(KoShape);
     if (d->filterEffectStack)

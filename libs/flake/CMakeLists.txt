@@ -97,7 +97,7 @@ set(flake_SRCS
     KoImageCollection.cpp
     KoOdfWorkaround.cpp
     KFilterEffect.cpp
-    KoFilterEffectStack.cpp
+    KFilterEffectStack.cpp
     KFilterEffectFactoryBase.cpp
     KFilterEffectRegistry.cpp
     KFilterEffectConfigWidgetBase.cpp
@@ -254,7 +254,7 @@ install(
     KFilterEffectLoadingContext.h
     KFilterEffectRegistry.h
     KFilterEffectRenderContext.h
-    KoFilterEffectStack.h
+    KFilterEffectStack.h
     KoFlake.h
     KoFrameShape.h
     KoGradientBackground.h

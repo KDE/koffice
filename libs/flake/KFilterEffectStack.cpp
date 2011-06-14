@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoFilterEffectStack.h"
+#include "KFilterEffectStack.h"
 #include "KFilterEffect.h"
 #include "KXmlWriter.h"
 
@@ -25,7 +25,7 @@
 #include <QtCore/QSet>
 #include <QDebug>
 
-class KoFilterEffectStack::Private
+class KFilterEffectStack::Private
 {
 public:
     Private()
@@ -43,62 +43,62 @@ public:
     QAtomicInt refCount;
 };
 
-KoFilterEffectStack::KoFilterEffectStack()
+KFilterEffectStack::KFilterEffectStack()
 : d(new Private())
 {
 }
 
-KoFilterEffectStack::~KoFilterEffectStack()
+KFilterEffectStack::~KFilterEffectStack()
 {
     delete d;
 }
 
-QList<KFilterEffect*> KoFilterEffectStack::filterEffects() const
+QList<KFilterEffect*> KFilterEffectStack::filterEffects() const
 {
     return d->filterEffects;
 }
 
-bool KoFilterEffectStack::isEmpty() const
+bool KFilterEffectStack::isEmpty() const
 {
     return d->filterEffects.isEmpty();
 }
 
-void KoFilterEffectStack::insertFilterEffect(int index, KFilterEffect * filter)
+void KFilterEffectStack::insertFilterEffect(int index, KFilterEffect * filter)
 {
     if (filter)
         d->filterEffects.insert(index, filter);
 }
 
-void KoFilterEffectStack::appendFilterEffect(KFilterEffect *filter)
+void KFilterEffectStack::appendFilterEffect(KFilterEffect *filter)
 {
     if (filter)
         d->filterEffects.append(filter);
 }
 
-void KoFilterEffectStack::removeFilterEffect(int index)
+void KFilterEffectStack::removeFilterEffect(int index)
 {
     KFilterEffect * filter = takeFilterEffect(index);
     delete filter;
 }
 
-KFilterEffect* KoFilterEffectStack::takeFilterEffect(int index)
+KFilterEffect* KFilterEffectStack::takeFilterEffect(int index)
 {
     if (index >= d->filterEffects.size())
         return 0;
     return d->filterEffects.takeAt(index);
 }
 
-void KoFilterEffectStack::setClipRect(const QRectF &clipRect)
+void KFilterEffectStack::setClipRect(const QRectF &clipRect)
 {
     d->clipRect = clipRect;
 }
 
-QRectF KoFilterEffectStack::clipRect() const
+QRectF KFilterEffectStack::clipRect() const
 {
     return d->clipRect;
 }
 
-QRectF KoFilterEffectStack::clipRectForBoundingRect(const QRectF &boundingRect) const
+QRectF KFilterEffectStack::clipRectForBoundingRect(const QRectF &boundingRect) const
 {
     qreal x = boundingRect.x() + d->clipRect.x() * boundingRect.width();
     qreal y = boundingRect.y() + d->clipRect.y() * boundingRect.height();
@@ -107,22 +107,22 @@ QRectF KoFilterEffectStack::clipRectForBoundingRect(const QRectF &boundingRect) 
     return QRectF(x, y, w, h);
 }
 
-bool KoFilterEffectStack::ref()
+bool KFilterEffectStack::ref()
 {
     return d->refCount.ref();
 }
 
-bool KoFilterEffectStack::deref()
+bool KFilterEffectStack::deref()
 {
     return d->refCount.deref();
 }
 
-int KoFilterEffectStack::useCount() const
+int KFilterEffectStack::useCount() const
 {
     return d->refCount;
 }
 
-void KoFilterEffectStack::save(KXmlWriter &writer, const QString &filterId)
+void KFilterEffectStack::save(KXmlWriter &writer, const QString &filterId)
 {
     writer.startElement("filter");
     writer.addAttribute("id", filterId);
@@ -140,7 +140,7 @@ void KoFilterEffectStack::save(KXmlWriter &writer, const QString &filterId)
     writer.endElement();
 }
 
-QSet<QString> KoFilterEffectStack::requiredStandarsInputs() const
+QSet<QString> KFilterEffectStack::requiredStandarsInputs() const
 {
     static QSet<QString> stdInputs = QSet<QString>()
         << "SourceGraphic"

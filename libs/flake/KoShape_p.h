@@ -94,7 +94,7 @@ public:
     QMap<QString, QString> additionalAttributes;
     QMap<QString, QString> additionalStyleAttributes;
     QSet<KoEventAction *> eventActions; ///< list of event actions the shape has
-    KoFilterEffectStack *filterEffectStack; ///< stack of filter effects applied to the shape
+    KFilterEffectStack *filterEffectStack; ///< stack of filter effects applied to the shape
     qreal transparency; ///< the shapes transparency
 
     QList<KoShapeConnection*> connections;

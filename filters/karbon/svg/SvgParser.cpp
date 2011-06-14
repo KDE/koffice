@@ -50,7 +50,7 @@
 #include <KoPatternBackground.h>
 #include <KFilterEffectRegistry.h>
 #include <KFilterEffect.h>
-#include "KoFilterEffectStack.h"
+#include "KFilterEffectStack.h"
 #include "KFilterEffectLoadingContext.h"
 
 #include <KDebug>
@@ -1269,7 +1269,7 @@ void SvgParser::applyFilter(KoShape * shape)
 
     KFilterEffectRegistry * registry = KFilterEffectRegistry::instance();
 
-    KoFilterEffectStack * filterStack = 0;
+    KFilterEffectStack * filterStack = 0;
 
     QSet<QString> stdInputs;
     stdInputs << "SourceGraphic" << "SourceAlpha";
@@ -1342,7 +1342,7 @@ void SvgParser::applyFilter(KoShape * shape)
         filterEffect->setFilterRect(subRegion);
 
         if (!filterStack)
-            filterStack = new KoFilterEffectStack();
+            filterStack = new KFilterEffectStack();
 
         filterStack->appendFilterEffect(filterEffect);
         inputs[filterEffect->output()] = filterEffect;

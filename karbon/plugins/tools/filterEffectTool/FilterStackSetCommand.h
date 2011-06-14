@@ -22,14 +22,14 @@
 
 #include <QtGui/QUndoCommand>
 
-class KoFilterEffectStack;
+class KFilterEffectStack;
 class KoShape;
 
 /// Command to set a filter stack on a shape
 class FilterStackSetCommand : public QUndoCommand
 {
 public:
-    FilterStackSetCommand(KoFilterEffectStack *newStack, KoShape *shape, QUndoCommand *parent = 0);
+    FilterStackSetCommand(KFilterEffectStack *newStack, KoShape *shape, QUndoCommand *parent = 0);
     ~FilterStackSetCommand();
 
     /// redo the command
@@ -38,8 +38,8 @@ public:
     virtual void undo();
 
 private:
-    KoFilterEffectStack * m_newFilterStack;
-    KoFilterEffectStack * m_oldFilterStack;
+    KFilterEffectStack * m_newFilterStack;
+    KFilterEffectStack * m_oldFilterStack;
     KoShape * m_shape;
     bool m_isSet;
 };

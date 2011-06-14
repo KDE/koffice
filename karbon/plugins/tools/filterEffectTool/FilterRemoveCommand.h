@@ -24,13 +24,13 @@
 
 class KoShape;
 class KFilterEffect;
-class KoFilterEffectStack;
+class KFilterEffectStack;
 
 /// A command do remove a filter effect from a filter effect stack
 class FilterRemoveCommand : public QUndoCommand
 {
 public:
-    FilterRemoveCommand(int filterEffectIndex, KoFilterEffectStack * filterStack, KoShape * shape, QUndoCommand *parent = 0);
+    FilterRemoveCommand(int filterEffectIndex, KFilterEffectStack * filterStack, KoShape * shape, QUndoCommand *parent = 0);
     ~FilterRemoveCommand();
     /// redo the command
     virtual void redo();
@@ -39,7 +39,7 @@ public:
 
 private:
     KFilterEffect * m_filterEffect;
-    KoFilterEffectStack * m_filterStack;
+    KFilterEffectStack * m_filterStack;
     KoShape * m_shape;
     bool m_isRemoved;
     int m_filterEffectIndex;

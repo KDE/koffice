@@ -20,11 +20,11 @@
 #include "FilterRemoveCommand.h"
 #include "KoShape.h"
 #include "KFilterEffect.h"
-#include "KoFilterEffectStack.h"
+#include "KFilterEffectStack.h"
 
 #include <KLocale>
 
-FilterRemoveCommand::FilterRemoveCommand(int filterEffectIndex, KoFilterEffectStack * filterStack, KoShape * shape, QUndoCommand *parent)
+FilterRemoveCommand::FilterRemoveCommand(int filterEffectIndex, KFilterEffectStack * filterStack, KoShape * shape, QUndoCommand *parent)
         : QUndoCommand(parent), m_filterEffect(0), m_filterStack(filterStack), m_shape(shape)
         , m_isRemoved(false), m_filterEffectIndex(filterEffectIndex)
 {

@@ -19,11 +19,11 @@
 
 #include "FilterStackSetCommand.h"
 #include "KoShape.h"
-#include "KoFilterEffectStack.h"
+#include "KFilterEffectStack.h"
 
 #include <KLocale>
 
-FilterStackSetCommand::FilterStackSetCommand(KoFilterEffectStack *newStack, KoShape *shape, QUndoCommand *parent)
+FilterStackSetCommand::FilterStackSetCommand(KFilterEffectStack *newStack, KoShape *shape, QUndoCommand *parent)
         : QUndoCommand(parent), m_newFilterStack(newStack), m_shape(shape)
 {
     Q_ASSERT(m_shape);

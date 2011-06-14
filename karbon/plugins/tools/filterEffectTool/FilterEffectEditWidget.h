@@ -27,7 +27,7 @@
 class KoShape;
 class KoCanvasBase;
 class KFilterEffect;
-class KoFilterEffectStack;
+class KFilterEffectStack;
 
 class FilterEffectEditWidget : public QWidget, Ui::FilterEffectEditWidget
 {
@@ -60,7 +60,7 @@ private:
     FilterEffectScene * m_scene;
     KoShape * m_shape;
     KoCanvasBase * m_canvas;
-    KoFilterEffectStack * m_effects;
+    KFilterEffectStack * m_effects;
     ConnectionSource m_currentItem;
     KComboBox * m_defaultSourceSelector;
 };

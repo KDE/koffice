@@ -21,7 +21,7 @@
 
 #include "KoGenericRegistryModel.h"
 #include "KFilterEffect.h"
-#include "KoFilterEffectStack.h"
+#include "KFilterEffectStack.h"
 #include "KFilterEffectFactoryBase.h"
 #include "KFilterEffectRegistry.h"
 #include "KFilterEffectConfigWidgetBase.h"
@@ -220,7 +220,7 @@ void KarbonFilterEffectsTool::paint(QPainter &painter, const KoViewConverter &co
         // get the size rect of the shape
         QRectF sizeRect(QPointF(), d->currentShape->size());
         // get the clipping rect of the filter stack
-        KoFilterEffectStack * filterStack = d->currentShape->filterEffectStack();
+        KFilterEffectStack * filterStack = d->currentShape->filterEffectStack();
         QRectF clipRect = filterStack->clipRectForBoundingRect(sizeRect);
         // finally paint the clipping rect
         painter.setBrush(Qt::NoBrush);
@@ -305,7 +305,7 @@ void KarbonFilterEffectsTool::presetSelected(KoResource *resource)
     if (!effectResource)
         return;
 
-    KoFilterEffectStack * filterStack = effectResource->toFilterStack();
+    KFilterEffectStack * filterStack = effectResource->toFilterStack();
     if (!filterStack)
         return;
 
