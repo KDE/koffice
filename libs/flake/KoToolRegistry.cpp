@@ -21,7 +21,7 @@
 #include "KoToolRegistry.h"
 #include <KGlobal>
 
-#include "tools/KoCreatePathToolFactory_p.h"
+#include "tools/KCreatePathToolFactory_p.h"
 #include "tools/KoCreateShapesToolFactory_p.h"
 #include "tools/KoCreateShapesTool.h"
 #include "tools/KoPathToolFactory_p.h"
@@ -52,7 +52,7 @@ void KoToolRegistry::init()
                                      config);
 
     // register generic tools
-    add(new KoCreatePathToolFactory(this));
+    add(new KCreatePathToolFactory(this));
     add(new KoCreateShapesToolFactory(this));
     add(new KoPathToolFactory(this));
     add(new KoZoomToolFactory(this));

@@ -18,7 +18,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoCreatePathToolFactory_p.h"
+#include "KCreatePathToolFactory_p.h"
 #include "KCreatePathTool_p.h"
 
 #include <klocale.h>
@@ -27,7 +27,7 @@
 #include <QRectF>
 #include <QPixmap>
 
-KoCreatePathToolFactory::KoCreatePathToolFactory(QObject *parent)
+KCreatePathToolFactory::KCreatePathToolFactory(QObject *parent)
         : KoToolFactoryBase(parent, KoCreatePathTool_ID)
 {
     setToolTip(i18n("Create Path"));
@@ -37,11 +37,11 @@ KoCreatePathToolFactory::KoCreatePathToolFactory(QObject *parent)
     setActivationShapeId("flake/edit");
 }
 
-KoCreatePathToolFactory::~KoCreatePathToolFactory()
+KCreatePathToolFactory::~KCreatePathToolFactory()
 {
 }
 
-KoToolBase* KoCreatePathToolFactory::createTool(KCanvasBase *canvas)
+KoToolBase* KCreatePathToolFactory::createTool(KCanvasBase *canvas)
 {
     return new KCreatePathTool(canvas);
 }

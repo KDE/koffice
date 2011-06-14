@@ -36,13 +36,13 @@
 #include "KoToolFactoryBase.h"
 
 /// The factory for the KCreatePathTool
-class KoCreatePathToolFactory : public KoToolFactoryBase
+class KCreatePathToolFactory : public KoToolFactoryBase
 {
 public:
     /// Constructor
-    KoCreatePathToolFactory(QObject *parent);
+    KCreatePathToolFactory(QObject *parent);
     /// Destructor
-    ~KoCreatePathToolFactory();
+    ~KCreatePathToolFactory();
 
     KoToolBase* createTool(KCanvasBase *canvas);
 };
