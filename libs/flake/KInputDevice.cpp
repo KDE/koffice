@@ -17,9 +17,9 @@
    Boston, MA 02110-1301, USA.
  */
 
-#include "KoInputDevice.h"
+#include "KInputDevice.h"
 
-class KoInputDevice::Private
+class KInputDevice::Private
 {
 public:
     Private(QTabletEvent::TabletDevice d, QTabletEvent::PointerType p, qint64 id, bool m)
@@ -34,60 +34,60 @@ public:
     bool mouse;
 };
 
-KoInputDevice::KoInputDevice(QTabletEvent::TabletDevice device, QTabletEvent::PointerType pointer, qint64 uniqueTabletId)
+KInputDevice::KInputDevice(QTabletEvent::TabletDevice device, QTabletEvent::PointerType pointer, qint64 uniqueTabletId)
         : d(new Private(device, pointer, uniqueTabletId, false))
 {
 }
 
-KoInputDevice::KoInputDevice()
+KInputDevice::KInputDevice()
         : d(new Private(QTabletEvent::NoDevice, QTabletEvent::UnknownPointer, -1, true))
 {
 }
 
-KoInputDevice::KoInputDevice(const KoInputDevice &other)
+KInputDevice::KInputDevice(const KInputDevice &other)
         : d(new Private(other.d->device, other.d->pointer, other.d->uniqueTabletId, other.d->mouse))
 {
 }
 
 
-KoInputDevice::~KoInputDevice()
+KInputDevice::~KInputDevice()
 {
     delete d;
 }
 
-QTabletEvent::TabletDevice KoInputDevice::device() const
+QTabletEvent::TabletDevice KInputDevice::device() const
 {
     return d->device;
 }
 
-QTabletEvent::PointerType KoInputDevice::pointer() const
+QTabletEvent::PointerType KInputDevice::pointer() const
 {
     return d->pointer;
 }
 
-qint64 KoInputDevice::uniqueTabletId() const
+qint64 KInputDevice::uniqueTabletId() const
 {
     return d->uniqueTabletId;
 }
 
-bool KoInputDevice::isMouse() const
+bool KInputDevice::isMouse() const
 {
     return d->mouse;
 }
 
 
-bool KoInputDevice::operator==(const KoInputDevice &other) const
+bool KInputDevice::operator==(const KInputDevice &other) const
 {
     return d->device == other.d->device && d->pointer == other.d->pointer &&
            d->uniqueTabletId == other.d->uniqueTabletId && d->mouse == other.d->mouse;
 }
 
-bool KoInputDevice::operator!=(const KoInputDevice &other) const
+bool KInputDevice::operator!=(const KInputDevice &other) const
 {
     return !(operator==(other));
 }
 
-KoInputDevice & KoInputDevice::operator=(const KoInputDevice & other)
+KInputDevice & KInputDevice::operator=(const KInputDevice & other)
 {
     d->device = other.d->device;
     d->pointer = other.d->pointer;
@@ -97,26 +97,26 @@ KoInputDevice & KoInputDevice::operator=(const KoInputDevice & other)
 }
 
 // static
-KoInputDevice KoInputDevice::mouse()
+KInputDevice KInputDevice::mouse()
 {
-    KoInputDevice id;
+    KInputDevice id;
     return id;
 }
 // static
-KoInputDevice KoInputDevice::stylus()
+KInputDevice KInputDevice::stylus()
 {
-    KoInputDevice id(QTabletEvent::Stylus, QTabletEvent::Pen);
+    KInputDevice id(QTabletEvent::Stylus, QTabletEvent::Pen);
     return id;
 }
 
 // static
-KoInputDevice KoInputDevice::eraser()
+KInputDevice KInputDevice::eraser()
 {
-    KoInputDevice id(QTabletEvent::Stylus, QTabletEvent::Eraser);
+    KInputDevice id(QTabletEvent::Stylus, QTabletEvent::Eraser);
     return id;
 }
 
-QDebug operator<<(QDebug dbg, const KoInputDevice &device)
+QDebug operator<<(QDebug dbg, const KInputDevice &device)
 {
 #ifndef NDEBUG
     if (device.isMouse())

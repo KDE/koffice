@@ -22,7 +22,7 @@
 
 #include "KoToolBase.h"
 #include "KoPointerEvent.h"
-#include "KoInputDevice.h"
+#include "KInputDevice.h"
 #include "KoToolManager_p.h"
 #include "KoToolSelection.h"
 #include "KoCanvasBase.h"
@@ -136,7 +136,7 @@ void KoToolProxy::tabletEvent(QTabletEvent *event, const QPointF &point)
         event->accept();
     }
 
-    KoInputDevice id(event->device(), event->pointerType(), event->uniqueId());
+    KInputDevice id(event->device(), event->pointerType(), event->uniqueId());
     KoToolManager::instance()->priv()->switchInputDevice(id);
 
     KoPointerEvent ev(event, point);
@@ -170,7 +170,7 @@ void KoToolProxy::tabletEvent(QTabletEvent *event, const QPointF &point)
 void KoToolProxy::mousePressEvent(QMouseEvent *event, const QPointF &point)
 {
     d->mouseLeaveWorkaround = false;
-    KoInputDevice id;
+    KInputDevice id;
     KoToolManager::instance()->priv()->switchInputDevice(id);
     d->mouseDownPoint = event->pos();
 
@@ -187,7 +187,7 @@ void KoToolProxy::mousePressEvent(QMouseEvent *event, const QPointF &point)
 void KoToolProxy::mouseDoubleClickEvent(QMouseEvent *event, const QPointF &point)
 {
     d->mouseLeaveWorkaround = false;
-    KoInputDevice id;
+    KInputDevice id;
     KoToolManager::instance()->priv()->switchInputDevice(id);
     if (d->activeTool == 0) {
         event->ignore();
@@ -206,7 +206,7 @@ void KoToolProxy::mouseMoveEvent(QMouseEvent *event, const QPointF &point)
         d->mouseLeaveWorkaround = false;
         return;
     }
-    KoInputDevice id;
+    KInputDevice id;
     KoToolManager::instance()->priv()->switchInputDevice(id);
     if (d->activeTool == 0) {
         event->ignore();
@@ -222,7 +222,7 @@ void KoToolProxy::mouseMoveEvent(QMouseEvent *event, const QPointF &point)
 void KoToolProxy::mouseReleaseEvent(QMouseEvent *event, const QPointF &point)
 {
     d->mouseLeaveWorkaround = false;
-    KoInputDevice id;
+    KInputDevice id;
     KoToolManager::instance()->priv()->switchInputDevice(id);
     d->scrollTimer.stop();
 

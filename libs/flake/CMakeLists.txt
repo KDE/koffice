@@ -57,7 +57,7 @@ set(flake_SRCS
     KoToolSelection.cpp
     KoShapeLayer.cpp
     KoPostscriptPaintDevice.cpp
-    KoInputDevice.cpp
+    KInputDevice.cpp
     KoToolManager_p.cpp
     KoToolManager.cpp
     KoToolRegistry.cpp
@@ -261,7 +261,7 @@ install(
     KGuidesData.h
     KImageCollection.h
     KImageData.h
-    KoInputDevice.h
+    KInputDevice.h
     KoInsets.h
     KoLineBorder.h
     KoLoadingShapeUpdater.h

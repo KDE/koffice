@@ -34,13 +34,13 @@
  * separately and be given their own tool instance to do their work.
  * @see KoToolFactoryBase::inputDeviceAgnostic()
  */
-class FLAKE_EXPORT KoInputDevice
+class FLAKE_EXPORT KInputDevice
 {
 public:
     /**
      * Copy constructor.
      */
-    KoInputDevice(const KoInputDevice &other);
+    KInputDevice(const KInputDevice &other);
 
     /**
      * Constructor for a tablet.
@@ -49,14 +49,14 @@ public:
      * @param pointer the pointer as found on a QTabletEvent
      * @param uniqueTabletId the uniqueId as found on a QTabletEvent
      */
-    explicit KoInputDevice(QTabletEvent::TabletDevice device, QTabletEvent::PointerType pointer, qint64 uniqueTabletId = -1);
+    explicit KInputDevice(QTabletEvent::TabletDevice device, QTabletEvent::PointerType pointer, qint64 uniqueTabletId = -1);
 
     /**
      * Constructor for the mouse as input device.
      */
-    KoInputDevice();
+    KInputDevice();
 
-    ~KoInputDevice();
+    ~KInputDevice();
 
     /**
      * Return the tablet device used
@@ -79,15 +79,15 @@ public:
     bool isMouse() const;
 
     /// equal
-    bool operator==(const KoInputDevice&) const;
+    bool operator==(const KInputDevice&) const;
     /// not equal
-    bool operator!=(const KoInputDevice&) const;
+    bool operator!=(const KInputDevice&) const;
     /// assignment
-    KoInputDevice & operator=(const KoInputDevice &);
+    KInputDevice & operator=(const KInputDevice &);
 
-    static KoInputDevice mouse();     ///< Standard mouse
-    static KoInputDevice stylus();    ///< Wacom style/pen
-    static KoInputDevice eraser();    ///< Wacom eraser
+    static KInputDevice mouse();     ///< Standard mouse
+    static KInputDevice stylus();    ///< Wacom style/pen
+    static KInputDevice eraser();    ///< Wacom eraser
 
 
 private:
@@ -95,11 +95,11 @@ private:
     Private * const d;
 };
 
-Q_DECLARE_METATYPE(KoInputDevice)
+Q_DECLARE_METATYPE(KInputDevice)
 
-FLAKE_EXPORT QDebug operator<<(QDebug debug, const KoInputDevice &device);
+FLAKE_EXPORT QDebug operator<<(QDebug debug, const KInputDevice &device);
 
-inline uint qHash(const KoInputDevice &key)
+inline uint qHash(const KInputDevice &key)
 {
     return qHash(QString(":%1:%2:%3:%4")
                  .arg(key.device())

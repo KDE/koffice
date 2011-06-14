@@ -39,7 +39,7 @@
 
 #include <kshortcut.h>
 
-#include "KoInputDevice.h"
+#include "KInputDevice.h"
 #include "KoToolManager.h"
 
 class KoToolFactoryBase;
@@ -76,14 +76,14 @@ public:
     void selectionChanged(QList<KoShape*> shapes);
     void currentLayerChanged(const KoShapeLayer *layer);
     void switchToolTemporaryRequested(const QString &id);
-    CanvasData *createCanvasData(KoCanvasController *controller, KoInputDevice device);
+    CanvasData *createCanvasData(KoCanvasController *controller, KInputDevice device);
     bool toolCanBeUsed(const QString &activationShapeId);
 
     /**
      * Request a switch from to the param input device.
      * This will cause the tool for that device to be selected.
      */
-    void switchInputDevice(const KoInputDevice &device);
+    void switchInputDevice(const KInputDevice &device);
 
     /**
      * Whenever a new tool proxy class is instantiated, it will use this method to register itself
@@ -107,7 +107,7 @@ public:
 
     CanvasData *canvasData; // data about the active canvas.
 
-    KoInputDevice inputDevice;
+    KInputDevice inputDevice;
     QTimer tabletEventTimer; // Runs for a short while after any tablet event is
     // received to help correct input device detection.
 

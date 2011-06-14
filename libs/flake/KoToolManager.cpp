@@ -63,7 +63,7 @@
 class CanvasData
 {
 public:
-    CanvasData(KoCanvasController *cc, const KoInputDevice &id)
+    CanvasData(KoCanvasController *cc, const KInputDevice &id)
             : activeTool(0),
             canvas(cc),
             inputDevice(id),
@@ -82,7 +82,7 @@ public:
     QHash<QString, KoToolBase*> allTools; // all the tools that are created for this canvas.
     QStack<QString> stack; // stack of temporary tools
     KoCanvasController *const canvas;
-    const KoInputDevice inputDevice;
+    const KInputDevice inputDevice;
     QWidget *dummyToolWidget;  // the widget shown in the toolDocker.
     QLabel *dummyToolLabel;
 };
@@ -100,7 +100,7 @@ KoToolManager::Private::~Private()
     qDeleteAll(tools);
 }
     // helper method.
-CanvasData *KoToolManager::Private::createCanvasData(KoCanvasController *controller, KoInputDevice device)
+CanvasData *KoToolManager::Private::createCanvasData(KoCanvasController *controller, KInputDevice device)
 {
     QHash<QString, KoToolBase*> origHash;
     if (canvasses.contains(controller))
@@ -430,7 +430,7 @@ void KoToolManager::Private::detachCanvas(KoCanvasController *controller)
 void KoToolManager::Private::attachCanvas(KoCanvasController *controller)
 {
     Q_ASSERT(controller);
-    CanvasData *cd = createCanvasData(controller, KoInputDevice::mouse());
+    CanvasData *cd = createCanvasData(controller, KInputDevice::mouse());
     // switch to new canvas as the active one.
     if (canvasData == 0) {
         QApplication::instance()->installEventFilter(q);
@@ -605,7 +605,7 @@ void KoToolManager::Private::currentLayerChanged(const KoShapeLayer *layer)
 
 #define MSECS_TO_IGNORE_SWITCH_TO_MOUSE_AFTER_TABLET_EVENT_RECEIVED 100
 
-void KoToolManager::Private::switchInputDevice(const KoInputDevice &device)
+void KoToolManager::Private::switchInputDevice(const KInputDevice &device)
 {
     Q_ASSERT(canvasData);
     if (!canvasData) return;
@@ -745,7 +745,7 @@ void KoToolManager::requestToolActivation(KoCanvasController * controller)
     }
 }
 
-KoInputDevice KoToolManager::currentInputDevice() const
+KInputDevice KoToolManager::currentInputDevice() const
 {
     return d->inputDevice;
 }
@@ -863,14 +863,14 @@ bool KoToolManager::eventFilter(QObject *object, QEvent *event)
     case QEvent::TabletLeaveProximity: {
         QTabletEvent *tabletEvent = static_cast<QTabletEvent *>(event);
 
-        KoInputDevice id(tabletEvent->device(), tabletEvent->pointerType(), tabletEvent->uniqueId());
+        KInputDevice id(tabletEvent->device(), tabletEvent->pointerType(), tabletEvent->uniqueId());
         d->switchInputDevice(id);
         break;
     }
     case QEvent::MouseButtonPress:
     case QEvent::MouseMove:
     case QEvent::MouseButtonRelease:
-        d->switchInputDevice(KoInputDevice::mouse());
+        d->switchInputDevice(KInputDevice::mouse());
         break;
     default:
         break;

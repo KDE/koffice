@@ -21,7 +21,7 @@
 #ifndef KO_TOOL_MANAGER
 #define KO_TOOL_MANAGER
 
-#include "KoInputDevice.h"
+#include "KInputDevice.h"
 #include "flake_export.h"
 
 #include <QObject>
@@ -145,7 +145,7 @@ public:
     KoToolBase *toolById(KoCanvasBase *canvas, const QString &id) const;
 
     /// @return the currently active pointing device
-    KoInputDevice currentInputDevice() const;
+    KInputDevice currentInputDevice() const;
 
     /**
      * For the list of shapes find out which tool is the highest priorty tool that can handle it.
@@ -221,7 +221,7 @@ signals:
      * Every time a new input device gets used by a tool, this event is emitted.
      * @param device the new input device that the user picked up.
      */
-    void inputDeviceChanged(const KoInputDevice &device);
+    void inputDeviceChanged(const KInputDevice &device);
 
     /**
      * Emitted whenever the active canvas changed.
