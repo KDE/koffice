@@ -21,13 +21,13 @@
 #ifndef KPRSHAPEAPPLICATIONDATA_H
 #define KPRSHAPEAPPLICATIONDATA_H
 
-#include <KoShapeApplicationData.h>
+#include <KShapeApplicationData.h>
 
 #include <QSet>
 
 class SCShapeAnimation;
 
-class SCShapeApplicationData : public KoShapeApplicationData
+class SCShapeApplicationData : public KShapeApplicationData
 {
 public:
     SCShapeApplicationData();

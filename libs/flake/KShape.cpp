@@ -36,7 +36,7 @@
 #include "KoShapeManager.h"
 #include "KoShapeManager_p.h"
 #include "KoShapeUserData.h"
-#include "KoShapeApplicationData.h"
+#include "KShapeApplicationData.h"
 #include "KoShapeSavingContext.h"
 #include "KoShapeLoadingContext.h"
 #include "KoViewConverter.h"
@@ -650,14 +650,14 @@ KoShapeUserData *KShape::userData() const
     return d->userData;
 }
 
-void KShape::setApplicationData(KoShapeApplicationData *appData)
+void KShape::setApplicationData(KShapeApplicationData *appData)
 {
     Q_D(KShape);
     // appdata is deleted by the application.
     d->appData = appData;
 }
 
-KoShapeApplicationData *KShape::applicationData() const
+KShapeApplicationData *KShape::applicationData() const
 {
     Q_D(const KShape);
     return d->appData;

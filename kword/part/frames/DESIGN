@@ -29,7 +29,7 @@ automatically be deleted.
 How delete works
 ----------------
 
-A KWFrame implements the interface KoShapeApplicationData.  In the constructor of the frame
+A KWFrame implements the interface KShapeApplicationData.  In the constructor of the frame
 we set the frame to be a member of the shape using KShape::setApplicationData(this);
 When the shape is deleted (destructor) it will thus also delete the Frame.
 This has the implication that the application can NEVER delete a frame object directly, if

@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoShapeApplicationData.h"
+#include "KShapeApplicationData.h"
 
-KoShapeApplicationData::~KoShapeApplicationData()
+KShapeApplicationData::~KShapeApplicationData()
 {
 }

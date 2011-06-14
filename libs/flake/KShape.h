@@ -45,7 +45,7 @@ class KoShapeBackground;
 class KoShapeManager;
 class KoShapeUserData;
 class KoViewConverter;
-class KoShapeApplicationData;
+class KShapeApplicationData;
 class KoShapeSavingContext;
 class KCanvasBase;
 class KoShapeLoadingContext;
@@ -616,12 +616,12 @@ public:
      * and should be deleted when the shape is destructed.
      * @param applicationData the new application data, or 0 to delete the current one.
      */
-    void setApplicationData(KoShapeApplicationData *applicationData);
+    void setApplicationData(KShapeApplicationData *applicationData);
 
     /**
      * Return the current applicationData.
      */
-    KoShapeApplicationData *applicationData() const;
+    KShapeApplicationData *applicationData() const;
 
     /**
      * Return the Id of this shape, identifying the type of shape by the id of the factory.

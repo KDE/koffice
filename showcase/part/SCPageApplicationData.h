@@ -21,11 +21,11 @@
 
 #include "showcase_export.h"
 
-#include <KoShapeApplicationData.h>
+#include <KShapeApplicationData.h>
 
 class SCPageEffect;
 
-class SHOWCASE_EXPORT SCPageApplicationData : public KoShapeApplicationData
+class SHOWCASE_EXPORT SCPageApplicationData : public KShapeApplicationData
 {
 public:
    SCPageApplicationData();

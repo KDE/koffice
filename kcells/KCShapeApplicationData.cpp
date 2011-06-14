@@ -26,7 +26,7 @@ public:
 };
 
 KCShapeApplicationData::KCShapeApplicationData()
-        : KoShapeApplicationData()
+        : KShapeApplicationData()
         , d(new Private)
 {
     d->anchoredToCell = true;

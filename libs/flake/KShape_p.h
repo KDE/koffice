@@ -85,7 +85,7 @@ public:
     QSet<KoShapeManager *> shapeManagers;
     QSet<KShape *> toolDelegates;
     KoShapeUserData *userData;
-    KoShapeApplicationData *appData;
+    KShapeApplicationData *appData;
     KoShapeBackground * fill; ///< Stands for the background color / fill etc.
     KoShapeBorderBase *border; ///< points to a border, or 0 if there is no border
     KShape *q_ptr;

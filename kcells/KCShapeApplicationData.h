@@ -20,7 +20,7 @@
 #ifndef KSPREAD_SHAPE_APPLICATION_DATA
 #define KSPREAD_SHAPE_APPLICATION_DATA
 
-#include <KoShapeApplicationData.h>
+#include <KShapeApplicationData.h>
 #include "kcells_export.h"
 
 
@@ -28,7 +28,7 @@
  * \ingroup Embedding
  * KCells specific data attached to each shape.
  */
-class KCELLS_EXPORT KCShapeApplicationData : public KoShapeApplicationData
+class KCELLS_EXPORT KCShapeApplicationData : public KShapeApplicationData
 {
 public:
     /**
