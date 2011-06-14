@@ -23,7 +23,7 @@
 #include "KoPathToolHandle_p.h"
 #include "KoPathTool_p.h"
 #include "KoPathPointMoveStrategy_p.h"
-#include "KoPathControlPointMoveStrategy_p.h"
+#include "KPathControlPointMoveStrategy_p.h"
 #include "KoSelection.h"
 #include "commands/KoPathPointTypeCommand_p.h"
 #include "KParameterChangeStrategy_p.h"
@@ -105,7 +105,7 @@ KInteractionStrategy * PointHandle::handleMousePress(KoPointerEvent *event)
         } else {
             KoPathShape * pathShape = m_activePoint->parent();
             KoPathPointData pd(pathShape, pathShape->pathPointIndex(m_activePoint));
-            return new KoPathControlPointMoveStrategy(m_tool, pd, m_activePointType, event->point);
+            return new KPathControlPointMoveStrategy(m_tool, pd, m_activePointType, event->point);
         }
     } else {
         KoPathPoint::PointProperties props = m_activePoint->properties();

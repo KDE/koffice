@@ -45,12 +45,12 @@ class KoPathTool;
  * /internal
  * @brief Strategy for moving points of a path shape.
  */
-class KoPathControlPointMoveStrategy : public KInteractionStrategy
+class KPathControlPointMoveStrategy : public KInteractionStrategy
 {
 public:
-    KoPathControlPointMoveStrategy(KoPathTool *tool, const KoPathPointData &point,
+    KPathControlPointMoveStrategy(KoPathTool *tool, const KoPathPointData &point,
                                    KoPathPoint::PointType type, const QPointF &pos);
-    virtual ~KoPathControlPointMoveStrategy();
+    virtual ~KPathControlPointMoveStrategy();
     virtual void handleMouseMove(const QPointF &mouseLocation, Qt::KeyboardModifiers modifiers);
     virtual QUndoCommand* createCommand(QUndoCommand *parent = 0);
 
