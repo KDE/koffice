@@ -20,7 +20,7 @@
 #include "KPathSegmentChangeStrategy_p.h"
 #include "KPathShape.h"
 #include "KPathPoint.h"
-#include "KoPathTool_p.h"
+#include "KPathTool_p.h"
 #include "KoSnapGuide.h"
 #include "commands/KPathControlPointMoveCommand.h"
 #include "commands/KPathSegmentTypeCommand.h"
@@ -28,7 +28,7 @@
 #include <KLocale>
 #include <limits>
 
-KPathSegmentChangeStrategy::KPathSegmentChangeStrategy(KoPathTool *tool, const QPointF &pos, const KPathPointData &segment, qreal segmentParam)
+KPathSegmentChangeStrategy::KPathSegmentChangeStrategy(KPathTool *tool, const QPointF &pos, const KPathPointData &segment, qreal segmentParam)
 : KInteractionStrategy(tool)
 , m_originalPosition(pos)
 , m_lastPosition(pos)

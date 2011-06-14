@@ -40,7 +40,7 @@
 
 #include <QList>
 
-class KoPathTool;
+class KPathTool;
 class KParameterShape;
 class KoViewConverter;
 class KoPointerEvent;
@@ -50,7 +50,7 @@ class KPathShape;
 class KoPathToolHandle
 {
 public:
-    KoPathToolHandle(KoPathTool *tool);
+    KoPathToolHandle(KPathTool *tool);
     virtual ~KoPathToolHandle();
     virtual void paint(QPainter &painter, const KoViewConverter &converter) = 0;
     virtual void repaint() const = 0;
@@ -59,13 +59,13 @@ public:
     virtual bool check(const QList<KPathShape*> &selectedShapes) = 0;
 
 protected:
-    KoPathTool *m_tool;
+    KPathTool *m_tool;
 };
 
 class PointHandle : public KoPathToolHandle
 {
 public:
-    PointHandle(KoPathTool *tool, KPathPoint *activePoint, KPathPoint::PointType activePointType);
+    PointHandle(KPathTool *tool, KPathPoint *activePoint, KPathPoint::PointType activePointType);
     void paint(QPainter &painter, const KoViewConverter &converter);
     void repaint() const;
     KInteractionStrategy *handleMousePress(KoPointerEvent *event);
@@ -80,7 +80,7 @@ private:
 class ParameterHandle : public KoPathToolHandle
 {
 public:
-    ParameterHandle(KoPathTool *tool, KParameterShape *parameterShape, int handleId);
+    ParameterHandle(KPathTool *tool, KParameterShape *parameterShape, int handleId);
     void paint(QPainter &painter, const KoViewConverter &converter);
     void repaint() const;
     KInteractionStrategy *handleMousePress(KoPointerEvent *event);

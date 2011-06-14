@@ -36,7 +36,7 @@
 
 #include <ui_PathToolOptionWidget.h>
 
-class KoPathTool;
+class KPathTool;
 class KPathShape;
 class KoShapeConfigWidgetBase;
 
@@ -49,7 +49,7 @@ public:
         ParametricType
     };
 
-    explicit PathToolOptionWidget(KoPathTool *tool, QWidget *parent = 0);
+    explicit PathToolOptionWidget(KPathTool *tool, QWidget *parent = 0);
     ~PathToolOptionWidget();
 
     void setSelectionType(Type type);
@@ -60,7 +60,7 @@ private:
 
 private:
     Ui::PathToolOptionWidget widget;
-    KoPathTool *m_tool;
+    KPathTool *m_tool;
     KoShapeConfigWidgetBase *m_shapePropertiesWidget;
     KPathShape *m_currentOpenPath;
 };

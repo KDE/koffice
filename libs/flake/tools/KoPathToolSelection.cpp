@@ -21,7 +21,7 @@
  */
 
 #include "KoPathToolSelection_p.h"
-#include "KoPathTool_p.h"
+#include "KPathTool_p.h"
 #include <KParameterShape.h>
 #include <KPathPoint.h>
 #include <KPathPointData.h>
@@ -30,7 +30,7 @@
 #include <KoResourceManager.h>
 #include <QtGui/QPainter>
 
-KoPathToolSelection::KoPathToolSelection(KoPathTool * tool)
+KoPathToolSelection::KoPathToolSelection(KPathTool * tool)
         : m_tool(tool)
 {
 }

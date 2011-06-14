@@ -37,7 +37,7 @@
 #include "KInteractionStrategy.h"
 
 
-class KoPathTool;
+class KPathTool;
 class KCanvasBase;
 
 /**
@@ -46,7 +46,7 @@ class KCanvasBase;
 class KPathPointMoveStrategy : public KInteractionStrategy
 {
 public:
-    KPathPointMoveStrategy(KoPathTool *tool, const QPointF &pos);
+    KPathPointMoveStrategy(KPathTool *tool, const QPointF &pos);
     virtual ~KPathPointMoveStrategy();
     virtual void handleMouseMove(const QPointF &mouseLocation, Qt::KeyboardModifiers modifiers);
     virtual QUndoCommand *createCommand(QUndoCommand *parent = 0);
@@ -56,7 +56,7 @@ private:
     /// the accumulated point move amount
     QPointF m_move;
     /// pointer to the path tool
-    KoPathTool *m_tool;
+    KPathTool *m_tool;
 };
 
 #endif /* KOPATHPOINTMOVESTRATEGY_H */

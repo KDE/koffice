@@ -37,7 +37,7 @@
 #include "KPathPointData.h"
 #include <QtCore/QPointF>
 
-class KoPathTool;
+class KPathTool;
 class KCanvasBase;
 class KPathShape;
 
@@ -47,7 +47,7 @@ class KPathShape;
 class KPathSegmentChangeStrategy : public KInteractionStrategy
 {
 public:
-    KPathSegmentChangeStrategy(KoPathTool *tool, const QPointF &pos, const KPathPointData &segment, qreal segmentParam);
+    KPathSegmentChangeStrategy(KPathTool *tool, const QPointF &pos, const KPathPointData &segment, qreal segmentParam);
     virtual ~KPathSegmentChangeStrategy();
     virtual void handleMouseMove(const QPointF &mouseLocation, Qt::KeyboardModifiers modifiers);
     virtual QUndoCommand *createCommand(QUndoCommand *parent = 0);
@@ -58,7 +58,7 @@ private:
     /// the accumulated point move amount
     QPointF m_move;
     /// pointer to the path tool
-    KoPathTool *m_tool;
+    KPathTool *m_tool;
     KPathShape *m_path;
     KPathSegment m_segment;
     qreal m_segmentParam;

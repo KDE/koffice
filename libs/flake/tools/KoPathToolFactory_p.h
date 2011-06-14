@@ -34,7 +34,7 @@
 
 #include <KoToolFactoryBase.h>
 
-/// Factory for the KoPathTool
+/// Factory for the KPathTool
 class KoPathToolFactory : public KoToolFactoryBase
 {
     Q_OBJECT

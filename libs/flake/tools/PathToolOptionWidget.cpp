@@ -18,14 +18,14 @@
  */
 
 #include "PathToolOptionWidget_p.h"
-#include "KoPathTool_p.h"
+#include "KPathTool_p.h"
 #include "../KoShapeRegistry.h"
 #include "../KoShapeConfigWidgetBase.h"
 #include "../KCanvasBase.h"
 
 #include <KAction>
 
-PathToolOptionWidget::PathToolOptionWidget(KoPathTool *tool, QWidget *parent)
+PathToolOptionWidget::PathToolOptionWidget(KPathTool *tool, QWidget *parent)
         : QWidget(parent),
         m_tool(tool),
         m_shapePropertiesWidget(0)

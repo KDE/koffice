@@ -35,7 +35,7 @@
 
 #include "KoShapeRubberSelectStrategy.h"
 
-class KoPathTool;
+class KPathTool;
 
 /**
  * @brief Strategy to rubber select points of a path shape
@@ -43,13 +43,13 @@ class KoPathTool;
 class KPathPointRubberSelectStrategy : public KoShapeRubberSelectStrategy
 {
 public:
-    KPathPointRubberSelectStrategy(KoPathTool *tool, const QPointF &clicked);
+    KPathPointRubberSelectStrategy(KPathTool *tool, const QPointF &clicked);
     virtual ~KPathPointRubberSelectStrategy() {}
     virtual void finishInteraction(Qt::KeyboardModifiers modifiers);
 
 private:
     /// pointer to the path tool
-    KoPathTool *m_tool;
+    KPathTool *m_tool;
     Q_DECLARE_PRIVATE(KoShapeRubberSelectStrategy)
 };
 

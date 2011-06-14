@@ -48,12 +48,12 @@ class PathToolOptionWidget;
 class KAction;
 
 /// The tool for editing a KPathShape or a KParameterShape
-class FLAKE_TEST_EXPORT KoPathTool : public KoToolBase
+class FLAKE_TEST_EXPORT KPathTool : public KoToolBase
 {
     Q_OBJECT
 public:
-    explicit KoPathTool(KCanvasBase *canvas);
-    ~KoPathTool();
+    explicit KPathTool(KCanvasBase *canvas);
+    ~KPathTool();
 
     /// reimplemented
     virtual void paint(QPainter &painter, const KoViewConverter &converter);

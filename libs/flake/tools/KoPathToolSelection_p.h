@@ -38,7 +38,7 @@
 #include <KoToolSelection.h>
 #include <KPathShape.h>
 
-class KoPathTool;
+class KPathTool;
 class KPathPoint;
 class KPathPointData;
 class KoViewConverter;
@@ -55,7 +55,7 @@ class FLAKE_TEST_EXPORT KoPathToolSelection : public KoToolSelection
     Q_OBJECT
 
 public:
-    explicit KoPathToolSelection(KoPathTool *tool);
+    explicit KoPathToolSelection(KPathTool *tool);
 
     ~KoPathToolSelection();
 
@@ -165,7 +165,7 @@ private:
 
     QSet<KPathPoint *> m_selectedPoints;
     PathShapePointMap m_shapePointMap;
-    KoPathTool *m_tool;
+    KPathTool *m_tool;
     QList<KPathShape*> m_selectedShapes;
 };
 

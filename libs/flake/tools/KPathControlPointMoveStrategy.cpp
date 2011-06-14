@@ -22,10 +22,10 @@
 #include "KCanvasBase.h"
 #include "KoSnapGuide.h"
 
-#include "KoPathTool_p.h"
+#include "KPathTool_p.h"
 #include "commands/KPathControlPointMoveCommand.h"
 
-KPathControlPointMoveStrategy::KPathControlPointMoveStrategy(KoPathTool *tool, const KPathPointData &pointData, KPathPoint::PointType type, const QPointF &pos)
+KPathControlPointMoveStrategy::KPathControlPointMoveStrategy(KPathTool *tool, const KPathPointData &pointData, KPathPoint::PointType type, const QPointF &pos)
         : KInteractionStrategy(tool)
         , m_lastPosition(pos)
         , m_move(0, 0)

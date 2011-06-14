@@ -18,7 +18,7 @@
  */
 
 #include "KoPathToolFactory_p.h"
-#include "KoPathTool_p.h"
+#include "KPathTool_p.h"
 #include "KPathShape.h"
 
 #include <klocale.h>
@@ -39,7 +39,7 @@ KoPathToolFactory::~KoPathToolFactory()
 
 KoToolBase * KoPathToolFactory::createTool(KCanvasBase *canvas)
 {
-    return new KoPathTool(canvas);
+    return new KPathTool(canvas);
 }
 
 #include <KoPathToolFactory_p.moc>
