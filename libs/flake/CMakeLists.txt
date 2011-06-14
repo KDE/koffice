@@ -131,7 +131,7 @@ set(flake_SRCS
     commands/KPathSegmentTypeCommand.cpp
     commands/KPathCombineCommand.cpp
     commands/KPathSeparateCommand.cpp
-    commands/KoSubpathRemoveCommand.cpp
+    commands/KSubpathRemoveCommand.cpp
     commands/KSubpathJoinCommand.cpp
     commands/KParameterHandleMoveCommand.cpp
     commands/KParameterToPathCommand.cpp
@@ -228,7 +228,7 @@ install(
     commands/KShapeTransformCommand.h
     commands/KShapeTransparencyCommand.h
     commands/KShapeUngroupCommand.h
-    commands/KoSubpathRemoveCommand.h
+    commands/KSubpathRemoveCommand.h
     flake_export.h
     KCanvasBase.h
     KCanvasController.h

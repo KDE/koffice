@@ -28,7 +28,7 @@
 #include "KPathPoint.h"
 
 /// The undo / redo command for removing a subpath
-class FLAKE_TEST_EXPORT KoSubpathRemoveCommand : public QUndoCommand
+class FLAKE_TEST_EXPORT KSubpathRemoveCommand : public QUndoCommand
 {
 public:
     /**
@@ -37,8 +37,8 @@ public:
      * @param subpathIndex the index. See KPathShape::removeSubpath()
      * @param parent the parent command if the resulting command is a compound undo command.
      */
-    KoSubpathRemoveCommand(KPathShape *pathShape, int subpathIndex, QUndoCommand *parent = 0);
-    ~KoSubpathRemoveCommand();
+    KSubpathRemoveCommand(KPathShape *pathShape, int subpathIndex, QUndoCommand *parent = 0);
+    ~KSubpathRemoveCommand();
 
     /// redo the command
     void redo();

@@ -18,10 +18,10 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoSubpathRemoveCommand.h"
+#include "KSubpathRemoveCommand.h"
 #include <klocale.h>
 
-KoSubpathRemoveCommand::KoSubpathRemoveCommand(KPathShape *pathShape, int subpathIndex, QUndoCommand *parent)
+KSubpathRemoveCommand::KSubpathRemoveCommand(KPathShape *pathShape, int subpathIndex, QUndoCommand *parent)
         : QUndoCommand(parent)
         , m_pathShape(pathShape)
         , m_subpathIndex(subpathIndex)
@@ -30,7 +30,7 @@ KoSubpathRemoveCommand::KoSubpathRemoveCommand(KPathShape *pathShape, int subpat
     setText(i18n("Remove Subpath"));
 }
 
-KoSubpathRemoveCommand::~KoSubpathRemoveCommand()
+KSubpathRemoveCommand::~KSubpathRemoveCommand()
 {
     if (m_subpath) {
         qDeleteAll(*m_subpath);
@@ -38,7 +38,7 @@ KoSubpathRemoveCommand::~KoSubpathRemoveCommand()
     }
 }
 
-void KoSubpathRemoveCommand::redo()
+void KSubpathRemoveCommand::redo()
 {
     QUndoCommand::redo();
     m_pathShape->update();
@@ -55,7 +55,7 @@ void KoSubpathRemoveCommand::redo()
     }
 }
 
-void KoSubpathRemoveCommand::undo()
+void KSubpathRemoveCommand::undo()
 {
     QUndoCommand::undo();
     if (m_subpath) {

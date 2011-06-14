@@ -19,7 +19,7 @@
  */
 
 #include "KPathPointRemoveCommand.h"
-#include "KoSubpathRemoveCommand.h"
+#include "KSubpathRemoveCommand.h"
 #include "KShapeControllerBase.h"
 #include "KShapeController.h"
 #include <klocale.h>
@@ -107,7 +107,7 @@ QUndoCommand *KPathPointRemoveCommand::createCommand(
         new KPathPointRemoveCommand(pointsToDelete, cmd);
     }
     foreach(const KPathPointData & pd, subpathToDelete) {
-        new KoSubpathRemoveCommand(pd.pathShape, pd.pointIndex.first, cmd);
+        new KSubpathRemoveCommand(pd.pathShape, pd.pointIndex.first, cmd);
     }
     if (shapesToDelete.size() > 0) {
         shapeController->removeShapes(shapesToDelete, cmd);
