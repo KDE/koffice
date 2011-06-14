@@ -22,10 +22,10 @@
 #include "KParameterShape.h"
 #include <klocale.h>
 
-class KoParameterToPathCommandPrivate
+class KParameterToPathCommandPrivate
 {
 public:
-    ~KoParameterToPathCommandPrivate() {
+    ~KParameterToPathCommandPrivate() {
         qDeleteAll(copies);
     }
     void initialize();
@@ -36,7 +36,7 @@ public:
 
 KParameterToPathCommand::KParameterToPathCommand(KParameterShape *shape, QUndoCommand *parent)
     : QUndoCommand(parent),
-    d(new KoParameterToPathCommandPrivate())
+    d(new KParameterToPathCommandPrivate())
 {
     d->shapes.append(shape);
     d->initialize();
@@ -45,7 +45,7 @@ KParameterToPathCommand::KParameterToPathCommand(KParameterShape *shape, QUndoCo
 
 KParameterToPathCommand::KParameterToPathCommand(const QList<KParameterShape*> &shapes, QUndoCommand *parent)
     : QUndoCommand(parent),
-    d(new KoParameterToPathCommandPrivate())
+    d(new KParameterToPathCommandPrivate())
 {
     d->shapes = shapes;
     d->initialize();
@@ -80,7 +80,7 @@ void KParameterToPathCommand::undo()
     }
 }
 
-void KoParameterToPathCommandPrivate::initialize()
+void KParameterToPathCommandPrivate::initialize()
 {
     foreach(KParameterShape *shape, shapes) {
         KoPathShape *p = new KoPathShape();
@@ -89,7 +89,7 @@ void KoParameterToPathCommandPrivate::initialize()
     }
 }
 
-void KoParameterToPathCommandPrivate::copyPath(KoPathShape *destination, KoPathShape *source)
+void KParameterToPathCommandPrivate::copyPath(KoPathShape *destination, KoPathShape *source)
 {
     destination->clear();
 
