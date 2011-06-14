@@ -30,7 +30,7 @@
 
 class KCanvasBase;
 class KProperties;
-class KoCreateShapesToolPrivate;
+class KCreateShapesToolPrivate;
 
 #define KoCreateShapesTool_ID "CreateShapesTool"
 

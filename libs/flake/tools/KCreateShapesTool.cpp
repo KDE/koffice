@@ -28,10 +28,10 @@
 #include <QMouseEvent>
 #include <QPainter>
 
-class KoCreateShapesToolPrivate : public KInteractionToolPrivate
+class KCreateShapesToolPrivate : public KInteractionToolPrivate
 {
 public:
-    KoCreateShapesToolPrivate(KoToolBase *qq, KCanvasBase *canvas)
+    KCreateShapesToolPrivate(KoToolBase *qq, KCanvasBase *canvas)
         : KInteractionToolPrivate(qq, canvas),
         newShapeProperties(0)
     {
@@ -42,7 +42,7 @@ public:
 };
 
 KCreateShapesTool::KCreateShapesTool(KCanvasBase *canvas)
-    : KInteractionTool(*(new KoCreateShapesToolPrivate(this, canvas)))
+    : KInteractionTool(*(new KCreateShapesToolPrivate(this, canvas)))
 {
 }
 
