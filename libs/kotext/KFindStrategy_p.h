@@ -37,11 +37,11 @@ class QWidget;
 /**
  * Stratagy used for implementing find
  */
-class KoFindStrategy : public KoFindStrategyBase
+class KFindStrategy : public KoFindStrategyBase
 {
 public:
-    KoFindStrategy(QWidget *parent);
-    virtual ~KoFindStrategy();
+    KFindStrategy(QWidget *parent);
+    virtual ~KFindStrategy();
 
     /// reimplemented
     KFindDialog *dialog();

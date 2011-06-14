@@ -41,7 +41,7 @@ set(kotext_LIB_SRCS
     KoBookmarkManager.cpp
     KoInlineNote.cpp
     FindDirection_p.cpp
-    KoFindStrategy.cpp
+    KFindStrategy.cpp
     KoReplaceStrategy.cpp
     KoFind_p.cpp
     KoFind.cpp

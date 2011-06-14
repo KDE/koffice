@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoFindStrategy_p.h"
+#include "KFindStrategy_p.h"
 
 #include <KFind>
 #include <KFindDialog>
@@ -35,36 +35,36 @@ public:
     virtual void accept() {}
 };
 
-KoFindStrategy::KoFindStrategy(QWidget *parent)
+KFindStrategy::KFindStrategy(QWidget *parent)
         : m_dialog(new NonClosingFindDialog(parent))
         , m_matches(0)
 {
     m_dialog->setOptions(KFind::FromCursor);
 }
 
-KoFindStrategy::~KoFindStrategy()
+KFindStrategy::~KFindStrategy()
 {
     if (m_dialog->parent() == 0)
         delete m_dialog;
 }
 
-KFindDialog *KoFindStrategy::dialog()
+KFindDialog *KFindStrategy::dialog()
 {
     return m_dialog;
 }
 
-void KoFindStrategy::reset()
+void KFindStrategy::reset()
 {
     m_matches = 0;
 }
 
-void KoFindStrategy::displayFinalDialog()
+void KFindStrategy::displayFinalDialog()
 {
     KMessageBox::information(m_dialog, m_matches ? i18np("Found 1 match", "Found %1 matches", m_matches) : i18n("Found no match"));
     reset();
 }
 
-bool KoFindStrategy::foundMatch(QTextCursor &cursor, FindDirection *findDirection)
+bool KFindStrategy::foundMatch(QTextCursor &cursor, FindDirection *findDirection)
 {
     ++m_matches;
     findDirection->select(cursor);
