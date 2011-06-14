@@ -71,7 +71,7 @@ void KPathPointTypeCommand::redo()
             KoPathPointIndex pointIndex = it->m_pointData.pointIndex;
             KoPathPointIndex prevIndex;
             KoPathPointIndex nextIndex;
-            KoPathShape * path = it->m_pointData.pathShape;
+            KPathShape * path = it->m_pointData.pathShape;
             // get previous path node
             if (pointIndex.second > 0)
                 prevIndex = KoPathPointIndex(pointIndex.first, pointIndex.second - 1);
@@ -163,7 +163,7 @@ void KPathPointTypeCommand::undo()
     QList<PointData>::iterator it(m_oldPointData.begin());
     for (; it != m_oldPointData.end(); ++it)
     {
-        KoPathShape *pathShape = it->m_pointData.pathShape;
+        KPathShape *pathShape = it->m_pointData.pathShape;
         KPathPoint *point = pathShape->pointByIndex(it->m_pointData.pointIndex);
 
         point->setProperties(it->m_oldProperties);
@@ -187,7 +187,7 @@ void KPathPointTypeCommand::undoChanges(const QList<PointData> &data)
 {
     QList<PointData>::const_iterator it(data.begin());
     for (; it != data.end(); ++it) {
-        KoPathShape *pathShape = it->m_pointData.pathShape;
+        KPathShape *pathShape = it->m_pointData.pathShape;
         KPathPoint *point = pathShape->pointByIndex(it->m_pointData.pointIndex);
 
         point->setProperties(it->m_oldProperties);

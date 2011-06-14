@@ -23,7 +23,7 @@
 
 #include <QUndoCommand>
 #include <QList>
-#include "KoPathShape.h"
+#include "KPathShape.h"
 #include "flake_export.h"
 
 class KoShapeControllerBase;
@@ -38,7 +38,7 @@ public:
      * @param paths the list of paths to combine
      * @param parent the parent command used for macro commands
      */
-    KPathCombineCommand(KoShapeControllerBase *controller, const QList<KoPathShape*> &paths, QUndoCommand *parent = 0);
+    KPathCombineCommand(KoShapeControllerBase *controller, const QList<KPathShape*> &paths, QUndoCommand *parent = 0);
     virtual ~KPathCombineCommand();
     /// redo the command
     void redo();

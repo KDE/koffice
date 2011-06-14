@@ -19,12 +19,12 @@
 #include "TestRemoveSubpathCommand.h"
 
 #include <QPainterPath>
-#include "KoPathShape.h"
+#include "KPathShape.h"
 #include "KoSubpathRemoveCommand.h"
 
 void TestRemoveSubpathCommand::redoUndo()
 {
-    KoPathShape path;
+    KPathShape path;
     path.moveTo(QPointF(0, 0));
     path.lineTo(QPointF(0, 100));
     path.curveTo(QPointF(0, 50), QPointF(100, 50), QPointF(100, 100));

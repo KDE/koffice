@@ -29,7 +29,7 @@
 #include <KoShape.h>
 #include <KoShapeContainer.h>
 #include <KoShapeLayer.h>
-#include <KoPathShape.h>
+#include <KPathShape.h>
 #include <KoResourceManager.h>
 #include <KoPathShapeLoader.h>
 #include <KoShapeGroup.h>
@@ -610,7 +610,7 @@ void KarbonImport::loadCommon(KoShape * shape, const KXmlElement &element)
 
 KoShape * KarbonImport::loadPath(const KXmlElement &element)
 {
-    KoPathShape * path = new KoPathShape();
+    KPathShape * path = new KPathShape();
 
     QString data = element.attribute("d");
     if (data.length() > 0) {
@@ -625,7 +625,7 @@ KoShape * KarbonImport::loadPath(const KXmlElement &element)
     forEachElement(child, element) {
         // backward compatibility for karbon before koffice 1.3.x
         if (child.tagName() == "PATH") {
-            KoPathShape * subpath = new KoPathShape();
+            KPathShape * subpath = new KPathShape();
 
             KXmlElement segment;
             forEachElement(segment, child) {
@@ -709,7 +709,7 @@ KoShape * KarbonImport::loadRect(const KXmlElement &element)
 
 KoShape * KarbonImport::loadPolyline(const KXmlElement &element)
 {
-    KoPathShape * polyline = new KoPathShape();
+    KPathShape * polyline = new KPathShape();
 
     QString points = element.attribute("points").simplified();
 
@@ -740,7 +740,7 @@ KoShape * KarbonImport::loadPolyline(const KXmlElement &element)
 
 KoShape * KarbonImport::loadPolygon(const KXmlElement &element)
 {
-    KoPathShape * polygon = new KoPathShape();
+    KPathShape * polygon = new KPathShape();
 
     QString points = element.attribute("points").simplified();
 
@@ -776,7 +776,7 @@ KoShape * KarbonImport::loadPolygon(const KXmlElement &element)
 
 KoShape * KarbonImport::loadSinus(const KXmlElement &element)
 {
-    KoPathShape * sinus = new KoPathShape();
+    KPathShape * sinus = new KPathShape();
 
     uint periods = element.attribute("periods").toUInt();
 
@@ -871,7 +871,7 @@ KoShape * KarbonImport::loadSpiral(const KXmlElement &element)
 {
     enum SpiralType { round, rectangular };
 
-    KoPathShape * spiral = new KoPathShape();
+    KPathShape * spiral = new KPathShape();
 
     double radius  = qAbs(KUnit::parseValue(element.attribute("radius")));
     double angle = element.attribute("angle").toDouble();
@@ -965,7 +965,7 @@ KoShape * KarbonImport::loadStar(const KXmlElement &element)
 
     int type = element.attribute("type").toInt();
 
-    KoPathShape * starShape = 0;
+    KPathShape * starShape = 0;
 
     if (type == star_outline || type == polygon) {
         StarShape * paramStar = new StarShape();
@@ -986,7 +986,7 @@ KoShape * KarbonImport::loadStar(const KXmlElement &element)
         starShape = paramStar;
     } else {
 
-        KoPathShape * pathStar = new KoPathShape();
+        KPathShape * pathStar = new KPathShape();
 
         // We start at angle + KarbonGlobal::pi_2:
         QPointF p2, p3;
@@ -1210,7 +1210,7 @@ KoShape * KarbonImport::loadText(const KXmlElement &element)
     if (e.tagName() == "PATH") {
         // as long as there is no text on path support, just try to get a transformation
         // if the path is only a single line
-        KoPathShape * path = dynamic_cast<KoPathShape*>(loadPath(e));
+        KPathShape * path = dynamic_cast<KPathShape*>(loadPath(e));
         if (path) {
             QTransform matrix = path->absoluteTransformation(0);
             QPainterPath outline = matrix.map(path->outline());
@@ -1273,7 +1273,7 @@ KoShape * KarbonImport::createShape(const QString &shapeID) const
     if (shape && shape->shapeId().isEmpty())
         shape->setShapeId(factory->id());
 
-    KoPathShape * path = dynamic_cast<KoPathShape*>(shape);
+    KPathShape * path = dynamic_cast<KPathShape*>(shape);
     if (path && shapeID == KoPathShapeId)
         path->clear();
     // reset tranformation that might come from the default shape

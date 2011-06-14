@@ -22,7 +22,7 @@
 
 void TestSegmentTypeCommand::changeToCurve()
 {
-    KoPathShape path;
+    KPathShape path;
     path.moveTo( QPointF(0,0) );
     path.lineTo( QPointF(100,0) );
 
@@ -51,7 +51,7 @@ void TestSegmentTypeCommand::changeToCurve()
 
 void TestSegmentTypeCommand::changeToLine()
 {
-    KoPathShape path;
+    KPathShape path;
     path.moveTo( QPointF(0,0) );
     path.curveTo( QPointF(25,25), QPointF(75,25), QPointF(100,0) );
 

@@ -29,9 +29,9 @@
 #include "KoShape.h"
 #include "KPathSegment.h"
 
-#define KoPathShapeId "KoPathShape"
+#define KoPathShapeId "KPathShape"
 
-class KoPathShape;
+class KPathShape;
 class KPathPoint;
 class KoPathShapePrivate;
 
@@ -47,7 +47,7 @@ typedef QList<KoSubpath *> KoSubpathList;
  * All graphical objects are based on this object e.g. lines, rectangulars, pies
  * and so on.
  *
- * The KoPathShape uses KPathPoint's to describe the path of the shape.
+ * The KPathShape uses KPathPoint's to describe the path of the shape.
  *
  * Here a short example:
  * 3 points connected by a curveTo's described by the following svg:
@@ -69,18 +69,18 @@ typedef QList<KoSubpath *> KoSubpathList;
  * generated. See the outline method. The reason for storing it like that is that
  * it is the points that are modified by the user and not the segments.
  */
-class FLAKE_EXPORT KoPathShape : public KoShape
+class FLAKE_EXPORT KPathShape : public KoShape
 {
 public:
     /**
      * @brief constructor
      */
-    KoPathShape();
+    KPathShape();
 
     /**
      * @brief
      */
-    virtual ~KoPathShape();
+    virtual ~KPathShape();
 
     virtual void paint(QPainter &painter, const KoViewConverter &converter);
     virtual void paintPoints(QPainter &painter, const KoViewConverter &converter, int handleRadius);
@@ -390,14 +390,14 @@ public:
      * @param path the path to combine with
      * @return true if combining was successful, else false
      */
-    bool combine(const KoPathShape *path);
+    bool combine(const KPathShape *path);
 
     /**
      * @brief Creates separate path shapes, one for each existing subpath.
      * @param separatedPaths the list which contains the separated path shapes
      * @return true if separating the path was successful, false otherwise
      */
-    bool separate(QList<KoPathShape*> &separatedPaths);
+    bool separate(QList<KPathShape*> &separatedPaths);
 
     /**
      * Returns the specific path shape id.
@@ -424,11 +424,11 @@ public:
     void setFillRule(Qt::FillRule fillRule);
 
     /// Creates path shape from given QPainterPath
-    static KoPathShape *createShapeFromPainterPath(const QPainterPath &path);
+    static KPathShape *createShapeFromPainterPath(const QPainterPath &path);
 
 protected:
     /// constructor \internal
-    KoPathShape(KoPathShapePrivate &);
+    KPathShape(KoPathShapePrivate &);
 
     /// reimplemented
     virtual QString saveStyle(KOdfGenericStyle &style, KoShapeSavingContext &context) const;
@@ -465,7 +465,7 @@ protected:
     KoSubpathList m_subpaths;
 
 private:
-    Q_DECLARE_PRIVATE(KoPathShape)
+    Q_DECLARE_PRIVATE(KPathShape)
 };
 
 #endif /* KOPATHSHAPE_H */

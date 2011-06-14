@@ -18,7 +18,7 @@
  */
 
 #include "KarbonPathRefineCommand.h"
-#include <KoPathShape.h>
+#include <KPathShape.h>
 #include <KPathPointData.h>
 #include <KPathPointInsertCommand.h>
 #include <klocale.h>
@@ -26,16 +26,16 @@
 
 class KarbonPathRefineCommand::Private {
 public:
-    Private(KoPathShape * p, uint insertPointsCount)
+    Private(KPathShape * p, uint insertPointsCount)
             : path(p), insertCount(insertPointsCount), initialized(false) {}
     ~Private() {}
 
-    KoPathShape * path; ///< the path to refine
+    KPathShape * path; ///< the path to refine
     uint insertCount;   ///< the number of points to insert into segments
     bool initialized;   ///< tells whether the subcommands are already created
 };
 
-KarbonPathRefineCommand::KarbonPathRefineCommand(KoPathShape * path, uint insertPointsCount, QUndoCommand *parent)
+KarbonPathRefineCommand::KarbonPathRefineCommand(KPathShape * path, uint insertPointsCount, QUndoCommand *parent)
         : QUndoCommand(parent), d(new Private(path, insertPointsCount))
 {
     setText(i18n("Refine path"));

@@ -34,7 +34,7 @@
 #include <KCanvasBase.h>
 #include <KoShapeManager.h>
 #include <KoSelection.h>
-#include <KoPathShape.h>
+#include <KPathShape.h>
 #include <KParameterShape.h>
 
 #include <kpluginfactory.h>
@@ -71,7 +71,7 @@ void FlattenPathPlugin::slotFlattenPath()
         return;
 
     // check if we have a path based shape
-    KoPathShape * path = dynamic_cast<KoPathShape*>(shape);
+    KPathShape * path = dynamic_cast<KPathShape*>(shape);
     if (! path)
         return;
 

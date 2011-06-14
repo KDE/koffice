@@ -19,7 +19,7 @@
 
 #include "KarbonWhirlPinchCommand.h"
 
-#include <KoPathShape.h>
+#include <KPathShape.h>
 #include <KPathPoint.h>
 
 #include <klocale.h>
@@ -30,7 +30,7 @@ struct PointData
 {
     PointData(KPathPoint * p)
     {
-        KoPathShape * shape = p->parent();
+        KPathShape * shape = p->parent();
         // save points in document coordinates
         oldNode = shape->shapeToDocument(p->point());
         oldControlPoint1 = shape->shapeToDocument(p->controlPoint1());
@@ -39,7 +39,7 @@ struct PointData
 
     void restorePoint(KPathPoint * p)
     {
-        KoPathShape * shape = p->parent();
+        KPathShape * shape = p->parent();
         p->setPoint(shape->documentToShape(oldNode));
         if (p->activeControlPoint1())
             p->setControlPoint1(shape->documentToShape(oldControlPoint1));
@@ -55,7 +55,7 @@ struct PointData
 class KarbonWhirlPinchCommand::Private
 {
 public:
-    Private(KoPathShape * path, qreal angle, qreal pinch, qreal radius)
+    Private(KPathShape * path, qreal angle, qreal pinch, qreal radius)
             : pathShape(path), whirlAngle(angle), pinchAmount(pinch), effectRadius(radius)
     {
         effectCenter = pathShape->boundingRect().center();
@@ -94,7 +94,7 @@ public:
         return point;
     }
 
-    KoPathShape * pathShape;
+    KPathShape * pathShape;
     qreal whirlAngle;
     qreal pinchAmount;
     qreal effectRadius;
@@ -102,7 +102,7 @@ public:
     QList< QList<PointData> > pathData;
 };
 
-KarbonWhirlPinchCommand::KarbonWhirlPinchCommand(KoPathShape * path, qreal angle, qreal pinch, qreal radius, QUndoCommand *parent)
+KarbonWhirlPinchCommand::KarbonWhirlPinchCommand(KPathShape * path, qreal angle, qreal pinch, qreal radius, QUndoCommand *parent)
         : QUndoCommand(parent), d(new Private(path, angle, pinch, radius))
 {
     setText(i18n("Whirl & pinch"));

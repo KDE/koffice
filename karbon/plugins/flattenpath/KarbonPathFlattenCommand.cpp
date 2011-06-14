@@ -18,7 +18,7 @@
  */
 
 #include "KarbonPathFlattenCommand.h"
-#include <KoPathShape.h>
+#include <KPathShape.h>
 #include <KPathPoint.h>
 #include <KPathPointData.h>
 #include <klocale.h>
@@ -72,7 +72,7 @@ struct PointData
 class KarbonPathFlattenCommand::Private
 {
 public:
-    Private(KoPathShape * p, qreal f)
+    Private(KPathShape * p, qreal f)
             : path(p), flatness(f), flattened(false)
     {}
 
@@ -131,13 +131,13 @@ public:
         return insertCount;
     }
 
-    KoPathShape * path;
+    KPathShape * path;
     qreal flatness;
     qreal flattened;
     QList< QList<PointData> > oldPointData;
 };
 
-KarbonPathFlattenCommand::KarbonPathFlattenCommand(KoPathShape * path, qreal flatness, QUndoCommand * parent)
+KarbonPathFlattenCommand::KarbonPathFlattenCommand(KPathShape * path, qreal flatness, QUndoCommand * parent)
         : QUndoCommand(parent), d(new Private(path, flatness))
 {
     // save original point data

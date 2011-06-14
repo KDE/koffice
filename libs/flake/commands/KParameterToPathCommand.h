@@ -23,7 +23,7 @@
 
 #include <QUndoCommand>
 #include <QList>
-#include "KoPathShape.h"
+#include "KPathShape.h"
 #include "KPathPoint.h"
 
 #include "flake_export.h"
@@ -31,7 +31,7 @@
 class KParameterShape;
 class KParameterToPathCommandPrivate;
 
-/// The undo / redo command for changing a KParameterShape into a KoPathShape
+/// The undo / redo command for changing a KParameterShape into a KPathShape
 class FLAKE_EXPORT KParameterToPathCommand : public QUndoCommand
 {
 public:

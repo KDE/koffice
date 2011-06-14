@@ -19,12 +19,12 @@
 #include "TestControlPointMoveCommand.h"
 
 #include <QPainterPath>
-#include "KoPathShape.h"
+#include "KPathShape.h"
 #include "KPathControlPointMoveCommand.h"
 
 void TestControlPointMoveCommand::redoUndoControlPoint1()
 {
-    KoPathShape path;
+    KPathShape path;
     path.moveTo(QPointF(0, 0));
     path.lineTo(QPointF(0, 100));
     KPathPoint *point1 = path.curveTo(QPointF(0, 50), QPointF(100, 50), QPointF(100, 100));
@@ -72,7 +72,7 @@ void TestControlPointMoveCommand::redoUndoControlPoint1()
 
 void TestControlPointMoveCommand::redoUndoControlPoint1Smooth()
 {
-    KoPathShape path;
+    KPathShape path;
     path.moveTo(QPointF(0, 0));
     path.lineTo(QPointF(0, 100));
     KPathPoint *point1 = path.curveTo(QPointF(0, 50), QPointF(100, 50), QPointF(100, 100));
@@ -106,7 +106,7 @@ void TestControlPointMoveCommand::redoUndoControlPoint1Smooth()
 
 void TestControlPointMoveCommand::redoUndoControlPoint1Symmetric()
 {
-    KoPathShape path;
+    KPathShape path;
     path.moveTo(QPointF(0, 0));
     path.lineTo(QPointF(0, 100));
     KPathPoint *point1 = path.curveTo(QPointF(0, 50), QPointF(100, 50), QPointF(100, 100));
@@ -140,7 +140,7 @@ void TestControlPointMoveCommand::redoUndoControlPoint1Symmetric()
 
 void TestControlPointMoveCommand::redoUndoControlPoint2()
 {
-    KoPathShape path;
+    KPathShape path;
     path.moveTo(QPointF(0, 0));
     path.lineTo(QPointF(0, 100));
     KPathPoint *point1 = path.curveTo(QPointF(0, 50), QPointF(100, 50), QPointF(100, 100));
@@ -188,7 +188,7 @@ void TestControlPointMoveCommand::redoUndoControlPoint2()
 
 void TestControlPointMoveCommand::redoUndoControlPoint2Smooth()
 {
-    KoPathShape path;
+    KPathShape path;
     path.moveTo(QPointF(0, 0));
     path.lineTo(QPointF(0, 100));
     KPathPoint *point1 = path.curveTo(QPointF(0, 50), QPointF(100, 50), QPointF(100, 100));
@@ -222,7 +222,7 @@ void TestControlPointMoveCommand::redoUndoControlPoint2Smooth()
 
 void TestControlPointMoveCommand::redoUndoControlPoint2Symmetric()
 {
-    KoPathShape path;
+    KPathShape path;
     path.moveTo(QPointF(0, 0));
     path.lineTo(QPointF(0, 100));
     KPathPoint *point1 = path.curveTo(QPointF(0, 50), QPointF(100, 50), QPointF(100, 100));

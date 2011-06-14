@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 #include "KoPathShapeFactory_p.h"
-#include "KoPathShape.h"
+#include "KPathShape.h"
 #include "KLineBorder.h"
 #include "KImageCollection.h"
 #include "KoResourceManager.h"
@@ -41,7 +41,7 @@ KoPathShapeFactory::KoPathShapeFactory(QObject *parent, const QStringList&)
 
 KoShape *KoPathShapeFactory::createDefaultShape(KoResourceManager *) const
 {
-    KoPathShape* path = new KoPathShape();
+    KPathShape* path = new KPathShape();
     path->moveTo(QPointF(0, 50));
     path->curveTo(QPointF(0, 120), QPointF(50, 120), QPointF(50, 50));
     path->curveTo(QPointF(50, -20), QPointF(100, -20), QPointF(100, 50));

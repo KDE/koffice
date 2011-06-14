@@ -19,13 +19,13 @@
 #include "TestPathShape.h"
 
 #include <QPainterPath>
-#include "KoPathShape.h"
+#include "KPathShape.h"
 #include "KPathPoint.h"
 #include "KPathPointData.h"
 
 void TestPathShape::close()
 {
-    KoPathShape path;
+    KPathShape path;
     path.lineTo(QPointF(10, 0));
     path.lineTo(QPointF(10, 10));
 
@@ -48,7 +48,7 @@ void TestPathShape::close()
 
 void TestPathShape::moveTo()
 {
-    KoPathShape path;
+    KPathShape path;
     path.moveTo(QPointF(10, 10));
     QPainterPath ppath(QPointF(10, 10));
     path.lineTo(QPointF(20, 20));
@@ -63,7 +63,7 @@ void TestPathShape::moveTo()
 
 void TestPathShape::normalize()
 {
-    KoPathShape path;
+    KPathShape path;
     path.moveTo(QPointF(10, 10));
     path.lineTo(QPointF(20, 20));
     path.normalize();
@@ -74,7 +74,7 @@ void TestPathShape::normalize()
 
 void TestPathShape::pathPointIndex()
 {
-    KoPathShape path;
+    KPathShape path;
     KPathPoint * point1 = path.moveTo(QPointF(10, 10));
     KoPathPointIndex p1Index(0, 0);
     KPathPoint * point2 = path.lineTo(QPointF(20, 20));
@@ -101,7 +101,7 @@ void TestPathShape::pathPointIndex()
 
 void TestPathShape::pointByIndex()
 {
-    KoPathShape path;
+    KPathShape path;
     KPathPoint * point1 = path.moveTo(QPointF(10, 10));
     KPathPoint * point2 = path.lineTo(QPointF(20, 20));
     KPathPoint * point3 = path.moveTo(QPointF(30, 30));
@@ -117,7 +117,7 @@ void TestPathShape::pointByIndex()
 
 void TestPathShape::segmentByIndex()
 {
-    KoPathShape path;
+    KPathShape path;
     KPathPoint * point1 = path.moveTo(QPointF(20, 20));
     KPathPoint * point2 = path.lineTo(QPointF(15, 25));
     path.lineTo(QPointF(10, 20));
@@ -146,7 +146,7 @@ void TestPathShape::segmentByIndex()
 
 void TestPathShape::pointCount()
 {
-    KoPathShape path;
+    KPathShape path;
     path.moveTo(QPointF(20, 20));
     path.lineTo(QPointF(15, 25));
     path.lineTo(QPointF(10, 20));
@@ -174,7 +174,7 @@ void TestPathShape::pointCount()
 
 void TestPathShape::subpathPointCount()
 {
-    KoPathShape path;
+    KPathShape path;
     path.moveTo(QPointF(20, 20));
     path.lineTo(QPointF(15, 25));
     path.lineTo(QPointF(10, 20));
@@ -200,7 +200,7 @@ void TestPathShape::subpathPointCount()
 
 void TestPathShape::isClosedSubpath()
 {
-    KoPathShape path;
+    KPathShape path;
     path.moveTo(QPointF(20, 20));
     path.lineTo(QPointF(15, 25));
     path.lineTo(QPointF(10, 20));
@@ -226,7 +226,7 @@ void TestPathShape::isClosedSubpath()
 
 void TestPathShape::insertPoint()
 {
-    KoPathShape path;
+    KPathShape path;
     path.moveTo(QPointF(10, 10));
     path.lineTo(QPointF(20, 20));
     path.moveTo(QPointF(30, 30));
@@ -290,7 +290,7 @@ void TestPathShape::insertPoint()
 
     QVERIFY(ppath == path.outline());
 
-    KoPathShape path2;
+    KPathShape path2;
     path2.moveTo(QPointF(0, 0));
     KPathPoint * p = new KPathPoint(0, QPointF(100, 100));
     QVERIFY(path2.insertPoint(p, KoPathPointIndex(0, 1)) == true);
@@ -299,7 +299,7 @@ void TestPathShape::insertPoint()
 
 void TestPathShape::removePoint()
 {
-    KoPathShape path;
+    KPathShape path;
     KPathPoint *point1 = path.moveTo(QPointF(10, 10));
     path.lineTo(QPointF(20, 10));
     KPathPoint *point3 = path.lineTo(QPointF(20, 20));
@@ -337,7 +337,7 @@ void TestPathShape::removePoint()
 
 void TestPathShape::splitAfter()
 {
-    KoPathShape path;
+    KPathShape path;
     path.moveTo(QPointF(10, 10));
     path.lineTo(QPointF(20, 10));
     path.lineTo(QPointF(20, 20));
@@ -371,7 +371,7 @@ void TestPathShape::splitAfter()
 
 void TestPathShape::join()
 {
-    KoPathShape path;
+    KPathShape path;
     path.moveTo(QPointF(10, 10));
     path.lineTo(QPointF(20, 10));
     path.moveTo(QPointF(20, 20));
@@ -411,7 +411,7 @@ void TestPathShape::join()
 
 void TestPathShape::moveSubpath()
 {
-    KoPathShape path;
+    KPathShape path;
     path.moveTo(QPointF(10, 10));
     path.lineTo(QPointF(20, 10));
     path.moveTo(QPointF(20, 20));
@@ -446,7 +446,7 @@ void TestPathShape::moveSubpath()
 
 void TestPathShape::openSubpath()
 {
-    KoPathShape path;
+    KPathShape path;
     path.moveTo(QPointF(20, 20));
     KPathPoint *point1 = path.lineTo(QPointF(15, 25));
     path.lineTo(QPointF(10, 20));
@@ -508,7 +508,7 @@ void TestPathShape::openSubpath()
 
 void TestPathShape::closeSubpath()
 {
-    KoPathShape path;
+    KPathShape path;
     path.moveTo(QPointF(20, 20));
     KPathPoint *point1 = path.lineTo(QPointF(15, 25));
     path.lineTo(QPointF(10, 20));
@@ -555,7 +555,7 @@ void TestPathShape::closeSubpath()
 
 void TestPathShape::openCloseSubpath()
 {
-    KoPathShape path;
+    KPathShape path;
     path.moveTo(QPointF(20, 20));
     KPathPoint *point1 = path.lineTo(QPointF(15, 25));
     path.lineTo(QPointF(10, 20));
@@ -587,7 +587,7 @@ void TestPathShape::openCloseSubpath()
 
 void TestPathShape::reverseSubpath()
 {
-    KoPathShape path;
+    KPathShape path;
     path.moveTo(QPointF(10, 10));
     path.lineTo(QPointF(20, 10));
     path.moveTo(QPointF(20, 20));
@@ -628,7 +628,7 @@ void TestPathShape::removeSubpath()
 {
 #if 0
     // enable again when point groups work
-    KoPathShape path;
+    KPathShape path;
     path.moveTo(QPointF(10, 10));
     path.lineTo(QPointF(20, 10));
     path.lineTo(QPointF(20, 20));
@@ -654,7 +654,7 @@ void TestPathShape::removeSubpath()
     QVERIFY(ppath == path.outline());
 #endif
 
-    KoPathShape path;
+    KPathShape path;
     path.moveTo(QPointF(10, 10));
     path.lineTo(QPointF(20, 10));
     path.lineTo(QPointF(20, 20));
@@ -679,7 +679,7 @@ void TestPathShape::removeSubpath()
 
 void TestPathShape::addSubpath()
 {
-    KoPathShape path;
+    KPathShape path;
     path.moveTo(QPointF(10, 10));
     path.lineTo(QPointF(20, 10));
     path.lineTo(QPointF(20, 20));
@@ -718,15 +718,15 @@ void TestPathShape::addSubpath()
 void TestPathShape::koPathPointDataLess()
 {
     QList<KPathPointData> v;
-    v.push_back(KPathPointData((KoPathShape*)1, KoPathPointIndex(1, 1)));
-    v.push_back(KPathPointData((KoPathShape*)1, KoPathPointIndex(1, 2)));
-    v.push_back(KPathPointData((KoPathShape*)1, KoPathPointIndex(1, 3)));
-    v.push_back(KPathPointData((KoPathShape*)1, KoPathPointIndex(1, 6)));
-    v.push_back(KPathPointData((KoPathShape*)2, KoPathPointIndex(2, 1)));
-    v.push_back(KPathPointData((KoPathShape*)2, KoPathPointIndex(2, 3)));
-    v.push_back(KPathPointData((KoPathShape*)2, KoPathPointIndex(3, 3)));
-    v.push_back(KPathPointData((KoPathShape*)3, KoPathPointIndex(1, 1)));
-    v.push_back(KPathPointData((KoPathShape*)3, KoPathPointIndex(1, 2)));
+    v.push_back(KPathPointData((KPathShape*)1, KoPathPointIndex(1, 1)));
+    v.push_back(KPathPointData((KPathShape*)1, KoPathPointIndex(1, 2)));
+    v.push_back(KPathPointData((KPathShape*)1, KoPathPointIndex(1, 3)));
+    v.push_back(KPathPointData((KPathShape*)1, KoPathPointIndex(1, 6)));
+    v.push_back(KPathPointData((KPathShape*)2, KoPathPointIndex(2, 1)));
+    v.push_back(KPathPointData((KPathShape*)2, KoPathPointIndex(2, 3)));
+    v.push_back(KPathPointData((KPathShape*)2, KoPathPointIndex(3, 3)));
+    v.push_back(KPathPointData((KPathShape*)3, KoPathPointIndex(1, 1)));
+    v.push_back(KPathPointData((KPathShape*)3, KoPathPointIndex(1, 2)));
 
     QList<KPathPointData> l;
     l.push_back(v[8]);
@@ -751,7 +751,7 @@ void TestPathShape::koPathPointDataLess()
 
 void TestPathShape::closeMerge()
 {
-    KoPathShape path;
+    KPathShape path;
     KPathPoint *p1 = path.moveTo(QPointF(0, 0));
     KPathPoint *p2 = path.curveTo(QPointF(50, 0), QPointF(100, 50), QPointF(100, 100));
     KPathPoint *p3 = path.curveTo(QPointF(50, 100), QPointF(0, 50), QPointF(0, 0));

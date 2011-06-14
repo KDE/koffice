@@ -19,14 +19,14 @@
  */
 
 #include "KPathBaseCommand_p.h"
-#include "KoPathShape.h"
+#include "KPathShape.h"
 
 KPathBaseCommand::KPathBaseCommand(QUndoCommand *parent)
         : QUndoCommand(parent)
 {
 }
 
-KPathBaseCommand::KPathBaseCommand(KoPathShape *shape, QUndoCommand *parent)
+KPathBaseCommand::KPathBaseCommand(KPathShape *shape, QUndoCommand *parent)
         : QUndoCommand(parent)
 {
     m_shapes.insert(shape);
@@ -34,7 +34,7 @@ KPathBaseCommand::KPathBaseCommand(KoPathShape *shape, QUndoCommand *parent)
 
 void KPathBaseCommand::repaint(bool normalizeShapes)
 {
-    foreach(KoPathShape *shape, m_shapes) {
+    foreach(KPathShape *shape, m_shapes) {
         if (normalizeShapes)
             shape->normalize();
         shape->update();

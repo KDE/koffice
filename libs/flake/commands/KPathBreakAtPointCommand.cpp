@@ -39,7 +39,7 @@ KPathBreakAtPointCommand::KPathBreakAtPointCommand(const QList<KPathPointData> &
 
     QList<KPathPointData>::const_iterator it(sortedPointDataList.constBegin());
     for (; it != sortedPointDataList.constEnd(); ++it) {
-        KoPathShape * pathShape = it->pathShape;
+        KPathShape * pathShape = it->pathShape;
         KPathPoint * point = pathShape->pointByIndex(it->pointIndex);
         if (! point)
             continue;
@@ -88,7 +88,7 @@ void KPathBreakAtPointCommand::redo()
     int offset = 0;
     for (int i = m_pointDataList.size() - 1; i >= 0; --i) {
         const KPathPointData & pd = m_pointDataList.at(i);
-        KoPathShape * pathShape = pd.pathShape;
+        KPathShape * pathShape = pd.pathShape;
 
         KoPathPointIndex pointIndex = pd.pointIndex;
         if (last.pathShape != pathShape || last.pointIndex.first != pointIndex.first) {
@@ -125,11 +125,11 @@ void KPathBreakAtPointCommand::redo()
 void KPathBreakAtPointCommand::undo()
 {
     QUndoCommand::undo();
-    KoPathShape * lastPathShape = 0;
+    KPathShape * lastPathShape = 0;
 
     for (int i = 0; i < m_pointDataList.size(); ++i) {
         const KPathPointData & pd = m_pointDataList.at(i);
-        KoPathShape * pathShape = pd.pathShape;
+        KPathShape * pathShape = pd.pathShape;
         KoPathPointIndex pointIndex = pd.pointIndex;
         ++pointIndex.second;
         if (m_closedIndex.at(i).first != -1) {

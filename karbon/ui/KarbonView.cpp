@@ -84,7 +84,7 @@
 #include <KoSelection.h>
 #include <KoZoomAction.h>
 #include <KoZoomHandler.h>
-#include <KoPathShape.h>
+#include <KPathShape.h>
 #include <KPathPointData.h>
 #include <KPathCombineCommand.h>
 #include <KPathSeparateCommand.h>
@@ -608,10 +608,10 @@ void KarbonView::combinePath()
         return;
 
     QList<KoShape*> selectedShapes = selection->selectedShapes();
-    QList<KoPathShape*> paths;
+    QList<KPathShape*> paths;
 
     foreach(KoShape* shape, selectedShapes) {
-        KoPathShape *path = dynamic_cast<KoPathShape*>(shape);
+        KPathShape *path = dynamic_cast<KPathShape*>(shape);
         if (path) {
             KParameterShape * paramShape = dynamic_cast<KParameterShape*>(path);
             if (paramShape && paramShape->isParametricShape())
@@ -632,10 +632,10 @@ void KarbonView::separatePath()
         return;
 
     QList<KoShape*> selectedShapes = selection->selectedShapes();
-    QList<KoPathShape*> paths;
+    QList<KPathShape*> paths;
 
     foreach(KoShape* shape, selectedShapes) {
-        KoPathShape *path = dynamic_cast<KoPathShape*>(shape);
+        KPathShape *path = dynamic_cast<KPathShape*>(shape);
         if (path) {
             paths << path;
             selection->deselect(shape);
@@ -648,7 +648,7 @@ void KarbonView::separatePath()
 
 void KarbonView::reversePath()
 {
-    QList<KoPathShape*> paths = selectedPathShapes();
+    QList<KPathShape*> paths = selectedPathShapes();
     if (paths.size())
         d->canvas->addCommand(new KPathReverseCommand(paths));
 }
@@ -680,10 +680,10 @@ void KarbonView::booleanOperation(KarbonBooleanCommand::BooleanOperation operati
         return;
 
     QList<KoShape*> selectedShapes = selection->selectedShapes();
-    QList<KoPathShape*> paths;
+    QList<KPathShape*> paths;
 
     foreach(KoShape* shape, selectedShapes) {
-        KoPathShape *path = dynamic_cast<KoPathShape*>(shape);
+        KPathShape *path = dynamic_cast<KPathShape*>(shape);
         if (path) {
             paths << path;
             selection->deselect(shape);
@@ -729,7 +729,7 @@ void KarbonView::pathSnapToGrid()
         if (paramShape && paramShape->isParametricShape())
             continue;
 
-        KoPathShape *path = dynamic_cast<KoPathShape*>(shape);
+        KPathShape *path = dynamic_cast<KPathShape*>(shape);
         if (! path)
             continue;
 
@@ -1099,7 +1099,7 @@ void KarbonView::selectionChanged()
         uint selectedParametrics = 0;
         // check for different shape types for enabling specific actions
         foreach(KoShape* shape, selection->selectedShapes(KoFlake::FullSelection)) {
-            if (dynamic_cast<KoPathShape*>(shape)) {
+            if (dynamic_cast<KPathShape*>(shape)) {
                 KParameterShape * ps = dynamic_cast<KParameterShape*>(shape);
                 if (ps && ps->isParametricShape())
                     selectedParametrics++;
@@ -1169,17 +1169,17 @@ void KarbonView::updateUnit(const KUnit &unit)
     d->canvas->resourceManager()->setResource(KoCanvasResource::Unit, unit);
 }
 
-QList<KoPathShape*> KarbonView::selectedPathShapes()
+QList<KPathShape*> KarbonView::selectedPathShapes()
 {
     KoSelection* selection = d->canvas->shapeManager()->selection();
     if (! selection)
-        return QList<KoPathShape*>();
+        return QList<KPathShape*>();
 
     QList<KoShape*> selectedShapes = selection->selectedShapes();
-    QList<KoPathShape*> paths;
+    QList<KPathShape*> paths;
 
     foreach(KoShape* shape, selectedShapes) {
-        KoPathShape *path = dynamic_cast<KoPathShape*>(shape);
+        KPathShape *path = dynamic_cast<KPathShape*>(shape);
         if (path) {
             paths << path;
             selection->deselect(shape);

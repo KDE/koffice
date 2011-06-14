@@ -80,7 +80,7 @@ void EllipseShape::saveOdf(KoShapeSavingContext &context) const
             parent()->saveOdfChildElements(context);
         context.xmlWriter().endElement();
     } else {
-        KoPathShape::saveOdf(context);
+        KPathShape::saveOdf(context);
     }
 }
 

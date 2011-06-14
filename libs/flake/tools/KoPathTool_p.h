@@ -35,7 +35,7 @@
 //
 
 
-#include "../KoPathShape.h"
+#include "../KPathShape.h"
 #include "../KoToolBase.h"
 #include "KoPathToolSelection_p.h"
 
@@ -47,7 +47,7 @@ class PathToolOptionWidget;
 
 class KAction;
 
-/// The tool for editing a KoPathShape or a KParameterShape
+/// The tool for editing a KPathShape or a KParameterShape
 class FLAKE_TEST_EXPORT KoPathTool : public KoToolBase
 {
     Q_OBJECT
@@ -93,7 +93,7 @@ protected:
 
 private:
     void updateOptionsWidget();
-    bool segmentAtPoint(const QPointF &point, KoPathShape* &shape, KPathPoint* &segmentStart, qreal &pointParam);
+    bool segmentAtPoint(const QPointF &point, KPathShape* &shape, KPathPoint* &segmentStart, qreal &pointParam);
 
 private slots:
     void pointTypeChanged(QAction *type);

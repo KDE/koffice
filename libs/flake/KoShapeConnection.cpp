@@ -24,8 +24,8 @@
 #include "KoShapeManager_p.h"
 #include "KoShapeBorderBase.h"
 #include "KoViewConverter.h"
-#include "KoPathShape.h"
-#include "KoPathShape_p.h"
+#include "KPathShape.h"
+#include "KPathShape_p.h"
 #include "KPathPoint.h"
 #include "KLoadingShapeUpdater.h"
 
@@ -89,7 +89,7 @@ class ConnectCurve : public ConnectStrategy
         QRectF br(topLeft.x(), topLeft.y(), bottomRight.x() - topLeft.x(), bottomRight.y() - topLeft.y());
         return br.normalized();
     }
-    KoPathShape shape;
+    KPathShape shape;
 
   private:
     bool needsResize;
@@ -386,7 +386,7 @@ void ConnectCurve::saveOdf(KoShapeSavingContext &context) const
 {
     // write the path data
     context.xmlWriter().addAttribute("svg:d", shape.toString());
-    //shape.saveOdfAttributes(context, KoPathShape::OdfViewbox);
+    //shape.saveOdfAttributes(context, KPathShape::OdfViewbox);
     shape.saveOdfCommonChildElements(context);
 }
 

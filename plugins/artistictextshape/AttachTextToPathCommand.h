@@ -24,19 +24,19 @@
 #include <QtGui/QTransform>
 
 class ArtisticTextShape;
-class KoPathShape;
+class KPathShape;
 
 class AttachTextToPathCommand : public QUndoCommand
 {
 public:
-    AttachTextToPathCommand(ArtisticTextShape * textShape, KoPathShape * pathShape, QUndoCommand * parent = 0);
+    AttachTextToPathCommand(ArtisticTextShape * textShape, KPathShape * pathShape, QUndoCommand * parent = 0);
     /// reimplemented from QUndoCommand
     virtual void redo();
     /// reimplemented from QUndoCommand
     virtual void undo();
 private:
     ArtisticTextShape * m_textShape;
-    KoPathShape * m_pathShape;
+    KPathShape * m_pathShape;
     QTransform m_oldMatrix;
 };
 

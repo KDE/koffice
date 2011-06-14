@@ -20,7 +20,7 @@
 
 #include "ArtisticTextShape.h"
 
-#include <KoPathShape.h>
+#include <KPathShape.h>
 #include <KoShapeSavingContext.h>
 #include <KoShapeLoadingContext.h>
 #include <KOdfXmlNS.h>
@@ -106,7 +106,7 @@ void ArtisticTextShape::saveOdf(KoShapeSavingContext &context) const
     }
     else if ( layout() == ArtisticTextShape::OnPath )
     {
-        KoPathShape * baseline = KoPathShape::createShapeFromPainterPath( m_baseline );
+        KPathShape * baseline = KPathShape::createShapeFromPainterPath( m_baseline );
         QTransform offsetMatrix;
         offsetMatrix.translate( 0.0, m_baselineOffset );
         drawData += "textPathData:" + baseline->toString( baseline->transformation() ) + ';';
@@ -121,7 +121,7 @@ void ArtisticTextShape::saveOdf(KoShapeSavingContext &context) const
     context.xmlWriter().startElement("draw:enhanced-geometry");
 
     // write the path data
-    KoPathShape * path = KoPathShape::createShapeFromPainterPath( outline() );
+    KPathShape * path = KPathShape::createShapeFromPainterPath( outline() );
     context.xmlWriter().addAttribute("draw:enhanced-path", path->toString( transformation() ) );
     delete path;
 
@@ -171,14 +171,14 @@ bool ArtisticTextShape::loadOdf( const KXmlElement & element, KoShapeLoadingCont
         }
         else if ( pair[0] == "textPathData" )
         {
-            KoPathShape path;
+            KPathShape path;
             KoPathShapeLoader loader( &path );
             loader.parseSvg( pair[1], true );
             putOnPath( path.outline() );
         }
         else if ( pair[0] == "textPath" )
         {
-            KoPathShape * path = dynamic_cast<KoPathShape*>( context.shapeById( pair[1] ) ); 
+            KPathShape * path = dynamic_cast<KPathShape*>( context.shapeById( pair[1] ) ); 
             if ( path ) {
                 putOnPath( path );
             }
@@ -406,7 +406,7 @@ ArtisticTextShape::TextAnchor ArtisticTextShape::textAnchor() const
     return m_textAnchor;
 }
 
-bool ArtisticTextShape::putOnPath( KoPathShape * path )
+bool ArtisticTextShape::putOnPath( KPathShape * path )
 {
     if ( ! path )
         return false;
@@ -487,7 +487,7 @@ QPainterPath ArtisticTextShape::baseline() const
     return m_baseline;
 }
 
-KoPathShape * ArtisticTextShape::baselineShape() const
+KPathShape * ArtisticTextShape::baselineShape() const
 {
     return m_path;
 }

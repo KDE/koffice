@@ -141,7 +141,7 @@ KPathPointRemoveCommand::~KPathPointRemoveCommand()
 void KPathPointRemoveCommand::redo()
 {
     QUndoCommand::redo();
-    KoPathShape * lastPathShape = 0;
+    KPathShape * lastPathShape = 0;
     int updateBefore = d->pointDataList.size();
     for (int i = d->pointDataList.size() - 1; i >= 0; --i) {
         const KPathPointData &pd = d->pointDataList.at(i);
@@ -181,7 +181,7 @@ void KPathPointRemoveCommand::redo()
 void KPathPointRemoveCommand::undo()
 {
     QUndoCommand::undo();
-    KoPathShape * lastPathShape = 0;
+    KPathShape * lastPathShape = 0;
     for (int i = 0; i < d->pointDataList.size(); ++i) {
         const KPathPointData &pd = d->pointDataList.at(i);
         if (lastPathShape && lastPathShape != pd.pathShape) {

@@ -18,7 +18,7 @@
  */
 
 #include "KPathSegmentChangeStrategy_p.h"
-#include "KoPathShape.h"
+#include "KPathShape.h"
 #include "KPathPoint.h"
 #include "KoPathTool_p.h"
 #include "KoSnapGuide.h"

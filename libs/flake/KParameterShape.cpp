@@ -25,12 +25,12 @@
 #include <KDebug>
 
 KParameterShape::KParameterShape()
-    : KoPathShape(*(new KParameterShapePrivate(this)))
+    : KPathShape(*(new KParameterShapePrivate(this)))
 {
 }
 
 KParameterShape::KParameterShape(KParameterShapePrivate &dd)
-    : KoPathShape(dd)
+    : KPathShape(dd)
 {
 }
 
@@ -123,13 +123,13 @@ void KParameterShape::setSize(const QSizeF &newSize)
         d->handles[i] = matrix.map(d->handles[i]);
     }
 
-    KoPathShape::setSize(newSize);
+    KPathShape::setSize(newSize);
 }
 
 QPointF KParameterShape::normalize()
 {
     Q_D(KParameterShape);
-    QPointF offset(KoPathShape::normalize());
+    QPointF offset(KPathShape::normalize());
     QTransform matrix;
     matrix.translate(-offset.x(), -offset.y());
 

@@ -29,9 +29,9 @@ public:
         qDeleteAll(copies);
     }
     void initialize();
-    void copyPath(KoPathShape *destination, KoPathShape *source);
+    void copyPath(KPathShape *destination, KPathShape *source);
     QList<KParameterShape*> shapes;
-    QList<KoPathShape*> copies;
+    QList<KPathShape*> copies;
 };
 
 KParameterToPathCommand::KParameterToPathCommand(KParameterShape *shape, QUndoCommand *parent)
@@ -83,13 +83,13 @@ void KParameterToPathCommand::undo()
 void KParameterToPathCommandPrivate::initialize()
 {
     foreach(KParameterShape *shape, shapes) {
-        KoPathShape *p = new KoPathShape();
+        KPathShape *p = new KPathShape();
         copyPath(p, shape);
         copies.append(p);
     }
 }
 
-void KParameterToPathCommandPrivate::copyPath(KoPathShape *destination, KoPathShape *source)
+void KParameterToPathCommandPrivate::copyPath(KPathShape *destination, KPathShape *source)
 {
     destination->clear();
 

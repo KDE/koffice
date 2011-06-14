@@ -381,7 +381,7 @@ void EnhancedPathShape::saveOdf(KoShapeSavingContext &context) const
         context.xmlWriter().endElement(); // draw:custom-shape
 
     } else {
-        KoPathShape::saveOdf(context);
+        KPathShape::saveOdf(context);
     }
 }
 

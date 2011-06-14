@@ -37,7 +37,7 @@
 #include <ui_PathToolOptionWidget.h>
 
 class KoPathTool;
-class KoPathShape;
+class KPathShape;
 class KoShapeConfigWidgetBase;
 
 class PathToolOptionWidget : public QWidget
@@ -53,7 +53,7 @@ public:
     ~PathToolOptionWidget();
 
     void setSelectionType(Type type);
-    void setSelectedPath(KoPathShape *path);
+    void setSelectedPath(KPathShape *path);
 
 private:
     void setShapePropertiesWidget(KoShapeConfigWidgetBase *widget);
@@ -62,7 +62,7 @@ private:
     Ui::PathToolOptionWidget widget;
     KoPathTool *m_tool;
     KoShapeConfigWidgetBase *m_shapePropertiesWidget;
-    KoPathShape *m_currentOpenPath;
+    KPathShape *m_currentOpenPath;
 };
 
 #endif

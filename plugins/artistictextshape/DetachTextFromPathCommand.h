@@ -24,7 +24,7 @@
 #include <QtGui/QPainterPath>
 
 class ArtisticTextShape;
-class KoPathShape;
+class KPathShape;
 
 class DetachTextFromPathCommand : public QUndoCommand
 {
@@ -36,7 +36,7 @@ public:
     virtual void undo();
 private:
     ArtisticTextShape * m_textShape;
-    KoPathShape * m_pathShape;
+    KPathShape * m_pathShape;
     QPainterPath m_path;
 };
 

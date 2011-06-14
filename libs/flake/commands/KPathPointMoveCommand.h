@@ -27,7 +27,7 @@
 #include <QUndoCommand>
 #include <QPointF>
 
-#include "KoPathShape.h"
+#include "KPathShape.h"
 #include "KPathPointData.h"
 
 class KPathPointMoveCommandPrivate;

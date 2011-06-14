@@ -19,7 +19,7 @@
 
 #include "RoundCornersCommand.h"
 
-#include <KoPathShape.h>
+#include <KPathShape.h>
 #include <KPathSegment.h>
 #include <KPathPoint.h>
 
@@ -27,7 +27,7 @@
 
 #include <math.h>
 
-RoundCornersCommand::RoundCornersCommand(KoPathShape * path, qreal radius, QUndoCommand * parent)
+RoundCornersCommand::RoundCornersCommand(KPathShape * path, qreal radius, QUndoCommand * parent)
         : QUndoCommand(parent), m_path(path), m_copy(0)
 {
     Q_ASSERT(path);
@@ -35,7 +35,7 @@ RoundCornersCommand::RoundCornersCommand(KoPathShape * path, qreal radius, QUndo
     // Set members.
     m_radius = radius > 0.0 ? radius : 1.0;
     // copy original path data
-    m_copy = new KoPathShape();
+    m_copy = new KPathShape();
     copyPath(m_copy, m_path);
     m_copy->normalize();
     setText(i18n("Round Corners"));
@@ -322,7 +322,7 @@ void RoundCornersCommand::roundPath()
     }
 }
 
-KPathPoint * RoundCornersCommand::addSegment(KoPathShape * p, KPathSegment & s)
+KPathPoint * RoundCornersCommand::addSegment(KPathShape * p, KPathSegment & s)
 {
     switch (s.degree()) {
     case 1:
@@ -343,7 +343,7 @@ KPathPoint * RoundCornersCommand::addSegment(KoPathShape * p, KPathSegment & s)
     return 0;
 }
 
-void RoundCornersCommand::copyPath(KoPathShape * dst, KoPathShape * src)
+void RoundCornersCommand::copyPath(KPathShape * dst, KPathShape * src)
 {
     dst->clear();
 

@@ -23,7 +23,7 @@
 #include <KoToolBase.h>
 #include <QtCore/QRectF>
 
-class KoPathShape;
+class KPathShape;
 class KLineBorder;
 class KPathPoint;
 
@@ -63,7 +63,7 @@ private:
     KPathPoint* endPointAtPosition(const QPointF &position);
 
     /// Connects given path with the ones we hit when starting/finishing
-    bool connectPaths(KoPathShape *pathShape, KPathPoint *pointAtStart, KPathPoint *pointAtEnd);
+    bool connectPaths(KPathShape *pathShape, KPathPoint *pointAtStart, KPathPoint *pointAtEnd);
 
     enum PencilMode { ModeRaw, ModeCurve, ModeStraight };
 
@@ -76,7 +76,7 @@ private:
 
     QList<QPointF> m_points; // the raw points
 
-    KoPathShape * m_shape;
+    KPathShape * m_shape;
     KPathPoint *m_existingStartPoint; ///< an existing path point we started a new path at
     KPathPoint *m_existingEndPoint;   ///< an existing path point we finished a new path at
     KPathPoint *m_hoveredPoint; ///< an existing path end point the mouse is hovering on

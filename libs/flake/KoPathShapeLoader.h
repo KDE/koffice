@@ -22,7 +22,7 @@
 
 #include "flake_export.h"
 
-class KoPathShape;
+class KPathShape;
 class KoPathShapeLoaderPrivate;
 class QString;
 
@@ -33,7 +33,7 @@ class QString;
 class FLAKE_EXPORT KoPathShapeLoader
 {
 public:
-    KoPathShapeLoader(KoPathShape *path);
+    KoPathShapeLoader(KPathShape *path);
     ~KoPathShapeLoader();
 
     /**

@@ -20,10 +20,10 @@
 #ifndef KARBONSIMPLIFYPATH_H
 #define KARBONSIMPLIFYPATH_H
 
-class KoPathShape;
+class KPathShape;
 
 #include <QtCore/qglobal.h>
 
-void karbonSimplifyPath(KoPathShape *path, qreal error);
+void karbonSimplifyPath(KPathShape *path, qreal error);
 
 #endif // KARBONSIMPLIFYPATH_H

@@ -28,7 +28,7 @@
 #include <QClipboard>
 
 #include <KoShapeLayer.h>
-#include <KoPathShape.h>
+#include <KPathShape.h>
 #include <KDrag.h>
 #include <KOdf.h>
 
@@ -60,7 +60,7 @@ void TestPACopyPastePage::paste(MockDocument * doc, QMimeData * data, KoPAPageBa
 
 void TestPACopyPastePage::addShape(KoPAPageBase * page)
 {
-    KoPathShape * path = new KoPathShape();
+    KPathShape * path = new KPathShape();
     path->lineTo(QPointF(10, 0));
     path->lineTo(QPointF(10, 10));
     path->setPosition(m_pos);

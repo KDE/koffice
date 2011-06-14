@@ -19,11 +19,11 @@
 #ifndef KWOUTLINESHAPE_H
 #define KWOUTLINESHAPE_H
 
-#include <KoPathShape.h>
+#include <KPathShape.h>
 
 class KWFrame;
 
-class KWOutlineShape : public KoPathShape
+class KWOutlineShape : public KPathShape
 {
 public:
     KWOutlineShape(KWFrame *frame);

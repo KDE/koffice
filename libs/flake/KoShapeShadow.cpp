@@ -23,7 +23,7 @@
 #include "KoShapeBorderBase.h"
 #include "KoShape.h"
 #include "KoInsets.h"
-#include "KoPathShape.h"
+#include "KPathShape.h"
 #include <KOdfGenericStyle.h>
 #include <KoViewConverter.h>
 #include <QtGui/QPainter>
@@ -85,7 +85,7 @@ void KoShapeShadow::paint(KoShape *shape, QPainter &painter, const KoViewConvert
         painter.setBrush(QBrush(d->color));
 
         QPainterPath path(shape->outline());
-        KoPathShape * pathShape = dynamic_cast<KoPathShape*>(shape);
+        KPathShape * pathShape = dynamic_cast<KPathShape*>(shape);
         if (pathShape)
             path.setFillRule(pathShape->fillRule());
         painter.drawPath(path);

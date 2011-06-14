@@ -21,7 +21,7 @@
 #include "KoSnapProxy_p.h"
 #include "KoSnapStrategy_p.h"
 
-#include <KoPathShape.h>
+#include <KPathShape.h>
 #include <KPathPoint.h>
 #include <KoViewConverter.h>
 #include <KCanvasBase.h>

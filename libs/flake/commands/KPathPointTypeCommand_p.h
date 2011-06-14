@@ -36,7 +36,7 @@
 #include <QUndoCommand>
 #include <QList>
 #include "KPathBaseCommand_p.h"
-//#include "KoPathShape.h"
+//#include "KPathShape.h"
 #include "KPathPoint.h"
 #include "KPathPointData.h"
 #include "flake_export.h"

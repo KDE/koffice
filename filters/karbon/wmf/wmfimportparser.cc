@@ -21,7 +21,7 @@
 
 #include <KarbonDocument.h>
 
-#include <KoPathShape.h>
+#include <KPathShape.h>
 #include <KLineBorder.h>
 #include <KoShapeLayer.h>
 #include <KImageData.h>
@@ -228,7 +228,7 @@ void WMFImportParser::moveTo(int left, int top)
 
 void WMFImportParser::lineTo(int left, int top)
 {
-    KoPathShape * line = static_cast<KoPathShape*>(createShape(KoPathShapeId));
+    KPathShape * line = static_cast<KPathShape*>(createShape(KoPathShapeId));
     if (! line)
         return;
 
@@ -377,7 +377,7 @@ void WMFImportParser::drawChord(int x, int y, int w, int h, int aStart, int aLen
 
 void WMFImportParser::drawPolyline(const QPolygon &pa)
 {
-    KoPathShape *polyline = static_cast<KoPathShape*>(createShape(KoPathShapeId));
+    KPathShape *polyline = static_cast<KPathShape*>(createShape(KoPathShapeId));
     if (! polyline)
         return;
 
@@ -390,7 +390,7 @@ void WMFImportParser::drawPolyline(const QPolygon &pa)
 
 void WMFImportParser::drawPolygon(const QPolygon &pa, bool winding)
 {
-    KoPathShape *polygon = static_cast<KoPathShape*>(createShape(KoPathShapeId));
+    KPathShape *polygon = static_cast<KPathShape*>(createShape(KoPathShapeId));
     if (! polygon)
         return;
 
@@ -406,7 +406,7 @@ void WMFImportParser::drawPolygon(const QPolygon &pa, bool winding)
 
 void WMFImportParser::drawPolyPolygon(QList<QPolygon>& listPa, bool winding)
 {
-    KoPathShape *path = static_cast<KoPathShape*>(createShape(KoPathShapeId));
+    KPathShape *path = static_cast<KPathShape*>(createShape(KoPathShapeId));
     if (! path)
         return;
 
@@ -417,7 +417,7 @@ void WMFImportParser::drawPolyPolygon(QList<QPolygon>& listPa, bool winding)
         path->close();
         path->setFillRule(winding ? Qt::WindingFill : Qt::OddEvenFill);
         foreach(const QPolygon & pa, listPa) {
-            KoPathShape *newPath = static_cast<KoPathShape*>(createShape(KoPathShapeId));
+            KPathShape *newPath = static_cast<KPathShape*>(createShape(KoPathShapeId));
             if (! newPath)
                 continue;
 
@@ -571,7 +571,7 @@ void  WMFImportParser::setCompositionMode(QPainter::CompositionMode)
     //TODO
 }
 
-void WMFImportParser::appendPoints(KoPathShape &path, const QPolygon& pa)
+void WMFImportParser::appendPoints(KPathShape &path, const QPolygon& pa)
 {
     // list of point array
     if (pa.size() > 0) {
@@ -615,7 +615,7 @@ KoShape * WMFImportParser::createShape(const QString &shapeID)
     if (shape && shape->shapeId().isEmpty())
         shape->setShapeId(factory->id());
 
-    KoPathShape * path = dynamic_cast<KoPathShape*>(shape);
+    KPathShape * path = dynamic_cast<KPathShape*>(shape);
     if (path && shapeID == KoPathShapeId)
         path->clear();
     // reset tranformation that might come from the default shape

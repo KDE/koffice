@@ -21,7 +21,7 @@
 #include "KarbonCalligraphicShape.h"
 #include "KarbonCalligraphyOptionWidget.h"
 
-#include <KoPathShape.h>
+#include <KPathShape.h>
 #include <KoShapeGroup.h>
 #include <KLineBorder.h>
 #include <KoPointerEvent.h>
@@ -459,16 +459,16 @@ void KarbonCalligraphyTool::setCaps(double caps)
 
 void KarbonCalligraphyTool::updateSelectedPath()
 {
-    KoPathShape *oldSelectedPath = m_selectedPath; // save old value
+    KPathShape *oldSelectedPath = m_selectedPath; // save old value
 
     KoSelection *selection = canvas()->shapeManager()->selection();
 
-    // null pointer if it the selection isn't a KoPathShape
+    // null pointer if it the selection isn't a KPathShape
     // or if the selection is empty
     m_selectedPath =
-        dynamic_cast<KoPathShape *>(selection->firstSelectedShape());
+        dynamic_cast<KPathShape *>(selection->firstSelectedShape());
 
-    // or if it's a KoPathShape but with no or more than one subpaths
+    // or if it's a KPathShape but with no or more than one subpaths
     if (m_selectedPath && m_selectedPath->subpathCount() != 1)
         m_selectedPath = 0;
 

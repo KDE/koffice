@@ -20,7 +20,7 @@
 #include "KarbonPencilTool.h"
 #include "KarbonCurveFit.h"
 
-#include <KoPathShape.h>
+#include <KPathShape.h>
 #include <KParameterShape.h>
 #include <KLineBorder.h>
 #include <KoPointerEvent.h>
@@ -107,7 +107,7 @@ void KarbonPencilTool::repaintDecorations()
 void KarbonPencilTool::mousePressEvent(KoPointerEvent *event)
 {
     if (! m_shape) {
-        m_shape = new KoPathShape();
+        m_shape = new KPathShape();
         m_shape->setShapeId(KoPathShapeId);
         m_shape->setBorder(currentBorder());
         m_points.clear();
@@ -222,7 +222,7 @@ void KarbonPencilTool::finish(bool closePath)
     if (m_points.count() < 2)
         return;
 
-    KoPathShape * path = 0;
+    KPathShape * path = 0;
     QList<QPointF> complete;
     QList<QPointF> *points = &m_points;
 
@@ -261,7 +261,7 @@ void KarbonPencilTool::finish(bool closePath)
     break;
     case ModeStraight:
     case ModeRaw: {
-        path = new KoPathShape();
+        path = new KPathShape();
         uint pointCount = points->count();
         path->moveTo(points->at(0));
         for (uint i = 1; i < pointCount; ++i)
@@ -410,7 +410,7 @@ KPathPoint* KarbonPencilTool::endPointAtPosition(const QPointF &position)
     qreal maxDistance = canvas()->viewConverter()->viewToDocumentX(grabSensitivity);
 
     foreach(KoShape *shape, shapes) {
-        KoPathShape * path = dynamic_cast<KoPathShape*>(shape);
+        KPathShape * path = dynamic_cast<KPathShape*>(shape);
         if (!path)
             continue;
         KParameterShape *paramShape = dynamic_cast<KParameterShape*>(shape);
@@ -442,7 +442,7 @@ KPathPoint* KarbonPencilTool::endPointAtPosition(const QPointF &position)
     return nearestPoint;
 }
 
-bool KarbonPencilTool::connectPaths(KoPathShape *pathShape, KPathPoint *pointAtStart, KPathPoint *pointAtEnd)
+bool KarbonPencilTool::connectPaths(KPathShape *pathShape, KPathPoint *pointAtStart, KPathPoint *pointAtEnd)
 {
     // at least one point must be valid
     if (!pointAtStart && !pointAtEnd)
@@ -462,8 +462,8 @@ bool KarbonPencilTool::connectPaths(KoPathShape *pathShape, KPathPoint *pointAtS
     KPathPoint * newStartPoint = pathShape->pointByIndex(newStartPointIndex);
     KPathPoint * newEndPoint = pathShape->pointByIndex(newEndPointIndex);
 
-    KoPathShape * startShape = pointAtStart ? pointAtStart->parent() : 0;
-    KoPathShape * endShape = pointAtEnd ? pointAtEnd->parent() : 0;
+    KPathShape * startShape = pointAtStart ? pointAtStart->parent() : 0;
+    KPathShape * endShape = pointAtEnd ? pointAtEnd->parent() : 0;
 
     // combine with the path we hit on start
     KoPathPointIndex startIndex(-1, -1);

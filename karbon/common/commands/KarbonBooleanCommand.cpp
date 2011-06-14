@@ -19,7 +19,7 @@
 
 #include "KarbonBooleanCommand.h"
 #include <KoShapeControllerBase.h>
-#include <KoPathShape.h>
+#include <KPathShape.h>
 #include <KoShapeContainer.h>
 #include <KoShapeGroup.h>
 #include <KoShapeGroupCommand.h>
@@ -44,9 +44,9 @@ public:
     }
 
     KoShapeControllerBase *controller;
-    KoPathShape * pathA;
-    KoPathShape * pathB;
-    KoPathShape * resultingPath;
+    KPathShape * pathA;
+    KPathShape * pathB;
+    KPathShape * resultingPath;
     KoShapeContainer * resultParent;
     QUndoCommand * resultParentCmd;
     BooleanOperation operation;
@@ -54,7 +54,7 @@ public:
 };
 
 KarbonBooleanCommand::KarbonBooleanCommand(
-    KoShapeControllerBase *controller, KoPathShape* pathA, KoPathShape * pathB,
+    KoShapeControllerBase *controller, KPathShape* pathA, KPathShape * pathB,
     BooleanOperation operation, QUndoCommand *parent
 )
         : QUndoCommand(parent), d(new Private(controller))
@@ -97,7 +97,7 @@ void KarbonBooleanCommand::redo()
 
         QTransform transformation = d->pathA->transformation();
         pr = transformation.inverted().map(pr);
-        d->resultingPath = KoPathShape::createShapeFromPainterPath(pr);
+        d->resultingPath = KPathShape::createShapeFromPainterPath(pr);
         d->resultingPath->setBorder(d->pathA->border());
         d->resultingPath->setBackground(d->pathA->background());
         d->resultingPath->setShapeId(d->pathA->shapeId());

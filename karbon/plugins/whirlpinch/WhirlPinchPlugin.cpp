@@ -37,7 +37,7 @@
 #include <KCanvasController.h>
 #include <KCanvasBase.h>
 #include <KoShapeManager.h>
-#include <KoPathShape.h>
+#include <KPathShape.h>
 #include <KParameterShape.h>
 #include <KoSelection.h>
 
@@ -78,7 +78,7 @@ void WhirlPinchPlugin::slotWhirlPinch()
         return;
 
     // check if we have a path based shape
-    KoPathShape * path = dynamic_cast<KoPathShape*>(shape);
+    KPathShape * path = dynamic_cast<KPathShape*>(shape);
     if (! path)
         return;
 

@@ -20,12 +20,12 @@
 #include "TestResourceManager.h"
 
 #include "KoResourceManager.h"
-#include "KoPathShape.h"
+#include "KPathShape.h"
 #include <QtTest/QSignalSpy>
 
 void TestResourceManager::koShapeResource()
 {
-    KoPathShape * shape = new KoPathShape();
+    KPathShape * shape = new KPathShape();
     int key = 9001;
 
     KoResourceManager rp( 0 );

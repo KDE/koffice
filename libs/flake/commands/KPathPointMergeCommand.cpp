@@ -21,7 +21,7 @@
 #include "KPathPointMergeCommand.h"
 #include "KPathPoint.h"
 #include "KPathPointData.h"
-#include "KoPathShape.h"
+#include "KPathShape.h"
 #include <KLocale>
 #include <QPointF>
 
@@ -77,7 +77,7 @@ public:
         }
     }
 
-    KoPathShape * pathShape;
+    KPathShape * pathShape;
     KoPathPointIndex endPoint;
     KoPathPointIndex startPoint;
     KoPathPointIndex splitIndex;

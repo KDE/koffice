@@ -39,7 +39,7 @@
 
 class KoPathTool;
 class KCanvasBase;
-class KoPathShape;
+class KPathShape;
 
 /**
 * @brief Strategy for deforming a segment of a path shape.
@@ -59,7 +59,7 @@ private:
     QPointF m_move;
     /// pointer to the path tool
     KoPathTool *m_tool;
-    KoPathShape *m_path;
+    KPathShape *m_path;
     KPathSegment m_segment;
     qreal m_segmentParam;
     QPointF m_ctrlPoint1Move;

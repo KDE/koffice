@@ -21,7 +21,7 @@
 #ifndef KOPARAMETERSHAPE_H
 #define KOPARAMETERSHAPE_H
 
-#include "KoPathShape.h"
+#include "KPathShape.h"
 #include "flake_export.h"
 
 class KParameterShapePrivate;
@@ -36,14 +36,14 @@ class KParameterShapePrivate;
  * of control points. These control points can be moved with the mouse
  * on the canvas which changes the shapes parameter values and hence the
  * shapes appearance in realtime.
- * KParameterShape is derived from the KoPathShape class that means
+ * KParameterShape is derived from the KPathShape class that means
  * by changing the shape parameters, the underlying path is manipulated.
  * A parametric shape can be converted into a path shape by simply calling
  * the setModified method. This makes the path tool know that it can handle
  * the shape like a path shape, so that modifying the single path points
  * is possible.
  */
-class FLAKE_EXPORT KParameterShape : public KoPathShape
+class FLAKE_EXPORT KParameterShape : public KPathShape
 {
 public:
     KParameterShape();

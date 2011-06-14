@@ -85,8 +85,8 @@ private:
     QTransform cursorTransform() const;
 
     ArtisticTextShape * m_currentShape;
-    KoPathShape * m_path;
-    KoPathShape * m_tmpPath;
+    KPathShape * m_path;
+    KPathShape * m_tmpPath;
     QPainterPath m_textCursorShape;
 
     QAction * m_attachPath;

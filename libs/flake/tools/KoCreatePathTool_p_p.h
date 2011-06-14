@@ -110,7 +110,7 @@ struct PathConnectionPoint {
         }
     }
 
-    KoPathShape * path;
+    KPathShape * path;
     KPathPoint * point;
 };
 
@@ -208,7 +208,7 @@ public:
 
     {}
 
-    KoPathShape *shape;
+    KPathShape *shape;
     KPathPoint *activePoint;
     KPathPoint *firstPoint;
     int handleRadius;
@@ -264,7 +264,7 @@ public:
         qreal maxDistance = q->canvas()->viewConverter()->viewToDocumentX(grabSensitivity);
 
         foreach(KoShape *shape, shapes) {
-            KoPathShape * path = dynamic_cast<KoPathShape*>(shape);
+            KPathShape * path = dynamic_cast<KPathShape*>(shape);
             if (!path)
                 continue;
             KParameterShape *paramShape = dynamic_cast<KParameterShape*>(shape);
@@ -297,10 +297,10 @@ public:
     }
 
     /// Connects given path with the ones we hit when starting/finishing
-    bool connectPaths(KoPathShape *pathShape, const PathConnectionPoint &pointAtStart, const PathConnectionPoint &pointAtEnd) const
+    bool connectPaths(KPathShape *pathShape, const PathConnectionPoint &pointAtStart, const PathConnectionPoint &pointAtEnd) const
     {
-        KoPathShape * startShape = 0;
-        KoPathShape * endShape = 0;
+        KPathShape * startShape = 0;
+        KPathShape * endShape = 0;
         KPathPoint * startPoint = 0;
         KPathPoint * endPoint = 0;
 
@@ -396,7 +396,7 @@ public:
         }
 
         // this is done so that nothing happens when the mouseReleaseEvent for the this event is received
-        KoPathShape *pathShape = shape;
+        KPathShape *pathShape = shape;
         shape=0;
 
         q->addPathShape(pathShape);

@@ -31,7 +31,7 @@ public:
 
     bool undoCalled; // this command stores diffs; so calling undo twice will give wrong results. Guard against that.
     QMap<KPathPointData, QPointF > points;
-    QSet<KoPathShape*> paths;
+    QSet<KPathShape*> paths;
 };
 
 
@@ -94,14 +94,14 @@ void KPathPointMoveCommand::undo()
 
 void KPathPointMoveCommandPrivate::applyOffset(qreal factor)
 {
-    foreach (KoPathShape *path, paths) {
+    foreach (KPathShape *path, paths) {
         // repaint old bounding rect
         path->update();
     }
 
     QMap<KPathPointData, QPointF>::iterator it(points.begin());
     for (; it != points.end(); ++it) {
-        KoPathShape *path = it.key().pathShape;
+        KPathShape *path = it.key().pathShape;
         // transform offset from document to shape coordinate system
         QPointF shapeOffset = path->documentToShape(factor*it.value()) - path->documentToShape(QPointF());
         QTransform matrix;
@@ -112,7 +112,7 @@ void KPathPointMoveCommandPrivate::applyOffset(qreal factor)
             p->map(matrix, true);
     }
 
-    foreach (KoPathShape *path, paths) {
+    foreach (KPathShape *path, paths) {
         path->normalize();
         // repaint new bounding rect
         path->update();

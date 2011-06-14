@@ -24,7 +24,7 @@ set(flake_SRCS
     KoInsets.cpp
     KPasteController.cpp
     KGuidesData.cpp
-    KoPathShape.cpp
+    KPathShape.cpp
     KPathPoint.cpp
     KPathPointData.cpp
     KPathSegment.cpp
@@ -271,7 +271,7 @@ install(
     KPathPointData.h
     KPathPoint.h
     KPathSegment.h
-    KoPathShape.h
+    KPathShape.h
     KoPathShapeLoader.h
     KoPatternBackground.h
     KoPluginLoader.h

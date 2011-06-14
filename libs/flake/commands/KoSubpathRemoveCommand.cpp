@@ -21,7 +21,7 @@
 #include "KoSubpathRemoveCommand.h"
 #include <klocale.h>
 
-KoSubpathRemoveCommand::KoSubpathRemoveCommand(KoPathShape *pathShape, int subpathIndex, QUndoCommand *parent)
+KoSubpathRemoveCommand::KoSubpathRemoveCommand(KPathShape *pathShape, int subpathIndex, QUndoCommand *parent)
         : QUndoCommand(parent)
         , m_pathShape(pathShape)
         , m_subpathIndex(subpathIndex)

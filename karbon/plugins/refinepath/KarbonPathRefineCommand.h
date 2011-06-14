@@ -22,7 +22,7 @@
 
 #include <QtGui/QUndoCommand>
 
-class KoPathShape;
+class KPathShape;
 
 /// The undo / redo command for refining a given path
 class KarbonPathRefineCommand : public QUndoCommand
@@ -38,7 +38,7 @@ public:
      * @param insertPointsCount number of point to insert into each segment
      * @param parent the parent command used for macro commands
      */
-    KarbonPathRefineCommand(KoPathShape * path, uint insertPointsCount, QUndoCommand *parent = 0);
+    KarbonPathRefineCommand(KPathShape * path, uint insertPointsCount, QUndoCommand *parent = 0);
     virtual ~KarbonPathRefineCommand();
 
     /// redo the command

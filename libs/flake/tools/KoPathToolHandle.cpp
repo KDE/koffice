@@ -103,7 +103,7 @@ KInteractionStrategy * PointHandle::handleMousePress(KoPointerEvent *event)
             QPointF startPoint = m_activePoint->parent()->shapeToDocument(m_activePoint->point());
             return new KPathPointMoveStrategy(m_tool, startPoint);
         } else {
-            KoPathShape * pathShape = m_activePoint->parent();
+            KPathShape * pathShape = m_activePoint->parent();
             KPathPointData pd(pathShape, pathShape->pathPointIndex(m_activePoint));
             return new KPathControlPointMoveStrategy(m_tool, pd, m_activePointType, event->point);
         }
@@ -126,7 +126,7 @@ KInteractionStrategy * PointHandle::handleMousePress(KoPointerEvent *event)
     return 0;
 }
 
-bool PointHandle::check(const QList<KoPathShape*> &selectedShapes)
+bool PointHandle::check(const QList<KPathShape*> &selectedShapes)
 {
     if (selectedShapes.contains(m_activePoint->parent())) {
         return m_activePoint->parent()->pathPointIndex(m_activePoint) != KoPathPointIndex(-1, -1);
@@ -177,7 +177,7 @@ KInteractionStrategy * ParameterHandle::handleMousePress(KoPointerEvent *event)
     return 0;
 }
 
-bool ParameterHandle::check(const QList<KoPathShape*> &selectedShapes)
+bool ParameterHandle::check(const QList<KPathShape*> &selectedShapes)
 {
     return selectedShapes.contains(m_parameterShape);
 }

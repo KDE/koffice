@@ -42,7 +42,7 @@
 #include <KoDocument.h>
 #include <KoFilterChain.h>
 #include <KoShapeLayer.h>
-#include <KoPathShape.h>
+#include <KPathShape.h>
 #include <KLineBorder.h>
 #include <KColorBackground.h>
 #include <KGradientBackground.h>
@@ -204,7 +204,7 @@ void SvgExport::saveGroup(KoShapeContainer * group)
 
 void SvgExport::saveShape(KoShape * shape)
 {
-    KoPathShape * path = dynamic_cast<KoPathShape*>(shape);
+    KPathShape * path = dynamic_cast<KPathShape*>(shape);
     if (path) {
         KParameterShape * parameterShape = dynamic_cast<KParameterShape*>(path);
         bool isParametric = parameterShape && parameterShape->isParametricShape();
@@ -224,7 +224,7 @@ void SvgExport::saveShape(KoShape * shape)
     }
 }
 
-void SvgExport::savePath(KoPathShape * path)
+void SvgExport::savePath(KPathShape * path)
 {
     printIndentation(m_body, m_indent);
     *m_body << "<path" << getID(path);
@@ -553,7 +553,7 @@ void SvgExport::getFill(KoShape * shape, QTextStream *stream)
         *stream << "\"";
     }
 
-    KoPathShape * path = dynamic_cast<KoPathShape*>(shape);
+    KPathShape * path = dynamic_cast<KPathShape*>(shape);
     if (path && shape->background()) {
         // non-zero is default, so only write fillrule if evenodd is set
         if (path->fillRule() == Qt::OddEvenFill)
@@ -684,7 +684,7 @@ void SvgExport::saveText(ArtisticTextShape * text)
         *m_body << ">" << endl;
         *m_body << text->text();
     } else {
-        KoPathShape * baseline = KoPathShape::createShapeFromPainterPath(text->baseline());
+        KPathShape * baseline = KPathShape::createShapeFromPainterPath(text->baseline());
 
         QString id;
 

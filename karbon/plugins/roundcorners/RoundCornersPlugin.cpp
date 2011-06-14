@@ -34,7 +34,7 @@
 #include <KCanvasBase.h>
 #include <KoSelection.h>
 #include <KoShapeManager.h>
-#include <KoPathShape.h>
+#include <KPathShape.h>
 #include <KParameterShape.h>
 #include <KParameterToPathCommand.h>
 #include <KoUnitDoubleSpinBox.h>
@@ -76,7 +76,7 @@ void RoundCornersPlugin::slotRoundCorners()
         return;
 
     // check if we have a path based shape
-    KoPathShape * path = dynamic_cast<KoPathShape*>(shape);
+    KPathShape * path = dynamic_cast<KPathShape*>(shape);
     if (! path)
         return;
 

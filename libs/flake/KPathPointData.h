@@ -21,23 +21,23 @@
 #ifndef KOPATHPOINTDATA_H
 #define KOPATHPOINTDATA_H
 
-#include "KoPathShape.h"
+#include "KPathShape.h"
 
 /**
- * @brief Describe a KPathPoint by a KoPathShape and its indices
+ * @brief Describe a KPathPoint by a KPathShape and its indices
  */
 class FLAKE_EXPORT KPathPointData
 {
 public:
     /// contructor
-    KPathPointData(KoPathShape *path, const KoPathPointIndex &pointIndex);
+    KPathPointData(KPathShape *path, const KoPathPointIndex &pointIndex);
 
     /// operator used for sorting
     bool operator<(const KPathPointData &other) const;
     bool operator==(const KPathPointData &other) const;
 
     /// path shape the path point belongs too
-    KoPathShape *pathShape;
+    KPathShape *pathShape;
     /// position of the point in the path shape
     KoPathPointIndex pointIndex;
 };

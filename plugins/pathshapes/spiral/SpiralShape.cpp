@@ -48,7 +48,7 @@ SpiralShape::~SpiralShape()
 void SpiralShape::saveOdf(KoShapeSavingContext &context) const
 {
     // TODO?
-    KoPathShape::saveOdf(context);
+    KPathShape::saveOdf(context);
 }
 
 bool SpiralShape::loadOdf(const KXmlElement &element, KoShapeLoadingContext &/*context*/)

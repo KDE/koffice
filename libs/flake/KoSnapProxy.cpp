@@ -21,7 +21,7 @@
 #include "KoSnapGuide.h"
 #include "KCanvasBase.h"
 #include "KoShapeManager.h"
-#include "KoPathShape.h"
+#include "KPathShape.h"
 #include "KPathPoint.h"
 
 KoSnapProxy::KoSnapProxy(KoSnapGuide *snapGuide)
@@ -66,7 +66,7 @@ QList<QPointF> KoSnapProxy::pointsFromShape(KoShape *shape)
     if (! shape->isVisible(true))
         return snapPoints;
 
-    KoPathShape *path = dynamic_cast<KoPathShape*>(shape);
+    KPathShape *path = dynamic_cast<KPathShape*>(shape);
     if (path) {
         QTransform m = path->absoluteTransformation(0);
 
@@ -104,7 +104,7 @@ QList<KPathSegment> KoSnapProxy::segmentsInRect(const QRectF &rect)
     foreach (KoShape *shape, shapes) {
         QList<KPathSegment> shapeSegments;
         QRectF rectOnShape = shape->documentToShape(rect);
-        KoPathShape *path = dynamic_cast<KoPathShape*>(shape);
+        KPathShape *path = dynamic_cast<KPathShape*>(shape);
         if (path) {
             shapeSegments = path->segmentsAt(rectOnShape);
         }

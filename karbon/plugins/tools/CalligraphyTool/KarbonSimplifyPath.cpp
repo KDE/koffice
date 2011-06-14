@@ -20,7 +20,7 @@
 #include "KarbonSimplifyPath.h"
 
 #include <KarbonCurveFit.h>
-#include <KoPathShape.h>
+#include <KPathShape.h>
 #include <KPathPoint.h>
 #include <KDebug>
 
@@ -45,9 +45,9 @@ const qreal SUBDIVISION_COEFF = 100; // use error instead?
 const int MAX_RECURSIVE_DEPTH = 1024;
 int recursiveDepth;
 
-void removeDuplicates(KoPathShape *path);
+void removeDuplicates(KPathShape *path);
 
-QList<KoSubpath *> split(const KoPathShape &path);
+QList<KoSubpath *> split(const KPathShape &path);
 
 // subdivides the path adding additional points where to "complicated"
 void subdivide(KoSubpath *subpath);
@@ -62,13 +62,13 @@ void simplifySubpaths(QList<KoSubpath *> *subpaths, qreal error);
 void simplifySubpath(KoSubpath *subpath, qreal error);
 
 // put the result into path
-void mergeSubpaths(QList<KoSubpath *> subpaths, KoPathShape *path);
+void mergeSubpaths(QList<KoSubpath *> subpaths, KPathShape *path);
 }
 
 using namespace KarbonSimplifyPath;
 
 // TODO: rename to simplify subpath
-void karbonSimplifyPath(KoPathShape *path, qreal error)
+void karbonSimplifyPath(KPathShape *path, qreal error)
 {
     if (path->pointCount() == 0)
         return;
@@ -100,7 +100,7 @@ void karbonSimplifyPath(KoPathShape *path, qreal error)
         path->closeMerge();
 }
 
-void KarbonSimplifyPath::removeDuplicates(KoPathShape *path)
+void KarbonSimplifyPath::removeDuplicates(KPathShape *path)
 {
     // NOTE: works because path has only has one subshape, if this ever moves in
     //       KPathPoint it should be changed
@@ -120,7 +120,7 @@ void KarbonSimplifyPath::removeDuplicates(KoPathShape *path)
     }
 }
 
-QList<KoSubpath *> KarbonSimplifyPath::split(const KoPathShape &path)
+QList<KoSubpath *> KarbonSimplifyPath::split(const KPathShape &path)
 {
     QList<KoSubpath *> res;
     KoSubpath *subpath = new KoSubpath;
@@ -239,7 +239,7 @@ void KarbonSimplifyPath::simplifySubpath(KoSubpath *subpath, qreal error)
         points.append((*subpath)[i]->point());
     }
 
-    KoPathShape *simplified = bezierFit(points, error);
+    KPathShape *simplified = bezierFit(points, error);
 
     qDeleteAll(*subpath);
     subpath->clear();
@@ -253,7 +253,7 @@ void KarbonSimplifyPath::simplifySubpath(KoSubpath *subpath, qreal error)
 }
 
 void KarbonSimplifyPath::mergeSubpaths(QList<KoSubpath *> subpaths,
-                                       KoPathShape *path)
+                                       KPathShape *path)
 {
     path->clear();
     path->moveTo(subpaths.first()->first()->point());

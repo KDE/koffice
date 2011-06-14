@@ -20,7 +20,7 @@
 #include "KoSnapStrategy_p.h"
 #include "KoSnapProxy_p.h"
 #include "KoSnapGuide.h"
-#include <KoPathShape.h>
+#include <KPathShape.h>
 #include <KPathPoint.h>
 #include <KCanvasBase.h>
 #include <KoViewConverter.h>
@@ -183,7 +183,7 @@ bool ExtensionSnapStrategy::snap(const QPointF &mousePosition, KoSnapProxy * pro
 
     QList<KoShape*> shapes = proxy->shapes(true);
     foreach(KoShape * shape, shapes) {
-        KoPathShape * path = dynamic_cast<KoPathShape*>(shape);
+        KPathShape * path = dynamic_cast<KPathShape*>(shape);
         if (! path)
             continue;
 
@@ -325,7 +325,7 @@ qreal ExtensionSnapStrategy::project(const QPointF &lineStart, const QPointF &li
 
 QPointF ExtensionSnapStrategy::extensionDirection(KPathPoint * point, const QTransform &matrix)
 {
-    KoPathShape * path = point->parent();
+    KPathShape * path = point->parent();
     KoPathPointIndex index = path->pathPointIndex(point);
 
     /// check if it is a start point

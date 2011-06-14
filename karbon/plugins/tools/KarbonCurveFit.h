@@ -24,7 +24,7 @@
 #include <QList>
 #include <QPointF>
 
-class KoPathShape;
+class KPathShape;
 
 /*
  * Fits bezier curve to given list of points.
@@ -41,7 +41,7 @@ class KoPathShape;
  * @return a path shape representing the fitted curve
  */
 
-KoPathShape * bezierFit(const QList<QPointF> &points, float error);
+KPathShape * bezierFit(const QList<QPointF> &points, float error);
 
 #endif
 

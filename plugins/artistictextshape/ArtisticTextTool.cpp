@@ -27,7 +27,7 @@
 #include <KoSelection.h>
 #include <KoShapeManager.h>
 #include <KoPointerEvent.h>
-#include <KoPathShape.h>
+#include <KPathShape.h>
 #include <KoShapeController.h>
 #include <KoShapeContainer.h>
 #include <KLineBorder.h>
@@ -284,7 +284,7 @@ void ArtisticTextTool::mouseMoveEvent( KoPointerEvent *event )
             textShape = text;
             break;
         }
-        KoPathShape * path = dynamic_cast<KoPathShape*>( shape );
+        KPathShape * path = dynamic_cast<KPathShape*>( shape );
         if ( path )
         {
             m_tmpPath = path;
@@ -428,7 +428,7 @@ void ArtisticTextTool::convertText()
     if ( ! m_currentShape )
         return;
 
-    KoPathShape * path = KoPathShape::createShapeFromPainterPath( m_currentShape->outline() );
+    KPathShape * path = KPathShape::createShapeFromPainterPath( m_currentShape->outline() );
     path->setParent( m_currentShape->parent() );
     path->setZIndex( m_currentShape->zIndex() );
     path->setBorder( m_currentShape->border() );

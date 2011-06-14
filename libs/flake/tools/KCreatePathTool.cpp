@@ -23,7 +23,7 @@
 
 #include "KoShapeController.h"
 #include "KoPointerEvent.h"
-#include "KoPathShape.h"
+#include "KPathShape.h"
 #include "KLineBorder.h"
 #include "KoSelection.h"
 #include "commands/KPathPointMergeCommand.h"
@@ -100,7 +100,7 @@ void KCreatePathTool::paint(QPainter &painter, const KoViewConverter &converter)
     painter.restore();
 }
 
-void KCreatePathTool::paintPath(KoPathShape& pathShape, QPainter &painter, const KoViewConverter &converter)
+void KCreatePathTool::paintPath(KPathShape& pathShape, QPainter &painter, const KoViewConverter &converter)
 {
     Q_D(KCreatePathTool);
     painter.setTransform(pathShape.absoluteTransformation(&converter) * painter.transform());
@@ -158,7 +158,7 @@ void KCreatePathTool::mousePressEvent(KoPointerEvent *event)
             }
         }
     } else {
-        KoPathShape *pathShape = new KoPathShape();
+        KPathShape *pathShape = new KPathShape();
         d->shape=pathShape;
         pathShape->setShapeId(KoPathShapeId);
 
@@ -325,12 +325,12 @@ void KCreatePathTool::resourceChanged(int key, const QVariant & res)
     }
 }
 
-void KCreatePathTool::addPathShape(KoPathShape *pathShape)
+void KCreatePathTool::addPathShape(KPathShape *pathShape)
 {
     Q_D(KCreatePathTool);
 
-    KoPathShape *startShape = 0;
-    KoPathShape *endShape = 0;
+    KPathShape *startShape = 0;
+    KPathShape *endShape = 0;
     pathShape->normalize();
 
     // check if existing start/end points are still valid

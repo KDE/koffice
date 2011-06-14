@@ -32,7 +32,7 @@ KPathControlPointMoveCommand::KPathControlPointMoveCommand(
         , m_pointType(pointType)
 {
     Q_ASSERT(offset.x() < 1e14 && offset.y() < 1e14);
-    KoPathShape * pathShape = m_pointData.pathShape;
+    KPathShape * pathShape = m_pointData.pathShape;
     KPathPoint * point = pathShape->pointByIndex(m_pointData.pointIndex);
     if (point) {
         m_offset = point->parent()->documentToShape(offset) - point->parent()->documentToShape(QPointF(0, 0));
@@ -44,7 +44,7 @@ KPathControlPointMoveCommand::KPathControlPointMoveCommand(
 void KPathControlPointMoveCommand::redo()
 {
     QUndoCommand::redo();
-    KoPathShape * pathShape = m_pointData.pathShape;
+    KPathShape * pathShape = m_pointData.pathShape;
     KPathPoint * point = pathShape->pointByIndex(m_pointData.pointIndex);
     if (point) {
         pathShape->update();

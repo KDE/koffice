@@ -165,7 +165,7 @@ private:
     void booleanOperation(KarbonBooleanCommand::BooleanOperation operation);
 
     /// Returns a list of all selected path shapes
-    QList<KoPathShape*> selectedPathShapes();
+    QList<KPathShape*> selectedPathShapes();
 
     class Private;
     Private * const d;

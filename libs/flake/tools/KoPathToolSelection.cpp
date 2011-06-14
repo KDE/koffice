@@ -75,7 +75,7 @@ void KoPathToolSelection::add(KPathPoint * point, bool clear)
 
     if (!allreadyIn) {
         m_selectedPoints.insert(point);
-        KoPathShape * pathShape = point->parent();
+        KPathShape * pathShape = point->parent();
         PathShapePointMap::iterator it(m_shapePointMap.find(pathShape));
         if (it == m_shapePointMap.end()) {
             it = m_shapePointMap.insert(pathShape, QSet<KPathPoint *>());
@@ -89,7 +89,7 @@ void KoPathToolSelection::add(KPathPoint * point, bool clear)
 void KoPathToolSelection::remove(KPathPoint * point)
 {
     if (m_selectedPoints.remove(point)) {
-        KoPathShape * pathShape = point->parent();
+        KPathShape * pathShape = point->parent();
         m_shapePointMap[pathShape].remove(point);
         if (m_shapePointMap[pathShape].size() == 0) {
             m_shapePointMap.remove(pathShape);
@@ -114,7 +114,7 @@ void KoPathToolSelection::selectPoints(const QRectF &rect, bool clearSelection)
     }
 
     blockSignals(true);
-    foreach(KoPathShape* shape, m_selectedShapes) {
+    foreach(KPathShape* shape, m_selectedShapes) {
         KParameterShape *parameterShape = dynamic_cast<KParameterShape*>(shape);
         if (parameterShape && parameterShape->isParametricShape())
             continue;
@@ -149,7 +149,7 @@ QList<KPathPointData> KoPathToolSelection::selectedPointsData() const
 {
     QList<KPathPointData> pointData;
     foreach(KPathPoint* p, m_selectedPoints) {
-        KoPathShape * pathShape = p->parent();
+        KPathShape * pathShape = p->parent();
         pointData.append(KPathPointData(pathShape, pathShape->pathPointIndex(p)));
     }
     return pointData;
@@ -188,12 +188,12 @@ QList<KPathPointData> KoPathToolSelection::selectedSegmentsData() const
     return pointData;
 }
 
-QList<KoPathShape*> KoPathToolSelection::selectedShapes() const
+QList<KPathShape*> KoPathToolSelection::selectedShapes() const
 {
     return m_selectedShapes;
 }
 
-void KoPathToolSelection::setSelectedShapes(const QList<KoPathShape*> shapes)
+void KoPathToolSelection::setSelectedShapes(const QList<KPathShape*> shapes)
 {
     m_selectedShapes = shapes;
 }

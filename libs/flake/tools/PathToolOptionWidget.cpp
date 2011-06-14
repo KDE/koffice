@@ -77,7 +77,7 @@ void PathToolOptionWidget::setShapePropertiesWidget(KoShapeConfigWidgetBase *pro
     m_shapePropertiesWidget = propWidget;
 }
 
-void PathToolOptionWidget::setSelectedPath(KoPathShape *path)
+void PathToolOptionWidget::setSelectedPath(KPathShape *path)
 {
     if (path == m_currentOpenPath) {
         if (path && m_shapePropertiesWidget)

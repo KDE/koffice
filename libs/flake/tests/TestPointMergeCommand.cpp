@@ -19,14 +19,14 @@
 
 #include "TestPointMergeCommand.h"
 #include "KPathPointMergeCommand.h"
-#include "KoPathShape.h"
+#include "KPathShape.h"
 #include "KPathPoint.h"
 #include "KPathPointData.h"
 #include <KDebug>
 
 void TestPointMergeCommand::closeSingleLinePath()
 {
-    KoPathShape path1;
+    KPathShape path1;
     path1.moveTo(QPointF(40, 0));
     path1.lineTo(QPointF(60, 0));
     path1.lineTo(QPointF(60, 30));
@@ -79,7 +79,7 @@ void TestPointMergeCommand::closeSingleLinePath()
 
 void TestPointMergeCommand::closeSingleCurvePath()
 {
-    KoPathShape path1;
+    KPathShape path1;
     path1.moveTo(QPointF(40, 0));
     path1.curveTo(QPointF(60, 0), QPointF(60,0), QPointF(60,60));
     path1.lineTo(QPointF(0, 60));
@@ -140,7 +140,7 @@ void TestPointMergeCommand::closeSingleCurvePath()
 
 void TestPointMergeCommand::connectLineSubpaths()
 {
-    KoPathShape path1;
+    KPathShape path1;
     path1.moveTo(QPointF(0,0));
     path1.lineTo(QPointF(10,0));
     path1.moveTo(QPointF(20,0));
@@ -183,7 +183,7 @@ void TestPointMergeCommand::connectLineSubpaths()
 
 void TestPointMergeCommand::connectCurveSubpaths()
 {
-    KoPathShape path1;
+    KPathShape path1;
     path1.moveTo(QPointF(0,0));
     path1.curveTo(QPointF(20,0),QPointF(0,20),QPointF(20,20));
     path1.moveTo(QPointF(50,0));

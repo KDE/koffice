@@ -20,7 +20,7 @@
 */
 
 #include "KPathPoint.h"
-#include "KoPathShape.h"
+#include "KPathShape.h"
 #include "KoPointGroup_p.h"
 
 #include <KDebug>
@@ -42,7 +42,7 @@ public:
     Private()
             : shape(0), properties(Normal), pointGroup(0)
             , activeControlPoint1(false), activeControlPoint2(false) {}
-    KoPathShape * shape;
+    KPathShape * shape;
     QPointF point;
     QPointF controlPoint1;
     QPointF controlPoint2;
@@ -69,7 +69,7 @@ KPathPoint::KPathPoint()
 {
 }
 
-KPathPoint::KPathPoint(KoPathShape * path, const QPointF &point, PointProperties properties)
+KPathPoint::KPathPoint(KPathShape * path, const QPointF &point, PointProperties properties)
         : d(new Private())
 {
     d->shape = path;
@@ -306,7 +306,7 @@ void KPathPoint::paint(QPainter &painter, int handleRadius, PointTypes types, bo
     painter.setWorldTransform(worldMatrix);
 }
 
-void KPathPoint::setParent(KoPathShape* parent)
+void KPathPoint::setParent(KPathShape* parent)
 {
     // don't set to zero
     //Q_ASSERT(parent);
@@ -423,7 +423,7 @@ QPointF KPathPoint::controlPoint2() const
     return d->controlPoint2;
 }
 
-KoPathShape * KPathPoint::parent() const
+KPathShape * KPathPoint::parent() const
 {
     return d->shape;
 }

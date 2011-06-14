@@ -36,7 +36,7 @@
 #include <QUndoCommand>
 #include <QSet>
 
-class KoPathShape;
+class KPathShape;
 
 /// the base command for commands altering a path shape
 class KPathBaseCommand : public QUndoCommand
@@ -50,7 +50,7 @@ public:
     /** initialize the base command with a single shape
      * @param parent the parent command used for macro commands
      */
-    explicit KPathBaseCommand(KoPathShape *shape, QUndoCommand *parent = 0);
+    explicit KPathBaseCommand(KPathShape *shape, QUndoCommand *parent = 0);
 
 protected:
     /**
@@ -59,7 +59,7 @@ protected:
      */
     void repaint(bool normalizeShapes);
 
-    QSet<KoPathShape*> m_shapes; ///< the shapes the command operates on
+    QSet<KPathShape*> m_shapes; ///< the shapes the command operates on
 };
 
 #endif // KOPATHBASECOMMAND_H

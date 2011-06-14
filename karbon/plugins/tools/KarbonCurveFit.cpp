@@ -19,7 +19,7 @@
 */
 
 #include "KarbonCurveFit.h"
-#include <KoPathShape.h>
+#include <KPathShape.h>
 #include <QVector>
 #include <math.h>
 
@@ -550,7 +550,7 @@ QPointF *FitCubic(const QList<QPointF> &points, int first, int last, FitVector t
 }
 
 
-KoPathShape * bezierFit(const QList<QPointF> &points, float error)
+KPathShape * bezierFit(const QList<QPointF> &points, float error)
 {
     FitVector tHat1, tHat2;
 
@@ -561,7 +561,7 @@ KoPathShape * bezierFit(const QList<QPointF> &points, float error)
     QPointF *curve;
     curve = FitCubic(points, 0, points.count() - 1, tHat1, tHat2, error, width);
 
-    KoPathShape * path = new KoPathShape();
+    KPathShape * path = new KPathShape();
 
     if (width > 3) {
         path->moveTo(curve[0]);

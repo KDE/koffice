@@ -18,14 +18,14 @@
  */
 
 #include "KoPathShapeLoader.h"
-#include "KoPathShape.h"
+#include "KPathShape.h"
 #include <math.h>
 #include <kdebug.h>
 
 class KoPathShapeLoaderPrivate
 {
 public:
-    KoPathShapeLoaderPrivate(KoPathShape * p) : path(p) {
+    KoPathShapeLoaderPrivate(KPathShape * p) : path(p) {
         Q_ASSERT(path);
         path->clear();
     }
@@ -46,7 +46,7 @@ public:
     const char *getCoord(const char *, qreal &);
     void calculateArc(bool relative, qreal &curx, qreal &cury, qreal angle, qreal x, qreal y, qreal r1, qreal r2, bool largeArcFlag, bool sweepFlag);
 
-    KoPathShape * path; ///< the path shape to work on
+    KPathShape * path; ///< the path shape to work on
     QPointF lastPoint;
 };
 
@@ -625,7 +625,7 @@ void KoPathShapeLoaderPrivate::svgClosePath()
     path->closeMerge();
 }
 
-KoPathShapeLoader::KoPathShapeLoader(KoPathShape *path)
+KoPathShapeLoader::KoPathShapeLoader(KPathShape *path)
     : d(new KoPathShapeLoaderPrivate(path))
 {
 }

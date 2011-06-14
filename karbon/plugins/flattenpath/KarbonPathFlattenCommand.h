@@ -22,7 +22,7 @@
 
 #include <QtGui/QUndoCommand>
 
-class KoPathShape;
+class KPathShape;
 
 /// The undo / redo command for flatten a given path
 class KarbonPathFlattenCommand : public QUndoCommand
@@ -38,7 +38,7 @@ public:
     * @param flatness the desired flatness
     * @param parent the parent command used for macro commands
      */
-    KarbonPathFlattenCommand(KoPathShape * path, qreal flatness, QUndoCommand *parent = 0);
+    KarbonPathFlattenCommand(KPathShape * path, qreal flatness, QUndoCommand *parent = 0);
     virtual ~KarbonPathFlattenCommand();
 
     /// redo the command

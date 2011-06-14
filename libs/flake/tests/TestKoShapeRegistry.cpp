@@ -31,7 +31,7 @@
 
 #include "KoShapeRegistry.h"
 #include "KoShape.h"
-#include "KoPathShape.h"
+#include "KPathShape.h"
 #include "KoShapeLoadingContext.h"
 
 #include <KXmlReader.h>

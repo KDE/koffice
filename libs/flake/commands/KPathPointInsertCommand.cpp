@@ -48,7 +48,7 @@ KPathPointInsertCommand::KPathPointInsertCommand(const QList<KPathPointData> &po
 
     QList<KPathPointData>::const_iterator it(pointDataList.begin());
     for (; it != pointDataList.end(); ++it) {
-        KoPathShape * pathShape = it->pathShape;
+        KPathShape * pathShape = it->pathShape;
 
         KPathSegment segment = pathShape->segmentByIndex(it->pointIndex);
 
@@ -85,7 +85,7 @@ void KPathPointInsertCommand::redo()
     QUndoCommand::redo();
     for (int i = d->pointDataList.size() - 1; i >= 0; --i) {
         KPathPointData pointData = d->pointDataList.at(i);
-        KoPathShape * pathShape = pointData.pathShape;
+        KPathShape * pathShape = pointData.pathShape;
 
         KPathSegment segment = pathShape->segmentByIndex(pointData.pointIndex);
 
@@ -114,7 +114,7 @@ void KPathPointInsertCommand::undo()
     QUndoCommand::undo();
     for (int i = 0; i < d->pointDataList.size(); ++i) {
         const KPathPointData &pdBefore = d->pointDataList.at(i);
-        KoPathShape * pathShape = pdBefore.pathShape;
+        KPathShape * pathShape = pdBefore.pathShape;
         KoPathPointIndex piAfter = pdBefore.pointIndex;
         ++piAfter.second;
 

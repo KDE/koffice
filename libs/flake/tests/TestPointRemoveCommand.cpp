@@ -19,14 +19,14 @@
 #include "TestPointRemoveCommand.h"
 
 #include <QPainterPath>
-#include "KoPathShape.h"
+#include "KPathShape.h"
 #include "KPathPointRemoveCommand.h"
 #include "KoShapeController.h"
 #include <MockShapes.h>
 
 void TestPointRemoveCommand::redoUndoPointRemove()
 {
-    KoPathShape path1;
+    KPathShape path1;
     path1.moveTo(QPointF(0, 0));
     path1.lineTo(QPointF(0, 100));
     KPathPoint *point1 = path1.curveTo(QPointF(0, 50), QPointF(100, 50), QPointF(100, 100));
@@ -41,7 +41,7 @@ void TestPointRemoveCommand::redoUndoPointRemove()
 
     QVERIFY(orig1 == path1.outline());
 
-    KoPathShape path2;
+    KPathShape path2;
     path2.moveTo(QPointF(0, 0));
     KPathPoint *point3 = path2.curveTo(QPointF(50, 0), QPointF(100, 50), QPointF(100, 100));
     path2.curveTo(QPointF(50, 100), QPointF(0, 50), QPointF(0, 0));
@@ -82,7 +82,7 @@ void TestPointRemoveCommand::redoUndoPointRemove()
 
 void TestPointRemoveCommand::redoUndoSubpathRemove()
 {
-    KoPathShape path1;
+    KPathShape path1;
     KPathPoint *point11 = path1.moveTo(QPointF(0, 0));
     KPathPoint *point12 = path1.lineTo(QPointF(0, 100));
     KPathPoint *point13 = path1.curveTo(QPointF(0, 50), QPointF(100, 50), QPointF(100, 100));
@@ -146,13 +146,13 @@ void TestPointRemoveCommand::redoUndoSubpathRemove()
 
 void TestPointRemoveCommand::redoUndoShapeRemove()
 {
-    KoPathShape *path1 = new KoPathShape();
+    KPathShape *path1 = new KPathShape();
     KPathPoint *point11 = path1->moveTo(QPointF(0, 0));
     KPathPoint *point12 = path1->lineTo(QPointF(0, 100));
     KPathPoint *point13 = path1->curveTo(QPointF(0, 50), QPointF(100, 50), QPointF(100, 100));
     KPathPoint *point14 = path1->lineTo(QPointF(200, 100));
     KPathPoint *point15 = path1->curveTo(QPointF(200, 50), QPointF(300, 50), QPointF(300, 100));
-    KoPathShape *path2 = new KoPathShape();
+    KPathShape *path2 = new KPathShape();
     KPathPoint *point21 = path2->moveTo(QPointF(0, 0));
     KPathPoint *point22 = path2->curveTo(QPointF(50, 0), QPointF(100, 50), QPointF(100, 100));
     path2->curveTo(QPointF(50, 100), QPointF(0, 50), QPointF(0, 0));
@@ -194,7 +194,7 @@ void TestPointRemoveCommand::redoUndoShapeRemove()
 
 void TestPointRemoveCommand::redoUndo()
 {
-    KoPathShape *path1 = new KoPathShape();
+    KPathShape *path1 = new KPathShape();
     KPathPoint *point11 = path1->moveTo(QPointF(0, 0));
     KPathPoint *point12 = path1->lineTo(QPointF(0, 100));
     KPathPoint *point13 = path1->curveTo(QPointF(0, 50), QPointF(100, 50), QPointF(100, 100));
@@ -207,13 +207,13 @@ void TestPointRemoveCommand::redoUndo()
     KPathPoint *point18 = path1->moveTo(QPointF(200, 0));
     KPathPoint *point19 = path1->lineTo(QPointF(200, 100));
 
-    KoPathShape *path2 = new KoPathShape();
+    KPathShape *path2 = new KPathShape();
     KPathPoint *point21 = path2->moveTo(QPointF(0, 0));
     KPathPoint *point22 = path2->curveTo(QPointF(50, 0), QPointF(100, 50), QPointF(100, 100));
     path2->curveTo(QPointF(50, 100), QPointF(0, 50), QPointF(0, 0));
     path2->closeMerge();
 
-    KoPathShape *path3 = new KoPathShape();
+    KPathShape *path3 = new KPathShape();
     KPathPoint *point31 = path3->moveTo(QPointF(0, 0));
     KPathPoint *point32 = path3->lineTo(QPointF(100, 100));
     KPathPoint *point33 = path3->lineTo(QPointF(200, 150));

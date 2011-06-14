@@ -33,7 +33,7 @@
 //
 
 
-#include "KoPathShape_p.h"
+#include "KPathShape_p.h"
 
 #include <QList>
 #include <QPointF>

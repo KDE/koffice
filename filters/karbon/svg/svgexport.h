@@ -37,7 +37,7 @@ class KarbonDocument;
 class KoShapeLayer;
 class KoShapeContainer;
 class KoShape;
-class KoPathShape;
+class KPathShape;
 class KoShapeBorderModel;
 class ArtisticTextShape;
 class EllipseShape;
@@ -64,7 +64,7 @@ private:
     void saveLayer(KoShapeLayer * layer);
     void saveGroup(KoShapeContainer * group);
     void saveShape(KoShape * shape);
-    void savePath(KoPathShape * path);
+    void savePath(KPathShape * path);
     void saveEllipse(EllipseShape * ellipse);
     void saveRectangle(RectangleShape * rectangle);
 

@@ -19,19 +19,19 @@
 #include "TestPointTypeCommand.h"
 
 #include <QPainterPath>
-#include "KoPathShape.h"
+#include "KPathShape.h"
 #include "KPathPointTypeCommand_p.h"
 
 void TestPointTypeCommand::redoUndoSymmetric()
 {
-    KoPathShape path1;
+    KPathShape path1;
     path1.moveTo(QPointF(0, 0));
     path1.lineTo(QPointF(0, 100));
     KPathPoint *point1 = path1.curveTo(QPointF(0, 50), QPointF(100, 50), QPointF(100, 100));
     KPathPoint *point2 = path1.curveTo(QPointF(100, 200), QPointF(200, 200), QPointF(200, 100));
     path1.curveTo(QPointF(200, 50), QPointF(300, 50), QPointF(300, 100));
     // test with normalize
-    KoPathShape path2;
+    KPathShape path2;
     KPathPoint *point3 = path2.moveTo(QPointF(0, 0));
     path2.curveTo(QPointF(50, 0), QPointF(100, 50), QPointF(100, 100));
     path2.curveTo(QPointF(50, 100), QPointF(0, 50), QPointF(0, 0));
@@ -67,14 +67,14 @@ void TestPointTypeCommand::redoUndoSymmetric()
 
 void TestPointTypeCommand::redoUndoSmooth()
 {
-    KoPathShape path1;
+    KPathShape path1;
     path1.moveTo(QPointF(0, 0));
     path1.lineTo(QPointF(0, 100));
     KPathPoint *point1 = path1.curveTo(QPointF(0, 50), QPointF(100, 50), QPointF(100, 100));
     KPathPoint *point2 = path1.curveTo(QPointF(100, 200), QPointF(200, 200), QPointF(200, 100));
     path1.curveTo(QPointF(200, 50), QPointF(300, 50), QPointF(300, 100));
     // test with normalize
-    KoPathShape path2;
+    KPathShape path2;
     KPathPoint *point3 = path2.moveTo(QPointF(0, 0));
     path2.curveTo(QPointF(50, 0), QPointF(100, 50), QPointF(100, 100));
     path2.curveTo(QPointF(50, 100), QPointF(0, 50), QPointF(0, 0));
@@ -110,14 +110,14 @@ void TestPointTypeCommand::redoUndoSmooth()
 
 void TestPointTypeCommand::redoUndoCorner()
 {
-    KoPathShape path1;
+    KPathShape path1;
     path1.moveTo(QPointF(0, 0));
     path1.lineTo(QPointF(0, 100));
     KPathPoint *point1 = path1.curveTo(QPointF(0, 50), QPointF(100, 50), QPointF(100, 100));
     KPathPoint *point2 = path1.curveTo(QPointF(100, 150), QPointF(200, 150), QPointF(200, 100));
     path1.curveTo(QPointF(200, 50), QPointF(300, 50), QPointF(300, 100));
     // test with normalize
-    KoPathShape path2;
+    KPathShape path2;
     KPathPoint *point3 = path2.moveTo(QPointF(0, 0));
     path2.curveTo(QPointF(50, 0), QPointF(100, 50), QPointF(100, 100));
     path2.curveTo(QPointF(50, 100), QPointF(0, 50), QPointF(0, 0));

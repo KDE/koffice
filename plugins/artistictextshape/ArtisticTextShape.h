@@ -27,7 +27,7 @@
 #include <QtGui/QFont>
 
 class QPainter;
-class KoPathShape;
+class KPathShape;
 
 #define ArtisticTextShapeID "ArtisticText"
 
@@ -77,7 +77,7 @@ public:
     QFont font() const;
 
     /// Attaches this text shape to the given path shape
-    bool putOnPath(KoPathShape * path);
+    bool putOnPath(KPathShape * path);
 
     /// Puts the text on the given path, the path is expected to be in document coordinates
     bool putOnPath(const QPainterPath &path);
@@ -114,7 +114,7 @@ public:
     QPainterPath baseline() const;
 
     /// Returns a pointer to the shape used as baseline
-    KoPathShape * baselineShape() const;
+    KPathShape * baselineShape() const;
 
     /// Removes a range of text from the given index
     QString removeRange(unsigned int index, unsigned int nr);
@@ -144,7 +144,7 @@ private:
     KoPostscriptPaintDevice m_paintDevice;
     QString m_text; ///< the text content
     QFont m_font; ///< the font to use for drawing
-    KoPathShape * m_path; ///< the path shape we are attached to
+    KPathShape * m_path; ///< the path shape we are attached to
     QList<QPainterPath> m_charOutlines; ///< cached character oulines
     qreal m_startOffset; ///< the offset from the attached path start point
     qreal m_baselineOffset; ///< the y-offset from the top-left corner to the baseline

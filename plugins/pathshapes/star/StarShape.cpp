@@ -410,7 +410,7 @@ void StarShape::saveOdf(KoShapeSavingContext & context) const
             context.xmlWriter().endElement();
         }
     } else {
-        KoPathShape::saveOdf(context);
+        KPathShape::saveOdf(context);
     }
 }
 

@@ -18,13 +18,13 @@
  */
 
 #include "KPathReverseCommand.h"
-#include "KoPathShape.h"
+#include "KPathShape.h"
 #include <klocale.h>
 
 class KPathReverseCommand::Private
 {
 public:
-    Private(const QList<KoPathShape*> &p)
+    Private(const QList<KPathShape*> &p)
             : paths(p) {
     }
     ~Private() {
@@ -34,17 +34,17 @@ public:
         if (! paths.size())
             return;
 
-        foreach(KoPathShape* shape, paths) {
+        foreach(KPathShape* shape, paths) {
             int subpathCount = shape->subpathCount();
             for (int i = 0; i < subpathCount; ++i)
                 shape->reverseSubpath(i);
         }
     }
 
-    QList<KoPathShape*> paths;
+    QList<KPathShape*> paths;
 };
 
-KPathReverseCommand::KPathReverseCommand(const QList<KoPathShape*> &paths, QUndoCommand *parent)
+KPathReverseCommand::KPathReverseCommand(const QList<KPathShape*> &paths, QUndoCommand *parent)
         : QUndoCommand(parent),
         d(new Private(paths))
 {

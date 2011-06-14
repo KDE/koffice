@@ -19,7 +19,7 @@
 
 #include "KPathPointData.h"
 
-KPathPointData::KPathPointData(KoPathShape *path, const KoPathPointIndex &pointIndex)
+KPathPointData::KPathPointData(KPathShape *path, const KoPathPointIndex &pointIndex)
     : pathShape(path),
     pointIndex(pointIndex)
 {

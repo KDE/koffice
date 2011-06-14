@@ -61,7 +61,7 @@
 #include <KInlineTextObjectManager.h>
 #include <KoMainWindow.h>
 #include <KPasteController.h>
-#include <KoPathShape.h> // for KoPathShapeId
+#include <KPathShape.h> // for KoPathShapeId
 #include <KoResourceManager.h>
 #include <KoSelection.h>
 #include <KoShapeContainer.h>

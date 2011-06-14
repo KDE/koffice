@@ -33,7 +33,7 @@
 //
 
 
-#include "KoPathShape.h"
+#include "KPathShape.h"
 
 /**
  * @brief A KoPointGroup represents points in a path that should be treated as one

@@ -23,7 +23,7 @@
 
 #include "KoShapeLoadingContext.h"
 #include "KoShape.h"
-#include <KoPathShape.h>
+#include <KPathShape.h>
 #include <KOdfLoadingContext.h>
 #include <KXmlReader.h>
 #include <KOdfXmlNS.h>
@@ -162,7 +162,7 @@ bool KoOdfWorkaround::fixMissingStroke(QPen &pen, const KXmlElement &element, Ko
 
         styleStack.restore();
     } else {
-        const KoPathShape *pathShape = dynamic_cast<const KoPathShape*>(shape);
+        const KPathShape *pathShape = dynamic_cast<const KPathShape*>(shape);
         if (pathShape) {
             const QString strokeColor(styleStack.property(KOdfXmlNS::draw, "stroke-color"));
             if (strokeColor.isEmpty()) {
@@ -213,7 +213,7 @@ KColorBackground *KoOdfWorkaround::fixBackgroundColor(const KoShape *shape, KoSh
     KColorBackground *colorBackground = 0;
     KOdfLoadingContext &odfContext = context.odfLoadingContext();
     if (odfContext.generatorType() == KOdfLoadingContext::OpenOffice) {
-        const KoPathShape *pathShape = dynamic_cast<const KoPathShape*>(shape);
+        const KPathShape *pathShape = dynamic_cast<const KPathShape*>(shape);
         //check shape type
         if (pathShape) {
             KOdfStyleStack &styleStack = odfContext.styleStack();

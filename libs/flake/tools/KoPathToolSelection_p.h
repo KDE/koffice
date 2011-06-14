@@ -36,7 +36,7 @@
 
 
 #include <KoToolSelection.h>
-#include <KoPathShape.h>
+#include <KPathShape.h>
 
 class KoPathTool;
 class KPathPoint;
@@ -133,10 +133,10 @@ public:
     QList<KPathPointData> selectedSegmentsData() const;
 
     /// Returns list of selected shapes
-    QList<KoPathShape*> selectedShapes() const;
+    QList<KPathShape*> selectedShapes() const;
 
     /// Sets list of selected shapes
-    void setSelectedShapes(const QList<KoPathShape*> shapes);
+    void setSelectedShapes(const QList<KPathShape*> shapes);
 
     /**
     * @brief trigger a repaint
@@ -161,12 +161,12 @@ signals:
     void selectionChanged();
 
 private:
-    typedef QMap<KoPathShape *, QSet<KPathPoint *> > PathShapePointMap;
+    typedef QMap<KPathShape *, QSet<KPathPoint *> > PathShapePointMap;
 
     QSet<KPathPoint *> m_selectedPoints;
     PathShapePointMap m_shapePointMap;
     KoPathTool *m_tool;
-    QList<KoPathShape*> m_selectedShapes;
+    QList<KPathShape*> m_selectedShapes;
 };
 
 #endif // PATHTOOLSELECTION_H

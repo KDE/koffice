@@ -23,7 +23,7 @@
 #include <kowmfread.h>
 
 class KoShape;
-class KoPathShape;
+class KPathShape;
 class KarbonDocument;
 
 /**
@@ -116,7 +116,7 @@ private:
     // Add pen, brush and points to a path
     void appendPen(KoShape& obj);
     void appendBrush(KoShape& obj);
-    void appendPoints(KoPathShape& path, const QPolygon& pa);
+    void appendPoints(KPathShape& path, const QPolygon& pa);
     // coordinate transformation
     // translate wmf to (0,0) -> scale to document size
     double coordX(int left);

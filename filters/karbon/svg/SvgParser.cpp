@@ -35,7 +35,7 @@
 #include <KoShapeLayer.h>
 #include <KoShapeContainer.h>
 #include <KoShapeGroup.h>
-#include <KoPathShape.h>
+#include <KPathShape.h>
 #include <KoResourceManager.h>
 #include <KoPathShapeLoader.h>
 #include <commands/KoShapeGroupCommand.h>
@@ -1174,7 +1174,7 @@ void SvgParser::applyFillStyle(KoShape * shape)
         break;
     }
 
-    KoPathShape * path = dynamic_cast<KoPathShape*>(shape);
+    KPathShape * path = dynamic_cast<KPathShape*>(shape);
     if (path)
         path->setFillRule(gc->fillRule);
 }
@@ -1676,7 +1676,7 @@ KoShape * SvgParser::createText(const KXmlElement &b, const QList<KoShape*> & sh
         if (! text)
             return 0;
 
-        KoPathShape * path = 0;
+        KPathShape * path = 0;
         bool pathInDocument = false;
 
         for (KXmlNode n = b.firstChild(); !n.isNull(); n = n.nextSibling()) {
@@ -1695,12 +1695,12 @@ KoShape * SvgParser::createText(const KXmlElement &b, const QList<KoShape*> & sh
                     if (! obj)
                         obj = findObject(key, shapes);
                     if (obj)
-                        path = dynamic_cast<KoPathShape*>(obj);
+                        path = dynamic_cast<KPathShape*>(obj);
                     if (path)
                         pathInDocument = true;
                 } else {
                     KXmlElement p = m_defs[key];
-                    path = dynamic_cast<KoPathShape*>(createObject(p));
+                    path = dynamic_cast<KPathShape*>(createObject(p));
                     pathInDocument = false;
                     path->applyAbsoluteTransformation(m_gc.top()->matrix.inverted());
                 }
@@ -1873,7 +1873,7 @@ KoShape * SvgParser::createObject(const KXmlElement &b, const SvgStyles &style)
                 obj->setVisible(false);
         }
     } else if (b.tagName() == "line") {
-        KoPathShape * path = static_cast<KoPathShape*>(createShape(KoPathShapeId));
+        KPathShape * path = static_cast<KPathShape*>(createShape(KoPathShapeId));
         if (path) {
             double x1 = b.attribute("x1").isEmpty() ? 0.0 : parseUnitX(b.attribute("x1"));
             double y1 = b.attribute("y1").isEmpty() ? 0.0 : parseUnitY(b.attribute("y1"));
@@ -1886,7 +1886,7 @@ KoShape * SvgParser::createObject(const KXmlElement &b, const SvgStyles &style)
             obj = path;
         }
     } else if (b.tagName() == "polyline" || b.tagName() == "polygon") {
-        KoPathShape * path = static_cast<KoPathShape*>(createShape(KoPathShapeId));
+        KPathShape * path = static_cast<KPathShape*>(createShape(KoPathShapeId));
         if (path) {
             path->clear();
 
@@ -1917,7 +1917,7 @@ KoShape * SvgParser::createObject(const KXmlElement &b, const SvgStyles &style)
             obj = path;
         }
     } else if (b.tagName() == "path") {
-        KoPathShape * path = static_cast<KoPathShape*>(createShape(KoPathShapeId));
+        KPathShape * path = static_cast<KPathShape*>(createShape(KoPathShapeId));
         if (path) {
             path->clear();
 

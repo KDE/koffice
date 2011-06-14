@@ -23,7 +23,7 @@
 #include <QtGui/QUndoCommand>
 #include <QtCore/QPointF>
 
-class KoPathShape;
+class KPathShape;
 class KPathSegment;
 class KPathPoint;
 
@@ -31,7 +31,7 @@ class KPathPoint;
 class RoundCornersCommand : public QUndoCommand
 {
 public:
-    RoundCornersCommand(KoPathShape * path, qreal radius, QUndoCommand * parent = 0);
+    RoundCornersCommand(KPathShape * path, qreal radius, QUndoCommand * parent = 0);
     virtual ~RoundCornersCommand();
 
     /// redo the command
@@ -41,14 +41,14 @@ public:
 
 private:
     void roundPath();
-    KPathPoint * addSegment(KoPathShape * p, KPathSegment & s);
-    void copyPath(KoPathShape * dst, KoPathShape * src);
+    KPathPoint * addSegment(KPathShape * p, KPathSegment & s);
+    void copyPath(KPathShape * dst, KPathShape * src);
     QPointF tangentAtStart(const KPathSegment &s);
     QPointF tangentAtEnd(const KPathSegment &s);
 
     qreal m_radius;
-    KoPathShape * m_path;
-    KoPathShape * m_copy;
+    KPathShape * m_path;
+    KPathShape * m_copy;
 };
 
 #endif // ROUNDCORNERSCOMMAND_H

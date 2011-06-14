@@ -47,7 +47,7 @@ void KPathSegmentTypeCommand::redo()
     QUndoCommand::redo();
     QList<KPathPointData>::const_iterator it(m_pointDataList.constBegin());
     for (; it != m_pointDataList.constEnd(); ++it) {
-        KoPathShape * pathShape = it->pathShape;
+        KPathShape * pathShape = it->pathShape;
         pathShape->update();
 
         KPathSegment segment = pathShape->segmentByIndex(it->pointIndex);
@@ -114,7 +114,7 @@ void KPathSegmentTypeCommand::initialize(const QList<KPathPointData> & pointData
             m_pointDataList.append(*it);
             SegmentTypeData segmentData;
 
-            KoPathShape * pathShape = segment.first()->parent();
+            KPathShape * pathShape = segment.first()->parent();
 
             // we are changing a curve to a line -> save control point positions
             if (m_segmentType == Line) {

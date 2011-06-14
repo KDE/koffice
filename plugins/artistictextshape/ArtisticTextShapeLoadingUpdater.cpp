@@ -20,7 +20,7 @@
 #include "ArtisticTextShapeLoadingUpdater.h"
 
 #include "ArtisticTextShape.h"
-#include <KoPathShape.h>
+#include <KPathShape.h>
 
 ArtisticTextShapeLoadingUpdater::ArtisticTextShapeLoadingUpdater(ArtisticTextShape * artisticTextShape)
 : m_artisticTextShape(artisticTextShape)
@@ -38,7 +38,7 @@ void ArtisticTextShapeLoadingUpdater::update(KoShape * shape)
     QTransform matrix = m_artisticTextShape->transformation();
     
     // putting us on the path shape resulting in a changed transformation
-    m_artisticTextShape->putOnPath(dynamic_cast<KoPathShape*>(shape));
+    m_artisticTextShape->putOnPath(dynamic_cast<KPathShape*>(shape));
 
     // resetting the transformation to the former state
     m_artisticTextShape->setTransformation( matrix );

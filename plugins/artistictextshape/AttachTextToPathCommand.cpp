@@ -22,7 +22,7 @@
 
 #include <KLocale>
 
-AttachTextToPathCommand::AttachTextToPathCommand( ArtisticTextShape * textShape, KoPathShape * pathShape, QUndoCommand * parent )
+AttachTextToPathCommand::AttachTextToPathCommand( ArtisticTextShape * textShape, KPathShape * pathShape, QUndoCommand * parent )
     : QUndoCommand(parent), m_textShape(textShape), m_pathShape(pathShape)
 {
     setText( i18n("Attach Path") );

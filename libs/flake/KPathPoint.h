@@ -24,7 +24,7 @@
 
 #include "flake_export.h"
 
-class KoPathShape;
+class KPathShape;
 class QPointF;
 class QTransform;
 class QRectF;
@@ -73,7 +73,7 @@ public:
      * @param point the position relative to the shape origin
      * @param properties describing the point
      */
-    KPathPoint(KoPathShape *path, const QPointF &point, PointProperties properties = Normal);
+    KPathPoint(KPathShape *path, const QPointF &point, PointProperties properties = Normal);
 
     /**
      * @brief Copy Constructor
@@ -219,13 +219,13 @@ public:
      * @brief Sets the parent path shape.
      * @param parent the new parent path shape
      */
-    void setParent(KoPathShape* parent);
+    void setParent(KPathShape* parent);
 
     /**
      * @brief Get the path shape the point belongs to
      * @return the path shape the point belongs to
      */
-    KoPathShape *parent() const;
+    KPathShape *parent() const;
 
     /**
      * @brief Get the bounding rect of the point.
@@ -264,7 +264,7 @@ public:
 
 protected:
     friend class KoPointGroup;
-    friend class KoPathShape;
+    friend class KPathShape;
     friend class KoPathShapePrivate;
     void removeFromGroup();
     void addToGroup(KoPointGroup *pointGroup);

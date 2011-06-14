@@ -21,10 +21,10 @@
 #define KARBONCALLIGRAPHYTOOL_H
 
 #include <KoToolBase.h>
-#include <KoPathShape.h>
+#include <KPathShape.h>
 #include <QtCore/QPointer>
 
-class KoPathShape;
+class KPathShape;
 class KoShapeGroup;
 class KPathPoint;
 class KarbonCalligraphicShape;
@@ -93,7 +93,7 @@ private:
     qreal m_mass;  // in raw format (not user friendly)
     qreal m_drag;  // from 0.0 to 1.0
 
-    KoPathShape *m_selectedPath;
+    KPathShape *m_selectedPath;
     QPainterPath m_selectedPathOutline;
     qreal m_followPathPosition;
     bool m_endOfPath;

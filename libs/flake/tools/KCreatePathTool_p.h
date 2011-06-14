@@ -38,7 +38,7 @@
 
 #include <QMap>
 
-class KoPathShape;
+class KPathShape;
 class KPathPoint;
 class KLineBorder;
 
@@ -88,13 +88,13 @@ protected:
      * This method can be overridden and change the behaviour of the tool. In that case the subclass takes ownership of pathShape.
      * It gets only called, if there are two or more points in the path.
      */
-    virtual void addPathShape(KoPathShape* pathShape);
+    virtual void addPathShape(KPathShape* pathShape);
 
 protected:
     /**
       * This method is called to paint the path. Decorations are drawn by KCreatePathTool afterwards.
       */
-    virtual void paintPath(KoPathShape& pathShape, QPainter &painter, const KoViewConverter &converter);
+    virtual void paintPath(KPathShape& pathShape, QPainter &painter, const KoViewConverter &converter);
 
     /// reimplemented
     virtual QMap<QString, QWidget *> createOptionWidgets();
