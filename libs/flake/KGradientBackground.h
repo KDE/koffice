@@ -26,7 +26,7 @@
 #include <QtGui/QTransform>
 #include <QtGui/QGradient>
 
-class KoGradientBackgroundPrivate;
+class KGradientBackgroundPrivate;
 
 /// A gradient shape background
 class FLAKE_EXPORT KGradientBackground : public KoShapeBackground

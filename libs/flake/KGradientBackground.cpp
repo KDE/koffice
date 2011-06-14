@@ -31,11 +31,11 @@
 #include <QtGui/QBrush>
 #include <QtGui/QPainter>
 
-class KoGradientBackgroundPrivate : public KoShapeBackgroundPrivate
+class KGradientBackgroundPrivate : public KoShapeBackgroundPrivate
 {
 public:
-    KoGradientBackgroundPrivate() : gradient(0) {};
-    ~KoGradientBackgroundPrivate() {
+    KGradientBackgroundPrivate() : gradient(0) {};
+    ~KGradientBackgroundPrivate() {
         delete gradient;
     }
 
@@ -44,7 +44,7 @@ public:
 };
 
 KGradientBackground::KGradientBackground(QGradient * gradient, const QTransform &matrix)
-    : KoShapeBackground(*(new KoGradientBackgroundPrivate()))
+    : KoShapeBackground(*(new KGradientBackgroundPrivate()))
 {
     Q_D(KGradientBackground);
     d->gradient = gradient;
@@ -54,7 +54,7 @@ KGradientBackground::KGradientBackground(QGradient * gradient, const QTransform 
 }
 
 KGradientBackground::KGradientBackground(const QGradient & gradient, const QTransform &matrix)
-    : KoShapeBackground(*(new KoGradientBackgroundPrivate()))
+    : KoShapeBackground(*(new KGradientBackgroundPrivate()))
 {
     Q_D(KGradientBackground);
     d->gradient = KoFlake::cloneGradient(&gradient);
@@ -111,7 +111,7 @@ KGradientBackground &KGradientBackground::operator = (const KGradientBackground 
     if (this == &rhs)
         return *this;
 
-    KoGradientBackgroundPrivate *other = static_cast<KoGradientBackgroundPrivate*>(rhs.d_ptr);
+    KGradientBackgroundPrivate *other = static_cast<KGradientBackgroundPrivate*>(rhs.d_ptr);
 
     d->matrix = other->matrix;
     delete d->gradient;
