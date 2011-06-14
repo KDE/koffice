@@ -26,7 +26,7 @@ class QMimeData;
 class QString;
 class QByteArray;
 class KDragOdfSaveHelper;
-class KoDragPrivate;
+class KDragPrivate;
 
 /**
  * Class for simplifying adding a odf to the clip board
@@ -72,7 +72,7 @@ public:
     QMimeData *mimeData();
 
 private:
-    KoDragPrivate * const d;
+    KDragPrivate * const d;
 };
 
 #endif /* KODRAG_H */

@@ -38,15 +38,15 @@
 #include <KOdfEmbeddedDocumentSaver.h>
 #include "KoShapeSavingContext.h"
 
-class KoDragPrivate {
+class KDragPrivate {
 public:
-    KoDragPrivate() : mimeData(0) { }
-    ~KoDragPrivate() { delete mimeData; }
+    KDragPrivate() : mimeData(0) { }
+    ~KDragPrivate() { delete mimeData; }
     QMimeData *mimeData;
 };
 
 KDrag::KDrag()
-    : d(new KoDragPrivate())
+    : d(new KDragPrivate())
 {
 }
 
