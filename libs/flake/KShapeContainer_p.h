@@ -35,11 +35,11 @@
 
 class KShapeContainerModel;
 
-class KoShapeContainerPrivate : public KShapePrivate
+class KShapeContainerPrivate : public KShapePrivate
 {
 public:
-    KoShapeContainerPrivate(KShapeContainer *q);
-    virtual ~KoShapeContainerPrivate();
+    KShapeContainerPrivate(KShapeContainer *q);
+    virtual ~KShapeContainerPrivate();
 
     KShapeContainerModel *model;
 };

@@ -31,7 +31,7 @@
 #include <KDebug>
 #include <QTextCursor>
 
-class KoTextOnShapeContainerPrivate : public KoShapeContainerPrivate
+class KoTextOnShapeContainerPrivate : public KShapeContainerPrivate
 {
 public:
     KoTextOnShapeContainerPrivate(KShapeContainer *q);
@@ -60,7 +60,7 @@ public:
 
 // KoTextOnShapeContainerPrivate
 KoTextOnShapeContainerPrivate::KoTextOnShapeContainerPrivate(KShapeContainer *q)
-    : KoShapeContainerPrivate(q),
+    : KShapeContainerPrivate(q),
     content(0),
     textShape(0),
     resizeBehavior(KoTextOnShapeContainer::IndependendSizes)

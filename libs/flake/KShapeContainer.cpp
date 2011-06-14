@@ -28,30 +28,30 @@
 #include <QPainter>
 #include <QPainterPath>
 
-KoShapeContainerPrivate::KoShapeContainerPrivate(KShapeContainer *q)
+KShapeContainerPrivate::KShapeContainerPrivate(KShapeContainer *q)
     : KShapePrivate(q),
     model(0)
 {
 }
 
-KoShapeContainerPrivate::~KoShapeContainerPrivate()
+KShapeContainerPrivate::~KShapeContainerPrivate()
 {
     delete model;
 }
 
 KShapeContainer::KShapeContainer()
-    : KShape(*(new KoShapeContainerPrivate(this)))
+    : KShape(*(new KShapeContainerPrivate(this)))
 {
 }
 
 KShapeContainer::KShapeContainer(KShapeContainerModel *model)
-        : KShape(*(new KoShapeContainerPrivate(this)))
+        : KShape(*(new KShapeContainerPrivate(this)))
 {
     Q_D(KShapeContainer);
     d->model = model;
 }
 
-KShapeContainer::KShapeContainer(KoShapeContainerPrivate &dd)
+KShapeContainer::KShapeContainer(KShapeContainerPrivate &dd)
     : KShape(dd)
 {
 }

@@ -29,7 +29,7 @@
 
 class QPainter;
 class KShapeContainerModel;
-class KoShapeContainerPrivate;
+class KShapeContainerPrivate;
 
 /**
  * This is the base class that all Flake group-shapes are based on.
@@ -210,7 +210,7 @@ protected:
     virtual void shapeCountChanged() { }
 
     /// constructor
-    KShapeContainer(KoShapeContainerPrivate &);
+    KShapeContainer(KShapeContainerPrivate &);
 
 private:
     void shapeChanged(ChangeType type, KShape *shape);
