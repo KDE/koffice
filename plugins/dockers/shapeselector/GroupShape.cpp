@@ -20,7 +20,7 @@
 #include "GroupShape.h"
 
 #include <KoShapeFactoryBase.h>
-#include <KoCreateShapesTool.h>
+#include <KCreateShapesTool.h>
 
 #include <QDomElement>
 
@@ -30,7 +30,7 @@ GroupShape::GroupShape(KoShapeFactoryBase *shapeFactory)
     m_shapeFactory = shapeFactory;
 }
 
-void GroupShape::visit(KoCreateShapesTool *tool)
+void GroupShape::visit(KCreateShapesTool *tool)
 {
     tool->setShapeId(m_shapeFactory->id());
     tool->setShapeProperties(0);

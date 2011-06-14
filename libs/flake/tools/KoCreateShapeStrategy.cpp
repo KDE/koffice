@@ -20,7 +20,7 @@
 
 #include "KoCreateShapeStrategy_p.h"
 #include "KoShapeRubberSelectStrategy_p.h"
-#include "KoCreateShapesTool.h"
+#include "KCreateShapesTool.h"
 #include "KoShape.h"
 #include "KoShapeRegistry.h"
 #include "KoShapeManager.h"
@@ -33,10 +33,10 @@
 
 #include <kdebug.h>
 
-KoCreateShapeStrategy::KoCreateShapeStrategy(KoCreateShapesTool *tool, const QPointF &clicked)
+KoCreateShapeStrategy::KoCreateShapeStrategy(KCreateShapesTool *tool, const QPointF &clicked)
         : KoShapeRubberSelectStrategy(tool, clicked, tool->canvas()->snapToGrid())
 {
-    KoCreateShapesTool *parent = static_cast<KoCreateShapesTool*>(d_ptr->tool);
+    KCreateShapesTool *parent = static_cast<KCreateShapesTool*>(d_ptr->tool);
     KoShapeFactoryBase *factory = KoShapeRegistry::instance()->value(parent->shapeId());
     if (factory) {
         const KProperties *props = parent->shapeProperties();
@@ -56,7 +56,7 @@ KoCreateShapeStrategy::KoCreateShapeStrategy(KoCreateShapesTool *tool, const QPo
 QUndoCommand* KoCreateShapeStrategy::createCommand(QUndoCommand *parentCommand)
 {
     Q_D(KoShapeRubberSelectStrategy);
-    KoCreateShapesTool *parent = static_cast<KoCreateShapesTool*>(d_ptr->tool);
+    KCreateShapesTool *parent = static_cast<KCreateShapesTool*>(d_ptr->tool);
     KoShapeFactoryBase *factory = KoShapeRegistry::instance()->value(parent->shapeId());
     if (! factory) {
         kWarning(30006) << "Application requested a shape that is not registered" << parent->shapeId();

@@ -35,7 +35,7 @@
 #include "KoShapeManager.h"
 #include "KCanvasBase.h"
 #include "KoPointerEvent.h"
-#include "tools/KoCreateShapesTool.h"
+#include "tools/KCreateShapesTool.h"
 #include "tools/KoZoomTool_p.h"
 #include "tools/KPanTool_p.h"
 
@@ -137,7 +137,7 @@ CanvasData *KoToolManager::Private::createCanvasData(KCanvasController *controll
         if (panTool)
             panTool->setCanvasController(controller);
     }
-    KoCreateShapesTool *createTool = dynamic_cast<KoCreateShapesTool*>(toolsHash.value(KoCreateShapesTool_ID));
+    KCreateShapesTool *createTool = dynamic_cast<KCreateShapesTool*>(toolsHash.value(KoCreateShapesTool_ID));
     Q_ASSERT(createTool);
     QString id = KoShapeRegistry::instance()->keys()[0];
     createTool->setShapeId(id);
@@ -800,12 +800,12 @@ void KoToolManager::switchToolRequested(const QString & id)
     d->switchTool(id, false);
 }
 
-KoCreateShapesTool * KoToolManager::shapeCreatorTool(KCanvasBase *canvas) const
+KCreateShapesTool * KoToolManager::shapeCreatorTool(KCanvasBase *canvas) const
 {
     Q_ASSERT(canvas);
     foreach(KCanvasController *controller, d->canvasses.keys()) {
         if (controller->canvas() == canvas) {
-            KoCreateShapesTool *createTool = dynamic_cast<KoCreateShapesTool*>
+            KCreateShapesTool *createTool = dynamic_cast<KCreateShapesTool*>
                                              (d->canvasData->allTools.value(KoCreateShapesTool_ID));
             Q_ASSERT(createTool /* ID changed? */);
             return createTool;

@@ -31,7 +31,7 @@
 class KCanvasController;
 class KCanvasBase;
 class KoToolBase;
-class KoCreateShapesTool;
+class KCreateShapesTool;
 class KActionCollection;
 class KoShape;
 class QToolButton;
@@ -134,7 +134,7 @@ public:
      *    who's tool you want.
      * @see addController()
      */
-    KoCreateShapesTool *shapeCreatorTool(KCanvasBase *canvas) const;
+    KCreateShapesTool *shapeCreatorTool(KCanvasBase *canvas) const;
 
     /**
      * Returns the tool that is able to add/edit guides for this param canvas.

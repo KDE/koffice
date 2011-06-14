@@ -37,16 +37,16 @@ class KoCreateShapesToolPrivate;
 /**
  * A tool to create shapes with.
  */
-class FLAKE_EXPORT KoCreateShapesTool : public KInteractionTool
+class FLAKE_EXPORT KCreateShapesTool : public KInteractionTool
 {
 public:
     /**
      * Create a new tool; typically not called by applications, only by the KoToolManager
      * @param canvas the canvas this tool works for.
      */
-    explicit KoCreateShapesTool(KCanvasBase *canvas);
+    explicit KCreateShapesTool(KCanvasBase *canvas);
     /// destructor
-    virtual ~KoCreateShapesTool();
+    virtual ~KCreateShapesTool();
     virtual void mouseReleaseEvent(KoPointerEvent *event);
     virtual void activate(ToolActivation toolActivation, const QSet<KoShape*> &shapes);
 
@@ -81,7 +81,7 @@ protected:
     virtual KInteractionStrategy *createStrategy(KoPointerEvent *event);
 
 private:
-    Q_DECLARE_PRIVATE(KoCreateShapesTool)
+    Q_DECLARE_PRIVATE(KCreateShapesTool)
 };
 
 #endif

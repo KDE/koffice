@@ -27,7 +27,7 @@
 #include <KoShapeRegistry.h>
 #include <KCanvasController.h>
 #include <KoToolManager.h>
-#include <KoCreateShapesTool.h>
+#include <KCreateShapesTool.h>
 #include <KoShape.h>
 #include <KoZoomHandler.h>
 
@@ -324,7 +324,7 @@ void ShapeCollectionDocker::activateShapeCreationToolFromQuick(const QModelIndex
     KCanvasController* canvasController = KoToolManager::instance()->activeCanvasController();
 
     if (canvasController) {
-        KoCreateShapesTool* tool = KoToolManager::instance()->shapeCreatorTool(canvasController->canvas());
+        KCreateShapesTool* tool = KoToolManager::instance()->shapeCreatorTool(canvasController->canvas());
         QString id = m_quickView->model()->data(index, Qt::UserRole).toString();
         KProperties* properties = static_cast<CollectionItemModel*>(m_quickView->model())->properties(index);
 
@@ -343,7 +343,7 @@ void ShapeCollectionDocker::activateShapeCreationTool(const QModelIndex& index)
     KCanvasController* canvasController = KoToolManager::instance()->activeCanvasController();
 
     if (canvasController) {
-        KoCreateShapesTool* tool = KoToolManager::instance()->shapeCreatorTool(canvasController->canvas());
+        KCreateShapesTool* tool = KoToolManager::instance()->shapeCreatorTool(canvasController->canvas());
         QString id = m_collectionView->model()->data(index, Qt::UserRole).toString();
         KProperties* properties = static_cast<CollectionItemModel*>(m_collectionView->model())->properties(index);
         

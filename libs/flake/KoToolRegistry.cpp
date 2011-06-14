@@ -23,7 +23,7 @@
 
 #include "tools/KCreatePathToolFactory_p.h"
 #include "tools/KoCreateShapesToolFactory_p.h"
-#include "tools/KoCreateShapesTool.h"
+#include "tools/KCreateShapesTool.h"
 #include "tools/KoPathToolFactory_p.h"
 #include "tools/KoZoomTool_p.h"
 #include "tools/KoZoomToolFactory_p.h"

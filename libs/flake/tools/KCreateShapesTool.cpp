@@ -19,7 +19,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoCreateShapesTool.h"
+#include "KCreateShapesTool.h"
 #include "KInteractionTool_p.h"
 #include "KoPointerEvent.h"
 #include "KInteractionStrategy.h"
@@ -41,57 +41,57 @@ public:
     KProperties *newShapeProperties;
 };
 
-KoCreateShapesTool::KoCreateShapesTool(KCanvasBase *canvas)
+KCreateShapesTool::KCreateShapesTool(KCanvasBase *canvas)
     : KInteractionTool(*(new KoCreateShapesToolPrivate(this, canvas)))
 {
 }
 
-KoCreateShapesTool::~KoCreateShapesTool()
+KCreateShapesTool::~KCreateShapesTool()
 {
 }
 
-void KoCreateShapesTool::paint(QPainter &painter, const KoViewConverter &converter)
+void KCreateShapesTool::paint(QPainter &painter, const KoViewConverter &converter)
 {
     if (currentStrategy())
         currentStrategy()->paint(painter, converter);
 }
 
-void KoCreateShapesTool::mouseReleaseEvent(KoPointerEvent *event)
+void KCreateShapesTool::mouseReleaseEvent(KoPointerEvent *event)
 {
     KInteractionTool::mouseReleaseEvent(event);
     emit KoToolBase::done();
 }
 
-void KoCreateShapesTool::activate(ToolActivation, const QSet<KoShape*> &)
+void KCreateShapesTool::activate(ToolActivation, const QSet<KoShape*> &)
 {
     setCursor(Qt::ArrowCursor);
 }
 
-void KoCreateShapesTool::setShapeId(const QString &id)
+void KCreateShapesTool::setShapeId(const QString &id)
 {
-    Q_D(KoCreateShapesTool);
+    Q_D(KCreateShapesTool);
     d->shapeId = id;
 }
 
-QString KoCreateShapesTool::shapeId() const
+QString KCreateShapesTool::shapeId() const
 {
-    Q_D(const KoCreateShapesTool);
+    Q_D(const KCreateShapesTool);
     return d->shapeId;
 }
 
-void KoCreateShapesTool::setShapeProperties(KProperties *properties)
+void KCreateShapesTool::setShapeProperties(KProperties *properties)
 {
-    Q_D(KoCreateShapesTool);
+    Q_D(KCreateShapesTool);
     d->newShapeProperties = properties;
 }
 
-KProperties const * KoCreateShapesTool::shapeProperties()
+KProperties const * KCreateShapesTool::shapeProperties()
 {
-    Q_D(KoCreateShapesTool);
+    Q_D(KCreateShapesTool);
     return d->newShapeProperties;
 }
 
-KInteractionStrategy *KoCreateShapesTool::createStrategy(KoPointerEvent *event)
+KInteractionStrategy *KCreateShapesTool::createStrategy(KoPointerEvent *event)
 {
     return new KoCreateShapeStrategy(this, event->point);
 }

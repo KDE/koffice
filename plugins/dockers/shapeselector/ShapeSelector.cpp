@@ -27,7 +27,7 @@
 #include <KoShapeManager.h>
 #include <KoToolManager.h>
 #include <KoSelection.h>
-#include <KoCreateShapesTool.h>
+#include <KCreateShapesTool.h>
 #include <KCanvasController.h>
 
 #include <QFile>
@@ -58,7 +58,7 @@ void ShapeSelector::itemSelected()
     KCanvasController* canvasController = KoToolManager::instance()->activeCanvasController();
 
     if (canvasController) {
-        KoCreateShapesTool * tool = KoToolManager::instance()->shapeCreatorTool( canvasController->canvas() );
+        KCreateShapesTool * tool = KoToolManager::instance()->shapeCreatorTool( canvasController->canvas() );
         shape->visit( tool );
         KoToolManager::instance()->switchToolRequested(KoCreateShapesTool_ID);
     }

@@ -19,7 +19,7 @@
 
 #include "TemplateShape.h"
 
-#include <KoCreateShapesTool.h>
+#include <KCreateShapesTool.h>
 #include <KProperties.h>
 
 #include <QDomElement>
@@ -30,7 +30,7 @@ TemplateShape::TemplateShape(const KoShapeTemplate &shapeTemplate)
     m_shapeTemplate = shapeTemplate;
 }
 
-void TemplateShape::visit(KoCreateShapesTool *tool)
+void TemplateShape::visit(KCreateShapesTool *tool)
 {
     tool->setShapeId(m_shapeTemplate.id);
     tool->setShapeProperties(m_shapeTemplate.properties);

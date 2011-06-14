@@ -39,7 +39,7 @@ class TemplateShape : public IconShape
 public:
     TemplateShape(const KoShapeTemplate &shapeTemplate);
 
-    virtual void visit(KoCreateShapesTool *tool);
+    virtual void visit(KCreateShapesTool *tool);
     virtual void save(QDomElement &root);
 
     virtual QString toolTip();

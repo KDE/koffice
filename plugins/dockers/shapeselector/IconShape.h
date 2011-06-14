@@ -21,7 +21,7 @@
 
 #include <KoShape.h>
 
-class KoCreateShapesTool;
+class KCreateShapesTool;
 class QDomElement;
 
 /**
@@ -43,9 +43,9 @@ public:
 
     /**
      * This method is called when the user selects this item to be created later.
-     * The implementation should set all its options on the KoCreateShapesTool instance.
+     * The implementation should set all its options on the KCreateShapesTool instance.
      */
-    virtual void visit(KoCreateShapesTool *tool) = 0;
+    virtual void visit(KCreateShapesTool *tool) = 0;
     /**
      * Return the tooltip that should be shown when the user hovers over this item.
      */

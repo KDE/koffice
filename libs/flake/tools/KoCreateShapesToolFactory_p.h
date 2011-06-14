@@ -35,7 +35,7 @@
 
 #include "KoToolFactoryBase.h"
 
-/// The factory for the KoCreateShapesTool
+/// The factory for the KCreateShapesTool
 class KoCreateShapesToolFactory : public KoToolFactoryBase
 {
 public:

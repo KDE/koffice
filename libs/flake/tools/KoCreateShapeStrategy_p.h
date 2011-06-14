@@ -39,10 +39,10 @@
 #include <QPainterPath>
 
 class KCanvasBase;
-class KoCreateShapesTool;
+class KCreateShapesTool;
 
 /**
- * A strategy for the KoCreateShapesTool.
+ * A strategy for the KCreateShapesTool.
  */
 class KoCreateShapeStrategy : public KoShapeRubberSelectStrategy
 {
@@ -52,7 +52,7 @@ public:
      * @param tool the parent tool which controls this strategy
      * @param clicked the initial point that the user depressed (in pt).
      */
-    KoCreateShapeStrategy(KoCreateShapesTool *tool, const QPointF &clicked);
+    KoCreateShapeStrategy(KCreateShapesTool *tool, const QPointF &clicked);
     virtual ~KoCreateShapeStrategy() {}
 
     void finishInteraction(Qt::KeyboardModifiers modifiers);

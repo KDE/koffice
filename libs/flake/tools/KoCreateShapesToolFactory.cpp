@@ -19,7 +19,7 @@
  */
 
 #include "KoCreateShapesToolFactory_p.h"
-#include "KoCreateShapesTool.h"
+#include "KCreateShapesTool.h"
 
 #include <klocale.h>
 
@@ -41,5 +41,5 @@ KoCreateShapesToolFactory::~KoCreateShapesToolFactory()
 
 KoToolBase* KoCreateShapesToolFactory::createTool(KCanvasBase *canvas)
 {
-    return new KoCreateShapesTool(canvas);
+    return new KCreateShapesTool(canvas);
 }

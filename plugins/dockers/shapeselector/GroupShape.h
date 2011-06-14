@@ -39,7 +39,7 @@ class GroupShape : public IconShape
 public:
     GroupShape(KoShapeFactoryBase *shapeFactory);
 
-    virtual void visit(KoCreateShapesTool *tool);
+    virtual void visit(KCreateShapesTool *tool);
     virtual void save(QDomElement &root);
     virtual QString toolTip();
 
