@@ -905,7 +905,7 @@ void TextTool::mousePressEvent(KoPointerEvent *event)
             const int position = pointToPosition(event->point);
             QTextCursor cursor(m_textEditor.data()->document());
             cursor.setPosition(position);
-            KoInlineObject *obj = inlineTextObjectManager->inlineTextObject(cursor.charFormat());
+            KInlineObject *obj = inlineTextObjectManager->inlineTextObject(cursor.charFormat());
             variable = dynamic_cast<KoVariable*>(obj);
         }
 
@@ -2387,7 +2387,7 @@ void TextTool::debugTextDocument()
             kDebug(32500) << "\\n";
         }
         foreach (QTextCharFormat cf, inlineCharacters) {
-            KoInlineObject *object= inlineManager->inlineTextObject(cf);
+            KInlineObject *object= inlineManager->inlineTextObject(cf);
             kDebug(32500) << "At pos:" << cf.intProperty(CHARPOSITION) << object;
             // kDebug(32500) << "-> id:" << cf.intProperty(577297549);
         }

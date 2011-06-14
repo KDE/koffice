@@ -159,7 +159,7 @@ void DeleteCommand::deleteInlineObjects(QTextCursor &selection)
     Q_ASSERT(layout);
 
     KoInlineTextObjectManager *manager = layout->inlineTextObjectManager();
-    KoInlineObject *object;
+    KInlineObject *object;
 
     if (cursor.hasSelection()) {
         QString selected = cursor.selectedText();
@@ -187,7 +187,7 @@ void DeleteCommand::deleteInlineObjects(QTextCursor &selection)
     }
 }
 
-void DeleteCommand::deleteTextAnchor(KoInlineObject *object)
+void DeleteCommand::deleteTextAnchor(KInlineObject *object)
 {
     if (object) {
         KoTextAnchor *anchor = dynamic_cast<KoTextAnchor *>(object);
@@ -312,7 +312,7 @@ DeleteCommand::~DeleteCommand()
         KoTextEditor *textEditor = m_tool->m_textEditor.data();
         if (textEditor == 0)
             return;
-        foreach (KoInlineObject *object, m_invalidInlineObjects) {
+        foreach (KInlineObject *object, m_invalidInlineObjects) {
             QTextDocument *document = textEditor->document();
             KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(document->documentLayout());
             KoInlineTextObjectManager *manager = layout->inlineTextObjectManager();

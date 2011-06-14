@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 #include "KoVariable.h"
-#include "KoInlineObject_p.h"
+#include "KInlineObject_p.h"
 #include "KoTextDocumentLayout.h"
 #include "KoTextShapeData.h"
 
@@ -51,7 +51,7 @@ public:
 };
 
 KoVariable::KoVariable(bool propertyChangeListener)
-        : KoInlineObject(*(new KoVariablePrivate(this)), propertyChangeListener)
+        : KInlineObject(*(new KoVariablePrivate(this)), propertyChangeListener)
 {
 }
 

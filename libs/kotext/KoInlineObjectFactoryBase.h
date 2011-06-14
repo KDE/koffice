@@ -25,7 +25,7 @@
 
 #include "kotext_export.h"
 
-class KoInlineObject;
+class KInlineObject;
 class InlineObjectFactoryPrivate;
 class KProperties;
 
@@ -68,7 +68,7 @@ public:
     /**
      * Create a new instance of an inline object.
      */
-    virtual KoInlineObject *createInlineObject(const KProperties *properties = 0) const = 0;
+    virtual KInlineObject *createInlineObject(const KProperties *properties = 0) const = 0;
 
     /**
      * return the id for the variable this factory creates.

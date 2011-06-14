@@ -47,7 +47,7 @@ class KoTextPage;
  *
  * @see KoInlineTextObjectManager
  */
-class KOTEXT_EXPORT KoInlineObject
+class KOTEXT_EXPORT KInlineObject
 {
 public:
     enum Property {
@@ -91,8 +91,8 @@ public:
      * @see KoInlineTextObjectManager::setProperty()
      * @see propertyChangeListener()
      */
-    explicit KoInlineObject(bool propertyChangeListener = false);
-    virtual ~KoInlineObject();
+    explicit KInlineObject(bool propertyChangeListener = false);
+    virtual ~KInlineObject();
 
     /**
      * Will be called by the manager when this variable is added.
@@ -167,7 +167,7 @@ public:
      * example:
      * @code
      *  void KoDateVariable::propertyChanged(Property key, const QVariant &value) {
-     *      if(key == KoInlineObject::PageCount)
+     *      if(key == KInlineObject::PageCount)
      *          setValue(QString::number(value.toInt()));
      *  }
      * @endcode
@@ -245,7 +245,7 @@ public:
     KoInlineObjectPrivate *priv();
 
 protected:
-    explicit KoInlineObject(KoInlineObjectPrivate &, bool propertyChangeListener = false);
+    explicit KInlineObject(KoInlineObjectPrivate &, bool propertyChangeListener = false);
 
     /**
      * We allow a text document to be shown in more than one shape; which brings up the need to figure out
@@ -267,10 +267,10 @@ protected:
     KoInlineObjectPrivate *d_ptr;
 
 private:
-    Q_DECLARE_PRIVATE(KoInlineObject)
-    friend KOTEXT_EXPORT QDebug operator<<(QDebug, const KoInlineObject *);
+    Q_DECLARE_PRIVATE(KInlineObject)
+    friend KOTEXT_EXPORT QDebug operator<<(QDebug, const KInlineObject *);
 };
 
-KOTEXT_EXPORT QDebug operator<<(QDebug dbg, const KoInlineObject *o);
+KOTEXT_EXPORT QDebug operator<<(QDebug dbg, const KInlineObject *o);
 
 #endif

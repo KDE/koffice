@@ -397,7 +397,7 @@ void KoTextDocumentLayout::drawInlineObject(QPainter *painter, const QRectF &rec
     if (d->inlineTextObjectManager == 0)
         return;
     QTextCharFormat cf = format.toCharFormat();
-    KoInlineObject *obj = d->inlineTextObjectManager->inlineTextObject(cf);
+    KInlineObject *obj = d->inlineTextObjectManager->inlineTextObject(cf);
     if (obj) {
         Q_ASSERT(obj->document() == document());
         Q_ASSERT(obj->textPosition() == position);
@@ -413,7 +413,7 @@ void KoTextDocumentLayout::positionInlineObject(QTextInlineObject item, int posi
     if (d->inlineTextObjectManager == 0)
         return;
     QTextCharFormat cf = format.toCharFormat();
-    KoInlineObject *obj = d->inlineTextObjectManager->inlineTextObject(cf);
+    KInlineObject *obj = d->inlineTextObjectManager->inlineTextObject(cf);
     if (obj) {
         obj->setDocument(document());
         obj->setTextPosition(position);
@@ -427,7 +427,7 @@ void KoTextDocumentLayout::resizeInlineObject(QTextInlineObject item, int positi
     if (d->inlineTextObjectManager == 0)
         return;
     QTextCharFormat cf = format.toCharFormat();
-    KoInlineObject *obj = d->inlineTextObjectManager->inlineTextObject(cf);
+    KInlineObject *obj = d->inlineTextObjectManager->inlineTextObject(cf);
     if (obj) {
         obj->setDocument(document());
         obj->setTextPosition(position);

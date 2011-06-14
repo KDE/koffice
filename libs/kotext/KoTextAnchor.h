@@ -19,7 +19,7 @@
 #ifndef KOTEXTANCHOR_H
 #define KOTEXTANCHOR_H
 
-#include "KoInlineObject.h"
+#include "KInlineObject.h"
 
 #include "kotext_export.h"
 
@@ -55,7 +55,7 @@ class KoShapeLoadingContext;
  * The position of the shape relative to the anchor is called the offset. It's loaded by loadOdf().
  * @see KWAnchorStrategy for more information about the layout of anchors/shapes in KWord.
  */
-class KOTEXT_EXPORT KoTextAnchor : public KoInlineObject
+class KOTEXT_EXPORT KoTextAnchor : public KInlineObject
 {
 public:
     /// the vertical alignment options for the shape this anchor holds.
@@ -119,11 +119,11 @@ public:
     /// return the current horizontal aligment
     AnchorHorizontal horizontalAlignment() const;
 
-    /// reimplemented from KoInlineObject
+    /// reimplemented from KInlineObject
     virtual void updatePosition(QTextInlineObject object, const QTextCharFormat &format);
-    /// reimplemented from KoInlineObject
+    /// reimplemented from KInlineObject
     virtual void resize(QTextInlineObject object, const QTextCharFormat &format, QPaintDevice *pd);
-    /// reimplemented from KoInlineObject
+    /// reimplemented from KInlineObject
     virtual void paint(QPainter &painter, QPaintDevice *pd, const QRectF &rect,
             QTextInlineObject object, const QTextCharFormat &format);
 

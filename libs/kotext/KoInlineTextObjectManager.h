@@ -19,7 +19,7 @@
 #ifndef KOINLINETEXTOBJECTMANAGER_H
 #define KOINLINETEXTOBJECTMANAGER_H
 
-#include "KoInlineObject.h"
+#include "KInlineObject.h"
 #include "KoBookmarkManager.h"
 #include "KoVariableManager.h"
 #include "kotext_export.h"
@@ -51,20 +51,20 @@ public:
      * Retrieve a formerly added inline object based on the format.
      * @param format the textCharFormat
      */
-    KoInlineObject *inlineTextObject(const QTextCharFormat &format) const;
+    KInlineObject *inlineTextObject(const QTextCharFormat &format) const;
     /**
      * Retrieve a formerly added inline object based on the cursor position.
      * @param cursor the cursor which position is used. The anchor is ignored.
      */
-    KoInlineObject *inlineTextObject(const QTextCursor &cursor) const;
+    KInlineObject *inlineTextObject(const QTextCursor &cursor) const;
 
     /**
-     * Retrieve a formerly added inline object based on the KoInlineObject::id() of the object.
+     * Retrieve a formerly added inline object based on the KInlineObject::id() of the object.
      * @param id the id assigned to the inline text object when it was added.
      */
-    KoInlineObject *inlineTextObject(int id) const;
+    KInlineObject *inlineTextObject(int id) const;
 
-    QList<KoInlineObject*> inlineTextObjects() const;
+    QList<KInlineObject*> inlineTextObjects() const;
 
     /**
      * Insert a new inline object into the manager as well as the document.
@@ -76,7 +76,7 @@ public:
      * @param object the inline object to insert.
      * @param charFormat specifies char format which will be used to insert inline object
      */
-    void insertInlineObject(QTextCursor &cursor, KoInlineObject *object, QTextCharFormat charFormat = QTextCharFormat());
+    void insertInlineObject(QTextCursor &cursor, KInlineObject *object, QTextCharFormat charFormat = QTextCharFormat());
 
     /**
      * Remove an inline object from this manager (as well as the document).
@@ -89,26 +89,26 @@ public:
     bool removeInlineObject(QTextCursor &cursor);
 
     /// remove an inline object from this manager.
-    void removeInlineObject(KoInlineObject *object);
+    void removeInlineObject(KInlineObject *object);
 
     /**
      * Set a property that may have changed which will be forwarded to all registered textObjects.
      * If the key has changed then all registered InlineObject instances that have stated to want
      * updates will get called with the change.
      * The property will be stored to allow it to be retrieved via the intProperty() and friends.
-     * @see KoInlineObject::propertyChangeListener()
+     * @see KInlineObject::propertyChangeListener()
      */
-    void setProperty(KoInlineObject::Property key, const QVariant &value);
+    void setProperty(KInlineObject::Property key, const QVariant &value);
     /// retrieve a propery
-    QVariant property(KoInlineObject::Property key) const;
+    QVariant property(KInlineObject::Property key) const;
     /// retrieve an int property
-    int intProperty(KoInlineObject::Property key) const;
+    int intProperty(KInlineObject::Property key) const;
     /// retrieve a bool property
-    bool boolProperty(KoInlineObject::Property key) const;
+    bool boolProperty(KInlineObject::Property key) const;
     /// retrieve a string property
-    QString stringProperty(KoInlineObject::Property key) const;
+    QString stringProperty(KInlineObject::Property key) const;
     /// remove a property from the store.
-    void removeProperty(KoInlineObject::Property key);
+    void removeProperty(KInlineObject::Property key);
 
     /**
      * Return the variableManager.
@@ -151,8 +151,8 @@ private:
         InlineInstanceId = 577297549 // If you change this, don't forget to change KoCharacterStyle.h
     };
 
-    QHash<int, KoInlineObject*> m_objects;
-    QList<KoInlineObject*> m_listeners; // holds objects also in m_objects, but which want propertyChanges
+    QHash<int, KInlineObject*> m_objects;
+    QList<KInlineObject*> m_listeners; // holds objects also in m_objects, but which want propertyChanges
     int m_lastObjectId;
     QHash<int, QVariant> m_properties;
 

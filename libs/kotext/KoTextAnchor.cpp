@@ -19,7 +19,7 @@
  */
 
 #include "KoTextAnchor.h"
-#include "KoInlineObject_p.h"
+#include "KInlineObject_p.h"
 #include "KoTextDocumentLayout.h"
 #include "KoTextShapeContainerModel.h"
 #include "KoTextShapeData.h"
@@ -155,7 +155,7 @@ public:
 };
 
 KoTextAnchor::KoTextAnchor(KoShape *shape)
-    : KoInlineObject(*(new KoTextAnchorPrivate(this, shape)), false)
+    : KInlineObject(*(new KoTextAnchorPrivate(this, shape)), false)
 {
 }
 

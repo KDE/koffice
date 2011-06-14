@@ -59,7 +59,7 @@ PageVariableFactory::PageVariableFactory(QObject *parent)
     setOdfElementNames(KOdfXmlNS::text, elementNames);
 }
 
-KoInlineObject *PageVariableFactory::createInlineObject(const KProperties *properties) const
+KInlineObject *PageVariableFactory::createInlineObject(const KProperties *properties) const
 {
     PageVariable *var = new PageVariable();
     if (properties)

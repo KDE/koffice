@@ -61,7 +61,7 @@ void PageVariable::readProperties(const KProperties *props)
 
 void PageVariable::propertyChanged(Property property, const QVariant &value)
 {
-    if (m_type == PageCount && property == KoInlineObject::PageCount)
+    if (m_type == PageCount && property == KInlineObject::PageCount)
         setValue(value.toString());
 }
 

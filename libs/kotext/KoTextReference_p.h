@@ -48,7 +48,7 @@ public:
     /**
      * Constructor; please don't use directly as the KoInlineTextObjectManager will supply an action
      * to create one.
-     * @param indexId the index of the inline object that is the locator.  See KoInlineObject::id()
+     * @param indexId the index of the inline object that is the locator.  See KInlineObject::id()
      */
     KoTextReference(int indexId);
     ~KoTextReference();

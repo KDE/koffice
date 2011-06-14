@@ -29,7 +29,7 @@ InsertNamedVariableAction::InsertNamedVariableAction(KoCanvasBase *canvas, const
 {
 }
 
-KoInlineObject *InsertNamedVariableAction::createInlineObject()
+KInlineObject *InsertNamedVariableAction::createInlineObject()
 {
     return m_manager->variableManager()->createVariable(m_name);
 }

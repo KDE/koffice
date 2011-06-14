@@ -28,7 +28,7 @@ class PageVariableFactory : public KoInlineObjectFactoryBase
 public:
     PageVariableFactory(QObject *parent = 0);
 
-    virtual KoInlineObject *createInlineObject(const KProperties *properties = 0) const;
+    virtual KInlineObject *createInlineObject(const KProperties *properties = 0) const;
 };
 
 #endif

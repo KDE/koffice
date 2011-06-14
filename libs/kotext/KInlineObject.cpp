@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoInlineObject.h"
-#include "KoInlineObject_p.h"
+#include "KInlineObject.h"
+#include "KInlineObject_p.h"
 #include "KoTextDocumentLayout.h"
 #include "KoTextShapeData.h"
 #include "KoShapeSavingContext.h"
@@ -32,13 +32,13 @@
 
 QDebug KoInlineObjectPrivate::printDebug(QDebug dbg) const
 {
-    dbg.nospace() << "KoInlineObject ManagerId: " << id;
+    dbg.nospace() << "KInlineObject ManagerId: " << id;
     return dbg.space();
 }
 
 void KoInlineObjectPrivate::callbackPositionChanged()
 {
-    Q_Q(KoInlineObject);
+    Q_Q(KInlineObject);
     q->positionChanged();
 }
 
@@ -50,21 +50,21 @@ KoInlineObjectPrivate::~KoInlineObjectPrivate()
 
 //////////////////////////////////////
 
-KoInlineObject::KoInlineObject(bool propertyChangeListener)
+KInlineObject::KInlineObject(bool propertyChangeListener)
         : d_ptr(new KoInlineObjectPrivate(this))
 {
-    Q_D(KoInlineObject);
+    Q_D(KInlineObject);
     d->propertyChangeListener = propertyChangeListener;
 }
 
-KoInlineObject::KoInlineObject(KoInlineObjectPrivate &priv, bool propertyChangeListener)
+KInlineObject::KInlineObject(KoInlineObjectPrivate &priv, bool propertyChangeListener)
     : d_ptr(&priv)
 {
-    Q_D(KoInlineObject);
+    Q_D(KInlineObject);
     d->propertyChangeListener = propertyChangeListener;
 }
 
-KoInlineObject::~KoInlineObject()
+KInlineObject::~KInlineObject()
 {
     if (d_ptr->manager) {
         d_ptr->manager->removeInlineObject(this);
@@ -73,44 +73,44 @@ KoInlineObject::~KoInlineObject()
     d_ptr = 0;
 }
 
-void KoInlineObject::setManager(KoInlineTextObjectManager *manager)
+void KInlineObject::setManager(KoInlineTextObjectManager *manager)
 {
-    Q_D(KoInlineObject);
+    Q_D(KInlineObject);
     d->manager = manager;
 }
 
-KoInlineTextObjectManager *KoInlineObject::manager()
+KoInlineTextObjectManager *KInlineObject::manager()
 {
-    Q_D(KoInlineObject);
+    Q_D(KInlineObject);
     return d->manager;
 }
 
-void KoInlineObject::propertyChanged(Property key, const QVariant &value)
+void KInlineObject::propertyChanged(Property key, const QVariant &value)
 {
     Q_UNUSED(key);
     Q_UNUSED(value);
 }
 
-int KoInlineObject::id() const
+int KInlineObject::id() const
 {
-    Q_D(const KoInlineObject);
+    Q_D(const KInlineObject);
     return d->id;
 }
 
-void KoInlineObject::setId(int id)
+void KInlineObject::setId(int id)
 {
-    Q_D(KoInlineObject);
+    Q_D(KInlineObject);
     d->id = id;
 }
 
-bool KoInlineObject::propertyChangeListener() const
+bool KInlineObject::propertyChangeListener() const
 {
-    Q_D(const KoInlineObject);
+    Q_D(const KInlineObject);
     return d->propertyChangeListener;
 }
 
 //static
-KoShape * KoInlineObject::shapeForPosition(const QTextDocument *document, int position)
+KoShape * KInlineObject::shapeForPosition(const QTextDocument *document, int position)
 {
     KoTextDocumentLayout *lay = qobject_cast<KoTextDocumentLayout*>(document->documentLayout());
     if (lay == 0)
@@ -118,62 +118,62 @@ KoShape * KoInlineObject::shapeForPosition(const QTextDocument *document, int po
     return lay->shapeForPosition(position);
 }
 
-QDebug operator<<(QDebug dbg, const KoInlineObject *o)
+QDebug operator<<(QDebug dbg, const KInlineObject *o)
 {
     return o->d_func()->printDebug(dbg);
 }
 
-void KoInlineObject::setInlineRdf(KoTextInlineRdf* rdf)
+void KInlineObject::setInlineRdf(KoTextInlineRdf* rdf)
 {
-    Q_D(KoInlineObject);
+    Q_D(KInlineObject);
     d->rdf = rdf;
 }
 
-KoTextInlineRdf* KoInlineObject::inlineRdf() const
+KoTextInlineRdf* KInlineObject::inlineRdf() const
 {
-    Q_D(const KoInlineObject);
+    Q_D(const KInlineObject);
     return d->rdf;
 }
 
-void KoInlineObject::setDocument(QTextDocument *doc)
+void KInlineObject::setDocument(QTextDocument *doc)
 {
-    Q_D(KoInlineObject);
+    Q_D(KInlineObject);
     if (d->document == doc)
         return;
     d->document = doc;
     d->positionInDocument = -1;
 }
 
-QTextDocument *KoInlineObject::document() const
+QTextDocument *KInlineObject::document() const
 {
-    Q_D(const KoInlineObject);
+    Q_D(const KInlineObject);
     return d->document;
 }
 
-void KoInlineObject::setTextPosition(int pos)
+void KInlineObject::setTextPosition(int pos)
 {
-    Q_D(KoInlineObject);
+    Q_D(KInlineObject);
     if (d->positionInDocument == pos)
         return;
     d->positionInDocument = pos;
     positionChanged();
 }
 
-int KoInlineObject::textPosition() const
+int KInlineObject::textPosition() const
 {
-    Q_D(const KoInlineObject);
+    Q_D(const KInlineObject);
     return d->positionInDocument;
 }
 
-KoShape *KoInlineObject::shape() const
+KoShape *KInlineObject::shape() const
 {
-    Q_D(const KoInlineObject);
+    Q_D(const KInlineObject);
     return shapeForPosition(d->document, d->positionInDocument);
 }
 
-KoTextPage *KoInlineObject::page() const
+KoTextPage *KInlineObject::page() const
 {
-    Q_D(const KoInlineObject);
+    Q_D(const KInlineObject);
     KoShape *shape = shapeForPosition(d->document, d->positionInDocument);
     if (shape == 0)
         return 0;
@@ -183,12 +183,12 @@ KoTextPage *KoInlineObject::page() const
     return data->page();
 }
 
-void KoInlineObject::positionChanged()
+void KInlineObject::positionChanged()
 {
 }
 
-KoInlineObjectPrivate *KoInlineObject::priv()
+KoInlineObjectPrivate *KInlineObject::priv()
 {
-    Q_D(KoInlineObject);
+    Q_D(KInlineObject);
     return d;
 }

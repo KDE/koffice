@@ -28,7 +28,7 @@ set(kotext_LIB_SRCS
     InsertNamedVariableAction.cpp
     InsertTextReferenceAction.cpp
     InsertTextLocator.cpp
-    KoInlineObject.cpp
+    KInlineObject.cpp
     KoVariable.cpp
     KoVariableManager.cpp
     KoNamedVariable.cpp
@@ -114,7 +114,7 @@ install( FILES texteditingplugin.desktop inlinetextobject.desktop textvariablepl
 install(
     FILES
     kotext_export.h
-    KoInlineObject.h
+    KInlineObject.h
     KoTextEditor.h
     KoTextEditingFactory.h
     KoTextEditingPlugin.h

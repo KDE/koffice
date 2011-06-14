@@ -19,7 +19,7 @@
  */
 
 #include "InsertInlineObjectActionBase_p.h"
-#include "KoInlineObject.h"
+#include "KInlineObject.h"
 #include "KoInlineObjectFactoryBase.h"
 #include "KoTextEditor.h"
 
@@ -44,7 +44,7 @@ void InsertInlineObjectActionBase::activated()
     Q_ASSERT(m_canvas->toolProxy());
     KoTextEditor *handler = qobject_cast<KoTextEditor*> (m_canvas->toolProxy()->selection());
     if (handler) {
-        KoInlineObject *obj = createInlineObject();
+        KInlineObject *obj = createInlineObject();
         if (obj)
             handler->insertInlineObject(obj);
     } else {

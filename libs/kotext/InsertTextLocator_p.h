@@ -44,7 +44,7 @@ public:
     InsertTextLocator(KoCanvasBase *canvas);
 
 private:
-    virtual KoInlineObject *createInlineObject();
+    virtual KInlineObject *createInlineObject();
 
 private slots:
     void activated();

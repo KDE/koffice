@@ -43,7 +43,7 @@ DateVariableFactory::DateVariableFactory(QObject *parent)
     setOdfElementNames(KOdfXmlNS::text, elementNames);
 }
 
-KoInlineObject *DateVariableFactory::createInlineObject(const KProperties *properties) const
+KInlineObject *DateVariableFactory::createInlineObject(const KProperties *properties) const
 {
     DateVariable::DateType dt = DateVariable::Fixed;
     if (properties)

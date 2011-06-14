@@ -179,7 +179,7 @@ bool KoTextEditorPrivate::deleteInlineObjects(bool backwards)
     KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(d->textShapeData->document()->documentLayout());
     Q_ASSERT(layout);
     KoInlineTextObjectManager *manager = layout->inlineObjectTextManager();
-    KoInlineObject *object;
+    KInlineObject *object;
     bool found = false;
 
     if (d->caret->hasSelection()) {
@@ -770,7 +770,7 @@ bool KoTextEditor::insertIndexMarker()
     return true;
 }
 
-void KoTextEditor::insertInlineObject(KoInlineObject *inliner)
+void KoTextEditor::insertInlineObject(KInlineObject *inliner)
 {
     d->updateState(KoTextEditorPrivate::Custom, i18n("Insert Variable"));
     KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(d->document->documentLayout());

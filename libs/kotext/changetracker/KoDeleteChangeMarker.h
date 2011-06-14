@@ -22,7 +22,7 @@
 
 #include "kotext_export.h"
 
-#include <KoInlineObject.h>
+#include <KInlineObject.h>
 #include <QTextFormat>
 #include <KoListStyle.h>
 
@@ -31,7 +31,7 @@ class KXmlElement;
 
 class QTextDocument;
 
-class KOTEXT_EXPORT KoDeleteChangeMarker : public KoInlineObject
+class KOTEXT_EXPORT KoDeleteChangeMarker : public KInlineObject
 {
 public:
 

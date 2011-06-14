@@ -19,7 +19,7 @@
 #ifndef KOINLINENOTE_H
 #define KOINLINENOTE_H
 
-#include "KoInlineObject.h"
+#include "KInlineObject.h"
 #include "kotext_export.h"
 
 class KoShapeLoadingContext;
@@ -32,7 +32,7 @@ class QTextDocumentFragment;
  * This object is an inline object, which means it is anchored in the text-flow and it can hold note info.
  * Typical notes that use this are Footnotes, Endnotes and Annotations (also known as comments).
  */
-class KOTEXT_EXPORT KInlineNote : public KoInlineObject
+class KOTEXT_EXPORT KInlineNote : public KInlineObject
 {
 public:
     /// The type of note specifies how the application will use the text from the note.

@@ -37,7 +37,7 @@ InsertTextReferenceAction::InsertTextReferenceAction(KoCanvasBase *canvas, const
 {
 }
 
-KoInlineObject *InsertTextReferenceAction::createInlineObject()
+KInlineObject *InsertTextReferenceAction::createInlineObject()
 {
     const QList<KoTextLocator*> textLocators = m_manager->textLocators();
     if (textLocators.isEmpty()) {

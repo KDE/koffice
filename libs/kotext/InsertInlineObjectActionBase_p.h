@@ -34,7 +34,7 @@
 #include <QString>
 
 class KoCanvasBase;
-class KoInlineObject;
+class KInlineObject;
 
 /**
  * helper class
@@ -50,7 +50,7 @@ private slots:
     void activated();
 
 protected:
-    virtual KoInlineObject *createInlineObject() = 0;
+    virtual KInlineObject *createInlineObject() = 0;
 
     KoCanvasBase *m_canvas;
 };

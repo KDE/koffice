@@ -43,7 +43,7 @@ public:
     InsertTextReferenceAction(KoCanvasBase *canvas, const KoInlineTextObjectManager *manager);
 
 private:
-    virtual KoInlineObject *createInlineObject();
+    virtual KInlineObject *createInlineObject();
 
     const KoInlineTextObjectManager *m_manager;
 };

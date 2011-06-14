@@ -24,7 +24,7 @@ class KoVariableManagerPrivate
 {
 public:
     KoVariableManagerPrivate()
-            : lastId(KoInlineObject::VariableManagerStart) { }
+            : lastId(KInlineObject::VariableManagerStart) { }
     KoInlineTextObjectManager *inlineObjectManager;
     QHash<QString, int> variableMapping;
     int lastId;
@@ -52,7 +52,7 @@ void KoVariableManager::setValue(const QString &name, const QString &value)
         d->variableMapping.insert(name, key);
     }
     // the variable manager stores the actual value of the variable.
-    d->inlineObjectManager->setProperty(static_cast<KoInlineObject::Property>(key), value);
+    d->inlineObjectManager->setProperty(static_cast<KInlineObject::Property>(key), value);
     emit valueChanged();
 }
 
@@ -61,7 +61,7 @@ QString KoVariableManager::value(const QString &name) const
     int key = d->variableMapping.value(name);
     if (key == 0)
         return QString();
-    return d->inlineObjectManager->stringProperty(static_cast<KoInlineObject::Property>(key));
+    return d->inlineObjectManager->stringProperty(static_cast<KInlineObject::Property>(key));
 }
 
 void KoVariableManager::remove(const QString &name)
@@ -70,7 +70,7 @@ void KoVariableManager::remove(const QString &name)
     if (key == 0)
         return;
     d->variableMapping.remove(name);
-    d->inlineObjectManager->removeProperty(static_cast<KoInlineObject::Property>(key));
+    d->inlineObjectManager->removeProperty(static_cast<KInlineObject::Property>(key));
 }
 
 int KoVariableManager::usageCount(const QString &name) const
@@ -85,7 +85,7 @@ KoVariable *KoVariableManager::createVariable(const QString &name) const
     int key = d->variableMapping.value(name);
     if (key == 0)
         return 0;
-    return new KoNamedVariable(static_cast<KoInlineObject::Property>(key), name);
+    return new KoNamedVariable(static_cast<KInlineObject::Property>(key), name);
 }
 
 QList<QString> KoVariableManager::variables() const

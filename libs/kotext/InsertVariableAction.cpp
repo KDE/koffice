@@ -37,9 +37,9 @@ InsertVariableAction::InsertVariableAction(KoCanvasBase *base, KoInlineObjectFac
 {
 }
 
-KoInlineObject *InsertVariableAction::createInlineObject()
+KInlineObject *InsertVariableAction::createInlineObject()
 {
-    KoInlineObject *io = m_factory->createInlineObject(m_properties);
+    KInlineObject *io = m_factory->createInlineObject(m_properties);
     KoVariable *variable = dynamic_cast<KoVariable*>(io);
     Q_ASSERT(variable);
     QWidget *widget = variable->createOptionsWidget();

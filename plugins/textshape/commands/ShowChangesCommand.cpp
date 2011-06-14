@@ -141,7 +141,7 @@ void ShowChangesCommand::checkAndAddAnchoredShapes(int position, int length)
     for (int i=position;i < (position + length);i++) {
         if (m_textEditor->document()->characterAt(i) == QChar::ObjectReplacementCharacter) {
             cursor.setPosition(i+1);
-            KoInlineObject *object = KoTextDocument(m_textEditor->document()).inlineTextObjectManager()->inlineTextObject(cursor);
+            KInlineObject *object = KoTextDocument(m_textEditor->document()).inlineTextObjectManager()->inlineTextObject(cursor);
             if (!object)
                 continue;
 
@@ -194,7 +194,7 @@ void ShowChangesCommand::checkAndRemoveAnchoredShapes(int position, int length)
     for (int i=position;i < (position + length);i++) {
         if (m_textEditor->document()->characterAt(i) == QChar::ObjectReplacementCharacter) {
             cursor.setPosition(i+1);
-            KoInlineObject *object = KoTextDocument(m_textEditor->document()).inlineTextObjectManager()->inlineTextObject(cursor);
+            KInlineObject *object = KoTextDocument(m_textEditor->document()).inlineTextObjectManager()->inlineTextObject(cursor);
             if (!object)
                 continue;
 

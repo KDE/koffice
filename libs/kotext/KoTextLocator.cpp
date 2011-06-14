@@ -18,7 +18,7 @@
  */
 
 #include "KoTextLocator.h"
-#include "KoInlineObject_p.h"
+#include "KInlineObject_p.h"
 #include "KoTextBlockData.h"
 #include "KoTextShapeData.h"
 #include "KoTextReference_p.h"
@@ -53,7 +53,7 @@ public:
         dirty = false;
         if (document == 0)
             return;
-        Q_Q(KoInlineObject);
+        Q_Q(KInlineObject);
 
         const int oldPage = pageNumber;
         const int oldChapter = chapterPosition;
@@ -91,7 +91,7 @@ public:
 
 
 KoTextLocator::KoTextLocator()
-        : KoInlineObject(*(new KoTextLocatorPrivate(this)), false)
+        : KInlineObject(*(new KoTextLocatorPrivate(this)), false)
 {
 }
 

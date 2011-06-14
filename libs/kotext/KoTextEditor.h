@@ -32,7 +32,7 @@
 #include <QTextCursor>
 
 class KoCharacterStyle;
-class KoInlineObject;
+class KInlineObject;
 class KoParagraphStyle;
 
 class QTextBlock;
@@ -121,7 +121,7 @@ public slots:
     * Insert an inlineObject (such as a variable) at the current cursor position. Possibly replacing the selection.
     * @param inliner the object to insert.
     */
-    void insertInlineObject(KoInlineObject *inliner);
+    void insertInlineObject(KInlineObject *inliner);
 
     /**
     * At the current cursor position, insert a marker that marks the next word as being part of the index.

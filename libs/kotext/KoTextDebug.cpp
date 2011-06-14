@@ -125,7 +125,7 @@ QString KoTextDebug::inlineObjectAttributes(const QTextCharFormat &textFormat)
     if (textFormat.objectType() == QTextFormat::UserObject + 1) {
         KoTextDocumentLayout *lay = document ? qobject_cast<KoTextDocumentLayout *>(document->documentLayout()) : 0;
         KoInlineTextObjectManager *inlineObjectManager = lay ? lay->inlineTextObjectManager() : 0;
-        KoInlineObject *inlineObject = inlineObjectManager->inlineTextObject(textFormat);
+        KInlineObject *inlineObject = inlineObjectManager->inlineTextObject(textFormat);
         if (KoBookmark *bookmark = dynamic_cast<KoBookmark *>(inlineObject)) {
             if (bookmark->type() == KoBookmark::SinglePosition) {
                 attrs.append(" type=\"bookmark\"");
@@ -1265,7 +1265,7 @@ void KoTextDebug::dumpFragment(const QTextFragment &fragment, QTextStream &out)
 
     KoTextDocumentLayout *lay = document ? qobject_cast<KoTextDocumentLayout *>(document->documentLayout()) : 0;
     QTextCharFormat charFormat = fragment.charFormat();
-    KoInlineObject *inlineObject = lay ? lay->inlineTextObjectManager()->inlineTextObject(charFormat) : 0;
+    KInlineObject *inlineObject = lay ? lay->inlineTextObjectManager()->inlineTextObject(charFormat) : 0;
     if (inlineObject) {
         QString cf = inlineObjectAttributes(charFormat);
 

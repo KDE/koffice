@@ -25,7 +25,7 @@
 #include <QObject>
 #include <QList>
 
-class KoInlineObject;
+class KInlineObject;
 class KoCanvasBase;
 class QAction;
 class KXmlElement;
@@ -35,7 +35,7 @@ class KoShapeLoadingContext;
  * This singleton class keeps a register of all available InlineObject factories.
  * @see KoInlineObjectFactoryBase
  * @see KoInlineTextObjectManager
- * @see KoInlineObject
+ * @see KInlineObject
  * @see KoVariable
  */
 class KOTEXT_EXPORT KoInlineObjectRegistry : public QObject,  public KGenericRegistry<KoInlineObjectFactoryBase*>
@@ -69,7 +69,7 @@ public:
      *
      * @returns the variable or 0 if no variable could be created
      */
-    KoInlineObject *createFromOdf(const KXmlElement &element, KoShapeLoadingContext &context) const;
+    KInlineObject *createFromOdf(const KXmlElement &element, KoShapeLoadingContext &context) const;
 
 private:
     KoInlineObjectRegistry();

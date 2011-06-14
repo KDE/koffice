@@ -122,7 +122,7 @@ void JumpOverview::setCurrentRow(int row)
 
     widget.name->setText(entry.name);
     if (entry.pageNumber == -1) {
-        KoInlineObject *object = m_doc.inlineTextObjectManager()->inlineTextObject(entry.objId);
+        KInlineObject *object = m_doc.inlineTextObjectManager()->inlineTextObject(entry.objId);
         KoTextPage *page = 0;
         if (object)
             page = object->page();

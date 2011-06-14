@@ -21,7 +21,7 @@
 #define __KOVARIABLE_H__
 
 // KOffice libs
-#include "KoInlineObject.h"
+#include "KInlineObject.h"
 #include "kotext_export.h"
 
 // Qt + kde
@@ -45,12 +45,12 @@ class KoVariablePrivate;
  * text shown; we depend on plugin writers to create more exciting ways to update variables.
  *
  * The inheriting class can choose from a number of callbacks to reimplement, see the
- *  KoInlineObject API. The most important one for variable authors is the positionChanged()
+ *  KInlineObject API. The most important one for variable authors is the positionChanged()
  * virtual method. That hook is called whenever the variable gets a new position.
  * For variables that needs to change their value based on position in the document,
  * you should implement that hook.  Useful methods.
  */
-class KOTEXT_EXPORT KoVariable : public KoInlineObject
+class KOTEXT_EXPORT KoVariable : public KInlineObject
 {
 public:
     /**

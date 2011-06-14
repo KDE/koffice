@@ -44,7 +44,7 @@ public:
     InsertVariableAction(KoCanvasBase *base, KoInlineObjectFactoryBase *factory, const KoInlineObjectTemplate &templ);
 
 private:
-    virtual KoInlineObject *createInlineObject();
+    virtual KInlineObject *createInlineObject();
 
     KoInlineObjectFactoryBase *const m_factory;
     const QString m_templateId;

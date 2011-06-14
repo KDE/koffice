@@ -30,7 +30,7 @@ InsertTextLocator::InsertTextLocator(KoCanvasBase *canvas)
 {
 }
 
-KoInlineObject *InsertTextLocator::createInlineObject()
+KInlineObject *InsertTextLocator::createInlineObject()
 {
     Q_ASSERT(m_canvas->toolProxy());
     KoTextEditor *handler = qobject_cast<KoTextEditor*> (m_canvas->toolProxy()->selection());

@@ -33,7 +33,7 @@ public:
     PresentationVariableFactory(QObject *parent = 0);
 
     /// reimplemented
-    virtual KoInlineObject *createInlineObject(const KProperties *properties = 0) const;
+    virtual KInlineObject *createInlineObject(const KProperties *properties = 0) const;
 };
 
 #endif

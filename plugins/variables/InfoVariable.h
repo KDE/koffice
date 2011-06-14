@@ -44,7 +44,7 @@ public:
     bool loadOdf(const KXmlElement & element, KoShapeLoadingContext & context);
 
 private:
-    KoInlineObject::Property m_type;
+    KInlineObject::Property m_type;
 };
 
 #endif

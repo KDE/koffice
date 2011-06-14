@@ -27,7 +27,7 @@
 #include <QRectF>
 #include <QObject>
 
-class KoInlineObject;
+class KInlineObject;
 class KoZoomHandler;
 class KWPageManagerPrivate;
 

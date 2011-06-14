@@ -22,7 +22,7 @@
 #include "InsertVariableAction_p.h"
 
 #include <KoCanvasBase.h>
-#include <KoInlineObject.h>
+#include <KInlineObject.h>
 #include <KXmlReader.h>
 #include <KoPluginLoader.h>
 
@@ -90,7 +90,7 @@ QList<QAction*> KoInlineObjectRegistry::createInsertVariableActions(KoCanvasBase
     return answer;
 }
 
-KoInlineObject *KoInlineObjectRegistry::createFromOdf(const KXmlElement &element, KoShapeLoadingContext &context) const
+KInlineObject *KoInlineObjectRegistry::createFromOdf(const KXmlElement &element, KoShapeLoadingContext &context) const
 {
     kDebug(32500) << "Going to check for" << element.namespaceURI() << ":" << element.tagName();
 
@@ -99,7 +99,7 @@ KoInlineObject *KoInlineObjectRegistry::createFromOdf(const KXmlElement &element
     if (factory == 0)
         return 0;
 
-    KoInlineObject *object = factory->createInlineObject(0);
+    KInlineObject *object = factory->createInlineObject(0);
     if (object) {
         object->loadOdf(element, context);
     }

@@ -33,7 +33,7 @@
 #include <QTextDocumentFragment>
 #include <QXmlStreamReader>
 
-#include "KoInlineObject.h"
+#include "KInlineObject.h"
 #include "KoTextAnchor.h"
 #include "KoShape.h"
 #include "KoVariable.h"
@@ -199,7 +199,7 @@ public:
     // Things like bookmarks need to be properly turn down
     // during a cut and paste operation when their end marker
     // is not included in the selection.
-    QList<KoInlineObject*> pairedInlineObjectStack;
+    QList<KInlineObject*> pairedInlineObjectStack;
 
     // For saving of paragraph or header splits
     int checkForSplit(const QTextBlock &block);
@@ -814,7 +814,7 @@ void KoTextWriter::Private::saveParagraph(const QTextBlock &block, int from, int
                 inlineRdf->saveOdf(context, writer);
             }
 
-            KoInlineObject *inlineObject = layout ? layout->inlineTextObjectManager()->inlineTextObject(charFormat) : 0;
+            KInlineObject *inlineObject = layout ? layout->inlineTextObjectManager()->inlineTextObject(charFormat) : 0;
             if (currentFragment.length() == 1 && inlineObject
                     && currentFragment.text()[0].unicode() == QChar::ObjectReplacementCharacter) {
                 if (!dynamic_cast<KoDeleteChangeMarker*>(inlineObject)) {
@@ -931,7 +931,7 @@ void KoTextWriter::Private::saveParagraph(const QTextBlock &block, int from, int
 
     //kDebug(30015) << "pairedInlineObjectStack.sz:" << pairedInlineObjectStack.size();
     if (to !=-1 && to < block.position() + block.length()) {
-        foreach (KoInlineObject* inlineObject, pairedInlineObjectStack) {
+        foreach (KInlineObject* inlineObject, pairedInlineObjectStack) {
             inlineObject->saveOdf(context);
         }
     }
@@ -986,7 +986,7 @@ int KoTextWriter::Private::checkForBlockChange(const QTextBlock &block)
             QTextCharFormat charFormat = currentFragment.charFormat();
             int currentChangeId = charFormat.property(KoCharacterStyle::ChangeTrackerId).toInt();
 
-            KoInlineObject *inlineObject = layout ? layout->inlineTextObjectManager()->inlineTextObject(charFormat) : 0;
+            KInlineObject *inlineObject = layout ? layout->inlineTextObjectManager()->inlineTextObject(charFormat) : 0;
             if (currentFragment.length() == 1 && inlineObject && currentFragment.text()[0].unicode() == QChar::ObjectReplacementCharacter) {
                 continue;
             }

@@ -55,7 +55,7 @@ PresentationVariableFactory::PresentationVariableFactory(QObject *parent)
     setOdfElementNames(KOdfXmlNS::presentation, elementNames);
 }
 
-KoInlineObject *PresentationVariableFactory::createInlineObject(const KProperties *properties) const
+KInlineObject *PresentationVariableFactory::createInlineObject(const KProperties *properties) const
 {
     PresentationVariable *var = new PresentationVariable();
     if (properties)

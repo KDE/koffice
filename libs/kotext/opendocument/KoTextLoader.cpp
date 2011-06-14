@@ -653,7 +653,7 @@ void KoTextLoader::loadBody(const KXmlElement &bodyElem, QTextCursor &cursor)
                     } else if (localName == "table-of-content") {
                         loadTableOfContents(tag, cursor);
                     } else {
-                        KoInlineObject *obj = KoInlineObjectRegistry::instance()->createFromOdf(tag, d->context);
+                        KInlineObject *obj = KoInlineObjectRegistry::instance()->createFromOdf(tag, d->context);
                         if (obj) {
                             KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(cursor.block().document()->documentLayout());
                             if (layout) {
@@ -1674,7 +1674,7 @@ void KoTextLoader::loadSpan(const KXmlElement &element, QTextCursor &cursor, boo
         } else if (isDrawNS) {
             loadShape(ts, cursor);
         } else {
-            KoInlineObject *obj = KoInlineObjectRegistry::instance()->createFromOdf(ts, d->context);
+            KInlineObject *obj = KoInlineObjectRegistry::instance()->createFromOdf(ts, d->context);
 
             if (obj) {
                 KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(cursor.block().document()->documentLayout());
@@ -1839,7 +1839,7 @@ bool KoTextLoader::Private::checkForDeleteMerge(QTextCursor &cursor, const QStri
 
             if (!prevChangeId) {
                 KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(cursor.block().document()->documentLayout());
-                KoInlineObject *inlineObject = layout ? layout->inlineTextObjectManager()->inlineTextObject(tempCursor.charFormat()) : 0;
+                KInlineObject *inlineObject = layout ? layout->inlineTextObjectManager()->inlineTextObject(tempCursor.charFormat()) : 0;
                 KoDeleteChangeMarker *deleteChangeMarker = dynamic_cast<KoDeleteChangeMarker *>(inlineObject);
                 if (deleteChangeMarker) {
                     prevChangeId = deleteChangeMarker->changeId();

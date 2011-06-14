@@ -35,7 +35,7 @@
 #include <KoToolProxy.h>
 #include <KoResourceManager.h>
 #include <KoTextEditor.h>
-#include <KoInlineObject.h>
+#include <KInlineObject.h>
 #include <KoTextInlineRdf.h>
 #include <KoInlineTextObjectManager.h>
 #include <KoBookmark.h>
@@ -888,7 +888,7 @@ QPair<int, int> KoDocumentRdf::findExtent(QTextCursor &cursor)
         for (QTextCursor tc = cursor;
                 !tc.atStart() && limit;
                 tc.movePosition(QTextCursor::Left), --limit) {
-            KoInlineObject *inlineObject = textObjectManager->inlineTextObject(tc);
+            KInlineObject *inlineObject = textObjectManager->inlineTextObject(tc);
             if (inlineObject) {
                 if (KoBookmark *bm = dynamic_cast<KoBookmark*>(inlineObject)) {
                     if (bm->type() == KoBookmark::EndBookmark) {
@@ -937,7 +937,7 @@ QPair<int, int> KoDocumentRdf::findExtent(KoTextEditor *handler)
                 tc.movePosition(QTextCursor::Left), --limit) {
             QTextCursor qtc(handler->document());
             qtc.setPosition(tc.position());
-            KoInlineObject *inlineObject = textObjectManager->inlineTextObject(qtc);
+            KInlineObject *inlineObject = textObjectManager->inlineTextObject(qtc);
             if (inlineObject) {
                 if (KoBookmark *bm = dynamic_cast<KoBookmark*>(inlineObject)) {
                     if (bm->type() == KoBookmark::EndBookmark) {
@@ -985,7 +985,7 @@ QString KoDocumentRdf::findXmlId(KoTextEditor *handler)
                 tc.movePosition(QTextCursor::Left), --limit) {
             QTextCursor qtc(handler->document());
             qtc.setPosition(tc.position());
-            KoInlineObject *inlineObject = textObjectManager->inlineTextObject(qtc);
+            KInlineObject *inlineObject = textObjectManager->inlineTextObject(qtc);
             if (inlineObject) {
                 if (KoBookmark *bm = dynamic_cast<KoBookmark*>(inlineObject)) {
                     if (bm->type() == KoBookmark::EndBookmark) {
@@ -1007,8 +1007,8 @@ QString KoDocumentRdf::findXmlId(KoTextEditor *handler)
                             continue;
                     }
                 }
-                if (KoInlineObject *shape = dynamic_cast<KoInlineObject*>(inlineObject)) {
-                    RDEBUG << "have KoInlineObject at:" <<  tc.position();
+                if (KInlineObject *shape = dynamic_cast<KInlineObject*>(inlineObject)) {
+                    RDEBUG << "have KInlineObject at:" <<  tc.position();
                     inlineRdf = shape->inlineRdf();
                     if (inlineRdf) {
                         break;
@@ -1040,7 +1040,7 @@ QString KoDocumentRdf::findXmlId(QTextCursor &cursor)
         int limit = 500;
         for (QTextCursor tc = cursor; !tc.atStart() && limit;
                 tc.movePosition(QTextCursor::Left), --limit) {
-            KoInlineObject *inlineObject = textObjectManager->inlineTextObject(tc);
+            KInlineObject *inlineObject = textObjectManager->inlineTextObject(tc);
             if (inlineObject) {
                 if (KoBookmark *bm = dynamic_cast<KoBookmark*>(inlineObject)) {
                     if (bm->type() == KoBookmark::EndBookmark) {
@@ -1062,8 +1062,8 @@ QString KoDocumentRdf::findXmlId(QTextCursor &cursor)
                             continue;
                     }
                 }
-                if (KoInlineObject *shape = dynamic_cast<KoInlineObject*>(inlineObject)) {
-                    RDEBUG << "have KoInlineObject at:" <<  tc.position();
+                if (KInlineObject *shape = dynamic_cast<KInlineObject*>(inlineObject)) {
+                    RDEBUG << "have KInlineObject at:" <<  tc.position();
                     inlineRdf = shape->inlineRdf();
                     if (inlineRdf) {
                         break;
@@ -1097,7 +1097,7 @@ Soprano::Model *KoDocumentRdf::findStatements(QTextCursor &cursor, int depth)
         int limit = 500;
         for (QTextCursor tc = cursor; !tc.atStart() && limit;
                 tc.movePosition(QTextCursor::Left), --limit) {
-            KoInlineObject *inlineObject = textObjectManager->inlineTextObject(tc);
+            KInlineObject *inlineObject = textObjectManager->inlineTextObject(tc);
             if (inlineObject) {
                 if (KoBookmark *bm = dynamic_cast<KoBookmark*>(inlineObject)) {
                     RDEBUG << "have KoBookmark type:" << bm->type() << " at:" <<  tc.position() << endl;
@@ -1133,8 +1133,8 @@ Soprano::Model *KoDocumentRdf::findStatements(QTextCursor &cursor, int depth)
                             continue;
                     }
                 }
-                if (KoInlineObject *shape = dynamic_cast<KoInlineObject*>(inlineObject)) {
-                    RDEBUG << "have KoInlineObject at:" <<  tc.position();
+                if (KInlineObject *shape = dynamic_cast<KInlineObject*>(inlineObject)) {
+                    RDEBUG << "have KInlineObject at:" <<  tc.position();
                     inlineRdf = shape->inlineRdf();
                     if (inlineRdf) {
                         break;
@@ -1201,7 +1201,7 @@ Soprano::Model *KoDocumentRdf::findStatements(KoTextEditor *handler, int depth)
                 tc.movePosition(QTextCursor::Left), --limit) {
             QTextCursor qtc(handler->document());
             qtc.setPosition(tc.position());
-            KoInlineObject *inlineObject = textObjectManager->inlineTextObject(qtc);
+            KInlineObject *inlineObject = textObjectManager->inlineTextObject(qtc);
             if (inlineObject) {
                 if (KoBookmark *bm = dynamic_cast<KoBookmark*>(inlineObject)) {
                     RDEBUG << "have KoBookmark type:" << bm->type() << " at:" <<  tc.position() << endl;
@@ -1234,8 +1234,8 @@ Soprano::Model *KoDocumentRdf::findStatements(KoTextEditor *handler, int depth)
                             continue;
                     }
                 }
-                if (KoInlineObject *shape = dynamic_cast<KoInlineObject*>(inlineObject)) {
-                    RDEBUG << "have KoInlineObject at:" <<  tc.position();
+                if (KInlineObject *shape = dynamic_cast<KInlineObject*>(inlineObject)) {
+                    RDEBUG << "have KInlineObject at:" <<  tc.position();
                     inlineRdf = shape->inlineRdf();
                     if (inlineRdf) {
                         break;
@@ -1305,8 +1305,8 @@ void KoDocumentRdf::updateInlineRdfStatements(QTextDocument *qdoc)
     //
     // Rdf from inline objects
     //
-    QList<KoInlineObject*> kiocol = textObjectManager->inlineTextObjects();
-    foreach (KoInlineObject *kio, kiocol) {
+    QList<KInlineObject*> kiocol = textObjectManager->inlineTextObjects();
+    foreach (KInlineObject *kio, kiocol) {
         if (KoTextInlineRdf *inlineRdf = kio->inlineRdf()) {
             rememberNewInlineRdfObject(inlineRdf);
         }

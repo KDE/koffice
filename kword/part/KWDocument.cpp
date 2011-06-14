@@ -310,7 +310,7 @@ void KWDocument::removePage(int pageNumber)
 void KWDocument::firePageSetupChanged()
 {
     if (inlineTextObjectManager())
-        inlineTextObjectManager()->setProperty(KoInlineObject::PageCount, pageCount());
+        inlineTextObjectManager()->setProperty(KInlineObject::PageCount, pageCount());
     resourceManager()->setResource(KWord::CurrentPageCount, pageCount());
     emit pageSetupChanged();
 }
@@ -593,7 +593,7 @@ void KWDocument::clear()
     m_pageManager.setPadding(padding);
 
     if (inlineTextObjectManager())
-        inlineTextObjectManager()->setProperty(KoInlineObject::PageCount, pageCount());
+        inlineTextObjectManager()->setProperty(KInlineObject::PageCount, pageCount());
 }
 
 void KWDocument::openTemplate(const KUrl &url)
@@ -775,7 +775,7 @@ void KWDocument::endOfLoading() // called by both oasis and oldxml
         if (!tfs)
             continue;
         KoTextDocument textDoc(tfs->document());
-        foreach (KoInlineObject *inlineObject, textDoc.inlineTextObjectManager()->inlineTextObjects()) {
+        foreach (KInlineObject *inlineObject, textDoc.inlineTextObjectManager()->inlineTextObjects()) {
             KoTextAnchor *anchor = dynamic_cast<KoTextAnchor*>(inlineObject);
             if (anchor) {
                 if (m_magicCurtain == 0) {

@@ -35,7 +35,7 @@ KoInlineTextObjectManager::KoInlineTextObjectManager(QObject *parent)
 {
 }
 
-KoInlineObject *KoInlineTextObjectManager::inlineTextObject(const QTextCharFormat &format) const
+KInlineObject *KoInlineTextObjectManager::inlineTextObject(const QTextCharFormat &format) const
 {
     int id = format.intProperty(InlineInstanceId);
     if (id <= 0)
@@ -43,17 +43,17 @@ KoInlineObject *KoInlineTextObjectManager::inlineTextObject(const QTextCharForma
     return m_objects.value(id);
 }
 
-KoInlineObject *KoInlineTextObjectManager::inlineTextObject(const QTextCursor &cursor) const
+KInlineObject *KoInlineTextObjectManager::inlineTextObject(const QTextCursor &cursor) const
 {
     return inlineTextObject(cursor.charFormat());
 }
 
-KoInlineObject *KoInlineTextObjectManager::inlineTextObject(int id) const
+KInlineObject *KoInlineTextObjectManager::inlineTextObject(int id) const
 {
     return m_objects.value(id);
 }
 
-void KoInlineTextObjectManager::insertInlineObject(QTextCursor &cursor, KoInlineObject *object, QTextCharFormat charFormat)
+void KoInlineTextObjectManager::insertInlineObject(QTextCursor &cursor, KInlineObject *object, QTextCharFormat charFormat)
 {
     QTextCharFormat oldCf = cursor.charFormat();
     QTextCharFormat cf(charFormat);
@@ -70,7 +70,7 @@ void KoInlineTextObjectManager::insertInlineObject(QTextCursor &cursor, KoInline
         m_listeners.append(object);
         QHash<int, QVariant>::iterator i;
         for (i = m_properties.begin(); i != m_properties.end(); ++i)
-            object->propertyChanged((KoInlineObject::Property)(i.key()), i.value());
+            object->propertyChanged((KInlineObject::Property)(i.key()), i.value());
     }
 
     KoBookmark *bookmark = dynamic_cast<KoBookmark *>(object);
@@ -85,7 +85,7 @@ void KoInlineTextObjectManager::insertInlineObject(QTextCursor &cursor, KoInline
 
 bool KoInlineTextObjectManager::removeInlineObject(QTextCursor &cursor)
 {
-    KoInlineObject *object = inlineTextObject(cursor);
+    KInlineObject *object = inlineTextObject(cursor);
     if (object->propertyChangeListener()) {
         int position = m_listeners.indexOf(object);
         m_listeners.removeAt(position);
@@ -123,7 +123,7 @@ bool KoInlineTextObjectManager::removeInlineObject(QTextCursor &cursor)
     return false;
 }
 
-void KoInlineTextObjectManager::removeInlineObject(KoInlineObject *object)
+void KoInlineTextObjectManager::removeInlineObject(KInlineObject *object)
 {
     //Q_ASSERT(object);
     if (object)
@@ -131,7 +131,7 @@ void KoInlineTextObjectManager::removeInlineObject(KoInlineObject *object)
     // TODO dirty the document somehow
 }
 
-void KoInlineTextObjectManager::setProperty(KoInlineObject::Property key, const QVariant &value)
+void KoInlineTextObjectManager::setProperty(KInlineObject::Property key, const QVariant &value)
 {
     if (m_properties.contains(key)) {
         if (value == m_properties.value(key))
@@ -139,30 +139,30 @@ void KoInlineTextObjectManager::setProperty(KoInlineObject::Property key, const 
         m_properties.remove(key);
     }
     m_properties.insert(key, value);
-    foreach (KoInlineObject *obj, m_listeners)
+    foreach (KInlineObject *obj, m_listeners)
         obj->propertyChanged(key, value);
 }
 
-QVariant KoInlineTextObjectManager::property(KoInlineObject::Property key) const
+QVariant KoInlineTextObjectManager::property(KInlineObject::Property key) const
 {
     return m_properties.value(key);
 }
 
-int KoInlineTextObjectManager::intProperty(KoInlineObject::Property key) const
+int KoInlineTextObjectManager::intProperty(KInlineObject::Property key) const
 {
     if (!m_properties.contains(key))
         return 0;
     return m_properties.value(key).toInt();
 }
 
-bool KoInlineTextObjectManager::boolProperty(KoInlineObject::Property key) const
+bool KoInlineTextObjectManager::boolProperty(KInlineObject::Property key) const
 {
     if (!m_properties.contains(key))
         return false;
     return m_properties.value(key).toBool();
 }
 
-QString KoInlineTextObjectManager::stringProperty(KoInlineObject::Property key) const
+QString KoInlineTextObjectManager::stringProperty(KInlineObject::Property key) const
 {
     if (!m_properties.contains(key))
         return QString();
@@ -184,7 +184,7 @@ KoBookmarkManager *KoInlineTextObjectManager::bookmarkManager()
     return &m_bookmarkManager;
 }
 
-void KoInlineTextObjectManager::removeProperty(KoInlineObject::Property key)
+void KoInlineTextObjectManager::removeProperty(KInlineObject::Property key)
 {
     m_properties.remove(key);
 }
@@ -205,7 +205,7 @@ QList<QAction*> KoInlineTextObjectManager::createInsertVariableActions(KoCanvasB
 QList<KoTextLocator*> KoInlineTextObjectManager::textLocators() const
 {
     QList<KoTextLocator*> answers;
-    foreach(KoInlineObject *object, m_objects) {
+    foreach(KInlineObject *object, m_objects) {
         KoTextLocator *tl = dynamic_cast<KoTextLocator*>(object);
         if (tl)
             answers.append(tl);
@@ -216,42 +216,42 @@ QList<KoTextLocator*> KoInlineTextObjectManager::textLocators() const
 void KoInlineTextObjectManager::documentInformationUpdated(const QString &info, const QString &data)
 {
     if (info == "title")
-        setProperty(KoInlineObject::Title, data);
+        setProperty(KInlineObject::Title, data);
     else if (info == "description")
-        setProperty(KoInlineObject::Description, data);
+        setProperty(KInlineObject::Description, data);
     else if (info == "subject")
-        setProperty(KoInlineObject::Subject, data);
+        setProperty(KInlineObject::Subject, data);
     else if (info == "keyword")
-        setProperty(KoInlineObject::Keywords, data);
+        setProperty(KInlineObject::Keywords, data);
     else if (info == "creator")
-        setProperty(KoInlineObject::AuthorName, data);
+        setProperty(KInlineObject::AuthorName, data);
     else if (info == "initial")
-        setProperty(KoInlineObject::AuthorInitials, data);
+        setProperty(KInlineObject::AuthorInitials, data);
     else if (info == "author-title")
-        setProperty(KoInlineObject::SenderTitle, data);
+        setProperty(KInlineObject::SenderTitle, data);
     else if (info == "email")
-        setProperty(KoInlineObject::SenderEmail, data);
+        setProperty(KInlineObject::SenderEmail, data);
     else if (info == "telephone")
-        setProperty(KoInlineObject::SenderPhonePrivate, data);
+        setProperty(KInlineObject::SenderPhonePrivate, data);
     else if (info == "telephone-work")
-        setProperty(KoInlineObject::SenderPhoneWork, data);
+        setProperty(KInlineObject::SenderPhoneWork, data);
     else if (info == "fax")
-        setProperty(KoInlineObject::SenderFax, data);
+        setProperty(KInlineObject::SenderFax, data);
     else if (info == "country")
-        setProperty(KoInlineObject::SenderCountry, data);
+        setProperty(KInlineObject::SenderCountry, data);
     else if (info == "postal-code")
-        setProperty(KoInlineObject::SenderPostalCode, data);
+        setProperty(KInlineObject::SenderPostalCode, data);
     else if (info == "city")
-        setProperty(KoInlineObject::SenderCity, data);
+        setProperty(KInlineObject::SenderCity, data);
     else if (info == "street")
-        setProperty(KoInlineObject::SenderStreet, data);
+        setProperty(KInlineObject::SenderStreet, data);
     else if (info == "position")
-        setProperty(KoInlineObject::SenderPosition, data);
+        setProperty(KInlineObject::SenderPosition, data);
     else if (info == "company")
-        setProperty(KoInlineObject::SenderCompany, data);
+        setProperty(KInlineObject::SenderCompany, data);
 }
 
-QList<KoInlineObject*> KoInlineTextObjectManager::inlineTextObjects() const
+QList<KInlineObject*> KoInlineTextObjectManager::inlineTextObjects() const
 {
     return m_objects.values();
 }

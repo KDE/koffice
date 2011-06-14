@@ -42,7 +42,7 @@ public:
 };
 
 KoTextMeta::KoTextMeta()
-        : KoInlineObject(false),
+        : KInlineObject(false),
         d(new Private())
 {
     d->endBookmark = 0;

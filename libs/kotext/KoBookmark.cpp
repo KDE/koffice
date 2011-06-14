@@ -19,7 +19,7 @@
  */
 
 #include "KoBookmark.h"
-#include "KoInlineObject_p.h"
+#include "KInlineObject_p.h"
 
 #include <KoShapeSavingContext.h>
 #include <KoShapeLoadingContext.h>
@@ -54,7 +54,7 @@ public:
 };
 
 KoBookmark::KoBookmark(const QString &name)
-        : KoInlineObject(*(new KoBookmarkPrivate(this)), false)
+        : KInlineObject(*(new KoBookmarkPrivate(this)), false)
 {
     Q_D(KoBookmark);
     d->selection = false;

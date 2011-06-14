@@ -36,7 +36,7 @@ InfoVariableFactory::InfoVariableFactory(QObject *parent)
     setOdfElementNames(KOdfXmlNS::text, elementNames);
 }
 
-KoInlineObject *InfoVariableFactory::createInlineObject(const KProperties *properties) const
+KInlineObject *InfoVariableFactory::createInlineObject(const KProperties *properties) const
 {
     InfoVariable *var = new InfoVariable();
     if (properties)

@@ -28,7 +28,7 @@
 
 class TextTool;
 class QTextCursor;
-class KoInlineObject;
+class KInlineObject;
 class KoShape;
 
 class DeleteCommand : public TextCommandBase
@@ -51,7 +51,7 @@ public:
 private:
     TextTool *m_tool;
     QList<QUndoCommand *> m_shapeDeleteCommands;
-    QSet<KoInlineObject *> m_invalidInlineObjects;
+    QSet<KInlineObject *> m_invalidInlineObjects;
     bool m_first;
     bool m_undone;
     DeleteMode m_mode;
@@ -64,7 +64,7 @@ private:
     virtual void deletePreviousChar();
     virtual void deleteSelection(QTextCursor &selection);
     virtual void deleteInlineObjects(QTextCursor &selection);
-    virtual void deleteTextAnchor(KoInlineObject *object);
+    virtual void deleteTextAnchor(KInlineObject *object);
     virtual bool checkMerge(const QUndoCommand *command);
     virtual void updateListChanges();
 };

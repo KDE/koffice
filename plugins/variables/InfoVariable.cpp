@@ -28,7 +28,7 @@
 
 InfoVariable::InfoVariable()
         : KoVariable(true),
-        m_type(KoInlineObject::DocumentURL)
+        m_type(KInlineObject::DocumentURL)
 {
 }
 
@@ -48,11 +48,11 @@ void InfoVariable::saveOdf(KoShapeSavingContext & context)
 {
     KXmlWriter *writer = &context.xmlWriter();
     QString nodeName;
-    if (m_type == KoInlineObject::Title)
+    if (m_type == KInlineObject::Title)
         nodeName = "text:title";
-    else if (m_type == KoInlineObject::Subject)
+    else if (m_type == KInlineObject::Subject)
         nodeName = "text:subject";
-    else if (m_type == KoInlineObject::Keywords)
+    else if (m_type == KInlineObject::Keywords)
         nodeName = "text:keywords";
     if (!nodeName.isEmpty()) {
         writer->startElement(nodeName.toLatin1(), false);
@@ -66,11 +66,11 @@ bool InfoVariable::loadOdf(const KXmlElement & element, KoShapeLoadingContext & 
     const QString localName(element.localName());
 
     if (localName == "title") {
-        m_type = KoInlineObject::Title;
+        m_type = KInlineObject::Title;
     } else if (localName == "subject") {
-        m_type = KoInlineObject::Subject;
+        m_type = KInlineObject::Subject;
     } else if (localName == "keywords") {
-        m_type = KoInlineObject::Keywords;
+        m_type = KInlineObject::Keywords;
     }
 
     return true;
