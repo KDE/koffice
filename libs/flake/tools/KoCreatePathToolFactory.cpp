@@ -19,7 +19,7 @@
  */
 
 #include "KoCreatePathToolFactory_p.h"
-#include "KoCreatePathTool_p.h"
+#include "KCreatePathTool_p.h"
 
 #include <klocale.h>
 
@@ -43,5 +43,5 @@ KoCreatePathToolFactory::~KoCreatePathToolFactory()
 
 KoToolBase* KoCreatePathToolFactory::createTool(KCanvasBase *canvas)
 {
-    return new KoCreatePathTool(canvas);
+    return new KCreatePathTool(canvas);
 }

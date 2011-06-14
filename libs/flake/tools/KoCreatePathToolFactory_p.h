@@ -35,7 +35,7 @@
 
 #include "KoToolFactoryBase.h"
 
-/// The factory for the KoCreatePathTool
+/// The factory for the KCreatePathTool
 class KoCreatePathToolFactory : public KoToolFactoryBase
 {
 public:

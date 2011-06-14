@@ -34,7 +34,7 @@
 //
 
 
-#include "KoCreatePathTool_p.h"
+#include "KCreatePathTool_p.h"
 #include "KoPathPoint.h"
 #include "KoPathPointData.h"
 #include "KoPathPointMergeCommand.h"
@@ -191,9 +191,9 @@ private:
 
 
 class KoCreatePathToolPrivate : public KoToolBasePrivate {
-    KoCreatePathTool * const q;
+    KCreatePathTool * const q;
 public:
-    KoCreatePathToolPrivate(KoCreatePathTool * const qq, KCanvasBase* canvas)
+    KoCreatePathToolPrivate(KCreatePathTool * const qq, KCanvasBase* canvas)
         : KoToolBasePrivate(qq, canvas),
         q(qq),
         shape(0),

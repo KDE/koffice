@@ -49,7 +49,7 @@ class KoCreatePathToolPrivate;
 /**
  * Tool for creating path shapes.
  */
-class KoCreatePathTool : public KoToolBase
+class KCreatePathTool : public KoToolBase
 {
     Q_OBJECT
 public:
@@ -57,8 +57,8 @@ public:
      * Constructor for the tool that allows you to create new paths by hand.
      * @param canvas the canvas this tool will be working for.
      */
-    explicit KoCreatePathTool(KCanvasBase *canvas);
-    virtual ~KoCreatePathTool();
+    explicit KCreatePathTool(KCanvasBase *canvas);
+    virtual ~KCreatePathTool();
 
     /// reimplemented
     virtual void paint(QPainter &painter, const KoViewConverter &converter);
@@ -92,7 +92,7 @@ protected:
 
 protected:
     /**
-      * This method is called to paint the path. Decorations are drawn by KoCreatePathTool afterwards.
+      * This method is called to paint the path. Decorations are drawn by KCreatePathTool afterwards.
       */
     virtual void paintPath(KoPathShape& pathShape, QPainter &painter, const KoViewConverter &converter);
 
@@ -100,7 +100,7 @@ protected:
     virtual QMap<QString, QWidget *> createOptionWidgets();
 
 private:
-    Q_DECLARE_PRIVATE(KoCreatePathTool);
+    Q_DECLARE_PRIVATE(KCreatePathTool);
     Q_PRIVATE_SLOT(d_func(), void angleDeltaChanged(int));
 };
 #endif
