@@ -200,8 +200,6 @@ install( FILES
 
 install(
     FILES
-    commands/KEventActionAddCommand.h
-    commands/KEventActionRemoveCommand.h
     commands/KParameterToPathCommand.h
     commands/KPathCombineCommand.h
     commands/KPathControlPointMoveCommand.h
@@ -225,7 +223,6 @@ install(
     commands/KoShapeMoveCommand.h
     commands/KoShapeRenameCommand.h
     commands/KoShapeReorderCommand.h
-    commands/KoShapeShadowCommand.h
     commands/KoShapeShearCommand.h
     commands/KoShapeSizeCommand.h
     commands/KoShapeTransformCommand.h
@@ -236,7 +233,6 @@ install(
     KCanvasBase.h
     KCanvasController.h
     KCanvasObserverBase.h
-    KCanvasSupervisor.h
     KColorBackground.h
     KCopyController.h
     KCutController.h
@@ -245,16 +241,6 @@ install(
     KDockRegistry.h
     KDrag.h
     KDragOdfSaveHelper.h
-    KEventActionFactoryBase.h
-    KEventAction.h
-    KEventActionRegistry.h
-    KFilterEffectConfigWidgetBase.h
-    KFilterEffectFactoryBase.h
-    KFilterEffect.h
-    KFilterEffectLoadingContext.h
-    KFilterEffectRegistry.h
-    KFilterEffectRenderContext.h
-    KFilterEffectStack.h
     KoFlake.h
     KFrameShape.h
     KGradientBackground.h
@@ -274,7 +260,6 @@ install(
     KPathShape.h
     KPathShapeLoader.h
     KPatternBackground.h
-    KoPluginLoader.h
     KPointerEvent.h
     KPostscriptPaintDevice.h
     KResourceManager.h
@@ -301,17 +286,13 @@ install(
     KoShapeManager.h
     KoShapeManagerPaintingStrategy.h
     KoShapeOdfSaveHelper.h
-    KoShapePainter.h
     KoShapePaste.h
     KoShapeRegistry.h
     KoShapeSavingContext.h
-    KoShapeShadow.h
     KoShapeUserData.h
     KoSharedLoadingData.h
     KoSharedSavingData.h
     KoSnapGuide.h
-    KoTextOnShapeContainer.h
-    KoTextShapeDataBase.h
     KoToolBase.h
     KoToolFactoryBase.h
     KoToolManager.h
@@ -325,4 +306,31 @@ install(
     tools/KoShapeRubberSelectStrategy.h
     DESTINATION
     ${INCLUDE_INSTALL_DIR} COMPONENT Devel
+)
+
+install(
+    FILES
+    KFilterEffectConfigWidgetBase.h
+    KFilterEffectFactoryBase.h
+    KFilterEffect.h
+    KFilterEffectLoadingContext.h
+    KFilterEffectRegistry.h
+    KFilterEffectRenderContext.h
+    KFilterEffectStack.h
+    KEventActionFactoryBase.h
+    KEventAction.h
+    KEventActionRegistry.h
+    KoShapePainter.h
+    KoTextShapeDataBase.h
+    KoTextOnShapeContainer.h
+    KoPluginLoader.h
+    KoShapeShadow.h
+    KCanvasSupervisor.h
+
+    commands/KEventActionAddCommand.h
+    commands/KEventActionRemoveCommand.h
+    commands/KoShapeShadowCommand.h
+
+    DESTINATION
+    ${INCLUDE_INSTALL_DIR}/private COMPONENT Devel
 )
