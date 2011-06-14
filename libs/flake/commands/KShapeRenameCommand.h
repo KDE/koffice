@@ -27,11 +27,11 @@ class QString;
 class KShape;
 
 /// API docs go here
-class FLAKE_EXPORT KoShapeRenameCommand : public QUndoCommand
+class FLAKE_EXPORT KShapeRenameCommand : public QUndoCommand
 {
 public:
-    KoShapeRenameCommand(KShape *shape, const QString &newName, QUndoCommand *parent = 0);
-    virtual ~KoShapeRenameCommand();
+    KShapeRenameCommand(KShape *shape, const QString &newName, QUndoCommand *parent = 0);
+    virtual ~KShapeRenameCommand();
 
     /// redo the command
     void redo();

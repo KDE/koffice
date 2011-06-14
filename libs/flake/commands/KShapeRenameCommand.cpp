@@ -17,13 +17,13 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoShapeRenameCommand.h"
+#include "KShapeRenameCommand.h"
 
 #include <QString>
 #include <klocale.h>
 #include "KShape.h"
 
-class KoShapeRenameCommand::Private
+class KShapeRenameCommand::Private
 {
 public:
     Private(KShape *shape, const QString &newName)
@@ -37,7 +37,7 @@ public:
     QString oldName;
 };
 
-KoShapeRenameCommand::KoShapeRenameCommand(KShape *shape, const QString &newName, QUndoCommand *parent)
+KShapeRenameCommand::KShapeRenameCommand(KShape *shape, const QString &newName, QUndoCommand *parent)
 : QUndoCommand(parent)
 , d(new Private(shape, newName))
 {
@@ -45,18 +45,18 @@ KoShapeRenameCommand::KoShapeRenameCommand(KShape *shape, const QString &newName
     //setText();
 }
 
-KoShapeRenameCommand::~KoShapeRenameCommand()
+KShapeRenameCommand::~KShapeRenameCommand()
 {
    delete d;
 }
 
-void KoShapeRenameCommand::redo()
+void KShapeRenameCommand::redo()
 {
     QUndoCommand::redo();
     d->shape->setName(d->newName);
 }
 
-void KoShapeRenameCommand::undo()
+void KShapeRenameCommand::undo()
 {
     QUndoCommand::undo();
     d->shape->setName(d->oldName);

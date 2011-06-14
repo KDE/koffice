@@ -31,7 +31,7 @@
 #include <KShapeLayer.h>
 #include <KShapeGroup.h>
 #include <KoShapeUngroupCommand.h>
-#include <KoShapeRenameCommand.h>
+#include <KShapeRenameCommand.h>
 #include <KoZoomHandler.h>
 
 #include <kiconloader.h>
@@ -250,7 +250,7 @@ bool KoPADocumentModel::setData(const QModelIndex &index, const QVariant &value,
         case Qt::DisplayRole:
         case Qt::EditRole:
         {
-            QUndoCommand * cmd = new KoShapeRenameCommand(shape, value.toString());
+            QUndoCommand * cmd = new KShapeRenameCommand(shape, value.toString());
             // TODO 2.1 use different text for the command if e.g. it is a page/slide or layer
             m_document->addCommand(cmd);
         }   break;
