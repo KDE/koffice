@@ -31,7 +31,7 @@ class KoShapeController;
 class KoPathPointRemoveCommandPrivate;
 
 /// The undo / redo command for removing path points.
-class FLAKE_TEST_EXPORT KoPathPointRemoveCommand : public QUndoCommand
+class FLAKE_TEST_EXPORT KPathPointRemoveCommand : public QUndoCommand
 {
 public:
     /**
@@ -55,8 +55,8 @@ public:
      * @param pointDataList List of point data to remove.
      * @param parent the parent command used for macro commands
      */
-    explicit KoPathPointRemoveCommand(const QList<KPathPointData> &pointDataList, QUndoCommand *parent = 0);
-    ~KoPathPointRemoveCommand();
+    explicit KPathPointRemoveCommand(const QList<KPathPointData> &pointDataList, QUndoCommand *parent = 0);
+    ~KPathPointRemoveCommand();
 
     /// redo the command
     void redo();

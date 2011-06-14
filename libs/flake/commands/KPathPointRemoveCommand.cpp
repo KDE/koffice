@@ -18,7 +18,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoPathPointRemoveCommand.h"
+#include "KPathPointRemoveCommand.h"
 #include "KoSubpathRemoveCommand.h"
 #include "KoShapeControllerBase.h"
 #include "KoShapeController.h"
@@ -37,7 +37,7 @@ public:
     bool deletePoints;
 };
 
-QUndoCommand *KoPathPointRemoveCommand::createCommand(
+QUndoCommand *KPathPointRemoveCommand::createCommand(
     const QList<KPathPointData> &pointDataList,
     KoShapeController *shapeController,
     QUndoCommand *parent)
@@ -104,7 +104,7 @@ QUndoCommand *KoPathPointRemoveCommand::createCommand(
     QUndoCommand *cmd = new QUndoCommand(i18n("Remove Points"), parent);
 
     if (pointsToDelete.size() > 0) {
-        new KoPathPointRemoveCommand(pointsToDelete, cmd);
+        new KPathPointRemoveCommand(pointsToDelete, cmd);
     }
     foreach(const KPathPointData & pd, subpathToDelete) {
         new KoSubpathRemoveCommand(pd.pathShape, pd.pointIndex.first, cmd);
@@ -116,7 +116,7 @@ QUndoCommand *KoPathPointRemoveCommand::createCommand(
     return cmd;
 }
 
-KoPathPointRemoveCommand::KoPathPointRemoveCommand(const QList<KPathPointData> & pointDataList,
+KPathPointRemoveCommand::KPathPointRemoveCommand(const QList<KPathPointData> & pointDataList,
         QUndoCommand *parent)
     : QUndoCommand(parent),
     d(new KoPathPointRemoveCommandPrivate())
@@ -133,12 +133,12 @@ KoPathPointRemoveCommand::KoPathPointRemoveCommand(const QList<KPathPointData> &
     setText(i18n("Remove Points"));
 }
 
-KoPathPointRemoveCommand::~KoPathPointRemoveCommand()
+KPathPointRemoveCommand::~KPathPointRemoveCommand()
 {
     delete d;
 }
 
-void KoPathPointRemoveCommand::redo()
+void KPathPointRemoveCommand::redo()
 {
     QUndoCommand::redo();
     KoPathShape * lastPathShape = 0;
@@ -178,7 +178,7 @@ void KoPathPointRemoveCommand::redo()
     d->deletePoints = true;
 }
 
-void KoPathPointRemoveCommand::undo()
+void KPathPointRemoveCommand::undo()
 {
     QUndoCommand::undo();
     KoPathShape * lastPathShape = 0;
