@@ -9,7 +9,7 @@
 #include "MockTextShape.h"
 
 class KoTextDocumentLayout;
-class KoSectionStyle;
+class KSectionStyle;
 class KoStyleManager;
 class QTextDocument;
 class QTextFrame;
@@ -27,14 +27,14 @@ private:
      *
      * @param sectionStyles a list of section styles to use.
      */
-    void initTest(const KoSectionStyle *sectionStyles);
+    void initTest(const KSectionStyle *sectionStyles);
 
     /**
      * Initialize for a new test. Simplified version.
      *
      * @param sectionStyle the section style to use.
      */
-    void initTestSimple(KoSectionStyle *sectionStyle);
+    void initTestSimple(KSectionStyle *sectionStyle);
 
     /// Clean up after a test.
     void cleanupTest();
@@ -58,7 +58,7 @@ private:
     MockTextShape *m_shape;
 
     // Default styles for the test.
-    KoSectionStyle *m_defaultSectionStyle;
+    KSectionStyle *m_defaultSectionStyle;
 };
 
 #endif // TESTSECTIONS_H

@@ -57,7 +57,7 @@ public:
     QHash<int, KoTableColumnStyle *> tableColumnStyles;
     QHash<int, KoTableRowStyle *> tableRowStyles;
     QHash<int, KoTableCellStyle *> tableCellStyles;
-    QHash<int, KoSectionStyle *> sectionStyles;
+    QHash<int, KSectionStyle *> sectionStyles;
     QList<ChangeFollower*> documentUpdaterProxies;
 
     /// the unsetStore has a hash from the styleId to a set of all the property ids of a style

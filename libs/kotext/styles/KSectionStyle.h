@@ -45,10 +45,10 @@ class KXmlElement;
  * Each section in the main text either is based on a section style, or its not. Where
  * it is based on a section style this is indecated that it has a property 'StyleId'
  * with an integer as value.  The integer value corresponds to the styleId() output of
- * a specific KoSectionStyle.
+ * a specific KSectionStyle.
  * @see KoStyleManager
  */
-class KOTEXT_EXPORT KoSectionStyle : public QObject
+class KOTEXT_EXPORT KSectionStyle : public QObject
 {
     Q_OBJECT
 public:
@@ -58,14 +58,14 @@ public:
     };
 
     /// Constructor
-    KoSectionStyle(QObject *parent = 0);
-    /// Creates a KoSectionStyle with the given frame format and \a parent
-    KoSectionStyle(const QTextFrameFormat &frameFormat, QObject *parent = 0);
+    KSectionStyle(QObject *parent = 0);
+    /// Creates a KSectionStyle with the given frame format and \a parent
+    KSectionStyle(const QTextFrameFormat &frameFormat, QObject *parent = 0);
     /// Destructor
-    ~KoSectionStyle();
+    ~KSectionStyle();
 
     /// creates a clone of this style with the specified parent
-    KoSectionStyle *clone(QObject *parent = 0) const;
+    KSectionStyle *clone(QObject *parent = 0) const;
 
     /**
      * Return the current columns settings.
@@ -105,10 +105,10 @@ public:
 #endif
 
     /// set the parent style this one inherits its unset properties from.
-    void setParentStyle(KoSectionStyle *parent);
+    void setParentStyle(KSectionStyle *parent);
 
     /// return the parent style
-    KoSectionStyle *parentStyle() const;
+    KSectionStyle *parentStyle() const;
 
     /// return the name of the style.
     QString name() const;
@@ -123,7 +123,7 @@ public:
     void setStyleId(int id);
 
     /// copy all the properties from the other style to this style, effectively duplicating it.
-    void copyProperties(const KoSectionStyle *style);
+    void copyProperties(const KSectionStyle *style);
 
     void unapplyStyle(QTextFrame &section) const;
 
@@ -143,11 +143,11 @@ public:
     void remove(int key);
 
     /// Compare the section of this style with the other
-    bool operator==(const KoSectionStyle &other) const;
+    bool operator==(const KSectionStyle &other) const;
     /// Compare the section properties of this style with other
-    bool compareSectionProperties(const KoSectionStyle &other) const;
+    bool compareSectionProperties(const KSectionStyle &other) const;
 
-    void removeDuplicates(const KoSectionStyle &other);
+    void removeDuplicates(const KSectionStyle &other);
 
     /**
      * Load the style form the element

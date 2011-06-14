@@ -2,7 +2,7 @@
 
 #include <KoStyleManager.h>
 #include <KoTextDocument.h>
-#include <KoSectionStyle.h>
+#include <KSectionStyle.h>
 
 #include <QTextDocument>
 #include <QTextFrame>
@@ -22,7 +22,7 @@ void TestSections::init()
     m_defaultSectionStyle = 0;
 }
 
-void TestSections::initTest(const KoSectionStyle *sectionStyle)
+void TestSections::initTest(const KSectionStyle *sectionStyle)
 {
     // Mock shape of size 200x1000 pt.
     m_shape = new MockTextShape();
@@ -49,7 +49,7 @@ void TestSections::initTest(const KoSectionStyle *sectionStyle)
     KoTextDocument(m_doc).setStyleManager(m_styleManager);
 
     // Table style.
-    m_defaultSectionStyle = new KoSectionStyle();
+    m_defaultSectionStyle = new KSectionStyle();
     Q_ASSERT(m_defaultSectionStyle);
     m_defaultSectionStyle->setLeftMargin(0.0);
     m_defaultSectionStyle->setRightMargin(0.0);
@@ -74,7 +74,7 @@ void TestSections::cleanupTest()
 
 void TestSections::testBasicLayout()
 {
-    KoSectionStyle *sectionStyle = new KoSectionStyle();
+    KSectionStyle *sectionStyle = new KSectionStyle();
     Q_ASSERT(sectionStyle);
     sectionStyle->setLeftMargin(0.0);
     sectionStyle->setRightMargin(0.0);
@@ -95,7 +95,7 @@ void TestSections::testBasicLayout()
 
 void TestSections::testShrinkByMargin()
 {
-    KoSectionStyle *sectionStyle = new KoSectionStyle();
+    KSectionStyle *sectionStyle = new KSectionStyle();
     Q_ASSERT(sectionStyle);
     sectionStyle->setLeftMargin(20.0);
     sectionStyle->setRightMargin(20.0);
@@ -117,7 +117,7 @@ void TestSections::testShrinkByMargin()
 
 void TestSections::testMoveByMargin()
 {
-    KoSectionStyle *sectionStyle = new KoSectionStyle();
+    KSectionStyle *sectionStyle = new KSectionStyle();
     Q_ASSERT(sectionStyle);
     sectionStyle->setLeftMargin(20.0);
     sectionStyle->setRightMargin(-20.0);

@@ -37,7 +37,7 @@ class KoTableStyle;
 class KoTableColumnStyle;
 class KoTableRowStyle;
 class KoTableCellStyle;
-class KoSectionStyle;
+class KSectionStyle;
 class KoStyleManager;
 class KoShape;
 class KoShapeLoadingContext;
@@ -150,7 +150,7 @@ public:
      * @param stylesDotXml If set the styles from styles.xml are use if unset styles from content.xml are used.
      * @return The section style for the given name or 0 if not found
      */
-    KoSectionStyle *sectionStyle(const QString &name, bool stylesDotXml) const;
+    KSectionStyle *sectionStyle(const QString &name, bool stylesDotXml) const;
 
     /**
      * Set the appication default style
@@ -226,7 +226,7 @@ private:
     // helper functions for loading of section styles
     void addSectionStyles(KOdfLoadingContext &context, QList<KXmlElement*> styleElements, int styleTypes,
                        KoStyleManager *styleManager = 0);
-    QList<QPair<QString, KoSectionStyle *> > loadSectionStyles(KOdfLoadingContext &context, QList<KXmlElement*> styleElements);
+    QList<QPair<QString, KSectionStyle *> > loadSectionStyles(KOdfLoadingContext &context, QList<KXmlElement*> styleElements);
 
     void addOutlineStyle(KoShapeLoadingContext & context, KoStyleManager *styleManager);
 

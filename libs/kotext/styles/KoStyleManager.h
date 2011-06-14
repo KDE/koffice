@@ -37,7 +37,7 @@ class KoTableStyle;
 class KoTableColumnStyle;
 class KoTableRowStyle;
 class KoTableCellStyle;
-class KoSectionStyle;
+class KSectionStyle;
 class KXmlWriter;
 class ChangeFollower;
 class KOdfGenericStyles;
@@ -101,7 +101,7 @@ public:
     /**
      * Add a new sewction style, automatically giving it a new styleId.
      */
-    void add(KoSectionStyle *style);
+    void add(KSectionStyle *style);
 
     /**
      * Remove a style.
@@ -134,7 +134,7 @@ public:
     /**
      * Remove a section style.
      */
-    void remove(KoSectionStyle *style);
+    void remove(KSectionStyle *style);
 
     /**
      * Add a document for which the styles will be applied.
@@ -207,11 +207,11 @@ public:
     /**
      * Return a sectionStyle by its id.
      * From documents you can retrieve the id out of each QTextFrameFormat
-     * by requesting the KoSectionStyle::StyleId property.
+     * by requesting the KSectionStyle::StyleId property.
      * @param id the unique Id to search for.
-     * @see KoSectionStyle::styleId()
+     * @see KSectionStyle::styleId()
      */
-    KoSectionStyle *sectionStyle(int id) const;
+    KSectionStyle *sectionStyle(int id) const;
 
     /**
      * Return the first characterStyle with the param user-visible-name.
@@ -279,7 +279,7 @@ public:
      * @param name the name of the style.
      * @see sectionStyle(id);
      */
-    KoSectionStyle *sectionStyle(const QString &name) const;
+    KSectionStyle *sectionStyle(const QString &name) const;
 
      /**
      * Return the default paragraph style that will always be present in each
@@ -330,7 +330,7 @@ public:
     QList<KoTableCellStyle*> tableCellStyles() const;
 
     /// return all the sectionStyles registered.
-    QList<KoSectionStyle*> sectionStyles() const;
+    QList<KSectionStyle*> sectionStyles() const;
 
     /// \internal
     KoStyleManagerPrivate *priv();
@@ -343,7 +343,7 @@ signals:
     void styleAdded(KoTableColumnStyle*);
     void styleAdded(KoTableRowStyle*);
     void styleAdded(KoTableCellStyle*);
-    void styleAdded(KoSectionStyle*);
+    void styleAdded(KSectionStyle*);
     void styleRemoved(KParagraphStyle*);
     void styleRemoved(KCharacterStyle*);
     void styleRemoved(KListStyle*);
@@ -351,7 +351,7 @@ signals:
     void styleRemoved(KoTableColumnStyle*);
     void styleRemoved(KoTableRowStyle*);
     void styleRemoved(KoTableCellStyle*);
-    void styleRemoved(KoSectionStyle*);
+    void styleRemoved(KSectionStyle*);
 
 public slots:
     /**
@@ -407,7 +407,7 @@ public slots:
      * all documents with the style.
      * Note that successive calls are aggregated.
      */
-    void alteredStyle(const KoSectionStyle *style);
+    void alteredStyle(const KSectionStyle *style);
 
 private:
     friend class ChangeFollower;

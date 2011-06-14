@@ -31,7 +31,7 @@
 #include "KoTableColumnStyle.h"
 #include "KoTableRowStyle.h"
 #include "KoTableCellStyle.h"
-#include "KoSectionStyle.h"
+#include "KSectionStyle.h"
 #include "ChangeFollower_p.h"
 #include "KoTextDocument.h"
 
@@ -255,7 +255,7 @@ void KoStyleManager::saveOdf(KOdfGenericStyles& mainStyles)
         mainStyles.insert(style, name, KOdfGenericStyles::DontAddNumberToName);
     }
 
-    foreach(KoSectionStyle *sectionStyle, d->sectionStyles) {
+    foreach(KSectionStyle *sectionStyle, d->sectionStyles) {
         QString name(QUrl::toPercentEncoding(QString(sectionStyle->name()).replace(' ', '_')));
         name.replace('%', '_');
         if (name.isEmpty())
@@ -370,7 +370,7 @@ void KoStyleManager::add(KoTableCellStyle *style)
     emit styleAdded(style);
 }
 
-void KoStyleManager::add(KoSectionStyle *style)
+void KoStyleManager::add(KSectionStyle *style)
 {
     if (d->sectionStyles.key(style, -1) != -1)
         return;
@@ -422,7 +422,7 @@ void KoStyleManager::remove(KoTableCellStyle *style)
         emit styleRemoved(style);
 }
 
-void KoStyleManager::remove(KoSectionStyle *style)
+void KoStyleManager::remove(KSectionStyle *style)
 {
     if (d->sectionStyles.remove(style->styleId()))
         emit styleRemoved(style);
@@ -535,7 +535,7 @@ void KoStyleManager::alteredStyle(const KoTableCellStyle *style)
     d->requestFireUpdate(this);
 }
 
-void KoStyleManager::alteredStyle(const KoSectionStyle *style)
+void KoStyleManager::alteredStyle(const KSectionStyle *style)
 {
     Q_ASSERT(style);
     int id = style->styleId();
@@ -622,7 +622,7 @@ KoTableCellStyle *KoStyleManager::tableCellStyle(int id) const
     return d->tableCellStyles.value(id);
 }
 
-KoSectionStyle *KoStyleManager::sectionStyle(int id) const
+KSectionStyle *KoStyleManager::sectionStyle(int id) const
 {
     return d->sectionStyles.value(id);
 }
@@ -690,9 +690,9 @@ KoTableCellStyle *KoStyleManager::tableCellStyle(const QString &name) const
     return 0;
 }
 
-KoSectionStyle *KoStyleManager::sectionStyle(const QString &name) const
+KSectionStyle *KoStyleManager::sectionStyle(const QString &name) const
 {
-    foreach(KoSectionStyle *style, d->sectionStyles) {
+    foreach(KSectionStyle *style, d->sectionStyles) {
         if (style->name() == name)
             return style;
     }
@@ -757,7 +757,7 @@ QList<KoTableCellStyle*> KoStyleManager::tableCellStyles() const
     return d->tableCellStyles.values();
 }
 
-QList<KoSectionStyle*> KoStyleManager::sectionStyles() const
+QList<KSectionStyle*> KoStyleManager::sectionStyles() const
 {
     return d->sectionStyles.values();
 }

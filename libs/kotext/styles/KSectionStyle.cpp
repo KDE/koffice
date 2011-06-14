@@ -20,7 +20,7 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#include "KoSectionStyle.h"
+#include "KSectionStyle.h"
 #include "KoStyleManager.h"
 #include <KOdfGenericStyle.h>
 #include <KOdfGenericStyles.h>
@@ -41,7 +41,7 @@
 #include <KXmlWriter.h>
 #include <KOdfBorders.h>
 
-class KoSectionStyle::Private
+class KSectionStyle::Private
 {
 public:
     Private() : parentStyle(0) {}
@@ -78,33 +78,33 @@ public:
     }
 
     QString name;
-    KoSectionStyle *parentStyle;
+    KSectionStyle *parentStyle;
     StylePrivate stylesPrivate;
 };
 
-KoSectionStyle::KoSectionStyle(QObject *parent)
+KSectionStyle::KSectionStyle(QObject *parent)
         : QObject(parent), d(new Private())
 {
 }
 
-KoSectionStyle::KoSectionStyle(const QTextFrameFormat &sectionFormat, QObject *parent)
+KSectionStyle::KSectionStyle(const QTextFrameFormat &sectionFormat, QObject *parent)
         : QObject(parent),
         d(new Private())
 {
     d->stylesPrivate = sectionFormat.properties();
 }
 
-KoSectionStyle::~KoSectionStyle()
+KSectionStyle::~KSectionStyle()
 {
     delete d;
 }
 
-void KoSectionStyle::setParentStyle(KoSectionStyle *parent)
+void KSectionStyle::setParentStyle(KSectionStyle *parent)
 {
     d->parentStyle = parent;
 }
 
-void KoSectionStyle::setProperty(int key, const QVariant &value)
+void KSectionStyle::setProperty(int key, const QVariant &value)
 {
     if (d->parentStyle) {
         QVariant var = d->parentStyle->value(key);
@@ -116,12 +116,12 @@ void KoSectionStyle::setProperty(int key, const QVariant &value)
     d->stylesPrivate.add(key, value);
 }
 
-void KoSectionStyle::remove(int key)
+void KSectionStyle::remove(int key)
 {
     d->stylesPrivate.remove(key);
 }
 
-QVariant KoSectionStyle::value(int key) const
+QVariant KSectionStyle::value(int key) const
 {
     QVariant var = d->stylesPrivate.value(key);
     if (var.isNull() && d->parentStyle)
@@ -129,12 +129,12 @@ QVariant KoSectionStyle::value(int key) const
     return var;
 }
 
-bool KoSectionStyle::hasProperty(int key) const
+bool KSectionStyle::hasProperty(int key) const
 {
     return d->stylesPrivate.contains(key);
 }
 
-void KoSectionStyle::applyStyle(QTextFrameFormat &format) const
+void KSectionStyle::applyStyle(QTextFrameFormat &format) const
 {
     if (d->parentStyle) {
         d->parentStyle->applyStyle(format);
@@ -146,14 +146,14 @@ void KoSectionStyle::applyStyle(QTextFrameFormat &format) const
     }
 }
 
-void KoSectionStyle::applyStyle(QTextFrame &section) const
+void KSectionStyle::applyStyle(QTextFrame &section) const
 {
     QTextFrameFormat format = section.frameFormat();
     applyStyle(format);
     section.setFrameFormat(format);
 }
 
-void KoSectionStyle::unapplyStyle(QTextFrame &section) const
+void KSectionStyle::unapplyStyle(QTextFrame &section) const
 {
     if (d->parentStyle)
         d->parentStyle->unapplyStyle(section);
@@ -169,37 +169,37 @@ void KoSectionStyle::unapplyStyle(QTextFrame &section) const
     section.setFrameFormat(format);
 }
 
-void KoSectionStyle::setLeftMargin(qreal margin)
+void KSectionStyle::setLeftMargin(qreal margin)
 {
     setProperty(QTextFormat::BlockLeftMargin, margin);
 }
 
-qreal KoSectionStyle::leftMargin() const
+qreal KSectionStyle::leftMargin() const
 {
     return d->propertyDouble(QTextFormat::BlockLeftMargin);
 }
 
-void KoSectionStyle::setRightMargin(qreal margin)
+void KSectionStyle::setRightMargin(qreal margin)
 {
     setProperty(QTextFormat::BlockRightMargin, margin);
 }
 
-qreal KoSectionStyle::rightMargin() const
+qreal KSectionStyle::rightMargin() const
 {
     return d->propertyDouble(QTextFormat::BlockRightMargin);
 }
 
-KoSectionStyle *KoSectionStyle::parentStyle() const
+KSectionStyle *KSectionStyle::parentStyle() const
 {
     return d->parentStyle;
 }
 
-QString KoSectionStyle::name() const
+QString KSectionStyle::name() const
 {
     return d->name;
 }
 
-void KoSectionStyle::setName(const QString &name)
+void KSectionStyle::setName(const QString &name)
 {
     if (name == d->name)
         return;
@@ -207,38 +207,38 @@ void KoSectionStyle::setName(const QString &name)
     emit nameChanged(name);
 }
 
-int KoSectionStyle::styleId() const
+int KSectionStyle::styleId() const
 {
     return d->propertyInt(StyleId);
 }
 
-void KoSectionStyle::setStyleId(int id)
+void KSectionStyle::setStyleId(int id)
 {
     setProperty(StyleId, id);
 }
 
 
-KoText::Direction KoSectionStyle::textProgressionDirection() const
+KoText::Direction KSectionStyle::textProgressionDirection() const
 {
     return static_cast<KoText::Direction>(d->propertyInt(TextProgressionDirection));
 }
 
-void KoSectionStyle::setTextProgressionDirection(KoText::Direction dir)
+void KSectionStyle::setTextProgressionDirection(KoText::Direction dir)
 {
     setProperty(TextProgressionDirection, dir);
 }
 
-void KoSectionStyle::setBackground(const QBrush &brush)
+void KSectionStyle::setBackground(const QBrush &brush)
 {
     d->setProperty(QTextFormat::BackgroundBrush, brush);
 }
 
-void KoSectionStyle::clearBackground()
+void KSectionStyle::clearBackground()
 {
     d->stylesPrivate.remove(QTextCharFormat::BackgroundBrush);
 }
 
-QBrush KoSectionStyle::background() const
+QBrush KSectionStyle::background() const
 {
     QVariant variant = d->stylesPrivate.value(QTextFormat::BackgroundBrush);
 
@@ -249,7 +249,7 @@ QBrush KoSectionStyle::background() const
     return qvariant_cast<QBrush>(variant);
 }
 
-void KoSectionStyle::loadOdf(const KXmlElement *element, KOdfLoadingContext &context)
+void KSectionStyle::loadOdf(const KXmlElement *element, KOdfLoadingContext &context)
 {
     if (element->hasAttributeNS(KOdfXmlNS::style, "display-name"))
         d->name = element->attributeNS(KOdfXmlNS::style, "display-name", QString());
@@ -300,31 +300,31 @@ void KoSectionStyle::loadOdf(const KXmlElement *element, KOdfLoadingContext &con
 }
 
 
-void KoSectionStyle::copyProperties(const KoSectionStyle *style)
+void KSectionStyle::copyProperties(const KSectionStyle *style)
 {
     d->stylesPrivate = style->d->stylesPrivate;
     setName(style->name()); // make sure we emit property change
     d->parentStyle = style->d->parentStyle;
 }
 
-KoSectionStyle *KoSectionStyle::clone(QObject *parent) const
+KSectionStyle *KSectionStyle::clone(QObject *parent) const
 {
-    KoSectionStyle *newStyle = new KoSectionStyle(parent);
+    KSectionStyle *newStyle = new KSectionStyle(parent);
     newStyle->copyProperties(this);
     return newStyle;
 }
 
-bool KoSectionStyle::operator==(const KoSectionStyle &other) const
+bool KSectionStyle::operator==(const KSectionStyle &other) const
 {
     return other.d->stylesPrivate == d->stylesPrivate;
 }
 
-void KoSectionStyle::removeDuplicates(const KoSectionStyle &other)
+void KSectionStyle::removeDuplicates(const KSectionStyle &other)
 {
     d->stylesPrivate.removeDuplicates(other.d->stylesPrivate);
 }
 
-void KoSectionStyle::saveOdf(KOdfGenericStyle &style)
+void KSectionStyle::saveOdf(KOdfGenericStyle &style)
 {
     // only custom style have a displayname. automatic styles don't have a name set.
     if (!d->name.isEmpty() && !style.isDefaultStyle()) {
@@ -333,7 +333,7 @@ void KoSectionStyle::saveOdf(KOdfGenericStyle &style)
 
     QList<int> keys = d->stylesPrivate.keys();
     foreach(int key, keys) {
-        if (key == KoSectionStyle::TextProgressionDirection) {
+        if (key == KSectionStyle::TextProgressionDirection) {
             int directionValue = 0;
             bool ok = false;
             directionValue = d->stylesPrivate.value(key).toInt(&ok);
@@ -364,4 +364,4 @@ void KoSectionStyle::saveOdf(KOdfGenericStyle &style)
     }
 }
 
-#include <KoSectionStyle.moc>
+#include <KSectionStyle.moc>

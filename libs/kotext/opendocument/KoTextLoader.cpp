@@ -67,7 +67,7 @@
 #include "styles/KoTableStyle.h"
 #include "styles/KoTableColumnStyle.h"
 #include "styles/KoTableCellStyle.h"
-#include "styles/KoSectionStyle.h"
+#include "styles/KSectionStyle.h"
 
 #include <klocale.h>
 #include <kdebug.h>
@@ -1368,7 +1368,7 @@ void KoTextLoader::loadSection(const KXmlElement &sectionElem, QTextCursor &curs
     QTextFrameFormat sectionFormat;
     QString sectionStyleName = sectionElem.attributeNS(KOdfXmlNS::text, "style-name", "");
     if (!sectionStyleName.isEmpty()) {
-        KoSectionStyle *secStyle = d->textSharedData->sectionStyle(sectionStyleName, d->stylesDotXml);
+        KSectionStyle *secStyle = d->textSharedData->sectionStyle(sectionStyleName, d->stylesDotXml);
         if (secStyle)
             secStyle->applyStyle(sectionFormat);
     }

@@ -44,7 +44,7 @@
 #include "styles/KoTableColumnStyle.h"
 #include "styles/KoTableRowStyle.h"
 #include "styles/KoTableCellStyle.h"
-#include "styles/KoSectionStyle.h"
+#include "styles/KSectionStyle.h"
 
 class KoTextSharedLoadingData::Private
 {
@@ -74,7 +74,7 @@ public:
     QHash<QString, KoTableColumnStyle *> tableColumnContentDotXmlStyles;
     QHash<QString, KoTableRowStyle *> tableRowContentDotXmlStyles;
     QHash<QString, KoTableCellStyle *> tableCellContentDotXmlStyles;
-    QHash<QString, KoSectionStyle *> sectionContentDotXmlStyles;
+    QHash<QString, KSectionStyle *> sectionContentDotXmlStyles;
     QHash<QString, KParagraphStyle *> paragraphStylesDotXmlStyles;
     QHash<QString, KCharacterStyle *> characterStylesDotXmlStyles;
     QHash<QString, KListStyle *> listStylesDotXmlStyles;
@@ -82,7 +82,7 @@ public:
     QHash<QString, KoTableColumnStyle *> tableColumnStylesDotXmlStyles;
     QHash<QString, KoTableRowStyle *> tableRowStylesDotXmlStyles;
     QHash<QString, KoTableCellStyle *> tableCellStylesDotXmlStyles;
-    QHash<QString, KoSectionStyle *> sectionStylesDotXmlStyles;
+    QHash<QString, KSectionStyle *> sectionStylesDotXmlStyles;
 
     QList<KParagraphStyle *> paragraphStylesToDelete;
     QList<KCharacterStyle *> characterStylesToDelete;
@@ -91,7 +91,7 @@ public:
     QList<KoTableCellStyle *> tableCellStylesToDelete;
     QList<KoTableColumnStyle *> tableColumnStylesToDelete;
     QList<KoTableRowStyle *> tableRowStylesToDelete;
-    QList<KoSectionStyle *> sectionStylesToDelete;
+    QList<KSectionStyle *> sectionStylesToDelete;
     QHash<QString, KParagraphStyle*> namedParagraphStyles;
 
     KParagraphStyle *applicationDefaultStyle;
@@ -538,9 +538,9 @@ QList<QPair<QString, KoTableCellStyle *> > KoTextSharedLoadingData::loadTableCel
 void KoTextSharedLoadingData::addSectionStyles(KOdfLoadingContext &context, QList<KXmlElement*> styleElements,
                                             int styleTypes, KoStyleManager *styleManager)
 {
-    QList<QPair<QString, KoSectionStyle *> > sectionStyles(loadSectionStyles(context, styleElements));
+    QList<QPair<QString, KSectionStyle *> > sectionStyles(loadSectionStyles(context, styleElements));
 
-    QList<QPair<QString, KoSectionStyle *> >::iterator it(sectionStyles.begin());
+    QList<QPair<QString, KSectionStyle *> >::iterator it(sectionStyles.begin());
     for (; it != sectionStyles.end(); ++it) {
         if (styleTypes & ContentDotXml) {
             d->sectionContentDotXmlStyles.insert(it->first, it->second);
@@ -558,9 +558,9 @@ void KoTextSharedLoadingData::addSectionStyles(KOdfLoadingContext &context, QLis
     }
 }
 
-QList<QPair<QString, KoSectionStyle *> > KoTextSharedLoadingData::loadSectionStyles(KOdfLoadingContext &context, QList<KXmlElement*> styleElements)
+QList<QPair<QString, KSectionStyle *> > KoTextSharedLoadingData::loadSectionStyles(KOdfLoadingContext &context, QList<KXmlElement*> styleElements)
 {
-    QList<QPair<QString, KoSectionStyle *> > sectionStyles;
+    QList<QPair<QString, KSectionStyle *> > sectionStyles;
 
     foreach(KXmlElement *styleElem, styleElements) {
         Q_ASSERT(styleElem);
@@ -568,9 +568,9 @@ QList<QPair<QString, KoSectionStyle *> > KoTextSharedLoadingData::loadSectionSty
 
         QString name = styleElem->attributeNS(KOdfXmlNS::style, "name", QString());
         // nah don't think this is it: context.fillStyleStack(*styleElem, KOdfXmlNS::style, "style-name", "table");
-        KoSectionStyle *sectionstyle = new KoSectionStyle();
+        KSectionStyle *sectionstyle = new KSectionStyle();
         sectionstyle->loadOdf(styleElem, context);
-        sectionStyles.append(QPair<QString, KoSectionStyle *>(name, sectionstyle));
+        sectionStyles.append(QPair<QString, KSectionStyle *>(name, sectionstyle));
     }
     return sectionStyles;
 }
@@ -626,7 +626,7 @@ KoTableCellStyle *KoTextSharedLoadingData::tableCellStyle(const QString &name, b
     return stylesDotXml ? d->tableCellStylesDotXmlStyles.value(name) : d->tableCellContentDotXmlStyles.value(name);
 }
 
-KoSectionStyle *KoTextSharedLoadingData::sectionStyle(const QString &name, bool stylesDotXml) const
+KSectionStyle *KoTextSharedLoadingData::sectionStyle(const QString &name, bool stylesDotXml) const
 {
     return stylesDotXml ? d->sectionStylesDotXmlStyles.value(name) : d->sectionContentDotXmlStyles.value(name);
 }
