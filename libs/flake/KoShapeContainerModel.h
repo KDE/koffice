@@ -32,10 +32,10 @@ class KShapeContainer;
 /**
  * The interface for the container model.
  * This class has no implementation, but only pure virtual methods. You can find a
- * fully implemented model using KoShapeContainerDefaultModel.  Extending this
+ * fully implemented model using KShapeContainerDefaultModel.  Extending this
  * class and implementing all methods allows you to implement a custom data-backend
  * for the KShapeContainer.
- * @see KShapeContainer, KoShapeContainerDefaultModel
+ * @see KShapeContainer, KShapeContainerDefaultModel
  */
 class FLAKE_EXPORT KoShapeContainerModel
 {

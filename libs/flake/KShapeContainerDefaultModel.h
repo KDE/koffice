@@ -28,11 +28,11 @@
 /**
  * A default implementation of the KoShapeContainerModel.
  */
-class FLAKE_EXPORT KoShapeContainerDefaultModel : public KoShapeContainerModel
+class FLAKE_EXPORT KShapeContainerDefaultModel : public KoShapeContainerModel
 {
 public:
-    KoShapeContainerDefaultModel();
-    virtual ~KoShapeContainerDefaultModel();
+    KShapeContainerDefaultModel();
+    virtual ~KShapeContainerDefaultModel();
 
     virtual void add(KShape *shape);
 

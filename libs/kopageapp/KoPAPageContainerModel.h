@@ -20,9 +20,9 @@
 #ifndef KOPAPAGECONTAINERMODEL_H
 #define KOPAPAGECONTAINERMODEL_H
 
-#include <KoShapeContainerDefaultModel.h>
+#include <KShapeContainerDefaultModel.h>
 
-class KoPAPageContainerModel : public KoShapeContainerDefaultModel
+class KoPAPageContainerModel : public KShapeContainerDefaultModel
 {
 public:
     KoPAPageContainerModel();

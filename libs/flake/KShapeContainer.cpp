@@ -21,7 +21,7 @@
 #include "KShapeContainer_p.h"
 #include "KoShapeContainerModel.h"
 #include "KShapeBorderBase.h"
-#include "KoShapeContainerDefaultModel.h"
+#include "KShapeContainerDefaultModel.h"
 #include "KoShapeSavingContext.h"
 
 #include <QPointF>
@@ -72,7 +72,7 @@ void KShapeContainer::addShape(KShape *shape)
     if (shape->parent() == this && shapes().contains(shape))
         return;
     if (d->model == 0)
-        d->model = new KoShapeContainerDefaultModel();
+        d->model = new KShapeContainerDefaultModel();
     if (shape->parent() && shape->parent() != this)
         shape->parent()->removeShape(shape);
     d->model->add(shape);

@@ -19,11 +19,11 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoShapeContainerDefaultModel.h"
+#include "KShapeContainerDefaultModel.h"
 
 #include "KShapeContainer.h"
 
-class KoShapeContainerDefaultModel::Private
+class KShapeContainerDefaultModel::Private
 {
 public:
     class Relation
@@ -67,23 +67,23 @@ public:
     QList<Relation *> relations;
 };
 
-KoShapeContainerDefaultModel::KoShapeContainerDefaultModel()
+KShapeContainerDefaultModel::KShapeContainerDefaultModel()
 : d(new Private())
 {
 }
 
-KoShapeContainerDefaultModel::~KoShapeContainerDefaultModel()
+KShapeContainerDefaultModel::~KShapeContainerDefaultModel()
 {
     delete d;
 }
 
-void KoShapeContainerDefaultModel::add(KShape *child)
+void KShapeContainerDefaultModel::add(KShape *child)
 {
     Private::Relation *r = new Private::Relation(child);
     d->relations.append(r);
 }
 
-void KoShapeContainerDefaultModel::proposeMove(KShape *shape, QPointF &move)
+void KShapeContainerDefaultModel::proposeMove(KShape *shape, QPointF &move)
 {
     KShapeContainer *parent = shape->parent();
     bool allowedToMove = true;
@@ -98,7 +98,7 @@ void KoShapeContainerDefaultModel::proposeMove(KShape *shape, QPointF &move)
 }
 
 
-void KoShapeContainerDefaultModel::setClipped(const KShape *child, bool clipping)
+void KShapeContainerDefaultModel::setClipped(const KShape *child, bool clipping)
 {
     Private::Relation *relation = d->findRelation(child);
     if (relation == 0)
@@ -111,13 +111,13 @@ void KoShapeContainerDefaultModel::setClipped(const KShape *child, bool clipping
     relation->child()->update(); // mark new area as in need of repaint
 }
 
-bool KoShapeContainerDefaultModel::isClipped(const KShape *child) const
+bool KShapeContainerDefaultModel::isClipped(const KShape *child) const
 {
     Private::Relation *relation = d->findRelation(child);
     return relation ? relation->inside: false;
 }
 
-void KoShapeContainerDefaultModel::remove(KShape *child)
+void KShapeContainerDefaultModel::remove(KShape *child)
 {
     Private::Relation *relation = d->findRelation(child);
     if (relation == 0)
@@ -125,12 +125,12 @@ void KoShapeContainerDefaultModel::remove(KShape *child)
     d->relations.removeAll(relation);
 }
 
-int KoShapeContainerDefaultModel::count() const
+int KShapeContainerDefaultModel::count() const
 {
     return d->relations.count();
 }
 
-QList<KShape*> KoShapeContainerDefaultModel::shapes() const
+QList<KShape*> KShapeContainerDefaultModel::shapes() const
 {
     QList<KShape*> answer;
     foreach(Private::Relation *relation, d->relations) {
@@ -139,16 +139,16 @@ QList<KShape*> KoShapeContainerDefaultModel::shapes() const
     return answer;
 }
 
-bool KoShapeContainerDefaultModel::isChildLocked(const KShape *child) const
+bool KShapeContainerDefaultModel::isChildLocked(const KShape *child) const
 {
     return child->isGeometryProtected();
 }
 
-void KoShapeContainerDefaultModel::containerChanged(KShapeContainer *, KShape::ChangeType)
+void KShapeContainerDefaultModel::containerChanged(KShapeContainer *, KShape::ChangeType)
 {
 }
 
-void KoShapeContainerDefaultModel::setInheritsTransform(const KShape *shape, bool inherit)
+void KShapeContainerDefaultModel::setInheritsTransform(const KShape *shape, bool inherit)
 {
     Private::Relation *relation = d->findRelation(shape);
     if (relation == 0)
@@ -161,7 +161,7 @@ void KoShapeContainerDefaultModel::setInheritsTransform(const KShape *shape, boo
     relation->child()->update(); // mark new area as in need of repaint
 }
 
-bool KoShapeContainerDefaultModel::inheritsTransform(const KShape *shape) const
+bool KShapeContainerDefaultModel::inheritsTransform(const KShape *shape) const
 {
     Private::Relation *relation = d->findRelation(shape);
     return relation ? relation->inheritsTransform: false;
