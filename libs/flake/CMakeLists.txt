@@ -142,7 +142,7 @@ set(flake_SRCS
     commands/KEventActionAddCommand.cpp
     commands/KEventActionRemoveCommand.cpp
     commands/KoShapeRenameCommand.cpp
-    commands/KoPathPointMergeCommand.cpp
+    commands/KPathPointMergeCommand.cpp
     commands/KoShapeTransparencyCommand.cpp
     tools/KCreatePathTool.cpp
     tools/KCreatePathToolFactory.cpp
@@ -207,7 +207,7 @@ install(
     commands/KPathControlPointMoveCommand.h
     commands/KPathFillRuleCommand.h
     commands/KPathPointInsertCommand.h
-    commands/KoPathPointMergeCommand.h
+    commands/KPathPointMergeCommand.h
     commands/KoPathPointMoveCommand.h
     commands/KoPathPointRemoveCommand.h
     commands/KoPathReverseCommand.h

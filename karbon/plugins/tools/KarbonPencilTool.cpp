@@ -32,7 +32,7 @@
 #include <KoColor.h>
 #include <KPathPoint.h>
 #include <KPathPointData.h>
-#include <KoPathPointMergeCommand.h>
+#include <KPathPointMergeCommand.h>
 
 #include <knuminput.h>
 #include <klocale.h>
@@ -508,14 +508,14 @@ bool KarbonPencilTool::connectPaths(KoPathShape *pathShape, KPathPoint *pointAtS
     if (existingStartPoint) {
         KPathPointData pd1(pathShape, pathShape->pathPointIndex(existingStartPoint));
         KPathPointData pd2(pathShape, pathShape->pathPointIndex(newStartPoint));
-        KoPathPointMergeCommand cmd1(pd1, pd2);
+        KPathPointMergeCommand cmd1(pd1, pd2);
         cmd1.redo();
     }
     // merge last two points
     if (existingEndPoint) {
         KPathPointData pd3(pathShape, pathShape->pathPointIndex(newEndPoint));
         KPathPointData pd4(pathShape, pathShape->pathPointIndex(existingEndPoint));
-        KoPathPointMergeCommand cmd2(pd3, pd4);
+        KPathPointMergeCommand cmd2(pd3, pd4);
         cmd2.redo();
     }
 

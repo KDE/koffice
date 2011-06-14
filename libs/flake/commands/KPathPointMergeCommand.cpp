@@ -18,14 +18,14 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoPathPointMergeCommand.h"
+#include "KPathPointMergeCommand.h"
 #include "KPathPoint.h"
 #include "KPathPointData.h"
 #include "KoPathShape.h"
 #include <KLocale>
 #include <QPointF>
 
-class KoPathPointMergeCommand::Private
+class KPathPointMergeCommand::Private
 {
 public:
     Private(const KPathPointData &pointData1, const KPathPointData &pointData2)
@@ -104,7 +104,7 @@ public:
  * The goal is to merge the point that is ending an open subpath with the one
  * starting the same or another open subpath.
  */
-KoPathPointMergeCommand::KoPathPointMergeCommand(const KPathPointData &pointData1, const KPathPointData &pointData2, QUndoCommand *parent)
+KPathPointMergeCommand::KPathPointMergeCommand(const KPathPointData &pointData1, const KPathPointData &pointData2, QUndoCommand *parent)
     : QUndoCommand(parent), d(new Private(pointData1, pointData2))
 {
     Q_ASSERT(pointData1.pathShape == pointData2.pathShape);
@@ -152,12 +152,12 @@ KoPathPointMergeCommand::KoPathPointMergeCommand(const KPathPointData &pointData
     setText(i18n("Merge Points"));
 }
 
-KoPathPointMergeCommand::~KoPathPointMergeCommand()
+KPathPointMergeCommand::~KPathPointMergeCommand()
 {
     delete d;
 }
 
-void KoPathPointMergeCommand::redo()
+void KPathPointMergeCommand::redo()
 {
     QUndoCommand::redo();
 
@@ -199,7 +199,7 @@ void KoPathPointMergeCommand::redo()
     d->pathShape->update();
 }
 
-void KoPathPointMergeCommand::undo()
+void KPathPointMergeCommand::undo()
 {
     QUndoCommand::undo();
 

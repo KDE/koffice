@@ -18,7 +18,7 @@
  */
 
 #include "TestPointMergeCommand.h"
-#include "KoPathPointMergeCommand.h"
+#include "KPathPointMergeCommand.h"
 #include "KoPathShape.h"
 #include "KPathPoint.h"
 #include "KPathPointData.h"
@@ -48,7 +48,7 @@ void TestPointMergeCommand::closeSingleLinePath()
     QCOMPARE(p1->point(), QPointF(40,0));
     QCOMPARE(p2->point(), QPointF(20,0));
 
-    KoPathPointMergeCommand cmd1(pd1,pd2);
+    KPathPointMergeCommand cmd1(pd1,pd2);
     cmd1.redo();
 
     QVERIFY(path1.isClosedSubpath(0));
@@ -62,7 +62,7 @@ void TestPointMergeCommand::closeSingleLinePath()
     QCOMPARE(p1->point(), QPointF(40,0));
     QCOMPARE(p2->point(), QPointF(20,0));
 
-    KoPathPointMergeCommand cmd2(pd2,pd1);
+    KPathPointMergeCommand cmd2(pd2,pd1);
     cmd2.redo();
 
     QVERIFY(path1.isClosedSubpath(0));
@@ -101,7 +101,7 @@ void TestPointMergeCommand::closeSingleCurvePath()
     QCOMPARE(p2->point(), QPointF(20,0));
     QVERIFY(!p2->activeControlPoint2());
 
-    KoPathPointMergeCommand cmd1(pd1,pd2);
+    KPathPointMergeCommand cmd1(pd1,pd2);
     cmd1.redo();
 
     QVERIFY(path1.isClosedSubpath(0));
@@ -119,7 +119,7 @@ void TestPointMergeCommand::closeSingleCurvePath()
     QCOMPARE(p2->point(), QPointF(20,0));
     QVERIFY(!p2->activeControlPoint2());
 
-    KoPathPointMergeCommand cmd2(pd2,pd1);
+    KPathPointMergeCommand cmd2(pd2,pd1);
     cmd2.redo();
 
     QVERIFY(path1.isClosedSubpath(0));
@@ -156,7 +156,7 @@ void TestPointMergeCommand::connectLineSubpaths()
     QCOMPARE(path1.pointByIndex(index1)->point(), QPointF(10,0));
     QCOMPARE(path1.pointByIndex(index2)->point(), QPointF(20,0));
 
-    KoPathPointMergeCommand cmd1(pd1, pd2);
+    KPathPointMergeCommand cmd1(pd1, pd2);
     cmd1.redo();
 
     QCOMPARE(path1.subpathCount(), 1);
@@ -168,7 +168,7 @@ void TestPointMergeCommand::connectLineSubpaths()
     QCOMPARE(path1.pointByIndex(index1)->point(), QPointF(10,0));
     QCOMPARE(path1.pointByIndex(index2)->point(), QPointF(20,0));
 
-    KoPathPointMergeCommand cmd2(pd2, pd1);
+    KPathPointMergeCommand cmd2(pd2, pd1);
     cmd2.redo();
 
     QCOMPARE(path1.subpathCount(), 1);
@@ -203,7 +203,7 @@ void TestPointMergeCommand::connectCurveSubpaths()
     QVERIFY(path1.pointByIndex(index1)->activeControlPoint1());
     QVERIFY(!path1.pointByIndex(index1)->activeControlPoint2());
 
-    KoPathPointMergeCommand cmd1(pd1, pd2);
+    KPathPointMergeCommand cmd1(pd1, pd2);
     cmd1.redo();
 
     QCOMPARE(path1.subpathCount(), 1);
@@ -223,7 +223,7 @@ void TestPointMergeCommand::connectCurveSubpaths()
     QVERIFY(path1.pointByIndex(index1)->activeControlPoint1());
     QVERIFY(!path1.pointByIndex(index1)->activeControlPoint2());
 
-    KoPathPointMergeCommand cmd2(pd2, pd1);
+    KPathPointMergeCommand cmd2(pd2, pd1);
     cmd2.redo();
 
     QCOMPARE(path1.subpathCount(), 1);

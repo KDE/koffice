@@ -38,7 +38,7 @@
 #include "commands/KoPathSegmentBreakCommand_p.h"
 #include "commands/KParameterToPathCommand.h"
 #include "commands/KoSubpathJoinCommand_p.h"
-#include "commands/KoPathPointMergeCommand.h"
+#include "commands/KPathPointMergeCommand.h"
 #include "KParameterShape.h"
 #include "KPathPoint.h"
 #include "KoPathPointRubberSelectStrategy_p.h"
@@ -367,7 +367,7 @@ void KoPathTool::mergePoints()
         return;
 
     // now we can start merging the endpoints
-    KoPathPointMergeCommand *cmd = new KoPathPointMergeCommand(pd1, pd2);
+    KPathPointMergeCommand *cmd = new KPathPointMergeCommand(pd1, pd2);
     d->canvas->addCommand(cmd);
     updateActions();
 }

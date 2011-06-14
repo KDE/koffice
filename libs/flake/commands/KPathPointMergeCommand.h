@@ -27,7 +27,7 @@
 class KPathPointData;
 
 /// The undo / redo command for merging two subpath end points
-class FLAKE_EXPORT KoPathPointMergeCommand : public QUndoCommand
+class FLAKE_EXPORT KPathPointMergeCommand : public QUndoCommand
 {
 public:
     /**
@@ -39,8 +39,8 @@ public:
      * @param pointData2 the data of the second point to merge
      * @param parent the parent command used for macro commands
      */
-    KoPathPointMergeCommand(const KPathPointData &pointData1, const KPathPointData &pointData2, QUndoCommand *parent = 0);
-    ~KoPathPointMergeCommand();
+    KPathPointMergeCommand(const KPathPointData &pointData1, const KPathPointData &pointData2, QUndoCommand *parent = 0);
+    ~KPathPointMergeCommand();
 
     /// redo the command
     void redo();

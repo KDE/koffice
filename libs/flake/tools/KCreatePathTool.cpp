@@ -26,7 +26,7 @@
 #include "KoPathShape.h"
 #include "KLineBorder.h"
 #include "KoSelection.h"
-#include "commands/KoPathPointMergeCommand.h"
+#include "commands/KPathPointMergeCommand.h"
 #include "SnapGuideConfigWidget_p.h"
 
 #include <KNumInput>
