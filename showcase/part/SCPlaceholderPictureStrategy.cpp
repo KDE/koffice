@@ -25,7 +25,7 @@
 #include <KImageCollection.h>
 #include <KResourceManager.h>
 #include <KImageData.h>
-#include <KoShape.h>
+#include <KShape.h>
 #include <kio/netaccess.h>
 #include <kdebug.h>
 
@@ -38,9 +38,9 @@ SCPlaceholderPictureStrategy::~SCPlaceholderPictureStrategy()
 {
 }
 
-KoShape *SCPlaceholderPictureStrategy::createShape(KResourceManager *rm)
+KShape *SCPlaceholderPictureStrategy::createShape(KResourceManager *rm)
 {
-    KoShape * shape = 0;
+    KShape * shape = 0;
 
     KUrl url = KFileDialog::getOpenUrl();
     if (!url.isEmpty()) {

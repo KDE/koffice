@@ -34,7 +34,7 @@
 #include <QtCore/QMap>
 #include <QtCore/QStack>
 
-class KoShape;
+class KShape;
 class KoShapeContainer;
 class KoShapeGroup;
 class KResourceManager;
@@ -46,27 +46,27 @@ public:
     virtual ~SvgParser();
 
     /// Parses a svg fragment, returning the list of top level child shapes
-    QList<KoShape*> parseSvg(const KXmlElement &e, QSizeF * fragmentSize = 0);
+    QList<KShape*> parseSvg(const KXmlElement &e, QSizeF * fragmentSize = 0);
 
     /// Sets the initial xml base directory (the directory form where the file is read)
     void setXmlBaseDir(const QString &baseDir);
 
     /// Returns the list of all shapes of the svg document
-    QList<KoShape*> shapes() const;
+    QList<KShape*> shapes() const;
 
 protected:
 
     typedef QMap<QString, QString> SvgStyles;
 
     /// Parses a container element, returning a list of child shapes
-    QList<KoShape*> parseContainer(const KXmlElement &);
+    QList<KShape*> parseContainer(const KXmlElement &);
     /// Parses a use element, returning a list of child shapes
-    QList<KoShape*> parseUse(const KXmlElement &);
+    QList<KShape*> parseUse(const KXmlElement &);
     /// Parses definitions for later use
     void parseDefs(const KXmlElement &);
     /// Parses style attributes, applying them to the given shape
-    void parseStyle(KoShape *, const KXmlElement &);
-    void parseStyle(KoShape *, const SvgStyles &);
+    void parseStyle(KShape *, const KXmlElement &);
+    void parseStyle(KShape *, const SvgStyles &);
     /// Parses a single style attribute
     void parsePA(SvgGraphicsContext *, const QString &, const QString &);
     /// Parses a gradient element
@@ -98,17 +98,17 @@ protected:
     void removeGraphicContext();
 
     /// Creates an object from the given xml element
-    KoShape * createObject(const KXmlElement &, const SvgStyles &style = SvgStyles());
+    KShape * createObject(const KXmlElement &, const SvgStyles &style = SvgStyles());
     /// Create text object from the given xml element
-    KoShape * createText(const KXmlElement &, const QList<KoShape*> & shapes);
+    KShape * createText(const KXmlElement &, const QList<KShape*> & shapes);
     /// Parses font attributes
     void parseFont(const SvgStyles &styles);
     /// find object with given id in document
-    KoShape * findObject(const QString &name);
+    KShape * findObject(const QString &name);
     /// find object with given id in given group
-    KoShape * findObject(const QString &name, KoShapeContainer *);
+    KShape * findObject(const QString &name, KoShapeContainer *);
     /// find object with given if in given shape list
-    KoShape * findObject(const QString &name, const QList<KoShape*> & shapes);
+    KShape * findObject(const QString &name, const QList<KShape*> & shapes);
     /// find gradient with given id in gradient map
     SvgGradientHelper* findGradient(const QString &id, const QString &href = 0);
     /// find pattern with given id in pattern map
@@ -122,7 +122,7 @@ protected:
     SvgStyles mergeStyles(const SvgStyles &, const SvgStyles &);
 
     /// Adds list of shapes to the given group shape
-    void addToGroup(QList<KoShape*> shapes, KoShapeGroup * group);
+    void addToGroup(QList<KShape*> shapes, KoShapeGroup * group);
 
     /// Returns the next z-index
     int nextZIndex();
@@ -131,19 +131,19 @@ protected:
     QString absoluteFilePath(const QString &href, const QString &xmlBase);
 
     /// creates a shape from the given shape id
-    KoShape * createShape(const QString &shapeID);
+    KShape * createShape(const QString &shapeID);
 
     /// Builds the document from the given shapes list
-    void buildDocument(QList<KoShape*> shapes);
+    void buildDocument(QList<KShape*> shapes);
 
     /// Applies the current fill style to the object
-    void applyFillStyle(KoShape * shape);
+    void applyFillStyle(KShape * shape);
 
     /// Applies the current stroke style to the object
-    void applyStrokeStyle(KoShape * shape);
+    void applyStrokeStyle(KShape * shape);
 
     /// Applies the current filter to the object
-    void applyFilter(KoShape * shape);
+    void applyFilter(KShape * shape);
 
     /// Returns inherited attribute value for specified element
     QString inheritedAttribute(const QString &attributeName, const KXmlElement &e);
@@ -158,8 +158,8 @@ private:
     QStringList m_fontAttributes; ///< font related attributes
     QStringList m_styleAttributes; ///< style related attributes
     KResourceManager *m_documentResourceManager;
-    QList<KoShape*> m_shapes;
-    QList<KoShape*> m_toplevelShapes;
+    QList<KShape*> m_shapes;
+    QList<KShape*> m_toplevelShapes;
     QString m_xmlBaseDir;
     SvgCssHelper m_cssStyles;
 };

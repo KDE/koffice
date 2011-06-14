@@ -38,8 +38,8 @@ public:
      * @param shapes a list of all the shapes that should be ungrouped.
      * @param parent the parent command used for macro commands
      */
-    KoShapeUngroupCommand(KoShapeContainer *container, const QList<KoShape *> &shapes,
-                          const QList<KoShape *> &topLevelShapes = QList<KoShape*>(), QUndoCommand *parent = 0);
+    KoShapeUngroupCommand(KoShapeContainer *container, const QList<KShape *> &shapes,
+                          const QList<KShape *> &topLevelShapes = QList<KShape*>(), QUndoCommand *parent = 0);
     /// redo the command
     void redo();
     /// revert the actions done in redo

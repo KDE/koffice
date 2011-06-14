@@ -29,7 +29,7 @@
 
 #include <KUnit.h>
 
-class KoShape;
+class KShape;
 class QUndoCommand;
 
 /**
@@ -60,7 +60,7 @@ public:
      * widget.
      * @param shape the shape that is to be queried for the data this widget can edit.
      */
-    virtual void open(KoShape *shape) = 0;
+    virtual void open(KShape *shape) = 0;
 
     /**
      * Overwrite this method to set the application unit type and update all unit-widgets

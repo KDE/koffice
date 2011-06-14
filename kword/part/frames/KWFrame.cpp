@@ -32,7 +32,7 @@
 
 #include <KDebug>
 
-KWFrame::KWFrame(KoShape *shape, KWFrameSet *parent, int pageNumber)
+KWFrame::KWFrame(KShape *shape, KWFrameSet *parent, int pageNumber)
         : m_shape(shape),
         m_copyToEverySheet(true),
         m_runAroundSide(KWord::BiggestRunAroundSide),
@@ -49,7 +49,7 @@ KWFrame::KWFrame(KoShape *shape, KWFrameSet *parent, int pageNumber)
 
 KWFrame::~KWFrame()
 {
-    KoShape *myShape = m_shape;
+    KShape *myShape = m_shape;
     m_shape = 0; // no delete is needed as the shape deletes us.
     if (m_frameSet) {
         bool justMe = m_frameSet->frameCount() == 1;

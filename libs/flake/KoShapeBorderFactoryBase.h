@@ -24,7 +24,7 @@
 #include <QObject>
 
 class KoShapeBorderBase;
-class KoShape;
+class KShape;
 
 class FLAKE_EXPORT KoShapeBorderFactoryBase : public QObject
 {
@@ -38,7 +38,7 @@ public:
      * @param targetShape the shape the border is for
      * @return a new shape
      */
-    virtual KoShapeBorderBase *createBorder(KoShape *targetShape) const = 0;
+    virtual KoShapeBorderBase *createBorder(KShape *targetShape) const = 0;
 
     /**
      * return the id for the shape this factory creates.

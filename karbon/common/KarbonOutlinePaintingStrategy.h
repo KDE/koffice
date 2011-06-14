@@ -32,7 +32,7 @@ public:
     KarbonOutlinePaintingStrategy(KoShapeManager * shapeManager);
     ~KarbonOutlinePaintingStrategy();
     /// reimplemented from KoShapeManagerPaintingStrategy
-    virtual void paint(KoShape * shape, QPainter &painter, const KoViewConverter &converter, bool forPrint);
+    virtual void paint(KShape * shape, QPainter &painter, const KoViewConverter &converter, bool forPrint);
 private:
     KLineBorder * m_border;
 };

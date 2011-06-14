@@ -28,7 +28,7 @@
 #include <QtCore/QVariant>
 #include <QtGui/QMatrix>
 
-class KoShape;
+class KShape;
 class KoShapeContainer;
 
 class KarbonImport : public KoFilter
@@ -48,30 +48,30 @@ protected:
     bool loadXML(const KXmlElement& doc);
 
     void loadGroup(KoShapeContainer * parent, const KXmlElement &element);
-    void loadStyle(KoShape * shape, const KXmlElement &element);
-    void loadCommon(KoShape * shape, const KXmlElement &element);
-    void loadStroke(KoShape * shape, const KXmlElement &element);
-    void loadFill(KoShape * shape, const KXmlElement &element);
+    void loadStyle(KShape * shape, const KXmlElement &element);
+    void loadCommon(KShape * shape, const KXmlElement &element);
+    void loadStroke(KShape * shape, const KXmlElement &element);
+    void loadFill(KShape * shape, const KXmlElement &element);
     QColor loadColor(const KXmlElement &element);
     QVector<qreal> loadDashes(const KXmlElement& element);
-    QBrush loadGradient(KoShape * shape, const KXmlElement &element);
-    void loadPattern(KoShape * shape, const KXmlElement &element);
+    QBrush loadGradient(KShape * shape, const KXmlElement &element);
+    void loadPattern(KShape * shape, const KXmlElement &element);
 
-    KoShape * loadPath(const KXmlElement &element);
-    KoShape * loadEllipse(const KXmlElement &element);
-    KoShape * loadRect(const KXmlElement &element);
-    KoShape * loadPolyline(const KXmlElement &element);
-    KoShape * loadPolygon(const KXmlElement &element);
-    KoShape * loadSinus(const KXmlElement &element);
-    KoShape * loadSpiral(const KXmlElement &element);
-    KoShape * loadStar(const KXmlElement &element);
-    KoShape * loadImage(const KXmlElement &element);
-    KoShape * loadText(const KXmlElement &element);
+    KShape * loadPath(const KXmlElement &element);
+    KShape * loadEllipse(const KXmlElement &element);
+    KShape * loadRect(const KXmlElement &element);
+    KShape * loadPolyline(const KXmlElement &element);
+    KShape * loadPolygon(const KXmlElement &element);
+    KShape * loadSinus(const KXmlElement &element);
+    KShape * loadSpiral(const KXmlElement &element);
+    KShape * loadStar(const KXmlElement &element);
+    KShape * loadImage(const KXmlElement &element);
+    KShape * loadText(const KXmlElement &element);
 
     double getAttribute(KXmlElement &element, const char *attributeName, double defaultValue);
     int getAttribute(KXmlElement &element, const char *attributeName, int defaultValue);
     int nextZIndex();
-    KoShape * createShape(const QString &shapeID) const;
+    KShape * createShape(const QString &shapeID) const;
 
 private:
     KarbonDocument * m_document;

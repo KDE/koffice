@@ -12,7 +12,7 @@
  * Flake is a middle layer between the applications and the content providers.
  * The applications will allow flake to be plugged in by implementing the
  * KCanvasController interface while providers of content (like a chart engine
- * or a text component) will extend KoShape and optionally KoToolBase to do their
+ * or a text component) will extend KShape and optionally KoToolBase to do their
  * work.
  *
  * A <b>shape</b> is a rectangle or a text or a movie.  A shape paints itself and has content.
@@ -28,8 +28,8 @@
  *
  * The way that a shape is kept separate from the application and from the Flake
  * layer is similar to how a widget in a GUI is kept separate from the application.
- * The shape inherits from the abstract KoShape class and all the logic embedded in
- * the KoShape class is enough for the flake layer to do all things with it like
+ * The shape inherits from the abstract KShape class and all the logic embedded in
+ * the KShape class is enough for the flake layer to do all things with it like
  * positioning and moving as well as rotating and deleting it.
  * Just like a widget does not know the difference between painting on one app, or
  * another a shape will not know the difference. The flake library will take care
@@ -38,11 +38,11 @@
  * It is common to combine a shape-plugin with one or more tools which are made
  * specifically to work on that shape type. This has the advantage of them being
  * compiled into one plugin and that means the shape can be dynamic_cast to the
- * subclass of KoShape which in turn means the tool can both access the data that
- * is for each KoShape and also the data that is unique for the plugin shape.
+ * subclass of KShape which in turn means the tool can both access the data that
+ * is for each KShape and also the data that is unique for the plugin shape.
  *
  * So, a text shape comes with a tool that
- * knows how to address the shape not only by the abstract KoShape class, but also
+ * knows how to address the shape not only by the abstract KShape class, but also
  * by the TextShape internal API and is therefor able to alter the data that that shape
  * displays. In this case text.
  *
@@ -54,10 +54,10 @@
  * not part of Flake itself.
  *
  *
- * Use KoShape as a base object for any application-specific graphical
+ * Use KShape as a base object for any application-specific graphical
  * content, and extend KoShapeContainer for objects that can contain other shapes.
  *
- * KoShape is the base class for all flake objects. Flake shapes extend it
+ * KShape is the base class for all flake objects. Flake shapes extend it
  * to allow themselves to be manipulated by the tools. The content of such a
  * shape is independent and based on the model of the data this object represents.
  *

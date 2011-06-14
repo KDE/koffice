@@ -193,11 +193,11 @@ QPointF TextShape::convertScreenPos(const QPointF &point)
     return p + QPointF(0.0, m_textShapeData->documentOffset());
 }
 
-void TextShape::shapeChanged(ChangeType type, KoShape *shape)
+void TextShape::shapeChanged(ChangeType type, KShape *shape)
 {
     Q_ASSERT(shape);
     // children can be moved by the layout process, we should ignore them here.
-    KoShape *parent = shape->parent();
+    KShape *parent = shape->parent();
     while (parent) {
         if (parent == this)
             return;
@@ -250,7 +250,7 @@ void TextShape::paintDecorations(QPainter &painter, const KoViewConverter &conve
     if (m_textShapeData->endPosition() <= 1) return;
     KoTextDocumentLayout *lay = qobject_cast<KoTextDocumentLayout*>(m_textShapeData->document()->documentLayout());
     if (showTextFrames && lay) {
-        QList<KoShape *> shapes = lay->shapes();
+        QList<KShape *> shapes = lay->shapes();
         if (shapes.count() == 0 || shapes.last() != this)
             return;
 
@@ -318,7 +318,7 @@ void TextShape::saveOdf(KoShapeSavingContext &context) const
     int index = -1;
     if (lay) {
         int i = 0;
-        foreach (KoShape *shape, lay->shapes()) {
+        foreach (KShape *shape, lay->shapes()) {
             if (shape == this) {
                 index = i;
             } else if (index >= 0) {
@@ -348,12 +348,12 @@ QString TextShape::saveStyle(KOdfGenericStyle &style, KoShapeSavingContext &cont
     }
     style.addProperty("draw:textarea-vertical-align", verticalAlign);
 
-    return KoShape::saveStyle(style, context);
+    return KShape::saveStyle(style, context);
 }
 
 void TextShape::loadStyle(const KXmlElement &element, KoShapeLoadingContext &context)
 {
-    KoShape::loadStyle(element, context);
+    KShape::loadStyle(element, context);
     KOdfStyleStack &styleStack = context.odfLoadingContext().styleStack();
     styleStack.setTypeProperties("graphic");
     QString verticalAlign(styleStack.property(KOdfXmlNS::draw, "textarea-vertical-align"));

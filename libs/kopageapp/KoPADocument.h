@@ -155,8 +155,8 @@ public:
      */
     virtual void removePage(KoPAPageBase * page);
 
-    void addShape(KoShape *shape);
-    void removeShape(KoShape* shape);
+    void addShape(KShape *shape);
+    void removeShape(KShape* shape);
 
     QList<KoPAPageBase*> pages(bool masterPages = false) const;
 
@@ -196,7 +196,7 @@ public:
      * @param shape The shape for which the page should be found
      * @return The page on which the shape is located
      */
-    KoPAPageBase * pageByShape(KoShape * shape) const;
+    KoPAPageBase * pageByShape(KShape * shape) const;
 
     /**
      * Update all views this document is displayed on
@@ -224,8 +224,8 @@ public slots:
     virtual void initEmpty();
 
 signals:
-    void shapeAdded(KoShape* shape);
-    void shapeRemoved(KoShape* shape);
+    void shapeAdded(KShape* shape);
+    void shapeRemoved(KShape* shape);
     void pageAdded(KoPAPageBase* page);
     void pageRemoved(KoPAPageBase* page);
 
@@ -277,7 +277,7 @@ protected:
      *
      * The default impementation does nothing
      */
-    virtual void postAddShape(KoPAPageBase * page, KoShape * shape);
+    virtual void postAddShape(KoPAPageBase * page, KShape * shape);
 
     /**
      * This function is called by at the end of removeShape. This is used
@@ -285,7 +285,7 @@ protected:
      *
      * The default impementation does nothing
      */
-    virtual void postRemoveShape(KoPAPageBase * page, KoShape * shape);
+    virtual void postRemoveShape(KoPAPageBase * page, KShape * shape);
 
     /**
      * This function is called with the command that will remove the page

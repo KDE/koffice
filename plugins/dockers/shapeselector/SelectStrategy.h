@@ -24,7 +24,7 @@
 #include <QObject>
 
 class Canvas;
-class KoShape;
+class KShape;
 class KPointerEvent;
 
 /**
@@ -41,7 +41,7 @@ class SelectStrategy : public QObject, public InteractionStrategy
 {
     Q_OBJECT
 public:
-    SelectStrategy(Canvas *canvas, KoShape *clickedShape, KPointerEvent &event);
+    SelectStrategy(Canvas *canvas, KShape *clickedShape, KPointerEvent &event);
 
     virtual void handleMouseMove(const QPointF &mouseLocation, Qt::KeyboardModifiers modifiers);
     virtual void finishInteraction(Qt::KeyboardModifiers modifiers);
@@ -51,7 +51,7 @@ signals:
 
 private:
     Canvas *m_canvas;
-    KoShape *m_clickedShape;
+    KShape *m_clickedShape;
     bool m_emitItemSelected;
 };
 

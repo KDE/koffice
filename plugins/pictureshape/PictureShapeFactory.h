@@ -29,7 +29,7 @@ public:
     PictureShapeFactory(QObject *parent);
     ~PictureShapeFactory() {}
 
-    virtual KoShape *createDefaultShape(KResourceManager *documentResources = 0) const;
+    virtual KShape *createDefaultShape(KResourceManager *documentResources = 0) const;
     virtual bool supports(const KXmlElement &e, KoShapeLoadingContext &context) const;
 
     /// reimplemented

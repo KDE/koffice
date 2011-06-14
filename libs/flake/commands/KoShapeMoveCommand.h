@@ -29,7 +29,7 @@
 #include <QList>
 #include <QPointF>
 
-class KoShape;
+class KShape;
 
 /// The undo / redo command for shape moving.
 class FLAKE_EXPORT KoShapeMoveCommand : public QUndoCommand
@@ -44,7 +44,7 @@ public:
      *  this list naturally must have the same amount of items as the shapes set.
      * @param parent the parent command used for macro commands
      */
-    KoShapeMoveCommand(const QList<KoShape*> &shapes, QList<QPointF> &previousPositions, QList<QPointF> &newPositions,
+    KoShapeMoveCommand(const QList<KShape*> &shapes, QList<QPointF> &previousPositions, QList<QPointF> &newPositions,
                        QUndoCommand *parent = 0);
     ~KoShapeMoveCommand();
     /// redo the command

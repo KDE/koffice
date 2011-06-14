@@ -35,7 +35,7 @@ public:
     ~PictureShapeConfigWidget();
 
     /// reimplemented from KoShapeConfigWidgetBase
-    virtual void open(KoShape *shape);
+    virtual void open(KShape *shape);
     /// reimplemented from KoShapeConfigWidgetBase
     virtual void save();
     /// reimplemented from KoShapeConfigWidgetBase

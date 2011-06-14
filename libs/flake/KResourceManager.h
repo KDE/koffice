@@ -31,7 +31,7 @@
 
 #include <KUnit.h>
 
-class KoShape;
+class KShape;
 class KLineBorder;
 class KUndoStack;
 class KImageCollection;
@@ -142,12 +142,12 @@ public:
     void setResource(int key, const QVariant &value);
 
     /**
-     * Set a resource of type KoShape*.
+     * Set a resource of type KShape*.
      * @param key the integer key
      * @param shape the new value for the key.
      * @see KoCanvasResource::CanvasResource KoDocumentResource::DocumentResource
      */
-    void setResource(int key, KoShape *shape);
+    void setResource(int key, KShape *shape);
 
     /**
      * Set a resource of type KUnit
@@ -226,11 +226,11 @@ public:
     QColor colorResource(int key) const;
 
     /**
-     * Return the resource determined by param key as a pointer to a KoShape.
+     * Return the resource determined by param key as a pointer to a KShape.
      * @param key the indentifying key for the resource
      * @see KoCanvasResource::CanvasResource KoDocumentResource::DocumentResource
      */
-    KoShape *koShapeResource(int key) const;
+    KShape *koShapeResource(int key) const;
 
     /**
      * Return the resource determined by param key as a QString .

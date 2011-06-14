@@ -89,7 +89,7 @@ public:
 private:
 
     QPointF correctPosition(const QPoint &point) const;
-    void repaint(KoShape *shape);
+    void repaint(KShape *shape);
 
     /**
        Decides whether the containing canvas widget should be as
@@ -102,7 +102,7 @@ private:
 private:
 
     KCanvasController *m_parent;
-    KoShape *m_draggedShape;
+    KShape *m_draggedShape;
 
     bool m_drawShadow;
     QWidget *m_canvas;

@@ -29,7 +29,7 @@ Outline::Outline(KWFrame *frame, const QTransform &matrix)
     : m_side(None),
     m_shape(frame->shape())
 {
-    KoShape *shape = frame->outlineShape();
+    KShape *shape = frame->outlineShape();
     if (shape == 0)
         shape = frame->shape();
     QPainterPath path = shape->outline();
@@ -50,7 +50,7 @@ Outline::Outline(KWFrame *frame, const QTransform &matrix)
         m_side = None;
 }
 
-Outline::Outline(KoShape *shape, const QTransform &matrix)
+Outline::Outline(KShape *shape, const QTransform &matrix)
     : m_side(None),
     m_shape(shape)
 {

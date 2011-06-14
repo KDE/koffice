@@ -61,7 +61,7 @@ QUndoCommand *KPathPointRemoveCommand::createCommand(
     QList<KPathPointData> subpathsOfPath;  // subpaths of current path
     QList<KPathPointData> pointsToDelete;  // single points to delete
     QList<KPathPointData> subpathToDelete; // single subpaths to delete
-    QList<KoShape*> shapesToDelete;         // single paths to delete
+    QList<KShape*> shapesToDelete;         // single paths to delete
 
     last = sortedPointData.first();
 

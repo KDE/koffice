@@ -36,7 +36,7 @@
 
 #include <KLocale>
 
-RightClickStrategy::RightClickStrategy(Canvas *canvas, KoShape *clickedShape, KPointerEvent &event)
+RightClickStrategy::RightClickStrategy(Canvas *canvas, KShape *clickedShape, KPointerEvent &event)
     : m_canvas(canvas),
     m_clickedShape(clickedShape)
 {
@@ -144,7 +144,7 @@ void RightClickStrategy::createNewFolder()
 
 void RightClickStrategy::saveSelection()
 {
-    KoShape *shape = m_canvas->shapeManager()->selection()->firstSelectedShape();
+    KShape *shape = m_canvas->shapeManager()->selection()->firstSelectedShape();
     FolderShape *fs = dynamic_cast<FolderShape*>(shape);
     if (fs == 0)
         fs = dynamic_cast<FolderShape*>(shape->parent());

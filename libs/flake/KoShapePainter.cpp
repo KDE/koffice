@@ -24,7 +24,7 @@
 #include "KCanvasBase.h"
 #include "KoShapeManager.h"
 #include "KoShapeManagerPaintingStrategy.h"
-#include "KoShape.h"
+#include "KShape.h"
 #include "KoViewConverter.h"
 #include "KoShapeBorderBase.h"
 #include "KoShapeGroup.h"
@@ -131,14 +131,14 @@ KoShapePainter::~KoShapePainter()
     delete d;
 }
 
-void KoShapePainter::setShapes(const QList<KoShape*> &shapes)
+void KoShapePainter::setShapes(const QList<KShape*> &shapes)
 {
     d->canvas->shapeManager()->setShapes(shapes, KoShapeManager::AddWithoutRepaint);
 }
 
 void KoShapePainter::paint(QPainter &painter, KoViewConverter &converter)
 {
-    foreach (KoShape *shape, d->canvas->shapeManager()->shapes()) {
+    foreach (KShape *shape, d->canvas->shapeManager()->shapes()) {
         shape->waitUntilReady(converter, false);
     }
 
@@ -197,7 +197,7 @@ void KoShapePainter::paint(QImage &image)
 QRectF KoShapePainter::contentRect()
 {
     QRectF bound;
-    foreach (KoShape *shape, d->canvas->shapeManager()->shapes()) {
+    foreach (KShape *shape, d->canvas->shapeManager()->shapes()) {
         if (!shape->isVisible(true))
             continue;
         if (dynamic_cast<KoShapeGroup*>(shape))

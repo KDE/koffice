@@ -108,7 +108,7 @@ void KarbonBooleanCommand::redo()
 
         KoShapeGroup * group = dynamic_cast<KoShapeGroup*>(d->pathA->parent());
         if (group) {
-            QList<KoShape*> children;
+            QList<KShape*> children;
             d->resultParentCmd = new KoShapeGroupCommand(group, children << d->resultingPath, this);
         }
     }

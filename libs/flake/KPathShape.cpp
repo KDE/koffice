@@ -93,12 +93,12 @@ void KPathShapePrivate::applyViewboxTransformation(const KXmlElement &element)
 
 /////////////////////////
 KPathShape::KPathShape()
-    :KoShape(*(new KPathShapePrivate(this)))
+    :KShape(*(new KPathShapePrivate(this)))
 {
 }
 
 KPathShape::KPathShape(KPathShapePrivate &dd)
-    : KoShape(dd)
+    : KShape(dd)
 {
 }
 
@@ -187,13 +187,13 @@ QString KPathShape::saveStyle(KOdfGenericStyle &style, KoShapeSavingContext &con
     Q_D(const KPathShape);
     style.addProperty("svg:fill-rule", d->fillRule == Qt::OddEvenFill ? "evenodd" : "nonzero");
 
-    return KoShape::saveStyle(style, context);
+    return KShape::saveStyle(style, context);
 }
 
 void KPathShape::loadStyle(const KXmlElement & element, KoShapeLoadingContext &context)
 {
     Q_D(KPathShape);
-    KoShape::loadStyle(element, context);
+    KShape::loadStyle(element, context);
 
     KOdfStyleStack &styleStack = context.odfLoadingContext().styleStack();
     styleStack.setTypeProperties("graphic");
@@ -408,7 +408,7 @@ void KPathShape::setSize(const QSizeF &newSize)
     Q_D(KPathShape);
     QTransform matrix(resizeMatrix(newSize));
 
-    KoShape::setSize(newSize);
+    KShape::setSize(newSize);
     d->map(matrix);
 }
 

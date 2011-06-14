@@ -25,7 +25,7 @@
 #include <KoFilter.h>
 #include <QtCore/QVariant>
 
-class KoShape;
+class KShape;
 class KarbonDocument;
 class KXmlElement;
 
@@ -45,7 +45,7 @@ protected:
     void convert(const KXmlElement &rootElement);
 
     /// Builds the document from the given shapes list
-    void buildDocument(const QList<KoShape*> &toplevelShapes, const QList<KoShape*> &shapes);
+    void buildDocument(const QList<KShape*> &toplevelShapes, const QList<KShape*> &shapes);
 
 private:
     KarbonDocument * m_document;

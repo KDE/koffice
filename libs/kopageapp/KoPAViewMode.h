@@ -31,7 +31,7 @@ class KoPACanvas;
 class KoPACanvasBase;
 class KoPAPageBase;
 class KoToolProxy;
-class KoShape;
+class KShape;
 class KoViewConverter;
 class QPainter;
 class QPaintEvent;
@@ -133,7 +133,7 @@ public:
      *
      * @param shape the new shape added to the document
      */
-    virtual void addShape(KoShape *shape);
+    virtual void addShape(KShape *shape);
 
     /**
      * @brief Update the view when a shape is removed from the document
@@ -143,7 +143,7 @@ public:
      *
      * @param shape the shape removed from the document
      */
-    virtual void removeShape(KoShape *shape);
+    virtual void removeShape(KShape *shape);
 
     virtual const KOdfPageLayoutData &activePageLayout() const;
 

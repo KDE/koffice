@@ -47,8 +47,8 @@ public:
 
     void updateActivePage(KoPAPageBase *page);
 
-    void addShape(KoShape *shape);
-    void removeShape(KoShape *shape);
+    void addShape(KShape *shape);
+    void removeShape(KShape *shape);
 };
 
 #endif // KPRVIEWMODENOTES_H

@@ -20,7 +20,7 @@
 #include "ConnectionChangeCommand.h"
 
 #include<KoShapeConnection.h>
-#include<KoShape.h>
+#include<KShape.h>
 
 ConnectionChangeCommand::ConnectionChangeCommand(KoShapeConnection *connection, const ConnectionHook &previousStart, const ConnectionHook &newStart, const ConnectionHook &previousEnd, const ConnectionHook &newEnd, QUndoCommand *parent)
     : QUndoCommand(parent),

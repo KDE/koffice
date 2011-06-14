@@ -31,7 +31,7 @@ class KOdfStoreReader;
 class KOdfLoadingContext;
 class KoShapeLoadingContext;
 class QTimer;
-class KoShape;
+class KShape;
 class KoFilterManager;
 
 class OdfCollectionLoader : public QObject
@@ -43,7 +43,7 @@ class OdfCollectionLoader : public QObject
 
         void load();
 
-        QList<KoShape*> shapeList() const { return m_shapeList; }
+        QList<KShape*> shapeList() const { return m_shapeList; }
         QString collectionPath() const { return m_path; }
 
     protected:
@@ -62,7 +62,7 @@ class OdfCollectionLoader : public QObject
         KXmlElement m_body;
         KXmlElement m_page;
         KXmlElement m_shape;
-        QList<KoShape*> m_shapeList;
+        QList<KShape*> m_shapeList;
         QString m_path;
         QStringList m_fileList;
         KoFilterManager* m_filterManager;

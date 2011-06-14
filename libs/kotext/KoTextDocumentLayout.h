@@ -32,7 +32,7 @@
 #include <QTextTableCell>
 
 class KoTextDocumentLayout;
-class KoShape;
+class KShape;
 class KoStyleManager;
 class QTextLayout;
 class KInlineTextObjectManager;
@@ -122,10 +122,10 @@ public:
     bool isInterrupted() const;
 
     /// Add a shape to the list of shapes that the text can run into.
-    void addShape(KoShape *shape);
+    void addShape(KShape *shape);
 
     /// return the list of shapes that will be used to run all the text into.
-    virtual QList<KoShape*> shapes() const;
+    virtual QList<KShape*> shapes() const;
 
     /**
      * This inner class is an interface that allows the KoTextDocumentLayout to do rough layout
@@ -176,7 +176,7 @@ public:
          * @param shape the dummy shape to layout in.
          * @return true if the request for continued layout is honored, false otherwise.
          */
-        virtual bool setFollowupShape(KoShape *shape) = 0;
+        virtual bool setFollowupShape(KShape *shape) = 0;
         /// remove layout information from the current layout position to the end of the document.
         virtual void clearTillEnd() = 0;
         /// called by the KoTextDocumentLayout to notify the LayoutState of a successfully resized inline object
@@ -187,7 +187,7 @@ public:
         /// the index in the list of shapes (or frameset) of the shape we are currently layouting.
         int shapeNumber;
         /// the shape that is currently being laid out
-        KoShape *shape;
+        KShape *shape;
         /// The current paragraph layout.
         QTextLayout *layout;
         /// signify if the layout should be restarted from the start
@@ -200,7 +200,7 @@ public:
      * @param position the position of the character in the text document we want to locate.
      * @return the shape the text is laid-out in.  Or 0 if there is no shape for that text character.
      */
-    KoShape* shapeForPosition(int position) const;
+    KShape* shapeForPosition(int position) const;
 
     /// reimplemented from QAbstractTextDocumentLayout
     virtual void documentChanged(int position, int charsRemoved, int charsAdded);
@@ -216,7 +216,7 @@ public:
     KoTextDocument::ResizeMethod resizeMethod() const;
 
 signals:
-    void shapeAdded(KoShape *shape);
+    void shapeAdded(KShape *shape);
     /**
      * Signal is emitted every time a layout run has finished and all text is positioned.
      */

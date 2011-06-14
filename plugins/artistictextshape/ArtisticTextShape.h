@@ -21,7 +21,7 @@
 #ifndef ARTISTICTEXTSHAPE_H
 #define ARTISTICTEXTSHAPE_H
 
-#include <KoShape.h>
+#include <KShape.h>
 #include <KPostscriptPaintDevice.h>
 
 #include <QtGui/QFont>
@@ -31,7 +31,7 @@ class KPathShape;
 
 #define ArtisticTextShapeID "ArtisticText"
 
-class ArtisticTextShape : public KoShape
+class ArtisticTextShape : public KShape
 {
 public:
     enum TextAnchor { AnchorStart, AnchorMiddle, AnchorEnd };
@@ -131,8 +131,8 @@ public:
     /// Gets the extents of the char with the given index
     void getCharExtentsAt(unsigned int charNum, QRectF &extents) const;
 
-    /// reimplemented from KoShape
-    virtual void shapeChanged(ChangeType type, KoShape * shape);
+    /// reimplemented from KShape
+    virtual void shapeChanged(ChangeType type, KShape * shape);
 
 private:
     void updateSizeAndPosition(bool global = false);

@@ -25,7 +25,7 @@
 #include <QtCore/QSet>
 #include <QtCore/QMap>
 
-class KoShape;
+class KShape;
 class KFilterEffect;
 class KFilterEffectStack;
 class QGraphicsItem;

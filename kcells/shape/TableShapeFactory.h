@@ -25,7 +25,7 @@
 
 #include <KoShapeFactoryBase.h>
 
-class KoShape;
+class KShape;
 
 class TableShapePlugin : public QObject
 {
@@ -46,7 +46,7 @@ public:
     virtual void newDocumentResourceManager(KResourceManager *manager);
     virtual bool supports(const KXmlElement &element, KoShapeLoadingContext &context) const;
 
-    virtual KoShape *createDefaultShape(KResourceManager *documentResources = 0) const;
+    virtual KShape *createDefaultShape(KResourceManager *documentResources = 0) const;
 
 public slots:
     void createMap(KResourceManager *manager);

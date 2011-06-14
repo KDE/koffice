@@ -23,7 +23,7 @@
 #include "flake_export.h"
 
 class KXmlElement;
-class KoShape;
+class KShape;
 class KoShapeLoadingContext;
 class QPen;
 class QColor;
@@ -63,11 +63,11 @@ namespace KoOdfWorkaround
      */
     FLAKE_EXPORT void fixEnhancedPathPolarHandlePosition(QString &position, const KXmlElement &element, KoShapeLoadingContext &context);
 
-    FLAKE_EXPORT bool   fixMissingStroke(QPen &pen, const KXmlElement &element, KoShapeLoadingContext &context, const KoShape *shape = 0);
+    FLAKE_EXPORT bool   fixMissingStroke(QPen &pen, const KXmlElement &element, KoShapeLoadingContext &context, const KShape *shape = 0);
     FLAKE_EXPORT QColor fixMissingFillColor(const KXmlElement &element, KoShapeLoadingContext &context);
     FLAKE_EXPORT bool   fixMissingStyle_DisplayLabel(const KXmlElement &element, KoShapeLoadingContext &context);
 
-    FLAKE_EXPORT KColorBackground *fixBackgroundColor(const KoShape *shape, KoShapeLoadingContext &context);
+    FLAKE_EXPORT KColorBackground *fixBackgroundColor(const KShape *shape, KoShapeLoadingContext &context);
 
     /**
      * Old versions of ooimpress does not set the placeholder for shapes that should have it set
@@ -76,7 +76,7 @@ namespace KoOdfWorkaround
      */
     FLAKE_EXPORT void setFixPresentationPlaceholder(bool fix, KoShapeLoadingContext &context);
     FLAKE_EXPORT bool fixPresentationPlaceholder();
-    FLAKE_EXPORT void fixPresentationPlaceholder(KoShape *shape);
+    FLAKE_EXPORT void fixPresentationPlaceholder(KShape *shape);
 }
 
 #endif /* KOODFWORKAROUND_H */

@@ -22,7 +22,7 @@
 
 #include "KoShapeFactoryBase.h"
 
-class KoShape;
+class KShape;
 
 /// Factory for spiral shapes
 class SpiralShapeFactory : public KoShapeFactoryBase
@@ -31,7 +31,7 @@ public:
     /// constructor
     explicit SpiralShapeFactory(QObject *parent);
     ~SpiralShapeFactory() {}
-    virtual KoShape *createDefaultShape(KResourceManager *documentResources = 0) const;
+    virtual KShape *createDefaultShape(KResourceManager *documentResources = 0) const;
     virtual bool supports(const KXmlElement & e, KoShapeLoadingContext &context) const;
     virtual KoShapeConfigWidgetBase *createConfigWidget(KCanvasBase *canvas);
 };

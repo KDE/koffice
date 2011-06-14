@@ -19,7 +19,7 @@
 
 #include "CollectionShapeFactory.h"
 
-#include <KoShape.h>
+#include <KShape.h>
 #include <KDrag.h>
 #include <KoShapeOdfSaveHelper.h>
 #include <KOdf.h>
@@ -36,7 +36,7 @@
 #include <QMimeData>
 #include <QBuffer>
 
-CollectionShapeFactory::CollectionShapeFactory(QObject *parent, const QString &id, KoShape* shape)
+CollectionShapeFactory::CollectionShapeFactory(QObject *parent, const QString &id, KShape* shape)
     : KoShapeFactoryBase(parent, id, shape->name()), m_shape(shape)
 {
 }
@@ -46,9 +46,9 @@ CollectionShapeFactory::~CollectionShapeFactory()
     delete m_shape;
 }
 
-KoShape *CollectionShapeFactory::createDefaultShape(KResourceManager *documentResources) const
+KShape *CollectionShapeFactory::createDefaultShape(KResourceManager *documentResources) const
 {
-    QList<KoShape*> shapes;
+    QList<KShape*> shapes;
 
     shapes << m_shape;
 
@@ -60,7 +60,7 @@ KoShape *CollectionShapeFactory::createDefaultShape(KResourceManager *documentRe
     QMimeData* data = drag.mimeData();
 
     QByteArray arr = data->data(KOdf::mimeType(KOdf::GraphicsDocument));
-    KoShape* shape = 0;
+    KShape* shape = 0;
 
     if ( !arr.isEmpty() ) {
         QBuffer buffer( &arr );
@@ -95,7 +95,7 @@ KoShape *CollectionShapeFactory::createDefaultShape(KResourceManager *documentRe
 
         forEachElement(element, body)
         {
-            KoShape * shape = KoShapeRegistry::instance()->createShapeFromOdf( element, context );
+            KShape * shape = KoShapeRegistry::instance()->createShapeFromOdf( element, context );
             if ( shape ) {
                 delete data;
                 return shape;

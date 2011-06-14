@@ -34,28 +34,28 @@ public:
     KoShapeContainerDefaultModel();
     virtual ~KoShapeContainerDefaultModel();
 
-    virtual void add(KoShape *shape);
+    virtual void add(KShape *shape);
 
-    virtual void proposeMove(KoShape *shape, QPointF &move);
+    virtual void proposeMove(KShape *shape, QPointF &move);
 
-    virtual void setClipped(const KoShape *shape, bool clipping);
+    virtual void setClipped(const KShape *shape, bool clipping);
 
-    virtual bool isClipped(const KoShape *shape) const;
+    virtual bool isClipped(const KShape *shape) const;
 
-    virtual void setInheritsTransform(const KoShape *shape, bool inherit);
+    virtual void setInheritsTransform(const KShape *shape, bool inherit);
 
-    virtual bool inheritsTransform(const KoShape *shape) const;
+    virtual bool inheritsTransform(const KShape *shape) const;
 
-    virtual void remove(KoShape *shape);
+    virtual void remove(KShape *shape);
 
     virtual int count() const;
 
-    virtual QList<KoShape*> shapes() const;
+    virtual QList<KShape*> shapes() const;
 
-    virtual bool isChildLocked(const KoShape *child) const;
+    virtual bool isChildLocked(const KShape *child) const;
 
     /// empty implementation.
-    virtual void containerChanged(KoShapeContainer *container, KoShape::ChangeType type);
+    virtual void containerChanged(KoShapeContainer *container, KShape::ChangeType type);
 
 private:
     class Private;

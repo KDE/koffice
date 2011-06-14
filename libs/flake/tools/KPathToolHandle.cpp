@@ -55,7 +55,7 @@ void PointHandle::paint(QPainter &painter, const KoViewConverter &converter)
 {
     painter.save();
     painter.setTransform(m_activePoint->parent()->absoluteTransformation(&converter) * painter.transform());
-    KoShape::applyConversion(painter, converter);
+    KShape::applyConversion(painter, converter);
 
     KPathToolSelection * selection = dynamic_cast<KPathToolSelection*>(m_tool->selection());
 

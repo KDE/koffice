@@ -298,8 +298,8 @@ void SCView::createAnimation()
 {
     static int animationcount = 0;
     KSelection * selection = kopaCanvas()->shapeManager()->selection();
-    QList<KoShape*> selectedShapes = selection->selectedShapes();
-    foreach (KoShape *shape, selectedShapes)
+    QList<KShape*> selectedShapes = selection->selectedShapes();
+    foreach (KShape *shape, selectedShapes)
     {
         Q_UNUSED(shape);
         /*SCShapeAnimationOld * animation = new SCAnimationMoveAppear(shape, animationcount);

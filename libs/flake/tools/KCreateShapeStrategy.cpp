@@ -21,7 +21,7 @@
 #include "KCreateShapeStrategy_p.h"
 #include "KoShapeRubberSelectStrategy_p.h"
 #include "KCreateShapesTool.h"
-#include "KoShape.h"
+#include "KShape.h"
 #include "KoShapeRegistry.h"
 #include "KoShapeManager.h"
 #include "KCanvasBase.h"
@@ -40,7 +40,7 @@ KCreateShapeStrategy::KCreateShapeStrategy(KCreateShapesTool *tool, const QPoint
     KoShapeFactoryBase *factory = KoShapeRegistry::instance()->value(parent->shapeId());
     if (factory) {
         const KProperties *props = parent->shapeProperties();
-        KoShape *shape;
+        KShape *shape;
         if (props) {
             shape = factory->createShape(props);
         } else {
@@ -64,7 +64,7 @@ QUndoCommand* KCreateShapeStrategy::createCommand(QUndoCommand *parentCommand)
     }
 
     const KProperties *props = parent->shapeProperties();
-    KoShape *shape;
+    KShape *shape;
     if (props)
         shape = factory->createShape(props, parent->canvas()->shapeController()->resourceManager());
     else

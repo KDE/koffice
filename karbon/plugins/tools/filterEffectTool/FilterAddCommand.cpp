@@ -18,13 +18,13 @@
  */
 
 #include "FilterAddCommand.h"
-#include "KoShape.h"
+#include "KShape.h"
 #include "KFilterEffect.h"
 #include "KFilterEffectStack.h"
 
 #include <KLocale>
 
-FilterAddCommand::FilterAddCommand(KFilterEffect *filterEffect, KoShape * shape, QUndoCommand *parent)
+FilterAddCommand::FilterAddCommand(KFilterEffect *filterEffect, KShape * shape, QUndoCommand *parent)
         : QUndoCommand(parent), m_filterEffect(filterEffect), m_shape(shape), m_isAdded(false)
 {
     Q_ASSERT(m_shape);

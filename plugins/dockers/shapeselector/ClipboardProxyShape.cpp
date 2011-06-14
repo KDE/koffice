@@ -25,18 +25,18 @@
 #include <QPainter>
 #include <QSizeF>
 
-ClipboardProxyShape::ClipboardProxyShape(KoShape*clipboardItem, const QByteArray &clipboardData)
+ClipboardProxyShape::ClipboardProxyShape(KShape*clipboardItem, const QByteArray &clipboardData)
     : m_child(clipboardItem),
     m_clipboardData(clipboardData)
 {
     Q_ASSERT(clipboardItem);
 }
 
-static void deleteShape(KoShape *shape)
+static void deleteShape(KShape *shape)
 {
     KoShapeContainer *container = dynamic_cast<KoShapeContainer*>(shape);
     if (container) {
-        foreach(KoShape *shape, container->shapes())
+        foreach(KShape *shape, container->shapes())
             deleteShape(shape);
     }
     delete shape;

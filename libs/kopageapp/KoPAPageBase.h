@@ -35,7 +35,7 @@
 struct KOdfPageLayoutData;
 class KOdfLoadingContext;
 class KOdfGenericStyle;
-class KoShape;
+class KShape;
 class KoPALoadingContext;
 class KoShapeManagerPaintingStrategy;
 class KoZoomHandler;
@@ -114,7 +114,7 @@ public:
      * @param shape for which to check if it should be shown or not.
      * @return true if the shape should be shown, otherwise false. 
      */
-    virtual bool displayShape(KoShape *shape) const = 0;
+    virtual bool displayShape(KShape *shape) const = 0;
 
     QPixmap thumbnail(const QSize &size = QSize(512, 512));
 
@@ -142,7 +142,7 @@ public:
      *
      * @param shape The shape that was added
      */
-    virtual void shapeAdded(KoShape * shape);
+    virtual void shapeAdded(KShape * shape);
 
     /**
      * This function is called after a shape is removed from the document off this page
@@ -150,7 +150,7 @@ public:
      *
      * @param shape The shape that was removed
      */
-    virtual void shapeRemoved(KoShape * shape);
+    virtual void shapeRemoved(KShape * shape);
 
     /**
      * Get the page type used in the document

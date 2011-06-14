@@ -23,7 +23,7 @@
 
 #include <KoShapeFactoryBase.h>
 
-class KoShape;
+class KShape;
 class KInlineTextObjectManager;
 
 class TextShapeFactory : public KoShapeFactoryBase
@@ -35,8 +35,8 @@ public:
     explicit TextShapeFactory(QObject *parent);
     ~TextShapeFactory() {}
 
-    virtual KoShape *createShape(const KProperties *params, KResourceManager *documentResources = 0) const;
-    virtual KoShape *createDefaultShape(KResourceManager *documentResources = 0) const;
+    virtual KShape *createShape(const KProperties *params, KResourceManager *documentResources = 0) const;
+    virtual KShape *createDefaultShape(KResourceManager *documentResources = 0) const;
     virtual bool supports(const KXmlElement & e, KoShapeLoadingContext &context) const;
 
     virtual void newDocumentResourceManager(KResourceManager *manager);

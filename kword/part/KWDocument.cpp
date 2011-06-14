@@ -100,7 +100,7 @@ public:
     /// add the frame to be hidden
     void addFrame(KWFrame *frame);
     /// add the shape to be hidden
-    void addShape(KoShape *shape);
+    void addShape(KShape *shape);
     // reveal all the frames that were added before
     void revealFramesForPage(int pageNumber, qreal moveFrames);
 
@@ -117,7 +117,7 @@ void MagicCurtain::addFrame(KWFrame *frame)
     frame->shape()->setParent(this);
 }
 
-void MagicCurtain::addShape(KoShape *shape)
+void MagicCurtain::addShape(KShape *shape)
 {
     shape->setParent(this);
 }
@@ -175,7 +175,7 @@ KWDocument::~KWDocument()
     qDeleteAll(m_frameSets);
 }
 
-void KWDocument::addShape(KoShape *shape)
+void KWDocument::addShape(KShape *shape)
 {
     // notice that this call can come from the user inserting a shape, the undo framework
     // or from pasting.
@@ -210,7 +210,7 @@ void KWDocument::recurseFrameRemovalOn(KoShapeContainer *container, QUndoCommand
 {
     if (container == 0)
         return;
-    foreach (KoShape *shape, container->shapes()) {
+    foreach (KShape *shape, container->shapes()) {
         KWFrame *frame = dynamic_cast<KWFrame*>(shape->applicationData());
         if (frame) {
             QUndoCommand *cmd = new KWFrameRemoveSilentCommand(this, frame, m_commandBeingAdded);
@@ -223,7 +223,7 @@ void KWDocument::recurseFrameRemovalOn(KoShapeContainer *container, QUndoCommand
     }
 }
 
-void KWDocument::removeShape(KoShape *shape)
+void KWDocument::removeShape(KShape *shape)
 {
     KWFrame *frame = dynamic_cast<KWFrame*>(shape->applicationData());
     if (frame) { // not all shapes have to have a frame. Only top-level ones do.
@@ -482,7 +482,7 @@ QString KWDocument::renameFrameSet(const QString &prefix, const QString &base)
     }
 }
 
-void KWDocument::clipToDocument(const KoShape *shape, QPointF &move) const
+void KWDocument::clipToDocument(const KShape *shape, QPointF &move) const
 {
     Q_ASSERT(shape);
     const QPointF absPos = shape->absolutePosition();
@@ -824,7 +824,7 @@ void KWDocument::requestMoreSpace(KWTextFrameSet *fs)
 
     QString masterPageName;
     if (fs == mainFrameSet()) {
-        KoShape *shape = lastFrame->shape();
+        KShape *shape = lastFrame->shape();
         if (shape) {
             KoTextShapeData *data = qobject_cast<KoTextShapeData*>(shape->userData());
             if (data) {

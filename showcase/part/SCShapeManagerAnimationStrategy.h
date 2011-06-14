@@ -33,10 +33,10 @@ public:
     virtual ~SCShapeManagerAnimationStrategy();
 
     /// reimplemented
-    virtual void paint(KoShape * shape, QPainter &painter, const KoViewConverter &converter, bool forPrint);
+    virtual void paint(KShape * shape, QPainter &painter, const KoViewConverter &converter, bool forPrint);
 
     /// reimplemented
-    virtual void adapt(KoShape * shape, QRectF &rect);
+    virtual void adapt(KShape * shape, QRectF &rect);
 
 private:
     SCAnimationCache * m_animationCache;

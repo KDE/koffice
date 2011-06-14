@@ -30,7 +30,7 @@
 class MockAppearAnimation : public SCShapeAnimationOld
 {
 public:
-    MockAppearAnimation(KoShape * shape, int step)
+    MockAppearAnimation(KShape * shape, int step)
     : SCShapeAnimationOld(shape, step, Appear)
     {}
 
@@ -71,7 +71,7 @@ public:
 class MockDisappearAnimation : public SCShapeAnimationOld
 {
 public:
-    MockDisappearAnimation(KoShape * shape, int step)
+    MockDisappearAnimation(KShape * shape, int step)
     : SCShapeAnimationOld(shape, step, Disappear)
     {}
 

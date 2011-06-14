@@ -121,7 +121,7 @@ void KarbonCalligraphyTool::mouseReleaseEvent(KPointerEvent *event)
         // handle click: select shape (if any)
         if (event->point == m_lastPoint) {
             KoShapeManager *shapeManager = canvas()->shapeManager();
-            KoShape *selectedShape = shapeManager->shapeAt(event->point);
+            KShape *selectedShape = shapeManager->shapeAt(event->point);
             if (selectedShape != 0) {
                 shapeManager->selection()->deselectAll();
                 shapeManager->selection()->select(selectedShape);
@@ -326,7 +326,7 @@ qreal KarbonCalligraphyTool::calculateAngle(const QPointF &oldSpeed,
     return angle;
 }
 
-void KarbonCalligraphyTool::activate(ToolActivation, const QSet<KoShape*> &)
+void KarbonCalligraphyTool::activate(ToolActivation, const QSet<KShape*> &)
 {
     setCursor(Qt::ArrowCursor);
     m_lastShape = 0;

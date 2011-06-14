@@ -93,13 +93,13 @@ SCNotes *SCPage::pageNotes()
     return d->pageNotes;
 }
 
-void SCPage::shapeAdded(KoShape * shape)
+void SCPage::shapeAdded(KShape * shape)
 {
     Q_ASSERT(shape);
     placeholders().shapeAdded(shape);
 }
 
-void SCPage::shapeRemoved(KoShape * shape)
+void SCPage::shapeRemoved(KShape * shape)
 {
     Q_ASSERT(shape);
     placeholders().shapeRemoved(shape);
@@ -346,7 +346,7 @@ QString SCPage::declaration(SCDeclarations::Type type) const
     return d->declarations->declaration(type, d->usedDeclaration.value(type));
 }
 
-bool SCPage::displayShape(KoShape *shape) const
+bool SCPage::displayShape(KShape *shape) const
 {
     bool display = true;
     QString presentationClass = shape->additionalAttribute("presentation:class");

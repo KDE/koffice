@@ -30,7 +30,7 @@
 
 #include <KoTextBlockData.h>
 
-SCShapeAnimation::SCShapeAnimation(KoShape *shape, KoTextBlockData *textBlockData)
+SCShapeAnimation::SCShapeAnimation(KShape *shape, KoTextBlockData *textBlockData)
 : m_shape(shape)
 , m_textBlockData(textBlockData)
 {
@@ -73,7 +73,7 @@ bool SCShapeAnimation::saveOdf(KoPASavingContext &paContext, bool startStep, boo
     return true;
 }
 
-KoShape * SCShapeAnimation::shape() const
+KShape * SCShapeAnimation::shape() const
 {
     return m_shape;
 }

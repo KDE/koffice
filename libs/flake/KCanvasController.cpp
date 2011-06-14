@@ -26,7 +26,7 @@
 #include "KCanvasController.h"
 
 #include "KCanvasController_p.h"
-#include "KoShape.h"
+#include "KShape.h"
 #include "KoViewConverter.h"
 #include "KCanvasBase.h"
 #include "KCanvasObserverBase.h"
@@ -377,7 +377,7 @@ bool KCanvasController::eventFilter(QObject *watched, QEvent *event)
     return false;
 }
 
-void KCanvasController::ensureVisible(KoShape *shape)
+void KCanvasController::ensureVisible(KShape *shape)
 {
     Q_ASSERT(shape);
     ensureVisible(d->canvas->viewConverter()->documentToView(shape->boundingRect()));

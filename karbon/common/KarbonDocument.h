@@ -40,7 +40,7 @@
 #include <KXmlReader.h>
 #include <KoDocument.h>
 
-class KoShape;
+class KShape;
 class KoShapeSavingContext;
 class KoShapeLayer;
 class KImageCollection;
@@ -152,7 +152,7 @@ public:
      * For an hierarchical view/access one should retrieve the documents
      * layers with layers().
      */
-    const QList<KoShape*> shapes() const;
+    const QList<KShape*> shapes() const;
 
     void saveOasis(KoShapeSavingContext & context) const;
     bool saveOdf(KoDocument::SavingContext & documentContext, const KOdfPageLayoutData &layout);
@@ -165,14 +165,14 @@ public:
     *
     * @param shape the object to append
     */
-    void add(KoShape* shape);
+    void add(KShape* shape);
 
     /**
     * Removes an object from the document.
     *
     * @param shape the object to append
     */
-    void remove(KoShape* shape);
+    void remove(KShape* shape);
 
     /**
      * Fetch the current resourceManager.

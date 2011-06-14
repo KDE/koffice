@@ -22,7 +22,7 @@
 #include "frames/KWTextFrame.h"
 #include "frames/KWTextFrameSet.h"
 
-#include <KoShape.h>
+#include <KShape.h>
 #include <KoShapeKeepAspectRatioCommand.h>
 #include <KoShapeMoveCommand.h>
 #include <KoShapeSizeCommand.h>
@@ -88,7 +88,7 @@ void KWFrameGeometry::open(KWFrame *frame)
     }
 }
 
-void KWFrameGeometry::open(KoShape *shape)
+void KWFrameGeometry::open(KShape *shape)
 {
     KWPage page = m_state->document()->pageManager()->page(shape);
     m_topOfPage = page.offsetInDocument();
@@ -136,7 +136,7 @@ void KWFrameGeometry::updateShape()
     }
     Q_ASSERT(frame);
     frame->shape()->update();
-    KoShape *shape = frame->shape();
+    KShape *shape = frame->shape();
     QPointF currentPos(shape->absolutePosition(widget.positionSelector->position()));
     QPointF pos(widget.xPos->value(), widget.yPos->value() + m_topOfPage);
     QPointF moved = pos - currentPos;
@@ -258,19 +258,19 @@ QUndoCommand *KWFrameGeometry::createCommand(QUndoCommand *parent)
 {
     if (m_frame == 0)
         return 0;
-    KoShape *shape = m_frame->shape();
+    KShape *shape = m_frame->shape();
     if (!qFuzzyCompare(m_originalSize.width(), shape->size().width())
             || !qFuzzyCompare(m_originalSize.height(), shape->size().height())) {
-        new KoShapeSizeCommand(QList<KoShape*>() << shape, QList<QSizeF>() << m_originalSize,
+        new KoShapeSizeCommand(QList<KShape*>() << shape, QList<QSizeF>() << m_originalSize,
             QList<QSizeF>() << shape->size(), parent);
     }
     if (!qFuzzyCompare(m_originalPosition.x(), shape->position().x())
             || !qFuzzyCompare(m_originalPosition.y(), shape->position().y())) {
-        new KoShapeMoveCommand(QList<KoShape*>() << shape, QList<QPointF>() << m_originalPosition,
+        new KoShapeMoveCommand(QList<KShape*>() << shape, QList<QPointF>() << m_originalPosition,
             QList<QPointF>() << shape->position(), parent);
     }
     if (m_originalGeometryLock != shape->isGeometryProtected()) {
-        new KoShapeLockCommand(QList<KoShape*>() << shape, QList<bool>() << m_originalGeometryLock,
+        new KoShapeLockCommand(QList<KShape*>() << shape, QList<bool>() << m_originalGeometryLock,
             QList<bool>() << !m_originalGeometryLock, parent);
     }
     return parent;

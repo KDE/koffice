@@ -39,7 +39,7 @@ class KoTableRowStyle;
 class KoTableCellStyle;
 class KSectionStyle;
 class KoStyleManager;
-class KoShape;
+class KShape;
 class KoShapeLoadingContext;
 
 #define KOTEXT_SHARED_LOADING_ID "KoTextSharedLoadingId"
@@ -167,13 +167,13 @@ public:
 
 protected:
     /**
-     * This method got called by kotext once a \a KoShape got inserted and an
+     * This method got called by kotext once a \a KShape got inserted and an
      * application can implement this to do additional things with shapes once
      * they got inserted.
      * @param shape a shape that has finished loading.
      * @param element the xml element that represents the shape being inserted.
      */
-    virtual void shapeInserted(KoShape *shape, const KXmlElement &element, KoShapeLoadingContext &context);
+    virtual void shapeInserted(KShape *shape, const KXmlElement &element, KoShapeLoadingContext &context);
 
 private:
     enum StyleType {

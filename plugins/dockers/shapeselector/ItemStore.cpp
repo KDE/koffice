@@ -48,8 +48,8 @@ class DummyShapeController : public KoShapeControllerBase
 public:
     DummyShapeController() {}
 
-    virtual void addShape( KoShape* ) {}
-    virtual void removeShape( KoShape* ) {}
+    virtual void addShape( KShape* ) {}
+    virtual void removeShape( KShape* ) {}
 };
 
 /**
@@ -69,8 +69,8 @@ public:
     ItemStorePrivate();
     void addFolder(FolderShape *folder);
     void removeFolder(FolderShape *folder);
-    void addShape(KoShape *shape);
-    void removeShape(KoShape *shape);
+    void addShape(KShape *shape);
+    void removeShape(KShape *shape);
     /// register a KoShapeManager as a user of this store so repaints can be made.
     void addUser(KoShapeManager *sm);
     /// remove a KoShapeManager as a user of this store to no longer report repaints to it.
@@ -81,7 +81,7 @@ private slots:
     void clipboardChanged();
 
 public:
-    QList<KoShape*> shapes;
+    QList<KShape*> shapes;
     QList<FolderShape *> folders;
     QList<KoShapeManager*> shapeManagers;
     FolderShape *mainFolder;
@@ -130,7 +130,7 @@ void ItemStorePrivate::removeFolder(FolderShape *folder)
         mainFolder = folders[0];
 }
 
-void ItemStorePrivate::addShape(KoShape *shape)
+void ItemStorePrivate::addShape(KShape *shape)
 {
     if (shapes.contains(shape))
         return;
@@ -139,7 +139,7 @@ void ItemStorePrivate::addShape(KoShape *shape)
     shapes.append(shape);
 }
 
-void ItemStorePrivate::removeShape(KoShape *shape)
+void ItemStorePrivate::removeShape(KShape *shape)
 {
     foreach (KoShapeManager *sm, shapeManagers)
         sm->remove(shape);
@@ -157,7 +157,7 @@ void ItemStorePrivate::removeUser(KoShapeManager *sm)
         return;
     shapeManagers.removeAll(sm);
     // remove all shapes from this shape manager to avoid a crash later
-    sm->setShapes(QList<KoShape *>());
+    sm->setShapes(QList<KShape *>());
     KConfigGroup conf = KoGlobal::kofficeConfig()->group("ShapeSelectorPlugin");
     const int previouslyConfiguredBooks = conf.readEntry("books", 0);
     conf.writeEntry("books", folders.size());
@@ -190,7 +190,7 @@ void ItemStorePrivate::clipboardChanged()
 {
     const QMimeData *data = QApplication::clipboard()->mimeData(QClipboard::Clipboard);
     QByteArray bytes = data->data(OASIS_MIME);
-    KoShape *shape = ItemStore::createShapeFromPaste(bytes);
+    KShape *shape = ItemStore::createShapeFromPaste(bytes);
 
     if (shape)
         setClipboardShape(new ClipboardProxyShape(shape, bytes));
@@ -253,17 +253,17 @@ QList<FolderShape*> ItemStore::folders() const
     return s_itemStorePrivate()->folders;
 }
 
-void ItemStore::addShape(KoShape *shape)
+void ItemStore::addShape(KShape *shape)
 {
     s_itemStorePrivate()->addShape(shape);
 }
 
-void ItemStore::removeShape(KoShape *shape)
+void ItemStore::removeShape(KShape *shape)
 {
     s_itemStorePrivate()->removeShape(shape);
 }
 
-QList<KoShape*> ItemStore::shapes() const
+QList<KShape*> ItemStore::shapes() const
 {
     return s_itemStorePrivate()->shapes;
 }
@@ -300,7 +300,7 @@ QRectF ItemStore::loadShapeTypes()
             int line, column;
             if (doc.setContent(children, false, &error, &line, &column)) {
                 folder->load(doc);
-                foreach(KoShape *child, folder->shapes())
+                foreach(KShape *child, folder->shapes())
                     s_itemStorePrivate()->addShape(child);
             } else {
                 kWarning(31000) << "ERROR: Could not parse xml for folder" << i << "at Line" << line << "Column" << column;
@@ -334,7 +334,7 @@ QRectF ItemStore::loadShapeTypes()
             oneAdded=true;
             TemplateShape *ts = new TemplateShape(shapeTemplate);
             KoShapeTemplate t1 = ts->shapeTemplate();
-            foreach(KoShape *shape, s_itemStorePrivate()->shapes) {
+            foreach(KShape *shape, s_itemStorePrivate()->shapes) {
                 TemplateShape *t = dynamic_cast<TemplateShape*>(shape);
                 if (t == 0)
                     continue;
@@ -352,7 +352,7 @@ QRectF ItemStore::loadShapeTypes()
             }
         }
         if (!oneAdded) {
-            KoShape *group = new GroupShape(factory);
+            KShape *group = new GroupShape(factory);
             mainFolder->addShape(group);
             s_itemStorePrivate()->addShape(group);
         }
@@ -373,7 +373,7 @@ void ItemStore::setClipboardShape(ClipboardProxyShape *shape)
 
 
 // static
-KoShape *ItemStore::createShapeFromPaste(const QByteArray &bytes)
+KShape *ItemStore::createShapeFromPaste(const QByteArray &bytes)
 {
     class Paster : public KOdfPasteBase {
       public:
@@ -396,10 +396,10 @@ KoShape *ItemStore::createShapeFromPaste(const QByteArray &bytes)
             return false;
         }
 
-        KoShape *shape() { return m_shape; }
+        KShape *shape() { return m_shape; }
 
       private:
-        KoShape *m_shape;
+        KShape *m_shape;
         KoShapeControllerBase *m_shapeController;
     };
 

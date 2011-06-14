@@ -25,7 +25,7 @@
 
 #include <QtGui/QBrush>
 
-class KoShape;
+class KShape;
 class QGradient;
 class KoShapeBackground;
 
@@ -64,7 +64,7 @@ namespace KoFlake
         ShapeOnTop  ///< return the shape highest z-ordering, regardless of selection.
     };
 
-    /// position. See KoShape::absolutePosition()
+    /// position. See KShape::absolutePosition()
     enum Position {
         TopLeftCorner, ///< the top left corner
         TopRightCorner, ///< the top right corner

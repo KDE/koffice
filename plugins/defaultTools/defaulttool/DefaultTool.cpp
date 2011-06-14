@@ -491,7 +491,7 @@ void DefaultTool::paint(QPainter &painter, const KoViewConverter &converter)
     }
 
     painter.save();
-    KoShape::applyConversion(painter, converter);
+    KShape::applyConversion(painter, converter);
     canvas()->snapGuide()->paint(painter, converter);
     painter.restore();
 
@@ -625,14 +625,14 @@ void DefaultTool::mouseDoubleClickEvent(KPointerEvent *event)
 {
     if (event->button() != Qt::LeftButton)
         return;
-    QList<KoShape*> shapes;
-    foreach(KoShape *shape, koSelection()->selectedShapes()) {
+    QList<KShape*> shapes;
+    foreach(KShape *shape, koSelection()->selectedShapes()) {
         if (shape->boundingRect().contains(event->point) && // first 'cheap' check
                 shape->outline().contains(event->point)) // this is more expensive but weeds out the almost hits
             shapes.append(shape);
     }
     if (shapes.count() == 0) { // nothing in the selection was clicked on.
-        KoShape *shape = canvas()->shapeManager()->shapeAt (event->point, KoFlake::ShapeOnTop);
+        KShape *shape = canvas()->shapeManager()->shapeAt (event->point, KoFlake::ShapeOnTop);
         if (shape) {
             shapes.append(shape);
         } else if (m_guideLine->isSelected()) {
@@ -645,13 +645,13 @@ void DefaultTool::mouseDoubleClickEvent(KPointerEvent *event)
         }
     }
 
-    QList<KoShape*> shapes2;
-    foreach (KoShape *shape, shapes) {
-        QSet<KoShape*> delegates = shape->toolDelegates();
+    QList<KShape*> shapes2;
+    foreach (KShape *shape, shapes) {
+        QSet<KShape*> delegates = shape->toolDelegates();
         if (delegates.isEmpty()) {
             shapes2.append(shape);
         } else {
-            foreach (KoShape *delegatedShape, delegates) {
+            foreach (KShape *delegatedShape, delegates) {
                 shapes2.append(delegatedShape);
             }
         }
@@ -685,8 +685,8 @@ bool DefaultTool::moveSelection(int direction, Qt::KeyboardModifiers modifiers)
 
         QList<QPointF> prevPos;
         QList<QPointF> newPos;
-        QList<KoShape*> shapes;
-        foreach(KoShape* shape, koSelection()->selectedShapes(KoFlake::TopLevelSelection)) {
+        QList<KShape*> shapes;
+        foreach(KShape* shape, koSelection()->selectedShapes(KoFlake::TopLevelSelection)) {
             if (shape->isGeometryProtected())
                 continue;
             shapes.append(shape);
@@ -749,7 +749,7 @@ void DefaultTool::repaintDecorations()
 
 void DefaultTool::copy() const
 {
-    QList<KoShape *> shapes = canvas()->shapeManager()->selection()->selectedShapes(KoFlake::TopLevelSelection);
+    QList<KShape *> shapes = canvas()->shapeManager()->selection()->selectedShapes(KoFlake::TopLevelSelection);
     if (!shapes.empty()) {
         KoShapeOdfSaveHelper saveHelper(shapes);
         KDrag drag;
@@ -760,8 +760,8 @@ void DefaultTool::copy() const
 
 void DefaultTool::deleteSelection()
 {
-    QList<KoShape *> shapes;
-    foreach (KoShape *s, canvas()->shapeManager()->selection()->selectedShapes(KoFlake::TopLevelSelection)) {
+    QList<KShape *> shapes;
+    foreach (KShape *s, canvas()->shapeManager()->selection()->selectedShapes(KoFlake::TopLevelSelection)) {
         if (s->isGeometryProtected())
             continue;
         shapes << s;
@@ -782,7 +782,7 @@ bool DefaultTool::paste()
         success = paste.paste(KOdf::TextDocument, data);
         if (success) {
             shapeManager->selection()->deselectAll();
-            foreach(KoShape *shape, paste.pastedShapes()) {
+            foreach(KShape *shape, paste.pastedShapes()) {
                 shapeManager->selection()->select(shape);
             }
         }
@@ -875,7 +875,7 @@ void DefaultTool::recalcSelectionBox()
     m_selectionBox[KoFlake::TopLeftHandle] = outline.value(0);
     if (koSelection()->count() == 1) {
 #if 0        // TODO detect mirroring
-        KoShape *s = koSelection()->firstSelectedShape();
+        KShape *s = koSelection()->firstSelectedShape();
 
         if (s->scaleX() < 0) { // vertically mirrored: swap left / right
             qSwap(m_selectionBox[KoFlake::TopLeftHandle], m_selectionBox[KoFlake::TopRightHandle]);
@@ -891,7 +891,7 @@ void DefaultTool::recalcSelectionBox()
     }
 }
 
-void DefaultTool::activate(ToolActivation, const QSet<KoShape*> &)
+void DefaultTool::activate(ToolActivation, const QSet<KShape*> &)
 {
     m_mouseWasInsideHandles = false;
     m_lastHandle = KoFlake::NoHandle;
@@ -938,11 +938,11 @@ void DefaultTool::selectionGroup()
     if (! selection)
         return;
 
-    QList<KoShape*> selectedShapes = selection->selectedShapes(KoFlake::TopLevelSelection);
-    QList<KoShape*> groupedShapes;
+    QList<KShape*> selectedShapes = selection->selectedShapes(KoFlake::TopLevelSelection);
+    QList<KShape*> groupedShapes;
 
     // only group shapes with an unselected parent
-    foreach (KoShape* shape, selectedShapes) {
+    foreach (KShape* shape, selectedShapes) {
         if (! selectedShapes.contains(shape->parent()) && shape->isEditable()) {
             groupedShapes << shape;
         }
@@ -958,11 +958,11 @@ void DefaultTool::selectionUngroup()
     if (! selection)
         return;
 
-    QList<KoShape*> selectedShapes = selection->selectedShapes(KoFlake::TopLevelSelection);
-    QList<KoShape*> containerSet;
+    QList<KShape*> selectedShapes = selection->selectedShapes(KoFlake::TopLevelSelection);
+    QList<KShape*> containerSet;
 
     // only ungroup shape groups with an unselected parent
-    foreach (KoShape* shape, selectedShapes) {
+    foreach (KShape* shape, selectedShapes) {
         if (!selectedShapes.contains(shape->parent()) && shape->isEditable()) {
             containerSet << shape;
         }
@@ -971,18 +971,18 @@ void DefaultTool::selectionUngroup()
     QUndoCommand *cmd = 0;
 
     // add a ungroup command for each found shape container to the macro command
-    foreach(KoShape *shape, containerSet) {
+    foreach(KShape *shape, containerSet) {
         KoShapeGroup *group = dynamic_cast<KoShapeGroup*>(shape);
         if (group) {
             cmd = cmd ? cmd : new QUndoCommand(i18n("Ungroup shapes"));
             canvas()->shapeController()->removeShape(group, cmd); // removes parent and children.
-            QList<KoShape*> children = group->shapes();
-            foreach (KoShape *shape, children) {
+            QList<KShape*> children = group->shapes();
+            foreach (KShape *shape, children) {
                 // re-add children to document correctly, so the doc can notice them as toplevels
                 canvas()->shapeController()->addShape(shape, cmd);
             }
             new KoShapeUngroupCommand(group, group->shapes(),
-                    group->parent()? QList<KoShape*>(): canvas()->shapeManager()->topLevelShapes(),
+                    group->parent()? QList<KShape*>(): canvas()->shapeManager()->topLevelShapes(),
                     cmd);
         }
     }
@@ -997,11 +997,11 @@ void DefaultTool::selectionAlign(KoShapeAlignCommand::Align align)
     if (! selection)
         return;
 
-    QList<KoShape*> selectedShapes = selection->selectedShapes(KoFlake::TopLevelSelection);
+    QList<KShape*> selectedShapes = selection->selectedShapes(KoFlake::TopLevelSelection);
     if (selectedShapes.count() < 1)
         return;
 
-    QList<KoShape*> editableShapes = filterEditableShapes(selectedShapes);
+    QList<KShape*> editableShapes = filterEditableShapes(selectedShapes);
 
     // TODO add an option to the widget so that one can align to the page
     // with multiple selected shapes too
@@ -1014,7 +1014,7 @@ void DefaultTool::selectionAlign(KoShapeAlignCommand::Align align)
             return;
         bb = QRectF(QPointF(0,0), canvas()->resourceManager()->sizeResource(KoCanvasResource::PageSize));
     } else {
-        foreach( KoShape * shape, editableShapes ) {
+        foreach( KShape * shape, editableShapes ) {
             bb |= shape->boundingRect();
         }
     }
@@ -1051,11 +1051,11 @@ void DefaultTool::selectionReorder(KoShapeReorderCommand::MoveShapeType order)
     if (! selection)
         return;
 
-    QList<KoShape*> selectedShapes = selection->selectedShapes(KoFlake::TopLevelSelection);
+    QList<KShape*> selectedShapes = selection->selectedShapes(KoFlake::TopLevelSelection);
     if (selectedShapes.count() < 1)
         return;
 
-    QList<KoShape*> editableShapes = filterEditableShapes(selectedShapes);
+    QList<KShape*> editableShapes = filterEditableShapes(selectedShapes);
     if (editableShapes.count() < 1)
         return;
 
@@ -1178,7 +1178,7 @@ KInteractionStrategy *DefaultTool::createStrategy(KPointerEvent *event)
         }
     }
 
-    KoShape *shape = shapeManager->shapeAt(event->point, selectNextInStack ? KoFlake::NextUnselected : KoFlake::ShapeOnTop);
+    KShape *shape = shapeManager->shapeAt(event->point, selectNextInStack ? KoFlake::NextUnselected : KoFlake::ShapeOnTop);
 
     if (!shape && handle == KoFlake::NoHandle) {
         KoShapeConnection *connection = shapeManager->connectionAt(event->point);
@@ -1242,7 +1242,7 @@ void DefaultTool::updateActions()
         return;
     }
 
-    QList<KoShape*> editableShapes = filterEditableShapes(selection->selectedShapes(KoFlake::TopLevelSelection));
+    QList<KShape*> editableShapes = filterEditableShapes(selection->selectedShapes(KoFlake::TopLevelSelection));
     bool enable = editableShapes.count () > 0;
     action("object_order_front")->setEnabled(enable);
     action("object_order_raise")->setEnabled(enable);
@@ -1258,7 +1258,7 @@ void DefaultTool::updateActions()
 
     action("object_group")->setEnabled(editableShapes.count() > 1);
     bool groupShape = false;
-    foreach (KoShape * shape, editableShapes) {
+    foreach (KShape * shape, editableShapes) {
         if (dynamic_cast<KoShapeGroup *>(shape)) {
             groupShape = true;
             break;
@@ -1274,10 +1274,10 @@ KoToolSelection* DefaultTool::selection()
     return m_selectionHandler;
 }
 
-QList<KoShape*> DefaultTool::filterEditableShapes( const QList<KoShape*> &shapes )
+QList<KShape*> DefaultTool::filterEditableShapes( const QList<KShape*> &shapes )
 {
-    QList<KoShape*> editableShapes;
-    foreach( KoShape * shape, shapes ) {
+    QList<KShape*> editableShapes;
+    foreach( KShape * shape, shapes ) {
         if (shape->isEditable())
             editableShapes.append(shape);
     }
@@ -1285,10 +1285,10 @@ QList<KoShape*> DefaultTool::filterEditableShapes( const QList<KoShape*> &shapes
     return editableShapes;
 }
 
-uint DefaultTool::editableShapesCount( const QList<KoShape*> &shapes )
+uint DefaultTool::editableShapesCount( const QList<KShape*> &shapes )
 {
     uint count = 0;
-    foreach( KoShape * shape, shapes ) {
+    foreach( KShape * shape, shapes ) {
         if (shape->isEditable())
             count++;
     }

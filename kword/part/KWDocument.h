@@ -63,9 +63,9 @@ public:
 
     // KoShapeControllerBase interface
     /// reimplemented from KoShapeControllerBase
-    void addShape(KoShape *shape);
+    void addShape(KShape *shape);
     /// reimplemented from KoShapeControllerBase
-    void removeShape(KoShape *shape);
+    void removeShape(KShape *shape);
 
 
     // KoDocument interface
@@ -167,7 +167,7 @@ public:
     /// request a relayout of auto-generated frames on all pages of this argument style.
     void updatePagesForStyle(const KWPageStyle &style, bool delayed);
 
-    void clipToDocument(const KoShape *shape, QPointF &move) const;
+    void clipToDocument(const KShape *shape, QPointF &move) const;
 
 public slots:
     /// Register new frameset

@@ -53,7 +53,7 @@ class KOdfStyleStack;
 class KOdfGenericStyles;
 class KOdfSettings;
 class KOdfStylesReader;
-class KoShape;
+class KShape;
 class KoShapeSavingContext;
 class KXmlWriter;
 
@@ -130,8 +130,8 @@ public:
     KCDocBase* doc() const;
 
     // KoShapeControllerBase interface
-    virtual void addShape(KoShape* shape);
-    virtual void removeShape(KoShape* shape);
+    virtual void addShape(KShape* shape);
+    virtual void removeShape(KShape* shape);
     virtual KResourceManager* resourceManager() const;
 
     /**
@@ -144,7 +144,7 @@ public:
      * Returns the sheet's shapes.
      * \return the shapes this sheet contains
      */
-    QList<KoShape*> shapes() const;
+    QList<KShape*> shapes() const;
 
     //////////////////////////////////////////////////////////////////////////
     //
@@ -816,14 +816,14 @@ signals:
      * Emitted, if a \p shape was added.
      * \param sheet this sheet (for the KCView to determine, if it's the active one)
      */
-    void shapeAdded(KCSheet *sheet, KoShape *shape);
+    void shapeAdded(KCSheet *sheet, KShape *shape);
 
     /**
      * \ingroup Embedding
      * Emitted, if a \p shape was removed.
      * \param sheet this sheet (for the KCView to determine, if it's the active one)
      */
-    void shapeRemoved(KCSheet *sheet, KoShape *shape);
+    void shapeRemoved(KCSheet *sheet, KShape *shape);
 
 protected:
     /**

@@ -26,11 +26,11 @@
 
 #include "flake_export.h"
 
-class KoShape;
+class KShape;
 class KoShapeKeepAspectRatioCommandPrivate;
 
 /**
- * Command that changes the keepAspectRatio property of a set of KoShape instances
+ * Command that changes the keepAspectRatio property of a set of KShape instances
  */
 class FLAKE_EXPORT KoShapeKeepAspectRatioCommand : public QUndoCommand
 {
@@ -42,7 +42,7 @@ public:
      * @param newKeepAspectRatio the new settings
      * @param parent the parent command
      */
-    KoShapeKeepAspectRatioCommand(const QList<KoShape*> &shapes, const QList<bool> &oldKeepAspectRatio, const QList<bool> &newKeepAspectRatio, QUndoCommand* parent = 0);
+    KoShapeKeepAspectRatioCommand(const QList<KShape*> &shapes, const QList<bool> &oldKeepAspectRatio, const QList<bool> &newKeepAspectRatio, QUndoCommand* parent = 0);
     ~KoShapeKeepAspectRatioCommand();
 
     /// Execute the command

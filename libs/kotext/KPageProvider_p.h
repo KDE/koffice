@@ -33,7 +33,7 @@
 
 #include "kotext_export.h"
 
-class KoShape;
+class KShape;
 class KoTextPage;
 
 /// \internal  this is a hack for kpresenter
@@ -46,6 +46,6 @@ public:
     /**
      * Get the page number for the given shape
      */
-    virtual KoTextPage *page(KoShape *shape) = 0;
+    virtual KoTextPage *page(KShape *shape) = 0;
 };
 #endif // KOPAGEPROVIDER_H

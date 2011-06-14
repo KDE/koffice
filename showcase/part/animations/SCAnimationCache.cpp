@@ -23,7 +23,7 @@
 #include <QString>
 #include <QVariant>
 
-#include <KoShape.h>
+#include <KShape.h>
 #include <KoTextBlockData.h>
 
 #include "kdebug.h"
@@ -38,7 +38,7 @@ SCAnimationCache::~SCAnimationCache()
 }
 
 
-bool SCAnimationCache::hasValue(KoShape *shape, const QString &id)
+bool SCAnimationCache::hasValue(KShape *shape, const QString &id)
 {
     if (m_currentShapeValues.contains(shape))
         return m_currentShapeValues.value(shape).contains(id);
@@ -52,14 +52,14 @@ bool SCAnimationCache::hasValue(int step, KoTextBlockData *textBlockData, const 
     return false;
 }
 
-bool SCAnimationCache::hasValue(int step, KoShape *shape, const QString &id)
+bool SCAnimationCache::hasValue(int step, KShape *shape, const QString &id)
 {
     if (m_shapeValuesStack[step].contains(shape))
         return m_shapeValuesStack[step].value(shape).contains(id);
     return false;
 }
 
-void SCAnimationCache::setValue(int step, KoShape *shape, const QString &id, const QVariant &value)
+void SCAnimationCache::setValue(int step, KShape *shape, const QString &id, const QVariant &value)
 {
     m_shapeValuesStack[step][shape][id] = value;
 }
@@ -69,14 +69,14 @@ void SCAnimationCache::setValue(int step, KoTextBlockData *textBlockData, const 
     m_textBlockDataValuesStack[step][textBlockData][id] = value;
 }
 
-QVariant SCAnimationCache::value(KoShape *shape, const QString &id, const QVariant &defaultValue)
+QVariant SCAnimationCache::value(KShape *shape, const QString &id, const QVariant &defaultValue)
 {
     if (m_currentShapeValues.contains(shape))
         return m_currentShapeValues.value(shape).value(id, defaultValue);
     return defaultValue;
 }
 
-QVariant SCAnimationCache::value(int step, KoShape *shape, const QString &id)
+QVariant SCAnimationCache::value(int step, KShape *shape, const QString &id)
 {
     if (m_shapeValuesStack[step].contains(shape))
         return m_shapeValuesStack[step].value(shape).value(id);
@@ -91,7 +91,7 @@ QVariant SCAnimationCache::value(KoTextBlockData *textBlockData, const QString &
     return defaultValue;
 }
 
-void SCAnimationCache::init(int step, KoShape *shape, KoTextBlockData * textBlockData, const QString &id, const QVariant &value)
+void SCAnimationCache::init(int step, KShape *shape, KoTextBlockData * textBlockData, const QString &id, const QVariant &value)
 {
     if (textBlockData) {
         for (int i = m_textBlockDataValuesStack.size(); i <= step; ++i) {
@@ -128,7 +128,7 @@ void SCAnimationCache::init(int step, KoShape *shape, KoTextBlockData * textBloc
                 m_shapeValuesStack.append(m_shapeValuesStack[i-1]);
             }
             else {
-                m_shapeValuesStack.append(QMap<KoShape *, QMap<QString, QVariant> >());
+                m_shapeValuesStack.append(QMap<KShape *, QMap<QString, QVariant> >());
             }
         }
         // check if value is valid
@@ -151,7 +151,7 @@ void SCAnimationCache::init(int step, KoShape *shape, KoTextBlockData * textBloc
     }
 }
 
-void SCAnimationCache::update(KoShape *shape, KoTextBlockData * textBlockData, const QString &id, const QVariant &value)
+void SCAnimationCache::update(KShape *shape, KoTextBlockData * textBlockData, const QString &id, const QVariant &value)
 {
     if (textBlockData) {
         if (id == "transform" && !m_next) {

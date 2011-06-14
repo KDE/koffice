@@ -37,8 +37,8 @@ public:
     KoTextOnShapeContainerPrivate(KoShapeContainer *q);
     virtual ~KoTextOnShapeContainerPrivate();
 
-    KoShape *content; // the original shape
-    KoShape *textShape;
+    KShape *content; // the original shape
+    KShape *textShape;
     KoTextOnShapeContainer::ResizeBehavior resizeBehavior;
 };
 
@@ -46,10 +46,10 @@ class KoTextOnShapeContainerModel : public SimpleShapeContainerModel
 {
 public:
     KoTextOnShapeContainerModel(KoTextOnShapeContainer *qq, KoTextOnShapeContainerPrivate *containerData);
-    virtual void containerChanged(KoShapeContainer *container, KoShape::ChangeType type);
-    virtual void proposeMove(KoShape *child, QPointF &move);
-    virtual void childChanged(KoShape *child, KoShape::ChangeType type);
-    bool inheritsTransform(const KoShape *) const {
+    virtual void containerChanged(KoShapeContainer *container, KShape::ChangeType type);
+    virtual void proposeMove(KShape *child, QPointF &move);
+    virtual void childChanged(KShape *child, KShape::ChangeType type);
+    bool inheritsTransform(const KShape *) const {
         return true;
     }
 
@@ -81,25 +81,25 @@ KoTextOnShapeContainerModel::KoTextOnShapeContainerModel(KoTextOnShapeContainer 
 {
 }
 
-void KoTextOnShapeContainerModel::containerChanged(KoShapeContainer *container, KoShape::ChangeType type)
+void KoTextOnShapeContainerModel::containerChanged(KoShapeContainer *container, KShape::ChangeType type)
 {
 #ifdef QT_NO_DEBUG
     Q_UNUSED(container);
 #endif
-    if (lock || type != KoShape::SizeChanged) {
+    if (lock || type != KShape::SizeChanged) {
         return;
     }
     lock = true;
     Q_ASSERT(container == q);
     containerData->content->setSize(q->size());
-    KoShape *text = containerData->textShape;
+    KShape *text = containerData->textShape;
     if (text) {
         text->setSize(q->size());
     }
     lock = false;
 }
 
-void KoTextOnShapeContainerModel::proposeMove(KoShape *child, QPointF &move)
+void KoTextOnShapeContainerModel::proposeMove(KShape *child, QPointF &move)
 {
     if (child == containerData->textShape) { // not user movable
         move.setX(0);
@@ -107,7 +107,7 @@ void KoTextOnShapeContainerModel::proposeMove(KoShape *child, QPointF &move)
     }
 }
 
-void KoTextOnShapeContainerModel::childChanged(KoShape *child, KoShape::ChangeType type)
+void KoTextOnShapeContainerModel::childChanged(KShape *child, KShape::ChangeType type)
 {
     if (lock) {
         return;
@@ -116,10 +116,10 @@ void KoTextOnShapeContainerModel::childChanged(KoShape *child, KoShape::ChangeTy
     // the container is leading in size, so the only reason we get here is when
     // one of the child shapes decided to resize itself. This would probably be
     // the text shape deciding it needs more space.
-    KoShape *text = containerData->textShape;
+    KShape *text = containerData->textShape;
     if (child == text) {
         switch (type) {
-        case KoShape::SizeChanged:
+        case KShape::SizeChanged:
             q->setSize(text->size()); // should have a policy to decide what to do
             break;
         default: // the others are not interesting for us
@@ -130,7 +130,7 @@ void KoTextOnShapeContainerModel::childChanged(KoShape *child, KoShape::ChangeTy
 }
 
 /// KoTextOnShapeContainer
-KoTextOnShapeContainer::KoTextOnShapeContainer(KoShape *childShape, KResourceManager *documentResources)
+KoTextOnShapeContainer::KoTextOnShapeContainer(KShape *childShape, KResourceManager *documentResources)
     : KoShapeContainer(*(new KoTextOnShapeContainerPrivate(this)))
 {
     Q_D(KoTextOnShapeContainer);
@@ -151,7 +151,7 @@ KoTextOnShapeContainer::KoTextOnShapeContainer(KoShape *childShape, KResourceMan
     d->model = new KoTextOnShapeContainerModel(this, d);
     addShape(childShape);
 
-    QSet<KoShape*> delegates;
+    QSet<KShape*> delegates;
     delegates << childShape;
     KoShapeFactoryBase *factory = KoShapeRegistry::instance()->get("TextShapeID");
     if (factory) { // not installed, thats too bad, but allowed
@@ -235,7 +235,7 @@ void KoTextOnShapeContainer::setResizeBehavior(ResizeBehavior resizeBehavior)
         return;
     }
     d->resizeBehavior = resizeBehavior;
-    d->model->containerChanged(this, KoShape::SizeChanged);
+    d->model->containerChanged(this, KShape::SizeChanged);
 }
 
 KoTextOnShapeContainer::ResizeBehavior KoTextOnShapeContainer::resizeBehavior() const
@@ -300,7 +300,7 @@ void KoTextOnShapeContainer::saveOdfChildElements(KoShapeSavingContext &context)
 }
 
 // static
-void KoTextOnShapeContainer::tryWrapShape(KoShape *shape, const KXmlElement &element, KoShapeLoadingContext &context)
+void KoTextOnShapeContainer::tryWrapShape(KShape *shape, const KXmlElement &element, KoShapeLoadingContext &context)
 {
     KXmlElement text = KoXml::namedItemNS(element, KOdfXmlNS::text, "p");
     if (!text.isNull()) {

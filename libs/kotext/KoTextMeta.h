@@ -24,7 +24,7 @@
 #include "KInlineObject.h"
 #include "kotext_export.h"
 
-class KoShape;
+class KShape;
 class QTextDocument;
 class KoShapeSavingContext;
 class KoShapeLoadingContext;
@@ -72,8 +72,8 @@ public:
     /// @return the end bookmark if the type is StartBookmark
     KoTextMeta* endBookmark() const; // TODO rename to an appropriate method name
 
-    /// @return the KoShape where this bookmark is located
-    KoShape *shape() const;
+    /// @return the KShape where this bookmark is located
+    KShape *shape() const;
 
 private:
     class Private; // TODO share the private with super

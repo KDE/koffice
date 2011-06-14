@@ -58,9 +58,9 @@ public:
 
     virtual bool masterMode();
 
-    void addShape(KoShape *shape);
+    void addShape(KShape *shape);
 
-    void removeShape(KoShape *shape);
+    void removeShape(KShape *shape);
 
     virtual void changePageLayout(const KOdfPageLayoutData &pageLayout, bool applyToDocument, QUndoCommand *parent = 0);
 

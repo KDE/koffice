@@ -30,7 +30,7 @@
 #include "KCanvasBase.h"
 #include "KoShapeConfigWidgetBase.h"
 #include "KoShapeFactoryBase.h"
-#include "KoShape.h"
+#include "KShape.h"
 #include "KoShapeRegistry.h"
 
 #include <kpagedialog.h>
@@ -55,7 +55,7 @@ public:
     KoShapeControllerBase *shapeController;
     KResourceManager *dummyRm; // only used when there is no shapeController
 
-    QUndoCommand* addShape(KoShape *shape, QUndoCommand *parent) {
+    QUndoCommand* addShape(KShape *shape, QUndoCommand *parent) {
         Q_ASSERT(canvas->shapeManager());
         // set the active layer as parent if there is not yet a parent.
         if (!shape->parent()) {
@@ -78,17 +78,17 @@ KoShapeController::~KoShapeController()
     delete d;
 }
 
-QUndoCommand* KoShapeController::addShape(KoShape *shape, QUndoCommand *parent)
+QUndoCommand* KoShapeController::addShape(KShape *shape, QUndoCommand *parent)
 {
     return d->addShape(shape, parent);
 }
 
-QUndoCommand* KoShapeController::removeShape(KoShape *shape, QUndoCommand *parent)
+QUndoCommand* KoShapeController::removeShape(KShape *shape, QUndoCommand *parent)
 {
     return new KoShapeDeleteCommand(d->shapeController, shape, parent);
 }
 
-QUndoCommand* KoShapeController::removeShapes(const QList<KoShape*> &shapes, QUndoCommand *parent)
+QUndoCommand* KoShapeController::removeShapes(const QList<KShape*> &shapes, QUndoCommand *parent)
 {
     return new KoShapeDeleteCommand(d->shapeController, shapes, parent);
 }

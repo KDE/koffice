@@ -46,7 +46,7 @@ KWOutlineShape::KWOutlineShape(KWFrame *frame)
     group->setSize(QSize(1, 1));
     group->setApplicationData(frame);
 
-    KoShape *child = frame->shape();
+    KShape *child = frame->shape();
     group->setTransformation(child->absoluteTransformation(0));
     QTransform matrix;
     child->setTransformation(matrix);

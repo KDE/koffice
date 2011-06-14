@@ -252,7 +252,7 @@ void SCAnimationDirector::updateActivePage(KoPAPageBase * page)
         m_view->viewMode()->updateActivePage(page);
     }
     else {
-        QList<KoShape*> shapes = page->shapes();
+        QList<KShape*> shapes = page->shapes();
         m_canvas->shapeManager()->setShapes(shapes, KoShapeManager::AddWithoutRepaint);
         //Make the top most layer active
         if (!shapes.isEmpty()) {
@@ -265,7 +265,7 @@ void SCAnimationDirector::updateActivePage(KoPAPageBase * page)
 
         Q_ASSERT(paPage);
         KoPAMasterPage * masterPage = paPage->masterPage();
-        QList<KoShape*> masterShapes = masterPage->shapes();
+        QList<KShape*> masterShapes = masterPage->shapes();
         m_canvas->masterShapeManager()->setShapes(masterShapes, KoShapeManager::AddWithoutRepaint);
         // Make the top most layer active
         if (!masterShapes.isEmpty()) {
@@ -370,13 +370,13 @@ void SCAnimationDirector::paintStep(QPainter &painter)
     m_view->activePage()->paintBackground(painter, m_zoomHandler);
 
     if (m_view->activePage()->displayMasterShapes()) {
-        foreach (KoShape *shape, m_canvas->masterShapeManager()->shapes()) {
+        foreach (KShape *shape, m_canvas->masterShapeManager()->shapes()) {
             shape->waitUntilReady(m_zoomHandler, false);
         }
 
         m_canvas->masterShapeManager()->paint(painter, m_zoomHandler, true);
     }
-    foreach (KoShape *shape, m_canvas->shapeManager()->shapes()) {
+    foreach (KShape *shape, m_canvas->shapeManager()->shapes()) {
         shape->waitUntilReady(m_zoomHandler, false);
     }
     m_canvas->shapeManager()->paint(painter, m_zoomHandler, true);

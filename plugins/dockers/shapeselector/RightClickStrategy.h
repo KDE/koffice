@@ -22,7 +22,7 @@
 #include "InteractionStrategy.h"
 
 class Canvas;
-class KoShape;
+class KShape;
 class KPointerEvent;
 
 /**
@@ -35,7 +35,7 @@ class KPointerEvent;
 class RightClickStrategy : public InteractionStrategy
 {
 public:
-    RightClickStrategy(Canvas *canvas, KoShape *clickedShape, KPointerEvent &event);
+    RightClickStrategy(Canvas *canvas, KShape *clickedShape, KPointerEvent &event);
 
     virtual void handleMouseMove(const QPointF &mouseLocation, Qt::KeyboardModifiers modifiers);
     virtual void finishInteraction(Qt::KeyboardModifiers modifiers);
@@ -48,7 +48,7 @@ private:
 
     Canvas *m_canvas;
     QPointF m_lastPosition;
-    KoShape *m_clickedShape;
+    KShape *m_clickedShape;
 };
 
 #endif

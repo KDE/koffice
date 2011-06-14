@@ -22,7 +22,7 @@
 
 #include <KoZoomHandler.h>
 #include <KoShapePainter.h>
-#include <KoShape.h>
+#include <KShape.h>
 
 #include <QtGui/QPainter>
 
@@ -113,7 +113,7 @@ void SvgPatternHelper::setPatternContentViewbox(const QRectF &viewBox)
     m_patternContentViewbox = viewBox;
 }
 
-QImage SvgPatternHelper::generateImage(const QRectF &objectBound, const QList<KoShape*> content)
+QImage SvgPatternHelper::generateImage(const QRectF &objectBound, const QList<KShape*> content)
 {
     KoZoomHandler zoomHandler;
 

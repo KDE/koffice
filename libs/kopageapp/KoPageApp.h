@@ -38,7 +38,7 @@ namespace KoPageApp
      * This enum holds identifiers to the resources that can be stored in the KResourceManager.
      */
     enum CanvasResource {
-        CurrentPage = KoCanvasResource::KoPageAppStart+1 ///< The current page as a KoShape
+        CurrentPage = KoCanvasResource::KoPageAppStart+1 ///< The current page as a KShape
     };
 
     /**

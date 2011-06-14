@@ -21,7 +21,7 @@
 #define PICTURESHAPE_H
 
 #include <QPixmap>
-#include <KoShape.h>
+#include <KShape.h>
 #include <KFrameShape.h>
 
 #define PICTURESHAPEID "PictureShape"
@@ -29,7 +29,7 @@
 class KImageCollection;
 class RenderQueue;
 
-class PictureShape : public KoShape, public KFrameShape
+class PictureShape : public KShape, public KFrameShape
 {
 public:
     enum PictureMode {
@@ -88,7 +88,7 @@ public slots:
     void updateShape();
 
 private:
-    KoShape *m_pictureShape;
+    KShape *m_pictureShape;
     QList<QSize> m_wantedImageSize;
 };
 

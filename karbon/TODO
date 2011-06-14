@@ -73,7 +73,7 @@ General:
     - icon -> quadratic page size
     - wallpaper -> using sreen resolution
 
-- rename Dependee* in KoShape to Follower* as suggested by Thomas
+- rename Dependee* in KShape to Follower* as suggested by Thomas
 
 - don't use shape in the svg import filter directly, create a shape using the shape factory and 
   provide the properties 

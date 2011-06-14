@@ -24,7 +24,7 @@
 #include <QUndoCommand>
 #include <QList>
 
-class KoShape;
+class KShape;
 class KoShapeShadow;
 
 /// The undo / redo command for setting the shape shadow
@@ -37,7 +37,7 @@ public:
      * @param shadow the new shadow, the same for all given shapes
      * @param parent the parent command used for macro commands
      */
-    KoShapeShadowCommand(const QList<KoShape*> & shapes, KoShapeShadow *shadow, QUndoCommand *parent = 0);
+    KoShapeShadowCommand(const QList<KShape*> & shapes, KoShapeShadow *shadow, QUndoCommand *parent = 0);
 
     /**
      * Command to set new shape shadows.
@@ -45,7 +45,7 @@ public:
      * @param shadows the new shadows, one for each shape
      * @param parent the parent command used for macro commands
      */
-    KoShapeShadowCommand(const QList<KoShape*> &shapes, const QList<KoShapeShadow*> &shadows, QUndoCommand *parent = 0);
+    KoShapeShadowCommand(const QList<KShape*> &shapes, const QList<KoShapeShadow*> &shadows, QUndoCommand *parent = 0);
 
     /**
      * Command to set a new shape shadow.
@@ -53,7 +53,7 @@ public:
      * @param shadow the new shadow
      * @param parent the parent command used for macro commands
      */
-    KoShapeShadowCommand(KoShape *shape, KoShapeShadow *shadow, QUndoCommand *parent = 0);
+    KoShapeShadowCommand(KShape *shape, KoShapeShadow *shadow, QUndoCommand *parent = 0);
 
     virtual ~KoShapeShadowCommand();
     /// redo the command

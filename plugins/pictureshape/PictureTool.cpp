@@ -41,11 +41,11 @@ PictureTool::PictureTool( KCanvasBase* canvas )
 {
 }
 
-void PictureTool::activate(ToolActivation toolActivation, const QSet<KoShape*> &shapes)
+void PictureTool::activate(ToolActivation toolActivation, const QSet<KShape*> &shapes)
 {
     Q_UNUSED(toolActivation);
 
-    foreach (KoShape *shape, shapes) {
+    foreach (KShape *shape, shapes) {
         m_pictureshape = dynamic_cast<PictureShape*>( shape );
         if ( m_pictureshape )
             break;

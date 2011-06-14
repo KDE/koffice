@@ -43,7 +43,7 @@ public:
     void layout();
 
     /// reimplemented from KoTextDocumentLayout::shapes()
-    virtual QList<KoShape*> shapes() const;
+    virtual QList<KShape*> shapes() const;
 
 protected:
     friend class KWTextFrameSet;

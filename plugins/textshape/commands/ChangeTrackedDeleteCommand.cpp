@@ -214,7 +214,7 @@ void ChangeTrackedDeleteCommand::deleteSelection(QTextCursor &selection)
     int selectionEnd = qMax(checker.anchor(), checker.position());
     int changeId;
 
-    QList<KoShape *> shapesInSelection;
+    QList<KShape *> shapesInSelection;
 
     checker.setPosition(selectionBegin);
 
@@ -323,7 +323,7 @@ void ChangeTrackedDeleteCommand::deleteSelection(QTextCursor &selection)
         if (backwards)
             selection.movePosition(QTextCursor::PreviousCharacter, QTextCursor::MoveAnchor,1);
 
-        foreach (KoShape *shape, shapesInSelection) {
+        foreach (KShape *shape, shapesInSelection) {
             QUndoCommand *shapeDeleteCommand = m_tool->canvas()->shapeController()->removeShape(shape, this);
             shapeDeleteCommand->redo();
             m_canMerge = false;

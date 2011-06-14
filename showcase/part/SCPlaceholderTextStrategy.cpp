@@ -30,7 +30,7 @@
 #include <KOdfGenericStyles.h>
 #include <KXmlWriter.h>
 #include <KParagraphStyle.h>
-#include <KoShape.h>
+#include <KShape.h>
 #include <KoShapeLoadingContext.h>
 #include <KoShapeFactoryBase.h>
 #include <KoShapeRegistry.h>
@@ -56,9 +56,9 @@ SCPlaceholderTextStrategy::~SCPlaceholderTextStrategy()
     delete m_textShape;
 }
 
-KoShape *SCPlaceholderTextStrategy::createShape(KResourceManager *documentResources)
+KShape *SCPlaceholderTextStrategy::createShape(KResourceManager *documentResources)
 {
-    KoShape * shape = SCPlaceholderStrategy::createShape(documentResources);
+    KShape * shape = SCPlaceholderStrategy::createShape(documentResources);
     if (m_textShape) {
         KoTextShapeData * data = qobject_cast<KoTextShapeData*>(m_textShape->userData());
         KoTextShapeData * newData = qobject_cast<KoTextShapeData*>(shape->userData());
@@ -90,7 +90,7 @@ void SCPlaceholderTextStrategy::paint(QPainter &painter, const KoViewConverter &
         }
         m_textShape->paint(painter, converter);
 
-        KoShape::applyConversion(painter, converter);
+        KShape::applyConversion(painter, converter);
         QPen pen(Qt::gray);
         //pen.setStyle(Qt::DashLine); // endless loop
         painter.setPen(pen);

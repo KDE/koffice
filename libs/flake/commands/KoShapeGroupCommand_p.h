@@ -38,11 +38,11 @@
 class KoShapeGroupCommandPrivate
 {
 public:
-    KoShapeGroupCommandPrivate(KoShapeContainer *container, const QList<KoShape *> &shapes, const QList<bool> &clipped = QList<bool>(), const QList<bool> &inheritTransform = QList<bool>());
+    KoShapeGroupCommandPrivate(KoShapeContainer *container, const QList<KShape *> &shapes, const QList<bool> &clipped = QList<bool>(), const QList<bool> &inheritTransform = QList<bool>());
     void init(QUndoCommand *q);
     QRectF containerBoundingRect();
 
-    QList<KoShape*> shapes; ///<list of shapes to be grouped
+    QList<KShape*> shapes; ///<list of shapes to be grouped
     QList<bool> clipped; ///< list of booleans to specify the shape of the same index to be clipped
     QList<bool> inheritTransform; ///< list of booleans to specify the shape of the same index to inherit transform
     KoShapeContainer *container; ///< the container where the grouping should be for.
@@ -51,7 +51,7 @@ public:
     QList<bool> oldInheritTransform; ///< if the shape was inheriting transform in the old parent
     QList<int> oldZIndex; ///< the old z-index of the shapes
 
-    QList<QPair<KoShape*, int> > oldAncestorsZIndex; // only used by the ungroup command
+    QList<QPair<KShape*, int> > oldAncestorsZIndex; // only used by the ungroup command
 };
 
 #endif

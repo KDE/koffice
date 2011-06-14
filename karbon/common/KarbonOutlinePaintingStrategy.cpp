@@ -19,7 +19,7 @@
 
 #include "KarbonOutlinePaintingStrategy.h"
 #include <KoShapeManager.h>
-#include <KoShape.h>
+#include <KShape.h>
 #include <KLineBorder.h>
 
 #include <QPainter>
@@ -33,8 +33,8 @@ public:
 
     using KLineBorder::paint;
 
-    virtual void paint(KoShape *shape, QPainter &painter, const KoViewConverter &converter) {
-        KoShape::applyConversion(painter, converter);
+    virtual void paint(KShape *shape, QPainter &painter, const KoViewConverter &converter) {
+        KShape::applyConversion(painter, converter);
         painter.strokePath(shape->outline(), m_pen);
     }
 private:
@@ -53,7 +53,7 @@ KarbonOutlinePaintingStrategy::~KarbonOutlinePaintingStrategy()
     delete m_border;
 }
 
-void KarbonOutlinePaintingStrategy::paint(KoShape * shape, QPainter &painter, const KoViewConverter &converter, bool)
+void KarbonOutlinePaintingStrategy::paint(KShape * shape, QPainter &painter, const KoViewConverter &converter, bool)
 {
     painter.save();
     painter.setTransform(shape->absoluteTransformation(&converter) * painter.transform());

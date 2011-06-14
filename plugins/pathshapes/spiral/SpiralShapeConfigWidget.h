@@ -35,7 +35,7 @@ class SpiralShapeConfigWidget : public KoShapeConfigWidgetBase
 public:
     SpiralShapeConfigWidget(KCanvasBase *canvas);
     /// reimplemented
-    virtual void open(KoShape *shape);
+    virtual void open(KShape *shape);
 
 private slots:
     void propertyChanged();

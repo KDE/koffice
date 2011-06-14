@@ -20,7 +20,7 @@
 #include "SCAttributeRotate.h"
 #include "../SCAnimationCache.h"
 #include "../SCShapeAnimation.h"
-#include <KoShape.h>
+#include <KShape.h>
 #include "SCShapeAnimations.h"
 #include <KoTextBlockData.h>
 #include <KoTextShapeData.h>
@@ -35,7 +35,7 @@ SCAttributeRotate::SCAttributeRotate() : SCAnimationAttribute("rotate")
 void SCAttributeRotate::updateCache(SCAnimationCache *cache, SCShapeAnimation *shapeAnimation, qreal value)
 {
     qreal tx = 0.0, ty = 0.0;
-    KoShape * shape = shapeAnimation->shape();
+    KShape * shape = shapeAnimation->shape();
     KoTextBlockData * textBlockData = shapeAnimation->textBlockData();
     QTransform transform;
     if (textBlockData) {
@@ -62,7 +62,7 @@ void SCAttributeRotate::updateCache(SCAnimationCache *cache, SCShapeAnimation *s
 void SCAttributeRotate::initCache(SCAnimationCache *animationCache, int step, SCShapeAnimation * shapeAnimation, qreal startValue, qreal endValue)
 {
     qreal tx = 0.0, ty = 0.0;
-    KoShape * shape = shapeAnimation->shape();
+    KShape * shape = shapeAnimation->shape();
     KoTextBlockData * textBlockData = shapeAnimation->textBlockData();
     if (textBlockData) {
         if (KoTextShapeData *textShapeData = dynamic_cast<KoTextShapeData*>(shape->userData())) {

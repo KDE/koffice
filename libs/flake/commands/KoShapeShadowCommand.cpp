@@ -18,7 +18,7 @@
  */
 
 #include "KoShapeShadowCommand.h"
-#include "KoShape.h"
+#include "KShape.h"
 #include "KoShapeShadow.h"
 
 #include <klocale.h>
@@ -48,18 +48,18 @@ public:
         newShadows.append(newShadow);
     }
 
-    QList<KoShape*> shapes;           ///< the shapes to set shadow for
+    QList<KShape*> shapes;           ///< the shapes to set shadow for
     QList<KoShapeShadow*> oldShadows; ///< the old shadows, one for each shape
     QList<KoShapeShadow*> newShadows; ///< the new shadows to set
 };
 
-KoShapeShadowCommand::KoShapeShadowCommand(const QList<KoShape*> &shapes, KoShapeShadow *shadow,  QUndoCommand *parent)
+KoShapeShadowCommand::KoShapeShadowCommand(const QList<KShape*> &shapes, KoShapeShadow *shadow,  QUndoCommand *parent)
     : QUndoCommand(parent)
     , d(new Private())
 {
     d->shapes = shapes;
     // save old shadows
-    foreach(KoShape *shape, d->shapes) {
+    foreach(KShape *shape, d->shapes) {
         d->addOldShadow(shape->shadow());
         d->addNewShadow(shadow);
     }
@@ -67,7 +67,7 @@ KoShapeShadowCommand::KoShapeShadowCommand(const QList<KoShape*> &shapes, KoShap
     setText(i18n("Set Shadow"));
 }
 
-KoShapeShadowCommand::KoShapeShadowCommand(const QList<KoShape*> &shapes, const QList<KoShapeShadow*> &shadows, QUndoCommand *parent)
+KoShapeShadowCommand::KoShapeShadowCommand(const QList<KShape*> &shapes, const QList<KoShapeShadow*> &shadows, QUndoCommand *parent)
     : QUndoCommand(parent)
     , d(new Private())
 {
@@ -76,7 +76,7 @@ KoShapeShadowCommand::KoShapeShadowCommand(const QList<KoShape*> &shapes, const 
     d->shapes = shapes;
 
     // save old shadows
-    foreach(KoShape *shape, shapes)
+    foreach(KShape *shape, shapes)
         d->addOldShadow(shape->shadow());
     foreach(KoShapeShadow * shadow, shadows)
         d->addNewShadow(shadow);
@@ -84,7 +84,7 @@ KoShapeShadowCommand::KoShapeShadowCommand(const QList<KoShape*> &shapes, const 
     setText(i18n("Set Shadow"));
 }
 
-KoShapeShadowCommand::KoShapeShadowCommand(KoShape* shape, KoShapeShadow *shadow, QUndoCommand *parent)
+KoShapeShadowCommand::KoShapeShadowCommand(KShape* shape, KoShapeShadow *shadow, QUndoCommand *parent)
     : QUndoCommand(parent)
     , d(new Private())
 {
@@ -105,7 +105,7 @@ void KoShapeShadowCommand::redo()
     QUndoCommand::redo();
     int shapeCount = d->shapes.count();
     for (int i = 0; i < shapeCount; ++i) {
-        KoShape *shape = d->shapes[i];
+        KShape *shape = d->shapes[i];
         shape->update();
         shape->setShadow(d->newShadows[i]);
         shape->update();
@@ -117,7 +117,7 @@ void KoShapeShadowCommand::undo()
     QUndoCommand::undo();
     int shapeCount = d->shapes.count();
     for (int i = 0; i < shapeCount; ++i) {
-        KoShape *shape = d->shapes[i];
+        KShape *shape = d->shapes[i];
         shape->update();
         shape->setShadow(d->oldShadows[i]);
         shape->update();

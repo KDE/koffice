@@ -78,7 +78,7 @@ void KoPABackgroundToolWidget::setBackgroundImage()
     // TODO only make images selectable
     KImageCollection *collection = m_tool->canvas()->shapeController()->resourceManager()->imageCollection();
     Q_ASSERT(collection);
-    KoShape * page = m_tool->canvas()->resourceManager()->koShapeResource(KoPageApp::CurrentPage);
+    KShape * page = m_tool->canvas()->resourceManager()->koShapeResource(KoPageApp::CurrentPage);
     Q_ASSERT(page);
     if (!collection || !page) {
         return;

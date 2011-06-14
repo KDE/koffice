@@ -162,7 +162,7 @@ bool KoPAViewModeNormal::masterMode()
     return m_masterMode;
 }
 
-void KoPAViewModeNormal::addShape(KoShape *shape)
+void KoPAViewModeNormal::addShape(KShape *shape)
 {
     // the KoShapeController sets the active layer as parent
     KoPAPageBase * page(m_view->kopaDocument()->pageByShape(shape));
@@ -180,7 +180,7 @@ void KoPAViewModeNormal::addShape(KoShape *shape)
     }
 }
 
-void KoPAViewModeNormal::removeShape(KoShape *shape)
+void KoPAViewModeNormal::removeShape(KShape *shape)
 {
     KoPAPageBase * page(m_view->kopaDocument()->pageByShape(shape));
 

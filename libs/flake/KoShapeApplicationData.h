@@ -27,10 +27,10 @@
  * See also the KoShapeUserData class that is specifically set for the benefit of shapes and tools.
  *
  * KoShapeAppliationData provides an abstract interface for container classes
- * that are used to associate application-specific data with shapes in KoShape
+ * that are used to associate application-specific data with shapes in KShape
  * Generally, subclasses of this class provide functions to allow data to
- * be stored and retrieved, and instances are attached to KoShape using
- * KoShape::setApplicationData(). This makes it possible for an application to attach
+ * be stored and retrieved, and instances are attached to KShape using
+ * KShape::setApplicationData(). This makes it possible for an application to attach
  * application specific data (like a Frame in KWord) and have the deletion of a shape also delete
  * that data.
  * Each subclass should provide a reimplementation of the destructor to ensure that

@@ -22,19 +22,19 @@
 class SCEventActionData::Private
 {
 public:
-    Private(KoShape *s, KEventAction *ea, SCSoundCollection *sc)
+    Private(KShape *s, KEventAction *ea, SCSoundCollection *sc)
             : shape(s),
             eventAction(ea),
             soundCollection(sc)
     {
     }
 
-    KoShape *shape;
+    KShape *shape;
     KEventAction *eventAction;
     SCSoundCollection *soundCollection;
 };
 
-SCEventActionData::SCEventActionData(KoShape * shape, KEventAction * eventAction , SCSoundCollection * soundCollection)
+SCEventActionData::SCEventActionData(KShape * shape, KEventAction * eventAction , SCSoundCollection * soundCollection)
     : d(new Private(shape, eventAction, soundCollection))
 {
 }
@@ -49,7 +49,7 @@ SCSoundCollection * SCEventActionData::soundCollection() const
     return d->soundCollection;
 }
 
-KoShape *SCEventActionData::shape() const
+KShape *SCEventActionData::shape() const
 {
     return d->shape;
 }

@@ -59,7 +59,7 @@ SCEndOfSlideShowPage::SCEndOfSlideShowPage(const QRectF &screenRect, SCDocument 
     KoShapeFactoryBase *factory = KoShapeRegistry::instance()->value("TextShapeID");
     Q_ASSERT(factory);
     if (factory) {
-        KoShape * textShape = factory->createDefaultShape();
+        KShape * textShape = factory->createDefaultShape();
         QTextDocument * document = qobject_cast<KoTextShapeData*>(textShape->userData())->document();
         QTextCursor cursor(document);
         QTextCharFormat format;

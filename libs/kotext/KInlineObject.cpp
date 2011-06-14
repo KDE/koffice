@@ -25,7 +25,7 @@
 #include "KInlineTextObjectManager.h"
 #include "KoTextInlineRdf.h"
 
-#include <KoShape.h>
+#include <KShape.h>
 
 #include <kdebug.h>
 #include <QDebug>
@@ -110,7 +110,7 @@ bool KInlineObject::propertyChangeListener() const
 }
 
 //static
-KoShape * KInlineObject::shapeForPosition(const QTextDocument *document, int position)
+KShape * KInlineObject::shapeForPosition(const QTextDocument *document, int position)
 {
     KoTextDocumentLayout *lay = qobject_cast<KoTextDocumentLayout*>(document->documentLayout());
     if (lay == 0)
@@ -165,7 +165,7 @@ int KInlineObject::textPosition() const
     return d->positionInDocument;
 }
 
-KoShape *KInlineObject::shape() const
+KShape *KInlineObject::shape() const
 {
     Q_D(const KInlineObject);
     return shapeForPosition(d->document, d->positionInDocument);
@@ -174,7 +174,7 @@ KoShape *KInlineObject::shape() const
 KoTextPage *KInlineObject::page() const
 {
     Q_D(const KInlineObject);
-    KoShape *shape = shapeForPosition(d->document, d->positionInDocument);
+    KShape *shape = shapeForPosition(d->document, d->positionInDocument);
     if (shape == 0)
         return 0;
     KoTextShapeData *data = static_cast<KoTextShapeData*>(shape->userData());

@@ -40,7 +40,7 @@ PictureShapeFactory::PictureShapeFactory(QObject *parent)
     setLoadingPriority(1);
 }
 
-KoShape *PictureShapeFactory::createDefaultShape(KResourceManager *documentResources) const
+KShape *PictureShapeFactory::createDefaultShape(KResourceManager *documentResources) const
 {
     PictureShape * defaultShape = new PictureShape();
     defaultShape->setShapeId(PICTURESHAPEID);

@@ -119,7 +119,7 @@ public:
 
     KChangeTracker *changeTracker;
 
-    KoShape *shape;
+    KShape *shape;
 
     int loadSpanLevel;
     int loadSpanInitialPos;
@@ -154,7 +154,7 @@ public:
     bool checkForListItemSplit(const KXmlElement &element);
     KXmlNode loadListItemSplit(const KXmlElement &element, QString *generatedXmlString);
 
-    explicit Private(KoShapeLoadingContext &context, KoShape *s)
+    explicit Private(KoShapeLoadingContext &context, KShape *s)
             : context(context),
             textSharedData(0),
             // stylesDotXml says from where the office:automatic-styles are to be picked from:
@@ -396,7 +396,7 @@ KoList *KoTextLoader::Private::list(const QTextDocument *document, KListStyle *l
 
 /////////////KoTextLoader
 
-KoTextLoader::KoTextLoader(KoShapeLoadingContext &context, KoShape *shape)
+KoTextLoader::KoTextLoader(KoShapeLoadingContext &context, KShape *shape)
         : QObject()
         , d(new Private(context, shape))
 {
@@ -2118,7 +2118,7 @@ void KoTextLoader::loadTableCell(KXmlElement &rowTag, QTextTable *tbl, QList<QRe
 
 void KoTextLoader::loadShape(const KXmlElement &element, QTextCursor &cursor)
 {
-    KoShape *shape = KoShapeRegistry::instance()->createShapeFromOdf(element, d->context);
+    KShape *shape = KoShapeRegistry::instance()->createShapeFromOdf(element, d->context);
     if (!shape) {
         kDebug(32500) << "shape '" << element.localName() << "' unhandled";
         return;

@@ -21,23 +21,23 @@
 
 #include <QString>
 #include <klocale.h>
-#include "KoShape.h"
+#include "KShape.h"
 
 class KoShapeRenameCommand::Private
 {
 public:
-    Private(KoShape *shape, const QString &newName)
+    Private(KShape *shape, const QString &newName)
     : shape(shape)
     , newName(newName)
     , oldName(shape->name())
     {}
 
-    KoShape *shape;
+    KShape *shape;
     QString newName;
     QString oldName;
 };
 
-KoShapeRenameCommand::KoShapeRenameCommand(KoShape *shape, const QString &newName, QUndoCommand *parent)
+KoShapeRenameCommand::KoShapeRenameCommand(KShape *shape, const QString &newName, QUndoCommand *parent)
 : QUndoCommand(parent)
 , d(new Private(shape, newName))
 {

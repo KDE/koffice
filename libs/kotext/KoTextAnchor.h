@@ -25,7 +25,7 @@
 
 #include <QPointF>
 
-class KoShape;
+class KShape;
 class KoTextAnchorPrivate;
 class KXmlElement;
 class KoShapeLoadingContext;
@@ -90,13 +90,13 @@ public:
      * Constructor for an in-place anchor.
      * @param shape the anchored shape that this anchor links to.
      */
-    KoTextAnchor(KoShape *shape);
+    KoTextAnchor(KShape *shape);
     virtual ~KoTextAnchor();
 
     /**
      * Return the shape that is linked to from the text anchor.
      */
-    KoShape *shape() const;
+    KShape *shape() const;
 
     /**
      * The linked shape will be placed based on the combined horizontal and vertical alignments.

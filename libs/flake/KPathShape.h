@@ -26,7 +26,7 @@
 
 #include <QMap>
 
-#include "KoShape.h"
+#include "KShape.h"
 #include "KPathSegment.h"
 
 #define KoPathShapeId "KPathShape"
@@ -69,7 +69,7 @@ typedef QList<KoSubpath *> KoSubpathList;
  * generated. See the outline method. The reason for storing it like that is that
  * it is the points that are modified by the user and not the segments.
  */
-class FLAKE_EXPORT KPathShape : public KoShape
+class FLAKE_EXPORT KPathShape : public KShape
 {
 public:
     /**
@@ -407,7 +407,7 @@ public:
      * a special tool for editing them.
      * This function returns the specific shape id for finding the shape
      * factory from KoShapeRegistry. The default KoPathShapeId is returned
-     * from KoShape::shapeId() so that the generic path editing tool gets
+     * from KShape::shapeId() so that the generic path editing tool gets
      * activated when the shape is selected.
      *
      * @return the specific shape id

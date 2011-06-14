@@ -61,12 +61,12 @@ void SCPlaceholderTool::mouseReleaseEvent(KPointerEvent *event)
     Q_UNUSED(event);
 }
 
-void SCPlaceholderTool::activate(ToolActivation toolActivation, const QSet<KoShape*> &shapes)
+void SCPlaceholderTool::activate(ToolActivation toolActivation, const QSet<KShape*> &shapes)
 {
     Q_UNUSED(toolActivation);
     QList<SCPlaceholderShape *> selectedShapes;
 
-    foreach (KoShape *shape, shapes) {
+    foreach (KShape *shape, shapes) {
         if (SCPlaceholderShape * ps = dynamic_cast<SCPlaceholderShape*>(shape)) {
             selectedShapes.append(ps);
         }
@@ -79,7 +79,7 @@ void SCPlaceholderTool::activate(ToolActivation toolActivation, const QSet<KoSha
 
     SCPlaceholderShape * shape = selectedShapes.at(0);
 
-    KoShape * newShape = shape->createShape(canvas()->shapeController()->resourceManager());
+    KShape * newShape = shape->createShape(canvas()->shapeController()->resourceManager());
     // only do anything when we got a shape back
     if (newShape) {
         // copy settings from placeholder shape

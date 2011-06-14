@@ -43,7 +43,7 @@ SCPlaceholderShapeFactory::~SCPlaceholderShapeFactory()
 {
 }
 
-KoShape *SCPlaceholderShapeFactory::createDefaultShape(KResourceManager *) const
+KShape *SCPlaceholderShapeFactory::createDefaultShape(KResourceManager *) const
 {
     return new SCPlaceholderShape();
 }

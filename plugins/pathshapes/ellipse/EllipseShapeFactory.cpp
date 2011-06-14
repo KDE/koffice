@@ -41,7 +41,7 @@ EllipseShapeFactory::EllipseShapeFactory(QObject *parent)
     setLoadingPriority(1);
 }
 
-KoShape *EllipseShapeFactory::createDefaultShape(KResourceManager *) const
+KShape *EllipseShapeFactory::createDefaultShape(KResourceManager *) const
 {
     EllipseShape *ellipse = new EllipseShape();
 

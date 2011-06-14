@@ -23,7 +23,7 @@
 
 #include <KCanvasBase.h>
 #include <KCanvasController.h>
-#include <KoShape.h>
+#include <KShape.h>
 #include <KoShapeManager.h>
 #include <KoViewConverter.h>
 
@@ -46,7 +46,7 @@ RightToLeftPaintingStrategy::~RightToLeftPaintingStrategy()
     delete d;
 }
 
-void RightToLeftPaintingStrategy::paint(KoShape *shape, QPainter &painter,
+void RightToLeftPaintingStrategy::paint(KShape *shape, QPainter &painter,
                                         const KoViewConverter &converter, bool forPrint)
 {
     painter.save();
@@ -64,7 +64,7 @@ void RightToLeftPaintingStrategy::paint(KoShape *shape, QPainter &painter,
     painter.restore();  // for the matrix
 }
 
-void RightToLeftPaintingStrategy::adapt(KoShape *shape, QRectF &rect)
+void RightToLeftPaintingStrategy::adapt(KShape *shape, QRectF &rect)
 {
     Q_UNUSED(shape)
     Q_UNUSED(rect)

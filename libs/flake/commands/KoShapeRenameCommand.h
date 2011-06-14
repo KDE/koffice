@@ -24,13 +24,13 @@
 #include <QUndoCommand>
 
 class QString;
-class KoShape;
+class KShape;
 
 /// API docs go here
 class FLAKE_EXPORT KoShapeRenameCommand : public QUndoCommand
 {
 public:
-    KoShapeRenameCommand(KoShape *shape, const QString &newName, QUndoCommand *parent = 0);
+    KoShapeRenameCommand(KShape *shape, const QString &newName, QUndoCommand *parent = 0);
     virtual ~KoShapeRenameCommand();
 
     /// redo the command

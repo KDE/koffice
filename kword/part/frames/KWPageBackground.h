@@ -21,9 +21,9 @@
 #define KWPAGEBACKGROUND_H
 
 // KOffice
-#include <KoShape.h>
+#include <KShape.h>
 
-class KWPageBackground : public KoShape
+class KWPageBackground : public KShape
 {
 public:
     KWPageBackground();

@@ -42,7 +42,7 @@ public:
     void mouseReleaseEvent(KPointerEvent *event);
     void keyPressEvent(QKeyEvent *event);
 
-    virtual void activate(ToolActivation toolActivation, const QSet<KoShape*> &shapes);
+    virtual void activate(ToolActivation toolActivation, const QSet<KShape*> &shapes);
     void deactivate();
 
 protected:

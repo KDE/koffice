@@ -22,18 +22,18 @@
 
 #include <KLocale>
 
-#include <KoShape.h>
+#include <KShape.h>
 
 class KoShapeKeepAspectRatioCommandPrivate
 {
 public:
-    QList<KoShape*> shapes;
+    QList<KShape*> shapes;
     QList<bool> oldKeepAspectRatio;
     QList<bool> newKeepAspectRatio;
 };
 
 
-KoShapeKeepAspectRatioCommand::KoShapeKeepAspectRatioCommand(const QList<KoShape*>& shapes,
+KoShapeKeepAspectRatioCommand::KoShapeKeepAspectRatioCommand(const QList<KShape*>& shapes,
         const QList<bool>& oldKeepAspectRatio,
         const QList<bool>& newKeepAspectRatio,
         QUndoCommand* parent)

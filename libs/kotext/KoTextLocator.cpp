@@ -25,7 +25,7 @@
 #include "KoTextPage.h"
 #include "styles/KListStyle.h"
 
-#include <KoShape.h>
+#include <KShape.h>
 #include <KoShapeLoadingContext.h>
 #include <KoShapeSavingContext.h> // for usage in Q_UNUSED
 

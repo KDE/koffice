@@ -29,7 +29,7 @@
 #include "KSelection.h"
 #include "KCanvasController.h"
 #include "KCanvasController_p.h"
-#include "KoShape.h"
+#include "KShape.h"
 #include "KoShapeLayer.h"
 #include "KoShapeRegistry.h"
 #include "KoShapeManager.h"
@@ -78,7 +78,7 @@ public:
 
     KoToolBase *activeTool;     // active Tool
     QString activeToolId;   // the id of the active Tool
-    QString activationShapeId; // the shape-type (KoShape::shapeId()) the activeTool 'belongs' to.
+    QString activationShapeId; // the shape-type (KShape::shapeId()) the activeTool 'belongs' to.
     QHash<QString, KoToolBase*> allTools; // all the tools that are created for this canvas.
     QStack<QString> stack; // stack of temporary tools
     KCanvasController *const canvas;
@@ -296,15 +296,15 @@ void KoToolManager::Private::postSwitchTool(bool temporary)
         toolActivation = KoToolBase::TemporaryActivation;
     else
         toolActivation = KoToolBase::DefaultActivation;
-    QSet<KoShape*> shapesToOperateOn;
+    QSet<KShape*> shapesToOperateOn;
     if (canvasData->activeTool
             && canvasData->activeTool->canvas()
             && canvasData->activeTool->canvas()->shapeManager()) {
         KSelection *selection = canvasData->activeTool->canvas()->shapeManager()->selection();
         Q_ASSERT(selection);
 
-        foreach(KoShape *shape, selection->selectedShapes()) {
-            QSet<KoShape*> delegates = shape->toolDelegates();
+        foreach(KShape *shape, selection->selectedShapes()) {
+            QSet<KShape*> delegates = shape->toolDelegates();
             if (delegates.isEmpty()) { // no delegates, just the orig shape
                 shapesToOperateOn << shape;
             } else {
@@ -462,8 +462,8 @@ void KoToolManager::Private::attachCanvas(KCanvasController *controller)
     }
 
     Connector *connector = new Connector(controller->canvas()->shapeManager());
-    connect(connector, SIGNAL(selectionChanged(QList<KoShape*>)), q,
-            SLOT(selectionChanged(QList<KoShape*>)));
+    connect(connector, SIGNAL(selectionChanged(QList<KShape*>)), q,
+            SLOT(selectionChanged(QList<KShape*>)));
     connect(controller->canvas()->shapeManager()->selection(),
             SIGNAL(currentLayerChanged(const KoShapeLayer*)),
             q, SLOT(currentLayerChanged(const KoShapeLayer*)));
@@ -555,16 +555,16 @@ void KoToolManager::Private::switchBackRequested()
     switchTool(canvasData->stack.pop(), false);
 }
 
-void KoToolManager::Private::selectionChanged(QList<KoShape*> shapes)
+void KoToolManager::Private::selectionChanged(QList<KShape*> shapes)
 {
     QList<QString> types;
-    foreach(KoShape *shape, shapes) {
-        QSet<KoShape*> delegates = shape->toolDelegates();
+    foreach(KShape *shape, shapes) {
+        QSet<KShape*> delegates = shape->toolDelegates();
         if (delegates.isEmpty()) { // no delegates, just the orig shape
             delegates << shape;
         }
 
-        foreach (KoShape *shape2, delegates) {
+        foreach (KShape *shape2, delegates) {
             Q_ASSERT(shape2);
             if (! types.contains(shape2->shapeId())) {
                 types.append(shape2->shapeId());
@@ -831,10 +831,10 @@ KCanvasController *KoToolManager::activeCanvasController() const
     return d->canvasData->canvas;
 }
 
-QString KoToolManager::preferredToolForSelection(const QList<KoShape*> &shapes)
+QString KoToolManager::preferredToolForSelection(const QList<KShape*> &shapes)
 {
     QList<QString> types;
-    foreach(KoShape *shape, shapes)
+    foreach(KShape *shape, shapes)
         if (! types.contains(shape->shapeId()))
             types.append(shape->shapeId());
 

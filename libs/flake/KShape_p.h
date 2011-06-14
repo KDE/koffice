@@ -31,19 +31,19 @@
 //
 
 
-#include "KoShape.h"
+#include "KShape.h"
 #include "KoShapeConnectionPolicy.h"
 
 class KoShapePrivate
 {
 public:
-    KoShapePrivate(KoShape *shape);
+    KoShapePrivate(KShape *shape);
     virtual ~KoShapePrivate();
     /**
      * Notify the shape that a change was done. To be used by inheriting shapes.
      * @param type the change type
      */
-    void shapeChanged(KoShape::ChangeType type);
+    void shapeChanged(KShape::ChangeType type);
 
     void addShapeManager(KoShapeManager *manager);
     void removeShapeManager(KoShapeManager *manager);
@@ -83,13 +83,13 @@ public:
 
     KoShapeContainer *parent;
     QSet<KoShapeManager *> shapeManagers;
-    QSet<KoShape *> toolDelegates;
+    QSet<KShape *> toolDelegates;
     KoShapeUserData *userData;
     KoShapeApplicationData *appData;
     KoShapeBackground * fill; ///< Stands for the background color / fill etc.
     KoShapeBorderBase *border; ///< points to a border, or 0 if there is no border
-    KoShape *q_ptr;
-    QSet<KoShape*> dependees; ///< set of shapes dependent on this shape
+    KShape *q_ptr;
+    QSet<KShape*> dependees; ///< set of shapes dependent on this shape
     KoShapeShadow * shadow; ///< the current shape shadow
     QMap<QString, QString> additionalAttributes;
     QMap<QString, QString> additionalStyleAttributes;
@@ -112,7 +112,7 @@ public:
     int editBlockEndShouldEmit : 1;
     int dummy : 4; // filler till 32 bits, adjust whenever altering the set!
 
-    Q_DECLARE_PUBLIC(KoShape)
+    Q_DECLARE_PUBLIC(KShape)
 };
 
 #endif

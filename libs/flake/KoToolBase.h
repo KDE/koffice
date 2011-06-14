@@ -27,7 +27,7 @@
 
 #include "flake_export.h"
 
-class KoShape;
+class KShape;
 class KCanvasBase;
 class KPointerEvent;
 class KoViewConverter;
@@ -301,7 +301,7 @@ public:
      *                  and should emit done when it is done.
      * @see deactivate()
      */
-    virtual void activate(ToolActivation toolActivation, const QSet<KoShape*> &shapes) = 0;
+    virtual void activate(ToolActivation toolActivation, const QSet<KShape*> &shapes) = 0;
 
     /**
      * This method is called whenever this tool is no longer the

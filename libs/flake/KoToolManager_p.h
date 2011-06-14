@@ -46,7 +46,7 @@ class KoToolFactoryBase;
 class KoShapeManager;
 class KCanvasBase;
 class KoToolBase;
-class KoShape;
+class KShape;
 class KoToolManager;
 class KCanvasController;
 class KoShapeLayer;
@@ -73,7 +73,7 @@ public:
     void movedFocus(QWidget *from, QWidget *to);
     void updateCursor(const QCursor &cursor);
     void switchBackRequested();
-    void selectionChanged(QList<KoShape*> shapes);
+    void selectionChanged(QList<KShape*> shapes);
     void currentLayerChanged(const KoShapeLayer *layer);
     void switchToolTemporaryRequested(const QString &id);
     CanvasData *createCanvasData(KCanvasController *controller, KInputDevice device);
@@ -167,7 +167,7 @@ public slots:
     void selectionChanged();
 
 signals:
-    void selectionChanged(QList<KoShape*> shape);
+    void selectionChanged(QList<KShape*> shape);
 
 private:
     KoShapeManager *m_shapeManager;

@@ -67,7 +67,7 @@ private:
     void saveHeaderFooter(KOdfEmbeddedDocumentSaver &embeddedSaver, KOdfGenericStyles &mainStyles, KOdfGenericChanges &changes);
 
     void calculateZindexOffsets();
-    void addShapeToTree(KoShape *shape);
+    void addShapeToTree(KShape *shape);
 
     bool saveOdfSettings(KOdfStore *store);
 
@@ -77,7 +77,7 @@ private:
     /// Since ODF requires zindexes >= 0 and we can have negative ones we will calculate an offset per
     /// page and store that here.
     QHash<KWPage, int> m_zIndexOffsets;
-    KRTree<KoShape *> m_shapeTree;
+    KRTree<KShape *> m_shapeTree;
 };
 
 #endif

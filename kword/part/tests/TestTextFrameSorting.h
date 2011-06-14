@@ -27,7 +27,7 @@
 class KWTextFrame;
 class KWTextFrameSet;
 class KWFrame;
-class KoShape;
+class KShape;
 
 class TestTextFrameSorting : public QObject
 {
@@ -46,7 +46,7 @@ private slots:
 
 private:
     KWTextFrame* createFrame(const QPointF &position, KWTextFrameSet &fs);
-    KWFrame* createCopyFrame(const QPointF &position, KoShape *orig, KWTextFrameSet &fs);
+    KWFrame* createCopyFrame(const QPointF &position, KShape *orig, KWTextFrameSet &fs);
 };
 
 #endif

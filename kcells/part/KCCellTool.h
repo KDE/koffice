@@ -39,7 +39,7 @@ public:
     virtual void paint(QPainter &painter, const KoViewConverter &converter);
 
 public Q_SLOTS:
-    virtual void activate(ToolActivation toolActivation, const QSet<KoShape*> &shapes);
+    virtual void activate(ToolActivation toolActivation, const QSet<KShape*> &shapes);
 
 protected:
     virtual Selection* selection();

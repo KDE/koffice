@@ -24,7 +24,7 @@
 #include <QtGui/QTransform>
 
 class KSelection;
-class KoShape;
+class KShape;
 
 class SelectionTransformCommand : public QUndoCommand
 {
@@ -37,7 +37,7 @@ public:
     virtual void undo();
 private:
     KSelection * m_selection;
-    QList<KoShape*> m_selectedShapes;
+    QList<KShape*> m_selectedShapes;
     QTransform m_oldTransformation;
     QTransform m_newTransformation;
 };

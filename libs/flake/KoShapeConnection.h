@@ -24,7 +24,7 @@
 #include <QPointF>
 #include <QRectF>
 
-class KoShape;
+class KShape;
 class QPainter;
 class KoViewConverter;
 class KXmlElement;
@@ -36,9 +36,9 @@ class KoShapeConnectionPrivate;
  * The shapeConnection class represents a connection between two shapes.
  * In order to create a visible connection between any two shapes of any kind you can
  * create a new KoShapeConnection passing the two shapes that it connects.
- * Each KoShape instance can have a number of connection points, also called glue points, each
+ * Each KShape instance can have a number of connection points, also called glue points, each
  * of which can be used to start or end a connection.  Consider an shape in the form of a man.
- * You would call KoShape::addConnectionPoint() with a point where his hand is.  If you have a
+ * You would call KShape::addConnectionPoint() with a point where his hand is.  If you have a
  * pet with a similarly added connection point adding a connection is a simple case of
  * @code
    new KoShapeConnection(man, 0, dog, 0);
@@ -77,7 +77,7 @@ public:
      * @param to is the shape for the endpoint.
      * @param gluePointIndex2 The point to connect to is found via the index in the list of connectors on the end shape.
      */
-    explicit KoShapeConnection(KoShape *from, int gluePointIndex1, KoShape *to, int gluePointIndex2);
+    explicit KoShapeConnection(KShape *from, int gluePointIndex1, KShape *to, int gluePointIndex2);
     /**
      * Constructor for connection between a shape and a fixed point.
      * The connection will be added to the shape. Note that we refer to the gluePoints by index
@@ -88,9 +88,9 @@ public:
      * @param gluePointIndex The point to connect to is found via the index in the list of of connectors on the originating shape.
      * @param endPoint Fixed point on the canvas where the connection is anchored.
      */
-    explicit KoShapeConnection(KoShape* from, int gluePointIndex, const QPointF &endPoint);
+    explicit KoShapeConnection(KShape* from, int gluePointIndex, const QPointF &endPoint);
 
-    explicit KoShapeConnection(KoShape *from, KoShape *to, int gluePointIndex2 = 0);
+    explicit KoShapeConnection(KShape *from, KShape *to, int gluePointIndex2 = 0);
     ~KoShapeConnection();
 
     /**
@@ -105,12 +105,12 @@ public:
     /**
      * Return the first shape.
      */
-    KoShape *shape1() const;
+    KShape *shape1() const;
     /**
      * Return the second shape.
      * Note that this can be 0.
      */
-    KoShape *shape2() const;
+    KShape *shape2() const;
 
     /**
      * The z index in which the connection will be drawn.  If the index is higher it will be drawn on top.
@@ -171,9 +171,9 @@ public:
         setEndPoint(QPointF(x, y));
     }
     /// Sets shape1 to @p shape and gluePointIndex1 to @p gluePointIndex
-    void setStartPoint(KoShape *shape, int gluePointIndex);
+    void setStartPoint(KShape *shape, int gluePointIndex);
     /// Sets shape2 to @p shape and gluePointIndex2 to @p gluePointIndex
-    void setEndPoint(KoShape *shape, int gluePointIndex);
+    void setEndPoint(KShape *shape, int gluePointIndex);
 
     bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context);
 

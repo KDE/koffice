@@ -36,7 +36,7 @@
 #include "ui/SheetView.h"
 
 #include <KoGlobal.h>
-#include <KoShape.h>
+#include <KShape.h>
 #include <KoShapeManager.h>
 #include <KoZoomHandler.h>
 
@@ -152,7 +152,7 @@ bool KCPrintJob::Private::pageNeedsPrinting(KCSheet * sheet, const QRect& cellRa
     }
 
     QRectF shapesBoundingRect;
-    const QList<KoShape*> shapes = sheet->shapes();
+    const QList<KShape*> shapes = sheet->shapes();
     for (int i = 0; i < shapes.count(); ++i) {
         shapesBoundingRect |= shapes[i]->boundingRect();
     }
@@ -524,13 +524,13 @@ void KCPrintJob::printPage(int pageNumber, QPainter &painter)
     painter.restore();
 }
 
-QList<KoShape*> KCPrintJob::shapesOnPage(int pageNumber)
+QList<KShape*> KCPrintJob::shapesOnPage(int pageNumber)
 {
     // This method is called only for page preparation; to determine the shapes to wait for.
     int sheetPageNumber = pageNumber;
     KCSheet* sheet = d->getSheetPageNumber(&sheetPageNumber);
     if (!sheet)
-        return QList<KoShape*>();
+        return QList<KShape*>();
 
     const QRectF documentArea = d->pageManagers[sheet]->documentArea(sheetPageNumber);
     return shapeManager()->shapesAt(documentArea);

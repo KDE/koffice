@@ -24,7 +24,7 @@
 #include "KInlineObject.h"
 #include "kotext_export.h"
 
-class KoShape;
+class KShape;
 class QTextDocument;
 class KoShapeSavingContext;
 class KoShapeLoadingContext;
@@ -97,8 +97,8 @@ public:
     /// @return the end bookmark if the type is StartBookmark
     KoBookmark *endBookmark() const;
 
-    /// @return the KoShape where this bookmark is located
-    KoShape *shape() const;
+    /// @return the KShape where this bookmark is located
+    KShape *shape() const;
 
     /// @return true if this bookmark has selection (type is StartBookmark of EndBookmark)
     bool hasSelection() const;

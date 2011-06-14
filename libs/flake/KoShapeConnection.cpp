@@ -18,8 +18,8 @@
  */
 #include "KoShapeConnection.h"
 #include "KoShapeConnection_p.h"
-#include "KoShape.h"
-#include "KoShape_p.h"
+#include "KShape.h"
+#include "KShape_p.h"
 #include "KoShapeManager.h"
 #include "KoShapeManager_p.h"
 #include "KoShapeBorderBase.h"
@@ -109,7 +109,7 @@ public:
     {
     }
 
-    virtual void update(KoShape *shape) {
+    virtual void update(KShape *shape) {
         if (m_pos == First) {
             m_connectionShape->setStartPoint(shape, m_connectionShape->gluePointIndex1());
         } else {
@@ -122,7 +122,7 @@ private:
     Pos m_pos;
 };
 
-KoShapeConnectionPrivate::KoShapeConnectionPrivate(KoShapeConnection *qq, KoShape *from, int gp1, KoShape *to, int gp2)
+KoShapeConnectionPrivate::KoShapeConnectionPrivate(KoShapeConnection *qq, KShape *from, int gp1, KShape *to, int gp2)
     : q(qq),
     shape1(from),
     shape2(to),
@@ -139,7 +139,7 @@ KoShapeConnectionPrivate::KoShapeConnectionPrivate(KoShapeConnection *qq, KoShap
         zIndex = qMax(zIndex, shape2->zIndex() + 1);
 }
 
-KoShapeConnectionPrivate::KoShapeConnectionPrivate(KoShapeConnection *qq, KoShape *from, int gp1, const QPointF &ep)
+KoShapeConnectionPrivate::KoShapeConnectionPrivate(KoShapeConnection *qq, KShape *from, int gp1, const QPointF &ep)
     : q(qq),
     shape1(from),
     shape2(0),
@@ -181,7 +181,7 @@ QPointF KoShapeConnectionPrivate::resolveEndPoint() const
 
 QPainterPath KoShapeConnectionPrivate::createConnectionPath(const QPointF &from, const QPointF &to) const
 {
-    KoShape *shape = shape1;
+    KShape *shape = shape1;
     if (shape == 0)
         shape = shape2;
     QPainterPath path;
@@ -219,7 +219,7 @@ QLineF KoShapeConnectionPrivate::calculateShapeFalloutPrivate(const QPointF &beg
     QPointF a(begin);
     QPointF b(a);
 
-    KoShape *shape = 0;
+    KShape *shape = 0;
     KoShapeConnectionPolicy policy;
     if (start && !hasDummyShape && shape1) {
         shape = shape1;
@@ -398,7 +398,7 @@ KoShapeConnection::KoShapeConnection()
 {
 }
 
-KoShapeConnection::KoShapeConnection(KoShape *from, int gp1, KoShape *to, int gp2)
+KoShapeConnection::KoShapeConnection(KShape *from, int gp1, KShape *to, int gp2)
     : d(new KoShapeConnectionPrivate(this, from, gp1, to, gp2))
 {
     Q_ASSERT(from);
@@ -407,14 +407,14 @@ KoShapeConnection::KoShapeConnection(KoShape *from, int gp1, KoShape *to, int gp
     d->shape2->priv()->addConnection(this);
 }
 
-KoShapeConnection::KoShapeConnection(KoShape* from, int gluePointIndex, const QPointF &endPoint)
+KoShapeConnection::KoShapeConnection(KShape* from, int gluePointIndex, const QPointF &endPoint)
 : d(new KoShapeConnectionPrivate(this, from, gluePointIndex, endPoint))
 {
     Q_ASSERT(from);
     d->shape1->priv()->addConnection(this);
 }
 
-KoShapeConnection::KoShapeConnection(KoShape *from, KoShape *to, int gp2)
+KoShapeConnection::KoShapeConnection(KShape *from, KShape *to, int gp2)
     : d(new KoShapeConnectionPrivate(this, from, 0, to, gp2))
 {
     Q_ASSERT(from);
@@ -440,12 +440,12 @@ void KoShapeConnection::paint(QPainter &painter, const KoViewConverter &converte
     d->connectionStrategy->paint(painter, converter);
 }
 
-KoShape *KoShapeConnection::shape1() const
+KShape *KoShapeConnection::shape1() const
 {
     return d->shape1;
 }
 
-KoShape *KoShapeConnection::shape2() const
+KShape *KoShapeConnection::shape2() const
 {
     return d->shape2;
 }
@@ -508,7 +508,7 @@ void KoShapeConnection::setEndPoint(const QPointF &point)
     d->foul();
 }
 
-void KoShapeConnection::setStartPoint(KoShape *shape, int gluePointIndex)
+void KoShapeConnection::setStartPoint(KShape *shape, int gluePointIndex)
 {
     if (d->shape1) {
         d->shape1->priv()->removeConnection(this);
@@ -525,7 +525,7 @@ void KoShapeConnection::setStartPoint(KoShape *shape, int gluePointIndex)
     d->foul();
 }
 
-void KoShapeConnection::setEndPoint(KoShape *shape, int gluePointIndex)
+void KoShapeConnection::setEndPoint(KShape *shape, int gluePointIndex)
 {
     if (d->shape2) {
         d->shape2->priv()->removeConnection(this);
@@ -682,7 +682,7 @@ void KoShapeConnection::setType(ConnectionType newType)
 
 void KoShapeConnection::update() const
 {
-    KoShape *shape = d->shape1;
+    KShape *shape = d->shape1;
     if (shape == 0)
         shape = d->shape2;
     if (shape == 0)

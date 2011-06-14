@@ -22,7 +22,7 @@
 #include <QPainter>
 #include <kowmfread.h>
 
-class KoShape;
+class KShape;
 class KPathShape;
 class KarbonDocument;
 
@@ -114,8 +114,8 @@ private:
     //-----------------------------------------------------------------------------
     // Utilities
     // Add pen, brush and points to a path
-    void appendPen(KoShape& obj);
-    void appendBrush(KoShape& obj);
+    void appendPen(KShape& obj);
+    void appendBrush(KShape& obj);
     void appendPoints(KPathShape& path, const QPolygon& pa);
     // coordinate transformation
     // translate wmf to (0,0) -> scale to document size
@@ -125,7 +125,7 @@ private:
     double scaleH(int height);
 
 private:
-    KoShape * createShape(const QString &shapeID);
+    KShape * createShape(const QString &shapeID);
 
     KarbonDocument *mDoc;
     QRegion   mClippingRegion;

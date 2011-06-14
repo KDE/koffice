@@ -58,7 +58,7 @@ void TestShapeAt::test()
     QVERIFY(manager.shapeAt(QPointF(200, 200)) == 0);
     QCOMPARE(manager.shapeAt(QPointF(90, 90)), &shape2);
     QCOMPARE(manager.shapeAt(QPointF(105, 105)), &shape2); // the one on top
-    KoShape *dummy = 0;
+    KShape *dummy = 0;
     QCOMPARE(manager.shapeAt(QPointF(105, 105), KoFlake::Selected), dummy);
     QCOMPARE(manager.shapeAt(QPointF(105, 105), KoFlake::Unselected), &shape2); // the one on top
     QCOMPARE(manager.shapeAt(QPointF(105, 105), KoFlake::NextUnselected), &shape2);

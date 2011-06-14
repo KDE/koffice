@@ -94,7 +94,7 @@ void KPanTool::keyPressEvent(QKeyEvent *event)
     event->accept();
 }
 
-void KPanTool::activate(ToolActivation toolActivation, const QSet<KoShape*> &)
+void KPanTool::activate(ToolActivation toolActivation, const QSet<KShape*> &)
 {
     if (m_controller == 0) {
         emit done();

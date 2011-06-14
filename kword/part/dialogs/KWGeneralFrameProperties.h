@@ -37,7 +37,7 @@ public:
 
     /// load all info from the argument frame into this widget
     void open(const QList<KWFrame*> &frames);
-    void open(KoShape *shape);
+    void open(KShape *shape);
     void save();
 
 private slots:
@@ -47,7 +47,7 @@ private slots:
 private:
     Ui::KWGeneralFrameProperties widget;
     FrameConfigSharedState *m_state;
-    KoShape *m_shape;
+    KShape *m_shape;
     QList<KWFrame*> m_frames;
     QButtonGroup *m_textGroup, *m_newPageGroup;
 };

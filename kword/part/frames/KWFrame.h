@@ -23,7 +23,7 @@
 #include "KWord.h"
 #include "kword_export.h"
 
-#include <KoShape.h>
+#include <KShape.h>
 #include <KoShapeSavingContext.h>
 #include <KoShapeApplicationData.h>
 
@@ -50,7 +50,7 @@ public:
      * @param pageNumber the page number is normally -1, only set when loading page anchored frames to the
      *      page where the frame should be positioned
      */
-    KWFrame(KoShape *shape, KWFrameSet *parent, int pageNumber = -1);
+    KWFrame(KShape *shape, KWFrameSet *parent, int pageNumber = -1);
     virtual ~KWFrame();
 
     /**
@@ -121,7 +121,7 @@ public:
      * Each frame will be rendered by a shape which also holds the position etc.
      * @return the shape that represents this frame.
      */
-    KoShape *shape() const {
+    KShape *shape() const {
         return m_shape;
     }
 
@@ -175,7 +175,7 @@ public:
     void setOutlineShape(KWOutlineShape *outline);
 
 private:
-    KoShape *m_shape;
+    KShape *m_shape;
     bool m_copyToEverySheet;
     KWord::RunAroundSide m_runAroundSide;
     KWord::TextRunAround m_runAround;

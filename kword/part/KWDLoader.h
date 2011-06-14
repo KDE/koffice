@@ -34,7 +34,7 @@ class KWTextFrameSet;
 class KParagraphStyle;
 class KCharacterStyle;
 class QColor;
-class KoShape;
+class KShape;
 class KOdfStore;
 class KInlineNote;
 
@@ -106,7 +106,7 @@ private:
 
     struct AnchorData {
         int cursorPosition;
-        KoShape *textShape;
+        KShape *textShape;
         QTextDocument *document;
         QString frameSetName;
     };

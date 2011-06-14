@@ -43,7 +43,7 @@ void TestShapeReorderCommand::testBringToFront()
     shape2.setZIndex(2);
     shape3.setSize(QSizeF(100, 100));
     shape3.setZIndex(3);
-    QList<KoShape*> shapes;
+    QList<KShape*> shapes;
     shapes.append(&shape1);
     shapes.append(&shape2);
     shapes.append(&shape3);
@@ -51,18 +51,18 @@ void TestShapeReorderCommand::testBringToFront()
     MockCanvas canvas;
     KoShapeManager manager(&canvas, shapes);
 
-    qSort(shapes.begin(), shapes.end(), KoShape::compareShapeZIndex);
+    qSort(shapes.begin(), shapes.end(), KShape::compareShapeZIndex);
     QCOMPARE(shapes.indexOf(&shape1), 0);
     QCOMPARE(shapes.indexOf(&shape2), 1);
     QCOMPARE(shapes.indexOf(&shape3), 2);
 
-    QList<KoShape*> selectedShapes;
+    QList<KShape*> selectedShapes;
     selectedShapes.append(&shape1);
 
     QUndoCommand * cmd = KoShapeReorderCommand::createCommand(selectedShapes, &manager, KoShapeReorderCommand::BringToFront);
     cmd->redo();
 
-    qSort(shapes.begin(), shapes.end(), KoShape::compareShapeZIndex);
+    qSort(shapes.begin(), shapes.end(), KShape::compareShapeZIndex);
     QCOMPARE(shapes.indexOf(&shape2), 0);
     QCOMPARE(shapes.indexOf(&shape3), 1);
     QCOMPARE(shapes.indexOf(&shape1), 2);
@@ -80,7 +80,7 @@ void TestShapeReorderCommand::testSendToBack()
     shape2.setZIndex(2);
     shape3.setSize(QSizeF(100, 100));
     shape3.setZIndex(3);
-    QList<KoShape*> shapes;
+    QList<KShape*> shapes;
     shapes.append(&shape1);
     shapes.append(&shape2);
     shapes.append(&shape3);
@@ -88,18 +88,18 @@ void TestShapeReorderCommand::testSendToBack()
     MockCanvas canvas;
     KoShapeManager manager(&canvas, shapes);
 
-    qSort(shapes.begin(), shapes.end(), KoShape::compareShapeZIndex);
+    qSort(shapes.begin(), shapes.end(), KShape::compareShapeZIndex);
     QCOMPARE(shapes.indexOf(&shape1), 0);
     QCOMPARE(shapes.indexOf(&shape2), 1);
     QCOMPARE(shapes.indexOf(&shape3), 2);
 
-    QList<KoShape*> selectedShapes;
+    QList<KShape*> selectedShapes;
     selectedShapes.append(&shape3);
 
     QUndoCommand * cmd = KoShapeReorderCommand::createCommand(selectedShapes, &manager, KoShapeReorderCommand::SendToBack);
     cmd->redo();
 
-    qSort(shapes.begin(), shapes.end(), KoShape::compareShapeZIndex);
+    qSort(shapes.begin(), shapes.end(), KShape::compareShapeZIndex);
     QCOMPARE(shapes.indexOf(&shape3), 0);
     QCOMPARE(shapes.indexOf(&shape1), 1);
     QCOMPARE(shapes.indexOf(&shape2), 2);
@@ -117,7 +117,7 @@ void TestShapeReorderCommand::testMoveUp()
     shape2.setZIndex(2);
     shape3.setSize(QSizeF(100, 100));
     shape3.setZIndex(3);
-    QList<KoShape*> shapes;
+    QList<KShape*> shapes;
     shapes.append(&shape1);
     shapes.append(&shape2);
     shapes.append(&shape3);
@@ -125,18 +125,18 @@ void TestShapeReorderCommand::testMoveUp()
     MockCanvas canvas;
     KoShapeManager manager(&canvas, shapes);
 
-    qSort(shapes.begin(), shapes.end(), KoShape::compareShapeZIndex);
+    qSort(shapes.begin(), shapes.end(), KShape::compareShapeZIndex);
     QCOMPARE(shapes.indexOf(&shape1), 0);
     QCOMPARE(shapes.indexOf(&shape2), 1);
     QCOMPARE(shapes.indexOf(&shape3), 2);
 
-    QList<KoShape*> selectedShapes;
+    QList<KShape*> selectedShapes;
     selectedShapes.append(&shape1);
 
     QUndoCommand * cmd = KoShapeReorderCommand::createCommand(selectedShapes, &manager, KoShapeReorderCommand::RaiseShape);
     cmd->redo();
 
-    qSort(shapes.begin(), shapes.end(), KoShape::compareShapeZIndex);
+    qSort(shapes.begin(), shapes.end(), KShape::compareShapeZIndex);
     QCOMPARE(shapes.indexOf(&shape2), 0);
     QCOMPARE(shapes.indexOf(&shape1), 1);
     QCOMPARE(shapes.indexOf(&shape3), 2);
@@ -154,7 +154,7 @@ void TestShapeReorderCommand::testMoveDown()
     shape2.setZIndex(2);
     shape3.setSize(QSizeF(100, 100));
     shape3.setZIndex(3);
-    QList<KoShape*> shapes;
+    QList<KShape*> shapes;
     shapes.append(&shape1);
     shapes.append(&shape2);
     shapes.append(&shape3);
@@ -162,18 +162,18 @@ void TestShapeReorderCommand::testMoveDown()
     MockCanvas canvas;
     KoShapeManager manager(&canvas, shapes);
 
-    qSort(shapes.begin(), shapes.end(), KoShape::compareShapeZIndex);
+    qSort(shapes.begin(), shapes.end(), KShape::compareShapeZIndex);
     QCOMPARE(shapes.indexOf(&shape1), 0);
     QCOMPARE(shapes.indexOf(&shape2), 1);
     QCOMPARE(shapes.indexOf(&shape3), 2);
 
-    QList<KoShape*> selectedShapes;
+    QList<KShape*> selectedShapes;
     selectedShapes.append(&shape2);
 
     QUndoCommand * cmd = KoShapeReorderCommand::createCommand(selectedShapes, &manager, KoShapeReorderCommand::LowerShape);
     cmd->redo();
 
-    qSort(shapes.begin(), shapes.end(), KoShape::compareShapeZIndex);
+    qSort(shapes.begin(), shapes.end(), KShape::compareShapeZIndex);
     QCOMPARE(shapes.indexOf(&shape2), 0);
     QCOMPARE(shapes.indexOf(&shape1), 1);
     QCOMPARE(shapes.indexOf(&shape3), 2);
@@ -200,7 +200,7 @@ void TestShapeReorderCommand::testMoveUpOverlapping()
     shape5.setPosition(QPointF(200,200));
     shape5.setZIndex(5);
     
-    QList<KoShape*> shapes;
+    QList<KShape*> shapes;
     shapes.append(&shape1);
     shapes.append(&shape2);
     shapes.append(&shape3);
@@ -215,7 +215,7 @@ void TestShapeReorderCommand::testMoveUpOverlapping()
     QVERIFY(shape3.zIndex() < shape4.zIndex());
     QVERIFY(shape4.zIndex() < shape5.zIndex());
     
-    QList<KoShape*> selectedShapes;
+    QList<KShape*> selectedShapes;
     selectedShapes.append(&shape1);
     
     QUndoCommand * cmd = KoShapeReorderCommand::createCommand(selectedShapes, &manager, KoShapeReorderCommand::RaiseShape);
@@ -249,7 +249,7 @@ void TestShapeReorderCommand::testMoveDownOverlapping()
     shape5.setPosition(QPointF(200,200));
     shape5.setZIndex(5);
     
-    QList<KoShape*> shapes;
+    QList<KShape*> shapes;
     shapes.append(&shape1);
     shapes.append(&shape2);
     shapes.append(&shape3);
@@ -264,7 +264,7 @@ void TestShapeReorderCommand::testMoveDownOverlapping()
     QVERIFY(shape3.zIndex() < shape4.zIndex());
     QVERIFY(shape4.zIndex() < shape5.zIndex());
     
-    QList<KoShape*> selectedShapes;
+    QList<KShape*> selectedShapes;
     selectedShapes.append(&shape5);
     
     QUndoCommand * cmd = KoShapeReorderCommand::createCommand(selectedShapes, &manager, KoShapeReorderCommand::LowerShape);
@@ -295,7 +295,7 @@ void TestShapeReorderCommand::testSendToBackChildren()
     container.addShape(&shape2);
     container.addShape(&shape3);
     
-    QList<KoShape*> shapes;
+    QList<KShape*> shapes;
     shapes.append(&shape1);
     shapes.append(&shape2);
     shapes.append(&shape3);
@@ -304,20 +304,20 @@ void TestShapeReorderCommand::testSendToBackChildren()
     MockCanvas canvas;
     KoShapeManager manager(&canvas, shapes);
     
-    qSort(shapes.begin(), shapes.end(), KoShape::compareShapeZIndex);
+    qSort(shapes.begin(), shapes.end(), KShape::compareShapeZIndex);
     QCOMPARE(shapes.indexOf(&container), 0); // atm the parent is always lower than its children
     QCOMPARE(shapes.indexOf(&shape1), 1);
     QCOMPARE(shapes.indexOf(&shape2), 2);
     QCOMPARE(shapes.indexOf(&shape3), 3);
     
-    QList<KoShape*> selectedShapes;
+    QList<KShape*> selectedShapes;
     selectedShapes.append(&shape3);
     
     QUndoCommand * cmd = KoShapeReorderCommand::createCommand(selectedShapes, &manager, KoShapeReorderCommand::SendToBack);
     cmd->redo();
     delete cmd;
     
-    qSort(shapes.begin(), shapes.end(), KoShape::compareShapeZIndex);
+    qSort(shapes.begin(), shapes.end(), KShape::compareShapeZIndex);
     QCOMPARE(shapes.indexOf(&container), 0); // atm the parent is always lower than its children
     QCOMPARE(shapes.indexOf(&shape3), 1);
     QVERIFY(shape3.zIndex() < shape1.zIndex());
@@ -332,7 +332,7 @@ void TestShapeReorderCommand::testSendToBackChildren()
     cmd->redo();
     delete cmd;
     
-    qSort(shapes.begin(), shapes.end(), KoShape::compareShapeZIndex);
+    qSort(shapes.begin(), shapes.end(), KShape::compareShapeZIndex);
     QCOMPARE(shapes.indexOf(&container), 0); // atm the parent is always lower than its children
     QCOMPARE(shapes.indexOf(&shape2), 1);
     QVERIFY(shape2.zIndex() < shape3.zIndex());
@@ -347,7 +347,7 @@ void TestShapeReorderCommand::testSendToBackChildren()
     cmd->redo();
     delete cmd;
     
-    qSort(shapes.begin(), shapes.end(), KoShape::compareShapeZIndex);
+    qSort(shapes.begin(), shapes.end(), KShape::compareShapeZIndex);
     QCOMPARE(shapes.indexOf(&container), 0); // atm the parent is always lower than its children
     QCOMPARE(shapes.indexOf(&shape1), 1);
     QVERIFY(shape1.zIndex() < shape2.zIndex());

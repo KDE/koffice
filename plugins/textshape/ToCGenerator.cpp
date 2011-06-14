@@ -24,7 +24,7 @@
 #include <KoTextDocumentLayout.h>
 #include <KoTextShapeData.h>
 #include <KoTextPage.h>
-#include <KoShape.h>
+#include <KShape.h>
 #include <KoTextDocument.h>
 #include <KoTextBlockData.h>
 #include <KoStyleManager.h>
@@ -140,7 +140,7 @@ void ToCGenerator::update()
     cursor.beginEditBlock();
     cursor.movePosition(QTextCursor::NextBlock, QTextCursor::MoveAnchor, 2);// past our header
     foreach (const QTextBlock &block, m_originalBlocksInToc) {
-        KoShape *shape = layout->shapeForPosition(block.position());
+        KShape *shape = layout->shapeForPosition(block.position());
         cursor.movePosition(QTextCursor::NextBlock);
         Q_ASSERT(shape);
         if (shape == 0)

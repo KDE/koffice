@@ -24,7 +24,7 @@
 #include "FilterEffectScene.h"
 #include <QtGui/QWidget>
 
-class KoShape;
+class KShape;
 class KCanvasBase;
 class KFilterEffect;
 class KFilterEffectStack;
@@ -37,7 +37,7 @@ public:
     ~FilterEffectEditWidget();
 
     /// Edits effects of given shape
-    void editShape(KoShape *shape, KCanvasBase * canvas);
+    void editShape(KShape *shape, KCanvasBase * canvas);
 
 protected:
     /// reimplemented from QWidget
@@ -58,7 +58,7 @@ private:
     void addWidgetForItem(ConnectionSource item);
 
     FilterEffectScene * m_scene;
-    KoShape * m_shape;
+    KShape * m_shape;
     KCanvasBase * m_canvas;
     KFilterEffectStack * m_effects;
     ConnectionSource m_currentItem;

@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoShape_p.h"
+#include "KShape_p.h"
 #include "KoShapeGroup.h"
 #include <KRTree.h>
 
@@ -49,7 +49,7 @@ public:
     /**
      * Request a repaint to be queued.
      * The repaint will be restricted to the parameters rectangle, which is expected to be
-     * in points (the document coordinates system of KoShape) and it is expected to be
+     * in points (the document coordinates system of KShape) and it is expected to be
      * normalized and based in the global coordinates, not any local coordinates.
      * <p>This method will return immediately and only request a repaint. Successive calls
      * will be merged into an appropriate repaint action.
@@ -58,7 +58,7 @@ public:
      * @param selectionHandles if true; find out if the shape is selected and repaint its
      *   selection handles at the same time.
      */
-    void update(const QRectF &rect, const KoShape *shape = 0, bool selectionHandles = false);
+    void update(const QRectF &rect, const KShape *shape = 0, bool selectionHandles = false);
 
     QPolygonF routeConnection(KoShapeConnection *connection, const QPointF &from, const QPointF &to);
 
@@ -66,8 +66,8 @@ public:
     {
     public:
         DetectCollision() {}
-        void detect(KRTree<KoShape *> &tree, KoShape *s, int prevZIndex) {
-            foreach(KoShape *shape, tree.intersects(s->boundingRect())) {
+        void detect(KRTree<KShape *> &tree, KShape *s, int prevZIndex) {
+            foreach(KShape *shape, tree.intersects(s->boundingRect())) {
                 bool isChild = false;
                 KoShapeContainer *parent = s->parent();
                 while (parent && !isChild) {
@@ -86,23 +86,23 @@ public:
         }
 
         void fireSignals() {
-            foreach(KoShape *shape, shapesWithCollisionDetection)
-                shape->priv()->shapeChanged(KoShape::CollisionDetected);
+            foreach(KShape *shape, shapesWithCollisionDetection)
+                shape->priv()->shapeChanged(KShape::CollisionDetected);
         }
 
     private:
-        QList<KoShape*> shapesWithCollisionDetection;
+        QList<KShape*> shapesWithCollisionDetection;
     };
 
-    QList<KoShape *> shapes;
-    QList<KoShape *> additionalShapes; // these are shapes that are only handled for updates
+    QList<KShape *> shapes;
+    QList<KShape *> additionalShapes; // these are shapes that are only handled for updates
     KSelection *selection;
     KCanvasBase *canvas;
-    KRTree<KoShape *> tree;
+    KRTree<KShape *> tree;
     KRTree<KoShapeConnection *> connectionTree;
 
-    QSet<KoShape *> aggregate4update;
-    QHash<KoShape*, int> shapeIndexesBeforeUpdate;
+    QSet<KShape *> aggregate4update;
+    QHash<KShape*, int> shapeIndexesBeforeUpdate;
     KoShapeManagerPaintingStrategy *strategy;
     KoShapeManager *q;
 };

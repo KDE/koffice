@@ -65,7 +65,7 @@ public:
     /// reimplemented from superclass
     virtual void paint(QPainter &, const KoViewConverter &) {}
     /// reimplemented from superclass
-    virtual void activate(ToolActivation toolActivation, const QSet<KoShape*> &shapes);
+    virtual void activate(ToolActivation toolActivation, const QSet<KShape*> &shapes);
     /// reimplemented method
     virtual void customMoveEvent(KPointerEvent *event);
 

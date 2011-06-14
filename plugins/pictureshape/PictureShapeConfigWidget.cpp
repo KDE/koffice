@@ -36,7 +36,7 @@ PictureShapeConfigWidget::~PictureShapeConfigWidget()
 {
 }
 
-void PictureShapeConfigWidget::open(KoShape *shape)
+void PictureShapeConfigWidget::open(KShape *shape)
 {
     m_shape = dynamic_cast<PictureShape*>(shape);
     Q_ASSERT(m_shape);

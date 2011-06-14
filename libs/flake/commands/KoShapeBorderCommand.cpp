@@ -19,7 +19,7 @@
  */
 
 #include "KoShapeBorderCommand.h"
-#include "KoShape.h"
+#include "KShape.h"
 #include "KoShapeBorderBase.h"
 
 #include <klocale.h>
@@ -50,19 +50,19 @@ public:
         newBorders.append(newBorder);
     }
 
-    QList<KoShape*> shapes;                ///< the shapes to set border for
+    QList<KShape*> shapes;                ///< the shapes to set border for
     QList<KoShapeBorderBase*> oldBorders; ///< the old borders, one for each shape
     QList<KoShapeBorderBase*> newBorders; ///< the new borders to set
 };
 
-KoShapeBorderCommand::KoShapeBorderCommand(const QList<KoShape*> &shapes, KoShapeBorderBase *border, QUndoCommand *parent)
+KoShapeBorderCommand::KoShapeBorderCommand(const QList<KShape*> &shapes, KoShapeBorderBase *border, QUndoCommand *parent)
     : QUndoCommand(parent)
     , d(new Private())
 {
     d->shapes = shapes;
 
     // save old borders
-    foreach(KoShape *shape, d->shapes) {
+    foreach(KShape *shape, d->shapes) {
         d->addOldBorder(shape->border());
         d->addNewBorder(border);
     }
@@ -70,7 +70,7 @@ KoShapeBorderCommand::KoShapeBorderCommand(const QList<KoShape*> &shapes, KoShap
     setText(i18n("Set Border"));
 }
 
-KoShapeBorderCommand::KoShapeBorderCommand(const QList<KoShape*> &shapes,
+KoShapeBorderCommand::KoShapeBorderCommand(const QList<KShape*> &shapes,
         const QList<KoShapeBorderBase*> &borders,
         QUndoCommand *parent)
         : QUndoCommand(parent)
@@ -81,7 +81,7 @@ KoShapeBorderCommand::KoShapeBorderCommand(const QList<KoShape*> &shapes,
     d->shapes = shapes;
 
     // save old borders
-    foreach(KoShape *shape, shapes)
+    foreach(KShape *shape, shapes)
         d->addOldBorder(shape->border());
     foreach (KoShapeBorderBase * border, borders)
         d->addNewBorder(border);
@@ -89,7 +89,7 @@ KoShapeBorderCommand::KoShapeBorderCommand(const QList<KoShape*> &shapes,
     setText(i18n("Set Border"));
 }
 
-KoShapeBorderCommand::KoShapeBorderCommand(KoShape* shape, KoShapeBorderBase *border, QUndoCommand *parent)
+KoShapeBorderCommand::KoShapeBorderCommand(KShape* shape, KoShapeBorderBase *border, QUndoCommand *parent)
         : QUndoCommand(parent)
         , d(new Private())
 {
@@ -109,7 +109,7 @@ void KoShapeBorderCommand::redo()
 {
     QUndoCommand::redo();
     QList<KoShapeBorderBase*>::iterator borderIt = d->newBorders.begin();
-    foreach(KoShape *shape, d->shapes) {
+    foreach(KShape *shape, d->shapes) {
         shape->update();
         shape->setBorder(*borderIt);
         shape->update();
@@ -121,7 +121,7 @@ void KoShapeBorderCommand::undo()
 {
     QUndoCommand::undo();
     QList<KoShapeBorderBase*>::iterator borderIt = d->oldBorders.begin();
-    foreach(KoShape *shape, d->shapes) {
+    foreach(KShape *shape, d->shapes) {
         shape->update();
         shape->setBorder(*borderIt);
         shape->update();

@@ -36,7 +36,7 @@ class EllipseShapeConfigWidget : public KoShapeConfigWidgetBase
 public:
     EllipseShapeConfigWidget(KCanvasBase *canvas);
     /// reimplemented
-    virtual void open(KoShape *shape);
+    virtual void open(KShape *shape);
 
 private slots:
     void closeEllipse();

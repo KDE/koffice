@@ -95,7 +95,7 @@ public:
      */
     void paintHandle(QPainter &painter, const KoViewConverter &converter, int handleId, int handleRadius);
 
-    /// reimplemented from KoShape
+    /// reimplemented from KShape
     virtual void setSize(const QSizeF &size);
 
     /**

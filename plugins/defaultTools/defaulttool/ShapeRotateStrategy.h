@@ -29,7 +29,7 @@
 
 class KCanvasBase;
 class KoToolBase;
-class KoShape;
+class KShape;
 
 /**
  * A strategy for the KInteractionTool.
@@ -59,7 +59,7 @@ private:
     QTransform m_initialSelectionMatrix;
     QList<QTransform> m_oldTransforms;
     QPointF m_rotationCenter;
-    QList<KoShape*> m_selectedShapes;
+    QList<KShape*> m_selectedShapes;
 };
 
 #endif

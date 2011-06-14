@@ -186,10 +186,10 @@ void MapViewModel::addSheet(KCSheet *sheet)
 {
     KCMapModel::addSheet(sheet);
 
-    connect(sheet, SIGNAL(shapeAdded(KCSheet *, KoShape *)),
-            this, SLOT(addShape(KCSheet *, KoShape *)));
-    connect(sheet, SIGNAL(shapeRemoved(KCSheet *, KoShape *)),
-            this, SLOT(removeShape(KCSheet *, KoShape *)));
+    connect(sheet, SIGNAL(shapeAdded(KCSheet *, KShape *)),
+            this, SLOT(addShape(KCSheet *, KShape *)));
+    connect(sheet, SIGNAL(shapeRemoved(KCSheet *, KShape *)),
+            this, SLOT(removeShape(KCSheet *, KShape *)));
 
     if (!d->xmlGuiClient) {
         return;
@@ -212,10 +212,10 @@ void MapViewModel::removeSheet(KCSheet *sheet)
 {
     KCMapModel::removeSheet(sheet);
 
-    disconnect(sheet, SIGNAL(shapeAdded(KCSheet *, KoShape *)),
-               this, SLOT(addShape(KCSheet *, KoShape *)));
-    disconnect(sheet, SIGNAL(shapeRemoved(KCSheet *, KoShape *)),
-               this, SLOT(removeShape(KCSheet *, KoShape *)));
+    disconnect(sheet, SIGNAL(shapeAdded(KCSheet *, KShape *)),
+               this, SLOT(addShape(KCSheet *, KShape *)));
+    disconnect(sheet, SIGNAL(shapeRemoved(KCSheet *, KShape *)),
+               this, SLOT(removeShape(KCSheet *, KShape *)));
 
     if (!d->xmlGuiClient) {
         return;
@@ -238,14 +238,14 @@ void MapViewModel::removeSheet(KCSheet *sheet)
     }
 }
 
-void MapViewModel::addShape(KCSheet *sheet, KoShape *shape)
+void MapViewModel::addShape(KCSheet *sheet, KShape *shape)
 {
     if (sheet == d->activeSheet) {
         d->canvas->shapeManager()->addShape(shape);
     }
 }
 
-void MapViewModel::removeShape(KCSheet *sheet, KoShape *shape)
+void MapViewModel::removeShape(KCSheet *sheet, KShape *shape)
 {
     if (sheet == d->activeSheet) {
         d->canvas->shapeManager()->remove(shape);

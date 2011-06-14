@@ -25,7 +25,7 @@
 #include <KoDocumentSectionView.h>
 
 class KoShapeControllerBase;
-class KoShape;
+class KShape;
 class KoShapeLayer;
 class KoShapeGroup;
 class KarbonLayerModel;
@@ -68,10 +68,10 @@ private slots:
     void detailedView();
     void thumbnailView();
 private:
-    void extractSelectedLayersAndShapes(QList<KoShapeLayer*> &layers, QList<KoShape*> &shapes, bool addChilds = false);
-    void addChildsRecursive(KoShapeGroup * parent, QList<KoShape*> &shapes);
+    void extractSelectedLayersAndShapes(QList<KoShapeLayer*> &layers, QList<KShape*> &shapes, bool addChilds = false);
+    void addChildsRecursive(KoShapeGroup * parent, QList<KShape*> &shapes);
 
-    KoShape * shapeFromIndex(const QModelIndex &index);
+    KShape * shapeFromIndex(const QModelIndex &index);
 
     void setViewMode(KoDocumentSectionView::DisplayMode mode);
     void selectLayers(QList<KoShapeLayer*> layers);

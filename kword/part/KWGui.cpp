@@ -27,7 +27,7 @@
 #include <KCanvasController.h>
 #include <KoToolManager.h>
 #include <KoShapeManager.h>
-#include <KoShape.h>
+#include <KShape.h>
 #include <KoFlake.h>
 #include <KSelection.h>
 #include <KoDockerManager.h>
@@ -166,7 +166,7 @@ void KWGui::shapeSelectionChanged()
 {
     QPointF start, end;
     bool first = true;
-    foreach (KoShape *shape, m_canvas->shapeManager()->selection()->selectedShapes(KoFlake::TopLevelSelection)) {
+    foreach (KShape *shape, m_canvas->shapeManager()->selection()->selectedShapes(KoFlake::TopLevelSelection)) {
         QRectF rect = shape->boundingRect();
         if (first) {
             start = rect.topLeft();

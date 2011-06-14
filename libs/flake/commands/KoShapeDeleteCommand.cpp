@@ -36,17 +36,17 @@ public:
         if (! deleteShapes)
             return;
 
-        foreach(KoShape *shape, shapes)
+        foreach(KShape *shape, shapes)
             delete shape;
     }
 
     KoShapeControllerBase *controller; ///< the shape controller to use for removing/readding
-    QList<KoShape*> shapes; ///< the list of shapes to delete
+    QList<KShape*> shapes; ///< the list of shapes to delete
     QList<KoShapeContainer*> oldParents; ///< the old parents of the shapes
     bool deleteShapes;  ///< shows if shapes should be deleted when deleting the command
 };
 
-KoShapeDeleteCommand::KoShapeDeleteCommand(KoShapeControllerBase *controller, KoShape *shape, QUndoCommand *parent)
+KoShapeDeleteCommand::KoShapeDeleteCommand(KoShapeControllerBase *controller, KShape *shape, QUndoCommand *parent)
         : QUndoCommand(parent),
         d(new Private(controller))
 {
@@ -56,13 +56,13 @@ KoShapeDeleteCommand::KoShapeDeleteCommand(KoShapeControllerBase *controller, Ko
     setText(i18n("Delete Shape"));
 }
 
-KoShapeDeleteCommand::KoShapeDeleteCommand(KoShapeControllerBase *controller, const QList<KoShape*> &shapes,
+KoShapeDeleteCommand::KoShapeDeleteCommand(KoShapeControllerBase *controller, const QList<KShape*> &shapes,
         QUndoCommand *parent)
         : QUndoCommand(parent),
         d(new Private(controller))
 {
     d->shapes = shapes;
-    foreach(KoShape *shape, d->shapes) {
+    foreach(KShape *shape, d->shapes) {
         d->oldParents.append(shape->parent());
     }
 

@@ -23,13 +23,13 @@
 #include <QtGui/QUndoCommand>
 
 class KFilterEffectStack;
-class KoShape;
+class KShape;
 
 /// Command to set a filter stack on a shape
 class FilterStackSetCommand : public QUndoCommand
 {
 public:
-    FilterStackSetCommand(KFilterEffectStack *newStack, KoShape *shape, QUndoCommand *parent = 0);
+    FilterStackSetCommand(KFilterEffectStack *newStack, KShape *shape, QUndoCommand *parent = 0);
     ~FilterStackSetCommand();
 
     /// redo the command
@@ -40,7 +40,7 @@ public:
 private:
     KFilterEffectStack * m_newFilterStack;
     KFilterEffectStack * m_oldFilterStack;
-    KoShape * m_shape;
+    KShape * m_shape;
     bool m_isSet;
 };
 

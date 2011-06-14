@@ -51,7 +51,7 @@ void KWCreateOutlineCommand::redo()
         m_path = new KWOutlineShape(m_frame);
         m_container = m_path->parent();
     } else {
-        KoShape *child = m_frame->shape();
+        KShape *child = m_frame->shape();
         m_container->setTransformation(child->absoluteTransformation(0));
         QTransform matrix;
         child->setTransformation(matrix);
@@ -67,7 +67,7 @@ void KWCreateOutlineCommand::undo()
 {
     QUndoCommand::undo();
     Q_ASSERT(m_container);
-    KoShape *child = m_frame->shape();
+    KShape *child = m_frame->shape();
     child->setTransformation(m_container->absoluteTransformation(0));
     m_container->removeShape(m_frame->shape());
     m_container->setApplicationData(0);

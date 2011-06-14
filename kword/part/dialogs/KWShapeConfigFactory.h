@@ -22,7 +22,7 @@
 
 #include <QObject>
 
-class KoShape;
+class KShape;
 class KWFrame;
 class KWDocument;
 
@@ -41,7 +41,7 @@ public:
         return m_frame;
     }
     void setFrame(KWFrame *frame);
-    KWFrame *createFrame(KoShape *shape);
+    KWFrame *createFrame(KShape *shape);
     void markFrameUsed() {
         m_deleteFrame = false;
     }

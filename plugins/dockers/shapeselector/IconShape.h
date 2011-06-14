@@ -19,7 +19,7 @@
 #ifndef ICONSHAPE_H
 #define ICONSHAPE_H
 
-#include <KoShape.h>
+#include <KShape.h>
 
 class KCreateShapesTool;
 class QDomElement;
@@ -35,7 +35,7 @@ class QDomElement;
  * The TemplateShape is used for a KoShapeTemplate, when the factory has none (so only
  * KoShapeFactoryBase::createDefaultShape() can be called) the GroupShape is used instead.
  */
-class IconShape : public KoShape
+class IconShape : public KShape
 {
 public:
     IconShape(const QString &icon);

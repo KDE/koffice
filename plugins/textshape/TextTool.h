@@ -83,7 +83,7 @@ public:
     virtual void keyReleaseEvent(QKeyEvent *event);
 
     /// reimplemented from superclass
-    virtual void activate(ToolActivation toolActivation, const QSet<KoShape*> &shapes);
+    virtual void activate(ToolActivation toolActivation, const QSet<KShape*> &shapes);
     /// reimplemented from superclass
     virtual void deactivate();
     /// reimplemented from superclass
@@ -265,7 +265,7 @@ private slots:
     /// print debug about the details of the styles on the current text document
     void debugTextStyles();
     /// the document we are editing has received an extra shape
-    void shapeAddedToDoc(KoShape *shape);
+    void shapeAddedToDoc(KShape *shape);
     void ensureCursorVisible();
 
     void showEditVariableDialog();

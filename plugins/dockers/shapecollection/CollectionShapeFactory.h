@@ -27,14 +27,14 @@ class CollectionShapeFactory : public KoShapeFactoryBase
 {
     Q_OBJECT
     public:
-        CollectionShapeFactory(QObject *parent, const QString &id, KoShape* shape);
+        CollectionShapeFactory(QObject *parent, const QString &id, KShape* shape);
         ~CollectionShapeFactory();
 
-        virtual KoShape *createDefaultShape(KResourceManager *documentResources = 0) const;
+        virtual KShape *createDefaultShape(KResourceManager *documentResources = 0) const;
         virtual bool supports(const KXmlElement &e, KoShapeLoadingContext &context) const;
 
     private:
-        KoShape* m_shape;
+        KShape* m_shape;
 };
 
 #endif //KOCOLLECTIONSHAPEFACTORY_H

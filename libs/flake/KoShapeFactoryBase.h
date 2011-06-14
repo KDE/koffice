@@ -31,7 +31,7 @@
 
 #include <KXmlReader.h>
 
-class KoShape;
+class KShape;
 class KProperties;
 class KoShapeConfigWidgetBase;
 class KoShapeLoadingContext;
@@ -65,8 +65,8 @@ struct FLAKE_EXPORT KoShapeTemplate {
 };
 
 /**
- * A factory for KoShape objects.
- * The baseclass for all shape plugins. Each plugin that ships a KoShape should also
+ * A factory for KShape objects.
+ * The baseclass for all shape plugins. Each plugin that ships a KShape should also
  * ship a factory. That factory will extend this class and set variable data like
  * a toolTip and icon in the constructor of that extending class.
  *
@@ -171,19 +171,19 @@ public:
      * This method should be implemented by factories to create a shape that the user
      * gets when doing a base insert. For example from a script.  The created shape
      * should have its values set to good defaults that the user can then adjust further if
-     * needed.  Including the KoShape:setShapeId(), with the Id from this factory
+     * needed.  Including the KShape:setShapeId(), with the Id from this factory
      * The default shape position is not relevant, it will be moved by the caller.
      * @param documentResources the resources manager that has all the document wide
      *      resources which can be used to create the object.
      * @return a new shape
      * @see createShape() newDocumentResourceManager()
      */
-    virtual KoShape *createDefaultShape(KResourceManager *documentResources = 0) const = 0;
+    virtual KShape *createDefaultShape(KResourceManager *documentResources = 0) const = 0;
 
     /**
      * This method should be implemented by factories to create a shape based on a set of
      * properties that are specifically made for this shape-type.
-     * This method should also set this factories shapeId on the shape using KoShape::setShapeId()
+     * This method should also set this factories shapeId on the shape using KShape::setShapeId()
      * The default implementation just ignores 'params' and calls createDefaultShape()
      * @return a new shape
      * @param params the properties object is the same as added in the addTemplate() call
@@ -192,7 +192,7 @@ public:
      * @see createDefaultShape() newDocumentResourceManager()
      * @see KoShapeTemplate::properties
      */
-    virtual KoShape *createShape(const KProperties *params, KResourceManager *documentResources = 0) const;
+    virtual KShape *createShape(const KProperties *params, KResourceManager *documentResources = 0) const;
 
 protected:
 

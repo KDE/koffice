@@ -21,7 +21,7 @@
 
 #include "SelectionDecorator.h"
 
-#include <KoShape.h>
+#include <KShape.h>
 #include <KSelection.h>
 #include <kstandarddirs.h>
 #include <kglobal.h>
@@ -72,11 +72,11 @@ void SelectionDecorator::paint(QPainter &painter, const KoViewConverter &convert
 
     painter.setPen( Qt::green );
     bool editable=false;
-    foreach (KoShape *shape, m_selection->selectedShapes(KoFlake::StrippedSelection)) {
+    foreach (KShape *shape, m_selection->selectedShapes(KoFlake::StrippedSelection)) {
         // apply the shape transformation on top of the old painter transformation
         painter.setWorldTransform( shape->absoluteTransformation(&converter) * painterMatrix );
         // apply the zoom factor
-        KoShape::applyConversion( painter, converter );
+        KShape::applyConversion( painter, converter );
         // draw the shape bounding rect
         painter.drawRect( QRectF( QPointF(), shape->size() ) );
 
@@ -90,7 +90,7 @@ void SelectionDecorator::paint(QPainter &painter, const KoViewConverter &convert
         // apply the selection transformation on top of the old painter transformation
         painter.setWorldTransform(m_selection->absoluteTransformation(&converter) * painterMatrix);
         // apply the zoom factor
-        KoShape::applyConversion(painter, converter);
+        KShape::applyConversion(painter, converter);
         // draw the selection bounding rect
         painter.drawRect(QRectF(QPointF(), m_selection->size()));
         // save the selection bounding rect for later drawing the selection handles
@@ -98,7 +98,7 @@ void SelectionDecorator::paint(QPainter &painter, const KoViewConverter &convert
     } else if (m_selection->firstSelectedShape()) {
         // only one shape selected, so we compose the correct painter matrix
         painter.setWorldTransform(m_selection->firstSelectedShape()->absoluteTransformation(&converter) * painterMatrix);
-        KoShape::applyConversion(painter, converter);
+        KShape::applyConversion(painter, converter);
         // save the only selected shapes bounding rect for later drawing the handles
         handleArea = QRectF(QPointF(), m_selection->firstSelectedShape()->size());
     }

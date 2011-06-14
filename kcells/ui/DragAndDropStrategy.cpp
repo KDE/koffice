@@ -26,7 +26,7 @@
 
 #include <KCanvasBase.h>
 #include <KoToolBase.h>
-#include <KoShape.h>
+#include <KShape.h>
 #include <KSelection.h>
 #include <KoShapeManager.h>
 
@@ -55,7 +55,7 @@ DragAndDropStrategy::DragAndDropStrategy(CellToolBase *cellTool,
 {
     d->lastPoint = documentPos;
     Selection *const selection = this->selection();
-    const KoShape *shape = tool()->canvas()->shapeManager()->selection()->firstSelectedShape();
+    const KShape *shape = tool()->canvas()->shapeManager()->selection()->firstSelectedShape();
     const QPointF position = documentPos - (shape ? shape->position() : QPointF(0.0, 0.0));
 
     // In which cell did the user click?
@@ -82,7 +82,7 @@ void DragAndDropStrategy::handleMouseMove(const QPointF& documentPos, Qt::Keyboa
     if (d->started)
         return;
     d->lastPoint = documentPos;
-    const KoShape *shape = tool()->canvas()->shapeManager()->selection()->firstSelectedShape();
+    const KShape *shape = tool()->canvas()->shapeManager()->selection()->firstSelectedShape();
     const QPointF position = documentPos - (shape ? shape->position() : QPointF(0.0, 0.0));
 
     // In which cell did the user click?
@@ -118,7 +118,7 @@ void DragAndDropStrategy::handleMouseMove(const QPointF& documentPos, Qt::Keyboa
 
 QUndoCommand* DragAndDropStrategy::createCommand(QUndoCommand *)
 {
-    const KoShape *shape = tool()->canvas()->shapeManager()->selection()->firstSelectedShape();
+    const KShape *shape = tool()->canvas()->shapeManager()->selection()->firstSelectedShape();
     const QPointF position = d->lastPoint - (shape ? shape->position() : QPointF(0.0, 0.0));
 
     // In which cell did the user click?

@@ -25,7 +25,7 @@
 #include <KoShapeFactoryBase.h>
 #include <KoShapeRegistry.h>
 #include <KResourceManager.h>
-#include <KoShape.h>
+#include <KShape.h>
 
 #include <kfilewidget.h>
 #include <KIO/Job>
@@ -191,7 +191,7 @@ KImageData *KoImageSelectionWidget::selectImage(KImageCollection *collection, QW
 }
 
 // static
-KoShape *KoImageSelectionWidget::selectImageShape(KResourceManager *documentResources, QWidget *parent)
+KShape *KoImageSelectionWidget::selectImageShape(KResourceManager *documentResources, QWidget *parent)
 {
     if (!documentResources || !documentResources->imageCollection())
         return 0;
@@ -202,7 +202,7 @@ KoShape *KoImageSelectionWidget::selectImageShape(KResourceManager *documentReso
     }
     KImageData *data = selectImage(documentResources->imageCollection(), parent);
     if (data) {
-        KoShape *shape = factory->createDefaultShape(documentResources);
+        KShape *shape = factory->createDefaultShape(documentResources);
         shape->setUserData(data);
         shape->setSize(data->imageSize());
         return shape;

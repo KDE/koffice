@@ -43,7 +43,7 @@ public:
     virtual void mouseReleaseEvent(KPointerEvent*) {}
 
     /// reimplemented from KoToolBase
-    virtual void activate(ToolActivation toolActivation, const QSet<KoShape*> &shapes);
+    virtual void activate(ToolActivation toolActivation, const QSet<KShape*> &shapes);
     /// reimplemented from KoToolBase
     virtual void deactivate();
 

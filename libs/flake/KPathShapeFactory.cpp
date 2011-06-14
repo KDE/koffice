@@ -39,7 +39,7 @@ KPathShapeFactory::KPathShapeFactory(QObject *parent, const QStringList&)
     setLoadingPriority(0);
 }
 
-KoShape *KPathShapeFactory::createDefaultShape(KResourceManager *) const
+KShape *KPathShapeFactory::createDefaultShape(KResourceManager *) const
 {
     KPathShape* path = new KPathShape();
     path->moveTo(QPointF(0, 50));

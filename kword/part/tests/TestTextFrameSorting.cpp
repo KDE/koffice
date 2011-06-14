@@ -213,9 +213,9 @@ KWTextFrame * TestTextFrameSorting::createFrame(const QPointF &position, KWTextF
     return frame;
 }
 
-KWFrame * TestTextFrameSorting::createCopyFrame(const QPointF &position, KoShape *orig, KWTextFrameSet &fs)
+KWFrame * TestTextFrameSorting::createCopyFrame(const QPointF &position, KShape *orig, KWTextFrameSet &fs)
 {
-    KoShape *shape = new KWCopyShape(orig);
+    KShape *shape = new KWCopyShape(orig);
     KWFrame *frame = new KWFrame(shape, &fs);
     shape->setPosition(position);
     return frame;

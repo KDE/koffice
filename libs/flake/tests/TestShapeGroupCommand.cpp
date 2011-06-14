@@ -115,7 +115,7 @@ void TestShapeGroupCommand::cleanup()
 
 void TestShapeGroupCommand::testToplevelGroup()
 {
-    QList<KoShape*> toplevelShapes;
+    QList<KShape*> toplevelShapes;
     toplevelShapes << toplevelShape1 << toplevelShape2;
     cmd1 = KoShapeGroupCommand::createCommand(toplevelGroup, toplevelShapes);
 
@@ -139,11 +139,11 @@ void TestShapeGroupCommand::testToplevelGroup()
 
 void TestShapeGroupCommand::testSublevelGroup()
 {
-    QList<KoShape*> toplevelShapes;
+    QList<KShape*> toplevelShapes;
     toplevelShapes << toplevelShape1 << toplevelShape2;
     cmd1 = KoShapeGroupCommand::createCommand(toplevelGroup, toplevelShapes);
 
-    QList<KoShape*> sublevelShapes;
+    QList<KShape*> sublevelShapes;
     sublevelShapes << sublevelShape1 << sublevelShape2;
     sublevelShape1->setZIndex(1);
     sublevelShape2->setZIndex(2);
@@ -151,7 +151,7 @@ void TestShapeGroupCommand::testSublevelGroup()
     strokeGroup->setZIndex(-1);
 
     KoShapeGroupCommand::createCommand(sublevelGroup, sublevelShapes, cmd1);
-    KoShapeGroupCommand::createCommand(toplevelGroup, QList<KoShape*>() << sublevelGroup, cmd1);
+    KoShapeGroupCommand::createCommand(toplevelGroup, QList<KShape*>() << sublevelGroup, cmd1);
 
     cmd1->redo();
 
@@ -173,9 +173,9 @@ void TestShapeGroupCommand::testSublevelGroup()
     QCOMPARE(sublevelGroup->position(), QPointF(100, 100));
 
     // check that the shapes are added in the correct order
-    QList<KoShape*> childOrder(sublevelGroup->shapes());
-    qSort(childOrder.begin(), childOrder.end(), KoShape::compareShapeZIndex);
-    QList<KoShape*> expectedOrder;
+    QList<KShape*> childOrder(sublevelGroup->shapes());
+    qSort(childOrder.begin(), childOrder.end(), KShape::compareShapeZIndex);
+    QList<KShape*> expectedOrder;
     expectedOrder << sublevelShape2 << sublevelShape1;
     QCOMPARE(childOrder, expectedOrder); 
     // check that the group has the zIndex/parent of its added top shape 
@@ -185,12 +185,12 @@ void TestShapeGroupCommand::testSublevelGroup()
 
 void TestShapeGroupCommand::testAddToToplevelGroup()
 {
-    QList<KoShape*> toplevelShapes;
+    QList<KShape*> toplevelShapes;
     toplevelShapes << toplevelShape1 << toplevelShape2;
     cmd1 = KoShapeGroupCommand::createCommand(toplevelGroup, toplevelShapes);
     cmd1->redo();
 
-    cmd2 = KoShapeGroupCommand::createCommand(toplevelGroup, QList<KoShape*>() << extraShape1);
+    cmd2 = KoShapeGroupCommand::createCommand(toplevelGroup, QList<KShape*>() << extraShape1);
     cmd2->redo();
 
     QVERIFY(extraShape1->parent() == toplevelGroup);
@@ -208,17 +208,17 @@ void TestShapeGroupCommand::testAddToToplevelGroup()
 
 void TestShapeGroupCommand::testAddToSublevelGroup()
 {
-    QList<KoShape*> toplevelShapes;
+    QList<KShape*> toplevelShapes;
     toplevelShapes << toplevelShape1 << toplevelShape2;
     cmd1 = new KoShapeGroupCommand(toplevelGroup, toplevelShapes);
 
-    QList<KoShape*> sublevelShapes;
+    QList<KShape*> sublevelShapes;
     sublevelShapes << sublevelShape1 << sublevelShape2;
     new KoShapeGroupCommand(sublevelGroup, sublevelShapes, cmd1);
-    new KoShapeGroupCommand(toplevelGroup, QList<KoShape*>() << sublevelGroup, cmd1);
+    new KoShapeGroupCommand(toplevelGroup, QList<KShape*>() << sublevelGroup, cmd1);
     cmd1->redo();
 
-    cmd2 = new KoShapeGroupCommand(sublevelGroup, QList<KoShape*>() << extraShape2);
+    cmd2 = new KoShapeGroupCommand(sublevelGroup, QList<KShape*>() << extraShape2);
     cmd2->redo();
 
     QVERIFY(extraShape2->parent() == sublevelGroup);
@@ -258,7 +258,7 @@ void TestShapeGroupCommand::testGroupStrokeShapes()
         bound.adjust(-insets.left, -insets.top, insets.right, insets.bottom);
     }
 
-    QList<KoShape*> strokeShapes;
+    QList<KShape*> strokeShapes;
     strokeShapes << strokeShape2 << strokeShape1;
     strokeCmd = new KoShapeGroupCommand(strokeGroup, strokeShapes);
     strokeCmd->redo();

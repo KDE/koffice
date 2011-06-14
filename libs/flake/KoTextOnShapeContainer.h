@@ -42,7 +42,7 @@ public:
      *      integrate better into the document. Not passing this will mean that for example
      *      the text styles will not be shared with other shapes.
      */
-    explicit KoTextOnShapeContainer(KoShape *childShape, KResourceManager *documentResources = 0);
+    explicit KoTextOnShapeContainer(KShape *childShape, KResourceManager *documentResources = 0);
     virtual ~KoTextOnShapeContainer();
 
     virtual bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context);
@@ -100,7 +100,7 @@ public:
      * to know that the text was added you can call parent() on the shape you
      * passed in.
      */
-    static void tryWrapShape(KoShape *shape, const KXmlElement &element,
+    static void tryWrapShape(KShape *shape, const KXmlElement &element,
             KoShapeLoadingContext &context);
 
 private:

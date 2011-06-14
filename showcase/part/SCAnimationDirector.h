@@ -28,7 +28,7 @@
 class QPainter;
 class QPaintEvent;
 class KoViewConverter;
-class KoShape;
+class KShape;
 class KoShapeManager;
 class KoPACanvas;
 class KoPAPageBase;
@@ -102,7 +102,7 @@ public:
      * @param shape which should be animated
      * @return pair of the animation and the animation data for the shape or a 0, 0 if there is no animation
      */
-    SCShapeAnimation shapeAnimation(KoShape * shape);
+    SCShapeAnimation shapeAnimation(KShape * shape);
 
     void deactivate();
 protected:

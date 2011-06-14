@@ -32,7 +32,7 @@
 
 
 class KoSnapGuide;
-class KoShape;
+class KShape;
 class KPathSegment;
 class KCanvasBase;
 
@@ -52,16 +52,16 @@ public:
     QList<QPointF> pointsInRect(const QRectF &rect);
 
     /// returns list of shape in given rectangle in document coordinates
-    QList<KoShape*> shapesInRect(const QRectF &rect, bool omitEditedShape = false);
+    QList<KShape*> shapesInRect(const QRectF &rect, bool omitEditedShape = false);
 
     /// returns list of points from given shape
-    QList<QPointF> pointsFromShape(KoShape *shape);
+    QList<QPointF> pointsFromShape(KShape *shape);
 
     /// returns list of points in given rectangle in document coordinates
     QList<KPathSegment> segmentsInRect(const QRectF &rect);
 
     /// returns list of all shapes
-    QList<KoShape*> shapes(bool omitEditedShape = false);
+    QList<KShape*> shapes(bool omitEditedShape = false);
 
     /// returns canvas we are working on
     KCanvasBase *canvas();

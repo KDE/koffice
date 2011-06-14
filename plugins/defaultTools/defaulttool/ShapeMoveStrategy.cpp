@@ -37,9 +37,9 @@ ShapeMoveStrategy::ShapeMoveStrategy(KoToolBase *tool, const QPointF &clicked)
     : KInteractionStrategy(tool),
     m_start(clicked)
 {
-    QList<KoShape*> selectedShapes = tool->canvas()->shapeManager()->selection()->selectedShapes(KoFlake::TopLevelSelection);
+    QList<KShape*> selectedShapes = tool->canvas()->shapeManager()->selection()->selectedShapes(KoFlake::TopLevelSelection);
     QRectF boundingRect;
-    foreach(KoShape *shape, selectedShapes) {
+    foreach(KShape *shape, selectedShapes) {
         if (! shape->isEditable())
             continue;
         m_selectedShapes << shape;
@@ -85,7 +85,7 @@ void ShapeMoveStrategy::moveSelection()
     Q_ASSERT(m_newPositions.count());
 
     int i=0;
-    foreach(KoShape *shape, m_selectedShapes) {
+    foreach(KShape *shape, m_selectedShapes) {
         QPointF delta = m_previousPositions.at(i) + m_diff - shape->position();
         if (shape->parent())
             shape->parent()->model()->proposeMove(shape, delta);

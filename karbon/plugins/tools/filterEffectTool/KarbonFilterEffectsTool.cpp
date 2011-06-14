@@ -61,7 +61,7 @@ public:
     {
     }
 
-    void fillConfigSelector(KoShape *shape, KarbonFilterEffectsTool * tool)
+    void fillConfigSelector(KShape *shape, KarbonFilterEffectsTool * tool)
     {
         if (!configSelector)
             return;
@@ -191,7 +191,7 @@ public:
     KDoubleNumInput * posH;
     KFilterEffect * currentEffect;
     KFilterEffectConfigWidgetBase * currentPanel;
-    KoShape * currentShape;
+    KShape * currentShape;
 };
 
 KarbonFilterEffectsTool::KarbonFilterEffectsTool(KCanvasBase *canvas)
@@ -216,7 +216,7 @@ void KarbonFilterEffectsTool::paint(QPainter &painter, const KoViewConverter &co
         QTransform transform = d->currentShape->absoluteTransformation(&converter);
         painter.setTransform(transform, true);
         // apply the zoom transformation
-        KoShape::applyConversion(painter, converter);
+        KShape::applyConversion(painter, converter);
         // get the size rect of the shape
         QRectF sizeRect(QPointF(), d->currentShape->size());
         // get the clipping rect of the filter stack
@@ -250,7 +250,7 @@ void KarbonFilterEffectsTool::repaintDecorations()
     }
 }
 
-void KarbonFilterEffectsTool::activate(ToolActivation toolActivation, const QSet<KoShape*> &shapes)
+void KarbonFilterEffectsTool::activate(ToolActivation toolActivation, const QSet<KShape*> &shapes)
 {
     Q_UNUSED(toolActivation);
     if (shapes.isEmpty()) {

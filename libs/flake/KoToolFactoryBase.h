@@ -114,7 +114,7 @@ public:
      * to handle a music shape may be useless on a vector shape. Using this string we allow the
      * tool to be coupled to one or more shape-types in a flexible manner.
      *
-     * This method returns a value that is based on the KoShape::shapeId() we want to be
+     * This method returns a value that is based on the KShape::shapeId() we want to be
      *  associated with.  For example a TextTool for a TextShape.
      * In combination with the toolType() the following situations can occur;
      <table><tr><th>Type</th><th>shapeId</th><th>Result</th></tr>
@@ -153,7 +153,7 @@ public:
         <td>An activation shape id ending with '/always' will make the tool always visible and enabled.</td></tr>
      </table>
      * @see KoShapeFactoryBase::KoShapeFactoryBase() constructor which takes a shapeid
-     * @see KoShape::shapeId
+     * @see KShape::shapeId
      * @see setActivationShapeId()
      * @return the id of a shape we can manipulate, or an empty string for all shapes.
      */

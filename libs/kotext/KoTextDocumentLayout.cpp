@@ -30,7 +30,7 @@
 
 #include <KoInsets.h>
 #include <KPostscriptPaintDevice.h>
-#include <KoShape.h>
+#include <KShape.h>
 
 #include <kdebug.h>
 #include <QTextBlock>
@@ -80,7 +80,7 @@ public:
     }
     void draw(QPainter *, const KoTextDocumentLayout::PaintContext &) {}
 
-    bool setFollowupShape(KoShape *) {
+    bool setFollowupShape(KShape *) {
         return false;
     }
     void clearTillEnd() {}
@@ -116,7 +116,7 @@ public:
     void postLayoutHook() {
         Q_ASSERT(parent);
         Q_ASSERT(parent->m_state);
-        KoShape *shape = parent->m_state->shape;
+        KShape *shape = parent->m_state->shape;
         if (shape == 0)
             return;
         KoTextShapeData *data = qobject_cast<KoTextShapeData*>(shape->userData());
@@ -133,7 +133,7 @@ public:
 
     void adjustSize();
 
-    QList<KoShape *> shapes;
+    QList<KShape *> shapes;
     KInlineTextObjectManager *inlineTextObjectManager;
     bool scheduled;
     KoTextDocumentLayout *parent;
@@ -150,7 +150,7 @@ void KoTextDocumentLayout::Private::adjustSize()
         return;
     // Limit auto-resizing to the first shape only (there won't be more
     // with auto-resizing turned on, unless specifically set)
-    KoShape *shape = parent->shapes().first();
+    KShape *shape = parent->shapes().first();
 
     // Determine the maximum width of all text lines
     qreal width = 0;
@@ -208,7 +208,7 @@ bool KoTextDocumentLayout::hasLayouter() const
     return true;
 }
 
-void KoTextDocumentLayout::addShape(KoShape *shape)
+void KoTextDocumentLayout::addShape(KShape *shape)
 {
     d->shapes.append(shape);
 
@@ -371,7 +371,7 @@ void KoTextDocumentLayout::documentChanged(int position, int charsRemoved, int c
         from = block.position() + block.length();
     }
 
-    foreach (KoShape *shape, shapes()) {
+    foreach (KShape *shape, shapes()) {
         KoTextShapeData *data = qobject_cast<KoTextShapeData*>(shape->userData());
         Q_ASSERT(data);
         if (data && data->position() <= position && data->endPosition() >= position) {
@@ -383,7 +383,7 @@ void KoTextDocumentLayout::documentChanged(int position, int charsRemoved, int c
         }
     }
     // if still here; then the change was not in any frame, lets relayout the last for now.
-    KoShape *shape = shapes().last();
+    KShape *shape = shapes().last();
     KoTextShapeData *data = qobject_cast<KoTextShapeData*>(shape->userData());
     Q_ASSERT(data);
     data->foul();
@@ -519,15 +519,15 @@ void KoTextDocumentLayout::layout()
     }
 }
 
-QList<KoShape*> KoTextDocumentLayout::shapes() const
+QList<KShape*> KoTextDocumentLayout::shapes() const
 {
     return d->shapes;
 }
 
-KoShape* KoTextDocumentLayout::shapeForPosition(int position) const
+KShape* KoTextDocumentLayout::shapeForPosition(int position) const
 {
     // TODO make faster
-    foreach(KoShape *shape, shapes()) {
+    foreach(KShape *shape, shapes()) {
         KoTextShapeData *data = qobject_cast<KoTextShapeData*>(shape->userData());
         if (data == 0)
             continue;

@@ -59,7 +59,7 @@ public:
     SCViewModePresentation &viewModePresentation();
 
 public slots:
-    virtual void activate(ToolActivation toolActivation, const QSet<KoShape*> &shapes);
+    virtual void activate(ToolActivation toolActivation, const QSet<KShape*> &shapes);
     void deactivate();
     void highlightPresentation();
     void drawOnPresentation();
@@ -77,7 +77,7 @@ private:
      * @param shape the shape fhich is searched for hyperlink
      * @param hyperLink the string which is filled with hyperlink url
      */
-    bool checkHyperlink(KPointerEvent *event, KoShape * shape, QString &hyperLink);
+    bool checkHyperlink(KPointerEvent *event, KShape * shape, QString &hyperLink);
 
     /**
      * Runs url string defined inside hyperlink

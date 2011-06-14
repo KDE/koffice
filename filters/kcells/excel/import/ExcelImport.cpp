@@ -47,7 +47,7 @@
 #include <KoShapeRegistry.h>
 #include <KOdfStylesReader.h>
 #include <KOdfLoadingContext.h>
-#include <KoShape.h>
+#include <KShape.h>
 #include <KoDocumentInfo.h>
 #include <KoTextDocument.h>
 

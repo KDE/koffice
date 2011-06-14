@@ -445,7 +445,7 @@ KoPAPageBase* KoPADocument::pageByNavigation(KoPAPageBase * currentPage, KoPageA
     return newPage;
 }
 
-void KoPADocument::addShape(KoShape * shape)
+void KoPADocument::addShape(KShape * shape)
 {
     if(!shape)
         return;
@@ -468,13 +468,13 @@ void KoPADocument::addShape(KoShape * shape)
     }
 }
 
-void KoPADocument::postAddShape(KoPAPageBase * page, KoShape * shape)
+void KoPADocument::postAddShape(KoPAPageBase * page, KShape * shape)
 {
     Q_UNUSED(page);
     Q_UNUSED(shape);
 }
 
-void KoPADocument::removeShape(KoShape *shape)
+void KoPADocument::removeShape(KShape *shape)
 {
     if(!shape)
         return;
@@ -493,7 +493,7 @@ void KoPADocument::removeShape(KoShape *shape)
     postRemoveShape(page, shape);
 }
 
-void KoPADocument::postRemoveShape(KoPAPageBase * page, KoShape * shape)
+void KoPADocument::postRemoveShape(KoPAPageBase * page, KShape * shape)
 {
     Q_UNUSED(page);
     Q_UNUSED(shape);
@@ -512,9 +512,9 @@ void KoPADocument::pageRemoved(KoPAPageBase * page, QUndoCommand * parent)
     Q_UNUSED(parent);
 }
 
-KoPAPageBase * KoPADocument::pageByShape(KoShape * shape) const
+KoPAPageBase * KoPADocument::pageByShape(KShape * shape) const
 {
-    KoShape * parent = shape;
+    KShape * parent = shape;
     KoPAPageBase * page = 0;
     while (!page && (parent = parent->parent()))
     {

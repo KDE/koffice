@@ -19,7 +19,7 @@
 
 #include "SCAttributeX.h"
 #include "../SCAnimationCache.h"
-#include "KoShape.h"
+#include "KShape.h"
 #include "../SCShapeAnimation.h"
 #include "kdebug.h"
 
@@ -30,7 +30,7 @@ SCAttributeX::SCAttributeX() : SCAnimationAttribute("x")
 
 void SCAttributeX::updateCache(SCAnimationCache *cache, SCShapeAnimation *shapeAnimation, qreal value)
 {
-    KoShape *shape = shapeAnimation->shape();
+    KShape *shape = shapeAnimation->shape();
     QTransform transform;
     value = value * cache->pageSize().width();
     value = value - shape->position().x();
@@ -41,7 +41,7 @@ void SCAttributeX::updateCache(SCAnimationCache *cache, SCShapeAnimation *shapeA
 
 void SCAttributeX::initCache(SCAnimationCache *animationCache, int step, SCShapeAnimation * shapeAnimation, qreal startValue, qreal endValue)
 {
-    KoShape* shape = shapeAnimation->shape();
+    KShape* shape = shapeAnimation->shape();
     qreal v1 = startValue * animationCache->pageSize().width() - shape->position().x();
     qreal v2 = endValue * animationCache->pageSize().width() - shape->position().x();
     animationCache->init(step, shape, shapeAnimation->textBlockData(), "transform", QTransform().translate(v1, 0));

@@ -55,7 +55,7 @@ public:
      * You shouldn't use this method in most cases but the convinience version with only a single
      * parameter
      */
-    void removeFrame(KWFrame *frame, KoShape *shape);
+    void removeFrame(KWFrame *frame, KShape *shape);
 
     /**
      * Remove a previously added Frame

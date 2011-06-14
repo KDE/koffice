@@ -29,7 +29,7 @@
 
 class KCanvasBase;
 class KoToolBase;
-class KoShape;
+class KShape;
 
 /**
  * A strategy for the KInteractionTool.
@@ -62,7 +62,7 @@ private:
     bool m_isMirrored;
     QList<QTransform> m_oldTransforms;
     QTransform m_initialSelectionMatrix;
-    QList<KoShape*> m_selectedShapes;
+    QList<KShape*> m_selectedShapes;
 };
 
 #endif

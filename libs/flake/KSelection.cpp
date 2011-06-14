@@ -39,7 +39,7 @@ QRectF KSelectionPrivate::sizeRect()
     QRectF bound;
 
     if (!selectedShapes.isEmpty()) {
-        QList<KoShape*>::const_iterator it = selectedShapes.constBegin();
+        QList<KShape*>::const_iterator it = selectedShapes.constBegin();
         for (; it != selectedShapes.constEnd(); ++it) {
             if (dynamic_cast<KoShapeGroup*>(*it))
                 continue;
@@ -81,7 +81,7 @@ void KSelectionPrivate::selectGroupChildren(KoShapeGroup *group)
     if (! group)
         return;
 
-    foreach(KoShape *shape, group->shapes()) {
+    foreach(KShape *shape, group->shapes()) {
         if (selectedShapes.contains(shape))
             continue;
         selectedShapes << shape;
@@ -97,7 +97,7 @@ void KSelectionPrivate::deselectGroupChildren(KoShapeGroup *group)
     if (! group)
         return;
 
-    foreach(KoShape *shape, group->shapes()) {
+    foreach(KShape *shape, group->shapes()) {
         if (selectedShapes.contains(shape))
             selectedShapes.removeAll(shape);
 
@@ -111,7 +111,7 @@ void KSelectionPrivate::deselectGroupChildren(KoShapeGroup *group)
 
 KSelection::KSelection(QObject *parent)
     : QObject(parent),
-    KoShape(*(new KSelectionPrivate(this)))
+    KShape(*(new KSelectionPrivate(this)))
 {
 }
 
@@ -119,7 +119,7 @@ KSelection::~KSelection()
 {
 }
 
-void KSelection::select(KoShape *shape, bool recursive)
+void KSelection::select(KShape *shape, bool recursive)
 {
     Q_D(KSelection);
     Q_ASSERT(shape != this);
@@ -166,7 +166,7 @@ void KSelection::select(KoShape *shape, bool recursive)
         // in document coordinates and then use that size and position
         int newSelectionCount = d->selectedShapes.count();
         for (int i = oldSelectionCount; i < newSelectionCount; ++i) {
-            KoShape *shape = d->selectedShapes[i];
+            KShape *shape = d->selectedShapes[i];
 
             // don't add the rect of the group rect, as it can be invalid
             if (dynamic_cast<KoShapeGroup*>(shape)) {
@@ -184,7 +184,7 @@ void KSelection::select(KoShape *shape, bool recursive)
     d->requestSelectionChangedEvent();
 }
 
-void KSelection::deselect(KoShape *shape, bool recursive)
+void KSelection::deselect(KShape *shape, bool recursive)
 {
     Q_D(KSelection);
     if (! d->selectedShapes.contains(shape))
@@ -228,7 +228,7 @@ int KSelection::count() const
 {
     Q_D(const KSelection);
     int count = 0;
-    foreach(KoShape *shape, d->selectedShapes)
+    foreach(KShape *shape, d->selectedShapes)
         if (dynamic_cast<KoShapeGroup*>(shape) == 0)
             ++count;
     return count;
@@ -261,13 +261,13 @@ QRectF KSelection::boundingRect() const
     return absoluteTransformation(0).mapRect(QRectF(QPointF(), size()));
 }
 
-const QList<KoShape*> KSelection::selectedShapes(KoFlake::SelectionType strip) const
+const QList<KShape*> KSelection::selectedShapes(KoFlake::SelectionType strip) const
 {
     Q_D(const KSelection);
-    QList<KoShape*> answer;
+    QList<KShape*> answer;
     // strip the child objects when there is also a parent included.
     bool doStripping = strip == KoFlake::StrippedSelection;
-    foreach(KoShape *shape, d->selectedShapes) {
+    foreach(KShape *shape, d->selectedShapes) {
         KoShapeContainer *container = shape->parent();
         if (strip != KoFlake::TopLevelSelection && dynamic_cast<KoShapeGroup*>(shape))
             // since a KoShapeGroup
@@ -288,13 +288,13 @@ const QList<KoShape*> KSelection::selectedShapes(KoFlake::SelectionType strip) c
     return answer;
 }
 
-bool KSelection::isSelected(const KoShape *shape) const
+bool KSelection::isSelected(const KShape *shape) const
 {
     Q_D(const KSelection);
     if (shape == this)
         return true;
 
-    foreach (KoShape *s, d->selectedShapes) {
+    foreach (KShape *s, d->selectedShapes) {
         if (s == shape)
             return true;
     }
@@ -302,9 +302,9 @@ bool KSelection::isSelected(const KoShape *shape) const
     return false;
 }
 
-KoShape *KSelection::firstSelectedShape(KoFlake::SelectionType strip) const
+KShape *KSelection::firstSelectedShape(KoFlake::SelectionType strip) const
 {
-    QList<KoShape*> set = selectedShapes(strip);
+    QList<KShape*> set = selectedShapes(strip);
     if (set.isEmpty())
         return 0;
     return *(set.begin());

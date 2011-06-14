@@ -22,7 +22,7 @@
 #include "kword_export.h"
 #include "../KWord.h"
 
-#include <KoShape.h>
+#include <KShape.h>
 
 class KWPageManager;
 
@@ -32,21 +32,21 @@ class KWPageManager;
  * reused from the original, as passed on the constructor.  The shapes appearance
  * will be the same as the original, just in a different place in the document.
  */
-class KWORD_TEST_EXPORT KWCopyShape : public KoShape
+class KWORD_TEST_EXPORT KWCopyShape : public KShape
 {
 public:
     /**
      * Constructor
      * @param original the original shape this one will look like.
      */
-    explicit KWCopyShape(KoShape *original, const KWPageManager *pageManager = 0);
+    explicit KWCopyShape(KShape *original, const KWPageManager *pageManager = 0);
     ~KWCopyShape();
 
-    /// reimplemented from KoShape
+    /// reimplemented from KShape
     void paint(QPainter &painter, const KoViewConverter &converter);
-    /// reimplemented from KoShape
+    /// reimplemented from KShape
     void paintDecorations(QPainter &painter, const KoViewConverter &converter, const KCanvasBase *canvas);
-    /// reimplemented from KoShape
+    /// reimplemented from KShape
     QPainterPath outline() const;
     /// reimplemented
     virtual void saveOdf(KoShapeSavingContext &context) const;
@@ -61,14 +61,14 @@ public:
         return m_placementPolicy;
     }
 
-    KoShape *original() {return m_original;}
+    KShape *original() {return m_original;}
     void resetOriginal();
 
 protected:
-    virtual void shapeChanged(ChangeType type, KoShape *shape);
+    virtual void shapeChanged(ChangeType type, KShape *shape);
 
 private:
-    KoShape *m_original;
+    KShape *m_original;
     const KWPageManager *m_pageManager;
     KWord::ShapeSeriesPlacement m_placementPolicy;
 };

@@ -173,7 +173,7 @@ KOdf::DocumentType SCDocument::documentType() const
 
 void SCDocument::addAnimation(SCShapeAnimation * animation)
 {
-    KoShape * shape = animation->shape();
+    KShape * shape = animation->shape();
 
     SCShapeAnimations &animations(animationsByPage(pageByShape(shape)));
 
@@ -191,7 +191,7 @@ void SCDocument::addAnimation(SCShapeAnimation * animation)
 
 void SCDocument::removeAnimation(SCShapeAnimation * animation, bool removeFromApplicationData)
 {
-    KoShape * shape = animation->shape();
+    KShape * shape = animation->shape();
 
     SCShapeAnimations &animations(animationsByPage(pageByShape(shape)));
 
@@ -206,7 +206,7 @@ void SCDocument::removeAnimation(SCShapeAnimation * animation, bool removeFromAp
     }
 }
 
-void SCDocument::postAddShape(KoPAPageBase * page, KoShape * shape)
+void SCDocument::postAddShape(KoPAPageBase * page, KShape * shape)
 {
     Q_UNUSED(page);
     SCShapeApplicationData * applicationData = dynamic_cast<SCShapeApplicationData*>(shape->applicationData());
@@ -219,7 +219,7 @@ void SCDocument::postAddShape(KoPAPageBase * page, KoShape * shape)
     }
 }
 
-void SCDocument::postRemoveShape(KoPAPageBase * page, KoShape * shape)
+void SCDocument::postRemoveShape(KoPAPageBase * page, KShape * shape)
 {
     Q_UNUSED(page);
     SCShapeApplicationData * applicationData = dynamic_cast<SCShapeApplicationData*>(shape->applicationData());

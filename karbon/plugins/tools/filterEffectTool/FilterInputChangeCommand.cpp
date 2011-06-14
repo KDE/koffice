@@ -19,15 +19,15 @@
 
 #include "FilterInputChangeCommand.h"
 #include "KFilterEffect.h"
-#include "KoShape.h"
+#include "KShape.h"
 
-FilterInputChangeCommand::FilterInputChangeCommand(const InputChangeData &data, KoShape *shape, QUndoCommand *parent)
+FilterInputChangeCommand::FilterInputChangeCommand(const InputChangeData &data, KShape *shape, QUndoCommand *parent)
         : QUndoCommand(parent), m_shape(shape)
 {
     m_data.append(data);
 }
 
-FilterInputChangeCommand::FilterInputChangeCommand(const QList<InputChangeData> &data, KoShape *shape, QUndoCommand *parent)
+FilterInputChangeCommand::FilterInputChangeCommand(const QList<InputChangeData> &data, KShape *shape, QUndoCommand *parent)
         : QUndoCommand(parent), m_shape(shape)
 {
     m_data = data;

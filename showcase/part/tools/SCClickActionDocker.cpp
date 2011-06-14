@@ -76,7 +76,7 @@ void SCClickActionDocker::selectionChanged()
     if(! m_canvas)
         return;
     KSelection *selection = m_canvas->shapeManager()->selection();
-    KoShape *shape = selection->firstSelectedShape();
+    KShape *shape = selection->firstSelectedShape();
 
     if (shape) {
         QSet<KEventAction *> eventActions = shape->eventActions();

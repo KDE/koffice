@@ -57,10 +57,10 @@ public:
     SCNotes *pageNotes();
 
     /// reimplemented
-    virtual void shapeAdded(KoShape * shape);
+    virtual void shapeAdded(KShape * shape);
 
     /// reimplemented
-    virtual void shapeRemoved(KoShape * shape);
+    virtual void shapeRemoved(KShape * shape);
 
     /**
      * Set the layout to use on the page
@@ -90,7 +90,7 @@ public:
     virtual bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context);
 
     /// reimplemented
-    virtual bool displayShape(KoShape *shape) const;
+    virtual bool displayShape(KShape *shape) const;
 
 protected:
     /// reimplemented

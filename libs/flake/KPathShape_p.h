@@ -31,7 +31,7 @@
 //
 
 
-#include "KoShape_p.h"
+#include "KShape_p.h"
 
 class KPathShapePrivate : public KoShapePrivate
 {

@@ -28,7 +28,7 @@
 #include <KoTextLocator.h>
 #include <KoTextDocumentLayout.h>
 #include <KoTextShapeData.h>
-#include <KoShape.h>
+#include <KShape.h>
 
 #include <KLocale>
 #include <KDebug>
@@ -75,7 +75,7 @@ JumpOverview::JumpOverview(QTextDocument *doc, QWidget *parent)
 
     KoTextDocumentLayout *lay = qobject_cast<KoTextDocumentLayout*>(doc->documentLayout());
     if (lay) {
-        foreach (KoShape *shape, lay->shapes()) {
+        foreach (KShape *shape, lay->shapes()) {
             KoTextShapeData *textData = qobject_cast<KoTextShapeData*>(shape->userData());
             if (textData) {
                 KoTextPage *page = textData->page();

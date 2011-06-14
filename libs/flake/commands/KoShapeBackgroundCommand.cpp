@@ -19,7 +19,7 @@
  */
 
 #include "KoShapeBackgroundCommand.h"
-#include "KoShape.h"
+#include "KShape.h"
 #include "KoShapeBackground.h"
 
 #include <klocale.h>
@@ -54,18 +54,18 @@ public:
         newFills.append(newFill);
     }
 
-    QList<KoShape*> shapes;    ///< the shapes to set background for
+    QList<KShape*> shapes;    ///< the shapes to set background for
     QList<KoShapeBackground*> oldFills;
     QList<KoShapeBackground*> newFills;
 };
 
-KoShapeBackgroundCommand::KoShapeBackgroundCommand(const QList<KoShape*> &shapes, KoShapeBackground * fill,
+KoShapeBackgroundCommand::KoShapeBackgroundCommand(const QList<KShape*> &shapes, KoShapeBackground * fill,
         QUndoCommand *parent)
         : QUndoCommand(parent)
         , d(new Private())
 {
     d->shapes = shapes;
-    foreach(KoShape *shape, d->shapes) {
+    foreach(KShape *shape, d->shapes) {
         d->addOldFill(shape->background());
         d->addNewFill(fill);
     }
@@ -73,7 +73,7 @@ KoShapeBackgroundCommand::KoShapeBackgroundCommand(const QList<KoShape*> &shapes
     setText(i18n("Set Background"));
 }
 
-KoShapeBackgroundCommand::KoShapeBackgroundCommand(KoShape * shape, KoShapeBackground * fill, QUndoCommand *parent)
+KoShapeBackgroundCommand::KoShapeBackgroundCommand(KShape * shape, KoShapeBackground * fill, QUndoCommand *parent)
         : QUndoCommand(parent)
         , d(new Private())
 {
@@ -84,12 +84,12 @@ KoShapeBackgroundCommand::KoShapeBackgroundCommand(KoShape * shape, KoShapeBackg
     setText(i18n("Set Background"));
 }
 
-KoShapeBackgroundCommand::KoShapeBackgroundCommand(const QList<KoShape*> &shapes, const QList<KoShapeBackground*> &fills, QUndoCommand *parent)
+KoShapeBackgroundCommand::KoShapeBackgroundCommand(const QList<KShape*> &shapes, const QList<KoShapeBackground*> &fills, QUndoCommand *parent)
         : QUndoCommand(parent)
         , d(new Private())
 {
     d->shapes = shapes;
-    foreach(KoShape *shape, d->shapes) {
+    foreach(KShape *shape, d->shapes) {
         d->addOldFill(shape->background());
     }
     foreach (KoShapeBackground * fill, fills) {
@@ -103,7 +103,7 @@ void KoShapeBackgroundCommand::redo()
 {
     QUndoCommand::redo();
     QList<KoShapeBackground*>::iterator brushIt = d->newFills.begin();
-    foreach(KoShape *shape, d->shapes) {
+    foreach(KShape *shape, d->shapes) {
         shape->setBackground(*brushIt);
         shape->update();
         brushIt++;
@@ -114,7 +114,7 @@ void KoShapeBackgroundCommand::undo()
 {
     QUndoCommand::undo();
     QList<KoShapeBackground*>::iterator brushIt = d->oldFills.begin();
-    foreach(KoShape *shape, d->shapes) {
+    foreach(KShape *shape, d->shapes) {
         shape->setBackground(*brushIt);
         shape->update();
         brushIt++;

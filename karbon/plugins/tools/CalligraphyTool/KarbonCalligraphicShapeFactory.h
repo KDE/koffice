@@ -22,7 +22,7 @@
 
 #include "KoShapeFactoryBase.h"
 
-class KoShape;
+class KShape;
 
 /// Factory for ellipse shapes
 class KarbonCalligraphicShapeFactory : public KoShapeFactoryBase
@@ -31,7 +31,7 @@ public:
     /// constructor
     explicit KarbonCalligraphicShapeFactory(QObject *parent);
     virtual ~KarbonCalligraphicShapeFactory();
-    virtual KoShape *createDefaultShape(KResourceManager *documentResources = 0) const;
+    virtual KShape *createDefaultShape(KResourceManager *documentResources = 0) const;
     virtual bool supports(const KXmlElement & e, KoShapeLoadingContext &context) const;
 };
 

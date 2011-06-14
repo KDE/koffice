@@ -31,7 +31,7 @@ public:
 
 protected:
     virtual QRectF preparePage(int pageNumber);
-    virtual QList<KoShape*> shapesOnPage(int pageNumber);
+    virtual QList<KShape*> shapesOnPage(int pageNumber);
     virtual QList<QWidget*> createOptionWidgets() const;
 
 private:

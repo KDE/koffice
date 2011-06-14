@@ -164,10 +164,10 @@ void SvgExport::saveLayer(KoShapeLayer * layer)
     printIndentation(m_body, m_indent++);
     *m_body << "<g" << getID(layer) << ">" << endl;
 
-    QList<KoShape*> sortedShapes = layer->shapes();
-    qSort(sortedShapes.begin(), sortedShapes.end(), KoShape::compareShapeZIndex);
+    QList<KShape*> sortedShapes = layer->shapes();
+    qSort(sortedShapes.begin(), sortedShapes.end(), KShape::compareShapeZIndex);
 
-    foreach(KoShape * shape, sortedShapes) {
+    foreach(KShape * shape, sortedShapes) {
         KoShapeContainer * container = dynamic_cast<KoShapeContainer*>(shape);
         if (container)
             saveGroup(container);
@@ -187,10 +187,10 @@ void SvgExport::saveGroup(KoShapeContainer * group)
     getStyle(group, m_body);
     *m_body << ">" << endl;
 
-    QList<KoShape*> sortedShapes = group->shapes();
-    qSort(sortedShapes.begin(), sortedShapes.end(), KoShape::compareShapeZIndex);
+    QList<KShape*> sortedShapes = group->shapes();
+    qSort(sortedShapes.begin(), sortedShapes.end(), KShape::compareShapeZIndex);
 
-    foreach(KoShape * shape, sortedShapes) {
+    foreach(KShape * shape, sortedShapes) {
         KoShapeContainer * container = dynamic_cast<KoShapeContainer*>(shape);
         if (container)
             saveGroup(container);
@@ -202,7 +202,7 @@ void SvgExport::saveGroup(KoShapeContainer * group)
     *m_body << "</g>" << endl;
 }
 
-void SvgExport::saveShape(KoShape * shape)
+void SvgExport::saveShape(KShape * shape)
 {
     KPathShape * path = dynamic_cast<KPathShape*>(shape);
     if (path) {
@@ -289,7 +289,7 @@ static QString createUID()
     return "defitem" + QString().setNum(nr++);
 }
 
-QString SvgExport::createID(const KoShape * obj)
+QString SvgExport::createID(const KShape * obj)
 {
     QString id;
     if (! m_shapeIds.contains(obj)) {
@@ -301,7 +301,7 @@ QString SvgExport::createID(const KoShape * obj)
     return id;
 }
 
-QString SvgExport::getID(const KoShape *obj)
+QString SvgExport::getID(const KShape *obj)
 {
     return QString(" id=\"%1\"").arg(createID(obj));
 }
@@ -427,7 +427,7 @@ void SvgExport::getGradient(const QGradient * gradient, const QTransform &gradie
 }
 
 // better than nothing
-void SvgExport::getPattern(KPatternBackground * pattern, KoShape * shape)
+void SvgExport::getPattern(KPatternBackground * pattern, KShape * shape)
 {
     QString uid = createUID();
 
@@ -516,7 +516,7 @@ void SvgExport::getPattern(KPatternBackground * pattern, KoShape * shape)
     *m_body << "url(#" << uid << ")";
 }
 
-void SvgExport::getStyle(KoShape * shape, QTextStream * stream)
+void SvgExport::getStyle(KShape * shape, QTextStream * stream)
 {
     getFill(shape, stream);
     getStroke(shape, stream);
@@ -527,7 +527,7 @@ void SvgExport::getStyle(KoShape * shape, QTextStream * stream)
         *stream << " opacity=\"" << 1.0 - shape->transparency() << "\"";
 }
 
-void SvgExport::getFill(KoShape * shape, QTextStream *stream)
+void SvgExport::getFill(KShape * shape, QTextStream *stream)
 {
     if (! shape->background()) {
         *stream << " fill=\"none\"";
@@ -561,7 +561,7 @@ void SvgExport::getFill(KoShape * shape, QTextStream *stream)
     }
 }
 
-void SvgExport::getStroke(KoShape *shape, QTextStream *stream)
+void SvgExport::getStroke(KShape *shape, QTextStream *stream)
 {
     const KLineBorder * line = dynamic_cast<const KLineBorder*>(shape->border());
     if (! line)
@@ -614,7 +614,7 @@ void SvgExport::getStroke(KoShape *shape, QTextStream *stream)
     }
 }
 
-void SvgExport::getEffects(KoShape *shape, QTextStream *stream)
+void SvgExport::getEffects(KShape *shape, QTextStream *stream)
 {
     KFilterEffectStack * filterStack = shape->filterEffectStack();
     if (!filterStack)
@@ -710,7 +710,7 @@ void SvgExport::saveText(ArtisticTextShape * text)
     *m_body << "</text>" << endl;
 }
 
-void SvgExport::saveImage(KoShape *picture)
+void SvgExport::saveImage(KShape *picture)
 {
     KImageData *imageData = qobject_cast<KImageData*>(picture->userData());
     if (! imageData) {

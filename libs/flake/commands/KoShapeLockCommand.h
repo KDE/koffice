@@ -26,7 +26,7 @@
 
 #include "flake_export.h"
 
-class KoShape;
+class KShape;
 class KoShapeLockCommandPrivate;
 
 /// The undo / redo command to lock a set of shapes position and size
@@ -40,7 +40,7 @@ public:
      * @param newLock list of new lock states the same length as @p shapes
      * @param parent the parent command used for macro commands
      */
-    KoShapeLockCommand(const QList<KoShape*> &shapes, const QList<bool> &oldLock,
+    KoShapeLockCommand(const QList<KShape*> &shapes, const QList<bool> &oldLock,
             const QList<bool> &newLock, QUndoCommand *parent = 0);
     ~KoShapeLockCommand();
 

@@ -29,7 +29,7 @@
 #include <KoTableRowStyle.h>
 #include <KoTableColumnAndRowStyleManager.h>
 #include <KoTextDocumentLayout.h>
-#include <KoShape.h>
+#include <KShape.h>
 
 #include <KChangeTracker.h>
 #include <KChangeTrackerElement.h>

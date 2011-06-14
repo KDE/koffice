@@ -631,7 +631,7 @@ KSectionStyle *KoTextSharedLoadingData::sectionStyle(const QString &name, bool s
     return stylesDotXml ? d->sectionStylesDotXmlStyles.value(name) : d->sectionContentDotXmlStyles.value(name);
 }
 
-void KoTextSharedLoadingData::shapeInserted(KoShape *shape, const KXmlElement &element, KoShapeLoadingContext &/*context*/)
+void KoTextSharedLoadingData::shapeInserted(KShape *shape, const KXmlElement &element, KoShapeLoadingContext &/*context*/)
 {
     Q_UNUSED(shape);
     Q_UNUSED(element);

@@ -28,7 +28,7 @@
 
 #include <QAbstractScrollArea>
 
-class KoShape;
+class KShape;
 class KCanvasBase;
 class KoView;
 
@@ -159,7 +159,7 @@ public:
      *
      * @param shape the shape to make visible
      */
-    void ensureVisible(KoShape *shape);
+    void ensureVisible(KShape *shape);
 
     /**
      * will cause the toolOptionWidgetsChanged to be emitted and all

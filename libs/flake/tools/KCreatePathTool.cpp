@@ -58,7 +58,7 @@ void KCreatePathTool::paint(QPainter &painter, const KoViewConverter &converter)
 
         painter.setTransform(d->shape->absoluteTransformation(&converter) * painter.transform());
 
-        KoShape::applyConversion(painter, converter);
+        KShape::applyConversion(painter, converter);
 
         painter.setPen(Qt::blue);
         painter.setBrush(Qt::white);   //TODO make configurable
@@ -88,14 +88,14 @@ void KCreatePathTool::paint(QPainter &painter, const KoViewConverter &converter)
     if (d->hoveredPoint) {
         painter.save();
         painter.setTransform(d->hoveredPoint->parent()->absoluteTransformation(&converter), true);
-        KoShape::applyConversion(painter, converter);
+        KShape::applyConversion(painter, converter);
         painter.setPen(Qt::blue);
         painter.setBrush(Qt::white);   //TODO make configurable
         d->hoveredPoint->paint(painter, d->handleRadius, KPathPoint::Node);
         painter.restore();
     }
     painter.save();
-    KoShape::applyConversion(painter, converter);
+    KShape::applyConversion(painter, converter);
     canvas()->snapGuide()->paint(painter, converter);
     painter.restore();
 }
@@ -285,7 +285,7 @@ void KCreatePathTool::keyPressEvent(QKeyEvent *event)
         event->ignore();
 }
 
-void KCreatePathTool::activate(ToolActivation, const QSet<KoShape*> &)
+void KCreatePathTool::activate(ToolActivation, const QSet<KShape*> &)
 {
     Q_D(KCreatePathTool);
     setCursor(Qt::ArrowCursor);

@@ -29,7 +29,7 @@
 class TextTool;
 class QTextCursor;
 class KInlineObject;
-class KoShape;
+class KShape;
 
 class DeleteCommand : public TextCommandBase
 {

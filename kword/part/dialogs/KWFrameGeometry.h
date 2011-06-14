@@ -23,10 +23,10 @@
 #include <dialogs/KWShapeConfigFactory.h>
 
 class KWFrame;
-class KoShape;
+class KShape;
 class QUndoCommand;
 
-/// A (very simple) widget to show some KoShape sizing / positioning information.
+/// A (very simple) widget to show some KShape sizing / positioning information.
 class KWFrameGeometry : public QWidget
 {
     Q_OBJECT
@@ -35,7 +35,7 @@ public:
     ~KWFrameGeometry();
 
     void open(KWFrame* frame);
-    void open(KoShape *shape);
+    void open(KShape *shape);
     void save();
     void cancel();
 

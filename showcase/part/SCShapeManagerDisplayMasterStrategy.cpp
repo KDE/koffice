@@ -34,7 +34,7 @@ SCShapeManagerDisplayMasterStrategy::~SCShapeManagerDisplayMasterStrategy()
     delete m_strategy;
 }
 
-void SCShapeManagerDisplayMasterStrategy::paint(KoShape * shape, QPainter &painter, const KoViewConverter &converter, bool forPrint)
+void SCShapeManagerDisplayMasterStrategy::paint(KShape * shape, QPainter &painter, const KoViewConverter &converter, bool forPrint)
 {
     if (! dynamic_cast<SCPlaceholderShape *>(shape)) {
         if (m_strategy->page()->displayShape(shape)) {

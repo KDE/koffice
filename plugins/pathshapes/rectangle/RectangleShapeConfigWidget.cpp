@@ -41,7 +41,7 @@ void RectangleShapeConfigWidget::setUnit(const KUnit &unit)
     widget.cornerRadiusY->setUnit(unit);
 }
 
-void RectangleShapeConfigWidget::open(KoShape *shape)
+void RectangleShapeConfigWidget::open(KShape *shape)
 {
     if (m_blocking)
         return;

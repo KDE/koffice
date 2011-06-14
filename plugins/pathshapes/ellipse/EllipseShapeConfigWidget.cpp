@@ -47,7 +47,7 @@ EllipseShapeConfigWidget::EllipseShapeConfigWidget(KCanvasBase *canvas)
     connect(widget.closeEllipse, SIGNAL(clicked(bool)), this, SLOT(closeEllipse()));
 }
 
-void EllipseShapeConfigWidget::open(KoShape *shape)
+void EllipseShapeConfigWidget::open(KShape *shape)
 {
     if (m_blocking)
         return;

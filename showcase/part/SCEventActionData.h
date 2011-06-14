@@ -23,14 +23,14 @@
 #include "showcase_export.h"
 
 class SCSoundCollection;
-class KoShape;
+class KShape;
 class KEventAction;
 class SCSoundCollection;
 
 class SHOWCASE_EXPORT SCEventActionData
 {
 public:
-    SCEventActionData(KoShape * shape, KEventAction * eventAction , SCSoundCollection * soundCollection);
+    SCEventActionData(KShape * shape, KEventAction * eventAction , SCSoundCollection * soundCollection);
     ~SCEventActionData();
 
     SCSoundCollection * soundCollection() const;
@@ -40,7 +40,7 @@ public:
      *
      * @return the shape or 0 if there is none.
      */
-    KoShape *shape() const;
+    KShape *shape() const;
 
     /**
      * Get the event action

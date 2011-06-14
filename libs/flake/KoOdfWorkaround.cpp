@@ -22,7 +22,7 @@
 #include "KoOdfWorkaround.h"
 
 #include "KoShapeLoadingContext.h"
-#include "KoShape.h"
+#include "KShape.h"
 #include <KPathShape.h>
 #include <KOdfLoadingContext.h>
 #include <KXmlReader.h>
@@ -120,7 +120,7 @@ QColor KoOdfWorkaround::fixMissingFillColor(const KXmlElement &element, KoShapeL
     return color;
 }
 
-bool KoOdfWorkaround::fixMissingStroke(QPen &pen, const KXmlElement &element, KoShapeLoadingContext &context, const KoShape *shape)
+bool KoOdfWorkaround::fixMissingStroke(QPen &pen, const KXmlElement &element, KoShapeLoadingContext &context, const KShape *shape)
 {
     bool fixed = false;
 
@@ -201,14 +201,14 @@ bool KoOdfWorkaround::fixPresentationPlaceholder()
     return s_workaroundPresentationPlaceholderBug;
 }
 
-void KoOdfWorkaround::fixPresentationPlaceholder(KoShape *shape)
+void KoOdfWorkaround::fixPresentationPlaceholder(KShape *shape)
 {
     if (s_workaroundPresentationPlaceholderBug && !shape->hasAdditionalAttribute("presentation:placeholder")) {
         shape->setAdditionalAttribute("presentation:placeholder", "true");
     }
 }
 
-KColorBackground *KoOdfWorkaround::fixBackgroundColor(const KoShape *shape, KoShapeLoadingContext &context)
+KColorBackground *KoOdfWorkaround::fixBackgroundColor(const KShape *shape, KoShapeLoadingContext &context)
 {
     KColorBackground *colorBackground = 0;
     KOdfLoadingContext &odfContext = context.odfLoadingContext();

@@ -30,7 +30,7 @@
 
 class QTextInlineObject;
 class QTextDocument;
-class KoShape;
+class KShape;
 class KoShapeLoadingContext;
 class KProperties;
 class QWidget;

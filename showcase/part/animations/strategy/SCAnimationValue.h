@@ -22,7 +22,7 @@
 
 #include <QtGlobal>
 
-class KoShape;
+class KShape;
 class KoTextBlockData;
 class SCAnimationCache;
 class SCShapeAnimation;
@@ -47,7 +47,7 @@ public:
 protected:
     SmilCalcMode m_calcMode;
     SCAnimationCache * m_cache;
-    KoShape * m_shape;
+    KShape * m_shape;
     KoTextBlockData * m_textBlockData;
 };
 

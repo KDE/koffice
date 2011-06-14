@@ -192,7 +192,7 @@ void DeleteCommand::deleteTextAnchor(KInlineObject *object)
     if (object) {
         KoTextAnchor *anchor = dynamic_cast<KoTextAnchor *>(object);
         if (anchor) {
-                KoShape *shape = anchor->shape();
+                KShape *shape = anchor->shape();
                 QUndoCommand *shapeDeleteCommand = m_tool->canvas()->shapeController()->removeShape(shape);
                 shapeDeleteCommand->redo();
                 m_shapeDeleteCommands.push_back(shapeDeleteCommand);

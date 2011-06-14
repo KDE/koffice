@@ -74,9 +74,9 @@ void KoPAPageBase::saveOdfPageContent(KoPASavingContext &paContext) const
 
 void KoPAPageBase::saveOdfLayers(KoPASavingContext &paContext) const
 {
-    QList<KoShape*> shapes(this->shapes());
-    qSort(shapes.begin(), shapes.end(), KoShape::compareShapeZIndex);
-    foreach(KoShape* shape, shapes) {
+    QList<KShape*> shapes(this->shapes());
+    qSort(shapes.begin(), shapes.end(), KShape::compareShapeZIndex);
+    foreach(KShape* shape, shapes) {
         KoShapeLayer *layer = dynamic_cast<KoShapeLayer*>(shape);
         if (layer) {
             paContext.addLayerForSaving(layer);
@@ -92,12 +92,12 @@ void KoPAPageBase::saveOdfLayers(KoPASavingContext &paContext) const
 
 void KoPAPageBase::saveOdfShapes(KoShapeSavingContext &context) const
 {
-    QList<KoShape*> shapes(this->shapes());
-    QList<KoShape*> tlshapes(shapes);
+    QList<KShape*> shapes(this->shapes());
+    QList<KShape*> tlshapes(shapes);
 
-    qSort(tlshapes.begin(), tlshapes.end(), KoShape::compareShapeZIndex);
+    qSort(tlshapes.begin(), tlshapes.end(), KShape::compareShapeZIndex);
 
-    foreach(KoShape *shape, tlshapes) {
+    foreach(KShape *shape, tlshapes) {
         shape->saveOdf(context);
     }
 }
@@ -176,7 +176,7 @@ bool KoPAPageBase::loadOdf(const KXmlElement &element, KoShapeLoadingContext &lo
         forEachElement(child, element) {
             kDebug(30010) <<"loading shape" << child.localName();
 
-            KoShape *shape = KoShapeRegistry::instance()->createShapeFromOdf(child, loadingContext);
+            KShape *shape = KoShapeRegistry::instance()->createShapeFromOdf(child, loadingContext);
             if (shape) {
                 if(!shape->parent()) {
                     layer->addShape(shape);
@@ -222,7 +222,7 @@ QRectF KoPAPageBase::boundingRect() const
 QRectF KoPAPageBase::contentRect() const
 {
     QRectF bb;
-    foreach (KoShape* layer, shapes()) {
+    foreach (KShape* layer, shapes()) {
         if (bb.isNull()) {
             bb = layer->boundingRect();
         }
@@ -234,12 +234,12 @@ QRectF KoPAPageBase::contentRect() const
     return bb;
 }
 
-void KoPAPageBase::shapeAdded(KoShape * shape)
+void KoPAPageBase::shapeAdded(KShape * shape)
 {
     Q_UNUSED(shape);
 }
 
-void KoPAPageBase::shapeRemoved(KoShape * shape)
+void KoPAPageBase::shapeRemoved(KShape * shape)
 {
     Q_UNUSED(shape);
 }

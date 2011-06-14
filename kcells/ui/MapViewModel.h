@@ -23,7 +23,7 @@
 #include "KCMapModel.h"
 
 class KCanvasBase;
-class KoShape;
+class KShape;
 
 class KXMLGUIClient;
 
@@ -74,12 +74,12 @@ private Q_SLOTS:
     /**
      * Adds the \p shape, if \p sheet is active.
      */
-    void addShape(KCSheet *sheet, KoShape *shape);
+    void addShape(KCSheet *sheet, KShape *shape);
 
     /**
      * Removes the \p shape, if \p sheet is active.
      */
-    void removeShape(KCSheet *sheet, KoShape *shape);
+    void removeShape(KCSheet *sheet, KShape *shape);
 
     /**
      * Activates the associated sheet of the \p action.

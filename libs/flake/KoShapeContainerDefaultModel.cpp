@@ -29,13 +29,13 @@ public:
     class Relation
     {
     public:
-        explicit Relation(KoShape *child)
+        explicit Relation(KShape *child)
         : inside(false),
         inheritsTransform(false),
         m_child(child)
         {}
 
-        KoShape* child()
+        KShape* child()
         {
             return m_child;
         }
@@ -44,7 +44,7 @@ public:
         uint inheritsTransform : 1;
 
     private:
-        KoShape *m_child;
+        KShape *m_child;
     };
 
     ~Private()
@@ -52,7 +52,7 @@ public:
         qDeleteAll(relations);
     }
 
-    Relation* findRelation(const KoShape *child) const
+    Relation* findRelation(const KShape *child) const
     {
         foreach (Relation *relation, relations) {
             if (relation->child() == child) {
@@ -63,7 +63,7 @@ public:
     }
 
 
-    // TODO use a QMap<KoShape*, bool> instead this should speed things up a bit
+    // TODO use a QMap<KShape*, bool> instead this should speed things up a bit
     QList<Relation *> relations;
 };
 
@@ -77,13 +77,13 @@ KoShapeContainerDefaultModel::~KoShapeContainerDefaultModel()
     delete d;
 }
 
-void KoShapeContainerDefaultModel::add(KoShape *child)
+void KoShapeContainerDefaultModel::add(KShape *child)
 {
     Private::Relation *r = new Private::Relation(child);
     d->relations.append(r);
 }
 
-void KoShapeContainerDefaultModel::proposeMove(KoShape *shape, QPointF &move)
+void KoShapeContainerDefaultModel::proposeMove(KShape *shape, QPointF &move)
 {
     KoShapeContainer *parent = shape->parent();
     bool allowedToMove = true;
@@ -98,7 +98,7 @@ void KoShapeContainerDefaultModel::proposeMove(KoShape *shape, QPointF &move)
 }
 
 
-void KoShapeContainerDefaultModel::setClipped(const KoShape *child, bool clipping)
+void KoShapeContainerDefaultModel::setClipped(const KShape *child, bool clipping)
 {
     Private::Relation *relation = d->findRelation(child);
     if (relation == 0)
@@ -111,13 +111,13 @@ void KoShapeContainerDefaultModel::setClipped(const KoShape *child, bool clippin
     relation->child()->update(); // mark new area as in need of repaint
 }
 
-bool KoShapeContainerDefaultModel::isClipped(const KoShape *child) const
+bool KoShapeContainerDefaultModel::isClipped(const KShape *child) const
 {
     Private::Relation *relation = d->findRelation(child);
     return relation ? relation->inside: false;
 }
 
-void KoShapeContainerDefaultModel::remove(KoShape *child)
+void KoShapeContainerDefaultModel::remove(KShape *child)
 {
     Private::Relation *relation = d->findRelation(child);
     if (relation == 0)
@@ -130,25 +130,25 @@ int KoShapeContainerDefaultModel::count() const
     return d->relations.count();
 }
 
-QList<KoShape*> KoShapeContainerDefaultModel::shapes() const
+QList<KShape*> KoShapeContainerDefaultModel::shapes() const
 {
-    QList<KoShape*> answer;
+    QList<KShape*> answer;
     foreach(Private::Relation *relation, d->relations) {
         answer.append(relation->child());
     }
     return answer;
 }
 
-bool KoShapeContainerDefaultModel::isChildLocked(const KoShape *child) const
+bool KoShapeContainerDefaultModel::isChildLocked(const KShape *child) const
 {
     return child->isGeometryProtected();
 }
 
-void KoShapeContainerDefaultModel::containerChanged(KoShapeContainer *, KoShape::ChangeType)
+void KoShapeContainerDefaultModel::containerChanged(KoShapeContainer *, KShape::ChangeType)
 {
 }
 
-void KoShapeContainerDefaultModel::setInheritsTransform(const KoShape *shape, bool inherit)
+void KoShapeContainerDefaultModel::setInheritsTransform(const KShape *shape, bool inherit)
 {
     Private::Relation *relation = d->findRelation(shape);
     if (relation == 0)
@@ -161,7 +161,7 @@ void KoShapeContainerDefaultModel::setInheritsTransform(const KoShape *shape, bo
     relation->child()->update(); // mark new area as in need of repaint
 }
 
-bool KoShapeContainerDefaultModel::inheritsTransform(const KoShape *shape) const
+bool KoShapeContainerDefaultModel::inheritsTransform(const KShape *shape) const
 {
     Private::Relation *relation = d->findRelation(shape);
     return relation ? relation->inheritsTransform: false;

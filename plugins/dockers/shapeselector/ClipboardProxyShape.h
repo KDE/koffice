@@ -19,7 +19,7 @@
 #ifndef CLIPBOARDPROXYSHAPE_H
 #define CLIPBOARDPROXYSHAPE_H
 
-#include <KoShape.h>
+#include <KShape.h>
 
 #include <QByteArray>
 
@@ -40,7 +40,7 @@ class KoShapeSavingContext;
  * indicates, this shape will have a child that shows the actual content (like a picture,
  * or some text).
  */
-class ClipboardProxyShape : public KoShape
+class ClipboardProxyShape : public KShape
 {
 public:
     /*
@@ -48,17 +48,17 @@ public:
      * scaling the view on the actual item if needed.
      * Note that we take ownership of the clipboardItem.
      */
-    ClipboardProxyShape(KoShape*clipboardItem, const QByteArray &clipboardData);
+    ClipboardProxyShape(KShape*clipboardItem, const QByteArray &clipboardData);
     virtual ~ClipboardProxyShape();
 
-    /// reimplemented from KoShape
+    /// reimplemented from KShape
     virtual void paint(QPainter &painter, const KoViewConverter &converter);
 
     /// return the clipboard data that this shape displays
     QByteArray clipboardData() const { return m_clipboardData; }
 
 private:
-    KoShape *m_child;
+    KShape *m_child;
     QByteArray m_clipboardData;
 };
 

@@ -69,7 +69,7 @@ public:
     /**
      * @return the anchored shape that we will reposition.
      */
-    KoShape *anchoredShape() const;
+    KShape *anchoredShape() const;
 
     /**
      * Return the text anchor this strategy works for.

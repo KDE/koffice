@@ -41,7 +41,7 @@ public:
 
 protected:
     virtual QRectF preparePage(int pageNumber);
-    virtual QList<KoShape*> shapesOnPage(int pageNumber);
+    virtual QList<KShape*> shapesOnPage(int pageNumber);
     virtual void printingDone();
     virtual int documentFirstPage() const;
     virtual int documentLastPage() const;

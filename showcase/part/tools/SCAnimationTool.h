@@ -43,7 +43,7 @@ public:
     virtual void paint(QPainter &painter, const KoViewConverter &converter);
 
 public slots:
-    virtual void activate(ToolActivation toolActivation, const QSet<KoShape*> &shapes);
+    virtual void activate(ToolActivation toolActivation, const QSet<KShape*> &shapes);
 
 public: // Events
 

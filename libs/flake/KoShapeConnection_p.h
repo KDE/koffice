@@ -57,8 +57,8 @@ private:
 class KoShapeConnectionPrivate
 {
 public:
-    KoShapeConnectionPrivate(KoShapeConnection *qq, KoShape *from, int gp1, KoShape *to, int gp2);
-    KoShapeConnectionPrivate(KoShapeConnection *qq, KoShape *from, int gp1, const QPointF &ep);
+    KoShapeConnectionPrivate(KoShapeConnection *qq, KShape *from, int gp1, KShape *to, int gp2);
+    KoShapeConnectionPrivate(KoShapeConnection *qq, KShape *from, int gp1, const QPointF &ep);
 
     /// return the start point or the point from the shape connector if that exists
     QPointF resolveStartPoint() const;
@@ -75,8 +75,8 @@ public:
     QLineF calculateShapeFalloutPrivate(const QPointF &begin, bool start) const;
 
     KoShapeConnection *q;
-    KoShape *shape1;
-    KoShape *shape2;
+    KShape *shape1;
+    KShape *shape2;
     int gluePointIndex1;
     int gluePointIndex2;
     QPointF startPoint; // used if there is no shape1

@@ -18,7 +18,7 @@
  */
 
 #include "KoInsets.h"
-#include "KoShape.h"
+#include "KShape.h"
 
 #include <KXmlReader.h>
 #include <KUnit.h>
@@ -38,7 +38,7 @@ QDebug operator<<(QDebug debug, const KoInsets &insets)
 }
 #endif
 
-void KoInsets::saveTo(KoShape *shape, const QString &prefix) const
+void KoInsets::saveTo(KShape *shape, const QString &prefix) const
 {
     if (left == right && top == bottom && left == top) {
         if (qAbs(top) > 1E-4)

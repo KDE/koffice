@@ -22,7 +22,7 @@
 
 #include <KoShapeFactoryBase.h>
 
-class KoShape;
+class KShape;
 
 class ArtisticTextShapeFactory : public KoShapeFactoryBase
 {
@@ -32,7 +32,7 @@ public:
     explicit ArtisticTextShapeFactory(QObject *parent);
     ~ArtisticTextShapeFactory() {}
 
-    virtual KoShape *createDefaultShape(KResourceManager *documentResources = 0) const;
+    virtual KShape *createDefaultShape(KResourceManager *documentResources = 0) const;
     // reimplemented from KoShapeFactoryBase
     virtual bool supports(const KXmlElement & e, KoShapeLoadingContext &context) const;
 };

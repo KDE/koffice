@@ -23,7 +23,7 @@
 #include "flake_export.h"
 #include <QUndoCommand>
 
-class KoShape;
+class KShape;
 class KoShapeControllerBase;
 
 /// The undo / redo command for creating shapes
@@ -36,7 +36,7 @@ public:
      * @param shape the shape thats just been created.
      * @param parent the parent command used for macro commands
      */
-    KoShapeCreateCommand(KoShapeControllerBase *controller, KoShape *shape,
+    KoShapeCreateCommand(KoShapeControllerBase *controller, KShape *shape,
                          QUndoCommand *parent = 0);
     virtual ~KoShapeCreateCommand();
     /// redo the command

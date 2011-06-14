@@ -106,7 +106,7 @@ void KWFrameLayout::createNewFramesForPage(int pageNumber)
         }
         KWFrame *background = frameOn(m_backgroundFrameSet, pageNumber);
         if (background == 0) {
-            KoShape *shape = new KWPageBackground();
+            KShape *shape = new KWPageBackground();
             shape->setPosition(QPointF(0, page.offsetInDocument()));
             background = new KWFrame(shape, m_backgroundFrameSet);
             background->setTextRunAround(KWord::RunThrough);
@@ -170,7 +170,7 @@ void KWFrameLayout::createNewFramesForPage(int pageNumber)
                     frame = new KWTextFrame(m_parent->createTextShape(page), fs);
                 else
                     frame = m_parent->createCopyFrame(fs, page);
-                KoShape *shape = frame->shape();
+                KShape *shape = frame->shape();
                 shape->setPosition(QPointF(page.width() / 2 + 1, shape->position().y()));
             }
             KWFrameLayout *m_parent;
@@ -408,7 +408,7 @@ void KWFrameLayout::layoutFramesOnPage(int pageNumber)
         if (header)
             header->shape()->setZIndex(--minZIndex);
         if (pageBackground) {
-            KoShape *bs = pageBackground->shape();
+            KShape *bs = pageBackground->shape();
             bs->setZIndex(--minZIndex);
             bs->setSize(pageRect.size());
             bs->setPosition(pageRect.topLeft());
@@ -466,7 +466,7 @@ void KWFrameLayout::layoutFramesOnPage(int pageNumber)
 
         bool first = true;
         for (int i = columns - 1; i >= 0; i--) {
-            KoShape *shape = main[i]->shape();
+            KShape *shape = main[i]->shape();
             shape->update();
             shape->setPosition(points[i]);
             shape->setSize(QSizeF(columnWidth -
@@ -622,7 +622,7 @@ void KWFrameLayout::setup()
     m_setup = true;
 }
 
-KoShape *KWFrameLayout::createTextShape(const KWPage &page)
+KShape *KWFrameLayout::createTextShape(const KWPage &page)
 {
     Q_ASSERT(page.isValid());
     KoShapeFactoryBase *factory = KoShapeRegistry::instance()->value(TextShape_SHAPEID);
@@ -630,7 +630,7 @@ KoShape *KWFrameLayout::createTextShape(const KWPage &page)
     KResourceManager *rm = 0;
     if (m_document)
         rm = m_document->resourceManager();
-    KoShape *shape = factory->createDefaultShape(rm);
+    KShape *shape = factory->createDefaultShape(rm);
     shape->setPosition(QPointF(0, page.offsetInDocument()));
     return shape;
 }
@@ -778,14 +778,14 @@ KWFrame *KWFrameLayout::createCopyFrame(KWFrameSet *fs, const KWPage &page)
     if (fs->frameCount() == 0) { // special case for the headers. Just return a new textframe.
         KWTextFrameSet *tfs = dynamic_cast<KWTextFrameSet*>(fs);
         Q_ASSERT(tfs); // an empty, non-text frameset asking for a copy? Thats a bug.
-        KoShape *shape = createTextShape(page);
+        KShape *shape = createTextShape(page);
         shape->setSize(QSize(20, 10));
         KWTextFrame *frame = new KWTextFrame(shape, tfs);
 
         return frame;
     }
 
-    KoShape *orig = 0;
+    KShape *orig = 0;
     //Lets find the last non-copy frame in the frameset
     foreach (KWFrame *candidate, fs->frames()) {
         if (candidate->isCopy())

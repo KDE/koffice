@@ -19,7 +19,7 @@
 
 #include "KarbonLayerSortingModel.h"
 #include "KarbonDocument.h"
-#include <KoShape.h>
+#include <KShape.h>
 #include <KoShapeLayer.h>
 #include <KoShapeContainer.h>
 
@@ -41,8 +41,8 @@ void KarbonLayerSortingModel::setDocument(KarbonDocument * newDocument)
 
 bool KarbonLayerSortingModel::lessThan(const QModelIndex &left, const QModelIndex &right) const
 {
-    KoShape * leftShape = static_cast<KoShape*>(left.internalPointer());
-    KoShape * rightShape = static_cast<KoShape*>(right.internalPointer());
+    KShape * leftShape = static_cast<KShape*>(left.internalPointer());
+    KShape * rightShape = static_cast<KShape*>(right.internalPointer());
 
     if (! leftShape || ! rightShape)
         return false;
@@ -57,7 +57,7 @@ bool KarbonLayerSortingModel::lessThan(const QModelIndex &left, const QModelInde
                 KoShapeContainer * leftParent = leftShape->parent();
                 KoShapeContainer * rightParent = rightShape->parent();
                 if (leftParent && leftParent == rightParent) {
-                    QList<KoShape*> children = leftParent->shapes();
+                    QList<KShape*> children = leftParent->shapes();
                     return children.indexOf(leftShape) < children.indexOf(rightShape);
                 } else {
                     return leftShape < rightShape;

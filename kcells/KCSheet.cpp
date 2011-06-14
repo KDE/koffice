@@ -46,7 +46,7 @@
 #include <KOdfSettings.h>
 #include <KOdfStylesReader.h>
 
-#include <KoShape.h>
+#include <KShape.h>
 #include <KResourceManager.h>
 #include <KoShapeLoadingContext.h>
 #include <KoShapeManager.h>
@@ -155,7 +155,7 @@ public:
     KCCellStorage* cellStorage;
     KCRowCluster rows;
     KCColumnCluster columns;
-    QList<KoShape*> shapes;
+    QList<KShape*> shapes;
 
     // hold the print object
     KCSheetPrint* print;
@@ -262,8 +262,8 @@ KCSheet::KCSheet(const KCSheet &other)
 #if 0 // KSPREAD_WIP_COPY_SHEET_(SHAPES)
     //FIXME This does not work as copySettings does not work. Also createDefaultShapeAndInit without the correct settings can not work
     //I think this should use saveOdf and loadOdf for copying
-    KoShape* shape;
-    const QList<KoShape*> shapes = other.d->shapes;
+    KShape* shape;
+    const QList<KShape*> shapes = other.d->shapes;
     for (int i = 0; i < shapes.count(); ++i) {
         shape = KoShapeRegistry::instance()->value(shapes[i]->shapeId())->createDefaultShapeAndInit(0);
         shape->copySettings(shapes[i]);
@@ -313,7 +313,7 @@ KCDocBase* KCSheet::doc() const
     return d->workbook->doc();
 }
 
-void KCSheet::addShape(KoShape* shape)
+void KCSheet::addShape(KShape* shape)
 {
     if (!shape)
         return;
@@ -322,7 +322,7 @@ void KCSheet::addShape(KoShape* shape)
     emit shapeAdded(this, shape);
 }
 
-void KCSheet::removeShape(KoShape* shape)
+void KCSheet::removeShape(KShape* shape)
 {
     if (!shape)
         return;
@@ -341,7 +341,7 @@ KResourceManager* KCSheet::resourceManager() const
     return map()->resourceManager();
 }
 
-QList<KoShape*> KCSheet::shapes() const
+QList<KShape*> KCSheet::shapes() const
 {
     return d->shapes;
 }
@@ -1706,7 +1706,7 @@ bool KCSheet::loadOdf(const KXmlElement& sheetElement,
 
 void KCSheet::loadOdfObject(const KXmlElement& element, KoShapeLoadingContext& shapeContext)
 {
-    KoShape* shape = KoShapeRegistry::instance()->createShapeFromOdf(element, shapeContext);
+    KShape* shape = KoShapeRegistry::instance()->createShapeFromOdf(element, shapeContext);
     if (!shape)
         return;
     addShape(shape);
@@ -2501,7 +2501,7 @@ bool KCSheet::saveOdf(KCOdfSavingContext& tableContext)
 
     // flake
     // Create a dict of cell anchored shapes with the cell as key.
-    foreach(KoShape* shape, d->shapes) {
+    foreach(KShape* shape, d->shapes) {
         if (dynamic_cast<KCShapeApplicationData*>(shape->applicationData())->isAnchoredToCell()) {
             double dummy;
             const QPointF position = shape->position();
@@ -2518,7 +2518,7 @@ bool KCSheet::saveOdf(KCOdfSavingContext& tableContext)
     // Save the remaining shapes, those that are anchored in the page.
     if (!d->shapes.isEmpty()) {
         xmlWriter.startElement("table:shapes");
-        foreach(KoShape* shape, d->shapes) {
+        foreach(KShape* shape, d->shapes) {
             if (dynamic_cast<KCShapeApplicationData*>(shape->applicationData())->isAnchoredToCell())
                 continue;
             shape->saveOdf(tableContext.shapeContext);

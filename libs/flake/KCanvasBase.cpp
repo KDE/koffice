@@ -94,7 +94,7 @@ KCanvasController *KCanvasBase::canvasController() const
     return d->controller;
 }
 
-void KCanvasBase::clipToDocument(const KoShape *, QPointF &) const
+void KCanvasBase::clipToDocument(const KShape *, QPointF &) const
 {
 }
 

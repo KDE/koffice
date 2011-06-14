@@ -27,30 +27,30 @@ FolderShapeModel::FolderShapeModel(FolderShape *parent)
 {
 }
 
-void FolderShapeModel::remove(KoShape *child)
+void FolderShapeModel::remove(KShape *child)
 {
     m_icons.removeAll(child);
 }
 
-void FolderShapeModel::setClipped(const KoShape *, bool )
+void FolderShapeModel::setClipped(const KShape *, bool )
 {
 }
 
-bool FolderShapeModel::isClipped(const KoShape *) const
-{
-    return true;
-}
-
-bool FolderShapeModel::inheritsTransform(const KoShape */*shape*/) const
+bool FolderShapeModel::isClipped(const KShape *) const
 {
     return true;
 }
 
-void FolderShapeModel::setInheritsTransform(const KoShape *, bool)
+bool FolderShapeModel::inheritsTransform(const KShape */*shape*/) const
+{
+    return true;
+}
+
+void FolderShapeModel::setInheritsTransform(const KShape *, bool)
 {
 }
 
-bool FolderShapeModel::isChildLocked(const KoShape *) const
+bool FolderShapeModel::isChildLocked(const KShape *) const
 {
     return false;
 }
@@ -60,12 +60,12 @@ int FolderShapeModel::count() const
     return m_icons.count();
 }
 
-QList<KoShape *> FolderShapeModel::shapes() const
+QList<KShape *> FolderShapeModel::shapes() const
 {
     return m_icons;
 }
 
-void FolderShapeModel::containerChanged(KoShapeContainer *, KoShape::ChangeType)
+void FolderShapeModel::containerChanged(KoShapeContainer *, KShape::ChangeType)
 {
 }
 
@@ -74,7 +74,7 @@ void FolderShapeModel::folderResized()
     int x = 5, y = 5;
     const qreal width = m_parent->size().width();
     int rowHeight=0;
-    foreach (KoShape *shape, m_icons) {
+    foreach (KShape *shape, m_icons) {
         const QSizeF size = shape->size();
         if (x + size.width() > width) { // next row
             y += rowHeight + 5; // 5 = gap
@@ -89,13 +89,13 @@ void FolderShapeModel::folderResized()
     }
 }
 
-void FolderShapeModel::childChanged(KoShape *child, KoShape::ChangeType type)
+void FolderShapeModel::childChanged(KShape *child, KShape::ChangeType type)
 {
     Q_UNUSED(child);
     Q_UNUSED(type);
 }
 
-void FolderShapeModel::add(KoShape *shape)
+void FolderShapeModel::add(KShape *shape)
 {
     int x = 5, y = 5;
     const int w = (int) shape->size().width();
@@ -104,7 +104,7 @@ void FolderShapeModel::add(KoShape *shape)
     do {
         int rowHeight=0;
         ok = true;
-        foreach (const KoShape *shape, m_icons) {
+        foreach (const KShape *shape, m_icons) {
             if (shape->position().y() > y || shape->position().y() + shape->size().height() < y)
                 continue; // other row.
             rowHeight = qMax(rowHeight, qRound(shape->size().height()));

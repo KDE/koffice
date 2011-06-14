@@ -19,7 +19,7 @@
 
 #include "SCPlaceholders.h"
 
-#include <KoShape.h>
+#include <KShape.h>
 #include <KoShapeContainer.h>
 #include <KoShapeLayer.h>
 #include <KoShapeMoveCommand.h>
@@ -50,7 +50,7 @@ SCPlaceholders::~SCPlaceholders()
 {
 }
 
-void SCPlaceholders::setLayout(SCPageLayout * layout, KoPADocument * document, const QList<KoShape *> &shapes, const QSizeF &pageSize,
+void SCPlaceholders::setLayout(SCPageLayout * layout, KoPADocument * document, const QList<KShape *> &shapes, const QSizeF &pageSize,
                                  const QMap<QString, KoTextShapeData*> &styles)
 {
     Q_ASSERT(m_initialized);
@@ -82,7 +82,7 @@ void SCPlaceholders::setLayout(SCPageLayout * layout, KoPADocument * document, c
                 placeholders.erase(itPlaceholder);
             }
             // replace the shape as given by the layout
-            QList<KoShape *> modifiedShape;
+            QList<KShape *> modifiedShape;
             QList<QSizeF> oldSize;
             QList<QSizeF> newSize;
             QList<QPointF> oldPosition;
@@ -136,7 +136,7 @@ void SCPlaceholders::setLayout(SCPageLayout * layout)
     m_layout = layout;
 }
 
-void SCPlaceholders::init(SCPageLayout * layout, const QList<KoShape *> &shapes)
+void SCPlaceholders::init(SCPageLayout * layout, const QList<KShape *> &shapes)
 {
     m_layout = layout;
     add(shapes);
@@ -150,7 +150,7 @@ SCPageLayout * SCPlaceholders::layout() const
     return m_layout;
 }
 
-void SCPlaceholders::shapeAdded(KoShape * shape)
+void SCPlaceholders::shapeAdded(KShape * shape)
 {
     Q_ASSERT(m_initialized);
 // if presentation:class add to index no matter if it is a placeholder or not
@@ -161,7 +161,7 @@ void SCPlaceholders::shapeAdded(KoShape * shape)
     }
 }
 
-void SCPlaceholders::shapeRemoved(KoShape * shape)
+void SCPlaceholders::shapeRemoved(KShape * shape)
 {
     Q_ASSERT(m_initialized);
 // if it is a placeholder remove it
@@ -177,9 +177,9 @@ void SCPlaceholders::shapeRemoved(KoShape * shape)
     }
 }
 
-void SCPlaceholders::add(const QList<KoShape *> &shapes)
+void SCPlaceholders::add(const QList<KShape *> &shapes)
 {
-    foreach (KoShape *shape, shapes) {
+    foreach (KShape *shape, shapes) {
         QString presentationClass = shape->additionalAttribute("presentation:class");
         QString placeholder = shape->additionalAttribute("presentation:placeholder");
         if (!presentationClass.isNull()) {

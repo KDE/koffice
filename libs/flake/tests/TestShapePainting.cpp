@@ -225,14 +225,14 @@ void TestShapePainting::testPaintOrder()
     root.addShape(&branch1);
     root.addShape(&branch2);
     
-    QList<KoShape*> sortedShapes;
+    QList<KShape*> sortedShapes;
     sortedShapes.append(&root);
     sortedShapes.append(&branch1);
     sortedShapes.append(&branch2);
     sortedShapes.append(branch1.shapes());
     sortedShapes.append(branch2.shapes());
     
-    qSort(sortedShapes.begin(), sortedShapes.end(), KoShape::compareShapeZIndex);
+    qSort(sortedShapes.begin(), sortedShapes.end(), KShape::compareShapeZIndex);
     QCOMPARE(sortedShapes.count(), 7);
     QVERIFY(sortedShapes[0] == &root);
     QVERIFY(sortedShapes[1] == &branch1);

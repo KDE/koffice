@@ -19,21 +19,21 @@
  */
 
 #include "KoShapeShearCommand.h"
-#include "KoShape.h"
+#include "KShape.h"
 
 #include <klocale.h>
 
 class KoShapeShearCommandPrivate
 {
 public:
-    QList<KoShape*> shapes;
+    QList<KShape*> shapes;
     QList<qreal> previousShearXs;
     QList<qreal> previousShearYs;
     QList<qreal> newShearXs;
     QList<qreal> newShearYs;
 };
 
-KoShapeShearCommand::KoShapeShearCommand(const QList<KoShape*> &shapes, const QList<qreal> &previousShearXs, const QList<qreal> &previousShearYs, const QList<qreal> &newShearXs, const QList<qreal> &newShearYs, QUndoCommand *parent)
+KoShapeShearCommand::KoShapeShearCommand(const QList<KShape*> &shapes, const QList<qreal> &previousShearXs, const QList<qreal> &previousShearYs, const QList<qreal> &newShearXs, const QList<qreal> &newShearYs, QUndoCommand *parent)
     : QUndoCommand(parent),
     d(new KoShapeShearCommandPrivate())
 {

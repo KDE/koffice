@@ -257,12 +257,12 @@ QString PictureShape::saveStyle(KOdfGenericStyle& style, KoShapeSavingContext& c
     if (transparency() > 0.0) {
         style.addProperty("draw:image-opacity", QString("%1%").arg((1.0 - transparency()) * 100.0));
     }
-    return KoShape::saveStyle(style, context);
+    return KShape::saveStyle(style, context);
 }
 
 void PictureShape::loadStyle(const KXmlElement& element, KoShapeLoadingContext& context)
 {
-    KoShape::loadStyle(element, context);
+    KShape::loadStyle(element, context);
     KOdfStyleStack &styleStack = context.odfLoadingContext().styleStack();
     styleStack.setTypeProperties("graphic");
 

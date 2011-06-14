@@ -20,7 +20,7 @@
 #define KIVIOSHAPETEMPLATEMODEL_H
 
 #include <KProperties.h>
-#include <KoShape.h>
+#include <KShape.h>
 
 #include <QAbstractItemModel>
 #include <QList>

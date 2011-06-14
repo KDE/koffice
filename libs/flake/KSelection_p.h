@@ -31,7 +31,7 @@
 //
 
 
-#include "KoShape_p.h"
+#include "KShape_p.h"
 
 class KoShapeGroup;
 
@@ -40,7 +40,7 @@ class KSelectionPrivate : public KoShapePrivate
 public:
     KSelectionPrivate(KSelection *parent)
         : KoShapePrivate(parent), eventTriggered(false), activeLayer(0), q(parent) {}
-    QList<KoShape*> selectedShapes;
+    QList<KShape*> selectedShapes;
     bool eventTriggered;
 
     KoShapeLayer *activeLayer;

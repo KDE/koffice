@@ -22,7 +22,7 @@
 
 #include <QUndoCommand>
 
-class KoShape;
+class KShape;
 class KWFrame;
 class KWFrameSet;
 class KWDocument;
@@ -48,7 +48,7 @@ public:
 private:
     KWFrame *m_frame;
     KWFrameSet *m_frameSet;
-    KoShape *m_shape;
+    KShape *m_shape;
     KWDocument *m_doc;
     bool m_ownFrame;
     bool m_ownFrameSet;

@@ -43,8 +43,8 @@ class KOdfStore;
  * lower-resolution data to be shown this class will actually be the backing store of
  * the image data and it can create a pre-rendered QPixmap without deminishing the backing-store
  * data.
- * This class inherits from KoShapeUserData which means you can set it on any KoShape using
- * KoShape::setUserData() and get it using KoShape::userData().  The pictureshape plugin
+ * This class inherits from KoShapeUserData which means you can set it on any KShape using
+ * KShape::setUserData() and get it using KShape::userData().  The pictureshape plugin
  * uses this class to show its image data.
  * Such plugins are suggested to not make a copy of the pixmap data, but use the fact that this
  * image data caches one for every request to pixmap()

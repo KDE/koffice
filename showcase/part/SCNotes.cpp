@@ -24,7 +24,7 @@
 
 #include <KImageCollection.h>
 #include <KImageData.h>
-#include <KoShape.h>
+#include <KShape.h>
 #include <KoShapeFactoryBase.h>
 #include <KoShapeLayer.h>
 #include <KoShapeRegistry.h>
@@ -39,7 +39,7 @@
 
 #include <QPainter>
 // a helper class to load attributes of the thumbnail shape
-class ShapeLoaderHelper : public KoShape
+class ShapeLoaderHelper : public KShape
 {
 public:
     ShapeLoaderHelper() { }
@@ -92,7 +92,7 @@ SCNotes::~SCNotes()
     delete m_imageCollection;
 }
 
-KoShape *SCNotes::textShape()
+KShape *SCNotes::textShape()
 {
     return m_textShape;
 }
@@ -111,7 +111,7 @@ void SCNotes::saveOdf(KoShapeSavingContext &context) const
     writer.endElement(); // draw:page-thumbnail
 
     KoShapeLayer* layer = dynamic_cast<KoShapeLayer*>(shapes().last());
-    foreach (KoShape *shape, layer->shapes()) {
+    foreach (KShape *shape, layer->shapes()) {
         if (shape != m_textShape && shape != m_thumbnailShape) {
             shape->saveOdf(context);
         }
@@ -139,7 +139,7 @@ bool SCNotes::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context
             delete helper;
         }
         else /* if (child.tagName() == "frame") */ {
-            KoShape *shape = KoShapeRegistry::instance()->createShapeFromOdf(child, context);
+            KShape *shape = KoShapeRegistry::instance()->createShapeFromOdf(child, context);
             if (shape) {
                 if (shape->shapeId() == "TextShapeID" &&
                         child.hasAttributeNS(KOdfXmlNS::presentation, "class")) {
@@ -184,7 +184,7 @@ void SCNotes::setDisplayMasterShapes(bool)
 {
 }
 
-bool SCNotes::displayShape(KoShape *) const
+bool SCNotes::displayShape(KShape *) const
 {
     return true;
 }

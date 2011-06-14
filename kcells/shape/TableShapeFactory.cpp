@@ -69,7 +69,7 @@ bool TableShapeFactory::supports(const KXmlElement &element, KoShapeLoadingConte
     return (element.namespaceURI() == KOdfXmlNS::table && element.localName() == "table");
 }
 
-KoShape *TableShapeFactory::createDefaultShape(KResourceManager *documentResources) const
+KShape *TableShapeFactory::createDefaultShape(KResourceManager *documentResources) const
 {
     TableShape *shape = new TableShape();
     shape->setShapeId(TableShapeId);

@@ -28,10 +28,10 @@
 /**
  * The interface for view conversions.
  *
- * All KoShape based objects are using a postscript-point (pt) based measurement system
+ * All KShape based objects are using a postscript-point (pt) based measurement system
  * which requires a conversion to view coordinates (in pixel sizes) at the moment
  * we are painting, and a conversion to the normalized coordinate system if we
- * receive mouse events so we can figure out which KoShape object was touched.
+ * receive mouse events so we can figure out which KShape object was touched.
  *
  * The zoom level is expressed on a scale of 0.0 to 1.0 to infinite, where 1.0 is
  * 100%
@@ -44,7 +44,7 @@ public:
 
     /**
      * Convert a coordinate in pt to pixels.
-     * @param documentPoint the point in the document coordinate system of a KoShape.
+     * @param documentPoint the point in the document coordinate system of a KShape.
      */
     virtual QPointF documentToView(const QPointF &documentPoint) const;
 
@@ -56,7 +56,7 @@ public:
 
     /**
      * Convert a rectangle in pt to pixels.
-     * @param documentRect the rect in the document coordinate system of a KoShape.
+     * @param documentRect the rect in the document coordinate system of a KShape.
      */
     virtual QRectF documentToView(const QRectF &documentRect) const;
 

@@ -358,8 +358,8 @@ void KarbonView::dropEvent(QDropEvent *e)
 
         if (d->canvas->resourceManager()->intResource(KoCanvasResource::ActiveStyleType) == KoFlake::Foreground) {
             QList<KoShapeBorderBase*> borders;
-            QList<KoShape*> selectedShapes = selection->selectedShapes();
-            foreach(KoShape * shape, selectedShapes) {
+            QList<KShape*> selectedShapes = selection->selectedShapes();
+            foreach(KShape * shape, selectedShapes) {
                 KLineBorder * border = dynamic_cast<KLineBorder*>(shape->border());
                 KLineBorder * newBorder = 0;
                 if (border) {
@@ -442,7 +442,7 @@ void KarbonView::fileImportGraphic()
             return;
         }
 
-        KoShape *picture = factory->createDefaultShape(part()->document().resourceManager());
+        KShape *picture = factory->createDefaultShape(part()->document().resourceManager());
         KImageCollection *imageCollection = part()->document().resourceManager()->imageCollection();
         if (!picture || !imageCollection) {
             KMessageBox::error(0, i18n("Could not create image shape."), i18n("Import graphic"), 0);
@@ -494,12 +494,12 @@ void KarbonView::fileImportGraphic()
     }
 
     if (success) {
-        QList<KoShape*> importedShapes = importPart.document().shapes();
+        QList<KShape*> importedShapes = importPart.document().shapes();
 
         KarbonDocumentMergeCommand * cmd = new KarbonDocumentMergeCommand(part(), &importPart);
         d->canvas->addCommand(cmd);
 
-        foreach(KoShape * shape, importedShapes) {
+        foreach(KShape * shape, importedShapes) {
             d->canvas->shapeManager()->selection()->select(shape, false);
         }
     }
@@ -517,10 +517,10 @@ void KarbonView::editSelectAll()
     if (! selection)
         return;
 
-    QList<KoShape*> shapes = part()->document().shapes();
+    QList<KShape*> shapes = part()->document().shapes();
     kDebug(38000) << "shapes.size() =" << shapes.size();
 
-    foreach(KoShape* shape, shapes) {
+    foreach(KShape* shape, shapes) {
         selection->select(shape);
         shape->update();
     }
@@ -588,7 +588,7 @@ void KarbonView::selectionDistribute(KoShapeDistributeCommand::Distribute distri
     if (! selection)
         return;
 
-    QList<KoShape*> selectedShapes = selection->selectedShapes(KoFlake::TopLevelSelection);
+    QList<KShape*> selectedShapes = selection->selectedShapes(KoFlake::TopLevelSelection);
     if (selectedShapes.count() < 2) return;
 
     KoShapeDistributeCommand *cmd = new KoShapeDistributeCommand(selectedShapes, distribute, selection->boundingRect());
@@ -607,10 +607,10 @@ void KarbonView::combinePath()
     if (! selection)
         return;
 
-    QList<KoShape*> selectedShapes = selection->selectedShapes();
+    QList<KShape*> selectedShapes = selection->selectedShapes();
     QList<KPathShape*> paths;
 
-    foreach(KoShape* shape, selectedShapes) {
+    foreach(KShape* shape, selectedShapes) {
         KPathShape *path = dynamic_cast<KPathShape*>(shape);
         if (path) {
             KParameterShape * paramShape = dynamic_cast<KParameterShape*>(path);
@@ -631,10 +631,10 @@ void KarbonView::separatePath()
     if (! selection)
         return;
 
-    QList<KoShape*> selectedShapes = selection->selectedShapes();
+    QList<KShape*> selectedShapes = selection->selectedShapes();
     QList<KPathShape*> paths;
 
-    foreach(KoShape* shape, selectedShapes) {
+    foreach(KShape* shape, selectedShapes) {
         KPathShape *path = dynamic_cast<KPathShape*>(shape);
         if (path) {
             paths << path;
@@ -679,10 +679,10 @@ void KarbonView::booleanOperation(KarbonBooleanCommand::BooleanOperation operati
     if (! selection)
         return;
 
-    QList<KoShape*> selectedShapes = selection->selectedShapes();
+    QList<KShape*> selectedShapes = selection->selectedShapes();
     QList<KPathShape*> paths;
 
-    foreach(KoShape* shape, selectedShapes) {
+    foreach(KShape* shape, selectedShapes) {
         KPathShape *path = dynamic_cast<KPathShape*>(shape);
         if (path) {
             paths << path;
@@ -711,7 +711,7 @@ void KarbonView::pathSnapToGrid()
     if (! selection)
         return;
 
-    QList<KoShape*> selectedShapes = selection->selectedShapes();
+    QList<KShape*> selectedShapes = selection->selectedShapes();
     QList<KPathPointData> points;
     QList<QPointF> offsets;
 
@@ -724,7 +724,7 @@ void KarbonView::pathSnapToGrid()
     snapGuide.enableSnapStrategies(KoSnapGuide::GridSnapping);
     snapGuide.setSnapDistance(INT_MAX);
 
-    foreach(KoShape* shape, selectedShapes) {
+    foreach(KShape* shape, selectedShapes) {
         KParameterShape * paramShape = dynamic_cast<KParameterShape*>(shape);
         if (paramShape && paramShape->isParametricShape())
             continue;
@@ -1098,7 +1098,7 @@ void KarbonView::selectionChanged()
         uint selectedPaths = 0;
         uint selectedParametrics = 0;
         // check for different shape types for enabling specific actions
-        foreach(KoShape* shape, selection->selectedShapes(KoFlake::FullSelection)) {
+        foreach(KShape* shape, selection->selectedShapes(KoFlake::FullSelection)) {
             if (dynamic_cast<KPathShape*>(shape)) {
                 KParameterShape * ps = dynamic_cast<KParameterShape*>(shape);
                 if (ps && ps->isParametricShape())
@@ -1175,10 +1175,10 @@ QList<KPathShape*> KarbonView::selectedPathShapes()
     if (! selection)
         return QList<KPathShape*>();
 
-    QList<KoShape*> selectedShapes = selection->selectedShapes();
+    QList<KShape*> selectedShapes = selection->selectedShapes();
     QList<KPathShape*> paths;
 
-    foreach(KoShape* shape, selectedShapes) {
+    foreach(KShape* shape, selectedShapes) {
         KPathShape *path = dynamic_cast<KPathShape*>(shape);
         if (path) {
             paths << path;
@@ -1200,7 +1200,7 @@ void KarbonView::applyFillToSelection()
     if (! selection->count())
         return;
 
-    KoShape * shape = selection->firstSelectedShape();
+    KShape * shape = selection->firstSelectedShape();
     d->canvas->addCommand(new KoShapeBackgroundCommand(selection->selectedShapes(), shape->background()));
 }
 
@@ -1210,7 +1210,7 @@ void KarbonView::applyStrokeToSelection()
     if (! selection->count())
         return;
 
-    KoShape * shape = selection->firstSelectedShape();
+    KShape * shape = selection->firstSelectedShape();
     d->canvas->addCommand(new KoShapeBorderCommand(selection->selectedShapes(), shape->border()));
 }
 

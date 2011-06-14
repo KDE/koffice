@@ -35,7 +35,7 @@
 
 #include "KInlineObject.h"
 #include "KoTextAnchor.h"
-#include "KoShape.h"
+#include "KShape.h"
 #include "KoVariable.h"
 #include "KInlineTextObjectManager.h"
 #include "styles/KoStyleManager.h"

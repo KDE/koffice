@@ -106,7 +106,7 @@ KCCellTool::~KCCellTool()
 
 void KCCellTool::paint(QPainter &painter, const KoViewConverter &viewConverter)
 {
-    KoShape::applyConversion(painter, viewConverter);
+    KShape::applyConversion(painter, viewConverter);
     const double xOffset = viewConverter.viewToDocumentX(canvas()->canvasController()->canvasOffsetX());
     const double yOffset = viewConverter.viewToDocumentY(canvas()->canvasController()->canvasOffsetY());
     // The visible area in document coordinates:
@@ -117,7 +117,7 @@ void KCCellTool::paint(QPainter &painter, const KoViewConverter &viewConverter)
     paintSelection(painter, paintRect);
 }
 
-void KCCellTool::activate(ToolActivation toolActivation, const QSet<KoShape*> &shapes)
+void KCCellTool::activate(ToolActivation toolActivation, const QSet<KShape*> &shapes)
 {
     canvas()->shapeManager()->selection()->deselectAll();
     CellToolBase::activate(toolActivation, shapes);

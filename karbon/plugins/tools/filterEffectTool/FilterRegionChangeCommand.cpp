@@ -19,9 +19,9 @@
 
 #include "FilterRegionChangeCommand.h"
 #include "KFilterEffect.h"
-#include "KoShape.h"
+#include "KShape.h"
 
-FilterRegionChangeCommand::FilterRegionChangeCommand(KFilterEffect *effect, const QRectF &filterRegion, KoShape *shape, QUndoCommand *parent)
+FilterRegionChangeCommand::FilterRegionChangeCommand(KFilterEffect *effect, const QRectF &filterRegion, KShape *shape, QUndoCommand *parent)
         : QUndoCommand(parent), m_effect(effect), m_newRegion(filterRegion), m_shape(shape)
 {
     Q_ASSERT(m_effect);

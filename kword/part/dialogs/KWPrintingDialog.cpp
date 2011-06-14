@@ -102,7 +102,7 @@ QRectF KWPrintingDialog::preparePage(int pageNumber)
     return QRectF(offsetX, pageOffset - bleedOffsetY, clipWidth + bleedWidth, clipHeight + bleedHeight);
 }
 
-QList<KoShape*> KWPrintingDialog::shapesOnPage(int pageNumber)
+QList<KShape*> KWPrintingDialog::shapesOnPage(int pageNumber)
 {
     Q_ASSERT(pageNumber > 0);
     KWPage page = m_document->pageManager()->page(pageNumber);

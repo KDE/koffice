@@ -52,9 +52,9 @@ TablePageManager::~TablePageManager()
 
 QSizeF TablePageManager::size(int page) const
 {
-    if (page < 1 || page > d->pages.count() || !d->pages[page - 1]->KoShape::parent())
+    if (page < 1 || page > d->pages.count() || !d->pages[page - 1]->KShape::parent())
         return QSizeF();
-    return (page == 1) ? d->master->size() : d->pages[page - 1]->KoShape::parent()->size();
+    return (page == 1) ? d->master->size() : d->pages[page - 1]->KShape::parent()->size();
 }
 
 void TablePageManager::clearPages()
@@ -71,7 +71,7 @@ void TablePageManager::insertPage(int page)
     TableShape* const shape = static_cast<TableShape*>(d->pages[page - 1]);
     const QRect cellRange = this->cellRange(page);
     shape->setVisibleCellRange(cellRange);
-    shape->KoShape::setSize(shape->sheet()->cellCoordinatesToDocument(cellRange).size());
+    shape->KShape::setSize(shape->sheet()->cellCoordinatesToDocument(cellRange).size());
 }
 
 void TablePageManager::preparePage(int page)
@@ -80,7 +80,7 @@ void TablePageManager::preparePage(int page)
     if (page == 1) {
         return;
     }
-    KoTextShapeData* const data = static_cast<KoTextShapeData*>(d->master->KoShape::parent()->userData());
+    KoTextShapeData* const data = static_cast<KoTextShapeData*>(d->master->KShape::parent()->userData());
     if (!data) {
         // not embedded in a text shape
         return;
@@ -90,7 +90,7 @@ void TablePageManager::preparePage(int page)
     Q_CHECK_PTR(document);
     KoTextDocumentLayout* const layout = qobject_cast<KoTextDocumentLayout*>(document->documentLayout());
     Q_CHECK_PTR(layout);
-    const QList<KoShape*> textShapes = layout->shapes();
+    const QList<KShape*> textShapes = layout->shapes();
     const int masterIndex = textShapes.indexOf(d->master);
     if (masterIndex < 0)
         return;  // huh?

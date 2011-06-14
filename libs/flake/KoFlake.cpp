@@ -20,7 +20,7 @@
  * Boston, MA 02110-1301, USA.
  */
 #include "KoFlake.h"
-#include "KoShape.h"
+#include "KShape.h"
 #include "KLineBorder.h"
 #include "KGradientBackground.h"
 

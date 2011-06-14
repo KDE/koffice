@@ -30,7 +30,7 @@
 #include <KXmlWriter.h>
 #include <KProperties.h>
 #include <kdebug.h>
-#include <KoShape.h>
+#include <KShape.h>
 #include <KoShapeSavingContext.h>
 #include <KoShapeLoadingContext.h>
 #include <KoTextShapeData.h>

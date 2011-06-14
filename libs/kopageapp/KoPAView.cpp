@@ -492,14 +492,14 @@ void KoPAView::editSelectAll()
     if(!selection)
         return;
 
-    QList<KoShape*> shapes = activePage()->shapes();
+    QList<KShape*> shapes = activePage()->shapes();
 
-    foreach(KoShape *shape, shapes) {
+    foreach(KShape *shape, shapes) {
         KoShapeLayer *layer = dynamic_cast<KoShapeLayer *>(shape);
 
         if (layer) {
-            QList<KoShape*> layerShapes(layer->shapes());
-            foreach(KoShape *layerShape, layerShapes) {
+            QList<KShape*> layerShapes(layer->shapes());
+            foreach(KShape *layerShape, layerShapes) {
                 selection->select(layerShape);
                 layerShape->update();
             }
@@ -656,7 +656,7 @@ void KoPAView::setActivePage(KoPAPageBase* page)
     shapeManager()->removeAdditional(d->activePage);
     d->activePage = page;
     shapeManager()->addAdditional(d->activePage);
-    QList<KoShape*> shapes = page->shapes();
+    QList<KShape*> shapes = page->shapes();
     shapeManager()->setShapes(shapes, KoShapeManager::AddWithoutRepaint);
     //Make the top most layer active
     if (!shapes.isEmpty()) {
@@ -668,7 +668,7 @@ void KoPAView::setActivePage(KoPAPageBase* page)
     KoPAPage * paPage = dynamic_cast<KoPAPage *>(page);
     if (paPage) {
         KoPAMasterPage * masterPage = paPage->masterPage();
-        QList<KoShape*> masterShapes = masterPage->shapes();
+        QList<KShape*> masterShapes = masterPage->shapes();
         masterShapeManager()->setShapes(masterShapes, KoShapeManager::AddWithoutRepaint);
         //Make the top most layer active
         if (!masterShapes.isEmpty()) {
@@ -678,7 +678,7 @@ void KoPAView::setActivePage(KoPAPageBase* page)
     }
     else {
         // if the page is a master page no shapes are in the masterShapeManager
-        masterShapeManager()->setShapes(QList<KoShape*>());
+        masterShapeManager()->setShapes(QList<KShape*>());
     }
 
     if (shell() && pageChanged) {
@@ -937,7 +937,7 @@ void KoPAView::goToLastPage()
 void KoPAView::findDocumentSetNext(QTextDocument * document)
 {
     KoPAPageBase * page = 0;
-    KoShape * startShape = 0;
+    KShape * startShape = 0;
     KoTextDocumentLayout *lay = document ? qobject_cast<KoTextDocumentLayout*>(document->documentLayout()) : 0;
     if (lay != 0) {
         startShape = lay->shapes().value(0);
@@ -953,7 +953,7 @@ void KoPAView::findDocumentSetNext(QTextDocument * document)
         startShape = page;
     }
 
-    KoShape * shape = startShape;
+    KShape * shape = startShape;
 
     do {
         // find next text shape
@@ -989,7 +989,7 @@ void KoPAView::findDocumentSetNext(QTextDocument * document)
 void KoPAView::findDocumentSetPrevious(QTextDocument * document)
 {
     KoPAPageBase * page = 0;
-    KoShape * startShape = 0;
+    KShape * startShape = 0;
     KoTextDocumentLayout *lay = document ? qobject_cast<KoTextDocumentLayout*>(document->documentLayout()) : 0;
     if (lay != 0) {
         startShape = lay->shapes().value(0);
@@ -1007,7 +1007,7 @@ void KoPAView::findDocumentSetPrevious(QTextDocument * document)
         check = true;
     }
 
-    KoShape * shape = startShape;
+    KShape * shape = startShape;
 
     do {
         if (!check || shape->shapeId() != "TextShapeID") {

@@ -217,7 +217,7 @@ KoTextPage* KoTextShapeData::page() const
     return d->textpage;
 }
 
-bool KoTextShapeData::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context, KDocumentRdfBase *rdfData, KoShape *shape)
+bool KoTextShapeData::loadOdf(const KXmlElement &element, KoShapeLoadingContext &context, KDocumentRdfBase *rdfData, KShape *shape)
 {
     Q_UNUSED(rdfData);
     KoTextLoader loader(context, shape);

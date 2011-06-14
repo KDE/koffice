@@ -26,7 +26,7 @@
 
 class KoWmfWrite;
 class KarbonDocument;
-class KoShape;
+class KShape;
 class KoShapeBorderBase;
 class QPainterPath;
 
@@ -42,7 +42,7 @@ public:
 
 private:
     void paintDocument(KarbonDocument& document);
-    void paintShape(KoShape * shape);
+    void paintShape(KShape * shape);
 
     QPen getPen(const KoShapeBorderBase *stroke);
 

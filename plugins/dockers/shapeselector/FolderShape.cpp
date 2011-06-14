@@ -43,7 +43,7 @@ QDomDocument FolderShape::save() const
     QDomDocument doc;
     QDomElement element = doc.createElement("book");
     doc.appendChild(element);
-    foreach (KoShape *child, shapes()) {
+    foreach (KShape *child, shapes()) {
         IconShape *ic = dynamic_cast<IconShape*>(child);
         if (ic) {
             ic->save(element);
@@ -72,7 +72,7 @@ void FolderShape::load(const QDomDocument &document)
             addShape(t);
         } else if (item.tagName() == "clipboard") {
             QByteArray data = item.text().toLatin1();
-            KoShape *clipboardShape = ItemStore::createShapeFromPaste(data);
+            KShape *clipboardShape = ItemStore::createShapeFromPaste(data);
             if (clipboardShape) {
                 ClipboardProxyShape *proxy = new ClipboardProxyShape(clipboardShape, data);
                 ItemStore is;

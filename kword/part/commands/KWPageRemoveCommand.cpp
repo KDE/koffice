@@ -48,7 +48,7 @@ KWPageRemoveCommand::KWPageRemoveCommand(KWDocument *document, KWPage page, QUnd
     const qreal bottom = top + page.height();
     const qreal height = page.height() + padding.top + padding.bottom; // size from previous page
 
-    QList<KoShape*> shapesToMove;
+    QList<KShape*> shapesToMove;
     QList<QPointF> previousPositions;
     QList<QPointF> newPositions;
     foreach (KWFrameSet *fs, document->frameSets()) {
@@ -62,7 +62,7 @@ KWPageRemoveCommand::KWPageRemoveCommand(KWDocument *document, KWPage page, QUnd
         int count = -1;
         foreach (KWFrame *frame, fs->frames()) {
             ++count;
-            KoShape *shape = frame->shape();
+            KShape *shape = frame->shape();
             QPointF pos = shape->position();
             if (pos.y() < top)
                 continue;

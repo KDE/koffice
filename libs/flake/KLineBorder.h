@@ -29,7 +29,7 @@
 
 #include "flake_export.h"
 
-class KoShape;
+class KShape;
 class QPainter;
 class QColor;
 class KoViewConverter;
@@ -95,8 +95,8 @@ public:
     virtual void borderInsets(KoInsets &insets) const;
     virtual bool hasTransparency() const;
 
-    virtual void paint(KoShape *shape, QPainter &painter, const KoViewConverter &converter);
-    virtual void paint(KoShape *shape, QPainter &painter, const KoViewConverter &converter, const QColor &color);
+    virtual void paint(KShape *shape, QPainter &painter, const KoViewConverter &converter);
+    virtual void paint(KShape *shape, QPainter &painter, const KoViewConverter &converter, const QColor &color);
 
 private:
     class Private;

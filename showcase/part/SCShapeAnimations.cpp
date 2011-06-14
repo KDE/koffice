@@ -20,7 +20,7 @@
 #include <QList>
 #include <QSet>
 #include <kdebug.h>
-#include "KoShape.h"
+#include "KShape.h"
 #include "SCShapeAnimations.h"
 
 SCShapeAnimations::SCShapeAnimations()

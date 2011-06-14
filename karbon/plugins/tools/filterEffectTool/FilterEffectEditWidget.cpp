@@ -29,7 +29,7 @@
 #include "KFilterEffect.h"
 #include "KFilterEffectStack.h"
 #include "KFilterEffectConfigWidgetBase.h"
-#include "KoShape.h"
+#include "KShape.h"
 #include "KCanvasBase.h"
 #include "KoResourceModel.h"
 #include "KoResourceServerAdapter.h"
@@ -112,7 +112,7 @@ FilterEffectEditWidget::~FilterEffectEditWidget()
     }
 }
 
-void FilterEffectEditWidget::editShape(KoShape *shape, KCanvasBase * canvas)
+void FilterEffectEditWidget::editShape(KShape *shape, KCanvasBase * canvas)
 {
     if (!m_shape) {
         delete m_effects;

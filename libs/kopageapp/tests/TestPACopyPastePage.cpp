@@ -66,7 +66,7 @@ void TestPACopyPastePage::addShape(KoPAPageBase * page)
     path->setPosition(m_pos);
     m_pos += QPointF(1.0, 1.0);
 
-    QList<KoShape*> shapes = page->shapes();
+    QList<KShape*> shapes = page->shapes();
     if (!shapes.isEmpty()) {
         KoShapeLayer* layer = dynamic_cast<KoShapeLayer*>(shapes.last());
         layer->addShape(path);

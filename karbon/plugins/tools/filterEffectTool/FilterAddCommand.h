@@ -22,14 +22,14 @@
 
 #include <QtGui/QUndoCommand>
 
-class KoShape;
+class KShape;
 class KFilterEffect;
 
 /// A command do add a new filter effect to a filter effect stack
 class FilterAddCommand : public QUndoCommand
 {
 public:
-    FilterAddCommand(KFilterEffect *filterEffect, KoShape * shape, QUndoCommand *parent = 0);
+    FilterAddCommand(KFilterEffect *filterEffect, KShape * shape, QUndoCommand *parent = 0);
     ~FilterAddCommand();
     /// redo the command
     virtual void redo();
@@ -38,7 +38,7 @@ public:
 
 private:
     KFilterEffect * m_filterEffect;
-    KoShape * m_shape;
+    KShape * m_shape;
     bool m_isAdded;
 };
 

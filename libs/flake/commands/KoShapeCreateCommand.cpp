@@ -19,7 +19,7 @@
  */
 
 #include "KoShapeCreateCommand.h"
-#include "KoShape.h"
+#include "KShape.h"
 #include "KoShapeContainer.h"
 #include "KoShapeControllerBase.h"
 
@@ -28,7 +28,7 @@
 class KoShapeCreateCommand::Private
 {
 public:
-    Private(KoShapeControllerBase *c, KoShape *s)
+    Private(KoShapeControllerBase *c, KShape *s)
             : controller(c),
             shape(s),
             shapeParent(shape->parent()),
@@ -40,12 +40,12 @@ public:
     }
 
     KoShapeControllerBase *controller;
-    KoShape *shape;
+    KShape *shape;
     KoShapeContainer *shapeParent;
     bool deleteShape;
 };
 
-KoShapeCreateCommand::KoShapeCreateCommand(KoShapeControllerBase *controller, KoShape *shape, QUndoCommand *parent)
+KoShapeCreateCommand::KoShapeCreateCommand(KoShapeControllerBase *controller, KShape *shape, QUndoCommand *parent)
         : QUndoCommand(parent),
         d(new Private(controller, shape))
 {

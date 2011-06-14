@@ -22,18 +22,18 @@
 
 #include <KXmlWriter.h>
 #include <KOdf.h>
-#include <KoShape.h>
+#include <KShape.h>
 
 class KoShapeOdfSaveHelperPrivate : public KDragOdfSaveHelperPrivate
 {
 public:
-    KoShapeOdfSaveHelperPrivate(QList<KoShape *> shapes)
+    KoShapeOdfSaveHelperPrivate(QList<KShape *> shapes)
     : shapes(shapes) {}
 
-    QList<KoShape *> shapes;
+    QList<KShape *> shapes;
 };
 
-KoShapeOdfSaveHelper::KoShapeOdfSaveHelper(QList<KoShape *> shapes)
+KoShapeOdfSaveHelper::KoShapeOdfSaveHelper(QList<KShape *> shapes)
         : KDragOdfSaveHelper(*(new KoShapeOdfSaveHelperPrivate(shapes)))
 {
 }
@@ -47,8 +47,8 @@ bool KoShapeOdfSaveHelper::writeBody()
     bodyWriter.startElement("office:body");
     bodyWriter.startElement(KOdf::bodyContentElement(KOdf::TextDocument, true));
 
-    qSort(d->shapes.begin(), d->shapes.end(), KoShape::compareShapeZIndex);
-    foreach (KoShape *shape, d->shapes) {
+    qSort(d->shapes.begin(), d->shapes.end(), KShape::compareShapeZIndex);
+    foreach (KShape *shape, d->shapes) {
         shape->saveOdf(*d->context);
     }
     d->context->writeConnectors();

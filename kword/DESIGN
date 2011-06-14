@@ -6,7 +6,7 @@ Overall design
 * Framesets include: text frameset & generic framesets.
 
 * A frameset has a list of frames, KWFrame. A KWFrame is basically a thin wrapper
-around a KoShape.
+around a KShape.
 Imagine a 10 pages document, with 1 text-frameset and 10 frames, because our
 example author wants to have one frame per page.  This means that there is one 
 text, and the frames define where on the pages this text is displayed.

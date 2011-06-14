@@ -74,7 +74,7 @@ public:
     }
 
     /**
-     * From KoShape reimplemented method to load the TextShape from ODF.
+     * From KShape reimplemented method to load the TextShape from ODF.
      *
      * This method redirects the call to the KoTextShapeData::loadOdf() method which
      * in turn will call the KoTextLoader::loadBody() method that reads the element
@@ -87,7 +87,7 @@ public:
     virtual bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context);
 
     /**
-     * From KoShape reimplemented method to store the TextShape data as ODF.
+     * From KShape reimplemented method to store the TextShape data as ODF.
      *
      * @param context the KoShapeSavingContext used for saving.
      */
@@ -120,7 +120,7 @@ protected:
     virtual QString saveStyle(KOdfGenericStyle &style, KoShapeSavingContext &context) const;
 
 private:
-    void shapeChanged(ChangeType type, KoShape *shape);
+    void shapeChanged(ChangeType type, KShape *shape);
 
     KoTextShapeData *m_textShapeData;
     QTextDocument *m_footnotes;

@@ -31,7 +31,7 @@
 #include <QPointF>
 
 class KWPage;
-class KoShape;
+class KShape;
 class KWPageManagerPrivate;
 
 
@@ -53,7 +53,7 @@ public:
     /**
      * return pageNumber of the argument shape, pagenumbers for a normal document start at 0.
      */
-    int pageNumber(const KoShape *shape) const;
+    int pageNumber(const KShape *shape) const;
 
     /**
      * return pageNumber of page with document-offset (in the Y direction) of @p ptY,
@@ -74,7 +74,7 @@ public:
     /**
      * return the KWPage instance where the rect is on. Returns 0 if page does not exist.
      */
-    KWPage page(const KoShape *shape) const;
+    KWPage page(const KShape *shape) const;
 
     /**
      * return the KWPage instance where the point is on. Returns 0 if page does not exist.

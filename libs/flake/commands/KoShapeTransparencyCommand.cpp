@@ -18,7 +18,7 @@
  */
 
 #include "KoShapeTransparencyCommand.h"
-#include "KoShape.h"
+#include "KShape.h"
 #include "KoShapeBackground.h"
 
 #include <klocale.h>
@@ -31,17 +31,17 @@ public:
     ~Private() {
     }
 
-    QList<KoShape*> shapes;    ///< the shapes to set background for
+    QList<KShape*> shapes;    ///< the shapes to set background for
     QList<qreal> oldTransparencies; ///< the old transparencies
     QList<qreal> newTransparencies; ///< the new transparencies
 };
 
-KoShapeTransparencyCommand::KoShapeTransparencyCommand(const QList<KoShape*> &shapes, qreal transparency, QUndoCommand *parent)
+KoShapeTransparencyCommand::KoShapeTransparencyCommand(const QList<KShape*> &shapes, qreal transparency, QUndoCommand *parent)
     : QUndoCommand(parent)
     , d(new Private())
 {
     d->shapes = shapes;
-    foreach(KoShape *shape, d->shapes) {
+    foreach(KShape *shape, d->shapes) {
         d->oldTransparencies.append(shape->transparency());
         d->newTransparencies.append(transparency);
     }
@@ -49,7 +49,7 @@ KoShapeTransparencyCommand::KoShapeTransparencyCommand(const QList<KoShape*> &sh
     setText(i18n("Set Opacity"));
 }
 
-KoShapeTransparencyCommand::KoShapeTransparencyCommand(KoShape * shape, qreal transparency, QUndoCommand *parent)
+KoShapeTransparencyCommand::KoShapeTransparencyCommand(KShape * shape, qreal transparency, QUndoCommand *parent)
     : QUndoCommand(parent)
     , d(new Private())
 {
@@ -60,12 +60,12 @@ KoShapeTransparencyCommand::KoShapeTransparencyCommand(KoShape * shape, qreal tr
     setText(i18n("Set Opacity"));
 }
 
-KoShapeTransparencyCommand::KoShapeTransparencyCommand(const QList<KoShape*> &shapes, const QList<qreal> &transparencies, QUndoCommand *parent)
+KoShapeTransparencyCommand::KoShapeTransparencyCommand(const QList<KShape*> &shapes, const QList<qreal> &transparencies, QUndoCommand *parent)
     : QUndoCommand(parent)
     , d(new Private())
 {
     d->shapes = shapes;
-    foreach(KoShape *shape, d->shapes) {
+    foreach(KShape *shape, d->shapes) {
         d->oldTransparencies.append(shape->transparency());
     }
     d->newTransparencies = transparencies;
@@ -82,7 +82,7 @@ void KoShapeTransparencyCommand::redo()
 {
     QUndoCommand::redo();
     QList<qreal>::iterator transparencyIt = d->newTransparencies.begin();
-    foreach(KoShape *shape, d->shapes) {
+    foreach(KShape *shape, d->shapes) {
         shape->setTransparency(*transparencyIt);
         shape->update();
         transparencyIt++;
@@ -93,7 +93,7 @@ void KoShapeTransparencyCommand::undo()
 {
     QUndoCommand::undo();
     QList<qreal>::iterator transparencyIt = d->oldTransparencies.begin();
-    foreach(KoShape *shape, d->shapes) {
+    foreach(KShape *shape, d->shapes) {
         shape->setTransparency(*transparencyIt);
         shape->update();
         transparencyIt++;

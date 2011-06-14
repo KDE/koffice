@@ -21,7 +21,7 @@
 #include "TestShapeContainer.h"
 #include <MockShapes.h>
 
-#include <KoShape.h>
+#include <KShape.h>
 #include <QUndoCommand>
 #include <KoShapeGroupCommand.h>
 #include <KoShapeUngroupCommand.h>
@@ -106,8 +106,8 @@ void TestShapeContainer::testSetParent2()
 
 void TestShapeContainer::testScaling()
 {
-    KoShape *shape1 = new MockShape();
-    KoShape *shape2 = new MockShape();
+    KShape *shape1 = new MockShape();
+    KShape *shape2 = new MockShape();
 
     shape1->setSize(QSizeF(10., 10.));
     shape1->setPosition(QPointF(20., 20.));
@@ -115,7 +115,7 @@ void TestShapeContainer::testScaling()
     shape2->setSize(QSizeF(30., 10.));
     shape2->setPosition(QPointF(10., 40.));
 
-    QList<KoShape*> groupedShapes;
+    QList<KShape*> groupedShapes;
     groupedShapes.append(shape1);
     groupedShapes.append(shape2);
 
@@ -123,7 +123,7 @@ void TestShapeContainer::testScaling()
     QUndoCommand* groupCommand = KoShapeGroupCommand::createCommand(group, groupedShapes);
     groupCommand->redo();
 
-    QList<KoShape*> transformShapes;
+    QList<KShape*> transformShapes;
     transformShapes.append(groupedShapes);
     transformShapes.append(group);
 
@@ -132,7 +132,7 @@ void TestShapeContainer::testScaling()
 
     QList<QTransform> oldTransformations;
     QList<QTransform> newTransformations;
-    foreach(const KoShape* shape, transformShapes) {
+    foreach(const KShape* shape, transformShapes) {
         QTransform oldTransform = shape->transformation();
         oldTransformations.append(oldTransform);
         newTransformations.append(oldTransform*matrix);
@@ -170,8 +170,8 @@ void TestShapeContainer::testScaling()
 
 void TestShapeContainer::testScaling2()
 {
-    KoShape *shape1 = new MockShape();
-    KoShape *shape2 = new MockShape();
+    KShape *shape1 = new MockShape();
+    KShape *shape2 = new MockShape();
 
     shape1->setPosition(QPointF(20., 20.));
     shape1->setSize(QSizeF(10., 10.));
@@ -180,7 +180,7 @@ void TestShapeContainer::testScaling2()
     shape2->setSize(QSizeF(30., 10.));
 
 
-    QList<KoShape*> groupedShapes;
+    QList<KShape*> groupedShapes;
     groupedShapes.append(shape1);
     groupedShapes.append(shape2);
 
@@ -191,7 +191,7 @@ void TestShapeContainer::testScaling2()
     KSelection* selection = new KSelection();
     selection->select(shape1, true);
 
-    QList<KoShape*> transformShapes;
+    QList<KShape*> transformShapes;
     transformShapes.append(selection->selectedShapes());
 
     QTransform matrix;
@@ -199,7 +199,7 @@ void TestShapeContainer::testScaling2()
 
     QList<QTransform> oldTransformations;
     QList<QTransform> newTransformations;
-    foreach(const KoShape* shape, transformShapes) {
+    foreach(const KShape* shape, transformShapes) {
         QTransform oldTransform = shape->transformation();
         oldTransformations.append(oldTransform);
         newTransformations.append(oldTransform*matrix);

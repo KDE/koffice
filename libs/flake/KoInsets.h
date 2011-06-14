@@ -25,7 +25,7 @@
 #include <QtCore/QDebug>
 
 class KXmlElement;
-class KoShape;
+class KShape;
 
 /**
  * An Insets object is a representation of the borders of a shape.
@@ -73,7 +73,7 @@ public:
     }
 
     //void saveTo(KXmlElement &element, const QString &prefix);
-    void saveTo(KoShape *shape, const QString &prefix) const;
+    void saveTo(KShape *shape, const QString &prefix) const;
     void fillFrom(const KXmlElement &element, const QString &NS, const QString &attributePrefix);
 
     qreal top;     ///< Top inset

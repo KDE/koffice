@@ -33,7 +33,7 @@ class KCanvasBase;
 class KoToolBase;
 class KCreateShapesTool;
 class KActionCollection;
-class KoShape;
+class KShape;
 class QToolButton;
 class KoShapeLayer;
 
@@ -152,7 +152,7 @@ public:
      * @returns the toolId for the shapes.
      * @param shapes a list of shapes, a selection for example, that is used to look for the tool.
      */
-    QString preferredToolForSelection(const QList<KoShape*> &shapes);
+    QString preferredToolForSelection(const QList<KShape*> &shapes);
 
     /// Struct for the createToolList return type.
     struct Button {
@@ -246,7 +246,7 @@ private:
     Q_PRIVATE_SLOT(d, void movedFocus(QWidget *from, QWidget *to))
     Q_PRIVATE_SLOT(d, void updateCursor(const QCursor &cursor))
     Q_PRIVATE_SLOT(d, void switchBackRequested())
-    Q_PRIVATE_SLOT(d, void selectionChanged(QList<KoShape*> shapes))
+    Q_PRIVATE_SLOT(d, void selectionChanged(QList<KShape*> shapes))
     Q_PRIVATE_SLOT(d, void currentLayerChanged(const KoShapeLayer *layer))
     Q_PRIVATE_SLOT(d, void switchToolTemporaryRequested(const QString &id))
 

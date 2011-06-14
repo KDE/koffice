@@ -38,8 +38,8 @@ ShapeResizeStrategy::ShapeResizeStrategy(KoToolBase *tool,
     : KInteractionStrategy(tool), m_lastScale(1.0,1.0)
 {
     Q_ASSERT(tool->canvas()->shapeManager()->selection()->count() > 0);
-    QList<KoShape*> selectedShapes = tool->canvas()->shapeManager()->selection()->selectedShapes(KoFlake::StrippedSelection);
-    foreach(KoShape *shape, selectedShapes) {
+    QList<KShape*> selectedShapes = tool->canvas()->shapeManager()->selection()->selectedShapes(KoFlake::StrippedSelection);
+    foreach(KShape *shape, selectedShapes) {
         if (! shape->isEditable())
             continue;
         m_selectedShapes << shape;
@@ -50,7 +50,7 @@ ShapeResizeStrategy::ShapeResizeStrategy(KoToolBase *tool,
     }
     m_start = clicked;
 
-    KoShape *shp = 0;
+    KShape *shp = 0;
     if (tool->canvas()->shapeManager()->selection()->count()>1)
        shp = tool->canvas()->shapeManager()->selection();
     if (tool->canvas()->shapeManager()->selection()->count()==1)
@@ -100,7 +100,7 @@ void ShapeResizeStrategy::handleMouseMove(const QPointF &point, Qt::KeyboardModi
     QPointF newPos = tool()->canvas()->snapGuide()->snap(point, modifiers);
 
     bool keepAspect = modifiers & Qt::ShiftModifier;
-    foreach(KoShape *shape, m_selectedShapes)
+    foreach(KShape *shape, m_selectedShapes)
         keepAspect = keepAspect || shape->keepAspectRatio();
 
     qreal startWidth = m_initialSize.width();
@@ -167,7 +167,7 @@ void ShapeResizeStrategy::resizeBy(const QPointF &center, qreal zoomX, qreal zoo
     mirrorMatrix.translate(-center.x(), -center.y()); // and back
 
     int i = 0;
-    foreach (KoShape *shape, m_selectedShapes) {
+    foreach (KShape *shape, m_selectedShapes) {
         shape->update();
         shape->beginEditBlock();
 

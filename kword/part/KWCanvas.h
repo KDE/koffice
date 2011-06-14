@@ -95,7 +95,7 @@ public:
         return m_toolProxy;
     }
     /// reimplemented method from superclass
-    virtual void clipToDocument(const KoShape *shape, QPointF &move) const;
+    virtual void clipToDocument(const KShape *shape, QPointF &move) const;
     /// reimplemented method from superclass
     virtual void updateInputMethodInfo();
     /// reimplemented method from superclass

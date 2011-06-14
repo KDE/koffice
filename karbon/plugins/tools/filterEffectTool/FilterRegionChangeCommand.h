@@ -23,7 +23,7 @@
 #include <QtGui/QUndoCommand>
 #include <QtCore/QRectF>
 
-class KoShape;
+class KShape;
 class KFilterEffect;
 
 /// A command to change the region of a filter effect
@@ -37,7 +37,7 @@ public:
      * @param shape the shape the filter effect is applied to
      * @param parent the parent undo command
      */
-    explicit FilterRegionChangeCommand(KFilterEffect *effect, const QRectF &filterRegion, KoShape *shape = 0, QUndoCommand *parent = 0);
+    explicit FilterRegionChangeCommand(KFilterEffect *effect, const QRectF &filterRegion, KShape *shape = 0, QUndoCommand *parent = 0);
 
     /// redo the command
     virtual void redo();
@@ -48,7 +48,7 @@ private:
     KFilterEffect * m_effect; ///< the filter effect we are working on
     QRectF m_oldRegion; ///< the old filter region
     QRectF m_newRegion; ///< the new filter region
-    KoShape * m_shape;  ///< the shape the effect is applied to, might be zero
+    KShape * m_shape;  ///< the shape the effect is applied to, might be zero
 };
 
 #endif // FILTERREGIONCHANGECOMMAND_H

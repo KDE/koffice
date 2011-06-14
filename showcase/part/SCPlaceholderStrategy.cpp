@@ -27,7 +27,7 @@
 #include <QTextOption>
 
 #include <klocale.h>
-#include <KoShape.h>
+#include <KShape.h>
 #include <KoShapeFactoryBase.h>
 #include <KoShapeRegistry.h>
 #include <KoShapeSavingContext.h>
@@ -114,9 +114,9 @@ SCPlaceholderStrategy::~SCPlaceholderStrategy()
 {
 }
 
-KoShape *SCPlaceholderStrategy::createShape(KResourceManager *rm)
+KShape *SCPlaceholderStrategy::createShape(KResourceManager *rm)
 {
-    KoShape * shape = 0;
+    KShape * shape = 0;
     KoShapeFactoryBase * factory = KoShapeRegistry::instance()->value(m_placeholderData->m_shapeId);
     if (factory) {
         shape = factory->createDefaultShape(rm);
@@ -126,7 +126,7 @@ KoShape *SCPlaceholderStrategy::createShape(KResourceManager *rm)
 
 void SCPlaceholderStrategy::paint(QPainter &painter, const KoViewConverter &converter, const QRectF &rect)
 {
-    KoShape::applyConversion(painter, converter);
+    KShape::applyConversion(painter, converter);
     QPen penText(Qt::black);
     painter.setPen(penText);
     //painter.setFont()

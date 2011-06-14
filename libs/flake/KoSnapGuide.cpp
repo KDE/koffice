@@ -49,7 +49,7 @@ public:
     }
 
     KCanvasBase *canvas;
-    KoShape *editedShape;
+    KShape *editedShape;
 
     QList<KoSnapStrategy*> strategies;
     KoSnapStrategy *currentStrategy;
@@ -58,7 +58,7 @@ public:
     bool active;
     int snapDistance;
     QList<KPathPoint*> ignoredPoints;
-    QList<KoShape*> ignoredShapes;
+    QList<KShape*> ignoredShapes;
 };
 
 KoSnapGuide::KoSnapGuide(KCanvasBase *canvas)
@@ -78,12 +78,12 @@ KoSnapGuide::~KoSnapGuide()
     delete d;
 }
 
-void KoSnapGuide::setEditedShape(KoShape *shape)
+void KoSnapGuide::setEditedShape(KShape *shape)
 {
     d->editedShape = shape;
 }
 
-KoShape *KoSnapGuide::editedShape() const
+KShape *KoSnapGuide::editedShape() const
 {
     return d->editedShape;
 }
@@ -209,12 +209,12 @@ QList<KPathPoint*> KoSnapGuide::ignoredPathPoints() const
     return d->ignoredPoints;
 }
 
-void KoSnapGuide::setIgnoredShapes(const QList<KoShape*> &ignoredShapes)
+void KoSnapGuide::setIgnoredShapes(const QList<KShape*> &ignoredShapes)
 {
     d->ignoredShapes = ignoredShapes;
 }
 
-QList<KoShape*> KoSnapGuide::ignoredShapes() const
+QList<KShape*> KoSnapGuide::ignoredShapes() const
 {
     return d->ignoredShapes;
 }

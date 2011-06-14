@@ -23,13 +23,13 @@
 #include <KInteractionStrategy.h>
 #include "KarbonFilterEffectsTool.h"
 
-class KoShape;
+class KShape;
 class KFilterEffect;
 
 class FilterRegionEditStrategy : public KInteractionStrategy
 {
 public:
-    FilterRegionEditStrategy(KoToolBase* parent, KoShape * shape, KFilterEffect *effect, KarbonFilterEffectsTool::EditMode mode);
+    FilterRegionEditStrategy(KoToolBase* parent, KShape * shape, KFilterEffect *effect, KarbonFilterEffectsTool::EditMode mode);
 
     // reimplemented from KInteractionStrategy
     virtual void handleMouseMove(const QPointF &mouseLocation, Qt::KeyboardModifiers modifiers);
@@ -40,7 +40,7 @@ public:
 
 private:
     KFilterEffect * m_effect;
-    KoShape * m_shape;
+    KShape * m_shape;
     QRectF m_sizeRect;
     QRectF m_filterRect;
     KarbonFilterEffectsTool::EditMode m_editMode;

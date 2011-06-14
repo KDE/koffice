@@ -51,7 +51,7 @@ public:
      * @param boundingRect the rect the shapes will be distributed in
      * @param parent the parent command used for macro commands
      */
-    KoShapeDistributeCommand(const QList<KoShape*> &shapes, Distribute distribute,
+    KoShapeDistributeCommand(const QList<KShape*> &shapes, Distribute distribute,
             const QRectF &boundingRect, QUndoCommand *parent = 0);
     virtual ~KoShapeDistributeCommand();
     /// redo the command

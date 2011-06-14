@@ -77,7 +77,7 @@ class KXmlElement;
  * in the model to be reused in different parts of the document. For example
  * by having two flake objects that show that same data. Or each showing a section of it.
  *
- * The KoShape data is completely in postscript-points (pt) (see KUnit
+ * The KShape data is completely in postscript-points (pt) (see KUnit
  * for conversion methods to and from points).
  * This image will explain the real-world use of the shape and its options.
  * <img src="../flake_shape_coords.png" align=center><br>
@@ -93,7 +93,7 @@ class KXmlElement;
  * <h1>Shape interaction notifications</h1>
  * We had several notification methods that allow your shape to be notified of changes in other
  * shapes positions or rotation etc.
- * <ol><li>The most general is KoShape::shapeChanged().<br>
+ * <ol><li>The most general is KShape::shapeChanged().<br>
  * a virtual method that you can use to check various changed to your shape made by tools or otherwise.</li>
  * <li>for shape hierarchies the parent may receive a notification when a child was modified.
  *  This is done though KoShapeContainerModel::childChanged()</li>
@@ -101,10 +101,10 @@ class KXmlElement;
  * You can register your shape to be sensitive to any changes like moving or whatever to
  * <b>other</b> shapes that intersect yours.
  * Such changes will then be notified to your shape using the method from (1) You should call
- * KoShape::setCollisionDetection(bool) to enable this.
+ * KShape::setCollisionDetection(bool) to enable this.
  * </ol>
  */
-class FLAKE_EXPORT KoShape
+class FLAKE_EXPORT KShape
 {
 public:
     /// Used by shapeChanged() to select which change was made
@@ -129,17 +129,17 @@ public:
     /**
      * @brief Constructor
      */
-    KoShape();
+    KShape();
 
     /**
      * @brief Constructor with a color background
      */
-    KoShape(const QColor &color);
+    KShape(const QColor &color);
 
     /**
      * @brief Destructor
      */
-    virtual ~KoShape();
+    virtual ~KShape();
 
     /**
      * @brief Paint the shape
@@ -306,7 +306,7 @@ public:
      * @param point the position where to place the connector. The points coordinate system
      *   are based around the zero-pos which is the top-left of the shape
      *   The point does not have to be inside the boundings rectangle.  The point is in pt,
-     *   just like the rest of the KoShape class uses.
+     *   just like the rest of the KShape class uses.
      */
     void addConnectionPoint(const QPointF &point);
     void setConnectionPolicy(int connectionIndex, const KoShapeConnectionPolicy &policy);
@@ -506,7 +506,7 @@ public:
     /**
      * Request a repaint to be queued.
      * The repaint will be restricted to the parameters rectangle, which is expected to be
-     * in points (the internal coordinates system of KoShape) and it is expected to be
+     * in points (the internal coordinates system of KShape) and it is expected to be
      * normalized.
      * <p>This method will return immediately and only request a repaint. Successive calls
      * will be merged into an appropriate repaint action.
@@ -519,7 +519,7 @@ public:
      * @param s1 the first shape
      * @param s2 the second shape
      */
-    static bool compareShapeZIndex(KoShape *s1, KoShape *s2);
+    static bool compareShapeZIndex(KShape *s1, KShape *s2);
 
     /**
      * returns the outline of the shape in the form of a path.
@@ -684,7 +684,7 @@ public:
      * is a notable exclusion.
      * @param shape the shape to use as original
      */
-    void copySettings(const KoShape *shape);
+    void copySettings(const KShape *shape);
 
     /**
      * Convenience method that allows people implementing paint() to use the shape
@@ -786,16 +786,16 @@ public:
      * @return true if dependency could be established, otherwise false
      * @see removeDependee(), hasDependee()
      */
-    bool addDependee(KoShape *shape);
+    bool addDependee(KShape *shape);
 
     /**
      * Removes as shape depending on this shape.
      * @see addDependee(), hasDependee()
      */
-    void removeDependee(KoShape *shape);
+    void removeDependee(KShape *shape);
 
     /// Returns if the given shape is dependent on this shape
-    bool hasDependee(KoShape *shape) const;
+    bool hasDependee(KShape *shape) const;
 
     /**
      * Set additional attribute
@@ -870,14 +870,14 @@ public:
      * Notice that if the set is non-empty 'this' shape is no longer looked at. You can choose
      * to add itself to the set too.
      */
-    QSet<KoShape*> toolDelegates() const;
+    QSet<KShape*> toolDelegates() const;
 
     /**
      * Set the tool delegates.
      * @param delegates the new delegates.
      * @see toolDelegates()
      */
-    void setToolDelegates(const QSet<KoShape*> &delegates);
+    void setToolDelegates(const QSet<KShape*> &delegates);
 
     /**
      * Mark the beginning of an edit block where the user can call various times to
@@ -916,7 +916,7 @@ public:
 
 protected:
     /// constructor
-    KoShape(KoShapePrivate &);
+    KShape(KoShapePrivate &);
 
     /* ** loading saving helper methods */
     /// attributes from ODF 1.1 chapter 9.2.15 Common Drawing Shape Attributes
@@ -987,11 +987,11 @@ protected:
     /* ** end loading saving */
 
     /**
-     * A hook that allows inheriting classes to do something after a KoShape property changed
+     * A hook that allows inheriting classes to do something after a KShape property changed
      * This is called whenever the shape, position rotation or scale properties were altered.
      * @param type an indicator which type was changed.
      */
-    virtual void shapeChanged(ChangeType type, KoShape *shape);
+    virtual void shapeChanged(ChangeType type, KShape *shape);
 
     /// return the current matrix that contains the rotation/scale/position of this shape
     QTransform transform() const;
@@ -999,9 +999,9 @@ protected:
     KoShapePrivate *d_ptr;
 
 private:
-    Q_DECLARE_PRIVATE(KoShape)
+    Q_DECLARE_PRIVATE(KShape)
 };
 
-Q_DECLARE_METATYPE(KoShape*)
+Q_DECLARE_METATYPE(KShape*)
 
 #endif

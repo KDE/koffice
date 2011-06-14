@@ -23,7 +23,7 @@
 
 #include "flake_export.h"
 
-class KoShape;
+class KShape;
 class KOdfGenericStyle;
 class KoShapeSavingContext;
 class KoViewConverter;
@@ -35,7 +35,7 @@ class QPainter;
  * A model for borders around KoShapes.
  * Classes that implement this model will be allowed to draw a border on the outline
  * of a shape.
- * Note that since the important members take a KoShape as argument it is possible,
+ * Note that since the important members take a KShape as argument it is possible,
  * and preferred behavior, to have one instance of a border that is reused on several
  * objects.
  */
@@ -75,7 +75,7 @@ public:
      *       shape as its start coordinate.
      * @param converter to convert between internal and view coordinates.
      */
-    virtual void paint(KoShape *shape, QPainter &painter, const KoViewConverter &converter) = 0;
+    virtual void paint(KShape *shape, QPainter &painter, const KoViewConverter &converter) = 0;
 
     /**
      * Paint the border in the given color
@@ -88,7 +88,7 @@ public:
      * @param converter to convert between internal and view coordinates.
      * @param color to use to paint the border.
      */
-    virtual void paint(KoShape *shape, QPainter &painter, const KoViewConverter &converter, const QColor &color) = 0;
+    virtual void paint(KShape *shape, QPainter &painter, const KoViewConverter &converter, const QColor &color) = 0;
 
     /**
      * Increments the use-value.

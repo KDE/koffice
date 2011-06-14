@@ -22,7 +22,7 @@
 
 #include <QtGui/QUndoCommand>
 
-class KoShape;
+class KShape;
 class KFilterEffect;
 
 struct InputChangeData {
@@ -44,9 +44,9 @@ struct InputChangeData {
 class FilterInputChangeCommand : public QUndoCommand
 {
 public:
-    explicit FilterInputChangeCommand(const InputChangeData &data, KoShape *shape = 0, QUndoCommand *parent = 0);
+    explicit FilterInputChangeCommand(const InputChangeData &data, KShape *shape = 0, QUndoCommand *parent = 0);
 
-    explicit FilterInputChangeCommand(const QList<InputChangeData> &data, KoShape * shape = 0, QUndoCommand *parent = 0);
+    explicit FilterInputChangeCommand(const QList<InputChangeData> &data, KShape * shape = 0, QUndoCommand *parent = 0);
 
     /// redo the command
     virtual void redo();
@@ -54,7 +54,7 @@ public:
     virtual void undo();
 private:
     QList<InputChangeData> m_data;
-    KoShape * m_shape;
+    KShape * m_shape;
 };
 
 #endif // FILTERINPUTCHANGECOMMAND_H

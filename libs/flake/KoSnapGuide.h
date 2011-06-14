@@ -29,7 +29,7 @@
 #include <QtGui/QPainterPath>
 
 class KoSnapStrategy;
-class KoShape;
+class KShape;
 class KPathPoint;
 class KoViewConverter;
 class KCanvasBase;
@@ -86,10 +86,10 @@ public:
     QRectF boundingRect();
 
     /// Adds an additional shape to snap to (useful when creating a path)
-    void setEditedShape(KoShape *shape);
+    void setEditedShape(KShape *shape);
 
     /// returns the extra shapes to use
-    KoShape *editedShape() const;
+    KShape *editedShape() const;
 
     /// enables the strategies used for snapping
     void enableSnapStrategies(Strategies strategies);
@@ -127,10 +127,10 @@ public:
     QList<KPathPoint*> ignoredPathPoints() const;
 
     /// Sets list of ignored shapes
-    void setIgnoredShapes(const QList<KoShape*> &ignoredShapes);
+    void setIgnoredShapes(const QList<KShape*> &ignoredShapes);
 
     /// Returns list of ignored shapes
-    QList<KoShape*> ignoredShapes() const;
+    QList<KShape*> ignoredShapes() const;
 
     /// Resets the snap guide
     void reset();

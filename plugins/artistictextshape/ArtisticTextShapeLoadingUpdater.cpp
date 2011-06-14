@@ -31,7 +31,7 @@ ArtisticTextShapeLoadingUpdater::~ArtisticTextShapeLoadingUpdater()
 {
 }
 
-void ArtisticTextShapeLoadingUpdater::update(KoShape * shape)
+void ArtisticTextShapeLoadingUpdater::update(KShape * shape)
 {
     // we have already loaded the correct transformation, so save it here
     // and apply after putting us on the path shape

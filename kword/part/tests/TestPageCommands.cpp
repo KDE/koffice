@@ -604,7 +604,7 @@ void TestPageCommands::testPageStylePropertiesCommand2()
         KWPage page = manager->page(i);
         QVERIFY(page.height() <= 500); // not 1000 yet
         QVERIFY(page.isValid());
-        KoShape *shape = fs->frames().at(i-1)->shape();
+        KShape *shape = fs->frames().at(i-1)->shape();
         QCOMPARE(shape->position(), QPointF(-10, page.offsetInDocument() + 10));
     }
 
@@ -625,7 +625,7 @@ void TestPageCommands::testPageStylePropertiesCommand2()
     for (int i = 1; i <= manager->pageCount(); ++i) {
         KWPage page = manager->page(i);
         QVERIFY(page.isValid());
-        KoShape *shape = fs->frames().at(i-1)->shape();
+        KShape *shape = fs->frames().at(i-1)->shape();
         QCOMPARE(shape->position(), QPointF(-10, page.offsetInDocument() + 10));
     }
 }

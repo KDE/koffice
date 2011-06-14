@@ -106,7 +106,7 @@ QString SCViewAdaptor::pageNotes(int page, const QString &format) const
         Q_ASSERT(0 != prPage);
         if (0 != prPage) {
             SCNotes *pageNotes = prPage->pageNotes();
-            KoShape *textShape = pageNotes->textShape();
+            KShape *textShape = pageNotes->textShape();
             KoTextShapeData *textShapeData = qobject_cast<KoTextShapeData *>(textShape->userData());
             Q_ASSERT(0 != textShapeData);
             if (0 != textShapeData) {

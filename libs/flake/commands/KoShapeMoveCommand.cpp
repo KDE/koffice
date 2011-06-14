@@ -25,11 +25,11 @@
 class KoShapeMoveCommand::Private
 {
 public:
-    QList<KoShape*> shapes;
+    QList<KShape*> shapes;
     QList<QPointF> previousPositions, newPositions;
 };
 
-KoShapeMoveCommand::KoShapeMoveCommand(const QList<KoShape*> &shapes, QList<QPointF> &previousPositions, QList<QPointF> &newPositions, QUndoCommand *parent)
+KoShapeMoveCommand::KoShapeMoveCommand(const QList<KShape*> &shapes, QList<QPointF> &previousPositions, QList<QPointF> &newPositions, QUndoCommand *parent)
         : QUndoCommand(parent),
         d(new Private())
 {

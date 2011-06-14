@@ -95,7 +95,7 @@ public:
     void scrollToCell(const QPoint &location);
 
 public Q_SLOTS:
-    virtual void activate(ToolActivation toolActivation, const QSet<KoShape*> &shapes);
+    virtual void activate(ToolActivation toolActivation, const QSet<KShape*> &shapes);
     virtual void deactivate();
 
     virtual void deleteEditor(bool saveChanges, bool expandMatrix = false);

@@ -113,7 +113,7 @@
 #include <KOdfStylesReader.h>
 #include <KPointerEvent.h>
 #include <KSelection.h>
-#include <KoShape.h>
+#include <KShape.h>
 #include <KoShapeManager.h>
 #include <KOdfStore.h>
 #include <KoViewConverter.h>
@@ -863,7 +863,7 @@ CellToolBase::~CellToolBase()
 
 void CellToolBase::paint(QPainter &painter, const KoViewConverter &viewConverter)
 {
-    KoShape::applyConversion(painter, viewConverter);
+    KShape::applyConversion(painter, viewConverter);
     painter.translate(offset()); // the table shape offset
     const QRectF paintRect = QRectF(QPointF(), size());
 
@@ -1075,7 +1075,7 @@ void CellToolBase::inputMethodEvent(QInputMethodEvent * event)
     }
 }
 
-void CellToolBase::activate(ToolActivation toolActivation, const QSet<KoShape*> &shapes)
+void CellToolBase::activate(ToolActivation toolActivation, const QSet<KShape*> &shapes)
 {
     Q_UNUSED(toolActivation);
     Q_UNUSED(shapes);

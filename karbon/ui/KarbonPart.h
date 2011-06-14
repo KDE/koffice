@@ -69,9 +69,9 @@ public:
     virtual bool saveOdf(SavingContext &documentContext);
 
     /// implemented from KoShapeController
-    virtual void addShape(KoShape* shape);
+    virtual void addShape(KShape* shape);
     /// implemented from KoShapeController
-    virtual void removeShape(KoShape* shape);
+    virtual void removeShape(KShape* shape);
     /// implemented from KoShapeController
     virtual QMap<QString, KDataCenterBase*> dataCenterMap() const;
 

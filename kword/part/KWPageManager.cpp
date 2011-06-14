@@ -24,7 +24,7 @@
 #include "KWPage.h"
 #include "KWDocument.h"
 
-#include <KoShape.h>
+#include <KShape.h>
 #include <KUnit.h>
 
 #include <KDebug>
@@ -169,7 +169,7 @@ int KWPageManager::pageNumber(const QPointF &point) const
     return answer;
 }
 
-int KWPageManager::pageNumber(const KoShape *shape) const
+int KWPageManager::pageNumber(const KShape *shape) const
 {
     return pageNumber(shape->absolutePosition());
 }
@@ -203,7 +203,7 @@ KWPage KWPageManager::page(int pageNum) const
     return KWPage();
 }
 
-KWPage KWPageManager::page(const KoShape *shape) const
+KWPage KWPageManager::page(const KShape *shape) const
 {
     return page(pageNumber(shape));
 }

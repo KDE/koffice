@@ -63,7 +63,7 @@ QRectF KarbonPrintJob::preparePage(int)
     return QRectF(QPointF(), scale * contentSize);
 }
 
-QList<KoShape*> KarbonPrintJob::shapesOnPage(int)
+QList<KShape*> KarbonPrintJob::shapesOnPage(int)
 {
     return shapeManager()->shapes();
 }

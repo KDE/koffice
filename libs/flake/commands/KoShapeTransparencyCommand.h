@@ -26,7 +26,7 @@
 #include <QList>
 #include <QBrush>
 
-class KoShape;
+class KShape;
 class KoShapeBackground;
 
 /// The undo / redo command for setting the shape transparency
@@ -39,7 +39,7 @@ public:
      * @param transparency the new shape transparency
      * @param parent the parent command used for macro commands
      */
-    KoShapeTransparencyCommand(const QList<KoShape*> &shapes, qreal transparency, QUndoCommand *parent = 0);
+    KoShapeTransparencyCommand(const QList<KShape*> &shapes, qreal transparency, QUndoCommand *parent = 0);
 
     /**
      * Command to set a new shape transparency.
@@ -47,7 +47,7 @@ public:
      * @param transparency the new shape transparency
      * @param parent the parent command used for macro commands
      */
-    KoShapeTransparencyCommand(KoShape *shape, qreal transparency, QUndoCommand *parent = 0);
+    KoShapeTransparencyCommand(KShape *shape, qreal transparency, QUndoCommand *parent = 0);
 
     /**
      * Command to set new shape transparencies.
@@ -55,7 +55,7 @@ public:
      * @param transparencies the new transparencies, one for each shape
      * @param parent the parent command used for macro commands
      */
-    KoShapeTransparencyCommand(const QList<KoShape*> &shapes, const QList<qreal> &transparencies, QUndoCommand *parent = 0);
+    KoShapeTransparencyCommand(const QList<KShape*> &shapes, const QList<qreal> &transparencies, QUndoCommand *parent = 0);
 
     virtual ~KoShapeTransparencyCommand();
     /// redo the command

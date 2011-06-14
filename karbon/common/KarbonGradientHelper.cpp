@@ -19,7 +19,7 @@
 
 #include "KarbonGradientHelper.h"
 
-#include <KoShape.h>
+#include <KShape.h>
 #include <KLineBorder.h>
 #include <KGradientBackground.h>
 

@@ -38,9 +38,9 @@ public:
     /// reimplemented from KoShapeBorderModel
     virtual bool hasTransparency() const;
     /// reimplemented from KoShapeBorderModel
-    virtual void paint(KoShape *shape, QPainter &painter, const KoViewConverter &converter);
+    virtual void paint(KShape *shape, QPainter &painter, const KoViewConverter &converter);
     /// reimplemented from KoShapeBorderModel
-    virtual void paint(KoShape *shape, QPainter &painter, const KoViewConverter &converter, const QColor &color);
+    virtual void paint(KShape *shape, QPainter &painter, const KoViewConverter &converter, const QColor &color);
 };
 
 #endif

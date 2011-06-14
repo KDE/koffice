@@ -19,7 +19,7 @@
    Boston, MA 02110-1301, USA.
  */
 #include "KResourceManager.h"
-#include "KoShape.h"
+#include "KShape.h"
 #include "KLineBorder.h"
 
 #include <QVariant>
@@ -85,7 +85,7 @@ QVariant KResourceManager::resource(int key) const
         return d->resources.value(key);
 }
 
-void KResourceManager::setResource(int key, KoShape *shape)
+void KResourceManager::setResource(int key, KShape *shape)
 {
     QVariant v;
     v.setValue(shape);
@@ -128,14 +128,14 @@ QColor KResourceManager::backgroundColor() const
     return colorResource(KoCanvasResource::BackgroundColor);
 }
 
-KoShape *KResourceManager::koShapeResource(int key) const
+KShape *KResourceManager::koShapeResource(int key) const
 {
     if (d->lazyResources.contains(key))
         d->fetchLazy(key, this);
     if (! d->resources.contains(key))
         return 0;
 
-    return resource(key).value<KoShape *>();
+    return resource(key).value<KShape *>();
 }
 
 void KResourceManager::setHandleRadius(int handleRadius)

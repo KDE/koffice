@@ -30,7 +30,7 @@ KoPAPageContainerModel::~KoPAPageContainerModel()
 {
 }
 
-void KoPAPageContainerModel::childChanged(KoShape *child, KoShape::ChangeType type)
+void KoPAPageContainerModel::childChanged(KShape *child, KShape::ChangeType type)
 {
     Q_UNUSED(type);
     kDebug(30010) << "page changed" << child->parent();

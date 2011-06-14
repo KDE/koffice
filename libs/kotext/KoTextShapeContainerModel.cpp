@@ -31,14 +31,14 @@
 
 struct Relation
 {
-    Relation(KoShape *shape = 0)
+    Relation(KShape *shape = 0)
         : child(shape),
         anchor(0),
         nested(false),
         inheritsTransform(false)
     {
     }
-    KoShape *child;
+    KShape *child;
     KoTextAnchor *anchor;
     uint nested : 1;
     uint inheritsTransform :1;
@@ -47,7 +47,7 @@ struct Relation
 class KoTextShapeContainerModel::Private
 {
 public:
-    QHash<const KoShape*, Relation> children;
+    QHash<const KShape*, Relation> children;
     QList<KoTextAnchor *> shapeRemovedAnchors;
 };
 
@@ -61,7 +61,7 @@ KoTextShapeContainerModel::~KoTextShapeContainerModel()
     delete d;
 }
 
-void KoTextShapeContainerModel::add(KoShape *child)
+void KoTextShapeContainerModel::add(KShape *child)
 {
     if (d->children.contains(child))
         return;
@@ -82,7 +82,7 @@ void KoTextShapeContainerModel::add(KoShape *child)
     }
 }
 
-void KoTextShapeContainerModel::remove(KoShape *child)
+void KoTextShapeContainerModel::remove(KShape *child)
 {
     Relation relation = d->children.value(child);
     d->children.remove(child);
@@ -92,25 +92,25 @@ void KoTextShapeContainerModel::remove(KoShape *child)
     }
 }
 
-void KoTextShapeContainerModel::setClipped(const KoShape *child, bool clipping)
+void KoTextShapeContainerModel::setClipped(const KShape *child, bool clipping)
 {
     Q_ASSERT(d->children.contains(child));
     d->children[child].nested = clipping;
 }
 
-bool KoTextShapeContainerModel::isClipped(const KoShape *child) const
+bool KoTextShapeContainerModel::isClipped(const KShape *child) const
 {
     Q_ASSERT(d->children.contains(child));
     return d->children[child].nested;
 }
 
-void KoTextShapeContainerModel::setInheritsTransform(const KoShape *shape, bool inherit)
+void KoTextShapeContainerModel::setInheritsTransform(const KShape *shape, bool inherit)
 {
     Q_ASSERT(d->children.contains(shape));
     d->children[shape].inheritsTransform = inherit;
 }
 
-bool KoTextShapeContainerModel::inheritsTransform(const KoShape *shape) const
+bool KoTextShapeContainerModel::inheritsTransform(const KShape *shape) const
 {
     Q_ASSERT(d->children.contains(shape));
     return d->children[shape].inheritsTransform;
@@ -122,9 +122,9 @@ int KoTextShapeContainerModel::count() const
     return d->children.count();
 }
 
-QList<KoShape*> KoTextShapeContainerModel::shapes() const
+QList<KShape*> KoTextShapeContainerModel::shapes() const
 {
-    QList<KoShape*> answer;
+    QList<KShape*> answer;
 #if QT_VERSION >= 0x040700
     answer.reserve(d->children.count());
 #endif
@@ -134,16 +134,16 @@ QList<KoShape*> KoTextShapeContainerModel::shapes() const
     return answer;
 }
 
-void KoTextShapeContainerModel::containerChanged(KoShapeContainer *container, KoShape::ChangeType type)
+void KoTextShapeContainerModel::containerChanged(KoShapeContainer *container, KShape::ChangeType type)
 {
     Q_UNUSED(container);
     Q_UNUSED(type);
 }
 
-void KoTextShapeContainerModel::childChanged(KoShape *child, KoShape::ChangeType type)
+void KoTextShapeContainerModel::childChanged(KShape *child, KShape::ChangeType type)
 {
-    if (type == KoShape::RotationChanged || type == KoShape::ScaleChanged ||
-            type == KoShape::ShearChanged || type == KoShape::SizeChanged) {
+    if (type == KShape::RotationChanged || type == KShape::ScaleChanged ||
+            type == KShape::ShearChanged || type == KShape::SizeChanged) {
 
         KoTextShapeData *data  = qobject_cast<KoTextShapeData*>(child->parent()->userData());
         Q_ASSERT(data);
@@ -173,7 +173,7 @@ void KoTextShapeContainerModel::removeAnchor(KoTextAnchor *anchor)
     }
 }
 
-void KoTextShapeContainerModel::proposeMove(KoShape *child, QPointF &move)
+void KoTextShapeContainerModel::proposeMove(KShape *child, QPointF &move)
 {
     if (!d->children.contains(child))
         return;
@@ -257,7 +257,7 @@ void KoTextShapeContainerModel::proposeMove(KoShape *child, QPointF &move)
     move.setY(0);
 }
 
-bool KoTextShapeContainerModel::isChildLocked(const KoShape *child) const
+bool KoTextShapeContainerModel::isChildLocked(const KShape *child) const
 {
     return child->isGeometryProtected();
 }

@@ -49,7 +49,7 @@ void SCAnimationTool::paint(QPainter &painter, const KoViewConverter &converter)
 }
 
 
-void SCAnimationTool::activate(ToolActivation toolActivation, const QSet<KoShape*> &shapes)
+void SCAnimationTool::activate(ToolActivation toolActivation, const QSet<KShape*> &shapes)
 {
     setCursor(Qt::ArrowCursor);
     repaintDecorations();

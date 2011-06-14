@@ -29,7 +29,7 @@ void TestConnection::testRouteSimple()
     MockCanvas canvas;
     KoShapeManager manager(&canvas);
 
-    KoShape shape1;
+    KShape shape1;
     shape1.setPosition(30, 50);
     shape1.setSize(100, 200);
     manager.addShape(&shape1);

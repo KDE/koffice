@@ -36,7 +36,7 @@
  * Usage;
  *
  * For all QFont() and QFontMetrics constructors add an instance of this PaintDevice
- * to the constructor if those fonts are to be used for painting in a KoShape inheriting
+ * to the constructor if those fonts are to be used for painting in a KShape inheriting
  * class.
  *
  * Note: never try to actually paint on this paint device, since that will noisily crash.

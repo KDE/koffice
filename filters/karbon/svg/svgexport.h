@@ -36,7 +36,7 @@
 class KarbonDocument;
 class KoShapeLayer;
 class KoShapeContainer;
-class KoShape;
+class KShape;
 class KPathShape;
 class KoShapeBorderModel;
 class ArtisticTextShape;
@@ -63,25 +63,25 @@ private:
     void saveDocument(KarbonDocument& document);
     void saveLayer(KoShapeLayer * layer);
     void saveGroup(KoShapeContainer * group);
-    void saveShape(KoShape * shape);
+    void saveShape(KShape * shape);
     void savePath(KPathShape * path);
     void saveEllipse(EllipseShape * ellipse);
     void saveRectangle(RectangleShape * rectangle);
 
-    void saveImage(KoShape *picture);
+    void saveImage(KShape *picture);
     void saveText(ArtisticTextShape * text);
 
-    void getStyle(KoShape * shape, QTextStream * stream);
-    void getFill(KoShape * shape, QTextStream *stream);
-    void getStroke(KoShape * shape, QTextStream *stream);
-    void getEffects(KoShape *shape, QTextStream *stream);
+    void getStyle(KShape * shape, QTextStream * stream);
+    void getFill(KShape * shape, QTextStream *stream);
+    void getStroke(KShape * shape, QTextStream *stream);
+    void getEffects(KShape *shape, QTextStream *stream);
     void getColorStops(const QGradientStops & colorStops);
     void getGradient(const QGradient * gradient, const QTransform &gradientTransform);
-    void getPattern(KPatternBackground * pattern, KoShape * shape);
+    void getPattern(KPatternBackground * pattern, KShape * shape);
     QString getTransform(const QTransform &matrix, const QString &attributeName);
 
-    QString getID(const KoShape *obj);
-    QString createID(const KoShape * obj);
+    QString getID(const KShape *obj);
+    QString createID(const KShape * obj);
 
     /// Checks if the matrix only has translation set
     bool isTranslation(const QTransform &);
@@ -93,7 +93,7 @@ private:
     unsigned int m_indent;
     unsigned int m_indent2;
 
-    QMap<const KoShape*, QString> m_shapeIds;
+    QMap<const KShape*, QString> m_shapeIds;
 
     QTransform m_userSpaceMatrix;
 

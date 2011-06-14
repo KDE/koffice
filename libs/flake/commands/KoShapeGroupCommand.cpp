@@ -20,7 +20,7 @@
 
 #include "KoShapeGroupCommand.h"
 #include "KoShapeGroupCommand_p.h"
-#include "KoShape.h"
+#include "KShape.h"
 #include "KoShapeGroup.h"
 #include "KoShapeContainer.h"
 #include "KoShapeController.h"
@@ -28,12 +28,12 @@
 #include <klocale.h>
 
 // static
-QUndoCommand * KoShapeGroupCommand::createCommand(KoShapeGroup *container, const QList<KoShape *> &shapes, QUndoCommand *parent)
+QUndoCommand * KoShapeGroupCommand::createCommand(KoShapeGroup *container, const QList<KShape *> &shapes, QUndoCommand *parent)
 {
-    QList<KoShape*> orderedShapes(shapes);
-    qSort(orderedShapes.begin(), orderedShapes.end(), KoShape::compareShapeZIndex);
+    QList<KShape*> orderedShapes(shapes);
+    qSort(orderedShapes.begin(), orderedShapes.end(), KShape::compareShapeZIndex);
     if (!orderedShapes.isEmpty()) {
-        KoShape * top = orderedShapes.last();
+        KShape * top = orderedShapes.last();
         container->setParent(top->parent());
         container->setZIndex(top->zIndex());
     }
@@ -42,7 +42,7 @@ QUndoCommand * KoShapeGroupCommand::createCommand(KoShapeGroup *container, const
 }
 
 //static
-QUndoCommand * KoShapeGroupCommand::createCommand(const QList<KoShape *> &shapes, KoShapeController *shapeController, QUndoCommand *parent)
+QUndoCommand * KoShapeGroupCommand::createCommand(const QList<KShape *> &shapes, KoShapeController *shapeController, QUndoCommand *parent)
 {
     KoShapeGroup *container = new KoShapeGroup();
     QUndoCommand *addShapeCommand = parent;
@@ -54,7 +54,7 @@ QUndoCommand * KoShapeGroupCommand::createCommand(const QList<KoShape *> &shapes
     return cmd;
 }
 
-KoShapeGroupCommandPrivate::KoShapeGroupCommandPrivate(KoShapeContainer *c, const QList<KoShape *> &s, const QList<bool> &clip, const QList<bool> &it)
+KoShapeGroupCommandPrivate::KoShapeGroupCommandPrivate(KoShapeContainer *c, const QList<KShape *> &s, const QList<bool> &clip, const QList<bool> &it)
     : shapes(s),
     clipped(clip),
     inheritTransform(it),
@@ -63,7 +63,7 @@ KoShapeGroupCommandPrivate::KoShapeGroupCommandPrivate(KoShapeContainer *c, cons
 }
 
 
-KoShapeGroupCommand::KoShapeGroupCommand(KoShapeContainer *container, const QList<KoShape *> &shapes, const QList<bool> &clipped, const QList<bool> &inheritTransform, QUndoCommand *parent)
+KoShapeGroupCommand::KoShapeGroupCommand(KoShapeContainer *container, const QList<KShape *> &shapes, const QList<bool> &clipped, const QList<bool> &inheritTransform, QUndoCommand *parent)
     : QUndoCommand(parent),
     d(new KoShapeGroupCommandPrivate(container,shapes, clipped, inheritTransform))
 {
@@ -72,7 +72,7 @@ KoShapeGroupCommand::KoShapeGroupCommand(KoShapeContainer *container, const QLis
     d->init(this);
 }
 
-KoShapeGroupCommand::KoShapeGroupCommand(KoShapeGroup *container, const QList<KoShape *> &shapes, QUndoCommand *parent)
+KoShapeGroupCommand::KoShapeGroupCommand(KoShapeGroup *container, const QList<KShape *> &shapes, QUndoCommand *parent)
     : QUndoCommand(parent),
     d(new KoShapeGroupCommandPrivate(container,shapes))
 {
@@ -96,7 +96,7 @@ KoShapeGroupCommand::KoShapeGroupCommand(KoShapeGroupCommandPrivate &dd, QUndoCo
 
 void KoShapeGroupCommandPrivate::init(QUndoCommand *q)
 {
-    foreach(KoShape* shape, shapes) {
+    foreach(KShape* shape, shapes) {
         oldParents.append(shape->parent());
         oldClipped.append(shape->parent() && shape->parent()->isClipped(shape));
         oldInheritTransform.append(shape->parent() && shape->parent()->inheritsTransform(shape));
@@ -124,7 +124,7 @@ void KoShapeGroupCommand::redo()
             // the group has changed position and so have the group child shapes
             // -> we need compensate the group position change
             QPointF positionOffset = oldGroupPosition - bound.topLeft();
-            foreach(KoShape * child, d->container->shapes())
+            foreach(KShape * child, d->container->shapes())
                 child->setAbsolutePosition(child->absolutePosition() + positionOffset);
         }
     }
@@ -132,15 +132,15 @@ void KoShapeGroupCommand::redo()
     QTransform groupTransform = d->container->absoluteTransformation(0).inverted();
 
     int zIndex=0;
-    QList<KoShape*> shapes(d->container->shapes());
+    QList<KShape*> shapes(d->container->shapes());
     if (!shapes.isEmpty()) {
-        qSort(shapes.begin(), shapes.end(), KoShape::compareShapeZIndex);
+        qSort(shapes.begin(), shapes.end(), KShape::compareShapeZIndex);
         zIndex = shapes.last()->zIndex();
     }
 
     uint shapeCount = d->shapes.count();
     for (uint i = 0; i < shapeCount; ++i) {
-        KoShape * shape = d->shapes[i];
+        KShape * shape = d->shapes[i];
         shape->setZIndex(zIndex++);
 
         if (d->container->inheritsTransform(shape)) {
@@ -167,7 +167,7 @@ void KoShapeGroupCommand::undo()
 
     QTransform ungroupTransform = d->container->absoluteTransformation(0);
     for (int i = 0; i < d->shapes.count(); i++) {
-        KoShape * shape = d->shapes[i];
+        KShape * shape = d->shapes[i];
         d->container->removeShape(shape);
         if (d->oldParents.at(i)) {
             d->oldParents.at(i)->addShape(shape);
@@ -193,7 +193,7 @@ void KoShapeGroupCommand::undo()
         if (d->container->shapeCount() > 0) {
             bool boundingRectInitialized = false;
             QRectF bound;
-            foreach(KoShape * shape, d->container->shapes()) {
+            foreach(KShape * shape, d->container->shapes()) {
                 if (! boundingRectInitialized) {
                     bound = shape->boundingRect();
                     boundingRectInitialized = true;
@@ -203,7 +203,7 @@ void KoShapeGroupCommand::undo()
             // the group has changed position and so have the group child shapes
             // -> we need compensate the group position change
             QPointF positionOffset = oldGroupPosition - bound.topLeft();
-            foreach(KoShape * child, d->container->shapes())
+            foreach(KShape * child, d->container->shapes())
                 child->setAbsolutePosition(child->absolutePosition() + positionOffset);
 
             d->container->setAbsolutePosition(bound.topLeft(), KoFlake::TopLeftCorner);
@@ -221,7 +221,7 @@ QRectF KoShapeGroupCommandPrivate::containerBoundingRect()
     else
         boundingRectInitialized = false;
 
-    foreach(KoShape *shape, shapes) {
+    foreach(KShape *shape, shapes) {
         if (boundingRectInitialized)
             bound = bound.unite(shape->boundingRect());
         else {

@@ -18,7 +18,7 @@
  */
 
 #include "KoShapeReorderCommand.h"
-#include "KoShape.h"
+#include "KShape.h"
 #include "KoShapeManager.h"
 #include "KoShapeContainer.h"
 
@@ -30,22 +30,22 @@
 class KoShapeReorderCommandPrivate
 {
 public:
-    KoShapeReorderCommandPrivate(const QList<KoShape*> &s, QList<int> &ni)
+    KoShapeReorderCommandPrivate(const QList<KShape*> &s, QList<int> &ni)
         : shapes(s), newIndexes(ni)
     {
     }
 
-    QList<KoShape*> shapes;
+    QList<KShape*> shapes;
     QList<int> previousIndexes;
     QList<int> newIndexes;
 };
 
-KoShapeReorderCommand::KoShapeReorderCommand(const QList<KoShape*> &shapes, QList<int> &newIndexes, QUndoCommand *parent)
+KoShapeReorderCommand::KoShapeReorderCommand(const QList<KShape*> &shapes, QList<int> &newIndexes, QUndoCommand *parent)
     : QUndoCommand(parent),
     d(new KoShapeReorderCommandPrivate(shapes, newIndexes))
 {
     Q_ASSERT(shapes.count() == newIndexes.count());
-    foreach (KoShape *shape, shapes)
+    foreach (KShape *shape, shapes)
         d->previousIndexes.append(shape->zIndex());
 
     setText(i18n("Reorder Shapes"));
@@ -76,12 +76,12 @@ void KoShapeReorderCommand::undo()
     }
 }
 
-static void prepare(KoShape *s, QMap<KoShape*, QList<KoShape*> > &newOrder, KoShapeManager *manager, KoShapeReorderCommand::MoveShapeType move)
+static void prepare(KShape *s, QMap<KShape*, QList<KShape*> > &newOrder, KoShapeManager *manager, KoShapeReorderCommand::MoveShapeType move)
 {
     KoShapeContainer *parent = s->parent();
-    QMap<KoShape*, QList<KoShape*> >::iterator it(newOrder.find(parent));
+    QMap<KShape*, QList<KShape*> >::iterator it(newOrder.find(parent));
     if (it == newOrder.end()) {
-        QList<KoShape*> children;
+        QList<KShape*> children;
         if (parent != 0) {
             children = parent->shapes();
         }
@@ -89,13 +89,13 @@ static void prepare(KoShape *s, QMap<KoShape*, QList<KoShape*> > &newOrder, KoSh
             // get all toplevel shapes
             children = manager->topLevelShapes();
         }
-        qSort(children.begin(), children.end(), KoShape::compareShapeZIndex);
+        qSort(children.begin(), children.end(), KShape::compareShapeZIndex);
         // the append and prepend are needed so that the raise/lower of all shapes works as expected.
         children.append(0);
         children.prepend(0);
         it = newOrder.insert(parent, children);
     }
-    QList<KoShape *> & shapes(newOrder[parent]);
+    QList<KShape *> & shapes(newOrder[parent]);
     int index = shapes.indexOf(s);
     if (index != -1) {
         shapes.removeAt(index);
@@ -122,13 +122,13 @@ static void prepare(KoShape *s, QMap<KoShape*, QList<KoShape*> > &newOrder, KoSh
 }
 
 // static
-KoShapeReorderCommand *KoShapeReorderCommand::createCommand(const QList<KoShape*> &shapes, KoShapeManager *manager, MoveShapeType move, QUndoCommand *parent)
+KoShapeReorderCommand *KoShapeReorderCommand::createCommand(const QList<KShape*> &shapes, KoShapeManager *manager, MoveShapeType move, QUndoCommand *parent)
 {
     QList<int> newIndexes;
-    QList<KoShape*> changedShapes;
-    QMap<KoShape*, QList<KoShape*> > newOrder;
-    QList<KoShape*> sortedShapes(shapes);
-    qSort(sortedShapes.begin(), sortedShapes.end(), KoShape::compareShapeZIndex);
+    QList<KShape*> changedShapes;
+    QMap<KShape*, QList<KShape*> > newOrder;
+    QList<KShape*> sortedShapes(shapes);
+    qSort(sortedShapes.begin(), sortedShapes.end(), KShape::compareShapeZIndex);
     if (move == BringToFront || move == LowerShape) {
         for (int i = 0; i < sortedShapes.size(); ++i) {
             prepare(sortedShapes.at(i), newOrder, manager, move);
@@ -141,9 +141,9 @@ KoShapeReorderCommand *KoShapeReorderCommand::createCommand(const QList<KoShape*
     }
 
 
-    QMap<KoShape*, QList<KoShape*> >::iterator newIt(newOrder.begin());
+    QMap<KShape*, QList<KShape*> >::iterator newIt(newOrder.begin());
     for (; newIt!= newOrder.end(); ++newIt) {
-        QList<KoShape*> order(newIt.value());
+        QList<KShape*> order(newIt.value());
         order.removeAll(0);
         int index = -2^13;
         int pos = 0;

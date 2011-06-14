@@ -29,7 +29,7 @@
 #include <KarbonGlobal.h>
 #include <KarbonPart.h>
 
-#include <KoShape.h>
+#include <KShape.h>
 #include <KoShapeRegistry.h>
 #include <KoShapeFactoryBase.h>
 #include <KoShapeLayer.h>
@@ -86,7 +86,7 @@ void SvgParser::setXmlBaseDir(const QString &baseDir)
     m_xmlBaseDir = baseDir;
 }
 
-QList<KoShape*> SvgParser::shapes() const
+QList<KShape*> SvgParser::shapes() const
 {
     return m_shapes;
 }
@@ -185,13 +185,13 @@ void SvgParser::setupTransform(const KXmlElement &e)
     }
 }
 
-KoShape * SvgParser::findObject(const QString &name, const QList<KoShape*> & shapes)
+KShape * SvgParser::findObject(const QString &name, const QList<KShape*> & shapes)
 {
-    foreach(KoShape * shape, shapes) {
+    foreach(KShape * shape, shapes) {
         if (shape->name() == name)
             return shape;
 
-        KoShape * resultShape = findObject(name, dynamic_cast<KoShapeContainer*>(shape));
+        KShape * resultShape = findObject(name, dynamic_cast<KoShapeContainer*>(shape));
         if (resultShape)
             return resultShape;
     }
@@ -199,18 +199,18 @@ KoShape * SvgParser::findObject(const QString &name, const QList<KoShape*> & sha
     return 0;
 }
 
-KoShape * SvgParser::findObject(const QString &name, KoShapeContainer * group)
+KShape * SvgParser::findObject(const QString &name, KoShapeContainer * group)
 {
     if (! group)
         return 0L;
 
-    foreach(KoShape * shape, group->shapes()) {
+    foreach(KShape * shape, group->shapes()) {
         if (shape->name() == name)
             return shape;
 
         KoShapeContainer * container = dynamic_cast<KoShapeContainer*>(shape);
         if (container) {
-            KoShape * resultShape = findObject(name, container);
+            KShape * resultShape = findObject(name, container);
             if (resultShape)
                 return resultShape;
         }
@@ -219,7 +219,7 @@ KoShape * SvgParser::findObject(const QString &name, KoShapeContainer * group)
     return 0;
 }
 
-KoShape * SvgParser::findObject(const QString &name)
+KShape * SvgParser::findObject(const QString &name)
 {
     return findObject(name, m_shapes);
 }
@@ -1031,12 +1031,12 @@ SvgParser::SvgStyles SvgParser::collectStyles(const KXmlElement &e)
     return styleMap;
 }
 
-void SvgParser::parseStyle(KoShape *obj, const KXmlElement &e)
+void SvgParser::parseStyle(KShape *obj, const KXmlElement &e)
 {
     parseStyle(obj, collectStyles(e));
 }
 
-void SvgParser::parseStyle(KoShape *obj, const SvgStyles &styles)
+void SvgParser::parseStyle(KShape *obj, const SvgStyles &styles)
 {
     SvgGraphicsContext *gc = m_gc.top();
     if (!gc)
@@ -1064,7 +1064,7 @@ void SvgParser::parseStyle(KoShape *obj, const SvgStyles &styles)
     obj->setTransparency(1.0 - gc->opacity);
 }
 
-void SvgParser::applyFillStyle(KoShape * shape)
+void SvgParser::applyFillStyle(KShape * shape)
 {
     SvgGraphicsContext *gc = m_gc.top();
     if (! gc)
@@ -1120,7 +1120,7 @@ void SvgParser::applyFillStyle(KoShape * shape)
             parseStyle(0, pattern->content());
 
             // parse the pattern content elements
-            QList<KoShape*> patternContent = parseContainer(pattern->content());
+            QList<KShape*> patternContent = parseContainer(pattern->content());
 
             // generate the pattern image from the shapes and the object bounding rect
             QImage image = pattern->generateImage(objectBound, patternContent);
@@ -1179,7 +1179,7 @@ void SvgParser::applyFillStyle(KoShape * shape)
         path->setFillRule(gc->fillRule);
 }
 
-void SvgParser::applyStrokeStyle(KoShape * shape)
+void SvgParser::applyStrokeStyle(KShape * shape)
 {
     SvgGraphicsContext *gc = m_gc.top();
     if (! gc)
@@ -1233,7 +1233,7 @@ void SvgParser::applyStrokeStyle(KoShape * shape)
     }
 }
 
-void SvgParser::applyFilter(KoShape * shape)
+void SvgParser::applyFilter(KShape * shape)
 {
     SvgGraphicsContext *gc = m_gc.top();
     if (! gc)
@@ -1368,9 +1368,9 @@ void SvgParser::parseFont(const SvgStyles &styles)
     }
 }
 
-QList<KoShape*> SvgParser::parseUse(const KXmlElement &e)
+QList<KShape*> SvgParser::parseUse(const KXmlElement &e)
 {
-    QList<KoShape*> shapes;
+    QList<KShape*> shapes;
 
     QString id = e.attribute("xlink:href");
     //
@@ -1402,7 +1402,7 @@ QList<KoShape*> SvgParser::parseUse(const KXmlElement &e)
                 parseStyle(0, styles);
                 parseFont(styles);
 
-                QList<KoShape*> childShapes = parseContainer(a);
+                QList<KShape*> childShapes = parseContainer(a);
 
                 // handle id
                 if (!a.attribute("id").isEmpty())
@@ -1418,7 +1418,7 @@ QList<KoShape*> SvgParser::parseUse(const KXmlElement &e)
                 // Create the object with the merged styles.
                 // The object inherits all style attributes from the use tag, but keeps it's own attributes.
                 // So, not just use the style attributes of the use tag, but merge them first.
-                KoShape * shape = createObject(a, styles);
+                KShape * shape = createObject(a, styles);
                 if (shape)
                     shapes.append(shape);
             }
@@ -1431,7 +1431,7 @@ QList<KoShape*> SvgParser::parseUse(const KXmlElement &e)
     return shapes;
 }
 
-void SvgParser::addToGroup(QList<KoShape*> shapes, KoShapeGroup * group)
+void SvgParser::addToGroup(QList<KShape*> shapes, KoShapeGroup * group)
 {
     m_shapes += shapes;
 
@@ -1442,7 +1442,7 @@ void SvgParser::addToGroup(QList<KoShape*> shapes, KoShapeGroup * group)
     cmd.redo();
 }
 
-QList<KoShape*> SvgParser::parseSvg(const KXmlElement &e, QSizeF * fragmentSize)
+QList<KShape*> SvgParser::parseSvg(const KXmlElement &e, QSizeF * fragmentSize)
 {
     // check if we are the root svg element
     bool isRootSvg = m_gc.isEmpty();
@@ -1494,16 +1494,16 @@ QList<KoShape*> SvgParser::parseSvg(const KXmlElement &e, QSizeF * fragmentSize)
         gc->currentBoundbox.setHeight(gc->currentBoundbox.height() * (viewBox.height() / height));
     }
 
-    QList<KoShape*> shapes = parseContainer(e);
+    QList<KShape*> shapes = parseContainer(e);
 
     removeGraphicContext();
 
     return shapes;
 }
 
-QList<KoShape*> SvgParser::parseContainer(const KXmlElement &e)
+QList<KShape*> SvgParser::parseContainer(const KXmlElement &e)
 {
-    QList<KoShape*> shapes;
+    QList<KShape*> shapes;
 
     // are we parsing a switch container
     bool isSwitch = e.tagName() == "switch";
@@ -1546,7 +1546,7 @@ QList<KoShape*> SvgParser::parseContainer(const KXmlElement &e)
             parseStyle(0, styles);   // parse style for inheritance
             parseFont(styles);
 
-            QList<KoShape*> childShapes = parseContainer(b);
+            QList<KShape*> childShapes = parseContainer(b);
 
             // handle id
             if (!b.attribute("id").isEmpty())
@@ -1585,11 +1585,11 @@ QList<KoShape*> SvgParser::parseContainer(const KXmlElement &e)
                    b.tagName() == "polygon" ||
                    b.tagName() == "path" ||
                    b.tagName() == "image") {
-            KoShape * shape = createObject(b);
+            KShape * shape = createObject(b);
             if (shape)
                 shapes.append(shape);
         } else if (b.tagName() == "text") {
-            KoShape * shape = createText(b, shapes);
+            KShape * shape = createText(b, shapes);
             if (shape)
                 shapes.append(shape);
         } else if (b.tagName() == "use") {
@@ -1644,7 +1644,7 @@ QRectF SvgParser::parseViewBox(QString viewbox)
 // Creating functions
 // ---------------------------------------------------------------------------------------
 
-KoShape * SvgParser::createText(const KXmlElement &b, const QList<KoShape*> & shapes)
+KShape * SvgParser::createText(const KXmlElement &b, const QList<KShape*> & shapes)
 {
     QString content;
     QString anchor;
@@ -1690,7 +1690,7 @@ KoShape * SvgParser::createText(const KXmlElement &b, const QList<KoShape*> & sh
                 QString key = e.attribute("xlink:href").mid(1);
                 if (! m_defs.contains(key)) {
                     // try to find referenced object in document
-                    KoShape * obj = findObject(key);
+                    KShape * obj = findObject(key);
                     // try to find referenced object in actual group, which is not yet part of document
                     if (! obj)
                         obj = findObject(key, shapes);
@@ -1742,7 +1742,7 @@ KoShape * SvgParser::createText(const KXmlElement &b, const QList<KoShape*> & sh
                 QString key = e.attribute("xlink:href").mid(1);
                 if (! m_defs.contains(key)) {
                     // try to find referenced object in document
-                    KoShape * obj = findObject(key);
+                    KShape * obj = findObject(key);
                     // try to find referenced object in actual group, which is not yet part of document
                     if (! obj)
                         obj = findObject(key, shapes);
@@ -1814,9 +1814,9 @@ KoShape * SvgParser::createText(const KXmlElement &b, const QList<KoShape*> & sh
     return text;
 }
 
-KoShape * SvgParser::createObject(const KXmlElement &b, const SvgStyles &style)
+KShape * SvgParser::createObject(const KXmlElement &b, const SvgStyles &style)
 {
-    KoShape *obj = 0L;
+    KShape *obj = 0L;
 
     addGraphicContext();
     setupTransform(b);
@@ -1947,7 +1947,7 @@ KoShape * SvgParser::createObject(const KXmlElement &b, const SvgStyles &style)
         QString fname = b.attribute("xlink:href");
         QImage img;
         if (parseImage(fname, img)) {
-            KoShape * picture = createShape("PictureShape");
+            KShape * picture = createShape("PictureShape");
             KImageCollection *imageCollection = m_documentResourceManager->imageCollection();
 
             if (picture && imageCollection) {
@@ -2016,7 +2016,7 @@ QString SvgParser::absoluteFilePath(const QString &href, const QString &xmlBase)
     return absFile;
 }
 
-KoShape * SvgParser::createShape(const QString &shapeID)
+KShape * SvgParser::createShape(const QString &shapeID)
 {
     KoShapeFactoryBase * factory = KoShapeRegistry::instance()->get(shapeID);
     if (! factory) {
@@ -2024,7 +2024,7 @@ KoShape * SvgParser::createShape(const QString &shapeID)
         return 0;
     }
 
-    KoShape *shape = factory->createDefaultShape(m_documentResourceManager);
+    KShape *shape = factory->createDefaultShape(m_documentResourceManager);
     if (shape && shape->shapeId().isEmpty())
         shape->setShapeId(factory->id());
 

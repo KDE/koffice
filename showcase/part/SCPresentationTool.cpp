@@ -33,7 +33,7 @@
 #include <qdesktopservices.h>
 #include <qurl.h>
 
-#include <KoShape.h>
+#include <KShape.h>
 #include <KoShapeManager.h>
 #include <KPointerEvent.h>
 #include <KEventAction.h>
@@ -100,7 +100,7 @@ void SCPresentationTool::mousePressEvent(KPointerEvent *event)
     if (event->button() & Qt::LeftButton) {
         event->accept();
         finishEventActions();
-        KoShape * shapeClicked = canvas()->shapeManager()->shapeAt(event->point);
+        KShape * shapeClicked = canvas()->shapeManager()->shapeAt(event->point);
         if (shapeClicked) {
             QString link;
             if (checkHyperlink(event, shapeClicked, link)) {
@@ -133,7 +133,7 @@ void SCPresentationTool::mouseDoubleClickEvent(KPointerEvent *event)
 
 void SCPresentationTool::mouseMoveEvent(KPointerEvent *event)
 {
-    KoShape * shape = canvas()->shapeManager()->shapeAt(event->point);
+    KShape * shape = canvas()->shapeManager()->shapeAt(event->point);
 
     QString link;
     if (checkHyperlink(event, shape, link)) {
@@ -198,7 +198,7 @@ void SCPresentationTool::wheelEvent(KPointerEvent * event)
     Q_UNUSED(event);
 }
 
-void SCPresentationTool::activate(ToolActivation toolActivation, const QSet<KoShape*> &shapes)
+void SCPresentationTool::activate(ToolActivation toolActivation, const QSet<KShape*> &shapes)
 {
     Q_UNUSED(toolActivation);
     Q_UNUSED(shapes);
@@ -287,7 +287,7 @@ bool SCPresentationTool::eventFilter(QObject *obj, QEvent * event)
     return false;
 }
 
-bool SCPresentationTool::checkHyperlink(KPointerEvent *event, KoShape *shape, QString &hyperLink)
+bool SCPresentationTool::checkHyperlink(KPointerEvent *event, KShape *shape, QString &hyperLink)
 {
     if (!shape) {
         return false;

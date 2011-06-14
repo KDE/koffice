@@ -21,17 +21,17 @@
 
 #include <kdebug.h>
 
-#include <KoShape.h>
+#include <KShape.h>
 #include <KoShapeContainer.h>
 
-KoShape * KoShapeTraversal::nextShape(const KoShape * current)
+KShape * KoShapeTraversal::nextShape(const KShape * current)
 {
     return nextShapeStep(current, 0);
 }
 
-KoShape * KoShapeTraversal::nextShape(const KoShape * current, const QString &shapeId)
+KShape * KoShapeTraversal::nextShape(const KShape * current, const QString &shapeId)
 {
-    KoShape * next = nextShapeStep(current, 0);
+    KShape * next = nextShapeStep(current, 0);
 
     while (next != 0 && next->shapeId() != shapeId) {
         next = nextShapeStep(next, 0);
@@ -40,14 +40,14 @@ KoShape * KoShapeTraversal::nextShape(const KoShape * current, const QString &sh
     return next;
 }
 
-KoShape * KoShapeTraversal::previousShape(const KoShape * current)
+KShape * KoShapeTraversal::previousShape(const KShape * current)
 {
     return previousShapeStep(current, 0);
 }
 
-KoShape * KoShapeTraversal::previousShape(const KoShape * current, const QString &shapeId)
+KShape * KoShapeTraversal::previousShape(const KShape * current, const QString &shapeId)
 {
-    KoShape * previous = previousShapeStep(current, 0);
+    KShape * previous = previousShapeStep(current, 0);
 
     while (previous != 0 && previous->shapeId() != shapeId) {
         previous = previousShapeStep(previous, 0);
@@ -56,11 +56,11 @@ KoShape * KoShapeTraversal::previousShape(const KoShape * current, const QString
     return previous;
 }
 
-KoShape * KoShapeTraversal::last(KoShape * current)
+KShape * KoShapeTraversal::last(KShape * current)
 {
-    KoShape * last = current;
+    KShape * last = current;
     while (const KoShapeContainer * container = dynamic_cast<const KoShapeContainer *>(last)) {
-        QList<KoShape*> shapes = container->shapes();
+        QList<KShape*> shapes = container->shapes();
         if (!shapes.isEmpty()) {
             last = shapes.last();
         }
@@ -71,18 +71,18 @@ KoShape * KoShapeTraversal::last(KoShape * current)
     return last;
 }
 
-KoShape * KoShapeTraversal::nextShapeStep(const KoShape * current, const KoShapeContainer * parent)
+KShape * KoShapeTraversal::nextShapeStep(const KShape * current, const KoShapeContainer * parent)
 {
     Q_ASSERT(current);
     if (!current) {
         return 0;
     }
 
-    KoShape * next = 0;
+    KShape * next = 0;
 
     if (parent) {
-        const QList<KoShape*> shapes = parent->shapes();
-        QList<KoShape*>::const_iterator it(qFind(shapes, current));
+        const QList<KShape*> shapes = parent->shapes();
+        QList<KShape*>::const_iterator it(qFind(shapes, current));
         Q_ASSERT(it != shapes.end());
 
         if (it == shapes.end()) {
@@ -101,7 +101,7 @@ KoShape * KoShapeTraversal::nextShapeStep(const KoShape * current, const KoShape
     }
     else {
         if (const KoShapeContainer * container = dynamic_cast<const KoShapeContainer *>(current)) {
-            QList<KoShape*> shapes = container->shapes();
+            QList<KShape*> shapes = container->shapes();
             if (!shapes.isEmpty()) {
                 next = shapes[0];
             }
@@ -116,19 +116,19 @@ KoShape * KoShapeTraversal::nextShapeStep(const KoShape * current, const KoShape
     return next;
 }
 
-KoShape * KoShapeTraversal::previousShapeStep(const KoShape * current, const KoShapeContainer * parent)
+KShape * KoShapeTraversal::previousShapeStep(const KShape * current, const KoShapeContainer * parent)
 {
     Q_ASSERT(current);
     if (!current) {
         return 0;
     }
 
-    KoShape * previous = 0;
+    KShape * previous = 0;
 
     if (parent) {
         if (previous == 0) {
-            const QList<KoShape*> shapes = parent->shapes();
-            QList<KoShape*>::const_iterator it(qFind(shapes, current));
+            const QList<KShape*> shapes = parent->shapes();
+            QList<KShape*>::const_iterator it(qFind(shapes, current));
             Q_ASSERT(it != shapes.end());
 
             if (it == shapes.end()) {

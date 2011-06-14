@@ -23,7 +23,7 @@
 #include <KoDocumentSectionModel.h>
 
 class KarbonDocument;
-class KoShape;
+class KShape;
 class KoShapeContainer;
 class QAbstractItemModel;
 class KoViewConverter;
@@ -58,17 +58,17 @@ public slots:
 
 private:
     /// Returns properties of the given shape
-    PropertyList properties(KoShape* shape) const;
+    PropertyList properties(KShape* shape) const;
     /// Sets the properties on the given shape
-    void setProperties(KoShape* shape, const PropertyList &properties);
+    void setProperties(KShape* shape, const PropertyList &properties);
     /// Creates a thumbnail image with the specified size from the given shape
-    QImage createThumbnail(KoShape* shape, const QSize &thumbSize) const;
+    QImage createThumbnail(KShape* shape, const QSize &thumbSize) const;
     /// Returns the child shape with the given index from the parent shape
-    KoShape * childFromIndex(KoShapeContainer *parent, int row) const;
+    KShape * childFromIndex(KoShapeContainer *parent, int row) const;
     /// Returns the zero based index of a child shape within its parent shape
-    int indexFromChild(KoShapeContainer *parent, KoShape *child) const;
+    int indexFromChild(KoShapeContainer *parent, KShape *child) const;
     /// Returns the parent model index from the given child shape
-    QModelIndex parentIndexFromShape(const KoShape * child) const;
+    QModelIndex parentIndexFromShape(const KShape * child) const;
 
     /// Recursively locks childs of the specified shape container
     void lockRecursively(KoShapeContainer *container, bool lock);

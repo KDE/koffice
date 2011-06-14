@@ -146,7 +146,7 @@ public:
 
     /**
      * Convert a coordinate in pt to pixels.
-     * @param documentPoint the point in the document coordinate system of a KoShape.
+     * @param documentPoint the point in the document coordinate system of a KShape.
      */
     virtual QPointF documentToView(const QPointF &documentPoint) const;
 
@@ -158,7 +158,7 @@ public:
 
     /**
      * Convert a rectangle in pt to pixels.
-     * @param documentRect the rect in the document coordinate system of a KoShape.
+     * @param documentRect the rect in the document coordinate system of a KShape.
      */
     virtual QRectF documentToView(const QRectF &documentRect) const;
 

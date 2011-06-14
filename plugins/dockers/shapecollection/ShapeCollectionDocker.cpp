@@ -28,7 +28,7 @@
 #include <KCanvasController.h>
 #include <KoToolManager.h>
 #include <KCreateShapesTool.h>
-#include <KoShape.h>
+#include <KShape.h>
 #include <KoZoomHandler.h>
 
 #include <klocale.h>
@@ -467,7 +467,7 @@ void ShapeCollectionDocker::onLoadingFailed(const QString& reason)
     if (loader)
     {
         removeCollection(loader->collectionPath());
-        QList<KoShape*> shapeList = loader->shapeList();
+        QList<KShape*> shapeList = loader->shapeList();
         qDeleteAll(shapeList);
         loader->deleteLater();
     }
@@ -486,9 +486,9 @@ void ShapeCollectionDocker::onLoadingFinished()
     }
 
     QList<KoCollectionItem> templateList;
-    QList<KoShape*> shapeList = loader->shapeList();
+    QList<KShape*> shapeList = loader->shapeList();
 
-    foreach(KoShape* shape, shapeList)
+    foreach(KShape* shape, shapeList)
     {
         KoCollectionItem temp;
         temp.id = loader->collectionPath() + shape->name();
@@ -508,7 +508,7 @@ void ShapeCollectionDocker::onLoadingFinished()
     //TODO m_collectionsCombo->setCurrentIndex(m_collectionsCombo->findData(loader->collectionPath()));
 }
 
-QIcon ShapeCollectionDocker::generateShapeIcon(KoShape* shape)
+QIcon ShapeCollectionDocker::generateShapeIcon(KShape* shape)
 {
     KoZoomHandler converter;
 

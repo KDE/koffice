@@ -35,7 +35,7 @@ class RectangleShapeConfigWidget : public KoShapeConfigWidgetBase
 public:
     RectangleShapeConfigWidget(KCanvasBase *canvas);
     /// reimplemented
-    virtual void open(KoShape *shape);
+    virtual void open(KShape *shape);
     /// reimplemented
     virtual void setUnit(const KUnit &unit);
 

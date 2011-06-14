@@ -28,7 +28,7 @@
 
 class KCanvasBase;
 class KoShapeLayer;
-class KoShape;
+class KShape;
 
 /**
  * Class for pasting shapes to the document
@@ -45,7 +45,7 @@ public:
     KoShapePaste(KCanvasBase *canvas, KoShapeLayer *parentLayer);
     virtual ~KoShapePaste();
 
-    QList<KoShape*> pastedShapes() const;
+    QList<KShape*> pastedShapes() const;
 
 protected:
     /// reimplemented

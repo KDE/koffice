@@ -48,7 +48,7 @@ void KPathToolSelection::paint(QPainter &painter, const KoViewConverter &convert
         painter.save();
 
         painter.setTransform(it.key()->absoluteTransformation(&converter) * painter.transform());
-        KoShape::applyConversion(painter, converter);
+        KShape::applyConversion(painter, converter);
 
         foreach(KPathPoint *p, it.value())
             p->paint(painter, handleRadius, KPathPoint::All);

@@ -19,7 +19,7 @@
  */
 
 #include "KoShapeAlignCommand.h"
-#include "KoShape.h"
+#include "KShape.h"
 #include "KoShapeGroup.h"
 #include "commands/KoShapeMoveCommand.h"
 
@@ -36,7 +36,7 @@ public:
     KoShapeMoveCommand *command;
 };
 
-KoShapeAlignCommand::KoShapeAlignCommand(const QList<KoShape*> &shapes, Align align, const QRectF &boundingRect, QUndoCommand *parent)
+KoShapeAlignCommand::KoShapeAlignCommand(const QList<KShape*> &shapes, Align align, const QRectF &boundingRect, QUndoCommand *parent)
         : QUndoCommand(parent),
         d(new Private())
 {
@@ -45,7 +45,7 @@ KoShapeAlignCommand::KoShapeAlignCommand(const QList<KoShape*> &shapes, Align al
     QPointF position;
     QPointF delta;
     QRectF bRect;
-    foreach(KoShape *shape, shapes) {
+    foreach(KShape *shape, shapes) {
 //   if (dynamic_cast<KoShapeGroup*> (shape))
 //       kDebug(30006) <<"Found Group";
 //   else if (dynamic_cast<KoShapeContainer*> (shape))

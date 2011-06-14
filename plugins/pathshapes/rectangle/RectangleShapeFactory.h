@@ -22,7 +22,7 @@
 
 #include "KoShapeFactoryBase.h"
 
-class KoShape;
+class KShape;
 
 /// Factory for path shapes
 class RectangleShapeFactory : public KoShapeFactoryBase
@@ -31,7 +31,7 @@ public:
     /// constructor
     explicit RectangleShapeFactory(QObject *parent);
     ~RectangleShapeFactory() {}
-    virtual KoShape *createDefaultShape(KResourceManager *documentResources = 0) const;
+    virtual KShape *createDefaultShape(KResourceManager *documentResources = 0) const;
     virtual bool supports(const KXmlElement &e, KoShapeLoadingContext &context) const;
     virtual KoShapeConfigWidgetBase *createConfigWidget(KCanvasBase *canvas);
 };

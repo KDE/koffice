@@ -23,7 +23,7 @@
 #include "KDragOdfSaveHelper.h"
 #include "flake_export.h"
 
-class KoShape;
+class KShape;
 class KoShapeOdfSaveHelperPrivate;
 
 /**
@@ -40,7 +40,7 @@ public:
      * @param shapes The list of shapes to save. If the shapes contain
      *               children these are also saved.
      */
-    KoShapeOdfSaveHelper(QList<KoShape *> shapes);
+    KoShapeOdfSaveHelper(QList<KShape *> shapes);
 
     /// reimplemented
     virtual bool writeBody();

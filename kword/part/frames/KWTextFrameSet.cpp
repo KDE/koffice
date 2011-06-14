@@ -160,8 +160,8 @@ void KWTextFrameSet::setupFrame(KWFrame *frame)
         data->setDocument(m_document, false); // claim doc for ourselves
     } else {
         if (frameCount() > 1) {
-            KoShape *lastShape = frames().value(frameCount() - 2)->shape();
-            KoShape *shape = frame->shape();
+            KShape *lastShape = frames().value(frameCount() - 2)->shape();
+            KShape *shape = frame->shape();
             if (lastShape->position().y() + lastShape->size().height() > shape->position().y())
                 m_frameOrderDirty = true;
         }
@@ -205,7 +205,7 @@ void KWTextFrameSet::requestMoreFrames(qreal textHeight)
     } else if (frameBehavior() == KWord::AutoExtendFrameBehavior
             && lastFrame->canAutoGrow() && qAbs(textHeight) > 2) {
         // enlarge last shape
-        KoShape *shape = lastFrame->shape();
+        KShape *shape = lastFrame->shape();
         if (shape->isGeometryProtected()) { // don't alter a locked shape.
             requestMoreFrames(0);
             return;

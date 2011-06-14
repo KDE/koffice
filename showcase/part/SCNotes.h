@@ -24,7 +24,7 @@
 #include <KOdfPageLayoutData.h>
 #include <KoPAPageBase.h>
 
-class KoShape;
+class KShape;
 class KImageCollection;
 class SCDocument;
 class SCPage;
@@ -36,7 +36,7 @@ public:
     ~SCNotes();
 
     /// Get the main text note shape for this presentation notes
-    KoShape *textShape();
+    KShape *textShape();
 
     /// reimplemented
     virtual void saveOdf(KoShapeSavingContext &context) const;
@@ -64,7 +64,7 @@ public:
     /// reimplemented
     virtual void setDisplayMasterBackground(bool);
     /// reimplemented
-    virtual bool displayShape(KoShape *shape) const;
+    virtual bool displayShape(KShape *shape) const;
     /// reimplemented
     virtual QPixmap generateThumbnail(const QSize&);
     /// reimplemented
@@ -74,8 +74,8 @@ private:
     QImage createPageThumbnail() const;
 
 private:
-    KoShape *m_textShape;
-    KoShape *m_thumbnailShape;
+    KShape *m_textShape;
+    KShape *m_thumbnailShape;
     KOdfPageLayoutData m_pageLayout;
     SCPage *m_page;
     SCDocument *m_doc;

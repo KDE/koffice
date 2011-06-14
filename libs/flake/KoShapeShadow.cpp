@@ -21,7 +21,7 @@
 #include "KoShapeShadow.h"
 #include "KoShapeSavingContext.h"
 #include "KoShapeBorderBase.h"
-#include "KoShape.h"
+#include "KShape.h"
 #include "KoInsets.h"
 #include "KPathShape.h"
 #include <KOdfGenericStyle.h>
@@ -63,7 +63,7 @@ void KoShapeShadow::fillStyle(KOdfGenericStyle &style, KoShapeSavingContext &con
     style.addProperty("draw:shadow-offset-y", QString("%1pt").arg(d->offset.y()));
 }
 
-void KoShapeShadow::paint(KoShape *shape, QPainter &painter, const KoViewConverter &converter)
+void KoShapeShadow::paint(KShape *shape, QPainter &painter, const KoViewConverter &converter)
 {
     if (! d->visible)
         return;
@@ -77,7 +77,7 @@ void KoShapeShadow::paint(KoShape *shape, QPainter &painter, const KoViewConvert
     if (shape->background()) {
         painter.save();
 
-        KoShape::applyConversion(painter, converter);
+        KShape::applyConversion(painter, converter);
 
         // the shadow direction is independent of the shapes transformation
         // please only change if you know what you are doing
@@ -94,7 +94,7 @@ void KoShapeShadow::paint(KoShape *shape, QPainter &painter, const KoViewConvert
 
     if (shape->border()) {
         QTransform oldPainterMatrix = painter.transform();
-        KoShape::applyConversion(painter, converter);
+        KShape::applyConversion(painter, converter);
         QTransform newPainterMatrix = painter.transform();
 
         // the shadow direction is independent of the shapes transformation

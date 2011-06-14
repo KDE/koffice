@@ -49,7 +49,7 @@ ShapeSelector::~ShapeSelector()
 
 void ShapeSelector::itemSelected()
 {
-    KoShape *koShape = m_itemStore.shapeManager()->selection()->firstSelectedShape();
+    KShape *koShape = m_itemStore.shapeManager()->selection()->firstSelectedShape();
     if (koShape == 0)
         return;
     IconShape *shape= dynamic_cast<IconShape*>(koShape);

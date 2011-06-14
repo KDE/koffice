@@ -134,9 +134,9 @@ Selection* TableTool::selection()
     return d->selection;
 }
 
-void TableTool::activate(ToolActivation toolActivation, const QSet<KoShape*> &shapes)
+void TableTool::activate(ToolActivation toolActivation, const QSet<KShape*> &shapes)
 {
-    foreach(KoShape* shape, shapes) {
+    foreach(KShape* shape, shapes) {
         d->tableShape = dynamic_cast<TableShape*>(shape);
         if (d->tableShape)
             break;

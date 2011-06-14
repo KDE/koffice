@@ -32,7 +32,7 @@
 #include <QPainterPath>
 // #include <KDebug>
 
-KWCopyShape::KWCopyShape(KoShape *original, const KWPageManager *pageManager)
+KWCopyShape::KWCopyShape(KShape *original, const KWPageManager *pageManager)
         : m_original(original),
         m_pageManager(pageManager),
         m_placementPolicy(KWord::FlexiblePlacement)
@@ -40,7 +40,7 @@ KWCopyShape::KWCopyShape(KoShape *original, const KWPageManager *pageManager)
     setSize(m_original->size());
     setSelectable(original->isSelectable());
     // allow selecting me to get the tool for the original to still work.
-    QSet<KoShape*> delegates;
+    QSet<KShape*> delegates;
     delegates << m_original;
     setToolDelegates(delegates);
     m_original->addDependee(this);
@@ -81,8 +81,8 @@ void KWCopyShape::paint(QPainter &painter, const KoViewConverter &converter)
             return;
         }
 
-        QList<KoShape*> sortedObjects = container->shapes();
-        qSort(sortedObjects.begin(), sortedObjects.end(), KoShape::compareShapeZIndex);
+        QList<KShape*> sortedObjects = container->shapes();
+        qSort(sortedObjects.begin(), sortedObjects.end(), KShape::compareShapeZIndex);
 
         // Do the following to revert the absolute transformation of the
         // container that is re-applied in shape->absoluteTransformation()
@@ -90,7 +90,7 @@ void KWCopyShape::paint(QPainter &painter, const KoViewConverter &converter)
         // been applied once before this function is called.
         QTransform baseMatrix = container->absoluteTransformation(&converter).inverted() * painter.transform();
 
-        foreach (KoShape *shape, sortedObjects) {
+        foreach (KShape *shape, sortedObjects) {
             painter.save();
             painter.setTransform(shape->absoluteTransformation(&converter) * baseMatrix);
             shape->paint(painter, converter);
@@ -150,7 +150,7 @@ void KWCopyShape::setShapeSeriesPlacement(KWord::ShapeSeriesPlacement placement)
     shapeChanged(GenericMatrixChange, m_original);
 }
 
-void KWCopyShape::shapeChanged(ChangeType type, KoShape *shape)
+void KWCopyShape::shapeChanged(ChangeType type, KShape *shape)
 {
     if (shape == 0)
         return;

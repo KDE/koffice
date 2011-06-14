@@ -40,7 +40,7 @@ public:
 
     KXmlWriter *xmlWriter;
     KoShapeSavingContext::ShapeSavingOptions savingOptions;
-    QMap<const KoShape *, QString> drawIds;
+    QMap<const KShape *, QString> drawIds;
     QMap<const QTextBlockUserData*, QString> subIds;
     QList<KoShapeLayer*> layers;
     QSet<KDataCenterBase *> dataCenter;
@@ -50,7 +50,7 @@ public:
     QMap<qint64, QString> imageNames;
     int imageId;
     QMap<QString, QImage> images;
-    QHash<const KoShape *, QTransform> shapeOffsets;
+    QHash<const KShape *, QTransform> shapeOffsets;
     QSet<KoShapeConnection*> unsavedConnections;
 
     KOdfGenericStyles& mainStyles;
@@ -127,9 +127,9 @@ void KoShapeSavingContext::removeOption(ShapeSavingOption option)
         d->savingOptions = d->savingOptions ^ option; // xor to remove it.
 }
 
-QString KoShapeSavingContext::drawId(const KoShape *shape, bool insert)
+QString KoShapeSavingContext::drawId(const KShape *shape, bool insert)
 {
-    QMap<const KoShape *, QString>::iterator it(d->drawIds.find(shape));
+    QMap<const KShape *, QString>::iterator it(d->drawIds.find(shape));
     if (it == d->drawIds.end()) {
         if (insert == true) {
             it = d->drawIds.insert(shape, QString("shape%1").arg(++d->drawId));
@@ -285,17 +285,17 @@ KoSharedSavingData * KoShapeSavingContext::sharedData(const QString &id) const
     return data;
 }
 
-void KoShapeSavingContext::addShapeOffset(const KoShape *shape, const QTransform &m)
+void KoShapeSavingContext::addShapeOffset(const KShape *shape, const QTransform &m)
 {
     d->shapeOffsets.insert(shape, m);
 }
 
-void KoShapeSavingContext::removeShapeOffset(const KoShape *shape)
+void KoShapeSavingContext::removeShapeOffset(const KShape *shape)
 {
     d->shapeOffsets.remove(shape);
 }
 
-QTransform KoShapeSavingContext::shapeOffset(const KoShape *shape) const
+QTransform KoShapeSavingContext::shapeOffset(const KShape *shape) const
 {
     return d->shapeOffsets.value(shape, QTransform());
 }

@@ -50,7 +50,7 @@
 class KoTextAnchorPrivate : public KInlineObjectPrivate
 {
 public:
-    KoTextAnchorPrivate(KoTextAnchor *qq, KoShape *s)
+    KoTextAnchorPrivate(KoTextAnchor *qq, KShape *s)
             : KInlineObjectPrivate(qq),
             shape(s),
             horizontalAlignment(KoTextAnchor::HorizontalOffset),
@@ -143,7 +143,7 @@ public:
         return answer;
     }
 
-    KoShape * const shape;
+    KShape * const shape;
     KoTextAnchor::AnchorHorizontal horizontalAlignment;
     KoTextAnchor::AnchorVertical verticalAlignment;
     QTextCharFormat format;
@@ -154,7 +154,7 @@ public:
     Q_DECLARE_PUBLIC(KoTextAnchor)
 };
 
-KoTextAnchor::KoTextAnchor(KoShape *shape)
+KoTextAnchor::KoTextAnchor(KShape *shape)
     : KInlineObject(*(new KoTextAnchorPrivate(this, shape)), false)
 {
 }
@@ -166,7 +166,7 @@ KoTextAnchor::~KoTextAnchor()
         d->model->removeAnchor(this);
 }
 
-KoShape *KoTextAnchor::shape() const
+KShape *KoTextAnchor::shape() const
 {
     Q_D(const KoTextAnchor);
     return d->shape;

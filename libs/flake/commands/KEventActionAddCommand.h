@@ -23,7 +23,7 @@
 #include <QUndoCommand>
 #include "flake_export.h"
 
-class KoShape;
+class KShape;
 class KEventAction;
 class KEventActionAddCommandPrivate;
 
@@ -31,7 +31,7 @@ class KEventActionAddCommandPrivate;
 class FLAKE_EXPORT KEventActionAddCommand : public QUndoCommand
 {
 public:
-    KEventActionAddCommand(KoShape *shape, KEventAction *eventAction, QUndoCommand *parent = 0);
+    KEventActionAddCommand(KShape *shape, KEventAction *eventAction, QUndoCommand *parent = 0);
     virtual ~KEventActionAddCommand();
 
     /// redo the command

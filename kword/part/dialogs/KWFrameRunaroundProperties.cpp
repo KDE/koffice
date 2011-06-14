@@ -92,7 +92,7 @@ void KWFrameRunaroundProperties::open(const QList<KWFrame*> &frames)
     widget.groupBox_4->setEnabled(hasRunAroundCurve);
 }
 
-void KWFrameRunaroundProperties::open(KoShape *shape)
+void KWFrameRunaroundProperties::open(KShape *shape)
 {
     m_state->addUser();
     m_shape = shape;

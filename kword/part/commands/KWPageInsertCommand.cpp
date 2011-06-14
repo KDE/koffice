@@ -89,14 +89,14 @@ void KWPageInsertCommand::redo()
         KWPageStyle pageStyle = d->document->pageManager()->pageStyle(d->masterPageName);
         d->page = d->document->pageManager()->insertPage(d->pageNumber, pageStyle);
         // move shapes after this page down.
-        QList<KoShape *> shapes;
+        QList<KShape *> shapes;
         QList<QPointF> previousPositions;
         QList<QPointF> newPositions;
 
         QRectF rect = d->page.rect();
         foreach(KWFrameSet *fs, d->document->frameSets()) {
             foreach(KWFrame *frame, fs->frames()) {
-                KoShape *shape = frame->shape();
+                KShape *shape = frame->shape();
                 if (shape->position().y() >= rect.top()) { // frame should be moved down
                     shapes.append(shape);
                     previousPositions.append(shape->position());
@@ -135,7 +135,7 @@ void KWPageInsertCommand::undo()
     // any frames left should be removed.
     foreach(KWFrameSet *fs, d->document->frameSets()) {
         foreach(KWFrame *frame, fs->frames()) {
-            KoShape *shape = frame->shape();
+            KShape *shape = frame->shape();
             if (rect.contains(shape->absolutePosition())) // frame should be moved down
                 delete shape;
         }

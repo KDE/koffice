@@ -40,7 +40,7 @@ public:
 
     KarbonPart * targetPart;
     QList<KoShapeLayer*> layers;
-    QList<KoShape*> shapes;
+    QList<KShape*> shapes;
     bool hasMerged;
 };
 
@@ -53,7 +53,7 @@ KarbonDocumentMergeCommand::KarbonDocumentMergeCommand(KarbonPart * targetPart, 
     foreach(KoShapeLayer * layer, d->layers) {
         sourcePart->removeShape(layer);
     }
-    foreach(KoShape * shape, d->shapes) {
+    foreach(KShape * shape, d->shapes) {
         sourcePart->removeShape(shape);
     }
     setText(i18n("Insert graphics"));
@@ -70,7 +70,7 @@ void KarbonDocumentMergeCommand::redo()
         foreach(KoShapeLayer * layer, d->layers) {
             d->targetPart->addShape(layer);
         }
-        foreach(KoShape * shape, d->shapes) {
+        foreach(KShape * shape, d->shapes) {
             d->targetPart->addShape(shape);
         }
         d->hasMerged = true;
@@ -87,7 +87,7 @@ void KarbonDocumentMergeCommand::undo()
         foreach(KoShapeLayer * layer, d->layers) {
             d->targetPart->removeShape(layer);
         }
-        foreach(KoShape * shape, d->shapes) {
+        foreach(KShape * shape, d->shapes) {
             d->targetPart->removeShape(shape);
         }
         d->hasMerged = false;

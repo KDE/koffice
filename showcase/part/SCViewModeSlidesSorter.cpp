@@ -228,12 +228,12 @@ void SCViewModeSlidesSorter::updateActivePage(KoPAPageBase *page)
     Q_UNUSED(page);
 }
 
-void SCViewModeSlidesSorter::addShape(KoShape *shape)
+void SCViewModeSlidesSorter::addShape(KShape *shape)
 {
     Q_UNUSED(shape);
 }
 
-void SCViewModeSlidesSorter::removeShape(KoShape *shape)
+void SCViewModeSlidesSorter::removeShape(KShape *shape)
 {
     Q_UNUSED(shape);
 }

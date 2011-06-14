@@ -92,8 +92,8 @@ TableShape::~TableShape()
 {
     delete d->pageManager;
     delete d->sheetView;
-    if (KoShape::userData()) {
-        map()->removeSheet(qobject_cast<KCSheet*>(KoShape::userData())); // declare the sheet as deleted
+    if (KShape::userData()) {
+        map()->removeSheet(qobject_cast<KCSheet*>(KShape::userData())); // declare the sheet as deleted
     }
     delete d;
 }
@@ -115,7 +115,7 @@ void TableShape::setColumns(int columns)
         return;
     const double factor = (double) d->columns / columns;
     d->columns = columns;
-    d->adjustColumnDimensions(qobject_cast<KCSheet*>(KoShape::userData()), factor);
+    d->adjustColumnDimensions(qobject_cast<KCSheet*>(KShape::userData()), factor);
     setVisibleCellRange(QRect(1, 1, d->columns, d->rows));
     d->sheetView->invalidate();
     if (!d->pageManager) {
@@ -133,7 +133,7 @@ void TableShape::setRows(int rows)
         return;
     const double factor = (double) d->rows / rows;
     d->rows = rows;
-    d->adjustRowDimensions(qobject_cast<KCSheet*>(KoShape::userData()), factor);
+    d->adjustRowDimensions(qobject_cast<KCSheet*>(KShape::userData()), factor);
     setVisibleCellRange(QRect(1, 1, d->columns, d->rows));
     d->sheetView->invalidate();
     if (!d->pageManager) {
@@ -147,8 +147,8 @@ void TableShape::setRows(int rows)
 void TableShape::paint(QPainter& painter, const KoViewConverter& converter)
 {
 #ifndef NDEBUG
-    if (KoShape::parent()) {
-        kDebug(36001) << KoShape::parent()->name() <<  KoShape::parent()->shapeId() << KoShape::parent()->boundingRect();
+    if (KShape::parent()) {
+        kDebug(36001) << KShape::parent()->name() <<  KShape::parent()->shapeId() << KShape::parent()->boundingRect();
     }
 #endif
     const QRectF paintRect = QRectF(QPointF(0.0, 0.0), size());
@@ -197,7 +197,7 @@ bool TableShape::loadOdf(const KXmlElement &element, KoShapeLoadingContext &cont
         for (int row = 1; row <= d->rows; ++row) {
             size.rheight() += sheet()->rowFormat(row)->visibleHeight();
         }
-        KoShape::setSize(size);
+        KShape::setSize(size);
         return true;
     }
     return false;
@@ -234,7 +234,7 @@ void TableShape::setMap(KCMap *map)
         return;
     KCSheet* const sheet = map->addNewSheet();
     d->sheetView = new SheetView(sheet);
-    KoShape::setUserData(sheet);
+    KShape::setUserData(sheet);
     d->isMaster = true;
     setVisibleCellRange(QRect(1, 1, d->columns, d->rows));
 
@@ -249,7 +249,7 @@ void TableShape::setMap(KCMap *map)
     for (int row = 1; row <= d->rows; ++row) {
         size.rheight() += sheet->rowFormat(row)->visibleHeight();
     }
-    KoShape::setSize(size);
+    KShape::setSize(size);
 }
 
 void TableShape::setSize(const QSizeF& newSize)
@@ -281,18 +281,18 @@ void TableShape::setSize(const QSizeF& newSize)
         d->rows += numAddedRows;
         setVisibleCellRange(QRect(1, 1, d->columns, d->rows));
         d->sheetView->invalidate();
-        KoShape::setSize(size2);
+        KShape::setSize(size2);
     }
 }
 
 KCMap* TableShape::map() const
 {
-    return qobject_cast<KCSheet*>(KoShape::userData())->map();
+    return qobject_cast<KCSheet*>(KShape::userData())->map();
 }
 
 KCSheet* TableShape::sheet() const
 {
-    return qobject_cast<KCSheet*>(KoShape::userData());
+    return qobject_cast<KCSheet*>(KShape::userData());
 }
 
 SheetView* TableShape::sheetView() const
@@ -307,7 +307,7 @@ void TableShape::setSheet(const QString& sheetName)
         return;
     delete d->sheetView;
     d->sheetView = new SheetView(sheet);
-    KoShape::setUserData(sheet);
+    KShape::setUserData(sheet);
     setColumns(d->columns);
     setRows(d->rows);
     setVisibleCellRange(QRect(1, 1, d->columns, d->rows));
@@ -316,14 +316,14 @@ void TableShape::setSheet(const QString& sheetName)
 
 void TableShape::setVisibleCellRange(const QRect& cellRange)
 {
-    Q_ASSERT(KoShape::userData());
+    Q_ASSERT(KShape::userData());
     if (!d->sheetView) {
         d->sheetView = new SheetView(sheet());
     }
     d->sheetView->setPaintCellRange(cellRange & QRect(1, 1, d->columns, d->rows));
 }
 
-void TableShape::shapeChanged(ChangeType type, KoShape *shape)
+void TableShape::shapeChanged(ChangeType type, KShape *shape)
 {
     Q_UNUSED(shape);
     // If this is a master table shape, the parent changed and we have no parent yet...
@@ -332,7 +332,7 @@ void TableShape::shapeChanged(ChangeType type, KoShape *shape)
         return;
     }
     // Not the master table shape? Not embedded into a container?
-    if (!d->isMaster || !KoShape::parent()) {
+    if (!d->isMaster || !KShape::parent()) {
         return;
     }
     // Not the changes, we want to react on?

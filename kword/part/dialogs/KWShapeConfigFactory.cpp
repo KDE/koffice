@@ -59,7 +59,7 @@ void FrameConfigSharedState::addUser()
     ++m_refcount;
 }
 
-KWFrame *FrameConfigSharedState::createFrame(KoShape *shape)
+KWFrame *FrameConfigSharedState::createFrame(KShape *shape)
 {
     if (m_frame == 0) {
         KWFrameSet *fs = new KWFrameSet();

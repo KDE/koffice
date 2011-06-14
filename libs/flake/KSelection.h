@@ -27,7 +27,7 @@
 #include <QObject>
 #include <QSet>
 
-#include "KoShape.h"
+#include "KShape.h"
 #include "KoViewConverter.h"
 #include "KoFlake.h"
 
@@ -49,7 +49,7 @@ class KSelectionPrivate;
  * A selection, however, should not be selectable. We need to think
  * a little about the interaction here.
  */
-class FLAKE_EXPORT KSelection : public QObject, public KoShape
+class FLAKE_EXPORT KSelection : public QObject, public KShape
 {
     Q_OBJECT
 
@@ -72,7 +72,7 @@ public:
      * @param shape the shape to add to the selection
      * @param recursive enables recursively selecting shapes of parent groups
      */
-    void select(KoShape *shape, bool recursive = true);
+    void select(KShape *shape, bool recursive = true);
 
     /**
      * Removes a selected shape.
@@ -88,7 +88,7 @@ public:
      * @param shape the shape to remove from the selection
      * @param recursive enables recursively deselecting shapes of parent groups
      */
-    void deselect(KoShape *shape, bool recursive = true);
+    void deselect(KShape *shape, bool recursive = true);
 
     /// clear the selections list
     void deselectAll();
@@ -99,17 +99,17 @@ public:
      * @param strip if StrippedSelection, the returned list will not include any children
      *    of a container shape if the container-parent is itself also in the set.
      */
-    const QList<KoShape*> selectedShapes(KoFlake::SelectionType strip = KoFlake::FullSelection) const;
+    const QList<KShape*> selectedShapes(KoFlake::SelectionType strip = KoFlake::FullSelection) const;
 
     /**
      * Return the first selected shape, or 0 if there is nothing selected.
      * @param strip if StrippedSelection, the returned list will not include any children
      *    of a grouped shape if the group-parent is itself also in the set.
      */
-    KoShape *firstSelectedShape(KoFlake::SelectionType strip = KoFlake::FullSelection) const;
+    KShape *firstSelectedShape(KoFlake::SelectionType strip = KoFlake::FullSelection) const;
 
     /// return true if the shape is selected
-    bool isSelected(const KoShape *shape) const;
+    bool isSelected(const KShape *shape) const;
 
     /// return the selection count, i.e. the number of all selected shapes
     int count() const;
@@ -143,7 +143,7 @@ signals:
 
 private:
     Q_PRIVATE_SLOT(d_func(), void selectionChangedEvent())
-    Q_DECLARE_PRIVATE_D(KoShape::d_ptr, KSelection)
+    Q_DECLARE_PRIVATE_D(KShape::d_ptr, KSelection)
 };
 
 #endif

@@ -39,29 +39,29 @@ public:
     ~KoTextShapeContainerModel();
 
     /// reimplemented from KoShapeContainerModel
-    virtual void add(KoShape *child);
+    virtual void add(KShape *child);
     /// reimplemented from KoShapeContainerModel
-    virtual void remove(KoShape *child);
+    virtual void remove(KShape *child);
     /// reimplemented from KoShapeContainerModel
-    virtual void setClipped(const KoShape *child, bool clipping);
+    virtual void setClipped(const KShape *child, bool clipping);
     /// reimplemented from KoShapeContainerModel
-    virtual bool isClipped(const KoShape *child) const;
+    virtual bool isClipped(const KShape *child) const;
     /// reimplemented from KoShapeContainerModel
     virtual int count() const;
     /// reimplemented from KoShapeContainerModel
-    virtual QList<KoShape*> shapes() const;
+    virtual QList<KShape*> shapes() const;
     /// reimplemented from KoShapeContainerModel
-    virtual void containerChanged(KoShapeContainer *container, KoShape::ChangeType type);
+    virtual void containerChanged(KoShapeContainer *container, KShape::ChangeType type);
     /// reimplemented from KoShapeContainerModel
-    virtual void proposeMove(KoShape *child, QPointF &move);
+    virtual void proposeMove(KShape *child, QPointF &move);
     /// reimplemented from KoShapeContainerModel
-    virtual void childChanged(KoShape *child, KoShape::ChangeType type);
+    virtual void childChanged(KShape *child, KShape::ChangeType type);
     /// reimplemented from KoShapeContainerModel
-    virtual bool isChildLocked(const KoShape *child) const;
+    virtual bool isChildLocked(const KShape *child) const;
     /// reimplemented from KoShapeContainerModel
-    virtual void setInheritsTransform(const KoShape *shape, bool inherit);
+    virtual void setInheritsTransform(const KShape *shape, bool inherit);
     /// reimplemented from KoShapeContainerModel
-    virtual bool inheritsTransform(const KoShape *shape) const;
+    virtual bool inheritsTransform(const KShape *shape) const;
 
     /// each child that is added due to being anchored in the text has an anchor; register it for rules based placement.
     void addAnchor(KoTextAnchor *anchor);

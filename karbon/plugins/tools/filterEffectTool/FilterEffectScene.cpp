@@ -19,7 +19,7 @@
 
 #include "FilterEffectScene.h"
 #include "FilterEffectSceneItems.h"
-#include "KoShape.h"
+#include "KShape.h"
 #include "KFilterEffect.h"
 #include "KFilterEffectStack.h"
 

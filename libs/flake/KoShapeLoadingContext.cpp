@@ -19,7 +19,7 @@
 */
 
 #include "KoShapeLoadingContext.h"
-#include "KoShape.h"
+#include "KShape.h"
 #include "KoShapeContainer.h"
 #include "KoSharedLoadingData.h"
 #include "KoShapeControllerBase.h"
@@ -52,12 +52,12 @@ public:
     }
     KOdfLoadingContext &context;
     QMap<QString, KoShapeLayer*> layers;
-    QMap<QString, KoShape*> drawIds;
-    QMap<QString, QPair<KoShape *, QVariant> > subIds;
+    QMap<QString, KShape*> drawIds;
+    QMap<QString, QPair<KShape *, QVariant> > subIds;
     QMap<QString, KoSharedLoadingData*> sharedData;
     int zIndex;
     QMap<QString, KLoadingShapeUpdater*> updaterById;
-    QMap<KoShape *, KLoadingShapeUpdater*> updaterByShape;
+    QMap<KShape *, KLoadingShapeUpdater*> updaterByShape;
     KResourceManager *documentResources;
 };
 
@@ -91,7 +91,7 @@ void KoShapeLoadingContext::clearLayers()
     d->layers.clear();
 }
 
-void KoShapeLoadingContext::addShapeId(KoShape * shape, const QString & id)
+void KoShapeLoadingContext::addShapeId(KShape * shape, const QString & id)
 {
     d->drawIds.insert(id, shape);
     QMap<QString, KLoadingShapeUpdater*>::iterator it(d->updaterById.find(id));
@@ -101,17 +101,17 @@ void KoShapeLoadingContext::addShapeId(KoShape * shape, const QString & id)
     }
 }
 
-KoShape * KoShapeLoadingContext::shapeById(const QString &id)
+KShape * KoShapeLoadingContext::shapeById(const QString &id)
 {
     return d->drawIds.value(id, 0);
 }
 
-void KoShapeLoadingContext::addShapeSubItemId(KoShape *shape, const QVariant &subItem, const QString &id)
+void KoShapeLoadingContext::addShapeSubItemId(KShape *shape, const QVariant &subItem, const QString &id)
 {
-    d->subIds.insert(id, QPair<KoShape *, QVariant>(shape, subItem));
+    d->subIds.insert(id, QPair<KShape *, QVariant>(shape, subItem));
 }
 
-QPair<KoShape *, QVariant> KoShapeLoadingContext::shapeSubItemById(const QString &id)
+QPair<KShape *, QVariant> KoShapeLoadingContext::shapeSubItemById(const QString &id)
 {
     return d->subIds.value(id);
 }
@@ -123,9 +123,9 @@ void KoShapeLoadingContext::updateShape(const QString & id, KLoadingShapeUpdater
     d->updaterById.insertMulti(id, shapeUpdater);
 }
 
-void KoShapeLoadingContext::shapeLoaded(KoShape * shape)
+void KoShapeLoadingContext::shapeLoaded(KShape * shape)
 {
-    QMap<KoShape*, KLoadingShapeUpdater*>::iterator it(d->updaterByShape.find(shape));
+    QMap<KShape*, KLoadingShapeUpdater*>::iterator it(d->updaterByShape.find(shape));
     while (it != d->updaterByShape.end() && it.key() == shape) {
         it.value()->update(shape);
         delete it.value();

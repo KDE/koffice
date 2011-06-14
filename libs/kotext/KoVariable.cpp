@@ -21,7 +21,7 @@
 #include "KoTextDocumentLayout.h"
 #include "KoTextShapeData.h"
 
-#include <KoShape.h>
+#include <KShape.h>
 
 #include <QTextCursor>
 #include <QPainter>

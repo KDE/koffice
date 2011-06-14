@@ -48,7 +48,7 @@ KWOdfSharedLoadingData::KWOdfSharedLoadingData(KWOdfLoader *loader)
             KOdfXmlNS::text, "anchor-page-number", "text:anchor-page-number"));
 }
 
-void KWOdfSharedLoadingData::shapeInserted(KoShape *shape, const KXmlElement &element, KoShapeLoadingContext &context)
+void KWOdfSharedLoadingData::shapeInserted(KShape *shape, const KXmlElement &element, KoShapeLoadingContext &context)
 {
     int pageNumber = -1;
     if (shape->hasAdditionalAttribute("text:anchor-type")) {
@@ -102,7 +102,7 @@ void KWOdfSharedLoadingData::shapeInserted(KoShape *shape, const KXmlElement &el
 
             if (textBox.hasAttributeNS(KOdfXmlNS::fo, "min-height")) {
                 frame->setMinimumFrameHeight(KUnit::parseValue(textBox.attributeNS(KOdfXmlNS::fo, "min-height")));
-                KoShape *shape = frame->shape();
+                KShape *shape = frame->shape();
                 QSizeF newSize = shape->size();
                 if (newSize.height() < frame->minimumFrameHeight()) {
                     newSize.setHeight(frame->minimumFrameHeight());

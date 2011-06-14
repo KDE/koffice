@@ -311,7 +311,7 @@ bool KWAnchorStrategy::isFinished()
     return m_finished;
 }
 
-KoShape *KWAnchorStrategy::anchoredShape() const
+KShape *KWAnchorStrategy::anchoredShape() const
 {
     if (m_anchor->isPositionedInline())
         return 0;

@@ -28,7 +28,7 @@
 #include <KoExecutePolicy.h>
 #include <KoAction.h>
 #include <KSelection.h>
-#include <KoShape.h>
+#include <KShape.h>
 
 #include <QTextLayout>
 #include <QTextDocument>
@@ -290,7 +290,7 @@ void KWStatistics::selectionChanged()
     if (m_selection->count() != 1)
         return;
 
-    KoShape *shape = m_selection->firstSelectedShape();
+    KShape *shape = m_selection->firstSelectedShape();
     if (!shape) return;
     KWFrame *frame = dynamic_cast<KWFrame*>(shape->applicationData());
     if (!frame) return; // you can have embedded shapes selected, in that case it surely is no text frameset.

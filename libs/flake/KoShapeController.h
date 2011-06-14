@@ -27,7 +27,7 @@
 #include <QList>
 
 class KCanvasBase;
-class KoShape;
+class KShape;
 class KoShapeControllerBase;
 class QUndoCommand;
 class KResourceManager;
@@ -63,7 +63,7 @@ public:
      * @return command which will insert the shape into the document.
      *     The command is not yet executed.
      */
-    QUndoCommand* addShape(KoShape *shape, QUndoCommand *parent = 0);
+    QUndoCommand* addShape(KShape *shape, QUndoCommand *parent = 0);
 
     /**
      * @brief Remove a shape from the document.
@@ -74,7 +74,7 @@ public:
      * @return command which will remove the shape from the document.
      *         The command is not yet executed.
      */
-    QUndoCommand* removeShape(KoShape *shape, QUndoCommand *parent = 0);
+    QUndoCommand* removeShape(KShape *shape, QUndoCommand *parent = 0);
 
     /**
      * Remove a series of shapes from the document.
@@ -85,7 +85,7 @@ public:
      * @return command which will remove the shape from the document.
      *         The command is not yet executed.
      */
-    QUndoCommand* removeShapes(const QList<KoShape*> &shapes, QUndoCommand *parent = 0);
+    QUndoCommand* removeShapes(const QList<KShape*> &shapes, QUndoCommand *parent = 0);
 
     /**
      * @brief Set the KoShapeControllerBase used to add/remove shapes

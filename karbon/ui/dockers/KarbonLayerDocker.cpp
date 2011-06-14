@@ -229,7 +229,7 @@ void KarbonLayerDocker::slotButtonClicked(int buttonId)
 
 void KarbonLayerDocker::itemClicked(const QModelIndex &index)
 {
-    KoShape *shape = shapeFromIndex(index);
+    KShape *shape = shapeFromIndex(index);
     if (! shape)
         return;
 
@@ -248,17 +248,17 @@ void KarbonLayerDocker::itemClicked(const QModelIndex &index)
     }
 
     QList<KoShapeLayer*> selectedLayers;
-    QList<KoShape*> selectedShapes;
+    QList<KShape*> selectedShapes;
 
     // separate selected layers and selected shapes
     extractSelectedLayersAndShapes(selectedLayers, selectedShapes);
 
-    foreach(KoShape* shape, selection->selectedShapes())
+    foreach(KShape* shape, selection->selectedShapes())
     shape->update();
 
     selection->deselectAll();
 
-    foreach(KoShape* shape, selectedShapes) {
+    foreach(KShape* shape, selectedShapes) {
         if (shape) {
             selection->select(shape, false);
             shape->update();
@@ -286,7 +286,7 @@ void KarbonLayerDocker::addLayer()
 void KarbonLayerDocker::deleteItem()
 {
     QList<KoShapeLayer*> selectedLayers;
-    QList<KoShape*> selectedShapes;
+    QList<KShape*> selectedShapes;
 
     // separate selected layers and selected shapes
     extractSelectedLayersAndShapes(selectedLayers, selectedShapes);
@@ -295,7 +295,7 @@ void KarbonLayerDocker::deleteItem()
 
     if (selectedLayers.count()) {
         if (m_part->document().layers().count() > selectedLayers.count()) {
-            QList<KoShape*> deleteShapes;
+            QList<KShape*> deleteShapes;
             foreach(KoShapeLayer* layer, selectedLayers) {
                 deleteShapes += layer->shapes();
                 deleteShapes.append(layer);
@@ -319,7 +319,7 @@ void KarbonLayerDocker::deleteItem()
 void KarbonLayerDocker::raiseItem()
 {
     QList<KoShapeLayer*> selectedLayers;
-    QList<KoShape*> selectedShapes;
+    QList<KShape*> selectedShapes;
 
     // separate selected layers and selected shapes
     extractSelectedLayersAndShapes(selectedLayers, selectedShapes, true);
@@ -353,7 +353,7 @@ void KarbonLayerDocker::raiseItem()
 void KarbonLayerDocker::lowerItem()
 {
     QList<KoShapeLayer*> selectedLayers;
-    QList<KoShape*> selectedShapes;
+    QList<KShape*> selectedShapes;
 
     // separate selected layers and selected shapes
     extractSelectedLayersAndShapes(selectedLayers, selectedShapes, true);
@@ -397,7 +397,7 @@ void KarbonLayerDocker::selectLayers(QList<KoShapeLayer*> layers)
 }
 
 void KarbonLayerDocker::extractSelectedLayersAndShapes(
-    QList<KoShapeLayer*> &layers, QList<KoShape*> &shapes, bool addChilds)
+    QList<KoShapeLayer*> &layers, QList<KShape*> &shapes, bool addChilds)
 {
     layers.clear();
     shapes.clear();
@@ -408,7 +408,7 @@ void KarbonLayerDocker::extractSelectedLayersAndShapes(
 
     // separate selected layers and selected shapes
     foreach(const QModelIndex & index, selectedItems) {
-        KoShape *shape = shapeFromIndex(index);
+        KShape *shape = shapeFromIndex(index);
         KoShapeLayer *layer = dynamic_cast<KoShapeLayer*>(shape);
         if (layer) {
             layers.append(layer);
@@ -421,9 +421,9 @@ void KarbonLayerDocker::extractSelectedLayersAndShapes(
     }
 }
 
-void KarbonLayerDocker::addChildsRecursive(KoShapeGroup * parent, QList<KoShape*> &shapes)
+void KarbonLayerDocker::addChildsRecursive(KoShapeGroup * parent, QList<KShape*> &shapes)
 {
-    foreach(KoShape * child, parent->shapes()) {
+    foreach(KShape * child, parent->shapes()) {
         if (! shapes.contains(child))
             shapes.append(child);
         KoShapeGroup * group = dynamic_cast<KoShapeGroup*>(child);
@@ -432,7 +432,7 @@ void KarbonLayerDocker::addChildsRecursive(KoShapeGroup * parent, QList<KoShape*
     }
 }
 
-KoShape * KarbonLayerDocker::shapeFromIndex(const QModelIndex &index)
+KShape * KarbonLayerDocker::shapeFromIndex(const QModelIndex &index)
 {
     Q_ASSERT(index.internalPointer());
 
@@ -443,7 +443,7 @@ KoShape * KarbonLayerDocker::shapeFromIndex(const QModelIndex &index)
     if (! sourceIndex.isValid())
         return 0;
 
-    return static_cast<KoShape*>(sourceIndex.internalPointer());
+    return static_cast<KShape*>(sourceIndex.internalPointer());
 }
 
 void KarbonLayerDocker::minimalView()

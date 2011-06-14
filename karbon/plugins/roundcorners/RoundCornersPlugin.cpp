@@ -71,7 +71,7 @@ void RoundCornersPlugin::slotRoundCorners()
 {
     KCanvasController* canvasController = KoToolManager::instance()->activeCanvasController();
     KSelection *selection = canvasController->canvas()->shapeManager()->selection();
-    KoShape * shape = selection->firstSelectedShape();
+    KShape * shape = selection->firstSelectedShape();
     if (! shape)
         return;
 

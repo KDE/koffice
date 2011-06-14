@@ -23,7 +23,7 @@
 #include <QObject>
 #include <QtTest/QtTest>
 
-#include <KoShape.h>
+#include <KShape.h>
 
 class KWFrameSet;
 

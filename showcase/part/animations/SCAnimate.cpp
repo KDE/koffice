@@ -32,7 +32,7 @@
 #include "strategy/SCAttributeRotate.h"
 
 #include <KOdfXmlNS.h>
-#include <KoShape.h>
+#include <KShape.h>
 #include <KXmlReader.h>
 #include <KoShapeLoadingContext.h>
 #include <KoShapeSavingContext.h>

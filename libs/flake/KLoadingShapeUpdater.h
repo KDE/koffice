@@ -22,7 +22,7 @@
 
 #include "flake_export.h"
 
-class KoShape;
+class KShape;
 
 /**
  * Reimplement this class when you depend on a shape during loading that is
@@ -45,7 +45,7 @@ public:
      *
      * @param shape The shape that just got loaded.
      */
-    virtual void update(KoShape *shape) = 0;
+    virtual void update(KShape *shape) = 0;
 };
 
 #endif /* KOLOADINGSHAPEUPDATER_H */

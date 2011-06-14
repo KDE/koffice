@@ -26,7 +26,7 @@
 #include <KXmlWriter.h>
 #include <KProperties.h>
 #include <KOdfXmlNS.h>
-#include <KoShape.h>
+#include <KShape.h>
 #include <KoShapeSavingContext.h>
 #include <KoShapeLoadingContext.h>
 

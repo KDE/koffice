@@ -60,7 +60,7 @@ KWPageStylePropertiesCommand::KWPageStylePropertiesCommand(KWDocument *document,
         }
 
         // move
-        QList<KoShape *> shapes;
+        QList<KShape *> shapes;
         QList<QPointF> previousPositions;
         QList<QPointF> newPositions;
         foreach (KWFrameSet *fs, m_document->frameSets()) {
@@ -93,7 +93,7 @@ KWPageStylePropertiesCommand::KWPageStylePropertiesCommand(KWDocument *document,
 
 #if 0
     // move
-    QList<KoShape *> shapes;
+    QList<KShape *> shapes;
     QList<QPointF> previousPositions;
     QList<QPointF> newPositions;
 
@@ -105,7 +105,7 @@ KWPageStylePropertiesCommand::KWPageStylePropertiesCommand(KWDocument *document,
         KWTextFrameSet *tfs = dynamic_cast<KWTextFrameSet*>(fs);
         bool remove = tfs && tfs->textFrameSetType() == KWord::MainTextFrameSet;
         foreach (KWFrame *frame, fs->frames()) {
-            KoShape *shape = frame->shape();
+            KShape *shape = frame->shape();
             if (remove && shape->boundingRect().intersects(page.rect())) {
                 if (m_oldLayout.leftMargin < 0 && m_newLayout.leftMargin >= 0 &&
                         shape->position().x() >= rect.center().x()) // before it was a pageSpread.

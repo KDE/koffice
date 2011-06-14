@@ -92,7 +92,7 @@ public:
     KoFlake::SelectionHandle handleAt(const QPointF &point, bool *innerHandleMeaning = 0);
 
 public slots:
-    virtual void activate(ToolActivation toolActivation, const QSet<KoShape*> &shapes);
+    virtual void activate(ToolActivation toolActivation, const QSet<KShape*> &shapes);
 
 private slots:
     void selectionAlignHorizontalLeft();
@@ -150,10 +150,10 @@ private:
     void selectGuideAtPosition(const QPointF &position);
 
     /// Returns list of editable shapes from the given list of shapes
-    QList<KoShape*> filterEditableShapes(const QList<KoShape*> &shapes);
+    QList<KShape*> filterEditableShapes(const QList<KShape*> &shapes);
 
     /// Returns the number of editable shapes from the given list of shapes
-    uint editableShapesCount(const QList<KoShape*> &shapes);
+    uint editableShapesCount(const QList<KShape*> &shapes);
 
     KoFlake::SelectionHandle m_lastHandle;
     KoFlake::Position m_hotPosition;

@@ -25,7 +25,7 @@
 #include <QMultiMap>
 #include <QPainterPath>
 
-class KoShape;
+class KShape;
 class KWFrame;
 
 ///  Class that allows us with the runaround of QPainterPaths
@@ -33,13 +33,13 @@ class Outline
 {
 public:
     Outline(KWFrame *frame, const QTransform &matrix);
-    Outline(KoShape *shape, const QTransform &matrix);
+    Outline(KShape *shape, const QTransform &matrix);
 
     void init(const QTransform &matrix, const QPainterPath &outline, qreal distance);
 
     QRectF limit(const QRectF &content);
 
-    KoShape *shape() const { return m_shape; }
+    KShape *shape() const { return m_shape; }
 
     static qreal xAtY(const QLineF &line, qreal y);
 
@@ -50,7 +50,7 @@ private:
     Side m_side;
     QMultiMap<qreal, QLineF> m_edges; //sorted with y-coord
     QRectF m_bounds;
-    KoShape *m_shape;
+    KShape *m_shape;
     qreal m_distance;
 };
 

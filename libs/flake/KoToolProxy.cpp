@@ -239,11 +239,11 @@ void KoToolProxy::mouseReleaseEvent(QMouseEvent *event, const QPointF &point)
             Q_ASSERT(manager);
             // only change the selection if that will not lead to losing a complex selection
             if (manager->selection()->count() <= 1) {
-                KoShape *shape = manager->shapeAt(point);
+                KShape *shape = manager->shapeAt(point);
                 if (shape && !manager->selection()->isSelected(shape)) { // make the clicked shape the active one
                     manager->selection()->deselectAll();
                     manager->selection()->select(shape);
-                    QList<KoShape*> shapes;
+                    QList<KShape*> shapes;
                     shapes << shape;
                     QString tool = KoToolManager::instance()->preferredToolForSelection(shapes);
                     KoToolManager::instance()->switchToolRequested(tool);

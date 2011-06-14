@@ -42,7 +42,7 @@ SelectionStrategy::SelectionStrategy(CellToolBase *cellTool,
 {
     d->startCell = KCCell();
 
-    const KoShape* shape = tool()->canvas()->shapeManager()->selection()->firstSelectedShape();
+    const KShape* shape = tool()->canvas()->shapeManager()->selection()->firstSelectedShape();
     const QPointF position = documentPos - (shape ? shape->position() : QPointF(0.0, 0.0));
     KCSheet *const sheet = this->selection()->activeSheet();
     Selection *const selection = this->selection();
@@ -125,7 +125,7 @@ void SelectionStrategy::handleMouseMove(const QPointF &documentPos,
 {
 #if 0 // KSPREAD_WIP_DRAG_REFERENCE_SELECTION
     Q_UNUSED(modifiers);
-    const KoShape* shape = tool()->canvas()->shapeManager()->selection()->firstSelectedShape();
+    const KShape* shape = tool()->canvas()->shapeManager()->selection()->firstSelectedShape();
     const QPointF position = documentPos - (shape ? shape->position() : QPointF(0.0, 0.0));
     KCSheet *const sheet = selection()->activeSheet();
 

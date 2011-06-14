@@ -20,13 +20,13 @@
 #include "KEventActionAddCommand.h"
 #include <klocale.h>
 
-#include "KoShape.h"
+#include "KShape.h"
 #include "KEventAction.h"
 
 class KEventActionAddCommandPrivate
 {
 public:
-    KEventActionAddCommandPrivate(KoShape *s, KEventAction *a)
+    KEventActionAddCommandPrivate(KShape *s, KEventAction *a)
         : shape(s), eventAction(a), deleteEventAction(true)
     {
     }
@@ -35,13 +35,13 @@ public:
         if (deleteEventAction)
             delete eventAction;
     }
-    KoShape *shape;
+    KShape *shape;
     KEventAction *eventAction;
     bool deleteEventAction;
 };
 
 
-KEventActionAddCommand::KEventActionAddCommand(KoShape *shape, KEventAction *eventAction, QUndoCommand *parent)
+KEventActionAddCommand::KEventActionAddCommand(KShape *shape, KEventAction *eventAction, QUndoCommand *parent)
     : QUndoCommand(parent),
     d(new KEventActionAddCommandPrivate(shape, eventAction))
 {

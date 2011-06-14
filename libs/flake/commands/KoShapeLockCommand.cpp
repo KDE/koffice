@@ -19,19 +19,19 @@
  */
 
 #include "KoShapeLockCommand.h"
-#include "KoShape.h"
+#include "KShape.h"
 
 #include <klocale.h>
 
 class KoShapeLockCommandPrivate
 {
 public:
-    QList<KoShape*> shapes;    /// the shapes to lock
+    QList<KShape*> shapes;    /// the shapes to lock
     QList<bool> oldLock;       /// old lock states
     QList<bool> newLock;       /// new lock states
 };
 
-KoShapeLockCommand::KoShapeLockCommand(const QList<KoShape*> &shapes, const QList<bool> &oldLock, const QList<bool> &newLock, QUndoCommand *parent)
+KoShapeLockCommand::KoShapeLockCommand(const QList<KShape*> &shapes, const QList<bool> &oldLock, const QList<bool> &newLock, QUndoCommand *parent)
         : QUndoCommand(parent),
         d(new KoShapeLockCommandPrivate())
 {

@@ -20,7 +20,7 @@
 #ifndef KOSHAPECONTAINER_H
 #define KOSHAPECONTAINER_H
 
-#include "KoShape.h"
+#include "KShape.h"
 #include "KoViewConverter.h"
 
 #include <QList>
@@ -34,12 +34,12 @@ class KoShapeContainerPrivate;
 /**
  * This is the base class that all Flake group-shapes are based on.
  * Extending from this class allows you to have child-shapes.
- * Like the KoShape class, this shape is a visible class with
+ * Like the KShape class, this shape is a visible class with
  * a position and a size. It can paint itself as well if you implement
  * the paintComponent() method.
  *
  * <p>The most important feature of this class is that you can make
- * other KoShape classes to be children of this container.
+ * other KShape classes to be children of this container.
  *
  * <p>The effect of grouping those shapes is that their position
  * is relative to the position of the container. Move the container and
@@ -66,7 +66,7 @@ class KoShapeContainerPrivate;
  * and the width of the individual columns gets too small, the model can choose to
  * remove a child or add one when the width allows another column.
  */
-class FLAKE_EXPORT KoShapeContainer : public KoShape
+class FLAKE_EXPORT KoShapeContainer : public KShape
 {
 public:
 
@@ -86,7 +86,7 @@ public:
 
     /**
      * Destructor for the shape container.
-     * All children will be orphaned by calling a KoShape::setParent(0)
+     * All children will be orphaned by calling a KShape::setParent(0)
      */
     virtual ~KoShapeContainer();
 
@@ -94,13 +94,13 @@ public:
      * Add a child to this container.
      * @param shape the child to be managed in the container.
      */
-    void addShape(KoShape *shape);
+    void addShape(KShape *shape);
 
     /**
      * Remove a child to be completely separated from the container.
      * @param shape the child to be removed.
      */
-    void removeShape(KoShape *shape);
+    void removeShape(KShape *shape);
 
     /**
      * Return the current number of children registered.
@@ -114,13 +114,13 @@ public:
      * A shape that is clipped by the container will have its visible portion
      * limited to the area where it intersects with the container.
      * If a shape is positioned or sized such that it would be painted outside
-     * of the KoShape::outline() of its parent container, setting this property
+     * of the KShape::outline() of its parent container, setting this property
      * to true will clip the shape painting to the container outline.
      *
      * @param child the child for which the property will be changed.
      * @param clipping the property
      */
-    void setClipped(const KoShape *child, bool clipping);
+    void setClipped(const KShape *child, bool clipping);
 
     /**
      * Returns if the argument child has its 'clipping' property set.
@@ -128,20 +128,20 @@ public:
      * A shape that is clipped by the container will have its visible portion
      * limited to the area where it intersects with the container.
      * If a shape is positioned or sized such that it would be painted outside
-     * of the KoShape::outline() of its parent container, setting this property
+     * of the KShape::outline() of its parent container, setting this property
      * to true will clip the shape painting to the container outline.
      *
      * @return if the argument child has its 'clipping' property set.
      * @param child the child for which the property will be returned.
      */
-    bool isClipped(const KoShape *child) const;
+    bool isClipped(const KShape *child) const;
 
     /**
      * Return wheather the child has the effective state of being locked for user modifications.
-     * This method is deferred to the model, which should call the KoShape::isGeometryProtected() on the child.
+     * This method is deferred to the model, which should call the KShape::isGeometryProtected() on the child.
      * @param child the shape that the user wants to move.
      */
-    bool isChildLocked(const KoShape *child) const;
+    bool isChildLocked(const KShape *child) const;
 
 
     /**
@@ -156,7 +156,7 @@ public:
      * @param shape the shape for which the property will be changed.
      * @param inherit the new value
      */
-    void setInheritsTransform(const KoShape *shape, bool inherit);
+    void setInheritsTransform(const KShape *shape, bool inherit);
 
     /**
      * Returns if the shape inherits the container transform.
@@ -170,7 +170,7 @@ public:
      * @return if the argument shape has its 'inherits transform' property set.
      * @param shape the shape for which the property will be returned.
      */
-    bool inheritsTransform(const KoShape *shape) const;
+    bool inheritsTransform(const KShape *shape) const;
 
 
     /// reimplemented
@@ -178,7 +178,7 @@ public:
 
     /**
      * @brief Paint the component
-     * Implement this method to allow the shape to paint itself, just like the KoShape::paint()
+     * Implement this method to allow the shape to paint itself, just like the KShape::paint()
      * method does.
      *
      * @param painter used for painting the shape
@@ -191,7 +191,7 @@ public:
      * Create and return an iterator over all child shapes.
      * @return an interator over all child shapes.
      */
-    QList<KoShape*> shapes() const;
+    QList<KShape*> shapes() const;
 
     /**
      * return the model for this container
@@ -213,7 +213,7 @@ protected:
     KoShapeContainer(KoShapeContainerPrivate &);
 
 private:
-    void shapeChanged(ChangeType type, KoShape *shape);
+    void shapeChanged(ChangeType type, KShape *shape);
 
     Q_DECLARE_PRIVATE(KoShapeContainer)
 };

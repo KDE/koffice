@@ -21,14 +21,14 @@
 #include <QPointF>
 
 class KoShapeConnection;
-class KoShape;
+class KShape;
 
 /**
  * All information for hooking up a connection object to either a shape or just a point.
  * If the shape is null then the point is used.
  */
 struct ConnectionHook {
-    KoShape *shape;
+    KShape *shape;
     int index;
     QPointF point;
 };

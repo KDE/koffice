@@ -22,14 +22,14 @@
 
 #include "SCPlaceholderStrategy.h"
 
-class KoShape;
+class KShape;
 
 class SCPlaceholderTextStrategy : public SCPlaceholderStrategy
 {
 public:
     virtual ~SCPlaceholderTextStrategy();
 
-    virtual KoShape *createShape(KResourceManager *documentResources);
+    virtual KShape *createShape(KResourceManager *documentResources);
 
     virtual void paint(QPainter &painter, const KoViewConverter &converter, const QRectF &rect);
 
@@ -46,7 +46,7 @@ protected:
 
     friend class SCPlaceholderStrategy;
 
-    KoShape * m_textShape;
+    KShape * m_textShape;
 };
 
 #endif /* KPRPLACEHOLDERTEXTSTRATEGY_H */

@@ -25,11 +25,11 @@
 class KoShapeSizeCommand::Private
 {
 public:
-    QList<KoShape*> shapes;
+    QList<KShape*> shapes;
     QList<QSizeF> previousSizes, newSizes;
 };
 
-KoShapeSizeCommand::KoShapeSizeCommand(const QList<KoShape*> &shapes, const QList<QSizeF> &previousSizes, const QList<QSizeF> &newSizes, QUndoCommand *parent)
+KoShapeSizeCommand::KoShapeSizeCommand(const QList<KShape*> &shapes, const QList<QSizeF> &previousSizes, const QList<QSizeF> &newSizes, QUndoCommand *parent)
         : QUndoCommand(parent),
         d(new Private())
 {
@@ -51,7 +51,7 @@ void KoShapeSizeCommand::redo()
 {
     QUndoCommand::redo();
     int i = 0;
-    foreach(KoShape *shape, d->shapes) {
+    foreach(KShape *shape, d->shapes) {
         shape->update();
         shape->setSize(d->newSizes[i++]);
         shape->update();
@@ -62,7 +62,7 @@ void KoShapeSizeCommand::undo()
 {
     QUndoCommand::undo();
     int i = 0;
-    foreach(KoShape *shape, d->shapes) {
+    foreach(KShape *shape, d->shapes) {
         shape->update();
         shape->setSize(d->previousSizes[i++]);
         shape->update();

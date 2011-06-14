@@ -105,9 +105,9 @@ void DefaultToolWidget::updatePosition()
     positionXSpinBox->changeValue( selPosition.x() );
     positionYSpinBox->changeValue( selPosition.y() );
 
-    QList<KoShape*> selectedShapes = selection->selectedShapes( KoFlake::TopLevelSelection );
+    QList<KShape*> selectedShapes = selection->selectedShapes( KoFlake::TopLevelSelection );
     bool aspectLocked = false;
-    foreach (KoShape* shape, selectedShapes)
+    foreach (KShape* shape, selectedShapes)
         aspectLocked = aspectLocked | shape->keepAspectRatio();
     aspectButton->setKeepAspectRatio(aspectLocked);
     m_blockSignals = false;
@@ -125,11 +125,11 @@ void DefaultToolWidget::positionHasChanged()
     if( oldPos == newPos )
         return;
 
-    QList<KoShape*> selectedShapes = selection->selectedShapes( KoFlake::TopLevelSelection );
+    QList<KShape*> selectedShapes = selection->selectedShapes( KoFlake::TopLevelSelection );
     QPointF moveBy = newPos - oldPos;
     QList<QPointF> oldPositions;
     QList<QPointF> newPositions;
-    foreach( KoShape* shape, selectedShapes )
+    foreach( KShape* shape, selectedShapes )
     {
         oldPositions.append( shape->position() );
         newPositions.append( shape->position() + moveBy );
@@ -189,12 +189,12 @@ void DefaultToolWidget::sizeHasChanged()
         resizeMatrix.scale( newSize.width() / rect.width(), newSize.height() / rect.height() );
         resizeMatrix.translate( -scaleCenter.x(), -scaleCenter.y() );
 
-        QList<KoShape*> selectedShapes = selection->selectedShapes( KoFlake::StrippedSelection );
+        QList<KShape*> selectedShapes = selection->selectedShapes( KoFlake::StrippedSelection );
         QList<QSizeF> oldSizes, newSizes;
         QList<QTransform> oldState;
         QList<QTransform> newState;
 
-        foreach( KoShape* shape, selectedShapes )
+        foreach( KShape* shape, selectedShapes )
         {
             shape->update();
             QSizeF oldSize = shape->size();
@@ -262,7 +262,7 @@ void DefaultToolWidget::aspectButtonToggled(bool keepAspect)
     if (m_blockSignals)
         return;
     KSelection * selection = m_tool->canvas()->shapeManager()->selection();
-    foreach (KoShape *shape, selection->selectedShapes(KoFlake::TopLevelSelection)) {
+    foreach (KShape *shape, selection->selectedShapes(KoFlake::TopLevelSelection)) {
         shape->setKeepAspectRatio(keepAspect);
     }
 }

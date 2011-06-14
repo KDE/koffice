@@ -43,8 +43,8 @@ ShapeShearStrategy::ShapeShearStrategy(KoToolBase *tool, const QPointF &clicked,
 , m_start(clicked)
 {
     KSelection *sel = tool->canvas()->shapeManager()->selection();
-    QList<KoShape*> selectedShapes = sel->selectedShapes(KoFlake::StrippedSelection);
-    foreach (KoShape *shape, selectedShapes) {
+    QList<KShape*> selectedShapes = sel->selectedShapes(KoFlake::StrippedSelection);
+    foreach (KShape *shape, selectedShapes) {
         if (!shape->isEditable())
             continue;
         m_selectedShapes << shape;
@@ -147,7 +147,7 @@ void ShapeShearStrategy::handleMouseMove(const QPointF &point, Qt::KeyboardModif
 
     QTransform applyMatrix = matrix * m_shearMatrix.inverted();
 
-    foreach (KoShape *shape, m_selectedShapes) {
+    foreach (KShape *shape, m_selectedShapes) {
         shape->update();
         shape->applyAbsoluteTransformation(applyMatrix);
         shape->update();
@@ -167,7 +167,7 @@ void ShapeShearStrategy::paint(QPainter &painter, const KoViewConverter &convert
 QUndoCommand* ShapeShearStrategy::createCommand(QUndoCommand *parent)
 {
     QList<QTransform> newTransforms;
-    foreach(KoShape* shape, m_selectedShapes)
+    foreach(KShape* shape, m_selectedShapes)
         newTransforms << shape->transformation();
     KoShapeTransformCommand *cmd = new KoShapeTransformCommand(m_selectedShapes, m_oldTransforms, newTransforms, parent);
     cmd->setText(i18n("Shear"));

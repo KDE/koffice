@@ -578,7 +578,7 @@ void TextTool::paint(QPainter &painter, const KoViewConverter &converter)
     QList<TextShape *> shapesToPaint;
     KoTextDocumentLayout *lay = qobject_cast<KoTextDocumentLayout*>(textEditor->document()->documentLayout());
     if (lay) {
-        foreach (KoShape *shape, lay->shapes()) {
+        foreach (KShape *shape, lay->shapes()) {
             TextShape *ts = dynamic_cast<TextShape*>(shape);
             if (! ts)
                 continue;
@@ -659,7 +659,7 @@ void TextTool::updateSelectedShape(const QPointF &point)
             repaintSelection();
         else
             repaintCaret();
-        foreach (KoShape *shape, canvas()->shapeManager()->shapesAt(area, true)) {
+        foreach (KShape *shape, canvas()->shapeManager()->shapesAt(area, true)) {
             if (shape->isContentProtected())
                 continue;
             TextShape *textShape = dynamic_cast<TextShape*>(shape);
@@ -690,7 +690,7 @@ void TextTool::setShapeData(KoTextShapeData *data)
         disconnect(m_textShapeData, SIGNAL(destroyed (QObject*)), this, SLOT(shapeDataRemoved()));
         KoTextDocumentLayout *lay = qobject_cast<KoTextDocumentLayout*>(m_textShapeData->document()->documentLayout());
         if (lay)
-            disconnect(lay, SIGNAL(shapeAdded(KoShape*)), this, SLOT(shapeAddedToDoc(KoShape*)));
+            disconnect(lay, SIGNAL(shapeAdded(KShape*)), this, SLOT(shapeAddedToDoc(KShape*)));
     }
     m_textShapeData = data;
     if (m_textShapeData == 0)
@@ -705,11 +705,11 @@ void TextTool::setShapeData(KoTextShapeData *data)
 
         KoTextDocumentLayout *lay = qobject_cast<KoTextDocumentLayout*>(m_textShapeData->document()->documentLayout());
         if (lay) {
-            connect(lay, SIGNAL(shapeAdded(KoShape*)), this, SLOT(shapeAddedToDoc(KoShape*)));
+            connect(lay, SIGNAL(shapeAdded(KShape*)), this, SLOT(shapeAddedToDoc(KShape*)));
 
              // check and remove the demo text.
             bool demoTextOn = true;
-            foreach (KoShape *shape, lay->shapes()) {
+            foreach (KShape *shape, lay->shapes()) {
                 TextShape *ts = dynamic_cast<TextShape*>(shape);
                 if (ts && !ts->demoText()) { // if any shape in the series has it turned off, we don't have it anymore.
                     demoTextOn = false;
@@ -728,7 +728,7 @@ void TextTool::setShapeData(KoTextShapeData *data)
                     styleManager->defaultParagraphStyle()->applyStyle(block);
                 }
                 m_textShapeData->document()->setUndoRedoEnabled(true); // allow undo history
-                foreach (KoShape *shape, lay->shapes()) {
+                foreach (KShape *shape, lay->shapes()) {
                     TextShape *ts = dynamic_cast<TextShape*>(shape);
                     if (ts) ts->setDemoText(false);
                 }
@@ -832,7 +832,7 @@ int TextTool::pointToPosition(const QPointF &point) const
     if (textShapeData->endPosition() == -1) {
         KoTextDocumentLayout *lay = qobject_cast<KoTextDocumentLayout*>(textShapeData->document()->documentLayout());
         if (lay) {
-            foreach (KoShape *shape, lay->shapes()) {
+            foreach (KShape *shape, lay->shapes()) {
                 KoTextShapeData *sd = dynamic_cast<KoTextShapeData*>(shape->userData());
                 if (sd && sd->endPosition() >= 0)
                     textShapeData = sd;
@@ -1304,7 +1304,7 @@ void TextTool::ensureCursorVisible()
     if (m_textShapeData->endPosition() < textEditor->position() || m_textShapeData->position() > textEditor->position()) {
         KoTextDocumentLayout *lay = qobject_cast<KoTextDocumentLayout*>(m_textShapeData->document()->documentLayout());
         Q_ASSERT(lay);
-        foreach (KoShape* shape, lay->shapes()) {
+        foreach (KShape* shape, lay->shapes()) {
             TextShape *textShape = dynamic_cast<TextShape*>(shape);
             Q_ASSERT(textShape);
             KoTextShapeData *d = static_cast<KoTextShapeData*>(textShape->userData());
@@ -1405,11 +1405,11 @@ void TextTool::updateStyleManager()
     m_changeTracker = KoTextDocument(textEditor->document()).changeTracker();
 }
 
-void TextTool::activate(ToolActivation toolActivation, const QSet<KoShape*> &shapes)
+void TextTool::activate(ToolActivation toolActivation, const QSet<KShape*> &shapes)
 {
     Q_UNUSED(toolActivation);
     m_caretTimer.start();
-    foreach (KoShape *shape, shapes) {
+    foreach (KShape *shape, shapes) {
         m_textShape = dynamic_cast<TextShape*>(shape);
         if (m_textShape)
             break;
@@ -1515,9 +1515,9 @@ void TextTool::repaintSelection(int startPosition, int endPosition)
     QList<TextShape *> shapes;
     KoTextDocumentLayout *lay = qobject_cast<KoTextDocumentLayout*>(textEditor->document()->documentLayout());
     Q_ASSERT(lay);
-    foreach (KoShape* shape, lay->shapes()) {
+    foreach (KShape* shape, lay->shapes()) {
         TextShape *textShape = dynamic_cast<TextShape*>(shape);
-        if (textShape == 0) // when the shape is being deleted its no longer a TextShape but a KoShape
+        if (textShape == 0) // when the shape is being deleted its no longer a TextShape but a KShape
             continue;
 
         const int from = textShape->textShapeData()->position();
@@ -2145,7 +2145,7 @@ void TextTool::shapeAddedToCanvas()
 {
     if (m_textShape) {
         KSelection *selection = canvas()->shapeManager()->selection();
-        KoShape *shape = selection->firstSelectedShape();
+        KShape *shape = selection->firstSelectedShape();
         if (shape != m_textShape && canvas()->shapeManager()->shapes().contains(m_textShape)) {
             // this situation applies when someone, not us, changed the selection by selecting another
             // text shape. Possibly by adding one.
@@ -2228,7 +2228,7 @@ void TextTool::setBackgroundColor(const KoColor &color)
     m_textEditor.data()->setTextBackgroundColor(color.toQColor());
 }
 
-void TextTool::shapeAddedToDoc(KoShape *shape)
+void TextTool::shapeAddedToDoc(KShape *shape)
 {
     // calling ensureCursorVisible below is a rather intrusive thing to do for the user
     // so make doube sure we need it!
@@ -2245,7 +2245,7 @@ void TextTool::shapeAddedToDoc(KoShape *shape)
         return;
     KoTextDocumentLayout *lay = qobject_cast<KoTextDocumentLayout*>(textEditor->document()->documentLayout());
     Q_ASSERT(lay);
-    const QList<KoShape*> shapes = lay->shapes();
+    const QList<KShape*> shapes = lay->shapes();
     // only when the new one is directly after our current one should we do the move
     if (shapes.indexOf(ts) - shapes.indexOf(m_textShape) > 1)
         return;

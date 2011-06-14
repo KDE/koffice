@@ -256,14 +256,14 @@ public:
     KPathPoint* endPointAtPosition(const QPointF &position) const
     {
         QRectF roi = q->handleGrabRect(position);
-        QList<KoShape *> shapes = q->canvas()->shapeManager()->shapesAt(roi);
+        QList<KShape *> shapes = q->canvas()->shapeManager()->shapesAt(roi);
 
         KPathPoint * nearestPoint = 0;
         qreal minDistance = HUGE_VAL;
         uint grabSensitivity = q->canvas()->resourceManager()->grabSensitivity();
         qreal maxDistance = q->canvas()->viewConverter()->viewToDocumentX(grabSensitivity);
 
-        foreach(KoShape *shape, shapes) {
+        foreach(KShape *shape, shapes) {
             KPathShape * path = dynamic_cast<KPathShape*>(shape);
             if (!path)
                 continue;

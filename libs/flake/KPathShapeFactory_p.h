@@ -33,7 +33,7 @@
 //
 
 
-#include "KoShape.h"
+#include "KShape.h"
 #include "KoShapeFactoryBase.h"
 
 #include "KXmlReader.h"
@@ -45,7 +45,7 @@ public:
     /// constructor
     KPathShapeFactory(QObject *parent, const QStringList&);
     ~KPathShapeFactory() {}
-    virtual KoShape *createDefaultShape(KResourceManager *documentResources = 0) const;
+    virtual KShape *createDefaultShape(KResourceManager *documentResources = 0) const;
     bool supports(const KXmlElement &element, KoShapeLoadingContext &context) const;
     /// reimplemented
     virtual void newDocumentResourceManager(KResourceManager *manager);

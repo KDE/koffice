@@ -41,7 +41,7 @@ KWGeneralFrameProperties::KWGeneralFrameProperties(FrameConfigSharedState *state
     connect(m_state, SIGNAL(keepAspectRatioChanged(bool)), widget.keepAspectRatio, SLOT(setChecked(bool)));
 }
 
-void KWGeneralFrameProperties::open(KoShape *shape)
+void KWGeneralFrameProperties::open(KShape *shape)
 {
     m_state->addUser();
     m_shape = shape;

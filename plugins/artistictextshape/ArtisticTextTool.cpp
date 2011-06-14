@@ -231,9 +231,9 @@ void ArtisticTextTool::mousePressEvent( KPointerEvent *event )
 {
     ArtisticTextShape *hit = 0;
     QRectF roi( event->point, QSizeF(1,1) );
-    QList<KoShape*> shapes = canvas()->shapeManager()->shapesAt( roi );
+    QList<KShape*> shapes = canvas()->shapeManager()->shapesAt( roi );
     KSelection *selection = canvas()->shapeManager()->selection();
-    foreach( KoShape *shape, shapes ) 
+    foreach( KShape *shape, shapes ) 
     {
         hit = dynamic_cast<ArtisticTextShape*>( shape );
         if ( hit ) {
@@ -275,8 +275,8 @@ void ArtisticTextTool::mouseMoveEvent( KPointerEvent *event )
     ArtisticTextShape *textShape = 0;
 
     QRectF roi( event->point, QSizeF(1,1) );
-    QList<KoShape*> shapes = canvas()->shapeManager()->shapesAt( roi );
-    foreach( KoShape * shape, shapes )
+    QList<KShape*> shapes = canvas()->shapeManager()->shapesAt( roi );
+    foreach( KShape * shape, shapes )
     {
         ArtisticTextShape * text = dynamic_cast<ArtisticTextShape*>( shape );
         if ( text )
@@ -343,10 +343,10 @@ void ArtisticTextTool::keyPressEvent(QKeyEvent *event)
     }
 }
 
-void ArtisticTextTool::activate(ToolActivation toolActivation, const QSet<KoShape*> &shapes)
+void ArtisticTextTool::activate(ToolActivation toolActivation, const QSet<KShape*> &shapes)
 {
     Q_UNUSED(toolActivation);
-    foreach (KoShape *shape, shapes) {
+    foreach (KShape *shape, shapes) {
         m_currentShape = dynamic_cast<ArtisticTextShape*>( shape );
         if (m_currentShape)
             break;

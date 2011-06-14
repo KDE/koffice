@@ -25,7 +25,7 @@
 #include <QString>
 #include <math.h>
 #include "../SCAnimationCache.h"
-#include "KoShape.h"
+#include "KShape.h"
 #include "KoTextBlockData.h"
 #include <QTextLayout>
 #include "KoTextShapeData.h"
@@ -173,7 +173,7 @@ void TokenStack::ensureSpace()
 /**********************
     SCValueParser
  **********************/
-SCValueParser::SCValueParser(QString formula, KoShape *shape, KoTextBlockData *textBlockData)
+SCValueParser::SCValueParser(QString formula, KShape *shape, KoTextBlockData *textBlockData)
     : m_shape(shape)
     , m_textBlockData(textBlockData)
     , m_formula(formula)

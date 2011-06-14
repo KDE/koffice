@@ -24,7 +24,7 @@
 #include "flake_export.h"
 #include <QtGui/QUndoCommand>
 
-class KoShape;
+class KShape;
 class QTransform;
 
 /**
@@ -40,10 +40,10 @@ public:
      * @param shapes all the shapes that should be transformed
      * @param oldState the old shapes transformations
      * @param newState the new shapes transformations
-     * @see KoShape::transformation()
-     * @see KoShape::setTransformation()
+     * @see KShape::transformation()
+     * @see KShape::setTransformation()
      */
-    KoShapeTransformCommand(const QList<KoShape*> &shapes, const QList<QTransform> &oldState, const QList<QTransform> &newState, QUndoCommand * parent = 0);
+    KoShapeTransformCommand(const QList<KShape*> &shapes, const QList<QTransform> &oldState, const QList<QTransform> &newState, QUndoCommand * parent = 0);
     ~KoShapeTransformCommand();
     /// redo the command
     void redo();

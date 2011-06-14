@@ -28,12 +28,12 @@
  * The KoShapeUserData class is used to associate custom data with a shape.
  *
  *  KoShapeUserData provides an abstract interface for container classes
- *  that are used to associate application-specific user data with shapes in KoShape
+ *  that are used to associate application-specific user data with shapes in KShape
  *  Generally, subclasses of this class provide functions to allow data to
- *  be stored and retrieved, and instances are attached to KoShape using
- *  KoShape::setUserData(). This makes it possible to store additional data per
+ *  be stored and retrieved, and instances are attached to KShape using
+ *  KShape::setUserData(). This makes it possible to store additional data per
  *  shape in a way that allows applications to not know the implementation of a
- *  specific KoShape extending class.
+ *  specific KShape extending class.
  *
  *  Each subclass should provide a reimplementation of the destructor to ensure that
  *  any private data is automatically cleaned up when user data objects are deleted.

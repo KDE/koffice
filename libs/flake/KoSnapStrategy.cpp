@@ -75,8 +75,8 @@ bool OrthogonalSnapStrategy::snap(const QPointF &mousePosition, KoSnapProxy * pr
     qreal minVertDist = HUGE_VAL;
     qreal minHorzDist = HUGE_VAL;
 
-    QList<KoShape*> shapes = proxy->shapes();
-    foreach(KoShape * shape, shapes) {
+    QList<KShape*> shapes = proxy->shapes();
+    foreach(KShape * shape, shapes) {
         QList<QPointF> points = proxy->pointsFromShape(shape);
         foreach (const QPointF &point, points) {
             qreal dx = fabs(point.x() - mousePosition.x());
@@ -181,8 +181,8 @@ bool ExtensionSnapStrategy::snap(const QPointF &mousePosition, KoSnapProxy * pro
     QPointF snappedPoints[2] = { mousePosition, mousePosition };
     QPointF startPoints[2];
 
-    QList<KoShape*> shapes = proxy->shapes(true);
-    foreach(KoShape * shape, shapes) {
+    QList<KShape*> shapes = proxy->shapes(true);
+    foreach(KShape * shape, shapes) {
         KPathShape * path = dynamic_cast<KPathShape*>(shape);
         if (! path)
             continue;
@@ -490,8 +490,8 @@ bool BoundingBoxSnapStrategy::snap(const QPointF &mousePosition, KoSnapProxy *pr
         KoFlake::CenteredPosition
     };
 
-    QList<KoShape*> shapes = proxy->shapesInRect(rect, true);
-    foreach(KoShape * shape, shapes) {
+    QList<KShape*> shapes = proxy->shapesInRect(rect, true);
+    foreach(KShape * shape, shapes) {
         qreal shapeMinDistance = HUGE_VAL;
         // first check the corner and center points
         for (int i = 0; i < 5; ++i) {

@@ -186,7 +186,7 @@ void SCViewModeNotes::updateActivePage(KoPAPageBase *page)
     m_canvas->repaint();
 
     m_canvas->shapeManager()->setShapes(layer->shapes());
-    m_canvas->masterShapeManager()->setShapes(QList<KoShape*>());
+    m_canvas->masterShapeManager()->setShapes(QList<KShape*>());
 
     m_view->updatePageNavigationActions();
 
@@ -197,9 +197,9 @@ void SCViewModeNotes::updateActivePage(KoPAPageBase *page)
     KoToolManager::instance()->switchToolRequested(tool);
 }
 
-void SCViewModeNotes::addShape(KoShape *shape)
+void SCViewModeNotes::addShape(KShape *shape)
 {
-    KoShape *parent = shape;
+    KShape *parent = shape;
     SCNotes *notes = 0;
     // similar to KoPADocument::pageByShape()
     while (!notes && (parent = parent->parent())) {
@@ -214,9 +214,9 @@ void SCViewModeNotes::addShape(KoShape *shape)
     }
 }
 
-void SCViewModeNotes::removeShape(KoShape *shape)
+void SCViewModeNotes::removeShape(KShape *shape)
 {
-    KoShape *parent = shape;
+    KShape *parent = shape;
     SCNotes *notes = 0;
     while (!notes && (parent = parent->parent())) {
         notes = dynamic_cast<SCNotes *>(parent);

@@ -25,7 +25,7 @@
 #include <QVector>
 #include <QString>
 
-class KoShape;
+class KShape;
 class KoTextBlockData;
 class SCAnimationCache;
 
@@ -187,7 +187,7 @@ public:
 class SCValueParser
 {
 public:
-    SCValueParser(QString formula, KoShape *shape, KoTextBlockData *textBlockData);
+    SCValueParser(QString formula, KShape *shape, KoTextBlockData *textBlockData);
     QString formula() const;
     qreal eval(SCAnimationCache * cache) const;
     bool valid() const;
@@ -196,7 +196,7 @@ protected:
     void compile(const Tokens &tokens) const;
     qreal identifierToValue(QString identifier, SCAnimationCache * cache) const;
 private:
-    KoShape *m_shape;
+    KShape *m_shape;
     KoTextBlockData *m_textBlockData;
     QString m_formula;
     mutable bool m_compiled;

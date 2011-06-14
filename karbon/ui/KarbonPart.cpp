@@ -436,7 +436,7 @@ bool KarbonPart::mergeNativeFormat(const QString &file)
     return result;
 }
 
-void KarbonPart::addShape(KoShape* shape)
+void KarbonPart::addShape(KShape* shape)
 {
     KCanvasController* canvasController = KoToolManager::instance()->activeCanvasController();
 
@@ -472,7 +472,7 @@ void KarbonPart::addShape(KoShape* shape)
     setModified(true);
 }
 
-void KarbonPart::removeShape(KoShape* shape)
+void KarbonPart::removeShape(KShape* shape)
 {
     KoShapeLayer *layer = dynamic_cast<KoShapeLayer*>(shape);
     if (layer) {

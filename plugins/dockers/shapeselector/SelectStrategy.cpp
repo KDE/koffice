@@ -23,7 +23,7 @@
 #include "FolderShape.h"
 #include "ClipboardProxyShape.h"
 
-#include <KoShape.h>
+#include <KShape.h>
 #include <KProperties.h>
 #include <KoShapeManager.h>
 #include <KSelection.h>
@@ -33,13 +33,13 @@
 #include <QMouseEvent>
 #include <QDrag>
 
-SelectStrategy::SelectStrategy(Canvas *canvas, KoShape *clickedShape, KPointerEvent &event)
+SelectStrategy::SelectStrategy(Canvas *canvas, KShape *clickedShape, KPointerEvent &event)
     : m_canvas(canvas), m_clickedShape(clickedShape)
 {
     const bool deselectAll = event.button() == Qt::LeftButton
         || (event.button() == Qt::RightButton && clickedShape);
     if (deselectAll) {
-        foreach(KoShape *shape, canvas->shapeManager()->selection()->selectedShapes())
+        foreach(KShape *shape, canvas->shapeManager()->selection()->selectedShapes())
             shape->update();
         canvas->shapeManager()->selection()->deselectAll();
     }

@@ -23,7 +23,7 @@
 #include <KOdfStylesReader.h>
 #include <KoShapeLoadingContext.h>
 #include <KPathShapeFactory_p.h>
-#include <KoShape.h>
+#include <KShape.h>
 #include <KoShapeFactoryBase.h>
 #include <KOdfXmlNS.h>
 #include <kdebug.h>
@@ -49,7 +49,7 @@ void TestKoShapeFactory::testPriority()
 void TestKoShapeFactory::testCreateDefaultShape()
 {
     KoShapeFactoryBase * factory = new KPathShapeFactory(0, QStringList());
-    KoShape *shape = factory->createDefaultShape();
+    KShape *shape = factory->createDefaultShape();
     QVERIFY(shape != 0);
     delete shape;
     delete factory;
@@ -58,7 +58,7 @@ void TestKoShapeFactory::testCreateDefaultShape()
 void TestKoShapeFactory::testCreateShape()
 {
     KoShapeFactoryBase * factory = new KPathShapeFactory(0, QStringList());
-    KoShape *shape = factory->createShape(0);
+    KShape *shape = factory->createShape(0);
     QVERIFY(shape != 0);
     delete shape;
     delete factory;
@@ -115,7 +115,7 @@ void TestKoShapeFactory::testOdfElement()
     QVERIFY(pathElement.tagName() == "path");
     QCOMPARE(factory->supports(pathElement, shapeContext), true);
 
-    KoShape *shape = factory->createDefaultShape();
+    KShape *shape = factory->createDefaultShape();
     QVERIFY(shape);
 
     QVERIFY(shape->loadOdf(pathElement, shapeContext));

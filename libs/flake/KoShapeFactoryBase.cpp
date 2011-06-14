@@ -21,7 +21,7 @@
  */
 
 #include "KoShapeFactoryBase.h"
-#include "KoShape.h"
+#include "KShape.h"
 #include <KProperties.h>
 
 #include <kdebug.h>
@@ -159,7 +159,7 @@ void KoShapeFactoryBase::newDocumentResourceManager(KResourceManager *manager)
     Q_UNUSED(manager);
 }
 
-KoShape *KoShapeFactoryBase::createShape(const KProperties*, KResourceManager *documentResources) const
+KShape *KoShapeFactoryBase::createShape(const KProperties*, KResourceManager *documentResources) const
 {
     return createDefaultShape(documentResources);
 }

@@ -26,7 +26,7 @@
 #include <QList>
 
 class KWFrame;
-class KoShape;
+class KShape;
 
 /// A widget that is shown to allow the user to select the run around properties
 class KWFrameRunaroundProperties : public QWidget
@@ -38,7 +38,7 @@ public:
 
     /// load all info from the argument frames into this widget
     void open(const QList<KWFrame*> &frames);
-    void open(KoShape *shape);
+    void open(KShape *shape);
     void save();
 
 private:
@@ -47,7 +47,7 @@ private:
 
     QButtonGroup *m_runAroundSide, *m_runAround;
     QList<KWFrame*> m_frames;
-    KoShape *m_shape;
+    KShape *m_shape;
 };
 
 #endif

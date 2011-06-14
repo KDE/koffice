@@ -147,7 +147,7 @@ KoBookmark *KoBookmark::endBookmark() const
     return d->endBookmark;
 }
 
-KoShape *KoBookmark::shape() const
+KShape *KoBookmark::shape() const
 {
     Q_D(const KoBookmark);
     return shapeForPosition(d->document, d->positionInDocument);

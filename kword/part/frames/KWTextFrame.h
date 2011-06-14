@@ -23,7 +23,7 @@
 #include "KWFrame.h"
 #include "kword_export.h"
 
-#include <KoShape.h>
+#include <KShape.h>
 #include <KoViewConverter.h>
 
 class KWTextFrameSet;
@@ -40,7 +40,7 @@ public:
      *      This shape should be created using a KoShapeFactoryBase from the textShape plugin
      * @param parent the frameSet this frame will be associated with.
      */
-    KWTextFrame(KoShape *shape, KWTextFrameSet *parent, int pageNumber = -1);
+    KWTextFrame(KShape *shape, KWTextFrameSet *parent, int pageNumber = -1);
     ~KWTextFrame();
 
     /**

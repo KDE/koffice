@@ -52,7 +52,7 @@ public:
     virtual void mousePressEvent(KPointerEvent* event);
     virtual void paint(QPainter& painter, const KoViewConverter& converter);
     virtual void keyPressEvent(QKeyEvent* event);
-    virtual void activate(ToolActivation toolActivation, const QSet<KoShape*> &shapes);
+    virtual void activate(ToolActivation toolActivation, const QSet<KShape*> &shapes);
     virtual void deactivate();
 
 protected:

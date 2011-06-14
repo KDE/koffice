@@ -80,7 +80,7 @@ public:
 
     QSizeF pageSize; ///< the documents page size
 
-    QList<KoShape*> objects;     ///< The list of all object of the document.
+    QList<KShape*> objects;     ///< The list of all object of the document.
     QList<KoShapeLayer*> layers; ///< The layers in this document.
 
     QMap<QString, KDataCenterBase*> dataCenterMap;
@@ -169,13 +169,13 @@ int KarbonDocument::layerPos(KoShapeLayer* layer)
     return d->layers.indexOf(layer);
 }
 
-void KarbonDocument::add(KoShape* shape)
+void KarbonDocument::add(KShape* shape)
 {
     if (! d->objects.contains(shape))
         d->objects.append(shape);
 }
 
-void KarbonDocument::remove(KoShape* shape)
+void KarbonDocument::remove(KShape* shape)
 {
     d->objects.removeAt(d->objects.indexOf(shape));
 }
@@ -230,13 +230,13 @@ bool KarbonDocument::loadOasis(const KXmlElement &element, KoShapeLoadingContext
     forEachElement(child, element) {
         kDebug(38000) << "loading shape" << child.localName();
 
-        KoShape * shape = KoShapeRegistry::instance()->createShapeFromOdf(child, context);
+        KShape * shape = KoShapeRegistry::instance()->createShapeFromOdf(child, context);
         if (shape)
             d->objects.append(shape);
     }
 
     // add all toplevel shapes to the default layer
-    foreach(KoShape * shape, d->objects) {
+    foreach(KShape * shape, d->objects) {
         if (! shape->parent()) {
             if (! defaultLayer)
                 defaultLayer = new KoShapeLayer();
@@ -262,18 +262,18 @@ bool KarbonDocument::loadOasis(const KXmlElement &element, KoShapeLoadingContext
     if (master) {
         context.odfLoadingContext().setUseStylesAutoStyles( true );
 
-        QList<KoShape*> masterPageShapes;
+        QList<KShape*> masterPageShapes;
         KXmlElement child;
         forEachElement(child, (*master)) {
             kDebug(38000) <<"loading master page shape" << child.localName();
-            KoShape * shape = KoShapeRegistry::instance()->createShapeFromOdf( child, context );
+            KShape * shape = KoShapeRegistry::instance()->createShapeFromOdf( child, context );
             if( shape )
                 masterPageShapes.append( shape );
         }
 
         KoShapeLayer * masterPageLayer = 0;
         // add all toplevel shapes to the master page layer
-        foreach(KoShape * shape, masterPageShapes) {
+        foreach(KShape * shape, masterPageShapes) {
             d->objects.append( shape );
             if(!shape->parent()) {
                 if( ! masterPageLayer ) {
@@ -302,7 +302,7 @@ QRectF KarbonDocument::boundingRect() const
 QRectF KarbonDocument::contentRect() const
 {
     QRectF bb;
-    foreach(KoShape* layer, d->layers) {
+    foreach(KShape* layer, d->layers) {
         if (bb.isNull())
             bb = layer->boundingRect();
         else
@@ -322,7 +322,7 @@ void KarbonDocument::setPageSize(QSizeF pageSize)
     d->pageSize = pageSize;
 }
 
-const QList<KoShape*> KarbonDocument::shapes() const
+const QList<KShape*> KarbonDocument::shapes() const
 {
     return d->objects;
 }

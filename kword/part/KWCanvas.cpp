@@ -121,7 +121,7 @@ const KoViewConverter *KWCanvas::viewConverter() const
     return m_view->viewConverter();
 }
 
-void KWCanvas::clipToDocument(const KoShape *shape, QPointF &move) const
+void KWCanvas::clipToDocument(const KShape *shape, QPointF &move) const
 {
     Q_ASSERT(shape);
     const QPointF absPos = shape->absolutePosition();

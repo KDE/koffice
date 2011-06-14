@@ -26,7 +26,7 @@
 #include <QList>
 #include <QUndoCommand>
 
-class KoShape;
+class KShape;
 class KoShapeGroup;
 class KoShapeContainer;
 class KoShapeGroupCommandPrivate;
@@ -38,7 +38,7 @@ class FLAKE_EXPORT KoShapeGroupCommand : public QUndoCommand
 public:
     /**
      * Create command to group a set of shapes into a predefined container.
-     * This uses the KoShapeGroupCommand(KoShapeGroup *container, const QList<KoShape *> &shapes, QUndoCommand *parent = 0);
+     * This uses the KoShapeGroupCommand(KoShapeGroup *container, const QList<KShape *> &shapes, QUndoCommand *parent = 0);
      * constructor.
      * The createCommand will make sure that the group will have the z-index and the parent of the top most shape in the group.
      *
@@ -46,11 +46,11 @@ public:
      * @param parent the parent command if the resulting command is a compound undo command.
      * @param shapes a list of all the shapes that should be grouped.
      */
-    static QUndoCommand *createCommand(KoShapeGroup *container, const QList<KoShape *> &shapes, QUndoCommand *parent = 0);
+    static QUndoCommand *createCommand(KoShapeGroup *container, const QList<KShape *> &shapes, QUndoCommand *parent = 0);
 
     /**
      * Create command to group a set of shapes into a KoShapeGroup, which is added to the controller.
-     * This uses the KoShapeGroupCommand(KoShapeGroup *container, const QList<KoShape *> &shapes, QUndoCommand *parent = 0);
+     * This uses the KoShapeGroupCommand(KoShapeGroup *container, const QList<KShape *> &shapes, QUndoCommand *parent = 0);
      * constructor.
      * The createCommand will make sure that the group will have the z-index and the parent of the top most shape in the group.
      *
@@ -58,7 +58,7 @@ public:
      * @param shapeController a shape controller where the new group shape can be added to.
      * @param shapes a list of all the shapes that should be grouped.
      */
-    static QUndoCommand *createCommand(const QList<KoShape *> &shapes, KoShapeController *shapeController, QUndoCommand *parent = 0);
+    static QUndoCommand *createCommand(const QList<KShape *> &shapes, KoShapeController *shapeController, QUndoCommand *parent = 0);
 
     /**
      * Command to group a set of shapes into a predefined container.
@@ -70,7 +70,7 @@ public:
      *      See KoShapeContainer::inheritsTransform()
      * @param parent the parent command used for macro commands
      */
-    KoShapeGroupCommand(KoShapeContainer *container, const QList<KoShape *> &shapes,
+    KoShapeGroupCommand(KoShapeContainer *container, const QList<KShape *> &shapes,
             const QList<bool> &clipped, const QList<bool> &inheritTransform, QUndoCommand *parent = 0);
     /**
      * Command to group a set of shapes into a predefined container.
@@ -79,7 +79,7 @@ public:
      * @param parent the parent command if the resulting command is a compound undo command.
      * @param shapes a list of all the shapes that should be grouped.
      */
-    KoShapeGroupCommand(KoShapeGroup *container, const QList<KoShape *> &shapes, QUndoCommand *parent = 0);
+    KoShapeGroupCommand(KoShapeGroup *container, const QList<KShape *> &shapes, QUndoCommand *parent = 0);
     virtual ~KoShapeGroupCommand();
     /// redo the command
     virtual void redo();

@@ -35,7 +35,7 @@ public:
 };
 
 class CollectionItemModel;
-class KoShape;
+class KShape;
 class QListView;
 class QListWidget;
 class QListWidgetItem;
@@ -97,7 +97,7 @@ class ShapeCollectionDocker : public QDockWidget
         void buildAddCollectionMenu();
 
         /// Generate an icon from @p shape
-        QIcon generateShapeIcon(KoShape* shape);
+        QIcon generateShapeIcon(KShape* shape);
 
     private:
         void scanCollectionDir(const QString& dirName, QMenu* menu);

@@ -25,7 +25,7 @@
 
 #include "flake_export.h"
 
-class KoShape;
+class KShape;
 class QString;
 class KoShapeControllerBasePrivate;
 class KResourceManager;
@@ -47,14 +47,14 @@ public:
      * if the shape is one that should be currently shown on screen.
      * @param shape the new shape
      */
-    virtual void addShape(KoShape *shape) = 0;
+    virtual void addShape(KShape *shape) = 0;
 
     /**
      * Remove a shape from the shape controllers control, allowing it to be deleted shortly after
      * The controller should remove the shape from all the ShapeManager instance(s) manually
      * @param shape the shape to remove
      */
-    virtual void removeShape(KoShape *shape) = 0;
+    virtual void removeShape(KShape *shape) = 0;
 
     /**
      * Return a pointer to the resource manager associated with the

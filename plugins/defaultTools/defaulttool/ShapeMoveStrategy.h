@@ -29,7 +29,7 @@
 
 class KCanvasBase;
 class KoToolBase;
-class KoShape;
+class KShape;
 
 /**
  * Implements the Move action on an object or selected objects.
@@ -54,7 +54,7 @@ private:
     QList<QPointF> m_previousPositions;
     QList<QPointF> m_newPositions;
     QPointF m_start, m_diff, m_initialSelectionPosition, m_initialOffset;
-    QList<KoShape*> m_selectedShapes;
+    QList<KShape*> m_selectedShapes;
 };
 
 #endif

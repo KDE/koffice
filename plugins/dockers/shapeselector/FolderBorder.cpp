@@ -18,7 +18,7 @@
  */
 #include "FolderBorder.h"
 
-#include <KoShape.h>
+#include <KShape.h>
 #include <KoViewConverter.h>
 
 #include <KGlobalSettings>
@@ -44,7 +44,7 @@ bool FolderBorder::hasTransparency() const
     return false;
 }
 
-void FolderBorder::paint(KoShape *shape, QPainter &painter, const KoViewConverter &converter)
+void FolderBorder::paint(KShape *shape, QPainter &painter, const KoViewConverter &converter)
 {
     qreal zoomX, zoomY;
     converter.zoom(&zoomX, &zoomY);
@@ -66,7 +66,7 @@ void FolderBorder::paint(KoShape *shape, QPainter &painter, const KoViewConverte
     }
 }
 
-void FolderBorder::paint(KoShape *shape, QPainter &painter, const KoViewConverter &converter, const QColor &color)
+void FolderBorder::paint(KShape *shape, QPainter &painter, const KoViewConverter &converter, const QColor &color)
 {
     Q_UNUSED(color);
     // FIXME

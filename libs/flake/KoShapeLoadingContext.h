@@ -30,7 +30,7 @@
 
 class KOdfLoadingContext;
 class KoShapeLayer;
-class KoShape;
+class KShape;
 class KoShapeControllerBase;
 class KLoadingShapeUpdater;
 class KImageCollection;
@@ -95,14 +95,14 @@ public:
     void clearLayers();
 
     /// register the id for a specific shape
-    void addShapeId(KoShape *shape, const QString &id);
+    void addShapeId(KShape *shape, const QString &id);
     /// return the shape formerly registered using addShapeId()
-    KoShape *shapeById(const QString &id);
+    KShape *shapeById(const QString &id);
 
     /// register the id for a specific shape sub item
-    void addShapeSubItemId(KoShape *shape, const QVariant &subItem, const QString &id);
+    void addShapeSubItemId(KShape *shape, const QVariant &subItem, const QString &id);
     /// return the shape and subitem formerly registered using addShapeSubItemId()
-    QPair<KoShape *, QVariant> shapeSubItemById(const QString &id);
+    QPair<KShape *, QVariant> shapeSubItemById(const QString &id);
 
     /**
      * call function on the shapeUpdater when the shape with the id shapeid is inserted
@@ -114,7 +114,7 @@ public:
      * this checks if there is an updater for this shape if yes it calls it
      * this needs to be done via the shape id and
      */
-    void shapeLoaded(KoShape *shape);
+    void shapeLoaded(KShape *shape);
 
     /// Returns the image collection for loading images
     KImageCollection *imageCollection();
@@ -169,7 +169,7 @@ public:
     /**
      * @brief Get the additional attribute data for loading of a shape
      *
-     * This is used by KoShape::loadOdfAttributes to load all additional attributes defined
+     * This is used by KShape::loadOdfAttributes to load all additional attributes defined
      * in the returned set.
      */
     static QSet<AdditionalAttributeData> additionalAttributeData();

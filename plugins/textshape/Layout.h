@@ -65,7 +65,7 @@ public:
     virtual qreal documentOffsetInShape();
     // get the text indent accounting for auto-text-indent
     qreal resolveTextIndent();
-    virtual bool setFollowupShape(KoShape *shape);
+    virtual bool setFollowupShape(KShape *shape);
     /// called by the KoTextDocumentLayout to notify the LayoutState of a successfully resized inline object
     virtual void registerInlineObject(const QTextInlineObject &inlineObject);
     virtual QTextTableCell hitTestTable(QTextTable *table, const QPointF &point);
@@ -91,7 +91,7 @@ private:
     qreal topMargin();
     qreal listIndent();
     void cleanupShapes();
-    void cleanupShape(KoShape *daShape);
+    void cleanupShape(KShape *daShape);
     void nextShape();
     void drawFrame(QTextFrame *frame, QPainter *painter, const KoTextDocumentLayout::PaintContext & context, int inTable);
     void drawListItem(QPainter *painter, const QTextBlock &block, KImageCollection *imageCollection);

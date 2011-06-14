@@ -24,7 +24,7 @@
 #include "komain_export.h"
 
 class KoShapeManager;
-class KoShape;
+class KShape;
 class KoPrintingDialogPrivate;
 
 /**
@@ -114,7 +114,7 @@ protected:
     /**
      * Implement to return the shapes on the requested page.
      */
-    virtual QList<KoShape*> shapesOnPage(int pageNumber) = 0;
+    virtual QList<KShape*> shapesOnPage(int pageNumber) = 0;
 
     /**
      * @returns the shapeManager.

@@ -28,7 +28,7 @@ class ArtisticTextShapeLoadingUpdater : public KLoadingShapeUpdater
 public:
     ArtisticTextShapeLoadingUpdater(ArtisticTextShape * artisticTextShape);
     virtual ~ArtisticTextShapeLoadingUpdater();
-    virtual void update(KoShape * shape);
+    virtual void update(KShape * shape);
 
 private:
     ArtisticTextShape * m_artisticTextShape;

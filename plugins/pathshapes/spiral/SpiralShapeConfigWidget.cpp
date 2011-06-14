@@ -46,7 +46,7 @@ SpiralShapeConfigWidget::SpiralShapeConfigWidget(KCanvasBase *canvas)
     connect(widget.fade, SIGNAL(valueChanged(double)), this, SLOT(propertyChanged()));
 }
 
-void SpiralShapeConfigWidget::open(KoShape *shape)
+void SpiralShapeConfigWidget::open(KShape *shape)
 {
     if (m_blocking)
         return;

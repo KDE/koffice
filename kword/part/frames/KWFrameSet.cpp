@@ -50,7 +50,7 @@ void KWFrameSet::addFrame(KWFrame *frame)
     emit frameAdded(frame);
 }
 
-void KWFrameSet::removeFrame(KWFrame *frame, KoShape *shape)
+void KWFrameSet::removeFrame(KWFrame *frame, KShape *shape)
 {
     Q_ASSERT(frame);
     if (!frame->isCopy()) {

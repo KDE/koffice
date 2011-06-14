@@ -104,7 +104,7 @@ static QList<QPointF> intersect(const QRectF &rect, const QLineF &line)
     return answer;
 }
 
-class KWTextDocumentLayout::DummyShape : public KoShape
+class KWTextDocumentLayout::DummyShape : public KShape
 {
 public:
     DummyShape(QTextDocument *doc) : textShapeData(new KoTextShapeData()) {
@@ -113,7 +113,7 @@ public:
         //setPosition(QPointF(10E6, 10E6));
     }
 
-    KoTextShapeData * const textShapeData; // will be deleted by KoShape
+    KoTextShapeData * const textShapeData; // will be deleted by KShape
 
 private:
     virtual void paint(QPainter&, const KoViewConverter&) {}
@@ -144,9 +144,9 @@ KWTextDocumentLayout::~KWTextDocumentLayout()
     delete m_dummyShape;
 }
 
-QList<KoShape*> KWTextDocumentLayout::shapes() const
+QList<KShape*> KWTextDocumentLayout::shapes() const
 {
-    QList<KoShape*> answer;
+    QList<KShape*> answer;
     foreach (KWFrame *frame, m_frameSet->frames()) {
         if (frame->isCopy())
             continue;
@@ -242,7 +242,7 @@ void KWTextDocumentLayout::layout()
     bool requestFrameResize = false, firstParagraph = true;
     int startOfBlock = -1; // the first position in a block (aka paragraph)
     int startOfBlockText = -1; // the first position of text in a block. Will be different only if anchors preceed text.
-    KoShape *currentShape = 0;
+    KShape *currentShape = 0;
     while (m_state->shape) {
         ADEBUG << "> loop.... layout has" << m_state->layout->lineCount() << "lines, we have" << m_activeAnchors.count() << "+" << m_newAnchors.count() <<"anchors";
 #ifndef DEBUG_ANCHORS
@@ -380,7 +380,7 @@ void KWTextDocumentLayout::layout()
                         if (! bounds.intersects(frame->shape()->boundingRect()))
                             continue;
                         bool isChild = false;
-                        KoShape *parent = frame->shape()->parent();
+                        KShape *parent = frame->shape()->parent();
                         while (parent && !isChild) {
                             if (parent == currentShape)
                                 isChild = true;

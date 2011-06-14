@@ -29,7 +29,7 @@
 
 #include "flake_export.h"
 
-class KoShape;
+class KShape;
 class KoShapeFactoryBase;
 class KoShapeLoadingContext;
 
@@ -68,7 +68,7 @@ public:
      *    set a layer which was previously created and stored in the context.
      * @see KoShapeLoadingContext::layer()
      */
-    KoShape *createShapeFromOdf(const KXmlElement &element, KoShapeLoadingContext &context) const;
+    KShape *createShapeFromOdf(const KXmlElement &element, KoShapeLoadingContext &context) const;
 
 private:
     KoShapeRegistry();

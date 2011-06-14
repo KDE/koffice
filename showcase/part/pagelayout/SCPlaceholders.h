@@ -31,7 +31,7 @@
 #include <QMap>
 
 class QSizeF;
-class KoShape;
+class KShape;
 class KoPADocument;
 class SCPageLayout;
 class SCPlaceholderShape;
@@ -39,14 +39,14 @@ class KoTextShapeData;
 
 struct Placeholder
 {
-    Placeholder(const QString &presentationClass, KoShape * shape, bool isPlaceholder)
+    Placeholder(const QString &presentationClass, KShape * shape, bool isPlaceholder)
     : presentationClass(presentationClass)
     , shape(shape)
     , isPlaceholder(isPlaceholder)
     {}
 
     QString presentationClass;
-    KoShape * shape;
+    KShape * shape;
     bool    isPlaceholder;
 };
 
@@ -58,7 +58,7 @@ typedef boost::multi_index_container<
             boost::multi_index::member<Placeholder, QString, &Placeholder::presentationClass>
         >,
         boost::multi_index::ordered_non_unique<
-            boost::multi_index::member<Placeholder, KoShape *, &Placeholder::shape>
+            boost::multi_index::member<Placeholder, KShape *, &Placeholder::shape>
         >,
         boost::multi_index::ordered_non_unique<
             boost::multi_index::member<Placeholder, bool, &Placeholder::isPlaceholder>
@@ -82,7 +82,7 @@ public:
      * @param pageSize
      * @param styles
      */
-    void setLayout(SCPageLayout * layout, KoPADocument * document, const QList<KoShape *> &shapes, const QSizeF &pageSize,
+    void setLayout(SCPageLayout * layout, KoPADocument * document, const QList<KShape *> &shapes, const QSizeF &pageSize,
                     const QMap<QString, KoTextShapeData*> &styles);
 
     /**
@@ -91,20 +91,20 @@ public:
      *        If 0 no layout will be used.
      * TODO tz: maybe make privat and the classes that need to call it a friend
      */
-    void init(SCPageLayout * layout, const QList<KoShape *> &shapes);
+    void init(SCPageLayout * layout, const QList<KShape *> &shapes);
 
     SCPageLayout * layout() const;
 
-    void shapeAdded(KoShape * shape);
+    void shapeAdded(KShape * shape);
 
-    void shapeRemoved(KoShape * shape);
+    void shapeRemoved(KShape * shape);
 
     void debug() const;
 
     QMap<QString, KoTextShapeData *> styles() const;
 
 private:
-    void add(const QList<KoShape *> &shapes);
+    void add(const QList<KShape *> &shapes);
 
     // set the new layout 
     // this gets called by the SCPageLayoutCommand

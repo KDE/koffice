@@ -103,7 +103,7 @@ void GuidesTool::repaintDecorations()
     canvas()->updateCanvas(rect);
 }
 
-void GuidesTool::activate(ToolActivation toolActivation, const QSet<KoShape*> &)
+void GuidesTool::activate(ToolActivation toolActivation, const QSet<KShape*> &)
 {
     if (m_mode != None)
         setCursor(m_orientation == Qt::Horizontal ? Qt::SizeVerCursor : Qt::SizeHorCursor);

@@ -65,7 +65,7 @@ bool WMFImportParser::play(KarbonDocument& doc)
 
     uint zIndex = 0;
     // add all toplevel shapes to the layer
-    foreach(KoShape * shape, mDoc->shapes()) {
+    foreach(KShape * shape, mDoc->shapes()) {
         shape->setZIndex(zIndex++);
         if (! shape->parent())
             layer->addShape(shape);
@@ -437,7 +437,7 @@ void WMFImportParser::drawImage(int x, int y, const QImage &image, int sx, int s
     if (! data)
         return;
 
-    KoShape * pic = createShape("PictureShape");
+    KShape * pic = createShape("PictureShape");
     if (! pic)
         return;
 
@@ -524,7 +524,7 @@ void WMFImportParser::drawText(int x, int y, int , int , int flags, const QStrin
 //-----------------------------------------------------------------------------
 // Utilities
 
-void WMFImportParser::appendPen(KoShape& obj)
+void WMFImportParser::appendPen(KShape& obj)
 {
     double width = mPen.width() * mScaleX;
 
@@ -537,7 +537,7 @@ void WMFImportParser::appendPen(KoShape& obj)
 }
 
 
-void WMFImportParser::appendBrush(KoShape& obj)
+void WMFImportParser::appendBrush(KShape& obj)
 {
     switch (mBrush.style()) {
     case Qt::NoBrush:
@@ -603,7 +603,7 @@ double WMFImportParser::scaleH(int height)
     return (height * mScaleY);
 }
 
-KoShape * WMFImportParser::createShape(const QString &shapeID)
+KShape * WMFImportParser::createShape(const QString &shapeID)
 {
     KoShapeFactoryBase * factory = KoShapeRegistry::instance()->get(shapeID);
     if (! factory) {
@@ -611,7 +611,7 @@ KoShape * WMFImportParser::createShape(const QString &shapeID)
         return 0;
     }
 
-    KoShape * shape = factory->createDefaultShape(mDoc->resourceManager());
+    KShape * shape = factory->createDefaultShape(mDoc->resourceManager());
     if (shape && shape->shapeId().isEmpty())
         shape->setShapeId(factory->id());
 

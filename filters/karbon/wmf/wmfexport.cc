@@ -27,7 +27,7 @@
 #include <kpluginfactory.h>
 #include <KoFilterChain.h>
 #include <KLineBorder.h>
-#include <KoShape.h>
+#include <KShape.h>
 #include <KoShapeContainer.h>
 #include <KColorBackground.h>
 #include <KGradientBackground.h>
@@ -97,18 +97,18 @@ void WmfExport::paintDocument(KarbonDocument& document)
         mScaleY = static_cast<double>(height) / pageSize.height();
     }
 
-    QList<KoShape*> shapes = document.shapes();
-    qSort(shapes.begin(), shapes.end(), KoShape::compareShapeZIndex);
+    QList<KShape*> shapes = document.shapes();
+    qSort(shapes.begin(), shapes.end(), KShape::compareShapeZIndex);
 
     // Export layers.
-    foreach(KoShape * shape, shapes) {
+    foreach(KShape * shape, shapes) {
         if (dynamic_cast<KoShapeContainer*>(shape))
             continue;
         paintShape(shape);
     }
 }
 
-void WmfExport::paintShape(KoShape * shape)
+void WmfExport::paintShape(KShape * shape)
 {
     QList<QPolygonF> subpaths = shape->outline().toFillPolygons(shape->absoluteTransformation(0));
 

@@ -79,7 +79,7 @@ void KoZoomTool::keyReleaseEvent(QKeyEvent *event)
     KInteractionTool::keyReleaseEvent(event);
 }
 
-void KoZoomTool::activate(ToolActivation toolActivation, const QSet<KoShape*> &)
+void KoZoomTool::activate(ToolActivation toolActivation, const QSet<KShape*> &)
 {
     m_temporary = toolActivation == TemporaryActivation;
     updateCursor(false);

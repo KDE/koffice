@@ -121,7 +121,7 @@ void ChangeTrackingTool::updateSelectedShape(const QPointF &point)
 {
     if (! m_textShape->boundingRect().contains(point)) {
         QRectF area(point, QSizeF(1, 1));
-        foreach(KoShape *shape, canvas()->shapeManager()->shapesAt(area, true)) {
+        foreach(KShape *shape, canvas()->shapeManager()->shapesAt(area, true)) {
             TextShape *textShape = dynamic_cast<TextShape*>(shape);
             if (textShape) {
                 KoTextShapeData *d = static_cast<KoTextShapeData*>(textShape->userData());
@@ -172,7 +172,7 @@ void ChangeTrackingTool::paint(QPainter& painter, const KoViewConverter& convert
         QList<TextShape *> shapesToPaint;
         KoTextDocumentLayout *lay = qobject_cast<KoTextDocumentLayout*>(m_textShapeData->document()->documentLayout());
         if (lay) {
-            foreach(KoShape *shape, lay->shapes()) {
+            foreach(KShape *shape, lay->shapes()) {
                 TextShape *ts = dynamic_cast<TextShape*>(shape);
                 if (! ts)
                     continue;
@@ -287,10 +287,10 @@ void ChangeTrackingTool::keyPressEvent(QKeyEvent* event)
     KoToolBase::keyPressEvent(event);
 }
 
-void ChangeTrackingTool::activate(ToolActivation toolActivation, const QSet<KoShape*> &shapes)
+void ChangeTrackingTool::activate(ToolActivation toolActivation, const QSet<KShape*> &shapes)
 {
     Q_UNUSED(toolActivation);
-    foreach(KoShape *shape, shapes) {
+    foreach(KShape *shape, shapes) {
         m_textShape = dynamic_cast<TextShape*>(shape);
         if (m_textShape)
             break;
@@ -314,7 +314,7 @@ void ChangeTrackingTool::setShapeData(KoTextShapeData *data)
 //        disconnect(m_textShapeData, SIGNAL(destroyed (QObject*)), this, SLOT(shapeDataRemoved()));
         KoTextDocumentLayout *lay = qobject_cast<KoTextDocumentLayout*>(m_textShapeData->document()->documentLayout());
 //        if (lay)
-//            disconnect(lay, SIGNAL(shapeAdded(KoShape*)), this, SLOT(shapeAddedToDoc(KoShape*)));
+//            disconnect(lay, SIGNAL(shapeAdded(KShape*)), this, SLOT(shapeAddedToDoc(KShape*)));
     }
 */
     if (!data) {
@@ -336,7 +336,7 @@ void ChangeTrackingTool::setShapeData(KoTextShapeData *data)
 
         KoTextDocumentLayout *lay = qobject_cast<KoTextDocumentLayout*>(m_textShapeData->document()->documentLayout());
         if (lay) {
-//            connect(lay, SIGNAL(shapeAdded(KoShape*)), this, SLOT(shapeAddedToDoc(KoShape*)));
+//            connect(lay, SIGNAL(shapeAdded(KShape*)), this, SLOT(shapeAddedToDoc(KShape*)));
         }
     }
     m_textEditor->updateDefaultTextDirection(m_textShapeData->pageDirection());

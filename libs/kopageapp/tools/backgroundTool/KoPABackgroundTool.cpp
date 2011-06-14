@@ -57,7 +57,7 @@ void KoPABackgroundTool::paint(QPainter &painter, const KoViewConverter &convert
     Q_UNUSED(converter);
 }
 
-void KoPABackgroundTool::activate(ToolActivation toolActivation, const QSet<KoShape*> &)
+void KoPABackgroundTool::activate(ToolActivation toolActivation, const QSet<KShape*> &)
 {
     Q_UNUSED(toolActivation);
 

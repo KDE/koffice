@@ -29,7 +29,7 @@
 
 #include "KCanvasBase.h"
 #include "KoShapeController.h"
-#include "KoShape.h"
+#include "KShape.h"
 #include "KoShapeLayer.h"
 #include "KoShapeLoadingContext.h"
 #include "KoShapeManager.h"
@@ -48,7 +48,7 @@ public:
 
     KCanvasBase *canvas;
     KoShapeLayer *layer;
-    QList<KoShape*> pastedShapes;
+    QList<KShape*> pastedShapes;
 };
 
 KoShapePaste::KoShapePaste(KCanvasBase *canvas, KoShapeLayer *layer)
@@ -67,12 +67,12 @@ bool KoShapePaste::process(const KXmlElement & body, KOdfStoreReader & odfStore)
     KOdfLoadingContext loadingContext(odfStore.styles(), odfStore.store());
     KoShapeLoadingContext context(loadingContext, d->canvas->shapeController()->resourceManager());
 
-    QList<KoShape*> shapes(d->layer ? d->layer->shapes(): d->canvas->shapeManager()->topLevelShapes());
+    QList<KShape*> shapes(d->layer ? d->layer->shapes(): d->canvas->shapeManager()->topLevelShapes());
 
     int zIndex = 0;
     if (!shapes.isEmpty()) {
         zIndex = shapes.first()->zIndex();
-        foreach (KoShape * shape, shapes) {
+        foreach (KShape * shape, shapes) {
             zIndex = qMax(zIndex, shape->zIndex());
         }
         ++zIndex;
@@ -94,7 +94,7 @@ bool KoShapePaste::process(const KXmlElement & body, KOdfStoreReader & odfStore)
     forEachElement(element, body) {
         kDebug(30006) << "loading shape" << element.localName();
 
-        KoShape * shape = KoShapeRegistry::instance()->createShapeFromOdf(element, context);
+        KShape * shape = KoShapeRegistry::instance()->createShapeFromOdf(element, context);
         if (shape) {
             if (!cmd)
                 cmd = new QUndoCommand(i18n("Paste Shapes"));
@@ -105,7 +105,7 @@ bool KoShapePaste::process(const KXmlElement & body, KOdfStoreReader & odfStore)
             do {
                 // find a nice place for our shape.
                 done = true;
-                foreach (const KoShape *s, sm->shapesAt(shape->boundingRect()) + d->pastedShapes) {
+                foreach (const KShape *s, sm->shapesAt(shape->boundingRect()) + d->pastedShapes) {
                     if (d->layer && s->parent() != d->layer)
                         continue;
                     if (s->name() != shape->name())
@@ -141,7 +141,7 @@ bool KoShapePaste::process(const KXmlElement & body, KOdfStoreReader & odfStore)
     return true;
 }
 
-QList<KoShape*> KoShapePaste::pastedShapes() const
+QList<KShape*> KoShapePaste::pastedShapes() const
 {
     return d->pastedShapes;
 }

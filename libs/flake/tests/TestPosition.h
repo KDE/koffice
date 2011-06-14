@@ -22,7 +22,7 @@
 
 #include <QtTest/QtTest>
 
-class KoShape;
+class KShape;
 class KoShapeContainer;
 
 class TestPosition : public QObject
@@ -44,10 +44,10 @@ private slots:
 
 private:
     void resetValues();
-    void resetValues(KoShape *shape);
+    void resetValues(KShape *shape);
 
     // vars
-    KoShape *shape1, *shape2, *childShape1, *childShape2;
+    KShape *shape1, *shape2, *childShape1, *childShape2;
     KoShapeContainer *container, *container2;
 };
 

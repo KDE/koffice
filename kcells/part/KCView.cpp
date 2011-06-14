@@ -1001,7 +1001,7 @@ void KCView::recalcWorkSheet()
 void KCView::shapeSelectionChanged()
 {
     const KSelection* selection = d->canvas->shapeManager()->selection();
-    const QList<KoShape*> shapes = selection->selectedShapes(KoFlake::StrippedSelection);
+    const QList<KShape*> shapes = selection->selectedShapes(KoFlake::StrippedSelection);
 
     if (shapes.isEmpty()) {
         d->actions->shapeAnchor->setEnabled(false);
@@ -1010,7 +1010,7 @@ void KCView::shapeSelectionChanged()
     d->actions->shapeAnchor->setEnabled(true);
 
     // start with the first shape
-    const KoShape* shape = shapes[0];
+    const KShape* shape = shapes[0];
     const KCShapeApplicationData* data = dynamic_cast<KCShapeApplicationData*>(shape->applicationData());
     if (!data) {
         // Container children do not have the application data set, deselect the anchoring action.
@@ -1443,9 +1443,9 @@ void KCView::copyAsText()
 void KCView::setShapeAnchoring(const QString& mode)
 {
     const KSelection* selection = d->canvas->shapeManager()->selection();
-    const QList<KoShape*> shapes = selection->selectedShapes(KoFlake::StrippedSelection);
+    const QList<KShape*> shapes = selection->selectedShapes(KoFlake::StrippedSelection);
     for (int i = 0; i < shapes.count(); ++i) {
-        const KoShape* shape = shapes[i];
+        const KShape* shape = shapes[i];
         KCShapeApplicationData* data = dynamic_cast<KCShapeApplicationData*>(shape->applicationData());
         Q_ASSERT(data);
         data->setAnchoredToCell(mode == i18n("Cell"));
@@ -1977,10 +1977,10 @@ void KCView::addSheet(KCSheet *sheet)
     d->actions->hideSheet->setEnabled(state);
 
     // Connect some signals
-    connect(sheet, SIGNAL(shapeAdded(KCSheet *, KoShape *)),
-            d->mapViewModel, SLOT(addShape(KCSheet *, KoShape *)));
-    connect(sheet, SIGNAL(shapeRemoved(KCSheet *, KoShape *)),
-            d->mapViewModel, SLOT(removeShape(KCSheet *, KoShape *)));
+    connect(sheet, SIGNAL(shapeAdded(KCSheet *, KShape *)),
+            d->mapViewModel, SLOT(addShape(KCSheet *, KShape *)));
+    connect(sheet, SIGNAL(shapeRemoved(KCSheet *, KShape *)),
+            d->mapViewModel, SLOT(removeShape(KCSheet *, KShape *)));
 }
 
 void KCView::removeSheet(KCSheet *sheet)

@@ -29,7 +29,7 @@
 #include <QPointF>
 
 class KoShapeConnection;
-class KoShape;
+class KShape;
 
 /**
  * 
@@ -57,7 +57,7 @@ public:
 private:
     struct Connection {
         Connection() : shape(0), index(0) { }
-        KoShape *shape;
+        KShape *shape;
         int index;
     };
 

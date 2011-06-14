@@ -20,7 +20,7 @@
 #include "SCAttributeWidth.h"
 #include "../SCAnimationCache.h"
 #include "../SCShapeAnimation.h"
-#include "KoShape.h"
+#include "KShape.h"
 #include "SCShapeAnimations.h"
 #include "KoTextBlockData.h"
 #include "KoTextShapeData.h"
@@ -34,7 +34,7 @@ SCAttributeWidth::SCAttributeWidth() : SCAnimationAttribute("width")
 void SCAttributeWidth::updateCache(SCAnimationCache *cache, SCShapeAnimation *shapeAnimation, qreal value)
 {
     qreal tx = 0.0, ty = 0.0;
-    KoShape * shape = shapeAnimation->shape();
+    KShape * shape = shapeAnimation->shape();
     KoTextBlockData * textBlockData = shapeAnimation->textBlockData();
     QTransform transform;
 
@@ -64,7 +64,7 @@ void SCAttributeWidth::updateCache(SCAnimationCache *cache, SCShapeAnimation *sh
 void SCAttributeWidth::initCache(SCAnimationCache *animationCache, int step, SCShapeAnimation * shapeAnimation, qreal startValue, qreal endValue)
 {
     qreal v1 = 0.0, v2 = 0.0, tx = 0.0, ty = 0.0;
-    KoShape * shape = shapeAnimation->shape();
+    KShape * shape = shapeAnimation->shape();
     KoTextBlockData * textBlockData = shapeAnimation->textBlockData();
 
     if (textBlockData) {

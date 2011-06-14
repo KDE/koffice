@@ -20,7 +20,7 @@
 #ifndef KPRPLACEHOLDERSHAPE_H
 #define KPRPLACEHOLDERSHAPE_H
 
-#include <KoShape.h>
+#include <KShape.h>
 
 #define SCPlaceholderShapeId "SCPlaceholderShapeId"
 
@@ -30,7 +30,7 @@ class KResourceManager;
 /**
  * This shape is used as placeholder as long as the shape is not modified
  */
-class SCPlaceholderShape : public KoShape
+class SCPlaceholderShape : public KShape
 {
 public:
     SCPlaceholderShape();
@@ -41,7 +41,7 @@ public:
     virtual bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context);
     virtual void saveOdf(KoShapeSavingContext &context) const;
 
-    KoShape *createShape(KResourceManager *documentResources);
+    KShape *createShape(KResourceManager *documentResources);
 
     virtual void initStrategy(KResourceManager *documentResources);
     KoShapeUserData * userData() const;

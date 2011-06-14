@@ -80,7 +80,7 @@ void ShadowDocker::selectionChanged()
         return;
 
     KSelection *selection = d->canvas->shapeManager()->selection();
-    KoShape * shape = selection->firstSelectedShape();
+    KShape * shape = selection->firstSelectedShape();
     d->widget->setEnabled( shape != 0 );
 
     if ( ! shape )
@@ -116,7 +116,7 @@ void ShadowDocker::setCanvas( KCanvasBase *canvas )
 void ShadowDocker::shadowChanged()
 {
     KSelection *selection = d->canvas->shapeManager()->selection();
-    KoShape * shape = selection->firstSelectedShape();
+    KShape * shape = selection->firstSelectedShape();
     if ( ! shape )
         return;
 

@@ -170,11 +170,11 @@ bool SCAnimationLoader::loadOdfAnimation(SCAnimationStep **animationStep, const 
         if (shapeAnimation == 0) {
             QString targetElement(e.attributeNS(KOdfXmlNS::smil, "targetElement", QString()));
             if (!targetElement.isEmpty()) {
-                KoShape *shape = 0;
+                KShape *shape = 0;
                 KoTextBlockData *textBlockData = 0;
 
                 if (e.attributeNS(KOdfXmlNS::anim, "sub-item", "whole") == "text") {
-                    QPair<KoShape *, QVariant> pair = context.shapeSubItemById(targetElement);
+                    QPair<KShape *, QVariant> pair = context.shapeSubItemById(targetElement);
                     shape = pair.first;
                     textBlockData = pair.second.value<KoTextBlockData *>();
                     kDebug() << "subitem text" << textBlockData;

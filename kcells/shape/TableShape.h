@@ -22,7 +22,7 @@
 
 #include <QObject>
 
-#include <KoShape.h>
+#include <KShape.h>
 
 #define TableShapeId "TableShape"
 
@@ -31,7 +31,7 @@ class KCMap;
 class KCSheet;
 class SheetView;
 
-class TableShape : public QObject, public KoShape
+class TableShape : public QObject, public KShape
 {
     Q_OBJECT
 
@@ -44,7 +44,7 @@ public:
     void setColumns(int columns);
     void setRows(int rows);
 
-    // KoShape interface
+    // KShape interface
     virtual void paint(QPainter& painter, const KoViewConverter& converter);
     virtual bool loadOdf(const KXmlElement & element, KoShapeLoadingContext &context);
     virtual void saveOdf(KoShapeSavingContext & context) const;
@@ -71,7 +71,7 @@ public:
     void setVisibleCellRange(const QRect& cellRange);
 
 protected:
-    virtual void shapeChanged(ChangeType type, KoShape *shape);
+    virtual void shapeChanged(ChangeType type, KShape *shape);
 
 private Q_SLOTS:
     void handleDamages(const QList<KCDamage*>& damages);

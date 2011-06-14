@@ -89,7 +89,7 @@ void KarbonPencilTool::paint(QPainter &painter, const KoViewConverter &converter
     if (m_hoveredPoint) {
         painter.save();
         painter.setTransform(m_hoveredPoint->parent()->absoluteTransformation(&converter), true);
-        KoShape::applyConversion(painter, converter);
+        KShape::applyConversion(painter, converter);
 
         int handleRadius = canvas()->resourceManager()->handleRadius();
         painter.setPen(Qt::blue);      //TODO make configurable
@@ -173,7 +173,7 @@ void KarbonPencilTool::keyPressEvent(QKeyEvent *event)
     }
 }
 
-void KarbonPencilTool::activate(ToolActivation, const QSet<KoShape*> &)
+void KarbonPencilTool::activate(ToolActivation, const QSet<KShape*> &)
 {
     m_points.clear();
     m_close = false;
@@ -273,8 +273,8 @@ void KarbonPencilTool::finish(bool closePath)
     if (! path)
         return;
 
-    KoShape * startShape = 0;
-    KoShape * endShape = 0;
+    KShape * startShape = 0;
+    KShape * endShape = 0;
 
     if (closePath) {
         path->close();
@@ -402,14 +402,14 @@ KLineBorder * KarbonPencilTool::currentBorder()
 KPathPoint* KarbonPencilTool::endPointAtPosition(const QPointF &position)
 {
     QRectF roi = handleGrabRect(position);
-    QList<KoShape *> shapes = canvas()->shapeManager()->shapesAt(roi);
+    QList<KShape *> shapes = canvas()->shapeManager()->shapesAt(roi);
 
     KPathPoint * nearestPoint = 0;
     qreal minDistance = HUGE_VAL;
     uint grabSensitivity = canvas()->resourceManager()->grabSensitivity();
     qreal maxDistance = canvas()->viewConverter()->viewToDocumentX(grabSensitivity);
 
-    foreach(KoShape *shape, shapes) {
+    foreach(KShape *shape, shapes) {
         KPathShape * path = dynamic_cast<KPathShape*>(shape);
         if (!path)
             continue;

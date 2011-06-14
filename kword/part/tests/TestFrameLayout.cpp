@@ -101,7 +101,7 @@ void TestFrameLayout::testCreateNewFramesForPage()
     QVERIFY(main);
     QVERIFY(bfl.frameOn(main, 1) == 0);
 
-    KoShape *shape = new MockTextShape();
+    KShape *shape = new MockTextShape();
     new KWTextFrame(shape, main);
     QCOMPARE(main->frameCount(), 1);
 
@@ -475,7 +475,7 @@ void TestFrameLayout::testCopyFramesForPage()
     // textshapePlain
     QCOMPARE(textshapePlainFS->frameCount(), 2);
     QVERIFY(!textshapePlainFS->frames()[1]->isCopy());
-    KoShape *shape = textshapePlainFS->frames()[1]->shape();
+    KShape *shape = textshapePlainFS->frames()[1]->shape();
     QCOMPARE(shape->position().x(), 11.);
     QCOMPARE(shape->position().y(), 15. + page2.offsetInDocument());
     // TODO test sizing
@@ -565,7 +565,7 @@ void TestFrameLayout::testLargeHeaders()
     bfl.layoutFramesOnPage(page.pageNumber());
     QCOMPARE(fs->frameCount(), 1);
 
-    KoShape *shape = fs->frames()[0]->shape();
+    KShape *shape = fs->frames()[0]->shape();
     QVERIFY(shape->size().width() <= 200);
     // the header can never be bigger than a page.
     QVERIFY(shape->size().height() < 180);

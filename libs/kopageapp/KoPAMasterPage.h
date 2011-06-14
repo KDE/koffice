@@ -54,7 +54,7 @@ public:
     virtual void setDisplayMasterBackground(bool display);
 
     /// reimplemented
-    virtual bool displayShape(KoShape *shape) const;
+    virtual bool displayShape(KShape *shape) const;
 
     /// reimplemented
     virtual void pageUpdated();

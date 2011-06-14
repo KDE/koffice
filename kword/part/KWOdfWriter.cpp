@@ -241,7 +241,7 @@ bool KWOdfWriter::save(KOdfWriteStore &odfStore, KOdfEmbeddedDocumentSaver &embe
         //     in ODF terms those frames are page-anchored.
 
         if (fs->frameCount() == 1) {
-            KoShape *shape = fs->frames().first()->shape();
+            KShape *shape = fs->frames().first()->shape();
             // may be a frame that is anchored to text, don't save those here.
             // but first check since clipped shapes look similar, but are not anchored to text
             if (shape->parent() && !shape->parent()->isClipped(shape))
@@ -262,7 +262,7 @@ bool KWOdfWriter::save(KOdfWriteStore &odfStore, KOdfEmbeddedDocumentSaver &embe
         int counter = 1;
         QSet<QString> uniqueNames;
         foreach (KWFrame *frame, fs->frames()) { // make sure all shapes have names.
-            KoShape *shape = frame->shape();
+            KShape *shape = frame->shape();
             if (counter++ == 1)
                 shape->setName(fs->name());
             else if (shape->name().isEmpty() || uniqueNames.contains(shape->name()))
@@ -405,13 +405,13 @@ void KWOdfWriter::calculateZindexOffsets()
     foreach (const KWPage &page, m_document->pageManager()->pages()) {
         // TODO handle pageSpread here.
         int minZIndex = 0;
-        foreach (KoShape *shape, m_shapeTree.intersects(page.rect()))
+        foreach (KShape *shape, m_shapeTree.intersects(page.rect()))
             minZIndex = qMin(shape->zIndex(), minZIndex);
         m_zIndexOffsets.insert(page, -minZIndex);
     }
 }
 
-void KWOdfWriter::addShapeToTree(KoShape *shape)
+void KWOdfWriter::addShapeToTree(KShape *shape)
 {
     if (! dynamic_cast<KoShapeGroup*>(shape) && ! dynamic_cast<KoShapeLayer*>(shape))
         m_shapeTree.insert(shape->boundingRect(), shape);
@@ -419,7 +419,7 @@ void KWOdfWriter::addShapeToTree(KoShape *shape)
     // add the children of a KoShapeContainer
     KoShapeContainer *container = dynamic_cast<KoShapeContainer*>(shape);
     if (container) {
-        foreach(KoShape *containerShape, container->shapes()) {
+        foreach(KShape *containerShape, container->shapes()) {
             addShapeToTree(containerShape);
         }
     }

@@ -28,7 +28,7 @@
 
 #include <KoTextShapeData.h>
 #include <KoTextDocumentLayout.h>
-#include <KoShape.h>
+#include <KShape.h>
 
 class QPainter;
 class KoViewConverter;

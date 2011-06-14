@@ -22,7 +22,7 @@
 #include <KoAction.h>
 #include <KoZoomHandler.h>
 #include <KoShapeManager.h>
-#include <KoShape.h>
+#include <KShape.h>
 #include <KoProgressBar.h>
 #include <KoUpdater.h>
 
@@ -99,12 +99,12 @@ public:
         updater->setProgress(55);
         painter->save(); // state after page preparation
 
-        QList<KoShape*> shapes = parent->shapesOnPage(pageNumber);
+        QList<KShape*> shapes = parent->shapesOnPage(pageNumber);
         if (shapes.isEmpty()) {
             kDebug(30004) << "Printing page" << pageNumber << "I notice there are no shapes on this page";
         } else {
             const int progressPart = 45 / shapes.count();
-            foreach(KoShape *shape, shapes) {
+            foreach(KShape *shape, shapes) {
                 kDebug(30004) << "Calling waitUntilReady on shape;" << shape;
                 if(! stop)
                     shape->waitUntilReady(zoomer);

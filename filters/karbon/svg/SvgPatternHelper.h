@@ -24,7 +24,7 @@
 #include <QtGui/QImage>
 #include <QtGui/QTransform>
 
-class KoShape;
+class KShape;
 
 class SvgPatternHelper
 {
@@ -71,7 +71,7 @@ public:
     void setPatternContentViewbox(const QRectF &viewBox);
 
     /// generates the pattern image from the given shapes and using the specified bounding box
-    QImage generateImage(const QRectF &objectBound, const QList<KoShape*> content);
+    QImage generateImage(const QRectF &objectBound, const QList<KShape*> content);
 
 private:
 

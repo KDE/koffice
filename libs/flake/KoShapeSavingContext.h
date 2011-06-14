@@ -29,7 +29,7 @@
 #include <QTransform>
 #include <QTextBlockUserData>
 
-class KoShape;
+class KShape;
 class KXmlWriter;
 class KOdfGenericStyles;
 class KDataCenterBase;
@@ -149,7 +149,7 @@ public:
      *
      * @return the draw id for the shape or and empty string if it was not found
      */
-    QString drawId(const KoShape *shape, bool insert = true);
+    QString drawId(const KShape *shape, bool insert = true);
 
     /**
      * @brief Clear out all given draw ids
@@ -260,14 +260,14 @@ public:
      * @param shape The shape for which the offset should be added.
      * @param matrix The offset which should be applied on saving the position.
      */
-    void addShapeOffset(const KoShape *shape, const QTransform &matrix);
+    void addShapeOffset(const KShape *shape, const QTransform &matrix);
 
     /**
      * Remove an offset from the saved offset list
      *
      * @param shape The shape for which the offset should be removed.
      */
-    void removeShapeOffset(const KoShape *shape);
+    void removeShapeOffset(const KShape *shape);
 
     /**
      * Get the offest that will be applied to the shape position when saved.
@@ -275,7 +275,7 @@ public:
      * @param shape The shape for which the offset should be get.
      * @return the saved offset or QTransform() when offset is not set.
      */
-    QTransform shapeOffset(const KoShape *shape) const;
+    QTransform shapeOffset(const KShape *shape) const;
 
     void addForWriting(const QList<KoShapeConnection*> &connections);
 

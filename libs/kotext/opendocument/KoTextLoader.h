@@ -33,7 +33,7 @@
 #include "kotext_export.h"
 
 class KoShapeLoadingContext;
-class KoShape;
+class KShape;
 class QTextCursor;
 class QTextTable;
 class QRect;
@@ -72,7 +72,7 @@ public:
     *
     * @param context The context the KoTextLoader is called in
     */
-    explicit KoTextLoader(KoShapeLoadingContext &context, KoShape *shape = 0);
+    explicit KoTextLoader(KoShapeLoadingContext &context, KShape *shape = 0);
 
     /**
     * Destructor.

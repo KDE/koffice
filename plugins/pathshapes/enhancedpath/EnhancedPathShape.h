@@ -69,7 +69,7 @@ public:
      */
     void modifyReference(const QString &reference, qreal value);
 
-    // from KoShape
+    // from KShape
     virtual void setSize(const QSizeF &newSize);
     // from KParameterShape
     virtual QPointF normalize();
@@ -106,9 +106,9 @@ public:
     EnhancedPathParameter *parameter(const QString &text);
 
 protected:
-    // from KoShape
+    // from KShape
     virtual void saveOdf(KoShapeSavingContext &context) const;
-    // from KoShape
+    // from KShape
     virtual bool loadOdf(const KXmlElement &element, KoShapeLoadingContext &context);
     // from KParameterShape
     virtual void moveHandleAction(int handleId, const QPointF &point, Qt::KeyboardModifiers modifiers = Qt::NoModifier);

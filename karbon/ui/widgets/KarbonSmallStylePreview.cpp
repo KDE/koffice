@@ -27,7 +27,7 @@
 #include <KoToolManager.h>
 #include <KCanvasController.h>
 #include <KoShapeManager.h>
-#include <KoShape.h>
+#include <KShape.h>
 #include <KSelection.h>
 #include <KLineBorder.h>
 
@@ -239,7 +239,7 @@ void KarbonSmallStylePreview::selectionChanged()
         return;
     }
 
-    KoShape * shape = controller->canvas()->shapeManager()->selection()->firstSelectedShape();
+    KShape * shape = controller->canvas()->shapeManager()->selection()->firstSelectedShape();
     if (shape) {
         m_fillFrame->setFill(shape->background());
         m_strokeFrame->setStroke(shape->border());

@@ -119,8 +119,8 @@ void Canvas::mousePressEvent(QMouseEvent *event)
 {
     KPointerEvent pe(event, m_displayOffset + m_converter.viewToDocument(event->pos()));
     m_lastPoint = pe.point;
-    KoShape *clickedShape = 0;
-    foreach(KoShape *shape, shapeManager()->shapesAt(QRectF(pe.point, QSizeF(1,1)))) {
+    KShape *clickedShape = 0;
+    foreach(KShape *shape, shapeManager()->shapesAt(QRectF(pe.point, QSizeF(1,1)))) {
         FolderShape *folder = dynamic_cast<FolderShape*>(shape);
         if ((event->buttons() & Qt::LeftButton) && itemStore()->mainFolder() == 0 && folder) {
             QPointF localPoint = pe.point - folder->position();
@@ -167,7 +167,7 @@ void Canvas::tabletEvent(QTabletEvent *event)
     event->ignore(); // if not accepted it will fall through and be offered as a mouseMoveEvent
     if (event->type() != QEvent::TabletMove)
         return;
-    KoShape *clickedShape = shapeManager()->selection()->firstSelectedShape();
+    KShape *clickedShape = shapeManager()->selection()->firstSelectedShape();
     if (clickedShape) {
         QPoint distance = m_converter.documentToView(clickedShape->position()).toPoint() - event->pos();
         if (qAbs(distance.x()) < 15 && qAbs(distance.y()) < 15) // filter out tablet events that don't move enough
@@ -232,7 +232,7 @@ void  Canvas::dropEvent(QDropEvent *event)
     else { // "text/uri-list"
         QRectF hitArea(m_displayOffset + viewConverter()->viewToDocument(event->pos()), QSizeF(1,1));
         FolderShape *folder = 0;
-        foreach (KoShape *shape, shapeManager()->shapesAt(hitArea)) {
+        foreach (KShape *shape, shapeManager()->shapesAt(hitArea)) {
             folder = dynamic_cast<FolderShape*>(shape);
             if (folder) break;
         }
@@ -263,14 +263,14 @@ void  Canvas::dropEvent(QDropEvent *event)
     event->setDropAction(Qt::MoveAction);
     event->accept();
     QPointF point = m_displayOffset + m_converter.viewToDocument(event->pos());
-    foreach (KoShape *shape, shapeManager()->selection()->selectedShapes()) {
+    foreach (KShape *shape, shapeManager()->selection()->selectedShapes()) {
         shape->update();
         if (dynamic_cast<FolderShape*>(shape)) { // is a folder
             shape->setPosition(point - offset);
         }
         else { // is an icon.
-            QList<KoShape*> shapes = shapeManager()->shapesAt(QRectF(point - offset, QSizeF(0.1, 0.1)));
-            foreach(KoShape *s, shapes) {
+            QList<KShape*> shapes = shapeManager()->shapesAt(QRectF(point - offset, QSizeF(0.1, 0.1)));
+            foreach(KShape *s, shapes) {
                 FolderShape *folder = dynamic_cast<FolderShape*>(s);
                 if (folder) {
                     if (folder != shape->parent())
@@ -301,10 +301,10 @@ void Canvas::paintEvent(QPaintEvent *e)
     painter.translate(-m_displayOffset);
     QPen pen(Qt::blue); // TODO use the kde-wide 'selected' color.
     pen.setWidth(0); // a cosmetic pen
-    foreach (KoShape *shape, shapeManager()->selection()->selectedShapes()) {
+    foreach (KShape *shape, shapeManager()->selection()->selectedShapes()) {
         painter.save();
         QPointF pos = shape->position();
-        KoShape *parent = shape->parent ();
+        KShape *parent = shape->parent ();
         while (parent) {
             pos += parent->position();
             parent = parent->parent();

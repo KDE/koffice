@@ -29,7 +29,7 @@
 #include <KarbonPart.h>
 #include <KarbonDocument.h>
 
-#include <KoShape.h>
+#include <KShape.h>
 #include <KoShapeLayer.h>
 #include <KoShapeGroup.h>
 #include <KoFilterChain.h>
@@ -131,7 +131,7 @@ void SvgImport::convert(const KXmlElement &rootElement)
 
     parser.setXmlBaseDir(QFileInfo(m_chain->inputFile()).filePath());
 
-    QList<KoShape*> toplevelShapes = parser.parseSvg(rootElement, &pageSize);
+    QList<KShape*> toplevelShapes = parser.parseSvg(rootElement, &pageSize);
     // parse the root svg element
     buildDocument(toplevelShapes, parser.shapes());
 
@@ -139,11 +139,11 @@ void SvgImport::convert(const KXmlElement &rootElement)
     m_document->setPageSize(pageSize);
 }
 
-void SvgImport::buildDocument(const QList<KoShape*> &toplevelShapes, const QList<KoShape*> &shapes)
+void SvgImport::buildDocument(const QList<KShape*> &toplevelShapes, const QList<KShape*> &shapes)
 {
     // if we have only top level groups, make them layers
     bool onlyTopLevelGroups = true;
-    foreach(KoShape * shape, toplevelShapes) {
+    foreach(KShape * shape, toplevelShapes) {
         if (! dynamic_cast<KoShapeGroup*>(shape) || shape->filterEffectStack()) {
             onlyTopLevelGroups = false;
             break;
@@ -151,7 +151,7 @@ void SvgImport::buildDocument(const QList<KoShape*> &toplevelShapes, const QList
     }
 
     // add all shapes to the document
-    foreach(KoShape * shape, shapes) {
+    foreach(KShape * shape, shapes) {
         m_document->add(shape);
     }
 
@@ -160,15 +160,15 @@ void SvgImport::buildDocument(const QList<KoShape*> &toplevelShapes, const QList
         oldLayer = m_document->layers().first();
 
     if (onlyTopLevelGroups) {
-        foreach(KoShape * shape, toplevelShapes) {
+        foreach(KShape * shape, toplevelShapes) {
             // ungroup toplevel groups
             KoShapeGroup * group = dynamic_cast<KoShapeGroup*>(shape);
-            QList<KoShape*> children = group->shapes();
-            KoShapeUngroupCommand cmd(group, children, QList<KoShape*>() << group);
+            QList<KShape*> children = group->shapes();
+            KoShapeUngroupCommand cmd(group, children, QList<KShape*>() << group);
             cmd.redo();
 
             KoShapeLayer * layer = new KoShapeLayer();
-            foreach(KoShape * child, children) {
+            foreach(KShape * child, children) {
                 m_document->add(child);
                 layer->addShape(child);
             }
@@ -181,7 +181,7 @@ void SvgImport::buildDocument(const QList<KoShape*> &toplevelShapes, const QList
         }
     } else {
         KoShapeLayer * layer = new KoShapeLayer();
-        foreach(KoShape * shape, toplevelShapes) {
+        foreach(KShape * shape, toplevelShapes) {
             m_document->add(shape);
             layer->addShape(shape);
         }

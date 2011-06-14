@@ -29,13 +29,13 @@ KoShapeContainerModel::~KoShapeContainerModel()
 {
 }
 
-void KoShapeContainerModel::proposeMove(KoShape *child, QPointF &move)
+void KoShapeContainerModel::proposeMove(KShape *child, QPointF &move)
 {
     Q_UNUSED(child);
     Q_UNUSED(move);
 }
 
-void KoShapeContainerModel::childChanged(KoShape *child, KoShape::ChangeType type)
+void KoShapeContainerModel::childChanged(KShape *child, KShape::ChangeType type)
 {
     Q_UNUSED(type);
     KoShapeContainer * parent = child->parent();
@@ -43,6 +43,6 @@ void KoShapeContainerModel::childChanged(KoShape *child, KoShape::ChangeType typ
     // propagate the change up the hierarchy
     KoShapeContainer * grandparent = parent->parent();
     if (grandparent) {
-        grandparent->model()->childChanged(parent, KoShape::ChildChanged);
+        grandparent->model()->childChanged(parent, KShape::ChildChanged);
     }
 }

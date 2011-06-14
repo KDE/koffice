@@ -26,7 +26,7 @@
 #include <QtCore/QList>
 #include <QtCore/QRectF>
 
-class KoShape;
+class KShape;
 class KoViewConverter;
 class KoShapeManagerPaintingStrategy;
 class QPainter;
@@ -48,7 +48,7 @@ public:
      * Sets the shapes to be painted.
      * @param shapes the shapes to paint
      */
-    void setShapes(const QList<KoShape*> &shapes);
+    void setShapes(const QList<KShape*> &shapes);
 
     /**
      * Paints the shapes on the given painter and using the zoom handler.

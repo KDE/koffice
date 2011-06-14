@@ -27,7 +27,7 @@
 #include <QList>
 #include <QBrush>
 
-class KoShape;
+class KShape;
 class KoShapeBackground;
 
 /// The undo / redo command for setting the shape background
@@ -40,7 +40,7 @@ public:
      * @param fill the new shape background
      * @param parent the parent command used for macro commands
      */
-    KoShapeBackgroundCommand(const QList<KoShape*> &shapes, KoShapeBackground *fill, QUndoCommand *parent = 0);
+    KoShapeBackgroundCommand(const QList<KShape*> &shapes, KoShapeBackground *fill, QUndoCommand *parent = 0);
 
     /**
     * Command to set a new shape background.
@@ -48,7 +48,7 @@ public:
     * @param fill the new shape background
     * @param parent the parent command used for macro commands
     */
-    KoShapeBackgroundCommand(KoShape *shape, KoShapeBackground *fill, QUndoCommand *parent = 0);
+    KoShapeBackgroundCommand(KShape *shape, KoShapeBackground *fill, QUndoCommand *parent = 0);
 
     /**
      * Command to set new shape backgrounds.
@@ -56,7 +56,7 @@ public:
      * @param fills the new backgrounds, one for each shape
      * @param parent the parent command used for macro commands
      */
-    KoShapeBackgroundCommand(const QList<KoShape*> &shapes, const QList<KoShapeBackground*> &fills, QUndoCommand *parent = 0);
+    KoShapeBackgroundCommand(const QList<KShape*> &shapes, const QList<KoShapeBackground*> &fills, QUndoCommand *parent = 0);
 
     virtual ~KoShapeBackgroundCommand();
     /// redo the command

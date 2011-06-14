@@ -25,7 +25,7 @@
 #include <QtCore/QPointF>
 #include <QtGui/QColor>
 
-class KoShape;
+class KShape;
 class KOdfGenericStyle;
 class KoShapeSavingContext;
 class QPainter;
@@ -52,7 +52,7 @@ public:
      *       shape as its start coordinate.
      * @param converter to convert between internal and view coordinates.
      */
-    void paint(KoShape *shape, QPainter &painter, const KoViewConverter &converter);
+    void paint(KShape *shape, QPainter &painter, const KoViewConverter &converter);
 
     /**
      * Sets the shadow offset from the topleft corner of the shape

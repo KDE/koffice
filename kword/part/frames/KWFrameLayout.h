@@ -37,7 +37,7 @@ class KWPage;
 class KWFrame;
 class KWDocument;
 
-class KoShape;
+class KShape;
 
 /**
  * This class is a controller class for frame layouting.
@@ -123,7 +123,7 @@ private:
         KWTextFrameSet *pageBackground;
     };
 
-    KoShape *createTextShape(const KWPage &page);
+    KShape *createTextShape(const KWPage &page);
     /**
      * Get or create a text frameset of the specified \a type on the specified \a page.
      * A page follows a KWPageStyle and we have individual framesets for each style.

@@ -33,7 +33,7 @@
 #include <KoPAPageThumbnailModel.h>
 #include <KoPAView.h>
 #include <KoPAViewMode.h>
-#include <KoShape.h>
+#include <KShape.h>
 #include <KoTextShapeData.h>
 
 #include "SCAnimationDirector.h"

@@ -90,7 +90,7 @@ void TestDocumentLayout::testMultiFrameLineBreaking()
 {
     initForNewTest(m_loremIpsum);
     m_shape1->setSize(QSizeF(200, 47)); // fits 3 lines.
-    KoShape *shape2 = new MockTextShape();
+    KShape *shape2 = new MockTextShape();
     shape2->setSize(QSizeF(120, 1000));
     m_layout->addShape(shape2);
 
@@ -354,7 +354,7 @@ void TestDocumentLayout::testMultipageMargins()
     h1.applyStyle(block);
 
     m_shape1->setSize(QSizeF(200, 14.4 + 100 + 20 + 14.4 + 5)); // 5 for fun..
-    KoShape *shape2 = new MockTextShape();
+    KShape *shape2 = new MockTextShape();
     shape2->setSize(QSizeF(120, 1000));
     m_layout->addShape(shape2);
 
@@ -512,11 +512,11 @@ void TestDocumentLayout::testPageBreak()
     style.applyStyle(block);
 
     m_shape1->setSize(QSizeF(200, 40));
-    KoShape *shape2 = new MockTextShape();
+    KShape *shape2 = new MockTextShape();
     shape2->setSize(QSizeF(200, 100));
     m_layout->addShape(shape2);
 
-    KoShape *shape3 = new MockTextShape();
+    KShape *shape3 = new MockTextShape();
     shape3->setSize(QSizeF(200, 100));
     m_layout->addShape(shape3);
 
@@ -558,10 +558,10 @@ void TestDocumentLayout::testPageBreak2()
     cursor.setBlockFormat(bf);
 
     m_shape1->setSize(QSizeF(200, 40));
-    KoShape *shape2 = new MockTextShape();
+    KShape *shape2 = new MockTextShape();
     shape2->setSize(QSizeF(200, 100));
     m_layout->addShape(shape2);
-    KoShape *shape3 = new MockTextShape();
+    KShape *shape3 = new MockTextShape();
     shape3->setSize(QSizeF(200, 100));
     m_layout->addShape(shape3);
 
@@ -611,7 +611,7 @@ void TestDocumentLayout::testParagOffset()
     h1.applyStyle(block);
 
     m_shape1->setSize(QSizeF(200, 100));
-    KoShape *shape2 = new MockTextShape();
+    KShape *shape2 = new MockTextShape();
     shape2->setSize(QSizeF(200, 100));
     m_layout->addShape(shape2);
 
@@ -873,7 +873,7 @@ void TestDocumentLayout::testNonBreakableLines()
     cursor.setBlockFormat(format);
 
     m_shape1->setSize(QSizeF(200, 100));
-    KoShape *shape2 = new MockTextShape();
+    KShape *shape2 = new MockTextShape();
     shape2->setSize(QSizeF(120, 1000));
     m_layout->addShape(shape2);
 

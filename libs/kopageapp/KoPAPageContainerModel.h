@@ -28,7 +28,7 @@ public:
     KoPAPageContainerModel();
     virtual ~KoPAPageContainerModel();
 
-    virtual void childChanged(KoShape *child, KoShape::ChangeType type);
+    virtual void childChanged(KShape *child, KShape::ChangeType type);
 };
 
 #endif /* KOPAPAGECONTAINERMODEL_H */

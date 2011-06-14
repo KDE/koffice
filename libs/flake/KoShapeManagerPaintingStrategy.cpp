@@ -20,7 +20,7 @@
 
 #include "KoShapeManagerPaintingStrategy.h"
 
-#include "KoShape.h"
+#include "KShape.h"
 #include "KoShapeManager.h"
 #include <QPainter>
 
@@ -44,7 +44,7 @@ KoShapeManagerPaintingStrategy::~KoShapeManagerPaintingStrategy()
     delete d;
 }
 
-void KoShapeManagerPaintingStrategy::paint(KoShape * shape, QPainter &painter, const KoViewConverter &converter, bool forPrint)
+void KoShapeManagerPaintingStrategy::paint(KShape * shape, QPainter &painter, const KoViewConverter &converter, bool forPrint)
 {
     if (d->shapeManager) {
         painter.save();
@@ -54,7 +54,7 @@ void KoShapeManagerPaintingStrategy::paint(KoShape * shape, QPainter &painter, c
     }
 }
 
-void KoShapeManagerPaintingStrategy::adapt(KoShape * shape, QRectF & rect)
+void KoShapeManagerPaintingStrategy::adapt(KShape * shape, QRectF & rect)
 {
     Q_UNUSED(shape);
     Q_UNUSED(rect);

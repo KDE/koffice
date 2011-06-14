@@ -87,10 +87,10 @@ void SCPlaceholderShape::saveOdf(KoShapeSavingContext &context) const
     writer.endElement(); // draw:frame
 }
 
-KoShape *SCPlaceholderShape::createShape(KResourceManager *documentResources)
+KShape *SCPlaceholderShape::createShape(KResourceManager *documentResources)
 {
     Q_ASSERT(m_strategy);
-    KoShape * shape = 0;
+    KShape * shape = 0;
     if (m_strategy) {
         shape = m_strategy->createShape(documentResources);
     }

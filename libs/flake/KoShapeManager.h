@@ -29,7 +29,7 @@
 #include "KoFlake.h"
 #include "flake_export.h"
 
-class KoShape;
+class KShape;
 class KSelection;
 class KoViewConverter;
 class KCanvasBase;
@@ -71,7 +71,7 @@ public:
      * @param canvas the canvas this shape manager is working on.
      * @param parent is a QObject based parent for memory management purposes
      */
-    KoShapeManager(KCanvasBase *canvas, const QList<KoShape *> &shapes, QObject *parent = 0);
+    KoShapeManager(KCanvasBase *canvas, const QList<KShape *> &shapes, QObject *parent = 0);
     virtual ~KoShapeManager();
 
     /**
@@ -80,43 +80,43 @@ public:
      * @param shapes the new shapes to manage.
      * @param repaint if true it will trigger a repaint of the shapes
      */
-    void setShapes(const QList<KoShape *> &shapes, Repaint repaint = PaintShapeOnAdd);
+    void setShapes(const QList<KShape *> &shapes, Repaint repaint = PaintShapeOnAdd);
 
     /// returns the list of maintained shapes
-    QList<KoShape*> shapes() const;
+    QList<KShape*> shapes() const;
 
     /**
      * Get a list of all shapes that don't have a parent.
      */
-    QList<KoShape*> topLevelShapes() const;
+    QList<KShape*> topLevelShapes() const;
 
     /**
-     * Add a KoShape to be displayed and managed by this manager.
+     * Add a KShape to be displayed and managed by this manager.
      * This will trigger a repaint of the shape.
      * @param shape the shape to add
      * @param repaint if true it will trigger a repaint of the shape
      */
-    void addShape(KoShape *shape, Repaint repaint = PaintShapeOnAdd);
+    void addShape(KShape *shape, Repaint repaint = PaintShapeOnAdd);
 
     /**
      * Add an additional shape to the manager.
      *
      * For additional shapes only updates are handled
      */
-    void addAdditional(KoShape *shape);
+    void addAdditional(KShape *shape);
 
     /**
-     * Remove a KoShape from this manager
+     * Remove a KShape from this manager
      * @param shape the shape to remove
      */
-    void remove(KoShape *shape);
+    void remove(KShape *shape);
 
     /**
      * Remove an additional shape
      *
      * For additional shapes only updates are handled
      */
-    void removeAdditional(KoShape *shape);
+    void removeAdditional(KShape *shape);
 
     /// return the selection shapes for this shapeManager
     KSelection *selection() const;
@@ -137,7 +137,7 @@ public:
      * @param selection controls which shape is returned when more than one shape is at the specific point
      * @param omitHiddenShapes if true, only visible shapes are considered
      */
-    KoShape *shapeAt(const QPointF &position, KoFlake::ShapeSelection selection = KoFlake::ShapeOnTop, bool omitHiddenShapes = true);
+    KShape *shapeAt(const QPointF &position, KoFlake::ShapeSelection selection = KoFlake::ShapeOnTop, bool omitHiddenShapes = true);
 
     KoShapeConnection *connectionAt(const QPointF &position);
 
@@ -146,7 +146,7 @@ public:
      * @param rect the rectangle in the document coordinate system.
      * @param omitHiddenShapes if true, only visible shapes are considered
      */
-    QList<KoShape *> shapesAt(const QRectF &rect, bool omitHiddenShapes = true);
+    QList<KShape *> shapesAt(const QRectF &rect, bool omitHiddenShapes = true);
 
     /**
      * Update the tree for finding the shapes.
@@ -155,7 +155,7 @@ public:
      * will be merged into one.
      * @param shape the shape to updated its position in the tree.
      */
-    void notifyShapeChanged(KoShape *shape);
+    void notifyShapeChanged(KShape *shape);
 
     /**
      * Switch to editing the shape that is at the position of the event.
@@ -173,7 +173,7 @@ public:
      * @param converter to convert between document and view coordinates.
      * @param forPrint if true, make sure only actual content is drawn and no decorations.
      */
-    void paintShape(KoShape *shape, QPainter &painter, const KoViewConverter &converter, bool forPrint);
+    void paintShape(KShape *shape, QPainter &painter, const KoViewConverter &converter, bool forPrint);
 
     /**
      * Set the strategy of the KoShapeManager

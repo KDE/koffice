@@ -22,7 +22,7 @@
 
 #include <KoShapeConnection.h>
 #include <KoShapeManager.h>
-#include <KoShape.h>
+#include <KShape.h>
 #include <KoToolBase.h>
 #include <KCanvasBase.h>
 #include <KoViewConverter.h>
@@ -123,7 +123,7 @@ ConnectionChangeStrategy::Connection ConnectionChangeStrategy::findConnectionFor
     const int distance = tool()->canvas()->snapGuide()->snapDistance();
     QRectF rect(point.x() - distance, point.y() - distance, distance * 2, distance * 2);
     Connection answer;
-    foreach (KoShape *shape, tool()->canvas()->shapeManager()->shapesAt(rect)) {
+    foreach (KShape *shape, tool()->canvas()->shapeManager()->shapesAt(rect)) {
         QTransform st = shape->absoluteTransformation(0);
         QList<QPointF> points = shape->connectionPoints();
         for (int i = 0; i < points.size(); ++i) {

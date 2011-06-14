@@ -69,7 +69,7 @@
 #include <KoShapeCreateCommand.h>
 #include <KoShapeFactoryBase.h>
 #include <KoShapeGroupCommand.h>
-#include <KoShape.h>
+#include <KShape.h>
 #include <KoShapeManager.h>
 #include <KoShapeRegistry.h>
 #include <KoStandardAction.h>
@@ -99,7 +99,7 @@
 #include <kfiledialog.h>
 #include <kmessagebox.h>
 
-static KWFrame *frameForShape(KoShape *shape)
+static KWFrame *frameForShape(KShape *shape)
 {
     while (shape) {
         KWFrame *answer = dynamic_cast<KWFrame*>(shape->applicationData());
@@ -923,7 +923,7 @@ if (false) { // TODO move this to the text tool as soon as  a) the string freeze
 QList<KWFrame*> KWView::selectedFrames() const
 {
     QList<KWFrame*> frames;
-    foreach (KoShape *shape, m_canvas->shapeManager()->selection()->selectedShapes()) {
+    foreach (KShape *shape, m_canvas->shapeManager()->selection()->selectedShapes()) {
         KWFrame *frame = frameForShape(shape);
         Q_ASSERT(frame);
         frames.append(frame);
@@ -963,8 +963,8 @@ void KWView::insertFrameBreak()
 
 void KWView::editDeleteFrame()
 {
-    QList<KoShape*> frames;
-    foreach (KoShape *shape, m_canvas->shapeManager()->selection()->selectedShapes(KoFlake::TopLevelSelection)) {
+    QList<KShape*> frames;
+    foreach (KShape *shape, m_canvas->shapeManager()->selection()->selectedShapes(KoFlake::TopLevelSelection)) {
         KWFrame *frame = frameForShape(shape);
         if (frame) {
             KWTextFrameSet *fs = dynamic_cast<KWTextFrameSet*>(frame->frameSet());
@@ -1071,8 +1071,8 @@ void KWView::inlineFrame()
     Q_ASSERT(kwdocument()->mainFrameSet());
     KSelection *selection = m_canvas->shapeManager()->selection();
 
-    KoShape *targetShape = 0;
-    foreach (KoShape *shape, selection->selectedShapes(KoFlake::TopLevelSelection)) {
+    KShape *targetShape = 0;
+    foreach (KShape *shape, selection->selectedShapes(KoFlake::TopLevelSelection)) {
         if (shape->isGeometryProtected())
             continue;
         if (shape->parent())
@@ -1137,13 +1137,13 @@ void KWView::showRulers(bool visible)
 void KWView::createLinkedFrame()
 {
     KSelection *selection = m_canvas->shapeManager()->selection();
-    QList<KoShape*> oldSelection = selection->selectedShapes(KoFlake::TopLevelSelection);
+    QList<KShape*> oldSelection = selection->selectedShapes(KoFlake::TopLevelSelection);
     if (oldSelection.count() == 0)
         return;
     selection->deselectAll();
 
     QUndoCommand *cmd = new QUndoCommand(i18n("Create Linked Copy"));
-    foreach (KoShape *shape, oldSelection) {
+    foreach (KShape *shape, oldSelection) {
         KWFrame *frame = dynamic_cast<KWFrame*>(shape->applicationData());
         Q_ASSERT(frame);
         KWCopyShape *copy = new KWCopyShape(frame->shape(), m_document->pageManager());
@@ -1241,7 +1241,7 @@ void KWView::createCustomOutline()
 void KWView::createFrameClipping()
 {
     QSet<KWFrame *> clipFrames;
-    foreach (KoShape *shape, m_canvas->shapeManager()->selection()->selectedShapes(KoFlake::TopLevelSelection)) {
+    foreach (KShape *shape, m_canvas->shapeManager()->selection()->selectedShapes(KoFlake::TopLevelSelection)) {
         KWFrame *frame = frameForShape(shape);
         Q_ASSERT(frame);
         if (frame->shape()->parent() == 0)
@@ -1256,7 +1256,7 @@ void KWView::createFrameClipping()
 void KWView::removeFrameClipping()
 {
     QSet<KWFrame *> unClipFrames;
-    foreach (KoShape *shape, m_canvas->shapeManager()->selection()->selectedShapes(KoFlake::TopLevelSelection)) {
+    foreach (KShape *shape, m_canvas->shapeManager()->selection()->selectedShapes(KoFlake::TopLevelSelection)) {
         KWFrame *frame = frameForShape(shape);
         Q_ASSERT(frame);
         if (frame->shape()->parent())
@@ -1270,7 +1270,7 @@ void KWView::removeFrameClipping()
 
 void KWView::insertImage()
 {
-    KoShape *shape = KoImageSelectionWidget::selectImageShape(m_document->resourceManager(), this);
+    KShape *shape = KoImageSelectionWidget::selectImageShape(m_document->resourceManager(), this);
     if (shape) {
         if (m_currentPage.isValid()) {
             QRectF page = m_currentPage.rect();
@@ -1288,7 +1288,7 @@ void KWView::insertImage()
             shape->setPosition(page.topLeft());
 
             int zIndex = 0;
-            foreach (KoShape *s, m_canvas->shapeManager()->shapesAt(page))
+            foreach (KShape *s, m_canvas->shapeManager()->shapesAt(page))
                 zIndex = qMax(s->zIndex(), zIndex);
             shape->setZIndex(zIndex+1);
         }
@@ -1309,9 +1309,9 @@ void KWView::setGuideVisibility(bool on)
 
 void KWView::createTextOnShape()
 {
-    QSet<KoShape *> frameShapes;
+    QSet<KShape *> frameShapes;
     KSelection *selection = m_canvas->shapeManager()->selection();
-    foreach (KoShape *shape, selection->selectedShapes(KoFlake::TopLevelSelection)) {
+    foreach (KShape *shape, selection->selectedShapes(KoFlake::TopLevelSelection)) {
         KWFrame *frame = frameForShape(shape);
         Q_ASSERT(frame);
         if (frame->shape()->parent() == 0) {
@@ -1324,7 +1324,7 @@ void KWView::createTextOnShape()
         m_document->addCommand(cmd);
     }
 #else
-    foreach (KoShape *shape, frameShapes) {
+    foreach (KShape *shape, frameShapes) {
         selection->deselect(shape);
         KoTextOnShapeContainer *decorator = new KoTextOnShapeContainer(shape, m_document->resourceManager());
         decorator->setPlainText("dummy text, la la la enzo");
@@ -1338,7 +1338,7 @@ void KWView::insertTextShape()
 {
     KoShapeFactoryBase *factory = KoShapeRegistry::instance()->value(TextShape_SHAPEID);
     Q_ASSERT(factory);
-    KoShape *shape = factory->createDefaultShape(m_document->resourceManager());
+    KShape *shape = factory->createDefaultShape(m_document->resourceManager());
     if (m_currentPage.isValid())
         shape->setPosition(QPointF(0, m_currentPage.offsetInDocument()));
 
@@ -1368,7 +1368,7 @@ void KWView::zoomChanged(KoZoomMode::Mode mode, qreal zoom)
 
 void KWView::selectionChanged()
 {
-    KoShape *shape = m_canvas->shapeManager()->selection()-> firstSelectedShape();
+    KShape *shape = m_canvas->shapeManager()->selection()-> firstSelectedShape();
     if (shape) {
         setCurrentPage(m_document->pageManager()->page(shape));
     }
@@ -1380,7 +1380,7 @@ void KWView::selectionChanged()
 
     bool doneOne = false; // only use first for resourcemanager data
     bool onlyAutogeneratedFrames = true; // detect if we have user frames selected
-    foreach (KoShape *shape, m_canvas->shapeManager()->selection()->selectedShapes(KoFlake::TopLevelSelection)) {
+    foreach (KShape *shape, m_canvas->shapeManager()->selection()->selectedShapes(KoFlake::TopLevelSelection)) {
         KWFrame *frame = frameForShape(shape);
         Q_ASSERT(frame);
         KWFrameSet *fs = frame->frameSet();

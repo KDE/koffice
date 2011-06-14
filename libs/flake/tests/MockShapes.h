@@ -28,7 +28,7 @@
 
 #include "kdebug.h"
 
-class MockShape : public KoShape
+class MockShape : public KShape
 {
 public:
     MockShape() : paintedCount(0) {}
@@ -103,17 +103,17 @@ public:
 class MockShapeController : public KoShapeControllerBase
 {
 public:
-    void addShape(KoShape* shape) {
+    void addShape(KShape* shape) {
         m_shapes.insert(shape);
     }
-    void removeShape(KoShape* shape) {
+    void removeShape(KShape* shape) {
         m_shapes.remove(shape);
     }
-    bool contains(KoShape* shape) {
+    bool contains(KShape* shape) {
         return m_shapes.contains(shape);
     }
 private:
-    QSet<KoShape * > m_shapes;
+    QSet<KShape * > m_shapes;
 };
 
 class MockContainerModel : public KoShapeContainerModel
@@ -124,22 +124,22 @@ public:
     }
 
     /// reimplemented
-    void add(KoShape *child) {
+    void add(KShape *child) {
         m_children.append(child); // note that we explicitly do not check for duplicates here!
     }
     /// reimplemented
-    void remove(KoShape *child) {
+    void remove(KShape *child) {
         m_children.removeAll(child);
     }
 
     /// reimplemented
-    void setClipped(const KoShape *, bool) { }  // ignored
+    void setClipped(const KShape *, bool) { }  // ignored
     /// reimplemented
-    bool isClipped(const KoShape *) const {
+    bool isClipped(const KShape *) const {
         return false;
     }// ignored
     /// reimplemented
-    bool isChildLocked(const KoShape *child) const {
+    bool isChildLocked(const KShape *child) const {
         return child->isGeometryProtected();
     }
     /// reimplemented
@@ -147,24 +147,24 @@ public:
         return m_children.count();
     }
     /// reimplemented
-    QList<KoShape*> shapes() const {
+    QList<KShape*> shapes() const {
         return m_children;
     }
     /// reimplemented
-    void containerChanged(KoShapeContainer *, KoShape::ChangeType) {
+    void containerChanged(KoShapeContainer *, KShape::ChangeType) {
         m_containerChangedCalled++;
     }
     /// reimplemented
-    void proposeMove(KoShape *, QPointF &) {
+    void proposeMove(KShape *, QPointF &) {
         m_proposeMoveCalled++;
     }
     /// reimplemented
-    void childChanged(KoShape *, KoShape::ChangeType) {
+    void childChanged(KShape *, KShape::ChangeType) {
         m_childChangedCalled++;
     }
-    void setInheritsTransform(const KoShape *, bool) {
+    void setInheritsTransform(const KShape *, bool) {
     }
-    bool inheritsTransform(const KoShape *) const {
+    bool inheritsTransform(const KShape *) const {
         return false;
     }
 
@@ -185,7 +185,7 @@ public:
     }
 
 private:
-    QList<KoShape*> m_children;
+    QList<KShape*> m_children;
     int m_containerChangedCalled, m_childChangedCalled, m_proposeMoveCalled;
 };
 

@@ -72,7 +72,7 @@
 #include "KCValueParser.h"
 #include "KCStyleStorage.h"
 
-#include <KoShape.h>
+#include <KShape.h>
 #include <KoShapeLoadingContext.h>
 #include <KoShapeRegistry.h>
 #include <KOdfStyleStack.h>
@@ -1220,9 +1220,9 @@ bool KCCell::saveOdf(KXmlWriter& xmlwriter, KOdfGenericStyles &mainStyles,
     // see: OpenDocument, 2.3.1 Text Documents
     // see: OpenDocument, 9.2 Drawing Shapes
     if (tableContext.cellHasAnchoredShapes(sheet(), row, column)) {
-        const QList<KoShape*> shapes = tableContext.cellAnchoredShapes(sheet(), row, column);
+        const QList<KShape*> shapes = tableContext.cellAnchoredShapes(sheet(), row, column);
         for (int i = 0; i < shapes.count(); ++i) {
-            KoShape* const shape = shapes[i];
+            KShape* const shape = shapes[i];
             const QPointF bottomRight = shape->boundingRect().bottomRight();
             double endX = 0.0;
             double endY = 0.0;
@@ -1744,7 +1744,7 @@ void KCCell::loadOdfObjects(const KXmlElement &parent, KCOdfLoadingContext& tabl
 
 void KCCell::loadOdfObject(const KXmlElement &element, KoShapeLoadingContext &shapeContext)
 {
-    KoShape* shape = KoShapeRegistry::instance()->createShapeFromOdf(element, shapeContext);
+    KShape* shape = KoShapeRegistry::instance()->createShapeFromOdf(element, shapeContext);
     if (!shape) {
         kDebug(36003) << "Unable to load shape.";
         return;

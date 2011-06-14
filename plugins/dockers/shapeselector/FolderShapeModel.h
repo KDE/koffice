@@ -29,32 +29,32 @@ public:
     FolderShapeModel(FolderShape *parent);
 
     /// add a content item to the folder
-    virtual void add(KoShape *child);
+    virtual void add(KShape *child);
     /// remove a content item from the folder
-    virtual void remove(KoShape *child);
+    virtual void remove(KShape *child);
     /// ignored.
-    virtual void setClipped(const KoShape *child, bool clipping);
+    virtual void setClipped(const KShape *child, bool clipping);
     /// always returns true clipping any child to the folder outline
-    virtual bool isClipped(const KoShape *child) const;
-    virtual bool isChildLocked(const KoShape *child) const;
+    virtual bool isClipped(const KShape *child) const;
+    virtual bool isChildLocked(const KShape *child) const;
     /// always returns true, but thats irrelevant since folders don't rotate.
-    virtual bool inheritsTransform(const KoShape *shape) const;
+    virtual bool inheritsTransform(const KShape *shape) const;
     /// ignored
-    virtual void setInheritsTransform(const KoShape *shape, bool inherit);
+    virtual void setInheritsTransform(const KShape *shape, bool inherit);
     /// return content item count
     virtual int count() const;
     /// returns content items added earlier
-    virtual QList<KoShape *> shapes() const;
+    virtual QList<KShape *> shapes() const;
     /// reimplemented from KoShapeContainerModel
-    virtual void containerChanged(KoShapeContainer *container, KoShape::ChangeType type);
+    virtual void containerChanged(KoShapeContainer *container, KShape::ChangeType type);
     /// reimplemented from KoShapeContainerModel
-    virtual void childChanged(KoShape *child, KoShape::ChangeType type);
+    virtual void childChanged(KShape *child, KShape::ChangeType type);
 
     /// called by the folder shape to allow us to reorganize the items in the folder
     void folderResized();
 
 private:
-    QList<KoShape*> m_icons;
+    QList<KShape*> m_icons;
     FolderShape *m_parent;
 };
 

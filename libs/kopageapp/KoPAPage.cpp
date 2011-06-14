@@ -157,7 +157,7 @@ void KoPAPage::setDisplayMasterBackground(bool display)
     }
 }
 
-bool KoPAPage::displayShape(KoShape *shape) const
+bool KoPAPage::displayShape(KShape *shape) const
 {
     Q_UNUSED(shape);
     return true;

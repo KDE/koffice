@@ -33,7 +33,7 @@
 
 #include <QObject>
 
-class KoShape;
+class KShape;
 
 /**
  * Small helper class that will try to delete itself and the param shape with it.
@@ -49,11 +49,11 @@ public:
      * Create a ShapeDeleter that will delete param shape
      * @param shape the shape that will be deleted soon after this object is created.
      */
-    ShapeDeleter(KoShape *shape);
+    ShapeDeleter(KShape *shape);
     ~ShapeDeleter();
 
 private:
-    KoShape *m_shape;
+    KShape *m_shape;
 };
 
 #endif

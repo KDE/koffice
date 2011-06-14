@@ -24,7 +24,7 @@
 #include <QObject>
 
 class KoShapeManager;
-class KoShape;
+class KShape;
 class FolderShape;
 class ClipboardProxyShape;
 class KoShapeControllerBase;
@@ -57,9 +57,9 @@ public:
     void addFolder(FolderShape *folder);
     void removeFolder(FolderShape *folder);
     QList<FolderShape*> folders() const;
-    void addShape(KoShape *shape);
-    void removeShape(KoShape *shape);
-    QList<KoShape*> shapes() const;
+    void addShape(KShape *shape);
+    void removeShape(KShape *shape);
+    QList<KShape*> shapes() const;
 
     /**
      * Return the mainFolder if there is one.
@@ -76,7 +76,7 @@ public:
     QRectF loadShapeTypes();
     KoShapeManager *shapeManager() const { return m_shapeManager; }
 
-    static KoShape *createShapeFromPaste(const QByteArray &bytes);
+    static KShape *createShapeFromPaste(const QByteArray &bytes);
 
     KoShapeControllerBase *shapeController();
 

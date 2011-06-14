@@ -205,7 +205,7 @@ void SCViewModePresentation::activate(KoPAViewMode * previousViewMode)
         }
     }
 
-    m_tool->activate(KoToolBase::DefaultActivation, QSet<KoShape*>());
+    m_tool->activate(KoToolBase::DefaultActivation, QSet<KShape*>());
 
     emit activated();
     emit pageChanged(m_animationDirector->currentPage(), m_animationDirector->numStepsInPage());

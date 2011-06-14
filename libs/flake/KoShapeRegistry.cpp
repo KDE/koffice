@@ -48,7 +48,7 @@ public:
     void insertFactory(KoShapeFactoryBase *factory);
     void init(KoShapeRegistry *q);
 
-    KoShape *createShapeInternal(const KXmlElement &fullElement, KoShapeLoadingContext &context, const KXmlElement &element) const;
+    KShape *createShapeInternal(const KXmlElement &fullElement, KoShapeLoadingContext &context, const KXmlElement &element) const;
 
 
     // Map namespace,tagname to priority:factory
@@ -134,11 +134,11 @@ void KoShapeRegistry::Private::insertFactory(KoShapeFactoryBase *factory)
     }
 }
 
-KoShape * KoShapeRegistry::createShapeFromOdf(const KXmlElement & e, KoShapeLoadingContext & context) const
+KShape * KoShapeRegistry::createShapeFromOdf(const KXmlElement & e, KoShapeLoadingContext & context) const
 {
     kDebug(30006) << "Going to check for" << e.namespaceURI() << ":" << e.tagName();
 
-    KoShape * shape = 0;
+    KShape * shape = 0;
     // If the element is in a frame, the frame is already added by the
     // application and we only want to create a shape from the
     // embedded element. The very first shape we create is accepted.
@@ -190,7 +190,7 @@ KoShape * KoShapeRegistry::createShapeFromOdf(const KXmlElement & e, KoShapeLoad
             delete connection;
         } else if (connection->priv()->hasDummyShape) {
             // if there is no shape for a connection it will fall between the cracks
-            shape = new KoShape();
+            shape = new KShape();
             shape->setName("ConnectionPlaceholder");
             shape->setPosition(connection->startPoint());
             connection->setStartPoint(shape, 0);
@@ -206,7 +206,7 @@ KoShape * KoShapeRegistry::createShapeFromOdf(const KXmlElement & e, KoShapeLoad
     return shape;
 }
 
-KoShape *KoShapeRegistry::Private::createShapeInternal(const KXmlElement &fullElement,
+KShape *KoShapeRegistry::Private::createShapeInternal(const KXmlElement &fullElement,
                                                        KoShapeLoadingContext &context,
                                                        const KXmlElement &element) const
 {
@@ -241,7 +241,7 @@ KoShape *KoShapeRegistry::Private::createShapeInternal(const KXmlElement &fullEl
     for (int i = factories.size() - 1; i >= 0; --i) {
         KoShapeFactoryBase * factory = factories[i];
         if (factory->supports(element, context)) {
-            KoShape *shape = factory->createDefaultShape(context.documentResourceManager());
+            KShape *shape = factory->createDefaultShape(context.documentResourceManager());
 
             if (shape->shapeId().isEmpty())
                 shape->setShapeId(factory->id());
@@ -253,7 +253,7 @@ KoShape *KoShapeRegistry::Private::createShapeInternal(const KXmlElement &fullEl
             if (loaded) {
                 // we return the top-level most shape as thats the one that we'll have to
                 // add to the KoShapeManager for painting later (and also to avoid memory leaks)
-                // but don't go past a KoShapeLayer as KoShape adds those from the context
+                // but don't go past a KoShapeLayer as KShape adds those from the context
                 // during loading and those are already added.
                 while (shape->parent() && dynamic_cast<KoShapeLayer*>(shape->parent()) == 0)
                     shape = shape->parent();

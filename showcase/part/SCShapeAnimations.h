@@ -55,7 +55,7 @@ public:
      * @return A map of the shape -> animation if the animation is 0 the shape
      *         is not visible
      */
-/*    QMap<KoShape *, SCShapeAnimation *> animations(int step) const;
+/*    QMap<KShape *, SCShapeAnimation *> animations(int step) const;
 */
     /**
      * Get all steps

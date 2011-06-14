@@ -108,7 +108,7 @@ public:
     }
     void draw(QPainter *, const KoTextDocumentLayout::PaintContext &) {}
 
-    bool setFollowupShape(KoShape *) {
+    bool setFollowupShape(KShape *) {
         return false;
     }
     void clearTillEnd() {}

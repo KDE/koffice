@@ -43,7 +43,7 @@ void StarShapeConfigWidget::setUnit(const KUnit &unit)
     widget.outerRadius->setUnit(unit);
 }
 
-void StarShapeConfigWidget::open(KoShape *shape)
+void StarShapeConfigWidget::open(KShape *shape)
 {
     m_star = dynamic_cast<StarShape*>(shape);
     if (! m_star)

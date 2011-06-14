@@ -44,7 +44,7 @@ class KoViewConverter;
 class KoShapeController;
 class KoShapeControllerBase;
 class KCanvasController;
-class KoShape;
+class KShape;
 class KoSnapGuide;
 class KGuidesData;
 
@@ -151,7 +151,7 @@ public:
      * @param shape the shape that will be moved soon.
      * @param move the distance the caller intends to move the shape.
      */
-    virtual void clipToDocument(const KoShape *shape, QPointF &move) const;
+    virtual void clipToDocument(const KShape *shape, QPointF &move) const;
 
     /**
      * Return the position of the document origin inside the canvas widget, in pixels.

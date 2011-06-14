@@ -18,12 +18,12 @@
  */
 
 #include "ShapeDeleter_p.h"
-#include "KoShape.h"
+#include "KShape.h"
 
 #include <QCoreApplication>
 #include <QThread>
 
-ShapeDeleter::ShapeDeleter(KoShape *shape)
+ShapeDeleter::ShapeDeleter(KShape *shape)
         : m_shape(shape)
 {
     moveToThread(QCoreApplication::instance()->thread());

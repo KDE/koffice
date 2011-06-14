@@ -29,7 +29,7 @@
 #include <QMap>
 #include <QMultiHash>
 
-class KoShape;
+class KShape;
 
 
 /**
@@ -42,7 +42,7 @@ public:
     KCOdfSavingContext(KoShapeSavingContext& shapeContext)
             : shapeContext(shapeContext) {}
 
-    void insertCellAnchoredShape(const KCSheet *sheet, int row, int column, KoShape* shape) {
+    void insertCellAnchoredShape(const KCSheet *sheet, int row, int column, KShape* shape) {
         m_cellAnchoredShapes[sheet][row].insert(column, shape);
     }
 
@@ -59,17 +59,17 @@ public:
 
     int nextAnchoredShape(const KCSheet *sheet, int row, int column) const {
         if (!rowHasCellAnchoredShapes(sheet, row)) return 0;
-        QMultiHash<int, KoShape*>::const_iterator it;
+        QMultiHash<int, KShape*>::const_iterator it;
         for (it = m_cellAnchoredShapes[sheet][row].constBegin(); it != m_cellAnchoredShapes[sheet][row].constEnd(); ++it)
             if (it.key() > column) return it.key();  // found one
         return 0;
     }
 
-    QList<KoShape*> cellAnchoredShapes(const KCSheet *sheet, int row, int column) const {
+    QList<KShape*> cellAnchoredShapes(const KCSheet *sheet, int row, int column) const {
         if (!m_cellAnchoredShapes.contains(sheet))
-            return QList<KoShape*>();
+            return QList<KShape*>();
         if (!m_cellAnchoredShapes[sheet].contains(row))
-            return QList<KoShape*>();
+            return QList<KShape*>();
         return m_cellAnchoredShapes[sheet][row].values(column);
     }
 
@@ -80,7 +80,7 @@ public:
     QMap<int, KCStyle> rowDefaultStyles;
 
 private:
-    QHash < const KCSheet*, QHash < int /*row*/, QMultiHash < int /*col*/, KoShape* > > > m_cellAnchoredShapes;
+    QHash < const KCSheet*, QHash < int /*row*/, QMultiHash < int /*col*/, KShape* > > > m_cellAnchoredShapes;
 };
 
 #endif // KSPREAD_ODF_SAVING_CONTEXT

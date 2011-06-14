@@ -19,7 +19,7 @@
  */
 
 #include "KoShapeTransformCommand.h"
-#include "KoShape.h"
+#include "KShape.h"
 
 #include <QList>
 #include <QTransform>
@@ -29,13 +29,13 @@
 class KoShapeTransformCommand::Private
 {
 public:
-    Private(const QList<KoShape*> &list) : shapes(list) { }
-    QList<KoShape*> shapes;
+    Private(const QList<KShape*> &list) : shapes(list) { }
+    QList<KShape*> shapes;
     QList<QTransform> oldState;
     QList<QTransform> newState;
 };
 
-KoShapeTransformCommand::KoShapeTransformCommand(const QList<KoShape*> &shapes, const QList<QTransform> &oldState, const QList<QTransform> &newState, QUndoCommand * parent)
+KoShapeTransformCommand::KoShapeTransformCommand(const QList<KShape*> &shapes, const QList<QTransform> &oldState, const QList<QTransform> &newState, QUndoCommand * parent)
         : QUndoCommand(parent),
         d(new Private(shapes))
 {
@@ -56,7 +56,7 @@ void KoShapeTransformCommand::redo()
 
     const int shapeCount = d->shapes.count();
     for (int i = 0; i < shapeCount; ++i) {
-        KoShape * shape = d->shapes[i];
+        KShape * shape = d->shapes[i];
         shape->update();
         shape->setTransformation(d->newState[i]);
         shape->update();
@@ -69,7 +69,7 @@ void KoShapeTransformCommand::undo()
 
     const int shapeCount = d->shapes.count();
     for (int i = 0; i < shapeCount; ++i) {
-        KoShape * shape = d->shapes[i];
+        KShape * shape = d->shapes[i];
         shape->update();
         shape->setTransformation(d->oldState[i]);
         shape->update();

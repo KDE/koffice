@@ -81,7 +81,7 @@ void SCPicturesImport::import()
 
 void SCPicturesImport::pictureImported(KJob *job)
 {
-    KoShape *shape = m_factory->createDefaultShape();
+    KShape *shape = m_factory->createDefaultShape();
     if (shape) {
         KIO::StoredTransferJob *transferJob = qobject_cast<KIO::StoredTransferJob*>(job);
         Q_ASSERT(transferJob);

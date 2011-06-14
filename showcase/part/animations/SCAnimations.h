@@ -42,7 +42,7 @@ public:
      */
     void add(SCAnimationBase * animation);
 
-    QMap<QPair<KoShape *, KoTextBlockData *>, SCShapeAnimation *> m_current;
+    QMap<QPair<KShape *, KoTextBlockData *>, SCShapeAnimation *> m_current;
 #endif
 
 private:

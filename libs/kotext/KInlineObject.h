@@ -29,7 +29,7 @@ class QPaintDevice;
 class QPainter;
 class QRectF;
 
-class KoShape;
+class KShape;
 class KInlineTextObjectManager;
 class KInlineObjectPrivate;
 class KoShapeSavingContext;
@@ -239,7 +239,7 @@ public:
      * Notice that if the text has not yet been layed-out we can return a null pointer.
      * @see page()
      */
-    KoShape *shape() const;
+    KShape *shape() const;
 
     /// \inline
     KInlineObjectPrivate *priv();
@@ -254,7 +254,7 @@ protected:
      * @param position the position of the character in the text document we want to locate.
      * @return the shape the text is laid-out in.  Or 0 if there is no shape for that text character.
      */
-    static KoShape *shapeForPosition(const QTextDocument *document, int position);
+    static KShape *shapeForPosition(const QTextDocument *document, int position);
 
     /**
      * Callback to notify any subclasses that the text position and/or document have been updated.

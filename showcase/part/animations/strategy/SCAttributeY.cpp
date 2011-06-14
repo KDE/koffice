@@ -19,7 +19,7 @@
 
 #include "SCAttributeY.h"
 #include "../SCAnimationCache.h"
-#include "KoShape.h"
+#include "KShape.h"
 #include "../SCShapeAnimation.h"
 
 #include "kdebug.h"
@@ -30,7 +30,7 @@ SCAttributeY::SCAttributeY() : SCAnimationAttribute("y")
 
 void SCAttributeY::updateCache(SCAnimationCache *cache, SCShapeAnimation *shapeAnimation, qreal value)
 {
-    KoShape *shape = shapeAnimation->shape();
+    KShape *shape = shapeAnimation->shape();
     QTransform transform;
     value = value * cache->pageSize().height();
     value = value - shape->position().y();
@@ -41,7 +41,7 @@ void SCAttributeY::updateCache(SCAnimationCache *cache, SCShapeAnimation *shapeA
 
 void SCAttributeY::initCache(SCAnimationCache *animationCache, int step, SCShapeAnimation * shapeAnimation, qreal startValue, qreal endValue)
 {
-    KoShape * shape = shapeAnimation->shape();
+    KShape * shape = shapeAnimation->shape();
     qreal v1 = (startValue * animationCache->pageSize().height() - shape->position().y()) * animationCache->zoom();
     qreal v2 = (endValue * animationCache->pageSize().height() - shape->position().y()) * animationCache->zoom();
     animationCache->init(step, shape, shapeAnimation->textBlockData(), "transform", QTransform().translate(0, v1));

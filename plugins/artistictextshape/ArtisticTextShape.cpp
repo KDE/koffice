@@ -600,11 +600,11 @@ void ArtisticTextShape::cacheGlyphOutlines()
     }
 }
 
-void ArtisticTextShape::shapeChanged(ChangeType type, KoShape * shape)
+void ArtisticTextShape::shapeChanged(ChangeType type, KShape * shape)
 {
     if ( m_path && shape == m_path )
     {
-        if ( type == KoShape::Deleted )
+        if ( type == KShape::Deleted )
         {
             m_path = 0;
         }

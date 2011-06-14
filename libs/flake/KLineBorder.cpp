@@ -21,7 +21,7 @@
 
 #include "KLineBorder.h"
 #include "KoViewConverter.h"
-#include "KoShape.h"
+#include "KShape.h"
 #include "KoShapeSavingContext.h"
 
 #include <QPainter>
@@ -108,9 +108,9 @@ bool KLineBorder::hasTransparency() const
     return d->color.alpha() > 0;
 }
 
-void KLineBorder::paint(KoShape *shape, QPainter &painter, const KoViewConverter &converter)
+void KLineBorder::paint(KShape *shape, QPainter &painter, const KoViewConverter &converter)
 {
-    KoShape::applyConversion(painter, converter);
+    KShape::applyConversion(painter, converter);
 
     QPen pen = d->pen;
 
@@ -123,9 +123,9 @@ void KLineBorder::paint(KoShape *shape, QPainter &painter, const KoViewConverter
         painter.strokePath(shape->outline(), pen);
 }
 
-void KLineBorder::paint(KoShape *shape, QPainter &painter, const KoViewConverter &converter, const QColor &color)
+void KLineBorder::paint(KShape *shape, QPainter &painter, const KoViewConverter &converter, const QColor &color)
 {
-    KoShape::applyConversion(painter, converter);
+    KShape::applyConversion(painter, converter);
 
     QPen pen = d->pen;
     pen.setColor(color);

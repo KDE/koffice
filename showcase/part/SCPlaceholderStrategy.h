@@ -24,7 +24,7 @@ class QString;
 class QRectF;
 class QPainter;
 class KXmlElement;
-class KoShape;
+class KShape;
 class KoShapeLoadingContext;
 class KoShapeSavingContext;
 class KoShapeUserData;
@@ -51,7 +51,7 @@ public:
 
     virtual ~SCPlaceholderStrategy();
 
-    virtual KoShape *createShape(KResourceManager *documentResources);
+    virtual KShape *createShape(KResourceManager *documentResources);
 
     virtual void paint(QPainter &painter, const KoViewConverter &converter, const QRectF &rect);
 

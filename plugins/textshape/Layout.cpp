@@ -41,7 +41,7 @@
 #include <KoTextBlockBorderData.h>
 #include <KInlineNote.h>
 #include <KInlineTextObjectManager.h>
-#include <KoShape.h>
+#include <KShape.h>
 #include <KUnit.h>
 #include <KoTextDocument.h>
 #include <KChangeTracker.h>
@@ -843,7 +843,7 @@ void Layout::nextShape()
     m_data = 0;
     m_textShape = 0;
 
-    QList<KoShape *> shapes = m_parent->shapes();
+    QList<KShape *> shapes = m_parent->shapes();
     for (shapeNumber++; shapeNumber < shapes.count(); shapeNumber++) {
         shape = shapes[shapeNumber];
         m_data = qobject_cast<KoTextShapeData*>(shape->userData());
@@ -875,12 +875,12 @@ void Layout::nextShape()
 void Layout::cleanupShapes()
 {
     int i = shapeNumber + 1;
-    QList<KoShape *> shapes = m_parent->shapes();
+    QList<KShape *> shapes = m_parent->shapes();
     while (i < shapes.count())
         cleanupShape(shapes[i++]);
 }
 
-void Layout::cleanupShape(KoShape *daShape)
+void Layout::cleanupShape(KShape *daShape)
 {
     TextShape *ts = dynamic_cast<TextShape*>(daShape);
     if (ts) {
@@ -934,8 +934,8 @@ void Layout::resetPrivate()
 
     shapeNumber = 0;
     int lastPos = -1;
-    QList<KoShape *> shapes = m_parent->shapes();
-    foreach(KoShape *shape, shapes) {
+    QList<KShape *> shapes = m_parent->shapes();
+    foreach(KShape *shape, shapes) {
         KoTextShapeData *data = qobject_cast<KoTextShapeData*>(shape->userData());
         Q_ASSERT(data);
         if (data->isDirty()) {
@@ -1811,7 +1811,7 @@ void Layout::drawListItem(QPainter *painter, const QTextBlock &block, KImageColl
     }
 }
 
-bool Layout::setFollowupShape(KoShape *followupShape)
+bool Layout::setFollowupShape(KShape *followupShape)
 {
     if (m_demoText)
         return false;
@@ -1877,7 +1877,7 @@ bool Layout::previousParag()
     m_newParag = true;
 
     if (m_data->position() > m_block.position()) { // go back a shape.
-        QList<KoShape *> shapes = m_parent->shapes();
+        QList<KShape *> shapes = m_parent->shapes();
         for (--shapeNumber; shapeNumber >= 0; shapeNumber--) {
             shape = shapes[shapeNumber];
             m_textShape = dynamic_cast<TextShape*>(shape);

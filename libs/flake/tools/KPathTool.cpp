@@ -311,7 +311,7 @@ void KPathTool::convertToPath()
 {
     Q_D(KoToolBase);
     QList<KParameterShape*> shapesToConvert;
-    foreach(KoShape *shape, m_pointSelection.selectedShapes()) {
+    foreach(KShape *shape, m_pointSelection.selectedShapes()) {
         KParameterShape * parameterShape = dynamic_cast<KParameterShape*>(shape);
         if (parameterShape && parameterShape->isParametricShape())
             shapesToConvert.append(parameterShape);
@@ -441,7 +441,7 @@ void KPathTool::paint(QPainter &painter, const KoViewConverter &converter)
 
     if (m_currentStrategy) {
         painter.save();
-        KoShape::applyConversion(painter, converter);
+        KShape::applyConversion(painter, converter);
         d->canvas->snapGuide()->paint(painter, converter);
         painter.restore();
     }
@@ -449,7 +449,7 @@ void KPathTool::paint(QPainter &painter, const KoViewConverter &converter)
 
 void KPathTool::repaintDecorations()
 {
-    foreach(KoShape *shape, m_pointSelection.selectedShapes()) {
+    foreach(KShape *shape, m_pointSelection.selectedShapes()) {
         repaint(shape->boundingRect());
     }
 
@@ -826,7 +826,7 @@ bool KPathTool::segmentAtPoint(const QPointF &point, KPathShape* &shape, KPathPo
     return (shape && segmentStart);
 }
 
-void KPathTool::activate(ToolActivation toolActivation, const QSet<KoShape*> &shapes)
+void KPathTool::activate(ToolActivation toolActivation, const QSet<KShape*> &shapes)
 {
     Q_D(KoToolBase);
     Q_UNUSED(toolActivation);
@@ -836,7 +836,7 @@ void KPathTool::activate(ToolActivation toolActivation, const QSet<KoShape*> &sh
 
     repaintDecorations();
     QList<KPathShape*> selectedShapes;
-    foreach(KoShape *shape, shapes) {
+    foreach(KShape *shape, shapes) {
         KPathShape *pathShape = dynamic_cast<KPathShape*>(shape);
 
         if (shape->isEditable() && pathShape) {
@@ -861,9 +861,9 @@ void KPathTool::activate(ToolActivation toolActivation, const QSet<KoShape*> &sh
 void KPathTool::activate()
 {
     Q_D(KoToolBase);
-    QSet<KoShape*> shapes;
-    foreach(KoShape *shape, d->canvas->shapeManager()->selection()->selectedShapes()) {
-        QSet<KoShape*> delegates = shape->toolDelegates();
+    QSet<KShape*> shapes;
+    foreach(KShape *shape, d->canvas->shapeManager()->selection()->selectedShapes()) {
+        QSet<KShape*> delegates = shape->toolDelegates();
         if (delegates.isEmpty()) {
             shapes << shape;
         } else {

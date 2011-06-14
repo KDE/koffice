@@ -21,8 +21,8 @@
  */
 
 #include "KCanvasController_p.h"
-#include "KoShape.h"
-#include "KoShape_p.h"
+#include "KShape.h"
+#include "KShape_p.h"
 #include "KoShapeFactoryBase.h" // for the SHAPE mimetypes
 #include "KoShapeRegistry.h"
 #include "KoShapeController.h"
@@ -162,7 +162,7 @@ void Viewport::handleDragEnterEvent(QDragEnterEvent *event)
         KoShapeManager *sm = m_parent->canvas()->shapeManager();
         KoShapePaste paste(m_parent->canvas(), sm->selection()->activeLayer());
         if (paste.paste(KOdf::TextDocument, data)) {
-            QList<KoShape *> shapes = paste.pastedShapes();
+            QList<KShape *> shapes = paste.pastedShapes();
             Q_ASSERT(!shapes.isEmpty());
             if (shapes.count() > 1) {
                 Q_ASSERT(0); // hmm hmm, when does this happen?
@@ -192,7 +192,7 @@ void Viewport::handleDropEvent(QDropEvent *event)
         KSelection *selection = m_parent->canvas()->shapeManager()->selection();
 
         // repaint selection before selecting newly create shape
-        foreach(KoShape * shape, selection->selectedShapes())
+        foreach(KShape * shape, selection->selectedShapes())
             shape->update();
 
         selection->deselectAll();
@@ -225,7 +225,7 @@ void Viewport::handleDragMoveEvent(QDragMoveEvent *event)
     repaint(m_draggedShape);
 }
 
-void Viewport::repaint(KoShape *shape)
+void Viewport::repaint(KShape *shape)
 {
     QRect rect = m_parent->canvas()->viewConverter()->documentToView(shape->boundingRect()).toRect();
     QWidget *canvasWidget = m_parent->canvas()->canvasWidget();

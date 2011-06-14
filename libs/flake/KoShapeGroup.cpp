@@ -73,10 +73,10 @@ void KoShapeGroup::saveOdf(KoShapeSavingContext & context) const
     saveOdfAttributes(context, (OdfMandatories ^ OdfLayer) | OdfAdditionalAttributes);
     context.xmlWriter().addAttributePt("svg:y", position().y());
 
-    QList<KoShape*> shapes = this->shapes();
-    qSort(shapes.begin(), shapes.end(), KoShape::compareShapeZIndex);
+    QList<KShape*> shapes = this->shapes();
+    qSort(shapes.begin(), shapes.end(), KShape::compareShapeZIndex);
 
-    foreach(KoShape* shape, shapes) {
+    foreach(KShape* shape, shapes) {
         shape->saveOdf(context);
     }
 
@@ -91,7 +91,7 @@ bool KoShapeGroup::loadOdf(const KXmlElement & element, KoShapeLoadingContext &c
     KXmlElement child;
     QMap<KoShapeLayer*, int> usedLayers;
     forEachElement(child, element) {
-        KoShape * shape = KoShapeRegistry::instance()->createShapeFromOdf(child, context);
+        KShape * shape = KoShapeRegistry::instance()->createShapeFromOdf(child, context);
         if (shape) {
             KoShapeLayer *layer = dynamic_cast<KoShapeLayer*>(shape->parent());
             if (layer) {
@@ -113,7 +113,7 @@ bool KoShapeGroup::loadOdf(const KXmlElement & element, KoShapeLoadingContext &c
 
     QRectF bound;
     bool boundInitialized = false;
-    foreach(KoShape * shape, shapes()) {
+    foreach(KShape * shape, shapes()) {
         if (! boundInitialized) {
             bound = shape->boundingRect();
             boundInitialized = true;
@@ -124,17 +124,17 @@ bool KoShapeGroup::loadOdf(const KXmlElement & element, KoShapeLoadingContext &c
     setSize(bound.size());
     setPosition(bound.topLeft());
 
-    foreach(KoShape * shape, shapes())
+    foreach(KShape * shape, shapes())
         shape->setAbsolutePosition(shape->absolutePosition() - bound.topLeft());
 
     return true;
 }
 
-void KoShapeGroup::shapeChanged(ChangeType type, KoShape *shape)
+void KoShapeGroup::shapeChanged(ChangeType type, KShape *shape)
 {
     Q_UNUSED(shape);
     switch (type) {
-    case KoShape::BorderChanged:
+    case KShape::BorderChanged:
     {
         KoShapeBorderBase *stroke = border();
         if (stroke) {
@@ -144,7 +144,7 @@ void KoShapeGroup::shapeChanged(ChangeType type, KoShape *shape)
         }
         break;
     }
-    case KoShape::ShadowChanged:
+    case KShape::ShadowChanged:
     {
         KoShapeShadow *shade = shadow();
         if (shade) {
