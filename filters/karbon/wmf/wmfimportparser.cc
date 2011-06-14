@@ -24,7 +24,7 @@
 #include <KoPathShape.h>
 #include <KoLineBorder.h>
 #include <KoShapeLayer.h>
-#include <KoImageData.h>
+#include <KImageData.h>
 #include <KImageCollection.h>
 #include <KoColorBackground.h>
 #include <KGradientBackground.h>
@@ -433,7 +433,7 @@ void WMFImportParser::drawPolyPolygon(QList<QPolygon>& listPa, bool winding)
 
 void WMFImportParser::drawImage(int x, int y, const QImage &image, int sx, int sy, int sw, int sh)
 {
-    KoImageData * data = mDoc->imageCollection()->createImageData(image);
+    KImageData * data = mDoc->imageCollection()->createImageData(image);
     if (! data)
         return;
 

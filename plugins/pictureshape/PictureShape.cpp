@@ -23,7 +23,7 @@
 
 #include <KoViewConverter.h>
 #include <KImageCollection.h>
-#include <KoImageData.h>
+#include <KImageData.h>
 #include <KoShapeLoadingContext.h>
 #include <KOdfLoadingContext.h>
 #include <KoShapeSavingContext.h>
@@ -50,7 +50,7 @@ QString generate_key(qint64 key, const QSize & size)
 
 void RenderQueue::renderImage()
 {
-    KoImageData *imageData = qobject_cast<KoImageData*>(m_pictureShape->userData());
+    KImageData *imageData = qobject_cast<KImageData*>(m_pictureShape->userData());
     if (m_wantedImageSize.isEmpty() || imageData == 0) {
         return;
     }
@@ -90,7 +90,7 @@ PictureShape::~PictureShape()
 void PictureShape::paint(QPainter &painter, const KoViewConverter &converter)
 {
     QRectF pixelsF = converter.documentToView(QRectF(QPointF(0,0), size()));
-    KoImageData *imageData = qobject_cast<KoImageData*>(userData());
+    KImageData *imageData = qobject_cast<KImageData*>(userData());
     if (imageData == 0) {
         painter.fillRect(pixelsF, QColor(Qt::gray));
         return;
@@ -158,7 +158,7 @@ void PictureShape::paint(QPainter &painter, const KoViewConverter &converter)
 
 void PictureShape::waitUntilReady(const KoViewConverter &converter, bool asynchronous) const
 {
-    KoImageData *imageData = qobject_cast<KoImageData*>(userData());
+    KImageData *imageData = qobject_cast<KImageData*>(userData());
     if (imageData == 0) {
         return;
     }
@@ -188,7 +188,7 @@ void PictureShape::waitUntilReady(const KoViewConverter &converter, bool asynchr
 void PictureShape::saveOdf(KoShapeSavingContext &context) const
 {
     // make sure we have a valid image data pointer before saving
-    KoImageData *imageData = qobject_cast<KoImageData*>(userData());
+    KImageData *imageData = qobject_cast<KImageData*>(userData());
     if (imageData == 0) {
         return;
     }
@@ -227,7 +227,7 @@ bool PictureShape::loadOdfFrameElement(const KXmlElement &element, KoShapeLoadin
         // this can happen in case it is a presentation:placeholder
         if (!href.isEmpty()) {
             KOdfStore *store = context.odfLoadingContext().store();
-            KoImageData *data = m_imageCollection->createImageData(href, store);
+            KImageData *data = m_imageCollection->createImageData(href, store);
             setUserData(data);
         } else {
             // check if we have an office:binary data element containing the image data
@@ -235,7 +235,7 @@ bool PictureShape::loadOdfFrameElement(const KXmlElement &element, KoShapeLoadin
             if (!binaryData.isNull()) {
                 QImage image;
                 if (image.loadFromData(QByteArray::fromBase64(binaryData.text().toLatin1()))) {
-                    KoImageData *data = m_imageCollection->createImageData(image);
+                    KImageData *data = m_imageCollection->createImageData(image);
                     setUserData(data);
                 }
             }

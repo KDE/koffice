@@ -41,7 +41,7 @@
 #include <QPixmap>
 #include <QTimer>
 
-#include "KoImageData.h"
+#include "KImageData.h"
 
 class KImageCollection;
 class KTemporaryFile;
@@ -49,7 +49,7 @@ class KTemporaryFile;
 class KoImageDataPrivate
 {
 public:
-    KoImageDataPrivate(KoImageData *q);
+    KoImageDataPrivate(KImageData *q);
     virtual ~KoImageDataPrivate();
 
     /**
@@ -81,7 +81,7 @@ public:
     };
 
     KImageCollection *collection;
-    KoImageData::ErrorCode errorCode;
+    KImageData::ErrorCode errorCode;
     QSizeF imageSize;
     qint64 key;
     QString suffix; // the suffix of the picture e.g. png  TODO use a QByteArray ?

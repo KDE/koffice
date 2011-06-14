@@ -40,7 +40,7 @@
 #include <KoPathShapeLoader.h>
 #include <commands/KoShapeGroupCommand.h>
 #include <KUnit.h>
-#include <KoImageData.h>
+#include <KImageData.h>
 #include <KImageCollection.h>
 #include <pathshapes/rectangle/RectangleShape.h>
 #include <pathshapes/ellipse/EllipseShape.h>
@@ -1952,7 +1952,7 @@ KoShape * SvgParser::createObject(const KXmlElement &b, const SvgStyles &style)
 
             if (picture && imageCollection) {
                 // TODO use it already for loading
-                KoImageData * data = imageCollection->createImageData(img);
+                KImageData * data = imageCollection->createImageData(img);
 
                 picture->setUserData(data);
                 picture->setSize(QSizeF(w, h));

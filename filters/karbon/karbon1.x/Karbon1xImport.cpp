@@ -40,7 +40,7 @@
 #include <pathshapes/star/StarShape.h>
 #include <artistictextshape/ArtisticTextShape.h>
 #include <pictureshape/PictureShape.h>
-#include <KoImageData.h>
+#include <KImageData.h>
 #include <KImageCollection.h>
 #include <KoPathPoint.h>
 #include <KoZoomHandler.h>
@@ -1161,7 +1161,7 @@ KoShape * KarbonImport::loadImage(const KXmlElement &element)
         return 0;
     }
 
-    KoImageData * data = m_document->imageCollection()->createImageData(img.mirrored(false, true));
+    KImageData * data = m_document->imageCollection()->createImageData(img.mirrored(false, true));
     if (! data)
         return 0;
 

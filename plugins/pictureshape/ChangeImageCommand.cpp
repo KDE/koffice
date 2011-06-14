@@ -20,21 +20,21 @@
 
 #include <math.h>
 #include <klocale.h>
-#include <KoImageData.h>
+#include <KImageData.h>
 #include <KDebug>
 
 #include "PictureShape.h"
 
-ChangeImageCommand::ChangeImageCommand(PictureShape *shape, KoImageData *newImageData, QUndoCommand *parent)
+ChangeImageCommand::ChangeImageCommand(PictureShape *shape, KImageData *newImageData, QUndoCommand *parent)
 : QUndoCommand(parent)
 , m_shape(shape)
 , m_oldImageData(0)
 , m_newImageData(newImageData)
 {
     Q_ASSERT( shape );
-    KoImageData *oldImageData = qobject_cast<KoImageData*>(m_shape->userData());
+    KImageData *oldImageData = qobject_cast<KImageData*>(m_shape->userData());
     // we need new here as setUserData deletes the old data
-    m_oldImageData = oldImageData ? new KoImageData( *oldImageData ): 0;
+    m_oldImageData = oldImageData ? new KImageData( *oldImageData ): 0;
     setText(i18n("Change image"));
 
     m_oldSize = shape->size();
@@ -54,7 +54,7 @@ void ChangeImageCommand::redo()
 {
     m_shape->update();
     // we need new here as setUserData deletes the old data
-    m_shape->setUserData( m_newImageData ? new KoImageData( *m_newImageData ): 0 );
+    m_shape->setUserData( m_newImageData ? new KImageData( *m_newImageData ): 0 );
     m_shape->setSize( m_newSize );
     m_shape->update();
 }
@@ -63,7 +63,7 @@ void ChangeImageCommand::undo()
 {
     // we need new here as setUserData deletes the old data
     m_shape->update();
-    m_shape->setUserData( m_oldImageData ? new KoImageData( *m_oldImageData ): 0 );
+    m_shape->setUserData( m_oldImageData ? new KImageData( *m_oldImageData ): 0 );
     m_shape->setSize( m_oldSize );
     m_shape->update();
 }

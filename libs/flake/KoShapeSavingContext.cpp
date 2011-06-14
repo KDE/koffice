@@ -24,7 +24,7 @@
 #include "KoDataCenterBase.h"
 #include "KoShapeConnection.h"
 #include "KoShapeLayer.h"
-#include "KoImageData.h"
+#include "KImageData.h"
 
 #include <KXmlWriter.h>
 #include <KOdfStore.h>
@@ -199,7 +199,7 @@ void KoShapeSavingContext::clearLayers()
     d->layers.clear();
 }
 
-QString KoShapeSavingContext::imageHref(KoImageData * image)
+QString KoShapeSavingContext::imageHref(KImageData * image)
 {
     QMap<qint64, QString>::iterator it(d->imageNames.find(image->key()));
     if (it == d->imageNames.end()) {

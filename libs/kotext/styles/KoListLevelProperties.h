@@ -30,7 +30,7 @@
 class KoListStyle;
 class KoShapeLoadingContext;
 class KXmlWriter;
-class KoImageData;
+class KImageData;
 
 /**
  * Properties per list level.
@@ -106,8 +106,8 @@ public:
     void setHeight(qreal height);
     /// return the height (in pt) of the image bullet
     qreal height() const;
-    /// set the bullet image key (as from the KoImageData)
-    void setBulletImage(KoImageData *imageData);
+    /// set the bullet image key (as from the KImageData)
+    void setBulletImage(KImageData *imageData);
     /// set the listId used by all list-styles that together make 1 user defined list in an ODF file.
     void setListId(KoListStyle::ListIdType listId);
     /// return the listId used by all list-styles that together make 1 user defined list in an ODF file.

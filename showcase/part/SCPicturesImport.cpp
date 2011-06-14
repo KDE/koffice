@@ -22,7 +22,7 @@
 #include <KoShapeFactoryBase.h>
 #include <KoShapeRegistry.h>
 #include <KoShapeLayer.h>
-#include <KoImageData.h>
+#include <KImageData.h>
 #include <KImageCollection.h>
 #include <KoPAPage.h>
 #include <KoPAMasterPage.h>
@@ -85,7 +85,7 @@ void SCPicturesImport::pictureImported(KJob *job)
     if (shape) {
         KIO::StoredTransferJob *transferJob = qobject_cast<KIO::StoredTransferJob*>(job);
         Q_ASSERT(transferJob);
-        KoImageData *imageData = m_doc->resourceManager()->imageCollection()->createImageData(transferJob->data());
+        KImageData *imageData = m_doc->resourceManager()->imageCollection()->createImageData(transferJob->data());
         if (imageData->isValid()) {
             shape->setUserData(imageData);
 

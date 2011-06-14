@@ -23,7 +23,7 @@
 #include <KDebug>
 
 #include <KImageCollection.h>
-#include <KoImageData.h>
+#include <KImageData.h>
 #include <KoShape.h>
 #include <KoShapeFactoryBase.h>
 #include <KoShapeLayer.h>
@@ -207,7 +207,7 @@ QPixmap SCNotes::generateThumbnail(const QSize&)
 void SCNotes::updatePageThumbnail()
 {
     // set image at least to 150 dpi we might need more when printing
-    KoImageData *imageData = m_imageCollection->createImageData(m_doc->pageThumbnail(m_page, (m_thumbnailShape->size() * 150 / 72.).toSize()).toImage());
+    KImageData *imageData = m_imageCollection->createImageData(m_doc->pageThumbnail(m_page, (m_thumbnailShape->size() * 150 / 72.).toSize()).toImage());
     m_thumbnailShape->setUserData(imageData);
 }
 

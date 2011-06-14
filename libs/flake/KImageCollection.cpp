@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
  */
 #include "KImageCollection.h"
-#include "KoImageData.h"
-#include "KoImageData_p.h"
+#include "KImageData.h"
+#include "KImageData_p.h"
 #include "KoShapeSavingContext.h"
 
 #include <KOdfStorageDevice.h>
@@ -109,22 +109,22 @@ bool KImageCollection::completeSaving(KOdfStore *store, KXmlWriter *manifestWrit
     return true;
 }
 
-KoImageData *KImageCollection::createImageData(const QImage &image)
+KImageData *KImageCollection::createImageData(const QImage &image)
 {
     Q_ASSERT(!image.isNull());
-    KoImageData *data = new KoImageData();
+    KImageData *data = new KImageData();
     data->setImage(image);
 
     data = cacheImage(data);
     return data;
 }
 
-KoImageData *KImageCollection::createExternalImageData(const QString &localPath)
+KImageData *KImageCollection::createExternalImageData(const QString &localPath)
 {
     return createExternalImageData(QUrl::fromUserInput(localPath));
 }
 
-KoImageData *KImageCollection::createExternalImageData(const QUrl &url)
+KImageData *KImageCollection::createExternalImageData(const QUrl &url)
 {
     Q_ASSERT(!url.isEmpty() && url.isValid());
 
@@ -132,8 +132,8 @@ KoImageData *KImageCollection::createExternalImageData(const QUrl &url)
     md5.addData(url.toEncoded());
     qint64 key = KoImageDataPrivate::generateKey(md5.result());
     if (d->images.contains(key))
-        return new KoImageData(d->images.value(key));
-    KoImageData *data = new KoImageData();
+        return new KImageData(d->images.value(key));
+    KImageData *data = new KImageData();
     data->setExternalImage(url);
     data->priv()->collection = this;
     Q_ASSERT(data->key() == key);
@@ -141,7 +141,7 @@ KoImageData *KImageCollection::createExternalImageData(const QUrl &url)
     return data;
 }
 
-KoImageData *KImageCollection::createImageData(const QString &href, KOdfStore *store)
+KImageData *KImageCollection::createImageData(const QString &href, KOdfStore *store)
 {
     // the tricky thing with a 'store' is that we need to read the data now
     // as the store will no longer be readable after the loading completed.
@@ -154,9 +154,9 @@ KoImageData *KImageCollection::createImageData(const QString &href, KOdfStore *s
     //
     QByteArray storeKey = (QString::number((qint64) store) + href).toLatin1();
     if (d->storeImages.contains(storeKey))
-        return new KoImageData(d->storeImages.value(storeKey));
+        return new KImageData(d->storeImages.value(storeKey));
 
-    KoImageData *data = new KoImageData();
+    KImageData *data = new KImageData();
     data->setImage(href, store);
 
     data = cacheImage(data);
@@ -164,14 +164,14 @@ KoImageData *KImageCollection::createImageData(const QString &href, KOdfStore *s
     return data;
 }
 
-KoImageData *KImageCollection::createImageData(const QByteArray &imageData)
+KImageData *KImageCollection::createImageData(const QByteArray &imageData)
 {
     QCryptographicHash md5(QCryptographicHash::Md5);
     md5.addData(imageData);
     qint64 key = KoImageDataPrivate::generateKey(md5.result());
     if (d->images.contains(key))
-        return new KoImageData(d->images.value(key));
-    KoImageData *data = new KoImageData();
+        return new KImageData(d->images.value(key));
+    KImageData *data = new KImageData();
     data->setImage(imageData);
     data->priv()->collection = this;
     Q_ASSERT(data->key() == key);
@@ -179,7 +179,7 @@ KoImageData *KImageCollection::createImageData(const QByteArray &imageData)
     return data;
 }
 
-KoImageData *KImageCollection::cacheImage(KoImageData *data)
+KImageData *KImageCollection::cacheImage(KImageData *data)
 {
     QMap<qint64, KoImageDataPrivate*>::const_iterator it(d->images.constFind(data->key()));
     if (it == d->images.constEnd()) {
@@ -188,15 +188,15 @@ KoImageData *KImageCollection::cacheImage(KoImageData *data)
     }
     else {
         delete data;
-        data = new KoImageData(it.value());
+        data = new KImageData(it.value());
     }
     return data;
 }
 
-bool KImageCollection::fillFromKey(KoImageData &idata, qint64 key)
+bool KImageCollection::fillFromKey(KImageData &idata, qint64 key)
 {
     if (d->images.contains(key)) {
-        idata = KoImageData(d->images.value(key));
+        idata = KImageData(d->images.value(key));
         return true;
     }
     return false;

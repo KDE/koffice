@@ -27,7 +27,7 @@
 class KImageCollection;
 class KOdfLoadingContext;
 class KoPatternBackgroundPrivate;
-class KoImageData;
+class KImageData;
 
 /// A pattern shape background
 class FLAKE_EXPORT KoPatternBackground : public KoShapeBackground
@@ -67,7 +67,7 @@ public:
     void setPattern(const QImage &pattern);
 
     /// Sets a new pattern. imageData memory is deleted inside this class
-    void setPattern(KoImageData *imageData);
+    void setPattern(KImageData *imageData);
 
     /// Returns the pattern
     QImage pattern();

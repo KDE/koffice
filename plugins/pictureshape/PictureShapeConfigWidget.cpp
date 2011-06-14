@@ -20,7 +20,7 @@
 #include "PictureShapeConfigWidget.h"
 #include "PictureShape.h"
 
-#include <KoImageData.h>
+#include <KImageData.h>
 #include <KoImageSelectionWidget.h>
 
 #include <KDebug>
@@ -51,7 +51,7 @@ void PictureShapeConfigWidget::save()
 {
     if (!m_shape)
         return;
-    KoImageData *data = m_selectionWidget->imageData();
+    KImageData *data = m_selectionWidget->imageData();
     if (data) {
         m_shape->setUserData(data);
         m_shape->setSize(data->imageSize());

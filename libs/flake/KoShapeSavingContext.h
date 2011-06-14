@@ -34,7 +34,7 @@ class KXmlWriter;
 class KOdfGenericStyles;
 class KoDataCenterBase;
 class KOdfEmbeddedDocumentSaver;
-class KoImageData;
+class KImageData;
 class KoShapeLayer;
 class KOdfStore;
 class KoSharedSavingData;
@@ -194,7 +194,7 @@ public:
     /**
      * Get the image href under which the image will be saved in the store
      */
-    QString imageHref(KoImageData *image);
+    QString imageHref(KImageData *image);
 
     /**
      * Get the image href under which the image will be save in the store

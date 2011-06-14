@@ -50,7 +50,7 @@
 #include <plugins/artistictextshape/ArtisticTextShape.h>
 #include <pathshapes/rectangle/RectangleShape.h>
 #include <pathshapes/ellipse/EllipseShape.h>
-#include <KoImageData.h>
+#include <KImageData.h>
 #include "KFilterEffect.h"
 #include "KFilterEffectStack.h"
 #include "KXmlWriter.h"
@@ -712,7 +712,7 @@ void SvgExport::saveText(ArtisticTextShape * text)
 
 void SvgExport::saveImage(KoShape *picture)
 {
-    KoImageData *imageData = qobject_cast<KoImageData*>(picture->userData());
+    KImageData *imageData = qobject_cast<KImageData*>(picture->userData());
     if (! imageData) {
         qWarning() << "Picture has no image data. Omitting.";
         return;
@@ -747,7 +747,7 @@ void SvgExport::saveImage(KoShape *picture)
         // write to a temp file first
         KTemporaryFile imgFile;
         if (imageData->saveData(imgFile)) {
-            // tz: TODO the new version of KoImageData has the extension save inside maybe that can be used
+            // tz: TODO the new version of KImageData has the extension save inside maybe that can be used
             // get the mime type from the temp file content
             KMimeType::Ptr mimeType = KMimeType::findByFileContent(imgFile.fileName());
             // get url of destination directory

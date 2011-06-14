@@ -19,7 +19,7 @@
  */
 #include "TestImageCollection.h"
 
-#include <KoImageData.h>
+#include <KImageData.h>
 #include <KImageCollection.h>
 #include <KOdfStore.h>
 
@@ -35,18 +35,18 @@ void TestImageCollection::testGetImageImage()
     KImageCollection collection;
     QImage image(KDESRCDIR "/logo-koffice.png");
 
-    KoImageData *id1 = collection.createImageData(image);
+    KImageData *id1 = collection.createImageData(image);
     QCOMPARE(id1->hasCachedImage(), true);
     QCOMPARE(id1->suffix(), QString("png"));
-    KoImageData *id2 = collection.createImageData(image);
+    KImageData *id2 = collection.createImageData(image);
     QCOMPARE(id2->hasCachedImage(), true);
     QCOMPARE(id1->priv(), id2->priv());
-    KoImageData *id3 = collection.createImageData(image);
+    KImageData *id3 = collection.createImageData(image);
     QCOMPARE(id3->hasCachedImage(), true);
     QCOMPARE(id1->key(), id3->key());
     QCOMPARE(id1->priv(), id3->priv());
     QImage image2(KDESRCDIR "/logo-kpresenter.png");
-    KoImageData *id4 = collection.createImageData(image2);
+    KImageData *id4 = collection.createImageData(image2);
     QCOMPARE(id4->hasCachedImage(), true);
     QVERIFY(id1->key() != id4->key());
     QCOMPARE(collection.count(), 2);
@@ -67,7 +67,7 @@ void TestImageCollection::testGetImageImage()
 
     // add an image bigger than the allowed size to be held in memory
     QImage hugeImage(500, 500, QImage::Format_RGB32);
-    KoImageData *id5 = collection.createImageData(hugeImage);
+    KImageData *id5 = collection.createImageData(hugeImage);
     delete id5;
 }
 
@@ -75,17 +75,17 @@ void TestImageCollection::testGetExternalImage()
 {
     KImageCollection collection;
     QUrl url = QUrl::fromUserInput(KDESRCDIR "/logo-koffice.png");
-    KoImageData *id1 = collection.createExternalImageData(url);
+    KImageData *id1 = collection.createExternalImageData(url);
     QCOMPARE(id1->suffix(), QString("png"));
     QCOMPARE(id1->hasCachedImage(), false);
-    KoImageData *id2 = collection.createExternalImageData(url);
+    KImageData *id2 = collection.createExternalImageData(url);
     QCOMPARE(id2->hasCachedImage(), false);
     QCOMPARE(id1->priv(), id2->priv());
-    KoImageData *id3 = collection.createExternalImageData(url);
+    KImageData *id3 = collection.createExternalImageData(url);
     QCOMPARE(id1->key(), id3->key());
     QCOMPARE(id1->priv(), id3->priv());
     KUrl url2(KDESRCDIR "/logo-kpresenter.png");
-    KoImageData *id4 = collection.createExternalImageData(url2);
+    KImageData *id4 = collection.createExternalImageData(url2);
     QCOMPARE(id4->hasCachedImage(), false);
     QVERIFY(id1->key() != id4->key());
     QCOMPARE(collection.size(), 2);
@@ -98,10 +98,10 @@ void TestImageCollection::testGetImageStore()
     KImageCollection collection;
     KOdfStore *store = KOdfStore::createStore(KDESRCDIR "/store.zip", KOdfStore::Read);
     QString image("logo-koffice.jpg");
-    KoImageData *id1 = collection.createImageData(image, store);
+    KImageData *id1 = collection.createImageData(image, store);
     QCOMPARE(id1->suffix(), QString("jpg"));
     QCOMPARE(id1->hasCachedImage(), false);
-    KoImageData *id2 = collection.createImageData(image, store);
+    KImageData *id2 = collection.createImageData(image, store);
     QCOMPARE(id2->hasCachedImage(), false);
     QCOMPARE(id1->priv(), id2->priv());
     QCOMPARE(id1->key(), id2->key());
@@ -115,12 +115,12 @@ void TestImageCollection::testGetImageStore()
     // Opening a KOdfStore based file we only have the content, and we always have to
     // read the full content anyway due to the store being deleted soon after.
     // So the key is based on the image data.
-    KoImageData *id3 = collection.createExternalImageData(image);
+    KImageData *id3 = collection.createExternalImageData(image);
     QCOMPARE(collection.count(), 2);
     QVERIFY(id1->key() != id3->key());
     QVERIFY(id1->priv() != id3->priv());
     QString image2("logo-kpresenter.png");
-    KoImageData *id4 = collection.createExternalImageData(image2);
+    KImageData *id4 = collection.createExternalImageData(image2);
     QCOMPARE(id4->hasCachedImage(), false);
     QVERIFY(id1->key() != id4->key());
     QCOMPARE(collection.count(), 3);
@@ -133,10 +133,10 @@ void TestImageCollection::testInvalidImageData()
 {
     KImageCollection collection;
     QByteArray invalidImageData(100, '^');
-    KoImageData *data = collection.createImageData(invalidImageData);
+    KImageData *data = collection.createImageData(invalidImageData);
     QVERIFY(data);
     QVERIFY(!data->isValid());
-    QVERIFY(data->errorCode() == KoImageData::OpenFailed);
+    QVERIFY(data->errorCode() == KImageData::OpenFailed);
     QCOMPARE(collection.count(), 1);
     QBuffer storedData;
     QVERIFY(!data->saveData(storedData)); // should fail if QIODevice is closed
@@ -148,7 +148,7 @@ void TestImageCollection::testInvalidImageData()
 
 void TestImageCollection::testImageDataAsSharedData()
 {
-    KoImageData data;
+    KImageData data;
     QCOMPARE(data.isValid(), false);
 
     QImage image(100, 101, QImage::Format_RGB32);
@@ -157,14 +157,14 @@ void TestImageCollection::testImageDataAsSharedData()
     QCOMPARE(data.hasCachedImage(), true);
     QCOMPARE(data.image(), image);
 
-    KoImageData data2(data);
+    KImageData data2(data);
     QCOMPARE(data, data2);
     QCOMPARE(data.isValid(), true);
     QCOMPARE(data.image(), image);
     QCOMPARE(data2.isValid(), true);
     QCOMPARE(data2.image(), image);
     {
-        KoImageData data3;
+        KImageData data3;
         data3 = data;
         QCOMPARE(data3.isValid(), true);
         QCOMPARE(data3.image(), image);
@@ -175,13 +175,13 @@ void TestImageCollection::testImageDataAsSharedData()
     QCOMPARE(data2.isValid(), true);
     QCOMPARE(data2.image(), image);
 
-    KoImageData empty;
-    KoImageData second(empty);
+    KImageData empty;
+    KImageData second(empty);
 }
 
 void TestImageCollection::testPreload1()
 {
-    KoImageData data;
+    KImageData data;
     QImage image(100, 102, QImage::Format_RGB32);
     data.setImage(image);
     QCOMPARE(data.hasCachedImage(), true);
@@ -201,7 +201,7 @@ void TestImageCollection::testPreload1()
 
 void TestImageCollection::testPreload2()
 {
-    KoImageData data;
+    KImageData data;
     data.setExternalImage(KDESRCDIR "/logo-koffice.png");
 
     QCOMPARE(data.hasCachedImage(), false);
@@ -222,7 +222,7 @@ void TestImageCollection::testPreload2()
 
 void TestImageCollection::testPreload3()
 {
-    KoImageData data;
+    KImageData data;
     KOdfStore *store = KOdfStore::createStore(KDESRCDIR "/store.zip", KOdfStore::Read);
     QString image("logo-koffice.png");
     data.setImage(image, store);
@@ -256,10 +256,10 @@ void TestImageCollection::testSameKey()
 {
     KOdfStore *store = KOdfStore::createStore(KDESRCDIR "/store.zip", KOdfStore::Read);
     QString image("logo-koffice.png");
-    KoImageData data;
+    KImageData data;
     data.setImage(image, store);
 
-    KoImageData data2;
+    KImageData data2;
     data2.setImage(image, store);
 
     QCOMPARE(data.key(), data2.key());
@@ -267,31 +267,31 @@ void TestImageCollection::testSameKey()
     QFile file(KDESRCDIR "/logo-koffice.png");
     file.open(QIODevice::ReadOnly);
     QByteArray imageData = file.readAll();
-    KoImageData data3;
+    KImageData data3;
     data3.setImage(imageData);
     QCOMPARE(data.key(), data3.key());
     QCOMPARE(data2.key(), data3.key());
 
     QImage qImage1(KDESRCDIR "/logo-koffice.png");
     QImage qImage2(KDESRCDIR "/logo-koffice.png");
-    KoImageData data4;
+    KImageData data4;
     data4.setImage(qImage1);
-    KoImageData data5;
+    KImageData data5;
     data5.setImage(qImage2);
     QCOMPARE(data4.key(), data5.key());
 
     QImage qImage3(KDESRCDIR "/logo-koffice-big.png");
     QImage qImage4(KDESRCDIR "/logo-koffice-big.png");
-    KoImageData data6;
+    KImageData data6;
     data6.setImage(qImage3);
-    KoImageData data7;
+    KImageData data7;
     data7.setImage(qImage4);
     QCOMPARE(data6.key(), data7.key());
 }
 
 void TestImageCollection::testIsValid()
 {
-    KoImageData data;
+    KImageData data;
     QCOMPARE(data.isValid(), false);
 
     QImage image(100, 102, QImage::Format_RGB32);

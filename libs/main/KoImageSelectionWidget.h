@@ -26,7 +26,7 @@
 #include <QtCore/QMap>
 
 class KImageCollection;
-class KoImageData;
+class KImageData;
 class KoShape;
 class KoResourceManager;
 
@@ -40,9 +40,9 @@ public:
     /// return if the user selected a valid image and we successfully downloaded it.
     bool hasValidImage() const;
     /// return the image data resulting from the users choice
-    KoImageData *imageData() const;
+    KImageData *imageData() const;
 
-    static KoImageData *selectImage(KImageCollection *collection, QWidget *parent);
+    static KImageData *selectImage(KImageCollection *collection, QWidget *parent);
     static KoShape *selectImageShape(KoResourceManager *documentResourceManager, QWidget *parent);
 
 signals:

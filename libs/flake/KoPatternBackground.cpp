@@ -20,7 +20,7 @@
 #include "KoPatternBackground.h"
 #include "KoShapeBackground_p.h"
 #include "KoShapeSavingContext.h"
-#include "KoImageData.h"
+#include "KImageData.h"
 #include "KImageCollection.h"
 #include <KOdfStyleStack.h>
 #include <KOdfGenericStyle.h>
@@ -123,7 +123,7 @@ public:
     QPointF refPointOffsetPercent;
     QPointF tileRepeatOffsetPercent;
     KImageCollection * imageCollection;
-    KoImageData * imageData;
+    KImageData * imageData;
 };
 
 
@@ -163,7 +163,7 @@ void KoPatternBackground::setPattern(const QImage &pattern)
     d->imageData = d->imageCollection->createImageData(pattern);
 }
 
-void KoPatternBackground::setPattern(KoImageData *imageData)
+void KoPatternBackground::setPattern(KImageData *imageData)
 {
     Q_D(KoPatternBackground);
     if (d->imageData)
@@ -272,7 +272,7 @@ KoPatternBackground &KoPatternBackground::operator = (const KoPatternBackground 
             *(d->imageData) = *(otherD->imageData);
         }
         else {
-            d->imageData = new KoImageData(*otherD->imageData);
+            d->imageData = new KImageData(*otherD->imageData);
         }
     } else {
         delete d->imageData;

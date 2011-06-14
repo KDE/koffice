@@ -40,7 +40,7 @@
 #include <KoInlineTextObjectManager.h>
 #include <KoColorBackground.h>
 #include <KImageCollection.h>
-#include <KoImageData.h>
+#include <KImageData.h>
 #include <KOdfBorders.h>
 
 // KDE + Qt includes
@@ -493,7 +493,7 @@ void KWDLoader::loadFrameSet(const KXmlElement &framesetElem)
 
         KImageCollection *collection = m_document->resourceManager()->imageCollection();
         Q_ASSERT(collection);
-        KoImageData *data = collection->createImageData(imageKey.filename, m_store);
+        KImageData *data = collection->createImageData(imageKey.filename, m_store);
         shape->setUserData(data);
 
         KWFrame *f = new KWFrame(shape, fs);

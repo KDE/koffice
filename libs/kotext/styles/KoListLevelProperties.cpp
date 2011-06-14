@@ -34,7 +34,7 @@
 #include <KUnit.h>
 #include <KoText.h>
 #include <KImageCollection.h>
-#include <KoImageData.h>
+#include <KImageData.h>
 
 class KoListLevelProperties::Private
 {
@@ -292,7 +292,7 @@ qreal KoListLevelProperties::height() const
     return propertyDouble(KoListStyle::Height);
 }
 
-void KoListLevelProperties::setBulletImage(KoImageData *imageData)
+void KoListLevelProperties::setBulletImage(KImageData *imageData)
 {
     setProperty(KoListStyle::BulletImageKey, imageData->key());
 }

@@ -20,7 +20,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoImageData_p.h"
+#include "KImageData_p.h"
 #include "KImageCollection.h"
 
 #include <KTemporaryFile>
@@ -30,9 +30,9 @@
 #include <KDebug>
 #include <QBuffer>
 
-KoImageDataPrivate::KoImageDataPrivate(KoImageData *q)
+KoImageDataPrivate::KoImageDataPrivate(KImageData *q)
     : collection(0),
-    errorCode(KoImageData::Success),
+    errorCode(KImageData::Success),
     key(0),
     refCount(0),
     dataStoreState(StateEmpty),
@@ -107,10 +107,10 @@ void KoImageDataPrivate::copyToTemporary(QIODevice &device)
 {
     delete temporaryFile;
     temporaryFile = new KTemporaryFile();
-    temporaryFile->setPrefix("KoImageData");
+    temporaryFile->setPrefix("KImageData");
     if (!temporaryFile->open()) {
         kWarning(30006) << "open temporary file for writing failed";
-        errorCode = KoImageData::StorageFailed;
+        errorCode = KImageData::StorageFailed;
         return;
     }
     QCryptographicHash md5(QCryptographicHash::Md5);
@@ -142,7 +142,7 @@ void KoImageDataPrivate::cleanupImageCache()
 
 void KoImageDataPrivate::clear()
 {
-    errorCode = KoImageData::Success;
+    errorCode = KImageData::Success;
     dataStoreState = StateEmpty;
     imageLocation.clear();
     imageSize = QSizeF();

@@ -21,7 +21,7 @@
 #define KWPRINTINGDIALOG_H
 
 #include <KoPrintingDialog.h>
-#include <KoImageData.h>
+#include <KImageData.h>
 
 #include <QMap>
 #include <QRectF>

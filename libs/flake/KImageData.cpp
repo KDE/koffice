@@ -20,10 +20,10 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoImageData.h"
+#include "KImageData.h"
 
 #include "KImageCollection.h"
-#include "KoImageData_p.h"
+#include "KImageData_p.h"
 
 #include <KUnit.h>
 #include <KOdfStore.h>
@@ -40,12 +40,12 @@
 /// spooling it to disk in a temp-file.
 #define MAX_MEMORY_IMAGESIZE 90000
 
-KoImageData::KoImageData()
+KImageData::KImageData()
     : d(0)
 {
 }
 
-KoImageData::KoImageData(const KoImageData &imageData)
+KImageData::KImageData(const KImageData &imageData)
     : KoShapeUserData(),
     d(imageData.d)
 {
@@ -53,19 +53,19 @@ KoImageData::KoImageData(const KoImageData &imageData)
         d->refCount.ref();
 }
 
-KoImageData::KoImageData(KoImageDataPrivate *priv)
+KImageData::KImageData(KoImageDataPrivate *priv)
     : d(priv)
 {
     d->refCount.ref();
 }
 
-KoImageData::~KoImageData()
+KImageData::~KImageData()
 {
     if (d && !d->refCount.deref())
         delete d;
 }
 
-QPixmap KoImageData::pixmap(const QSize &size)
+QPixmap KImageData::pixmap(const QSize &size)
 {
     if (!d) return QPixmap();
     QSize wantedSize = size;
@@ -107,12 +107,12 @@ QPixmap KoImageData::pixmap(const QSize &size)
     return d->pixmap;
 }
 
-bool KoImageData::hasCachedPixmap() const
+bool KImageData::hasCachedPixmap() const
 {
     return d && !d->pixmap.isNull();
 }
 
-QSizeF KoImageData::imageSize()
+QSizeF KImageData::imageSize()
 {
     if (!d->imageSize.isValid()) {
         // The imagesize have not yet been calculated
@@ -132,7 +132,7 @@ QSizeF KoImageData::imageSize()
     return d->imageSize;
 }
 
-QImage KoImageData::image() const
+QImage KImageData::image() const
 {
     if (d->dataStoreState == KoImageDataPrivate::StateNotLoaded) {
         // load image
@@ -151,18 +151,18 @@ QImage KoImageData::image() const
     return d->image;
 }
 
-bool KoImageData::hasCachedImage() const
+bool KImageData::hasCachedImage() const
 {
     return d && !d->image.isNull();
 }
 
-void KoImageData::setImage(const QImage &image, KImageCollection *collection)
+void KImageData::setImage(const QImage &image, KImageCollection *collection)
 {
     Q_ASSERT(!image.isNull());
     if (collection) {
         // let the collection first check if it already has one. If it doesn't it'll call this method
         // again and we'll go to the other clause
-        KoImageData *other = collection->createImageData(image);
+        KImageData *other = collection->createImageData(image);
         this->operator=(*other);
         delete other;
     } else {
@@ -201,17 +201,17 @@ void KoImageData::setImage(const QImage &image, KImageCollection *collection)
     }
 }
 
-void KoImageData::setExternalImage(const QString &location, KImageCollection *collection)
+void KImageData::setExternalImage(const QString &location, KImageCollection *collection)
 {
     setExternalImage(QUrl::fromUserInput(location), collection);
 }
 
-void KoImageData::setExternalImage(const QUrl &location, KImageCollection *collection)
+void KImageData::setExternalImage(const QUrl &location, KImageCollection *collection)
 {
     if (collection) {
         // let the collection first check if it already has one. If it doesn't it'll call this method
         // again and we'll go to the other clause
-        KoImageData *other = collection->createExternalImageData(location);
+        KImageData *other = collection->createExternalImageData(location);
         this->operator=(*other);
         delete other;
     } else {
@@ -230,13 +230,13 @@ void KoImageData::setExternalImage(const QUrl &location, KImageCollection *colle
     }
 }
 
-void KoImageData::setImage(const QString &url, KOdfStore *store, KImageCollection *collection)
+void KImageData::setImage(const QString &url, KOdfStore *store, KImageCollection *collection)
 {
     if (collection) {
         // Let the collection first check if it already has one. If it
         // doesn't it'll call this method again and we'll go to the
         // other clause.
-        KoImageData *other = collection->createImageData(url, store);
+        KImageData *other = collection->createImageData(url, store);
         this->operator=(*other);
         delete other;
     } else {
@@ -281,12 +281,12 @@ void KoImageData::setImage(const QString &url, KOdfStore *store, KImageCollectio
     }
 }
 
-void KoImageData::setImage(const QByteArray &imageData, KImageCollection *collection)
+void KImageData::setImage(const QByteArray &imageData, KImageCollection *collection)
 {
     if (collection) {
         // let the collection first check if it already has one. If it doesn't it'll call this method
         // again and we'll go to the other clause
-        KoImageData *other = collection->createImageData(imageData);
+        KImageData *other = collection->createImageData(imageData);
         this->operator=(*other);
         delete other;
     } else {
@@ -323,18 +323,18 @@ void KoImageData::setImage(const QByteArray &imageData, KImageCollection *collec
     }
 }
 
-bool KoImageData::isValid() const
+bool KImageData::isValid() const
 {
     return d && d->dataStoreState != KoImageDataPrivate::StateEmpty
         && d->errorCode == Success;
 }
 
-bool KoImageData::operator==(const KoImageData &other) const
+bool KImageData::operator==(const KImageData &other) const
 {
     return other.d == d;
 }
 
-KoImageData &KoImageData::operator=(const KoImageData &other)
+KImageData &KImageData::operator=(const KImageData &other)
 {
     if (other.d)
         other.d->refCount.ref();
@@ -344,24 +344,24 @@ KoImageData &KoImageData::operator=(const KoImageData &other)
     return *this;
 }
 
-qint64 KoImageData::key() const
+qint64 KImageData::key() const
 {
     return d->key;
 }
 
-QString KoImageData::suffix() const
+QString KImageData::suffix() const
 {
     return d->suffix;
 }
 
-KoImageData::ErrorCode KoImageData::errorCode() const
+KImageData::ErrorCode KImageData::errorCode() const
 {
     return d->errorCode;
 }
 
-bool KoImageData::saveData(QIODevice &device)
+bool KImageData::saveData(QIODevice &device)
 {
     return d->saveData(device);
 }
 
-#include <KoImageData.moc>
+#include <KImageData.moc>

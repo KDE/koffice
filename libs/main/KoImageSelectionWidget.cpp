@@ -20,7 +20,7 @@
 
 #include "KoImageSelectionWidget.h"
 
-#include <KoImageData.h>
+#include <KImageData.h>
 #include <KImageCollection.h>
 #include <KoShapeFactoryBase.h>
 #include <KoShapeRegistry.h>
@@ -40,7 +40,7 @@ class ImageFilePreview : public QWidget
 {
 public:
     ImageFilePreview(QWidget *parent = 0);
-    void showPreview(KoImageData *imageData);
+    void showPreview(KImageData *imageData);
 
 protected:
     virtual void paintEvent(QPaintEvent *paintEvent);
@@ -48,7 +48,7 @@ protected:
 
 private:
     QPixmap m_pixmap;
-    KoImageData *m_imageData;
+    KImageData *m_imageData;
 };
 
 ImageFilePreview::ImageFilePreview(QWidget *parent)
@@ -57,7 +57,7 @@ ImageFilePreview::ImageFilePreview(QWidget *parent)
 {
 }
 
-void ImageFilePreview::showPreview(KoImageData *imageData)
+void ImageFilePreview::showPreview(KImageData *imageData)
 {
     m_imageData = imageData;
     update();
@@ -110,7 +110,7 @@ public:
     QStackedWidget *stack;
     KFileWidget *fileWidget;
     ImageFilePreview *filePreview;
-    KoImageData *imageData;
+    KImageData *imageData;
 };
 
 void KoImageSelectionWidget::Private::acceptFileSelection()
@@ -171,13 +171,13 @@ bool KoImageSelectionWidget::hasValidImage() const
     return d->imageData && d->imageData->isValid();
 }
 
-KoImageData *KoImageSelectionWidget::imageData() const
+KImageData *KoImageSelectionWidget::imageData() const
 {
     return d->imageData;
 }
 
 // static
-KoImageData *KoImageSelectionWidget::selectImage(KImageCollection *collection, QWidget *parent)
+KImageData *KoImageSelectionWidget::selectImage(KImageCollection *collection, QWidget *parent)
 {
     KDialog *dialog = new KDialog(parent);
     dialog->setButtons(KDialog::Ok | KDialog::Cancel);
@@ -200,7 +200,7 @@ KoShape *KoImageSelectionWidget::selectImageShape(KoResourceManager *documentRes
         kWarning(30003) << "No picture shape found, installation problem";
         return 0;
     }
-    KoImageData *data = selectImage(documentResources->imageCollection(), parent);
+    KImageData *data = selectImage(documentResources->imageCollection(), parent);
     if (data) {
         KoShape *shape = factory->createDefaultShape(documentResources);
         shape->setUserData(data);

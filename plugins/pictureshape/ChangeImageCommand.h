@@ -23,13 +23,13 @@
 
 #include <QSizeF>
 
-class KoImageData;
+class KImageData;
 class PictureShape;
 
 class ChangeImageCommand : public QUndoCommand
 {
 public:
-    ChangeImageCommand(PictureShape *shape, KoImageData *newImageData, QUndoCommand *parent = 0);
+    ChangeImageCommand(PictureShape *shape, KImageData *newImageData, QUndoCommand *parent = 0);
     virtual ~ChangeImageCommand();
 
     /// redo the command
@@ -39,8 +39,8 @@ public:
 
 private:
     PictureShape *m_shape;
-    KoImageData *m_oldImageData;
-    KoImageData *m_newImageData;
+    KImageData *m_oldImageData;
+    KImageData *m_newImageData;
     QSizeF m_oldSize;
     QSizeF m_newSize;
 };

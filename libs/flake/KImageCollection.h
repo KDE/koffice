@@ -27,10 +27,10 @@
 class QImage;
 class QUrl;
 class KOdfStore;
-class KoImageData;
+class KImageData;
 
 /**
- * An collection of KoImageData objects to allow loading and saving them all together to the KOdfStore.
+ * An collection of KImageData objects to allow loading and saving them all together to the KOdfStore.
  * It also makes sure that if the same image is added to the collection that they share the internal data structure.
  */
 class FLAKE_EXPORT KImageCollection : public QObject, public KoDataCenterBase
@@ -53,59 +53,59 @@ public:
     /**
      * Create a data object for the image data.
      * The collection will create an image data in a way that if there is an
-     * existing data object with the same image the returned KoImageData will
+     * existing data object with the same image the returned KImageData will
      * share its data.
      * @param image a valid image which will be represented by the imageData.
-     * @see KoImageData::isValid()
+     * @see KImageData::isValid()
      */
-    KoImageData *createImageData(const QImage &image);
+    KImageData *createImageData(const QImage &image);
 
     /**
      * Create a data object for the image data.
      * The collection will create an image data in a way that if there is an
-     * existing data object with the same image the returned KoImageData will
+     * existing data object with the same image the returned KImageData will
      * share its data.
      * @param url a valid, local url to point to an image on the filesystem.
-     * @see KoImageData::isValid()
+     * @see KImageData::isValid()
      */
-    KoImageData *createExternalImageData(const QUrl &url);
+    KImageData *createExternalImageData(const QUrl &url);
 
     /**
      * Create a data object for the image data.
      * The collection will create an image data in a way that if there is an
-     * existing data object with the same image the returned KoImageData will
+     * existing data object with the same image the returned KImageData will
      * share its data.
      * @param localPath a valid, local path to point to an image on the filesystem.
-     * @see KoImageData::isValid()
+     * @see KImageData::isValid()
      */
-    KoImageData *createExternalImageData(const QString &localPath);
+    KImageData *createExternalImageData(const QString &localPath);
 
     /**
      * Create a data object for the image data.
      * The collection will create an image data in a way that if there is an
-     * existing data object with the same image the returned KoImageData will
+     * existing data object with the same image the returned KImageData will
      * share its data.
      * @param href the name of the image inside the store.
      * @param store the KOdfStore object.
-     * @see KoImageData::isValid()
+     * @see KImageData::isValid()
      */
-    KoImageData *createImageData(const QString &href, KOdfStore *store);
+    KImageData *createImageData(const QString &href, KOdfStore *store);
 
     /**
      * Create a data object for the image data.
      * The collection will create an image data in a way that if there is an
-     * existing data object with the same image the returned KoImageData will
+     * existing data object with the same image the returned KImageData will
      * share its data.
      * @param imageData the bytes that represent the image in a format like png.
-     * @see KoImageData::isValid()
+     * @see KImageData::isValid()
      */
-    KoImageData *createImageData(const QByteArray &imageData);
+    KImageData *createImageData(const QByteArray &imageData);
 
-    void add(const KoImageData &data);
-    void remove(const KoImageData &data);
+    void add(const KImageData &data);
+    void remove(const KImageData &data);
     void removeOnKey(qint64 imageDataKey);
 
-    bool fillFromKey(KoImageData &idata, qint64 imageDataKey);
+    bool fillFromKey(KImageData &idata, qint64 imageDataKey);
 
     /**
      * Get the number of images inside the collection
@@ -117,7 +117,7 @@ public:
     int count() const;
 
 private:
-    KoImageData *cacheImage(KoImageData *data);
+    KImageData *cacheImage(KImageData *data);
 
     class Private;
     Private * const d;

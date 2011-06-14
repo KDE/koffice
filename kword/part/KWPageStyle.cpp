@@ -426,7 +426,7 @@ void KWPageStyle::loadOdf(KOdfLoadingContext &context, const KXmlElement &master
 
             KImageCollection *imageCollection = documentResources->imageCollection();
             if (imageCollection != 0) {
-                KoImageData *imageData = imageCollection->createImageData(href,context.store());
+                KImageData *imageData = imageCollection->createImageData(href,context.store());
                 background->setPattern(imageData);
             }
         }

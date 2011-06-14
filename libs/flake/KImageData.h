@@ -49,7 +49,7 @@ class KOdfStore;
  * Such plugins are suggested to not make a copy of the pixmap data, but use the fact that this
  * image data caches one for every request to pixmap()
  */
-class FLAKE_EXPORT KoImageData : public KoShapeUserData
+class FLAKE_EXPORT KImageData : public KoShapeUserData
 {
     Q_OBJECT
 public:
@@ -62,15 +62,15 @@ public:
     };
 
     /// default constructor, creates an invalid imageData object
-    KoImageData();
+    KImageData();
 
     /**
      * copy constructor
      * @param imageData the other one.
      */
-    KoImageData(const KoImageData &imageData);
+    KImageData(const KImageData &imageData);
     /// destructor
-    virtual ~KoImageData();
+    virtual ~KImageData();
 
     /**
      * Renders a pixmap the first time you request it is called and returns it.
@@ -109,10 +109,10 @@ public:
      */
     QSizeF imageSize();
 
-    KoImageData &operator=(const KoImageData &other);
+    KImageData &operator=(const KImageData &other);
 
-    inline bool operator!=(const KoImageData &other) const { return !operator==(other); }
-    bool operator==(const KoImageData &other) const;
+    inline bool operator!=(const KImageData &other) const { return !operator==(other); }
+    bool operator==(const KImageData &other) const;
 
     /**
      * Get a unique key of the image data
@@ -133,7 +133,7 @@ protected:
     friend class KImageCollection;
 
     /// \internal
-    KoImageData(KoImageDataPrivate *priv);
+    KImageData(KoImageDataPrivate *priv);
 
 private:
     KoImageDataPrivate *d;

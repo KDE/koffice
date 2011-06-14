@@ -104,7 +104,7 @@
 #include <KoShapeFactoryBase.h>
 #include <KoShapeRegistry.h>
 #include <KImageCollection.h>
-#include <KoImageData.h>
+#include <KImageData.h>
 
 // kde header
 #include <kaction.h>

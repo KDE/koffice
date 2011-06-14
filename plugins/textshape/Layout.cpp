@@ -48,7 +48,7 @@
 #include <KoChangeTrackerElement.h>
 #include <KOdfGenericChange.h>
 #include <KoTextBlockPaintStrategyBase.h>
-#include <KoImageData.h>
+#include <KImageData.h>
 #include <KImageCollection.h>
 
 #include <KDebug>
@@ -1804,7 +1804,7 @@ void Layout::drawListItem(QPainter *painter, const QTextBlock &block, KImageColl
             qreal height = qMax(listFormat.doubleProperty(KoListStyle::Height), (qreal)1.0);
             qreal y = data->counterPosition().y() + fm.ascent() - fm.xHeight()/2 - height/2; // centered
             qint64 key = listFormat.property(KoListStyle::BulletImageKey).value<qint64>();
-            KoImageData idata;
+            KImageData idata;
             imageCollection->fillFromKey(idata, key);
             painter->drawPixmap(x, y, width, height, idata.pixmap());
         }

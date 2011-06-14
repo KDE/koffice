@@ -24,7 +24,7 @@
 #include <KUrl>
 #include <KImageCollection.h>
 #include <KoResourceManager.h>
-#include <KoImageData.h>
+#include <KImageData.h>
 #include <KoShape.h>
 #include <kio/netaccess.h>
 #include <kdebug.h>
@@ -53,7 +53,7 @@ KoShape *SCPlaceholderPictureStrategy::createShape(KoResourceManager *rm)
         if (KIO::NetAccess::download(url, tmpFile, 0)) {
             QImage image(tmpFile);
             //setSuffix(url.prettyUrl());
-            KoImageData *data = collection->createImageData(image);
+            KImageData *data = collection->createImageData(image);
             if (data->isValid()) {
                 shape->setUserData(data);
                 // TODO the pic should be fit into the space provided
