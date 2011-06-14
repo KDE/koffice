@@ -28,7 +28,7 @@
 class KoPathShape;
 
 /// The undo / redo command for setting the fill rule of a path shape
-class FLAKE_EXPORT KoPathFillRuleCommand : public QUndoCommand
+class FLAKE_EXPORT KPathFillRuleCommand : public QUndoCommand
 {
 public:
     /**
@@ -37,8 +37,8 @@ public:
      * @param fillRule the new fill rule
      * @param parent the parent command used for macro commands
      */
-    KoPathFillRuleCommand(const QList<KoPathShape*> &shapes, Qt::FillRule fillRule, QUndoCommand *parent = 0);
-    virtual ~KoPathFillRuleCommand();
+    KPathFillRuleCommand(const QList<KoPathShape*> &shapes, Qt::FillRule fillRule, QUndoCommand *parent = 0);
+    virtual ~KPathFillRuleCommand();
     /// redo the command
     void redo();
     /// revert the actions done in redo

@@ -136,7 +136,7 @@ set(flake_SRCS
     commands/KParameterHandleMoveCommand.cpp
     commands/KParameterToPathCommand.cpp
     commands/KoShapeTransformCommand.cpp
-    commands/KoPathFillRuleCommand.cpp
+    commands/KPathFillRuleCommand.cpp
     commands/KoShapeShadowCommand.cpp
     commands/KoPathReverseCommand.cpp
     commands/KEventActionAddCommand.cpp
@@ -205,7 +205,7 @@ install(
     commands/KParameterToPathCommand.h
     commands/KPathCombineCommand.h
     commands/KPathControlPointMoveCommand.h
-    commands/KoPathFillRuleCommand.h
+    commands/KPathFillRuleCommand.h
     commands/KoPathPointInsertCommand.h
     commands/KoPathPointMergeCommand.h
     commands/KoPathPointMoveCommand.h
