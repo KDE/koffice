@@ -22,11 +22,11 @@
 #include <QTextCursor>
 #include <QTextTable>
 
-#include "KoDeletedColumnData_p.h"
+#include "KDeletedColumnData_p.h"
 #include "KDeletedCellData_p.h"
 #include <KoTableColumnAndRowStyleManager.h>
 
-KoDeletedColumnData::KoDeletedColumnData(QTextTable *table, int columnNumber)
+KDeletedColumnData::KDeletedColumnData(QTextTable *table, int columnNumber)
 {
     this->column_number = columnNumber;
     KoTableColumnStyle columnStyle = KoTableColumnAndRowStyleManager::manager(table).columnStyle(columnNumber);
@@ -34,7 +34,7 @@ KoDeletedColumnData::KoDeletedColumnData(QTextTable *table, int columnNumber)
     storeDeletedCells(table);
 }
 
-KoDeletedColumnData::~KoDeletedColumnData()
+KDeletedColumnData::~KDeletedColumnData()
 {
     KDeletedCellData *cellData;
     foreach (cellData, deleted_cells) {
@@ -42,27 +42,27 @@ KoDeletedColumnData::~KoDeletedColumnData()
     }
 }
 
-int KoDeletedColumnData::columnNumber()
+int KDeletedColumnData::columnNumber()
 {
     return column_number;
 }
 
-void KoDeletedColumnData::setColumnStyle(KoTableColumnStyle columnStyle)
+void KDeletedColumnData::setColumnStyle(KoTableColumnStyle columnStyle)
 {
     this->column_style = columnStyle;
 }
 
-KoTableColumnStyle KoDeletedColumnData::columnStyle()
+KoTableColumnStyle KDeletedColumnData::columnStyle()
 {
     return column_style;
 }
 
-const QVector<KDeletedCellData *>& KoDeletedColumnData::deletedCells()
+const QVector<KDeletedCellData *>& KDeletedColumnData::deletedCells()
 {
     return deleted_cells;
 }
 
-void KoDeletedColumnData::storeDeletedCells(QTextTable *table)
+void KDeletedColumnData::storeDeletedCells(QTextTable *table)
 {
     QTextCursor cursor(table->document());
     int rows = table->rows();

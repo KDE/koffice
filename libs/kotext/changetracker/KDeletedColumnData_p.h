@@ -36,12 +36,12 @@
 class KDeletedCellData;
 class QTextTable;
 
-class KoDeletedColumnData
+class KDeletedColumnData
 {
 public:
-    KoDeletedColumnData(QTextTable *table, int columnNumber);
+    KDeletedColumnData(QTextTable *table, int columnNumber);
 
-    ~KoDeletedColumnData();
+    ~KDeletedColumnData();
 
     int columnNumber();
 
