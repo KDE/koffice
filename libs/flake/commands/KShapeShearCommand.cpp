@@ -23,7 +23,7 @@
 
 #include <klocale.h>
 
-class KoShapeShearCommandPrivate
+class KShapeShearCommandPrivate
 {
 public:
     QList<KShape*> shapes;
@@ -35,7 +35,7 @@ public:
 
 KShapeShearCommand::KShapeShearCommand(const QList<KShape*> &shapes, const QList<qreal> &previousShearXs, const QList<qreal> &previousShearYs, const QList<qreal> &newShearXs, const QList<qreal> &newShearYs, QUndoCommand *parent)
     : QUndoCommand(parent),
-    d(new KoShapeShearCommandPrivate())
+    d(new KShapeShearCommandPrivate())
 {
     d->shapes = shapes;
     d->previousShearXs = previousShearXs;

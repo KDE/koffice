@@ -27,7 +27,7 @@
 #include <QList>
 
 class KShape;
-class KoShapeShearCommandPrivate;
+class KShapeShearCommandPrivate;
 
 /// The undo / redo command for shape shearing.
 class FLAKE_EXPORT KShapeShearCommand : public QUndoCommand
@@ -54,7 +54,7 @@ public:
     void undo();
 
 private:
-    KoShapeShearCommandPrivate *d;
+    KShapeShearCommandPrivate *d;
 };
 
 #endif
