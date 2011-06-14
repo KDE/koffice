@@ -415,7 +415,7 @@ void KarbonCanvas::updateInputMethodInfo()
     updateMicroFocus();
 }
 
-KoGuidesData * KarbonCanvas::guidesData()
+KGuidesData * KarbonCanvas::guidesData()
 {
     return &d->part->guidesData();
 }

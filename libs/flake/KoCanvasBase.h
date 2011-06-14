@@ -46,7 +46,7 @@ class KoShapeControllerBase;
 class KoCanvasController;
 class KoShape;
 class KoSnapGuide;
-class KoGuidesData;
+class KGuidesData;
 
 /**
  * KoCanvasBase is the interface actual application canvas classes
@@ -220,7 +220,7 @@ public:
      *
      * @return pointer to the guide data or zero if there is none
      */
-    virtual KoGuidesData *guidesData();
+    virtual KGuidesData *guidesData();
 
     /**
      * Calling this will turn the canvas into a read/write or a read-only canvas.

@@ -35,7 +35,7 @@
 #include <KOdfPageLayoutData.h>
 #include "komain_export.h"
 #include "KoGridData.h"
-#include "KoGuidesData.h"
+#include "KGuidesData.h"
 #include <KXmlReader.h>
 #include <KOdfDocumentBase.h>
 
@@ -762,7 +762,7 @@ public:
     KoGridData &gridData();
 
     /// returns the guides data for this document.
-    KoGuidesData &guidesData();
+    KGuidesData &guidesData();
 
     void clearUndoHistory();
 

@@ -103,7 +103,7 @@ KoSnapGuide * KoCanvasBase::snapGuide() const
     return d->snapGuide;
 }
 
-KoGuidesData * KoCanvasBase::guidesData()
+KGuidesData * KoCanvasBase::guidesData()
 {
     return 0;
 }

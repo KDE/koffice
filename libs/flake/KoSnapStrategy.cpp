@@ -24,7 +24,7 @@
 #include <KoPathPoint.h>
 #include <KoCanvasBase.h>
 #include <KoViewConverter.h>
-#include <KoGuidesData.h>
+#include <KGuidesData.h>
 
 #include <QtGui/QPainter>
 
@@ -560,7 +560,7 @@ LineGuideSnapStrategy::LineGuideSnapStrategy()
 
 bool LineGuideSnapStrategy::snap(const QPointF &mousePosition, KoSnapProxy * proxy, qreal maxSnapDistance)
 {
-    KoGuidesData * guidesData = proxy->canvas()->guidesData();
+    KGuidesData * guidesData = proxy->canvas()->guidesData();
     if (! guidesData || ! guidesData->showGuideLines())
         return false;
 

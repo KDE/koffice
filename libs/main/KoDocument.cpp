@@ -197,7 +197,7 @@ public:
     KUndoStack *undoStack;
 
     KoGridData gridData;
-    KoGuidesData guidesData;
+    KGuidesData guidesData;
 
     KService::Ptr nativeService;
 
@@ -2559,7 +2559,7 @@ KoGridData &KoDocument::gridData()
     return d->gridData;
 }
 
-KoGuidesData &KoDocument::guidesData()
+KGuidesData &KoDocument::guidesData()
 {
     return d->guidesData;
 }

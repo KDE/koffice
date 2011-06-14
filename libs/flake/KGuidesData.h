@@ -35,11 +35,11 @@ class KXmlDocument;
 /**
  * XXX
  */
-class FLAKE_EXPORT KoGuidesData
+class FLAKE_EXPORT KGuidesData
 {
 public:
-    KoGuidesData();
-    ~KoGuidesData();
+    KGuidesData();
+    ~KGuidesData();
 
     /**
      * @brief Set the positions of the horizontal guide lines

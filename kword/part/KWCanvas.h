@@ -99,7 +99,7 @@ public:
     /// reimplemented method from superclass
     virtual void updateInputMethodInfo();
     /// reimplemented method from superclass
-    virtual KoGuidesData *guidesData();
+    virtual KGuidesData *guidesData();
     // getters
     /// return the document that this canvas works on
     KWDocument *document() const {

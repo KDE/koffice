@@ -18,7 +18,7 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KoGuidesData.h"
+#include "KGuidesData.h"
 #include "KoViewConverter.h"
 #include <KUnit.h>
 #include <KOdfSettings.h>
@@ -26,7 +26,7 @@
 
 #include <QtGui/QPainter>
 
-class KoGuidesData::Private
+class KGuidesData::Private
 {
 public:
     Private() : showGuideLines(true), guidesColor(Qt::lightGray) {}
@@ -74,27 +74,27 @@ public:
     QColor guidesColor;
 };
 
-KoGuidesData::KoGuidesData()
+KGuidesData::KGuidesData()
         : d(new Private())
 {
 }
 
-KoGuidesData::~KoGuidesData()
+KGuidesData::~KGuidesData()
 {
     delete d;
 }
 
-void KoGuidesData::setHorizontalGuideLines(const QList<qreal> &lines)
+void KGuidesData::setHorizontalGuideLines(const QList<qreal> &lines)
 {
     d->horzGuideLines = lines;
 }
 
-void KoGuidesData::setVerticalGuideLines(const QList<qreal> &lines)
+void KGuidesData::setVerticalGuideLines(const QList<qreal> &lines)
 {
     d->vertGuideLines = lines;
 }
 
-void KoGuidesData::addGuideLine(Qt::Orientation o, qreal pos)
+void KGuidesData::addGuideLine(Qt::Orientation o, qreal pos)
 {
     if (o == Qt::Horizontal) {
         d->horzGuideLines.append(pos);
@@ -103,27 +103,27 @@ void KoGuidesData::addGuideLine(Qt::Orientation o, qreal pos)
     }
 }
 
-bool KoGuidesData::showGuideLines() const
+bool KGuidesData::showGuideLines() const
 {
     return d->showGuideLines;
 }
 
-void KoGuidesData::setShowGuideLines(bool show)
+void KGuidesData::setShowGuideLines(bool show)
 {
     d->showGuideLines = show;
 }
 
-QList<qreal> KoGuidesData::horizontalGuideLines() const
+QList<qreal> KGuidesData::horizontalGuideLines() const
 {
     return d->horzGuideLines;
 }
 
-QList<qreal> KoGuidesData::verticalGuideLines() const
+QList<qreal> KGuidesData::verticalGuideLines() const
 {
     return d->vertGuideLines;
 }
 
-void KoGuidesData::paintGuides(QPainter &painter, const KoViewConverter &converter, const QRectF &area) const
+void KGuidesData::paintGuides(QPainter &painter, const KoViewConverter &converter, const QRectF &area) const
 {
     if (! showGuideLines())
         return;
@@ -143,17 +143,17 @@ void KoGuidesData::paintGuides(QPainter &painter, const KoViewConverter &convert
     }
 }
 
-void KoGuidesData::setGuidesColor(const QColor &color)
+void KGuidesData::setGuidesColor(const QColor &color)
 {
     d->guidesColor = color;
 }
 
-QColor KoGuidesData::guidesColor() const
+QColor KGuidesData::guidesColor() const
 {
     return d->guidesColor;
 }
 
-bool KoGuidesData::loadOdfSettings(const KXmlDocument & settingsDoc)
+bool KGuidesData::loadOdfSettings(const KXmlDocument & settingsDoc)
 {
     d->vertGuideLines.clear();
     d->horzGuideLines.clear();
@@ -178,7 +178,7 @@ bool KoGuidesData::loadOdfSettings(const KXmlDocument & settingsDoc)
     return true;
 }
 
-void KoGuidesData::saveOdfSettings(KXmlWriter &settingsWriter)
+void KGuidesData::saveOdfSettings(KXmlWriter &settingsWriter)
 {
     settingsWriter.startElement("config:config-item");
     settingsWriter.addAttribute("config:name", "SnapLinesDrawing");

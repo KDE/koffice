@@ -168,7 +168,7 @@ QRect KoPACanvasBase::viewToWidget(const QRect &r) const
     return r.translated(viewConverter()->documentToView(d->origin()).toPoint());
 }
 
-KoGuidesData * KoPACanvasBase::guidesData()
+KGuidesData * KoPACanvasBase::guidesData()
 {
     return &d->doc->guidesData();
 }

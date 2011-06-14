@@ -241,7 +241,7 @@ void KWCanvas::inputMethodEvent(QInputMethodEvent *event)
     m_toolProxy->inputMethodEvent(event);
 }
 
-KoGuidesData *KWCanvas::guidesData()
+KGuidesData *KWCanvas::guidesData()
 {
     return &m_document->guidesData();
 }

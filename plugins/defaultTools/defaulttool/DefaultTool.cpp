@@ -37,7 +37,7 @@
 #include <KoShapeConnection.h>
 #include <KoToolSelection.h>
 #include <KoToolManager.h>
-#include <KoGuidesData.h>
+#include <KGuidesData.h>
 #include <KoShapeController.h>
 #include <KoShapeManager.h>
 #include <KoShapeGroup.h>
@@ -564,7 +564,7 @@ void DefaultTool::selectGuideAtPosition(const QPointF &position)
     Qt::Orientation orientation = Qt::Horizontal;
 
     // check if we are on a guide line
-    KoGuidesData * guidesData = canvas()->guidesData();
+    KGuidesData * guidesData = canvas()->guidesData();
     if (guidesData && guidesData->showGuideLines()) {
         qreal grabSensitivity = canvas()->resourceManager()->grabSensitivity();
         qreal minDistance = canvas()->viewConverter()->viewToDocumentX(grabSensitivity);

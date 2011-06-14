@@ -55,7 +55,7 @@ public:
     virtual KoShapeManager * shapeManager() const;
     KoShapeManager * masterShapeManager() const;
     /// reimplemented from KoCanvasBase
-    virtual KoGuidesData * guidesData();
+    virtual KGuidesData * guidesData();
 
     KoToolProxy * toolProxy() const;
     const KoViewConverter *viewConverter() const;

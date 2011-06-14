@@ -84,7 +84,7 @@ public:
     /// reimplemented from KoCanvasBase
     virtual void updateInputMethodInfo();
     /// reimplemented from KoCanvasBase
-    virtual KoGuidesData * guidesData();
+    virtual KGuidesData * guidesData();
     /// Enables/disables showing page margins
     void setShowPageMargins(bool on);
 
