@@ -36,7 +36,7 @@ class KoPALoadingContext;
 class KoPASavingContext;
 class KXmlWriter;
 
-class KoInlineTextObjectManager;
+class KInlineTextObjectManager;
 
 /// Document class that stores KoPAPage and KoPAMasterPage objects
 class KOPAGEAPP_EXPORT KoPADocument : public KoDocument, public KoShapeControllerBase
@@ -185,7 +185,7 @@ public:
 
 
     /// return the inlineTextObjectManager for this document.
-    KoInlineTextObjectManager *inlineTextObjectManager() const;
+    KInlineTextObjectManager *inlineTextObjectManager() const;
 
     void setRulersVisible(bool visible);
     bool rulersVisible() const;

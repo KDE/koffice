@@ -31,7 +31,7 @@
 
 #include <KoTextShapeData.h>
 #include <KoShapeContainer.h>
-#include <KoInlineTextObjectManager.h>
+#include <KInlineTextObjectManager.h>
 #include <KoTextAnchor.h>
 #include <KDebug>
 

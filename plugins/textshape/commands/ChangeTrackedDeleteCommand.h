@@ -32,7 +32,7 @@ class QTextCursor;
 class QTextDocumentFragment;
 class KoChangeTrackerElement;
 class KoDeleteChangeMarker;
-class KoInlineTextObjectManager;
+class KInlineTextObjectManager;
 
 class ChangeTrackedDeleteCommand : public TextCommandBase
 {

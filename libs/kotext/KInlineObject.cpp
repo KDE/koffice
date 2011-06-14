@@ -22,7 +22,7 @@
 #include "KoTextDocumentLayout.h"
 #include "KoTextShapeData.h"
 #include "KoShapeSavingContext.h"
-#include "KoInlineTextObjectManager.h"
+#include "KInlineTextObjectManager.h"
 #include "KoTextInlineRdf.h"
 
 #include <KoShape.h>
@@ -73,13 +73,13 @@ KInlineObject::~KInlineObject()
     d_ptr = 0;
 }
 
-void KInlineObject::setManager(KoInlineTextObjectManager *manager)
+void KInlineObject::setManager(KInlineTextObjectManager *manager)
 {
     Q_D(KInlineObject);
     d->manager = manager;
 }
 
-KoInlineTextObjectManager *KInlineObject::manager()
+KInlineTextObjectManager *KInlineObject::manager()
 {
     Q_D(KInlineObject);
     return d->manager;

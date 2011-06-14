@@ -48,7 +48,7 @@ public:
     }
     virtual ~KInlineObjectPrivate();
 
-    KoInlineTextObjectManager *manager;
+    KInlineTextObjectManager *manager;
     KInlineObject *q_ptr;
     int id;
     int positionInDocument;

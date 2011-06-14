@@ -21,7 +21,7 @@
 
 #include <KoTextDocument.h>
 #include <KoTextEditor.h>
-#include <KoInlineTextObjectManager.h>
+#include <KInlineTextObjectManager.h>
 #include <KoBookmarkManager.h>
 
 #include <KLocale>
@@ -33,7 +33,7 @@ CreateBookmark::CreateBookmark(KoTextEditor *editor, QWidget *parent)
     m_manager(0)
 {
     KoTextDocument doc(editor->document());
-    KoInlineTextObjectManager *itom = doc.inlineTextObjectManager();
+    KInlineTextObjectManager *itom = doc.inlineTextObjectManager();
     if (itom)
         m_manager = itom->bookmarkManager();
     if (m_manager)

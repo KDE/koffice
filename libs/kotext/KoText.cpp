@@ -23,7 +23,7 @@
 #include "changetracker/KoChangeTracker.h"
 #include "KoTextShapeData.h"
 #include "KoTextDocumentLayout.h"
-#include "KoInlineTextObjectManager.h"
+#include "KInlineTextObjectManager.h"
 
 #include <KOdfStore.h>
 #include <KOdfStoreReader.h>
@@ -199,7 +199,7 @@ QTextDocument *KoText::loadOpenDocument(const QString &filename, QTextDocument *
     if (layout == 0)
         layout = new KoTextDocumentLayout(document);
     if (layout->inlineTextObjectManager() == 0)
-        layout->setInlineTextObjectManager(new KoInlineTextObjectManager(layout)); // required while saving
+        layout->setInlineTextObjectManager(new KInlineTextObjectManager(layout)); // required while saving
     textShapeData->document()->setDocumentLayout(layout);
 
     if (!textShapeData->loadOdf(body, shapeLoadingContext)) {

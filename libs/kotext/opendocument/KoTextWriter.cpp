@@ -37,7 +37,7 @@
 #include "KoTextAnchor.h"
 #include "KoShape.h"
 #include "KoVariable.h"
-#include "KoInlineTextObjectManager.h"
+#include "KInlineTextObjectManager.h"
 #include "styles/KoStyleManager.h"
 #include "styles/KoCharacterStyle.h"
 #include "styles/KoParagraphStyle.h"

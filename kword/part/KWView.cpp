@@ -58,7 +58,7 @@
 #include <kofficeversion.h>
 #include <KoFind.h>
 #include <KoImageSelectionWidget.h>
-#include <KoInlineTextObjectManager.h>
+#include <KInlineTextObjectManager.h>
 #include <KoMainWindow.h>
 #include <KoPasteController.h>
 #include <KoPathShape.h> // for KoPathShapeId

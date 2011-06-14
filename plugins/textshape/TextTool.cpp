@@ -58,7 +58,7 @@
 #include <KoParagraphStyle.h>
 #include <KoTextEditingPlugin.h>
 #include <KoTextEditingRegistry.h>
-#include <KoInlineTextObjectManager.h>
+#include <KInlineTextObjectManager.h>
 #include <KoStyleManager.h>
 #include <KoTextOdfSaveHelper.h>
 #include <KoTextDrag.h>
@@ -497,7 +497,7 @@ TextTool::TextTool(MockCanvas *canvas)  // constructor for our unit tests;
     KGlobal::setLocale(new KLocale("en"));
     QTextDocument *document = new QTextDocument();
     KoTextDocumentLayout *layout = new KoTextDocumentLayout(document);
-    KoInlineTextObjectManager *inlineManager = new KoInlineTextObjectManager();
+    KInlineTextObjectManager *inlineManager = new KInlineTextObjectManager();
     layout->setInlineTextObjectManager(inlineManager);
     document->setDocumentLayout(layout);
     m_textEditor = new KoTextEditor(document);
@@ -899,7 +899,7 @@ void TextTool::mousePressEvent(KoPointerEvent *event)
             plugin->setCurrentCursorPosition(m_textEditor.data()->document(), m_textEditor.data()->position());
 
         // Is there a KoVariable here?
-        KoInlineTextObjectManager *inlineTextObjectManager = KoTextDocument(m_textEditor.data()->document()).inlineTextObjectManager();
+        KInlineTextObjectManager *inlineTextObjectManager = KoTextDocument(m_textEditor.data()->document()).inlineTextObjectManager();
         KoVariable *variable = 0;
         if (inlineTextObjectManager) {
             const int position = pointToPosition(event->point);
@@ -1004,7 +1004,7 @@ void TextTool::mouseReleaseEvent(KoPointerEvent *event)
         QString anchor = cfm.anchorHref();
         if (!anchor.isEmpty()) {
             KoTextDocument document(m_textEditor.data()->document());
-            KoInlineTextObjectManager *inlineManager = document.inlineTextObjectManager();
+            KInlineTextObjectManager *inlineManager = document.inlineTextObjectManager();
             if (inlineManager) {
                 QList<QString> bookmarks = inlineManager->bookmarkManager()->bookmarkNames();
                 // Which are the bookmarks we have ?
@@ -2310,7 +2310,7 @@ void TextTool::debugTextDocument()
     const int CHARPOSITION = 278301935;
     KoTextDocument document(textEditor->document());
     KoStyleManager *styleManager = document.styleManager();
-    KoInlineTextObjectManager *inlineManager = document.inlineTextObjectManager();
+    KInlineTextObjectManager *inlineManager = document.inlineTextObjectManager();
 
     QTextBlock block = textEditor->document()->begin();
     for (;block.isValid(); block = block.next()) {

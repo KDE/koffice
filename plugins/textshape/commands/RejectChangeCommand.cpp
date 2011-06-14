@@ -20,7 +20,7 @@
 #include "RejectChangeCommand.h"
 
 #include <KOdfGenericChange.h>
-#include <KoInlineTextObjectManager.h>
+#include <KInlineTextObjectManager.h>
 #include <KoTextDocument.h>
 #include <KoTextDocumentLayout.h>
 

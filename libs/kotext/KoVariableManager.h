@@ -25,7 +25,7 @@
 #include <QString>
 
 class KoVariable;
-class KoInlineTextObjectManager;
+class KInlineTextObjectManager;
 class KoVariableManagerPrivate;
 
 /**
@@ -37,15 +37,15 @@ class KoVariableManagerPrivate;
  * use that and insert that into the text-document.
  * Changing the value will lead to directly change the value of all variables
  * inserted into the document.
- * @see KoInlineTextObjectManager::createInsertVariableActions()
- * @see KoInlineTextObjectManager::variableManager()
+ * @see KInlineTextObjectManager::createInsertVariableActions()
+ * @see KInlineTextObjectManager::variableManager()
  */
 class KOTEXT_EXPORT KoVariableManager : public QObject
 {
     Q_OBJECT
 public:
     /// constructor
-    explicit KoVariableManager(KoInlineTextObjectManager *inlineObjectManager);
+    explicit KoVariableManager(KInlineTextObjectManager *inlineObjectManager);
     ~KoVariableManager();
 
     /**
@@ -76,7 +76,7 @@ public:
 
     /**
      * Create a new variable that can be inserted into the document using
-     * KoInlineTextObjectManager::insertInlineObject()
+     * KInlineTextObjectManager::insertInlineObject()
      * This is a factory method that creates a visible variable object of an already existing
      * name/value pair previously inserted into the manager.
      * @param name the named variable.

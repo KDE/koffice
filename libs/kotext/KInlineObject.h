@@ -30,7 +30,7 @@ class QPainter;
 class QRectF;
 
 class KoShape;
-class KoInlineTextObjectManager;
+class KInlineTextObjectManager;
 class KInlineObjectPrivate;
 class KoShapeSavingContext;
 class KoTextInlineRdf;
@@ -45,7 +45,7 @@ class KoTextPage;
  * They are essentially anchored to a specific position in the text, as
  * one character.
  *
- * @see KoInlineTextObjectManager
+ * @see KInlineTextObjectManager
  */
 class KOTEXT_EXPORT KInlineObject
 {
@@ -88,7 +88,7 @@ public:
     /**
      * constructor
      * @param propertyChangeListener if set to true this instance will be notified of changes of properties.
-     * @see KoInlineTextObjectManager::setProperty()
+     * @see KInlineTextObjectManager::setProperty()
      * @see propertyChangeListener()
      */
     explicit KInlineObject(bool propertyChangeListener = false);
@@ -99,12 +99,12 @@ public:
      * Remember that inheriting classes should not use the manager() in the constructor, since it will be 0
      * @param manager the object manager for this object.
      */
-    void setManager(KoInlineTextObjectManager *manager);
+    void setManager(KInlineTextObjectManager *manager);
 
     /**
      * Return the object manager set on this inline object.
      */
-    KoInlineTextObjectManager *manager();
+    KInlineTextObjectManager *manager();
 
     /**
      * Just prior to the first time this object will be shown this method will be called.
@@ -177,7 +177,7 @@ public:
 
     /// return the inline-object Id that is assigned for this object.
     int id() const;
-    /// Set the inline-object Id that is assigned for this object by the KoInlineTextObjectManager.
+    /// Set the inline-object Id that is assigned for this object by the KInlineTextObjectManager.
     void setId(int id);
 
     /**
@@ -186,7 +186,7 @@ public:
      * Only objects that actually have a need for such information be a listener to avoid unneeded
      * overhead.
      * When this returns true, the propertyChanged() method will be called.
-     * @see KoInlineTextObjectManager::setProperty()
+     * @see KInlineTextObjectManager::setProperty()
      */
     bool propertyChangeListener() const;
 

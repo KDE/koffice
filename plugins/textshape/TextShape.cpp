@@ -47,7 +47,7 @@ struct Finalizer {
 #include <KoCanvasBase.h>
 #include <KoResourceManager.h>
 #include <KoChangeTracker.h>
-#include <KoInlineTextObjectManager.h>
+#include <KInlineTextObjectManager.h>
 #include <KOdfLoadingContext.h>
 #include <KOdfStylesReader.h>
 #include <KoParagraphStyle.h>

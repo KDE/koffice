@@ -29,7 +29,7 @@
 #include "KoTextDocument.h"
 #include "KoTextEditor.h"
 #include "styles/KoStyleManager.h"
-#include "KoInlineTextObjectManager.h"
+#include "KInlineTextObjectManager.h"
 #include "KoTextDocumentLayout.h"
 #include "styles/KoParagraphStyle.h"
 #include "changetracker/KoChangeTracker.h"
@@ -87,7 +87,7 @@ void KoTextDocument::setStyleManager(KoStyleManager *sm)
         sm->add(m_document);
 }
 
-void KoTextDocument::setInlineTextObjectManager(KoInlineTextObjectManager *manager)
+void KoTextDocument::setInlineTextObjectManager(KInlineTextObjectManager *manager)
 {
     QVariant v;
     v.setValue(manager);
@@ -210,11 +210,11 @@ void KoTextDocument::clearText()
     cursor.removeSelectedText();
 }
 
-KoInlineTextObjectManager *KoTextDocument::inlineTextObjectManager() const
+KInlineTextObjectManager *KoTextDocument::inlineTextObjectManager() const
 {
     QVariant resource = m_document->resource(KoTextDocument::InlineTextManager,
             InlineObjectTextManagerURL);
-    return resource.value<KoInlineTextObjectManager *>();
+    return resource.value<KInlineTextObjectManager *>();
 }
 
 void KoTextDocument::setResizeMethod(KoTextDocument::ResizeMethod method)

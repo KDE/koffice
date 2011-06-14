@@ -30,7 +30,7 @@
 #include <KoBookmark.h>
 #include <KoBookmarkManager.h>
 #include <KInlineNote.h>
-#include <KoInlineTextObjectManager.h>
+#include <KInlineTextObjectManager.h>
 #include "KoList.h"
 #include <KOdfLoadingContext.h>
 #include <KOdfStylesReader.h>
@@ -536,7 +536,7 @@ void KoTextLoader::loadBody(const KXmlElement &bodyElem, QTextCursor &cursor)
                             changeElement->setEnabled(true);
                             KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(cursor.block().document()->documentLayout());
                             if (layout) {
-                                KoInlineTextObjectManager *textObjectManager = layout->inlineTextObjectManager();
+                                KInlineTextObjectManager *textObjectManager = layout->inlineTextObjectManager();
                                 textObjectManager->insertInlineObject(cursor, deleteChangemarker);
                             }
                         }
@@ -657,7 +657,7 @@ void KoTextLoader::loadBody(const KXmlElement &bodyElem, QTextCursor &cursor)
                         if (obj) {
                             KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(cursor.block().document()->documentLayout());
                             if (layout) {
-                                KoInlineTextObjectManager *textObjectManager = layout->inlineTextObjectManager();
+                                KInlineTextObjectManager *textObjectManager = layout->inlineTextObjectManager();
                                 if (textObjectManager) {
                                     KoVariableManager *varManager = textObjectManager->variableManager();
                                     if (varManager) {
@@ -1389,7 +1389,7 @@ void KoTextLoader::loadNote(const KXmlElement &noteElem, QTextCursor &cursor)
     if (layout) {
         KInlineNote *note = new KInlineNote(KInlineNote::Footnote);
         if (note->loadOdf(noteElem, d->context, d->styleManager, d->changeTracker)) {
-            KoInlineTextObjectManager *textObjectManager = layout->inlineTextObjectManager();
+            KInlineTextObjectManager *textObjectManager = layout->inlineTextObjectManager();
             textObjectManager->insertInlineObject(cursor, note, cursor.charFormat());
         } else {
             kDebug(32500) << "Error while loading the note !";
@@ -1518,7 +1518,7 @@ void KoTextLoader::loadSpan(const KXmlElement &element, QTextCursor &cursor, boo
                 KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(cursor.block().document()->documentLayout());
 
                 if (layout) {
-                    KoInlineTextObjectManager *textObjectManager = layout->inlineTextObjectManager();
+                    KInlineTextObjectManager *textObjectManager = layout->inlineTextObjectManager();
                     textObjectManager->insertInlineObject(cursor, deleteChangemarker);
                 }
 
@@ -1594,7 +1594,7 @@ void KoTextLoader::loadSpan(const KXmlElement &element, QTextCursor &cursor, boo
             KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(cursor.block().document()->documentLayout());
             if (layout) {
                 const QTextDocument *document = cursor.block().document();
-                KoInlineTextObjectManager *textObjectManager = layout->inlineTextObjectManager();
+                KInlineTextObjectManager *textObjectManager = layout->inlineTextObjectManager();
                 KoTextMeta* startmark = new KoTextMeta();
                 textObjectManager->insertInlineObject(cursor, startmark);
 
@@ -1621,7 +1621,7 @@ void KoTextLoader::loadSpan(const KXmlElement &element, QTextCursor &cursor, boo
             KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(cursor.block().document()->documentLayout());
             if (layout) {
                 const QTextDocument *document = cursor.block().document();
-                KoInlineTextObjectManager *textObjectManager = layout->inlineTextObjectManager();
+                KInlineTextObjectManager *textObjectManager = layout->inlineTextObjectManager();
                 // For cut and paste, make sure that the name is unique.
                 QString uniqBookmarkName = createUniqueBookmarkName(textObjectManager->bookmarkManager(),
                                            bookmarkName,
@@ -1679,7 +1679,7 @@ void KoTextLoader::loadSpan(const KXmlElement &element, QTextCursor &cursor, boo
             if (obj) {
                 KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(cursor.block().document()->documentLayout());
                 if (layout) {
-                    KoInlineTextObjectManager *textObjectManager = layout->inlineTextObjectManager();
+                    KInlineTextObjectManager *textObjectManager = layout->inlineTextObjectManager();
                     if (textObjectManager) {
                         KoVariableManager *varManager = textObjectManager->variableManager();
                         if (varManager) {
@@ -1813,7 +1813,7 @@ KoDeleteChangeMarker * KoTextLoader::Private::insertDeleteChangeMarker(QTextCurs
         changeElement->setChangeType(KOdfGenericChange::DeleteChange);
         KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(cursor.block().document()->documentLayout());
         if (layout) {
-            KoInlineTextObjectManager *textObjectManager = layout->inlineTextObjectManager();
+            KInlineTextObjectManager *textObjectManager = layout->inlineTextObjectManager();
             textObjectManager->insertInlineObject(cursor, deleteChangemarker);
         }
         retMarker = deleteChangemarker;
@@ -2155,7 +2155,7 @@ void KoTextLoader::loadShape(const KXmlElement &element, QTextCursor &cursor)
                 }
             }
 
-            KoInlineTextObjectManager *textObjectManager = layout->inlineTextObjectManager();
+            KInlineTextObjectManager *textObjectManager = layout->inlineTextObjectManager();
             if (textObjectManager) {
                 textObjectManager->insertInlineObject(cursor, anchor, cursor.charFormat());
             }

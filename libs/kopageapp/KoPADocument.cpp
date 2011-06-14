@@ -30,7 +30,7 @@
 #include <KoTextShapeData.h>
 #include <KoTextSharedLoadingData.h>
 #include <KoTextDocumentLayout.h>
-#include <KoInlineTextObjectManager.h>
+#include <KInlineTextObjectManager.h>
 #include <KoStyleManager.h>
 #include <KOdfXmlNS.h>
 #include <KoProgressUpdater.h>
@@ -56,7 +56,7 @@ class KoPADocument::Private
 public:
     QList<KoPAPageBase*> pages;
     QList<KoPAPageBase*> masterPages;
-    KoInlineTextObjectManager *inlineTextObjectManager;
+    KInlineTextObjectManager *inlineTextObjectManager;
     bool rulersVisible;
     KoPAPageProvider *pageProvider;
 };
@@ -65,7 +65,7 @@ KoPADocument::KoPADocument(QWidget* parentWidget, QObject* parent, bool singleVi
 : KoDocument(parentWidget, parent, singleViewMode),
     d(new Private())
 {
-    d->inlineTextObjectManager = new KoInlineTextObjectManager(this);
+    d->inlineTextObjectManager = new KInlineTextObjectManager(this);
     d->rulersVisible = false;
 
     resourceManager()->setUndoStack(undoStack());
@@ -672,7 +672,7 @@ KoPAMasterPage * KoPADocument::newMasterPage()
 }
 
 /// return the inlineTextObjectManager for this document.
-KoInlineTextObjectManager *KoPADocument::inlineTextObjectManager() const {
+KInlineTextObjectManager *KoPADocument::inlineTextObjectManager() const {
     return d->inlineTextObjectManager;
 }
 
@@ -767,7 +767,7 @@ void KoPADocument::updatePageCount()
 {
     if (resourceManager()->hasResource(KoText::InlineTextObjectManager)) {
         QVariant var = resourceManager()->resource(KoText::InlineTextObjectManager);
-        KoInlineTextObjectManager *om = var.value<KoInlineTextObjectManager*>();
+        KInlineTextObjectManager *om = var.value<KInlineTextObjectManager*>();
         om->setProperty(KInlineObject::PageCount, pageCount());
     }
 }

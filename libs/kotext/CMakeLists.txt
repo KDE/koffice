@@ -20,7 +20,7 @@ set(kotext_LIB_SRCS
     KoTextEditingFactory.cpp
     KoTextEditingPlugin.cpp
 
-    KoInlineTextObjectManager.cpp
+    KInlineTextObjectManager.cpp
     KInlineObjectFactoryBase.cpp
     KInlineObjectRegistry.cpp
     InsertInlineObjectActionBase.cpp
@@ -123,7 +123,7 @@ install(
     KInlineObjectFactoryBase.h
     KoBookmark.h
     KoBookmarkManager.h
-    KoInlineTextObjectManager.h
+    KInlineTextObjectManager.h
     KoTextAnchor.h
     KoTextBlockBorderData.h
     KoTextBlockData.h

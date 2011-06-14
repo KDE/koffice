@@ -26,7 +26,7 @@
 #include "styles/KoStyleManager.h"
 #include "KoTextBlockData.h"
 #include "KoTextBlockBorderData.h"
-#include "KoInlineTextObjectManager.h"
+#include "KInlineTextObjectManager.h"
 
 #include <KoInsets.h>
 #include <KoPostscriptPaintDevice.h>
@@ -134,7 +134,7 @@ public:
     void adjustSize();
 
     QList<KoShape *> shapes;
-    KoInlineTextObjectManager *inlineTextObjectManager;
+    KInlineTextObjectManager *inlineTextObjectManager;
     bool scheduled;
     KoTextDocumentLayout *parent;
     KoTextDocument::ResizeMethod resizeMethod;
@@ -220,12 +220,12 @@ void KoTextDocumentLayout::addShape(KoShape *shape)
     emit shapeAdded(shape);
 }
 
-void KoTextDocumentLayout::setInlineTextObjectManager(KoInlineTextObjectManager *iom)
+void KoTextDocumentLayout::setInlineTextObjectManager(KInlineTextObjectManager *iom)
 {
     d->inlineTextObjectManager = iom;
 }
 
-KoInlineTextObjectManager *KoTextDocumentLayout::inlineTextObjectManager()
+KInlineTextObjectManager *KoTextDocumentLayout::inlineTextObjectManager()
 {
     return d->inlineTextObjectManager;
 }

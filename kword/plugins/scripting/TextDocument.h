@@ -25,7 +25,7 @@
 #include <QTextDocument>
 #include <kdebug.h>
 #include <KoVariable.h>
-#include <KoInlineTextObjectManager.h>
+#include <KInlineTextObjectManager.h>
 #include <KoTextDocumentLayout.h>
 
 #include "TextFrame.h"
@@ -52,7 +52,7 @@ public:
     }
     virtual ~TextDocument() {}
 
-    KoInlineTextObjectManager* inlineTextObjectManager() {
+    KInlineTextObjectManager* inlineTextObjectManager() {
         QTextDocument *doc = m_doc.data();
         if (doc) {
             KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(doc->documentLayout());
@@ -62,7 +62,7 @@ public:
     }
 
     KoVariableManager* variableManager() {
-        KoInlineTextObjectManager* objmanager = inlineTextObjectManager();
+        KInlineTextObjectManager* objmanager = inlineTextObjectManager();
         return objmanager ? objmanager->variableManager() : 0;
     }
 
@@ -193,7 +193,7 @@ public slots:
             kDebug(32010) << "No cursor";
             return false;
         }
-        KoInlineTextObjectManager* objmanager = inlineTextObjectManager();
+        KInlineTextObjectManager* objmanager = inlineTextObjectManager();
         if (! objmanager) {
             kDebug(32010) << "No textobjectmanager";
             return false;

@@ -33,7 +33,7 @@
 
 #define TextShape_SHAPEID "TextShapeID"
 
-class KoInlineTextObjectManager;
+class KInlineTextObjectManager;
 class KoPageProvider;
 class KImageCollection;
 

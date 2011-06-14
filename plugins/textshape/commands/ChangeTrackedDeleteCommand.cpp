@@ -30,7 +30,7 @@
 #include <KoChangeTrackerElement.h>
 #include <KoTextDocument.h>
 #include <KoTextDocumentLayout.h>
-#include <KoInlineTextObjectManager.h>
+#include <KInlineTextObjectManager.h>
 #include <KAction>
 #include <KoTextAnchor.h>
 #include <KoDeleteChangeMarker.h>

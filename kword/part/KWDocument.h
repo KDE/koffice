@@ -42,7 +42,7 @@ class KWPage;
 class KWFrameSet;
 class MagicCurtain;
 
-class KoInlineTextObjectManager;
+class KInlineTextObjectManager;
 class KoShapeContainer;
 
 class KLocalizedString;
@@ -138,7 +138,7 @@ public:
     KWTextFrameSet *mainFrameSet() const;
 
     /// return the inlineTextObjectManager for this document.
-    KoInlineTextObjectManager *inlineTextObjectManager() const;
+    KInlineTextObjectManager *inlineTextObjectManager() const;
 
     /// reimplemented from super
     QList<KoDocument::CustomDocumentWidgetItem> createCustomDocumentWidgets(QWidget *parent);

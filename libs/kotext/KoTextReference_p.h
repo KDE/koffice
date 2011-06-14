@@ -46,7 +46,7 @@ class KoTextReference : public KoVariable
 {
 public:
     /**
-     * Constructor; please don't use directly as the KoInlineTextObjectManager will supply an action
+     * Constructor; please don't use directly as the KInlineTextObjectManager will supply an action
      * to create one.
      * @param indexId the index of the inline object that is the locator.  See KInlineObject::id()
      */

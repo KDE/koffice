@@ -33,7 +33,7 @@
 #include <KoCharacterStyle.h>
 #include <KoParagraphStyle.h>
 #include <KoText.h>
-#include <KoInlineTextObjectManager.h>
+#include <KInlineTextObjectManager.h>
 #include <KoTextSharedLoadingData.h>
 #include <KoTextDocument.h>
 #include <KoChangeTracker.h>
@@ -102,7 +102,7 @@ QTextDocument *TestLoadStyle::documentFromOdt(const QString &odt)
     QTextDocument *document = new QTextDocument;
     textShapeData->setDocument(document, false /* ownership */);
     KoTextDocumentLayout *layout = new KoTextDocumentLayout(textShapeData->document());
-    layout->setInlineTextObjectManager(new KoInlineTextObjectManager(layout)); // required while saving
+    layout->setInlineTextObjectManager(new KInlineTextObjectManager(layout)); // required while saving
     KoTextDocument(document).setStyleManager(styleManager);
     textShapeData->document()->setDocumentLayout(layout);
     KoTextDocument(document).setChangeTracker(changeTracker);

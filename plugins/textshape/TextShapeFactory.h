@@ -24,7 +24,7 @@
 #include <KoShapeFactoryBase.h>
 
 class KoShape;
-class KoInlineTextObjectManager;
+class KInlineTextObjectManager;
 
 class TextShapeFactory : public KoShapeFactoryBase
 {

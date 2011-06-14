@@ -96,7 +96,7 @@ enum Direction {
  */
 enum DocumentResource {
     ChangeTracker = KoDocumentResource::KoTextStart + 1, ///< KoChangeTracker
-    InlineTextObjectManager, ///< The KoText inline-text-object manager. KoInlineTextObjectManager
+    InlineTextObjectManager, ///< The KoText inline-text-object manager. KInlineTextObjectManager
     StyleManager,           ///< The KoStyleManager
     PageProvider            ///< The KoPageProvider
 };

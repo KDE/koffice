@@ -26,7 +26,7 @@
 #include "KoChangeTrackerElement.h"
 #include <KXmlReader.h>
 #include <KOdfXmlNS.h>
-#include <KoInlineTextObjectManager.h>
+#include <KInlineTextObjectManager.h>
 #include <KoTextDocument.h>
 #include <KoTextDocumentLayout.h>
 #include <KoList.h>

@@ -26,7 +26,7 @@
 #include <KoTextEditor.h>
 #include <KoTextDocument.h>
 #include <KoTextDocumentLayout.h>
-#include <KoInlineTextObjectManager.h>
+#include <KInlineTextObjectManager.h>
 #include <KoTextAnchor.h>
 #include <KoCanvasBase.h>
 #include <KoShapeController.h>
@@ -158,7 +158,7 @@ void DeleteCommand::deleteInlineObjects(QTextCursor &selection)
     KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(document->documentLayout());
     Q_ASSERT(layout);
 
-    KoInlineTextObjectManager *manager = layout->inlineTextObjectManager();
+    KInlineTextObjectManager *manager = layout->inlineTextObjectManager();
     KInlineObject *object;
 
     if (cursor.hasSelection()) {
@@ -315,7 +315,7 @@ DeleteCommand::~DeleteCommand()
         foreach (KInlineObject *object, m_invalidInlineObjects) {
             QTextDocument *document = textEditor->document();
             KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(document->documentLayout());
-            KoInlineTextObjectManager *manager = layout->inlineTextObjectManager();
+            KInlineTextObjectManager *manager = layout->inlineTextObjectManager();
             manager->removeInlineObject(object);
             delete object;
         }

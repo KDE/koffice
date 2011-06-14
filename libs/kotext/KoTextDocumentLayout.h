@@ -35,7 +35,7 @@ class KoTextDocumentLayout;
 class KoShape;
 class KoStyleManager;
 class QTextLayout;
-class KoInlineTextObjectManager;
+class KInlineTextObjectManager;
 class KoViewConverter;
 class KImageCollection;
 
@@ -73,10 +73,10 @@ public:
     /**
      * Register the manager for inline objects which is needed to notify variables of layout changes.
      */
-    void setInlineTextObjectManager(KoInlineTextObjectManager *manager);
+    void setInlineTextObjectManager(KInlineTextObjectManager *manager);
 
     /// return the currently set manager, or 0 if none is set.
-    KoInlineTextObjectManager *inlineTextObjectManager();
+    KInlineTextObjectManager *inlineTextObjectManager();
 
     /// Returns the bounding rectangle of block.
     virtual QRectF blockBoundingRect(const QTextBlock &block) const;

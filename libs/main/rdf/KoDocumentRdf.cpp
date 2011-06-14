@@ -37,7 +37,7 @@
 #include <KoTextEditor.h>
 #include <KInlineObject.h>
 #include <KoTextInlineRdf.h>
-#include <KoInlineTextObjectManager.h>
+#include <KInlineTextObjectManager.h>
 #include <KoBookmark.h>
 #include <KoTextMeta.h>
 
@@ -881,7 +881,7 @@ QPair<int, int> KoDocumentRdf::findExtent(QTextCursor &cursor)
     //
     // Look backwards for enclosing text:meta and bookmark-start tags
     //
-    if (KoInlineTextObjectManager *textObjectManager
+    if (KInlineTextObjectManager *textObjectManager
             = KoTextDocument(cursor.document()).inlineTextObjectManager()) {
         long searchStartPosition = cursor.position();
         int limit = 500;
@@ -928,7 +928,7 @@ QPair<int, int> KoDocumentRdf::findExtent(KoTextEditor *handler)
     //
     // Look backwards for enclosing text:meta and bookmark-start tags
     //
-    if (KoInlineTextObjectManager *textObjectManager
+    if (KInlineTextObjectManager *textObjectManager
             = KoTextDocument(handler->document()).inlineTextObjectManager()) {
         long searchStartPosition = handler->position();
         KoTextEditor tc(handler->document());
@@ -976,7 +976,7 @@ QString KoDocumentRdf::findXmlId(KoTextEditor *handler)
     //
     // Look backwards for enclosing text:meta and bookmark-start tags
     //
-    if (KoInlineTextObjectManager *textObjectManager
+    if (KInlineTextObjectManager *textObjectManager
             = KoTextDocument(handler->document()).inlineTextObjectManager()) {
         long searchStartPosition = handler->position();
         KoTextEditor tc(handler->document());
@@ -1034,7 +1034,7 @@ QString KoDocumentRdf::findXmlId(QTextCursor &cursor)
     //
     // Look backwards for enclosing text:meta and bookmark-start tags
     //
-    if (KoInlineTextObjectManager *textObjectManager
+    if (KInlineTextObjectManager *textObjectManager
             = KoTextDocument(cursor.document()).inlineTextObjectManager()) {
         long searchStartPosition = cursor.position();
         int limit = 500;
@@ -1091,7 +1091,7 @@ Soprano::Model *KoDocumentRdf::findStatements(QTextCursor &cursor, int depth)
     //
     // Look backwards for enclosing text:meta and bookmark-start tags
     //
-    if (KoInlineTextObjectManager *textObjectManager
+    if (KInlineTextObjectManager *textObjectManager
             = KoTextDocument(cursor.document()).inlineTextObjectManager()) {
         long searchStartPosition = cursor.position();
         int limit = 500;
@@ -1192,7 +1192,7 @@ Soprano::Model *KoDocumentRdf::findStatements(KoTextEditor *handler, int depth)
     //
     // Look backwards for enclosing text:meta and bookmark-start tags
     //
-    if (KoInlineTextObjectManager *textObjectManager
+    if (KInlineTextObjectManager *textObjectManager
             = KoTextDocument(handler->document()).inlineTextObjectManager()) {
         long searchStartPosition = handler->position();
         KoTextEditor tc(handler->document());
@@ -1297,7 +1297,7 @@ void KoDocumentRdf::rememberNewInlineRdfObject(KoTextInlineRdf *inlineRdf)
 void KoDocumentRdf::updateInlineRdfStatements(QTextDocument *qdoc)
 {
     RDEBUG << "top";
-    KoInlineTextObjectManager *textObjectManager = KoTextDocument(qdoc).inlineTextObjectManager();
+    KInlineTextObjectManager *textObjectManager = KoTextDocument(qdoc).inlineTextObjectManager();
     d->inlineRdfObjects.clear();
     if(!textObjectManager) {
         return;

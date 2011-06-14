@@ -56,7 +56,7 @@
 #include <KoStyleManager.h>
 #include <KoResourceManager.h>
 #include <KoInteractionTool.h>
-#include <KoInlineTextObjectManager.h>
+#include <KInlineTextObjectManager.h>
 #include <KoDocumentInfo.h>
 #include <KoCharacterStyle.h>
 #include <KoParagraphStyle.h>
@@ -432,10 +432,10 @@ KWTextFrameSet *KWDocument::mainFrameSet() const
     return m_frameLayout.mainFrameSet();
 }
 
-KoInlineTextObjectManager *KWDocument::inlineTextObjectManager() const
+KInlineTextObjectManager *KWDocument::inlineTextObjectManager() const
 {
     QVariant var = resourceManager()->resource(KoText::InlineTextObjectManager);
-    return var.value<KoInlineTextObjectManager*>();
+    return var.value<KInlineTextObjectManager*>();
 }
 
 QString KWDocument::uniqueFrameSetName(const QString &suggestion)

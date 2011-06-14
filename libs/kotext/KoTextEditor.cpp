@@ -22,7 +22,7 @@
 #include "KoTextEditor_p.h"
 
 #include "KoBookmark.h"
-#include "KoInlineTextObjectManager.h"
+#include "KInlineTextObjectManager.h"
 #include <KOdf.h>
 #include "KoTextDocument.h"
 #include "KoTextDocumentLayout.h"
@@ -178,7 +178,7 @@ bool KoTextEditorPrivate::deleteInlineObjects(bool backwards)
     QTextCursor cursor(*d->caret);
     KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(d->textShapeData->document()->documentLayout());
     Q_ASSERT(layout);
-    KoInlineTextObjectManager *manager = layout->inlineObjectTextManager();
+    KInlineTextObjectManager *manager = layout->inlineObjectTextManager();
     KInlineObject *object;
     bool found = false;
 

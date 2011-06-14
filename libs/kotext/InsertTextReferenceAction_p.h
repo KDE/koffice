@@ -32,7 +32,7 @@
 
 #include "InsertInlineObjectActionBase_p.h"
 
-class KoInlineTextObjectManager;
+class KInlineTextObjectManager;
 
 /**
  * helper class
@@ -40,12 +40,12 @@ class KoInlineTextObjectManager;
 class InsertTextReferenceAction : public InsertInlineObjectActionBase
 {
 public:
-    InsertTextReferenceAction(KoCanvasBase *canvas, const KoInlineTextObjectManager *manager);
+    InsertTextReferenceAction(KoCanvasBase *canvas, const KInlineTextObjectManager *manager);
 
 private:
     virtual KInlineObject *createInlineObject();
 
-    const KoInlineTextObjectManager *m_manager;
+    const KInlineTextObjectManager *m_manager;
 };
 
 #endif

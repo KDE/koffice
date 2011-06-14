@@ -29,7 +29,7 @@
 #include <KOdfXmlNS.h>
 #include <KoStyleManager.h>
 #include <KoResourceManager.h>
-#include <KoInlineTextObjectManager.h>
+#include <KInlineTextObjectManager.h>
 #include <changetracker/KoChangeTracker.h>
 #include <KImageCollection.h>
 #include <KoShapeLoadingContext.h>
@@ -65,7 +65,7 @@ KoShape *TextShapeFactory::createDefaultShape(KoResourceManager *documentResourc
         KoTextDocument document(text->textShapeData()->document());
         document.setUndoStack(documentResources->undoStack());
 
-        KoInlineTextObjectManager *itom = documentResources->resource(KoText::InlineTextObjectManager).value<KoInlineTextObjectManager*>();
+        KInlineTextObjectManager *itom = documentResources->resource(KoText::InlineTextObjectManager).value<KInlineTextObjectManager*>();
         if (itom)
             document.setInlineTextObjectManager(itom);
 
@@ -135,7 +135,7 @@ void TextShapeFactory::createStylemanager(KoResourceManager *manager)
 void TextShapeFactory::createTextObjectManager(KoResourceManager *manager)
 {
     QVariant variant;
-    variant.setValue<KoInlineTextObjectManager*>(new KoInlineTextObjectManager(manager));
+    variant.setValue<KInlineTextObjectManager*>(new KInlineTextObjectManager(manager));
     manager->setResource(KoText::InlineTextObjectManager, variant);
 }
 

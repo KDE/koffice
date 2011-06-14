@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 #include "KoVariableManager.h"
-#include "KoInlineTextObjectManager.h"
+#include "KInlineTextObjectManager.h"
 #include "KoNamedVariable_p.h"
 
 class KoVariableManagerPrivate
@@ -25,12 +25,12 @@ class KoVariableManagerPrivate
 public:
     KoVariableManagerPrivate()
             : lastId(KInlineObject::VariableManagerStart) { }
-    KoInlineTextObjectManager *inlineObjectManager;
+    KInlineTextObjectManager *inlineObjectManager;
     QHash<QString, int> variableMapping;
     int lastId;
 };
 
-KoVariableManager::KoVariableManager(KoInlineTextObjectManager *inlineObjectManager)
+KoVariableManager::KoVariableManager(KInlineTextObjectManager *inlineObjectManager)
         : d(new KoVariableManagerPrivate)
 {
     d->inlineObjectManager = inlineObjectManager;

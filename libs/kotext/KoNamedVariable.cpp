@@ -18,7 +18,7 @@
  */
 
 #include "KoNamedVariable_p.h"
-#include "KoInlineTextObjectManager.h"
+#include "KInlineTextObjectManager.h"
 #include <KProperties.h>
 
 #include <KXmlReader.h> // for usage in Q_UNUSED

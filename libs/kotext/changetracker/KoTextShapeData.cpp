@@ -50,7 +50,7 @@
 #include <KoChangeTracker.h>
 #include <KoChangeTrackerElement.h>
 #include <KoTextAnchor.h>
-#include <KoInlineTextObjectManager.h>
+#include <KInlineTextObjectManager.h>
 #include <KoCanvasBase.h>
 #include <KoShapeController.h>
 #include <KoShapeContainer.h>

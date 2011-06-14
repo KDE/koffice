@@ -54,7 +54,7 @@
 #include <KoParagraphStyle.h>
 #include <KoText.h>
 #include <KOdfEmbeddedDocumentSaver.h>
-#include <KoInlineTextObjectManager.h>
+#include <KInlineTextObjectManager.h>
 #include <KoTextSharedLoadingData.h>
 #include <KoTextSharedSavingData.h>
 #include <KoTextDocument.h>
@@ -1080,7 +1080,7 @@ QString TestLoading::documentToOdt(QTextDocument *document)
         // Setup layout and managers just like kotext
         KoTextDocumentLayout *layout = new KoTextDocumentLayout(textShapeData->document());
         textShapeData->document()->setDocumentLayout(layout);
-        layout->setInlineTextObjectManager(new KoInlineTextObjectManager(layout)); // required while saving
+        layout->setInlineTextObjectManager(new KInlineTextObjectManager(layout)); // required while saving
         KoStyleManager *styleManager = new KoStyleManager;
         KoTextDocument(textShapeData->document()).setStyleManager(styleManager);
     }

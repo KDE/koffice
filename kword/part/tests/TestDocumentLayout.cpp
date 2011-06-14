@@ -31,7 +31,7 @@
 #include <KoTextDocument.h>
 #include <MockShapes.h>
 #include <KoTextAnchor.h>
-#include <KoInlineTextObjectManager.h>
+#include <KInlineTextObjectManager.h>
 
 #include <kdebug.h>
 #include <kcomponentdata.h>
@@ -181,7 +181,7 @@ void TestDocumentLayout::placeAnchoredFrame()
     anchor->setOffset(QPointF(23, 45));
     QTextCursor cursor(doc);
 
-    KoInlineTextObjectManager *manager = new KoInlineTextObjectManager();
+    KInlineTextObjectManager *manager = new KInlineTextObjectManager();
     layout->setInlineTextObjectManager(manager);
     MockLayoutState *state = new MockLayoutState(doc);
     layout->setLayout(state);
@@ -268,7 +268,7 @@ void TestDocumentLayout::placeAnchoredFrame2()
     picture->setPosition(startPosition);
     QTextCursor cursor(doc);
 
-    KoInlineTextObjectManager *manager = new KoInlineTextObjectManager();
+    KInlineTextObjectManager *manager = new KInlineTextObjectManager();
     layout->setInlineTextObjectManager(manager);
     MockLayoutState *state = new MockLayoutState(doc);
     layout->setLayout(state);
@@ -299,7 +299,7 @@ void TestDocumentLayout::placeAnchoredFrame3()
     anchor->setAlignment(KoTextAnchor::VerticalOffset);
     anchor->setAlignment(KoTextAnchor::HorizontalOffset);
     QTextCursor cursor(doc);
-    KoInlineTextObjectManager *manager = new KoInlineTextObjectManager();
+    KInlineTextObjectManager *manager = new KInlineTextObjectManager();
     layout->setInlineTextObjectManager(manager);
     MockLayoutState *state = new MockLayoutState(doc);
     layout->setLayout(state);

@@ -34,7 +34,7 @@ class KoShapeLoadingContext;
 /**
  * This singleton class keeps a register of all available InlineObject factories.
  * @see KInlineObjectFactoryBase
- * @see KoInlineTextObjectManager
+ * @see KInlineTextObjectManager
  * @see KInlineObject
  * @see KoVariable
  */
@@ -59,7 +59,7 @@ public:
      * The actions assume that the text tool is selected, if thats not the case then they will silently fail.
      * @param host the canvas for which these actions are created.  Note that the actions will get these
      *  actions as a parent (for memory management purposes) as well.
-     * @see KoInlineTextObjectManager::createInsertVariableActions()
+     * @see KInlineTextObjectManager::createInsertVariableActions()
      */
     QList<QAction*> createInsertVariableActions(KoCanvasBase *host) const;
 

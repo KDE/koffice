@@ -40,7 +40,7 @@
 #include <KoTextBlockData.h>
 #include <KoTextBlockBorderData.h>
 #include <KInlineNote.h>
-#include <KoInlineTextObjectManager.h>
+#include <KInlineTextObjectManager.h>
 #include <KoShape.h>
 #include <KUnit.h>
 #include <KoTextDocument.h>

@@ -37,7 +37,7 @@
 #include <KoTextShapeData.h>
 #include <KoTextAnchor.h>
 #include <KoTextDocumentLayout.h>
-#include <KoInlineTextObjectManager.h>
+#include <KInlineTextObjectManager.h>
 #include <KoColorBackground.h>
 #include <KImageCollection.h>
 #include <KImageData.h>

@@ -21,7 +21,7 @@
 
 #include <KoTextDocument.h>
 #include <KoTextEditor.h>
-#include <KoInlineTextObjectManager.h>
+#include <KInlineTextObjectManager.h>
 #include <KoBookmarkManager.h>
 #include <KoBookmark.h>
 #include <KoTextPage.h>
@@ -46,7 +46,7 @@ JumpOverview::JumpOverview(QTextDocument *doc, QWidget *parent)
     setDefaultButton(Ok);
     setModal(true);
 
-    KoInlineTextObjectManager *itom = m_doc.inlineTextObjectManager();
+    KInlineTextObjectManager *itom = m_doc.inlineTextObjectManager();
     if (itom == 0)
         return;
     KoBookmarkManager *bookmarkManager = itom->bookmarkManager();

@@ -20,7 +20,7 @@
 #include "InsertTextReferenceAction_p.h"
 #include "KoTextLocator.h"
 #include "KoTextReference_p.h"
-#include "KoInlineTextObjectManager.h"
+#include "KInlineTextObjectManager.h"
 
 #include <KoCanvasBase.h>
 
@@ -31,7 +31,7 @@
 #include <QListWidget>
 #include <QLabel>
 
-InsertTextReferenceAction::InsertTextReferenceAction(KoCanvasBase *canvas, const KoInlineTextObjectManager *manager)
+InsertTextReferenceAction::InsertTextReferenceAction(KoCanvasBase *canvas, const KInlineTextObjectManager *manager)
         : InsertInlineObjectActionBase(canvas, i18n("Text Reference")),
         m_manager(manager)
 {

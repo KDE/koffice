@@ -28,7 +28,7 @@
 #include "KoList.h"
 
 class KoStyleManager;
-class KoInlineTextObjectManager;
+class KInlineTextObjectManager;
 class KUndoStack;
 class KoTextEditor;
 class KoChangeTracker;
@@ -105,11 +105,11 @@ public:
     /// Return the KoList that holds \a listId
     KoList *list(KoListStyle::ListIdType listId) const;
 
-    /// Returns the KoInlineTextObjectManager
-    KoInlineTextObjectManager *inlineTextObjectManager() const;
+    /// Returns the KInlineTextObjectManager
+    KInlineTextObjectManager *inlineTextObjectManager() const;
 
-    /// Set the KoInlineTextObjectManager
-    void setInlineTextObjectManager(KoInlineTextObjectManager *manager);
+    /// Set the KInlineTextObjectManager
+    void setInlineTextObjectManager(KInlineTextObjectManager *manager);
 
     /**
      * Enum to describe the text document's automatic resizing behaviour

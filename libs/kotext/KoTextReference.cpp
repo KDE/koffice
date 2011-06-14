@@ -19,7 +19,7 @@
 
 #include "KoTextReference_p.h"
 #include "KoTextLocator.h"
-#include "KoInlineTextObjectManager.h"
+#include "KInlineTextObjectManager.h"
 
 #include <KXmlReader.h> // for usage in Q_UNUSED
 #include <KoShapeLoadingContext.h> // for usage in Q_UNUSED

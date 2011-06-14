@@ -17,7 +17,7 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#include "KoInlineTextObjectManager.h"
+#include "KInlineTextObjectManager.h"
 #include "InsertNamedVariableAction_p.h"
 #include "InsertTextReferenceAction_p.h"
 #include "InsertTextLocator_p.h"
@@ -28,14 +28,14 @@
 #include <QTextCursor>
 #include <QPainter>
 
-KoInlineTextObjectManager::KoInlineTextObjectManager(QObject *parent)
+KInlineTextObjectManager::KInlineTextObjectManager(QObject *parent)
         : QObject(parent),
         m_lastObjectId(0),
         m_variableManager(this)
 {
 }
 
-KInlineObject *KoInlineTextObjectManager::inlineTextObject(const QTextCharFormat &format) const
+KInlineObject *KInlineTextObjectManager::inlineTextObject(const QTextCharFormat &format) const
 {
     int id = format.intProperty(InlineInstanceId);
     if (id <= 0)
@@ -43,17 +43,17 @@ KInlineObject *KoInlineTextObjectManager::inlineTextObject(const QTextCharFormat
     return m_objects.value(id);
 }
 
-KInlineObject *KoInlineTextObjectManager::inlineTextObject(const QTextCursor &cursor) const
+KInlineObject *KInlineTextObjectManager::inlineTextObject(const QTextCursor &cursor) const
 {
     return inlineTextObject(cursor.charFormat());
 }
 
-KInlineObject *KoInlineTextObjectManager::inlineTextObject(int id) const
+KInlineObject *KInlineTextObjectManager::inlineTextObject(int id) const
 {
     return m_objects.value(id);
 }
 
-void KoInlineTextObjectManager::insertInlineObject(QTextCursor &cursor, KInlineObject *object, QTextCharFormat charFormat)
+void KInlineTextObjectManager::insertInlineObject(QTextCursor &cursor, KInlineObject *object, QTextCharFormat charFormat)
 {
     QTextCharFormat oldCf = cursor.charFormat();
     QTextCharFormat cf(charFormat);
@@ -83,7 +83,7 @@ void KoInlineTextObjectManager::insertInlineObject(QTextCursor &cursor, KInlineO
     cursor.setCharFormat(oldCf);
 }
 
-bool KoInlineTextObjectManager::removeInlineObject(QTextCursor &cursor)
+bool KInlineTextObjectManager::removeInlineObject(QTextCursor &cursor)
 {
     KInlineObject *object = inlineTextObject(cursor);
     if (object->propertyChangeListener()) {
@@ -123,7 +123,7 @@ bool KoInlineTextObjectManager::removeInlineObject(QTextCursor &cursor)
     return false;
 }
 
-void KoInlineTextObjectManager::removeInlineObject(KInlineObject *object)
+void KInlineTextObjectManager::removeInlineObject(KInlineObject *object)
 {
     //Q_ASSERT(object);
     if (object)
@@ -131,7 +131,7 @@ void KoInlineTextObjectManager::removeInlineObject(KInlineObject *object)
     // TODO dirty the document somehow
 }
 
-void KoInlineTextObjectManager::setProperty(KInlineObject::Property key, const QVariant &value)
+void KInlineTextObjectManager::setProperty(KInlineObject::Property key, const QVariant &value)
 {
     if (m_properties.contains(key)) {
         if (value == m_properties.value(key))
@@ -143,53 +143,53 @@ void KoInlineTextObjectManager::setProperty(KInlineObject::Property key, const Q
         obj->propertyChanged(key, value);
 }
 
-QVariant KoInlineTextObjectManager::property(KInlineObject::Property key) const
+QVariant KInlineTextObjectManager::property(KInlineObject::Property key) const
 {
     return m_properties.value(key);
 }
 
-int KoInlineTextObjectManager::intProperty(KInlineObject::Property key) const
+int KInlineTextObjectManager::intProperty(KInlineObject::Property key) const
 {
     if (!m_properties.contains(key))
         return 0;
     return m_properties.value(key).toInt();
 }
 
-bool KoInlineTextObjectManager::boolProperty(KInlineObject::Property key) const
+bool KInlineTextObjectManager::boolProperty(KInlineObject::Property key) const
 {
     if (!m_properties.contains(key))
         return false;
     return m_properties.value(key).toBool();
 }
 
-QString KoInlineTextObjectManager::stringProperty(KInlineObject::Property key) const
+QString KInlineTextObjectManager::stringProperty(KInlineObject::Property key) const
 {
     if (!m_properties.contains(key))
         return QString();
     return qvariant_cast<QString>(m_properties.value(key));
 }
 
-const KoVariableManager *KoInlineTextObjectManager::variableManager() const
+const KoVariableManager *KInlineTextObjectManager::variableManager() const
 {
     return &m_variableManager;
 }
 
-KoVariableManager *KoInlineTextObjectManager::variableManager()
+KoVariableManager *KInlineTextObjectManager::variableManager()
 {
     return &m_variableManager;
 }
 
-KoBookmarkManager *KoInlineTextObjectManager::bookmarkManager()
+KoBookmarkManager *KInlineTextObjectManager::bookmarkManager()
 {
     return &m_bookmarkManager;
 }
 
-void KoInlineTextObjectManager::removeProperty(KInlineObject::Property key)
+void KInlineTextObjectManager::removeProperty(KInlineObject::Property key)
 {
     m_properties.remove(key);
 }
 
-QList<QAction*> KoInlineTextObjectManager::createInsertVariableActions(KoCanvasBase *host) const
+QList<QAction*> KInlineTextObjectManager::createInsertVariableActions(KoCanvasBase *host) const
 {
     QList<QAction *> answer = KInlineObjectRegistry::instance()->createInsertVariableActions(host);
     int i = 0;
@@ -202,7 +202,7 @@ QList<QAction*> KoInlineTextObjectManager::createInsertVariableActions(KoCanvasB
     return answer;
 }
 
-QList<KoTextLocator*> KoInlineTextObjectManager::textLocators() const
+QList<KoTextLocator*> KInlineTextObjectManager::textLocators() const
 {
     QList<KoTextLocator*> answers;
     foreach(KInlineObject *object, m_objects) {
@@ -213,7 +213,7 @@ QList<KoTextLocator*> KoInlineTextObjectManager::textLocators() const
     return answers;
 }
 
-void KoInlineTextObjectManager::documentInformationUpdated(const QString &info, const QString &data)
+void KInlineTextObjectManager::documentInformationUpdated(const QString &info, const QString &data)
 {
     if (info == "title")
         setProperty(KInlineObject::Title, data);
@@ -251,9 +251,9 @@ void KoInlineTextObjectManager::documentInformationUpdated(const QString &info, 
         setProperty(KInlineObject::SenderCompany, data);
 }
 
-QList<KInlineObject*> KoInlineTextObjectManager::inlineTextObjects() const
+QList<KInlineObject*> KInlineTextObjectManager::inlineTextObjects() const
 {
     return m_objects.values();
 }
 
-#include <KoInlineTextObjectManager.moc>
+#include <KInlineTextObjectManager.moc>

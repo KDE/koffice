@@ -18,11 +18,11 @@
  */
 
 #include "InsertNamedVariableAction_p.h"
-#include "KoInlineTextObjectManager.h"
+#include "KInlineTextObjectManager.h"
 
 #include "KoVariable.h"
 
-InsertNamedVariableAction::InsertNamedVariableAction(KoCanvasBase *canvas, const KoInlineTextObjectManager *manager, const QString &name)
+InsertNamedVariableAction::InsertNamedVariableAction(KoCanvasBase *canvas, const KInlineTextObjectManager *manager, const QString &name)
         : InsertInlineObjectActionBase(canvas, name),
         m_manager(manager),
         m_name(name)

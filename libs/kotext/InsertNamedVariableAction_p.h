@@ -35,7 +35,7 @@
 #include <QString>
 
 class KoCanvasBase;
-class KoInlineTextObjectManager;
+class KInlineTextObjectManager;
 
 /**
  * helper class
@@ -43,12 +43,12 @@ class KoInlineTextObjectManager;
 class InsertNamedVariableAction : public InsertInlineObjectActionBase
 {
 public:
-    InsertNamedVariableAction(KoCanvasBase *canvas, const KoInlineTextObjectManager *manager, const QString &name);
+    InsertNamedVariableAction(KoCanvasBase *canvas, const KInlineTextObjectManager *manager, const QString &name);
 
 private:
     virtual KInlineObject *createInlineObject();
 
-    const KoInlineTextObjectManager *m_manager;
+    const KInlineTextObjectManager *m_manager;
     QString m_name;
 };
 

@@ -38,7 +38,7 @@
 #include "KoTextDocument.h"
 #include "KoTextBlockData.h"
 #include <KoTextDocumentLayout.h>
-#include <KoInlineTextObjectManager.h>
+#include <KInlineTextObjectManager.h>
 #include <KoBookmark.h>
 #include <KInlineNote.h>
 
@@ -124,7 +124,7 @@ QString KoTextDebug::inlineObjectAttributes(const QTextCharFormat &textFormat)
 
     if (textFormat.objectType() == QTextFormat::UserObject + 1) {
         KoTextDocumentLayout *lay = document ? qobject_cast<KoTextDocumentLayout *>(document->documentLayout()) : 0;
-        KoInlineTextObjectManager *inlineObjectManager = lay ? lay->inlineTextObjectManager() : 0;
+        KInlineTextObjectManager *inlineObjectManager = lay ? lay->inlineTextObjectManager() : 0;
         KInlineObject *inlineObject = inlineObjectManager->inlineTextObject(textFormat);
         if (KoBookmark *bookmark = dynamic_cast<KoBookmark *>(inlineObject)) {
             if (bookmark->type() == KoBookmark::SinglePosition) {
