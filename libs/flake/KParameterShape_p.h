@@ -38,10 +38,10 @@
 #include <QList>
 #include <QPointF>
 
-class KoParameterShapePrivate : public KoPathShapePrivate
+class KParameterShapePrivate : public KoPathShapePrivate
 {
 public:
-    KoParameterShapePrivate(KParameterShape *shape)
+    KParameterShapePrivate(KParameterShape *shape)
         : KoPathShapePrivate(shape),
         parametric(true)
     {

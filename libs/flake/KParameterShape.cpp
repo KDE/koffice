@@ -25,11 +25,11 @@
 #include <KDebug>
 
 KParameterShape::KParameterShape()
-    : KoPathShape(*(new KoParameterShapePrivate(this)))
+    : KoPathShape(*(new KParameterShapePrivate(this)))
 {
 }
 
-KParameterShape::KParameterShape(KoParameterShapePrivate &dd)
+KParameterShape::KParameterShape(KParameterShapePrivate &dd)
     : KoPathShape(dd)
 {
 }

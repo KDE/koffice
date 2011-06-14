@@ -24,7 +24,7 @@
 #include "KoPathShape.h"
 #include "flake_export.h"
 
-class KoParameterShapePrivate;
+class KParameterShapePrivate;
 
 /**
  * KParameterShape is the base class for all parametric shapes
@@ -137,7 +137,7 @@ protected:
     void setHandles(const QList<QPointF> &handles);
 
     /// constructor
-    KParameterShape(KoParameterShapePrivate &);
+    KParameterShape(KParameterShapePrivate &);
 
     /**
      * @brief Updates the internal state of a KParameterShape.
