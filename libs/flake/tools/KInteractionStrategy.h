@@ -28,7 +28,7 @@
 
 class KoPointerEvent;
 class KoViewConverter;
-class KoInteractionStrategyPrivate;
+class KInteractionStrategyPrivate;
 class KoToolBase;
 class QUndoCommand;
 class QPointF;
@@ -94,9 +94,9 @@ protected:
     void setStatusText(const QString &statusText);
 
     /// constructor
-    KInteractionStrategy(KoInteractionStrategyPrivate &);
+    KInteractionStrategy(KInteractionStrategyPrivate &);
 
-    KoInteractionStrategyPrivate *d_ptr;
+    KInteractionStrategyPrivate *d_ptr;
 
 private:
     Q_DECLARE_PRIVATE(KInteractionStrategy)

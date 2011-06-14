@@ -35,11 +35,11 @@
 #include "KInteractionStrategy_p.h"
 #include "KoSnapGuide.h"
 
-class KoShapeRubberSelectStrategyPrivate : public KoInteractionStrategyPrivate
+class KoShapeRubberSelectStrategyPrivate : public KInteractionStrategyPrivate
 {
 public:
     KoShapeRubberSelectStrategyPrivate(KoToolBase *owner)
-        : KoInteractionStrategyPrivate(owner),
+        : KInteractionStrategyPrivate(owner),
         snapGuide(new KoSnapGuide(owner->canvas()))
     {
     }

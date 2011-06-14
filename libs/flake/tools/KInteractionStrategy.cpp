@@ -23,7 +23,7 @@
 #include <QUndoCommand>
 
 KInteractionStrategy::KInteractionStrategy(KoToolBase *parent)
-    : d_ptr(new KoInteractionStrategyPrivate(parent))
+    : d_ptr(new KInteractionStrategyPrivate(parent))
 {
 }
 
@@ -41,7 +41,7 @@ void KInteractionStrategy::finishInteraction(Qt::KeyboardModifiers)
     // empty!
 }
 
-KInteractionStrategy::KInteractionStrategy(KoInteractionStrategyPrivate &dd)
+KInteractionStrategy::KInteractionStrategy(KInteractionStrategyPrivate &dd)
     : d_ptr(&dd)
 {
 }

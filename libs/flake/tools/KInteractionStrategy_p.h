@@ -35,15 +35,15 @@
 #include "../KoToolBase.h"
 #include "../KoToolBase_p.h"
 
-class KoInteractionStrategyPrivate
+class KInteractionStrategyPrivate
 {
 public:
-    KoInteractionStrategyPrivate(KoToolBase *t)
+    KInteractionStrategyPrivate(KoToolBase *t)
         : tool(t)
     {
     }
 
-    ~KoInteractionStrategyPrivate()
+    ~KInteractionStrategyPrivate()
     {
         tool->priv()->emitStatusText(QString());
     }
