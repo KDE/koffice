@@ -42,7 +42,7 @@
 #include "flake_export.h"
 
 /// The undo / redo command for changing the path point type.
-class FLAKE_TEST_EXPORT KoPathPointTypeCommand : public KPathBaseCommand
+class FLAKE_TEST_EXPORT KPathPointTypeCommand : public KPathBaseCommand
 {
 public:
     /// The type of the point
@@ -59,8 +59,8 @@ public:
      * @param pointType the new point type to set
      * @param parent the parent command used for macro commands
      */
-    KoPathPointTypeCommand(const QList<KPathPointData> &pointDataList, PointType pointType, QUndoCommand *parent = 0);
-    ~KoPathPointTypeCommand();
+    KPathPointTypeCommand(const QList<KPathPointData> &pointDataList, PointType pointType, QUndoCommand *parent = 0);
+    ~KPathPointTypeCommand();
 
     /// redo the command
     void redo();

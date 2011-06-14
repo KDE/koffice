@@ -25,7 +25,7 @@
 #include "KPathPointMoveStrategy_p.h"
 #include "KPathControlPointMoveStrategy_p.h"
 #include "KoSelection.h"
-#include "commands/KoPathPointTypeCommand_p.h"
+#include "commands/KPathPointTypeCommand_p.h"
 #include "KParameterChangeStrategy_p.h"
 #include "KParameterShape.h"
 #include "KCanvasBase.h"
@@ -112,16 +112,16 @@ KInteractionStrategy * PointHandle::handleMousePress(KoPointerEvent *event)
         if (! m_activePoint->activeControlPoint1() || ! m_activePoint->activeControlPoint2())
             return 0;
 
-        KoPathPointTypeCommand::PointType pointType = KoPathPointTypeCommand::Smooth;
+        KPathPointTypeCommand::PointType pointType = KPathPointTypeCommand::Smooth;
         // cycle the smooth->symmetric->unsmooth state of the path point
         if (props & KPathPoint::IsSmooth)
-            pointType = KoPathPointTypeCommand::Symmetric;
+            pointType = KPathPointTypeCommand::Symmetric;
         else if (props & KPathPoint::IsSymmetric)
-            pointType = KoPathPointTypeCommand::Corner;
+            pointType = KPathPointTypeCommand::Corner;
 
         QList<KPathPointData> pointData;
         pointData.append(KPathPointData(m_activePoint->parent(), m_activePoint->parent()->pathPointIndex(m_activePoint)));
-        m_tool->canvas()->addCommand(new KoPathPointTypeCommand(pointData, pointType));
+        m_tool->canvas()->addCommand(new KPathPointTypeCommand(pointData, pointType));
     }
     return 0;
 }

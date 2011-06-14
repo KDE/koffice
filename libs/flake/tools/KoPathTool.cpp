@@ -30,7 +30,7 @@
 #include "KoViewConverter.h"
 #include "KoSelection.h"
 #include "KoPointerEvent.h"
-#include "commands/KoPathPointTypeCommand_p.h"
+#include "commands/KPathPointTypeCommand_p.h"
 #include "commands/KPathPointInsertCommand.h"
 #include "commands/KPathPointRemoveCommand.h"
 #include "commands/KoPathSegmentTypeCommand.h"
@@ -86,17 +86,17 @@ KoPathTool::KoPathTool(KCanvasBase *canvas)
     // m_pointTypeGroup->setExclusive(true);
     m_actionPathPointCorner = new KAction(KIcon("pathpoint-corner"), i18n("Corner point"), this);
     addAction("pathpoint-corner", m_actionPathPointCorner);
-    m_actionPathPointCorner->setData(KoPathPointTypeCommand::Corner);
+    m_actionPathPointCorner->setData(KPathPointTypeCommand::Corner);
     points->addAction(m_actionPathPointCorner);
 
     m_actionPathPointSmooth = new KAction(KIcon("pathpoint-smooth"), i18n("Smooth point"), this);
     addAction("pathpoint-smooth", m_actionPathPointSmooth);
-    m_actionPathPointSmooth->setData(KoPathPointTypeCommand::Smooth);
+    m_actionPathPointSmooth->setData(KPathPointTypeCommand::Smooth);
     points->addAction(m_actionPathPointSmooth);
 
     m_actionPathPointSymmetric = new KAction(KIcon("pathpoint-symmetric"), i18n("Symmetric Point"), this);
     addAction("pathpoint-symmetric", m_actionPathPointSymmetric);
-    m_actionPathPointSymmetric->setData(KoPathPointTypeCommand::Symmetric);
+    m_actionPathPointSymmetric->setData(KPathPointTypeCommand::Symmetric);
     points->addAction(m_actionPathPointSymmetric);
 
     m_actionCurvePoint = new KAction(KIcon("pathpoint-curve"), i18n("Make curve point"), this);
@@ -200,8 +200,8 @@ void KoPathTool::pointTypeChanged(QAction *type)
         }
 
         if (!pointToChange.isEmpty()) {
-            KoPathPointTypeCommand *cmd = new KoPathPointTypeCommand(pointToChange,
-                    static_cast<KoPathPointTypeCommand::PointType>(type->data().toInt()));
+            KPathPointTypeCommand *cmd = new KPathPointTypeCommand(pointToChange,
+                    static_cast<KPathPointTypeCommand::PointType>(type->data().toInt()));
             d->canvas->addCommand(cmd);
             updateActions();
         }
@@ -256,7 +256,7 @@ void KoPathTool::pointToLine()
         }
 
         if (! pointToChange.isEmpty()) {
-            d->canvas->addCommand(new KoPathPointTypeCommand(pointToChange, KoPathPointTypeCommand::Line));
+            d->canvas->addCommand(new KPathPointTypeCommand(pointToChange, KPathPointTypeCommand::Line));
             updateActions();
         }
     }
@@ -277,7 +277,7 @@ void KoPathTool::pointToCurve()
         }
 
         if (! pointToChange.isEmpty()) {
-            d->canvas->addCommand(new KoPathPointTypeCommand(pointToChange, KoPathPointTypeCommand::Curve));
+            d->canvas->addCommand(new KPathPointTypeCommand(pointToChange, KPathPointTypeCommand::Curve));
             updateActions();
         }
     }

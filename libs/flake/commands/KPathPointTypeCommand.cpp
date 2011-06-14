@@ -18,11 +18,11 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoPathPointTypeCommand_p.h"
+#include "KPathPointTypeCommand_p.h"
 #include <klocale.h>
 #include <math.h>
 
-KoPathPointTypeCommand::KoPathPointTypeCommand(
+KPathPointTypeCommand::KPathPointTypeCommand(
     const QList<KPathPointData> & pointDataList,
     PointType pointType,
     QUndoCommand *parent)
@@ -46,11 +46,11 @@ KoPathPointTypeCommand::KoPathPointTypeCommand(
     setText(i18n("Set Point Type"));
 }
 
-KoPathPointTypeCommand::~KoPathPointTypeCommand()
+KPathPointTypeCommand::~KPathPointTypeCommand()
 {
 }
 
-void KoPathPointTypeCommand::redo()
+void KPathPointTypeCommand::redo()
 {
     QUndoCommand::redo();
     repaint(false);
@@ -154,7 +154,7 @@ void KoPathPointTypeCommand::redo()
     repaint(true);
 }
 
-void KoPathPointTypeCommand::undo()
+void KPathPointTypeCommand::undo()
 {
     QUndoCommand::undo();
     repaint(false);
@@ -183,7 +183,7 @@ void KoPathPointTypeCommand::undo()
     repaint(true);
 }
 
-void KoPathPointTypeCommand::undoChanges(const QList<PointData> &data)
+void KPathPointTypeCommand::undoChanges(const QList<PointData> &data)
 {
     QList<PointData>::const_iterator it(data.begin());
     for (; it != data.end(); ++it) {
@@ -202,7 +202,7 @@ void KoPathPointTypeCommand::undoChanges(const QList<PointData> &data)
     }
 }
 
-bool KoPathPointTypeCommand::appendPointData(KPathPointData data)
+bool KPathPointTypeCommand::appendPointData(KPathPointData data)
 {
     KPathPoint *point = data.pathShape->pointByIndex(data.pointIndex);
     if (! point)
