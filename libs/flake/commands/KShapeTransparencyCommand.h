@@ -30,7 +30,7 @@ class KShape;
 class KShapeBackground;
 
 /// The undo / redo command for setting the shape transparency
-class FLAKE_EXPORT KoShapeTransparencyCommand : public QUndoCommand
+class FLAKE_EXPORT KShapeTransparencyCommand : public QUndoCommand
 {
 public:
     /**
@@ -39,7 +39,7 @@ public:
      * @param transparency the new shape transparency
      * @param parent the parent command used for macro commands
      */
-    KoShapeTransparencyCommand(const QList<KShape*> &shapes, qreal transparency, QUndoCommand *parent = 0);
+    KShapeTransparencyCommand(const QList<KShape*> &shapes, qreal transparency, QUndoCommand *parent = 0);
 
     /**
      * Command to set a new shape transparency.
@@ -47,7 +47,7 @@ public:
      * @param transparency the new shape transparency
      * @param parent the parent command used for macro commands
      */
-    KoShapeTransparencyCommand(KShape *shape, qreal transparency, QUndoCommand *parent = 0);
+    KShapeTransparencyCommand(KShape *shape, qreal transparency, QUndoCommand *parent = 0);
 
     /**
      * Command to set new shape transparencies.
@@ -55,9 +55,9 @@ public:
      * @param transparencies the new transparencies, one for each shape
      * @param parent the parent command used for macro commands
      */
-    KoShapeTransparencyCommand(const QList<KShape*> &shapes, const QList<qreal> &transparencies, QUndoCommand *parent = 0);
+    KShapeTransparencyCommand(const QList<KShape*> &shapes, const QList<qreal> &transparencies, QUndoCommand *parent = 0);
 
-    virtual ~KoShapeTransparencyCommand();
+    virtual ~KShapeTransparencyCommand();
     /// redo the command
     void redo();
     /// revert the actions done in redo

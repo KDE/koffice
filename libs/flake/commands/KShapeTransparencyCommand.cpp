@@ -17,13 +17,13 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoShapeTransparencyCommand.h"
+#include "KShapeTransparencyCommand.h"
 #include "KShape.h"
 #include "KShapeBackground.h"
 
 #include <klocale.h>
 
-class KoShapeTransparencyCommand::Private
+class KShapeTransparencyCommand::Private
 {
 public:
     Private() {
@@ -36,7 +36,7 @@ public:
     QList<qreal> newTransparencies; ///< the new transparencies
 };
 
-KoShapeTransparencyCommand::KoShapeTransparencyCommand(const QList<KShape*> &shapes, qreal transparency, QUndoCommand *parent)
+KShapeTransparencyCommand::KShapeTransparencyCommand(const QList<KShape*> &shapes, qreal transparency, QUndoCommand *parent)
     : QUndoCommand(parent)
     , d(new Private())
 {
@@ -49,7 +49,7 @@ KoShapeTransparencyCommand::KoShapeTransparencyCommand(const QList<KShape*> &sha
     setText(i18n("Set Opacity"));
 }
 
-KoShapeTransparencyCommand::KoShapeTransparencyCommand(KShape * shape, qreal transparency, QUndoCommand *parent)
+KShapeTransparencyCommand::KShapeTransparencyCommand(KShape * shape, qreal transparency, QUndoCommand *parent)
     : QUndoCommand(parent)
     , d(new Private())
 {
@@ -60,7 +60,7 @@ KoShapeTransparencyCommand::KoShapeTransparencyCommand(KShape * shape, qreal tra
     setText(i18n("Set Opacity"));
 }
 
-KoShapeTransparencyCommand::KoShapeTransparencyCommand(const QList<KShape*> &shapes, const QList<qreal> &transparencies, QUndoCommand *parent)
+KShapeTransparencyCommand::KShapeTransparencyCommand(const QList<KShape*> &shapes, const QList<qreal> &transparencies, QUndoCommand *parent)
     : QUndoCommand(parent)
     , d(new Private())
 {
@@ -73,12 +73,12 @@ KoShapeTransparencyCommand::KoShapeTransparencyCommand(const QList<KShape*> &sha
     setText(i18n("Set Opacity"));
 }
 
-KoShapeTransparencyCommand::~KoShapeTransparencyCommand()
+KShapeTransparencyCommand::~KShapeTransparencyCommand()
 {
     delete d;
 }
 
-void KoShapeTransparencyCommand::redo()
+void KShapeTransparencyCommand::redo()
 {
     QUndoCommand::redo();
     QList<qreal>::iterator transparencyIt = d->newTransparencies.begin();
@@ -89,7 +89,7 @@ void KoShapeTransparencyCommand::redo()
     }
 }
 
-void KoShapeTransparencyCommand::undo()
+void KShapeTransparencyCommand::undo()
 {
     QUndoCommand::undo();
     QList<qreal>::iterator transparencyIt = d->oldTransparencies.begin();

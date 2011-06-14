@@ -143,7 +143,7 @@ set(flake_SRCS
     commands/KEventActionRemoveCommand.cpp
     commands/KShapeRenameCommand.cpp
     commands/KPathPointMergeCommand.cpp
-    commands/KoShapeTransparencyCommand.cpp
+    commands/KShapeTransparencyCommand.cpp
     tools/KCreatePathTool.cpp
     tools/KCreatePathToolFactory.cpp
     tools/KCreateShapeStrategy.cpp
@@ -226,7 +226,7 @@ install(
     commands/KShapeShearCommand.h
     commands/KShapeSizeCommand.h
     commands/KShapeTransformCommand.h
-    commands/KoShapeTransparencyCommand.h
+    commands/KShapeTransparencyCommand.h
     commands/KoShapeUngroupCommand.h
     commands/KoSubpathRemoveCommand.h
     flake_export.h
