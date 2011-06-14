@@ -56,7 +56,7 @@ class KShapeShadow;
 class KEventAction;
 class KShapePrivate;
 class KFilterEffectStack;
-class KoSnapData;
+class KSnapData;
 class KShapeConnection;
 class KShapeConnectionPolicy;
 class KXmlElement;
