@@ -50,25 +50,25 @@ class KXmlElement;
  * Each tablecell in the main text either is based on a table cell style, or its not. Where
  * it is based on a table cell style this is indecated that it has a property 'StyleId'
  * with an integer as value.  The integer value corresponds to the styleId() output of
- * a specific KoTableCellStyle.
+ * a specific KTableCellStyle.
  * @see KStyleManager
  */
-class KOTEXT_EXPORT KoTableCellStyle : public KTableBorderStyle
+class KOTEXT_EXPORT KTableCellStyle : public KTableBorderStyle
 {
     Q_OBJECT
 public:
     /// Constructor
-    KoTableCellStyle(QObject *parent = 0);
-    /// Creates a KoTableCellStyle with the given table cell format, and \a parent
-    KoTableCellStyle(const QTextTableCellFormat &tableCellFormat, QObject *parent = 0);
+    KTableCellStyle(QObject *parent = 0);
+    /// Creates a KTableCellStyle with the given table cell format, and \a parent
+    KTableCellStyle(const QTextTableCellFormat &tableCellFormat, QObject *parent = 0);
     /// Destructor
-    ~KoTableCellStyle();
+    ~KTableCellStyle();
 
-    /// Creates a KoTableCellStyle that represents the formatting of \a block.
-    static KoTableCellStyle *fromTableCell(const QTextTableCell &table, QObject *parent = 0);
+    /// Creates a KTableCellStyle that represents the formatting of \a block.
+    static KTableCellStyle *fromTableCell(const QTextTableCell &table, QObject *parent = 0);
 
     /// creates a clone of this style with the specified parent
-    KoTableCellStyle *clone(QObject *parent = 0);
+    KTableCellStyle *clone(QObject *parent = 0);
 
     /**
      * Adjust the bounding rectange boundingRect according to the paddings and margins
@@ -136,7 +136,7 @@ public:
      * @param w the width.
      * @param blanks a painterpath where blank borders should be added to.
      */
-    void drawSharedHorizontalBorder(QPainter &painter, const KoTableCellStyle &styleBelow,  qreal x, qreal y, qreal w, QPainterPath *blanks = 0) const;
+    void drawSharedHorizontalBorder(QPainter &painter, const KTableCellStyle &styleBelow,  qreal x, qreal y, qreal w, QPainterPath *blanks = 0) const;
 
     /**
      * Paint the bottom border.
@@ -170,7 +170,7 @@ public:
      * @param h the height.
      * @param blanks a painterpath where blank borders should be added to.
      */
-    void drawSharedVerticalBorder(QPainter &painter, const KoTableCellStyle &styleRight,  qreal x, qreal y, qreal h, QPainterPath *blanks = 0) const;
+    void drawSharedVerticalBorder(QPainter &painter, const KTableCellStyle &styleRight,  qreal x, qreal y, qreal h, QPainterPath *blanks = 0) const;
 
     /**
      * Paint the rightmost border.
@@ -204,10 +204,10 @@ public:
     Qt::Alignment alignment() const;
 
     /// set the parent style this one inherits its unset properties from.
-    void setParentStyle(KoTableCellStyle *parent);
+    void setParentStyle(KTableCellStyle *parent);
 
     /// return the parent style
-    KoTableCellStyle *parentStyle() const;
+    KTableCellStyle *parentStyle() const;
 
     /// return the name of the style.
     QString name() const;
@@ -228,7 +228,7 @@ public:
 
 
     /// copy all the properties from the other style to this style, effectively duplicating it.
-    void copyProperties(const KoTableCellStyle *style);
+    void copyProperties(const KTableCellStyle *style);
 
     /**
      * Apply this style to a blockFormat by copying all properties from this, and parent
@@ -240,9 +240,9 @@ public:
     void remove(int key);
 
     /// Compare the paragraph, character and list properties of this style with the other
-    bool operator==(const KoTableCellStyle &other) const;
+    bool operator==(const KTableCellStyle &other) const;
 
-    void removeDuplicates(const KoTableCellStyle &other);
+    void removeDuplicates(const KTableCellStyle &other);
 
     /**
      * Load the style form the element
@@ -293,7 +293,7 @@ private:
     BorderStyle oasisBorderStyle(const QString &borderstyle);
     QString odfBorderStyleString(const BorderStyle borderstyle);
 
-    Q_DECLARE_PRIVATE(KoTableCellStyle)
+    Q_DECLARE_PRIVATE(KTableCellStyle)
 };
 
 #endif

@@ -20,13 +20,13 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#include "KoTableCellStyle.h"
+#include "KTableCellStyle.h"
 #include "KStyleManager.h"
 #include <KOdfGenericStyle.h>
 #include <KOdfGenericStyles.h>
 #include "Styles_p.h"
 #include "KoTextDocument.h"
-#include "KoTableCellStyle_p.h"
+#include "KTableCellStyle_p.h"
 
 #include <KDebug>
 
@@ -54,31 +54,31 @@ void KoTableCellStylePrivate::setProperty(int key, const QVariant &value)
     stylesPrivate.add(key, value);
 }
 
-KoTableCellStyle::KoTableCellStyle(QObject *parent)
+KTableCellStyle::KTableCellStyle(QObject *parent)
     : KTableBorderStyle(*new KoTableCellStylePrivate(), parent)
 {
 }
 
-KoTableCellStyle::KoTableCellStyle(const QTextTableCellFormat &format, QObject *parent)
+KTableCellStyle::KTableCellStyle(const QTextTableCellFormat &format, QObject *parent)
     : KTableBorderStyle(*new KoTableCellStylePrivate(), format, parent)
 {
-    Q_D(KoTableCellStyle);
+    Q_D(KTableCellStyle);
     d->stylesPrivate = format.properties();
 }
 
-KoTableCellStyle::~KoTableCellStyle()
+KTableCellStyle::~KTableCellStyle()
 {
 }
 
-KoTableCellStyle *KoTableCellStyle::fromTableCell(const QTextTableCell &tableCell, QObject *parent)
+KTableCellStyle *KTableCellStyle::fromTableCell(const QTextTableCell &tableCell, QObject *parent)
 {
     QTextTableCellFormat tableCellFormat = tableCell.format().toTableCellFormat();
-    return new KoTableCellStyle(tableCellFormat, parent);
+    return new KTableCellStyle(tableCellFormat, parent);
 }
 
-QRectF KoTableCellStyle::contentRect(const QRectF &boundingRect) const
+QRectF KTableCellStyle::contentRect(const QRectF &boundingRect) const
 {
-    Q_D(const KoTableCellStyle);
+    Q_D(const KTableCellStyle);
     return boundingRect.adjusted(
                 d->edges[Left].outerPen.widthF() + d->edges[Left].spacing + d->edges[Left].innerPen.widthF() + propertyDouble(QTextFormat::TableCellLeftPadding),
                 d->edges[Top].outerPen.widthF() + d->edges[Top].spacing + d->edges[Top].innerPen.widthF() + propertyDouble(QTextFormat::TableCellTopPadding),
@@ -87,9 +87,9 @@ QRectF KoTableCellStyle::contentRect(const QRectF &boundingRect) const
    );
 }
 
-QRectF KoTableCellStyle::boundingRect(const QRectF &contentRect) const
+QRectF KTableCellStyle::boundingRect(const QRectF &contentRect) const
 {
-    Q_D(const KoTableCellStyle);
+    Q_D(const KTableCellStyle);
     return contentRect.adjusted(
                 - d->edges[Left].outerPen.widthF() - d->edges[Left].spacing - d->edges[Left].innerPen.widthF() - propertyDouble(QTextFormat::TableCellLeftPadding),
                 - d->edges[Top].outerPen.widthF() - d->edges[Top].spacing - d->edges[Top].innerPen.widthF() - propertyDouble(QTextFormat::TableCellTopPadding),
@@ -98,7 +98,7 @@ QRectF KoTableCellStyle::boundingRect(const QRectF &contentRect) const
    );
 }
 
-void KoTableCellStyle::paintBackground(QPainter &painter, const QRectF &bounds) const
+void KTableCellStyle::paintBackground(QPainter &painter, const QRectF &bounds) const
 {
     QRectF innerBounds = bounds;
 
@@ -107,7 +107,7 @@ void KoTableCellStyle::paintBackground(QPainter &painter, const QRectF &bounds) 
     }
 }
 
-KoTableCellStyle::BorderStyle KoTableCellStyle::oasisBorderStyle(const QString &borderstyle)
+KTableCellStyle::BorderStyle KTableCellStyle::oasisBorderStyle(const QString &borderstyle)
 {
     if (borderstyle == "none")
         return BorderNone;
@@ -132,7 +132,7 @@ KoTableCellStyle::BorderStyle KoTableCellStyle::oasisBorderStyle(const QString &
     return BorderSolid; // not needed to handle "solid" since it's the default
 }
 
-QString KoTableCellStyle::odfBorderStyleString(const KoTableCellStyle::BorderStyle borderstyle)
+QString KTableCellStyle::odfBorderStyleString(const KTableCellStyle::BorderStyle borderstyle)
 {
     switch (borderstyle) {
     case BorderDouble:
@@ -149,53 +149,53 @@ QString KoTableCellStyle::odfBorderStyleString(const KoTableCellStyle::BorderSty
     }
 }
 
-void KoTableCellStyle::setParentStyle(KoTableCellStyle *parent)
+void KTableCellStyle::setParentStyle(KTableCellStyle *parent)
 {
-    Q_D(KoTableCellStyle);
+    Q_D(KTableCellStyle);
     d->parentStyle = parent;
 }
 
-void KoTableCellStyle::setLeftPadding(qreal padding)
+void KTableCellStyle::setLeftPadding(qreal padding)
 {
     setProperty(QTextFormat::TableCellLeftPadding, padding);
 }
 
-void KoTableCellStyle::setTopPadding(qreal padding)
+void KTableCellStyle::setTopPadding(qreal padding)
 {
     setProperty(QTextFormat::TableCellTopPadding, padding);
 }
 
-void KoTableCellStyle::setRightPadding(qreal padding)
+void KTableCellStyle::setRightPadding(qreal padding)
 {
     setProperty(QTextFormat::TableCellRightPadding, padding);
 }
 
-void KoTableCellStyle::setBottomPadding(qreal padding)
+void KTableCellStyle::setBottomPadding(qreal padding)
 {
     setProperty(QTextFormat::TableCellBottomPadding, padding);
 }
 
-qreal KoTableCellStyle::leftPadding() const
+qreal KTableCellStyle::leftPadding() const
 {
     return propertyDouble(QTextFormat::TableCellLeftPadding);
 }
 
-qreal KoTableCellStyle::rightPadding() const
+qreal KTableCellStyle::rightPadding() const
 {
     return propertyDouble(QTextFormat::TableCellRightPadding);
 }
 
-qreal KoTableCellStyle::topPadding() const
+qreal KTableCellStyle::topPadding() const
 {
     return propertyDouble(QTextFormat::TableCellTopPadding);
 }
 
-qreal KoTableCellStyle::bottomPadding() const
+qreal KTableCellStyle::bottomPadding() const
 {
     return propertyDouble(QTextFormat::TableCellBottomPadding);
 }
 
-void KoTableCellStyle::setPadding(qreal padding)
+void KTableCellStyle::setPadding(qreal padding)
 {
     setBottomPadding(padding);
     setTopPadding(padding);
@@ -203,9 +203,9 @@ void KoTableCellStyle::setPadding(qreal padding)
     setLeftPadding(padding);
 }
 
-void KoTableCellStyle::setProperty(int key, const QVariant &value)
+void KTableCellStyle::setProperty(int key, const QVariant &value)
 {
-    Q_D(KoTableCellStyle);
+    Q_D(KTableCellStyle);
     if (d->parentStyle) {
         QVariant var = d->parentStyle->value(key);
         if (!var.isNull() && var == value) { // same as parent, so its actually a reset.
@@ -216,28 +216,28 @@ void KoTableCellStyle::setProperty(int key, const QVariant &value)
     d->stylesPrivate.add(key, value);
 }
 
-void KoTableCellStyle::remove(int key)
+void KTableCellStyle::remove(int key)
 {
-    Q_D(KoTableCellStyle);
+    Q_D(KTableCellStyle);
     d->stylesPrivate.remove(key);
 }
 
-QVariant KoTableCellStyle::value(int key) const
+QVariant KTableCellStyle::value(int key) const
 {
-    Q_D(const KoTableCellStyle);
+    Q_D(const KTableCellStyle);
     QVariant var = d->stylesPrivate.value(key);
     if (var.isNull() && d->parentStyle)
         var = d->parentStyle->value(key);
     return var;
 }
 
-bool KoTableCellStyle::hasProperty(int key) const
+bool KTableCellStyle::hasProperty(int key) const
 {
-    Q_D(const KoTableCellStyle);
+    Q_D(const KTableCellStyle);
     return d->stylesPrivate.contains(key);
 }
 
-qreal KoTableCellStyle::propertyDouble(int key) const
+qreal KTableCellStyle::propertyDouble(int key) const
 {
     QVariant variant = value(key);
     if (variant.isNull())
@@ -245,7 +245,7 @@ qreal KoTableCellStyle::propertyDouble(int key) const
     return variant.toDouble();
 }
 
-int KoTableCellStyle::propertyInt(int key) const
+int KTableCellStyle::propertyInt(int key) const
 {
     QVariant variant = value(key);
     if (variant.isNull())
@@ -253,7 +253,7 @@ int KoTableCellStyle::propertyInt(int key) const
     return variant.toInt();
 }
 
-bool KoTableCellStyle::propertyBoolean(int key) const
+bool KTableCellStyle::propertyBoolean(int key) const
 {
     QVariant variant = value(key);
     if (variant.isNull())
@@ -261,7 +261,7 @@ bool KoTableCellStyle::propertyBoolean(int key) const
     return variant.toBool();
 }
 
-QColor KoTableCellStyle::propertyColor(int key) const
+QColor KTableCellStyle::propertyColor(int key) const
 {
     QVariant variant = value(key);
     if (variant.isNull()) {
@@ -270,9 +270,9 @@ QColor KoTableCellStyle::propertyColor(int key) const
     return qvariant_cast<QColor>(variant);
 }
 
-void KoTableCellStyle::applyStyle(QTextTableCellFormat &format) const
+void KTableCellStyle::applyStyle(QTextTableCellFormat &format) const
 {
-    Q_D(const KoTableCellStyle);
+    Q_D(const KTableCellStyle);
     if (d->parentStyle) {
         d->parentStyle->applyStyle(format);
     }
@@ -308,20 +308,20 @@ void KoTableCellStyle::applyStyle(QTextTableCellFormat &format) const
     format.setProperty(BottomLeftToTopRightBorderStyle, d->borderstyle[BottomLeftToTopRight]);
 }
 
-void KoTableCellStyle::setBackground(const QBrush &brush)
+void KTableCellStyle::setBackground(const QBrush &brush)
 {
     setProperty(CellBackgroundBrush, brush);
 }
 
-void KoTableCellStyle::clearBackground()
+void KTableCellStyle::clearBackground()
 {
-    Q_D(KoTableCellStyle);
+    Q_D(KTableCellStyle);
     d->stylesPrivate.remove(CellBackgroundBrush);
 }
 
-QBrush KoTableCellStyle::background() const
+QBrush KTableCellStyle::background() const
 {
-    Q_D(const KoTableCellStyle);
+    Q_D(const KTableCellStyle);
     QVariant variant = d->stylesPrivate.value(CellBackgroundBrush);
 
     if (variant.isNull()) {
@@ -330,61 +330,61 @@ QBrush KoTableCellStyle::background() const
     return qvariant_cast<QBrush>(variant);
 }
 
-void KoTableCellStyle::setAlignment(Qt::Alignment alignment)
+void KTableCellStyle::setAlignment(Qt::Alignment alignment)
 {
     setProperty(QTextFormat::BlockAlignment, (int) alignment);
 }
 
-Qt::Alignment KoTableCellStyle::alignment() const
+Qt::Alignment KTableCellStyle::alignment() const
 {
     return static_cast<Qt::Alignment>(propertyInt(VerticalAlignment));
 }
 
-KoTableCellStyle *KoTableCellStyle::parentStyle() const
+KTableCellStyle *KTableCellStyle::parentStyle() const
 {
-    Q_D(const KoTableCellStyle);
+    Q_D(const KTableCellStyle);
     return d->parentStyle;
 }
 
-QString KoTableCellStyle::name() const
+QString KTableCellStyle::name() const
 {
-    Q_D(const KoTableCellStyle);
+    Q_D(const KTableCellStyle);
     return d->name;
 }
 
-void KoTableCellStyle::setName(const QString &name)
+void KTableCellStyle::setName(const QString &name)
 {
-    Q_D(KoTableCellStyle);
+    Q_D(KTableCellStyle);
     if (name == d->name)
         return;
     d->name = name;
     emit nameChanged(name);
 }
 
-int KoTableCellStyle::styleId() const
+int KTableCellStyle::styleId() const
 {
     return propertyInt(StyleId);
 }
 
-void KoTableCellStyle::setStyleId(int id)
+void KTableCellStyle::setStyleId(int id)
 {
-    Q_D(KoTableCellStyle);
+    Q_D(KTableCellStyle);
     setProperty(StyleId, id); if (d->next == 0) d->next = id;
 }
 
-QString KoTableCellStyle::masterPageName() const
+QString KTableCellStyle::masterPageName() const
 {
     return value(MasterPageName).toString();
 }
 
-void KoTableCellStyle::setMasterPageName(const QString &name)
+void KTableCellStyle::setMasterPageName(const QString &name)
 {
     setProperty(MasterPageName, name);
 }
 
-void KoTableCellStyle::loadOdf(const KXmlElement *element, KOdfLoadingContext &context)
+void KTableCellStyle::loadOdf(const KXmlElement *element, KOdfLoadingContext &context)
 {
-    Q_D(KoTableCellStyle);
+    Q_D(KTableCellStyle);
     if (element->hasAttributeNS(KOdfXmlNS::style, "display-name"))
         d->name = element->attributeNS(KOdfXmlNS::style, "display-name", QString());
 
@@ -410,7 +410,7 @@ void KoTableCellStyle::loadOdf(const KXmlElement *element, KOdfLoadingContext &c
     context.styleStack().restore();
 }
 
-void KoTableCellStyle::loadOdfProperties(KOdfStyleStack &styleStack)
+void KTableCellStyle::loadOdfProperties(KOdfStyleStack &styleStack)
 {
     // Padding
     if (styleStack.hasProperty(KOdfXmlNS::fo, "padding-left"))
@@ -547,9 +547,9 @@ void KoTableCellStyle::loadOdfProperties(KOdfStyleStack &styleStack)
     }
 }
 
-void KoTableCellStyle::copyProperties(const KoTableCellStyle *style)
+void KTableCellStyle::copyProperties(const KTableCellStyle *style)
 {
-    Q_D(KoTableCellStyle);
+    Q_D(KTableCellStyle);
     const KoTableCellStylePrivate *styleD = static_cast<const KoTableCellStylePrivate*>(style->d_func());
 
     d->stylesPrivate = styleD->stylesPrivate;
@@ -558,29 +558,29 @@ void KoTableCellStyle::copyProperties(const KoTableCellStyle *style)
     d->parentStyle = styleD->parentStyle;
 }
 
-KoTableCellStyle *KoTableCellStyle::clone(QObject *parent)
+KTableCellStyle *KTableCellStyle::clone(QObject *parent)
 {
-    KoTableCellStyle *newStyle = new KoTableCellStyle(parent);
+    KTableCellStyle *newStyle = new KTableCellStyle(parent);
     newStyle->copyProperties(this);
     return newStyle;
 }
 
 
-bool KoTableCellStyle::operator==(const KoTableCellStyle &other) const
+bool KTableCellStyle::operator==(const KTableCellStyle &other) const
 {
-    Q_D(const KoTableCellStyle);
+    Q_D(const KTableCellStyle);
     const KoTableCellStylePrivate *otherD = static_cast<const KoTableCellStylePrivate*>(other.d_func());
     return otherD->stylesPrivate == d->stylesPrivate;
 }
 
-void KoTableCellStyle::removeDuplicates(const KoTableCellStyle &other)
+void KTableCellStyle::removeDuplicates(const KTableCellStyle &other)
 {
-    Q_D(KoTableCellStyle);
+    Q_D(KTableCellStyle);
     const KoTableCellStylePrivate *otherD = static_cast<const KoTableCellStylePrivate*>(other.d_func());
     d->stylesPrivate.removeDuplicates(otherD->stylesPrivate);
 }
 
-void KoTableCellStyle::saveOdf(KOdfGenericStyle &style)
+void KTableCellStyle::saveOdf(KOdfGenericStyle &style)
 {
     Q_UNUSED(style);
 /*
@@ -596,7 +596,7 @@ void KoTableCellStyle::saveOdf(KOdfGenericStyle &style)
                 if (!align.isEmpty())
                     style.addProperty("fo:text-align", align, KOdfGenericStyle::ParagraphType);
             }
-        } else if (key == KoTableCellStyle::TextProgressionDirection) {
+        } else if (key == KTableCellStyle::TextProgressionDirection) {
             int directionValue = 0;
             bool ok = false;
             directionValue = d->stylesPrivate.value(key).toInt(&ok);
@@ -677,4 +677,4 @@ void KoTableCellStyle::saveOdf(KOdfGenericStyle &style)
 */
 }
 
-#include <KoTableCellStyle.moc>
+#include <KTableCellStyle.moc>

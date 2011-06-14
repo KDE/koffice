@@ -33,7 +33,7 @@
 #include "styles/KCharacterStyle.h"
 #include "styles/KListStyle.h"
 #include "styles/KoTableStyle.h"
-#include "styles/KoTableCellStyle.h"
+#include "styles/KTableCellStyle.h"
 #include "styles/KStyleManager.h"
 #include "KoTextDocument.h"
 #include "KoTextBlockData.h"
@@ -793,7 +793,7 @@ QString KoTextDebug::frameAttributes(const QTextFrameFormat &frameFormat)
     return attrs;
 }
 
-QString KoTextDebug::tableCellAttributes(const KoTableCellStyle &tableCellStyle)
+QString KoTextDebug::tableCellAttributes(const KTableCellStyle &tableCellStyle)
 {
     QTextTableCellFormat format;
     tableCellStyle.applyStyle(format);
@@ -805,8 +805,8 @@ QString KoTextDebug::tableCellAttributes(const QTextTableCellFormat &tableCellFo
     QString attrs;
     KStyleManager *styleManager = document ? KoTextDocument(document).styleManager() : 0;
     if (styleManager) {
-        int id = tableCellFormat.intProperty(KoTableCellStyle::StyleId);
-        KoTableCellStyle *tableCellStyle = styleManager->tableCellStyle(id);
+        int id = tableCellFormat.intProperty(KTableCellStyle::StyleId);
+        KTableCellStyle *tableCellStyle = styleManager->tableCellStyle(id);
         attrs.append(" tableCellStyle=\"id:").append(QString::number(id));
         if (tableCellStyle)
             attrs.append(" name:").append(tableCellStyle->name());
@@ -841,7 +841,7 @@ QString KoTextDebug::tableCellAttributes(const QTextTableCellFormat &tableCellFo
             key = "right-padding";
             value = QString::number(properties[id].toDouble());
             break;
-        case KoTableCellStyle::TopBorderOuterPen: {
+        case KTableCellStyle::TopBorderOuterPen: {
             key = "top-border-outer";
             QPen pen = qvariant_cast<QPen>(properties[id]);
             if (pen.style() == Qt::NoPen) {
@@ -875,11 +875,11 @@ QString KoTextDebug::tableCellAttributes(const QTextTableCellFormat &tableCellFo
             }
             break;
         }
-        case KoTableCellStyle::TopBorderSpacing:
+        case KTableCellStyle::TopBorderSpacing:
             key = "top-border-spacing";
             value = QString::number(properties[id].toDouble());
             break;
-        case KoTableCellStyle::TopBorderInnerPen: {
+        case KTableCellStyle::TopBorderInnerPen: {
             key = "top-border-inner";
             QPen pen = qvariant_cast<QPen>(properties[id]);
             if (pen.style() == Qt::NoPen) {
@@ -913,7 +913,7 @@ QString KoTextDebug::tableCellAttributes(const QTextTableCellFormat &tableCellFo
             }
             break;
         }
-        case KoTableCellStyle::LeftBorderOuterPen: {
+        case KTableCellStyle::LeftBorderOuterPen: {
             key = "left-border-outer";
             QPen pen = qvariant_cast<QPen>(properties[id]);
             if (pen.style() == Qt::NoPen) {
@@ -947,11 +947,11 @@ QString KoTextDebug::tableCellAttributes(const QTextTableCellFormat &tableCellFo
             }
             break;
         }
-        case KoTableCellStyle::LeftBorderSpacing:
+        case KTableCellStyle::LeftBorderSpacing:
             key = "left-border-spacing";
             value = QString::number(properties[id].toDouble());
             break;
-        case KoTableCellStyle::LeftBorderInnerPen: {
+        case KTableCellStyle::LeftBorderInnerPen: {
             key = "left-border-inner";
             QPen pen = qvariant_cast<QPen>(properties[id]);
             if (pen.style() == Qt::NoPen) {
@@ -985,7 +985,7 @@ QString KoTextDebug::tableCellAttributes(const QTextTableCellFormat &tableCellFo
             }
             break;
         }
-        case KoTableCellStyle::BottomBorderOuterPen: {
+        case KTableCellStyle::BottomBorderOuterPen: {
             key = "bottom-border-outer";
             QPen pen = qvariant_cast<QPen>(properties[id]);
             if (pen.style() == Qt::NoPen) {
@@ -1019,11 +1019,11 @@ QString KoTextDebug::tableCellAttributes(const QTextTableCellFormat &tableCellFo
             }
             break;
         }
-        case KoTableCellStyle::BottomBorderSpacing:
+        case KTableCellStyle::BottomBorderSpacing:
             key = "bottom-border-spacing";
             value = QString::number(properties[id].toDouble());
             break;
-        case KoTableCellStyle::BottomBorderInnerPen: {
+        case KTableCellStyle::BottomBorderInnerPen: {
             key = "bottom-border-inner";
             QPen pen = qvariant_cast<QPen>(properties[id]);
             if (pen.style() == Qt::NoPen) {
@@ -1057,7 +1057,7 @@ QString KoTextDebug::tableCellAttributes(const QTextTableCellFormat &tableCellFo
             }
             break;
         }
-        case KoTableCellStyle::RightBorderOuterPen: {
+        case KTableCellStyle::RightBorderOuterPen: {
             key = "right-border-outer";
             QPen pen = qvariant_cast<QPen>(properties[id]);
             if (pen.style() == Qt::NoPen) {
@@ -1091,11 +1091,11 @@ QString KoTextDebug::tableCellAttributes(const QTextTableCellFormat &tableCellFo
             }
             break;
         }
-        case KoTableCellStyle::RightBorderSpacing:
+        case KTableCellStyle::RightBorderSpacing:
             key = "right-border-spacing";
             value = QString::number(properties[id].toDouble());
             break;
-        case KoTableCellStyle::RightBorderInnerPen: {
+        case KTableCellStyle::RightBorderInnerPen: {
             key = "right-border-inner";
             QPen pen = qvariant_cast<QPen>(properties[id]);
             if (pen.style() == Qt::NoPen) {
@@ -1129,7 +1129,7 @@ QString KoTextDebug::tableCellAttributes(const QTextTableCellFormat &tableCellFo
             }
             break;
         }
-        case KoTableCellStyle::MasterPageName:
+        case KTableCellStyle::MasterPageName:
             key = "master-page-name";
             value = properties[id].toString();
             break;

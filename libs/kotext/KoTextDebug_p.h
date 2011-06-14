@@ -49,7 +49,7 @@ class QTextStream;
 class KParagraphStyle;
 class KCharacterStyle;
 class KoTableStyle;
-class KoTableCellStyle;
+class KTableCellStyle;
 
 #include <QMap>
 #include <QVariant>
@@ -245,7 +245,7 @@ public:
      * @param tableCellStyle the table cell style from which properties should be fetched.
      * @return the formatted attribute string.
      */
-    static QString tableCellAttributes(const KoTableCellStyle &tableCellStyle);
+    static QString tableCellAttributes(const KTableCellStyle &tableCellStyle);
 
     /**
      * Get the properties of the given table cell format.

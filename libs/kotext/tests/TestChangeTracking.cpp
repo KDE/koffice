@@ -45,7 +45,7 @@
 #include <KoTextDebug_p.h>
 #include <KListStyle.h>
 #include <KoTableStyle.h>
-#include <KoTableCellStyle.h>
+#include <KTableCellStyle.h>
 #include <KoTextDocumentLayout.h>
 #include <KStyleManager.h>
 #include <KCharacterStyle.h>

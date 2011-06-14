@@ -6,7 +6,7 @@
 #include <KParagraphStyle.h>
 #include <KoTableColumnAndRowStyleManager.h>
 #include <KoTextDocument.h>
-#include <KoTableCellStyle.h>
+#include <KTableCellStyle.h>
 #include <KoTableColumnStyle.h>
 #include <KoTableRowStyle.h>
 #include <KoTableStyle.h>
@@ -34,7 +34,7 @@ void TestTableLayout::initTest(int rows, int columns,
         KoTableStyle *tableStyle,
         const QList<KoTableColumnStyle *> &columnStyles,
         const QList<KoTableRowStyle *> &rowStyles,
-        const QMap<QPair<int, int>, KoTableCellStyle *> &cellStyles,
+        const QMap<QPair<int, int>, KTableCellStyle *> &cellStyles,
         const QMap<QPair<int, int>, QString> &cellTexts)
 {
     // Mock shape of size 200x1000 pt.
@@ -101,7 +101,7 @@ void TestTableLayout::initTest(int rows, int columns,
     }
 
     // Cell styles and texts.
-    m_defaultCellStyle = new KoTableCellStyle();
+    m_defaultCellStyle = new KTableCellStyle();
     Q_ASSERT(m_defaultCellStyle);
     for (int row = 0; row < m_table->rows(); ++row) {
         for (int col = 0; col < m_table->columns(); ++col) {
@@ -136,7 +136,7 @@ void TestTableLayout::initTestSimple(int rows, int columns, KoTableStyle *tableS
     // initTest() will use default ones for these.
     QList<KoTableColumnStyle *> columnStyles;
     QList<KoTableRowStyle *> rowStyles;
-    QMap<QPair<int, int>, KoTableCellStyle *> cellStyles;
+    QMap<QPair<int, int>, KTableCellStyle *> cellStyles;
     QMap<QPair<int, int>, QString> cellTexts;
 
     initTest(rows, columns, tableStyle, columnStyles, rowStyles, cellStyles, cellTexts);
@@ -154,7 +154,7 @@ void TestTableLayout::testBasicLayout()
 {
     QList<KoTableColumnStyle *> columnStyles;
     QList<KoTableRowStyle *> rowStyles;
-    QMap<QPair<int, int>, KoTableCellStyle *> cellStyles;
+    QMap<QPair<int, int>, KTableCellStyle *> cellStyles;
     QMap<QPair<int, int>, QString> cellTexts;
     cellTexts.insert(qMakePair(0, 0), "Cell 1");
     cellTexts.insert(qMakePair(0, 1), "Cell 2");
@@ -395,23 +395,23 @@ void TestTableLayout::testCellStyles()
 {
     QList<KoTableColumnStyle *> columnStyles;
     QList<KoTableRowStyle *> rowStyles;
-    QMap<QPair<int, int>, KoTableCellStyle *> cellStyles;
+    QMap<QPair<int, int>, KTableCellStyle *> cellStyles;
     /*
      * Set a style for cell 0, 0:
      * - 8 pt padding.
      * - 7 pt double black border (4 pt inner, 2 pt spacing, 1 pt inner)
      */
-    KoTableCellStyle *cell1Style = new KoTableCellStyle();
+    KTableCellStyle *cell1Style = new KTableCellStyle();
     Q_ASSERT(cell1Style);
     cell1Style->setPadding(8.0);
-    cell1Style->setEdge(KoTableCellStyle::Left, KoTableCellStyle::BorderSolid, 7.0, Qt::black);
-    cell1Style->setEdgeDoubleBorderValues(KoTableCellStyle::Left, 1.0, 2.0);
-    cell1Style->setEdge(KoTableCellStyle::Right, KoTableCellStyle::BorderSolid, 7.0, Qt::black);
-    cell1Style->setEdgeDoubleBorderValues(KoTableCellStyle::Right, 1.0, 2.0);
-    cell1Style->setEdge(KoTableCellStyle::Top, KoTableCellStyle::BorderSolid, 7.0, Qt::black);
-    cell1Style->setEdgeDoubleBorderValues(KoTableCellStyle::Top, 1.0, 2.0);
-    cell1Style->setEdge(KoTableCellStyle::Bottom, KoTableCellStyle::BorderSolid, 7.0, Qt::black);
-    cell1Style->setEdgeDoubleBorderValues(KoTableCellStyle::Bottom, 1.0, 2.0);
+    cell1Style->setEdge(KTableCellStyle::Left, KTableCellStyle::BorderSolid, 7.0, Qt::black);
+    cell1Style->setEdgeDoubleBorderValues(KTableCellStyle::Left, 1.0, 2.0);
+    cell1Style->setEdge(KTableCellStyle::Right, KTableCellStyle::BorderSolid, 7.0, Qt::black);
+    cell1Style->setEdgeDoubleBorderValues(KTableCellStyle::Right, 1.0, 2.0);
+    cell1Style->setEdge(KTableCellStyle::Top, KTableCellStyle::BorderSolid, 7.0, Qt::black);
+    cell1Style->setEdgeDoubleBorderValues(KTableCellStyle::Top, 1.0, 2.0);
+    cell1Style->setEdge(KTableCellStyle::Bottom, KTableCellStyle::BorderSolid, 7.0, Qt::black);
+    cell1Style->setEdgeDoubleBorderValues(KTableCellStyle::Bottom, 1.0, 2.0);
     cellStyles.insert(qMakePair(0, 0), cell1Style);
     QMap<QPair<int, int>, QString> cellTexts;
 
@@ -510,7 +510,7 @@ void TestTableLayout::testCellRowSpanningCellHeight()
 {
     QList<KoTableColumnStyle *> columnStyles;
     QList<KoTableRowStyle *> rowStyles;
-    QMap<QPair<int, int>, KoTableCellStyle *> cellStyles;
+    QMap<QPair<int, int>, KTableCellStyle *> cellStyles;
     QMap<QPair<int, int>, QString> cellTexts;
     cellTexts.insert(qMakePair(0, 0), "A\nB\nC\nD\nE");
 
@@ -580,7 +580,7 @@ void TestTableLayout::testTableWidth()
 void TestTableLayout::testMinimumRowHeight()
 {
     QList<KoTableColumnStyle *> columnStyles;
-    QMap<QPair<int, int>, KoTableCellStyle *> cellStyles;
+    QMap<QPair<int, int>, KTableCellStyle *> cellStyles;
     // Give row 0 a minimum height of 30 pt.
     QList<KoTableRowStyle *> rowStyles;
     KoTableRowStyle *rowStyle = new KoTableRowStyle();
@@ -649,7 +649,7 @@ void TestTableLayout::testMinimumRowHeight()
 void TestTableLayout::testVariableColumnWidth()
 {
     QList<KoTableRowStyle *> rowStyles;
-    QMap<QPair<int, int>, KoTableCellStyle *> cellStyles;
+    QMap<QPair<int, int>, KTableCellStyle *> cellStyles;
     QMap<QPair<int, int>, QString> cellTexts;
     QList<KoTableColumnStyle *> columnStyles;
     // Give column 0 20% width.
@@ -689,7 +689,7 @@ void TestTableLayout::testVariableColumnWidth()
 void TestTableLayout::testColumnWidth()
 {
     QList<KoTableRowStyle *> rowStyles;
-    QMap<QPair<int, int>, KoTableCellStyle *> cellStyles;
+    QMap<QPair<int, int>, KTableCellStyle *> cellStyles;
     QMap<QPair<int, int>, QString> cellTexts;
     QList<KoTableColumnStyle *> columnStyles;
     // Give column 0 20 pt width.
@@ -855,57 +855,57 @@ void TestTableLayout::testFeatureCombination()
     QVERIFY(tableStyle);
     tableStyle->setWidth(QTextLength(QTextLength::FixedLength, 300.0));
     QList<KoTableRowStyle *> rowStyles;
-    QMap<QPair<int, int>, KoTableCellStyle *> cellStyles;
+    QMap<QPair<int, int>, KTableCellStyle *> cellStyles;
     QMap<QPair<int, int>, QString> cellTexts;
 
 
-    KoTableCellStyle *cellStyle1 = new KoTableCellStyle();
+    KTableCellStyle *cellStyle1 = new KTableCellStyle();
     QVERIFY(cellStyle1);
     cellStyle1->setPadding(8.0);
-    cellStyle1->setEdge(KoTableCellStyle::Left, KoTableCellStyle::BorderSolid, 5.0, Qt::black);
-    cellStyle1->setEdge(KoTableCellStyle::Right, KoTableCellStyle::BorderSolid, 6.0, Qt::black);
-    cellStyle1->setEdge(KoTableCellStyle::Top, KoTableCellStyle::BorderSolid, 4.0, Qt::black);
-    cellStyle1->setEdge(KoTableCellStyle::Bottom, KoTableCellStyle::BorderSolid, 8.0, Qt::black);
+    cellStyle1->setEdge(KTableCellStyle::Left, KTableCellStyle::BorderSolid, 5.0, Qt::black);
+    cellStyle1->setEdge(KTableCellStyle::Right, KTableCellStyle::BorderSolid, 6.0, Qt::black);
+    cellStyle1->setEdge(KTableCellStyle::Top, KTableCellStyle::BorderSolid, 4.0, Qt::black);
+    cellStyle1->setEdge(KTableCellStyle::Bottom, KTableCellStyle::BorderSolid, 8.0, Qt::black);
     cellStyles.insert(qMakePair(0, 0), cellStyle1);
 
-    KoTableCellStyle *cellStyle2 = new KoTableCellStyle();
+    KTableCellStyle *cellStyle2 = new KTableCellStyle();
     QVERIFY(cellStyle2);
-    cellStyle2->setEdge(KoTableCellStyle::Left, KoTableCellStyle::BorderSolid, 5.0, Qt::black);
-    cellStyle2->setEdge(KoTableCellStyle::Right, KoTableCellStyle::BorderSolid, 6.0, Qt::black);
-    cellStyle2->setEdge(KoTableCellStyle::Top, KoTableCellStyle::BorderSolid, 8.0, Qt::black);
-    cellStyle2->setEdge(KoTableCellStyle::Bottom, KoTableCellStyle::BorderSolid, 4.0, Qt::black);
+    cellStyle2->setEdge(KTableCellStyle::Left, KTableCellStyle::BorderSolid, 5.0, Qt::black);
+    cellStyle2->setEdge(KTableCellStyle::Right, KTableCellStyle::BorderSolid, 6.0, Qt::black);
+    cellStyle2->setEdge(KTableCellStyle::Top, KTableCellStyle::BorderSolid, 8.0, Qt::black);
+    cellStyle2->setEdge(KTableCellStyle::Bottom, KTableCellStyle::BorderSolid, 4.0, Qt::black);
     cellStyles.insert(qMakePair(0, 1), cellStyle2);
 
-    KoTableCellStyle *cellStyle3 = new KoTableCellStyle();
+    KTableCellStyle *cellStyle3 = new KTableCellStyle();
     QVERIFY(cellStyle3);
-    cellStyle3->setEdge(KoTableCellStyle::Left, KoTableCellStyle::BorderSolid, 2.0, Qt::black);
-    cellStyle3->setEdge(KoTableCellStyle::Right, KoTableCellStyle::BorderSolid, 2.0, Qt::black);
-    cellStyle3->setEdge(KoTableCellStyle::Top, KoTableCellStyle::BorderSolid, 2.0, Qt::black);
-    cellStyle3->setEdge(KoTableCellStyle::Bottom, KoTableCellStyle::BorderSolid, 2.0, Qt::black);
+    cellStyle3->setEdge(KTableCellStyle::Left, KTableCellStyle::BorderSolid, 2.0, Qt::black);
+    cellStyle3->setEdge(KTableCellStyle::Right, KTableCellStyle::BorderSolid, 2.0, Qt::black);
+    cellStyle3->setEdge(KTableCellStyle::Top, KTableCellStyle::BorderSolid, 2.0, Qt::black);
+    cellStyle3->setEdge(KTableCellStyle::Bottom, KTableCellStyle::BorderSolid, 2.0, Qt::black);
     cellStyles.insert(qMakePair(0, 2), cellStyle3);
 
-    KoTableCellStyle *cellStyle4 = new KoTableCellStyle();
+    KTableCellStyle *cellStyle4 = new KTableCellStyle();
     QVERIFY(cellStyle4);
-    cellStyle4->setEdge(KoTableCellStyle::Left, KoTableCellStyle::BorderSolid, 2.0, Qt::black);
-    cellStyle4->setEdge(KoTableCellStyle::Right, KoTableCellStyle::BorderSolid, 2.0, Qt::black);
-    cellStyle4->setEdge(KoTableCellStyle::Top, KoTableCellStyle::BorderSolid, 2.0, Qt::black);
-    cellStyle4->setEdge(KoTableCellStyle::Bottom, KoTableCellStyle::BorderSolid, 2.0, Qt::black);
+    cellStyle4->setEdge(KTableCellStyle::Left, KTableCellStyle::BorderSolid, 2.0, Qt::black);
+    cellStyle4->setEdge(KTableCellStyle::Right, KTableCellStyle::BorderSolid, 2.0, Qt::black);
+    cellStyle4->setEdge(KTableCellStyle::Top, KTableCellStyle::BorderSolid, 2.0, Qt::black);
+    cellStyle4->setEdge(KTableCellStyle::Bottom, KTableCellStyle::BorderSolid, 2.0, Qt::black);
     cellStyles.insert(qMakePair(1, 0), cellStyle4);
 
-    KoTableCellStyle *cellStyle5 = new KoTableCellStyle();
+    KTableCellStyle *cellStyle5 = new KTableCellStyle();
     QVERIFY(cellStyle5);
-    cellStyle5->setEdge(KoTableCellStyle::Left, KoTableCellStyle::BorderSolid, 2.0, Qt::black);
-    cellStyle5->setEdge(KoTableCellStyle::Right, KoTableCellStyle::BorderSolid, 2.0, Qt::black);
-    cellStyle5->setEdge(KoTableCellStyle::Top, KoTableCellStyle::BorderSolid, 2.0, Qt::black);
-    cellStyle5->setEdge(KoTableCellStyle::Bottom, KoTableCellStyle::BorderSolid, 2.0, Qt::black);
+    cellStyle5->setEdge(KTableCellStyle::Left, KTableCellStyle::BorderSolid, 2.0, Qt::black);
+    cellStyle5->setEdge(KTableCellStyle::Right, KTableCellStyle::BorderSolid, 2.0, Qt::black);
+    cellStyle5->setEdge(KTableCellStyle::Top, KTableCellStyle::BorderSolid, 2.0, Qt::black);
+    cellStyle5->setEdge(KTableCellStyle::Bottom, KTableCellStyle::BorderSolid, 2.0, Qt::black);
     cellStyles.insert(qMakePair(1, 2), cellStyle5);
 
-    KoTableCellStyle *cellStyle6 = new KoTableCellStyle();
+    KTableCellStyle *cellStyle6 = new KTableCellStyle();
     QVERIFY(cellStyle6);
-    cellStyle6->setEdge(KoTableCellStyle::Left, KoTableCellStyle::BorderSolid, 2.0, Qt::black);
-    cellStyle6->setEdge(KoTableCellStyle::Right, KoTableCellStyle::BorderSolid, 2.0, Qt::black);
-    cellStyle6->setEdge(KoTableCellStyle::Top, KoTableCellStyle::BorderSolid, 2.0, Qt::black);
-    cellStyle6->setEdge(KoTableCellStyle::Bottom, KoTableCellStyle::BorderSolid, 2.0, Qt::black);
+    cellStyle6->setEdge(KTableCellStyle::Left, KTableCellStyle::BorderSolid, 2.0, Qt::black);
+    cellStyle6->setEdge(KTableCellStyle::Right, KTableCellStyle::BorderSolid, 2.0, Qt::black);
+    cellStyle6->setEdge(KTableCellStyle::Top, KTableCellStyle::BorderSolid, 2.0, Qt::black);
+    cellStyle6->setEdge(KTableCellStyle::Bottom, KTableCellStyle::BorderSolid, 2.0, Qt::black);
     cellStyles.insert(qMakePair(2, 2), cellStyle6);
 
     QList<KoTableColumnStyle *> columnStyles;

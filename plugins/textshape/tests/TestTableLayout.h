@@ -20,7 +20,7 @@ class KoTextDocumentLayout;
 class KoTableStyle;
 class KoTableColumnStyle;
 class KoTableRowStyle;
-class KoTableCellStyle;
+class KTableCellStyle;
 class KStyleManager;
 class KoTableColumnAndRowStyleManager;
 class QTextDocument;
@@ -48,7 +48,7 @@ private:
     void initTest(int rows, int columns, KoTableStyle *tableStyle,
             const QList<KoTableColumnStyle *> &columnStyles,
             const QList<KoTableRowStyle *> &rowStyles,
-            const QMap<QPair<int, int>, KoTableCellStyle *> &cellStyles,
+            const QMap<QPair<int, int>, KTableCellStyle *> &cellStyles,
             const QMap<QPair<int, int>, QString> &cellTexts);
 
     /**
@@ -113,7 +113,7 @@ private:
     KoTableStyle *m_defaultTableStyle;
     KoTableColumnStyle m_defaultColumnStyle;
     KoTableRowStyle m_defaultRowStyle;
-    KoTableCellStyle *m_defaultCellStyle;
+    KTableCellStyle *m_defaultCellStyle;
 };
 
 class MockTextShape : public TextShape

@@ -47,7 +47,7 @@
 #include <KoTextDebug_p.h>
 #include <KListStyle.h>
 #include <KoTableStyle.h>
-#include <KoTableCellStyle.h>
+#include <KTableCellStyle.h>
 #include <KoTextDocumentLayout.h>
 #include <KStyleManager.h>
 #include <KCharacterStyle.h>
@@ -396,10 +396,10 @@ bool TestLoading::compareTableCellFormats(QTextTableCellFormat &actualFormat, QT
         QString key, value;
         switch (id) {
         // double properties
-        case KoTableCellStyle::LeftBorderSpacing:
-        case KoTableCellStyle::RightBorderSpacing:
-        case KoTableCellStyle::TopBorderSpacing:
-        case KoTableCellStyle::BottomBorderSpacing:
+        case KTableCellStyle::LeftBorderSpacing:
+        case KTableCellStyle::RightBorderSpacing:
+        case KTableCellStyle::TopBorderSpacing:
+        case KTableCellStyle::BottomBorderSpacing:
             if (abs(actualProperty[id].toDouble() - expectedProperty[id].toDouble()) > 1e-10) {
                 qDebug() << "Cell Border Spacing Mismatch";
                 qDebug() << "Expected Spacing: " << expectedProperty[id].toDouble();
@@ -408,19 +408,19 @@ bool TestLoading::compareTableCellFormats(QTextTableCellFormat &actualFormat, QT
             }
             break;
         // string properties
-        case KoTableCellStyle::MasterPageName:
+        case KTableCellStyle::MasterPageName:
             if (actualProperty[id].toString() != expectedProperty[id].toString())
                 match = false;
             break;
         // pen properties
-        case KoTableCellStyle::LeftBorderOuterPen:
-        case KoTableCellStyle::LeftBorderInnerPen:
-        case KoTableCellStyle::RightBorderOuterPen:
-        case KoTableCellStyle::RightBorderInnerPen:
-        case KoTableCellStyle::TopBorderOuterPen:
-        case KoTableCellStyle::TopBorderInnerPen:
-        case KoTableCellStyle::BottomBorderOuterPen:
-        case KoTableCellStyle::BottomBorderInnerPen: {
+        case KTableCellStyle::LeftBorderOuterPen:
+        case KTableCellStyle::LeftBorderInnerPen:
+        case KTableCellStyle::RightBorderOuterPen:
+        case KTableCellStyle::RightBorderInnerPen:
+        case KTableCellStyle::TopBorderOuterPen:
+        case KTableCellStyle::TopBorderInnerPen:
+        case KTableCellStyle::BottomBorderOuterPen:
+        case KTableCellStyle::BottomBorderInnerPen: {
             QPen actualPen = qvariant_cast<QPen>(actualProperty[id]);
             QPen expectedPen = qvariant_cast<QPen>(expectedProperty[id]);
             if (actualPen != expectedPen) {
@@ -432,7 +432,7 @@ bool TestLoading::compareTableCellFormats(QTextTableCellFormat &actualFormat, QT
             break;
         }
         // brush properties
-        case KoTableCellStyle::CellBackgroundBrush: {
+        case KTableCellStyle::CellBackgroundBrush: {
             QBrush actualBrush = qvariant_cast<QBrush>(actualProperty[id]);
             QBrush expectedBrush = qvariant_cast<QBrush>(expectedProperty[id]);
             if (actualBrush != expectedBrush)

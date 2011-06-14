@@ -27,7 +27,7 @@
 
 class KoTableColumnStyle;
 class KoTableRowStyle;
-class KoTableCellStyle;
+class KTableCellStyle;
 class QTextTable;
 
 /**
@@ -135,7 +135,7 @@ public:
      * @param row the row to get the style for.
      * @return the default cell style for \a row.
      */
-    KoTableCellStyle* defaultRowCellStyle(int row) const;
+    KTableCellStyle* defaultRowCellStyle(int row) const;
 
     /**
      * Set the default cell style for the row \a row.
@@ -143,7 +143,7 @@ public:
      * @param row the row to set the style to.
      * @return the default cell style for \a row.
      */
-    void setDefaultRowCellStyle(int row, KoTableCellStyle* cellStyle);
+    void setDefaultRowCellStyle(int row, KTableCellStyle* cellStyle);
 
     /**
      * Get the default cell style for the column \a column.
@@ -151,7 +151,7 @@ public:
      * @param column the column to get the style for.
      * @return the default cell style for \a column.
      */
-    KoTableCellStyle* defaultColumnCellStyle(int column) const;
+    KTableCellStyle* defaultColumnCellStyle(int column) const;
 
     /**
      * Set the default cell style for the column \a column.
@@ -159,7 +159,7 @@ public:
      * @param column the column to set the style to.
      * @return the default cell style for \a column.
      */
-    void setDefaultColumnCellStyle(int column, KoTableCellStyle* cellStyle);
+    void setDefaultColumnCellStyle(int column, KTableCellStyle* cellStyle);
 
 private:
     class Private;

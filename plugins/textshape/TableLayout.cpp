@@ -24,7 +24,7 @@
 
 #include <KoTableStyle.h>
 #include <KTableBorderStyle.h>
-#include <KoTableCellStyle.h>
+#include <KTableCellStyle.h>
 #include <KoTableColumnStyle.h>
 #include <KoTableRowStyle.h>
 #include <KoTableColumnAndRowStyleManager.h>
@@ -269,10 +269,10 @@ void TableLayout::layoutRow(int row)
              * This cell ends vertically in this row, and hence should
              * contribute to the row height. So we get the height of the
              * entire cell, including borders and padding. This is done
-             * by calling KoTableCellStyle::boundingRect() with a
+             * by calling KTableCellStyle::boundingRect() with a
              * rectangle as high as the cell content.
              */
-            KoTableCellStyle cellStyle(cellFormat);
+            KTableCellStyle cellStyle(cellFormat);
             QRectF heightRect(1, 1, 1, m_tableLayoutData->m_contentHeights.at(cell.row()).at(cell.column()));
             qreal cellHeight = cellStyle.boundingRect(heightRect).height();
 
@@ -522,7 +522,7 @@ qreal TableLayout::cellContentY(const QTextTableCell &cell) const
      * Get the cell style and return the y pos adjusted for
      * borders and paddings.
      */
-    KoTableCellStyle cellStyle(cell.format().toTableCellFormat());
+    KTableCellStyle cellStyle(cell.format().toTableCellFormat());
     return m_tableLayoutData->m_rowPositions[cell.row()] + cellStyle.topPadding() + cellStyle.topBorderWidth();
 }
 
@@ -545,9 +545,9 @@ qreal TableLayout::cellContentX(const QTextTableCell &cell) const
 
     /*
      * Get the cell style and return the bounding rect adjusted for
-     * borders and paddings by calling KoTableCellStyle::contentRect().
+     * borders and paddings by calling KTableCellStyle::contentRect().
      */
-    KoTableCellStyle cellStyle(cell.format().toTableCellFormat());
+    KTableCellStyle cellStyle(cell.format().toTableCellFormat());
     return tableRect.columnPositions[cell.column()] + cellStyle.topPadding() + cellStyle.topBorderWidth();
 }
 
@@ -558,9 +558,9 @@ QRectF TableLayout::cellContentRect(const QTextTableCell &cell) const
 
     /*
      * Get the cell style and return the bounding rect adjusted for
-     * borders and paddings by calling KoTableCellStyle::contentRect().
+     * borders and paddings by calling KTableCellStyle::contentRect().
      */
-    KoTableCellStyle cellStyle(cell.format().toTableCellFormat());
+    KTableCellStyle cellStyle(cell.format().toTableCellFormat());
     return cellStyle.contentRect(cellBoundingRect(cell));
 }
 
@@ -625,7 +625,7 @@ void TableLayout::setCellContentHeight(const QTextTableCell &cell, qreal bottom)
     if (!isValid() || !cell.isValid())
         return;
 
-    KoTableCellStyle cellStyle(cell.format().toTableCellFormat());
+    KTableCellStyle cellStyle(cell.format().toTableCellFormat());
     qreal top = m_tableLayoutData->m_rowPositions[cell.row()]
     + cellStyle.topPadding() + cellStyle.topBorderWidth();
     qreal contentHeight = bottom - top;

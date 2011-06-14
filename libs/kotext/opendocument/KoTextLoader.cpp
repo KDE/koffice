@@ -66,7 +66,7 @@
 #include "styles/KListLevelProperties.h"
 #include "styles/KoTableStyle.h"
 #include "styles/KoTableColumnStyle.h"
-#include "styles/KoTableCellStyle.h"
+#include "styles/KTableCellStyle.h"
 #include "styles/KSectionStyle.h"
 
 #include <klocale.h>
@@ -1989,7 +1989,7 @@ void KoTextLoader::loadTableColumn(KXmlElement &tblTag, QTextTable *tbl, int &co
 
     QString defaultCellStyleName = tblTag.attributeNS(KOdfXmlNS::table, "default-cell-style-name", "");
     if (!defaultCellStyleName.isEmpty()) {
-        KoTableCellStyle *cellStyle = d->textSharedData->tableCellStyle(defaultCellStyleName, d->stylesDotXml);
+        KTableCellStyle *cellStyle = d->textSharedData->tableCellStyle(defaultCellStyleName, d->stylesDotXml);
         for (int c = columns; c < columns + repeatColumn; c++) {
             tcarManager->setDefaultColumnCellStyle(c, cellStyle);
         }
@@ -2015,7 +2015,7 @@ void KoTextLoader::loadTableRow(KXmlElement &tblTag, QTextTable *tbl, QList<QRec
 
     QString defaultCellStyleName = tblTag.attributeNS(KOdfXmlNS::table, "default-cell-style-name", "");
     if (!defaultCellStyleName.isEmpty()) {
-        KoTableCellStyle *cellStyle = d->textSharedData->tableCellStyle(defaultCellStyleName, d->stylesDotXml);
+        KTableCellStyle *cellStyle = d->textSharedData->tableCellStyle(defaultCellStyleName, d->stylesDotXml);
         tcarManager->setDefaultRowCellStyle(rows, cellStyle);
     }
 
@@ -2076,7 +2076,7 @@ void KoTextLoader::loadTableCell(KXmlElement &rowTag, QTextTable *tbl, QList<QRe
 
     if (cell.isValid()) {
         QString cellStyleName = rowTag.attributeNS(KOdfXmlNS::table, "style-name", "");
-        KoTableCellStyle *cellStyle = 0;
+        KTableCellStyle *cellStyle = 0;
         if (!cellStyleName.isEmpty()) {
             cellStyle = d->textSharedData->tableCellStyle(cellStyleName, d->stylesDotXml);
         } else if (tcarManager->defaultRowCellStyle(currentRow)) {
@@ -2097,7 +2097,7 @@ void KoTextLoader::loadTableCell(KXmlElement &rowTag, QTextTable *tbl, QList<QRe
             KoTextInlineRdf* inlineRdf = new KoTextInlineRdf((QTextDocument*)cursor.block().document(),cell);
             inlineRdf->loadOdf(rowTag);
             QTextTableCellFormat cellFormat = cell.format().toTableCellFormat();
-            cellFormat.setProperty(KoTableCellStyle::InlineRdf,QVariant::fromValue(inlineRdf));
+            cellFormat.setProperty(KTableCellStyle::InlineRdf,QVariant::fromValue(inlineRdf));
             cell.setFormat(cellFormat);
         }
 

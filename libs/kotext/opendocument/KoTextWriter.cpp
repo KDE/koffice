@@ -43,7 +43,7 @@
 #include "styles/KParagraphStyle.h"
 #include "styles/KListStyle.h"
 #include "styles/KListLevelProperties.h"
-#include "styles/KoTableCellStyle.h"
+#include "styles/KTableCellStyle.h"
 #include "KoTextDocumentLayout.h"
 #include "KoTextBlockData.h"
 #include "KoTextDocument.h"
@@ -1219,7 +1219,7 @@ void KoTextWriter::Private::saveTable(QTextTable *table, QHash<QTextList *, QStr
 
                 // Save the Rdf for the table cell
                 QTextTableCellFormat cellFormat = cell.format().toTableCellFormat();
-                QVariant v = cellFormat.property(KoTableCellStyle::InlineRdf);
+                QVariant v = cellFormat.property(KTableCellStyle::InlineRdf);
                 if (KoTextInlineRdf* inlineRdf = v.value<KoTextInlineRdf*>()) {
                     inlineRdf->saveOdf(context, writer);
                 }

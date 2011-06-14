@@ -64,7 +64,7 @@ set(kotext_LIB_SRCS
     styles/KoTableStyle.cpp
     styles/KoTableColumnStyle.cpp
     styles/KoTableRowStyle.cpp
-    styles/KoTableCellStyle.cpp
+    styles/KTableCellStyle.cpp
     styles/KoTableFormat.cpp
     styles/KoTableFormat_p.cpp
     styles/KSectionStyle.cpp
@@ -147,7 +147,7 @@ install(
     styles/KParagraphStyle.h
     styles/KoTableColumnStyle.h
     styles/KoTableRowStyle.h
-    styles/KoTableCellStyle.h
+    styles/KTableCellStyle.h
     styles/KoTableFormat.h
     styles/KSectionStyle.h
     styles/KStyleManager.h

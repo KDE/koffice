@@ -24,27 +24,27 @@ cursor.insertText("this is an example of table with cell border.", defaultTextFo
 var table = cursor.insertTable(1, 4, defaultTableFormat);
 
 var leftFormat = QTextCharFormat.clone(defaultTextFormat);
-leftFormat.setProperty(KoTableCellStyle.LeftBorderOuterPen, outerPen);
-leftFormat.setProperty(KoTableCellStyle.LeftBorderInnerPen, innerPen);
-leftFormat.setProperty(KoTableCellStyle.LeftBorderSpacing, 144);
+leftFormat.setProperty(KTableCellStyle.LeftBorderOuterPen, outerPen);
+leftFormat.setProperty(KTableCellStyle.LeftBorderInnerPen, innerPen);
+leftFormat.setProperty(KTableCellStyle.LeftBorderSpacing, 144);
 table.cellAt(0,0).setFormat(leftFormat);
 
 var rightFormat = QTextCharFormat.clone(defaultTextFormat);
-rightFormat.setProperty(KoTableCellStyle.RightBorderOuterPen, outerPen);
-rightFormat.setProperty(KoTableCellStyle.RightBorderInnerPen, innerPen);
-rightFormat.setProperty(KoTableCellStyle.RightBorderSpacing, 144);
+rightFormat.setProperty(KTableCellStyle.RightBorderOuterPen, outerPen);
+rightFormat.setProperty(KTableCellStyle.RightBorderInnerPen, innerPen);
+rightFormat.setProperty(KTableCellStyle.RightBorderSpacing, 144);
 table.cellAt(0,1).setFormat(rightFormat);
 
 var topFormat = QTextCharFormat.clone(defaultTextFormat);
-topFormat.setProperty(KoTableCellStyle.TopBorderOuterPen, outerPen);
-topFormat.setProperty(KoTableCellStyle.TopBorderInnerPen, innerPen);
-topFormat.setProperty(KoTableCellStyle.TopBorderSpacing, 144);
+topFormat.setProperty(KTableCellStyle.TopBorderOuterPen, outerPen);
+topFormat.setProperty(KTableCellStyle.TopBorderInnerPen, innerPen);
+topFormat.setProperty(KTableCellStyle.TopBorderSpacing, 144);
 table.cellAt(0,2).setFormat(topFormat);
 
 var bottomFormat = QTextCharFormat.clone(defaultTextFormat);
-bottomFormat.setProperty(KoTableCellStyle.BottomBorderOuterPen, outerPen);
-bottomFormat.setProperty(KoTableCellStyle.BottomBorderInnerPen, innerPen);
-bottomFormat.setProperty(KoTableCellStyle.BottomBorderSpacing, 144);
+bottomFormat.setProperty(KTableCellStyle.BottomBorderOuterPen, outerPen);
+bottomFormat.setProperty(KTableCellStyle.BottomBorderInnerPen, innerPen);
+bottomFormat.setProperty(KTableCellStyle.BottomBorderSpacing, 144);
 table.cellAt(0,3).setFormat(bottomFormat);
 
 cursor.movePosition(QTextCursor.End);

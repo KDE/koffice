@@ -35,7 +35,7 @@
 #include "styles/KCharacterStyle.h"
 #include "styles/KParagraphStyle.h"
 #include "styles/KStyleManager.h"
-#include "styles/KoTableCellStyle.h"
+#include "styles/KTableCellStyle.h"
 #include "styles/KoTableColumnStyle.h"
 #include "styles/KoTableRowStyle.h"
 #include "KoTableColumnAndRowStyleManager.h"
@@ -977,11 +977,11 @@ void KoTextEditor::insertTable(int rows, int columns)
         for (int col = 0; col < table->columns(); ++col) {
             QTextTableCell cell = table->cellAt(row, col);
             QTextTableCellFormat format;
-            KoTableCellStyle cellStyle;
-            cellStyle.setEdge(KoTableCellStyle::Top, KoTableCellStyle::BorderSolid, 2, QColor(Qt::black));
-            cellStyle.setEdge(KoTableCellStyle::Left, KoTableCellStyle::BorderSolid, 2, QColor(Qt::black));
-            cellStyle.setEdge(KoTableCellStyle::Bottom, KoTableCellStyle::BorderSolid, 2, QColor(Qt::black));
-            cellStyle.setEdge(KoTableCellStyle::Right, KoTableCellStyle::BorderSolid, 2, QColor(Qt::black));
+            KTableCellStyle cellStyle;
+            cellStyle.setEdge(KTableCellStyle::Top, KTableCellStyle::BorderSolid, 2, QColor(Qt::black));
+            cellStyle.setEdge(KTableCellStyle::Left, KTableCellStyle::BorderSolid, 2, QColor(Qt::black));
+            cellStyle.setEdge(KTableCellStyle::Bottom, KTableCellStyle::BorderSolid, 2, QColor(Qt::black));
+            cellStyle.setEdge(KTableCellStyle::Right, KTableCellStyle::BorderSolid, 2, QColor(Qt::black));
             cellStyle.setPadding(5);
 
             cellStyle.applyStyle(format);

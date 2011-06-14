@@ -44,7 +44,7 @@ public:
     void setProperty(int key, const QVariant &value);
 
     QString name;
-    KoTableCellStyle *parentStyle;
+    KTableCellStyle *parentStyle;
     int next;
     StylePrivate stylesPrivate;
 };
