@@ -250,7 +250,7 @@ include(MacroKOfficeAddBenchmark)
 #          any other include directory
 
 # for config.h and <toplevel/foo.h> includes (if any?)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_SOURCE_DIR}/interfaces )
+include_directories(${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_SOURCE_DIR}/libs/interfaces )
 
 # koodf is at the bottom of the stack
 set(KOODF_INCLUDES ${CMAKE_SOURCE_DIR}/libs/odf
@@ -364,7 +364,6 @@ macro_optional_add_subdirectory(doc)
 
 # non-app directories are moved here because they can depend on SHOULD_BUILD_{appname} variables set above
 add_subdirectory(libs)
-add_subdirectory(interfaces)
 add_subdirectory(cmake)
 add_subdirectory(pics)
 add_subdirectory(plugins)
