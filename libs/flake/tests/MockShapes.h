@@ -22,7 +22,7 @@
 
 #include <KoShapeGroup.h>
 #include <KCanvasBase.h>
-#include <KoShapeControllerBase.h>
+#include <KShapeControllerBase.h>
 #include <KShapeContainerModel.h>
 #include <QPainter>
 
@@ -100,7 +100,7 @@ public:
     void updateInputMethodInfo() {}
 };
 
-class MockShapeController : public KoShapeControllerBase
+class MockShapeController : public KShapeControllerBase
 {
 public:
     void addShape(KShape* shape) {

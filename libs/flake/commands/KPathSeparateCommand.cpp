@@ -19,14 +19,14 @@
  */
 
 #include "KPathSeparateCommand.h"
-#include "KoShapeControllerBase.h"
+#include "KShapeControllerBase.h"
 #include "KPathShape.h"
 #include <klocale.h>
 
 class KPathSeparateCommand::Private
 {
 public:
-    Private(KoShapeControllerBase *c, const QList<KPathShape*> &p)
+    Private(KShapeControllerBase *c, const QList<KPathShape*> &p)
             : controller(c),
             paths(p),
             isSeparated(false) {
@@ -42,14 +42,14 @@ public:
         }
     }
 
-    KoShapeControllerBase *controller;
+    KShapeControllerBase *controller;
     QList<KPathShape*> paths;
     QList<KPathShape*> separatedPaths;
     bool isSeparated;
 };
 
 
-KPathSeparateCommand::KPathSeparateCommand(KoShapeControllerBase *controller, const QList<KPathShape*> &paths, QUndoCommand *parent)
+KPathSeparateCommand::KPathSeparateCommand(KShapeControllerBase *controller, const QList<KPathShape*> &paths, QUndoCommand *parent)
         : QUndoCommand(parent),
         d(new Private(controller, paths))
 {

@@ -19,14 +19,14 @@
  */
 
 #include "KPathCombineCommand.h"
-#include "KoShapeControllerBase.h"
+#include "KShapeControllerBase.h"
 #include "KShapeContainer.h"
 #include <klocale.h>
 
 class KPathCombineCommand::Private
 {
 public:
-    Private(KoShapeControllerBase *c, const QList<KPathShape*> &p)
+    Private(KShapeControllerBase *c, const QList<KPathShape*> &p)
         : controller(c), paths(p)
         , combinedPath(0), combinedPathParent(0)
         , isCombined(false)
@@ -42,7 +42,7 @@ public:
             delete combinedPath;
     }
 
-    KoShapeControllerBase *controller;
+    KShapeControllerBase *controller;
     QList<KPathShape*> paths;
     QList<KShapeContainer*> oldParents;
     KPathShape *combinedPath;
@@ -50,7 +50,7 @@ public:
     bool isCombined;
 };
 
-KPathCombineCommand::KPathCombineCommand(KoShapeControllerBase *controller,
+KPathCombineCommand::KPathCombineCommand(KShapeControllerBase *controller,
         const QList<KPathShape*> &paths, QUndoCommand *parent)
 : QUndoCommand(parent)
 , d(new Private(controller, paths))

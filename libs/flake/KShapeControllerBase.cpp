@@ -18,7 +18,7 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KoShapeControllerBase.h"
+#include "KShapeControllerBase.h"
 #include "KResourceManager.h"
 #include "KoShapeRegistry.h"
 
@@ -43,17 +43,17 @@ public:
     KResourceManager *resourceManager;
 };
 
-KoShapeControllerBase::KoShapeControllerBase()
+KShapeControllerBase::KShapeControllerBase()
     : d(new KoShapeControllerBasePrivate())
 {
 }
 
-KoShapeControllerBase::~KoShapeControllerBase()
+KShapeControllerBase::~KShapeControllerBase()
 {
     delete d;
 }
 
-KResourceManager *KoShapeControllerBase::resourceManager() const
+KResourceManager *KShapeControllerBase::resourceManager() const
 {
     return d->resourceManager;
 }

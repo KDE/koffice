@@ -21,12 +21,12 @@
 #include "../frames/KWOutlineShape.h"
 #include "../frames/KWFrame.h"
 
-#include <KoShapeControllerBase.h>
+#include <KShapeControllerBase.h>
 #include <KShapeContainer.h>
 
 #include <KLocale>
 
-KWCreateOutlineCommand::KWCreateOutlineCommand(KoShapeControllerBase *controller, KWFrame *frame, QUndoCommand *parent)
+KWCreateOutlineCommand::KWCreateOutlineCommand(KShapeControllerBase *controller, KWFrame *frame, QUndoCommand *parent)
         : QUndoCommand(i18n("Create custom outline"), parent),
         m_controller(controller),
         m_frame(frame),

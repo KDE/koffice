@@ -24,7 +24,7 @@
 
 class KWFrame;
 class KWFrameSet;
-class KoShapeControllerBase;
+class KShapeControllerBase;
 
 /// The undo / redo command for deleting frames
 class KWFrameDeleteCommand : public QUndoCommand
@@ -36,7 +36,7 @@ public:
      * @param frame the frame to delete.
      * @param parent the parent for macro command functionality
      */
-    explicit KWFrameDeleteCommand(KoShapeControllerBase *shapeController, KWFrame *frame, QUndoCommand *parent = 0);
+    explicit KWFrameDeleteCommand(KShapeControllerBase *shapeController, KWFrame *frame, QUndoCommand *parent = 0);
 
     /// redo the command
     virtual void redo();

@@ -24,7 +24,7 @@
 #include <KDockFactoryBase.h>
 #include <KoDocumentSectionView.h>
 
-class KoShapeControllerBase;
+class KShapeControllerBase;
 class KShape;
 class KoShapeLayer;
 class KoShapeGroup;

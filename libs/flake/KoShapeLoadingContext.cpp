@@ -22,7 +22,7 @@
 #include "KShape.h"
 #include "KShapeContainer.h"
 #include "KoSharedLoadingData.h"
-#include "KoShapeControllerBase.h"
+#include "KShapeControllerBase.h"
 #include "KImageCollection.h"
 #include "KResourceManager.h"
 #include "KLoadingShapeUpdater.h"

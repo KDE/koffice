@@ -22,7 +22,7 @@
 #include <QUndoCommand>
 
 class KWFrame;
-class KoShapeControllerBase;
+class KShapeControllerBase;
 class KShapeContainer;
 class KWOutlineShape;
 
@@ -30,7 +30,7 @@ class KWOutlineShape;
 class KWCreateOutlineCommand : public QUndoCommand
 {
 public:
-    explicit KWCreateOutlineCommand(KoShapeControllerBase *controller, KWFrame *frame, QUndoCommand *parent = 0);
+    explicit KWCreateOutlineCommand(KShapeControllerBase *controller, KWFrame *frame, QUndoCommand *parent = 0);
     ~KWCreateOutlineCommand();
 
     /// (re)do the command
@@ -39,7 +39,7 @@ public:
     virtual void undo();
 
 private:
-    KoShapeControllerBase *m_controller;
+    KShapeControllerBase *m_controller;
     KWFrame *m_frame;
     KShapeContainer *m_container;
     KWOutlineShape *m_path;

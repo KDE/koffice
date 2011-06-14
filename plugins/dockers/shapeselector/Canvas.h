@@ -25,7 +25,7 @@
 #include "ShapeSelector.h"
 
 #include <KCanvasBase.h>
-#include <KoShapeControllerBase.h>
+#include <KShapeControllerBase.h>
 
 #include <QList>
 

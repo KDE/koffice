@@ -28,14 +28,14 @@
 
 class KCanvasBase;
 class KShape;
-class KoShapeControllerBase;
+class KShapeControllerBase;
 class QUndoCommand;
 class KResourceManager;
 
 /**
  * Class used by tools to maintain the list of shapes.
  * All applications have some sort of list of all shapes that belong to the document.
- * The applications implement the KoShapeControllerBase interface (all pure virtuals)
+ * The applications implement the KShapeControllerBase interface (all pure virtuals)
  * to add and remove shapes from the document. To ensure that an application can expect
  * a certain protocol to be adhered to when adding/removing shapes, all tools use the API
  * from this class for maintaining the list of shapes in the document. So no tool gets
@@ -49,7 +49,7 @@ public:
      * @param canvas the canvas this controller works for.
      * @param shapeController the application provided shapeControllerBase that we can call.
      */
-    KShapeController(KCanvasBase *canvas, KoShapeControllerBase *shapeController);
+    KShapeController(KCanvasBase *canvas, KShapeControllerBase *shapeController);
     /// destructor
     ~KShapeController();
 
@@ -88,11 +88,11 @@ public:
     QUndoCommand* removeShapes(const QList<KShape*> &shapes, QUndoCommand *parent = 0);
 
     /**
-     * @brief Set the KoShapeControllerBase used to add/remove shapes
+     * @brief Set the KShapeControllerBase used to add/remove shapes
      *
      * @param shapeControllerBase the new shapeControllerBase
      */
-    void setShapeControllerBase(KoShapeControllerBase* shapeControllerBase);
+    void setShapeControllerBase(KShapeControllerBase* shapeControllerBase);
 
     /**
      * Return a pointer to the resource manager associated with the

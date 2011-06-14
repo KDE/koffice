@@ -20,14 +20,14 @@
 
 #include "KoShapeDeleteCommand.h"
 #include "KShapeContainer.h"
-#include "KoShapeControllerBase.h"
+#include "KShapeControllerBase.h"
 
 #include <klocale.h>
 
 class KoShapeDeleteCommand::Private
 {
 public:
-    Private(KoShapeControllerBase *c)
+    Private(KShapeControllerBase *c)
             : controller(c),
             deleteShapes(false) {
     }
@@ -40,13 +40,13 @@ public:
             delete shape;
     }
 
-    KoShapeControllerBase *controller; ///< the shape controller to use for removing/readding
+    KShapeControllerBase *controller; ///< the shape controller to use for removing/readding
     QList<KShape*> shapes; ///< the list of shapes to delete
     QList<KShapeContainer*> oldParents; ///< the old parents of the shapes
     bool deleteShapes;  ///< shows if shapes should be deleted when deleting the command
 };
 
-KoShapeDeleteCommand::KoShapeDeleteCommand(KoShapeControllerBase *controller, KShape *shape, QUndoCommand *parent)
+KoShapeDeleteCommand::KoShapeDeleteCommand(KShapeControllerBase *controller, KShape *shape, QUndoCommand *parent)
         : QUndoCommand(parent),
         d(new Private(controller))
 {
@@ -56,7 +56,7 @@ KoShapeDeleteCommand::KoShapeDeleteCommand(KoShapeControllerBase *controller, KS
     setText(i18n("Delete Shape"));
 }
 
-KoShapeDeleteCommand::KoShapeDeleteCommand(KoShapeControllerBase *controller, const QList<KShape*> &shapes,
+KoShapeDeleteCommand::KoShapeDeleteCommand(KShapeControllerBase *controller, const QList<KShape*> &shapes,
         QUndoCommand *parent)
         : QUndoCommand(parent),
         d(new Private(controller))
@@ -81,7 +81,7 @@ void KoShapeDeleteCommand::redo()
         return;
 
     for (int i = 0; i < d->shapes.count(); i++) {
-        // the parent has to be there when it is removed from the KoShapeControllerBase
+        // the parent has to be there when it is removed from the KShapeControllerBase
         d->controller->removeShape(d->shapes[i]);
         if (d->oldParents.at(i))
             d->oldParents.at(i)->removeShape(d->shapes[i]);
@@ -98,7 +98,7 @@ void KoShapeDeleteCommand::undo()
     for (int i = 0; i < d->shapes.count(); i++) {
         if (d->oldParents.at(i))
             d->oldParents.at(i)->addShape(d->shapes[i]);
-        // the parent has to be there when it is added to the KoShapeControllerBase
+        // the parent has to be there when it is added to the KShapeControllerBase
         d->controller->addShape(d->shapes[i]);
     }
     d->deleteShapes = false;

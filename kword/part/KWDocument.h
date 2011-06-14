@@ -30,7 +30,7 @@
 #include "kword_export.h"
 
 #include <KoDocument.h>
-#include <KoShapeControllerBase.h>
+#include <KShapeControllerBase.h>
 #include <KXmlReader.h>
 
 #include <QObject>
@@ -51,7 +51,7 @@ class QIODevice;
 /**
  * The class that represents a KWord document containing content and settings.
  */
-class KWORD_EXPORT KWDocument : public KoDocument, public KoShapeControllerBase
+class KWORD_EXPORT KWDocument : public KoDocument, public KShapeControllerBase
 {
     Q_OBJECT
 public:
@@ -61,10 +61,10 @@ public:
     explicit KWDocument(QWidget *parentWidget = 0, QObject* parent = 0, bool singleViewMode = false);
     ~KWDocument();
 
-    // KoShapeControllerBase interface
-    /// reimplemented from KoShapeControllerBase
+    // KShapeControllerBase interface
+    /// reimplemented from KShapeControllerBase
     void addShape(KShape *shape);
-    /// reimplemented from KoShapeControllerBase
+    /// reimplemented from KShapeControllerBase
     void removeShape(KShape *shape);
 
 

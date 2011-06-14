@@ -35,11 +35,11 @@ class KResourceManager;
  * that controls the shapes should implement.  This tends to be the document.
  * @see KoShapeDeleteCommand, KoShapeCreateCommand
  */
-class FLAKE_EXPORT KoShapeControllerBase
+class FLAKE_EXPORT KShapeControllerBase
 {
 public:
-    KoShapeControllerBase();
-    virtual ~KoShapeControllerBase();
+    KShapeControllerBase();
+    virtual ~KShapeControllerBase();
 
     /**
      * Add a shape to the shape controller, allowing it to be seen and saved.

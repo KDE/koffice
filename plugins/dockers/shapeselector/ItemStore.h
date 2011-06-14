@@ -27,7 +27,7 @@ class KoShapeManager;
 class KShape;
 class FolderShape;
 class ClipboardProxyShape;
-class KoShapeControllerBase;
+class KShapeControllerBase;
 class ShapeSelector;
 class Canvas;
 
@@ -78,7 +78,7 @@ public:
 
     static KShape *createShapeFromPaste(const QByteArray &bytes);
 
-    KoShapeControllerBase *shapeController();
+    KShapeControllerBase *shapeController();
 
 private:
     KoShapeManager *m_shapeManager;

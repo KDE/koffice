@@ -175,7 +175,7 @@ public:
 
 KCSheet::KCSheet(KCMap* map, const QString &sheetName)
         : KoShapeUserData(map)
-        , KoShapeControllerBase()
+        , KShapeControllerBase()
         , d(new Private)
 {
     d->workbook = map;
@@ -226,7 +226,7 @@ KCSheet::KCSheet(KCMap* map, const QString &sheetName)
 
 KCSheet::KCSheet(const KCSheet &other)
         : KoShapeUserData(other.d->workbook)
-        , KoShapeControllerBase()
+        , KShapeControllerBase()
         , KCProtectableObject(other)
         , d(new Private)
 {

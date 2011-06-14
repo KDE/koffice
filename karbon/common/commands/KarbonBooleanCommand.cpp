@@ -18,7 +18,7 @@
  */
 
 #include "KarbonBooleanCommand.h"
-#include <KoShapeControllerBase.h>
+#include <KShapeControllerBase.h>
 #include <KPathShape.h>
 #include <KShapeContainer.h>
 #include <KoShapeGroup.h>
@@ -31,7 +31,7 @@
 class KarbonBooleanCommand::Private
 {
 public:
-    Private(KoShapeControllerBase * c)
+    Private(KShapeControllerBase * c)
             : controller(c), pathA(0), pathB(0), resultingPath(0)
             , resultParent(0), resultParentCmd(0)
             , operation(Intersection), isExecuted(false)
@@ -43,7 +43,7 @@ public:
             delete resultingPath;
     }
 
-    KoShapeControllerBase *controller;
+    KShapeControllerBase *controller;
     KPathShape * pathA;
     KPathShape * pathB;
     KPathShape * resultingPath;
@@ -54,7 +54,7 @@ public:
 };
 
 KarbonBooleanCommand::KarbonBooleanCommand(
-    KoShapeControllerBase *controller, KPathShape* pathA, KPathShape * pathB,
+    KShapeControllerBase *controller, KPathShape* pathA, KPathShape * pathB,
     BooleanOperation operation, QUndoCommand *parent
 )
         : QUndoCommand(parent), d(new Private(controller))

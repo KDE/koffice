@@ -20,7 +20,7 @@
  */
 
 #include "KShapeController.h"
-#include "KoShapeControllerBase.h"
+#include "KShapeControllerBase.h"
 #include "KoShapeRegistry.h"
 #include "KoShapeManager.h"
 #include "KoShapeLayer.h"
@@ -52,7 +52,7 @@ public:
     }
 
     KCanvasBase *canvas;
-    KoShapeControllerBase *shapeController;
+    KShapeControllerBase *shapeController;
     KResourceManager *dummyRm; // only used when there is no shapeController
 
     QUndoCommand* addShape(KShape *shape, QUndoCommand *parent) {
@@ -66,7 +66,7 @@ public:
     }
 };
 
-KShapeController::KShapeController(KCanvasBase *canvas, KoShapeControllerBase *shapeController)
+KShapeController::KShapeController(KCanvasBase *canvas, KShapeControllerBase *shapeController)
         : d(new Private())
 {
     d->canvas = canvas;
@@ -93,7 +93,7 @@ QUndoCommand* KShapeController::removeShapes(const QList<KShape*> &shapes, QUndo
     return new KoShapeDeleteCommand(d->shapeController, shapes, parent);
 }
 
-void KShapeController::setShapeControllerBase(KoShapeControllerBase* shapeControllerBase)
+void KShapeController::setShapeControllerBase(KShapeControllerBase* shapeControllerBase)
 {
     d->shapeController = shapeControllerBase;
 }

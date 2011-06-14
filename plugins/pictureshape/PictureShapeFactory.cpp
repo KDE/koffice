@@ -24,7 +24,7 @@
 #include "PictureShapeConfigWidget.h"
 
 #include <KOdfXmlNS.h>
-#include "KoShapeControllerBase.h"
+#include "KShapeControllerBase.h"
 #include <KoShapeLoadingContext.h>
 #include "KImageCollection.h"
 

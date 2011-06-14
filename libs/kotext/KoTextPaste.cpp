@@ -23,7 +23,7 @@
 #include <KOdfLoadingContext.h>
 #include <KCanvasBase.h>
 #include <KoShapeLoadingContext.h>
-#include <KoShapeControllerBase.h>
+#include <KShapeControllerBase.h>
 #include <KShapeController.h>
 #include "KoTextShapeData.h"
 #include "opendocument/KoTextLoader.h"

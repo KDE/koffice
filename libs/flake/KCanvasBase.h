@@ -42,7 +42,7 @@ class KoShapeManager;
 class KoToolProxy;
 class KoViewConverter;
 class KShapeController;
-class KoShapeControllerBase;
+class KShapeControllerBase;
 class KCanvasController;
 class KShape;
 class KoSnapGuide;
@@ -63,7 +63,7 @@ public:
      * @param shapeControllerBase the implementation of the shapeController that the
      *   application provides to allow shapes to be added in multiple views.
      */
-    explicit KCanvasBase(KoShapeControllerBase *shapeControllerBase);
+    explicit KCanvasBase(KShapeControllerBase *shapeControllerBase);
     virtual ~KCanvasBase();
 
 public:
@@ -242,7 +242,7 @@ public:
     void setCanvasController(KCanvasController *controller);
 
 private:
-    // we need a KoShapeControllerBase so that it can work
+    // we need a KShapeControllerBase so that it can work
     KCanvasBase();
 
     class Private;

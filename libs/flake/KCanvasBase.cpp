@@ -53,7 +53,7 @@ public:
     bool readWrite;
 };
 
-KCanvasBase::KCanvasBase(KoShapeControllerBase *shapeControllerBase)
+KCanvasBase::KCanvasBase(KShapeControllerBase *shapeControllerBase)
         : d(new Private())
 {
     d->resourceManager = new KResourceManager();

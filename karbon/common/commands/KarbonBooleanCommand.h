@@ -23,7 +23,7 @@
 #include <karboncommon_export.h>
 #include <QtGui/QUndoCommand>
 
-class KoShapeControllerBase;
+class KShapeControllerBase;
 class KPathShape;
 class QPainterPath;
 
@@ -45,7 +45,7 @@ public:
      * @param operation the booelan operation to execute
      * @param parent the parent command used for macro commands
      */
-    explicit KarbonBooleanCommand(KoShapeControllerBase *controller, KPathShape* pathA, KPathShape * pathB,
+    explicit KarbonBooleanCommand(KShapeControllerBase *controller, KPathShape* pathA, KPathShape * pathB,
                                   BooleanOperation operation, QUndoCommand *parent = 0);
     virtual ~KarbonBooleanCommand();
     /// redo the command

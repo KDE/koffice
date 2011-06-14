@@ -24,7 +24,7 @@
 
 #include <KOdf.h>
 #include <KoDocument.h>
-#include <KoShapeControllerBase.h>
+#include <KShapeControllerBase.h>
 #include "KoPageApp.h"
 #include "kopageapp_export.h"
 
@@ -39,7 +39,7 @@ class KXmlWriter;
 class KInlineTextObjectManager;
 
 /// Document class that stores KoPAPage and KoPAMasterPage objects
-class KOPAGEAPP_EXPORT KoPADocument : public KoDocument, public KoShapeControllerBase
+class KOPAGEAPP_EXPORT KoPADocument : public KoDocument, public KShapeControllerBase
 {
     Q_OBJECT
 public:

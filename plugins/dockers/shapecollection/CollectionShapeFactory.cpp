@@ -24,7 +24,7 @@
 #include <KoShapeOdfSaveHelper.h>
 #include <KOdf.h>
 #include <KoShapeLoadingContext.h>
-#include <KoShapeControllerBase.h>
+#include <KShapeControllerBase.h>
 #include <KOdfLoadingContext.h>
 #include <KOdfStore.h>
 #include <KOdfStoreReader.h>

@@ -43,7 +43,7 @@
 #include <KGlobal>
 #include <KDebug>
 
-class DummyShapeController : public KoShapeControllerBase
+class DummyShapeController : public KShapeControllerBase
 {
 public:
     DummyShapeController() {}
@@ -377,7 +377,7 @@ KShape *ItemStore::createShapeFromPaste(const QByteArray &bytes)
 {
     class Paster : public KOdfPasteBase {
       public:
-        Paster(KoShapeControllerBase *controller)
+        Paster(KShapeControllerBase *controller)
             : m_shape(0), m_shapeController(controller)
         {
         }
@@ -400,7 +400,7 @@ KShape *ItemStore::createShapeFromPaste(const QByteArray &bytes)
 
       private:
         KShape *m_shape;
-        KoShapeControllerBase *m_shapeController;
+        KShapeControllerBase *m_shapeController;
     };
 
     Paster paster(&s_itemStorePrivate()->shapeController);
@@ -408,7 +408,7 @@ KShape *ItemStore::createShapeFromPaste(const QByteArray &bytes)
     return paster.shape();
 }
 
-KoShapeControllerBase *ItemStore::shapeController()
+KShapeControllerBase *ItemStore::shapeController()
 {
     return &s_itemStorePrivate()->shapeController;
 }

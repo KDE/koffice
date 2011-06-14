@@ -25,7 +25,7 @@
 
 #include <KLocale>
 
-KWFrameCreateCommand::KWFrameCreateCommand(KoShapeControllerBase *shapeController, KWFrame *frame, QUndoCommand *parent)
+KWFrameCreateCommand::KWFrameCreateCommand(KShapeControllerBase *shapeController, KWFrame *frame, QUndoCommand *parent)
         : QUndoCommand(i18n("Create Frame"), parent),
         m_frame(frame),
         m_frameSet(frame->frameSet())

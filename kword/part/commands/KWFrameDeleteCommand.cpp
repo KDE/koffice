@@ -25,7 +25,7 @@
 
 #include <KLocale>
 
-KWFrameDeleteCommand::KWFrameDeleteCommand(KoShapeControllerBase *shapeController, KWFrame *frame, QUndoCommand *parent)
+KWFrameDeleteCommand::KWFrameDeleteCommand(KShapeControllerBase *shapeController, KWFrame *frame, QUndoCommand *parent)
         : QUndoCommand(i18n("Delete Frame"), parent),
         m_frame(frame),
         m_frameSet(frame->frameSet())

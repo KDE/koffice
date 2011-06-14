@@ -20,7 +20,7 @@
 
 #include "KPathPointRemoveCommand.h"
 #include "KoSubpathRemoveCommand.h"
-#include "KoShapeControllerBase.h"
+#include "KShapeControllerBase.h"
 #include "KShapeController.h"
 #include <klocale.h>
 

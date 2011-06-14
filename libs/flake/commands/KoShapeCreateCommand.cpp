@@ -21,14 +21,14 @@
 #include "KoShapeCreateCommand.h"
 #include "KShape.h"
 #include "KShapeContainer.h"
-#include "KoShapeControllerBase.h"
+#include "KShapeControllerBase.h"
 
 #include <klocale.h>
 
 class KoShapeCreateCommand::Private
 {
 public:
-    Private(KoShapeControllerBase *c, KShape *s)
+    Private(KShapeControllerBase *c, KShape *s)
             : controller(c),
             shape(s),
             shapeParent(shape->parent()),
@@ -39,13 +39,13 @@ public:
             delete shape;
     }
 
-    KoShapeControllerBase *controller;
+    KShapeControllerBase *controller;
     KShape *shape;
     KShapeContainer *shapeParent;
     bool deleteShape;
 };
 
-KoShapeCreateCommand::KoShapeCreateCommand(KoShapeControllerBase *controller, KShape *shape, QUndoCommand *parent)
+KoShapeCreateCommand::KoShapeCreateCommand(KShapeControllerBase *controller, KShape *shape, QUndoCommand *parent)
         : QUndoCommand(parent),
         d(new Private(controller, shape))
 {
@@ -64,7 +64,7 @@ void KoShapeCreateCommand::redo()
     Q_ASSERT(d->controller);
     if (d->shapeParent)
         d->shapeParent->addShape(d->shape);
-    // the parent has to be there when it is added to the KoShapeControllerBase
+    // the parent has to be there when it is added to the KShapeControllerBase
     d->controller->addShape(d->shape);
     d->shapeParent = d->shape->parent(); // update parent if the 'addShape' changed it
     d->deleteShape = false;
@@ -75,7 +75,7 @@ void KoShapeCreateCommand::undo()
     QUndoCommand::undo();
     Q_ASSERT(d->shape);
     Q_ASSERT(d->controller);
-    // the parent has to be there when it is removed from the KoShapeControllerBase
+    // the parent has to be there when it is removed from the KShapeControllerBase
     d->controller->removeShape(d->shape);
     if (d->shapeParent)
         d->shapeParent->removeShape(d->shape);

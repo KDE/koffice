@@ -24,7 +24,7 @@
 
 class KWFrame;
 class KWFrameSet;
-class KoShapeControllerBase;
+class KShapeControllerBase;
 
 /// The undo / redo command for creating frames
 class KWFrameCreateCommand : public QUndoCommand
@@ -36,7 +36,7 @@ public:
      * @param frame the frame to create.
      * @param parent the parent for macro command functionality
      */
-    explicit KWFrameCreateCommand(KoShapeControllerBase *shapeController, KWFrame *frame, QUndoCommand *parent = 0);
+    explicit KWFrameCreateCommand(KShapeControllerBase *shapeController, KWFrame *frame, QUndoCommand *parent = 0);
 
     /// redo the command
     virtual void redo();
