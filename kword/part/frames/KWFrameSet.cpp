@@ -19,7 +19,7 @@
 
 #include "KWFrameSet.h"
 #include "KWFrame.h"
-#include <KoColorBackground.h>
+#include <KColorBackground.h>
 #include "KWCopyShape.h"
 
 #include <kdebug.h>
@@ -114,7 +114,7 @@ void KWFrameSet::printDebug(KWFrame *frame)
     if (!frame->shape()->background())
         kDebug(32001) << "     BackgroundColor: Transparent";
     else {
-        KoColorBackground * fill = dynamic_cast<KoColorBackground*>(frame->shape()->background());
+        KColorBackground * fill = dynamic_cast<KColorBackground*>(frame->shape()->background());
         QColor col;
         if (fill)
             col = fill->color();

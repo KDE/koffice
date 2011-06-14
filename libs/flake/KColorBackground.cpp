@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoColorBackground.h"
+#include "KColorBackground.h"
 #include "KoShapeSavingContext.h"
 #include <KOdf.h>
 #include <KOdfLoadingContext.h>
@@ -26,7 +26,7 @@
 #include <QtGui/QColor>
 #include <QtGui/QPainter>
 
-class KoColorBackground::Private
+class KColorBackground::Private
 {
 public:
     Private() {
@@ -37,12 +37,12 @@ public:
     QColor color;
 };
 
-KoColorBackground::KoColorBackground()
+KColorBackground::KColorBackground()
         : d(new Private())
 {
 }
 
-KoColorBackground::KoColorBackground(const QColor &color, Qt::BrushStyle style)
+KColorBackground::KColorBackground(const QColor &color, Qt::BrushStyle style)
         : d(new Private())
 {
     if (style < Qt::SolidPattern || style >= Qt::LinearGradientPattern)
@@ -51,38 +51,38 @@ KoColorBackground::KoColorBackground(const QColor &color, Qt::BrushStyle style)
     d->color = color;
 }
 
-KoColorBackground::~KoColorBackground()
+KColorBackground::~KColorBackground()
 {
     delete d;
 }
 
-QColor KoColorBackground::color() const
+QColor KColorBackground::color() const
 {
     return d->color;
 }
 
-void KoColorBackground::setColor(const QColor &color)
+void KColorBackground::setColor(const QColor &color)
 {
     d->color = color;
 }
 
-Qt::BrushStyle KoColorBackground::style() const
+Qt::BrushStyle KColorBackground::style() const
 {
     return d->style;
 }
 
-void KoColorBackground::paint(QPainter &painter, const QPainterPath &fillPath) const
+void KColorBackground::paint(QPainter &painter, const QPainterPath &fillPath) const
 {
     painter.setBrush(QBrush(d->color, d->style));
     painter.drawPath(fillPath);
 }
 
-void KoColorBackground::fillStyle(KOdfGenericStyle &style, KoShapeSavingContext &context)
+void KColorBackground::fillStyle(KOdfGenericStyle &style, KoShapeSavingContext &context)
 {
     KOdf::saveOdfFillStyle(style, context.mainStyles(), QBrush(d->color, d->style));
 }
 
-bool KoColorBackground::loadStyle(KOdfLoadingContext & context, const QSizeF &)
+bool KColorBackground::loadStyle(KOdfLoadingContext & context, const QSizeF &)
 {
     KOdfStyleStack &styleStack = context.styleStack();
     if (! styleStack.hasProperty(KOdfXmlNS::draw, "fill"))

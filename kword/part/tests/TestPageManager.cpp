@@ -20,7 +20,7 @@
 
 #include <KWPageManager.h>
 #include <KWPage.h>
-#include <KoColorBackground.h>
+#include <KColorBackground.h>
 
 #include <kdebug.h>
 
@@ -657,7 +657,7 @@ void TestPageManager::testBackgroundRefCount()
 {
     KWPageStyle ps1("test");
     QVERIFY(ps1.background() == 0);
-    KoColorBackground *background = new KoColorBackground(QColor(Qt::red));
+    KColorBackground *background = new KColorBackground(QColor(Qt::red));
     QVERIFY(background->ref());
     QCOMPARE(background->useCount(), 1);
 

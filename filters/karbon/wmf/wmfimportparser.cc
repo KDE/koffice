@@ -26,7 +26,7 @@
 #include <KoShapeLayer.h>
 #include <KImageData.h>
 #include <KImageCollection.h>
-#include <KoColorBackground.h>
+#include <KColorBackground.h>
 #include <KGradientBackground.h>
 #include <KoPatternBackground.h>
 #include <KoShapeFactoryBase.h>
@@ -515,7 +515,7 @@ void WMFImportParser::drawText(int x, int y, int , int , int flags, const QStrin
         textShape->applyTransformation(matrix);
     }
 
-    textShape->setBackground(new KoColorBackground(mTextPen.color()));
+    textShape->setBackground(new KColorBackground(mTextPen.color()));
 
     mDoc->add(textShape);
 }
@@ -562,7 +562,7 @@ void WMFImportParser::appendBrush(KoShape& obj)
         break;
     }
     default:
-        obj.setBackground(new KoColorBackground(mBrush.color(), mBrush.style()));
+        obj.setBackground(new KColorBackground(mBrush.color(), mBrush.style()));
     }
 }
 

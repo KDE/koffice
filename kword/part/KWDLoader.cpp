@@ -38,7 +38,7 @@
 #include <KoTextAnchor.h>
 #include <KoTextDocumentLayout.h>
 #include <KInlineTextObjectManager.h>
-#include <KoColorBackground.h>
+#include <KColorBackground.h>
 #include <KImageCollection.h>
 #include <KImageData.h>
 #include <KOdfBorders.h>
@@ -1052,7 +1052,7 @@ void KWDLoader::fill(KWFrame *frame, const KXmlElement &frameElem)
                       frameElem.attribute("bkBlue", "255").toInt());
     Qt::BrushStyle bs = static_cast<Qt::BrushStyle>(frameElem.attribute("bkStyle", "1").toInt());
 
-    frame->shape()->setBackground(new KoColorBackground(background, bs));
+    frame->shape()->setBackground(new KColorBackground(background, bs));
 
     switch (frameElem.attribute("runaround", "0").toInt()) {
     case 0:

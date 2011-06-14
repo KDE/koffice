@@ -45,7 +45,7 @@
 #include <pathshapes/rectangle/RectangleShape.h>
 #include <pathshapes/ellipse/EllipseShape.h>
 #include <plugins/artistictextshape/ArtisticTextShape.h>
-#include <KoColorBackground.h>
+#include <KColorBackground.h>
 #include <KGradientBackground.h>
 #include <KoPatternBackground.h>
 #include <KFilterEffectRegistry.h>
@@ -1170,7 +1170,7 @@ void SvgParser::applyFillStyle(KoShape * shape)
     break;
     case SvgGraphicsContext::Solid:
     default:
-        shape->setBackground(new KoColorBackground(gc->fillColor));
+        shape->setBackground(new KColorBackground(gc->fillColor));
         break;
     }
 

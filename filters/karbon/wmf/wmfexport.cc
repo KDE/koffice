@@ -29,7 +29,7 @@
 #include <KLineBorder.h>
 #include <KoShape.h>
 #include <KoShapeContainer.h>
-#include <KoColorBackground.h>
+#include <KColorBackground.h>
 #include <KGradientBackground.h>
 #include <KoPatternBackground.h>
 
@@ -130,7 +130,7 @@ void WmfExport::paintShape(KoShape * shape)
         mWmf->drawPolyline(polygons.first());
     else {
         QBrush fill(Qt::NoBrush);
-        KoColorBackground * cbg = dynamic_cast<KoColorBackground*>(shape->background());
+        KColorBackground * cbg = dynamic_cast<KColorBackground*>(shape->background());
         if (cbg)
             fill = QBrush(cbg->color(), cbg->style());
         KGradientBackground * gbg = dynamic_cast<KGradientBackground*>(shape->background());

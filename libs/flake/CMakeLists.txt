@@ -73,7 +73,7 @@ set(flake_SRCS
     KLineBorder.cpp
     KLineBorderFactory.cpp
     KoShapeBackground.cpp
-    KoColorBackground.cpp
+    KColorBackground.cpp
     KGradientBackground.cpp
     KoPatternBackground.cpp
     KoShapeConfigWidgetBase.cpp
@@ -237,7 +237,7 @@ install(
     KCanvasController.h
     KCanvasObserverBase.h
     KCanvasSupervisor.h
-    KoColorBackground.h
+    KColorBackground.h
     KoCopyController.h
     KoCutController.h
     KoDataCenterBase.h

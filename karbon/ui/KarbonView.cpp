@@ -96,7 +96,7 @@
 #include <KoDockRegistry.h>
 #include <KoDockerManager.h>
 #include <KoShapeLayer.h>
-#include <KoColorBackground.h>
+#include <KColorBackground.h>
 #include <KoCutController.h>
 #include <KoCopyController.h>
 #include <KoPasteController.h>
@@ -372,7 +372,7 @@ void KarbonView::dropEvent(QDropEvent *e)
             }
             d->canvas->addCommand(new KoShapeBorderCommand(selectedShapes, borders, 0));
         } else {
-            KoColorBackground * fill = new KoColorBackground(color);
+            KColorBackground * fill = new KColorBackground(color);
             d->canvas->addCommand(new KoShapeBackgroundCommand(selection->selectedShapes(), fill, 0));
         }
     }

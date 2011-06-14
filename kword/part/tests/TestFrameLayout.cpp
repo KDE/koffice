@@ -32,7 +32,7 @@
 #include <MockTextShape.h>
 
 #include <KoTextDocumentLayout.h>
-#include <KoColorBackground.h>
+#include <KColorBackground.h>
 #include <QTextCursor>
 
 #include <kcomponentdata.h>
@@ -714,7 +714,7 @@ void TestFrameLayout::testPageBackground()
     connect(&bfl, SIGNAL(newFrameSet(KWFrameSet*)), this, SLOT(addFS(KWFrameSet*)));
 
     KWPage page1 = helper.pageManager->page(1);
-    page1.pageStyle().setBackground(new KoColorBackground(Qt::red));
+    page1.pageStyle().setBackground(new KColorBackground(Qt::red));
 
     KWPageStyle style2("No Background");
     helper.pageManager->addPageStyle(style2);

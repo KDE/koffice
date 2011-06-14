@@ -23,7 +23,7 @@
 #include <KoShapeLayer.h>
 #include <KoShapeFactoryBase.h>
 #include <KoShapeRegistry.h>
-#include <KoColorBackground.h>
+#include <KColorBackground.h>
 #include <KoTextShapeData.h>
 #include <QTextCursor>
 #include <QTextDocument>
@@ -51,7 +51,7 @@ SCEndOfSlideShowPage::SCEndOfSlideShowPage(const QRectF &screenRect, SCDocument 
     pageLayout.format = KOdfPageFormat::IsoA3Size; 
 
     masterPage()->setPageLayout(pageLayout);
-    masterPage()->setBackground(new KoColorBackground(Qt::black));
+    masterPage()->setBackground(new KColorBackground(Qt::black));
 
     KoShapeLayer* layer = new KoShapeLayer;
     addShape(layer);

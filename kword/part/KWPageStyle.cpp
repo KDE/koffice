@@ -25,7 +25,7 @@
 #include <KXmlWriter.h>
 #include <KOdfXmlNS.h>
 #include <KUnit.h>
-#include <KoColorBackground.h>
+#include <KColorBackground.h>
 #include <KoPatternBackground.h>
 #include <KImageCollection.h>
 #include <KOdfLoadingContext.h>
@@ -441,7 +441,7 @@ void KWPageStyle::loadOdf(KOdfLoadingContext &context, const KXmlElement &master
             d->fullPageBackground = 0;
         }
         else {
-            d->fullPageBackground = new KoColorBackground(QColor(backgroundColor));
+            d->fullPageBackground = new KColorBackground(QColor(backgroundColor));
             d->fullPageBackground->ref();
         }
     }

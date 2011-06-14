@@ -51,7 +51,7 @@
 #include <KoShapeManager.h>
 #include <KoPointerEvent.h>
 #include <KoVariable.h>
-#include <KoColorBackground.h>
+#include <KColorBackground.h>
 #include <KOdf.h>
 #include <KoColorPopupAction.h>
 #include <KoTextDocumentLayout.h>
@@ -631,7 +631,7 @@ void TextTool::paint(QPainter &painter, const KoViewConverter &converter)
             // paint caret
             QPen caretPen(Qt::black);
             if (! m_textShape->hasTransparency()) {
-                KoColorBackground * fill = dynamic_cast<KoColorBackground*>(m_textShape->background());
+                KColorBackground * fill = dynamic_cast<KColorBackground*>(m_textShape->background());
                 if (fill) {
                     QColor bg = fill->color();
                     QColor invert = QColor(255 - bg.red(), 255 - bg.green(), 255 - bg.blue());

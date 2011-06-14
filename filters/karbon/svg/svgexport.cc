@@ -44,7 +44,7 @@
 #include <KoShapeLayer.h>
 #include <KoPathShape.h>
 #include <KLineBorder.h>
-#include <KoColorBackground.h>
+#include <KColorBackground.h>
 #include <KGradientBackground.h>
 #include <KoPatternBackground.h>
 #include <plugins/artistictextshape/ArtisticTextShape.h>
@@ -534,7 +534,7 @@ void SvgExport::getFill(KoShape * shape, QTextStream *stream)
     }
 
     QBrush fill(Qt::NoBrush);
-    KoColorBackground * cbg = dynamic_cast<KoColorBackground*>(shape->background());
+    KColorBackground * cbg = dynamic_cast<KColorBackground*>(shape->background());
     if (cbg) {
         *stream << " fill=\"" << cbg->color().name() << "\"";
         if (cbg->color().alphaF() < 1.0)

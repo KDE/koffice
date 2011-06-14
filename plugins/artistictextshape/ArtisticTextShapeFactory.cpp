@@ -22,7 +22,7 @@
 #include "ArtisticTextShapeConfigWidget.h"
 
 #include <KOdfXmlNS.h>
-#include <KoColorBackground.h>
+#include <KColorBackground.h>
 #include <KoShapeLoadingContext.h>
 
 #include <klocale.h>
@@ -39,7 +39,7 @@ ArtisticTextShapeFactory::ArtisticTextShapeFactory(QObject *parent)
 KoShape *ArtisticTextShapeFactory::createDefaultShape(KoResourceManager *) const
 {
     ArtisticTextShape * text = new ArtisticTextShape();
-    text->setBackground( new KoColorBackground( QColor( Qt::black) ) );
+    text->setBackground( new KColorBackground( QColor( Qt::black) ) );
     return text;
 }
 

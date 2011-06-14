@@ -23,7 +23,7 @@
 
 #include <QObject>
 #include <KWFrame.h>
-#include <KoColorBackground.h>
+#include <KColorBackground.h>
 
 /**
 * \brief This namespace holds all the KWord scripting API.
@@ -233,7 +233,7 @@ public slots:
 
     /** Return the background color of the shape. */
     QColor backgroundColor() const {
-        KoColorBackground * fill = dynamic_cast<KoColorBackground*>(m_frame->shape()->background());
+        KColorBackground * fill = dynamic_cast<KColorBackground*>(m_frame->shape()->background());
         if (fill)
             return fill->color();
         else
@@ -249,7 +249,7 @@ public slots:
     * \endcode
     */
     void setBackgroundColor(const QColor& color) {
-        KoColorBackground * newFill = new KoColorBackground(color);
+        KColorBackground * newFill = new KColorBackground(color);
         m_frame->shape()->setBackground(newFill);
     }
 

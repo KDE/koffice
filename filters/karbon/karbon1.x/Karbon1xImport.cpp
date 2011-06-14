@@ -45,7 +45,7 @@
 #include <KoPathPoint.h>
 #include <KoZoomHandler.h>
 #include <KoPatternBackground.h>
-#include <KoColorBackground.h>
+#include <KColorBackground.h>
 #include <KGradientBackground.h>
 #include <KoShapeFactoryBase.h>
 #include <KoShapeRegistry.h>
@@ -577,7 +577,7 @@ void KarbonImport::loadFill(KoShape * shape, const KXmlElement &element)
     KXmlElement e;
     forEachElement(e, element) {
         if (e.tagName() == "COLOR") {
-            KoColorBackground * newFill = new KoColorBackground(loadColor(e));
+            KColorBackground * newFill = new KColorBackground(loadColor(e));
             shape->setBackground(newFill);
         }
         if (e.tagName() == "GRADIENT") {

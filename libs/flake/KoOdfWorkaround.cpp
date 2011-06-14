@@ -27,7 +27,7 @@
 #include <KOdfLoadingContext.h>
 #include <KXmlReader.h>
 #include <KOdfXmlNS.h>
-#include <KoColorBackground.h>
+#include <KColorBackground.h>
 #include <KOdfStyleStack.h>
 
 #include <QPen>
@@ -208,9 +208,9 @@ void KoOdfWorkaround::fixPresentationPlaceholder(KoShape *shape)
     }
 }
 
-KoColorBackground *KoOdfWorkaround::fixBackgroundColor(const KoShape *shape, KoShapeLoadingContext &context)
+KColorBackground *KoOdfWorkaround::fixBackgroundColor(const KoShape *shape, KoShapeLoadingContext &context)
 {
-    KoColorBackground *colorBackground = 0;
+    KColorBackground *colorBackground = 0;
     KOdfLoadingContext &odfContext = context.odfLoadingContext();
     if (odfContext.generatorType() == KOdfLoadingContext::OpenOffice) {
         const KoPathShape *pathShape = dynamic_cast<const KoPathShape*>(shape);
@@ -219,9 +219,9 @@ KoColorBackground *KoOdfWorkaround::fixBackgroundColor(const KoShape *shape, KoS
             KOdfStyleStack &styleStack = odfContext.styleStack();
             const QString color(styleStack.property(KOdfXmlNS::draw, "fill-color"));
             if (color.isEmpty()) {
-                colorBackground = new KoColorBackground(QColor(153, 204, 255));
+                colorBackground = new KColorBackground(QColor(153, 204, 255));
             } else { 
-                colorBackground = new KoColorBackground(color);
+                colorBackground = new KColorBackground(color);
             }
         }
     }

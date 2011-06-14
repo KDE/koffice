@@ -30,7 +30,7 @@
 #include "KoInsets.h"
 #include "KoShapeBorderBase.h"
 #include "KoShapeBackground.h"
-#include "KoColorBackground.h"
+#include "KColorBackground.h"
 #include "KGradientBackground.h"
 #include "KoPatternBackground.h"
 #include "KoShapeManager.h"
@@ -274,7 +274,7 @@ KoShape::KoShape()
 KoShape::KoShape(const QColor &color)
         : d_ptr(new KoShapePrivate(this))
 {
-    d_ptr->fill = new KoColorBackground(color);
+    d_ptr->fill = new KColorBackground(color);
     notifyChanged();
 }
 
@@ -1228,7 +1228,7 @@ KoShapeBackground *KoShape::loadOdfFill(KoShapeLoadingContext &context) const
     QString fill = KoShapePrivate::getStyleProperty("fill", context);
     KoShapeBackground *bg = 0;
     if (fill == "solid" || fill == "hatch") {
-        bg = new KoColorBackground();
+        bg = new KColorBackground();
     } else if (fill == "gradient") {
         QGradient *gradient = new QLinearGradient();
         gradient->setCoordinateMode(QGradient::ObjectBoundingMode);
