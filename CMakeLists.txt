@@ -297,16 +297,6 @@ endif(SHOULD_BUILD_SCRIPTING)
 # kopageapp
 set(KOPAGEAPP_INCLUDES ${CMAKE_SOURCE_DIR}/libs/kopageapp ${CMAKE_SOURCE_DIR}/libs/kopageapp/commands ${CMAKE_BINARY_DIR}/libs/kopageapp )
 
-# koproperty
-SET(KOPROPERTY_TARGETNAME koproperty)                           # TODO remove when we move to independent place
-SET(KOPROPERTY_LIBS ${KOPROPERTY_TARGETNAME})                   # TODO remove when we move to independent place
-SET(KOPROPERTY_LIB_VERSION ${GENERIC_KOFFICE_LIB_VERSION})      # TODO remove when we move to independent place
-SET(KOPROPERTY_LIB_SOVERSION ${GENERIC_KOFFICE_LIB_SOVERSION})  # TODO remove when we move to independent place
-SET(KOPROPERTY_USE_KOLIBS TRUE)                                 # TODO remove when we move to independent place
-set(KOPROPERTY_INCLUDES ${KOODF_INCLUDES}
-                        ${CMAKE_SOURCE_DIR}/libs
-                        ${CMAKE_SOURCE_DIR}/libs/widgets)
-
  #############################################
 ##############################################
 ## Detect which applications can be compile ##
@@ -320,12 +310,12 @@ set(KOPROPERTY_INCLUDES ${KOODF_INCLUDES}
 #
 
 
-### KSpread: eigen2
+### KCells: eigen2
 if(NOT EIGEN2_FOUND)
     set(SHOULD_BUILD_KCELLS FALSE)
 endif(NOT EIGEN2_FOUND)
 
-### showcase: boost
+### Showcase: boost
 if(NOT Boost_FOUND)
     set(SHOULD_BUILD_SHOWCASE FALSE)
 endif(NOT Boost_FOUND)
@@ -374,9 +364,9 @@ add_subdirectory(filters)
 macro_display_feature_log()
 
 macro(macro_display_application_enabled _appName _shouldBuild)
-if( BUILD_${_appName} AND ${_shouldBuild} MATCHES "[Tt][Rr][Uu][Ee]" )
+if( ${_shouldBuild} MATCHES "[Tt][Rr][Uu][Ee]" )
   message(STATUS ${_appName} )
-endif( BUILD_${_appName} AND ${_shouldBuild} MATCHES "[Tt][Rr][Uu][Ee]" )
+endif( ${_shouldBuild} MATCHES "[Tt][Rr][Uu][Ee]" )
 endmacro(macro_display_application_enabled)
 
 message(STATUS "---------------- The following applications will be built ----------------" )
