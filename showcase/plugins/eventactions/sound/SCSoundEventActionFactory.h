@@ -28,7 +28,7 @@ public:
     SCSoundEventActionFactory();
     virtual ~SCSoundEventActionFactory();
 
-    virtual KoEventAction * createEventAction();
+    virtual KEventAction * createEventAction();
     virtual QWidget *createOptionWidget();
 };
 

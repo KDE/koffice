@@ -24,14 +24,14 @@
 #include "flake_export.h"
 
 class KoShape;
-class KoEventAction;
+class KEventAction;
 class KEventActionAddCommandPrivate;
 
 /// API docs go here
 class FLAKE_EXPORT KoEventActionAddCommand : public QUndoCommand
 {
 public:
-    KoEventActionAddCommand(KoShape *shape, KoEventAction *eventAction, QUndoCommand *parent = 0);
+    KoEventActionAddCommand(KoShape *shape, KEventAction *eventAction, QUndoCommand *parent = 0);
     virtual ~KoEventActionAddCommand();
 
     /// redo the command

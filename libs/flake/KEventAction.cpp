@@ -17,32 +17,32 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoEventAction.h"
+#include "KEventAction.h"
 
 #include <QString>
 
-class KoEventAction::Private
+class KEventAction::Private
 {
 public:
     QString id;
 };
 
-KoEventAction::KoEventAction()
+KEventAction::KEventAction()
         : d(new Private())
 {
 }
 
-KoEventAction::~KoEventAction()
+KEventAction::~KEventAction()
 {
     delete d;
 }
 
-QString KoEventAction::id() const
+QString KEventAction::id() const
 {
     return d->id;
 }
 
-void KoEventAction::setId(const QString &id)
+void KEventAction::setId(const QString &id)
 {
     d->id = id;
 }

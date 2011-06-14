@@ -20,7 +20,7 @@
 #ifndef KPRSOUNDEVENTACTION_H
 #define KPRSOUNDEVENTACTION_H
 
-#include <KoEventAction.h>
+#include <KEventAction.h>
 
 #include <QObject>
 
@@ -32,7 +32,7 @@ class SCSoundData;
 
 #define SCSoundEventActionId "SCSoundEventAction"
 
-class SCSoundEventAction : public QObject, public KoEventAction
+class SCSoundEventAction : public QObject, public KEventAction
 {
     Q_OBJECT
 public:

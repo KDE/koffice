@@ -25,7 +25,7 @@
 
 #include "flake_export.h"
 
-class KoEventAction;
+class KEventAction;
 class KEventActionFactoryBase;
 class KoShapeLoadingContext;
 class KXmlElement;
@@ -50,7 +50,7 @@ public:
     /**
      * Create action events for the elements given
      */
-    QSet<KoEventAction*> createEventActionsFromOdf(const KXmlElement &element, KoShapeLoadingContext &context) const;
+    QSet<KEventAction*> createEventActionsFromOdf(const KXmlElement &element, KoShapeLoadingContext &context) const;
 
     /**
      * Add presentation event action.

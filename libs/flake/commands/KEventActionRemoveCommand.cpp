@@ -21,12 +21,12 @@
 #include <klocale.h>
 
 #include "KoShape.h"
-#include "KoEventAction.h"
+#include "KEventAction.h"
 
 class KEventActionRemoveCommandPrivate
 {
 public:
-    KEventActionRemoveCommandPrivate(KoShape *s, KoEventAction *e)
+    KEventActionRemoveCommandPrivate(KoShape *s, KEventAction *e)
         : shape(s), eventAction(e), deleteEventAction(false)
     {
     }
@@ -38,11 +38,11 @@ public:
     }
 
     KoShape *shape;
-    KoEventAction *eventAction;
+    KEventAction *eventAction;
     bool deleteEventAction;
 };
 
-KEventActionRemoveCommand::KEventActionRemoveCommand(KoShape *shape, KoEventAction *eventAction, QUndoCommand *parent)
+KEventActionRemoveCommand::KEventActionRemoveCommand(KoShape *shape, KEventAction *eventAction, QUndoCommand *parent)
     : QUndoCommand(parent),
     d(new KEventActionRemoveCommandPrivate(shape, eventAction))
 {

@@ -25,7 +25,7 @@
 class QComboBox;
 class QString;
 class KoShape;
-class KoEventAction;
+class KEventAction;
 class KoEventActionData;
 class SCEventActionData;
 class SCSoundCollection;
@@ -47,7 +47,7 @@ private:
     void updateCombo(const QString & title);
 
     KoShape * m_shape;
-    KoEventAction * m_eventAction;
+    KEventAction * m_eventAction;
     SCSoundCollection * m_soundCollection;
     QComboBox * m_soundCombo;
 };

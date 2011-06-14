@@ -33,7 +33,7 @@
 
 SCSoundEventAction::SCSoundEventAction()
 : QObject()
-, KoEventAction()
+, KEventAction()
 , m_media(0)
 , m_soundData(0)
 {

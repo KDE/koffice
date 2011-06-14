@@ -53,7 +53,7 @@ class KOdfGenericStyle;
 class KoShapeControllerBase;
 class KDataCenterBase;
 class KoShapeShadow;
-class KoEventAction;
+class KEventAction;
 class KoShapePrivate;
 class KFilterEffectStack;
 class KoSnapData;
@@ -322,17 +322,17 @@ public:
     /**
      * Add a event action
      */
-    void addEventAction(KoEventAction *action);
+    void addEventAction(KEventAction *action);
 
     /**
      * Remove a event action
      */
-    void removeEventAction(KoEventAction *action);
+    void removeEventAction(KEventAction *action);
 
     /**
      * Get all event actions
      */
-    QSet<KoEventAction *> eventActions() const;
+    QSet<KEventAction *> eventActions() const;
 
     /**
      * Set the background of the shape.

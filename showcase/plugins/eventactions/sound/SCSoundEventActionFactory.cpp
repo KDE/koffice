@@ -31,7 +31,7 @@ SCSoundEventActionFactory::~SCSoundEventActionFactory()
 {
 }
 
-KoEventAction * SCSoundEventActionFactory::createEventAction()
+KEventAction * SCSoundEventActionFactory::createEventAction()
 {
     return new SCSoundEventAction();
 }

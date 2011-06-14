@@ -45,14 +45,14 @@ class KXmlElement;
  * with a macro that is executed whenever the condition occurs, that is, whenever a user places the
  * cursor over a graphic.
  */
-class FLAKE_EXPORT KoEventAction
+class FLAKE_EXPORT KEventAction
 {
 public:
     /**
      * Constructor
      */
-    KoEventAction();
-    virtual ~KoEventAction();
+    KEventAction();
+    virtual ~KEventAction();
 
     /**
      * Set The id of the action

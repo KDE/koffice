@@ -35,7 +35,7 @@
 #include <KoSelection.h>
 #include <KoShapeController.h>
 #include <KoShapeManager.h>
-#include <KoEventAction.h>
+#include <KEventAction.h>
 #include <KEventActionFactoryBase.h>
 #include <KEventActionRegistry.h>
 #include <SCEventActionWidget.h>
@@ -79,9 +79,9 @@ void SCClickActionDocker::selectionChanged()
     KoShape *shape = selection->firstSelectedShape();
 
     if (shape) {
-        QSet<KoEventAction *> eventActions = shape->eventActions();
-        QMap<QString, KoEventAction*> eventActionMap;
-        foreach (KoEventAction * eventAction, eventActions) {
+        QSet<KEventAction *> eventActions = shape->eventActions();
+        QMap<QString, KEventAction*> eventActionMap;
+        foreach (KEventAction * eventAction, eventActions) {
             eventActionMap.insert(eventAction->id(), eventAction);
         }
 

@@ -43,7 +43,7 @@
 #include "KLineBorder.h"
 #include "ShapeDeleter_p.h"
 #include "KoShapeShadow.h"
-#include "KoEventAction.h"
+#include "KEventAction.h"
 #include "KEventActionRegistry.h"
 #include "KoOdfWorkaround.h"
 #include "KFilterEffectStack.h"
@@ -771,19 +771,19 @@ KoShapeConnectionPolicy KoShape::connectionPolicy(int connectionIndex) const
     return d->connectorPolicies.value(connectionIndex);
 }
 
-void KoShape::addEventAction(KoEventAction *action)
+void KoShape::addEventAction(KEventAction *action)
 {
     Q_D(KoShape);
     d->eventActions.insert(action);
 }
 
-void KoShape::removeEventAction(KoEventAction *action)
+void KoShape::removeEventAction(KEventAction *action)
 {
     Q_D(KoShape);
     d->eventActions.remove(action);
 }
 
-QSet<KoEventAction *> KoShape::eventActions() const
+QSet<KEventAction *> KoShape::eventActions() const
 {
     Q_D(const KoShape);
     return d->eventActions;
@@ -1507,7 +1507,7 @@ void KoShape::saveOdfCommonChildElements(KoShapeSavingContext &context) const
     // save event listeners see ODF 9.2.21 Event Listeners
     if (d->eventActions.size() > 0) {
         context.xmlWriter().startElement("office:event-listeners");
-        foreach(KoEventAction * action, d->eventActions) {
+        foreach(KEventAction * action, d->eventActions) {
             action->saveOdf(context);
         }
         context.xmlWriter().endElement();

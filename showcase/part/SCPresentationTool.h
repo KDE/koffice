@@ -29,7 +29,7 @@
 #include <QSet>
 
 class QFrame;
-class KoEventAction;
+class KEventAction;
 class SCViewModePresentation;
 class SCPresentationToolWidget;
 class SCPresentationStrategyBase;
@@ -86,7 +86,7 @@ private:
     void runHyperlink(QString hyperLink);
 
     SCViewModePresentation &m_viewMode;
-    QSet<KoEventAction *> m_eventActions;
+    QSet<KEventAction *> m_eventActions;
 
     SCPresentationToolWidget * m_presentationToolWidget;
     QFrame * m_frame;

@@ -24,13 +24,13 @@
 
 #include "flake_export.h"
 
-class KoEventAction;
+class KEventAction;
 class QWidget;
 
 /**
  * Factory for creating KoEventActions 
  *
- * This is the base class for event action plugins. Each plugin that ships a KoEventAction should
+ * This is the base class for event action plugins. Each plugin that ships a KEventAction should
  * also ship a factory.
  */
 class FLAKE_EXPORT KEventActionFactoryBase
@@ -49,7 +49,7 @@ public:
     /**
      * Create the event action.
      */
-    virtual KoEventAction *createEventAction() = 0;
+    virtual KEventAction *createEventAction() = 0;
 
     /**
      * Create the widget to configure the action

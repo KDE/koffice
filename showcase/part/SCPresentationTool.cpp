@@ -36,7 +36,7 @@
 #include <KoShape.h>
 #include <KoShapeManager.h>
 #include <KoPointerEvent.h>
-#include <KoEventAction.h>
+#include <KEventAction.h>
 #include <KoPACanvas.h>
 #include <KoTextShapeData.h>
 
@@ -110,7 +110,7 @@ void SCPresentationTool::mousePressEvent(KoPointerEvent *event)
 
             m_eventActions = shapeClicked->eventActions();
             if (!m_eventActions.isEmpty()) {
-                foreach (KoEventAction * eventAction, m_eventActions) {
+                foreach (KEventAction * eventAction, m_eventActions) {
                     eventAction->start();
                 }
                 // don't do next step if a action was executed
@@ -218,7 +218,7 @@ void SCPresentationTool::deactivate()
 
 void SCPresentationTool::finishEventActions()
 {
-    foreach (KoEventAction * eventAction, m_eventActions) {
+    foreach (KEventAction * eventAction, m_eventActions) {
         eventAction->finish();
     }
 }

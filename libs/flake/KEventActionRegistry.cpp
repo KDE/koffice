@@ -27,7 +27,7 @@
 #include <KXmlReader.h>
 #include <KOdfXmlNS.h>
 #include "KEventActionFactoryBase.h"
-#include "KoEventAction.h"
+#include "KEventAction.h"
 
 class KEventActionRegistry::Singleton
 {
@@ -110,9 +110,9 @@ void KEventActionRegistry::init()
                                      config);
 }
 
-QSet<KoEventAction*> KEventActionRegistry::createEventActionsFromOdf(const KXmlElement & e, KoShapeLoadingContext & context) const
+QSet<KEventAction*> KEventActionRegistry::createEventActionsFromOdf(const KXmlElement & e, KoShapeLoadingContext & context) const
 {
-    QSet<KoEventAction *> eventActions;
+    QSet<KEventAction *> eventActions;
 
     if (e.namespaceURI() == KOdfXmlNS::office && e.tagName() == "event-listeners") {
         KXmlElement element;
@@ -123,7 +123,7 @@ QSet<KoEventAction*> KEventActionRegistry::createEventActionsFromOdf(const KXmlE
                     QHash<QString, KEventActionFactoryBase *>::const_iterator it(d->presentationEventActions.find(action));
 
                     if (it != d->presentationEventActions.constEnd()) {
-                        KoEventAction * eventAction = it.value()->createEventAction();
+                        KEventAction * eventAction = it.value()->createEventAction();
                         if (eventAction) {
                             if (eventAction->loadOdf(element, context)) {
                                 eventActions.insert(eventAction);

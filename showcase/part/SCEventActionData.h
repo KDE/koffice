@@ -24,13 +24,13 @@
 
 class SCSoundCollection;
 class KoShape;
-class KoEventAction;
+class KEventAction;
 class SCSoundCollection;
 
 class SHOWCASE_EXPORT SCEventActionData
 {
 public:
-    SCEventActionData(KoShape * shape, KoEventAction * eventAction , SCSoundCollection * soundCollection);
+    SCEventActionData(KoShape * shape, KEventAction * eventAction , SCSoundCollection * soundCollection);
     ~SCEventActionData();
 
     SCSoundCollection * soundCollection() const;
@@ -47,7 +47,7 @@ public:
      *
      * @return the event action or 0 if there is none
      */
-    KoEventAction *eventAction() const;
+    KEventAction *eventAction() const;
 
 private:
     class Private;
