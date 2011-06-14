@@ -67,7 +67,7 @@ public:
     static QString getStyleProperty(const char *property, KShapeLoadingContext &context);
 
     /// Loads the shadow style
-    KoShapeShadow *loadOdfShadow(KShapeLoadingContext &context) const;
+    KShapeShadow *loadOdfShadow(KShapeLoadingContext &context) const;
 
     /// calls update on the shape where the border is.
     void updateBorder();
@@ -90,7 +90,7 @@ public:
     KShapeBorderBase *border; ///< points to a border, or 0 if there is no border
     KShape *q_ptr;
     QSet<KShape*> dependees; ///< set of shapes dependent on this shape
-    KoShapeShadow * shadow; ///< the current shape shadow
+    KShapeShadow * shadow; ///< the current shape shadow
     QMap<QString, QString> additionalAttributes;
     QMap<QString, QString> additionalStyleAttributes;
     QSet<KEventAction *> eventActions; ///< list of event actions the shape has

@@ -22,7 +22,7 @@
 #include <KShapeGroup.h>
 #include <KShapeGroupCommand.h>
 #include <KLineBorder.h>
-#include <KoShapeShadow.h>
+#include <KShapeShadow.h>
 #include <QtGui/QUndoCommand>
 
 TestShapeGroupCommand::TestShapeGroupCommand()
@@ -78,7 +78,7 @@ void TestShapeGroupCommand::init()
 
     strokeGroup = new KShapeGroup();
     strokeGroup->setBorder( new KLineBorder( 2.0f ) );
-    strokeGroup->setShadow( new KoShapeShadow() );
+    strokeGroup->setShadow( new KShapeShadow() );
 }
 
 void TestShapeGroupCommand::cleanup()

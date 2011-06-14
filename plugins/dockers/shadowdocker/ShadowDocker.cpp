@@ -18,7 +18,7 @@
  */
 
 #include "ShadowDocker.h"
-#include <KoShapeShadow.h>
+#include <KShapeShadow.h>
 #include <KCanvasBase.h>
 #include <KShapeManager.h>
 #include <KSelection.h>
@@ -36,7 +36,7 @@ public:
     Private() 
     : widget(0), canvas(0)
     {}
-    KoShapeShadow shadow;
+    KShapeShadow shadow;
     KoShadowConfigWidget * widget;
     KCanvasBase * canvas;
     QSpacerItem *spacer;
@@ -88,7 +88,7 @@ void ShadowDocker::selectionChanged()
         d->widget->setShadowVisible( false );
         return;
     }
-    KoShapeShadow * shadow = shape->shadow();
+    KShapeShadow * shadow = shape->shadow();
     if ( ! shadow )
     {
         d->widget->setShadowVisible( false );
@@ -120,7 +120,7 @@ void ShadowDocker::shadowChanged()
     if ( ! shape )
         return;
 
-    KoShapeShadow * newShadow = new KoShapeShadow();
+    KShapeShadow * newShadow = new KShapeShadow();
     newShadow->setVisible(d->widget->shadowVisible());
     newShadow->setColor( d->widget->shadowColor() );
     newShadow->setOffset( d->widget->shadowOffset() );

@@ -24,7 +24,7 @@
 #include <KShapeManager.h>
 #include <KSelection.h>
 #include <KLineBorder.h>
-#include <KoShapeShadow.h>
+#include <KShapeShadow.h>
 
 #include <kcomponentdata.h>
 
@@ -122,7 +122,7 @@ void TestShapeAt::testShadow()
     bbox.adjust(-borderInsets.left, -borderInsets.top, borderInsets.right, borderInsets.bottom);
     QCOMPARE(shape.boundingRect(), bbox);
 
-    KoShapeShadow *shadow = new KoShapeShadow();
+    KShapeShadow *shadow = new KShapeShadow();
     shadow->setOffset(QPointF(5, 9));
     shape.setShadow(shadow);
     KoInsets shadowInsets;

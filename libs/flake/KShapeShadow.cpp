@@ -18,7 +18,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoShapeShadow.h"
+#include "KShapeShadow.h"
 #include "KShapeSavingContext.h"
 #include "KShapeBorderBase.h"
 #include "KShape.h"
@@ -29,7 +29,7 @@
 #include <QtGui/QPainter>
 #include <QtCore/QAtomicInt>
 
-class KoShapeShadow::Private
+class KShapeShadow::Private
 {
 public:
     Private()
@@ -41,17 +41,17 @@ public:
     QAtomicInt refCount;
 };
 
-KoShapeShadow::KoShapeShadow()
+KShapeShadow::KShapeShadow()
         : d(new Private())
 {
 }
 
-KoShapeShadow::~KoShapeShadow()
+KShapeShadow::~KShapeShadow()
 {
     delete d;
 }
 
-void KoShapeShadow::fillStyle(KOdfGenericStyle &style, KShapeSavingContext &context)
+void KShapeShadow::fillStyle(KOdfGenericStyle &style, KShapeSavingContext &context)
 {
     Q_UNUSED(context);
 
@@ -63,7 +63,7 @@ void KoShapeShadow::fillStyle(KOdfGenericStyle &style, KShapeSavingContext &cont
     style.addProperty("draw:shadow-offset-y", QString("%1pt").arg(d->offset.y()));
 }
 
-void KoShapeShadow::paint(KShape *shape, QPainter &painter, const KoViewConverter &converter)
+void KShapeShadow::paint(KShape *shape, QPainter &painter, const KoViewConverter &converter)
 {
     if (! d->visible)
         return;
@@ -109,37 +109,37 @@ void KoShapeShadow::paint(KShape *shape, QPainter &painter, const KoViewConverte
     }
 }
 
-void KoShapeShadow::setOffset(const QPointF & offset)
+void KShapeShadow::setOffset(const QPointF & offset)
 {
     d->offset = offset;
 }
 
-QPointF KoShapeShadow::offset() const
+QPointF KShapeShadow::offset() const
 {
     return d->offset;
 }
 
-void KoShapeShadow::setColor(const QColor &color)
+void KShapeShadow::setColor(const QColor &color)
 {
     d->color = color;
 }
 
-QColor KoShapeShadow::color() const
+QColor KShapeShadow::color() const
 {
     return d->color;
 }
 
-void KoShapeShadow::setVisible(bool visible)
+void KShapeShadow::setVisible(bool visible)
 {
     d->visible = visible;
 }
 
-bool KoShapeShadow::isVisible() const
+bool KShapeShadow::isVisible() const
 {
     return d->visible;
 }
 
-void KoShapeShadow::insets(KoInsets &insets) const
+void KShapeShadow::insets(KoInsets &insets) const
 {
     if (!d->visible) {
         insets.top = 0;
@@ -155,17 +155,17 @@ void KoShapeShadow::insets(KoInsets &insets) const
     insets.bottom = (d->offset.y() > 0.0) ? d->offset.y() : 0.0;
 }
 
-bool KoShapeShadow::ref()
+bool KShapeShadow::ref()
 {
     return d->refCount.ref();
 }
 
-bool KoShapeShadow::deref()
+bool KShapeShadow::deref()
 {
     return d->refCount.deref();
 }
 
-int KoShapeShadow::useCount() const
+int KShapeShadow::useCount() const
 {
     return d->refCount;
 }

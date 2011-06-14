@@ -42,7 +42,7 @@
 #include "KoViewConverter.h"
 #include "KLineBorder.h"
 #include "ShapeDeleter_p.h"
-#include "KoShapeShadow.h"
+#include "KShapeShadow.h"
 #include "KEventAction.h"
 #include "KEventActionRegistry.h"
 #include "KoOdfWorkaround.h"
@@ -949,7 +949,7 @@ void KShape::setBorder(KShapeBorderBase *border)
     notifyChanged();
 }
 
-void KShape::setShadow(KoShapeShadow *shadow)
+void KShape::setShadow(KShapeShadow *shadow)
 {
     Q_D(KShape);
     if (d->shadow)
@@ -963,7 +963,7 @@ void KShape::setShadow(KoShapeShadow *shadow)
     notifyChanged();
 }
 
-KoShapeShadow *KShape::shadow() const
+KShapeShadow *KShape::shadow() const
 {
     Q_D(const KShape);
     return d->shadow;
@@ -1046,7 +1046,7 @@ QString KShape::saveStyle(KOdfGenericStyle &style, KShapeSavingContext &context)
     else {
         style.addProperty("draw:stroke", "none");
     }
-    KoShapeShadow *s = shadow();
+    KShapeShadow *s = shadow();
     if (s)
         s->fillStyle(style, context);
 
@@ -1302,12 +1302,12 @@ KShapeBorderBase *KShape::loadOdfStroke(const KXmlElement &element, KShapeLoadin
     return 0;
 }
 
-KoShapeShadow *KShapePrivate::loadOdfShadow(KShapeLoadingContext &context) const
+KShapeShadow *KShapePrivate::loadOdfShadow(KShapeLoadingContext &context) const
 {
     KOdfStyleStack &styleStack = context.odfLoadingContext().styleStack();
     QString shadowStyle = KShapePrivate::getStyleProperty("shadow", context);
     if (shadowStyle == "visible" || shadowStyle == "hidden") {
-        KoShapeShadow *shadow = new KoShapeShadow();
+        KShapeShadow *shadow = new KShapeShadow();
         QColor shadowColor(styleStack.property(KOdfXmlNS::draw, "shadow-color"));
         qreal offsetX = KUnit::parseValue(styleStack.property(KOdfXmlNS::draw, "shadow-offset-x"));
         qreal offsetY = KUnit::parseValue(styleStack.property(KOdfXmlNS::draw, "shadow-offset-y"));

@@ -19,15 +19,15 @@
 #include "TestShapeShadowCommand.h"
 
 #include <MockShapes.h>
-#include "KoShapeShadow.h"
+#include "KShapeShadow.h"
 #include "KoShapeShadowCommand.h"
 
 void TestShapeShadowCommand::refCounting()
 {
     MockShape * shape1 = new MockShape();
-    KoShapeShadow * shadow1 = new KoShapeShadow();
-    KoShapeShadow * shadow2 = new KoShapeShadow();
-    KoShapeShadow * shadow3 = new KoShapeShadow();
+    KShapeShadow * shadow1 = new KShapeShadow();
+    KShapeShadow * shadow2 = new KShapeShadow();
+    KShapeShadow * shadow3 = new KShapeShadow();
 
     shape1->setShadow(shadow1);
     QVERIFY(shape1->shadow() == shadow1);

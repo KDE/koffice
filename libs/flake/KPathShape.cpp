@@ -28,7 +28,7 @@
 #include "KPathShapeLoader.h"
 #include "KShapeSavingContext.h"
 #include "KShapeLoadingContext.h"
-#include "KoShapeShadow.h"
+#include "KShapeShadow.h"
 #include "KShapeBackground.h"
 #include "KShapeContainer.h"
 #include "KFilterEffectStack.h"

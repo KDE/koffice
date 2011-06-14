@@ -30,7 +30,7 @@
 #include "KShapeBorderBase.h"
 #include "KoToolProxy.h"
 #include "KShapeManagerPaintingStrategy.h"
-#include "KoShapeShadow.h"
+#include "KShapeShadow.h"
 #include "KShapeConnection.h"
 #include "KShapeConnection_p.h"
 #include "KShapeLayer.h"

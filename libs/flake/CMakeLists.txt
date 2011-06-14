@@ -85,7 +85,7 @@ set(flake_SRCS
     KoSnapProxy.cpp
     KoSnapStrategy.cpp
     SnapGuideConfigWidget.cpp
-    KoShapeShadow.cpp
+    KShapeShadow.cpp
     KoSharedSavingData.cpp
     KoSharedLoadingData.cpp
     KoViewConverter.cpp
@@ -324,7 +324,7 @@ install(
     KoTextShapeDataBase.h
     KoTextOnShapeContainer.h
     KoPluginLoader.h
-    KoShapeShadow.h
+    KShapeShadow.h
     KCanvasSupervisor.h
 
     commands/KEventActionAddCommand.h

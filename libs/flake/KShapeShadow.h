@@ -32,11 +32,11 @@ class QPainter;
 class KoViewConverter;
 struct KoInsets;
 
-class FLAKE_EXPORT KoShapeShadow
+class FLAKE_EXPORT KShapeShadow
 {
 public:
-    KoShapeShadow();
-    ~KoShapeShadow();
+    KShapeShadow();
+    ~KShapeShadow();
 
     /**
      * Fills the style object

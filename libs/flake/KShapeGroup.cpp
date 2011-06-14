@@ -28,7 +28,7 @@
 #include "KXmlReader.h"
 #include "KShapeRegistry.h"
 #include "KShapeBorderBase.h"
-#include "KoShapeShadow.h"
+#include "KShapeShadow.h"
 
 #include <QPainter>
 
@@ -146,7 +146,7 @@ void KShapeGroup::shapeChanged(ChangeType type, KShape *shape)
     }
     case KShape::ShadowChanged:
     {
-        KoShapeShadow *shade = shadow();
+        KShapeShadow *shade = shadow();
         if (shade) {
             if (shade->deref())
                 delete shade;

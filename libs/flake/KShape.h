@@ -52,7 +52,7 @@ class KShapeLoadingContext;
 class KOdfGenericStyle;
 class KShapeControllerBase;
 class KDataCenterBase;
-class KoShapeShadow;
+class KShapeShadow;
 class KEventAction;
 class KShapePrivate;
 class KFilterEffectStack;
@@ -553,10 +553,10 @@ public:
     void fetchInsets(KoInsets &insets) const;
 
     /// Sets the new shadow, removing the old one
-    void setShadow(KoShapeShadow *shadow);
+    void setShadow(KShapeShadow *shadow);
 
     /// Returns the currently set shadow or 0 if there is no shadow set
-    KoShapeShadow *shadow() const;
+    KShapeShadow *shadow() const;
 
     /**
      * Setting the shape to keep its aspect-ratio has the effect that user-scaling will
