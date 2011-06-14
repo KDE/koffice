@@ -29,11 +29,11 @@
 #include <QTextDocument>
 #include <QTextInlineObject>
 
-class KoVariablePrivate : public KoInlineObjectPrivate
+class KoVariablePrivate : public KInlineObjectPrivate
 {
 public:
     KoVariablePrivate(KoVariable *qq)
-        : KoInlineObjectPrivate(qq),
+        : KInlineObjectPrivate(qq),
         modified(true)
     {
     }

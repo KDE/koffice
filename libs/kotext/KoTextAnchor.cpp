@@ -47,11 +47,11 @@
 
 // #define DEBUG_PAINTING
 
-class KoTextAnchorPrivate : public KoInlineObjectPrivate
+class KoTextAnchorPrivate : public KInlineObjectPrivate
 {
 public:
     KoTextAnchorPrivate(KoTextAnchor *qq, KoShape *s)
-            : KoInlineObjectPrivate(qq),
+            : KInlineObjectPrivate(qq),
             shape(s),
             horizontalAlignment(KoTextAnchor::HorizontalOffset),
             verticalAlignment(KoTextAnchor::VerticalOffset),

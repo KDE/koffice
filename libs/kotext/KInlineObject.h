@@ -31,7 +31,7 @@ class QRectF;
 
 class KoShape;
 class KoInlineTextObjectManager;
-class KoInlineObjectPrivate;
+class KInlineObjectPrivate;
 class KoShapeSavingContext;
 class KoTextInlineRdf;
 class KXmlElement;
@@ -242,10 +242,10 @@ public:
     KoShape *shape() const;
 
     /// \inline
-    KoInlineObjectPrivate *priv();
+    KInlineObjectPrivate *priv();
 
 protected:
-    explicit KInlineObject(KoInlineObjectPrivate &, bool propertyChangeListener = false);
+    explicit KInlineObject(KInlineObjectPrivate &, bool propertyChangeListener = false);
 
     /**
      * We allow a text document to be shown in more than one shape; which brings up the need to figure out
@@ -264,7 +264,7 @@ protected:
      */
     virtual void positionChanged();
 
-    KoInlineObjectPrivate *d_ptr;
+    KInlineObjectPrivate *d_ptr;
 
 private:
     Q_DECLARE_PRIVATE(KInlineObject)

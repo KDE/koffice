@@ -36,11 +36,11 @@
 #include <QTextBlock>
 #include <QTextCursor>
 
-class KoTextLocatorPrivate : public KoInlineObjectPrivate
+class KoTextLocatorPrivate : public KInlineObjectPrivate
 {
 public:
     KoTextLocatorPrivate(KoTextLocator *q)
-        : KoInlineObjectPrivate(q),
+        : KInlineObjectPrivate(q),
         dirty(false),
         chapterPosition(-1),
         pageNumber(0)

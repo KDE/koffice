@@ -33,10 +33,10 @@
 class KoTextInlineRdf;
 class QTextDocument;
 
-class KoInlineObjectPrivate
+class KInlineObjectPrivate
 {
 public:
-    KoInlineObjectPrivate(KInlineObject *qq)
+    KInlineObjectPrivate(KInlineObject *qq)
             : manager(0),
             q_ptr(qq),
             id(-1),
@@ -46,7 +46,7 @@ public:
             document(0)
     {
     }
-    virtual ~KoInlineObjectPrivate();
+    virtual ~KInlineObjectPrivate();
 
     KoInlineTextObjectManager *manager;
     KInlineObject *q_ptr;

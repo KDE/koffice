@@ -35,11 +35,11 @@
 
 #include <KDebug>
 
-class KoBookmarkPrivate : public KoInlineObjectPrivate
+class KoBookmarkPrivate : public KInlineObjectPrivate
 {
 public:
     KoBookmarkPrivate(KoBookmark *qq)
-        : KoInlineObjectPrivate(qq),
+        : KInlineObjectPrivate(qq),
         endBookmark(0),
         selection(false),
         type(KoBookmark::SinglePosition)

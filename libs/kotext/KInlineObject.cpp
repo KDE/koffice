@@ -30,19 +30,19 @@
 #include <kdebug.h>
 #include <QDebug>
 
-QDebug KoInlineObjectPrivate::printDebug(QDebug dbg) const
+QDebug KInlineObjectPrivate::printDebug(QDebug dbg) const
 {
     dbg.nospace() << "KInlineObject ManagerId: " << id;
     return dbg.space();
 }
 
-void KoInlineObjectPrivate::callbackPositionChanged()
+void KInlineObjectPrivate::callbackPositionChanged()
 {
     Q_Q(KInlineObject);
     q->positionChanged();
 }
 
-KoInlineObjectPrivate::~KoInlineObjectPrivate()
+KInlineObjectPrivate::~KInlineObjectPrivate()
 {
     delete rdf;
 }
@@ -51,13 +51,13 @@ KoInlineObjectPrivate::~KoInlineObjectPrivate()
 //////////////////////////////////////
 
 KInlineObject::KInlineObject(bool propertyChangeListener)
-        : d_ptr(new KoInlineObjectPrivate(this))
+        : d_ptr(new KInlineObjectPrivate(this))
 {
     Q_D(KInlineObject);
     d->propertyChangeListener = propertyChangeListener;
 }
 
-KInlineObject::KInlineObject(KoInlineObjectPrivate &priv, bool propertyChangeListener)
+KInlineObject::KInlineObject(KInlineObjectPrivate &priv, bool propertyChangeListener)
     : d_ptr(&priv)
 {
     Q_D(KInlineObject);
@@ -187,7 +187,7 @@ void KInlineObject::positionChanged()
 {
 }
 
-KoInlineObjectPrivate *KInlineObject::priv()
+KInlineObjectPrivate *KInlineObject::priv()
 {
     Q_D(KInlineObject);
     return d;
