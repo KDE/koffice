@@ -33,7 +33,7 @@
 class KoPathPointMoveCommandPrivate;
 
 /// The undo / redo command for path point moving.
-class FLAKE_EXPORT KoPathPointMoveCommand : public QUndoCommand
+class FLAKE_EXPORT KPathPointMoveCommand : public QUndoCommand
 {
 public:
     /**
@@ -42,7 +42,7 @@ public:
      * @param offset the offset by which the point is moved in document coordinates
      * @param parent the parent command used for macro commands
      */
-    KoPathPointMoveCommand(const QList<KPathPointData> &pointData, const QPointF &offset, QUndoCommand *parent = 0);
+    KPathPointMoveCommand(const QList<KPathPointData> &pointData, const QPointF &offset, QUndoCommand *parent = 0);
 
     /**
     * Command to move path points.
@@ -50,9 +50,9 @@ public:
     * @param offsets the offsets by which the points are moved in document coordinates
     * @param parent the parent command used for macro commands
     */
-    KoPathPointMoveCommand(const QList<KPathPointData> &pointData, const QList<QPointF> &offsets, QUndoCommand *parent = 0);
+    KPathPointMoveCommand(const QList<KPathPointData> &pointData, const QList<QPointF> &offsets, QUndoCommand *parent = 0);
 
-    ~KoPathPointMoveCommand();
+    ~KPathPointMoveCommand();
 
     /// redo the command
     void redo();

@@ -89,7 +89,7 @@
 #include <KPathCombineCommand.h>
 #include <KoPathSeparateCommand.h>
 #include <KoPathReverseCommand.h>
-#include <KoPathPointMoveCommand.h>
+#include <KPathPointMoveCommand.h>
 #include <KoToolBoxFactory.h>
 #include <KParameterShape.h>
 #include <KoRulerController.h>
@@ -753,7 +753,7 @@ void KarbonView::pathSnapToGrid()
     // reset grid snapping state to old value
     part()->gridData().setSnapToGrid(oldSnapToGrid);
 
-    d->canvas->addCommand(new KoPathPointMoveCommand(points, offsets));
+    d->canvas->addCommand(new KPathPointMoveCommand(points, offsets));
 }
 
 void KarbonView::viewModeChanged(bool outlineMode)

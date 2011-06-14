@@ -19,7 +19,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoPathPointMoveCommand.h"
+#include "KPathPointMoveCommand.h"
 #include "KPathPoint.h"
 #include <klocale.h>
 
@@ -35,7 +35,7 @@ public:
 };
 
 
-KoPathPointMoveCommand::KoPathPointMoveCommand(const QList<KPathPointData> &pointData, const QPointF &offset, QUndoCommand *parent)
+KPathPointMoveCommand::KPathPointMoveCommand(const QList<KPathPointData> &pointData, const QPointF &offset, QUndoCommand *parent)
     : QUndoCommand(parent),
     d(new KoPathPointMoveCommandPrivate())
 {
@@ -49,7 +49,7 @@ KoPathPointMoveCommand::KoPathPointMoveCommand(const QList<KPathPointData> &poin
     }
 }
 
-KoPathPointMoveCommand::KoPathPointMoveCommand(const QList<KPathPointData> &pointData, const QList<QPointF> &offsets, QUndoCommand *parent)
+KPathPointMoveCommand::KPathPointMoveCommand(const QList<KPathPointData> &pointData, const QList<QPointF> &offsets, QUndoCommand *parent)
     : QUndoCommand(parent),
     d(new KoPathPointMoveCommandPrivate())
 {
@@ -67,12 +67,12 @@ KoPathPointMoveCommand::KoPathPointMoveCommand(const QList<KPathPointData> &poin
     }
 }
 
-KoPathPointMoveCommand::~KoPathPointMoveCommand()
+KPathPointMoveCommand::~KPathPointMoveCommand()
 {
     delete d;
 }
 
-void KoPathPointMoveCommand::redo()
+void KPathPointMoveCommand::redo()
 {
     QUndoCommand::redo();
     if (! d->undoCalled)
@@ -82,7 +82,7 @@ void KoPathPointMoveCommand::redo()
     d->undoCalled = false;
 }
 
-void KoPathPointMoveCommand::undo()
+void KPathPointMoveCommand::undo()
 {
     QUndoCommand::undo();
     if (d->undoCalled)
