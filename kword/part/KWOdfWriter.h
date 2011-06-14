@@ -26,7 +26,7 @@
 
 #include "KWPageStyle.h"
 
-#include <KoRTree.h>
+#include <KRTree.h>
 
 class KWDocument;
 class KOdfWriteStore;
@@ -77,7 +77,7 @@ private:
     /// Since ODF requires zindexes >= 0 and we can have negative ones we will calculate an offset per
     /// page and store that here.
     QHash<KWPage, int> m_zIndexOffsets;
-    KoRTree<KoShape *> m_shapeTree;
+    KRTree<KoShape *> m_shapeTree;
 };
 
 #endif

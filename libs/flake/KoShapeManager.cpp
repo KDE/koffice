@@ -38,7 +38,7 @@
 #include "KFilterEffectStack.h"
 #include "KFilterEffectRenderContext.h"
 #include "KoShapeBackground.h"
-#include <KoRTree.h>
+#include <KRTree.h>
 
 #include <QPainter>
 #include <QTimer>

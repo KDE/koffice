@@ -19,7 +19,7 @@
 
 #include "KoShape_p.h"
 #include "KoShapeGroup.h"
-#include <KoRTree.h>
+#include <KRTree.h>
 
 class KoShapeManagerPrivate
 {
@@ -66,7 +66,7 @@ public:
     {
     public:
         DetectCollision() {}
-        void detect(KoRTree<KoShape *> &tree, KoShape *s, int prevZIndex) {
+        void detect(KRTree<KoShape *> &tree, KoShape *s, int prevZIndex) {
             foreach(KoShape *shape, tree.intersects(s->boundingRect())) {
                 bool isChild = false;
                 KoShapeContainer *parent = s->parent();
@@ -98,8 +98,8 @@ public:
     QList<KoShape *> additionalShapes; // these are shapes that are only handled for updates
     KoSelection *selection;
     KCanvasBase *canvas;
-    KoRTree<KoShape *> tree;
-    KoRTree<KoShapeConnection *> connectionTree;
+    KRTree<KoShape *> tree;
+    KRTree<KoShapeConnection *> connectionTree;
 
     QSet<KoShape *> aggregate4update;
     QHash<KoShape*, int> shapeIndexesBeforeUpdate;

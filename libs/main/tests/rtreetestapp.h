@@ -25,7 +25,7 @@
 #include <QtGui>
 #include <QLinkedList>
 
-#include "KoRTree.h"
+#include "KRTree.h"
 #include "Tool.h"
 
 class QAction;
@@ -91,7 +91,7 @@ private:
     QList<Data*> m_found;
     QRectF m_insertRect;
     bool m_buttonPressed;
-    KoRTree<Data*> m_rtree;
+    KRTree<Data*> m_rtree;
     Tool * m_tool;
     CreateTool m_createTool;
     SelectTool m_selectTool;

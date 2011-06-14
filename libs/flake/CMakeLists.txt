@@ -278,7 +278,7 @@ install(
     KPointerEvent.h
     KPostscriptPaintDevice.h
     KResourceManager.h
-    KoRTree.h
+    KRTree.h
     KoSelection.h
     KoShapeApplicationData.h
     KoShapeBackground.h
