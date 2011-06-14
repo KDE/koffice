@@ -28,7 +28,7 @@
 #include "flake_export.h"
 
 class KoShapeController;
-class KoPathPointRemoveCommandPrivate;
+class KPathPointRemoveCommandPrivate;
 
 /// The undo / redo command for removing path points.
 class FLAKE_TEST_EXPORT KPathPointRemoveCommand : public QUndoCommand
@@ -64,7 +64,7 @@ public:
     void undo();
 
 private:
-    KoPathPointRemoveCommandPrivate *d;
+    KPathPointRemoveCommandPrivate *d;
 };
 
 #endif // KOPATHPOINTREMOVECOMMAND_H

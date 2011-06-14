@@ -24,11 +24,11 @@
 #include "KoShapeController.h"
 #include <klocale.h>
 
-class KoPathPointRemoveCommandPrivate
+class KPathPointRemoveCommandPrivate
 {
 public:
-    KoPathPointRemoveCommandPrivate() : deletePoints(false) { }
-    ~KoPathPointRemoveCommandPrivate() {
+    KPathPointRemoveCommandPrivate() : deletePoints(false) { }
+    ~KPathPointRemoveCommandPrivate() {
         if (deletePoints)
             qDeleteAll(points);
     }
@@ -119,7 +119,7 @@ QUndoCommand *KPathPointRemoveCommand::createCommand(
 KPathPointRemoveCommand::KPathPointRemoveCommand(const QList<KPathPointData> & pointDataList,
         QUndoCommand *parent)
     : QUndoCommand(parent),
-    d(new KoPathPointRemoveCommandPrivate())
+    d(new KPathPointRemoveCommandPrivate())
 {
     QList<KPathPointData>::const_iterator it(pointDataList.begin());
     for (; it != pointDataList.end(); ++it) {
