@@ -55,7 +55,7 @@ class KarbonPart;
 class KSelectAction;
 class KToggleAction;
 
-class KoCanvasController;
+class KCanvasController;
 class KoRuler;
 
 class KarbonLayerDocker;

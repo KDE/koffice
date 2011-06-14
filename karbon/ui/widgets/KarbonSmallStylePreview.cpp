@@ -25,7 +25,7 @@
 #include <KGradientBackground.h>
 #include <KCanvasBase.h>
 #include <KoToolManager.h>
-#include <KoCanvasController.h>
+#include <KCanvasController.h>
 #include <KoShapeManager.h>
 #include <KoShape.h>
 #include <KoSelection.h>
@@ -231,7 +231,7 @@ void KarbonSmallStylePreview::canvasChanged(const KCanvasBase *canvas)
 
 void KarbonSmallStylePreview::selectionChanged()
 {
-    KoCanvasController * controller = KoToolManager::instance()->activeCanvasController();
+    KCanvasController * controller = KoToolManager::instance()->activeCanvasController();
     if (! controller || ! controller->canvas()) {
         m_fillFrame->setFill(0);
         m_strokeFrame->setStroke(0);

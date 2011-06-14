@@ -25,7 +25,7 @@
 
 class KWView;
 class KWCanvas;
-class KoCanvasController;
+class KCanvasController;
 class KoRuler;
 
 /**
@@ -79,7 +79,7 @@ public:
     void updateRulers() const;
 
     /// return the canvasController that wraps this view
-    KoCanvasController *canvasController() const {
+    KCanvasController *canvasController() const {
         return m_canvasController;
     }
 
@@ -95,7 +95,7 @@ private:
     KoRuler *m_horizontalRuler;
     KoRuler *m_verticalRuler;
 
-    KoCanvasController *m_canvasController;
+    KCanvasController *m_canvasController;
 };
 
 #endif

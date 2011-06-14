@@ -30,7 +30,7 @@
 #include "RoundCornersCommand.h"
 
 #include <KoToolManager.h>
-#include <KoCanvasController.h>
+#include <KCanvasController.h>
 #include <KCanvasBase.h>
 #include <KoSelection.h>
 #include <KoShapeManager.h>
@@ -69,7 +69,7 @@ RoundCornersPlugin::~RoundCornersPlugin()
 
 void RoundCornersPlugin::slotRoundCorners()
 {
-    KoCanvasController* canvasController = KoToolManager::instance()->activeCanvasController();
+    KCanvasController* canvasController = KoToolManager::instance()->activeCanvasController();
     KoSelection *selection = canvasController->canvas()->shapeManager()->selection();
     KoShape * shape = selection->firstSelectedShape();
     if (! shape)

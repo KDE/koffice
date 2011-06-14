@@ -104,7 +104,7 @@
 
 // KOffice
 #include <KCanvasBase.h>
-#include <KoCanvasController.h>
+#include <KCanvasController.h>
 #include <KoResourceManager.h>
 #include <KoColor.h>
 #include <KoColorPopupAction.h>

@@ -24,7 +24,7 @@
 #include "KoZoomToolWidget_p.h"
 #include "KoPointerEvent.h"
 #include "KCanvasBase.h"
-#include "KoCanvasController.h"
+#include "KCanvasController.h"
 
 #include <kstandarddirs.h>
 #include <kdebug.h>
@@ -42,7 +42,7 @@ KoZoomTool::KoZoomTool(KCanvasBase *canvas)
 
 void KoZoomTool::wheelEvent(KoPointerEvent *event)
 {
-    // Let KoCanvasController handle this
+    // Let KCanvasController handle this
     event->ignore();
 }
 

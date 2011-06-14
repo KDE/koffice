@@ -28,7 +28,7 @@
 #include "KoZoomMode.h"
 #include "kopageapp_export.h"
 
-class KoCanvasController;
+class KCanvasController;
 class KoFind;
 class KoPACanvasBase;
 class KoPADocument;

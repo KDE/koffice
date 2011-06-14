@@ -36,7 +36,7 @@ class QTabletEvent;
 class KoToolSelection;
 class KoToolBase;
 class KCanvasBase;
-class KoCanvasController;
+class KCanvasController;
 class KoToolProxyPrivate;
 class QInputMethodEvent;
 

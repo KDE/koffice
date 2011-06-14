@@ -22,7 +22,7 @@
 
 #include <KarbonCanvas.h>
 #include <KoZoomAction.h>
-#include <KoCanvasController.h>
+#include <KCanvasController.h>
 #include <KCanvasBase.h>
 #include <KoZoomHandler.h>
 #include <KoResourceManager.h>
@@ -46,7 +46,7 @@ public:
         delete action;
     }
 
-    KoCanvasController * canvasController;
+    KCanvasController * canvasController;
     KarbonCanvas * canvas;
     KoZoomHandler * zoomHandler;
     KoZoomAction * action;
@@ -54,7 +54,7 @@ public:
     int fitMargin;
 };
 
-KarbonZoomController::KarbonZoomController(KoCanvasController *controller, KActionCollection *actionCollection, QObject *parent)
+KarbonZoomController::KarbonZoomController(KCanvasController *controller, KActionCollection *actionCollection, QObject *parent)
         : QObject(parent), d(new Private())
 {
     d->canvasController = controller;

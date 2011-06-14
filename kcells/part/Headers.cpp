@@ -60,7 +60,7 @@
 #include <kwordwrap.h>
 
 // KOffice
-#include <KoCanvasController.h>
+#include <KCanvasController.h>
 #include <KoToolProxy.h>
 #include <KoZoomHandler.h>
 #include <KoDpi.h>

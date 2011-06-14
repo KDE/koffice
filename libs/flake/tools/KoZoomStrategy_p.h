@@ -34,7 +34,7 @@
 
 #include "KoShapeRubberSelectStrategy.h"
 
-class KoCanvasController;
+class KCanvasController;
 class KoZoomTool;
 
 /**
@@ -50,7 +50,7 @@ public:
      * @param controller the canvas controller that wraps the canvas the tool is acting on.
      * @param clicked the location (in documnet points) where the interaction starts.
      */
-    KoZoomStrategy(KoZoomTool *tool, KoCanvasController *controller, const QPointF &clicked);
+    KoZoomStrategy(KoZoomTool *tool, KCanvasController *controller, const QPointF &clicked);
 
     void forceZoomOut();
     void forceZoomIn();
@@ -59,7 +59,7 @@ public:
     virtual void finishInteraction(Qt::KeyboardModifiers modifiers);
     virtual void cancelInteraction();
 private:
-    KoCanvasController *m_controller;
+    KCanvasController *m_controller;
 
     bool m_forceZoomOut;
     Q_DECLARE_PRIVATE(KoShapeRubberSelectStrategy)

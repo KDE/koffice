@@ -26,7 +26,7 @@
 
 #include <QtGui/QButtonGroup>
 
-#include <KoCanvasController.h>
+#include <KCanvasController.h>
 #include <KoToolManager.h>
 #include <KoShapeManager.h>
 #include <KCanvasBase.h>

@@ -21,7 +21,7 @@
 #include "KCanvasBase.h"
 #include "KoResourceManager.h"
 #include "KoShapeController.h"
-#include "KoCanvasController.h"
+#include "KCanvasController.h"
 #include "KoViewConverter.h"
 #include "KoSnapGuide.h"
 #include "SnapGuideConfigWidget_p.h"
@@ -48,7 +48,7 @@ public:
     }
     KoShapeController *shapeController;
     KoResourceManager *resourceManager;
-    KoCanvasController *controller;
+    KCanvasController *controller;
     KoSnapGuide *snapGuide;
     bool readWrite;
 };
@@ -84,12 +84,12 @@ void KCanvasBase::ensureVisible(const QRectF &rect)
                 d->controller->canvas()->viewConverter()->documentToView(rect));
 }
 
-void KCanvasBase::setCanvasController(KoCanvasController *controller)
+void KCanvasBase::setCanvasController(KCanvasController *controller)
 {
     d->controller = controller;
 }
 
-KoCanvasController *KCanvasBase::canvasController() const
+KCanvasController *KCanvasBase::canvasController() const
 {
     return d->controller;
 }

@@ -28,7 +28,7 @@
 #include <KoToolManager.h>
 #include <KoSelection.h>
 #include <KoCreateShapesTool.h>
-#include <KoCanvasController.h>
+#include <KCanvasController.h>
 
 #include <QFile>
 #include <KLocale>
@@ -55,7 +55,7 @@ void ShapeSelector::itemSelected()
     IconShape *shape= dynamic_cast<IconShape*>(koShape);
     if (shape == 0)
         return;
-    KoCanvasController* canvasController = KoToolManager::instance()->activeCanvasController();
+    KCanvasController* canvasController = KoToolManager::instance()->activeCanvasController();
 
     if (canvasController) {
         KoCreateShapesTool * tool = KoToolManager::instance()->shapeCreatorTool( canvasController->canvas() );

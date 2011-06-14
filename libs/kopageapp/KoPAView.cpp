@@ -31,7 +31,7 @@
 #include <QClipboard>
 #include <QLabel>
 
-#include <KoCanvasController.h>
+#include <KCanvasController.h>
 #include <KoResourceManager.h>
 #include <KoColorBackground.h>
 #include <KoFind.h>
@@ -105,7 +105,7 @@ public:
     // These were originally private in the .h file
     KoPADocumentStructureDocker *documentStructureDocker;
 
-    KoCanvasController *canvasController;
+    KCanvasController *canvasController;
     KoZoomController *zoomController;
 
     KAction *editPaste;
@@ -179,7 +179,7 @@ void KoPAView::initGUI()
     setLayout(gridLayout);
 
     d->canvas = new KoPACanvas(this, d->doc, this);
-    KoCanvasController *canvasController = new KoCanvasController(this);
+    KCanvasController *canvasController = new KCanvasController(this);
     d->canvasController = canvasController;
     d->canvasController->setCanvas(d->canvas);
     KoToolManager::instance()->addController(d->canvasController);

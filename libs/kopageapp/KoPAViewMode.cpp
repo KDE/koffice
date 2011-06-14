@@ -22,7 +22,7 @@
 #include "KoPACanvas.h"
 #include "KoPAPageBase.h"
 #include "KoPAView.h"
-#include <KoCanvasController.h>
+#include <KCanvasController.h>
 #include <KOdfPageLayoutData.h>
 
 #include <QCloseEvent>
@@ -59,7 +59,7 @@ void KoPAViewMode::activate(KoPAViewMode * previousViewMode)
     m_canvas->updateSize();
     updateActivePage(m_view->activePage());
     // this is done to set the preferred center
-    m_canvas->canvasController()->setCanvasMode(KoCanvasController::Centered);
+    m_canvas->canvasController()->setCanvasMode(KCanvasController::Centered);
     m_canvas->canvasController()->recenterPreferred();
 }
 

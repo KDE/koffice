@@ -36,7 +36,7 @@
 
 #include <QPointF>
 
-class KoCanvasController;
+class KCanvasController;
 
 #define KoPanTool_ID "PanTool"
 
@@ -70,13 +70,13 @@ public:
     virtual void customMoveEvent(KoPointerEvent *event);
 
     /// set the canvasController this tool works on.
-    void setCanvasController(KoCanvasController *controller) {
+    void setCanvasController(KCanvasController *controller) {
         m_controller = controller;
     }
 
 private:
     QPointF documentToViewport(const QPointF &p);
-    KoCanvasController *m_controller;
+    KCanvasController *m_controller;
     QPointF m_lastPosition;
     bool m_temporary;
     Q_DECLARE_PRIVATE(KoToolBase)

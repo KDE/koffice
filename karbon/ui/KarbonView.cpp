@@ -63,7 +63,7 @@
 
 #include <KoMainWindow.h>
 #include <KLineBorder.h>
-#include <KoCanvasController.h>
+#include <KCanvasController.h>
 #include <KoResourceManager.h>
 #include <KoFilterManager.h>
 #include <KoUnitDoubleSpinBox.h>
@@ -155,7 +155,7 @@ public:
 
     KarbonPart * part;
     KarbonCanvas * canvas;
-    KoCanvasController * canvasController;
+    KCanvasController * canvasController;
     KoRuler * horizRuler;
     KoRuler * vertRuler;
 
@@ -202,10 +202,10 @@ KarbonView::KarbonView(KarbonPart* p, QWidget* parent)
     connect(d->canvas->shapeManager()->selection(), SIGNAL(selectionChanged()),
             this, SLOT(selectionChanged()));
 
-    d->canvasController = new KoCanvasController(this);
+    d->canvasController = new KCanvasController(this);
     d->canvasController->setMinimumSize(QSize(viewMargin + 50, viewMargin + 50));
     d->canvasController->setCanvas(d->canvas);
-    d->canvasController->setCanvasMode(KoCanvasController::Infinite);
+    d->canvasController->setCanvasMode(KCanvasController::Infinite);
     // always show srollbars which fixes some nasty infinite
     // recursion when scrollbars are disabled during resizing
     d->canvasController->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);

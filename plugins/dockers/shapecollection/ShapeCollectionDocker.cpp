@@ -25,7 +25,7 @@
 
 #include <KoShapeFactoryBase.h>
 #include <KoShapeRegistry.h>
-#include <KoCanvasController.h>
+#include <KCanvasController.h>
 #include <KoToolManager.h>
 #include <KoCreateShapesTool.h>
 #include <KoShape.h>
@@ -321,7 +321,7 @@ void ShapeCollectionDocker::activateShapeCreationToolFromQuick(const QModelIndex
     if (!index.isValid())
         return;
 
-    KoCanvasController* canvasController = KoToolManager::instance()->activeCanvasController();
+    KCanvasController* canvasController = KoToolManager::instance()->activeCanvasController();
 
     if (canvasController) {
         KoCreateShapesTool* tool = KoToolManager::instance()->shapeCreatorTool(canvasController->canvas());
@@ -340,7 +340,7 @@ void ShapeCollectionDocker::activateShapeCreationTool(const QModelIndex& index)
     if (!index.isValid())
         return;
 
-    KoCanvasController* canvasController = KoToolManager::instance()->activeCanvasController();
+    KCanvasController* canvasController = KoToolManager::instance()->activeCanvasController();
 
     if (canvasController) {
         KoCreateShapesTool* tool = KoToolManager::instance()->shapeCreatorTool(canvasController->canvas());

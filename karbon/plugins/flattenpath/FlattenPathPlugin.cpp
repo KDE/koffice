@@ -30,7 +30,7 @@
 #include "KarbonPathFlattenCommand.h"
 
 #include <KoToolManager.h>
-#include <KoCanvasController.h>
+#include <KCanvasController.h>
 #include <KCanvasBase.h>
 #include <KoShapeManager.h>
 #include <KoSelection.h>
@@ -64,7 +64,7 @@ FlattenPathPlugin::FlattenPathPlugin(QObject *parent, const QVariantList &)
 
 void FlattenPathPlugin::slotFlattenPath()
 {
-    KoCanvasController* canvasController = KoToolManager::instance()->activeCanvasController();
+    KCanvasController* canvasController = KoToolManager::instance()->activeCanvasController();
     KoSelection *selection = canvasController->canvas()->shapeManager()->selection();
     KoShape * shape = selection->firstSelectedShape();
     if (! shape)

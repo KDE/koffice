@@ -45,7 +45,7 @@ class QKeyEvent;
 class QResizeEvent;
 class QScrollBar;
 
-class KoCanvasController;
+class KCanvasController;
 class KoDocumentEntry;
 class KoZoomHandler;
 
@@ -95,7 +95,7 @@ public:
     KCCanvas* canvasWidget() const;
 
     /** \return the canvas controller of the view */
-    KoCanvasController* canvasController() const;
+    KCanvasController* canvasController() const;
 
     /** \return the column header */
     KCColumnHeader* columnHeader() const;

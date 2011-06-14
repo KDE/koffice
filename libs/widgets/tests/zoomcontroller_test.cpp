@@ -24,7 +24,7 @@
 #include <kactioncollection.h>
 #include <kdebug.h>
 
-#include "KoCanvasController.h"
+#include "KCanvasController.h"
 #include "KoZoomHandler.h"
 #include "KoZoomController.h"
 #include "KoDpi.h"
@@ -35,7 +35,7 @@
 void zoomcontroller_test::testApi()
 {
     KoZoomHandler zoomHandler;
-    KoZoomController zoomController(new KoCanvasController(), &zoomHandler, new KActionCollection(this), KoZoomAction::AspectMode);
+    KoZoomController zoomController(new KCanvasController(), &zoomHandler, new KActionCollection(this), KoZoomAction::AspectMode);
     Q_UNUSED(zoomController);
 
 }

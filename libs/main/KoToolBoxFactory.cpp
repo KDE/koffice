@@ -22,15 +22,15 @@
 #include <KoToolManager.h>
 #include "KoToolBox_p.h"
 
-#include <KoCanvasController.h>
+#include <KCanvasController.h>
 
 class KoToolBoxFactory::Private { // TODO make inherit from KoToolBoxFactoryPrivate
 public:
-    KoCanvasController *canvas;
+    KCanvasController *canvas;
     QString appName;
 };
 
-KoToolBoxFactory::KoToolBoxFactory(KoCanvasController *canvas, const QString& title)
+KoToolBoxFactory::KoToolBoxFactory(KCanvasController *canvas, const QString& title)
     : KoDockFactoryBase(canvas, "ToolBox"),
     d(new Private())
 {

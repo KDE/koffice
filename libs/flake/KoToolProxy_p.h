@@ -37,7 +37,7 @@
 
 class KoPointerEvent;
 class KoToolBase;
-class KoCanvasController;
+class KCanvasController;
 class KoToolProxy;
 
 class KoToolProxyPrivate
@@ -53,15 +53,15 @@ public:
 
     bool isActiveLayerEditable();
 
-    /// the toolManager tells us which KoCanvasController this toolProxy is working for.
-    void setCanvasController(KoCanvasController *controller);
+    /// the toolManager tells us which KCanvasController this toolProxy is working for.
+    void setCanvasController(KCanvasController *controller);
 
     KoToolBase *activeTool;
     bool tabletPressed;
     bool hasSelection;
     QTimer scrollTimer;
     QPoint scrollEdgePoint;
-    KoCanvasController *controller;
+    KCanvasController *controller;
     KoToolProxy *parent;
 
     // used to determine if the mouse-release is after a drag or a simple click

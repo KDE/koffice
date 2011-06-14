@@ -27,12 +27,12 @@
 #include <QString>
 #include <QDockWidget>
 
-class KoCanvasController;
+class KCanvasController;
 
 class KOMAIN_EXPORT KoToolBoxFactory : public KoDockFactoryBase
 {
 public:
-    explicit KoToolBoxFactory(KoCanvasController *canvas, const QString &appName);
+    explicit KoToolBoxFactory(KCanvasController *canvas, const QString &appName);
     ~KoToolBoxFactory();
 
     QDockWidget* createDockWidget();

@@ -25,7 +25,7 @@
 
 #include <KoPointerEvent.h>
 #include <KCanvasBase.h>
-#include <KoCanvasController.h>
+#include <KCanvasController.h>
 #include <KoResourceManager.h>
 #include <KoViewConverter.h>
 #include <KGuidesData.h>
@@ -58,7 +58,7 @@ void GuidesTool::paint(QPainter &painter, const KoViewConverter &converter)
     if (m_mode == EditGuide && m_index == -1)
         return;
 
-    KoCanvasController *controller = canvas()->canvasController();
+    KCanvasController *controller = canvas()->canvasController();
     QPoint documentOrigin = canvas()->documentOrigin();
     QPoint canvasOffset(controller->canvasOffsetX(), controller->canvasOffsetY());
 
@@ -84,7 +84,7 @@ void GuidesTool::repaintDecorations()
         return;
 
     QRectF rect;
-    KoCanvasController *controller = canvas()->canvasController();
+    KCanvasController *controller = canvas()->canvasController();
     QPoint documentOrigin = canvas()->documentOrigin();
     QPoint canvasOffset(controller->canvasOffsetX(), controller->canvasOffsetY());
     if (m_orientation == Qt::Horizontal) {

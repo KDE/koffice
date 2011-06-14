@@ -29,7 +29,7 @@ class KStatusBar;
 class KWView;
 class QLabel;
 class KSqueezedTextLabel;
-class KoCanvasController;
+class KCanvasController;
 class KWDocument;
 class KWCanvas;
 class QAction;
@@ -59,7 +59,7 @@ private slots:
     void updatePageCount();
     void updateMousePosition(const QPoint&);
     void resourceChanged(int, const QVariant&);
-    void updateCurrentTool(KoCanvasController*);
+    void updateCurrentTool(KCanvasController*);
     void createZoomWidget();
     void showPage(bool visible);
     void showModified(bool visible);
@@ -83,7 +83,7 @@ private:
     KStatusBar *m_statusbar;
     QPointer<KWView> m_currentView;
     QMap<KWView*, QWidget*> m_zoomWidgets;
-    QPointer<KoCanvasController> m_controller;
+    QPointer<KCanvasController> m_controller;
     int m_currentPageNumber;
     QAction *m_zoomAction;
 

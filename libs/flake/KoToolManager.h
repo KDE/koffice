@@ -28,7 +28,7 @@
 #include <QCursor>
 #include <QList>
 
-class KoCanvasController;
+class KCanvasController;
 class KCanvasBase;
 class KoToolBase;
 class KoCreateShapesTool;
@@ -50,11 +50,11 @@ class KoShapeLayer;
  *
  * The ToolManager is a singleton and will manage all views in all applications that
  * are loaded in this process. This means you will have to register and unregister your view.
- * When creating your new view you should use a KoCanvasController() and register that
+ * When creating your new view you should use a KCanvasController() and register that
  * with the ToolManager like this:
 @code
     MyGuiWidget::MyGuiWidget() {
-        m_canvasController = new KoCanvasController(this);
+        m_canvasController = new KCanvasController(this);
         m_canvasController->setCanvas(m_canvas);
         KoToolManager::instance()->addControllers(m_canvasController));
     }
@@ -68,7 +68,7 @@ class KoShapeLayer;
  * KoToolManager also keeps track of the current tool based on a
    complex set of conditions and heuristics:
 
-   - there is one active tool per KoCanvasController (and there is one KoCanvasController
+   - there is one active tool per KCanvasController (and there is one KCanvasController
      per view, because this is a class with scrollbars and a zoomlevel and so on)
    - for every pointing device (determined by the unique id of tablet,
      or 0 for mice -- you may have more than one mouse attached, but
@@ -108,13 +108,13 @@ public:
      * @param ac the actionCollection that will be the parent of the actions.
      * @param controller tools registered with this controller will have all their actions added as well.
      */
-    void registerTools(KActionCollection *ac, KoCanvasController *controller = 0);
+    void registerTools(KActionCollection *ac, KCanvasController *controller = 0);
 
     /**
      * Register a new canvas controller
      * @param controller the view controller that this toolmanager will manage the tools for
      */
-    void addController(KoCanvasController *controller);
+    void addController(KCanvasController *controller);
 
     /**
      * Remove a set of controllers
@@ -122,10 +122,10 @@ public:
      * deleted and stop eating memory.
      * @param controller the controller that is removed
      */
-    void removeCanvasController(KoCanvasController *controller);
+    void removeCanvasController(KCanvasController *controller);
 
     /// @return the active canvas controller
-    KoCanvasController *activeCanvasController() const;
+    KCanvasController *activeCanvasController() const;
 
     /**
      * Return the tool that is able to create shapes for this param canvas.
@@ -171,12 +171,12 @@ public:
     QList<Button> createToolList(KCanvasBase *canvas) const;
 
     /// Request tool activation for the given canvas controller
-    void requestToolActivation(KoCanvasController *controller);
+    void requestToolActivation(KCanvasController *controller);
 
     /// Returns the toolId of the currently active tool
     QString activeToolId() const;
 
-    void updateReadWrite(KoCanvasController *cc, bool readWrite);
+    void updateReadWrite(KCanvasController *cc, bool readWrite);
 
     class Private;
     /**
@@ -200,7 +200,7 @@ signals:
      * @param canvas the currently active canvas.
      * @param uniqueToolId a random but unique code for the new tool.
      */
-    void changedTool(KoCanvasController *canvas, int uniqueToolId);
+    void changedTool(KCanvasController *canvas, int uniqueToolId);
 
     /**
      * Emitted after the selection changed to state which unique shape-types are now
@@ -208,14 +208,14 @@ signals:
      * @param canvas the currently active canvas.
      * @param types a list of string that are the shape types of the selected objects.
      */
-    void toolCodesSelected(const KoCanvasController *canvas, const QList<QString> &types);
+    void toolCodesSelected(const KCanvasController *canvas, const QList<QString> &types);
 
     /**
      * Emitted after the current layer changed either its properties or to a new layer.
      * @param canvas the currently active canvas.
      * @param layer the layer that is selected.
      */
-    void currentLayerChanged(const KoCanvasController *canvas, const KoShapeLayer *layer);
+    void currentLayerChanged(const KCanvasController *canvas, const KoShapeLayer *layer);
 
     /**
      * Every time a new input device gets used by a tool, this event is emitted.
@@ -241,8 +241,8 @@ private:
     KoToolManager operator=(const KoToolManager&);
 
     Q_PRIVATE_SLOT(d, void toolActivated(ToolHelper *tool))
-    Q_PRIVATE_SLOT(d, void detachCanvas(KoCanvasController *controller))
-    Q_PRIVATE_SLOT(d, void attachCanvas(KoCanvasController *controller))
+    Q_PRIVATE_SLOT(d, void detachCanvas(KCanvasController *controller))
+    Q_PRIVATE_SLOT(d, void attachCanvas(KCanvasController *controller))
     Q_PRIVATE_SLOT(d, void movedFocus(QWidget *from, QWidget *to))
     Q_PRIVATE_SLOT(d, void updateCursor(const QCursor &cursor))
     Q_PRIVATE_SLOT(d, void switchBackRequested())

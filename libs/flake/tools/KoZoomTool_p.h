@@ -39,7 +39,7 @@
 #include <QCursor>
 
 class KCanvasBase;
-class KoCanvasController;
+class KCanvasController;
 
 /// \internal
 class KoZoomTool : public KInteractionTool
@@ -65,7 +65,7 @@ public:
     /// reimplemented method
     virtual void mouseDoubleClickEvent(KoPointerEvent *event);
 
-    void setCanvasController(KoCanvasController *controller) {
+    void setCanvasController(KCanvasController *controller) {
         m_controller = controller;
     }
 
@@ -79,7 +79,7 @@ private:
 
     void updateCursor(bool swap);
 
-    KoCanvasController *m_controller;
+    KCanvasController *m_controller;
     QCursor m_inCursor;
     QCursor m_outCursor;
     bool m_temporary;

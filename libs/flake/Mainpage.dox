@@ -11,7 +11,7 @@
  * <img src="../flake.png">
  * Flake is a middle layer between the applications and the content providers.
  * The applications will allow flake to be plugged in by implementing the
- * KoCanvasController interface while providers of content (like a chart engine
+ * KCanvasController interface while providers of content (like a chart engine
  * or a text component) will extend KoShape and optionally KoToolBase to do their
  * work.
  *

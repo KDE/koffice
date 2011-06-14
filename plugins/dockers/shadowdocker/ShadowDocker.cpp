@@ -23,7 +23,7 @@
 #include <KoShapeManager.h>
 #include <KoSelection.h>
 #include <KoToolManager.h>
-#include <KoCanvasController.h>
+#include <KCanvasController.h>
 #include <KoShadowConfigWidget.h>
 #include <KoShapeShadowCommand.h>
 #include <KLocale>

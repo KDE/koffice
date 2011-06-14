@@ -27,7 +27,7 @@
 #include <QObject>
 #include <QSizeF>
 
-class KoCanvasController;
+class KCanvasController;
 class KoZoomAction;
 class KoZoomHandler;
 class KActionCollection;
@@ -37,7 +37,7 @@ class QSize;
 /**
  * This controller class handles zoom levels for any canvas.
  *
- * For each KoCanvasController you should have one instance of this
+ * For each KCanvasController you should have one instance of this
  * class to go with it. This class then creates a KoZoomAction and
  * basically handles all zooming for you.
  *
@@ -69,7 +69,7 @@ public:
     * @param actionCollection the action collection where the KoZoomAction is added to
     * @param specialButtons controls which special buttons to show
     */
-    KoZoomController(KoCanvasController *controller, KoZoomHandler *zoomHandler, KActionCollection *actionCollection, KoZoomAction::SpecialButtons specialButtons = 0, QObject *parent = 0);
+    KoZoomController(KCanvasController *controller, KoZoomHandler *zoomHandler, KActionCollection *actionCollection, KoZoomAction::SpecialButtons specialButtons = 0, QObject *parent = 0);
 
     /// destructor
     ~KoZoomController();

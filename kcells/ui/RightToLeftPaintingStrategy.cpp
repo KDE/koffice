@@ -22,7 +22,7 @@
 #include <QPainter>
 
 #include <KCanvasBase.h>
-#include <KoCanvasController.h>
+#include <KCanvasController.h>
 #include <KoShape.h>
 #include <KoShapeManager.h>
 #include <KoViewConverter.h>

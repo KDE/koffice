@@ -38,7 +38,7 @@
 #include <KoShapeManager.h>
 #include <KoToolProxy.h>
 #include <KoShapeManagerPaintingStrategy.h>
-#include <KoCanvasController.h>
+#include <KCanvasController.h>
 #include <KoSelection.h>
 
 #include <kdebug.h>
@@ -304,7 +304,7 @@ void KarbonCanvas::updateSizeAndOffset()
     // check if the view rect has changed and emit signal if it has
     if (oldDocumentViewRect != d->documentViewRect) {
         QRectF viewRect = d->zoomHandler.documentToView(d->documentViewRect);
-        KoCanvasController * controller = canvasController();
+        KCanvasController * controller = canvasController();
         if (controller) {
             // tell canvas controller the new document size in pixel
             controller->setDocumentSize(viewRect.size().toSize(), true);

@@ -24,7 +24,7 @@
 #include "KWCanvas.h"
 #include "KWPage.h"
 
-#include <KoCanvasController.h>
+#include <KCanvasController.h>
 #include <KoToolManager.h>
 #include <KoShapeManager.h>
 #include <KoShape.h>
@@ -59,11 +59,11 @@ KWGui::KWGui(const QString &viewMode, KWView *parent)
     m_verticalRuler->setShowMousePosition(true);
 
     m_canvas = new KWCanvas(viewMode, static_cast<KWDocument*>(m_view->koDocument()), m_view, this);
-    KoCanvasController *canvasController = new KoCanvasController(this);
+    KCanvasController *canvasController = new KCanvasController(this);
     m_canvasController = canvasController;
     m_canvasController->setMargin(10);
     m_canvasController->setCanvas(m_canvas);
-    m_canvasController->setCanvasMode(KoCanvasController::AlignTop);
+    m_canvasController->setCanvasMode(KCanvasController::AlignTop);
     KoToolManager::instance()->addController(m_canvasController);
     KoToolManager::instance()->registerTools(m_view->actionCollection(), m_canvasController);
 

@@ -26,7 +26,7 @@
 #include "KoToolManager_p.h"
 #include "KoToolSelection.h"
 #include "KCanvasBase.h"
-#include "KoCanvasController.h"
+#include "KCanvasController.h"
 #include "KoShapeManager.h"
 #include "KoSelection.h"
 #include "KoShapeLayer.h"
@@ -311,7 +311,7 @@ void KoToolProxy::setActiveTool(KoToolBase *tool)
     }
 }
 
-void KoToolProxyPrivate::setCanvasController(KoCanvasController *c)
+void KoToolProxyPrivate::setCanvasController(KCanvasController *c)
 {
     controller = c;
 }

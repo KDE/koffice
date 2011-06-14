@@ -84,7 +84,7 @@
 // KOffice includes
 #include <KoGlobal.h>
 #include <KoDpi.h>
-#include <KoCanvasController.h>
+#include <KCanvasController.h>
 #include <KoMainWindow.h>
 #include <KOdfLoadingContext.h>
 #include <KOdfStoreReader.h>
@@ -178,7 +178,7 @@ public:
     // GUI elements
     QWidget *frame;
     KCCanvas *canvas;
-    KoCanvasController* canvasController;
+    KCanvasController* canvasController;
     KoZoomController* zoomController;
     KoZoomHandler* zoomHandler;
     KCRowHeader *rowHeader;
@@ -577,7 +577,7 @@ KCView::KCView(QWidget *_parent, KCDoc *_doc)
     // Connect updateView() signal to KCView::update() in order to repaint its
     // child widgets: the column/row headers and the select all button.
     // Connect to KCCanvas::update() explicitly as it lives in the viewport
-    // of the KoCanvasController.
+    // of the KCanvasController.
     connect(doc(), SIGNAL(updateView()),
             this, SLOT(update()));
     connect(doc(), SIGNAL(updateView()),
@@ -646,7 +646,7 @@ KCView::~KCView()
     // NOTE Stefan: Delete the KCCanvas explicitly, even if it has this view as
     //              parent. Otherwise, it leads to crashes, because it tries to
     //              access this KCView in some events (Bug #126492).
-    //              The KoCanvasController takes ownership of the KCCanvas and does the deletion.
+    //              The KCanvasController takes ownership of the KCCanvas and does the deletion.
     delete d->canvasController;
     delete d;
 }
@@ -673,9 +673,9 @@ void KCView::initView()
 
     // Setup the KCCanvas and its controller.
     d->canvas = new KCCanvas(this);
-    d->canvasController = new KoCanvasController(this);
+    d->canvasController = new KCanvasController(this);
     d->canvasController->setCanvas(d->canvas);
-    d->canvasController->setCanvasMode(KoCanvasController::Spreadsheet);
+    d->canvasController->setCanvasMode(KCanvasController::Spreadsheet);
     d->canvasController->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     d->canvasController->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
@@ -817,7 +817,7 @@ KoZoomController *KCView::zoomController() const
     return d->zoomController;
 }
 
-KoCanvasController* KCView::canvasController() const
+KCanvasController* KCView::canvasController() const
 {
     return d->canvasController;
 }

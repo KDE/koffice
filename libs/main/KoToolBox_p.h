@@ -30,7 +30,7 @@
 #include <QtGui/QDockWidget>
 
 class QToolButton;
-class KoCanvasController;
+class KCanvasController;
 class KCanvasBase;
 class KoShapeLayer;
 
@@ -52,7 +52,7 @@ class KoToolBox : public QWidget {
     Q_OBJECT
 public:
     /// constructor
-    explicit KoToolBox(KoCanvasController *canvas);
+    explicit KoToolBox(KCanvasController *canvas);
     ~KoToolBox();
 
     /**
@@ -77,7 +77,7 @@ public slots:
      * @param canvas the currently active canvas.
      * @param id an id to identify the button to activate.
      */
-    void setActiveTool(KoCanvasController *canvas, int id);
+    void setActiveTool(KCanvasController *canvas, int id);
 
     /**
      * Show only the dynamic buttons that have a code from parameter codes.
@@ -87,7 +87,7 @@ public slots:
      * @param canvas the currently active canvas.
      * @param codes a list of all the codes to show.
      */
-    void setButtonsVisible(const KoCanvasController *canvas, const QList<QString> &codes);
+    void setButtonsVisible(const KCanvasController *canvas, const QList<QString> &codes);
 
     /// set the canvas this docker should listen to for changes.
     void setCanvas(KCanvasBase *canvas);
@@ -98,7 +98,7 @@ public slots:
     void setFloating(bool v);
 
 private slots:
-    void setCurrentLayer(const KoCanvasController *canvas, const KoShapeLayer* newLayer);
+    void setCurrentLayer(const KCanvasController *canvas, const KoShapeLayer* newLayer);
 
 protected:
     void paintEvent(QPaintEvent *event);

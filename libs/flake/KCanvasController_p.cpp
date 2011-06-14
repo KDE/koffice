@@ -20,7 +20,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoCanvasController_p.h"
+#include "KCanvasController_p.h"
 #include "KoShape.h"
 #include "KoShape_p.h"
 #include "KoShapeFactoryBase.h" // for the SHAPE mimetypes
@@ -46,7 +46,7 @@
 #include <stdlib.h>
 
 // ********** Viewport **********
-Viewport::Viewport(KoCanvasController *parent)
+Viewport::Viewport(KCanvasController *parent)
         : QWidget(parent)
         , m_draggedShape(0)
         , m_drawShadow(false)
@@ -345,13 +345,13 @@ void Viewport::resetLayout()
         if (marginRight > 0) resizeW = viewW - marginRight;
         if (marginBottom > 0) resizeH = viewH - marginBottom;
     }
-    if (m_parent->canvasMode() == KoCanvasController::AlignTop) {
+    if (m_parent->canvasMode() == KCanvasController::AlignTop) {
         // have up to m_margin pixels at top.
         moveY = qMin(m_margin, moveY);
     }
     if (m_canvas) {
         QRect geom;
-        if (m_parent->canvasMode() == KoCanvasController::Infinite)
+        if (m_parent->canvasMode() == KCanvasController::Infinite)
             geom = QRect(0, 0, viewW, viewH);
         else
             geom = QRect(moveX, moveY, resizeW, resizeH);
@@ -370,4 +370,4 @@ void Viewport::resetLayout()
 #endif
 }
 
-#include <KoCanvasController_p.moc>
+#include <KCanvasController_p.moc>

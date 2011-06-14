@@ -48,7 +48,7 @@ class KCanvasBase;
 class KoToolBase;
 class KoShape;
 class KoToolManager;
-class KoCanvasController;
+class KCanvasController;
 class KoShapeLayer;
 class ToolHelper;
 class CanvasData;
@@ -68,15 +68,15 @@ public:
     bool eventFilter(QObject *object, QEvent *event);
     void toolActivated(ToolHelper *tool);
 
-    void detachCanvas(KoCanvasController *controller);
-    void attachCanvas(KoCanvasController *controller);
+    void detachCanvas(KCanvasController *controller);
+    void attachCanvas(KCanvasController *controller);
     void movedFocus(QWidget *from, QWidget *to);
     void updateCursor(const QCursor &cursor);
     void switchBackRequested();
     void selectionChanged(QList<KoShape*> shapes);
     void currentLayerChanged(const KoShapeLayer *layer);
     void switchToolTemporaryRequested(const QString &id);
-    CanvasData *createCanvasData(KoCanvasController *controller, KInputDevice device);
+    CanvasData *createCanvasData(KCanvasController *controller, KInputDevice device);
     bool toolCanBeUsed(const QString &activationShapeId);
 
     /**
@@ -102,7 +102,7 @@ public:
     QList<ToolHelper*> tools; // list of all available tools via their factories.
 
     QHash<KoToolBase*, int> uniqueToolIds; // for the changedTool signal
-    QHash<KoCanvasController*, QList<CanvasData*> > canvasses;
+    QHash<KCanvasController*, QList<CanvasData*> > canvasses;
     QHash<KCanvasBase*, KoToolProxy*> proxies;
 
     CanvasData *canvasData; // data about the active canvas.

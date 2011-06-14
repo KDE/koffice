@@ -24,7 +24,7 @@
 #include "KWCanvas.h"
 
 #include <KoToolManager.h>
-#include <KoCanvasController.h>
+#include <KCanvasController.h>
 #include <KoZoomController.h>
 
 #include <QLabel>
@@ -111,8 +111,8 @@ KWStatusBar::KWStatusBar(KStatusBar *statusBar, KWView *view)
 
     updateCurrentTool(0);
     setCurrentCanvas(view->kwcanvas());
-    connect(KoToolManager::instance(), SIGNAL(changedTool(KoCanvasController*, int)),
-            this, SLOT(updateCurrentTool(KoCanvasController*)));
+    connect(KoToolManager::instance(), SIGNAL(changedTool(KCanvasController*, int)),
+            this, SLOT(updateCurrentTool(KCanvasController*)));
 }
 
 KWStatusBar::~KWStatusBar()
@@ -154,7 +154,7 @@ void KWStatusBar::resourceChanged(int key, const QVariant &value)
         updatePageCount();
 }
 
-void KWStatusBar::updateCurrentTool(KoCanvasController *canvasController)
+void KWStatusBar::updateCurrentTool(KCanvasController *canvasController)
 {
     QWidget *root = m_statusbar->window();
     if (root && !root->isAncestorOf(canvasController))

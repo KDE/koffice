@@ -34,7 +34,7 @@
 #include <kcursor.h>
 
 #include <KoPointerEvent.h>
-#include <KoCanvasController.h>
+#include <KCanvasController.h>
 #include <KoPageApp.h>
 #include <KoPACanvas.h>
 #include <KoPADocument.h>

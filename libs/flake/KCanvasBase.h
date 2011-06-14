@@ -43,7 +43,7 @@ class KoToolProxy;
 class KoViewConverter;
 class KoShapeController;
 class KoShapeControllerBase;
-class KoCanvasController;
+class KCanvasController;
 class KoShape;
 class KoSnapGuide;
 class KGuidesData;
@@ -189,7 +189,7 @@ public:
     /**
      * Return the canvas controller for this canvas.
      */
-    KoCanvasController *canvasController() const;
+    KCanvasController *canvasController() const;
 
     /**
      * @brief Scrolls the content of the canvas so that the given rect is visible.
@@ -238,8 +238,8 @@ public:
      */
     bool isReadWrite() const;
 
-    /// called by KoCanvasController to set the controller that handles this canvas.
-    void setCanvasController(KoCanvasController *controller);
+    /// called by KCanvasController to set the controller that handles this canvas.
+    void setCanvasController(KCanvasController *controller);
 
 private:
     // we need a KoShapeControllerBase so that it can work

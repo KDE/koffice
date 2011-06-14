@@ -44,7 +44,7 @@ class KoView;
  * called multiple times for those that wish to exchange one canvas
  * widget for another.
  *
- * Effectively, there is _one_ KoCanvasController per KoView in your
+ * Effectively, there is _one_ KCanvasController per KoView in your
  * application.
  *
  * The canvas widget is at most as big as the viewport of the scroll
@@ -52,7 +52,7 @@ class KoView;
  * In your canvas widget code, you can find the right place in your
  * document in view coordinates (pixels) by adding the documentOffset
  */
-class FLAKE_EXPORT KoCanvasController : public QAbstractScrollArea
+class FLAKE_EXPORT KCanvasController : public QAbstractScrollArea
 {
     Q_OBJECT
 public:
@@ -61,7 +61,7 @@ public:
         AlignTop,     ///< canvas is top aligned if smaller than the viewport
         Centered,     ///< canvas is centered if smaller than the viewport
         Infinite,     ///< canvas is never smaller than the viewport
-        Presentation, ///< canvas is not handled by KoCanvasController, canvas is full screen
+        Presentation, ///< canvas is not handled by KCanvasController, canvas is full screen
         Spreadsheet   ///< same as Infinite, but supports right-to-left layouts
     };
 
@@ -69,8 +69,8 @@ public:
      * Constructor.
      * @param parent the parent this widget will belong to
      */
-    explicit KoCanvasController(QWidget *parent = 0);
-    virtual ~KoCanvasController();
+    explicit KCanvasController(QWidget *parent = 0);
+    virtual ~KCanvasController();
     /**
      * Reimplemented from QAbstractScrollArea.
      */
@@ -262,20 +262,20 @@ public:
      * \internal
      */
     class Private;
-    KoCanvasController::Private *priv();
+    KCanvasController::Private *priv();
 
 signals:
     /**
      * Emitted when a previously added canvas is about to be removed.
      * @param canvasController this object
      */
-    void canvasRemoved(KoCanvasController *canvasController);
+    void canvasRemoved(KCanvasController *canvasController);
 
     /**
      * Emitted when a canvas is set on this widget
      * @param canvasController this object
      */
-    void canvasSet(KoCanvasController *canvasController);
+    void canvasSet(KCanvasController *canvasController);
 
     /**
      * Emitted when canvasOffsetX() changes

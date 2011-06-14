@@ -52,7 +52,7 @@
 
 // koffice libs includes
 #include <KoBookmark.h>
-#include <KoCanvasController.h>
+#include <KCanvasController.h>
 #include <KoCopyController.h>
 #include <KoCutController.h>
 #include <kofficeversion.h>
@@ -1430,7 +1430,7 @@ void KWView::goToPreviousPage()
 
 void KWView::goToPage(const KWPage &page)
 {
-    KoCanvasController *controller = m_gui->canvasController();
+    KCanvasController *controller = m_gui->canvasController();
     QPoint origPos = controller->scrollBarValue();
     QPointF pos = m_canvas->viewMode()->documentToView(QPointF(0, page.offsetInDocument()));
     origPos.setY((int)pos.y());

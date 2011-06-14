@@ -27,7 +27,7 @@
 
 #include <KoZoomHandler.h>
 #include <KCanvasBase.h>
-#include <KoCanvasController.h>
+#include <KCanvasController.h>
 
 class KoZoomController::Private
 {
@@ -65,7 +65,7 @@ public:
         parent->setZoom(mode, zoom);
     }
 
-    KoCanvasController *canvasController;
+    KCanvasController *canvasController;
     KoZoomHandler *zoomHandler;
     KoZoomAction *action;
     QSizeF pageSize;
@@ -74,7 +74,7 @@ public:
     KoZoomController *parent;
 };
 
-KoZoomController::KoZoomController(KoCanvasController *co, KoZoomHandler *zh, KActionCollection *actionCollection, KoZoomAction::SpecialButtons specialButtons, QObject *parent)
+KoZoomController::KoZoomController(KCanvasController *co, KoZoomHandler *zh, KActionCollection *actionCollection, KoZoomAction::SpecialButtons specialButtons, QObject *parent)
     : QObject(parent),
     d(new Private(this, specialButtons))
 {
@@ -172,7 +172,7 @@ void KoZoomController::setZoom(KoZoomMode::Mode mode, qreal zoom)
 #endif
     d->canvasController->setDocumentSize(d->zoomHandler->documentToView(d->documentSize).toSize(), true );
 
-    if(d->canvasController->canvasMode() == KoCanvasController::Infinite
+    if(d->canvasController->canvasMode() == KCanvasController::Infinite
        && (mode == KoZoomMode::ZOOM_WIDTH || mode == KoZoomMode::ZOOM_PAGE)) {
         QPoint documentCenter =
             d->zoomHandler->documentToView(QPoint(d->documentSize.width() / 2,

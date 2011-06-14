@@ -64,7 +64,7 @@
 
 // KOffice
 #include <KCanvasBase.h>
-#include <KoCanvasController.h>
+#include <KCanvasController.h>
 #include <KoResourceManager.h>
 #include <KoViewConverter.h>
 
