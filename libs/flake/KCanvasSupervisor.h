@@ -1,6 +1,6 @@
 /* This file is part of the KDE project
  *
- * Copyright (C) 2010 Thomas Zander <zander@kde.org>
+ * Copyright (c) 2009 Boudewijn Rempt <boud@valdyas.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -17,14 +17,25 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
+#ifndef KOCANVASSUPERVISOR_H
+#define KOCANVASSUPERVISOR_H
 
-#include "KoCanvasSupervisor.h"
+#include <QList>
 
-KoCanvasSupervisor::KoCanvasSupervisor()
+#include "flake_export.h"
+
+class KCanvasObserverBase;
+
+/**
+ * KCanvasSupervisor is an abstract class that can return a
+ * list of canvas observers, such as dock widgets.
+ */
+class FLAKE_EXPORT KCanvasSupervisor
 {
-}
+public:
+    KCanvasSupervisor();
+    virtual ~KCanvasSupervisor();
+    virtual QList<KCanvasObserverBase*> canvasObservers() = 0;
+};
 
-KoCanvasSupervisor::~KoCanvasSupervisor()
-{
-}
-
+#endif

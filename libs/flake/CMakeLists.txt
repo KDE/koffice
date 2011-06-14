@@ -15,7 +15,7 @@ set(flake_SRCS
     KCanvasBase.cpp
     KoResourceManager.cpp
     KCanvasObserverBase.cpp
-    KoCanvasSupervisor.cpp
+    KCanvasSupervisor.cpp
     KoCutController.cpp
     KoCopyController.cpp
     KoDockFactoryBase.cpp
@@ -236,7 +236,7 @@ install(
     KCanvasBase.h
     KCanvasController.h
     KCanvasObserverBase.h
-    KoCanvasSupervisor.h
+    KCanvasSupervisor.h
     KoColorBackground.h
     KoCopyController.h
     KoCutController.h

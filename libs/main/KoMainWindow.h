@@ -26,7 +26,7 @@
 #include <kparts/mainwindow.h>
 
 #include <KCanvasObserverBase.h>
-#include <KoCanvasSupervisor.h>
+#include <KCanvasSupervisor.h>
 
 class KoMainWindowPrivate;
 class KoDocument;
@@ -54,7 +54,7 @@ class PartManager;
  *
  * @note This class does NOT need to be subclassed in your application.
  */
-class KOMAIN_EXPORT KoMainWindow : public KParts::MainWindow, public KoCanvasSupervisor
+class KOMAIN_EXPORT KoMainWindow : public KParts::MainWindow, public KCanvasSupervisor
 {
     Q_OBJECT
 public:
