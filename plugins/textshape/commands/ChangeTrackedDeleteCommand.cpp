@@ -257,7 +257,7 @@ void ChangeTrackedDeleteCommand::deleteSelection(QTextCursor &selection)
     }
 
     if (KoTextDocument(document).changeTracker()->containsInlineChanges(checker.charFormat())) {
-        int changeId = checker.charFormat().property(KoCharacterStyle::ChangeTrackerId).toInt();
+        int changeId = checker.charFormat().property(KCharacterStyle::ChangeTrackerId).toInt();
         if (KoTextDocument(document).changeTracker()->elementById(changeId)->changeType() == KOdfGenericChange::DeleteChange) {
             QTextDocumentFragment prefix =  KoTextDocument(document).changeTracker()->elementById(changeId)->deleteData();
             selectionBegin -= (KChangeTracker::fragmentLength(prefix) + 1 );
@@ -293,7 +293,7 @@ void ChangeTrackedDeleteCommand::deleteSelection(QTextCursor &selection)
     element->setDeleteChangeMarker(deleteChangemarker);
 
     QTextCharFormat charFormat;
-    charFormat.setProperty(KoCharacterStyle::ChangeTrackerId, changeId);
+    charFormat.setProperty(KCharacterStyle::ChangeTrackerId, changeId);
     selection.mergeCharFormat(charFormat);
 
     deletedFragment = KChangeTracker::generateDeleteFragment(selection, deleteChangemarker);

@@ -22,7 +22,7 @@
 
 #include <QObject>
 #include <KParagraphStyle.h>
-#include <KoCharacterStyle.h>
+#include <KCharacterStyle.h>
 #include <KListStyle.h>
 
 namespace Scripting
@@ -35,9 +35,9 @@ class CharacterStyle : public QObject
 {
     Q_OBJECT
 public:
-    CharacterStyle(QObject* parent, KoCharacterStyle* style) : QObject(parent), m_style(style) {}
+    CharacterStyle(QObject* parent, KCharacterStyle* style) : QObject(parent), m_style(style) {}
     virtual ~CharacterStyle() {}
-    KoCharacterStyle* style() const {
+    KCharacterStyle* style() const {
         return m_style;
     }
 public slots:
@@ -146,11 +146,11 @@ public slots:
 
     /** Return true if the there is a underline. */
     bool underline() const {
-        return m_style->underlineStyle() != KoCharacterStyle::NoLineStyle;
+        return m_style->underlineStyle() != KCharacterStyle::NoLineStyle;
     }
     /** Set the underline. */
     void setUnderline(bool underline) {
-        m_style->setUnderlineStyle(underline ? KoCharacterStyle::SolidLine : KoCharacterStyle::NoLineStyle);
+        m_style->setUnderlineStyle(underline ? KCharacterStyle::SolidLine : KCharacterStyle::NoLineStyle);
     }
 
     /***** Foreground *****/
@@ -197,7 +197,7 @@ public slots:
     }
 
 private:
-    KoCharacterStyle* m_style;
+    KCharacterStyle* m_style;
 };
 
 /**
@@ -411,13 +411,13 @@ public slots:
 
     /** Return the character-style for this paragraph-style. */
     QObject* characterStyle() {
-        KoCharacterStyle* charstyle = m_style->characterStyle();
+        KCharacterStyle* charstyle = m_style->characterStyle();
         return charstyle ? new CharacterStyle(this, charstyle) : 0;
     }
     /** Set the character-style for this paragraph-style. */
     void setCharacterStyle(QObject *style) {
         CharacterStyle* charstyle = dynamic_cast<CharacterStyle*>(style);
-        KoCharacterStyle* s = charstyle ? charstyle->style() : 0;
+        KCharacterStyle* s = charstyle ? charstyle->style() : 0;
         if (s) m_style->setCharacterStyle(s);
     }
 

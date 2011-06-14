@@ -79,7 +79,7 @@ void InsertTableColumnCommand::redo()
         if (m_changeId) {
             for (int i=0; i < m_table->rows(); i++) {
                 QTextTableCellFormat cellFormat = m_table->cellAt(i, m_column).format().toTableCellFormat();
-                cellFormat.setProperty(KoCharacterStyle::ChangeTrackerId, m_changeId);
+                cellFormat.setProperty(KCharacterStyle::ChangeTrackerId, m_changeId);
                 m_table->cellAt(i, m_column).setFormat(cellFormat);
             }
         }

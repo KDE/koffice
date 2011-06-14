@@ -103,7 +103,7 @@ void ShowChangesCommand::enableDisableStates(bool showChanges)
     m_changeTracker->setDisplayChanges(showChanges);
 
     QTextCharFormat format = m_textEditor->charFormat();
-    format.clearProperty(KoCharacterStyle::ChangeTrackerId);
+    format.clearProperty(KCharacterStyle::ChangeTrackerId);
     m_textEditor->setCharFormat(format);
 }
 
@@ -124,8 +124,8 @@ void ShowChangesCommand::insertDeletedChanges()
             QTextCursor caret(element->deleteChangeMarker()->document());
             caret.setPosition(element->deleteChangeMarker()->position() + numAddedChars +  1);
             QTextCharFormat f = caret.charFormat();
-            f.setProperty(KoCharacterStyle::ChangeTrackerId, element->deleteChangeMarker()->changeId());
-            f.clearProperty(KoCharacterStyle::InlineInstanceId);
+            f.setProperty(KCharacterStyle::ChangeTrackerId, element->deleteChangeMarker()->changeId());
+            f.clearProperty(KCharacterStyle::InlineInstanceId);
             caret.setCharFormat(f);
             int insertPosition = caret.position();
             KChangeTracker::insertDeleteFragment(caret, element->deleteChangeMarker());

@@ -33,7 +33,7 @@
 
 #include <KXmlWriter.h>
 #include <KOdfGenericStyle.h>
-#include <styles/KoCharacterStyle.h>
+#include <styles/KCharacterStyle.h>
 
 //#define NO_DRAWINGML_PICTURE // disables pic:pic, etc. in MsooXmlCommonReader
 
@@ -232,7 +232,7 @@ private:
                            const QString& lineStyle, BorderSide borderSide);
 
     //! Used by read_strike() and read_dstrike()
-    void readStrikeElement(KoCharacterStyle::LineType type);
+    void readStrikeElement(KCharacterStyle::LineType type);
 
     void setParentParagraphStyleName(const QXmlStreamAttributes& attrs);
 

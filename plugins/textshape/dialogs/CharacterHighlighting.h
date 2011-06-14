@@ -24,7 +24,7 @@
 
 #include <ui_CharacterHighlighting.h>
 
-#include "KoCharacterStyle.h"
+#include "KCharacterStyle.h"
 
 class QColor;
 
@@ -36,12 +36,12 @@ public:
     explicit CharacterHighlighting(bool uniqueFormat, QWidget* parent = 0);
     ~CharacterHighlighting() {}
 
-    void setDisplay(KoCharacterStyle *style);
-    void save(KoCharacterStyle *style);
+    void setDisplay(KCharacterStyle *style);
+    void save(KCharacterStyle *style);
 
 signals:
-    void underlineChanged(KoCharacterStyle::LineType, KoCharacterStyle::LineStyle, QColor);
-    void strikethroughChanged(KoCharacterStyle::LineType, KoCharacterStyle::LineStyle, QColor);
+    void underlineChanged(KCharacterStyle::LineType, KCharacterStyle::LineStyle, QColor);
+    void strikethroughChanged(KCharacterStyle::LineType, KCharacterStyle::LineStyle, QColor);
     void capitalizationChanged(QFont::Capitalization);
 
 private slots:
@@ -54,10 +54,10 @@ private slots:
     void capitalisationChanged();
 
 private:
-    KoCharacterStyle::LineType indexToLineType(int index);
-    KoCharacterStyle::LineStyle indexToLineStyle(int index);
-    int lineTypeToIndex(KoCharacterStyle::LineType type);
-    int lineStyleToIndex(KoCharacterStyle::LineStyle type);
+    KCharacterStyle::LineType indexToLineType(int index);
+    KCharacterStyle::LineStyle indexToLineStyle(int index);
+    int lineTypeToIndex(KCharacterStyle::LineType type);
+    int lineStyleToIndex(KCharacterStyle::LineStyle type);
 
     Ui::CharacterHighlighting widget;
 

@@ -44,7 +44,7 @@
 #include <KOdfGenericStyles.h>
 #include <KOdf.h>
 #include <KOdf.h>
-#include <styles/KoCharacterStyle.h>
+#include <styles/KCharacterStyle.h>
 
 #include <kcells/Util.h>
 
@@ -851,7 +851,7 @@ KoFilter::ConversionStatus XlsxXmlWorksheetReader::read_c()
 //    const bool addTextPElement = true;//m_value.isEmpty() || t != QLatin1String("s");
 
     if (!m_value.isEmpty()) {
-        KoCharacterStyle cellCharacterStyle;
+        KCharacterStyle cellCharacterStyle;
         cellFormat->setupCharacterStyle(m_context->styles, &cellCharacterStyle);
 
         if( cellCharacterStyle.verticalAlignment() == QTextCharFormat::AlignSuperScript 
@@ -967,7 +967,7 @@ KoFilter::ConversionStatus XlsxXmlWorksheetReader::read_c()
         KOdfGenericStyle cellStyle(KOdfGenericStyle::TableCellAutoStyle, "table-cell");
 
         if( charStyleName.isEmpty() ) {
-            KoCharacterStyle cellCharacterStyle;
+            KCharacterStyle cellCharacterStyle;
             cellFormat->setupCharacterStyle(m_context->styles, &cellCharacterStyle);
             cellCharacterStyle.saveOdf(cellStyle);
         }

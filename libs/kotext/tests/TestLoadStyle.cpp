@@ -30,7 +30,7 @@
 #include <KOdfXmlNS.h>
 #include <KoTextDocumentLayout.h>
 #include <KoStyleManager.h>
-#include <KoCharacterStyle.h>
+#include <KCharacterStyle.h>
 #include <KParagraphStyle.h>
 #include <KoText.h>
 #include <KInlineTextObjectManager.h>
@@ -128,18 +128,18 @@ void TestLoadStyle::testLoadStyle()
 
     QTextCursor cursor(block);
     QCOMPARE(cursor.blockFormat().property(KParagraphStyle::StyleId).toInt(), 100);
-    QCOMPARE(cursor.blockCharFormat().property(KoCharacterStyle::StyleId).toInt(), 101);
-    QCOMPARE(cursor.charFormat().property(KoCharacterStyle::StyleId).toInt(), 101);
+    QCOMPARE(cursor.blockCharFormat().property(KCharacterStyle::StyleId).toInt(), 101);
+    QCOMPARE(cursor.charFormat().property(KCharacterStyle::StyleId).toInt(), 101);
 
     cursor.setPosition(62);
-    //qDebug() << cursor.charFormat().property(KoCharacterStyle::StyleId).toInt();
+    //qDebug() << cursor.charFormat().property(KCharacterStyle::StyleId).toInt();
 
     KoTextDocument textDoc(document);
     KoStyleManager *sm = textDoc.styleManager();
-    KoCharacterStyle *myStyle = sm->characterStyle("MyStyle");
+    KCharacterStyle *myStyle = sm->characterStyle("MyStyle");
     QVERIFY(myStyle);
     //qDebug() << myStyle->styleId();
-    QCOMPARE(cursor.charFormat().property(KoCharacterStyle::StyleId).toInt(), myStyle->styleId());
+    QCOMPARE(cursor.charFormat().property(KCharacterStyle::StyleId).toInt(), myStyle->styleId());
 }
 
 QTEST_KDEMAIN(TestLoadStyle, GUI)

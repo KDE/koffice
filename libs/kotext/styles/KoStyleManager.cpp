@@ -24,7 +24,7 @@
 #include "KoStyleManager.h"
 #include "KoStyleManager_p.h"
 #include "KParagraphStyle.h"
-#include "KoCharacterStyle.h"
+#include "KCharacterStyle.h"
 #include "KListStyle.h"
 #include "KListLevelProperties.h"
 #include "KoTableStyle.h"
@@ -68,7 +68,7 @@ void KoStyleManagerPrivate::refreshUnsetStoreFor(int key)
         parag->applyStyle(bf);
         keys = bf.properties();
     } else {
-        KoCharacterStyle *charStyle = charStyles.value(key);
+        KCharacterStyle *charStyle = charStyles.value(key);
         if (charStyle) {
             QTextCharFormat cf;
             charStyle->applyStyle(cf);
@@ -128,7 +128,7 @@ KoStyleManager::KoStyleManager(QObject *parent)
     d->defaultParagraphStyle = new KParagraphStyle(this);
     d->defaultParagraphStyle->setName("[No Paragraph Style]");
     add(d->defaultParagraphStyle);
-    KoCharacterStyle *charStyle = d->defaultParagraphStyle->characterStyle();
+    KCharacterStyle *charStyle = d->defaultParagraphStyle->characterStyle();
     charStyle->setFontPointSize(12); // hardcoded defaults. use defaultstyles.xml to overide
     charStyle->setFontFamily(QLatin1String("Sans Serif"));
     charStyle->setForeground(QBrush(Qt::black));
@@ -156,7 +156,7 @@ void KoStyleManager::saveOdf(KOdfGenericStyles& mainStyles)
     mainStyles.insert(defStyle);
 
     // don't save character styles that are already saved as part of a paragraph style
-    QSet<KoCharacterStyle*> characterParagraphStyles;
+    QSet<KCharacterStyle*> characterParagraphStyles;
     QHash<KParagraphStyle*, QString> savedNames;
     foreach(KParagraphStyle *paragraphStyle, d->paragStyles) {
         if (paragraphStyle == d->defaultParagraphStyle)
@@ -183,7 +183,7 @@ void KoStyleManager::saveOdf(KOdfGenericStyles& mainStyles)
         }
     }
 
-    foreach(KoCharacterStyle *characterStyle, d->charStyles) {
+    foreach(KCharacterStyle *characterStyle, d->charStyles) {
         if (characterStyle == d->defaultParagraphStyle->characterStyle() || characterParagraphStyles.contains(characterStyle))
             continue;
 
@@ -267,7 +267,7 @@ void KoStyleManager::saveOdf(KOdfGenericStyles& mainStyles)
     }
 }
 
-void KoStyleManager::add(KoCharacterStyle *style)
+void KoStyleManager::add(KCharacterStyle *style)
 {
     if (d->charStyles.key(style, -1) != -1)
         return;
@@ -380,7 +380,7 @@ void KoStyleManager::add(KoSectionStyle *style)
     emit styleAdded(style);
 }
 
-void KoStyleManager::remove(KoCharacterStyle *style)
+void KoStyleManager::remove(KCharacterStyle *style)
 {
     if (d->charStyles.remove(style->styleId()))
         emit styleRemoved(style);
@@ -453,7 +453,7 @@ void KoStyleManager::alteredStyle(const KParagraphStyle *style)
     }
 }
 
-void KoStyleManager::alteredStyle(const KoCharacterStyle *style)
+void KoStyleManager::alteredStyle(const KCharacterStyle *style)
 {
     Q_ASSERT(style);
     int id = style->styleId();
@@ -569,7 +569,7 @@ void KoStyleManager::remove(QTextDocument *document)
     }
 }
 
-KoCharacterStyle *KoStyleManager::characterStyle(int id) const
+KCharacterStyle *KoStyleManager::characterStyle(int id) const
 {
     return d->charStyles.value(id);
 }
@@ -627,9 +627,9 @@ KoSectionStyle *KoStyleManager::sectionStyle(int id) const
     return d->sectionStyles.value(id);
 }
 
-KoCharacterStyle *KoStyleManager::characterStyle(const QString &name) const
+KCharacterStyle *KoStyleManager::characterStyle(const QString &name) const
 {
-    foreach(KoCharacterStyle *style, d->charStyles) {
+    foreach(KCharacterStyle *style, d->charStyles) {
         if (style->name() == name)
             return style;
     }
@@ -722,7 +722,7 @@ KListStyle *KoStyleManager::outlineStyle() const
     return d->outlineStyle;
 }
 
-QList<KoCharacterStyle*> KoStyleManager::characterStyles() const
+QList<KCharacterStyle*> KoStyleManager::characterStyles() const
 {
     return d->charStyles.values();
 }

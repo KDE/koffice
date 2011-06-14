@@ -23,7 +23,7 @@
 #include "StyleManager.h"
 
 #include <KoStyleManager.h>
-#include <KoCharacterStyle.h>
+#include <KCharacterStyle.h>
 #include <KParagraphStyle.h>
 #include <KCanvasBase.h>
 
@@ -151,9 +151,9 @@ void StylesWidget::setCurrentFormat(const QTextCharFormat &format)
         return;
     m_currentCharFormat = format;
 
-    int id = m_currentCharFormat.intProperty(KoCharacterStyle::StyleId);
+    int id = m_currentCharFormat.intProperty(KCharacterStyle::StyleId);
     bool unchanged = true;
-    KoCharacterStyle *usedStyle = 0;
+    KCharacterStyle *usedStyle = 0;
     if (m_styleManager)
         usedStyle = m_styleManager->characterStyle(id);
     if (usedStyle) {
@@ -163,7 +163,7 @@ void StylesWidget::setCurrentFormat(const QTextCharFormat &format)
             if (property == QTextFormat::ObjectIndex || property == QTextFormat::ObjectType
                     || property == QTextFormat::ForegroundBrush
                     || property == QTextFormat::FontFamily
-                    || property == KoCharacterStyle::InlineInstanceId)
+                    || property == KCharacterStyle::InlineInstanceId)
                 continue;
             if (m_currentCharFormat.property(property) != usedStyle->value(property)
                     && m_currentCharFormat.property(property) != defaultFormat.property(property)) {
@@ -216,7 +216,7 @@ void StylesWidget::newStyleClicked()
         if (styleName.isEmpty())
             styleName = i18n("new style");
         if (cr->isChecked()) {
-            KoCharacterStyle *style = new KoCharacterStyle();
+            KCharacterStyle *style = new KCharacterStyle();
             style->setName(styleName);
             m_styleManager->add(style);
         } else {
@@ -234,7 +234,7 @@ void StylesWidget::deleteStyleClicked()
     widget.stylesView->clearSelection();
     KParagraphStyle *paragraphStyle = m_stylesModel->paragraphStyleForIndex(index);
     if (paragraphStyle) {
-        KoCharacterStyle *s = paragraphStyle->characterStyle();
+        KCharacterStyle *s = paragraphStyle->characterStyle();
         m_styleManager->remove(paragraphStyle);
         bool inUse = false;
         foreach(KParagraphStyle *ps, m_styleManager->paragraphStyles()) {
@@ -267,14 +267,14 @@ void StylesWidget::editStyle()
         styleManager->layout()->setMargin(0);
         widget = styleManager;
     } else {
-        KoCharacterStyle *characterStyle = m_stylesModel->characterStyleForIndex(index);
+        KCharacterStyle *characterStyle = m_stylesModel->characterStyleForIndex(index);
         Q_ASSERT(characterStyle);
         CharacterGeneral *c = new CharacterGeneral;
         c->setStyle(characterStyle);
         if (m_canvasBase)
             c->setUnit(m_canvasBase->unit());
-        connect(c, SIGNAL(styleAltered(const KoCharacterStyle*)),
-                m_styleManager, SLOT(alteredStyle(const KoCharacterStyle*)));
+        connect(c, SIGNAL(styleAltered(const KCharacterStyle*)),
+                m_styleManager, SLOT(alteredStyle(const KCharacterStyle*)));
         widget = c;
     }
 
@@ -304,7 +304,7 @@ void StylesWidget::applyStyle(const QModelIndex &index)
         return;
     }
 
-    KoCharacterStyle *characterStyle = m_stylesModel->characterStyleForIndex(index);
+    KCharacterStyle *characterStyle = m_stylesModel->characterStyleForIndex(index);
     if (characterStyle) {
         emit characterStyleSelected(characterStyle);
         emit doneWithFocus();
@@ -336,7 +336,7 @@ void StylesWidget::setCurrent(const QModelIndex &index)
             return;
         }
 
-        KoCharacterStyle *characterStyle = m_stylesModel->characterStyleForIndex(index);
+        KCharacterStyle *characterStyle = m_stylesModel->characterStyleForIndex(index);
         if (characterStyle) {
             emit characterStyleSelected(characterStyle, canDelete);
             return;

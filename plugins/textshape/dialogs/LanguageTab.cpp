@@ -20,7 +20,7 @@
 #include "LanguageTab.h"
 #include "KoGlobal.h"
 
-#include <KoCharacterStyle.h>
+#include <KCharacterStyle.h>
 
 #include <kcombobox.h>
 #include <kiconloader.h>
@@ -70,7 +70,7 @@ LanguageTab::~LanguageTab()
 {
 }
 
-void LanguageTab::save(KoCharacterStyle* style) const
+void LanguageTab::save(KCharacterStyle* style) const
 {
     if (!widget.languageList->currentItem() || widget.languageList->currentItem()->text() == "None") //TODO i18n
         style->setLanguage(QString());
@@ -78,7 +78,7 @@ void LanguageTab::save(KoCharacterStyle* style) const
         style->setLanguage(KoGlobal::tagOfLanguage(widget.languageList->currentItem()->text()));
 }
 
-void LanguageTab::setDisplay(KoCharacterStyle *style)
+void LanguageTab::setDisplay(KCharacterStyle *style)
 {
     if (m_uniqueFormat) {
         const QString& name = KoGlobal::languageFromTag(style->language());

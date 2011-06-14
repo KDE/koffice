@@ -24,7 +24,7 @@
 
 #include <QWidget>
 
-class KoCharacterStyle;
+class KCharacterStyle;
 class FontDecorations;
 class CharacterHighlighting;
 class FontTab;
@@ -37,27 +37,27 @@ class CharacterGeneral : public QWidget
 public:
     explicit CharacterGeneral(QWidget *parent = 0, bool uniqueFormat = true);
 
-    void setStyle(KoCharacterStyle *style);
+    void setStyle(KCharacterStyle *style);
     void setStyleNameVisible(bool visible);
 
     void setUnit(const KUnit &unit);
 
 public slots:
-    void save(KoCharacterStyle *style = 0);
+    void save(KCharacterStyle *style = 0);
 
     void switchToGeneralTab();
 
 signals:
     void nameChanged(const QString &name);
-    void styleAltered(const KoCharacterStyle *style);
+    void styleAltered(const KCharacterStyle *style);
 
 private slots:
     void setName(const QString &name);
     void slotFontSelected(const QFont &);
     void slotBackgroundColorChanged(QColor);
     void slotTextColorChanged(QColor);
-    void slotUnderlineChanged(KoCharacterStyle::LineType, KoCharacterStyle::LineStyle, QColor);
-    void slotStrikethroughChanged(KoCharacterStyle::LineType, KoCharacterStyle::LineStyle, QColor);
+    void slotUnderlineChanged(KCharacterStyle::LineType, KCharacterStyle::LineStyle, QColor);
+    void slotStrikethroughChanged(KCharacterStyle::LineType, KCharacterStyle::LineStyle, QColor);
     void slotCapitalizationChanged(QFont::Capitalization capitalisation);
 
 private:
@@ -71,7 +71,7 @@ private:
     FontTab *m_fontTab;
     LanguageTab *m_languageTab;
 
-    KoCharacterStyle *m_style;
+    KCharacterStyle *m_style;
 };
 
 #endif

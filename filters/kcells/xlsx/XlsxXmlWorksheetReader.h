@@ -30,7 +30,7 @@
 #include "XlsxSharedString.h"
 
 #include <KOdfGenericStyle.h>
-#include <styles/KoCharacterStyle.h>
+#include <styles/KCharacterStyle.h>
 
 class XlsxXmlWorksheetReaderContext;
 class XlsxXmlDocumentReaderContext;

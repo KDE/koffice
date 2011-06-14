@@ -148,7 +148,7 @@ signals:
 
 private:
     enum Properties {
-        InlineInstanceId = 577297549 // If you change this, don't forget to change KoCharacterStyle.h
+        InlineInstanceId = 577297549 // If you change this, don't forget to change KCharacterStyle.h
     };
 
     QHash<int, KInlineObject*> m_objects;

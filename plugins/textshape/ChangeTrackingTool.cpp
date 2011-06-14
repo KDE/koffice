@@ -87,7 +87,7 @@ void ChangeTrackingTool::mouseMoveEvent(KoPointerEvent* event)
     QTextCursor cursor(m_textShapeData->document());
     cursor.setPosition(position);
 
-    int changeId = cursor.charFormat().property(KoCharacterStyle::ChangeTrackerId).toInt();
+    int changeId = cursor.charFormat().property(KCharacterStyle::ChangeTrackerId).toInt();
     if (changeId) {
         setCursor(QCursor(Qt::PointingHandCursor));
         QModelIndex index = m_model->indexForChangeId(changeId);
@@ -104,7 +104,7 @@ void ChangeTrackingTool::mousePressEvent(KoPointerEvent* event)
     QTextCursor cursor(m_textShapeData->document());
     cursor.setPosition(position);
 
-    int changeId = cursor.charFormat().property(KoCharacterStyle::ChangeTrackerId).toInt();
+    int changeId = cursor.charFormat().property(KCharacterStyle::ChangeTrackerId).toInt();
     if (changeId) {
         AcceptRejectChangeDialog acceptDialog(KoTextDocument(m_textShapeData->document()).changeTracker(), changeId);
         if (int result = acceptDialog.exec()) {

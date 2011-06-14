@@ -25,7 +25,7 @@
 #define MSOOXMLCOMMONREADER_H
 
 #include <KOdfGenericStyle.h>
-#include <styles/KoCharacterStyle.h>
+#include <styles/KCharacterStyle.h>
 #include <styles/KListLevelProperties.h>
 
 #include "MsooXmlReader.h"
@@ -67,7 +67,7 @@ protected:
 
     KOdfGenericStyle m_currentTextStyle;
     bool m_currentTextStylePredefined; //!< true if m_currentTextStyle shouldn't be created in read_rPr
-    KoCharacterStyle* m_currentTextStyleProperties;
+    KCharacterStyle* m_currentTextStyleProperties;
 
     KOdfGenericStyle m_currentListStyle;
     MSOOXML::Utils::ParagraphBulletProperties m_currentBulletProperties;

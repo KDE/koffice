@@ -1604,7 +1604,7 @@ KoFilter::ConversionStatus MSOOXML_CURRENT_CLASS::read_DrawingML_r()
     MSOOXML::Utils::XmlWriteBuffer rBuf;
     body = rBuf.setWriter(body);
 
-    m_currentTextStyleProperties = new KoCharacterStyle();
+    m_currentTextStyleProperties = new KCharacterStyle();
     m_currentTextStyle = KOdfGenericStyle(KOdfGenericStyle::TextAutoStyle, "text");
 
 #ifdef PPTXXMLSLIDEREADER_CPP
@@ -1797,11 +1797,11 @@ KoFilter::ConversionStatus MSOOXML_CURRENT_CLASS::read_DrawingML_rPr()
     // from 20.1.10.79 ST_TextStrikeType (Text Strike Type)
     TRY_READ_ATTR_WITHOUT_NS(strike)
     if (strike == QLatin1String("sngStrike")) {
-        m_currentTextStyleProperties->setStrikeOutType(KoCharacterStyle::SingleLine);
-        m_currentTextStyleProperties->setStrikeOutStyle(KoCharacterStyle::SolidLine);
+        m_currentTextStyleProperties->setStrikeOutType(KCharacterStyle::SingleLine);
+        m_currentTextStyleProperties->setStrikeOutStyle(KCharacterStyle::SolidLine);
     } else if (strike == QLatin1String("dblStrike")) {
-        m_currentTextStyleProperties->setStrikeOutType(KoCharacterStyle::DoubleLine);
-        m_currentTextStyleProperties->setStrikeOutStyle(KoCharacterStyle::SolidLine);
+        m_currentTextStyleProperties->setStrikeOutType(KCharacterStyle::DoubleLine);
+        m_currentTextStyleProperties->setStrikeOutStyle(KCharacterStyle::SolidLine);
     } else {
         // empty or "noStrike"
     }
@@ -3999,7 +3999,7 @@ KoFilter::ConversionStatus MSOOXML_CURRENT_CLASS::lvlHelper(const QString& level
     const QXmlStreamAttributes attrs(attributes());
 
     Q_ASSERT(m_currentTextStyleProperties == 0);
-    m_currentTextStyleProperties = new KoCharacterStyle();
+    m_currentTextStyleProperties = new KCharacterStyle();
 
     // Number 3 makes eg. lvl4 -> 4
     m_currentListLevel = QString(level.at(3)).toInt();
@@ -4440,7 +4440,7 @@ KoFilter::ConversionStatus MSOOXML_CURRENT_CLASS::read_fld()
 
     TRY_READ_ATTR_WITHOUT_NS(type)
 
-    m_currentTextStyleProperties = new KoCharacterStyle();
+    m_currentTextStyleProperties = new KCharacterStyle();
     m_currentTextStyle = KOdfGenericStyle(KOdfGenericStyle::TextAutoStyle, "text");
 
     MSOOXML::Utils::XmlWriteBuffer fldBuf;
@@ -4902,11 +4902,11 @@ KoFilter::ConversionStatus MSOOXML_CURRENT_CLASS::read_defRPr()
     }
     TRY_READ_ATTR_WITHOUT_NS(strike)
     if (strike == QLatin1String("sngStrike")) {
-        m_currentTextStyleProperties->setStrikeOutType(KoCharacterStyle::SingleLine);
-        m_currentTextStyleProperties->setStrikeOutStyle(KoCharacterStyle::SolidLine);
+        m_currentTextStyleProperties->setStrikeOutType(KCharacterStyle::SingleLine);
+        m_currentTextStyleProperties->setStrikeOutStyle(KCharacterStyle::SolidLine);
     } else if (strike == QLatin1String("dblStrike")) {
-        m_currentTextStyleProperties->setStrikeOutType(KoCharacterStyle::DoubleLine);
-        m_currentTextStyleProperties->setStrikeOutStyle(KoCharacterStyle::SolidLine);
+        m_currentTextStyleProperties->setStrikeOutType(KCharacterStyle::DoubleLine);
+        m_currentTextStyleProperties->setStrikeOutStyle(KCharacterStyle::SolidLine);
     } else {
         // empty or "noStrike"
     }

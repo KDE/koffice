@@ -23,7 +23,7 @@
 
 #include <ui_FontDecorations.h>
 
-#include <KoCharacterStyle.h>
+#include <KCharacterStyle.h>
 
 class KUnit;
 
@@ -35,8 +35,8 @@ public:
     explicit FontDecorations(bool uniqueFormat, QWidget* parent = 0);
     ~FontDecorations() {}
 
-    void setDisplay(KoCharacterStyle *style);
-    void save(KoCharacterStyle *style) const;
+    void setDisplay(KCharacterStyle *style);
+    void save(KCharacterStyle *style) const;
 
     void setUnit(const KUnit &unit);
 

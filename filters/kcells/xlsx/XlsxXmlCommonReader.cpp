@@ -27,7 +27,7 @@
 #include <MsooXmlSchemas.h>
 #include <MsooXmlUtils.h>
 #include <KXmlWriter.h>
-#include <KoCharacterStyle.h>
+#include <KCharacterStyle.h>
 
 #undef MSOOXML_CURRENT_NS
 #define MSOOXML_CURRENT_CLASS XlsxXmlCommonReader
@@ -169,7 +169,7 @@ KoFilter::ConversionStatus XlsxXmlCommonReader::read_rPr()
 {
     READ_PROLOGUE
     delete m_currentTextStyleProperties;
-    m_currentTextStyleProperties = new KoCharacterStyle;
+    m_currentTextStyleProperties = new KCharacterStyle;
     m_currentTextStyle = KOdfGenericStyle(KOdfGenericStyle::TextAutoStyle, "text");
 
     while (!atEnd()) {

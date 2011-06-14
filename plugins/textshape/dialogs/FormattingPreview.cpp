@@ -51,12 +51,12 @@ FormattingPreview::FormattingPreview(QWidget* parent)
         m_backgroundColor(QColor(Qt::transparent)),
         m_font(QFont("Sans Serif", 12)),
         m_fontCapitalisation(QFont::MixedCase),
-        m_strikethroughType(KoCharacterStyle::NoLineType),
-        m_strikethroughStyle(KoCharacterStyle::NoLineStyle),
+        m_strikethroughType(KCharacterStyle::NoLineType),
+        m_strikethroughStyle(KCharacterStyle::NoLineStyle),
         m_strikethroughColor(QColor(Qt::black)),
         m_textColor(QColor(Qt::black)),
-        m_underlineType(KoCharacterStyle::NoLineType),
-        m_underlineStyle(KoCharacterStyle::NoLineStyle),
+        m_underlineType(KCharacterStyle::NoLineType),
+        m_underlineStyle(KCharacterStyle::NoLineStyle),
         m_underlineColor(QColor(Qt::black)),
         //Paragraph properties
         m_paragBackgroundColor(QColor(Qt::white)),
@@ -92,7 +92,7 @@ void FormattingPreview::setText(const QString &sampleText)
 }
 
 //Character properties
-void FormattingPreview::setCharacterStyle(const KoCharacterStyle* style)
+void FormattingPreview::setCharacterStyle(const KCharacterStyle* style)
 {
     if (style->hasProperty(QTextFormat::ForegroundBrush) && style->foreground().color().isValid())
         m_textColor = style->foreground().color();
@@ -131,7 +131,7 @@ void FormattingPreview::setFontCapitalisation(QFont::Capitalization capitalisati
     update();
 }
 
-void FormattingPreview::setStrikethrough(KoCharacterStyle::LineType strikethroughType, KoCharacterStyle::LineStyle strikethroughStyle, const QColor &strikethroughColor)
+void FormattingPreview::setStrikethrough(KCharacterStyle::LineType strikethroughType, KCharacterStyle::LineStyle strikethroughStyle, const QColor &strikethroughColor)
 {
     m_strikethroughType = strikethroughType;
     m_strikethroughStyle = strikethroughStyle;
@@ -145,7 +145,7 @@ void FormattingPreview::setTextColor(QColor color)
     update();
 }
 
-void FormattingPreview::setUnderline(KoCharacterStyle::LineType underlineType, KoCharacterStyle::LineStyle underlineStyle, const QColor &underlineColor)
+void FormattingPreview::setUnderline(KCharacterStyle::LineType underlineType, KCharacterStyle::LineStyle underlineStyle, const QColor &underlineColor)
 {
     m_underlineType = underlineType;
     m_underlineStyle = underlineStyle;
@@ -335,9 +335,9 @@ void FormattingPreview::paintEvent(QPaintEvent *event)
         qreal xend = line.naturalTextRect().x() + xmargin + line.naturalTextWidth();
         qreal y = line.naturalTextRect().y() + ymargin + line.ascent();
 
-        if ((m_underlineType != KoCharacterStyle::NoLineType) && (m_underlineStyle != KoCharacterStyle::NoLineStyle))
+        if ((m_underlineType != KCharacterStyle::NoLineType) && (m_underlineStyle != KCharacterStyle::NoLineStyle))
             drawLine(painter, xstart, xend, y + fm.underlinePos() + 1, width, fm.underlinePos(), m_underlineType, m_underlineStyle, (m_underlineColor.isValid())?m_underlineColor:m_textColor);
-        if ((m_strikethroughType != KoCharacterStyle::NoLineType) && (m_strikethroughStyle != KoCharacterStyle::NoLineStyle))
+        if ((m_strikethroughType != KCharacterStyle::NoLineType) && (m_strikethroughStyle != KCharacterStyle::NoLineStyle))
             drawLine(painter, xstart, xend, y - fm.strikeOutPos(), width, fm.underlinePos(), m_strikethroughType, m_strikethroughStyle, (m_strikethroughColor.isValid())?m_strikethroughColor:m_textColor);
     }
 
@@ -345,7 +345,7 @@ void FormattingPreview::paintEvent(QPaintEvent *event)
     delete zoomHandler;
 }
 
-void FormattingPreview::drawLine(QPainter &painter, qreal xstart, qreal xend, qreal y, qreal width, int distToBaseLine, KoCharacterStyle::LineType lineType, KoCharacterStyle::LineStyle lineStyle, QColor lineColor)
+void FormattingPreview::drawLine(QPainter &painter, qreal xstart, qreal xend, qreal y, qreal width, int distToBaseLine, KCharacterStyle::LineType lineType, KCharacterStyle::LineStyle lineStyle, QColor lineColor)
 {
 //Following code derived from plugins/textShape/Layout::drawDecorationLine
     painter.save();
@@ -353,7 +353,7 @@ void FormattingPreview::drawLine(QPainter &painter, qreal xstart, qreal xend, qr
     pen.setColor(lineColor);
     pen.setWidthF(width);
 
-    if (lineStyle == KoCharacterStyle::WaveLine) {
+    if (lineStyle == KCharacterStyle::WaveLine) {
         pen.setStyle(Qt::SolidLine);
         painter.setPen(pen);
         painter.setRenderHint(QPainter::Antialiasing, true);
@@ -367,7 +367,7 @@ void FormattingPreview::drawLine(QPainter &painter, qreal xstart, qreal xend, qr
         qreal ybound2 = y - (1 + sin(startAngle))*halfWaveWidth / 2;
         while (xbound < xend) {
             QRectF rectangle1(xbound, ybound1, halfWaveLength, halfWaveWidth);
-            if (lineType == KoCharacterStyle::DoubleLine) {
+            if (lineType == KCharacterStyle::DoubleLine) {
                 painter.translate(0, -pen.width());
                 painter.drawArc(rectangle1, startAngle * 16, spanAngle * 16);
                 painter.translate(0, 2*pen.width());
@@ -380,7 +380,7 @@ void FormattingPreview::drawLine(QPainter &painter, qreal xstart, qreal xend, qr
                 break;
             xbound = xbound + (1 - cos(startAngle)) * halfWaveLength;
             QRectF rectangle2(xbound, ybound2, halfWaveLength, halfWaveWidth);
-            if (lineType == KoCharacterStyle::DoubleLine) {
+            if (lineType == KCharacterStyle::DoubleLine) {
                 painter.translate(0, -pen.width());
                 painter.drawArc(rectangle2, middleAngle * 16, spanAngle * 16);
                 painter.translate(0, 2*pen.width());
@@ -393,18 +393,18 @@ void FormattingPreview::drawLine(QPainter &painter, qreal xstart, qreal xend, qr
         }
     }
     else {
-        if (lineStyle == KoCharacterStyle::SolidLine)
+        if (lineStyle == KCharacterStyle::SolidLine)
             pen.setStyle(Qt::SolidLine);
-        else if (lineStyle == KoCharacterStyle::DashLine)
+        else if (lineStyle == KCharacterStyle::DashLine)
             pen.setStyle(Qt::DashLine);
-        else if (lineStyle == KoCharacterStyle::DottedLine)
+        else if (lineStyle == KCharacterStyle::DottedLine)
             pen.setStyle(Qt::DotLine);
-        else if (lineStyle == KoCharacterStyle::DotDashLine)
+        else if (lineStyle == KCharacterStyle::DotDashLine)
             pen.setStyle(Qt::DashDotLine);
-        else if (lineStyle == KoCharacterStyle::DotDotDashLine)
+        else if (lineStyle == KCharacterStyle::DotDotDashLine)
             pen.setStyle(Qt::DashDotDotLine);
         painter.setPen(pen);
-        if (lineType == KoCharacterStyle::DoubleLine) {
+        if (lineType == KCharacterStyle::DoubleLine) {
             painter.translate(0, -pen.width());
             painter.drawLine(QPointF(xstart, y), QPointF(xend, y));
             painter.translate(0, 2*pen.width());

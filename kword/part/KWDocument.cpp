@@ -58,7 +58,7 @@
 #include <KInteractionTool.h>
 #include <KInlineTextObjectManager.h>
 #include <KoDocumentInfo.h>
-#include <KoCharacterStyle.h>
+#include <KCharacterStyle.h>
 #include <KParagraphStyle.h>
 #include <KListStyle.h>
 #include <KListLevelProperties.h>
@@ -539,7 +539,7 @@ void KWDocument::initEmpty()
 
     KParagraphStyle *parag = new KParagraphStyle();
     parag->setName(i18n("Head 1"));
-    KoCharacterStyle *character = parag->characterStyle();
+    KCharacterStyle *character = parag->characterStyle();
     character->setFontPointSize(20);
     character->setFontWeight(QFont::Bold);
     styleManager->add(parag);

@@ -26,7 +26,7 @@
 
 class KoStyleManager;
 class KParagraphStyle;
-class KoCharacterStyle;
+class KCharacterStyle;
 
 class StyleManager : public QWidget
 {
@@ -52,30 +52,30 @@ private slots:
     void buttonNewPressed();
     void buttonDeletePressed();
     void addParagraphStyle(KParagraphStyle*);
-    void addCharacterStyle(KoCharacterStyle*);
+    void addCharacterStyle(KCharacterStyle*);
     void removeParagraphStyle(KParagraphStyle*);
-    void removeCharacterStyle(KoCharacterStyle*);
+    void removeCharacterStyle(KCharacterStyle*);
     /// handle opening a 'cloned' style
     void setParagraphStyle(KParagraphStyle *style, bool canDelete);
     /// handle opening a 'cloned' style
-    void setCharacterStyle(KoCharacterStyle *style, bool canDelete);
+    void setCharacterStyle(KCharacterStyle *style, bool canDelete);
     // switches between paragraph and character styles
     void switchStyle(bool on);
     void toStartupScreen();
 
 private:
-    void setCharacterStyle(KoCharacterStyle *style, bool canDelete, bool partOfParag);
+    void setCharacterStyle(KCharacterStyle *style, bool canDelete, bool partOfParag);
 
     Ui::StyleManager widget;
     KoStyleManager *m_styleManager;
     KoStyleManager *m_shadowStyleManager;
 
     QHash<KParagraphStyle*, int> m_shadowParagraphStyles; // shadow to orig Id
-    QHash<KoCharacterStyle*, int> m_shadowCharacterStyles; // shadow to orig Id
+    QHash<KCharacterStyle*, int> m_shadowCharacterStyles; // shadow to orig Id
     QSet<int> m_alteredStyles;
 
     KParagraphStyle *m_selectedParagStyle;
-    KoCharacterStyle *m_selectedCharStyle;
+    KCharacterStyle *m_selectedCharStyle;
 
     bool m_blockSignals;
 };

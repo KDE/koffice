@@ -1,16 +1,16 @@
 include("common.qs");
 
 var noUnderlineFormat = QTextCharFormat.clone(defaultTextFormat);
-setFormatProperty(noUnderlineFormat, KoCharacterStyle.UnderlineStyle, KoCharacterStyle.NoLineStyle);
-setFormatProperty(noUnderlineFormat, KoCharacterStyle.UnderlineType, KoCharacterStyle.NoLineType);
+setFormatProperty(noUnderlineFormat, KCharacterStyle.UnderlineStyle, KCharacterStyle.NoLineStyle);
+setFormatProperty(noUnderlineFormat, KCharacterStyle.UnderlineType, KCharacterStyle.NoLineType);
 
 var singleUnderlineFormat = QTextCharFormat.clone(defaultTextFormat);
-setFormatProperty(singleUnderlineFormat, KoCharacterStyle.UnderlineStyle, KoCharacterStyle.SolidLine);
-setFormatProperty(singleUnderlineFormat, KoCharacterStyle.UnderlineType, KoCharacterStyle.SingleLine);
+setFormatProperty(singleUnderlineFormat, KCharacterStyle.UnderlineStyle, KCharacterStyle.SolidLine);
+setFormatProperty(singleUnderlineFormat, KCharacterStyle.UnderlineType, KCharacterStyle.SingleLine);
 
 var doubleUnderlineFormat = QTextCharFormat.clone(defaultTextFormat);
-setFormatProperty(doubleUnderlineFormat, KoCharacterStyle.UnderlineStyle, KoCharacterStyle.SolidLine);
-setFormatProperty(doubleUnderlineFormat, KoCharacterStyle.UnderlineType, KoCharacterStyle.DoubleLine);
+setFormatProperty(doubleUnderlineFormat, KCharacterStyle.UnderlineStyle, KCharacterStyle.SolidLine);
+setFormatProperty(doubleUnderlineFormat, KCharacterStyle.UnderlineType, KCharacterStyle.DoubleLine);
 
 cursor.insertText("This is an example of text ", defaultTextFormat);
 cursor.insertText("without underline.", noUnderlineFormat);

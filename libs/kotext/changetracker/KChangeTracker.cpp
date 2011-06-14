@@ -22,7 +22,7 @@
 #include "KoDeleteChangeMarker.h"
 
 //KOffice includes
-#include "styles/KoCharacterStyle.h"
+#include "styles/KCharacterStyle.h"
 #include "KChangeTrackerElement.h"
 #include <KXmlReader.h>
 #include <KOdfXmlNS.h>
@@ -222,7 +222,7 @@ bool KChangeTracker::removeById(int id, bool freeMemory)
 
 bool KChangeTracker::containsInlineChanges(const QTextFormat &format)
 {
-    if (format.property(KoCharacterStyle::ChangeTrackerId).toInt())
+    if (format.property(KCharacterStyle::ChangeTrackerId).toInt())
         return true;
 
     return false;
@@ -567,13 +567,13 @@ QTextDocumentFragment KChangeTracker::generateDeleteFragment(QTextCursor &cursor
 
         if (editCursor.currentTable()) {
             QTextTableFormat tableFormat = editCursor.currentTable()->format();
-            tableFormat.setProperty(KoCharacterStyle::ChangeTrackerId, changeId);
+            tableFormat.setProperty(KCharacterStyle::ChangeTrackerId, changeId);
             editCursor.currentTable()->setFormat(tableFormat);
         }
 
         if (currentBlock != startBlock) {
             QTextBlockFormat blockFormat;
-            blockFormat.setProperty(KoCharacterStyle::ChangeTrackerId, changeId);
+            blockFormat.setProperty(KCharacterStyle::ChangeTrackerId, changeId);
             editCursor.mergeBlockFormat(blockFormat);
         }
     }

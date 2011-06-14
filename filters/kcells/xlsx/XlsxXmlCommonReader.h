@@ -27,7 +27,7 @@
 #include <MsooXmlReader.h>
 #include <KOdfGenericStyle.h>
 
-class KoCharacterStyle;
+class KCharacterStyle;
 
 //! A class reading MSOOXML XLSX markup
 //! This is a base class implementing reading elements common to some XLSX content types.
@@ -47,7 +47,7 @@ protected:
 
     QString m_text; //!< result of read_t() and read_r()
 
-    KoCharacterStyle *m_currentTextStyleProperties;
+    KCharacterStyle *m_currentTextStyleProperties;
 
     //! Used for creating style in w:pPr (style:style/@style:name attr)
     KOdfGenericStyle m_currentTextStyle;

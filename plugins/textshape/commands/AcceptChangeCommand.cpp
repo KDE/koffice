@@ -24,7 +24,7 @@
 
 #include <changetracker/KChangeTracker.h>
 #include <changetracker/KChangeTrackerElement.h>
-#include <styles/KoCharacterStyle.h>
+#include <styles/KCharacterStyle.h>
 
 #include <KLocale>
 
@@ -62,13 +62,13 @@ void AcceptChangeCommand::redo()
                 cursor.setPosition((*it).first);
                 cursor.setPosition((*it).second, QTextCursor::KeepAnchor);
                 QTextCharFormat format = cursor.charFormat();
-                int changeId = format.property(KoCharacterStyle::ChangeTrackerId).toInt();
+                int changeId = format.property(KCharacterStyle::ChangeTrackerId).toInt();
                 if (changeId == m_changeId) {
                     if (int parentChangeId = m_changeTracker->parent(m_changeId)) {
-                        format.setProperty(KoCharacterStyle::ChangeTrackerId, parentChangeId);
+                        format.setProperty(KCharacterStyle::ChangeTrackerId, parentChangeId);
                     }
                     else {
-                        format.clearProperty(KoCharacterStyle::ChangeTrackerId);
+                        format.clearProperty(KCharacterStyle::ChangeTrackerId);
                     }
                     cursor.setCharFormat(format);
                 }

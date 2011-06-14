@@ -31,7 +31,7 @@
 #include <KoShapeContainer.h>
 #include <KoStyleManager.h>
 #include <KParagraphStyle.h>
-#include <KoCharacterStyle.h>
+#include <KCharacterStyle.h>
 #include <KListStyle.h>
 #include <KListLevelProperties.h>
 #include <KoTextShapeData.h>
@@ -632,11 +632,11 @@ void KWDLoader::fill(KWTextFrameSet *fs, const KXmlElement &framesetElem)
             cursor.insertText(paragraph.namedItem("TEXT").toElement().text().replace('\n', QChar(0x2028)));
 
             // re-apply char format after we added the text
-            KoCharacterStyle *style = styleManager->characterStyle(
-                    cursor.blockCharFormat().intProperty(KoCharacterStyle::StyleId));
+            KCharacterStyle *style = styleManager->characterStyle(
+                    cursor.blockCharFormat().intProperty(KCharacterStyle::StyleId));
             KXmlElement formats = paragraph.namedItem("FORMATS").toElement();
             if (!formats.isNull()) {
-                KoCharacterStyle defaultStyle;
+                KCharacterStyle defaultStyle;
                 if (style == 0) // parag is not based on any style, just text.
                     style = &defaultStyle;
 
@@ -662,7 +662,7 @@ void KWDLoader::fill(KWTextFrameSet *fs, const KXmlElement &framesetElem)
                         continue;
                     }
                     if (id == "1") {
-                        KoCharacterStyle s2;
+                        KCharacterStyle s2;
                         s2.copyProperties(style);
                         fill(&s2, format);
                         s2.applyStyle(&formatCursor);
@@ -951,7 +951,7 @@ QColor KWDLoader::colorFrom(const KXmlElement &element)
     return color;
 }
 
-void KWDLoader::fill(KoCharacterStyle *style, const KXmlElement &formatElem)
+void KWDLoader::fill(KCharacterStyle *style, const KXmlElement &formatElem)
 {
     KXmlElement element = formatElem.namedItem("COLOR").toElement();
     if (!element.isNull()) {
@@ -979,39 +979,39 @@ void KWDLoader::fill(KoCharacterStyle *style, const KXmlElement &formatElem)
         QString value = element.attribute("value", "0");
         // TODO store other properties
         if (value != "0")
-            style->setStrikeOutStyle(KoCharacterStyle::SolidLine);
+            style->setStrikeOutStyle(KCharacterStyle::SolidLine);
     }
     element = formatElem.namedItem("UNDERLINE").toElement();
     if (!element.isNull()) {
-        KoCharacterStyle::LineStyle underline;
+        KCharacterStyle::LineStyle underline;
         QString value = element.attribute("value", "0"); // "0" is NoUnderline
         if (value == "1" || value == "single")
-            style->setUnderlineType(KoCharacterStyle::SingleLine);
+            style->setUnderlineType(KCharacterStyle::SingleLine);
         else if (value == "double")
-            style->setUnderlineType(KoCharacterStyle::DoubleLine);
+            style->setUnderlineType(KCharacterStyle::DoubleLine);
         else if (value == "single-bold")
-            style->setUnderlineType(KoCharacterStyle::SingleLine);   // TODO support single-bold underline!
+            style->setUnderlineType(KCharacterStyle::SingleLine);   // TODO support single-bold underline!
         else if (value == "wave") {
-            style->setUnderlineType(KoCharacterStyle::SingleLine);
-            underline = KoCharacterStyle::WaveLine;
+            style->setUnderlineType(KCharacterStyle::SingleLine);
+            underline = KCharacterStyle::WaveLine;
         }
 
         QString type = element.attribute("styleline", "solid");
         if (value == "0")
-            underline = KoCharacterStyle::NoLineStyle;// no underline, ignore the type.
+            underline = KCharacterStyle::NoLineStyle;// no underline, ignore the type.
         else if (type == "solid")
-            underline = KoCharacterStyle::SolidLine;
+            underline = KCharacterStyle::SolidLine;
         else if (type == "dash")
-            underline = KoCharacterStyle::DashLine;
+            underline = KCharacterStyle::DashLine;
         else if (type == "dot")
-            underline = KoCharacterStyle::DottedLine;
+            underline = KCharacterStyle::DottedLine;
         else if (type == "dashdot")
-            underline = KoCharacterStyle::DotDashLine;
+            underline = KCharacterStyle::DotDashLine;
         else if (type == "dashdotdot")
-            underline = KoCharacterStyle::DotDotDashLine;
+            underline = KCharacterStyle::DotDotDashLine;
 
         //style->setFontUnderline(underline != QTextCharFormat::NoUnderline);
-        style->setUnderlineStyle((KoCharacterStyle::LineStyle) underline);
+        style->setUnderlineStyle((KCharacterStyle::LineStyle) underline);
     }
     element = formatElem.namedItem("TEXTBACKGROUNDCOLOR").toElement();
     if (!element.isNull()) {

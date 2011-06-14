@@ -29,7 +29,7 @@
 #include <QtGui/QTextCharFormat>
 #include <QtCore/QMetaType>
 #include <QtGui/QTextOption>
-#include <KoCharacterStyle.h>
+#include <KCharacterStyle.h>
 
 
 /**
@@ -69,9 +69,9 @@ struct KOTEXT_EXPORT Tab {
     qreal position;    ///< distance in ps-points from the edge of the text-shape
     QTextOption::TabType type;       ///< Determine which type is used.
     QChar delimiter;    ///< If type is DelimitorTab; tab until this char was found in the text.
-    KoCharacterStyle::LineType leaderType; // none/single/double
-    KoCharacterStyle::LineStyle leaderStyle; // solid/dotted/dash/...
-    KoCharacterStyle::LineWeight leaderWeight; // auto/bold/thin/length/percentage/...
+    KCharacterStyle::LineType leaderType; // none/single/double
+    KCharacterStyle::LineStyle leaderStyle; // solid/dotted/dash/...
+    KCharacterStyle::LineWeight leaderWeight; // auto/bold/thin/length/percentage/...
     qreal leaderWidth; // the width value if length/percentage
     QColor leaderColor; ///< if color is valid, then use this instead of the (current) text color
     QString leaderText;   ///< character to print as the leader (filler of the tabbed space)

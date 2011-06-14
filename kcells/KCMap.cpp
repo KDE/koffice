@@ -477,26 +477,26 @@ QDomElement KCMap::save(QDomDocument& doc)
     return mymap;
 }
 
-static void fixupStyle(KoCharacterStyle* style)
+static void fixupStyle(KCharacterStyle* style)
 {
     QTextCharFormat format;
     style->applyStyle(format);
     switch (style->underlineStyle()) {
-        case KoCharacterStyle::NoLineStyle:
+        case KCharacterStyle::NoLineStyle:
             format.setUnderlineStyle(QTextCharFormat::NoUnderline); break;
-        case KoCharacterStyle::SolidLine:
+        case KCharacterStyle::SolidLine:
             format.setUnderlineStyle(QTextCharFormat::SingleUnderline); break;
-        case KoCharacterStyle::DottedLine:
+        case KCharacterStyle::DottedLine:
             format.setUnderlineStyle(QTextCharFormat::DotLine); break;
-        case KoCharacterStyle::DashLine:
+        case KCharacterStyle::DashLine:
             format.setUnderlineStyle(QTextCharFormat::DashUnderline); break;
-        case KoCharacterStyle::DotDashLine:
+        case KCharacterStyle::DotDashLine:
             format.setUnderlineStyle(QTextCharFormat::DashDotLine); break;
-        case KoCharacterStyle::DotDotDashLine:
+        case KCharacterStyle::DotDotDashLine:
             format.setUnderlineStyle(QTextCharFormat::DashDotDotLine); break;
-        case KoCharacterStyle::LongDashLine:
+        case KCharacterStyle::LongDashLine:
             format.setUnderlineStyle(QTextCharFormat::DashUnderline); break;
-        case KoCharacterStyle::WaveLine:
+        case KCharacterStyle::WaveLine:
             format.setUnderlineStyle(QTextCharFormat::WaveUnderline); break;
     }
     style->copyProperties(format);
@@ -520,10 +520,10 @@ bool KCMap::loadOdf(const KXmlElement& body, KOdfLoadingContext& odfContext)
     sharedData->loadOdfStyles(shapeContext, textStyleManager());
 
     fixupStyle(textStyleManager()->defaultParagraphStyle()->characterStyle());
-    foreach (KoCharacterStyle* style, sharedData->characterStyles(true)) {
+    foreach (KCharacterStyle* style, sharedData->characterStyles(true)) {
         fixupStyle(style);
     }
-    foreach (KoCharacterStyle* style, sharedData->characterStyles(false)) {
+    foreach (KCharacterStyle* style, sharedData->characterStyles(false)) {
         fixupStyle(style);
     }
     shapeContext.addSharedData(KOTEXT_SHARED_LOADING_ID, sharedData);

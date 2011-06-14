@@ -31,7 +31,7 @@
 #include <QMetaType>
 #include <QTextCursor>
 
-class KoCharacterStyle;
+class KCharacterStyle;
 class KInlineObject;
 class KParagraphStyle;
 
@@ -115,7 +115,7 @@ public slots:
 
     void setStyle(KParagraphStyle *style);
 
-    void setStyle(KoCharacterStyle *style);
+    void setStyle(KCharacterStyle *style);
 
     /**
     * Insert an inlineObject (such as a variable) at the current cursor position. Possibly replacing the selection.

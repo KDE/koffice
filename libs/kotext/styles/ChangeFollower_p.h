@@ -67,7 +67,7 @@ public:
      * text that has one of the changed styles and on those portions of the text
      * the style will be (re)applied.
      * @param changedStyles a list of styleIds. from KParagraphStyle::styleId
-     *      and KoCharacterStyle::styleId followed with a set of keys set on
+     *      and KCharacterStyle::styleId followed with a set of keys set on
      *      format due to applying of style (and parents)
      */
     void processUpdates(const QMap<int, QMap<int, QVariant> > &changedStyles);

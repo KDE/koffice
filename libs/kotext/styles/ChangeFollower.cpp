@@ -18,7 +18,7 @@
  */
 
 #include "ChangeFollower_p.h"
-#include "KoCharacterStyle.h"
+#include "KCharacterStyle.h"
 #include "KParagraphStyle.h"
 
 #include <QVector>
@@ -81,9 +81,9 @@ void ChangeFollower::processUpdates(const QMap<int, QMap<int, QVariant> > &chang
             cursor.setBlockFormat(bf); // first we remove all traces, below we'll reapply.
         }
         QTextCharFormat cf = block.charFormat();
-        id = cf.intProperty(KoCharacterStyle::StyleId);
+        id = cf.intProperty(KCharacterStyle::StyleId);
         if (paragStyle && id > 0 && changedStyles.contains(id)) {
-            KoCharacterStyle *style = sm->characterStyle(id);
+            KCharacterStyle *style = sm->characterStyle(id);
             Q_ASSERT(style);
 
             Q_ASSERT(changedStyles.contains(id)); // otherwise the [] next will be BAD
@@ -109,12 +109,12 @@ void ChangeFollower::processUpdates(const QMap<int, QMap<int, QVariant> > &chang
         while (! iter.atEnd()) {
             QTextFragment fragment = iter.fragment();
             cf = fragment.charFormat();
-            id = cf.intProperty(KoCharacterStyle::StyleId);
+            id = cf.intProperty(KCharacterStyle::StyleId);
             if (id > 0 && changedStyles.contains(id)) {
 #ifdef DEBUG_CHANGES
                 kDebug(32500) << "Updating segment" << fragment.position() << fragment.text();
 #endif
-                KoCharacterStyle *style = sm->characterStyle(id);
+                KCharacterStyle *style = sm->characterStyle(id);
                 Q_ASSERT(style);
                 Q_ASSERT(changedStyles.contains(id)); // otherwise the [] next will be BAD
                 const QMap<int, QVariant> &origValues = changedStyles[id];

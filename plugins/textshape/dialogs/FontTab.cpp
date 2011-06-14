@@ -23,7 +23,7 @@
 
 #include <kfontdialog.h>
 
-#include <KoCharacterStyle.h>
+#include <KCharacterStyle.h>
 
 #include <QFontDatabase>
 #include <QStringList>
@@ -46,7 +46,7 @@ FontTab::FontTab(bool uniqueFormat, QWidget* parent)
     connect(m_fontChooser, SIGNAL(fontSelected(const QFont &)), this, SIGNAL(fontChanged(const QFont &)));
 }
 
-void FontTab::setDisplay(const KoCharacterStyle* displayStyle)
+void FontTab::setDisplay(const KCharacterStyle* displayStyle)
 {
 //First deal with fonts which don't have the italic property but oblique instead.
     QFont font = displayStyle->font();
@@ -58,7 +58,7 @@ void FontTab::setDisplay(const KoCharacterStyle* displayStyle)
     m_fontChooser->setFont(font);
 }
 
-void FontTab::save(KoCharacterStyle* style) const
+void FontTab::save(KCharacterStyle* style) const
 {
     KFontChooser::FontDiffFlags fontDiff = m_fontChooser->fontDiffFlags();
     if (m_uniqueFormat || (fontDiff & KFontChooser::FontDiffFamily)){

@@ -30,7 +30,7 @@
 
 class KoStyleManager;
 class KParagraphStyle;
-class KoCharacterStyle;
+class KCharacterStyle;
 class StylesModel;
 class KCanvasBase;
 
@@ -52,7 +52,7 @@ public slots:
 signals:
     void doneWithFocus();
     void paragraphStyleSelected(KParagraphStyle *paragraphStyle, bool canDelete);
-    void characterStyleSelected(KoCharacterStyle *characterStyle, bool canDelete);
+    void characterStyleSelected(KCharacterStyle *characterStyle, bool canDelete);
 
 private slots:
     void newStyleClicked();
@@ -66,7 +66,7 @@ private slots:
 
 signals:
     void paragraphStyleSelected(KParagraphStyle *style);
-    void characterStyleSelected(KoCharacterStyle *style);
+    void characterStyleSelected(KCharacterStyle *style);
 
 private:
     Ui::StylesWidget widget;

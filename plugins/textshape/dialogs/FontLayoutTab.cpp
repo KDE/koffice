@@ -19,7 +19,7 @@
 */
 
 #include "FontLayoutTab.h"
-#include "styles/KoCharacterStyle.h"
+#include "styles/KCharacterStyle.h"
 
 #include <QButtonGroup>
 
@@ -45,7 +45,7 @@ FontLayoutTab::FontLayoutTab(bool withSubSuperScript, bool uniqueFormat, QWidget
     widget.hyphenate->setVisible(false); // TODO enable when we add this feature to the layout engine
 }
 
-void FontLayoutTab::setDisplay(KoCharacterStyle *style)
+void FontLayoutTab::setDisplay(KCharacterStyle *style)
 {
     if (!style)
         return;
@@ -73,7 +73,7 @@ void FontLayoutTab::setDisplay(KoCharacterStyle *style)
         widget.hyphenate->setChecked(style->hasHyphenation());
 }
 
-void FontLayoutTab::save(KoCharacterStyle *style)
+void FontLayoutTab::save(KCharacterStyle *style)
 {
     Q_ASSERT(style);
     QTextCharFormat::VerticalAlignment va;

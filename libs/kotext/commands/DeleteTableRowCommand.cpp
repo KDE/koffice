@@ -81,7 +81,7 @@ void DeleteTableRowCommand::redo()
         } else {
             for (int i=0; i < m_table->columns(); i++) {
                 QTextTableCellFormat cellFormat = m_table->cellAt(m_selectionRow, i).format().toTableCellFormat();
-                cellFormat.setProperty(KoCharacterStyle::ChangeTrackerId, m_changeId);
+                cellFormat.setProperty(KCharacterStyle::ChangeTrackerId, m_changeId);
                 m_table->cellAt(m_selectionRow, i).setFormat(cellFormat);
             }
         }

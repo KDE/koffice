@@ -24,7 +24,7 @@
 #define FONTDIA_H
 
 #include <kdialog.h>
-#include <KoCharacterStyle.h>
+#include <KCharacterStyle.h>
 
 #include <QTextCursor>
 

@@ -37,7 +37,7 @@
 
 #include "styles/KoStyleManager.h"
 #include "styles/KParagraphStyle.h"
-#include "styles/KoCharacterStyle.h"
+#include "styles/KCharacterStyle.h"
 #include "styles/KListStyle.h"
 #include "styles/KListLevelProperties.h"
 #include "styles/KoTableStyle.h"
@@ -68,7 +68,7 @@ public:
     // added to the autostyles so that only one lookup is needed to get the style. This is
     // about 30% faster than having a special data structure for office:styles.
     QHash<QString, KParagraphStyle *> paragraphContentDotXmlStyles;
-    QHash<QString, KoCharacterStyle *> characterContentDotXmlStyles;
+    QHash<QString, KCharacterStyle *> characterContentDotXmlStyles;
     QHash<QString, KListStyle *> listContentDotXmlStyles;
     QHash<QString, KoTableStyle *> tableContentDotXmlStyles;
     QHash<QString, KoTableColumnStyle *> tableColumnContentDotXmlStyles;
@@ -76,7 +76,7 @@ public:
     QHash<QString, KoTableCellStyle *> tableCellContentDotXmlStyles;
     QHash<QString, KoSectionStyle *> sectionContentDotXmlStyles;
     QHash<QString, KParagraphStyle *> paragraphStylesDotXmlStyles;
-    QHash<QString, KoCharacterStyle *> characterStylesDotXmlStyles;
+    QHash<QString, KCharacterStyle *> characterStylesDotXmlStyles;
     QHash<QString, KListStyle *> listStylesDotXmlStyles;
     QHash<QString, KoTableStyle *> tableStylesDotXmlStyles;
     QHash<QString, KoTableColumnStyle *> tableColumnStylesDotXmlStyles;
@@ -85,7 +85,7 @@ public:
     QHash<QString, KoSectionStyle *> sectionStylesDotXmlStyles;
 
     QList<KParagraphStyle *> paragraphStylesToDelete;
-    QList<KoCharacterStyle *> characterStylesToDelete;
+    QList<KCharacterStyle *> characterStylesToDelete;
     QList<KListStyle *> listStylesToDelete;
     QList<KoTableStyle *> tableStylesToDelete;
     QList<KoTableCellStyle *> tableCellStylesToDelete;
@@ -112,7 +112,7 @@ void KoTextSharedLoadingData::addDefaultParagraphStyle(KoShapeLoadingContext &co
     // first fill with defaultstyles.xml
     const KXmlElement *appDef = context.odfLoadingContext().defaultStylesReader().defaultStyle("paragraph");
     if (appDef) {
-        KoCharacterStyle *style = styleManager->defaultParagraphStyle()->characterStyle();
+        KCharacterStyle *style = styleManager->defaultParagraphStyle()->characterStyle();
         KOdfStyleStack defaultStyleStack;
         defaultStyleStack.push(*appDef);
         defaultStyleStack.setTypeProperties("text");
@@ -281,7 +281,7 @@ void KoTextSharedLoadingData::addCharacterStyles(KoShapeLoadingContext &context,
                 // lets find the parent and set the styleId of that one on the auto-style too.
                 // this will have the effect that whereever the autostyle is applied, it will
                 // cause the parent style-id to be applied. So we don't loose this info.
-                KoCharacterStyle *parent = characterStyle(odfStyle.parentStyle, false);
+                KCharacterStyle *parent = characterStyle(odfStyle.parentStyle, false);
                 if (!parent)
                     parent = characterStyle(odfStyle.parentStyle, true); // try harder
                 if (parent)
@@ -305,7 +305,7 @@ QList<KoTextSharedLoadingData::OdfCharStyle> KoTextSharedLoadingData::loadCharac
         QString displayName = styleElem->attributeNS(KOdfXmlNS::style, "display-name", name);
         kDebug(32500) << "styleName =" << name << "styleDisplayName =" << displayName;
 
-        KoCharacterStyle *characterStyle = 0;
+        KCharacterStyle *characterStyle = 0;
         if (styleManager)
             characterStyle = styleManager->characterStyle(displayName);
         if (characterStyle == 0) {
@@ -314,7 +314,7 @@ QList<KoTextSharedLoadingData::OdfCharStyle> KoTextSharedLoadingData::loadCharac
 
             context.styleStack().setTypeProperties("text");
 
-            characterStyle = new KoCharacterStyle();
+            characterStyle = new KCharacterStyle();
             characterStyle->setName(displayName);
             characterStyle->loadOdf(shapeContext);
             context.styleStack().restore();
@@ -591,12 +591,12 @@ KParagraphStyle *KoTextSharedLoadingData::paragraphStyle(const QString &name, bo
     return stylesDotXml ? d->paragraphStylesDotXmlStyles.value(name) : d->paragraphContentDotXmlStyles.value(name);
 }
 
-KoCharacterStyle *KoTextSharedLoadingData::characterStyle(const QString &name, bool stylesDotXml) const
+KCharacterStyle *KoTextSharedLoadingData::characterStyle(const QString &name, bool stylesDotXml) const
 {
     return stylesDotXml ? d->characterStylesDotXmlStyles.value(name) : d->characterContentDotXmlStyles.value(name);
 }
 
-QList<KoCharacterStyle*> KoTextSharedLoadingData::characterStyles(bool stylesDotXml) const
+QList<KCharacterStyle*> KoTextSharedLoadingData::characterStyles(bool stylesDotXml) const
 {
     return stylesDotXml ? d->characterStylesDotXmlStyles.values() : d->characterContentDotXmlStyles.values();
 }

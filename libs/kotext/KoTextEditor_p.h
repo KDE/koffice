@@ -137,8 +137,8 @@ public:
             if (registerChange && KoTextDocument(editor->document()).changeTracker() && KoTextDocument(editor->document()).changeTracker()->recordChanges()) {
                 QTextCharFormat prevFormat(editor->charFormat());
 
-                int changeId = KoTextDocument(editor->document()).changeTracker()->formatChangeId(title, format, prevFormat, editor->charFormat().property( KoCharacterStyle::ChangeTrackerId ).toInt());
-                format.setProperty(KoCharacterStyle::ChangeTrackerId, changeId);
+                int changeId = KoTextDocument(editor->document()).changeTracker()->formatChangeId(title, format, prevFormat, editor->charFormat().property( KCharacterStyle::ChangeTrackerId ).toInt());
+                format.setProperty(KCharacterStyle::ChangeTrackerId, changeId);
             }
 
             editor->cursor()->setCharFormat(format);
@@ -171,8 +171,8 @@ public:
                 if (registerChange && KoTextDocument(editor->document()).changeTracker() && KoTextDocument(editor->document()).changeTracker()->recordChanges()) {
                     QTextCharFormat prevFormat(cursor.charFormat());
 
-                    int changeId = KoTextDocument(editor->document()).changeTracker()->formatChangeId(title, format, prevFormat, cursor.charFormat().property( KoCharacterStyle::ChangeTrackerId ).toInt());
-                    format.setProperty(KoCharacterStyle::ChangeTrackerId, changeId);
+                    int changeId = KoTextDocument(editor->document()).changeTracker()->formatChangeId(title, format, prevFormat, cursor.charFormat().property( KCharacterStyle::ChangeTrackerId ).toInt());
+                    format.setProperty(KCharacterStyle::ChangeTrackerId, changeId);
                 }
 
                 cursor.setPosition(qMax(start, fragment.position()));

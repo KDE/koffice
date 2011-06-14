@@ -22,7 +22,7 @@
 #include "CharacterHighlighting.h"
 
 #include <KoText.h>
-#include <KoCharacterStyle.h>
+#include <KCharacterStyle.h>
 
 CharacterHighlighting::CharacterHighlighting(bool uniqueFormat,QWidget* parent)
         : QWidget(parent),
@@ -51,57 +51,57 @@ CharacterHighlighting::CharacterHighlighting(bool uniqueFormat,QWidget* parent)
     connect(widget.capitalize, SIGNAL(toggled(bool)), this, SLOT(capitalisationChanged()));
 }
 
-KoCharacterStyle::LineType CharacterHighlighting::indexToLineType(int index)
+KCharacterStyle::LineType CharacterHighlighting::indexToLineType(int index)
 {
-    KoCharacterStyle::LineType lineType;
+    KCharacterStyle::LineType lineType;
     switch (index) {
-        case 1: lineType = KoCharacterStyle::SingleLine; break;
-        case 2: lineType = KoCharacterStyle::DoubleLine; break;
+        case 1: lineType = KCharacterStyle::SingleLine; break;
+        case 2: lineType = KCharacterStyle::DoubleLine; break;
         case 0:
         default:
-            lineType = KoCharacterStyle::NoLineType; break;
+            lineType = KCharacterStyle::NoLineType; break;
     }
     return lineType;
 }
 
-KoCharacterStyle::LineStyle CharacterHighlighting::indexToLineStyle(int index)
+KCharacterStyle::LineStyle CharacterHighlighting::indexToLineStyle(int index)
 {
-    KoCharacterStyle::LineStyle lineStyle;
+    KCharacterStyle::LineStyle lineStyle;
     switch (index) {
-        case 1: lineStyle = KoCharacterStyle::DashLine; break;
-        case 2: lineStyle = KoCharacterStyle::DottedLine; break;
-        case 3: lineStyle = KoCharacterStyle::DotDashLine; break;
-        case 4: lineStyle = KoCharacterStyle::DotDotDashLine; break;
-        case 5: lineStyle = KoCharacterStyle::WaveLine; break;
+        case 1: lineStyle = KCharacterStyle::DashLine; break;
+        case 2: lineStyle = KCharacterStyle::DottedLine; break;
+        case 3: lineStyle = KCharacterStyle::DotDashLine; break;
+        case 4: lineStyle = KCharacterStyle::DotDotDashLine; break;
+        case 5: lineStyle = KCharacterStyle::WaveLine; break;
         case 0:
         default:
-            lineStyle = KoCharacterStyle::SolidLine; break;
+            lineStyle = KCharacterStyle::SolidLine; break;
     }
     return lineStyle;
 }
 
-int CharacterHighlighting::lineTypeToIndex(KoCharacterStyle::LineType type)
+int CharacterHighlighting::lineTypeToIndex(KCharacterStyle::LineType type)
 {
     int index;
     switch (type) {
-    case KoCharacterStyle::NoLineType: index = 0; break;
-    case KoCharacterStyle::SingleLine: index = 1; break;
-    case KoCharacterStyle::DoubleLine: index = 2; break;
+    case KCharacterStyle::NoLineType: index = 0; break;
+    case KCharacterStyle::SingleLine: index = 1; break;
+    case KCharacterStyle::DoubleLine: index = 2; break;
     default: index = 0; break;
     }
     return index;
 }
 
-int CharacterHighlighting::lineStyleToIndex(KoCharacterStyle::LineStyle type)
+int CharacterHighlighting::lineStyleToIndex(KCharacterStyle::LineStyle type)
 {
     int index;
     switch (type) {
-    case KoCharacterStyle::SolidLine: index = 0; break;
-    case KoCharacterStyle::DashLine: index = 1; break;
-    case KoCharacterStyle::DottedLine: index = 2; break;
-    case KoCharacterStyle::DotDashLine: index = 3; break;
-    case KoCharacterStyle::DotDotDashLine: index = 4; break;
-    case KoCharacterStyle::WaveLine: index = 5; break;
+    case KCharacterStyle::SolidLine: index = 0; break;
+    case KCharacterStyle::DashLine: index = 1; break;
+    case KCharacterStyle::DottedLine: index = 2; break;
+    case KCharacterStyle::DotDashLine: index = 3; break;
+    case KCharacterStyle::DotDotDashLine: index = 4; break;
+    case KCharacterStyle::WaveLine: index = 5; break;
     default: index = 0; break;
     }
     return index;
@@ -163,7 +163,7 @@ void CharacterHighlighting::strikethroughColorChanged(QColor color)
         emit strikethroughChanged(indexToLineType(widget.strikethroughStyle->currentIndex()), indexToLineStyle(widget.strikethroughLineStyle->currentIndex()), color);
 }
 
-void CharacterHighlighting::setDisplay(KoCharacterStyle *style)
+void CharacterHighlighting::setDisplay(KCharacterStyle *style)
 {
     if (style == 0)
         return;
@@ -204,14 +204,14 @@ void CharacterHighlighting::setDisplay(KoCharacterStyle *style)
     capitalisationChanged();
 }
 
-void CharacterHighlighting::save(KoCharacterStyle *style)
+void CharacterHighlighting::save(KCharacterStyle *style)
 {
     if (style == 0)
         return;
 
     if (widget.underlineStyle->currentIndex() == 0) {
-        style->setUnderlineType(KoCharacterStyle::NoLineType);
-        style->setUnderlineStyle(KoCharacterStyle::NoLineStyle);
+        style->setUnderlineType(KCharacterStyle::NoLineType);
+        style->setUnderlineStyle(KCharacterStyle::NoLineStyle);
     } else if (widget.underlineStyle->currentIndex() > 0) {
         style->setUnderlineType(indexToLineType(widget.underlineStyle->currentIndex()));
         style->setUnderlineStyle(indexToLineStyle(widget.underlineLineStyle->currentIndex()));
@@ -219,8 +219,8 @@ void CharacterHighlighting::save(KoCharacterStyle *style)
     }
 
     if (widget.strikethroughStyle->currentIndex() == 0) {
-        style->setStrikeOutType(KoCharacterStyle::NoLineType);
-        style->setStrikeOutStyle(KoCharacterStyle::NoLineStyle);
+        style->setStrikeOutType(KCharacterStyle::NoLineType);
+        style->setStrikeOutStyle(KCharacterStyle::NoLineStyle);
     } else if (widget.strikethroughStyle->currentIndex() > 0) {
         style->setStrikeOutType(indexToLineType(widget.strikethroughStyle->currentIndex()));
         style->setStrikeOutStyle(indexToLineStyle(widget.strikethroughLineStyle->currentIndex()));

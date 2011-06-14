@@ -23,7 +23,7 @@
 
 #include <KoStyleManager.h>
 #include <KParagraphStyle.h>
-#include <KoCharacterStyle.h>
+#include <KCharacterStyle.h>
 
 #include <KIcon>
 #include <KDebug>
@@ -127,7 +127,7 @@ void StylesModel::recalculate()
     }
     emit isMultiLevel(m_relations.count() != newStyleList.count());
 
-    foreach (KoCharacterStyle *style, m_styleManager->characterStyles()) {
+    foreach (KCharacterStyle *style, m_styleManager->characterStyles()) {
         const int key = style->styleId();
         if (key != DefaultCharStyleId && !characterStyles.contains(key))
             newStyleList << style->styleId();
@@ -267,7 +267,7 @@ QVariant StylesModel::data(const QModelIndex &index, int role) const
         KParagraphStyle *paragStyle = m_styleManager->paragraphStyle(id);
         if (paragStyle)
             return paragStyle->name();
-        KoCharacterStyle *characterStyle =  m_styleManager->characterStyle(id);
+        KCharacterStyle *characterStyle =  m_styleManager->characterStyle(id);
         if (characterStyle)
             return characterStyle->name();
         break;
@@ -339,7 +339,7 @@ KParagraphStyle *StylesModel::paragraphStyleForIndex(const QModelIndex &index) c
     return m_styleManager->paragraphStyle(index.internalId());
 }
 
-KoCharacterStyle *StylesModel::characterStyleForIndex(const QModelIndex &index) const
+KCharacterStyle *StylesModel::characterStyleForIndex(const QModelIndex &index) const
 {
     return m_styleManager->characterStyle(index.internalId());
 }
@@ -350,9 +350,9 @@ void StylesModel::setStyleManager(KoStyleManager *sm)
         return;
     if (m_styleManager) {
         disconnect(sm, SIGNAL(styleAdded(KParagraphStyle*)), this, SLOT(addParagraphStyle(KParagraphStyle*)));
-        disconnect(sm, SIGNAL(styleAdded(KoCharacterStyle*)), this, SLOT(addCharacterStyle(KoCharacterStyle*)));
+        disconnect(sm, SIGNAL(styleAdded(KCharacterStyle*)), this, SLOT(addCharacterStyle(KCharacterStyle*)));
         disconnect(sm, SIGNAL(styleRemoved(KParagraphStyle*)), this, SLOT(removeParagraphStyle(KParagraphStyle*)));
-        disconnect(sm, SIGNAL(styleRemoved(KoCharacterStyle*)), this, SLOT(removeCharacterStyle(KoCharacterStyle*)));
+        disconnect(sm, SIGNAL(styleRemoved(KCharacterStyle*)), this, SLOT(removeCharacterStyle(KCharacterStyle*)));
     }
     m_styleManager = sm;
 
@@ -361,14 +361,14 @@ void StylesModel::setStyleManager(KoStyleManager *sm)
         return;
     }
 
-    connect(sm, SIGNAL(styleAdded(KoCharacterStyle*)), this, SLOT(addCharacterStyle(KoCharacterStyle*)));
-    connect(sm, SIGNAL(styleRemoved(KoCharacterStyle*)), this, SLOT(removeCharacterStyle(KoCharacterStyle*)));
+    connect(sm, SIGNAL(styleAdded(KCharacterStyle*)), this, SLOT(addCharacterStyle(KCharacterStyle*)));
+    connect(sm, SIGNAL(styleRemoved(KCharacterStyle*)), this, SLOT(removeCharacterStyle(KCharacterStyle*)));
     connect(sm, SIGNAL(styleAdded(KParagraphStyle*)), this, SLOT(addParagraphStyle(KParagraphStyle*)));
     connect(sm, SIGNAL(styleRemoved(KParagraphStyle*)), this, SLOT(removeParagraphStyle(KParagraphStyle*)));
 
     foreach(KParagraphStyle *style, m_styleManager->paragraphStyles())
         addParagraphStyle(style, false);
-    foreach(KoCharacterStyle *style, m_styleManager->characterStyles())
+    foreach(KCharacterStyle *style, m_styleManager->characterStyles())
         addCharacterStyle(style, false);
 
     recalculate();
@@ -385,7 +385,7 @@ void StylesModel::addParagraphStyle(KParagraphStyle *style, bool recalc)
 }
 
 // called when the stylemanager adds a style
-void StylesModel::addCharacterStyle(KoCharacterStyle *style, bool recalc)
+void StylesModel::addCharacterStyle(KCharacterStyle *style, bool recalc)
 {
     if (recalc)
         recalculate();
@@ -403,7 +403,7 @@ void StylesModel::removeParagraphStyle(KParagraphStyle *style, bool recalc)
 }
 
 // called when the stylemanager removes a style
-void StylesModel::removeCharacterStyle(KoCharacterStyle *style, bool recalc)
+void StylesModel::removeCharacterStyle(KCharacterStyle *style, bool recalc)
 {
     if (recalc)
         recalculate();

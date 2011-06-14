@@ -26,7 +26,7 @@
 #include <KInlineTextObjectManager.h>
 #include <changetracker/KChangeTracker.h>
 #include <changetracker/KChangeTrackerElement.h>
-#include <styles/KoCharacterStyle.h>
+#include <styles/KCharacterStyle.h>
 
 #include <QHash>
 #include <QModelIndex>
@@ -287,7 +287,7 @@ void TrackedChangeModel::setupModelData(QTextDocument* document, ModelItem* pare
         for (it = block.begin(); !(it.atEnd()); ++it) {
             QTextFragment fragment = it.fragment();
             QTextCharFormat format = fragment.charFormat();
-            int changeId = format.property(KoCharacterStyle::ChangeTrackerId).toInt();
+            int changeId = format.property(KCharacterStyle::ChangeTrackerId).toInt();
 //            if (m_changeTracker->elementById(changeId) && m_changeTracker->elementById(changeId)->getChangeType() == KOdfGenericChange::deleteChange)
 //                continue;
             if (KoDeleteChangeMarker *changeMarker = dynamic_cast<KoDeleteChangeMarker*>(m_layout->inlineTextObjectManager()->inlineTextObject(format)))

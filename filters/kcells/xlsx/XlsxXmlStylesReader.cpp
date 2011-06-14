@@ -26,7 +26,7 @@
 #include <MsooXmlSchemas.h>
 #include <MsooXmlUtils.h>
 #include <KXmlWriter.h>
-#include <styles/KoCharacterStyle.h>
+#include <styles/KCharacterStyle.h>
 #include <KOdfGenericStyles.h>
 
 #undef MSOOXML_CURRENT_NS
@@ -465,7 +465,7 @@ ST_VerticalAlignRun::ST_VerticalAlignRun(const QString& msooxmlName)
         value = BaselineVerticalAlignRun;
 }
 
-void ST_VerticalAlignRun::setupCharacterStyle(KoCharacterStyle* characterStyle) const
+void ST_VerticalAlignRun::setupCharacterStyle(KCharacterStyle* characterStyle) const
 {
     switch (value) {
     case SubscriptVerticalAlignRun:
@@ -478,7 +478,7 @@ void ST_VerticalAlignRun::setupCharacterStyle(KoCharacterStyle* characterStyle) 
     }
 }
 
-void XlsxFontStyle::setupCharacterStyle(KoCharacterStyle* characterStyle) const
+void XlsxFontStyle::setupCharacterStyle(KCharacterStyle* characterStyle) const
 {
     // line
     switch (underline) {
@@ -486,7 +486,7 @@ void XlsxFontStyle::setupCharacterStyle(KoCharacterStyle* characterStyle) const
     case DoubleUnderline:
     case SingleAccountingUnderline:
     case DoubleAccountingUnderline:
-        characterStyle->setUnderlineStyle(KoCharacterStyle::SolidLine);
+        characterStyle->setUnderlineStyle(KCharacterStyle::SolidLine);
         break;
     case NoUnderline:
     default:;
@@ -496,11 +496,11 @@ void XlsxFontStyle::setupCharacterStyle(KoCharacterStyle* characterStyle) const
     switch (underline) {
     case SingleUnderline:
     case SingleAccountingUnderline:
-        characterStyle->setUnderlineType(KoCharacterStyle::SingleLine);
+        characterStyle->setUnderlineType(KCharacterStyle::SingleLine);
         break;
     case DoubleUnderline:
     case DoubleAccountingUnderline:
-        characterStyle->setUnderlineType(KoCharacterStyle::DoubleLine);
+        characterStyle->setUnderlineType(KCharacterStyle::DoubleLine);
         break;
     case NoUnderline:
     default:;
@@ -512,19 +512,19 @@ void XlsxFontStyle::setupCharacterStyle(KoCharacterStyle* characterStyle) const
     case SingleAccountingUnderline:
     case DoubleUnderline:
     case DoubleAccountingUnderline:
-        characterStyle->setUnderlineWidth(KoCharacterStyle::AutoLineWeight, 1.0);
+        characterStyle->setUnderlineWidth(KCharacterStyle::AutoLineWeight, 1.0);
         break;
     case NoUnderline:
     default:;
     }
 
     if (strike) {
-        characterStyle->setStrikeOutStyle(KoCharacterStyle::SolidLine);
-        characterStyle->setStrikeOutType(KoCharacterStyle::SingleLine);
+        characterStyle->setStrikeOutStyle(KCharacterStyle::SolidLine);
+        characterStyle->setStrikeOutType(KCharacterStyle::SingleLine);
     }
 
     {
-        KoCharacterStyle::LineWeight weight;
+        KCharacterStyle::LineWeight weight;
         qreal width;
         characterStyle->underlineWidth(weight, width);
 
@@ -549,7 +549,7 @@ void XlsxFontStyle::setupCellTextStyle(
 {
     if (!name.isEmpty()) {
 #ifdef __GNUC__
-#warning TODO: we are saving with fo:font-family now because style:font-name is not properly supported by kotext; fix void KoCharacterStyle::loadOdf(KOdfLoadingContext &context)...
+#warning TODO: we are saving with fo:font-family now because style:font-name is not properly supported by kotext; fix void KCharacterStyle::loadOdf(KOdfLoadingContext &context)...
 #endif
 //!@ todo reenable this        cellStyle->addProperty("style:font-name", name, KOdfGenericStyle::TextType);
         cellStyle->addProperty("fo:font-family", name, KOdfGenericStyle::TextType);
@@ -643,7 +643,7 @@ XlsxCellFormat::~XlsxCellFormat()
 {
 }
 
-bool XlsxCellFormat::setupCharacterStyle(const XlsxStyles *styles, KoCharacterStyle* characterStyle) const
+bool XlsxCellFormat::setupCharacterStyle(const XlsxStyles *styles, KCharacterStyle* characterStyle) const
 {
     XlsxFontStyle* fontStyle = styles->fontStyle(fontId);
     if (!fontStyle) {

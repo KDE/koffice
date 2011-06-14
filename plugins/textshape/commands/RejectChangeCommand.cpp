@@ -26,7 +26,7 @@
 
 #include <KChangeTracker.h>
 #include <KChangeTrackerElement.h>
-#include <KoCharacterStyle.h>
+#include <KCharacterStyle.h>
 #include <KoDeleteChangeMarker.h>
 
 #include <KLocale>
@@ -79,14 +79,14 @@ void RejectChangeCommand::redo()
             for (it = m_changeRanges.constBegin(); it != m_changeRanges.constEnd(); it++) {
                 cursor.setPosition((*it).first);
                 cursor.setPosition((*it).second, QTextCursor::KeepAnchor);
-                int changeId = cursor.charFormat().property(KoCharacterStyle::ChangeTrackerId).toInt();
+                int changeId = cursor.charFormat().property(KCharacterStyle::ChangeTrackerId).toInt();
                 QTextCharFormat format = m_changeTracker->elementById(m_changeId)->prevFormat().toCharFormat();
                 if (changeId == m_changeId) {
                     if (int parentChangeId = m_changeTracker->parent(m_changeId)) {
-                        format.setProperty(KoCharacterStyle::ChangeTrackerId, parentChangeId);
+                        format.setProperty(KCharacterStyle::ChangeTrackerId, parentChangeId);
                     }
                     else {
-                        format.clearProperty(KoCharacterStyle::ChangeTrackerId);
+                        format.clearProperty(KCharacterStyle::ChangeTrackerId);
                     }
                     cursor.setCharFormat(format);
                 }
@@ -108,7 +108,7 @@ void RejectChangeCommand::redo()
                 }
                 else {
                     QTextCharFormat format = cursor.charFormat();
-                    format.clearProperty(KoCharacterStyle::ChangeTrackerId);
+                    format.clearProperty(KCharacterStyle::ChangeTrackerId);
                     cursor.setCharFormat(format);
                 }
             }

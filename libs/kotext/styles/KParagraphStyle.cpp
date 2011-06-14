@@ -22,7 +22,7 @@
  * Boston, MA 02110-1301, USA.
  */
 #include "KParagraphStyle.h"
-#include "KoCharacterStyle.h"
+#include "KCharacterStyle.h"
 #include "KListStyle.h"
 #include "KoTextBlockData.h"
 #include "KoTextDocumentLayout.h"
@@ -70,7 +70,7 @@ public:
     }
 
     QString name;
-    KoCharacterStyle *charStyle;
+    KCharacterStyle *charStyle;
     KListStyle *listStyle;
     KParagraphStyle *parentStyle;
     KoList *list;
@@ -81,7 +81,7 @@ public:
 KParagraphStyle::KParagraphStyle(QObject *parent)
         : QObject(parent), d(new Private()), normalLineHeight(false)
 {
-    d->charStyle = new KoCharacterStyle(this);
+    d->charStyle = new KCharacterStyle(this);
 }
 
 KParagraphStyle::KParagraphStyle(const QTextBlockFormat &blockFormat, const QTextCharFormat &blockCharFormat, QObject *parent)
@@ -90,7 +90,7 @@ KParagraphStyle::KParagraphStyle(const QTextBlockFormat &blockFormat, const QTex
         normalLineHeight(false)
 {
     d->stylesPrivate = blockFormat.properties();
-    d->charStyle = new KoCharacterStyle(blockCharFormat, this);
+    d->charStyle = new KCharacterStyle(blockCharFormat, this);
 }
 
 KParagraphStyle *KParagraphStyle::fromBlock(const QTextBlock &block, QObject *parent)
@@ -951,17 +951,17 @@ bool KParagraphStyle::isListHeader() const
     return propertyBoolean(IsListHeader);
 }
 
-KoCharacterStyle *KParagraphStyle::characterStyle()
+KCharacterStyle *KParagraphStyle::characterStyle()
 {
     return d->charStyle;
 }
 
-const KoCharacterStyle *KParagraphStyle::characterStyle() const
+const KCharacterStyle *KParagraphStyle::characterStyle() const
 {
     return d->charStyle;
 }
 
-void KParagraphStyle::setCharacterStyle(KoCharacterStyle *style)
+void KParagraphStyle::setCharacterStyle(KCharacterStyle *style)
 {
     if (d->charStyle == style)
         return;
@@ -1042,9 +1042,9 @@ void KParagraphStyle::loadOdf(const KXmlElement *element, KoShapeLoadingContext 
     }
 
     //1.6: KoTextFormat::load
-    KoCharacterStyle *charstyle = characterStyle();
+    KCharacterStyle *charstyle = characterStyle();
     context.styleStack().setTypeProperties("text");   // load all style attributes from "style:text-properties"
-    charstyle->loadOdf(scontext);   // load the KoCharacterStyle from the stylestack
+    charstyle->loadOdf(scontext);   // load the KCharacterStyle from the stylestack
 
     //1.6: KoTextParag::loadOasis => KoParagLayout::loadOasisParagLayout
     context.styleStack().setTypeProperties("paragraph");   // load all style attributes from "style:paragraph-properties"
@@ -1214,43 +1214,43 @@ void KParagraphStyle::loadOdfProperties(KoShapeLoadingContext &scontext)
 
             QString leaderType = tabStop.attributeNS(KOdfXmlNS::style, "leader-type", QString());
             if (leaderType.isEmpty() || leaderType == "none") {
-                tab.leaderType = KoCharacterStyle::NoLineType;
+                tab.leaderType = KCharacterStyle::NoLineType;
             } else {
                 if (leaderType == "single")
-                    tab.leaderType = KoCharacterStyle::SingleLine;
+                    tab.leaderType = KCharacterStyle::SingleLine;
                 else if (leaderType == "double")
-                    tab.leaderType = KoCharacterStyle::DoubleLine;
+                    tab.leaderType = KCharacterStyle::DoubleLine;
                 // change default leaderStyle
-                tab.leaderStyle = KoCharacterStyle::SolidLine;
+                tab.leaderStyle = KCharacterStyle::SolidLine;
             }
 
             QString leaderStyle = tabStop.attributeNS(KOdfXmlNS::style, "leader-style", QString());
             if (leaderStyle == "none")
-                tab.leaderStyle = KoCharacterStyle::NoLineStyle;
+                tab.leaderStyle = KCharacterStyle::NoLineStyle;
             else if (leaderStyle == "solid")
-                tab.leaderStyle = KoCharacterStyle::SolidLine;
+                tab.leaderStyle = KCharacterStyle::SolidLine;
             else if (leaderStyle == "dotted")
-                tab.leaderStyle = KoCharacterStyle::DottedLine;
+                tab.leaderStyle = KCharacterStyle::DottedLine;
             else if (leaderStyle == "dash")
-                tab.leaderStyle = KoCharacterStyle::DashLine;
+                tab.leaderStyle = KCharacterStyle::DashLine;
             else if (leaderStyle == "long-dash")
-                tab.leaderStyle = KoCharacterStyle::LongDashLine;
+                tab.leaderStyle = KCharacterStyle::LongDashLine;
             else if (leaderStyle == "dot-dash")
-                tab.leaderStyle = KoCharacterStyle::DotDashLine;
+                tab.leaderStyle = KCharacterStyle::DotDashLine;
             else if (leaderStyle == "dot-dot-dash")
-                tab.leaderStyle = KoCharacterStyle::DotDotDashLine;
+                tab.leaderStyle = KCharacterStyle::DotDotDashLine;
             else if (leaderStyle == "wave")
-                tab.leaderStyle = KoCharacterStyle::WaveLine;
+                tab.leaderStyle = KCharacterStyle::WaveLine;
 
-            if (tab.leaderType == KoCharacterStyle::NoLineType && tab.leaderStyle != KoCharacterStyle::NoLineStyle) {
+            if (tab.leaderType == KCharacterStyle::NoLineType && tab.leaderStyle != KCharacterStyle::NoLineStyle) {
                 if (leaderType == "none")
                     // if leaderType was explicitly specified as none, but style was not none,
                     // make leaderType override (ODF1.1 §15.5.11)
-                    tab.leaderStyle = KoCharacterStyle::NoLineStyle;
+                    tab.leaderStyle = KCharacterStyle::NoLineStyle;
                 else
                     // if leaderType was implicitly assumed none, but style was not none,
                     // make leaderStyle override
-                    tab.leaderType = KoCharacterStyle::SingleLine;
+                    tab.leaderType = KCharacterStyle::SingleLine;
             }
 
             QString leaderColor = tabStop.attributeNS(KOdfXmlNS::style, "leader-color", QString());
@@ -1259,27 +1259,27 @@ void KParagraphStyle::loadOdfProperties(KoShapeLoadingContext &scontext)
 
             QString width = tabStop.attributeNS(KOdfXmlNS::style, "leader-width", QString());
             if (width.isEmpty() || width == "auto")
-                tab.leaderWeight = KoCharacterStyle::AutoLineWeight;
+                tab.leaderWeight = KCharacterStyle::AutoLineWeight;
             else if (width == "normal")
-                tab.leaderWeight = KoCharacterStyle::NormalLineWeight;
+                tab.leaderWeight = KCharacterStyle::NormalLineWeight;
             else if (width == "bold")
-                tab.leaderWeight = KoCharacterStyle::BoldLineWeight;
+                tab.leaderWeight = KCharacterStyle::BoldLineWeight;
             else if (width == "thin")
-                tab.leaderWeight = KoCharacterStyle::ThinLineWeight;
+                tab.leaderWeight = KCharacterStyle::ThinLineWeight;
             else if (width == "dash")
-                tab.leaderWeight = KoCharacterStyle::DashLineWeight;
+                tab.leaderWeight = KCharacterStyle::DashLineWeight;
             else if (width == "medium")
-                tab.leaderWeight = KoCharacterStyle::MediumLineWeight;
+                tab.leaderWeight = KCharacterStyle::MediumLineWeight;
             else if (width == "thick")
-                tab.leaderWeight = KoCharacterStyle::ThickLineWeight;
+                tab.leaderWeight = KCharacterStyle::ThickLineWeight;
             else if (width.endsWith('%')) {
-                tab.leaderWeight = KoCharacterStyle::PercentLineWeight;
+                tab.leaderWeight = KCharacterStyle::PercentLineWeight;
                 tab.leaderWidth = width.mid(0, width.length() - 1).toDouble();
             } else if (width[width.length()-1].isNumber()) {
-                tab.leaderWeight = KoCharacterStyle::PercentLineWeight;
+                tab.leaderWeight = KCharacterStyle::PercentLineWeight;
                 tab.leaderWidth = 100 * width.toDouble();
             } else {
-                tab.leaderWeight = KoCharacterStyle::LengthLineWeight;
+                tab.leaderWeight = KCharacterStyle::LengthLineWeight;
                 tab.leaderWidth = KUnit::parseValue(width);
             }
 
@@ -1394,7 +1394,7 @@ void KParagraphStyle::loadOdfProperties(KoShapeLoadingContext &scontext)
             KoTextSharedLoadingData *textSharedData = 0;
             textSharedData = dynamic_cast<KoTextSharedLoadingData *>(sharedData);
             if (textSharedData) {
-                KoCharacterStyle *cs = textSharedData->characterStyle(dropstyle, true);
+                KCharacterStyle *cs = textSharedData->characterStyle(dropstyle, true);
                 if (cs)
                     setDropCapsTextStyleId(cs->styleId());
             }
@@ -1712,24 +1712,24 @@ void KParagraphStyle::saveOdf(KOdfGenericStyle &style, KOdfGenericStyles &mainSt
         tabTypeMap[QTextOption::RightTab] = "right";
         tabTypeMap[QTextOption::CenterTab] = "center";
         tabTypeMap[QTextOption::DelimiterTab] = "char";
-        leaderTypeMap[KoCharacterStyle::NoLineType] = "none";
-        leaderTypeMap[KoCharacterStyle::SingleLine] = "single";
-        leaderTypeMap[KoCharacterStyle::DoubleLine] = "double";
-        leaderStyleMap[KoCharacterStyle::NoLineStyle] = "none";
-        leaderStyleMap[KoCharacterStyle::SolidLine] = "solid";
-        leaderStyleMap[KoCharacterStyle::DottedLine] = "dotted";
-        leaderStyleMap[KoCharacterStyle::DashLine] = "dash";
-        leaderStyleMap[KoCharacterStyle::LongDashLine] = "long-dash";
-        leaderStyleMap[KoCharacterStyle::DotDashLine] = "dot-dash";
-        leaderStyleMap[KoCharacterStyle::DotDotDashLine] = "dot-dot-dash";
-        leaderStyleMap[KoCharacterStyle::WaveLine] = "wave";
-        leaderWeightMap[KoCharacterStyle::AutoLineWeight] = "auto";
-        leaderWeightMap[KoCharacterStyle::NormalLineWeight] = "normal";
-        leaderWeightMap[KoCharacterStyle::BoldLineWeight] = "bold";
-        leaderWeightMap[KoCharacterStyle::ThinLineWeight] = "thin";
-        leaderWeightMap[KoCharacterStyle::DashLineWeight] = "dash";
-        leaderWeightMap[KoCharacterStyle::MediumLineWeight] = "medium";
-        leaderWeightMap[KoCharacterStyle::ThickLineWeight] = "thick";
+        leaderTypeMap[KCharacterStyle::NoLineType] = "none";
+        leaderTypeMap[KCharacterStyle::SingleLine] = "single";
+        leaderTypeMap[KCharacterStyle::DoubleLine] = "double";
+        leaderStyleMap[KCharacterStyle::NoLineStyle] = "none";
+        leaderStyleMap[KCharacterStyle::SolidLine] = "solid";
+        leaderStyleMap[KCharacterStyle::DottedLine] = "dotted";
+        leaderStyleMap[KCharacterStyle::DashLine] = "dash";
+        leaderStyleMap[KCharacterStyle::LongDashLine] = "long-dash";
+        leaderStyleMap[KCharacterStyle::DotDashLine] = "dot-dash";
+        leaderStyleMap[KCharacterStyle::DotDotDashLine] = "dot-dot-dash";
+        leaderStyleMap[KCharacterStyle::WaveLine] = "wave";
+        leaderWeightMap[KCharacterStyle::AutoLineWeight] = "auto";
+        leaderWeightMap[KCharacterStyle::NormalLineWeight] = "normal";
+        leaderWeightMap[KCharacterStyle::BoldLineWeight] = "bold";
+        leaderWeightMap[KCharacterStyle::ThinLineWeight] = "thin";
+        leaderWeightMap[KCharacterStyle::DashLineWeight] = "dash";
+        leaderWeightMap[KCharacterStyle::MediumLineWeight] = "medium";
+        leaderWeightMap[KCharacterStyle::ThickLineWeight] = "thick";
 
         QBuffer buf;
         buf.open(QIODevice::WriteOnly);
@@ -1748,9 +1748,9 @@ void KParagraphStyle::saveOdf(KOdfGenericStyle &style, KOdfGenericStyles &mainSt
                 elementWriter.addAttribute("style:leader-style", leaderStyleMap[tab.leaderStyle]);
             if (!leaderWeightMap[tab.leaderWeight].isEmpty())
                 elementWriter.addAttribute("style:leader-width", leaderWeightMap[tab.leaderWeight]);
-            else if (tab.leaderWeight == KoCharacterStyle::PercentLineWeight)
+            else if (tab.leaderWeight == KCharacterStyle::PercentLineWeight)
                 elementWriter.addAttribute("style:leader-width", QString("%1%").arg(QString::number(tab.leaderWidth)));
-            else if (tab.leaderWeight == KoCharacterStyle::LengthLineWeight)
+            else if (tab.leaderWeight == KCharacterStyle::LengthLineWeight)
                 elementWriter.addAttributePt("style:leader-width", tab.leaderWidth);
             if (tab.leaderColor.isValid())
                 elementWriter.addAttribute("style:leader-color", tab.leaderColor.name());

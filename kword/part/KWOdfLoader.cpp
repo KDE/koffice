@@ -186,9 +186,9 @@ bool KWOdfLoader::load(KOdfStoreReader &odfStore)
     m_document->styleManager()->add(parastyle);
     context.styleStack().setTypeProperties("paragraph"); // load all style attributes from "style:paragraph-properties"
     parastyle->loadOasis(context.styleStack()); // load the KParagraphStyle from the stylestack
-    KoCharacterStyle *charstyle = parastyle->characterStyle();
+    KCharacterStyle *charstyle = parastyle->characterStyle();
     context.styleStack().setTypeProperties("text"); // load all style attributes from "style:text-properties"
-    charstyle->loadOasis(context.styleStack()); // load the KoCharacterStyle from the stylestack
+    charstyle->loadOasis(context.styleStack()); // load the KCharacterStyle from the stylestack
     //}
     */
 #endif

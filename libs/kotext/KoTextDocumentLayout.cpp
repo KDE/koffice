@@ -21,7 +21,7 @@
 #include "KoTextDocumentLayout.h"
 #include "KoTextShapeData.h"
 #include "styles/KParagraphStyle.h"
-#include "styles/KoCharacterStyle.h"
+#include "styles/KCharacterStyle.h"
 #include "styles/KListStyle.h"
 #include "styles/KoStyleManager.h"
 #include "KoTextBlockData.h"

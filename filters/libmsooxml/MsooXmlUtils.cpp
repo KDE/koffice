@@ -49,7 +49,7 @@
 #include "pole.h"
 
 #include <KOdfStoreReader.h>
-#include <styles/KoCharacterStyle.h>
+#include <styles/KCharacterStyle.h>
 #include <KXmlReader.h>
 #include <KXmlWriter.h>
 #include <KUnit.h>
@@ -924,17 +924,17 @@ QString Utils::ST_PlaceholderType_to_ODF(const QString& ecmaType)
 //! Mapping for handling u element, used in setupUnderLineStyle()
 struct UnderlineStyle {
     UnderlineStyle(
-        KoCharacterStyle::LineStyle style_,
-        KoCharacterStyle::LineType type_,
-        KoCharacterStyle::LineWeight weight_,
-        KoCharacterStyle::LineMode mode_ = KoCharacterStyle::ContinuousLineMode)
+        KCharacterStyle::LineStyle style_,
+        KCharacterStyle::LineType type_,
+        KCharacterStyle::LineWeight weight_,
+        KCharacterStyle::LineMode mode_ = KCharacterStyle::ContinuousLineMode)
             : style(style_), type(type_), weight(weight_), mode(mode_) {
     }
 
-    KoCharacterStyle::LineStyle style;
-    KoCharacterStyle::LineType type;
-    KoCharacterStyle::LineWeight weight;
-    KoCharacterStyle::LineMode mode;
+    KCharacterStyle::LineStyle style;
+    KCharacterStyle::LineType type;
+    KCharacterStyle::LineWeight weight;
+    KCharacterStyle::LineMode mode;
 };
 
 typedef QHash<QByteArray, UnderlineStyle*> UnderlineStylesHashBase;
@@ -945,76 +945,76 @@ public:
     UnderlineStylesHash() {
         // default:
         insert("-",
-               new UnderlineStyle(KoCharacterStyle::SolidLine, KoCharacterStyle::SingleLine,
-                                  KoCharacterStyle::AutoLineWeight)
+               new UnderlineStyle(KCharacterStyle::SolidLine, KCharacterStyle::SingleLine,
+                                  KCharacterStyle::AutoLineWeight)
               );
         // 17.18.99 ST_Underline (Underline Patterns), WML ECMA-376 p.1681:
         insert("single",
-               new UnderlineStyle(KoCharacterStyle::SolidLine, KoCharacterStyle::SingleLine,
-                                  KoCharacterStyle::AutoLineWeight)
+               new UnderlineStyle(KCharacterStyle::SolidLine, KCharacterStyle::SingleLine,
+                                  KCharacterStyle::AutoLineWeight)
               );
         insert("double",
-               new UnderlineStyle(KoCharacterStyle::SolidLine, KoCharacterStyle::DoubleLine,
-                                  KoCharacterStyle::AutoLineWeight)
+               new UnderlineStyle(KCharacterStyle::SolidLine, KCharacterStyle::DoubleLine,
+                                  KCharacterStyle::AutoLineWeight)
               );
         insert("dbl",
-               new UnderlineStyle(KoCharacterStyle::SolidLine, KoCharacterStyle::DoubleLine,
-                                  KoCharacterStyle::AutoLineWeight)
+               new UnderlineStyle(KCharacterStyle::SolidLine, KCharacterStyle::DoubleLine,
+                                  KCharacterStyle::AutoLineWeight)
               );
         insert("words",
-               new UnderlineStyle(KoCharacterStyle::SolidLine, KoCharacterStyle::SingleLine,
-                                  KoCharacterStyle::AutoLineWeight, KoCharacterStyle::SkipWhiteSpaceLineMode)
+               new UnderlineStyle(KCharacterStyle::SolidLine, KCharacterStyle::SingleLine,
+                                  KCharacterStyle::AutoLineWeight, KCharacterStyle::SkipWhiteSpaceLineMode)
               );
         insert("thick",
-               new UnderlineStyle(KoCharacterStyle::SolidLine, KoCharacterStyle::SingleLine,
-                                  KoCharacterStyle::BoldLineWeight)
+               new UnderlineStyle(KCharacterStyle::SolidLine, KCharacterStyle::SingleLine,
+                                  KCharacterStyle::BoldLineWeight)
               );
         insert("dash",
-               new UnderlineStyle(KoCharacterStyle::DashLine, KoCharacterStyle::SingleLine,
-                                  KoCharacterStyle::AutoLineWeight)
+               new UnderlineStyle(KCharacterStyle::DashLine, KCharacterStyle::SingleLine,
+                                  KCharacterStyle::AutoLineWeight)
               );
         insert("dashDotHeavy",
-               new UnderlineStyle(KoCharacterStyle::DotDashLine, KoCharacterStyle::SingleLine,
-                                  KoCharacterStyle::BoldLineWeight)
+               new UnderlineStyle(KCharacterStyle::DotDashLine, KCharacterStyle::SingleLine,
+                                  KCharacterStyle::BoldLineWeight)
               );
         insert("dotted",
-               new UnderlineStyle(KoCharacterStyle::DottedLine, KoCharacterStyle::SingleLine,
-                                  KoCharacterStyle::AutoLineWeight)
+               new UnderlineStyle(KCharacterStyle::DottedLine, KCharacterStyle::SingleLine,
+                                  KCharacterStyle::AutoLineWeight)
               );
         insert("dotDash",
-               new UnderlineStyle(KoCharacterStyle::DotDashLine, KoCharacterStyle::SingleLine,
-                                  KoCharacterStyle::AutoLineWeight)
+               new UnderlineStyle(KCharacterStyle::DotDashLine, KCharacterStyle::SingleLine,
+                                  KCharacterStyle::AutoLineWeight)
               );
         insert("dotDotDash",
-               new UnderlineStyle(KoCharacterStyle::DotDotDashLine, KoCharacterStyle::SingleLine,
-                                  KoCharacterStyle::AutoLineWeight)
+               new UnderlineStyle(KCharacterStyle::DotDotDashLine, KCharacterStyle::SingleLine,
+                                  KCharacterStyle::AutoLineWeight)
               );
         insert("wave",
-               new UnderlineStyle(KoCharacterStyle::WaveLine, KoCharacterStyle::SingleLine,
-                                  KoCharacterStyle::AutoLineWeight)
+               new UnderlineStyle(KCharacterStyle::WaveLine, KCharacterStyle::SingleLine,
+                                  KCharacterStyle::AutoLineWeight)
               );
         insert("wavyDouble",
-               new UnderlineStyle(KoCharacterStyle::WaveLine, KoCharacterStyle::DoubleLine,
-                                  KoCharacterStyle::AutoLineWeight)
+               new UnderlineStyle(KCharacterStyle::WaveLine, KCharacterStyle::DoubleLine,
+                                  KCharacterStyle::AutoLineWeight)
               );
         insert("wavyDbl",
-               new UnderlineStyle(KoCharacterStyle::WaveLine, KoCharacterStyle::DoubleLine,
-                                  KoCharacterStyle::AutoLineWeight)
+               new UnderlineStyle(KCharacterStyle::WaveLine, KCharacterStyle::DoubleLine,
+                                  KCharacterStyle::AutoLineWeight)
               );
         insert("wavyHeavy",
-               new UnderlineStyle(KoCharacterStyle::WaveLine, KoCharacterStyle::SingleLine,
-                                  KoCharacterStyle::BoldLineWeight)
+               new UnderlineStyle(KCharacterStyle::WaveLine, KCharacterStyle::SingleLine,
+                                  KCharacterStyle::BoldLineWeight)
               );
 //! @todo more styles
 
         // 20.1.10.82 ST_TextUnderlineType (Text Underline Types), DrawingML ECMA-376 p.3450:
         insert("none",
-               new UnderlineStyle(KoCharacterStyle::NoLineStyle, KoCharacterStyle::NoLineType,
-                                  KoCharacterStyle::AutoLineWeight)
+               new UnderlineStyle(KCharacterStyle::NoLineStyle, KCharacterStyle::NoLineType,
+                                  KCharacterStyle::AutoLineWeight)
               );
         insert("sng",
-               new UnderlineStyle(KoCharacterStyle::SolidLine, KoCharacterStyle::SingleLine,
-                                  KoCharacterStyle::AutoLineWeight)
+               new UnderlineStyle(KCharacterStyle::SolidLine, KCharacterStyle::SingleLine,
+                                  KCharacterStyle::AutoLineWeight)
               );
 //! @todo more styles
     }
@@ -1024,18 +1024,18 @@ public:
     }
 
     void setup(const QString& msooxmlName,
-               KoCharacterStyle* textStyleProperties) {
+               KCharacterStyle* textStyleProperties) {
         UnderlineStyle* style = value(msooxmlName.toLatin1());
         if (!style)
             style = value("-");
         textStyleProperties->setUnderlineStyle(style->style);
         // add style:text-underline-type if it is not "single"
-        if (KoCharacterStyle::SingleLine != style->type) {
+        if (KCharacterStyle::SingleLine != style->type) {
             textStyleProperties->setUnderlineType(style->type);
         }
         textStyleProperties->setUnderlineWidth(style->weight, 1.0);
         // add style:text-underline-mode if it is not "continuous"
-        if (KoCharacterStyle::ContinuousLineMode != style->mode) {
+        if (KCharacterStyle::ContinuousLineMode != style->mode) {
             textStyleProperties->setUnderlineMode(style->mode);
         }
     }
@@ -1056,7 +1056,7 @@ void Utils::rotateString(const qreal rotation, const qreal width, const qreal he
     yDiff = height/2 - sin(-angle)*width/2 - cos(-angle)*height/2;
 }
 
-void Utils::setupUnderLineStyle(const QString& msooxmlName, KoCharacterStyle* textStyleProperties)
+void Utils::setupUnderLineStyle(const QString& msooxmlName, KCharacterStyle* textStyleProperties)
 {
     K_GLOBAL_STATIC(UnderlineStylesHash, s_underLineStyles)
     s_underLineStyles->setup(msooxmlName, textStyleProperties);

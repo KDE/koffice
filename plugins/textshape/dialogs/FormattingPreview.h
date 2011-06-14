@@ -20,7 +20,7 @@
 #ifndef FORMATTINGPREVIEW_H
 #define FORMATTINGPREVIEW_H
 
-#include <KoCharacterStyle.h>
+#include <KCharacterStyle.h>
 #include <KParagraphStyle.h>
 
 #include <QFont>
@@ -46,15 +46,15 @@ public:
 
 public slots:
     ///Character properties
-    void setCharacterStyle(const KoCharacterStyle *style);
+    void setCharacterStyle(const KCharacterStyle *style);
 
     void setBackgroundColor(QColor color);
     void setFont(const QFont &font);
     void setFontCapitalisation(QFont::Capitalization capitalisation);
-    void setStrikethrough(KoCharacterStyle::LineType strikethroughType, KoCharacterStyle::LineStyle striketrhoughStyle, const QColor &strikethroughColor);
+    void setStrikethrough(KCharacterStyle::LineType strikethroughType, KCharacterStyle::LineStyle striketrhoughStyle, const QColor &strikethroughColor);
     void setText(const QString &sampleText);
     void setTextColor(QColor color);
-    void setUnderline(KoCharacterStyle::LineType underlineType, KoCharacterStyle::LineStyle underlineStyle, const QColor &underlineColor);
+    void setUnderline(KCharacterStyle::LineType underlineType, KCharacterStyle::LineStyle underlineStyle, const QColor &underlineColor);
 
     ///Paragraph properties
     void setParagraphBackgroundColor(const QColor &color);
@@ -67,7 +67,7 @@ public slots:
 
 protected:
     void paintEvent(QPaintEvent *event);
-    void drawLine(QPainter &painter, qreal xstart, qreal xend, qreal y, qreal width, int underlineDist, KoCharacterStyle::LineType lineType, KoCharacterStyle::LineStyle lineStyle, QColor lineColor);
+    void drawLine(QPainter &painter, qreal xstart, qreal xend, qreal y, qreal width, int underlineDist, KCharacterStyle::LineType lineType, KCharacterStyle::LineStyle lineStyle, QColor lineColor);
 
 private:
     PreviewType m_previewType;
@@ -82,14 +82,14 @@ private:
 
     QFont::Capitalization m_fontCapitalisation;
 
-    KoCharacterStyle::LineType m_strikethroughType;
-    KoCharacterStyle::LineStyle m_strikethroughStyle;
+    KCharacterStyle::LineType m_strikethroughType;
+    KCharacterStyle::LineStyle m_strikethroughStyle;
     QColor m_strikethroughColor;
 
     QColor m_textColor;
 
-    KoCharacterStyle::LineType m_underlineType;
-    KoCharacterStyle::LineStyle m_underlineStyle;
+    KCharacterStyle::LineType m_underlineType;
+    KCharacterStyle::LineStyle m_underlineStyle;
     QColor m_underlineColor;
 
     ///Paragraph properties

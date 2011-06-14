@@ -33,7 +33,7 @@
 #include <QVariant>
 #include <QTextFormat>
 
-class KoCharacterStyle;
+class KCharacterStyle;
 class KXmlElement;
 class KListStyle;
 class QTextBlock;
@@ -502,11 +502,11 @@ public:
     void applyStyle(const QTextBlock &block, bool applyListStyle = true) const;
 
     /// return the character style for this paragraph style
-    KoCharacterStyle *characterStyle();
+    KCharacterStyle *characterStyle();
     /// return the character style for this paragraph style
-    const KoCharacterStyle *characterStyle() const;
+    const KCharacterStyle *characterStyle() const;
     /// set the character style for this paragraph style
-    void setCharacterStyle(KoCharacterStyle *style);
+    void setCharacterStyle(KCharacterStyle *style);
 
     /**
      * Returns the list style for this paragraph style.

@@ -42,7 +42,7 @@ namespace MSOOXML
 }
 
 //#include <KOdfGenericStyle.h>
-//#include <styles/KoCharacterStyle.h>
+//#include <styles/KCharacterStyle.h>
 
 class XlsxShape {
 };

@@ -14,7 +14,7 @@
 #include <QTextDocumentFragment>
 #include <KInlineTextObjectManager.h>
 #include <KChangeTrackerElement.h>
-#include <KoCharacterStyle.h>
+#include <KCharacterStyle.h>
 #include <KChangeTracker.h>
 
 TestChangeTrackedDelete::TestChangeTrackedDelete()

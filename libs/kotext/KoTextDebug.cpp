@@ -30,7 +30,7 @@
 #include <QTextStream>
 
 #include "styles/KParagraphStyle.h"
-#include "styles/KoCharacterStyle.h"
+#include "styles/KCharacterStyle.h"
 #include "styles/KListStyle.h"
 #include "styles/KoTableStyle.h"
 #include "styles/KoTableCellStyle.h"
@@ -85,7 +85,7 @@ static QString fontProperties(const QTextCharFormat &textFormat)
         case QTextFormat::FontCapitalization:
             fontProps.append(QString("caps %1").arg(properties[id].toInt()));
             break;
-        case KoCharacterStyle::FontCharset:
+        case KCharacterStyle::FontCharset:
             fontProps.append(properties[id].toString());
             break;
         case QTextFormat::FontStyleHint:
@@ -111,7 +111,7 @@ void KoTextDebug::dumpDocument(const QTextDocument *doc, QTextStream &out)
     document = 0;
 }
 
-QString KoTextDebug::textAttributes(const KoCharacterStyle &style)
+QString KoTextDebug::textAttributes(const KCharacterStyle &style)
 {
     QTextCharFormat format;
     style.applyStyle(format);
@@ -166,9 +166,9 @@ QString KoTextDebug::textAttributes(const QTextCharFormat &textFormat)
     }
 
     KoStyleManager *styleManager = document ? KoTextDocument(document).styleManager() : 0;
-    if (styleManager && textFormat.hasProperty(KoCharacterStyle::StyleId)) {
-        int id = textFormat.intProperty(KoCharacterStyle::StyleId);
-        KoCharacterStyle *characterStyle = styleManager->characterStyle(id);
+    if (styleManager && textFormat.hasProperty(KCharacterStyle::StyleId)) {
+        int id = textFormat.intProperty(KCharacterStyle::StyleId);
+        KCharacterStyle *characterStyle = styleManager->characterStyle(id);
         attrs.append(" characterStyle=\"id:").append(QString::number(id));
         if (characterStyle)
             attrs.append(" name:").append(characterStyle->name());
@@ -198,7 +198,7 @@ QString KoTextDebug::textAttributes(const QTextCharFormat &textFormat)
                 value = pen.color().name();
             break;
         }
-        case KoCharacterStyle::UnderlineStyle:
+        case KCharacterStyle::UnderlineStyle:
             key = "underlinestyle";
             value = QString::number(properties[id].toInt());
             break;
@@ -206,43 +206,43 @@ QString KoTextDebug::textAttributes(const QTextCharFormat &textFormat)
             key = "underlinecolor";
             value = qvariant_cast<QColor>(properties[id]).name();
             break;
-        case KoCharacterStyle::UnderlineType:
+        case KCharacterStyle::UnderlineType:
             key = "underlinetype";
             value = QString::number(properties[id].toInt());
             break;
-        case KoCharacterStyle::UnderlineMode:
+        case KCharacterStyle::UnderlineMode:
             key = "underlinemode";
             value = QString::number(properties[id].toInt());
             break;
-        case KoCharacterStyle::UnderlineWeight:
+        case KCharacterStyle::UnderlineWeight:
             key = "underlineweight";
             value = QString::number(properties[id].toInt());
             break;
-        case KoCharacterStyle::UnderlineWidth:
+        case KCharacterStyle::UnderlineWidth:
             key = "underlinewidth";
             value = QString::number(properties[id].toDouble());
             break;
-        case KoCharacterStyle::StrikeOutStyle:
+        case KCharacterStyle::StrikeOutStyle:
             key = "strikeoutstyle";
             value = QString::number(properties[id].toInt());
             break;
-        case KoCharacterStyle::StrikeOutColor:
+        case KCharacterStyle::StrikeOutColor:
             key = "strikeoutcolor";
             value = qvariant_cast<QColor>(properties[id]).name();
             break;
-        case KoCharacterStyle::StrikeOutType:
+        case KCharacterStyle::StrikeOutType:
             key = "strikeouttype";
             value = QString::number(properties[id].toInt());
             break;
-        case KoCharacterStyle::StrikeOutMode:
+        case KCharacterStyle::StrikeOutMode:
             key = "strikeoutmode";
             value = QString::number(properties[id].toInt());
             break;
-        case KoCharacterStyle::StrikeOutWeight:
+        case KCharacterStyle::StrikeOutWeight:
             key = "strikeoutweight";
             value = QString::number(properties[id].toInt());
             break;
-        case KoCharacterStyle::StrikeOutWidth:
+        case KCharacterStyle::StrikeOutWidth:
             key = "strikeoutwidth";
             value = QString::number(properties[id].toDouble());
             break;
@@ -266,39 +266,39 @@ QString KoTextDebug::textAttributes(const QTextCharFormat &textFormat)
             key = "indent";
             value = QString::number(properties[id].toInt());
             break;
-        case KoCharacterStyle::Country:
+        case KCharacterStyle::Country:
             key = "country";
             value = properties[id].toString();
             break;
-        case KoCharacterStyle::Language:
+        case KCharacterStyle::Language:
             key = "language";
             value = properties[id].toString();
             break;
-        case KoCharacterStyle::HasHyphenation:
+        case KCharacterStyle::HasHyphenation:
             key = "hypenation";
             value = properties[id].toBool();
             break;
-        case KoCharacterStyle::StrikeOutText:
+        case KCharacterStyle::StrikeOutText:
             key = "strikeout-text";
             value = properties[id].toString();
             break;
-        case KoCharacterStyle::FontCharset:
+        case KCharacterStyle::FontCharset:
             key = "font-charset";
             value = properties[id].toString();
             break;
-        case KoCharacterStyle::TextRotationAngle:
+        case KCharacterStyle::TextRotationAngle:
             key = "rotation-angle";
             value = QString::number(properties[id].toInt());
             break;
-        case KoCharacterStyle::TextRotationScale:
+        case KCharacterStyle::TextRotationScale:
             key = "text-rotation-scale";
-            value = properties[id].toInt() == KoCharacterStyle::Fixed ? "Fixed" : "LineHeight";
+            value = properties[id].toInt() == KCharacterStyle::Fixed ? "Fixed" : "LineHeight";
             break;
-        case KoCharacterStyle::TextScale:
+        case KCharacterStyle::TextScale:
             key = "text-scale";
             value = QString::number(properties[id].toInt());
             break;
-        case KoCharacterStyle::InlineRdf:
+        case KCharacterStyle::InlineRdf:
             key = "inline-rdf";
             value = QString::number(properties[id].toInt());
             break;

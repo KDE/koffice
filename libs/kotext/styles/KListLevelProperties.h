@@ -74,9 +74,9 @@ public:
     void setDisplayLevel(int level);
     /// return the amount of levels that will be shown in list items of this list.
     int displayLevel() const;
-    /// set the styleId of the KoCharacterStyle to be used to layout the listitem
+    /// set the styleId of the KCharacterStyle to be used to layout the listitem
     void setCharacterStyleId(int id);
-    /// return the styleId of the KoCharacterStyle to be used to layout the listitem
+    /// return the styleId of the KCharacterStyle to be used to layout the listitem
     int characterStyleId() const;
     /// set the character to be used as the counter of the listitem
     void setBulletCharacter(QChar character);

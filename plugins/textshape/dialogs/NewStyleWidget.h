@@ -25,7 +25,7 @@
 #include <QWidget>
 
 class KParagraphStyle;
-class KoCharacterStyle;
+class KCharacterStyle;
 
 class NewStyleWidget : public QWidget
 {
@@ -35,7 +35,7 @@ public:
 
 signals:
     void newParagraphStyle(KParagraphStyle *style);
-    void newCharacterStyle(KoCharacterStyle *style);
+    void newCharacterStyle(KCharacterStyle *style);
     void cancelled();
 
 private slots:

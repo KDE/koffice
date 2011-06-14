@@ -520,7 +520,7 @@ void TextTool::showChangeTip()
     QTextCursor c(textEditor->document());
     c.setPosition(m_changeTipCursorPos);
     if (m_changeTracker && m_changeTracker->containsInlineChanges(c.charFormat())) {
-        KChangeTrackerElement *element = m_changeTracker->elementById(c.charFormat().property(KoCharacterStyle::ChangeTrackerId).toInt());
+        KChangeTrackerElement *element = m_changeTracker->elementById(c.charFormat().property(KCharacterStyle::ChangeTrackerId).toInt());
         if (element->isEnabled()) {
             QString changeType;
             if (element->changeType() == KOdfGenericChange::InsertChange)
@@ -1348,8 +1348,8 @@ void TextTool::updateActions()
     QTextCharFormat cf = textEditor->charFormat();
     m_actionFormatBold->setChecked(cf.fontWeight() > QFont::Normal);
     m_actionFormatItalic->setChecked(cf.fontItalic());
-    m_actionFormatUnderline->setChecked(cf.intProperty(KoCharacterStyle::UnderlineType) != KoCharacterStyle::NoLineType);
-    m_actionFormatStrikeOut->setChecked(cf.intProperty(KoCharacterStyle::StrikeOutType) != KoCharacterStyle::NoLineType);
+    m_actionFormatUnderline->setChecked(cf.intProperty(KCharacterStyle::UnderlineType) != KCharacterStyle::NoLineType);
+    m_actionFormatStrikeOut->setChecked(cf.intProperty(KCharacterStyle::StrikeOutType) != KCharacterStyle::NoLineType);
     bool super = false, sub = false;
     switch (cf.verticalAlignment()) {
     case QTextCharFormat::AlignSuperScript:
@@ -1602,8 +1602,8 @@ QWidget *TextTool::createOptionWidget()
 
     connect(styles, SIGNAL(paragraphStyleSelected(KParagraphStyle *)),
             this, SLOT(setStyle(KParagraphStyle*)));
-    connect(styles, SIGNAL(characterStyleSelected(KoCharacterStyle *)),
-            this, SLOT(setStyle(KoCharacterStyle*)));
+    connect(styles, SIGNAL(characterStyleSelected(KCharacterStyle *)),
+            this, SLOT(setStyle(KCharacterStyle*)));
     connect(styles, SIGNAL(doneWithFocus()), this, SLOT(returnFocusToCanvas()));
     connect(changeTrackingOptions, SIGNAL(doneWithFocus()), this, SLOT(returnFocusToCanvas()));
     connect(m_actionShowChanges, SIGNAL(triggered(bool)), changeTrackingOptions, SLOT(toggleShowChanges(bool)));
@@ -1841,7 +1841,7 @@ void TextTool::insertIndexMarker()
     }
 }
 
-void TextTool::setStyle(KoCharacterStyle *style)
+void TextTool::setStyle(KCharacterStyle *style)
 {
     m_textEditor.data()->setStyle(style);
     emit charFormatChanged(m_textEditor.data()->charFormat());
@@ -2319,9 +2319,9 @@ void TextTool::debugTextDocument()
             KParagraphStyle *ps = styleManager->paragraphStyle(var.toInt());
             kDebug(32500) << "--- Paragraph Style:" << (ps ? ps->name() : QString()) << var.toInt();
         }
-        var = block.charFormat().property(KoCharacterStyle::StyleId);
+        var = block.charFormat().property(KCharacterStyle::StyleId);
         if (!var.isNull()) {
-            KoCharacterStyle *cs = styleManager->characterStyle(var.toInt());
+            KCharacterStyle *cs = styleManager->characterStyle(var.toInt());
             kDebug(32500) << "--- Character Style:" << (cs ? cs->name() : QString()) << var.toInt();
         }
         int lastPrintedChar = -1;
@@ -2333,7 +2333,7 @@ void TextTool::debugTextDocument()
             if (!fragment.isValid())
                 continue;
             QTextCharFormat fmt = fragment.charFormat();
-            kDebug(32500) << "changeId: " << fmt.property(KoCharacterStyle::ChangeTrackerId);
+            kDebug(32500) << "changeId: " << fmt.property(KCharacterStyle::ChangeTrackerId);
             const int fragmentStart = fragment.position() - block.position();
             for (int i = fragmentStart; i < fragmentStart + fragment.length(); i += CHARSPERLINE) {
                 if (lastPrintedChar == fragmentStart-1)
@@ -2345,15 +2345,15 @@ void TextTool::debugTextDocument()
                         debug += "\\n";
                     kDebug(32500) << debug;
                 }
-                var = fmt.property(KoCharacterStyle::StyleId);
+                var = fmt.property(KCharacterStyle::StyleId);
                 QString charStyleLong, charStyleShort;
                 if (! var.isNull()) { // named style
                     charStyleShort = QString::number(var.toInt());
-                    KoCharacterStyle *cs = styleManager->characterStyle(var.toInt());
+                    KCharacterStyle *cs = styleManager->characterStyle(var.toInt());
                     if (cs)
                         charStyleLong = cs->name();
                 }
-                if (inlineManager && fmt.hasProperty(KoCharacterStyle::InlineInstanceId)) {
+                if (inlineManager && fmt.hasProperty(KCharacterStyle::InlineInstanceId)) {
                     QTextCharFormat inlineFmt = fmt;
                     inlineFmt.setProperty(CHARPOSITION, fragmentStart);
                     inlineCharacters << inlineFmt;
@@ -2419,7 +2419,7 @@ void TextTool::debugTextStyles()
         kDebug(32500) << style->styleId() << style->name() << (styleManager->defaultParagraphStyle() == style ? "[Default]" : "");
         if (style->parentStyle())
             kDebug(32500) << "  +- With parent style; " << style->parentStyle()->styleId();
-        KoCharacterStyle *cs = style->characterStyle();
+        KCharacterStyle *cs = style->characterStyle();
         seenStyles << style->styleId();
         if (cs) {
             kDebug(32500) << "  +- CharStyle: " << cs->styleId() << cs->name();
@@ -2447,7 +2447,7 @@ void TextTool::debugTextStyles()
     }
 
     bool first = true;
-    foreach (KoCharacterStyle *style, styleManager->characterStyles()) {
+    foreach (KCharacterStyle *style, styleManager->characterStyles()) {
         if (seenStyles.contains(style->styleId()))
             continue;
         if (first) {

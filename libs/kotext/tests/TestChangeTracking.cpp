@@ -48,7 +48,7 @@
 #include <KoTableCellStyle.h>
 #include <KoTextDocumentLayout.h>
 #include <KoStyleManager.h>
-#include <KoCharacterStyle.h>
+#include <KCharacterStyle.h>
 #include <KParagraphStyle.h>
 #include <KoText.h>
 #include <KOdfEmbeddedDocumentSaver.h>

@@ -49,7 +49,7 @@ public:
 
     static int s_stylesNumber; // For giving out unique numbers to the styles for referencing
 
-    QHash<int, KoCharacterStyle*> charStyles;
+    QHash<int, KCharacterStyle*> charStyles;
     QHash<int, KParagraphStyle*> paragStyles;
     QHash<int, KListStyle*> listStyles;
     QHash<int, KListStyle *> automaticListStyles;

@@ -20,7 +20,7 @@
 #include "NewStyleWidget.h"
 
 #include <KParagraphStyle.h>
-#include <KoCharacterStyle.h>
+#include <KCharacterStyle.h>
 
 NewStyleWidget::NewStyleWidget(QWidget *parent)
         : QWidget(parent)
@@ -39,7 +39,7 @@ NewStyleWidget::NewStyleWidget(QWidget *parent)
 void NewStyleWidget::createButtonPressed()
 {
     if (widget.character->isChecked()) {
-        KoCharacterStyle *style = new KoCharacterStyle();
+        KCharacterStyle *style = new KCharacterStyle();
         style->setName(widget.name->text());
         emit newCharacterStyle(style);
     } else {

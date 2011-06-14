@@ -24,7 +24,7 @@
 #include <ui_FontLayoutTab.h>
 
 class QButtonGroup;
-class KoCharacterStyle;
+class KCharacterStyle;
 
 class FontLayoutTab : public QWidget
 {
@@ -34,8 +34,8 @@ public:
     explicit FontLayoutTab(bool withSubSuperScript, bool uniqueFormat, QWidget* parent = 0);
     ~FontLayoutTab() {}
 
-    void setDisplay(KoCharacterStyle *style);
-    void save(KoCharacterStyle *style);
+    void setDisplay(KCharacterStyle *style);
+    void save(KCharacterStyle *style);
 
     void setUnit(const KUnit &unit);
 

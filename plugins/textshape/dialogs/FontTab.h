@@ -26,7 +26,7 @@
 
 #include <kfontchooser.h>
 
-class KoCharacterStyle;
+class KCharacterStyle;
 
 class FontTab : public QWidget
 {
@@ -36,8 +36,8 @@ public:
     explicit FontTab(bool uniqueFormat, QWidget* parent = 0);
     ~FontTab() {}
 
-    void setDisplay(const KoCharacterStyle *displayStyle);
-    void save(KoCharacterStyle *style) const;
+    void setDisplay(const KCharacterStyle *displayStyle);
+    void save(KCharacterStyle *style) const;
 
 signals:
     void fontChanged(const QFont &font);

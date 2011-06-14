@@ -41,7 +41,7 @@ class QDomElement;
 class QDomDocument;
 class KZip;
 struct KoOdfWriters;
-class KoCharacterStyle;
+class KCharacterStyle;
 class KOdfStyleStack;
 class KXmlWriter;
 
@@ -338,7 +338,7 @@ MSOOXML_EXPORT QString ST_PlaceholderType_to_ODF(const QString& ecmaType);
 //! Sets up @a textStyleProperties with underline style matching MSOOXML name @a msooxmlName.
 //! Based on 17.18.99 ST_Underline (Underline Patterns), WML ECMA-376 p.1681
 //! and on 20.1.10.82 ST_TextUnderlineType (Text Underline Types), DrawingML ECMA-376 p.3450 (merged)
-MSOOXML_EXPORT void setupUnderLineStyle(const QString& msooxmlName, KoCharacterStyle* textStyleProperties);
+MSOOXML_EXPORT void setupUnderLineStyle(const QString& msooxmlName, KCharacterStyle* textStyleProperties);
 
 //! @return the symbolic name of column @a column (counted from 0)
 //! This is similar to the notation of spreadsheet's column, e.g. 0th column is "A", 1st is "B", 26th is "AA".

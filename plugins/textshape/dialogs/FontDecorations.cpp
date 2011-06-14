@@ -68,7 +68,7 @@ void FontDecorations::backgroundToggled(bool state)
     widget.resetBackground->setEnabled(state);
 }
 
-void FontDecorations::setDisplay(KoCharacterStyle *style)
+void FontDecorations::setDisplay(KCharacterStyle *style)
 {
     if (!style)
         return;
@@ -96,7 +96,7 @@ void FontDecorations::setDisplay(KoCharacterStyle *style)
     }
 }
 
-void FontDecorations::save(KoCharacterStyle *style) const
+void FontDecorations::save(KCharacterStyle *style) const
 {
     if (!style)
         return;

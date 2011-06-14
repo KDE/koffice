@@ -28,7 +28,7 @@
 #include <QtCore/QFlags>
 #include <QColor>
 
-class KoCharacterStyle;
+class KCharacterStyle;
 class KOdfGenericStyle;
 class XlsxImport;
 class XlsxStyles;
@@ -73,7 +73,7 @@ struct ST_VerticalAlignRun
     };
     ST_VerticalAlignRun(const QString& msooxmlName = QString());
     //! Sets up @a characterStyle to match this setting.
-    void setupCharacterStyle(KoCharacterStyle* characterStyle) const;
+    void setupCharacterStyle(KCharacterStyle* characterStyle) const;
 
     Value value;
 };
@@ -130,7 +130,7 @@ public:
 
     //! Sets up @a characterStyle to match this font style.
     //! @todo implement more formatting
-    void setupCharacterStyle(KoCharacterStyle* characterStyle) const;
+    void setupCharacterStyle(KCharacterStyle* characterStyle) const;
 
 private:
     qreal m_size;
@@ -360,7 +360,7 @@ public:
 
     //! Sets up @a characterStyle to match this font style.
 //! @todo implement more formatting
-    bool setupCharacterStyle(const XlsxStyles *styles, KoCharacterStyle* characterStyle) const;
+    bool setupCharacterStyle(const XlsxStyles *styles, KCharacterStyle* characterStyle) const;
 
 private:
     //! Used by setupCellStyle()

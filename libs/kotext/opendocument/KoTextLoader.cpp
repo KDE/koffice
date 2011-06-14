@@ -61,7 +61,7 @@
 #include <KFormatChangeInformation_p.h>
 #include "styles/KoStyleManager.h"
 #include "styles/KParagraphStyle.h"
-#include "styles/KoCharacterStyle.h"
+#include "styles/KCharacterStyle.h"
 #include "styles/KListStyle.h"
 #include "styles/KListLevelProperties.h"
 #include "styles/KoTableStyle.h"
@@ -298,7 +298,7 @@ void KoTextLoader::Private::openChangeRegion(const KXmlElement& element)
         QString styleName = spanElement.attributeNS(KOdfXmlNS::text, "style-name", QString());
 
         QTextCharFormat cf;
-        KoCharacterStyle *characterStyle = textSharedData->characterStyle(styleName, stylesDotXml);
+        KCharacterStyle *characterStyle = textSharedData->characterStyle(styleName, stylesDotXml);
         if (characterStyle) {
              characterStyle->applyStyle(cf);
         }
@@ -927,7 +927,7 @@ void KoTextLoader::loadDeleteChangeOutsidePorH(QString id, QTextCursor &cursor)
         cursor.setPosition(startPosition);
         cursor.setPosition(endPosition, QTextCursor::KeepAnchor);
         QTextCharFormat format;
-        format.setProperty(KoCharacterStyle::ChangeTrackerId, changeId);
+        format.setProperty(KCharacterStyle::ChangeTrackerId, changeId);
         cursor.mergeCharFormat(format);
 
         //Get the QTextDocumentFragment from the selection and store it in the changeElement
@@ -1435,12 +1435,12 @@ void KoTextLoader::loadText(const QString &fulltext, QTextCursor &cursor,
 
         if (d->changeTracker && d->changeStack.count()) {
             QTextCharFormat format;
-            format.setProperty(KoCharacterStyle::ChangeTrackerId, d->changeStack.top());
+            format.setProperty(KCharacterStyle::ChangeTrackerId, d->changeStack.top());
             cursor.mergeCharFormat(format);
         } else {
             QTextCharFormat format = cursor.charFormat();
-            if (format.hasProperty(KoCharacterStyle::ChangeTrackerId)) {
-                format.clearProperty(KoCharacterStyle::ChangeTrackerId);
+            if (format.hasProperty(KCharacterStyle::ChangeTrackerId)) {
+                format.clearProperty(KCharacterStyle::ChangeTrackerId);
                 cursor.setCharFormat(format);
             }
         }
@@ -1534,7 +1534,7 @@ void KoTextLoader::loadSpan(const KXmlElement &element, QTextCursor &cursor, boo
 
             QTextCharFormat cf = cursor.charFormat(); // store the current cursor char format
 
-            KoCharacterStyle *characterStyle = d->textSharedData->characterStyle(styleName, d->stylesDotXml);
+            KCharacterStyle *characterStyle = d->textSharedData->characterStyle(styleName, d->stylesDotXml);
             if (characterStyle) {
                 characterStyle->applyStyle(&cursor);
             } else if (!styleName.isEmpty()) {
@@ -1574,8 +1574,8 @@ void KoTextLoader::loadSpan(const KXmlElement &element, QTextCursor &cursor, boo
                 foreground.setColor(Qt::blue);
 //                 foreground.setStyle(Qt::Dense1Pattern);
                 linkCf.setForeground(foreground);
-                linkCf.setProperty(KoCharacterStyle::UnderlineStyle, KoCharacterStyle::SolidLine);
-                linkCf.setProperty(KoCharacterStyle::UnderlineType, KoCharacterStyle::SingleLine);
+                linkCf.setProperty(KCharacterStyle::UnderlineStyle, KCharacterStyle::SolidLine);
+                linkCf.setProperty(KCharacterStyle::UnderlineType, KCharacterStyle::SingleLine);
 
                 cursor.setCharFormat(linkCf);
             }
@@ -1750,7 +1750,7 @@ void KoTextLoader::loadDeleteChangeWithinPorH(QString id, QTextCursor &cursor)
         cursor.setPosition(startPosition);
         cursor.setPosition(endPosition, QTextCursor::KeepAnchor);
         QTextCharFormat format;
-        format.setProperty(KoCharacterStyle::ChangeTrackerId, changeId);
+        format.setProperty(KCharacterStyle::ChangeTrackerId, changeId);
         cursor.mergeCharFormat(format);
 
         //Get the QTextDocumentFragment from the selection and store it in the changeElement
@@ -1835,7 +1835,7 @@ bool KoTextLoader::Private::checkForDeleteMerge(QTextCursor &cursor, const QStri
         if ( startPosition == (cursor.block().position())) {
             QTextCursor tempCursor(cursor);
             tempCursor.setPosition(cursor.block().previous().position() + cursor.block().previous().length() - 1);
-            prevChangeId = tempCursor.charFormat().property(KoCharacterStyle::ChangeTrackerId).toInt();
+            prevChangeId = tempCursor.charFormat().property(KCharacterStyle::ChangeTrackerId).toInt();
 
             if (!prevChangeId) {
                 KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(cursor.block().document()->documentLayout());
@@ -1849,7 +1849,7 @@ bool KoTextLoader::Private::checkForDeleteMerge(QTextCursor &cursor, const QStri
         } else {
             QTextCursor tempCursor(cursor);
             tempCursor.setPosition(startPosition - 1);
-            prevChangeId = tempCursor.charFormat().property(KoCharacterStyle::ChangeTrackerId).toInt();
+            prevChangeId = tempCursor.charFormat().property(KCharacterStyle::ChangeTrackerId).toInt();
         }
 
         if ((prevChangeId) && (prevChangeId == changeId)) {
@@ -1920,7 +1920,7 @@ void KoTextLoader::loadTable(const KXmlElement &tableElem, QTextCursor &cursor)
     KoTableColumnAndRowStyleManager *tcarManager = new KoTableColumnAndRowStyleManager;
     tableFormat.setProperty(KoTableStyle::ColumnAndRowStyleManager, QVariant::fromValue(reinterpret_cast<void *>(tcarManager)));
     if (d->changeTracker && d->changeStack.count()) {
-        tableFormat.setProperty(KoCharacterStyle::ChangeTrackerId, d->changeStack.top());
+        tableFormat.setProperty(KCharacterStyle::ChangeTrackerId, d->changeStack.top());
     }
     QTextTable *tbl = cursor.insertTable(1, 1, tableFormat);
     int rows = 0;
@@ -2106,7 +2106,7 @@ void KoTextLoader::loadTableCell(KXmlElement &rowTag, QTextTable *tbl, QList<QRe
 
         if (d->changeTracker && d->changeStack.count()) {
             QTextTableCellFormat cellFormat = cell.format().toTableCellFormat();
-            cellFormat.setProperty(KoCharacterStyle::ChangeTrackerId, d->changeStack.top());
+            cellFormat.setProperty(KCharacterStyle::ChangeTrackerId, d->changeStack.top());
             cell.setFormat(cellFormat);
         }
     }
@@ -2145,12 +2145,12 @@ void KoTextLoader::loadShape(const KXmlElement &element, QTextCursor &cursor)
 
             if (d->changeTracker && d->changeStack.count()) {
                 QTextCharFormat format;
-                format.setProperty(KoCharacterStyle::ChangeTrackerId, d->changeStack.top());
+                format.setProperty(KCharacterStyle::ChangeTrackerId, d->changeStack.top());
                 cursor.mergeCharFormat(format);
             } else {
                 QTextCharFormat format = cursor.charFormat();
-                if (format.hasProperty(KoCharacterStyle::ChangeTrackerId)) {
-                    format.clearProperty(KoCharacterStyle::ChangeTrackerId);
+                if (format.hasProperty(KCharacterStyle::ChangeTrackerId)) {
+                    format.clearProperty(KCharacterStyle::ChangeTrackerId);
                     cursor.setCharFormat(format);
                 }
             }
@@ -2273,7 +2273,7 @@ void KoTextLoader::markBlocksAsInserted(QTextCursor& cursor,int from, const QStr
     int changeId = d->changeTracker->loadedChangeId(id);
 
     QTextBlockFormat format;
-    format.setProperty(KoCharacterStyle::ChangeTrackerId, changeId);
+    format.setProperty(KCharacterStyle::ChangeTrackerId, changeId);
 
     do {
         startBlock = startBlock.next();

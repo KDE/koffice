@@ -245,7 +245,7 @@ void SCPlaceholders::applyStyle(SCPlaceholderShape * shape, const QString &prese
 
         QTextCharFormat chatFormat(cursor.blockCharFormat());
         // TODO check if needed
-        //chatFormat.setProperty(KoCharacterStyle::StyleId, styleManager->defaultParagraphStyle()->characterStyle()->styleId());
+        //chatFormat.setProperty(KCharacterStyle::StyleId, styleManager->defaultParagraphStyle()->characterStyle()->styleId());
         chatFormat.clearProperty(QTextFormat::ObjectIndex);
         newCursor.select(QTextCursor::Document);
         newCursor.setBlockCharFormat(chatFormat);

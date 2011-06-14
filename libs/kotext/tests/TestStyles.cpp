@@ -22,7 +22,7 @@
 #include <styles/KParagraphStyle.h>
 #include <styles/KoStyleManager.h>
 #include <styles/KoStyleManager_p.h>
-#include <styles/KoCharacterStyle.h>
+#include <styles/KCharacterStyle.h>
 #include <KDebug>
 #include <QTextDocument>
 #include <QTextBlock>
@@ -209,7 +209,7 @@ void TestStyles::testCopyParagraphStyle()
 
 void TestStyles::testUnapplyStyle()
 {
-    // in this test we should avoid testing any of the hardcodedDefaultProperties; see KoCharacterStyle for details!
+    // in this test we should avoid testing any of the hardcodedDefaultProperties; see KCharacterStyle for details!
     KParagraphStyle headers;
     headers.characterStyle()->setFontOverline(true);
     headers.characterStyle()->setFontWeight(QFont::Bold);
@@ -295,7 +295,7 @@ void TestStyles::testChangeManagedStyle()
     KParagraphStyle *p2 = new KParagraphStyle(&manager);
     p2->setName("Head1");
     p2->setParentStyle(p1);
-    KoCharacterStyle *charStyle = p1->characterStyle();
+    KCharacterStyle *charStyle = p1->characterStyle();
     charStyle->setUnderlineColor(Qt::red);
 
     manager.add(p2);

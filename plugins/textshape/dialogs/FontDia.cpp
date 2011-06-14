@@ -94,14 +94,14 @@ FontDia::FontDia(QTextCursor* cursor, QWidget* parent)
 
 void FontDia::initTabs()
 {
-    KoCharacterStyle style(m_initialFormat);
+    KCharacterStyle style(m_initialFormat);
     m_characterGeneral->setStyle(&style);
 }
 
 void FontDia::slotApply()
 {
     emit startMacro(i18n("Font"));
-    KoCharacterStyle chosenStyle;
+    KCharacterStyle chosenStyle;
     m_characterGeneral->save(&chosenStyle);
     chosenStyle.applyStyle(m_cursor);
     emit stopMacro();

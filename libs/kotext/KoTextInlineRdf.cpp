@@ -28,7 +28,7 @@
 #include "KoBookmark.h"
 #include "KoTextMeta.h"
 #include "KoTextBlockData.h"
-#include "styles/KoCharacterStyle.h"
+#include "styles/KCharacterStyle.h"
 #include "KoTextEditor.h"
 
 #include <kdebug.h>
@@ -288,10 +288,10 @@ void KoTextInlineRdf::setXmlId(const QString &id)
 
 KoTextInlineRdf *KoTextInlineRdf::tryToGetInlineRdf(const QTextFormat &tf)
 {
-    if (!tf.hasProperty(KoCharacterStyle::InlineRdf)) {
+    if (!tf.hasProperty(KCharacterStyle::InlineRdf)) {
         return 0;
     }
-    QVariant v = tf.property(KoCharacterStyle::InlineRdf);
+    QVariant v = tf.property(KCharacterStyle::InlineRdf);
     KoTextInlineRdf *inlineRdf = v.value<KoTextInlineRdf *>();
     if (inlineRdf) {
         return inlineRdf;
@@ -302,7 +302,7 @@ KoTextInlineRdf *KoTextInlineRdf::tryToGetInlineRdf(const QTextFormat &tf)
 KoTextInlineRdf *KoTextInlineRdf::tryToGetInlineRdf(QTextCursor &cursor)
 {
     QTextCharFormat cf = cursor.charFormat();
-    QVariant v = cf.property(KoCharacterStyle::InlineRdf);
+    QVariant v = cf.property(KCharacterStyle::InlineRdf);
     KoTextInlineRdf *inlineRdf = v.value<KoTextInlineRdf *>();
     if (inlineRdf) {
         return inlineRdf;
@@ -313,7 +313,7 @@ KoTextInlineRdf *KoTextInlineRdf::tryToGetInlineRdf(QTextCursor &cursor)
 KoTextInlineRdf *KoTextInlineRdf::tryToGetInlineRdf(KoTextEditor *handler)
 {
     QTextCharFormat cf = handler->charFormat();
-    QVariant v = cf.property(KoCharacterStyle::InlineRdf);
+    QVariant v = cf.property(KCharacterStyle::InlineRdf);
     KoTextInlineRdf *inlineRdf = v.value<KoTextInlineRdf *>();
     if (inlineRdf) {
         return inlineRdf;
@@ -325,6 +325,6 @@ void KoTextInlineRdf::attach(KoTextInlineRdf *inlineRdf, QTextCursor &cursor)
 {
     QTextCharFormat format = cursor.charFormat();
     QVariant v = QVariant::fromValue(inlineRdf);
-    format.setProperty(KoCharacterStyle::InlineRdf, v);
+    format.setProperty(KCharacterStyle::InlineRdf, v);
     cursor.mergeCharFormat(format);
 }

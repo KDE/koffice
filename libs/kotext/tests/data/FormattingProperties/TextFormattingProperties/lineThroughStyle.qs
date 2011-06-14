@@ -1,35 +1,35 @@
 include("common.qs");
 
 var noLineFormat = QTextCharFormat.clone(defaultTextFormat);
-setFormatProperty(noLineFormat, KoCharacterStyle.StrikeOutStyle, KoCharacterStyle.NoLineStyle);
+setFormatProperty(noLineFormat, KCharacterStyle.StrikeOutStyle, KCharacterStyle.NoLineStyle);
 
 var solidLineFormat = QTextCharFormat.clone(defaultTextFormat);
-setFormatProperty(solidLineFormat, KoCharacterStyle.StrikeOutStyle, KoCharacterStyle.SolidLine);
-setFormatProperty(solidLineFormat, KoCharacterStyle.StrikeOutType, KoCharacterStyle.SingleLine);
+setFormatProperty(solidLineFormat, KCharacterStyle.StrikeOutStyle, KCharacterStyle.SolidLine);
+setFormatProperty(solidLineFormat, KCharacterStyle.StrikeOutType, KCharacterStyle.SingleLine);
 
 var dottedLineFormat = QTextCharFormat.clone(defaultTextFormat);
-setFormatProperty(dottedLineFormat, KoCharacterStyle.StrikeOutStyle, KoCharacterStyle.DottedLine);
-setFormatProperty(dottedLineFormat, KoCharacterStyle.StrikeOutType, KoCharacterStyle.SingleLine);
+setFormatProperty(dottedLineFormat, KCharacterStyle.StrikeOutStyle, KCharacterStyle.DottedLine);
+setFormatProperty(dottedLineFormat, KCharacterStyle.StrikeOutType, KCharacterStyle.SingleLine);
 
 var dashLineFormat = QTextCharFormat.clone(defaultTextFormat);
-setFormatProperty(dashLineFormat, KoCharacterStyle.StrikeOutStyle, KoCharacterStyle.DashLine);
-setFormatProperty(dashLineFormat, KoCharacterStyle.StrikeOutType, KoCharacterStyle.SingleLine);
+setFormatProperty(dashLineFormat, KCharacterStyle.StrikeOutStyle, KCharacterStyle.DashLine);
+setFormatProperty(dashLineFormat, KCharacterStyle.StrikeOutType, KCharacterStyle.SingleLine);
 
 var longDashLineFormat = QTextCharFormat.clone(defaultTextFormat);
-setFormatProperty(longDashLineFormat, KoCharacterStyle.StrikeOutStyle, KoCharacterStyle.LongDashLine);
-setFormatProperty(longDashLineFormat, KoCharacterStyle.StrikeOutType, KoCharacterStyle.SingleLine);
+setFormatProperty(longDashLineFormat, KCharacterStyle.StrikeOutStyle, KCharacterStyle.LongDashLine);
+setFormatProperty(longDashLineFormat, KCharacterStyle.StrikeOutType, KCharacterStyle.SingleLine);
 
 var dotDashLineFormat = QTextCharFormat.clone(defaultTextFormat);
-setFormatProperty(dotDashLineFormat, KoCharacterStyle.StrikeOutStyle, KoCharacterStyle.DashDotLine);
-setFormatProperty(dotDashLineFormat, KoCharacterStyle.StrikeOutType, KoCharacterStyle.SingleLine);
+setFormatProperty(dotDashLineFormat, KCharacterStyle.StrikeOutStyle, KCharacterStyle.DashDotLine);
+setFormatProperty(dotDashLineFormat, KCharacterStyle.StrikeOutType, KCharacterStyle.SingleLine);
 
 var dotDotDashLineFormat = QTextCharFormat.clone(defaultTextFormat);
-setFormatProperty(dotDotDashLineFormat, KoCharacterStyle.StrikeOutStyle, KoCharacterStyle.DashDotDotLine);
-setFormatProperty(dotDotDashLineFormat, KoCharacterStyle.StrikeOutType, KoCharacterStyle.SingleLine);
+setFormatProperty(dotDotDashLineFormat, KCharacterStyle.StrikeOutStyle, KCharacterStyle.DashDotDotLine);
+setFormatProperty(dotDotDashLineFormat, KCharacterStyle.StrikeOutType, KCharacterStyle.SingleLine);
 
 var waveLineFormat = QTextCharFormat.clone(defaultTextFormat);
-setFormatProperty(waveLineFormat, KoCharacterStyle.StrikeOutStyle, KoCharacterStyle.WaveLine);
-setFormatProperty(waveLineFormat, KoCharacterStyle.StrikeOutType, KoCharacterStyle.SingleLine);
+setFormatProperty(waveLineFormat, KCharacterStyle.StrikeOutStyle, KCharacterStyle.WaveLine);
+setFormatProperty(waveLineFormat, KCharacterStyle.StrikeOutType, KCharacterStyle.SingleLine);
 
 cursor.insertText("this is an example of text without line through.", noLineFormat);
 

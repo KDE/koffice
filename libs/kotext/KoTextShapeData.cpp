@@ -269,7 +269,7 @@ void InsertDeleteChangesCommand::insertDeleteChanges()
             QTextCursor caret(element->deleteChangeMarker()->document());
             caret.setPosition(element->deleteChangeMarker()->position() + numAddedChars +  1);
             QTextCharFormat f = caret.charFormat();
-            f.clearProperty(KoCharacterStyle::InlineInstanceId);
+            f.clearProperty(KCharacterStyle::InlineInstanceId);
             caret.setCharFormat(f);
             KChangeTracker::insertDeleteFragment(caret, element->deleteChangeMarker());
             numAddedChars += KChangeTracker::fragmentLength(element->deleteData());

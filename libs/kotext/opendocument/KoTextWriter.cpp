@@ -39,7 +39,7 @@
 #include "KoVariable.h"
 #include "KInlineTextObjectManager.h"
 #include "styles/KoStyleManager.h"
-#include "styles/KoCharacterStyle.h"
+#include "styles/KCharacterStyle.h"
 #include "styles/KParagraphStyle.h"
 #include "styles/KListStyle.h"
 #include "styles/KListLevelProperties.h"
@@ -275,7 +275,7 @@ void KoTextWriter::Private::saveChange(QTextCharFormat format)
     if (!changeTracker /*&& changeTracker->isEnabled()*/)
         return;//The change tracker exist and we are allowed to save tracked changes
 
-    int changeId = format.property(KoCharacterStyle::ChangeTrackerId).toInt();
+    int changeId = format.property(KCharacterStyle::ChangeTrackerId).toInt();
     if (changeId) { //There is a tracked change
         saveChange(changeId);
     }
@@ -309,7 +309,7 @@ void KoTextWriter::Private::saveODF12Change(QTextCharFormat format)
     if (!changeTracker /*&& changeTracker->isEnabled()*/)
         return;//The change tracker exist and we are allowed to save tracked changes
 
-    int changeId = format.property(KoCharacterStyle::ChangeTrackerId).toInt();
+    int changeId = format.property(KCharacterStyle::ChangeTrackerId).toInt();
 
     //First we need to check if the eventual already opened change regions are still valid
     while (int change = changeStack.top()) {
@@ -395,7 +395,7 @@ int KoTextWriter::Private::openTagRegion(int position, ElementType elementType, 
         switch (elementType) {
             case KoTextWriter::Private::Span:
                 cursor.setPosition(position + 1);
-                changeId = cursor.charFormat().property(KoCharacterStyle::ChangeTrackerId).toInt();
+                changeId = cursor.charFormat().property(KCharacterStyle::ChangeTrackerId).toInt();
                 break;
             case KoTextWriter::Private::ParagraphOrHeader:
                 changeId = checkForBlockChange(block);
@@ -417,12 +417,12 @@ int KoTextWriter::Private::openTagRegion(int position, ElementType elementType, 
                 break;
             case KoTextWriter::Private::TableCell:
                 cursor.setPosition(position);
-                changeId = cursor.currentTable()->cellAt(position).format().property(KoCharacterStyle::ChangeTrackerId).toInt();
+                changeId = cursor.currentTable()->cellAt(position).format().property(KCharacterStyle::ChangeTrackerId).toInt();
                 break;
             case KoTextWriter::Private::Table:
                 cursor.setPosition(position);
                 QTextTableFormat tableFormat = cursor.currentTable()->format();
-                changeId = tableFormat.property(KoCharacterStyle::ChangeTrackerId).toInt();
+                changeId = tableFormat.property(KCharacterStyle::ChangeTrackerId).toInt();
                 break;
         }
     }
@@ -628,9 +628,9 @@ QString KoTextWriter::Private::saveParagraphStyle(const QTextBlockFormat &blockF
 
 QString KoTextWriter::Private::saveCharacterStyle(const QTextCharFormat &charFormat, const QTextCharFormat &blockCharFormat)
 {
-    KoCharacterStyle *defaultCharStyle = styleManager->defaultParagraphStyle()->characterStyle();
+    KCharacterStyle *defaultCharStyle = styleManager->defaultParagraphStyle()->characterStyle();
 
-    KoCharacterStyle *originalCharStyle = styleManager->characterStyle(charFormat.intProperty(KoCharacterStyle::StyleId));
+    KCharacterStyle *originalCharStyle = styleManager->characterStyle(charFormat.intProperty(KCharacterStyle::StyleId));
     if (!originalCharStyle)
         originalCharStyle = defaultCharStyle;
 
@@ -638,8 +638,8 @@ QString KoTextWriter::Private::saveCharacterStyle(const QTextCharFormat &charFor
     QString displayName = originalCharStyle->name();
     QString internalName = QString(QUrl::toPercentEncoding(displayName, "", " ")).replace('%', '_');
 
-    KoCharacterStyle charStyle(charFormat);
-    // we'll convert it to a KoCharacterStyle to check for local changes.
+    KCharacterStyle charStyle(charFormat);
+    // we'll convert it to a KCharacterStyle to check for local changes.
     // we remove that properties given by the paragraphstyle char format, these are not present in the saved style (should it really be the case?)
     charStyle.removeDuplicates(blockCharFormat);
     if (charStyle == (*originalCharStyle)) { // This is the real, unmodified character style.
@@ -746,7 +746,7 @@ void KoTextWriter::Private::saveParagraph(const QTextBlock &block, int from, int
             splitEndBlockNumber = -1;
             QString splitId = QString("split") + QString::number(splitIdCounter);
             writer->addAttribute("delta:split-id", splitId);
-            int changeId = block.blockFormat().intProperty(KoCharacterStyle::ChangeTrackerId);
+            int changeId = block.blockFormat().intProperty(KCharacterStyle::ChangeTrackerId);
             writer->addAttribute("delta:insertion-change-idref", changeTransTable.value(changeId));
             writer->addAttribute("delta:insertion-type", "split");
             splitIdCounter++;
@@ -761,11 +761,11 @@ void KoTextWriter::Private::saveParagraph(const QTextBlock &block, int from, int
         QTextBlock previousBlock = block.previous();
         if (previousBlock.isValid()) {
             QTextBlockFormat blockFormat = block.blockFormat();
-            int changeId = blockFormat.intProperty(KoCharacterStyle::ChangeTrackerId);
+            int changeId = blockFormat.intProperty(KCharacterStyle::ChangeTrackerId);
             if (changeId && changeTracker->elementById(changeId)->changeType() == KOdfGenericChange::DeleteChange) {
                 QTextFragment firstFragment = (block.begin()).fragment();
                 QTextCharFormat firstFragmentFormat = firstFragment.charFormat();
-                int firstFragmentChangeId = firstFragmentFormat.intProperty(KoCharacterStyle::ChangeTrackerId);
+                int firstFragmentChangeId = firstFragmentFormat.intProperty(KCharacterStyle::ChangeTrackerId);
                 if (changeTracker->isDuplicateChangeId(firstFragmentChangeId)) {
                     firstFragmentChangeId = changeTracker->originalChangeId(firstFragmentChangeId);
                 }
@@ -791,8 +791,8 @@ void KoTextWriter::Private::saveParagraph(const QTextBlock &block, int from, int
             QTextCharFormat charFormat = currentFragment.charFormat();
             QTextCharFormat compFormat = charFormat;
             bool identical;
-            previousCharFormat.clearProperty(KoCharacterStyle::ChangeTrackerId);
-            compFormat.clearProperty(KoCharacterStyle::ChangeTrackerId);
+            previousCharFormat.clearProperty(KCharacterStyle::ChangeTrackerId);
+            compFormat.clearProperty(KCharacterStyle::ChangeTrackerId);
             if (previousCharFormat == compFormat)
                 identical = true;
             else
@@ -852,7 +852,7 @@ void KoTextWriter::Private::saveParagraph(const QTextBlock &block, int from, int
                     }
 
                     if (saveInlineObject) {
-                        int changeId = charFormat.intProperty(KoCharacterStyle::ChangeTrackerId);
+                        int changeId = charFormat.intProperty(KCharacterStyle::ChangeTrackerId);
                         KoTextAnchor *textAnchor = dynamic_cast<KoTextAnchor *>(inlineObject);
                         if (changeTracker && changeTracker->saveFormat() == KChangeTracker::DELTAXML) {
                             if (textAnchor && changeId && changeTracker->elementById(changeId)->changeType() == KOdfGenericChange::InsertChange) {
@@ -940,11 +940,11 @@ void KoTextWriter::Private::saveParagraph(const QTextBlock &block, int from, int
         QTextBlock nextBlock = block.next();
         if (nextBlock.isValid() && deleteMergeRegionOpened) {
             QTextBlockFormat nextBlockFormat = nextBlock.blockFormat();
-            int changeId = nextBlockFormat.intProperty(KoCharacterStyle::ChangeTrackerId);
+            int changeId = nextBlockFormat.intProperty(KCharacterStyle::ChangeTrackerId);
             if (changeId && changeTracker->elementById(changeId)->changeType() == KOdfGenericChange::DeleteChange) {
                 QTextFragment lastFragment = (--block.end()).fragment();
                 QTextCharFormat lastFragmentFormat = lastFragment.charFormat();
-                int lastFragmentChangeId = lastFragmentFormat.intProperty(KoCharacterStyle::ChangeTrackerId);
+                int lastFragmentChangeId = lastFragmentFormat.intProperty(KCharacterStyle::ChangeTrackerId);
                 if (changeTracker->isDuplicateChangeId(lastFragmentChangeId)) {
                     lastFragmentChangeId = changeTracker->originalChangeId(lastFragmentChangeId);
                 }
@@ -977,14 +977,14 @@ int KoTextWriter::Private::checkForBlockChange(const QTextBlock &block)
 
     if (it.atEnd()) {
         //This is a empty block. So just return the change-id of the block
-        changeId = block.blockFormat().property(KoCharacterStyle::ChangeTrackerId).toInt();
+        changeId = block.blockFormat().property(KCharacterStyle::ChangeTrackerId).toInt();
     }
 
     for (it = block.begin(); !(it.atEnd()); ++it) {
         QTextFragment currentFragment = it.fragment();
         if (currentFragment.isValid()) {
             QTextCharFormat charFormat = currentFragment.charFormat();
-            int currentChangeId = charFormat.property(KoCharacterStyle::ChangeTrackerId).toInt();
+            int currentChangeId = charFormat.property(KCharacterStyle::ChangeTrackerId).toInt();
 
             KInlineObject *inlineObject = layout ? layout->inlineTextObjectManager()->inlineTextObject(charFormat) : 0;
             if (currentFragment.length() == 1 && inlineObject && currentFragment.text()[0].unicode() == QChar::ObjectReplacementCharacter) {
@@ -1115,7 +1115,7 @@ int KoTextWriter::Private::checkForTableRowChange(int position)
     if (table) {
         int row = table->cellAt(position).row();
         for (int i=0; i<table->columns(); i++) {
-            int currentChangeId = table->cellAt(row,i).format().property(KoCharacterStyle::ChangeTrackerId).toInt();
+            int currentChangeId = table->cellAt(row,i).format().property(KCharacterStyle::ChangeTrackerId).toInt();
             if (!currentChangeId) {
                 // Encountered a cell that is not a change
                 // So break out of loop and return 0
@@ -1158,7 +1158,7 @@ int KoTextWriter::Private::checkForTableColumnChange(int position)
     if (table) {
         int column = table->cellAt(position).column();
         for (int i=0; i<table->rows(); i++) {
-            int currentChangeId = table->cellAt(i,column).format().property(KoCharacterStyle::ChangeTrackerId).toInt();
+            int currentChangeId = table->cellAt(i,column).format().property(KCharacterStyle::ChangeTrackerId).toInt();
             if (!currentChangeId) {
                 // Encountered a cell that is not a change
                 // So break out of loop and return 0
@@ -1391,7 +1391,7 @@ QTextBlock& KoTextWriter::Private::saveList(QTextBlock &block, QHash<QTextList *
                         splitRegionOpened = false;
                         splitEndBlockNumber = -1;
                         closeSplitMergeRegion();
-                        postProcessListItemSplit(block.blockFormat().intProperty(KoCharacterStyle::ChangeTrackerId));
+                        postProcessListItemSplit(block.blockFormat().intProperty(KCharacterStyle::ChangeTrackerId));
                     }
                 }
             }
@@ -1555,9 +1555,9 @@ int KoTextWriter::Private::checkForMergeOrSplit(const QTextBlock &block, KOdfGen
         QTextTable *currentTable;
 
         if ((currentTable = QTextCursor(endBlock.next()).currentTable())) {
-            nextBlockChangeId = currentTable->format().intProperty(KoCharacterStyle::ChangeTrackerId);
+            nextBlockChangeId = currentTable->format().intProperty(KCharacterStyle::ChangeTrackerId);
         } else {
-            nextBlockChangeId = endBlock.next().blockFormat().property(KoCharacterStyle::ChangeTrackerId).toInt();
+            nextBlockChangeId = endBlock.next().blockFormat().property(KCharacterStyle::ChangeTrackerId).toInt();
         }
 
         if (changeTracker->isDuplicateChangeId(nextBlockChangeId)) {
@@ -1584,7 +1584,7 @@ int KoTextWriter::Private::checkForMergeOrSplit(const QTextBlock &block, KOdfGen
         //Check that the last fragment of this block is not a part of this change. If so, it is not a merge or a split
         QTextFragment lastFragment = (--(endBlock.end())).fragment();
         QTextCharFormat lastFragmentFormat = lastFragment.charFormat();
-        int lastFragmentChangeId = lastFragmentFormat.intProperty(KoCharacterStyle::ChangeTrackerId);
+        int lastFragmentChangeId = lastFragmentFormat.intProperty(KCharacterStyle::ChangeTrackerId);
         if (changeTracker->isDuplicateChangeId(lastFragmentChangeId)) {
             lastFragmentChangeId = changeTracker->originalChangeId(lastFragmentChangeId);
         }

@@ -7,7 +7,7 @@ size28Format.setFont(font);
 
 font = new QFont(defaultFont);
 var size50pcFormat = QTextCharFormat.clone(defaultTextFormat);
-font.setPointSizeF(12.0 * 50/100); // ### hardcoded because KoCharacterStyle is hardcoded too..
+font.setPointSizeF(12.0 * 50/100); // ### hardcoded because KCharacterStyle is hardcoded too..
 size50pcFormat.setFont(font);
 
 cursor.insertText("This test case checks font size, this is an example of text with ", defaultTextFormat);

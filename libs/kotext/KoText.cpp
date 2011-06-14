@@ -65,9 +65,9 @@ QStringList KoText::underlineStyleList()
 KoText::Tab::Tab()
         : position(0.),
         type(QTextOption::LeftTab),
-        leaderType(KoCharacterStyle::NoLineType),
-        leaderStyle(KoCharacterStyle::NoLineStyle),
-        leaderWeight(KoCharacterStyle::AutoLineWeight),
+        leaderType(KCharacterStyle::NoLineType),
+        leaderStyle(KCharacterStyle::NoLineStyle),
+        leaderWeight(KCharacterStyle::AutoLineWeight),
         leaderWidth(0)
 {
 }

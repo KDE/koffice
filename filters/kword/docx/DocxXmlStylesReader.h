@@ -29,7 +29,7 @@
 #include "DocxXmlDocumentReader.h"
 
 #include <KOdfGenericStyles.h>
-#include <KoCharacterStyle.h>
+#include <KCharacterStyle.h>
 
 //! A class reading MSOOXML DOCX markup - styles.xml part.
 /*! @todo generalize for other MSOOXML subformats.

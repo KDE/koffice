@@ -2044,7 +2044,7 @@ KoFilter::ConversionStatus DocxXmlDocumentReader::read_rPr()
     const QXmlStreamAttributes attrs(attributes());
 
     Q_ASSERT(m_currentTextStyleProperties == 0);
-    m_currentTextStyleProperties = new KoCharacterStyle();
+    m_currentTextStyleProperties = new KCharacterStyle();
 
     if (!m_currentTextStylePredefined) {
         m_currentTextStyle = KOdfGenericStyle(KOdfGenericStyle::TextAutoStyle, "text");
@@ -3521,12 +3521,12 @@ KoFilter::ConversionStatus DocxXmlDocumentReader::read_bdr()
     READ_EPILOGUE
 }
 
-void DocxXmlDocumentReader::readStrikeElement(KoCharacterStyle::LineType type)
+void DocxXmlDocumentReader::readStrikeElement(KCharacterStyle::LineType type)
 {
     const QXmlStreamAttributes attrs(attributes());
     if (READ_BOOLEAN_VAL) {
         m_currentTextStyleProperties->setStrikeOutType(type);
-        m_currentTextStyleProperties->setStrikeOutStyle(KoCharacterStyle::SolidLine);
+        m_currentTextStyleProperties->setStrikeOutStyle(KCharacterStyle::SolidLine);
 //! @todo m_currentTextStyleProperties->strikeOutWidth() ??
 //! @todo m_currentTextStyleProperties->setStrikeOutColor() ??
 //! @todo m_currentTextStyleProperties->setStrikeOutMode() ??
@@ -3541,7 +3541,7 @@ void DocxXmlDocumentReader::readStrikeElement(KoCharacterStyle::LineType type)
 KoFilter::ConversionStatus DocxXmlDocumentReader::read_strike()
 {
     READ_PROLOGUE
-    readStrikeElement(KoCharacterStyle::SingleLine);
+    readStrikeElement(KCharacterStyle::SingleLine);
     readNext();
     READ_EPILOGUE
 }
@@ -3553,7 +3553,7 @@ KoFilter::ConversionStatus DocxXmlDocumentReader::read_strike()
 KoFilter::ConversionStatus DocxXmlDocumentReader::read_dstrike()
 {
     READ_PROLOGUE
-    readStrikeElement(KoCharacterStyle::DoubleLine);
+    readStrikeElement(KCharacterStyle::DoubleLine);
     readNext();
     READ_EPILOGUE
 }
@@ -3681,7 +3681,7 @@ KoFilter::ConversionStatus DocxXmlDocumentReader::read_color()
     READ_ATTR(val)
 //! @todo more styles
     if (val == MsooXmlReader::constAuto) {
-//! @todo set use-window-font-color="true" (currently no way to do this using KoCharacterStyle)
+//! @todo set use-window-font-color="true" (currently no way to do this using KCharacterStyle)
     } else {
         QColor color(MSOOXML::Utils::ST_HexColorRGB_to_QColor(val));
         if (color.isValid()) {

@@ -5,7 +5,7 @@
 
 #include <KoStyleManager.h>
 #include <KParagraphStyle.h>
-#include <KoCharacterStyle.h>
+#include <KCharacterStyle.h>
 #include "../dialogs/StylesModel.h"
 
 class TestStylesModel : public QObject
@@ -68,7 +68,7 @@ void TestStylesModel::testPrecalcCache()
     QVERIFY(headers);
     QCOMPARE(headers->name(), QString("headers"));
 
-    KoCharacterStyle *red = manager->characterStyle(model.rootStyleIds().at(3));
+    KCharacterStyle *red = manager->characterStyle(model.rootStyleIds().at(3));
     QVERIFY(red);
     QCOMPARE(red->name(), QString("red"));
 
@@ -152,7 +152,7 @@ void TestStylesModel::fillManager()
     manager->add(head);
     // qDebug() << "head3:" << head->styleId();
 
-    KoCharacterStyle *style = new KoCharacterStyle();
+    KCharacterStyle *style = new KCharacterStyle();
     style->setName("red");
     manager->add(style);
     // qDebug() << "red:" << style->styleId();

@@ -1,36 +1,36 @@
 include("common.qs");
 
 var noLineFormat = QTextCharFormat.clone(defaultTextFormat);
-setFormatProperty(noLineFormat, KoCharacterStyle.UnderlineStyle, KoCharacterStyle.NoLineStyle);
-setFormatProperty(noLineFormat, KoCharacterStyle.UnderlineType, KoCharacterStyle.SingleLine);
+setFormatProperty(noLineFormat, KCharacterStyle.UnderlineStyle, KCharacterStyle.NoLineStyle);
+setFormatProperty(noLineFormat, KCharacterStyle.UnderlineType, KCharacterStyle.SingleLine);
 
 var solidLineFormat = QTextCharFormat.clone(defaultTextFormat);
-setFormatProperty(solidLineFormat, KoCharacterStyle.UnderlineStyle, KoCharacterStyle.SolidLine);
-setFormatProperty(solidLineFormat, KoCharacterStyle.UnderlineType, KoCharacterStyle.SingleLine);
+setFormatProperty(solidLineFormat, KCharacterStyle.UnderlineStyle, KCharacterStyle.SolidLine);
+setFormatProperty(solidLineFormat, KCharacterStyle.UnderlineType, KCharacterStyle.SingleLine);
 
 var dottedLineFormat = QTextCharFormat.clone(defaultTextFormat);
-setFormatProperty(dottedLineFormat, KoCharacterStyle.UnderlineStyle, KoCharacterStyle.DottedLine);
-setFormatProperty(dottedLineFormat, KoCharacterStyle.UnderlineType, KoCharacterStyle.SingleLine);
+setFormatProperty(dottedLineFormat, KCharacterStyle.UnderlineStyle, KCharacterStyle.DottedLine);
+setFormatProperty(dottedLineFormat, KCharacterStyle.UnderlineType, KCharacterStyle.SingleLine);
 
 var dashLineFormat = QTextCharFormat.clone(defaultTextFormat);
-setFormatProperty(dashLineFormat, KoCharacterStyle.UnderlineStyle, KoCharacterStyle.DashLine);
-setFormatProperty(dashLineFormat, KoCharacterStyle.UnderlineType, KoCharacterStyle.SingleLine);
+setFormatProperty(dashLineFormat, KCharacterStyle.UnderlineStyle, KCharacterStyle.DashLine);
+setFormatProperty(dashLineFormat, KCharacterStyle.UnderlineType, KCharacterStyle.SingleLine);
 
 var longDashLineFormat = QTextCharFormat.clone(defaultTextFormat);
-setFormatProperty(longDashLineFormat, KoCharacterStyle.UnderlineStyle, KoCharacterStyle.LongDashLine);
-setFormatProperty(longDashLineFormat, KoCharacterStyle.UnderlineType, KoCharacterStyle.SingleLine);
+setFormatProperty(longDashLineFormat, KCharacterStyle.UnderlineStyle, KCharacterStyle.LongDashLine);
+setFormatProperty(longDashLineFormat, KCharacterStyle.UnderlineType, KCharacterStyle.SingleLine);
 
 var dotDashLineFormat = QTextCharFormat.clone(defaultTextFormat);
-setFormatProperty(dotDashLineFormat, KoCharacterStyle.UnderlineStyle, KoCharacterStyle.DashDotLine);
-setFormatProperty(dotDashLineFormat, KoCharacterStyle.UnderlineType, KoCharacterStyle.SingleLine);
+setFormatProperty(dotDashLineFormat, KCharacterStyle.UnderlineStyle, KCharacterStyle.DashDotLine);
+setFormatProperty(dotDashLineFormat, KCharacterStyle.UnderlineType, KCharacterStyle.SingleLine);
 
 var dotDotDashLineFormat = QTextCharFormat.clone(defaultTextFormat);
-setFormatProperty(dotDotDashLineFormat, KoCharacterStyle.UnderlineStyle, KoCharacterStyle.DashDotDotLine);
-setFormatProperty(dotDotDashLineFormat, KoCharacterStyle.UnderlineType, KoCharacterStyle.SingleLine);
+setFormatProperty(dotDotDashLineFormat, KCharacterStyle.UnderlineStyle, KCharacterStyle.DashDotDotLine);
+setFormatProperty(dotDotDashLineFormat, KCharacterStyle.UnderlineType, KCharacterStyle.SingleLine);
 
 var waveLineFormat = QTextCharFormat.clone(defaultTextFormat);
-setFormatProperty(waveLineFormat, KoCharacterStyle.UnderlineStyle, KoCharacterStyle.WaveLine);
-setFormatProperty(waveLineFormat, KoCharacterStyle.UnderlineType, KoCharacterStyle.SingleLine);
+setFormatProperty(waveLineFormat, KCharacterStyle.UnderlineStyle, KCharacterStyle.WaveLine);
+setFormatProperty(waveLineFormat, KCharacterStyle.UnderlineType, KCharacterStyle.SingleLine);
 
 cursor.insertText("This is an example of text without underline.", noLineFormat);
 

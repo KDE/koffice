@@ -32,7 +32,7 @@
 #include "changetracker/KChangeTracker.h"
 #include "changetracker/KChangeTrackerElement.h"
 #include "changetracker/KoDeleteChangeMarker.h"
-#include "styles/KoCharacterStyle.h"
+#include "styles/KCharacterStyle.h"
 #include "styles/KParagraphStyle.h"
 #include "styles/KoStyleManager.h"
 #include "styles/KoTableCellStyle.h"
@@ -362,7 +362,7 @@ void KoTextEditor::registerTrackedChange(QTextCursor &selection, KOdfGenericChan
                 QTextCursor cursor(block);
                 cursor.setPosition(fragment.position());
                 QTextCharFormat fm = fragment.charFormat();
-                fm.clearProperty(KoCharacterStyle::ChangeTrackerId);
+                fm.clearProperty(KCharacterStyle::ChangeTrackerId);
                 int to = qMin(end, fragment.position() + fragment.length());
                 cursor.setPosition(to, QTextCursor::KeepAnchor);
                 cursor.setCharFormat(fm);
@@ -384,18 +384,18 @@ void KoTextEditor::registerTrackedChange(QTextCursor &selection, KOdfGenericChan
             checker.setPosition(selectionBegin);
             KChangeTracker *changeTracker = KoTextDocument(d->document).changeTracker();
             if (!checker.atBlockStart()) {
-                int changeId = checker.charFormat().property(KoCharacterStyle::ChangeTrackerId).toInt();
+                int changeId = checker.charFormat().property(KCharacterStyle::ChangeTrackerId).toInt();
                 if (changeId && changeTracker->elementById(changeId)->changeType() == changeType)
                     idBefore = changeId;
             } else {
                 if (!checker.currentTable()) {
-                    int changeId = checker.blockFormat().intProperty(KoCharacterStyle::ChangeTrackerId);
+                    int changeId = checker.blockFormat().intProperty(KCharacterStyle::ChangeTrackerId);
                     if (changeId && changeTracker->elementById(changeId)->changeType() == changeType)
                         idBefore = changeId;
                 } else {
-                    idBefore = checker.currentTable()->format().intProperty(KoCharacterStyle::ChangeTrackerId);
+                    idBefore = checker.currentTable()->format().intProperty(KCharacterStyle::ChangeTrackerId);
                     if (!idBefore) {
-                        idBefore = checker.currentTable()->cellAt(checker).format().intProperty(KoCharacterStyle::ChangeTrackerId);
+                        idBefore = checker.currentTable()->cellAt(checker).format().intProperty(KCharacterStyle::ChangeTrackerId);
                     }
                 }
             }
@@ -403,7 +403,7 @@ void KoTextEditor::registerTrackedChange(QTextCursor &selection, KOdfGenericChan
             checker.setPosition(selectionEnd);
             if (!checker.atEnd()) {
                 checker.movePosition(QTextCursor::NextCharacter);
-                idAfter = KoTextDocument(d->document).changeTracker()->mergeableId(changeType, title, checker.charFormat().property( KoCharacterStyle::ChangeTrackerId ).toInt());
+                idAfter = KoTextDocument(d->document).changeTracker()->mergeableId(changeType, title, checker.charFormat().property( KCharacterStyle::ChangeTrackerId ).toInt());
             }
             changeId = (idBefore)?idBefore:idAfter;
 
@@ -427,7 +427,7 @@ void KoTextEditor::registerTrackedChange(QTextCursor &selection, KOdfGenericChan
             }
 
             QTextCharFormat f;
-            f.setProperty(KoCharacterStyle::ChangeTrackerId, changeId);
+            f.setProperty(KCharacterStyle::ChangeTrackerId, changeId);
             selection.mergeCharFormat(f);
 
             QTextBlock startBlock = selection.document()->findBlock(selection.anchor());
@@ -438,12 +438,12 @@ void KoTextEditor::registerTrackedChange(QTextCursor &selection, KOdfGenericChan
                     startBlock = startBlock.next();
                     QTextCursor cursor(startBlock);
                     QTextBlockFormat blockFormat;
-                    blockFormat.setProperty(KoCharacterStyle::ChangeTrackerId, changeId);
+                    blockFormat.setProperty(KCharacterStyle::ChangeTrackerId, changeId);
                     cursor.mergeBlockFormat(blockFormat);
 
                     QTextCharFormat blockCharFormat = cursor.blockCharFormat();
-                    if (blockCharFormat.hasProperty(KoCharacterStyle::ChangeTrackerId)) {
-                        blockCharFormat.clearProperty(KoCharacterStyle::ChangeTrackerId);
+                    if (blockCharFormat.hasProperty(KCharacterStyle::ChangeTrackerId)) {
+                        blockCharFormat.clearProperty(KCharacterStyle::ChangeTrackerId);
                         cursor.setBlockCharFormat(blockCharFormat);
                     }
                 } while(startBlock != endBlock);
@@ -481,11 +481,11 @@ void KoTextEditor::underline(bool underline)
     d->updateState(KoTextEditorPrivate::Format, i18n("Underline"));
     QTextCharFormat format;
     if (underline) {
-        format.setProperty(KoCharacterStyle::UnderlineType, KoCharacterStyle::SingleLine);
-        format.setProperty(KoCharacterStyle::UnderlineStyle, KoCharacterStyle::SolidLine);
+        format.setProperty(KCharacterStyle::UnderlineType, KCharacterStyle::SingleLine);
+        format.setProperty(KCharacterStyle::UnderlineStyle, KCharacterStyle::SolidLine);
     } else {
-        format.setProperty(KoCharacterStyle::UnderlineType, KoCharacterStyle::NoLineType);
-        format.setProperty(KoCharacterStyle::UnderlineStyle, KoCharacterStyle::NoLineStyle);
+        format.setProperty(KCharacterStyle::UnderlineType, KCharacterStyle::NoLineType);
+        format.setProperty(KCharacterStyle::UnderlineStyle, KCharacterStyle::NoLineStyle);
     }
 
     QTextCharFormat prevFormat(d->caret.charFormat());
@@ -499,11 +499,11 @@ void KoTextEditor::strikeOut(bool strikeout)
     d->updateState(KoTextEditorPrivate::Format, i18n("Strike Out"));
     QTextCharFormat format;
     if (strikeout) {
-        format.setProperty(KoCharacterStyle::StrikeOutType, KoCharacterStyle::SingleLine);
-        format.setProperty(KoCharacterStyle::StrikeOutStyle, KoCharacterStyle::SolidLine);
+        format.setProperty(KCharacterStyle::StrikeOutType, KCharacterStyle::SingleLine);
+        format.setProperty(KCharacterStyle::StrikeOutStyle, KCharacterStyle::SolidLine);
     } else {
-        format.setProperty(KoCharacterStyle::StrikeOutType, KoCharacterStyle::NoLineType);
-        format.setProperty(KoCharacterStyle::StrikeOutStyle, KoCharacterStyle::NoLineStyle);
+        format.setProperty(KCharacterStyle::StrikeOutType, KCharacterStyle::NoLineType);
+        format.setProperty(KCharacterStyle::StrikeOutStyle, KCharacterStyle::NoLineStyle);
     }
     QTextCharFormat prevFormat(d->caret.charFormat());
     d->caret.mergeCharFormat(format);
@@ -666,7 +666,7 @@ void KoTextEditor::setTextColor(const QColor &color)
     d->updateState(KoTextEditorPrivate::NoOp);
 }
 
-void KoTextEditor::setStyle(KoCharacterStyle *style)
+void KoTextEditor::setStyle(KCharacterStyle *style)
 {
     Q_ASSERT(style);
     d->updateState(KoTextEditorPrivate::Format, i18n("Set Character Style"));
@@ -702,7 +702,7 @@ void KoTextEditor::setDefaultFormat()
 {
     d->updateState(KoTextEditorPrivate::Format, i18n("Set default format"));
     if (KoStyleManager *styleManager = KoTextDocument(d->document).styleManager()) {
-        KoCharacterStyle *defaultCharStyle = styleManager->defaultParagraphStyle()->characterStyle();
+        KCharacterStyle *defaultCharStyle = styleManager->defaultParagraphStyle()->characterStyle();
         QTextCharFormat format;
         defaultCharStyle->applyStyle(format);
         QTextCharFormat prevFormat(d->caret.charFormat());
@@ -779,8 +779,8 @@ void KoTextEditor::insertInlineObject(KInlineObject *inliner)
 
     int startPosition = d->caret.position();
     QTextCharFormat format = d->caret.charFormat();
-    if (format.hasProperty(KoCharacterStyle::ChangeTrackerId)) {
-        format.clearProperty(KoCharacterStyle::ChangeTrackerId);
+    if (format.hasProperty(KCharacterStyle::ChangeTrackerId)) {
+        format.clearProperty(KCharacterStyle::ChangeTrackerId);
     }
 
     layout->inlineTextObjectManager()->insertInlineObject(d->caret, inliner, d->caret.charFormat());
@@ -960,14 +960,14 @@ void KoTextEditor::insertTable(int rows, int columns)
 
         int changeId;
         if (!d->caret.atBlockStart())
-            changeId = changeTracker->mergeableId(KOdfGenericChange::InsertChange, title, charFormat.intProperty(KoCharacterStyle::ChangeTrackerId));
+            changeId = changeTracker->mergeableId(KOdfGenericChange::InsertChange, title, charFormat.intProperty(KCharacterStyle::ChangeTrackerId));
         else
-            changeId = changeTracker->mergeableId(KOdfGenericChange::InsertChange, title, blockFormat.intProperty(KoCharacterStyle::ChangeTrackerId));
+            changeId = changeTracker->mergeableId(KOdfGenericChange::InsertChange, title, blockFormat.intProperty(KCharacterStyle::ChangeTrackerId));
 
         if (!changeId)
             changeId = KoTextDocument(d->document).changeTracker()->insertChangeId(title, 0);
 
-        tableFormat.setProperty(KoCharacterStyle::ChangeTrackerId, changeId);
+        tableFormat.setProperty(KCharacterStyle::ChangeTrackerId, changeId);
     }
 
     QTextTable *table = d->caret.insertTable(rows, columns, tableFormat);
@@ -1109,13 +1109,13 @@ void KoTextEditor::insertText(const QString &text)
     d->updateState(KoTextEditorPrivate::KeyPress, i18n("Key Press"));
 
     //first we make sure that we clear the inlineObject charProperty, if we have no selection
-    if (!d->caret.hasSelection() && d->caret.charFormat().hasProperty(KoCharacterStyle::InlineInstanceId))
-        d->clearCharFormatProperty(KoCharacterStyle::InlineInstanceId);
+    if (!d->caret.hasSelection() && d->caret.charFormat().hasProperty(KCharacterStyle::InlineInstanceId))
+        d->clearCharFormatProperty(KCharacterStyle::InlineInstanceId);
 
     int startPosition = d->caret.position();
     QTextCharFormat format = d->caret.charFormat();
-    if (format.hasProperty(KoCharacterStyle::ChangeTrackerId)) {
-        format.clearProperty(KoCharacterStyle::ChangeTrackerId);
+    if (format.hasProperty(KCharacterStyle::ChangeTrackerId)) {
+        format.clearProperty(KCharacterStyle::ChangeTrackerId);
     }
     d->caret.insertText(text, format);
     int endPosition = d->caret.position();
@@ -1190,8 +1190,8 @@ void KoTextEditor::newLine()
 
     int startPosition = d->caret.position();
     QTextCharFormat format = d->caret.charFormat();
-    if (format.hasProperty(KoCharacterStyle::ChangeTrackerId)) {
-        format.clearProperty(KoCharacterStyle::ChangeTrackerId);
+    if (format.hasProperty(KCharacterStyle::ChangeTrackerId)) {
+        format.clearProperty(KCharacterStyle::ChangeTrackerId);
     }
 
     QTextBlockFormat bf = d->caret.blockFormat();

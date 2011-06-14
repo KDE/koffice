@@ -22,7 +22,7 @@
 
 #include <ui_LanguageTab.h>
 
-class KoCharacterStyle;
+class KCharacterStyle;
 
 class LanguageTab : public QWidget
 {
@@ -33,8 +33,8 @@ public:
     ~LanguageTab();
 
     QString language() const;
-    void setDisplay(KoCharacterStyle *style);
-    void save(KoCharacterStyle *style) const;
+    void setDisplay(KCharacterStyle *style);
+    void save(KCharacterStyle *style) const;
 
 signals:
     void languageChanged();

@@ -44,11 +44,11 @@ class KOdfGenericStyle;
  * shared with all the characters next to it that have the same style (see
  * QTextFragment).
  * In a document the instances of QTextCharFormat which are based on a
- * KoCharacterStyle have a property StyleId with an integer as value which
+ * KCharacterStyle have a property StyleId with an integer as value which
  * equals styleId() of that style.
  * @see KoStyleManager
  */
-class KOTEXT_EXPORT KoCharacterStyle : public QObject
+class KOTEXT_EXPORT KCharacterStyle : public QObject
 {
     Q_OBJECT
 public:
@@ -132,11 +132,11 @@ public:
      * Constructor. Initializes with standard size/font properties.
      * @param parent the parent object for memory management purposes.
      */
-    explicit KoCharacterStyle(QObject *parent = 0);
+    explicit KCharacterStyle(QObject *parent = 0);
     /// Copy constructor
-    explicit KoCharacterStyle(const QTextCharFormat &format, QObject *parent = 0);
+    explicit KCharacterStyle(const QTextCharFormat &format, QObject *parent = 0);
     /// Destructor
-    ~KoCharacterStyle();
+    ~KCharacterStyle();
 
     /// return the effective font for this style
     QFont font() const;
@@ -209,55 +209,55 @@ public:
     /// See similar named method on QTextCharFormat
     void clearForeground();
 
-    /// Apply a font strike out style to this KoCharacterStyle
+    /// Apply a font strike out style to this KCharacterStyle
     void setStrikeOutStyle(LineStyle style);
-    /// Get the current font strike out style of this KoCharacterStyle
+    /// Get the current font strike out style of this KCharacterStyle
     LineStyle strikeOutStyle() const;
-    /// Apply a font strike out width to this KoCharacterStyle
+    /// Apply a font strike out width to this KCharacterStyle
     void setStrikeOutWidth(LineWeight weight, qreal width);
-    /// Get the current font strike out width of this KoCharacterStyle
+    /// Get the current font strike out width of this KCharacterStyle
     void strikeOutWidth(LineWeight &weight, qreal &width) const;
-    /// Apply a font strike out color to this KoCharacterStyle
+    /// Apply a font strike out color to this KCharacterStyle
     void setStrikeOutColor(const QColor &color);
-    /// Get the current font strike out color of this KoCharacterStyle
+    /// Get the current font strike out color of this KCharacterStyle
     QColor strikeOutColor() const;
-    /// Apply a font strike out color to this KoCharacterStyle
+    /// Apply a font strike out color to this KCharacterStyle
     void setStrikeOutType(LineType lineType);
-    /// Get the current font strike out color of this KoCharacterStyle
+    /// Get the current font strike out color of this KCharacterStyle
     LineType strikeOutType() const;
-    /// Apply a strike out mode of this KoCharacterStyle
+    /// Apply a strike out mode of this KCharacterStyle
     void setStrikeOutMode(LineMode lineMode);
-    /// Get the current strike out mode of this KoCharacterStyle
+    /// Get the current strike out mode of this KCharacterStyle
     LineMode strikeOutMode() const;
-    /// Apply a strike out text of this KoCharacterStyle
+    /// Apply a strike out text of this KCharacterStyle
     void setStrikeOutText(const QString &text);
-    /// Get the current strike out text of this KoCharacterStyle
+    /// Get the current strike out text of this KCharacterStyle
     QString strikeOutText() const;
 
-    /// Apply a font underline style to this KoCharacterStyle
+    /// Apply a font underline style to this KCharacterStyle
     void setUnderlineStyle(LineStyle style);
-    /// Get the current font underline style of this KoCharacterStyle
+    /// Get the current font underline style of this KCharacterStyle
     LineStyle underlineStyle() const;
-    /// Apply a font underline width to this KoCharacterStyle
+    /// Apply a font underline width to this KCharacterStyle
     void setUnderlineWidth(LineWeight weight, qreal width);
-    /// Get the current font underline width of this KoCharacterStyle
+    /// Get the current font underline width of this KCharacterStyle
     void underlineWidth(LineWeight &weight, qreal &width) const;
-    /// Apply a font underline color to this KoCharacterStyle
+    /// Apply a font underline color to this KCharacterStyle
     void setUnderlineColor(const QColor &color);
-    /// Get the current font underline color of this KoCharacterStyle
+    /// Get the current font underline color of this KCharacterStyle
     QColor underlineColor() const;
-    /// Apply a font underline color to this KoCharacterStyle
+    /// Apply a font underline color to this KCharacterStyle
     void setUnderlineType(LineType lineType);
-    /// Get the current font underline color of this KoCharacterStyle
+    /// Get the current font underline color of this KCharacterStyle
     LineType underlineType() const;
-    /// Apply a underline mode to this KoCharacterStyle
+    /// Apply a underline mode to this KCharacterStyle
     void setUnderlineMode(LineMode mode);
-    /// Get the current underline mode of this KoCharacterStyle
+    /// Get the current underline mode of this KCharacterStyle
     LineMode underlineMode() const;
 
-    /// Apply text rotation angle to this KoCharacterStyle
+    /// Apply text rotation angle to this KCharacterStyle
     void setTextRotationAngle(RotationAngle angle);
-    /// Get the current text rotation angle of this KoCharacterStyle
+    /// Get the current text rotation angle of this KCharacterStyle
     RotationAngle textRotationAngle() const;
     /**
      *  RotationScale pecifies whether for rotated text the width of the text
@@ -265,11 +265,11 @@ public:
      *  should remain fixed, therefore changing the current line height
      */
     void setTextRotationScale(RotationScale scale);
-    /// Get the current text rotation scale of this KoCharacterStyle
+    /// Get the current text rotation scale of this KCharacterStyle
     RotationScale textRotationScale() const;
-    /// Apply text scale to this KoCharacterStyle
+    /// Apply text scale to this KCharacterStyle
     void setTextScale(int scale);
-    /// Get the current text scale of this KoCharacterStyle
+    /// Get the current text scale of this KCharacterStyle
     int textScale() const;
 
     /// Set the country
@@ -284,10 +284,10 @@ public:
     void setHasHyphenation(bool on);
     bool hasHyphenation() const;
 
-    void copyProperties(const KoCharacterStyle *style);
+    void copyProperties(const KCharacterStyle *style);
     void copyProperties(const QTextCharFormat &format);
 
-    KoCharacterStyle *clone(QObject *parent = 0);
+    KCharacterStyle *clone(QObject *parent = 0);
 
     /// return the name of the style.
     QString name() const;
@@ -328,12 +328,12 @@ public:
     /// return true if this style has a non-default value set for the Property
     bool hasProperty(int key) const;
 
-    bool operator==(const KoCharacterStyle &other) const;
+    bool operator==(const KCharacterStyle &other) const;
 
     /**
      * Removes properties from this style that have the same value in other style.
      */
-    void removeDuplicates(const KoCharacterStyle &other);
+    void removeDuplicates(const KCharacterStyle &other);
 
     /**
      * Removes properties from this style that have the same value in other format.

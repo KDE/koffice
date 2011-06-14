@@ -25,7 +25,7 @@
 
 class KoStyleManager;
 class KParagraphStyle;
-class KoCharacterStyle;
+class KCharacterStyle;
 class QSignalMapper;
 
 class StylesModel : public QAbstractItemModel
@@ -48,7 +48,7 @@ public:
     virtual Qt::ItemFlags flags(const QModelIndex &index) const;
 
     KParagraphStyle *paragraphStyleForIndex(const QModelIndex &index) const;
-    KoCharacterStyle *characterStyleForIndex(const QModelIndex &index) const;
+    KCharacterStyle *characterStyleForIndex(const QModelIndex &index) const;
 
     void setStyleManager(KoStyleManager *manager);
 
@@ -67,16 +67,16 @@ public slots:
     QModelIndex setCurrentParagraphStyle(int styleId, bool unchanged);
     /**
         Sets the character style that is to be marked as the 'active' one.
-        @param styleId the id from KoCharacterStyle::styleId()
+        @param styleId the id from KCharacterStyle::styleId()
         @param unchanged if true the icon will display the character style in the text has no local modifications.
     */
     void setCurrentCharacterStyle(int styleId, bool unchanged);
 
 private slots:
     void addParagraphStyle(KParagraphStyle*, bool recalc = true);
-    void addCharacterStyle(KoCharacterStyle*, bool recalc = true);
+    void addCharacterStyle(KCharacterStyle*, bool recalc = true);
     void removeParagraphStyle(KParagraphStyle*, bool recalc = true);
-    void removeCharacterStyle(KoCharacterStyle*, bool recalc = true);
+    void removeCharacterStyle(KCharacterStyle*, bool recalc = true);
     void updateName(int styleId);
 
 protected:

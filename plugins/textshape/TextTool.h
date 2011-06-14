@@ -36,7 +36,7 @@
 class TextEditingPluginContainer;
 class InsertCharacter;
 class KChangeTracker;
-class KoCharacterStyle;
+class KCharacterStyle;
 class KoColor;
 class KoColorPopupAction;
 class KParagraphStyle;
@@ -229,7 +229,7 @@ private slots:
     /// set Paragraph style of current selection. Exisiting style will be completely overridden.
     void setStyle(KParagraphStyle *syle);
     /// set the characterStyle of the current selection. see above.
-    void setStyle(KoCharacterStyle *style);
+    void setStyle(KCharacterStyle *style);
     /// show dialog with markers (bookmarks, pages)
     void jumpToText();
 

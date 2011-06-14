@@ -215,7 +215,7 @@ QObject* Module::characterStyle(const QString& name)
 {
     KoStyleManager *styleManager = kwDoc()->resourceManager()->resource(KoText::StyleManager).value<KoStyleManager*>();
     Q_ASSERT(styleManager);
-    KoCharacterStyle* s = styleManager->characterStyle(name);
+    KCharacterStyle* s = styleManager->characterStyle(name);
     return s ? new CharacterStyle(this, s) : 0;
 }
 
@@ -223,7 +223,7 @@ QObject* Module::addCharacterStyle(const QString& name)
 {
     KoStyleManager *styleManager = kwDoc()->resourceManager()->resource(KoText::StyleManager).value<KoStyleManager*>();
     Q_ASSERT(styleManager);
-    KoCharacterStyle* s = new KoCharacterStyle();
+    KCharacterStyle* s = new KCharacterStyle();
     s->setName(name);
     styleManager->add(s);
     return new CharacterStyle(this, s);

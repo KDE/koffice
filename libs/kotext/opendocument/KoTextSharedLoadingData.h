@@ -31,7 +31,7 @@
 class QString;
 class KOdfLoadingContext;
 class KParagraphStyle;
-class KoCharacterStyle;
+class KCharacterStyle;
 class KListStyle;
 class KoTableStyle;
 class KoTableColumnStyle;
@@ -88,7 +88,7 @@ public:
      * @param stylesDotXml If set the styles from styles.xml are use if unset styles from content.xml are used.
      * @return The character style for the given name or 0 if not found
      */
-    KoCharacterStyle *characterStyle(const QString &name, bool stylesDotXml) const;
+    KCharacterStyle *characterStyle(const QString &name, bool stylesDotXml) const;
 
     /**
      * Return all character styles.
@@ -96,7 +96,7 @@ public:
      * @param stylesDotXml If set the styles from styles.xml are used if unset styles from content.xml are used.
      * @return All character styles from the givin file
      */
-    QList<KoCharacterStyle*> characterStyles(bool stylesDotXml) const;
+    QList<KCharacterStyle*> characterStyles(bool stylesDotXml) const;
 
     /**
      * Get the list style for the given name
@@ -158,12 +158,12 @@ public:
      * This is done so the application default style needs to be loaded only once.
      * The ownership of the style is transfered to this class.
      */
-    void setApplicationDefaultStyle(KoCharacterStyle *applicationDefaultStyle);
+    void setApplicationDefaultStyle(KCharacterStyle *applicationDefaultStyle);
 
     /**
      * Get the application default style
      */
-    KoCharacterStyle *applicationDefaultStyle() const;
+    KCharacterStyle *applicationDefaultStyle() const;
 
 protected:
     /**
@@ -194,7 +194,7 @@ private:
     struct OdfCharStyle {
         QString odfName;
         QString parentStyle;
-        KoCharacterStyle *style;
+        KCharacterStyle *style;
     };
     QList<OdfCharStyle> loadCharacterStyles(KoShapeLoadingContext &context, QList<KXmlElement*> styleElements, KoStyleManager *sm);
 

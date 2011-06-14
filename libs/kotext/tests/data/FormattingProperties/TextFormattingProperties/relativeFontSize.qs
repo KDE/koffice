@@ -3,11 +3,11 @@ include("common.qs");
 var font = defaultTextFormat.font();
 
 var sizeP5Format = QTextCharFormat.clone(defaultTextFormat); // size+5
-font.setPointSizeF(12.0 + 5); // hardcoded since KoCharacterStyle is hardcoded too
+font.setPointSizeF(12.0 + 5); // hardcoded since KCharacterStyle is hardcoded too
 sizeP5Format.setFont(font);
 
 var sizeM3Format = QTextCharFormat.clone(defaultTextFormat); // size-3
-font.setPointSizeF(12.0 - 3); // hardcoded since KoCharacterStyle is hardcoded too
+font.setPointSizeF(12.0 - 3); // hardcoded since KCharacterStyle is hardcoded too
 sizeM3Format.setFont(font);
 
 cursor.insertText("This test case checks font size, this is an example of text with ", defaultTextFormat);

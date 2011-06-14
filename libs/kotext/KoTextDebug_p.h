@@ -47,7 +47,7 @@ class QTextFrameFormat;
 class QTextBlockFormat;
 class QTextStream;
 class KParagraphStyle;
-class KoCharacterStyle;
+class KCharacterStyle;
 class KoTableStyle;
 class KoTableCellStyle;
 
@@ -173,7 +173,7 @@ public:
      * @param style the character style from which properties should be fetched.
      * @return the formatted attribute string.
      */
-    static QString textAttributes(const KoCharacterStyle &style);
+    static QString textAttributes(const KCharacterStyle &style);
 
     /**
      * Get the properties of the given text block format.

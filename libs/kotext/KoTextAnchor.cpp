@@ -41,7 +41,7 @@
 
 #include "changetracker/KChangeTracker.h"
 #include "changetracker/KChangeTrackerElement.h"
-#include "styles/KoCharacterStyle.h"
+#include "styles/KCharacterStyle.h"
 #include "KoTextDocument.h"
 #include <KOdfGenericChanges.h>
 
@@ -244,7 +244,7 @@ void KoTextAnchor::paint(QPainter &painter, QPaintDevice *, const QRectF &rect, 
     // This section of code is to indicate changes done to KoTextAnchors. Once the new approach is complete this can be removed
     // In this approach we draw a rectangle around the shape with the appropriate change indication color.
     Q_D(KoTextAnchor);
-    int changeId = d->format.property(KoCharacterStyle::ChangeTrackerId).toInt();
+    int changeId = d->format.property(KCharacterStyle::ChangeTrackerId).toInt();
     bool drawChangeRect = false;
 
     QRectF changeRect = rect;

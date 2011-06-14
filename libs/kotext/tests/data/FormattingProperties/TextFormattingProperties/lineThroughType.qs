@@ -1,16 +1,16 @@
 include("common.qs");
 
 var noLineThroughFormat = QTextCharFormat.clone(defaultTextFormat);
-setFormatProperty(noLineThroughFormat, KoCharacterStyle.StrikeOutStyle, KoCharacterStyle.NoLineStyle);
-setFormatProperty(noLineThroughFormat, KoCharacterStyle.StrikeOutType, KoCharacterStyle.NoLineTYpe);
+setFormatProperty(noLineThroughFormat, KCharacterStyle.StrikeOutStyle, KCharacterStyle.NoLineStyle);
+setFormatProperty(noLineThroughFormat, KCharacterStyle.StrikeOutType, KCharacterStyle.NoLineTYpe);
 
 var singleLineThroughFormat = QTextCharFormat.clone(defaultTextFormat);
-setFormatProperty(singleLineThroughFormat, KoCharacterStyle.StrikeOutStyle, KoCharacterStyle.SolidLine);
-setFormatProperty(singleLineThroughFormat, KoCharacterStyle.StrikeOutType, KoCharacterStyle.SingleLine);
+setFormatProperty(singleLineThroughFormat, KCharacterStyle.StrikeOutStyle, KCharacterStyle.SolidLine);
+setFormatProperty(singleLineThroughFormat, KCharacterStyle.StrikeOutType, KCharacterStyle.SingleLine);
 
 var doubleLineThroughFormat = QTextCharFormat.clone(defaultTextFormat);
-setFormatProperty(doubleLineThroughFormat, KoCharacterStyle.StrikeOutStyle, KoCharacterStyle.SolidLine);
-setFormatProperty(doubleLineThroughFormat, KoCharacterStyle.StrikeOutType, KoCharacterStyle.DoubleLine);
+setFormatProperty(doubleLineThroughFormat, KCharacterStyle.StrikeOutStyle, KCharacterStyle.SolidLine);
+setFormatProperty(doubleLineThroughFormat, KCharacterStyle.StrikeOutType, KCharacterStyle.DoubleLine);
 
 cursor.insertText("this is an example of text with no line trough", noLineThroughFormat); // typo intentional
 

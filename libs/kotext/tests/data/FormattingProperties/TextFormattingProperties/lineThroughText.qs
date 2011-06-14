@@ -1,28 +1,28 @@
 include("common.qs");
 
 var tf_plain = QTextCharFormat.clone(defaultTextFormat);
-setFormatProperty(tf_plain, KoCharacterStyle.StrikeOutStyle, KoCharacterStyle.NoLineStyle);
-setFormatProperty(tf_plain, KoCharacterStyle.StrikeOutText, "/");
+setFormatProperty(tf_plain, KCharacterStyle.StrikeOutStyle, KCharacterStyle.NoLineStyle);
+setFormatProperty(tf_plain, KCharacterStyle.StrikeOutText, "/");
 
 var tf = QTextCharFormat.clone(defaultTextFormat);
-setFormatProperty(tf, KoCharacterStyle.StrikeOutStyle, KoCharacterStyle.SolidLine);
-setFormatProperty(tf, KoCharacterStyle.StrikeOutType, KoCharacterStyle.SingleLine);
+setFormatProperty(tf, KCharacterStyle.StrikeOutStyle, KCharacterStyle.SolidLine);
+setFormatProperty(tf, KCharacterStyle.StrikeOutType, KCharacterStyle.SingleLine);
 
-setFormatProperty(tf, KoCharacterStyle.StrikeOutText, "/");
+setFormatProperty(tf, KCharacterStyle.StrikeOutText, "/");
 cursor.insertText("this is an example of text with line through /", tf);
 cursor.insertBlock();
 cursor.insertText("the line through text is /.", tf_plain);
 cursor.insertBlock();
 
 cursor.insertBlock();
-setFormatProperty(tf, KoCharacterStyle.StrikeOutText, "x");
+setFormatProperty(tf, KCharacterStyle.StrikeOutText, "x");
 cursor.insertText("this is an example of text with line through x", tf);
 cursor.insertBlock();
 cursor.insertText("the line through text is x.", tf_plain);
 cursor.insertBlock();
 
 cursor.insertBlock();
-setFormatProperty(tf, KoCharacterStyle.StrikeOutText, "--x--");
+setFormatProperty(tf, KCharacterStyle.StrikeOutText, "--x--");
 cursor.insertText("this is an example of text with line through --x--", tf);
 cursor.insertBlock();
 cursor.insertText("the line through text is --x--.", tf_plain);

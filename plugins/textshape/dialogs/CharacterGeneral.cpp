@@ -27,7 +27,7 @@
 #include "FormattingPreview.h"
 
 #include <KoStyleManager.h>
-#include <KoCharacterStyle.h>
+#include <KCharacterStyle.h>
 
 #include "kdebug.h"
 
@@ -46,8 +46,8 @@ CharacterGeneral::CharacterGeneral(QWidget *parent, bool uniqueFormat)
     connect(m_characterDecorations, SIGNAL(textColorChanged(QColor)), this, SLOT(slotTextColorChanged(QColor)));
 
     m_characterHighlighting = new CharacterHighlighting(uniqueFormat, this);
-    connect(m_characterHighlighting, SIGNAL(underlineChanged(KoCharacterStyle::LineType, KoCharacterStyle::LineStyle, QColor)), this, SLOT(slotUnderlineChanged(KoCharacterStyle::LineType, KoCharacterStyle::LineStyle, QColor)));
-    connect(m_characterHighlighting, SIGNAL(strikethroughChanged(KoCharacterStyle::LineType, KoCharacterStyle::LineStyle, QColor)), this, SLOT(slotStrikethroughChanged(KoCharacterStyle::LineType, KoCharacterStyle::LineStyle, QColor)));
+    connect(m_characterHighlighting, SIGNAL(underlineChanged(KCharacterStyle::LineType, KCharacterStyle::LineStyle, QColor)), this, SLOT(slotUnderlineChanged(KCharacterStyle::LineType, KCharacterStyle::LineStyle, QColor)));
+    connect(m_characterHighlighting, SIGNAL(strikethroughChanged(KCharacterStyle::LineType, KCharacterStyle::LineStyle, QColor)), this, SLOT(slotStrikethroughChanged(KCharacterStyle::LineType, KCharacterStyle::LineStyle, QColor)));
     connect(m_characterHighlighting, SIGNAL(capitalizationChanged(QFont::Capitalization)), this, SLOT(slotCapitalizationChanged(QFont::Capitalization)));
 
     m_fontTab = new FontTab(uniqueFormat, this);
@@ -83,7 +83,7 @@ void CharacterGeneral::setStyleNameVisible(bool visible)
     }
 }
 
-void CharacterGeneral::setStyle(KoCharacterStyle *style)
+void CharacterGeneral::setStyle(KCharacterStyle *style)
 {
     m_style = style;
     if (m_style == 0)
@@ -100,9 +100,9 @@ void CharacterGeneral::setStyle(KoCharacterStyle *style)
     m_blockSignals = false;
 }
 
-void CharacterGeneral::save(KoCharacterStyle *style)
+void CharacterGeneral::save(KCharacterStyle *style)
 {
-    KoCharacterStyle *savingStyle;
+    KCharacterStyle *savingStyle;
     if (style == 0) {
         if (m_style == 0)
             return;
@@ -151,12 +151,12 @@ void CharacterGeneral::slotTextColorChanged(QColor color)
     widget.preview->setTextColor(color);
 }
 
-void CharacterGeneral::slotUnderlineChanged(KoCharacterStyle::LineType lineType, KoCharacterStyle::LineStyle lineStyle, QColor lineColor)
+void CharacterGeneral::slotUnderlineChanged(KCharacterStyle::LineType lineType, KCharacterStyle::LineStyle lineStyle, QColor lineColor)
 {
     widget.preview->setUnderline(lineType, lineStyle, lineColor);
 }
 
-void CharacterGeneral::slotStrikethroughChanged(KoCharacterStyle::LineType lineType, KoCharacterStyle::LineStyle lineStyle, QColor lineColor)
+void CharacterGeneral::slotStrikethroughChanged(KCharacterStyle::LineType lineType, KCharacterStyle::LineStyle lineStyle, QColor lineColor)
 {
     widget.preview->setStrikethrough(lineType, lineStyle, lineColor);
 }
