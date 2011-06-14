@@ -37,10 +37,10 @@
 #include <QtGui/QBrush>
 #include <QtGui/QPainter>
 
-class KoPatternBackgroundPrivate : public KoShapeBackgroundPrivate
+class KPatternBackgroundPrivate : public KoShapeBackgroundPrivate
 {
 public:
-    KoPatternBackgroundPrivate()
+    KPatternBackgroundPrivate()
         : repeat(KPatternBackground::Tiled)
         , refPoint(KPatternBackground::TopLeft)
         , imageCollection(0)
@@ -48,7 +48,7 @@ public:
     {
     }
 
-    ~KoPatternBackgroundPrivate() {
+    ~KPatternBackgroundPrivate() {
         delete imageData;
     }
 
@@ -131,7 +131,7 @@ public:
 
 
 KPatternBackground::KPatternBackground(KImageCollection * imageCollection)
-        : KoShapeBackground(*(new KoPatternBackgroundPrivate()))
+        : KoShapeBackground(*(new KPatternBackgroundPrivate()))
 {
     Q_D(KPatternBackground);
     d->imageCollection = imageCollection;
@@ -256,7 +256,7 @@ KPatternBackground &KPatternBackground::operator = (const KPatternBackground &rh
     if (this == &rhs)
         return *this;
 
-    const KoPatternBackgroundPrivate *otherD = static_cast<const KoPatternBackgroundPrivate*>(rhs.d_func());
+    const KPatternBackgroundPrivate *otherD = static_cast<const KPatternBackgroundPrivate*>(rhs.d_func());
 
     d->matrix = otherD->matrix;
     d->repeat = otherD->repeat;

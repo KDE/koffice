@@ -26,7 +26,7 @@
 
 class KImageCollection;
 class KOdfLoadingContext;
-class KoPatternBackgroundPrivate;
+class KPatternBackgroundPrivate;
 class KImageData;
 
 /// A pattern shape background
