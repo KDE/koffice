@@ -23,7 +23,7 @@
 #include "KShapeContainer.h"
 #include "flake_export.h"
 
-class KoShapeLayerPrivate;
+class KShapeLayerPrivate;
 
 /**
  * Provides arranging shapes into layers.
