@@ -26,7 +26,7 @@
 #include <KShapeKeepAspectRatioCommand.h>
 #include <KoShapeMoveCommand.h>
 #include <KoShapeSizeCommand.h>
-#include <KoShapeLockCommand.h>
+#include <KShapeLockCommand.h>
 
 #include <kdebug.h>
 
@@ -270,7 +270,7 @@ QUndoCommand *KWFrameGeometry::createCommand(QUndoCommand *parent)
             QList<QPointF>() << shape->position(), parent);
     }
     if (m_originalGeometryLock != shape->isGeometryProtected()) {
-        new KoShapeLockCommand(QList<KShape*>() << shape, QList<bool>() << m_originalGeometryLock,
+        new KShapeLockCommand(QList<KShape*>() << shape, QList<bool>() << m_originalGeometryLock,
             QList<bool>() << !m_originalGeometryLock, parent);
     }
     return parent;

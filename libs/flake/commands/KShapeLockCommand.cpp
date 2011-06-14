@@ -18,7 +18,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoShapeLockCommand.h"
+#include "KShapeLockCommand.h"
 #include "KShape.h"
 
 #include <klocale.h>
@@ -31,7 +31,7 @@ public:
     QList<bool> newLock;       /// new lock states
 };
 
-KoShapeLockCommand::KoShapeLockCommand(const QList<KShape*> &shapes, const QList<bool> &oldLock, const QList<bool> &newLock, QUndoCommand *parent)
+KShapeLockCommand::KShapeLockCommand(const QList<KShape*> &shapes, const QList<bool> &oldLock, const QList<bool> &newLock, QUndoCommand *parent)
         : QUndoCommand(parent),
         d(new KoShapeLockCommandPrivate())
 {
@@ -45,11 +45,11 @@ KoShapeLockCommand::KoShapeLockCommand(const QList<KShape*> &shapes, const QList
     setText(i18n("Lock Shapes"));
 }
 
-KoShapeLockCommand::~KoShapeLockCommand()
+KShapeLockCommand::~KShapeLockCommand()
 {
 }
 
-void KoShapeLockCommand::redo()
+void KShapeLockCommand::redo()
 {
     QUndoCommand::redo();
     for (int i = 0; i < d->shapes.count(); ++i) {
@@ -57,7 +57,7 @@ void KoShapeLockCommand::redo()
     }
 }
 
-void KoShapeLockCommand::undo()
+void KShapeLockCommand::undo()
 {
     QUndoCommand::undo();
     for (int i = 0; i < d->shapes.count(); ++i) {
