@@ -93,7 +93,7 @@ protected:
 
 private:
     void updateOptionsWidget();
-    bool segmentAtPoint(const QPointF &point, KoPathShape* &shape, KoPathPoint* &segmentStart, qreal &pointParam);
+    bool segmentAtPoint(const QPointF &point, KoPathShape* &shape, KPathPoint* &segmentStart, qreal &pointParam);
 
 private slots:
     void pointTypeChanged(QAction *type);

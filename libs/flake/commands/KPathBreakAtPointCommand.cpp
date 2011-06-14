@@ -40,7 +40,7 @@ KPathBreakAtPointCommand::KPathBreakAtPointCommand(const QList<KoPathPointData> 
     QList<KoPathPointData>::const_iterator it(sortedPointDataList.constBegin());
     for (; it != sortedPointDataList.constEnd(); ++it) {
         KoPathShape * pathShape = it->pathShape;
-        KoPathPoint * point = pathShape->pointByIndex(it->pointIndex);
+        KPathPoint * point = pathShape->pointByIndex(it->pointIndex);
         if (! point)
             continue;
 
@@ -53,7 +53,7 @@ KPathBreakAtPointCommand::KPathBreakAtPointCommand(const QList<KoPathPointData> 
         }
 
         m_pointDataList.append(*it);
-        m_points.push_back(new KoPathPoint(*point));
+        m_points.push_back(new KPathPoint(*point));
         m_closedIndex.push_back(KoPathPointIndex(-1, 0));
     }
 

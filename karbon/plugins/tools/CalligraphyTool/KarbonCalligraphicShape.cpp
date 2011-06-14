@@ -19,7 +19,7 @@
 
 #include "KarbonCalligraphicShape.h"
 
-#include <KoPathPoint.h>
+#include <KPathPoint.h>
 
 #include "KarbonSimplifyPath.h"
 #include <KarbonCurveFit.h>
@@ -106,8 +106,8 @@ appendPointToPath(const KarbonCalligraphicPoint &p)
         if (flip) {
             int index = pointCount() / 2;
             // find the last two points
-            KoPathPoint *last1 = pointByIndex(KoPathPointIndex(0, index - 1));
-            KoPathPoint *last2 = pointByIndex(KoPathPointIndex(0, index));
+            KPathPoint *last1 = pointByIndex(KoPathPointIndex(0, index - 1));
+            KPathPoint *last2 = pointByIndex(KoPathPointIndex(0, index));
 
             last1->removeControlPoint1();
             last1->removeControlPoint2();
@@ -119,8 +119,8 @@ appendPointToPath(const KarbonCalligraphicPoint &p)
         if (m_lastWasFlip) {
             int index = pointCount() / 2;
             // find the previous two points
-            KoPathPoint *prev1 = pointByIndex(KoPathPointIndex(0, index - 2));
-            KoPathPoint *prev2 = pointByIndex(KoPathPointIndex(0, index + 1));
+            KPathPoint *prev1 = pointByIndex(KoPathPointIndex(0, index - 2));
+            KPathPoint *prev2 = pointByIndex(KoPathPointIndex(0, index + 1));
 
             prev1->removeControlPoint1();
             prev1->removeControlPoint2();
@@ -143,8 +143,8 @@ appendPointToPath(const KarbonCalligraphicPoint &p)
         // duplicate the last point to make the points remain "balanced"
         // needed to keep all indexes code (else I would need to change
         // everything in the code...)
-        KoPathPoint *last = pointByIndex(KoPathPointIndex(0, pointCount() - 1));
-        KoPathPoint *newPoint = new KoPathPoint(this, last->point());
+        KPathPoint *last = pointByIndex(KoPathPointIndex(0, pointCount() - 1));
+        KPathPoint *newPoint = new KPathPoint(this, last->point());
         insertPoint(newPoint, KoPathPointIndex(0, pointCount()));
         close();
     }
@@ -153,8 +153,8 @@ appendPointToPath(const KarbonCalligraphicPoint &p)
 void KarbonCalligraphicShape::appendPointsToPathAux(const QPointF &p1,
         const QPointF &p2)
 {
-    KoPathPoint *pathPoint1 = new KoPathPoint(this, p1);
-    KoPathPoint *pathPoint2 = new KoPathPoint(this, p2);
+    KPathPoint *pathPoint1 = new KPathPoint(this, p1);
+    KPathPoint *pathPoint2 = new KPathPoint(this, p2);
 
     // calculate the index of the insertion position
     int index = pointCount() / 2;
@@ -342,7 +342,7 @@ void KarbonCalligraphicShape::addCap(int index1, int index2, int pointIndex,
     QPointF direction = QLineF(QPointF(0, 0), p2 - p1).unitVector().p2();
     QPointF p = p2 + direction * m_caps * width;
 
-    KoPathPoint * newPoint = new KoPathPoint(this, p);
+    KPathPoint * newPoint = new KPathPoint(this, p);
 
     qreal angle = m_points[index2]->angle();
     if (inverted)

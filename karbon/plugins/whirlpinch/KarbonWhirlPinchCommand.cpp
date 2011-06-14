@@ -20,7 +20,7 @@
 #include "KarbonWhirlPinchCommand.h"
 
 #include <KoPathShape.h>
-#include <KoPathPoint.h>
+#include <KPathPoint.h>
 
 #include <klocale.h>
 #include <math.h>
@@ -28,7 +28,7 @@
 // the original data of a path point
 struct PointData
 {
-    PointData(KoPathPoint * p)
+    PointData(KPathPoint * p)
     {
         KoPathShape * shape = p->parent();
         // save points in document coordinates
@@ -37,7 +37,7 @@ struct PointData
         oldControlPoint2 = shape->shapeToDocument(p->controlPoint2());
     }
 
-    void restorePoint(KoPathPoint * p)
+    void restorePoint(KPathPoint * p)
     {
         KoPathShape * shape = p->parent();
         p->setPoint(shape->documentToShape(oldNode));
@@ -113,7 +113,7 @@ KarbonWhirlPinchCommand::KarbonWhirlPinchCommand(KoPathShape * path, qreal angle
         QList<PointData> subpathData;
         int pointCount = d->pathShape->subpathPointCount(subpathIndex);
         for (int pointIndex = 0; pointIndex < pointCount; ++pointIndex) {
-            KoPathPoint * p = d->pathShape->pointByIndex(KoPathPointIndex(subpathIndex, pointIndex));
+            KPathPoint * p = d->pathShape->pointByIndex(KoPathPointIndex(subpathIndex, pointIndex));
             subpathData.append(PointData(p));
         }
         d->pathData.append(subpathData);
@@ -132,7 +132,7 @@ void KarbonWhirlPinchCommand::redo()
     for (uint subpathIndex = 0; subpathIndex < subpathCount; ++subpathIndex) {
         uint pointCount = d->pathData[subpathIndex].count();
         for (uint pointIndex = 0; pointIndex < pointCount; ++pointIndex) {
-            KoPathPoint * p = d->pathShape->pointByIndex(KoPathPointIndex(subpathIndex, pointIndex));
+            KPathPoint * p = d->pathShape->pointByIndex(KoPathPointIndex(subpathIndex, pointIndex));
             p->setPoint(d->whirlPinch(p->point()));
             if (p->activeControlPoint1())
                 p->setControlPoint1(d->whirlPinch(p->controlPoint1()));
@@ -153,7 +153,7 @@ void KarbonWhirlPinchCommand::undo()
     for (uint subpathIndex = 0; subpathIndex < subpathCount; ++subpathIndex) {
         uint pointCount = d->pathData[subpathIndex].count();
         for (uint pointIndex = 0; pointIndex < pointCount; ++pointIndex) {
-            KoPathPoint * p = d->pathShape->pointByIndex(KoPathPointIndex(subpathIndex, pointIndex));
+            KPathPoint * p = d->pathShape->pointByIndex(KoPathPointIndex(subpathIndex, pointIndex));
             d->pathData[subpathIndex][pointIndex].restorePoint(p);
         }
     }

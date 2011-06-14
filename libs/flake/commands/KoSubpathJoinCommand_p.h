@@ -35,7 +35,7 @@
 
 #include <QUndoCommand>
 #include <QPointF>
-#include "KoPathPoint.h"
+#include "KPathPoint.h"
 #include "KoPathPointData.h"
 
 /// The undo / redo command for joining two subpath end points
@@ -65,8 +65,8 @@ private:
     // the control points have to be stored in document positions
     QPointF m_oldControlPoint1;
     QPointF m_oldControlPoint2;
-    KoPathPoint::PointProperties m_oldProperties1;
-    KoPathPoint::PointProperties m_oldProperties2;
+    KPathPoint::PointProperties m_oldProperties1;
+    KPathPoint::PointProperties m_oldProperties2;
     enum Reverse {
         ReverseFirst = 1,
         ReverseSecond = 2

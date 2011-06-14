@@ -22,7 +22,7 @@
 #include "KCanvasBase.h"
 #include "KoShapeManager.h"
 #include "KoPathShape.h"
-#include "KoPathPoint.h"
+#include "KPathPoint.h"
 
 KoSnapProxy::KoSnapProxy(KoSnapGuide *snapGuide)
         : m_snapGuide(snapGuide)
@@ -70,13 +70,13 @@ QList<QPointF> KoSnapProxy::pointsFromShape(KoShape *shape)
     if (path) {
         QTransform m = path->absoluteTransformation(0);
 
-        QList<KoPathPoint*> ignoredPoints = m_snapGuide->ignoredPathPoints();
+        QList<KPathPoint*> ignoredPoints = m_snapGuide->ignoredPathPoints();
 
         int subpathCount = path->subpathCount();
         for (int subpathIndex = 0; subpathIndex < subpathCount; ++subpathIndex) {
             int pointCount = path->subpathPointCount(subpathIndex);
             for (int pointIndex = 0; pointIndex < pointCount; ++pointIndex) {
-                KoPathPoint *p = path->pointByIndex(KoPathPointIndex(subpathIndex, pointIndex));
+                KPathPoint *p = path->pointByIndex(KoPathPointIndex(subpathIndex, pointIndex));
                 if (! p || ignoredPoints.contains(p))
                     continue;
 
@@ -98,7 +98,7 @@ QList<QPointF> KoSnapProxy::pointsFromShape(KoShape *shape)
 QList<KoPathSegment> KoSnapProxy::segmentsInRect(const QRectF &rect)
 {
     QList<KoShape*> shapes = shapesInRect(rect, true);
-    QList<KoPathPoint*> ignoredPoints = m_snapGuide->ignoredPathPoints();
+    QList<KPathPoint*> ignoredPoints = m_snapGuide->ignoredPathPoints();
 
     QList<KoPathSegment> segments;
     foreach (KoShape *shape, shapes) {

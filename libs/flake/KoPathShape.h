@@ -32,13 +32,13 @@
 #define KoPathShapeId "KoPathShape"
 
 class KoPathShape;
-class KoPathPoint;
+class KPathPoint;
 class KoPathShapePrivate;
 
 typedef QPair<int, int> KoPathPointIndex;
 
 /// a KoSubpath contains a path from a moveTo until a close or a new moveTo
-typedef QList<KoPathPoint *> KoSubpath;
+typedef QList<KPathPoint *> KoSubpath;
 typedef QList<KoSubpath *> KoSubpathList;
 /// The position of a path point within a path shape
 /**
@@ -47,13 +47,13 @@ typedef QList<KoSubpath *> KoSubpathList;
  * All graphical objects are based on this object e.g. lines, rectangulars, pies
  * and so on.
  *
- * The KoPathShape uses KoPathPoint's to describe the path of the shape.
+ * The KoPathShape uses KPathPoint's to describe the path of the shape.
  *
  * Here a short example:
  * 3 points connected by a curveTo's described by the following svg:
  * M 100,200 C 100,100 250,100 250,200 C 250,200 400,300 400,200.
  *
- * This will be stored in 3 KoPathPoint's as
+ * This will be stored in 3 KPathPoint's as
  * The first point contains in
  *       point 100,200
  *       controlPoint2 100,100
@@ -113,7 +113,7 @@ public:
      *
      * @return the newly created point
      */
-    KoPathPoint *moveTo(const QPointF &p);
+    KPathPoint *moveTo(const QPointF &p);
 
     /**
      * @brief Adds a new line segment
@@ -122,7 +122,7 @@ public:
      *
      * @return the newly created point
      */
-    KoPathPoint *lineTo(const QPointF &p);
+    KPathPoint *lineTo(const QPointF &p);
 
     /**
      * @brief Adds a new cubic Bezier curve segment.
@@ -136,7 +136,7 @@ public:
      *
      * @return The newly created point
      */
-    KoPathPoint *curveTo(const QPointF &c1, const QPointF &c2, const QPointF &p);
+    KPathPoint *curveTo(const QPointF &c1, const QPointF &c2, const QPointF &p);
 
     /**
      * @brief Adds a new quadratic Bezier curve segment.
@@ -149,7 +149,7 @@ public:
      *
      * @return The newly created point
      */
-    KoPathPoint *curveTo(const QPointF &c, const QPointF &p);
+    KPathPoint *curveTo(const QPointF &c, const QPointF &p);
 
     /**
      * @brief Add an arc.
@@ -164,7 +164,7 @@ public:
      *
      * @return The newly created point
      */
-    KoPathPoint *arcTo(qreal rx, qreal ry, qreal startAngle, qreal sweepAngle);
+    KPathPoint *arcTo(qreal rx, qreal ry, qreal startAngle, qreal sweepAngle);
 
 
     /**
@@ -199,7 +199,7 @@ public:
      * @param rect the rectangle the requested points are in
      * @return list of points within the rectangle
      */
-    QList<KoPathPoint*> pointsAt(const QRectF &rect);
+    QList<KPathPoint*> pointsAt(const QRectF &rect);
 
     /**
      * @brief Returns the list of path segments within the given rectangle.
@@ -215,16 +215,16 @@ public:
      * @return path point index of the point if it exists
      *         otherwise KoPathPointIndex(-1, -1)
      */
-    KoPathPointIndex pathPointIndex(const KoPathPoint *point) const;
+    KoPathPointIndex pathPointIndex(const KPathPoint *point) const;
 
     /**
      * @brief Returns the path point specified by a path point index
      *
      * @param pointIndex index of the point to get
      *
-     * @return KoPathPoint on success, 0 otherwise e.g. out of bounds
+     * @return KPathPoint on success, 0 otherwise e.g. out of bounds
      */
-    KoPathPoint *pointByIndex(const KoPathPointIndex &pointIndex) const;
+    KPathPoint *pointByIndex(const KoPathPointIndex &pointIndex) const;
 
     /**
      * @brief Returns the segment specified by a path point index
@@ -284,7 +284,7 @@ public:
      * @return true on success,
      *         false when pointIndex is out of bounds
      */
-    bool insertPoint(KoPathPoint *point, const KoPathPointIndex &pointIndex);
+    bool insertPoint(KPathPoint *point, const KoPathPointIndex &pointIndex);
 
     /**
      * @brief Removes a point from the path.
@@ -296,7 +296,7 @@ public:
      * @return The removed point on success,
      *         otherwise 0
      */
-    KoPathPoint *removePoint(const KoPathPointIndex &pointIndex);
+    KPathPoint *removePoint(const KoPathPointIndex &pointIndex);
 
     /**
      * @brief Breaks the path after the point index

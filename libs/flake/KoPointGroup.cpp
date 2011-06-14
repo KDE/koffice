@@ -20,15 +20,15 @@
 */
 
 #include "KoPointGroup_p.h"
-#include "KoPathPoint.h"
+#include "KPathPoint.h"
 
-void KoPointGroup::add(KoPathPoint * point)
+void KoPointGroup::add(KPathPoint * point)
 {
     m_points.insert(point);
     point->addToGroup(this);
 }
 
-void KoPointGroup::remove(KoPathPoint * point)
+void KoPointGroup::remove(KPathPoint * point)
 {
     if (m_points.remove(point)) {
         point->removeFromGroup();
@@ -42,7 +42,7 @@ void KoPointGroup::remove(KoPathPoint * point)
 
 void KoPointGroup::map(const QTransform &matrix)
 {
-    QSet<KoPathPoint *>::iterator it = m_points.begin();
+    QSet<KPathPoint *>::iterator it = m_points.begin();
     for (; it != m_points.end(); ++it) {
         (*it)->map(matrix, false);
     }

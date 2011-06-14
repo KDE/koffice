@@ -19,7 +19,7 @@
 
 #include "KoPathSegmentChangeStrategy_p.h"
 #include "KoPathShape.h"
-#include "KoPathPoint.h"
+#include "KPathPoint.h"
 #include "KoPathTool_p.h"
 #include "KoSnapGuide.h"
 #include "commands/KPathControlPointMoveCommand.h"
@@ -113,11 +113,11 @@ void KoPathSegmentChangeStrategy::handleMouseMove(const QPointF &mouseLocation, 
 
     m_path->update();
     if (m_segment.first()->activeControlPoint2()) {
-        KPathControlPointMoveCommand cmd(m_pointData1, move2, KoPathPoint::ControlPoint2);
+        KPathControlPointMoveCommand cmd(m_pointData1, move2, KPathPoint::ControlPoint2);
         cmd.redo();
     }
     if (m_segment.second()->activeControlPoint1()) {
-        KPathControlPointMoveCommand cmd(m_pointData2, move1, KoPathPoint::ControlPoint1);
+        KPathControlPointMoveCommand cmd(m_pointData2, move1, KPathPoint::ControlPoint1);
         cmd.redo();
     }
     m_path->normalize();
@@ -147,12 +147,12 @@ QUndoCommand* KoPathSegmentChangeStrategy::createCommand(QUndoCommand *parent)
     if (hasControlPoint2) {
         QPointF oldCtrlPointPos = m_segment.first()->controlPoint2()-m_ctrlPoint2Move;
         m_segment.first()->setControlPoint2(oldCtrlPointPos);
-        new KPathControlPointMoveCommand(m_pointData1, m_ctrlPoint2Move, KoPathPoint::ControlPoint2, cmd);
+        new KPathControlPointMoveCommand(m_pointData1, m_ctrlPoint2Move, KPathPoint::ControlPoint2, cmd);
     }
     if (hasControlPoint1) {
         QPointF oldCtrlPointPos = m_segment.second()->controlPoint1()-m_ctrlPoint1Move;
         m_segment.second()->setControlPoint1(oldCtrlPointPos);
-        new KPathControlPointMoveCommand(m_pointData2, m_ctrlPoint1Move, KoPathPoint::ControlPoint1, cmd);
+        new KPathControlPointMoveCommand(m_pointData2, m_ctrlPoint1Move, KPathPoint::ControlPoint1, cmd);
     }
 
     return cmd;

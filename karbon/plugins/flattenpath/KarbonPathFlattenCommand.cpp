@@ -19,7 +19,7 @@
 
 #include "KarbonPathFlattenCommand.h"
 #include <KoPathShape.h>
-#include <KoPathPoint.h>
+#include <KPathPoint.h>
 #include <KoPathPointData.h>
 #include <klocale.h>
 #include <QtGlobal>
@@ -63,7 +63,7 @@ struct PointData
     // old control points in document coordinates
     QPointF oldControlPoint1;
     QPointF oldControlPoint2;
-    KoPathPoint::PointProperties oldProperties;
+    KPathPoint::PointProperties oldProperties;
     uint insertedPoints;
     bool activeControlPoint1;
     bool activeControlPoint2;
@@ -82,7 +82,7 @@ public:
     }
 
     // splits the given segment at the splitPosition and returns the inserted point
-    KoPathPoint * splitSegment(KoPathPoint *p1, KoPathPoint *p2, qreal splitPosition)
+    KPathPoint * splitSegment(KPathPoint *p1, KPathPoint *p2, qreal splitPosition)
     {
         if (!p1->activeControlPoint2() && ! p2->activeControlPoint1())
             return 0;
@@ -107,14 +107,14 @@ public:
         p1->setControlPoint2(p[0]);
         p2->setControlPoint1(q[2]);
 
-        KoPathPoint * splitPoint = new KoPathPoint(p1->parent(), p[2]);
+        KPathPoint * splitPoint = new KPathPoint(p1->parent(), p[2]);
         splitPoint->setControlPoint1(p[1]);
         splitPoint->setControlPoint2(q[1]);
         return splitPoint;
     }
 
     // determines number of splits for given segment
-    uint splitCount(KoPathPoint *curr, KoPathPoint *next)
+    uint splitCount(KPathPoint *curr, KPathPoint *next)
     {
         QPointF p0 = curr->point();
         QPointF p1 = curr->activeControlPoint2() ? curr->controlPoint2() : curr->point();
@@ -149,7 +149,7 @@ KarbonPathFlattenCommand::KarbonPathFlattenCommand(KoPathShape * path, qreal fla
         int pointCount = d->path->subpathPointCount(subpathIndex);
         // iterate over all the points/segments
         for (int pointIndex = 0; pointIndex < pointCount; ++pointIndex) {
-            KoPathPoint * curr = d->path->pointByIndex(KoPathPointIndex(subpathIndex, pointIndex));
+            KPathPoint * curr = d->path->pointByIndex(KoPathPointIndex(subpathIndex, pointIndex));
 
             // save the data of the current path point
             PointData pointData;
@@ -187,14 +187,14 @@ void KarbonPathFlattenCommand::redo()
                 if (correctedPointIndex + 1 == correctedPointCount && ! d->path->isClosedSubpath(subpathIndex))
                     break;
 
-                KoPathPoint * curr = d->path->pointByIndex(KoPathPointIndex(subpathIndex, correctedPointIndex));
-                KoPathPoint * next = d->path->pointByIndex(KoPathPointIndex(subpathIndex, (correctedPointIndex + 1) % correctedPointCount));
+                KPathPoint * curr = d->path->pointByIndex(KoPathPointIndex(subpathIndex, correctedPointIndex));
+                KPathPoint * next = d->path->pointByIndex(KoPathPointIndex(subpathIndex, (correctedPointIndex + 1) % correctedPointCount));
 
                 // determine how many point we want to insert
                 uint requestedSplitCount = d->splitCount(curr, next);
 
-                KoPathPoint * segStart = curr;
-                KoPathPoint * segEnd = next;
+                KPathPoint * segStart = curr;
+                KPathPoint * segEnd = next;
 
                 uint achievedSplitCount = 0; // counter for executed splits
                 // split the segment
@@ -222,7 +222,7 @@ void KarbonPathFlattenCommand::redo()
             int newPointCount = d->path->subpathPointCount(subpathIndex);
             // now remove all the control points from the subpath
             for (int pointIndex = 0; pointIndex < newPointCount; ++pointIndex) {
-                KoPathPoint * point = d->path->pointByIndex(KoPathPointIndex(subpathIndex, pointIndex));
+                KPathPoint * point = d->path->pointByIndex(KoPathPointIndex(subpathIndex, pointIndex));
                 point->removeControlPoint1();
                 point->removeControlPoint2();
             }
@@ -250,7 +250,7 @@ void KarbonPathFlattenCommand::undo()
                     d->path->removePoint(KoPathPointIndex(subpathIndex, pointIndex + data.insertedPoints - i));
 
                 // get the original point...
-                KoPathPoint * p = d->path->pointByIndex(KoPathPointIndex(subpathIndex, pointIndex));
+                KPathPoint * p = d->path->pointByIndex(KoPathPointIndex(subpathIndex, pointIndex));
                 if (! p)
                     continue;
                 // and restore original point data

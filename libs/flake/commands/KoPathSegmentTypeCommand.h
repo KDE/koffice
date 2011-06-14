@@ -24,7 +24,7 @@
 #include <QUndoCommand>
 #include <QList>
 #include <QPointF>
-#include "KoPathPoint.h"
+#include "KPathPoint.h"
 #include "KoPathPointData.h"
 #include "flake_export.h"
 
@@ -66,8 +66,8 @@ private:
         // old control points in document coordinates
         QPointF m_controlPoint1;
         QPointF m_controlPoint2;
-        KoPathPoint::PointProperties m_properties1;
-        KoPathPoint::PointProperties m_properties2;
+        KPathPoint::PointProperties m_properties1;
+        KPathPoint::PointProperties m_properties2;
     };
 
     void initialize(const QList<KoPathPointData> &pointDataList);

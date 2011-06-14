@@ -66,9 +66,9 @@ void KCreatePathTool::paint(QPainter &painter, const KoViewConverter &converter)
         const bool firstPoint = (d->firstPoint == d->activePoint);
         if (d->pointIsDragged || firstPoint) {
             const bool onlyPaintActivePoints = false;
-            KoPathPoint::PointTypes paintFlags = KoPathPoint::ControlPoint2;
+            KPathPoint::PointTypes paintFlags = KPathPoint::ControlPoint2;
             if (d->activePoint->activeControlPoint1())
-                paintFlags |= KoPathPoint::ControlPoint1;
+                paintFlags |= KPathPoint::ControlPoint1;
             d->activePoint->paint(painter, d->handleRadius, paintFlags, onlyPaintActivePoints);
         }
 
@@ -80,7 +80,7 @@ void KCreatePathTool::paint(QPainter &painter, const KoViewConverter &converter)
         else
             painter.setBrush(Qt::white);   //TODO make configurable
 
-        d->firstPoint->paint(painter, d->handleRadius, KoPathPoint::Node);
+        d->firstPoint->paint(painter, d->handleRadius, KPathPoint::Node);
 
         painter.restore();
     }
@@ -91,7 +91,7 @@ void KCreatePathTool::paint(QPainter &painter, const KoViewConverter &converter)
         KoShape::applyConversion(painter, converter);
         painter.setPen(Qt::blue);
         painter.setBrush(Qt::white);   //TODO make configurable
-        d->hoveredPoint->paint(painter, d->handleRadius, KoPathPoint::Node);
+        d->hoveredPoint->paint(painter, d->handleRadius, KPathPoint::Node);
         painter.restore();
     }
     painter.save();
@@ -208,7 +208,7 @@ void KCreatePathTool::mouseMoveEvent(KoPointerEvent *event)
 {
     Q_D(KCreatePathTool);
 
-    KoPathPoint *endPoint = d->endPointAtPosition(event->point);
+    KPathPoint *endPoint = d->endPointAtPosition(event->point);
     if (d->hoveredPoint != endPoint) {
         if (d->hoveredPoint) {
             QPointF nodePos = d->hoveredPoint->parent()->shapeToDocument(d->hoveredPoint->point());
@@ -262,16 +262,16 @@ void KCreatePathTool::mouseReleaseEvent(KoPointerEvent *event)
 
     d->repaintActivePoint();
     d->pointIsDragged = false;
-    KoPathPoint *lastActivePoint = d->activePoint;
+    KPathPoint *lastActivePoint = d->activePoint;
     d->activePoint = d->shape->lineTo(event->point);
     // apply symmetric point property if applicable
     if (lastActivePoint->activeControlPoint1() && lastActivePoint->activeControlPoint2()) {
         QPointF diff1 = lastActivePoint->point() - lastActivePoint->controlPoint1();
         QPointF diff2 = lastActivePoint->controlPoint2() - lastActivePoint->point();
         if (qFuzzyCompare(diff1.x(), diff2.x()) && qFuzzyCompare(diff1.y(), diff2.y()))
-            lastActivePoint->setProperty(KoPathPoint::IsSymmetric);
+            lastActivePoint->setProperty(KPathPoint::IsSymmetric);
     }
-    canvas()->snapGuide()->setIgnoredPathPoints((QList<KoPathPoint*>()<<d->activePoint));
+    canvas()->snapGuide()->setIgnoredPathPoints((QList<KPathPoint*>()<<d->activePoint));
     if (d->angleSnapStrategy && lastActivePoint->activeControlPoint2()) {
         d->angleSnapStrategy->deactivate();
     }

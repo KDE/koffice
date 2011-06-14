@@ -21,7 +21,7 @@
 
 #include "EllipseShape.h"
 
-#include <KoPathPoint.h>
+#include <KPathPoint.h>
 #include <KoShapeSavingContext.h>
 #include <KXmlReader.h>
 #include <KoTextOnShapeContainer.h>
@@ -238,7 +238,7 @@ void EllipseShape::updatePath(const QSizeF &size)
     int curveIndex = 0;
     points[0]->setPoint(startpoint);
     points[0]->removeControlPoint1();
-    points[0]->setProperty(KoPathPoint::StartSubpath);
+    points[0]->setProperty(KPathPoint::StartSubpath);
     for (int i = 1; i < curvePointCount; ++i) {
         points[i-1]->setControlPoint2(curvePoints[curveIndex++]);
         points[i]->setControlPoint1(curvePoints[curveIndex++]);
@@ -256,16 +256,16 @@ void EllipseShape::updatePath(const QSizeF &size)
     }
 
     for (int i = 0; i < requiredPointCount; ++i) {
-        points[i]->unsetProperty(KoPathPoint::StopSubpath);
-        points[i]->unsetProperty(KoPathPoint::CloseSubpath);
+        points[i]->unsetProperty(KPathPoint::StopSubpath);
+        points[i]->unsetProperty(KPathPoint::CloseSubpath);
     }
-    m_subpaths[0]->last()->setProperty(KoPathPoint::StopSubpath);
+    m_subpaths[0]->last()->setProperty(KPathPoint::StopSubpath);
     if (m_type == Arc && m_startAngle != m_endAngle) {
-        m_subpaths[0]->first()->unsetProperty(KoPathPoint::CloseSubpath);
-        m_subpaths[0]->last()->unsetProperty(KoPathPoint::CloseSubpath);
+        m_subpaths[0]->first()->unsetProperty(KPathPoint::CloseSubpath);
+        m_subpaths[0]->last()->unsetProperty(KPathPoint::CloseSubpath);
     } else {
-        m_subpaths[0]->first()->setProperty(KoPathPoint::CloseSubpath);
-        m_subpaths[0]->last()->setProperty(KoPathPoint::CloseSubpath);
+        m_subpaths[0]->first()->setProperty(KPathPoint::CloseSubpath);
+        m_subpaths[0]->last()->setProperty(KPathPoint::CloseSubpath);
     }
 
     normalize();
@@ -285,7 +285,7 @@ void EllipseShape::createPoints(int requiredPointCount)
         }
     } else if (requiredPointCount > currentPointCount) {
         for (int i = 0; i < requiredPointCount-currentPointCount; ++i) {
-            m_subpaths[0]->append(new KoPathPoint(this, QPointF()));
+            m_subpaths[0]->append(new KPathPoint(this, QPointF()));
         }
     }
 }

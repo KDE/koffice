@@ -27,12 +27,12 @@ void TestPointTypeCommand::redoUndoSymmetric()
     KoPathShape path1;
     path1.moveTo(QPointF(0, 0));
     path1.lineTo(QPointF(0, 100));
-    KoPathPoint *point1 = path1.curveTo(QPointF(0, 50), QPointF(100, 50), QPointF(100, 100));
-    KoPathPoint *point2 = path1.curveTo(QPointF(100, 200), QPointF(200, 200), QPointF(200, 100));
+    KPathPoint *point1 = path1.curveTo(QPointF(0, 50), QPointF(100, 50), QPointF(100, 100));
+    KPathPoint *point2 = path1.curveTo(QPointF(100, 200), QPointF(200, 200), QPointF(200, 100));
     path1.curveTo(QPointF(200, 50), QPointF(300, 50), QPointF(300, 100));
     // test with normalize
     KoPathShape path2;
-    KoPathPoint *point3 = path2.moveTo(QPointF(0, 0));
+    KPathPoint *point3 = path2.moveTo(QPointF(0, 0));
     path2.curveTo(QPointF(50, 0), QPointF(100, 50), QPointF(100, 100));
     path2.curveTo(QPointF(50, 100), QPointF(0, 50), QPointF(0, 0));
     path2.closeMerge();
@@ -54,8 +54,8 @@ void TestPointTypeCommand::redoUndoSymmetric()
     ppath.cubicTo(100, 175, 200, 175, 200, 100);
     ppath.cubicTo(200, 25, 300, 50, 300, 100);
 
-    QVERIFY((point1->properties() & KoPathPoint::IsSymmetric) == KoPathPoint::IsSymmetric);
-    QVERIFY((point1->properties() & KoPathPoint::IsSmooth) == KoPathPoint::Normal);
+    QVERIFY((point1->properties() & KPathPoint::IsSymmetric) == KPathPoint::IsSymmetric);
+    QVERIFY((point1->properties() & KPathPoint::IsSmooth) == KPathPoint::Normal);
 
     QVERIFY(ppath == path1.outline());
 
@@ -70,12 +70,12 @@ void TestPointTypeCommand::redoUndoSmooth()
     KoPathShape path1;
     path1.moveTo(QPointF(0, 0));
     path1.lineTo(QPointF(0, 100));
-    KoPathPoint *point1 = path1.curveTo(QPointF(0, 50), QPointF(100, 50), QPointF(100, 100));
-    KoPathPoint *point2 = path1.curveTo(QPointF(100, 200), QPointF(200, 200), QPointF(200, 100));
+    KPathPoint *point1 = path1.curveTo(QPointF(0, 50), QPointF(100, 50), QPointF(100, 100));
+    KPathPoint *point2 = path1.curveTo(QPointF(100, 200), QPointF(200, 200), QPointF(200, 100));
     path1.curveTo(QPointF(200, 50), QPointF(300, 50), QPointF(300, 100));
     // test with normalize
     KoPathShape path2;
-    KoPathPoint *point3 = path2.moveTo(QPointF(0, 0));
+    KPathPoint *point3 = path2.moveTo(QPointF(0, 0));
     path2.curveTo(QPointF(50, 0), QPointF(100, 50), QPointF(100, 100));
     path2.curveTo(QPointF(50, 100), QPointF(0, 50), QPointF(0, 0));
     path2.closeMerge();
@@ -97,8 +97,8 @@ void TestPointTypeCommand::redoUndoSmooth()
     ppath.cubicTo(100, 200, 200, 200, 200, 100);
     ppath.cubicTo(200, 50, 300, 50, 300, 100);
 
-    QVERIFY((point1->properties() & KoPathPoint::IsSmooth) == KoPathPoint::IsSmooth);
-    QVERIFY((point1->properties() & KoPathPoint::IsSymmetric) == KoPathPoint::Normal);
+    QVERIFY((point1->properties() & KPathPoint::IsSmooth) == KPathPoint::IsSmooth);
+    QVERIFY((point1->properties() & KPathPoint::IsSymmetric) == KPathPoint::Normal);
 
     QVERIFY(ppath == path1.outline());
 
@@ -113,12 +113,12 @@ void TestPointTypeCommand::redoUndoCorner()
     KoPathShape path1;
     path1.moveTo(QPointF(0, 0));
     path1.lineTo(QPointF(0, 100));
-    KoPathPoint *point1 = path1.curveTo(QPointF(0, 50), QPointF(100, 50), QPointF(100, 100));
-    KoPathPoint *point2 = path1.curveTo(QPointF(100, 150), QPointF(200, 150), QPointF(200, 100));
+    KPathPoint *point1 = path1.curveTo(QPointF(0, 50), QPointF(100, 50), QPointF(100, 100));
+    KPathPoint *point2 = path1.curveTo(QPointF(100, 150), QPointF(200, 150), QPointF(200, 100));
     path1.curveTo(QPointF(200, 50), QPointF(300, 50), QPointF(300, 100));
     // test with normalize
     KoPathShape path2;
-    KoPathPoint *point3 = path2.moveTo(QPointF(0, 0));
+    KPathPoint *point3 = path2.moveTo(QPointF(0, 0));
     path2.curveTo(QPointF(50, 0), QPointF(100, 50), QPointF(100, 100));
     path2.curveTo(QPointF(50, 100), QPointF(0, 50), QPointF(0, 0));
     path2.closeMerge();
@@ -143,8 +143,8 @@ void TestPointTypeCommand::redoUndoCorner()
     ppath.cubicTo(100, 150, 200, 150, 200, 100);
     ppath.cubicTo(200, 50, 300, 50, 300, 100);
 
-    QVERIFY((point1->properties() & KoPathPoint::IsSmooth) == KoPathPoint::Normal);
-    QVERIFY((point1->properties() & KoPathPoint::IsSymmetric) == KoPathPoint::Normal);
+    QVERIFY((point1->properties() & KPathPoint::IsSmooth) == KPathPoint::Normal);
+    QVERIFY((point1->properties() & KPathPoint::IsSymmetric) == KPathPoint::Normal);
 
     QVERIFY(ppath == path1.outline());
 

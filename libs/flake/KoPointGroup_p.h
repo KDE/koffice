@@ -52,7 +52,7 @@ public:
     /**
      * @brief Add a point to the group
      */
-    void add(KoPathPoint *point);
+    void add(KPathPoint *point);
     /**
      * @brief Remove a point from the group
      *
@@ -60,7 +60,7 @@ public:
      * When the second last point is removed from the group, the
      * group removes also the last point and deletes itself.
      */
-    void remove(KoPathPoint *point);
+    void remove(KPathPoint *point);
 
     void map(const QTransform &matrix);
 
@@ -69,12 +69,12 @@ public:
      *
      * @return all points of the group
      */
-    const QSet<KoPathPoint *> &points() const {
+    const QSet<KPathPoint *> &points() const {
         return m_points;
     }
 
 private:
-    QSet<KoPathPoint *> m_points;
+    QSet<KPathPoint *> m_points;
 };
 
 

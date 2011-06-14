@@ -33,7 +33,7 @@ public:
             qDeleteAll(points);
     }
     QList<KoPathPointData> pointDataList;
-    QList<KoPathPoint*> points;
+    QList<KPathPoint*> points;
     bool deletePoints;
 };
 
@@ -123,7 +123,7 @@ KoPathPointRemoveCommand::KoPathPointRemoveCommand(const QList<KoPathPointData> 
 {
     QList<KoPathPointData>::const_iterator it(pointDataList.begin());
     for (; it != pointDataList.end(); ++it) {
-        KoPathPoint *point = it->pathShape->pointByIndex(it->pointIndex);
+        KPathPoint *point = it->pathShape->pointByIndex(it->pointIndex);
         if (point) {
             d->pointDataList.append(*it);
             d->points.append(0);

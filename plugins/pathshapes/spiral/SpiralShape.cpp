@@ -19,7 +19,7 @@
 
 #include "SpiralShape.h"
 
-#include <KoPathPoint.h>
+#include <KPathPoint.h>
 #include <KoShapeSavingContext.h>
 #include <KXmlReader.h>
 #include <KXmlWriter.h>
@@ -152,19 +152,19 @@ void SpiralShape::updatePath(const QSizeF &size)
 
     int cp = 0;
     m_points[cp]->setPoint(startpoint);
-    m_points[cp]->unsetProperty(KoPathPoint::HasControlPoint1);
+    m_points[cp]->unsetProperty(KPathPoint::HasControlPoint1);
     for (int i = 0; i < pointCnt; i += 3)
     {
         m_points[cp]->setControlPoint2(curvePoints[i]);
         m_points[++cp]->setControlPoint1(curvePoints[i+1]); 
         m_points[cp]->setPoint(curvePoints[i+2]);
-        m_points[cp]->unsetProperty(KoPathPoint::HasControlPoint2);
+        m_points[cp]->unsetProperty(KPathPoint::HasControlPoint2);
     }
     if (m_type == Curve)
     {
         m_points[++cp]->setPoint(m_center);
-        m_points[cp]->unsetProperty(KoPathPoint::HasControlPoint1);
-        m_points[cp]->unsetProperty(KoPathPoint::HasControlPoint2);
+        m_points[cp]->unsetProperty(KPathPoint::HasControlPoint1);
+        m_points[cp]->unsetProperty(KPathPoint::HasControlPoint2);
     }
     else if (m_type == Line && m_startAngle == m_endAngle)
     {
@@ -178,11 +178,11 @@ void SpiralShape::updatePath(const QSizeF &size)
     {
         if (i < cp || (m_type == Line && m_startAngle != m_endAngle))
         {
-            m_points[i]->unsetProperty(KoPathPoint::CloseSubpath);
+            m_points[i]->unsetProperty(KPathPoint::CloseSubpath);
         }
         else
         {
-            m_points[i]->setProperty(KoPathPoint::CloseSubpath);
+            m_points[i]->setProperty(KPathPoint::CloseSubpath);
         }
         m_subpaths[0]->push_back(m_points[i]);
     }

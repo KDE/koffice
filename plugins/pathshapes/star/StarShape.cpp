@@ -20,7 +20,7 @@
 
 #include "StarShape.h"
 
-#include <KoPathPoint.h>
+#include <KPathPoint.h>
 #include <KoShapeLoadingContext.h>
 #include <KoShapeSavingContext.h>
 #include <KoTextOnShapeContainer.h>
@@ -181,8 +181,8 @@ void StarShape::updatePath(const QSizeF &size)
         QPointF cornerPoint = QPointF(m_zoomX * m_radius[cornerType] * cos(radian), m_zoomY * m_radius[cornerType] * sin(radian));
 
         points[index]->setPoint(m_center + cornerPoint);
-        points[index]->unsetProperty(KoPathPoint::StopSubpath);
-        points[index]->unsetProperty(KoPathPoint::CloseSubpath);
+        points[index]->unsetProperty(KPathPoint::StopSubpath);
+        points[index]->unsetProperty(KPathPoint::CloseSubpath);
         if (m_roundness[cornerType] > 1e-10 || m_roundness[cornerType] < -1e-10) {
             // normalized cross product to compute tangential vector for handle point
             QPointF tangentVector(cornerPoint.y()/m_radius[cornerType], -cornerPoint.x()/m_radius[cornerType]);
@@ -196,11 +196,11 @@ void StarShape::updatePath(const QSizeF &size)
     }
 
     // first path starts and closes path
-    points[0]->setProperty(KoPathPoint::StartSubpath);
-    points[0]->setProperty(KoPathPoint::CloseSubpath);
+    points[0]->setProperty(KPathPoint::StartSubpath);
+    points[0]->setProperty(KPathPoint::CloseSubpath);
     // last point stops and closes path
-    points.last()->setProperty(KoPathPoint::StopSubpath);
-    points.last()->setProperty(KoPathPoint::CloseSubpath);
+    points.last()->setProperty(KPathPoint::StopSubpath);
+    points.last()->setProperty(KPathPoint::CloseSubpath);
 
     normalize();
 
@@ -227,7 +227,7 @@ void StarShape::createPoints(int requiredPointCount)
         }
     } else if (requiredPointCount > currentPointCount) {
         for (int i = 0; i < requiredPointCount-currentPointCount; ++i) {
-            m_subpaths[0]->append(new KoPathPoint(this, QPointF()));
+            m_subpaths[0]->append(new KPathPoint(this, QPointF()));
         }
     }
 }

@@ -30,8 +30,8 @@ KoPathSegmentBreakCommand::KoPathSegmentBreakCommand(const KoPathPointData & poi
 {
     if (m_pointData.pathShape->isClosedSubpath(m_pointData.pointIndex.first)) {
         m_startIndex = m_pointData.pointIndex;
-        KoPathPoint * before = m_pointData.pathShape->pointByIndex(m_startIndex);
-        if (before->properties() & KoPathPoint::CloseSubpath) {
+        KPathPoint * before = m_pointData.pathShape->pointByIndex(m_startIndex);
+        if (before->properties() & KPathPoint::CloseSubpath) {
             m_startIndex.second = 0;
         } else {
             ++m_startIndex.second;

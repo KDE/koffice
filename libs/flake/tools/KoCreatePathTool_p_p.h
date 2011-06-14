@@ -35,7 +35,7 @@
 
 
 #include "KCreatePathTool_p.h"
-#include "KoPathPoint.h"
+#include "KPathPoint.h"
 #include "KoPathPointData.h"
 #include "KoPathPointMergeCommand.h"
 #include "KCanvasBase.h"
@@ -60,7 +60,7 @@ struct PathConnectionPoint {
         point = 0;
     }
 
-    PathConnectionPoint& operator =(KoPathPoint * pathPoint)
+    PathConnectionPoint& operator =(KPathPoint * pathPoint)
     {
         if (!pathPoint || ! pathPoint->parent()) {
             reset();
@@ -111,7 +111,7 @@ struct PathConnectionPoint {
     }
 
     KoPathShape * path;
-    KoPathPoint * point;
+    KPathPoint * point;
 };
 
 inline qreal squareDistance(const QPointF &p1, const QPointF &p2)
@@ -209,14 +209,14 @@ public:
     {}
 
     KoPathShape *shape;
-    KoPathPoint *activePoint;
-    KoPathPoint *firstPoint;
+    KPathPoint *activePoint;
+    KPathPoint *firstPoint;
     int handleRadius;
     bool mouseOverFirstPoint;
     bool pointIsDragged;
     PathConnectionPoint existingStartPoint; ///< an existing path point we started a new path at
     PathConnectionPoint existingEndPoint;   ///< an existing path point we finished a new path at
-    KoPathPoint *hoveredPoint; ///< an existing path end point the mouse is hovering on
+    KPathPoint *hoveredPoint; ///< an existing path end point the mouse is hovering on
 
     AngleSnapStrategy *angleSnapStrategy;
     int angleSnappingDelta;
@@ -231,7 +231,7 @@ public:
         QRectF rect = activePoint->boundingRect(false);
 
         // make sure that we have the second control point inside our
-        // update rect, as KoPathPoint::boundingRect will not include
+        // update rect, as KPathPoint::boundingRect will not include
         // the second control point of the last path point if the path
         // is not closed
         const QPointF &point = activePoint->point();
@@ -253,12 +253,12 @@ public:
     }
 
     /// returns the nearest existing path point
-    KoPathPoint* endPointAtPosition(const QPointF &position) const
+    KPathPoint* endPointAtPosition(const QPointF &position) const
     {
         QRectF roi = q->handleGrabRect(position);
         QList<KoShape *> shapes = q->canvas()->shapeManager()->shapesAt(roi);
 
-        KoPathPoint * nearestPoint = 0;
+        KPathPoint * nearestPoint = 0;
         qreal minDistance = HUGE_VAL;
         uint grabSensitivity = q->canvas()->resourceManager()->grabSensitivity();
         qreal maxDistance = q->canvas()->viewConverter()->viewToDocumentX(grabSensitivity);
@@ -271,7 +271,7 @@ public:
             if (paramShape && paramShape->isParametricShape())
                 continue;
 
-            KoPathPoint * p = 0;
+            KPathPoint * p = 0;
             uint subpathCount = path->subpathCount();
             for (uint i = 0; i < subpathCount; ++i) {
                 if (path->isClosedSubpath(i))
@@ -301,8 +301,8 @@ public:
     {
         KoPathShape * startShape = 0;
         KoPathShape * endShape = 0;
-        KoPathPoint * startPoint = 0;
-        KoPathPoint * endPoint = 0;
+        KPathPoint * startPoint = 0;
+        KPathPoint * endPoint = 0;
 
         if (pointAtStart.isValid()) {
             startShape = pointAtStart.path;
@@ -328,8 +328,8 @@ public:
         uint newPointCount = pathShape->subpathPointCount(0);
         KoPathPointIndex newStartPointIndex(0, 0);
         KoPathPointIndex newEndPointIndex(0, newPointCount-1);
-        KoPathPoint * newStartPoint = pathShape->pointByIndex(newStartPointIndex);
-        KoPathPoint * newEndPoint = pathShape->pointByIndex(newEndPointIndex);
+        KPathPoint * newStartPoint = pathShape->pointByIndex(newStartPointIndex);
+        KPathPoint * newEndPoint = pathShape->pointByIndex(newEndPointIndex);
 
         // combine with the path we hit on start
         KoPathPointIndex startIndex(-1,-1);
@@ -367,8 +367,8 @@ public:
 
         // get the path points we want to merge, as these are not going to
         // change while merging
-        KoPathPoint * existingStartPoint = pathShape->pointByIndex(startIndex);
-        KoPathPoint * existingEndPoint = pathShape->pointByIndex(endIndex);
+        KPathPoint * existingStartPoint = pathShape->pointByIndex(startIndex);
+        KPathPoint * existingEndPoint = pathShape->pointByIndex(endIndex);
 
         // merge first two points
         if (existingStartPoint) {

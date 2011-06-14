@@ -30,7 +30,7 @@ public:
             qDeleteAll(points);
     }
     QList<KoPathPointData> pointDataList;
-    QList<KoPathPoint*> points;
+    QList<KPathPoint*> points;
     QList<QPair<QPointF, QPointF> > controlPoints;
     bool deletePoints;
 };
@@ -60,9 +60,9 @@ KoPathPointInsertCommand::KoPathPointInsertCommand(const QList<KoPathPointData> 
 
         QPair<KoPathSegment, KoPathSegment> splitSegments = segment.splitAt(insertPosition);
 
-        KoPathPoint * split1 = splitSegments.first.second();
-        KoPathPoint * split2 = splitSegments.second.first();
-        KoPathPoint * splitPoint = new KoPathPoint(pathShape, split1->point());
+        KPathPoint * split1 = splitSegments.first.second();
+        KPathPoint * split2 = splitSegments.second.first();
+        KPathPoint * splitPoint = new KPathPoint(pathShape, split1->point());
         if (split1->activeControlPoint1())
             splitPoint->setControlPoint1(split1->controlPoint1());
         if (split2->activeControlPoint2())
@@ -118,15 +118,15 @@ void KoPathPointInsertCommand::undo()
         KoPathPointIndex piAfter = pdBefore.pointIndex;
         ++piAfter.second;
 
-        KoPathPoint * before = pathShape->pointByIndex(pdBefore.pointIndex);
+        KPathPoint * before = pathShape->pointByIndex(pdBefore.pointIndex);
 
         d->points[i] = pathShape->removePoint(piAfter);
 
-        if (d->points[i]->properties() & KoPathPoint::CloseSubpath) {
+        if (d->points[i]->properties() & KPathPoint::CloseSubpath) {
             piAfter.second = 0;
         }
 
-        KoPathPoint * after = pathShape->pointByIndex(piAfter);
+        KPathPoint * after = pathShape->pointByIndex(piAfter);
 
         if (before->activeControlPoint2()) {
             QPointF controlPoint2 = before->controlPoint2();
@@ -144,7 +144,7 @@ void KoPathPointInsertCommand::undo()
     d->deletePoints = true;
 }
 
-QList<KoPathPoint*> KoPathPointInsertCommand::insertedPoints() const
+QList<KPathPoint*> KoPathPointInsertCommand::insertedPoints() const
 {
     return d->points;
 }

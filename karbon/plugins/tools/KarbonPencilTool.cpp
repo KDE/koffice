@@ -30,7 +30,7 @@
 #include <KoSelection.h>
 #include <KoResourceManager.h>
 #include <KoColor.h>
-#include <KoPathPoint.h>
+#include <KPathPoint.h>
 #include <KoPathPointData.h>
 #include <KoPathPointMergeCommand.h>
 
@@ -94,7 +94,7 @@ void KarbonPencilTool::paint(QPainter &painter, const KoViewConverter &converter
         int handleRadius = canvas()->resourceManager()->handleRadius();
         painter.setPen(Qt::blue);      //TODO make configurable
         painter.setBrush(Qt::white);   //TODO make configurable
-        m_hoveredPoint->paint(painter, handleRadius, KoPathPoint::Node);
+        m_hoveredPoint->paint(painter, handleRadius, KPathPoint::Node);
 
         painter.restore();
     }
@@ -126,7 +126,7 @@ void KarbonPencilTool::mouseMoveEvent(KoPointerEvent *event)
     if (event->buttons() & Qt::LeftButton)
         addPoint(event->point);
 
-    KoPathPoint * endPoint = endPointAtPosition(event->point);
+    KPathPoint * endPoint = endPointAtPosition(event->point);
     if (m_hoveredPoint != endPoint) {
         if (m_hoveredPoint) {
             QPointF nodePos = m_hoveredPoint->parent()->shapeToDocument(m_hoveredPoint->point());
@@ -399,12 +399,12 @@ KLineBorder * KarbonPencilTool::currentBorder()
     return border;
 }
 
-KoPathPoint* KarbonPencilTool::endPointAtPosition(const QPointF &position)
+KPathPoint* KarbonPencilTool::endPointAtPosition(const QPointF &position)
 {
     QRectF roi = handleGrabRect(position);
     QList<KoShape *> shapes = canvas()->shapeManager()->shapesAt(roi);
 
-    KoPathPoint * nearestPoint = 0;
+    KPathPoint * nearestPoint = 0;
     qreal minDistance = HUGE_VAL;
     uint grabSensitivity = canvas()->resourceManager()->grabSensitivity();
     qreal maxDistance = canvas()->viewConverter()->viewToDocumentX(grabSensitivity);
@@ -417,7 +417,7 @@ KoPathPoint* KarbonPencilTool::endPointAtPosition(const QPointF &position)
         if (paramShape && paramShape->isParametricShape())
             continue;
 
-        KoPathPoint * p = 0;
+        KPathPoint * p = 0;
         uint subpathCount = path->subpathCount();
         for (uint i = 0; i < subpathCount; ++i) {
             if (path->isClosedSubpath(i))
@@ -442,7 +442,7 @@ KoPathPoint* KarbonPencilTool::endPointAtPosition(const QPointF &position)
     return nearestPoint;
 }
 
-bool KarbonPencilTool::connectPaths(KoPathShape *pathShape, KoPathPoint *pointAtStart, KoPathPoint *pointAtEnd)
+bool KarbonPencilTool::connectPaths(KoPathShape *pathShape, KPathPoint *pointAtStart, KPathPoint *pointAtEnd)
 {
     // at least one point must be valid
     if (!pointAtStart && !pointAtEnd)
@@ -459,8 +459,8 @@ bool KarbonPencilTool::connectPaths(KoPathShape *pathShape, KoPathPoint *pointAt
     uint newPointCount = pathShape->subpathPointCount(0);
     KoPathPointIndex newStartPointIndex(0, 0);
     KoPathPointIndex newEndPointIndex(0, newPointCount - 1);
-    KoPathPoint * newStartPoint = pathShape->pointByIndex(newStartPointIndex);
-    KoPathPoint * newEndPoint = pathShape->pointByIndex(newEndPointIndex);
+    KPathPoint * newStartPoint = pathShape->pointByIndex(newStartPointIndex);
+    KPathPoint * newEndPoint = pathShape->pointByIndex(newEndPointIndex);
 
     KoPathShape * startShape = pointAtStart ? pointAtStart->parent() : 0;
     KoPathShape * endShape = pointAtEnd ? pointAtEnd->parent() : 0;
@@ -501,8 +501,8 @@ bool KarbonPencilTool::connectPaths(KoPathShape *pathShape, KoPathPoint *pointAt
 
     // get the path points we want to merge, as these are not going to
     // change while merging
-    KoPathPoint * existingStartPoint = pathShape->pointByIndex(startIndex);
-    KoPathPoint * existingEndPoint = pathShape->pointByIndex(endIndex);
+    KPathPoint * existingStartPoint = pathShape->pointByIndex(startIndex);
+    KPathPoint * existingEndPoint = pathShape->pointByIndex(endIndex);
 
     // merge first two points
     if (existingStartPoint) {

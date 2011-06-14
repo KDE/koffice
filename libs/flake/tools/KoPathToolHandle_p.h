@@ -35,7 +35,7 @@
 //
 
 
-#include <KoPathPoint.h>
+#include <KPathPoint.h>
 #include "KInteractionStrategy.h"
 
 #include <QList>
@@ -65,16 +65,16 @@ protected:
 class PointHandle : public KoPathToolHandle
 {
 public:
-    PointHandle(KoPathTool *tool, KoPathPoint *activePoint, KoPathPoint::PointType activePointType);
+    PointHandle(KoPathTool *tool, KPathPoint *activePoint, KPathPoint::PointType activePointType);
     void paint(QPainter &painter, const KoViewConverter &converter);
     void repaint() const;
     KInteractionStrategy *handleMousePress(KoPointerEvent *event);
     virtual bool check(const QList<KoPathShape*> &selectedShapes);
-    KoPathPoint *activePoint() const;
-    KoPathPoint::PointType activePointType() const;
+    KPathPoint *activePoint() const;
+    KPathPoint::PointType activePointType() const;
 private:
-    KoPathPoint *m_activePoint;
-    KoPathPoint::PointType m_activePointType;
+    KPathPoint *m_activePoint;
+    KPathPoint::PointType m_activePointType;
 };
 
 class ParameterHandle : public KoPathToolHandle

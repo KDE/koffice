@@ -37,7 +37,7 @@
 #include <QtCore/QPointF>
 #include <QtGui/QPainterPath>
 
-class KoPathPoint;
+class KPathPoint;
 class KoSnapProxy;
 class KoViewConverter;
 
@@ -100,8 +100,8 @@ public:
     virtual QPainterPath decoration(const KoViewConverter &converter) const;
 private:
     qreal project(const QPointF &lineStart , const QPointF &lineEnd, const QPointF &point);
-    QPointF extensionDirection(KoPathPoint * point, const QTransform &matrix);
-    bool snapToExtension(QPointF &position, KoPathPoint * point, const QTransform &matrix);
+    QPointF extensionDirection(KPathPoint * point, const QTransform &matrix);
+    bool snapToExtension(QPointF &position, KPathPoint * point, const QTransform &matrix);
     QList<QLineF> m_lines;
 };
 

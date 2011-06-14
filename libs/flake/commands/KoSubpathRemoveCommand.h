@@ -25,7 +25,7 @@
 #include "flake_export.h"
 #include "KoPathPointData.h"
 
-#include "KoPathPoint.h"
+#include "KPathPoint.h"
 
 /// The undo / redo command for removing a subpath
 class FLAKE_TEST_EXPORT KoSubpathRemoveCommand : public QUndoCommand

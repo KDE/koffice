@@ -26,8 +26,8 @@ KoSubpathJoinCommand::KoSubpathJoinCommand(const KoPathPointData &pointData1, co
         , m_pointData1(pointData1)
         , m_pointData2(pointData2)
         , m_splitIndex(KoPathPointIndex(-1, -1))
-        , m_oldProperties1(KoPathPoint::Normal)
-        , m_oldProperties2(KoPathPoint::Normal)
+        , m_oldProperties1(KPathPoint::Normal)
+        , m_oldProperties2(KPathPoint::Normal)
         , m_reverse(0)
 {
     Q_ASSERT(m_pointData1.pathShape == m_pointData2.pathShape);
@@ -53,8 +53,8 @@ KoSubpathJoinCommand::KoSubpathJoinCommand(const KoPathPointData &pointData1, co
         setText(i18n("Join Subpaths"));
     }
 
-    KoPathPoint * point1 = pathShape->pointByIndex(m_pointData1.pointIndex);
-    KoPathPoint * point2 = pathShape->pointByIndex(m_pointData2.pointIndex);
+    KPathPoint * point1 = pathShape->pointByIndex(m_pointData1.pointIndex);
+    KPathPoint * point2 = pathShape->pointByIndex(m_pointData2.pointIndex);
 
     m_oldControlPoint1 = QPointF(pathShape->shapeToDocument(m_reverse & 1 ? point1->controlPoint1() : point1->controlPoint2()));
     m_oldControlPoint2 = QPointF(pathShape->shapeToDocument(m_reverse & 2 ? point2->controlPoint1() : point2->controlPoint2()));
@@ -73,8 +73,8 @@ void KoSubpathJoinCommand::redo()
 
     bool closeSubpath = m_pointData1.pointIndex.first == m_pointData2.pointIndex.first;
 
-    KoPathPoint * point1 = pathShape->pointByIndex(m_pointData1.pointIndex);
-    KoPathPoint * point2 = pathShape->pointByIndex(m_pointData2.pointIndex);
+    KPathPoint * point1 = pathShape->pointByIndex(m_pointData1.pointIndex);
+    KPathPoint * point2 = pathShape->pointByIndex(m_pointData2.pointIndex);
 
     // if the endpoint is has a control point create a contol point for the new segment to be
     // at the symetric position to the exiting one
@@ -125,8 +125,8 @@ void KoSubpathJoinCommand::undo()
             pathShape->reverseSubpath(m_pointData1.pointIndex.first);
         }
     }
-    KoPathPoint * point1 = pathShape->pointByIndex(m_pointData1.pointIndex);
-    KoPathPoint * point2 = pathShape->pointByIndex(m_pointData2.pointIndex);
+    KPathPoint * point1 = pathShape->pointByIndex(m_pointData1.pointIndex);
+    KPathPoint * point2 = pathShape->pointByIndex(m_pointData2.pointIndex);
 
     // restore the old end points
     if (m_reverse & ReverseFirst)

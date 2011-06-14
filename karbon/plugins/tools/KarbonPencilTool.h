@@ -25,7 +25,7 @@
 
 class KoPathShape;
 class KLineBorder;
-class KoPathPoint;
+class KPathPoint;
 
 class KarbonPencilTool : public KoToolBase
 {
@@ -60,10 +60,10 @@ private:
     KLineBorder * currentBorder();
 
     /// returns the nearest existing path point
-    KoPathPoint* endPointAtPosition(const QPointF &position);
+    KPathPoint* endPointAtPosition(const QPointF &position);
 
     /// Connects given path with the ones we hit when starting/finishing
-    bool connectPaths(KoPathShape *pathShape, KoPathPoint *pointAtStart, KoPathPoint *pointAtEnd);
+    bool connectPaths(KoPathShape *pathShape, KPathPoint *pointAtStart, KPathPoint *pointAtEnd);
 
     enum PencilMode { ModeRaw, ModeCurve, ModeStraight };
 
@@ -77,9 +77,9 @@ private:
     QList<QPointF> m_points; // the raw points
 
     KoPathShape * m_shape;
-    KoPathPoint *m_existingStartPoint; ///< an existing path point we started a new path at
-    KoPathPoint *m_existingEndPoint;   ///< an existing path point we finished a new path at
-    KoPathPoint *m_hoveredPoint; ///< an existing path end point the mouse is hovering on
+    KPathPoint *m_existingStartPoint; ///< an existing path point we started a new path at
+    KPathPoint *m_existingEndPoint;   ///< an existing path point we finished a new path at
+    KPathPoint *m_hoveredPoint; ///< an existing path end point the mouse is hovering on
 };
 
 #endif // _KARBONPENCILTOOL_H_

@@ -48,7 +48,7 @@ void KoSubpathRemoveCommand::redo()
 
         QTransform matrix;
         matrix.translate(-offset.x(), -offset.y());
-        foreach(KoPathPoint *point, *m_subpath) {
+        foreach(KPathPoint *point, *m_subpath) {
             point->map(matrix);
         }
         m_pathShape->update();

@@ -39,7 +39,7 @@
 #include <QMap>
 
 class KoPathShape;
-class KoPathPoint;
+class KPathPoint;
 class KLineBorder;
 
 class KCreatePathToolPrivate;

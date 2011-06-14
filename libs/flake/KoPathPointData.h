@@ -24,7 +24,7 @@
 #include "KoPathShape.h"
 
 /**
- * @brief Describe a KoPathPoint by a KoPathShape and its indices
+ * @brief Describe a KPathPoint by a KoPathShape and its indices
  */
 class FLAKE_EXPORT KoPathPointData
 {

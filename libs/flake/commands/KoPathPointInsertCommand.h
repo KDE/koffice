@@ -24,7 +24,7 @@
 #include <QUndoCommand>
 #include <QList>
 #include <QPointF>
-#include "KoPathPoint.h"
+#include "KPathPoint.h"
 #include "KoPathPointData.h"
 #include "flake_export.h"
 
@@ -54,7 +54,7 @@ public:
     void undo();
 
     /// Returns list of inserted points
-    QList<KoPathPoint*> insertedPoints() const;
+    QList<KPathPoint*> insertedPoints() const;
 
 private:
     KoPathPointInsertCommandPrivate *d;

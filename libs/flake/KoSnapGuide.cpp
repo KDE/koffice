@@ -22,7 +22,7 @@
 #include "KoSnapStrategy_p.h"
 
 #include <KoPathShape.h>
-#include <KoPathPoint.h>
+#include <KPathPoint.h>
 #include <KoViewConverter.h>
 #include <KCanvasBase.h>
 #include <KoShapeManager.h>
@@ -57,7 +57,7 @@ public:
     KoSnapGuide::Strategies usedStrategies;
     bool active;
     int snapDistance;
-    QList<KoPathPoint*> ignoredPoints;
+    QList<KPathPoint*> ignoredPoints;
     QList<KoShape*> ignoredShapes;
 };
 
@@ -199,12 +199,12 @@ KCanvasBase *KoSnapGuide::canvas() const
     return d->canvas;
 }
 
-void KoSnapGuide::setIgnoredPathPoints(const QList<KoPathPoint*> &ignoredPoints)
+void KoSnapGuide::setIgnoredPathPoints(const QList<KPathPoint*> &ignoredPoints)
 {
     d->ignoredPoints = ignoredPoints;
 }
 
-QList<KoPathPoint*> KoSnapGuide::ignoredPathPoints() const
+QList<KPathPoint*> KoSnapGuide::ignoredPathPoints() const
 {
     return d->ignoredPoints;
 }

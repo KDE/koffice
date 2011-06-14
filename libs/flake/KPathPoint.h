@@ -32,15 +32,15 @@ class QPainter;
 class KoPointGroup;
 
 /**
- * @brief A KoPathPoint represents a point in a path.
+ * @brief A KPathPoint represents a point in a path.
  *
- * A KoPathPoint stores a point in a path. Additional to this point
+ * A KPathPoint stores a point in a path. Additional to this point
  * 2 control points are stored.
  * controlPoint1 is used to describe the second point of a cubic
  * bezier ending at the point. controlPoint2 is used to describe the
  * first point of a cubic bezier curve starting at the point.
  */
-class FLAKE_EXPORT KoPathPoint
+class FLAKE_EXPORT KPathPoint
 {
 public:
     /// property enum
@@ -54,7 +54,7 @@ public:
     };
     Q_DECLARE_FLAGS(PointProperties, PointProperty)
 
-    /// the type for identifying part of a KoPathPoint
+    /// the type for identifying part of a KPathPoint
     enum PointType {
         Node = 1,          ///< the node point
         ControlPoint1 = 2, ///< the first control point
@@ -64,7 +64,7 @@ public:
     Q_DECLARE_FLAGS(PointTypes, PointType)
 
     /// Default constructor
-    KoPathPoint();
+    KPathPoint();
 
     /**
      * @brief Constructor
@@ -73,25 +73,25 @@ public:
      * @param point the position relative to the shape origin
      * @param properties describing the point
      */
-    KoPathPoint(KoPathShape *path, const QPointF &point, PointProperties properties = Normal);
+    KPathPoint(KoPathShape *path, const QPointF &point, PointProperties properties = Normal);
 
     /**
      * @brief Copy Constructor
      */
-    KoPathPoint(const KoPathPoint &pathPoint);
+    KPathPoint(const KPathPoint &pathPoint);
 
     /**
      * @brief Assignment operator.
      */
-    KoPathPoint& operator=(const KoPathPoint &other);
+    KPathPoint& operator=(const KPathPoint &other);
 
     /// Compare operator
-    bool operator == (const KoPathPoint &other) const;
+    bool operator == (const KPathPoint &other) const;
 
     /**
      * @brief Destructor
      */
-    ~KoPathPoint();
+    ~KPathPoint();
 
     /**
      * @brief return the position relative to the shape origin
@@ -260,7 +260,7 @@ public:
      * @param previous the previous path point
      * @param next the next path point
      */
-    bool isSmooth(KoPathPoint *previous, KoPathPoint *next) const;
+    bool isSmooth(KPathPoint *previous, KPathPoint *next) const;
 
 protected:
     friend class KoPointGroup;
@@ -275,14 +275,14 @@ private:
 };
 
 //   /// a KoSubpath contains a path from a moveTo until a close or a new moveTo
-//   typedef QList<KoPathPoint *> KoSubpath;
+//   typedef QList<KPathPoint *> KoSubpath;
 //   typedef QList<KoSubpath *> KoSubpathList;
 //   /// A KoPathSegment is a pair two neighboring KoPathPoints
-//   typedef QPair<KoPathPoint*,KoPathPoint*> KoPathSegment;
+//   typedef QPair<KPathPoint*,KPathPoint*> KoPathSegment;
 //   /// The position of a path point within a path shape
 //   typedef QPair<KoSubpath*, int> KoPointPosition;
 
-Q_DECLARE_OPERATORS_FOR_FLAGS(KoPathPoint::PointProperties)
-Q_DECLARE_OPERATORS_FOR_FLAGS(KoPathPoint::PointTypes)
+Q_DECLARE_OPERATORS_FOR_FLAGS(KPathPoint::PointProperties)
+Q_DECLARE_OPERATORS_FOR_FLAGS(KPathPoint::PointTypes)
 
 #endif

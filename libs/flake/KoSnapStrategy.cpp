@@ -21,7 +21,7 @@
 #include "KoSnapProxy_p.h"
 #include "KoSnapGuide.h"
 #include <KoPathShape.h>
-#include <KoPathPoint.h>
+#include <KPathPoint.h>
 #include <KCanvasBase.h>
 #include <KoViewConverter.h>
 #include <KGuidesData.h>
@@ -197,7 +197,7 @@ bool ExtensionSnapStrategy::snap(const QPointF &mousePosition, KoSnapProxy * pro
             int pointCount = path->subpathPointCount(subpathIndex);
 
             // check the extension from the start point
-            KoPathPoint * first = path->pointByIndex(KoPathPointIndex(subpathIndex, 0));
+            KPathPoint * first = path->pointByIndex(KoPathPointIndex(subpathIndex, 0));
             QPointF firstSnapPosition = mousePosition;
             if (snapToExtension(firstSnapPosition, first, matrix)) {
                 qreal distance = squareDistance(firstSnapPosition, mousePosition);
@@ -220,7 +220,7 @@ bool ExtensionSnapStrategy::snap(const QPointF &mousePosition, KoSnapProxy * pro
             }
 
             // now check the extension from the last point
-            KoPathPoint * last = path->pointByIndex(KoPathPointIndex(subpathIndex, pointCount - 1));
+            KPathPoint * last = path->pointByIndex(KoPathPointIndex(subpathIndex, pointCount - 1));
             QPointF lastSnapPosition = mousePosition;
             if (snapToExtension(lastSnapPosition, last, matrix)) {
                 qreal distance = squareDistance(lastSnapPosition, mousePosition);
@@ -293,7 +293,7 @@ QPainterPath ExtensionSnapStrategy::decoration(const KoViewConverter &converter)
     return decoration;
 }
 
-bool ExtensionSnapStrategy::snapToExtension(QPointF &position, KoPathPoint * point, const QTransform &matrix)
+bool ExtensionSnapStrategy::snapToExtension(QPointF &position, KPathPoint * point, const QTransform &matrix)
 {
     QPointF direction = extensionDirection(point, matrix);
     if (direction.isNull())
@@ -323,17 +323,17 @@ qreal ExtensionSnapStrategy::project(const QPointF &lineStart, const QPointF &li
     return scalar /= diffLength;
 }
 
-QPointF ExtensionSnapStrategy::extensionDirection(KoPathPoint * point, const QTransform &matrix)
+QPointF ExtensionSnapStrategy::extensionDirection(KPathPoint * point, const QTransform &matrix)
 {
     KoPathShape * path = point->parent();
     KoPathPointIndex index = path->pathPointIndex(point);
 
     /// check if it is a start point
-    if (point->properties() & KoPathPoint::StartSubpath) {
+    if (point->properties() & KPathPoint::StartSubpath) {
         if (point->activeControlPoint2()) {
             return matrix.map(point->point()) - matrix.map(point->controlPoint2());
         } else {
-            KoPathPoint * next = path->pointByIndex(KoPathPointIndex(index.first, index.second + 1));
+            KPathPoint * next = path->pointByIndex(KoPathPointIndex(index.first, index.second + 1));
             if (! next)
                 return QPointF();
             else if (next->activeControlPoint1())
@@ -345,7 +345,7 @@ QPointF ExtensionSnapStrategy::extensionDirection(KoPathPoint * point, const QTr
         if (point->activeControlPoint1()) {
             return matrix.map(point->point()) - matrix.map(point->controlPoint1());
         } else {
-            KoPathPoint * prev = path->pointByIndex(KoPathPointIndex(index.first, index.second - 1));
+            KPathPoint * prev = path->pointByIndex(KoPathPointIndex(index.first, index.second - 1));
             if (! prev)
                 return QPointF();
             else if (prev->activeControlPoint2())

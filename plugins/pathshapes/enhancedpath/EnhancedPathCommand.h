@@ -27,7 +27,7 @@
 
 class EnhancedPathShape;
 class EnhancedPathParameter;
-class KoPathPoint;
+class KPathPoint;
 
 /**
  * A EnhancedPathCommand is a command like moveto, curveto, etc.
@@ -55,7 +55,7 @@ private:
     /// Returns sweep angle from start to stop and given direction
     qreal degSweepAngle(qreal start, qreal stop, bool clockwise) const;
     /// Returns the last path point of given path
-    KoPathPoint *lastPathPoint() const;
+    KPathPoint *lastPathPoint() const;
     /// Returns rectangle from given points
     QRectF rectFromPoints(const QPointF &tl, const QPointF &br) const;
 

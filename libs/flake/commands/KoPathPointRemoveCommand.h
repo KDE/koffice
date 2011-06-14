@@ -23,7 +23,7 @@
 
 #include <QUndoCommand>
 #include <QList>
-#include "KoPathPoint.h"
+#include "KPathPoint.h"
 #include "KoPathPointData.h"
 #include "flake_export.h"
 

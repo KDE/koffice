@@ -31,7 +31,7 @@ KoPathPointTypeCommand::KoPathPointTypeCommand(
 {
     QList<KoPathPointData>::const_iterator it(pointDataList.begin());
     for (; it != pointDataList.end(); ++it) {
-        KoPathPoint *point = it->pathShape->pointByIndex(it->pointIndex);
+        KPathPoint *point = it->pathShape->pointByIndex(it->pointIndex);
         if (point) {
             PointData pointData(*it);
             pointData.m_oldControlPoint1 = it->pathShape->shapeToDocument(point->controlPoint1());
@@ -58,8 +58,8 @@ void KoPathPointTypeCommand::redo()
 
     QList<PointData>::iterator it(m_oldPointData.begin());
     for (; it != m_oldPointData.end(); ++it) {
-        KoPathPoint *point = it->m_pointData.pathShape->pointByIndex(it->m_pointData.pointIndex);
-        KoPathPoint::PointProperties properties = point->properties();
+        KPathPoint *point = it->m_pointData.pathShape->pointByIndex(it->m_pointData.pointIndex);
+        KPathPoint::PointProperties properties = point->properties();
 
         switch (m_pointType) {
         case Line: {
@@ -84,8 +84,8 @@ void KoPathPointTypeCommand::redo()
                      && path->isClosedSubpath(pointIndex.first))
                 nextIndex = KoPathPointIndex(pointIndex.first, 0);
 
-            KoPathPoint * prevPoint = path->pointByIndex(prevIndex);
-            KoPathPoint * nextPoint = path->pointByIndex(nextIndex);
+            KPathPoint * prevPoint = path->pointByIndex(prevIndex);
+            KPathPoint * nextPoint = path->pointByIndex(nextIndex);
 
             if (prevPoint && ! point->activeControlPoint1() && appendPointData(KoPathPointData(path, prevIndex))) {
                 KoPathSegment cubic = KoPathSegment(prevPoint, point).toCubic();
@@ -106,8 +106,8 @@ void KoPathPointTypeCommand::redo()
             break;
         }
         case Symmetric: {
-            properties &= ~KoPathPoint::IsSmooth;
-            properties |= KoPathPoint::IsSymmetric;
+            properties &= ~KPathPoint::IsSmooth;
+            properties |= KPathPoint::IsSymmetric;
 
             // calculate vector from node point to first control point and normalize it
             QPointF directionC1 = point->controlPoint1() - point->point();
@@ -126,8 +126,8 @@ void KoPathPointTypeCommand::redo()
         }
         break;
         case Smooth: {
-            properties &= ~KoPathPoint::IsSymmetric;
-            properties |= KoPathPoint::IsSmooth;
+            properties &= ~KPathPoint::IsSymmetric;
+            properties |= KPathPoint::IsSmooth;
 
             // calculate vector from node point to first control point and normalize it
             QPointF directionC1 = point->controlPoint1() - point->point();
@@ -145,8 +145,8 @@ void KoPathPointTypeCommand::redo()
         break;
         case Corner:
         default:
-            properties &= ~KoPathPoint::IsSymmetric;
-            properties &= ~KoPathPoint::IsSmooth;
+            properties &= ~KPathPoint::IsSymmetric;
+            properties &= ~KPathPoint::IsSmooth;
             break;
         }
         point->setProperties(properties);
@@ -164,7 +164,7 @@ void KoPathPointTypeCommand::undo()
     for (; it != m_oldPointData.end(); ++it)
     {
         KoPathShape *pathShape = it->m_pointData.pathShape;
-        KoPathPoint *point = pathShape->pointByIndex(it->m_pointData.pointIndex);
+        KPathPoint *point = pathShape->pointByIndex(it->m_pointData.pointIndex);
 
         point->setProperties(it->m_oldProperties);
         if (it->m_hadControlPoint1)
@@ -188,7 +188,7 @@ void KoPathPointTypeCommand::undoChanges(const QList<PointData> &data)
     QList<PointData>::const_iterator it(data.begin());
     for (; it != data.end(); ++it) {
         KoPathShape *pathShape = it->m_pointData.pathShape;
-        KoPathPoint *point = pathShape->pointByIndex(it->m_pointData.pointIndex);
+        KPathPoint *point = pathShape->pointByIndex(it->m_pointData.pointIndex);
 
         point->setProperties(it->m_oldProperties);
         if (it->m_hadControlPoint1)
@@ -204,7 +204,7 @@ void KoPathPointTypeCommand::undoChanges(const QList<PointData> &data)
 
 bool KoPathPointTypeCommand::appendPointData(KoPathPointData data)
 {
-    KoPathPoint *point = data.pathShape->pointByIndex(data.pointIndex);
+    KPathPoint *point = data.pathShape->pointByIndex(data.pointIndex);
     if (! point)
         return false;
 

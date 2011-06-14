@@ -18,7 +18,7 @@
  */
 
 #include "KoPathSegment.h"
-#include "KoPathPoint.h"
+#include "KPathPoint.h"
 #include <kdebug.h>
 #include <QtGui/QPainterPath>
 #include <QtGui/QTransform>
@@ -266,7 +266,7 @@ private:
 class KoPathSegment::Private
 {
 public:
-    Private(KoPathSegment *qq, KoPathPoint *p1, KoPathPoint *p2)
+    Private(KoPathSegment *qq, KPathPoint *p1, KPathPoint *p2)
         : first(p1),
         second(p2),
         q(qq)
@@ -299,8 +299,8 @@ public:
      */
     void deCasteljau(qreal t, QPointF *p1, QPointF *p2, QPointF *p3, QPointF *p4, QPointF *p5) const;
 
-    KoPathPoint *first;
-    KoPathPoint *second;
+    KPathPoint *first;
+    KPathPoint *second;
     KoPathSegment *q;
 };
 
@@ -556,7 +556,7 @@ QList<QPointF> KoPathSegment::Private::linesIntersection(const KoPathSegment &se
 
 
 ///////////////////
-KoPathSegment::KoPathSegment(KoPathPoint * first, KoPathPoint * second)
+KoPathSegment::KoPathSegment(KPathPoint * first, KPathPoint * second)
     : d(new Private(this, first, second))
 {
 }
@@ -567,23 +567,23 @@ KoPathSegment::KoPathSegment(const KoPathSegment & segment)
     if (! segment.first() || segment.first()->parent())
         setFirst(segment.first());
     else
-        setFirst(new KoPathPoint(*segment.first()));
+        setFirst(new KPathPoint(*segment.first()));
 
     if (! segment.second() || segment.second()->parent())
         setSecond(segment.second());
     else
-        setSecond(new KoPathPoint(*segment.second()));
+        setSecond(new KPathPoint(*segment.second()));
 }
 
 KoPathSegment::KoPathSegment(const QPointF &p0, const QPointF &p1)
-    : d(new Private(this, new KoPathPoint(), new KoPathPoint()))
+    : d(new Private(this, new KPathPoint(), new KPathPoint()))
 {
     d->first->setPoint(p0);
     d->second->setPoint(p1);
 }
 
 KoPathSegment::KoPathSegment(const QPointF &p0, const QPointF &p1, const QPointF &p2)
-    : d(new Private(this, new KoPathPoint(), new KoPathPoint()))
+    : d(new Private(this, new KPathPoint(), new KPathPoint()))
 {
     d->first->setPoint(p0);
     d->first->setControlPoint2(p1);
@@ -591,7 +591,7 @@ KoPathSegment::KoPathSegment(const QPointF &p0, const QPointF &p1, const QPointF
 }
 
 KoPathSegment::KoPathSegment(const QPointF &p0, const QPointF &p1, const QPointF &p2, const QPointF &p3)
-    : d(new Private(this, new KoPathPoint(), new KoPathPoint()))
+    : d(new Private(this, new KPathPoint(), new KPathPoint()))
 {
     d->first->setPoint(p0);
     d->first->setControlPoint2(p1);
@@ -607,12 +607,12 @@ KoPathSegment &KoPathSegment::operator=(const KoPathSegment &rhs)
     if (! rhs.first() || rhs.first()->parent())
         setFirst(rhs.first());
     else
-        setFirst(new KoPathPoint(*rhs.first()));
+        setFirst(new KPathPoint(*rhs.first()));
 
     if (! rhs.second() || rhs.second()->parent())
         setSecond(rhs.second());
     else
-        setSecond(new KoPathPoint(*rhs.second()));
+        setSecond(new KPathPoint(*rhs.second()));
 
     return (*this);
 }
@@ -626,24 +626,24 @@ KoPathSegment::~KoPathSegment()
     delete d;
 }
 
-KoPathPoint *KoPathSegment::first() const
+KPathPoint *KoPathSegment::first() const
 {
     return d->first;
 }
 
-void KoPathSegment::setFirst(KoPathPoint *first)
+void KoPathSegment::setFirst(KPathPoint *first)
 {
     if (d->first && !d->first->parent())
         delete d->first;
     d->first = first;
 }
 
-KoPathPoint *KoPathSegment::second() const
+KPathPoint *KoPathSegment::second() const
 {
     return d->second;
 }
 
-void KoPathSegment::setSecond(KoPathPoint *second)
+void KoPathSegment::setSecond(KPathPoint *second)
 {
     if (d->second && !d->second->parent())
         delete d->second;
@@ -966,8 +966,8 @@ KoPathSegment KoPathSegment::mapped(const QTransform &matrix) const
     if (!isValid())
         return *this;
 
-    KoPathPoint * p1 = new KoPathPoint(*d->first);
-    KoPathPoint * p2 = new KoPathPoint(*d->second);
+    KPathPoint * p1 = new KPathPoint(*d->first);
+    KPathPoint * p2 = new KPathPoint(*d->second);
     p1->map(matrix);
     p2->map(matrix);
 
@@ -979,8 +979,8 @@ KoPathSegment KoPathSegment::toCubic() const
     if (! isValid())
         return KoPathSegment();
 
-    KoPathPoint * p1 = new KoPathPoint(*d->first);
-    KoPathPoint * p2 = new KoPathPoint(*d->second);
+    KPathPoint * p1 = new KPathPoint(*d->first);
+    KPathPoint * p2 = new KPathPoint(*d->second);
 
     if (degree() == 1) {
         p1->setControlPoint2(p1->point() + 0.3 * (p2->point() - p1->point()));
@@ -1232,11 +1232,11 @@ QPair<KoPathSegment, KoPathSegment> KoPathSegment::splitAt(qreal t) const
 
         if (degree() == 2) {
             if (second()->activeControlPoint1()) {
-                KoPathPoint *s1p1 = new KoPathPoint(0, d->first->point());
-                KoPathPoint *s1p2 = new KoPathPoint(0, splitP);
+                KPathPoint *s1p1 = new KPathPoint(0, d->first->point());
+                KPathPoint *s1p2 = new KPathPoint(0, splitP);
                 s1p2->setControlPoint1(splitCP1);
-                KoPathPoint *s2p1 = new KoPathPoint(0, splitP);
-                KoPathPoint *s2p2 = new KoPathPoint(0, d->second->point());
+                KPathPoint *s2p1 = new KPathPoint(0, splitP);
+                KPathPoint *s2p2 = new KPathPoint(0, d->second->point());
                 s2p2->setControlPoint1(splitCP2);
                 results.first = KoPathSegment(s1p1, s1p2);
                 results.second = KoPathSegment(s2p1, s2p2);

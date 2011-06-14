@@ -30,7 +30,7 @@
 
 class KoSnapStrategy;
 class KoShape;
-class KoPathPoint;
+class KPathPoint;
 class KoViewConverter;
 class KCanvasBase;
 class QPainter;
@@ -121,10 +121,10 @@ public:
     KCanvasBase *canvas() const;
 
     /// Sets a list of path points to ignore
-    void setIgnoredPathPoints(const QList<KoPathPoint*> &ignoredPoints);
+    void setIgnoredPathPoints(const QList<KPathPoint*> &ignoredPoints);
 
     /// Returns list of ignored points
-    QList<KoPathPoint*> ignoredPathPoints() const;
+    QList<KPathPoint*> ignoredPathPoints() const;
 
     /// Sets list of ignored shapes
     void setIgnoredShapes(const QList<KoShape*> &ignoredShapes);

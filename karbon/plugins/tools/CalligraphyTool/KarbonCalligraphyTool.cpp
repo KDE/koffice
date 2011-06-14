@@ -25,7 +25,7 @@
 #include <KoShapeGroup.h>
 #include <KLineBorder.h>
 #include <KoPointerEvent.h>
-#include <KoPathPoint.h>
+#include <KPathPoint.h>
 #include <KCanvasBase.h>
 #include <KoShapeController.h>
 #include <KoShapeManager.h>

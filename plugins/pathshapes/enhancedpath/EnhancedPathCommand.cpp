@@ -21,7 +21,7 @@
 #include "EnhancedPathCommand.h"
 #include "EnhancedPathParameter.h"
 #include "EnhancedPathShape.h"
-#include <KoPathPoint.h>
+#include <KPathPoint.h>
 #include <math.h>
 
 #include <KDebug>
@@ -165,7 +165,7 @@ bool EnhancedPathCommand::execute()
     }
     // elliptical quadrant (initial segment tangential to x-axis) (x y) +
     case 'X': {
-        KoPathPoint * lastPoint = lastPathPoint();
+        KPathPoint * lastPoint = lastPathPoint();
         bool xDir = true;
         foreach (const QPointF &point, points) {
             qreal rx = point.x() - lastPoint->point().x();
@@ -179,7 +179,7 @@ bool EnhancedPathCommand::execute()
     }
     // elliptical quadrant (initial segment tangential to y-axis) (x y) +
     case 'Y': {
-        KoPathPoint * lastPoint = lastPathPoint();
+        KPathPoint * lastPoint = lastPathPoint();
         bool xDir = false;
         foreach (const QPointF &point, points) {
             qreal rx = point.x() - lastPoint->point().x();
@@ -279,9 +279,9 @@ qreal EnhancedPathCommand::degSweepAngle(qreal start, qreal stop, bool clockwise
    return sweepAngle;
 }
 
-KoPathPoint * EnhancedPathCommand::lastPathPoint() const
+KPathPoint * EnhancedPathCommand::lastPathPoint() const
 {
-    KoPathPoint *lastPoint = 0;
+    KPathPoint *lastPoint = 0;
     int subpathCount = m_parent->subpathCount();
     if (subpathCount) {
         int subpathPointCount = m_parent->subpathPointCount(subpathCount-1);

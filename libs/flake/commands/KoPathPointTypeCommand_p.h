@@ -37,7 +37,7 @@
 #include <QList>
 #include "KPathBaseCommand_p.h"
 //#include "KoPathShape.h"
-#include "KoPathPoint.h"
+#include "KPathPoint.h"
 #include "KoPathPointData.h"
 #include "flake_export.h"
 
@@ -76,7 +76,7 @@ private:
         // old control points in document coordinates
         QPointF m_oldControlPoint1;
         QPointF m_oldControlPoint2;
-        KoPathPoint::PointProperties m_oldProperties;
+        KPathPoint::PointProperties m_oldProperties;
         bool m_hadControlPoint1;
         bool m_hadControlPoint2;
     };

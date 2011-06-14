@@ -29,8 +29,8 @@ void TestPointRemoveCommand::redoUndoPointRemove()
     KoPathShape path1;
     path1.moveTo(QPointF(0, 0));
     path1.lineTo(QPointF(0, 100));
-    KoPathPoint *point1 = path1.curveTo(QPointF(0, 50), QPointF(100, 50), QPointF(100, 100));
-    KoPathPoint *point2 = path1.lineTo(QPointF(200, 100));
+    KPathPoint *point1 = path1.curveTo(QPointF(0, 50), QPointF(100, 50), QPointF(100, 100));
+    KPathPoint *point2 = path1.lineTo(QPointF(200, 100));
     path1.curveTo(QPointF(200, 50), QPointF(300, 50), QPointF(300, 100));
 
     QPainterPath orig1(QPointF(0, 0));
@@ -43,7 +43,7 @@ void TestPointRemoveCommand::redoUndoPointRemove()
 
     KoPathShape path2;
     path2.moveTo(QPointF(0, 0));
-    KoPathPoint *point3 = path2.curveTo(QPointF(50, 0), QPointF(100, 50), QPointF(100, 100));
+    KPathPoint *point3 = path2.curveTo(QPointF(50, 0), QPointF(100, 50), QPointF(100, 100));
     path2.curveTo(QPointF(50, 100), QPointF(0, 50), QPointF(0, 0));
     path2.closeMerge();
 
@@ -83,13 +83,13 @@ void TestPointRemoveCommand::redoUndoPointRemove()
 void TestPointRemoveCommand::redoUndoSubpathRemove()
 {
     KoPathShape path1;
-    KoPathPoint *point11 = path1.moveTo(QPointF(0, 0));
-    KoPathPoint *point12 = path1.lineTo(QPointF(0, 100));
-    KoPathPoint *point13 = path1.curveTo(QPointF(0, 50), QPointF(100, 50), QPointF(100, 100));
-    KoPathPoint *point14 = path1.lineTo(QPointF(200, 100));
-    KoPathPoint *point15 = path1.curveTo(QPointF(200, 50), QPointF(300, 50), QPointF(300, 100));
-    KoPathPoint *point21 = path1.moveTo(QPointF(0, 0));
-    KoPathPoint *point22 = path1.curveTo(QPointF(50, 0), QPointF(100, 50), QPointF(100, 100));
+    KPathPoint *point11 = path1.moveTo(QPointF(0, 0));
+    KPathPoint *point12 = path1.lineTo(QPointF(0, 100));
+    KPathPoint *point13 = path1.curveTo(QPointF(0, 50), QPointF(100, 50), QPointF(100, 100));
+    KPathPoint *point14 = path1.lineTo(QPointF(200, 100));
+    KPathPoint *point15 = path1.curveTo(QPointF(200, 50), QPointF(300, 50), QPointF(300, 100));
+    KPathPoint *point21 = path1.moveTo(QPointF(0, 0));
+    KPathPoint *point22 = path1.curveTo(QPointF(50, 0), QPointF(100, 50), QPointF(100, 100));
     path1.curveTo(QPointF(50, 100), QPointF(0, 50), QPointF(0, 0));
     path1.closeMerge();
     path1.moveTo(QPointF(100, 0));
@@ -147,14 +147,14 @@ void TestPointRemoveCommand::redoUndoSubpathRemove()
 void TestPointRemoveCommand::redoUndoShapeRemove()
 {
     KoPathShape *path1 = new KoPathShape();
-    KoPathPoint *point11 = path1->moveTo(QPointF(0, 0));
-    KoPathPoint *point12 = path1->lineTo(QPointF(0, 100));
-    KoPathPoint *point13 = path1->curveTo(QPointF(0, 50), QPointF(100, 50), QPointF(100, 100));
-    KoPathPoint *point14 = path1->lineTo(QPointF(200, 100));
-    KoPathPoint *point15 = path1->curveTo(QPointF(200, 50), QPointF(300, 50), QPointF(300, 100));
+    KPathPoint *point11 = path1->moveTo(QPointF(0, 0));
+    KPathPoint *point12 = path1->lineTo(QPointF(0, 100));
+    KPathPoint *point13 = path1->curveTo(QPointF(0, 50), QPointF(100, 50), QPointF(100, 100));
+    KPathPoint *point14 = path1->lineTo(QPointF(200, 100));
+    KPathPoint *point15 = path1->curveTo(QPointF(200, 50), QPointF(300, 50), QPointF(300, 100));
     KoPathShape *path2 = new KoPathShape();
-    KoPathPoint *point21 = path2->moveTo(QPointF(0, 0));
-    KoPathPoint *point22 = path2->curveTo(QPointF(50, 0), QPointF(100, 50), QPointF(100, 100));
+    KPathPoint *point21 = path2->moveTo(QPointF(0, 0));
+    KPathPoint *point22 = path2->curveTo(QPointF(50, 0), QPointF(100, 50), QPointF(100, 100));
     path2->curveTo(QPointF(50, 100), QPointF(0, 50), QPointF(0, 0));
     path2->closeMerge();
 
@@ -195,28 +195,28 @@ void TestPointRemoveCommand::redoUndoShapeRemove()
 void TestPointRemoveCommand::redoUndo()
 {
     KoPathShape *path1 = new KoPathShape();
-    KoPathPoint *point11 = path1->moveTo(QPointF(0, 0));
-    KoPathPoint *point12 = path1->lineTo(QPointF(0, 100));
-    KoPathPoint *point13 = path1->curveTo(QPointF(0, 50), QPointF(100, 50), QPointF(100, 100));
-    KoPathPoint *point14 = path1->lineTo(QPointF(200, 100));
-    KoPathPoint *point15 = path1->curveTo(QPointF(200, 50), QPointF(300, 50), QPointF(300, 100));
-    KoPathPoint *point16 = path1->moveTo(QPointF(100, 0));
-    KoPathPoint *point17 = path1->curveTo(QPointF(150, 0), QPointF(200, 50), QPointF(200, 100));
+    KPathPoint *point11 = path1->moveTo(QPointF(0, 0));
+    KPathPoint *point12 = path1->lineTo(QPointF(0, 100));
+    KPathPoint *point13 = path1->curveTo(QPointF(0, 50), QPointF(100, 50), QPointF(100, 100));
+    KPathPoint *point14 = path1->lineTo(QPointF(200, 100));
+    KPathPoint *point15 = path1->curveTo(QPointF(200, 50), QPointF(300, 50), QPointF(300, 100));
+    KPathPoint *point16 = path1->moveTo(QPointF(100, 0));
+    KPathPoint *point17 = path1->curveTo(QPointF(150, 0), QPointF(200, 50), QPointF(200, 100));
     path1->curveTo(QPointF(150, 100), QPointF(100, 50), QPointF(100, 0));
     path1->closeMerge();
-    KoPathPoint *point18 = path1->moveTo(QPointF(200, 0));
-    KoPathPoint *point19 = path1->lineTo(QPointF(200, 100));
+    KPathPoint *point18 = path1->moveTo(QPointF(200, 0));
+    KPathPoint *point19 = path1->lineTo(QPointF(200, 100));
 
     KoPathShape *path2 = new KoPathShape();
-    KoPathPoint *point21 = path2->moveTo(QPointF(0, 0));
-    KoPathPoint *point22 = path2->curveTo(QPointF(50, 0), QPointF(100, 50), QPointF(100, 100));
+    KPathPoint *point21 = path2->moveTo(QPointF(0, 0));
+    KPathPoint *point22 = path2->curveTo(QPointF(50, 0), QPointF(100, 50), QPointF(100, 100));
     path2->curveTo(QPointF(50, 100), QPointF(0, 50), QPointF(0, 0));
     path2->closeMerge();
 
     KoPathShape *path3 = new KoPathShape();
-    KoPathPoint *point31 = path3->moveTo(QPointF(0, 0));
-    KoPathPoint *point32 = path3->lineTo(QPointF(100, 100));
-    KoPathPoint *point33 = path3->lineTo(QPointF(200, 150));
+    KPathPoint *point31 = path3->moveTo(QPointF(0, 0));
+    KPathPoint *point32 = path3->lineTo(QPointF(100, 100));
+    KPathPoint *point33 = path3->lineTo(QPointF(200, 150));
 
     MockShapeController mockController;
     mockController.addShape(path1);

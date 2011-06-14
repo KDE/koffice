@@ -20,7 +20,7 @@
  */
 
 #include "KoPathPointMoveCommand.h"
-#include "KoPathPoint.h"
+#include "KPathPoint.h"
 #include <klocale.h>
 
 class KoPathPointMoveCommandPrivate
@@ -107,7 +107,7 @@ void KoPathPointMoveCommandPrivate::applyOffset(qreal factor)
         QTransform matrix;
         matrix.translate(shapeOffset.x(), shapeOffset.y());
 
-        KoPathPoint *p = path->pointByIndex(it.key().pointIndex);
+        KPathPoint *p = path->pointByIndex(it.key().pointIndex);
         if (p)
             p->map(matrix, true);
     }

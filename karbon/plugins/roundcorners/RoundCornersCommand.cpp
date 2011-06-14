@@ -21,7 +21,7 @@
 
 #include <KoPathShape.h>
 #include <KoPathSegment.h>
-#include <KoPathPoint.h>
+#include <KPathPoint.h>
 
 #include <klocale.h>
 
@@ -77,7 +77,7 @@ void RoundCornersCommand::roundPath()
     * the algorithm achieves nice looking results and is generic enough to be applied
     * to all kind of paths.
     * Note also, that this algorithm doesn't touch smooth joins (in the sense of
-    * KoPathPoint::isSmooth() ).
+    * KPathPoint::isSmooth() ).
     *
     * We'll manipulate the input path for bookkeeping purposes and construct a new
     * temporary path in parallel. We finally replace the input path with the new path.
@@ -204,9 +204,9 @@ void RoundCornersCommand::roundPath()
         KoPathSegment nextSeg = m_copy->segmentByIndex(KoPathPointIndex(subpathIndex, 0));
         KoPathSegment lastSeg;
 
-        KoPathPoint * currPoint = nextSeg.first();
-        KoPathPoint * firstPoint = 0;
-        KoPathPoint * lastPoint = 0;
+        KPathPoint * currPoint = nextSeg.first();
+        KPathPoint * firstPoint = 0;
+        KPathPoint * lastPoint = 0;
 
         // check if first path point is a smooth join with the closing segment
         bool firstPointIsCorner = m_copy->isClosedSubpath(subpathIndex)
@@ -294,8 +294,8 @@ void RoundCornersCommand::roundPath()
         // End: take care of the last path point
         if (firstPointIsCorner) {
             // construct the closing segment
-            lastPoint->setProperty(KoPathPoint::CloseSubpath);
-            firstPoint->setProperty(KoPathPoint::CloseSubpath);
+            lastPoint->setProperty(KPathPoint::CloseSubpath);
+            firstPoint->setProperty(KPathPoint::CloseSubpath);
             switch (lastSeg.degree()) {
             case 1:
                 lastPoint->removeControlPoint2();
@@ -322,7 +322,7 @@ void RoundCornersCommand::roundPath()
     }
 }
 
-KoPathPoint * RoundCornersCommand::addSegment(KoPathShape * p, KoPathSegment & s)
+KPathPoint * RoundCornersCommand::addSegment(KoPathShape * p, KoPathSegment & s)
 {
     switch (s.degree()) {
     case 1:
@@ -355,8 +355,8 @@ void RoundCornersCommand::copyPath(KoPathShape * dst, KoPathShape * src)
 
         KoSubpath * subpath = new KoSubpath;
         for (int pointIndex = 0; pointIndex < pointCount; ++pointIndex) {
-            KoPathPoint * p = src->pointByIndex(KoPathPointIndex(subpathIndex, pointIndex));
-            KoPathPoint * c = new KoPathPoint(*p);
+            KPathPoint * p = src->pointByIndex(KoPathPointIndex(subpathIndex, pointIndex));
+            KPathPoint * c = new KPathPoint(*p);
             c->setParent(dst);
             subpath->append(c);
         }

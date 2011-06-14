@@ -34,7 +34,7 @@
 #include <KoTextOnShapeContainer.h>
 #include <KUnit.h>
 #include <KoOdfWorkaround.h>
-#include <KoPathPoint.h>
+#include <KPathPoint.h>
 
 EnhancedPathShape::EnhancedPathShape(const QRectF &viewBox)
 : m_viewBox(viewBox), m_viewBoxOffset(0.0, 0.0), m_mirrorVertically(false), m_mirrorHorizontally(false)

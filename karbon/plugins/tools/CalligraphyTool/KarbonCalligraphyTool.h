@@ -26,7 +26,7 @@
 
 class KoPathShape;
 class KoShapeGroup;
-class KoPathPoint;
+class KPathPoint;
 class KarbonCalligraphicShape;
 class KarbonCalligraphyOptionWidget;
 

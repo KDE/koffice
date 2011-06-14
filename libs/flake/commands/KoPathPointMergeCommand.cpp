@@ -19,7 +19,7 @@
  */
 
 #include "KoPathPointMergeCommand.h"
-#include "KoPathPoint.h"
+#include "KPathPoint.h"
 #include "KoPathPointData.h"
 #include "KoPathShape.h"
 #include <KLocale>
@@ -43,7 +43,7 @@ public:
         delete removedPoint;
     }
 
-    KoPathPoint * mergePoints(KoPathPoint * p1, KoPathPoint * p2)
+    KPathPoint * mergePoints(KPathPoint * p1, KPathPoint * p2)
     {
         QPointF mergePosition = 0.5 * (p1->point() + p2->point());
         QPointF mergeControlPoint1 = mergePosition + (p1->controlPoint1() - p1->point());
@@ -65,8 +65,8 @@ public:
 
     void resetPoints(KoPathPointIndex index1, KoPathPointIndex index2)
     {
-        KoPathPoint * p1 = pathShape->pointByIndex(index1);
-        KoPathPoint * p2 = pathShape->pointByIndex(index2);
+        KPathPoint * p1 = pathShape->pointByIndex(index1);
+        KPathPoint * p2 = pathShape->pointByIndex(index2);
         p1->setPoint(pathShape->documentToShape(oldNodePoint1));
         p2->setPoint(pathShape->documentToShape(oldNodePoint2));
         if (p1->activeControlPoint1()) {
@@ -88,7 +88,7 @@ public:
     QPointF oldNodePoint2;
     QPointF oldControlPoint2;
 
-    KoPathPoint * removedPoint;
+    KPathPoint * removedPoint;
 
     enum Reverse {
         ReverseNone = 0,
@@ -133,8 +133,8 @@ KoPathPointMergeCommand::KoPathPointMergeCommand(const KoPathPointData &pointDat
             qSwap(d->endPoint, d->startPoint);
     }
 
-    KoPathPoint * p1 = d->pathShape->pointByIndex(d->endPoint);
-    KoPathPoint * p2 = d->pathShape->pointByIndex(d->startPoint);
+    KPathPoint * p1 = d->pathShape->pointByIndex(d->endPoint);
+    KPathPoint * p2 = d->pathShape->pointByIndex(d->startPoint);
 
     d->oldNodePoint1 = d->pathShape->shapeToDocument(p1->point());
     if (d->reverse & Private::ReverseFirst) {
@@ -166,18 +166,18 @@ void KoPathPointMergeCommand::redo()
 
     d->pathShape->update();
 
-    KoPathPoint * endPoint = d->pathShape->pointByIndex(d->endPoint);
-    KoPathPoint * startPoint = d->pathShape->pointByIndex(d->startPoint);
+    KPathPoint * endPoint = d->pathShape->pointByIndex(d->endPoint);
+    KPathPoint * startPoint = d->pathShape->pointByIndex(d->startPoint);
 
     // are we just closing a single subpath ?
     if (d->endPoint.first == d->startPoint.first) {
         // change the endpoint of the subpath
         d->removedPoint = d->mergePoints(endPoint, startPoint);
         // set endpoint of subpath to close the subpath
-        endPoint->setProperty(KoPathPoint::CloseSubpath);
+        endPoint->setProperty(KPathPoint::CloseSubpath);
         // set new startpoint of subpath to close the subpath
         KoPathPointIndex newStartIndex(d->startPoint.first,0);
-        d->pathShape->pointByIndex(newStartIndex)->setProperty(KoPathPoint::CloseSubpath);
+        d->pathShape->pointByIndex(newStartIndex)->setProperty(KPathPoint::CloseSubpath);
     } else {
         // first revert subpaths if needed
         if (d->reverse & Private::ReverseFirst) {

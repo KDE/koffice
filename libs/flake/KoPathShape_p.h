@@ -44,7 +44,7 @@ public:
 
     void map(const QTransform &matrix);
 
-    void updateLast(KoPathPoint **lastPoint);
+    void updateLast(KPathPoint **lastPoint);
 
     /// closes specified subpath
     void closeSubpath(KoSubpath *subpath);

@@ -42,7 +42,7 @@
 #include <pictureshape/PictureShape.h>
 #include <KImageData.h>
 #include <KImageCollection.h>
-#include <KoPathPoint.h>
+#include <KPathPoint.h>
 #include <KoZoomHandler.h>
 #include <KoPatternBackground.h>
 #include <KColorBackground.h>
@@ -1221,8 +1221,8 @@ KoShape * KarbonImport::loadText(const KXmlElement &element)
                 // elongate path so that text fits completely on it
                 int subpathCount = path->subpathCount();
                 int subpathPointCount = path->subpathPointCount(subpathCount - 1);
-                KoPathPoint * lastPoint = path->pointByIndex(KoPathPointIndex(subpathCount - 1, subpathPointCount - 1));
-                KoPathPoint * prevLastPoint = path->pointByIndex(KoPathPointIndex(subpathCount - 1, subpathPointCount - 2));
+                KPathPoint * lastPoint = path->pointByIndex(KoPathPointIndex(subpathCount - 1, subpathPointCount - 1));
+                KPathPoint * prevLastPoint = path->pointByIndex(KoPathPointIndex(subpathCount - 1, subpathPointCount - 2));
                 if (lastPoint && prevLastPoint) {
                     QPointF tangent;
                     if (lastPoint->activeControlPoint1())

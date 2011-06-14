@@ -20,7 +20,7 @@
 #include "TestPointMergeCommand.h"
 #include "KoPathPointMergeCommand.h"
 #include "KoPathShape.h"
-#include "KoPathPoint.h"
+#include "KPathPoint.h"
 #include "KoPathPointData.h"
 #include <KDebug>
 
@@ -40,8 +40,8 @@ void TestPointMergeCommand::closeSingleLinePath()
     KoPathPointData pd1(&path1, index1);
     KoPathPointData pd2(&path1, index2);
 
-    KoPathPoint * p1 = path1.pointByIndex(index1);
-    KoPathPoint * p2 = path1.pointByIndex(index2);
+    KPathPoint * p1 = path1.pointByIndex(index1);
+    KPathPoint * p2 = path1.pointByIndex(index2);
 
     QVERIFY(!path1.isClosedSubpath(0));
     QCOMPARE(path1.subpathPointCount(0), 6);
@@ -91,8 +91,8 @@ void TestPointMergeCommand::closeSingleCurvePath()
     KoPathPointData pd1(&path1, index1);
     KoPathPointData pd2(&path1, index2);
 
-    KoPathPoint * p1 = path1.pointByIndex(index1);
-    KoPathPoint * p2 = path1.pointByIndex(index2);
+    KPathPoint * p1 = path1.pointByIndex(index1);
+    KPathPoint * p2 = path1.pointByIndex(index2);
 
     QVERIFY(!path1.isClosedSubpath(0));
     QCOMPARE(path1.subpathPointCount(0), 4);

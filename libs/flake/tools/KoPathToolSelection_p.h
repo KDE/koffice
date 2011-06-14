@@ -39,7 +39,7 @@
 #include <KoPathShape.h>
 
 class KoPathTool;
-class KoPathPoint;
+class KPathPoint;
 class KoPathPointData;
 class KoViewConverter;
 class QPainter;
@@ -68,14 +68,14 @@ public:
     * @param point to add to the selection
     * @param clear if true the selection will be cleared before adding the point
     */
-    void add(KoPathPoint *point, bool clear);
+    void add(KPathPoint *point, bool clear);
 
     /**
     * @brief Remove a point form the selection
     *
     * @param point to remove from the selection
     */
-    void remove(KoPathPoint *point);
+    void remove(KPathPoint *point);
 
     /**
     * @brief Clear the selection
@@ -109,14 +109,14 @@ public:
     *
     * @return true when the point is in the selection, false otherwise
     */
-    bool contains(KoPathPoint *point);
+    bool contains(KPathPoint *point);
 
     /**
     * @brief Get all selected points
     *
     * @return set of selected points
     */
-    const QSet<KoPathPoint *> &selectedPoints() const;
+    const QSet<KPathPoint *> &selectedPoints() const;
 
     /**
     * @brief Get the point data of all selected points
@@ -161,9 +161,9 @@ signals:
     void selectionChanged();
 
 private:
-    typedef QMap<KoPathShape *, QSet<KoPathPoint *> > PathShapePointMap;
+    typedef QMap<KoPathShape *, QSet<KPathPoint *> > PathShapePointMap;
 
-    QSet<KoPathPoint *> m_selectedPoints;
+    QSet<KPathPoint *> m_selectedPoints;
     PathShapePointMap m_shapePointMap;
     KoPathTool *m_tool;
     QList<KoPathShape*> m_selectedShapes;

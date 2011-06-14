@@ -56,7 +56,7 @@ private:
 /*class KarbonCalligraphicShape::Point
 {
 public:
-    KoPainterPath(KoPathPoint *point) : m_prev(point), m_next(0) {}
+    KoPainterPath(KPathPoint *point) : m_prev(point), m_next(0) {}
 
     // calculates the effective point
     QPointF point() {

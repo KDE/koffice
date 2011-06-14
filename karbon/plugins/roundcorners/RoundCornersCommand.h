@@ -25,7 +25,7 @@
 
 class KoPathShape;
 class KoPathSegment;
-class KoPathPoint;
+class KPathPoint;
 
 /// command for rounding corners on a path shape
 class RoundCornersCommand : public QUndoCommand
@@ -41,7 +41,7 @@ public:
 
 private:
     void roundPath();
-    KoPathPoint * addSegment(KoPathShape * p, KoPathSegment & s);
+    KPathPoint * addSegment(KoPathShape * p, KoPathSegment & s);
     void copyPath(KoPathShape * dst, KoPathShape * src);
     QPointF tangentAtStart(const KoPathSegment &s);
     QPointF tangentAtEnd(const KoPathSegment &s);

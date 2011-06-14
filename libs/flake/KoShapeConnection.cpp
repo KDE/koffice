@@ -26,7 +26,7 @@
 #include "KoViewConverter.h"
 #include "KoPathShape.h"
 #include "KoPathShape_p.h"
-#include "KoPathPoint.h"
+#include "KPathPoint.h"
 #include "KLoadingShapeUpdater.h"
 
 #include <KXmlReader.h>
@@ -344,8 +344,8 @@ void ConnectCurve::paint(QPainter &painter, const KoViewConverter &converter)
             - shape.outline().boundingRect().topLeft());
 
     if (needsResize) {
-        KoPathPoint *first = shape.pointByIndex(KoPathPointIndex(0, 0));
-        KoPathPoint *last = shape.pointByIndex(KoPathPointIndex(0, shape.pointCount() - 1));
+        KPathPoint *first = shape.pointByIndex(KoPathPointIndex(0, 0));
+        KPathPoint *last = shape.pointByIndex(KoPathPointIndex(0, shape.pointCount() - 1));
 
         if (!first || !last || first == last) {
             foul();

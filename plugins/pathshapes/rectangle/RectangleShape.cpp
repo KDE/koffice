@@ -21,7 +21,7 @@
 
 #include "RectangleShape.h"
 
-#include <KoPathPoint.h>
+#include <KPathPoint.h>
 #include <KoTextOnShapeContainer.h>
 #include <KoShapeSavingContext.h>
 #include <KXmlReader.h>
@@ -165,8 +165,8 @@ void RectangleShape::updatePath(const QSizeF &size)
     int cp = 0;
 
     // first path starts and closes path
-    points[cp]->setProperty(KoPathPoint::StartSubpath);
-    points[cp]->setProperty(KoPathPoint::CloseSubpath);
+    points[cp]->setProperty(KPathPoint::StartSubpath);
+    points[cp]->setProperty(KPathPoint::CloseSubpath);
     points[cp]->setPoint(QPointF(rx, 0));
     points[cp]->removeControlPoint1();
     points[cp]->removeControlPoint2();
@@ -236,13 +236,13 @@ void RectangleShape::updatePath(const QSizeF &size)
 
     // unset all stop/close path properties
     for (int i = 1; i < cp; ++i) {
-        points[i]->unsetProperty(KoPathPoint::StopSubpath);
-        points[i]->unsetProperty(KoPathPoint::CloseSubpath);
+        points[i]->unsetProperty(KPathPoint::StopSubpath);
+        points[i]->unsetProperty(KPathPoint::CloseSubpath);
     }
 
     // last point stops and closes path
-    points.last()->setProperty(KoPathPoint::StopSubpath);
-    points.last()->setProperty(KoPathPoint::CloseSubpath);
+    points.last()->setProperty(KPathPoint::StopSubpath);
+    points.last()->setProperty(KPathPoint::CloseSubpath);
 }
 
 void RectangleShape::createPoints(int requiredPointCount)
@@ -259,7 +259,7 @@ void RectangleShape::createPoints(int requiredPointCount)
         }
     } else if (requiredPointCount > currentPointCount) {
         for (int i = 0; i < requiredPointCount-currentPointCount; ++i) {
-            m_subpaths[0]->append(new KoPathPoint(this, QPointF()));
+            m_subpaths[0]->append(new KPathPoint(this, QPointF()));
         }
     }
 }

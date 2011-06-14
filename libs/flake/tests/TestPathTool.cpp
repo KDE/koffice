@@ -28,26 +28,26 @@
 void TestPathTool::koPathPointSelection_selectedSegmentsData()
 {
     KoPathShape path1;
-    KoPathPoint *point11 = path1.moveTo(QPointF(10, 10));
-    KoPathPoint *point12 = path1.lineTo(QPointF(20, 10));
-    KoPathPoint *point13 = path1.lineTo(QPointF(20, 20));
-    KoPathPoint *point14 = path1.lineTo(QPointF(15, 25));
+    KPathPoint *point11 = path1.moveTo(QPointF(10, 10));
+    KPathPoint *point12 = path1.lineTo(QPointF(20, 10));
+    KPathPoint *point13 = path1.lineTo(QPointF(20, 20));
+    KPathPoint *point14 = path1.lineTo(QPointF(15, 25));
     path1.lineTo(QPointF(10, 20));
-    KoPathPoint *point16 = path1.moveTo(QPointF(30, 30));
+    KPathPoint *point16 = path1.moveTo(QPointF(30, 30));
     path1.lineTo(QPointF(40, 30));
-    KoPathPoint *point18 = path1.lineTo(QPointF(40, 40));
-    KoPathPoint *point19 = path1.curveTo(QPointF(40, 45), QPointF(30, 45), QPointF(30, 40));
+    KPathPoint *point18 = path1.lineTo(QPointF(40, 40));
+    KPathPoint *point19 = path1.curveTo(QPointF(40, 45), QPointF(30, 45), QPointF(30, 40));
     path1.close();
 
     KoPathShape path2;
-    KoPathPoint *point21 = path2.moveTo(QPointF(100, 100));
-    KoPathPoint *point22 = path2.lineTo(QPointF(110, 100));
-    KoPathPoint *point23 = path2.lineTo(QPointF(110, 110));
+    KPathPoint *point21 = path2.moveTo(QPointF(100, 100));
+    KPathPoint *point22 = path2.lineTo(QPointF(110, 100));
+    KPathPoint *point23 = path2.lineTo(QPointF(110, 110));
 
     KoPathShape path3;
-    KoPathPoint *point31 = path3.moveTo(QPointF(200, 220));
-    KoPathPoint *point32 = path3.lineTo(QPointF(210, 220));
-    KoPathPoint *point33 = path3.lineTo(QPointF(220, 220));
+    KPathPoint *point31 = path3.moveTo(QPointF(200, 220));
+    KPathPoint *point32 = path3.lineTo(QPointF(210, 220));
+    KPathPoint *point33 = path3.lineTo(QPointF(220, 220));
     path3.close();
 
     MockCanvas canvas;

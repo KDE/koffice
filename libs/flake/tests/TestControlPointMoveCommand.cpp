@@ -27,15 +27,15 @@ void TestControlPointMoveCommand::redoUndoControlPoint1()
     KoPathShape path;
     path.moveTo(QPointF(0, 0));
     path.lineTo(QPointF(0, 100));
-    KoPathPoint *point1 = path.curveTo(QPointF(0, 50), QPointF(100, 50), QPointF(100, 100));
+    KPathPoint *point1 = path.curveTo(QPointF(0, 50), QPointF(100, 50), QPointF(100, 100));
     path.curveTo(QPointF(100, 150), QPointF(200, 150), QPointF(200, 100));
-    KoPathPoint *point2 = path.moveTo(QPointF(0, 300));
+    KPathPoint *point2 = path.moveTo(QPointF(0, 300));
     path.lineTo(QPointF(100, 400));
     path.curveTo(QPointF(50, 400), QPointF(0, 350), QPointF(0, 300));
     path.closeMerge();
 
     QPainterPath ppathOrg = path.outline();
-    KPathControlPointMoveCommand cmd1(KoPathPointData(&path, path.pathPointIndex(point1)), QPointF(10, 10), KoPathPoint::ControlPoint1);
+    KPathControlPointMoveCommand cmd1(KoPathPointData(&path, path.pathPointIndex(point1)), QPointF(10, 10), KPathPoint::ControlPoint1);
     cmd1.redo();
 
     QPainterPath ppathNew1(QPointF(0, 0));
@@ -49,7 +49,7 @@ void TestControlPointMoveCommand::redoUndoControlPoint1()
 
     QVERIFY(ppathNew1 == path.outline());
 
-    KPathControlPointMoveCommand cmd2(KoPathPointData(&path, path.pathPointIndex(point2)), QPointF(10, -10), KoPathPoint::ControlPoint1);
+    KPathControlPointMoveCommand cmd2(KoPathPointData(&path, path.pathPointIndex(point2)), QPointF(10, -10), KPathPoint::ControlPoint1);
     cmd2.redo();
 
     QPainterPath ppathNew2(QPointF(0, 0));
@@ -75,17 +75,17 @@ void TestControlPointMoveCommand::redoUndoControlPoint1Smooth()
     KoPathShape path;
     path.moveTo(QPointF(0, 0));
     path.lineTo(QPointF(0, 100));
-    KoPathPoint *point1 = path.curveTo(QPointF(0, 50), QPointF(100, 50), QPointF(100, 100));
+    KPathPoint *point1 = path.curveTo(QPointF(0, 50), QPointF(100, 50), QPointF(100, 100));
     path.curveTo(QPointF(100, 150), QPointF(200, 150), QPointF(200, 100));
     path.moveTo(QPointF(0, 300));
     path.lineTo(QPointF(100, 400));
     path.curveTo(QPointF(50, 400), QPointF(0, 350), QPointF(0, 300));
     path.closeMerge();
 
-    point1->setProperties(point1->properties() | KoPathPoint::IsSmooth);
+    point1->setProperties(point1->properties() | KPathPoint::IsSmooth);
 
     QPainterPath ppathOrg = path.outline();
-    KPathControlPointMoveCommand cmd1(KoPathPointData(&path, path.pathPointIndex(point1)), QPointF(-25, 50), KoPathPoint::ControlPoint1);
+    KPathControlPointMoveCommand cmd1(KoPathPointData(&path, path.pathPointIndex(point1)), QPointF(-25, 50), KPathPoint::ControlPoint1);
     cmd1.redo();
 
     QPainterPath ppathNew1(QPointF(0, 0));
@@ -109,17 +109,17 @@ void TestControlPointMoveCommand::redoUndoControlPoint1Symmetric()
     KoPathShape path;
     path.moveTo(QPointF(0, 0));
     path.lineTo(QPointF(0, 100));
-    KoPathPoint *point1 = path.curveTo(QPointF(0, 50), QPointF(100, 50), QPointF(100, 100));
+    KPathPoint *point1 = path.curveTo(QPointF(0, 50), QPointF(100, 50), QPointF(100, 100));
     path.curveTo(QPointF(100, 150), QPointF(200, 150), QPointF(200, 100));
     path.moveTo(QPointF(0, 300));
     path.lineTo(QPointF(100, 400));
     path.curveTo(QPointF(50, 400), QPointF(0, 350), QPointF(0, 300));
     path.closeMerge();
 
-    point1->setProperties(point1->properties() | KoPathPoint::IsSymmetric);
+    point1->setProperties(point1->properties() | KPathPoint::IsSymmetric);
 
     QPainterPath ppathOrg = path.outline();
-    KPathControlPointMoveCommand cmd1(KoPathPointData(&path, path.pathPointIndex(point1)), QPointF(-25, 50), KoPathPoint::ControlPoint1);
+    KPathControlPointMoveCommand cmd1(KoPathPointData(&path, path.pathPointIndex(point1)), QPointF(-25, 50), KPathPoint::ControlPoint1);
     cmd1.redo();
 
     QPainterPath ppathNew1(QPointF(0, 0));
@@ -143,15 +143,15 @@ void TestControlPointMoveCommand::redoUndoControlPoint2()
     KoPathShape path;
     path.moveTo(QPointF(0, 0));
     path.lineTo(QPointF(0, 100));
-    KoPathPoint *point1 = path.curveTo(QPointF(0, 50), QPointF(100, 50), QPointF(100, 100));
+    KPathPoint *point1 = path.curveTo(QPointF(0, 50), QPointF(100, 50), QPointF(100, 100));
     path.curveTo(QPointF(100, 150), QPointF(200, 150), QPointF(200, 100));
     path.moveTo(QPointF(0, 300));
-    KoPathPoint *point2 = path.lineTo(QPointF(100, 400));
+    KPathPoint *point2 = path.lineTo(QPointF(100, 400));
     path.curveTo(QPointF(50, 400), QPointF(0, 350), QPointF(0, 300));
     path.closeMerge();
 
     QPainterPath ppathOrg = path.outline();
-    KPathControlPointMoveCommand cmd1(KoPathPointData(&path, path.pathPointIndex(point1)), QPointF(10, 10), KoPathPoint::ControlPoint2);
+    KPathControlPointMoveCommand cmd1(KoPathPointData(&path, path.pathPointIndex(point1)), QPointF(10, 10), KPathPoint::ControlPoint2);
     cmd1.redo();
 
     QPainterPath ppathNew1(QPointF(0, 0));
@@ -165,7 +165,7 @@ void TestControlPointMoveCommand::redoUndoControlPoint2()
 
     QVERIFY(ppathNew1 == path.outline());
 
-    KPathControlPointMoveCommand cmd2(KoPathPointData(&path, path.pathPointIndex(point2)), QPointF(-10, -10), KoPathPoint::ControlPoint2);
+    KPathControlPointMoveCommand cmd2(KoPathPointData(&path, path.pathPointIndex(point2)), QPointF(-10, -10), KPathPoint::ControlPoint2);
     cmd2.redo();
 
     QPainterPath ppathNew2(QPointF(0, 0));
@@ -191,17 +191,17 @@ void TestControlPointMoveCommand::redoUndoControlPoint2Smooth()
     KoPathShape path;
     path.moveTo(QPointF(0, 0));
     path.lineTo(QPointF(0, 100));
-    KoPathPoint *point1 = path.curveTo(QPointF(0, 50), QPointF(100, 50), QPointF(100, 100));
+    KPathPoint *point1 = path.curveTo(QPointF(0, 50), QPointF(100, 50), QPointF(100, 100));
     path.curveTo(QPointF(100, 150), QPointF(200, 150), QPointF(200, 100));
     path.moveTo(QPointF(0, 300));
     path.lineTo(QPointF(100, 400));
     path.curveTo(QPointF(50, 400), QPointF(0, 350), QPointF(0, 300));
     path.closeMerge();
 
-    point1->setProperties(point1->properties() | KoPathPoint::IsSmooth);
+    point1->setProperties(point1->properties() | KPathPoint::IsSmooth);
 
     QPainterPath ppathOrg = path.outline();
-    KPathControlPointMoveCommand cmd1(KoPathPointData(&path, path.pathPointIndex(point1)), QPointF(25, -50), KoPathPoint::ControlPoint2);
+    KPathControlPointMoveCommand cmd1(KoPathPointData(&path, path.pathPointIndex(point1)), QPointF(25, -50), KPathPoint::ControlPoint2);
     cmd1.redo();
 
     QPainterPath ppathNew1(QPointF(0, 0));
@@ -225,17 +225,17 @@ void TestControlPointMoveCommand::redoUndoControlPoint2Symmetric()
     KoPathShape path;
     path.moveTo(QPointF(0, 0));
     path.lineTo(QPointF(0, 100));
-    KoPathPoint *point1 = path.curveTo(QPointF(0, 50), QPointF(100, 50), QPointF(100, 100));
+    KPathPoint *point1 = path.curveTo(QPointF(0, 50), QPointF(100, 50), QPointF(100, 100));
     path.curveTo(QPointF(100, 150), QPointF(200, 150), QPointF(200, 100));
     path.moveTo(QPointF(0, 300));
     path.lineTo(QPointF(100, 400));
     path.curveTo(QPointF(50, 400), QPointF(0, 350), QPointF(0, 300));
     path.closeMerge();
 
-    point1->setProperties(point1->properties() | KoPathPoint::IsSymmetric);
+    point1->setProperties(point1->properties() | KPathPoint::IsSymmetric);
 
     QPainterPath ppathOrg = path.outline();
-    KPathControlPointMoveCommand cmd1(KoPathPointData(&path, path.pathPointIndex(point1)), QPointF(25, -50), KoPathPoint::ControlPoint2);
+    KPathControlPointMoveCommand cmd1(KoPathPointData(&path, path.pathPointIndex(point1)), QPointF(25, -50), KPathPoint::ControlPoint2);
     cmd1.redo();
 
     QPainterPath ppathNew1(QPointF(0, 0));

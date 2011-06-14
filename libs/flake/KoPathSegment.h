@@ -26,7 +26,7 @@
 #include <QtCore/QPair>
 #include <QtCore/QRectF>
 
-class KoPathPoint;
+class KPathPoint;
 class QTransform;
 
 /// A KoPathSegment consist of two neighboring KoPathPoints
@@ -38,7 +38,7 @@ public:
     * It takes ownership of the path points which do not have a
     * parent path shape set.
     */
-    explicit KoPathSegment(KoPathPoint * first = 0, KoPathPoint * second = 0);
+    explicit KoPathSegment(KPathPoint * first = 0, KPathPoint * second = 0);
 
     /// Constructs segment by copying another segment
     KoPathSegment(const KoPathSegment &segment);
@@ -57,16 +57,16 @@ public:
     ~KoPathSegment();
 
     /// Returns the first point of the segment
-    KoPathPoint *first() const;
+    KPathPoint *first() const;
 
     /// Sets the first segment point
-    void setFirst(KoPathPoint *first);
+    void setFirst(KPathPoint *first);
 
     /// Returns the second point of the segment
-    KoPathPoint *second() const;
+    KPathPoint *second() const;
 
     /// Sets the second segment point
-    void setSecond(KoPathPoint *second);
+    void setSecond(KPathPoint *second);
 
     /// Returns if segment is valid, e.g. has two valid points
     bool isValid() const;

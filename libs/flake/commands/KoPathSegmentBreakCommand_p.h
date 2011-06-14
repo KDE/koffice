@@ -34,7 +34,7 @@
 
 
 #include <QUndoCommand>
-#include "KoPathPoint.h"
+#include "KPathPoint.h"
 #include "KoPathPointData.h"
 
 /// The undo / redo command for breaking a subpath by removing the segment

@@ -44,7 +44,7 @@ KoPathToolHandle::~KoPathToolHandle()
 {
 }
 
-PointHandle::PointHandle(KoPathTool *tool, KoPathPoint *activePoint, KoPathPoint::PointType activePointType)
+PointHandle::PointHandle(KoPathTool *tool, KPathPoint *activePoint, KPathPoint::PointType activePointType)
         : KoPathToolHandle(tool)
         , m_activePoint(activePoint)
         , m_activePointType(activePointType)
@@ -59,9 +59,9 @@ void PointHandle::paint(QPainter &painter, const KoViewConverter &converter)
 
     KoPathToolSelection * selection = dynamic_cast<KoPathToolSelection*>(m_tool->selection());
 
-    KoPathPoint::PointType type = KoPathPoint::Node;
+    KPathPoint::PointType type = KPathPoint::Node;
     if (selection && selection->contains(m_activePoint))
-        type = KoPathPoint::All;
+        type = KPathPoint::All;
     int handleRadius = m_tool->canvas()->resourceManager()->handleRadius();
     m_activePoint->paint(painter, handleRadius, type);
     painter.restore();
@@ -99,7 +99,7 @@ KInteractionStrategy * PointHandle::handleMousePress(KoPointerEvent *event)
             }
         }
         // TODO remove canvas from call ?
-        if (m_activePointType == KoPathPoint::Node) {
+        if (m_activePointType == KPathPoint::Node) {
             QPointF startPoint = m_activePoint->parent()->shapeToDocument(m_activePoint->point());
             return new KoPathPointMoveStrategy(m_tool, startPoint);
         } else {
@@ -108,15 +108,15 @@ KInteractionStrategy * PointHandle::handleMousePress(KoPointerEvent *event)
             return new KPathControlPointMoveStrategy(m_tool, pd, m_activePointType, event->point);
         }
     } else {
-        KoPathPoint::PointProperties props = m_activePoint->properties();
+        KPathPoint::PointProperties props = m_activePoint->properties();
         if (! m_activePoint->activeControlPoint1() || ! m_activePoint->activeControlPoint2())
             return 0;
 
         KoPathPointTypeCommand::PointType pointType = KoPathPointTypeCommand::Smooth;
         // cycle the smooth->symmetric->unsmooth state of the path point
-        if (props & KoPathPoint::IsSmooth)
+        if (props & KPathPoint::IsSmooth)
             pointType = KoPathPointTypeCommand::Symmetric;
-        else if (props & KoPathPoint::IsSymmetric)
+        else if (props & KPathPoint::IsSymmetric)
             pointType = KoPathPointTypeCommand::Corner;
 
         QList<KoPathPointData> pointData;
@@ -134,12 +134,12 @@ bool PointHandle::check(const QList<KoPathShape*> &selectedShapes)
     return false;
 }
 
-KoPathPoint * PointHandle::activePoint() const
+KPathPoint * PointHandle::activePoint() const
 {
     return m_activePoint;
 }
 
-KoPathPoint::PointType PointHandle::activePointType() const
+KPathPoint::PointType PointHandle::activePointType() const
 {
     return m_activePointType;
 }
