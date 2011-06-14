@@ -34,9 +34,9 @@
 #include <kdebug.h>
 #include <QMap>
 
-class KoShapeSavingContextPrivate {
+class KShapeSavingContextPrivate {
 public:
-    KoShapeSavingContextPrivate(KXmlWriter&, KOdfGenericStyles&, KOdfEmbeddedDocumentSaver&);
+    KShapeSavingContextPrivate(KXmlWriter&, KOdfGenericStyles&, KOdfEmbeddedDocumentSaver&);
 
     KXmlWriter *xmlWriter;
     KShapeSavingContext::ShapeSavingOptions savingOptions;
@@ -57,7 +57,7 @@ public:
     KOdfEmbeddedDocumentSaver& embeddedSaver;
 };
 
-KoShapeSavingContextPrivate::KoShapeSavingContextPrivate(KXmlWriter &w,
+KShapeSavingContextPrivate::KShapeSavingContextPrivate(KXmlWriter &w,
         KOdfGenericStyles &s, KOdfEmbeddedDocumentSaver &e)
         : xmlWriter(&w),
         savingOptions(0),
@@ -71,7 +71,7 @@ KoShapeSavingContextPrivate::KoShapeSavingContextPrivate(KXmlWriter &w,
 
 KShapeSavingContext::KShapeSavingContext(KXmlWriter &xmlWriter, KOdfGenericStyles &mainStyles,
         KOdfEmbeddedDocumentSaver &embeddedSaver)
-    : d(new KoShapeSavingContextPrivate(xmlWriter, mainStyles, embeddedSaver))
+    : d(new KShapeSavingContextPrivate(xmlWriter, mainStyles, embeddedSaver))
 {
     // by default allow saving of draw:id
     addOption(KShapeSavingContext::DrawId);

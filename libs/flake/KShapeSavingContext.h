@@ -38,7 +38,7 @@ class KImageData;
 class KShapeLayer;
 class KOdfStore;
 class KoSharedSavingData;
-class KoShapeSavingContextPrivate;
+class KShapeSavingContextPrivate;
 class KShapeConnection;
 
 /**
@@ -282,7 +282,7 @@ public:
     void writeConnectors();
 
 private:
-    KoShapeSavingContextPrivate *d;
+    KShapeSavingContextPrivate *d;
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(KShapeSavingContext::ShapeSavingOptions)
