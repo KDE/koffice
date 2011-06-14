@@ -32,7 +32,7 @@
 #include "KoShapeBackground.h"
 #include "KColorBackground.h"
 #include "KGradientBackground.h"
-#include "KoPatternBackground.h"
+#include "KPatternBackground.h"
 #include "KoShapeManager.h"
 #include "KoShapeManager_p.h"
 #include "KoShapeUserData.h"
@@ -1234,7 +1234,7 @@ KoShapeBackground *KoShape::loadOdfFill(KoShapeLoadingContext &context) const
         gradient->setCoordinateMode(QGradient::ObjectBoundingMode);
         bg = new KGradientBackground(gradient);
     } else if (fill == "bitmap") {
-        bg = new KoPatternBackground(context.imageCollection());
+        bg = new KPatternBackground(context.imageCollection());
 #ifndef NWORKAROUND_ODF_BUGS
     } else if (fill.isEmpty()) {
          bg = KoOdfWorkaround::fixBackgroundColor(this, context);

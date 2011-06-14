@@ -24,7 +24,7 @@
 #include <kio/netaccess.h>
 
 #include <KImageCollection.h>
-#include <KoPatternBackground.h>
+#include <KPatternBackground.h>
 #include <KCanvasBase.h>
 #include <KoShapeController.h>
 #include <KoShapeBackgroundCommand.h>
@@ -91,16 +91,16 @@ void KoPABackgroundToolWidget::setBackgroundImage()
             QImage image(tmpFile);
             if (!image.isNull()) {
                 QUndoCommand * cmd = new QUndoCommand(i18n("Change background image"));
-                KoPatternBackground * bg = new KoPatternBackground(collection);
+                KPatternBackground * bg = new KPatternBackground(collection);
                 bg->setPattern(image);
                 QSizeF imageSize = bg->patternOriginalSize();
                 QSizeF pageSize = m_tool->view()->activePage()->size();
-                KoPatternBackground::PatternRepeat repeat = KoPatternBackground::Original;
+                KPatternBackground::PatternRepeat repeat = KPatternBackground::Original;
                 if (imageSize.width() > pageSize.width() || imageSize.height() > pageSize.height()) {
                     qreal imageRatio = imageSize.width() / imageSize.height();
                     qreal pageRatio = pageSize.width() / pageSize.height();
                     if (qAbs(imageRatio - pageRatio) < 0.1) {
-                        repeat = KoPatternBackground::Stretched;
+                        repeat = KPatternBackground::Stretched;
                     }
                     else {
                         qreal zoom = pageSize.width() / imageSize.width();

@@ -22,7 +22,7 @@
 
 #include <karbonui_export.h>
 
-#include <KoPatternBackground.h>
+#include <KPatternBackground.h>
 
 #include <QtGui/QWidget>
 
@@ -33,16 +33,16 @@ public:
     virtual ~KarbonPatternOptionsWidget();
 
     /// Sets the pattern repeat
-    void setRepeat(KoPatternBackground::PatternRepeat repeat);
+    void setRepeat(KPatternBackground::PatternRepeat repeat);
 
     /// Return the pattern repeat
-    KoPatternBackground::PatternRepeat repeat() const;
+    KPatternBackground::PatternRepeat repeat() const;
 
     /// Returns the pattern reference point identifier
-    KoPatternBackground::ReferencePoint referencePoint() const;
+    KPatternBackground::ReferencePoint referencePoint() const;
 
     /// Sets the pattern reference point
-    void setReferencePoint(KoPatternBackground::ReferencePoint referencePoint);
+    void setReferencePoint(KPatternBackground::ReferencePoint referencePoint);
 
     /// Returns reference point offset in percent of the size to fill
     QPointF referencePointOffset() const;

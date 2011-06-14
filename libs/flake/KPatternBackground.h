@@ -30,7 +30,7 @@ class KoPatternBackgroundPrivate;
 class KImageData;
 
 /// A pattern shape background
-class FLAKE_EXPORT KoPatternBackground : public KoShapeBackground
+class FLAKE_EXPORT KPatternBackground : public KoShapeBackground
 {
 public:
     /// Pattern rendering style
@@ -53,9 +53,9 @@ public:
     };
 
     /// Constructs a new pattern background utilizing the given image collection
-    KoPatternBackground(KImageCollection *collection);
+    KPatternBackground(KImageCollection *collection);
 
-    virtual ~KoPatternBackground();
+    virtual ~KPatternBackground();
 
     /// Sets the transform matrix
     void setTransform(const QTransform &matrix);
@@ -106,7 +106,7 @@ public:
     QSizeF patternOriginalSize() const;
 
     /// Assignment operator
-    KoPatternBackground& operator=(const KoPatternBackground &other);
+    KPatternBackground& operator=(const KPatternBackground &other);
 
     /// reimplemented from KoShapeBackground
     virtual void paint(QPainter &painter, const QPainterPath &fillPath) const;
@@ -118,7 +118,7 @@ public:
     /// Returns the bounding rect of the pattern image based on the given fill size
     QRectF patternRectFromFillSize(const QSizeF &size);
 private:
-    Q_DECLARE_PRIVATE(KoPatternBackground)
+    Q_DECLARE_PRIVATE(KPatternBackground)
 };
 
 #endif // KOPATTERNBACKGROUND_H

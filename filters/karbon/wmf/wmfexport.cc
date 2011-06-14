@@ -31,7 +31,7 @@
 #include <KoShapeContainer.h>
 #include <KColorBackground.h>
 #include <KGradientBackground.h>
-#include <KoPatternBackground.h>
+#include <KPatternBackground.h>
 
 /*
 TODO: bs.wmf stroke in red with MSword and in brown with Kword ??
@@ -138,7 +138,7 @@ void WmfExport::paintShape(KoShape * shape)
             fill = QBrush(*gbg->gradient());
             fill.setTransform(gbg->transform());
         }
-        KoPatternBackground * pbg = dynamic_cast<KoPatternBackground*>(shape->background());
+        KPatternBackground * pbg = dynamic_cast<KPatternBackground*>(shape->background());
         if (pbg) {
             fill.setTextureImage(pbg->pattern());
             fill.setTransform(pbg->transform());

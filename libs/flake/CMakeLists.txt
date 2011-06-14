@@ -75,7 +75,7 @@ set(flake_SRCS
     KoShapeBackground.cpp
     KColorBackground.cpp
     KGradientBackground.cpp
-    KoPatternBackground.cpp
+    KPatternBackground.cpp
     KoShapeConfigWidgetBase.cpp
     KDrag.cpp
     KDragOdfSaveHelper.cpp
@@ -273,7 +273,7 @@ install(
     KPathSegment.h
     KPathShape.h
     KPathShapeLoader.h
-    KoPatternBackground.h
+    KPatternBackground.h
     KoPluginLoader.h
     KoPointerEvent.h
     KoPostscriptPaintDevice.h

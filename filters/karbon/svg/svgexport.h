@@ -42,7 +42,7 @@ class KoShapeBorderModel;
 class ArtisticTextShape;
 class EllipseShape;
 class RectangleShape;
-class KoPatternBackground;
+class KPatternBackground;
 class QTextStream;
 class QPixmap;
 class QImage;
@@ -77,7 +77,7 @@ private:
     void getEffects(KoShape *shape, QTextStream *stream);
     void getColorStops(const QGradientStops & colorStops);
     void getGradient(const QGradient * gradient, const QTransform &gradientTransform);
-    void getPattern(KoPatternBackground * pattern, KoShape * shape);
+    void getPattern(KPatternBackground * pattern, KoShape * shape);
     QString getTransform(const QTransform &matrix, const QString &attributeName);
 
     QString getID(const KoShape *obj);

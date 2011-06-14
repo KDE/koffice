@@ -26,7 +26,7 @@
 #include <KOdfXmlNS.h>
 #include <KUnit.h>
 #include <KColorBackground.h>
-#include <KoPatternBackground.h>
+#include <KPatternBackground.h>
 #include <KImageCollection.h>
 #include <KOdfLoadingContext.h>
 
@@ -420,7 +420,7 @@ void KWPageStyle::loadOdf(KOdfLoadingContext &context, const KXmlElement &master
     if (!propBackgroundImage.isNull()) {
         const QString href = propBackgroundImage.attributeNS(KOdfXmlNS::xlink, "href", QString());
         if (!href.isEmpty()) {
-            KoPatternBackground *background = new KoPatternBackground(documentResources->imageCollection());
+            KPatternBackground *background = new KPatternBackground(documentResources->imageCollection());
             d->fullPageBackground = background;
             d->fullPageBackground->ref();
 

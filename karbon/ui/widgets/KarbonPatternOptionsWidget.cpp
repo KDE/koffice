@@ -71,7 +71,7 @@ KarbonPatternOptionsWidget::~KarbonPatternOptionsWidget()
     delete d;
 }
 
-void KarbonPatternOptionsWidget::setRepeat(KoPatternBackground::PatternRepeat repeat)
+void KarbonPatternOptionsWidget::setRepeat(KPatternBackground::PatternRepeat repeat)
 {
     d->widget.patternRepeat->blockSignals(true);
     d->widget.patternRepeat->setCurrentIndex(repeat);
@@ -79,17 +79,17 @@ void KarbonPatternOptionsWidget::setRepeat(KoPatternBackground::PatternRepeat re
     updateControls();
 }
 
-KoPatternBackground::PatternRepeat KarbonPatternOptionsWidget::repeat() const
+KPatternBackground::PatternRepeat KarbonPatternOptionsWidget::repeat() const
 {
-    return static_cast<KoPatternBackground::PatternRepeat>(d->widget.patternRepeat->currentIndex());
+    return static_cast<KPatternBackground::PatternRepeat>(d->widget.patternRepeat->currentIndex());
 }
 
-KoPatternBackground::ReferencePoint KarbonPatternOptionsWidget::referencePoint() const
+KPatternBackground::ReferencePoint KarbonPatternOptionsWidget::referencePoint() const
 {
-    return static_cast<KoPatternBackground::ReferencePoint>(d->widget.referencePoint->currentIndex());
+    return static_cast<KPatternBackground::ReferencePoint>(d->widget.referencePoint->currentIndex());
 }
 
-void KarbonPatternOptionsWidget::setReferencePoint(KoPatternBackground::ReferencePoint referencePoint)
+void KarbonPatternOptionsWidget::setReferencePoint(KPatternBackground::ReferencePoint referencePoint)
 {
     d->widget.referencePoint->blockSignals(true);
     d->widget.referencePoint->setCurrentIndex(referencePoint);
@@ -143,11 +143,11 @@ void KarbonPatternOptionsWidget::setPatternSize(const QSize &size)
 
 void KarbonPatternOptionsWidget::updateControls()
 {
-    bool stretch = d->widget.patternRepeat->currentIndex() == KoPatternBackground::Stretched;
+    bool stretch = d->widget.patternRepeat->currentIndex() == KPatternBackground::Stretched;
     d->widget.patternWidth->setEnabled(! stretch);
     d->widget.patternHeight->setEnabled(! stretch);
 
-    bool tiled = d->widget.patternRepeat->currentIndex() == KoPatternBackground::Tiled;
+    bool tiled = d->widget.patternRepeat->currentIndex() == KPatternBackground::Tiled;
     d->widget.referencePoint->setEnabled(tiled);
     d->widget.refPointOffsetX->setEnabled(tiled);
     d->widget.refPointOffsetY->setEnabled(tiled);

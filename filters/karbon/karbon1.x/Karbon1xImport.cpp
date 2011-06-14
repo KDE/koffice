@@ -44,7 +44,7 @@
 #include <KImageCollection.h>
 #include <KPathPoint.h>
 #include <KoZoomHandler.h>
-#include <KoPatternBackground.h>
+#include <KPatternBackground.h>
 #include <KColorBackground.h>
 #include <KGradientBackground.h>
 #include <KoShapeFactoryBase.h>
@@ -493,7 +493,7 @@ void KarbonImport::loadPattern(KoShape * shape, const KXmlElement &element)
 
     KImageCollection *imageCollection = m_document->resourceManager()->imageCollection();
     if (imageCollection) {
-        KoPatternBackground * newFill = new KoPatternBackground(imageCollection);
+        KPatternBackground * newFill = new KPatternBackground(imageCollection);
         newFill->setPattern(img.mirrored(false, true));
         newFill->setTransform(m);
         shape->setBackground(newFill);

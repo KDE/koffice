@@ -28,7 +28,7 @@
 #include <KImageCollection.h>
 #include <KColorBackground.h>
 #include <KGradientBackground.h>
-#include <KoPatternBackground.h>
+#include <KPatternBackground.h>
 #include <KoShapeFactoryBase.h>
 #include <KoShapeRegistry.h>
 
@@ -546,7 +546,7 @@ void WMFImportParser::appendBrush(KoShape& obj)
     case Qt::TexturePattern: {
         KImageCollection * imageCollection = mDoc->imageCollection();
         if (imageCollection) {
-            KoPatternBackground * bg = new KoPatternBackground(imageCollection);
+            KPatternBackground * bg = new KPatternBackground(imageCollection);
             bg->setPattern(mBrush.textureImage());
             bg->setTransform(mBrush.transform());
             obj.setBackground(bg);

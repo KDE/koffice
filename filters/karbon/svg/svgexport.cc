@@ -46,7 +46,7 @@
 #include <KLineBorder.h>
 #include <KColorBackground.h>
 #include <KGradientBackground.h>
-#include <KoPatternBackground.h>
+#include <KPatternBackground.h>
 #include <plugins/artistictextshape/ArtisticTextShape.h>
 #include <pathshapes/rectangle/RectangleShape.h>
 #include <pathshapes/ellipse/EllipseShape.h>
@@ -427,7 +427,7 @@ void SvgExport::getGradient(const QGradient * gradient, const QTransform &gradie
 }
 
 // better than nothing
-void SvgExport::getPattern(KoPatternBackground * pattern, KoShape * shape)
+void SvgExport::getPattern(KPatternBackground * pattern, KoShape * shape)
 {
     QString uid = createUID();
 
@@ -442,30 +442,30 @@ void SvgExport::getPattern(KoPatternBackground * pattern, KoShape * shape)
 
     // now take the reference point into account
     switch (pattern->referencePoint()) {
-    case KoPatternBackground::TopLeft:
+    case KPatternBackground::TopLeft:
         break;
-    case KoPatternBackground::Top:
+    case KPatternBackground::Top:
         offset += QPointF(0.5 * shapeSize.width(), 0.0);
         break;
-    case KoPatternBackground::TopRight:
+    case KPatternBackground::TopRight:
         offset += QPointF(shapeSize.width(), 0.0);
         break;
-    case KoPatternBackground::Left:
+    case KPatternBackground::Left:
         offset += QPointF(0.0, 0.5 * shapeSize.height());
         break;
-    case KoPatternBackground::Center:
+    case KPatternBackground::Center:
         offset += QPointF(0.5 * shapeSize.width(), 0.5 * shapeSize.height());
         break;
-    case KoPatternBackground::Right:
+    case KPatternBackground::Right:
         offset += QPointF(shapeSize.width(), 0.5 * shapeSize.height());
         break;
-    case KoPatternBackground::BottomLeft:
+    case KPatternBackground::BottomLeft:
         offset += QPointF(0.0, shapeSize.height());
         break;
-    case KoPatternBackground::Bottom:
+    case KPatternBackground::Bottom:
         offset += QPointF(0.5 * shapeSize.width(), shapeSize.height());
         break;
-    case KoPatternBackground::BottomRight:
+    case KPatternBackground::BottomRight:
         offset += QPointF(shapeSize.width(), shapeSize.height());
         break;
     }
@@ -477,7 +477,7 @@ void SvgExport::getPattern(KoPatternBackground * pattern, KoShape * shape)
     *m_defs << " x=\"" << SvgUtil::toUserSpace(offset.x()) << "\"";
     *m_defs << " y=\"" << SvgUtil::toUserSpace(offset.y()) << "\"";
 
-    if (pattern->repeat() == KoPatternBackground::Stretched) {
+    if (pattern->repeat() == KPatternBackground::Stretched) {
         *m_defs << " width=\"100%\"";
         *m_defs << " height=\"100%\"";
         *m_defs << " patternUnits=\"objectBoundingBox\"";
@@ -546,7 +546,7 @@ void SvgExport::getFill(KoShape * shape, QTextStream *stream)
         getGradient(gbg->gradient(), gbg->transform());
         *stream << "\"";
     }
-    KoPatternBackground * pbg = dynamic_cast<KoPatternBackground*>(shape->background());
+    KPatternBackground * pbg = dynamic_cast<KPatternBackground*>(shape->background());
     if (pbg) {
         *stream << " fill=\"";
         getPattern(pbg, shape);

@@ -47,7 +47,7 @@
 #include <plugins/artistictextshape/ArtisticTextShape.h>
 #include <KColorBackground.h>
 #include <KGradientBackground.h>
-#include <KoPatternBackground.h>
+#include <KPatternBackground.h>
 #include <KFilterEffectRegistry.h>
 #include <KFilterEffect.h>
 #include "KFilterEffectStack.h"
@@ -1131,7 +1131,7 @@ void SvgParser::applyFillStyle(KoShape * shape)
             qDeleteAll(patternContent);
 
             if (!image.isNull()) {
-                KoPatternBackground * bg = new KoPatternBackground(imageCollection);
+                KPatternBackground * bg = new KPatternBackground(imageCollection);
                 bg->setPattern(image);
 
                 QPointF refPoint = shape->documentToShape(pattern->position(objectBound));
@@ -1140,7 +1140,7 @@ void SvgParser::applyFillStyle(KoShape * shape)
                 bg->setPatternDisplaySize(tileSize);
                 if (pattern->patternUnits() == SvgPatternHelper::ObjectBoundingBox) {
                     if (tileSize == objectBound.size())
-                        bg->setRepeat(KoPatternBackground::Stretched);
+                        bg->setRepeat(KPatternBackground::Stretched);
                 }
 
                 // calculate pattern reference point offset in percent of tileSize
