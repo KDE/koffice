@@ -20,11 +20,11 @@
 #ifndef MORPHOLOGYEFFECTFACTORY_H
 #define MORPHOLOGYEFFECTFACTORY_H
 
-#include "KoFilterEffectFactoryBase.h"
+#include "KFilterEffectFactoryBase.h"
 
 class KFilterEffect;
 
-class MorphologyEffectFactory : public KoFilterEffectFactoryBase
+class MorphologyEffectFactory : public KFilterEffectFactoryBase
 {
 public:
     explicit MorphologyEffectFactory(QObject *parent);

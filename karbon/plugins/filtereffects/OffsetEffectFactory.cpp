@@ -23,7 +23,7 @@
 #include <KLocale>
 
 OffsetEffectFactory::OffsetEffectFactory(QObject *parent)
-        : KoFilterEffectFactoryBase(parent, OffsetEffectId, i18n("Offset"))
+        : KFilterEffectFactoryBase(parent, OffsetEffectId, i18n("Offset"))
 {
 }
 

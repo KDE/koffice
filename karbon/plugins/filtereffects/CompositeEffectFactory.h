@@ -20,11 +20,11 @@
 #ifndef COMPOSITEEFFECTFACTORY_H
 #define COMPOSITEEFFECTFACTORY_H
 
-#include "KoFilterEffectFactoryBase.h"
+#include "KFilterEffectFactoryBase.h"
 
 class KFilterEffect;
 
-class CompositeEffectFactory : public KoFilterEffectFactoryBase
+class CompositeEffectFactory : public KFilterEffectFactoryBase
 {
 public:
     explicit CompositeEffectFactory(QObject *parent);

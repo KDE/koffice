@@ -21,7 +21,7 @@
 #define KOFILTEREFFECTREGISTRY_H
 
 #include <KoGenericRegistry.h>
-#include <KoFilterEffectFactoryBase.h>
+#include <KFilterEffectFactoryBase.h>
 #include <QtCore/QObject>
 #include <QtGui/QTransform>
 
@@ -30,7 +30,7 @@
 class KXmlElement;
 class KoFilterEffectLoadingContext;
 
-class FLAKE_EXPORT KoFilterEffectRegistry : public QObject, public KoGenericRegistry<KoFilterEffectFactoryBase*>
+class FLAKE_EXPORT KoFilterEffectRegistry : public QObject, public KoGenericRegistry<KFilterEffectFactoryBase*>
 {
 Q_OBJECT
 

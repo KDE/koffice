@@ -24,7 +24,7 @@
 #include <KLocale>
 
 MergeEffectFactory::MergeEffectFactory(QObject *parent)
-        : KoFilterEffectFactoryBase(parent, MergeEffectId, i18n("Merge"))
+        : KFilterEffectFactoryBase(parent, MergeEffectId, i18n("Merge"))
 {
 }
 

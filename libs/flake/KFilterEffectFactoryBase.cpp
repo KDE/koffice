@@ -17,9 +17,9 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoFilterEffectFactoryBase.h"
+#include "KFilterEffectFactoryBase.h"
 
-class KoFilterEffectFactoryBase::Private
+class KFilterEffectFactoryBase::Private
 {
 public:
     Private(const QString &_id, const QString &_name) : id(_id), name(_name)
@@ -29,24 +29,24 @@ public:
     const QString name;
 };
 
-KoFilterEffectFactoryBase::KoFilterEffectFactoryBase(QObject *parent, const QString &id, const QString &name)
+KFilterEffectFactoryBase::KFilterEffectFactoryBase(QObject *parent, const QString &id, const QString &name)
 : QObject(parent), d(new Private(id, name))
 {
 }
 
-KoFilterEffectFactoryBase::~KoFilterEffectFactoryBase()
+KFilterEffectFactoryBase::~KFilterEffectFactoryBase()
 {
     delete d;
 }
 
-QString KoFilterEffectFactoryBase::name() const
+QString KFilterEffectFactoryBase::name() const
 {
     return d->name;
 }
 
-QString KoFilterEffectFactoryBase::id() const
+QString KFilterEffectFactoryBase::id() const
 {
     return d->id;
 }
 
-#include <KoFilterEffectFactoryBase.moc>
+#include <KFilterEffectFactoryBase.moc>

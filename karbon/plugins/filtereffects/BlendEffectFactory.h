@@ -20,11 +20,11 @@
 #ifndef BLENDEFFECTFACTORY_H
 #define BLENDEFFECTFACTORY_H
 
-#include "KoFilterEffectFactoryBase.h"
+#include "KFilterEffectFactoryBase.h"
 
 class KFilterEffect;
 
-class BlendEffectFactory : public KoFilterEffectFactoryBase
+class BlendEffectFactory : public KFilterEffectFactoryBase
 {
 public:
     explicit BlendEffectFactory(QObject *parent);

@@ -20,11 +20,11 @@
 #ifndef IMAGEEFFECTFACTORY_H
 #define IMAGEEFFECTFACTORY_H
 
-#include "KoFilterEffectFactoryBase.h"
+#include "KFilterEffectFactoryBase.h"
 
 class KFilterEffect;
 
-class ImageEffectFactory : public KoFilterEffectFactoryBase
+class ImageEffectFactory : public KFilterEffectFactoryBase
 {
 public:
     explicit ImageEffectFactory(QObject *parent);

@@ -23,7 +23,7 @@
 #include <KLocale>
 
 ImageEffectFactory::ImageEffectFactory(QObject *parent)
-        : KoFilterEffectFactoryBase(parent, ImageEffectId, i18n("Image"))
+        : KFilterEffectFactoryBase(parent, ImageEffectId, i18n("Image"))
 {
 }
 

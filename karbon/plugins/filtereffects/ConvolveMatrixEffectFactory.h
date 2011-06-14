@@ -20,11 +20,11 @@
 #ifndef CONVOLVEMATRIXEFFECTFACTORY_H
 #define CONVOLVEMATRIXEFFECTFACTORY_H
 
-#include "KoFilterEffectFactoryBase.h"
+#include "KFilterEffectFactoryBase.h"
 
 class KFilterEffect;
 
-class ConvolveMatrixEffectFactory : public KoFilterEffectFactoryBase
+class ConvolveMatrixEffectFactory : public KFilterEffectFactoryBase
 {
 public:
     explicit ConvolveMatrixEffectFactory(QObject *parent);

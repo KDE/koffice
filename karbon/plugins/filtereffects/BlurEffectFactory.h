@@ -20,11 +20,11 @@
 #ifndef BLUREFFECTFACTORY_H
 #define BLUREFFECTFACTORY_H
 
-#include "KoFilterEffectFactoryBase.h"
+#include "KFilterEffectFactoryBase.h"
 
 class KFilterEffect;
 
-class BlurEffectFactory : public KoFilterEffectFactoryBase
+class BlurEffectFactory : public KFilterEffectFactoryBase
 {
 public:
     explicit BlurEffectFactory(QObject *parent);

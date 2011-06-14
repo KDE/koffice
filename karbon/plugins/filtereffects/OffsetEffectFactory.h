@@ -20,11 +20,11 @@
 #ifndef OFFSETEFFECTFACTORY_H
 #define OFFSETEFFECTFACTORY_H
 
-#include "KoFilterEffectFactoryBase.h"
+#include "KFilterEffectFactoryBase.h"
 
 class KFilterEffect;
 
-class OffsetEffectFactory : public KoFilterEffectFactoryBase
+class OffsetEffectFactory : public KFilterEffectFactoryBase
 {
 public:
     explicit OffsetEffectFactory(QObject *parent);

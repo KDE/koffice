@@ -20,11 +20,11 @@
 #ifndef COMPONENTTRANSFEREFFECTFACTORY_H
 #define COMPONENTTRANSFEREFFECTFACTORY_H
 
-#include "KoFilterEffectFactoryBase.h"
+#include "KFilterEffectFactoryBase.h"
 
 class KFilterEffect;
 
-class ComponentTransferEffectFactory : public KoFilterEffectFactoryBase
+class ComponentTransferEffectFactory : public KFilterEffectFactoryBase
 {
 public:
     explicit ComponentTransferEffectFactory(QObject *parent);

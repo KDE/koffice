@@ -24,7 +24,7 @@
 #include <KLocale>
 
 ComponentTransferEffectFactory::ComponentTransferEffectFactory(QObject *parent)
-        : KoFilterEffectFactoryBase(parent, ComponentTransferEffectId, i18n("Component transfer"))
+        : KFilterEffectFactoryBase(parent, ComponentTransferEffectId, i18n("Component transfer"))
 {
 }
 

@@ -24,7 +24,7 @@
 #include <KLocale>
 
 MorphologyEffectFactory::MorphologyEffectFactory(QObject *parent)
-        : KoFilterEffectFactoryBase(parent, MorphologyEffectId, i18n("Morphology"))
+        : KFilterEffectFactoryBase(parent, MorphologyEffectId, i18n("Morphology"))
 {
 }
 

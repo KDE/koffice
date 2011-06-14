@@ -53,7 +53,7 @@ KoFilterEffectRegistry* KoFilterEffectRegistry::instance()
 
 KFilterEffect * KoFilterEffectRegistry::createFilterEffectFromXml(const KXmlElement & element, const KoFilterEffectLoadingContext &context)
 {
-    KoFilterEffectFactoryBase * factory = get(element.tagName());
+    KFilterEffectFactoryBase * factory = get(element.tagName());
     if (!factory)
         return 0;
 

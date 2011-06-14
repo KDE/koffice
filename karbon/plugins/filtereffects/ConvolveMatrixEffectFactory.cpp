@@ -24,7 +24,7 @@
 #include <KLocale>
 
 ConvolveMatrixEffectFactory::ConvolveMatrixEffectFactory(QObject *parent)
-        : KoFilterEffectFactoryBase(parent, ConvolveMatrixEffectId, i18n("Convolve Matrix"))
+        : KFilterEffectFactoryBase(parent, ConvolveMatrixEffectId, i18n("Convolve Matrix"))
 {
 }
 
