@@ -44,11 +44,11 @@ class KoPathShape;
 /**
 * @brief Strategy for deforming a segment of a path shape.
 */
-class KoPathSegmentChangeStrategy : public KInteractionStrategy
+class KPathSegmentChangeStrategy : public KInteractionStrategy
 {
 public:
-    KoPathSegmentChangeStrategy(KoPathTool *tool, const QPointF &pos, const KPathPointData &segment, qreal segmentParam);
-    virtual ~KoPathSegmentChangeStrategy();
+    KPathSegmentChangeStrategy(KoPathTool *tool, const QPointF &pos, const KPathPointData &segment, qreal segmentParam);
+    virtual ~KPathSegmentChangeStrategy();
     virtual void handleMouseMove(const QPointF &mouseLocation, Qt::KeyboardModifiers modifiers);
     virtual QUndoCommand *createCommand(QUndoCommand *parent = 0);
 

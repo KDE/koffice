@@ -42,7 +42,7 @@
 #include "KParameterShape.h"
 #include "KPathPoint.h"
 #include "KPathPointRubberSelectStrategy_p.h"
-#include "KoPathSegmentChangeStrategy_p.h"
+#include "KPathSegmentChangeStrategy_p.h"
 #include "PathToolOptionWidget_p.h"
 #include "KoSnapGuide.h"
 
@@ -474,7 +474,7 @@ void KoPathTool::mousePressEvent(KoPointerEvent *event)
             if (segmentAtPoint(event->point, clickedShape, clickedPoint, clickedPointParam)) {
                 KoPathPointIndex index = clickedShape->pathPointIndex(clickedPoint);
                 KPathPointData data(clickedShape, index);
-                m_currentStrategy = new KoPathSegmentChangeStrategy(this, event->point, data, clickedPointParam);
+                m_currentStrategy = new KPathSegmentChangeStrategy(this, event->point, data, clickedPointParam);
                 event->accept();
             } else {
                 if ((event->modifiers() & Qt::ControlModifier) == 0) {

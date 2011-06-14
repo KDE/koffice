@@ -167,7 +167,7 @@ set(flake_SRCS
     tools/KCreateShapesTool.cpp
     tools/KCreateShapesToolFactory.cpp
     tools/KoShapeRubberSelectStrategy.cpp
-    tools/KoPathSegmentChangeStrategy.cpp
+    tools/KPathSegmentChangeStrategy.cpp
 )
 
 kde4_add_ui_files(flake_SRCS

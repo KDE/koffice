@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoPathSegmentChangeStrategy_p.h"
+#include "KPathSegmentChangeStrategy_p.h"
 #include "KoPathShape.h"
 #include "KPathPoint.h"
 #include "KoPathTool_p.h"
@@ -28,7 +28,7 @@
 #include <KLocale>
 #include <limits>
 
-KoPathSegmentChangeStrategy::KoPathSegmentChangeStrategy(KoPathTool *tool, const QPointF &pos, const KPathPointData &segment, qreal segmentParam)
+KPathSegmentChangeStrategy::KPathSegmentChangeStrategy(KoPathTool *tool, const QPointF &pos, const KPathPointData &segment, qreal segmentParam)
 : KInteractionStrategy(tool)
 , m_originalPosition(pos)
 , m_lastPosition(pos)
@@ -54,11 +54,11 @@ KoPathSegmentChangeStrategy::KoPathSegmentChangeStrategy(KoPathTool *tool, const
     m_originalSegmentDegree = m_segment.degree();
 }
 
-KoPathSegmentChangeStrategy::~KoPathSegmentChangeStrategy()
+KPathSegmentChangeStrategy::~KPathSegmentChangeStrategy()
 {
 }
 
-void KoPathSegmentChangeStrategy::handleMouseMove(const QPointF &mouseLocation, Qt::KeyboardModifiers modifiers)
+void KPathSegmentChangeStrategy::handleMouseMove(const QPointF &mouseLocation, Qt::KeyboardModifiers modifiers)
 {
     m_tool->canvas()->updateCanvas(m_tool->canvas()->snapGuide()->boundingRect());
     QPointF snappedPosition = m_tool->canvas()->snapGuide()->snap(mouseLocation, modifiers);
@@ -130,7 +130,7 @@ void KoPathSegmentChangeStrategy::handleMouseMove(const QPointF &mouseLocation, 
     m_lastPosition = mouseLocation;
 }
 
-QUndoCommand* KoPathSegmentChangeStrategy::createCommand(QUndoCommand *parent)
+QUndoCommand* KPathSegmentChangeStrategy::createCommand(QUndoCommand *parent)
 {
     m_tool->canvas()->updateCanvas(m_tool->canvas()->snapGuide()->boundingRect());
 
