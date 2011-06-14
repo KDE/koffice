@@ -44,7 +44,7 @@ class KCreateShapesTool;
 /**
  * A strategy for the KCreateShapesTool.
  */
-class KoCreateShapeStrategy : public KoShapeRubberSelectStrategy
+class KCreateShapeStrategy : public KoShapeRubberSelectStrategy
 {
 public:
     /**
@@ -52,8 +52,8 @@ public:
      * @param tool the parent tool which controls this strategy
      * @param clicked the initial point that the user depressed (in pt).
      */
-    KoCreateShapeStrategy(KCreateShapesTool *tool, const QPointF &clicked);
-    virtual ~KoCreateShapeStrategy() {}
+    KCreateShapeStrategy(KCreateShapesTool *tool, const QPointF &clicked);
+    virtual ~KCreateShapeStrategy() {}
 
     void finishInteraction(Qt::KeyboardModifiers modifiers);
     QUndoCommand* createCommand(QUndoCommand *parent = 0);

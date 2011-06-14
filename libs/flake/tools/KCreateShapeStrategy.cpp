@@ -18,7 +18,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoCreateShapeStrategy_p.h"
+#include "KCreateShapeStrategy_p.h"
 #include "KoShapeRubberSelectStrategy_p.h"
 #include "KCreateShapesTool.h"
 #include "KoShape.h"
@@ -33,7 +33,7 @@
 
 #include <kdebug.h>
 
-KoCreateShapeStrategy::KoCreateShapeStrategy(KCreateShapesTool *tool, const QPointF &clicked)
+KCreateShapeStrategy::KCreateShapeStrategy(KCreateShapesTool *tool, const QPointF &clicked)
         : KoShapeRubberSelectStrategy(tool, clicked, tool->canvas()->snapToGrid())
 {
     KCreateShapesTool *parent = static_cast<KCreateShapesTool*>(d_ptr->tool);
@@ -53,7 +53,7 @@ KoCreateShapeStrategy::KoCreateShapeStrategy(KCreateShapesTool *tool, const QPoi
     }
 }
 
-QUndoCommand* KoCreateShapeStrategy::createCommand(QUndoCommand *parentCommand)
+QUndoCommand* KCreateShapeStrategy::createCommand(QUndoCommand *parentCommand)
 {
     Q_D(KoShapeRubberSelectStrategy);
     KCreateShapesTool *parent = static_cast<KCreateShapesTool*>(d_ptr->tool);
@@ -88,14 +88,14 @@ QUndoCommand* KoCreateShapeStrategy::createCommand(QUndoCommand *parentCommand)
     return cmd;
 }
 
-void KoCreateShapeStrategy::finishInteraction(Qt::KeyboardModifiers modifiers)
+void KCreateShapeStrategy::finishInteraction(Qt::KeyboardModifiers modifiers)
 {
     Q_UNUSED(modifiers);
     Q_D(KoShapeRubberSelectStrategy);
     d->tool->canvas()->updateCanvas(d->selectedRect());
 }
 
-void KoCreateShapeStrategy::paint(QPainter &painter, const KoViewConverter &converter)
+void KCreateShapeStrategy::paint(QPainter &painter, const KoViewConverter &converter)
 {
     Q_D(KoShapeRubberSelectStrategy);
     if (m_outline.isEmpty())
@@ -127,7 +127,7 @@ void KoCreateShapeStrategy::paint(QPainter &painter, const KoViewConverter &conv
     }
 }
 
-void KoCreateShapeStrategy::handleMouseMove(const QPointF &point, Qt::KeyboardModifiers modifiers)
+void KCreateShapeStrategy::handleMouseMove(const QPointF &point, Qt::KeyboardModifiers modifiers)
 {
     Q_D(KoShapeRubberSelectStrategy);
     QPointF p(point);
