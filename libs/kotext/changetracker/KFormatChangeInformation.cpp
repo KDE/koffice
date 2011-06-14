@@ -59,23 +59,23 @@ QTextBlockFormat& KoParagraphStyleChangeInformation::previousBlockFormat()
     return this->previousTextBlockFormat;
 }
 
-KoListItemNumChangeInformation::KoListItemNumChangeInformation(KoListItemNumChangeInformation::ListItemNumChangeType type):
+KListItemNumChangeInformation::KListItemNumChangeInformation(KListItemNumChangeInformation::ListItemNumChangeType type):
                                                                KFormatChangeInformation(KFormatChangeInformation::eListItemNumberingChange),
                                                                eSubType(type)
 {
 }
 
-void KoListItemNumChangeInformation::setPreviousStartNumber(int oldStartNumber)
+void KListItemNumChangeInformation::setPreviousStartNumber(int oldStartNumber)
 {
     this->oldStartNumber = oldStartNumber;
 }
 
-KoListItemNumChangeInformation::ListItemNumChangeType KoListItemNumChangeInformation::listItemNumChangeType()
+KListItemNumChangeInformation::ListItemNumChangeType KListItemNumChangeInformation::listItemNumChangeType()
 {
     return eSubType;
 }
 
-int KoListItemNumChangeInformation::previousStartNumber()
+int KListItemNumChangeInformation::previousStartNumber()
 {
     return oldStartNumber;
 }

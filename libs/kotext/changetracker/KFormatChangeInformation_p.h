@@ -72,19 +72,19 @@ private:
     QTextBlockFormat previousTextBlockFormat;
 };
 
-class KoListItemNumChangeInformation : public KFormatChangeInformation
+class KListItemNumChangeInformation : public KFormatChangeInformation
 {
 public:
     typedef enum {
         eNumberingRestarted = 0,
         eRestartRemoved
     } ListItemNumChangeType;
-    KoListItemNumChangeInformation(KoListItemNumChangeInformation::ListItemNumChangeType eSubType);
+    KListItemNumChangeInformation(KListItemNumChangeInformation::ListItemNumChangeType eSubType);
     void setPreviousStartNumber(int oldRestartNumber);
-    KoListItemNumChangeInformation::ListItemNumChangeType listItemNumChangeType();
+    KListItemNumChangeInformation::ListItemNumChangeType listItemNumChangeType();
     int previousStartNumber();
 private:
     int oldStartNumber;
-    KoListItemNumChangeInformation::ListItemNumChangeType eSubType;
+    KListItemNumChangeInformation::ListItemNumChangeType eSubType;
 };
 #endif

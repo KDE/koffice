@@ -323,10 +323,10 @@ void KoTextLoader::Private::openChangeRegion(const KXmlElement& element)
     } else if((element.localName() == "list-item") && attributeChange.isValid) {
         changeElement->setChangeType(KOdfGenericChange::FormatChange);
         if (attributeChange.changeType == "insert") {
-            KoListItemNumChangeInformation *listItemChangeInformation = new KoListItemNumChangeInformation(KoListItemNumChangeInformation::eNumberingRestarted);
+            KListItemNumChangeInformation *listItemChangeInformation = new KListItemNumChangeInformation(KListItemNumChangeInformation::eNumberingRestarted);
             changeTracker->setFormatChangeInformation(changeId, listItemChangeInformation);
         } else if (attributeChange.changeType == "remove") {
-            KoListItemNumChangeInformation *listItemChangeInformation = new KoListItemNumChangeInformation(KoListItemNumChangeInformation::eRestartRemoved);
+            KListItemNumChangeInformation *listItemChangeInformation = new KListItemNumChangeInformation(KListItemNumChangeInformation::eRestartRemoved);
             listItemChangeInformation->setPreviousStartNumber(attributeChange.attributeValue.toInt());
             changeTracker->setFormatChangeInformation(changeId, listItemChangeInformation);
         }

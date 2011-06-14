@@ -503,13 +503,13 @@ int KoTextWriter::Private::openTagRegion(int position, ElementType elementType, 
                             && elementType == KoTextWriter::Private::ListItem) {
             KFormatChangeInformation *formatChangeInformation = changeTracker->formatChangeInformation(changeId);
             if (formatChangeInformation && formatChangeInformation->formatType() == KFormatChangeInformation::eListItemNumberingChange) {
-                KoListItemNumChangeInformation *listItemChangeInfo = static_cast<KoListItemNumChangeInformation *>(formatChangeInformation);
+                KListItemNumChangeInformation *listItemChangeInfo = static_cast<KListItemNumChangeInformation *>(formatChangeInformation);
 
-                if (listItemChangeInfo->listItemNumChangeType() == KoListItemNumChangeInformation::eNumberingRestarted) {
+                if (listItemChangeInfo->listItemNumChangeType() == KListItemNumChangeInformation::eNumberingRestarted) {
                     QString attributeChangeRecord = changeTransTable.value(changeId) + QString(",") + QString("insert")
                                                                                      + QString(",") + QString("text:start-value");
                     tagInformation.addAttribute("ac:change001", attributeChangeRecord);
-                } else if (listItemChangeInfo->listItemNumChangeType() == KoListItemNumChangeInformation::eRestartRemoved) {
+                } else if (listItemChangeInfo->listItemNumChangeType() == KListItemNumChangeInformation::eRestartRemoved) {
                     QString attributeChangeRecord = changeTransTable.value(changeId) + QString(",") + QString("remove")
                                                                                      + QString(",") + QString("text:start-value")
                                                                                      + QString(",") + QString::number(listItemChangeInfo->previousStartNumber());
