@@ -26,7 +26,7 @@
 
 
 #include <KoEventActionAddCommand.h>
-#include <KoEventActionRemoveCommand.h>
+#include <KEventActionRemoveCommand.h>
 #include <SCEventActionData.h>
 #include <SCSoundCollection.h>
 #include <SCSoundData.h>
@@ -93,7 +93,7 @@ void SCSoundEventActionWidget::soundComboChanged()
     // TODO better name e.g. on new or remove sound
     QUndoCommand * cmd = new QUndoCommand(i18n("Change sound action"));
     if (m_eventAction) {
-        new KoEventActionRemoveCommand(m_shape, m_eventAction, cmd);
+        new KEventActionRemoveCommand(m_shape, m_eventAction, cmd);
         m_eventAction = 0;
     }
 

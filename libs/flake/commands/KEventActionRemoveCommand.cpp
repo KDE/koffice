@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoEventActionRemoveCommand.h"
+#include "KEventActionRemoveCommand.h"
 #include <klocale.h>
 
 #include "KoShape.h"
@@ -42,24 +42,24 @@ public:
     bool deleteEventAction;
 };
 
-KoEventActionRemoveCommand::KoEventActionRemoveCommand(KoShape *shape, KoEventAction *eventAction, QUndoCommand *parent)
+KEventActionRemoveCommand::KEventActionRemoveCommand(KoShape *shape, KoEventAction *eventAction, QUndoCommand *parent)
     : QUndoCommand(parent),
     d(new KoEventActionRemoveCommandPrivate(shape, eventAction))
 {
 }
 
-KoEventActionRemoveCommand::~KoEventActionRemoveCommand()
+KEventActionRemoveCommand::~KEventActionRemoveCommand()
 {
     delete d;
 }
 
-void KoEventActionRemoveCommand::redo()
+void KEventActionRemoveCommand::redo()
 {
     d->shape->removeEventAction(d->eventAction);
     d->deleteEventAction = true;
 }
 
-void KoEventActionRemoveCommand::undo()
+void KEventActionRemoveCommand::undo()
 {
     d->shape->addEventAction(d->eventAction);
     d->deleteEventAction = false;
