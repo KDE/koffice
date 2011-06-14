@@ -20,7 +20,7 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#include "KoTableColumnStyle.h"
+#include "KTableColumnStyle.h"
 #include "KStyleManager.h"
 #include <KOdfGenericStyle.h>
 #include <KOdfGenericStyles.h>
@@ -38,7 +38,7 @@
 #include <KOdfXmlNS.h>
 #include <KXmlWriter.h>
 
-class KoTableColumnStyle::Private : public QSharedData
+class KTableColumnStyle::Private : public QSharedData
 {
 public:
     Private() : QSharedData(), parentStyle(0), next(0) {}
@@ -51,39 +51,39 @@ public:
     }
 
     QString name;
-    KoTableColumnStyle *parentStyle;
+    KTableColumnStyle *parentStyle;
     int next;
     StylePrivate stylesPrivate;
 };
 
 
-KoTableColumnStyle::KoTableColumnStyle()
+KTableColumnStyle::KTableColumnStyle()
         :  d(new Private())
 {
     Q_ASSERT (d);
 }
 
-KoTableColumnStyle::KoTableColumnStyle(const KoTableColumnStyle &rhs)
+KTableColumnStyle::KTableColumnStyle(const KTableColumnStyle &rhs)
         : d(rhs.d)
 {
 }
 
-KoTableColumnStyle &KoTableColumnStyle::operator=(const KoTableColumnStyle &rhs)
+KTableColumnStyle &KTableColumnStyle::operator=(const KTableColumnStyle &rhs)
 {
     d = rhs.d;
     return *this;
 }
 
-KoTableColumnStyle::~KoTableColumnStyle()
+KTableColumnStyle::~KTableColumnStyle()
 {
 }
 
-void KoTableColumnStyle::setParentStyle(KoTableColumnStyle *parent)
+void KTableColumnStyle::setParentStyle(KTableColumnStyle *parent)
 {
     d->parentStyle = parent;
 }
 
-void KoTableColumnStyle::setProperty(int key, const QVariant &value)
+void KTableColumnStyle::setProperty(int key, const QVariant &value)
 {
     if (d->parentStyle) {
         QVariant var = d->parentStyle->value(key);
@@ -95,12 +95,12 @@ void KoTableColumnStyle::setProperty(int key, const QVariant &value)
     d->stylesPrivate.add(key, value);
 }
 
-void KoTableColumnStyle::remove(int key)
+void KTableColumnStyle::remove(int key)
 {
     d->stylesPrivate.remove(key);
 }
 
-QVariant KoTableColumnStyle::value(int key) const
+QVariant KTableColumnStyle::value(int key) const
 {
     QVariant var = d->stylesPrivate.value(key);
     if (var.isNull() && d->parentStyle)
@@ -108,12 +108,12 @@ QVariant KoTableColumnStyle::value(int key) const
     return var;
 }
 
-bool KoTableColumnStyle::hasProperty(int key) const
+bool KTableColumnStyle::hasProperty(int key) const
 {
     return d->stylesPrivate.contains(key);
 }
 
-qreal KoTableColumnStyle::propertyDouble(int key) const
+qreal KTableColumnStyle::propertyDouble(int key) const
 {
     QVariant variant = value(key);
     if (variant.isNull())
@@ -121,7 +121,7 @@ qreal KoTableColumnStyle::propertyDouble(int key) const
     return variant.toDouble();
 }
 
-int KoTableColumnStyle::propertyInt(int key) const
+int KTableColumnStyle::propertyInt(int key) const
 {
     QVariant variant = value(key);
     if (variant.isNull())
@@ -129,7 +129,7 @@ int KoTableColumnStyle::propertyInt(int key) const
     return variant.toInt();
 }
 
-bool KoTableColumnStyle::propertyBoolean(int key) const
+bool KTableColumnStyle::propertyBoolean(int key) const
 {
     QVariant variant = value(key);
     if (variant.isNull())
@@ -137,7 +137,7 @@ bool KoTableColumnStyle::propertyBoolean(int key) const
     return variant.toBool();
 }
 
-QColor KoTableColumnStyle::propertyColor(int key) const
+QColor KTableColumnStyle::propertyColor(int key) const
 {
     QVariant variant = value(key);
     if (variant.isNull()) {
@@ -147,84 +147,84 @@ QColor KoTableColumnStyle::propertyColor(int key) const
     return qvariant_cast<QColor>(variant);
 }
 
-void KoTableColumnStyle::setColumnWidth(qreal width)
+void KTableColumnStyle::setColumnWidth(qreal width)
 {
     setProperty(ColumnWidth, width);
 }
 
-qreal KoTableColumnStyle::columnWidth() const
+qreal KTableColumnStyle::columnWidth() const
 {
     return propertyDouble(ColumnWidth);
 }
 
-void KoTableColumnStyle::setRelativeColumnWidth(qreal width)
+void KTableColumnStyle::setRelativeColumnWidth(qreal width)
 {
     setProperty(RelativeColumnWidth, width);
 }
 
-qreal KoTableColumnStyle::relativeColumnWidth() const
+qreal KTableColumnStyle::relativeColumnWidth() const
 {
     return propertyDouble(RelativeColumnWidth);
 }
 
-void KoTableColumnStyle::setBreakBefore(bool on)
+void KTableColumnStyle::setBreakBefore(bool on)
 {
     setProperty(BreakBefore, on);
 }
 
-bool KoTableColumnStyle::breakBefore()
+bool KTableColumnStyle::breakBefore()
 {
     return propertyBoolean(BreakBefore);
 }
 
-void KoTableColumnStyle::setBreakAfter(bool on)
+void KTableColumnStyle::setBreakAfter(bool on)
 {
     setProperty(BreakAfter, on);
 }
 
-bool KoTableColumnStyle::breakAfter()
+bool KTableColumnStyle::breakAfter()
 {
     return propertyBoolean(BreakAfter);
 }
 
-KoTableColumnStyle *KoTableColumnStyle::parentStyle() const
+KTableColumnStyle *KTableColumnStyle::parentStyle() const
 {
     return d->parentStyle;
 }
 
-QString KoTableColumnStyle::name() const
+QString KTableColumnStyle::name() const
 {
     return d->name;
 }
 
-void KoTableColumnStyle::setName(const QString &name)
+void KTableColumnStyle::setName(const QString &name)
 {
     if (name == d->name)
         return;
     d->name = name;
 }
 
-int KoTableColumnStyle::styleId() const
+int KTableColumnStyle::styleId() const
 {
     return propertyInt(StyleId);
 }
 
-void KoTableColumnStyle::setStyleId(int id)
+void KTableColumnStyle::setStyleId(int id)
 {
     setProperty(StyleId, id); if (d->next == 0) d->next = id;
 }
 
-QString KoTableColumnStyle::masterPageName() const
+QString KTableColumnStyle::masterPageName() const
 {
     return value(MasterPageName).toString();
 }
 
-void KoTableColumnStyle::setMasterPageName(const QString &name)
+void KTableColumnStyle::setMasterPageName(const QString &name)
 {
     setProperty(MasterPageName, name);
 }
 
-void KoTableColumnStyle::loadOdf(const KXmlElement *element, KOdfLoadingContext &context)
+void KTableColumnStyle::loadOdf(const KXmlElement *element, KOdfLoadingContext &context)
 {
     if (element->hasAttributeNS(KOdfXmlNS::style, "display-name"))
         d->name = element->attributeNS(KOdfXmlNS::style, "display-name", QString());
@@ -241,12 +241,12 @@ void KoTableColumnStyle::loadOdf(const KXmlElement *element, KOdfLoadingContext 
     context.addStyles(element, family.toLocal8Bit().constData());   // Load all parents - only because we don't support inheritance.
 
     context.styleStack().setTypeProperties("table-column");   // load all style attributes from "style:table-column-properties"
-    loadOdfProperties(context.styleStack());   // load the KoTableColumnStyle from the stylestack
+    loadOdfProperties(context.styleStack());   // load the KTableColumnStyle from the stylestack
     context.styleStack().restore();
 }
 
 
-void KoTableColumnStyle::loadOdfProperties(KOdfStyleStack &styleStack)
+void KTableColumnStyle::loadOdfProperties(KOdfStyleStack &styleStack)
 {
     // Column width.
     if (styleStack.hasProperty(KOdfXmlNS::style, "column-width")) {
@@ -268,26 +268,26 @@ void KoTableColumnStyle::loadOdfProperties(KOdfStyleStack &styleStack)
     }
 }
 
-bool KoTableColumnStyle::operator==(const KoTableColumnStyle &other) const
+bool KTableColumnStyle::operator==(const KTableColumnStyle &other) const
 {
     return other.d == d;
 }
 
-void KoTableColumnStyle::removeDuplicates(const KoTableColumnStyle &other)
+void KTableColumnStyle::removeDuplicates(const KTableColumnStyle &other)
 {
     d->stylesPrivate.removeDuplicates(other.d->stylesPrivate);
 }
 
-void KoTableColumnStyle::saveOdf(KOdfGenericStyle &style)
+void KTableColumnStyle::saveOdf(KOdfGenericStyle &style)
 {
     Q_UNUSED(style);
 /*
     QList<int> keys = d->stylesPrivate.keys();
     foreach(int key, keys) {
-        if (key == KoTableColumnStyle::BreakBefore) {
+        if (key == KTableColumnStyle::BreakBefore) {
             if (breakBefore())
                 style.addProperty("fo:break-before", "page", KOdfGenericStyle::ParagraphType);
-        } else if (key == KoTableColumnStyle::BreakAfter) {
+        } else if (key == KTableColumnStyle::BreakAfter) {
             if (breakAfter())
                 style.addProperty("fo:break-after", "page", KOdfGenericStyle::ParagraphType);
         }

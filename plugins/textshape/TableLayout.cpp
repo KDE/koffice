@@ -25,7 +25,7 @@
 #include <KoTableStyle.h>
 #include <KTableBorderStyle.h>
 #include <KTableCellStyle.h>
-#include <KoTableColumnStyle.h>
+#include <KTableColumnStyle.h>
 #include <KoTableRowStyle.h>
 #include <KTableColumnAndRowStyleManager.h>
 #include <KoTextDocumentLayout.h>
@@ -148,12 +148,12 @@ void TableLayout::startNewTableRect(QPointF position, qreal parentWidth, int fro
     qreal relativeWidthSum = 0; // Sum of relative column width values.
     int numNonStyleColumns = 0;
     for (int col = 0; col < tableRect.columnPositions.size(); ++col) {
-        KoTableColumnStyle columnStyle = carsManager.columnStyle(col);
-        if (columnStyle.hasProperty(KoTableColumnStyle::RelativeColumnWidth)) {
+        KTableColumnStyle columnStyle = carsManager.columnStyle(col);
+        if (columnStyle.hasProperty(KTableColumnStyle::RelativeColumnWidth)) {
             // Relative width specified. Will be handled in the next loop.
             relativeWidthColumns.append(col);
             relativeWidthSum += columnStyle.relativeColumnWidth();
-        } else if (columnStyle.hasProperty(KoTableColumnStyle::ColumnWidth)) {
+        } else if (columnStyle.hasProperty(KTableColumnStyle::ColumnWidth)) {
             // Only width specified, so use it.
             tableRect.columnWidths[col] = columnStyle.columnWidth();
             availableWidth -= columnStyle.columnWidth();
@@ -173,8 +173,8 @@ void TableLayout::startNewTableRect(QPointF position, qreal parentWidth, int fro
 
     // Relative column widths have now been summed up and can be distributed.
     foreach (int col, relativeWidthColumns) {
-        KoTableColumnStyle columnStyle = carsManager.columnStyle(col);
-        if (columnStyle.hasProperty(KoTableColumnStyle::RelativeColumnWidth) || columnStyle.hasProperty(KoTableColumnStyle::ColumnWidth)) {
+        KTableColumnStyle columnStyle = carsManager.columnStyle(col);
+        if (columnStyle.hasProperty(KTableColumnStyle::RelativeColumnWidth) || columnStyle.hasProperty(KTableColumnStyle::ColumnWidth)) {
             tableRect.columnWidths[col] =
                 qMax<qreal>(columnStyle.relativeColumnWidth() * availableWidth / relativeWidthSum, 0.0);
         } else {

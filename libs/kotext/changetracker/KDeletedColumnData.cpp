@@ -29,7 +29,7 @@
 KDeletedColumnData::KDeletedColumnData(QTextTable *table, int columnNumber)
 {
     this->column_number = columnNumber;
-    KoTableColumnStyle columnStyle = KTableColumnAndRowStyleManager::manager(table).columnStyle(columnNumber);
+    KTableColumnStyle columnStyle = KTableColumnAndRowStyleManager::manager(table).columnStyle(columnNumber);
     setColumnStyle(columnStyle);
     storeDeletedCells(table);
 }
@@ -47,12 +47,12 @@ int KDeletedColumnData::columnNumber()
     return column_number;
 }
 
-void KDeletedColumnData::setColumnStyle(KoTableColumnStyle columnStyle)
+void KDeletedColumnData::setColumnStyle(KTableColumnStyle columnStyle)
 {
     this->column_style = columnStyle;
 }
 
-KoTableColumnStyle KDeletedColumnData::columnStyle()
+KTableColumnStyle KDeletedColumnData::columnStyle()
 {
     return column_style;
 }

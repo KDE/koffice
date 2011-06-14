@@ -65,7 +65,7 @@
 #include "styles/KListStyle.h"
 #include "styles/KListLevelProperties.h"
 #include "styles/KoTableStyle.h"
-#include "styles/KoTableColumnStyle.h"
+#include "styles/KTableColumnStyle.h"
 #include "styles/KTableCellStyle.h"
 #include "styles/KSectionStyle.h"
 
@@ -1979,7 +1979,7 @@ void KoTextLoader::loadTableColumn(KXmlElement &tblTag, QTextTable *tbl, int &co
     int repeatColumn = tblTag.attributeNS(KOdfXmlNS::table, "number-columns-repeated", "1").toInt();
     QString columnStyleName = tblTag.attributeNS(KOdfXmlNS::table, "style-name", "");
     if (!columnStyleName.isEmpty()) {
-        KoTableColumnStyle *columnStyle = d->textSharedData->tableColumnStyle(columnStyleName, d->stylesDotXml);
+        KTableColumnStyle *columnStyle = d->textSharedData->tableColumnStyle(columnStyleName, d->stylesDotXml);
         if (columnStyle) {
             for (int c = columns; c < columns + repeatColumn; c++) {
                 tcarManager->setColumnStyle(c, *columnStyle);

@@ -28,7 +28,7 @@
 #include "KListStyle.h"
 #include "KListLevelProperties.h"
 #include "KoTableStyle.h"
-#include "KoTableColumnStyle.h"
+#include "KTableColumnStyle.h"
 #include "KoTableRowStyle.h"
 #include "KTableCellStyle.h"
 #include "KSectionStyle.h"
@@ -222,7 +222,7 @@ void KStyleManager::saveOdf(KOdfGenericStyles& mainStyles)
         mainStyles.insert(style, name, KOdfGenericStyles::DontAddNumberToName);
     }
 
-    foreach(KoTableColumnStyle *tableColumnStyle, d->tableColumnStyles) {
+    foreach(KTableColumnStyle *tableColumnStyle, d->tableColumnStyles) {
         QString name(QUrl::toPercentEncoding(QString(tableColumnStyle->name()).replace(' ', '_')));
         name.replace('%', '_');
         if (name.isEmpty())
@@ -342,7 +342,7 @@ void KStyleManager::add(KoTableStyle *style)
     emit styleAdded(style);
 }
 
-void KStyleManager::add(KoTableColumnStyle *style)
+void KStyleManager::add(KTableColumnStyle *style)
 {
     if (d->tableColumnStyles.key(style, -1) != -1)
         return;
@@ -404,7 +404,7 @@ void KStyleManager::remove(KoTableStyle *style)
         emit styleRemoved(style);
 }
 
-void KStyleManager::remove(KoTableColumnStyle *style)
+void KStyleManager::remove(KTableColumnStyle *style)
 {
     if (d->tableColumnStyles.remove(style->styleId()))
         emit styleRemoved(style);
@@ -496,7 +496,7 @@ void KStyleManager::alteredStyle(const KoTableStyle *style)
     d->requestFireUpdate(this);
 }
 
-void KStyleManager::alteredStyle(const KoTableColumnStyle *style)
+void KStyleManager::alteredStyle(const KTableColumnStyle *style)
 {
     Q_ASSERT(style);
     int id = style->styleId();
@@ -607,7 +607,7 @@ KoTableStyle *KStyleManager::tableStyle(int id) const
     return d->tableStyles.value(id);
 }
 
-KoTableColumnStyle *KStyleManager::tableColumnStyle(int id) const
+KTableColumnStyle *KStyleManager::tableColumnStyle(int id) const
 {
     return d->tableColumnStyles.value(id);
 }
@@ -663,9 +663,9 @@ KoTableStyle *KStyleManager::tableStyle(const QString &name) const
     return 0;
 }
 
-KoTableColumnStyle *KStyleManager::tableColumnStyle(const QString &name) const
+KTableColumnStyle *KStyleManager::tableColumnStyle(const QString &name) const
 {
-    foreach(KoTableColumnStyle *style, d->tableColumnStyles) {
+    foreach(KTableColumnStyle *style, d->tableColumnStyles) {
         if (style->name() == name)
             return style;
     }
@@ -742,7 +742,7 @@ QList<KoTableStyle*> KStyleManager::tableStyles() const
     return d->tableStyles.values();
 }
 
-QList<KoTableColumnStyle*> KStyleManager::tableColumnStyles() const
+QList<KTableColumnStyle*> KStyleManager::tableColumnStyles() const
 {
     return d->tableColumnStyles.values();
 }

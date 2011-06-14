@@ -7,7 +7,7 @@
 #include <KTableColumnAndRowStyleManager.h>
 #include <KoTextDocument.h>
 #include <KTableCellStyle.h>
-#include <KoTableColumnStyle.h>
+#include <KTableColumnStyle.h>
 #include <KoTableRowStyle.h>
 #include <KoTableStyle.h>
 
@@ -32,7 +32,7 @@ void TestTableLayout::init()
 
 void TestTableLayout::initTest(int rows, int columns,
         KoTableStyle *tableStyle,
-        const QList<KoTableColumnStyle *> &columnStyles,
+        const QList<KTableColumnStyle *> &columnStyles,
         const QList<KoTableRowStyle *> &rowStyles,
         const QMap<QPair<int, int>, KTableCellStyle *> &cellStyles,
         const QMap<QPair<int, int>, QString> &cellTexts)
@@ -134,7 +134,7 @@ void TestTableLayout::initTest(int rows, int columns,
 void TestTableLayout::initTestSimple(int rows, int columns, KoTableStyle *tableStyle)
 {
     // initTest() will use default ones for these.
-    QList<KoTableColumnStyle *> columnStyles;
+    QList<KTableColumnStyle *> columnStyles;
     QList<KoTableRowStyle *> rowStyles;
     QMap<QPair<int, int>, KTableCellStyle *> cellStyles;
     QMap<QPair<int, int>, QString> cellTexts;
@@ -152,7 +152,7 @@ void TestTableLayout::cleanupTest()
 
 void TestTableLayout::testBasicLayout()
 {
-    QList<KoTableColumnStyle *> columnStyles;
+    QList<KTableColumnStyle *> columnStyles;
     QList<KoTableRowStyle *> rowStyles;
     QMap<QPair<int, int>, KTableCellStyle *> cellStyles;
     QMap<QPair<int, int>, QString> cellTexts;
@@ -393,7 +393,7 @@ void TestTableLayout::testIndividualTableMargin()
 
 void TestTableLayout::testCellStyles()
 {
-    QList<KoTableColumnStyle *> columnStyles;
+    QList<KTableColumnStyle *> columnStyles;
     QList<KoTableRowStyle *> rowStyles;
     QMap<QPair<int, int>, KTableCellStyle *> cellStyles;
     /*
@@ -508,7 +508,7 @@ void TestTableLayout::testCellRowAndColumnSpanning()
 
 void TestTableLayout::testCellRowSpanningCellHeight()
 {
-    QList<KoTableColumnStyle *> columnStyles;
+    QList<KTableColumnStyle *> columnStyles;
     QList<KoTableRowStyle *> rowStyles;
     QMap<QPair<int, int>, KTableCellStyle *> cellStyles;
     QMap<QPair<int, int>, QString> cellTexts;
@@ -579,7 +579,7 @@ void TestTableLayout::testTableWidth()
 
 void TestTableLayout::testMinimumRowHeight()
 {
-    QList<KoTableColumnStyle *> columnStyles;
+    QList<KTableColumnStyle *> columnStyles;
     QMap<QPair<int, int>, KTableCellStyle *> cellStyles;
     // Give row 0 a minimum height of 30 pt.
     QList<KoTableRowStyle *> rowStyles;
@@ -651,14 +651,14 @@ void TestTableLayout::testVariableColumnWidth()
     QList<KoTableRowStyle *> rowStyles;
     QMap<QPair<int, int>, KTableCellStyle *> cellStyles;
     QMap<QPair<int, int>, QString> cellTexts;
-    QList<KoTableColumnStyle *> columnStyles;
+    QList<KTableColumnStyle *> columnStyles;
     // Give column 0 20% width.
-    KoTableColumnStyle *columnStyle1 = new KoTableColumnStyle();
+    KTableColumnStyle *columnStyle1 = new KTableColumnStyle();
     QVERIFY(columnStyle1);
     columnStyle1->setRelativeColumnWidth(20.0);
     columnStyles.append(columnStyle1);
     // And column 1 80% width.
-    KoTableColumnStyle *columnStyle2 = new KoTableColumnStyle();
+    KTableColumnStyle *columnStyle2 = new KTableColumnStyle();
     QVERIFY(columnStyle2);
     columnStyle2->setRelativeColumnWidth(80.0);
     columnStyles.append(columnStyle2);
@@ -691,14 +691,14 @@ void TestTableLayout::testColumnWidth()
     QList<KoTableRowStyle *> rowStyles;
     QMap<QPair<int, int>, KTableCellStyle *> cellStyles;
     QMap<QPair<int, int>, QString> cellTexts;
-    QList<KoTableColumnStyle *> columnStyles;
+    QList<KTableColumnStyle *> columnStyles;
     // Give column 0 20 pt width.
-    KoTableColumnStyle *columnStyle1 = new KoTableColumnStyle();
+    KTableColumnStyle *columnStyle1 = new KTableColumnStyle();
     QVERIFY(columnStyle1);
     columnStyle1->setColumnWidth(20.0);
     columnStyles.append(columnStyle1);
     // And column 1 180 pt width.
-    KoTableColumnStyle *columnStyle2 = new KoTableColumnStyle();
+    KTableColumnStyle *columnStyle2 = new KTableColumnStyle();
     columnStyle2->setColumnWidth(180.0);
     QVERIFY(columnStyle2);
     columnStyles.append(columnStyle2);
@@ -908,19 +908,19 @@ void TestTableLayout::testFeatureCombination()
     cellStyle6->setEdge(KTableCellStyle::Bottom, KTableCellStyle::BorderSolid, 2.0, Qt::black);
     cellStyles.insert(qMakePair(2, 2), cellStyle6);
 
-    QList<KoTableColumnStyle *> columnStyles;
+    QList<KTableColumnStyle *> columnStyles;
     // Give column 0 50 pt width.
-    KoTableColumnStyle *columnStyle1 = new KoTableColumnStyle();
+    KTableColumnStyle *columnStyle1 = new KTableColumnStyle();
     QVERIFY(columnStyle1);
     columnStyle1->setColumnWidth(50.0);
     columnStyles.append(columnStyle1);
     // And column 1 100 pt width.
-    KoTableColumnStyle *columnStyle2 = new KoTableColumnStyle();
+    KTableColumnStyle *columnStyle2 = new KTableColumnStyle();
     columnStyle2->setColumnWidth(100.0);
     QVERIFY(columnStyle2);
     columnStyles.append(columnStyle2);
     // And column 2 150 pt width.
-    KoTableColumnStyle *columnStyle3 = new KoTableColumnStyle();
+    KTableColumnStyle *columnStyle3 = new KTableColumnStyle();
     columnStyle3->setColumnWidth(150.0);
     QVERIFY(columnStyle3);
     columnStyles.append(columnStyle3);

@@ -54,7 +54,7 @@ public:
     QHash<int, KListStyle*> listStyles;
     QHash<int, KListStyle *> automaticListStyles;
     QHash<int, KoTableStyle *> tableStyles;
-    QHash<int, KoTableColumnStyle *> tableColumnStyles;
+    QHash<int, KTableColumnStyle *> tableColumnStyles;
     QHash<int, KoTableRowStyle *> tableRowStyles;
     QHash<int, KTableCellStyle *> tableCellStyles;
     QHash<int, KSectionStyle *> sectionStyles;

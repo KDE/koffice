@@ -41,7 +41,7 @@
 #include "styles/KListStyle.h"
 #include "styles/KListLevelProperties.h"
 #include "styles/KoTableStyle.h"
-#include "styles/KoTableColumnStyle.h"
+#include "styles/KTableColumnStyle.h"
 #include "styles/KoTableRowStyle.h"
 #include "styles/KTableCellStyle.h"
 #include "styles/KSectionStyle.h"
@@ -71,7 +71,7 @@ public:
     QHash<QString, KCharacterStyle *> characterContentDotXmlStyles;
     QHash<QString, KListStyle *> listContentDotXmlStyles;
     QHash<QString, KoTableStyle *> tableContentDotXmlStyles;
-    QHash<QString, KoTableColumnStyle *> tableColumnContentDotXmlStyles;
+    QHash<QString, KTableColumnStyle *> tableColumnContentDotXmlStyles;
     QHash<QString, KoTableRowStyle *> tableRowContentDotXmlStyles;
     QHash<QString, KTableCellStyle *> tableCellContentDotXmlStyles;
     QHash<QString, KSectionStyle *> sectionContentDotXmlStyles;
@@ -79,7 +79,7 @@ public:
     QHash<QString, KCharacterStyle *> characterStylesDotXmlStyles;
     QHash<QString, KListStyle *> listStylesDotXmlStyles;
     QHash<QString, KoTableStyle *> tableStylesDotXmlStyles;
-    QHash<QString, KoTableColumnStyle *> tableColumnStylesDotXmlStyles;
+    QHash<QString, KTableColumnStyle *> tableColumnStylesDotXmlStyles;
     QHash<QString, KoTableRowStyle *> tableRowStylesDotXmlStyles;
     QHash<QString, KTableCellStyle *> tableCellStylesDotXmlStyles;
     QHash<QString, KSectionStyle *> sectionStylesDotXmlStyles;
@@ -89,7 +89,7 @@ public:
     QList<KListStyle *> listStylesToDelete;
     QList<KoTableStyle *> tableStylesToDelete;
     QList<KTableCellStyle *> tableCellStylesToDelete;
-    QList<KoTableColumnStyle *> tableColumnStylesToDelete;
+    QList<KTableColumnStyle *> tableColumnStylesToDelete;
     QList<KoTableRowStyle *> tableRowStylesToDelete;
     QList<KSectionStyle *> sectionStylesToDelete;
     QHash<QString, KParagraphStyle*> namedParagraphStyles;
@@ -418,9 +418,9 @@ QList<QPair<QString, KoTableStyle *> > KoTextSharedLoadingData::loadTableStyles(
 void KoTextSharedLoadingData::addTableColumnStyles(KOdfLoadingContext &context, QList<KXmlElement*> styleElements,
                                             int styleTypes, KStyleManager *styleManager)
 {
-    QList<QPair<QString, KoTableColumnStyle *> > tableColumnStyles(loadTableColumnStyles(context, styleElements));
+    QList<QPair<QString, KTableColumnStyle *> > tableColumnStyles(loadTableColumnStyles(context, styleElements));
 
-    QList<QPair<QString, KoTableColumnStyle *> >::iterator it(tableColumnStyles.begin());
+    QList<QPair<QString, KTableColumnStyle *> >::iterator it(tableColumnStyles.begin());
     for (; it != tableColumnStyles.end(); ++it) {
         if (styleTypes & ContentDotXml) {
             d->tableColumnContentDotXmlStyles.insert(it->first, it->second);
@@ -438,9 +438,9 @@ void KoTextSharedLoadingData::addTableColumnStyles(KOdfLoadingContext &context, 
     }
 }
 
-QList<QPair<QString, KoTableColumnStyle *> > KoTextSharedLoadingData::loadTableColumnStyles(KOdfLoadingContext &context, QList<KXmlElement*> styleElements)
+QList<QPair<QString, KTableColumnStyle *> > KoTextSharedLoadingData::loadTableColumnStyles(KOdfLoadingContext &context, QList<KXmlElement*> styleElements)
 {
-    QList<QPair<QString, KoTableColumnStyle *> > tableColumnStyles;
+    QList<QPair<QString, KTableColumnStyle *> > tableColumnStyles;
 
     foreach(KXmlElement *styleElem, styleElements) {
         Q_ASSERT(styleElem);
@@ -448,9 +448,9 @@ QList<QPair<QString, KoTableColumnStyle *> > KoTextSharedLoadingData::loadTableC
 
         QString name = styleElem->attributeNS(KOdfXmlNS::style, "name", QString());
         // nah don't think this is it: context.fillStyleStack(*styleElem, KOdfXmlNS::style, "style-name", "table");
-        KoTableColumnStyle *tablecolumnstyle = new KoTableColumnStyle();
+        KTableColumnStyle *tablecolumnstyle = new KTableColumnStyle();
         tablecolumnstyle->loadOdf(styleElem, context);
-        tableColumnStyles.append(QPair<QString, KoTableColumnStyle *>(name, tablecolumnstyle));
+        tableColumnStyles.append(QPair<QString, KTableColumnStyle *>(name, tablecolumnstyle));
     }
     return tableColumnStyles;
 }
@@ -611,7 +611,7 @@ KoTableStyle *KoTextSharedLoadingData::tableStyle(const QString &name, bool styl
     return stylesDotXml ? d->tableStylesDotXmlStyles.value(name) : d->tableContentDotXmlStyles.value(name);
 }
 
-KoTableColumnStyle *KoTextSharedLoadingData::tableColumnStyle(const QString &name, bool stylesDotXml) const
+KTableColumnStyle *KoTextSharedLoadingData::tableColumnStyle(const QString &name, bool stylesDotXml) const
 {
     return stylesDotXml ? d->tableColumnStylesDotXmlStyles.value(name) : d->tableColumnContentDotXmlStyles.value(name);
 }

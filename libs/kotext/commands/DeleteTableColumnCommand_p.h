@@ -34,7 +34,7 @@
 
 #include <QUndoStack>
 #include <QList>
-#include <KoTableColumnStyle.h>
+#include <KTableColumnStyle.h>
 
 class KoTextEditor;
 class QTextTable;
@@ -55,7 +55,7 @@ private:
     int m_selectionColumn;
     int m_selectionColumnSpan;
     int m_changeId;
-    QList<KoTableColumnStyle> m_deletedStyles;
+    QList<KTableColumnStyle> m_deletedStyles;
 };
 
 #endif

@@ -19,7 +19,7 @@
  */
 #include "TestKoTableColumnAndRowStyleManager.h"
 
-#include "styles/KoTableColumnStyle.h"
+#include "styles/KTableColumnStyle.h"
 #include "styles/KoTableRowStyle.h"
 #include "../KTableColumnAndRowStyleManager.h"
 
@@ -27,9 +27,9 @@ void TestKoTableColumnAndRowStyleManager::testColumns()
 {
     KTableColumnAndRowStyleManager manager;
 
-    KoTableColumnStyle *style1 = new KoTableColumnStyle();
-    KoTableColumnStyle *style2 = new KoTableColumnStyle();
-    KoTableColumnStyle *style3 = new KoTableColumnStyle();
+    KTableColumnStyle *style1 = new KTableColumnStyle();
+    KTableColumnStyle *style2 = new KTableColumnStyle();
+    KTableColumnStyle *style3 = new KTableColumnStyle();
 
     manager.setColumnStyle(0, *style1);
     manager.setColumnStyle(2, *style2);

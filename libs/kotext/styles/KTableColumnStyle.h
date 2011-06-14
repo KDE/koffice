@@ -44,13 +44,13 @@ class KXmlElement;
  * KTableColumnAndRowStyleManager.
  *
  * The style has a property 'StyleId' with an integer as value. The integer value
- * corresponds to the styleId() output of a specific KoTableColumnStyle.
+ * corresponds to the styleId() output of a specific KTableColumnStyle.
  *
  * TODO: Make this class implicitly shared.
  *
  * @see KStyleManager, KoTableRowAndColumnStyleManager
  */
-class KOTEXT_EXPORT KoTableColumnStyle
+class KOTEXT_EXPORT KTableColumnStyle
 {
 public:
     enum Property {
@@ -63,14 +63,14 @@ public:
     };
 
     /// Constructor
-    KoTableColumnStyle();
+    KTableColumnStyle();
     /// Constructor
-    KoTableColumnStyle(const KoTableColumnStyle &rhs);
+    KTableColumnStyle(const KTableColumnStyle &rhs);
     /// assign operator
-    KoTableColumnStyle &operator=(const KoTableColumnStyle &rhs);
+    KTableColumnStyle &operator=(const KTableColumnStyle &rhs);
 
     /// Destructor
-    ~KoTableColumnStyle();
+    ~KTableColumnStyle();
 
     /// Set the column width.
     void setColumnWidth(qreal width);
@@ -97,10 +97,10 @@ public:
     bool breakAfter();
 
     /// Set the parent style this one inherits its unset properties from.
-    void setParentStyle(KoTableColumnStyle *parent);
+    void setParentStyle(KTableColumnStyle *parent);
 
     /// Return the parent style.
-    KoTableColumnStyle *parentStyle() const;
+    KTableColumnStyle *parentStyle() const;
 
     /// Return the name of the style.
     QString name() const;
@@ -127,10 +127,10 @@ public:
     void remove(int key);
 
     /// Remove properties in this style that are already in other.
-    void removeDuplicates(const KoTableColumnStyle &other);
+    void removeDuplicates(const KTableColumnStyle &other);
 
     /// Compare the properties of this style with the other.
-    bool operator==(const KoTableColumnStyle &other) const;
+    bool operator==(const KTableColumnStyle &other) const;
 
     /**
      * Load the style form the element

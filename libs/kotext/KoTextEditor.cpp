@@ -36,7 +36,7 @@
 #include "styles/KParagraphStyle.h"
 #include "styles/KStyleManager.h"
 #include "styles/KTableCellStyle.h"
-#include "styles/KoTableColumnStyle.h"
+#include "styles/KTableColumnStyle.h"
 #include "styles/KoTableRowStyle.h"
 #include "KTableColumnAndRowStyleManager.h"
 #include "commands/DeleteTableRowCommand_p.h"

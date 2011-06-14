@@ -25,7 +25,7 @@
 #include <QMetaType>
 #include <QExplicitlySharedDataPointer>
 
-class KoTableColumnStyle;
+class KTableColumnStyle;
 class KoTableRowStyle;
 class KTableCellStyle;
 class QTextTable;
@@ -65,7 +65,7 @@ public:
      * @param column the column to set the style for.
      * @param columnStyle a column style.
      */
-    void setColumnStyle(int column, const KoTableColumnStyle &columnStyle);
+    void setColumnStyle(int column, const KTableColumnStyle &columnStyle);
 
     /**
      * Insert a number of columns before the column \a column to \a columnStyle.
@@ -75,7 +75,7 @@ public:
      * @param columnStyle the column style of the new columns.
      * @see QTextTable::insertColumns for the analog method for the table data.
      */
-    void insertColumns(int column, int numberColumns, const KoTableColumnStyle &columnStyle);
+    void insertColumns(int column, int numberColumns, const KTableColumnStyle &columnStyle);
 
     /**
      * Remove a number of columns  \a column to \a columnStyle.
@@ -92,7 +92,7 @@ public:
      * @param column the column to get the style for.
      * @return the column style.
      */
-    KoTableColumnStyle columnStyle(int column) const;
+    KTableColumnStyle columnStyle(int column) const;
 
     /**
      * Set the row style for the row \a row to \a rowStyle.

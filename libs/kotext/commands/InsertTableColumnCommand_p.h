@@ -33,7 +33,7 @@
 
 #include <QUndoStack>
 #include <QList>
-#include <KoTableColumnStyle.h>
+#include <KTableColumnStyle.h>
 
 class KoTextEditor;
 class QTextTable;
@@ -54,7 +54,7 @@ private:
     int m_column;
     bool m_right;
     int m_changeId;
-    KoTableColumnStyle m_style;
+    KTableColumnStyle m_style;
 };
 
 #endif // INSERTTABLECOLUMNCOMMAND_H

@@ -1,7 +1,7 @@
 #ifndef TESTTABLELAYOUT_H
 #define TESTTABLELAYOUT_H
 
-#include <KoTableColumnStyle.h>
+#include <KTableColumnStyle.h>
 #include <KoTableRowStyle.h>
 #include <KTableColumnAndRowStyleManager.h>
 
@@ -18,7 +18,7 @@
 class MockTextShape;
 class KoTextDocumentLayout;
 class KoTableStyle;
-class KoTableColumnStyle;
+class KTableColumnStyle;
 class KoTableRowStyle;
 class KTableCellStyle;
 class KStyleManager;
@@ -46,7 +46,7 @@ private:
      * @param cellTexts a map of strings to put in the cells, key is QPair<row, col>.
      */
     void initTest(int rows, int columns, KoTableStyle *tableStyle,
-            const QList<KoTableColumnStyle *> &columnStyles,
+            const QList<KTableColumnStyle *> &columnStyles,
             const QList<KoTableRowStyle *> &rowStyles,
             const QMap<QPair<int, int>, KTableCellStyle *> &cellStyles,
             const QMap<QPair<int, int>, QString> &cellTexts);
@@ -111,7 +111,7 @@ private:
 
     // Default styles for the test table.
     KoTableStyle *m_defaultTableStyle;
-    KoTableColumnStyle m_defaultColumnStyle;
+    KTableColumnStyle m_defaultColumnStyle;
     KoTableRowStyle m_defaultRowStyle;
     KTableCellStyle *m_defaultCellStyle;
 };

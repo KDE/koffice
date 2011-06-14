@@ -19,7 +19,7 @@
 
 #include "KTableColumnAndRowStyleManager.h"
 
-#include "styles/KoTableColumnStyle.h"
+#include "styles/KTableColumnStyle.h"
 #include "styles/KoTableRowStyle.h"
 #include "styles/KTableCellStyle.h"
 #include "styles/KoTableStyle.h"
@@ -37,7 +37,7 @@ public:
     Private()  { }
     ~Private() {
     }
-    QVector<KoTableColumnStyle> tableColumnStyles;
+    QVector<KTableColumnStyle> tableColumnStyles;
     QVector<KoTableRowStyle> tableRowStyles;
 
     QVector<KTableCellStyle*> defaultRowCellStyles;
@@ -82,7 +82,7 @@ KTableColumnAndRowStyleManager KTableColumnAndRowStyleManager::manager(QTextTabl
     }
 }
 
-void KTableColumnAndRowStyleManager::setColumnStyle(int column, const KoTableColumnStyle &columnStyle)
+void KTableColumnAndRowStyleManager::setColumnStyle(int column, const KTableColumnStyle &columnStyle)
 {
     Q_ASSERT(column >= 0);
 
@@ -95,12 +95,12 @@ void KTableColumnAndRowStyleManager::setColumnStyle(int column, const KoTableCol
     }
 
     while (column > d->tableColumnStyles.size())
-        d->tableColumnStyles.append(KoTableColumnStyle());
+        d->tableColumnStyles.append(KTableColumnStyle());
 
     d->tableColumnStyles.insert(column, columnStyle);
 }
 
-void KTableColumnAndRowStyleManager::insertColumns(int column, int numberColumns, const KoTableColumnStyle &columnStyle)
+void KTableColumnAndRowStyleManager::insertColumns(int column, int numberColumns, const KTableColumnStyle &columnStyle)
 {
     Q_ASSERT(column >= 0);
     Q_ASSERT(numberColumns >= 0);
@@ -110,7 +110,7 @@ void KTableColumnAndRowStyleManager::insertColumns(int column, int numberColumns
     }
 
     while (column > d->tableColumnStyles.size())
-        d->tableColumnStyles.append(KoTableColumnStyle());
+        d->tableColumnStyles.append(KTableColumnStyle());
 
     d->tableColumnStyles.insert(column, numberColumns, columnStyle);
 }
@@ -125,17 +125,17 @@ void KTableColumnAndRowStyleManager::removeColumns(int column, int numberColumns
     }
 
     while (column > d->tableColumnStyles.size())
-        d->tableColumnStyles.append(KoTableColumnStyle());
+        d->tableColumnStyles.append(KTableColumnStyle());
 
     d->tableColumnStyles.remove(column, numberColumns);
 }
 
-KoTableColumnStyle KTableColumnAndRowStyleManager::columnStyle(int column) const
+KTableColumnStyle KTableColumnAndRowStyleManager::columnStyle(int column) const
 {
     Q_ASSERT(column >= 0);
 
     if (column < 0) {
-        return KoTableColumnStyle();
+        return KTableColumnStyle();
     }
 
     return d->tableColumnStyles.value(column);
