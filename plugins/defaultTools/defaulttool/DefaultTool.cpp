@@ -42,7 +42,7 @@
 #include <KShapeManager.h>
 #include <KShapeGroup.h>
 #include <KoShapePaste.h>
-#include <KoShapeOdfSaveHelper.h>
+#include <KShapeOdfSaveHelper.h>
 #include <KDrag.h>
 #include <KCanvasBase.h>
 #include <KResourceManager.h>
@@ -751,7 +751,7 @@ void DefaultTool::copy() const
 {
     QList<KShape *> shapes = canvas()->shapeManager()->selection()->selectedShapes(KoFlake::TopLevelSelection);
     if (!shapes.empty()) {
-        KoShapeOdfSaveHelper saveHelper(shapes);
+        KShapeOdfSaveHelper saveHelper(shapes);
         KDrag drag;
         drag.setOdf(KOdf::mimeType(KOdf::TextDocument), saveHelper);
         drag.addToClipboard();

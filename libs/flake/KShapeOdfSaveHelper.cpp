@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoShapeOdfSaveHelper.h"
+#include "KShapeOdfSaveHelper.h"
 #include "KDragOdfSaveHelper_p.h"
 
 #include <KXmlWriter.h>
@@ -33,14 +33,14 @@ public:
     QList<KShape *> shapes;
 };
 
-KoShapeOdfSaveHelper::KoShapeOdfSaveHelper(QList<KShape *> shapes)
+KShapeOdfSaveHelper::KShapeOdfSaveHelper(QList<KShape *> shapes)
         : KDragOdfSaveHelper(*(new KoShapeOdfSaveHelperPrivate(shapes)))
 {
 }
 
-bool KoShapeOdfSaveHelper::writeBody()
+bool KShapeOdfSaveHelper::writeBody()
 {
-    Q_D(KoShapeOdfSaveHelper);
+    Q_D(KShapeOdfSaveHelper);
     d->context->addOption(KoShapeSavingContext::DrawId);
 
     KXmlWriter &bodyWriter = d->context->xmlWriter();

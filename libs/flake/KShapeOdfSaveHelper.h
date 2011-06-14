@@ -31,7 +31,7 @@ class KoShapeOdfSaveHelperPrivate;
  *
  * The shapes are saved in an office:text document.
  */
-class FLAKE_EXPORT KoShapeOdfSaveHelper : public KDragOdfSaveHelper
+class FLAKE_EXPORT KShapeOdfSaveHelper : public KDragOdfSaveHelper
 {
 public:
     /**
@@ -40,13 +40,13 @@ public:
      * @param shapes The list of shapes to save. If the shapes contain
      *               children these are also saved.
      */
-    KoShapeOdfSaveHelper(QList<KShape *> shapes);
+    KShapeOdfSaveHelper(QList<KShape *> shapes);
 
     /// reimplemented
     virtual bool writeBody();
 
 private:
-    Q_DECLARE_PRIVATE(KoShapeOdfSaveHelper)
+    Q_DECLARE_PRIVATE(KShapeOdfSaveHelper)
 };
 
 #endif /* KOSHAPEODFSAVEHELPER_H */

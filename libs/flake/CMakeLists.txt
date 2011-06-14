@@ -79,7 +79,7 @@ set(flake_SRCS
     KShapeConfigWidgetBase.cpp
     KDrag.cpp
     KDragOdfSaveHelper.cpp
-    KoShapeOdfSaveHelper.cpp
+    KShapeOdfSaveHelper.cpp
     KoShapePaste.cpp
     KoSnapGuide.cpp
     KoSnapProxy.cpp
@@ -285,7 +285,7 @@ install(
     KShapeLoadingContext.h
     KShapeManager.h
     KShapeManagerPaintingStrategy.h
-    KoShapeOdfSaveHelper.h
+    KShapeOdfSaveHelper.h
     KoShapePaste.h
     KoShapeRegistry.h
     KoShapeSavingContext.h

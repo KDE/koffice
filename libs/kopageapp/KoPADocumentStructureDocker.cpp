@@ -31,7 +31,7 @@
 #include <KoToolManager.h>
 #include <KCanvasController.h>
 #include <KSelection.h>
-#include <KoShapeOdfSaveHelper.h>
+#include <KShapeOdfSaveHelper.h>
 #include <KoPAOdfPageSaveHelper.h>
 #include <KDrag.h>
 #include <KShapeCreateCommand.h>
@@ -653,7 +653,7 @@ void KoPADocumentStructureDocker::editCopy()
 
     if (!shapes.empty()) {
         // Copy Shapes or Layers
-        KoShapeOdfSaveHelper saveHelper(shapes);
+        KShapeOdfSaveHelper saveHelper(shapes);
         KDrag drag;
         drag.setOdf(KOdf::mimeType(KOdf::TextDocument), saveHelper);
         drag.addToClipboard();
