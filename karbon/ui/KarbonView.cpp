@@ -544,45 +544,45 @@ void KarbonView::editDeleteSelection()
 
 void KarbonView::selectionDistributeHorizontalCenter()
 {
-    selectionDistribute(KoShapeDistributeCommand::HorizontalCenterDistribution);
+    selectionDistribute(KShapeDistributeCommand::HorizontalCenterDistribution);
 }
 
 void KarbonView::selectionDistributeHorizontalGap()
 {
-    selectionDistribute(KoShapeDistributeCommand::HorizontalGapsDistribution);
+    selectionDistribute(KShapeDistributeCommand::HorizontalGapsDistribution);
 }
 
 void KarbonView::selectionDistributeHorizontalLeft()
 {
-    selectionDistribute(KoShapeDistributeCommand::HorizontalLeftDistribution);
+    selectionDistribute(KShapeDistributeCommand::HorizontalLeftDistribution);
 }
 
 void KarbonView::selectionDistributeHorizontalRight()
 {
-    selectionDistribute(KoShapeDistributeCommand::HorizontalRightDistribution);
+    selectionDistribute(KShapeDistributeCommand::HorizontalRightDistribution);
 }
 
 void KarbonView::selectionDistributeVerticalCenter()
 {
-    selectionDistribute(KoShapeDistributeCommand::VerticalCenterDistribution);
+    selectionDistribute(KShapeDistributeCommand::VerticalCenterDistribution);
 }
 
 void KarbonView::selectionDistributeVerticalGap()
 {
-    selectionDistribute(KoShapeDistributeCommand::VerticalGapsDistribution);
+    selectionDistribute(KShapeDistributeCommand::VerticalGapsDistribution);
 }
 
 void KarbonView::selectionDistributeVerticalBottom()
 {
-    selectionDistribute(KoShapeDistributeCommand::VerticalBottomDistribution);
+    selectionDistribute(KShapeDistributeCommand::VerticalBottomDistribution);
 }
 
 void KarbonView::selectionDistributeVerticalTop()
 {
-    selectionDistribute(KoShapeDistributeCommand::VerticalTopDistribution);
+    selectionDistribute(KShapeDistributeCommand::VerticalTopDistribution);
 }
 
-void KarbonView::selectionDistribute(KoShapeDistributeCommand::Distribute distribute)
+void KarbonView::selectionDistribute(KShapeDistributeCommand::Distribute distribute)
 {
     KSelection* selection = d->canvas->shapeManager()->selection();
     if (! selection)
@@ -591,7 +591,7 @@ void KarbonView::selectionDistribute(KoShapeDistributeCommand::Distribute distri
     QList<KShape*> selectedShapes = selection->selectedShapes(KoFlake::TopLevelSelection);
     if (selectedShapes.count() < 2) return;
 
-    KoShapeDistributeCommand *cmd = new KoShapeDistributeCommand(selectedShapes, distribute, selection->boundingRect());
+    KShapeDistributeCommand *cmd = new KShapeDistributeCommand(selectedShapes, distribute, selection->boundingRect());
 
     d->canvas->addCommand(cmd);
 }

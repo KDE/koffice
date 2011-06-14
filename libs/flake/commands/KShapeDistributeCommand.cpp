@@ -18,13 +18,13 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoShapeDistributeCommand.h"
+#include "KShapeDistributeCommand.h"
 
 #include <QMap>
 
 #include <klocale.h>
 
-class KoShapeDistributeCommand::Private
+class KShapeDistributeCommand::Private
 {
 public:
     Private() : command(0) {}
@@ -38,7 +38,7 @@ public:
     KoShapeMoveCommand *command;
 };
 
-KoShapeDistributeCommand::KoShapeDistributeCommand(const QList<KShape*> &shapes, Distribute distribute, const QRectF &boundingRect, QUndoCommand *parent)
+KShapeDistributeCommand::KShapeDistributeCommand(const QList<KShape*> &shapes, Distribute distribute, const QRectF &boundingRect, QUndoCommand *parent)
         : QUndoCommand(parent),
         d(new Private())
 {
@@ -128,24 +128,24 @@ KoShapeDistributeCommand::KoShapeDistributeCommand(const QList<KShape*> &shapes,
     setText(i18n("Distribute Shapes"));
 }
 
-KoShapeDistributeCommand::~KoShapeDistributeCommand()
+KShapeDistributeCommand::~KShapeDistributeCommand()
 {
     delete d;
 }
 
-void KoShapeDistributeCommand::redo()
+void KShapeDistributeCommand::redo()
 {
     QUndoCommand::redo();
     d->command->redo();
 }
 
-void KoShapeDistributeCommand::undo()
+void KShapeDistributeCommand::undo()
 {
     QUndoCommand::undo();
     d->command->undo();
 }
 
-qreal KoShapeDistributeCommand::Private::getAvailableSpace(KShape *first, KShape *last, qreal extent, const QRectF &boundingRect)
+qreal KShapeDistributeCommand::Private::getAvailableSpace(KShape *first, KShape *last, qreal extent, const QRectF &boundingRect)
 {
     switch (distribute) {
     case HorizontalCenterDistribution:

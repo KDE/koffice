@@ -39,7 +39,7 @@
 #include <kxmlguibuilder.h>
 #include <KUnit.h>
 #include <KShapeAlignCommand.h>
-#include <KoShapeDistributeCommand.h>
+#include <KShapeDistributeCommand.h>
 #include <KoZoomMode.h>
 #include <karbonui_export.h>
 #include "KarbonBooleanCommand.h"
@@ -160,7 +160,7 @@ private:
     void initActions();
     void updateRuler();
 
-    void selectionDistribute(KoShapeDistributeCommand::Distribute distribute);
+    void selectionDistribute(KShapeDistributeCommand::Distribute distribute);
 
     void booleanOperation(KarbonBooleanCommand::BooleanOperation operation);
 
