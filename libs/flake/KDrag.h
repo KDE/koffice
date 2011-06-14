@@ -36,11 +36,11 @@ class KoDragPrivate;
  * setOdf takes care of saving styles and all the other
  * common stuff.
  */
-class FLAKE_EXPORT KoDrag
+class FLAKE_EXPORT KDrag
 {
 public:
-    KoDrag();
-    ~KoDrag();
+    KDrag();
+    ~KDrag();
 
     /**
      * Set odf mime type

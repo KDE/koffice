@@ -18,7 +18,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoDrag.h"
+#include "KDrag.h"
 #include "KoDragOdfSaveHelper.h"
 
 #include <QApplication>
@@ -45,17 +45,17 @@ public:
     QMimeData *mimeData;
 };
 
-KoDrag::KoDrag()
+KDrag::KDrag()
     : d(new KoDragPrivate())
 {
 }
 
-KoDrag::~KoDrag()
+KDrag::~KDrag()
 {
     delete d;
 }
 
-bool KoDrag::setOdf(const char *mimeType, KoDragOdfSaveHelper &helper)
+bool KDrag::setOdf(const char *mimeType, KoDragOdfSaveHelper &helper)
 {
     struct Finally {
         Finally(KOdfStore *s) : store(s) { }
@@ -125,7 +125,7 @@ bool KoDrag::setOdf(const char *mimeType, KoDragOdfSaveHelper &helper)
     return true;
 }
 
-void KoDrag::setData(const QString &mimeType, const QByteArray &data)
+void KDrag::setData(const QString &mimeType, const QByteArray &data)
 {
     if (d->mimeData == 0) {
         d->mimeData = new QMimeData();
@@ -133,7 +133,7 @@ void KoDrag::setData(const QString &mimeType, const QByteArray &data)
     d->mimeData->setData(mimeType, data);
 }
 
-void KoDrag::addToClipboard()
+void KDrag::addToClipboard()
 {
     if (d->mimeData) {
         QApplication::clipboard()->setMimeData(d->mimeData);
@@ -141,7 +141,7 @@ void KoDrag::addToClipboard()
     }
 }
 
-QMimeData * KoDrag::mimeData()
+QMimeData * KDrag::mimeData()
 {
     QMimeData *mimeData = d->mimeData;
     d->mimeData = 0;

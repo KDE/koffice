@@ -52,7 +52,7 @@
 #include <KoShapeLayer.h>
 #include <KoRuler.h>
 #include <KoRulerController.h>
-#include <KoDrag.h>
+#include <KDrag.h>
 #include <KoShapeDeleteCommand.h>
 #include <KCutController.h>
 #include <KCopyController.h>
@@ -784,7 +784,7 @@ void KoPAView::copyPage()
     QList<KoPAPageBase *> pages;
     pages.append(d->activePage);
     KoPAOdfPageSaveHelper saveHelper(d->doc, pages);
-    KoDrag drag;
+    KDrag drag;
     drag.setOdf(KOdf::mimeType(d->doc->documentType()), saveHelper);
     drag.addToClipboard();
 }

@@ -33,7 +33,7 @@
 #include <KoSelection.h>
 #include <KoShapeOdfSaveHelper.h>
 #include <KoPAOdfPageSaveHelper.h>
-#include <KoDrag.h>
+#include <KDrag.h>
 #include <KoShapeCreateCommand.h>
 #include <KoShapeDeleteCommand.h>
 #include <KoShapeReorderCommand.h>
@@ -654,7 +654,7 @@ void KoPADocumentStructureDocker::editCopy()
     if (!shapes.empty()) {
         // Copy Shapes or Layers
         KoShapeOdfSaveHelper saveHelper(shapes);
-        KoDrag drag;
+        KDrag drag;
         drag.setOdf(KOdf::mimeType(KOdf::TextDocument), saveHelper);
         drag.addToClipboard();
         return;
@@ -663,7 +663,7 @@ void KoPADocumentStructureDocker::editCopy()
     if (!pages.empty()) {
         // Copy Pages
         KoPAOdfPageSaveHelper saveHelper(m_doc, pages);
-        KoDrag drag;
+        KDrag drag;
         drag.setOdf(KOdf::mimeType(m_doc->documentType()), saveHelper);
         drag.addToClipboard();
     }

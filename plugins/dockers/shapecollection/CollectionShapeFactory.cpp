@@ -20,7 +20,7 @@
 #include "CollectionShapeFactory.h"
 
 #include <KoShape.h>
-#include <KoDrag.h>
+#include <KDrag.h>
 #include <KoShapeOdfSaveHelper.h>
 #include <KOdf.h>
 #include <KoShapeLoadingContext.h>
@@ -54,7 +54,7 @@ KoShape *CollectionShapeFactory::createDefaultShape(KoResourceManager *documentR
 
     //kDebug() << m_shape->shapeId();
 
-    KoDrag drag;
+    KDrag drag;
     KoShapeOdfSaveHelper saveHelper(shapes);
     drag.setOdf(KOdf::mimeType(KOdf::GraphicsDocument), saveHelper);
     QMimeData* data = drag.mimeData();
