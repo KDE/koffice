@@ -21,7 +21,7 @@
 #include "shapeselector/ShapeSelectorFactory.h"
 #include "shapecollection/ShapeCollectionDocker.h"
 
-#include <KoDockRegistry.h>
+#include <KDockRegistry.h>
 
 #include <kpluginfactory.h>
 
@@ -31,9 +31,9 @@ K_EXPORT_PLUGIN(PluginFactory("koffice-dockers"))
 Plugin::Plugin(QObject *parent, const QVariantList&)
     : QObject(parent)
 {
-    KoDockRegistry::instance()->add(new ShadowDockerFactory(parent));
-    KoDockRegistry::instance()->add(new ShapeSelectorFactory(parent));
-    KoDockRegistry::instance()->add(new ShapeCollectionDockerFactory(parent));
+    KDockRegistry::instance()->add(new ShadowDockerFactory(parent));
+    KDockRegistry::instance()->add(new ShapeSelectorFactory(parent));
+    KDockRegistry::instance()->add(new ShapeCollectionDockerFactory(parent));
 }
 
 #include <Plugin.moc>

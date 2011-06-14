@@ -19,7 +19,7 @@ set(flake_SRCS
     KCutController.cpp
     KCopyController.cpp
     KDockFactoryBase.cpp
-    KoDockRegistry.cpp
+    KDockRegistry.cpp
     KDataCenterBase.cpp
     KoInsets.cpp
     KoPasteController.cpp
@@ -242,7 +242,7 @@ install(
     KCutController.h
     KDataCenterBase.h
     KDockFactoryBase.h
-    KoDockRegistry.h
+    KDockRegistry.h
     KoDrag.h
     KoDragOdfSaveHelper.h
     KEventActionFactoryBase.h

@@ -35,23 +35,23 @@
  *
  * @see KCanvasObserverBase
  */
-class FLAKE_EXPORT KoDockRegistry : public QObject, public KGenericRegistry<KDockFactoryBase*>
+class FLAKE_EXPORT KDockRegistry : public QObject, public KGenericRegistry<KDockFactoryBase*>
 {
     Q_OBJECT
 
 public:
-    ~KoDockRegistry();
+    ~KDockRegistry();
 
     /**
-     * Return an instance of the KoDockRegistry
+     * Return an instance of the KDockRegistry
      * Create a new instance on first call and return the singleton.
      */
-    static KoDockRegistry *instance();
+    static KDockRegistry *instance();
 
 private:
-    KoDockRegistry();
-    KoDockRegistry(const KoDockRegistry&);
-    KoDockRegistry operator=(const KoDockRegistry&);
+    KDockRegistry();
+    KDockRegistry(const KDockRegistry&);
+    KDockRegistry operator=(const KDockRegistry&);
     void init();
 
     class Private;

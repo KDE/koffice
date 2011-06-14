@@ -31,7 +31,7 @@ class KDockFactoryBasePrivate;
 
 /**
  * Base class for factories used to create new dock widgets.
- * @see KoDockRegistry
+ * @see KDockRegistry
  * @see KCanvasObserverBase
  */
 class FLAKE_EXPORT KDockFactoryBase : public QObject

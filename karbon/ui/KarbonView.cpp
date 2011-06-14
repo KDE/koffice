@@ -93,7 +93,7 @@
 #include <KoToolBoxFactory.h>
 #include <KoParameterShape.h>
 #include <KoRulerController.h>
-#include <KoDockRegistry.h>
+#include <KDockRegistry.h>
 #include <KoDockerManager.h>
 #include <KoShapeLayer.h>
 #include <KColorBackground.h>

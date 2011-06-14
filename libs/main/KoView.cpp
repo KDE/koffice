@@ -24,7 +24,7 @@
 // local directory
 
 #include "KoView_p.h"
-#include "KoDockRegistry.h"
+#include "KDockRegistry.h"
 #include "KoDocument.h"
 #include "KoMainWindow.h"
 #include "KoViewAdaptor.h"
@@ -160,8 +160,8 @@ KoView::KoView(KoDocument *document, QWidget *parent)
     connect(d->scrollTimer, SIGNAL(timeout()), this, SLOT(slotAutoScroll()));
 
     // add all plugins.
-    foreach(const QString & docker, KoDockRegistry::instance()->keys()) {
-        KDockFactoryBase *factory = KoDockRegistry::instance()->value(docker);
+    foreach(const QString & docker, KDockRegistry::instance()->keys()) {
+        KDockFactoryBase *factory = KDockRegistry::instance()->value(docker);
         if (shell())
             shell()->createDockWidget(factory);
     }

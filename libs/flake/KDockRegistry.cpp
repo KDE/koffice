@@ -17,17 +17,17 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoDockRegistry.h"
+#include "KDockRegistry.h"
 
 #include "KoPluginLoader.h"
 
 #include <KGlobal>
 
-KoDockRegistry::KoDockRegistry()
+KDockRegistry::KDockRegistry()
 {
 }
 
-void KoDockRegistry::init()
+void KDockRegistry::init()
 {
     KoPluginLoader::PluginsConfig config;
     config.whiteList = "DockerPlugins";
@@ -38,17 +38,17 @@ void KoDockRegistry::init()
                                      config);
 }
 
-KoDockRegistry::~KoDockRegistry()
+KDockRegistry::~KDockRegistry()
 {
 }
 
-KoDockRegistry* KoDockRegistry::instance()
+KDockRegistry* KDockRegistry::instance()
 {
-    K_GLOBAL_STATIC(KoDockRegistry, s_instance)
+    K_GLOBAL_STATIC(KDockRegistry, s_instance)
     if (!s_instance.exists()) {
         s_instance->init();
     }
     return s_instance;
 }
 
-#include <KoDockRegistry.moc>
+#include <KDockRegistry.moc>
