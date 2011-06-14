@@ -78,7 +78,7 @@ public:
     KProperties const *shapeProperties();
 
 protected:
-    virtual KoInteractionStrategy *createStrategy(KoPointerEvent *event);
+    virtual KInteractionStrategy *createStrategy(KoPointerEvent *event);
 
 private:
     Q_DECLARE_PRIVATE(KoCreateShapesTool)

@@ -25,7 +25,7 @@
 #include "KoToolBase.h"
 #include "flake_export.h"
 
-class KoInteractionStrategy;
+class KInteractionStrategy;
 class KoInteractionToolPrivate;
 
 #define KoInteractionTool_ID "InteractionTool"
@@ -45,7 +45,7 @@ class KoInteractionToolPrivate;
     public:
         MyTool::MyTool(KoCanvasBase *canvas) : KoInteractionTool(canvas) { }
 
-        KoInteractionStrategy *MyTool::createStrategy(KoPointerEvent *event) {
+        KInteractionStrategy *MyTool::createStrategy(KoPointerEvent *event) {
             return new MyStrategy(this, m_canvas, event->point);
         }
     };
@@ -58,7 +58,7 @@ class FLAKE_EXPORT KoInteractionTool : public KoToolBase
 public:
     /**
      * Constructor for basic interaction tool where user actions are translated
-     * and handled by interaction strategies of type KoInteractionStrategy.
+     * and handled by interaction strategies of type KInteractionStrategy.
      * @param canvas the canvas this tool will be working for.
      */
     explicit KoInteractionTool(KoCanvasBase *canvas);
@@ -78,7 +78,7 @@ protected:
     /// \internal
     KoInteractionTool(KoInteractionToolPrivate &dd);
 
-    KoInteractionStrategy *currentStrategy(); ///< the strategy that is 'in progress'
+    KInteractionStrategy *currentStrategy(); ///< the strategy that is 'in progress'
     /// Cancels the current strategy and deletes it.
     void cancelCurrentStrategy();
 
@@ -86,7 +86,7 @@ protected:
      * Reimplement this factory method to create your strategy to be used for mouse interaction.
      * @returns a new strategy, or 0 when there is nothing to do.
      */
-    virtual KoInteractionStrategy *createStrategy(KoPointerEvent *event) = 0;
+    virtual KInteractionStrategy *createStrategy(KoPointerEvent *event) = 0;
 
 private:
     KoInteractionTool(const KoInteractionTool&);

@@ -32,7 +32,7 @@
 //
 
 
-#include "KoInteractionStrategy.h"
+#include "KInteractionStrategy.h"
 #include "KoPathSegment.h"
 #include "KoPathPointData.h"
 #include <QtCore/QPointF>
@@ -44,7 +44,7 @@ class KoPathShape;
 /**
 * @brief Strategy for deforming a segment of a path shape.
 */
-class KoPathSegmentChangeStrategy : public KoInteractionStrategy
+class KoPathSegmentChangeStrategy : public KInteractionStrategy
 {
 public:
     KoPathSegmentChangeStrategy(KoPathTool *tool, const QPointF &pos, const KoPathPointData &segment, qreal segmentParam);

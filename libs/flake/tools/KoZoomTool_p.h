@@ -75,7 +75,7 @@ protected:
     QWidget *createOptionWidget();
 
 private:
-    virtual KoInteractionStrategy *createStrategy(KoPointerEvent *event);
+    virtual KInteractionStrategy *createStrategy(KoPointerEvent *event);
 
     void updateCursor(bool swap);
 

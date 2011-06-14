@@ -20,7 +20,7 @@
 #ifndef KSPREAD_ABSTRACT_SELECTION_STRATEGY
 #define KSPREAD_ABSTRACT_SELECTION_STRATEGY
 
-#include <KoInteractionStrategy.h>
+#include <KInteractionStrategy.h>
 
 #include <Qt>
 
@@ -38,7 +38,7 @@ class Selection;
  *
  * \see SelectionStrategy
  */
-class AbstractSelectionStrategy : public KoInteractionStrategy
+class AbstractSelectionStrategy : public KInteractionStrategy
 {
 public:
     /**

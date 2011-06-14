@@ -76,7 +76,7 @@ void PointHandle::repaint() const
     m_tool->repaint(m_activePoint->boundingRect(!active));
 }
 
-KoInteractionStrategy * PointHandle::handleMousePress(KoPointerEvent *event)
+KInteractionStrategy * PointHandle::handleMousePress(KoPointerEvent *event)
 {
     if ((event->button() & Qt::LeftButton) == 0)
         return 0;
@@ -166,7 +166,7 @@ void ParameterHandle::repaint() const
     m_tool->repaint(m_parameterShape->shapeToDocument(QRectF(m_parameterShape->handlePosition(m_handleId), QSize(1, 1))));
 }
 
-KoInteractionStrategy * ParameterHandle::handleMousePress(KoPointerEvent *event)
+KInteractionStrategy * ParameterHandle::handleMousePress(KoPointerEvent *event)
 {
     if (event->button() & Qt::LeftButton) {
         KoPathToolSelection * selection = dynamic_cast<KoPathToolSelection*>(m_tool->selection());

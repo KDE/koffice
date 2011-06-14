@@ -34,7 +34,7 @@
 
 
 #include "KoToolBase_p.h"
-#include "KoInteractionStrategy.h"
+#include "KInteractionStrategy.h"
 
 class KoInteractionToolPrivate : public KoToolBasePrivate
 {
@@ -50,7 +50,7 @@ public:
     }
 
     QPointF lastPoint;
-    KoInteractionStrategy *currentStrategy;
+    KInteractionStrategy *currentStrategy;
 };
 
 #endif

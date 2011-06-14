@@ -17,17 +17,17 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoInteractionStrategy.h"
-#include "KoInteractionStrategy_p.h"
+#include "KInteractionStrategy.h"
+#include "KInteractionStrategy_p.h"
 
 #include <QUndoCommand>
 
-KoInteractionStrategy::KoInteractionStrategy(KoToolBase *parent)
+KInteractionStrategy::KInteractionStrategy(KoToolBase *parent)
     : d_ptr(new KoInteractionStrategyPrivate(parent))
 {
 }
 
-void KoInteractionStrategy::cancelInteraction()
+void KInteractionStrategy::cancelInteraction()
 {
     QUndoCommand *cmd = createCommand();
     if (cmd) {
@@ -36,35 +36,35 @@ void KoInteractionStrategy::cancelInteraction()
     }
 }
 
-void KoInteractionStrategy::finishInteraction(Qt::KeyboardModifiers)
+void KInteractionStrategy::finishInteraction(Qt::KeyboardModifiers)
 {
     // empty!
 }
 
-KoInteractionStrategy::KoInteractionStrategy(KoInteractionStrategyPrivate &dd)
+KInteractionStrategy::KInteractionStrategy(KoInteractionStrategyPrivate &dd)
     : d_ptr(&dd)
 {
 }
 
-KoInteractionStrategy::~KoInteractionStrategy()
+KInteractionStrategy::~KInteractionStrategy()
 {
-    Q_D(KoInteractionStrategy);
+    Q_D(KInteractionStrategy);
     delete d;
 }
 
-void KoInteractionStrategy::paint(QPainter &, const KoViewConverter &)
+void KInteractionStrategy::paint(QPainter &, const KoViewConverter &)
 {
 }
 
-KoToolBase *KoInteractionStrategy::tool() const
+KoToolBase *KInteractionStrategy::tool() const
 {
-    Q_D(const KoInteractionStrategy);
+    Q_D(const KInteractionStrategy);
     return d->tool;
 }
 
-void KoInteractionStrategy::setStatusText(const QString &statusText)
+void KInteractionStrategy::setStatusText(const QString &statusText)
 {
-    Q_D(KoInteractionStrategy);
+    Q_D(KInteractionStrategy);
     d->tool->priv()->emitStatusText(statusText);
 }
 

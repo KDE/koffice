@@ -41,7 +41,7 @@
 
 class QButtonGroup;
 class KoCanvasBase;
-class KoInteractionStrategy;
+class KInteractionStrategy;
 class KoPathToolHandle;
 class PathToolOptionWidget;
 
@@ -125,7 +125,7 @@ private:
     // make a frind so that it can test private member/methods
     friend class TestPathTool;
 
-    KoInteractionStrategy *m_currentStrategy; ///< the rubber selection strategy
+    KInteractionStrategy *m_currentStrategy; ///< the rubber selection strategy
 
     QButtonGroup *m_pointTypeGroup;
 

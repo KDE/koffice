@@ -104,7 +104,7 @@ protected:
     void init();
     virtual QWidget* createOptionWidget();
     void applyUserInput(const QString &userInput, bool expandMatrix = false);
-    virtual KoInteractionStrategy* createStrategy(KoPointerEvent* event);
+    virtual KInteractionStrategy* createStrategy(KoPointerEvent* event);
 
     /**
      * The shape offset in document coordinates.

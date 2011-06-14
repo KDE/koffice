@@ -39,7 +39,7 @@
 #include <klocale.h>
 
 ShapeShearStrategy::ShapeShearStrategy(KoToolBase *tool, const QPointF &clicked, KoFlake::SelectionHandle direction)
-: KoInteractionStrategy(tool)
+: KInteractionStrategy(tool)
 , m_start(clicked)
 {
     KoSelection *sel = tool->canvas()->shapeManager()->selection();

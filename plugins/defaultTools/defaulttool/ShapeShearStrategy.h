@@ -20,7 +20,7 @@
 #ifndef SHAPESHEARSTRATEGY_H
 #define SHAPESHEARSTRATEGY_H
 
-#include <KoInteractionStrategy.h>
+#include <KInteractionStrategy.h>
 #include <KoFlake.h>
 
 #include <QPointF>
@@ -36,7 +36,7 @@ class KoShape;
  * This strategy is invoked when the user starts a shear of a selection of objects,
  * the stategy will then shear the objects interactively and provide a command afterwards.
  */
-class ShapeShearStrategy : public KoInteractionStrategy
+class ShapeShearStrategy : public KInteractionStrategy
 {
 public:
     /**

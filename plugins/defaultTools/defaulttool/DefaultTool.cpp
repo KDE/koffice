@@ -1080,7 +1080,7 @@ void DefaultTool::resourceChanged(int key, const QVariant & res)
     }
 }
 
-KoInteractionStrategy *DefaultTool::createStrategy(KoPointerEvent *event)
+KInteractionStrategy *DefaultTool::createStrategy(KoPointerEvent *event)
 {
     // reset the move by keys when a new strategy is created otherwise we might change the
     // command after a new command was added. This happend when you where faster than the timer.

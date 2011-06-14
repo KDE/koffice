@@ -22,7 +22,7 @@
 #ifndef SHAPEMOVESTRATEGY_H
 #define SHAPEMOVESTRATEGY_H
 
-#include <KoInteractionStrategy.h>
+#include <KInteractionStrategy.h>
 
 #include <QPointF>
 #include <QList>
@@ -34,7 +34,7 @@ class KoShape;
 /**
  * Implements the Move action on an object or selected objects.
  */
-class ShapeMoveStrategy : public KoInteractionStrategy
+class ShapeMoveStrategy : public KInteractionStrategy
 {
 public:
     /**

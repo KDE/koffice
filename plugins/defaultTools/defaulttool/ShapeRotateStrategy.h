@@ -20,7 +20,7 @@
 #ifndef SHAPEROTATESTRATEGY_H
 #define SHAPEROTATESTRATEGY_H
 
-#include <KoInteractionStrategy.h>
+#include <KInteractionStrategy.h>
 
 #include <QPointF>
 #include <QRectF>
@@ -36,7 +36,7 @@ class KoShape;
  * This strategy is invoked when the user starts a rotate of a selection of objects,
  * the stategy will then rotate the objects interactively and provide a command afterwards.
  */
-class ShapeRotateStrategy : public KoInteractionStrategy
+class ShapeRotateStrategy : public KInteractionStrategy
 {
 public:
     /**

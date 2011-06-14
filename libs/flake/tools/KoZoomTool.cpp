@@ -90,7 +90,7 @@ void KoZoomTool::mouseDoubleClickEvent(KoPointerEvent *event)
     mousePressEvent(event);
 }
 
-KoInteractionStrategy *KoZoomTool::createStrategy(KoPointerEvent *event)
+KInteractionStrategy *KoZoomTool::createStrategy(KoPointerEvent *event)
 {
     KoZoomStrategy *zs = new KoZoomStrategy(this, m_controller, event->point);
     if (event->button() == Qt::RightButton) {

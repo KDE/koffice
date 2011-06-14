@@ -22,7 +22,7 @@
 #ifndef KODEFRUBBERSELECT_H
 #define KODEFRUBBERSELECT_H
 
-#include "KoInteractionStrategy.h"
+#include "KInteractionStrategy.h"
 
 #include <QRectF>
 
@@ -34,7 +34,7 @@ class KoShapeRubberSelectStrategyPrivate;
 /**
  * Implement the rubber band selection of flake objects.
  */
-class FLAKE_EXPORT KoShapeRubberSelectStrategy : public KoInteractionStrategy
+class FLAKE_EXPORT KoShapeRubberSelectStrategy : public KInteractionStrategy
 {
 public:
     /**

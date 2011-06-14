@@ -20,22 +20,22 @@
 #ifndef FILTERREGIONEDITSTRATEGY_H
 #define FILTERREGIONEDITSTRATEGY_H
 
-#include <KoInteractionStrategy.h>
+#include <KInteractionStrategy.h>
 #include "KarbonFilterEffectsTool.h"
 
 class KoShape;
 class KFilterEffect;
 
-class FilterRegionEditStrategy : public KoInteractionStrategy
+class FilterRegionEditStrategy : public KInteractionStrategy
 {
 public:
     FilterRegionEditStrategy(KoToolBase* parent, KoShape * shape, KFilterEffect *effect, KarbonFilterEffectsTool::EditMode mode);
 
-    // reimplemented from KoInteractionStrategy
+    // reimplemented from KInteractionStrategy
     virtual void handleMouseMove(const QPointF &mouseLocation, Qt::KeyboardModifiers modifiers);
-    // reimplemented from KoInteractionStrategy
+    // reimplemented from KInteractionStrategy
     virtual QUndoCommand *createCommand(QUndoCommand *parent = 0);
-    // reimplemented from KoInteractionStrategy
+    // reimplemented from KInteractionStrategy
     virtual void paint(QPainter &painter, const KoViewConverter &converter);
 
 private:

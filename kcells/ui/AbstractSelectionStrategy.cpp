@@ -38,7 +38,7 @@ public:
 
 AbstractSelectionStrategy::AbstractSelectionStrategy(CellToolBase *cellTool,
         const QPointF documentPos, Qt::KeyboardModifiers modifiers)
-        : KoInteractionStrategy(cellTool)
+        : KInteractionStrategy(cellTool)
         , d(new Private)
 {
     Q_UNUSED(modifiers)

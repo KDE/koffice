@@ -30,7 +30,7 @@
 #include "KoCanvasBase.h"
 
 KoShapeRubberSelectStrategy::KoShapeRubberSelectStrategy(KoToolBase *tool, const QPointF &clicked, bool useSnapToGrid)
-    : KoInteractionStrategy(*(new KoShapeRubberSelectStrategyPrivate(tool)))
+    : KInteractionStrategy(*(new KoShapeRubberSelectStrategyPrivate(tool)))
 {
     Q_D(KoShapeRubberSelectStrategy);
     d->snapGuide->enableSnapStrategies(KoSnapGuide::GridSnapping);

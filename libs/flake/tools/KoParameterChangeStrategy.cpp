@@ -23,7 +23,7 @@
 #include "commands/KoParameterHandleMoveCommand_p.h"
 
 KoParameterChangeStrategy::KoParameterChangeStrategy(KoToolBase *tool, KoParameterShape *parameterShape, int handleId)
-        : KoInteractionStrategy(tool)
+        : KInteractionStrategy(tool)
         , m_parameterShape(parameterShape)
         , m_handleId(handleId)
         , m_startPoint(m_parameterShape->shapeToDocument(m_parameterShape->handlePosition(handleId)))

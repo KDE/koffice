@@ -34,7 +34,7 @@
 
 
 #include <QPointF>
-#include "KoInteractionStrategy.h"
+#include "KInteractionStrategy.h"
 #include "KoPathPoint.h"
 #include "KoPathPointData.h"
 
@@ -45,7 +45,7 @@ class KoPathTool;
  * /internal
  * @brief Strategy for moving points of a path shape.
  */
-class KoPathControlPointMoveStrategy : public KoInteractionStrategy
+class KoPathControlPointMoveStrategy : public KInteractionStrategy
 {
 public:
     KoPathControlPointMoveStrategy(KoPathTool *tool, const KoPathPointData &point,

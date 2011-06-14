@@ -21,7 +21,7 @@
 #ifndef CONNECTIONCHANGESTRATEGY_H
 #define CONNECTIONCHANGESTRATEGY_H
 
-#include <KoInteractionStrategy.h>
+#include <KInteractionStrategy.h>
 
 #include "ConnectionChangeCommand.h"
 
@@ -34,7 +34,7 @@ class KoShape;
 /**
  * 
  */
-class ConnectionChangeStrategy : public KoInteractionStrategy
+class ConnectionChangeStrategy : public KInteractionStrategy
 {
 public:
     enum Type {

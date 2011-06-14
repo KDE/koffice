@@ -33,12 +33,12 @@
 
 
 #include <QPointF>
-#include "KoInteractionStrategy.h"
+#include "KInteractionStrategy.h"
 
 class KoParameterShape;
 
 /// Strategy for changing control points of parametric shapes
-class KoParameterChangeStrategy : public KoInteractionStrategy
+class KoParameterChangeStrategy : public KInteractionStrategy
 {
 public:
     /**

@@ -30,7 +30,7 @@
 #include <QPolygonF>
 #include <QTime>
 
-class KoInteractionStrategy;
+class KInteractionStrategy;
 class KoShapeMoveCommand;
 class KoSelection;
 class KoShapeConnection;
@@ -49,7 +49,7 @@ class DefaultTool : public KoInteractionTool
 public:
     /**
      * Constructor for basic interaction tool where user actions are translated
-     * and handled by interaction strategies of type KoInteractionStrategy.
+     * and handled by interaction strategies of type KInteractionStrategy.
      * @param canvas the canvas this tool will be working for.
      */
     explicit DefaultTool(KoCanvasBase *canvas);
@@ -125,7 +125,7 @@ public: // Events
 protected:
     QMap<QString, QWidget *> createOptionWidgets();
 
-    virtual KoInteractionStrategy *createStrategy(KoPointerEvent *event);
+    virtual KInteractionStrategy *createStrategy(KoPointerEvent *event);
 
 private:
     void setupActions();

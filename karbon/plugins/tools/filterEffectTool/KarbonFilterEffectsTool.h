@@ -23,7 +23,7 @@
 #include "KoInteractionTool.h"
 
 class KoResource;
-class KoInteractionStrategy;
+class KInteractionStrategy;
 
 class KarbonFilterEffectsTool : public KoInteractionTool
 {
@@ -55,7 +55,7 @@ protected:
     /// reimplemented from KoToolBase
     virtual QMap<QString, QWidget *> createOptionWidgets();
     /// reimplemented from KoToolBase
-    virtual KoInteractionStrategy *createStrategy(KoPointerEvent *event);
+    virtual KInteractionStrategy *createStrategy(KoPointerEvent *event);
 private slots:
     void editFilter();
     void filterChanged();

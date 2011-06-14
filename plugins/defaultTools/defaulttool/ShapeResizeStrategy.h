@@ -20,7 +20,7 @@
 #ifndef SHAPERESIZESTRATEGY_H
 #define SHAPERESIZESTRATEGY_H
 
-#include <KoInteractionStrategy.h>
+#include <KInteractionStrategy.h>
 #include <KoFlake.h>
 
 #include <QPointF>
@@ -35,7 +35,7 @@ class KoShape;
  * This strategy is invoked when the user starts a resize of a selection of objects,
  * the stategy will then resize the objects interactively and provide a command afterwards.
  */
-class ShapeResizeStrategy : public KoInteractionStrategy
+class ShapeResizeStrategy : public KInteractionStrategy
 {
 public:
     /**

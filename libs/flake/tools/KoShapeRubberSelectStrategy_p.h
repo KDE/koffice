@@ -32,7 +32,7 @@
 //
 
 
-#include "KoInteractionStrategy_p.h"
+#include "KInteractionStrategy_p.h"
 #include "KoSnapGuide.h"
 
 class KoShapeRubberSelectStrategyPrivate : public KoInteractionStrategyPrivate

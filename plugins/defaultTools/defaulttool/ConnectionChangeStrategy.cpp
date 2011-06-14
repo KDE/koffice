@@ -32,7 +32,7 @@
 #include <KDebug>
 
 ConnectionChangeStrategy::ConnectionChangeStrategy(KoToolBase *tool, KoShapeConnection *connection, const QPointF &clicked, Type type)
-    : KoInteractionStrategy(tool),
+    : KInteractionStrategy(tool),
     m_connection(connection),
     m_type(type)
 {

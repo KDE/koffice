@@ -287,7 +287,7 @@ void KarbonFilterEffectsTool::mouseMoveEvent(KoPointerEvent *event)
     }
 }
 
-KoInteractionStrategy *KarbonFilterEffectsTool::createStrategy(KoPointerEvent *event)
+KInteractionStrategy *KarbonFilterEffectsTool::createStrategy(KoPointerEvent *event)
 {
     EditMode mode = d->editModeFromMousePosition(event->point, this);
     if (mode == None)

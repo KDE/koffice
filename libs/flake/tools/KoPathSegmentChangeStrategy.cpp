@@ -29,7 +29,7 @@
 #include <limits>
 
 KoPathSegmentChangeStrategy::KoPathSegmentChangeStrategy(KoPathTool *tool, const QPointF &pos, const KoPathPointData &segment, qreal segmentParam)
-: KoInteractionStrategy(tool)
+: KInteractionStrategy(tool)
 , m_originalPosition(pos)
 , m_lastPosition(pos)
 , m_tool(tool)

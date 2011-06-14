@@ -22,7 +22,7 @@
 
 #include "CellToolBase.h"
 
-class KoInteractionStrategy;
+class KInteractionStrategy;
 
 class KCRegion;
 

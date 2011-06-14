@@ -22,7 +22,7 @@
 #include "KoCreateShapesTool.h"
 #include "KoInteractionTool_p.h"
 #include "KoPointerEvent.h"
-#include "KoInteractionStrategy.h"
+#include "KInteractionStrategy.h"
 #include "KoCreateShapeStrategy_p.h"
 
 #include <QMouseEvent>
@@ -91,7 +91,7 @@ KProperties const * KoCreateShapesTool::shapeProperties()
     return d->newShapeProperties;
 }
 
-KoInteractionStrategy *KoCreateShapesTool::createStrategy(KoPointerEvent *event)
+KInteractionStrategy *KoCreateShapesTool::createStrategy(KoPointerEvent *event)
 {
     return new KoCreateShapeStrategy(this, event->point);
 }

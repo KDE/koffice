@@ -1138,7 +1138,7 @@ QWidget* CellToolBase::createOptionWidget()
     return d->optionWidget;
 }
 
-KoInteractionStrategy* CellToolBase::createStrategy(KoPointerEvent* event)
+KInteractionStrategy* CellToolBase::createStrategy(KoPointerEvent* event)
 {
     // Get info about where the event occurred.
     QPointF position = event->point - offset(); // the shape offset, not the scrolling one.

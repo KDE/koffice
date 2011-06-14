@@ -39,20 +39,20 @@ class QPainter;
  * the Strategy design pattern.
  * e.g, move, select, transform.
 
- * KoInteractionStrategy is a Strategy baseclass for the KoInteractionTool and it
+ * KInteractionStrategy is a Strategy baseclass for the KoInteractionTool and it
  * defines the behavior in case the user clicks or drags the input device.
  * The strategy is created in the createPolicy() function which defines the
  * resulting behavior and initiates a move or a resize, for example.
  * The mouseMove events are forwarded to the handleMouseMove() method and the interaction
  * is either finished with finishInteraction() or cancelInteraction() (never both).
  */
-class FLAKE_EXPORT KoInteractionStrategy
+class FLAKE_EXPORT KInteractionStrategy
 {
 public:
     /// constructor
-    KoInteractionStrategy(KoToolBase *parent);
+    KInteractionStrategy(KoToolBase *parent);
     /// Destructor
-    virtual ~KoInteractionStrategy();
+    virtual ~KInteractionStrategy();
 
     /**
      * Reimplement this if the action needs to draw a "blob" on the canvas;
@@ -94,12 +94,12 @@ protected:
     void setStatusText(const QString &statusText);
 
     /// constructor
-    KoInteractionStrategy(KoInteractionStrategyPrivate &);
+    KInteractionStrategy(KoInteractionStrategyPrivate &);
 
     KoInteractionStrategyPrivate *d_ptr;
 
 private:
-    Q_DECLARE_PRIVATE(KoInteractionStrategy)
+    Q_DECLARE_PRIVATE(KInteractionStrategy)
 };
 
 #endif

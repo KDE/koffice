@@ -36,7 +36,7 @@
 
 
 #include <KoPathPoint.h>
-#include "KoInteractionStrategy.h"
+#include "KInteractionStrategy.h"
 
 #include <QList>
 
@@ -54,7 +54,7 @@ public:
     virtual ~KoPathToolHandle();
     virtual void paint(QPainter &painter, const KoViewConverter &converter) = 0;
     virtual void repaint() const = 0;
-    virtual KoInteractionStrategy * handleMousePress(KoPointerEvent *event) = 0;
+    virtual KInteractionStrategy * handleMousePress(KoPointerEvent *event) = 0;
     // test if handle is still valid
     virtual bool check(const QList<KoPathShape*> &selectedShapes) = 0;
 
@@ -68,7 +68,7 @@ public:
     PointHandle(KoPathTool *tool, KoPathPoint *activePoint, KoPathPoint::PointType activePointType);
     void paint(QPainter &painter, const KoViewConverter &converter);
     void repaint() const;
-    KoInteractionStrategy *handleMousePress(KoPointerEvent *event);
+    KInteractionStrategy *handleMousePress(KoPointerEvent *event);
     virtual bool check(const QList<KoPathShape*> &selectedShapes);
     KoPathPoint *activePoint() const;
     KoPathPoint::PointType activePointType() const;
@@ -83,7 +83,7 @@ public:
     ParameterHandle(KoPathTool *tool, KoParameterShape *parameterShape, int handleId);
     void paint(QPainter &painter, const KoViewConverter &converter);
     void repaint() const;
-    KoInteractionStrategy *handleMousePress(KoPointerEvent *event);
+    KInteractionStrategy *handleMousePress(KoPointerEvent *event);
     virtual bool check(const QList<KoPathShape*> &selectedShapes);
 protected:
     KoParameterShape *m_parameterShape;
