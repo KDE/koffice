@@ -35,7 +35,7 @@
 
 #include "KTableBorderStyle_p.h"
 
-class KoTableCellStylePrivate : public KoTableBorderStylePrivate
+class KoTableCellStylePrivate : public KTableBorderStylePrivate
 {
 public:
     KoTableCellStylePrivate();

@@ -26,7 +26,7 @@
 
 #include <QPainter>
 
-KoTableBorderStylePrivate::KoTableBorderStylePrivate()
+KTableBorderStylePrivate::KTableBorderStylePrivate()
 {
     edges[KTableBorderStyle::Top].spacing = 0;
     borderstyle[KTableBorderStyle::Top] = KTableBorderStyle::BorderNone;
@@ -47,31 +47,31 @@ KoTableBorderStylePrivate::KoTableBorderStylePrivate()
     borderstyle[KTableBorderStyle::BottomLeftToTopRight] = KTableBorderStyle::BorderNone;
 }
 
-KoTableBorderStylePrivate::~KoTableBorderStylePrivate()
+KTableBorderStylePrivate::~KTableBorderStylePrivate()
 {
 }
 
 KTableBorderStyle::KTableBorderStyle(QObject *parent)
     : QObject(parent)
-    , d_ptr(new KoTableBorderStylePrivate())
+    , d_ptr(new KTableBorderStylePrivate())
 {
 }
 
 KTableBorderStyle::KTableBorderStyle(const QTextTableCellFormat &format, QObject *parent)
     : QObject(parent)
-    , d_ptr(new KoTableBorderStylePrivate())
+    , d_ptr(new KTableBorderStylePrivate())
 {
     init(format);
 }
 
-KTableBorderStyle::KTableBorderStyle(KoTableBorderStylePrivate &dd, const QTextTableCellFormat &format, QObject *parent)
+KTableBorderStyle::KTableBorderStyle(KTableBorderStylePrivate &dd, const QTextTableCellFormat &format, QObject *parent)
     : QObject(parent)
     , d_ptr(&dd)
 {
     init(format);
 }
 
-KTableBorderStyle::KTableBorderStyle(KoTableBorderStylePrivate &dd, QObject *parent)
+KTableBorderStyle::KTableBorderStyle(KTableBorderStylePrivate &dd, QObject *parent)
     : QObject(parent)
     , d_ptr(&dd)
 {
@@ -175,7 +175,7 @@ void KTableBorderStyle::setEdge(Side side, BorderStyle style, qreal width, QColo
 {
     Q_D(KTableBorderStyle);
 
-    KoTableBorderStylePrivate::Edge edge;
+    KTableBorderStylePrivate::Edge edge;
     qreal innerWidth = 0;
     qreal middleWidth = 0;
     qreal space = 0;
@@ -425,7 +425,7 @@ void KTableBorderStyle::drawTopHorizontalBorder(QPainter &painter, qreal x, qrea
 void KTableBorderStyle::drawSharedHorizontalBorder(QPainter &painter, const KTableBorderStyle &styleBelow,  qreal x, qreal y, qreal w, QVector<QLineF> *accumulatedBlankBorders) const
 {
     Q_D(const KTableBorderStyle);
-    const KoTableBorderStylePrivate *styleBelowD = static_cast<const KoTableBorderStylePrivate*>(styleBelow.d_func());
+    const KTableBorderStylePrivate *styleBelowD = static_cast<const KTableBorderStylePrivate*>(styleBelow.d_func());
 
     bool paintThis = true;
     if (d->borderstyle[Bottom] == BorderNone) {
@@ -446,7 +446,7 @@ void KTableBorderStyle::drawSharedHorizontalBorder(QPainter &painter, const KTab
         }
     }
 
-    const KoTableBorderStylePrivate::Edge &edge = paintThis ? d->edges[Bottom]: styleBelowD->edges[Top];
+    const KTableBorderStylePrivate::Edge &edge = paintThis ? d->edges[Bottom]: styleBelowD->edges[Top];
     const BorderStyle borderStyle = paintThis ? d->borderstyle[Bottom]: d->borderstyle[Top];
     qreal t=y;
 
@@ -551,7 +551,7 @@ void KTableBorderStyle::drawLeftmostVerticalBorder(QPainter &painter, qreal x, q
 void KTableBorderStyle::drawSharedVerticalBorder(QPainter &painter, const KTableBorderStyle &styleRight,  qreal x, qreal y, qreal h, QVector<QLineF> *accumulatedBlankBorders) const
 {
     Q_D(const KTableBorderStyle);
-    const KoTableBorderStylePrivate *styleRightD = static_cast<const KoTableBorderStylePrivate*>(styleRight.d_func());
+    const KTableBorderStylePrivate *styleRightD = static_cast<const KTableBorderStylePrivate*>(styleRight.d_func());
 
     // First determine which style "wins" by comparing total width
     qreal thisWidth = d->edges[Right].outerPen.widthF() + d->edges[Right].spacing + d->edges[Right].innerPen.widthF();
@@ -661,7 +661,7 @@ qreal KTableBorderStyle::leftBorderWidth() const
 {
     Q_D(const KTableBorderStyle);
 
-    const KoTableBorderStylePrivate::Edge &edge = d->edges[Left];
+    const KTableBorderStylePrivate::Edge &edge = d->edges[Left];
     return edge.spacing + edge.innerPen.widthF() + edge.outerPen.widthF();
 }
 
@@ -669,7 +669,7 @@ qreal KTableBorderStyle::rightBorderWidth() const
 {
     Q_D(const KTableBorderStyle);
 
-    const KoTableBorderStylePrivate::Edge &edge = d->edges[Right];
+    const KTableBorderStylePrivate::Edge &edge = d->edges[Right];
     return edge.spacing + edge.innerPen.widthF() + edge.outerPen.widthF();
 }
 
@@ -677,7 +677,7 @@ qreal KTableBorderStyle::topBorderWidth() const
 {
     Q_D(const KTableBorderStyle);
 
-    const KoTableBorderStylePrivate::Edge &edge = d->edges[Top];
+    const KTableBorderStylePrivate::Edge &edge = d->edges[Top];
     return edge.spacing + edge.innerPen.widthF() + edge.outerPen.widthF();
 }
 
@@ -685,7 +685,7 @@ qreal KTableBorderStyle::bottomBorderWidth() const
 {
     Q_D(const KTableBorderStyle);
 
-    const KoTableBorderStylePrivate::Edge &edge = d->edges[Bottom];
+    const KTableBorderStylePrivate::Edge &edge = d->edges[Bottom];
     return edge.spacing + edge.innerPen.widthF() + edge.outerPen.widthF();
 }
 

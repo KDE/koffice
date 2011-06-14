@@ -35,7 +35,7 @@
 
 #include "KTableBorderStyle.h"
 
-class KoTableBorderStylePrivate
+class KTableBorderStylePrivate
 {
 public:
     struct Edge {
@@ -46,8 +46,8 @@ public:
         qreal spacing;
     };
 
-    KoTableBorderStylePrivate();
-    virtual ~KoTableBorderStylePrivate();
+    KTableBorderStylePrivate();
+    virtual ~KTableBorderStylePrivate();
 
     Edge edges[6];
     KTableBorderStyle::BorderStyle borderstyle[6];

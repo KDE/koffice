@@ -25,7 +25,7 @@
 #include "KoText.h"
 #include "kotext_export.h"
 
-class KoTableBorderStylePrivate;
+class KTableBorderStylePrivate;
 
 class KOTEXT_EXPORT KTableBorderStyle : public QObject
 {
@@ -225,9 +225,9 @@ public:
     qreal bottomBorderWidth() const;
 
 protected:
-    KTableBorderStyle(KoTableBorderStylePrivate &dd, const QTextTableCellFormat &format, QObject *parent);
-    KTableBorderStyle(KoTableBorderStylePrivate &dd, QObject *parent);
-    KoTableBorderStylePrivate *d_ptr;
+    KTableBorderStyle(KTableBorderStylePrivate &dd, const QTextTableCellFormat &format, QObject *parent);
+    KTableBorderStyle(KTableBorderStylePrivate &dd, QObject *parent);
+    KTableBorderStylePrivate *d_ptr;
 
 private:
     void init(const QTextTableCellFormat &format);
