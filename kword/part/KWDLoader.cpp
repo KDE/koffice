@@ -39,7 +39,7 @@
 #include <KoTextDocumentLayout.h>
 #include <KoInlineTextObjectManager.h>
 #include <KoColorBackground.h>
-#include <KoImageCollection.h>
+#include <KImageCollection.h>
 #include <KoImageData.h>
 #include <KOdfBorders.h>
 
@@ -491,7 +491,7 @@ void KWDLoader::loadFrameSet(const KXmlElement &framesetElem)
         KoShape *shape = factory->createDefaultShape(m_document->resourceManager());
         shape->setKeepAspectRatio(image.attribute("keepAspectRatio", "true") == "true");
 
-        KoImageCollection *collection = m_document->resourceManager()->imageCollection();
+        KImageCollection *collection = m_document->resourceManager()->imageCollection();
         Q_ASSERT(collection);
         KoImageData *data = collection->createImageData(imageKey.filename, m_store);
         shape->setUserData(data);

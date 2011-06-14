@@ -19,7 +19,7 @@
 #include "KoPathShapeFactory_p.h"
 #include "KoPathShape.h"
 #include "KoLineBorder.h"
-#include "KoImageCollection.h"
+#include "KImageCollection.h"
 #include "KoResourceManager.h"
 #include "KoShapeLoadingContext.h"
 
@@ -74,7 +74,7 @@ void KoPathShapeFactory::newDocumentResourceManager(KoResourceManager *manager)
     // added to the data center map, in case the picture shape plugin
     // is not loaded
     if (manager->imageCollection() == 0) {
-        KoImageCollection *imgCol = new KoImageCollection(manager);
+        KImageCollection *imgCol = new KImageCollection(manager);
         manager->setImageCollection(imgCol);
     }
 }

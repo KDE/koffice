@@ -24,7 +24,7 @@
 #include "flake_export.h"
 #include <QtGui/QTransform>
 
-class KoImageCollection;
+class KImageCollection;
 class KOdfLoadingContext;
 class KoPatternBackgroundPrivate;
 class KoImageData;
@@ -53,7 +53,7 @@ public:
     };
 
     /// Constructs a new pattern background utilizing the given image collection
-    KoPatternBackground(KoImageCollection *collection);
+    KoPatternBackground(KImageCollection *collection);
 
     virtual ~KoPatternBackground();
 

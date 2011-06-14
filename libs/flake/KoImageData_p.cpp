@@ -21,7 +21,7 @@
  */
 
 #include "KoImageData_p.h"
-#include "KoImageCollection.h"
+#include "KImageCollection.h"
 
 #include <KTemporaryFile>
 #include <QImageWriter>

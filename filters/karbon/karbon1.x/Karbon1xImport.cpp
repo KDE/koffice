@@ -41,7 +41,7 @@
 #include <artistictextshape/ArtisticTextShape.h>
 #include <pictureshape/PictureShape.h>
 #include <KoImageData.h>
-#include <KoImageCollection.h>
+#include <KImageCollection.h>
 #include <KoPathPoint.h>
 #include <KoZoomHandler.h>
 #include <KoPatternBackground.h>
@@ -491,7 +491,7 @@ void KarbonImport::loadPattern(KoShape * shape, const KXmlElement &element)
         return;
     }
 
-    KoImageCollection *imageCollection = m_document->resourceManager()->imageCollection();
+    KImageCollection *imageCollection = m_document->resourceManager()->imageCollection();
     if (imageCollection) {
         KoPatternBackground * newFill = new KoPatternBackground(imageCollection);
         newFill->setPattern(img.mirrored(false, true));

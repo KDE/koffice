@@ -94,7 +94,7 @@ set(flake_SRCS
     KEventActionRegistry.cpp
     KoImageData.cpp
     KoImageData_p.cpp
-    KoImageCollection.cpp
+    KImageCollection.cpp
     KoOdfWorkaround.cpp
     KFilterEffect.cpp
     KFilterEffectStack.cpp
@@ -259,7 +259,7 @@ install(
     KFrameShape.h
     KGradientBackground.h
     KGuidesData.h
-    KoImageCollection.h
+    KImageCollection.h
     KoImageData.h
     KoInputDevice.h
     KoInsets.h

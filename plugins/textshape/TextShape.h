@@ -35,7 +35,7 @@
 
 class KoInlineTextObjectManager;
 class KoPageProvider;
-class KoImageCollection;
+class KImageCollection;
 
 /**
  * A text shape.
@@ -59,7 +59,7 @@ public:
     QPointF convertScreenPos(const QPointF &point);
 
     /// set the image collection which is needed to draw bullet from images
-    void setImageCollection(KoImageCollection *collection) { m_imageCollection = collection; }
+    void setImageCollection(KImageCollection *collection) { m_imageCollection = collection; }
 
     /**
      * Set the shape's text to be demo text or not.
@@ -129,7 +129,7 @@ private:
     mutable QMutex m_mutex;
     mutable QWaitCondition m_waiter;
     KoPageProvider *m_pageProvider;
-    KoImageCollection *m_imageCollection;
+    KImageCollection *m_imageCollection;
 
     QRegion m_paintRegion;
 };

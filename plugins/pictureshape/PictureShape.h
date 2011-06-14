@@ -26,7 +26,7 @@
 
 #define PICTURESHAPEID "PictureShape"
 
-class KoImageCollection;
+class KImageCollection;
 class RenderQueue;
 
 class PictureShape : public KoShape, public KFrameShape
@@ -54,9 +54,9 @@ public:
     /**
      * Get the collection used in the shape.
      */
-    KoImageCollection *imageCollection() const;
+    KImageCollection *imageCollection() const;
 
-    void setImageCollection(KoImageCollection *collection) { m_imageCollection = collection; }
+    void setImageCollection(KImageCollection *collection) { m_imageCollection = collection; }
 
     void setMode(PictureMode mode);
     PictureMode mode() const;
@@ -69,7 +69,7 @@ protected:
     virtual void loadStyle(const KXmlElement& element, KoShapeLoadingContext& context);
 
 private:
-    KoImageCollection *m_imageCollection;
+    KImageCollection *m_imageCollection;
     RenderQueue *m_renderQueue;
     mutable QImage m_printQualityImage;
     PictureMode m_mode;

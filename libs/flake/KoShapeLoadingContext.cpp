@@ -23,7 +23,7 @@
 #include "KoShapeContainer.h"
 #include "KoSharedLoadingData.h"
 #include "KoShapeControllerBase.h"
-#include "KoImageCollection.h"
+#include "KImageCollection.h"
 #include "KoResourceManager.h"
 #include "KoLoadingShapeUpdater.h"
 
@@ -133,7 +133,7 @@ void KoShapeLoadingContext::shapeLoaded(KoShape * shape)
     }
 }
 
-KoImageCollection * KoShapeLoadingContext::imageCollection()
+KImageCollection * KoShapeLoadingContext::imageCollection()
 {
     return d->documentResources ? d->documentResources->imageCollection() : 0;
 }

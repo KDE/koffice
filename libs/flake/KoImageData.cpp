@@ -22,7 +22,7 @@
 
 #include "KoImageData.h"
 
-#include "KoImageCollection.h"
+#include "KImageCollection.h"
 #include "KoImageData_p.h"
 
 #include <KUnit.h>
@@ -156,7 +156,7 @@ bool KoImageData::hasCachedImage() const
     return d && !d->image.isNull();
 }
 
-void KoImageData::setImage(const QImage &image, KoImageCollection *collection)
+void KoImageData::setImage(const QImage &image, KImageCollection *collection)
 {
     Q_ASSERT(!image.isNull());
     if (collection) {
@@ -201,12 +201,12 @@ void KoImageData::setImage(const QImage &image, KoImageCollection *collection)
     }
 }
 
-void KoImageData::setExternalImage(const QString &location, KoImageCollection *collection)
+void KoImageData::setExternalImage(const QString &location, KImageCollection *collection)
 {
     setExternalImage(QUrl::fromUserInput(location), collection);
 }
 
-void KoImageData::setExternalImage(const QUrl &location, KoImageCollection *collection)
+void KoImageData::setExternalImage(const QUrl &location, KImageCollection *collection)
 {
     if (collection) {
         // let the collection first check if it already has one. If it doesn't it'll call this method
@@ -230,7 +230,7 @@ void KoImageData::setExternalImage(const QUrl &location, KoImageCollection *coll
     }
 }
 
-void KoImageData::setImage(const QString &url, KOdfStore *store, KoImageCollection *collection)
+void KoImageData::setImage(const QString &url, KOdfStore *store, KImageCollection *collection)
 {
     if (collection) {
         // Let the collection first check if it already has one. If it
@@ -281,7 +281,7 @@ void KoImageData::setImage(const QString &url, KOdfStore *store, KoImageCollecti
     }
 }
 
-void KoImageData::setImage(const QByteArray &imageData, KoImageCollection *collection)
+void KoImageData::setImage(const QByteArray &imageData, KImageCollection *collection)
 {
     if (collection) {
         // let the collection first check if it already has one. If it doesn't it'll call this method

@@ -41,7 +41,7 @@
 #include <commands/KoShapeGroupCommand.h>
 #include <KUnit.h>
 #include <KoImageData.h>
-#include <KoImageCollection.h>
+#include <KImageCollection.h>
 #include <pathshapes/rectangle/RectangleShape.h>
 #include <pathshapes/ellipse/EllipseShape.h>
 #include <plugins/artistictextshape/ArtisticTextShape.h>
@@ -1095,7 +1095,7 @@ void SvgParser::applyFillStyle(KoShape * shape)
     break;
     case SvgGraphicsContext::Pattern: {
         SvgPatternHelper * pattern = findPattern(gc->fillId);
-        KoImageCollection *imageCollection = m_documentResourceManager->imageCollection();
+        KImageCollection *imageCollection = m_documentResourceManager->imageCollection();
         if (pattern && imageCollection) {
             QRectF objectBound = QRectF(QPoint(), shape->size());
             QRectF currentBoundbox = gc->currentBoundbox;
@@ -1948,7 +1948,7 @@ KoShape * SvgParser::createObject(const KXmlElement &b, const SvgStyles &style)
         QImage img;
         if (parseImage(fname, img)) {
             KoShape * picture = createShape("PictureShape");
-            KoImageCollection *imageCollection = m_documentResourceManager->imageCollection();
+            KImageCollection *imageCollection = m_documentResourceManager->imageCollection();
 
             if (picture && imageCollection) {
                 // TODO use it already for loading

@@ -30,7 +30,7 @@
 #include <KIO/Job>
 
 #include <KoCanvasBase.h>
-#include <KoImageCollection.h>
+#include <KImageCollection.h>
 #include <KoSelection.h>
 #include <KoShapeManager.h>
 #include <KoPointerEvent.h>

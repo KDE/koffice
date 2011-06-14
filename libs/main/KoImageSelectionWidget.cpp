@@ -21,7 +21,7 @@
 #include "KoImageSelectionWidget.h"
 
 #include <KoImageData.h>
-#include <KoImageCollection.h>
+#include <KImageCollection.h>
 #include <KoShapeFactoryBase.h>
 #include <KoShapeRegistry.h>
 #include <KoResourceManager.h>
@@ -92,7 +92,7 @@ void ImageFilePreview::paintEvent(QPaintEvent *)
 class KoImageSelectionWidget::Private
 {
 public:
-    Private(KoImageSelectionWidget *qq, KoImageCollection *c)
+    Private(KoImageSelectionWidget *qq, KImageCollection *c)
         : q(qq),
         collection(c),
         stack(0),
@@ -106,7 +106,7 @@ public:
     void setImageData(KJob *job);
 
     KoImageSelectionWidget *q;
-    KoImageCollection *collection;
+    KImageCollection *collection;
     QStackedWidget *stack;
     KFileWidget *fileWidget;
     ImageFilePreview *filePreview;
@@ -135,7 +135,7 @@ void KoImageSelectionWidget::Private::setImageData(KJob *job)
 }
 
 
-KoImageSelectionWidget::KoImageSelectionWidget(KoImageCollection *collection, QWidget *parent)
+KoImageSelectionWidget::KoImageSelectionWidget(KImageCollection *collection, QWidget *parent)
     : QWidget(parent),
     d (new Private(this, collection))
 {
@@ -177,7 +177,7 @@ KoImageData *KoImageSelectionWidget::imageData() const
 }
 
 // static
-KoImageData *KoImageSelectionWidget::selectImage(KoImageCollection *collection, QWidget *parent)
+KoImageData *KoImageSelectionWidget::selectImage(KImageCollection *collection, QWidget *parent)
 {
     KDialog *dialog = new KDialog(parent);
     dialog->setButtons(KDialog::Ok | KDialog::Cancel);

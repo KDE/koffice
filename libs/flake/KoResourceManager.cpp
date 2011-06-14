@@ -251,14 +251,14 @@ void KoResourceManager::setUndoStack(KUndoStack *undoStack)
     setResource(KoDocumentResource::UndoStack, variant);
 }
 
-KoImageCollection *KoResourceManager::imageCollection() const
+KImageCollection *KoResourceManager::imageCollection() const
 {
     if (!hasResource(KoDocumentResource::ImageCollection))
         return 0;
-    return static_cast<KoImageCollection*>(resource(KoDocumentResource::ImageCollection).value<void*>());
+    return static_cast<KImageCollection*>(resource(KoDocumentResource::ImageCollection).value<void*>());
 }
 
-void KoResourceManager::setImageCollection(KoImageCollection *ic)
+void KoResourceManager::setImageCollection(KImageCollection *ic)
 {
     QVariant variant;
     variant.setValue<void*>(ic);

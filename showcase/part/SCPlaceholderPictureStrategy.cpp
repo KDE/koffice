@@ -22,7 +22,7 @@
 #include <QString>
 #include <KFileDialog>
 #include <KUrl>
-#include <KoImageCollection.h>
+#include <KImageCollection.h>
 #include <KoResourceManager.h>
 #include <KoImageData.h>
 #include <KoShape.h>
@@ -46,7 +46,7 @@ KoShape *SCPlaceholderPictureStrategy::createShape(KoResourceManager *rm)
     if (!url.isEmpty()) {
         shape = SCPlaceholderStrategy::createShape(rm);
 
-        KoImageCollection *collection = rm->imageCollection();
+        KImageCollection *collection = rm->imageCollection();
         Q_ASSERT(collection);
 
         QString tmpFile;

@@ -25,7 +25,7 @@
 #include <QtGui/QWidget>
 #include <QtCore/QMap>
 
-class KoImageCollection;
+class KImageCollection;
 class KoImageData;
 class KoShape;
 class KoResourceManager;
@@ -34,7 +34,7 @@ class KOMAIN_EXPORT KoImageSelectionWidget : public QWidget
 {
     Q_OBJECT
 public:
-    explicit KoImageSelectionWidget(KoImageCollection *collection, QWidget *parent = 0);
+    explicit KoImageSelectionWidget(KImageCollection *collection, QWidget *parent = 0);
     virtual ~KoImageSelectionWidget();
 
     /// return if the user selected a valid image and we successfully downloaded it.
@@ -42,7 +42,7 @@ public:
     /// return the image data resulting from the users choice
     KoImageData *imageData() const;
 
-    static KoImageData *selectImage(KoImageCollection *collection, QWidget *parent);
+    static KoImageData *selectImage(KImageCollection *collection, QWidget *parent);
     static KoShape *selectImageShape(KoResourceManager *documentResourceManager, QWidget *parent);
 
 signals:

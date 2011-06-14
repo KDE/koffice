@@ -22,7 +22,7 @@
 #include "PictureShape.h"
 
 #include <KoViewConverter.h>
-#include <KoImageCollection.h>
+#include <KImageCollection.h>
 #include <KoImageData.h>
 #include <KoShapeLoadingContext.h>
 #include <KOdfLoadingContext.h>
@@ -117,7 +117,7 @@ void PictureShape::paint(QPainter &painter, const KoViewConverter &converter)
             }
 
             if (m_printQualityImage.isNull()) {
-                const int MaxSize = 1000; // TODO set the number as a KoImageCollection size
+                const int MaxSize = 1000; // TODO set the number as a KImageCollection size
                 // make sure our pixmap doesn't get too slow.
                 // In future we may want to make this action cause a multi-threaded rescale of the pixmap.
                 if (pixmapSize.width() > MaxSize) { // resize to max size.
@@ -247,7 +247,7 @@ bool PictureShape::loadOdfFrameElement(const KXmlElement &element, KoShapeLoadin
     return true;
 }
 
-KoImageCollection *PictureShape::imageCollection() const
+KImageCollection *PictureShape::imageCollection() const
 {
     return m_imageCollection;
 }

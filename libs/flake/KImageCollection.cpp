@@ -17,7 +17,7 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#include "KoImageCollection.h"
+#include "KImageCollection.h"
 #include "KoImageData.h"
 #include "KoImageData_p.h"
 #include "KoShapeSavingContext.h"
@@ -30,7 +30,7 @@
 #include <kdebug.h>
 #include <kmimetype.h>
 
-class KoImageCollection::Private
+class KImageCollection::Private
 {
 public:
     ~Private()
@@ -44,25 +44,25 @@ public:
     QMap<QByteArray, KoImageDataPrivate*> storeImages;
 };
 
-KoImageCollection::KoImageCollection(QObject *parent)
+KImageCollection::KImageCollection(QObject *parent)
     : QObject(parent),
     d(new Private())
 {
 }
 
-KoImageCollection::~KoImageCollection()
+KImageCollection::~KImageCollection()
 {
     delete d;
 }
 
-bool KoImageCollection::completeLoading(KOdfStore *store)
+bool KImageCollection::completeLoading(KOdfStore *store)
 {
     Q_UNUSED(store);
     d->storeImages.clear();
     return true;
 }
 
-bool KoImageCollection::completeSaving(KOdfStore *store, KXmlWriter *manifestWriter, KoShapeSavingContext *context)
+bool KImageCollection::completeSaving(KOdfStore *store, KXmlWriter *manifestWriter, KoShapeSavingContext *context)
 {
     QMap<qint64, QString> images(context->imagesToSave());
     QMap<qint64, QString>::iterator it(images.begin());
@@ -109,7 +109,7 @@ bool KoImageCollection::completeSaving(KOdfStore *store, KXmlWriter *manifestWri
     return true;
 }
 
-KoImageData *KoImageCollection::createImageData(const QImage &image)
+KoImageData *KImageCollection::createImageData(const QImage &image)
 {
     Q_ASSERT(!image.isNull());
     KoImageData *data = new KoImageData();
@@ -119,12 +119,12 @@ KoImageData *KoImageCollection::createImageData(const QImage &image)
     return data;
 }
 
-KoImageData *KoImageCollection::createExternalImageData(const QString &localPath)
+KoImageData *KImageCollection::createExternalImageData(const QString &localPath)
 {
     return createExternalImageData(QUrl::fromUserInput(localPath));
 }
 
-KoImageData *KoImageCollection::createExternalImageData(const QUrl &url)
+KoImageData *KImageCollection::createExternalImageData(const QUrl &url)
 {
     Q_ASSERT(!url.isEmpty() && url.isValid());
 
@@ -141,7 +141,7 @@ KoImageData *KoImageCollection::createExternalImageData(const QUrl &url)
     return data;
 }
 
-KoImageData *KoImageCollection::createImageData(const QString &href, KOdfStore *store)
+KoImageData *KImageCollection::createImageData(const QString &href, KOdfStore *store)
 {
     // the tricky thing with a 'store' is that we need to read the data now
     // as the store will no longer be readable after the loading completed.
@@ -164,7 +164,7 @@ KoImageData *KoImageCollection::createImageData(const QString &href, KOdfStore *
     return data;
 }
 
-KoImageData *KoImageCollection::createImageData(const QByteArray &imageData)
+KoImageData *KImageCollection::createImageData(const QByteArray &imageData)
 {
     QCryptographicHash md5(QCryptographicHash::Md5);
     md5.addData(imageData);
@@ -179,7 +179,7 @@ KoImageData *KoImageCollection::createImageData(const QByteArray &imageData)
     return data;
 }
 
-KoImageData *KoImageCollection::cacheImage(KoImageData *data)
+KoImageData *KImageCollection::cacheImage(KoImageData *data)
 {
     QMap<qint64, KoImageDataPrivate*>::const_iterator it(d->images.constFind(data->key()));
     if (it == d->images.constEnd()) {
@@ -193,7 +193,7 @@ KoImageData *KoImageCollection::cacheImage(KoImageData *data)
     return data;
 }
 
-bool KoImageCollection::fillFromKey(KoImageData &idata, qint64 key)
+bool KImageCollection::fillFromKey(KoImageData &idata, qint64 key)
 {
     if (d->images.contains(key)) {
         idata = KoImageData(d->images.value(key));
@@ -202,17 +202,17 @@ bool KoImageCollection::fillFromKey(KoImageData &idata, qint64 key)
     return false;
 }
 
-int KoImageCollection::size() const
+int KImageCollection::size() const
 {
     return d->images.count();
 }
 
-int KoImageCollection::count() const
+int KImageCollection::count() const
 {
     return d->images.count();
 }
 
-void KoImageCollection::removeOnKey(qint64 imageDataKey)
+void KImageCollection::removeOnKey(qint64 imageDataKey)
 {
     d->images.remove(imageDataKey);
 }

@@ -43,7 +43,7 @@
 class KoShape;
 class KoShapeSavingContext;
 class KoShapeLayer;
-class KoImageCollection;
+class KImageCollection;
 class KOdfStore;
 class KoDataCenterBase;
 class KoResourceManager;
@@ -197,7 +197,7 @@ public:
     void setPageSize(QSizeF pageSize);
 
     /// Returns the documents image collection
-    KoImageCollection * imageCollection();
+    KImageCollection * imageCollection();
 
     /// Returns the documents data centers
     QMap<QString, KoDataCenterBase*> dataCenterMap() const;

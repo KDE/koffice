@@ -25,7 +25,7 @@
 #include <KoPAPageBase.h>
 
 class KoShape;
-class KoImageCollection;
+class KImageCollection;
 class SCDocument;
 class SCPage;
 
@@ -79,7 +79,7 @@ private:
     KOdfPageLayoutData m_pageLayout;
     SCPage *m_page;
     SCDocument *m_doc;
-    KoImageCollection * m_imageCollection;
+    KImageCollection * m_imageCollection;
 };
 
 #endif // KPRNOTES_H

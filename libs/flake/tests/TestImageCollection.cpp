@@ -20,7 +20,7 @@
 #include "TestImageCollection.h"
 
 #include <KoImageData.h>
-#include <KoImageCollection.h>
+#include <KImageCollection.h>
 #include <KOdfStore.h>
 
 #include <QImage>
@@ -32,7 +32,7 @@
 
 void TestImageCollection::testGetImageImage()
 {
-    KoImageCollection collection;
+    KImageCollection collection;
     QImage image(KDESRCDIR "/logo-koffice.png");
 
     KoImageData *id1 = collection.createImageData(image);
@@ -73,7 +73,7 @@ void TestImageCollection::testGetImageImage()
 
 void TestImageCollection::testGetExternalImage()
 {
-    KoImageCollection collection;
+    KImageCollection collection;
     QUrl url = QUrl::fromUserInput(KDESRCDIR "/logo-koffice.png");
     KoImageData *id1 = collection.createExternalImageData(url);
     QCOMPARE(id1->suffix(), QString("png"));
@@ -95,7 +95,7 @@ void TestImageCollection::testGetExternalImage()
 
 void TestImageCollection::testGetImageStore()
 {
-    KoImageCollection collection;
+    KImageCollection collection;
     KOdfStore *store = KOdfStore::createStore(KDESRCDIR "/store.zip", KOdfStore::Read);
     QString image("logo-koffice.jpg");
     KoImageData *id1 = collection.createImageData(image, store);
@@ -131,7 +131,7 @@ void TestImageCollection::testGetImageStore()
 
 void TestImageCollection::testInvalidImageData()
 {
-    KoImageCollection collection;
+    KImageCollection collection;
     QByteArray invalidImageData(100, '^');
     KoImageData *data = collection.createImageData(invalidImageData);
     QVERIFY(data);

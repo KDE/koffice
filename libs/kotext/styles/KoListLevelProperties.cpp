@@ -33,7 +33,7 @@
 #include <KXmlWriter.h>
 #include <KUnit.h>
 #include <KoText.h>
-#include <KoImageCollection.h>
+#include <KImageCollection.h>
 #include <KoImageData.h>
 
 class KoListLevelProperties::Private
@@ -479,7 +479,7 @@ void KoListLevelProperties::loadOdf(KoShapeLoadingContext& scontext, const KXmlE
     }
     else if (style.localName() == "list-level-style-image") {   // list with image
         setStyle(KoListStyle::ImageItem);
-        KoImageCollection *imageCollection = scontext.imageCollection();
+        KImageCollection *imageCollection = scontext.imageCollection();
         const QString href = style.attribute("href");
         if(imageCollection) {
             if (!href.isEmpty()) {

@@ -32,7 +32,7 @@ class QPixmap;
 class QImage;
 class QSizeF;
 class QUrl;
-class KoImageCollection;
+class KImageCollection;
 class KoImageDataPrivate;
 class KOdfStore;
 
@@ -82,11 +82,11 @@ public:
     /// returns true only if pixmap() would return immediately with a cached pixmap
     bool hasCachedPixmap() const;
 
-    void setImage(const QImage &image, KoImageCollection *collection = 0);
-    void setImage(const QByteArray &imageData, KoImageCollection *collection = 0);
-    void setExternalImage(const QUrl &location, KoImageCollection *collection = 0);
-    void setExternalImage(const QString &location, KoImageCollection *collection = 0);
-    void setImage(const QString &location, KOdfStore *store, KoImageCollection *collection = 0);
+    void setImage(const QImage &image, KImageCollection *collection = 0);
+    void setImage(const QByteArray &imageData, KImageCollection *collection = 0);
+    void setExternalImage(const QUrl &location, KImageCollection *collection = 0);
+    void setExternalImage(const QString &location, KImageCollection *collection = 0);
+    void setImage(const QString &location, KOdfStore *store, KImageCollection *collection = 0);
 
     /**
      * Save the image data to the param device.
@@ -130,7 +130,7 @@ public:
     KoImageDataPrivate *priv() { return d; }
 
 protected:
-    friend class KoImageCollection;
+    friend class KImageCollection;
 
     /// \internal
     KoImageData(KoImageDataPrivate *priv);

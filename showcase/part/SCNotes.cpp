@@ -22,7 +22,7 @@
 
 #include <KDebug>
 
-#include <KoImageCollection.h>
+#include <KImageCollection.h>
 #include <KoImageData.h>
 #include <KoShape.h>
 #include <KoShapeFactoryBase.h>
@@ -60,7 +60,7 @@ SCNotes::SCNotes(SCPage *page, SCDocument * document)
 : KoPAPageBase()
 , m_page(page)
 , m_doc(document)
-, m_imageCollection(new KoImageCollection())
+, m_imageCollection(new KImageCollection())
 {
     // add default layer
     KoShapeLayer* layer = new KoShapeLayer;

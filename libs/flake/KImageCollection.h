@@ -33,13 +33,13 @@ class KoImageData;
  * An collection of KoImageData objects to allow loading and saving them all together to the KOdfStore.
  * It also makes sure that if the same image is added to the collection that they share the internal data structure.
  */
-class FLAKE_EXPORT KoImageCollection : public QObject, public KoDataCenterBase
+class FLAKE_EXPORT KImageCollection : public QObject, public KoDataCenterBase
 {
     Q_OBJECT
 public:
     /// constructor
-    KoImageCollection(QObject *parent = 0);
-    virtual ~KoImageCollection();
+    KImageCollection(QObject *parent = 0);
+    virtual ~KImageCollection();
 
     /// reimplemented
     bool completeLoading(KOdfStore *store);

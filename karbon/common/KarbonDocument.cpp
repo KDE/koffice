@@ -46,7 +46,7 @@
 #include <KOdfStorageDevice.h>
 #include <KOdfWriteStore.h>
 #include <KOdfEmbeddedDocumentSaver.h>
-#include <KoImageCollection.h>
+#include <KImageCollection.h>
 #include <KoDataCenterBase.h>
 #include <KoText.h>
 #include <KoStyleManager.h>
@@ -332,7 +332,7 @@ const QList<KoShapeLayer*> KarbonDocument::layers() const
     return d->layers;
 }
 
-KoImageCollection * KarbonDocument::imageCollection()
+KImageCollection * KarbonDocument::imageCollection()
 {
     return resourceManager()->imageCollection();
 }

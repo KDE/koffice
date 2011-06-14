@@ -23,7 +23,7 @@
 #include <kfiledialog.h>
 #include <kio/netaccess.h>
 
-#include <KoImageCollection.h>
+#include <KImageCollection.h>
 #include <KoPatternBackground.h>
 #include <KoCanvasBase.h>
 #include <KoShapeController.h>
@@ -76,7 +76,7 @@ void KoPABackgroundToolWidget::slotActivePageChanged()
 void KoPABackgroundToolWidget::setBackgroundImage()
 {
     // TODO only make images selectable
-    KoImageCollection *collection = m_tool->canvas()->shapeController()->resourceManager()->imageCollection();
+    KImageCollection *collection = m_tool->canvas()->shapeController()->resourceManager()->imageCollection();
     Q_ASSERT(collection);
     KoShape * page = m_tool->canvas()->resourceManager()->koShapeResource(KoPageApp::CurrentPage);
     Q_ASSERT(page);

@@ -43,7 +43,7 @@
 
 #include "KoImageData.h"
 
-class KoImageCollection;
+class KImageCollection;
 class KTemporaryFile;
 
 class KoImageDataPrivate
@@ -80,7 +80,7 @@ public:
         StateImageOnly  ///< Image data is stored in a QImage. There is no external storage.
     };
 
-    KoImageCollection *collection;
+    KImageCollection *collection;
     KoImageData::ErrorCode errorCode;
     QSizeF imageSize;
     qint64 key;

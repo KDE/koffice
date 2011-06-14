@@ -103,7 +103,7 @@
 #include <KoSnapGuide.h>
 #include <KoShapeFactoryBase.h>
 #include <KoShapeRegistry.h>
-#include <KoImageCollection.h>
+#include <KImageCollection.h>
 #include <KoImageData.h>
 
 // kde header
@@ -443,7 +443,7 @@ void KarbonView::fileImportGraphic()
         }
 
         KoShape *picture = factory->createDefaultShape(part()->document().resourceManager());
-        KoImageCollection *imageCollection = part()->document().resourceManager()->imageCollection();
+        KImageCollection *imageCollection = part()->document().resourceManager()->imageCollection();
         if (!picture || !imageCollection) {
             KMessageBox::error(0, i18n("Could not create image shape."), i18n("Import graphic"), 0);
             return;

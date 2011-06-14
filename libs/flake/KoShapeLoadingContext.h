@@ -33,7 +33,7 @@ class KoShapeLayer;
 class KoShape;
 class KoShapeControllerBase;
 class KoLoadingShapeUpdater;
-class KoImageCollection;
+class KImageCollection;
 class KoSharedLoadingData;
 class KoResourceManager;
 
@@ -117,7 +117,7 @@ public:
     void shapeLoaded(KoShape *shape);
 
     /// Returns the image collection for loading images
-    KoImageCollection *imageCollection();
+    KImageCollection *imageCollection();
 
     /// Get current z-index
     int zIndex();

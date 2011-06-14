@@ -27,7 +27,7 @@
 #include <KUnit.h>
 #include <KoColorBackground.h>
 #include <KoPatternBackground.h>
-#include <KoImageCollection.h>
+#include <KImageCollection.h>
 #include <KOdfLoadingContext.h>
 
 #include <kdebug.h>
@@ -424,7 +424,7 @@ void KWPageStyle::loadOdf(KOdfLoadingContext &context, const KXmlElement &master
             d->fullPageBackground = background;
             d->fullPageBackground->ref();
 
-            KoImageCollection *imageCollection = documentResources->imageCollection();
+            KImageCollection *imageCollection = documentResources->imageCollection();
             if (imageCollection != 0) {
                 KoImageData *imageData = imageCollection->createImageData(href,context.store());
                 background->setPattern(imageData);

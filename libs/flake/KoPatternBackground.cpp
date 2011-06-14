@@ -21,7 +21,7 @@
 #include "KoShapeBackground_p.h"
 #include "KoShapeSavingContext.h"
 #include "KoImageData.h"
-#include "KoImageCollection.h"
+#include "KImageCollection.h"
 #include <KOdfStyleStack.h>
 #include <KOdfGenericStyle.h>
 #include <KOdfGenericStyles.h>
@@ -122,7 +122,7 @@ public:
     QSizeF targetImageSizePercent;
     QPointF refPointOffsetPercent;
     QPointF tileRepeatOffsetPercent;
-    KoImageCollection * imageCollection;
+    KImageCollection * imageCollection;
     KoImageData * imageData;
 };
 
@@ -130,7 +130,7 @@ public:
 // ----------------------------------------------------------------
 
 
-KoPatternBackground::KoPatternBackground(KoImageCollection * imageCollection)
+KoPatternBackground::KoPatternBackground(KImageCollection * imageCollection)
         : KoShapeBackground(*(new KoPatternBackgroundPrivate()))
 {
     Q_D(KoPatternBackground);

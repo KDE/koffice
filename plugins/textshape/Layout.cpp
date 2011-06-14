@@ -49,7 +49,7 @@
 #include <KOdfGenericChange.h>
 #include <KoTextBlockPaintStrategyBase.h>
 #include <KoImageData.h>
-#include <KoImageCollection.h>
+#include <KImageCollection.h>
 
 #include <KDebug>
 #include <QTextList>
@@ -1635,7 +1635,7 @@ void Layout::decorateParagraph(QPainter *painter, const QTextBlock &block, int s
     painter->setFont(oldFont);
 }
 
-void Layout::drawListItem(QPainter *painter, const QTextBlock &block, KoImageCollection *imageCollection)
+void Layout::drawListItem(QPainter *painter, const QTextBlock &block, KImageCollection *imageCollection)
 {
     KoTextBlockData *data = dynamic_cast<KoTextBlockData*>(block.userData());
     if (data == 0)

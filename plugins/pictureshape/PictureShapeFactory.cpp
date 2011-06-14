@@ -26,7 +26,7 @@
 #include <KOdfXmlNS.h>
 #include "KoShapeControllerBase.h"
 #include <KoShapeLoadingContext.h>
-#include "KoImageCollection.h"
+#include "KImageCollection.h"
 
 #include <klocale.h>
 #include <kdebug.h>
@@ -65,6 +65,6 @@ void PictureShapeFactory::newDocumentResourceManager(KoResourceManager *manager)
 
 void PictureShapeFactory::createImageCollection(KoResourceManager *manager)
 {
-    manager->setImageCollection(new KoImageCollection(manager));
+    manager->setImageCollection(new KImageCollection(manager));
 }
 

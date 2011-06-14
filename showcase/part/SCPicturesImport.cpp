@@ -23,7 +23,7 @@
 #include <KoShapeRegistry.h>
 #include <KoShapeLayer.h>
 #include <KoImageData.h>
-#include <KoImageCollection.h>
+#include <KImageCollection.h>
 #include <KoPAPage.h>
 #include <KoPAMasterPage.h>
 #include <KoPAPageInsertCommand.h>

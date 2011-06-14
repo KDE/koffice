@@ -37,7 +37,7 @@ class KoStyleManager;
 class QTextLayout;
 class KoInlineTextObjectManager;
 class KoViewConverter;
-class KoImageCollection;
+class KImageCollection;
 
 /**
  * KWords text layouter that allows text to flow in multiple frames and around
@@ -57,7 +57,7 @@ public:
         /// A view converter, when set, is used to find out when the zoom is so low that painting of text is unneeded
         const KoViewConverter *viewConverter;
 
-        KoImageCollection *imageCollection;
+        KImageCollection *imageCollection;
     };
 
     /// constructor
