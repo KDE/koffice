@@ -24,7 +24,7 @@
 #include <QDockWidget>
 #include <ui_KWRdfDocker.h>
 #include <rdf/KoDocumentRdf.h>
-#include <KoCanvasObserverBase.h>
+#include <KCanvasObserverBase.h>
 
 class QTimer;
 class QTextDocument;
@@ -38,7 +38,7 @@ class KWDocument;
  * element, then the person will be shown in the docker giving
  * the user the ability to import that contact.
  */
-class KWRdfDocker : public QDockWidget, public KoCanvasObserverBase
+class KWRdfDocker : public QDockWidget, public KCanvasObserverBase
 {
     Q_OBJECT
 

@@ -23,7 +23,7 @@
 
 #include <QWidget>
 #include <QMap>
-#include <KoCanvasObserverBase.h>
+#include <KCanvasObserverBase.h>
 
 class QComboBox;
 class QUndoCommand;
@@ -34,7 +34,7 @@ class SCSoundCollection;
 /**
  * This is the click action docker widget that let's you choose a click action for your shapes
  */
-class SCClickActionDocker : public QWidget, public KoCanvasObserverBase
+class SCClickActionDocker : public QWidget, public KCanvasObserverBase
 {
     Q_OBJECT
 public:

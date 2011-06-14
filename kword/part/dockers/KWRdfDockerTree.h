@@ -21,7 +21,7 @@
 #define KWRDFDOCKERTREE_H
 
 #include <QTreeWidget>
-#include <KoCanvasObserverBase.h>
+#include <KCanvasObserverBase.h>
 
 class KoDocumentRdf;
 class KWView;
@@ -45,7 +45,7 @@ class KoTextEditor;
  * dropped the data onto.
  *
  */
-class KWRdfDockerTree : public QTreeWidget, public KoCanvasObserverBase
+class KWRdfDockerTree : public QTreeWidget, public KCanvasObserverBase
 {
     Q_OBJECT
 public:

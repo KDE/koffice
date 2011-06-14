@@ -1892,13 +1892,13 @@ QList<QDockWidget*> KoMainWindow::dockWidgets()
     return d->dockWidgetsMap.values();
 }
 
-QList<KoCanvasObserverBase*> KoMainWindow::canvasObservers()
+QList<KCanvasObserverBase*> KoMainWindow::canvasObservers()
 {
 
-    QList<KoCanvasObserverBase*> observers;
+    QList<KCanvasObserverBase*> observers;
 
     foreach(QDockWidget *docker, dockWidgets()) {
-        KoCanvasObserverBase *observer = dynamic_cast<KoCanvasObserverBase*>(docker);
+        KCanvasObserverBase *observer = dynamic_cast<KCanvasObserverBase*>(docker);
         if (observer) {
             observers << observer;
         }

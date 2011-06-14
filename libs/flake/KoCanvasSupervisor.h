@@ -24,7 +24,7 @@
 
 #include "flake_export.h"
 
-class KoCanvasObserverBase;
+class KCanvasObserverBase;
 
 /**
  * KoCanvasSupervisor is an abstract class that can return a
@@ -35,7 +35,7 @@ class FLAKE_EXPORT KoCanvasSupervisor
 public:
     KoCanvasSupervisor();
     virtual ~KoCanvasSupervisor();
-    virtual QList<KoCanvasObserverBase*> canvasObservers() = 0;
+    virtual QList<KCanvasObserverBase*> canvasObservers() = 0;
 };
 
 #endif

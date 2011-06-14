@@ -29,7 +29,7 @@
 #include "KoShape.h"
 #include "KoViewConverter.h"
 #include "KCanvasBase.h"
-#include "KoCanvasObserverBase.h"
+#include "KCanvasObserverBase.h"
 #include "KoCanvasSupervisor.h"
 #include "KoToolManager_p.h"
 
@@ -159,8 +159,8 @@ void KCanvasController::Private::activate()
     if (!observerProvider)
         return;
 
-    foreach(KoCanvasObserverBase *docker, observerProvider->canvasObservers()) {
-        KoCanvasObserverBase *observer = dynamic_cast<KoCanvasObserverBase*>(docker);
+    foreach(KCanvasObserverBase *docker, observerProvider->canvasObservers()) {
+        KCanvasObserverBase *observer = dynamic_cast<KCanvasObserverBase*>(docker);
         if (observer) {
             observer->setCanvas(q->canvas());
         }

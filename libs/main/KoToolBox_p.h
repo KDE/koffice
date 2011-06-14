@@ -22,7 +22,7 @@
 #ifndef _KO_TOOLBOX_H_
 #define _KO_TOOLBOX_H_
 
-#include <KoCanvasObserverBase.h>
+#include <KCanvasObserverBase.h>
 
 #include <QtCore/QList>
 #include <QtCore/QMap>
@@ -110,13 +110,13 @@ private:
     Private * const d;
 };
 
-class KoToolBoxDocker : public QDockWidget, public KoCanvasObserverBase
+class KoToolBoxDocker : public QDockWidget, public KCanvasObserverBase
 {
     Q_OBJECT
 public:
     KoToolBoxDocker(KoToolBox *toolBox);
 
-    /// reimplemented from KoCanvasObserverBase
+    /// reimplemented from KCanvasObserverBase
     virtual void setCanvas(KCanvasBase *canvas);
 
 protected slots:

@@ -30,11 +30,11 @@ class KCanvasBase;
  * should implement that interface so that the tool controller
  * can give them the active canvas.
  */
-class FLAKE_EXPORT KoCanvasObserverBase
+class FLAKE_EXPORT KCanvasObserverBase
 {
 public:
-    KoCanvasObserverBase();
-    virtual ~KoCanvasObserverBase();
+    KCanvasObserverBase();
+    virtual ~KCanvasObserverBase();
     virtual void setCanvas(KCanvasBase *canvas) = 0;
 
 };

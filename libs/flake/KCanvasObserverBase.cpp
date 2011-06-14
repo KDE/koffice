@@ -17,12 +17,12 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoCanvasObserverBase.h"
+#include "KCanvasObserverBase.h"
 
-KoCanvasObserverBase::KoCanvasObserverBase()
+KCanvasObserverBase::KCanvasObserverBase()
 {
 }
 
-KoCanvasObserverBase::~KoCanvasObserverBase()
+KCanvasObserverBase::~KCanvasObserverBase()
 {
 }
