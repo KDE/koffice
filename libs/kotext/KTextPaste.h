@@ -33,16 +33,16 @@ namespace Soprano
     class Model;
 }
 
-class KOTEXT_EXPORT KoTextPaste : public KOdfPasteBase
+class KOTEXT_EXPORT KTextPaste : public KOdfPasteBase
 {
 public:
     /**
      * Note: RdfModel ownership is not taken. You must ensure that it remains
      * valid for the lifetime of the object.
      */
-    KoTextPaste(KoTextShapeData *shapeData, QTextCursor &cursor,
+    KTextPaste(KoTextShapeData *shapeData, QTextCursor &cursor,
                 KCanvasBase *canvas, Soprano::Model *rdfModel);
-    virtual ~KoTextPaste();
+    virtual ~KTextPaste();
 
 protected:
     /// reimplemented

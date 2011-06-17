@@ -23,7 +23,7 @@
 #include <KoTextEditor.h>
 
 #include <KTextDocument.h>
-#include <KoTextPaste.h>
+#include <KTextPaste.h>
 #include "TextTool.h"
 
 #include <klocale.h>
@@ -92,7 +92,7 @@ void TextPasteCommand::redo()
 #endif
 
             //kDebug() << "pasting odf text";
-            KoTextPaste paste(m_tool->m_textShapeData, *editor->cursor(),
+            KTextPaste paste(m_tool->m_textShapeData, *editor->cursor(),
                               m_tool->canvas(), rdfModel);
             paste.paste(odfBasedType, data);
             //kDebug() << "done with pasting odf";

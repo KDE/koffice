@@ -11,7 +11,7 @@ set(kotext_LIB_SRCS
     KTextBlockPaintStrategyBase.cpp
     KTextDocumentLayout.cpp
     KTextOdfSaveHelper.cpp
-    KoTextPaste.cpp
+    KTextPaste.cpp
     KTextDocument.cpp
     KoTextEditor.cpp
     KoList.cpp
@@ -133,7 +133,7 @@ install(
     KoList.h
     KTextLocator.h
     KTextPage.h
-    KoTextPaste.h
+    KTextPaste.h
     KoTextShapeData.h
     KoVariable.h
     KoVariableManager.h

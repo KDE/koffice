@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoTextPaste.h"
+#include "KTextPaste.h"
 
 #include <KOdfStoreReader.h>
 #include <KOdfLoadingContext.h>
@@ -34,7 +34,7 @@
 #include "KoTextRdfCore_p.h"
 #endif
 
-class KoTextPaste::Private
+class KTextPaste::Private
 {
 public:
     Private(KoTextShapeData *shapeData, QTextCursor &cursor,
@@ -50,18 +50,18 @@ public:
     Soprano::Model *rdfModel;
 };
 
-KoTextPaste::KoTextPaste(KoTextShapeData *shapeData, QTextCursor &cursor,
+KTextPaste::KTextPaste(KoTextShapeData *shapeData, QTextCursor &cursor,
                          KCanvasBase *canvas, Soprano::Model *rdfModel)
         : d(new Private(shapeData, cursor, canvas, rdfModel))
 {
 }
 
-KoTextPaste::~KoTextPaste()
+KTextPaste::~KTextPaste()
 {
     delete d;
 }
 
-bool KoTextPaste::process(const KXmlElement &body, KOdfStoreReader &odfStore)
+bool KTextPaste::process(const KXmlElement &body, KOdfStoreReader &odfStore)
 {
     bool ok = true;
     KOdfLoadingContext loadingContext(odfStore.styles(), odfStore.store());
