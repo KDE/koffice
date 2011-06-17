@@ -28,9 +28,9 @@
 #include <KShapeSavingContext.h>
 #include <KoPASavingContext.h>
 
-#include <KoTextBlockData.h>
+#include <KTextBlockData.h>
 
-SCShapeAnimation::SCShapeAnimation(KShape *shape, KoTextBlockData *textBlockData)
+SCShapeAnimation::SCShapeAnimation(KShape *shape, KTextBlockData *textBlockData)
 : m_shape(shape)
 , m_textBlockData(textBlockData)
 {
@@ -78,7 +78,7 @@ KShape * SCShapeAnimation::shape() const
     return m_shape;
 }
 
-KoTextBlockData * SCShapeAnimation::textBlockData() const
+KTextBlockData * SCShapeAnimation::textBlockData() const
 {
     return m_textBlockData;
 }

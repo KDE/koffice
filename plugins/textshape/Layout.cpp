@@ -37,7 +37,7 @@
 #include <KTableRowStyle.h>
 #include <KTableColumnAndRowStyleManager.h>
 #include <KStyleManager.h>
-#include <KoTextBlockData.h>
+#include <KTextBlockData.h>
 #include <KTextBlockBorderData.h>
 #include <KInlineNote.h>
 #include <KInlineTextObjectManager.h>
@@ -419,7 +419,7 @@ bool Layout::nextParag()
         Q_ASSERT(m_tableCell.isValid());
     }
     m_format = m_block.blockFormat();
-    m_blockData = dynamic_cast<KoTextBlockData*>(m_block.userData());
+    m_blockData = dynamic_cast<KTextBlockData*>(m_block.userData());
     KoText::Direction dir = static_cast<KoText::Direction>(m_format.intProperty(KParagraphStyle::TextProgressionDirection));
     if (dir == KoText::InheritDirection)
         dir = m_data->pageDirection();
@@ -454,7 +454,7 @@ bool Layout::nextParag()
             }
             ListItemsHelper lih(textList, font);
             lih.recalculate();
-            m_blockData = dynamic_cast<KoTextBlockData*>(m_block.userData());
+            m_blockData = dynamic_cast<KTextBlockData*>(m_block.userData());
         }
     } else if (m_blockData) { // make sure it is empty
         m_blockData->setCounterText(QString());
@@ -822,7 +822,7 @@ void Layout::handleTableBreak(QTextTableCell &previousCell, QTextTable *table)
         m_y -= layout->lineAt(layout->lineCount() - 1).y() + layout->lineAt(layout->lineCount() - 1).height() - layout->lineAt(0).y();
 
         m_format = m_block.blockFormat();
-        m_blockData = dynamic_cast<KoTextBlockData*>(m_block.userData());
+        m_blockData = dynamic_cast<KTextBlockData*>(m_block.userData());
         m_isRtl = m_block.text().isRightToLeft();
         m_fragmentIterator = m_block.begin();
         layout->beginLayout();
@@ -974,7 +974,7 @@ void Layout::resetPrivate()
                     break;
                 }
                 // in case this parag has a border we have to subtract that as well
-                m_blockData = dynamic_cast<KoTextBlockData*>(m_block.userData());
+                m_blockData = dynamic_cast<KTextBlockData*>(m_block.userData());
                 if (m_blockData && m_blockData->border()) {
                     qreal top = m_blockData->border()->inset(KTextBlockBorderData::Top);
                     // but only when this border actually makes us have an indent.
@@ -1035,13 +1035,13 @@ void Layout::updateBorders()
     QTextBlock prev = m_block.previous();
     KTextBlockBorderData *prevBorder = 0;
     if (prev.isValid()) {
-        KoTextBlockData *bd = dynamic_cast<KoTextBlockData*>(prev.userData());
+        KTextBlockData *bd = dynamic_cast<KTextBlockData*>(prev.userData());
         if (bd)
             prevBorder = bd->border();
     }
     if (border.hasBorders()) {
         if (m_blockData == 0) {
-            m_blockData = new KoTextBlockData();
+            m_blockData = new KTextBlockData();
             m_block.setUserData(m_blockData);
         }
 
@@ -1142,7 +1142,7 @@ void Layout::drawFrame(QTextFrame *frame, QPainter *painter, const KoTextDocumen
         if (!painter->hasClipping() || clipRegion.intersects(layout->boundingRect().toRect())) {
             started = true;
 
-            KoTextBlockData *blockData = dynamic_cast<KoTextBlockData*>(block.userData());
+            KTextBlockData *blockData = dynamic_cast<KTextBlockData*>(block.userData());
             KTextBlockBorderData *border = 0;
             KoTextBlockPaintStrategyBase *paintStrategy = 0;
             if (blockData) {
@@ -1637,7 +1637,7 @@ void Layout::decorateParagraph(QPainter *painter, const QTextBlock &block, int s
 
 void Layout::drawListItem(QPainter *painter, const QTextBlock &block, KImageCollection *imageCollection)
 {
-    KoTextBlockData *data = dynamic_cast<KoTextBlockData*>(block.userData());
+    KTextBlockData *data = dynamic_cast<KTextBlockData*>(block.userData());
     if (data == 0)
         return;
 
@@ -1870,7 +1870,7 @@ bool Layout::previousParag()
     m_y = tl.y();
 
     m_format = m_block.blockFormat();
-    m_blockData = dynamic_cast<KoTextBlockData*>(m_block.userData());
+    m_blockData = dynamic_cast<KTextBlockData*>(m_block.userData());
     m_isRtl = m_block.text().isRightToLeft();
 
     m_fragmentIterator = m_block.begin();

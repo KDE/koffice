@@ -23,7 +23,7 @@
 #include "../SCShapeAnimation.h"
 #include "kdebug.h"
 
-#include "KoTextBlockData.h"
+#include "KTextBlockData.h"
 SCAttributeX::SCAttributeX() : SCAnimationAttribute("x")
 {
 }

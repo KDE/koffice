@@ -24,7 +24,7 @@
 #include <QVariant>
 
 #include <KShape.h>
-#include <KoTextBlockData.h>
+#include <KTextBlockData.h>
 
 #include "kdebug.h"
 
@@ -45,7 +45,7 @@ bool SCAnimationCache::hasValue(KShape *shape, const QString &id)
     return false;
 }
 
-bool SCAnimationCache::hasValue(int step, KoTextBlockData *textBlockData, const QString &id)
+bool SCAnimationCache::hasValue(int step, KTextBlockData *textBlockData, const QString &id)
 {
     if (m_textBlockDataValuesStack[step].contains(textBlockData))
         return m_textBlockDataValuesStack[step].value(textBlockData).contains(id);
@@ -64,7 +64,7 @@ void SCAnimationCache::setValue(int step, KShape *shape, const QString &id, cons
     m_shapeValuesStack[step][shape][id] = value;
 }
 
-void SCAnimationCache::setValue(int step, KoTextBlockData *textBlockData, const QString &id, const QVariant &value)
+void SCAnimationCache::setValue(int step, KTextBlockData *textBlockData, const QString &id, const QVariant &value)
 {
     m_textBlockDataValuesStack[step][textBlockData][id] = value;
 }
@@ -84,14 +84,14 @@ QVariant SCAnimationCache::value(int step, KShape *shape, const QString &id)
 }
 
 
-QVariant SCAnimationCache::value(KoTextBlockData *textBlockData, const QString &id, const QVariant &defaultValue)
+QVariant SCAnimationCache::value(KTextBlockData *textBlockData, const QString &id, const QVariant &defaultValue)
 {
     if (m_currentTextBlockDataValues.contains(textBlockData))
         return m_currentTextBlockDataValues.value(textBlockData).value(id, defaultValue);
     return defaultValue;
 }
 
-void SCAnimationCache::init(int step, KShape *shape, KoTextBlockData * textBlockData, const QString &id, const QVariant &value)
+void SCAnimationCache::init(int step, KShape *shape, KTextBlockData * textBlockData, const QString &id, const QVariant &value)
 {
     if (textBlockData) {
         for (int i = m_textBlockDataValuesStack.size(); i <= step; ++i) {
@@ -100,7 +100,7 @@ void SCAnimationCache::init(int step, KShape *shape, KoTextBlockData * textBlock
                 m_textBlockDataValuesStack.append(m_textBlockDataValuesStack[i-1]);
             }
             else {
-                m_textBlockDataValuesStack.append(QMap<KoTextBlockData *, QMap<QString, QVariant> >());
+                m_textBlockDataValuesStack.append(QMap<KTextBlockData *, QMap<QString, QVariant> >());
             }
         }
         // check if value is valid
@@ -151,7 +151,7 @@ void SCAnimationCache::init(int step, KShape *shape, KoTextBlockData * textBlock
     }
 }
 
-void SCAnimationCache::update(KShape *shape, KoTextBlockData * textBlockData, const QString &id, const QVariant &value)
+void SCAnimationCache::update(KShape *shape, KTextBlockData * textBlockData, const QString &id, const QVariant &value)
 {
     if (textBlockData) {
         if (id == "transform" && !m_next) {

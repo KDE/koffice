@@ -18,11 +18,11 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoTextBlockData.h"
+#include "KTextBlockData.h"
 #include "KTextBlockBorderData.h"
 #include "KoTextBlockPaintStrategyBase.h"
 
-class KoTextBlockData::Private
+class KTextBlockData::Private
 {
 public:
     Private()
@@ -51,28 +51,28 @@ public:
     KoTextBlockPaintStrategyBase *paintStrategy;
 };
 
-KoTextBlockData::KoTextBlockData()
+KTextBlockData::KTextBlockData()
         : d(new Private())
 {
     d->counterWidth = -1.0;
 }
 
-KoTextBlockData::~KoTextBlockData()
+KTextBlockData::~KTextBlockData()
 {
     delete d;
 }
 
-bool KoTextBlockData::hasCounterData() const
+bool KTextBlockData::hasCounterData() const
 {
     return d->counterWidth >= 0 && (!d->counterText.isNull() || d->counterIsImage);
 }
 
-qreal KoTextBlockData::counterWidth() const
+qreal KTextBlockData::counterWidth() const
 {
     return qMax(qreal(0), d->counterWidth);
 }
 
-void KoTextBlockData::setBorder(KTextBlockBorderData *border)
+void KTextBlockData::setBorder(KTextBlockBorderData *border)
 {
     if (d->border && !d->border->deref())
         delete d->border;
@@ -81,83 +81,83 @@ void KoTextBlockData::setBorder(KTextBlockBorderData *border)
         d->border->ref();
 }
 
-void KoTextBlockData::setCounterWidth(qreal width)
+void KTextBlockData::setCounterWidth(qreal width)
 {
     d->counterWidth = width;
 }
 
-qreal KoTextBlockData::counterSpacing() const
+qreal KTextBlockData::counterSpacing() const
 {
     return d->counterSpacing;
 }
 
-void KoTextBlockData::setCounterSpacing(qreal spacing)
+void KTextBlockData::setCounterSpacing(qreal spacing)
 {
     d->counterSpacing = spacing;
 }
 
-void KoTextBlockData::setCounterText(const QString &text)
+void KTextBlockData::setCounterText(const QString &text)
 {
     d->counterText = text;
 }
 
-QString KoTextBlockData::counterText() const
+QString KTextBlockData::counterText() const
 {
     return d->counterText;
 }
 
-void KoTextBlockData::setPartialCounterText(const QString &text)
+void KTextBlockData::setPartialCounterText(const QString &text)
 {
     d->partialCounterText = text;
 }
 
-QString KoTextBlockData::partialCounterText() const
+QString KTextBlockData::partialCounterText() const
 {
     return d->partialCounterText;
 }
 
-void KoTextBlockData::setCounterIsImage(bool isImage)
+void KTextBlockData::setCounterIsImage(bool isImage)
 {
     d->counterIsImage = isImage;
 }
 
-bool KoTextBlockData::counterIsImage() const
+bool KTextBlockData::counterIsImage() const
 {
     return d->counterIsImage;
 }
 
-void KoTextBlockData::setCounterIndex(int index)
+void KTextBlockData::setCounterIndex(int index)
 {
     d->counterIndex = index;
 }
 
-int KoTextBlockData::counterIndex() const
+int KTextBlockData::counterIndex() const
 {
     return d->counterIndex;
 }
 
-void KoTextBlockData::setCounterPosition(const QPointF &position)
+void KTextBlockData::setCounterPosition(const QPointF &position)
 {
     d->counterPos = position;
 }
 
-QPointF KoTextBlockData::counterPosition() const
+QPointF KTextBlockData::counterPosition() const
 {
     return d->counterPos;
 }
 
-KTextBlockBorderData *KoTextBlockData::border() const
+KTextBlockBorderData *KTextBlockData::border() const
 {
     return d->border;
 }
 
-void KoTextBlockData::setPaintStrategy(KoTextBlockPaintStrategyBase *paintStrategy)
+void KTextBlockData::setPaintStrategy(KoTextBlockPaintStrategyBase *paintStrategy)
 {
     delete d->paintStrategy;
     d->paintStrategy = paintStrategy;
 }
 
-KoTextBlockPaintStrategyBase *KoTextBlockData::paintStrategy() const
+KoTextBlockPaintStrategyBase *KTextBlockData::paintStrategy() const
 {
     return d->paintStrategy;
 }

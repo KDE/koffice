@@ -23,7 +23,7 @@
 #include <KXmlReader.h>
 #include <KOdfXmlNS.h>
 #include <KShapeLoadingContext.h>
-#include <KoTextBlockData.h>
+#include <KTextBlockData.h>
 
 #include <QVariant>
 #include <QDomDocument>
@@ -171,12 +171,12 @@ bool SCAnimationLoader::loadOdfAnimation(SCAnimationStep **animationStep, const 
             QString targetElement(e.attributeNS(KOdfXmlNS::smil, "targetElement", QString()));
             if (!targetElement.isEmpty()) {
                 KShape *shape = 0;
-                KoTextBlockData *textBlockData = 0;
+                KTextBlockData *textBlockData = 0;
 
                 if (e.attributeNS(KOdfXmlNS::anim, "sub-item", "whole") == "text") {
                     QPair<KShape *, QVariant> pair = context.shapeSubItemById(targetElement);
                     shape = pair.first;
-                    textBlockData = pair.second.value<KoTextBlockData *>();
+                    textBlockData = pair.second.value<KTextBlockData *>();
                     kDebug() << "subitem text" << textBlockData;
                 }
                 else {

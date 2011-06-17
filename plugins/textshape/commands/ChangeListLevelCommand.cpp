@@ -20,7 +20,7 @@
 #include "ChangeListLevelCommand.h"
 
 #include <KParagraphStyle.h>
-#include <KoTextBlockData.h>
+#include <KTextBlockData.h>
 #include <KoTextDocument.h>
 #include <KoList.h>
 #include "TextTool.h"
@@ -85,7 +85,7 @@ void ChangeListLevelCommand::redo()
         UndoRedoFinalizer finalizer(this);
         for (int i = 0; i < m_blocks.size(); ++i) {
             m_lists.value(i)->updateStoredList(m_blocks.at(i));
-            if (KoTextBlockData *userData = dynamic_cast<KoTextBlockData*>(m_blocks.at(i).userData()))
+            if (KTextBlockData *userData = dynamic_cast<KTextBlockData*>(m_blocks.at(i).userData()))
                 userData->setCounterWidth(-1.0);
         }
     }
@@ -109,7 +109,7 @@ void ChangeListLevelCommand::undo()
     for (int i = 0; i < m_blocks.size(); ++i) {
         if (m_blocks.at(i).textList())
             m_lists.value(i)->updateStoredList(m_blocks.at(i));
-        if (KoTextBlockData *userData = dynamic_cast<KoTextBlockData*>(m_blocks.at(i).userData()))
+        if (KTextBlockData *userData = dynamic_cast<KTextBlockData*>(m_blocks.at(i).userData()))
             userData->setCounterWidth(-1.0);
 
     }

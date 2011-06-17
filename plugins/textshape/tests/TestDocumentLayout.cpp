@@ -23,7 +23,7 @@
 #include <KListStyle.h>
 #include <KListLevelProperties.h>
 #include <KStyleManager.h>
-#include <KoTextBlockData.h>
+#include <KTextBlockData.h>
 #include <KTextBlockBorderData.h>
 #include <KoTextDocument.h>
 
@@ -688,7 +688,7 @@ void TestDocumentLayout::testParagraphBorders()
 
     // borders are positioned outside the padding, lets check that to be the case.
     block = m_doc->begin();
-    KoTextBlockData *data  = dynamic_cast<KoTextBlockData*>(block.userData());
+    KTextBlockData *data  = dynamic_cast<KTextBlockData*>(block.userData());
     QVERIFY(data);
     KTextBlockBorderData *border = data->border();
     QVERIFY(border);
@@ -761,7 +761,7 @@ void TestDocumentLayout::testBorderData()
     m_layout->layout();
 
     block = m_doc->begin().next();
-    KoTextBlockData *data = dynamic_cast<KoTextBlockData*>(block.userData());
+    KTextBlockData *data = dynamic_cast<KTextBlockData*>(block.userData());
     QVERIFY(data);
     KTextBlockBorderData *border = data->border();
     QVERIFY(border);
@@ -794,7 +794,7 @@ void TestDocumentLayout::testBorderData()
     QCOMPARE(data->counterPosition(), QPointF(3, 24.4));
 
     block = block.next();
-    data = dynamic_cast<KoTextBlockData*>(block.userData());
+    data = dynamic_cast<KTextBlockData*>(block.userData());
     QCOMPARE(data->counterPosition(), QPointF(3, 53.8));
 }
 

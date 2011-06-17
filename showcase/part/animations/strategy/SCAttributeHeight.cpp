@@ -22,7 +22,7 @@
 #include "../SCShapeAnimation.h"
 #include <SCShapeAnimations.h>
 
-#include <KoTextBlockData.h>
+#include <KTextBlockData.h>
 #include <KoTextShapeData.h>
 #include <KShape.h>
 #include <QTextDocument>
@@ -36,7 +36,7 @@ void SCAttributeHeight::updateCache(SCAnimationCache *cache, SCShapeAnimation *s
 {
     qreal tx = 0.0, ty = 0.0;
     KShape * shape = shapeAnimation->shape();
-    KoTextBlockData * textBlockData = shapeAnimation->textBlockData();
+    KTextBlockData * textBlockData = shapeAnimation->textBlockData();
     QTransform transform;
     if (textBlockData) {
         if (KoTextShapeData *textShapeData = dynamic_cast<KoTextShapeData*>(shape->userData())) {
@@ -64,7 +64,7 @@ void SCAttributeHeight::initCache(SCAnimationCache *animationCache, int step, SC
 {
     qreal v1 = 0.0, v2 = 0.0, tx = 0.0, ty = 0.0;
     KShape * shape = shapeAnimation->shape();
-    KoTextBlockData * textBlockData = shapeAnimation->textBlockData();
+    KTextBlockData * textBlockData = shapeAnimation->textBlockData();
 
     if (textBlockData) {
         if (KoTextShapeData *textShapeData = dynamic_cast<KoTextShapeData*>(shape->userData())) {

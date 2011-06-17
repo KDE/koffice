@@ -21,7 +21,7 @@
 
 #include "KListStyle.h"
 #include "KListLevelProperties.h"
-#include "KoTextBlockData.h"
+#include "KTextBlockData.h"
 #include "KParagraphStyle.h"
 #include "KoList.h"
 

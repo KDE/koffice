@@ -24,7 +24,7 @@
 #include "KParagraphStyle.h"
 #include "KCharacterStyle.h"
 #include "KListStyle.h"
-#include "KoTextBlockData.h"
+#include "KTextBlockData.h"
 #include "KoTextDocumentLayout.h"
 #include "KStyleManager.h"
 #include "KListLevelProperties.h"
@@ -249,7 +249,7 @@ void KParagraphStyle::applyStyle(const QTextBlock &block, bool applyListStyle) c
         } else {
             if (block.textList())
                 block.textList()->remove(block);
-            KoTextBlockData *data = dynamic_cast<KoTextBlockData*>(block.userData());
+            KTextBlockData *data = dynamic_cast<KTextBlockData*>(block.userData());
             if (data)
                 data->setCounterWidth(-1);
         }

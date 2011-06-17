@@ -31,7 +31,7 @@
 #include <KXmlReader.h>
 #include <KShapeLoadingContext.h>
 #include <KShapeSavingContext.h>
-#include <KoTextBlockData.h>
+#include <KTextBlockData.h>
 #include "KXmlWriter.h"
 #include <kdebug.h>
 

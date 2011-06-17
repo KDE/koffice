@@ -23,7 +23,7 @@
 #include "../commands/ChangeListCommand.h"
 
 #include <KAction>
-#include <KoTextBlockData.h>
+#include <KTextBlockData.h>
 #include <KParagraphStyle.h>
 #include <KoTextDocumentLayout.h>
 #include <KoZoomHandler.h>

@@ -25,7 +25,7 @@
 #include "SCAnimationData.h"
 
 class KShape;
-class KoTextBlockData;
+class KTextBlockData;
 class KXmlElement;
 class KShapeLoadingContext;
 class KShapeSavingContext;
@@ -35,14 +35,14 @@ class KoPASavingContext;
 class SCShapeAnimation : public QParallelAnimationGroup, SCAnimationData
 {
 public:
-    SCShapeAnimation(KShape *shape, KoTextBlockData *textBlockData);
+    SCShapeAnimation(KShape *shape, KTextBlockData *textBlockData);
     virtual ~SCShapeAnimation();
 
     bool loadOdf(const KXmlElement &element, KShapeLoadingContext &context);
     virtual bool saveOdf(KoPASavingContext &paContext, bool startStep, bool startSubStep) const;
 
     KShape * shape() const;
-    KoTextBlockData * textBlockData() const;
+    KTextBlockData * textBlockData() const;
 
     virtual void init(SCAnimationCache *animationCache, int step);
 
@@ -60,11 +60,11 @@ public:
     /**
      * Read the value from the first SCAnimationBase object
      */
-    //QPair<KShape *, KoTextBlockData *> animationShape() const;
+    //QPair<KShape *, KTextBlockData *> animationShape() const;
 
 private:
     KShape *m_shape;
-    KoTextBlockData *m_textBlockData;
+    KTextBlockData *m_textBlockData;
 };
 
 #endif /* KPRSHAPEANIMATION_H */

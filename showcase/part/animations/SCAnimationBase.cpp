@@ -26,7 +26,7 @@
 #include "SCAnimationCache.h"
 #include "SCShapeAnimation.h"
 #include "KShapeLoadingContext.h"
-#include "KoTextBlockData.h"
+#include "KTextBlockData.h"
 
 #include <KoPASavingContext.h>
 

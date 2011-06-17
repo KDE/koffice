@@ -26,7 +26,7 @@
 #include <MockTextShape.h>
 #include <KParagraphStyle.h>
 #include <KListStyle.h>
-#include <KoTextBlockData.h>
+#include <KTextBlockData.h>
 #include <KStyleManager.h>
 #include <KoTextDocument.h>
 #include <MockShapes.h>

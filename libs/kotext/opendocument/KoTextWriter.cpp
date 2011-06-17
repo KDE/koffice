@@ -45,7 +45,7 @@
 #include "styles/KListLevelProperties.h"
 #include "styles/KTableCellStyle.h"
 #include "KoTextDocumentLayout.h"
-#include "KoTextBlockData.h"
+#include "KTextBlockData.h"
 #include "KoTextDocument.h"
 #include "KoTextInlineRdf.h"
 #include "../KDocumentRdfBase.h"
@@ -802,7 +802,7 @@ void KoTextWriter::Private::saveParagraph(const QTextBlock &block, int from, int
                 saveODF12Change(charFormat);
             }
 
-            const KoTextBlockData *blockData = dynamic_cast<const KoTextBlockData *>(block.userData());
+            const KTextBlockData *blockData = dynamic_cast<const KTextBlockData *>(block.userData());
             if (blockData && (it == block.begin())) {
                 writer->addAttribute("text:id", context.subId(blockData));
             }
@@ -1359,7 +1359,7 @@ QTextBlock& KoTextWriter::Private::saveList(QTextBlock &block, QHash<QTextList *
                 }
 
                 if (KListStyle::isNumberingStyle(textList->format().style())) {
-                    if (KoTextBlockData *blockData = dynamic_cast<KoTextBlockData *>(block.userData())) {
+                    if (KTextBlockData *blockData = dynamic_cast<KTextBlockData *>(block.userData())) {
                         writer->startElement("text:number", false);
                         writer->addTextSpan(blockData->counterText());
                         writer->endElement();

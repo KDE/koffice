@@ -23,7 +23,7 @@
 #include "TableLayout.h"
 
 #include <KoTextDocumentLayout.h>
-#include <KoTextBlockData.h>
+#include <KTextBlockData.h>
 #include <KoInsets.h>
 
 #include <QTextLine>
@@ -33,7 +33,7 @@
 #include <QWeakPointer>
 
 class KStyleManager;
-class KoTextBlockData;
+class KTextBlockData;
 class KoTextShapeData;
 class TextShape;
 class KChangeTracker;
@@ -142,7 +142,7 @@ private:
 
     qreal m_y;
     QTextBlock m_block;
-    KoTextBlockData *m_blockData;
+    KTextBlockData *m_blockData;
 
     QTextBlockFormat m_format;
     QTextBlock::Iterator m_fragmentIterator;

@@ -41,7 +41,7 @@
 #include <KShapeRegistry.h>
 #include <KTableColumnAndRowStyleManager.h>
 #include <KTextAnchor.h>
-#include <KoTextBlockData.h>
+#include <KTextBlockData.h>
 #include "KoTextDebug_p.h"
 #include "KoTextDocument.h"
 #include <KoTextDocumentLayout.h>
@@ -974,9 +974,9 @@ could be true; but the following code has no effect... (TZander)
     QString id(element.attributeNS(KOdfXmlNS::text, "id"));
     if (!id.isEmpty() && d->shape) {
         QTextBlock block = cursor.block();
-        KoTextBlockData *data = dynamic_cast<KoTextBlockData*>(block.userData());
+        KTextBlockData *data = dynamic_cast<KTextBlockData*>(block.userData());
         if (!data) {
-            data = new KoTextBlockData();
+            data = new KTextBlockData();
             block.setUserData(data);
         }
         d->context.addShapeSubItemId(d->shape, QVariant::fromValue(data), id);

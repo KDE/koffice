@@ -19,7 +19,7 @@
 
 #include "KoTextLocator.h"
 #include "KInlineObject_p.h"
-#include "KoTextBlockData.h"
+#include "KTextBlockData.h"
 #include "KoTextShapeData.h"
 #include "KoTextReference_p.h"
 #include "KoTextPage.h"
@@ -127,14 +127,14 @@ QString KoTextLocator::chapter() const
     return block.text().remove(QChar::ObjectReplacementCharacter);
 }
 
-KoTextBlockData *KoTextLocator::chapterBlockData() const
+KTextBlockData *KoTextLocator::chapterBlockData() const
 {
     Q_D(const KoTextLocator);
     const_cast<KoTextLocatorPrivate*>(d)->update();
     if (d->chapterPosition < 0)
         return 0;
     QTextBlock block = d->document->findBlock(d->chapterPosition);
-    return dynamic_cast<KoTextBlockData*>(block.userData());
+    return dynamic_cast<KTextBlockData*>(block.userData());
 }
 
 int KoTextLocator::pageNumber() const

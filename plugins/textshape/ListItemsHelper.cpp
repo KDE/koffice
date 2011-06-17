@@ -20,7 +20,7 @@
 
 #include "ListItemsHelper.h"
 
-#include <KoTextBlockData.h>
+#include <KTextBlockData.h>
 #include <KListStyle.h>
 #include <KParagraphStyle.h>
 #include <KoTextDocument.h>
@@ -250,7 +250,7 @@ void ListItemsHelper::recalculate()
                 break; // found a different list but of a different level
 
             if (otherFormat.style() == format.style()) {
-                if (KoTextBlockData *data = dynamic_cast<KoTextBlockData *>(tb.userData()))
+                if (KTextBlockData *data = dynamic_cast<KTextBlockData *>(tb.userData()))
                     startValue = data->counterIndex() + 1; // Start from previous list value + 1
             }
 
@@ -264,9 +264,9 @@ void ListItemsHelper::recalculate()
     for (int i = 0; i < m_textList->count(); i++) {
         QTextBlock tb = m_textList->item(i);
         //kDebug(32500) <<" *" << tb.text();
-        KoTextBlockData *data = dynamic_cast<KoTextBlockData*>(tb.userData());
+        KTextBlockData *data = dynamic_cast<KTextBlockData*>(tb.userData());
         if (!data) {
-            data = new KoTextBlockData();
+            data = new KTextBlockData();
             tb.setUserData(data);
         }
         QTextBlockFormat blockFormat = tb.blockFormat();
@@ -316,9 +316,9 @@ void ListItemsHelper::recalculate()
                 /*if(needsRecalc(b->textList())) {
                       TODO
                   } */
-                KoTextBlockData *otherData = dynamic_cast<KoTextBlockData*>(b.userData());
+                KTextBlockData *otherData = dynamic_cast<KTextBlockData*>(b.userData());
                 if (! otherData) {
-                    kWarning(32500) << "Missing KoTextBlockData, Skipping textblock";
+                    kWarning(32500) << "Missing KTextBlockData, Skipping textblock";
                     continue;
                 }
                 if (tmpDisplayLevel - 1 < otherLevel) { // can't just copy it fully since we are
@@ -463,7 +463,7 @@ void ListItemsHelper::recalculate()
         width = qMax(format.doubleProperty(KListStyle::MinimumWidth), width);
     for (int i = 0; i < m_textList->count(); i++) {
         QTextBlock tb = m_textList->item(i);
-        KoTextBlockData *data = dynamic_cast<KoTextBlockData*>(tb.userData());
+        KTextBlockData *data = dynamic_cast<KTextBlockData*>(tb.userData());
         Q_ASSERT(data);
         data->setCounterWidth(width);
         data->setCounterSpacing(counterSpacing);
@@ -478,7 +478,7 @@ bool ListItemsHelper::needsRecalc(QTextList *textList)
 {
     Q_ASSERT(textList);
     QTextBlock tb = textList->item(0);
-    KoTextBlockData *data = dynamic_cast<KoTextBlockData*>(tb.userData());
+    KTextBlockData *data = dynamic_cast<KTextBlockData*>(tb.userData());
     if (data == 0)
         return true;
     return !data->hasCounterData();

@@ -26,8 +26,8 @@
 #include <QPainter>
 
 #include "kdebug.h"
-#include "KoTextBlockData.h"
-SCTextBlockPaintStrategy::SCTextBlockPaintStrategy(KoTextBlockData *blockData, SCAnimationCache *animationCache)
+#include "KTextBlockData.h"
+SCTextBlockPaintStrategy::SCTextBlockPaintStrategy(KTextBlockData *blockData, SCAnimationCache *animationCache)
     : m_animationCache(animationCache)
     , m_textBlockData(blockData)
 {

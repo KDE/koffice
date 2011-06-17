@@ -24,7 +24,7 @@
 #include "styles/KCharacterStyle.h"
 #include "styles/KListStyle.h"
 #include "styles/KStyleManager.h"
-#include "KoTextBlockData.h"
+#include "KTextBlockData.h"
 #include "KTextBlockBorderData.h"
 #include "KInlineTextObjectManager.h"
 
@@ -363,7 +363,7 @@ void KoTextDocumentLayout::documentChanged(int position, int charsRemoved, int c
         if (! block.isValid())
             break;
         if (from == block.position() && block.textList()) {
-            KoTextBlockData *data = dynamic_cast<KoTextBlockData*>(block.userData());
+            KTextBlockData *data = dynamic_cast<KTextBlockData*>(block.userData());
             if (data)
                 data->setCounterWidth(-1); // invalidate whole list.
         }

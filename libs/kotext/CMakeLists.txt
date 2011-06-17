@@ -6,7 +6,7 @@ add_subdirectory( tests )
 set(kotext_LIB_SRCS
     KoTextShapeData.cpp
     KoText.cpp
-    KoTextBlockData.cpp
+    KTextBlockData.cpp
     KTextBlockBorderData.cpp
     KoTextBlockPaintStrategyBase.cpp
     KoTextDocumentLayout.cpp
@@ -127,7 +127,7 @@ install(
     KInlineTextObjectManager.h
     KTextAnchor.h
     KTextBlockBorderData.h
-    KoTextBlockData.h
+    KTextBlockData.h
     KoTextDocument.h
     KoText.h
     KoList.h

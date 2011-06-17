@@ -33,7 +33,7 @@
 
 #include "KoList.h"
 #include "KListStyle.h"
-#include "KoTextBlockData.h"
+#include "KTextBlockData.h"
 
 #include <QTextDocument>
 #include <QTextBlock>
@@ -56,7 +56,7 @@ public:
 
     static void invalidate(const QTextBlock &block)
     {
-        if (KoTextBlockData *userData = dynamic_cast<KoTextBlockData*>(block.userData()))
+        if (KTextBlockData *userData = dynamic_cast<KTextBlockData*>(block.userData()))
             userData->setCounterWidth(-1.0);
     }
 

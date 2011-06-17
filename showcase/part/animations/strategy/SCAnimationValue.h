@@ -23,7 +23,7 @@
 #include <QtGlobal>
 
 class KShape;
-class KoTextBlockData;
+class KTextBlockData;
 class SCAnimationCache;
 class SCShapeAnimation;
 class KoPASavingContext;
@@ -48,7 +48,7 @@ protected:
     SmilCalcMode m_calcMode;
     SCAnimationCache * m_cache;
     KShape * m_shape;
-    KoTextBlockData * m_textBlockData;
+    KTextBlockData * m_textBlockData;
 };
 
 #endif // KPRANIMATIONVALUE_H

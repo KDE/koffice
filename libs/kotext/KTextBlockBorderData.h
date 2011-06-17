@@ -31,7 +31,7 @@
  * This class holds data for paragraph-borders.
  * All the information needed to paint the borders, but also to calculate the insets that the borders
  * cause on text-layout is stored in here.
- * An instance of this class is owned by the KoTextBlockData and this class is being refcounted
+ * An instance of this class is owned by the KTextBlockData and this class is being refcounted
  * to allow multiple paragraphs to share one border.
  *
  */

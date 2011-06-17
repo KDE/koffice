@@ -23,7 +23,7 @@
 #include <KoTextBlockPaintStrategyBase.h>
 
 class SCAnimationCache;
-class KoTextBlockData;
+class KTextBlockData;
 
 /**
  * This class is used to control aspects of textblock painting
@@ -31,7 +31,7 @@ class KoTextBlockData;
 class SCTextBlockPaintStrategy : public KoTextBlockPaintStrategyBase
 {
 public:
-    SCTextBlockPaintStrategy(KoTextBlockData *blockData, SCAnimationCache *animationCache);
+    SCTextBlockPaintStrategy(KTextBlockData *blockData, SCAnimationCache *animationCache);
     virtual ~SCTextBlockPaintStrategy();
     void setAnimationCache(SCAnimationCache *animationCache);
     virtual QBrush background(const QBrush &defaultBackground);
@@ -39,7 +39,7 @@ public:
     virtual bool isVisible();
 
     SCAnimationCache *m_animationCache;
-    KoTextBlockData *m_textBlockData;
+    KTextBlockData *m_textBlockData;
 };
 
 #endif

@@ -26,7 +26,7 @@
 #include <KoTextPage.h>
 #include <KShape.h>
 #include <KoTextDocument.h>
-#include <KoTextBlockData.h>
+#include <KTextBlockData.h>
 #include <KStyleManager.h>
 
 #include <QTextFrame>
@@ -112,7 +112,7 @@ void ToCGenerator::generate()
             QTextBlock tocBlock = cursor.block();
             currentStyle->applyStyle(tocBlock);
 
-            KoTextBlockData *bd = dynamic_cast<KoTextBlockData *>(block.userData());
+            KTextBlockData *bd = dynamic_cast<KTextBlockData *>(block.userData());
             if (bd && bd->hasCounterData()) {
                 // TODO instead of using plain text we likely want to use a text list
                 // which makes all paragraphs be properly aligned

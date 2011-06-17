@@ -27,7 +27,7 @@ class KXmlElement;
 class KShapeLoadingContext;
 class KShapeSavingContext;
 class KShape;
-class KoTextBlockData;
+class KTextBlockData;
 class SCAnimationCache;
 class SCShapeAnimation;
 class KoPASavingContext;

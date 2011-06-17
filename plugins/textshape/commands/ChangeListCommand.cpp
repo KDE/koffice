@@ -20,7 +20,7 @@
 
 #include "ChangeListCommand.h"
 
-#include <KoTextBlockData.h>
+#include <KTextBlockData.h>
 #include <KoTextDocument.h>
 #include <QTextCursor>
 #include <KParagraphStyle.h>
@@ -196,7 +196,7 @@ void ChangeListCommand::redo()
             if (m_actions.value(i) == ChangeListCommand::RemoveList)
                 for (int j = 0; j < m_blocks.at(i).textList()->count(); j++) {
                     if (m_blocks.at(i).textList()->item(j) != m_blocks.at(i)) {
-                        if (KoTextBlockData *userData = dynamic_cast<KoTextBlockData*>(m_blocks.at(i).textList()->item(j).userData()))
+                        if (KTextBlockData *userData = dynamic_cast<KTextBlockData*>(m_blocks.at(i).textList()->item(j).userData()))
                             userData->setCounterWidth(-1.0);
                         break;
                     }
@@ -212,13 +212,13 @@ void ChangeListCommand::redo()
                 listStyle->refreshLevelProperties(m_newProperties.value(i));
                 for (int j = 0; j < m_blocks.at(i).textList()->count(); j++) {
                     if (m_blocks.at(i).textList()->item(j) != m_blocks.at(i)) {
-                        if (KoTextBlockData *userData = dynamic_cast<KoTextBlockData*>(m_blocks.at(i).textList()->item(j).userData()))
+                        if (KTextBlockData *userData = dynamic_cast<KTextBlockData*>(m_blocks.at(i).textList()->item(j).userData()))
                             userData->setCounterWidth(-1.0);
                         break;
                     }
                 }
             }
-            if (KoTextBlockData *userData = dynamic_cast<KoTextBlockData*>(m_blocks.at(i).userData()))
+            if (KTextBlockData *userData = dynamic_cast<KTextBlockData*>(m_blocks.at(i).userData()))
                 userData->setCounterWidth(-1.0);
         }
     }
@@ -264,7 +264,7 @@ void ChangeListCommand::undo()
             }
             for (int j = 0; j < m_blocks.at(i).textList()->count(); j++) {
                 if (m_blocks.at(i).textList()->item(j) != m_blocks.at(i)) {
-                    if (KoTextBlockData *userData = dynamic_cast<KoTextBlockData*>(m_blocks.at(i).textList()->item(j).userData()))
+                    if (KTextBlockData *userData = dynamic_cast<KTextBlockData*>(m_blocks.at(i).textList()->item(j).userData()))
                         userData->setCounterWidth(-1.0);
                     break;
                 }
@@ -278,7 +278,7 @@ void ChangeListCommand::undo()
             }
             for (int j = 0; j < m_blocks.at(i).textList()->count(); j++) {
                 if (m_blocks.at(i).textList()->item(j) != m_blocks.at(i)) {
-                    if (KoTextBlockData *userData = dynamic_cast<KoTextBlockData*>(m_blocks.at(i).textList()->item(j).userData()))
+                    if (KTextBlockData *userData = dynamic_cast<KTextBlockData*>(m_blocks.at(i).textList()->item(j).userData()))
                         userData->setCounterWidth(-1.0);
                     break;
                 }
@@ -293,7 +293,7 @@ void ChangeListCommand::undo()
                 m_oldList.value(i)->updateStoredList(m_blocks.at(i));
                 for (int j = 0; j < m_blocks.at(i).textList()->count(); j++) {
                     if (m_blocks.at(i).textList()->item(j) != m_blocks.at(i)) {
-                        if (KoTextBlockData *userData = dynamic_cast<KoTextBlockData*>(m_blocks.at(i).textList()->item(j).userData()))
+                        if (KTextBlockData *userData = dynamic_cast<KTextBlockData*>(m_blocks.at(i).textList()->item(j).userData()))
                             userData->setCounterWidth(-1.0);
                         break;
                     }
@@ -301,7 +301,7 @@ void ChangeListCommand::undo()
             }
         }
 
-        if (KoTextBlockData *userData = dynamic_cast<KoTextBlockData*>(m_blocks.at(i).userData()))
+        if (KTextBlockData *userData = dynamic_cast<KTextBlockData*>(m_blocks.at(i).userData()))
             userData->setCounterWidth(-1.0);
     }
 }

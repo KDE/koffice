@@ -36,7 +36,7 @@
 #include "styles/KTableCellStyle.h"
 #include "styles/KStyleManager.h"
 #include "KoTextDocument.h"
-#include "KoTextBlockData.h"
+#include "KTextBlockData.h"
 #include <KoTextDocumentLayout.h>
 #include <KInlineTextObjectManager.h>
 #include <KoBookmark.h>

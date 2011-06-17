@@ -31,7 +31,7 @@ class KoTextBlockPaintStrategyBase;
  * This class is used to store properties for KoText layouting inside Qt QTextBlock
  * instances.
  */
-class KOTEXT_EXPORT KoTextBlockData : public QTextBlockUserData
+class KOTEXT_EXPORT KTextBlockData : public QTextBlockUserData
 {
 public:
     /**
@@ -52,8 +52,8 @@ public:
         QList<qreal> tabLength;
     };
 
-    KoTextBlockData();
-    virtual ~KoTextBlockData();
+    KTextBlockData();
+    virtual ~KTextBlockData();
 
     /// return if this block has up-to-date counter data
     bool hasCounterData() const;
@@ -134,6 +134,6 @@ private:
     Private * const d;
 };
 
-Q_DECLARE_METATYPE(KoTextBlockData*)
+Q_DECLARE_METATYPE(KTextBlockData*)
 
 #endif

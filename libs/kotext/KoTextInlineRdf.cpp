@@ -27,7 +27,7 @@
 #include <KOdfXmlNS.h>
 #include "KoBookmark.h"
 #include "KoTextMeta.h"
-#include "KoTextBlockData.h"
+#include "KTextBlockData.h"
 #include "styles/KCharacterStyle.h"
 #include "KoTextEditor.h"
 

@@ -22,7 +22,7 @@
 #include <KLocale>
 
 #include <KParagraphStyle.h>
-#include <KoTextBlockData.h>
+#include <KTextBlockData.h>
 #include <QTextCursor>
 
 ListItemNumberingCommand::ListItemNumberingCommand(const QTextBlock &block, bool numbered, QUndoCommand *parent)
@@ -50,7 +50,7 @@ void ListItemNumberingCommand::setNumbered(bool numbered)
     }
     cursor.setBlockFormat(blockFormat);
 
-    KoTextBlockData *userData = dynamic_cast<KoTextBlockData*>(m_block.userData());
+    KTextBlockData *userData = dynamic_cast<KTextBlockData*>(m_block.userData());
     if (userData)
         userData->setCounterWidth(-1.0);
 }
@@ -60,7 +60,7 @@ void ListItemNumberingCommand::redo()
     if (!m_first) {
         TextCommandBase::redo();
         UndoRedoFinalizer finalizer(this);
-        KoTextBlockData *userData = dynamic_cast<KoTextBlockData*>(m_block.userData());
+        KTextBlockData *userData = dynamic_cast<KTextBlockData*>(m_block.userData());
         if (userData)
             userData->setCounterWidth(-1.0);
     } else {
@@ -74,7 +74,7 @@ void ListItemNumberingCommand::undo()
     TextCommandBase::undo();
     UndoRedoFinalizer finalizer(this);
 
-    KoTextBlockData *userData = dynamic_cast<KoTextBlockData*>(m_block.userData());
+    KTextBlockData *userData = dynamic_cast<KTextBlockData*>(m_block.userData());
     if (userData)
         userData->setCounterWidth(-1.0);
 }
