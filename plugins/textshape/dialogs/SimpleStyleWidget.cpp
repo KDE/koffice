@@ -25,7 +25,7 @@
 #include <KAction>
 #include <KTextBlockData.h>
 #include <KParagraphStyle.h>
-#include <KoTextDocumentLayout.h>
+#include <KTextDocumentLayout.h>
 #include <KoZoomHandler.h>
 
 #include <KDebug>
@@ -93,7 +93,7 @@ void SimpleStyleWidget::fillListsCombobox()
 
     TextShape textShape;
     textShape.setSize(QSizeF(300, 100));
-    KoTextDocumentLayout *layouter = qobject_cast<KoTextDocumentLayout*> (textShape.textShapeData()->document()->documentLayout());
+    KTextDocumentLayout *layouter = qobject_cast<KTextDocumentLayout*> (textShape.textShapeData()->document()->documentLayout());
     Q_ASSERT(layouter);
     KParagraphStyle ps;
     ps.characterStyle()->setFontPointSize(12);

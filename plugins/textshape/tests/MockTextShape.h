@@ -21,7 +21,7 @@
 #define MOCKTEXTSHAPE_H
 
 #include "../TextShape.h"
-#include <KoTextDocumentLayout.h>
+#include <KTextDocumentLayout.h>
 
 class MockTextShape : public TextShape
 {
@@ -29,7 +29,7 @@ public:
     MockTextShape()
         : TextShape()
     {
-        layout = qobject_cast<KoTextDocumentLayout*>(textShapeData()->document()->documentLayout());
+        layout = qobject_cast<KTextDocumentLayout*>(textShapeData()->document()->documentLayout());
     }
     void paint(QPainter &painter, const KoViewConverter &converter) {
         Q_UNUSED(painter);
@@ -39,7 +39,7 @@ public:
     virtual bool loadOdf(const KXmlElement &, KShapeLoadingContext &) {
         return true;
     }
-    KoTextDocumentLayout *layout;
+    KTextDocumentLayout *layout;
 };
 
 #endif

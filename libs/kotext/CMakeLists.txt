@@ -9,7 +9,7 @@ set(kotext_LIB_SRCS
     KTextBlockData.cpp
     KTextBlockBorderData.cpp
     KTextBlockPaintStrategyBase.cpp
-    KoTextDocumentLayout.cpp
+    KTextDocumentLayout.cpp
     KoTextOdfSaveHelper.cpp
     KoTextPaste.cpp
     KTextDocument.cpp
@@ -140,7 +140,7 @@ install(
     KoTextRdfCore.h
     KoTextInlineRdf.h
     KoTextMeta.h
-    KoTextDocumentLayout.h
+    KTextDocumentLayout.h
     styles/KCharacterStyle.h
     styles/KListLevelProperties.h
     styles/KListStyle.h

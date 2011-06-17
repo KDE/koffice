@@ -28,7 +28,7 @@
 #include <KShapeLoadingContext.h>
 #include <KOdfLoadingContext.h>
 #include <KOdfXmlNS.h>
-#include <KoTextDocumentLayout.h>
+#include <KTextDocumentLayout.h>
 #include <KStyleManager.h>
 #include <KCharacterStyle.h>
 #include <KParagraphStyle.h>
@@ -101,7 +101,7 @@ QTextDocument *TestLoadStyle::documentFromOdt(const QString &odt)
     KoTextShapeData *textShapeData = new KoTextShapeData;
     QTextDocument *document = new QTextDocument;
     textShapeData->setDocument(document, false /* ownership */);
-    KoTextDocumentLayout *layout = new KoTextDocumentLayout(textShapeData->document());
+    KTextDocumentLayout *layout = new KTextDocumentLayout(textShapeData->document());
     layout->setInlineTextObjectManager(new KInlineTextObjectManager(layout)); // required while saving
     KTextDocument(document).setStyleManager(styleManager);
     textShapeData->document()->setDocumentLayout(layout);

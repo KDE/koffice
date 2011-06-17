@@ -28,7 +28,7 @@
 #include "TextShape.h"
 #include "ToCGenerator.h"
 
-#include <KoTextDocumentLayout.h>
+#include <KTextDocumentLayout.h>
 #include <KoTextShapeData.h>
 #include <KParagraphStyle.h>
 #include <KCharacterStyle.h>
@@ -64,7 +64,7 @@ extern int qt_defaultDpiY();
 #define DropCapsAdditionalFormattingId 25602902
 
 // ---------------- layout helper ----------------
-Layout::Layout(KoTextDocumentLayout *parent)
+Layout::Layout(KTextDocumentLayout *parent)
         : m_styleManager(0),
         m_changeTracker(0),
         m_blockData(0),
@@ -1090,12 +1090,12 @@ qreal Layout::topMargin()
     return 0.0;
 }
 
-void Layout::draw(QPainter *painter, const KoTextDocumentLayout::PaintContext &context)
+void Layout::draw(QPainter *painter, const KTextDocumentLayout::PaintContext &context)
 {
     drawFrame(m_parent->document()->rootFrame(), painter, context, 0);
 }
 
-void Layout::drawFrame(QTextFrame *frame, QPainter *painter, const KoTextDocumentLayout::PaintContext &context, int inTable)
+void Layout::drawFrame(QTextFrame *frame, QPainter *painter, const KTextDocumentLayout::PaintContext &context, int inTable)
 {
     painter->setPen(context.textContext.palette.color(QPalette::Text)); // for text that has no color.
     const QRegion clipRegion = painter->clipRegion();

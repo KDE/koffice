@@ -19,7 +19,7 @@
 
 #include "KInlineObject.h"
 #include "KInlineObject_p.h"
-#include "KoTextDocumentLayout.h"
+#include "KTextDocumentLayout.h"
 #include "KoTextShapeData.h"
 #include "KShapeSavingContext.h"
 #include "KInlineTextObjectManager.h"
@@ -112,7 +112,7 @@ bool KInlineObject::propertyChangeListener() const
 //static
 KShape * KInlineObject::shapeForPosition(const QTextDocument *document, int position)
 {
-    KoTextDocumentLayout *lay = qobject_cast<KoTextDocumentLayout*>(document->documentLayout());
+    KTextDocumentLayout *lay = qobject_cast<KTextDocumentLayout*>(document->documentLayout());
     if (lay == 0)
         return 0;
     return lay->shapeForPosition(position);

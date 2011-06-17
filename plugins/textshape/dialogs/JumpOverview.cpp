@@ -26,7 +26,7 @@
 #include <KoBookmark.h>
 #include <KoTextPage.h>
 #include <KoTextLocator.h>
-#include <KoTextDocumentLayout.h>
+#include <KTextDocumentLayout.h>
 #include <KoTextShapeData.h>
 #include <KShape.h>
 
@@ -73,7 +73,7 @@ JumpOverview::JumpOverview(QTextDocument *doc, QWidget *parent)
         m_entries << entry;
     }
 
-    KoTextDocumentLayout *lay = qobject_cast<KoTextDocumentLayout*>(doc->documentLayout());
+    KTextDocumentLayout *lay = qobject_cast<KTextDocumentLayout*>(doc->documentLayout());
     if (lay) {
         foreach (KShape *shape, lay->shapes()) {
             KoTextShapeData *textData = qobject_cast<KoTextShapeData*>(shape->userData());

@@ -21,7 +21,7 @@
 #include "ToCGenerator.h"
 
 #include <KParagraphStyle.h>
-#include <KoTextDocumentLayout.h>
+#include <KTextDocumentLayout.h>
 #include <KoTextShapeData.h>
 #include <KoTextPage.h>
 #include <KShape.h>
@@ -134,7 +134,7 @@ void ToCGenerator::update()
     // update the text for the TOC entries with the proper page numbers
     QTextDocument *doc = m_ToCFrame->document();
     KTextDocument koDocument(doc);
-    KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(doc->documentLayout());
+    KTextDocumentLayout *layout = qobject_cast<KTextDocumentLayout*>(doc->documentLayout());
 
     QTextCursor cursor = m_ToCFrame->firstCursorPosition();
     cursor.beginEditBlock();

@@ -20,7 +20,7 @@
 #include "KoTextShapeContainerModel.h"
 #include "KTextAnchor.h"
 #include "KoTextShapeData.h"
-#include "KoTextDocumentLayout.h"
+#include "KTextDocumentLayout.h"
 
 #include <QTextBlock>
 #include <QTextLayout>
@@ -149,7 +149,7 @@ void KoTextShapeContainerModel::childChanged(KShape *child, KShape::ChangeType t
         Q_ASSERT(data);
         data->foul();
 
-        KoTextDocumentLayout *lay = qobject_cast<KoTextDocumentLayout*>(data->document()->documentLayout());
+        KTextDocumentLayout *lay = qobject_cast<KTextDocumentLayout*>(data->document()->documentLayout());
         if (lay)
             lay->interruptLayout();
         data->fireResizeEvent();

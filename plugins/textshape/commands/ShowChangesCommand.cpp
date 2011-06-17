@@ -24,7 +24,7 @@
 #include <KChangeTracker.h>
 #include <KChangeTrackerElement.h>
 #include <KTextDocument.h>
-#include <KoTextDocumentLayout.h>
+#include <KTextDocumentLayout.h>
 #include <KoTextEditor.h>
 #include <KTextAnchor.h>
 #include <KInlineTextObjectManager.h>
@@ -92,7 +92,7 @@ void ShowChangesCommand::enableDisableChanges()
         else
           removeDeletedChanges();
 
-        KoTextDocumentLayout *lay = qobject_cast<KoTextDocumentLayout*>(m_document->documentLayout());
+        KTextDocumentLayout *lay = qobject_cast<KTextDocumentLayout*>(m_document->documentLayout());
         if (lay)
           lay->scheduleLayout();
     }
@@ -149,7 +149,7 @@ void ShowChangesCommand::checkAndAddAnchoredShapes(int position, int length)
             if (!anchor)
                 continue;
            
-            KoTextDocumentLayout *lay = qobject_cast<KoTextDocumentLayout*>(m_document->documentLayout());
+            KTextDocumentLayout *lay = qobject_cast<KTextDocumentLayout*>(m_document->documentLayout());
             KShapeContainer *container = dynamic_cast<KShapeContainer *>(lay->shapeForPosition(i));
             
             // a very ugly hack. Since this class is going away soon, it should be okay

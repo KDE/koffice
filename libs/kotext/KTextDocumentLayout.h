@@ -31,7 +31,7 @@
 #include <QTextFrame>
 #include <QTextTableCell>
 
-class KoTextDocumentLayout;
+class KTextDocumentLayout;
 class KShape;
 class KStyleManager;
 class QTextLayout;
@@ -43,7 +43,7 @@ class KImageCollection;
  * KWords text layouter that allows text to flow in multiple frames and around
  * other KWord objects.
  */
-class KOTEXT_EXPORT KoTextDocumentLayout : public QAbstractTextDocumentLayout
+class KOTEXT_EXPORT KTextDocumentLayout : public QAbstractTextDocumentLayout
 {
     Q_OBJECT
 public:
@@ -61,8 +61,8 @@ public:
     };
 
     /// constructor
-    explicit KoTextDocumentLayout(QTextDocument *document, KoTextDocumentLayout::LayoutState *layout = 0);
-    virtual ~KoTextDocumentLayout();
+    explicit KTextDocumentLayout(QTextDocument *document, KTextDocumentLayout::LayoutState *layout = 0);
+    virtual ~KTextDocumentLayout();
 
     /// set the layoutState for this document layout
     void setLayout(LayoutState *layout);
@@ -91,7 +91,7 @@ public:
     virtual void draw(QPainter *painter, const QAbstractTextDocumentLayout::PaintContext &context);
 
     /// Draws the layout on the given painter with the given context, and pass the zoom.
-    void draw(QPainter *painter, const KoTextDocumentLayout::PaintContext &context);
+    void draw(QPainter *painter, const KTextDocumentLayout::PaintContext &context);
 
     /// Returns the bounding rectacle of frame. Returns the bounding rectangle of frame.
     virtual QRectF frameBoundingRect(QTextFrame *frame) const;
@@ -128,7 +128,7 @@ public:
     virtual QList<KShape*> shapes() const;
 
     /**
-     * This inner class is an interface that allows the KoTextDocumentLayout to do rough layout
+     * This inner class is an interface that allows the KTextDocumentLayout to do rough layout
      * while the LayoutState implementation can do all the boring details.
      */
     class KOTEXT_EXPORT LayoutState
@@ -169,7 +169,7 @@ public:
          * @param painter the painter to draw to.
          * @param context a set of variables able to alter the way things are painted.
          */
-        virtual void draw(QPainter *painter, const KoTextDocumentLayout::PaintContext &context) = 0;
+        virtual void draw(QPainter *painter, const KTextDocumentLayout::PaintContext &context) = 0;
         /**
          * After all shapes have been used and there is still text left, use the param shape to continue
          * layout.
@@ -179,9 +179,9 @@ public:
         virtual bool setFollowupShape(KShape *shape) = 0;
         /// remove layout information from the current layout position to the end of the document.
         virtual void clearTillEnd() = 0;
-        /// called by the KoTextDocumentLayout to notify the LayoutState of a successfully resized inline object
+        /// called by the KTextDocumentLayout to notify the LayoutState of a successfully resized inline object
         virtual void registerInlineObject(const QTextInlineObject &inlineObject) = 0;
-        /// called by the KoTextDocumentLayout to find out which if any table cell is hit. Returns 0 when no hit
+        /// called by the KTextDocumentLayout to find out which if any table cell is hit. Returns 0 when no hit
         virtual QTextTableCell hitTestTable(QTextTable *table, const QPointF &point) = 0;
 
         /// the index in the list of shapes (or frameset) of the shape we are currently layouting.

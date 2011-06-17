@@ -18,7 +18,7 @@
  */
 #include "KoVariable.h"
 #include "KInlineObject_p.h"
-#include "KoTextDocumentLayout.h"
+#include "KTextDocumentLayout.h"
 #include "KoTextShapeData.h"
 
 #include <KShape.h>
@@ -67,7 +67,7 @@ void KoVariable::setValue(const QString &value)
     d->value = value;
     d->modified = true;
     if (d->document) {
-        KoTextDocumentLayout *lay = qobject_cast<KoTextDocumentLayout*>(d->document->documentLayout());
+        KTextDocumentLayout *lay = qobject_cast<KTextDocumentLayout*>(d->document->documentLayout());
         if (lay)
             lay->documentChanged(d->positionInDocument, 0, 0);
     }

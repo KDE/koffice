@@ -124,7 +124,7 @@ private:
 };
 
 KWTextDocumentLayout::KWTextDocumentLayout(KWTextFrameSet *frameSet)
-        : KoTextDocumentLayout(frameSet->document()),
+        : KTextDocumentLayout(frameSet->document()),
         m_frameSet(frameSet),
         m_dummyShape(new DummyShape(frameSet->document())),
         m_lastKnownFrameCount(0)
@@ -191,7 +191,7 @@ void KWTextDocumentLayout::relayout()
 
 void KWTextDocumentLayout::positionInlineObject(QTextInlineObject item, int position, const QTextFormat &f)
 {
-    KoTextDocumentLayout::positionInlineObject(item, position, f);
+    KTextDocumentLayout::positionInlineObject(item, position, f);
 #ifndef DEBUG
     if (inlineTextObjectManager() == 0) {
         kWarning(32002) << "Need to call setInlineObjectTextManager on the KTextDocument!!";
@@ -222,14 +222,14 @@ void KWTextDocumentLayout::layout()
     class End
     {
     public:
-        End(KoTextDocumentLayout::LayoutState *state, QList<Outline*> *outlines) {
+        End(KTextDocumentLayout::LayoutState *state, QList<Outline*> *outlines) {
             m_state = state; m_outlines = outlines;
         }
         ~End() {
             m_state->end(); qDeleteAll(*m_outlines);
         }
     private:
-        KoTextDocumentLayout::LayoutState *m_state;
+        KTextDocumentLayout::LayoutState *m_state;
         QList<Outline*> *m_outlines;
     };
     End ender(m_state, &outlines); // poor mans finally{}
@@ -259,7 +259,7 @@ void KWTextDocumentLayout::layout()
         class Line
         {
         public:
-            Line(KoTextDocumentLayout::LayoutState *state) : m_state(state) {
+            Line(KTextDocumentLayout::LayoutState *state) : m_state(state) {
                 line = m_state->layout->createLine();
             }
             bool isValid() const {
@@ -346,7 +346,7 @@ void KWTextDocumentLayout::layout()
 
                 return answer;
             }
-            KoTextDocumentLayout::LayoutState *m_state;
+            KTextDocumentLayout::LayoutState *m_state;
             const QList<Outline*> *m_outlines;
             qreal m_initialIndent;
         };

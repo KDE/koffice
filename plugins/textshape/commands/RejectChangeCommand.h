@@ -25,7 +25,7 @@
 #include <QPair>
 
 class KChangeTracker;
-class KoTextDocumentLayout;
+class KTextDocumentLayout;
 
 class QTextDocument;
 
@@ -48,7 +48,7 @@ private:
     QList<QPair<int, int> > m_changeRanges;
     QTextDocument *m_document;
     KChangeTracker *m_changeTracker;
-    KoTextDocumentLayout *m_layout;
+    KTextDocumentLayout *m_layout;
 };
 
 #endif // REJECTCHANGECOMMAND_H

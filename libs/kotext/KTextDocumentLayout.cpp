@@ -18,7 +18,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoTextDocumentLayout.h"
+#include "KTextDocumentLayout.h"
 #include "KoTextShapeData.h"
 #include "styles/KParagraphStyle.h"
 #include "styles/KCharacterStyle.h"
@@ -39,7 +39,7 @@
 #include <QTextList>
 #include <QTimer>
 
-class LayoutStateDummy : public KoTextDocumentLayout::LayoutState
+class LayoutStateDummy : public KTextDocumentLayout::LayoutState
 {
 public:
     LayoutStateDummy() {}
@@ -78,7 +78,7 @@ public:
     qreal documentOffsetInShape() {
         return 0;
     }
-    void draw(QPainter *, const KoTextDocumentLayout::PaintContext &) {}
+    void draw(QPainter *, const KTextDocumentLayout::PaintContext &) {}
 
     bool setFollowupShape(KShape *) {
         return false;
@@ -93,10 +93,10 @@ public:
     }
 };
 
-class KoTextDocumentLayout::Private
+class KTextDocumentLayout::Private
 {
 public:
-    Private(KoTextDocumentLayout *parent_)
+    Private(KTextDocumentLayout *parent_)
             : inlineTextObjectManager(0),
             scheduled(false),
             parent(parent_),
@@ -136,12 +136,12 @@ public:
     QList<KShape *> shapes;
     KInlineTextObjectManager *inlineTextObjectManager;
     bool scheduled;
-    KoTextDocumentLayout *parent;
+    KTextDocumentLayout *parent;
     KTextDocument::ResizeMethod resizeMethod;
     KPostscriptPaintDevice *paintDevice;
 };
 
-void KoTextDocumentLayout::Private::adjustSize()
+void KTextDocumentLayout::Private::adjustSize()
 {
     if (parent->resizeMethod() == KTextDocument::NoResize)
         return;
@@ -169,8 +169,8 @@ void KoTextDocumentLayout::Private::adjustSize()
     shape->setSize(QSizeF(width, height));
 }
 
-// ------------------- KoTextDocumentLayout --------------------
-KoTextDocumentLayout::KoTextDocumentLayout(QTextDocument *doc, KoTextDocumentLayout::LayoutState *layout)
+// ------------------- KTextDocumentLayout --------------------
+KTextDocumentLayout::KTextDocumentLayout(QTextDocument *doc, KTextDocumentLayout::LayoutState *layout)
         : QAbstractTextDocumentLayout(doc),
         m_state(layout),
         d(new Private(this))
@@ -184,14 +184,14 @@ KoTextDocumentLayout::KoTextDocumentLayout(QTextDocument *doc, KoTextDocumentLay
     connect(this, SIGNAL(finishedLayout()), SLOT(adjustSize()));
 }
 
-KoTextDocumentLayout::~KoTextDocumentLayout()
+KTextDocumentLayout::~KTextDocumentLayout()
 {
     delete d;
     delete m_state;
     m_state = 0;
 }
 
-void KoTextDocumentLayout::setLayout(LayoutState *layout)
+void KTextDocumentLayout::setLayout(LayoutState *layout)
 {
     Q_ASSERT(layout);
     delete m_state;
@@ -199,7 +199,7 @@ void KoTextDocumentLayout::setLayout(LayoutState *layout)
     scheduleLayout();
 }
 
-bool KoTextDocumentLayout::hasLayouter() const
+bool KTextDocumentLayout::hasLayouter() const
 {
     if (dynamic_cast<LayoutStateDummy*>(m_state) != 0)
         return false;
@@ -208,7 +208,7 @@ bool KoTextDocumentLayout::hasLayouter() const
     return true;
 }
 
-void KoTextDocumentLayout::addShape(KShape *shape)
+void KTextDocumentLayout::addShape(KShape *shape)
 {
     d->shapes.append(shape);
 
@@ -220,52 +220,52 @@ void KoTextDocumentLayout::addShape(KShape *shape)
     emit shapeAdded(shape);
 }
 
-void KoTextDocumentLayout::setInlineTextObjectManager(KInlineTextObjectManager *iom)
+void KTextDocumentLayout::setInlineTextObjectManager(KInlineTextObjectManager *iom)
 {
     d->inlineTextObjectManager = iom;
 }
 
-KInlineTextObjectManager *KoTextDocumentLayout::inlineTextObjectManager()
+KInlineTextObjectManager *KTextDocumentLayout::inlineTextObjectManager()
 {
     return d->inlineTextObjectManager;
 }
 
-QRectF KoTextDocumentLayout::blockBoundingRect(const QTextBlock &block) const
+QRectF KTextDocumentLayout::blockBoundingRect(const QTextBlock &block) const
 {
     // nobody calls this code and I have no way of implementing it anyway...
     Q_UNUSED(block);
-    //kWarning() << "KoTextDocumentLayout::blockBoundingRect is not implemented";
+    //kWarning() << "KTextDocumentLayout::blockBoundingRect is not implemented";
     return QRectF(0, 0, 10, 10);
 }
 
-QSizeF KoTextDocumentLayout::documentSize() const
+QSizeF KTextDocumentLayout::documentSize() const
 {
     // nobody calls this code and I have no way of implementing it anyway...
-    //kWarning() << "KoTextDocumentLayout::documentSize is not implemented";
+    //kWarning() << "KTextDocumentLayout::documentSize is not implemented";
     return QSizeF(10, 10);
 }
 
-void KoTextDocumentLayout::draw(QPainter *painter, const QAbstractTextDocumentLayout::PaintContext &context)
+void KTextDocumentLayout::draw(QPainter *painter, const QAbstractTextDocumentLayout::PaintContext &context)
 {
     PaintContext pc;
     pc.textContext = context;
     m_state->draw(painter, pc);
 }
 
-void KoTextDocumentLayout::draw(QPainter * painter, const KoTextDocumentLayout::PaintContext & context)
+void KTextDocumentLayout::draw(QPainter * painter, const KTextDocumentLayout::PaintContext & context)
 {
     m_state->draw(painter, context);
 }
 
-QRectF KoTextDocumentLayout::frameBoundingRect(QTextFrame *frame) const
+QRectF KTextDocumentLayout::frameBoundingRect(QTextFrame *frame) const
 {
     Q_UNUSED(frame);
     // nobody calls this code and I have no way of implementing it anyway...
-    //kWarning() << "KoTextDocumentLayout::frameBoundingRect is not implemented";
+    //kWarning() << "KTextDocumentLayout::frameBoundingRect is not implemented";
     return QRectF(0, 0, 10, 10);
 }
 
-int KoTextDocumentLayout::hitTest(const QPointF &point, Qt::HitTestAccuracy accuracy) const
+int KTextDocumentLayout::hitTest(const QPointF &point, Qt::HitTestAccuracy accuracy) const
 {
     int position = hitTestIterated(document()->rootFrame()->begin(),
                         document()->rootFrame()->end(), point, accuracy);
@@ -274,7 +274,7 @@ int KoTextDocumentLayout::hitTest(const QPointF &point, Qt::HitTestAccuracy accu
     return position;
 }
 
-int KoTextDocumentLayout::hitTestIterated(QTextFrame::iterator begin, QTextFrame::iterator end, const QPointF &point, Qt::HitTestAccuracy accuracy) const
+int KTextDocumentLayout::hitTestIterated(QTextFrame::iterator begin, QTextFrame::iterator end, const QPointF &point, Qt::HitTestAccuracy accuracy) const
 {
     int position = -1;
     QTextFrame::iterator it = begin;
@@ -330,12 +330,12 @@ int KoTextDocumentLayout::hitTestIterated(QTextFrame::iterator begin, QTextFrame
     return -1;
 }
 
-int KoTextDocumentLayout::pageCount() const
+int KTextDocumentLayout::pageCount() const
 {
     return 1;
 }
 
-void KoTextDocumentLayout::documentChanged(int position, int charsRemoved, int charsAdded)
+void KTextDocumentLayout::documentChanged(int position, int charsRemoved, int charsAdded)
 {
     Q_UNUSED(charsRemoved);
     if (shapes().count() == 0) // nothing to do.
@@ -391,7 +391,7 @@ void KoTextDocumentLayout::documentChanged(int position, int charsRemoved, int c
     scheduleLayout();
 }
 
-void KoTextDocumentLayout::drawInlineObject(QPainter *painter, const QRectF &rect, QTextInlineObject object, int position, const QTextFormat &format)
+void KTextDocumentLayout::drawInlineObject(QPainter *painter, const QRectF &rect, QTextInlineObject object, int position, const QTextFormat &format)
 {
     Q_ASSERT(format.isCharFormat());
     if (d->inlineTextObjectManager == 0)
@@ -407,7 +407,7 @@ void KoTextDocumentLayout::drawInlineObject(QPainter *painter, const QRectF &rec
     }
 }
 
-void KoTextDocumentLayout::positionInlineObject(QTextInlineObject item, int position, const QTextFormat &format)
+void KTextDocumentLayout::positionInlineObject(QTextInlineObject item, int position, const QTextFormat &format)
 {
     Q_ASSERT(format.isCharFormat());
     if (d->inlineTextObjectManager == 0)
@@ -421,7 +421,7 @@ void KoTextDocumentLayout::positionInlineObject(QTextInlineObject item, int posi
     }
 }
 
-void KoTextDocumentLayout::resizeInlineObject(QTextInlineObject item, int position, const QTextFormat &format)
+void KTextDocumentLayout::resizeInlineObject(QTextInlineObject item, int position, const QTextFormat &format)
 {
     Q_ASSERT(format.isCharFormat());
     if (d->inlineTextObjectManager == 0)
@@ -436,7 +436,7 @@ void KoTextDocumentLayout::resizeInlineObject(QTextInlineObject item, int positi
     }
 }
 
-void KoTextDocumentLayout::scheduleLayoutWithoutInterrupt()
+void KTextDocumentLayout::scheduleLayoutWithoutInterrupt()
 {
     if (d->scheduled)
         return;
@@ -444,7 +444,7 @@ void KoTextDocumentLayout::scheduleLayoutWithoutInterrupt()
     QTimer::singleShot(0, this, SLOT(relayoutPrivate()));
 }
 
-void KoTextDocumentLayout::scheduleLayout()
+void KTextDocumentLayout::scheduleLayout()
 {
     if (! d->scheduled) {
         scheduleLayoutWithoutInterrupt();
@@ -452,25 +452,25 @@ void KoTextDocumentLayout::scheduleLayout()
     }
 }
 
-void KoTextDocumentLayout::relayout()
+void KTextDocumentLayout::relayout()
 {
     layout();
 }
 
-void KoTextDocumentLayout::interruptLayout()
+void KTextDocumentLayout::interruptLayout()
 {
     m_state->interrupted = true;
 }
 
-bool KoTextDocumentLayout::isInterrupted() const
+bool KTextDocumentLayout::isInterrupted() const
 {
     return m_state->interrupted;
 }
 
-void KoTextDocumentLayout::layout()
+void KTextDocumentLayout::layout()
 {
     d->scheduled = false;
-//kDebug(32500) <<"KoTextDocumentLayout::layout";
+//kDebug(32500) <<"KTextDocumentLayout::layout";
     class End
     {
     public:
@@ -519,12 +519,12 @@ void KoTextDocumentLayout::layout()
     }
 }
 
-QList<KShape*> KoTextDocumentLayout::shapes() const
+QList<KShape*> KTextDocumentLayout::shapes() const
 {
     return d->shapes;
 }
 
-KShape* KoTextDocumentLayout::shapeForPosition(int position) const
+KShape* KTextDocumentLayout::shapeForPosition(int position) const
 {
     // TODO make faster
     foreach(KShape *shape, shapes()) {
@@ -537,7 +537,7 @@ KShape* KoTextDocumentLayout::shapeForPosition(int position) const
     return 0;
 }
 
-void KoTextDocumentLayout::setResizeMethod(KTextDocument::ResizeMethod method)
+void KTextDocumentLayout::setResizeMethod(KTextDocument::ResizeMethod method)
 {
     if (d->resizeMethod == method)
         return;
@@ -545,9 +545,9 @@ void KoTextDocumentLayout::setResizeMethod(KTextDocument::ResizeMethod method)
     scheduleLayout();
 }
 
-KTextDocument::ResizeMethod KoTextDocumentLayout::resizeMethod() const
+KTextDocument::ResizeMethod KTextDocumentLayout::resizeMethod() const
 {
     return d->resizeMethod;
 }
 
-#include <KoTextDocumentLayout.moc>
+#include <KTextDocumentLayout.moc>

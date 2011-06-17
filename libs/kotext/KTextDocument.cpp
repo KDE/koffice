@@ -30,7 +30,7 @@
 #include "KoTextEditor.h"
 #include "styles/KStyleManager.h"
 #include "KInlineTextObjectManager.h"
-#include "KoTextDocumentLayout.h"
+#include "KTextDocumentLayout.h"
 #include "styles/KParagraphStyle.h"
 #include "changetracker/KChangeTracker.h"
 #include "KoList.h"
@@ -93,7 +93,7 @@ void KTextDocument::setInlineTextObjectManager(KInlineTextObjectManager *manager
     v.setValue(manager);
     m_document->addResource(KTextDocument::InlineTextManager, InlineObjectTextManagerURL, v);
 
-    KoTextDocumentLayout *lay = qobject_cast<KoTextDocumentLayout*>(m_document->documentLayout());
+    KTextDocumentLayout *lay = qobject_cast<KTextDocumentLayout*>(m_document->documentLayout());
     if (lay)
         lay->setInlineTextObjectManager(manager);
 }
@@ -219,14 +219,14 @@ KInlineTextObjectManager *KTextDocument::inlineTextObjectManager() const
 
 void KTextDocument::setResizeMethod(KTextDocument::ResizeMethod method)
 {
-    KoTextDocumentLayout *layout = dynamic_cast<KoTextDocumentLayout*>(m_document->documentLayout());
+    KTextDocumentLayout *layout = dynamic_cast<KTextDocumentLayout*>(m_document->documentLayout());
     Q_ASSERT(layout);
     layout->setResizeMethod(method);
 }
 
 KTextDocument::ResizeMethod KTextDocument::resizeMethod() const
 {
-    KoTextDocumentLayout *layout = dynamic_cast<KoTextDocumentLayout*>(m_document->documentLayout());
+    KTextDocumentLayout *layout = dynamic_cast<KTextDocumentLayout*>(m_document->documentLayout());
     Q_ASSERT(layout);
     return layout->resizeMethod();
 }

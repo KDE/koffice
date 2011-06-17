@@ -36,7 +36,7 @@
 #include <KListLevelProperties.h>
 #include <KoTextShapeData.h>
 #include <KTextAnchor.h>
-#include <KoTextDocumentLayout.h>
+#include <KTextDocumentLayout.h>
 #include <KInlineTextObjectManager.h>
 #include <KColorBackground.h>
 #include <KImageCollection.h>
@@ -683,7 +683,7 @@ void KWDLoader::fill(KWTextFrameSet *fs, const KXmlElement &framesetElem)
                             note->setLabel(footnote.attribute("value"));
                             note->setAutoNumbering(footnote.attribute("numberingtype", "auto") == "auto");
                             note->setText(i18n("Unable to locate footnote text"));
-                            KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(
+                            KTextDocumentLayout *layout = qobject_cast<KTextDocumentLayout*>(
                                     fs->document()->documentLayout());
                             Q_ASSERT(layout);
                             Q_ASSERT(layout->inlineTextObjectManager());
@@ -703,7 +703,7 @@ void KWDLoader::fill(KWTextFrameSet *fs, const KXmlElement &framesetElem)
                             note->setLabel(footEndNote.attribute("value"));
                             note->setAutoNumbering(footEndNote.attribute("numberingtype", "auto") == "auto");
                             note->setText(i18n("Unable to locate note-text"));
-                            KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(
+                            KTextDocumentLayout *layout = qobject_cast<KTextDocumentLayout*>(
                                     fs->document()->documentLayout());
                             Q_ASSERT(layout);
                             Q_ASSERT(layout->inlineTextObjectManager());
@@ -1183,7 +1183,7 @@ void KWDLoader::insertAnchors()
         QTextCursor cursor(anchor.document);
         cursor.setPosition(anchor.cursorPosition);
         cursor.setPosition(anchor.cursorPosition + 1, QTextCursor::KeepAnchor);
-        KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(cursor.block().document()->documentLayout());
+        KTextDocumentLayout *layout = qobject_cast<KTextDocumentLayout*>(cursor.block().document()->documentLayout());
         Q_ASSERT(layout);
         Q_ASSERT(layout->inlineTextObjectManager());
         layout->inlineTextObjectManager()->insertInlineObject(cursor, textAnchor);

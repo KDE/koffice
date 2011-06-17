@@ -28,7 +28,7 @@
 #include <KTableColumnStyle.h>
 #include <KTableRowStyle.h>
 #include <KTableColumnAndRowStyleManager.h>
-#include <KoTextDocumentLayout.h>
+#include <KTextDocumentLayout.h>
 #include <KShape.h>
 
 #include <KChangeTracker.h>
@@ -310,7 +310,7 @@ void TableLayout::layoutRow(int row)
         - m_tableLayoutData->m_rowPositions[m_tableLayoutData->m_tableRects.last().fromRow]);//FIXME review when breaking inside a row
 }
 
-void TableLayout::drawBackground(QPainter *painter, const KoTextDocumentLayout::PaintContext &context) const
+void TableLayout::drawBackground(QPainter *painter, const KTextDocumentLayout::PaintContext &context) const
 {
     if (m_tableLayoutData->m_tableRects.isEmpty()) {
         return;

@@ -24,7 +24,7 @@
 #include <KCSheet.h>
 
 #include <KShapeContainer.h>
-#include <KoTextDocumentLayout.h>
+#include <KTextDocumentLayout.h>
 #include <KoTextShapeData.h>
 
 #include <kdebug.h>
@@ -88,7 +88,7 @@ void TablePageManager::preparePage(int page)
     Q_CHECK_PTR(data);
     QTextDocument* const document = data->document();
     Q_CHECK_PTR(document);
-    KoTextDocumentLayout* const layout = qobject_cast<KoTextDocumentLayout*>(document->documentLayout());
+    KTextDocumentLayout* const layout = qobject_cast<KTextDocumentLayout*>(document->documentLayout());
     Q_CHECK_PTR(layout);
     const QList<KShape*> textShapes = layout->shapes();
     const int masterIndex = textShapes.indexOf(d->master);

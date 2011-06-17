@@ -28,7 +28,7 @@
 #include <KOdfXmlNS.h>
 #include <KInlineTextObjectManager.h>
 #include <KTextDocument.h>
-#include <KoTextDocumentLayout.h>
+#include <KTextDocumentLayout.h>
 #include <KoList.h>
 #include <KListStyle.h>
 #include <KParagraphStyle.h>
@@ -508,7 +508,7 @@ QTextDocumentFragment KChangeTracker::generateDeleteFragment(QTextCursor &cursor
     QTextDocument deletedDocument;
     QTextDocument deleteCursor(&deletedDocument);
 
-    KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(document->documentLayout());
+    KTextDocumentLayout *layout = qobject_cast<KTextDocumentLayout*>(document->documentLayout());
 
     for (int i = cursor.anchor();i <= cursor.position(); i++) {
         if (document->characterAt(i) == QChar::ObjectReplacementCharacter) {

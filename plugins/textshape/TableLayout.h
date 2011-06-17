@@ -21,7 +21,7 @@
 #ifndef TABLELAYOUT_H
 #define TABLELAYOUT_H
 
-#include "KoTextDocumentLayout.h"
+#include "KTextDocumentLayout.h"
 
 #include <QObject>
 #include <QPointF>
@@ -193,7 +193,7 @@ public:
      *
      * @param painter a pointer to the QPainter to draw the table with.
      */
-    void drawBackground(QPainter *painter, const KoTextDocumentLayout::PaintContext &context) const;
+    void drawBackground(QPainter *painter, const KTextDocumentLayout::PaintContext &context) const;
 
     /**
      * Draw the table borders using the given QPainter.
@@ -329,7 +329,7 @@ private slots:
 private:
     friend class TestTableLayout; // To allow direct testing.
 
-    KoTextDocumentLayout::LayoutState *m_parentLayout; /**< Parent layout. */
+    KTextDocumentLayout::LayoutState *m_parentLayout; /**< Parent layout. */
 
     QTextTable *m_table;                /**< The current table. */
     TableLayoutData *m_tableLayoutData; /**< The current table layout data. */

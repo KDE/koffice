@@ -16,7 +16,7 @@
 #include "../TextShape.h"
 
 class MockTextShape;
-class KoTextDocumentLayout;
+class KTextDocumentLayout;
 class KTableStyle;
 class KTableColumnStyle;
 class KTableRowStyle;
@@ -103,7 +103,7 @@ private slots:
 private:
     QTextDocument *m_doc;
     QTextTable *m_table;
-    KoTextDocumentLayout *m_layout;
+    KTextDocumentLayout *m_layout;
     KStyleManager *m_styleManager;
     KTableColumnAndRowStyleManager m_tableColumnAndRowStyleManager;
     Layout *m_textLayout;
@@ -121,7 +121,7 @@ class MockTextShape : public TextShape
 public:
     MockTextShape() : TextShape()
     {
-        layout = qobject_cast<KoTextDocumentLayout*>(textShapeData()->document()->documentLayout());
+        layout = qobject_cast<KTextDocumentLayout*>(textShapeData()->document()->documentLayout());
     }
     void paint(QPainter &painter, const KoViewConverter &converter)
     {
@@ -132,7 +132,7 @@ public:
     virtual bool loadOdf(const KXmlElement &, KShapeLoadingContext &) {
         return true;
     }
-    KoTextDocumentLayout *layout;
+    KTextDocumentLayout *layout;
 };
 
 #endif // TESTTABLELAYOUT_H

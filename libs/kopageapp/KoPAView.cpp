@@ -35,7 +35,7 @@
 #include <KResourceManager.h>
 #include <KColorBackground.h>
 #include <KoFind.h>
-#include <KoTextDocumentLayout.h>
+#include <KTextDocumentLayout.h>
 #include <KoToolManager.h>
 #include <KoToolProxy.h>
 #include <KoZoomHandler.h>
@@ -938,7 +938,7 @@ void KoPAView::findDocumentSetNext(QTextDocument * document)
 {
     KoPAPageBase * page = 0;
     KShape * startShape = 0;
-    KoTextDocumentLayout *lay = document ? qobject_cast<KoTextDocumentLayout*>(document->documentLayout()) : 0;
+    KTextDocumentLayout *lay = document ? qobject_cast<KTextDocumentLayout*>(document->documentLayout()) : 0;
     if (lay != 0) {
         startShape = lay->shapes().value(0);
         Q_ASSERT(startShape->shapeId() == "TextShapeID");
@@ -990,7 +990,7 @@ void KoPAView::findDocumentSetPrevious(QTextDocument * document)
 {
     KoPAPageBase * page = 0;
     KShape * startShape = 0;
-    KoTextDocumentLayout *lay = document ? qobject_cast<KoTextDocumentLayout*>(document->documentLayout()) : 0;
+    KTextDocumentLayout *lay = document ? qobject_cast<KTextDocumentLayout*>(document->documentLayout()) : 0;
     if (lay != 0) {
         startShape = lay->shapes().value(0);
         Q_ASSERT(startShape->shapeId() == "TextShapeID");

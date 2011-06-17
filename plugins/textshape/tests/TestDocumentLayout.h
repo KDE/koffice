@@ -27,7 +27,7 @@
 #include "MockTextShape.h"
 
 #include <KoTextShapeData.h>
-#include <KoTextDocumentLayout.h>
+#include <KTextDocumentLayout.h>
 #include <KShape.h>
 
 class QPainter;
@@ -106,7 +106,7 @@ private:
 private:
     MockTextShape *m_shape1;
     QTextDocument *m_doc;
-    KoTextDocumentLayout *m_layout;
+    KTextDocumentLayout *m_layout;
     QTextLayout *m_blockLayout;
     QString m_loremIpsum;
     KStyleManager *m_styleManager;

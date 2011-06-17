@@ -20,7 +20,7 @@
 #ifndef KWANCHORSTRATEGY_H
 #define KWANCHORSTRATEGY_H
 
-#include <KoTextDocumentLayout.h>
+#include <KTextDocumentLayout.h>
 #include <KTextAnchor.h>
 
 class KWAnchorStrategy;
@@ -57,7 +57,7 @@ public:
      * @return will return true if the layout state has been changed.
      * @see isFinished()
      */
-    bool checkState(KoTextDocumentLayout::LayoutState *state, int startOfBlock, int startOfBlockText,
+    bool checkState(KTextDocumentLayout::LayoutState *state, int startOfBlock, int startOfBlockText,
                     KWTextFrameSet *frameSet);
 
     /**

@@ -39,7 +39,7 @@
 #include <KoTextSharedLoadingData.h>
 #include <KTextDocument.h>
 #include <KoTextEditor.h>
-#include <KoTextDocumentLayout.h>
+#include <KTextDocumentLayout.h>
 #include <KoTextWriter.h>
 #include <KStyleManager.h>
 #include <KXmlReader.h>
@@ -84,7 +84,7 @@ void SCPlaceholderTextStrategy::paint(QPainter &painter, const KoViewConverter &
         // this code is needed to make sure the text of the textshape is layouted before it is painted
         KoTextShapeData * shapeData = qobject_cast<KoTextShapeData*>(m_textShape->userData());
         QTextDocument * document = shapeData->document();
-        KoTextDocumentLayout * lay = qobject_cast<KoTextDocumentLayout*>(document->documentLayout());
+        KTextDocumentLayout * lay = qobject_cast<KTextDocumentLayout*>(document->documentLayout());
         if (lay) {
             lay->layout();
         }

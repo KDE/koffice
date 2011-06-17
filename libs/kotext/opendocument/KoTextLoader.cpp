@@ -44,7 +44,7 @@
 #include <KTextBlockData.h>
 #include "KTextDebug_p.h"
 #include "KTextDocument.h"
-#include <KoTextDocumentLayout.h>
+#include <KTextDocumentLayout.h>
 #include <KoTextShapeData.h>
 #include "KoTextSharedLoadingData.h"
 #include <KUnit.h>
@@ -534,7 +534,7 @@ void KoTextLoader::loadBody(const KXmlElement &bodyElem, QTextCursor &cursor)
                             KChangeTrackerElement *changeElement = d->changeTracker->elementById(changeId);
                             changeElement->setDeleteChangeMarker(deleteChangemarker);
                             changeElement->setEnabled(true);
-                            KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(cursor.block().document()->documentLayout());
+                            KTextDocumentLayout *layout = qobject_cast<KTextDocumentLayout*>(cursor.block().document()->documentLayout());
                             if (layout) {
                                 KInlineTextObjectManager *textObjectManager = layout->inlineTextObjectManager();
                                 textObjectManager->insertInlineObject(cursor, deleteChangemarker);
@@ -655,7 +655,7 @@ void KoTextLoader::loadBody(const KXmlElement &bodyElem, QTextCursor &cursor)
                     } else {
                         KInlineObject *obj = KInlineObjectRegistry::instance()->createFromOdf(tag, d->context);
                         if (obj) {
-                            KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(cursor.block().document()->documentLayout());
+                            KTextDocumentLayout *layout = qobject_cast<KTextDocumentLayout*>(cursor.block().document()->documentLayout());
                             if (layout) {
                                 KInlineTextObjectManager *textObjectManager = layout->inlineTextObjectManager();
                                 if (textObjectManager) {
@@ -1385,7 +1385,7 @@ void KoTextLoader::loadSection(const KXmlElement &sectionElem, QTextCursor &curs
 void KoTextLoader::loadNote(const KXmlElement &noteElem, QTextCursor &cursor)
 {
     kDebug(32500) << "Loading a text:note element.";
-    KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(cursor.block().document()->documentLayout());
+    KTextDocumentLayout *layout = qobject_cast<KTextDocumentLayout*>(cursor.block().document()->documentLayout());
     if (layout) {
         KInlineNote *note = new KInlineNote(KInlineNote::Footnote);
         if (note->loadOdf(noteElem, d->context, d->styleManager, d->changeTracker)) {
@@ -1515,7 +1515,7 @@ void KoTextLoader::loadSpan(const KXmlElement &element, QTextCursor &cursor, boo
                 KChangeTrackerElement *changeElement = d->changeTracker->elementById(changeId);
                 changeElement->setDeleteChangeMarker(deleteChangemarker);
                 changeElement->setEnabled(true);
-                KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(cursor.block().document()->documentLayout());
+                KTextDocumentLayout *layout = qobject_cast<KTextDocumentLayout*>(cursor.block().document()->documentLayout());
 
                 if (layout) {
                     KInlineTextObjectManager *textObjectManager = layout->inlineTextObjectManager();
@@ -1591,7 +1591,7 @@ void KoTextLoader::loadSpan(const KXmlElement &element, QTextCursor &cursor, boo
         }
         else if (isTextNS && localName == "meta") {
             kDebug(30015) << "loading a text:meta";
-            KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(cursor.block().document()->documentLayout());
+            KTextDocumentLayout *layout = qobject_cast<KTextDocumentLayout*>(cursor.block().document()->documentLayout());
             if (layout) {
                 const QTextDocument *document = cursor.block().document();
                 KInlineTextObjectManager *textObjectManager = layout->inlineTextObjectManager();
@@ -1618,7 +1618,7 @@ void KoTextLoader::loadSpan(const KXmlElement &element, QTextCursor &cursor, boo
         else if (isTextNS && (localName == "bookmark" || localName == "bookmark-start" || localName == "bookmark-end")) {
             QString bookmarkName = ts.attribute("name");
 
-            KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(cursor.block().document()->documentLayout());
+            KTextDocumentLayout *layout = qobject_cast<KTextDocumentLayout*>(cursor.block().document()->documentLayout());
             if (layout) {
                 const QTextDocument *document = cursor.block().document();
                 KInlineTextObjectManager *textObjectManager = layout->inlineTextObjectManager();
@@ -1677,7 +1677,7 @@ void KoTextLoader::loadSpan(const KXmlElement &element, QTextCursor &cursor, boo
             KInlineObject *obj = KInlineObjectRegistry::instance()->createFromOdf(ts, d->context);
 
             if (obj) {
-                KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(cursor.block().document()->documentLayout());
+                KTextDocumentLayout *layout = qobject_cast<KTextDocumentLayout*>(cursor.block().document()->documentLayout());
                 if (layout) {
                     KInlineTextObjectManager *textObjectManager = layout->inlineTextObjectManager();
                     if (textObjectManager) {
@@ -1811,7 +1811,7 @@ KDeleteChangeMarker * KoTextLoader::Private::insertDeleteChangeMarker(QTextCurso
         changeElement->setDeleteChangeMarker(deleteChangemarker);
         changeElement->setEnabled(true);
         changeElement->setChangeType(KOdfGenericChange::DeleteChange);
-        KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(cursor.block().document()->documentLayout());
+        KTextDocumentLayout *layout = qobject_cast<KTextDocumentLayout*>(cursor.block().document()->documentLayout());
         if (layout) {
             KInlineTextObjectManager *textObjectManager = layout->inlineTextObjectManager();
             textObjectManager->insertInlineObject(cursor, deleteChangemarker);
@@ -1838,7 +1838,7 @@ bool KoTextLoader::Private::checkForDeleteMerge(QTextCursor &cursor, const QStri
             prevChangeId = tempCursor.charFormat().property(KCharacterStyle::ChangeTrackerId).toInt();
 
             if (!prevChangeId) {
-                KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(cursor.block().document()->documentLayout());
+                KTextDocumentLayout *layout = qobject_cast<KTextDocumentLayout*>(cursor.block().document()->documentLayout());
                 KInlineObject *inlineObject = layout ? layout->inlineTextObjectManager()->inlineTextObject(tempCursor.charFormat()) : 0;
                 KDeleteChangeMarker *deleteChangeMarker = dynamic_cast<KDeleteChangeMarker *>(inlineObject);
                 if (deleteChangeMarker) {
@@ -2138,7 +2138,7 @@ void KoTextLoader::loadShape(const KXmlElement &element, QTextCursor &cursor)
         anchor->loadOdf(element, d->context);
         d->textSharedData->shapeInserted(shape, element, d->context);
 
-        KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(cursor.block().document()->documentLayout());
+        KTextDocumentLayout *layout = qobject_cast<KTextDocumentLayout*>(cursor.block().document()->documentLayout());
         if (layout) {
             if (element.attributeNS(KOdfXmlNS::delta, "insertion-type") != "")
                 d->openChangeRegion(element);

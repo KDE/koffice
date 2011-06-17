@@ -26,7 +26,7 @@
 #include <kdebug.h>
 #include <KoVariable.h>
 #include <KInlineTextObjectManager.h>
-#include <KoTextDocumentLayout.h>
+#include <KTextDocumentLayout.h>
 
 #include "TextFrame.h"
 #include "TextCursor.h"
@@ -55,7 +55,7 @@ public:
     KInlineTextObjectManager* inlineTextObjectManager() {
         QTextDocument *doc = m_doc.data();
         if (doc) {
-            KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(doc->documentLayout());
+            KTextDocumentLayout *layout = qobject_cast<KTextDocumentLayout*>(doc->documentLayout());
             return layout ? layout->inlineTextObjectManager() : 0;
         }
         return 0;

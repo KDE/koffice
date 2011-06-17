@@ -39,7 +39,7 @@
 #define ROUNDING 0.126
 #define FRAME_SPACING 10.0
 
-class MockLayoutState : public KoTextDocumentLayout::LayoutState
+class MockLayoutState : public KTextDocumentLayout::LayoutState
 {
 public:
     MockLayoutState(QTextDocument *doc) :m_doc(doc) {}
@@ -106,7 +106,7 @@ public:
     qreal documentOffsetInShape() {
         return 0;
     }
-    void draw(QPainter *, const KoTextDocumentLayout::PaintContext &) {}
+    void draw(QPainter *, const KTextDocumentLayout::PaintContext &) {}
 
     bool setFollowupShape(KShape *) {
         return false;

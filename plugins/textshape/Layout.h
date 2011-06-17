@@ -22,7 +22,7 @@
 
 #include "TableLayout.h"
 
-#include <KoTextDocumentLayout.h>
+#include <KTextDocumentLayout.h>
 #include <KTextBlockData.h>
 #include <KoInsets.h>
 
@@ -43,10 +43,10 @@ class ToCGenerator;
 /**
  * The document layouter for KoText style docs.
  */
-class Layout : public KoTextDocumentLayout::LayoutState
+class Layout : public KTextDocumentLayout::LayoutState
 {
 public:
-    explicit Layout(KoTextDocumentLayout *parent);
+    explicit Layout(KTextDocumentLayout *parent);
     /// start layouting, return false when there is nothing to do
     virtual bool start();
     /// end layouting
@@ -66,12 +66,12 @@ public:
     // get the text indent accounting for auto-text-indent
     qreal resolveTextIndent();
     virtual bool setFollowupShape(KShape *shape);
-    /// called by the KoTextDocumentLayout to notify the LayoutState of a successfully resized inline object
+    /// called by the KTextDocumentLayout to notify the LayoutState of a successfully resized inline object
     virtual void registerInlineObject(const QTextInlineObject &inlineObject);
     virtual QTextTableCell hitTestTable(QTextTable *table, const QPointF &point);
 
     /// paint the document
-    virtual void draw(QPainter *painter, const KoTextDocumentLayout::PaintContext & context);
+    virtual void draw(QPainter *painter, const KTextDocumentLayout::PaintContext & context);
 
     /// reimplemented from superclass
     virtual void clearTillEnd();
@@ -93,7 +93,7 @@ private:
     void cleanupShapes();
     void cleanupShape(KShape *daShape);
     void nextShape();
-    void drawFrame(QTextFrame *frame, QPainter *painter, const KoTextDocumentLayout::PaintContext & context, int inTable);
+    void drawFrame(QTextFrame *frame, QPainter *painter, const KTextDocumentLayout::PaintContext & context, int inTable);
     void drawListItem(QPainter *painter, const QTextBlock &block, KImageCollection *imageCollection);
     void decorateParagraph(QPainter *painter, const QTextBlock &block, int selectionStart, int selectionEnd, const KoViewConverter *converter);
     void decorateTabs(QPainter *painter, const QVariantList& tabList, const QTextLine &line, const QTextFragment& currentFragment, int startOfBlock);
@@ -150,7 +150,7 @@ private:
     bool m_newShape, m_newParag, m_isRtl, m_inTable;
     KoInsets m_borderInsets;
     KoInsets m_shapeBorder;
-    KoTextDocumentLayout *m_parent;
+    KTextDocumentLayout *m_parent;
     QHash<int, qreal> m_inlineObjectHeights; // maps text-position to whole-line-height of an inline object
     TextShape *m_textShape;
     QVector<QTextFrame *> m_frameStack;

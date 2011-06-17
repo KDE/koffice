@@ -31,7 +31,7 @@
 #include <MockShapes.h>
 #include <MockTextShape.h>
 
-#include <KoTextDocumentLayout.h>
+#include <KTextDocumentLayout.h>
 #include <KColorBackground.h>
 #include <QTextCursor>
 

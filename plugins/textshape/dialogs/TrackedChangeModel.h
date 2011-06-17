@@ -30,7 +30,7 @@
 #include <QPair>
 
 class KChangeTracker;
-class KoTextDocumentLayout;
+class KTextDocumentLayout;
 
 class QTextDocument;
 
@@ -104,7 +104,7 @@ private:
     QTextDocument *m_document;
     ModelItem *m_rootItem;
     KChangeTracker *m_changeTracker;
-    KoTextDocumentLayout *m_layout;
+    KTextDocumentLayout *m_layout;
 
     QHash<int, int> m_changeOccurenceCounter;
     QHash<int, ModelItem*> m_changeItems;

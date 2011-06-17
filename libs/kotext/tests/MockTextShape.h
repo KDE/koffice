@@ -22,7 +22,7 @@
 #define MOCKTEXTSHAPE_H
 
 #include <KoTextShapeData.h>
-#include <KoTextDocumentLayout.h>
+#include <KTextDocumentLayout.h>
 #include <KShapeContainer.h>
 
 class MockTextShape : public KShapeContainer
@@ -31,7 +31,7 @@ public:
     MockTextShape() {
         KoTextShapeData *textShapeData = new KoTextShapeData();
         setUserData(textShapeData);
-        layout = new KoTextDocumentLayout(textShapeData->document());
+        layout = new KTextDocumentLayout(textShapeData->document());
         layout->addShape(this);
         textShapeData->document()->setDocumentLayout(layout);
     }
@@ -40,7 +40,7 @@ public:
     virtual bool loadOdf(const KXmlElement &, KShapeLoadingContext &) {
         return true;
     }
-    KoTextDocumentLayout *layout;
+    KTextDocumentLayout *layout;
 };
 
 #endif

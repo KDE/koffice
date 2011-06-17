@@ -54,7 +54,7 @@
 #include <KColorBackground.h>
 #include <KOdf.h>
 #include <KoColorPopupAction.h>
-#include <KoTextDocumentLayout.h>
+#include <KTextDocumentLayout.h>
 #include <KParagraphStyle.h>
 #include <KoTextEditingPlugin.h>
 #include <KoTextEditingRegistry.h>
@@ -496,7 +496,7 @@ TextTool::TextTool(MockCanvas *canvas)  // constructor for our unit tests;
     // we could init some vars here, but we probably don't have to
     KGlobal::setLocale(new KLocale("en"));
     QTextDocument *document = new QTextDocument();
-    KoTextDocumentLayout *layout = new KoTextDocumentLayout(document);
+    KTextDocumentLayout *layout = new KTextDocumentLayout(document);
     KInlineTextObjectManager *inlineManager = new KInlineTextObjectManager();
     layout->setInlineTextObjectManager(inlineManager);
     document->setDocumentLayout(layout);
@@ -576,7 +576,7 @@ void TextTool::paint(QPainter &painter, const KoViewConverter &converter)
     if (selectEnd < selectStart)
         qSwap(selectStart, selectEnd);
     QList<TextShape *> shapesToPaint;
-    KoTextDocumentLayout *lay = qobject_cast<KoTextDocumentLayout*>(textEditor->document()->documentLayout());
+    KTextDocumentLayout *lay = qobject_cast<KTextDocumentLayout*>(textEditor->document()->documentLayout());
     if (lay) {
         foreach (KShape *shape, lay->shapes()) {
             TextShape *ts = dynamic_cast<TextShape*>(shape);
@@ -688,7 +688,7 @@ void TextTool::setShapeData(KoTextShapeData *data)
     bool docChanged = data == 0 || m_textShapeData == 0 || m_textShapeData->document() != data->document();
     if (m_textShapeData) {
         disconnect(m_textShapeData, SIGNAL(destroyed (QObject*)), this, SLOT(shapeDataRemoved()));
-        KoTextDocumentLayout *lay = qobject_cast<KoTextDocumentLayout*>(m_textShapeData->document()->documentLayout());
+        KTextDocumentLayout *lay = qobject_cast<KTextDocumentLayout*>(m_textShapeData->document()->documentLayout());
         if (lay)
             disconnect(lay, SIGNAL(shapeAdded(KShape*)), this, SLOT(shapeAddedToDoc(KShape*)));
     }
@@ -703,7 +703,7 @@ void TextTool::setShapeData(KoTextShapeData *data)
         Q_ASSERT(m_textEditor.data());
         connect(m_textEditor.data(), SIGNAL(isBidiUpdated()), this, SLOT(isBidiUpdated()));
 
-        KoTextDocumentLayout *lay = qobject_cast<KoTextDocumentLayout*>(m_textShapeData->document()->documentLayout());
+        KTextDocumentLayout *lay = qobject_cast<KTextDocumentLayout*>(m_textShapeData->document()->documentLayout());
         if (lay) {
             connect(lay, SIGNAL(shapeAdded(KShape*)), this, SLOT(shapeAddedToDoc(KShape*)));
 
@@ -830,7 +830,7 @@ int TextTool::pointToPosition(const QPointF &point) const
     if (textShapeData == 0)
         return -1;
     if (textShapeData->endPosition() == -1) {
-        KoTextDocumentLayout *lay = qobject_cast<KoTextDocumentLayout*>(textShapeData->document()->documentLayout());
+        KTextDocumentLayout *lay = qobject_cast<KTextDocumentLayout*>(textShapeData->document()->documentLayout());
         if (lay) {
             foreach (KShape *shape, lay->shapes()) {
                 KoTextShapeData *sd = dynamic_cast<KoTextShapeData*>(shape->userData());
@@ -842,7 +842,7 @@ int TextTool::pointToPosition(const QPointF &point) const
                     break;
             }
         }
-        if (textShapeData == 0) // we have no textShapeData and probably no KoTextDocumentLayout
+        if (textShapeData == 0) // we have no textShapeData and probably no KTextDocumentLayout
             return -1;
         if (textShapeData->endPosition() == -1) // never been layed-out before   
             return 0;
@@ -1302,7 +1302,7 @@ void TextTool::ensureCursorVisible()
     if (textEditor == 0 || m_textShapeData == 0)
         return;
     if (m_textShapeData->endPosition() < textEditor->position() || m_textShapeData->position() > textEditor->position()) {
-        KoTextDocumentLayout *lay = qobject_cast<KoTextDocumentLayout*>(m_textShapeData->document()->documentLayout());
+        KTextDocumentLayout *lay = qobject_cast<KTextDocumentLayout*>(m_textShapeData->document()->documentLayout());
         Q_ASSERT(lay);
         foreach (KShape* shape, lay->shapes()) {
             TextShape *textShape = dynamic_cast<TextShape*>(shape);
@@ -1513,7 +1513,7 @@ void TextTool::repaintSelection(int startPosition, int endPosition)
     KoTextEditor *textEditor = m_textEditor.data();
     Q_ASSERT(textEditor);
     QList<TextShape *> shapes;
-    KoTextDocumentLayout *lay = qobject_cast<KoTextDocumentLayout*>(textEditor->document()->documentLayout());
+    KTextDocumentLayout *lay = qobject_cast<KTextDocumentLayout*>(textEditor->document()->documentLayout());
     Q_ASSERT(lay);
     foreach (KShape* shape, lay->shapes()) {
         TextShape *textShape = dynamic_cast<TextShape*>(shape);
@@ -2163,7 +2163,7 @@ void TextTool::shapeDataRemoved()
     if (!m_textEditor.isNull() && m_textEditor.data()->cursor()->isNull()) {
         const QTextDocument *doc = m_textEditor.data()->document();
         Q_ASSERT(doc);
-        KoTextDocumentLayout *lay = qobject_cast<KoTextDocumentLayout*>(doc->documentLayout());
+        KTextDocumentLayout *lay = qobject_cast<KTextDocumentLayout*>(doc->documentLayout());
         if (lay == 0 || lay->shapes().isEmpty()) {
             emit done();
             return;
@@ -2243,7 +2243,7 @@ void TextTool::shapeAddedToDoc(KShape *shape)
         return;
     if (data->document() != textEditor->document())
         return;
-    KoTextDocumentLayout *lay = qobject_cast<KoTextDocumentLayout*>(textEditor->document()->documentLayout());
+    KTextDocumentLayout *lay = qobject_cast<KTextDocumentLayout*>(textEditor->document()->documentLayout());
     Q_ASSERT(lay);
     const QList<KShape*> shapes = lay->shapes();
     // only when the new one is directly after our current one should we do the move

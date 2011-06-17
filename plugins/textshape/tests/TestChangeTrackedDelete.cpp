@@ -9,7 +9,7 @@
 #include <QTextCursor>
 #include <KAction>
 #include <KIcon>
-#include <KoTextDocumentLayout.h>
+#include <KTextDocumentLayout.h>
 #include <KDeleteChangeMarker.h>
 #include <QTextDocumentFragment>
 #include <KInlineTextObjectManager.h>
@@ -65,7 +65,7 @@ void TestChangeTrackedDelete::testDeleteSelection()
     KoTextEditor *textEditor = textTool->textEditor();
     QVERIFY(textEditor);
     QTextDocument *document = textEditor->document();
-    KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(document->documentLayout());
+    KTextDocumentLayout *layout = qobject_cast<KTextDocumentLayout*>(document->documentLayout());
     QTextCursor *cursor = textEditor->cursor();
     cursor->insertText("Hello World");
     cursor->setPosition(2);
@@ -90,7 +90,7 @@ void TestChangeTrackedDelete::testPrefixMerge()
     KoTextEditor *textEditor = textTool->textEditor();
     QVERIFY(textEditor);
     QTextDocument *document = textEditor->document();
-    KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(document->documentLayout());
+    KTextDocumentLayout *layout = qobject_cast<KTextDocumentLayout*>(document->documentLayout());
     QTextCursor *cursor = textEditor->cursor();
     cursor->insertText("Hello World");
     cursor->setPosition(3);
@@ -117,7 +117,7 @@ void TestChangeTrackedDelete::testSuffixMerge()
     KoTextEditor *textEditor = textTool->textEditor();
     QVERIFY(textEditor);
     QTextDocument *document = textEditor->document();
-    KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(document->documentLayout());
+    KTextDocumentLayout *layout = qobject_cast<KTextDocumentLayout*>(document->documentLayout());
     QTextCursor *cursor = textEditor->cursor();
     cursor->insertText("Hello World");
     cursor->setPosition(3);
@@ -144,7 +144,7 @@ void TestChangeTrackedDelete::testInterMerge()
     KoTextEditor *textEditor = textTool->textEditor();
     QVERIFY(textEditor);
     QTextDocument *document = textEditor->document();
-    KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(document->documentLayout());
+    KTextDocumentLayout *layout = qobject_cast<KTextDocumentLayout*>(document->documentLayout());
     QTextCursor *cursor = textEditor->cursor();
     cursor->insertText("Hello World");
     cursor->setPosition(4);
@@ -175,7 +175,7 @@ void TestChangeTrackedDelete::testPartialListItemDelete()
     KoTextEditor *textEditor = textTool->textEditor();
     QVERIFY(textEditor);
     QTextDocument *document = textEditor->document();
-    KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(document->documentLayout());
+    KTextDocumentLayout *layout = qobject_cast<KTextDocumentLayout*>(document->documentLayout());
     QTextCursor *cursor = textEditor->cursor();
     insertSampleList(document);
 
@@ -224,7 +224,7 @@ void TestChangeTrackedDelete::testListItemDelete()
     KoTextEditor *textEditor = textTool->textEditor();
     QVERIFY(textEditor);
     QTextDocument *document = textEditor->document();
-    KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(document->documentLayout());
+    KTextDocumentLayout *layout = qobject_cast<KTextDocumentLayout*>(document->documentLayout());
     QTextCursor *cursor = textEditor->cursor();
     insertSampleList(document);
 
@@ -275,7 +275,7 @@ void TestChangeTrackedDelete::testListDelete()
     KoTextEditor *textEditor = textTool->textEditor();
     QVERIFY(textEditor);
     QTextDocument *document = textEditor->document();
-    KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(document->documentLayout());
+    KTextDocumentLayout *layout = qobject_cast<KTextDocumentLayout*>(document->documentLayout());
     QTextCursor *cursor = textEditor->cursor();
     insertSampleList(document);
 
@@ -332,7 +332,7 @@ void TestChangeTrackedDelete::testTableDelete()
     KoTextEditor *textEditor = textTool->textEditor();
     QVERIFY(textEditor);
     QTextDocument *document = textEditor->document();
-    KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(document->documentLayout());
+    KTextDocumentLayout *layout = qobject_cast<KTextDocumentLayout*>(document->documentLayout());
     QTextCursor *cursor = textEditor->cursor();
     insertSampleTable(document);
 

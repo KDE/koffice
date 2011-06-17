@@ -22,7 +22,7 @@
 
 #include "kword_export.h"
 
-#include <KoTextDocumentLayout.h>
+#include <KTextDocumentLayout.h>
 
 
 class KWTextFrameSet;
@@ -32,7 +32,7 @@ class KWAnchorStrategy;
  * KWords text layouter that allows text to flow in multiple frames and around
  * other KWord objects.
  */
-class KWORD_TEST_EXPORT KWTextDocumentLayout : public KoTextDocumentLayout
+class KWORD_TEST_EXPORT KWTextDocumentLayout : public KTextDocumentLayout
 {
 public:
     /// constructor
@@ -42,14 +42,14 @@ public:
     ///  Actually do the layout of the text.
     void layout();
 
-    /// reimplemented from KoTextDocumentLayout::shapes()
+    /// reimplemented from KTextDocumentLayout::shapes()
     virtual QList<KShape*> shapes() const;
 
 protected:
     friend class KWTextFrameSet;
 
 private:
-    /// reimplemented from KoTextDocumentLayout::relayout()
+    /// reimplemented from KTextDocumentLayout::relayout()
     virtual void relayout();
 
     virtual void positionInlineObject(QTextInlineObject item, int position, const QTextFormat &format);

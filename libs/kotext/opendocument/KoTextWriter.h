@@ -24,7 +24,7 @@
 
 class KShapeSavingContext;
 class KXmlWriter;
-class KoTextDocumentLayout;
+class KTextDocumentLayout;
 class KStyleManager;
 class QTextDocument;
 class QTextTable;

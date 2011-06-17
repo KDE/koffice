@@ -20,7 +20,7 @@
 
 #include "KTextAnchor.h"
 #include "KInlineObject_p.h"
-#include "KoTextDocumentLayout.h"
+#include "KTextDocumentLayout.h"
 #include "KoTextShapeContainerModel.h"
 #include "KoTextShapeData.h"
 #include "KOdfStyleStack.h"
@@ -67,7 +67,7 @@ public:
             KoTextShapeData *data  = qobject_cast<KoTextShapeData*>(shape->parent()->userData());
             Q_ASSERT(data);
             data->foul();
-            KoTextDocumentLayout *lay = qobject_cast<KoTextDocumentLayout*>(document->documentLayout());
+            KTextDocumentLayout *lay = qobject_cast<KTextDocumentLayout*>(document->documentLayout());
             if (lay)
                 lay->interruptLayout();
             data->fireResizeEvent();

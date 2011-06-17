@@ -25,7 +25,7 @@
 #include "KInlineTextObjectManager.h"
 #include <KOdf.h>
 #include "KTextDocument.h"
-#include "KoTextDocumentLayout.h"
+#include "KTextDocumentLayout.h"
 #include "KoTextDrag.h"
 #include "KoTextLocator.h"
 #include "KoTextOdfSaveHelper.h"
@@ -176,7 +176,7 @@ bool KoTextEditorPrivate::deleteInlineObjects(bool backwards)
     // Also note that the below code needs unit testing since I found some issues already
     /*
     QTextCursor cursor(*d->caret);
-    KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(d->textShapeData->document()->documentLayout());
+    KTextDocumentLayout *layout = qobject_cast<KTextDocumentLayout*>(d->textShapeData->document()->documentLayout());
     Q_ASSERT(layout);
     KInlineTextObjectManager *manager = layout->inlineObjectTextManager();
     KInlineObject *object;
@@ -219,7 +219,7 @@ return found;
 void KoTextEditorPrivate::deleteSelection()
 {
 #ifndef NDEBUG
-    KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(document->documentLayout());
+    KTextDocumentLayout *layout = qobject_cast<KTextDocumentLayout*>(document->documentLayout());
     Q_ASSERT(layout);
 #endif
     QTextCursor delText = QTextCursor(caret);
@@ -718,7 +718,7 @@ void KoTextEditor::addBookmark(const QString &name)
     KoBookmark *bookmark = new KoBookmark(name);
     int startPos = -1, endPos = -1, caretPos = -1;
 
-    KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(d->document->documentLayout());
+    KTextDocumentLayout *layout = qobject_cast<KTextDocumentLayout*>(d->document->documentLayout());
     Q_ASSERT(layout);
     Q_ASSERT(layout->inlineTextObjectManager());
     if (d->caret.hasSelection()) {
@@ -761,7 +761,7 @@ bool KoTextEditor::insertIndexMarker()
         return false; // can't insert one on a whitespace as that does not indicate a word.
 
     d->updateState(KoTextEditorPrivate::Custom, i18n("Insert Index"));
-    KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(d->document->documentLayout());
+    KTextDocumentLayout *layout = qobject_cast<KTextDocumentLayout*>(d->document->documentLayout());
     Q_ASSERT(layout);
     Q_ASSERT(layout->inlineTextObjectManager());
     KoTextLocator *tl = new KoTextLocator();
@@ -773,7 +773,7 @@ bool KoTextEditor::insertIndexMarker()
 void KoTextEditor::insertInlineObject(KInlineObject *inliner)
 {
     d->updateState(KoTextEditorPrivate::Custom, i18n("Insert Variable"));
-    KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(d->document->documentLayout());
+    KTextDocumentLayout *layout = qobject_cast<KTextDocumentLayout*>(d->document->documentLayout());
     Q_ASSERT(layout);
     Q_ASSERT(layout->inlineTextObjectManager());
 

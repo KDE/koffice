@@ -52,7 +52,7 @@
  *
  * Important classes;
  *
- * KoTextDocumentLayout the main layout class to be set on the QTextDocument.
+ * KTextDocumentLayout the main layout class to be set on the QTextDocument.
  *
  * KoInlineTextObject plugin base for inline objects (and variables)
  *

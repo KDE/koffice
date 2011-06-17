@@ -25,7 +25,7 @@
 #include "KCharacterStyle.h"
 #include "KListStyle.h"
 #include "KTextBlockData.h"
-#include "KoTextDocumentLayout.h"
+#include "KTextDocumentLayout.h"
 #include "KStyleManager.h"
 #include "KListLevelProperties.h"
 #include "KoTextSharedLoadingData.h"

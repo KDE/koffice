@@ -59,7 +59,7 @@ struct Finalizer {
 #include <KShapeSavingContext.h>
 #include <KoText.h>
 #include <KTextDocument.h>
-#include <KoTextDocumentLayout.h>
+#include <KTextDocumentLayout.h>
 #include <KoTextEditor.h>
 #include <KoTextPage.h>
 #include <KoTextShapeContainerModel.h>
@@ -91,7 +91,7 @@ TextShape::TextShape()
     setShapeId(TextShape_SHAPEID);
     m_textShapeData = new KoTextShapeData();
     setUserData(m_textShapeData);
-    KoTextDocumentLayout *lay = new KoTextDocumentLayout(m_textShapeData->document());
+    KTextDocumentLayout *lay = new KTextDocumentLayout(m_textShapeData->document());
     lay->setLayout(new Layout(lay));
     lay->addShape(this);
     m_textShapeData->document()->setDocumentLayout(lay);
@@ -131,7 +131,7 @@ void TextShape::paintComponent(QPainter &painter, const KoViewConverter &convert
     }
     QTextDocument *doc = m_textShapeData->document();
     Q_ASSERT(doc);
-    KoTextDocumentLayout *lay = qobject_cast<KoTextDocumentLayout*>(doc->documentLayout());
+    KTextDocumentLayout *lay = qobject_cast<KTextDocumentLayout*>(doc->documentLayout());
 
     if (m_textShapeData->endPosition() < 0) { // not layouted yet.
         if (lay == 0) {
@@ -168,7 +168,7 @@ void TextShape::paintComponent(QPainter &painter, const KoViewConverter &convert
     }
 
     QAbstractTextDocumentLayout::PaintContext pc;
-    KoTextDocumentLayout::PaintContext context;
+    KTextDocumentLayout::PaintContext context;
     context.textContext = pc;
     context.viewConverter = &converter;
     context.imageCollection = m_imageCollection;
@@ -205,7 +205,7 @@ void TextShape::shapeChanged(ChangeType type, KShape *shape)
     }
     if (type == PositionChanged || type == SizeChanged || type == CollisionDetected) {
         m_textShapeData->foul();
-        KoTextDocumentLayout *lay = qobject_cast<KoTextDocumentLayout*>(m_textShapeData->document()->documentLayout());
+        KTextDocumentLayout *lay = qobject_cast<KTextDocumentLayout*>(m_textShapeData->document()->documentLayout());
         if (lay)
             lay->interruptLayout();
         m_textShapeData->fireResizeEvent();
@@ -248,7 +248,7 @@ void TextShape::paintDecorations(QPainter &painter, const KoViewConverter &conve
 
     if (m_demoText) return;
     if (m_textShapeData->endPosition() <= 1) return;
-    KoTextDocumentLayout *lay = qobject_cast<KoTextDocumentLayout*>(m_textShapeData->document()->documentLayout());
+    KTextDocumentLayout *lay = qobject_cast<KTextDocumentLayout*>(m_textShapeData->document()->documentLayout());
     if (showTextFrames && lay) {
         QList<KShape *> shapes = lay->shapes();
         if (shapes.count() == 0 || shapes.last() != this)
@@ -314,7 +314,7 @@ void TextShape::saveOdf(KShapeSavingContext &context) const
     writer.startElement("draw:text-box");
     if (! textHeight.isEmpty())
         writer.addAttribute("fo:min-height", textHeight);
-    KoTextDocumentLayout *lay = qobject_cast<KoTextDocumentLayout*>(m_textShapeData->document()->documentLayout());
+    KTextDocumentLayout *lay = qobject_cast<KTextDocumentLayout*>(m_textShapeData->document()->documentLayout());
     int index = -1;
     if (lay) {
         int i = 0;
@@ -452,7 +452,7 @@ void TextShape::markLayoutDone()
 
 void TextShape::waitUntilReady(const KoViewConverter &, bool asynchronous) const
 {
-    KoTextDocumentLayout *lay = qobject_cast<KoTextDocumentLayout*>(m_textShapeData->document()->documentLayout());
+    KTextDocumentLayout *lay = qobject_cast<KTextDocumentLayout*>(m_textShapeData->document()->documentLayout());
     Q_ASSERT(lay);
     if (!lay->hasLayouter()) {
         lay->setLayout(new Layout(lay));
@@ -471,7 +471,7 @@ void TextShape::waitUntilReady(const KoViewConverter &, bool asynchronous) const
         }
     }
     else {
-        KoTextDocumentLayout *lay = qobject_cast<KoTextDocumentLayout*>(m_textShapeData->document()->documentLayout());
+        KTextDocumentLayout *lay = qobject_cast<KTextDocumentLayout*>(m_textShapeData->document()->documentLayout());
         if (lay) {
             while (m_textShapeData->isDirty()){
                 lay->layout();

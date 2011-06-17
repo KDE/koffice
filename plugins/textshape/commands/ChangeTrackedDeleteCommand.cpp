@@ -29,7 +29,7 @@
 #include <KChangeTracker.h>
 #include <KChangeTrackerElement.h>
 #include <KTextDocument.h>
-#include <KoTextDocumentLayout.h>
+#include <KTextDocumentLayout.h>
 #include <KInlineTextObjectManager.h>
 #include <KAction>
 #include <KTextAnchor.h>
@@ -201,7 +201,7 @@ void ChangeTrackedDeleteCommand::handleListItemDelete(QTextCursor &selection)
 void ChangeTrackedDeleteCommand::deleteSelection(QTextCursor &selection)
 {
     QTextDocument *document = m_tool->m_textEditor.data()->document();
-    KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(document->documentLayout());
+    KTextDocumentLayout *layout = qobject_cast<KTextDocumentLayout*>(document->documentLayout());
     Q_ASSERT(layout);
     Q_ASSERT(layout->inlineTextObjectManager());
 
@@ -446,7 +446,7 @@ ChangeTrackedDeleteCommand::~ChangeTrackedDeleteCommand()
 void ChangeTrackedDeleteCommand::removeChangeElement(int changeId)
 {
     QTextDocument *document = m_tool->m_textEditor.data()->document();
-    KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(document->documentLayout());
+    KTextDocumentLayout *layout = qobject_cast<KTextDocumentLayout*>(document->documentLayout());
     KChangeTrackerElement *element = KTextDocument(document).changeTracker()->elementById(changeId);
     KDeleteChangeMarker *marker = element->deleteChangeMarker();
     layout->inlineTextObjectManager()->removeInlineObject(marker);

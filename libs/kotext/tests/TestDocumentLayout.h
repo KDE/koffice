@@ -27,7 +27,7 @@
 
 class MockTextShape;
 class QTextDocument;
-class KoTextDocumentLayout;
+class KTextDocumentLayout;
 
 class TestDocumentLayout : public QObject
 {
@@ -38,7 +38,7 @@ public:
 private slots:
     void initTestCase();
 
-    /// Test the hittest of KoTextDocumentLayout
+    /// Test the hittest of KTextDocumentLayout
     void testHitTest();
 
 private:
@@ -47,7 +47,7 @@ private:
 private:
     MockTextShape *shape1;
     QTextDocument *doc;
-    KoTextDocumentLayout *layout;
+    KTextDocumentLayout *layout;
 };
 
 #endif

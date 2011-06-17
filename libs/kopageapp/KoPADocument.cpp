@@ -29,7 +29,7 @@
 #include <KOdfStorageDevice.h>
 #include <KoTextShapeData.h>
 #include <KoTextSharedLoadingData.h>
-#include <KoTextDocumentLayout.h>
+#include <KTextDocumentLayout.h>
 #include <KInlineTextObjectManager.h>
 #include <KStyleManager.h>
 #include <KOdfXmlNS.h>

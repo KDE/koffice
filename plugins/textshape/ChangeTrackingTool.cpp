@@ -26,7 +26,7 @@
 #include <KSelection.h>
 #include <KShapeManager.h>
 #include <KTextDocument.h>
-#include <KoTextDocumentLayout.h>
+#include <KTextDocumentLayout.h>
 #include <KoTextEditor.h>
 #include <KoTextShapeData.h>
 #include <KoViewConverter.h>
@@ -170,7 +170,7 @@ void ChangeTrackingTool::paint(QPainter& painter, const KoViewConverter& convert
         if (end < start)
             qSwap(start, end);
         QList<TextShape *> shapesToPaint;
-        KoTextDocumentLayout *lay = qobject_cast<KoTextDocumentLayout*>(m_textShapeData->document()->documentLayout());
+        KTextDocumentLayout *lay = qobject_cast<KTextDocumentLayout*>(m_textShapeData->document()->documentLayout());
         if (lay) {
             foreach(KShape *shape, lay->shapes()) {
                 TextShape *ts = dynamic_cast<TextShape*>(shape);
@@ -312,7 +312,7 @@ void ChangeTrackingTool::setShapeData(KoTextShapeData *data)
 /*
     if (m_textShapeData) {
 //        disconnect(m_textShapeData, SIGNAL(destroyed (QObject*)), this, SLOT(shapeDataRemoved()));
-        KoTextDocumentLayout *lay = qobject_cast<KoTextDocumentLayout*>(m_textShapeData->document()->documentLayout());
+        KTextDocumentLayout *lay = qobject_cast<KTextDocumentLayout*>(m_textShapeData->document()->documentLayout());
 //        if (lay)
 //            disconnect(lay, SIGNAL(shapeAdded(KShape*)), this, SLOT(shapeAddedToDoc(KShape*)));
     }
@@ -334,7 +334,7 @@ void ChangeTrackingTool::setShapeData(KoTextShapeData *data)
         Q_ASSERT(m_textEditor);
 //        connect(m_textEditor, SIGNAL(isBidiUpdated()), this, SLOT(isBidiUpdated()));
 
-        KoTextDocumentLayout *lay = qobject_cast<KoTextDocumentLayout*>(m_textShapeData->document()->documentLayout());
+        KTextDocumentLayout *lay = qobject_cast<KTextDocumentLayout*>(m_textShapeData->document()->documentLayout());
         if (lay) {
 //            connect(lay, SIGNAL(shapeAdded(KShape*)), this, SLOT(shapeAddedToDoc(KShape*)));
         }

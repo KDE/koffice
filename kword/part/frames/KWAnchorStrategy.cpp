@@ -47,7 +47,7 @@ KWAnchorStrategy::~KWAnchorStrategy()
 {
 }
 
-bool KWAnchorStrategy::checkState(KoTextDocumentLayout::LayoutState *state, int startOfBlock, int startOfBlockText, KWTextFrameSet *frameSet)
+bool KWAnchorStrategy::checkState(KTextDocumentLayout::LayoutState *state, int startOfBlock, int startOfBlockText, KWTextFrameSet *frameSet)
 {
     if (m_anchor->shape()->parent() == 0) { // it should be parented to our current shape
         KShapeContainer *sc = dynamic_cast<KShapeContainer*>(state->shape);

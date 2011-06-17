@@ -44,7 +44,7 @@
 #include "styles/KListStyle.h"
 #include "styles/KListLevelProperties.h"
 #include "styles/KTableCellStyle.h"
-#include "KoTextDocumentLayout.h"
+#include "KTextDocumentLayout.h"
 #include "KTextBlockData.h"
 #include "KTextDocument.h"
 #include "KoTextInlineRdf.h"
@@ -186,7 +186,7 @@ public:
     KoTextSharedSavingData *sharedData;
     KXmlWriter *writer;
 
-    KoTextDocumentLayout *layout;
+    KTextDocumentLayout *layout;
     KStyleManager *styleManager;
     KChangeTracker *changeTracker;
     KDocumentRdfBase *rdfData;
@@ -2321,7 +2321,7 @@ void KoTextWriter::write(QTextDocument *document, int from, int to)
 {
     d->document = document;
     d->styleManager = KTextDocument(document).styleManager();
-    d->layout = qobject_cast<KoTextDocumentLayout*>(document->documentLayout());
+    d->layout = qobject_cast<KTextDocumentLayout*>(document->documentLayout());
 
     d->changeTracker = KTextDocument(document).changeTracker();
 

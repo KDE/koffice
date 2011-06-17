@@ -8,7 +8,7 @@
 #include "../Layout.h"
 #include "MockTextShape.h"
 
-class KoTextDocumentLayout;
+class KTextDocumentLayout;
 class KSectionStyle;
 class KStyleManager;
 class QTextDocument;
@@ -52,7 +52,7 @@ private slots:
 private:
     QTextDocument *m_doc;
     QTextTable *m_table;
-    KoTextDocumentLayout *m_layout;
+    KTextDocumentLayout *m_layout;
     KStyleManager *m_styleManager;
     Layout *m_textLayout;
     MockTextShape *m_shape;

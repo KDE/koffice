@@ -48,7 +48,7 @@
 #include <KListStyle.h>
 #include <KTableStyle.h>
 #include <KTableCellStyle.h>
-#include <KoTextDocumentLayout.h>
+#include <KTextDocumentLayout.h>
 #include <KStyleManager.h>
 #include <KCharacterStyle.h>
 #include <KParagraphStyle.h>
@@ -1076,9 +1076,9 @@ QString TestLoading::documentToOdt(QTextDocument *document)
 
     KoTextShapeData *textShapeData = new KoTextShapeData;
     textShapeData->setDocument(document, false /* ownership */);
-    if (qobject_cast<KoTextDocumentLayout *>(document->documentLayout()) == 0) {
+    if (qobject_cast<KTextDocumentLayout *>(document->documentLayout()) == 0) {
         // Setup layout and managers just like kotext
-        KoTextDocumentLayout *layout = new KoTextDocumentLayout(textShapeData->document());
+        KTextDocumentLayout *layout = new KTextDocumentLayout(textShapeData->document());
         textShapeData->document()->setDocumentLayout(layout);
         layout->setInlineTextObjectManager(new KInlineTextObjectManager(layout)); // required while saving
         KStyleManager *styleManager = new KStyleManager;
