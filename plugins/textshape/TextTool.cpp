@@ -99,7 +99,7 @@ static bool hit(const QKeySequence &input, KStandardShortcut::StandardShortcut s
 }
 
 TextTool::TextTool(KCanvasBase *canvas)
-        : KoToolBase(canvas),
+        : KToolBase(canvas),
         m_textShape(0),
         m_textShapeData(0),
         m_changeTracker(0),
@@ -417,7 +417,7 @@ TextTool::TextTool(KCanvasBase *canvas)
 
     m_actionShowChanges = new KAction(i18n("Show Changes"), this);
     m_actionShowChanges->setCheckable(true);
-    addAction("edit_show_changes", m_actionShowChanges, KoToolBase::ReadOnlyAction);
+    addAction("edit_show_changes", m_actionShowChanges, KToolBase::ReadOnlyAction);
     connect(m_actionShowChanges, SIGNAL(triggered(bool)), this, SLOT(toggleShowChanges(bool)));
 
     m_actionRecordChanges = new KAction(i18n("Record Changes"), this);
@@ -437,7 +437,7 @@ TextTool::TextTool(KCanvasBase *canvas)
     connect(action, SIGNAL(triggered()), this, SLOT(showStyleManager()));
 
     action = KStandardAction::selectAll(this, SLOT(selectAll()), this);
-    addAction("edit_selectall", action, KoToolBase::ReadOnlyAction);
+    addAction("edit_selectall", action, KToolBase::ReadOnlyAction);
 
     action = new KAction(i18n("Special Character..."), this);
     action->setIcon(KIcon("character-set"));
@@ -450,11 +450,11 @@ TextTool::TextTool(KCanvasBase *canvas)
 #ifndef NDEBUG
     action = new KAction("Paragraph Debug", this); // do NOT add i18n!
     action->setShortcut(Qt::CTRL + Qt::SHIFT + Qt::Key_P);
-    addAction("detailed_debug_paragraphs", action, KoToolBase::ReadOnlyAction);
+    addAction("detailed_debug_paragraphs", action, KToolBase::ReadOnlyAction);
     connect(action, SIGNAL(triggered()), this, SLOT(debugTextDocument()));
     action = new KAction("Styles Debug", this); // do NOT add i18n!
     action->setShortcut(Qt::CTRL + Qt::SHIFT + Qt::ALT + Qt::Key_S);
-    addAction("detailed_debug_styles", action, KoToolBase::ReadOnlyAction);
+    addAction("detailed_debug_styles", action, KToolBase::ReadOnlyAction);
     connect(action, SIGNAL(triggered()), this, SLOT(debugTextStyles()));
 #endif
 
@@ -473,7 +473,7 @@ TextTool::TextTool(KCanvasBase *canvas)
 #include <KUndoStack>
 
 TextTool::TextTool(MockCanvas *canvas)  // constructor for our unit tests;
-    : KoToolBase(canvas),
+    : KToolBase(canvas),
     m_textShape(0),
     m_textShapeData(0),
     m_changeTracker(0),

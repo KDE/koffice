@@ -24,7 +24,7 @@
 #ifndef KPRPRESENTATIONTOOL_H
 #define KPRPRESENTATIONTOOL_H
 
-#include <KoToolBase.h>
+#include <KToolBase.h>
 
 #include <QSet>
 
@@ -36,7 +36,7 @@ class SCPresentationStrategyBase;
 class SCPresentationToolAdaptor;
 
 /// The tool used for presentations
-class SCPresentationTool : public KoToolBase
+class SCPresentationTool : public KToolBase
 {
     Q_OBJECT
 public:

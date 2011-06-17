@@ -21,7 +21,7 @@
 #ifndef KO_TOOL_FACTORY_H
 #define KO_TOOL_FACTORY_H
 
-#include "KoToolBase.h"
+#include "KToolBase.h"
 #include "flake_export.h"
 
 #include <klocale.h>
@@ -29,8 +29,8 @@
 #include <QObject>
 
 /**
- * A factory for KoToolBase objects.
- * The baseclass for all tool plugins. Each plugin that ships a KoToolBase should also
+ * A factory for KToolBase objects.
+ * The baseclass for all tool plugins. Each plugin that ships a KToolBase should also
  * ship a factory. That factory will extend this class and set variable data like
  * a toolTip and icon in the constructor of that extending class.
  *
@@ -44,7 +44,7 @@ public:
         setPriority(5);
     }
     ~MyToolFactory() {}
-    KoToolBase *createTool(KCanvasBase *canvas);
+    KToolBase *createTool(KCanvasBase *canvas);
 };
 K_PLUGIN_FACTORY(MyToolFactoryFactory, registerPlugin<MyToolFactory>();)
 K_EXPORT_PLUGIN(MyToolFactoryFactory("MyTool"))
@@ -69,10 +69,10 @@ public:
      * Instanciate a new tool
      * @param canvas the canvas that the new tool will work on. Should be passed
      *    to the constructor of the tool.
-     * @return a new KoToolBase instance, or zero if the tool doesn't want to show up.
+     * @return a new KToolBase instance, or zero if the tool doesn't want to show up.
      * @see canCreateTool()
      */
-    virtual KoToolBase *createTool(KCanvasBase *canvas) = 0;
+    virtual KToolBase *createTool(KCanvasBase *canvas) = 0;
 
     /**
      * Returns true if this factory will create a tool instance when called with the same canvas in createTool()

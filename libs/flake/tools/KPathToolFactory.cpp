@@ -37,7 +37,7 @@ KPathToolFactory::~KPathToolFactory()
 {
 }
 
-KoToolBase * KPathToolFactory::createTool(KCanvasBase *canvas)
+KToolBase * KPathToolFactory::createTool(KCanvasBase *canvas)
 {
     return new KPathTool(canvas);
 }

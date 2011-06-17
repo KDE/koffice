@@ -47,7 +47,7 @@ public:
      * @param canvas the canvas interface which will supply things like a selection object
      * @param clicked the initial point that the user depressed (in pt).
      */
-    ConnectionChangeStrategy(KoToolBase *tool, KShapeConnection* connection, const QPointF &clicked, Type type);
+    ConnectionChangeStrategy(KToolBase *tool, KShapeConnection* connection, const QPointF &clicked, Type type);
     virtual ~ConnectionChangeStrategy() {}
 
     void handleMouseMove(const QPointF &mouseLocation, Qt::KeyboardModifiers modifiers);

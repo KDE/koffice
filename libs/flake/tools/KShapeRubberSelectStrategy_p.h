@@ -38,7 +38,7 @@
 class KShapeRubberSelectStrategyPrivate : public KInteractionStrategyPrivate
 {
 public:
-    KShapeRubberSelectStrategyPrivate(KoToolBase *owner)
+    KShapeRubberSelectStrategyPrivate(KToolBase *owner)
         : KInteractionStrategyPrivate(owner),
         snapGuide(new KSnapGuide(owner->canvas()))
     {

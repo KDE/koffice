@@ -32,7 +32,7 @@
 //
 
 
-#include "KoToolBase.h"
+#include "KToolBase.h"
 
 #include <QPointF>
 
@@ -43,7 +43,7 @@ class KCanvasController;
 /**
  * This is the tool that allows you to move the canvas by dragging it and 'panning' around.
  */
-class KPanTool : public KoToolBase
+class KPanTool : public KToolBase
 {
 public:
     /**
@@ -79,7 +79,7 @@ private:
     KCanvasController *m_controller;
     QPointF m_lastPosition;
     bool m_temporary;
-    Q_DECLARE_PRIVATE(KoToolBase)
+    Q_DECLARE_PRIVATE(KToolBase)
 };
 
 #endif

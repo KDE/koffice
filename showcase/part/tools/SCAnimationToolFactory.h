@@ -31,6 +31,6 @@ public:
     ~SCAnimationToolFactory();
 
     bool canCreateTool(KCanvasBase *canvas) const;
-    KoToolBase* createTool(KCanvasBase *canvas);
+    KToolBase* createTool(KCanvasBase *canvas);
 };
 #endif

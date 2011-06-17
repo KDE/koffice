@@ -51,7 +51,7 @@
 
 
 SCPresentationTool::SCPresentationTool(SCViewModePresentation &viewMode)
-: KoToolBase(viewMode.canvas())
+: KToolBase(viewMode.canvas())
 , m_viewMode(viewMode)
 , m_strategy(new SCPresentationStrategy(this))
 , m_bus (new SCPresentationToolAdaptor(this))

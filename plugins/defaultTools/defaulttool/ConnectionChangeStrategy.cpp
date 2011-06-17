@@ -23,7 +23,7 @@
 #include <KShapeConnection.h>
 #include <KShapeManager.h>
 #include <KShape.h>
-#include <KoToolBase.h>
+#include <KToolBase.h>
 #include <KCanvasBase.h>
 #include <KoViewConverter.h>
 #include <KSnapGuide.h>
@@ -31,7 +31,7 @@
 #include <QLineF>
 #include <KDebug>
 
-ConnectionChangeStrategy::ConnectionChangeStrategy(KoToolBase *tool, KShapeConnection *connection, const QPointF &clicked, Type type)
+ConnectionChangeStrategy::ConnectionChangeStrategy(KToolBase *tool, KShapeConnection *connection, const QPointF &clicked, Type type)
     : KInteractionStrategy(tool),
     m_connection(connection),
     m_type(type)

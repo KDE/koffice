@@ -46,7 +46,7 @@ bool SCAnimationToolFactory::canCreateTool(KCanvasBase *canvas) const
     return paCanvas!=0; // we only work in Showcase
 }
 
-KoToolBase* SCAnimationToolFactory::createTool(KCanvasBase *canvas)
+KToolBase* SCAnimationToolFactory::createTool(KCanvasBase *canvas)
 {
     return new SCAnimationTool(canvas);
 }

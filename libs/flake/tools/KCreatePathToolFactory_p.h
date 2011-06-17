@@ -44,6 +44,6 @@ public:
     /// Destructor
     ~KCreatePathToolFactory();
 
-    KoToolBase* createTool(KCanvasBase *canvas);
+    KToolBase* createTool(KCanvasBase *canvas);
 };
 #endif

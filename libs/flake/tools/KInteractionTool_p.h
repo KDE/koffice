@@ -33,13 +33,13 @@
 //
 
 
-#include "KoToolBase_p.h"
+#include "KToolBase_p.h"
 #include "KInteractionStrategy.h"
 
 class KInteractionToolPrivate : public KoToolBasePrivate
 {
 public:
-    KInteractionToolPrivate(KoToolBase *qq, KCanvasBase *canvas)
+    KInteractionToolPrivate(KToolBase *qq, KCanvasBase *canvas)
         : KoToolBasePrivate(qq, canvas),
         currentStrategy(0)
     {

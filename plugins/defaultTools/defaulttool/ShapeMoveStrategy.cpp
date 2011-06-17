@@ -30,10 +30,10 @@
 #include <commands/KShapeMoveCommand.h>
 #include <KSnapGuide.h>
 #include <KPointerEvent.h>
-#include <KoToolBase.h>
+#include <KToolBase.h>
 #include <KLocale>
 
-ShapeMoveStrategy::ShapeMoveStrategy(KoToolBase *tool, const QPointF &clicked)
+ShapeMoveStrategy::ShapeMoveStrategy(KToolBase *tool, const QPointF &clicked)
     : KInteractionStrategy(tool),
     m_start(clicked)
 {

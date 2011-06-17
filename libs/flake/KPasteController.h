@@ -30,7 +30,7 @@ class KCanvasBase;
  * This class takes care of the paste actions integration into flake.
  * Whenever the paste (KStandardAction::Paste) action is triggered the controller
  * will use the currently selected tool and try to paste using that tool.
- * Additionally; when the tool does not allow pasting (KoToolBase::hasSelection() returns false)
+ * Additionally; when the tool does not allow pasting (KToolBase::hasSelection() returns false)
  * the signal pasteRequested will be emitted for applications to connect to.
  */
 class FLAKE_EXPORT KPasteController : public QObject

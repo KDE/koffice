@@ -28,7 +28,7 @@
 
 #include "flake_export.h"
 
-class KoToolBase;
+class KToolBase;
 class KShapeRubberSelectStrategyPrivate;
 
 /**
@@ -46,7 +46,7 @@ public:
      * @param clicked the initial point that the user depressed (in pt).
      * @param useSnapToGrid use the snap-to-grid settings while doing the rubberstamp.
      */
-    KShapeRubberSelectStrategy(KoToolBase *tool, const QPointF &clicked, bool useSnapToGrid = false);
+    KShapeRubberSelectStrategy(KToolBase *tool, const QPointF &clicked, bool useSnapToGrid = false);
 
     virtual void paint(QPainter &painter, const KoViewConverter &converter);
     virtual void handleMouseMove(const QPointF &mouseLocation, Qt::KeyboardModifiers modifiers);

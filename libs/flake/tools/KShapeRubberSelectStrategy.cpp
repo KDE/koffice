@@ -29,7 +29,7 @@
 #include "KSelection.h"
 #include "KCanvasBase.h"
 
-KShapeRubberSelectStrategy::KShapeRubberSelectStrategy(KoToolBase *tool, const QPointF &clicked, bool useSnapToGrid)
+KShapeRubberSelectStrategy::KShapeRubberSelectStrategy(KToolBase *tool, const QPointF &clicked, bool useSnapToGrid)
     : KInteractionStrategy(*(new KShapeRubberSelectStrategyPrivate(tool)))
 {
     Q_D(KShapeRubberSelectStrategy);

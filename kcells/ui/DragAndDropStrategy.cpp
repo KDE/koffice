@@ -25,7 +25,7 @@
 #include "KCSheet.h"
 
 #include <KCanvasBase.h>
-#include <KoToolBase.h>
+#include <KToolBase.h>
 #include <KShape.h>
 #include <KSelection.h>
 #include <KShapeManager.h>

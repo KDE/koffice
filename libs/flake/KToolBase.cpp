@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoToolBase.h"
-#include "KoToolBase_p.h"
+#include "KToolBase.h"
+#include "KToolBase_p.h"
 #include "KCanvasBase.h"
 #include "KPointerEvent.h"
 #include "KResourceManager.h"
@@ -28,67 +28,67 @@
 #include <kactioncollection.h>
 #include <QWidget>
 
-KoToolBase::KoToolBase(KCanvasBase *canvas)
+KToolBase::KToolBase(KCanvasBase *canvas)
     : d_ptr(new KoToolBasePrivate(this, canvas))
 {
-    Q_D(KoToolBase);
+    Q_D(KToolBase);
     if (d->canvas) { // in the case of KoToolManagers dummytool it can be zero :(
         KResourceManager *resources = d->canvas->resourceManager();
-        Q_ASSERT_X(resources, "KoToolBase::KoToolBase", "No KResourceManager");
+        Q_ASSERT_X(resources, "KToolBase::KToolBase", "No KResourceManager");
         if (resources)
             connect(resources, SIGNAL(resourceChanged(int, const QVariant&)),
                     this, SLOT(resourceChanged(int, const QVariant&)));
     }
 }
 
-KoToolBase::KoToolBase(KoToolBasePrivate &dd)
+KToolBase::KToolBase(KoToolBasePrivate &dd)
     : d_ptr(&dd)
 {
 }
 
-KoToolBase::~KoToolBase()
+KToolBase::~KToolBase()
 {
     delete d_ptr;
 }
 
-void KoToolBase::deactivate()
+void KToolBase::deactivate()
 {
 }
 
-void KoToolBase::resourceChanged(int key, const QVariant & res)
+void KToolBase::resourceChanged(int key, const QVariant & res)
 {
     Q_UNUSED(key);
     Q_UNUSED(res);
 }
 
-bool KoToolBase::wantsAutoScroll() const
+bool KToolBase::wantsAutoScroll() const
 {
     return true;
 }
 
-void KoToolBase::mouseDoubleClickEvent(KPointerEvent *event)
+void KToolBase::mouseDoubleClickEvent(KPointerEvent *event)
 {
     event->ignore();
 }
 
-void KoToolBase::keyPressEvent(QKeyEvent *e)
+void KToolBase::keyPressEvent(QKeyEvent *e)
 {
     e->ignore();
 }
 
-void KoToolBase::keyReleaseEvent(QKeyEvent *e)
+void KToolBase::keyReleaseEvent(QKeyEvent *e)
 {
     e->ignore();
 }
 
-void KoToolBase::wheelEvent(KPointerEvent * e)
+void KToolBase::wheelEvent(KPointerEvent * e)
 {
     e->ignore();
 }
 
-QVariant KoToolBase::inputMethodQuery(Qt::InputMethodQuery query, const KoViewConverter &) const
+QVariant KToolBase::inputMethodQuery(Qt::InputMethodQuery query, const KoViewConverter &) const
 {
-    Q_D(const KoToolBase);
+    Q_D(const KToolBase);
     if (d->canvas->canvasWidget() == 0)
         return QVariant();
 
@@ -102,7 +102,7 @@ QVariant KoToolBase::inputMethodQuery(Qt::InputMethodQuery query, const KoViewCo
     }
 }
 
-void KoToolBase::inputMethodEvent(QInputMethodEvent * event)
+void KToolBase::inputMethodEvent(QInputMethodEvent * event)
 {
     if (! event->commitString().isEmpty()) {
         QKeyEvent ke(QEvent::KeyPress, -1, 0, event->commitString());
@@ -111,16 +111,16 @@ void KoToolBase::inputMethodEvent(QInputMethodEvent * event)
     event->accept();
 }
 
-void KoToolBase::setCursor(const QCursor &cursor)
+void KToolBase::setCursor(const QCursor &cursor)
 {
-    Q_D(KoToolBase);
+    Q_D(KToolBase);
     d->currentCursor = cursor;
     emit cursorChanged(d->currentCursor);
 }
 
-QMap<QString, QWidget *> KoToolBase::optionWidgets()
+QMap<QString, QWidget *> KToolBase::optionWidgets()
 {
-    Q_D(KoToolBase);
+    Q_D(KToolBase);
     if (d->createdOptionWidgets == false) {
         d->optionWidgets = createOptionWidgets();
         d->createdOptionWidgets = true;
@@ -128,17 +128,17 @@ QMap<QString, QWidget *> KoToolBase::optionWidgets()
     return d->optionWidgets;
 }
 
-void KoToolBase::addAction(const QString &name, KAction *action, ReadWrite readWrite)
+void KToolBase::addAction(const QString &name, KAction *action, ReadWrite readWrite)
 {
-    Q_D(KoToolBase);
+    Q_D(KToolBase);
     d->actionCollection.insert(name, action);
     if (readWrite == ReadOnlyAction)
         d->readOnlyActions.insert(action);
 }
 
-QHash<QString, KAction*> KoToolBase::actions(ReadWrite readWrite) const
+QHash<QString, KAction*> KToolBase::actions(ReadWrite readWrite) const
 {
-    Q_D(const KoToolBase);
+    Q_D(const KToolBase);
     QHash<QString, KAction*> answer = d->actionCollection;
     if (readWrite == ReadOnlyAction) {
         QHash<QString, KAction*>::Iterator iter = answer.begin();
@@ -152,18 +152,18 @@ QHash<QString, KAction*> KoToolBase::actions(ReadWrite readWrite) const
     return answer;
 }
 
-KAction *KoToolBase::action(const QString &name) const
+KAction *KToolBase::action(const QString &name) const
 {
-    Q_D(const KoToolBase);
+    Q_D(const KToolBase);
     return d->actionCollection.value(name);
 }
 
-QWidget * KoToolBase::createOptionWidget()
+QWidget * KToolBase::createOptionWidget()
 {
     return 0;
 }
 
-QMap<QString, QWidget *>  KoToolBase::createOptionWidgets()
+QMap<QString, QWidget *>  KToolBase::createOptionWidgets()
 {
     QMap<QString, QWidget *> ow;
     if (QWidget *widget = createOptionWidget()) {
@@ -175,60 +175,60 @@ QMap<QString, QWidget *>  KoToolBase::createOptionWidgets()
     return ow;
 }
 
-void KoToolBase::setToolId(const QString &id)
+void KToolBase::setToolId(const QString &id)
 {
-    Q_D(KoToolBase);
+    Q_D(KToolBase);
     d->toolId = id;
 }
 
-QString KoToolBase::toolId() const
+QString KToolBase::toolId() const
 {
-    Q_D(const KoToolBase);
+    Q_D(const KToolBase);
     return d->toolId;
 }
 
-QCursor KoToolBase::cursor() const
+QCursor KToolBase::cursor() const
 {
-    Q_D(const KoToolBase);
+    Q_D(const KToolBase);
     return d->currentCursor;
 }
 
-void KoToolBase::deleteSelection()
+void KToolBase::deleteSelection()
 {
 }
 
-void KoToolBase::cut()
+void KToolBase::cut()
 {
     copy();
     deleteSelection();
 }
 
-QList<QAction*> KoToolBase::popupActionList() const
+QList<QAction*> KToolBase::popupActionList() const
 {
-    Q_D(const KoToolBase);
+    Q_D(const KToolBase);
     return d->popupActionList;
 }
 
-void KoToolBase::setPopupActionList(const QList<QAction*> &list)
+void KToolBase::setPopupActionList(const QList<QAction*> &list)
 {
-    Q_D(KoToolBase);
+    Q_D(KToolBase);
     d->popupActionList = list;
 }
 
-KCanvasBase * KoToolBase::canvas() const
+KCanvasBase * KToolBase::canvas() const
 {
-    Q_D(const KoToolBase);
+    Q_D(const KToolBase);
     return d->canvas;
 }
 
-void KoToolBase::setStatusText(const QString &statusText)
+void KToolBase::setStatusText(const QString &statusText)
 {
     emit statusTextChanged(statusText);
 }
 
-QRectF KoToolBase::handleGrabRect(const QPointF &position) const
+QRectF KToolBase::handleGrabRect(const QPointF &position) const
 {
-    Q_D(const KoToolBase);
+    Q_D(const KToolBase);
     const KoViewConverter * converter = d->canvas->viewConverter();
     uint handleSize = 2*d->canvas->resourceManager()->grabSensitivity();
     QRectF r = converter->viewToDocument(QRectF(0, 0, handleSize, handleSize));
@@ -236,9 +236,9 @@ QRectF KoToolBase::handleGrabRect(const QPointF &position) const
     return r;
 }
 
-QRectF KoToolBase::handlePaintRect(const QPointF &position) const
+QRectF KToolBase::handlePaintRect(const QPointF &position) const
 {
-    Q_D(const KoToolBase);
+    Q_D(const KToolBase);
     const KoViewConverter * converter = d->canvas->viewConverter();
     uint handleSize = 2*d->canvas->resourceManager()->handleRadius();
     QRectF r = converter->viewToDocument(QRectF(0, 0, handleSize, handleSize));
@@ -246,57 +246,57 @@ QRectF KoToolBase::handlePaintRect(const QPointF &position) const
     return r;
 }
 
-void KoToolBase::setTextMode(bool value)
+void KToolBase::setTextMode(bool value)
 {
-    Q_D(KoToolBase);
+    Q_D(KToolBase);
     d->isInTextMode=value;
 }
 
-QStringList KoToolBase::supportedPasteMimeTypes() const
+QStringList KToolBase::supportedPasteMimeTypes() const
 {
     return QStringList();
 }
 
-bool KoToolBase::paste()
+bool KToolBase::paste()
 {
     return false;
 }
 
-void KoToolBase::copy() const
+void KToolBase::copy() const
 {
 }
 
-KoToolSelection *KoToolBase::selection()
+KoToolSelection *KToolBase::selection()
 {
     return 0;
 }
 
-void KoToolBase::repaintDecorations()
+void KToolBase::repaintDecorations()
 {
 }
 
-void KoToolBase::setReadWrite(bool readWrite)
+void KToolBase::setReadWrite(bool readWrite)
 {
-    Q_D(KoToolBase);
+    Q_D(KToolBase);
     d->readWrite = readWrite;
 }
 
-bool KoToolBase::isReadWrite() const
+bool KToolBase::isReadWrite() const
 {
-    Q_D(const KoToolBase);
+    Q_D(const KToolBase);
     return d->readWrite;
 }
 
-bool KoToolBase::isInTextMode() const
+bool KToolBase::isInTextMode() const
 {
-    Q_D(const KoToolBase);
+    Q_D(const KToolBase);
     return d->isInTextMode;
 }
 
-KoToolBasePrivate *KoToolBase::priv()
+KoToolBasePrivate *KToolBase::priv()
 {
-    Q_D(KoToolBase);
+    Q_D(KToolBase);
     return d;
 }
 
-#include <KoToolBase.moc>
+#include <KToolBase.moc>

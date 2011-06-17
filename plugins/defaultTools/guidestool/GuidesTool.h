@@ -21,7 +21,7 @@
 #ifndef GUIDESTOOL_H
 #define GUIDESTOOL_H
 
-#include <KoToolBase.h>
+#include <KToolBase.h>
 
 #include <QString>
 #include <QPair>
@@ -31,30 +31,30 @@ class GuidesTransaction;
 class InsertGuidesToolOptionWidget;
 class GuidesToolOptionWidget;
 
-class GuidesTool : public KoToolBase
+class GuidesTool : public KToolBase
 {
     Q_OBJECT
 
 public:
     explicit GuidesTool(KCanvasBase *canvas);
     virtual ~GuidesTool();
-    /// reimplemented form KoToolBase
+    /// reimplemented form KToolBase
     virtual void paint(QPainter &painter, const KoViewConverter &converter);
-    /// reimplemented form KoToolBase
+    /// reimplemented form KToolBase
     virtual void mousePressEvent(KPointerEvent *event);
-    /// reimplemented form KoToolBase
+    /// reimplemented form KToolBase
     virtual void mouseMoveEvent(KPointerEvent *event);
-    /// reimplemented form KoToolBase
+    /// reimplemented form KToolBase
     virtual void mouseReleaseEvent(KPointerEvent *event);
-    /// reimplemented form KoToolBase
+    /// reimplemented form KToolBase
     virtual void mouseDoubleClickEvent(KPointerEvent *event);
-    /// reimplemented form KoToolBase
+    /// reimplemented form KToolBase
     virtual void repaintDecorations();
-    /// reimplemented form KoToolBase
+    /// reimplemented form KToolBase
     virtual void activate(ToolActivation toolActivation, const QSet<KShape*> &shapes);
-    /// reimplemented form KoToolBase
+    /// reimplemented form KToolBase
     virtual void deactivate();
-    /// reimplemented form KoToolBase
+    /// reimplemented form KToolBase
     virtual QMap<QString, QWidget*> createOptionWidgets();
     void moveGuideLine(Qt::Orientation orientation, int index);
     void editGuideLine(Qt::Orientation orientation, int index);
@@ -66,7 +66,7 @@ private slots:
     void updateGuidePosition(qreal position);
     void guideLineSelected(Qt::Orientation orientation, int index);
     void guideLinesChanged(Qt::Orientation orientation);
-    /// reimplemented from KoToolBase
+    /// reimplemented from KToolBase
     virtual void resourceChanged(int key, const QVariant &res);
 
     void insertorCreateGuidesSlot(GuidesTransaction* result);

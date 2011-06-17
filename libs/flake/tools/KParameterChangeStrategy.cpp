@@ -22,7 +22,7 @@
 #include "KParameterShape.h"
 #include "commands/KParameterHandleMoveCommand_p.h"
 
-KParameterChangeStrategy::KParameterChangeStrategy(KoToolBase *tool, KParameterShape *parameterShape, int handleId)
+KParameterChangeStrategy::KParameterChangeStrategy(KToolBase *tool, KParameterShape *parameterShape, int handleId)
         : KInteractionStrategy(tool)
         , m_parameterShape(parameterShape)
         , m_handleId(handleId)

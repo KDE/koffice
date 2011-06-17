@@ -42,13 +42,13 @@
 
 class QWidget;
 class KAction;
-class KoToolBase;
+class KToolBase;
 class KCanvasBase;
 
 class KoToolBasePrivate
 {
 public:
-    KoToolBasePrivate(KoToolBase *qq, KCanvasBase *canvas_)
+    KoToolBasePrivate(KToolBase *qq, KCanvasBase *canvas_)
         : currentCursor(Qt::ArrowCursor),
         q(qq),
         canvas(canvas_),
@@ -73,7 +73,7 @@ public:
     QString toolId;
     QList<QAction*> popupActionList;
     QSet<KAction*> readOnlyActions;
-    KoToolBase *q;
+    KToolBase *q;
     KCanvasBase *canvas; ///< the canvas interface this tool will work for.
     bool readWrite;
     bool isInTextMode;

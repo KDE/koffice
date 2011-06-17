@@ -30,7 +30,7 @@
 
 class KCanvasController;
 class KCanvasBase;
-class KoToolBase;
+class KToolBase;
 class KCreateShapesTool;
 class KActionCollection;
 class KShape;
@@ -142,7 +142,7 @@ public:
      *    who's tool you want.
      * @see addController()
      */
-    KoToolBase *toolById(KCanvasBase *canvas, const QString &id) const;
+    KToolBase *toolById(KCanvasBase *canvas, const QString &id) const;
 
     /// @return the currently active pointing device
     KInputDevice currentInputDevice() const;

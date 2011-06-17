@@ -20,7 +20,7 @@
 #ifndef KARBONCALLIGRAPHYTOOL_H
 #define KARBONCALLIGRAPHYTOOL_H
 
-#include <KoToolBase.h>
+#include <KToolBase.h>
 #include <KPathShape.h>
 #include <QtCore/QPointer>
 
@@ -30,7 +30,7 @@ class KPathPoint;
 class KarbonCalligraphicShape;
 class KarbonCalligraphyOptionWidget;
 
-class KarbonCalligraphyTool : public KoToolBase
+class KarbonCalligraphyTool : public KToolBase
 {
     Q_OBJECT
 public:

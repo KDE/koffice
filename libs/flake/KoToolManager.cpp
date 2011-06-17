@@ -76,10 +76,10 @@ public:
         delete dummyToolWidget;
     }
 
-    KoToolBase *activeTool;     // active Tool
+    KToolBase *activeTool;     // active Tool
     QString activeToolId;   // the id of the active Tool
     QString activationShapeId; // the shape-type (KShape::shapeId()) the activeTool 'belongs' to.
-    QHash<QString, KoToolBase*> allTools; // all the tools that are created for this canvas.
+    QHash<QString, KToolBase*> allTools; // all the tools that are created for this canvas.
     QStack<QString> stack; // stack of temporary tools
     KCanvasController *const canvas;
     const KInputDevice inputDevice;
@@ -102,7 +102,7 @@ KoToolManager::Private::~Private()
     // helper method.
 CanvasData *KoToolManager::Private::createCanvasData(KCanvasController *controller, KInputDevice device)
 {
-    QHash<QString, KoToolBase*> origHash;
+    QHash<QString, KToolBase*> origHash;
     if (canvasses.contains(controller))
         origHash = canvasses.value(controller).first()->allTools;
 
@@ -110,7 +110,7 @@ CanvasData *KoToolManager::Private::createCanvasData(KCanvasController *controll
     if (controller->canvas())
         readWrite = controller->canvas()->isReadWrite();
 
-    QHash<QString, KoToolBase*> toolsHash;
+    QHash<QString, KToolBase*> toolsHash;
     foreach(ToolHelper *tool, tools) {
         if (tool->inputDeviceAgnostic() && origHash.contains(tool->id())) {
             // reuse ones that are marked as inputDeviceAgnostic();
@@ -122,7 +122,7 @@ CanvasData *KoToolManager::Private::createCanvasData(KCanvasController *controll
             continue;
         }
         kDebug(30006) << "Creating tool" << tool->id() << ". Activated on:" << tool->activationShapeId() << ", prio:" << tool->priority();
-        KoToolBase *tl = tool->createTool(controller->canvas());
+        KToolBase *tl = tool->createTool(controller->canvas());
         Q_ASSERT(tl);
         tl->setReadWrite(readWrite);
         uniqueToolIds.insert(tl, tool->uniqueId());
@@ -173,7 +173,7 @@ void KoToolManager::Private::setup()
         connect(tool, SIGNAL(toolActivated(ToolHelper*)), q, SLOT(toolActivated(ToolHelper*)));
 }
 
-void KoToolManager::Private::switchTool(KoToolBase *tool, bool temporary)
+void KoToolManager::Private::switchTool(KToolBase *tool, bool temporary)
 {
     Q_ASSERT(tool);
     if (canvasData == 0)
@@ -199,8 +199,8 @@ void KoToolManager::Private::switchTool(KoToolBase *tool, bool temporary)
 
     if (newActiveTool) {
         foreach(KAction *action, canvasData->activeTool->actions(
-                    canvasData->activeTool->isReadWrite() ? KoToolBase::ReadWriteAction
-                    : KoToolBase::ReadOnlyAction)) {
+                    canvasData->activeTool->isReadWrite() ? KToolBase::ReadWriteAction
+                    : KToolBase::ReadOnlyAction)) {
             action->setEnabled(false);
         }
         // repaint the decorations before we deactivate the tool as it might deleted
@@ -255,7 +255,7 @@ void KoToolManager::Private::switchTool(const QString &id, bool temporary)
     if (canvasData->activeTool && temporary)
         canvasData->stack.push(canvasData->activeToolId);
     canvasData->activeToolId = id;
-    KoToolBase *tool = canvasData->allTools.value(id);
+    KToolBase *tool = canvasData->allTools.value(id);
     if (! tool) {
         kWarning(30006) << "KoToolManager::switchTool() " << (temporary ? "temporary" : "") << " got request to unknown tool: '" << id << "'";
         return;
@@ -291,11 +291,11 @@ void KoToolManager::Private::postSwitchTool(bool temporary)
     Q_ASSERT(canvasData);
     if (!canvasData) return;
 
-    KoToolBase::ToolActivation toolActivation;
+    KToolBase::ToolActivation toolActivation;
     if (temporary)
-        toolActivation = KoToolBase::TemporaryActivation;
+        toolActivation = KToolBase::TemporaryActivation;
     else
-        toolActivation = KoToolBase::DefaultActivation;
+        toolActivation = KToolBase::DefaultActivation;
     QSet<KShape*> shapesToOperateOn;
     if (canvasData->activeTool
             && canvasData->activeTool->canvas()
@@ -369,7 +369,7 @@ void KoToolManager::Private::toolActivated(ToolHelper *tool)
 
     Q_ASSERT(canvasData);
     if (!canvasData) return;
-    KoToolBase *t = canvasData->allTools.value(tool->id());
+    KToolBase *t = canvasData->allTools.value(tool->id());
     Q_ASSERT(t);
 
     canvasData->activeToolId = tool->id();
@@ -410,16 +410,16 @@ void KoToolManager::Private::detachCanvas(KCanvasController *controller)
     if (proxy)
         proxy->setActiveTool(0);
 
-    QList<KoToolBase *> tools;
+    QList<KToolBase *> tools;
     foreach(CanvasData *canvasData, canvasses.value(controller)) {
-        foreach(KoToolBase *tool, canvasData->allTools) {
+        foreach(KToolBase *tool, canvasData->allTools) {
             if (! tools.contains(tool)) {
                 tools.append(tool);
             }
         }
         delete canvasData;
     }
-    foreach(KoToolBase *tool, tools) {
+    foreach(KToolBase *tool, tools) {
         uniqueToolIds.remove(tool);
         delete tool;
     }
@@ -625,7 +625,7 @@ void KoToolManager::Private::switchInputDevice(const KInputDevice &device)
 
     // disable all actions for all tools in the all canvasdata objects for this canvas.
     foreach(CanvasData *cd, items) {
-        foreach(KoToolBase* tool, cd->allTools) {
+        foreach(KToolBase* tool, cd->allTools) {
             foreach(KAction* action, tool->actions()) {
                 action->setEnabled(false);
             }
@@ -762,7 +762,7 @@ void KoToolManager::registerTools(KActionCollection *ac, KCanvasController *cont
         return;
     }
     CanvasData *cd = d->canvasses.value(controller).first();
-    foreach(KoToolBase *tool, cd->allTools) {
+    foreach(KToolBase *tool, cd->allTools) {
         QHash<QString, KAction*> actions = tool->actions();
         QHash<QString, KAction*>::const_iterator it(actions.constBegin());
         for (; it != actions.constEnd(); ++it) {
@@ -815,7 +815,7 @@ KCreateShapesTool * KoToolManager::shapeCreatorTool(KCanvasBase *canvas) const
     return 0;
 }
 
-KoToolBase *KoToolManager::toolById(KCanvasBase *canvas, const QString &id) const
+KToolBase *KoToolManager::toolById(KCanvasBase *canvas, const QString &id) const
 {
     Q_ASSERT(canvas);
     foreach(KCanvasController *controller, d->canvasses.keys()) {
@@ -895,19 +895,19 @@ void KoToolManager::updateReadWrite(KCanvasController *cc, bool readWrite)
 {
     if (d->canvasData && d->canvasData->activeTool
             && d->canvasData->activeTool->isReadWrite() != readWrite) {
-        KoToolBase *tl = d->canvasData->activeTool;
+        KToolBase *tl = d->canvasData->activeTool;
         if (readWrite) { // enable all
             foreach (KAction *action, tl->actions())
                 action->setEnabled(true);
         } else { // disable all destructive actions
-            QList<KAction*> actionsToEnable = tl->actions(KoToolBase::ReadOnlyAction).values();
+            QList<KAction*> actionsToEnable = tl->actions(KToolBase::ReadOnlyAction).values();
             foreach (KAction *action, tl->actions()) {
                 action->setEnabled(actionsToEnable.contains(action));
             }
         }
     }
     foreach (CanvasData *data, d->canvasses.value(cc)) {
-        foreach (KoToolBase *tool, data->allTools) {
+        foreach (KToolBase *tool, data->allTools) {
             tool->setReadWrite(readWrite);
         }
     }

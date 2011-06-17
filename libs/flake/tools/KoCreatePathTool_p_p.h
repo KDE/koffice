@@ -44,7 +44,7 @@
 #include "KShapeManager.h"
 #include "KResourceManager.h"
 #include "KSnapStrategy_p.h"
-#include "KoToolBase_p.h"
+#include "KToolBase_p.h"
 
 /// Small helper to keep track of a path point and its parent path shape
 struct PathConnectionPoint {

@@ -31,7 +31,7 @@
 class KCreateShapesToolPrivate : public KInteractionToolPrivate
 {
 public:
-    KCreateShapesToolPrivate(KoToolBase *qq, KCanvasBase *canvas)
+    KCreateShapesToolPrivate(KToolBase *qq, KCanvasBase *canvas)
         : KInteractionToolPrivate(qq, canvas),
         newShapeProperties(0)
     {
@@ -59,7 +59,7 @@ void KCreateShapesTool::paint(QPainter &painter, const KoViewConverter &converte
 void KCreateShapesTool::mouseReleaseEvent(KPointerEvent *event)
 {
     KInteractionTool::mouseReleaseEvent(event);
-    emit KoToolBase::done();
+    emit KToolBase::done();
 }
 
 void KCreateShapesTool::activate(ToolActivation, const QSet<KShape*> &)

@@ -41,20 +41,20 @@ public:
     explicit KarbonFilterEffectsTool(KCanvasBase *canvas);
     virtual ~KarbonFilterEffectsTool();
 
-    /// reimplemented from KoToolBase
+    /// reimplemented from KToolBase
     virtual void paint(QPainter &painter, const KoViewConverter &converter);
-    /// reimplemented from KoToolBase
+    /// reimplemented from KToolBase
     virtual void repaintDecorations();
-    /// reimplemented from KoToolBase
+    /// reimplemented from KToolBase
     virtual void mouseMoveEvent(KPointerEvent *event);
 
-    /// reimplemented from KoToolBase
+    /// reimplemented from KToolBase
     virtual void activate(ToolActivation toolActivation, const QSet<KShape*> &shapes);
 
 protected:
-    /// reimplemented from KoToolBase
+    /// reimplemented from KToolBase
     virtual QMap<QString, QWidget *> createOptionWidgets();
-    /// reimplemented from KoToolBase
+    /// reimplemented from KToolBase
     virtual KInteractionStrategy *createStrategy(KPointerEvent *event);
 private slots:
     void editFilter();

@@ -12,7 +12,7 @@
  * Flake is a middle layer between the applications and the content providers.
  * The applications will allow flake to be plugged in by implementing the
  * KCanvasController interface while providers of content (like a chart engine
- * or a text component) will extend KShape and optionally KoToolBase to do their
+ * or a text component) will extend KShape and optionally KToolBase to do their
  * work.
  *
  * A <b>shape</b> is a rectangle or a text or a movie.  A shape paints itself and has content.

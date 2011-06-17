@@ -63,11 +63,11 @@ QString ToolHelper::toolTip() const
     return m_toolFactory->toolTip();
 }
 
-KoToolBase *ToolHelper::createTool(KCanvasBase *canvas) const
+KToolBase *ToolHelper::createTool(KCanvasBase *canvas) const
 {
     if (! canCreateTool(canvas))
         return 0;
-    KoToolBase *tool = m_toolFactory->createTool(canvas);
+    KToolBase *tool = m_toolFactory->createTool(canvas);
     tool->setToolId(id());
     return tool;
 }

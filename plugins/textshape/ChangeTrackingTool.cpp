@@ -52,7 +52,7 @@
 #include <QVBoxLayout>
 #include <QVector>
 
-ChangeTrackingTool::ChangeTrackingTool(KCanvasBase* canvas): KoToolBase(canvas),
+ChangeTrackingTool::ChangeTrackingTool(KCanvasBase* canvas): KToolBase(canvas),
     m_disableShowChangesOnExit(false),
     m_textEditor(0),
     m_textShapeData(0),
@@ -284,7 +284,7 @@ QVector<QRectF> *ChangeTrackingTool::textRect ( int startPosition, int endPositi
 
 void ChangeTrackingTool::keyPressEvent(QKeyEvent* event)
 {
-    KoToolBase::keyPressEvent(event);
+    KToolBase::keyPressEvent(event);
 }
 
 void ChangeTrackingTool::activate(ToolActivation toolActivation, const QSet<KShape*> &shapes)

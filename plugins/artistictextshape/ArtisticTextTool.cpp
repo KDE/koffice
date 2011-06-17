@@ -171,7 +171,7 @@ class ArtisticTextTool::RemoveTextRangeCommand : public QUndoCommand
 
 
 ArtisticTextTool::ArtisticTextTool(KCanvasBase *canvas)
-    : KoToolBase(canvas), m_currentShape(0), m_path(0), m_tmpPath(0), m_textCursor( -1 ), m_showCursor( true )
+    : KToolBase(canvas), m_currentShape(0), m_path(0), m_tmpPath(0), m_textCursor( -1 ), m_showCursor( true )
 {
     m_attachPath  = new QAction(KIcon("artistictext-attach-path"), i18n("Attach Path"), this);
     m_attachPath->setEnabled( false );

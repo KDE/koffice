@@ -28,7 +28,7 @@
 #include <QTransform>
 
 class KCanvasBase;
-class KoToolBase;
+class KToolBase;
 class KShape;
 
 /**
@@ -45,7 +45,7 @@ public:
      * @param clicked the initial point that the user depressed (in pt).
      * @param direction the handle that was grabbed
      */
-    ShapeShearStrategy(KoToolBase *tool, const QPointF &clicked, KoFlake::SelectionHandle direction);
+    ShapeShearStrategy(KToolBase *tool, const QPointF &clicked, KoFlake::SelectionHandle direction);
     virtual ~ShapeShearStrategy() {}
 
     void handleMouseMove(const QPointF &mouseLocation, Qt::KeyboardModifiers modifiers);

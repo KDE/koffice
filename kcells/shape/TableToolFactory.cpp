@@ -39,7 +39,7 @@ TableToolFactory::~TableToolFactory()
 {
 }
 
-KoToolBase* TableToolFactory::createTool(KCanvasBase* canvas)
+KToolBase* TableToolFactory::createTool(KCanvasBase* canvas)
 {
     return new TableTool(canvas);
 }

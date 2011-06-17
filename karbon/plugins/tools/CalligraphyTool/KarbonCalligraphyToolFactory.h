@@ -29,7 +29,7 @@ public:
     explicit KarbonCalligraphyToolFactory(QObject *parent);
     ~KarbonCalligraphyToolFactory();
 
-    KoToolBase * createTool(KCanvasBase *canvas);
+    KToolBase * createTool(KCanvasBase *canvas);
 };
 
 #endif // _KARBONCALLIGRAPHYTOOLFACTORY_H_

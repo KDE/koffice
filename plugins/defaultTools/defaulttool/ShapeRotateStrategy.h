@@ -28,7 +28,7 @@
 #include <QList>
 
 class KCanvasBase;
-class KoToolBase;
+class KToolBase;
 class KShape;
 
 /**
@@ -44,7 +44,7 @@ public:
      * @param tool the parent tool which controls this strategy
      * @param clicked the initial point that the user depressed (in pt).
      */
-    ShapeRotateStrategy(KoToolBase *tool, const QPointF &clicked, Qt::MouseButtons buttons);
+    ShapeRotateStrategy(KToolBase *tool, const QPointF &clicked, Qt::MouseButtons buttons);
     virtual ~ShapeRotateStrategy() {}
 
     void handleMouseMove(const QPointF &mouseLocation, Qt::KeyboardModifiers modifiers);

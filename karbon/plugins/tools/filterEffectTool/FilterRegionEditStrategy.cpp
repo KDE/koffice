@@ -24,7 +24,7 @@
 #include <KoViewConverter.h>
 #include <QtGui/QPainter>
 
-FilterRegionEditStrategy::FilterRegionEditStrategy(KoToolBase* parent, KShape * shape, KFilterEffect *effect, KarbonFilterEffectsTool::EditMode mode)
+FilterRegionEditStrategy::FilterRegionEditStrategy(KToolBase* parent, KShape * shape, KFilterEffect *effect, KarbonFilterEffectsTool::EditMode mode)
 : KInteractionStrategy(parent), m_effect(effect), m_shape(shape), m_editMode(mode)
 {
     Q_ASSERT(m_effect);

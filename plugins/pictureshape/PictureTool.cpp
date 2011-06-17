@@ -36,7 +36,7 @@
 #include <KPointerEvent.h>
 
 PictureTool::PictureTool( KCanvasBase* canvas )
-    : KoToolBase( canvas ),
+    : KToolBase( canvas ),
       m_pictureshape(0)
 {
 }

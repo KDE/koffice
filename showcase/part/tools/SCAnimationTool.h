@@ -21,13 +21,13 @@
 #ifndef KPRANIMATIONTOOL_H
 #define KPRANIMATIONTOOL_H
 
-#include <KoToolBase.h>
+#include <KToolBase.h>
 
 /**
  * The animation tool (associated with the clapperboard icon) is the tool in Showcase where the user
  * animates shapes and sets up slide transitions.
  */
-class SCAnimationTool : public KoToolBase
+class SCAnimationTool : public KToolBase
 {
     Q_OBJECT
 public:

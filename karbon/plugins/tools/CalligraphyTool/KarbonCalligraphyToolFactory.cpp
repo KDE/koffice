@@ -39,7 +39,7 @@ KarbonCalligraphyToolFactory::~KarbonCalligraphyToolFactory()
 {
 }
 
-KoToolBase * KarbonCalligraphyToolFactory::createTool(KCanvasBase *canvas)
+KToolBase * KarbonCalligraphyToolFactory::createTool(KCanvasBase *canvas)
 {
     return new KarbonCalligraphyTool(canvas);
 }

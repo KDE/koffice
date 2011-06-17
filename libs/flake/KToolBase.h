@@ -50,7 +50,7 @@ class QInputMethodEvent;
  * There exists an instance of every tool for every pointer device.
  * These instances are managed by the toolmanager..
  */
-class FLAKE_EXPORT KoToolBase : public QObject
+class FLAKE_EXPORT KToolBase : public QObject
 {
     Q_OBJECT
 public:
@@ -70,8 +70,8 @@ public:
      * Constructor, normally only called by the factory (see KoToolFactoryBase)
      * @param canvas the canvas interface this tool will work for.
      */
-    explicit KoToolBase(KCanvasBase *canvas);
-    virtual ~KoToolBase();
+    explicit KToolBase(KCanvasBase *canvas);
+    virtual ~KToolBase();
 
     /**
      * request a repaint of the decorations to be made. This triggers
@@ -432,16 +432,16 @@ protected:
     void setTextMode(bool value);
 
 protected:
-    KoToolBase(KoToolBasePrivate &dd);
+    KToolBase(KoToolBasePrivate &dd);
 
     KoToolBasePrivate *d_ptr;
 
 private:
-    KoToolBase();
-    KoToolBase(const KoToolBase&);
-    KoToolBase& operator=(const KoToolBase&);
+    KToolBase();
+    KToolBase(const KToolBase&);
+    KToolBase& operator=(const KToolBase&);
 
-    Q_DECLARE_PRIVATE(KoToolBase)
+    Q_DECLARE_PRIVATE(KToolBase)
 };
 
 #endif /* KOTOOL_H */

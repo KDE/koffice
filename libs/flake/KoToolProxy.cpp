@@ -20,7 +20,7 @@
 #include "KoToolProxy.h"
 #include "KoToolProxy_p.h"
 
-#include "KoToolBase.h"
+#include "KToolBase.h"
 #include "KPointerEvent.h"
 #include "KInputDevice.h"
 #include "KoToolManager_p.h"
@@ -299,7 +299,7 @@ KoToolSelection* KoToolProxy::selection()
     return 0;
 }
 
-void KoToolProxy::setActiveTool(KoToolBase *tool)
+void KoToolProxy::setActiveTool(KToolBase *tool)
 {
     if (d->activeTool)
         disconnect(d->activeTool, SIGNAL(selectionChanged(bool)), this, SLOT(selectionChanged(bool)));

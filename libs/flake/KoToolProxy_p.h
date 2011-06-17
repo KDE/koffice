@@ -36,7 +36,7 @@
 #include <QPointF>
 
 class KPointerEvent;
-class KoToolBase;
+class KToolBase;
 class KCanvasController;
 class KoToolProxy;
 
@@ -56,7 +56,7 @@ public:
     /// the toolManager tells us which KCanvasController this toolProxy is working for.
     void setCanvasController(KCanvasController *controller);
 
-    KoToolBase *activeTool;
+    KToolBase *activeTool;
     bool tabletPressed;
     bool hasSelection;
     QTimer scrollTimer;

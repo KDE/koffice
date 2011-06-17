@@ -50,7 +50,7 @@ void KoZoomTool::mouseReleaseEvent(KPointerEvent *event)
 {
     KInteractionTool::mouseReleaseEvent(event);
     if (m_temporary) {
-        emit KoToolBase::done();
+        emit KToolBase::done();
     }
 }
 

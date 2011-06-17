@@ -34,7 +34,7 @@
 #include <math.h>
 #include <klocale.h>
 
-ShapeRotateStrategy::ShapeRotateStrategy(KoToolBase *tool, const QPointF &clicked, Qt::MouseButtons buttons)
+ShapeRotateStrategy::ShapeRotateStrategy(KToolBase *tool, const QPointF &clicked, Qt::MouseButtons buttons)
     : KInteractionStrategy(tool),
     m_initialBoundingRect(),
     m_start(clicked)

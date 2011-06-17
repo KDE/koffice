@@ -20,7 +20,7 @@
  */
 
 #include "KPanTool_p.h"
-#include "KoToolBase_p.h"
+#include "KToolBase_p.h"
 #include "KPointerEvent.h"
 #include "KCanvasBase.h"
 #include "KCanvasController.h"
@@ -31,7 +31,7 @@
 #include <kdebug.h>
 
 KPanTool::KPanTool(KCanvasBase *canvas)
-        : KoToolBase(canvas),
+        : KToolBase(canvas),
         m_controller(0),
         m_temporary(false)
 {
@@ -112,7 +112,7 @@ void KPanTool::customMoveEvent(KPointerEvent * event)
 
 QPointF KPanTool::documentToViewport(const QPointF &p)
 {
-    Q_D(KoToolBase);
+    Q_D(KToolBase);
     QPointF viewportPoint = d->canvas->viewConverter()->documentToView(p);
     viewportPoint += d->canvas->documentOrigin();
     viewportPoint += QPoint(m_controller->canvasOffsetX(), m_controller->canvasOffsetY());

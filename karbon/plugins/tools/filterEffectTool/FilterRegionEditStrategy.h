@@ -29,7 +29,7 @@ class KFilterEffect;
 class FilterRegionEditStrategy : public KInteractionStrategy
 {
 public:
-    FilterRegionEditStrategy(KoToolBase* parent, KShape * shape, KFilterEffect *effect, KarbonFilterEffectsTool::EditMode mode);
+    FilterRegionEditStrategy(KToolBase* parent, KShape * shape, KFilterEffect *effect, KarbonFilterEffectsTool::EditMode mode);
 
     // reimplemented from KInteractionStrategy
     virtual void handleMouseMove(const QPointF &mouseLocation, Qt::KeyboardModifiers modifiers);

@@ -42,7 +42,7 @@ public:
     KPathToolFactory(QObject *parent);
     ~KPathToolFactory();
 
-    KoToolBase *createTool(KCanvasBase *canvas);
+    KToolBase *createTool(KCanvasBase *canvas);
 };
 
 #endif

@@ -27,7 +27,7 @@
 #include <QList>
 
 class KCanvasBase;
-class KoToolBase;
+class KToolBase;
 class KShape;
 
 /**
@@ -41,7 +41,7 @@ public:
     /**
      * Constructor
      */
-    ShapeResizeStrategy(KoToolBase *tool, const QPointF &clicked, KoFlake::SelectionHandle direction);
+    ShapeResizeStrategy(KToolBase *tool, const QPointF &clicked, KoFlake::SelectionHandle direction);
     virtual ~ShapeResizeStrategy() {}
 
     void handleMouseMove(const QPointF &mouseLocation, Qt::KeyboardModifiers modifiers);

@@ -32,7 +32,7 @@
 #include "SCPlaceholderShape.h"
 
 SCPlaceholderTool::SCPlaceholderTool(KCanvasBase *canvas)
-: KoToolBase(canvas)
+: KToolBase(canvas)
 {
 }
 

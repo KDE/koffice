@@ -42,6 +42,6 @@ public:
     /// constructor
     KoZoomToolFactory(QObject *parent);
 
-    KoToolBase *createTool(KCanvasBase *canvas);
+    KToolBase *createTool(KCanvasBase *canvas);
 };
 #endif

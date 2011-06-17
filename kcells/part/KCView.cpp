@@ -641,7 +641,7 @@ KCView::~KCView()
     // nothing needs to be done in between cause flake does first delete the TableTool
     // on removeCanvasController and the proxytool which points to that TableTool later
     // while the canvasController is destroyed. That means, that we will have a dangling
-    // pointer in the KoToolProxy that points to the KoToolBase the time in between.
+    // pointer in the KoToolProxy that points to the KToolBase the time in between.
     KoToolManager::instance()->removeCanvasController(d->canvasController);
     // NOTE Stefan: Delete the KCCanvas explicitly, even if it has this view as
     //              parent. Otherwise, it leads to crashes, because it tries to

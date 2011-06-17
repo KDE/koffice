@@ -33,7 +33,7 @@
 #include "SCClickActionDocker.h"
 
 SCAnimationTool::SCAnimationTool(KCanvasBase *canvas)
-    : KoToolBase(canvas)
+    : KToolBase(canvas)
 {
 }
 

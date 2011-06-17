@@ -34,7 +34,7 @@
 
 
 
-#include <KoToolBase.h>
+#include <KToolBase.h>
 
 #include <QMap>
 
@@ -49,7 +49,7 @@ class KCreatePathToolPrivate;
 /**
  * Tool for creating path shapes.
  */
-class KCreatePathTool : public KoToolBase
+class KCreatePathTool : public KToolBase
 {
     Q_OBJECT
 public:

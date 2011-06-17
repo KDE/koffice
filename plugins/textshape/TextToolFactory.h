@@ -30,7 +30,7 @@ public:
     explicit TextToolFactory(QObject *parent);
     ~TextToolFactory();
 
-    KoToolBase * createTool(KCanvasBase *canvas);
+    KToolBase * createTool(KCanvasBase *canvas);
 };
 
 #endif

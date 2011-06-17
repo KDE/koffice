@@ -31,7 +31,7 @@ public:
     explicit CalendarToolFactory(QObject* parent, const QVariantList& args);
     ~CalendarToolFactory();
 
-    KoToolBase* createTool(KCanvasBase* canvas);
+    KToolBase* createTool(KCanvasBase* canvas);
 };
 
 #endif // KSPREAD_CALENDAR_TOOL_FACTORY

@@ -39,7 +39,7 @@ KarbonPencilToolFactory::~KarbonPencilToolFactory()
 {
 }
 
-KoToolBase * KarbonPencilToolFactory::createTool(KCanvasBase *canvas)
+KToolBase * KarbonPencilToolFactory::createTool(KCanvasBase *canvas)
 {
     return new KarbonPencilTool(canvas);
 }

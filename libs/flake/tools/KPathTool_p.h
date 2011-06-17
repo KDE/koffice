@@ -36,7 +36,7 @@
 
 
 #include "../KPathShape.h"
-#include "../KoToolBase.h"
+#include "../KToolBase.h"
 #include "KPathToolSelection_p.h"
 
 class QButtonGroup;
@@ -48,7 +48,7 @@ class PathToolOptionWidget;
 class KAction;
 
 /// The tool for editing a KPathShape or a KParameterShape
-class FLAKE_TEST_EXPORT KPathTool : public KoToolBase
+class FLAKE_TEST_EXPORT KPathTool : public KToolBase
 {
     Q_OBJECT
 public:
@@ -148,7 +148,7 @@ private:
 
     PathToolOptionWidget *m_toolOptionWidget;
 
-    Q_DECLARE_PRIVATE(KoToolBase)
+    Q_DECLARE_PRIVATE(KToolBase)
 };
 
 #endif

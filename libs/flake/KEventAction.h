@@ -24,7 +24,7 @@
 
 class KShapeLoadingContext;
 class KShapeSavingContext;
-class KoToolBase;
+class KToolBase;
 class KXmlElement;
 
 /**

@@ -36,7 +36,7 @@
 #include <QtGui/QPainter>
 
 GuidesTool::GuidesTool(KCanvasBase *canvas)
-    : KoToolBase(canvas),
+    : KToolBase(canvas),
     m_orientation(Qt::Horizontal),
     m_index(-1),
     m_position(0),
@@ -109,7 +109,7 @@ void GuidesTool::activate(ToolActivation toolActivation, const QSet<KShape*> &)
         setCursor(m_orientation == Qt::Horizontal ? Qt::SizeVerCursor : Qt::SizeHorCursor);
     else
         setCursor(Qt::ArrowCursor);
-    if (toolActivation == KoToolBase::TemporaryActivation)
+    if (toolActivation == KToolBase::TemporaryActivation)
         canvas()->canvasWidget()->grabMouse();
 
     if (m_options) {

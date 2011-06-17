@@ -47,7 +47,7 @@ public:
      * @param parameterShape the parametric shapes the strategy is working on
      * @param handleId the id of the handle to modify
      */
-    KParameterChangeStrategy(KoToolBase *tool, KParameterShape *parameterShape, int handleId);
+    KParameterChangeStrategy(KToolBase *tool, KParameterShape *parameterShape, int handleId);
     virtual ~KParameterChangeStrategy();
 
     virtual void handleMouseMove(const QPointF &mouseLocation, Qt::KeyboardModifiers modifiers);

@@ -33,7 +33,7 @@
  * to create flake tools.
  *
  * XXX: Make it possible for this class to load not just flake tools,
-   but also the app-specific KoToolBase-based tools. (BSAR)
+   but also the app-specific KToolBase-based tools. (BSAR)
  */
 class FLAKE_EXPORT KoToolRegistry : public QObject, public KGenericRegistry<KoToolFactoryBase*>
 {
