@@ -26,7 +26,7 @@
 #include "KInsets.h"
 #include <QTextDocument>
 
-class KoTextShapeDataBasePrivate;
+class KTextShapeDataBasePrivate;
 class KXmlElement;
 class KShapeLoadingContext;
 class KShapeSavingContext;
@@ -74,9 +74,9 @@ public:
 
 protected:
     /// constructor
-    KTextShapeDataBase(KoTextShapeDataBasePrivate &);
+    KTextShapeDataBase(KTextShapeDataBasePrivate &);
 
-    KoTextShapeDataBasePrivate *d_ptr;
+    KTextShapeDataBasePrivate *d_ptr;
 
 private:
     Q_DECLARE_PRIVATE(KTextShapeDataBase)

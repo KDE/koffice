@@ -37,11 +37,11 @@
 class QTextDocument;
 
 /// \internal
-class FLAKE_EXPORT KoTextShapeDataBasePrivate
+class FLAKE_EXPORT KTextShapeDataBasePrivate
 {
 public:
-    KoTextShapeDataBasePrivate();
-    virtual ~KoTextShapeDataBasePrivate();
+    KTextShapeDataBasePrivate();
+    virtual ~KTextShapeDataBasePrivate();
 
     QTextDocument *document;
     KInsets margins;

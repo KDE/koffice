@@ -59,7 +59,7 @@
 #include <KUndoStack>
 #include <QUndoCommand>
 
-class KoTextShapeDataPrivate : public KoTextShapeDataBasePrivate
+class KoTextShapeDataPrivate : public KTextShapeDataBasePrivate
 {
 public:
     KoTextShapeDataPrivate()

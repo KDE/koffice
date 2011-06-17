@@ -20,17 +20,17 @@
 #include "KTextShapeDataBase.h"
 #include "KTextShapeDataBase_p.h"
 
-KoTextShapeDataBasePrivate::KoTextShapeDataBasePrivate()
+KTextShapeDataBasePrivate::KTextShapeDataBasePrivate()
         : document(0),
         textAlignment(Qt::AlignLeft | Qt::AlignTop)
 {
 }
 
-KoTextShapeDataBasePrivate::~KoTextShapeDataBasePrivate()
+KTextShapeDataBasePrivate::~KTextShapeDataBasePrivate()
 {
 }
 
-KTextShapeDataBase::KTextShapeDataBase(KoTextShapeDataBasePrivate &dd)
+KTextShapeDataBase::KTextShapeDataBase(KTextShapeDataBasePrivate &dd)
     : d_ptr(&dd)
 {
 }
