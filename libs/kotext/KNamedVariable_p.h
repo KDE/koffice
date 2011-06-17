@@ -33,8 +33,8 @@
 #include "KVariable.h"
 
 /**
- * This inlineObject shows the curent value of a variable as registered in the KoVariableManager.
- * The proper way to create a new class is to use KoVariableManager::createVariable()
+ * This inlineObject shows the curent value of a variable as registered in the KVariableManager.
+ * The proper way to create a new class is to use KVariableManager::createVariable()
  */
 class KNamedVariable : public KVariable
 {
@@ -48,10 +48,10 @@ public:
     virtual void saveOdf(KShapeSavingContext &context);
 
 protected:
-    friend class KoVariableManager;
+    friend class KVariableManager;
     /**
      * Constructor
-     * @param key the property that represents the named variable. As defined internally in the KoVariableManager
+     * @param key the property that represents the named variable. As defined internally in the KVariableManager
      * @param name the name of the variable.
      */
     KNamedVariable(Property key, const QString &name);

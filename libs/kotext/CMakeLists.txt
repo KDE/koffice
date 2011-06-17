@@ -30,7 +30,7 @@ set(kotext_LIB_SRCS
     InsertTextLocator.cpp
     KInlineObject.cpp
     KVariable.cpp
-    KoVariableManager.cpp
+    KVariableManager.cpp
     KNamedVariable.cpp
     KTextLocator.cpp
     KTextReference.cpp
@@ -136,7 +136,7 @@ install(
     KTextPaste.h
     KTextShapeData.h
     KVariable.h
-    KoVariableManager.h
+    KVariableManager.h
     KoTextRdfCore.h
     KTextInlineRdf.h
     KTextMeta.h

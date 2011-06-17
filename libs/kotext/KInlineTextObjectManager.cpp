@@ -169,12 +169,12 @@ QString KInlineTextObjectManager::stringProperty(KInlineObject::Property key) co
     return qvariant_cast<QString>(m_properties.value(key));
 }
 
-const KoVariableManager *KInlineTextObjectManager::variableManager() const
+const KVariableManager *KInlineTextObjectManager::variableManager() const
 {
     return &m_variableManager;
 }
 
-KoVariableManager *KInlineTextObjectManager::variableManager()
+KVariableManager *KInlineTextObjectManager::variableManager()
 {
     return &m_variableManager;
 }

@@ -21,7 +21,7 @@
 
 #include "KInlineObject.h"
 #include "KoBookmarkManager.h"
-#include "KoVariableManager.h"
+#include "KVariableManager.h"
 #include "kotext_export.h"
 
 // Qt + kde
@@ -113,11 +113,11 @@ public:
     /**
      * Return the variableManager.
      */
-    const KoVariableManager *variableManager() const;
+    const KVariableManager *variableManager() const;
     /**
      * Return the variableManager.
      */
-    KoVariableManager *variableManager();
+    KVariableManager *variableManager();
     /**
      * Return the bookmarkManager.
      */
@@ -131,7 +131,7 @@ public:
      * The actions assume that the text tool is selected, if thats not the case then they will silently fail.
      * @param host the canvas for which these actions are created.  Note that the actions will get these
      *  actions as a parent (for memory management purposes) as well.
-     * @see KoVariableManager
+     * @see KVariableManager
      */
     QList<QAction*> createInsertVariableActions(KCanvasBase *host) const;
 
@@ -156,7 +156,7 @@ private:
     int m_lastObjectId;
     QHash<int, QVariant> m_properties;
 
-    KoVariableManager m_variableManager;
+    KVariableManager m_variableManager;
     KoBookmarkManager m_bookmarkManager;
 };
 

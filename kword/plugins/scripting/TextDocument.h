@@ -61,7 +61,7 @@ public:
         return 0;
     }
 
-    KoVariableManager* variableManager() {
+    KVariableManager* variableManager() {
         KInlineTextObjectManager* objmanager = inlineTextObjectManager();
         return objmanager ? objmanager->variableManager() : 0;
     }
@@ -167,17 +167,17 @@ public slots:
 
     /** Return a list of all variablenames. */
     QStringList variableNames() {
-        KoVariableManager* manager = variableManager();
+        KVariableManager* manager = variableManager();
         return manager ? QStringList(manager->variables()) : QStringList();
     }
     /** Return the value of a variable. */
     QString variableValue(const QString& variablename) {
-        KoVariableManager* manager = variableManager();
+        KVariableManager* manager = variableManager();
         return manager ? manager->value(variablename) : QString();
     }
     /** Set the value of a variable. */
     bool setVariableValue(const QString& variablename, const QString& value) {
-        KoVariableManager* manager = variableManager();
+        KVariableManager* manager = variableManager();
         if (! manager) return false;
         manager->setValue(variablename, value);
         return true;
@@ -198,7 +198,7 @@ public slots:
             kDebug(32010) << "No textobjectmanager";
             return false;
         }
-        KoVariableManager* varmanager = variableManager();
+        KVariableManager* varmanager = variableManager();
         KVariable* variable = varmanager ? varmanager->createVariable(variablename) : 0;
         if (! variable) {
             kDebug(32010) << (varmanager ? "No variable" : "No variablemanager");
@@ -209,7 +209,7 @@ public slots:
     }
     /** Remove an existing variable. */
     void removeVariable(const QString& variablename) {
-        KoVariableManager* manager = variableManager();
+        KVariableManager* manager = variableManager();
         if (manager) manager->remove(variablename);
     }
 

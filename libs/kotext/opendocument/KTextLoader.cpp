@@ -49,7 +49,7 @@
 #include "KTextSharedLoadingData.h"
 #include <KUnit.h>
 #include <KVariable.h>
-#include <KoVariableManager.h>
+#include <KVariableManager.h>
 #include <KInlineObjectRegistry.h>
 #include <KOdfXmlNS.h>
 #include <KXmlReader.h>
@@ -659,7 +659,7 @@ void KTextLoader::loadBody(const KXmlElement &bodyElem, QTextCursor &cursor)
                             if (layout) {
                                 KInlineTextObjectManager *textObjectManager = layout->inlineTextObjectManager();
                                 if (textObjectManager) {
-                                    KoVariableManager *varManager = textObjectManager->variableManager();
+                                    KVariableManager *varManager = textObjectManager->variableManager();
                                     if (varManager) {
                                         textObjectManager->insertInlineObject(cursor, obj);
                                     }
@@ -1681,7 +1681,7 @@ void KTextLoader::loadSpan(const KXmlElement &element, QTextCursor &cursor, bool
                 if (layout) {
                     KInlineTextObjectManager *textObjectManager = layout->inlineTextObjectManager();
                     if (textObjectManager) {
-                        KoVariableManager *varManager = textObjectManager->variableManager();
+                        KVariableManager *varManager = textObjectManager->variableManager();
                         if (varManager) {
                             textObjectManager->insertInlineObject(cursor, obj, cursor.charFormat());
                         }

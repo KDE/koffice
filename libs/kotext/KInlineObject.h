@@ -81,7 +81,7 @@ public:
         KPresenterStart = 5000,  ///< Base number for kpresenter specific values.
         KritaStart = 6000,       ///< Base number for krita specific values.
         KWordStart = 7000,       ///< Base number for kword specific values.
-        VariableManagerStart = 8000, ///< Start of numbers reserved for the KoVariableManager
+        VariableManagerStart = 8000, ///< Start of numbers reserved for the KVariableManager
         User = 12000
     };
 

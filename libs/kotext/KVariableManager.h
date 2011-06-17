@@ -33,20 +33,20 @@ class KoVariableManagerPrivate;
  * These initially exist solely in the variableManager as such name/value pairs
  * and can be managed by setValue(), value() and remove().
  * When the user chooses to use one of these pairs in the text-document he can create a
- * new KVariable by calling KoVariableManager::createVariable()
+ * new KVariable by calling KVariableManager::createVariable()
  * use that and insert that into the text-document.
  * Changing the value will lead to directly change the value of all variables
  * inserted into the document.
  * @see KInlineTextObjectManager::createInsertVariableActions()
  * @see KInlineTextObjectManager::variableManager()
  */
-class KOTEXT_EXPORT KoVariableManager : public QObject
+class KOTEXT_EXPORT KVariableManager : public QObject
 {
     Q_OBJECT
 public:
     /// constructor
-    explicit KoVariableManager(KInlineTextObjectManager *inlineObjectManager);
-    ~KoVariableManager();
+    explicit KVariableManager(KInlineTextObjectManager *inlineObjectManager);
+    ~KVariableManager();
 
     /**
      * Set or create a variable to the new value.

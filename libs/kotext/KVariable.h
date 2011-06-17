@@ -34,7 +34,7 @@ class KShape;
 class KShapeLoadingContext;
 class KProperties;
 class QWidget;
-class KoVariableManager;
+class KVariableManager;
 class KoVariablePrivate;
 
 /**
