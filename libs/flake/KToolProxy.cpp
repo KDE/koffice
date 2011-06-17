@@ -34,7 +34,7 @@
 #include <kdebug.h>
 #include <QTimer>
 
-KoToolProxyPrivate::KoToolProxyPrivate(KToolProxy *p)
+KToolProxyPrivate::KToolProxyPrivate(KToolProxy *p)
     : activeTool(0),
     tabletPressed(false),
     hasSelection(false),
@@ -45,7 +45,7 @@ KoToolProxyPrivate::KoToolProxyPrivate(KToolProxy *p)
     mouseLeaveWorkaround = false;
 }
 
-void KoToolProxyPrivate::timeout() // Auto scroll the canvas
+void KToolProxyPrivate::timeout() // Auto scroll the canvas
 {
     Q_ASSERT(controller);
     int offsetX = controller->canvasOffsetX();
@@ -65,7 +65,7 @@ void KoToolProxyPrivate::timeout() // Auto scroll the canvas
     activeTool->mouseMoveEvent(&ev);
 }
 
-void KoToolProxyPrivate::checkAutoScroll(const KPointerEvent &event)
+void KToolProxyPrivate::checkAutoScroll(const KPointerEvent &event)
 {
     if (controller == 0) return;
     if (!activeTool) return;
@@ -77,7 +77,7 @@ void KoToolProxyPrivate::checkAutoScroll(const KPointerEvent &event)
         scrollTimer.start();
 }
 
-void KoToolProxyPrivate::selectionChanged(bool newSelection)
+void KToolProxyPrivate::selectionChanged(bool newSelection)
 {
     if (hasSelection == newSelection)
         return;
@@ -85,7 +85,7 @@ void KoToolProxyPrivate::selectionChanged(bool newSelection)
     emit parent->selectionChanged(hasSelection);
 }
 
-bool KoToolProxyPrivate::isActiveLayerEditable()
+bool KToolProxyPrivate::isActiveLayerEditable()
 {
     if (!activeTool)
         return false;
@@ -99,7 +99,7 @@ bool KoToolProxyPrivate::isActiveLayerEditable()
 
 KToolProxy::KToolProxy(KCanvasBase *canvas, QObject *parent)
         : QObject(parent),
-        d(new KoToolProxyPrivate(this))
+        d(new KToolProxyPrivate(this))
 {
     KToolManager::instance()->priv()->registerToolProxy(this, canvas);
 
@@ -311,7 +311,7 @@ void KToolProxy::setActiveTool(KToolBase *tool)
     }
 }
 
-void KoToolProxyPrivate::setCanvasController(KCanvasController *c)
+void KToolProxyPrivate::setCanvasController(KCanvasController *c)
 {
     controller = c;
 }
@@ -373,7 +373,7 @@ void KToolProxy::processEvent(QEvent *e) const
     }
 }
 
-KoToolProxyPrivate *KToolProxy::priv()
+KToolProxyPrivate *KToolProxy::priv()
 {
     return d;
 }

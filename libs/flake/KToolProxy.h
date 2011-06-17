@@ -37,7 +37,7 @@ class KoToolSelection;
 class KToolBase;
 class KCanvasBase;
 class KCanvasController;
-class KoToolProxyPrivate;
+class KToolProxyPrivate;
 class QInputMethodEvent;
 
 /**
@@ -118,7 +118,7 @@ public:
     void setActiveTool(KToolBase *tool);
 
     /// \internal
-    KoToolProxyPrivate *priv();
+    KToolProxyPrivate *priv();
 
 signals:
     /**
@@ -138,8 +138,8 @@ private:
     Q_PRIVATE_SLOT(d, void timeout())
     Q_PRIVATE_SLOT(d, void selectionChanged(bool))
 
-    friend class KoToolProxyPrivate;
-    KoToolProxyPrivate * const d;
+    friend class KToolProxyPrivate;
+    KToolProxyPrivate * const d;
 };
 
 #endif // _KO_TOOL_PROXY_H_

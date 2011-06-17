@@ -40,10 +40,10 @@ class KToolBase;
 class KCanvasController;
 class KToolProxy;
 
-class KoToolProxyPrivate
+class KToolProxyPrivate
 {
 public:
-    KoToolProxyPrivate(KToolProxy *p);
+    KToolProxyPrivate(KToolProxy *p);
 
     void timeout(); // Auto scroll the canvas
 
