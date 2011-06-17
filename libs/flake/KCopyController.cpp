@@ -22,7 +22,7 @@
 #include <KToolBase.h>
 #include <KCanvasBase.h>
 #include <KToolProxy.h>
-#include <KoToolSelection.h>
+#include <KToolSelection.h>
 
 #include <KDebug>
 #include <QAction>

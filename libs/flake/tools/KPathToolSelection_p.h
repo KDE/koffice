@@ -35,7 +35,7 @@
 //
 
 
-#include <KoToolSelection.h>
+#include <KToolSelection.h>
 #include <KPathShape.h>
 
 class KPathTool;
@@ -50,7 +50,7 @@ class QPainter;
 * This class handles the selection of points. It makes sure
 * the canvas is repainted when the selection changes.
 */
-class FLAKE_TEST_EXPORT KPathToolSelection : public KoToolSelection
+class FLAKE_TEST_EXPORT KPathToolSelection : public KToolSelection
 {
     Q_OBJECT
 
@@ -154,7 +154,7 @@ public:
     */
     void update();
 
-    /// reimplemented from KoToolSelection
+    /// reimplemented from KToolSelection
     virtual bool hasSelection();
 
 signals:

@@ -82,7 +82,7 @@ public:
     virtual void deleteSelection();
 
     /// reimplemented
-    virtual KoToolSelection* selection();
+    virtual KToolSelection* selection();
 
     /// repaints the specified rect
     void repaint(const QRectF &repaintRect);

@@ -54,7 +54,7 @@ set(flake_SRCS
     KParameterShape.cpp
     KPointerEvent.cpp
     KShapeController.cpp
-    KoToolSelection.cpp
+    KToolSelection.cpp
     KShapeLayer.cpp
     KPostscriptPaintDevice.cpp
     KInputDevice.cpp
@@ -299,7 +299,7 @@ install(
     KToolManager.h
     KToolProxy.h
     KToolRegistry.h
-    KoToolSelection.h
+    KToolSelection.h
     KoViewConverter.h
     tools/KCreateShapesTool.h
     tools/KInteractionStrategy.h

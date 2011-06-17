@@ -79,7 +79,7 @@ public:
     ///reimplemented
     virtual QStringList supportedPasteMimeTypes() const;
     ///reimplemented
-    virtual KoToolSelection* selection();
+    virtual KToolSelection* selection();
 
     /**
      * Returns which selection handle is at params point (or NoHandle if none).
@@ -169,7 +169,7 @@ private:
     QCursor m_rotateCursors[8];
     QCursor m_shearCursors[8];
     qreal m_angle;
-    KoToolSelection *m_selectionHandler;
+    KToolSelection *m_selectionHandler;
     friend class SelectionHandler;
 
     class GuideLine;

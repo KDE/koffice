@@ -100,7 +100,7 @@ public:
     virtual void repaintDecorations();
 
     /// reimplemented from superclass
-    virtual KoToolSelection* selection();
+    virtual KToolSelection* selection();
     /// reimplemented from superclass
     virtual QWidget *createOptionWidget();
     /// reimplemented from superclass

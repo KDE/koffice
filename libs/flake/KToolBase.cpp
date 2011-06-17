@@ -266,7 +266,7 @@ void KToolBase::copy() const
 {
 }
 
-KoToolSelection *KToolBase::selection()
+KToolSelection *KToolBase::selection()
 {
     return 0;
 }

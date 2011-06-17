@@ -33,7 +33,7 @@ class QMouseEvent;
 class QKeyEvent;
 class QWheelEvent;
 class QTabletEvent;
-class KoToolSelection;
+class KToolSelection;
 class KToolBase;
 class KCanvasBase;
 class KCanvasController;
@@ -104,7 +104,7 @@ public:
     /**
      * Proxies for KToolBase::selection()
      */
-    KoToolSelection *selection();
+    KToolSelection *selection();
 
     /// Forwarded to the current KToolBase
     void cut();

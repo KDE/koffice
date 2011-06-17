@@ -25,7 +25,7 @@
 
 #include <KOdfGenericChange.h>
 #include "KoText.h"
-#include <KoToolSelection.h>
+#include <KToolSelection.h>
 
 #include <QClipboard>
 #include <QMetaType>
@@ -44,7 +44,7 @@ class QString;
 class QUndoCommand;
 class KoTextEditorPrivate;
 
-class KOTEXT_EXPORT KoTextEditor: public KoToolSelection
+class KOTEXT_EXPORT KoTextEditor: public KToolSelection
 {
     Q_OBJECT
 public:

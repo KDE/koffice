@@ -24,7 +24,7 @@
 #include <QColor>
 #include <QList>
 
-#include <KoToolSelection.h>
+#include <KToolSelection.h>
 
 #include <kdebug.h>
 
@@ -42,7 +42,7 @@ class CellEditor;
  * \author Torben Weis <weis@kde.org>
  * \author Stefan Nikolaus <stefan.nikolaus@kdemail.net>
  */
-class KCELLS_EXPORT Selection : public KoToolSelection, public KCRegion
+class KCELLS_EXPORT Selection : public KToolSelection, public KCRegion
 {
     Q_OBJECT
 

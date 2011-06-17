@@ -35,7 +35,7 @@
 
 #include <KPointerEvent.h>
 #include <KShapeConnection.h>
-#include <KoToolSelection.h>
+#include <KToolSelection.h>
 #include <KToolManager.h>
 #include <KGuidesData.h>
 #include <KShapeController.h>
@@ -62,11 +62,11 @@
 
 #define HANDLE_DISTANCE 10
 
-class SelectionHandler : public KoToolSelection
+class SelectionHandler : public KToolSelection
 {
 public:
     SelectionHandler(DefaultTool *parent)
-        : KoToolSelection(parent), m_selection(parent->koSelection())
+        : KToolSelection(parent), m_selection(parent->koSelection())
     {
         Q_ASSERT(m_selection);
     }
@@ -1269,7 +1269,7 @@ void DefaultTool::updateActions()
     emit selectionChanged(selection->count());
 }
 
-KoToolSelection* DefaultTool::selection()
+KToolSelection* DefaultTool::selection()
 {
     return m_selectionHandler;
 }

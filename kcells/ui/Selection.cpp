@@ -110,7 +110,7 @@ public:
 ****************************************************************************/
 
 Selection::Selection(KCanvasBase* canvasBase)
-        : KoToolSelection(0)
+        : KToolSelection(0)
         , KCRegion(1, 1)
         , d(new Private())
 {
@@ -118,7 +118,7 @@ Selection::Selection(KCanvasBase* canvasBase)
 }
 
 Selection::Selection(const Selection& selection)
-        : KoToolSelection(selection.parent())
+        : KToolSelection(selection.parent())
         , KCRegion()
         , d(new Private())
 {

@@ -1570,7 +1570,7 @@ QRectF TextTool::textRect(int startPosition, int endPosition) const
     return QRectF(0, line1.y(), 10E6, line2.y() + line2.height() - line1.y());
 }
 
-KoToolSelection* TextTool::selection()
+KToolSelection* TextTool::selection()
 {
     return m_textEditor.data();
 }

@@ -299,7 +299,7 @@ void KoTextEditorPrivate::clearCharFormatProperty(int property)
 
 
 KoTextEditor::KoTextEditor(QTextDocument *document)
-    : KoToolSelection(document),
+    : KToolSelection(document),
     d (new KoTextEditorPrivate(this, document))
 {
     connect (d->document, SIGNAL (undoCommandAdded()), this, SLOT (documentCommandAdded()));

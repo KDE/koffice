@@ -968,7 +968,7 @@ void KPathTool::deleteSelection()
     removePoints();
 }
 
-KoToolSelection * KPathTool::selection()
+KToolSelection * KPathTool::selection()
 {
     return &m_pointSelection;
 }

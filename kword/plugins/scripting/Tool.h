@@ -77,7 +77,7 @@ public:
     }
     virtual ~Tool() {}
 
-    KoToolSelection* toolSelection() const {
+    KToolSelection* toolSelection() const {
         return m_toolproxy ? m_toolproxy->selection() : 0;
     }
     KoTextEditor* textSelection() const {

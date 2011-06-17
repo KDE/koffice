@@ -31,7 +31,7 @@ class KShape;
 class KCanvasBase;
 class KPointerEvent;
 class KoViewConverter;
-class KoToolSelection;
+class KToolSelection;
 class KToolBasePrivate;
 
 class KAction;
@@ -108,7 +108,7 @@ public:
      * Each tool can have a selection which is private to that tool and the specified shape that it comes with.
      * The default returns 0.
      */
-    virtual KoToolSelection *selection();
+    virtual KToolSelection *selection();
 
     /**
      * Retrieves the entire collection of actions for the tool.

@@ -24,7 +24,7 @@
 #include "KPointerEvent.h"
 #include "KInputDevice.h"
 #include "KToolManager_p.h"
-#include "KoToolSelection.h"
+#include "KToolSelection.h"
 #include "KCanvasBase.h"
 #include "KCanvasController.h"
 #include "KShapeManager.h"
@@ -292,7 +292,7 @@ void KToolProxy::inputMethodEvent(QInputMethodEvent *event)
     if (d->activeTool) d->activeTool->inputMethodEvent(event);
 }
 
-KoToolSelection* KToolProxy::selection()
+KToolSelection* KToolProxy::selection()
 {
     if (d->activeTool)
         return d->activeTool->selection();

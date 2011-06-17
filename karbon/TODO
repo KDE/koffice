@@ -39,7 +39,7 @@ Filters:
 
 Cleanup:
 --------
-- move cut, paste, copy, deleteSelection into KoToolSelection -> patch to Zagge
+- move cut, paste, copy, deleteSelection into KToolSelection -> patch to Zagge
 - remove selection order actions and use the ones from the default tool
 - make gradient and pattern tool dockers smaller
 - port away from deprecated plugin loading macros:
