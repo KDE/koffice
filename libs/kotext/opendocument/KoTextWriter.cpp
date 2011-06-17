@@ -50,7 +50,7 @@
 #include "KTextInlineRdf.h"
 #include "../KDocumentRdfBase.h"
 
-#include "KoTextMeta.h"
+#include "KTextMeta.h"
 #include "KoBookmark.h"
 
 #include <KShapeSavingContext.h>
@@ -820,14 +820,14 @@ void KoTextWriter::Private::saveParagraph(const QTextBlock &block, int from, int
                 if (!dynamic_cast<KDeleteChangeMarker*>(inlineObject)) {
                     bool saveInlineObject = true;
 
-                    if (KoTextMeta* z = dynamic_cast<KoTextMeta*>(inlineObject)) {
+                    if (KTextMeta* z = dynamic_cast<KTextMeta*>(inlineObject)) {
                         if (z->textPosition() < from) {
                             //
                             // This <text:meta> starts before the selection, default
                             // to not saving it with special cases to allow saving
                             //
                             saveInlineObject = false;
-                            if (z->type() == KoTextMeta::StartBookmark) {
+                            if (z->type() == KTextMeta::StartBookmark) {
                                 if (z->endBookmark()->textPosition() > from) {
                                     //
                                     // They have selected something starting after the
@@ -883,11 +883,11 @@ void KoTextWriter::Private::saveParagraph(const QTextBlock &block, int from, int
                     // Track the end marker for matched pairs so we produce valid
                     // ODF
                     //
-                    if (KoTextMeta* z = dynamic_cast<KoTextMeta*>(inlineObject)) {
+                    if (KTextMeta* z = dynamic_cast<KTextMeta*>(inlineObject)) {
                         kDebug(30015) << "found kometa, type:" << z->type();
-                        if (z->type() == KoTextMeta::StartBookmark)
+                        if (z->type() == KTextMeta::StartBookmark)
                             pairedInlineObjectStack.append(z->endBookmark());
-                        if (z->type() == KoTextMeta::EndBookmark
+                        if (z->type() == KTextMeta::EndBookmark
                                 && !pairedInlineObjectStack.isEmpty())
                             pairedInlineObjectStack.removeLast();
                     } else if (KoBookmark* z = dynamic_cast<KoBookmark*>(inlineObject)) {

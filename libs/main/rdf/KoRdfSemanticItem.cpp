@@ -28,7 +28,7 @@
 #include <KCanvasBase.h>
 #include <KoToolProxy.h>
 #include <KoBookmark.h>
-#include <KoTextMeta.h>
+#include <KTextMeta.h>
 #include <KTextDocument.h>
 
 #include <kdebug.h>
@@ -250,7 +250,7 @@ void KoRdfSemanticItem::insert(KCanvasBase *host)
     KTextDocument ktd(editor->document());
     KoChangeTrackerDisabledRAII disableChangeTracker(ktd.changeTracker());
 
-    KoTextMeta *startmark = new KoTextMeta();
+    KTextMeta *startmark = new KTextMeta();
     editor->insertInlineObject(startmark);
     KTextInlineRdf *inlineRdf(new KTextInlineRdf((QTextDocument*)editor->document(), startmark));
 
@@ -281,7 +281,7 @@ void KoRdfSemanticItem::insert(KCanvasBase *host)
 
     //
     // Use stylesheets to format the display of the newly inserted
-    // semitem. To do this, there needs to be a start and end KoTextMeta
+    // semitem. To do this, there needs to be a start and end KTextMeta
     // and they have to be properly linked. So first the name() is inserted
     // and the endmark inserted so that the stylesheet system has a valid
     // begin <-> end range. To make the docker happy, we move the cursor back
@@ -290,7 +290,7 @@ void KoRdfSemanticItem::insert(KCanvasBase *host)
     //
     editor->insertText(name());
 
-    KoTextMeta *endmark = new KoTextMeta();
+    KTextMeta *endmark = new KTextMeta();
     editor->insertInlineObject(endmark);
     startmark->setEndBookmark(endmark);
 

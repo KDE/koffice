@@ -39,7 +39,7 @@
 #include <KTextInlineRdf.h>
 #include <KInlineTextObjectManager.h>
 #include <KoBookmark.h>
-#include <KoTextMeta.h>
+#include <KTextMeta.h>
 
 #include <kconfig.h>
 #include <kdebug.h>
@@ -902,12 +902,12 @@ QPair<int, int> KoDocumentRdf::findExtent(QTextCursor &cursor)
                             return QPair<int, int>(bm->textPosition(), e->textPosition());
                     }
                 }
-                if (KoTextMeta *bm = dynamic_cast<KoTextMeta*>(inlineObject)) {
-                    if (bm->type() == KoTextMeta::EndBookmark) {
+                if (KTextMeta *bm = dynamic_cast<KTextMeta*>(inlineObject)) {
+                    if (bm->type() == KTextMeta::EndBookmark) {
                         continue;
                     }
-                    if (bm->type() == KoTextMeta::StartBookmark) {
-                        KoTextMeta *e = bm->endBookmark();
+                    if (bm->type() == KTextMeta::StartBookmark) {
+                        KTextMeta *e = bm->endBookmark();
                         if (e && e->textPosition() < searchStartPosition)
                             continue;
                         else
@@ -951,12 +951,12 @@ QPair<int, int> KoDocumentRdf::findExtent(KoTextEditor *handler)
                             return QPair<int, int>(bm->textPosition(), e->textPosition());
                     }
                 }
-                if (KoTextMeta *bm = dynamic_cast<KoTextMeta*>(inlineObject)) {
-                    if (bm->type() == KoTextMeta::EndBookmark) {
+                if (KTextMeta *bm = dynamic_cast<KTextMeta*>(inlineObject)) {
+                    if (bm->type() == KTextMeta::EndBookmark) {
                         continue;
                     }
-                    if (bm->type() == KoTextMeta::StartBookmark) {
-                        KoTextMeta *e = bm->endBookmark();
+                    if (bm->type() == KTextMeta::StartBookmark) {
+                        KTextMeta *e = bm->endBookmark();
                         if (e && e->textPosition() < searchStartPosition)
                             continue;
                         else
@@ -997,12 +997,12 @@ QString KoDocumentRdf::findXmlId(KoTextEditor *handler)
                             continue;
                     }
                 }
-                if (KoTextMeta *bm = dynamic_cast<KoTextMeta*>(inlineObject)) {
-                    if (bm->type() == KoTextMeta::EndBookmark) {
+                if (KTextMeta *bm = dynamic_cast<KTextMeta*>(inlineObject)) {
+                    if (bm->type() == KTextMeta::EndBookmark) {
                         continue;
                     }
-                    if (bm->type() == KoTextMeta::StartBookmark) {
-                        KoTextMeta *e = bm->endBookmark();
+                    if (bm->type() == KTextMeta::StartBookmark) {
+                        KTextMeta *e = bm->endBookmark();
                         if (e && e->textPosition() < searchStartPosition)
                             continue;
                     }
@@ -1052,12 +1052,12 @@ QString KoDocumentRdf::findXmlId(QTextCursor &cursor)
                             continue;
                     }
                 }
-                if (KoTextMeta *bm = dynamic_cast<KoTextMeta*>(inlineObject)) {
-                    if (bm->type() == KoTextMeta::EndBookmark) {
+                if (KTextMeta *bm = dynamic_cast<KTextMeta*>(inlineObject)) {
+                    if (bm->type() == KTextMeta::EndBookmark) {
                         continue;
                     }
-                    if (bm->type() == KoTextMeta::StartBookmark) {
-                        KoTextMeta *e = bm->endBookmark();
+                    if (bm->type() == KTextMeta::StartBookmark) {
+                        KTextMeta *e = bm->endBookmark();
                         if (e && e->textPosition() < searchStartPosition)
                             continue;
                     }
@@ -1110,15 +1110,15 @@ Soprano::Model *KoDocumentRdf::findStatements(QTextCursor &cursor, int depth)
                             continue;
                     }
                 }
-                if (KoTextMeta *bm = dynamic_cast<KoTextMeta*>(inlineObject)) {
+                if (KTextMeta *bm = dynamic_cast<KTextMeta*>(inlineObject)) {
                     RDEBUG << "have KoMeta type:" << bm->type() << " at:" <<  tc.position() << endl;
-                    if (bm->type() == KoTextMeta::EndBookmark) {
+                    if (bm->type() == KTextMeta::EndBookmark) {
                         RDEBUG << "end text:meta, cursor:" << searchStartPosition;
                         RDEBUG << " end.pos:" << bm->textPosition();
                         continue;
                     }
-                    if (bm->type() == KoTextMeta::StartBookmark) {
-                        KoTextMeta *e = bm->endBookmark();
+                    if (bm->type() == KTextMeta::StartBookmark) {
+                        KTextMeta *e = bm->endBookmark();
 
                         RDEBUG << "start text:meta, cursor:" << searchStartPosition;
                         RDEBUG << " start.pos:" << bm->textPosition();
@@ -1214,15 +1214,15 @@ Soprano::Model *KoDocumentRdf::findStatements(KoTextEditor *handler, int depth)
                             continue;
                     }
                 }
-                if (KoTextMeta *bm = dynamic_cast<KoTextMeta*>(inlineObject)) {
+                if (KTextMeta *bm = dynamic_cast<KTextMeta*>(inlineObject)) {
                     RDEBUG << "have KoMeta type:" << bm->type() << " at:" <<  tc.position() << endl;
-                    if (bm->type() == KoTextMeta::EndBookmark) {
+                    if (bm->type() == KTextMeta::EndBookmark) {
                         RDEBUG << "end text:meta, cursor:" << searchStartPosition;
                         RDEBUG << " end.pos:" << bm->textPosition();
                         continue;
                     }
-                    if (bm->type() == KoTextMeta::StartBookmark) {
-                        KoTextMeta *e = bm->endBookmark();
+                    if (bm->type() == KTextMeta::StartBookmark) {
+                        KTextMeta *e = bm->endBookmark();
                         RDEBUG << "start text:meta, cursor:" << searchStartPosition;
                         RDEBUG << " start.pos:" << bm->textPosition();
                         if (e) {

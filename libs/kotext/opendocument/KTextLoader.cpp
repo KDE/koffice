@@ -26,7 +26,7 @@
  */
 
 #include "KTextLoader.h"
-#include <KoTextMeta.h>
+#include <KTextMeta.h>
 #include <KoBookmark.h>
 #include <KoBookmarkManager.h>
 #include <KInlineNote.h>
@@ -1595,7 +1595,7 @@ void KTextLoader::loadSpan(const KXmlElement &element, QTextCursor &cursor, bool
             if (layout) {
                 const QTextDocument *document = cursor.block().document();
                 KInlineTextObjectManager *textObjectManager = layout->inlineTextObjectManager();
-                KoTextMeta* startmark = new KoTextMeta();
+                KTextMeta* startmark = new KTextMeta();
                 textObjectManager->insertInlineObject(cursor, startmark);
 
                 // Add inline Rdf here.
@@ -1609,7 +1609,7 @@ void KTextLoader::loadSpan(const KXmlElement &element, QTextCursor &cursor, bool
 
                 loadSpan(ts, cursor, stripLeadingSpace);   // recurse
 
-                KoTextMeta* endmark = new KoTextMeta();
+                KTextMeta* endmark = new KTextMeta();
                 textObjectManager->insertInlineObject(cursor, endmark);
                 startmark->setEndBookmark(endmark);
             }

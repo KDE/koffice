@@ -26,7 +26,7 @@
 #include <KXmlWriter.h>
 #include <KOdfXmlNS.h>
 #include "KoBookmark.h"
-#include "KoTextMeta.h"
+#include "KTextMeta.h"
 #include "KTextBlockData.h"
 #include "styles/KCharacterStyle.h"
 #include "KoTextEditor.h"
@@ -72,7 +72,7 @@ public:
         isObjectAttriuteUsed = false;
         sopranoObjectType = LiteralNode;
     }
-    Private(QTextDocument *doc, KoTextMeta *b)
+    Private(QTextDocument *doc, KTextMeta *b)
             : document(doc),
             bookmark(0),
             kotextmeta(b)
@@ -98,7 +98,7 @@ public:
     // or document and one of bookmark, kotextmeta, ...
     QTextDocument *document;
     KoBookmark *bookmark;
-    KoTextMeta *kotextmeta;
+    KTextMeta *kotextmeta;
     QTextTableCell cell;
 
     QString subject;
@@ -122,7 +122,7 @@ KTextInlineRdf::KTextInlineRdf(QTextDocument *doc, KoBookmark *b)
 {
 }
 
-KTextInlineRdf::KTextInlineRdf(QTextDocument *doc, KoTextMeta *b)
+KTextInlineRdf::KTextInlineRdf(QTextDocument *doc, KTextMeta *b)
         : d(new Private(doc, b))
 {
 }
@@ -215,7 +215,7 @@ QPair<int, int>  KTextInlineRdf::findExtent()
         return QPair<int, int>(d->bookmark->textPosition(), e->textPosition());
     }
     if (d->kotextmeta && d->document) {
-        KoTextMeta *e = d->kotextmeta->endBookmark();
+        KTextMeta *e = d->kotextmeta->endBookmark();
         if (!e) {
             return QPair<int, int>(0, 0);
         }
@@ -244,11 +244,11 @@ QString KTextInlineRdf::object()
         return ret.remove(QChar::ObjectReplacementCharacter);
     }
     if (d->kotextmeta && d->document) {
-        KoTextMeta *e = d->kotextmeta->endBookmark();
+        KTextMeta *e = d->kotextmeta->endBookmark();
         QTextCursor cursor(d->document);
 
         if (!e) {
-            kDebug(30015) << "Broken KoTextMeta, no end tag found!";
+            kDebug(30015) << "Broken KTextMeta, no end tag found!";
             return QString();
         } else {
             cursor.setPosition(d->kotextmeta->textPosition(), QTextCursor::MoveAnchor);

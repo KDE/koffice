@@ -34,7 +34,7 @@ class KXmlElement;
  * Used to indicate an ODF text:meta container. This is very similar to a KoBookmark
  * in that a specific start-end is marked
  */
-class KOTEXT_EXPORT KoTextMeta : public KInlineObject
+class KOTEXT_EXPORT KTextMeta : public KInlineObject
 {
 public:
     enum BookmarkType {
@@ -45,9 +45,9 @@ public:
     /**
      * Constructor
      */
-    KoTextMeta();
+    KTextMeta();
 
-    virtual ~KoTextMeta();
+    virtual ~KTextMeta();
 
     /// reimplemented from super
     void saveOdf(KShapeSavingContext &context);
@@ -67,10 +67,10 @@ public:
     BookmarkType type() const;
 
     // TODO rename to an appropriate method name
-    void setEndBookmark(KoTextMeta *bookmark);
+    void setEndBookmark(KTextMeta *bookmark);
 
     /// @return the end bookmark if the type is StartBookmark
-    KoTextMeta* endBookmark() const; // TODO rename to an appropriate method name
+    KTextMeta* endBookmark() const; // TODO rename to an appropriate method name
 
     /// @return the KShape where this bookmark is located
     KShape *shape() const;

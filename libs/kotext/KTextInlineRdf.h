@@ -28,7 +28,7 @@
 class KXmlWriter;
 class KShapeSavingContext;
 class KoBookmark;
-class KoTextMeta;
+class KTextMeta;
 class KTextInlineRdf;
 class RdfSemanticItem;
 class RdfFoaF;
@@ -74,7 +74,7 @@ class KOTEXT_EXPORT KTextInlineRdf
 public:
     KTextInlineRdf(QTextDocument *doc, const QTextBlock &b);
     KTextInlineRdf(QTextDocument *doc, KoBookmark *b);
-    KTextInlineRdf(QTextDocument *doc, KoTextMeta *b);
+    KTextInlineRdf(QTextDocument *doc, KTextMeta *b);
     KTextInlineRdf(QTextDocument *doc, const QTextTableCell &b);
 
     virtual ~KTextInlineRdf();

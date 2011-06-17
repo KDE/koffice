@@ -18,7 +18,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoTextMeta.h"
+#include "KTextMeta.h"
 
 #include <KShapeLoadingContext.h>
 #include <KShapeSavingContext.h>
@@ -34,26 +34,26 @@
 
 #include <KDebug>
 
-class KoTextMeta::Private
+class KTextMeta::Private
 {
 public:
-    KoTextMeta *endBookmark;
+    KTextMeta *endBookmark;
     BookmarkType type;
 };
 
-KoTextMeta::KoTextMeta()
+KTextMeta::KTextMeta()
         : KInlineObject(false),
         d(new Private())
 {
     d->endBookmark = 0;
 }
 
-KoTextMeta::~KoTextMeta()
+KTextMeta::~KTextMeta()
 {
     delete d;
 }
 
-void KoTextMeta::saveOdf(KShapeSavingContext &context)
+void KTextMeta::saveOdf(KShapeSavingContext &context)
 {
     KXmlWriter &writer = context.xmlWriter();
 
@@ -76,7 +76,7 @@ void KoTextMeta::saveOdf(KShapeSavingContext &context)
     kDebug(30015) << "kom.save() done this:" << (void*)this << " d->type:" << d->type;
 }
 
-bool KoTextMeta::loadOdf(const KXmlElement &element, KShapeLoadingContext &context)
+bool KTextMeta::loadOdf(const KXmlElement &element, KShapeLoadingContext &context)
 {
     Q_UNUSED(element);
     Q_UNUSED(context);
@@ -84,47 +84,47 @@ bool KoTextMeta::loadOdf(const KXmlElement &element, KShapeLoadingContext &conte
     return true;
 }
 
-void KoTextMeta::updatePosition(QTextInlineObject object, const QTextCharFormat &format)
+void KTextMeta::updatePosition(QTextInlineObject object, const QTextCharFormat &format)
 {
     Q_UNUSED(object);
     Q_UNUSED(format);
 }
 
-void KoTextMeta::resize(QTextInlineObject object, const QTextCharFormat &format, QPaintDevice *pd)
+void KTextMeta::resize(QTextInlineObject object, const QTextCharFormat &format, QPaintDevice *pd)
 {
     Q_UNUSED(object);
     Q_UNUSED(pd);
     Q_UNUSED(format);
 }
 
-void KoTextMeta::paint(QPainter &, QPaintDevice *, const QRectF &, QTextInlineObject, const QTextCharFormat &)
+void KTextMeta::paint(QPainter &, QPaintDevice *, const QRectF &, QTextInlineObject, const QTextCharFormat &)
 {
     // nothing to paint.
 }
 
-void KoTextMeta::setType(BookmarkType type)
+void KTextMeta::setType(BookmarkType type)
 {
     d->type = type;
 }
 
-KoTextMeta::BookmarkType KoTextMeta::type() const
+KTextMeta::BookmarkType KTextMeta::type() const
 {
     return d->type;
 }
 
-void KoTextMeta::setEndBookmark(KoTextMeta *bookmark)
+void KTextMeta::setEndBookmark(KTextMeta *bookmark)
 {
     d->type = StartBookmark;
     bookmark->d->type = EndBookmark;
     d->endBookmark = bookmark;
 }
 
-KoTextMeta *KoTextMeta::endBookmark() const
+KTextMeta *KTextMeta::endBookmark() const
 {
     return d->endBookmark;
 }
 
-KShape *KoTextMeta::shape() const
+KShape *KTextMeta::shape() const
 {
     return shapeForPosition(document(), textPosition());
 }
