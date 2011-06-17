@@ -10,7 +10,7 @@ set(kotext_LIB_SRCS
     KTextBlockBorderData.cpp
     KTextBlockPaintStrategyBase.cpp
     KTextDocumentLayout.cpp
-    KoTextOdfSaveHelper.cpp
+    KTextOdfSaveHelper.cpp
     KoTextPaste.cpp
     KTextDocument.cpp
     KoTextEditor.cpp

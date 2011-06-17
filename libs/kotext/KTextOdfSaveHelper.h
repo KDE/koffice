@@ -31,11 +31,11 @@ namespace Soprano
     class Model;
 }
 
-class KOTEXT_EXPORT KoTextOdfSaveHelper : public KDragOdfSaveHelper
+class KOTEXT_EXPORT KTextOdfSaveHelper : public KDragOdfSaveHelper
 {
 public:
-    KoTextOdfSaveHelper(KoTextShapeData * shapeData, int from, int to);
-    virtual ~KoTextOdfSaveHelper();
+    KTextOdfSaveHelper(KoTextShapeData * shapeData, int from, int to);
+    virtual ~KTextOdfSaveHelper();
 
     /// reimplemented
     virtual bool writeBody();

@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoTextOdfSaveHelper.h"
+#include "KTextOdfSaveHelper.h"
 
 #include <KXmlWriter.h>
 #include <KOdf.h>
@@ -28,7 +28,7 @@
 #include <opendocument/KoTextSharedSavingData.h>
 #include "KoTextSopranoRdfModel_p.h"
 
-struct KoTextOdfSaveHelper::Private {
+struct KTextOdfSaveHelper::Private {
     Private(KoTextShapeData *shapeData, int from, int to)
         : shapeData(shapeData),
         from(from),
@@ -47,17 +47,17 @@ struct KoTextOdfSaveHelper::Private {
 };
 
 
-KoTextOdfSaveHelper::KoTextOdfSaveHelper(KoTextShapeData * shapeData, int from, int to)
+KTextOdfSaveHelper::KTextOdfSaveHelper(KoTextShapeData * shapeData, int from, int to)
         : d(new Private(shapeData, from, to))
 {
 }
 
-KoTextOdfSaveHelper::~KoTextOdfSaveHelper()
+KTextOdfSaveHelper::~KTextOdfSaveHelper()
 {
     delete d;
 }
 
-bool KoTextOdfSaveHelper::writeBody()
+bool KTextOdfSaveHelper::writeBody()
 {
     if (d->to < d->from)
         qSwap(d->to, d->from);
@@ -74,7 +74,7 @@ bool KoTextOdfSaveHelper::writeBody()
     return true;
 }
 
-KShapeSavingContext * KoTextOdfSaveHelper::context(KXmlWriter * bodyWriter, KOdfGenericStyles & mainStyles, KOdfEmbeddedDocumentSaver & embeddedSaver)
+KShapeSavingContext * KTextOdfSaveHelper::context(KXmlWriter * bodyWriter, KOdfGenericStyles & mainStyles, KOdfEmbeddedDocumentSaver & embeddedSaver)
 {
 //    Q_ASSERT(d->context == 0);
 
@@ -82,12 +82,12 @@ KShapeSavingContext * KoTextOdfSaveHelper::context(KXmlWriter * bodyWriter, KOdf
     return d->context;
 }
 
-void KoTextOdfSaveHelper::setRdfModel(Soprano::Model *m)
+void KTextOdfSaveHelper::setRdfModel(Soprano::Model *m)
 {
     d->rdfModel = m;
 }
 
-Soprano::Model *KoTextOdfSaveHelper::rdfModel() const
+Soprano::Model *KTextOdfSaveHelper::rdfModel() const
 {
     return d->rdfModel;
 }

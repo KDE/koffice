@@ -60,7 +60,7 @@
 #include <KTextEditingRegistry.h>
 #include <KInlineTextObjectManager.h>
 #include <KStyleManager.h>
-#include <KoTextOdfSaveHelper.h>
+#include <KTextOdfSaveHelper.h>
 #include <KTextDrag.h>
 #include <KTextDocument.h>
 #include <KoTextEditor.h>
@@ -776,7 +776,7 @@ void TextTool::copy() const
         return;
     int from = m_textEditor.data()->position();
     int to = m_textEditor.data()->anchor();
-    KoTextOdfSaveHelper saveHelper(m_textShapeData, from, to);
+    KTextOdfSaveHelper saveHelper(m_textShapeData, from, to);
     KTextDrag drag;
 
     if (KDocumentRdfBase *rdf = KDocumentRdfBase::fromResourceManager(canvas())) {

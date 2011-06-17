@@ -26,7 +26,7 @@
 class QMimeData;
 class QString;
 class QByteArray;
-class KoTextOdfSaveHelper;
+class KTextOdfSaveHelper;
 
 /**
  * Class for simplifying adding a odf text with tracked changes to the clip board
@@ -50,7 +50,7 @@ public:
      * @param mimeType used for creating the odf document
      * @param helper helper for saving the body of the odf document
      */
-    bool setOdf(const char * mimeType, KoTextOdfSaveHelper &helper);
+    bool setOdf(const char * mimeType, KTextOdfSaveHelper &helper);
 
     /**
      * Add additional mimeTypes

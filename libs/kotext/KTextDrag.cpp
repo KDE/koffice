@@ -38,7 +38,7 @@
 #include "KShapeSavingContext.h"
 #include <opendocument/KoTextSharedSavingData.h>
 
-#include "KoTextOdfSaveHelper.h"
+#include "KTextOdfSaveHelper.h"
 
 #ifdef SHOULD_BUILD_RDF
 #include "KoTextRdfCore.h"
@@ -57,7 +57,7 @@ KTextDrag::~KTextDrag()
     }
 }
 
-bool KTextDrag::setOdf(const char * mimeType, KoTextOdfSaveHelper &helper)
+bool KTextDrag::setOdf(const char * mimeType, KTextOdfSaveHelper &helper)
 {
     struct Finally {
         Finally(KOdfStore *s) : store(s) { }

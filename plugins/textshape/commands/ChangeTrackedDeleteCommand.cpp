@@ -38,7 +38,7 @@
 #include <KShapeController.h>
 #include <KoList.h>
 #include <KParagraphStyle.h>
-#include <KoTextOdfSaveHelper.h>
+#include <KTextOdfSaveHelper.h>
 #include <KTextDrag.h>
 #include <KOdf.h>
 #include <KDocumentRdfBase.h>
@@ -160,7 +160,7 @@ void ChangeTrackedDeleteCommand::handleListItemDelete(QTextCursor &selection)
     // Copy the marked item
     int from = selection.anchor();
     int to = selection.position();
-    KoTextOdfSaveHelper saveHelper(m_tool->m_textShapeData, from, to);
+    KTextOdfSaveHelper saveHelper(m_tool->m_textShapeData, from, to);
     KTextDrag drag;
 
     if (KDocumentRdfBase *rdf = KDocumentRdfBase::fromResourceManager(m_tool->canvas())) {
