@@ -45,7 +45,7 @@ set(kotext_LIB_SRCS
     KReplaceStrategy.cpp
     KoFind_p.cpp
     KoFind.cpp
-    KoTextDebug.cpp
+    KTextDebug.cpp
     KoTextPage.cpp
     KPageProvider.cpp
     KTableColumnAndRowStyleManager.cpp

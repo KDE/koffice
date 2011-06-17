@@ -42,7 +42,7 @@
 #include <KTableColumnAndRowStyleManager.h>
 #include <KTextAnchor.h>
 #include <KTextBlockData.h>
-#include "KoTextDebug_p.h"
+#include "KTextDebug_p.h"
 #include "KoTextDocument.h"
 #include <KoTextDocumentLayout.h>
 #include <KoTextShapeData.h>
@@ -444,7 +444,7 @@ void KoTextLoader::loadBody(const KXmlElement &bodyElem, QTextCursor &cursor)
     d->styleManager = KoTextDocument(document).styleManager();
     d->changeTracker = KoTextDocument(document).changeTracker();
 
-    kDebug(32500) << "text-style:" << KoTextDebug::textAttributes(cursor.blockCharFormat());
+    kDebug(32500) << "text-style:" << KTextDebug::textAttributes(cursor.blockCharFormat());
     bool usedParagraph = false; // set to true if we found a tag that used the paragraph, indicating that the next round needs to start a new one.
     if (bodyElem.namespaceURI() == KOdfXmlNS::table && bodyElem.localName() == "table") {
         if (!bodyElem.attributeNS(KOdfXmlNS::delta, "insertion-type").isEmpty())
@@ -992,7 +992,7 @@ could be true; but the following code has no effect... (TZander)
         inlineRdf->loadOdf(element);
         KoTextInlineRdf::attach(inlineRdf, cursor);
     }
-    kDebug(32500) << "text-style:" << KoTextDebug::textAttributes(cursor.blockCharFormat()) << d->currentList << d->currentListStyle;
+    kDebug(32500) << "text-style:" << KTextDebug::textAttributes(cursor.blockCharFormat()) << d->currentList << d->currentListStyle;
 
     bool stripLeadingSpace = true;
     loadSpan(element, cursor, &stripLeadingSpace);
@@ -1052,7 +1052,7 @@ void KoTextLoader::loadHeading(const KXmlElement &element, QTextCursor &cursor)
         KoTextInlineRdf::attach(inlineRdf, cursor);
     }
 
-    kDebug(32500) << "text-style:" << KoTextDebug::textAttributes(cursor.blockCharFormat());
+    kDebug(32500) << "text-style:" << KTextDebug::textAttributes(cursor.blockCharFormat());
 
     QTextCharFormat cf = cursor.charFormat(); // store the current cursor char format
 
@@ -1252,7 +1252,7 @@ void KoTextLoader::loadListItem(KXmlElement &e, QTextCursor &cursor, int level)
 
     if (e.attributeNS(KOdfXmlNS::delta, "insertion-type") != "")
         d->closeChangeRegion(e);
-    kDebug(32500) << "text-style:" << KoTextDebug::textAttributes(cursor.blockCharFormat());
+    kDebug(32500) << "text-style:" << KTextDebug::textAttributes(cursor.blockCharFormat());
 }
 
 bool KoTextLoader::Private::checkForListItemSplit(const KXmlElement &element)
@@ -1459,7 +1459,7 @@ void KoTextLoader::loadText(const QString &fulltext, QTextCursor &cursor,
 
 void KoTextLoader::loadSpan(const KXmlElement &element, QTextCursor &cursor, bool *stripLeadingSpace)
 {
-    kDebug(32500) << "text-style:" << KoTextDebug::textAttributes(cursor.blockCharFormat());
+    kDebug(32500) << "text-style:" << KTextDebug::textAttributes(cursor.blockCharFormat());
     Q_ASSERT(stripLeadingSpace);
     if (d->loadSpanLevel++ == 0)
         d->loadSpanInitialPos = cursor.position();

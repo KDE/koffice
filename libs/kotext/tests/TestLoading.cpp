@@ -44,7 +44,7 @@
 #include <KOdfGenericStyles.h>
 #include <KOdfXmlNS.h>
 #include <kcomponentdata.h>
-#include <KoTextDebug_p.h>
+#include <KTextDebug_p.h>
 #include <KListStyle.h>
 #include <KTableStyle.h>
 #include <KTableCellStyle.h>
@@ -146,8 +146,8 @@ bool TestLoading::compareFragments(const QTextFragment &actualFragment, const QT
 
     if (!equal) {
         qDebug() << "compareFragments: properties mismatch at " << actualFragment.text() << endl
-        << "actual:  " << KoTextDebug::textAttributes(actualFormat) << endl
-        << "expected:" << KoTextDebug::textAttributes(expectedFormat);
+        << "actual:  " << KTextDebug::textAttributes(actualFormat) << endl
+        << "expected:" << KTextDebug::textAttributes(expectedFormat);
     }
 
     return equal;
@@ -237,8 +237,8 @@ bool TestLoading::compareBlockFormats(const QTextBlockFormat &actualFormat, cons
             break;
         }
         if (!match) {
-            qDebug() << "Actual:  " << KoTextDebug::paraAttributes(actualFormat);
-            qDebug() << "Expected:" << KoTextDebug::paraAttributes(expectedFormat);
+            qDebug() << "Actual:  " << KTextDebug::paraAttributes(actualFormat);
+            qDebug() << "Expected:" << KTextDebug::paraAttributes(expectedFormat);
             qDebug() << "At index: QTextFormat::UserProperty + " << id - QTextFormat::UserProperty;
             return false;
         }
@@ -308,9 +308,9 @@ bool TestLoading::compareBlocks(const QTextBlock &actualBlock, const QTextBlock 
         if (!compareListFormats(actualList->format(), expectedList->format())
                 || (actualList->itemNumber(actualBlock) != expectedList->itemNumber(expectedBlock))) {
             qDebug() << "compareBlocks: list properties mismatch at " << actualBlock.text() << endl
-            << "actual:  " << KoTextDebug::listAttributes(actualList->format())
+            << "actual:  " << KTextDebug::listAttributes(actualList->format())
             << actualList->itemNumber(actualBlock) << endl
-            << "expected:" << KoTextDebug::listAttributes(expectedList->format())
+            << "expected:" << KTextDebug::listAttributes(expectedList->format())
             << expectedList->itemNumber(expectedBlock);
             return false;
         }
@@ -441,8 +441,8 @@ bool TestLoading::compareTableCellFormats(QTextTableCellFormat &actualFormat, QT
         }
         }
         if (!match) {
-            qDebug() << "Actual property:   " << KoTextDebug::tableCellAttributes(actualFormat);
-            qDebug() << "Expected property: " << KoTextDebug::tableCellAttributes(expectedFormat);
+            qDebug() << "Actual property:   " << KTextDebug::tableCellAttributes(actualFormat);
+            qDebug() << "Expected property: " << KTextDebug::tableCellAttributes(expectedFormat);
             qDebug() << "At index: QTextTableFormat::UserProperty + " << id + 7001 - QTextFormat::UserProperty;
             return false;
         }
@@ -579,8 +579,8 @@ bool TestLoading::compareTableFormats(QTextTableFormat &actualFormat, QTextTable
             break;
         }
         if (!match) {
-            qDebug() << "Actual property:   " << KoTextDebug::tableAttributes(actualFormat);
-            qDebug() << "Expected property: " << KoTextDebug::tableAttributes(expectedFormat);
+            qDebug() << "Actual property:   " << KTextDebug::tableAttributes(actualFormat);
+            qDebug() << "Expected property: " << KTextDebug::tableAttributes(expectedFormat);
             qDebug() << "At index: QTextTableFormat::UserProperty + " << id - QTextTableFormat::UserProperty;
             return false;
         }
@@ -1151,13 +1151,13 @@ void TestLoading::testLoading()
         QFile file1("failed-loading-" + testName + "-actual");
         if (file1.open(QFile::WriteOnly)) {
             QTextStream out(&file1);
-            KoTextDebug::dumpDocument(actualDocument, out);
+            KTextDebug::dumpDocument(actualDocument, out);
             file1.close();
         }
         QFile file2("failed-loading-" + testName + "-expected");
         if (file2.open(QFile::WriteOnly)) {
             QTextStream out(&file2);
-            KoTextDebug::dumpDocument(expectedDocument, out);
+            KTextDebug::dumpDocument(expectedDocument, out);
             file2.close();
         }
     }
@@ -1197,13 +1197,13 @@ void TestLoading::testSaving()
         QFile file1("failed-saving-" + testName + "-actual");
         if (file1.open(QFile::WriteOnly)) {
             QTextStream out(&file1);
-            KoTextDebug::dumpDocument(savedDocument, out);
+            KTextDebug::dumpDocument(savedDocument, out);
             file1.close();
         }
         QFile file2("failed-saving-" + testName + "-expected");
         if (file2.open(QFile::WriteOnly)) {
             QTextStream out(&file2);
-            KoTextDebug::dumpDocument(expectedDocument, out);
+            KTextDebug::dumpDocument(expectedDocument, out);
             file2.close();
         }
     }

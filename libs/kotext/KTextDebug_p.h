@@ -73,7 +73,7 @@ class KTableCellStyle;
  * cursor.insertText("Hello!\n");
  * cursor.insertHtml("<b>World!</b>");
  *
- * KoTextDebug::dumpDocument(&doc);
+ * KTextDebug::dumpDocument(&doc);
  * @endcode
  *
  * will result in this output:
@@ -98,7 +98,7 @@ class KTableCellStyle;
  *
  * @sa dumpDocument(), dumpFrame(), dumpBlock()
  */
-class KOTEXT_TEST_EXPORT KoTextDebug
+class KOTEXT_TEST_EXPORT KTextDebug
 {
 public:
     /**
@@ -284,9 +284,9 @@ public:
     static QString inlineObjectAttributes(const QTextCharFormat &textFormat);
 
 private:
-    KoTextDebug();
-    KoTextDebug(const KoTextDebug&);
-    KoTextDebug operator=(const KoTextDebug&);
+    KTextDebug();
+    KTextDebug(const KTextDebug&);
+    KTextDebug operator=(const KTextDebug&);
 
     static const QTextDocument *document; /**< Pointer to the debugged document. */
     static int depth;                     /**< Current indentation depth. */

@@ -42,7 +42,7 @@
 #include <KOdfGenericStyles.h>
 #include <KOdfXmlNS.h>
 #include <kcomponentdata.h>
-#include <KoTextDebug_p.h>
+#include <KTextDebug_p.h>
 #include <KListStyle.h>
 #include <KTableStyle.h>
 #include <KTableCellStyle.h>

@@ -18,7 +18,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoTextDebug_p.h"
+#include "KTextDebug_p.h"
 
 #include <QTextDocument>
 #include <QTextDocumentFragment>
@@ -44,9 +44,9 @@
 
 #define PARAGRAPH_BORDER_DEBUG
 
-int KoTextDebug::depth = 0;
-const int KoTextDebug::INDENT = 2;
-const QTextDocument *KoTextDebug::document = 0;
+int KTextDebug::depth = 0;
+const int KTextDebug::INDENT = 2;
+const QTextDocument *KTextDebug::document = 0;
 
 #define dumpIndent(T) { for (int i=0; i<T; ++i) out << ' '; }
 #define dumpList(T) { foreach (const QString &x, T) out << x << ' '; }
@@ -101,7 +101,7 @@ static QString fontProperties(const QTextCharFormat &textFormat)
     return fontProps.join(",");
 }
 
-void KoTextDebug::dumpDocument(const QTextDocument *doc, QTextStream &out)
+void KTextDebug::dumpDocument(const QTextDocument *doc, QTextStream &out)
 {
     Q_ASSERT(doc);
     document = doc;
@@ -111,14 +111,14 @@ void KoTextDebug::dumpDocument(const QTextDocument *doc, QTextStream &out)
     document = 0;
 }
 
-QString KoTextDebug::textAttributes(const KCharacterStyle &style)
+QString KTextDebug::textAttributes(const KCharacterStyle &style)
 {
     QTextCharFormat format;
     style.applyStyle(format);
     return textAttributes(format);
 }
 
-QString KoTextDebug::inlineObjectAttributes(const QTextCharFormat &textFormat)
+QString KTextDebug::inlineObjectAttributes(const QTextCharFormat &textFormat)
 {
     QString attrs;
 
@@ -154,7 +154,7 @@ QString KoTextDebug::inlineObjectAttributes(const QTextCharFormat &textFormat)
     return attrs;
 }
 
-QString KoTextDebug::textAttributes(const QTextCharFormat &textFormat)
+QString KTextDebug::textAttributes(const QTextCharFormat &textFormat)
 {
     QString attrs;
 
@@ -311,14 +311,14 @@ QString KoTextDebug::textAttributes(const QTextCharFormat &textFormat)
     return attrs;
 }
 
-QString KoTextDebug::paraAttributes(const KParagraphStyle &style)
+QString KTextDebug::paraAttributes(const KParagraphStyle &style)
 {
     QTextBlockFormat format;
     style.applyStyle(format);
     return paraAttributes(format);
 }
 
-QString KoTextDebug::paraAttributes(const QTextBlockFormat &blockFormat)
+QString KTextDebug::paraAttributes(const QTextBlockFormat &blockFormat)
 {
     QString attrs;
     KStyleManager *styleManager = document ? KoTextDocument(document).styleManager() : 0;
@@ -492,7 +492,7 @@ QString KoTextDebug::paraAttributes(const QTextBlockFormat &blockFormat)
     return attrs;
 }
 
-QString KoTextDebug::listAttributes(const QTextListFormat &listFormat)
+QString KTextDebug::listAttributes(const QTextListFormat &listFormat)
 {
     QString attrs;
     KStyleManager *styleManager = document ? KoTextDocument(document).styleManager() : 0;
@@ -606,14 +606,14 @@ QString KoTextDebug::listAttributes(const QTextListFormat &listFormat)
     return attrs;
 }
 
-QString KoTextDebug::tableAttributes(const KTableStyle &tableStyle)
+QString KTextDebug::tableAttributes(const KTableStyle &tableStyle)
 {
     QTextTableFormat format;
     tableStyle.applyStyle(format);
     return tableAttributes(format);
 }
 
-QString KoTextDebug::tableAttributes(const QTextTableFormat &tableFormat)
+QString KTextDebug::tableAttributes(const QTextTableFormat &tableFormat)
 {
     QString attrs;
     KStyleManager *styleManager = document ? KoTextDocument(document).styleManager() : 0;
@@ -696,7 +696,7 @@ QString KoTextDebug::tableAttributes(const QTextTableFormat &tableFormat)
     return attrs;
 }
 
-QString KoTextDebug::frameAttributes(const QTextFrameFormat &frameFormat)
+QString KTextDebug::frameAttributes(const QTextFrameFormat &frameFormat)
 {
     QString attrs;
 
@@ -793,14 +793,14 @@ QString KoTextDebug::frameAttributes(const QTextFrameFormat &frameFormat)
     return attrs;
 }
 
-QString KoTextDebug::tableCellAttributes(const KTableCellStyle &tableCellStyle)
+QString KTextDebug::tableCellAttributes(const KTableCellStyle &tableCellStyle)
 {
     QTextTableCellFormat format;
     tableCellStyle.applyStyle(format);
     return tableCellAttributes(format);
 }
 
-QString KoTextDebug::tableCellAttributes(const QTextTableCellFormat &tableCellFormat)
+QString KTextDebug::tableCellAttributes(const QTextTableCellFormat &tableCellFormat)
 {
     QString attrs;
     KStyleManager *styleManager = document ? KoTextDocument(document).styleManager() : 0;
@@ -1142,7 +1142,7 @@ QString KoTextDebug::tableCellAttributes(const QTextTableCellFormat &tableCellFo
     return attrs;
 }
 
-void KoTextDebug::dumpFrame(const QTextFrame *frame, QTextStream &out)
+void KTextDebug::dumpFrame(const QTextFrame *frame, QTextStream &out)
 {
     depth += INDENT;
 
@@ -1172,7 +1172,7 @@ void KoTextDebug::dumpFrame(const QTextFrame *frame, QTextStream &out)
     depth -= INDENT;
 }
 
-void KoTextDebug::dumpBlock(const QTextBlock &block, QTextStream &out)
+void KTextDebug::dumpBlock(const QTextBlock &block, QTextStream &out)
 {
     depth += INDENT;
 
@@ -1206,7 +1206,7 @@ void KoTextDebug::dumpBlock(const QTextBlock &block, QTextStream &out)
         out << ' ';
 }
 
-void KoTextDebug::dumpTable(const QTextTable *table, QTextStream &out)
+void KTextDebug::dumpTable(const QTextTable *table, QTextStream &out)
 {
     depth += INDENT;
 
@@ -1229,7 +1229,7 @@ void KoTextDebug::dumpTable(const QTextTable *table, QTextStream &out)
     depth -= INDENT;
 }
 
-void KoTextDebug::dumpTableCell(const QTextTableCell &cell, QTextStream &out)
+void KTextDebug::dumpTableCell(const QTextTableCell &cell, QTextStream &out)
 {
     depth += INDENT;
 
@@ -1259,7 +1259,7 @@ void KoTextDebug::dumpTableCell(const QTextTableCell &cell, QTextStream &out)
     depth -= INDENT;
 }
 
-void KoTextDebug::dumpFragment(const QTextFragment &fragment, QTextStream &out)
+void KTextDebug::dumpFragment(const QTextFragment &fragment, QTextStream &out)
 {
     depth += INDENT;
 
