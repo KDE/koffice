@@ -26,7 +26,7 @@
 #include <QExplicitlySharedDataPointer>
 
 class KTableColumnStyle;
-class KoTableRowStyle;
+class KTableRowStyle;
 class KTableCellStyle;
 class QTextTable;
 
@@ -100,7 +100,7 @@ public:
      * @param row the row to set the style for.
      * @param rowStyle a row style.
      */
-    void setRowStyle(int row, const KoTableRowStyle &rowStyle);
+    void setRowStyle(int row, const KTableRowStyle &rowStyle);
 
     /**
      * Insert a number of rows above the row \a row to \a rowStyle.
@@ -110,7 +110,7 @@ public:
      * @param rowStyle the row style of the new rows.
      * @see QTextTable::insertRows for the analog method for the table data.
      */
-    void insertRows(int row, int numberRows, const KoTableRowStyle &rowStyle);
+    void insertRows(int row, int numberRows, const KTableRowStyle &rowStyle);
 
     /**
      * Remove a number of rows  \a row to \a rowStyle.
@@ -127,7 +127,7 @@ public:
      * @param row the row to get the style for.
      * @return the row style.
      */
-    KoTableRowStyle rowStyle(int row) const;
+    KTableRowStyle rowStyle(int row) const;
 
     /**
      * Get the default cell style for the row \a row.

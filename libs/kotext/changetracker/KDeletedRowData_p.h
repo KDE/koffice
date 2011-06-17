@@ -31,7 +31,7 @@
 //
 
 #include <QVector>
-#include <styles/KoTableRowStyle.h>
+#include <styles/KTableRowStyle.h>
 
 class KDeletedCellData;
 class QTextTable;
@@ -45,20 +45,20 @@ public:
 
     int rowNumber();
 
-    KoTableRowStyle rowStyle();
+    KTableRowStyle rowStyle();
 
     const QVector<KDeletedCellData *>& deletedCells();
 
 private:
     int row_number;
 
-    KoTableRowStyle row_style;
+    KTableRowStyle row_style;
 
     QVector<KDeletedCellData *> deleted_cells;
 
     void storeDeletedCells(QTextTable *table);
 
-    void setRowStyle(KoTableRowStyle rowStyle);
+    void setRowStyle(KTableRowStyle rowStyle);
 };
 
 #endif

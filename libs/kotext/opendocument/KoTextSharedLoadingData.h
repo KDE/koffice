@@ -35,7 +35,7 @@ class KCharacterStyle;
 class KListStyle;
 class KoTableStyle;
 class KTableColumnStyle;
-class KoTableRowStyle;
+class KTableRowStyle;
 class KTableCellStyle;
 class KSectionStyle;
 class KStyleManager;
@@ -132,7 +132,7 @@ public:
      * @param stylesDotXml If set the styles from styles.xml are use if unset styles from content.xml are used.
      * @return The table row style for the given name or 0 if not found
      */
-    KoTableRowStyle *tableRowStyle(const QString &name, bool stylesDotXml) const;
+    KTableRowStyle *tableRowStyle(const QString &name, bool stylesDotXml) const;
 
     /**
      * Get the table cell style for the given name
@@ -216,7 +216,7 @@ private:
     // helper functions for loading of table row styles
     void addTableRowStyles(KOdfLoadingContext &context, QList<KXmlElement*> styleElements, int styleTypes,
                        KStyleManager *styleManager = 0);
-    QList<QPair<QString, KoTableRowStyle *> > loadTableRowStyles(KOdfLoadingContext &context, QList<KXmlElement*> styleElements);
+    QList<QPair<QString, KTableRowStyle *> > loadTableRowStyles(KOdfLoadingContext &context, QList<KXmlElement*> styleElements);
 
     // helper functions for loading of table cell styles
     void addTableCellStyles(KOdfLoadingContext &context, QList<KXmlElement*> styleElements, int styleTypes,

@@ -34,7 +34,7 @@
 #include <KCharacterStyle.h>
 #include <KListStyle.h>
 #include <KoTableStyle.h>
-#include <KoTableRowStyle.h>
+#include <KTableRowStyle.h>
 #include <KTableColumnAndRowStyleManager.h>
 #include <KStyleManager.h>
 #include <KoTextBlockData.h>
@@ -779,7 +779,7 @@ void Layout::handleTableBreak(QTextTableCell &previousCell, QTextTable *table)
         // TODO
 
         // It could also be that the previous row had a breakBefore property
-        KoTableRowStyle rowStyle = carsManager->rowStyle(previousCell.row());
+        KTableRowStyle rowStyle = carsManager->rowStyle(previousCell.row());
         if (rowStyle.breakBefore()) {
             m_restartingAfterTableBreak = true;
         }

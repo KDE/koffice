@@ -20,7 +20,7 @@
 #include "TestKoTableColumnAndRowStyleManager.h"
 
 #include "styles/KTableColumnStyle.h"
-#include "styles/KoTableRowStyle.h"
+#include "styles/KTableRowStyle.h"
 #include "../KTableColumnAndRowStyleManager.h"
 
 void TestKoTableColumnAndRowStyleManager::testColumns()
@@ -57,9 +57,9 @@ void TestKoTableColumnAndRowStyleManager::testRows()
 {
     KTableColumnAndRowStyleManager manager;
 
-    KoTableRowStyle *style1 = new KoTableRowStyle();
-    KoTableRowStyle *style2 = new KoTableRowStyle();
-    KoTableRowStyle *style3 = new KoTableRowStyle();
+    KTableRowStyle *style1 = new KTableRowStyle();
+    KTableRowStyle *style2 = new KTableRowStyle();
+    KTableRowStyle *style3 = new KTableRowStyle();
 
     manager.setRowStyle(0, *style1);
     manager.setRowStyle(2, *style2);

@@ -26,7 +26,7 @@
 #include <KTableBorderStyle.h>
 #include <KTableCellStyle.h>
 #include <KTableColumnStyle.h>
-#include <KoTableRowStyle.h>
+#include <KTableRowStyle.h>
 #include <KTableColumnAndRowStyleManager.h>
 #include <KoTextDocumentLayout.h>
 #include <KShape.h>
@@ -251,12 +251,12 @@ void TableLayout::layoutRow(int row)
      * cells that should contribute to the row height.
      */
 
-    KoTableRowStyle rowStyle = carsManager.rowStyle(row);
+    KTableRowStyle rowStyle = carsManager.rowStyle(row);
 
     // Adjust row height.
     qreal minimumRowHeight = rowStyle.minimumRowHeight();
     qreal rowHeight = rowStyle.rowHeight();
-    bool rowHasExactHeight = rowStyle.hasProperty(KoTableRowStyle::RowHeight);
+    bool rowHasExactHeight = rowStyle.hasProperty(KTableRowStyle::RowHeight);
 
     int col = 0;
     while (col < m_table->columns()) {
@@ -323,7 +323,7 @@ void TableLayout::drawBackground(QPainter *painter, const KoTextDocumentLayout::
         QRectF tableRect = tRect.rect;
         for (int row = tRect.fromRow; row < m_table->rows() && m_tableLayoutData->m_rowPositions[row] < tableRect.bottom(); ++row) {
             QRectF rowRect(tableRect.x(), m_tableLayoutData->m_rowPositions[row], tableRect.width(), m_tableLayoutData->m_rowHeights[row]);
-            KoTableRowStyle rowStyle = carsManager.rowStyle(row);
+            KTableRowStyle rowStyle = carsManager.rowStyle(row);
             painter->fillRect(rowRect, rowStyle.background());
         }
     }

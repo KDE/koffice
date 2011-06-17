@@ -2,7 +2,7 @@
 #define TESTTABLELAYOUT_H
 
 #include <KTableColumnStyle.h>
-#include <KoTableRowStyle.h>
+#include <KTableRowStyle.h>
 #include <KTableColumnAndRowStyleManager.h>
 
 #include <QObject>
@@ -19,7 +19,7 @@ class MockTextShape;
 class KoTextDocumentLayout;
 class KoTableStyle;
 class KTableColumnStyle;
-class KoTableRowStyle;
+class KTableRowStyle;
 class KTableCellStyle;
 class KStyleManager;
 class KTableColumnAndRowStyleManager;
@@ -47,7 +47,7 @@ private:
      */
     void initTest(int rows, int columns, KoTableStyle *tableStyle,
             const QList<KTableColumnStyle *> &columnStyles,
-            const QList<KoTableRowStyle *> &rowStyles,
+            const QList<KTableRowStyle *> &rowStyles,
             const QMap<QPair<int, int>, KTableCellStyle *> &cellStyles,
             const QMap<QPair<int, int>, QString> &cellTexts);
 
@@ -112,7 +112,7 @@ private:
     // Default styles for the test table.
     KoTableStyle *m_defaultTableStyle;
     KTableColumnStyle m_defaultColumnStyle;
-    KoTableRowStyle m_defaultRowStyle;
+    KTableRowStyle m_defaultRowStyle;
     KTableCellStyle *m_defaultCellStyle;
 };
 

@@ -20,7 +20,7 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#include "KoTableRowStyle.h"
+#include "KTableRowStyle.h"
 #include "KStyleManager.h"
 #include <KOdfGenericStyle.h>
 #include <KOdfGenericStyles.h>
@@ -38,7 +38,7 @@
 #include <KOdfXmlNS.h>
 #include <KXmlWriter.h>
 
-class KoTableRowStyle::Private : public QSharedData
+class KTableRowStyle::Private : public QSharedData
 {
 public:
     Private() : QSharedData(), parentStyle(0), next(0) {}
@@ -51,37 +51,37 @@ public:
     }
 
     QString name;
-    KoTableRowStyle *parentStyle;
+    KTableRowStyle *parentStyle;
     int next;
     StylePrivate stylesPrivate;
 };
 
-KoTableRowStyle::KoTableRowStyle()
+KTableRowStyle::KTableRowStyle()
     :  d(new Private())
 {
 }
 
-KoTableRowStyle::KoTableRowStyle(const KoTableRowStyle &rhs)
+KTableRowStyle::KTableRowStyle(const KTableRowStyle &rhs)
         : d(rhs.d)
 {
 }
 
-KoTableRowStyle &KoTableRowStyle::operator=(const KoTableRowStyle &rhs)
+KTableRowStyle &KTableRowStyle::operator=(const KTableRowStyle &rhs)
 {
     d = rhs.d;
     return *this;
 }
 
-KoTableRowStyle::~KoTableRowStyle()
+KTableRowStyle::~KTableRowStyle()
 {
 }
 
-void KoTableRowStyle::setParentStyle(KoTableRowStyle *parent)
+void KTableRowStyle::setParentStyle(KTableRowStyle *parent)
 {
     d->parentStyle = parent;
 }
 
-void KoTableRowStyle::setProperty(int key, const QVariant &value)
+void KTableRowStyle::setProperty(int key, const QVariant &value)
 {
     if (d->parentStyle) {
         QVariant var = d->parentStyle->value(key);
@@ -93,12 +93,12 @@ void KoTableRowStyle::setProperty(int key, const QVariant &value)
     d->stylesPrivate.add(key, value);
 }
 
-void KoTableRowStyle::remove(int key)
+void KTableRowStyle::remove(int key)
 {
     d->stylesPrivate.remove(key);
 }
 
-QVariant KoTableRowStyle::value(int key) const
+QVariant KTableRowStyle::value(int key) const
 {
     QVariant var = d->stylesPrivate.value(key);
     if (var.isNull() && d->parentStyle)
@@ -106,12 +106,12 @@ QVariant KoTableRowStyle::value(int key) const
     return var;
 }
 
-bool KoTableRowStyle::hasProperty(int key) const
+bool KTableRowStyle::hasProperty(int key) const
 {
     return d->stylesPrivate.contains(key);
 }
 
-qreal KoTableRowStyle::propertyDouble(int key) const
+qreal KTableRowStyle::propertyDouble(int key) const
 {
     QVariant variant = value(key);
     if (variant.isNull())
@@ -119,7 +119,7 @@ qreal KoTableRowStyle::propertyDouble(int key) const
     return variant.toDouble();
 }
 
-int KoTableRowStyle::propertyInt(int key) const
+int KTableRowStyle::propertyInt(int key) const
 {
     QVariant variant = value(key);
     if (variant.isNull())
@@ -127,7 +127,7 @@ int KoTableRowStyle::propertyInt(int key) const
     return variant.toInt();
 }
 
-bool KoTableRowStyle::propertyBoolean(int key) const
+bool KTableRowStyle::propertyBoolean(int key) const
 {
     QVariant variant = value(key);
     if (variant.isNull())
@@ -135,7 +135,7 @@ bool KoTableRowStyle::propertyBoolean(int key) const
     return variant.toBool();
 }
 
-QColor KoTableRowStyle::propertyColor(int key) const
+QColor KTableRowStyle::propertyColor(int key) const
 {
     QVariant variant = value(key);
     if (variant.isNull()) {
@@ -144,17 +144,17 @@ QColor KoTableRowStyle::propertyColor(int key) const
     return qvariant_cast<QColor>(variant);
 }
 
-void KoTableRowStyle::setBackground(const QBrush &brush)
+void KTableRowStyle::setBackground(const QBrush &brush)
 {
     d->setProperty(QTextFormat::BackgroundBrush, brush);
 }
 
-void KoTableRowStyle::clearBackground()
+void KTableRowStyle::clearBackground()
 {
     d->stylesPrivate.remove(QTextCharFormat::BackgroundBrush);
 }
 
-QBrush KoTableRowStyle::background() const
+QBrush KTableRowStyle::background() const
 {
     QVariant variant = d->stylesPrivate.value(QTextFormat::BackgroundBrush);
 
@@ -164,95 +164,95 @@ QBrush KoTableRowStyle::background() const
     return qvariant_cast<QBrush>(variant);
 }
 
-void KoTableRowStyle::setBreakBefore(bool on)
+void KTableRowStyle::setBreakBefore(bool on)
 {
     setProperty(BreakBefore, on);
 }
 
-bool KoTableRowStyle::breakBefore()
+bool KTableRowStyle::breakBefore()
 {
     return propertyBoolean(BreakBefore);
 }
 
-void KoTableRowStyle::setBreakAfter(bool on)
+void KTableRowStyle::setBreakAfter(bool on)
 {
     setProperty(BreakAfter, on);
 }
 
-bool KoTableRowStyle::breakAfter()
+bool KTableRowStyle::breakAfter()
 {
     return propertyBoolean(BreakAfter);
 }
 
-void KoTableRowStyle::setMinimumRowHeight(const qreal height)
+void KTableRowStyle::setMinimumRowHeight(const qreal height)
 {
     setProperty(MinumumRowHeight, height);
 }
 
 
-qreal KoTableRowStyle::minimumRowHeight() const
+qreal KTableRowStyle::minimumRowHeight() const
 {
     return propertyDouble(MinumumRowHeight);
 }
 
-void KoTableRowStyle::setRowHeight(qreal height)
+void KTableRowStyle::setRowHeight(qreal height)
 {
     setProperty(RowHeight, height);
 }
 
-qreal KoTableRowStyle::rowHeight() const
+qreal KTableRowStyle::rowHeight() const
 {
     return propertyDouble(RowHeight);
 }
 
-void KoTableRowStyle::setKeepTogether(bool on)
+void KTableRowStyle::setKeepTogether(bool on)
 {
     setProperty(KeepTogether, on);
 }
 
-bool KoTableRowStyle::keepTogether() const
+bool KTableRowStyle::keepTogether() const
 {
     return propertyBoolean(KeepTogether);
 }
 
-KoTableRowStyle *KoTableRowStyle::parentStyle() const
+KTableRowStyle *KTableRowStyle::parentStyle() const
 {
     return d->parentStyle;
 }
 
-QString KoTableRowStyle::name() const
+QString KTableRowStyle::name() const
 {
     return d->name;
 }
 
-void KoTableRowStyle::setName(const QString &name)
+void KTableRowStyle::setName(const QString &name)
 {
     if (name == d->name)
         return;
     d->name = name;
 }
 
-int KoTableRowStyle::styleId() const
+int KTableRowStyle::styleId() const
 {
     return propertyInt(StyleId);
 }
 
-void KoTableRowStyle::setStyleId(int id)
+void KTableRowStyle::setStyleId(int id)
 {
     setProperty(StyleId, id); if (d->next == 0) d->next = id;
 }
 
-QString KoTableRowStyle::masterPageName() const
+QString KTableRowStyle::masterPageName() const
 {
     return value(MasterPageName).toString();
 }
 
-void KoTableRowStyle::setMasterPageName(const QString &name)
+void KTableRowStyle::setMasterPageName(const QString &name)
 {
     setProperty(MasterPageName, name);
 }
 
-void KoTableRowStyle::loadOdf(const KXmlElement *element, KOdfLoadingContext &context)
+void KTableRowStyle::loadOdf(const KXmlElement *element, KOdfLoadingContext &context)
 {
     if (element->hasAttributeNS(KOdfXmlNS::style, "display-name"))
         d->name = element->attributeNS(KOdfXmlNS::style, "display-name", QString());
@@ -269,12 +269,12 @@ void KoTableRowStyle::loadOdf(const KXmlElement *element, KOdfLoadingContext &co
     context.addStyles(element, family.toLocal8Bit().constData());   // Load all parents - only because we don't support inheritance.
 
     context.styleStack().setTypeProperties("table-row");   // load all style attributes from "style:table-column-properties"
-    loadOdfProperties(context.styleStack());   // load the KoTableRowStyle from the stylestack
+    loadOdfProperties(context.styleStack());   // load the KTableRowStyle from the stylestack
     context.styleStack().restore();
 }
 
 
-void KoTableRowStyle::loadOdfProperties(KOdfStyleStack &styleStack)
+void KTableRowStyle::loadOdfProperties(KOdfStyleStack &styleStack)
 {
     // The fo:background-color attribute specifies the background color of a cell.
     if (styleStack.hasProperty(KOdfXmlNS::fo, "background-color")) {
@@ -317,26 +317,26 @@ void KoTableRowStyle::loadOdfProperties(KOdfStyleStack &styleStack)
     }
 }
 
-bool KoTableRowStyle::operator==(const KoTableRowStyle &other) const
+bool KTableRowStyle::operator==(const KTableRowStyle &other) const
 {
     return other.d == d;
 }
 
-void KoTableRowStyle::removeDuplicates(const KoTableRowStyle &other)
+void KTableRowStyle::removeDuplicates(const KTableRowStyle &other)
 {
     d->stylesPrivate.removeDuplicates(other.d->stylesPrivate);
 }
 
-void KoTableRowStyle::saveOdf(KOdfGenericStyle &style)
+void KTableRowStyle::saveOdf(KOdfGenericStyle &style)
 {
     Q_UNUSED(style);
 /*
     QList<int> keys = d->stylesPrivate.keys();
     foreach(int key, keys) {
-        if (key == KoTableRowStyle::BreakBefore) {
+        if (key == KTableRowStyle::BreakBefore) {
             if (breakBefore())
                 style.addProperty("fo:break-before", "page", KOdfGenericStyle::ParagraphType);
-        } else if (key == KoTableRowStyle::BreakAfter) {
+        } else if (key == KTableRowStyle::BreakAfter) {
             if (breakAfter())
                 style.addProperty("fo:break-after", "page", KOdfGenericStyle::ParagraphType);
         }

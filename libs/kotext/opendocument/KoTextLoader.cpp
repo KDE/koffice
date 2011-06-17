@@ -2007,7 +2007,7 @@ void KoTextLoader::loadTableRow(KXmlElement &tblTag, QTextTable *tbl, QList<QRec
     int columns = tbl->columns();
     QString rowStyleName = tblTag.attributeNS(KOdfXmlNS::table, "style-name", "");
     if (!rowStyleName.isEmpty()) {
-        KoTableRowStyle *rowStyle = d->textSharedData->tableRowStyle(rowStyleName, d->stylesDotXml);
+        KTableRowStyle *rowStyle = d->textSharedData->tableRowStyle(rowStyleName, d->stylesDotXml);
         if (rowStyle) {
             tcarManager->setRowStyle(rows, *rowStyle);
         }

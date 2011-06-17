@@ -42,11 +42,11 @@ class KXmlElement;
  * Each table column in the main text is based on a table row style.
  * Row styles are stored (besides in the KStyleManager) in the KTableColumnAndRowStyleManager.
  * The style has a property 'StyleId' with an integer as value.  The integer value corresponds to the styleId() output of
- * a specific KoTableRowStyle.
+ * a specific KTableRowStyle.
  * @see KStyleManager
  * @see KoTableRowAndColumnStyleManager
  */
-class KOTEXT_EXPORT KoTableRowStyle
+class KOTEXT_EXPORT KTableRowStyle
 {
 public:
     enum Property {
@@ -61,14 +61,14 @@ public:
     };
 
     /// Constructor
-    KoTableRowStyle();
+    KTableRowStyle();
     /// Constructor
-    KoTableRowStyle(const KoTableRowStyle &rhs);
+    KTableRowStyle(const KTableRowStyle &rhs);
     /// assign operator
-    KoTableRowStyle &operator=(const KoTableRowStyle &rhs);
+    KTableRowStyle &operator=(const KTableRowStyle &rhs);
 
     /// Destructor
-    ~KoTableRowStyle();
+    ~KTableRowStyle();
 
     void setBackground(const QBrush &brush);
     /// See similar named method on QTextBlockFormat
@@ -94,10 +94,10 @@ public:
     bool keepTogether() const;
 
     /// set the parent style this one inherits its unset properties from.
-    void setParentStyle(KoTableRowStyle *parent);
+    void setParentStyle(KTableRowStyle *parent);
 
     /// return the parent style
-    KoTableRowStyle *parentStyle() const;
+    KTableRowStyle *parentStyle() const;
 
     /// return the name of the style.
     QString name() const;
@@ -119,9 +119,9 @@ public:
     void remove(int key);
 
     /// Compare the properties of this style with the other
-    bool operator==(const KoTableRowStyle &other) const;
+    bool operator==(const KTableRowStyle &other) const;
 
-    void removeDuplicates(const KoTableRowStyle &other);
+    void removeDuplicates(const KTableRowStyle &other);
 
     /**
      * Load the style from the element

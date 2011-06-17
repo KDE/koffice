@@ -55,7 +55,7 @@ public:
     QHash<int, KListStyle *> automaticListStyles;
     QHash<int, KoTableStyle *> tableStyles;
     QHash<int, KTableColumnStyle *> tableColumnStyles;
-    QHash<int, KoTableRowStyle *> tableRowStyles;
+    QHash<int, KTableRowStyle *> tableRowStyles;
     QHash<int, KTableCellStyle *> tableCellStyles;
     QHash<int, KSectionStyle *> sectionStyles;
     QList<ChangeFollower*> documentUpdaterProxies;

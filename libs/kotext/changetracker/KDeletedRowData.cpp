@@ -30,7 +30,7 @@
 KDeletedRowData::KDeletedRowData(QTextTable *table, int rowNumber)
 {
     this->row_number = rowNumber;
-    KoTableRowStyle rowStyle = KTableColumnAndRowStyleManager::manager(table).rowStyle(rowNumber);
+    KTableRowStyle rowStyle = KTableColumnAndRowStyleManager::manager(table).rowStyle(rowNumber);
     setRowStyle(rowStyle);
     storeDeletedCells(table);
 }
@@ -48,12 +48,12 @@ int KDeletedRowData::rowNumber()
     return row_number;
 }
 
-void KDeletedRowData::setRowStyle(KoTableRowStyle rowStyle)
+void KDeletedRowData::setRowStyle(KTableRowStyle rowStyle)
 {
     this->row_style = rowStyle;
 }
 
-KoTableRowStyle KDeletedRowData::rowStyle()
+KTableRowStyle KDeletedRowData::rowStyle()
 {
     return row_style;
 }
