@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoTextEditingPlugin.h"
+#include "KTextEditingPlugin.h"
 
 #include <QTextDocument>
 #include <QTextBlock>
@@ -25,23 +25,23 @@
 
 #include <KDebug>
 
-class KoTextEditingPlugin::Private
+class KTextEditingPlugin::Private
 {
 public:
     QHash<QString, KAction*> actionCollection;
 };
 
-KoTextEditingPlugin::KoTextEditingPlugin()
+KTextEditingPlugin::KTextEditingPlugin()
         : d(new Private())
 {
 }
 
-KoTextEditingPlugin::~KoTextEditingPlugin()
+KTextEditingPlugin::~KTextEditingPlugin()
 {
     delete d;
 }
 
-void KoTextEditingPlugin::selectWord(QTextCursor &cursor, int cursorPosition) const
+void KTextEditingPlugin::selectWord(QTextCursor &cursor, int cursorPosition) const
 {
     cursor.setPosition(cursorPosition);
     QTextBlock block = cursor.block();
@@ -66,18 +66,18 @@ void KoTextEditingPlugin::selectWord(QTextCursor &cursor, int cursorPosition) co
     cursor.setPosition(pos + block.position(), QTextCursor::KeepAnchor);
 }
 
-QString KoTextEditingPlugin::paragraph(QTextDocument *document, int cursorPosition) const
+QString KTextEditingPlugin::paragraph(QTextDocument *document, int cursorPosition) const
 {
     QTextBlock block = document->findBlock(cursorPosition);
     return block.text();
 }
 
-void KoTextEditingPlugin::addAction(const QString &name, KAction *action)
+void KTextEditingPlugin::addAction(const QString &name, KAction *action)
 {
     d->actionCollection.insert(name, action);
 }
 
-void KoTextEditingPlugin::checkSection(QTextDocument *document, int startPosition, int endPosition)
+void KTextEditingPlugin::checkSection(QTextDocument *document, int startPosition, int endPosition)
 {
     QTextBlock block = document->findBlock(startPosition);
     int pos = block.position();
@@ -105,16 +105,16 @@ void KoTextEditingPlugin::checkSection(QTextDocument *document, int startPositio
     }
 }
 
-QHash<QString, KAction*> KoTextEditingPlugin::actions() const
+QHash<QString, KAction*> KTextEditingPlugin::actions() const
 {
     return d->actionCollection;
 }
 
-void KoTextEditingPlugin::setCurrentCursorPosition(QTextDocument *document, int cursorPosition)
+void KTextEditingPlugin::setCurrentCursorPosition(QTextDocument *document, int cursorPosition)
 {
     Q_UNUSED(cursorPosition);
     Q_UNUSED(document);
 }
 
-#include <KoTextEditingPlugin.moc>
+#include <KTextEditingPlugin.moc>
 

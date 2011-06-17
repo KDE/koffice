@@ -29,7 +29,7 @@
 #include <kcomponentdata.h>
 
 #include <KResourceManager.h>
-#include <KoTextEditingPlugin.h>
+#include <KTextEditingPlugin.h>
 #include <KoTextEditingRegistry.h>
 #include <KTextEditingFactory.h>
 
@@ -46,7 +46,7 @@ extern "C" KDE_EXPORT int kdemain(int argc, char **argv)
     KCmdLineArgs::addCmdLineOptions(options);
     KApplication a;
 
-    KoTextEditingPlugin *thesaurus = 0;
+    KTextEditingPlugin *thesaurus = 0;
     KResourceManager *rm = new KResourceManager(&a);
 
     foreach (const QString &key, KoTextEditingRegistry::instance()->keys()) {

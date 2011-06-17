@@ -25,7 +25,7 @@
 
 #include "kotext_export.h"
 
-class KoTextEditingPlugin;
+class KTextEditingPlugin;
 class KResourceManager;
 
 /**
@@ -46,15 +46,15 @@ public:
     virtual ~KTextEditingFactory();
 
     /**
-     * Factory method for the KoTextEditingPlugin.
-     * The framework will create at most one KoTextEditingPlugin for one KoDocument.
+     * Factory method for the KTextEditingPlugin.
+     * The framework will create at most one KTextEditingPlugin for one KoDocument.
      * The implications of that is that multiple vies will reuse the one instance and
      * the lifetime of the plugin is limited to the lifetime of the koffice document.
      *
      * Create a new instance of an text editor plugin.
      * @param documentResourceManager the resources manager that holds all document-wide data.
      */
-    virtual KoTextEditingPlugin *create(KResourceManager *documentResourceManager) const = 0;
+    virtual KTextEditingPlugin *create(KResourceManager *documentResourceManager) const = 0;
 
     /**
      * return the id for the plugin this factory creates.
@@ -64,7 +64,7 @@ public:
 
     /**
      * return if the plugin this factory creates has to be shown in the context menu.
-     * @see KoTextEditingPlugin::checkSection()
+     * @see KTextEditingPlugin::checkSection()
      */
     bool showInMenu() const;
 
@@ -74,7 +74,7 @@ public:
 protected:
     /**
      * Set if the plugin this factory creates has to be shown in the context menu.
-     * @see KoTextEditingPlugin::checkSection()
+     * @see KTextEditingPlugin::checkSection()
      */
     void setShowInMenu(bool show);
     /// set the title used in the context menu

@@ -32,7 +32,7 @@
  * word and when a paragraph has been finished. Which is ideal for autocorrection
  * and autoreplacement of text.
  * @see KTextEditingFactory
- * @see KoTextEditingPlugin
+ * @see KTextEditingPlugin
  */
 class KOTEXT_EXPORT KoTextEditingRegistry : public QObject,  public KGenericRegistry<KTextEditingFactory*>
 {

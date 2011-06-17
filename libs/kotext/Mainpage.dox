@@ -56,7 +56,7 @@
  *
  * KoInlineTextObject plugin base for inline objects (and variables)
  *
- * KoTextEditingPlugin plugin base for text editing plugins.
+ * KTextEditingPlugin plugin base for text editing plugins.
  *
  * KoText namespace.
  */

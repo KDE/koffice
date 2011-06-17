@@ -20,7 +20,7 @@
 #include "TextEditingPluginContainer.h"
 #include "TextTool.h"
 #include <KoTextEditingRegistry.h>
-#include <KoTextEditingPlugin.h>
+#include <KTextEditingPlugin.h>
 
 #include <KDebug>
 
@@ -50,7 +50,7 @@ TextEditingPluginContainer *TextEditingPluginContainer::create(KResourceManager 
                 continue;
             }
             QString factoryId = factory->id();
-            KoTextEditingPlugin *plugin = factory->create(documentResourceManager);
+            KTextEditingPlugin *plugin = factory->create(documentResourceManager);
             if (factoryId == "spellcheck") {
                 kDebug(32500) << "KOffice SpellCheck plugin found";
                 answer->m_spellcheckPlugin = plugin;

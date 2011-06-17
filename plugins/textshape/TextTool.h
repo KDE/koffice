@@ -41,7 +41,7 @@ class KoColor;
 class KoColorPopupAction;
 class KParagraphStyle;
 class KStyleManager;
-class KoTextEditingPlugin;
+class KTextEditingPlugin;
 class KoTextEditor;
 class UndoTextCommand;
 

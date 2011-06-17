@@ -56,7 +56,7 @@
 #include <KoColorPopupAction.h>
 #include <KTextDocumentLayout.h>
 #include <KParagraphStyle.h>
-#include <KoTextEditingPlugin.h>
+#include <KTextEditingPlugin.h>
 #include <KoTextEditingRegistry.h>
 #include <KInlineTextObjectManager.h>
 #include <KStyleManager.h>
@@ -337,7 +337,7 @@ TextTool::TextTool(KCanvasBase *canvas)
         resource(TextEditingPluginContainer::ResourceId).value<TextEditingPluginContainer*>();
     Q_ASSERT(m_textEditingPlugins);
 
-    foreach (KoTextEditingPlugin *plugin, m_textEditingPlugins->values()) {
+    foreach (KTextEditingPlugin *plugin, m_textEditingPlugins->values()) {
         connect(plugin, SIGNAL(startMacro(const QString &)),
                 this, SLOT(startMacro(const QString &)));
         connect(plugin, SIGNAL(stopMacro()), this, SLOT(stopMacro()));
@@ -735,7 +735,7 @@ void TextTool::setShapeData(KoTextShapeData *data)
             }
         }
 
-        foreach (KoTextEditingPlugin *plugin, m_textEditingPlugins->values()) {
+        foreach (KTextEditingPlugin *plugin, m_textEditingPlugins->values()) {
             plugin->setCurrentCursorPosition(m_textEditor.data()->document(),
                     m_textEditor.data()->position());
         }
@@ -894,7 +894,7 @@ void TextTool::mousePressEvent(KPointerEvent *event)
 
     if (event->button() == Qt::RightButton) {
         // activate context-menu for spelling-suggestions
-        KoTextEditingPlugin *plugin = m_textEditingPlugins->spellcheck();
+        KTextEditingPlugin *plugin = m_textEditingPlugins->spellcheck();
         if (plugin)
             plugin->setCurrentCursorPosition(m_textEditor.data()->document(), m_textEditor.data()->position());
 
@@ -2036,7 +2036,7 @@ void TextTool::showStyleManager()
 
 void TextTool::startTextEditingPlugin(const QString &pluginId)
 {
-    KoTextEditingPlugin *plugin = m_textEditingPlugins->plugin(pluginId);
+    KTextEditingPlugin *plugin = m_textEditingPlugins->plugin(pluginId);
     if (plugin) {
         KoTextEditor *textEditor = m_textEditor.data();
         if (textEditor == 0)
@@ -2205,7 +2205,7 @@ void TextTool::finishedWord()
     KoTextEditor *textEditor = m_textEditor.data();
     if (textEditor == 0)
         return;
-    foreach (KoTextEditingPlugin* plugin, m_textEditingPlugins->values())
+    foreach (KTextEditingPlugin* plugin, m_textEditingPlugins->values())
         plugin->finishedWord(textEditor->document(), m_prevCursorPosition);
 }
 
@@ -2214,7 +2214,7 @@ void TextTool::finishedParagraph()
     KoTextEditor *textEditor = m_textEditor.data();
     if (textEditor == 0)
         return;
-    foreach (KoTextEditingPlugin* plugin, m_textEditingPlugins->values())
+    foreach (KTextEditingPlugin* plugin, m_textEditingPlugins->values())
         plugin->finishedParagraph(textEditor->document(), m_prevCursorPosition);
 }
 

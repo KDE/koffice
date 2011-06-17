@@ -24,7 +24,7 @@
 #include <QString>
 #include <QVariant>
 
-class KoTextEditingPlugin;
+class KTextEditingPlugin;
 class KResourceManager;
 class TextTool;
 
@@ -40,15 +40,15 @@ public:
     };
     ~TextEditingPluginContainer();
 
-    KoTextEditingPlugin *spellcheck() const {
+    KTextEditingPlugin *spellcheck() const {
         return m_spellcheckPlugin;
     }
 
-    KoTextEditingPlugin *plugin(const QString &pluginId) {
+    KTextEditingPlugin *plugin(const QString &pluginId) {
         return m_textEditingPlugins.value(pluginId);
     }
 
-    QList<KoTextEditingPlugin*> values() const {
+    QList<KTextEditingPlugin*> values() const {
         return m_textEditingPlugins.values();
     }
 
@@ -60,8 +60,8 @@ public:
     static TextEditingPluginContainer *create(KResourceManager *documentResourceManager, Type init = Normal);
 
 private:
-    QHash<QString, KoTextEditingPlugin*> m_textEditingPlugins;
-    KoTextEditingPlugin *m_spellcheckPlugin;
+    QHash<QString, KTextEditingPlugin*> m_textEditingPlugins;
+    KTextEditingPlugin *m_spellcheckPlugin;
 
     TextEditingPluginContainer(KResourceManager *documentResourceManager);
 };
