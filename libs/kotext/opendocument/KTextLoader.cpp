@@ -1423,7 +1423,7 @@ QString KTextLoader::createUniqueBookmarkName(KoBookmarkManager* bmm, QString bo
 void KTextLoader::loadText(const QString &fulltext, QTextCursor &cursor,
                             bool *stripLeadingSpace, bool isLastNode)
 {
-    QString text = KoTextLoaderP::normalizeWhitespace(fulltext, *stripLeadingSpace);
+    QString text = KTextLoaderP::normalizeWhitespace(fulltext, *stripLeadingSpace);
 #ifdef KOOPENDOCUMENTLOADER_DEBUG
     kDebug(32500) << "  <text> text=" << text << text.length();
 #endif

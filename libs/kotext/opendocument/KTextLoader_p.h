@@ -44,7 +44,7 @@
 // leading and trailing whitespace, but such whitespace is significant
 // in ODF -- so we use this function to compress sequences of space characters
 // into single spaces
-class KoTextLoaderP {
+class KTextLoaderP {
 public:
     inline static bool isspace(ushort ch) {
         // options are ordered by likelyhood

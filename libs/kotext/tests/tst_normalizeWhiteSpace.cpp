@@ -32,8 +32,8 @@ void tst_normalizeWhiteSpace::normalizeWhiteSpace()
     QFETCH(QString, input);
     QBENCHMARK {
         for (int i = 0; i < ITERATION_COUNT; ++i) {
-            QString answer = KoTextLoaderP::normalizeWhitespace(input, true);
-            answer = KoTextLoaderP::normalizeWhitespace(input, false);
+            QString answer = KTextLoaderP::normalizeWhitespace(input, true);
+            answer = KTextLoaderP::normalizeWhitespace(input, false);
         }
     }
 }
