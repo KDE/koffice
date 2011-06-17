@@ -22,7 +22,7 @@
 #include "TextShapeFactory.h"
 
 #include <KShapeRegistry.h>
-#include <KoToolRegistry.h>
+#include <KToolRegistry.h>
 
 #include <kpluginfactory.h>
 
@@ -32,8 +32,8 @@ K_EXPORT_PLUGIN(TextPluginFactory("TextShape"))
 TextPlugin::TextPlugin(QObject * parent, const QVariantList &)
         : QObject(parent)
 {
-    KoToolRegistry::instance()->add(new TextToolFactory(parent));
-    KoToolRegistry::instance()->add(new ChangeTrackingToolFactory(parent));
+    KToolRegistry::instance()->add(new TextToolFactory(parent));
+    KToolRegistry::instance()->add(new ChangeTrackingToolFactory(parent));
     KShapeRegistry::instance()->add(new TextShapeFactory(parent));
 }
 

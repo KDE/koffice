@@ -35,23 +35,23 @@
  * XXX: Make it possible for this class to load not just flake tools,
    but also the app-specific KToolBase-based tools. (BSAR)
  */
-class FLAKE_EXPORT KoToolRegistry : public QObject, public KGenericRegistry<KToolFactoryBase*>
+class FLAKE_EXPORT KToolRegistry : public QObject, public KGenericRegistry<KToolFactoryBase*>
 {
     Q_OBJECT
 
 public:
-    ~KoToolRegistry();
+    ~KToolRegistry();
 
     /**
-     * Return an instance of the KoToolRegistry
+     * Return an instance of the KToolRegistry
      * Create a new instance on first call and return the singleton.
      */
-    static KoToolRegistry *instance();
+    static KToolRegistry *instance();
 
 private:
-    KoToolRegistry();
-    KoToolRegistry(const KoToolRegistry&);
-    KoToolRegistry operator=(const KoToolRegistry&);
+    KToolRegistry();
+    KToolRegistry(const KToolRegistry&);
+    KToolRegistry operator=(const KToolRegistry&);
     void init();
 
     class Private;

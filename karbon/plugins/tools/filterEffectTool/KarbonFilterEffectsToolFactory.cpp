@@ -20,7 +20,7 @@
 #include "KarbonFilterEffectsToolFactory.h"
 #include "KarbonFilterEffectsTool.h"
 
-#include <KoToolRegistry.h>
+#include <KToolRegistry.h>
 
 #include <KLocale>
 

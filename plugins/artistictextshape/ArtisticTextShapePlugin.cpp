@@ -22,7 +22,7 @@
 #include "ArtisticTextToolFactory.h"
 
 #include <KShapeRegistry.h>
-#include <KoToolRegistry.h>
+#include <KToolRegistry.h>
 
 #include <kpluginfactory.h>
 
@@ -33,7 +33,7 @@ ArtisticTextShapePlugin::ArtisticTextShapePlugin( QObject * parent, const QVaria
     : QObject(parent)
 {
     KShapeRegistry::instance()->add( new ArtisticTextShapeFactory( parent ) );
-    KoToolRegistry::instance()->add( new ArtisticTextToolFactory( parent ) );
+    KToolRegistry::instance()->add( new ArtisticTextToolFactory( parent ) );
 }
 
 ArtisticTextShapePlugin::~ArtisticTextShapePlugin()

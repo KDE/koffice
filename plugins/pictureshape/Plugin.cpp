@@ -20,7 +20,7 @@
 #include "PictureShapeFactory.h"
 #include "PictureToolFactory.h"
 
-#include <KoToolRegistry.h>
+#include <KToolRegistry.h>
 #include <KShapeRegistry.h>
 
 #include <kpluginfactory.h>
@@ -33,7 +33,7 @@ Plugin::Plugin(QObject *parent, const QVariantList &)
     : QObject(parent)
 {
     KShapeRegistry::instance()->add( new PictureShapeFactory(parent) );
-    KoToolRegistry::instance()->add( new PictureToolFactory(parent) );
+    KToolRegistry::instance()->add( new PictureToolFactory(parent) );
 }
 
 #include <Plugin.moc>

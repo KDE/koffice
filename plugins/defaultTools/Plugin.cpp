@@ -21,7 +21,7 @@
 #include "guidestool/GuidesToolFactory.h"
 
 #include <KShapeRegistry.h>
-#include <KoToolRegistry.h>
+#include <KToolRegistry.h>
 
 #include <kpluginfactory.h>
 
@@ -31,8 +31,8 @@ K_EXPORT_PLUGIN(PluginFactory("koffice-defaulttools"))
 Plugin::Plugin(QObject * parent, const QVariantList &)
     : QObject(parent)
 {
-    KoToolRegistry::instance()->add(new DefaultToolFactory(parent));
-    KoToolRegistry::instance()->add(new GuidesToolFactory(parent));
+    KToolRegistry::instance()->add(new DefaultToolFactory(parent));
+    KToolRegistry::instance()->add(new GuidesToolFactory(parent));
 }
 
 #include <Plugin.moc>

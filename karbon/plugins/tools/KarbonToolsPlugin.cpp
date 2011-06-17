@@ -23,7 +23,7 @@
 #include "CalligraphyTool/KarbonCalligraphicShapeFactory.h"
 #include "KarbonFilterEffectsToolFactory.h"
 
-#include <KoToolRegistry.h>
+#include <KToolRegistry.h>
 #include <KShapeRegistry.h>
 
 #include <KPluginFactory>
@@ -35,9 +35,9 @@ K_EXPORT_PLUGIN(KarbonToolsPluginFactory("KarbonTools"))
 KarbonToolsPlugin::KarbonToolsPlugin(QObject *parent, const QVariantList&)
         : QObject(parent)
 {
-    KoToolRegistry::instance()->add(new KarbonPencilToolFactory(parent));
-    KoToolRegistry::instance()->add(new KarbonCalligraphyToolFactory(parent));
-    KoToolRegistry::instance()->add(new KarbonFilterEffectsToolFactory(parent));
+    KToolRegistry::instance()->add(new KarbonPencilToolFactory(parent));
+    KToolRegistry::instance()->add(new KarbonCalligraphyToolFactory(parent));
+    KToolRegistry::instance()->add(new KarbonFilterEffectsToolFactory(parent));
 
     KShapeRegistry::instance()->add(new KarbonCalligraphicShapeFactory(parent));
 }

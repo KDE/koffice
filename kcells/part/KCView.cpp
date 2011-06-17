@@ -96,7 +96,7 @@
 #include <KoToolBoxFactory.h>
 #include <KoDockerManager.h>
 #include <KToolManager.h>
-#include <KoToolRegistry.h>
+#include <KToolRegistry.h>
 #include <KoTemplateCreateDia.h>
 #include <KOdfXmlNS.h>
 #include <KoZoomAction.h>

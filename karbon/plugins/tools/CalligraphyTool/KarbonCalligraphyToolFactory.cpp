@@ -20,7 +20,7 @@
 #include "KarbonCalligraphyToolFactory.h"
 #include "KarbonCalligraphyTool.h"
 
-#include <KoToolRegistry.h>
+#include <KToolRegistry.h>
 
 #include <klocale.h>
 #include <kdebug.h>

@@ -23,7 +23,7 @@
 // flake
 #include "KToolManager.h"
 #include "KToolManager_p.h"
-#include "KoToolRegistry.h"
+#include "KToolRegistry.h"
 #include "KToolProxy.h"
 #include "KToolProxy_p.h"
 #include "KSelection.h"
@@ -162,7 +162,7 @@ void KToolManager::Private::setup()
         return;
 
     KShapeRegistry::instance();
-    KoToolRegistry *registry = KoToolRegistry::instance();
+    KToolRegistry *registry = KToolRegistry::instance();
     foreach(const QString & id, registry->keys()) {
         ToolHelper *t = new ToolHelper(registry->value(id));
         tools.append(t);

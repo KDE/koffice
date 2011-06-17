@@ -35,7 +35,7 @@
 #include <KOdfXmlNS.h>
 #include <KoProgressUpdater.h>
 #include <KoUpdater.h>
-#include <KoToolRegistry.h>
+#include <KToolRegistry.h>
 #include "tools/backgroundTool/KoPABackgroundToolFactory.h"
 
 #include "KoPAView.h"
@@ -76,9 +76,9 @@ KoPADocument::KoPADocument(QWidget* parentWidget, QObject* parent, bool singleVi
     resourceManager()->setResource(KoText::PageProvider, variant);
     loadConfig();
 
-    if (!KoToolRegistry::instance()->contains("KoPABackgroundTool")) {
-        KoPABackgroundToolFactory *f = new KoPABackgroundToolFactory(KoToolRegistry::instance());
-        KoToolRegistry::instance()->add(f);
+    if (!KToolRegistry::instance()->contains("KoPABackgroundTool")) {
+        KoPABackgroundToolFactory *f = new KoPABackgroundToolFactory(KToolRegistry::instance());
+        KToolRegistry::instance()->add(f);
     }
 }
 

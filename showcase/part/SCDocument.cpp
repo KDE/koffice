@@ -38,7 +38,7 @@
 #include <KoPASavingContext.h>
 #include <KShapeLoadingContext.h>
 #include <KShapeRegistry.h>
-#include <KoToolRegistry.h>
+#include <KToolRegistry.h>
 #include <KOdfXmlNS.h>
 #include <KXmlWriter.h>
 
@@ -56,11 +56,11 @@ SCDocument::SCDocument(QWidget* parentWidget, QObject* parent, bool singleViewMo
 , m_presenterViewEnabled(false)
 , m_declarations(new SCDeclarations())
 {
-    if (!KoToolRegistry::instance()->contains("SCPlaceholderToolID")) {
-        KToolFactoryBase *f = new SCAnimationToolFactory(KoToolRegistry::instance());
-        KoToolRegistry::instance()->add(f);
-        f = new SCPlaceholderToolFactory(KoToolRegistry::instance());
-        KoToolRegistry::instance()->add(f);
+    if (!KToolRegistry::instance()->contains("SCPlaceholderToolID")) {
+        KToolFactoryBase *f = new SCAnimationToolFactory(KToolRegistry::instance());
+        KToolRegistry::instance()->add(f);
+        f = new SCPlaceholderToolFactory(KToolRegistry::instance());
+        KToolRegistry::instance()->add(f);
     }
 
     setComponentData(SCFactory::componentData(), false);

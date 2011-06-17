@@ -18,7 +18,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoToolRegistry.h"
+#include "KToolRegistry.h"
 #include <KGlobal>
 
 #include "tools/KCreatePathToolFactory_p.h"
@@ -32,11 +32,11 @@
 
 #include <KoPluginLoader.h>
 
-KoToolRegistry::KoToolRegistry()
+KToolRegistry::KToolRegistry()
 {
 }
 
-void KoToolRegistry::init()
+void KToolRegistry::init()
 {
     KoPluginLoader::PluginsConfig config;
     config.whiteList = "FlakePlugins";
@@ -59,17 +59,17 @@ void KoToolRegistry::init()
     add(new KPanToolFactory(this));
 }
 
-KoToolRegistry::~KoToolRegistry()
+KToolRegistry::~KToolRegistry()
 {
 }
 
-KoToolRegistry* KoToolRegistry::instance()
+KToolRegistry* KToolRegistry::instance()
 {
-    K_GLOBAL_STATIC(KoToolRegistry, s_instance)
+    K_GLOBAL_STATIC(KToolRegistry, s_instance)
     if (!s_instance.exists()) {
         s_instance->init();
     }
     return s_instance;
 }
 
-#include <KoToolRegistry.moc>
+#include <KToolRegistry.moc>

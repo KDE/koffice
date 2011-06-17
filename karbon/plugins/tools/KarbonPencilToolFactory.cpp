@@ -20,7 +20,7 @@
 #include "KarbonPencilToolFactory.h"
 #include "KarbonPencilTool.h"
 
-#include <KoToolRegistry.h>
+#include <KToolRegistry.h>
 
 #include <klocale.h>
 #include <kdebug.h>

@@ -28,7 +28,7 @@
 #include <klocale.h>
 
 #include <KResourceManager.h>
-#include <KoToolRegistry.h>
+#include <KToolRegistry.h>
 #include <KShapeRegistry.h>
 #include <KShapeLoadingContext.h>
 #include <KOdfXmlNS.h>
@@ -47,7 +47,7 @@ K_EXPORT_PLUGIN(TableShapePluginFactory("TableShape"))
 TableShapePlugin::TableShapePlugin(QObject * parent, const QVariantList&)
 {
     KShapeRegistry::instance()->add(new TableShapeFactory(parent));
-    KoToolRegistry::instance()->add(new TableToolFactory(parent));
+    KToolRegistry::instance()->add(new TableToolFactory(parent));
 }
 
 

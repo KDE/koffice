@@ -26,7 +26,7 @@
 #include <KPluginInfo>
 #include <KServiceTypeTrader>
 
-#include <KoToolRegistry.h>
+#include <KToolRegistry.h>
 
 
 class KCToolRegistry::Private
@@ -39,7 +39,7 @@ KCToolRegistry::KCToolRegistry()
         : d(new Private)
 {
     // Add the built-in cell tool.
-    KoToolRegistry::instance()->add(new KCCellToolFactory(this, "KCellsCellToolId"));
+    KToolRegistry::instance()->add(new KCCellToolFactory(this, "KCellsCellToolId"));
     // Load the tool plugins.
     loadTools();
 }
@@ -77,20 +77,20 @@ void KCToolRegistry::loadTools()
         pluginInfo.load(); // load activation state
         if (pluginInfo.isPluginEnabled()) {
             // Tool already registered?
-            if (KoToolRegistry::instance()->contains(toolFactory->id())) {
+            if (KToolRegistry::instance()->contains(toolFactory->id())) {
                 continue;
             }
             toolFactory->setIcon(pluginInfo.service()->icon());
             toolFactory->setPriority(10);
             toolFactory->setToolTip(pluginInfo.service()->comment());
-            KoToolRegistry::instance()->add(toolFactory);
+            KToolRegistry::instance()->add(toolFactory);
         } else {
             // Tool not registered?
-            if (!KoToolRegistry::instance()->contains(toolFactory->id())) {
+            if (!KToolRegistry::instance()->contains(toolFactory->id())) {
                 continue;
             }
-            delete KoToolRegistry::instance()->value(toolFactory->id());
-            KoToolRegistry::instance()->remove(toolFactory->id());
+            delete KToolRegistry::instance()->value(toolFactory->id());
+            KToolRegistry::instance()->remove(toolFactory->id());
         }
     }
 }
