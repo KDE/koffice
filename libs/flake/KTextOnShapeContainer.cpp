@@ -22,7 +22,7 @@
 #include "SimpleShapeContainerModel_p.h"
 #include "KShapeRegistry.h"
 #include "KShapeFactoryBase.h"
-#include "KoTextShapeDataBase.h"
+#include "KTextShapeDataBase.h"
 
 #include <KOdfXmlNS.h>
 #include <KOdfLoadingContext.h>
@@ -159,7 +159,7 @@ KTextOnShapeContainer::KTextOnShapeContainer(KShape *childShape, KResourceManage
         Q_ASSERT(d->textShape); // would be a bug in the text shape;
         d->textShape->setSize(size());
         d->textShape->setTransformation(childShape->transformation());
-        KoTextShapeDataBase *shapeData = qobject_cast<KoTextShapeDataBase*>(d->textShape->userData());
+        KTextShapeDataBase *shapeData = qobject_cast<KTextShapeDataBase*>(d->textShape->userData());
         Q_ASSERT(shapeData); // would be a bug in kotext
         shapeData->setVerticalAlignment(Qt::AlignVCenter);
         addShape(d->textShape);
@@ -185,7 +185,7 @@ bool KTextOnShapeContainer::loadOdf(const KXmlElement &element, KShapeLoadingCon
     if (d->textShape == 0)
         return false; // probably because the factory was not found.
 
-    KoTextShapeDataBase *shapeData = qobject_cast<KoTextShapeDataBase*>(d->textShape->userData());
+    KTextShapeDataBase *shapeData = qobject_cast<KTextShapeDataBase*>(d->textShape->userData());
     Q_ASSERT(shapeData); // would be a bug in kotext
 
     QString styleName = element.attributeNS(KOdfXmlNS::draw, "style-name");
@@ -222,7 +222,7 @@ void KTextOnShapeContainer::setPlainText(const QString &text)
         kWarning(30006) << "No text shape present in KTextOnShapeContainer";
         return;
     }
-    KoTextShapeDataBase *shapeData = qobject_cast<KoTextShapeDataBase*>(d->textShape->userData());
+    KTextShapeDataBase *shapeData = qobject_cast<KTextShapeDataBase*>(d->textShape->userData());
     Q_ASSERT(shapeData); // would be a bug in kotext
     Q_ASSERT(shapeData->document());
     shapeData->document()->setPlainText(text);
@@ -253,7 +253,7 @@ void KTextOnShapeContainer::setTextAlignment(Qt::Alignment alignment)
     }
 
     // vertical
-    KoTextShapeDataBase *shapeData = qobject_cast<KoTextShapeDataBase*>(d->textShape->userData());
+    KTextShapeDataBase *shapeData = qobject_cast<KTextShapeDataBase*>(d->textShape->userData());
     shapeData->setVerticalAlignment(alignment);
 
     // horizontal
@@ -275,7 +275,7 @@ Qt::Alignment KTextOnShapeContainer::textAlignment() const
     }
 
     // vertical
-    KoTextShapeDataBase *shapeData = qobject_cast<KoTextShapeDataBase*>(d->textShape->userData());
+    KTextShapeDataBase *shapeData = qobject_cast<KTextShapeDataBase*>(d->textShape->userData());
     Qt::Alignment answer = shapeData->verticalAlignment() & Qt::AlignVertical_Mask;
 
     // horizontal
@@ -292,7 +292,7 @@ void KTextOnShapeContainer::saveOdfChildElements(KShapeSavingContext &context) c
     if (d->textShape == 0) {
         return;
     }
-    KoTextShapeDataBase *shapeData = qobject_cast<KoTextShapeDataBase*>(d->textShape->userData());
+    KTextShapeDataBase *shapeData = qobject_cast<KTextShapeDataBase*>(d->textShape->userData());
     Q_ASSERT(shapeData); // would be a bug in kotext
     if (!shapeData->document()->isEmpty()) {
         shapeData->saveOdf(context);

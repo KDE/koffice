@@ -23,7 +23,7 @@
 #include "KoText.h"
 #include "kotext_export.h"
 
-#include <KoTextShapeDataBase.h>
+#include <KTextShapeDataBase.h>
 #include <KInsets.h>
 
 class QTextDocument;
@@ -44,7 +44,7 @@ class KDocumentRdfBase;
  * multiple instances of this shape data) can share one QTextDocument by providing a
  * different view on (a different part of) the QTextDocument.
  */
-class KOTEXT_EXPORT KTextShapeData : public KoTextShapeDataBase
+class KOTEXT_EXPORT KTextShapeData : public KTextShapeDataBase
 {
     Q_OBJECT
 public:

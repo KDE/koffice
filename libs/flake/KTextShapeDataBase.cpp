@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoTextShapeDataBase.h"
-#include "KoTextShapeDataBase_p.h"
+#include "KTextShapeDataBase.h"
+#include "KTextShapeDataBase_p.h"
 
 KoTextShapeDataBasePrivate::KoTextShapeDataBasePrivate()
         : document(0),
@@ -30,45 +30,45 @@ KoTextShapeDataBasePrivate::~KoTextShapeDataBasePrivate()
 {
 }
 
-KoTextShapeDataBase::KoTextShapeDataBase(KoTextShapeDataBasePrivate &dd)
+KTextShapeDataBase::KTextShapeDataBase(KoTextShapeDataBasePrivate &dd)
     : d_ptr(&dd)
 {
 }
 
-KoTextShapeDataBase::~KoTextShapeDataBase()
+KTextShapeDataBase::~KTextShapeDataBase()
 {
     delete d_ptr;
 }
 
-QTextDocument *KoTextShapeDataBase::document() const
+QTextDocument *KTextShapeDataBase::document() const
 {
-    Q_D(const KoTextShapeDataBase);
+    Q_D(const KTextShapeDataBase);
     return d->document;
 }
 
-void KoTextShapeDataBase::setShapeMargins(const KInsets &margins)
+void KTextShapeDataBase::setShapeMargins(const KInsets &margins)
 {
-    Q_D(KoTextShapeDataBase);
+    Q_D(KTextShapeDataBase);
     d->margins = margins;
 }
 
-KInsets KoTextShapeDataBase::shapeMargins() const
+KInsets KTextShapeDataBase::shapeMargins() const
 {
-    Q_D(const KoTextShapeDataBase);
+    Q_D(const KTextShapeDataBase);
     return d->margins;
 }
 
-void KoTextShapeDataBase::setVerticalAlignment(Qt::Alignment alignment)
+void KTextShapeDataBase::setVerticalAlignment(Qt::Alignment alignment)
 {
-    Q_D(KoTextShapeDataBase);
+    Q_D(KTextShapeDataBase);
     d->textAlignment = (d->textAlignment & Qt::AlignHorizontal_Mask)
         | (alignment & Qt::AlignVertical_Mask);
 }
 
-Qt::Alignment KoTextShapeDataBase::verticalAlignment() const
+Qt::Alignment KTextShapeDataBase::verticalAlignment() const
 {
-    Q_D(const KoTextShapeDataBase);
+    Q_D(const KTextShapeDataBase);
     return d->textAlignment & Qt::AlignVertical_Mask;
 }
 
-#include <KoTextShapeDataBase.moc>
+#include <KTextShapeDataBase.moc>

@@ -104,7 +104,7 @@ set(flake_SRCS
     KFilterEffectRenderContext.cpp
     KFilterEffectLoadingContext.cpp
     KTextOnShapeContainer.cpp
-    KoTextShapeDataBase.cpp
+    KTextShapeDataBase.cpp
     KoPluginLoader.cpp
     commands/KShapeGroupCommand.cpp
     commands/KShapeAlignCommand.cpp
@@ -293,7 +293,7 @@ install(
     KSharedLoadingData.h
     KSharedSavingData.h
     KSnapGuide.h
-    KoTextShapeDataBase.h
+    KTextShapeDataBase.h
     KoToolBase.h
     KoToolFactoryBase.h
     KoToolManager.h

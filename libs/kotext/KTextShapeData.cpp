@@ -20,8 +20,8 @@
  */
 
 #include "KTextShapeData.h"
-#include <KoTextShapeDataBase.h>
-#include <KoTextShapeDataBase_p.h>
+#include <KTextShapeDataBase.h>
+#include <KTextShapeDataBase_p.h>
 #include "KTextDocument.h"
 #include "KoTextEditor.h"
 #include "KTextDocumentLayout.h"
@@ -94,7 +94,7 @@ public:
 
 
 KTextShapeData::KTextShapeData()
-    : KoTextShapeDataBase(*(new KoTextShapeDataPrivate()))
+    : KTextShapeDataBase(*(new KoTextShapeDataPrivate()))
 {
     setDocument(new QTextDocument, true);
 }

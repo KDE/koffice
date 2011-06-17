@@ -34,13 +34,13 @@ class KShapeSavingContext;
 /**
  * \internal
  */
-class FLAKE_EXPORT KoTextShapeDataBase : public KShapeUserData
+class FLAKE_EXPORT KTextShapeDataBase : public KShapeUserData
 {
     Q_OBJECT
 public:
     /// constructor
-    KoTextShapeDataBase();
-    virtual ~KoTextShapeDataBase();
+    KTextShapeDataBase();
+    virtual ~KTextShapeDataBase();
 
     /// return the document
     QTextDocument *document() const;
@@ -74,12 +74,12 @@ public:
 
 protected:
     /// constructor
-    KoTextShapeDataBase(KoTextShapeDataBasePrivate &);
+    KTextShapeDataBase(KoTextShapeDataBasePrivate &);
 
     KoTextShapeDataBasePrivate *d_ptr;
 
 private:
-    Q_DECLARE_PRIVATE(KoTextShapeDataBase)
+    Q_DECLARE_PRIVATE(KTextShapeDataBase)
 };
 
 #endif
