@@ -32,7 +32,7 @@ class KCanvasBase;
 class KPointerEvent;
 class KoViewConverter;
 class KoToolSelection;
-class KoToolBasePrivate;
+class KToolBasePrivate;
 
 class KAction;
 class QAction;
@@ -311,7 +311,7 @@ public:
     virtual void deactivate();
 
     /// \internal
-    KoToolBasePrivate *priv();
+    KToolBasePrivate *priv();
 
 public slots:
     /**
@@ -432,9 +432,9 @@ protected:
     void setTextMode(bool value);
 
 protected:
-    KToolBase(KoToolBasePrivate &dd);
+    KToolBase(KToolBasePrivate &dd);
 
-    KoToolBasePrivate *d_ptr;
+    KToolBasePrivate *d_ptr;
 
 private:
     KToolBase();

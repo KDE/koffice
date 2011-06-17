@@ -45,10 +45,10 @@ class KAction;
 class KToolBase;
 class KCanvasBase;
 
-class KoToolBasePrivate
+class KToolBasePrivate
 {
 public:
-    KoToolBasePrivate(KToolBase *qq, KCanvasBase *canvas_)
+    KToolBasePrivate(KToolBase *qq, KCanvasBase *canvas_)
         : currentCursor(Qt::ArrowCursor),
         q(qq),
         canvas(canvas_),
@@ -58,7 +58,7 @@ public:
     {
     }
 
-    ~KoToolBasePrivate()
+    ~KToolBasePrivate()
     {
         qDeleteAll(optionWidgets);
     }

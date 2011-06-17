@@ -29,7 +29,7 @@
 #include <QWidget>
 
 KToolBase::KToolBase(KCanvasBase *canvas)
-    : d_ptr(new KoToolBasePrivate(this, canvas))
+    : d_ptr(new KToolBasePrivate(this, canvas))
 {
     Q_D(KToolBase);
     if (d->canvas) { // in the case of KoToolManagers dummytool it can be zero :(
@@ -41,7 +41,7 @@ KToolBase::KToolBase(KCanvasBase *canvas)
     }
 }
 
-KToolBase::KToolBase(KoToolBasePrivate &dd)
+KToolBase::KToolBase(KToolBasePrivate &dd)
     : d_ptr(&dd)
 {
 }
@@ -293,7 +293,7 @@ bool KToolBase::isInTextMode() const
     return d->isInTextMode;
 }
 
-KoToolBasePrivate *KToolBase::priv()
+KToolBasePrivate *KToolBase::priv()
 {
     Q_D(KToolBase);
     return d;
