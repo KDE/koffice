@@ -20,7 +20,7 @@
  */
 
 #include "KoZoomTool_p.h"
-#include "KoZoomStrategy_p.h"
+#include "KZoomStrategy_p.h"
 #include "KoZoomToolWidget_p.h"
 #include "KPointerEvent.h"
 #include "KCanvasBase.h"
@@ -92,7 +92,7 @@ void KoZoomTool::mouseDoubleClickEvent(KPointerEvent *event)
 
 KInteractionStrategy *KoZoomTool::createStrategy(KPointerEvent *event)
 {
-    KoZoomStrategy *zs = new KoZoomStrategy(this, m_controller, event->point);
+    KZoomStrategy *zs = new KZoomStrategy(this, m_controller, event->point);
     if (event->button() == Qt::RightButton) {
         if (m_zoomInMode) {
             zs->forceZoomOut();

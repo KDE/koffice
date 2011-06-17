@@ -18,7 +18,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoZoomStrategy_p.h"
+#include "KZoomStrategy_p.h"
 #include "KShapeRubberSelectStrategy_p.h"
 #include "KoZoomTool_p.h"
 #include "KCanvasBase.h"
@@ -27,14 +27,14 @@
 
 #include <kdebug.h>
 
-KoZoomStrategy::KoZoomStrategy(KoZoomTool *tool, KCanvasController *controller, const QPointF &clicked)
+KZoomStrategy::KZoomStrategy(KoZoomTool *tool, KCanvasController *controller, const QPointF &clicked)
         : KShapeRubberSelectStrategy(tool, clicked, false),
         m_controller(controller),
         m_forceZoomOut(false)
 {
 }
 
-void KoZoomStrategy::finishInteraction(Qt::KeyboardModifiers modifiers)
+void KZoomStrategy::finishInteraction(Qt::KeyboardModifiers modifiers)
 {
     Q_D(KShapeRubberSelectStrategy);
     QRect pixelRect = m_controller->canvas()->viewConverter()->documentToView(d->selectedRect()).toRect();
@@ -52,19 +52,19 @@ void KoZoomStrategy::finishInteraction(Qt::KeyboardModifiers modifiers)
     }
 }
 
-void KoZoomStrategy::cancelInteraction()
+void KZoomStrategy::cancelInteraction()
 {
     Q_D(KShapeRubberSelectStrategy);
     d->tool->repaintDecorations();
     d->tool->canvas()->updateCanvas(d->selectedRect().toRect().normalized());
 }
 
-void KoZoomStrategy::forceZoomOut()
+void KZoomStrategy::forceZoomOut()
 {
     m_forceZoomOut = true;
 }
 
-void KoZoomStrategy::forceZoomIn()
+void KZoomStrategy::forceZoomIn()
 {
     m_forceZoomOut = false;
 }

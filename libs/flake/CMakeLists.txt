@@ -159,7 +159,7 @@ set(flake_SRCS
     tools/KoZoomTool.cpp
     tools/KoZoomToolFactory.cpp
     tools/KoZoomToolWidget.cpp
-    tools/KoZoomStrategy.cpp
+    tools/KZoomStrategy.cpp
     tools/KPanTool.cpp
     tools/KPanToolFactory.cpp
     tools/KInteractionTool.cpp
