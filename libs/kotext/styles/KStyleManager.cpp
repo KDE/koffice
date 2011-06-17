@@ -27,7 +27,7 @@
 #include "KCharacterStyle.h"
 #include "KListStyle.h"
 #include "KListLevelProperties.h"
-#include "KoTableStyle.h"
+#include "KTableStyle.h"
 #include "KTableColumnStyle.h"
 #include "KTableRowStyle.h"
 #include "KTableCellStyle.h"
@@ -211,7 +211,7 @@ void KStyleManager::saveOdf(KOdfGenericStyles& mainStyles)
         mainStyles.insert(style, name, KOdfGenericStyles::DontAddNumberToName);
     }
 
-    foreach(KoTableStyle *tableStyle, d->tableStyles) {
+    foreach(KTableStyle *tableStyle, d->tableStyles) {
         QString name(QUrl::toPercentEncoding(QString(tableStyle->name()).replace(' ', '_')));
         name.replace('%', '_');
         if (name.isEmpty())
@@ -332,7 +332,7 @@ void KStyleManager::addAutomaticListStyle(KListStyle *style)
     d->automaticListStyles.insert(d->s_stylesNumber++, style);
 }
 
-void KStyleManager::add(KoTableStyle *style)
+void KStyleManager::add(KTableStyle *style)
 {
     if (d->tableStyles.key(style, -1) != -1)
         return;
@@ -398,7 +398,7 @@ void KStyleManager::remove(KListStyle *style)
         emit styleRemoved(style);
 }
 
-void KStyleManager::remove(KoTableStyle *style)
+void KStyleManager::remove(KTableStyle *style)
 {
     if (d->tableStyles.remove(style->styleId()))
         emit styleRemoved(style);
@@ -483,7 +483,7 @@ void KStyleManager::alteredStyle(const KListStyle *style)
     d->requestFireUpdate(this);
 }
 
-void KStyleManager::alteredStyle(const KoTableStyle *style)
+void KStyleManager::alteredStyle(const KTableStyle *style)
 {
     Q_ASSERT(style);
     int id = style->styleId();
@@ -602,7 +602,7 @@ KListStyle *KStyleManager::listStyle(int id, bool *automatic) const
     return style;
 }
 
-KoTableStyle *KStyleManager::tableStyle(int id) const
+KTableStyle *KStyleManager::tableStyle(int id) const
 {
     return d->tableStyles.value(id);
 }
@@ -654,9 +654,9 @@ KListStyle *KStyleManager::listStyle(const QString &name) const
     return 0;
 }
 
-KoTableStyle *KStyleManager::tableStyle(const QString &name) const
+KTableStyle *KStyleManager::tableStyle(const QString &name) const
 {
-    foreach(KoTableStyle *style, d->tableStyles) {
+    foreach(KTableStyle *style, d->tableStyles) {
         if (style->name() == name)
             return style;
     }
@@ -737,7 +737,7 @@ QList<KListStyle*> KStyleManager::listStyles() const
     return d->listStyles.values();
 }
 
-QList<KoTableStyle*> KStyleManager::tableStyles() const
+QList<KTableStyle*> KStyleManager::tableStyles() const
 {
     return d->tableStyles.values();
 }

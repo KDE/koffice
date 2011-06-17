@@ -46,7 +46,7 @@
 #include <kcomponentdata.h>
 #include <KoTextDebug_p.h>
 #include <KListStyle.h>
-#include <KoTableStyle.h>
+#include <KTableStyle.h>
 #include <KTableCellStyle.h>
 #include <KoTextDocumentLayout.h>
 #include <KStyleManager.h>
@@ -556,11 +556,11 @@ bool TestLoading::compareTableFormats(QTextTableFormat &actualFormat, QTextTable
         QString key, value;
         switch (id) {
         // bool properties
-        case KoTableStyle::BreakBefore:
-        case KoTableStyle::BreakAfter:
-        case KoTableStyle::KeepWithNext:
-        case KoTableStyle::MayBreakBetweenRows:
-        case KoTableStyle::CollapsingBorders:
+        case KTableStyle::BreakBefore:
+        case KTableStyle::BreakAfter:
+        case KTableStyle::KeepWithNext:
+        case KTableStyle::MayBreakBetweenRows:
+        case KTableStyle::CollapsingBorders:
             if (actualProperty[id].toBool() != expectedProperty[id].toBool())
                 match = false;
             break;
@@ -573,7 +573,7 @@ bool TestLoading::compareTableFormats(QTextTableFormat &actualFormat, QTextTable
                 match = false;
             break;
         // string properties
-        case KoTableStyle::MasterPageName:
+        case KTableStyle::MasterPageName:
             if (actualProperty[id].toString() != expectedProperty[id].toString())
                 match = false;
             break;

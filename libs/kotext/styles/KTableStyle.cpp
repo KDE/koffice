@@ -20,7 +20,7 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#include "KoTableStyle.h"
+#include "KTableStyle.h"
 #include "KStyleManager.h"
 #include <KOdfGenericStyle.h>
 #include <KOdfGenericStyles.h>
@@ -38,7 +38,7 @@
 #include <KOdfXmlNS.h>
 #include <KXmlWriter.h>
 
-class KoTableStyle::Private
+class KTableStyle::Private
 {
 public:
     Private() : parentStyle(0), next(0) {}
@@ -51,40 +51,40 @@ public:
     }
 
     QString name;
-    KoTableStyle *parentStyle;
+    KTableStyle *parentStyle;
     int next;
     StylePrivate stylesPrivate;
 };
 
-KoTableStyle::KoTableStyle(QObject *parent)
+KTableStyle::KTableStyle(QObject *parent)
         : QObject(parent), d(new Private())
 {
 }
 
-KoTableStyle::KoTableStyle(const QTextTableFormat &tableFormat, QObject *parent)
+KTableStyle::KTableStyle(const QTextTableFormat &tableFormat, QObject *parent)
         : QObject(parent),
         d(new Private())
 {
     d->stylesPrivate = tableFormat.properties();
 }
 
-KoTableStyle *KoTableStyle::fromTable(const QTextTable &table, QObject *parent)
+KTableStyle *KTableStyle::fromTable(const QTextTable &table, QObject *parent)
 {
     QTextTableFormat tableFormat = table.format();
-    return new KoTableStyle(tableFormat, parent);
+    return new KTableStyle(tableFormat, parent);
 }
 
-KoTableStyle::~KoTableStyle()
+KTableStyle::~KTableStyle()
 {
     delete d;
 }
 
-void KoTableStyle::setParentStyle(KoTableStyle *parent)
+void KTableStyle::setParentStyle(KTableStyle *parent)
 {
     d->parentStyle = parent;
 }
 
-void KoTableStyle::setProperty(int key, const QVariant &value)
+void KTableStyle::setProperty(int key, const QVariant &value)
 {
     if (d->parentStyle) {
         QVariant var = d->parentStyle->value(key);
@@ -96,12 +96,12 @@ void KoTableStyle::setProperty(int key, const QVariant &value)
     d->stylesPrivate.add(key, value);
 }
 
-void KoTableStyle::remove(int key)
+void KTableStyle::remove(int key)
 {
     d->stylesPrivate.remove(key);
 }
 
-QVariant KoTableStyle::value(int key) const
+QVariant KTableStyle::value(int key) const
 {
     QVariant var = d->stylesPrivate.value(key);
     if (var.isNull() && d->parentStyle)
@@ -109,12 +109,12 @@ QVariant KoTableStyle::value(int key) const
     return var;
 }
 
-bool KoTableStyle::hasProperty(int key) const
+bool KTableStyle::hasProperty(int key) const
 {
     return d->stylesPrivate.contains(key);
 }
 
-qreal KoTableStyle::propertyDouble(int key) const
+qreal KTableStyle::propertyDouble(int key) const
 {
     QVariant variant = value(key);
     if (variant.isNull())
@@ -122,7 +122,7 @@ qreal KoTableStyle::propertyDouble(int key) const
     return variant.toDouble();
 }
 
-int KoTableStyle::propertyInt(int key) const
+int KTableStyle::propertyInt(int key) const
 {
     QVariant variant = value(key);
     if (variant.isNull())
@@ -130,7 +130,7 @@ int KoTableStyle::propertyInt(int key) const
     return variant.toInt();
 }
 
-bool KoTableStyle::propertyBoolean(int key) const
+bool KTableStyle::propertyBoolean(int key) const
 {
     QVariant variant = value(key);
     if (variant.isNull())
@@ -138,7 +138,7 @@ bool KoTableStyle::propertyBoolean(int key) const
     return variant.toBool();
 }
 
-QColor KoTableStyle::propertyColor(int key) const
+QColor KTableStyle::propertyColor(int key) const
 {
     QVariant variant = value(key);
     if (variant.isNull()) {
@@ -147,7 +147,7 @@ QColor KoTableStyle::propertyColor(int key) const
     return qvariant_cast<QColor>(variant);
 }
 
-void KoTableStyle::applyStyle(QTextTableFormat &format) const
+void KTableStyle::applyStyle(QTextTableFormat &format) const
 {/*
     if (d->parentStyle) {
         d->parentStyle->applyStyle(format);
@@ -159,32 +159,32 @@ void KoTableStyle::applyStyle(QTextTableFormat &format) const
     }
 }
 
-void KoTableStyle::setWidth(const QTextLength &width)
+void KTableStyle::setWidth(const QTextLength &width)
 {
     d->setProperty(QTextFormat::FrameWidth, width);
 }
 
-void KoTableStyle::setKeepWithNext(bool keep)
+void KTableStyle::setKeepWithNext(bool keep)
 {
     d->setProperty(KeepWithNext, keep);
 }
 
-void KoTableStyle::setMayBreakBetweenRows(bool allow)
+void KTableStyle::setMayBreakBetweenRows(bool allow)
 {
     d->setProperty(MayBreakBetweenRows, allow);
 }
 
-void KoTableStyle::setBackground(const QBrush &brush)
+void KTableStyle::setBackground(const QBrush &brush)
 {
     d->setProperty(QTextFormat::BackgroundBrush, brush);
 }
 
-void KoTableStyle::clearBackground()
+void KTableStyle::clearBackground()
 {
     d->stylesPrivate.remove(QTextCharFormat::BackgroundBrush);
 }
 
-QBrush KoTableStyle::background() const
+QBrush KTableStyle::background() const
 {
     QVariant variant = d->stylesPrivate.value(QTextFormat::BackgroundBrush);
 
@@ -194,77 +194,77 @@ QBrush KoTableStyle::background() const
     return qvariant_cast<QBrush>(variant);
 }
 
-void KoTableStyle::setBreakBefore(bool on)
+void KTableStyle::setBreakBefore(bool on)
 {
     setProperty(BreakBefore, on);
 }
 
-bool KoTableStyle::breakBefore()
+bool KTableStyle::breakBefore()
 {
     return propertyBoolean(BreakBefore);
 }
 
-void KoTableStyle::setBreakAfter(bool on)
+void KTableStyle::setBreakAfter(bool on)
 {
     setProperty(BreakAfter, on);
 }
 
-bool KoTableStyle::breakAfter()
+bool KTableStyle::breakAfter()
 {
     return propertyBoolean(BreakAfter);
 }
 
-void KoTableStyle::setCollapsingBorderModel(bool on)
+void KTableStyle::setCollapsingBorderModel(bool on)
 {
     setProperty(CollapsingBorders, on);
 }
 
-bool KoTableStyle::collapsingBorderModel()
+bool KTableStyle::collapsingBorderModel()
 {
     return propertyBoolean(CollapsingBorders);
 }
 
-void KoTableStyle::setTopMargin(qreal topMargin)
+void KTableStyle::setTopMargin(qreal topMargin)
 {
     setProperty(QTextFormat::FrameTopMargin, topMargin);
 }
 
-qreal KoTableStyle::topMargin() const
+qreal KTableStyle::topMargin() const
 {
     return propertyDouble(QTextFormat::FrameTopMargin);
 }
 
-void KoTableStyle::setBottomMargin(qreal margin)
+void KTableStyle::setBottomMargin(qreal margin)
 {
     setProperty(QTextFormat::FrameBottomMargin, margin);
 }
 
-qreal KoTableStyle::bottomMargin() const
+qreal KTableStyle::bottomMargin() const
 {
     return propertyDouble(QTextFormat::FrameBottomMargin);
 }
 
-void KoTableStyle::setLeftMargin(qreal margin)
+void KTableStyle::setLeftMargin(qreal margin)
 {
     setProperty(QTextFormat::FrameLeftMargin, margin);
 }
 
-qreal KoTableStyle::leftMargin() const
+qreal KTableStyle::leftMargin() const
 {
     return propertyDouble(QTextFormat::FrameLeftMargin);
 }
 
-void KoTableStyle::setRightMargin(qreal margin)
+void KTableStyle::setRightMargin(qreal margin)
 {
     setProperty(QTextFormat::FrameRightMargin, margin);
 }
 
-qreal KoTableStyle::rightMargin() const
+qreal KTableStyle::rightMargin() const
 {
     return propertyDouble(QTextFormat::FrameRightMargin);
 }
 
-void KoTableStyle::setMargin(qreal margin)
+void KTableStyle::setMargin(qreal margin)
 {
     setTopMargin(margin);
     setBottomMargin(margin);
@@ -272,29 +272,29 @@ void KoTableStyle::setMargin(qreal margin)
     setRightMargin(margin);
 }
 
-void KoTableStyle::setAlignment(Qt::Alignment alignment)
+void KTableStyle::setAlignment(Qt::Alignment alignment)
 {
 
     setProperty(QTextFormat::BlockAlignment, (int) alignment);
 
 }
 
-Qt::Alignment KoTableStyle::alignment() const
+Qt::Alignment KTableStyle::alignment() const
 {
     return static_cast<Qt::Alignment>(propertyInt(QTextFormat::BlockAlignment));
 }
 
-KoTableStyle *KoTableStyle::parentStyle() const
+KTableStyle *KTableStyle::parentStyle() const
 {
     return d->parentStyle;
 }
 
-QString KoTableStyle::name() const
+QString KTableStyle::name() const
 {
     return d->name;
 }
 
-void KoTableStyle::setName(const QString &name)
+void KTableStyle::setName(const QString &name)
 {
     if (name == d->name)
         return;
@@ -302,27 +302,27 @@ void KoTableStyle::setName(const QString &name)
     emit nameChanged(name);
 }
 
-int KoTableStyle::styleId() const
+int KTableStyle::styleId() const
 {
     return propertyInt(StyleId);
 }
 
-void KoTableStyle::setStyleId(int id)
+void KTableStyle::setStyleId(int id)
 {
     setProperty(StyleId, id); if (d->next == 0) d->next = id;
 }
 
-QString KoTableStyle::masterPageName() const
+QString KTableStyle::masterPageName() const
 {
     return value(MasterPageName).toString();
 }
 
-void KoTableStyle::setMasterPageName(const QString &name)
+void KTableStyle::setMasterPageName(const QString &name)
 {
     setProperty(MasterPageName, name);
 }
 
-void KoTableStyle::loadOdf(const KXmlElement *element, KOdfLoadingContext &context)
+void KTableStyle::loadOdf(const KXmlElement *element, KOdfLoadingContext &context)
 {
     if (element->hasAttributeNS(KOdfXmlNS::style, "display-name"))
         d->name = element->attributeNS(KOdfXmlNS::style, "display-name", QString());
@@ -339,11 +339,11 @@ void KoTableStyle::loadOdf(const KXmlElement *element, KOdfLoadingContext &conte
     context.addStyles(element, family.toLocal8Bit().constData());   // Load all parents - only because we don't support inheritance.
 
     context.styleStack().setTypeProperties("table");   // load all style attributes from "style:table-properties"
-    loadOdfProperties(context.styleStack());   // load the KoTableStyle from the stylestack
+    loadOdfProperties(context.styleStack());   // load the KTableStyle from the stylestack
     context.styleStack().restore();
 }
 
-Qt::Alignment KoTableStyle::alignmentFromString(const QString &align)
+Qt::Alignment KTableStyle::alignmentFromString(const QString &align)
 {
     Qt::Alignment alignment = Qt::AlignLeft;
     if (align == "left")
@@ -357,7 +357,7 @@ Qt::Alignment KoTableStyle::alignmentFromString(const QString &align)
     return alignment;
 }
 
-QString KoTableStyle::alignmentToString(Qt::Alignment alignment)
+QString KTableStyle::alignmentToString(Qt::Alignment alignment)
 {
     QString align = "";
     if (alignment == Qt::AlignLeft)
@@ -371,7 +371,7 @@ QString KoTableStyle::alignmentToString(Qt::Alignment alignment)
     return align;
 }
 
-void KoTableStyle::loadOdfProperties(KOdfStyleStack &styleStack)
+void KTableStyle::loadOdfProperties(KOdfStyleStack &styleStack)
 {
     if (styleStack.hasProperty(KOdfXmlNS::style, "writing-mode")) {     // http://www.w3.org/TR/2004/WD-xsl11-20041216/#writing-mode
         // KoText::directionFromString()
@@ -453,7 +453,7 @@ void KoTableStyle::loadOdfProperties(KOdfStyleStack &styleStack)
     }
 }
 
-void KoTableStyle::copyProperties(const KoTableStyle *style)
+void KTableStyle::copyProperties(const KTableStyle *style)
 {
     d->stylesPrivate = style->d->stylesPrivate;
     setName(style->name()); // make sure we emit property change
@@ -461,25 +461,25 @@ void KoTableStyle::copyProperties(const KoTableStyle *style)
     d->parentStyle = style->d->parentStyle;
 }
 
-KoTableStyle *KoTableStyle::clone(QObject *parent)
+KTableStyle *KTableStyle::clone(QObject *parent)
 {
-    KoTableStyle *newStyle = new KoTableStyle(parent);
+    KTableStyle *newStyle = new KTableStyle(parent);
     newStyle->copyProperties(this);
     return newStyle;
 }
 
 
-bool KoTableStyle::operator==(const KoTableStyle &other) const
+bool KTableStyle::operator==(const KTableStyle &other) const
 {
     return other.d->stylesPrivate == d->stylesPrivate;
 }
 
-void KoTableStyle::removeDuplicates(const KoTableStyle &other)
+void KTableStyle::removeDuplicates(const KTableStyle &other)
 {
     d->stylesPrivate.removeDuplicates(other.d->stylesPrivate);
 }
 
-void KoTableStyle::saveOdf(KOdfGenericStyle &style)
+void KTableStyle::saveOdf(KOdfGenericStyle &style)
 {
     Q_UNUSED(style);
 /*
@@ -495,7 +495,7 @@ void KoTableStyle::saveOdf(KOdfGenericStyle &style)
                 if (!align.isEmpty())
                     style.addProperty("fo:text-align", align, KOdfGenericStyle::ParagraphType);
             }
-        } else if (key == KoTableStyle::TextProgressionDirection) {
+        } else if (key == KTableStyle::TextProgressionDirection) {
             int directionValue = 0;
             bool ok = false;
             directionValue = d->stylesPrivate.value(key).toInt(&ok);
@@ -510,13 +510,13 @@ void KoTableStyle::saveOdf(KOdfGenericStyle &style)
                 if (!direction.isEmpty())
                     style.addProperty("style:writing-mode", direction, KOdfGenericStyle::ParagraphType);
             }
-        } else if (key == KoTableStyle::BreakBefore) {
+        } else if (key == KTableStyle::BreakBefore) {
             if (breakBefore())
                 style.addProperty("fo:break-before", "page", KOdfGenericStyle::ParagraphType);
-        } else if (key == KoTableStyle::BreakAfter) {
+        } else if (key == KTableStyle::BreakAfter) {
             if (breakAfter())
                 style.addProperty("fo:break-after", "page", KOdfGenericStyle::ParagraphType);
-        } else if (key == KoTableStyle::CollapsingBorders) {
+        } else if (key == KTableStyle::CollapsingBorders) {
             if (collapsingBorderModel())
                 style.addProperty("style:border-bodel", "collapsing", KOdfGenericStyle::ParagraphType);
         } else if (key == QTextFormat::BackgroundBrush) {
@@ -538,4 +538,4 @@ void KoTableStyle::saveOdf(KOdfGenericStyle &style)
 */
 }
 
-#include <KoTableStyle.moc>
+#include <KTableStyle.moc>

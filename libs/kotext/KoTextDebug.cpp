@@ -32,7 +32,7 @@
 #include "styles/KParagraphStyle.h"
 #include "styles/KCharacterStyle.h"
 #include "styles/KListStyle.h"
-#include "styles/KoTableStyle.h"
+#include "styles/KTableStyle.h"
 #include "styles/KTableCellStyle.h"
 #include "styles/KStyleManager.h"
 #include "KoTextDocument.h"
@@ -606,7 +606,7 @@ QString KoTextDebug::listAttributes(const QTextListFormat &listFormat)
     return attrs;
 }
 
-QString KoTextDebug::tableAttributes(const KoTableStyle &tableStyle)
+QString KoTextDebug::tableAttributes(const KTableStyle &tableStyle)
 {
     QTextTableFormat format;
     tableStyle.applyStyle(format);
@@ -618,8 +618,8 @@ QString KoTextDebug::tableAttributes(const QTextTableFormat &tableFormat)
     QString attrs;
     KStyleManager *styleManager = document ? KoTextDocument(document).styleManager() : 0;
     if (styleManager) {
-        int id = tableFormat.intProperty(KoTableStyle::StyleId);
-        KoTableStyle *tableStyle = styleManager->tableStyle(id);
+        int id = tableFormat.intProperty(KTableStyle::StyleId);
+        KTableStyle *tableStyle = styleManager->tableStyle(id);
         attrs.append(" tableStyle=\"id:").append(QString::number(id));
         if (tableStyle)
             attrs.append(" name:").append(tableStyle->name());
@@ -655,23 +655,23 @@ QString KoTextDebug::tableAttributes(const QTextTableFormat &tableFormat)
                     break;
             }
             break;
-        case KoTableStyle::KeepWithNext:
+        case KTableStyle::KeepWithNext:
             key = "keep-with-next";
             value = properties[id].toBool() ? "true" : "false";
             break;
-        case KoTableStyle::BreakBefore:
+        case KTableStyle::BreakBefore:
             key = "break-before";
             value = properties[id].toBool() ? "true" : "false";
             break;
-        case KoTableStyle::BreakAfter:
+        case KTableStyle::BreakAfter:
             key = "break-after";
             value = properties[id].toBool() ? "true" : "false";
             break;
-        case KoTableStyle::MayBreakBetweenRows:
+        case KTableStyle::MayBreakBetweenRows:
             key = "may-break-between-rows";
             value = properties[id].toBool() ? "true" : "false";
             break;
-        case KoTableStyle::MasterPageName:
+        case KTableStyle::MasterPageName:
             key = "master-page-name";
             value = properties[id].toString();
             break;

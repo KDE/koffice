@@ -17,7 +17,7 @@
 
 class MockTextShape;
 class KoTextDocumentLayout;
-class KoTableStyle;
+class KTableStyle;
 class KTableColumnStyle;
 class KTableRowStyle;
 class KTableCellStyle;
@@ -45,7 +45,7 @@ private:
      * @param cellStyles a map of cell styles to use, key is QPair<row, col>.
      * @param cellTexts a map of strings to put in the cells, key is QPair<row, col>.
      */
-    void initTest(int rows, int columns, KoTableStyle *tableStyle,
+    void initTest(int rows, int columns, KTableStyle *tableStyle,
             const QList<KTableColumnStyle *> &columnStyles,
             const QList<KTableRowStyle *> &rowStyles,
             const QMap<QPair<int, int>, KTableCellStyle *> &cellStyles,
@@ -63,7 +63,7 @@ private:
      * @param columns the number of columns in the table.
      * @param tableStyle the table style to use.
      */
-    void initTestSimple(int rows = 2, int columns = 2, KoTableStyle *tableStyle = 0);
+    void initTestSimple(int rows = 2, int columns = 2, KTableStyle *tableStyle = 0);
 
     /// Clean up after a test.
     void cleanupTest();
@@ -110,7 +110,7 @@ private:
     MockTextShape *m_shape;
 
     // Default styles for the test table.
-    KoTableStyle *m_defaultTableStyle;
+    KTableStyle *m_defaultTableStyle;
     KTableColumnStyle m_defaultColumnStyle;
     KTableRowStyle m_defaultRowStyle;
     KTableCellStyle *m_defaultCellStyle;

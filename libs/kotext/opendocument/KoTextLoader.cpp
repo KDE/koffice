@@ -64,7 +64,7 @@
 #include "styles/KCharacterStyle.h"
 #include "styles/KListStyle.h"
 #include "styles/KListLevelProperties.h"
-#include "styles/KoTableStyle.h"
+#include "styles/KTableStyle.h"
 #include "styles/KTableColumnStyle.h"
 #include "styles/KTableCellStyle.h"
 #include "styles/KSectionStyle.h"
@@ -1900,7 +1900,7 @@ void KoTextLoader::loadTable(const KXmlElement &tableElem, QTextCursor &cursor)
     QTextTableFormat tableFormat;
     QString tableStyleName = tableElem.attributeNS(KOdfXmlNS::table, "style-name", "");
     if (!tableStyleName.isEmpty()) {
-        KoTableStyle *tblStyle = d->textSharedData->tableStyle(tableStyleName, d->stylesDotXml);
+        KTableStyle *tblStyle = d->textSharedData->tableStyle(tableStyleName, d->stylesDotXml);
         if (tblStyle)
             tblStyle->applyStyle(tableFormat);
     }
@@ -1910,7 +1910,7 @@ void KoTextLoader::loadTable(const KXmlElement &tableElem, QTextCursor &cursor)
     // An Empty block before a table would result in a <p></p> before a table
     // After n round-trips we would end-up with n <p></p> before table.
     // ******************************************************************************
-    //QVariant masterStyle = tableFormat.property(KoTableStyle::MasterPageName);
+    //QVariant masterStyle = tableFormat.property(KTableStyle::MasterPageName);
     //if (!masterStyle.isNull()) {
     //    QTextBlockFormat textBlockFormat;
     //    textBlockFormat.setProperty(KParagraphStyle::MasterPageName,masterStyle);
@@ -1918,7 +1918,7 @@ void KoTextLoader::loadTable(const KXmlElement &tableElem, QTextCursor &cursor)
     //}
 
     KTableColumnAndRowStyleManager *tcarManager = new KTableColumnAndRowStyleManager;
-    tableFormat.setProperty(KoTableStyle::ColumnAndRowStyleManager, QVariant::fromValue(reinterpret_cast<void *>(tcarManager)));
+    tableFormat.setProperty(KTableStyle::ColumnAndRowStyleManager, QVariant::fromValue(reinterpret_cast<void *>(tcarManager)));
     if (d->changeTracker && d->changeStack.count()) {
         tableFormat.setProperty(KCharacterStyle::ChangeTrackerId, d->changeStack.top());
     }
@@ -1974,7 +1974,7 @@ void KoTextLoader::loadTable(const KXmlElement &tableElem, QTextCursor &cursor)
 void KoTextLoader::loadTableColumn(KXmlElement &tblTag, QTextTable *tbl, int &columns)
 {
     KTableColumnAndRowStyleManager *tcarManager = reinterpret_cast<KTableColumnAndRowStyleManager *>
-                                                   (tbl->format().property(KoTableStyle::ColumnAndRowStyleManager).value<void *>());
+                                                   (tbl->format().property(KTableStyle::ColumnAndRowStyleManager).value<void *>());
     int rows = tbl->rows();
     int repeatColumn = tblTag.attributeNS(KOdfXmlNS::table, "number-columns-repeated", "1").toInt();
     QString columnStyleName = tblTag.attributeNS(KOdfXmlNS::table, "style-name", "");
@@ -2002,7 +2002,7 @@ void KoTextLoader::loadTableColumn(KXmlElement &tblTag, QTextTable *tbl, int &co
 void KoTextLoader::loadTableRow(KXmlElement &tblTag, QTextTable *tbl, QList<QRect> &spanStore, QTextCursor &cursor, int &rows)
 {
     KTableColumnAndRowStyleManager *tcarManager = reinterpret_cast<KTableColumnAndRowStyleManager *>
-                                                   (tbl->format().property(KoTableStyle::ColumnAndRowStyleManager).value<void *>());
+                                                   (tbl->format().property(KTableStyle::ColumnAndRowStyleManager).value<void *>());
 
     int columns = tbl->columns();
     QString rowStyleName = tblTag.attributeNS(KOdfXmlNS::table, "style-name", "");
@@ -2062,7 +2062,7 @@ void KoTextLoader::loadTableRow(KXmlElement &tblTag, QTextTable *tbl, QList<QRec
 void KoTextLoader::loadTableCell(KXmlElement &rowTag, QTextTable *tbl, QList<QRect> &spanStore, QTextCursor &cursor, int &currentCell)
 {
     KTableColumnAndRowStyleManager *tcarManager = reinterpret_cast<KTableColumnAndRowStyleManager *>
-                                                   (tbl->format().property(KoTableStyle::ColumnAndRowStyleManager).value<void *>());
+                                                   (tbl->format().property(KTableStyle::ColumnAndRowStyleManager).value<void *>());
     const int currentRow = tbl->rows() - 1;
     QTextTableCell cell = tbl->cellAt(currentRow, currentCell);
 

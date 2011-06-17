@@ -9,7 +9,7 @@
 #include <KTableCellStyle.h>
 #include <KTableColumnStyle.h>
 #include <KTableRowStyle.h>
-#include <KoTableStyle.h>
+#include <KTableStyle.h>
 
 #include <QTextDocument>
 #include <QTextTable>
@@ -31,7 +31,7 @@ void TestTableLayout::init()
 }
 
 void TestTableLayout::initTest(int rows, int columns,
-        KoTableStyle *tableStyle,
+        KTableStyle *tableStyle,
         const QList<KTableColumnStyle *> &columnStyles,
         const QList<KTableRowStyle *> &rowStyles,
         const QMap<QPair<int, int>, KTableCellStyle *> &cellStyles,
@@ -62,7 +62,7 @@ void TestTableLayout::initTest(int rows, int columns,
     KoTextDocument(m_doc).setStyleManager(m_styleManager);
 
     // Table style.
-    m_defaultTableStyle = new KoTableStyle();
+    m_defaultTableStyle = new KTableStyle();
     Q_ASSERT(m_defaultTableStyle);
     m_defaultTableStyle->setMargin(0.0);
     m_defaultTableStyle->setWidth(QTextLength(QTextLength::FixedLength, 200));
@@ -131,7 +131,7 @@ void TestTableLayout::initTest(int rows, int columns,
 
 }
 
-void TestTableLayout::initTestSimple(int rows, int columns, KoTableStyle *tableStyle)
+void TestTableLayout::initTestSimple(int rows, int columns, KTableStyle *tableStyle)
 {
     // initTest() will use default ones for these.
     QList<KTableColumnStyle *> columnStyles;
@@ -278,7 +278,7 @@ void TestTableLayout::testBasicLayout()
 
 void TestTableLayout::testTableMargin()
 {
-    KoTableStyle *tableStyle = new KoTableStyle();
+    KTableStyle *tableStyle = new KTableStyle();
     Q_ASSERT(tableStyle);
     tableStyle->setMargin(2.0);
     initTestSimple(2, 2, tableStyle);
@@ -334,7 +334,7 @@ void TestTableLayout::testTableMargin()
 
 void TestTableLayout::testIndividualTableMargin()
 {
-    KoTableStyle *tableStyle = new KoTableStyle();
+    KTableStyle *tableStyle = new KTableStyle();
     Q_ASSERT(tableStyle);
     tableStyle->setTopMargin(1.0);
     tableStyle->setRightMargin(2.0);
@@ -483,7 +483,7 @@ void TestTableLayout::testCellRowSpanning()
 
 void TestTableLayout::testCellRowAndColumnSpanning()
 {
-    KoTableStyle *tableStyle = new KoTableStyle();
+    KTableStyle *tableStyle = new KTableStyle();
     QVERIFY(tableStyle);
     tableStyle->setWidth(QTextLength(QTextLength::FixedLength, 300));
 
@@ -543,7 +543,7 @@ void TestTableLayout::testCellRowSpanningCellHeight()
 
 void TestTableLayout::testTableWidth()
 {
-    KoTableStyle *tableStyle = new KoTableStyle();
+    KTableStyle *tableStyle = new KTableStyle();
     QVERIFY(tableStyle);
     initTestSimple(2, 2, tableStyle);
 
@@ -728,7 +728,7 @@ void TestTableLayout::testColumnWidth()
 
 void TestTableLayout::testTableAlignment()
 {
-    KoTableStyle *tableStyle = new KoTableStyle();
+    KTableStyle *tableStyle = new KTableStyle();
     QVERIFY(tableStyle);
     tableStyle->setWidth(QTextLength(QTextLength::FixedLength, 50.0));
     tableStyle->setAlignment(Qt::AlignRight);
@@ -851,7 +851,7 @@ void TestTableLayout::testFeatureCombination()
      *  - different column widths
      *  - merged cells
      */
-    KoTableStyle *tableStyle = new KoTableStyle();
+    KTableStyle *tableStyle = new KTableStyle();
     QVERIFY(tableStyle);
     tableStyle->setWidth(QTextLength(QTextLength::FixedLength, 300.0));
     QList<KTableRowStyle *> rowStyles;

@@ -8,10 +8,10 @@
 include("common.qs");
 
 var firstTableFormat = QTextTableFormat.clone(defaultTableFormat);
-firstTableFormat.setProperty(KoTableStyle.KeepWithNext, true);
+firstTableFormat.setProperty(KTableStyle.KeepWithNext, true);
 
 var secondTableFormat = QTextTableFormat.clone(defaultTableFormat);
-secondTableFormat.setProperty(KoTableStyle.KeepWithNext, true);
+secondTableFormat.setProperty(KTableStyle.KeepWithNext, true);
 
 // first table
 cursor.insertText("this is an example of table.", defaultTextFormat);

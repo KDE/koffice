@@ -22,7 +22,7 @@
 #include "styles/KTableColumnStyle.h"
 #include "styles/KTableRowStyle.h"
 #include "styles/KTableCellStyle.h"
-#include "styles/KoTableStyle.h"
+#include "styles/KTableStyle.h"
 
 #include <QVector>
 #include <QSet>
@@ -69,14 +69,14 @@ KTableColumnAndRowStyleManager KTableColumnAndRowStyleManager::manager(QTextTabl
 {
     QTextTableFormat tableFormat = table->format();
 
-    if (tableFormat.hasProperty(KoTableStyle::ColumnAndRowStyleManager)) {
-        return  tableFormat.property(KoTableStyle::ColumnAndRowStyleManager).value<KTableColumnAndRowStyleManager>();
+    if (tableFormat.hasProperty(KTableStyle::ColumnAndRowStyleManager)) {
+        return  tableFormat.property(KTableStyle::ColumnAndRowStyleManager).value<KTableColumnAndRowStyleManager>();
     } else {
         KTableColumnAndRowStyleManager carsManager;
 
         QVariant var;
         var.setValue(carsManager);
-        tableFormat.setProperty(KoTableStyle::ColumnAndRowStyleManager, var);
+        tableFormat.setProperty(KTableStyle::ColumnAndRowStyleManager, var);
         table->setFormat(tableFormat);
         return carsManager;
     }

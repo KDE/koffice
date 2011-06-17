@@ -233,16 +233,16 @@ QTextTableFormat.clone = function(fmt) {
 
 var defaultTableFormat = new QTextTableFormat;
 
-var KoTableStyle = {};
+var KTableStyle = {};
 i = QTextFormat.UserProperty + 1;
-KoTableStyle.StyleId = i++;
-KoTableStyle.KeepWithNext = i++;
-KoTableStyle.BreakBefore = i++;
-KoTableStyle.BreakAfter = i++;
-KoTableStyle.MayBreakBetweenRows = i++;
-KoTableStyle.ColumnAndRowStylemanager = i++;
-KoTableStyle.CollapsingBorders = i++;
-KoTableStyle.MasterPageName = i++;
+KTableStyle.StyleId = i++;
+KTableStyle.KeepWithNext = i++;
+KTableStyle.BreakBefore = i++;
+KTableStyle.BreakAfter = i++;
+KTableStyle.MayBreakBetweenRows = i++;
+KTableStyle.ColumnAndRowStylemanager = i++;
+KTableStyle.CollapsingBorders = i++;
+KTableStyle.MasterPageName = i++;
 
 // Default table formatting
 QTextTableCellFormat.clone = function(fmt) {

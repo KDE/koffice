@@ -53,7 +53,7 @@ public:
     QHash<int, KParagraphStyle*> paragStyles;
     QHash<int, KListStyle*> listStyles;
     QHash<int, KListStyle *> automaticListStyles;
-    QHash<int, KoTableStyle *> tableStyles;
+    QHash<int, KTableStyle *> tableStyles;
     QHash<int, KTableColumnStyle *> tableColumnStyles;
     QHash<int, KTableRowStyle *> tableRowStyles;
     QHash<int, KTableCellStyle *> tableCellStyles;

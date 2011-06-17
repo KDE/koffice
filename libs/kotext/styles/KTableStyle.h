@@ -42,10 +42,10 @@ class KXmlElement;
  * Each table in the main text either is based on a table style, or its not. Where
  * it is based on a table style this is indecated that it has a property 'StyleId'
  * with an integer as value.  The integer value corresponds to the styleId() output of
- * a specific KoTableStyle.
+ * a specific KTableStyle.
  * @see KStyleManager
  */
-class KOTEXT_EXPORT KoTableStyle : public QObject
+class KOTEXT_EXPORT KTableStyle : public QObject
 {
     Q_OBJECT
 public:
@@ -57,23 +57,23 @@ public:
         BreakAfter,     ///< If true, insert a frame break after this table
         MayBreakBetweenRows,     ///< If true, then the table is allowed to break between rows
         ColumnAndRowStyleManager,     ///< QVariant of a KoColumnAndRowStyleManager
-                                                             /// It's not really a property of KoTableStyle but defined here for convenience
+                                                             /// It's not really a property of KTableStyle but defined here for convenience
         CollapsingBorders,     ///< If true, then the table has collapsing border model
         MasterPageName         ///< Optional name of the master-page
     };
 
     /// Constructor
-    KoTableStyle(QObject *parent = 0);
-    /// Creates a KoTableStyle with the given table format, and \a parent
-    KoTableStyle(const QTextTableFormat &blockFormat, QObject *parent = 0);
+    KTableStyle(QObject *parent = 0);
+    /// Creates a KTableStyle with the given table format, and \a parent
+    KTableStyle(const QTextTableFormat &blockFormat, QObject *parent = 0);
     /// Destructor
-    ~KoTableStyle();
+    ~KTableStyle();
 
-    /// Creates a KoTableStyle that represents the formatting of \a block.
-    static KoTableStyle *fromTable(const QTextTable &table, QObject *parent = 0);
+    /// Creates a KTableStyle that represents the formatting of \a block.
+    static KTableStyle *fromTable(const QTextTable &table, QObject *parent = 0);
 
     /// creates a clone of this style with the specified parent
-    KoTableStyle *clone(QObject *parent = 0);
+    KTableStyle *clone(QObject *parent = 0);
 
     /// See similar named method on QTextFrameFormat
     void setWidth(const QTextLength &width);
@@ -125,10 +125,10 @@ public:
     Qt::Alignment alignment() const;
 
     /// set the parent style this one inherits its unset properties from.
-    void setParentStyle(KoTableStyle *parent);
+    void setParentStyle(KTableStyle *parent);
 
     /// return the parent style
-    KoTableStyle *parentStyle() const;
+    KTableStyle *parentStyle() const;
 
     /// return the name of the style.
     QString name() const;
@@ -149,7 +149,7 @@ public:
 
 
     /// copy all the properties from the other style to this style, effectively duplicating it.
-    void copyProperties(const KoTableStyle *style);
+    void copyProperties(const KTableStyle *style);
 
     /**
      * Apply this style to a tableFormat by copying all properties from this, and parent
@@ -160,9 +160,9 @@ public:
     void remove(int key);
 
     /// Compare the properties of this style with the other
-    bool operator==(const KoTableStyle &other) const;
+    bool operator==(const KTableStyle &other) const;
 
-    void removeDuplicates(const KoTableStyle &other);
+    void removeDuplicates(const KTableStyle &other);
 
     /**
      * Load the style form the element

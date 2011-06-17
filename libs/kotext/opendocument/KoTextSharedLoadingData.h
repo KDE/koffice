@@ -33,7 +33,7 @@ class KOdfLoadingContext;
 class KParagraphStyle;
 class KCharacterStyle;
 class KListStyle;
-class KoTableStyle;
+class KTableStyle;
 class KTableColumnStyle;
 class KTableRowStyle;
 class KTableCellStyle;
@@ -114,7 +114,7 @@ public:
      * @param stylesDotXml If set the styles from styles.xml are use if unset styles from content.xml are used.
      * @return The table style for the given name or 0 if not found
      */
-    KoTableStyle *tableStyle(const QString &name, bool stylesDotXml) const;
+    KTableStyle *tableStyle(const QString &name, bool stylesDotXml) const;
 
     /**
      * Get the table column style for the given name
@@ -206,7 +206,7 @@ private:
     // helper functions for loading of table styles
     void addTableStyles(KOdfLoadingContext &context, QList<KXmlElement*> styleElements, int styleTypes,
                        KStyleManager *styleManager = 0);
-    QList<QPair<QString, KoTableStyle *> > loadTableStyles(KOdfLoadingContext &context, QList<KXmlElement*> styleElements);
+    QList<QPair<QString, KTableStyle *> > loadTableStyles(KOdfLoadingContext &context, QList<KXmlElement*> styleElements);
 
     // helper functions for loading of table column styles
     void addTableColumnStyles(KOdfLoadingContext &context, QList<KXmlElement*> styleElements, int styleTypes,

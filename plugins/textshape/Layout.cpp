@@ -33,7 +33,7 @@
 #include <KParagraphStyle.h>
 #include <KCharacterStyle.h>
 #include <KListStyle.h>
-#include <KoTableStyle.h>
+#include <KTableStyle.h>
 #include <KTableRowStyle.h>
 #include <KTableColumnAndRowStyleManager.h>
 #include <KStyleManager.h>
@@ -758,7 +758,7 @@ void Layout::handleTableBreak(QTextTableCell &previousCell, QTextTable *table)
     QTextTableFormat tableFormat = table->format();
     KTableColumnAndRowStyleManager *carsManager =
     reinterpret_cast<KTableColumnAndRowStyleManager *>(
-            tableFormat.property(KoTableStyle::ColumnAndRowStyleManager).value<void *>());
+            tableFormat.property(KTableStyle::ColumnAndRowStyleManager).value<void *>());
 
     if (!carsManager)
         carsManager = new KTableColumnAndRowStyleManager();

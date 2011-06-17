@@ -22,7 +22,7 @@
 #include "TableLayout.h"
 #include "TableLayoutData.h"
 
-#include <KoTableStyle.h>
+#include <KTableStyle.h>
 #include <KTableBorderStyle.h>
 #include <KTableCellStyle.h>
 #include <KTableColumnStyle.h>
@@ -406,7 +406,7 @@ void TableLayout::drawBorders(QPainter *painter, QVector<QLineF> *accuBlankBorde
 
     painter->save();
 
-    KoTableStyle tableStyle(m_table->format());
+    KTableStyle tableStyle(m_table->format());
     bool collapsing = tableStyle.collapsingBorderModel();
 
     // Draw cell borders using their styles.

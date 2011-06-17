@@ -33,7 +33,7 @@ class QTextDocument;
 class KCharacterStyle;
 class KParagraphStyle;
 class KListStyle;
-class KoTableStyle;
+class KTableStyle;
 class KTableColumnStyle;
 class KTableRowStyle;
 class KTableCellStyle;
@@ -85,7 +85,7 @@ public:
     /**
      * Add a new table style, automatically giving it a new styleId.
      */
-    void add(KoTableStyle *style);
+    void add(KTableStyle *style);
     /**
      * Add a new table column style, automatically giving it a new styleId.
      */
@@ -118,7 +118,7 @@ public:
     /**
      * Remove a table style.
      */
-    void remove(KoTableStyle *style);
+    void remove(KTableStyle *style);
     /**
      * Remove a table column style.
      */
@@ -173,11 +173,11 @@ public:
     /**
      * Return a tableStyle by its id.
      * From documents you can retrieve the id out of each QTextTableFormat
-     * by requesting the KoTableStyle::StyleId property.
+     * by requesting the KTableStyle::StyleId property.
      * @param id the unique Id to search for.
-     * @see KoTableStyle::styleId()
+     * @see KTableStyle::styleId()
      */
-    KoTableStyle *tableStyle(int id) const;
+    KTableStyle *tableStyle(int id) const;
 
     /**
      * Return a tableColumnStyle by its id.
@@ -243,7 +243,7 @@ public:
      * @param name the name of the style.
      * @see tableStyle(id);
      */
-    KoTableStyle *tableStyle(const QString &name) const;
+    KTableStyle *tableStyle(const QString &name) const;
 
     /**
      * Return the first tableColumnStyle with the param user-visible-name.
@@ -318,7 +318,7 @@ public:
     QList<KListStyle*> listStyles() const;
 
     /// return all the tableStyles registered.
-    QList<KoTableStyle*> tableStyles() const;
+    QList<KTableStyle*> tableStyles() const;
 
     /// return all the tableColumnStyles registered.
     QList<KTableColumnStyle*> tableColumnStyles() const;
@@ -339,7 +339,7 @@ signals:
     void styleAdded(KParagraphStyle*);
     void styleAdded(KCharacterStyle*);
     void styleAdded(KListStyle*);
-    void styleAdded(KoTableStyle*);
+    void styleAdded(KTableStyle*);
     void styleAdded(KTableColumnStyle*);
     void styleAdded(KTableRowStyle*);
     void styleAdded(KTableCellStyle*);
@@ -347,7 +347,7 @@ signals:
     void styleRemoved(KParagraphStyle*);
     void styleRemoved(KCharacterStyle*);
     void styleRemoved(KListStyle*);
-    void styleRemoved(KoTableStyle*);
+    void styleRemoved(KTableStyle*);
     void styleRemoved(KTableColumnStyle*);
     void styleRemoved(KTableRowStyle*);
     void styleRemoved(KTableCellStyle*);
@@ -379,7 +379,7 @@ public slots:
      * all documents with the style.
      * Note that successive calls are aggregated.
      */
-    void alteredStyle(const KoTableStyle *style);
+    void alteredStyle(const KTableStyle *style);
 
     /**
      * Slot that should be called whenever a style is changed. This will update

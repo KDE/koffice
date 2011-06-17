@@ -8,10 +8,10 @@
 include("common.qs");
 
 var firstTableFormat = QTextTableFormat.clone(defaultTableFormat);
-firstTableFormat.setProperty(KoTableStyle.MayBreakBetweenRows, true);
+firstTableFormat.setProperty(KTableStyle.MayBreakBetweenRows, true);
 
 var secondTableFormat = QTextTableFormat.clone(defaultTableFormat);
-secondTableFormat.setProperty(KoTableStyle.MayBreakBetweenRows, false);
+secondTableFormat.setProperty(KTableStyle.MayBreakBetweenRows, false);
 
 // first table
 cursor.insertText("this is an example of table with a page break after the table.", defaultTextFormat);

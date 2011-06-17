@@ -61,7 +61,7 @@ set(kotext_LIB_SRCS
     styles/KListLevelProperties.cpp
     styles/ChangeFollower.cpp
     styles/KTableBorderStyle.cpp
-    styles/KoTableStyle.cpp
+    styles/KTableStyle.cpp
     styles/KTableColumnStyle.cpp
     styles/KTableRowStyle.cpp
     styles/KTableCellStyle.cpp

@@ -8,9 +8,9 @@
 include("common.qs");
 
 var firstTableFormat = QTextTableFormat.clone(defaultTableFormat);
-firstTableFormat.setProperty(KoTableStyle.CollapsingBorders, true);
+firstTableFormat.setProperty(KTableStyle.CollapsingBorders, true);
 
-var i = KoTableStyle.CollapsingBorders + 1;
+var i = KTableStyle.CollapsingBorders + 1;
 print("The id is ", i);
 
 // first table
