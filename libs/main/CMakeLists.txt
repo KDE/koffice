@@ -197,7 +197,7 @@ install( FILES
     KoUpdater.h
     KoStandardAction.h
     komain_export.h
-DESTINATION ${INCLUDE_INSTALL_DIR} COMPONENT Devel)
+DESTINATION ${INCLUDE_INSTALL_DIR}/private COMPONENT Devel)
 
 if( Soprano_FOUND )
     install( FILES
@@ -216,6 +216,6 @@ if( Soprano_FOUND )
         rdf/InsertSemanticObjectCreateAction.h
         rdf/InsertSemanticObjectReferenceAction.h
         rdf/KoSemanticStylesheetsEditor.h
-    DESTINATION ${INCLUDE_INSTALL_DIR} COMPONENT Devel)
+    DESTINATION ${INCLUDE_INSTALL_DIR}/private COMPONENT Devel)
 endif( Soprano_FOUND )
 

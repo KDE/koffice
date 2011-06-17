@@ -119,7 +119,7 @@ install(FILES
     resources/KoSegmentGradient.h
     resources/KoStopGradient.h
     DESTINATION
-    ${INCLUDE_INSTALL_DIR} COMPONENT Devel
+    ${INCLUDE_INSTALL_DIR}/private COMPONENT Devel
 )
 
 install( FILES pigment.desktop pigmentextension.desktop DESTINATION ${SERVICETYPES_INSTALL_DIR})

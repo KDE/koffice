@@ -84,5 +84,5 @@ install(FILES
     KoPAViewBase.h
     KoPAViewMode.h
     DESTINATION
-    ${INCLUDE_INSTALL_DIR} COMPONENT Devel
+    ${INCLUDE_INSTALL_DIR}/private COMPONENT Devel
 )

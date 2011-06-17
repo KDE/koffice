@@ -112,5 +112,5 @@ install( FILES
     KoZoomMode.h
 
     DESTINATION
-    ${INCLUDE_INSTALL_DIR}
+    ${INCLUDE_INSTALL_DIR}/private
 COMPONENT Devel)
