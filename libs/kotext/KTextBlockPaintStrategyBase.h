@@ -31,11 +31,11 @@ class QPainter;
  * This class is used to control aspects of textblock painting
  * Which is used when KPresenter animates text.
  */
-class KOTEXT_EXPORT KoTextBlockPaintStrategyBase
+class KOTEXT_EXPORT KTextBlockPaintStrategyBase
 {
 public:
-    KoTextBlockPaintStrategyBase();
-    virtual ~KoTextBlockPaintStrategyBase();
+    KTextBlockPaintStrategyBase();
+    virtual ~KTextBlockPaintStrategyBase();
     /// returns a background for the block, the default implementation returns the defaultBackground
     virtual QBrush background(const QBrush &defaultBackground);
     /// A strategy implementing this class can apply its settings by modifying the \a painter

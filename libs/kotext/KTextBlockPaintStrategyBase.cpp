@@ -18,25 +18,25 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoTextBlockPaintStrategyBase.h"
+#include "KTextBlockPaintStrategyBase.h"
 
-KoTextBlockPaintStrategyBase::KoTextBlockPaintStrategyBase()
+KTextBlockPaintStrategyBase::KTextBlockPaintStrategyBase()
 {
 }
 
-KoTextBlockPaintStrategyBase::~KoTextBlockPaintStrategyBase()
+KTextBlockPaintStrategyBase::~KTextBlockPaintStrategyBase()
 {
 }
 
-QBrush KoTextBlockPaintStrategyBase::background(const QBrush &defaultBackground)
+QBrush KTextBlockPaintStrategyBase::background(const QBrush &defaultBackground)
 {
     return defaultBackground;
 }
 
-void KoTextBlockPaintStrategyBase::applyStrategy(QPainter *)
+void KTextBlockPaintStrategyBase::applyStrategy(QPainter *)
 {
 }
 
-bool KoTextBlockPaintStrategyBase::isVisible() {
+bool KTextBlockPaintStrategyBase::isVisible() {
     return true;
 }

@@ -20,7 +20,7 @@
 #ifndef KPRTEXTBLOCKPAINTSTRATEGY_H
 #define KPRTEXTBLOCKPAINTSTRATEGY_H
 
-#include <KoTextBlockPaintStrategyBase.h>
+#include <KTextBlockPaintStrategyBase.h>
 
 class SCAnimationCache;
 class KTextBlockData;
@@ -28,7 +28,7 @@ class KTextBlockData;
 /**
  * This class is used to control aspects of textblock painting
  */
-class SCTextBlockPaintStrategy : public KoTextBlockPaintStrategyBase
+class SCTextBlockPaintStrategy : public KTextBlockPaintStrategyBase
 {
 public:
     SCTextBlockPaintStrategy(KTextBlockData *blockData, SCAnimationCache *animationCache);

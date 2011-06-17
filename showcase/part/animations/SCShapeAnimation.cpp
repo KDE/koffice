@@ -109,7 +109,7 @@ bool SCShapeAnimation::visible()
 void SCShapeAnimation::deactivate()
 {
     if (m_textBlockData) {
-        m_textBlockData->setPaintStrategy(new KoTextBlockPaintStrategyBase());
+        m_textBlockData->setPaintStrategy(new KTextBlockPaintStrategyBase());
     }
 }
 

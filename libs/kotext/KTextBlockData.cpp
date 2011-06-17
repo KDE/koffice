@@ -20,7 +20,7 @@
 
 #include "KTextBlockData.h"
 #include "KTextBlockBorderData.h"
-#include "KoTextBlockPaintStrategyBase.h"
+#include "KTextBlockPaintStrategyBase.h"
 
 class KTextBlockData::Private
 {
@@ -48,7 +48,7 @@ public:
     int counterIndex;
     QPointF counterPos;
     KTextBlockBorderData *border;
-    KoTextBlockPaintStrategyBase *paintStrategy;
+    KTextBlockPaintStrategyBase *paintStrategy;
 };
 
 KTextBlockData::KTextBlockData()
@@ -151,13 +151,13 @@ KTextBlockBorderData *KTextBlockData::border() const
     return d->border;
 }
 
-void KTextBlockData::setPaintStrategy(KoTextBlockPaintStrategyBase *paintStrategy)
+void KTextBlockData::setPaintStrategy(KTextBlockPaintStrategyBase *paintStrategy)
 {
     delete d->paintStrategy;
     d->paintStrategy = paintStrategy;
 }
 
-KoTextBlockPaintStrategyBase *KTextBlockData::paintStrategy() const
+KTextBlockPaintStrategyBase *KTextBlockData::paintStrategy() const
 {
     return d->paintStrategy;
 }

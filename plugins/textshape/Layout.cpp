@@ -47,7 +47,7 @@
 #include <KChangeTracker.h>
 #include <KChangeTrackerElement.h>
 #include <KOdfGenericChange.h>
-#include <KoTextBlockPaintStrategyBase.h>
+#include <KTextBlockPaintStrategyBase.h>
 #include <KImageData.h>
 #include <KImageCollection.h>
 
@@ -1144,12 +1144,12 @@ void Layout::drawFrame(QTextFrame *frame, QPainter *painter, const KoTextDocumen
 
             KTextBlockData *blockData = dynamic_cast<KTextBlockData*>(block.userData());
             KTextBlockBorderData *border = 0;
-            KoTextBlockPaintStrategyBase *paintStrategy = 0;
+            KTextBlockPaintStrategyBase *paintStrategy = 0;
             if (blockData) {
                 border = blockData->border();
                 paintStrategy = blockData->paintStrategy();
             }
-            KoTextBlockPaintStrategyBase dummyPaintStrategy;
+            KTextBlockPaintStrategyBase dummyPaintStrategy;
             if (paintStrategy == 0)
                 paintStrategy = &dummyPaintStrategy;
             if (!paintStrategy->isVisible())
