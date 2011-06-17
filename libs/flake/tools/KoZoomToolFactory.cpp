@@ -19,7 +19,7 @@
  */
 
 #include "KoZoomToolFactory_p.h"
-#include "KoZoomTool_p.h"
+#include "KZoomTool_p.h"
 
 #include <klocale.h>
 
@@ -35,5 +35,5 @@ KoZoomToolFactory::KoZoomToolFactory(QObject *parent)
 
 KToolBase *KoZoomToolFactory::createTool(KCanvasBase *canvas)
 {
-    return new KoZoomTool(canvas);
+    return new KZoomTool(canvas);
 }

@@ -25,7 +25,7 @@
 #include "tools/KCreateShapesToolFactory_p.h"
 #include "tools/KCreateShapesTool.h"
 #include "tools/KPathToolFactory_p.h"
-#include "tools/KoZoomTool_p.h"
+#include "tools/KZoomTool_p.h"
 #include "tools/KoZoomToolFactory_p.h"
 #include "tools/KPanTool_p.h"
 #include "tools/KPanToolFactory_p.h"

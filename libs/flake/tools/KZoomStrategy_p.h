@@ -35,11 +35,11 @@
 #include "KShapeRubberSelectStrategy.h"
 
 class KCanvasController;
-class KoZoomTool;
+class KZoomTool;
 
 /**
  * //internal
- * This is a strategy for the KoZoomTool which will be used to do the actual zooming
+ * This is a strategy for the KZoomTool which will be used to do the actual zooming
  */
 class KZoomStrategy : public KShapeRubberSelectStrategy
 {
@@ -50,7 +50,7 @@ public:
      * @param controller the canvas controller that wraps the canvas the tool is acting on.
      * @param clicked the location (in documnet points) where the interaction starts.
      */
-    KZoomStrategy(KoZoomTool *tool, KCanvasController *controller, const QPointF &clicked);
+    KZoomStrategy(KZoomTool *tool, KCanvasController *controller, const QPointF &clicked);
 
     void forceZoomOut();
     void forceZoomIn();

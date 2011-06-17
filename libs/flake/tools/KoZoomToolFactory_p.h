@@ -35,7 +35,7 @@
 
 #include "KToolFactoryBase.h"
 
-/// Factory for the KoZoomTool
+/// Factory for the KZoomTool
 class KoZoomToolFactory : public KToolFactoryBase
 {
 public:

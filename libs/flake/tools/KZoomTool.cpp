@@ -19,7 +19,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoZoomTool_p.h"
+#include "KZoomTool_p.h"
 #include "KZoomStrategy_p.h"
 #include "KoZoomToolWidget_p.h"
 #include "KPointerEvent.h"
@@ -29,7 +29,7 @@
 #include <kstandarddirs.h>
 #include <kdebug.h>
 
-KoZoomTool::KoZoomTool(KCanvasBase *canvas)
+KZoomTool::KZoomTool(KCanvasBase *canvas)
         : KInteractionTool(canvas),
         m_temporary(false), m_zoomInMode(true)
 {
@@ -40,13 +40,13 @@ KoZoomTool::KoZoomTool(KCanvasBase *canvas)
     m_outCursor = QCursor(outPixmap, 4, 4);
 }
 
-void KoZoomTool::wheelEvent(KPointerEvent *event)
+void KZoomTool::wheelEvent(KPointerEvent *event)
 {
     // Let KCanvasController handle this
     event->ignore();
 }
 
-void KoZoomTool::mouseReleaseEvent(KPointerEvent *event)
+void KZoomTool::mouseReleaseEvent(KPointerEvent *event)
 {
     KInteractionTool::mouseReleaseEvent(event);
     if (m_temporary) {
@@ -54,7 +54,7 @@ void KoZoomTool::mouseReleaseEvent(KPointerEvent *event)
     }
 }
 
-void KoZoomTool::mouseMoveEvent(KPointerEvent *event)
+void KZoomTool::mouseMoveEvent(KPointerEvent *event)
 {
     updateCursor(event->modifiers() & Qt::ControlModifier);
 
@@ -63,14 +63,14 @@ void KoZoomTool::mouseMoveEvent(KPointerEvent *event)
     }
 }
 
-void KoZoomTool::keyPressEvent(QKeyEvent *event)
+void KZoomTool::keyPressEvent(QKeyEvent *event)
 {
     event->ignore();
 
     updateCursor(event->modifiers() & Qt::ControlModifier);
 }
 
-void KoZoomTool::keyReleaseEvent(QKeyEvent *event)
+void KZoomTool::keyReleaseEvent(QKeyEvent *event)
 {
     event->ignore();
 
@@ -79,18 +79,18 @@ void KoZoomTool::keyReleaseEvent(QKeyEvent *event)
     KInteractionTool::keyReleaseEvent(event);
 }
 
-void KoZoomTool::activate(ToolActivation toolActivation, const QSet<KShape*> &)
+void KZoomTool::activate(ToolActivation toolActivation, const QSet<KShape*> &)
 {
     m_temporary = toolActivation == TemporaryActivation;
     updateCursor(false);
 }
 
-void KoZoomTool::mouseDoubleClickEvent(KPointerEvent *event)
+void KZoomTool::mouseDoubleClickEvent(KPointerEvent *event)
 {
     mousePressEvent(event);
 }
 
-KInteractionStrategy *KoZoomTool::createStrategy(KPointerEvent *event)
+KInteractionStrategy *KZoomTool::createStrategy(KPointerEvent *event)
 {
     KZoomStrategy *zs = new KZoomStrategy(this, m_controller, event->point);
     if (event->button() == Qt::RightButton) {
@@ -109,18 +109,18 @@ KInteractionStrategy *KoZoomTool::createStrategy(KPointerEvent *event)
     return zs;
 }
 
-QWidget *KoZoomTool::createOptionWidget()
+QWidget *KZoomTool::createOptionWidget()
 {
     return new KoZoomToolWidget(this);
 }
 
-void KoZoomTool::setZoomInMode(bool zoomIn)
+void KZoomTool::setZoomInMode(bool zoomIn)
 {
     m_zoomInMode = zoomIn;
     updateCursor(false);
 }
 
-void KoZoomTool::updateCursor(bool swap)
+void KZoomTool::updateCursor(bool swap)
 {
     bool setZoomInCursor = m_zoomInMode;
     if (swap) {

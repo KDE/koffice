@@ -35,13 +35,13 @@
 #include <QPixmap>
 #include "ui_KoZoomToolWidget.h"
 
-class KoZoomTool;
+class KZoomTool;
 
 class KoZoomToolWidget : public QWidget, Ui::ZoomToolWidget
 {
     Q_OBJECT
 public:
-    explicit KoZoomToolWidget(KoZoomTool* tool, QWidget *parent = 0);
+    explicit KoZoomToolWidget(KZoomTool* tool, QWidget *parent = 0);
     ~KoZoomToolWidget();
 
 protected:
@@ -56,7 +56,7 @@ private:
     bool m_dirtyThumbnail;
     QRect m_birdEyeRect;
     QPixmap m_thumbnail;
-    KoZoomTool *m_tool;
+    KZoomTool *m_tool;
 };
 
 #endif
