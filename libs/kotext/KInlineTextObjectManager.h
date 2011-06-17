@@ -29,7 +29,7 @@
 #include <QTextCharFormat>
 
 class KCanvasBase;
-class KoTextLocator;
+class KTextLocator;
 class QAction;
 
 /**
@@ -135,7 +135,7 @@ public:
      */
     QList<QAction*> createInsertVariableActions(KCanvasBase *host) const;
 
-    QList<KoTextLocator*> textLocators() const;
+    QList<KTextLocator*> textLocators() const;
 
 public slots:
     void documentInformationUpdated(const QString &info, const QString &data);

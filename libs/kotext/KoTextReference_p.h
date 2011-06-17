@@ -32,11 +32,11 @@
 
 #include "KoVariable.h"
 
-class KoTextLocator;
+class KTextLocator;
 
 /**
  * This variable displays information about a text reference.
- * A user can insert characters that are called locators.  And are represented by a KoTextLocator
+ * A user can insert characters that are called locators.  And are represented by a KTextLocator
  * the user can then insert (several) KoTextReference variables that will update the textual description
  * of the locator whenever text is re-layouted.
  * This effectively means that the reference will print the page number (for example) of where the
@@ -61,7 +61,7 @@ protected:
     virtual void positionChanged();
 
 private:
-    KoTextLocator *locator();
+    KTextLocator *locator();
     int m_indexId;
     // TODO store a config of what we actually want to show.  The hardcoded pagenumber is not enough.
     // we want 'section' / chapter name/number and maybe word.  All in a nice formatted text.

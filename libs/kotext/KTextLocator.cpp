@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoTextLocator.h"
+#include "KTextLocator.h"
 #include "KInlineObject_p.h"
 #include "KTextBlockData.h"
 #include "KoTextShapeData.h"
@@ -39,7 +39,7 @@
 class KoTextLocatorPrivate : public KInlineObjectPrivate
 {
 public:
-    KoTextLocatorPrivate(KoTextLocator *q)
+    KoTextLocatorPrivate(KTextLocator *q)
         : KInlineObjectPrivate(q),
         dirty(false),
         chapterPosition(-1),
@@ -86,40 +86,40 @@ public:
 
     QList<KoTextReference*> listeners;
 
-    Q_DECLARE_PUBLIC(KoTextLocator)
+    Q_DECLARE_PUBLIC(KTextLocator)
 };
 
 
-KoTextLocator::KoTextLocator()
+KTextLocator::KTextLocator()
         : KInlineObject(*(new KoTextLocatorPrivate(this)), false)
 {
 }
 
-KoTextLocator::~KoTextLocator()
+KTextLocator::~KTextLocator()
 {
 }
 
-void KoTextLocator::updatePosition(QTextInlineObject object, const QTextCharFormat &format)
+void KTextLocator::updatePosition(QTextInlineObject object, const QTextCharFormat &format)
 {
     Q_UNUSED(object);
     Q_UNUSED(format);
 }
 
-void KoTextLocator::resize(QTextInlineObject object, const QTextCharFormat &format, QPaintDevice *pd)
+void KTextLocator::resize(QTextInlineObject object, const QTextCharFormat &format, QPaintDevice *pd)
 {
     Q_UNUSED(object);
     Q_UNUSED(pd);
     Q_UNUSED(format);
 }
 
-void KoTextLocator::paint(QPainter &, QPaintDevice *, const QRectF &, QTextInlineObject, const QTextCharFormat &)
+void KTextLocator::paint(QPainter &, QPaintDevice *, const QRectF &, QTextInlineObject, const QTextCharFormat &)
 {
     // nothing to paint.
 }
 
-QString KoTextLocator::chapter() const
+QString KTextLocator::chapter() const
 {
-    Q_D(const KoTextLocator);
+    Q_D(const KTextLocator);
     const_cast<KoTextLocatorPrivate*>(d)->update();
     if (d->chapterPosition < 0)
         return QString();
@@ -127,9 +127,9 @@ QString KoTextLocator::chapter() const
     return block.text().remove(QChar::ObjectReplacementCharacter);
 }
 
-KTextBlockData *KoTextLocator::chapterBlockData() const
+KTextBlockData *KTextLocator::chapterBlockData() const
 {
-    Q_D(const KoTextLocator);
+    Q_D(const KTextLocator);
     const_cast<KoTextLocatorPrivate*>(d)->update();
     if (d->chapterPosition < 0)
         return 0;
@@ -137,14 +137,14 @@ KTextBlockData *KoTextLocator::chapterBlockData() const
     return dynamic_cast<KTextBlockData*>(block.userData());
 }
 
-int KoTextLocator::pageNumber() const
+int KTextLocator::pageNumber() const
 {
-    Q_D(const KoTextLocator);
+    Q_D(const KTextLocator);
     const_cast<KoTextLocatorPrivate*>(d)->update();
     return d->pageNumber;
 }
 
-QString KoTextLocator::word() const
+QString KTextLocator::word() const
 {
     QTextCursor cursor(document());
     cursor.setPosition(textPosition());
@@ -153,19 +153,19 @@ QString KoTextLocator::word() const
     return cursor.selectedText().trimmed().remove(QChar::ObjectReplacementCharacter);
 }
 
-void KoTextLocator::addListener(KoTextReference *reference)
+void KTextLocator::addListener(KoTextReference *reference)
 {
-    Q_D(KoTextLocator);
+    Q_D(KTextLocator);
     d->listeners.append(reference);
 }
 
-void KoTextLocator::removeListener(KoTextReference *reference)
+void KTextLocator::removeListener(KoTextReference *reference)
 {
-    Q_D(KoTextLocator);
+    Q_D(KTextLocator);
     d->listeners.removeAll(reference);
 }
 
-bool KoTextLocator::loadOdf(const KXmlElement &element, KShapeLoadingContext &context)
+bool KTextLocator::loadOdf(const KXmlElement &element, KShapeLoadingContext &context)
 {
     Q_UNUSED(element);
     Q_UNUSED(context);
@@ -173,7 +173,7 @@ bool KoTextLocator::loadOdf(const KXmlElement &element, KShapeLoadingContext &co
     return false;
 }
 
-void KoTextLocator::saveOdf(KShapeSavingContext &context)
+void KTextLocator::saveOdf(KShapeSavingContext &context)
 {
     Q_UNUSED(context);
     // TODO

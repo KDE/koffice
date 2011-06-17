@@ -22,7 +22,7 @@
 #include "InsertTextReferenceAction_p.h"
 #include "InsertTextLocator_p.h"
 #include "KInlineObjectRegistry.h"
-#include "KoTextLocator.h"
+#include "KTextLocator.h"
 #include "KoBookmark.h"
 
 #include <QTextCursor>
@@ -91,7 +91,7 @@ bool KInlineTextObjectManager::removeInlineObject(QTextCursor &cursor)
         m_listeners.removeAt(position);
     }
 
-    // what if a KoTextLocator is removed? what to do with KoTextReference?
+    // what if a KTextLocator is removed? what to do with KoTextReference?
     QTextCharFormat format = cursor.charFormat();
     int id = format.intProperty(InlineInstanceId);
     if (id <= 0)
@@ -202,11 +202,11 @@ QList<QAction*> KInlineTextObjectManager::createInsertVariableActions(KCanvasBas
     return answer;
 }
 
-QList<KoTextLocator*> KInlineTextObjectManager::textLocators() const
+QList<KTextLocator*> KInlineTextObjectManager::textLocators() const
 {
-    QList<KoTextLocator*> answers;
+    QList<KTextLocator*> answers;
     foreach(KInlineObject *object, m_objects) {
-        KoTextLocator *tl = dynamic_cast<KoTextLocator*>(object);
+        KTextLocator *tl = dynamic_cast<KTextLocator*>(object);
         if (tl)
             answers.append(tl);
     }

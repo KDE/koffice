@@ -25,7 +25,7 @@
 #include <KoBookmarkManager.h>
 #include <KoBookmark.h>
 #include <KoTextPage.h>
-#include <KoTextLocator.h>
+#include <KTextLocator.h>
 #include <KTextDocumentLayout.h>
 #include <KoTextShapeData.h>
 #include <KShape.h>
@@ -63,7 +63,7 @@ JumpOverview::JumpOverview(QTextDocument *doc, QWidget *parent)
         m_entries << entry;
     }
 
-    foreach (const KoTextLocator *locator, itom->textLocators()) {
+    foreach (const KTextLocator *locator, itom->textLocators()) {
         // kDebug() << "locator" << locator->word() << "on page" << locator->pageNumber();
         JumpEntry entry;
         entry.type = JumpEntry::Bookmark;

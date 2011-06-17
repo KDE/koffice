@@ -18,7 +18,7 @@
  */
 
 #include "KoTextReference_p.h"
-#include "KoTextLocator.h"
+#include "KTextLocator.h"
 #include "KInlineTextObjectManager.h"
 
 #include <KXmlReader.h> // for usage in Q_UNUSED
@@ -33,7 +33,7 @@ KoTextReference::KoTextReference(int indexId)
 
 KoTextReference::~KoTextReference()
 {
-    KoTextLocator *loc = locator();
+    KTextLocator *loc = locator();
     if (loc)
         loc->removeListener(this);
 }
@@ -41,7 +41,7 @@ KoTextReference::~KoTextReference()
 void KoTextReference::positionChanged()
 {
     Q_ASSERT(manager());
-    KoTextLocator *loc = locator();
+    KTextLocator *loc = locator();
     if (loc)
         setValue(QString::number(loc->pageNumber()));
     else
@@ -54,9 +54,9 @@ void KoTextReference::setup()
     positionChanged();
 }
 
-KoTextLocator* KoTextReference::locator()
+KTextLocator* KoTextReference::locator()
 {
-    return dynamic_cast<KoTextLocator*>(manager()->inlineTextObject(m_indexId));
+    return dynamic_cast<KTextLocator*>(manager()->inlineTextObject(m_indexId));
 }
 
 bool KoTextReference::loadOdf(const KXmlElement &element, KShapeLoadingContext &context)

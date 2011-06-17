@@ -33,12 +33,12 @@ class KoTextLocatorPrivate;
  * After inserting this locator you can request things like pageNumber() and chapter() for the
  * place where the locator has been positioned in the document.
  */
-class KOTEXT_EXPORT KoTextLocator : public KInlineObject
+class KOTEXT_EXPORT KTextLocator : public KInlineObject
 {
 public:
     /// constructor
-    KoTextLocator();
-    virtual ~KoTextLocator();
+    KTextLocator();
+    virtual ~KTextLocator();
 
     /// reimplemented from super
     virtual void updatePosition(QTextInlineObject object, const QTextCharFormat &format);
@@ -66,7 +66,7 @@ public:
     virtual void saveOdf(KShapeSavingContext &context);
 
 private:
-    Q_DECLARE_PRIVATE(KoTextLocator)
+    Q_DECLARE_PRIVATE(KTextLocator)
 };
 
 #endif

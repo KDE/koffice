@@ -27,7 +27,7 @@
 #include "KTextDocument.h"
 #include "KTextDocumentLayout.h"
 #include "KTextDrag.h"
-#include "KoTextLocator.h"
+#include "KTextLocator.h"
 #include "KoTextOdfSaveHelper.h"
 #include "changetracker/KChangeTracker.h"
 #include "changetracker/KChangeTrackerElement.h"
@@ -764,7 +764,7 @@ bool KoTextEditor::insertIndexMarker()
     KTextDocumentLayout *layout = qobject_cast<KTextDocumentLayout*>(d->document->documentLayout());
     Q_ASSERT(layout);
     Q_ASSERT(layout->inlineTextObjectManager());
-    KoTextLocator *tl = new KoTextLocator();
+    KTextLocator *tl = new KTextLocator();
     layout->inlineTextObjectManager()->insertInlineObject(d->caret, tl);
     d->updateState(KoTextEditorPrivate::NoOp);
     return true;

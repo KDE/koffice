@@ -32,7 +32,7 @@ set(kotext_LIB_SRCS
     KoVariable.cpp
     KoVariableManager.cpp
     KNamedVariable.cpp
-    KoTextLocator.cpp
+    KTextLocator.cpp
     KoTextReference.cpp
     KTextAnchor.cpp
     KoTextShapeContainerModel.cpp
@@ -131,7 +131,7 @@ install(
     KTextDocument.h
     KoText.h
     KoList.h
-    KoTextLocator.h
+    KTextLocator.h
     KoTextPage.h
     KoTextPaste.h
     KoTextShapeData.h
