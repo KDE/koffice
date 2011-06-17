@@ -187,7 +187,7 @@ private:
     KWFrameSet *m_frameSet;
     KWOutlineShape *m_outline;
     // we store 4 directions because ODF does, but we don't really use anything but the left one
-    KoInsets m_margin; // distance between me and text from another shape
+    KInsets m_margin; // distance between me and text from another shape
 };
 
 #endif

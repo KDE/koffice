@@ -32,7 +32,7 @@
 //
 
 
-#include "KoInsets.h"
+#include "KInsets.h"
 
 class QTextDocument;
 
@@ -44,7 +44,7 @@ public:
     virtual ~KoTextShapeDataBasePrivate();
 
     QTextDocument *document;
-    KoInsets margins;
+    KInsets margins;
     Qt::Alignment textAlignment;
 };
 

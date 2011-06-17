@@ -1080,7 +1080,7 @@ void KWDLoader::fill(KWFrame *frame, const KXmlElement &frameElem)
             zIndex = 1; // OtherTextFrameSet types always live on top of the main frames.
         KoTextShapeData *textShapeData = qobject_cast<KoTextShapeData*>(frame->shape()->userData());
         Q_ASSERT(textShapeData);
-        KoInsets margins;
+        KInsets margins;
         margins.left = frameElem.attribute("bleftpt", "0.0").toDouble();
         margins.right = frameElem.attribute("brightpt", "0.0").toDouble();
         margins.top = frameElem.attribute("btoppt", "0.0").toDouble();

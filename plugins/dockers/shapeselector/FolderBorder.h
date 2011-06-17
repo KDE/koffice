@@ -34,7 +34,7 @@ public:
     /// reimplemented from KoShapeBorderModel
     virtual void saveOdf(KOdfGenericStyle &, KShapeSavingContext &) const {}
     /// reimplemented from KoShapeBorderModel
-    virtual void borderInsets(KoInsets &insets) const;
+    virtual void borderInsets(KInsets &insets) const;
     /// reimplemented from KoShapeBorderModel
     virtual bool hasTransparency() const;
     /// reimplemented from KoShapeBorderModel

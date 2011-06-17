@@ -24,7 +24,7 @@
 #include "kotext_export.h"
 
 #include <KoTextShapeDataBase.h>
-#include <KoInsets.h>
+#include <KInsets.h>
 
 class QTextDocument;
 class KXmlWriter;
@@ -178,9 +178,9 @@ public:
      * Return the spacing between the frame border and the content.
      * Only supported by the text frame currenty.
      */
-    KoInsets insets() const;
+    KInsets insets() const;
 
-    void setInsets(const KoInsets &insets);
+    void setInsets(const KInsets &insets);
 
 signals:
     /**

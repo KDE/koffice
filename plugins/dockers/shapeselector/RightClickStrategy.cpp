@@ -118,7 +118,7 @@ void RightClickStrategy::createNewFolder()
         FolderShape *oldFolder = m_canvas->itemStore()->folders()[0];
         oldFolder->update();
         oldFolder->setBorder(new FolderBorder());
-        KoInsets insets;
+        KInsets insets;
         oldFolder->fetchInsets(insets);
         oldFolder->setPosition(QPointF(insets.left, insets.top));
         QSizeF size = oldFolder->size(); // we can assume size is the size of the whole widget. So we just make each use half of that.

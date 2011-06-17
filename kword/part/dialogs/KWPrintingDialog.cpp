@@ -27,7 +27,7 @@
 #include "frames/KWTextFrameSet.h"
 #include "frames/KWFrame.h"
 
-#include <KoInsets.h>
+#include <KInsets.h>
 #include <KShapeManager.h>
 #include "KCanvasBase.h"
 
@@ -77,7 +77,7 @@ QRectF KWPrintingDialog::preparePage(int pageNumber)
         return QRectF();
     printer().setPaperSize(page.rect(pageNumber).size(), QPrinter::Point);
 
-    KoInsets bleed = m_document->pageManager()->padding();
+    KInsets bleed = m_document->pageManager()->padding();
     const int bleedOffsetX = qRound(POINT_TO_INCH(bleed.left * resolution));
     const int bleedOffsetY = qRound(POINT_TO_INCH(bleed.top * resolution));
     const int bleedWidth = qRound(POINT_TO_INCH((bleed.left + bleed.right) * resolution));

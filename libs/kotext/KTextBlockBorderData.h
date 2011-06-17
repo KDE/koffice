@@ -20,7 +20,7 @@
 #define KOTEXTBLOCKBORDERDATA_H
 
 #include "KParagraphStyle.h"
-#include <KoInsets.h>
+#include <KInsets.h>
 
 #include <QPen>
 #include <QRectF>
@@ -103,7 +103,7 @@ public:
             the border.  If false; its above the border.
      * @see inset()
      */
-    void applyInsets(KoInsets &insets, qreal paragraphStart, bool startUnderBorder) const;
+    void applyInsets(KInsets &insets, qreal paragraphStart, bool startUnderBorder) const;
 
     /**
      * Alter the bounding rect of the borders to move the bottom to the parameter position.

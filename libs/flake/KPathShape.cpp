@@ -377,7 +377,7 @@ QRectF KPathShape::boundingRect() const
 {
     QRectF bb(outline().boundingRect());
     if (border()) {
-        KoInsets inset;
+        KInsets inset;
         border()->borderInsets(inset);
         bb.adjust(-inset.left, -inset.top, inset.right, inset.bottom);
     }
@@ -385,7 +385,7 @@ QRectF KPathShape::boundingRect() const
     QTransform transform = absoluteTransformation(0);
     bb = transform.mapRect(bb);
     if (shadow()) {
-        KoInsets insets;
+        KInsets insets;
         shadow()->insets(insets);
         bb.adjust(-insets.left, -insets.top, insets.right, insets.bottom);
     }
@@ -1322,7 +1322,7 @@ bool KPathShape::hitTest(const QPointF &position) const
     QPointF point = absoluteTransformation(0).inverted().map(position);
     const QPainterPath outlinePath = outline();
     if (border()) {
-        KoInsets insets;
+        KInsets insets;
         border()->borderInsets(insets);
         QRectF roi(QPointF(-insets.left, -insets.top), QPointF(insets.right, insets.bottom));
         roi.moveCenter(point);

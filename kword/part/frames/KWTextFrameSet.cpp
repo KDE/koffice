@@ -141,7 +141,7 @@ void KWTextFrameSet::setupFrame(KWFrame *frame)
     }
     if (m_textFrameSetType != KWord::OtherTextFrameSet) {
         frame->shape()->setGeometryProtected(true);
-        data->setInsets(KoInsets());
+        data->setInsets(KInsets());
     }
     if (frameCount() == 1 && m_document->isEmpty() && m_document->allFormats().count() == 2) {
         // just added first frame, replace our document with the one from the frame...

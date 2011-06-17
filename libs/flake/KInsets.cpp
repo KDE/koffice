@@ -17,17 +17,17 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoInsets.h"
+#include "KInsets.h"
 #include "KShape.h"
 
 #include <KXmlReader.h>
 #include <KUnit.h>
 
 #ifndef QT_NO_DEBUG_STREAM
-QDebug operator<<(QDebug debug, const KoInsets &insets)
+QDebug operator<<(QDebug debug, const KInsets &insets)
 {
 #ifndef NDEBUG
-    debug.nospace() << "KoInsets [top=" << insets.top;
+    debug.nospace() << "KInsets [top=" << insets.top;
     debug.nospace() << ", left=" << insets.left;
     debug.nospace() << ", bottom=" << insets.bottom;
     debug.nospace() << ", right=" << insets.right << ']';
@@ -38,7 +38,7 @@ QDebug operator<<(QDebug debug, const KoInsets &insets)
 }
 #endif
 
-void KoInsets::saveTo(KShape *shape, const QString &prefix) const
+void KInsets::saveTo(KShape *shape, const QString &prefix) const
 {
     if (left == right && top == bottom && left == top) {
         if (qAbs(top) > 1E-4)
@@ -55,9 +55,9 @@ void KoInsets::saveTo(KShape *shape, const QString &prefix) const
     }
 }
 
-//void KoInsets::saveTo(KXmlElement &element, const QString &prefix)
+//void KInsets::saveTo(KXmlElement &element, const QString &prefix)
 
-void KoInsets::fillFrom(const KXmlElement &element, const QString &ns, const QString &prefix)
+void KInsets::fillFrom(const KXmlElement &element, const QString &ns, const QString &prefix)
 {
     const qreal margin(KUnit::parseValue(element.attributeNS(ns, prefix)));
     QString marginL = element.attributeNS(ns, prefix + "-left");

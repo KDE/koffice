@@ -94,7 +94,7 @@ void KWFrame::saveOdf(KShapeSavingContext &context, const KWPage &page, int page
 
     KoTextShapeData *tsd = qobject_cast<KoTextShapeData*>(shape()->userData());
     if (tsd) {
-        KoInsets padding = tsd->insets();
+        KInsets padding = tsd->insets();
         padding.saveTo(m_shape, "fo:padding");
     }
 
@@ -241,7 +241,7 @@ bool KWFrame::loadODf(const KXmlElement &style, KShapeLoadingContext & /*context
     m_margin.fillFrom(properties, KOdfXmlNS::fo, "margin");
 
     if (tfs) {
-        KoInsets p;
+        KInsets p;
         p.fillFrom(properties, KOdfXmlNS::fo, "padding");
         static_cast<KWTextFrame*>(this)->setInsets(p);
     }

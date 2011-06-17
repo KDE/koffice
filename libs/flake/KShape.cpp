@@ -27,7 +27,7 @@
 #include "KShapeContainerModel.h"
 #include "KSelection.h"
 #include "KPointerEvent.h"
-#include "KoInsets.h"
+#include "KInsets.h"
 #include "KShapeBorderBase.h"
 #include "KShapeBackground.h"
 #include "KColorBackground.h"
@@ -146,7 +146,7 @@ void KShapePrivate::updateBorder()
     Q_Q(KShape);
     if (border == 0)
         return;
-    KoInsets insets;
+    KInsets insets;
     border->borderInsets(insets);
     QSizeF inner = q->size();
     // update left
@@ -382,7 +382,7 @@ bool KShape::hitTest(const QPointF &position) const
     QPointF point = absoluteTransformation(0).inverted().map(position);
     QRectF bb(QPointF(), size());
     if (d->border) {
-        KoInsets insets;
+        KInsets insets;
         d->border->borderInsets(insets);
         bb.adjust(-insets.left, -insets.top, insets.right, insets.bottom);
     }
@@ -407,13 +407,13 @@ QRectF KShape::boundingRect() const
     QTransform transform = absoluteTransformation(0);
     QRectF bb(QPointF(0, 0), mySize);
     if (d->border) {
-        KoInsets insets;
+        KInsets insets;
         d->border->borderInsets(insets);
         bb.adjust(-insets.left, -insets.top, insets.right, insets.bottom);
     }
     bb = transform.mapRect(bb);
     if (d->shadow) {
-        KoInsets insets;
+        KInsets insets;
         d->shadow->insets(insets);
         bb.adjust(-insets.left, -insets.top, insets.right, insets.bottom);
     }
@@ -690,7 +690,7 @@ qreal KShape::transparency(bool recursive) const
     }
 }
 
-void KShape::fetchInsets(KoInsets &insets) const
+void KShape::fetchInsets(KInsets &insets) const
 {
     Q_D(const KShape);
     if (d->border)

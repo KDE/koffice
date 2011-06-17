@@ -70,7 +70,7 @@ void KWPageStylePrivate::clear()
     fixedFooterSize = false;
 }
 
-static void saveInsets(const KoInsets insets, KOdfGenericStyle &style, const QString &prefix, KOdfGenericStyle::PropertyType type)
+static void saveInsets(const KInsets insets, KOdfGenericStyle &style, const QString &prefix, KOdfGenericStyle::PropertyType type)
 {
     if (insets.left == insets.right && insets.top == insets.bottom && insets.left == insets.top) {
         if (qAbs(insets.top) > 1E-4)
@@ -368,8 +368,8 @@ void KWPageStyle::loadOdf(KOdfLoadingContext &context, const KXmlElement &master
         d->columns.columnSpacing = 17; // ~ 6mm
     }
 
-    d->headerMargin = KoInsets();
-    d->headerInsets = KoInsets();
+    d->headerMargin = KInsets();
+    d->headerInsets = KInsets();
     d->headerMinimumHeight = 0;
     d->fixedHeaderSize = true;
     KXmlElement header = KoXml::namedItemNS(style, KOdfXmlNS::style, "header-style");
@@ -399,8 +399,8 @@ void KWPageStyle::loadOdf(KOdfLoadingContext &context, const KXmlElement &master
         }
     }
 
-    d->footerMargin = KoInsets();
-    d->footerInsets = KoInsets();
+    d->footerMargin = KInsets();
+    d->footerInsets = KInsets();
     d->footerMinimumHeight = 0;
     d->fixedFooterSize = true;
     KXmlElement footer = KoXml::namedItemNS(style, KOdfXmlNS::style, "footer-style");

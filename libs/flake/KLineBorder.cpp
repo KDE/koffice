@@ -85,7 +85,7 @@ void KLineBorder::saveOdf(KOdfGenericStyle &style, KShapeSavingContext &context)
     KOdf::saveOdfStrokeStyle(style, context.mainStyles(), pen);
 }
 
-void KLineBorder::borderInsets(KoInsets &insets) const
+void KLineBorder::borderInsets(KInsets &insets) const
 {
     qreal lineWidth = d->pen.widthF();
     if (lineWidth < 0)

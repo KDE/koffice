@@ -82,7 +82,7 @@ bool KTextBlockBorderData::equals(const KTextBlockBorderData &border)
     return true;
 }
 
-void KTextBlockBorderData::applyInsets(KoInsets &insets, qreal paragStart, bool startUnderBorder) const
+void KTextBlockBorderData::applyInsets(KInsets &insets, qreal paragStart, bool startUnderBorder) const
 {
     insets.left += inset(Left);
     insets.right += inset(Right);

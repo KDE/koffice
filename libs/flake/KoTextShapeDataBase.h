@@ -23,7 +23,7 @@
 #include "flake_export.h"
 
 #include "KShapeUserData.h"
-#include "KoInsets.h"
+#include "KInsets.h"
 #include <QTextDocument>
 
 class KoTextShapeDataBasePrivate;
@@ -51,11 +51,11 @@ public:
      * confined by the shape size made smaller by the margins set here.
      * @param margins the margins that shrink the text area.
      */
-    void setShapeMargins(const KoInsets &margins);
+    void setShapeMargins(const KInsets &margins);
     /**
      * returns the currently set margins for the shape.
      */
-    KoInsets shapeMargins() const;
+    KInsets shapeMargins() const;
 
     /**
     * Load the text from ODF.

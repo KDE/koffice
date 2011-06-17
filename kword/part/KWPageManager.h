@@ -25,7 +25,7 @@
 #include "KWPageStyle.h"
 
 #include <KOdfPageLayoutData.h>
-#include <KoInsets.h>
+#include <KInsets.h>
 
 #include <QList>
 #include <QPointF>
@@ -141,13 +141,13 @@ public:
      * Return the padding used for this document. This is used to have some space around each
      * page outside of the printable area for page bleed.
      */
-    KoInsets padding() const;
+    KInsets padding() const;
 
     /**
      * Set a new padding used for this document. This is used to have some space around each
      * page outside of the printable area for page bleed.
      */
-    void setPadding(const KoInsets &padding);
+    void setPadding(const KInsets &padding);
 
     /**
      * This property can be set to register that new pages created should be made to be a pageSpread when aproriate.

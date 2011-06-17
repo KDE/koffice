@@ -27,7 +27,7 @@ class KShape;
 class KOdfGenericStyle;
 class KShapeSavingContext;
 class KoViewConverter;
-struct KoInsets;
+struct KInsets;
 class QColor;
 class QPainter;
 
@@ -59,7 +59,7 @@ public:
      * Return a borderInsets object filled with the size inside the shape that this border takes.
      * @param insets the insets object that will be filled and returned.
      */
-    virtual void borderInsets(KoInsets &insets) const = 0;
+    virtual void borderInsets(KInsets &insets) const = 0;
 
     /**
      * Returns true if there is some transparency, false if the border is fully opaque.

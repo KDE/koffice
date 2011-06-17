@@ -21,7 +21,7 @@ set(flake_SRCS
     KDockFactoryBase.cpp
     KDockRegistry.cpp
     KDataCenterBase.cpp
-    KoInsets.cpp
+    KInsets.cpp
     KPasteController.cpp
     KGuidesData.cpp
     KPathShape.cpp
@@ -248,7 +248,7 @@ install(
     KImageCollection.h
     KImageData.h
     KInputDevice.h
-    KoInsets.h
+    KInsets.h
     KLineBorder.h
     KLoadingShapeUpdater.h
     KoOdfWorkaround.h

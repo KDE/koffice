@@ -22,7 +22,7 @@
 #ifndef KOLINEBORDER_H
 #define KOLINEBORDER_H
 
-#include "KoInsets.h"
+#include "KInsets.h"
 #include "KShapeBorderBase.h"
 
 #include <QtGui/QBrush>
@@ -92,7 +92,7 @@ public:
     QBrush lineBrush() const;
 
     virtual void saveOdf(KOdfGenericStyle &style, KShapeSavingContext &context) const;
-    virtual void borderInsets(KoInsets &insets) const;
+    virtual void borderInsets(KInsets &insets) const;
     virtual bool hasTransparency() const;
 
     virtual void paint(KShape *shape, QPainter &painter, const KoViewConverter &converter);

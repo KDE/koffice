@@ -80,8 +80,8 @@ public:
      * Return the spacing between the frame border and the content.
      * Only supported by the text frame currenty.
      */
-    KoInsets insets() const;
-    void setInsets(const KoInsets &insets);
+    KInsets insets() const;
+    void setInsets(const KInsets &insets);
 
 private:
     /* TODO

@@ -484,12 +484,12 @@ KWPage KWPageManager::last()
     return KWPage(d, end.value());
 }
 
-KoInsets KWPageManager::padding() const
+KInsets KWPageManager::padding() const
 {
     return d->padding;
 }
 
-void KWPageManager::setPadding(const KoInsets &padding)
+void KWPageManager::setPadding(const KInsets &padding)
 {
     d->padding = padding;
 }

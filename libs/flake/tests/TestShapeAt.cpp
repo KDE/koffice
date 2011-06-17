@@ -117,7 +117,7 @@ void TestShapeAt::testShadow()
     KLineBorder *border = new KLineBorder();
     border->setLineWidth(20); // which means the shape grows 10 in all directions.
     shape.setBorder(border);
-    KoInsets borderInsets;
+    KInsets borderInsets;
     border->borderInsets(borderInsets);
     bbox.adjust(-borderInsets.left, -borderInsets.top, borderInsets.right, borderInsets.bottom);
     QCOMPARE(shape.boundingRect(), bbox);
@@ -125,7 +125,7 @@ void TestShapeAt::testShadow()
     KShapeShadow *shadow = new KShapeShadow();
     shadow->setOffset(QPointF(5, 9));
     shape.setShadow(shadow);
-    KoInsets shadowInsets;
+    KInsets shadowInsets;
     shadow->insets(shadowInsets);
     bbox.adjust(-shadowInsets.left, -shadowInsets.top, shadowInsets.right, shadowInsets.bottom);
     QCOMPARE(shape.boundingRect(), bbox);

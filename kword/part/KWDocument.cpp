@@ -585,7 +585,7 @@ void KWDocument::clear()
     }
 
     // industry standard for bleed
-    KoInsets padding;
+    KInsets padding;
     padding.top = MM_TO_POINT(3);
     padding.bottom = MM_TO_POINT(3);
     padding.left = MM_TO_POINT(3);

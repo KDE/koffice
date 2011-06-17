@@ -46,13 +46,13 @@ QTextDocument *KoTextShapeDataBase::document() const
     return d->document;
 }
 
-void KoTextShapeDataBase::setShapeMargins(const KoInsets &margins)
+void KoTextShapeDataBase::setShapeMargins(const KInsets &margins)
 {
     Q_D(KoTextShapeDataBase);
     d->margins = margins;
 }
 
-KoInsets KoTextShapeDataBase::shapeMargins() const
+KInsets KoTextShapeDataBase::shapeMargins() const
 {
     Q_D(const KoTextShapeDataBase);
     return d->margins;

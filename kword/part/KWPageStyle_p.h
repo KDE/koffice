@@ -20,7 +20,7 @@
 #define KWPAGESTYLE_P_H
 
 #include <QSharedData>
-#include <KoInsets.h>
+#include <KInsets.h>
 #include <KoText.h>
 #include <KShapeBackground.h>
 
@@ -40,8 +40,8 @@ public:
     qreal footNoteDistance, endNoteDistance;
     qreal headerMinimumHeight,footerMinimumHeight;
     KWord::HeaderFooterType headers, footers;
-    KoInsets footerMargin, headerMargin; // distance between header/footer and another shape
-    KoInsets footerInsets, headerInsets; // distance between text and shape border
+    KInsets footerMargin, headerMargin; // distance between header/footer and another shape
+    KInsets footerInsets, headerInsets; // distance between text and shape border
 
     qreal footNoteSeparatorLineWidth; ///< width of line; so more like 'thickness'
     int footNoteSeparatorLineLength; ///< It's a percentage of page.

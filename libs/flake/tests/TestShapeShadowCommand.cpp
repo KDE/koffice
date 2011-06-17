@@ -55,7 +55,7 @@ void TestShapeShadowCommand::refCounting()
     QVERIFY(shape1->shadow() == shadow1);
 
     // if shadow1 is deleted when deleting cmd1 this will crash
-    KoInsets insets;
+    KInsets insets;
     shadow1->insets(insets);
 
     delete cmd2;

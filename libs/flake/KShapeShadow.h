@@ -30,7 +30,7 @@ class KOdfGenericStyle;
 class KShapeSavingContext;
 class QPainter;
 class KoViewConverter;
-struct KoInsets;
+struct KInsets;
 
 class FLAKE_EXPORT KShapeShadow
 {
@@ -79,7 +79,7 @@ public:
     bool isVisible() const;
 
     /// Fills the insets oject with the space the shadow takes around a shape
-    void insets(KoInsets &insets) const;
+    void insets(KInsets &insets) const;
 
     /**
      * Increments the use-value.

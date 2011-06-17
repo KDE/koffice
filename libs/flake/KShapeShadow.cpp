@@ -22,7 +22,7 @@
 #include "KShapeSavingContext.h"
 #include "KShapeBorderBase.h"
 #include "KShape.h"
-#include "KoInsets.h"
+#include "KInsets.h"
 #include "KPathShape.h"
 #include <KOdfGenericStyle.h>
 #include <KoViewConverter.h>
@@ -139,7 +139,7 @@ bool KShapeShadow::isVisible() const
     return d->visible;
 }
 
-void KShapeShadow::insets(KoInsets &insets) const
+void KShapeShadow::insets(KInsets &insets) const
 {
     if (!d->visible) {
         insets.top = 0;

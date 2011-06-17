@@ -30,7 +30,7 @@ class KShape;
 /**
  * An Insets object is a representation of the borders of a shape.
  */
-struct FLAKE_EXPORT KoInsets
+struct FLAKE_EXPORT KInsets
 {
 public:
     /**
@@ -40,7 +40,7 @@ public:
      * @param bottom the inset at the bottom
      * @param right the inset at the right
      */
-    KoInsets(qreal top, qreal left, qreal bottom, qreal right) {
+    KInsets(qreal top, qreal left, qreal bottom, qreal right) {
         this->top = top;
         this->left = left;
         this->bottom = bottom;
@@ -50,7 +50,7 @@ public:
      * Constructor.
      * Initializes all values to 0
      */
-    KoInsets() : top(0.), bottom(0.), left(0.), right(0.) {
+    KInsets() : top(0.), bottom(0.), left(0.), right(0.) {
     }
 
     /// clears the insets so all sides are set to zero
@@ -61,14 +61,14 @@ public:
         right = 0;
     }
 
-    void operator+=(const KoInsets &other) {
+    void operator+=(const KInsets &other) {
         top += other.top;
         bottom += other.bottom;
         left += other.left;
         right += other.right;
     }
-    KoInsets operator+(const KoInsets &other) const {
-        return KoInsets(top + other.top, left + other.left, bottom + other.bottom,
+    KInsets operator+(const KInsets &other) const {
+        return KInsets(top + other.top, left + other.left, bottom + other.bottom,
             right + other.right);
     }
 
@@ -83,7 +83,7 @@ public:
 };
 
 #ifndef QT_NO_DEBUG_STREAM
-FLAKE_EXPORT QDebug operator<<(QDebug, const KoInsets &);
+FLAKE_EXPORT QDebug operator<<(QDebug, const KInsets &);
 #endif
 
 #endif

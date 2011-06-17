@@ -24,7 +24,7 @@
 
 #include <KTextDocumentLayout.h>
 #include <KTextBlockData.h>
-#include <KoInsets.h>
+#include <KInsets.h>
 
 #include <QTextLine>
 #include <QTextBlock>
@@ -148,8 +148,8 @@ private:
     QTextBlock::Iterator m_fragmentIterator;
     KoTextShapeData *m_data;
     bool m_newShape, m_newParag, m_isRtl, m_inTable;
-    KoInsets m_borderInsets;
-    KoInsets m_shapeBorder;
+    KInsets m_borderInsets;
+    KInsets m_shapeBorder;
     KTextDocumentLayout *m_parent;
     QHash<int, qreal> m_inlineObjectHeights; // maps text-position to whole-line-height of an inline object
     TextShape *m_textShape;

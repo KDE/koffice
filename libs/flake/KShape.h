@@ -23,7 +23,7 @@
 #ifndef KOSHAPE_H
 #define KOSHAPE_H
 
-#include "KoInsets.h"
+#include "KInsets.h"
 #include "KoFlake.h"
 
 #include <QTransform>
@@ -550,7 +550,7 @@ public:
      * of the shape and the inside area where the border is sure to not overlap.
      * \see KShapeBorderBase::borderInsets()
      */
-    void fetchInsets(KoInsets &insets) const;
+    void fetchInsets(KInsets &insets) const;
 
     /// Sets the new shadow, removing the old one
     void setShadow(KShapeShadow *shadow);

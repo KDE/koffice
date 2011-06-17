@@ -30,7 +30,7 @@ FolderBorder::FolderBorder()
 {
 }
 
-void FolderBorder::borderInsets(KoInsets &insets) const
+void FolderBorder::borderInsets(KInsets &insets) const
 {
     insets.left = 1;
     insets.right = 1;

@@ -28,7 +28,7 @@
 #include "KTextBlockBorderData.h"
 #include "KInlineTextObjectManager.h"
 
-#include <KoInsets.h>
+#include <KInsets.h>
 #include <KPostscriptPaintDevice.h>
 #include <KShape.h>
 

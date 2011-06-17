@@ -52,19 +52,19 @@ void TestBorder::testBorder()
     QCOMPARE(21., data.inset(KTextBlockBorderData::Top));
     QCOMPARE(0., data.inset(KTextBlockBorderData::Bottom));
 
-    KoInsets insets;
+    KInsets insets;
     data.applyInsets(insets, 0, false);
     QCOMPARE(insets.left, 7.);
     QCOMPARE(insets.right, 0.);
     QCOMPARE(insets.top, 0.);
     QCOMPARE(insets.bottom, 0.);
 
-    KoInsets insets2;
+    KInsets insets2;
     data.applyInsets(insets2, 31, true);
     QCOMPARE(insets2.left, 7.);
     QCOMPARE(insets2.top, 21.);
 
-    KoInsets insets3;
+    KInsets insets3;
     data.applyInsets(insets3, 10, false);
     QCOMPARE(insets3.left, 7.);
     QCOMPARE(insets3.top, 21.);

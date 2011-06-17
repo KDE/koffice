@@ -72,7 +72,7 @@ public:
     bool preferPageSpread;
 
     QHash <QString, KWPageStyle> pageStyles;
-    KoInsets padding;
+    KInsets padding;
     KWPageStyle defaultPageStyle;
 };
 

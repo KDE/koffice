@@ -56,7 +56,7 @@ void TestShapeBorderCommand::refCounting()
     QVERIFY(shape1->border() == whiteBorder);
 
     // if white is deleted when deleting cmd1 this will crash
-    KoInsets insets;
+    KInsets insets;
     whiteBorder->borderInsets(insets);
 
     delete cmd2;

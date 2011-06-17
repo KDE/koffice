@@ -77,7 +77,7 @@ void KWFrameGeometry::open(KWFrame *frame)
 
     KWTextFrame *tfs = dynamic_cast<KWTextFrame*>(frame);
     if (tfs) {
-        KoInsets insets(tfs->insets());
+        KInsets insets(tfs->insets());
         widget.marginsGB->setVisible(true);
         widget.leftMargin->changeValue(insets.left);
         widget.rightMargin->changeValue(insets.right);
@@ -150,7 +150,7 @@ void KWFrameGeometry::updateShape()
 
     KWTextFrame *tfs = dynamic_cast <KWTextFrame*>(frame);
     if (tfs) {
-        KoInsets insets(widget.topMargin->value(), widget.leftMargin->value(),
+        KInsets insets(widget.topMargin->value(), widget.leftMargin->value(),
                 widget.bottomMargin->value(), widget.rightMargin->value());
         tfs->setInsets(insets);
     }

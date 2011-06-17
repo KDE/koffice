@@ -89,7 +89,7 @@ public:
     int position, endPosition;
     KoText::Direction direction;
     KoTextPage *textpage;
-    KoInsets padding; // Distance between shape border and text
+    KInsets padding; // Distance between shape border and text
 };
 
 
@@ -374,13 +374,13 @@ void KoTextShapeData::relayoutFor(KoTextPage &textPage)
     d->inRelayoutForPage = false;
 }
 
-KoInsets KoTextShapeData::insets() const
+KInsets KoTextShapeData::insets() const
 {
     Q_D(const KoTextShapeData);
     return d->padding;
 }
 
-void KoTextShapeData::setInsets(const KoInsets &insets)
+void KoTextShapeData::setInsets(const KInsets &insets)
 {
     Q_D(KoTextShapeData);
     d->padding = insets;

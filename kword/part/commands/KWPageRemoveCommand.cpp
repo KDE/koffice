@@ -44,7 +44,7 @@ KWPageRemoveCommand::KWPageRemoveCommand(KWDocument *document, KWPage page, QUnd
     Q_ASSERT(document->pageManager()->page(m_pageNumber) == page);
 
     const qreal top = page.offsetInDocument();
-    KoInsets padding = document->pageManager()->padding();
+    KInsets padding = document->pageManager()->padding();
     const qreal bottom = top + page.height();
     const qreal height = page.height() + padding.top + padding.bottom; // size from previous page
 

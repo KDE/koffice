@@ -42,7 +42,7 @@ bool KWTextFrame::canAutoGrow()
 {
     if (!m_canGrow)
         return false;
-    KoInsets textInsets;
+    KInsets textInsets;
     shape()->fetchInsets(textInsets);
     textInsets += insets();
     const qreal effectiveHeight = shape()->size().height() - textInsets.top - textInsets.bottom;
@@ -73,14 +73,14 @@ void KWTextFrame::autoShrink(qreal requestedHeight)
     m_lastHeight = size.height();
 }
 
-KoInsets KWTextFrame::insets() const
+KInsets KWTextFrame::insets() const
 {
     KoTextShapeData *tsd = qobject_cast<KoTextShapeData*>(shape()->userData());
     Q_ASSERT(tsd);
     return tsd->insets();
 }
 
-void KWTextFrame::setInsets(const KoInsets &insets)
+void KWTextFrame::setInsets(const KInsets &insets)
 {
     KoTextShapeData *tsd = qobject_cast<KoTextShapeData*>(shape()->userData());
     Q_ASSERT(tsd);
