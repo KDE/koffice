@@ -31,7 +31,7 @@ class KXmlWriter;
 class KXmlElement;
 class KShapeLoadingContext;
 class KShapeSavingContext;
-class KoTextShapeDataPrivate;
+class KTextShapeDataPrivate;
 class KTextPage;
 class KDocumentRdfBase;
 

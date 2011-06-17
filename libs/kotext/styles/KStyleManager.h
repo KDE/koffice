@@ -416,7 +416,7 @@ private:
     friend class KoTextSharedLoadingData;
     void addAutomaticListStyle(KListStyle *listStyle);
     friend class KTextShapeData;
-    friend class KoTextShapeDataPrivate;
+    friend class KTextShapeDataPrivate;
     KListStyle *listStyle(int id, bool *automatic) const;
 
 private:

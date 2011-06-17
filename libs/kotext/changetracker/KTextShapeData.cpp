@@ -57,10 +57,10 @@
 #include <KUndoStack>
 #include <QUndoCommand>
 
-class KoTextShapeDataPrivate : public KTextShapeDataBasePrivate
+class KTextShapeDataPrivate : public KTextShapeDataBasePrivate
 {
 public:
-    KoTextShapeDataPrivate()
+    KTextShapeDataPrivate()
             : ownsDocument(true),
             dirty(true),
             inRelayoutForPage(false),
@@ -73,7 +73,7 @@ public:
     {
     }
 
-    virtual ~KoTextShapeDataPrivate()
+    virtual ~KTextShapeDataPrivate()
     {
         if (ownsDocument) {
             delete document;
@@ -93,7 +93,7 @@ public:
 
 
 KTextShapeData::KTextShapeData()
-    : KTextShapeDataBase(*(new KoTextShapeDataPrivate()))
+    : KTextShapeDataBase(*(new KTextShapeDataPrivate()))
 {
     setDocument(new QTextDocument, true);
 }
