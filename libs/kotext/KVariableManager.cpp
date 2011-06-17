@@ -20,10 +20,10 @@
 #include "KInlineTextObjectManager.h"
 #include "KNamedVariable_p.h"
 
-class KoVariableManagerPrivate
+class KVariableManagerPrivate
 {
 public:
-    KoVariableManagerPrivate()
+    KVariableManagerPrivate()
             : lastId(KInlineObject::VariableManagerStart) { }
     KInlineTextObjectManager *inlineObjectManager;
     QHash<QString, int> variableMapping;
@@ -31,7 +31,7 @@ public:
 };
 
 KVariableManager::KVariableManager(KInlineTextObjectManager *inlineObjectManager)
-        : d(new KoVariableManagerPrivate)
+        : d(new KVariableManagerPrivate)
 {
     d->inlineObjectManager = inlineObjectManager;
 }

@@ -26,7 +26,7 @@
 
 class KVariable;
 class KInlineTextObjectManager;
-class KoVariableManagerPrivate;
+class KVariableManagerPrivate;
 
 /**
  * A document can maintain a list of name-value pairs, which we call variables.
@@ -92,7 +92,7 @@ signals:
     void valueChanged();
 
 private:
-    KoVariableManagerPrivate * const d;
+    KVariableManagerPrivate * const d;
 };
 
 #endif
