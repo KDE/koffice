@@ -33,16 +33,16 @@
 
 #include <QWidget>
 #include <QPixmap>
-#include "ui_KoZoomToolWidget.h"
+#include "ui_KZoomToolWidget.h"
 
 class KZoomTool;
 
-class KoZoomToolWidget : public QWidget, Ui::ZoomToolWidget
+class KZoomToolWidget : public QWidget, Ui::ZoomToolWidget
 {
     Q_OBJECT
 public:
-    explicit KoZoomToolWidget(KZoomTool* tool, QWidget *parent = 0);
-    ~KoZoomToolWidget();
+    explicit KZoomToolWidget(KZoomTool* tool, QWidget *parent = 0);
+    ~KZoomToolWidget();
 
 protected:
     bool eventFilter(QObject *object, QEvent *event);

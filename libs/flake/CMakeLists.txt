@@ -158,7 +158,7 @@ set(flake_SRCS
     tools/KParameterChangeStrategy.cpp
     tools/KZoomTool.cpp
     tools/KZoomToolFactory.cpp
-    tools/KoZoomToolWidget.cpp
+    tools/KZoomToolWidget.cpp
     tools/KZoomStrategy.cpp
     tools/KPanTool.cpp
     tools/KPanToolFactory.cpp
@@ -173,7 +173,7 @@ set(flake_SRCS
 kde4_add_ui_files(flake_SRCS
     tools/PathToolOptionWidget.ui
     SnapGuideConfigWidget.ui
-    tools/KoZoomToolWidget.ui
+    tools/KZoomToolWidget.ui
 )
 
 kde4_add_library(flake SHARED ${flake_SRCS})

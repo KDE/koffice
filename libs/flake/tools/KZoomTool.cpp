@@ -21,7 +21,7 @@
 
 #include "KZoomTool_p.h"
 #include "KZoomStrategy_p.h"
-#include "KoZoomToolWidget_p.h"
+#include "KZoomToolWidget_p.h"
 #include "KPointerEvent.h"
 #include "KCanvasBase.h"
 #include "KCanvasController.h"
@@ -111,7 +111,7 @@ KInteractionStrategy *KZoomTool::createStrategy(KPointerEvent *event)
 
 QWidget *KZoomTool::createOptionWidget()
 {
-    return new KoZoomToolWidget(this);
+    return new KZoomToolWidget(this);
 }
 
 void KZoomTool::setZoomInMode(bool zoomIn)

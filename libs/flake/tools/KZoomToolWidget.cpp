@@ -17,13 +17,13 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoZoomToolWidget_p.h"
+#include "KZoomToolWidget_p.h"
 #include <QPainter>
 #include <QMouseEvent>
 #include <kicon.h>
 #include "KZoomTool_p.h"
 
-KoZoomToolWidget::KoZoomToolWidget(KZoomTool* tool, QWidget* parent)
+KZoomToolWidget::KZoomToolWidget(KZoomTool* tool, QWidget* parent)
         : QWidget(parent), m_tool(tool)
 {
     setupUi(this);
@@ -40,11 +40,11 @@ KoZoomToolWidget::KoZoomToolWidget(KZoomTool* tool, QWidget* parent)
     zoomInButton->click();
 }
 
-KoZoomToolWidget::~KoZoomToolWidget()
+KZoomToolWidget::~KZoomToolWidget()
 {
 }
 
-void KoZoomToolWidget::paintBirdEye()
+void KZoomToolWidget::paintBirdEye()
 {
     QPainter p;
     if (m_dirtyThumbnail) {
@@ -62,7 +62,7 @@ void KoZoomToolWidget::paintBirdEye()
     p.end();
 }
 
-bool KoZoomToolWidget::eventFilter(QObject* object, QEvent* event)
+bool KZoomToolWidget::eventFilter(QObject* object, QEvent* event)
 {
     if (object == birdEyeLabel) {
         if (event->type() == QEvent::Paint) {
@@ -83,9 +83,9 @@ bool KoZoomToolWidget::eventFilter(QObject* object, QEvent* event)
     return QWidget::eventFilter(object, event);
 }
 
-void KoZoomToolWidget::changeZoomMode()
+void KZoomToolWidget::changeZoomMode()
 {
     m_tool->setZoomInMode(zoomInButton->isChecked());
 }
 
-#include <KoZoomToolWidget_p.moc>
+#include <KZoomToolWidget_p.moc>
