@@ -49,7 +49,7 @@
 #include <KOdfLoadingContext.h>
 #include <KShape.h>
 #include <KoDocumentInfo.h>
-#include <KoTextDocument.h>
+#include <KTextDocument.h>
 
 #include <KCDocBase.h>
 #include <kcells/KCSheet.h>
@@ -885,7 +885,7 @@ void ExcelImport::Private::processCell(Cell* ic, KCCell oc)
             formatRuns[txt.length()] = ic->format().font();
 
             QSharedPointer<QTextDocument> doc(new QTextDocument(txt));
-            KoTextDocument(doc.data()).setStyleManager(oc.sheet()->map()->textStyleManager());
+            KTextDocument(doc.data()).setStyleManager(oc.sheet()->map()->textStyleManager());
             QTextCursor c(doc.data());
             for (std::map<unsigned, FormatFont>::iterator it = formatRuns.begin(); it != formatRuns.end(); ++it) {
                 std::map<unsigned, FormatFont>::iterator it2 = it; it2++;

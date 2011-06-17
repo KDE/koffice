@@ -43,7 +43,7 @@
 #include <KTextAnchor.h>
 #include <KTextBlockData.h>
 #include "KTextDebug_p.h"
-#include "KoTextDocument.h"
+#include "KTextDocument.h"
 #include <KoTextDocumentLayout.h>
 #include <KoTextShapeData.h>
 #include "KoTextSharedLoadingData.h"
@@ -441,8 +441,8 @@ void KoTextLoader::loadBody(const KXmlElement &bodyElem, QTextCursor &cursor)
     cursor.beginEditBlock();
     const QTextDocument *document = cursor.block().document();
 
-    d->styleManager = KoTextDocument(document).styleManager();
-    d->changeTracker = KoTextDocument(document).changeTracker();
+    d->styleManager = KTextDocument(document).styleManager();
+    d->changeTracker = KTextDocument(document).changeTracker();
 
     kDebug(32500) << "text-style:" << KTextDebug::textAttributes(cursor.blockCharFormat());
     bool usedParagraph = false; // set to true if we found a tag that used the paragraph, indicating that the next round needs to start a new one.
@@ -1034,8 +1034,8 @@ void KoTextLoader::loadHeading(const KXmlElement &element, QTextCursor &cursor)
         KListStyle *outlineStyle = d->styleManager->outlineStyle();
         if (outlineStyle) {
             KoList *list = d->list(block.document(), outlineStyle);
-            if (!KoTextDocument(block.document()).headingList()) {
-                KoTextDocument(block.document()).setHeadingList(list);
+            if (!KTextDocument(block.document()).headingList()) {
+                KTextDocument(block.document()).setHeadingList(list);
             }
             list->applyStyle(block, outlineStyle, level);
         }

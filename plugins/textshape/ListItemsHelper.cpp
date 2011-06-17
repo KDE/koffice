@@ -23,7 +23,7 @@
 #include <KTextBlockData.h>
 #include <KListStyle.h>
 #include <KParagraphStyle.h>
-#include <KoTextDocument.h>
+#include <KTextDocument.h>
 #include <KoList.h>
 
 #include <KDebug>

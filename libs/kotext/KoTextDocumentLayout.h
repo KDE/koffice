@@ -22,7 +22,7 @@
 
 #include "kotext_export.h"
 
-#include "KoTextDocument.h"
+#include "KTextDocument.h"
 
 #include <QAbstractTextDocumentLayout>
 #include <QRectF>
@@ -206,14 +206,14 @@ public:
     virtual void documentChanged(int position, int charsRemoved, int charsAdded);
 
     /**
-     * Sets the document's resizing method. @see KoTextDocument::setResizeMethod
+     * Sets the document's resizing method. @see KTextDocument::setResizeMethod
      */
-    void setResizeMethod(KoTextDocument::ResizeMethod mode);
+    void setResizeMethod(KTextDocument::ResizeMethod mode);
 
     /**
-     * Returns the document's resizing method. @see KoTextDocument::resizeMethod
+     * Returns the document's resizing method. @see KTextDocument::resizeMethod
      */
-    KoTextDocument::ResizeMethod resizeMethod() const;
+    KTextDocument::ResizeMethod resizeMethod() const;
 
 signals:
     void shapeAdded(KShape *shape);

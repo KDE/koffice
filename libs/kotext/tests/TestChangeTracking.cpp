@@ -55,7 +55,7 @@
 #include <KInlineTextObjectManager.h>
 #include <KoTextSharedLoadingData.h>
 #include <KoTextSharedSavingData.h>
-#include <KoTextDocument.h>
+#include <KTextDocument.h>
 #include <kstandarddirs.h>
 
 #include <KOdfGenericChanges.h>
@@ -119,9 +119,9 @@ QTextDocument *TestChangeTracking::documentFromOdt(const QString &odt, const QSt
     textShapeData->setDocument(document, false /* ownership */);
     KoTextDocumentLayout *layout = new KoTextDocumentLayout(textShapeData->document());
     layout->setInlineTextObjectManager(new KInlineTextObjectManager(layout)); // required while saving
-    KoTextDocument(document).setStyleManager(styleManager);
+    KTextDocument(document).setStyleManager(styleManager);
     textShapeData->document()->setDocumentLayout(layout);
-    KoTextDocument(document).setChangeTracker(changeTracker);
+    KTextDocument(document).setChangeTracker(changeTracker);
 
     if (!textShapeData->loadOdf(body, shapeLoadingContext)) {
         qDebug() << "KoTextShapeData failed to load ODT";
@@ -158,7 +158,7 @@ QString TestChangeTracking::documentToOdt(QTextDocument *document)
     KXmlWriter xmlWriter(&contentTmpFile, 1);
 
     KOdfGenericStyles mainStyles;
-    KStyleManager *styleMan = KoTextDocument(document).styleManager();
+    KStyleManager *styleMan = KTextDocument(document).styleManager();
     Q_UNUSED(styleMan);
     KOdfEmbeddedDocumentSaver embeddedSaver;
 
@@ -192,7 +192,7 @@ QString TestChangeTracking::documentToOdt(QTextDocument *document)
         textShapeData->document()->setDocumentLayout(layout);
         layout->setInlineTextObjectManager(new KInlineTextObjectManager(layout)); // required while saving
         KStyleManager *styleManager = new KStyleManager;
-        KoTextDocument(textShapeData->document()).setStyleManager(styleManager);
+        KTextDocument(textShapeData->document()).setStyleManager(styleManager);
     }
 
     textShapeData->saveOdf(context);

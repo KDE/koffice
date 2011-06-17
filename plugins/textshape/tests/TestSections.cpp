@@ -1,7 +1,7 @@
 #include "TestSections.h"
 
 #include <KStyleManager.h>
-#include <KoTextDocument.h>
+#include <KTextDocument.h>
 #include <KSectionStyle.h>
 
 #include <QTextDocument>
@@ -46,7 +46,7 @@ void TestSections::initTest(const KSectionStyle *sectionStyle)
     // Style manager.
     m_styleManager = new KStyleManager();
     Q_ASSERT(m_styleManager);
-    KoTextDocument(m_doc).setStyleManager(m_styleManager);
+    KTextDocument(m_doc).setStyleManager(m_styleManager);
 
     // Table style.
     m_defaultSectionStyle = new KSectionStyle();

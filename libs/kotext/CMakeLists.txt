@@ -12,7 +12,7 @@ set(kotext_LIB_SRCS
     KoTextDocumentLayout.cpp
     KoTextOdfSaveHelper.cpp
     KoTextPaste.cpp
-    KoTextDocument.cpp
+    KTextDocument.cpp
     KoTextEditor.cpp
     KoList.cpp
 
@@ -128,7 +128,7 @@ install(
     KTextAnchor.h
     KTextBlockBorderData.h
     KTextBlockData.h
-    KoTextDocument.h
+    KTextDocument.h
     KoText.h
     KoList.h
     KoTextLocator.h

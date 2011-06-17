@@ -25,7 +25,7 @@
 #include <KoTextShapeData.h>
 #include <KoTextPage.h>
 #include <KShape.h>
-#include <KoTextDocument.h>
+#include <KTextDocument.h>
 #include <KTextBlockData.h>
 #include <KStyleManager.h>
 
@@ -68,7 +68,7 @@ void ToCGenerator::generate()
     // Add a frame to the current layout
     QTextFrameFormat tocFormat = m_ToCFrame->frameFormat();
     QTextDocument *doc = m_ToCFrame->document();
-    KoTextDocument koDocument(doc);
+    KTextDocument koDocument(doc);
     KStyleManager *styleManager = koDocument.styleManager();
     QList<KParagraphStyle *> paragStyle;
 
@@ -133,7 +133,7 @@ void ToCGenerator::update()
 {
     // update the text for the TOC entries with the proper page numbers
     QTextDocument *doc = m_ToCFrame->document();
-    KoTextDocument koDocument(doc);
+    KTextDocument koDocument(doc);
     KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(doc->documentLayout());
 
     QTextCursor cursor = m_ToCFrame->firstCursorPosition();

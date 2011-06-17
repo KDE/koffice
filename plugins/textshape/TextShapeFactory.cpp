@@ -24,7 +24,7 @@
 
 #include <KProperties.h>
 #include <KShape.h>
-#include <KoTextDocument.h>
+#include <KTextDocument.h>
 #include <KoTextShapeData.h>
 #include <KOdfXmlNS.h>
 #include <KStyleManager.h>
@@ -62,7 +62,7 @@ KShape *TextShapeFactory::createDefaultShape(KResourceManager *documentResources
 {
     TextShape *text = new TextShape();
     if (documentResources) {
-        KoTextDocument document(text->textShapeData()->document());
+        KTextDocument document(text->textShapeData()->document());
         document.setUndoStack(documentResources->undoStack());
 
         KInlineTextObjectManager *itom = documentResources->resource(KoText::InlineTextObjectManager).value<KInlineTextObjectManager*>();

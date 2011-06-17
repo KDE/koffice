@@ -19,7 +19,7 @@
 
 #include "JumpOverview.h"
 
-#include <KoTextDocument.h>
+#include <KTextDocument.h>
 #include <KoTextEditor.h>
 #include <KInlineTextObjectManager.h>
 #include <KoBookmarkManager.h>

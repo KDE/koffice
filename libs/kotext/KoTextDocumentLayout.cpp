@@ -100,7 +100,7 @@ public:
             : inlineTextObjectManager(0),
             scheduled(false),
             parent(parent_),
-            resizeMethod(KoTextDocument::NoResize) {
+            resizeMethod(KTextDocument::NoResize) {
     }
 
     ~Private()
@@ -137,13 +137,13 @@ public:
     KInlineTextObjectManager *inlineTextObjectManager;
     bool scheduled;
     KoTextDocumentLayout *parent;
-    KoTextDocument::ResizeMethod resizeMethod;
+    KTextDocument::ResizeMethod resizeMethod;
     KPostscriptPaintDevice *paintDevice;
 };
 
 void KoTextDocumentLayout::Private::adjustSize()
 {
-    if (parent->resizeMethod() == KoTextDocument::NoResize)
+    if (parent->resizeMethod() == KTextDocument::NoResize)
         return;
 
     if (parent->shapes().isEmpty())
@@ -537,7 +537,7 @@ KShape* KoTextDocumentLayout::shapeForPosition(int position) const
     return 0;
 }
 
-void KoTextDocumentLayout::setResizeMethod(KoTextDocument::ResizeMethod method)
+void KoTextDocumentLayout::setResizeMethod(KTextDocument::ResizeMethod method)
 {
     if (d->resizeMethod == method)
         return;
@@ -545,7 +545,7 @@ void KoTextDocumentLayout::setResizeMethod(KoTextDocument::ResizeMethod method)
     scheduleLayout();
 }
 
-KoTextDocument::ResizeMethod KoTextDocumentLayout::resizeMethod() const
+KTextDocument::ResizeMethod KoTextDocumentLayout::resizeMethod() const
 {
     return d->resizeMethod;
 }

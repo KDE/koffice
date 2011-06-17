@@ -20,7 +20,7 @@
 #include "KDeleteChangeMarker.h"
 
 //KOffice includes
-#include <KoTextDocument.h>
+#include <KTextDocument.h>
 #include <KXmlReader.h>
 #include <KXmlWriter.h>
 #include <KoTextShapeSavingContext.h>

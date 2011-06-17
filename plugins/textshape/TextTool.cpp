@@ -62,7 +62,7 @@
 #include <KStyleManager.h>
 #include <KoTextOdfSaveHelper.h>
 #include <KoTextDrag.h>
-#include <KoTextDocument.h>
+#include <KTextDocument.h>
 #include <KoTextEditor.h>
 #include <KoGlobal.h>
 #include <KChangeTracker.h>
@@ -502,9 +502,9 @@ TextTool::TextTool(MockCanvas *canvas)  // constructor for our unit tests;
     document->setDocumentLayout(layout);
     m_textEditor = new KoTextEditor(document);
     m_changeTracker = new KChangeTracker();
-    KoTextDocument(document).setChangeTracker(m_changeTracker);
-    KoTextDocument(document).setUndoStack(new KUndoStack());
-    KoTextDocument(document).setTextEditor(m_textEditor.data());
+    KTextDocument(document).setChangeTracker(m_changeTracker);
+    KTextDocument(document).setUndoStack(new KUndoStack());
+    KTextDocument(document).setTextEditor(m_textEditor.data());
 }
 #endif
 
@@ -699,7 +699,7 @@ void TextTool::setShapeData(KoTextShapeData *data)
     if (docChanged) {
         if (!m_textEditor.isNull())
             disconnect(m_textEditor.data(), SIGNAL(isBidiUpdated()), this, SLOT(isBidiUpdated()));
-        m_textEditor = KoTextDocument(m_textShapeData->document()).textEditor();
+        m_textEditor = KTextDocument(m_textShapeData->document()).textEditor();
         Q_ASSERT(m_textEditor.data());
         connect(m_textEditor.data(), SIGNAL(isBidiUpdated()), this, SLOT(isBidiUpdated()));
 
@@ -720,7 +720,7 @@ void TextTool::setShapeData(KoTextShapeData *data)
             if (demoTextOn) {
                 QTextDocument *doc = m_textShapeData->document();
                 doc->setUndoRedoEnabled(false); // removes undo history
-                KoTextDocument document(doc);
+                KTextDocument document(doc);
                 document.clearText();
                 KStyleManager *styleManager = document.styleManager();
                 if (styleManager) {
@@ -899,7 +899,7 @@ void TextTool::mousePressEvent(KPointerEvent *event)
             plugin->setCurrentCursorPosition(m_textEditor.data()->document(), m_textEditor.data()->position());
 
         // Is there a KoVariable here?
-        KInlineTextObjectManager *inlineTextObjectManager = KoTextDocument(m_textEditor.data()->document()).inlineTextObjectManager();
+        KInlineTextObjectManager *inlineTextObjectManager = KTextDocument(m_textEditor.data()->document()).inlineTextObjectManager();
         KoVariable *variable = 0;
         if (inlineTextObjectManager) {
             const int position = pointToPosition(event->point);
@@ -1003,7 +1003,7 @@ void TextTool::mouseReleaseEvent(KPointerEvent *event)
     if (cfm.isAnchor() && !m_textEditor.data()->hasSelection()) {
         QString anchor = cfm.anchorHref();
         if (!anchor.isEmpty()) {
-            KoTextDocument document(m_textEditor.data()->document());
+            KTextDocument document(m_textEditor.data()->document());
             KInlineTextObjectManager *inlineManager = document.inlineTextObjectManager();
             if (inlineManager) {
                 QList<QString> bookmarks = inlineManager->bookmarkManager()->bookmarkNames();
@@ -1047,7 +1047,7 @@ void TextTool::mouseReleaseEvent(KPointerEvent *event)
             if (!anchorList.isEmpty()) {
                 anchorName = anchorList.takeFirst();
             }
-            KoTextDocument document(m_textEditor.data()->document());
+            KTextDocument document(m_textEditor.data()->document());
             KoBookmark *bookmark = document.inlineTextObjectManager()->bookmarkManager()->bookmark(anchorName);
             if (bookmark) {
                 m_textEditor.data()->setPosition(bookmark->textPosition());
@@ -1400,9 +1400,9 @@ void TextTool::updateStyleManager()
 {
     KoTextEditor *textEditor = m_textEditor.data();
     Q_ASSERT(textEditor);
-    KStyleManager *styleManager = KoTextDocument(textEditor->document()).styleManager();
+    KStyleManager *styleManager = KTextDocument(textEditor->document()).styleManager();
     emit styleManagerChanged(styleManager);
-    m_changeTracker = KoTextDocument(textEditor->document()).changeTracker();
+    m_changeTracker = KTextDocument(textEditor->document()).changeTracker();
 }
 
 void TextTool::activate(ToolActivation toolActivation, const QSet<KShape*> &shapes)
@@ -2024,7 +2024,7 @@ void TextTool::showStyleManager()
     KoTextEditor *textEditor = m_textEditor.data();
     if (textEditor == 0)
         return;
-    KStyleManager *styleManager = KoTextDocument(textEditor->document()).styleManager();
+    KStyleManager *styleManager = KTextDocument(textEditor->document()).styleManager();
     Q_ASSERT(styleManager);
     if (!styleManager)
         return;  //don't crash
@@ -2308,7 +2308,7 @@ void TextTool::debugTextDocument()
     if (CHARSPERLINE < 5)
         CHARSPERLINE = 80;
     const int CHARPOSITION = 278301935;
-    KoTextDocument document(textEditor->document());
+    KTextDocument document(textEditor->document());
     KStyleManager *styleManager = document.styleManager();
     KInlineTextObjectManager *inlineManager = document.inlineTextObjectManager();
 
@@ -2410,7 +2410,7 @@ void TextTool::debugTextStyles()
     KoTextEditor *textEditor = m_textEditor.data();
     if (textEditor == 0)
         return;
-    KoTextDocument document(textEditor->document());
+    KTextDocument document(textEditor->document());
     KStyleManager *styleManager = document.styleManager();
 
     QSet<int> seenStyles;

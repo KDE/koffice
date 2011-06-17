@@ -46,7 +46,7 @@
 #include "styles/KTableCellStyle.h"
 #include "KoTextDocumentLayout.h"
 #include "KTextBlockData.h"
-#include "KoTextDocument.h"
+#include "KTextDocument.h"
 #include "KoTextInlineRdf.h"
 #include "../KDocumentRdfBase.h"
 
@@ -687,7 +687,7 @@ QHash<QTextList *, QString> KoTextWriter::Private::saveListStyles(QTextBlock blo
         if (!textList)
             continue;
         KListStyle::ListIdType listId = ListId(textList->format());
-        if (KoList *list = KoTextDocument(document).list(listId)) {
+        if (KoList *list = KTextDocument(document).list(listId)) {
             if (generatedLists.contains(list)) {
                 if (!listStyles.contains(textList))
                     listStyles.insert(textList, generatedLists.value(list));
@@ -1052,7 +1052,7 @@ int KoTextWriter::Private::checkForListChange(const QTextBlock &listBlock)
     QTextList *textList;
     textList = block.textList();
 
-    KoTextDocument textDocument(block.document());
+    KTextDocument textDocument(block.document());
     KoList *list = textDocument.list(block);
     int topListLevel = KoList::level(block);
 
@@ -1270,7 +1270,7 @@ QTextBlock& KoTextWriter::Private::saveList(QTextBlock &block, QHash<QTextList *
     headingLevel = blockFormat.intProperty(KParagraphStyle::OutlineLevel);
     numberedParagraphLevel = blockFormat.intProperty(KParagraphStyle::ListLevel);
 
-    KoTextDocument textDocument(block.document());
+    KTextDocument textDocument(block.document());
     KoList *list = textDocument.list(block);
     int topListLevel = KoList::level(block);
     const bool saveChangeTrackerDeltaXml = changeTracker &&
@@ -1470,7 +1470,7 @@ void KoTextWriter::Private::postProcessListItemSplit(int changeId)
 
 void KoTextWriter::Private::writeBlocks(QTextDocument *document, int from, int to, QHash<QTextList *, QString> &listStyles, QTextTable *currentTable, QTextFrame *currentFrame, QTextList *currentList)
 {
-    KoTextDocument textDocument(document);
+    KTextDocument textDocument(document);
     QTextBlock block = document->findBlock(from);
 
     while (block.isValid() && ((to == -1) || (block.position() <= to))) {
@@ -2320,10 +2320,10 @@ void KoTextWriter::Private::writeNode(QTextStream &outputXmlStream, KXmlNode &no
 void KoTextWriter::write(QTextDocument *document, int from, int to)
 {
     d->document = document;
-    d->styleManager = KoTextDocument(document).styleManager();
+    d->styleManager = KTextDocument(document).styleManager();
     d->layout = qobject_cast<KoTextDocumentLayout*>(document->documentLayout());
 
-    d->changeTracker = KoTextDocument(document).changeTracker();
+    d->changeTracker = KTextDocument(document).changeTracker();
 
     if (d->layout) Q_ASSERT(d->layout->inlineTextObjectManager());
 

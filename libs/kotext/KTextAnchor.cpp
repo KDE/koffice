@@ -42,7 +42,7 @@
 #include "changetracker/KChangeTracker.h"
 #include "changetracker/KChangeTrackerElement.h"
 #include "styles/KCharacterStyle.h"
-#include "KoTextDocument.h"
+#include "KTextDocument.h"
 #include <KOdfGenericChanges.h>
 
 // #define DEBUG_PAINTING
@@ -261,7 +261,7 @@ void KTextAnchor::paint(QPainter &painter, QPaintDevice *, const QRectF &rect, Q
     painter.fillRect(charSpace, QColor(Qt::green));
 #endif
 
-    KChangeTracker *changeTracker = KoTextDocument(document()).changeTracker();
+    KChangeTracker *changeTracker = KTextDocument(document()).changeTracker();
     if (!changeTracker)
         return;
 

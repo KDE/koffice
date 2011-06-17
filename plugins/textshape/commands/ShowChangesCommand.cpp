@@ -23,7 +23,7 @@
 
 #include <KChangeTracker.h>
 #include <KChangeTrackerElement.h>
-#include <KoTextDocument.h>
+#include <KTextDocument.h>
 #include <KoTextDocumentLayout.h>
 #include <KoTextEditor.h>
 #include <KTextAnchor.h>
@@ -49,8 +49,8 @@ ShowChangesCommand::ShowChangesCommand(bool showChanges, QTextDocument *document
     m_canvas(canvas)
 {
     Q_ASSERT(document);
-    m_changeTracker = KoTextDocument(m_document).changeTracker();
-    m_textEditor = KoTextDocument(m_document).textEditor();
+    m_changeTracker = KTextDocument(m_document).changeTracker();
+    m_textEditor = KTextDocument(m_document).textEditor();
     if (showChanges)
       setText(i18n("Show Changes"));
     else
@@ -116,7 +116,7 @@ void ShowChangesCommand::insertDeletedChanges()
 {
     int numAddedChars = 0;
     QVector<KChangeTrackerElement *> elementVector;
-    KoTextDocument(m_textEditor->document()).changeTracker()->deletedChanges(elementVector);
+    KTextDocument(m_textEditor->document()).changeTracker()->deletedChanges(elementVector);
     qSort(elementVector.begin(), elementVector.end(), isPositionLessThan);
 
     foreach (KChangeTrackerElement *element, elementVector) {
@@ -141,7 +141,7 @@ void ShowChangesCommand::checkAndAddAnchoredShapes(int position, int length)
     for (int i=position;i < (position + length);i++) {
         if (m_textEditor->document()->characterAt(i) == QChar::ObjectReplacementCharacter) {
             cursor.setPosition(i+1);
-            KInlineObject *object = KoTextDocument(m_textEditor->document()).inlineTextObjectManager()->inlineTextObject(cursor);
+            KInlineObject *object = KTextDocument(m_textEditor->document()).inlineTextObjectManager()->inlineTextObject(cursor);
             if (!object)
                 continue;
 
@@ -194,7 +194,7 @@ void ShowChangesCommand::checkAndRemoveAnchoredShapes(int position, int length)
     for (int i=position;i < (position + length);i++) {
         if (m_textEditor->document()->characterAt(i) == QChar::ObjectReplacementCharacter) {
             cursor.setPosition(i+1);
-            KInlineObject *object = KoTextDocument(m_textEditor->document()).inlineTextObjectManager()->inlineTextObject(cursor);
+            KInlineObject *object = KTextDocument(m_textEditor->document()).inlineTextObjectManager()->inlineTextObject(cursor);
             if (!object)
                 continue;
 

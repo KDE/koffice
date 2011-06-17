@@ -25,7 +25,7 @@
 #include <KPointerEvent.h>
 #include <KSelection.h>
 #include <KShapeManager.h>
-#include <KoTextDocument.h>
+#include <KTextDocument.h>
 #include <KoTextDocumentLayout.h>
 #include <KoTextEditor.h>
 #include <KoTextShapeData.h>
@@ -106,7 +106,7 @@ void ChangeTrackingTool::mousePressEvent(KPointerEvent* event)
 
     int changeId = cursor.charFormat().property(KCharacterStyle::ChangeTrackerId).toInt();
     if (changeId) {
-        AcceptRejectChangeDialog acceptDialog(KoTextDocument(m_textShapeData->document()).changeTracker(), changeId);
+        AcceptRejectChangeDialog acceptDialog(KTextDocument(m_textShapeData->document()).changeTracker(), changeId);
         if (int result = acceptDialog.exec()) {
             if (result == (int)(AcceptRejectChangeDialog::eChangeAccepted)) {
                 acceptChange();
@@ -330,7 +330,7 @@ void ChangeTrackingTool::setShapeData(KoTextShapeData *data)
     if (docChanged) {
 //        if (m_textEditor)
 //            disconnect(m_textEditor, SIGNAL(isBidiUpdated()), this, SLOT(isBidiUpdated()));
-        m_textEditor = KoTextDocument(m_textShapeData->document()).textEditor();
+        m_textEditor = KTextDocument(m_textShapeData->document()).textEditor();
         Q_ASSERT(m_textEditor);
 //        connect(m_textEditor, SIGNAL(isBidiUpdated()), this, SLOT(isBidiUpdated()));
 
@@ -340,7 +340,7 @@ void ChangeTrackingTool::setShapeData(KoTextShapeData *data)
         }
     }
     m_textEditor->updateDefaultTextDirection(m_textShapeData->pageDirection());
-    if (!KoTextDocument(m_textShapeData->document()).changeTracker()->displayChanges()) {
+    if (!KTextDocument(m_textShapeData->document()).changeTracker()->displayChanges()) {
         m_disableShowChangesOnExit = true;
         ShowChangesCommand *command = new ShowChangesCommand(true, m_textShapeData->document(), m_canvas);
         m_textEditor->addCommand(command);

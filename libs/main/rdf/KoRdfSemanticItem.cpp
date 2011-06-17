@@ -29,7 +29,7 @@
 #include <KoToolProxy.h>
 #include <KoBookmark.h>
 #include <KoTextMeta.h>
-#include <KoTextDocument.h>
+#include <KTextDocument.h>
 
 #include <kdebug.h>
 #include <QUuid>
@@ -247,7 +247,7 @@ void KoRdfSemanticItem::insert(KCanvasBase *host)
     Q_ASSERT(editor);
     Q_ASSERT(editor->document());
 
-    KoTextDocument ktd(editor->document());
+    KTextDocument ktd(editor->document());
     KoChangeTrackerDisabledRAII disableChangeTracker(ktd.changeTracker());
 
     KoTextMeta *startmark = new KoTextMeta();

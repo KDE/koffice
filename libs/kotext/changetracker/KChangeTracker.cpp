@@ -27,7 +27,7 @@
 #include <KXmlReader.h>
 #include <KOdfXmlNS.h>
 #include <KInlineTextObjectManager.h>
-#include <KoTextDocument.h>
+#include <KTextDocument.h>
 #include <KoTextDocumentLayout.h>
 #include <KoList.h>
 #include <KListStyle.h>
@@ -548,7 +548,7 @@ QTextDocumentFragment KChangeTracker::generateDeleteFragment(QTextCursor &cursor
                 format.setProperty(KDeleteChangeMarker::DeletedList, fullyDeletedList);
                 if (fullyDeletedList) {
                     KListStyle::ListIdType listId = ListId(format);
-                    KoList *list = KoTextDocument(document).list(currentBlock);
+                    KoList *list = KTextDocument(document).list(currentBlock);
                     marker->setDeletedListStyle(listId, list->style());
                 }
                 editCursor.currentList()->setFormat(format);
@@ -604,7 +604,7 @@ bool KChangeTracker::Private::checkListDeletion(QTextList *list, const QTextCurs
 
 void KChangeTracker::insertDeleteFragment(QTextCursor &cursor, KDeleteChangeMarker *marker)
 {
-    QTextDocumentFragment fragment =  KoTextDocument(cursor.document()).changeTracker()->elementById(marker->changeId())->deleteData();
+    QTextDocumentFragment fragment =  KTextDocument(cursor.document()).changeTracker()->elementById(marker->changeId())->deleteData();
     QTextDocument tempDoc;
     QTextCursor tempCursor(&tempDoc);
     tempCursor.insertFragment(fragment);
@@ -623,7 +623,7 @@ void KChangeTracker::insertDeleteFragment(QTextCursor &cursor, KDeleteChangeMark
         QTextList *textList = tempCursor.currentList();
         int outlineLevel = currentBlock.blockFormat().property(KParagraphStyle::OutlineLevel).toInt();
 
-        KoList *currentList = KoTextDocument(cursor.document()).list(cursor.block());
+        KoList *currentList = KTextDocument(cursor.document()).list(cursor.block());
         int docOutlineLevel = cursor.block().blockFormat().property(KParagraphStyle::OutlineLevel).toInt();
         if (docOutlineLevel) {
             //Even though we got a list, it is actually a list for storing headings. So don't consider it
@@ -668,10 +668,10 @@ void KChangeTracker::insertDeleteFragment(QTextCursor &cursor, KDeleteChangeMark
                         //So go to the next block and insert it in the list there.
                         QTextCursor tmp(cursor);
                         tmp.setPosition(tmp.block().next().position());
-                        currentList = KoTextDocument(tmp.document()).list(tmp.block());
+                        currentList = KTextDocument(tmp.document()).list(tmp.block());
                     } else {
                         // This is a heading. So find the KoList for heading and add the block there
-                        KoList *headingList = KoTextDocument(cursor.document()).headingList();
+                        KoList *headingList = KTextDocument(cursor.document()).headingList();
                         currentList = headingList;
                     }
                 }
@@ -715,7 +715,7 @@ void KChangeTracker::insertDeleteFragment(QTextCursor &cursor, KDeleteChangeMark
             if (!currentList) {
                 QTextCursor tmp(cursor);
                 tmp.setPosition(tmp.block().previous().position());
-                currentList = KoTextDocument(tmp.document()).list(tmp.block());
+                currentList = KTextDocument(tmp.document()).list(tmp.block());
             }
             currentList->add(cursor.block(), KoList::level(currentBlock));
         }

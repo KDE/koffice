@@ -21,7 +21,7 @@
 #include "ChangeListCommand.h"
 
 #include <KTextBlockData.h>
-#include <KoTextDocument.h>
+#include <KTextDocument.h>
 #include <QTextCursor>
 #include <KParagraphStyle.h>
 
@@ -125,7 +125,7 @@ bool ChangeListCommand::formatsEqual(const KListLevelProperties &llp, const QTex
 
 void ChangeListCommand::initList(KListStyle *listStyle)
 {
-    KoTextDocument document(m_blocks.first().document());
+    KTextDocument document(m_blocks.first().document());
 
     KoList *mergeableList = 0;
     KoList *newList = 0;

@@ -26,7 +26,7 @@
 
 #include <kdebug.h>
 
-#include "KoTextDocument.h"
+#include "KTextDocument.h"
 #include "KoTextEditor.h"
 #include "styles/KStyleManager.h"
 #include "KInlineTextObjectManager.h"
@@ -36,127 +36,127 @@
 #include "KoList.h"
 #include <KUndoStack>
 
-const QUrl KoTextDocument::StyleManagerURL = QUrl("kotext://stylemanager");
-const QUrl KoTextDocument::ListsURL = QUrl("kotext://lists");
-const QUrl KoTextDocument::InlineObjectTextManagerURL = QUrl("kotext://inlineObjectTextManager");
-const QUrl KoTextDocument::UndoStackURL = QUrl("kotext://undoStack");
-const QUrl KoTextDocument::ChangeTrackerURL = QUrl("kotext://changetracker");
-const QUrl KoTextDocument::TextEditorURL = QUrl("kotext://textEditor");
-const QUrl KoTextDocument::HeadingListURL = QUrl("kotext://headingList");
+const QUrl KTextDocument::StyleManagerURL = QUrl("kotext://stylemanager");
+const QUrl KTextDocument::ListsURL = QUrl("kotext://lists");
+const QUrl KTextDocument::InlineObjectTextManagerURL = QUrl("kotext://inlineObjectTextManager");
+const QUrl KTextDocument::UndoStackURL = QUrl("kotext://undoStack");
+const QUrl KTextDocument::ChangeTrackerURL = QUrl("kotext://changetracker");
+const QUrl KTextDocument::TextEditorURL = QUrl("kotext://textEditor");
+const QUrl KTextDocument::HeadingListURL = QUrl("kotext://headingList");
 
-KoTextDocument::KoTextDocument(QTextDocument *document)
+KTextDocument::KTextDocument(QTextDocument *document)
     : m_document(document)
 {
     Q_ASSERT(m_document);
 }
 
-KoTextDocument::KoTextDocument(const QTextDocument *document)
+KTextDocument::KTextDocument(const QTextDocument *document)
     : m_document(const_cast<QTextDocument *>(document))
 {
     Q_ASSERT(m_document);
 }
 
-KoTextDocument::~KoTextDocument()
+KTextDocument::~KTextDocument()
 {
 }
 
-QTextDocument *KoTextDocument::document() const
+QTextDocument *KTextDocument::document() const
 {
     return m_document;
 }
 
-void KoTextDocument::setTextEditor (KoTextEditor* textEditor)
+void KTextDocument::setTextEditor (KoTextEditor* textEditor)
 {
     QVariant v;
     v.setValue(textEditor);
-    m_document->addResource(KoTextDocument::TextEditor, TextEditorURL, v);
+    m_document->addResource(KTextDocument::TextEditor, TextEditorURL, v);
 }
 
-KoTextEditor* KoTextDocument::textEditor()
+KoTextEditor* KTextDocument::textEditor()
 {
-    QVariant resource = m_document->resource(KoTextDocument::TextEditor, TextEditorURL);
+    QVariant resource = m_document->resource(KTextDocument::TextEditor, TextEditorURL);
     return resource.value<KoTextEditor *>();
 }
 
-void KoTextDocument::setStyleManager(KStyleManager *sm)
+void KTextDocument::setStyleManager(KStyleManager *sm)
 {
     QVariant v;
     v.setValue(sm);
-    m_document->addResource(KoTextDocument::StyleManager, StyleManagerURL, v);
+    m_document->addResource(KTextDocument::StyleManager, StyleManagerURL, v);
     if (sm)
         sm->add(m_document);
 }
 
-void KoTextDocument::setInlineTextObjectManager(KInlineTextObjectManager *manager)
+void KTextDocument::setInlineTextObjectManager(KInlineTextObjectManager *manager)
 {
     QVariant v;
     v.setValue(manager);
-    m_document->addResource(KoTextDocument::InlineTextManager, InlineObjectTextManagerURL, v);
+    m_document->addResource(KTextDocument::InlineTextManager, InlineObjectTextManagerURL, v);
 
     KoTextDocumentLayout *lay = qobject_cast<KoTextDocumentLayout*>(m_document->documentLayout());
     if (lay)
         lay->setInlineTextObjectManager(manager);
 }
 
-KStyleManager *KoTextDocument::styleManager() const
+KStyleManager *KTextDocument::styleManager() const
 {
-    QVariant resource = m_document->resource(KoTextDocument::StyleManager, StyleManagerURL);
+    QVariant resource = m_document->resource(KTextDocument::StyleManager, StyleManagerURL);
     return resource.value<KStyleManager *>();
 }
 
-void KoTextDocument::setChangeTracker(KChangeTracker *changeTracker)
+void KTextDocument::setChangeTracker(KChangeTracker *changeTracker)
 {
     QVariant v;
     v.setValue(changeTracker);
-    m_document->addResource(KoTextDocument::ChangeTrackerResource, ChangeTrackerURL, v);
+    m_document->addResource(KTextDocument::ChangeTrackerResource, ChangeTrackerURL, v);
 }
 
-KChangeTracker *KoTextDocument::changeTracker() const
+KChangeTracker *KTextDocument::changeTracker() const
 {
-    QVariant resource = m_document->resource(KoTextDocument::ChangeTrackerResource, ChangeTrackerURL);
+    QVariant resource = m_document->resource(KTextDocument::ChangeTrackerResource, ChangeTrackerURL);
     return resource.value<KChangeTracker *>();
 }
 
-void KoTextDocument::setHeadingList(KoList *headingList)
+void KTextDocument::setHeadingList(KoList *headingList)
 {
     QVariant v;
     v.setValue(headingList);
-    m_document->addResource(KoTextDocument::HeadingList, HeadingListURL, v);
+    m_document->addResource(KTextDocument::HeadingList, HeadingListURL, v);
 }
 
-KoList *KoTextDocument::headingList() const
+KoList *KTextDocument::headingList() const
 {
-    QVariant resource = m_document->resource(KoTextDocument::HeadingList, HeadingListURL);
+    QVariant resource = m_document->resource(KTextDocument::HeadingList, HeadingListURL);
     return resource.value<KoList *>();
 }
 
-void KoTextDocument::setUndoStack(KUndoStack *undoStack)
+void KTextDocument::setUndoStack(KUndoStack *undoStack)
 {
     QVariant v;
     v.setValue<void*>(undoStack);
-    m_document->addResource(KoTextDocument::UndoStack, UndoStackURL, v);
+    m_document->addResource(KTextDocument::UndoStack, UndoStackURL, v);
 }
 
-KUndoStack *KoTextDocument::undoStack() const
+KUndoStack *KTextDocument::undoStack() const
 {
-    QVariant resource = m_document->resource(KoTextDocument::UndoStack, UndoStackURL);
+    QVariant resource = m_document->resource(KTextDocument::UndoStack, UndoStackURL);
     return static_cast<KUndoStack*>(resource.value<void*>());
 }
 
-void KoTextDocument::setLists(const QList<KoList *> &lists)
+void KTextDocument::setLists(const QList<KoList *> &lists)
 {
     QVariant v;
     v.setValue(lists);
-    m_document->addResource(KoTextDocument::Lists, ListsURL, v);
+    m_document->addResource(KTextDocument::Lists, ListsURL, v);
 }
 
-QList<KoList *> KoTextDocument::lists() const
+QList<KoList *> KTextDocument::lists() const
 {
-    QVariant resource = m_document->resource(KoTextDocument::Lists, ListsURL);
+    QVariant resource = m_document->resource(KTextDocument::Lists, ListsURL);
     return resource.value<QList<KoList *> >();
 }
 
-void KoTextDocument::addList(KoList *list)
+void KTextDocument::addList(KoList *list)
 {
     Q_ASSERT(list);
     list->setParent(m_document);
@@ -167,7 +167,7 @@ void KoTextDocument::addList(KoList *list)
     setLists(l);
 }
 
-void KoTextDocument::removeList(KoList *list)
+void KTextDocument::removeList(KoList *list)
 {
     QList<KoList *> l = lists();
     if (l.contains(list)) {
@@ -176,7 +176,7 @@ void KoTextDocument::removeList(KoList *list)
     }
 }
 
-KoList *KoTextDocument::list(const QTextBlock &block) const
+KoList *KTextDocument::list(const QTextBlock &block) const
 {
     QTextList *textList = block.textList();
     if (!textList)
@@ -184,7 +184,7 @@ KoList *KoTextDocument::list(const QTextBlock &block) const
     return list(textList);
 }
 
-KoList *KoTextDocument::list(QTextList *textList) const
+KoList *KTextDocument::list(QTextList *textList) const
 {
     // FIXME: this is horrible.
     foreach(KoList *l, lists()) {
@@ -194,7 +194,7 @@ KoList *KoTextDocument::list(QTextList *textList) const
     return 0;
 }
 
-KoList *KoTextDocument::list(KListStyle::ListIdType listId) const
+KoList *KTextDocument::list(KListStyle::ListIdType listId) const
 {
     foreach(KoList *l, lists()) {
         if (l->textListIds().contains(listId))
@@ -203,28 +203,28 @@ KoList *KoTextDocument::list(KListStyle::ListIdType listId) const
     return 0;
 }
 
-void KoTextDocument::clearText()
+void KTextDocument::clearText()
 {
     QTextCursor cursor(m_document);
     cursor.select(QTextCursor::Document);
     cursor.removeSelectedText();
 }
 
-KInlineTextObjectManager *KoTextDocument::inlineTextObjectManager() const
+KInlineTextObjectManager *KTextDocument::inlineTextObjectManager() const
 {
-    QVariant resource = m_document->resource(KoTextDocument::InlineTextManager,
+    QVariant resource = m_document->resource(KTextDocument::InlineTextManager,
             InlineObjectTextManagerURL);
     return resource.value<KInlineTextObjectManager *>();
 }
 
-void KoTextDocument::setResizeMethod(KoTextDocument::ResizeMethod method)
+void KTextDocument::setResizeMethod(KTextDocument::ResizeMethod method)
 {
     KoTextDocumentLayout *layout = dynamic_cast<KoTextDocumentLayout*>(m_document->documentLayout());
     Q_ASSERT(layout);
     layout->setResizeMethod(method);
 }
 
-KoTextDocument::ResizeMethod KoTextDocument::resizeMethod() const
+KTextDocument::ResizeMethod KTextDocument::resizeMethod() const
 {
     KoTextDocumentLayout *layout = dynamic_cast<KoTextDocumentLayout*>(m_document->documentLayout());
     Q_ASSERT(layout);

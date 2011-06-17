@@ -46,7 +46,7 @@
 
 // koffice libs includes
 #include <KShapeManager.h>
-#include <KoTextDocument.h>
+#include <KTextDocument.h>
 #include <KTextAnchor.h>
 #include <KShapeContainer.h>
 #include <KOdfWriteStore.h>
@@ -533,7 +533,7 @@ void KWDocument::initEmpty()
     Q_ASSERT(styleManager);
 
     QTextDocument document;
-    KoTextDocument doc(&document);
+    KTextDocument doc(&document);
     doc.setStyleManager(styleManager);
     KoText::loadOpenDocument("/home/zander/work/kde/build-trunk/installed/share/apps/kword/templates/Normal/.source/A4.odt", &document);
 
@@ -774,7 +774,7 @@ void KWDocument::endOfLoading() // called by both oasis and oldxml
         KWTextFrameSet *tfs = dynamic_cast<KWTextFrameSet*>(fs);
         if (!tfs)
             continue;
-        KoTextDocument textDoc(tfs->document());
+        KTextDocument textDoc(tfs->document());
         foreach (KInlineObject *inlineObject, textDoc.inlineTextObjectManager()->inlineTextObjects()) {
             KTextAnchor *anchor = dynamic_cast<KTextAnchor*>(inlineObject);
             if (anchor) {

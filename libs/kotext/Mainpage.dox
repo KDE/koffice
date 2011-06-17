@@ -36,8 +36,8 @@
  * KParagraphStyle::Properities for instance), and we allow managers to
  * be stored on the document too.  So for example a KStyleManager will
  * be stored as a property on the QTextDocument and you can access that
- * using the KoTextDocument API.  Note that you can use the
- * KoTextDocument class while using only a QTextDocument instance.
+ * using the KTextDocument API.  Note that you can use the
+ * KTextDocument class while using only a QTextDocument instance.
  *
  * Plugins
  *

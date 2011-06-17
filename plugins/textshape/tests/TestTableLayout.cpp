@@ -5,7 +5,7 @@
 #include <KStyleManager.h>
 #include <KParagraphStyle.h>
 #include <KTableColumnAndRowStyleManager.h>
-#include <KoTextDocument.h>
+#include <KTextDocument.h>
 #include <KTableCellStyle.h>
 #include <KTableColumnStyle.h>
 #include <KTableRowStyle.h>
@@ -59,7 +59,7 @@ void TestTableLayout::initTest(int rows, int columns,
     // Style manager.
     m_styleManager = new KStyleManager();
     Q_ASSERT(m_styleManager);
-    KoTextDocument(m_doc).setStyleManager(m_styleManager);
+    KTextDocument(m_doc).setStyleManager(m_styleManager);
 
     // Table style.
     m_defaultTableStyle = new KTableStyle();

@@ -22,7 +22,7 @@
 
 #include <KoTextEditor.h>
 
-#include <KoTextDocument.h>
+#include <KTextDocument.h>
 #include <KoTextPaste.h>
 #include "TextTool.h"
 
@@ -58,7 +58,7 @@ void TextPasteCommand::undo()
 
 void TextPasteCommand::redo()
 {
-    KoTextEditor *editor = KoTextDocument(m_tool->m_textShapeData->document()).textEditor();
+    KoTextEditor *editor = KTextDocument(m_tool->m_textShapeData->document()).textEditor();
     if (!m_first) {
         QUndoCommand::redo();
     } else {

@@ -43,7 +43,7 @@
 #include <KInlineTextObjectManager.h>
 #include <KShape.h>
 #include <KUnit.h>
-#include <KoTextDocument.h>
+#include <KTextDocument.h>
 #include <KChangeTracker.h>
 #include <KChangeTrackerElement.h>
 #include <KOdfGenericChange.h>
@@ -91,8 +91,8 @@ Layout::Layout(KoTextDocumentLayout *parent)
 
 bool Layout::start()
 {
-    m_styleManager = KoTextDocument(m_parent->document()).styleManager();
-    m_changeTracker = KoTextDocument(m_parent->document()).changeTracker();
+    m_styleManager = KTextDocument(m_parent->document()).styleManager();
+    m_changeTracker = KTextDocument(m_parent->document()).changeTracker();
     if (interrupted)
         resetPrivate();
     else if (shape)
@@ -246,7 +246,7 @@ bool Layout::addLine(QTextLine &line)
     if (!m_newShape
             // In case the text shape automatically resizes itself to fit all contents, every line will fit,
             // so just lay them out (i.e. do not return true)
-            && m_parent->resizeMethod() == KoTextDocument::NoResize
+            && m_parent->resizeMethod() == KTextDocument::NoResize
             // line does not fit.
             && m_data->documentOffset() + shape->size().height() - footnoteHeight
               < m_y + line.height() + m_shapeBorder.bottom
@@ -487,7 +487,7 @@ bool Layout::nextParag()
     m_y += topMargin();
     layout = m_block.layout();
     QTextOption option = layout->textOption();
-    option.setWrapMode(m_parent->resizeMethod() == KoTextDocument::NoResize ? QTextOption::WrapAtWordBoundaryOrAnywhere : QTextOption::NoWrap);
+    option.setWrapMode(m_parent->resizeMethod() == KTextDocument::NoResize ? QTextOption::WrapAtWordBoundaryOrAnywhere : QTextOption::NoWrap);
     qreal tabStopDistance =  m_format.property(KParagraphStyle::TabStopDistance).toDouble();
     if (tabStopDistance > 0)
         option.setTabStop(tabStopDistance * qt_defaultDpiY() / 72.);

@@ -74,7 +74,7 @@
 #include <KShapeRegistry.h>
 #include <KoStandardAction.h>
 #include <KTextAnchor.h>
-#include <KoTextDocument.h>
+#include <KTextDocument.h>
 #include <KoTextEditor.h>
 #include <KoText.h>
 #include <KoTextOnShapeContainer.h>
@@ -956,7 +956,7 @@ void KWView::insertFrameBreak()
         // this means we have the text tool selected right now.
         handler->insertFrameBreak();
     } else if (m_document->mainFrameSet()) { // lets just add one to the main text frameset
-        KoTextDocument doc(m_document->mainFrameSet()->document());
+        KTextDocument doc(m_document->mainFrameSet()->document());
         doc.textEditor()->insertFrameBreak();
     }
 }
@@ -1047,7 +1047,7 @@ void KWView::formatPage()
         return;
     KWPageSettingsDialog *dia = new KWPageSettingsDialog(this, m_document, m_currentPage);
     if (m_document->mainFrameSet()) {
-        KoTextDocument doc(m_document->mainFrameSet()->document());
+        KTextDocument doc(m_document->mainFrameSet()->document());
         KoTextEditor *editor = doc.textEditor();
         if (editor)
             dia->showTextDirection(editor->isBidiDocument());

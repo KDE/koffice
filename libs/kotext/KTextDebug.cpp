@@ -35,7 +35,7 @@
 #include "styles/KTableStyle.h"
 #include "styles/KTableCellStyle.h"
 #include "styles/KStyleManager.h"
-#include "KoTextDocument.h"
+#include "KTextDocument.h"
 #include "KTextBlockData.h"
 #include <KoTextDocumentLayout.h>
 #include <KInlineTextObjectManager.h>
@@ -165,7 +165,7 @@ QString KTextDebug::textAttributes(const QTextCharFormat &textFormat)
         return attrs;
     }
 
-    KStyleManager *styleManager = document ? KoTextDocument(document).styleManager() : 0;
+    KStyleManager *styleManager = document ? KTextDocument(document).styleManager() : 0;
     if (styleManager && textFormat.hasProperty(KCharacterStyle::StyleId)) {
         int id = textFormat.intProperty(KCharacterStyle::StyleId);
         KCharacterStyle *characterStyle = styleManager->characterStyle(id);
@@ -321,7 +321,7 @@ QString KTextDebug::paraAttributes(const KParagraphStyle &style)
 QString KTextDebug::paraAttributes(const QTextBlockFormat &blockFormat)
 {
     QString attrs;
-    KStyleManager *styleManager = document ? KoTextDocument(document).styleManager() : 0;
+    KStyleManager *styleManager = document ? KTextDocument(document).styleManager() : 0;
     if (styleManager && blockFormat.hasProperty(KParagraphStyle::StyleId)) {
         int id = blockFormat.intProperty(KParagraphStyle::StyleId);
         KParagraphStyle *paragraphStyle = styleManager->paragraphStyle(id);
@@ -495,7 +495,7 @@ QString KTextDebug::paraAttributes(const QTextBlockFormat &blockFormat)
 QString KTextDebug::listAttributes(const QTextListFormat &listFormat)
 {
     QString attrs;
-    KStyleManager *styleManager = document ? KoTextDocument(document).styleManager() : 0;
+    KStyleManager *styleManager = document ? KTextDocument(document).styleManager() : 0;
     if (styleManager && listFormat.hasProperty(KListStyle::StyleId)) {
         int id = listFormat.intProperty(KListStyle::StyleId);
         KListStyle *listStyle = styleManager->listStyle(id);
@@ -616,7 +616,7 @@ QString KTextDebug::tableAttributes(const KTableStyle &tableStyle)
 QString KTextDebug::tableAttributes(const QTextTableFormat &tableFormat)
 {
     QString attrs;
-    KStyleManager *styleManager = document ? KoTextDocument(document).styleManager() : 0;
+    KStyleManager *styleManager = document ? KTextDocument(document).styleManager() : 0;
     if (styleManager) {
         int id = tableFormat.intProperty(KTableStyle::StyleId);
         KTableStyle *tableStyle = styleManager->tableStyle(id);
@@ -803,7 +803,7 @@ QString KTextDebug::tableCellAttributes(const KTableCellStyle &tableCellStyle)
 QString KTextDebug::tableCellAttributes(const QTextTableCellFormat &tableCellFormat)
 {
     QString attrs;
-    KStyleManager *styleManager = document ? KoTextDocument(document).styleManager() : 0;
+    KStyleManager *styleManager = document ? KTextDocument(document).styleManager() : 0;
     if (styleManager) {
         int id = tableCellFormat.intProperty(KTableCellStyle::StyleId);
         KTableCellStyle *tableCellStyle = styleManager->tableCellStyle(id);

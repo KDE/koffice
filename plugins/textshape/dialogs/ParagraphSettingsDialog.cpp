@@ -24,7 +24,7 @@
 #include "../TextTool.h"
 
 #include <KParagraphStyle.h>
-#include <KoTextDocument.h>
+#include <KTextDocument.h>
 
 #include <QTextBlock>
 #include <QTimer>

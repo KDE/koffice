@@ -175,7 +175,7 @@ QTextDocument *KoText::loadOpenDocument(const QString &filename, QTextDocument *
     if (document == 0)
         document = new QTextDocument;
 
-    KoTextDocument doc(document);
+    KTextDocument doc(document);
     KStyleManager *styleManager = doc.styleManager();
     if (styleManager == 0) {
         styleManager = new KStyleManager;

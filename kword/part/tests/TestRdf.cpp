@@ -42,7 +42,7 @@
 #include <rdf/KoRdfPrefixMapping.h>
 #include <rdf/KoSopranoTableModel.h>
 #include <KOdfStore.h>
-#include <KoTextDocument.h>
+#include <KTextDocument.h>
 #include "KWAboutData.h"
 #include <KoApplication.h>
 #include <KXmlWriter.h>

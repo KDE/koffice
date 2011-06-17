@@ -19,7 +19,7 @@
  */
 
 #include "KoList.h"
-#include "KoTextDocument.h"
+#include "KTextDocument.h"
 #include "styles/KListLevelProperties.h"
 #include "KTextBlockData.h"
 #include "styles/KParagraphStyle.h"
@@ -40,12 +40,12 @@ KoList::KoList(const QTextDocument *document, KListStyle *style, KoList::Type ty
     Q_ASSERT(document);
     d->type = type;
     setStyle(style);
-    KoTextDocument(document).addList(this);
+    KTextDocument(document).addList(this);
 }
 
 KoList::~KoList()
 {
-    KoTextDocument(d->document).removeList(this);
+    KTextDocument(d->document).removeList(this);
     delete d;
 }
 
@@ -62,7 +62,7 @@ QVector<KListStyle::ListIdType> KoList::textListIds() const
 KoList *KoList::applyStyle(const QTextBlock &block, KListStyle *style, int level)
 {
     Q_ASSERT(style);
-    KoTextDocument document(block.document());
+    KTextDocument document(block.document());
     KoList *list = document.list(block);
     if (list && *list->style() == *style) {
         list->add(block, level);
@@ -161,7 +161,7 @@ void KoList::remove(const QTextBlock &block)
 void KoList::setStyle(KListStyle *style)
 {
     if (style == 0) {
-        KStyleManager *styleManager = KoTextDocument(d->document).styleManager();
+        KStyleManager *styleManager = KTextDocument(d->document).styleManager();
         Q_ASSERT(styleManager);
         style = styleManager->defaultListStyle();
     }

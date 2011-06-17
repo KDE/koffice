@@ -36,7 +36,7 @@
 #include <QTextCursor>
 #include <QTextDocument>
 #include <KStyleManager.h>
-#include <KoTextDocument.h>
+#include <KTextDocument.h>
 #include <KParagraphStyle.h>
 
 #include <kdebug.h>
@@ -235,7 +235,7 @@ void SCPlaceholders::applyStyle(SCPlaceholderShape * shape, const QString &prese
         QTextCursor cursor(data->document());
         QTextCursor newCursor(newData->document());
         newCursor.select(QTextCursor::Document);
-        KoTextDocument textDocument(newData->document());
+        KTextDocument textDocument(newData->document());
 
         QTextBlockFormat blockFormat(cursor.blockFormat());
         // TODO check if needed

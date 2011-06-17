@@ -24,7 +24,7 @@
 #include <TextTool.h>
 #include <QUndoCommand>
 #include <KoTextEditor.h>
-#include <KoTextDocument.h>
+#include <KTextDocument.h>
 #include <KoTextDocumentLayout.h>
 #include <KInlineTextObjectManager.h>
 #include <KTextAnchor.h>
@@ -219,13 +219,13 @@ bool DeleteCommand::mergeWith(const QUndoCommand *command)
         void undo() {
             QTextDocument *doc = m_document.data();
             if (doc)
-                doc->undo(KoTextDocument(doc).textEditor()->cursor());
+                doc->undo(KTextDocument(doc).textEditor()->cursor());
         }
 
         void redo() {
             QTextDocument *doc = m_document.data();
             if (doc)
-                doc->redo(KoTextDocument(doc).textEditor()->cursor());
+                doc->redo(KTextDocument(doc).textEditor()->cursor());
         }
 
         QWeakPointer<QTextDocument> m_document;
@@ -298,8 +298,8 @@ void DeleteCommand::updateListChanges()
             else
                 listId = currentList->format().property(KListStyle::ListId).toULongLong();
 
-            if (!KoTextDocument(document).list(currentBlock)) {
-                KoList *list = KoTextDocument(document).list(listId);
+            if (!KTextDocument(document).list(currentBlock)) {
+                KoList *list = KTextDocument(document).list(listId);
                 list->updateStoredList(currentBlock);
             }
         }

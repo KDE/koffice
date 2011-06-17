@@ -29,7 +29,7 @@
 #include <KoTextShapeData.h>
 #include <KStyleManager.h>
 #include <KParagraphStyle.h>
-#include <KoTextDocument.h>
+#include <KTextDocument.h>
 #include <KoTextEditor.h>
 
 #include <changetracker/KChangeTracker.h>
@@ -52,7 +52,7 @@ KWTextFrameSet::KWTextFrameSet(const KWDocument *doc)
     setShapeSeriesPlacement(KWord::NoAutoPlacement);
     m_document->setDocumentLayout(new KWTextDocumentLayout(this));
     if (m_kwordDocument) {
-        KoTextDocument doc(m_document);
+        KTextDocument doc(m_document);
         doc.setInlineTextObjectManager(m_kwordDocument->inlineTextObjectManager());
         KStyleManager *styleManager = m_kwordDocument->resourceManager()->resource(KoText::StyleManager).value<KStyleManager*>();
         Q_ASSERT(styleManager);
@@ -78,7 +78,7 @@ KWTextFrameSet::KWTextFrameSet(const KWDocument *doc, KWord::TextFrameSetType ty
     setShapeSeriesPlacement(KWord::NoAutoPlacement);
     m_document->setDocumentLayout(new KWTextDocumentLayout(this));
     if (m_kwordDocument) {
-        KoTextDocument doc(m_document);
+        KTextDocument doc(m_document);
         doc.setInlineTextObjectManager(m_kwordDocument->inlineTextObjectManager());
         KStyleManager *styleManager = m_kwordDocument->resourceManager()->resource(KoText::StyleManager).value<KStyleManager*>();
         doc.setStyleManager(styleManager);
@@ -149,7 +149,7 @@ void KWTextFrameSet::setupFrame(KWFrame *frame)
         m_document = data->document();
         m_document->setDocumentLayout(new KWTextDocumentLayout(this));
         if (m_kwordDocument) {
-            KoTextDocument doc(m_document);
+            KTextDocument doc(m_document);
             KStyleManager *styleManager = m_kwordDocument->resourceManager()->resource(KoText::StyleManager).value<KStyleManager*>();
             doc.setStyleManager(styleManager);
             KChangeTracker *changeTracker = m_kwordDocument->resourceManager()->resource(KoText::ChangeTracker).value<KChangeTracker*>();

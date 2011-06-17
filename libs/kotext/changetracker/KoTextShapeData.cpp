@@ -22,7 +22,7 @@
 #include "KoTextShapeData.h"
 #include <KoTextShapeDataBase.h>
 #include <KoTextShapeDataBase_p.h>
-#include "KoTextDocument.h"
+#include "KTextDocument.h"
 #include "KoTextEditor.h"
 #include "KoTextDocumentLayout.h"
 #include "styles/KStyleManager.h"
@@ -119,13 +119,13 @@ void KoTextShapeData::setDocument(QTextDocument *document, bool transferOwnershi
 
     if (d->document->isEmpty() && d->document->allFormats().count() == 2) {
         // apply app default style for first parag
-        KoTextDocument doc(d->document);
+        KTextDocument doc(d->document);
         KStyleManager *sm = doc.styleManager();
         if (sm)
             sm->defaultParagraphStyle()->applyStyle(document->begin());
     }
 
-    KoTextDocument kodoc(d->document);
+    KTextDocument kodoc(d->document);
     if (kodoc.textEditor() == 0)
         kodoc.setTextEditor(new KoTextEditor(d->document));
 }
@@ -223,7 +223,7 @@ bool KoTextShapeData::loadOdf(const KXmlElement &element, KShapeLoadingContext &
 
     QTextCursor cursor(document());
     loader.loadBody(element, cursor);   // now let's load the body from the ODF KXmlElement.
-    KoTextEditor *editor = KoTextDocument(document()).textEditor();
+    KoTextEditor *editor = KTextDocument(document()).textEditor();
     if (editor) // at one point we have to get the position from the odf doc instead.
         editor->setPosition(0);
     editor->finishedLoading();
@@ -260,7 +260,7 @@ void InsertDeleteChangesCommand::insertDeleteChanges()
 {
     int numAddedChars = 0;
     QVector<KChangeTrackerElement *> elementVector;
-    KoTextDocument(m_document).changeTracker()->deletedChanges(elementVector);
+    KTextDocument(m_document).changeTracker()->deletedChanges(elementVector);
     qSort(elementVector.begin(), elementVector.end(), isPositionLessThan);
 
     foreach (KChangeTrackerElement *element, elementVector) {
@@ -300,7 +300,7 @@ void RemoveDeleteChangesCommand::removeDeleteChanges()
 {
     int numDeletedChars = 0;
     QVector<KChangeTrackerElement *> elementVector;
-    KoTextDocument(m_document).changeTracker()->getDeletedChanges(elementVector);
+    KTextDocument(m_document).changeTracker()->getDeletedChanges(elementVector);
     qSort(elementVector.begin(), elementVector.end(), isPositionLessThan);
 
     foreach(KChangeTrackerElement *element, elementVector) {
@@ -323,16 +323,16 @@ void KoTextShapeData::saveOdf(KShapeSavingContext &context, KDocumentRdfBase *rd
     InsertDeleteChangesCommand *insertCommand = new InsertDeleteChangesCommand(document());
     RemoveDeleteChangesCommand *removeCommand = new RemoveDeleteChangesCommand(document());
 
-    KChangeTracker *changeTracker = KoTextDocument(document()).changeTracker();
+    KChangeTracker *changeTracker = KTextDocument(document()).changeTracker();
     KChangeTracker::ChangeSaveFormat changeSaveFormat;
     if (changeTracker) {
         changeSaveFormat = changeTracker->saveFormat();
         if (!changeTracker->displayChanges() && (changeSaveFormat == KChangeTracker::DELTAXML)) {
-            KoTextDocument(document()).textEditor()->addCommand(insertCommand, false);
+            KTextDocument(document()).textEditor()->addCommand(insertCommand, false);
         }
 
         if (changeTracker->displayChanges() && (changeSaveFormat == KChangeTracker::ODF_1_2)) {
-            KoTextDocument(document()).textEditor()->addCommand(removeCommand, false);
+            KTextDocument(document()).textEditor()->addCommand(removeCommand, false);
         }
     }
 

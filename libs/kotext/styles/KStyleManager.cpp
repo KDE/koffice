@@ -33,7 +33,7 @@
 #include "KTableCellStyle.h"
 #include "KSectionStyle.h"
 #include "ChangeFollower_p.h"
-#include "KoTextDocument.h"
+#include "KTextDocument.h"
 
 #include <KOdfGenericStyle.h>
 #include <KOdfGenericStyles.h>

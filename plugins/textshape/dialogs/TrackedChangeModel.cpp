@@ -20,7 +20,7 @@
 #include "TrackedChangeModel.h"
 
 #include <KDeleteChangeMarker.h>
-#include <KoTextDocument.h>
+#include <KTextDocument.h>
 #include <KoTextDocumentLayout.h>
 #include <KOdfGenericChange.h>
 #include <KInlineTextObjectManager.h>
@@ -274,7 +274,7 @@ void TrackedChangeModel::setupModel()
 
 void TrackedChangeModel::setupModelData(QTextDocument* document, ModelItem* parent)
 {
-    m_changeTracker = KoTextDocument(document).changeTracker();
+    m_changeTracker = KTextDocument(document).changeTracker();
     m_layout = dynamic_cast<KoTextDocumentLayout*>(document->documentLayout());
 
     QStack<ModelItem*> itemStack;

@@ -25,7 +25,7 @@
 #include <KShapeSavingContext.h>
 #include <KoTextLoader.h>
 #include <KoTextWriter.h>
-#include <KoTextDocument.h>
+#include <KTextDocument.h>
 #include "changetracker/KChangeTracker.h"
 #include "styles/KStyleManager.h"
 
@@ -169,7 +169,7 @@ bool KInlineNote::loadOdf(const KXmlElement & element, KShapeLoadingContext &con
 {
     QTextDocument *document = new QTextDocument();
     QTextCursor cursor(document);
-    KoTextDocument textDocument(document);
+    KTextDocument textDocument(document);
     textDocument.setStyleManager(styleManager);
     d->styleManager = styleManager;
     textDocument.setChangeTracker(changeTracker);
@@ -226,11 +226,11 @@ void KInlineNote::saveOdf(KShapeSavingContext & context)
 {
     KXmlWriter *writer = &context.xmlWriter();
     QTextDocument *document = new QTextDocument();
-    KoTextDocument textDocument(document);
+    KTextDocument textDocument(document);
     Q_ASSERT(!d->styleManager.isNull());
     textDocument.setStyleManager(d->styleManager.data());
     if (this->document()) {
-        KoTextDocument origDoc(this->document());
+        KTextDocument origDoc(this->document());
         textDocument.setChangeTracker(origDoc.changeTracker());
     }
 

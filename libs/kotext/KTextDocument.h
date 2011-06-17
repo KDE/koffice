@@ -34,22 +34,22 @@ class KoTextEditor;
 class KChangeTracker;
 
 /**
- * KoTextDocument provides an easy mechanism to set and access the
+ * KTextDocument provides an easy mechanism to set and access the
  * editing members of a QTextDocument. The meta data are stored as resources
  * in the QTextDocument using QTextDocument::addResource() and fetched
  * using QTextDocument::resource().
  *
  */
-class KOTEXT_EXPORT KoTextDocument
+class KOTEXT_EXPORT KTextDocument
 {
 public:
     /// Constructor
-    KoTextDocument(QTextDocument *document);
+    KTextDocument(QTextDocument *document);
     /// Constructor
-    KoTextDocument(const QTextDocument *document);
+    KTextDocument(const QTextDocument *document);
 
     /// Destructor
-    ~KoTextDocument();
+    ~KTextDocument();
 
     /// Returns the document that was passed in the constructor
     QTextDocument *document() const;

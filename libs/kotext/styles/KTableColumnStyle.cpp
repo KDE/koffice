@@ -25,7 +25,7 @@
 #include <KOdfGenericStyle.h>
 #include <KOdfGenericStyles.h>
 #include "Styles_p.h"
-#include "KoTextDocument.h"
+#include "KTextDocument.h"
 
 #include <KDebug>
 

@@ -23,7 +23,7 @@
 
 #include "KoDocumentRdf.h"
 #include "../KoDocument.h"
-#include <KoTextDocument.h>
+#include <KTextDocument.h>
 #include <KoTextEditor.h>
 
 #include "KoChangeTrackerDisabledRAII.h"
@@ -125,7 +125,7 @@ void KoSemanticStylesheet::format(KoRdfSemanticItem *obj, KoTextEditor *editor, 
         kDebug(30015) << "format() invalid range, skipping! start:" << startpos << " end:" << endpos;
         return;
     }
-    KoTextDocument ktd(editor->document());
+    KTextDocument ktd(editor->document());
     KoChangeTrackerDisabledRAII disableChangeTracker(ktd.changeTracker());
     editor->beginEditBlock();
     editor->setPosition(startpos, QTextCursor::MoveAnchor);

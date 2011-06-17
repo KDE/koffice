@@ -20,7 +20,7 @@
 #include "AcceptChangeCommand.h"
 
 #include <KOdfGenericChange.h>
-#include <KoTextDocument.h>
+#include <KTextDocument.h>
 
 #include <changetracker/KChangeTracker.h>
 #include <changetracker/KChangeTrackerElement.h>
@@ -44,7 +44,7 @@ AcceptChangeCommand::AcceptChangeCommand (int changeId, QList<QPair<int, int> > 
 {
     setText(i18n("Accept change"));
 
-    m_changeTracker = KoTextDocument(m_document).changeTracker();
+    m_changeTracker = KTextDocument(m_document).changeTracker();
 }
 
 AcceptChangeCommand::~AcceptChangeCommand()

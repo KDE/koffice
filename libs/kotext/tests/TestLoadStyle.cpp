@@ -35,7 +35,7 @@
 #include <KoText.h>
 #include <KInlineTextObjectManager.h>
 #include <KoTextSharedLoadingData.h>
-#include <KoTextDocument.h>
+#include <KTextDocument.h>
 #include <KChangeTracker.h>
 
 #include <kstandarddirs.h>
@@ -103,9 +103,9 @@ QTextDocument *TestLoadStyle::documentFromOdt(const QString &odt)
     textShapeData->setDocument(document, false /* ownership */);
     KoTextDocumentLayout *layout = new KoTextDocumentLayout(textShapeData->document());
     layout->setInlineTextObjectManager(new KInlineTextObjectManager(layout)); // required while saving
-    KoTextDocument(document).setStyleManager(styleManager);
+    KTextDocument(document).setStyleManager(styleManager);
     textShapeData->document()->setDocumentLayout(layout);
-    KoTextDocument(document).setChangeTracker(changeTracker);
+    KTextDocument(document).setChangeTracker(changeTracker);
 
     if (!textShapeData->loadOdf(body, shapeLoadingContext)) {
         qDebug() << "KoTextShapeData failed to load ODT";
@@ -134,7 +134,7 @@ void TestLoadStyle::testLoadStyle()
     cursor.setPosition(62);
     //qDebug() << cursor.charFormat().property(KCharacterStyle::StyleId).toInt();
 
-    KoTextDocument textDoc(document);
+    KTextDocument textDoc(document);
     KStyleManager *sm = textDoc.styleManager();
     KCharacterStyle *myStyle = sm->characterStyle("MyStyle");
     QVERIFY(myStyle);

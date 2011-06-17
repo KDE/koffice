@@ -14,7 +14,7 @@ define print_kotextstring_noprocess
     end
 end
 
-# Print the contents of a KoTextDocument (use when debugging a core file)
+# Print the contents of a KTextDocument (use when debugging a core file)
 define print_kotextdocument_noprocess
     set $textdoc = $arg0
     set $p = $textdoc->fParag

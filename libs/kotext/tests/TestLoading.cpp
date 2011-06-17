@@ -57,7 +57,7 @@
 #include <KInlineTextObjectManager.h>
 #include <KoTextSharedLoadingData.h>
 #include <KoTextSharedSavingData.h>
-#include <KoTextDocument.h>
+#include <KTextDocument.h>
 #include <kstandarddirs.h>
 
 #include <KOdfGenericChanges.h>
@@ -1048,7 +1048,7 @@ QString TestLoading::documentToOdt(QTextDocument *document)
     KXmlWriter xmlWriter(&contentTmpFile, 1);
 
     KOdfGenericStyles mainStyles;
-    KStyleManager *styleMan = KoTextDocument(document).styleManager();
+    KStyleManager *styleMan = KTextDocument(document).styleManager();
     Q_UNUSED(styleMan);
     KOdfEmbeddedDocumentSaver embeddedSaver;
 
@@ -1082,10 +1082,10 @@ QString TestLoading::documentToOdt(QTextDocument *document)
         textShapeData->document()->setDocumentLayout(layout);
         layout->setInlineTextObjectManager(new KInlineTextObjectManager(layout)); // required while saving
         KStyleManager *styleManager = new KStyleManager;
-        KoTextDocument(textShapeData->document()).setStyleManager(styleManager);
+        KTextDocument(textShapeData->document()).setStyleManager(styleManager);
     }
     KChangeTracker* changeTracker = new KChangeTracker;
-    KoTextDocument(textShapeData->document()).setChangeTracker(changeTracker);
+    KTextDocument(textShapeData->document()).setChangeTracker(changeTracker);
 
     textShapeData->saveOdf(context, 0);
 

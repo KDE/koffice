@@ -33,7 +33,7 @@
 
 #include "KoTextEditor.h"
 
-#include "KoTextDocument.h"
+#include "KTextDocument.h"
 #include "styles/KParagraphStyle.h"
 #include "styles/KStyleManager.h"
 #include "changetracker/KChangeTracker.h"
@@ -102,8 +102,8 @@ public:
         while (block.isValid() && block.position() <= end) {
             QTextBlockFormat format = block.blockFormat();
             if (resetProperties) {
-                if (KoTextDocument(editor->document()).styleManager()) {
-                    KParagraphStyle *old = KoTextDocument(editor->document()).styleManager()->paragraphStyle(block.blockFormat().intProperty(KParagraphStyle::StyleId));
+                if (KTextDocument(editor->document()).styleManager()) {
+                    KParagraphStyle *old = KTextDocument(editor->document()).styleManager()->paragraphStyle(block.blockFormat().intProperty(KParagraphStyle::StyleId));
                     if (old)
                         old->unapplyStyle(block);
                 }
@@ -134,10 +134,10 @@ public:
             QTextCharFormat format = editor->charFormat();
             visitor.visit(format);
 
-            if (registerChange && KoTextDocument(editor->document()).changeTracker() && KoTextDocument(editor->document()).changeTracker()->recordChanges()) {
+            if (registerChange && KTextDocument(editor->document()).changeTracker() && KTextDocument(editor->document()).changeTracker()->recordChanges()) {
                 QTextCharFormat prevFormat(editor->charFormat());
 
-                int changeId = KoTextDocument(editor->document()).changeTracker()->formatChangeId(title, format, prevFormat, editor->charFormat().property( KCharacterStyle::ChangeTrackerId ).toInt());
+                int changeId = KTextDocument(editor->document()).changeTracker()->formatChangeId(title, format, prevFormat, editor->charFormat().property( KCharacterStyle::ChangeTrackerId ).toInt());
                 format.setProperty(KCharacterStyle::ChangeTrackerId, changeId);
             }
 
@@ -168,10 +168,10 @@ public:
                 QTextCharFormat format = cursor.charFormat(); // this gets the format one char after the postion.
                 visitor.visit(format);
 
-                if (registerChange && KoTextDocument(editor->document()).changeTracker() && KoTextDocument(editor->document()).changeTracker()->recordChanges()) {
+                if (registerChange && KTextDocument(editor->document()).changeTracker() && KTextDocument(editor->document()).changeTracker()->recordChanges()) {
                     QTextCharFormat prevFormat(cursor.charFormat());
 
-                    int changeId = KoTextDocument(editor->document()).changeTracker()->formatChangeId(title, format, prevFormat, cursor.charFormat().property( KCharacterStyle::ChangeTrackerId ).toInt());
+                    int changeId = KTextDocument(editor->document()).changeTracker()->formatChangeId(title, format, prevFormat, cursor.charFormat().property( KCharacterStyle::ChangeTrackerId ).toInt());
                     format.setProperty(KCharacterStyle::ChangeTrackerId, changeId);
                 }
 

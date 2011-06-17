@@ -23,11 +23,11 @@
 #include <KDialog>
 #include <QString>
 
-#include <KoTextDocument.h>
+#include <KTextDocument.h>
 
 #include <ui_JumpOverview.h>
 
-class KoTextDocument;
+class KTextDocument;
 class QTextDocument;
 
 struct JumpEntry {
@@ -68,7 +68,7 @@ private slots:
 
 private:
     Ui::JumpOverview widget;
-    KoTextDocument m_doc;
+    KTextDocument m_doc;
     QList<JumpEntry> m_entries;
 };
 

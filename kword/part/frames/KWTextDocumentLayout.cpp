@@ -194,7 +194,7 @@ void KWTextDocumentLayout::positionInlineObject(QTextInlineObject item, int posi
     KoTextDocumentLayout::positionInlineObject(item, position, f);
 #ifndef DEBUG
     if (inlineTextObjectManager() == 0) {
-        kWarning(32002) << "Need to call setInlineObjectTextManager on the KoTextDocument!!";
+        kWarning(32002) << "Need to call setInlineObjectTextManager on the KTextDocument!!";
         return;
     }
 #endif

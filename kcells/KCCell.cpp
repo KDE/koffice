@@ -84,7 +84,7 @@
 #include <KoTextLoader.h>
 #include <KStyleManager.h>
 #include <KoTextSharedLoadingData.h>
-#include <KoTextDocument.h>
+#include <KTextDocument.h>
 #include <KoTextWriter.h>
 #include <KOdfEmbeddedDocumentSaver.h>
 #include <KParagraphStyle.h>
@@ -1700,7 +1700,7 @@ void KCCell::loadOdfCellText(const KXmlElement& parent, KCOdfLoadingContext& tab
 
             KoTextLoader loader(*tableContext.shapeContext);
             QSharedPointer<QTextDocument> doc(new QTextDocument);
-            KoTextDocument(doc.data()).setStyleManager(sheet()->map()->textStyleManager());
+            KTextDocument(doc.data()).setStyleManager(sheet()->map()->textStyleManager());
 
             QTextCursor cursor(doc.data());
             loader.loadBody(parent, cursor);

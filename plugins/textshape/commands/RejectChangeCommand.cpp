@@ -21,7 +21,7 @@
 
 #include <KOdfGenericChange.h>
 #include <KInlineTextObjectManager.h>
-#include <KoTextDocument.h>
+#include <KTextDocument.h>
 #include <KoTextDocumentLayout.h>
 
 #include <KChangeTracker.h>
@@ -48,7 +48,7 @@ RejectChangeCommand::RejectChangeCommand (int changeId, QList<QPair<int, int> > 
 {
     setText(i18n("Reject change"));
 
-    m_changeTracker = KoTextDocument(m_document).changeTracker();
+    m_changeTracker = KTextDocument(m_document).changeTracker();
     m_layout = dynamic_cast<KoTextDocumentLayout*>(document->documentLayout());
 }
 

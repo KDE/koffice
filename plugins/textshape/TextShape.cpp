@@ -58,7 +58,7 @@ struct Finalizer {
 #include <KShapeManager.h>
 #include <KShapeSavingContext.h>
 #include <KoText.h>
-#include <KoTextDocument.h>
+#include <KTextDocument.h>
 #include <KoTextDocumentLayout.h>
 #include <KoTextEditor.h>
 #include <KoTextPage.h>

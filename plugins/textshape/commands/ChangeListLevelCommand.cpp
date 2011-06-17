@@ -21,7 +21,7 @@
 
 #include <KParagraphStyle.h>
 #include <KTextBlockData.h>
-#include <KoTextDocument.h>
+#include <KTextDocument.h>
 #include <KoList.h>
 #include "TextTool.h"
 #include <KListLevelProperties.h>
@@ -51,7 +51,7 @@ ChangeListLevelCommand::ChangeListLevelCommand(const QTextCursor &cursor, Change
     while (block.isValid() && ((block.position() < selectionEnd) || oneOf)) {
         m_blocks.append(block);
         if (block.textList()) {
-            m_lists.insert(m_blocks.size() - 1, KoTextDocument(block.document()).list(block.textList()));
+            m_lists.insert(m_blocks.size() - 1, KTextDocument(block.document()).list(block.textList()));
             Q_ASSERT(m_lists.value(m_blocks.size() - 1));
             m_levels.insert(m_blocks.size() - 1, effectiveLevel(m_lists.value(m_blocks.size() - 1)->level(block)));
         }

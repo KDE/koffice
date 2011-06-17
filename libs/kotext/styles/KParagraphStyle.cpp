@@ -33,7 +33,7 @@
 #include <KOdfGenericStyle.h>
 #include <KOdfGenericStyles.h>
 #include "Styles_p.h"
-#include "KoTextDocument.h"
+#include "KTextDocument.h"
 
 #include <KDebug>
 
@@ -100,7 +100,7 @@ KParagraphStyle *KParagraphStyle::fromBlock(const QTextBlock &block, QObject *pa
     KParagraphStyle *answer = new KParagraphStyle(blockFormat, cursor.blockCharFormat(), parent);
 
     int listStyleId = blockFormat.intProperty(ListStyleId);
-    KStyleManager *sm = KoTextDocument(block.document()).styleManager();
+    KStyleManager *sm = KTextDocument(block.document()).styleManager();
     if (KListStyle *listStyle = sm->listStyle(listStyleId)) {
         answer->setListStyle(listStyle->clone(answer));
     } else if (block.textList()) {

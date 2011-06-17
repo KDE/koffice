@@ -28,7 +28,7 @@
 #include <KListStyle.h>
 #include <KTextBlockData.h>
 #include <KStyleManager.h>
-#include <KoTextDocument.h>
+#include <KTextDocument.h>
 #include <MockShapes.h>
 #include <KTextAnchor.h>
 #include <KInlineTextObjectManager.h>
@@ -155,7 +155,7 @@ void TestDocumentLayout::initForNewTest(const QString &initText)
     layout = dynamic_cast<KWTextDocumentLayout*>(doc->documentLayout());
     Q_ASSERT(layout);
     styleManager = new KStyleManager();
-    KoTextDocument(doc).setStyleManager(styleManager);
+    KTextDocument(doc).setStyleManager(styleManager);
 
     QTextBlock block = doc->begin();
     if (initText.length() > 0) {
