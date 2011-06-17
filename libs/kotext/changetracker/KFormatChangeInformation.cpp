@@ -29,23 +29,23 @@ KFormatChangeInformation::FormatChangeType KFormatChangeInformation::formatType(
     return formatChangeType;
 }
 
-KoTextStyleChangeInformation::KoTextStyleChangeInformation(KFormatChangeInformation::FormatChangeType formatChangeType):
+KTextStyleChangeInformation::KTextStyleChangeInformation(KFormatChangeInformation::FormatChangeType formatChangeType):
                               KFormatChangeInformation(formatChangeType)
 {
 }
 
-void KoTextStyleChangeInformation::setPreviousCharFormat(QTextCharFormat &previousFormat)
+void KTextStyleChangeInformation::setPreviousCharFormat(QTextCharFormat &previousFormat)
 {
     this->previousTextCharFormat = previousFormat;
 }
 
-QTextCharFormat& KoTextStyleChangeInformation::previousCharFormat()
+QTextCharFormat& KTextStyleChangeInformation::previousCharFormat()
 {
     return this->previousTextCharFormat;
 }
 
 KParagraphStyleChangeInformation::KParagraphStyleChangeInformation():
-                                   KoTextStyleChangeInformation(KFormatChangeInformation::eParagraphStyleChange)
+                                   KTextStyleChangeInformation(KFormatChangeInformation::eParagraphStyleChange)
 {
 }
 

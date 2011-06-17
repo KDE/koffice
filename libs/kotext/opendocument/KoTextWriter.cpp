@@ -475,7 +475,7 @@ int KoTextWriter::Private::openTagRegion(int position, ElementType elementType, 
                 writer->addAttribute("delta:end-element-idref", QString("end%1").arg(changeId));
 
                 cursor.setPosition(position);
-                KoTextStyleChangeInformation *textStyleChangeInformation = static_cast<KoTextStyleChangeInformation *>(formatChangeInformation);
+                KTextStyleChangeInformation *textStyleChangeInformation = static_cast<KTextStyleChangeInformation *>(formatChangeInformation);
                 QString styleName = saveCharacterStyle(textStyleChangeInformation->previousCharFormat(), cursor.blockCharFormat());
                 if (!styleName.isEmpty()) {
                    writer->startElement("text:span", false);

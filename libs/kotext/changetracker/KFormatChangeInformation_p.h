@@ -52,17 +52,17 @@ private:
     KFormatChangeInformation::FormatChangeType formatChangeType;
 };
 
-class KoTextStyleChangeInformation : public KFormatChangeInformation
+class KTextStyleChangeInformation : public KFormatChangeInformation
 {
 public:
-    KoTextStyleChangeInformation(KFormatChangeInformation::FormatChangeType formatChangeType = KFormatChangeInformation::eTextStyleChange);
+    KTextStyleChangeInformation(KFormatChangeInformation::FormatChangeType formatChangeType = KFormatChangeInformation::eTextStyleChange);
     void setPreviousCharFormat(QTextCharFormat &oldFormat);
     QTextCharFormat& previousCharFormat();
 private:
     QTextCharFormat previousTextCharFormat;
 };
 
-class KParagraphStyleChangeInformation : public KoTextStyleChangeInformation
+class KParagraphStyleChangeInformation : public KTextStyleChangeInformation
 {
 public:
     KParagraphStyleChangeInformation();

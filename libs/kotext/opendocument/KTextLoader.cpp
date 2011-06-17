@@ -303,7 +303,7 @@ void KTextLoader::Private::openChangeRegion(const KXmlElement& element)
              characterStyle->applyStyle(cf);
         }
 
-        KoTextStyleChangeInformation *formatChangeInformation = new KoTextStyleChangeInformation();
+        KTextStyleChangeInformation *formatChangeInformation = new KTextStyleChangeInformation();
         formatChangeInformation->setPreviousCharFormat(cf);
         changeTracker->setFormatChangeInformation(changeId, formatChangeInformation);
     } else if((element.localName() == "p") && attributeChange.isValid) {
