@@ -18,7 +18,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoTextDrag.h"
+#include "KTextDrag.h"
 #include <QApplication>
 #include <QBuffer>
 #include <QByteArray>
@@ -45,19 +45,19 @@
 #include "KoTextRdfCore_p.h"
 #endif
 
-KoTextDrag::KoTextDrag()
+KTextDrag::KTextDrag()
         : m_mimeData(0)
 {
 }
 
-KoTextDrag::~KoTextDrag()
+KTextDrag::~KTextDrag()
 {
     if (m_mimeData == 0) {
         delete m_mimeData;
     }
 }
 
-bool KoTextDrag::setOdf(const char * mimeType, KoTextOdfSaveHelper &helper)
+bool KTextDrag::setOdf(const char * mimeType, KoTextOdfSaveHelper &helper)
 {
     struct Finally {
         Finally(KOdfStore *s) : store(s) { }
@@ -157,7 +157,7 @@ bool KoTextDrag::setOdf(const char * mimeType, KoTextOdfSaveHelper &helper)
     return true;
 }
 
-void KoTextDrag::setData(const QString & mimeType, const QByteArray & data)
+void KTextDrag::setData(const QString & mimeType, const QByteArray & data)
 {
     if (m_mimeData == 0) {
         m_mimeData = new QMimeData();
@@ -165,7 +165,7 @@ void KoTextDrag::setData(const QString & mimeType, const QByteArray & data)
     m_mimeData->setData(mimeType, data);
 }
 
-void KoTextDrag::addToClipboard()
+void KTextDrag::addToClipboard()
 {
     if (m_mimeData) {
         QApplication::clipboard()->setMimeData(m_mimeData);
@@ -173,7 +173,7 @@ void KoTextDrag::addToClipboard()
     }
 }
 
-QMimeData * KoTextDrag::mimeData()
+QMimeData * KTextDrag::mimeData()
 {
     QMimeData * mimeData = m_mimeData;
     m_mimeData = 0;

@@ -36,11 +36,11 @@ class KoTextOdfSaveHelper;
  * setOdf takes care of saving styles and tracked changes and all the other
  * common stuff.
  */
-class KOTEXT_EXPORT KoTextDrag
+class KOTEXT_EXPORT KTextDrag
 {
 public:
-    KoTextDrag();
-    ~KoTextDrag();
+    KTextDrag();
+    ~KTextDrag();
 
     /**
      * Set odf mime type

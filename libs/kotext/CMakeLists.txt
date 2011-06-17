@@ -81,7 +81,7 @@ set(kotext_LIB_SRCS
     changetracker/KDeletedRowData.cpp
     changetracker/KDeletedColumnData.cpp
     changetracker/KDeletedCellData.cpp
-    KoTextDrag.cpp
+    KTextDrag.cpp
 
     commands/DeleteTableRowCommand.cpp
     commands/DeleteTableColumnCommand.cpp

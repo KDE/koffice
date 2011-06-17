@@ -26,7 +26,7 @@
 #include <KOdf.h>
 #include "KTextDocument.h"
 #include "KTextDocumentLayout.h"
-#include "KoTextDrag.h"
+#include "KTextDrag.h"
 #include "KoTextLocator.h"
 #include "KoTextOdfSaveHelper.h"
 #include "changetracker/KChangeTracker.h"
