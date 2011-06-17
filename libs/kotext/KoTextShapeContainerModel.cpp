@@ -18,7 +18,7 @@
  */
 
 #include "KoTextShapeContainerModel.h"
-#include "KoTextAnchor.h"
+#include "KTextAnchor.h"
 #include "KoTextShapeData.h"
 #include "KoTextDocumentLayout.h"
 
@@ -39,7 +39,7 @@ struct Relation
     {
     }
     KShape *child;
-    KoTextAnchor *anchor;
+    KTextAnchor *anchor;
     uint nested : 1;
     uint inheritsTransform :1;
 };
@@ -48,7 +48,7 @@ class KoTextShapeContainerModel::Private
 {
 public:
     QHash<const KShape*, Relation> children;
-    QList<KoTextAnchor *> shapeRemovedAnchors;
+    QList<KTextAnchor *> shapeRemovedAnchors;
 };
 
 KoTextShapeContainerModel::KoTextShapeContainerModel()
@@ -68,8 +68,8 @@ void KoTextShapeContainerModel::add(KShape *child)
     Relation relation(child);
     d->children.insert(child, relation);
 
-    KoTextAnchor *toBeAddedAnchor = 0;
-    foreach (KoTextAnchor *anchor, d->shapeRemovedAnchors) {
+    KTextAnchor *toBeAddedAnchor = 0;
+    foreach (KTextAnchor *anchor, d->shapeRemovedAnchors) {
         if (child == anchor->shape()) {
             toBeAddedAnchor = anchor;
             break;
@@ -157,7 +157,7 @@ void KoTextShapeContainerModel::childChanged(KShape *child, KShape::ChangeType t
     KShapeContainerModel::childChanged( child, type );
 }
 
-void KoTextShapeContainerModel::addAnchor(KoTextAnchor *anchor)
+void KoTextShapeContainerModel::addAnchor(KTextAnchor *anchor)
 {
     Q_ASSERT(anchor);
     Q_ASSERT(anchor->shape());
@@ -165,7 +165,7 @@ void KoTextShapeContainerModel::addAnchor(KoTextAnchor *anchor)
     d->children[anchor->shape()].anchor = anchor;
 }
 
-void KoTextShapeContainerModel::removeAnchor(KoTextAnchor *anchor)
+void KoTextShapeContainerModel::removeAnchor(KTextAnchor *anchor)
 {
     if (d->children.contains(anchor->shape())) {
         d->children[anchor->shape()].anchor = 0;
@@ -188,16 +188,16 @@ void KoTextShapeContainerModel::proposeMove(KShape *child, QPointF &move)
     QTextLayout *layout = 0;
     int anchorPosInParag = -1;
     if (qAbs(newPosition.x()) < 10) { // align left
-        relation.anchor->setAlignment(KoTextAnchor::Left);
+        relation.anchor->setAlignment(KTextAnchor::Left);
         relation.anchor->setOffset(QPointF(0, relation.anchor->offset().y()));
     } else if (qAbs(parentShapeRect.width() - newPosition.x() - child->size().width()) < 10.0) {
-        relation.anchor->setAlignment(KoTextAnchor::Right);
+        relation.anchor->setAlignment(KTextAnchor::Right);
         relation.anchor->setOffset(QPointF(0, relation.anchor->offset().y()));
     } else if (qAbs(parentShapeRect.width() / 2.0 - (newPosition.x() + child->size().width() / 2.0)) < 10.0) {
-        relation.anchor->setAlignment(KoTextAnchor::Center);
+        relation.anchor->setAlignment(KTextAnchor::Center);
         relation.anchor->setOffset(QPointF(0, relation.anchor->offset().y()));
     } else {
-        relation.anchor->setAlignment(KoTextAnchor::HorizontalOffset);
+        relation.anchor->setAlignment(KTextAnchor::HorizontalOffset);
         QTextBlock block = relation.anchor->document()->findBlock(relation.anchor->textPosition());
         layout = block.layout();
         anchorPosInParag = relation.anchor->textPosition() - block.position();
@@ -208,11 +208,11 @@ void KoTextShapeContainerModel::proposeMove(KShape *child, QPointF &move)
 
     if (qAbs(newPosition.y()) < 10.0) { // TopOfFrame
         kDebug(32500) <<"  TopOfFrame";
-        relation.anchor->setAlignment(KoTextAnchor::TopOfFrame);
+        relation.anchor->setAlignment(KTextAnchor::TopOfFrame);
         relation.anchor->setOffset(QPointF(relation.anchor->offset().x(), 0));
     } else if (qAbs(parentShapeRect.height() - newPosition.y()) < 10.0) {
         kDebug(32500) <<"  BottomOfFrame";
-        relation.anchor->setAlignment(KoTextAnchor::BottomOfFrame); // TODO
+        relation.anchor->setAlignment(KTextAnchor::BottomOfFrame); // TODO
         relation.anchor->setOffset(QPointF(relation.anchor->offset().x(), 0));
     } else { // need layout info..
         relation.anchor->setOffset(QPointF(relation.anchor->offset().x(), 0));
@@ -230,22 +230,22 @@ void KoTextShapeContainerModel::proposeMove(KShape *child, QPointF &move)
             qreal y = tl.y() - data->documentOffset() - newPosition.y() + child->size().height();
             if (y >= -5 && y < 10) {
                 kDebug(32500) <<"  TopOfParagraph" << y;
-                relation.anchor->setAlignment(KoTextAnchor::TopOfParagraph);
+                relation.anchor->setAlignment(KTextAnchor::TopOfParagraph);
             } else {
                 tl = layout->lineAt(layout->lineCount() - 1);
                 y = newPosition.y() - tl.y() - data->documentOffset() - tl.ascent() - child->size().height();
                 if (y >= 0 && y < 10) {
                     kDebug(32500) <<"  BottomOfParagraph" << y;
-                    relation.anchor->setAlignment(KoTextAnchor::BottomOfParagraph); // TODO
+                    relation.anchor->setAlignment(KTextAnchor::BottomOfParagraph); // TODO
                 } else {
                     tl = layout->lineForTextPosition(anchorPosInParag);
                     y = tl.y() - data->documentOffset() - newPosition.y() + child->size().height();
                     if (y >= 0 && y < 10) {
                         kDebug(32500) <<"  AboveCurrentLine";
-                        relation.anchor->setAlignment(KoTextAnchor::AboveCurrentLine);
+                        relation.anchor->setAlignment(KTextAnchor::AboveCurrentLine);
                     }
                     else {
-                        relation.anchor->setAlignment(KoTextAnchor::VerticalOffset);
+                        relation.anchor->setAlignment(KTextAnchor::VerticalOffset);
                         relation.anchor->setOffset(QPointF(relation.anchor->offset().x(), -y));
                     }
                 }

@@ -30,7 +30,7 @@
 #include <KStyleManager.h>
 #include <KoTextDocument.h>
 #include <MockShapes.h>
-#include <KoTextAnchor.h>
+#include <KTextAnchor.h>
 #include <KInlineTextObjectManager.h>
 
 #include <kdebug.h>
@@ -177,7 +177,7 @@ void TestDocumentLayout::placeAnchoredFrame()
     initForNewTest(QString());
     MockShape *picture = new MockShape();
     picture->setSize(QSizeF(100, 100));
-    KoTextAnchor *anchor = new KoTextAnchor(picture);
+    KTextAnchor *anchor = new KTextAnchor(picture);
     anchor->setOffset(QPointF(23, 45));
     QTextCursor cursor(doc);
 
@@ -223,8 +223,8 @@ void TestDocumentLayout::placeAnchoredFrame()
     QCOMPARE(picture->position(), newPos);
 
     anchor->setOffset(QPointF());
-    anchor->setAlignment(KoTextAnchor::Left);
-    anchor->setAlignment(KoTextAnchor::TopOfParagraph);
+    anchor->setAlignment(KTextAnchor::Left);
+    anchor->setAlignment(KTextAnchor::TopOfParagraph);
     layout->layout();
     // image is 100 wide, now centered in a parent of 200 so X = 50
     QCOMPARE(picture->position(), QPointF(50, 0));
@@ -237,18 +237,18 @@ void TestDocumentLayout::placeAnchoredFrame2_data()
     QTest::addColumn<QPointF>("startPosition");
     QTest::addColumn<QPointF>("imagePosition");
 
-    QTest::newRow("inline") << int(KoTextAnchor::HorizontalOffset) << int(KoTextAnchor::VerticalOffset)
+    QTest::newRow("inline") << int(KTextAnchor::HorizontalOffset) << int(KTextAnchor::VerticalOffset)
         << QPointF() << QPointF();
-    QTest::newRow("top/left") << int(KoTextAnchor::Left) << int(KoTextAnchor::TopOfParagraph)
+    QTest::newRow("top/left") << int(KTextAnchor::Left) << int(KTextAnchor::TopOfParagraph)
         << QPointF() << QPointF();
-    QTest::newRow("top/right") << int(KoTextAnchor::Right) << int(KoTextAnchor::TopOfParagraph)
+    QTest::newRow("top/right") << int(KTextAnchor::Right) << int(KTextAnchor::TopOfParagraph)
         << QPointF() << QPointF(2,0);
 
-    QTest::newRow("inline +") << int(KoTextAnchor::HorizontalOffset) << int(KoTextAnchor::VerticalOffset)
+    QTest::newRow("inline +") << int(KTextAnchor::HorizontalOffset) << int(KTextAnchor::VerticalOffset)
         << QPointF(100, 100) << QPointF();
-    QTest::newRow("top/left +") << int(KoTextAnchor::Left) << int(KoTextAnchor::TopOfParagraph)
+    QTest::newRow("top/left +") << int(KTextAnchor::Left) << int(KTextAnchor::TopOfParagraph)
         << QPointF(123,100) << QPointF();
-    QTest::newRow("top/right +") << int(KoTextAnchor::Right) << int(KoTextAnchor::TopOfParagraph)
+    QTest::newRow("top/right +") << int(KTextAnchor::Right) << int(KTextAnchor::TopOfParagraph)
         << QPointF(123,99) << QPointF(2,0);
 }
 
@@ -262,9 +262,9 @@ void TestDocumentLayout::placeAnchoredFrame2()
     initForNewTest(QString(loremIpsum));
     MockShape *picture = new MockShape();
     picture->setSize(QSizeF(198, 400));
-    KoTextAnchor *anchor = new KoTextAnchor(picture);
-    anchor->setAlignment(KoTextAnchor::AnchorHorizontal(horizontalAlignment));
-    anchor->setAlignment(KoTextAnchor::AnchorVertical(verticalAlignment));
+    KTextAnchor *anchor = new KTextAnchor(picture);
+    anchor->setAlignment(KTextAnchor::AnchorHorizontal(horizontalAlignment));
+    anchor->setAlignment(KTextAnchor::AnchorVertical(verticalAlignment));
     picture->setPosition(startPosition);
     QTextCursor cursor(doc);
 
@@ -295,9 +295,9 @@ void TestDocumentLayout::placeAnchoredFrame3()
     initForNewTest(QString(loremIpsum));
     MockShape *picture = new MockShape();
     picture->setSize(QSizeF(100, 100));
-    KoTextAnchor *anchor = new KoTextAnchor(picture);
-    anchor->setAlignment(KoTextAnchor::VerticalOffset);
-    anchor->setAlignment(KoTextAnchor::HorizontalOffset);
+    KTextAnchor *anchor = new KTextAnchor(picture);
+    anchor->setAlignment(KTextAnchor::VerticalOffset);
+    anchor->setAlignment(KTextAnchor::HorizontalOffset);
     QTextCursor cursor(doc);
     KInlineTextObjectManager *manager = new KInlineTextObjectManager();
     layout->setInlineTextObjectManager(manager);

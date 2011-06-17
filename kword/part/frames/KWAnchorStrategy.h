@@ -21,7 +21,7 @@
 #define KWANCHORSTRATEGY_H
 
 #include <KoTextDocumentLayout.h>
-#include <KoTextAnchor.h>
+#include <KTextAnchor.h>
 
 class KWAnchorStrategy;
 class KWFrame;
@@ -29,7 +29,7 @@ class KWTextFrameSet;
 
 /**
  * Class for text layout of anchored frames.
- * In KWTextDocumentLayout whenever we find an inlineObject of type KoTextAnchor an instance
+ * In KWTextDocumentLayout whenever we find an inlineObject of type KTextAnchor an instance
  * of this class is created.
  * The layout process will query the state of the anchored data after each line is layouted by
  * calling checkState() which will return false as long as there is not enough layout information
@@ -42,7 +42,7 @@ public:
      * Constructor.
      * @param anchor the anchor and affiliated shape this strategy will be operating on.
      */
-    KWAnchorStrategy(KoTextAnchor *anchor);
+    KWAnchorStrategy(KTextAnchor *anchor);
     ~KWAnchorStrategy();
 
     /**
@@ -74,14 +74,14 @@ public:
     /**
      * Return the text anchor this strategy works for.
      */
-    KoTextAnchor *anchor() {
+    KTextAnchor *anchor() {
         return m_anchor;
     }
 
 private:
     void calculateKnowledgePoint();
 
-    KoTextAnchor *const m_anchor;
+    KTextAnchor *const m_anchor;
     int m_knowledgePoint; // the cursor position at which the layout process has gathered enough info to do our work
     bool m_finished;
     qreal m_currentLineY;
@@ -89,8 +89,8 @@ private:
     int m_lastknownPosInDoc;
 
     QPointF m_lastOffset;
-    KoTextAnchor::AnchorVertical m_lastVerticalAnchorAlignment;
-    KoTextAnchor::AnchorHorizontal m_lastHorizontalAnchorAlignment;
+    KTextAnchor::AnchorVertical m_lastVerticalAnchorAlignment;
+    KTextAnchor::AnchorHorizontal m_lastHorizontalAnchorAlignment;
 };
 
 #endif

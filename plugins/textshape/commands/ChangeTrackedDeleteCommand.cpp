@@ -32,7 +32,7 @@
 #include <KoTextDocumentLayout.h>
 #include <KInlineTextObjectManager.h>
 #include <KAction>
-#include <KoTextAnchor.h>
+#include <KTextAnchor.h>
 #include <KDeleteChangeMarker.h>
 #include <KCanvasBase.h>
 #include <KShapeController.h>
@@ -233,7 +233,7 @@ void ChangeTrackedDeleteCommand::deleteSelection(QTextCursor &selection)
                 KoTextDocument(document).changeTracker()->elementById(testMarker->changeId())->setValid(false);
                 m_removedElements.push_back(testMarker->changeId());
            } else {
-                KoTextAnchor *anchor = dynamic_cast<KoTextAnchor *>(layout->inlineTextObjectManager()->inlineTextObject(checker));
+                KTextAnchor *anchor = dynamic_cast<KTextAnchor *>(layout->inlineTextObjectManager()->inlineTextObject(checker));
                 if (anchor)
                     shapesInSelection.push_back(anchor->shape());
            } 

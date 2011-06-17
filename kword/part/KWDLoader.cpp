@@ -35,7 +35,7 @@
 #include <KListStyle.h>
 #include <KListLevelProperties.h>
 #include <KoTextShapeData.h>
-#include <KoTextAnchor.h>
+#include <KTextAnchor.h>
 #include <KoTextDocumentLayout.h>
 #include <KInlineTextObjectManager.h>
 #include <KColorBackground.h>
@@ -1179,7 +1179,7 @@ void KWDLoader::insertAnchors()
         Q_ASSERT(container);
         if (! container) continue;
         container->addShape(frame->shape());   // attach here & avoid extra layouts
-        KoTextAnchor *textAnchor = new KoTextAnchor(frame->shape());
+        KTextAnchor *textAnchor = new KTextAnchor(frame->shape());
         QTextCursor cursor(anchor.document);
         cursor.setPosition(anchor.cursorPosition);
         cursor.setPosition(anchor.cursorPosition + 1, QTextCursor::KeepAnchor);

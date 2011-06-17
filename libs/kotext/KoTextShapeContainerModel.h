@@ -24,7 +24,7 @@
 
 #include "kotext_export.h"
 
-class KoTextAnchor;
+class KTextAnchor;
 
 /**
  *  A model to position children of the text shape.
@@ -64,9 +64,9 @@ public:
     virtual bool inheritsTransform(const KShape *shape) const;
 
     /// each child that is added due to being anchored in the text has an anchor; register it for rules based placement.
-    void addAnchor(KoTextAnchor *anchor);
+    void addAnchor(KTextAnchor *anchor);
     /// When a shape is removed or stops being anchored, remove it.
-    void removeAnchor(KoTextAnchor *anchor);
+    void removeAnchor(KTextAnchor *anchor);
 
 private:
     class Private;

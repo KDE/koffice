@@ -37,25 +37,25 @@ class KShapeLoadingContext;
  * to the text flow so the anchored shape can be repositioned on the canvas if new text is inserted
  * or removed before the anchor character.
  *
- * The KoTextAnchor object is inserted in text, and is represented to the user as one invisible character
+ * The KTextAnchor object is inserted in text, and is represented to the user as one invisible character
  * in the text flow. Since this is a real character it will be positioned by the text-layout engine and
- * anything that will change the position of the text will thus also change the KoTextAnchor character.
- * In such a case where the KoTextAnchor character is repositioned the position of the anchored-frame
+ * anything that will change the position of the text will thus also change the KTextAnchor character.
+ * In such a case where the KTextAnchor character is repositioned the position of the anchored-frame
  * will also be reconsidered.
  *
  * The anchored shape will be positioned (in supporting applications) based on the properties set on the
  * anchor.  The setAlignment(AnchorVertical) and setAlignment(AnchorHorizontal) calls will determine the
- * resulting position relative to the position the KoTextAnchor character.
+ * resulting position relative to the position the KTextAnchor character.
  *
- * Steps to use a KoTextAnchor are; <ol>
- * <li> Create a new instance with e.g. new KoTextAnchor(myshape);
+ * Steps to use a KTextAnchor are; <ol>
+ * <li> Create a new instance with e.g. new KTextAnchor(myshape);
  * <li> Use loadOdf() to load additional attributes like the "text:anchor-type"
- * <li> Position the anchor with updatePosition() what will attach the KoTextAnchor-instance to
+ * <li> Position the anchor with updatePosition() what will attach the KTextAnchor-instance to
  *    the TextShape's \a KoTextShapeContainerModel . </ol>
  * The position of the shape relative to the anchor is called the offset. It's loaded by loadOdf().
  * @see KWAnchorStrategy for more information about the layout of anchors/shapes in KWord.
  */
-class KOTEXT_EXPORT KoTextAnchor : public KInlineObject
+class KOTEXT_EXPORT KTextAnchor : public KInlineObject
 {
 public:
     /// the vertical alignment options for the shape this anchor holds.
@@ -90,8 +90,8 @@ public:
      * Constructor for an in-place anchor.
      * @param shape the anchored shape that this anchor links to.
      */
-    KoTextAnchor(KShape *shape);
-    virtual ~KoTextAnchor();
+    KTextAnchor(KShape *shape);
+    virtual ~KTextAnchor();
 
     /**
      * Return the shape that is linked to from the text anchor.
@@ -150,7 +150,7 @@ public:
     void detachFromModel();
 
 private:
-    Q_DECLARE_PRIVATE(KoTextAnchor)
+    Q_DECLARE_PRIVATE(KTextAnchor)
 };
 
 #endif

@@ -40,7 +40,7 @@
 #include <KShapeLoadingContext.h>
 #include <KShapeRegistry.h>
 #include <KTableColumnAndRowStyleManager.h>
-#include <KoTextAnchor.h>
+#include <KTextAnchor.h>
 #include <KoTextBlockData.h>
 #include "KoTextDebug_p.h"
 #include "KoTextDocument.h"
@@ -2134,7 +2134,7 @@ void KoTextLoader::loadShape(const KXmlElement &element, QTextCursor &cursor)
 
     // page anchored shapes are handled differently
     if (anchorType != "page") {
-        KoTextAnchor *anchor = new KoTextAnchor(shape);
+        KTextAnchor *anchor = new KTextAnchor(shape);
         anchor->loadOdf(element, d->context);
         d->textSharedData->shapeInserted(shape, element, d->context);
 

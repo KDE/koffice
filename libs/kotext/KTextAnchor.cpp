@@ -18,7 +18,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoTextAnchor.h"
+#include "KTextAnchor.h"
 #include "KInlineObject_p.h"
 #include "KoTextDocumentLayout.h"
 #include "KoTextShapeContainerModel.h"
@@ -50,11 +50,11 @@
 class KoTextAnchorPrivate : public KInlineObjectPrivate
 {
 public:
-    KoTextAnchorPrivate(KoTextAnchor *qq, KShape *s)
+    KoTextAnchorPrivate(KTextAnchor *qq, KShape *s)
             : KInlineObjectPrivate(qq),
             shape(s),
-            horizontalAlignment(KoTextAnchor::HorizontalOffset),
-            verticalAlignment(KoTextAnchor::VerticalOffset),
+            horizontalAlignment(KTextAnchor::HorizontalOffset),
+            verticalAlignment(KTextAnchor::VerticalOffset),
             model(0),
             isPositionedInline(false)
     {
@@ -77,7 +77,7 @@ public:
     /// as multiple shapes can hold 1 text flow; the anchored shape can be moved between containers and thus models
     void setContainer(KShapeContainer *container)
     {
-        Q_Q(KoTextAnchor);
+        Q_Q(KTextAnchor);
         if (container == 0) {
             if (model)
                 model->removeAnchor(q);
@@ -104,7 +104,7 @@ public:
     QDebug printDebug(QDebug dbg) const
     {
 #ifndef NDEBUG
-        dbg.nospace() << "KoTextAnchor";
+        dbg.nospace() << "KTextAnchor";
         dbg.space() << anchorPosition();
         dbg.space() << "offset:" << distance;
         dbg.space() << "shape:" << shape->name();
@@ -116,107 +116,107 @@ public:
     {
         QString answer;
         switch (verticalAlignment) {
-        case KoTextAnchor::TopOfFrame: answer = "TopOfFrame"; break;
-        case KoTextAnchor::TopOfParagraph: answer = "TopOfParagraph"; break;
-        case KoTextAnchor::AboveCurrentLine: answer = "AboveCurrentLine"; break;
-        case KoTextAnchor::BelowCurrentLine: answer = "BelowCurrentLine"; break;
-        case KoTextAnchor::BottomOfParagraph: answer = "BottomOfParagraph"; break;
-        case KoTextAnchor::BottomOfFrame: answer = "BottomOfFrame"; break;
-        case KoTextAnchor::VerticalOffset: answer = "VerticalOffset"; break;
-        case KoTextAnchor::TopOfPage: answer = "TopOfPage"; break;
-        case KoTextAnchor::BottomOfPage: answer = "BottomOfPage"; break;
-        case KoTextAnchor::TopOfPageContent: answer = "TopOfPageContent"; break;
-        case KoTextAnchor::BottomOfPageContent: answer = "BottomOfPageContent"; break;
+        case KTextAnchor::TopOfFrame: answer = "TopOfFrame"; break;
+        case KTextAnchor::TopOfParagraph: answer = "TopOfParagraph"; break;
+        case KTextAnchor::AboveCurrentLine: answer = "AboveCurrentLine"; break;
+        case KTextAnchor::BelowCurrentLine: answer = "BelowCurrentLine"; break;
+        case KTextAnchor::BottomOfParagraph: answer = "BottomOfParagraph"; break;
+        case KTextAnchor::BottomOfFrame: answer = "BottomOfFrame"; break;
+        case KTextAnchor::VerticalOffset: answer = "VerticalOffset"; break;
+        case KTextAnchor::TopOfPage: answer = "TopOfPage"; break;
+        case KTextAnchor::BottomOfPage: answer = "BottomOfPage"; break;
+        case KTextAnchor::TopOfPageContent: answer = "TopOfPageContent"; break;
+        case KTextAnchor::BottomOfPageContent: answer = "BottomOfPageContent"; break;
         }
         answer += '|';
         switch(horizontalAlignment) {
-        case KoTextAnchor::Left: answer+= "Left"; break;
-        case KoTextAnchor::Right: answer+= "Right"; break;
-        case KoTextAnchor::Center: answer+= "Center"; break;
-        case KoTextAnchor::ClosestToBinding: answer+= "ClosestToBinding"; break;
-        case KoTextAnchor::FurtherFromBinding: answer+= "FurtherFromBinding"; break;
-        case KoTextAnchor::HorizontalOffset: answer+= "HorizontalOffset"; break;
-        case KoTextAnchor::LeftOfPage: answer+= "LeftOfPage"; break;
-        case KoTextAnchor::RightOfPage: answer+= "RightOfPage"; break;
-        case KoTextAnchor::CenterOfPage: answer+= "CenterOfPage"; break;
+        case KTextAnchor::Left: answer+= "Left"; break;
+        case KTextAnchor::Right: answer+= "Right"; break;
+        case KTextAnchor::Center: answer+= "Center"; break;
+        case KTextAnchor::ClosestToBinding: answer+= "ClosestToBinding"; break;
+        case KTextAnchor::FurtherFromBinding: answer+= "FurtherFromBinding"; break;
+        case KTextAnchor::HorizontalOffset: answer+= "HorizontalOffset"; break;
+        case KTextAnchor::LeftOfPage: answer+= "LeftOfPage"; break;
+        case KTextAnchor::RightOfPage: answer+= "RightOfPage"; break;
+        case KTextAnchor::CenterOfPage: answer+= "CenterOfPage"; break;
         }
         return answer;
     }
 
     KShape * const shape;
-    KoTextAnchor::AnchorHorizontal horizontalAlignment;
-    KoTextAnchor::AnchorVertical verticalAlignment;
+    KTextAnchor::AnchorHorizontal horizontalAlignment;
+    KTextAnchor::AnchorVertical verticalAlignment;
     QTextCharFormat format;
     KoTextShapeContainerModel *model;
     QPointF distance;
     bool isPositionedInline;
 
-    Q_DECLARE_PUBLIC(KoTextAnchor)
+    Q_DECLARE_PUBLIC(KTextAnchor)
 };
 
-KoTextAnchor::KoTextAnchor(KShape *shape)
+KTextAnchor::KTextAnchor(KShape *shape)
     : KInlineObject(*(new KoTextAnchorPrivate(this, shape)), false)
 {
 }
 
-KoTextAnchor::~KoTextAnchor()
+KTextAnchor::~KTextAnchor()
 {
-    Q_D(KoTextAnchor);
+    Q_D(KTextAnchor);
     if (d->model)
         d->model->removeAnchor(this);
 }
 
-KShape *KoTextAnchor::shape() const
+KShape *KTextAnchor::shape() const
 {
-    Q_D(const KoTextAnchor);
+    Q_D(const KTextAnchor);
     return d->shape;
 }
 
-void KoTextAnchor::setAlignment(KoTextAnchor::AnchorHorizontal horizontal)
+void KTextAnchor::setAlignment(KTextAnchor::AnchorHorizontal horizontal)
 {
-    Q_D(KoTextAnchor);
+    Q_D(KTextAnchor);
     if (d->horizontalAlignment == horizontal)
         return;
     d->horizontalAlignment = horizontal;
     d->relayout();
 }
 
-void KoTextAnchor::setAlignment(KoTextAnchor::AnchorVertical vertical)
+void KTextAnchor::setAlignment(KTextAnchor::AnchorVertical vertical)
 {
-    Q_D(KoTextAnchor);
+    Q_D(KTextAnchor);
     if (d->verticalAlignment == vertical)
         return;
     d->verticalAlignment = vertical;
     d->relayout();
 }
 
-KoTextAnchor::AnchorVertical KoTextAnchor::verticalAlignment() const
+KTextAnchor::AnchorVertical KTextAnchor::verticalAlignment() const
 {
-    Q_D(const KoTextAnchor);
+    Q_D(const KTextAnchor);
     return d->verticalAlignment;
 }
 
-KoTextAnchor::AnchorHorizontal KoTextAnchor::horizontalAlignment() const
+KTextAnchor::AnchorHorizontal KTextAnchor::horizontalAlignment() const
 {
-    Q_D(const KoTextAnchor);
+    Q_D(const KTextAnchor);
     return d->horizontalAlignment;
 }
 
-void KoTextAnchor::updatePosition(QTextInlineObject object, const QTextCharFormat &format)
+void KTextAnchor::updatePosition(QTextInlineObject object, const QTextCharFormat &format)
 {
     Q_UNUSED(object);
     Q_UNUSED(format);
-    Q_D(KoTextAnchor);
+    Q_D(KTextAnchor);
     d->format = format;
     d->setContainer(dynamic_cast<KShapeContainer*>(shapeForPosition(d->document, d->positionInDocument)));
 }
 
-void KoTextAnchor::resize(QTextInlineObject object, const QTextCharFormat &format, QPaintDevice *pd)
+void KTextAnchor::resize(QTextInlineObject object, const QTextCharFormat &format, QPaintDevice *pd)
 {
     Q_UNUSED(object);
     Q_UNUSED(format);
     Q_UNUSED(pd);
-    Q_D(KoTextAnchor);
+    Q_D(KTextAnchor);
 
     // important detail; top of anchored shape is at the baseline.
     QFontMetricsF fm(format.font(), pd);
@@ -236,14 +236,14 @@ void KoTextAnchor::resize(QTextInlineObject object, const QTextCharFormat &forma
     }
 }
 
-void KoTextAnchor::paint(QPainter &painter, QPaintDevice *, const QRectF &rect, QTextInlineObject, const QTextCharFormat &)
+void KTextAnchor::paint(QPainter &painter, QPaintDevice *, const QRectF &rect, QTextInlineObject, const QTextCharFormat &)
 {
     Q_UNUSED(painter);
     Q_UNUSED(rect);
 
     // This section of code is to indicate changes done to KoTextAnchors. Once the new approach is complete this can be removed
     // In this approach we draw a rectangle around the shape with the appropriate change indication color.
-    Q_D(KoTextAnchor);
+    Q_D(KTextAnchor);
     int changeId = d->format.property(KCharacterStyle::ChangeTrackerId).toInt();
     bool drawChangeRect = false;
 
@@ -283,24 +283,24 @@ void KoTextAnchor::paint(QPainter &painter, QPaintDevice *, const QRectF &rect, 
     // End of Change Visualization Section. Can be removed once the new approach is finalized
 }
 
-const QPointF &KoTextAnchor::offset() const
+const QPointF &KTextAnchor::offset() const
 {
-    Q_D(const KoTextAnchor);
+    Q_D(const KTextAnchor);
     return d->distance;
 }
 
-void KoTextAnchor::setOffset(const QPointF &offset)
+void KTextAnchor::setOffset(const QPointF &offset)
 {
-    Q_D(KoTextAnchor);
+    Q_D(KTextAnchor);
     if (d->distance == offset)
         return;
     d->distance = offset;
     d->relayout();
 }
 
-void KoTextAnchor::saveOdf(KShapeSavingContext &context)
+void KTextAnchor::saveOdf(KShapeSavingContext &context)
 {
-    Q_D(KoTextAnchor);
+    Q_D(KTextAnchor);
     // the anchor type determines where in the stream the shape is to be saved.
     enum OdfAnchorType {
         AsChar,
@@ -311,21 +311,21 @@ void KoTextAnchor::saveOdf(KShapeSavingContext &context)
     // ODF is not nearly as powerful as we need it (yet) so lets do some mapping.
     OdfAnchorType odfAnchorType = Undefined;
     switch (d->verticalAlignment) {
-    case KoTextAnchor::TopOfFrame:
-    case KoTextAnchor::BottomOfFrame:
+    case KTextAnchor::TopOfFrame:
+    case KTextAnchor::BottomOfFrame:
         odfAnchorType = Frame;
         break;
-    case KoTextAnchor::TopOfParagraph:
-    case KoTextAnchor::AboveCurrentLine:
-    case KoTextAnchor::BelowCurrentLine:
-    case KoTextAnchor::BottomOfParagraph:
-    case KoTextAnchor::TopOfPage:
-    case KoTextAnchor::BottomOfPage:
-    case KoTextAnchor::TopOfPageContent:
-    case KoTextAnchor::BottomOfPageContent:
+    case KTextAnchor::TopOfParagraph:
+    case KTextAnchor::AboveCurrentLine:
+    case KTextAnchor::BelowCurrentLine:
+    case KTextAnchor::BottomOfParagraph:
+    case KTextAnchor::TopOfPage:
+    case KTextAnchor::BottomOfPage:
+    case KTextAnchor::TopOfPageContent:
+    case KTextAnchor::BottomOfPageContent:
         odfAnchorType = Paragraph;
         break;
-    case KoTextAnchor::VerticalOffset:
+    case KTextAnchor::VerticalOffset:
         odfAnchorType = AsChar;
         break;
     }
@@ -369,9 +369,9 @@ void KoTextAnchor::saveOdf(KShapeSavingContext &context)
     }
 }
 
-bool KoTextAnchor::loadOdf(const KXmlElement &element, KShapeLoadingContext &context)
+bool KTextAnchor::loadOdf(const KXmlElement &element, KShapeLoadingContext &context)
 {
-    Q_D(KoTextAnchor);
+    Q_D(KTextAnchor);
     d->distance = shape()->position();
     if (! shape()->hasAdditionalAttribute("text:anchor-type"))
         return false;
@@ -727,14 +727,14 @@ bool KoTextAnchor::loadOdf(const KXmlElement &element, KShapeLoadingContext &con
     return true;
 }
 
-bool KoTextAnchor::isPositionedInline() const
+bool KTextAnchor::isPositionedInline() const
 {
-    Q_D(const KoTextAnchor);
+    Q_D(const KTextAnchor);
     return d->isPositionedInline;
 }
 
-void KoTextAnchor::detachFromModel()
+void KTextAnchor::detachFromModel()
 {
-    Q_D(KoTextAnchor);
+    Q_D(KTextAnchor);
     d->model = 0;
 }

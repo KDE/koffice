@@ -26,7 +26,7 @@
 #include <KoTextDocument.h>
 #include <KoTextDocumentLayout.h>
 #include <KoTextEditor.h>
-#include <KoTextAnchor.h>
+#include <KTextAnchor.h>
 #include <KInlineTextObjectManager.h>
 #include <KCanvasBase.h>
 #include <KShapeController.h>
@@ -145,7 +145,7 @@ void ShowChangesCommand::checkAndAddAnchoredShapes(int position, int length)
             if (!object)
                 continue;
 
-            KoTextAnchor *anchor = dynamic_cast<KoTextAnchor *>(object);
+            KTextAnchor *anchor = dynamic_cast<KTextAnchor *>(object);
             if (!anchor)
                 continue;
            
@@ -198,7 +198,7 @@ void ShowChangesCommand::checkAndRemoveAnchoredShapes(int position, int length)
             if (!object)
                 continue;
 
-            KoTextAnchor *anchor = dynamic_cast<KoTextAnchor *>(object);
+            KTextAnchor *anchor = dynamic_cast<KTextAnchor *>(object);
             if (!anchor)
                 continue;
             

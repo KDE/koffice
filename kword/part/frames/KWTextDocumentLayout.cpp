@@ -32,7 +32,7 @@
 #include <KoTextShapeData.h>
 #include <KShapeContainer.h>
 #include <KInlineTextObjectManager.h>
-#include <KoTextAnchor.h>
+#include <KTextAnchor.h>
 #include <KDebug>
 
 #include <QList>
@@ -198,7 +198,7 @@ void KWTextDocumentLayout::positionInlineObject(QTextInlineObject item, int posi
         return;
     }
 #endif
-    KoTextAnchor *anchor = dynamic_cast<KoTextAnchor*>(inlineTextObjectManager()->inlineTextObject(f.toCharFormat()));
+    KTextAnchor *anchor = dynamic_cast<KTextAnchor*>(inlineTextObjectManager()->inlineTextObject(f.toCharFormat()));
     if (anchor) { // special case anchors as positionInlineObject is called before layout; which is no good.
         foreach (KWAnchorStrategy *strategy, m_activeAnchors + m_newAnchors) {
             if (strategy->anchor() == anchor)

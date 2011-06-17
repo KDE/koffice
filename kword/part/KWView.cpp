@@ -73,7 +73,7 @@
 #include <KShapeManager.h>
 #include <KShapeRegistry.h>
 #include <KoStandardAction.h>
-#include <KoTextAnchor.h>
+#include <KTextAnchor.h>
 #include <KoTextDocument.h>
 #include <KoTextEditor.h>
 #include <KoText.h>
@@ -1115,7 +1115,7 @@ void KWView::inlineFrame()
     KoToolManager::instance()->switchToolRequested(tool);
     KoTextEditor *handler = qobject_cast<KoTextEditor*> (m_canvas->toolProxy()->selection());
     Q_ASSERT(handler);
-    KoTextAnchor *anchor = new KoTextAnchor(targetShape);
+    KTextAnchor *anchor = new KTextAnchor(targetShape);
     anchor->setOffset(QPointF(0, -targetShape->size().height()));
     // TODO move caret
     handler->insertInlineObject(anchor);

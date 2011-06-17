@@ -27,7 +27,7 @@
 #include <KoTextDocument.h>
 #include <KoTextDocumentLayout.h>
 #include <KInlineTextObjectManager.h>
-#include <KoTextAnchor.h>
+#include <KTextAnchor.h>
 #include <KCanvasBase.h>
 #include <KShapeController.h>
 
@@ -190,7 +190,7 @@ void DeleteCommand::deleteInlineObjects(QTextCursor &selection)
 void DeleteCommand::deleteTextAnchor(KInlineObject *object)
 {
     if (object) {
-        KoTextAnchor *anchor = dynamic_cast<KoTextAnchor *>(object);
+        KTextAnchor *anchor = dynamic_cast<KTextAnchor *>(object);
         if (anchor) {
                 KShape *shape = anchor->shape();
                 QUndoCommand *shapeDeleteCommand = m_tool->canvas()->shapeController()->removeShape(shape);

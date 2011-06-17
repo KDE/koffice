@@ -51,7 +51,7 @@
 
 #include <KChangeTracker.h>
 #include <KChangeTrackerElement.h>
-#include <KoTextAnchor.h>
+#include <KTextAnchor.h>
 #include <KInlineTextObjectManager.h>
 #include <KCanvasBase.h>
 #include <KShapeController.h>

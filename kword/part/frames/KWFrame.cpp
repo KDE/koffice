@@ -23,7 +23,7 @@
 #include "KWTextFrameSet.h"
 #include "KWCopyShape.h"
 #include "KWOutlineShape.h"
-#include "KoTextAnchor.h"
+#include "KTextAnchor.h"
 #include "KWPage.h"
 
 #include <KXmlWriter.h>

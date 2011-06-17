@@ -34,7 +34,7 @@
 #include <QXmlStreamReader>
 
 #include "KInlineObject.h"
-#include "KoTextAnchor.h"
+#include "KTextAnchor.h"
 #include "KShape.h"
 #include "KoVariable.h"
 #include "KInlineTextObjectManager.h"
@@ -853,7 +853,7 @@ void KoTextWriter::Private::saveParagraph(const QTextBlock &block, int from, int
 
                     if (saveInlineObject) {
                         int changeId = charFormat.intProperty(KCharacterStyle::ChangeTrackerId);
-                        KoTextAnchor *textAnchor = dynamic_cast<KoTextAnchor *>(inlineObject);
+                        KTextAnchor *textAnchor = dynamic_cast<KTextAnchor *>(inlineObject);
                         if (changeTracker && changeTracker->saveFormat() == KChangeTracker::DELTAXML) {
                             if (textAnchor && changeId && changeTracker->elementById(changeId)->changeType() == KOdfGenericChange::InsertChange) {
                                 textAnchor->shape()->setAdditionalAttribute("delta:insertion-change-idref", changeTransTable.value(changeId));

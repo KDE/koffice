@@ -34,7 +34,7 @@ set(kotext_LIB_SRCS
     KNamedVariable.cpp
     KoTextLocator.cpp
     KoTextReference.cpp
-    KoTextAnchor.cpp
+    KTextAnchor.cpp
     KoTextShapeContainerModel.cpp
     KoTextShapeSavingContext.cpp
     KoBookmark.cpp
@@ -125,7 +125,7 @@ install(
     KoBookmark.h
     KoBookmarkManager.h
     KInlineTextObjectManager.h
-    KoTextAnchor.h
+    KTextAnchor.h
     KoTextBlockBorderData.h
     KoTextBlockData.h
     KoTextDocument.h

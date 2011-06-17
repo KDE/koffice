@@ -47,7 +47,7 @@
 // koffice libs includes
 #include <KShapeManager.h>
 #include <KoTextDocument.h>
-#include <KoTextAnchor.h>
+#include <KTextAnchor.h>
 #include <KShapeContainer.h>
 #include <KOdfWriteStore.h>
 #include <KoToolManager.h>
@@ -776,7 +776,7 @@ void KWDocument::endOfLoading() // called by both oasis and oldxml
             continue;
         KoTextDocument textDoc(tfs->document());
         foreach (KInlineObject *inlineObject, textDoc.inlineTextObjectManager()->inlineTextObjects()) {
-            KoTextAnchor *anchor = dynamic_cast<KoTextAnchor*>(inlineObject);
+            KTextAnchor *anchor = dynamic_cast<KTextAnchor*>(inlineObject);
             if (anchor) {
                 if (m_magicCurtain == 0) {
                     m_magicCurtain = new MagicCurtain();

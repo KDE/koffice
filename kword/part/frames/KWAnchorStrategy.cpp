@@ -31,14 +31,14 @@
 
 #include <KDebug>
 
-KWAnchorStrategy::KWAnchorStrategy(KoTextAnchor *anchor)
+KWAnchorStrategy::KWAnchorStrategy(KTextAnchor *anchor)
         : m_anchor(anchor),
         m_finished(false),
         m_currentLineY(0),
         m_pass(0),
         m_lastknownPosInDoc(-1),
-        m_lastVerticalAnchorAlignment(KoTextAnchor::TopOfFrame),
-        m_lastHorizontalAnchorAlignment(KoTextAnchor::Left)
+        m_lastVerticalAnchorAlignment(KTextAnchor::TopOfFrame),
+        m_lastHorizontalAnchorAlignment(KTextAnchor::Left)
 {
     calculateKnowledgePoint();
 }
@@ -89,8 +89,8 @@ bool KWAnchorStrategy::checkState(KoTextDocumentLayout::LayoutState *state, int 
     QRectF containerBoundingRect = m_anchor->shape()->parent()->boundingRect();
     QPointF newPosition;
     switch (m_anchor->horizontalAlignment()) {
-    case KoTextAnchor::ClosestToBinding: // TODO figure out a way to do pages...
-    case KoTextAnchor::Left: {
+    case KTextAnchor::ClosestToBinding: // TODO figure out a way to do pages...
+    case KTextAnchor::Left: {
         // take into account text indent and alignment.
         Qt::Alignment alignment = block.layout()->textOption().alignment() & Qt::AlignHorizontal_Mask;
         if ((alignment & Qt::AlignLeft) || (alignment & Qt::AlignJustify)) {
@@ -104,16 +104,16 @@ bool KWAnchorStrategy::checkState(KoTextDocumentLayout::LayoutState *state, int 
         recalcFrom = block.position();
         break;
     }
-    case KoTextAnchor::FurtherFromBinding: // TODO figure out a way to do pages...
-    case KoTextAnchor::Right:
+    case KTextAnchor::FurtherFromBinding: // TODO figure out a way to do pages...
+    case KTextAnchor::Right:
         newPosition.setX(containerBoundingRect.width() - boundingRect.width());
         recalcFrom = block.position();
         break;
-    case KoTextAnchor::Center:
+    case KTextAnchor::Center:
         newPosition.setX((containerBoundingRect.width() - boundingRect.width()) / 2.0);
         recalcFrom = block.position();
         break;
-    case KoTextAnchor::HorizontalOffset: {
+    case KTextAnchor::HorizontalOffset: {
         qreal x;
         if (m_anchor->textPosition() == block.position()) {
             // at first position of parag.
@@ -129,18 +129,18 @@ bool KWAnchorStrategy::checkState(KoTextDocumentLayout::LayoutState *state, int 
         m_finished = true;
         break;
     }
-    case KoTextAnchor::LeftOfPage: {
+    case KTextAnchor::LeftOfPage: {
         newPosition.setX(-containerBoundingRect.x());
         break;
     }
-    case KoTextAnchor::RightOfPage: {
+    case KTextAnchor::RightOfPage: {
         KWPageTextInfo *pageInfo = dynamic_cast<KWPageTextInfo *>(data->page());
         if (pageInfo) {
             newPosition.setX(pageInfo->page().width() - containerBoundingRect.x() - boundingRect.width());
         }
         break;
     }
-    case KoTextAnchor::CenterOfPage: {
+    case KTextAnchor::CenterOfPage: {
         KWPageTextInfo *pageInfo = dynamic_cast<KWPageTextInfo *>(data->page());
         if (pageInfo) {
             newPosition.setX(pageInfo->page().width()/2 - containerBoundingRect.x() - boundingRect.width()/2);
@@ -152,10 +152,10 @@ bool KWAnchorStrategy::checkState(KoTextDocumentLayout::LayoutState *state, int 
     }
 
     switch (m_anchor->verticalAlignment()) {
-    case KoTextAnchor::TopOfFrame:
+    case KTextAnchor::TopOfFrame:
         recalcFrom = qMax(recalcFrom, data->position());
         break;
-    case KoTextAnchor::TopOfParagraph: {
+    case KTextAnchor::TopOfParagraph: {
         if (layout->lineCount() == 0) {
             m_finished = false;
             return false;
@@ -165,33 +165,33 @@ bool KWAnchorStrategy::checkState(KoTextDocumentLayout::LayoutState *state, int 
         recalcFrom = qMax(recalcFrom, block.position());
         break;
     }
-    case KoTextAnchor::AboveCurrentLine:
-    case KoTextAnchor::BelowCurrentLine: {
+    case KTextAnchor::AboveCurrentLine:
+    case KTextAnchor::BelowCurrentLine: {
         QTextLine tl = layout->lineForTextPosition(m_anchor->textPosition() - block.position());
         Q_ASSERT(tl.isValid());
         m_currentLineY = tl.y() + tl.height() - data->documentOffset();
-        if (m_anchor->verticalAlignment() == KoTextAnchor::BelowCurrentLine)
+        if (m_anchor->verticalAlignment() == KTextAnchor::BelowCurrentLine)
             newPosition.setY(m_currentLineY);
         else
             newPosition.setY(m_currentLineY - boundingRect.height() - tl.height());
         recalcFrom = qMax(recalcFrom, block.position());
         break;
     }
-    case KoTextAnchor::BottomOfParagraph: {
+    case KTextAnchor::BottomOfParagraph: {
         QTextLine tl = layout->lineAt(layout->lineCount() - 1);
         Q_ASSERT(tl.isValid());
         newPosition.setY(tl.y() + tl.height() - data->documentOffset());
         recalcFrom = qMax(recalcFrom, block.position());
         break;
     }
-    case KoTextAnchor::BottomOfFrame:
+    case KTextAnchor::BottomOfFrame:
         newPosition.setY(containerBoundingRect.height() - boundingRect.height());
         recalcFrom = qMax(recalcFrom, block.position()); // TODO move further back if shape is tall
         break;
-    case KoTextAnchor::VerticalOffset: {
+    case KTextAnchor::VerticalOffset: {
         qreal y;
         if (block.length() == 2 && !m_anchor->isPositionedInline()) {
-            //m_anchor->horizontalAlignment()!=KoTextAnchor::HorizontalOffset) {
+            //m_anchor->horizontalAlignment()!=KTextAnchor::HorizontalOffset) {
             // the anchor is the only thing in the block, and not inline
             y = state->y();
         } else if (layout->lineCount()) {
@@ -207,14 +207,14 @@ bool KWAnchorStrategy::checkState(KoTextDocumentLayout::LayoutState *state, int 
         newPosition.setY(y - data->documentOffset());
         break;
     }
-    case KoTextAnchor::TopOfPage: {
+    case KTextAnchor::TopOfPage: {
         KWPageTextInfo *pageInfo = dynamic_cast<KWPageTextInfo *>(data->page());
         if (pageInfo) {
             newPosition.setY(pageInfo->page().offsetInDocument() - containerBoundingRect.y());
         }
         break;
     }
-    case KoTextAnchor::BottomOfPage: {
+    case KTextAnchor::BottomOfPage: {
         KWPageTextInfo *pageInfo = dynamic_cast<KWPageTextInfo *>(data->page());
         if (pageInfo) {
             newPosition.setY(pageInfo->page().offsetInDocument() + pageInfo->page().height()
@@ -222,7 +222,7 @@ bool KWAnchorStrategy::checkState(KoTextDocumentLayout::LayoutState *state, int 
         }
         break;
     }
-    case KoTextAnchor::TopOfPageContent: {
+    case KTextAnchor::TopOfPageContent: {
         KWPageTextInfo *pageInfo = dynamic_cast<KWPageTextInfo *>(data->page());
         if (!pageInfo)
             break;
@@ -245,7 +245,7 @@ bool KWAnchorStrategy::checkState(KoTextDocumentLayout::LayoutState *state, int 
         }
         break;
     }
-    case KoTextAnchor::BottomOfPageContent: {
+    case KTextAnchor::BottomOfPageContent: {
         KWPageTextInfo *pageInfo = dynamic_cast<KWPageTextInfo *>(data->page());
         if (!pageInfo)
             break;
@@ -323,14 +323,14 @@ void KWAnchorStrategy::calculateKnowledgePoint()
     m_knowledgePoint = -1;
     // figure out until what cursor position we need to layout to get all the info we need
     switch (m_anchor->horizontalAlignment()) {
-    case KoTextAnchor::ClosestToBinding:
-    case KoTextAnchor::Left:
-    case KoTextAnchor::FurtherFromBinding:
-    case KoTextAnchor::Right:
-    case KoTextAnchor::Center:
-    case KoTextAnchor::LeftOfPage:
-    case KoTextAnchor::RightOfPage:
-    case KoTextAnchor::CenterOfPage: {
+    case KTextAnchor::ClosestToBinding:
+    case KTextAnchor::Left:
+    case KTextAnchor::FurtherFromBinding:
+    case KTextAnchor::Right:
+    case KTextAnchor::Center:
+    case KTextAnchor::LeftOfPage:
+    case KTextAnchor::RightOfPage:
+    case KTextAnchor::CenterOfPage: {
         if (m_anchor->shape()->parent() == 0) // not enough info yet.
             return;
         KoTextShapeData *data = qobject_cast<KoTextShapeData*>(m_anchor->shape()->parent()->userData());
@@ -338,25 +338,25 @@ void KWAnchorStrategy::calculateKnowledgePoint()
         m_knowledgePoint = data->position();
         break;
     }
-    case KoTextAnchor::HorizontalOffset:
+    case KTextAnchor::HorizontalOffset:
         m_knowledgePoint = m_anchor->textPosition()+1;
     }
     switch (m_anchor->verticalAlignment()) {
-    case KoTextAnchor::TopOfParagraph:
+    case KTextAnchor::TopOfParagraph:
         m_knowledgePoint = qMax(m_knowledgePoint,
                                 m_anchor->document()->findBlock(m_anchor->textPosition()).position() + 1);
         break;
-    case KoTextAnchor::VerticalOffset:
-    case KoTextAnchor::AboveCurrentLine:
-    case KoTextAnchor::BelowCurrentLine:
-    case KoTextAnchor::TopOfPage:
-    case KoTextAnchor::BottomOfPage:
-    case KoTextAnchor::TopOfPageContent:
-    case KoTextAnchor::BottomOfPageContent:
+    case KTextAnchor::VerticalOffset:
+    case KTextAnchor::AboveCurrentLine:
+    case KTextAnchor::BelowCurrentLine:
+    case KTextAnchor::TopOfPage:
+    case KTextAnchor::BottomOfPage:
+    case KTextAnchor::TopOfPageContent:
+    case KTextAnchor::BottomOfPageContent:
         m_knowledgePoint = qMax(m_knowledgePoint, m_anchor->textPosition()+1);
         break;
-    case KoTextAnchor::TopOfFrame:
-    case KoTextAnchor::BottomOfFrame: {
+    case KTextAnchor::TopOfFrame:
+    case KTextAnchor::BottomOfFrame: {
         if (m_anchor->shape()->parent() == 0) // not enough info yet.
             return;
         KoTextShapeData *data = qobject_cast<KoTextShapeData*>(m_anchor->shape()->parent()->userData());
@@ -364,7 +364,7 @@ void KWAnchorStrategy::calculateKnowledgePoint()
         m_knowledgePoint = qMax(m_knowledgePoint, data->position() + 1);
         break;
     }
-    case KoTextAnchor::BottomOfParagraph: {
+    case KTextAnchor::BottomOfParagraph: {
         QTextBlock block = m_anchor->document()->findBlock(m_anchor->textPosition());
         m_knowledgePoint = qMax(m_knowledgePoint, block.position() + block.length() - 2);
         break;
