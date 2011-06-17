@@ -478,7 +478,7 @@ void DefaultTool::updateCursor()
         emit statusTextChanged(statusText);
 }
 
-void DefaultTool::paint(QPainter &painter, const KoViewConverter &converter)
+void DefaultTool::paint(QPainter &painter, const KViewConverter &converter)
 {
     KInteractionTool::paint(painter, converter);
     if (currentStrategy() == 0 && koSelection()->count() > 0) {
@@ -823,7 +823,7 @@ KoFlake::SelectionHandle DefaultTool::handleAt(const QPointF &point, bool *inner
         return KoFlake::NoHandle;
 
     recalcSelectionBox();
-    const KoViewConverter *converter = canvas()->viewConverter();
+    const KViewConverter *converter = canvas()->viewConverter();
     if (!converter) return KoFlake::NoHandle;
 
     if (innerHandleMeaning != 0)
@@ -1112,7 +1112,7 @@ KInteractionStrategy *DefaultTool::createStrategy(KPointerEvent *event)
         default:
         {
             // check if we had hit the center point
-            const KoViewConverter * converter = canvas()->viewConverter();
+            const KViewConverter * converter = canvas()->viewConverter();
             QPointF pt = converter->documentToView(event->point-select->absolutePosition());
             if (qAbs(pt.x()) < HANDLE_DISTANCE && qAbs(pt.y()) < HANDLE_DISTANCE)
                 newHotPosition = KoFlake::CenteredPosition;
@@ -1155,7 +1155,7 @@ KInteractionStrategy *DefaultTool::createStrategy(KPointerEvent *event)
 
     // check if we clicked near any of the selected connectors end-points.
     qreal clickDistance = HANDLE_DISTANCE/2;
-    const KoViewConverter *viewConverter = canvas()->viewConverter();
+    const KViewConverter *viewConverter = canvas()->viewConverter();
     if (viewConverter)
         clickDistance = viewConverter->viewToDocumentX(clickDistance);
     foreach (KShapeConnection *connection, m_selectedConnections) {

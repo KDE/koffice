@@ -44,7 +44,7 @@ class KShapeBorderBase;
 class KShapeBackground;
 class KShapeManager;
 class KShapeUserData;
-class KoViewConverter;
+class KViewConverter;
 class KShapeApplicationData;
 class KShapeSavingContext;
 class KCanvasBase;
@@ -156,7 +156,7 @@ public:
      * @param converter to convert between internal and view coordinates.
      * @see applyConversion()
      */
-    virtual void paint(QPainter &painter, const KoViewConverter &converter);
+    virtual void paint(QPainter &painter, const KViewConverter &converter);
 
     /**
      * Paint non-print decorations specific for this type of shape.
@@ -167,7 +167,7 @@ public:
      * @param canvas the canvas that requested this paint.  This can be used to retrieve canvas specific properties
      *      like selection and get a reference to the KResourceManager.
      */
-    virtual void paintDecorations(QPainter &painter, const KoViewConverter &converter, const KCanvasBase *canvas);
+    virtual void paintDecorations(QPainter &painter, const KViewConverter &converter, const KCanvasBase *canvas);
 
     /**
      * Load a shape from odf
@@ -647,7 +647,7 @@ public:
      * @param converter if not null, this method uses the converter to mark the right
      *        offsets in the current view.
      */
-    QTransform absoluteTransformation(const KoViewConverter *converter) const;
+    QTransform absoluteTransformation(const KViewConverter *converter) const;
 
     /**
      * Applies a transformation to this shape.
@@ -693,7 +693,7 @@ public:
      * @param painter the painter to alter the zoom level of.
      * @param converter the converter for the current views zoom.
      */
-    static void applyConversion(QPainter &painter, const KoViewConverter &converter);
+    static void applyConversion(QPainter &painter, const KViewConverter &converter);
 
     /**
      * @brief Transforms point from shape coordinates to document coordinates
@@ -753,7 +753,7 @@ public:
      *                     If set to false the processing needs to be done synchronously and will 
      *                     block until the result is finished.
      */
-    virtual void waitUntilReady(const KoViewConverter &converter, bool asynchronous = true) const;
+    virtual void waitUntilReady(const KViewConverter &converter, bool asynchronous = true) const;
 
     /**
      * Schedule the shape for thread-safe deletion.

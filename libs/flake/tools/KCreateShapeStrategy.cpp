@@ -95,7 +95,7 @@ void KCreateShapeStrategy::finishInteraction(Qt::KeyboardModifiers modifiers)
     d->tool->canvas()->updateCanvas(d->selectedRect());
 }
 
-void KCreateShapeStrategy::paint(QPainter &painter, const KoViewConverter &converter)
+void KCreateShapeStrategy::paint(QPainter &painter, const KViewConverter &converter)
 {
     Q_D(KShapeRubberSelectStrategy);
     if (m_outline.isEmpty())

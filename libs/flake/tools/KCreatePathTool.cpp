@@ -46,7 +46,7 @@ KCreatePathTool::~KCreatePathTool()
 {
 }
 
-void KCreatePathTool::paint(QPainter &painter, const KoViewConverter &converter)
+void KCreatePathTool::paint(QPainter &painter, const KViewConverter &converter)
 {
     Q_D(KCreatePathTool);
     if (d->shape) {
@@ -100,7 +100,7 @@ void KCreatePathTool::paint(QPainter &painter, const KoViewConverter &converter)
     painter.restore();
 }
 
-void KCreatePathTool::paintPath(KPathShape& pathShape, QPainter &painter, const KoViewConverter &converter)
+void KCreatePathTool::paintPath(KPathShape& pathShape, QPainter &painter, const KViewConverter &converter)
 {
     Q_D(KCreatePathTool);
     painter.setTransform(pathShape.absoluteTransformation(&converter) * painter.transform());

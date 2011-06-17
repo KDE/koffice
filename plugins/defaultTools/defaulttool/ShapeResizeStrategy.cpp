@@ -234,7 +234,7 @@ QUndoCommand *ShapeResizeStrategy::createCommand(QUndoCommand *parent)
     return cmd;
 }
 
-void ShapeResizeStrategy::paint(QPainter &painter, const KoViewConverter &converter)
+void ShapeResizeStrategy::paint(QPainter &painter, const KViewConverter &converter)
 {
     SelectionDecorator decorator (KoFlake::NoHandle, false, false);
     decorator.setSelection(tool()->canvas()->shapeManager()->selection());

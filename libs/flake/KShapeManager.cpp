@@ -95,7 +95,7 @@ void KShapeManagerPrivate::updateTree()
     }
 }
 
-void KShapeManagerPrivate::paintGroup(KShapeGroup *group, QPainter &painter, const KoViewConverter &converter, bool forPrint)
+void KShapeManagerPrivate::paintGroup(KShapeGroup *group, QPainter &painter, const KViewConverter &converter, bool forPrint)
 {
     QList<KShape*> shapes = group->shapes();
     qSort(shapes.begin(), shapes.end(), KShape::compareShapeZIndex);
@@ -252,7 +252,7 @@ void KShapeManager::removeAdditional(KShape *shape)
     }
 }
 
-void KShapeManager::paint(QPainter &painter, const KoViewConverter &converter, bool forPrint)
+void KShapeManager::paint(QPainter &painter, const KViewConverter &converter, bool forPrint)
 {
     d->updateTree();
     painter.setPen(Qt::NoPen);  // painters by default have a black stroke, lets turn that off.
@@ -337,7 +337,7 @@ void KShapeManager::paint(QPainter &painter, const KoViewConverter &converter, b
 #endif
 }
 
-void KShapeManager::paintShape(KShape *shape, QPainter &painter, const KoViewConverter &converter, bool forPrint)
+void KShapeManager::paintShape(KShape *shape, QPainter &painter, const KViewConverter &converter, bool forPrint)
 {
     qreal transparency = shape->transparency(true);
     if (transparency > 0.0) {

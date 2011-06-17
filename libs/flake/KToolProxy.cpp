@@ -111,7 +111,7 @@ KToolProxy::~KToolProxy()
     delete d;
 }
 
-void KToolProxy::paint(QPainter &painter, const KoViewConverter &converter)
+void KToolProxy::paint(QPainter &painter, const KViewConverter &converter)
 {
     if (d->activeTool) d->activeTool->paint(painter, converter);
 }
@@ -280,7 +280,7 @@ void KToolProxy::wheelEvent(QWheelEvent *event, const QPointF &point)
         event->ignore();
 }
 
-QVariant KToolProxy::inputMethodQuery(Qt::InputMethodQuery query, const KoViewConverter &converter) const
+QVariant KToolProxy::inputMethodQuery(Qt::InputMethodQuery query, const KViewConverter &converter) const
 {
     if (d->activeTool)
         return d->activeTool->inputMethodQuery(query, converter);

@@ -37,7 +37,7 @@ public:
     ~ArtisticTextTool();
 
     /// reimplemented
-    virtual void paint(QPainter &painter, const KoViewConverter &converter);
+    virtual void paint(QPainter &painter, const KViewConverter &converter);
 
     /// reimplemented
     virtual void mousePressEvent(KPointerEvent *event) ;

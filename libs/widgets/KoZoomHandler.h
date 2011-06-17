@@ -23,7 +23,7 @@
 
 #include "kowidgets_export.h"
 #include <KoZoomMode.h>
-#include <KoViewConverter.h>
+#include <KViewConverter.h>
 
 /**
  * This class handles the zooming and DPI stuff (conversions between
@@ -35,7 +35,7 @@
  * setZoomAndResolution() and setZoom()) so there is usually one
  * instance of KoZoomHandler per view.
  */
-class KOWIDGETS_EXPORT KoZoomHandler : public KoViewConverter
+class KOWIDGETS_EXPORT KoZoomHandler : public KViewConverter
 {
 public:
 
@@ -142,7 +142,7 @@ public:
             return  y / m_zoomedResolutionY;
         }
 
-    // KoViewConverter-interface methods
+    // KViewConverter-interface methods
 
     /**
      * Convert a coordinate in pt to pixels.

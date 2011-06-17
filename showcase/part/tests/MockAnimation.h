@@ -23,7 +23,7 @@
 #include "shapeanimations/SCShapeAnimationOld.h"
 #include "shapeanimations/SCAnimationData.h"
 
-#include <KoViewConverter.h>
+#include <KViewConverter.h>
 
 #include <QPainter>
 
@@ -42,7 +42,7 @@ public:
         return 0;
     }
 
-    bool animate(QPainter &painter, const KoViewConverter &converter, SCAnimationData * animationData)
+    bool animate(QPainter &painter, const KViewConverter &converter, SCAnimationData * animationData)
     {
         Q_UNUSED(painter);
         Q_UNUSED(converter);
@@ -83,7 +83,7 @@ public:
         return 0;
     }
 
-    bool animate(QPainter &painter, const KoViewConverter &converter, SCAnimationData * animationData)
+    bool animate(QPainter &painter, const KViewConverter &converter, SCAnimationData * animationData)
     {
         Q_UNUSED(painter);
         Q_UNUSED(converter);

@@ -40,7 +40,7 @@
 #include "KPathPointMergeCommand.h"
 #include "KCanvasBase.h"
 #include "KParameterShape.h"
-#include "KoViewConverter.h"
+#include "KViewConverter.h"
 #include "KShapeManager.h"
 #include "KResourceManager.h"
 #include "KSnapStrategy_p.h"
@@ -169,7 +169,7 @@ public:
         return true;
     }
 
-    virtual QPainterPath decoration(const KoViewConverter &converter) const
+    virtual QPainterPath decoration(const KViewConverter &converter) const
     {
         Q_UNUSED(converter);
 

@@ -25,7 +25,7 @@
 #include <KShape.h>
 #include <KToolBase.h>
 #include <KCanvasBase.h>
-#include <KoViewConverter.h>
+#include <KViewConverter.h>
 #include <KSnapGuide.h>
 
 #include <QLineF>
@@ -112,7 +112,7 @@ QUndoCommand* ConnectionChangeStrategy::createCommand(QUndoCommand *parent)
     }
 }
 
-void ConnectionChangeStrategy::paint(QPainter &painter, const KoViewConverter &converter)
+void ConnectionChangeStrategy::paint(QPainter &painter, const KViewConverter &converter)
 {
     //m_connection->paintDecorations(painter, converter);
     // TODO implement

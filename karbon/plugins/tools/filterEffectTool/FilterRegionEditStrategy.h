@@ -36,7 +36,7 @@ public:
     // reimplemented from KInteractionStrategy
     virtual QUndoCommand *createCommand(QUndoCommand *parent = 0);
     // reimplemented from KInteractionStrategy
-    virtual void paint(QPainter &painter, const KoViewConverter &converter);
+    virtual void paint(QPainter &painter, const KViewConverter &converter);
 
 private:
     KFilterEffect * m_effect;

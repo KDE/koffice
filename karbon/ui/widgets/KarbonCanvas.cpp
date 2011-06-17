@@ -111,7 +111,7 @@ KShapeManager * KarbonCanvas::shapeManager() const
     return d->shapeManager;
 }
 
-const KoViewConverter * KarbonCanvas::viewConverter() const
+const KViewConverter * KarbonCanvas::viewConverter() const
 {
     return &d->zoomHandler;
 }
@@ -176,7 +176,7 @@ void KarbonCanvas::paintEvent(QPaintEvent * ev)
     painter.end();
 }
 
-void KarbonCanvas::paintMargins(QPainter &painter, const KoViewConverter &converter)
+void KarbonCanvas::paintMargins(QPainter &painter, const KViewConverter &converter)
 {
     if (! d->showMargins)
         return;

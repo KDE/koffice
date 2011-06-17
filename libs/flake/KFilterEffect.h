@@ -25,7 +25,7 @@ class QImage;
 class QString;
 class QRect;
 class QRectF;
-class KoViewConverter;
+class KViewConverter;
 class KXmlWriter;
 class KFilterEffectRenderContext;
 class KFilterEffectLoadingContext;

@@ -73,7 +73,7 @@ KarbonZoomController::KarbonZoomController(KCanvasController *controller, KActio
     actionCollection->addAction(KStandardAction::ZoomOut, "zoom_out", d->action, SLOT(zoomOut()));
 
     d->canvas = dynamic_cast<KarbonCanvas*>(d->canvasController->canvas());
-    d->zoomHandler = dynamic_cast<KoZoomHandler*>(const_cast<KoViewConverter*>(d->canvas->viewConverter()));
+    d->zoomHandler = dynamic_cast<KoZoomHandler*>(const_cast<KViewConverter*>(d->canvas->viewConverter()));
 
     connect(d->canvasController, SIGNAL(sizeChanged(const QSize &)), this, SLOT(setAvailableSize()));
     connect(d->canvasController, SIGNAL(zoomBy(const qreal)), this, SLOT(requestZoomBy(const qreal)));

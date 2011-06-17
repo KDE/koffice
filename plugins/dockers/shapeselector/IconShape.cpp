@@ -19,7 +19,7 @@
 
 #include "IconShape.h"
 
-#include <KoViewConverter.h>
+#include <KViewConverter.h>
 
 #include <QPainter>
 #include <KIcon>
@@ -34,7 +34,7 @@ IconShape::~IconShape()
 {
 }
 
-void IconShape::paint(QPainter &painter, const KoViewConverter &converter)
+void IconShape::paint(QPainter &painter, const KViewConverter &converter)
 {
     applyConversion(painter, converter);
     painter.drawPixmap(QRect( QPoint(0,0), m_icon.size()), m_icon);

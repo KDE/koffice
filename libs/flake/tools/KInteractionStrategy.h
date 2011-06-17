@@ -27,7 +27,7 @@
 #include <Qt>
 
 class KPointerEvent;
-class KoViewConverter;
+class KViewConverter;
 class KInteractionStrategyPrivate;
 class KToolBase;
 class QUndoCommand;
@@ -58,7 +58,7 @@ public:
      * Reimplement this if the action needs to draw a "blob" on the canvas;
      * that is, a transient decoration like a rubber band.
      */
-    virtual void paint(QPainter &painter, const KoViewConverter &converter);
+    virtual void paint(QPainter &painter, const KViewConverter &converter);
     /**
      * Extending classes should implement this method to update the selectedShapes
      * based on the new mouse position.

@@ -56,7 +56,7 @@ ArtisticTextShape::~ArtisticTextShape()
         m_path->removeDependee( this );
 }
 
-void ArtisticTextShape::paint(QPainter &painter, const KoViewConverter &converter)
+void ArtisticTextShape::paint(QPainter &painter, const KViewConverter &converter)
 {
     applyConversion( painter, converter );
     painter.setFont( m_font );
@@ -64,7 +64,7 @@ void ArtisticTextShape::paint(QPainter &painter, const KoViewConverter &converte
         background()->paint( painter, outline() );
 }
 
-void ArtisticTextShape::paintDecorations(QPainter &/*painter*/, const KoViewConverter &/*converter*/, const KCanvasBase * /*canvas*/)
+void ArtisticTextShape::paintDecorations(QPainter &/*painter*/, const KViewConverter &/*converter*/, const KCanvasBase * /*canvas*/)
 {
 }
 

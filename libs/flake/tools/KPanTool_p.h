@@ -63,7 +63,7 @@ public:
     /// reimplemented from superclass
     virtual void keyPressEvent(QKeyEvent *event);
     /// reimplemented from superclass
-    virtual void paint(QPainter &, const KoViewConverter &) {}
+    virtual void paint(QPainter &, const KViewConverter &) {}
     /// reimplemented from superclass
     virtual void activate(ToolActivation toolActivation, const QSet<KShape*> &shapes);
     /// reimplemented method

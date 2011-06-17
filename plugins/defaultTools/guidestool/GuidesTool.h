@@ -39,7 +39,7 @@ public:
     explicit GuidesTool(KCanvasBase *canvas);
     virtual ~GuidesTool();
     /// reimplemented form KToolBase
-    virtual void paint(QPainter &painter, const KoViewConverter &converter);
+    virtual void paint(QPainter &painter, const KViewConverter &converter);
     /// reimplemented form KToolBase
     virtual void mousePressEvent(KPointerEvent *event);
     /// reimplemented form KToolBase

@@ -24,7 +24,7 @@
 #include "kword_export.h"
 
 #include <KShape.h>
-#include <KoViewConverter.h>
+#include <KViewConverter.h>
 
 class KWTextFrameSet;
 

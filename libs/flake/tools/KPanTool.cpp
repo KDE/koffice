@@ -24,7 +24,7 @@
 #include "KPointerEvent.h"
 #include "KCanvasBase.h"
 #include "KCanvasController.h"
-#include "KoViewConverter.h"
+#include "KViewConverter.h"
 
 #include <QKeyEvent>
 #include <QScrollBar>

@@ -25,7 +25,7 @@
 #include <KParameterShape.h>
 #include <KPathPoint.h>
 #include <KPathPointData.h>
-#include <KoViewConverter.h>
+#include <KViewConverter.h>
 #include <KCanvasBase.h>
 #include <KResourceManager.h>
 #include <QtGui/QPainter>
@@ -39,7 +39,7 @@ KPathToolSelection::~KPathToolSelection()
 {
 }
 
-void KPathToolSelection::paint(QPainter &painter, const KoViewConverter &converter)
+void KPathToolSelection::paint(QPainter &painter, const KViewConverter &converter)
 {
     int handleRadius = m_tool->canvas()->resourceManager()->handleRadius();
 

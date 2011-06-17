@@ -31,7 +31,7 @@
 #include <KShape.h>
 
 class QPainter;
-class KoViewConverter;
+class KViewConverter;
 class KStyleManager;
 class QTextDocument;
 class QTextLayout;

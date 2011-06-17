@@ -36,7 +36,7 @@
 #include <QMenu>
 #include <QMouseEvent>
 
-#include <KoViewConverter.h>
+#include <KViewConverter.h>
 
 // the distance in pixels of a mouse position considered outside the rule
 const int OutsideRulerThreshold = 20;
@@ -607,7 +607,7 @@ void HorizontalDistancesPaintingStrategy::drawMeasurements(const KoRulerPrivate 
     }
 }
 
-KoRulerPrivate::KoRulerPrivate(KoRuler *parent, const KoViewConverter *vc, Qt::Orientation o)
+KoRulerPrivate::KoRulerPrivate(KoRuler *parent, const KViewConverter *vc, Qt::Orientation o)
     : unit(KUnit(KUnit::Point)),
     orientation(o),
     viewConverter(vc),
@@ -744,7 +744,7 @@ void KoRulerPrivate::emitTabChanged()
 }
 
 
-KoRuler::KoRuler(QWidget* parent, Qt::Orientation orientation, const KoViewConverter* viewConverter)
+KoRuler::KoRuler(QWidget* parent, Qt::Orientation orientation, const KViewConverter* viewConverter)
   : QWidget(parent)
   , d( new KoRulerPrivate( this, viewConverter, orientation) )
 {

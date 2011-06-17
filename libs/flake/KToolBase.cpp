@@ -22,7 +22,7 @@
 #include "KCanvasBase.h"
 #include "KPointerEvent.h"
 #include "KResourceManager.h"
-#include "KoViewConverter.h"
+#include "KViewConverter.h"
 
 #include <klocale.h>
 #include <kactioncollection.h>
@@ -86,7 +86,7 @@ void KToolBase::wheelEvent(KPointerEvent * e)
     e->ignore();
 }
 
-QVariant KToolBase::inputMethodQuery(Qt::InputMethodQuery query, const KoViewConverter &) const
+QVariant KToolBase::inputMethodQuery(Qt::InputMethodQuery query, const KViewConverter &) const
 {
     Q_D(const KToolBase);
     if (d->canvas->canvasWidget() == 0)
@@ -229,7 +229,7 @@ void KToolBase::setStatusText(const QString &statusText)
 QRectF KToolBase::handleGrabRect(const QPointF &position) const
 {
     Q_D(const KToolBase);
-    const KoViewConverter * converter = d->canvas->viewConverter();
+    const KViewConverter * converter = d->canvas->viewConverter();
     uint handleSize = 2*d->canvas->resourceManager()->grabSensitivity();
     QRectF r = converter->viewToDocument(QRectF(0, 0, handleSize, handleSize));
     r.moveCenter(position);
@@ -239,7 +239,7 @@ QRectF KToolBase::handleGrabRect(const QPointF &position) const
 QRectF KToolBase::handlePaintRect(const QPointF &position) const
 {
     Q_D(const KToolBase);
-    const KoViewConverter * converter = d->canvas->viewConverter();
+    const KViewConverter * converter = d->canvas->viewConverter();
     uint handleSize = 2*d->canvas->resourceManager()->handleRadius();
     QRectF r = converter->viewToDocument(QRectF(0, 0, handleSize, handleSize));
     r.moveCenter(position);

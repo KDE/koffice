@@ -21,7 +21,7 @@
 
 #include "KShapeRubberSelectStrategy.h"
 #include "KShapeRubberSelectStrategy_p.h"
-#include "KoViewConverter.h"
+#include "KViewConverter.h"
 
 #include <QPainter>
 
@@ -39,7 +39,7 @@ KShapeRubberSelectStrategy::KShapeRubberSelectStrategy(KToolBase *tool, const QP
     d->selectRect = QRectF(d->snapGuide->snap(clicked, 0), QSizeF(0, 0));
 }
 
-void KShapeRubberSelectStrategy::paint(QPainter &painter, const KoViewConverter &converter)
+void KShapeRubberSelectStrategy::paint(QPainter &painter, const KViewConverter &converter)
 {
     Q_D(KShapeRubberSelectStrategy);
     painter.setRenderHint(QPainter::Antialiasing, false);

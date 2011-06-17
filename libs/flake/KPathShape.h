@@ -82,8 +82,8 @@ public:
      */
     virtual ~KPathShape();
 
-    virtual void paint(QPainter &painter, const KoViewConverter &converter);
-    virtual void paintPoints(QPainter &painter, const KoViewConverter &converter, int handleRadius);
+    virtual void paint(QPainter &painter, const KViewConverter &converter);
+    virtual void paintPoints(QPainter &painter, const KViewConverter &converter, int handleRadius);
     virtual QPainterPath outline() const;
     virtual QRectF boundingRect() const;
     virtual QSizeF size() const;

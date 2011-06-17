@@ -19,7 +19,7 @@
 */
 
 #include "KGuidesData.h"
-#include "KoViewConverter.h"
+#include "KViewConverter.h"
 #include <KUnit.h>
 #include <KOdfSettings.h>
 #include <KXmlWriter.h>
@@ -123,7 +123,7 @@ QList<qreal> KGuidesData::verticalGuideLines() const
     return d->vertGuideLines;
 }
 
-void KGuidesData::paintGuides(QPainter &painter, const KoViewConverter &converter, const QRectF &area) const
+void KGuidesData::paintGuides(QPainter &painter, const KViewConverter &converter, const QRectF &area) const
 {
     if (! showGuideLines())
         return;

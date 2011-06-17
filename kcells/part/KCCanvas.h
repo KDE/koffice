@@ -101,7 +101,7 @@ public:
     /// reimplemented method from KCanvasBase
     virtual void updateInputMethodInfo();
     /// reimplemented method from KCanvasBase
-    virtual const KoViewConverter* viewConverter() const;
+    virtual const KViewConverter* viewConverter() const;
 
 
     QPointF offset() const {

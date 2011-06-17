@@ -148,7 +148,7 @@ public:
      *
      * @param rect the rectangle to make visible
      * @param smooth if true the viewport translation will make be just enough to ensure visibility, no more.
-     * @see KoViewConverter::documentToView()
+     * @see KViewConverter::documentToView()
      */
     void ensureVisible(const QRectF &rect, bool smooth = false);
 

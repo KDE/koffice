@@ -28,7 +28,7 @@ class KWPageBackground : public KShape
 public:
     KWPageBackground();
 
-    virtual void paint(QPainter &painter, const KoViewConverter &converter);
+    virtual void paint(QPainter &painter, const KViewConverter &converter);
 };
 
 #endif

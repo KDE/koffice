@@ -40,7 +40,7 @@ class QUndoCommand;
 class KResourceManager;
 class KShapeManager;
 class KToolProxy;
-class KoViewConverter;
+class KViewConverter;
 class KShapeController;
 class KShapeControllerBase;
 class KCanvasController;
@@ -123,7 +123,7 @@ public:
      * Return the viewConverter for this view.
      * @return the viewConverter for this view.
      */
-    virtual const KoViewConverter *viewConverter() const = 0;
+    virtual const KViewConverter *viewConverter() const = 0;
 
     /**
      * Return the widget that will be added to the scrollArea.

@@ -33,7 +33,7 @@ public:
     virtual ~KoPABackgroundTool();
 
     ///Reimplemented from KToolBase
-    virtual void paint(QPainter &painter, const KoViewConverter &converter);
+    virtual void paint(QPainter &painter, const KViewConverter &converter);
     ///Reimplemented from KToolBase
     virtual void activate(ToolActivation toolActivation, const QSet<KShape*> &shapes);
     ///Reimplemented from KToolBase

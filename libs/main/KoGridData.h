@@ -26,7 +26,7 @@
 
 class QPainter;
 class QRectF;
-class KoViewConverter;
+class KViewConverter;
 class KXmlWriter;
 class KToggleAction;
 class KXmlElement;
@@ -110,7 +110,7 @@ public:
       * @param converter the view converter
       * @param area the area in need of updating
      */
-    void paintGrid(QPainter &painter, const KoViewConverter &converter, const QRectF &area) const;
+    void paintGrid(QPainter &painter, const KViewConverter &converter, const QRectF &area) const;
 
     /**
      * Returns a toggle action that can be added to the menu of your views.

@@ -18,7 +18,7 @@
  */
 
 #include "KFilterEffectRenderContext.h"
-#include "KoViewConverter.h"
+#include "KViewConverter.h"
 
 #include <QtCore/QRectF>
 #include <QtGui/QTransform>
@@ -26,16 +26,16 @@
 class KFilterEffectRenderContext::Private
 {
 public:
-    Private(const KoViewConverter &viewConverter)
+    Private(const KViewConverter &viewConverter)
         : converter(viewConverter)
     {}
 
     QRectF filterRegion;
     QRectF shapeBound;
-    const KoViewConverter & converter;
+    const KViewConverter & converter;
 };
 
-KFilterEffectRenderContext::KFilterEffectRenderContext(const KoViewConverter &converter)
+KFilterEffectRenderContext::KFilterEffectRenderContext(const KViewConverter &converter)
 : d(new Private(converter))
 {
 }
@@ -75,7 +75,7 @@ qreal KFilterEffectRenderContext::toUserSpaceY(qreal value) const
     return value * d->shapeBound.height();
 }
 
-const KoViewConverter * KFilterEffectRenderContext::viewConverter() const
+const KViewConverter * KFilterEffectRenderContext::viewConverter() const
 {
     return &d->converter;
 }

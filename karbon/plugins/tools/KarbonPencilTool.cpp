@@ -66,7 +66,7 @@ KarbonPencilTool::~KarbonPencilTool()
 {
 }
 
-void KarbonPencilTool::paint(QPainter &painter, const KoViewConverter &converter)
+void KarbonPencilTool::paint(QPainter &painter, const KViewConverter &converter)
 {
     if (m_shape) {
         painter.save();

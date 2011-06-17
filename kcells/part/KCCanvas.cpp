@@ -553,7 +553,7 @@ KToolProxy *KCCanvas::toolProxy() const
     return m_toolProxy;
 }
 
-const KoViewConverter* KCCanvas::viewConverter() const
+const KViewConverter* KCCanvas::viewConverter() const
 {
     return zoomHandler();
 }

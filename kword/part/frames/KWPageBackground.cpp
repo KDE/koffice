@@ -25,7 +25,7 @@ KWPageBackground::KWPageBackground()
     setSelectable(false);
 }
 
-void KWPageBackground::paint(QPainter &painter, const KoViewConverter &converter)
+void KWPageBackground::paint(QPainter &painter, const KViewConverter &converter)
 {
     if (background()) {
         applyConversion(painter, converter);

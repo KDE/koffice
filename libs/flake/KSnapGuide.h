@@ -31,7 +31,7 @@
 class KSnapStrategy;
 class KShape;
 class KPathPoint;
-class KoViewConverter;
+class KViewConverter;
 class KCanvasBase;
 class QPainter;
 class KCanvasBase;
@@ -80,7 +80,7 @@ public:
     QPointF snap(const QPointF &mousePosition, Qt::KeyboardModifiers modifiers);
 
     /// paints the guide
-    void paint(QPainter &painter, const KoViewConverter &converter);
+    void paint(QPainter &painter, const KViewConverter &converter);
 
     /// returns the bounding rect of the guide
     QRectF boundingRect();

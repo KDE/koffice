@@ -32,7 +32,7 @@ class QRectF;
 class QSize;
 class QSizeF;
 
-class KoViewConverter;
+class KViewConverter;
 
 class CellView;
 class KCRegion;
@@ -66,14 +66,14 @@ public:
     const KCSheet* sheet() const;
 
     /**
-     * Sets the KoViewConverter used by this SheetView.
+     * Sets the KViewConverter used by this SheetView.
      */
-    void setViewConverter(const KoViewConverter* viewConverter);
+    void setViewConverter(const KViewConverter* viewConverter);
 
     /**
      * \return the view in which the KCSheet is painted
      */
-    const KoViewConverter* viewConverter() const;
+    const KViewConverter* viewConverter() const;
 
     /**
      * Looks up a CellView for the position \p col , \p row in the cache.

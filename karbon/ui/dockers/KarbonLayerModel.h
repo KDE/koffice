@@ -26,7 +26,7 @@ class KarbonDocument;
 class KShape;
 class KShapeContainer;
 class QAbstractItemModel;
-class KoViewConverter;
+class KViewConverter;
 
 class KarbonLayerModel : public KoDocumentSectionModel
 {

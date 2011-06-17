@@ -58,7 +58,7 @@ void KoPAViewModeNormal::paint(KoPACanvasBase* canvas, QPainter &painter, const 
 
     painter.translate(m_canvas->documentOrigin().x(), m_canvas->documentOrigin().y());
 
-    KoViewConverter * converter = m_view->viewConverter(m_canvas);
+    KViewConverter * converter = m_view->viewConverter(m_canvas);
     m_view->activePage()->paintBackground(painter, *converter);
     if (m_view->activePage()->displayMasterShapes()) {
         m_canvas->masterShapeManager()->paint(painter, *converter, false);
@@ -208,7 +208,7 @@ void KoPAViewModeNormal::changePageLayout(const KOdfPageLayoutData &pageLayout, 
     new KoPAChangePageLayoutCommand(m_canvas->document(), masterPage, pageLayout, applyToDocument, parent);
 }
 
-void KoPAViewModeNormal::paintMargins(QPainter &painter, const KoViewConverter &converter)
+void KoPAViewModeNormal::paintMargins(QPainter &painter, const KViewConverter &converter)
 {
     KoPAPageBase *page = m_view->activePage();
     KOdfPageLayoutData pl = page->pageLayout();

@@ -338,7 +338,7 @@ QRectF KCPrintJob::preparePage(int pageNumber)
     const KCSheetPrint *const pageManager = d->pageManagers[sheet];
     const KCPrintSettings *const settings = pageManager->settings();
     // Everything in the painting logic is done in logical, device-independent
-    // coordinates. The painting logic uses KoZoomHandler/KoViewConverter. The
+    // coordinates. The painting logic uses KoZoomHandler/KViewConverter. The
     // mapping between logical and physical coordinates has to be done by
     // QPainter, merely QPaintEngine.
     // For screen painting: QWidget's paint engine does not seem to do the mapping,
@@ -450,7 +450,7 @@ void KCPrintJob::printPage(int pageNumber, QPainter &painter)
 
     // setup the SheetView
     SheetView *const sheetView = d->view->sheetView(sheet);
-    const KoViewConverter *const origViewConverter = sheetView->viewConverter();
+    const KViewConverter *const origViewConverter = sheetView->viewConverter();
 
     KoZoomHandler zoomHandler;
     zoomHandler.setZoom(zoom);

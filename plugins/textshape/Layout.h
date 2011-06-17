@@ -95,7 +95,7 @@ private:
     void nextShape();
     void drawFrame(QTextFrame *frame, QPainter *painter, const KTextDocumentLayout::PaintContext & context, int inTable);
     void drawListItem(QPainter *painter, const QTextBlock &block, KImageCollection *imageCollection);
-    void decorateParagraph(QPainter *painter, const QTextBlock &block, int selectionStart, int selectionEnd, const KoViewConverter *converter);
+    void decorateParagraph(QPainter *painter, const QTextBlock &block, int selectionStart, int selectionEnd, const KViewConverter *converter);
     void decorateTabs(QPainter *painter, const QVariantList& tabList, const QTextLine &line, const QTextFragment& currentFragment, int startOfBlock);
 
     qreal inlineCharHeight(const QTextFragment &fragment);

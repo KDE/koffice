@@ -41,7 +41,7 @@
 #include <QtGui/QBrush>
 
 class KarbonPart;
-class KoViewConverter;
+class KViewConverter;
 class KShapeManager;
 class KToolProxy;
 class QRectF;
@@ -70,7 +70,7 @@ public:
     /// reimplemented from KCanvasBase
     KShapeManager *shapeManager() const;
     /// reimplemented from KCanvasBase
-    const KoViewConverter *viewConverter() const;
+    const KViewConverter *viewConverter() const;
     /// reimplemented from KCanvasBase
     KToolProxy * toolProxy() const;
     /// reimplemented from KCanvasBase
@@ -158,7 +158,7 @@ private slots:
 
 private:
     /// paint page margins
-    void paintMargins(QPainter &painter, const KoViewConverter &converter);
+    void paintMargins(QPainter &painter, const KViewConverter &converter);
 
     class KarbonCanvasPrivate;
     KarbonCanvasPrivate * const d;

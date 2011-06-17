@@ -19,7 +19,7 @@
 */
 
 #include "KoGridData.h"
-#include "KoViewConverter.h"
+#include "KViewConverter.h"
 
 #include <KUnit.h>
 #include <KOdfSettings.h>
@@ -118,7 +118,7 @@ void KoGridData::setShowGrid(bool showGrid)
     d->showGrid = showGrid;
 }
 
-void KoGridData::paintGrid(QPainter &painter, const KoViewConverter &converter, const QRectF &area) const
+void KoGridData::paintGrid(QPainter &painter, const KViewConverter &converter, const QRectF &area) const
 {
     if (! showGrid())
         return;

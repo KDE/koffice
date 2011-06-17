@@ -21,7 +21,7 @@
 #define KOSHAPECONTAINER_H
 
 #include "KShape.h"
-#include "KoViewConverter.h"
+#include "KViewConverter.h"
 
 #include <QList>
 
@@ -174,7 +174,7 @@ public:
 
 
     /// reimplemented
-    virtual void paint(QPainter &painter, const KoViewConverter &converter);
+    virtual void paint(QPainter &painter, const KViewConverter &converter);
 
     /**
      * @brief Paint the component
@@ -185,7 +185,7 @@ public:
      * @param converter to convert between internal and view coordinates.
      * @see applyConversion()
      */
-    virtual void paintComponent(QPainter &painter, const KoViewConverter &converter);
+    virtual void paintComponent(QPainter &painter, const KViewConverter &converter);
 
     /**
      * Create and return an iterator over all child shapes.

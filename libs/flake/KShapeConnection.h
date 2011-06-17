@@ -26,7 +26,7 @@
 
 class KShape;
 class QPainter;
-class KoViewConverter;
+class KViewConverter;
 class KXmlElement;
 class KShapeLoadingContext;
 class KShapeSavingContext;
@@ -100,7 +100,7 @@ public:
      * @param painter used for painting the shape
      * @param converter to convert between internal and view coordinates.
      */
-    void paint(QPainter &painter, const KoViewConverter &converter);
+    void paint(QPainter &painter, const KViewConverter &converter);
 
     /**
      * Return the first shape.

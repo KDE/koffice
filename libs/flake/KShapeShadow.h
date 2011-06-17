@@ -29,7 +29,7 @@ class KShape;
 class KOdfGenericStyle;
 class KShapeSavingContext;
 class QPainter;
-class KoViewConverter;
+class KViewConverter;
 struct KInsets;
 
 class FLAKE_EXPORT KShapeShadow
@@ -52,7 +52,7 @@ public:
      *       shape as its start coordinate.
      * @param converter to convert between internal and view coordinates.
      */
-    void paint(KShape *shape, QPainter &painter, const KoViewConverter &converter);
+    void paint(KShape *shape, QPainter &painter, const KViewConverter &converter);
 
     /**
      * Sets the shadow offset from the topleft corner of the shape

@@ -28,7 +28,7 @@
 
 #include <KPointerEvent.h>
 #include <KoPACanvas.h>
-#include <KoViewConverter.h>
+#include <KViewConverter.h>
 #include "SCPageEffectDocker.h"
 #include "SCClickActionDocker.h"
 
@@ -42,7 +42,7 @@ SCAnimationTool::~SCAnimationTool()
 }
 
 
-void SCAnimationTool::paint(QPainter &painter, const KoViewConverter &converter)
+void SCAnimationTool::paint(QPainter &painter, const KViewConverter &converter)
 {
     Q_UNUSED(painter);
     Q_UNUSED(converter);

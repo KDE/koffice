@@ -35,7 +35,7 @@ public:
     virtual ~ConnectStrategy() { }
     KShapeConnection::ConnectionType type() const { return m_type; }
 
-    virtual void paint(QPainter &painter, const KoViewConverter &converter) = 0;
+    virtual void paint(QPainter &painter, const KViewConverter &converter) = 0;
     virtual void setSkew(const QStringList &values) {
         Q_UNUSED(values);
     }

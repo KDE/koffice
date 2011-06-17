@@ -558,7 +558,7 @@ void TextTool::blinkCaret()
     repaintCaret();
 }
 
-void TextTool::paint(QPainter &painter, const KoViewConverter &converter)
+void TextTool::paint(QPainter &painter, const KViewConverter &converter)
 {
     if (m_textEditor.isNull())
         return;
@@ -1231,7 +1231,7 @@ void TextTool::keyPressEvent(QKeyEvent *event)
     updateSelectionHandler();
 }
 
-QVariant TextTool::inputMethodQuery(Qt::InputMethodQuery query, const KoViewConverter &converter) const
+QVariant TextTool::inputMethodQuery(Qt::InputMethodQuery query, const KViewConverter &converter) const
 {
     KoTextEditor *textEditor = m_textEditor.data();
     if (textEditor == 0 || m_textShapeData == 0)

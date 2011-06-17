@@ -23,7 +23,7 @@
 #include "KWPageManager.h"
 
 #include <KShapeBorderBase.h>
-#include <KoViewConverter.h>
+#include <KViewConverter.h>
 #include <KTextShapeData.h>
 #include <KShapeContainer.h>
 #include <KShapeLoadingContext.h> //for Q_UNUSED
@@ -52,7 +52,7 @@ KWCopyShape::~KWCopyShape()
         m_original->removeDependee(this);
 }
 
-void KWCopyShape::paint(QPainter &painter, const KoViewConverter &converter)
+void KWCopyShape::paint(QPainter &painter, const KViewConverter &converter)
 {
     if (!m_original)
         return;
@@ -105,7 +105,7 @@ void KWCopyShape::paint(QPainter &painter, const KoViewConverter &converter)
     }
 }
 
-void KWCopyShape::paintDecorations(QPainter &painter, const KoViewConverter &converter, const KCanvasBase *canvas)
+void KWCopyShape::paintDecorations(QPainter &painter, const KViewConverter &converter, const KCanvasBase *canvas)
 {
     if (m_original)
         m_original->paintDecorations(painter, converter, canvas);

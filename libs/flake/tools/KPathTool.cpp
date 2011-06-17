@@ -27,7 +27,7 @@
 #include "KCanvasBase.h"
 #include "KShapeManager.h"
 #include "KResourceManager.h"
-#include "KoViewConverter.h"
+#include "KViewConverter.h"
 #include "KSelection.h"
 #include "KPointerEvent.h"
 #include "commands/KPathPointTypeCommand_p.h"
@@ -394,7 +394,7 @@ void KPathTool::breakAtSegment()
     }
 }
 
-void KPathTool::paint(QPainter &painter, const KoViewConverter &converter)
+void KPathTool::paint(QPainter &painter, const KViewConverter &converter)
 {
     Q_D(KToolBase);
     painter.setRenderHint(QPainter::Antialiasing, true);

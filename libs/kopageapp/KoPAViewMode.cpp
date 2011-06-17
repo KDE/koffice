@@ -77,7 +77,7 @@ KoPAViewBase * KoPAViewMode::view() const
     return m_view;
 }
 
-KoViewConverter * KoPAViewMode::viewConverter(KoPACanvasBase * canvas)
+KViewConverter * KoPAViewMode::viewConverter(KoPACanvasBase * canvas)
 {
     return m_view->KoPAViewBase::viewConverter(canvas);
 }

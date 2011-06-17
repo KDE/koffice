@@ -52,7 +52,7 @@ public:
 
     void handleMouseMove(const QPointF &mouseLocation, Qt::KeyboardModifiers modifiers);
     QUndoCommand* createCommand(QUndoCommand *parent = 0);
-    virtual void paint(QPainter &painter, const KoViewConverter &converter);
+    virtual void paint(QPainter &painter, const KViewConverter &converter);
 
 private:
     struct Connection {

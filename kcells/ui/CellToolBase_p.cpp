@@ -66,7 +66,7 @@
 #include <KCanvasBase.h>
 #include <KCanvasController.h>
 #include <KResourceManager.h>
-#include <KoViewConverter.h>
+#include <KViewConverter.h>
 
 // KDE
 #include <KFontAction>

@@ -30,7 +30,7 @@
 class KShape;
 class KCanvasBase;
 class KPointerEvent;
-class KoViewConverter;
+class KViewConverter;
 class KToolSelection;
 class KToolBasePrivate;
 
@@ -92,7 +92,7 @@ public:
      * @param painter used for painting the shape
      * @param converter to convert between internal and view coordinates.
      */
-    virtual void paint(QPainter &painter, const KoViewConverter &converter) = 0;
+    virtual void paint(QPainter &painter, const KViewConverter &converter) = 0;
 
     /**
      * Return the option widgets for this tool. Create them if they
@@ -181,7 +181,7 @@ public:
      * @param query specifies which property is queried.
      * @param converter the view converter for the current canvas.
      */
-    virtual QVariant inputMethodQuery(Qt::InputMethodQuery query, const KoViewConverter &converter) const;
+    virtual QVariant inputMethodQuery(Qt::InputMethodQuery query, const KViewConverter &converter) const;
 
     /**
      * Text entry of complex text, like CJK, can be made more interactive if a tool

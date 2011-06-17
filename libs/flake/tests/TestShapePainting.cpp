@@ -51,7 +51,7 @@ void TestShapePainting::testPaintShape()
 
     QImage image(100, 100,  QImage::Format_Mono);
     QPainter painter(&image);
-    KoViewConverter vc;
+    KViewConverter vc;
     manager.paint(painter, vc, false);
 
     // with the shape not being clipped, the shapeManager will paint it for us.
@@ -109,7 +109,7 @@ void TestShapePainting::testPaintHiddenShape()
 
     QImage image(100, 100,  QImage::Format_Mono);
     QPainter painter(&image);
-    KoViewConverter vc;
+    KViewConverter vc;
     manager.paint(painter, vc, false);
 
     QCOMPARE(top.paintedCount, 1);
@@ -132,7 +132,7 @@ void TestShapePainting::testPaintOrder()
     class OrderedMockShape : public MockShape {
     public:
         OrderedMockShape(QList<MockShape*> &list) : order(list) {}
-        void paint(QPainter &painter, const KoViewConverter &converter) {
+        void paint(QPainter &painter, const KViewConverter &converter) {
             order.append(this);
             MockShape::paint(painter, converter);
         }
@@ -167,7 +167,7 @@ void TestShapePainting::testPaintOrder()
 
     QImage image(100, 100,  QImage::Format_Mono);
     QPainter painter(&image);
-    KoViewConverter vc;
+    KViewConverter vc;
     manager.paint(painter, vc, false);
     QCOMPARE(top.paintedCount, 1);
     QCOMPARE(bottom.paintedCount, 1);

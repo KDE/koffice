@@ -37,7 +37,7 @@ public:
     explicit KarbonCalligraphyTool(KCanvasBase *canvas);
     ~KarbonCalligraphyTool();
 
-    void paint(QPainter &painter, const KoViewConverter &converter);
+    void paint(QPainter &painter, const KViewConverter &converter);
 
     void mousePressEvent(KPointerEvent *event) ;
     void mouseMoveEvent(KPointerEvent *event);

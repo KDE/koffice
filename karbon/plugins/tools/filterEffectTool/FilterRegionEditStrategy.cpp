@@ -21,7 +21,7 @@
 #include "FilterRegionChangeCommand.h"
 #include <KShape.h>
 #include <KFilterEffect.h>
-#include <KoViewConverter.h>
+#include <KViewConverter.h>
 #include <QtGui/QPainter>
 
 FilterRegionEditStrategy::FilterRegionEditStrategy(KToolBase* parent, KShape * shape, KFilterEffect *effect, KarbonFilterEffectsTool::EditMode mode)
@@ -79,7 +79,7 @@ QUndoCommand *FilterRegionEditStrategy::createCommand(QUndoCommand *parent)
     return new FilterRegionChangeCommand(m_effect, QRectF(x,y,w,h), m_shape, parent);
 }
 
-void FilterRegionEditStrategy::paint(QPainter &painter, const KoViewConverter &converter)
+void FilterRegionEditStrategy::paint(QPainter &painter, const KViewConverter &converter)
 {
     Q_UNUSED(converter);
     // paint the filter subregion rect

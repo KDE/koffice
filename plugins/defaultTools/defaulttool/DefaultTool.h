@@ -63,7 +63,7 @@ public:
     ///reimplemented
     virtual bool wantsAutoScroll() const;
     ///reimplemented
-    virtual void paint(QPainter &painter, const KoViewConverter &converter);
+    virtual void paint(QPainter &painter, const KViewConverter &converter);
 
     ///reimplemented
     virtual void repaintDecorations();

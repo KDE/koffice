@@ -108,7 +108,7 @@ void ShapeRotateStrategy::rotateBy(qreal angle)
     tool()->canvas()->shapeManager()->selection()->applyAbsoluteTransformation(applyMatrix);
 }
 
-void ShapeRotateStrategy::paint(QPainter &painter, const KoViewConverter &converter)
+void ShapeRotateStrategy::paint(QPainter &painter, const KViewConverter &converter)
 {
     SelectionDecorator decorator(KoFlake::NoHandle, true, false);
     decorator.setSelection(tool()->canvas()->shapeManager()->selection());

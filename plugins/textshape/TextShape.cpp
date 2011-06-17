@@ -64,7 +64,7 @@ struct Finalizer {
 #include <KTextPage.h>
 #include <KTextShapeContainerModel.h>
 #include <KPageProvider_p.h> // the exported class for the showcase hack
-#include <KoViewConverter.h>
+#include <KViewConverter.h>
 #include <KXmlWriter.h>
 #include <KXmlReader.h>
 #include <KOdfXmlNS.h>
@@ -121,7 +121,7 @@ void TextShape::setDemoText(bool on)
     }
 }
 
-void TextShape::paintComponent(QPainter &painter, const KoViewConverter &converter)
+void TextShape::paintComponent(QPainter &painter, const KViewConverter &converter)
 {
     applyConversion(painter, converter);
     if (background()) {
@@ -212,7 +212,7 @@ void TextShape::shapeChanged(ChangeType type, KShape *shape)
     }
 }
 
-void TextShape::paintDecorations(QPainter &painter, const KoViewConverter &converter, const KCanvasBase *canvas)
+void TextShape::paintDecorations(QPainter &painter, const KViewConverter &converter, const KCanvasBase *canvas)
 {
     bool showTextFrames = canvas->resourceManager()->boolResource(KoText::ShowTextFrames);
 
@@ -450,7 +450,7 @@ void TextShape::markLayoutDone()
     }
 }
 
-void TextShape::waitUntilReady(const KoViewConverter &, bool asynchronous) const
+void TextShape::waitUntilReady(const KViewConverter &, bool asynchronous) const
 {
     KTextDocumentLayout *lay = qobject_cast<KTextDocumentLayout*>(m_textShapeData->document()->documentLayout());
     Q_ASSERT(lay);

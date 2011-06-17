@@ -21,7 +21,7 @@
 #ifndef _KO_TOOL_PROXY_H_
 #define _KO_TOOL_PROXY_H_
 
-#include <KoViewConverter.h>
+#include <KViewConverter.h>
 #include <KToolManager.h>
 #include "flake_export.h"
 
@@ -63,7 +63,7 @@ public:
     ~KToolProxy();
 
     /// Forwarded to the current KToolBase
-    void paint(QPainter &painter, const KoViewConverter &converter);
+    void paint(QPainter &painter, const KViewConverter &converter);
     /// Forwarded to the current KToolBase
     void repaintDecorations();
     /// Forwarded to the current KToolBase
@@ -83,7 +83,7 @@ public:
     /// Forwarded to the current KToolBase
     void wheelEvent(QWheelEvent * event, const QPointF &point);
     /// Forwarded to the current KToolBase
-    QVariant inputMethodQuery(Qt::InputMethodQuery query, const KoViewConverter &converter) const;
+    QVariant inputMethodQuery(Qt::InputMethodQuery query, const KViewConverter &converter) const;
     /// Forwarded to the current KToolBase
     void inputMethodEvent(QInputMethodEvent *event);
     /// Forwarded to the current KToolBase

@@ -47,7 +47,7 @@ public:
     KoPAMasterPage * masterPage() { return m_masterPage; }
 
     /// reimplemented
-    virtual void paintBackground(QPainter &painter, const KoViewConverter &converter);
+    virtual void paintBackground(QPainter &painter, const KViewConverter &converter);
 
     /// reimplemented
     virtual bool displayMasterShapes();

@@ -21,7 +21,7 @@
 
 #include "PictureShape.h"
 
-#include <KoViewConverter.h>
+#include <KViewConverter.h>
 #include <KImageCollection.h>
 #include <KImageData.h>
 #include <KShapeLoadingContext.h>
@@ -87,7 +87,7 @@ PictureShape::~PictureShape()
     delete m_renderQueue;
 }
 
-void PictureShape::paint(QPainter &painter, const KoViewConverter &converter)
+void PictureShape::paint(QPainter &painter, const KViewConverter &converter)
 {
     QRectF pixelsF = converter.documentToView(QRectF(QPointF(0,0), size()));
     KImageData *imageData = qobject_cast<KImageData*>(userData());
@@ -156,7 +156,7 @@ void PictureShape::paint(QPainter &painter, const KoViewConverter &converter)
     painter.drawPixmap(pixels, pixmap, QRect(0, 0, pixmap.width(), pixmap.height()));
 }
 
-void PictureShape::waitUntilReady(const KoViewConverter &converter, bool asynchronous) const
+void PictureShape::waitUntilReady(const KViewConverter &converter, bool asynchronous) const
 {
     KImageData *imageData = qobject_cast<KImageData*>(userData());
     if (imageData == 0) {

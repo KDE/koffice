@@ -114,7 +114,7 @@ void KoPAPage::setMasterPage(KoPAMasterPage * masterPage)
     m_masterPage = masterPage;
 }
 
-void KoPAPage::paintBackground(QPainter &painter, const KoViewConverter &converter)
+void KoPAPage::paintBackground(QPainter &painter, const KViewConverter &converter)
 {
     if (m_pageProperties & UseMasterBackground) {
         if (m_pageProperties & DisplayMasterBackground) {

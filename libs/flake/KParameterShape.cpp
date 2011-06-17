@@ -76,7 +76,7 @@ QPointF KParameterShape::handlePosition(int handleId)
     return d->handles.value(handleId);
 }
 
-void KParameterShape::paintHandles(QPainter & painter, const KoViewConverter & converter, int handleRadius)
+void KParameterShape::paintHandles(QPainter & painter, const KViewConverter & converter, int handleRadius)
 {
     Q_D(KParameterShape);
     applyConversion(painter, converter);
@@ -98,7 +98,7 @@ void KParameterShape::paintHandles(QPainter & painter, const KoViewConverter & c
     }
 }
 
-void KParameterShape::paintHandle(QPainter & painter, const KoViewConverter & converter, int handleId, int handleRadius)
+void KParameterShape::paintHandle(QPainter & painter, const KViewConverter & converter, int handleId, int handleRadius)
 {
     Q_D(KParameterShape);
     applyConversion(painter, converter);

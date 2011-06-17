@@ -25,7 +25,7 @@
 
 class KShapeManager;
 class KShape;
-class KoViewConverter;
+class KViewConverter;
 class QPainter;
 class QRectF;
 
@@ -50,7 +50,7 @@ public:
      * @param converter to convert between document and view coordinates.
      * @param forPrint if true, make sure only actual content is drawn and no decorations.
      */
-    virtual void paint(KShape *shape, QPainter &painter, const KoViewConverter &converter, bool forPrint);
+    virtual void paint(KShape *shape, QPainter &painter, const KViewConverter &converter, bool forPrint);
 
     /**
      * Adapt the rect the shape occupies

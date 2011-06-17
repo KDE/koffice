@@ -116,7 +116,7 @@ public:
     KTextShapeData * const textShapeData; // will be deleted by KShape
 
 private:
-    virtual void paint(QPainter&, const KoViewConverter&) {}
+    virtual void paint(QPainter&, const KViewConverter&) {}
     virtual void saveOdf(KShapeSavingContext &) const { }
     virtual bool loadOdf(const KXmlElement &, KShapeLoadingContext &) {
         return false;

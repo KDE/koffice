@@ -64,7 +64,7 @@ KarbonCalligraphyTool::~KarbonCalligraphyTool()
 }
 
 void KarbonCalligraphyTool::paint(QPainter &painter,
-                                  const KoViewConverter &converter)
+                                  const KViewConverter &converter)
 {
     if (m_selectedPath) {
         painter.save();

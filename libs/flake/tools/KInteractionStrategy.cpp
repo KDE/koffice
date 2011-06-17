@@ -52,7 +52,7 @@ KInteractionStrategy::~KInteractionStrategy()
     delete d;
 }
 
-void KInteractionStrategy::paint(QPainter &, const KoViewConverter &)
+void KInteractionStrategy::paint(QPainter &, const KViewConverter &)
 {
 }
 

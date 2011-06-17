@@ -36,7 +36,7 @@ public:
     explicit KCCellTool(KCanvasBase* canvas);
     ~KCCellTool();
 
-    virtual void paint(QPainter &painter, const KoViewConverter &converter);
+    virtual void paint(QPainter &painter, const KViewConverter &converter);
 
 public Q_SLOTS:
     virtual void activate(ToolActivation toolActivation, const QSet<KShape*> &shapes);

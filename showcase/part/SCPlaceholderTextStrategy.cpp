@@ -76,7 +76,7 @@ KShape *SCPlaceholderTextStrategy::createShape(KResourceManager *documentResourc
     return shape;
 }
 
-void SCPlaceholderTextStrategy::paint(QPainter &painter, const KoViewConverter &converter, const QRectF &rect)
+void SCPlaceholderTextStrategy::paint(QPainter &painter, const KViewConverter &converter, const QRectF &rect)
 {
     if (m_textShape) {
         painter.save();

@@ -50,7 +50,7 @@ KCreateShapesTool::~KCreateShapesTool()
 {
 }
 
-void KCreateShapesTool::paint(QPainter &painter, const KoViewConverter &converter)
+void KCreateShapesTool::paint(QPainter &painter, const KViewConverter &converter)
 {
     if (currentStrategy())
         currentStrategy()->paint(painter, converter);

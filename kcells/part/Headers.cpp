@@ -533,7 +533,7 @@ void KCRowHeader::paintEvent(QPaintEvent* event)
     // Align to the offset
     yPos = yPos - m_pCanvas->yOffset();
 
-    const KoViewConverter *converter = m_pCanvas->viewConverter();
+    const KViewConverter *converter = m_pCanvas->viewConverter();
     const double width = converter->viewToDocumentX(this->width() - 1);
 
     QSet<int> selectedRows;
@@ -1228,7 +1228,7 @@ void KCColumnHeader::paintEvent(QPaintEvent* event)
         xPos = xPos - m_pCanvas->xOffset();
     }
 
-    const KoViewConverter *converter = m_pCanvas->viewConverter();
+    const KViewConverter *converter = m_pCanvas->viewConverter();
     const double height = converter->viewToDocumentY(this->height() - 1);
 
     if (sheet->layoutDirection() == Qt::RightToLeft) {

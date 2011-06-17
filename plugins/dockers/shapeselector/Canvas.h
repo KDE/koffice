@@ -63,7 +63,7 @@ public:
     /// implementing KCanvasBase
     virtual KToolProxy *toolProxy() const { return 0; }
     /// implementing KCanvasBase
-    virtual const KoViewConverter * viewConverter() const { return &m_converter; }
+    virtual const KViewConverter * viewConverter() const { return &m_converter; }
     /// implementing KCanvasBase
     virtual QWidget *canvasWidget();
     /// implementing KCanvasBase

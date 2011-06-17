@@ -45,7 +45,7 @@ public:
 
     bool wantsAutoScroll() const;
 
-    void paint(QPainter &painter, const KoViewConverter &converter);
+    void paint(QPainter &painter, const KViewConverter &converter);
 
     void mousePressEvent(KPointerEvent *event);
     void mouseDoubleClickEvent(KPointerEvent *event);

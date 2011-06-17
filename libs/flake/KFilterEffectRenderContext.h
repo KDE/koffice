@@ -24,13 +24,13 @@
 
 class QRectF;
 class QPointF;
-class KoViewConverter;
+class KViewConverter;
 
 /// This class provides the render context for filter effects
 class FLAKE_EXPORT KFilterEffectRenderContext
 {
 public:
-    KFilterEffectRenderContext(const KoViewConverter &converter);
+    KFilterEffectRenderContext(const KViewConverter &converter);
     ~KFilterEffectRenderContext();
 
     /// Returns the filter region the filter is applied to
@@ -52,7 +52,7 @@ public:
     qreal toUserSpaceY(qreal value) const;
 
     /// Returns the view converter
-    const KoViewConverter *viewConverter() const;
+    const KViewConverter *viewConverter() const;
 
 private:
     class Private;

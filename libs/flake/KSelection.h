@@ -28,7 +28,7 @@
 #include <QSet>
 
 #include "KShape.h"
-#include "KoViewConverter.h"
+#include "KViewConverter.h"
 #include "KoFlake.h"
 
 #include "flake_export.h"

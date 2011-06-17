@@ -67,7 +67,7 @@ public:
     ~TextTool();
 
     /// reimplemented from superclass
-    virtual void paint(QPainter &painter, const KoViewConverter &converter);
+    virtual void paint(QPainter &painter, const KViewConverter &converter);
 
     /// reimplemented from superclass
     virtual void mousePressEvent(KPointerEvent *event) ;
@@ -104,7 +104,7 @@ public:
     /// reimplemented from superclass
     virtual QWidget *createOptionWidget();
     /// reimplemented from superclass
-    virtual QVariant inputMethodQuery(Qt::InputMethodQuery query, const KoViewConverter &converter) const;
+    virtual QVariant inputMethodQuery(Qt::InputMethodQuery query, const KViewConverter &converter) const;
     /// reimplemented from superclass
     virtual void inputMethodEvent(QInputMethodEvent * event);
 

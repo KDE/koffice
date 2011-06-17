@@ -23,7 +23,7 @@
 #include "KoPAViewMode.h"
 
 class KoPACanvasBase;
-class KoViewConverter;
+class KViewConverter;
 class KoPAPageBase;
 class KoZoomHandler;
 class KoPADocument;
@@ -55,8 +55,8 @@ public:
     virtual KoPADocument * kopaDocument() const = 0;
 
     /// XXX
-    virtual KoViewConverter * viewConverter(KoPACanvasBase * canvas);
-    virtual KoViewConverter * viewConverter() const;
+    virtual KViewConverter * viewConverter(KoPACanvasBase * canvas);
+    virtual KViewConverter * viewConverter() const;
     virtual KoZoomController * zoomController() const = 0;
 
     virtual KoZoomHandler * zoomHandler();

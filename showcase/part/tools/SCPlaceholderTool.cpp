@@ -40,7 +40,7 @@ SCPlaceholderTool::~SCPlaceholderTool()
 {
 }
 
-void SCPlaceholderTool::paint(QPainter &painter, const KoViewConverter &converter)
+void SCPlaceholderTool::paint(QPainter &painter, const KViewConverter &converter)
 {
     Q_UNUSED(painter);
     Q_UNUSED(converter);

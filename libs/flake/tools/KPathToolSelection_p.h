@@ -41,7 +41,7 @@
 class KPathTool;
 class KPathPoint;
 class KPathPointData;
-class KoViewConverter;
+class KViewConverter;
 class QPainter;
 
 /**
@@ -60,7 +60,7 @@ public:
     ~KPathToolSelection();
 
     /// @brief Draw the selected points
-    void paint(QPainter &painter, const KoViewConverter &converter);
+    void paint(QPainter &painter, const KViewConverter &converter);
 
     /**
     * @brief Add a point to the selection

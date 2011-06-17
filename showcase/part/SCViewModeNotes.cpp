@@ -65,7 +65,7 @@ void SCViewModeNotes::paint(KoPACanvasBase* canvas, QPainter &painter, const QRe
     QRectF clipRect = paintRect.translated(m_canvas->documentOffset());
     painter.setClipRect(clipRect);
 
-    KoViewConverter *converter = m_view->viewConverter(m_canvas);
+    KViewConverter *converter = m_view->viewConverter(m_canvas);
     m_canvas->shapeManager()->paint(painter, *converter, false);
     m_toolProxy->paint(painter, *converter);
 

@@ -61,7 +61,7 @@ public:
     virtual ~KCreatePathTool();
 
     /// reimplemented
-    virtual void paint(QPainter &painter, const KoViewConverter &converter);
+    virtual void paint(QPainter &painter, const KViewConverter &converter);
 
     /// reimplemented
     virtual void mousePressEvent(KPointerEvent *event);
@@ -94,7 +94,7 @@ protected:
     /**
       * This method is called to paint the path. Decorations are drawn by KCreatePathTool afterwards.
       */
-    virtual void paintPath(KPathShape& pathShape, QPainter &painter, const KoViewConverter &converter);
+    virtual void paintPath(KPathShape& pathShape, QPainter &painter, const KViewConverter &converter);
 
     /// reimplemented
     virtual QMap<QString, QWidget *> createOptionWidgets();

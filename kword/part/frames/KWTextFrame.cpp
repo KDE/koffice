@@ -20,7 +20,7 @@
 #include "KWTextFrame.h"
 #include "KWTextFrameSet.h"
 
-#include <KoViewConverter.h>
+#include <KViewConverter.h>
 #include <KTextShapeData.h>
 
 #include <kdebug.h>

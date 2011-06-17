@@ -32,7 +32,7 @@ class MockShape : public KShape
 {
 public:
     MockShape() : paintedCount(0) {}
-    void paint(QPainter &painter, const KoViewConverter &converter) {
+    void paint(QPainter &painter, const KViewConverter &converter) {
         Q_UNUSED(painter);
         Q_UNUSED(converter);
         //qDebug() << "Shape" << kBacktrace(10);
@@ -46,7 +46,7 @@ class MockContainer : public KShapeContainer
 public:
     MockContainer(KShapeContainerModel *model) : KShapeContainer(model), paintedCount(0) {}
     MockContainer() : paintedCount(0) {}
-    void paintComponent(QPainter &painter, const KoViewConverter &converter) {
+    void paintComponent(QPainter &painter, const KViewConverter &converter) {
         Q_UNUSED(painter);
         Q_UNUSED(converter);
         //qDebug() << "Container:" << kBacktrace(10);
@@ -58,7 +58,7 @@ public:
 
 class MockGroup : public KShapeGroup
 {
-    void paintComponent(QPainter &painter, const KoViewConverter &converter) {
+    void paintComponent(QPainter &painter, const KViewConverter &converter) {
         Q_UNUSED(painter);
         Q_UNUSED(converter);
     }
@@ -85,7 +85,7 @@ public:
     KToolProxy * toolProxy() const {
         return 0;
     }
-    KoViewConverter *viewConverter() const {
+    KViewConverter *viewConverter() const {
         return 0;
     }
     QWidget* canvasWidget() {

@@ -25,7 +25,7 @@
 #include "KWPage.h"
 
 #include <KoView.h>
-#include <KoViewConverter.h>
+#include <KViewConverter.h>
 #include <KoZoomHandler.h>
 #include <KShapeReorderCommand.h>
 
@@ -90,7 +90,7 @@ public:
     KWCanvas *kwcanvas() const;
 
     /// Return the view converter for this view.
-    KoViewConverter *viewConverter() {
+    KViewConverter *viewConverter() {
         return &m_zoomHandler;
     }
 

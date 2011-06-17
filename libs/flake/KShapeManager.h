@@ -31,7 +31,7 @@
 
 class KShape;
 class KSelection;
-class KoViewConverter;
+class KViewConverter;
 class KCanvasBase;
 class KPointerEvent;
 class KShapeManagerPaintingStrategy;
@@ -127,7 +127,7 @@ public:
      * @param forPrint if true, make sure only actual content is drawn and no decorations.
      * @param converter to convert between document and view coordinates.
      */
-    void paint(QPainter &painter, const KoViewConverter &converter, bool forPrint);
+    void paint(QPainter &painter, const KViewConverter &converter, bool forPrint);
 
     /**
      * Returns the shape located at a specific point in the document.
@@ -173,7 +173,7 @@ public:
      * @param converter to convert between document and view coordinates.
      * @param forPrint if true, make sure only actual content is drawn and no decorations.
      */
-    void paintShape(KShape *shape, QPainter &painter, const KoViewConverter &converter, bool forPrint);
+    void paintShape(KShape *shape, QPainter &painter, const KViewConverter &converter, bool forPrint);
 
     /**
      * Set the strategy of the KShapeManager

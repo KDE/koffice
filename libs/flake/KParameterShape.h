@@ -83,7 +83,7 @@ public:
      * @param converter the view converter for applying the actual zoom
      * @param handleRadius the radius of the handles used for painting
      */
-    void paintHandles(QPainter &painter, const KoViewConverter &converter, int handleRadius);
+    void paintHandles(QPainter &painter, const KViewConverter &converter, int handleRadius);
 
     /**
      * @brief Paint the given handles
@@ -93,7 +93,7 @@ public:
      * @param handleId of the handle which should be repainted
      * @param handleRadius the radius of the handle used for painting
      */
-    void paintHandle(QPainter &painter, const KoViewConverter &converter, int handleId, int handleRadius);
+    void paintHandle(QPainter &painter, const KViewConverter &converter, int handleId, int handleRadius);
 
     /// reimplemented from KShape
     virtual void setSize(const QSizeF &size);

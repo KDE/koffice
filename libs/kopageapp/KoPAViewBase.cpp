@@ -41,7 +41,7 @@ KoPAViewBase::~KoPAViewBase()
     delete proxyObject;
 }
 
-KoViewConverter* KoPAViewBase::viewConverter(KoPACanvasBase * canvas)
+KViewConverter* KoPAViewBase::viewConverter(KoPACanvasBase * canvas)
 {
     Q_UNUSED(canvas);
 
@@ -53,7 +53,7 @@ KoZoomHandler* KoPAViewBase::zoomHandler()
     return &d->zoomHandler;
 }
 
-KoViewConverter* KoPAViewBase::viewConverter() const
+KViewConverter* KoPAViewBase::viewConverter() const
 {
     return &d->zoomHandler;
 }

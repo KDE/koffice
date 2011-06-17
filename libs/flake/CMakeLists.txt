@@ -88,7 +88,7 @@ set(flake_SRCS
     KShapeShadow.cpp
     KSharedSavingData.cpp
     KSharedLoadingData.cpp
-    KoViewConverter.cpp
+    KViewConverter.cpp
     KEventAction.cpp
     KEventActionFactoryBase.cpp
     KEventActionRegistry.cpp
@@ -300,7 +300,7 @@ install(
     KToolProxy.h
     KToolRegistry.h
     KToolSelection.h
-    KoViewConverter.h
+    KViewConverter.h
     tools/KCreateShapesTool.h
     tools/KInteractionStrategy.h
     tools/KInteractionTool.h

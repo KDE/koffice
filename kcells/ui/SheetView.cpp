@@ -25,7 +25,7 @@
 #include <QPainter>
 
 
-#include <KoViewConverter.h>
+#include <KViewConverter.h>
 
 #include "CellView.h"
 #include "kcells_limits.h"
@@ -37,7 +37,7 @@ class SheetView::Private
 {
 public:
     const KCSheet* sheet;
-    const KoViewConverter* viewConverter;
+    const KViewConverter* viewConverter;
     QRect visibleRect;
     QCache<QPoint, CellView> cache;
     QRegion cachedArea;
@@ -132,13 +132,13 @@ const KCSheet* SheetView::sheet() const
     return d->sheet;
 }
 
-void SheetView::setViewConverter(const KoViewConverter* viewConverter)
+void SheetView::setViewConverter(const KViewConverter* viewConverter)
 {
     Q_ASSERT(viewConverter);
     d->viewConverter = viewConverter;
 }
 
-const KoViewConverter* SheetView::viewConverter() const
+const KViewConverter* SheetView::viewConverter() const
 {
     Q_ASSERT(d->viewConverter);
     return d->viewConverter;

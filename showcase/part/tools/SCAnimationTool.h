@@ -40,7 +40,7 @@ public:
 
 public:
 
-    virtual void paint(QPainter &painter, const KoViewConverter &converter);
+    virtual void paint(QPainter &painter, const KViewConverter &converter);
 
 public slots:
     virtual void activate(ToolActivation toolActivation, const QSet<KShape*> &shapes);

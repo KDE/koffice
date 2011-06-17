@@ -23,7 +23,7 @@
 #include <KPathShape.h>
 #include <KPathPoint.h>
 #include <KCanvasBase.h>
-#include <KoViewConverter.h>
+#include <KViewConverter.h>
 #include <KGuidesData.h>
 
 #include <QtGui/QPainter>
@@ -114,7 +114,7 @@ bool OrthogonalSnapStrategy::snap(const QPointF &mousePosition, KSnapProxy * pro
     return (minHorzDist < HUGE_VAL || minVertDist < HUGE_VAL);
 }
 
-QPainterPath OrthogonalSnapStrategy::decoration(const KoViewConverter &converter) const
+QPainterPath OrthogonalSnapStrategy::decoration(const KViewConverter &converter) const
 {
     Q_UNUSED(converter);
 
@@ -159,7 +159,7 @@ bool NodeSnapStrategy::snap(const QPointF &mousePosition, KSnapProxy * proxy, qr
     return (minDistance < HUGE_VAL);
 }
 
-QPainterPath NodeSnapStrategy::decoration(const KoViewConverter &converter) const
+QPainterPath NodeSnapStrategy::decoration(const KViewConverter &converter) const
 {
     QRectF unzoomedRect = converter.viewToDocument(QRectF(0, 0, 11, 11));
     unzoomedRect.moveCenter(snappedPosition());
@@ -281,7 +281,7 @@ bool ExtensionSnapStrategy::snap(const QPointF &mousePosition, KSnapProxy * prox
     return true;
 }
 
-QPainterPath ExtensionSnapStrategy::decoration(const KoViewConverter &converter) const
+QPainterPath ExtensionSnapStrategy::decoration(const KViewConverter &converter) const
 {
     Q_UNUSED(converter);
 
@@ -396,7 +396,7 @@ bool IntersectionSnapStrategy::snap(const QPointF &mousePosition, KSnapProxy *pr
     return (minDistance < HUGE_VAL);
 }
 
-QPainterPath IntersectionSnapStrategy::decoration(const KoViewConverter &converter) const
+QPainterPath IntersectionSnapStrategy::decoration(const KViewConverter &converter) const
 {
     QRectF unzoomedRect = converter.viewToDocument(QRectF(0, 0, 11, 11));
     unzoomedRect.moveCenter(snappedPosition());
@@ -457,7 +457,7 @@ bool GridSnapStrategy::snap(const QPointF &mousePosition, KSnapProxy *proxy, qre
     return (distance < maxDistance);
 }
 
-QPainterPath GridSnapStrategy::decoration(const KoViewConverter &converter) const
+QPainterPath GridSnapStrategy::decoration(const KViewConverter &converter) const
 {
     QSizeF unzoomedSize = converter.viewToDocument(QSizeF(5, 5));
     QPainterPath decoration;
@@ -540,7 +540,7 @@ qreal BoundingBoxSnapStrategy::squareDistanceToLine(const QPointF &lineA, const 
     return distVec.x()*distVec.x() + distVec.y()*distVec.y();
 }
 
-QPainterPath BoundingBoxSnapStrategy::decoration(const KoViewConverter &converter) const
+QPainterPath BoundingBoxSnapStrategy::decoration(const KViewConverter &converter) const
 {
     QSizeF unzoomedSize = converter.viewToDocument(QSizeF(5, 5));
 
@@ -591,7 +591,7 @@ bool LineGuideSnapStrategy::snap(const QPointF &mousePosition, KSnapProxy * prox
     return (minHorzDistance < maxSnapDistance || minVertSnapDistance < maxSnapDistance);
 }
 
-QPainterPath LineGuideSnapStrategy::decoration(const KoViewConverter &converter) const
+QPainterPath LineGuideSnapStrategy::decoration(const KViewConverter &converter) const
 {
     QSizeF unzoomedSize = converter.viewToDocument(QSizeF(5, 5));
     QPainterPath decoration;

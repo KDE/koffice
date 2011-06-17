@@ -42,7 +42,7 @@ public:
     ~SCView();
 
     using KoPAViewBase::viewConverter;
-    virtual KoViewConverter * viewConverter(KoPACanvasBase * canvas);
+    virtual KViewConverter * viewConverter(KoPACanvasBase * canvas);
 
     /**
      * Get the document object the view was initialised with

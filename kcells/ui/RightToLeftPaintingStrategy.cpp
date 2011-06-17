@@ -25,7 +25,7 @@
 #include <KCanvasController.h>
 #include <KShape.h>
 #include <KShapeManager.h>
-#include <KoViewConverter.h>
+#include <KViewConverter.h>
 
 class RightToLeftPaintingStrategy::Private
 {
@@ -47,7 +47,7 @@ RightToLeftPaintingStrategy::~RightToLeftPaintingStrategy()
 }
 
 void RightToLeftPaintingStrategy::paint(KShape *shape, QPainter &painter,
-                                        const KoViewConverter &converter, bool forPrint)
+                                        const KViewConverter &converter, bool forPrint)
 {
     painter.save();
     const double width = d->canvas->canvasWidget()->width();

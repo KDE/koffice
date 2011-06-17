@@ -23,7 +23,7 @@
 
 #include <KPathShape.h>
 #include <KPathPoint.h>
-#include <KoViewConverter.h>
+#include <KViewConverter.h>
 #include <KCanvasBase.h>
 #include <KShapeManager.h>
 
@@ -174,7 +174,7 @@ QRectF KSnapGuide::boundingRect()
     }
 }
 
-void KSnapGuide::paint(QPainter &painter, const KoViewConverter &converter)
+void KSnapGuide::paint(QPainter &painter, const KViewConverter &converter)
 {
     if (! d->currentStrategy || ! d->active)
         return;

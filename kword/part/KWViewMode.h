@@ -23,7 +23,7 @@
 #define KWVIEWMODE_H
 
 class KWPageManager;
-class KoViewConverter;
+class KViewConverter;
 class KWDocument;
 class KWCanvas;
 
@@ -48,7 +48,7 @@ class KWCanvas;
  * the KWCanvas::viewConverter() for that.  This means that to the user of this API zooming
  * is applied just like translation is.
  *
- * This class provides a layer on top of the KoViewConverter and KWord should not use that
+ * This class provides a layer on top of the KViewConverter and KWord should not use that
  * interface directly.
  */
 class KWORD_TEST_EXPORT KWViewMode : public QObject
@@ -139,7 +139,7 @@ public slots:
      */
     void pageSetupChanged();
     void setPageManager(KWPageManager *pageManager) { m_pageManager = pageManager; updatePageCache(); }
-    void setViewConverter(const KoViewConverter *viewConverter) { m_viewConverter = viewConverter; }
+    void setViewConverter(const KViewConverter *viewConverter) { m_viewConverter = viewConverter; }
 
 protected:
     /**
@@ -148,7 +148,7 @@ protected:
     virtual void updatePageCache() = 0;
 
     KWPageManager *m_pageManager;
-    const KoViewConverter *m_viewConverter;
+    const KViewConverter *m_viewConverter;
 
 private:
     bool m_drawFrameBorders;

@@ -156,7 +156,7 @@ void ShapeShearStrategy::handleMouseMove(const QPointF &point, Qt::KeyboardModif
     m_shearMatrix = matrix;
 }
 
-void ShapeShearStrategy::paint(QPainter &painter, const KoViewConverter &converter)
+void ShapeShearStrategy::paint(QPainter &painter, const KViewConverter &converter)
 {
     SelectionDecorator decorator(KoFlake::NoHandle, true, false);
     decorator.setSelection(tool()->canvas()->shapeManager()->selection());

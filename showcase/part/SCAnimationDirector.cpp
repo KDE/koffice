@@ -46,7 +46,7 @@
 #include <KOdfPageLayoutData.h>
 #include <KShapeManager.h>
 #include <KShapeManagerPaintingStrategy.h>
-#include <KoViewConverter.h>
+#include <KViewConverter.h>
 #include <KoPAViewMode.h>
 #include <KoPACanvas.h>
 #include <KoPAPageBase.h>
@@ -149,7 +149,7 @@ void SCAnimationDirector::paintEvent(QPaintEvent* event)
     paint(painter, event->rect());
 }
 
-KoViewConverter * SCAnimationDirector::viewConverter()
+KViewConverter * SCAnimationDirector::viewConverter()
 {
     return &m_zoomHandler;
 }

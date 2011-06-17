@@ -45,7 +45,7 @@ public:
     virtual bool loadOdf(const KXmlElement &element, KShapeLoadingContext &context);
 
     /// reimplemented
-    virtual void paintComponent(QPainter&painter, const KoViewConverter &converter);
+    virtual void paintComponent(QPainter&painter, const KViewConverter &converter);
 
     /// Get the page layout for this presentation notes
     virtual KOdfPageLayoutData &pageLayout();

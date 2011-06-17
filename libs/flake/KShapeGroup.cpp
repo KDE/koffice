@@ -42,7 +42,7 @@ KShapeGroup::~KShapeGroup()
 {
 }
 
-void KShapeGroup::paintComponent(QPainter &painter, const KoViewConverter &converter)
+void KShapeGroup::paintComponent(QPainter &painter, const KViewConverter &converter)
 {
     Q_UNUSED(painter);
     Q_UNUSED(converter);

@@ -22,7 +22,7 @@
 #include "KResourceManager.h"
 #include "KShapeController.h"
 #include "KCanvasController.h"
-#include "KoViewConverter.h"
+#include "KViewConverter.h"
 #include "KSnapGuide.h"
 #include "SnapGuideConfigWidget_p.h"
 

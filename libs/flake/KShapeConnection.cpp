@@ -23,7 +23,7 @@
 #include "KShapeManager.h"
 #include "KShapeManager_p.h"
 #include "KShapeBorderBase.h"
-#include "KoViewConverter.h"
+#include "KViewConverter.h"
 #include "KPathShape.h"
 #include "KPathShape_p.h"
 #include "KPathPoint.h"
@@ -49,7 +49,7 @@ class ConnectLines : public ConnectStrategy
         : ConnectStrategy(qq, type) { }
     virtual ~ConnectLines() { }
 
-    virtual void paint(QPainter &painter, const KoViewConverter &converter);
+    virtual void paint(QPainter &painter, const KViewConverter &converter);
     virtual void setSkew(const QStringList &values);
     virtual void saveOdf(KShapeSavingContext &context) const;
     virtual QRectF boundingRect() const {
@@ -78,7 +78,7 @@ class ConnectCurve : public ConnectStrategy
     {
     }
 
-    virtual void paint(QPainter &painter, const KoViewConverter &converter);
+    virtual void paint(QPainter &painter, const KViewConverter &converter);
     virtual void saveOdf(KShapeSavingContext &context) const;
     virtual QRectF boundingRect() const {
         QPointF start = q->q->startPoint();
@@ -280,7 +280,7 @@ QLineF ConnectLines::calculateShape2Fallout() const
     return q->calculateShapeFalloutPrivate(q->resolveEndPoint(), false);
 }
 
-void ConnectLines::paint(QPainter &painter, const KoViewConverter &converter)
+void ConnectLines::paint(QPainter &painter, const KViewConverter &converter)
 {
     recalc();
     QPen pen(Qt::black);
@@ -332,7 +332,7 @@ void ConnectLines::saveOdf(KShapeSavingContext &context) const
     // We should try to save the svg:d
 }
 
-void ConnectCurve::paint(QPainter &painter, const KoViewConverter &converter)
+void ConnectCurve::paint(QPainter &painter, const KViewConverter &converter)
 {
     recalc();
     QPointF point1(q->resolveStartPoint());
@@ -432,7 +432,7 @@ KShapeConnection::~KShapeConnection()
     delete d;
 }
 
-void KShapeConnection::paint(QPainter &painter, const KoViewConverter &converter)
+void KShapeConnection::paint(QPainter &painter, const KViewConverter &converter)
 {
     if (d->connectionStrategy == 0)
         return;

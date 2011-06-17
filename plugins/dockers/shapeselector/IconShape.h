@@ -52,7 +52,7 @@ public:
     virtual QString toolTip() = 0;
     virtual void save(QDomElement &root) = 0;
     /// reimplemented
-    virtual void paint(QPainter &painter, const KoViewConverter &converter);
+    virtual void paint(QPainter &painter, const KViewConverter &converter);
 
     QPixmap pixmap() const { return m_icon; }
 

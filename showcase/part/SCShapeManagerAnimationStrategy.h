@@ -33,7 +33,7 @@ public:
     virtual ~SCShapeManagerAnimationStrategy();
 
     /// reimplemented
-    virtual void paint(KShape * shape, QPainter &painter, const KoViewConverter &converter, bool forPrint);
+    virtual void paint(KShape * shape, QPainter &painter, const KViewConverter &converter, bool forPrint);
 
     /// reimplemented
     virtual void adapt(KShape * shape, QRectF &rect);

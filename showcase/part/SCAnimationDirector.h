@@ -27,7 +27,7 @@
 
 class QPainter;
 class QPaintEvent;
-class KoViewConverter;
+class KViewConverter;
 class KShape;
 class KShapeManager;
 class KoPACanvas;
@@ -62,7 +62,7 @@ public:
     void paint(QPainter &painter, const QRectF &paintRect);
     void paintEvent(QPaintEvent* event);
 
-    KoViewConverter * viewConverter();
+    KViewConverter * viewConverter();
 
     /**
      * get the number of pages

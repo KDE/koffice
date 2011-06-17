@@ -27,7 +27,7 @@
 
 #include "kcells_export.h"
 #include "CellEditorBase.h"
-class KoViewConverter;
+class KViewConverter;
 
 class CellToolBase;
 class Selection;
@@ -49,7 +49,7 @@ public:
 
     Selection* selection() const;
 
-    void setEditorFont(QFont const & font, bool updateSize, const KoViewConverter *viewConverter);
+    void setEditorFont(QFont const & font, bool updateSize, const KViewConverter *viewConverter);
 
     int cursorPosition() const;
     void setCursorPosition(int pos);

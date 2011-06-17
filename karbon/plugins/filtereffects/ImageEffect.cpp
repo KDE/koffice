@@ -20,7 +20,7 @@
 #include "ImageEffect.h"
 #include "KFilterEffectRenderContext.h"
 #include "KFilterEffectLoadingContext.h"
-#include "KoViewConverter.h"
+#include "KViewConverter.h"
 #include "KXmlWriter.h"
 #include "KXmlReader.h"
 #include <KLocale>

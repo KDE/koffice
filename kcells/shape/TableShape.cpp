@@ -144,7 +144,7 @@ void TableShape::setRows(int rows)
     d->pageManager->setPrintSettings(settings);
 }
 
-void TableShape::paint(QPainter& painter, const KoViewConverter& converter)
+void TableShape::paint(QPainter& painter, const KViewConverter& converter)
 {
 #ifndef NDEBUG
     if (KShape::parent()) {

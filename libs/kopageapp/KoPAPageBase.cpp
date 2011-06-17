@@ -47,7 +47,7 @@ KoPAPageBase::~KoPAPageBase()
 {
 }
 
-void KoPAPageBase::paintBackground(QPainter &painter, const KoViewConverter &converter)
+void KoPAPageBase::paintBackground(QPainter &painter, const KViewConverter &converter)
 {
     painter.save();
     applyConversion(painter, converter);

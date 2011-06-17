@@ -32,7 +32,7 @@
 class KShape;
 class QPainter;
 class QColor;
-class KoViewConverter;
+class KViewConverter;
 
 /**
  * A border for shapes that draws a single line around the object.
@@ -95,8 +95,8 @@ public:
     virtual void borderInsets(KInsets &insets) const;
     virtual bool hasTransparency() const;
 
-    virtual void paint(KShape *shape, QPainter &painter, const KoViewConverter &converter);
-    virtual void paint(KShape *shape, QPainter &painter, const KoViewConverter &converter, const QColor &color);
+    virtual void paint(KShape *shape, QPainter &painter, const KViewConverter &converter);
+    virtual void paint(KShape *shape, QPainter &painter, const KViewConverter &converter, const QColor &color);
 
 private:
     class Private;

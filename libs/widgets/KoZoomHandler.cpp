@@ -25,7 +25,7 @@
 
 
 KoZoomHandler::KoZoomHandler()
-    : KoViewConverter()
+    : KViewConverter()
 {
     // Note that this calls the method below, not the derived one
     setZoomAndResolution( 100, KoDpi::dpiX(), KoDpi::dpiY() );

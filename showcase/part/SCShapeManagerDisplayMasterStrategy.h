@@ -35,7 +35,7 @@ public:
     virtual ~SCShapeManagerDisplayMasterStrategy();
 
     /// reimplemented
-    virtual void paint(KShape * shape, QPainter &painter, const KoViewConverter &converter, bool forPrint);
+    virtual void paint(KShape * shape, QPainter &painter, const KViewConverter &converter, bool forPrint);
 
 private:
     SCPageSelectStrategyBase *m_strategy;

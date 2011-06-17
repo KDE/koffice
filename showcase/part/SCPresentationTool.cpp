@@ -89,7 +89,7 @@ bool SCPresentationTool::wantsAutoScroll() const
     return false;
 }
 
-void SCPresentationTool::paint(QPainter &painter, const KoViewConverter &converter)
+void SCPresentationTool::paint(QPainter &painter, const KViewConverter &converter)
 {
     Q_UNUSED(painter);
     Q_UNUSED(converter);

@@ -37,7 +37,7 @@ public:
     SCPlaceholderShape(const QString &presentationClass);
     virtual ~SCPlaceholderShape();
 
-    virtual void paint(QPainter &painter, const KoViewConverter &converter);
+    virtual void paint(QPainter &painter, const KViewConverter &converter);
     virtual bool loadOdf(const KXmlElement &element, KShapeLoadingContext &context);
     virtual void saveOdf(KShapeSavingContext &context) const;
 

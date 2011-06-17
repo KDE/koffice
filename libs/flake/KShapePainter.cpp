@@ -25,7 +25,7 @@
 #include "KShapeManager.h"
 #include "KShapeManagerPaintingStrategy.h"
 #include "KShape.h"
-#include "KoViewConverter.h"
+#include "KViewConverter.h"
 #include "KShapeBorderBase.h"
 #include "KShapeGroup.h"
 #include "KShapeContainer.h"
@@ -79,7 +79,7 @@ public:
         return 0;
     }
 
-    virtual const KoViewConverter *viewConverter() const
+    virtual const KViewConverter *viewConverter() const
     {
         return 0;
     }
@@ -136,7 +136,7 @@ void KShapePainter::setShapes(const QList<KShape*> &shapes)
     d->canvas->shapeManager()->setShapes(shapes, KShapeManager::AddWithoutRepaint);
 }
 
-void KShapePainter::paint(QPainter &painter, KoViewConverter &converter)
+void KShapePainter::paint(QPainter &painter, KViewConverter &converter)
 {
     foreach (KShape *shape, d->canvas->shapeManager()->shapes()) {
         shape->waitUntilReady(converter, false);
@@ -150,7 +150,7 @@ void KShapePainter::paint(QPainter &painter, const QRect &painterRect, const QRe
     if (documentRect.width() == 0.0f || documentRect.height() == 0.0f)
         return;
 
-    KoViewConverter converter;
+    KViewConverter converter;
     // calculate the painter destination rectangle size in document coordinates
     QRectF paintBox = converter.viewToDocument(QRectF(QPointF(), painterRect.size()));
 

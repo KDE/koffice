@@ -116,7 +116,7 @@ void KWCanvas::updateCanvas(const QRectF &rc)
     }
 }
 
-const KoViewConverter *KWCanvas::viewConverter() const
+const KViewConverter *KWCanvas::viewConverter() const
 {
     return m_view->viewConverter();
 }

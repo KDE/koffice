@@ -136,7 +136,7 @@ bool KShapeContainer::inheritsTransform(const KShape *shape) const
     return d->model->inheritsTransform(shape);
 }
 
-void KShapeContainer::paint(QPainter &painter, const KoViewConverter &converter)
+void KShapeContainer::paint(QPainter &painter, const KViewConverter &converter)
 {
     Q_D(KShapeContainer);
     painter.save();
@@ -194,7 +194,7 @@ void KShapeContainer::paint(QPainter &painter, const KoViewConverter &converter)
     }
 }
 
-void KShapeContainer::paintComponent(QPainter &, const KoViewConverter &)
+void KShapeContainer::paintComponent(QPainter &, const KViewConverter &)
 {
     // empty
 }

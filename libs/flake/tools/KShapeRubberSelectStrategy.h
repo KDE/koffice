@@ -48,7 +48,7 @@ public:
      */
     KShapeRubberSelectStrategy(KToolBase *tool, const QPointF &clicked, bool useSnapToGrid = false);
 
-    virtual void paint(QPainter &painter, const KoViewConverter &converter);
+    virtual void paint(QPainter &painter, const KViewConverter &converter);
     virtual void handleMouseMove(const QPointF &mouseLocation, Qt::KeyboardModifiers modifiers);
     virtual QUndoCommand *createCommand(QUndoCommand *parent = 0);
     virtual void finishInteraction(Qt::KeyboardModifiers modifiers);

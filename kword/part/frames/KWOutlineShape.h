@@ -30,9 +30,9 @@ public:
     ~KWOutlineShape();
 
     /// empty. This thing is never printable.
-    virtual void paintComponent(QPainter &, const KoViewConverter &) {}
+    virtual void paintComponent(QPainter &, const KViewConverter &) {}
     /// reimplemented
-    virtual void paintDecorations(QPainter &painter, const KoViewConverter &converter, const KCanvasBase *canvas);
+    virtual void paintDecorations(QPainter &painter, const KViewConverter &converter, const KCanvasBase *canvas);
 
 private:
     bool m_paintOutline;

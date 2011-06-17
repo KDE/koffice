@@ -77,7 +77,7 @@ public:
     /// reimplemented method from superclass
     virtual void updateCanvas(const QRectF& rc);
     /// reimplemented method from superclass
-    virtual const KoViewConverter *viewConverter() const;
+    virtual const KViewConverter *viewConverter() const;
     /// reimplemented method from superclass
     virtual QWidget* canvasWidget() {
         return this;

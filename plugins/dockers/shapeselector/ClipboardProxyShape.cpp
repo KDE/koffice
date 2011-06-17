@@ -47,7 +47,7 @@ ClipboardProxyShape::~ClipboardProxyShape()
     deleteShape(m_child);
 }
 
-void ClipboardProxyShape::paint(QPainter &painter, const KoViewConverter &converter)
+void ClipboardProxyShape::paint(QPainter &painter, const KViewConverter &converter)
 {
     painter.setClipRect(converter.documentToView(QRectF(QPointF(), size())));
     QSizeF nestedSize = m_child->size();

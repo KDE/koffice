@@ -26,7 +26,7 @@
 #include <QtCore/Qt>
 
 class QPainter;
-class KoViewConverter;
+class KViewConverter;
 class QRectF;
 class QColor;
 class KXmlWriter;
@@ -86,7 +86,7 @@ public:
      * @param converter the view converter
      * @param area the area in need of updating
      */
-    void paintGuides(QPainter &painter, const KoViewConverter &converter, const QRectF &area) const;
+    void paintGuides(QPainter &painter, const KViewConverter &converter, const QRectF &area) const;
 
     /**
      * Sets the color of the guide lines.

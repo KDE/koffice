@@ -29,7 +29,7 @@ public:
     SCPlaceholderTool(KCanvasBase *canvas);
     virtual ~SCPlaceholderTool();
 
-    virtual void paint(QPainter &painter, const KoViewConverter &converter);
+    virtual void paint(QPainter &painter, const KViewConverter &converter);
 
     virtual void mousePressEvent(KPointerEvent *event);
     virtual void mouseMoveEvent(KPointerEvent *event);

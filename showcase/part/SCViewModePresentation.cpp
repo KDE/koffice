@@ -62,7 +62,7 @@ SCViewModePresentation::~SCViewModePresentation()
     delete m_tool;
 }
 
-KoViewConverter * SCViewModePresentation::viewConverter(KoPACanvasBase * canvas)
+KViewConverter * SCViewModePresentation::viewConverter(KoPACanvasBase * canvas)
 {
     if (m_baseCanvas && m_animationDirector && m_baseCanvas == canvas) {
         return m_animationDirector->viewConverter();

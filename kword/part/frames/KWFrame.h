@@ -29,7 +29,7 @@
 
 class KTextAnchor;
 class KWFrameSet;
-class KoViewConverter;
+class KViewConverter;
 class KWOutlineShape;
 class KWPage;
 

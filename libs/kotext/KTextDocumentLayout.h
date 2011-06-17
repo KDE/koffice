@@ -36,7 +36,7 @@ class KShape;
 class KStyleManager;
 class QTextLayout;
 class KInlineTextObjectManager;
-class KoViewConverter;
+class KViewConverter;
 class KImageCollection;
 
 /**
@@ -55,7 +55,7 @@ public:
         /// the QText context
         QAbstractTextDocumentLayout::PaintContext textContext;
         /// A view converter, when set, is used to find out when the zoom is so low that painting of text is unneeded
-        const KoViewConverter *viewConverter;
+        const KViewConverter *viewConverter;
 
         KImageCollection *imageCollection;
     };

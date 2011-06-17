@@ -42,7 +42,7 @@ public:
     virtual ~KarbonFilterEffectsTool();
 
     /// reimplemented from KToolBase
-    virtual void paint(QPainter &painter, const KoViewConverter &converter);
+    virtual void paint(QPainter &painter, const KViewConverter &converter);
     /// reimplemented from KToolBase
     virtual void repaintDecorations();
     /// reimplemented from KToolBase

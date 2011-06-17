@@ -26,7 +26,7 @@ class KoPADocument;
 class KShape;
 class KShapeContainer;
 class QAbstractItemModel;
-class KoViewConverter;
+class KViewConverter;
 
 /**
  * Model class for the document structure widget (dsw). The dsw can

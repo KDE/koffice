@@ -37,7 +37,7 @@ public:
     SCViewModePresentation(KoPAViewBase * view, KoPACanvasBase * m_canvas);
     ~SCViewModePresentation();
 
-    KoViewConverter * viewConverter(KoPACanvasBase * canvas);
+    KViewConverter * viewConverter(KoPACanvasBase * canvas);
 
     void paint(KoPACanvasBase* canvas, QPainter &painter, const QRectF &paintRect);
     void tabletEvent(QTabletEvent *event, const QPointF &point);

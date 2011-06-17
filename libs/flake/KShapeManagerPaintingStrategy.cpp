@@ -44,7 +44,7 @@ KShapeManagerPaintingStrategy::~KShapeManagerPaintingStrategy()
     delete d;
 }
 
-void KShapeManagerPaintingStrategy::paint(KShape * shape, QPainter &painter, const KoViewConverter &converter, bool forPrint)
+void KShapeManagerPaintingStrategy::paint(KShape * shape, QPainter &painter, const KViewConverter &converter, bool forPrint)
 {
     if (d->shapeManager) {
         painter.save();

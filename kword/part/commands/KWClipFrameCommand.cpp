@@ -31,7 +31,7 @@
 class KWFrameClipper : public KShapeContainer
 {
 public:
-    void paintComponent(QPainter &, const KoViewConverter &) {}
+    void paintComponent(QPainter &, const KViewConverter &) {}
     bool loadOdf(const KXmlElement &, KShapeLoadingContext &) { return true;}
     void saveOdf(KShapeSavingContext &) const {}
 };

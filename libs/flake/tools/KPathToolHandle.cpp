@@ -31,7 +31,7 @@
 #include "KCanvasBase.h"
 #include "KResourceManager.h"
 #include "KShapeManager.h"
-#include "KoViewConverter.h"
+#include "KViewConverter.h"
 #include "KPointerEvent.h"
 #include <QtGui/QPainter>
 
@@ -51,7 +51,7 @@ PointHandle::PointHandle(KPathTool *tool, KPathPoint *activePoint, KPathPoint::P
 {
 }
 
-void PointHandle::paint(QPainter &painter, const KoViewConverter &converter)
+void PointHandle::paint(QPainter &painter, const KViewConverter &converter)
 {
     painter.save();
     painter.setTransform(m_activePoint->parent()->absoluteTransformation(&converter) * painter.transform());
@@ -151,7 +151,7 @@ ParameterHandle::ParameterHandle(KPathTool *tool, KParameterShape *parameterShap
 {
 }
 
-void ParameterHandle::paint(QPainter &painter, const KoViewConverter &converter)
+void ParameterHandle::paint(QPainter &painter, const KViewConverter &converter)
 {
     painter.save();
     painter.setTransform(m_parameterShape->absoluteTransformation(&converter) * painter.transform());

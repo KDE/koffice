@@ -31,7 +31,7 @@ public:
     {
         layout = qobject_cast<KTextDocumentLayout*>(textShapeData()->document()->documentLayout());
     }
-    void paint(QPainter &painter, const KoViewConverter &converter) {
+    void paint(QPainter &painter, const KViewConverter &converter) {
         Q_UNUSED(painter);
         Q_UNUSED(converter);
     }

@@ -24,7 +24,7 @@
 #include <QByteArray>
 
 class QPainter;
-class KoViewConverter;
+class KViewConverter;
 class KShapeLoadingContext;
 class KShapeSavingContext;
 
@@ -52,7 +52,7 @@ public:
     virtual ~ClipboardProxyShape();
 
     /// reimplemented from KShape
-    virtual void paint(QPainter &painter, const KoViewConverter &converter);
+    virtual void paint(QPainter &painter, const KViewConverter &converter);
 
     /// return the clipboard data that this shape displays
     QByteArray clipboardData() const { return m_clipboardData; }

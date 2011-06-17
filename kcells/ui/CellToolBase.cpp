@@ -116,7 +116,7 @@
 #include <KShape.h>
 #include <KShapeManager.h>
 #include <KOdfStore.h>
-#include <KoViewConverter.h>
+#include <KViewConverter.h>
 #include <KXmlReader.h>
 #include <KOdfXmlNS.h>
 
@@ -861,7 +861,7 @@ CellToolBase::~CellToolBase()
     delete d;
 }
 
-void CellToolBase::paint(QPainter &painter, const KoViewConverter &viewConverter)
+void CellToolBase::paint(QPainter &painter, const KViewConverter &viewConverter)
 {
     KShape::applyConversion(painter, viewConverter);
     painter.translate(offset()); // the table shape offset

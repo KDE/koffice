@@ -44,7 +44,7 @@ SCShapeManagerAnimationStrategy::~SCShapeManagerAnimationStrategy()
     delete m_strategy;
 }
 
-void SCShapeManagerAnimationStrategy::paint(KShape * shape, QPainter &painter, const KoViewConverter &converter, bool forPrint)
+void SCShapeManagerAnimationStrategy::paint(KShape * shape, QPainter &painter, const KViewConverter &converter, bool forPrint)
 {
     if (! dynamic_cast<SCPlaceholderShape *>(shape) && m_strategy->page()->displayShape(shape)) {
         if (m_animationCache->value(shape, "visibility", true).toBool()) {

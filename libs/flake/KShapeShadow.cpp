@@ -25,7 +25,7 @@
 #include "KInsets.h"
 #include "KPathShape.h"
 #include <KOdfGenericStyle.h>
-#include <KoViewConverter.h>
+#include <KViewConverter.h>
 #include <QtGui/QPainter>
 #include <QtCore/QAtomicInt>
 
@@ -63,7 +63,7 @@ void KShapeShadow::fillStyle(KOdfGenericStyle &style, KShapeSavingContext &conte
     style.addProperty("draw:shadow-offset-y", QString("%1pt").arg(d->offset.y()));
 }
 
-void KShapeShadow::paint(KShape *shape, QPainter &painter, const KoViewConverter &converter)
+void KShapeShadow::paint(KShape *shape, QPainter &painter, const KViewConverter &converter)
 {
     if (! d->visible)
         return;

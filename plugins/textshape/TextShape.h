@@ -49,11 +49,11 @@ public:
     virtual ~TextShape();
 
     /// reimplemented
-    void paintComponent(QPainter &painter, const KoViewConverter &converter);
+    void paintComponent(QPainter &painter, const KViewConverter &converter);
     /// reimplemented
-    void paintDecorations(QPainter &painter, const KoViewConverter &converter, const KCanvasBase *canvas);
+    void paintDecorations(QPainter &painter, const KViewConverter &converter, const KCanvasBase *canvas);
     /// reimplemented
-    virtual void waitUntilReady(const KoViewConverter &converter, bool asynchronous) const;
+    virtual void waitUntilReady(const KViewConverter &converter, bool asynchronous) const;
 
     /// helper method.
     QPointF convertScreenPos(const QPointF &point);

@@ -62,7 +62,7 @@ KoFlake::Position SelectionDecorator::hotPosition()
     return m_hotPosition;
 }
 
-void SelectionDecorator::paint(QPainter &painter, const KoViewConverter &converter)
+void SelectionDecorator::paint(QPainter &painter, const KViewConverter &converter)
 {
     QRectF handleArea;
     painter.save();

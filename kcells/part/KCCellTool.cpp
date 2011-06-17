@@ -58,7 +58,7 @@
 #include <KPointerEvent.h>
 #include <KSelection.h>
 #include <KShapeManager.h>
-#include <KoViewConverter.h>
+#include <KViewConverter.h>
 
 #include "KCCell.h"
 #include "KCCanvas.h"
@@ -104,7 +104,7 @@ KCCellTool::~KCCellTool()
     delete d;
 }
 
-void KCCellTool::paint(QPainter &painter, const KoViewConverter &viewConverter)
+void KCCellTool::paint(QPainter &painter, const KViewConverter &viewConverter)
 {
     KShape::applyConversion(painter, viewConverter);
     const double xOffset = viewConverter.viewToDocumentX(canvas()->canvasController()->canvasOffsetX());

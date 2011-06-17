@@ -95,7 +95,7 @@ public:
     // reimplemented pure virtual calls
     bool loadOdf(const KXmlElement&, KShapeLoadingContext&) { return false; }
     void saveOdf(KShapeSavingContext&) const { }
-    void paintComponent(QPainter&, const KoViewConverter&) { }
+    void paintComponent(QPainter&, const KViewConverter&) { }
 
     /// add the frame to be hidden
     void addFrame(KWFrame *frame);

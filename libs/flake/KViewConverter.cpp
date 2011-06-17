@@ -17,88 +17,88 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoViewConverter.h"
+#include "KViewConverter.h"
 
-KoViewConverter::KoViewConverter()
+KViewConverter::KViewConverter()
     : m_zoomLevel(1.0)
 {
 }
 
-QPointF KoViewConverter::documentToView(const QPointF &documentPoint) const
+QPointF KViewConverter::documentToView(const QPointF &documentPoint) const
 {
     if (qFuzzyCompare(m_zoomLevel, 1))
         return documentPoint;
     return QPointF(documentToViewX(documentPoint.x()), documentToViewY(documentPoint.y()));
 }
 
-QPointF KoViewConverter::viewToDocument(const QPointF &viewPoint) const
+QPointF KViewConverter::viewToDocument(const QPointF &viewPoint) const
 {
     if (qFuzzyCompare(m_zoomLevel, 1))
         return viewPoint;
     return QPointF(viewToDocumentX(viewPoint.x()), viewToDocumentY(viewPoint.y()));
 }
 
-QRectF KoViewConverter::documentToView(const QRectF &documentRect) const
+QRectF KViewConverter::documentToView(const QRectF &documentRect) const
 {
     if (qFuzzyCompare(m_zoomLevel, 1))
         return documentRect;
     return QRectF(documentToView(documentRect.topLeft()), documentToView(documentRect.size()));
 }
 
-QRectF KoViewConverter::viewToDocument(const QRectF &viewRect) const
+QRectF KViewConverter::viewToDocument(const QRectF &viewRect) const
 {
     if (qFuzzyCompare(m_zoomLevel, 1))
         return viewRect;
     return QRectF(viewToDocument(viewRect.topLeft()), viewToDocument(viewRect.size()));
 }
 
-QSizeF KoViewConverter::documentToView(const QSizeF &documentSize) const
+QSizeF KViewConverter::documentToView(const QSizeF &documentSize) const
 {
     if (qFuzzyCompare(m_zoomLevel, 1))
         return documentSize;
     return QSizeF(documentToViewX(documentSize.width()), documentToViewY(documentSize.height()));
 }
 
-QSizeF KoViewConverter::viewToDocument(const QSizeF &viewSize) const
+QSizeF KViewConverter::viewToDocument(const QSizeF &viewSize) const
 {
     if (qFuzzyCompare(m_zoomLevel, 1))
         return viewSize;
     return QSizeF(viewToDocumentX(viewSize.width()), viewToDocumentY(viewSize.height()));
 }
 
-void KoViewConverter::zoom(qreal *zoomX, qreal *zoomY) const
+void KViewConverter::zoom(qreal *zoomX, qreal *zoomY) const
 {
     *zoomX = m_zoomLevel;
     *zoomY = m_zoomLevel;
 }
 
-qreal KoViewConverter::documentToViewX(qreal documentX) const
+qreal KViewConverter::documentToViewX(qreal documentX) const
 {
     return documentX * m_zoomLevel;
 }
 
-qreal KoViewConverter::documentToViewY(qreal documentY) const
+qreal KViewConverter::documentToViewY(qreal documentY) const
 {
     return documentY * m_zoomLevel;
 }
 
-qreal KoViewConverter::viewToDocumentX(qreal viewX) const
+qreal KViewConverter::viewToDocumentX(qreal viewX) const
 {
     return viewX / m_zoomLevel;
 }
 
-qreal KoViewConverter::viewToDocumentY(qreal viewY) const
+qreal KViewConverter::viewToDocumentY(qreal viewY) const
 {
     return viewY / m_zoomLevel;
 }
 
-void KoViewConverter::setZoom(qreal zoom)
+void KViewConverter::setZoom(qreal zoom)
 {
     Q_ASSERT((int)zoom >= 0);
     m_zoomLevel = zoom;
 }
 
-qreal KoViewConverter::zoom() const
+qreal KViewConverter::zoom() const
 {
     return m_zoomLevel;
 }

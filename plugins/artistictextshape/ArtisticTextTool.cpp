@@ -213,7 +213,7 @@ QTransform ArtisticTextTool::cursorTransform() const
     return transform;
 }
 
-void ArtisticTextTool::paint( QPainter &painter, const KoViewConverter &converter)
+void ArtisticTextTool::paint( QPainter &painter, const KViewConverter &converter)
 {
     if ( ! m_currentShape || !m_showCursor )
         return;

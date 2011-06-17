@@ -32,7 +32,7 @@
 
 class QPaintEvent;
 
-class KoViewConverter;
+class KViewConverter;
 class KCanvasBase;
 class KoRulerPrivate;
 
@@ -49,7 +49,7 @@ public:
      * @param orientation the orientation of the ruler
      * @param viewConverter the view converter used to convert from point to pixel
      */
-    KoRuler(QWidget* parent, Qt::Orientation orientation, const KoViewConverter* viewConverter);
+    KoRuler(QWidget* parent, Qt::Orientation orientation, const KViewConverter* viewConverter);
     ~KoRuler();
 
     /// For paragraphs each tab definition is represented by this struct.

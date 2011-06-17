@@ -39,7 +39,7 @@
 #include "KShapeApplicationData.h"
 #include "KShapeSavingContext.h"
 #include "KShapeLoadingContext.h"
-#include "KoViewConverter.h"
+#include "KViewConverter.h"
 #include "KLineBorder.h"
 #include "ShapeDeleter_p.h"
 #include "KShapeShadow.h"
@@ -291,7 +291,7 @@ KShape::~KShape()
     delete d_ptr;
 }
 
-void KShape::paint(QPainter &painter, const KoViewConverter &converter)
+void KShape::paint(QPainter &painter, const KViewConverter &converter)
 {
     Q_D(KShape);
     if (d->fill) {
@@ -300,7 +300,7 @@ void KShape::paint(QPainter &painter, const KoViewConverter &converter)
     }
 }
 
-void KShape::paintDecorations(QPainter &, const KoViewConverter &, const KCanvasBase *)
+void KShape::paintDecorations(QPainter &, const KViewConverter &, const KCanvasBase *)
 {
 }
 
@@ -425,7 +425,7 @@ QRectF KShape::boundingRect() const
     return bb;
 }
 
-QTransform KShape::absoluteTransformation(const KoViewConverter *converter) const
+QTransform KShape::absoluteTransformation(const KViewConverter *converter) const
 {
     Q_D(const KShape);
     QTransform matrix;
@@ -994,7 +994,7 @@ void KShape::setName(const QString &name)
     d->name = name;
 }
 
-void KShape::waitUntilReady(const KoViewConverter &converter, bool asynchronous) const
+void KShape::waitUntilReady(const KViewConverter &converter, bool asynchronous) const
 {
     Q_UNUSED(converter);
     Q_UNUSED(asynchronous);
@@ -1522,7 +1522,7 @@ void KShape::saveOdfCommonChildElements(KShapeSavingContext &context) const
 // end loading & saving methods
 
 // static
-void KShape::applyConversion(QPainter &painter, const KoViewConverter &converter)
+void KShape::applyConversion(QPainter &painter, const KViewConverter &converter)
 {
     qreal zoomX, zoomY;
     converter.zoom(&zoomX, &zoomY);

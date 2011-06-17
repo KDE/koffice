@@ -50,7 +50,7 @@ public:
     virtual void mouseReleaseEvent(KPointerEvent *event);
     virtual void activate(ToolActivation toolActivation, const QSet<KShape*> &shapes);
 
-    void paint(QPainter &painter, const KoViewConverter &converter);
+    void paint(QPainter &painter, const KViewConverter &converter);
 
     /**
      * Each shape-type has an Id; as found in KShapeFactoryBase::id().id(), to choose which

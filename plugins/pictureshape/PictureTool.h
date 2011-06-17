@@ -32,7 +32,7 @@ public:
     explicit PictureTool(KCanvasBase* canvas);
 
     /// reimplemented from KToolBase
-    virtual void paint(QPainter&, const KoViewConverter&) {}
+    virtual void paint(QPainter&, const KViewConverter&) {}
     /// reimplemented from KToolBase
     virtual void mousePressEvent(KPointerEvent*) {}
     /// reimplemented from superclass

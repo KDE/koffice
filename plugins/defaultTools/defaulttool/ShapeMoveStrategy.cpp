@@ -108,7 +108,7 @@ QUndoCommand* ShapeMoveStrategy::createCommand(QUndoCommand *parent)
     return new KShapeMoveCommand(m_selectedShapes, m_previousPositions, m_newPositions, parent);
 }
 
-void ShapeMoveStrategy::paint( QPainter &painter, const KoViewConverter &converter)
+void ShapeMoveStrategy::paint( QPainter &painter, const KViewConverter &converter)
 {
     SelectionDecorator decorator (KoFlake::NoHandle, false, false);
     decorator.setSelection(tool()->canvas()->shapeManager()->selection());

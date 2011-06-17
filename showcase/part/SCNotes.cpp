@@ -44,9 +44,9 @@ class ShapeLoaderHelper : public KShape
 public:
     ShapeLoaderHelper() { }
 
-    virtual void paint(QPainter &, const KoViewConverter &) { }
+    virtual void paint(QPainter &, const KViewConverter &) { }
 
-    virtual void paintDecorations(QPainter &, const KoViewConverter &, const KCanvasBase *) { }
+    virtual void paintDecorations(QPainter &, const KViewConverter &, const KCanvasBase *) { }
 
     virtual bool loadOdf(const KXmlElement &element, KShapeLoadingContext &context)
     {
@@ -159,7 +159,7 @@ bool SCNotes::loadOdf(const KXmlElement &element, KShapeLoadingContext &context)
     return true;
 }
 
-void SCNotes::paintComponent(QPainter &painter, const KoViewConverter &converter)
+void SCNotes::paintComponent(QPainter &painter, const KViewConverter &converter)
 {
     Q_UNUSED(painter);
     Q_UNUSED(converter);

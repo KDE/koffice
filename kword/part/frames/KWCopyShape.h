@@ -43,9 +43,9 @@ public:
     ~KWCopyShape();
 
     /// reimplemented from KShape
-    void paint(QPainter &painter, const KoViewConverter &converter);
+    void paint(QPainter &painter, const KViewConverter &converter);
     /// reimplemented from KShape
-    void paintDecorations(QPainter &painter, const KoViewConverter &converter, const KCanvasBase *canvas);
+    void paintDecorations(QPainter &painter, const KViewConverter &converter, const KCanvasBase *canvas);
     /// reimplemented from KShape
     QPainterPath outline() const;
     /// reimplemented

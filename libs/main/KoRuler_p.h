@@ -121,14 +121,14 @@ private:
 class KoRulerPrivate
 {
 public:
-    KoRulerPrivate(KoRuler *parent, const KoViewConverter *vc, Qt::Orientation orientation);
+    KoRulerPrivate(KoRuler *parent, const KViewConverter *vc, Qt::Orientation orientation);
     ~KoRulerPrivate();
 
     void emitTabChanged();
 
     KUnit unit;
     const Qt::Orientation orientation;
-    const KoViewConverter * const viewConverter;
+    const KViewConverter * const viewConverter;
 
     int offset;
     qreal rulerLength;

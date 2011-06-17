@@ -33,7 +33,7 @@ public:
 
     using KLineBorder::paint;
 
-    virtual void paint(KShape *shape, QPainter &painter, const KoViewConverter &converter) {
+    virtual void paint(KShape *shape, QPainter &painter, const KViewConverter &converter) {
         KShape::applyConversion(painter, converter);
         painter.strokePath(shape->outline(), m_pen);
     }
@@ -53,7 +53,7 @@ KarbonOutlinePaintingStrategy::~KarbonOutlinePaintingStrategy()
     delete m_border;
 }
 
-void KarbonOutlinePaintingStrategy::paint(KShape * shape, QPainter &painter, const KoViewConverter &converter, bool)
+void KarbonOutlinePaintingStrategy::paint(KShape * shape, QPainter &painter, const KViewConverter &converter, bool)
 {
     painter.save();
     painter.setTransform(shape->absoluteTransformation(&converter) * painter.transform());

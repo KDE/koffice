@@ -36,11 +36,11 @@
  * The zoom level is expressed on a scale of 0.0 to 1.0 to infinite, where 1.0 is
  * 100%
  */
-class FLAKE_EXPORT KoViewConverter
+class FLAKE_EXPORT KViewConverter
 {
 public:
-    KoViewConverter();
-    virtual ~KoViewConverter() {}
+    KViewConverter();
+    virtual ~KViewConverter() {}
 
     /**
      * Convert a coordinate in pt to pixels.

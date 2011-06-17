@@ -58,7 +58,7 @@ public:
     virtual KGuidesData * guidesData();
 
     KToolProxy * toolProxy() const;
-    const KoViewConverter *viewConverter() const;
+    const KViewConverter *viewConverter() const;
     KUnit unit() const;
 
     /// XXX

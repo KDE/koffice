@@ -22,7 +22,7 @@
 #ifndef SELECTIONDECORATOR_H
 #define SELECTIONDECORATOR_H
 
-#include <KoViewConverter.h>
+#include <KViewConverter.h>
 #include <KoFlake.h>
 #include <QPainter>
 
@@ -47,7 +47,7 @@ public:
      * @param painter the painter to paint to.
      * @param converter to convert between internal and view coordinates.
      */
-    void paint(QPainter &painter, const KoViewConverter &converter);
+    void paint(QPainter &painter, const KViewConverter &converter);
 
     /**
      * set the selection that is to be painted.

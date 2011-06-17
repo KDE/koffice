@@ -26,7 +26,7 @@ class KCanvasBase;
 class KPointerEvent;
 class KoTextEditor;
 class KTextShapeData;
-class KoViewConverter;
+class KViewConverter;
 class TextShape;
 class TrackedChangeManager;
 class TrackedChangeModel;
@@ -50,7 +50,7 @@ public:
     virtual void mouseReleaseEvent(KPointerEvent* event);
     virtual void mouseMoveEvent(KPointerEvent* event);
     virtual void mousePressEvent(KPointerEvent* event);
-    virtual void paint(QPainter& painter, const KoViewConverter& converter);
+    virtual void paint(QPainter& painter, const KViewConverter& converter);
     virtual void keyPressEvent(QKeyEvent* event);
     virtual void activate(ToolActivation toolActivation, const QSet<KShape*> &shapes);
     virtual void deactivate();

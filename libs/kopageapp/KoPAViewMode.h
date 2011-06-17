@@ -32,7 +32,7 @@ class KoPACanvasBase;
 class KoPAPageBase;
 class KToolProxy;
 class KShape;
-class KoViewConverter;
+class KViewConverter;
 class QPainter;
 class QPaintEvent;
 class QTabletEvent;
@@ -123,7 +123,7 @@ public:
      *
      * @return the view converter used in the view mode
      */
-    virtual KoViewConverter * viewConverter(KoPACanvasBase * canvas);
+    virtual KViewConverter * viewConverter(KoPACanvasBase * canvas);
 
     /**
      * @brief Update the view when a new shape is added to the document

@@ -20,12 +20,12 @@
 #ifndef ZOOMHANDLER_H
 #define ZOOMHANDLER_H
 
-#include <KoViewConverter.h>
+#include <KViewConverter.h>
 
 /**
  * The Canvas owns a ZoomHandler which allows the user to zoom in or out.
  */
-class ZoomHandler : public KoViewConverter
+class ZoomHandler : public KViewConverter
 {
 public:
     void setZoomIndex(int zoomIndex);

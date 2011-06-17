@@ -208,7 +208,7 @@ KarbonFilterEffectsTool::~KarbonFilterEffectsTool()
     delete d;
 }
 
-void KarbonFilterEffectsTool::paint(QPainter &painter, const KoViewConverter &converter)
+void KarbonFilterEffectsTool::paint(QPainter &painter, const KViewConverter &converter)
 {
     if (d->currentShape && d->currentShape->filterEffectStack()) {
         painter.save();

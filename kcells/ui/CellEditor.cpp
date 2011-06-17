@@ -34,7 +34,7 @@
 
 // KOffice
 #include <KoDpi.h>
-#include <KoViewConverter.h>
+#include <KViewConverter.h>
 
 // KDE
 #include <kdebug.h>
@@ -437,7 +437,7 @@ void CellEditor::Private::rebuildSelection()
     selectionChangedLocked = false;
 }
 
-void CellEditor::setEditorFont(QFont const & font, bool updateSize, const KoViewConverter *viewConverter)
+void CellEditor::setEditorFont(QFont const & font, bool updateSize, const KViewConverter *viewConverter)
 {
     const qreal scaleY = POINT_TO_INCH(static_cast<qreal>((KoDpi::dpiY())));
     setFont(QFont(font.family(), viewConverter->documentToViewY(font.pointSizeF()) / scaleY));

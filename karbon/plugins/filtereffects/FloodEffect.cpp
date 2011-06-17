@@ -19,7 +19,7 @@
 
 #include "FloodEffect.h"
 #include "KFilterEffectRenderContext.h"
-#include "KoViewConverter.h"
+#include "KViewConverter.h"
 #include "KXmlWriter.h"
 #include "KXmlReader.h"
 #include <KLocale>

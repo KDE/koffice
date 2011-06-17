@@ -42,7 +42,7 @@ SCPlaceholderShape::~SCPlaceholderShape()
     delete m_strategy;
 }
 
-void SCPlaceholderShape::paint(QPainter &painter, const KoViewConverter &converter)
+void SCPlaceholderShape::paint(QPainter &painter, const KViewConverter &converter)
 {
     QRectF rect(QPointF(0, 0), size());
     if (m_strategy) {

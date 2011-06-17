@@ -23,7 +23,7 @@
 #include "KoZoomTool_p.h"
 #include "KCanvasBase.h"
 #include "KCanvasController.h"
-#include "KoViewConverter.h"
+#include "KViewConverter.h"
 
 #include <kdebug.h>
 

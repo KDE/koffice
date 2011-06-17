@@ -1588,7 +1588,7 @@ void Layout::drawUnderlines(QPainter *painter, const QTextFragment &currentFragm
     }
 }
 
-void Layout::decorateParagraph(QPainter *painter, const QTextBlock &block, int selectionStart, int selectionEnd, const KoViewConverter *converter)
+void Layout::decorateParagraph(QPainter *painter, const QTextBlock &block, int selectionStart, int selectionEnd, const KViewConverter *converter)
 {
     Q_UNUSED(selectionStart);
     Q_UNUSED(selectionEnd);

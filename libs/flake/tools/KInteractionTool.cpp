@@ -34,7 +34,7 @@ KInteractionTool::~KInteractionTool()
 {
 }
 
-void KInteractionTool::paint(QPainter &painter, const KoViewConverter &converter)
+void KInteractionTool::paint(QPainter &painter, const KViewConverter &converter)
 {
     Q_D(KInteractionTool);
     if (d->currentStrategy)

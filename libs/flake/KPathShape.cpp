@@ -24,7 +24,7 @@
 #include "KPathPoint.h"
 #include "KPointGroup_p.h"
 #include "KShapeBorderBase.h"
-#include "KoViewConverter.h"
+#include "KViewConverter.h"
 #include "KPathShapeLoader.h"
 #include "KShapeSavingContext.h"
 #include "KShapeLoadingContext.h"
@@ -231,7 +231,7 @@ void KPathShape::clear()
     m_subpaths.clear();
 }
 
-void KPathShape::paint(QPainter &painter, const KoViewConverter &converter)
+void KPathShape::paint(QPainter &painter, const KViewConverter &converter)
 {
     Q_D(KPathShape);
     applyConversion(painter, converter);
@@ -295,7 +295,7 @@ void KPathShapePrivate::debugPath() const
 }
 #endif
 
-void KPathShape::paintPoints(QPainter &painter, const KoViewConverter &converter, int handleRadius)
+void KPathShape::paintPoints(QPainter &painter, const KViewConverter &converter, int handleRadius)
 {
     Q_D(KPathShape);
     applyConversion(painter, converter);

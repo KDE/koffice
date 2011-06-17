@@ -27,7 +27,7 @@
 
 #include "KCanvasController_p.h"
 #include "KShape.h"
-#include "KoViewConverter.h"
+#include "KViewConverter.h"
 #include "KCanvasBase.h"
 #include "KCanvasObserverBase.h"
 #include "KCanvasSupervisor.h"

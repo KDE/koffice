@@ -28,7 +28,7 @@ class KShape;
 class KShapeLoadingContext;
 class KShapeSavingContext;
 class KShapeUserData;
-class KoViewConverter;
+class KViewConverter;
 class PlaceholderData;
 class KResourceManager;
 
@@ -53,7 +53,7 @@ public:
 
     virtual KShape *createShape(KResourceManager *documentResources);
 
-    virtual void paint(QPainter &painter, const KoViewConverter &converter, const QRectF &rect);
+    virtual void paint(QPainter &painter, const KViewConverter &converter, const QRectF &rect);
 
     virtual void saveOdf(KShapeSavingContext &context);
 

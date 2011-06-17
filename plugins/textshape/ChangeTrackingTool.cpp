@@ -29,7 +29,7 @@
 #include <KTextDocumentLayout.h>
 #include <KoTextEditor.h>
 #include <KTextShapeData.h>
-#include <KoViewConverter.h>
+#include <KViewConverter.h>
 #include "TextShape.h"
 
 #include "commands/AcceptChangeCommand.h"
@@ -149,7 +149,7 @@ int ChangeTrackingTool::pointToPosition(const QPointF & point) const
     return caretPos;
 }
 
-void ChangeTrackingTool::paint(QPainter& painter, const KoViewConverter& converter)
+void ChangeTrackingTool::paint(QPainter& painter, const KViewConverter& converter)
 {
     Q_UNUSED(painter);
     Q_UNUSED(converter);

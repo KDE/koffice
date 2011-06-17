@@ -124,7 +124,7 @@ KShape *SCPlaceholderStrategy::createShape(KResourceManager *rm)
     return shape;
 }
 
-void SCPlaceholderStrategy::paint(QPainter &painter, const KoViewConverter &converter, const QRectF &rect)
+void SCPlaceholderStrategy::paint(QPainter &painter, const KViewConverter &converter, const QRectF &rect)
 {
     KShape::applyConversion(painter, converter);
     QPen penText(Qt::black);

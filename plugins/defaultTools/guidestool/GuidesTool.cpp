@@ -27,7 +27,7 @@
 #include <KCanvasBase.h>
 #include <KCanvasController.h>
 #include <KResourceManager.h>
-#include <KoViewConverter.h>
+#include <KViewConverter.h>
 #include <KGuidesData.h>
 #include <KToolManager.h>
 
@@ -50,7 +50,7 @@ GuidesTool::~GuidesTool()
 {
 }
 
-void GuidesTool::paint(QPainter &painter, const KoViewConverter &converter)
+void GuidesTool::paint(QPainter &painter, const KViewConverter &converter)
 {
     if (m_mode == None)
         return;

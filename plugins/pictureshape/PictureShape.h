@@ -43,13 +43,13 @@ public:
     virtual ~PictureShape();
 
     // reimplemented
-    virtual void paint(QPainter &painter, const KoViewConverter &converter);
+    virtual void paint(QPainter &painter, const KViewConverter &converter);
     // reimplemented
     virtual void saveOdf(KShapeSavingContext &context) const;
     // reimplemented
     virtual bool loadOdf(const KXmlElement &element, KShapeLoadingContext &context);
     // reimplemented
-    virtual void waitUntilReady(const KoViewConverter &converter, bool asynchronous) const;
+    virtual void waitUntilReady(const KViewConverter &converter, bool asynchronous) const;
 
     /**
      * Get the collection used in the shape.

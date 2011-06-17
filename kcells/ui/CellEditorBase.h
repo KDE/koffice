@@ -22,7 +22,7 @@
 #include <kcells_export.h>
 
 class QFont;
-class KoViewConverter;
+class KViewConverter;
 class QString;
 class QWidget;
 
@@ -34,7 +34,7 @@ public:
     virtual ~CellEditorBase();
     virtual QWidget* widget() = 0;
     virtual void selectionChanged() = 0;
-    virtual void setEditorFont(QFont const & font, bool updateSize, const KoViewConverter *viewConverter) = 0;
+    virtual void setEditorFont(QFont const & font, bool updateSize, const KViewConverter *viewConverter) = 0;
     virtual void setText(const QString& text, int cursorPos = -1) = 0;
     virtual QString toPlainText() const = 0;
     virtual void setCursorPosition(int pos) = 0;

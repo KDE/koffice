@@ -23,7 +23,7 @@
 #include "ClipboardProxyShape.h"
 #include "ItemStore.h"
 
-#include <KoViewConverter.h>
+#include <KViewConverter.h>
 
 #include <QPainter>
 

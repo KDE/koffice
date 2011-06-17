@@ -27,7 +27,7 @@
 #include <KShapeContainer.h>
 
 class QPainter;
-class KoViewConverter;
+class KViewConverter;
 class KStyleManager;
 class KWTextFrameSet;
 class MockTextShape;
