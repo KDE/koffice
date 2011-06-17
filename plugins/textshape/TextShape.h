@@ -77,7 +77,7 @@ public:
      * From KShape reimplemented method to load the TextShape from ODF.
      *
      * This method redirects the call to the KoTextShapeData::loadOdf() method which
-     * in turn will call the KoTextLoader::loadBody() method that reads the element
+     * in turn will call the KTextLoader::loadBody() method that reads the element
      * into a QTextCursor.
      *
      * @param context the KShapeLoadingContext used for loading.

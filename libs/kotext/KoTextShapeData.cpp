@@ -46,7 +46,7 @@
 
 #include "KoTextPage.h"
 
-#include "opendocument/KoTextLoader.h"
+#include "opendocument/KTextLoader.h"
 #include "opendocument/KoTextWriter.h"
 
 #include <KChangeTracker.h>
@@ -220,7 +220,7 @@ KoTextPage* KoTextShapeData::page() const
 bool KoTextShapeData::loadOdf(const KXmlElement &element, KShapeLoadingContext &context, KDocumentRdfBase *rdfData, KShape *shape)
 {
     Q_UNUSED(rdfData);
-    KoTextLoader loader(context, shape);
+    KTextLoader loader(context, shape);
 
     QTextCursor cursor(document());
     loader.loadBody(element, cursor);   // now let's load the body from the ODF KXmlElement.

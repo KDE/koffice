@@ -26,7 +26,7 @@
 #include <KShapeControllerBase.h>
 #include <KShapeController.h>
 #include "KoTextShapeData.h"
-#include "opendocument/KoTextLoader.h"
+#include "opendocument/KTextLoader.h"
 
 #include <kdebug.h>
 #ifdef SHOULD_BUILD_RDF
@@ -67,7 +67,7 @@ bool KoTextPaste::process(const KXmlElement &body, KOdfStoreReader &odfStore)
     KOdfLoadingContext loadingContext(odfStore.styles(), odfStore.store());
     KShapeLoadingContext context(loadingContext, d->canvas->shapeController()->resourceManager());
 
-    KoTextLoader loader(context);
+    KTextLoader loader(context);
 
     kDebug(30015) << "text paste";
     loader.loadBody(body, d->cursor);   // now let's load the body from the ODF KXmlElement.

@@ -28,7 +28,7 @@
 #include <KOdfStylesReader.h>
 #include <KOdfStore.h>
 #include <KOdfStylesReader.h>
-#include <KoTextLoader.h>
+#include <KTextLoader.h>
 #include <KXmlReader.h>
 #include <KOdfStoreReader.h>
 #include <KOdfWriteStore.h>

@@ -81,7 +81,7 @@
 #include <KOdfStylesReader.h>
 #include <KXmlWriter.h>
 
-#include <KoTextLoader.h>
+#include <KTextLoader.h>
 #include <KStyleManager.h>
 #include <KoTextSharedLoadingData.h>
 #include <KTextDocument.h>
@@ -1644,7 +1644,7 @@ void KCCell::loadOdfCellText(const KXmlElement& parent, KCOdfLoadingContext& tab
     QString cellText;
 
     bool multipleTextParagraphsFound = false;
-    bool hasRichText = KoTextLoader::containsRichText(parent);
+    bool hasRichText = KTextLoader::containsRichText(parent);
 
     forEachElement(textParagraphElement , parent) {
         if (textParagraphElement.localName() == "p" &&
@@ -1681,7 +1681,7 @@ void KCCell::loadOdfCellText(const KXmlElement& parent, KCOdfLoadingContext& tab
 
         if (hasRichText && !findDrawElements(parent)) {
             // for now we don't support richtext and embedded shapes in the same cell;
-            // this is because they would currently be loaded twice, once by the KoTextLoader
+            // this is because they would currently be loaded twice, once by the KTextLoader
             // and later properly by the cell itself
 
             KCStyle style; style.setDefault();
@@ -1698,7 +1698,7 @@ void KCCell::loadOdfCellText(const KXmlElement& parent, KCOdfLoadingContext& tab
             QTextCharFormat format = style.asCharFormat();
             sheet()->map()->textStyleManager()->defaultParagraphStyle()->characterStyle()->copyProperties(format);
 
-            KoTextLoader loader(*tableContext.shapeContext);
+            KTextLoader loader(*tableContext.shapeContext);
             QSharedPointer<QTextDocument> doc(new QTextDocument);
             KTextDocument(doc.data()).setStyleManager(sheet()->map()->textStyleManager());
 

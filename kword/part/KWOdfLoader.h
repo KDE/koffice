@@ -25,7 +25,7 @@
 
 #include "KWord.h"
 
-#include <KoTextLoader.h>
+#include <KTextLoader.h>
 #include <QPointer>
 
 class KWDocument;

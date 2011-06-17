@@ -42,17 +42,17 @@ class KXmlElement;
 class KXmlNode;
 
 /**
- * The KoTextLoader loads is use to load text for one and only one textdocument or shape
+ * The KTextLoader loads is use to load text for one and only one textdocument or shape
  * to the scribe text-engine using QTextCursor objects. So if you have two shapes 2 different
- * KoTextLoader are used for that. Also if you have a frame with text inside a text a new
- * KoTextLoader is used.
+ * KTextLoader are used for that. Also if you have a frame with text inside a text a new
+ * KTextLoader is used.
  *
- * If you want to use the KoTextLoader for text that needs styles from styles.xml. e.g.
+ * If you want to use the KTextLoader for text that needs styles from styles.xml. e.g.
  * test shapes on master pages, you need to set KOdfLoadingContext::setUseStylesAutoStyles( true ).
  *
  * Don't forget to unset it if you later want to load text that needs content.xml.
  */
-class KOTEXT_EXPORT KoTextLoader : public QObject
+class KOTEXT_EXPORT KTextLoader : public QObject
 {
     Q_OBJECT
 public:
@@ -70,14 +70,14 @@ public:
     * Notice that despite this being a QObject there is no 'parent' available for
     * memory management here.
     *
-    * @param context The context the KoTextLoader is called in
+    * @param context The context the KTextLoader is called in
     */
-    explicit KoTextLoader(KShapeLoadingContext &context, KShape *shape = 0);
+    explicit KTextLoader(KShapeLoadingContext &context, KShape *shape = 0);
 
     /**
     * Destructor.
     */
-    ~KoTextLoader();
+    ~KTextLoader();
 
     /**
     * Load the body from the \p element into the \p cursor .

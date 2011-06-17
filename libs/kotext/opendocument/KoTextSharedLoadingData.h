@@ -52,7 +52,7 @@ class KShapeLoadingContext;
  */
 class KOTEXT_EXPORT KoTextSharedLoadingData : public KSharedLoadingData
 {
-    friend class KoTextLoader;
+    friend class KTextLoader;
 public:
     KoTextSharedLoadingData();
     virtual ~KoTextSharedLoadingData();

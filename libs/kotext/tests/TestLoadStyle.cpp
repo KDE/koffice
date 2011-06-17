@@ -20,7 +20,7 @@
 #include "TestLoadStyle.h"
 
 #include <KOdfStore.h>
-#include <KoTextLoader.h>
+#include <KTextLoader.h>
 #include <KXmlReader.h>
 #include <KOdfStoreReader.h>
 #include <KTemporaryFile>

@@ -25,7 +25,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoTextLoader.h"
+#include "KTextLoader.h"
 #include <KoTextMeta.h>
 #include <KoBookmark.h>
 #include <KoBookmarkManager.h>
@@ -87,12 +87,12 @@
 #include <QTextStream>
 #include <QXmlStreamReader>
 
-#include "KoTextLoader_p.h"
+#include "KTextLoader_p.h"
 // if defined then debugging is enabled
 // #define KOOPENDOCUMENTLOADER_DEBUG
 
 /// \internal d-pointer class.
-class KoTextLoader::Private
+class KTextLoader::Private
 {
 public:
     KShapeLoadingContext &context;
@@ -211,7 +211,7 @@ class AttributeChangeRecord {
         QString attributeValue;
 };
 
-bool KoTextLoader::containsRichText(const KXmlElement &element)
+bool KTextLoader::containsRichText(const KXmlElement &element)
 {
     KXmlElement textParagraphElement;
     forEachElement(textParagraphElement, element) {
@@ -237,7 +237,7 @@ bool KoTextLoader::containsRichText(const KXmlElement &element)
     return false;
 }
 
-void KoTextLoader::Private::openChangeRegion(const KXmlElement& element)
+void KTextLoader::Private::openChangeRegion(const KXmlElement& element)
 {
     QString id;
     AttributeChangeRecord attributeChange;
@@ -337,7 +337,7 @@ void KoTextLoader::Private::openChangeRegion(const KXmlElement& element)
     }
 }
 
-void KoTextLoader::Private::closeChangeRegion(const KXmlElement& element)
+void KTextLoader::Private::closeChangeRegion(const KXmlElement& element)
 {
     QString id;
     int changeId;
@@ -371,7 +371,7 @@ void KoTextLoader::Private::closeChangeRegion(const KXmlElement& element)
     splitStack(changeId);
 }
 
-void KoTextLoader::Private::splitStack(int id)
+void KTextLoader::Private::splitStack(int id)
 {
     if (changeStack.isEmpty())
         return;
@@ -385,7 +385,7 @@ void KoTextLoader::Private::splitStack(int id)
     changeStack.push(newId);
 }
 
-KoList *KoTextLoader::Private::list(const QTextDocument *document, KListStyle *listStyle)
+KoList *KTextLoader::Private::list(const QTextDocument *document, KListStyle *listStyle)
 {
     if (lists.contains(listStyle))
         return lists[listStyle];
@@ -394,9 +394,9 @@ KoList *KoTextLoader::Private::list(const QTextDocument *document, KListStyle *l
     return newList;
 }
 
-/////////////KoTextLoader
+/////////////KTextLoader
 
-KoTextLoader::KoTextLoader(KShapeLoadingContext &context, KShape *shape)
+KTextLoader::KTextLoader(KShapeLoadingContext &context, KShape *shape)
         : QObject()
         , d(new Private(context, shape))
 {
@@ -421,12 +421,12 @@ KoTextLoader::KoTextLoader(KShapeLoadingContext &context, KShape *shape)
     }
 }
 
-KoTextLoader::~KoTextLoader()
+KTextLoader::~KTextLoader()
 {
     delete d;
 }
 
-void KoTextLoader::loadBody(const KXmlElement &bodyElem, QTextCursor &cursor)
+void KTextLoader::loadBody(const KXmlElement &bodyElem, QTextCursor &cursor)
 {
     static int rootCallChecker = 0;
     if (rootCallChecker == 0) {
@@ -681,7 +681,7 @@ void KoTextLoader::loadBody(const KXmlElement &bodyElem, QTextCursor &cursor)
                         if (tag.attributeNS(KOdfXmlNS::delta, "insertion-type") != "")
                             d->closeChangeRegion(tag);
                     } else {
-                        kWarning(32500) << "KoTextLoader::loadBody unhandled table::" << localName;
+                        kWarning(32500) << "KTextLoader::loadBody unhandled table::" << localName;
                     }
                 }
             }
@@ -703,7 +703,7 @@ void KoTextLoader::loadBody(const KXmlElement &bodyElem, QTextCursor &cursor)
     cursor.endEditBlock();
 }
 
-KXmlNode KoTextLoader::loadDeleteMerges(const KXmlElement& elem, QString *generatedXmlString)
+KXmlNode KTextLoader::loadDeleteMerges(const KXmlElement& elem, QString *generatedXmlString)
 {
     KXmlNode lastProcessedNode = elem;
     d->nameSpacesList.clear();
@@ -743,7 +743,7 @@ KXmlNode KoTextLoader::loadDeleteMerges(const KXmlElement& elem, QString *genera
     return lastProcessedNode.previousSibling();
 }
 
-void KoTextLoader::Private::copyRemoveLeavingContentStart(const KXmlNode &node, QTextStream &xmlStream)
+void KTextLoader::Private::copyRemoveLeavingContentStart(const KXmlNode &node, QTextStream &xmlStream)
 {
     KXmlElement element = node.firstChild().toElement();
     QString changeEndId = node.toElement().attributeNS(KOdfXmlNS::delta, "end-element-idref");
@@ -794,7 +794,7 @@ void KoTextLoader::Private::copyRemoveLeavingContentStart(const KXmlNode &node, 
     }
 }
 
-void KoTextLoader::Private::copyRemoveLeavingContentEnd(const KXmlNode &node, QTextStream &xmlStream)
+void KTextLoader::Private::copyRemoveLeavingContentEnd(const KXmlNode &node, QTextStream &xmlStream)
 {
     QString changeEndId = node.toElement().attributeNS(KOdfXmlNS::delta, "end-element-id");
     QString nodeName = removeLeavingContentMap.value(changeEndId);
@@ -828,12 +828,12 @@ void KoTextLoader::Private::copyRemoveLeavingContentEnd(const KXmlNode &node, QT
     xmlStream << "</" << nodeName << ">";
 }
 
-void KoTextLoader::Private::copyInsertAroundContent(const KXmlNode &node, QTextStream &xmlStream)
+void KTextLoader::Private::copyInsertAroundContent(const KXmlNode &node, QTextStream &xmlStream)
 {
     copyNode(node, xmlStream, true);
 }
 
-void KoTextLoader::Private::copyNode(const KXmlNode &node, QTextStream &xmlStream, bool copyOnlyChildren)
+void KTextLoader::Private::copyNode(const KXmlNode &node, QTextStream &xmlStream, bool copyOnlyChildren)
 {
     if (node.isText()) {
         xmlStream << node.toText().data();
@@ -868,7 +868,7 @@ void KoTextLoader::Private::copyNode(const KXmlNode &node, QTextStream &xmlStrea
     }
 }
 
-void KoTextLoader::Private::copyTagStart(const KXmlElement &element, QTextStream &xmlStream, bool ignoreChangeAttributes)
+void KTextLoader::Private::copyTagStart(const KXmlElement &element, QTextStream &xmlStream, bool ignoreChangeAttributes)
 {
     int index = nameSpacesList.indexOf(element.namespaceURI());
     if (index == -1) {
@@ -901,7 +901,7 @@ void KoTextLoader::Private::copyTagStart(const KXmlElement &element, QTextStream
     xmlStream << ">";
 }
 
-void KoTextLoader::Private::copyTagEnd(const KXmlElement &element, QTextStream &xmlStream)
+void KTextLoader::Private::copyTagEnd(const KXmlElement &element, QTextStream &xmlStream)
 {
     int index = nameSpacesList.indexOf(element.namespaceURI());
     QString nodeName  = QString("ns%1") + ":" + element.localName();
@@ -909,7 +909,7 @@ void KoTextLoader::Private::copyTagEnd(const KXmlElement &element, QTextStream &
     xmlStream << "</" << nodeName << ">";
 }
 
-void KoTextLoader::loadDeleteChangeOutsidePorH(QString id, QTextCursor &cursor)
+void KTextLoader::loadDeleteChangeOutsidePorH(QString id, QTextCursor &cursor)
 {
     int startPosition = cursor.position();
     int changeId = d->changeTracker->loadedChangeId(id);
@@ -939,7 +939,7 @@ void KoTextLoader::loadDeleteChangeOutsidePorH(QString id, QTextCursor &cursor)
     }
 }
 
-void KoTextLoader::loadParagraph(const KXmlElement &element, QTextCursor &cursor)
+void KTextLoader::loadParagraph(const KXmlElement &element, QTextCursor &cursor)
 {
     const QString styleName = element.attributeNS(KOdfXmlNS::text, "style-name",
                                                   QString());
@@ -999,7 +999,7 @@ could be true; but the following code has no effect... (TZander)
     cursor.setCharFormat(cf);   // restore the cursor char format
 }
 
-void KoTextLoader::loadHeading(const KXmlElement &element, QTextCursor &cursor)
+void KTextLoader::loadHeading(const KXmlElement &element, QTextCursor &cursor)
 {
     Q_ASSERT(d->styleManager);
     int level = qMax(-1, element.attributeNS(KOdfXmlNS::text, "outline-level", "-1").toInt());
@@ -1061,7 +1061,7 @@ void KoTextLoader::loadHeading(const KXmlElement &element, QTextCursor &cursor)
     cursor.setCharFormat(cf);   // restore the cursor char format
 }
 
-void KoTextLoader::loadList(const KXmlElement &element, QTextCursor &cursor)
+void KTextLoader::loadList(const KXmlElement &element, QTextCursor &cursor)
 {
     const bool numberedParagraph = element.localName() == "numbered-paragraph";
 
@@ -1172,7 +1172,7 @@ void KoTextLoader::loadList(const KXmlElement &element, QTextCursor &cursor)
     }
 }
 
-void KoTextLoader::loadListItem(KXmlElement &e, QTextCursor &cursor, int level)
+void KTextLoader::loadListItem(KXmlElement &e, QTextCursor &cursor, int level)
 {
     bool numberedParagraph = e.parentNode().toElement().localName() == "numbered-paragraph";
 
@@ -1255,7 +1255,7 @@ void KoTextLoader::loadListItem(KXmlElement &e, QTextCursor &cursor, int level)
     kDebug(32500) << "text-style:" << KTextDebug::textAttributes(cursor.blockCharFormat());
 }
 
-bool KoTextLoader::Private::checkForListItemSplit(const KXmlElement &element)
+bool KTextLoader::Private::checkForListItemSplit(const KXmlElement &element)
 {
     QString endId = element.attributeNS(KOdfXmlNS::delta, "end-element-idref");
     int insertedListItems = 0;
@@ -1284,7 +1284,7 @@ bool KoTextLoader::Private::checkForListItemSplit(const KXmlElement &element)
     return isSplitListItem;
 }
 
-KXmlNode KoTextLoader::Private::loadListItemSplit(const KXmlElement &elem, QString *generatedXmlString)
+KXmlNode KTextLoader::Private::loadListItemSplit(const KXmlElement &elem, QString *generatedXmlString)
 {
     KXmlNode lastProcessedNode = elem;
 
@@ -1362,7 +1362,7 @@ KXmlNode KoTextLoader::Private::loadListItemSplit(const KXmlElement &elem, QStri
     return lastProcessedNode;
 }
 
-void KoTextLoader::loadSection(const KXmlElement &sectionElem, QTextCursor &cursor)
+void KTextLoader::loadSection(const KXmlElement &sectionElem, QTextCursor &cursor)
 {
     // Add a frame to the current layout
     QTextFrameFormat sectionFormat;
@@ -1382,7 +1382,7 @@ void KoTextLoader::loadSection(const KXmlElement &sectionElem, QTextCursor &curs
     cursor.movePosition(QTextCursor::End);
 }
 
-void KoTextLoader::loadNote(const KXmlElement &noteElem, QTextCursor &cursor)
+void KTextLoader::loadNote(const KXmlElement &noteElem, QTextCursor &cursor)
 {
     kDebug(32500) << "Loading a text:note element.";
     KTextDocumentLayout *layout = qobject_cast<KTextDocumentLayout*>(cursor.block().document()->documentLayout());
@@ -1398,7 +1398,7 @@ void KoTextLoader::loadNote(const KXmlElement &noteElem, QTextCursor &cursor)
     }
 }
 
-QString KoTextLoader::createUniqueBookmarkName(KoBookmarkManager* bmm, QString bookmarkName, bool isEndMarker)
+QString KTextLoader::createUniqueBookmarkName(KoBookmarkManager* bmm, QString bookmarkName, bool isEndMarker)
 {
     QString ret = bookmarkName;
     int uniqID = 0;
@@ -1420,7 +1420,7 @@ QString KoTextLoader::createUniqueBookmarkName(KoBookmarkManager* bmm, QString b
     return ret;
 }
 
-void KoTextLoader::loadText(const QString &fulltext, QTextCursor &cursor,
+void KTextLoader::loadText(const QString &fulltext, QTextCursor &cursor,
                             bool *stripLeadingSpace, bool isLastNode)
 {
     QString text = KoTextLoaderP::normalizeWhitespace(fulltext, *stripLeadingSpace);
@@ -1457,7 +1457,7 @@ void KoTextLoader::loadText(const QString &fulltext, QTextCursor &cursor,
     }
 }
 
-void KoTextLoader::loadSpan(const KXmlElement &element, QTextCursor &cursor, bool *stripLeadingSpace)
+void KTextLoader::loadSpan(const KXmlElement &element, QTextCursor &cursor, bool *stripLeadingSpace)
 {
     kDebug(32500) << "text-style:" << KTextDebug::textAttributes(cursor.blockCharFormat());
     Q_ASSERT(stripLeadingSpace);
@@ -1714,7 +1714,7 @@ void KoTextLoader::loadSpan(const KXmlElement &element, QTextCursor &cursor, boo
     --d->loadSpanLevel;
 }
 
-void KoTextLoader::loadDeleteChangeWithinPorH(QString id, QTextCursor &cursor)
+void KTextLoader::loadDeleteChangeWithinPorH(QString id, QTextCursor &cursor)
 {
     int startPosition = cursor.position();
     int changeId = d->changeTracker->loadedChangeId(id);
@@ -1762,7 +1762,7 @@ void KoTextLoader::loadDeleteChangeWithinPorH(QString id, QTextCursor &cursor)
     }
 }
 
-void KoTextLoader::loadMerge(const KXmlElement &element, QTextCursor &cursor)
+void KTextLoader::loadMerge(const KXmlElement &element, QTextCursor &cursor)
 {
     d->openChangeRegion(element);
     QString changeId = element.attributeNS(KOdfXmlNS::delta, "removal-change-idref");
@@ -1800,7 +1800,7 @@ void KoTextLoader::loadMerge(const KXmlElement &element, QTextCursor &cursor)
     d->closeChangeRegion(element);
 }
 
-KDeleteChangeMarker * KoTextLoader::Private::insertDeleteChangeMarker(QTextCursor &cursor, const QString &id)
+KDeleteChangeMarker * KTextLoader::Private::insertDeleteChangeMarker(QTextCursor &cursor, const QString &id)
 {
     KDeleteChangeMarker *retMarker = NULL;
     int changeId = changeTracker->loadedChangeId(id);
@@ -1821,7 +1821,7 @@ KDeleteChangeMarker * KoTextLoader::Private::insertDeleteChangeMarker(QTextCurso
     return retMarker;
 }
 
-bool KoTextLoader::Private::checkForDeleteMerge(QTextCursor &cursor, const QString &id, int startPosition)
+bool KTextLoader::Private::checkForDeleteMerge(QTextCursor &cursor, const QString &id, int startPosition)
 {
     bool result = false;
 
@@ -1862,7 +1862,7 @@ bool KoTextLoader::Private::checkForDeleteMerge(QTextCursor &cursor, const QStri
     return result;
 }
 
-void KoTextLoader::Private::processDeleteChange(QTextCursor &cursor)
+void KTextLoader::Private::processDeleteChange(QTextCursor &cursor)
 {
     QList<KDeleteChangeMarker *> markersList = deleteChangeMarkerMap.keys();
 
@@ -1886,7 +1886,7 @@ void KoTextLoader::Private::processDeleteChange(QTextCursor &cursor)
     }
 }
 
-void KoTextLoader::loadTable(const KXmlElement &tableElem, QTextCursor &cursor)
+void KTextLoader::loadTable(const KXmlElement &tableElem, QTextCursor &cursor)
 {
     //add block before table,
     // **************This Should Be fixed: Just Commenting out for now***************
@@ -1971,7 +1971,7 @@ void KoTextLoader::loadTable(const KXmlElement &tableElem, QTextCursor &cursor)
     cursor.movePosition(QTextCursor::Right, QTextCursor::MoveAnchor, 1);
 }
 
-void KoTextLoader::loadTableColumn(KXmlElement &tblTag, QTextTable *tbl, int &columns)
+void KTextLoader::loadTableColumn(KXmlElement &tblTag, QTextTable *tbl, int &columns)
 {
     KTableColumnAndRowStyleManager *tcarManager = reinterpret_cast<KTableColumnAndRowStyleManager *>
                                                    (tbl->format().property(KTableStyle::ColumnAndRowStyleManager).value<void *>());
@@ -1999,7 +1999,7 @@ void KoTextLoader::loadTableColumn(KXmlElement &tblTag, QTextTable *tbl, int &co
     tbl->resize(qMax(rows, 1), columns);
 }
 
-void KoTextLoader::loadTableRow(KXmlElement &tblTag, QTextTable *tbl, QList<QRect> &spanStore, QTextCursor &cursor, int &rows)
+void KTextLoader::loadTableRow(KXmlElement &tblTag, QTextTable *tbl, QList<QRect> &spanStore, QTextCursor &cursor, int &rows)
 {
     KTableColumnAndRowStyleManager *tcarManager = reinterpret_cast<KTableColumnAndRowStyleManager *>
                                                    (tbl->format().property(KTableStyle::ColumnAndRowStyleManager).value<void *>());
@@ -2059,7 +2059,7 @@ void KoTextLoader::loadTableRow(KXmlElement &tblTag, QTextTable *tbl, QList<QRec
     }
 }
 
-void KoTextLoader::loadTableCell(KXmlElement &rowTag, QTextTable *tbl, QList<QRect> &spanStore, QTextCursor &cursor, int &currentCell)
+void KTextLoader::loadTableCell(KXmlElement &rowTag, QTextTable *tbl, QList<QRect> &spanStore, QTextCursor &cursor, int &currentCell)
 {
     KTableColumnAndRowStyleManager *tcarManager = reinterpret_cast<KTableColumnAndRowStyleManager *>
                                                    (tbl->format().property(KTableStyle::ColumnAndRowStyleManager).value<void *>());
@@ -2116,7 +2116,7 @@ void KoTextLoader::loadTableCell(KXmlElement &rowTag, QTextTable *tbl, QList<QRe
 
 }
 
-void KoTextLoader::loadShape(const KXmlElement &element, QTextCursor &cursor)
+void KTextLoader::loadShape(const KXmlElement &element, QTextCursor &cursor)
 {
     KShape *shape = KShapeRegistry::instance()->createShapeFromOdf(element, d->context);
     if (!shape) {
@@ -2168,7 +2168,7 @@ void KoTextLoader::loadShape(const KXmlElement &element, QTextCursor &cursor)
     }
 }
 
-void KoTextLoader::loadTableOfContents(const KXmlElement &element, QTextCursor &cursor)
+void KTextLoader::loadTableOfContents(const KXmlElement &element, QTextCursor &cursor)
 {
     // Add a frame to the current layout
     QTextFrameFormat tocFormat;
@@ -2220,12 +2220,12 @@ void KoTextLoader::loadTableOfContents(const KXmlElement &element, QTextCursor &
     cursor.movePosition(QTextCursor::End);
 }
 
-void KoTextLoader::startBody(int total)
+void KTextLoader::startBody(int total)
 {
     d->bodyProgressTotal += total;
 }
 
-void KoTextLoader::processBody()
+void KTextLoader::processBody()
 {
     d->bodyProgressValue++;
     if (d->dt.elapsed() >= d->nextProgressReportMs) {  // update based on elapsed time, don't saturate the queue
@@ -2236,11 +2236,11 @@ void KoTextLoader::processBody()
     }
 }
 
-void KoTextLoader::endBody()
+void KTextLoader::endBody()
 {
 }
 
-void KoTextLoader::storeDeleteChanges(KXmlElement &element)
+void KTextLoader::storeDeleteChanges(KXmlElement &element)
 {
     KXmlElement tag;
     forEachElement(tag, element) {
@@ -2261,7 +2261,7 @@ void KoTextLoader::storeDeleteChanges(KXmlElement &element)
     }
 }
 
-void KoTextLoader::markBlocksAsInserted(QTextCursor& cursor,int from, const QString& id)
+void KTextLoader::markBlocksAsInserted(QTextCursor& cursor,int from, const QString& id)
 {
     int to = cursor.position();
     QTextCursor editCursor(cursor);
@@ -2282,4 +2282,4 @@ void KoTextLoader::markBlocksAsInserted(QTextCursor& cursor,int from, const QStr
     } while(startBlock != endBlock);
 }
 
-#include <KoTextLoader.moc>
+#include <KTextLoader.moc>

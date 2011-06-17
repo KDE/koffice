@@ -1,6 +1,6 @@
 #include <qtest.h>
 
-#include "../opendocument/KoTextLoader_p.h"
+#include "../opendocument/KTextLoader_p.h"
 
 #define ITERATION_COUNT 1000
 

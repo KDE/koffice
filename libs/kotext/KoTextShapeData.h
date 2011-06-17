@@ -134,7 +134,7 @@ public:
     * Load the TextShape from ODF.
     *
     * @see the @a TextShape::loadOdf() method which calls this method.
-    * @see the @a KoTextLoader::loadBody() method which got called by this method
+    * @see the @a KTextLoader::loadBody() method which got called by this method
     * to load the ODF.
     */
     bool loadOdf(const KXmlElement &element, KShapeLoadingContext &context, KDocumentRdfBase *rdfData, KShape *shape = 0);

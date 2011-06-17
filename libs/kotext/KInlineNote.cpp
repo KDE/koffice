@@ -23,7 +23,7 @@
 #include <KXmlWriter.h>
 #include <KOdfXmlNS.h>
 #include <KShapeSavingContext.h>
-#include <KoTextLoader.h>
+#include <KTextLoader.h>
 #include <KoTextWriter.h>
 #include <KTextDocument.h>
 #include "changetracker/KChangeTracker.h"
@@ -174,7 +174,7 @@ bool KInlineNote::loadOdf(const KXmlElement & element, KShapeLoadingContext &con
     d->styleManager = styleManager;
     textDocument.setChangeTracker(changeTracker);
 
-    KoTextLoader loader(context);
+    KTextLoader loader(context);
 
     if (element.namespaceURI() == KOdfXmlNS::text && element.localName() == "note") {
 

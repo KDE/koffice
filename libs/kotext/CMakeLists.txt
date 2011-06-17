@@ -70,7 +70,7 @@ set(kotext_LIB_SRCS
     styles/KSectionStyle.cpp
     opendocument/KoTextSharedLoadingData.cpp
     opendocument/KoTextSharedSavingData.cpp
-    opendocument/KoTextLoader.cpp
+    opendocument/KTextLoader.cpp
     opendocument/KoTextWriter.cpp
 
     changetracker/KChangeTracker.cpp
