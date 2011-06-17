@@ -26,7 +26,7 @@
 
 class KTextBlockData;
 class KoTextReference;
-class KoTextLocatorPrivate;
+class KTextLocatorPrivate;
 
 /**
  * This inline object can be inserted in text to mark it and to later get location information from.

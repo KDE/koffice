@@ -36,10 +36,10 @@
 #include <QTextBlock>
 #include <QTextCursor>
 
-class KoTextLocatorPrivate : public KInlineObjectPrivate
+class KTextLocatorPrivate : public KInlineObjectPrivate
 {
 public:
-    KoTextLocatorPrivate(KTextLocator *q)
+    KTextLocatorPrivate(KTextLocator *q)
         : KInlineObjectPrivate(q),
         dirty(false),
         chapterPosition(-1),
@@ -91,7 +91,7 @@ public:
 
 
 KTextLocator::KTextLocator()
-        : KInlineObject(*(new KoTextLocatorPrivate(this)), false)
+        : KInlineObject(*(new KTextLocatorPrivate(this)), false)
 {
 }
 
@@ -120,7 +120,7 @@ void KTextLocator::paint(QPainter &, QPaintDevice *, const QRectF &, QTextInline
 QString KTextLocator::chapter() const
 {
     Q_D(const KTextLocator);
-    const_cast<KoTextLocatorPrivate*>(d)->update();
+    const_cast<KTextLocatorPrivate*>(d)->update();
     if (d->chapterPosition < 0)
         return QString();
     QTextBlock block = d->document->findBlock(d->chapterPosition);
@@ -130,7 +130,7 @@ QString KTextLocator::chapter() const
 KTextBlockData *KTextLocator::chapterBlockData() const
 {
     Q_D(const KTextLocator);
-    const_cast<KoTextLocatorPrivate*>(d)->update();
+    const_cast<KTextLocatorPrivate*>(d)->update();
     if (d->chapterPosition < 0)
         return 0;
     QTextBlock block = d->document->findBlock(d->chapterPosition);
@@ -140,7 +140,7 @@ KTextBlockData *KTextLocator::chapterBlockData() const
 int KTextLocator::pageNumber() const
 {
     Q_D(const KTextLocator);
-    const_cast<KoTextLocatorPrivate*>(d)->update();
+    const_cast<KTextLocatorPrivate*>(d)->update();
     return d->pageNumber;
 }
 
