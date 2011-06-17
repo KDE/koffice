@@ -42,10 +42,10 @@ public:
     KTextOnShapeContainer::ResizeBehavior resizeBehavior;
 };
 
-class KoTextOnShapeContainerModel : public SimpleShapeContainerModel
+class KTextOnShapeContainerModel : public SimpleShapeContainerModel
 {
 public:
-    KoTextOnShapeContainerModel(KTextOnShapeContainer *qq, KoTextOnShapeContainerPrivate *containerData);
+    KTextOnShapeContainerModel(KTextOnShapeContainer *qq, KoTextOnShapeContainerPrivate *containerData);
     virtual void containerChanged(KShapeContainer *container, KShape::ChangeType type);
     virtual void proposeMove(KShape *child, QPointF &move);
     virtual void childChanged(KShape *child, KShape::ChangeType type);
@@ -73,15 +73,15 @@ KoTextOnShapeContainerPrivate::~KoTextOnShapeContainerPrivate()
     delete textShape;
 }
 
-/// KoTextOnShapeContainerModel
-KoTextOnShapeContainerModel::KoTextOnShapeContainerModel(KTextOnShapeContainer *qq, KoTextOnShapeContainerPrivate *data)
+/// KTextOnShapeContainerModel
+KTextOnShapeContainerModel::KTextOnShapeContainerModel(KTextOnShapeContainer *qq, KoTextOnShapeContainerPrivate *data)
     : q(qq),
     containerData(data),
     lock(false)
 {
 }
 
-void KoTextOnShapeContainerModel::containerChanged(KShapeContainer *container, KShape::ChangeType type)
+void KTextOnShapeContainerModel::containerChanged(KShapeContainer *container, KShape::ChangeType type)
 {
 #ifdef QT_NO_DEBUG
     Q_UNUSED(container);
@@ -99,7 +99,7 @@ void KoTextOnShapeContainerModel::containerChanged(KShapeContainer *container, K
     lock = false;
 }
 
-void KoTextOnShapeContainerModel::proposeMove(KShape *child, QPointF &move)
+void KTextOnShapeContainerModel::proposeMove(KShape *child, QPointF &move)
 {
     if (child == containerData->textShape) { // not user movable
         move.setX(0);
@@ -107,7 +107,7 @@ void KoTextOnShapeContainerModel::proposeMove(KShape *child, QPointF &move)
     }
 }
 
-void KoTextOnShapeContainerModel::childChanged(KShape *child, KShape::ChangeType type)
+void KTextOnShapeContainerModel::childChanged(KShape *child, KShape::ChangeType type)
 {
     if (lock) {
         return;
@@ -148,7 +148,7 @@ KTextOnShapeContainer::KTextOnShapeContainer(KShape *childShape, KResourceManage
     childShape->setPosition(QPointF()); // since its relative to my position, this won't move it
     childShape->setSelectable(false);
 
-    d->model = new KoTextOnShapeContainerModel(this, d);
+    d->model = new KTextOnShapeContainerModel(this, d);
     addShape(childShape);
 
     QSet<KShape*> delegates;
