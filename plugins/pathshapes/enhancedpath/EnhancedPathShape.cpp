@@ -31,7 +31,7 @@
 #include <KXmlWriter.h>
 #include <KXmlReader.h>
 #include <KShapeSavingContext.h>
-#include <KoTextOnShapeContainer.h>
+#include <KTextOnShapeContainer.h>
 #include <KUnit.h>
 #include <KoOdfWorkaround.h>
 #include <KPathPoint.h>
@@ -468,7 +468,7 @@ bool EnhancedPathShape::loadOdf(const KXmlElement & element, KShapeLoadingContex
 
     loadOdfAttributes(element, context, OdfMandatories | OdfTransformation);
 
-    KoTextOnShapeContainer::tryWrapShape(this, element, context);
+    KTextOnShapeContainer::tryWrapShape(this, element, context);
 
     return true;
 }

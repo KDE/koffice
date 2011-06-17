@@ -32,7 +32,7 @@
 #include "KShapeBackground.h"
 #include "KShapeContainer.h"
 #include "KFilterEffectStack.h"
-#include "KoTextOnShapeContainer.h"
+#include "KTextOnShapeContainer.h"
 
 #include <KXmlReader.h>
 #include <KXmlWriter.h>
@@ -177,7 +177,7 @@ bool KPathShape::loadOdf(const KXmlElement & element, KShapeLoadingContext &cont
     setPosition(pos);
 
     loadOdfAttributes(element, context, OdfTransformation);
-    KoTextOnShapeContainer::tryWrapShape(this, element, context);
+    KTextOnShapeContainer::tryWrapShape(this, element, context);
 
     return true;
 }

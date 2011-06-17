@@ -24,7 +24,7 @@
 #include <KPathPoint.h>
 #include <KShapeSavingContext.h>
 #include <KXmlReader.h>
-#include <KoTextOnShapeContainer.h>
+#include <KTextOnShapeContainer.h>
 #include <KXmlWriter.h>
 #include <KOdfXmlNS.h>
 #include <KUnit.h>
@@ -135,7 +135,7 @@ bool EllipseShape::loadOdf(const KXmlElement &element, KShapeLoadingContext &con
 
     loadOdfAttributes(element, context, OdfMandatories | OdfTransformation | OdfAdditionalAttributes | OdfCommonChildElements);
 
-    KoTextOnShapeContainer::tryWrapShape(this, element, context);
+    KTextOnShapeContainer::tryWrapShape(this, element, context);
 
     return true;
 }

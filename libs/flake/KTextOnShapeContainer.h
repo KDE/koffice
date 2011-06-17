@@ -32,7 +32,7 @@ class KResourceManager;
  * Adding this container as a parent to any shape will allow you to add text
  * on top of that shape in the form of the decorator (design) pattern.
  */
-class FLAKE_EXPORT KoTextOnShapeContainer : public KShapeContainer
+class FLAKE_EXPORT KTextOnShapeContainer : public KShapeContainer
 {
 public:
     /**
@@ -42,8 +42,8 @@ public:
      *      integrate better into the document. Not passing this will mean that for example
      *      the text styles will not be shared with other shapes.
      */
-    explicit KoTextOnShapeContainer(KShape *childShape, KResourceManager *documentResources = 0);
-    virtual ~KoTextOnShapeContainer();
+    explicit KTextOnShapeContainer(KShape *childShape, KResourceManager *documentResources = 0);
+    virtual ~KTextOnShapeContainer();
 
     virtual bool loadOdf(const KXmlElement &element, KShapeLoadingContext &context);
     virtual void saveOdf(KShapeSavingContext &context) const;
@@ -91,7 +91,7 @@ public:
      * Try to load text-on-shape from \a element and wrap \a shape with it.
      * In ODF certain shape-types can have a "text:p" child-element which
      * translates in KOffice design to it ending up with a
-     * KoTextOnShapeContainer as parent.
+     * KTextOnShapeContainer as parent.
      * What this method does is check if the argument element has a text:p
      * child and if it does (and is valid) then it adds a parent to the
      * shape (see constructor) and loads the text data.
@@ -104,7 +104,7 @@ public:
             KShapeLoadingContext &context);
 
 private:
-    Q_DECLARE_PRIVATE(KoTextOnShapeContainer)
+    Q_DECLARE_PRIVATE(KTextOnShapeContainer)
 };
 
 #endif

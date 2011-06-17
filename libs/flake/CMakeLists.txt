@@ -103,7 +103,7 @@ set(flake_SRCS
     KFilterEffectConfigWidgetBase.cpp
     KFilterEffectRenderContext.cpp
     KFilterEffectLoadingContext.cpp
-    KoTextOnShapeContainer.cpp
+    KTextOnShapeContainer.cpp
     KoTextShapeDataBase.cpp
     KoPluginLoader.cpp
     commands/KShapeGroupCommand.cpp
@@ -322,7 +322,7 @@ install(
     KEventAction.h
     KEventActionRegistry.h
     KShapePainter.h
-    KoTextOnShapeContainer.h
+    KTextOnShapeContainer.h
     KoPluginLoader.h
     KShapeShadow.h
     KCanvasSupervisor.h

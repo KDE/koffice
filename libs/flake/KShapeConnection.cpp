@@ -607,7 +607,7 @@ bool KShapeConnection::loadOdf(const KXmlElement &element, KShapeLoadingContext 
     QStringList skewValues = skew.simplified().split(' ', QString::SkipEmptyParts);
     d->connectionStrategy->setSkew(skewValues);
 
-    //KoTextOnShapeContainer::tryWrapShape(this, element, context);
+    //KTextOnShapeContainer::tryWrapShape(this, element, context);
 
     return true;
 }

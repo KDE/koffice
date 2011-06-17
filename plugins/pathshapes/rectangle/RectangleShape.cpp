@@ -22,7 +22,7 @@
 #include "RectangleShape.h"
 
 #include <KPathPoint.h>
-#include <KoTextOnShapeContainer.h>
+#include <KTextOnShapeContainer.h>
 #include <KShapeSavingContext.h>
 #include <KXmlReader.h>
 #include <KXmlWriter.h>
@@ -67,7 +67,7 @@ bool RectangleShape::loadOdf(const KXmlElement &element, KShapeLoadingContext &c
     updateHandles();
 
     loadOdfAttributes(element, context, OdfTransformation);
-    KoTextOnShapeContainer::tryWrapShape(this, element, context);
+    KTextOnShapeContainer::tryWrapShape(this, element, context);
 
     return true;
 }

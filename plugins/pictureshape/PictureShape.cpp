@@ -32,7 +32,7 @@
 #include <KOdfStorageDevice.h>
 #include <KUnit.h>
 #include <KOdfGenericStyle.h>
-#include <KoTextOnShapeContainer.h>
+#include <KTextOnShapeContainer.h>
 
 #include <QPainter>
 #include <QTimer>
@@ -242,7 +242,7 @@ bool PictureShape::loadOdfFrameElement(const KXmlElement &element, KShapeLoading
         }
     }
 
-    KoTextOnShapeContainer::tryWrapShape(this, element, context);
+    KTextOnShapeContainer::tryWrapShape(this, element, context);
 
     return true;
 }

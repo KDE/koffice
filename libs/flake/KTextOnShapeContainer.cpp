@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoTextOnShapeContainer.h"
+#include "KTextOnShapeContainer.h"
 #include "KShapeContainer_p.h"
 #include "SimpleShapeContainerModel_p.h"
 #include "KShapeRegistry.h"
@@ -39,13 +39,13 @@ public:
 
     KShape *content; // the original shape
     KShape *textShape;
-    KoTextOnShapeContainer::ResizeBehavior resizeBehavior;
+    KTextOnShapeContainer::ResizeBehavior resizeBehavior;
 };
 
 class KoTextOnShapeContainerModel : public SimpleShapeContainerModel
 {
 public:
-    KoTextOnShapeContainerModel(KoTextOnShapeContainer *qq, KoTextOnShapeContainerPrivate *containerData);
+    KoTextOnShapeContainerModel(KTextOnShapeContainer *qq, KoTextOnShapeContainerPrivate *containerData);
     virtual void containerChanged(KShapeContainer *container, KShape::ChangeType type);
     virtual void proposeMove(KShape *child, QPointF &move);
     virtual void childChanged(KShape *child, KShape::ChangeType type);
@@ -53,7 +53,7 @@ public:
         return true;
     }
 
-    KoTextOnShapeContainer *q;
+    KTextOnShapeContainer *q;
     KoTextOnShapeContainerPrivate *containerData;
     bool lock;
 };
@@ -63,7 +63,7 @@ KoTextOnShapeContainerPrivate::KoTextOnShapeContainerPrivate(KShapeContainer *q)
     : KShapeContainerPrivate(q),
     content(0),
     textShape(0),
-    resizeBehavior(KoTextOnShapeContainer::IndependendSizes)
+    resizeBehavior(KTextOnShapeContainer::IndependendSizes)
 {
 }
 
@@ -74,7 +74,7 @@ KoTextOnShapeContainerPrivate::~KoTextOnShapeContainerPrivate()
 }
 
 /// KoTextOnShapeContainerModel
-KoTextOnShapeContainerModel::KoTextOnShapeContainerModel(KoTextOnShapeContainer *qq, KoTextOnShapeContainerPrivate *data)
+KoTextOnShapeContainerModel::KoTextOnShapeContainerModel(KTextOnShapeContainer *qq, KoTextOnShapeContainerPrivate *data)
     : q(qq),
     containerData(data),
     lock(false)
@@ -129,11 +129,11 @@ void KoTextOnShapeContainerModel::childChanged(KShape *child, KShape::ChangeType
     lock = false;
 }
 
-/// KoTextOnShapeContainer
-KoTextOnShapeContainer::KoTextOnShapeContainer(KShape *childShape, KResourceManager *documentResources)
+/// KTextOnShapeContainer
+KTextOnShapeContainer::KTextOnShapeContainer(KShape *childShape, KResourceManager *documentResources)
     : KShapeContainer(*(new KoTextOnShapeContainerPrivate(this)))
 {
-    Q_D(KoTextOnShapeContainer);
+    Q_D(KTextOnShapeContainer);
     Q_ASSERT(childShape);
     d->content = childShape;
 
@@ -172,16 +172,16 @@ KoTextOnShapeContainer::KoTextOnShapeContainer(KShape *childShape, KResourceMana
     setToolDelegates(delegates);
 }
 
-KoTextOnShapeContainer::~KoTextOnShapeContainer()
+KTextOnShapeContainer::~KTextOnShapeContainer()
 {
-    Q_D(KoTextOnShapeContainer);
+    Q_D(KTextOnShapeContainer);
     // can't do this in the destructor of the Private class as by the time that destructor gets called there is no ShapeContainer anymore to check the parent
     if (d->content && d->content->parent() == this) delete d->content;
 }
 
-bool KoTextOnShapeContainer::loadOdf(const KXmlElement &element, KShapeLoadingContext &context)
+bool KTextOnShapeContainer::loadOdf(const KXmlElement &element, KShapeLoadingContext &context)
 {
-    Q_D(KoTextOnShapeContainer);
+    Q_D(KTextOnShapeContainer);
     if (d->textShape == 0)
         return false; // probably because the factory was not found.
 
@@ -208,18 +208,18 @@ bool KoTextOnShapeContainer::loadOdf(const KXmlElement &element, KShapeLoadingCo
     return shapeData->loadOdf(element, context);
 }
 
-void KoTextOnShapeContainer::saveOdf(KShapeSavingContext &context) const
+void KTextOnShapeContainer::saveOdf(KShapeSavingContext &context) const
 {
-    Q_D(const KoTextOnShapeContainer);
+    Q_D(const KTextOnShapeContainer);
     if (d->content)
         d->content->saveOdf(context);
 }
 
-void KoTextOnShapeContainer::setPlainText(const QString &text)
+void KTextOnShapeContainer::setPlainText(const QString &text)
 {
-    Q_D(KoTextOnShapeContainer);
+    Q_D(KTextOnShapeContainer);
     if (d->textShape == 0) {
-        kWarning(30006) << "No text shape present in KoTextOnShapeContainer";
+        kWarning(30006) << "No text shape present in KTextOnShapeContainer";
         return;
     }
     KoTextShapeDataBase *shapeData = qobject_cast<KoTextShapeDataBase*>(d->textShape->userData());
@@ -228,9 +228,9 @@ void KoTextOnShapeContainer::setPlainText(const QString &text)
     shapeData->document()->setPlainText(text);
 }
 
-void KoTextOnShapeContainer::setResizeBehavior(ResizeBehavior resizeBehavior)
+void KTextOnShapeContainer::setResizeBehavior(ResizeBehavior resizeBehavior)
 {
-    Q_D(KoTextOnShapeContainer);
+    Q_D(KTextOnShapeContainer);
     if (d->resizeBehavior == resizeBehavior) {
         return;
     }
@@ -238,17 +238,17 @@ void KoTextOnShapeContainer::setResizeBehavior(ResizeBehavior resizeBehavior)
     d->model->containerChanged(this, KShape::SizeChanged);
 }
 
-KoTextOnShapeContainer::ResizeBehavior KoTextOnShapeContainer::resizeBehavior() const
+KTextOnShapeContainer::ResizeBehavior KTextOnShapeContainer::resizeBehavior() const
 {
-    Q_D(const KoTextOnShapeContainer);
+    Q_D(const KTextOnShapeContainer);
     return d->resizeBehavior;
 }
 
-void KoTextOnShapeContainer::setTextAlignment(Qt::Alignment alignment)
+void KTextOnShapeContainer::setTextAlignment(Qt::Alignment alignment)
 {
-    Q_D(KoTextOnShapeContainer);
+    Q_D(KTextOnShapeContainer);
     if (d->textShape == 0) {
-        kWarning(30006) << "No text shape present in KoTextOnShapeContainer";
+        kWarning(30006) << "No text shape present in KTextOnShapeContainer";
         return;
     }
 
@@ -266,11 +266,11 @@ void KoTextOnShapeContainer::setTextAlignment(Qt::Alignment alignment)
     cursor.mergeBlockFormat(bf);
 }
 
-Qt::Alignment KoTextOnShapeContainer::textAlignment() const
+Qt::Alignment KTextOnShapeContainer::textAlignment() const
 {
-    Q_D(const KoTextOnShapeContainer);
+    Q_D(const KTextOnShapeContainer);
     if (d->textShape == 0) {
-        kWarning(30006) << "No text shape present in KoTextOnShapeContainer";
+        kWarning(30006) << "No text shape present in KTextOnShapeContainer";
         return Qt::AlignTop;
     }
 
@@ -286,9 +286,9 @@ Qt::Alignment KoTextOnShapeContainer::textAlignment() const
     return answer;
 }
 
-void KoTextOnShapeContainer::saveOdfChildElements(KShapeSavingContext &context) const
+void KTextOnShapeContainer::saveOdfChildElements(KShapeSavingContext &context) const
 {
-    Q_D(const KoTextOnShapeContainer);
+    Q_D(const KTextOnShapeContainer);
     if (d->textShape == 0) {
         return;
     }
@@ -300,12 +300,12 @@ void KoTextOnShapeContainer::saveOdfChildElements(KShapeSavingContext &context) 
 }
 
 // static
-void KoTextOnShapeContainer::tryWrapShape(KShape *shape, const KXmlElement &element, KShapeLoadingContext &context)
+void KTextOnShapeContainer::tryWrapShape(KShape *shape, const KXmlElement &element, KShapeLoadingContext &context)
 {
     KXmlElement text = KoXml::namedItemNS(element, KOdfXmlNS::text, "p");
     if (!text.isNull()) {
         KShapeContainer *oldParent = shape->parent();
-        KoTextOnShapeContainer *tos = new KoTextOnShapeContainer(shape,
+        KTextOnShapeContainer *tos = new KTextOnShapeContainer(shape,
                 context.documentResourceManager());
         if (!tos->loadOdf(element, context)) {
             // failed, delete it again.

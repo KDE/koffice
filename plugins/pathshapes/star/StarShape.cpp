@@ -23,7 +23,7 @@
 #include <KPathPoint.h>
 #include <KShapeLoadingContext.h>
 #include <KShapeSavingContext.h>
-#include <KoTextOnShapeContainer.h>
+#include <KTextOnShapeContainer.h>
 #include <KXmlReader.h>
 #include <KOdfXmlNS.h>
 #include <KXmlWriter.h>
@@ -342,7 +342,7 @@ bool StarShape::loadOdf(const KXmlElement & element, KShapeLoadingContext & cont
     setTransformation(QTransform());
 
     loadOdfAttributes(element, context, OdfAllAttributes);
-    KoTextOnShapeContainer::tryWrapShape(this, element, context);
+    KTextOnShapeContainer::tryWrapShape(this, element, context);
 
     return true;
 }
