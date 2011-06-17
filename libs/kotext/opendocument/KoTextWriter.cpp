@@ -59,7 +59,7 @@
 #include <KOdfGenericStyles.h>
 #include <KOdfXmlNS.h>
 
-#include <opendocument/KoTextSharedSavingData.h>
+#include <opendocument/KTextSharedSavingData.h>
 #include <changetracker/KChangeTracker.h>
 #include <changetracker/KChangeTrackerElement.h>
 #include <changetracker/KDeleteChangeMarker.h>
@@ -183,7 +183,7 @@ public:
     int checkForTableRowChange(int position);
     int checkForTableColumnChange(int position);
     KShapeSavingContext &context;
-    KoTextSharedSavingData *sharedData;
+    KTextSharedSavingData *sharedData;
     KXmlWriter *writer;
 
     KTextDocumentLayout *layout;
@@ -555,11 +555,11 @@ KoTextWriter::KoTextWriter(KShapeSavingContext &context, KDocumentRdfBase *rdfDa
     d->rdfData = rdfData;
     KSharedSavingData *sharedData = context.sharedData(KOTEXT_SHARED_SAVING_ID);
     if (sharedData) {
-        d->sharedData = dynamic_cast<KoTextSharedSavingData *>(sharedData);
+        d->sharedData = dynamic_cast<KTextSharedSavingData *>(sharedData);
     }
 
     if (!d->sharedData) {
-        d->sharedData = new KoTextSharedSavingData();
+        d->sharedData = new KTextSharedSavingData();
         KOdfGenericChanges *changes = new KOdfGenericChanges();
         d->sharedData->setGenChanges(*changes);
         if (!sharedData) {

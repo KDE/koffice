@@ -36,7 +36,7 @@
 #include <KOdfDocumentBase.h>
 #include <KOdfEmbeddedDocumentSaver.h>
 #include "KShapeSavingContext.h"
-#include <opendocument/KoTextSharedSavingData.h>
+#include <opendocument/KTextSharedSavingData.h>
 
 #include "KTextOdfSaveHelper.h"
 
@@ -89,13 +89,13 @@ bool KTextDrag::setOdf(const char * mimeType, KTextOdfSaveHelper &helper)
     KOdfGenericChanges changes;
 
     KSharedSavingData *sharedData = context->sharedData(KOTEXT_SHARED_SAVING_ID);
-    KoTextSharedSavingData *textSharedData = 0;
+    KTextSharedSavingData *textSharedData = 0;
     if (sharedData) {
-        textSharedData = dynamic_cast<KoTextSharedSavingData *>(sharedData);
+        textSharedData = dynamic_cast<KTextSharedSavingData *>(sharedData);
     }
 
     if (!textSharedData) {
-        textSharedData = new KoTextSharedSavingData();
+        textSharedData = new KTextSharedSavingData();
         textSharedData->setGenChanges(changes);
         if (!sharedData) {
             context->addSharedData(KOTEXT_SHARED_SAVING_ID, textSharedData);

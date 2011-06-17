@@ -35,11 +35,11 @@ namespace Soprano
 class Model;
 }
 
-class KOTEXT_EXPORT KoTextSharedSavingData : public KSharedSavingData
+class KOTEXT_EXPORT KTextSharedSavingData : public KSharedSavingData
 {
 public:
-    KoTextSharedSavingData();
-    virtual ~KoTextSharedSavingData();
+    KTextSharedSavingData();
+    virtual ~KTextSharedSavingData();
 
     void setGenChanges(KOdfGenericChanges &changes);
 

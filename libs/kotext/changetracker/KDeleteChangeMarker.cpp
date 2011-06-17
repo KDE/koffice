@@ -25,7 +25,7 @@
 #include <KXmlWriter.h>
 #include <KTextShapeSavingContext.h>
 #include <KShapeLoadingContext.h>
-#include <opendocument/KoTextSharedSavingData.h>
+#include <opendocument/KTextSharedSavingData.h>
 #include "KChangeTrackerElement.h"
 #include "KChangeTracker.h"
 
@@ -136,11 +136,11 @@ void KDeleteChangeMarker::saveOdf(KShapeSavingContext &context)
     }
 
     QString changeName;
-    KoTextSharedSavingData *sharedData = 0;
+    KTextSharedSavingData *sharedData = 0;
     if (context.sharedData(KOTEXT_SHARED_SAVING_ID)) {
-        sharedData = dynamic_cast<KoTextSharedSavingData*>(context.sharedData(KOTEXT_SHARED_SAVING_ID));
+        sharedData = dynamic_cast<KTextSharedSavingData*>(context.sharedData(KOTEXT_SHARED_SAVING_ID));
         if (!sharedData) {
-            kWarning(32500) << "There is no KoTextSharedSavingData in the context. This should not be the case";
+            kWarning(32500) << "There is no KTextSharedSavingData in the context. This should not be the case";
             return;
         }
     }

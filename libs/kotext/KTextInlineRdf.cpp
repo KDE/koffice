@@ -19,7 +19,7 @@
 */
 
 #include "KTextInlineRdf.h"
-#include "opendocument/KoTextSharedSavingData.h"
+#include "opendocument/KTextSharedSavingData.h"
 #include <KShapeSavingContext.h>
 
 #include <KXmlReader.h>
@@ -160,13 +160,13 @@ bool KTextInlineRdf::saveOdf(KShapeSavingContext &context, KXmlWriter *writer)
     kDebug(30015) << " this:" << (void*)this << " xmlid:" << d->id;
     QString oldID = d->id;
     KSharedSavingData *sharedData = context.sharedData(KOTEXT_SHARED_SAVING_ID);
-    KoTextSharedSavingData *textSharedData = 0;
+    KTextSharedSavingData *textSharedData = 0;
     if (sharedData) {
-        textSharedData = dynamic_cast<KoTextSharedSavingData *>(sharedData);
+        textSharedData = dynamic_cast<KTextSharedSavingData *>(sharedData);
     }
     QString newID = createXmlId(writer);
-    if (KoTextSharedSavingData *sharedData =
-            dynamic_cast<KoTextSharedSavingData *>(context.sharedData(KOTEXT_SHARED_SAVING_ID))) {
+    if (KTextSharedSavingData *sharedData =
+            dynamic_cast<KTextSharedSavingData *>(context.sharedData(KOTEXT_SHARED_SAVING_ID))) {
         sharedData->addRdfIdMapping(oldID, newID);
     }
     kDebug(30015) << "oldID:" << oldID << " newID:" << newID;

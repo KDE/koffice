@@ -25,7 +25,7 @@
 #include <KOdfGenericChanges.h>
 #include <KShapeSavingContext.h>
 
-#include <opendocument/KoTextSharedSavingData.h>
+#include <opendocument/KTextSharedSavingData.h>
 #include "KoTextSopranoRdfModel_p.h"
 
 struct KTextOdfSaveHelper::Private {

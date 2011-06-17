@@ -69,7 +69,7 @@ set(kotext_LIB_SRCS
     styles/KTableFormat_p.cpp
     styles/KSectionStyle.cpp
     opendocument/KTextSharedLoadingData.cpp
-    opendocument/KoTextSharedSavingData.cpp
+    opendocument/KTextSharedSavingData.cpp
     opendocument/KTextLoader.cpp
     opendocument/KoTextWriter.cpp
 

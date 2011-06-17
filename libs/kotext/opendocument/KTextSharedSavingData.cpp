@@ -17,12 +17,12 @@ the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
 * Boston, MA 02110-1301, USA.
 */
 
-#include "KoTextSharedSavingData.h"
+#include "KTextSharedSavingData.h"
 
 #include "KOdfGenericChanges.h"
 #include "KoTextSopranoRdfModel_p.h"
 
-class KoTextSharedSavingData::Private
+class KTextSharedSavingData::Private
 {
 public:
     ~Private() {}
@@ -32,41 +32,41 @@ public:
     Soprano::Model* m_rdfModel; //< This is so cut/paste can serialize the relevant RDF to the clipboard
 };
 
-KoTextSharedSavingData::KoTextSharedSavingData()
+KTextSharedSavingData::KTextSharedSavingData()
         : d(new Private())
 {
 }
 
-KoTextSharedSavingData::~KoTextSharedSavingData()
+KTextSharedSavingData::~KTextSharedSavingData()
 {
     delete d;
 }
 
-void KoTextSharedSavingData::setGenChanges(KOdfGenericChanges& changes) {
+void KTextSharedSavingData::setGenChanges(KOdfGenericChanges& changes) {
     d->changes = &changes;
 }
 
-KOdfGenericChanges& KoTextSharedSavingData::genChanges()
+KOdfGenericChanges& KTextSharedSavingData::genChanges()
 {
     return *(d->changes);
 }
 
-void KoTextSharedSavingData::addRdfIdMapping(QString oldid, QString newid)
+void KTextSharedSavingData::addRdfIdMapping(QString oldid, QString newid)
 {
     d->m_rdfIdMapping[ oldid ] = newid;
 }
 
-QMap<QString, QString> KoTextSharedSavingData::getRdfIdMapping()
+QMap<QString, QString> KTextSharedSavingData::getRdfIdMapping()
 {
     return d->m_rdfIdMapping;
 }
 
-void KoTextSharedSavingData::setRdfModel(Soprano::Model* m)
+void KTextSharedSavingData::setRdfModel(Soprano::Model* m)
 {
     d->m_rdfModel = m;
 }
 
-Soprano::Model* KoTextSharedSavingData::rdfModel() const
+Soprano::Model* KTextSharedSavingData::rdfModel() const
 {
     return d->m_rdfModel;
 }

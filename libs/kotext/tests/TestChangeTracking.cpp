@@ -54,7 +54,7 @@
 #include <KOdfEmbeddedDocumentSaver.h>
 #include <KInlineTextObjectManager.h>
 #include <KTextSharedLoadingData.h>
-#include <KoTextSharedSavingData.h>
+#include <KTextSharedSavingData.h>
 #include <KTextDocument.h>
 #include <kstandarddirs.h>
 
@@ -166,15 +166,15 @@ QString TestChangeTracking::documentToOdt(QTextDocument *document)
     KShapeSavingContext context(xmlWriter, mainStyles, embeddedSaver);
 
     KSharedSavingData *sharedData = context.sharedData(KOTEXT_SHARED_SAVING_ID);
-    KoTextSharedSavingData *textSharedData = 0;
+    KTextSharedSavingData *textSharedData = 0;
     if (sharedData) {
-        textSharedData = dynamic_cast<KoTextSharedSavingData *>(sharedData);
+        textSharedData = dynamic_cast<KTextSharedSavingData *>(sharedData);
     }
 
     kDebug(32500) << "sharedData" << sharedData << "textSharedData" << textSharedData;
 
     if (!textSharedData) {
-        textSharedData = new KoTextSharedSavingData();
+        textSharedData = new KTextSharedSavingData();
         textSharedData->setGenChanges(changes);
         if (!sharedData) {
             context.addSharedData(KOTEXT_SHARED_SAVING_ID, textSharedData);

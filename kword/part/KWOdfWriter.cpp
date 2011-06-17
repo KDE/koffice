@@ -38,7 +38,7 @@
 #include <KShapeLayer.h>
 
 #include <KOdfGenericChanges.h>
-#include <KoTextSharedSavingData.h>
+#include <KTextSharedSavingData.h>
 
 #include <KOdfStorageDevice.h>
 #include <KDocumentRdfBase.h>
@@ -66,7 +66,7 @@ QByteArray KWOdfWriter::serializeHeaderFooter(KOdfEmbeddedDocumentSaver &embedde
 
     KShapeSavingContext context(writer, mainStyles, embeddedSaver);
 
-    KoTextSharedSavingData *sharedData = new KoTextSharedSavingData;
+    KTextSharedSavingData *sharedData = new KTextSharedSavingData;
     sharedData->setGenChanges(changes);
     context.addSharedData(KOTEXT_SHARED_SAVING_ID, sharedData);
 
@@ -225,7 +225,7 @@ bool KWOdfWriter::save(KOdfWriteStore &odfStore, KOdfEmbeddedDocumentSaver &embe
 
     KShapeSavingContext context(*tmpBodyWriter, mainStyles, embeddedSaver);
 
-    KoTextSharedSavingData *sharedData = new KoTextSharedSavingData;
+    KTextSharedSavingData *sharedData = new KTextSharedSavingData;
     sharedData->setGenChanges(changes);
     context.addSharedData(KOTEXT_SHARED_SAVING_ID, sharedData);
 
