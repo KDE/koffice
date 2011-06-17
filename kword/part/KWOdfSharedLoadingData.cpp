@@ -28,7 +28,7 @@
 #include "frames/KWTextFrame.h"
 #include "frames/KWCopyShape.h"
 
-#include <KoTextShapeData.h>
+#include <KTextShapeData.h>
 #include <KOdfLoadingContext.h>
 #include <KShapeLoadingContext.h>
 #include <KOdfXmlNS.h>
@@ -70,7 +70,7 @@ void KWOdfSharedLoadingData::shapeInserted(KShape *shape, const KXmlElement &ele
                     context.odfLoadingContext().useStylesAutoStyles());
     }
 
-    KoTextShapeData *text = qobject_cast<KoTextShapeData*>(shape->userData());
+    KTextShapeData *text = qobject_cast<KTextShapeData*>(shape->userData());
     if (text) {
         KWTextFrameSet *fs = 0;
         KWFrame *previous = m_nextFrames.value(shape->name());

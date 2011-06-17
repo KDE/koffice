@@ -20,7 +20,7 @@
 #include "KTextLocator.h"
 #include "KInlineObject_p.h"
 #include "KTextBlockData.h"
-#include "KoTextShapeData.h"
+#include "KTextShapeData.h"
 #include "KTextReference_p.h"
 #include "KTextPage.h"
 #include "styles/KListStyle.h"

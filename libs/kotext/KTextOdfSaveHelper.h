@@ -24,7 +24,7 @@
 
 #include "kotext_export.h"
 
-class KoTextShapeData;
+class KTextShapeData;
 class KXmlWriter;
 namespace Soprano
 {
@@ -34,7 +34,7 @@ namespace Soprano
 class KOTEXT_EXPORT KTextOdfSaveHelper : public KDragOdfSaveHelper
 {
 public:
-    KTextOdfSaveHelper(KoTextShapeData * shapeData, int from, int to);
+    KTextOdfSaveHelper(KTextShapeData * shapeData, int from, int to);
     virtual ~KTextOdfSaveHelper();
 
     /// reimplemented

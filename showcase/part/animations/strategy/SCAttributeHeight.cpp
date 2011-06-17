@@ -23,7 +23,7 @@
 #include <SCShapeAnimations.h>
 
 #include <KTextBlockData.h>
-#include <KoTextShapeData.h>
+#include <KTextShapeData.h>
 #include <KShape.h>
 #include <QTextDocument>
 #include <QTextLayout>
@@ -39,7 +39,7 @@ void SCAttributeHeight::updateCache(SCAnimationCache *cache, SCShapeAnimation *s
     KTextBlockData * textBlockData = shapeAnimation->textBlockData();
     QTransform transform;
     if (textBlockData) {
-        if (KoTextShapeData *textShapeData = dynamic_cast<KoTextShapeData*>(shape->userData())) {
+        if (KTextShapeData *textShapeData = dynamic_cast<KTextShapeData*>(shape->userData())) {
             QTextDocument *textDocument = textShapeData->document();
             for (int i = 0; i < textDocument->blockCount(); i++) {
                 QTextBlock textBlock = textDocument->findBlockByNumber(i);
@@ -67,7 +67,7 @@ void SCAttributeHeight::initCache(SCAnimationCache *animationCache, int step, SC
     KTextBlockData * textBlockData = shapeAnimation->textBlockData();
 
     if (textBlockData) {
-        if (KoTextShapeData *textShapeData = dynamic_cast<KoTextShapeData*>(shape->userData())) {
+        if (KTextShapeData *textShapeData = dynamic_cast<KTextShapeData*>(shape->userData())) {
             QTextDocument *textDocument = textShapeData->document();
             for (int i = 0; i < textDocument->blockCount(); i++) {
                 QTextBlock textBlock = textDocument->findBlockByNumber(i);

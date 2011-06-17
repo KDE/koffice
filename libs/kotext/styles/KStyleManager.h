@@ -41,7 +41,7 @@ class KSectionStyle;
 class KXmlWriter;
 class ChangeFollower;
 class KOdfGenericStyles;
-class KoTextShapeData;
+class KTextShapeData;
 class KStyleManagerPrivate;
 
 /**
@@ -415,7 +415,7 @@ private:
 
     friend class KoTextSharedLoadingData;
     void addAutomaticListStyle(KListStyle *listStyle);
-    friend class KoTextShapeData;
+    friend class KTextShapeData;
     friend class KoTextShapeDataPrivate;
     KListStyle *listStyle(int id, bool *automatic) const;
 

@@ -19,7 +19,7 @@
 
 #include "KTextShapeContainerModel.h"
 #include "KTextAnchor.h"
-#include "KoTextShapeData.h"
+#include "KTextShapeData.h"
 #include "KTextDocumentLayout.h"
 
 #include <QTextBlock>
@@ -145,7 +145,7 @@ void KTextShapeContainerModel::childChanged(KShape *child, KShape::ChangeType ty
     if (type == KShape::RotationChanged || type == KShape::ScaleChanged ||
             type == KShape::ShearChanged || type == KShape::SizeChanged) {
 
-        KoTextShapeData *data  = qobject_cast<KoTextShapeData*>(child->parent()->userData());
+        KTextShapeData *data  = qobject_cast<KTextShapeData*>(child->parent()->userData());
         Q_ASSERT(data);
         data->foul();
 
@@ -224,7 +224,7 @@ void KTextShapeContainerModel::proposeMove(KShape *child, QPointF &move)
             anchorPosInParag = relation.anchor->textPosition() - block.position();
         }
         if (layout->lineCount() > 0) {
-            KoTextShapeData *data = qobject_cast<KoTextShapeData*>(child->parent()->userData());
+            KTextShapeData *data = qobject_cast<KTextShapeData*>(child->parent()->userData());
             Q_ASSERT(data);
             QTextLine tl = layout->lineAt(0);
             qreal y = tl.y() - data->documentOffset() - newPosition.y() + child->size().height();

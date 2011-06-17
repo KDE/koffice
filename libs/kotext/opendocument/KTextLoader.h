@@ -82,7 +82,7 @@ public:
     /**
     * Load the body from the \p element into the \p cursor .
     *
-    * This method got called e.g. at the \a KoTextShapeData::loadOdf() method if a TextShape
+    * This method got called e.g. at the \a KTextShapeData::loadOdf() method if a TextShape
     * instance likes to load an ODF element.
     */
     void loadBody(const KXmlElement &element, QTextCursor &cursor);

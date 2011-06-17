@@ -39,7 +39,7 @@ void TestFrames::testCopyShapes()
 {
     KWTextFrameSet *fs = new KWTextFrameSet(0, KWord::OddPagesHeaderTextFrameSet);
     MockShape *orig = new MockShape();
-    orig->setUserData(new KoTextShapeData());
+    orig->setUserData(new KTextShapeData());
     KWTextFrame *tf = new KWTextFrame(orig, fs);
     orig->setPosition(QPointF(10, 10));
 

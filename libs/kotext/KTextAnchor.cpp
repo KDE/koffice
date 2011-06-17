@@ -22,7 +22,7 @@
 #include "KInlineObject_p.h"
 #include "KTextDocumentLayout.h"
 #include "KTextShapeContainerModel.h"
-#include "KoTextShapeData.h"
+#include "KTextShapeData.h"
 #include "KOdfStyleStack.h"
 #include "KOdfLoadingContext.h"
 
@@ -64,7 +64,7 @@ public:
     void relayout()
     {
         if (document && shape->parent()) {
-            KoTextShapeData *data  = qobject_cast<KoTextShapeData*>(shape->parent()->userData());
+            KTextShapeData *data  = qobject_cast<KTextShapeData*>(shape->parent()->userData());
             Q_ASSERT(data);
             data->foul();
             KTextDocumentLayout *lay = qobject_cast<KTextDocumentLayout*>(document->documentLayout());

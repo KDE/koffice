@@ -19,7 +19,7 @@
 #include "KoVariable.h"
 #include "KInlineObject_p.h"
 #include "KTextDocumentLayout.h"
-#include "KoTextShapeData.h"
+#include "KTextShapeData.h"
 
 #include <KShape.h>
 

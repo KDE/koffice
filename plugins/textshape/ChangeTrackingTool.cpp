@@ -28,7 +28,7 @@
 #include <KTextDocument.h>
 #include <KTextDocumentLayout.h>
 #include <KoTextEditor.h>
-#include <KoTextShapeData.h>
+#include <KTextShapeData.h>
 #include <KoViewConverter.h>
 #include "TextShape.h"
 
@@ -124,7 +124,7 @@ void ChangeTrackingTool::updateSelectedShape(const QPointF &point)
         foreach(KShape *shape, canvas()->shapeManager()->shapesAt(area, true)) {
             TextShape *textShape = dynamic_cast<TextShape*>(shape);
             if (textShape) {
-                KoTextShapeData *d = static_cast<KoTextShapeData*>(textShape->userData());
+                KTextShapeData *d = static_cast<KTextShapeData*>(textShape->userData());
                 const bool sameDocument = d->document() == m_textShapeData->document();
                 if (sameDocument && d->position() < 0)
                     continue; // don't change to a shape that has no text
@@ -133,7 +133,7 @@ void ChangeTrackingTool::updateSelectedShape(const QPointF &point)
                     break; // stop looking.
             }
         }
-        setShapeData(static_cast<KoTextShapeData*>(m_textShape->userData()));
+        setShapeData(static_cast<KTextShapeData*>(m_textShape->userData()));
     }
 }
 
@@ -176,7 +176,7 @@ void ChangeTrackingTool::paint(QPainter& painter, const KoViewConverter& convert
                 TextShape *ts = dynamic_cast<TextShape*>(shape);
                 if (! ts)
                     continue;
-                KoTextShapeData *data = ts->textShapeData();
+                KTextShapeData *data = ts->textShapeData();
                 // check if shape contains some of the selection, if not, skip
                 if (!( (data->endPosition() >= start && data->position() <= end)
                     || (data->position() <= start && data->endPosition() >= end)))
@@ -196,7 +196,7 @@ void ChangeTrackingTool::paint(QPainter& painter, const KoViewConverter& convert
         converter.zoom(&zoomX, &zoomY);
 
         foreach(TextShape *ts, shapesToPaint) {
-            KoTextShapeData *data = ts->textShapeData();
+            KTextShapeData *data = ts->textShapeData();
             Q_ASSERT(data);
             if (data->endPosition() == -1)
                 continue;
@@ -299,14 +299,14 @@ void ChangeTrackingTool::activate(ToolActivation toolActivation, const QSet<KSha
         emit done();
         return;
     }
-    setShapeData(static_cast<KoTextShapeData*>(m_textShape->userData()));
+    setShapeData(static_cast<KTextShapeData*>(m_textShape->userData()));
     setCursor(Qt::ArrowCursor);
 
 
     m_textShape->update();
 }
 
-void ChangeTrackingTool::setShapeData(KoTextShapeData *data)
+void ChangeTrackingTool::setShapeData(KTextShapeData *data)
 {
     bool docChanged = data == 0 || m_textShapeData == 0 || m_textShapeData->document() != data->document();
 /*

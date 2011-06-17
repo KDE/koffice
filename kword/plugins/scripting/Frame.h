@@ -97,15 +97,15 @@ public slots:
 
     /*testcases
     QObject* cursor() {
-        KoTextShapeData *frame = qobject_cast<KoTextShapeData*>(m_frame->shape()->userData());
+        KTextShapeData *frame = qobject_cast<KTextShapeData*>(m_frame->shape()->userData());
         return frame ? new TextCursor(this, QTextCursor(frame->document())) : 0;
     }
     int position() {
-        KoTextShapeData *frame = qobject_cast<KoTextShapeData*>(m_frame->shape()->userData());
+        KTextShapeData *frame = qobject_cast<KTextShapeData*>(m_frame->shape()->userData());
         return frame ? frame->position() : 0;
     }
     int endPosition() {
-        KoTextShapeData *frame = qobject_cast<KoTextShapeData*>(m_frame->shape()->userData());
+        KTextShapeData *frame = qobject_cast<KTextShapeData*>(m_frame->shape()->userData());
         return frame ? frame->endPosition() : 0;
     }
     */

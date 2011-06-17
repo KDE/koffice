@@ -25,7 +25,7 @@
 
 #include <KShapeContainer.h>
 #include <KTextDocumentLayout.h>
-#include <KoTextShapeData.h>
+#include <KTextShapeData.h>
 
 #include <kdebug.h>
 
@@ -80,7 +80,7 @@ void TablePageManager::preparePage(int page)
     if (page == 1) {
         return;
     }
-    KoTextShapeData* const data = static_cast<KoTextShapeData*>(d->master->KShape::parent()->userData());
+    KTextShapeData* const data = static_cast<KTextShapeData*>(d->master->KShape::parent()->userData());
     if (!data) {
         // not embedded in a text shape
         return;

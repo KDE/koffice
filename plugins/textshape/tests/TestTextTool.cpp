@@ -30,12 +30,12 @@ void TestTextTool::testTextRect()
 
     MockTextShape *shape1 = new MockTextShape();
     QVERIFY(shape1->userData());
-    QVERIFY(qobject_cast<KoTextShapeData*>(shape1->userData()));
+    QVERIFY(qobject_cast<KTextShapeData*>(shape1->userData()));
 
-    tool.setShapeData(qobject_cast<KoTextShapeData*>(shape1->userData()));
+    tool.setShapeData(qobject_cast<KTextShapeData*>(shape1->userData()));
     QVERIFY(tool.textEditor());
 
-    QTextCursor cursor(qobject_cast<KoTextShapeData*>(shape1->userData())->document());
+    QTextCursor cursor(qobject_cast<KTextShapeData*>(shape1->userData())->document());
     cursor.insertText("foo\n");
 
     QCOMPARE(tool.textRect(0,0), QRectF()); // invalid

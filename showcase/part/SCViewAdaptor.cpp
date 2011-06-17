@@ -25,7 +25,7 @@
 #include "SCDocument.h"
 #include "SCNotes.h"
 #include "SCPage.h"
-#include <KoTextShapeData.h>
+#include <KTextShapeData.h>
 
 #include <KUrl>
 
@@ -107,7 +107,7 @@ QString SCViewAdaptor::pageNotes(int page, const QString &format) const
         if (0 != prPage) {
             SCNotes *pageNotes = prPage->pageNotes();
             KShape *textShape = pageNotes->textShape();
-            KoTextShapeData *textShapeData = qobject_cast<KoTextShapeData *>(textShape->userData());
+            KTextShapeData *textShapeData = qobject_cast<KTextShapeData *>(textShape->userData());
             Q_ASSERT(0 != textShapeData);
             if (0 != textShapeData) {
                 if (format == "plain") {

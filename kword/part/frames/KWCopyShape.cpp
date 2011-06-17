@@ -24,7 +24,7 @@
 
 #include <KShapeBorderBase.h>
 #include <KoViewConverter.h>
-#include <KoTextShapeData.h>
+#include <KTextShapeData.h>
 #include <KShapeContainer.h>
 #include <KShapeLoadingContext.h> //for Q_UNUSED
 
@@ -58,7 +58,7 @@ void KWCopyShape::paint(QPainter &painter, const KoViewConverter &converter)
         return;
 
     if (m_pageManager) {
-        KoTextShapeData *data = qobject_cast<KoTextShapeData*>(m_original->userData());
+        KTextShapeData *data = qobject_cast<KTextShapeData*>(m_original->userData());
         if (data) {
             KWPage currentPage = m_pageManager->page(this);
             KWPageTextInfo info(currentPage);

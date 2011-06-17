@@ -44,13 +44,13 @@ class KDocumentRdfBase;
  * multiple instances of this shape data) can share one QTextDocument by providing a
  * different view on (a different part of) the QTextDocument.
  */
-class KOTEXT_EXPORT KoTextShapeData : public KoTextShapeDataBase
+class KOTEXT_EXPORT KTextShapeData : public KoTextShapeDataBase
 {
     Q_OBJECT
 public:
     /// constructor
-    KoTextShapeData();
-    virtual ~KoTextShapeData();
+    KTextShapeData();
+    virtual ~KTextShapeData();
 
     /**
      * Replace the QTextDocument this shape will render.
@@ -192,7 +192,7 @@ signals:
     void relayout();
 
 private:
-    Q_DECLARE_PRIVATE(KoTextShapeData)
+    Q_DECLARE_PRIVATE(KTextShapeData)
 };
 
 #endif

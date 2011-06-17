@@ -23,7 +23,7 @@
 #include "../frames/KWTextFrameSet.h"
 #include "../frames/KWTextFrame.h"
 
-#include <KoTextShapeData.h>
+#include <KTextShapeData.h>
 #include <MockShapes.h>
 #include <kcomponentdata.h>
 
@@ -65,7 +65,7 @@ void TestTextFrameManagement::testFrameRemoval()
 KWTextFrame * TestTextFrameManagement::createFrame(const QPointF &position, KWTextFrameSet &fs)
 {
     MockShape *shape = new MockShape();
-    shape->setUserData(new KoTextShapeData());
+    shape->setUserData(new KTextShapeData());
     KWTextFrame *frame = new KWTextFrame(shape, &fs);
     shape->setPosition(position);
     return frame;

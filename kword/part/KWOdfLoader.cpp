@@ -37,7 +37,7 @@
 #include <KOdfXmlNS.h>
 #include <KShapeRegistry.h>
 #include <KShapeFactoryBase.h>
-#include <KoTextShapeData.h>
+#include <KTextShapeData.h>
 #include <KShapeLoadingContext.h>
 #include <KStyleManager.h>
 #include <KOdfLoadingContext.h>
@@ -208,7 +208,7 @@ bool KWOdfLoader::load(KOdfStoreReader &odfStore)
 
     if (updater) updater->setProgress(60);
 
-    KoTextShapeData textShapeData;
+    KTextShapeData textShapeData;
     if (hasMainText) {
         KWTextFrameSet *mainFs = new KWTextFrameSet(m_document, KWord::MainTextFrameSet);
         mainFs->setAllowLayout(false);

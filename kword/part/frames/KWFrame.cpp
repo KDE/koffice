@@ -28,7 +28,7 @@
 
 #include <KXmlWriter.h>
 #include <KOdfXmlNS.h>
-#include <KoTextShapeData.h>
+#include <KTextShapeData.h>
 
 #include <KDebug>
 
@@ -92,7 +92,7 @@ void KWFrame::saveOdf(KShapeSavingContext &context, const KWPage &page, int page
     // frame properties first
     m_margin.saveTo(m_shape, "fo:margin");
 
-    KoTextShapeData *tsd = qobject_cast<KoTextShapeData*>(shape()->userData());
+    KTextShapeData *tsd = qobject_cast<KTextShapeData*>(shape()->userData());
     if (tsd) {
         KInsets padding = tsd->insets();
         padding.saveTo(m_shape, "fo:padding");

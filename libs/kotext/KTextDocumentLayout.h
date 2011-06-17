@@ -161,7 +161,7 @@ public:
         virtual bool nextParag() = 0;
         /// revert layout to the previous paragraph. Return false if there is no previous paragraph.
         virtual bool previousParag() = 0;
-        /// Return the y position of the offset for the current shape (See KoTextShapeData::documentOffset() )
+        /// Return the y position of the offset for the current shape (See KTextShapeData::documentOffset() )
         virtual qreal documentOffsetInShape() = 0;
         /**
          * Paint the document.
@@ -230,7 +230,7 @@ protected:
     /// the currently set LayoutState
     LayoutState *m_state;
 
-    friend class KoTextShapeData;
+    friend class KTextShapeData;
     /// make sure we start a layout run
     virtual void relayout();
 

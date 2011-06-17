@@ -27,7 +27,7 @@
 #include <KOdfLoadingContext.h>
 #include <KOdfSettings.h>
 #include <KOdfStorageDevice.h>
-#include <KoTextShapeData.h>
+#include <KTextShapeData.h>
 #include <KoTextSharedLoadingData.h>
 #include <KTextDocumentLayout.h>
 #include <KInlineTextObjectManager.h>

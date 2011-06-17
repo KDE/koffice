@@ -24,7 +24,7 @@
 #include <KShapeFactoryBase.h>
 #include <KShapeRegistry.h>
 #include <KColorBackground.h>
-#include <KoTextShapeData.h>
+#include <KTextShapeData.h>
 #include <QTextCursor>
 #include <QTextDocument>
 
@@ -60,7 +60,7 @@ SCEndOfSlideShowPage::SCEndOfSlideShowPage(const QRectF &screenRect, SCDocument 
     Q_ASSERT(factory);
     if (factory) {
         KShape * textShape = factory->createDefaultShape();
-        QTextDocument * document = qobject_cast<KoTextShapeData*>(textShape->userData())->document();
+        QTextDocument * document = qobject_cast<KTextShapeData*>(textShape->userData())->document();
         QTextCursor cursor(document);
         QTextCharFormat format;
         format.setForeground(QBrush(Qt::white));

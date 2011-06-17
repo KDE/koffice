@@ -19,7 +19,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoTextShapeData.h"
+#include "KTextShapeData.h"
 #include <KoTextShapeDataBase.h>
 #include <KoTextShapeDataBase_p.h>
 #include "KTextDocument.h"
@@ -27,9 +27,11 @@
 #include "KTextDocumentLayout.h"
 #include "styles/KStyleManager.h"
 #include "styles/KParagraphStyle.h"
+#include "KDeleteChangeMarker.h"
 
 #include <KDebug>
 #include <QUrl>
+#include <QTextDocumentFragment>
 #include <QTextDocument>
 #include <QTextBlock>
 #include <QMetaObject>
@@ -68,8 +70,7 @@ public:
             position(-1),
             endPosition(-1),
             direction(KoText::AutoDirection),
-            textpage(0),
-            padding(7, 7, 7, 7)
+            textpage(0)
     {
     }
 
@@ -92,19 +93,19 @@ public:
 };
 
 
-KoTextShapeData::KoTextShapeData()
+KTextShapeData::KTextShapeData()
     : KoTextShapeDataBase(*(new KoTextShapeDataPrivate()))
 {
     setDocument(new QTextDocument, true);
 }
 
-KoTextShapeData::~KoTextShapeData()
+KTextShapeData::~KTextShapeData()
 {
 }
 
-void KoTextShapeData::setDocument(QTextDocument *document, bool transferOwnership)
+void KTextShapeData::setDocument(QTextDocument *document, bool transferOwnership)
 {
-    Q_D(KoTextShapeData);
+    Q_D(KTextShapeData);
     Q_ASSERT(document);
     if (d->ownsDocument && document != d->document)
         delete d->document;
@@ -130,93 +131,93 @@ void KoTextShapeData::setDocument(QTextDocument *document, bool transferOwnershi
         kodoc.setTextEditor(new KoTextEditor(d->document));
 }
 
-qreal KoTextShapeData::documentOffset() const
+qreal KTextShapeData::documentOffset() const
 {
-    Q_D(const KoTextShapeData);
+    Q_D(const KTextShapeData);
     return d->offset;
 }
 
-void KoTextShapeData::setDocumentOffset(qreal offset)
+void KTextShapeData::setDocumentOffset(qreal offset)
 {
-    Q_D(KoTextShapeData);
+    Q_D(KTextShapeData);
     d->offset = offset;
 }
 
-int KoTextShapeData::position() const
+int KTextShapeData::position() const
 {
-    Q_D(const KoTextShapeData);
+    Q_D(const KTextShapeData);
     return d->position;
 }
 
-void KoTextShapeData::setPosition(int position)
+void KTextShapeData::setPosition(int position)
 {
-    Q_D(KoTextShapeData);
+    Q_D(KTextShapeData);
     d->position = position;
 }
 
-int KoTextShapeData::endPosition() const
+int KTextShapeData::endPosition() const
 {
-    Q_D(const KoTextShapeData);
+    Q_D(const KTextShapeData);
     return d->endPosition;
 }
 
-void KoTextShapeData::setEndPosition(int position)
+void KTextShapeData::setEndPosition(int position)
 {
-    Q_D(KoTextShapeData);
+    Q_D(KTextShapeData);
     d->endPosition = position;
 }
 
-void KoTextShapeData::foul()
+void KTextShapeData::foul()
 {
-    Q_D(KoTextShapeData);
+    Q_D(KTextShapeData);
     d->dirty = true;
 }
 
-void KoTextShapeData::wipe()
+void KTextShapeData::wipe()
 {
-    Q_D(KoTextShapeData);
+    Q_D(KTextShapeData);
     d->dirty = false;
 }
 
-bool KoTextShapeData::isDirty() const
+bool KTextShapeData::isDirty() const
 {
-    Q_D(const KoTextShapeData);
+    Q_D(const KTextShapeData);
     return d->dirty;
 }
 
-void KoTextShapeData::fireResizeEvent()
+void KTextShapeData::fireResizeEvent()
 {
     emit relayout();
 }
 
-void KoTextShapeData::setPageDirection(KoText::Direction direction)
+void KTextShapeData::setPageDirection(KoText::Direction direction)
 {
-    Q_D(KoTextShapeData);
+    Q_D(KTextShapeData);
     d->direction = direction;
 }
 
-KoText::Direction KoTextShapeData::pageDirection() const
+KoText::Direction KTextShapeData::pageDirection() const
 {
-    Q_D(const KoTextShapeData);
+    Q_D(const KTextShapeData);
     return d->direction;
 }
 
-void KoTextShapeData::setPage(KTextPage *textpage)
+void KTextShapeData::setPage(KTextPage *textpage)
 {
-    Q_D(KoTextShapeData);
+    Q_D(KTextShapeData);
     if (d->inRelayoutForPage)
         return;
     delete d->textpage;
     d->textpage = textpage;
 }
 
-KTextPage* KoTextShapeData::page() const
+KTextPage* KTextShapeData::page() const
 {
-    Q_D(const KoTextShapeData);
+    Q_D(const KTextShapeData);
     return d->textpage;
 }
 
-bool KoTextShapeData::loadOdf(const KXmlElement &element, KShapeLoadingContext &context, KDocumentRdfBase *rdfData, KShape *shape)
+bool KTextShapeData::loadOdf(const KXmlElement &element, KShapeLoadingContext &context, KDocumentRdfBase *rdfData, KShape *shape)
 {
     Q_UNUSED(rdfData);
     KTextLoader loader(context, shape);
@@ -300,26 +301,26 @@ void RemoveDeleteChangesCommand::removeDeleteChanges()
 {
     int numDeletedChars = 0;
     QVector<KChangeTrackerElement *> elementVector;
-    KTextDocument(m_document).changeTracker()->getDeletedChanges(elementVector);
+    KTextDocument(m_document).changeTracker()->deletedChanges(elementVector);
     qSort(elementVector.begin(), elementVector.end(), isPositionLessThan);
 
     foreach(KChangeTrackerElement *element, elementVector) {
-        if (element->isValid() && element->getDeleteChangeMarker()) {
-            QTextCursor caret(element->getDeleteChangeMarker()->document());
+        if (element->isValid() && element->deleteChangeMarker()) {
+            QTextCursor caret(element->deleteChangeMarker()->document());
             QTextCharFormat f;
-            int deletePosition = element->getDeleteChangeMarker()->position() + 1 - numDeletedChars;
+            int deletePosition = element->deleteChangeMarker()->position() + 1 - numDeletedChars;
             caret.setPosition(deletePosition);
-            int deletedLength = KChangeTracker::fragmentLength(element->getDeleteData());
+            int deletedLength = KChangeTracker::fragmentLength(element->deleteData());
             caret.setPosition(deletePosition + deletedLength, QTextCursor::KeepAnchor);
             caret.removeSelectedText();
-            numDeletedChars += KChangeTracker::fragmentLength(element->getDeleteData());
+            numDeletedChars += KChangeTracker::fragmentLength(element->deleteData());
         }
     }
 }
 
-void KoTextShapeData::saveOdf(KShapeSavingContext &context, KDocumentRdfBase *rdfData, int from, int to) const
+void KTextShapeData::saveOdf(KShapeSavingContext &context, KDocumentRdfBase *rdfData, int from, int to) const
 {
-    Q_D(const KoTextShapeData);
+    Q_D(const KTextShapeData);
     InsertDeleteChangesCommand *insertCommand = new InsertDeleteChangesCommand(document());
     RemoveDeleteChangesCommand *removeCommand = new RemoveDeleteChangesCommand(document());
 
@@ -339,16 +340,23 @@ void KoTextShapeData::saveOdf(KShapeSavingContext &context, KDocumentRdfBase *rd
     KoTextWriter writer(context, rdfData);
     writer.write(d->document, from, to);
 
-    if (changeTracker && ((!changeTracker->displayChanges() && (changeSaveFormat == KChangeTracker::DELTAXML)) ||
-                           (changeTracker->displayChanges() && (changeSaveFormat == KChangeTracker::ODF_1_2)))) {
-        insertCommand->undo();
+    if (changeTracker) {
+        changeSaveFormat = changeTracker->saveFormat();
+        if (!changeTracker->displayChanges() && (changeSaveFormat == KChangeTracker::DELTAXML)) {
+            insertCommand->undo();
+            delete insertCommand;
+        }
+
+        if (changeTracker->displayChanges() && (changeSaveFormat == KChangeTracker::ODF_1_2)) {
+            removeCommand->undo();
+            delete removeCommand;
+        }
     }
-    delete insertCommand;
 }
 
-void KoTextShapeData::relayoutFor(KTextPage &textPage)
+void KTextShapeData::relayoutFor(KTextPage &textPage)
 {
-    Q_D(KoTextShapeData);
+    Q_D(KTextShapeData);
     KTextDocumentLayout *layout = qobject_cast<KTextDocumentLayout*>(d->document->documentLayout());
     if (layout == 0)
         return;
@@ -366,16 +374,16 @@ void KoTextShapeData::relayoutFor(KTextPage &textPage)
     d->inRelayoutForPage = false;
 }
 
-KInsets KoTextShapeData::insets() const
+KInsets KTextShapeData::insets() const
 {
-    Q_D(const KoTextShapeData);
+    Q_D(const KTextShapeData);
     return d->padding;
 }
 
-void KoTextShapeData::setInsets(const KInsets &insets)
+void KTextShapeData::setInsets(const KInsets &insets)
 {
-    Q_D(KoTextShapeData);
+    Q_D(KTextShapeData);
     d->padding = insets;
 }
 
-#include <KoTextShapeData.moc>
+#include <KTextShapeData.moc>

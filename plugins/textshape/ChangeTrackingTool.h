@@ -25,7 +25,7 @@
 class KCanvasBase;
 class KPointerEvent;
 class KoTextEditor;
-class KoTextShapeData;
+class KTextShapeData;
 class KoViewConverter;
 class TextShape;
 class TrackedChangeManager;
@@ -62,7 +62,7 @@ private slots:
     void acceptChange();
     void rejectChange();
     void selectedChangeChanged(QModelIndex newItem, QModelIndex previousItem);
-    void setShapeData(KoTextShapeData *data);
+    void setShapeData(KTextShapeData *data);
     void showTrackedChangeManager();
 
 private:
@@ -72,7 +72,7 @@ private:
 
     bool m_disableShowChangesOnExit;
     KoTextEditor *m_textEditor;
-    KoTextShapeData *m_textShapeData;
+    KTextShapeData *m_textShapeData;
     KCanvasBase *m_canvas;
     TextShape *m_textShape;
     TrackedChangeModel *m_model;

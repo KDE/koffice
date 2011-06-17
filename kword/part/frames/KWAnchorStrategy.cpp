@@ -24,7 +24,7 @@
 #include "KWFrame.h"
 
 #include <KShapeContainer.h>
-#include <KoTextShapeData.h>
+#include <KTextShapeData.h>
 
 #include <QTextBlock>
 #include <QTextLine>
@@ -78,7 +78,7 @@ bool KWAnchorStrategy::checkState(KTextDocumentLayout::LayoutState *state, int s
     if (m_finished || (m_knowledgePoint > state->cursorPosition()))
         return false;
 
-    KoTextShapeData *data = qobject_cast<KoTextShapeData*>(m_anchor->shape()->parent()->userData());
+    KTextShapeData *data = qobject_cast<KTextShapeData*>(m_anchor->shape()->parent()->userData());
     Q_ASSERT(data);
 
     // *** alter 'state' to relayout the part we want.
@@ -230,7 +230,7 @@ bool KWAnchorStrategy::checkState(KTextDocumentLayout::LayoutState *state, int s
         KWTextFrameSet *tfs =frameSet->kwordDocument()->mainFrameSet();
         if (tfs) {
             foreach (KWFrame *frame, tfs->frames()) { //find main frame for current page
-                KoTextShapeData *tmpData = qobject_cast<KoTextShapeData*>(frame->shape()->userData());
+                KTextShapeData *tmpData = qobject_cast<KTextShapeData*>(frame->shape()->userData());
                 if (data != 0) {
                     KWPageTextInfo *tmpPageInfo = dynamic_cast<KWPageTextInfo *>(tmpData->page());
                     if (tmpPageInfo != 0) {
@@ -253,7 +253,7 @@ bool KWAnchorStrategy::checkState(KTextDocumentLayout::LayoutState *state, int s
         KWTextFrameSet *tfs =frameSet->kwordDocument()->mainFrameSet();
         if (tfs) {
             foreach (KWFrame *frame, tfs->frames()) { //find main frame for current page
-                KoTextShapeData *tmpData = qobject_cast<KoTextShapeData*>(frame->shape()->userData());
+                KTextShapeData *tmpData = qobject_cast<KTextShapeData*>(frame->shape()->userData());
                 if (data != 0) {
                     KWPageTextInfo *tmpPageInfo = dynamic_cast<KWPageTextInfo *>(tmpData->page());
                     if (tmpPageInfo != 0) {
@@ -333,7 +333,7 @@ void KWAnchorStrategy::calculateKnowledgePoint()
     case KTextAnchor::CenterOfPage: {
         if (m_anchor->shape()->parent() == 0) // not enough info yet.
             return;
-        KoTextShapeData *data = qobject_cast<KoTextShapeData*>(m_anchor->shape()->parent()->userData());
+        KTextShapeData *data = qobject_cast<KTextShapeData*>(m_anchor->shape()->parent()->userData());
         Q_ASSERT(data);
         m_knowledgePoint = data->position();
         break;
@@ -359,7 +359,7 @@ void KWAnchorStrategy::calculateKnowledgePoint()
     case KTextAnchor::BottomOfFrame: {
         if (m_anchor->shape()->parent() == 0) // not enough info yet.
             return;
-        KoTextShapeData *data = qobject_cast<KoTextShapeData*>(m_anchor->shape()->parent()->userData());
+        KTextShapeData *data = qobject_cast<KTextShapeData*>(m_anchor->shape()->parent()->userData());
         Q_ASSERT(data);
         m_knowledgePoint = qMax(m_knowledgePoint, data->position() + 1);
         break;

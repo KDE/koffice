@@ -35,7 +35,7 @@ class KShape;
 class KoPADocument;
 class SCPageLayout;
 class SCPlaceholderShape;
-class KoTextShapeData;
+class KTextShapeData;
 
 struct Placeholder
 {
@@ -83,7 +83,7 @@ public:
      * @param styles
      */
     void setLayout(SCPageLayout * layout, KoPADocument * document, const QList<KShape *> &shapes, const QSizeF &pageSize,
-                    const QMap<QString, KoTextShapeData*> &styles);
+                    const QMap<QString, KTextShapeData*> &styles);
 
     /**
      * This function should only be used during loading
@@ -101,7 +101,7 @@ public:
 
     void debug() const;
 
-    QMap<QString, KoTextShapeData *> styles() const;
+    QMap<QString, KTextShapeData *> styles() const;
 
 private:
     void add(const QList<KShape *> &shapes);
@@ -111,7 +111,7 @@ private:
     void setLayout(SCPageLayout * layout);
 
     // apply style to shape
-    void applyStyle(SCPlaceholderShape * shape, const QString &presentationClass, const QMap<QString, KoTextShapeData*> &styles);
+    void applyStyle(SCPlaceholderShape * shape, const QString &presentationClass, const QMap<QString, KTextShapeData*> &styles);
 
     SCPageLayout * m_layout;
     // that is set to true when the m_placeholders is initialized

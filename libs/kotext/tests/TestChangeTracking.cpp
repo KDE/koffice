@@ -35,7 +35,7 @@
 #include <KTemporaryFile>
 #include <KOdfStorageDevice.h>
 #include <KXmlWriter.h>
-#include <KoTextShapeData.h>
+#include <KTextShapeData.h>
 #include <KShapeLoadingContext.h>
 #include <KOdfLoadingContext.h>
 #include <KShapeSavingContext.h>
@@ -114,7 +114,7 @@ QTextDocument *TestChangeTracking::documentFromOdt(const QString &odt, const QSt
     textSharedLoadingData->loadOdfStyles(shapeLoadingContext, styleManager);
     shapeLoadingContext.addSharedData(KOTEXT_SHARED_LOADING_ID, textSharedLoadingData);
 
-    KoTextShapeData *textShapeData = new KoTextShapeData;
+    KTextShapeData *textShapeData = new KTextShapeData;
     QTextDocument *document = new QTextDocument;
     textShapeData->setDocument(document, false /* ownership */);
     KTextDocumentLayout *layout = new KTextDocumentLayout(textShapeData->document());
@@ -124,7 +124,7 @@ QTextDocument *TestChangeTracking::documentFromOdt(const QString &odt, const QSt
     KTextDocument(document).setChangeTracker(changeTracker);
 
     if (!textShapeData->loadOdf(body, shapeLoadingContext)) {
-        qDebug() << "KoTextShapeData failed to load ODT";
+        qDebug() << "KTextShapeData failed to load ODT";
     }
 
     delete readStore;
@@ -184,7 +184,7 @@ QString TestChangeTracking::documentToOdt(QTextDocument *document)
         }
     }
 
-    KoTextShapeData *textShapeData = new KoTextShapeData;
+    KTextShapeData *textShapeData = new KTextShapeData;
     textShapeData->setDocument(document, false /* ownership */);
     if (qobject_cast<KTextDocumentLayout *>(document->documentLayout()) == 0) {
         // Setup layout and managers just like kotext

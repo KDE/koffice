@@ -21,7 +21,7 @@
 
 #include <KXmlWriter.h>
 #include <KOdf.h>
-#include "KoTextShapeData.h"
+#include "KTextShapeData.h"
 #include <KOdfGenericChanges.h>
 #include <KShapeSavingContext.h>
 
@@ -29,7 +29,7 @@
 #include "KoTextSopranoRdfModel_p.h"
 
 struct KTextOdfSaveHelper::Private {
-    Private(KoTextShapeData *shapeData, int from, int to)
+    Private(KTextShapeData *shapeData, int from, int to)
         : shapeData(shapeData),
         from(from),
         to(to),
@@ -38,7 +38,7 @@ struct KTextOdfSaveHelper::Private {
     }
 
     KShapeSavingContext *context;
-    KoTextShapeData *shapeData;
+    KTextShapeData *shapeData;
 
     int from;
     int to;
@@ -47,7 +47,7 @@ struct KTextOdfSaveHelper::Private {
 };
 
 
-KTextOdfSaveHelper::KTextOdfSaveHelper(KoTextShapeData * shapeData, int from, int to)
+KTextOdfSaveHelper::KTextOdfSaveHelper(KTextShapeData * shapeData, int from, int to)
         : d(new Private(shapeData, from, to))
 {
 }

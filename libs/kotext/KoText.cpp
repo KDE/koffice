@@ -21,7 +21,7 @@
 #include "styles/KStyleManager.h"
 #include "styles/KStyleManager.h"
 #include "changetracker/KChangeTracker.h"
-#include "KoTextShapeData.h"
+#include "KTextShapeData.h"
 #include "KTextDocumentLayout.h"
 #include "KInlineTextObjectManager.h"
 
@@ -193,7 +193,7 @@ QTextDocument *KoText::loadOpenDocument(const QString &filename, QTextDocument *
     textSharedLoadingData->loadOdfStyles(shapeLoadingContext, styleManager);
     shapeLoadingContext.addSharedData(KOTEXT_SHARED_LOADING_ID, textSharedLoadingData);
 
-    KoTextShapeData *textShapeData = new KoTextShapeData;
+    KTextShapeData *textShapeData = new KTextShapeData;
     textShapeData->setDocument(document, false /* ownership */);
     KTextDocumentLayout *layout = qobject_cast<KTextDocumentLayout*>(document->documentLayout());
     if (layout == 0)
@@ -203,7 +203,7 @@ QTextDocument *KoText::loadOpenDocument(const QString &filename, QTextDocument *
     textShapeData->document()->setDocumentLayout(layout);
 
     if (!textShapeData->loadOdf(body, shapeLoadingContext)) {
-        qDebug() << "KoTextShapeData failed to load ODT";
+        qDebug() << "KTextShapeData failed to load ODT";
     }
 
     delete readStore;

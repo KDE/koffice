@@ -225,7 +225,7 @@ public:
      * Returns the page this object is located on, or null if unknown.
      *
      * This method searches for the page this object is located on and if the application
-     * has set the KTextPage object on the KoTextShapeData, we'll return a pointer to that.
+     * has set the KTextPage object on the KTextShapeData, we'll return a pointer to that.
      * Notice that if the text has not yet been layed-out, or if the application doesn't support
      * this concept, we can return a null pointer.
      * @see shape()

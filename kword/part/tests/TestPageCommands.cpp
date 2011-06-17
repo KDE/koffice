@@ -28,7 +28,7 @@
 #include <frames/KWTextFrame.h>
 #include <frames/KWTextFrameSet.h>
 #include <frames/KWFrameSet.h>
-#include <KoTextShapeData.h>
+#include <KTextShapeData.h>
 
 #include <tests/MockShapes.h> // from flake
 
@@ -181,7 +181,7 @@ void TestPageCommands::testInsertPageCommand2() // auto remove of frames
     new KWFrame(shape1, fs);
 
     MockShape *shape2 = new MockShape();
-    shape2->setUserData(new KoTextShapeData());
+    shape2->setUserData(new KTextShapeData());
     new KWTextFrame(shape2, tfs);
 
     KWPageInsertCommand command2(&document, 1); // append a page
@@ -332,7 +332,7 @@ void TestPageCommands::testRemovePageCommand2() // auto remove of frames
     new KWFrame(shape1, fs);
 
     MockShape *shape2 = new MockShape();
-    shape2->setUserData(new KoTextShapeData());
+    shape2->setUserData(new KTextShapeData());
     new KWTextFrame(shape2, tfs);
 
     KWPageRemoveCommand command(&document, insertCommand.page());
@@ -406,13 +406,13 @@ void TestPageCommands::testRemovePageCommand4() // auto remove of frames
     KWTextFrameSet *tfs = new KWTextFrameSet(&document, KWord::MainTextFrameSet);
     document.addFrameSet(tfs);
     MockShape *shape2 = new MockShape();
-    shape2->setUserData(new KoTextShapeData());
+    shape2->setUserData(new KTextShapeData());
     new KWTextFrame(shape2, tfs);
 
     KWTextFrameSet *header = new KWTextFrameSet(&document, KWord::EvenPagesHeaderTextFrameSet);
     document.addFrameSet(header);
     MockShape *shape3 = new MockShape();
-    shape3->setUserData(new KoTextShapeData());
+    shape3->setUserData(new KTextShapeData());
     new KWTextFrame(shape3, header);
 
     KWPageRemoveCommand command(&document, insertCommand.page());

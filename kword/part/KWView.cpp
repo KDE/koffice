@@ -78,7 +78,7 @@
 #include <KoTextEditor.h>
 #include <KoText.h>
 #include <KTextOnShapeContainer.h>
-#include <KoTextShapeData.h>
+#include <KTextShapeData.h>
 #include <KoToolManager.h>
 #include <KoToolProxy.h>
 #include <KoZoomAction.h>

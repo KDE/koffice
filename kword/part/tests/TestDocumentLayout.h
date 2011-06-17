@@ -23,7 +23,7 @@
 #include <QObject>
 #include <qtest_kde.h>
 
-#include <KoTextShapeData.h>
+#include <KTextShapeData.h>
 #include <KShapeContainer.h>
 
 class QPainter;

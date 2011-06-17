@@ -24,7 +24,7 @@
 
 #include <KShapeContainer.h>
 #include <KFrameShape.h>
-#include <KoTextShapeData.h>
+#include <KTextShapeData.h>
 
 #include <QTextDocument>
 #include <QPainter>
@@ -40,7 +40,7 @@ class KImageCollection;
 /**
  * A text shape.
  * The Text shape is capable of drawing structured text.
- * @see KoTextShapeData
+ * @see KTextShapeData
  */
 class TextShape : public KShapeContainer, public KFrameShape
 {
@@ -76,7 +76,7 @@ public:
     /**
      * From KShape reimplemented method to load the TextShape from ODF.
      *
-     * This method redirects the call to the KoTextShapeData::loadOdf() method which
+     * This method redirects the call to the KTextShapeData::loadOdf() method which
      * in turn will call the KTextLoader::loadBody() method that reads the element
      * into a QTextCursor.
      *
@@ -93,7 +93,7 @@ public:
      */
     virtual void saveOdf(KShapeSavingContext &context) const;
 
-    KoTextShapeData *textShapeData() {
+    KTextShapeData *textShapeData() {
         return m_textShapeData;
     }
 
@@ -122,7 +122,7 @@ protected:
 private:
     void shapeChanged(ChangeType type, KShape *shape);
 
-    KoTextShapeData *m_textShapeData;
+    KTextShapeData *m_textShapeData;
     QTextDocument *m_footnotes;
 
     bool m_demoText;

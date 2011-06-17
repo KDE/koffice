@@ -25,7 +25,7 @@
 #include "../KWDocument.h"
 #include "../frames/KWCopyShape.h"
 
-#include <KoTextShapeData.h>
+#include <KTextShapeData.h>
 #include <MockShapes.h>
 #include <kcomponentdata.h>
 
@@ -207,7 +207,7 @@ void TestTextFrameSorting::testCopyAfterTextSorting()
 KWTextFrame * TestTextFrameSorting::createFrame(const QPointF &position, KWTextFrameSet &fs)
 {
     MockShape *shape = new MockShape();
-    shape->setUserData(new KoTextShapeData());
+    shape->setUserData(new KTextShapeData());
     KWTextFrame *frame = new KWTextFrame(shape, &fs);
     shape->setPosition(position);
     return frame;

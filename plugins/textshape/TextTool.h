@@ -119,7 +119,7 @@ public:
 
     const QTextCursor cursor();
 
-    void setShapeData(KoTextShapeData *data);
+    void setShapeData(KTextShapeData *data);
 
     KoTextEditor *textEditor() { return m_textEditor.data(); }
 
@@ -295,7 +295,7 @@ private:
     friend class ChangeTrackedDeleteCommand;
     friend class DeleteCommand;
     TextShape *m_textShape;
-    KoTextShapeData *m_textShapeData;
+    KTextShapeData *m_textShapeData;
     QWeakPointer<KoTextEditor> m_textEditor;
     KChangeTracker *m_changeTracker;
     bool m_allowActions;

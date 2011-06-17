@@ -26,7 +26,7 @@
 #include "../Layout.h"
 #include "MockTextShape.h"
 
-#include <KoTextShapeData.h>
+#include <KTextShapeData.h>
 #include <KTextDocumentLayout.h>
 #include <KShape.h>
 

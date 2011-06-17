@@ -25,7 +25,7 @@
 #include <KProperties.h>
 #include <KShape.h>
 #include <KTextDocument.h>
-#include <KoTextShapeData.h>
+#include <KTextShapeData.h>
 #include <KOdfXmlNS.h>
 #include <KStyleManager.h>
 #include <KResourceManager.h>
@@ -93,7 +93,7 @@ KShape *TextShapeFactory::createShape(const KProperties *params, KResourceManage
     shape->setDemoText(params->boolProperty("demo"));
     QString text("text");
     if (params->contains(text)) {
-        KoTextShapeData *shapeData = qobject_cast<KoTextShapeData*>(shape->userData());
+        KTextShapeData *shapeData = qobject_cast<KTextShapeData*>(shape->userData());
         QTextCursor cursor(shapeData->document());
         cursor.insertText(params->stringProperty(text));
     }

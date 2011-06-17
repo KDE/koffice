@@ -25,7 +25,7 @@
 #include <KShapeLoadingContext.h>
 #include <KShapeControllerBase.h>
 #include <KShapeController.h>
-#include "KoTextShapeData.h"
+#include "KTextShapeData.h"
 #include "opendocument/KTextLoader.h"
 
 #include <kdebug.h>
@@ -37,20 +37,20 @@
 class KTextPaste::Private
 {
 public:
-    Private(KoTextShapeData *shapeData, QTextCursor &cursor,
+    Private(KTextShapeData *shapeData, QTextCursor &cursor,
             KCanvasBase *canvas, Soprano::Model *rdfModel)
             : shapeData(shapeData)
             , cursor(cursor)
             , canvas(canvas)
             , rdfModel(rdfModel) {}
 
-    KoTextShapeData *shapeData;
+    KTextShapeData *shapeData;
     QTextCursor &cursor;
     KCanvasBase *canvas;
     Soprano::Model *rdfModel;
 };
 
-KTextPaste::KTextPaste(KoTextShapeData *shapeData, QTextCursor &cursor,
+KTextPaste::KTextPaste(KTextShapeData *shapeData, QTextCursor &cursor,
                          KCanvasBase *canvas, Soprano::Model *rdfModel)
         : d(new Private(shapeData, cursor, canvas, rdfModel))
 {

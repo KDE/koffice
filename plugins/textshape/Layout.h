@@ -34,7 +34,7 @@
 
 class KStyleManager;
 class KTextBlockData;
-class KoTextShapeData;
+class KTextShapeData;
 class TextShape;
 class KChangeTracker;
 class KImageCollection;
@@ -146,7 +146,7 @@ private:
 
     QTextBlockFormat m_format;
     QTextBlock::Iterator m_fragmentIterator;
-    KoTextShapeData *m_data;
+    KTextShapeData *m_data;
     bool m_newShape, m_newParag, m_isRtl, m_inTable;
     KInsets m_borderInsets;
     KInsets m_shapeBorder;

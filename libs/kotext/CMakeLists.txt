@@ -4,7 +4,7 @@ add_subdirectory( tests )
 
 ########### next target ###############
 set(kotext_LIB_SRCS
-    KoTextShapeData.cpp
+    KTextShapeData.cpp
     KoText.cpp
     KTextBlockData.cpp
     KTextBlockBorderData.cpp
@@ -134,7 +134,7 @@ install(
     KTextLocator.h
     KTextPage.h
     KTextPaste.h
-    KoTextShapeData.h
+    KTextShapeData.h
     KoVariable.h
     KoVariableManager.h
     KoTextRdfCore.h

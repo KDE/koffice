@@ -21,7 +21,7 @@
 #ifndef MOCKTEXTSHAPE_H
 #define MOCKTEXTSHAPE_H
 
-#include <KoTextShapeData.h>
+#include <KTextShapeData.h>
 #include <KTextDocumentLayout.h>
 #include <KShapeContainer.h>
 
@@ -29,7 +29,7 @@ class MockTextShape : public KShapeContainer
 {
 public:
     MockTextShape() {
-        KoTextShapeData *textShapeData = new KoTextShapeData();
+        KTextShapeData *textShapeData = new KTextShapeData();
         setUserData(textShapeData);
         layout = new KTextDocumentLayout(textShapeData->document());
         layout->addShape(this);

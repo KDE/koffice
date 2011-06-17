@@ -38,7 +38,7 @@
 #include <KPointerEvent.h>
 #include <KEventAction.h>
 #include <KoPACanvas.h>
-#include <KoTextShapeData.h>
+#include <KTextShapeData.h>
 
 #include "SCViewModePresentation.h"
 #include "SCPresentationStrategy.h"
@@ -293,7 +293,7 @@ bool SCPresentationTool::checkHyperlink(KPointerEvent *event, KShape *shape, QSt
         return false;
     }
 
-    KoTextShapeData *textShapeData = qobject_cast<KoTextShapeData*>(shape->userData());
+    KTextShapeData *textShapeData = qobject_cast<KTextShapeData*>(shape->userData());
     if (textShapeData) {
         QPointF p = shape->absoluteTransformation(0).inverted().map(event->point);
         p = p + QPointF(0.0, textShapeData->documentOffset());

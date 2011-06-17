@@ -32,7 +32,7 @@
 #include <QTextBlock>
 #include <QTextDocument>
 #include <kdebug.h>
-#include <KoTextShapeData.h>
+#include <KTextShapeData.h>
 
 #include <KLocale>
 

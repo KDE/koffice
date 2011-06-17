@@ -34,7 +34,7 @@
 #include <KCharacterStyle.h>
 #include <KListStyle.h>
 #include <KListLevelProperties.h>
-#include <KoTextShapeData.h>
+#include <KTextShapeData.h>
 #include <KTextAnchor.h>
 #include <KTextDocumentLayout.h>
 #include <KInlineTextObjectManager.h>
@@ -1078,7 +1078,7 @@ void KWDLoader::fill(KWFrame *frame, const KXmlElement &frameElem)
     if (tf) {
         if (zIndex <= 0 && static_cast<KWTextFrameSet*>(tf->frameSet())->textFrameSetType() == KWord::OtherTextFrameSet)
             zIndex = 1; // OtherTextFrameSet types always live on top of the main frames.
-        KoTextShapeData *textShapeData = qobject_cast<KoTextShapeData*>(frame->shape()->userData());
+        KTextShapeData *textShapeData = qobject_cast<KTextShapeData*>(frame->shape()->userData());
         Q_ASSERT(textShapeData);
         KInsets margins;
         margins.left = frameElem.attribute("bleftpt", "0.0").toDouble();

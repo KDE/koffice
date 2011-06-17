@@ -31,7 +31,7 @@
 #include <KOdfWriteStore.h>
 #include <KShapeSavingContext.h>
 
-#include <KoTextShapeData.h>
+#include <KTextShapeData.h>
 #include <KStyleManager.h>
 #include <KParagraphStyle.h>
 #include <KShapeGroup.h>
@@ -71,7 +71,7 @@ QByteArray KWOdfWriter::serializeHeaderFooter(KOdfEmbeddedDocumentSaver &embedde
     context.addSharedData(KOTEXT_SHARED_SAVING_ID, sharedData);
 
     Q_ASSERT(!fs->frames().isEmpty());
-    KoTextShapeData *shapedata = qobject_cast<KoTextShapeData *>(fs->frames().first()->shape()->userData());
+    KTextShapeData *shapedata = qobject_cast<KTextShapeData *>(fs->frames().first()->shape()->userData());
     Q_ASSERT(shapedata);
 
     writer.startElement(tag);
@@ -280,7 +280,7 @@ bool KWOdfWriter::save(KOdfWriteStore &odfStore, KOdfEmbeddedDocumentSaver &embe
 
     if (mainTextFrame) {
         if (! mainTextFrame->frames().isEmpty() && mainTextFrame->frames().first()) {
-            KoTextShapeData *shapeData = qobject_cast<KoTextShapeData *>(mainTextFrame->frames().first()->shape()->userData());
+            KTextShapeData *shapeData = qobject_cast<KTextShapeData *>(mainTextFrame->frames().first()->shape()->userData());
             if (shapeData) {
                 KWPageManager *pm = m_document->pageManager();
                 if (pm->pageCount()) { // make the first page refer to our page master

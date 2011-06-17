@@ -28,7 +28,7 @@
 #include "KShape.h"
 #include "KTextBlockData.h"
 #include <QTextLayout>
-#include "KoTextShapeData.h"
+#include "KTextShapeData.h"
 #include <QTextDocument>
 #include <QTextBlock>
 
@@ -539,7 +539,7 @@ qreal SCValueParser::identifierToValue(QString identifier, SCAnimationCache * ca
 {
     if (identifier == "width") {
         if (m_textBlockData) {
-            if (KoTextShapeData *textShapeData = dynamic_cast<KoTextShapeData*>(m_shape->userData())) {
+            if (KTextShapeData *textShapeData = dynamic_cast<KTextShapeData*>(m_shape->userData())) {
                 QTextDocument *textDocument = textShapeData->document();
                 for (int i = 0; i < textDocument->blockCount(); i++) {
                     QTextBlock textBlock = textDocument->findBlockByNumber(i);
@@ -555,7 +555,7 @@ qreal SCValueParser::identifierToValue(QString identifier, SCAnimationCache * ca
         }
     } else if (identifier == "height") {
         if (m_textBlockData) {
-            if (KoTextShapeData *textShapeData = dynamic_cast<KoTextShapeData*>(m_shape->userData())) {
+            if (KTextShapeData *textShapeData = dynamic_cast<KTextShapeData*>(m_shape->userData())) {
                 QTextDocument *textDocument = textShapeData->document();
                 for (int i = 0; i < textDocument->blockCount(); i++) {
                     QTextBlock textBlock = textDocument->findBlockByNumber(i);

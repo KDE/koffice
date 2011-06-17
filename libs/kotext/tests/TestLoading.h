@@ -35,7 +35,7 @@ class QTextTableFormat;
 class QTextBlockFormat;
 class QTextListFormat;
 class KOdfStore;
-class KoTextShapeData;
+class KTextShapeData;
 class KComponentData;
 
 class TestLoading : public QObject

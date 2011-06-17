@@ -26,7 +26,7 @@
 #include "KWPage.h"
 #include "KWDocument.h"
 
-#include <KoTextShapeData.h>
+#include <KTextShapeData.h>
 #include <KStyleManager.h>
 #include <KParagraphStyle.h>
 #include <KTextDocument.h>
@@ -119,7 +119,7 @@ KWTextFrameSet::~KWTextFrameSet()
         --iter;
         do {
             // try to find a frame that already has layout data to take ownership of the doc.
-            KoTextShapeData *tsd = qobject_cast<KoTextShapeData*>(m_frames.last()->shape()->userData());
+            KTextShapeData *tsd = qobject_cast<KTextShapeData*>(m_frames.last()->shape()->userData());
             if (tsd) {
                 tsd->setDocument(m_document);
                 m_document = 0;
@@ -127,14 +127,14 @@ KWTextFrameSet::~KWTextFrameSet()
             }
             --iter;
         } while (iter != m_frames.begin());
-        // if no frames have a KoTextShapeData, its save to delete m_document.
+        // if no frames have a KTextShapeData, its save to delete m_document.
     }
     delete m_document;
 }
 
 void KWTextFrameSet::setupFrame(KWFrame *frame)
 {
-    KoTextShapeData *data = qobject_cast<KoTextShapeData*>(frame->shape()->userData());
+    KTextShapeData *data = qobject_cast<KTextShapeData*>(frame->shape()->userData());
     if (data == 0) {// probably a copy frame.
         Q_ASSERT(frameCount() > 1);
         return;
@@ -326,7 +326,7 @@ void KWTextFrameSet::sortFrames()
         KWFrame *first = m_frames.first();
         qSort(m_frames.begin(), m_frames.end(), sortTextFrames);
         if (m_frames[0] != first) { // that means it needs to be re-layouted
-            KoTextShapeData *tsd = qobject_cast<KoTextShapeData*>(m_frames[0]->shape()->userData());
+            KTextShapeData *tsd = qobject_cast<KTextShapeData*>(m_frames[0]->shape()->userData());
             if (tsd)
                 tsd->foul();
         }
@@ -393,7 +393,7 @@ bool KWTextFrameSet::sortTextFrames(const KWFrame *frame1, const KWFrame *frame2
 void KWTextFrameSet::printDebug(KWFrame *frame)
 {
     KWFrameSet::printDebug(frame);
-    KoTextShapeData *textShapeData = qobject_cast<KoTextShapeData*>(frame->shape()->userData());
+    KTextShapeData *textShapeData = qobject_cast<KTextShapeData*>(frame->shape()->userData());
     if (textShapeData == 0) return;
     kDebug(32001) << " Text position:" << textShapeData->position() << ", end:" << textShapeData->endPosition();
     kDebug(32001) << " Offset in text-document;" << textShapeData->documentOffset();

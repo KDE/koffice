@@ -37,7 +37,7 @@
 #include <KTemporaryFile>
 #include <KOdfStorageDevice.h>
 #include <KXmlWriter.h>
-#include <KoTextShapeData.h>
+#include <KTextShapeData.h>
 #include <KShapeLoadingContext.h>
 #include <KOdfLoadingContext.h>
 #include <KShapeSavingContext.h>
@@ -1074,7 +1074,7 @@ QString TestLoading::documentToOdt(QTextDocument *document)
         }
     }
 
-    KoTextShapeData *textShapeData = new KoTextShapeData;
+    KTextShapeData *textShapeData = new KTextShapeData;
     textShapeData->setDocument(document, false /* ownership */);
     if (qobject_cast<KTextDocumentLayout *>(document->documentLayout()) == 0) {
         // Setup layout and managers just like kotext

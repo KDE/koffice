@@ -24,7 +24,7 @@
 #include <KXmlReader.h>
 #include <KOdfStoreReader.h>
 #include <KTemporaryFile>
-#include <KoTextShapeData.h>
+#include <KTextShapeData.h>
 #include <KShapeLoadingContext.h>
 #include <KOdfLoadingContext.h>
 #include <KOdfXmlNS.h>
@@ -98,7 +98,7 @@ QTextDocument *TestLoadStyle::documentFromOdt(const QString &odt)
     textSharedLoadingData->loadOdfStyles(shapeLoadingContext, styleManager);
     shapeLoadingContext.addSharedData(KOTEXT_SHARED_LOADING_ID, textSharedLoadingData);
 
-    KoTextShapeData *textShapeData = new KoTextShapeData;
+    KTextShapeData *textShapeData = new KTextShapeData;
     QTextDocument *document = new QTextDocument;
     textShapeData->setDocument(document, false /* ownership */);
     KTextDocumentLayout *layout = new KTextDocumentLayout(textShapeData->document());
@@ -108,7 +108,7 @@ QTextDocument *TestLoadStyle::documentFromOdt(const QString &odt)
     KTextDocument(document).setChangeTracker(changeTracker);
 
     if (!textShapeData->loadOdf(body, shapeLoadingContext)) {
-        qDebug() << "KoTextShapeData failed to load ODT";
+        qDebug() << "KTextShapeData failed to load ODT";
     }
 
     delete readStore;

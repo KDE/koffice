@@ -21,7 +21,7 @@
 #include "KWTextFrameSet.h"
 
 #include <KoViewConverter.h>
-#include <KoTextShapeData.h>
+#include <KTextShapeData.h>
 
 #include <kdebug.h>
 
@@ -75,14 +75,14 @@ void KWTextFrame::autoShrink(qreal requestedHeight)
 
 KInsets KWTextFrame::insets() const
 {
-    KoTextShapeData *tsd = qobject_cast<KoTextShapeData*>(shape()->userData());
+    KTextShapeData *tsd = qobject_cast<KTextShapeData*>(shape()->userData());
     Q_ASSERT(tsd);
     return tsd->insets();
 }
 
 void KWTextFrame::setInsets(const KInsets &insets)
 {
-    KoTextShapeData *tsd = qobject_cast<KoTextShapeData*>(shape()->userData());
+    KTextShapeData *tsd = qobject_cast<KTextShapeData*>(shape()->userData());
     Q_ASSERT(tsd);
     tsd->setInsets(insets);
 }

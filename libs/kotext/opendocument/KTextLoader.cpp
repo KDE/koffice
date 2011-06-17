@@ -45,7 +45,7 @@
 #include "KTextDebug_p.h"
 #include "KTextDocument.h"
 #include <KTextDocumentLayout.h>
-#include <KoTextShapeData.h>
+#include <KTextShapeData.h>
 #include "KoTextSharedLoadingData.h"
 #include <KUnit.h>
 #include <KoVariable.h>

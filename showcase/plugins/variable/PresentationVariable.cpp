@@ -33,7 +33,7 @@
 #include <KShape.h>
 #include <KShapeSavingContext.h>
 #include <KShapeLoadingContext.h>
-#include <KoTextShapeData.h>
+#include <KTextShapeData.h>
 #include <KOdfXmlNS.h>
 #include <KoPATextPage.h>
 #include <SCPage.h>

@@ -38,7 +38,7 @@
 #include <KoPAView.h>
 #include <KoPAViewMode.h>
 #include <KShape.h>
-#include <KoTextShapeData.h>
+#include <KTextShapeData.h>
 
 #include "SCEndOfSlideShowPage.h"
 #include "SCNotes.h"
@@ -113,7 +113,7 @@ void SCPresenterViewInterface::setActivePage(int pageIndex)
     Q_ASSERT(prPage);
     SCNotes *pageNotes = prPage->pageNotes();
     KShape *textShape = pageNotes->textShape();
-    KoTextShapeData *textShapeData = qobject_cast<KoTextShapeData *>(textShape->userData());
+    KTextShapeData *textShapeData = qobject_cast<KTextShapeData *>(textShape->userData());
     Q_ASSERT(textShapeData);
     QTextDocument *document = textShapeData->document()->clone(m_notesTextEdit);
     m_notesTextEdit->setDocument(document);

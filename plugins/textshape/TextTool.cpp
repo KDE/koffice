@@ -582,7 +582,7 @@ void TextTool::paint(QPainter &painter, const KoViewConverter &converter)
             TextShape *ts = dynamic_cast<TextShape*>(shape);
             if (! ts)
                 continue;
-            KoTextShapeData *data = ts->textShapeData();
+            KTextShapeData *data = ts->textShapeData();
             // check if shape contains some of the selection, if not, skip
             if (!((data->endPosition() >= selectStart && data->position() <= selectEnd)
                     || (data->position() <= selectStart && data->endPosition() >= selectEnd)))
@@ -608,7 +608,7 @@ void TextTool::paint(QPainter &painter, const KoViewConverter &converter)
     selection.format.setForeground(canvas()->canvasWidget()->palette().brush(QPalette::HighlightedText));
     pc.selections.append(selection);
     foreach (TextShape *ts, shapesToPaint) {
-        KoTextShapeData *data = ts->textShapeData();
+        KTextShapeData *data = ts->textShapeData();
         Q_ASSERT(data);
         if (data->endPosition() == -1)
             continue;
@@ -664,7 +664,7 @@ void TextTool::updateSelectedShape(const QPointF &point)
                 continue;
             TextShape *textShape = dynamic_cast<TextShape*>(shape);
             if (textShape) {
-                KoTextShapeData *d = static_cast<KoTextShapeData*>(textShape->userData());
+                KTextShapeData *d = static_cast<KTextShapeData*>(textShape->userData());
                 const bool sameDocument = d->document() == textEditor->document();
                 if (sameDocument && d->position() < 0)
                     continue; // don't change to a shape that has no text
@@ -674,7 +674,7 @@ void TextTool::updateSelectedShape(const QPointF &point)
             }
         }
         if (m_textShape)
-            setShapeData(static_cast<KoTextShapeData*>(m_textShape->userData()));
+            setShapeData(static_cast<KTextShapeData*>(m_textShape->userData()));
     }
 }
 
@@ -683,7 +683,7 @@ const QTextCursor TextTool::cursor()
     return *(m_textEditor.data()->cursor());
 }
 
-void TextTool::setShapeData(KoTextShapeData *data)
+void TextTool::setShapeData(KTextShapeData *data)
 {
     bool docChanged = data == 0 || m_textShapeData == 0 || m_textShapeData->document() != data->document();
     if (m_textShapeData) {
@@ -826,14 +826,14 @@ QStringList TextTool::supportedPasteMimeTypes() const
 
 int TextTool::pointToPosition(const QPointF &point) const
 {
-    KoTextShapeData *textShapeData = m_textShapeData;
+    KTextShapeData *textShapeData = m_textShapeData;
     if (textShapeData == 0)
         return -1;
     if (textShapeData->endPosition() == -1) {
         KTextDocumentLayout *lay = qobject_cast<KTextDocumentLayout*>(textShapeData->document()->documentLayout());
         if (lay) {
             foreach (KShape *shape, lay->shapes()) {
-                KoTextShapeData *sd = dynamic_cast<KoTextShapeData*>(shape->userData());
+                KTextShapeData *sd = dynamic_cast<KTextShapeData*>(shape->userData());
                 if (sd && sd->endPosition() >= 0)
                     textShapeData = sd;
                 if (shape->boundingRect().contains(point))
@@ -1307,7 +1307,7 @@ void TextTool::ensureCursorVisible()
         foreach (KShape* shape, lay->shapes()) {
             TextShape *textShape = dynamic_cast<TextShape*>(shape);
             Q_ASSERT(textShape);
-            KoTextShapeData *d = static_cast<KoTextShapeData*>(textShape->userData());
+            KTextShapeData *d = static_cast<KTextShapeData*>(textShape->userData());
             if (textEditor->position() >= d->position() && textEditor->position() <= d->endPosition()) {
                 if (m_textShapeData)
                     disconnect(m_textShapeData, SIGNAL(destroyed(QObject*)), this, SLOT(shapeDataRemoved()));
@@ -1418,7 +1418,7 @@ void TextTool::activate(ToolActivation toolActivation, const QSet<KShape*> &shap
         emit done();
         return;
     }
-    setShapeData(static_cast<KoTextShapeData*>(m_textShape->userData()));
+    setShapeData(static_cast<KTextShapeData*>(m_textShape->userData()));
     setCursor(Qt::IBeamCursor);
 
     // restore the selection from a previous time we edited this document.
@@ -2170,7 +2170,7 @@ void TextTool::shapeDataRemoved()
         }
 
         m_textShape = static_cast<TextShape*>(lay->shapes().first());
-        m_textShapeData = static_cast<KoTextShapeData*>(m_textShape->userData());
+        m_textShapeData = static_cast<KTextShapeData*>(m_textShape->userData());
         Q_ASSERT(m_textShapeData);
         connect(m_textShapeData, SIGNAL(destroyed (QObject*)), this, SLOT(shapeDataRemoved()));
     }
@@ -2238,7 +2238,7 @@ void TextTool::shapeAddedToDoc(KShape *shape)
     TextShape *ts = dynamic_cast<TextShape*>(shape);
     if (!ts)
         return;
-    KoTextShapeData *data = qobject_cast<KoTextShapeData*>(ts->userData());
+    KTextShapeData *data = qobject_cast<KTextShapeData*>(ts->userData());
     if (!data)
         return;
     if (data->document() != textEditor->document())

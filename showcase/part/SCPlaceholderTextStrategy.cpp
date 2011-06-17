@@ -35,7 +35,7 @@
 #include <KShapeFactoryBase.h>
 #include <KShapeRegistry.h>
 #include <KShapeSavingContext.h>
-#include <KoTextShapeData.h>
+#include <KTextShapeData.h>
 #include <KoTextSharedLoadingData.h>
 #include <KTextDocument.h>
 #include <KoTextEditor.h>
@@ -60,8 +60,8 @@ KShape *SCPlaceholderTextStrategy::createShape(KResourceManager *documentResourc
 {
     KShape * shape = SCPlaceholderStrategy::createShape(documentResources);
     if (m_textShape) {
-        KoTextShapeData * data = qobject_cast<KoTextShapeData*>(m_textShape->userData());
-        KoTextShapeData * newData = qobject_cast<KoTextShapeData*>(shape->userData());
+        KTextShapeData * data = qobject_cast<KTextShapeData*>(m_textShape->userData());
+        KTextShapeData * newData = qobject_cast<KTextShapeData*>(shape->userData());
         if (data && newData) {
             QTextCursor cursor(data->document());
             QTextCursor newCursor(newData->document());
@@ -82,7 +82,7 @@ void SCPlaceholderTextStrategy::paint(QPainter &painter, const KoViewConverter &
         painter.save();
         m_textShape->setSize(rect.size());
         // this code is needed to make sure the text of the textshape is layouted before it is painted
-        KoTextShapeData * shapeData = qobject_cast<KoTextShapeData*>(m_textShape->userData());
+        KTextShapeData * shapeData = qobject_cast<KTextShapeData*>(m_textShape->userData());
         QTextDocument * document = shapeData->document();
         KTextDocumentLayout * lay = qobject_cast<KTextDocumentLayout*>(document->documentLayout());
         if (lay) {
@@ -105,7 +105,7 @@ void SCPlaceholderTextStrategy::paint(QPainter &painter, const KoViewConverter &
 void SCPlaceholderTextStrategy::saveOdf(KShapeSavingContext &context)
 {
     if (m_textShape) {
-        KoTextShapeData *shapeData = qobject_cast<KoTextShapeData*>(m_textShape->userData());
+        KTextShapeData *shapeData = qobject_cast<KTextShapeData*>(m_textShape->userData());
         if (shapeData) {
             KStyleManager *styleManager = KTextDocument(shapeData->document()).styleManager();
             if (styleManager) {
@@ -127,7 +127,7 @@ kDebug();
         Q_ASSERT(factory);
         m_textShape = factory->createDefaultShape(context.documentResourceManager());
 
-        KoTextShapeData *shapeData = qobject_cast<KoTextShapeData*>(m_textShape->userData());
+        KTextShapeData *shapeData = qobject_cast<KTextShapeData*>(m_textShape->userData());
         shapeData->document()->setUndoRedoEnabled(false);
 
         QTextDocument *document = shapeData->document();

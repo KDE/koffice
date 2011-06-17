@@ -62,7 +62,7 @@
 #include <KParagraphStyle.h>
 #include <KListStyle.h>
 #include <KListLevelProperties.h>
-#include <KoTextShapeData.h>
+#include <KTextShapeData.h>
 #include <KChangeTracker.h>
 
 #include <KDocumentRdfBase.h>
@@ -826,7 +826,7 @@ void KWDocument::requestMoreSpace(KWTextFrameSet *fs)
     if (fs == mainFrameSet()) {
         KShape *shape = lastFrame->shape();
         if (shape) {
-            KoTextShapeData *data = qobject_cast<KoTextShapeData*>(shape->userData());
+            KTextShapeData *data = qobject_cast<KTextShapeData*>(shape->userData());
             if (data) {
                 QTextBlock block = fs->document()->findBlock(data->endPosition() + 1);
                 if (block.isValid()) {

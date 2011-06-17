@@ -20,7 +20,7 @@
 #include "KInlineObject.h"
 #include "KInlineObject_p.h"
 #include "KTextDocumentLayout.h"
-#include "KoTextShapeData.h"
+#include "KTextShapeData.h"
 #include "KShapeSavingContext.h"
 #include "KInlineTextObjectManager.h"
 #include "KTextInlineRdf.h"
@@ -177,7 +177,7 @@ KTextPage *KInlineObject::page() const
     KShape *shape = shapeForPosition(d->document, d->positionInDocument);
     if (shape == 0)
         return 0;
-    KoTextShapeData *data = static_cast<KoTextShapeData*>(shape->userData());
+    KTextShapeData *data = static_cast<KTextShapeData*>(shape->userData());
     if (data == 0)
         return 0;
     return data->page();

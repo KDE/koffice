@@ -89,7 +89,7 @@ TextShape::TextShape()
     m_imageCollection(0)
 {
     setShapeId(TextShape_SHAPEID);
-    m_textShapeData = new KoTextShapeData();
+    m_textShapeData = new KTextShapeData();
     setUserData(m_textShapeData);
     KTextDocumentLayout *lay = new KTextDocumentLayout(m_textShapeData->document());
     lay->setLayout(new Layout(lay));

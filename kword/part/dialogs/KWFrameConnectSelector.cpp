@@ -22,7 +22,7 @@
 #include "frames/KWTextFrameSet.h"
 #include "frames/KWTextFrame.h"
 
-#include <KoTextShapeData.h>
+#include <KTextShapeData.h>
 #include <KTextPage.h>
 
 
@@ -68,7 +68,7 @@ bool KWFrameConnectSelector::open(KWFrame *frame)
         row->setText(0, textFs->name());
         if (fs->frameCount() > 0) {
             KWTextFrame *tf = static_cast<KWTextFrame*>(fs->frames().first());
-            KoTextShapeData *data = qobject_cast<KoTextShapeData*>(tf->shape()->userData());
+            KTextShapeData *data = qobject_cast<KTextShapeData*>(tf->shape()->userData());
             if (data && data->page())
                 row->setText(1, QString::number(data->page()->pageNumber()));
         }

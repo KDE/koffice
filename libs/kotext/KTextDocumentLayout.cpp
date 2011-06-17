@@ -19,7 +19,7 @@
  */
 
 #include "KTextDocumentLayout.h"
-#include "KoTextShapeData.h"
+#include "KTextShapeData.h"
 #include "styles/KParagraphStyle.h"
 #include "styles/KCharacterStyle.h"
 #include "styles/KListStyle.h"
@@ -119,7 +119,7 @@ public:
         KShape *shape = parent->m_state->shape;
         if (shape == 0)
             return;
-        KoTextShapeData *data = qobject_cast<KoTextShapeData*>(shape->userData());
+        KTextShapeData *data = qobject_cast<KTextShapeData*>(shape->userData());
         qreal offset = 0;
         if (data->verticalAlignment() == Qt::AlignVCenter) {
             offset = (shape->size().height() - (parent->m_state->y() - data->documentOffset())) / 2.;
@@ -212,7 +212,7 @@ void KTextDocumentLayout::addShape(KShape *shape)
 {
     d->shapes.append(shape);
 
-    KoTextShapeData *data = qobject_cast<KoTextShapeData*>(shape->userData());
+    KTextShapeData *data = qobject_cast<KTextShapeData*>(shape->userData());
     if (data) {
         data->foul();
         m_state->interrupted = true;
@@ -343,15 +343,15 @@ void KTextDocumentLayout::documentChanged(int position, int charsRemoved, int ch
 
 /*
     switch (document()->documentLayout()->property("KoTextRelayoutForPage").toInt()) {
-    case KoTextShapeData::NormalState:
+    case KTextShapeData::NormalState:
         kDebug() << "KoTextRelayoutForPage in NormalState"; break;
-    case KoTextShapeData::LayoutCopyShape:
+    case KTextShapeData::LayoutCopyShape:
         kDebug() << "KoTextRelayoutForPage in LayoutCopyShape"; break;
-    case KoTextShapeData::LayoutOrig:
+    case KTextShapeData::LayoutOrig:
         kDebug() << "KoTextRelayoutForPage in LayoutOrig, skipping relayout"; break;
     }
 */
-    if (document()->documentLayout()->property("KoTextRelayoutForPage").toInt() == KoTextShapeData::LayoutOrig) {
+    if (document()->documentLayout()->property("KoTextRelayoutForPage").toInt() == KTextShapeData::LayoutOrig) {
         // don't refresh if we relayout after a relayout-for-page
         return;
     }
@@ -372,7 +372,7 @@ void KTextDocumentLayout::documentChanged(int position, int charsRemoved, int ch
     }
 
     foreach (KShape *shape, shapes()) {
-        KoTextShapeData *data = qobject_cast<KoTextShapeData*>(shape->userData());
+        KTextShapeData *data = qobject_cast<KTextShapeData*>(shape->userData());
         Q_ASSERT(data);
         if (data && data->position() <= position && data->endPosition() >= position) {
             // found our (first) shape to re-layout
@@ -384,7 +384,7 @@ void KTextDocumentLayout::documentChanged(int position, int charsRemoved, int ch
     }
     // if still here; then the change was not in any frame, lets relayout the last for now.
     KShape *shape = shapes().last();
-    KoTextShapeData *data = qobject_cast<KoTextShapeData*>(shape->userData());
+    KTextShapeData *data = qobject_cast<KTextShapeData*>(shape->userData());
     Q_ASSERT(data);
     data->foul();
     m_state->interrupted = true;
@@ -528,7 +528,7 @@ KShape* KTextDocumentLayout::shapeForPosition(int position) const
 {
     // TODO make faster
     foreach(KShape *shape, shapes()) {
-        KoTextShapeData *data = qobject_cast<KoTextShapeData*>(shape->userData());
+        KTextShapeData *data = qobject_cast<KTextShapeData*>(shape->userData());
         if (data == 0)
             continue;
         if (data->position() <= position && (data->endPosition() == -1 || data->endPosition() > position))

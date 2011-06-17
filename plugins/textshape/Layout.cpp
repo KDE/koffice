@@ -29,7 +29,7 @@
 #include "ToCGenerator.h"
 
 #include <KTextDocumentLayout.h>
-#include <KoTextShapeData.h>
+#include <KTextShapeData.h>
 #include <KParagraphStyle.h>
 #include <KCharacterStyle.h>
 #include <KListStyle.h>
@@ -846,7 +846,7 @@ void Layout::nextShape()
     QList<KShape *> shapes = m_parent->shapes();
     for (shapeNumber++; shapeNumber < shapes.count(); shapeNumber++) {
         shape = shapes[shapeNumber];
-        m_data = qobject_cast<KoTextShapeData*>(shape->userData());
+        m_data = qobject_cast<KTextShapeData*>(shape->userData());
         if (m_data != 0)
             break;
         shape = 0;
@@ -887,7 +887,7 @@ void Layout::cleanupShape(KShape *daShape)
         ts->markLayoutDone();
         ts->setDemoText(m_demoText);
     }
-    KoTextShapeData *textData = qobject_cast<KoTextShapeData*>(daShape->userData());
+    KTextShapeData *textData = qobject_cast<KTextShapeData*>(daShape->userData());
     if (textData == 0)
         return;
     if (textData->position() == -1)
@@ -936,7 +936,7 @@ void Layout::resetPrivate()
     int lastPos = -1;
     QList<KShape *> shapes = m_parent->shapes();
     foreach(KShape *shape, shapes) {
-        KoTextShapeData *data = qobject_cast<KoTextShapeData*>(shape->userData());
+        KTextShapeData *data = qobject_cast<KTextShapeData*>(shape->userData());
         Q_ASSERT(data);
         if (data->isDirty()) {
             // this shape needs to be recalculated.
@@ -965,7 +965,7 @@ void Layout::resetPrivate()
                     // since we only recalc whole parags; we need to go back a little.
                     shapeNumber--;
                     shape = shapes[shapeNumber];
-                    data = qobject_cast<KoTextShapeData*>(shape->userData());
+                    data = qobject_cast<KTextShapeData*>(shape->userData());
                     m_newShape = false;
                 }
                 if (m_y > data->documentOffset() + shape->size().height()) {
@@ -995,7 +995,7 @@ void Layout::resetPrivate()
         return;
     Q_ASSERT(shapeNumber < shapes.count());
     shape = shapes[shapeNumber];
-    m_data = qobject_cast<KoTextShapeData*>(shape->userData());
+    m_data = qobject_cast<KTextShapeData*>(shape->userData());
     m_textShape = dynamic_cast<TextShape*>(shape);
     Q_ASSERT(m_textShape);
     if (m_textShape->hasFootnoteDocument() && m_y == m_data->documentOffset()) {
@@ -1818,7 +1818,7 @@ bool Layout::setFollowupShape(KShape *followupShape)
     Q_ASSERT(shape == 0);
     Q_ASSERT(followupShape);
 
-    m_data = qobject_cast<KoTextShapeData*>(followupShape->userData());
+    m_data = qobject_cast<KTextShapeData*>(followupShape->userData());
     if (m_data == 0)
         return false;
 
@@ -1881,7 +1881,7 @@ bool Layout::previousParag()
         for (--shapeNumber; shapeNumber >= 0; shapeNumber--) {
             shape = shapes[shapeNumber];
             m_textShape = dynamic_cast<TextShape*>(shape);
-            m_data = qobject_cast<KoTextShapeData*>(shape->userData());
+            m_data = qobject_cast<KTextShapeData*>(shape->userData());
             if (m_data != 0)
                 break;
         }

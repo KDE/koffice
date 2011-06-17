@@ -34,7 +34,7 @@
 #include <KoPAView.h>
 #include <KoPAViewMode.h>
 #include <KShape.h>
-#include <KoTextShapeData.h>
+#include <KTextShapeData.h>
 
 #include "SCAnimationDirector.h"
 #include "SCPresenterViewInterface.h"

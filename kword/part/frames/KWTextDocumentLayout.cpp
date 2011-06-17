@@ -29,7 +29,7 @@
 #include "KWOutlineShape.h"
 #include "Outline.h"
 
-#include <KoTextShapeData.h>
+#include <KTextShapeData.h>
 #include <KShapeContainer.h>
 #include <KInlineTextObjectManager.h>
 #include <KTextAnchor.h>
@@ -107,13 +107,13 @@ static QList<QPointF> intersect(const QRectF &rect, const QLineF &line)
 class KWTextDocumentLayout::DummyShape : public KShape
 {
 public:
-    DummyShape(QTextDocument *doc) : textShapeData(new KoTextShapeData()) {
+    DummyShape(QTextDocument *doc) : textShapeData(new KTextShapeData()) {
         textShapeData->setDocument(doc, false);
         setUserData(textShapeData);
         //setPosition(QPointF(10E6, 10E6));
     }
 
-    KoTextShapeData * const textShapeData; // will be deleted by KShape
+    KTextShapeData * const textShapeData; // will be deleted by KShape
 
 private:
     virtual void paint(QPainter&, const KoViewConverter&) {}
@@ -130,7 +130,7 @@ KWTextDocumentLayout::KWTextDocumentLayout(KWTextFrameSet *frameSet)
         m_lastKnownFrameCount(0)
 {
     if (m_frameSet->frameCount()) {
-        KoTextShapeData *data = qobject_cast<KoTextShapeData*>(m_frameSet->frames().first()->shape()->userData());
+        KTextShapeData *data = qobject_cast<KTextShapeData*>(m_frameSet->frames().first()->shape()->userData());
         if (data) { // reset layout.
             data->setEndPosition(-1);
             data->foul();
@@ -163,7 +163,7 @@ void KWTextDocumentLayout::relayout()
     QList<KWFrame*> dirtyFrames = frames;
     KWFrame *firstDirtyFrame = 0;
     foreach (KWFrame *frame, frames) {
-        KoTextShapeData *data = qobject_cast<KoTextShapeData*>(frame->shape()->userData());
+        KTextShapeData *data = qobject_cast<KTextShapeData*>(frame->shape()->userData());
         if (!firstDirtyFrame && data && data->isDirty())
             firstDirtyFrame = frame;
         if (!firstDirtyFrame)
@@ -179,7 +179,7 @@ void KWTextDocumentLayout::relayout()
             if (frame == firstDirtyFrame)
                 break;
             if (dirtyFrames.contains(frame)) {
-                static_cast<KoTextShapeData*>(frame->shape()->userData())->foul();
+                static_cast<KTextShapeData*>(frame->shape()->userData())->foul();
                 // just the first is enough.
                 break;
             }
@@ -399,7 +399,7 @@ void KWTextDocumentLayout::layout()
                 // set the page for the shape.
                 KWPage page = m_frameSet->pageManager()->page(currentShape);
                 Q_ASSERT(page.isValid());
-                KoTextShapeData *data = qobject_cast<KoTextShapeData*>(currentShape->userData());
+                KTextShapeData *data = qobject_cast<KTextShapeData*>(currentShape->userData());
                 Q_ASSERT(data);
                 data->setPageDirection(page.directionHint());
                 data->setPage(new KWPageTextInfo(page));
@@ -503,20 +503,20 @@ void KWTextDocumentLayout::layout()
                 } else {
                     TDEBUG << "Layout done!";
                     // if there is more space in the shape then there is text. Reset the no-grow bool.
-                    const KoTextShapeData::RelayoutForPageState relayoutState =
-                        (KoTextShapeData::RelayoutForPageState) property("KoTextRelayoutForPage").toInt();
+                    const KTextShapeData::RelayoutForPageState relayoutState =
+                        (KTextShapeData::RelayoutForPageState) property("KoTextRelayoutForPage").toInt();
                     QList<KWFrame*> frames = m_frameSet->frames();
                     QList<KWFrame*>::const_iterator iter = frames.end();
                     KWTextFrame *lastFrame;
                     do {
                         iter--;
                         lastFrame = dynamic_cast<KWTextFrame*>(*iter);
-                        if (relayoutState == KoTextShapeData::NormalState) {
+                        if (relayoutState == KTextShapeData::NormalState) {
                             // its a copy shape then, repaint it.
                             (*iter)->shape()->update();
                         }
                     } while (lastFrame == 0);
-                    KoTextShapeData *data = qobject_cast<KoTextShapeData*>(lastFrame->shape()->userData());
+                    KTextShapeData *data = qobject_cast<KTextShapeData*>(lastFrame->shape()->userData());
                     Q_ASSERT(data);
                     qreal spaceLeft = lastFrame->shape()->size().height() - bottomOfText + data->documentOffset();
                     data->wipe();
@@ -524,9 +524,9 @@ void KWTextDocumentLayout::layout()
                         // note that this may delete the data and lastFrame !!  Do not access them after this point.
                         m_frameSet->spaceLeft(spaceLeft - 3);
                     }
-                    if (relayoutState == KoTextShapeData::LayoutOrig) {
+                    if (relayoutState == KTextShapeData::LayoutOrig) {
                         // after having done a layout of the orig we go back to our daily lives.
-                        setProperty("KoTextRelayoutForPage", KoTextShapeData::NormalState);
+                        setProperty("KoTextRelayoutForPage", KTextShapeData::NormalState);
                     }
                 }
 
@@ -579,9 +579,9 @@ void KWTextDocumentLayout::layout()
 
         bottomOfText = line.line.y() + line.line.height();
         if (bottomOfText > m_state->shape->size().height() && document()->blockCount() == 1 && KWord::isHeaderFooter(m_frameSet)) {
-            const KoTextShapeData::RelayoutForPageState relayoutState =
-                (KoTextShapeData::RelayoutForPageState) property("KoTextRelayoutForPage").toInt();
-            if (relayoutState == KoTextShapeData::NormalState) {
+            const KTextShapeData::RelayoutForPageState relayoutState =
+                (KTextShapeData::RelayoutForPageState) property("KoTextRelayoutForPage").toInt();
+            if (relayoutState == KTextShapeData::NormalState) {
                 TDEBUG << "requestMoreFrames" << (bottomOfText - m_state->shape->size().height());
                 m_frameSet->requestMoreFrames(bottomOfText - m_state->shape->size().height());
             }
@@ -644,7 +644,7 @@ void KWTextDocumentLayout::layout()
                     m_frameSet->requestMoreFrames(0); // new page, please.
                     return;
                 }
-                KoTextShapeData *data = qobject_cast<KoTextShapeData*>(lastFrame->shape()->userData());
+                KTextShapeData *data = qobject_cast<KTextShapeData*>(lastFrame->shape()->userData());
                 Q_ASSERT(data);
 
                 m_dummyShape->setSize(QSizeF(currentShape->size().width(), maxFrameLength - currentShape->size().height()));

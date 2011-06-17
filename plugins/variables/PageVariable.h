@@ -22,7 +22,7 @@
 #define PAGEVARIABLE_H
 
 #include <KoVariable.h>
-#include <KoTextShapeData.h>
+#include <KTextShapeData.h>
 #include <KTextPage.h>
 
 class KShapeSavingContext;

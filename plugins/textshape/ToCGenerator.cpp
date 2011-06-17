@@ -22,7 +22,7 @@
 
 #include <KParagraphStyle.h>
 #include <KTextDocumentLayout.h>
-#include <KoTextShapeData.h>
+#include <KTextShapeData.h>
 #include <KTextPage.h>
 #include <KShape.h>
 #include <KTextDocument.h>
@@ -145,7 +145,7 @@ void ToCGenerator::update()
         Q_ASSERT(shape);
         if (shape == 0)
             continue;
-        KoTextShapeData *shapeData = qobject_cast<KoTextShapeData *>(shape->userData());
+        KTextShapeData *shapeData = qobject_cast<KTextShapeData *>(shape->userData());
         Q_ASSERT(shapeData);
         if (shapeData == 0 || shapeData->page() == 0)
             continue;

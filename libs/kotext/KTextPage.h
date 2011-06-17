@@ -27,7 +27,7 @@
  *
  * The KWord KWPageTextInfo class does implement this interface to provide
  * application specific functionality for single pages.
- * @see KoTextShapeData::setPage();
+ * @see KTextShapeData::setPage();
  */
 class KOTEXT_EXPORT KTextPage
 {

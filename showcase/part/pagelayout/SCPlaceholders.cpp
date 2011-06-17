@@ -27,7 +27,7 @@
 #include <KShapeDeleteCommand.h>
 #include <KShapeCreateCommand.h>
 #include <KoPADocument.h>
-#include <KoTextShapeData.h>
+#include <KTextShapeData.h>
 #include "SCPageLayout.h"
 #include "SCPlaceholder.h"
 #include "SCPlaceholderShape.h"
@@ -51,7 +51,7 @@ SCPlaceholders::~SCPlaceholders()
 }
 
 void SCPlaceholders::setLayout(SCPageLayout * layout, KoPADocument * document, const QList<KShape *> &shapes, const QSizeF &pageSize,
-                                 const QMap<QString, KoTextShapeData*> &styles)
+                                 const QMap<QString, KTextShapeData*> &styles)
 {
     Q_ASSERT(m_initialized);
 
@@ -201,18 +201,18 @@ void SCPlaceholders::debug() const
     }
 }
 
-QMap<QString, KoTextShapeData *> SCPlaceholders::styles() const
+QMap<QString, KTextShapeData *> SCPlaceholders::styles() const
 {
-    QMap<QString, KoTextShapeData *> styles;
+    QMap<QString, KTextShapeData *> styles;
     Placeholders::iterator it(m_placeholders.begin());
     for (; it != m_placeholders.end(); ++it) {
-        KoTextShapeData * data = 0;
+        KTextShapeData * data = 0;
         // this is done like that as userData is not virtual
         if (SCPlaceholderShape * shape = dynamic_cast<SCPlaceholderShape *>(it->shape)) {
-            data = qobject_cast<KoTextShapeData*>(shape->userData());
+            data = qobject_cast<KTextShapeData*>(shape->userData());
         }
         else {
-            data = qobject_cast<KoTextShapeData*>(it->shape->userData());
+            data = qobject_cast<KTextShapeData*>(it->shape->userData());
         }
         if (data && !styles.contains(it->presentationClass)) {
             styles.insert(it->presentationClass, data);
@@ -221,14 +221,14 @@ QMap<QString, KoTextShapeData *> SCPlaceholders::styles() const
     return styles;
 }
 
-void SCPlaceholders::applyStyle(SCPlaceholderShape * shape, const QString &presentationClass, const QMap<QString, KoTextShapeData*> &styles)
+void SCPlaceholders::applyStyle(SCPlaceholderShape * shape, const QString &presentationClass, const QMap<QString, KTextShapeData*> &styles)
 {
     // use outline as fallback
-    KoTextShapeData * data = styles.value(presentationClass, 0);
+    KTextShapeData * data = styles.value(presentationClass, 0);
     if (! data) {
         data = styles.value("outline", 0);
     }
-    KoTextShapeData * newData = qobject_cast<KoTextShapeData*>(shape->userData());
+    KTextShapeData * newData = qobject_cast<KTextShapeData*>(shape->userData());
     kDebug(33001) << "data" << data << "newData:" << newData << shape->userData();
     if (data && newData) {
         kDebug(33001) << "apply";

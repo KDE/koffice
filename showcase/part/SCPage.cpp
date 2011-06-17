@@ -110,7 +110,7 @@ void SCPage::setLayout(SCPageLayout * layout, KoPADocument * document)
     QSizeF pageSize(pageLayout().width, pageLayout().height);
     SCMasterPage * master = dynamic_cast<SCMasterPage *>(masterPage());
     Q_ASSERT(master);
-    placeholders().setLayout(layout, document, shapes(), pageSize, master ? master->placeholders().styles() : QMap<QString, KoTextShapeData*>());
+    placeholders().setLayout(layout, document, shapes(), pageSize, master ? master->placeholders().styles() : QMap<QString, KTextShapeData*>());
     kDebug(33001) << "master placeholders";
     master->placeholders().debug();
 }
