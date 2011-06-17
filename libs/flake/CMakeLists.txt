@@ -293,6 +293,7 @@ install(
     KSharedLoadingData.h
     KSharedSavingData.h
     KSnapGuide.h
+    KoTextShapeDataBase.h
     KoToolBase.h
     KoToolFactoryBase.h
     KoToolManager.h
@@ -321,7 +322,6 @@ install(
     KEventAction.h
     KEventActionRegistry.h
     KShapePainter.h
-    KoTextShapeDataBase.h
     KoTextOnShapeContainer.h
     KoPluginLoader.h
     KShapeShadow.h
