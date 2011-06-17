@@ -47,10 +47,10 @@
 
 // #define DEBUG_PAINTING
 
-class KoTextAnchorPrivate : public KInlineObjectPrivate
+class KTextAnchorPrivate : public KInlineObjectPrivate
 {
 public:
-    KoTextAnchorPrivate(KTextAnchor *qq, KShape *s)
+    KTextAnchorPrivate(KTextAnchor *qq, KShape *s)
             : KInlineObjectPrivate(qq),
             shape(s),
             horizontalAlignment(KTextAnchor::HorizontalOffset),
@@ -155,7 +155,7 @@ public:
 };
 
 KTextAnchor::KTextAnchor(KShape *shape)
-    : KInlineObject(*(new KoTextAnchorPrivate(this, shape)), false)
+    : KInlineObject(*(new KTextAnchorPrivate(this, shape)), false)
 {
 }
 

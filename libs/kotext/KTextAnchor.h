@@ -26,7 +26,7 @@
 #include <QPointF>
 
 class KShape;
-class KoTextAnchorPrivate;
+class KTextAnchorPrivate;
 class KXmlElement;
 class KShapeLoadingContext;
 
