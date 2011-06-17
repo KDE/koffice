@@ -21,7 +21,7 @@
 #include "KInlineObject_p.h"
 #include "KTextBlockData.h"
 #include "KoTextShapeData.h"
-#include "KoTextReference_p.h"
+#include "KTextReference_p.h"
 #include "KTextPage.h"
 #include "styles/KListStyle.h"
 
@@ -75,7 +75,7 @@ public:
         KTextPage *page = q->page();
         pageNumber = page == 0 ? -1 : page->pageNumber();
         if (oldPage != pageNumber || oldChapter != chapterPosition) {
-            foreach (KoTextReference *reference, listeners)
+            foreach (KTextReference *reference, listeners)
                 reference->priv()->callbackPositionChanged();
         }
     }
@@ -84,7 +84,7 @@ public:
     int chapterPosition;
     int pageNumber;
 
-    QList<KoTextReference*> listeners;
+    QList<KTextReference*> listeners;
 
     Q_DECLARE_PUBLIC(KTextLocator)
 };
@@ -153,13 +153,13 @@ QString KTextLocator::word() const
     return cursor.selectedText().trimmed().remove(QChar::ObjectReplacementCharacter);
 }
 
-void KTextLocator::addListener(KoTextReference *reference)
+void KTextLocator::addListener(KTextReference *reference)
 {
     Q_D(KTextLocator);
     d->listeners.append(reference);
 }
 
-void KTextLocator::removeListener(KoTextReference *reference)
+void KTextLocator::removeListener(KTextReference *reference)
 {
     Q_D(KTextLocator);
     d->listeners.removeAll(reference);

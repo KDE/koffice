@@ -37,12 +37,12 @@ class KTextLocator;
 /**
  * This variable displays information about a text reference.
  * A user can insert characters that are called locators.  And are represented by a KTextLocator
- * the user can then insert (several) KoTextReference variables that will update the textual description
+ * the user can then insert (several) KTextReference variables that will update the textual description
  * of the locator whenever text is re-layouted.
  * This effectively means that the reference will print the page number (for example) of where the
  * locator is and keep it updated automatically.
  */
-class KoTextReference : public KoVariable
+class KTextReference : public KoVariable
 {
 public:
     /**
@@ -50,8 +50,8 @@ public:
      * to create one.
      * @param indexId the index of the inline object that is the locator.  See KInlineObject::id()
      */
-    KoTextReference(int indexId);
-    ~KoTextReference();
+    KTextReference(int indexId);
+    ~KTextReference();
 
     virtual void setup();
     virtual bool loadOdf(const KXmlElement &element, KShapeLoadingContext &context);

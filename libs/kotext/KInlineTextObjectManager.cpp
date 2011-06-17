@@ -91,7 +91,7 @@ bool KInlineTextObjectManager::removeInlineObject(QTextCursor &cursor)
         m_listeners.removeAt(position);
     }
 
-    // what if a KTextLocator is removed? what to do with KoTextReference?
+    // what if a KTextLocator is removed? what to do with KTextReference?
     QTextCharFormat format = cursor.charFormat();
     int id = format.intProperty(InlineInstanceId);
     if (id <= 0)

@@ -25,7 +25,7 @@
 #include <QString>
 
 class KTextBlockData;
-class KoTextReference;
+class KTextReference;
 class KTextLocatorPrivate;
 
 /**
@@ -58,9 +58,9 @@ public:
     QString word() const;
 
     /// Add a text reference that is interrested in knowing when this locator is laid-out in a differen position.
-    void addListener(KoTextReference *reference);
+    void addListener(KTextReference *reference);
     /// Remove a reference from the listeners.
-    void removeListener(KoTextReference *reference);
+    void removeListener(KTextReference *reference);
 
     virtual bool loadOdf(const KXmlElement &element, KShapeLoadingContext &context);
     virtual void saveOdf(KShapeSavingContext &context);

@@ -19,7 +19,7 @@
 
 #include "InsertTextReferenceAction_p.h"
 #include "KTextLocator.h"
-#include "KoTextReference_p.h"
+#include "KTextReference_p.h"
 #include "KInlineTextObjectManager.h"
 
 #include <KCanvasBase.h>
@@ -67,7 +67,7 @@ KInlineObject *InsertTextReferenceAction::createInlineObject()
     if (dialog.exec() == KPageDialog::Accepted && list->currentRow() >= 0) {
         KTextLocator *locator = textLocators[list->currentRow()];
         Q_ASSERT(locator);
-        variable = new KoTextReference(locator->id());
+        variable = new KTextReference(locator->id());
     }
     return variable;
 }

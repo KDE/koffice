@@ -33,7 +33,7 @@ set(kotext_LIB_SRCS
     KoVariableManager.cpp
     KNamedVariable.cpp
     KTextLocator.cpp
-    KoTextReference.cpp
+    KTextReference.cpp
     KTextAnchor.cpp
     KoTextShapeContainerModel.cpp
     KoTextShapeSavingContext.cpp
