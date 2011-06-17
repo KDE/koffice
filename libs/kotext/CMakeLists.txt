@@ -49,7 +49,7 @@ set(kotext_LIB_SRCS
     KoTextPage.cpp
     KPageProvider.cpp
     KTableColumnAndRowStyleManager.cpp
-    KoTextInlineRdf.cpp
+    KTextInlineRdf.cpp
     KoTextMeta.cpp
     KDocumentRdfBase.cpp
 
@@ -138,7 +138,7 @@ install(
     KoVariable.h
     KoVariableManager.h
     KoTextRdfCore.h
-    KoTextInlineRdf.h
+    KTextInlineRdf.h
     KoTextMeta.h
     KTextDocumentLayout.h
     styles/KCharacterStyle.h

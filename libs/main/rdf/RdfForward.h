@@ -22,7 +22,7 @@
 
 class KoDocumentRdf;
 class KoDocumentRdfEditWidget;
-class KoTextInlineRdf;
+class KTextInlineRdf;
 class KoRdfPrefixMapping;
 class KoRdfSemanticTreeWidgetItem;
 class KoRdfFoaFTreeWidgetItem;

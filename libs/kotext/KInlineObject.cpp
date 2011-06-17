@@ -23,7 +23,7 @@
 #include "KoTextShapeData.h"
 #include "KShapeSavingContext.h"
 #include "KInlineTextObjectManager.h"
-#include "KoTextInlineRdf.h"
+#include "KTextInlineRdf.h"
 
 #include <KShape.h>
 
@@ -123,13 +123,13 @@ QDebug operator<<(QDebug dbg, const KInlineObject *o)
     return o->d_func()->printDebug(dbg);
 }
 
-void KInlineObject::setInlineRdf(KoTextInlineRdf* rdf)
+void KInlineObject::setInlineRdf(KTextInlineRdf* rdf)
 {
     Q_D(KInlineObject);
     d->rdf = rdf;
 }
 
-KoTextInlineRdf* KInlineObject::inlineRdf() const
+KTextInlineRdf* KInlineObject::inlineRdf() const
 {
     Q_D(const KInlineObject);
     return d->rdf;

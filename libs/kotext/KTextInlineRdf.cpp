@@ -18,7 +18,7 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KoTextInlineRdf.h"
+#include "KTextInlineRdf.h"
 #include "opendocument/KoTextSharedSavingData.h"
 #include <KShapeSavingContext.h>
 
@@ -52,7 +52,7 @@ enum Type {
 };
 #endif
 
-class KoTextInlineRdf::Private
+class KTextInlineRdf::Private
 {
 public:
     Private(QTextDocument *doc, const QTextBlock &b)
@@ -112,33 +112,33 @@ public:
     bool isObjectAttriuteUsed;
 };
 
-KoTextInlineRdf::KoTextInlineRdf(QTextDocument *doc, const QTextBlock &b)
+KTextInlineRdf::KTextInlineRdf(QTextDocument *doc, const QTextBlock &b)
         : d(new Private(doc, b))
 {
 }
 
-KoTextInlineRdf::KoTextInlineRdf(QTextDocument *doc, KoBookmark *b)
+KTextInlineRdf::KTextInlineRdf(QTextDocument *doc, KoBookmark *b)
         : d(new Private(doc, b))
 {
 }
 
-KoTextInlineRdf::KoTextInlineRdf(QTextDocument *doc, KoTextMeta *b)
+KTextInlineRdf::KTextInlineRdf(QTextDocument *doc, KoTextMeta *b)
         : d(new Private(doc, b))
 {
 }
 
-KoTextInlineRdf::KoTextInlineRdf(QTextDocument *doc, const QTextTableCell &b)
+KTextInlineRdf::KTextInlineRdf(QTextDocument *doc, const QTextTableCell &b)
         : d(new Private(doc, b))
 {
 }
 
-KoTextInlineRdf::~KoTextInlineRdf()
+KTextInlineRdf::~KTextInlineRdf()
 {
     kDebug(30015) << " this:" << (void*)this;
     delete d;
 }
 
-bool KoTextInlineRdf::loadOdf(const KXmlElement &e)
+bool KTextInlineRdf::loadOdf(const KXmlElement &e)
 {
     d->id = e.attribute("id", QString());
     d->subject = e.attributeNS(KOdfXmlNS::xhtml, "about");
@@ -155,7 +155,7 @@ bool KoTextInlineRdf::loadOdf(const KXmlElement &e)
     return true;
 }
 
-bool KoTextInlineRdf::saveOdf(KShapeSavingContext &context, KXmlWriter *writer)
+bool KTextInlineRdf::saveOdf(KShapeSavingContext &context, KXmlWriter *writer)
 {
     kDebug(30015) << " this:" << (void*)this << " xmlid:" << d->id;
     QString oldID = d->id;
@@ -187,7 +187,7 @@ bool KoTextInlineRdf::saveOdf(KShapeSavingContext &context, KXmlWriter *writer)
     return true;
 }
 
-QString KoTextInlineRdf::createXmlId(KXmlWriter *writer)
+QString KTextInlineRdf::createXmlId(KXmlWriter *writer)
 {
     Q_UNUSED(writer);
     QString uuid = QUuid::createUuid().toString();
@@ -198,17 +198,17 @@ QString KoTextInlineRdf::createXmlId(KXmlWriter *writer)
     return ret;
 }
 
-QString KoTextInlineRdf::subject()
+QString KTextInlineRdf::subject()
 {
     return d->subject;
 }
 
-QString KoTextInlineRdf::predicate()
+QString KTextInlineRdf::predicate()
 {
     return d->predicate;
 }
 
-QPair<int, int>  KoTextInlineRdf::findExtent()
+QPair<int, int>  KTextInlineRdf::findExtent()
 {
     if (d->bookmark && d->document) {
         KoBookmark *e = d->bookmark->endBookmark();
@@ -229,7 +229,7 @@ QPair<int, int>  KoTextInlineRdf::findExtent()
     return QPair<int, int>(0, 0);
 }
 
-QString KoTextInlineRdf::object()
+QString KTextInlineRdf::object()
 {
     if (d->isObjectAttriuteUsed) {
         return d->object;
@@ -271,57 +271,57 @@ QString KoTextInlineRdf::object()
     return d->block.text();
 }
 
-int KoTextInlineRdf::sopranoObjectType()
+int KTextInlineRdf::sopranoObjectType()
 {
     return d->sopranoObjectType;
 }
 
-QString KoTextInlineRdf::xmlId()
+QString KTextInlineRdf::xmlId()
 {
     return d->id;
 }
 
-void KoTextInlineRdf::setXmlId(const QString &id)
+void KTextInlineRdf::setXmlId(const QString &id)
 {
     d->id = id;
 }
 
-KoTextInlineRdf *KoTextInlineRdf::tryToGetInlineRdf(const QTextFormat &tf)
+KTextInlineRdf *KTextInlineRdf::tryToGetInlineRdf(const QTextFormat &tf)
 {
     if (!tf.hasProperty(KCharacterStyle::InlineRdf)) {
         return 0;
     }
     QVariant v = tf.property(KCharacterStyle::InlineRdf);
-    KoTextInlineRdf *inlineRdf = v.value<KoTextInlineRdf *>();
+    KTextInlineRdf *inlineRdf = v.value<KTextInlineRdf *>();
     if (inlineRdf) {
         return inlineRdf;
     }
     return 0;
 }
 
-KoTextInlineRdf *KoTextInlineRdf::tryToGetInlineRdf(QTextCursor &cursor)
+KTextInlineRdf *KTextInlineRdf::tryToGetInlineRdf(QTextCursor &cursor)
 {
     QTextCharFormat cf = cursor.charFormat();
     QVariant v = cf.property(KCharacterStyle::InlineRdf);
-    KoTextInlineRdf *inlineRdf = v.value<KoTextInlineRdf *>();
+    KTextInlineRdf *inlineRdf = v.value<KTextInlineRdf *>();
     if (inlineRdf) {
         return inlineRdf;
     }
     return 0;
 }
 
-KoTextInlineRdf *KoTextInlineRdf::tryToGetInlineRdf(KoTextEditor *handler)
+KTextInlineRdf *KTextInlineRdf::tryToGetInlineRdf(KoTextEditor *handler)
 {
     QTextCharFormat cf = handler->charFormat();
     QVariant v = cf.property(KCharacterStyle::InlineRdf);
-    KoTextInlineRdf *inlineRdf = v.value<KoTextInlineRdf *>();
+    KTextInlineRdf *inlineRdf = v.value<KTextInlineRdf *>();
     if (inlineRdf) {
         return inlineRdf;
     }
     return 0;
 }
 
-void KoTextInlineRdf::attach(KoTextInlineRdf *inlineRdf, QTextCursor &cursor)
+void KTextInlineRdf::attach(KTextInlineRdf *inlineRdf, QTextCursor &cursor)
 {
     QTextCharFormat format = cursor.charFormat();
     QVariant v = QVariant::fromValue(inlineRdf);

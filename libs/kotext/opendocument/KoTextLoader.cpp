@@ -53,7 +53,7 @@
 #include <KInlineObjectRegistry.h>
 #include <KOdfXmlNS.h>
 #include <KXmlReader.h>
-#include "KoTextInlineRdf.h"
+#include "KTextInlineRdf.h"
 
 #include "changetracker/KChangeTracker.h"
 #include "changetracker/KChangeTrackerElement.h"
@@ -987,10 +987,10 @@ could be true; but the following code has no effect... (TZander)
     if (element.hasAttributeNS(KOdfXmlNS::xhtml, "property")
             || element.hasAttribute("id")) {
         QTextBlock block = cursor.block();
-        KoTextInlineRdf* inlineRdf =
-            new KoTextInlineRdf((QTextDocument*)block.document(), block);
+        KTextInlineRdf* inlineRdf =
+            new KTextInlineRdf((QTextDocument*)block.document(), block);
         inlineRdf->loadOdf(element);
-        KoTextInlineRdf::attach(inlineRdf, cursor);
+        KTextInlineRdf::attach(inlineRdf, cursor);
     }
     kDebug(32500) << "text-style:" << KTextDebug::textAttributes(cursor.blockCharFormat()) << d->currentList << d->currentListStyle;
 
@@ -1046,10 +1046,10 @@ void KoTextLoader::loadHeading(const KXmlElement &element, QTextCursor &cursor)
     if (element.hasAttributeNS(KOdfXmlNS::xhtml, "property")
             || element.hasAttribute("id")) {
         QTextBlock block = cursor.block();
-        KoTextInlineRdf* inlineRdf =
-            new KoTextInlineRdf((QTextDocument*)block.document(), block);
+        KTextInlineRdf* inlineRdf =
+            new KTextInlineRdf((QTextDocument*)block.document(), block);
         inlineRdf->loadOdf(element);
-        KoTextInlineRdf::attach(inlineRdf, cursor);
+        KTextInlineRdf::attach(inlineRdf, cursor);
     }
 
     kDebug(32500) << "text-style:" << KTextDebug::textAttributes(cursor.blockCharFormat());
@@ -1601,8 +1601,8 @@ void KoTextLoader::loadSpan(const KXmlElement &element, QTextCursor &cursor, boo
                 // Add inline Rdf here.
                 if (ts.hasAttributeNS(KOdfXmlNS::xhtml, "property")
                         || ts.hasAttribute("id")) {
-                    KoTextInlineRdf* inlineRdf =
-                        new KoTextInlineRdf((QTextDocument*)document, startmark);
+                    KTextInlineRdf* inlineRdf =
+                        new KTextInlineRdf((QTextDocument*)document, startmark);
                     inlineRdf->loadOdf(ts);
                     startmark->setInlineRdf(inlineRdf);
                 }
@@ -1636,8 +1636,8 @@ void KoTextLoader::loadSpan(const KXmlElement &element, QTextCursor &cursor, boo
                     // Add inline Rdf to the bookmark.
                     if (ts.hasAttributeNS(KOdfXmlNS::xhtml, "property")
                             || ts.hasAttribute("id")) {
-                        KoTextInlineRdf* inlineRdf =
-                            new KoTextInlineRdf((QTextDocument*)document, bookmark);
+                        KTextInlineRdf* inlineRdf =
+                            new KTextInlineRdf((QTextDocument*)document, bookmark);
                         inlineRdf->loadOdf(ts);
                         bookmark->setInlineRdf(inlineRdf);
                     }
@@ -2094,7 +2094,7 @@ void KoTextLoader::loadTableCell(KXmlElement &rowTag, QTextTable *tbl, QList<QRe
         // handle inline Rdf
         // rowTag is the current table cell.
         if (rowTag.hasAttributeNS(KOdfXmlNS::xhtml, "property") || rowTag.hasAttribute("id")) {
-            KoTextInlineRdf* inlineRdf = new KoTextInlineRdf((QTextDocument*)cursor.block().document(),cell);
+            KTextInlineRdf* inlineRdf = new KTextInlineRdf((QTextDocument*)cursor.block().document(),cell);
             inlineRdf->loadOdf(rowTag);
             QTextTableCellFormat cellFormat = cell.format().toTableCellFormat();
             cellFormat.setProperty(KTableCellStyle::InlineRdf,QVariant::fromValue(inlineRdf));

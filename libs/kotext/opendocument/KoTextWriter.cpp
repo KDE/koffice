@@ -47,7 +47,7 @@
 #include "KTextDocumentLayout.h"
 #include "KTextBlockData.h"
 #include "KTextDocument.h"
-#include "KoTextInlineRdf.h"
+#include "KTextInlineRdf.h"
 #include "../KDocumentRdfBase.h"
 
 #include "KoTextMeta.h"
@@ -807,8 +807,8 @@ void KoTextWriter::Private::saveParagraph(const QTextBlock &block, int from, int
                 writer->addAttribute("text:id", context.subId(blockData));
             }
             //kDebug(30015) << "from:" << from << " to:" << to;
-            KoTextInlineRdf* inlineRdf;
-            if ((inlineRdf = KoTextInlineRdf::tryToGetInlineRdf(charFormat)) && (it == block.begin())) {
+            KTextInlineRdf* inlineRdf;
+            if ((inlineRdf = KTextInlineRdf::tryToGetInlineRdf(charFormat)) && (it == block.begin())) {
                 // Write xml:id here for Rdf
                 kDebug(30015) << "have inline rdf xmlid:" << inlineRdf->xmlId();
                 inlineRdf->saveOdf(context, writer);
@@ -1220,7 +1220,7 @@ void KoTextWriter::Private::saveTable(QTextTable *table, QHash<QTextList *, QStr
                 // Save the Rdf for the table cell
                 QTextTableCellFormat cellFormat = cell.format().toTableCellFormat();
                 QVariant v = cellFormat.property(KTableCellStyle::InlineRdf);
-                if (KoTextInlineRdf* inlineRdf = v.value<KoTextInlineRdf*>()) {
+                if (KTextInlineRdf* inlineRdf = v.value<KTextInlineRdf*>()) {
                     inlineRdf->saveOdf(context, writer);
                 }
                 writeBlocks(table->document(), cell.firstPosition(), cell.lastPosition(), listStyles, table);

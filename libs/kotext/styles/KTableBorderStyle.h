@@ -60,7 +60,7 @@ public:
         CellBackgroundBrush,     ///< the cell background brush, as QTextFormat::BackgroundBrush is used by paragraphs
         VerticalAlignment,     ///< the vertical alignment oinside the cell
         MasterPageName,         ///< Optional name of the master-page
-        InlineRdf               ///< Optional KoTextInlineRdf object
+        InlineRdf               ///< Optional KTextInlineRdf object
     };
 
     enum Side {

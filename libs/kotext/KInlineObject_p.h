@@ -30,7 +30,7 @@
 // We mean it.
 //
 
-class KoTextInlineRdf;
+class KTextInlineRdf;
 class QTextDocument;
 
 class KInlineObjectPrivate
@@ -53,7 +53,7 @@ public:
     int id;
     int positionInDocument;
     bool propertyChangeListener;
-    KoTextInlineRdf *rdf; //< An inline object might have RDF, we own it.
+    KTextInlineRdf *rdf; //< An inline object might have RDF, we own it.
     QTextDocument *document;
 
     virtual QDebug printDebug(QDebug dbg) const;

@@ -74,7 +74,7 @@ public:
         TextRotationAngle,
         TextRotationScale,
         TextScale,
-        InlineRdf,  ///< KoTextInlineRdf pointer
+        InlineRdf,  ///< KTextInlineRdf pointer
         InlineInstanceId = 577297549, // Internal: Reserved for KInlineTextObjectManager
         ChangeTrackerId = 577297550 // Internal: Reserved for ChangeTracker
     };

@@ -36,7 +36,7 @@
 #include <KResourceManager.h>
 #include <KoTextEditor.h>
 #include <KInlineObject.h>
-#include <KoTextInlineRdf.h>
+#include <KTextInlineRdf.h>
 #include <KInlineTextObjectManager.h>
 #include <KoBookmark.h>
 #include <KoTextMeta.h>
@@ -383,7 +383,7 @@ void KoDocumentRdf::updateXmlIdReferences(const QMap<QString, QString> &m)
                         s.context());
             addList << n;
             RDEBUG << "looking for inlineRdf object for ID:" << oldID;
-            if (KoTextInlineRdf *inlineRdf = findInlineRdfByID(oldID)) {
+            if (KTextInlineRdf *inlineRdf = findInlineRdfByID(oldID)) {
                 RDEBUG << "updating the xmlid of the inline object";
                 RDEBUG << "old:" << oldID << " new:" << newID;
                 inlineRdf->setXmlId(newID);
@@ -684,7 +684,7 @@ void KoDocumentRdf::dumpModel(const QString &msg, Soprano::Model *m) const
     }
 }
 
-Soprano::Statement KoDocumentRdf::toStatement(KoTextInlineRdf *inlineRdf) const
+Soprano::Statement KoDocumentRdf::toStatement(KTextInlineRdf *inlineRdf) const
 {
     if (!inlineRdf) {
         return Soprano::Statement();
@@ -864,7 +864,7 @@ QList<KAction*> KoDocumentRdf::createInsertSemanticObjectNewActions(KCanvasBase 
 
 QPair<int, int> KoDocumentRdf::findExtent(const QString &xmlid)
 {
-    KoTextInlineRdf *obj = findInlineRdfByID(xmlid);
+    KTextInlineRdf *obj = findInlineRdfByID(xmlid);
     if (obj) {
         QPair<int, int> ret = obj->findExtent();
         RDEBUG << "have inline obj, extent:" << ret;
@@ -972,7 +972,7 @@ QPair<int, int> KoDocumentRdf::findExtent(KoTextEditor *handler)
 QString KoDocumentRdf::findXmlId(KoTextEditor *handler)
 {
     QString ret;
-    KoTextInlineRdf *inlineRdf(0);
+    KTextInlineRdf *inlineRdf(0);
     //
     // Look backwards for enclosing text:meta and bookmark-start tags
     //
@@ -1018,7 +1018,7 @@ QString KoDocumentRdf::findXmlId(KoTextEditor *handler)
         }
     }
     if (!inlineRdf) {
-        inlineRdf = KoTextInlineRdf::tryToGetInlineRdf(handler);
+        inlineRdf = KTextInlineRdf::tryToGetInlineRdf(handler);
     }
     if (inlineRdf) {
         return inlineRdf->xmlId();
@@ -1030,7 +1030,7 @@ QString KoDocumentRdf::findXmlId(KoTextEditor *handler)
 QString KoDocumentRdf::findXmlId(QTextCursor &cursor)
 {
     QString ret;
-    KoTextInlineRdf *inlineRdf(0);
+    KTextInlineRdf *inlineRdf(0);
     //
     // Look backwards for enclosing text:meta and bookmark-start tags
     //
@@ -1073,7 +1073,7 @@ QString KoDocumentRdf::findXmlId(QTextCursor &cursor)
         }
     }
     if (!inlineRdf) {
-        inlineRdf = KoTextInlineRdf::tryToGetInlineRdf(cursor);
+        inlineRdf = KTextInlineRdf::tryToGetInlineRdf(cursor);
     }
     if (inlineRdf) {
         return inlineRdf->xmlId();
@@ -1086,7 +1086,7 @@ Soprano::Model *KoDocumentRdf::findStatements(QTextCursor &cursor, int depth)
     Q_ASSERT(d->model);
     Soprano::Model *ret(Soprano::createModel());
     Q_ASSERT(ret);
-    KoTextInlineRdf *inlineRdf(0);
+    KTextInlineRdf *inlineRdf(0);
     RDEBUG << "model.sz:" << d->model->statementCount();
     //
     // Look backwards for enclosing text:meta and bookmark-start tags
@@ -1156,7 +1156,7 @@ Soprano::Model *KoDocumentRdf::findStatements(QTextCursor &cursor, int depth)
     }
     RDEBUG << "2 ret.sz:" << ret->statementCount();
     RDEBUG << "checking for block inlineRdf...";
-    inlineRdf = KoTextInlineRdf::tryToGetInlineRdf(cursor);
+    inlineRdf = KTextInlineRdf::tryToGetInlineRdf(cursor);
     if (inlineRdf) {
         ret->addStatement(toStatement(inlineRdf));
         QString xmlid = inlineRdf->xmlId();
@@ -1187,7 +1187,7 @@ Soprano::Model *KoDocumentRdf::findStatements(KoTextEditor *handler, int depth)
     Q_ASSERT(d->model);
     Soprano::Model *ret(Soprano::createModel());
     Q_ASSERT(ret);
-    KoTextInlineRdf *inlineRdf(0);
+    KTextInlineRdf *inlineRdf(0);
     RDEBUG << "model.sz:" << d->model->statementCount();
     //
     // Look backwards for enclosing text:meta and bookmark-start tags
@@ -1257,7 +1257,7 @@ Soprano::Model *KoDocumentRdf::findStatements(KoTextEditor *handler, int depth)
     }
     RDEBUG << "2 ret.sz:" << ret->statementCount();
     RDEBUG << "checking for block inlineRdf...";
-    inlineRdf = KoTextInlineRdf::tryToGetInlineRdf(handler);
+    inlineRdf = KTextInlineRdf::tryToGetInlineRdf(handler);
     if (inlineRdf) {
         RDEBUG << "inlineRdf:" << (void*)inlineRdf;
         ret->addStatement(toStatement(inlineRdf));
@@ -1273,10 +1273,10 @@ Soprano::Model *KoDocumentRdf::findStatements(KoTextEditor *handler, int depth)
     return ret;
 }
 
-KoTextInlineRdf *KoDocumentRdf::findInlineRdfByID(const QString &xmlid)
+KTextInlineRdf *KoDocumentRdf::findInlineRdfByID(const QString &xmlid)
 {
     RDEBUG << "xxx xmlid:" << xmlid;
-    foreach (KoTextInlineRdf *sp, d->inlineRdfObjects) {
+    foreach (KTextInlineRdf *sp, d->inlineRdfObjects) {
         RDEBUG << "sp:" << (void*)sp;
         if (sp->xmlId() == xmlid) {
             return sp;
@@ -1286,7 +1286,7 @@ KoTextInlineRdf *KoDocumentRdf::findInlineRdfByID(const QString &xmlid)
 }
 
 
-void KoDocumentRdf::rememberNewInlineRdfObject(KoTextInlineRdf *inlineRdf)
+void KoDocumentRdf::rememberNewInlineRdfObject(KTextInlineRdf *inlineRdf)
 {
     if (!inlineRdf) {
         return;
@@ -1307,7 +1307,7 @@ void KoDocumentRdf::updateInlineRdfStatements(QTextDocument *qdoc)
     //
     QList<KInlineObject*> kiocol = textObjectManager->inlineTextObjects();
     foreach (KInlineObject *kio, kiocol) {
-        if (KoTextInlineRdf *inlineRdf = kio->inlineRdf()) {
+        if (KTextInlineRdf *inlineRdf = kio->inlineRdf()) {
             rememberNewInlineRdfObject(inlineRdf);
         }
     }
@@ -1316,7 +1316,7 @@ void KoDocumentRdf::updateInlineRdfStatements(QTextDocument *qdoc)
     //
     QVector<QTextFormat> formats = qdoc->allFormats();
     foreach (const QTextFormat& tf, formats) {
-        if (KoTextInlineRdf *inlineRdf = KoTextInlineRdf::tryToGetInlineRdf(tf)) {
+        if (KTextInlineRdf *inlineRdf = KTextInlineRdf::tryToGetInlineRdf(tf)) {
             rememberNewInlineRdfObject(inlineRdf);
         }
     }
@@ -1329,7 +1329,7 @@ void KoDocumentRdf::updateInlineRdfStatements(QTextDocument *qdoc)
     d->model->removeAllStatements(Soprano::Node(), Soprano::Node(), Soprano::Node(), context);
     RDEBUG << "adding, count:" << d->inlineRdfObjects.size();
     // add statements from inlineRdfObjects to model
-    foreach (KoTextInlineRdf *sp, d->inlineRdfObjects) {
+    foreach (KTextInlineRdf *sp, d->inlineRdfObjects) {
         Soprano::Statement st = toStatement(sp);
         if (st.isValid()) {
             d->model->addStatement(st);

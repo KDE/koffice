@@ -29,7 +29,7 @@ class KXmlWriter;
 class KShapeSavingContext;
 class KoBookmark;
 class KoTextMeta;
-class KoTextInlineRdf;
+class KTextInlineRdf;
 class RdfSemanticItem;
 class RdfFoaF;
 class KoTextEditor;
@@ -47,7 +47,7 @@ class KXmlElement;
  *
  * The main reason why the inlineRdf wants these document objects
  * passed in is so that object() can work out what the current value
- * is from the document. For example, when a KoTextInlineRdf is
+ * is from the document. For example, when a KTextInlineRdf is
  * attached to a bookmark-start, then when object() is called the
  * bookmark is inspected to find out the value currently between
  * bookmark-start and bookmark-end.
@@ -55,7 +55,7 @@ class KXmlElement;
  * The xmlId() method returns the xml:id that was associated with the
  * inline Rdf if there was one. For example,
  * <bookmark-start xml:id="foo" xhtml:property="uri:baba" ...>
- * the KoTextInlineRdf object will be attached to the KoBookmark
+ * the KTextInlineRdf object will be attached to the KoBookmark
  * for the bookmark-start location and xmlId() will return foo.
  *
  * You can convert one of these to a Soprano::Statement using
@@ -69,15 +69,15 @@ class KXmlElement;
  * FIXME: createXmlId() should consult with the KOffice codebase when
  * generating new xml:id values during save.
  */
-class KOTEXT_EXPORT KoTextInlineRdf
+class KOTEXT_EXPORT KTextInlineRdf
 {
 public:
-    KoTextInlineRdf(QTextDocument *doc, const QTextBlock &b);
-    KoTextInlineRdf(QTextDocument *doc, KoBookmark *b);
-    KoTextInlineRdf(QTextDocument *doc, KoTextMeta *b);
-    KoTextInlineRdf(QTextDocument *doc, const QTextTableCell &b);
+    KTextInlineRdf(QTextDocument *doc, const QTextBlock &b);
+    KTextInlineRdf(QTextDocument *doc, KoBookmark *b);
+    KTextInlineRdf(QTextDocument *doc, KoTextMeta *b);
+    KTextInlineRdf(QTextDocument *doc, const QTextTableCell &b);
 
-    virtual ~KoTextInlineRdf();
+    virtual ~KTextInlineRdf();
 
     /**
      * The attach() and tryToGetInlineRdf() are used by the ODF load and
@@ -85,16 +85,16 @@ public:
      * with the cursor and fetch back the inline Rdf if one is associated
      * with a text block.
      */
-    static KoTextInlineRdf *tryToGetInlineRdf(QTextCursor &cursor);
-    static KoTextInlineRdf *tryToGetInlineRdf(const QTextFormat &tf);
-    static KoTextInlineRdf *tryToGetInlineRdf(KoTextEditor *handler);
+    static KTextInlineRdf *tryToGetInlineRdf(QTextCursor &cursor);
+    static KTextInlineRdf *tryToGetInlineRdf(const QTextFormat &tf);
+    static KTextInlineRdf *tryToGetInlineRdf(KoTextEditor *handler);
     /**
      * The attach() and tryToGetInlineRdf() are used by the ODF load and
      * save codepaths respectively. They associate an inlineRdf object
      * with the cursor and fetch back the inline Rdf if one is associated
      * with a text block.
      */
-    static void attach(KoTextInlineRdf *inlineRdf, QTextCursor &cursor);
+    static void attach(KTextInlineRdf *inlineRdf, QTextCursor &cursor);
 
     bool loadOdf(const KXmlElement &element);
     bool saveOdf(KShapeSavingContext &context, KXmlWriter *writer);
@@ -149,5 +149,5 @@ private:
     Private* d;
 };
 
-Q_DECLARE_METATYPE(KoTextInlineRdf*)
+Q_DECLARE_METATYPE(KTextInlineRdf*)
 #endif

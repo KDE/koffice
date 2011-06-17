@@ -25,7 +25,7 @@
 #include <KShapeLoadingContext.h>
 #include <KXmlWriter.h>
 #include <KXmlReader.h>
-#include <KoTextInlineRdf.h>
+#include <KTextInlineRdf.h>
 
 #include <QTextDocument>
 #include <QTextInlineObject>

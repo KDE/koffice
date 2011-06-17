@@ -125,7 +125,7 @@ class KoDocumentRdfPrivate;
  * redo operations.
  *
  * The scattered Rdf from option (1) is stored using the
- * KoTextInlineRdf class. You can convert a KoTextInlineRdf to
+ * KTextInlineRdf class. You can convert a KTextInlineRdf to
  * a Soprano::Statement with the toStatement() method of this class.
  *
  * LOW LEVEL Rdf ACCESS:
@@ -190,10 +190,10 @@ public:
      * Used by KoRdfSemanticItem when creating new semantic items so that the
      * KoDocumentRdf class can find them.
      */
-    void rememberNewInlineRdfObject(KoTextInlineRdf *inlineRdf);
+    void rememberNewInlineRdfObject(KTextInlineRdf *inlineRdf);
 
     /**
-     * Find all the KoTextInlineRdf objects that exist in the
+     * Find all the KTextInlineRdf objects that exist in the
      * document and update the statements in the Soprano::model to
      * reflect the current state of the inline Rdf. You should call
      * KoDocument::updateInlineRdfStatements() instead which will pass
@@ -235,7 +235,7 @@ public:
     /**
      * Convert an inlineRdf object into a Soprano::Statement
      */
-    Soprano::Statement toStatement(KoTextInlineRdf *inlineRdf) const;
+    Soprano::Statement toStatement(KTextInlineRdf *inlineRdf) const;
 
     /**
      * Look for the semitem with the given xmlid and return the
@@ -296,7 +296,7 @@ public:
      * Find an inline Rdf object from the xml:id which
      * it has in the content.xml file
      */
-    KoTextInlineRdf* findInlineRdfByID(const QString &xmlid);
+    KTextInlineRdf* findInlineRdfByID(const QString &xmlid);
 
     /**
      * Obtain a list of Contact/FOAF semantic objects, if any, for the Rdf

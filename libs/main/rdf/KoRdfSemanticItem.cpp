@@ -22,7 +22,7 @@
 #include "KoDocumentRdf.h"
 #include "KoDocumentRdf_p.h"
 #include <KInlineObject.h>
-#include <KoTextInlineRdf.h>
+#include <KTextInlineRdf.h>
 #include <KoTextRdfCore.h>
 #include <KoTextEditor.h>
 #include <KCanvasBase.h>
@@ -252,7 +252,7 @@ void KoRdfSemanticItem::insert(KCanvasBase *host)
 
     KoTextMeta *startmark = new KoTextMeta();
     editor->insertInlineObject(startmark);
-    KoTextInlineRdf *inlineRdf(new KoTextInlineRdf((QTextDocument*)editor->document(), startmark));
+    KTextInlineRdf *inlineRdf(new KTextInlineRdf((QTextDocument*)editor->document(), startmark));
 
     // generate an xml:id for inlineRdf
     // set it and also insert some Rdf into manifest.rdf to link

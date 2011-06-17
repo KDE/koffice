@@ -33,7 +33,7 @@ class KShape;
 class KInlineTextObjectManager;
 class KInlineObjectPrivate;
 class KShapeSavingContext;
-class KoTextInlineRdf;
+class KTextInlineRdf;
 class KXmlElement;
 class KShapeLoadingContext;
 class KoTextPage;
@@ -196,12 +196,12 @@ public:
      * Ownership of the rdf object is taken by this object, you should not
      * delete it.
      */
-    void setInlineRdf(KoTextInlineRdf *rdf);
+    void setInlineRdf(KTextInlineRdf *rdf);
     /**
      * Get any Rdf which was stored in content.xml for this inline object
      * This object continues to own the object, do not delete it.
      */
-    KoTextInlineRdf *inlineRdf() const;
+    KTextInlineRdf *inlineRdf() const;
 
     /**
      * Load a variable from odf.
