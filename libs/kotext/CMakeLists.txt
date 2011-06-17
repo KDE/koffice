@@ -16,7 +16,7 @@ set(kotext_LIB_SRCS
     KoTextEditor.cpp
     KoList.cpp
 
-    KoTextEditingRegistry.cpp
+    KTextEditingRegistry.cpp
     KTextEditingFactory.cpp
     KTextEditingPlugin.cpp
 
@@ -119,7 +119,7 @@ install(
     KoTextEditor.h
     KTextEditingFactory.h
     KTextEditingPlugin.h
-    KoTextEditingRegistry.h
+    KTextEditingRegistry.h
     KInlineObjectRegistry.h
     KInlineObjectFactoryBase.h
     KoBookmark.h

@@ -17,20 +17,20 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoTextEditingRegistry.h"
+#include "KTextEditingRegistry.h"
 
 #include <KoPluginLoader.h>
 
 #include <KGlobal>
 
-class KoTextEditingRegistry::Private
+class KTextEditingRegistry::Private
 {
 public:
 };
 
-KoTextEditingRegistry* KoTextEditingRegistry::instance()
+KTextEditingRegistry* KTextEditingRegistry::instance()
 {
-    K_GLOBAL_STATIC(KoTextEditingRegistry, s_instance)
+    K_GLOBAL_STATIC(KTextEditingRegistry, s_instance)
     if (!s_instance.exists()) {
         KoPluginLoader::PluginsConfig config;
         config.whiteList = "TextEditingPlugins";
@@ -42,14 +42,14 @@ KoTextEditingRegistry* KoTextEditingRegistry::instance()
     return s_instance;
 }
 
-KoTextEditingRegistry::KoTextEditingRegistry()
+KTextEditingRegistry::KTextEditingRegistry()
     : d(0)
 {
 }
 
-KoTextEditingRegistry::~KoTextEditingRegistry()
+KTextEditingRegistry::~KTextEditingRegistry()
 {
     delete d;
 }
 
-#include <KoTextEditingRegistry.moc>
+#include <KTextEditingRegistry.moc>

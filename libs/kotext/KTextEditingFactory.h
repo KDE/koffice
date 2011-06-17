@@ -31,7 +31,7 @@ class KResourceManager;
 /**
  * A factory for text editing plugins. There should be one for each plugin type to
  * allow the creation of the text-editing-class from that plugin.
- * @see KoTextEditingRegistry
+ * @see KTextEditingRegistry
  */
 class KOTEXT_EXPORT KTextEditingFactory : public QObject
 {

@@ -34,21 +34,21 @@
  * @see KTextEditingFactory
  * @see KTextEditingPlugin
  */
-class KOTEXT_EXPORT KoTextEditingRegistry : public QObject,  public KGenericRegistry<KTextEditingFactory*>
+class KOTEXT_EXPORT KTextEditingRegistry : public QObject,  public KGenericRegistry<KTextEditingFactory*>
 {
     Q_OBJECT
 public:
-    ~KoTextEditingRegistry();
+    ~KTextEditingRegistry();
     /**
-     * Return an instance of the KoTextEditingRegistry
+     * Return an instance of the KTextEditingRegistry
      * Creates an instance if that has never happened before and returns the singleton instance.
      */
-    static KoTextEditingRegistry *instance();
+    static KTextEditingRegistry *instance();
 
 private:
-    KoTextEditingRegistry();
-    KoTextEditingRegistry(const KoTextEditingRegistry&);
-    KoTextEditingRegistry operator=(const KoTextEditingRegistry&);
+    KTextEditingRegistry();
+    KTextEditingRegistry(const KTextEditingRegistry&);
+    KTextEditingRegistry operator=(const KTextEditingRegistry&);
 
     class Private;
     Private *d;

@@ -57,7 +57,7 @@
 #include <KTextDocumentLayout.h>
 #include <KParagraphStyle.h>
 #include <KTextEditingPlugin.h>
-#include <KoTextEditingRegistry.h>
+#include <KTextEditingRegistry.h>
 #include <KInlineTextObjectManager.h>
 #include <KStyleManager.h>
 #include <KoTextOdfSaveHelper.h>
@@ -355,8 +355,8 @@ TextTool::TextTool(KCanvasBase *canvas)
     QList<QAction*> list;
     list.append(this->action("text_default"));
     list.append(this->action("format_font"));
-    foreach (const QString &key, KoTextEditingRegistry::instance()->keys()) {
-        KTextEditingFactory *factory =  KoTextEditingRegistry::instance()->value(key);
+    foreach (const QString &key, KTextEditingRegistry::instance()->keys()) {
+        KTextEditingFactory *factory =  KTextEditingRegistry::instance()->value(key);
         if (factory->showInMenu()) {
             KAction *a = new KAction(i18n("Apply %1", factory->title()), this);
             connect(a, SIGNAL(triggered()), signalMapper, SLOT(map()));
