@@ -57,7 +57,7 @@ SCDocument::SCDocument(QWidget* parentWidget, QObject* parent, bool singleViewMo
 , m_declarations(new SCDeclarations())
 {
     if (!KoToolRegistry::instance()->contains("SCPlaceholderToolID")) {
-        KoToolFactoryBase *f = new SCAnimationToolFactory(KoToolRegistry::instance());
+        KToolFactoryBase *f = new SCAnimationToolFactory(KoToolRegistry::instance());
         KoToolRegistry::instance()->add(f);
         f = new SCPlaceholderToolFactory(KoToolRegistry::instance());
         KoToolRegistry::instance()->add(f);

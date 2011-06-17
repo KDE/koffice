@@ -33,10 +33,10 @@
 //
 
 
-#include "KoToolFactoryBase.h"
+#include "KToolFactoryBase.h"
 
 /// The factory for the KCreateShapesTool
-class KCreateShapesToolFactory : public KoToolFactoryBase
+class KCreateShapesToolFactory : public KToolFactoryBase
 {
 public:
     /// Constructor

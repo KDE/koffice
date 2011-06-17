@@ -28,7 +28,7 @@
 #include <klocale.h>
 
 ChangeTrackingToolFactory::ChangeTrackingToolFactory(QObject *parent)
-        : KoToolFactoryBase(parent, "ChangeTrackingToolFactory_ID")
+        : KToolFactoryBase(parent, "ChangeTrackingToolFactory_ID")
 {
     setToolTip(i18n("Change Tracking tool"));
     setToolType(dynamicToolType());

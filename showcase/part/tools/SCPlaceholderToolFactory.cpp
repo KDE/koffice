@@ -23,7 +23,7 @@
 #include "SCPlaceholderShape.h"
 
 SCPlaceholderToolFactory::SCPlaceholderToolFactory(QObject *parent)
-    : KoToolFactoryBase(parent, "SCPlaceholderToolID")
+    : KToolFactoryBase(parent, "SCPlaceholderToolID")
 {
     setToolTip(i18n("Layout Tool"));
     setToolType(dynamicToolType());

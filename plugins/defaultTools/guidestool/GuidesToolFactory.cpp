@@ -22,7 +22,7 @@
 #include <KLocale>
 
 GuidesToolFactory::GuidesToolFactory( QObject *parent )
-    : KoToolFactoryBase(parent, GuidesToolId)
+    : KToolFactoryBase(parent, GuidesToolId)
 {
     setToolTip(i18n("Edit guidelines"));
     setToolType("never");

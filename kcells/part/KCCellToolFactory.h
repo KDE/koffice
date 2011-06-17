@@ -20,7 +20,7 @@
 #ifndef KSPREAD_CELL_TOOL_FACTORY
 #define KSPREAD_CELL_TOOL_FACTORY
 
-#include <KoToolFactoryBase.h>
+#include <KToolFactoryBase.h>
 
 #include "kcells_export.h"
 
@@ -28,7 +28,7 @@
 /**
  * The KCFactory, that creates a KCCellTool.
  */
-class KCELLS_EXPORT KCCellToolFactory : public KoToolFactoryBase
+class KCELLS_EXPORT KCCellToolFactory : public KToolFactoryBase
 {
     Q_OBJECT
 public:

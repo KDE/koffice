@@ -20,9 +20,9 @@
 #ifndef ARTISTICTEXTTOOLFACTORY_H
 #define ARTISTICTEXTTOOLFACTORY_H
 
-#include <KoToolFactoryBase.h>
+#include <KToolFactoryBase.h>
 
-class ArtisticTextToolFactory : public KoToolFactoryBase
+class ArtisticTextToolFactory : public KToolFactoryBase
 {
     Q_OBJECT
     public:

@@ -20,19 +20,19 @@
 #ifndef KOPABACKGROUNDTOOLFACTORY_H
 #define KOPABACKGROUNDTOOLFACTORY_H
 
-#include <KoToolFactoryBase.h>
+#include <KToolFactoryBase.h>
 #include "KoPABackgroundTool.h"
 
-class KoPABackgroundToolFactory : public KoToolFactoryBase
+class KoPABackgroundToolFactory : public KToolFactoryBase
 {
     Q_OBJECT
 public:
     KoPABackgroundToolFactory(QObject *parent);
-    ///reimplemented from KoToolFactoryBase
+    ///reimplemented from KToolFactoryBase
     virtual ~KoPABackgroundToolFactory();
-    ///reimplemented from KoToolFactoryBase
+    ///reimplemented from KToolFactoryBase
     virtual KToolBase * createTool(KCanvasBase *canvas);
-    ///reimplemented from KoToolFactoryBase
+    ///reimplemented from KToolFactoryBase
     virtual bool canCreateTool(KCanvasBase *canvas) const;
 };
 

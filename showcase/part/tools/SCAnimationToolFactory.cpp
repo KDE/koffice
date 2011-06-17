@@ -27,7 +27,7 @@
 #include <kdebug.h>
 
 SCAnimationToolFactory::SCAnimationToolFactory(QObject *parent)
-: KoToolFactoryBase(parent, "Animation Tool")
+: KToolFactoryBase(parent, "Animation Tool")
 {
     setToolTip(i18n("Animation tool"));
     setToolType(mainToolType());

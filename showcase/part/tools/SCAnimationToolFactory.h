@@ -21,10 +21,10 @@
 #ifndef KPRANIMATIONTOOLFACTORY_H
 #define KPRANIMATIONTOOLFACTORY_H
 
-#include <KoToolFactoryBase.h>
+#include <KToolFactoryBase.h>
 
 /// Factory for the SCAnimationTool
-class SCAnimationToolFactory : public KoToolFactoryBase {
+class SCAnimationToolFactory : public KToolFactoryBase {
 public:
     /// constructor
     SCAnimationToolFactory(QObject *parent);

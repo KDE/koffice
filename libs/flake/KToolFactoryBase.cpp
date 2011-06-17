@@ -17,9 +17,9 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoToolFactoryBase.h"
+#include "KToolFactoryBase.h"
 
-class KoToolFactoryBase::Private
+class KToolFactoryBase::Private
 {
 public:
     Private(const QString &i)
@@ -39,95 +39,95 @@ public:
 };
 
 
-KoToolFactoryBase::KoToolFactoryBase(QObject *parent, const QString &id)
+KToolFactoryBase::KToolFactoryBase(QObject *parent, const QString &id)
         : QObject(parent),
         d(new Private(id))
 {
 }
 
-KoToolFactoryBase::~KoToolFactoryBase()
+KToolFactoryBase::~KToolFactoryBase()
 {
     delete d;
 }
 
-QString KoToolFactoryBase::id() const
+QString KToolFactoryBase::id() const
 {
     return d->id;
 }
 
-int KoToolFactoryBase::priority() const
+int KToolFactoryBase::priority() const
 {
     return d->priority;
 }
 
-QString KoToolFactoryBase::toolType() const
+QString KToolFactoryBase::toolType() const
 {
     return d->toolType;
 }
 
-QString KoToolFactoryBase::toolTip() const
+QString KToolFactoryBase::toolTip() const
 {
     return d->tooltip;
 }
 
-QString KoToolFactoryBase::icon() const
+QString KToolFactoryBase::icon() const
 {
     return d->icon;
 }
 
-QString KoToolFactoryBase::activationShapeId() const
+QString KToolFactoryBase::activationShapeId() const
 {
     return d->activationId;
 }
 
-KShortcut KoToolFactoryBase::shortcut() const
+KShortcut KToolFactoryBase::shortcut() const
 {
     return d->shortcut;
 }
 
-void KoToolFactoryBase::setActivationShapeId(const QString &activationShapeId)
+void KToolFactoryBase::setActivationShapeId(const QString &activationShapeId)
 {
     d->activationId = activationShapeId;
 }
 
-void KoToolFactoryBase::setToolTip(const QString & tooltip)
+void KToolFactoryBase::setToolTip(const QString & tooltip)
 {
     d->tooltip = tooltip;
 }
 
-void KoToolFactoryBase::setToolType(const QString & toolType)
+void KToolFactoryBase::setToolType(const QString & toolType)
 {
     d->toolType = toolType;
 }
 
-void KoToolFactoryBase::setIcon(const QString & icon)
+void KToolFactoryBase::setIcon(const QString & icon)
 {
     d->icon = icon;
 }
 
-void KoToolFactoryBase::setPriority(int newPriority)
+void KToolFactoryBase::setPriority(int newPriority)
 {
     d->priority = newPriority;
 }
 
-void KoToolFactoryBase::setShortcut(const KShortcut & shortcut)
+void KToolFactoryBase::setShortcut(const KShortcut & shortcut)
 {
     d->shortcut = shortcut;
 }
 
-void KoToolFactoryBase::setInputDeviceAgnostic(bool agnostic)
+void KToolFactoryBase::setInputDeviceAgnostic(bool agnostic)
 {
     d->inputDeviceAgnostic = agnostic;
 }
 
-bool KoToolFactoryBase::inputDeviceAgnostic() const
+bool KToolFactoryBase::inputDeviceAgnostic() const
 {
     return d->inputDeviceAgnostic;
 }
 
-bool KoToolFactoryBase::canCreateTool(KCanvasBase *) const
+bool KToolFactoryBase::canCreateTool(KCanvasBase *) const
 {
     return true;
 }
 
-#include <KoToolFactoryBase.moc>
+#include <KToolFactoryBase.moc>

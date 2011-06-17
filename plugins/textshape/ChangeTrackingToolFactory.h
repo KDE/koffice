@@ -20,10 +20,10 @@
 #ifndef CHANGETRACKINGTOOLFACTORY_H
 #define CHANGETRACKINGTOOLFACTORY_H
 
-#include <KoToolFactoryBase.h>
+#include <KToolFactoryBase.h>
 
 
-class ChangeTrackingToolFactory : public KoToolFactoryBase
+class ChangeTrackingToolFactory : public KToolFactoryBase
 {
     Q_OBJECT
 public:

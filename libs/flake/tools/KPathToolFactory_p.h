@@ -32,10 +32,10 @@
 //
 
 
-#include <KoToolFactoryBase.h>
+#include <KToolFactoryBase.h>
 
 /// Factory for the KPathTool
-class KPathToolFactory : public KoToolFactoryBase
+class KPathToolFactory : public KToolFactoryBase
 {
     Q_OBJECT
 public:

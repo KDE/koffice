@@ -25,7 +25,7 @@
 #include "KCCellTool.h"
 
 KCCellToolFactory::KCCellToolFactory(QObject* parent, const QString& id)
-        : KoToolFactoryBase(parent, id)
+        : KToolFactoryBase(parent, id)
 {
     setToolTip(i18n("Cell Tool"));
     setIcon("kcells");
@@ -45,17 +45,17 @@ KToolBase* KCCellToolFactory::createTool(KCanvasBase* canvas)
 
 void KCCellToolFactory::setPriority(int priority)
 {
-    KoToolFactoryBase::setPriority(priority);
+    KToolFactoryBase::setPriority(priority);
 }
 
 void KCCellToolFactory::setToolTip(const QString& toolTip)
 {
-    KoToolFactoryBase::setToolTip(toolTip);
+    KToolFactoryBase::setToolTip(toolTip);
 }
 
 void KCCellToolFactory::setIcon(const QString& icon)
 {
-    KoToolFactoryBase::setIcon(icon);
+    KToolFactoryBase::setIcon(icon);
 }
 
 #include "KCCellToolFactory.moc"

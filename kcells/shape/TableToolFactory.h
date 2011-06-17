@@ -21,10 +21,10 @@
 #define KSPREAD_TABLE_TOOL_FACTORY
 
 
-#include <KoToolFactoryBase.h>
+#include <KToolFactoryBase.h>
 
 
-class TableToolFactory : public KoToolFactoryBase
+class TableToolFactory : public KToolFactoryBase
 {
     Q_OBJECT
 public:

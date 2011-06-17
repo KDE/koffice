@@ -46,7 +46,7 @@ set(flake_SRCS
     KCanvasController.cpp
     KCanvasController_p.cpp
     KShapeRegistry.cpp
-    KoToolFactoryBase.cpp
+    KToolFactoryBase.cpp
     KPathShapeFactory.cpp
     KShapeFactoryBase.cpp
     KShapeUserData.cpp
@@ -295,7 +295,7 @@ install(
     KSnapGuide.h
     KTextShapeDataBase.h
     KToolBase.h
-    KoToolFactoryBase.h
+    KToolFactoryBase.h
     KoToolManager.h
     KoToolProxy.h
     KoToolRegistry.h

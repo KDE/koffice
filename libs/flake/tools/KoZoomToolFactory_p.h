@@ -33,10 +33,10 @@
 //
 
 
-#include "KoToolFactoryBase.h"
+#include "KToolFactoryBase.h"
 
 /// Factory for the KoZoomTool
-class KoZoomToolFactory : public KoToolFactoryBase
+class KoZoomToolFactory : public KToolFactoryBase
 {
 public:
     /// constructor

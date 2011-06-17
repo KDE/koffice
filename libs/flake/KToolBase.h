@@ -67,7 +67,7 @@ public:
 
 
     /**
-     * Constructor, normally only called by the factory (see KoToolFactoryBase)
+     * Constructor, normally only called by the factory (see KToolFactoryBase)
      * @param canvas the canvas interface this tool will work for.
      */
     explicit KToolBase(KCanvasBase *canvas);
@@ -193,16 +193,16 @@ public:
     virtual void inputMethodEvent(QInputMethodEvent *event);
 
     /**
-     * Set the identifier code from the KoToolFactoryBase that created this tool.
+     * Set the identifier code from the KToolFactoryBase that created this tool.
      * @param id the identifier code
-     * @see KoToolFactoryBase::id()
+     * @see KToolFactoryBase::id()
      */
     void setToolId(const QString &id);
 
     /**
-     * get the identifier code from the KoToolFactoryBase that created this tool.
+     * get the identifier code from the KToolFactoryBase that created this tool.
      * @return the toolId.
-     * @see KoToolFactoryBase::id()
+     * @see KToolFactoryBase::id()
      */
     QString toolId() const;
 
@@ -326,7 +326,7 @@ signals:
      * Emitted when this tool wants itself to be replaced by another tool.
      *
      * @param id the identification of the desired tool
-     * @see toolId(), KoToolFactoryBase::id()
+     * @see toolId(), KToolFactoryBase::id()
      */
     void activateTool(const QString &id);
 

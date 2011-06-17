@@ -20,9 +20,9 @@
 #ifndef PICTURE_TOOL_FACTORY
 #define PICTURE_TOOL_FACTORY
 
-#include <KoToolFactoryBase.h>
+#include <KToolFactoryBase.h>
 
-class PictureToolFactory : public KoToolFactoryBase
+class PictureToolFactory : public KToolFactoryBase
 {
     Q_OBJECT
 public:

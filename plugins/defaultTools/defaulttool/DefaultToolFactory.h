@@ -21,10 +21,10 @@
 #ifndef DEFAULTTOOLFACTORY_H
 #define DEFAULTTOOLFACTORY_H
 
-#include <KoToolFactoryBase.h>
+#include <KToolFactoryBase.h>
 
 /// Factory for the KInteractionTool
-class DefaultToolFactory : public KoToolFactoryBase {
+class DefaultToolFactory : public KToolFactoryBase {
 public:
     /// constructor
     DefaultToolFactory(QObject *parent);

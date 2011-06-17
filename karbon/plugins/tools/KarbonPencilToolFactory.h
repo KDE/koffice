@@ -20,9 +20,9 @@
 #ifndef _KARBONPENCILTOOLFACTORY_H_
 #define _KARBONPENCILTOOLFACTORY_H_
 
-#include <KoToolFactoryBase.h>
+#include <KToolFactoryBase.h>
 
-class KarbonPencilToolFactory : public KoToolFactoryBase
+class KarbonPencilToolFactory : public KToolFactoryBase
 {
     Q_OBJECT
 public:

@@ -21,14 +21,14 @@
 
 #include <KShapeManager.h>
 #include <KSelection.h>
-#include <KoToolFactoryBase.h>
+#include <KToolFactoryBase.h>
 #include <QToolButton>
 #include <kicon.h>
 
 #include <stdlib.h> // for random()
 
 //   ************ ToolHelper **********
-ToolHelper::ToolHelper(KoToolFactoryBase *tool)
+ToolHelper::ToolHelper(KToolFactoryBase *tool)
 {
     m_toolFactory = tool;
     m_uniqueId = (int) random();

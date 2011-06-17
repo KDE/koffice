@@ -46,7 +46,7 @@
  * by the TextShape internal API and is therefor able to alter the data that that shape
  * displays. In this case text.
  *
- * Take a look at KoToolFactoryBase::activationShapeId() to understand how shapes and
+ * Take a look at KToolFactoryBase::activationShapeId() to understand how shapes and
  * tools are linked together.
  *
  * Flake natively only has a path shape (with full vector graphics support). All other

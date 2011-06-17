@@ -20,10 +20,10 @@
 #ifndef KOTEXTTOOLFACTORY_H
 #define KOTEXTTOOLFACTORY_H
 
-#include <KoToolFactoryBase.h>
+#include <KToolFactoryBase.h>
 
 
-class TextToolFactory : public KoToolFactoryBase
+class TextToolFactory : public KToolFactoryBase
 {
     Q_OBJECT
 public:

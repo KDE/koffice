@@ -28,7 +28,7 @@
 #include <QPixmap>
 
 KCreateShapesToolFactory::KCreateShapesToolFactory(QObject *parent)
-        : KoToolFactoryBase(parent, KoCreateShapesTool_ID)
+        : KToolFactoryBase(parent, KoCreateShapesTool_ID)
 {
     setToolTip(i18n("Create object"));
     setToolType(mainToolType());

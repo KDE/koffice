@@ -24,7 +24,7 @@
 #include <klocale.h>
 
 KPanToolFactory::KPanToolFactory(QObject *parent)
-        : KoToolFactoryBase(parent, KoPanTool_ID)
+        : KToolFactoryBase(parent, KoPanTool_ID)
 {
     setToolTip(i18n("Pan"));
     setToolType(navigationToolType());

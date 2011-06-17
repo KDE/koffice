@@ -20,9 +20,9 @@
 #ifndef KPRPLACEHOLDERTOOLFACTORY_H
 #define KPRPLACEHOLDERTOOLFACTORY_H
 
-#include <KoToolFactoryBase.h>
+#include <KToolFactoryBase.h>
 
-class SCPlaceholderToolFactory : public KoToolFactoryBase
+class SCPlaceholderToolFactory : public KToolFactoryBase
 {
 public:
     SCPlaceholderToolFactory(QObject *parent);

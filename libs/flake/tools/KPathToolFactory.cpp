@@ -24,7 +24,7 @@
 #include <klocale.h>
 
 KPathToolFactory::KPathToolFactory(QObject *parent)
-        : KoToolFactoryBase(parent, "PathToolFactoryId")
+        : KToolFactoryBase(parent, "PathToolFactoryId")
 {
     setToolTip(i18n("Path editing tool"));
     setToolType(dynamicToolType());

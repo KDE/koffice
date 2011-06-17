@@ -42,7 +42,7 @@
 #include "KInputDevice.h"
 #include "KoToolManager.h"
 
-class KoToolFactoryBase;
+class KToolFactoryBase;
 class KShapeManager;
 class KCanvasBase;
 class KToolBase;
@@ -120,25 +120,25 @@ class ToolHelper : public QObject
 {
     Q_OBJECT
 public:
-    explicit ToolHelper(KoToolFactoryBase *tool);
+    explicit ToolHelper(KToolFactoryBase *tool);
     QToolButton *createButton();
-    /// wrapper around KoToolFactoryBase::id();
+    /// wrapper around KToolFactoryBase::id();
     QString id() const;
-    /// wrapper around KoToolFactoryBase::toolTip();
+    /// wrapper around KToolFactoryBase::toolTip();
     QString toolTip() const;
-    /// wrapper around KoToolFactoryBase::toolType();
+    /// wrapper around KToolFactoryBase::toolType();
     QString toolType() const;
-    /// wrapper around KoToolFactoryBase::activationShapeId();
+    /// wrapper around KToolFactoryBase::activationShapeId();
     QString activationShapeId() const;
-    /// wrapper around KoToolFactoryBase::priority();
+    /// wrapper around KToolFactoryBase::priority();
     int priority() const;
     KToolBase *createTool(KCanvasBase *canvas) const;
     int uniqueId() const {
         return m_uniqueId;
     }
-    /// wrapper around KoToolFactoryBase::shortcut()
+    /// wrapper around KToolFactoryBase::shortcut()
     KShortcut shortcut() const;
-    /// wrapper around KoToolFactoryBase::inputDeviceAgnostic()
+    /// wrapper around KToolFactoryBase::inputDeviceAgnostic()
     bool inputDeviceAgnostic() const;
     /// returns true if the factory will create a tool, false if it decided to not create one in createTool().
     bool canCreateTool(KCanvasBase *canvas) const;
@@ -151,7 +151,7 @@ private slots:
     void buttonPressed();
 
 private:
-    KoToolFactoryBase *m_toolFactory;
+    KToolFactoryBase *m_toolFactory;
     int m_uniqueId;
 };
 

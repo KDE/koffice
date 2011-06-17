@@ -24,7 +24,7 @@
 #include <klocale.h>
 
 ArtisticTextToolFactory::ArtisticTextToolFactory( QObject *parent )
-    : KoToolFactoryBase(parent, "ArtisticTextToolFactoryID")
+    : KToolFactoryBase(parent, "ArtisticTextToolFactoryID")
 {
     setToolTip( i18n("Artistic Text Editing Tool") );
     setToolType( dynamicToolType() );

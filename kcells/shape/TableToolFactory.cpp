@@ -26,7 +26,7 @@
 #include "TableTool.h"
 
 TableToolFactory::TableToolFactory(QObject* parent)
-        : KoToolFactoryBase(parent, "TableToolFactoryId")
+        : KToolFactoryBase(parent, "TableToolFactoryId")
 {
     setToolTip(i18n("Table editing tool"));
     setIcon("spreadsheetshape");

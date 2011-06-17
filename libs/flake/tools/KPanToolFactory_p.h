@@ -33,10 +33,10 @@
 //
 
 
-#include "KoToolFactoryBase.h"
+#include "KToolFactoryBase.h"
 
 /// Factory for the KPanTool
-class KPanToolFactory : public KoToolFactoryBase
+class KPanToolFactory : public KToolFactoryBase
 {
 public:
     /// constructor
