@@ -21,7 +21,7 @@
 #include "KoTextEditor.h"
 
 #include <KCanvasBase.h>
-#include <KoToolProxy.h>
+#include <KToolProxy.h>
 
 #include <KLocale>
 

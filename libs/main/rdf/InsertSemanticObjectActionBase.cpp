@@ -19,7 +19,7 @@
 
 #include "InsertSemanticObjectActionBase.h"
 #include <KoTextEditor.h>
-#include <KoToolProxy.h>
+#include <KToolProxy.h>
 #include <KCanvasBase.h>
 
 InsertSemanticObjectActionBase::InsertSemanticObjectActionBase(KCanvasBase *canvas,

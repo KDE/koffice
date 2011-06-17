@@ -39,7 +39,7 @@ class QUndoCommand;
 
 class KResourceManager;
 class KShapeManager;
-class KoToolProxy;
+class KToolProxy;
 class KoViewConverter;
 class KShapeController;
 class KShapeControllerBase;
@@ -117,7 +117,7 @@ public:
      * is really, really active is hard when tablets are involved,
      * so leave that to others.
      */
-    virtual KoToolProxy *toolProxy() const = 0;
+    virtual KToolProxy *toolProxy() const = 0;
 
     /**
      * Return the viewConverter for this view.

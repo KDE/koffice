@@ -43,7 +43,7 @@
 class KarbonPart;
 class KoViewConverter;
 class KShapeManager;
-class KoToolProxy;
+class KToolProxy;
 class QRectF;
 class QPainter;
 class QPaintEvent;
@@ -72,7 +72,7 @@ public:
     /// reimplemented from KCanvasBase
     const KoViewConverter *viewConverter() const;
     /// reimplemented from KCanvasBase
-    KoToolProxy * toolProxy() const;
+    KToolProxy * toolProxy() const;
     /// reimplemented from KCanvasBase
     virtual QPoint documentOrigin() const;
     /// reimplemented from KCanvasBase

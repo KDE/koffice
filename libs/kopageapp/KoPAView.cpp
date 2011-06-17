@@ -37,7 +37,7 @@
 #include <KoFind.h>
 #include <KTextDocumentLayout.h>
 #include <KToolManager.h>
-#include <KoToolProxy.h>
+#include <KToolProxy.h>
 #include <KoZoomHandler.h>
 #include <KoStandardAction.h>
 #include <KoToolBoxFactory.h>

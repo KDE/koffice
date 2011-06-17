@@ -64,7 +64,7 @@ class MockGroup : public KShapeGroup
     }
 };
 
-class KoToolProxy;
+class KToolProxy;
 
 class MockCanvas : public KCanvasBase
 {
@@ -82,7 +82,7 @@ public:
         return 0;
     }
     void updateCanvas(const QRectF&)  {}
-    KoToolProxy * toolProxy() const {
+    KToolProxy * toolProxy() const {
         return 0;
     }
     KoViewConverter *viewConverter() const {

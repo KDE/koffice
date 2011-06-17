@@ -27,7 +27,7 @@
 class QLabel;
 
 class KShapeManager;
-class KoToolProxy;
+class KToolProxy;
 
 class KCView;
 
@@ -46,7 +46,7 @@ public:
 
     // flake
     KShapeManager* shapeManager;
-    QPointer<KoToolProxy> toolProxy;
+    QPointer<KToolProxy> toolProxy;
 };
 
 #endif

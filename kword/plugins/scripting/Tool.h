@@ -26,7 +26,7 @@
 
 #include <kdebug.h>
 #include <KToolManager.h>
-#include <KoToolProxy.h>
+#include <KToolProxy.h>
 #include <KoTextEditor.h>
 #include <KWView.h>
 #include <KWCanvas.h>
@@ -154,7 +154,7 @@ signals:
 
 private:
     Module* m_module;
-    KoToolProxy* m_toolproxy;
+    KToolProxy* m_toolproxy;
     QSignalMapper* m_signalMapper;
 };
 

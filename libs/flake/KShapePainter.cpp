@@ -74,7 +74,7 @@ public:
     {
     }
 
-    virtual KoToolProxy *toolProxy() const
+    virtual KToolProxy *toolProxy() const
     {
         return 0;
     }

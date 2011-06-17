@@ -17,8 +17,8 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#include "KoToolProxy.h"
-#include "KoToolProxy_p.h"
+#include "KToolProxy.h"
+#include "KToolProxy_p.h"
 
 #include "KToolBase.h"
 #include "KPointerEvent.h"
@@ -34,7 +34,7 @@
 #include <kdebug.h>
 #include <QTimer>
 
-KoToolProxyPrivate::KoToolProxyPrivate(KoToolProxy *p)
+KoToolProxyPrivate::KoToolProxyPrivate(KToolProxy *p)
     : activeTool(0),
     tabletPressed(false),
     hasSelection(false),
@@ -97,7 +97,7 @@ bool KoToolProxyPrivate::isActiveLayerEditable()
     return true;
 }
 
-KoToolProxy::KoToolProxy(KCanvasBase *canvas, QObject *parent)
+KToolProxy::KToolProxy(KCanvasBase *canvas, QObject *parent)
         : QObject(parent),
         d(new KoToolProxyPrivate(this))
 {
@@ -106,22 +106,22 @@ KoToolProxy::KoToolProxy(KCanvasBase *canvas, QObject *parent)
     connect(&d->scrollTimer, SIGNAL(timeout()), this, SLOT(timeout()));
 }
 
-KoToolProxy::~KoToolProxy()
+KToolProxy::~KToolProxy()
 {
     delete d;
 }
 
-void KoToolProxy::paint(QPainter &painter, const KoViewConverter &converter)
+void KToolProxy::paint(QPainter &painter, const KoViewConverter &converter)
 {
     if (d->activeTool) d->activeTool->paint(painter, converter);
 }
 
-void KoToolProxy::repaintDecorations()
+void KToolProxy::repaintDecorations()
 {
     if (d->activeTool) d->activeTool->repaintDecorations();
 }
 
-void KoToolProxy::tabletEvent(QTabletEvent *event, const QPointF &point)
+void KToolProxy::tabletEvent(QTabletEvent *event, const QPointF &point)
 {
     // don't process tablet events for stylus middle and right mouse button
     // they will be re-send as mouse events with the correct button. there is no possibility to get the button from the QTabletEvent.
@@ -167,7 +167,7 @@ void KoToolProxy::tabletEvent(QTabletEvent *event, const QPointF &point)
     d->mouseLeaveWorkaround = true;
 }
 
-void KoToolProxy::mousePressEvent(QMouseEvent *event, const QPointF &point)
+void KToolProxy::mousePressEvent(QMouseEvent *event, const QPointF &point)
 {
     d->mouseLeaveWorkaround = false;
     KInputDevice id;
@@ -184,7 +184,7 @@ void KoToolProxy::mousePressEvent(QMouseEvent *event, const QPointF &point)
         event->ignore();
 }
 
-void KoToolProxy::mouseDoubleClickEvent(QMouseEvent *event, const QPointF &point)
+void KToolProxy::mouseDoubleClickEvent(QMouseEvent *event, const QPointF &point)
 {
     d->mouseLeaveWorkaround = false;
     KInputDevice id;
@@ -200,7 +200,7 @@ void KoToolProxy::mouseDoubleClickEvent(QMouseEvent *event, const QPointF &point
         d->activeTool->canvas()->shapeManager()->suggestChangeTool(&ev);
 }
 
-void KoToolProxy::mouseMoveEvent(QMouseEvent *event, const QPointF &point)
+void KToolProxy::mouseMoveEvent(QMouseEvent *event, const QPointF &point)
 {
     if (d->mouseLeaveWorkaround) {
         d->mouseLeaveWorkaround = false;
@@ -219,7 +219,7 @@ void KoToolProxy::mouseMoveEvent(QMouseEvent *event, const QPointF &point)
     d->checkAutoScroll(ev);
 }
 
-void KoToolProxy::mouseReleaseEvent(QMouseEvent *event, const QPointF &point)
+void KToolProxy::mouseReleaseEvent(QMouseEvent *event, const QPointF &point)
 {
     d->mouseLeaveWorkaround = false;
     KInputDevice id;
@@ -255,7 +255,7 @@ void KoToolProxy::mouseReleaseEvent(QMouseEvent *event, const QPointF &point)
     }
 }
 
-void KoToolProxy::keyPressEvent(QKeyEvent *event)
+void KToolProxy::keyPressEvent(QKeyEvent *event)
 {
     if (d->activeTool)
         d->activeTool->keyPressEvent(event);
@@ -263,7 +263,7 @@ void KoToolProxy::keyPressEvent(QKeyEvent *event)
         event->ignore();
 }
 
-void KoToolProxy::keyReleaseEvent(QKeyEvent *event)
+void KToolProxy::keyReleaseEvent(QKeyEvent *event)
 {
     if (d->activeTool)
         d->activeTool->keyReleaseEvent(event);
@@ -271,7 +271,7 @@ void KoToolProxy::keyReleaseEvent(QKeyEvent *event)
         event->ignore();
 }
 
-void KoToolProxy::wheelEvent(QWheelEvent *event, const QPointF &point)
+void KToolProxy::wheelEvent(QWheelEvent *event, const QPointF &point)
 {
     KPointerEvent ev(event, point);
     if (d->activeTool)
@@ -280,26 +280,26 @@ void KoToolProxy::wheelEvent(QWheelEvent *event, const QPointF &point)
         event->ignore();
 }
 
-QVariant KoToolProxy::inputMethodQuery(Qt::InputMethodQuery query, const KoViewConverter &converter) const
+QVariant KToolProxy::inputMethodQuery(Qt::InputMethodQuery query, const KoViewConverter &converter) const
 {
     if (d->activeTool)
         return d->activeTool->inputMethodQuery(query, converter);
     return QVariant();
 }
 
-void KoToolProxy::inputMethodEvent(QInputMethodEvent *event)
+void KToolProxy::inputMethodEvent(QInputMethodEvent *event)
 {
     if (d->activeTool) d->activeTool->inputMethodEvent(event);
 }
 
-KoToolSelection* KoToolProxy::selection()
+KoToolSelection* KToolProxy::selection()
 {
     if (d->activeTool)
         return d->activeTool->selection();
     return 0;
 }
 
-void KoToolProxy::setActiveTool(KToolBase *tool)
+void KToolProxy::setActiveTool(KToolBase *tool)
 {
     if (d->activeTool)
         disconnect(d->activeTool, SIGNAL(selectionChanged(bool)), this, SLOT(selectionChanged(bool)));
@@ -316,25 +316,25 @@ void KoToolProxyPrivate::setCanvasController(KCanvasController *c)
     controller = c;
 }
 
-QHash<QString, KAction*> KoToolProxy::actions() const
+QHash<QString, KAction*> KToolProxy::actions() const
 {
     return d->activeTool ? d->activeTool->actions() : QHash<QString, KAction*>();
 }
 
-void KoToolProxy::cut()
+void KToolProxy::cut()
 {
     // TODO maybe move checking the active layer to KPasteController ?
     if (d->activeTool && d->isActiveLayerEditable())
         d->activeTool->cut();
 }
 
-void KoToolProxy::copy() const
+void KToolProxy::copy() const
 {
     if (d->activeTool)
         d->activeTool->copy();
 }
 
-bool KoToolProxy::paste()
+bool KToolProxy::paste()
 {
     // TODO maybe move checking the active layer to KPasteController ?
     if (d->activeTool && d->isActiveLayerEditable())
@@ -342,7 +342,7 @@ bool KoToolProxy::paste()
     return false;
 }
 
-QStringList KoToolProxy::supportedPasteMimeTypes() const
+QStringList KToolProxy::supportedPasteMimeTypes() const
 {
     if (d->activeTool)
         return d->activeTool->supportedPasteMimeTypes();
@@ -350,20 +350,20 @@ QStringList KoToolProxy::supportedPasteMimeTypes() const
     return QStringList();
 }
 
-QList<QAction*> KoToolProxy::popupActionList() const
+QList<QAction*> KToolProxy::popupActionList() const
 {
     if (d->activeTool)
         return d->activeTool->popupActionList();
     return QList<QAction*>();
 }
 
-void KoToolProxy::deleteSelection()
+void KToolProxy::deleteSelection()
 {
     if (d->activeTool)
         return d->activeTool->deleteSelection();
 }
 
-void KoToolProxy::processEvent(QEvent *e) const
+void KToolProxy::processEvent(QEvent *e) const
 {
     if (e->type()==QEvent::ShortcutOverride
        && d->activeTool
@@ -373,9 +373,9 @@ void KoToolProxy::processEvent(QEvent *e) const
     }
 }
 
-KoToolProxyPrivate *KoToolProxy::priv()
+KoToolProxyPrivate *KToolProxy::priv()
 {
     return d;
 }
 
-#include <KoToolProxy.moc>
+#include <KToolProxy.moc>

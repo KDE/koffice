@@ -22,7 +22,7 @@
 #include "KoDocumentRdf_p.h"
 
 #include <KCanvasBase.h>
-#include <KoToolProxy.h>
+#include <KToolProxy.h>
 #include <KResourceManager.h>
 #include <KoTextEditor.h>
 

@@ -80,7 +80,7 @@
 #include <KTextOnShapeContainer.h>
 #include <KTextShapeData.h>
 #include <KToolManager.h>
-#include <KoToolProxy.h>
+#include <KToolProxy.h>
 #include <KoZoomAction.h>
 #include <KoZoomController.h>
 

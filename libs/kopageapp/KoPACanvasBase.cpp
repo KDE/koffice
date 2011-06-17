@@ -20,7 +20,7 @@
 #include "KoPACanvasBase.h"
 
 #include <KShapeManager.h>
-#include <KoToolProxy.h>
+#include <KToolProxy.h>
 #include <KoText.h>
 
 #include "KoPADocument.h"
@@ -55,7 +55,7 @@ public:
     KoPADocument * doc;
     KShapeManager * shapeManager;
     KShapeManager * masterShapeManager;
-    KoToolProxy * toolProxy;
+    KToolProxy * toolProxy;
     QPoint documentOffset;
 };
 
@@ -65,7 +65,7 @@ KoPACanvasBase::KoPACanvasBase(KoPADocument * doc)
 {
     d->shapeManager = new KShapeManager(this);
     d->masterShapeManager = new KShapeManager(this);
-    d->toolProxy = new KoToolProxy(this);
+    d->toolProxy = new KToolProxy(this);
 }
 
 KoPACanvasBase::~KoPACanvasBase()
@@ -83,7 +83,7 @@ KoPADocument* KoPACanvasBase::document() const
     return d->doc;
 }
 
-KoToolProxy* KoPACanvasBase::toolProxy() const
+KToolProxy* KoPACanvasBase::toolProxy() const
 {
     return d->toolProxy;
 }

@@ -28,7 +28,7 @@
 
 #include <KoTextEditor.h>
 #include <KShapeController.h>
-#include <KoToolProxy.h>
+#include <KToolProxy.h>
 #include <KShapeManager.h>
 #include <KSelection.h>
 

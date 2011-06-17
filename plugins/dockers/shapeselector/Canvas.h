@@ -61,7 +61,7 @@ public:
     /// implementing KCanvasBase
     virtual void updateCanvas(const QRectF &rc);
     /// implementing KCanvasBase
-    virtual KoToolProxy *toolProxy() const { return 0; }
+    virtual KToolProxy *toolProxy() const { return 0; }
     /// implementing KCanvasBase
     virtual const KoViewConverter * viewConverter() const { return &m_converter; }
     /// implementing KCanvasBase

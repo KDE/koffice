@@ -71,7 +71,7 @@
 #include <KoRuler.h>
 #include <KToolManager.h>
 #include <KoStandardAction.h>
-#include <KoToolProxy.h>
+#include <KToolProxy.h>
 #include <KShapeManager.h>
 #include <KShapeController.h>
 #include <KShapeContainer.h>

@@ -33,7 +33,7 @@
 #include "KWCanvas.h"
 
 #include <KoTextEditor.h>
-#include <KoToolProxy.h>
+#include <KToolProxy.h>
 
 KWRdfDockerTree::KWRdfDockerTree(QWidget *parent)
         : QTreeWidget(parent),

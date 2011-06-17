@@ -95,7 +95,7 @@ public:
     /// reimplemented method from KCanvasBase
     virtual void updateCanvas(const QRectF& rc);
     /// reimplemented method from KCanvasBase
-    virtual KoToolProxy* toolProxy() const;
+    virtual KToolProxy* toolProxy() const;
     /// reimplemented method from KCanvasBase
     virtual KUnit unit() const;
     /// reimplemented method from KCanvasBase
@@ -212,7 +212,7 @@ private:
 
     // flake
     KShapeManager *m_shapeManager;
-    KoToolProxy *m_toolProxy;
+    KToolProxy *m_toolProxy;
 };
 
 #endif // KSPREAD_CANVAS

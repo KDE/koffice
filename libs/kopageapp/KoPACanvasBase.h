@@ -57,7 +57,7 @@ public:
     /// reimplemented from KCanvasBase
     virtual KGuidesData * guidesData();
 
-    KoToolProxy * toolProxy() const;
+    KToolProxy * toolProxy() const;
     const KoViewConverter *viewConverter() const;
     KUnit unit() const;
 

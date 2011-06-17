@@ -23,7 +23,7 @@
 #include "KInlineObjectFactoryBase.h"
 #include "KoTextEditor.h"
 
-#include <KoToolProxy.h>
+#include <KToolProxy.h>
 #include <KCanvasBase.h>
 
 #include <KDebug>

@@ -36,7 +36,7 @@ class QPainter;
 
 class KWGui;
 class KWView;
-class KoToolProxy;
+class KToolProxy;
 
 
 /**
@@ -91,7 +91,7 @@ public:
         return document()->unit();
     }
     /// reimplemented method from superclass
-    virtual KoToolProxy * toolProxy() const {
+    virtual KToolProxy * toolProxy() const {
         return m_toolProxy;
     }
     /// reimplemented method from superclass
@@ -178,7 +178,7 @@ private:
 
     KWDocument *m_document;
     KShapeManager *m_shapeManager;
-    KoToolProxy * m_toolProxy;
+    KToolProxy * m_toolProxy;
     KWView *m_view;
     KWViewMode *m_viewMode;
     QPoint m_documentOffset;

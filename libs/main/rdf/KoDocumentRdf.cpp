@@ -32,7 +32,7 @@
 #include <KXmlWriter.h>
 #include <KOdfStorageDevice.h>
 #include <KCanvasBase.h>
-#include <KoToolProxy.h>
+#include <KToolProxy.h>
 #include <KResourceManager.h>
 #include <KoTextEditor.h>
 #include <KInlineObject.h>

@@ -36,7 +36,7 @@
 
 #include <KoZoomHandler.h>
 #include <KShapeManager.h>
-#include <KoToolProxy.h>
+#include <KToolProxy.h>
 #include <KShapeManagerPaintingStrategy.h>
 #include <KCanvasController.h>
 #include <KSelection.h>
@@ -72,7 +72,7 @@ public:
     KShapeManager* shapeManager;
     KoZoomHandler zoomHandler;
 
-    KoToolProxy *toolProxy;
+    KToolProxy *toolProxy;
 
     KarbonDocument *document;
     KarbonPart *part;
@@ -88,7 +88,7 @@ KarbonCanvas::KarbonCanvas(KarbonPart *p)
 {
     d->part = p;
     d->document = &p->document();
-    d->toolProxy = new KoToolProxy(this);
+    d->toolProxy = new KToolProxy(this);
     d->shapeManager = new KShapeManager(this, d->document->shapes());
     connect(d->shapeManager, SIGNAL(selectionChanged()), this, SLOT(updateSizeAndOffset()));
 
@@ -116,7 +116,7 @@ const KoViewConverter * KarbonCanvas::viewConverter() const
     return &d->zoomHandler;
 }
 
-KoToolProxy * KarbonCanvas::toolProxy() const
+KToolProxy * KarbonCanvas::toolProxy() const
 {
     return d->toolProxy;
 }

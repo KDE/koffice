@@ -38,12 +38,12 @@
 class KPointerEvent;
 class KToolBase;
 class KCanvasController;
-class KoToolProxy;
+class KToolProxy;
 
 class KoToolProxyPrivate
 {
 public:
-    KoToolProxyPrivate(KoToolProxy *p);
+    KoToolProxyPrivate(KToolProxy *p);
 
     void timeout(); // Auto scroll the canvas
 
@@ -62,7 +62,7 @@ public:
     QTimer scrollTimer;
     QPoint scrollEdgePoint;
     KCanvasController *controller;
-    KoToolProxy *parent;
+    KToolProxy *parent;
 
     // used to determine if the mouse-release is after a drag or a simple click
     QPoint mouseDownPoint;

@@ -31,7 +31,7 @@
 #include <KPointerEvent.h>
 #include <KToolManager.h>
 #include <KCanvasController.h>
-#include <KoToolProxy.h>
+#include <KToolProxy.h>
 #include <KoGridData.h>
 
 // KDE + Qt includes
@@ -47,7 +47,7 @@ KWCanvas::KWCanvas(const QString &viewMode, KWDocument *document, KWView *view, 
         : QWidget(parent),
         KCanvasBase(document),
         m_document(document),
-        m_toolProxy(new KoToolProxy(this, this)),
+        m_toolProxy(new KToolProxy(this, this)),
         m_view(view),
         m_viewMode(0)
 {

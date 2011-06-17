@@ -61,7 +61,7 @@ set(flake_SRCS
     KToolManager_p.cpp
     KToolManager.cpp
     KoToolRegistry.cpp
-    KoToolProxy.cpp
+    KToolProxy.cpp
     KShapeSavingContext.cpp
     KShapeLoadingContext.cpp
     KLoadingShapeUpdater.cpp
@@ -297,7 +297,7 @@ install(
     KToolBase.h
     KToolFactoryBase.h
     KToolManager.h
-    KoToolProxy.h
+    KToolProxy.h
     KoToolRegistry.h
     KoToolSelection.h
     KoViewConverter.h

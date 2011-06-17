@@ -28,7 +28,7 @@
 #include "KCanvasBase.h"
 #include "KShapeContainer.h"
 #include "KShapeBorderBase.h"
-#include "KoToolProxy.h"
+#include "KToolProxy.h"
 #include "KShapeManagerPaintingStrategy.h"
 #include "KShapeShadow.h"
 #include "KShapeConnection.h"

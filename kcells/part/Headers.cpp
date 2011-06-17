@@ -61,7 +61,7 @@
 
 // KOffice
 #include <KCanvasController.h>
-#include <KoToolProxy.h>
+#include <KToolProxy.h>
 #include <KoZoomHandler.h>
 #include <KoDpi.h>
 

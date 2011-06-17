@@ -52,7 +52,7 @@
 
 // KOffice
 #include <KShapeManager.h>
-#include <KoToolProxy.h>
+#include <KToolProxy.h>
 #include <KoZoomHandler.h>
 #include <KPointerEvent.h>
 
@@ -87,7 +87,7 @@ KCCanvas::KCCanvas(KCView *view)
         m_doc(view ? view->doc() : 0)
 {
     m_shapeManager = new KShapeManager(this, this);
-    m_toolProxy = new KoToolProxy(this, this);
+    m_toolProxy = new KToolProxy(this, this);
 
     setAttribute(Qt::WA_OpaquePaintEvent);
     setAttribute(Qt::WA_StaticContents);
@@ -548,7 +548,7 @@ KUnit KCCanvas::unit() const
     return doc()->unit();
 }
 
-KoToolProxy *KCCanvas::toolProxy() const
+KToolProxy *KCCanvas::toolProxy() const
 {
     return m_toolProxy;
 }

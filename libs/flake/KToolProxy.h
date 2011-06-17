@@ -50,7 +50,7 @@ class QInputMethodEvent;
  * which will transparantly be routed to the active tool.  Without the application
  * having to bother about which tool is active.
  */
-class FLAKE_EXPORT KoToolProxy : public QObject
+class FLAKE_EXPORT KToolProxy : public QObject
 {
     Q_OBJECT
 public:
@@ -59,8 +59,8 @@ public:
      * @param canvas Each canvas has 1 toolProxy. Pass the parent here.
      * @param parent a parent QObject for memory management purposes.
      */
-    explicit KoToolProxy(KCanvasBase *canvas, QObject *parent = 0);
-    ~KoToolProxy();
+    explicit KToolProxy(KCanvasBase *canvas, QObject *parent = 0);
+    ~KToolProxy();
 
     /// Forwarded to the current KToolBase
     void paint(QPainter &painter, const KoViewConverter &converter);

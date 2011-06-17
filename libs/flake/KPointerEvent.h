@@ -203,8 +203,8 @@ public:
     const QPointF point;
 
 protected:
-    friend class KoToolProxy;
-    /// called by KoToolProxy to set which button was pressed.
+    friend class KToolProxy;
+    /// called by KToolProxy to set which button was pressed.
     void setTabletButton(Qt::MouseButton button);
 private:
     // for the d-pointer police; we want to make accessors to the event inline, so this one stays here.

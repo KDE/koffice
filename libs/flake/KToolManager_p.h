@@ -53,7 +53,7 @@ class KShapeLayer;
 class ToolHelper;
 class CanvasData;
 class QToolButton;
-class KoToolProxy;
+class KToolProxy;
 
 class KToolManager::Private
 {
@@ -92,7 +92,7 @@ public:
      * @param canvas which canvas the proxy is associated with; whenever a new tool is selected for that canvas,
      *        the proxy gets an update.
      */
-    void registerToolProxy(KoToolProxy *proxy, KCanvasBase *canvas);
+    void registerToolProxy(KToolProxy *proxy, KCanvasBase *canvas);
 
     void switchToolByShortcut(QKeyEvent *event);
 
@@ -103,7 +103,7 @@ public:
 
     QHash<KToolBase*, int> uniqueToolIds; // for the changedTool signal
     QHash<KCanvasController*, QList<CanvasData*> > canvasses;
-    QHash<KCanvasBase*, KoToolProxy*> proxies;
+    QHash<KCanvasBase*, KToolProxy*> proxies;
 
     CanvasData *canvasData; // data about the active canvas.
 

@@ -24,8 +24,8 @@
 #include "KToolManager.h"
 #include "KToolManager_p.h"
 #include "KoToolRegistry.h"
-#include "KoToolProxy.h"
-#include "KoToolProxy_p.h"
+#include "KToolProxy.h"
+#include "KToolProxy_p.h"
 #include "KSelection.h"
 #include "KCanvasController.h"
 #include "KCanvasController_p.h"
@@ -317,7 +317,7 @@ void KToolManager::Private::postSwitchTool(bool temporary)
     if (canvasData->canvas->canvas()) {
         KCanvasBase *canvas = canvasData->canvas->canvas();
         // Caller of postSwitchTool expect this to be called to update the selected tool
-        KoToolProxy *tp = proxies.value(canvas);
+        KToolProxy *tp = proxies.value(canvas);
         if (tp)
             tp->setActiveTool(canvasData->activeTool);
         canvasData->activeTool->activate(toolActivation, shapesToOperateOn);
@@ -406,7 +406,7 @@ void KToolManager::Private::detachCanvas(KCanvasController *controller)
         }
     }
 
-    KoToolProxy *proxy = proxies.value(controller->canvas());
+    KToolProxy *proxy = proxies.value(controller->canvas());
     if (proxy)
         proxy->setActiveTool(0);
 
@@ -441,7 +441,7 @@ void KToolManager::Private::attachCanvas(KCanvasController *controller)
     canvasses_.append(cd);
     canvasses[controller] = canvasses_;
 
-    KoToolProxy *tp = proxies[controller->canvas()];
+    KToolProxy *tp = proxies[controller->canvas()];
     if (tp)
         tp->priv()->setCanvasController(controller);
 
@@ -512,7 +512,7 @@ void KToolManager::Private::movedFocus(QWidget *from, QWidget *to)
                 updateCursor(Qt::ArrowCursor);
                 if (canvasData->activeTool) {
                     canvasData->activeTool->deactivate();
-                    KoToolProxy *proxy = proxies.value(canvasData->canvas->canvas());
+                    KToolProxy *proxy = proxies.value(canvasData->canvas->canvas());
                     Q_ASSERT(proxy);
                     proxy->setActiveTool(0);
                 }
@@ -595,7 +595,7 @@ void KToolManager::Private::currentLayerChanged(const KShapeLayer *layer)
 
     kDebug(30006) << "and the layer enabled is" << (layerEnabled ? "true" : "false");
 
-    KoToolProxy *proxy = proxies.value(canvasData->canvas->canvas());
+    KToolProxy *proxy = proxies.value(canvasData->canvas->canvas());
     kDebug(30006) << " and the proxy is" << proxy;
     if (proxy) {
         kDebug(30006) << " set" << canvasData->activeTool << (layerEnabled ? "enabled" : "disabled");
@@ -664,7 +664,7 @@ void KToolManager::Private::switchInputDevice(const KInputDevice &device)
     emit q->changedCanvas(canvasData ? canvasData->canvas->canvas() : 0);
 }
 
-void KToolManager::Private::registerToolProxy(KoToolProxy *proxy, KCanvasBase *canvas)
+void KToolManager::Private::registerToolProxy(KToolProxy *proxy, KCanvasBase *canvas)
 {
     proxies.insert(canvas, proxy);
     foreach(KCanvasController *controller, canvasses.keys()) {

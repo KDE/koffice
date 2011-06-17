@@ -330,7 +330,7 @@ public slots:
     /** Updates the shape anchoring action. */
     void shapeSelectionChanged();
 
-    /** Calls KoToolProxy::deleteSelection(). */
+    /** Calls KToolProxy::deleteSelection(). */
     void editDeleteSelection();
 
 public: // reimplementations

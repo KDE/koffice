@@ -19,7 +19,7 @@
 
 #include "RdfSemanticTreeWidgetAction.h"
 #include <KoTextEditor.h>
-#include <KoToolProxy.h>
+#include <KToolProxy.h>
 #include <KCanvasBase.h>
 
 RdfSemanticTreeWidgetAction::RdfSemanticTreeWidgetAction(QWidget *parent,

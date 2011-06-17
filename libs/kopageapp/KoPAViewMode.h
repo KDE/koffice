@@ -30,7 +30,7 @@ class KoPAViewBase;
 class KoPACanvas;
 class KoPACanvasBase;
 class KoPAPageBase;
-class KoToolProxy;
+class KToolProxy;
 class KShape;
 class KoViewConverter;
 class QPainter;
@@ -170,7 +170,7 @@ public slots:
 
 protected:
     KoPACanvasBase * m_canvas;
-    KoToolProxy * m_toolProxy;
+    KToolProxy * m_toolProxy;
     KoPAViewBase * m_view;
     QPointF m_origin;
 };

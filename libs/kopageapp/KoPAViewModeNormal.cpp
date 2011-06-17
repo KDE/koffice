@@ -23,7 +23,7 @@
 #include <QKeyEvent>
 #include <QPainter>
 
-#include <KoToolProxy.h>
+#include <KToolProxy.h>
 #include <KShapeManager.h>
 #include "KoPACanvas.h"
 #include "KoPADocument.h"
