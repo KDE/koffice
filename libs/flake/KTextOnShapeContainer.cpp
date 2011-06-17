@@ -31,11 +31,11 @@
 #include <KDebug>
 #include <QTextCursor>
 
-class KoTextOnShapeContainerPrivate : public KShapeContainerPrivate
+class KTextOnShapeContainerPrivate : public KShapeContainerPrivate
 {
 public:
-    KoTextOnShapeContainerPrivate(KShapeContainer *q);
-    virtual ~KoTextOnShapeContainerPrivate();
+    KTextOnShapeContainerPrivate(KShapeContainer *q);
+    virtual ~KTextOnShapeContainerPrivate();
 
     KShape *content; // the original shape
     KShape *textShape;
@@ -45,7 +45,7 @@ public:
 class KTextOnShapeContainerModel : public SimpleShapeContainerModel
 {
 public:
-    KTextOnShapeContainerModel(KTextOnShapeContainer *qq, KoTextOnShapeContainerPrivate *containerData);
+    KTextOnShapeContainerModel(KTextOnShapeContainer *qq, KTextOnShapeContainerPrivate *containerData);
     virtual void containerChanged(KShapeContainer *container, KShape::ChangeType type);
     virtual void proposeMove(KShape *child, QPointF &move);
     virtual void childChanged(KShape *child, KShape::ChangeType type);
@@ -54,12 +54,12 @@ public:
     }
 
     KTextOnShapeContainer *q;
-    KoTextOnShapeContainerPrivate *containerData;
+    KTextOnShapeContainerPrivate *containerData;
     bool lock;
 };
 
-// KoTextOnShapeContainerPrivate
-KoTextOnShapeContainerPrivate::KoTextOnShapeContainerPrivate(KShapeContainer *q)
+// KTextOnShapeContainerPrivate
+KTextOnShapeContainerPrivate::KTextOnShapeContainerPrivate(KShapeContainer *q)
     : KShapeContainerPrivate(q),
     content(0),
     textShape(0),
@@ -67,14 +67,14 @@ KoTextOnShapeContainerPrivate::KoTextOnShapeContainerPrivate(KShapeContainer *q)
 {
 }
 
-KoTextOnShapeContainerPrivate::~KoTextOnShapeContainerPrivate()
+KTextOnShapeContainerPrivate::~KTextOnShapeContainerPrivate()
 {
     // the 'content' object is not owned by us
     delete textShape;
 }
 
 /// KTextOnShapeContainerModel
-KTextOnShapeContainerModel::KTextOnShapeContainerModel(KTextOnShapeContainer *qq, KoTextOnShapeContainerPrivate *data)
+KTextOnShapeContainerModel::KTextOnShapeContainerModel(KTextOnShapeContainer *qq, KTextOnShapeContainerPrivate *data)
     : q(qq),
     containerData(data),
     lock(false)
@@ -131,7 +131,7 @@ void KTextOnShapeContainerModel::childChanged(KShape *child, KShape::ChangeType 
 
 /// KTextOnShapeContainer
 KTextOnShapeContainer::KTextOnShapeContainer(KShape *childShape, KResourceManager *documentResources)
-    : KShapeContainer(*(new KoTextOnShapeContainerPrivate(this)))
+    : KShapeContainer(*(new KTextOnShapeContainerPrivate(this)))
 {
     Q_D(KTextOnShapeContainer);
     Q_ASSERT(childShape);

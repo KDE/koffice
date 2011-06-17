@@ -24,7 +24,7 @@
 
 #include "flake_export.h"
 
-class KoTextOnShapeContainerPrivate;
+class KTextOnShapeContainerPrivate;
 class KResourceManager;
 
 /**
