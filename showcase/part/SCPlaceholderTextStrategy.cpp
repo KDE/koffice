@@ -40,7 +40,7 @@
 #include <KTextDocument.h>
 #include <KoTextEditor.h>
 #include <KTextDocumentLayout.h>
-#include <KoTextWriter.h>
+#include <KTextWriter.h>
 #include <KStyleManager.h>
 #include <KXmlReader.h>
 #include <KOdfXmlNS.h>

@@ -85,7 +85,7 @@
 #include <KStyleManager.h>
 #include <KTextSharedLoadingData.h>
 #include <KTextDocument.h>
-#include <KoTextWriter.h>
+#include <KTextWriter.h>
 #include <KOdfEmbeddedDocumentSaver.h>
 #include <KParagraphStyle.h>
 
@@ -1205,7 +1205,7 @@ bool KCCell::saveOdf(KXmlWriter& xmlwriter, KOdfGenericStyles &mainStyles,
 
             KOdfEmbeddedDocumentSaver saver;
             KShapeSavingContext shapeContext(xmlwriter, mainStyles, saver);
-            KoTextWriter writer(shapeContext);
+            KTextWriter writer(shapeContext);
 
             writer.write(doc.data(), 0);
         } else {

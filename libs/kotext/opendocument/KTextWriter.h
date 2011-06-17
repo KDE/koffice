@@ -35,22 +35,22 @@ class KDocumentRdfBase;
 #include <QTextBlock>
 
 /**
- * KoTextWriter saves the text ODF of a shape
+ * KTextWriter saves the text ODF of a shape
  */
-class KOTEXT_EXPORT KoTextWriter
+class KOTEXT_EXPORT KTextWriter
 {
 public:
     /**
     * Constructor.
     *
-    * @param context The context the KoTextWriter is called in
+    * @param context The context the KTextWriter is called in
     */
-    explicit KoTextWriter(KShapeSavingContext &context, KDocumentRdfBase *rdfData = 0);
+    explicit KTextWriter(KShapeSavingContext &context, KDocumentRdfBase *rdfData = 0);
 
     /**
     * Destructor.
     */
-    ~KoTextWriter();
+    ~KTextWriter();
 
     /**
      * Save a paragraph style used in a text block

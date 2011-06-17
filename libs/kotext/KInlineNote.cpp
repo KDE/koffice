@@ -24,7 +24,7 @@
 #include <KOdfXmlNS.h>
 #include <KShapeSavingContext.h>
 #include <KTextLoader.h>
-#include <KoTextWriter.h>
+#include <KTextWriter.h>
 #include <KTextDocument.h>
 #include "changetracker/KChangeTracker.h"
 #include "styles/KStyleManager.h"
@@ -251,7 +251,7 @@ void KInlineNote::saveOdf(KShapeSavingContext & context)
         writer->endElement();
 
         writer->startElement("text:note-body", false);
-        KoTextWriter textWriter(context);
+        KTextWriter textWriter(context);
         textWriter.write(document, 0);
         writer->endElement();
 
@@ -270,7 +270,7 @@ void KInlineNote::saveOdf(KShapeSavingContext & context)
             writer->endElement();
         }
 
-        KoTextWriter textWriter(context);
+        KTextWriter textWriter(context);
         textWriter.write(document, 0);
 
         writer->endElement();

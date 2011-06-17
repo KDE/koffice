@@ -47,7 +47,7 @@
 #include "KTextPage.h"
 
 #include "opendocument/KTextLoader.h"
-#include "opendocument/KoTextWriter.h"
+#include "opendocument/KTextWriter.h"
 
 #include <KChangeTracker.h>
 #include <KChangeTrackerElement.h>
@@ -337,7 +337,7 @@ void KTextShapeData::saveOdf(KShapeSavingContext &context, KDocumentRdfBase *rdf
         }
     }
 
-    KoTextWriter writer(context, rdfData);
+    KTextWriter writer(context, rdfData);
     writer.write(d->document, from, to);
 
     if (changeTracker) {
