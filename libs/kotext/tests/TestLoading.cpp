@@ -55,7 +55,7 @@
 #include <KoText.h>
 #include <KOdfEmbeddedDocumentSaver.h>
 #include <KInlineTextObjectManager.h>
-#include <KoTextSharedLoadingData.h>
+#include <KTextSharedLoadingData.h>
 #include <KoTextSharedSavingData.h>
 #include <KTextDocument.h>
 #include <kstandarddirs.h>

@@ -22,7 +22,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoTextSharedLoadingData.h"
+#include "KTextSharedLoadingData.h"
 
 #include <QString>
 #include <QHash>
@@ -46,7 +46,7 @@
 #include "styles/KTableCellStyle.h"
 #include "styles/KSectionStyle.h"
 
-class KoTextSharedLoadingData::Private
+class KTextSharedLoadingData::Private
 {
 public:
     Private()
@@ -97,17 +97,17 @@ public:
     KParagraphStyle *applicationDefaultStyle;
 };
 
-KoTextSharedLoadingData::KoTextSharedLoadingData()
+KTextSharedLoadingData::KTextSharedLoadingData()
         : d(new Private())
 {
 }
 
-KoTextSharedLoadingData::~KoTextSharedLoadingData()
+KTextSharedLoadingData::~KTextSharedLoadingData()
 {
     delete d;
 }
 
-void KoTextSharedLoadingData::addDefaultParagraphStyle(KShapeLoadingContext &context, const KXmlElement *styleElem, const KXmlElement *appDefault, KStyleManager *styleManager)
+void KTextSharedLoadingData::addDefaultParagraphStyle(KShapeLoadingContext &context, const KXmlElement *styleElem, const KXmlElement *appDefault, KStyleManager *styleManager)
 {
     // first fill with defaultstyles.xml
     const KXmlElement *appDef = context.odfLoadingContext().defaultStylesReader().defaultStyle("paragraph");
@@ -129,7 +129,7 @@ void KoTextSharedLoadingData::addDefaultParagraphStyle(KShapeLoadingContext &con
         d->applicationDefaultStyle = styleManager->defaultParagraphStyle();
 }
 
-void KoTextSharedLoadingData::loadOdfStyles(KShapeLoadingContext &shapeContext, KStyleManager *styleManager)
+void KTextSharedLoadingData::loadOdfStyles(KShapeLoadingContext &shapeContext, KStyleManager *styleManager)
 {
     KOdfLoadingContext &context = shapeContext.odfLoadingContext();
 
@@ -180,7 +180,7 @@ void KoTextSharedLoadingData::loadOdfStyles(KShapeLoadingContext &shapeContext, 
     kDebug(32500) << "styles.xml:  paragraph styles" << d->paragraphStylesDotXmlStyles.count() << "character styles" << d->characterStylesDotXmlStyles.count();
 }
 
-void KoTextSharedLoadingData::addParagraphStyles(KShapeLoadingContext &context, QList<KXmlElement*> styleElements,
+void KTextSharedLoadingData::addParagraphStyles(KShapeLoadingContext &context, QList<KXmlElement*> styleElements,
         int styleTypes, KStyleManager *styleManager)
 {
     QList<QPair<QString, KParagraphStyle *> > paragraphStyles(loadParagraphStyles(context, styleElements, styleTypes, styleManager));
@@ -202,7 +202,7 @@ void KoTextSharedLoadingData::addParagraphStyles(KShapeLoadingContext &context, 
     }
 }
 
-QList<QPair<QString, KParagraphStyle *> > KoTextSharedLoadingData::loadParagraphStyles(KShapeLoadingContext &context, QList<KXmlElement*> styleElements,
+QList<QPair<QString, KParagraphStyle *> > KTextSharedLoadingData::loadParagraphStyles(KShapeLoadingContext &context, QList<KXmlElement*> styleElements,
         int styleTypes, KStyleManager *styleManager)
 {
     QList<QPair<QString, KParagraphStyle *> > paragraphStyles;
@@ -261,7 +261,7 @@ QList<QPair<QString, KParagraphStyle *> > KoTextSharedLoadingData::loadParagraph
     return paragraphStyles;
 }
 
-void KoTextSharedLoadingData::addCharacterStyles(KShapeLoadingContext &context, QList<KXmlElement*> styleElements,
+void KTextSharedLoadingData::addCharacterStyles(KShapeLoadingContext &context, QList<KXmlElement*> styleElements,
         int styleTypes, KStyleManager *styleManager)
 {
     QList<OdfCharStyle> characterStyles(loadCharacterStyles(context, styleElements, styleManager));
@@ -292,7 +292,7 @@ void KoTextSharedLoadingData::addCharacterStyles(KShapeLoadingContext &context, 
     }
 }
 
-QList<KoTextSharedLoadingData::OdfCharStyle> KoTextSharedLoadingData::loadCharacterStyles(KShapeLoadingContext &shapeContext, QList<KXmlElement*> styleElements, KStyleManager *styleManager)
+QList<KTextSharedLoadingData::OdfCharStyle> KTextSharedLoadingData::loadCharacterStyles(KShapeLoadingContext &shapeContext, QList<KXmlElement*> styleElements, KStyleManager *styleManager)
 {
     QList<OdfCharStyle> characterStyles;
     KOdfLoadingContext &context = shapeContext.odfLoadingContext();
@@ -329,7 +329,7 @@ QList<KoTextSharedLoadingData::OdfCharStyle> KoTextSharedLoadingData::loadCharac
     return characterStyles;
 }
 
-void KoTextSharedLoadingData::addListStyles(KShapeLoadingContext &context, QList<KXmlElement*> styleElements,
+void KTextSharedLoadingData::addListStyles(KShapeLoadingContext &context, QList<KXmlElement*> styleElements,
                                             int styleTypes, KStyleManager *styleManager)
 {
     QList<QPair<QString, KListStyle *> > listStyles(loadListStyles(context, styleElements, styleManager));
@@ -352,7 +352,7 @@ void KoTextSharedLoadingData::addListStyles(KShapeLoadingContext &context, QList
     }
 }
 
-QList<QPair<QString, KListStyle *> > KoTextSharedLoadingData::loadListStyles(KShapeLoadingContext &context, QList<KXmlElement*> styleElements, KStyleManager *styleManager)
+QList<QPair<QString, KListStyle *> > KTextSharedLoadingData::loadListStyles(KShapeLoadingContext &context, QList<KXmlElement*> styleElements, KStyleManager *styleManager)
 {
     QList<QPair<QString, KListStyle *> > listStyles;
 
@@ -375,7 +375,7 @@ QList<QPair<QString, KListStyle *> > KoTextSharedLoadingData::loadListStyles(KSh
     return listStyles;
 }
 
-void KoTextSharedLoadingData::addTableStyles(KOdfLoadingContext &context, QList<KXmlElement*> styleElements,
+void KTextSharedLoadingData::addTableStyles(KOdfLoadingContext &context, QList<KXmlElement*> styleElements,
                                             int styleTypes, KStyleManager *styleManager)
 {
     QList<QPair<QString, KTableStyle *> > tableStyles(loadTableStyles(context, styleElements));
@@ -398,7 +398,7 @@ void KoTextSharedLoadingData::addTableStyles(KOdfLoadingContext &context, QList<
     }
 }
 
-QList<QPair<QString, KTableStyle *> > KoTextSharedLoadingData::loadTableStyles(KOdfLoadingContext &context, QList<KXmlElement*> styleElements)
+QList<QPair<QString, KTableStyle *> > KTextSharedLoadingData::loadTableStyles(KOdfLoadingContext &context, QList<KXmlElement*> styleElements)
 {
     QList<QPair<QString, KTableStyle *> > tableStyles;
 
@@ -415,7 +415,7 @@ QList<QPair<QString, KTableStyle *> > KoTextSharedLoadingData::loadTableStyles(K
     return tableStyles;
 }
 
-void KoTextSharedLoadingData::addTableColumnStyles(KOdfLoadingContext &context, QList<KXmlElement*> styleElements,
+void KTextSharedLoadingData::addTableColumnStyles(KOdfLoadingContext &context, QList<KXmlElement*> styleElements,
                                             int styleTypes, KStyleManager *styleManager)
 {
     QList<QPair<QString, KTableColumnStyle *> > tableColumnStyles(loadTableColumnStyles(context, styleElements));
@@ -438,7 +438,7 @@ void KoTextSharedLoadingData::addTableColumnStyles(KOdfLoadingContext &context, 
     }
 }
 
-QList<QPair<QString, KTableColumnStyle *> > KoTextSharedLoadingData::loadTableColumnStyles(KOdfLoadingContext &context, QList<KXmlElement*> styleElements)
+QList<QPair<QString, KTableColumnStyle *> > KTextSharedLoadingData::loadTableColumnStyles(KOdfLoadingContext &context, QList<KXmlElement*> styleElements)
 {
     QList<QPair<QString, KTableColumnStyle *> > tableColumnStyles;
 
@@ -455,7 +455,7 @@ QList<QPair<QString, KTableColumnStyle *> > KoTextSharedLoadingData::loadTableCo
     return tableColumnStyles;
 }
 
-void KoTextSharedLoadingData::addTableRowStyles(KOdfLoadingContext &context, QList<KXmlElement*> styleElements,
+void KTextSharedLoadingData::addTableRowStyles(KOdfLoadingContext &context, QList<KXmlElement*> styleElements,
                                             int styleTypes, KStyleManager *styleManager)
 {
     QList<QPair<QString, KTableRowStyle *> > tableRowStyles(loadTableRowStyles(context, styleElements));
@@ -478,7 +478,7 @@ void KoTextSharedLoadingData::addTableRowStyles(KOdfLoadingContext &context, QLi
     }
 }
 
-QList<QPair<QString, KTableRowStyle *> > KoTextSharedLoadingData::loadTableRowStyles(KOdfLoadingContext &context, QList<KXmlElement*> styleElements)
+QList<QPair<QString, KTableRowStyle *> > KTextSharedLoadingData::loadTableRowStyles(KOdfLoadingContext &context, QList<KXmlElement*> styleElements)
 {
     QList<QPair<QString, KTableRowStyle *> > tableRowStyles;
 
@@ -495,7 +495,7 @@ QList<QPair<QString, KTableRowStyle *> > KoTextSharedLoadingData::loadTableRowSt
     return tableRowStyles;
 }
 
-void KoTextSharedLoadingData::addTableCellStyles(KOdfLoadingContext &context, QList<KXmlElement*> styleElements,
+void KTextSharedLoadingData::addTableCellStyles(KOdfLoadingContext &context, QList<KXmlElement*> styleElements,
                                             int styleTypes, KStyleManager *styleManager)
 {
     QList<QPair<QString, KTableCellStyle *> > tableCellStyles(loadTableCellStyles(context, styleElements));
@@ -518,7 +518,7 @@ void KoTextSharedLoadingData::addTableCellStyles(KOdfLoadingContext &context, QL
     }
 }
 
-QList<QPair<QString, KTableCellStyle *> > KoTextSharedLoadingData::loadTableCellStyles(KOdfLoadingContext &context, QList<KXmlElement*> styleElements)
+QList<QPair<QString, KTableCellStyle *> > KTextSharedLoadingData::loadTableCellStyles(KOdfLoadingContext &context, QList<KXmlElement*> styleElements)
 {
     QList<QPair<QString, KTableCellStyle *> > tableCellStyles;
 
@@ -535,7 +535,7 @@ QList<QPair<QString, KTableCellStyle *> > KoTextSharedLoadingData::loadTableCell
     return tableCellStyles;
 }
 
-void KoTextSharedLoadingData::addSectionStyles(KOdfLoadingContext &context, QList<KXmlElement*> styleElements,
+void KTextSharedLoadingData::addSectionStyles(KOdfLoadingContext &context, QList<KXmlElement*> styleElements,
                                             int styleTypes, KStyleManager *styleManager)
 {
     QList<QPair<QString, KSectionStyle *> > sectionStyles(loadSectionStyles(context, styleElements));
@@ -558,7 +558,7 @@ void KoTextSharedLoadingData::addSectionStyles(KOdfLoadingContext &context, QLis
     }
 }
 
-QList<QPair<QString, KSectionStyle *> > KoTextSharedLoadingData::loadSectionStyles(KOdfLoadingContext &context, QList<KXmlElement*> styleElements)
+QList<QPair<QString, KSectionStyle *> > KTextSharedLoadingData::loadSectionStyles(KOdfLoadingContext &context, QList<KXmlElement*> styleElements)
 {
     QList<QPair<QString, KSectionStyle *> > sectionStyles;
 
@@ -575,7 +575,7 @@ QList<QPair<QString, KSectionStyle *> > KoTextSharedLoadingData::loadSectionStyl
     return sectionStyles;
 }
 
-void KoTextSharedLoadingData::addOutlineStyle(KShapeLoadingContext &context, KStyleManager *styleManager)
+void KTextSharedLoadingData::addOutlineStyle(KShapeLoadingContext &context, KStyleManager *styleManager)
 {
     // outline-styles used e.g. for headers
     KXmlElement outlineStyleElem = KoXml::namedItemNS(context.odfLoadingContext().stylesReader().officeStyle(), KOdfXmlNS::text, "outline-style");
@@ -586,52 +586,52 @@ void KoTextSharedLoadingData::addOutlineStyle(KShapeLoadingContext &context, KSt
     }
 }
 
-KParagraphStyle *KoTextSharedLoadingData::paragraphStyle(const QString &name, bool stylesDotXml) const
+KParagraphStyle *KTextSharedLoadingData::paragraphStyle(const QString &name, bool stylesDotXml) const
 {
     return stylesDotXml ? d->paragraphStylesDotXmlStyles.value(name) : d->paragraphContentDotXmlStyles.value(name);
 }
 
-KCharacterStyle *KoTextSharedLoadingData::characterStyle(const QString &name, bool stylesDotXml) const
+KCharacterStyle *KTextSharedLoadingData::characterStyle(const QString &name, bool stylesDotXml) const
 {
     return stylesDotXml ? d->characterStylesDotXmlStyles.value(name) : d->characterContentDotXmlStyles.value(name);
 }
 
-QList<KCharacterStyle*> KoTextSharedLoadingData::characterStyles(bool stylesDotXml) const
+QList<KCharacterStyle*> KTextSharedLoadingData::characterStyles(bool stylesDotXml) const
 {
     return stylesDotXml ? d->characterStylesDotXmlStyles.values() : d->characterContentDotXmlStyles.values();
 }
 
-KListStyle *KoTextSharedLoadingData::listStyle(const QString &name, bool stylesDotXml) const
+KListStyle *KTextSharedLoadingData::listStyle(const QString &name, bool stylesDotXml) const
 {
     return stylesDotXml ? d->listStylesDotXmlStyles.value(name) : d->listContentDotXmlStyles.value(name);
 }
 
-KTableStyle *KoTextSharedLoadingData::tableStyle(const QString &name, bool stylesDotXml) const
+KTableStyle *KTextSharedLoadingData::tableStyle(const QString &name, bool stylesDotXml) const
 {
     return stylesDotXml ? d->tableStylesDotXmlStyles.value(name) : d->tableContentDotXmlStyles.value(name);
 }
 
-KTableColumnStyle *KoTextSharedLoadingData::tableColumnStyle(const QString &name, bool stylesDotXml) const
+KTableColumnStyle *KTextSharedLoadingData::tableColumnStyle(const QString &name, bool stylesDotXml) const
 {
     return stylesDotXml ? d->tableColumnStylesDotXmlStyles.value(name) : d->tableColumnContentDotXmlStyles.value(name);
 }
 
-KTableRowStyle *KoTextSharedLoadingData::tableRowStyle(const QString &name, bool stylesDotXml) const
+KTableRowStyle *KTextSharedLoadingData::tableRowStyle(const QString &name, bool stylesDotXml) const
 {
     return stylesDotXml ? d->tableRowStylesDotXmlStyles.value(name) : d->tableRowContentDotXmlStyles.value(name);
 }
 
-KTableCellStyle *KoTextSharedLoadingData::tableCellStyle(const QString &name, bool stylesDotXml) const
+KTableCellStyle *KTextSharedLoadingData::tableCellStyle(const QString &name, bool stylesDotXml) const
 {
     return stylesDotXml ? d->tableCellStylesDotXmlStyles.value(name) : d->tableCellContentDotXmlStyles.value(name);
 }
 
-KSectionStyle *KoTextSharedLoadingData::sectionStyle(const QString &name, bool stylesDotXml) const
+KSectionStyle *KTextSharedLoadingData::sectionStyle(const QString &name, bool stylesDotXml) const
 {
     return stylesDotXml ? d->sectionStylesDotXmlStyles.value(name) : d->sectionContentDotXmlStyles.value(name);
 }
 
-void KoTextSharedLoadingData::shapeInserted(KShape *shape, const KXmlElement &element, KShapeLoadingContext &/*context*/)
+void KTextSharedLoadingData::shapeInserted(KShape *shape, const KXmlElement &element, KShapeLoadingContext &/*context*/)
 {
     Q_UNUSED(shape);
     Q_UNUSED(element);

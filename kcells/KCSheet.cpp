@@ -59,7 +59,7 @@
 #include <KOdfStore.h>
 #include <KoText.h>
 #include <KStyleManager.h>
-#include <KoTextSharedLoadingData.h>
+#include <KTextSharedLoadingData.h>
 #include <KParagraphStyle.h>
 #include <KoUpdater.h>
 #include <KoProgressUpdater.h>

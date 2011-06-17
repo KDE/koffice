@@ -23,14 +23,14 @@
 #ifndef KWODFSHAREDLOADINGDATA_H
 #define KWODFSHAREDLOADINGDATA_H
 
-#include <KoTextSharedLoadingData.h>
+#include <KTextSharedLoadingData.h>
 
 #include <QHash>
 
 class KWOdfLoader;
 class KWFrame;
 
-class KWOdfSharedLoadingData : public KoTextSharedLoadingData
+class KWOdfSharedLoadingData : public KTextSharedLoadingData
 {
 public:
     explicit KWOdfSharedLoadingData(KWOdfLoader *loader);

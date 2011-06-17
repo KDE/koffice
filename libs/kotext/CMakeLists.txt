@@ -68,7 +68,7 @@ set(kotext_LIB_SRCS
     styles/KTableFormat.cpp
     styles/KTableFormat_p.cpp
     styles/KSectionStyle.cpp
-    opendocument/KoTextSharedLoadingData.cpp
+    opendocument/KTextSharedLoadingData.cpp
     opendocument/KoTextSharedSavingData.cpp
     opendocument/KTextLoader.cpp
     opendocument/KoTextWriter.cpp

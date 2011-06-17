@@ -19,7 +19,7 @@
  * Boston, MA 02110-1301, USA.
  */
 #include "TextShape.h"
-#include <KoTextSharedLoadingData.h>
+#include <KTextSharedLoadingData.h>
 
 #define synchronized(T) QMutex T; \
     for (Finalizer finalizer(T); finalizer.loop(); finalizer.inc())

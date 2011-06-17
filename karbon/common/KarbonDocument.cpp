@@ -50,7 +50,7 @@
 #include <KDataCenterBase.h>
 #include <KoText.h>
 #include <KStyleManager.h>
-#include <KoTextSharedLoadingData.h>
+#include <KTextSharedLoadingData.h>
 
 #include <ktemporaryfile.h>
 #include <kdebug.h>
@@ -403,7 +403,7 @@ void KarbonDocument::loadOdfStyles(KShapeLoadingContext & context)
     if (! styleManager)
         return;
 
-    KoTextSharedLoadingData * sharedData = new KoTextSharedLoadingData();
+    KTextSharedLoadingData * sharedData = new KTextSharedLoadingData();
     if (! sharedData)
         return;
 

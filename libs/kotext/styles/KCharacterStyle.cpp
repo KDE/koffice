@@ -35,7 +35,7 @@
 #include <KOdfGenericStyle.h>
 #include <KPostscriptPaintDevice.h>
 #include <KShapeLoadingContext.h>
-#include "KoTextSharedLoadingData.h"
+#include "KTextSharedLoadingData.h"
 
 #include <KDebug>
 

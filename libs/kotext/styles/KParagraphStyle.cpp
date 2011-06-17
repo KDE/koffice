@@ -28,7 +28,7 @@
 #include "KTextDocumentLayout.h"
 #include "KStyleManager.h"
 #include "KListLevelProperties.h"
-#include "KoTextSharedLoadingData.h"
+#include "KTextSharedLoadingData.h"
 #include <KShapeLoadingContext.h>
 #include <KOdfGenericStyle.h>
 #include <KOdfGenericStyles.h>
@@ -1391,8 +1391,8 @@ void KParagraphStyle::loadOdfProperties(KShapeLoadingContext &scontext)
         const QString dropstyle = dropCap.attributeNS(KOdfXmlNS::style, "style-name");
         if (! dropstyle.isEmpty()) {
             KSharedLoadingData *sharedData = scontext.sharedData(KOTEXT_SHARED_LOADING_ID);
-            KoTextSharedLoadingData *textSharedData = 0;
-            textSharedData = dynamic_cast<KoTextSharedLoadingData *>(sharedData);
+            KTextSharedLoadingData *textSharedData = 0;
+            textSharedData = dynamic_cast<KTextSharedLoadingData *>(sharedData);
             if (textSharedData) {
                 KCharacterStyle *cs = textSharedData->characterStyle(dropstyle, true);
                 if (cs)

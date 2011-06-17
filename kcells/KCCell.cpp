@@ -83,7 +83,7 @@
 
 #include <KTextLoader.h>
 #include <KStyleManager.h>
-#include <KoTextSharedLoadingData.h>
+#include <KTextSharedLoadingData.h>
 #include <KTextDocument.h>
 #include <KoTextWriter.h>
 #include <KOdfEmbeddedDocumentSaver.h>

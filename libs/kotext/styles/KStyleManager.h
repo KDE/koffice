@@ -63,7 +63,7 @@ public:
      */
     virtual ~KStyleManager();
 
-    // load is not needed as it is done in KoTextSharedLoadingData
+    // load is not needed as it is done in KTextSharedLoadingData
 
     /**
      * Save document styles
@@ -413,7 +413,7 @@ private:
     friend class ChangeFollower;
     void remove(ChangeFollower *cf);
 
-    friend class KoTextSharedLoadingData;
+    friend class KTextSharedLoadingData;
     void addAutomaticListStyle(KListStyle *listStyle);
     friend class KTextShapeData;
     friend class KTextShapeDataPrivate;

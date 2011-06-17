@@ -46,7 +46,7 @@
 #include "KTextDocument.h"
 #include <KTextDocumentLayout.h>
 #include <KTextShapeData.h>
-#include "KoTextSharedLoadingData.h"
+#include "KTextSharedLoadingData.h"
 #include <KUnit.h>
 #include <KoVariable.h>
 #include <KoVariableManager.h>
@@ -96,7 +96,7 @@ class KTextLoader::Private
 {
 public:
     KShapeLoadingContext &context;
-    KoTextSharedLoadingData *textSharedData;
+    KTextSharedLoadingData *textSharedData;
     // store it here so that you don't need to get it all the time from
     // the KOdfLoadingContext.
     bool stylesDotXml;
@@ -402,13 +402,13 @@ KTextLoader::KTextLoader(KShapeLoadingContext &context, KShape *shape)
 {
     KSharedLoadingData *sharedData = context.sharedData(KOTEXT_SHARED_LOADING_ID);
     if (sharedData) {
-        d->textSharedData = dynamic_cast<KoTextSharedLoadingData *>(sharedData);
+        d->textSharedData = dynamic_cast<KTextSharedLoadingData *>(sharedData);
     }
 
     //kDebug(32500) << "sharedData" << sharedData << "textSharedData" << d->textSharedData;
 
     if (!d->textSharedData) {
-        d->textSharedData = new KoTextSharedLoadingData();
+        d->textSharedData = new KTextSharedLoadingData();
         KResourceManager *rm = context.documentResourceManager();
         KStyleManager *styleManager = rm->resource(KoText::StyleManager).value<KStyleManager*>();
         d->textSharedData->loadOdfStyles(context, styleManager);

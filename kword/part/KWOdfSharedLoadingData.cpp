@@ -37,7 +37,7 @@
 #include <kdebug.h>
 
 KWOdfSharedLoadingData::KWOdfSharedLoadingData(KWOdfLoader *loader)
-        : KoTextSharedLoadingData()
+        : KTextSharedLoadingData()
         , m_loader(loader)
 {
     KShapeLoadingContext::addAdditionalAttributeData(

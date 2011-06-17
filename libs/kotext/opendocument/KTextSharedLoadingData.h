@@ -47,15 +47,15 @@ class KShapeLoadingContext;
 /**
  * This class is used to cache the loaded styles so that they have to be loaded only once
  * and can be used by all text shapes.
- * When a text shape is loaded it checks if the KoTextSharedLoadingData is already there.
+ * When a text shape is loaded it checks if the KTextSharedLoadingData is already there.
  * If not it is created.
  */
-class KOTEXT_EXPORT KoTextSharedLoadingData : public KSharedLoadingData
+class KOTEXT_EXPORT KTextSharedLoadingData : public KSharedLoadingData
 {
     friend class KTextLoader;
 public:
-    KoTextSharedLoadingData();
-    virtual ~KoTextSharedLoadingData();
+    KTextSharedLoadingData();
+    virtual ~KTextSharedLoadingData();
 
     /**
      * Load the styles

@@ -34,7 +34,7 @@
 #include <KParagraphStyle.h>
 #include <KoText.h>
 #include <KInlineTextObjectManager.h>
-#include <KoTextSharedLoadingData.h>
+#include <KTextSharedLoadingData.h>
 #include <KTextDocument.h>
 #include <KChangeTracker.h>
 
@@ -94,7 +94,7 @@ QTextDocument *TestLoadStyle::documentFromOdt(const QString &odt)
 
     KOdfLoadingContext odfLoadingContext(odfReadStore.styles(), odfReadStore.store(), *componentData);
     KShapeLoadingContext shapeLoadingContext(odfLoadingContext, 0);
-    KoTextSharedLoadingData *textSharedLoadingData = new KoTextSharedLoadingData;
+    KTextSharedLoadingData *textSharedLoadingData = new KTextSharedLoadingData;
     textSharedLoadingData->loadOdfStyles(shapeLoadingContext, styleManager);
     shapeLoadingContext.addSharedData(KOTEXT_SHARED_LOADING_ID, textSharedLoadingData);
 

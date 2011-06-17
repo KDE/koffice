@@ -41,7 +41,7 @@
 #include <KXmlWriter.h>
 #include <KStyleManager.h>
 #include <KShapeLoadingContext.h>
-#include <KoTextSharedLoadingData.h>
+#include <KTextSharedLoadingData.h>
 #include <KParagraphStyle.h>
 #include <KShapeRegistry.h>
 
@@ -516,7 +516,7 @@ bool KCMap::loadOdf(const KXmlElement& body, KOdfLoadingContext& odfContext)
     // load text styles for rich-text content and TOS
     KShapeLoadingContext shapeContext(tableContext.odfContext, resourceManager());
     tableContext.shapeContext = &shapeContext;
-    KoTextSharedLoadingData * sharedData = new KoTextSharedLoadingData();
+    KTextSharedLoadingData * sharedData = new KTextSharedLoadingData();
     sharedData->loadOdfStyles(shapeContext, textStyleManager());
 
     fixupStyle(textStyleManager()->defaultParagraphStyle()->characterStyle());
