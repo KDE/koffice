@@ -18,22 +18,30 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoZoomToolFactory_p.h"
-#include "KZoomTool_p.h"
+#ifndef KOZOOMTOOLFACTORY_H
+#define KOZOOMTOOLFACTORY_H
 
-#include <klocale.h>
+//
+//  W A R N I N G
+//  -------------
+//
+// This file is not part of the Flake API.  It exists purely as an
+// implementation detail.  This header file may change from version to
+// version without notice, or even be removed.
+//
+// We mean it.
+//
 
-KoZoomToolFactory::KoZoomToolFactory(QObject *parent)
-        : KToolFactoryBase(parent, "KoZoomToolId")
+
+#include "KToolFactoryBase.h"
+
+/// Factory for the KZoomTool
+class KZoomToolFactory : public KToolFactoryBase
 {
-    setToolTip(i18n("Zoom"));
-    setToolType(navigationToolType());
-    setPriority(5);
-    setIcon("zoom-original");
-    setActivationShapeId("flake/always");
-}
+public:
+    /// constructor
+    KZoomToolFactory(QObject *parent);
 
-KToolBase *KoZoomToolFactory::createTool(KCanvasBase *canvas)
-{
-    return new KZoomTool(canvas);
-}
+    KToolBase *createTool(KCanvasBase *canvas);
+};
+#endif

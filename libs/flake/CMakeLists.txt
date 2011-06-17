@@ -157,7 +157,7 @@ set(flake_SRCS
     tools/KPathControlPointMoveStrategy.cpp
     tools/KParameterChangeStrategy.cpp
     tools/KZoomTool.cpp
-    tools/KoZoomToolFactory.cpp
+    tools/KZoomToolFactory.cpp
     tools/KoZoomToolWidget.cpp
     tools/KZoomStrategy.cpp
     tools/KPanTool.cpp

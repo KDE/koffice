@@ -26,7 +26,7 @@
 #include "tools/KCreateShapesTool.h"
 #include "tools/KPathToolFactory_p.h"
 #include "tools/KZoomTool_p.h"
-#include "tools/KoZoomToolFactory_p.h"
+#include "tools/KZoomToolFactory_p.h"
 #include "tools/KPanTool_p.h"
 #include "tools/KPanToolFactory_p.h"
 
@@ -55,7 +55,7 @@ void KToolRegistry::init()
     add(new KCreatePathToolFactory(this));
     add(new KCreateShapesToolFactory(this));
     add(new KPathToolFactory(this));
-    add(new KoZoomToolFactory(this));
+    add(new KZoomToolFactory(this));
     add(new KPanToolFactory(this));
 }
 
