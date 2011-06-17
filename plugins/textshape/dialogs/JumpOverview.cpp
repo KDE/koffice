@@ -24,7 +24,7 @@
 #include <KInlineTextObjectManager.h>
 #include <KoBookmarkManager.h>
 #include <KoBookmark.h>
-#include <KoTextPage.h>
+#include <KTextPage.h>
 #include <KTextLocator.h>
 #include <KTextDocumentLayout.h>
 #include <KoTextShapeData.h>
@@ -78,7 +78,7 @@ JumpOverview::JumpOverview(QTextDocument *doc, QWidget *parent)
         foreach (KShape *shape, lay->shapes()) {
             KoTextShapeData *textData = qobject_cast<KoTextShapeData*>(shape->userData());
             if (textData) {
-                KoTextPage *page = textData->page();
+                KTextPage *page = textData->page();
                 if (page) {
                     JumpEntry entry;
                     entry.type = JumpEntry::Page;
@@ -123,7 +123,7 @@ void JumpOverview::setCurrentRow(int row)
     widget.name->setText(entry.name);
     if (entry.pageNumber == -1) {
         KInlineObject *object = m_doc.inlineTextObjectManager()->inlineTextObject(entry.objId);
-        KoTextPage *page = 0;
+        KTextPage *page = 0;
         if (object)
             page = object->page();
         if (page)

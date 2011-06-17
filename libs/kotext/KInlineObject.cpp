@@ -171,7 +171,7 @@ KShape *KInlineObject::shape() const
     return shapeForPosition(d->document, d->positionInDocument);
 }
 
-KoTextPage *KInlineObject::page() const
+KTextPage *KInlineObject::page() const
 {
     Q_D(const KInlineObject);
     KShape *shape = shapeForPosition(d->document, d->positionInDocument);

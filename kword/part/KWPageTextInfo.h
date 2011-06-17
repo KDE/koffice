@@ -22,9 +22,9 @@
 #include "KWPage.h"
 #include "kword_export.h"
 
-#include <KoTextPage.h>
+#include <KTextPage.h>
 
-class KWORD_TEST_EXPORT KWPageTextInfo : public KoTextPage
+class KWORD_TEST_EXPORT KWPageTextInfo : public KTextPage
 {
 public:
     KWPageTextInfo(const KWPage &page);

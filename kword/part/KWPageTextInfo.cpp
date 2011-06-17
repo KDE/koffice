@@ -28,11 +28,11 @@ int KWPageTextInfo::pageNumber(PageSelection select, int adjustment) const
 {
     KWPage page = m_page;
     switch (select) {
-    case KoTextPage::CurrentPage: break;
-    case KoTextPage::PreviousPage:
+    case KTextPage::CurrentPage: break;
+    case KTextPage::PreviousPage:
         page = page.previous();
         break;
-    case KoTextPage::NextPage:
+    case KTextPage::NextPage:
         page = page.next();
         break;
     }

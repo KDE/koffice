@@ -61,7 +61,7 @@ struct Finalizer {
 #include <KTextDocument.h>
 #include <KTextDocumentLayout.h>
 #include <KoTextEditor.h>
-#include <KoTextPage.h>
+#include <KTextPage.h>
 #include <KoTextShapeContainerModel.h>
 #include <KPageProvider_p.h> // the exported class for the showcase hack
 #include <KoViewConverter.h>
@@ -147,7 +147,7 @@ void TextShape::paintComponent(QPainter &painter, const KoViewConverter &convert
     Q_ASSERT(lay);
 
     if (m_pageProvider) {
-        KoTextPage *page = m_pageProvider->page(this);
+        KTextPage *page = m_pageProvider->page(this);
         if (page) {
             // this is used to not trigger repaints if layout during the painting is done
             // this enables to use the same shapes on different pages showing different page numbers

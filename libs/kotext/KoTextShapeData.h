@@ -32,7 +32,7 @@ class KXmlElement;
 class KShapeLoadingContext;
 class KShapeSavingContext;
 class KoTextShapeDataPrivate;
-class KoTextPage;
+class KTextPage;
 class KDocumentRdfBase;
 
 /**
@@ -123,12 +123,12 @@ public:
      * document using a different textPage variable.
      * @param textPage the page to layout the text for.
      */
-    void relayoutFor(KoTextPage &textPage);
+    void relayoutFor(KTextPage &textPage);
 
     /// Set the provider that provides us the number of the \p page this shape is on.
-    void setPage(KoTextPage* textpage);
+    void setPage(KTextPage* textpage);
     /// Returns the provider that provides us the number of the page this shape is on.
-    KoTextPage* page() const;
+    KTextPage* page() const;
 
     /**
     * Load the TextShape from ODF.

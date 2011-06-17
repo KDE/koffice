@@ -31,7 +31,7 @@ public:
     KoPAPageProvider();
     virtual ~KoPAPageProvider();
 
-    virtual KoTextPage * page(KShape * shape);
+    virtual KTextPage * page(KShape * shape);
 
     void setPageData(int pageNumber, KoPAPageBase *page);
 

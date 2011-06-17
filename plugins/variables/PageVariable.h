@@ -23,7 +23,7 @@
 
 #include <KoVariable.h>
 #include <KoTextShapeData.h>
-#include <KoTextPage.h>
+#include <KTextPage.h>
 
 class KShapeSavingContext;
 
@@ -59,7 +59,7 @@ private:
 
     PageType m_type;
 
-    KoTextPage::PageSelection m_pageselect;
+    KTextPage::PageSelection m_pageselect;
     int m_pageadjust;
     bool m_fixed;
 

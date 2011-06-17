@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoTextPage.h"
+#include "KTextPage.h"
 
-KoTextPage::~KoTextPage()
+KTextPage::~KTextPage()
 {
 }

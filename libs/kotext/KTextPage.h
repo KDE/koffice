@@ -29,12 +29,12 @@
  * application specific functionality for single pages.
  * @see KoTextShapeData::setPage();
  */
-class KOTEXT_EXPORT KoTextPage
+class KOTEXT_EXPORT KTextPage
 {
 public:
 
     /// Destructor.
-    virtual ~KoTextPage();
+    virtual ~KTextPage();
 
     enum PageSelection {
         PreviousPage = -1,

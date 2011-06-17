@@ -48,36 +48,36 @@ void TestPageTextInfo::testPageNumber()
     QCOMPARE(page41.pageNumber(), 41);
 
     KWPageTextInfo info1(page1);
-    QCOMPARE(info1.pageNumber(KoTextPage::CurrentPage, 0), 1);
-    QCOMPARE(info1.pageNumber(KoTextPage::PreviousPage, 0), -1);
-    QCOMPARE(info1.pageNumber(KoTextPage::NextPage, 0), 2);
+    QCOMPARE(info1.pageNumber(KTextPage::CurrentPage, 0), 1);
+    QCOMPARE(info1.pageNumber(KTextPage::PreviousPage, 0), -1);
+    QCOMPARE(info1.pageNumber(KTextPage::NextPage, 0), 2);
 
-    QCOMPARE(info1.pageNumber(KoTextPage::CurrentPage, 4), 5);
-    QCOMPARE(info1.pageNumber(KoTextPage::CurrentPage, 5), -1);
-    QCOMPARE(info1.pageNumber(KoTextPage::CurrentPage, 40), 41);
-    QCOMPARE(info1.pageNumber(KoTextPage::PreviousPage, 1), -1);
-    QCOMPARE(info1.pageNumber(KoTextPage::NextPage, 3), 5);
-    QCOMPARE(info1.pageNumber(KoTextPage::NextPage, 4), -1);
+    QCOMPARE(info1.pageNumber(KTextPage::CurrentPage, 4), 5);
+    QCOMPARE(info1.pageNumber(KTextPage::CurrentPage, 5), -1);
+    QCOMPARE(info1.pageNumber(KTextPage::CurrentPage, 40), 41);
+    QCOMPARE(info1.pageNumber(KTextPage::PreviousPage, 1), -1);
+    QCOMPARE(info1.pageNumber(KTextPage::NextPage, 3), 5);
+    QCOMPARE(info1.pageNumber(KTextPage::NextPage, 4), -1);
 
     KWPageTextInfo info2(page2);
-    QCOMPARE(info2.pageNumber(KoTextPage::CurrentPage, 0), 2);
-    QCOMPARE(info2.pageNumber(KoTextPage::PreviousPage, 0), 1);
-    QCOMPARE(info2.pageNumber(KoTextPage::NextPage, 0), 3);
+    QCOMPARE(info2.pageNumber(KTextPage::CurrentPage, 0), 2);
+    QCOMPARE(info2.pageNumber(KTextPage::PreviousPage, 0), 1);
+    QCOMPARE(info2.pageNumber(KTextPage::NextPage, 0), 3);
 
     KWPageTextInfo info3(page5);
-    QCOMPARE(info3.pageNumber(KoTextPage::CurrentPage, 0), 5);
-    QCOMPARE(info3.pageNumber(KoTextPage::PreviousPage, 0), 4);
-    QCOMPARE(info3.pageNumber(KoTextPage::NextPage, 0), 40);
+    QCOMPARE(info3.pageNumber(KTextPage::CurrentPage, 0), 5);
+    QCOMPARE(info3.pageNumber(KTextPage::PreviousPage, 0), 4);
+    QCOMPARE(info3.pageNumber(KTextPage::NextPage, 0), 40);
 
     KWPageTextInfo info40(page40);
-    QCOMPARE(info40.pageNumber(KoTextPage::CurrentPage, 0), 40);
-    QCOMPARE(info40.pageNumber(KoTextPage::PreviousPage, 0), 5);
-    QCOMPARE(info40.pageNumber(KoTextPage::NextPage, 0), 41);
+    QCOMPARE(info40.pageNumber(KTextPage::CurrentPage, 0), 40);
+    QCOMPARE(info40.pageNumber(KTextPage::PreviousPage, 0), 5);
+    QCOMPARE(info40.pageNumber(KTextPage::NextPage, 0), 41);
 
     KWPageTextInfo info41(page41);
-    QCOMPARE(info41.pageNumber(KoTextPage::CurrentPage, 0), 41);
-    QCOMPARE(info41.pageNumber(KoTextPage::PreviousPage, 0), 40);
-    QCOMPARE(info41.pageNumber(KoTextPage::NextPage, 0), -1);
+    QCOMPARE(info41.pageNumber(KTextPage::CurrentPage, 0), 41);
+    QCOMPARE(info41.pageNumber(KTextPage::PreviousPage, 0), 40);
+    QCOMPARE(info41.pageNumber(KTextPage::NextPage, 0), -1);
 }
 
 QTEST_KDEMAIN(TestPageTextInfo, GUI)

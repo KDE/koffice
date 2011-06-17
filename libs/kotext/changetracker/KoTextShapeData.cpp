@@ -42,7 +42,7 @@
 
 #include <KXmlWriter.h>
 
-#include "KoTextPage.h"
+#include "KTextPage.h"
 
 #include "opendocument/KTextLoader.h"
 #include "opendocument/KoTextWriter.h"
@@ -87,7 +87,7 @@ public:
     qreal offset;
     int position, endPosition;
     KoText::Direction direction;
-    KoTextPage *textpage;
+    KTextPage *textpage;
     KInsets padding; // Distance between shape border and text
 };
 
@@ -201,7 +201,7 @@ KoText::Direction KoTextShapeData::pageDirection() const
     return d->direction;
 }
 
-void KoTextShapeData::setPage(KoTextPage *textpage)
+void KoTextShapeData::setPage(KTextPage *textpage)
 {
     Q_D(KoTextShapeData);
     if (d->inRelayoutForPage)
@@ -210,7 +210,7 @@ void KoTextShapeData::setPage(KoTextPage *textpage)
     d->textpage = textpage;
 }
 
-KoTextPage* KoTextShapeData::page() const
+KTextPage* KoTextShapeData::page() const
 {
     Q_D(const KoTextShapeData);
     return d->textpage;
@@ -346,13 +346,13 @@ void KoTextShapeData::saveOdf(KShapeSavingContext &context, KDocumentRdfBase *rd
     delete insertCommand;
 }
 
-void KoTextShapeData::relayoutFor(KoTextPage &textPage)
+void KoTextShapeData::relayoutFor(KTextPage &textPage)
 {
     Q_D(KoTextShapeData);
     KTextDocumentLayout *layout = qobject_cast<KTextDocumentLayout*>(d->document->documentLayout());
     if (layout == 0)
         return;
-    KoTextPage *oldPage = d->textpage;
+    KTextPage *oldPage = d->textpage;
     d->dirty = true;
     d->inRelayoutForPage = true;
     d->textpage = &textPage;

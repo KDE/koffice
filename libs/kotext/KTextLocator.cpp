@@ -22,7 +22,7 @@
 #include "KTextBlockData.h"
 #include "KoTextShapeData.h"
 #include "KoTextReference_p.h"
-#include "KoTextPage.h"
+#include "KTextPage.h"
 #include "styles/KListStyle.h"
 
 #include <KShape.h>
@@ -72,7 +72,7 @@ public:
             block = block.previous();
         }
 
-        KoTextPage *page = q->page();
+        KTextPage *page = q->page();
         pageNumber = page == 0 ? -1 : page->pageNumber();
         if (oldPage != pageNumber || oldChapter != chapterPosition) {
             foreach (KoTextReference *reference, listeners)

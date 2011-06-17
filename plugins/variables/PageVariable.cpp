@@ -35,7 +35,7 @@
 PageVariable::PageVariable()
         : KoVariable(true),
         m_type(PageNumber),
-        m_pageselect(KoTextPage::CurrentPage),
+        m_pageselect(KTextPage::CurrentPage),
         m_pageadjust(0),
         m_fixed(false)
 {
@@ -72,7 +72,7 @@ void PageVariable::positionChanged()
         break;
     case PageNumber:
         if (value().isEmpty() || ! m_fixed) {
-            KoTextPage *thePage = page();
+            KTextPage *thePage = page();
             int pageNumber = 0;
             if (thePage)
                 pageNumber = thePage->pageNumber(m_pageselect, m_pageadjust);
@@ -80,7 +80,7 @@ void PageVariable::positionChanged()
         }
         break;
     case PageContinuation: {
-        KoTextPage *thePage = page();
+        KTextPage *thePage = page();
         int pageNumber = 0;
         if (thePage)
             pageNumber = thePage->pageNumber(m_pageselect);
@@ -104,11 +104,11 @@ void PageVariable::saveOdf(KShapeSavingContext &context)
         // <text:page-number text:select-page="current" text:page-adjust="2" text:fixed="true">3</text:page-number>
         writer->startElement("text:page-number", false);
 
-        if (m_pageselect == KoTextPage::CurrentPage)
+        if (m_pageselect == KTextPage::CurrentPage)
             writer->addAttribute("text:select-page", "current");
-        else if (m_pageselect == KoTextPage::PreviousPage)
+        else if (m_pageselect == KTextPage::PreviousPage)
             writer->addAttribute("text:select-page", "previous");
-        else if (m_pageselect == KoTextPage::NextPage)
+        else if (m_pageselect == KTextPage::NextPage)
             writer->addAttribute("text:select-page", "next");
 
         if (m_pageadjust != 0)
@@ -124,9 +124,9 @@ void PageVariable::saveOdf(KShapeSavingContext &context)
         // <text:page-continuation-string text:select-page="previous">The Text</text:page-continuation-string>
         writer->startElement("page-continuation-string", false);
 
-        if (m_pageselect == KoTextPage::PreviousPage)
+        if (m_pageselect == KTextPage::PreviousPage)
             writer->addAttribute("text:select-page", "previous");
-        else if (m_pageselect == KoTextPage::NextPage)
+        else if (m_pageselect == KTextPage::NextPage)
             writer->addAttribute("text:select-page", "next");
 
         writer->addTextNode(m_continuation);
@@ -148,11 +148,11 @@ bool PageVariable::loadOdf(const KXmlElement &element, KShapeLoadingContext &con
         // page rather than the number of the current page.
         QString pageselect = element.attributeNS(KOdfXmlNS::text, "select-page");
         if (pageselect == "previous")
-            m_pageselect = KoTextPage::PreviousPage;
+            m_pageselect = KTextPage::PreviousPage;
         else if (pageselect == "next")
-            m_pageselect = KoTextPage::NextPage;
+            m_pageselect = KTextPage::NextPage;
         else // "current"
-            m_pageselect = KoTextPage::CurrentPage;
+            m_pageselect = KTextPage::CurrentPage;
 
         // The value of a page number field can be adjusted by a specified number, allowing the display
         // of page numbers of following or preceding pages. The adjustment amount is specified using
@@ -171,11 +171,11 @@ bool PageVariable::loadOdf(const KXmlElement &element, KShapeLoadingContext &con
         // continuation text is printed.
         QString pageselect = element.attributeNS(KOdfXmlNS::text, "select-page");
         if (pageselect == "previous")
-            m_pageselect = KoTextPage::PreviousPage;
+            m_pageselect = KTextPage::PreviousPage;
         else if (pageselect == "next")
-            m_pageselect = KoTextPage::NextPage;
+            m_pageselect = KTextPage::NextPage;
         else
-            m_pageselect = KoTextPage::CurrentPage;
+            m_pageselect = KTextPage::CurrentPage;
 
         // The text to display
         m_continuation = element.text();

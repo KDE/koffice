@@ -46,7 +46,7 @@ set(kotext_LIB_SRCS
     KoFind_p.cpp
     KoFind.cpp
     KTextDebug.cpp
-    KoTextPage.cpp
+    KTextPage.cpp
     KPageProvider.cpp
     KTableColumnAndRowStyleManager.cpp
     KTextInlineRdf.cpp
@@ -132,7 +132,7 @@ install(
     KoText.h
     KoList.h
     KTextLocator.h
-    KoTextPage.h
+    KTextPage.h
     KoTextPaste.h
     KoTextShapeData.h
     KoVariable.h

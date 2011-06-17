@@ -23,7 +23,7 @@
 #include "frames/KWTextFrame.h"
 
 #include <KoTextShapeData.h>
-#include <KoTextPage.h>
+#include <KTextPage.h>
 
 
 KWFrameConnectSelector::KWFrameConnectSelector(FrameConfigSharedState *state)

@@ -20,13 +20,13 @@
 #ifndef KOPATEXTPAGE_H
 #define KOPATEXTPAGE_H
 
-#include <KoTextPage.h>
+#include <KTextPage.h>
 
 #include "kopageapp_export.h"
 
 class KoPAPageBase;
 
-class KOPAGEAPP_EXPORT KoPATextPage : public KoTextPage
+class KOPAGEAPP_EXPORT KoPATextPage : public KTextPage
 {
 public:
     KoPATextPage(int pageNumber, KoPAPageBase *page);
