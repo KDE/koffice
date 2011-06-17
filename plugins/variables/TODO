@@ -13,7 +13,7 @@ KoTimeVariable
     fixed, current
 
 KoCustomVariable
-    Basically a text-based one.  Which is mostly what KoVariable already provides
+    Basically a text-based one.  Which is mostly what KVariable already provides
 
 KoFieldVariable
 Of types:

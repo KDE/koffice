@@ -20,12 +20,12 @@
 #ifndef INFOVARIABLE_H
 #define INFOVARIABLE_H
 
-#include <KoVariable.h>
+#include <KVariable.h>
 
 /**
- * This is a KoVariable for document information.
+ * This is a KVariable for document information.
  */
-class InfoVariable : public KoVariable
+class InfoVariable : public KVariable
 {
 public:
     /**

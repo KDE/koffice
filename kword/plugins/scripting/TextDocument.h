@@ -24,7 +24,7 @@
 #include <QObject>
 #include <QTextDocument>
 #include <kdebug.h>
-#include <KoVariable.h>
+#include <KVariable.h>
 #include <KInlineTextObjectManager.h>
 #include <KTextDocumentLayout.h>
 
@@ -199,7 +199,7 @@ public slots:
             return false;
         }
         KoVariableManager* varmanager = variableManager();
-        KoVariable* variable = varmanager ? varmanager->createVariable(variablename) : 0;
+        KVariable* variable = varmanager ? varmanager->createVariable(variablename) : 0;
         if (! variable) {
             kDebug(32010) << (varmanager ? "No variable" : "No variablemanager");
             return false;

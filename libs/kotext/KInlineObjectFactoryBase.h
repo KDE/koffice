@@ -53,7 +53,7 @@ class KOTEXT_EXPORT KInlineObjectFactoryBase : public QObject
 public:
     /// The type of inlineObject this factory creates.
     enum ObjectType {
-        TextVariable,   ///< The factory creates KoVariable inherting objects.
+        TextVariable,   ///< The factory creates KVariable inherting objects.
         Other = 0x100  ///< The factory creates objects that should not be shown in any menu
     };
 

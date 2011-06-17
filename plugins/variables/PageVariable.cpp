@@ -33,7 +33,7 @@
 #include <kdebug.h>
 
 PageVariable::PageVariable()
-        : KoVariable(true),
+        : KVariable(true),
         m_type(PageNumber),
         m_pageselect(KTextPage::CurrentPage),
         m_pageadjust(0),

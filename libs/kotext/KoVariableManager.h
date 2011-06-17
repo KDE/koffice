@@ -24,7 +24,7 @@
 #include <QObject>
 #include <QString>
 
-class KoVariable;
+class KVariable;
 class KInlineTextObjectManager;
 class KoVariableManagerPrivate;
 
@@ -33,7 +33,7 @@ class KoVariableManagerPrivate;
  * These initially exist solely in the variableManager as such name/value pairs
  * and can be managed by setValue(), value() and remove().
  * When the user chooses to use one of these pairs in the text-document he can create a
- * new KoVariable by calling KoVariableManager::createVariable()
+ * new KVariable by calling KoVariableManager::createVariable()
  * use that and insert that into the text-document.
  * Changing the value will lead to directly change the value of all variables
  * inserted into the document.
@@ -83,7 +83,7 @@ public:
      * @return the new variable, or 0 when the name was not previously set on this manager
      * @see setValue()
      */
-    KoVariable *createVariable(const QString &name) const;
+    KVariable *createVariable(const QString &name) const;
 
     /// return a list of all variable names.
     QList<QString> variables() const;

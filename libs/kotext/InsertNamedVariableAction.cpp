@@ -20,7 +20,7 @@
 #include "InsertNamedVariableAction_p.h"
 #include "KInlineTextObjectManager.h"
 
-#include "KoVariable.h"
+#include "KVariable.h"
 
 InsertNamedVariableAction::InsertNamedVariableAction(KCanvasBase *canvas, const KInlineTextObjectManager *manager, const QString &name)
         : InsertInlineObjectActionBase(canvas, name),

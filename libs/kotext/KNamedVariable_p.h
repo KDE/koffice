@@ -30,13 +30,13 @@
 // We mean it.
 //
 
-#include "KoVariable.h"
+#include "KVariable.h"
 
 /**
  * This inlineObject shows the curent value of a variable as registered in the KoVariableManager.
  * The proper way to create a new class is to use KoVariableManager::createVariable()
  */
-class KNamedVariable : public KoVariable
+class KNamedVariable : public KVariable
 {
 public:
     /// return the name of this named variable

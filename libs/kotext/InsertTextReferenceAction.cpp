@@ -63,7 +63,7 @@ KInlineObject *InsertTextReferenceAction::createInlineObject()
     dialog.setCaption(i18n("%1 Options", i18n("Text Reference"))); // reuse the text passed in the constructor
     dialog.addPage(widget, QString());
 
-    KoVariable *variable = 0;
+    KVariable *variable = 0;
     if (dialog.exec() == KPageDialog::Accepted && list->currentRow() >= 0) {
         KTextLocator *locator = textLocators[list->currentRow()];
         Q_ASSERT(locator);

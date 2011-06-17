@@ -50,7 +50,7 @@
 #include <KSelection.h>
 #include <KShapeManager.h>
 #include <KPointerEvent.h>
-#include <KoVariable.h>
+#include <KVariable.h>
 #include <KColorBackground.h>
 #include <KOdf.h>
 #include <KoColorPopupAction.h>
@@ -898,15 +898,15 @@ void TextTool::mousePressEvent(KPointerEvent *event)
         if (plugin)
             plugin->setCurrentCursorPosition(m_textEditor.data()->document(), m_textEditor.data()->position());
 
-        // Is there a KoVariable here?
+        // Is there a KVariable here?
         KInlineTextObjectManager *inlineTextObjectManager = KTextDocument(m_textEditor.data()->document()).inlineTextObjectManager();
-        KoVariable *variable = 0;
+        KVariable *variable = 0;
         if (inlineTextObjectManager) {
             const int position = pointToPosition(event->point);
             QTextCursor cursor(m_textEditor.data()->document());
             cursor.setPosition(position);
             KInlineObject *obj = inlineTextObjectManager->inlineTextObject(cursor.charFormat());
-            variable = dynamic_cast<KoVariable*>(obj);
+            variable = dynamic_cast<KVariable*>(obj);
         }
 
         if (variable) {
@@ -2056,7 +2056,7 @@ void TextTool::showEditVariableDialog()
 {
     QAction *action = qobject_cast<QAction*>(sender());
     if (action) {
-        KoVariable *variable = static_cast<KoVariable*>(action->data().value<void*>());
+        KVariable *variable = static_cast<KVariable*>(action->data().value<void*>());
         if (variable) {
             QWidget *optionsWidget = variable->createOptionsWidget();
             KPageDialog *dialog = new KPageDialog(canvas()->canvasWidget());

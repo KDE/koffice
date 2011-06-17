@@ -16,7 +16,7 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#include "KoVariable.h"
+#include "KVariable.h"
 #include "KInlineObject_p.h"
 #include "KTextDocumentLayout.h"
 #include "KTextShapeData.h"
@@ -32,7 +32,7 @@
 class KoVariablePrivate : public KInlineObjectPrivate
 {
 public:
-    KoVariablePrivate(KoVariable *qq)
+    KoVariablePrivate(KVariable *qq)
         : KInlineObjectPrivate(qq),
         modified(true)
     {
@@ -40,28 +40,28 @@ public:
 
     QDebug printDebug(QDebug dbg) const
     {
-        dbg.nospace() << "KoVariable value=" << value;
+        dbg.nospace() << "KVariable value=" << value;
         return dbg.space();
     }
 
     QString value;
     bool modified;
 
-    Q_DECLARE_PUBLIC(KoVariable)
+    Q_DECLARE_PUBLIC(KVariable)
 };
 
-KoVariable::KoVariable(bool propertyChangeListener)
+KVariable::KVariable(bool propertyChangeListener)
         : KInlineObject(*(new KoVariablePrivate(this)), propertyChangeListener)
 {
 }
 
-KoVariable::~KoVariable()
+KVariable::~KVariable()
 {
 }
 
-void KoVariable::setValue(const QString &value)
+void KVariable::setValue(const QString &value)
 {
-    Q_D(KoVariable);
+    Q_D(KVariable);
     if (d->value == value)
         return;
     d->value = value;
@@ -73,16 +73,16 @@ void KoVariable::setValue(const QString &value)
     }
 }
 
-void KoVariable::updatePosition(QTextInlineObject object, const QTextCharFormat &format)
+void KVariable::updatePosition(QTextInlineObject object, const QTextCharFormat &format)
 {
     Q_UNUSED(object);
     Q_UNUSED(format);
     positionChanged(); // force recalc. Even if the pos may not have actually changed.
 }
 
-void KoVariable::resize(QTextInlineObject object, const QTextCharFormat &format, QPaintDevice *pd)
+void KVariable::resize(QTextInlineObject object, const QTextCharFormat &format, QPaintDevice *pd)
 {
-    Q_D(KoVariable);
+    Q_D(KVariable);
     if (d->modified == false)
         return;
     Q_ASSERT(format.isCharFormat());
@@ -93,9 +93,9 @@ void KoVariable::resize(QTextInlineObject object, const QTextCharFormat &format,
     d->modified = true;
 }
 
-void KoVariable::paint(QPainter &painter, QPaintDevice *pd, const QRectF &rect, QTextInlineObject object, const QTextCharFormat &format)
+void KVariable::paint(QPainter &painter, QPaintDevice *pd, const QRectF &rect, QTextInlineObject object, const QTextCharFormat &format)
 {
-    Q_D(KoVariable);
+    Q_D(KVariable);
     Q_UNUSED(object);
 
     // TODO set all the font properties from the format (color etc)
@@ -119,8 +119,8 @@ void KoVariable::paint(QPainter &painter, QPaintDevice *pd, const QRectF &rect, 
     layout.draw(&painter, rect.topLeft());
 }
 
-QString KoVariable::value() const
+QString KVariable::value() const
 {
-    Q_D(const KoVariable);
+    Q_D(const KVariable);
     return d->value;
 }

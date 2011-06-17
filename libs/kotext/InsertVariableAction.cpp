@@ -19,7 +19,7 @@
  */
 
 #include "InsertVariableAction_p.h"
-#include "KoVariable.h"
+#include "KVariable.h"
 #include "KInlineObjectFactoryBase.h"
 
 #include <KCanvasBase.h>
@@ -40,7 +40,7 @@ InsertVariableAction::InsertVariableAction(KCanvasBase *base, KInlineObjectFacto
 KInlineObject *InsertVariableAction::createInlineObject()
 {
     KInlineObject *io = m_factory->createInlineObject(m_properties);
-    KoVariable *variable = dynamic_cast<KoVariable*>(io);
+    KVariable *variable = dynamic_cast<KVariable*>(io);
     Q_ASSERT(variable);
     QWidget *widget = variable->createOptionsWidget();
     if (widget) {

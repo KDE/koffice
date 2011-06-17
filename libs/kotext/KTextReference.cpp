@@ -26,7 +26,7 @@
 #include <KShapeSavingContext.h> // for usage in Q_UNUSED
 
 KTextReference::KTextReference(int indexId)
-        : KoVariable(),
+        : KVariable(),
         m_indexId(indexId)
 {
 }

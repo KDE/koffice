@@ -27,7 +27,7 @@
 #include <KXmlWriter.h>
 
 InfoVariable::InfoVariable()
-        : KoVariable(true),
+        : KVariable(true),
         m_type(KInlineObject::DocumentURL)
 {
 }

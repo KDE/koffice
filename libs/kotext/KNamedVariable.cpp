@@ -26,7 +26,7 @@
 #include <KShapeSavingContext.h> // for usage in Q_UNUSED
 
 KNamedVariable::KNamedVariable(Property key, const QString &name)
-        : KoVariable(true),
+        : KVariable(true),
         m_name(name),
         m_key(key)
 {

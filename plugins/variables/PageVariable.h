@@ -21,16 +21,16 @@
 #ifndef PAGEVARIABLE_H
 #define PAGEVARIABLE_H
 
-#include <KoVariable.h>
+#include <KVariable.h>
 #include <KTextShapeData.h>
 #include <KTextPage.h>
 
 class KShapeSavingContext;
 
 /**
- * This is a KoVariable for page numbers.
+ * This is a KVariable for page numbers.
  */
-class PageVariable : public KoVariable
+class PageVariable : public KVariable
 {
 public:
     enum PageType {

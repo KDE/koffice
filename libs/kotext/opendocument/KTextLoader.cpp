@@ -48,7 +48,7 @@
 #include <KTextShapeData.h>
 #include "KTextSharedLoadingData.h"
 #include <KUnit.h>
-#include <KoVariable.h>
+#include <KVariable.h>
 #include <KoVariableManager.h>
 #include <KInlineObjectRegistry.h>
 #include <KOdfXmlNS.h>
@@ -1691,7 +1691,7 @@ void KTextLoader::loadSpan(const KXmlElement &element, QTextCursor &cursor, bool
 #if 0 //1.6:
                 bool handled = false;
                 // Check if it's a variable
-                KoVariable *var = context.variableCollection().loadOasisField(textDocument(), ts, context);
+                KVariable *var = context.variableCollection().loadOasisField(textDocument(), ts, context);
                 if (var) {
                     textData = "#";     // field placeholder
                     customItem = var;

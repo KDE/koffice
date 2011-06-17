@@ -80,7 +80,7 @@ int KoVariableManager::usageCount(const QString &name) const
     return 0;
 }
 
-KoVariable *KoVariableManager::createVariable(const QString &name) const
+KVariable *KoVariableManager::createVariable(const QString &name) const
 {
     int key = d->variableMapping.value(name);
     if (key == 0)

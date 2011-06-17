@@ -30,7 +30,7 @@
 // We mean it.
 //
 
-#include "KoVariable.h"
+#include "KVariable.h"
 
 class KTextLocator;
 
@@ -42,7 +42,7 @@ class KTextLocator;
  * This effectively means that the reference will print the page number (for example) of where the
  * locator is and keep it updated automatically.
  */
-class KTextReference : public KoVariable
+class KTextReference : public KVariable
 {
 public:
     /**

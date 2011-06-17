@@ -36,7 +36,7 @@ class KShapeLoadingContext;
  * @see KInlineObjectFactoryBase
  * @see KInlineTextObjectManager
  * @see KInlineObject
- * @see KoVariable
+ * @see KVariable
  */
 class KOTEXT_EXPORT KInlineObjectRegistry : public QObject,  public KGenericRegistry<KInlineObjectFactoryBase*>
 {

@@ -31,7 +31,7 @@
 #include <KOdfStylesReader.h>
 
 DateVariable::DateVariable(DateType type)
-        : KoVariable()
+        : KVariable()
         , m_type(type)
         , m_displayType(Custom)
         , m_daysOffset(0)

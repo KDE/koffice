@@ -20,7 +20,7 @@
 #ifndef DATEVARIABLE_H
 #define DATEVARIABLE_H
 
-#include <KoVariable.h>
+#include <KVariable.h>
 
 #include <QString>
 #include <QDateTime>
@@ -31,7 +31,7 @@
  * is used as text.  This class is pretty boring in that it has just a setValue() to alter the
  * text shown; we depend on plugin writers to create more exciting ways to update variables.
  */
-class DateVariable : public KoVariable
+class DateVariable : public KVariable
 {
 public:
     enum DateType {

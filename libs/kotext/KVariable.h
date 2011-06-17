@@ -50,14 +50,14 @@ class KoVariablePrivate;
  * For variables that needs to change their value based on position in the document,
  * you should implement that hook.  Useful methods.
  */
-class KOTEXT_EXPORT KoVariable : public KInlineObject
+class KOTEXT_EXPORT KVariable : public KInlineObject
 {
 public:
     /**
      * Constructor.
      */
-    explicit KoVariable(bool propertyChangeListener = false);
-    virtual ~KoVariable();
+    explicit KVariable(bool propertyChangeListener = false);
+    virtual ~KVariable();
 
     /**
      * The new value this variable will show.
@@ -96,7 +96,7 @@ private:
             QTextInlineObject object, const QTextCharFormat &format);
 
 private:
-    Q_DECLARE_PRIVATE(KoVariable)
+    Q_DECLARE_PRIVATE(KVariable)
 };
 
 #endif

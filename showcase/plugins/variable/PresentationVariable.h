@@ -27,7 +27,7 @@
 #ifndef PRESENTATION_VARIABLE_H
 #define PRESENTATION_VARIABLE_H
 
-#include <KoVariable.h>
+#include <KVariable.h>
 
 #include <SCDeclarations.h>
 
@@ -35,7 +35,7 @@
  * This is a PresentationVariable for document declaration.
  * Ex: - Footer, Header, Date-time etc
  */
-class PresentationVariable : public KoVariable
+class PresentationVariable : public KVariable
 {
 public:
     /**

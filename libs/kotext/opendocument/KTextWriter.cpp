@@ -36,7 +36,7 @@
 #include "KInlineObject.h"
 #include "KTextAnchor.h"
 #include "KShape.h"
-#include "KoVariable.h"
+#include "KVariable.h"
 #include "KInlineTextObjectManager.h"
 #include "styles/KStyleManager.h"
 #include "styles/KCharacterStyle.h"
@@ -839,7 +839,7 @@ void KTextWriter::Private::saveParagraph(const QTextBlock &block, int from, int 
                         }
                     }
 
-                    bool saveSpan = dynamic_cast<KoVariable*>(inlineObject) != 0;
+                    bool saveSpan = dynamic_cast<KVariable*>(inlineObject) != 0;
 
                     if (saveSpan) {
                         QString styleName = saveCharacterStyle(charFormat, blockCharFormat);

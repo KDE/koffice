@@ -39,7 +39,7 @@
 #include <SCPage.h>
 
 PresentationVariable::PresentationVariable()
-    : KoVariable(true)
+    : KVariable(true)
     , m_type(SCDeclarations::Footer)
 {
 }
