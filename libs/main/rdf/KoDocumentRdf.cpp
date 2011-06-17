@@ -24,7 +24,7 @@
 
 #include "../KoView.h"
 #include "../KoDocument.h"
-#include <KoToolManager.h>
+#include <KToolManager.h>
 #include <KTextDocument.h>
 #include <KoTextRdfCore.h>
 #include "KOdfWriteStore.h"
@@ -1459,12 +1459,12 @@ void KoDocumentRdf::setUserStyleSheetList(const QString& className,const QList<K
 
 KoTextEditor *KoDocumentRdf::ensureTextTool(KCanvasBase *host)
 {
-    KoToolManager::instance()->switchToolRequested(TextTool_ID);
+    KToolManager::instance()->switchToolRequested(TextTool_ID);
     KoTextEditor *ret = qobject_cast<KoTextEditor*>(host->toolProxy()->selection());
     return ret;
 }
 
 void KoDocumentRdf::ensureTextTool()
 {
-    KoToolManager::instance()->switchToolRequested(TextTool_ID);
+    KToolManager::instance()->switchToolRequested(TextTool_ID);
 }

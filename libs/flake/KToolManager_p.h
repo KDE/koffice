@@ -40,14 +40,14 @@
 #include <kshortcut.h>
 
 #include "KInputDevice.h"
-#include "KoToolManager.h"
+#include "KToolManager.h"
 
 class KToolFactoryBase;
 class KShapeManager;
 class KCanvasBase;
 class KToolBase;
 class KShape;
-class KoToolManager;
+class KToolManager;
 class KCanvasController;
 class KShapeLayer;
 class ToolHelper;
@@ -55,10 +55,10 @@ class CanvasData;
 class QToolButton;
 class KoToolProxy;
 
-class KoToolManager::Private
+class KToolManager::Private
 {
 public:
-    Private(KoToolManager *qq);
+    Private(KToolManager *qq);
     ~Private();
 
     void setup();
@@ -97,7 +97,7 @@ public:
     void switchToolByShortcut(QKeyEvent *event);
 
 
-    KoToolManager *q;
+    KToolManager *q;
 
     QList<ToolHelper*> tools; // list of all available tools via their factories.
 

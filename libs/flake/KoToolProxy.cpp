@@ -23,7 +23,7 @@
 #include "KToolBase.h"
 #include "KPointerEvent.h"
 #include "KInputDevice.h"
-#include "KoToolManager_p.h"
+#include "KToolManager_p.h"
 #include "KoToolSelection.h"
 #include "KCanvasBase.h"
 #include "KCanvasController.h"
@@ -101,7 +101,7 @@ KoToolProxy::KoToolProxy(KCanvasBase *canvas, QObject *parent)
         : QObject(parent),
         d(new KoToolProxyPrivate(this))
 {
-    KoToolManager::instance()->priv()->registerToolProxy(this, canvas);
+    KToolManager::instance()->priv()->registerToolProxy(this, canvas);
 
     connect(&d->scrollTimer, SIGNAL(timeout()), this, SLOT(timeout()));
 }
@@ -137,7 +137,7 @@ void KoToolProxy::tabletEvent(QTabletEvent *event, const QPointF &point)
     }
 
     KInputDevice id(event->device(), event->pointerType(), event->uniqueId());
-    KoToolManager::instance()->priv()->switchInputDevice(id);
+    KToolManager::instance()->priv()->switchInputDevice(id);
 
     KPointerEvent ev(event, point);
     switch (event->type()) {
@@ -171,7 +171,7 @@ void KoToolProxy::mousePressEvent(QMouseEvent *event, const QPointF &point)
 {
     d->mouseLeaveWorkaround = false;
     KInputDevice id;
-    KoToolManager::instance()->priv()->switchInputDevice(id);
+    KToolManager::instance()->priv()->switchInputDevice(id);
     d->mouseDownPoint = event->pos();
 
     if (d->tabletPressed) // refuse to send a press unless there was a release first.
@@ -188,7 +188,7 @@ void KoToolProxy::mouseDoubleClickEvent(QMouseEvent *event, const QPointF &point
 {
     d->mouseLeaveWorkaround = false;
     KInputDevice id;
-    KoToolManager::instance()->priv()->switchInputDevice(id);
+    KToolManager::instance()->priv()->switchInputDevice(id);
     if (d->activeTool == 0) {
         event->ignore();
         return;
@@ -207,7 +207,7 @@ void KoToolProxy::mouseMoveEvent(QMouseEvent *event, const QPointF &point)
         return;
     }
     KInputDevice id;
-    KoToolManager::instance()->priv()->switchInputDevice(id);
+    KToolManager::instance()->priv()->switchInputDevice(id);
     if (d->activeTool == 0) {
         event->ignore();
         return;
@@ -223,7 +223,7 @@ void KoToolProxy::mouseReleaseEvent(QMouseEvent *event, const QPointF &point)
 {
     d->mouseLeaveWorkaround = false;
     KInputDevice id;
-    KoToolManager::instance()->priv()->switchInputDevice(id);
+    KToolManager::instance()->priv()->switchInputDevice(id);
     d->scrollTimer.stop();
 
     KPointerEvent ev(event, point);
@@ -245,8 +245,8 @@ void KoToolProxy::mouseReleaseEvent(QMouseEvent *event, const QPointF &point)
                     manager->selection()->select(shape);
                     QList<KShape*> shapes;
                     shapes << shape;
-                    QString tool = KoToolManager::instance()->preferredToolForSelection(shapes);
-                    KoToolManager::instance()->switchToolRequested(tool);
+                    QString tool = KToolManager::instance()->preferredToolForSelection(shapes);
+                    KToolManager::instance()->switchToolRequested(tool);
                 }
             }
         }

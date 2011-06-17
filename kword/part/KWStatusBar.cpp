@@ -23,7 +23,7 @@
 #include "KWDocument.h"
 #include "KWCanvas.h"
 
-#include <KoToolManager.h>
+#include <KToolManager.h>
 #include <KCanvasController.h>
 #include <KoZoomController.h>
 
@@ -100,7 +100,7 @@ KWStatusBar::KWStatusBar(KStatusBar *statusBar, KWView *view)
     m_statusLabel = new KSqueezedTextLabel(m_statusbar);
     m_statusbar->addWidget(m_statusLabel, 1);
     connect(m_statusbar, SIGNAL(messageChanged(const QString&)), this, SLOT(setText(const QString&)));
-    connect(KoToolManager::instance(), SIGNAL(changedStatusText(const QString&)),
+    connect(KToolManager::instance(), SIGNAL(changedStatusText(const QString&)),
             this, SLOT(setText(const QString&)));
 
     m_zoomAction = new KAction(i18n("Zoom Controller"), this);
@@ -111,7 +111,7 @@ KWStatusBar::KWStatusBar(KStatusBar *statusBar, KWView *view)
 
     updateCurrentTool(0);
     setCurrentCanvas(view->kwcanvas());
-    connect(KoToolManager::instance(), SIGNAL(changedTool(KCanvasController*, int)),
+    connect(KToolManager::instance(), SIGNAL(changedTool(KCanvasController*, int)),
             this, SLOT(updateCurrentTool(KCanvasController*)));
 }
 

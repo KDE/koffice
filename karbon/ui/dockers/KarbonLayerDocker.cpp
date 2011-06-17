@@ -29,7 +29,7 @@
 #include <KShapeManager.h>
 #include <KShapeBorderBase.h>
 #include <KShapeContainer.h>
-#include <KoToolManager.h>
+#include <KToolManager.h>
 #include <KCanvasBase.h>
 #include <KCanvasController.h>
 #include <KShapeControllerBase.h>
@@ -233,7 +233,7 @@ void KarbonLayerDocker::itemClicked(const QModelIndex &index)
     if (! shape)
         return;
 
-    KCanvasController * canvasController = KoToolManager::instance()->activeCanvasController();
+    KCanvasController * canvasController = KToolManager::instance()->activeCanvasController();
     if (! canvasController)
         return;
 
@@ -275,7 +275,7 @@ void KarbonLayerDocker::addLayer()
     if (ok) {
         KShapeLayer* layer = new KShapeLayer();
         layer->setName(name);
-        KCanvasController* canvasController = KoToolManager::instance()->activeCanvasController();
+        KCanvasController* canvasController = KToolManager::instance()->activeCanvasController();
         QUndoCommand *cmd = new KShapeCreateCommand(m_part, layer, 0);
         cmd->setText(i18n("Create Layer"));
         canvasController->canvas()->addCommand(cmd);
@@ -310,7 +310,7 @@ void KarbonLayerDocker::deleteItem()
     }
 
     if (cmd) {
-        KCanvasController* canvasController = KoToolManager::instance()->activeCanvasController();
+        KCanvasController* canvasController = KToolManager::instance()->activeCanvasController();
         canvasController->canvas()->addCommand(cmd);
         m_model->update();
     }
@@ -324,7 +324,7 @@ void KarbonLayerDocker::raiseItem()
     // separate selected layers and selected shapes
     extractSelectedLayersAndShapes(selectedLayers, selectedShapes, true);
 
-    KCanvasBase* canvas = KoToolManager::instance()->activeCanvasController()->canvas();
+    KCanvasBase* canvas = KToolManager::instance()->activeCanvasController()->canvas();
 
     QUndoCommand *cmd = 0;
 
@@ -358,7 +358,7 @@ void KarbonLayerDocker::lowerItem()
     // separate selected layers and selected shapes
     extractSelectedLayersAndShapes(selectedLayers, selectedShapes, true);
 
-    KCanvasBase* canvas = KoToolManager::instance()->activeCanvasController()->canvas();
+    KCanvasBase* canvas = KToolManager::instance()->activeCanvasController()->canvas();
 
     QUndoCommand *cmd = 0;
 

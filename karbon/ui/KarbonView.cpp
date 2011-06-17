@@ -69,7 +69,7 @@
 #include <KoUnitDoubleSpinBox.h>
 #include <KoPageLayoutDialog.h>
 #include <KoRuler.h>
-#include <KoToolManager.h>
+#include <KToolManager.h>
 #include <KoStandardAction.h>
 #include <KoToolProxy.h>
 #include <KShapeManager.h>
@@ -217,7 +217,7 @@ KarbonView::KarbonView(KarbonPart* p, QWidget* parent)
     d->status->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
     d->status->setMinimumWidth(300);
     addStatusBarItem(d->status, 1);
-    connect(KoToolManager::instance(), SIGNAL(changedStatusText(const QString &)),
+    connect(KToolManager::instance(), SIGNAL(changedStatusText(const QString &)),
             d->status, SLOT(setText(const QString &)));
     d->cursorCoords = new QLabel(QString(), this);
     d->cursorCoords->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
@@ -244,8 +244,8 @@ KarbonView::KarbonView(KarbonPart* p, QWidget* parent)
     layout->setMargin(0);
     layout->addWidget(d->canvasController, 1, 1);
 
-    KoToolManager::instance()->addController(d->canvasController);
-    KoToolManager::instance()->registerTools(actionCollection(), d->canvasController);
+    KToolManager::instance()->addController(d->canvasController);
+    KToolManager::instance()->registerTools(actionCollection(), d->canvasController);
 
     initActions();
 
@@ -292,7 +292,7 @@ KarbonView::KarbonView(KarbonPart* p, QWidget* parent)
         connect(d->canvasController, SIGNAL(toolOptionWidgetsChanged(const QMap<QString,QWidget*>&)),
                 shell()->dockerManager(), SLOT(newOptionWidgets(const  QMap<QString,QWidget*>&)));
 
-        KoToolManager::instance()->requestToolActivation(d->canvasController);
+        KToolManager::instance()->requestToolActivation(d->canvasController);
 
         bool b = d->showRulerAction->isChecked();
         d->horizRuler->setVisible(b);
@@ -308,7 +308,7 @@ KarbonView::KarbonView(KarbonPart* p, QWidget* parent)
 
 KarbonView::~KarbonView()
 {
-    KoToolManager::instance()->removeCanvasController(d->canvasController);
+    KToolManager::instance()->removeCanvasController(d->canvasController);
 
     removeStatusBarItem(d->status);
     removeStatusBarItem(d->cursorCoords);
@@ -1159,7 +1159,7 @@ void KarbonView::createLayersTabDock()
 void KarbonView::updateReadWrite(bool readwrite)
 {
     canvasWidget()->setReadWrite(readwrite);
-    KoToolManager::instance()->updateReadWrite(d->canvasController, readwrite);
+    KToolManager::instance()->updateReadWrite(d->canvasController, readwrite);
 }
 
 void KarbonView::updateUnit(const KUnit &unit)

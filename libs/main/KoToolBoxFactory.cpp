@@ -19,7 +19,7 @@
 
 #include "KoToolBoxFactory.h"
 #include <klocale.h>
-#include <KoToolManager.h>
+#include <KToolManager.h>
 #include "KoToolBox_p.h"
 
 #include <KCanvasController.h>

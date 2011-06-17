@@ -29,7 +29,7 @@
 // koffice libs includes
 #include <KShapeManager.h>
 #include <KPointerEvent.h>
-#include <KoToolManager.h>
+#include <KToolManager.h>
 #include <KCanvasController.h>
 #include <KoToolProxy.h>
 #include <KoGridData.h>

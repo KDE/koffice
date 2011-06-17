@@ -32,7 +32,7 @@
 #include <KShapeLayer.h>
 #include <KShapeManager.h>
 #include <KoText.h>
-#include <KoToolManager.h>
+#include <KToolManager.h>
 #include <KoToolProxy.h>
 #include <KoZoomController.h>
 

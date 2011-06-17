@@ -257,12 +257,12 @@ public:
     /**
      * Calling this will turn the tool into a read/write or a read-only tool.
      * Note that upon calling this method no actions will be enabled/disabled
-     * as that is the responsibility of the KoToolManager. The KoToolManager
+     * as that is the responsibility of the KToolManager. The KToolManager
      * should use this variable at next tool switch.
      *
      * @param readWrite if true all available actions will be enabled, if false
      *   only actions that do not change the content will be available.
-     * @see KoToolManager::updateReadWrite(), isReadWrite()
+     * @see KToolManager::updateReadWrite(), isReadWrite()
      */
     void setReadWrite(bool readWrite);
 
@@ -347,7 +347,7 @@ signals:
 
     /**
      * Emitted by setCursor() when the cursor to display on the canvas is changed.
-     * The KoToolManager should connect to this signal to handle cursors further.
+     * The KToolManager should connect to this signal to handle cursors further.
      */
     void cursorChanged(const QCursor &cursor);
 

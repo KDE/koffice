@@ -22,7 +22,7 @@
 #include <KCanvasBase.h>
 #include <KShapeManager.h>
 #include <KSelection.h>
-#include <KoToolManager.h>
+#include <KToolManager.h>
 #include <KCanvasController.h>
 #include <KoShadowConfigWidget.h>
 #include <KShapeShadowCommand.h>

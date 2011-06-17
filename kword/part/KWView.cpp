@@ -79,7 +79,7 @@
 #include <KoText.h>
 #include <KTextOnShapeContainer.h>
 #include <KTextShapeData.h>
-#include <KoToolManager.h>
+#include <KToolManager.h>
 #include <KoToolProxy.h>
 #include <KoZoomAction.h>
 #include <KoZoomController.h>
@@ -204,7 +204,7 @@ QWidget *KWView::canvas() const
 void KWView::updateReadWrite(bool readWrite)
 {
     m_canvas->setReadWrite(readWrite);
-    KoToolManager::instance()->updateReadWrite(m_gui->canvasController(), readWrite);
+    KToolManager::instance()->updateReadWrite(m_gui->canvasController(), readWrite);
     m_actionFormatFrameSet->setEnabled(readWrite);
     m_actionInsertFrameBreak->setEnabled(readWrite);
     m_actionViewHeader->setEnabled(readWrite);
@@ -1111,8 +1111,8 @@ void KWView::inlineFrame()
     targetShape->setParent(static_cast<KShapeContainer*>(frameForAnchor->shape()));
     targetShape->setAbsolutePosition(absPos);
 
-    QString tool = KoToolManager::instance()->preferredToolForSelection(selection->selectedShapes());
-    KoToolManager::instance()->switchToolRequested(tool);
+    QString tool = KToolManager::instance()->preferredToolForSelection(selection->selectedShapes());
+    KToolManager::instance()->switchToolRequested(tool);
     KoTextEditor *handler = qobject_cast<KoTextEditor*> (m_canvas->toolProxy()->selection());
     Q_ASSERT(handler);
     KTextAnchor *anchor = new KTextAnchor(targetShape);
@@ -1235,7 +1235,7 @@ void KWView::createCustomOutline()
             selection->select(group);
     }
 
-    KoToolManager::instance()->switchToolRequested("PathToolFactoryId");
+    KToolManager::instance()->switchToolRequested("PathToolFactoryId");
 }
 
 void KWView::createFrameClipping()

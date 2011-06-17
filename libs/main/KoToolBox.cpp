@@ -22,7 +22,7 @@
 #include "KoToolBox_p.h"
 
 #include <KCanvasController.h>
-#include <KoToolManager.h>
+#include <KToolManager.h>
 #include <KShapeLayer.h>
 #include <KInteractionTool.h>
 
@@ -384,7 +384,7 @@ KoToolBox::KoToolBox(KCanvasController *canvas)
 
     d->buttonGroup = new QButtonGroup(this);
     setLayout(d->layout);
-    foreach(const KoToolManager::Button & button, KoToolManager::instance()->createToolList(canvas->canvas())) {
+    foreach(const KToolManager::Button & button, KToolManager::instance()->createToolList(canvas->canvas())) {
         addButton(button.button, button.section, button.priority, button.buttonGroupId);
         d->visibilityCodes.insert(button.button, button.visibilityCode);
     }
@@ -392,11 +392,11 @@ KoToolBox::KoToolBox(KCanvasController *canvas)
     // Update visibility of buttons
     setButtonsVisible(canvas, QList<QString>());
 
-    connect(KoToolManager::instance(), SIGNAL(changedTool(KCanvasController*, int)),
+    connect(KToolManager::instance(), SIGNAL(changedTool(KCanvasController*, int)),
             this, SLOT(setActiveTool(KCanvasController*, int)));
-    connect(KoToolManager::instance(), SIGNAL(currentLayerChanged(const KCanvasController*,const KShapeLayer*)),
+    connect(KToolManager::instance(), SIGNAL(currentLayerChanged(const KCanvasController*,const KShapeLayer*)),
             this, SLOT(setCurrentLayer(const KCanvasController*,const KShapeLayer*)));
-    connect(KoToolManager::instance(), SIGNAL(toolCodesSelected(const KCanvasController*, QList<QString>)),
+    connect(KToolManager::instance(), SIGNAL(toolCodesSelected(const KCanvasController*, QList<QString>)),
             this, SLOT(setButtonsVisible(const KCanvasController*, QList<QString>)));
 }
 

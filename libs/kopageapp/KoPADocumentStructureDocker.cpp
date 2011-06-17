@@ -28,7 +28,7 @@
 #include "commands/KoPAPageDeleteCommand.h"
 
 #include <KShapeManager.h>
-#include <KoToolManager.h>
+#include <KToolManager.h>
 #include <KCanvasController.h>
 #include <KSelection.h>
 #include <KShapeOdfSaveHelper.h>
@@ -228,7 +228,7 @@ void KoPADocumentStructureDocker::itemClicked(const QModelIndex &index)
         return;
     // check whether the newly selected shape is a page or shape/layer
     bool isPage = (dynamic_cast<KoPAPageBase *>(shape) != 0);
-    KCanvasController* canvasController = KoToolManager::instance()->activeCanvasController();
+    KCanvasController* canvasController = KToolManager::instance()->activeCanvasController();
     KSelection *selection = canvasController->canvas()->shapeManager()->selection();
 
     if (isPage) {
@@ -316,7 +316,7 @@ void KoPADocumentStructureDocker::addLayer()
     if(ok)
     {
         KShapeLayer* layer = new KShapeLayer();
-        KoPACanvas * canvas = dynamic_cast<KoPACanvas *>(KoToolManager::instance()->activeCanvasController()->canvas());
+        KoPACanvas * canvas = dynamic_cast<KoPACanvas *>(KToolManager::instance()->activeCanvasController()->canvas());
         if (canvas) {
             layer->setParent(canvas->koPAView()->activePage());
             layer->setName(name);
@@ -400,7 +400,7 @@ void KoPADocumentStructureDocker::raiseItem()
     else if(selectedShapes.count())
     {
         cmd = KShapeReorderCommand::createCommand(selectedShapes,
-                KoToolManager::instance()->activeCanvasController()->canvas()->shapeManager(),
+                KToolManager::instance()->activeCanvasController()->canvas()->shapeManager(),
                 KShapeReorderCommand::RaiseShape);
     }
 
@@ -434,7 +434,7 @@ void KoPADocumentStructureDocker::lowerItem()
     else if(selectedShapes.count())
     {
         cmd = KShapeReorderCommand::createCommand(selectedShapes,
-                KoToolManager::instance()->activeCanvasController()->canvas()->shapeManager(),
+                KToolManager::instance()->activeCanvasController()->canvas()->shapeManager(),
                 KShapeReorderCommand::LowerShape);
     }
 
@@ -610,7 +610,7 @@ void KoPADocumentStructureDocker::itemSelected(const QItemSelection &selected, c
 
 void KoPADocumentStructureDocker::addPage()
 {
-    KoPACanvas * canvas = dynamic_cast<KoPACanvas *>(KoToolManager::instance()->activeCanvasController()->canvas());
+    KoPACanvas * canvas = dynamic_cast<KoPACanvas *>(KToolManager::instance()->activeCanvasController()->canvas());
     if (canvas) {
         canvas->koPAView()->insertPage();
     }
@@ -675,14 +675,14 @@ void KoPADocumentStructureDocker::editPaste()
 
     if (data->hasFormat(KOdf::mimeType(KOdf::TextDocument))) {
         // Paste Shapes or Layers
-        KCanvasBase* canvas = KoToolManager::instance()->activeCanvasController()->canvas();
+        KCanvasBase* canvas = KToolManager::instance()->activeCanvasController()->canvas();
         KShapeManager * shapeManager = canvas->shapeManager();
         KShapePaste paste(canvas, shapeManager->selection()->activeLayer());
         paste.paste(KOdf::TextDocument, data);
 
     } else {
         // Paste Pages
-        KoPACanvas * canvas = dynamic_cast<KoPACanvas *>(KoToolManager::instance()->activeCanvasController()->canvas());
+        KoPACanvas * canvas = dynamic_cast<KoPACanvas *>(KToolManager::instance()->activeCanvasController()->canvas());
         canvas->koPAView()->pagePaste();
     }
 }

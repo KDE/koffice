@@ -57,7 +57,7 @@
 #include <KOdfSettings.h>
 #include <KoMainWindow.h>
 #include <KCanvasController.h>
-#include <KoToolManager.h>
+#include <KToolManager.h>
 #include <KShapeManager.h>
 #include <KShapeLayer.h>
 #include <KShapeRegistry.h>
@@ -438,7 +438,7 @@ bool KarbonPart::mergeNativeFormat(const QString &file)
 
 void KarbonPart::addShape(KShape* shape)
 {
-    KCanvasController* canvasController = KoToolManager::instance()->activeCanvasController();
+    KCanvasController* canvasController = KToolManager::instance()->activeCanvasController();
 
     KShapeLayer *layer = dynamic_cast<KShapeLayer*>(shape);
     if (layer) {

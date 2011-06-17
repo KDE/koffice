@@ -25,7 +25,7 @@
 #include "FolderShape.h"
 
 #include <KShapeManager.h>
-#include <KoToolManager.h>
+#include <KToolManager.h>
 #include <KSelection.h>
 #include <KCreateShapesTool.h>
 #include <KCanvasController.h>
@@ -55,12 +55,12 @@ void ShapeSelector::itemSelected()
     IconShape *shape= dynamic_cast<IconShape*>(koShape);
     if (shape == 0)
         return;
-    KCanvasController* canvasController = KoToolManager::instance()->activeCanvasController();
+    KCanvasController* canvasController = KToolManager::instance()->activeCanvasController();
 
     if (canvasController) {
-        KCreateShapesTool * tool = KoToolManager::instance()->shapeCreatorTool( canvasController->canvas() );
+        KCreateShapesTool * tool = KToolManager::instance()->shapeCreatorTool( canvasController->canvas() );
         shape->visit( tool );
-        KoToolManager::instance()->switchToolRequested(KoCreateShapesTool_ID);
+        KToolManager::instance()->switchToolRequested(KoCreateShapesTool_ID);
     }
 }
 

@@ -26,7 +26,7 @@
 #include <KShapeFactoryBase.h>
 #include <KShapeRegistry.h>
 #include <KCanvasController.h>
-#include <KoToolManager.h>
+#include <KToolManager.h>
 #include <KCreateShapesTool.h>
 #include <KShape.h>
 #include <KoZoomHandler.h>
@@ -321,16 +321,16 @@ void ShapeCollectionDocker::activateShapeCreationToolFromQuick(const QModelIndex
     if (!index.isValid())
         return;
 
-    KCanvasController* canvasController = KoToolManager::instance()->activeCanvasController();
+    KCanvasController* canvasController = KToolManager::instance()->activeCanvasController();
 
     if (canvasController) {
-        KCreateShapesTool* tool = KoToolManager::instance()->shapeCreatorTool(canvasController->canvas());
+        KCreateShapesTool* tool = KToolManager::instance()->shapeCreatorTool(canvasController->canvas());
         QString id = m_quickView->model()->data(index, Qt::UserRole).toString();
         KProperties* properties = static_cast<CollectionItemModel*>(m_quickView->model())->properties(index);
 
         tool->setShapeId(id);
         tool->setShapeProperties(properties);
-        KoToolManager::instance()->switchToolRequested(KoCreateShapesTool_ID);
+        KToolManager::instance()->switchToolRequested(KoCreateShapesTool_ID);
     }
     m_quickView->clearSelection();
 }
@@ -340,16 +340,16 @@ void ShapeCollectionDocker::activateShapeCreationTool(const QModelIndex& index)
     if (!index.isValid())
         return;
 
-    KCanvasController* canvasController = KoToolManager::instance()->activeCanvasController();
+    KCanvasController* canvasController = KToolManager::instance()->activeCanvasController();
 
     if (canvasController) {
-        KCreateShapesTool* tool = KoToolManager::instance()->shapeCreatorTool(canvasController->canvas());
+        KCreateShapesTool* tool = KToolManager::instance()->shapeCreatorTool(canvasController->canvas());
         QString id = m_collectionView->model()->data(index, Qt::UserRole).toString();
         KProperties* properties = static_cast<CollectionItemModel*>(m_collectionView->model())->properties(index);
         
         tool->setShapeId(id);
         tool->setShapeProperties(properties);
-        KoToolManager::instance()->switchToolRequested(KoCreateShapesTool_ID);
+        KToolManager::instance()->switchToolRequested(KoCreateShapesTool_ID);
     }
    m_moreShapesContainer->hide();
 }

@@ -33,7 +33,7 @@
 #include "KarbonWhirlPinchCommand.h"
 
 #include <KoUnitDoubleSpinBox.h>
-#include <KoToolManager.h>
+#include <KToolManager.h>
 #include <KCanvasController.h>
 #include <KCanvasBase.h>
 #include <KShapeManager.h>
@@ -71,7 +71,7 @@ WhirlPinchPlugin::WhirlPinchPlugin(QObject *parent, const QVariantList &)
 
 void WhirlPinchPlugin::slotWhirlPinch()
 {
-    KCanvasController* canvasController = KoToolManager::instance()->activeCanvasController();
+    KCanvasController* canvasController = KToolManager::instance()->activeCanvasController();
     KSelection *selection = canvasController->canvas()->shapeManager()->selection();
     KShape * shape = selection->firstSelectedShape();
     if (! shape)

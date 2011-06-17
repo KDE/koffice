@@ -46,7 +46,7 @@ class KoZoomTool : public KInteractionTool
 {
 public:
     /**
-     * Create a new tool; typically not called by applications, only by the KoToolManager
+     * Create a new tool; typically not called by applications, only by the KToolManager
      * @param canvas the canvas this tool works for.
      */
     explicit KoZoomTool(KCanvasBase *canvas);

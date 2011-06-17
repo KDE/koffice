@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoToolManager_p.h"
+#include "KToolManager_p.h"
 
 #include <KShapeManager.h>
 #include <KSelection.h>
@@ -110,4 +110,4 @@ void Connector::selectionChanged()
     emit selectionChanged(m_shapeManager->selection()->selectedShapes());
 }
 
-#include <KoToolManager_p.moc>
+#include <KToolManager_p.moc>

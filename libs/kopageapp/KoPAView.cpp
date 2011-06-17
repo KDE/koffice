@@ -36,7 +36,7 @@
 #include <KColorBackground.h>
 #include <KoFind.h>
 #include <KTextDocumentLayout.h>
-#include <KoToolManager.h>
+#include <KToolManager.h>
 #include <KoToolProxy.h>
 #include <KoZoomHandler.h>
 #include <KoStandardAction.h>
@@ -158,7 +158,7 @@ KoPAView::KoPAView(KoPADocument *document, QWidget *parent)
 
 KoPAView::~KoPAView()
 {
-    KoToolManager::instance()->removeCanvasController(d->canvasController);
+    KToolManager::instance()->removeCanvasController(d->canvasController);
 
     removeStatusBarItem(d->status);
     removeStatusBarItem(d->zoomActionWidget);
@@ -182,8 +182,8 @@ void KoPAView::initGUI()
     KCanvasController *canvasController = new KCanvasController(this);
     d->canvasController = canvasController;
     d->canvasController->setCanvas(d->canvas);
-    KoToolManager::instance()->addController(d->canvasController);
-    KoToolManager::instance()->registerTools(actionCollection(), d->canvasController);
+    KToolManager::instance()->addController(d->canvasController);
+    KToolManager::instance()->registerTools(actionCollection(), d->canvasController);
 
     d->zoomController = new KoZoomController(d->canvasController, zoomHandler(), actionCollection());
     connect(d->zoomController, SIGNAL(zoomChanged(KoZoomMode::Mode, qreal)),
@@ -196,7 +196,7 @@ void KoPAView::initGUI()
     d->status->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
     d->status->setMinimumWidth(300);
     addStatusBarItem(d->status, 1);
-    connect(KoToolManager::instance(), SIGNAL(changedStatusText(const QString &)),
+    connect(KToolManager::instance(), SIGNAL(changedStatusText(const QString &)),
              d->status, SLOT(setText(const QString &)));
     d->zoomActionWidget = d->zoomAction->createWidget( statusBar());
     addStatusBarItem(d->zoomActionWidget, 0);
@@ -256,7 +256,7 @@ void KoPAView::initGUI()
         connect(d->documentStructureDocker, SIGNAL(pageChanged(KoPAPageBase*)), proxyObject, SLOT(updateActivePage(KoPAPageBase*)));
         connect(d->documentStructureDocker, SIGNAL(dockerReset()), this, SLOT(reinitDocumentDocker()));
 
-        KoToolManager::instance()->requestToolActivation(d->canvasController);
+        KToolManager::instance()->requestToolActivation(d->canvasController);
     }
 }
 
@@ -379,7 +379,7 @@ KoPAPageBase* KoPAView::activePage() const
 void KoPAView::updateReadWrite(bool readwrite)
 {
     d->canvas->setReadWrite(readwrite);
-    KoToolManager::instance()->updateReadWrite(d->canvasController, readwrite);
+    KToolManager::instance()->updateReadWrite(d->canvasController, readwrite);
 }
 
 KoRuler* KoPAView::horizontalRuler()
@@ -968,7 +968,7 @@ void KoPAView::findDocumentSetNext(QTextDocument * document)
             selection->deselectAll();
             selection->select(shape);
             // TODO can this be done nicer? is there a way to get the shape id and the tool id from the shape?
-            KoToolManager::instance()->switchToolRequested("TextToolFactory_ID");
+            KToolManager::instance()->switchToolRequested("TextToolFactory_ID");
             break;
         }
         else {
@@ -1023,7 +1023,7 @@ void KoPAView::findDocumentSetPrevious(QTextDocument * document)
             selection->deselectAll();
             selection->select(shape);
             // TODO can this be done nicer? is there a way to get the shape id and the tool id from the shape?
-            KoToolManager::instance()->switchToolRequested("TextToolFactory_ID");
+            KToolManager::instance()->switchToolRequested("TextToolFactory_ID");
             break;
         }
         else {

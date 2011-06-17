@@ -22,7 +22,7 @@
 #define _KO_TOOL_PROXY_H_
 
 #include <KoViewConverter.h>
-#include <KoToolManager.h>
+#include <KToolManager.h>
 #include "flake_export.h"
 
 #include <QPainter>

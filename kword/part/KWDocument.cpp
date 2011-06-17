@@ -50,7 +50,7 @@
 #include <KTextAnchor.h>
 #include <KShapeContainer.h>
 #include <KOdfWriteStore.h>
-#include <KoToolManager.h>
+#include <KToolManager.h>
 #include <KShapeRegistry.h>
 #include <KShapeFactoryBase.h>
 #include <KStyleManager.h>
@@ -266,13 +266,13 @@ KoView *KWDocument::createViewInstance(QWidget *parent)
             KSelection *selection = view->kwcanvas()->shapeManager()->selection();
             selection->select(fs->frames().first()->shape());
 
-            KoToolManager::instance()->switchToolRequested(
-                KoToolManager::instance()->preferredToolForSelection(selection->selectedShapes()));
+            KToolManager::instance()->switchToolRequested(
+                KToolManager::instance()->preferredToolForSelection(selection->selectedShapes()));
             switchToolCalled = true;
         }
     }
     if (!switchToolCalled)
-        KoToolManager::instance()->switchToolRequested(KoInteractionTool_ID);
+        KToolManager::instance()->switchToolRequested(KoInteractionTool_ID);
 
     return view;
 }

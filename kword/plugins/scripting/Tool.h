@@ -25,7 +25,7 @@
 #include <KAction>
 
 #include <kdebug.h>
-#include <KoToolManager.h>
+#include <KToolManager.h>
 #include <KoToolProxy.h>
 #include <KoTextEditor.h>
 #include <KWView.h>
@@ -73,7 +73,7 @@ public:
         }
         connect(m_signalMapper, SIGNAL(mapped(const QString&)), this, SIGNAL(actionTriggered(const QString&)));
 
-        connect(KoToolManager::instance(), SIGNAL(changedTool(KCanvasController*, int)), this, SIGNAL(changedTool()));
+        connect(KToolManager::instance(), SIGNAL(changedTool(KCanvasController*, int)), this, SIGNAL(changedTool()));
     }
     virtual ~Tool() {}
 

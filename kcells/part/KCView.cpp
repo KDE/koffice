@@ -95,7 +95,7 @@
 #include <KOdfStore.h>
 #include <KoToolBoxFactory.h>
 #include <KoDockerManager.h>
-#include <KoToolManager.h>
+#include <KToolManager.h>
 #include <KoToolRegistry.h>
 #include <KoTemplateCreateDia.h>
 #include <KOdfXmlNS.h>
@@ -642,7 +642,7 @@ KCView::~KCView()
     // on removeCanvasController and the proxytool which points to that TableTool later
     // while the canvasController is destroyed. That means, that we will have a dangling
     // pointer in the KoToolProxy that points to the KToolBase the time in between.
-    KoToolManager::instance()->removeCanvasController(d->canvasController);
+    KToolManager::instance()->removeCanvasController(d->canvasController);
     // NOTE Stefan: Delete the KCCanvas explicitly, even if it has this view as
     //              parent. Otherwise, it leads to crashes, because it tries to
     //              access this KCView in some events (Bug #126492).
@@ -712,8 +712,8 @@ void KCView::initView()
     if (shell())
     {
         // Setup the tool dock widget.
-        KoToolManager::instance()->addController(d->canvasController);
-        KoToolManager::instance()->registerTools(actionCollection(), d->canvasController);
+        KToolManager::instance()->addController(d->canvasController);
+        KToolManager::instance()->registerTools(actionCollection(), d->canvasController);
         KoToolBoxFactory toolBoxFactory(d->canvasController, i18n("Tools"));
         shell()->createDockWidget(&toolBoxFactory);
 
@@ -1105,7 +1105,7 @@ void KCView::finishLoading()
 
     // Activate the cell tool.
     if (shell())
-        KoToolManager::instance()->switchToolRequested("KCellsCellToolId");
+        KToolManager::instance()->switchToolRequested("KCellsCellToolId");
 }
 
 void KCView::updateReadWrite(bool readwrite)

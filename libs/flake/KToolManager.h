@@ -56,16 +56,16 @@ class KShapeLayer;
     MyGuiWidget::MyGuiWidget() {
         m_canvasController = new KCanvasController(this);
         m_canvasController->setCanvas(m_canvas);
-        KoToolManager::instance()->addControllers(m_canvasController));
+        KToolManager::instance()->addControllers(m_canvasController));
     }
     MyGuiWidget::~MyGuiWidget() {
-        KoToolManager::instance()->removeCanvasController(m_canvasController);
+        KToolManager::instance()->removeCanvasController(m_canvasController);
     }
 @endcode
  *
  * For a new view that extends KoView all you need to do is implement KoView::createToolBox()
  *
- * KoToolManager also keeps track of the current tool based on a
+ * KToolManager also keeps track of the current tool based on a
    complex set of conditions and heuristics:
 
    - there is one active tool per KCanvasController (and there is one KCanvasController
@@ -78,7 +78,7 @@ class KShapeLayer;
      we know what is what), the active pointing device is determined,
      and the active tool is set accordingly.
 
-   Nota bene: if you use KoToolManager and register your canvases with
+   Nota bene: if you use KToolManager and register your canvases with
    it you no longer have to manually implement methods to route mouse,
    tablet, key or wheel events to the active tool. In fact, it's no
    longer interesting to you which tool is active; you can safely
@@ -91,14 +91,14 @@ class KShapeLayer;
    the tool stuff.)
 
  */
-class FLAKE_EXPORT KoToolManager : public QObject
+class FLAKE_EXPORT KToolManager : public QObject
 {
     Q_OBJECT
 
 public:
     /// Return the toolmanager singleton
-    static KoToolManager* instance();
-    ~KoToolManager();
+    static KToolManager* instance();
+    ~KToolManager();
 
     /**
      * Register actions for switching to tools at the actionCollection parameter.
@@ -182,7 +182,7 @@ public:
     /**
      * \internal return the private object for the toolmanager.
      */
-    KoToolManager::Private *priv();
+    KToolManager::Private *priv();
 
     /// reimplemented from QObject
     virtual bool eventFilter(QObject *object, QEvent *event);
@@ -236,9 +236,9 @@ signals:
     void changedStatusText(const QString &statusText);
 
 private:
-    KoToolManager();
-    KoToolManager(const KoToolManager&);
-    KoToolManager operator=(const KoToolManager&);
+    KToolManager();
+    KToolManager(const KToolManager&);
+    KToolManager operator=(const KToolManager&);
 
     Q_PRIVATE_SLOT(d, void toolActivated(ToolHelper *tool))
     Q_PRIVATE_SLOT(d, void detachCanvas(KCanvasController *controller))

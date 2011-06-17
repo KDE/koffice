@@ -41,7 +41,7 @@ class FLAKE_EXPORT KCreateShapesTool : public KInteractionTool
 {
 public:
     /**
-     * Create a new tool; typically not called by applications, only by the KoToolManager
+     * Create a new tool; typically not called by applications, only by the KToolManager
      * @param canvas the canvas this tool works for.
      */
     explicit KCreateShapesTool(KCanvasBase *canvas);

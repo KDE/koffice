@@ -209,7 +209,7 @@ public slots:
      * Connect the ruler to a guides tool
      * This allows the user to drag a guide out of the ruler and get in one smooth operation
      * the guide tool to draw and position the guide line.
-     * @param canvas the canvas that has had the KoToolManager create the tool for previously.
+     * @param canvas the canvas that has had the KToolManager create the tool for previously.
      */
     void createGuideToolConnection(KCanvasBase *canvas);
 

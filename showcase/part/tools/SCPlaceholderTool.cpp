@@ -27,7 +27,7 @@
 #include <KShapeManager.h>
 #include <KShapeController.h>
 #include <KSelection.h>
-#include <KoToolManager.h>
+#include <KToolManager.h>
 
 #include "SCPlaceholderShape.h"
 
@@ -98,7 +98,7 @@ void SCPlaceholderTool::activate(ToolActivation toolActivation, const QSet<KShap
 
         // activate the correct tool for the shape
         canvas()->shapeManager()->selection()->select(newShape);
-        activateTool(KoToolManager::instance()->preferredToolForSelection(newShape->toolDelegates().toList()));
+        activateTool(KToolManager::instance()->preferredToolForSelection(newShape->toolDelegates().toList()));
     } else {
         // TODO show some dialog or popup to indicate to the user the reason of not continuing here.
         //  maybe we can investigate if we can avoid calling down two levels

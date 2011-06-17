@@ -31,7 +31,7 @@
 #include <KShapeLayer.h>
 #include <KShapeManager.h>
 #include <KoText.h>
-#include <KoToolManager.h>
+#include <KToolManager.h>
 #include <KoToolProxy.h>
 #include <KoZoomController.h>
 
@@ -193,8 +193,8 @@ void SCViewModeNotes::updateActivePage(KoPAPageBase *page)
     KSelection *selection = m_canvas->shapeManager()->selection();
     selection->select(notes->textShape());
     selection->setActiveLayer(layer);
-    QString tool = KoToolManager::instance()->preferredToolForSelection(selection->selectedShapes());
-    KoToolManager::instance()->switchToolRequested(tool);
+    QString tool = KToolManager::instance()->preferredToolForSelection(selection->selectedShapes());
+    KToolManager::instance()->switchToolRequested(tool);
 }
 
 void SCViewModeNotes::addShape(KShape *shape)

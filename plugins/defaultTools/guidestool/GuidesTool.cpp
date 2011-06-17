@@ -29,7 +29,7 @@
 #include <KResourceManager.h>
 #include <KoViewConverter.h>
 #include <KGuidesData.h>
-#include <KoToolManager.h>
+#include <KToolManager.h>
 
 #include <KDebug>
 
@@ -242,7 +242,7 @@ void GuidesTool::startGuideLineCreation(Qt::Orientation orientation, qreal posit
     m_position = position;
     m_mode = AddGuide;
 
-    KoToolManager::instance()->switchToolRequested(GuidesToolId);
+    KToolManager::instance()->switchToolRequested(GuidesToolId);
 }
 
 void GuidesTool::moveGuideLine(Qt::Orientation orientation, int index)

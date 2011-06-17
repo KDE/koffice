@@ -30,7 +30,7 @@
 #include "RefinePathPlugin.h"
 #include "KarbonPathRefineCommand.h"
 
-#include <KoToolManager.h>
+#include <KToolManager.h>
 #include <KCanvasController.h>
 #include <KCanvasBase.h>
 #include <KShapeManager.h>
@@ -63,7 +63,7 @@ RefinePathPlugin::RefinePathPlugin(QObject *parent, const QVariantList &) : Plug
 
 void RefinePathPlugin::slotRefinePath()
 {
-    KCanvasController* canvasController = KoToolManager::instance()->activeCanvasController();
+    KCanvasController* canvasController = KToolManager::instance()->activeCanvasController();
     KSelection *selection = canvasController->canvas()->shapeManager()->selection();
     KShape * shape = selection->firstSelectedShape();
     if (! shape)

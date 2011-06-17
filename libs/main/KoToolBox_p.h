@@ -46,7 +46,7 @@ class KShapeLayer;
  *
  * The unique property of this toolbox is that it can be shown horizontal as well as vertical,
  * rotating in a smart way to show the buttons optimally.
- * @see KoToolManager
+ * @see KToolManager
  */
 class KoToolBox : public QWidget {
     Q_OBJECT

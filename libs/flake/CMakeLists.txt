@@ -58,8 +58,8 @@ set(flake_SRCS
     KShapeLayer.cpp
     KPostscriptPaintDevice.cpp
     KInputDevice.cpp
-    KoToolManager_p.cpp
-    KoToolManager.cpp
+    KToolManager_p.cpp
+    KToolManager.cpp
     KoToolRegistry.cpp
     KoToolProxy.cpp
     KShapeSavingContext.cpp
@@ -296,7 +296,7 @@ install(
     KTextShapeDataBase.h
     KToolBase.h
     KToolFactoryBase.h
-    KoToolManager.h
+    KToolManager.h
     KoToolProxy.h
     KoToolRegistry.h
     KoToolSelection.h

@@ -24,7 +24,7 @@
 #include "KoPAPageBase.h"
 #include <KShapePainter.h>
 #include <KShapeManager.h>
-#include <KoToolManager.h>
+#include <KToolManager.h>
 #include <KCanvasBase.h>
 #include <KCanvasController.h>
 #include <KSelection.h>
@@ -186,7 +186,7 @@ QVariant KoPADocumentModel::data(const QModelIndex &index, int role) const
         }
         case ActiveRole:
         {
-            KCanvasController * canvasController = KoToolManager::instance()->activeCanvasController();
+            KCanvasController * canvasController = KToolManager::instance()->activeCanvasController();
             KSelection * selection = canvasController->canvas()->shapeManager()->selection();
             if(! selection)
                 return false;
@@ -260,7 +260,7 @@ bool KoPADocumentModel::setData(const QModelIndex &index, const QVariant &value,
         case ActiveRole:
             /* if (value.toBool())
             {
-                KCanvasController * canvasController = KoToolManager::instance()->activeCanvasController();
+                KCanvasController * canvasController = KToolManager::instance()->activeCanvasController();
                 KSelection * selection = canvasController->canvas()->shapeManager()->selection();
 
                 KShapeLayer *layer = dynamic_cast<KShapeLayer*>(shape);
@@ -500,7 +500,7 @@ bool KoPADocumentModel::dropMimeData(const QMimeData * data, Qt::DropAction acti
                 new KShapeUngroupCommand(shape->parent(), QList<KShape*>() << shape, QList<KShape*>(), cmd);
 
             new KShapeGroupCommand(group, toplevelShapes, cmd);
-            KCanvasController * canvasController = KoToolManager::instance()->activeCanvasController();
+            KCanvasController * canvasController = KToolManager::instance()->activeCanvasController();
             canvasController->canvas()->addCommand(cmd);
 
             endInsertRows();
@@ -534,7 +534,7 @@ bool KoPADocumentModel::dropMimeData(const QMimeData * data, Qt::DropAction acti
                 }
                 // shapes are dropped on a container, so add them to the container
                 new KShapeGroupCommand(container, toplevelShapes, clipped, inheritsTransform, cmd);
-                KCanvasController * canvasController = KoToolManager::instance()->activeCanvasController();
+                KCanvasController * canvasController = KToolManager::instance()->activeCanvasController();
                 canvasController->canvas()->addCommand(cmd);
 
                 endInsertRows();

@@ -25,7 +25,7 @@
 #include <KShapeManager.h>
 #include <KShapeBorderBase.h>
 #include <KShapeContainer.h>
-#include <KoToolManager.h>
+#include <KToolManager.h>
 #include <KCanvasBase.h>
 #include <KCanvasController.h>
 #include <KShapeControllerBase.h>
@@ -181,7 +181,7 @@ QVariant KarbonLayerModel::data(const QModelIndex &index, int role) const
     case Qt::EditRole: return shape->name();
     case Qt::SizeHintRole: return shape->size();
     case ActiveRole: {
-        KCanvasController * canvasController = KoToolManager::instance()->activeCanvasController();
+        KCanvasController * canvasController = KToolManager::instance()->activeCanvasController();
         KSelection * selection = canvasController->canvas()->shapeManager()->selection();
         if (! selection)
             return false;
@@ -244,7 +244,7 @@ bool KarbonLayerModel::setData(const QModelIndex &index, const QVariant &value, 
         setProperties(shape, value.value<PropertyList>());
         // fall through
     case ActiveRole: {
-        KCanvasController * canvasController = KoToolManager::instance()->activeCanvasController();
+        KCanvasController * canvasController = KToolManager::instance()->activeCanvasController();
         KSelection * selection = canvasController->canvas()->shapeManager()->selection();
 
         KShapeLayer *layer = dynamic_cast<KShapeLayer*>(shape);
@@ -468,7 +468,7 @@ bool KarbonLayerModel::dropMimeData(const QMimeData * data, Qt::DropAction actio
             new KShapeUngroupCommand(shape->parent(), QList<KShape*>() << shape, QList<KShape*>(), cmd);
 
             new KShapeGroupCommand(group, toplevelShapes, cmd);
-            KCanvasController * canvasController = KoToolManager::instance()->activeCanvasController();
+            KCanvasController * canvasController = KToolManager::instance()->activeCanvasController();
             canvasController->canvas()->addCommand(cmd);
 
             endInsertRows();
@@ -500,7 +500,7 @@ bool KarbonLayerModel::dropMimeData(const QMimeData * data, Qt::DropAction actio
 
                 // shapes are dropped on a container, so add them to the container
                 new KShapeGroupCommand(container, toplevelShapes, clipped, inheritsTransform, cmd);
-                KCanvasController * canvasController = KoToolManager::instance()->activeCanvasController();
+                KCanvasController * canvasController = KToolManager::instance()->activeCanvasController();
                 canvasController->canvas()->addCommand(cmd);
 
                 endInsertRows();

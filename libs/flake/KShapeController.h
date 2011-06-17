@@ -45,7 +45,7 @@ class FLAKE_EXPORT KShapeController
 {
 public:
     /**
-     * Create a new Controller; typically not called by applications, only by the KoToolManager
+     * Create a new Controller; typically not called by applications, only by the KToolManager
      * @param canvas the canvas this controller works for.
      * @param shapeController the application provided shapeControllerBase that we can call.
      */

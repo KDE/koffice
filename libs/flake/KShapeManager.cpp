@@ -23,7 +23,7 @@
 #include "KShapeManager.h"
 #include "KShapeManager_p.h"
 #include "KSelection.h"
-#include "KoToolManager.h"
+#include "KToolManager.h"
 #include "KPointerEvent.h"
 #include "KCanvasBase.h"
 #include "KShapeContainer.h"
@@ -617,8 +617,8 @@ void KShapeManager::suggestChangeTool(KPointerEvent *event)
             }
         }
     }
-    KoToolManager::instance()->switchToolRequested(
-        KoToolManager::instance()->preferredToolForSelection(shapes2));
+    KToolManager::instance()->switchToolRequested(
+        KToolManager::instance()->preferredToolForSelection(shapes2));
 }
 
 void KShapeManager::setPaintingStrategy(KShapeManagerPaintingStrategy *strategy)

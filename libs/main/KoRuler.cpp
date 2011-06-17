@@ -25,7 +25,7 @@
 
 #include "KoRuler_p.h"
 #include <KToolBase.h>
-#include <KoToolManager.h>
+#include <KToolManager.h>
 
 #include <klocale.h>
 #include <kdebug.h>
@@ -1205,7 +1205,7 @@ bool KoRuler::removeHotSpot(int id)
 void KoRuler::createGuideToolConnection(KCanvasBase *canvas)
 {
     Q_ASSERT(canvas);
-    KToolBase *tool = KoToolManager::instance()->toolById(canvas, QLatin1String("GuidesTool_ID"));
+    KToolBase *tool = KToolManager::instance()->toolById(canvas, QLatin1String("GuidesTool_ID"));
     if (tool == 0) {
         kWarning(30003) << "No guides tool found, skipping connection";
         return;

@@ -31,7 +31,7 @@
 #include "KCanvasBase.h"
 #include "KCanvasObserverBase.h"
 #include "KCanvasSupervisor.h"
-#include "KoToolManager_p.h"
+#include "KToolManager_p.h"
 
 #include <ksharedconfig.h>
 #include <KDebug>
@@ -573,7 +573,7 @@ void KCanvasController::dragLeaveEvent(QDragLeaveEvent *event)
 
 void KCanvasController::keyPressEvent(QKeyEvent *event)
 {
-    KoToolManager::instance()->priv()->switchToolByShortcut(event);
+    KToolManager::instance()->priv()->switchToolByShortcut(event);
 }
 
 void KCanvasController::wheelEvent(QWheelEvent *event)

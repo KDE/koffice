@@ -225,16 +225,16 @@ public:
     /**
      * Calling this will turn the canvas into a read/write or a read-only canvas.
      * Note that upon calling this method no actions will be enabled/disabled
-     * as that is the responsibility of the KoToolManager. The KoToolManager
+     * as that is the responsibility of the KToolManager. The KToolManager
      * should use this variable at next tool switch.
      *
-     * @see KoToolManager::updateReadWrite(), isReadWrite()
+     * @see KToolManager::updateReadWrite(), isReadWrite()
      */
     void setReadWrite(bool readWrite);
 
     /**
      * @return returns true if this canvas is marked as allowing content changing actions
-     * @see setReadWrite(), KoToolManager::updateReadWrite()
+     * @see setReadWrite(), KToolManager::updateReadWrite()
      */
     bool isReadWrite() const;
 

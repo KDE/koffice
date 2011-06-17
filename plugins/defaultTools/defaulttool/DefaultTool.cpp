@@ -36,7 +36,7 @@
 #include <KPointerEvent.h>
 #include <KShapeConnection.h>
 #include <KoToolSelection.h>
-#include <KoToolManager.h>
+#include <KToolManager.h>
 #include <KGuidesData.h>
 #include <KShapeController.h>
 #include <KShapeManager.h>
@@ -534,7 +534,7 @@ void DefaultTool::mouseMoveEvent(KPointerEvent *event)
             m_mouseWasInsideHandles = false;
 
             if (m_guideLine->isSelected()) {
-                GuidesTool *guidesTool = dynamic_cast<GuidesTool*>(KoToolManager::instance()->toolById(canvas(), GuidesToolId));
+                GuidesTool *guidesTool = dynamic_cast<GuidesTool*>(KToolManager::instance()->toolById(canvas(), GuidesToolId));
                 if (guidesTool) {
                     guidesTool->moveGuideLine(m_guideLine->orientation(), m_guideLine->index());
                     activateTemporary(guidesTool->toolId());
@@ -545,7 +545,7 @@ void DefaultTool::mouseMoveEvent(KPointerEvent *event)
         }
     } else {
         if (m_guideLine->isSelected()) {
-            GuidesTool *guidesTool = dynamic_cast<GuidesTool*>(KoToolManager::instance()->toolById(canvas(), GuidesToolId));
+            GuidesTool *guidesTool = dynamic_cast<GuidesTool*>(KToolManager::instance()->toolById(canvas(), GuidesToolId));
             if (guidesTool) {
                 guidesTool->moveGuideLine(m_guideLine->orientation(), m_guideLine->index());
                 activateTemporary(guidesTool->toolId());
@@ -636,7 +636,7 @@ void DefaultTool::mouseDoubleClickEvent(KPointerEvent *event)
         if (shape) {
             shapes.append(shape);
         } else if (m_guideLine->isSelected()) {
-            GuidesTool *guidesTool = dynamic_cast<GuidesTool*>(KoToolManager::instance()->toolById(canvas(), GuidesToolId));
+            GuidesTool *guidesTool = dynamic_cast<GuidesTool*>(KToolManager::instance()->toolById(canvas(), GuidesToolId));
             if (guidesTool) {
                 guidesTool->editGuideLine(m_guideLine->orientation(), m_guideLine->index());
                 activateTool(guidesTool->toolId());
@@ -658,8 +658,8 @@ void DefaultTool::mouseDoubleClickEvent(KPointerEvent *event)
     }
 
 
-    KoToolManager::instance()->switchToolRequested(
-            KoToolManager::instance()->preferredToolForSelection(shapes2));
+    KToolManager::instance()->switchToolRequested(
+            KToolManager::instance()->preferredToolForSelection(shapes2));
 }
 
 bool DefaultTool::moveSelection(int direction, Qt::KeyboardModifiers modifiers)

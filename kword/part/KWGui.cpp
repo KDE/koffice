@@ -25,7 +25,7 @@
 #include "KWPage.h"
 
 #include <KCanvasController.h>
-#include <KoToolManager.h>
+#include <KToolManager.h>
 #include <KShapeManager.h>
 #include <KShape.h>
 #include <KoFlake.h>
@@ -64,8 +64,8 @@ KWGui::KWGui(const QString &viewMode, KWView *parent)
     m_canvasController->setMargin(10);
     m_canvasController->setCanvas(m_canvas);
     m_canvasController->setCanvasMode(KCanvasController::AlignTop);
-    KoToolManager::instance()->addController(m_canvasController);
-    KoToolManager::instance()->registerTools(m_view->actionCollection(), m_canvasController);
+    KToolManager::instance()->addController(m_canvasController);
+    KToolManager::instance()->registerTools(m_view->actionCollection(), m_canvasController);
 
     if (m_view->shell()) {
         KoToolBoxFactory toolBoxFactory(m_canvasController, "KWord");
@@ -104,7 +104,7 @@ KWGui::KWGui(const QString &viewMode, KWView *parent)
 
 KWGui::~KWGui()
 {
-    KoToolManager::instance()->removeCanvasController(m_canvasController);
+    KToolManager::instance()->removeCanvasController(m_canvasController);
 }
 
 int KWGui::visibleWidth() const
