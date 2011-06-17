@@ -29,10 +29,10 @@
 #include <QTextDocument>
 #include <QTextInlineObject>
 
-class KoVariablePrivate : public KInlineObjectPrivate
+class KVariablePrivate : public KInlineObjectPrivate
 {
 public:
-    KoVariablePrivate(KVariable *qq)
+    KVariablePrivate(KVariable *qq)
         : KInlineObjectPrivate(qq),
         modified(true)
     {
@@ -51,7 +51,7 @@ public:
 };
 
 KVariable::KVariable(bool propertyChangeListener)
-        : KInlineObject(*(new KoVariablePrivate(this)), propertyChangeListener)
+        : KInlineObject(*(new KVariablePrivate(this)), propertyChangeListener)
 {
 }
 

@@ -35,7 +35,7 @@ class KShapeLoadingContext;
 class KProperties;
 class QWidget;
 class KVariableManager;
-class KoVariablePrivate;
+class KVariablePrivate;
 
 /**
  * Base class for in-text variables.
