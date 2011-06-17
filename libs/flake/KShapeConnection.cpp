@@ -493,7 +493,9 @@ QPointF KShapeConnection::endPoint() const
 
 QRectF KShapeConnection::boundingRect() const
 {
-    return d->connectionStrategy->boundingRect();
+    if (d->connectionStrategy)
+        return d->connectionStrategy->boundingRect();
+    return QRectF();
 }
 
 void KShapeConnection::setStartPoint(const QPointF &point)
