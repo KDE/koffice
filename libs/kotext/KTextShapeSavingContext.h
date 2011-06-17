@@ -29,7 +29,7 @@ class KOdfGenericChanges;
 /**
  * The set of data for the ODF file format used during saving of a shape.
  */
-class KOTEXT_EXPORT KoTextShapeSavingContext : public KShapeSavingContext
+class KOTEXT_EXPORT KTextShapeSavingContext : public KShapeSavingContext
 {
 public:
 
@@ -40,9 +40,9 @@ public:
      * @param embeddedSaver for saving embedded documents
      * @param changes for saving the tracked changes
      */
-    KoTextShapeSavingContext(KXmlWriter &xmlWriter, KOdfGenericStyles& mainStyles,
+    KTextShapeSavingContext(KXmlWriter &xmlWriter, KOdfGenericStyles& mainStyles,
                          KOdfEmbeddedDocumentSaver& embeddedSaver, KOdfGenericChanges& changes);
-    virtual ~KoTextShapeSavingContext();
+    virtual ~KTextShapeSavingContext();
 
     /**
      * @brief Get the changes (tracked)

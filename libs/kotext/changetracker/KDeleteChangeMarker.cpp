@@ -23,7 +23,7 @@
 #include <KTextDocument.h>
 #include <KXmlReader.h>
 #include <KXmlWriter.h>
-#include <KoTextShapeSavingContext.h>
+#include <KTextShapeSavingContext.h>
 #include <KShapeLoadingContext.h>
 #include <opendocument/KoTextSharedSavingData.h>
 #include "KChangeTrackerElement.h"

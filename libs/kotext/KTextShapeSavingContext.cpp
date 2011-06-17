@@ -17,24 +17,24 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KoTextShapeSavingContext.h"
+#include "KTextShapeSavingContext.h"
 
 #include <KOdfGenericChanges.h>
 
 #include <kdebug.h>
 
-KoTextShapeSavingContext::KoTextShapeSavingContext(KXmlWriter &xmlWriter, KOdfGenericStyles& mainStyles,
+KTextShapeSavingContext::KTextShapeSavingContext(KXmlWriter &xmlWriter, KOdfGenericStyles& mainStyles,
         KOdfEmbeddedDocumentSaver& embeddedSaver, KOdfGenericChanges& changes)
         : KShapeSavingContext(xmlWriter, mainStyles, embeddedSaver)
     , m_changes(changes)
 {
 }
 
-KoTextShapeSavingContext::~KoTextShapeSavingContext()
+KTextShapeSavingContext::~KTextShapeSavingContext()
 {
 }
 
-KOdfGenericChanges & KoTextShapeSavingContext::changes()
+KOdfGenericChanges & KTextShapeSavingContext::changes()
 {
     return m_changes;
 }
