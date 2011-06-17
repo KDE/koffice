@@ -22,36 +22,36 @@
 #include <QVariant>
 #include <QMap>
 
-KoTableFormatPrivate::KoTableFormatPrivate()
+KTableFormatPrivate::KTableFormatPrivate()
 {
 }
 
-KoTableFormatPrivate::KoTableFormatPrivate(const KoTableFormatPrivate &rhs) :
+KTableFormatPrivate::KTableFormatPrivate(const KTableFormatPrivate &rhs) :
     QSharedData(rhs), m_stylesPrivate(rhs.m_stylesPrivate)
 {
 }
 
-QVariant KoTableFormatPrivate::property(int propertyId) const
+QVariant KTableFormatPrivate::property(int propertyId) const
 {
     return m_stylesPrivate.value(propertyId);
 }
 
-void KoTableFormatPrivate::setProperty(int propertyId, const QVariant &value)
+void KTableFormatPrivate::setProperty(int propertyId, const QVariant &value)
 {
     m_stylesPrivate.add(propertyId, value);
 }
 
-bool KoTableFormatPrivate::hasProperty(int propertyId) const
+bool KTableFormatPrivate::hasProperty(int propertyId) const
 {
     return m_stylesPrivate.contains(propertyId);
 }
 
-void KoTableFormatPrivate::clearProperty(int propertyId)
+void KTableFormatPrivate::clearProperty(int propertyId)
 {
     m_stylesPrivate.remove(propertyId);
 }
 
-QMap<int, QVariant> KoTableFormatPrivate::properties() const
+QMap<int, QVariant> KTableFormatPrivate::properties() const
 {
     QMap<int, QVariant> map;
     foreach (int key, m_stylesPrivate.keys()) {

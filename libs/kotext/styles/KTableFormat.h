@@ -24,7 +24,7 @@
 #include <QSharedDataPointer>
 #include <QMap>
 
-class KoTableFormatPrivate;
+class KTableFormatPrivate;
 
 class QVariant;
 class QString;
@@ -75,7 +75,7 @@ public:
     QBrush brushProperty(int propertyId) const;
 
 private:
-    QSharedDataPointer<KoTableFormatPrivate> d; // Shared data pointer.
+    QSharedDataPointer<KTableFormatPrivate> d; // Shared data pointer.
 };
 
 #endif // KOTABLEFORMAT_H

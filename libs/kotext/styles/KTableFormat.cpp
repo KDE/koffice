@@ -25,7 +25,7 @@
 #include <QBrush>
 
 KTableFormat::KTableFormat() :
-    d(new KoTableFormatPrivate())
+    d(new KTableFormatPrivate())
 {
 }
 

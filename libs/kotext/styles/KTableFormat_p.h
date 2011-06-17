@@ -42,13 +42,13 @@
  * This class essentially just wraps StylePrivate and provides a
  * property API.
  */
-class KoTableFormatPrivate : public QSharedData
+class KTableFormatPrivate : public QSharedData
 {
 public:
     /// Constructor.
-    KoTableFormatPrivate();
+    KTableFormatPrivate();
     /// Copy constructor.
-    KoTableFormatPrivate(const KoTableFormatPrivate &rhs);
+    KTableFormatPrivate(const KTableFormatPrivate &rhs);
 
     /// Set property \a propertyId to \a value.
     void setProperty(int propertyId, const QVariant &value);
