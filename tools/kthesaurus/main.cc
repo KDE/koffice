@@ -31,7 +31,7 @@
 #include <KResourceManager.h>
 #include <KoTextEditingPlugin.h>
 #include <KoTextEditingRegistry.h>
-#include <KoTextEditingFactory.h>
+#include <KTextEditingFactory.h>
 
 extern "C" KDE_EXPORT int kdemain(int argc, char **argv)
 {
@@ -50,7 +50,7 @@ extern "C" KDE_EXPORT int kdemain(int argc, char **argv)
     KResourceManager *rm = new KResourceManager(&a);
 
     foreach (const QString &key, KoTextEditingRegistry::instance()->keys()) {
-        KoTextEditingFactory *factory =  KoTextEditingRegistry::instance()->value(key);
+        KTextEditingFactory *factory =  KoTextEditingRegistry::instance()->value(key);
         Q_ASSERT(factory);
         if (factory->id() == "thesaurustool") {
             kDebug() <<"Thesaurus plugin found, creating...";

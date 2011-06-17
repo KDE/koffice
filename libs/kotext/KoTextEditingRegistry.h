@@ -21,7 +21,7 @@
 #define KOTEXTEDITINGREGISTRY_H
 
 #include <KGenericRegistry.h>
-#include <KoTextEditingFactory.h>
+#include <KTextEditingFactory.h>
 #include <QObject>
 
 /**
@@ -31,10 +31,10 @@
  * including altering it and adding markup. The plugin gives events when a
  * word and when a paragraph has been finished. Which is ideal for autocorrection
  * and autoreplacement of text.
- * @see KoTextEditingFactory
+ * @see KTextEditingFactory
  * @see KoTextEditingPlugin
  */
-class KOTEXT_EXPORT KoTextEditingRegistry : public QObject,  public KGenericRegistry<KoTextEditingFactory*>
+class KOTEXT_EXPORT KoTextEditingRegistry : public QObject,  public KGenericRegistry<KTextEditingFactory*>
 {
     Q_OBJECT
 public:

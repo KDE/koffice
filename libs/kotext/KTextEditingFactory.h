@@ -33,7 +33,7 @@ class KResourceManager;
  * allow the creation of the text-editing-class from that plugin.
  * @see KoTextEditingRegistry
  */
-class KOTEXT_EXPORT KoTextEditingFactory : public QObject
+class KOTEXT_EXPORT KTextEditingFactory : public QObject
 {
     Q_OBJECT
 public:
@@ -42,8 +42,8 @@ public:
      * @param parent the parent QObject for memory management usage.
      * @param id a string that will be used internally for referencing the variable-type.
      */
-    KoTextEditingFactory(QObject *parent, const QString &id);
-    virtual ~KoTextEditingFactory();
+    KTextEditingFactory(QObject *parent, const QString &id);
+    virtual ~KTextEditingFactory();
 
     /**
      * Factory method for the KoTextEditingPlugin.

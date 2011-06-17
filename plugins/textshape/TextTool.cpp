@@ -356,7 +356,7 @@ TextTool::TextTool(KCanvasBase *canvas)
     list.append(this->action("text_default"));
     list.append(this->action("format_font"));
     foreach (const QString &key, KoTextEditingRegistry::instance()->keys()) {
-        KoTextEditingFactory *factory =  KoTextEditingRegistry::instance()->value(key);
+        KTextEditingFactory *factory =  KoTextEditingRegistry::instance()->value(key);
         if (factory->showInMenu()) {
             KAction *a = new KAction(i18n("Apply %1", factory->title()), this);
             connect(a, SIGNAL(triggered()), signalMapper, SLOT(map()));

@@ -17,9 +17,9 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoTextEditingFactory.h"
+#include "KTextEditingFactory.h"
 
-class KoTextEditingFactory::Private
+class KTextEditingFactory::Private
 {
 public:
     Private(const QString &identifier)
@@ -32,40 +32,40 @@ public:
     QString title;
 };
 
-KoTextEditingFactory::KoTextEditingFactory(QObject *parent, const QString &id)
+KTextEditingFactory::KTextEditingFactory(QObject *parent, const QString &id)
         : QObject(parent)
         , d(new Private(id))
 {
 }
 
-KoTextEditingFactory::~KoTextEditingFactory()
+KTextEditingFactory::~KTextEditingFactory()
 {
     delete d;
 }
 
-QString KoTextEditingFactory::id() const
+QString KTextEditingFactory::id() const
 {
     return d->id;
 }
 
-bool KoTextEditingFactory::showInMenu() const
+bool KTextEditingFactory::showInMenu() const
 {
     return d->showInMenu;
 }
 
-void KoTextEditingFactory::setShowInMenu(bool show)
+void KTextEditingFactory::setShowInMenu(bool show)
 {
     d->showInMenu = show;
 }
 
-QString KoTextEditingFactory::title() const
+QString KTextEditingFactory::title() const
 {
     return d->title;
 }
 
-void KoTextEditingFactory::setTitle(const QString &title)
+void KTextEditingFactory::setTitle(const QString &title)
 {
     d->title = title;
 }
 
-#include <KoTextEditingFactory.moc>
+#include <KTextEditingFactory.moc>
