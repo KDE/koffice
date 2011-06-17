@@ -21,7 +21,7 @@
 #include "styles/KParagraphStyle.h"
 #include "styles/KListStyle.h"
 #include "styles/KListLevelProperties.h"
-#include "KoTextBlockBorderData.h"
+#include "KTextBlockBorderData.h"
 #include "KoTextDocument.h"
 #include "styles/KStyleManager.h"
 

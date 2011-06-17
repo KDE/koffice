@@ -19,7 +19,7 @@
  */
 
 #include "KoTextBlockData.h"
-#include "KoTextBlockBorderData.h"
+#include "KTextBlockBorderData.h"
 #include "KoTextBlockPaintStrategyBase.h"
 
 class KoTextBlockData::Private
@@ -47,7 +47,7 @@ public:
     bool counterIsImage;
     int counterIndex;
     QPointF counterPos;
-    KoTextBlockBorderData *border;
+    KTextBlockBorderData *border;
     KoTextBlockPaintStrategyBase *paintStrategy;
 };
 
@@ -72,7 +72,7 @@ qreal KoTextBlockData::counterWidth() const
     return qMax(qreal(0), d->counterWidth);
 }
 
-void KoTextBlockData::setBorder(KoTextBlockBorderData *border)
+void KoTextBlockData::setBorder(KTextBlockBorderData *border)
 {
     if (d->border && !d->border->deref())
         delete d->border;
@@ -146,7 +146,7 @@ QPointF KoTextBlockData::counterPosition() const
     return d->counterPos;
 }
 
-KoTextBlockBorderData *KoTextBlockData::border() const
+KTextBlockBorderData *KoTextBlockData::border() const
 {
     return d->border;
 }

@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoTextBlockBorderData.h"
+#include "KTextBlockBorderData.h"
 
 #include <kdebug.h>
 
@@ -28,7 +28,7 @@ struct Edge {
     qreal distance;
 };
 
-class KoTextBlockBorderData::Private
+class KTextBlockBorderData::Private
 {
 public:
     Private() : refCount(0) {}
@@ -38,18 +38,18 @@ public:
     QAtomicInt refCount;
 };
 
-KoTextBlockBorderData::KoTextBlockBorderData(const QRectF &paragRect)
+KTextBlockBorderData::KTextBlockBorderData(const QRectF &paragRect)
         : d(new Private())
 {
     d->bounds = paragRect;
 }
 
-KoTextBlockBorderData::~KoTextBlockBorderData()
+KTextBlockBorderData::~KTextBlockBorderData()
 {
     delete d;
 }
 
-KoTextBlockBorderData::KoTextBlockBorderData(const KoTextBlockBorderData &other)
+KTextBlockBorderData::KTextBlockBorderData(const KTextBlockBorderData &other)
         : d(new Private())
 {
     for (int i = Top; i <= Right; i++)
@@ -57,7 +57,7 @@ KoTextBlockBorderData::KoTextBlockBorderData(const KoTextBlockBorderData &other)
     d->bounds = other.d->bounds;
 }
 
-bool KoTextBlockBorderData::hasBorders() const
+bool KTextBlockBorderData::hasBorders() const
 {
     for (int i = Top; i <= Right; i++)
         if (d->edges[i].outerPen.widthF() > 0.0)
@@ -65,11 +65,11 @@ bool KoTextBlockBorderData::hasBorders() const
     return false;
 }
 
-bool KoTextBlockBorderData::operator==(const KoTextBlockBorderData &border)
+bool KTextBlockBorderData::operator==(const KTextBlockBorderData &border)
 {
     return equals(border);
 }
-bool KoTextBlockBorderData::equals(const KoTextBlockBorderData &border)
+bool KTextBlockBorderData::equals(const KTextBlockBorderData &border)
 {
     for (int i = Top; i <= Right; i++) {
         if (d->edges[i].outerPen != border.d->edges[i].outerPen)
@@ -82,7 +82,7 @@ bool KoTextBlockBorderData::equals(const KoTextBlockBorderData &border)
     return true;
 }
 
-void KoTextBlockBorderData::applyInsets(KoInsets &insets, qreal paragStart, bool startUnderBorder) const
+void KTextBlockBorderData::applyInsets(KoInsets &insets, qreal paragStart, bool startUnderBorder) const
 {
     insets.left += inset(Left);
     insets.right += inset(Right);
@@ -93,12 +93,12 @@ void KoTextBlockBorderData::applyInsets(KoInsets &insets, qreal paragStart, bool
         insets.top += startUnderBorder ? insetTop : inset(Top);
 }
 
-void KoTextBlockBorderData::setParagraphBottom(qreal bottom)
+void KTextBlockBorderData::setParagraphBottom(qreal bottom)
 {
     d->bounds.setBottom(bottom + inset(Bottom));
 }
 
-void KoTextBlockBorderData::paint(QPainter &painter) const
+void KTextBlockBorderData::paint(QPainter &painter) const
 {
     QRectF bounds = d->bounds;
     QRectF innerBounds = d->bounds;
@@ -158,12 +158,12 @@ void KoTextBlockBorderData::paint(QPainter &painter) const
     }
 }
 
-qreal KoTextBlockBorderData::inset(Side side) const
+qreal KTextBlockBorderData::inset(Side side) const
 {
     return d->edges[side].outerPen.widthF() + d->edges[side].distance + d->edges[side].innerPen.widthF();
 }
 
-void KoTextBlockBorderData::setEdge(Side side, const QTextBlockFormat &bf,
+void KTextBlockBorderData::setEdge(Side side, const QTextBlockFormat &bf,
                                     KParagraphStyle::Property style, KParagraphStyle::Property width,
                                     KParagraphStyle::Property color, KParagraphStyle::Property space,
                                     KParagraphStyle::Property innerWidth)
@@ -196,22 +196,22 @@ void KoTextBlockBorderData::setEdge(Side side, const QTextBlockFormat &bf,
     d->edges[side] = edge;
 }
 
-bool KoTextBlockBorderData::ref()
+bool KTextBlockBorderData::ref()
 {
     return d->refCount.ref();
 }
 
-bool KoTextBlockBorderData::deref()
+bool KTextBlockBorderData::deref()
 {
     return d->refCount.deref();
 }
 
-int KoTextBlockBorderData::useCount() const
+int KTextBlockBorderData::useCount() const
 {
     return d->refCount;
 }
 
-QRectF KoTextBlockBorderData::rect() const
+QRectF KTextBlockBorderData::rect() const
 {
     return d->bounds;
 }

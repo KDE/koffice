@@ -24,7 +24,7 @@
 
 #include "kotext_export.h"
 
-class KoTextBlockBorderData;
+class KTextBlockBorderData;
 class KoTextBlockPaintStrategyBase;
 
 /**
@@ -108,15 +108,15 @@ public:
     QPointF counterPosition() const;
 
     /**
-     * When a paragraph has a border, it will have a KoTextBlockBorderData instance.
+     * When a paragraph has a border, it will have a KTextBlockBorderData instance.
      * Adding the border will increase the refcount.
      * @param border the border used for this paragraph, or 0 if no border is needed (anymore).
      */
-    void setBorder(KoTextBlockBorderData *border);
+    void setBorder(KTextBlockBorderData *border);
     /**
      * Return the border associated with this paragraph, or 0 if there is no border set.
      */
-    KoTextBlockBorderData *border() const;
+    KTextBlockBorderData *border() const;
 
     /**
      * sets a paintStrategy of this paragraph

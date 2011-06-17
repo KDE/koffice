@@ -7,7 +7,7 @@ set(kotext_LIB_SRCS
     KoTextShapeData.cpp
     KoText.cpp
     KoTextBlockData.cpp
-    KoTextBlockBorderData.cpp
+    KTextBlockBorderData.cpp
     KoTextBlockPaintStrategyBase.cpp
     KoTextDocumentLayout.cpp
     KoTextOdfSaveHelper.cpp
@@ -126,7 +126,7 @@ install(
     KoBookmarkManager.h
     KInlineTextObjectManager.h
     KTextAnchor.h
-    KoTextBlockBorderData.h
+    KTextBlockBorderData.h
     KoTextBlockData.h
     KoTextDocument.h
     KoText.h

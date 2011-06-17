@@ -35,7 +35,7 @@
  * to allow multiple paragraphs to share one border.
  *
  */
-class KOTEXT_EXPORT KoTextBlockBorderData
+class KOTEXT_EXPORT KTextBlockBorderData
 {
 public:
     /// Enum used to differentiate between the 4 types of borders this class maintains
@@ -52,15 +52,15 @@ public:
      * @param paragRect the rectangle that will be used to paint the border inside of.
      * @see setEdge() to set the actual border properties.
      */
-    explicit KoTextBlockBorderData(const QRectF &paragRect);
+    explicit KTextBlockBorderData(const QRectF &paragRect);
 
     /**
      * Copy constructor for the border data.
      * @param other the original object which will be duplicated.
      */
-    explicit KoTextBlockBorderData(const KoTextBlockBorderData &other);
+    explicit KTextBlockBorderData(const KTextBlockBorderData &other);
 
-    ~KoTextBlockBorderData();
+    ~KTextBlockBorderData();
 
     /**
      * Increments the use-value.
@@ -123,8 +123,8 @@ public:
     qreal inset(Side side) const;
 
     /// returns true if the borders of param border are the same as this one.
-    bool operator==(const KoTextBlockBorderData &border);
-    bool equals(const KoTextBlockBorderData &border);
+    bool operator==(const KTextBlockBorderData &border);
+    bool equals(const KTextBlockBorderData &border);
 
     /**
      * Paint the borders.

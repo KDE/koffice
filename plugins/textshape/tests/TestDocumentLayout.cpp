@@ -24,7 +24,7 @@
 #include <KListLevelProperties.h>
 #include <KStyleManager.h>
 #include <KoTextBlockData.h>
-#include <KoTextBlockBorderData.h>
+#include <KTextBlockBorderData.h>
 #include <KoTextDocument.h>
 
 #include <QtGui>
@@ -690,7 +690,7 @@ void TestDocumentLayout::testParagraphBorders()
     block = m_doc->begin();
     KoTextBlockData *data  = dynamic_cast<KoTextBlockData*>(block.userData());
     QVERIFY(data);
-    KoTextBlockBorderData *border = data->border();
+    KTextBlockBorderData *border = data->border();
     QVERIFY(border);
     QCOMPARE(border->hasBorders(), true);
     QRectF borderOutline = border->rect();
@@ -763,7 +763,7 @@ void TestDocumentLayout::testBorderData()
     block = m_doc->begin().next();
     KoTextBlockData *data = dynamic_cast<KoTextBlockData*>(block.userData());
     QVERIFY(data);
-    KoTextBlockBorderData *border = data->border();
+    KTextBlockBorderData *border = data->border();
     QVERIFY(border);
     // 1st parag is 12 * 120% = 14.4 tall.
     // 2nd parag starts with 10 pt offset = 24.4

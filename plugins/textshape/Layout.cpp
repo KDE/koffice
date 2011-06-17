@@ -38,7 +38,7 @@
 #include <KTableColumnAndRowStyleManager.h>
 #include <KStyleManager.h>
 #include <KoTextBlockData.h>
-#include <KoTextBlockBorderData.h>
+#include <KTextBlockBorderData.h>
 #include <KInlineNote.h>
 #include <KInlineTextObjectManager.h>
 #include <KShape.h>
@@ -976,7 +976,7 @@ void Layout::resetPrivate()
                 // in case this parag has a border we have to subtract that as well
                 m_blockData = dynamic_cast<KoTextBlockData*>(m_block.userData());
                 if (m_blockData && m_blockData->border()) {
-                    qreal top = m_blockData->border()->inset(KoTextBlockBorderData::Top);
+                    qreal top = m_blockData->border()->inset(KTextBlockBorderData::Top);
                     // but only when this border actually makes us have an indent.
                     if (qAbs(m_blockData->border()->rect().top() + top - m_y) < 1E-10)
                         m_y -= top;
@@ -1017,7 +1017,7 @@ void Layout::updateBorders()
 {
     Q_ASSERT(m_data);
     m_borderInsets = m_data->shapeMargins();
-    KoTextBlockBorderData border(QRectF(this->x() - resolveTextIndent() - listIndent(), m_y + m_borderInsets.top, width() + resolveTextIndent(), 1));
+    KTextBlockBorderData border(QRectF(this->x() - resolveTextIndent() - listIndent(), m_y + m_borderInsets.top, width() + resolveTextIndent(), 1));
     border.setEdge(border.Left, m_format, KParagraphStyle::LeftBorderStyle,
                    KParagraphStyle::LeftBorderWidth, KParagraphStyle::LeftBorderColor,
                    KParagraphStyle::LeftBorderSpacing, KParagraphStyle::LeftInnerBorderWidth);
@@ -1033,7 +1033,7 @@ void Layout::updateBorders()
 
     // check if prev parag had a border.
     QTextBlock prev = m_block.previous();
-    KoTextBlockBorderData *prevBorder = 0;
+    KTextBlockBorderData *prevBorder = 0;
     if (prev.isValid()) {
         KoTextBlockData *bd = dynamic_cast<KoTextBlockData*>(prev.userData());
         if (bd)
@@ -1050,15 +1050,15 @@ void Layout::updateBorders()
             m_blockData->setBorder(prevBorder);
         else {
             // can't merge; then these are our new borders.
-            KoTextBlockBorderData *newBorder = new KoTextBlockBorderData(border);
+            KTextBlockBorderData *newBorder = new KTextBlockBorderData(border);
             m_blockData->setBorder(newBorder);
             if (prevBorder && !m_newShape)
-                m_y += prevBorder->inset(KoTextBlockBorderData::Bottom);
+                m_y += prevBorder->inset(KTextBlockBorderData::Bottom);
         }
         m_blockData->border()->applyInsets(m_borderInsets, m_y + m_borderInsets.top, false);
     } else { // this parag has no border.
         if (prevBorder && !m_newShape)
-            m_y += prevBorder->inset(KoTextBlockBorderData::Bottom);
+            m_y += prevBorder->inset(KTextBlockBorderData::Bottom);
         if (m_blockData)
             m_blockData->setBorder(0); // remove an old one, if there was one.
     }
@@ -1099,7 +1099,7 @@ void Layout::drawFrame(QTextFrame *frame, QPainter *painter, const KoTextDocumen
 {
     painter->setPen(context.textContext.palette.color(QPalette::Text)); // for text that has no color.
     const QRegion clipRegion = painter->clipRegion();
-    KoTextBlockBorderData *lastBorder = 0;
+    KTextBlockBorderData *lastBorder = 0;
     bool started = false;
     int selectionStart = -1, selectionEnd = -1;
     if (context.textContext.selections.count()) {
@@ -1143,7 +1143,7 @@ void Layout::drawFrame(QTextFrame *frame, QPainter *painter, const KoTextDocumen
             started = true;
 
             KoTextBlockData *blockData = dynamic_cast<KoTextBlockData*>(block.userData());
-            KoTextBlockBorderData *border = 0;
+            KTextBlockBorderData *border = 0;
             KoTextBlockPaintStrategyBase *paintStrategy = 0;
             if (blockData) {
                 border = blockData->border();
