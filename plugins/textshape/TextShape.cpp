@@ -62,7 +62,7 @@ struct Finalizer {
 #include <KTextDocumentLayout.h>
 #include <KoTextEditor.h>
 #include <KTextPage.h>
-#include <KoTextShapeContainerModel.h>
+#include <KTextShapeContainerModel.h>
 #include <KPageProvider_p.h> // the exported class for the showcase hack
 #include <KoViewConverter.h>
 #include <KXmlWriter.h>
@@ -81,7 +81,7 @@ struct Finalizer {
 
 
 TextShape::TextShape()
-    : KShapeContainer(new KoTextShapeContainerModel()),
+    : KShapeContainer(new KTextShapeContainerModel()),
     KFrameShape(KOdfXmlNS::draw, "text-box"),
     m_footnotes(0),
     m_demoText(false),

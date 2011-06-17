@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoTextShapeContainerModel.h"
+#include "KTextShapeContainerModel.h"
 #include "KTextAnchor.h"
 #include "KoTextShapeData.h"
 #include "KTextDocumentLayout.h"
@@ -44,24 +44,24 @@ struct Relation
     uint inheritsTransform :1;
 };
 
-class KoTextShapeContainerModel::Private
+class KTextShapeContainerModel::Private
 {
 public:
     QHash<const KShape*, Relation> children;
     QList<KTextAnchor *> shapeRemovedAnchors;
 };
 
-KoTextShapeContainerModel::KoTextShapeContainerModel()
+KTextShapeContainerModel::KTextShapeContainerModel()
         : d(new Private())
 {
 }
 
-KoTextShapeContainerModel::~KoTextShapeContainerModel()
+KTextShapeContainerModel::~KTextShapeContainerModel()
 {
     delete d;
 }
 
-void KoTextShapeContainerModel::add(KShape *child)
+void KTextShapeContainerModel::add(KShape *child)
 {
     if (d->children.contains(child))
         return;
@@ -82,7 +82,7 @@ void KoTextShapeContainerModel::add(KShape *child)
     }
 }
 
-void KoTextShapeContainerModel::remove(KShape *child)
+void KTextShapeContainerModel::remove(KShape *child)
 {
     Relation relation = d->children.value(child);
     d->children.remove(child);
@@ -92,37 +92,37 @@ void KoTextShapeContainerModel::remove(KShape *child)
     }
 }
 
-void KoTextShapeContainerModel::setClipped(const KShape *child, bool clipping)
+void KTextShapeContainerModel::setClipped(const KShape *child, bool clipping)
 {
     Q_ASSERT(d->children.contains(child));
     d->children[child].nested = clipping;
 }
 
-bool KoTextShapeContainerModel::isClipped(const KShape *child) const
+bool KTextShapeContainerModel::isClipped(const KShape *child) const
 {
     Q_ASSERT(d->children.contains(child));
     return d->children[child].nested;
 }
 
-void KoTextShapeContainerModel::setInheritsTransform(const KShape *shape, bool inherit)
+void KTextShapeContainerModel::setInheritsTransform(const KShape *shape, bool inherit)
 {
     Q_ASSERT(d->children.contains(shape));
     d->children[shape].inheritsTransform = inherit;
 }
 
-bool KoTextShapeContainerModel::inheritsTransform(const KShape *shape) const
+bool KTextShapeContainerModel::inheritsTransform(const KShape *shape) const
 {
     Q_ASSERT(d->children.contains(shape));
     return d->children[shape].inheritsTransform;
 }
 
 
-int KoTextShapeContainerModel::count() const
+int KTextShapeContainerModel::count() const
 {
     return d->children.count();
 }
 
-QList<KShape*> KoTextShapeContainerModel::shapes() const
+QList<KShape*> KTextShapeContainerModel::shapes() const
 {
     QList<KShape*> answer;
 #if QT_VERSION >= 0x040700
@@ -134,13 +134,13 @@ QList<KShape*> KoTextShapeContainerModel::shapes() const
     return answer;
 }
 
-void KoTextShapeContainerModel::containerChanged(KShapeContainer *container, KShape::ChangeType type)
+void KTextShapeContainerModel::containerChanged(KShapeContainer *container, KShape::ChangeType type)
 {
     Q_UNUSED(container);
     Q_UNUSED(type);
 }
 
-void KoTextShapeContainerModel::childChanged(KShape *child, KShape::ChangeType type)
+void KTextShapeContainerModel::childChanged(KShape *child, KShape::ChangeType type)
 {
     if (type == KShape::RotationChanged || type == KShape::ScaleChanged ||
             type == KShape::ShearChanged || type == KShape::SizeChanged) {
@@ -157,7 +157,7 @@ void KoTextShapeContainerModel::childChanged(KShape *child, KShape::ChangeType t
     KShapeContainerModel::childChanged( child, type );
 }
 
-void KoTextShapeContainerModel::addAnchor(KTextAnchor *anchor)
+void KTextShapeContainerModel::addAnchor(KTextAnchor *anchor)
 {
     Q_ASSERT(anchor);
     Q_ASSERT(anchor->shape());
@@ -165,7 +165,7 @@ void KoTextShapeContainerModel::addAnchor(KTextAnchor *anchor)
     d->children[anchor->shape()].anchor = anchor;
 }
 
-void KoTextShapeContainerModel::removeAnchor(KTextAnchor *anchor)
+void KTextShapeContainerModel::removeAnchor(KTextAnchor *anchor)
 {
     if (d->children.contains(anchor->shape())) {
         d->children[anchor->shape()].anchor = 0;
@@ -173,7 +173,7 @@ void KoTextShapeContainerModel::removeAnchor(KTextAnchor *anchor)
     }
 }
 
-void KoTextShapeContainerModel::proposeMove(KShape *child, QPointF &move)
+void KTextShapeContainerModel::proposeMove(KShape *child, QPointF &move)
 {
     if (!d->children.contains(child))
         return;
@@ -257,7 +257,7 @@ void KoTextShapeContainerModel::proposeMove(KShape *child, QPointF &move)
     move.setY(0);
 }
 
-bool KoTextShapeContainerModel::isChildLocked(const KShape *child) const
+bool KTextShapeContainerModel::isChildLocked(const KShape *child) const
 {
     return child->isGeometryProtected();
 }

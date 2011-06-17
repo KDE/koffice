@@ -51,7 +51,7 @@ class KShapeLoadingContext;
  * <li> Create a new instance with e.g. new KTextAnchor(myshape);
  * <li> Use loadOdf() to load additional attributes like the "text:anchor-type"
  * <li> Position the anchor with updatePosition() what will attach the KTextAnchor-instance to
- *    the TextShape's \a KoTextShapeContainerModel . </ol>
+ *    the TextShape's \a KTextShapeContainerModel . </ol>
  * The position of the shape relative to the anchor is called the offset. It's loaded by loadOdf().
  * @see KWAnchorStrategy for more information about the layout of anchors/shapes in KWord.
  */
@@ -146,7 +146,7 @@ public:
      */
     bool isPositionedInline() const;
 
-    /// \internal make sure that the anchor has no KoTextShapeContainerModel references anymore.
+    /// \internal make sure that the anchor has no KTextShapeContainerModel references anymore.
     void detachFromModel();
 
 private:

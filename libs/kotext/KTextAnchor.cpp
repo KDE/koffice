@@ -21,7 +21,7 @@
 #include "KTextAnchor.h"
 #include "KInlineObject_p.h"
 #include "KTextDocumentLayout.h"
-#include "KoTextShapeContainerModel.h"
+#include "KTextShapeContainerModel.h"
 #include "KoTextShapeData.h"
 #include "KOdfStyleStack.h"
 #include "KOdfLoadingContext.h"
@@ -85,7 +85,7 @@ public:
             shape->setParent(0);
             return;
         }
-        KoTextShapeContainerModel *theModel = dynamic_cast<KoTextShapeContainerModel*>(container->model());
+        KTextShapeContainerModel *theModel = dynamic_cast<KTextShapeContainerModel*>(container->model());
         if (theModel != model) {
             if (model)
                 model->removeAnchor(q);
@@ -147,7 +147,7 @@ public:
     KTextAnchor::AnchorHorizontal horizontalAlignment;
     KTextAnchor::AnchorVertical verticalAlignment;
     QTextCharFormat format;
-    KoTextShapeContainerModel *model;
+    KTextShapeContainerModel *model;
     QPointF distance;
     bool isPositionedInline;
 

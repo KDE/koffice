@@ -35,7 +35,7 @@ set(kotext_LIB_SRCS
     KTextLocator.cpp
     KTextReference.cpp
     KTextAnchor.cpp
-    KoTextShapeContainerModel.cpp
+    KTextShapeContainerModel.cpp
     KoTextShapeSavingContext.cpp
     KoBookmark.cpp
     KoBookmarkManager.cpp
