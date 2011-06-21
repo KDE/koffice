@@ -103,7 +103,7 @@ void KWFrameConnectSelector::nameChanged(const QString &text)
     }
 }
 
-void KWFrameConnectSelector::save()
+void KWFrameConnectSelector::createCommand(QUndoCommand *parent)
 {
     Q_ASSERT(m_frameSets.count() == m_items.count());
 
@@ -111,8 +111,7 @@ void KWFrameConnectSelector::save()
     if (selected) {
         KWTextFrameSet *tfs = static_cast<KWTextFrameSet*>(selected->data(0, 1000).value<void*>());
         if (tfs != m_frame->frameSet()) {
-            QUndoCommand *cmd = new KWSetFrameSetCommand(static_cast<KWTextFrame*>(m_frame), tfs);
-            m_state->document()->addCommand(cmd);
+            new KWSetFrameSetCommand(static_cast<KWTextFrame*>(m_frame), tfs, parent);
         } else if (!widget.frameSetName->text().isEmpty()) {
             tfs->setName(widget.frameSetName->text()); // TODO make a command
         }

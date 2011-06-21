@@ -29,6 +29,7 @@ class KWFrame;
 class KWTextFrame;
 class KWFrameSet;
 class KWDocument;
+class QUndoCommand;
 
 /// A widget that is shown for 1 textframe to connect it to a frameset
 class KWFrameConnectSelector : public QWidget
@@ -40,7 +41,7 @@ public:
 
     /// load all info from the argument frame into this widget
     bool open(KWFrame *frame);
-    void save();
+    void createCommand(QUndoCommand *cmd);
 
 private slots:
     void frameSetSelected();
