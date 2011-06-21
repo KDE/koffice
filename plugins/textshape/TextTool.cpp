@@ -1970,8 +1970,7 @@ void TextTool::selectAll()
     if (textEditor == 0)
         return;
     const int selectionLength = qAbs(textEditor->position() - textEditor->anchor());
-    QTextBlock lastBlock = textEditor->document()->end().previous();
-    textEditor->setPosition(lastBlock.position() + lastBlock.length() - 1);
+    textEditor->setPosition(textEditor->document()->characterCount() - 1);
     textEditor->setPosition(0, QTextCursor::KeepAnchor);
     repaintSelection(0, textEditor->anchor());
     if (selectionLength != qAbs(textEditor->position() - textEditor->anchor())) // it actually changed
