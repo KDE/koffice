@@ -19,8 +19,9 @@
 
 #include "KWFrameConnectSelector.h"
 #include "KWDocument.h"
-#include "frames/KWTextFrameSet.h"
-#include "frames/KWTextFrame.h"
+#include <frames/KWTextFrameSet.h>
+#include <frames/KWTextFrame.h>
+#include <commands/KWSetFrameSetCommand.h>
 
 #include <KTextShapeData.h>
 #include <KTextPage.h>
@@ -64,6 +65,7 @@ bool KWFrameConnectSelector::open(KWFrame *frame)
         QTreeWidgetItem *row = new QTreeWidgetItem(widget.framesList);
         QVariant variant;
         variant.setValue<void*>(fs);
+        row->setText(2, QString::number(textFs->frameCount()));
         row->setData(0, 1000, variant);
         row->setText(0, textFs->name());
         if (fs->frameCount() > 0) {
@@ -106,14 +108,11 @@ void KWFrameConnectSelector::save()
     Q_ASSERT(m_frameSets.count() == m_items.count());
 
     QTreeWidgetItem *selected = widget.framesList->currentItem();
-    KWFrameSet *oldFs = m_frame->frameSet();
     if (selected) {
         KWTextFrameSet *tfs = static_cast<KWTextFrameSet*>(selected->data(0, 1000).value<void*>());
         if (tfs != m_frame->frameSet()) {
-            m_frame->setFrameSet(tfs); // TODO make a command
-            if (oldFs->frameCount() == 0) {
-                // TODO
-            }
+            QUndoCommand *cmd = new KWSetFrameSetCommand(static_cast<KWTextFrame*>(m_frame), tfs);
+            m_state->document()->addCommand(cmd);
         } else if (!widget.frameSetName->text().isEmpty()) {
             tfs->setName(widget.frameSetName->text()); // TODO make a command
         }
