@@ -22,6 +22,7 @@
 #include <frames/KWTextFrameSet.h>
 #include <frames/KWTextFrame.h>
 #include <commands/KWSetFrameSetCommand.h>
+#include <commands/KWSetFSNameCommand.h>
 
 #include <KTextShapeData.h>
 #include <KTextPage.h>
@@ -113,7 +114,7 @@ void KWFrameConnectSelector::createCommand(QUndoCommand *parent)
         if (tfs != m_frame->frameSet()) {
             new KWSetFrameSetCommand(static_cast<KWTextFrame*>(m_frame), tfs, parent);
         } else if (!widget.frameSetName->text().isEmpty()) {
-            tfs->setName(widget.frameSetName->text()); // TODO make a command
+            new KWSetFSNameCommand(tfs, widget.frameSetName->text(), parent);
         }
     }
 
