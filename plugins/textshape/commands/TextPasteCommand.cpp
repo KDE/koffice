@@ -36,10 +36,7 @@
 #include <KAction>
 
 #ifdef SHOULD_BUILD_RDF
-#include <rdf/KoDocumentRdf.h>
-#else
-#include "KoTextSopranoRdfModel_p.h" // TODO get rid of this include.
-                    // we can't include a private header from kotext outside of kotext.
+# include <rdf/KoDocumentRdf.h>
 #endif
 
 TextPasteCommand::TextPasteCommand(QClipboard::Mode mode, TextTool *tool, QUndoCommand *parent)
@@ -78,9 +75,9 @@ void TextPasteCommand::redo()
         if (!data->hasFormat(KOdf::mimeType(odfBasedType)))
             odfBasedType = KOdf::OpenOfficeClipboard;
         if (data->hasFormat(KOdf::mimeType(odfBasedType))) {
-            bool weOwnRdfModel = true;
             Soprano::Model *rdfModel = 0;
 #ifdef SHOULD_BUILD_RDF
+            bool weOwnRdfModel = true;
             rdfModel = Soprano::createModel();
             if (KoDocumentRdf *rdf = KoDocumentRdf::fromResourceManager(m_tool->canvas())) {
                 if (rdfModel) {
