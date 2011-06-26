@@ -20,35 +20,26 @@
 #include "SCPage.h"
 
 #include "SCDocument.h"
-#include "SCDeclarations.h"
 #include "Showcase.h"
 #include "SCPageApplicationData.h"
 #include "SCMasterPage.h"
 #include "SCNotes.h"
-#include "SCPlaceholderShape.h"
 #include "SCShapeManagerDisplayMasterStrategy.h"
 #include "SCPageSelectStrategyFixed.h"
-#include "pagelayout/SCPageLayout.h"
 #include "pagelayout/SCPageLayouts.h"
 #include "pagelayout/SCPageLayoutSharedSavingData.h"
-#include "pagelayout/SCPlaceholder.h"
 #include "pageeffects/SCPageEffectRegistry.h"
-#include "pageeffects/SCPageEffect.h"
 #include "animations/SCAnimationLoader.h"
 #include "animations/SCAnimationStep.h"
 
 #include <KOdfXmlNS.h>
 #include <KXmlWriter.h>
 #include <KOdfLoadingContext.h>
-#include <KOdfStylesReader.h>
 #include <KOdfStyleStack.h>
-#include <KOdfGenericStyle.h>
-#include <KShapeLayer.h>
 #include <KoPALoadingContext.h>
 #include <KoPASavingContext.h>
 
 #include <kdebug.h>
-#include <QString>
 
 class SCPage::Private
 {

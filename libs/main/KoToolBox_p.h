@@ -94,7 +94,7 @@ public slots:
 
     /// Set the orientation of the layout to @p orientation
     void setOrientation(Qt::Orientation orientation);
-    
+
     void setFloating(bool v);
 
 private slots:

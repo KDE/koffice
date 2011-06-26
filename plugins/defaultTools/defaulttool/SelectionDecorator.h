@@ -40,7 +40,6 @@ public:
      * @param shearHandles if true; the shearhandles will be drawn
      */
     SelectionDecorator(KoFlake::SelectionHandle arrows, bool rotationHandles, bool shearHandles);
-    ~SelectionDecorator() {}
 
     /**
      * paint the decortations.
@@ -68,7 +67,8 @@ public:
     static KoFlake::Position hotPosition();
 
 private:
-    bool m_rotationHandles, m_shearHandles;
+    bool m_rotationHandles;
+    bool m_shearHandles;
     KoFlake::SelectionHandle m_arrows;
     static KoFlake::Position m_hotPosition;
     KSelection *m_selection;

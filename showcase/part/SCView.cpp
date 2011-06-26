@@ -23,9 +23,6 @@
 
 #include "SCPresentationTool.h"
 #include "SCDocument.h"
-#include "SCPage.h"
-#include "SCMasterPage.h"
-#include "SCPageApplicationData.h"
 #include "SCViewAdaptor.h"
 #include "SCPdfPrintJob.h"
 #include "SCViewModePresentation.h"
@@ -34,7 +31,6 @@
 #include "SCShapeManagerDisplayMasterStrategy.h"
 #include "SCPageSelectStrategyActive.h"
 #include "SCPicturesImport.h"
-#include "commands/SCAnimationCreateCommand.h"
 #include "commands/SCSetCustomSlideShowsCommand.h"
 #include "dockers/SCPageLayoutDockerFactory.h"
 #include "dockers/SCPageLayoutDocker.h"
@@ -45,24 +41,16 @@
 #include "ui/SCConfigurePresenterViewDialog.h"
 #include "ui/SCHtmlExportDialog.h"
 
-#include <klocale.h>
-#include <ktoggleaction.h>
 #include <kactioncollection.h>
 #include <kactionmenu.h>
-#include <kmessagebox.h>
 #include <kfiledialog.h>
 
 #include <KSelection.h>
 #include <KShapeManager.h>
 #include <KoMainWindow.h>
 #include <KoPACanvas.h>
-#include <KoPADocumentStructureDocker.h>
-#include <KoPAPageInsertCommand.h>
+#include <KAction>
 #include <KoDocumentInfo.h>
-#include <KShapeRegistry.h>
-#include <KShapeLayer.h>
-
-#include <QtGui/QDesktopWidget>
 
 SCView::SCView(SCDocument *document, QWidget *parent)
   : KoPAView(document, parent)

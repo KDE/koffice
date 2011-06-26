@@ -172,18 +172,6 @@ void KShapePrivate::removeShapeManager(KShapeManager *manager)
 {
     shapeManagers.remove(manager);
 }
-// static
-QString KShapePrivate::getStyleProperty(const char *property, KShapeLoadingContext &context)
-{
-    KOdfStyleStack &styleStack = context.odfLoadingContext().styleStack();
-    QString value;
-
-    if (styleStack.hasProperty(KOdfXmlNS::draw, property)) {
-        value = styleStack.property(KOdfXmlNS::draw, property);
-    }
-
-    return value;
-}
 
 void KShapePrivate::addConnection(KShapeConnection *connection)
 {
@@ -1225,7 +1213,8 @@ bool KShape::loadOdfAttributes(const KXmlElement &element, KShapeLoadingContext 
 
 KShapeBackground *KShape::loadOdfFill(KShapeLoadingContext &context) const
 {
-    QString fill = KShapePrivate::getStyleProperty("fill", context);
+    KOdfStyleStack &styleStack = context.odfLoadingContext().styleStack();
+    QString fill = styleStack.property(KOdfXmlNS::draw, "fill");
     KShapeBackground *bg = 0;
     if (fill == "solid" || fill == "hatch") {
         bg = new KColorBackground();
@@ -1257,7 +1246,7 @@ KShapeBorderBase *KShape::loadOdfStroke(const KXmlElement &element, KShapeLoadin
     KOdfStyleStack &styleStack = context.odfLoadingContext().styleStack();
     KOdfStylesReader &stylesReader = context.odfLoadingContext().stylesReader();
 
-    QString stroke = KShapePrivate::getStyleProperty("stroke", context);
+    QString stroke = styleStack.property(KOdfXmlNS::draw, "stroke");
     if (stroke == "solid" || stroke == "dash") {
         QPen pen = KOdf::loadOdfStrokeStyle(styleStack, stroke, stylesReader);
 
@@ -1305,7 +1294,7 @@ KShapeBorderBase *KShape::loadOdfStroke(const KXmlElement &element, KShapeLoadin
 KShapeShadow *KShapePrivate::loadOdfShadow(KShapeLoadingContext &context) const
 {
     KOdfStyleStack &styleStack = context.odfLoadingContext().styleStack();
-    QString shadowStyle = KShapePrivate::getStyleProperty("shadow", context);
+    QString shadowStyle = styleStack.property(KOdfXmlNS::draw, "shadow");
     if (shadowStyle == "visible" || shadowStyle == "hidden") {
         KShapeShadow *shadow = new KShapeShadow();
         QColor shadowColor(styleStack.property(KOdfXmlNS::draw, "shadow-color"));
