@@ -25,9 +25,5 @@
 /* Defines if your system has the OpenEXR library */
 #cmakedefine HAVE_OPENEXR 1
 
-/* Defines if you have GL (Mesa, OpenGL, ...) and Qt GL support */
-#cmakedefine HAVE_OPENGL 1
-/* This file contains all the paths that change when changing the installation prefix */
-
 #define KOFFICEPREFIX "${CMAKE_INSTALL_PREFIX}"
 
