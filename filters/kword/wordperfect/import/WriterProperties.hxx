@@ -25,8 +25,8 @@
 /* "This product is not manufactured, approved, or supported by
  * Corel Corporation or Corel Corporation Limited."
  */
-#ifndef _WRITER_PROPERTIES_H
-#define _WRITER_PROPERTIES_H
+#ifndef WRITER_PROPERTIES_H
+#define WRITER_PROPERTIES_H
 
 #define IMP_DEFAULT_SUPER_SUB_SCRIPT "58%"
 #define IMP_NUM_CENTIMETERES_PER_INCH 2.54f

@@ -26,8 +26,8 @@
 /* "This product is not manufactured, approved, or supported by 
  * Corel Corporation or Corel Corporation Limited."
  */
-#ifndef _TABLESTYLE_H
-#define _TABLESTYLE_H
+#ifndef TABLESTYLE_H
+#define TABLESTYLE_H
 #include <libwpd/libwpd.h>
 #include <vector>
 

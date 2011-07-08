@@ -25,8 +25,8 @@
 /* "This product is not manufactured, approved, or supported by
  * Corel Corporation or Corel Corporation Limited."
  */
-#ifndef _PAGESPAN_H
-#define _PAGESPAN_H
+#ifndef PAGESPAN_H
+#define PAGESPAN_H
 #include <libwpd/libwpd.h>
 #include <vector>
 

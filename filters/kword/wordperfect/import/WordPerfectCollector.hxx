@@ -29,8 +29,8 @@
  * Corel Corporation or Corel Corporation Limited."
  */
 
-#ifndef _WORDPERFECTCOLLECTOR_H
-#define _WORDPERFECTCOLLECTOR_H
+#ifndef WORDPERFECTCOLLECTOR_H
+#define WORDPERFECTCOLLECTOR_H
 #include "SectionStyle.hxx"
 
 #include <libwpd/libwpd.h>

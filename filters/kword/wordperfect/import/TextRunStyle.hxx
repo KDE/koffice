@@ -28,8 +28,8 @@
  * Corel Corporation or Corel Corporation Limited."
  */
 
-#ifndef _TEXTRUNSTYLE_H
-#define _TEXTRUNSTYLE_H
+#ifndef TEXTRUNSTYLE_H
+#define TEXTRUNSTYLE_H
 #include <libwpd/libwpd.h>
 
 #include "Style.hxx"

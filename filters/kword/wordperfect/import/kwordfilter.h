@@ -18,8 +18,8 @@
 */
 
 
-#ifndef __WP_KWORDFILTER_H
-#define __WP_KWORDFILTER_H
+#ifndef WP_KWORDFILTER_H
+#define WP_KWORDFILTER_H
 
 #include "parser.h"
 

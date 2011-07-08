@@ -25,8 +25,8 @@
 /* "This product is not manufactured, approved, or supported by
  * Corel Corporation or Corel Corporation Limited."
  */
-#ifndef _DOCUMENTHANDLER_H
-#define _DOCUMENTHANDLER_H
+#ifndef DOCUMENTHANDLER_H
+#define DOCUMENTHANDLER_H
 #include <libwpd/libwpd.h>
 #include <libwpd/WPXProperty.h>
 #include <libwpd/WPXString.h>

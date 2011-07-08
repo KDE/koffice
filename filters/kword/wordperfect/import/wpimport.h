@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef __WPIMPORT_H
-#define __WPIMPORT_H
+#ifndef WPIMPORT_H
+#define WPIMPORT_H
 
 #include <QString>
 #include <QDataStream>
@@ -50,13 +50,3 @@ public:
 
 };
 #endif // __WPIMPORT_H
-
-
-
-
-
-
-
-
-
-

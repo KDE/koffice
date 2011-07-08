@@ -25,8 +25,8 @@
 /* "This product is not manufactured, approved, or supported by 
  * Corel Corporation or Corel Corporation Limited."
  */
-#ifndef _LISTSTYLE_H
-#define _LISTSTYLE_H
+#ifndef LISTSTYLE_H
+#define LISTSTYLE_H
 #include <libwpd/libwpd.h>
 
 #define WP6_NUM_LIST_LEVELS 8 // see WP6FileStructure.h (we shouldn't need to reference this)
