@@ -109,9 +109,10 @@ void DragAndDropStrategy::handleMouseMove(const QPointF& documentPos, Qt::Keyboa
         mimeData->setText(KCCopyCommand::saveAsPlainText(*selection()));
         mimeData->setData("application/x-kcells-snippet", buffer.buffer());
 
-        QDrag *drag = new QDrag(tool()->canvas()->canvasWidget());
+        QPointer<QDrag> drag = new QDrag(tool()->canvas()->canvasWidget());
         drag->setMimeData(mimeData);
         drag->exec();
+	delete drag;
         d->started = true;
     }
 }

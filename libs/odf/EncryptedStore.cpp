@@ -29,6 +29,7 @@
 #include <QIODevice>
 #include <QWidget>
 #include <QBuffer>
+#include <QPointer>
 #include <kpassworddialog.h>
 #include <knewpassworddialog.h>
 #include <kwallet.h>
@@ -536,21 +537,27 @@ bool EncryptedStore::openRead(const QString& name)
             } else {
                 if (!m_filename.isNull())
                     keepPass = false;
-                KPasswordDialog dlg(d->window , keepPass ? KPasswordDialog::ShowKeepPassword : static_cast<KPasswordDialog::KPasswordDialogFlags>(0));
-                dlg.setPrompt(i18n("Please enter the password to open this file."));
-                if (! dlg.exec()) {
+                QPointer<KPasswordDialog> dlg = new KPasswordDialog(d->window , 
+				keepPass ? KPasswordDialog::ShowKeepPassword : static_cast<KPasswordDialog::KPasswordDialogFlags>(0));
+                dlg->setPrompt(i18n("Please enter the password to open this file."));
+                if (! dlg->exec()) {
                     m_bPasswordDeclined = true;
                     d->stream = new QBuffer();
                     d->stream->open(QIODevice::ReadOnly);
                     d->size = 0;
+		    delete dlg;
                     return true;
                 }
-                password = QCA::SecureArray(dlg.password().toUtf8());
-                if (keepPass)
-                    keepPass = dlg.keepPassword();
-                if (password.isEmpty()) {
-                    continue;
-                }
+		if (dlg) {
+                    password = QCA::SecureArray(dlg->password().toUtf8());
+                    if (keepPass)
+                        keepPass = dlg->keepPassword();
+                    if (password.isEmpty()) {
+		        delete dlg;
+                        continue;
+                    }
+		}
+		delete dlg;
             }
 
             decrypted = decryptFile(encryptedFile, encData, password);
@@ -708,18 +715,22 @@ bool EncryptedStore::closeWrite()
         findPasswordInKWallet();
     }
     while (m_password.isEmpty()) {
-        KNewPasswordDialog dlg(d->window);
-        dlg.setPrompt(i18n("Please enter the password to encrypt the document with."));
-        if (! dlg.exec()) {
+        QPointer<KNewPasswordDialog> dlg = new KNewPasswordDialog(d->window);
+        dlg->setPrompt(i18n("Please enter the password to encrypt the document with."));
+        if (! dlg->exec()) {
             // Without the first password, prevent asking again by deadsimply refusing to continue functioning
             // TODO: This feels rather hackish. There should be a better way to do this.
             delete m_pZip;
             m_pZip = 0;
             d->good = false;
+	    delete dlg;
             return false;
         }
-        m_password = QCA::SecureArray(dlg.password().toUtf8());
-        passWasAsked = true;
+	if (dlg){
+            m_password = QCA::SecureArray(dlg->password().toUtf8());
+            passWasAsked = true;
+	}
+	delete dlg;
     }
 
     // Ask the user to save the password

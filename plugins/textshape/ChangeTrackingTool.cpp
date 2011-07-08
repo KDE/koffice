@@ -106,14 +106,15 @@ void ChangeTrackingTool::mousePressEvent(KPointerEvent* event)
 
     int changeId = cursor.charFormat().property(KCharacterStyle::ChangeTrackerId).toInt();
     if (changeId) {
-        AcceptRejectChangeDialog acceptDialog(KTextDocument(m_textShapeData->document()).changeTracker(), changeId);
-        if (int result = acceptDialog.exec()) {
+        QPointer<AcceptRejectChangeDialog> acceptDialog = new AcceptRejectChangeDialog(KTextDocument(m_textShapeData->document()).changeTracker(), changeId);
+        if (int result = acceptDialog->exec()) {
             if (result == (int)(AcceptRejectChangeDialog::eChangeAccepted)) {
                 acceptChange();
             } else if (result == (int)(AcceptRejectChangeDialog::eChangeRejected)) {
                 rejectChange();
             }
         }
+	delete acceptDialog;
     }
 }
 

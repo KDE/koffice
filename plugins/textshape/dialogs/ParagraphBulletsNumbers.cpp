@@ -27,6 +27,8 @@
 #include <KCharSelect>
 #include <KDialog>
 
+#include <QPointer>
+
 ParagraphBulletsNumbers::ParagraphBulletsNumbers(QWidget *parent)
         : QWidget(parent)
 {
@@ -183,7 +185,7 @@ void ParagraphBulletsNumbers::styleChanged(int index)
 
 void ParagraphBulletsNumbers::customCharButtonPressed()
 {
-    KDialog *dialog = new KDialog(this);
+    QPointer<KDialog> dialog = new KDialog(this);
     dialog->setModal(true);
     dialog->setButtons(KDialog::Ok | KDialog::Cancel);
     dialog->setDefaultButton(KDialog::Ok);

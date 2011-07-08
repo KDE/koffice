@@ -32,6 +32,7 @@
 #include <QHeaderView>
 #include <QFormLayout>
 #include <QRadioButton>
+#include <QPointer>
 
 #define DEBUG_CHANGED
 
@@ -279,7 +280,7 @@ void StylesWidget::editStyle()
     }
 
     if (widget) {
-        KDialog *dialog = new KDialog(this);
+        QPointer<KDialog> dialog = new KDialog(this);
         dialog->setCaption(paragraphStyle ? i18n("Edit Paragraph Style") : i18n("Edit Character Style"));
         dialog->setMainWidget(widget);
         connect(dialog, SIGNAL(okClicked()), widget, SLOT(save()));

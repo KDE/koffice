@@ -58,7 +58,7 @@ KoFilter::ConversionStatus XSLTImport::convert(const QByteArray&, const QByteArr
     /* input file Reading */
     out->close();
     kDebug() << "here";
-    XSLTImportDia* dialog = new XSLTImportDia(out, to, 0, "Importation", true);
+    QPointer<XSLTImportDia> dialog = new XSLTImportDia(out, to, 0, "Importation", true);
     dialog->setInputFile(m_chain->inputFile());
 
     dialog->exec();

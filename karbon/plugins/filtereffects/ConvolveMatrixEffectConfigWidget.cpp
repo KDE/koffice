@@ -217,22 +217,22 @@ void ConvolveMatrixEffectConfigWidget::editKernel()
     m_matrixModel->setMatrix(oldKernel, kernelSize.y(), kernelSize.x());
     connect(m_matrixModel, SIGNAL(dataChanged(QModelIndex,QModelIndex)), this, SLOT(kernelChanged()));
 
-    KDialog dlg(this);
-    QTableView * table = new QTableView(&dlg);
+    QPointer<KDialog> dlg = new KDialog(this);
+    QTableView * table = new QTableView(dlg);
     table->setModel(m_matrixModel);
     table->horizontalHeader()->hide();
     table->horizontalHeader()->setResizeMode(QHeaderView::Stretch);
     table->verticalHeader()->hide();
     table->verticalHeader()->setResizeMode(QHeaderView::ResizeToContents);
-    dlg.setMainWidget(table);
-    if (dlg.exec() == KDialog::Accepted) {
+    dlg->setMainWidget(table);
+    if (dlg && dlg->exec() == KDialog::Accepted) {
         m_effect->setKernel(m_matrixModel->matrix());
         emit filterChanged();
     } else {
         m_effect->setKernel(oldKernel);
     }
-
     disconnect(m_matrixModel, SIGNAL(dataChanged(QModelIndex,QModelIndex)), this, SLOT(kernelChanged()));
+    delete dlg;
 }
 
 void ConvolveMatrixEffectConfigWidget::kernelChanged()

@@ -133,14 +133,16 @@ void XSLTImportDia::chooseSlot()
     if (_currentFile.isLocalFile() && QFile::exists(_currentFile.path()))
         dir = QFileInfo(_currentFile.path()).absoluteFilePath();
 
-    KFileDialog *dialog = new KFileDialog(dir, QString(), 0L);
+    QPointer<KFileDialog> dialog = new KFileDialog(dir, QString(), 0L);
     dialog->setCaption(i18n("Open Document"));
     dialog->setMimeFilter(KoFilterManager::mimeFilter(_format, KoFilterManager::Import));
     KUrl u;
 
     if (dialog->exec() == QDialog::Accepted) {
-        u = dialog->selectedUrl();
-        KRecentDocument::add(dialog->selectedUrl().url(), !dialog->selectedUrl().isLocalFile());
+	if (dialog) {
+            u = dialog->selectedUrl();
+            KRecentDocument::add(dialog->selectedUrl().url(), !dialog->selectedUrl().isLocalFile());
+	}
     } else { //revert state
         //if (bEmpty) openEmpty();
         //if (bTemplates) openTemplate();

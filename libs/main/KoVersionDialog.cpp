@@ -126,7 +126,7 @@ void KoVersionDialog::updateButton()
 
 void KoVersionDialog::slotAdd()
 {
-    KoVersionModifyDialog * dlg = new KoVersionModifyDialog(this, 0);
+    QPointer<KoVersionModifyDialog> dlg = new KoVersionModifyDialog(this, 0);
     if (!dlg->exec()) {
         delete dlg;
         return;
@@ -169,10 +169,12 @@ void KoVersionDialog::slotModify()
     if (!version)
         return;
 
-    KoVersionModifyDialog * dlg = new KoVersionModifyDialog(this, version);
+    QPointer<KoVersionModifyDialog> dlg = new KoVersionModifyDialog(this, version);
     if (dlg->exec()) {
-        version->comment = dlg->comment();
-        list->currentItem()->setText(2, version->comment);
+	if (dlg){
+            version->comment = dlg->comment();
+            list->currentItem()->setText(2, version->comment);
+	}
     }
     delete dlg;
 

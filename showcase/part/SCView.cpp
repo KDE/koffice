@@ -189,7 +189,7 @@ void SCView::initActions()
     actionCollection()->addAction("file_export_html", m_actionExportHtml);
     connect(m_actionExportHtml, SIGNAL(triggered()), this, SLOT(exportToHtml()));
 
-    m_actionViewModeNormal = new KAction(i18n("Normal"), this);
+    m_actionViewModeNormal = new KAction(i18nc("@action:inmenu Default View", "Normal"), this);
     m_actionViewModeNormal->setCheckable(true);
     m_actionViewModeNormal->setChecked(true);
     actionCollection()->addAction("view_normal", m_actionViewModeNormal);
@@ -341,20 +341,21 @@ void SCView::dialogCustomSlideShows()
 {
     SCDocument *doc = static_cast<SCDocument *>(kopaDocument());
     SCCustomSlideShows *finalSlideShows;
-    SCCustomSlideShowsDialog dialog(this, doc->customSlideShows(), doc, finalSlideShows);
-    dialog.setModal(true);
-    if (dialog.exec() == QDialog::Accepted) {
+    QPointer<SCCustomSlideShowsDialog> dialog = new SCCustomSlideShowsDialog(this, doc->customSlideShows(), doc, finalSlideShows);
+    dialog->setModal(true);
+    if (dialog->exec() == QDialog::Accepted) {
         kopaCanvas()->addCommand(new SCSetCustomSlideShowsCommand(doc, finalSlideShows));
     }
     else {
         delete finalSlideShows;
     }
+    delete dialog;
 }
 
 void SCView::configureSlideShow()
 {
     SCDocument *doc = static_cast<SCDocument *>(kopaDocument());
-    SCConfigureSlideShowDialog *dialog = new SCConfigureSlideShowDialog(doc, this);
+    QPointer<SCConfigureSlideShowDialog> dialog = new SCConfigureSlideShowDialog(doc, this);
 
     if (dialog->exec() == QDialog::Accepted) {
         doc->setActiveCustomSlideShow(dialog->activeCustomSlideShow());

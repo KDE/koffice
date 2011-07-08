@@ -19,10 +19,11 @@
 **
 */
 
+#include "xmlparser.h"
+
 #include <kdebug.h>
 #include <KOdfStore.h>
 
-#include "xmlparser.h"
 #include "qfile.h"
 
 /* Init static data */

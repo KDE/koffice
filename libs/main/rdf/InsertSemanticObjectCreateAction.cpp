@@ -29,6 +29,7 @@
 #include <KPageDialog>
 
 #include <QVBoxLayout>
+#include <QPointer>
 
 InsertSemanticObjectCreateAction::InsertSemanticObjectCreateAction(
     KCanvasBase *canvas,
@@ -55,12 +56,13 @@ void InsertSemanticObjectCreateAction::activated()
                                    m_rdf, m_rdf, m_klass);
     QWidget *w = semItem->createEditor(widget);
     lay->addWidget(w);
-    KPageDialog dialog(m_canvas->canvasWidget());
-    dialog.setCaption(i18n("%1 Options", text())); // TODO add comment using i18nc
-    dialog.addPage(widget, QString());
-    if (dialog.exec() == KPageDialog::Accepted) {
+    QPointer<KPageDialog> dialog = new KPageDialog(m_canvas->canvasWidget());
+    dialog->setCaption(i18n("%1 Options", text())); // TODO add comment using i18nc
+    dialog->addPage(widget, QString());
+    if (dialog->exec() == KPageDialog::Accepted) {
         kDebug(30015) << "activated...";
         semItem->updateFromEditorData();
         semItem->insert(m_canvas);
     }
+    delete dialog;
 }

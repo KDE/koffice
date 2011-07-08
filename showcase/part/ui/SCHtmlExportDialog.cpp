@@ -180,18 +180,19 @@ void SCHtmlExportDialog::delSelectedTemplateFromFavorite()
 
 void SCHtmlExportDialog::browserAction()
 {
-    KFileDialog dialog(KUrl(), QString("*.zip"), this);
-    if (dialog.exec() == QDialog::Accepted) {
-        if (verifyZipFile(dialog.selectedFile())) {
-            QString name (dialog.selectedUrl().fileName());
+    QPointer<KFileDialog> dialog = new KFileDialog(KUrl(), QString("*.zip"), this);
+    if (dialog && dialog->exec() == QDialog::Accepted) {
+        if (verifyZipFile(dialog->selectedFile())) {
+            QString name (dialog->selectedUrl().fileName());
             if (name.endsWith(".zip", Qt::CaseInsensitive)) {
                     name.resize(name.size()-4);
             }
-            ui.kcombobox->addItem(name, dialog.selectedFile());
+            ui.kcombobox->addItem(name, dialog->selectedFile());
             ui.kcombobox->setCurrentIndex(ui.kcombobox->count() - 1);
         }
         this->updateFavoriteButton();
     }
+    delete dialog;
 }
 
 bool SCHtmlExportDialog::verifyZipFile(const QString &zipLocalPath){

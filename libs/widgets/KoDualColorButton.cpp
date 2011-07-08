@@ -29,6 +29,7 @@
 #include <QtGui/QBrush>
 #include <QtGui/QDragEnterEvent>
 #include <QtGui/QPainter>
+#include <QPointer>
 
 class KoDualColorButton::Private
 {
@@ -241,11 +242,14 @@ void KoDualColorButton::mouseReleaseEvent( QMouseEvent *event )
     if ( foregroundRect.contains( event->pos() )) {
         if(d->tmpSelection == Foreground ) {
             if( d->popDialog) {
-                KoUniColorDialog *dialog = new KoUniColorDialog(d->foregroundColor, d->dialogParent);
+                QPointer<KoUniColorDialog> dialog = new KoUniColorDialog(d->foregroundColor, d->dialogParent);
                 if(dialog->exec() == KPageDialog::Accepted) {
-                    d->foregroundColor = dialog->color();
-                    emit foregroundColorChanged( d->foregroundColor );
+		    if (dialog) {
+                        d->foregroundColor = dialog->color();
+                        emit foregroundColorChanged( d->foregroundColor );
+		    }
                 }
+		delete dialog;
             }
             else
                 emit pleasePopDialog( d->foregroundColor);
@@ -257,11 +261,14 @@ void KoDualColorButton::mouseReleaseEvent( QMouseEvent *event )
     } else if ( backgroundRect.contains( event->pos() )) {
         if(d->tmpSelection == Background ) {
             if( d->popDialog) {
-                KoUniColorDialog *dialog = new KoUniColorDialog(d->backgroundColor, d->dialogParent);
+                QPointer<KoUniColorDialog> dialog = new KoUniColorDialog(d->backgroundColor, d->dialogParent);
                 if(dialog->exec() == KPageDialog::Accepted) {
-                    d->backgroundColor = dialog->color();
-                    emit backgroundColorChanged( d->backgroundColor );
+		    if (dialog) {
+                        d->backgroundColor = dialog->color();
+                        emit backgroundColorChanged( d->backgroundColor );
+		    }
                 }
+		delete dialog;
             }
             else
                 emit pleasePopDialog( d->backgroundColor);
