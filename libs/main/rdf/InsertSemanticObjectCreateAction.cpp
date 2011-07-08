@@ -29,6 +29,7 @@
 #include <KPageDialog>
 
 #include <QVBoxLayout>
+#include <QPointer>
 
 InsertSemanticObjectCreateAction::InsertSemanticObjectCreateAction(
     KCanvasBase *canvas,
