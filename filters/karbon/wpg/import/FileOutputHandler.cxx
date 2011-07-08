@@ -23,6 +23,7 @@
  * Corel Corporation or Corel Corporation Limited."
  */
 
+#include <string.h>
 #include "FileOutputHandler.hxx"
 
 FileOutputHandler::FileOutputHandler(std::ostringstream &contentStream) :
@@ -35,7 +36,7 @@ void FileOutputHandler::startDocument()
 {
 }
 
-void FileOutputHandler::startElement(const char *psName, const std::vector<std::pair<std::string, std::string> > &xPropList)
+void FileOutputHandler::startElement(const char *psName, const WPXPropertyList &xPropList)
 {
 	if (mbIsTagOpened)
 	{
@@ -44,9 +45,12 @@ void FileOutputHandler::startElement(const char *psName, const std::vector<std::
 	}
 	mContentStream << "<" << psName;
 
-	for (std::vector<std::pair<std::string, std::string> >::const_iterator i = xPropList.begin(); i != xPropList.end(); i++)
+	WPXPropertyList::Iter i(xPropList);
+	for (i.rewind(); i.next(); )
 	{
-		mContentStream << " " <<  (*i).first.c_str() << "=\"" << (*i).second.c_str() << "\"";
+		// filter out libwpd elements
+		if (strncmp(i.key(), "libwpd", 6) != 0)
+			mContentStream << " " <<  i.key() << "=\"" << i()->getStr().cstr() << "\"";
 	}
 	mbIsTagOpened = true;
 	msOpenedTagName = psName;
@@ -75,14 +79,14 @@ void FileOutputHandler::endElement(const char *psName)
 	}
 }
 
-void FileOutputHandler::characters(const std::string &sCharacters)
+void FileOutputHandler::characters(const WPXString &sCharacters)
 {
 	if (mbIsTagOpened)
 	{
 		mContentStream << ">";
 		mbIsTagOpened = false;
 	}
-	mContentStream << sCharacters.c_str();
+	mContentStream << sCharacters.cstr();
 }
 
 void FileOutputHandler::endDocument()

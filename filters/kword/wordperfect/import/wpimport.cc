@@ -17,11 +17,13 @@
  * Boston, MA 02110-1301, USA.
 */
 
+#include <wpimport.h>
+
 #include <kdebug.h>
 #include <KoFilterChain.h>
 #include <kpluginfactory.h>
+#include <kde_file.h>
 
-#include <wpimport.h>
 
 #include <QByteArray>
 
@@ -29,14 +31,14 @@ K_PLUGIN_FACTORY(WPImportFactory, registerPlugin<WPImport>();)
 K_EXPORT_PLUGIN(WPImportFactory("kofficefilters"))
 
 #include <libwpd/libwpd.h>
-#include <libwpd/WPXStream.h>
-#include <libwpd/WPXHLListenerImpl.h>
+#include <libwpd-stream/WPXStream.h>
+#include <libwpd/WPXDocumentInterface.h>
 
 
 class WPXMemoryInputStream : public WPXInputStream
 {
 public:
-    WPXMemoryInputStream(uint8_t *data, size_t size);
+    WPXMemoryInputStream(unsigned char *data, size_t size);
     virtual ~WPXMemoryInputStream();
 
     virtual bool isOLEStream() {
@@ -45,8 +47,11 @@ public:
     virtual WPXInputStream * getDocumentOLEStream() {
         return NULL;
     }
+    virtual WPXInputStream * getDocumentOLEStream(const char* name) {
+        return NULL;
+    }
 
-    const virtual uint8_t *read(size_t numBytes, size_t &numBytesRead);
+    const virtual unsigned char *read(size_t numBytes, size_t &numBytesRead);
     virtual int seek(long offset, WPX_SEEK_TYPE seekType);
     virtual long tell();
     virtual bool atEOS();
@@ -54,13 +59,13 @@ public:
 private:
     long m_offset;
     size_t m_size;
-    uint8_t *m_data;
-    uint8_t *m_tmpBuf;
+    unsigned char *m_data;
+    unsigned char *m_tmpBuf;
 };
 
 
-WPXMemoryInputStream::WPXMemoryInputStream(uint8_t *data, size_t size) :
-        WPXInputStream(false),
+WPXMemoryInputStream::WPXMemoryInputStream(unsigned char *data, size_t size) :
+        WPXInputStream(),
         m_offset(0),
         m_data(data),
         m_size(size),
@@ -74,10 +79,10 @@ WPXMemoryInputStream::~WPXMemoryInputStream()
     delete [] m_data;
 }
 
-const uint8_t * WPXMemoryInputStream::read(size_t numBytes, size_t &numBytesRead)
+const unsigned char* WPXMemoryInputStream::read(size_t numBytes, size_t &numBytesRead)
 {
     delete [] m_tmpBuf;
-    int numBytesToRead;
+    unsigned int numBytesToRead;
 
     if ((m_offset + numBytes) < m_size)
         numBytesToRead = numBytes;
@@ -89,7 +94,7 @@ const uint8_t * WPXMemoryInputStream::read(size_t numBytes, size_t &numBytesRead
     if (numBytesToRead == 0)
         return NULL;
 
-    m_tmpBuf = new uint8_t[numBytesToRead];
+    m_tmpBuf = new unsigned char[numBytesToRead];
     for (size_t i = 0; i < numBytesToRead; i++) {
         m_tmpBuf[i] = m_data[m_offset];
         m_offset++;
@@ -107,7 +112,7 @@ int WPXMemoryInputStream::seek(long offset, WPX_SEEK_TYPE seekType)
 
     if (m_offset < 0)
         m_offset = 0;
-    else if (m_offset >= m_size)
+    else if ((unsigned long)m_offset >= m_size)
         m_offset = m_size;
 
     return 0;
@@ -120,14 +125,14 @@ long WPXMemoryInputStream::tell()
 
 bool WPXMemoryInputStream::atEOS()
 {
-    if (m_offset >= m_size)
+    if (m_offset >= 0 && (unsigned long)m_offset >= m_size)
         return true;
 
     return false;
 }
 
 
-class KWordListener : public WPXHLListenerImpl
+class KWordListener : public WPXDocumentInterface
 {
 public:
     KWordListener();
@@ -177,6 +182,21 @@ public:
     virtual void closeTableCell() {}
     virtual void insertCoveredTableCell(const WPXPropertyList &propList) {}
     virtual void closeTable() {}
+
+    virtual void definePageStyle(const WPXPropertyList&) {}
+    virtual void defineParagraphStyle(const WPXPropertyList&, const WPXPropertyListVector&) {}
+    virtual void defineCharacterStyle(const WPXPropertyList&) {}
+    virtual void defineSectionStyle(const WPXPropertyList&, const WPXPropertyListVector&) {}
+    virtual void insertSpace() {}
+    virtual void insertField(const WPXString&, const WPXPropertyList&) {}
+    virtual void openComment(const WPXPropertyList&) {}
+    virtual void closeComment() {}
+    virtual void openTextBox(const WPXPropertyList&) {}
+    virtual void closeTextBox() {}
+    virtual void openFrame(const WPXPropertyList&) {}
+    virtual void closeFrame() {}
+    virtual void insertBinaryObject(const WPXPropertyList&, const WPXBinaryData&) {}
+    virtual void insertEquation(const WPXPropertyList&, const WPXString&) {}
 
     QString root;
 
@@ -275,9 +295,9 @@ KoFilter::ConversionStatus WPImport::convert(const QByteArray& from, const QByte
     if (!f)
         return KoFilter::StupidError;
 
-    fseek(f, 0, SEEK_END);
-    long fsize = ftell(f);
-    fseek(f, 0, SEEK_SET);
+    KDE_fseek(f, 0, SEEK_END);
+    long fsize = KDE_ftell(f);
+    KDE_fseek(f, 0, SEEK_SET);
 
     unsigned char* buf = new unsigned char[fsize];
     fread(buf, 1, fsize, f);
@@ -288,7 +308,7 @@ KoFilter::ConversionStatus WPImport::convert(const QByteArray& from, const QByte
 
     // open and parse the file
     KWordListener listener;
-    WPDResult error = WPDocument::parse(instream, static_cast<WPXHLListenerImpl *>(&listener));
+    WPDResult error = WPDocument::parse(instream, static_cast<WPXDocumentInterface *>(&listener), NULL);
     delete instream;
 
     if (error != WPD_OK)

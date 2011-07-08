@@ -29,21 +29,22 @@
 #include <iostream>
 #include <sstream>
 #include <string>
-#include "GraphicsHandler.hxx"
+#include <libwpd/libwpd.h>
+#include "FileOutputHandler.hxx"
 
-class FileOutputHandler : public GraphicsHandler
+class FileOutputHandler
 {
   public:
         explicit FileOutputHandler(std::ostringstream &contentStream);
-        virtual void startDocument();
-        virtual void endDocument();
-        virtual void startElement(const char *psName, const std::vector<std::pair<std::string, std::string> > &xPropList);
-        virtual void endElement(const char *psName);
-        virtual void characters(const std::string &sCharacters);
+        void startDocument();
+        void endDocument();
+        void startElement(const char *psName, const WPXPropertyList &xPropList);
+        void endElement(const char *psName);
+        void characters(const WPXString &sCharacters);
 
   private:
 	bool mbIsTagOpened;
-	std::string msOpenedTagName;
+	WPXString msOpenedTagName;
 	std::ostringstream &mContentStream;
 };
 #endif

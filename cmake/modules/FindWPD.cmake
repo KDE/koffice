@@ -19,12 +19,12 @@ if (WPD_INCLUDE_DIR AND WPD_LIBRARIES)
 else (WPD_INCLUDE_DIR AND WPD_LIBRARIES)
 if(NOT WIN32)
   INCLUDE(FindPkgConfig)
-  pkg_check_modules(WPD libwpd-0.8)
+  pkg_check_modules(WPD REQUIRED libwpd-0.9)
 endif(NOT WIN32)
 
   FIND_PATH(WPD_INCLUDE_DIR libwpd/libwpd.h
     ${WPD_INCLUDE_DIR}
-    /usr/include/libwpd-0.8
+    /usr/include/libwpd-0.9
   )
 
 

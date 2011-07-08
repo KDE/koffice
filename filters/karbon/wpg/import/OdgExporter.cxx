@@ -13,8 +13,8 @@
  * Library General Public License for more details.
  *
  * You should have received a copy of the GNU Library General Public
- * License along with this library; if not, write to the
- * Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+ * License along with this library; if not, write to the 
+ * Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, 
  * Boston, MA  02111-1301 USA
  *
  * For further information visit http://libwpg.sourceforge.net
@@ -26,637 +26,660 @@
 
 #include "OdgExporter.hxx"
 #include "GraphicsElement.hxx"
-#include "GraphicsHandler.hxx"
+#include "FileOutputHandler.hxx"
 #include <locale.h>
+#include <math.h>
+#include <string>
 
-static std::string doubleToString(const double value)
-{
-  std::ostringstream tempStream;
-  tempStream << value;
-  std::string decimalPoint(localeconv()->decimal_point);
-  if ((decimalPoint.size() == 0) || (decimalPoint == "."))
-    return tempStream.str();
-  std::string stringValue(tempStream.str());
-  if (!stringValue.empty())
-  {
-    std::string::size_type pos;
-    while ((pos = stringValue.find(decimalPoint)) != std::string::npos)
-          stringValue.replace(pos,decimalPoint.size(),".");
-  }
-  return stringValue;
-}
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
 
-
-OdgExporter::OdgExporter(GraphicsHandler *pHandler, const bool isFlatXML):
-        mpHandler(pHandler),
-        m_fillRule(AlternatingFill),
-        m_gradientIndex(1),
-        m_dashIndex(1),
-        m_styleIndex(1),
-        m_width(0.0f),
-        m_height(0.0f),
-        m_isFlatXML(isFlatXML)
+OdgExporter::OdgExporter(FileOutputHandler *pHandler, const OdfStreamType streamType):
+	mpHandler(pHandler),
+	miGradientIndex(1),
+	miDashIndex(1), 
+	miGraphicsStyleIndex(1),
+	mfWidth(0.0),
+	mfHeight(0.0),
+	mxStreamType(streamType)
 {
 }
 
 OdgExporter::~OdgExporter()
 {
-        for (std::vector <GraphicsElement *>::iterator iterStroke = mStrokeDashElements.begin();
-                iterStroke != mStrokeDashElements.end(); iterStroke++)
-                delete (*iterStroke);
 
-        for (std::vector <GraphicsElement *>::iterator iterGradient = mGradientElements.begin();
-                iterGradient != mGradientElements.end(); iterGradient++)
-                delete (*iterGradient);
+	for (std::vector<GraphicsElement *>::iterator iterBody = mBodyElements.begin(); iterBody != mBodyElements.end(); ++iterBody)
+	{
+		delete (*iterBody);
+		(*iterBody) = NULL;
+	}
 
-        for (std::vector <GraphicsElement *>::iterator iterAutomaticStyles = mAutomaticStylesElements.begin();
-                iterAutomaticStyles != mAutomaticStylesElements.end(); iterAutomaticStyles++)
-                delete (*iterAutomaticStyles);
+	for (std::vector<GraphicsElement *>::iterator iterGraphicsAutomaticStyles = mGraphicsAutomaticStyles.begin();
+		iterGraphicsAutomaticStyles != mGraphicsAutomaticStyles.end(); ++iterGraphicsAutomaticStyles)
+	{
+		delete((*iterGraphicsAutomaticStyles));
+	}
 
-        for (std::vector<GraphicsElement *>::iterator bodyIter = mBodyElements.begin();
-                bodyIter != mBodyElements.end(); bodyIter++)
-                delete (*bodyIter);
+	for (std::vector<GraphicsElement *>::iterator iterGraphicsStrokeDashStyles = mGraphicsStrokeDashStyles.begin();
+		iterGraphicsStrokeDashStyles != mGraphicsStrokeDashStyles.end(); ++iterGraphicsStrokeDashStyles)
+	{
+		delete((*iterGraphicsStrokeDashStyles));
+	}
+
+	for (std::vector<GraphicsElement *>::iterator iterGraphicsGradientStyles = mGraphicsGradientStyles.begin();
+		iterGraphicsGradientStyles != mGraphicsGradientStyles.end(); ++iterGraphicsGradientStyles)
+	{
+		delete((*iterGraphicsGradientStyles));
+	}
 }
 
-void OdgExporter::startGraphics(double width, double height)
+void OdgExporter::startGraphics(const ::WPXPropertyList &propList)
 {
-        m_gradientIndex = 1;
-        m_dashIndex = 1;
-        m_styleIndex = 1;
-        m_width = width;
-        m_height = height;
+	miGradientIndex = 1;
+	miDashIndex = 1;
+	miGraphicsStyleIndex = 1;
+	mfWidth = 0.0;
+	mfHeight = 0.0;
 
+	if (propList["svg:width"])
+		mfWidth = propList["svg:width"]->getDouble();
 
-        mpHandler->startDocument();
-        OpenTagGraphicsElement tmpOfficeDocumentContent("office:document");
-        tmpOfficeDocumentContent.addAttribute("xmlns:office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0");
-        tmpOfficeDocumentContent.addAttribute("xmlns:style", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
-        tmpOfficeDocumentContent.addAttribute("xmlns:text", "urn:oasis:names:tc:opendocument:xmlns:text:1.0");
-        tmpOfficeDocumentContent.addAttribute("xmlns:draw", "urn:oasis:names:tc:opendocument:xmlns:drawing:1.0");
-        tmpOfficeDocumentContent.addAttribute("xmlns:dc", "http://purl.org/dc/elements/1.1/");
-        tmpOfficeDocumentContent.addAttribute("xmlns:svg", "urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0");
-        tmpOfficeDocumentContent.addAttribute("xmlns:fo", "urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0");
-        tmpOfficeDocumentContent.addAttribute("xmlns:config", "urn:oasis:names:tc:opendocument:xmlns:config:1.0");
-        tmpOfficeDocumentContent.addAttribute("xmlns:ooo", "http://openoffice.org/2004/office");
-        tmpOfficeDocumentContent.addAttribute("office:version", "1.0");
-        if (m_isFlatXML)
-                        tmpOfficeDocumentContent.addAttribute("office:mimetype", "application/x-vnd.oasis.openoffice.drawing");
-        tmpOfficeDocumentContent.write(mpHandler);
+	if (propList["svg:height"])
+		mfHeight = propList["svg:height"]->getDouble();
 
-        OpenTagGraphicsElement("office:settings").write(mpHandler);
+	mpHandler->startDocument();
+	TagOpenElement tmpOfficeDocumentContent(
+		(mxStreamType == ODF_FLAT_XML) ? "office:document" : (
+		(mxStreamType == ODF_CONTENT_XML) ? "office:document-content" : (
+		(mxStreamType == ODF_STYLES_XML) ? "office:document-styles" : (
+		(mxStreamType == ODF_SETTINGS_XML) ? "office:document-settings" : (
+		(mxStreamType == ODF_META_XML) ? "office:document-meta" : "office:document" )))));
+	tmpOfficeDocumentContent.addAttribute("xmlns:office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0");
+	tmpOfficeDocumentContent.addAttribute("xmlns:style", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
+	tmpOfficeDocumentContent.addAttribute("xmlns:text", "urn:oasis:names:tc:opendocument:xmlns:text:1.0");
+	tmpOfficeDocumentContent.addAttribute("xmlns:draw", "urn:oasis:names:tc:opendocument:xmlns:drawing:1.0");
+	tmpOfficeDocumentContent.addAttribute("xmlns:dc", "http://purl.org/dc/elements/1.1/");
+	tmpOfficeDocumentContent.addAttribute("xmlns:svg", "urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0");
+	tmpOfficeDocumentContent.addAttribute("xmlns:fo", "urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0");
+	tmpOfficeDocumentContent.addAttribute("xmlns:config", "urn:oasis:names:tc:opendocument:xmlns:config:1.0");
+	tmpOfficeDocumentContent.addAttribute("xmlns:ooo", "http://openoffice.org/2004/office");
+	tmpOfficeDocumentContent.addAttribute("office:version", "1.0");
+	if (mxStreamType == ODF_FLAT_XML)
+		tmpOfficeDocumentContent.addAttribute("office:mimetype", "application/vnd.oasis.opendocument.graphics");	
+	tmpOfficeDocumentContent.write(mpHandler);
+	
+	if ((mxStreamType == ODF_FLAT_XML) || (mxStreamType == ODF_SETTINGS_XML))
+	{
+		TagOpenElement("office:settings").write(mpHandler);
+	
+		TagOpenElement configItemSetOpenElement("config:config-item-set");
+		configItemSetOpenElement.addAttribute("config:name", "ooo:view-settings");
+		configItemSetOpenElement.write(mpHandler);
+	
+		TagOpenElement configItemOpenElement("config:config-item");
 
-        OpenTagGraphicsElement configItemSetOpenElement("config:config-item-set");
-        configItemSetOpenElement.addAttribute("config:name", "ooo:view-settings");
-        configItemSetOpenElement.write(mpHandler);
-
-        OpenTagGraphicsElement configItemOpenElement1("config:config-item");
-        configItemOpenElement1.addAttribute("config:name", "VisibleAreaTop");
-        configItemOpenElement1.addAttribute("config:type", "int");
-        configItemOpenElement1.write(mpHandler);
-        mpHandler->characters("0");
-        mpHandler->endElement("config:config-item");
-
-        OpenTagGraphicsElement configItemOpenElement2("config:config-item");
-        configItemOpenElement2.addAttribute("config:name", "VisibleAreaLeft");
-        configItemOpenElement2.addAttribute("config:type", "int");
-        configItemOpenElement2.write(mpHandler);
-        mpHandler->characters("0");
-        mpHandler->endElement("config:config-item");
-
-        OpenTagGraphicsElement configItemOpenElement3("config:config-item");
-        configItemOpenElement3.addAttribute("config:name", "VisibleAreaWidth");
-        configItemOpenElement3.addAttribute("config:type", "int");
-        configItemOpenElement3.write(mpHandler);
-        m_value.str("");
-        m_value << (unsigned)(2540 * width);
-        mpHandler->characters(m_value.str());
-        mpHandler->endElement("config:config-item");
-
-        OpenTagGraphicsElement configItemOpenElement4("config:config-item");
-        configItemOpenElement4.addAttribute("config:name", "VisibleAreaHeight");
-        configItemOpenElement4.addAttribute("config:type", "int");
-        configItemOpenElement4.write(mpHandler);
-        m_value.str("");
-        m_value << (unsigned)(2540 * height);
-        mpHandler->characters(m_value.str());
-        mpHandler->endElement("config:config-item");
-
-        mpHandler->endElement("config:config-item-set");
-
-        mpHandler->endElement("office:settings");
-
+		configItemOpenElement.addAttribute("config:name", "VisibleAreaTop");
+		configItemOpenElement.addAttribute("config:type", "int");
+		configItemOpenElement.write(mpHandler);
+		mpHandler->characters("0");
+		mpHandler->endElement("config:config-item");
+	
+		configItemOpenElement.addAttribute("config:name", "VisibleAreaLeft");
+		configItemOpenElement.addAttribute("config:type", "int");
+		configItemOpenElement.write(mpHandler);
+		mpHandler->characters("0");
+		mpHandler->endElement("config:config-item");
+	
+		configItemOpenElement.addAttribute("config:name", "VisibleAreaWidth");
+		configItemOpenElement.addAttribute("config:type", "int");
+		configItemOpenElement.write(mpHandler);
+		WPXString sWidth; sWidth.sprintf("%li", (unsigned long)(2540 * mfWidth));
+		mpHandler->characters(sWidth);
+		mpHandler->endElement("config:config-item");
+	
+		configItemOpenElement.addAttribute("config:name", "VisibleAreaHeight");
+		configItemOpenElement.addAttribute("config:type", "int");
+		configItemOpenElement.write(mpHandler);
+		WPXString sHeight; sHeight.sprintf("%li", (unsigned long)(2540 * mfHeight));
+		mpHandler->characters(sHeight);
+		mpHandler->endElement("config:config-item");
+	
+		mpHandler->endElement("config:config-item-set");
+	
+		mpHandler->endElement("office:settings");
+	}
 }
 
 void OdgExporter::endGraphics()
 {
-        OpenTagGraphicsElement("office:styles").write(mpHandler);
+	if ((mxStreamType == ODF_FLAT_XML) || (mxStreamType == ODF_STYLES_XML))
+	{
+		TagOpenElement("office:styles").write(mpHandler);
 
-        for (std::vector <GraphicsElement *>::const_iterator iterStroke = mStrokeDashElements.begin();
-                iterStroke != mStrokeDashElements.end(); iterStroke++)
-                (*iterStroke)->write(mpHandler);
+		for (std::vector<GraphicsElement *>::const_iterator iterGraphicsStrokeDashStyles = mGraphicsStrokeDashStyles.begin();
+			iterGraphicsStrokeDashStyles != mGraphicsStrokeDashStyles.end(); ++iterGraphicsStrokeDashStyles)
+		{
+			(*iterGraphicsStrokeDashStyles)->write(mpHandler);
+		}
 
-        for (std::vector <GraphicsElement *>::const_iterator iterGradient = mGradientElements.begin();
-                iterGradient != mGradientElements.end(); iterGradient++)
-                (*iterGradient)->write(mpHandler);
+		for (std::vector<GraphicsElement *>::const_iterator iterGraphicsGradientStyles = mGraphicsGradientStyles.begin();
+			iterGraphicsGradientStyles != mGraphicsGradientStyles.end(); ++iterGraphicsGradientStyles)
+		{
+			(*iterGraphicsGradientStyles)->write(mpHandler);
+		}
+	
+		mpHandler->endElement("office:styles");
+	}
 
-        mpHandler->endElement("office:styles");
+	
+	if ((mxStreamType == ODF_FLAT_XML) || (mxStreamType == ODF_CONTENT_XML) || (mxStreamType == ODF_STYLES_XML))
+	{
+		TagOpenElement("office:automatic-styles").write(mpHandler);
+	}
 
-        OpenTagGraphicsElement("office:automatic-styles").write(mpHandler);
+	if ((mxStreamType == ODF_FLAT_XML) || (mxStreamType == ODF_CONTENT_XML))
+	{
+		// writing out the graphics automatic styles
+		for (std::vector<GraphicsElement *>::iterator iterGraphicsAutomaticStyles = mGraphicsAutomaticStyles.begin();
+			iterGraphicsAutomaticStyles != mGraphicsAutomaticStyles.end(); ++iterGraphicsAutomaticStyles)
+		{
+			(*iterGraphicsAutomaticStyles)->write(mpHandler);
+		}
+	}
 
-        for (std::vector <GraphicsElement *>::const_iterator iterAutomaticStyles = mAutomaticStylesElements.begin();
-                iterAutomaticStyles != mAutomaticStylesElements.end(); iterAutomaticStyles++)
-                (*iterAutomaticStyles)->write(mpHandler);
+	if ((mxStreamType == ODF_FLAT_XML) || (mxStreamType == ODF_STYLES_XML))
+	{
+		TagOpenElement tmpStylePageLayoutOpenElement("style:page-layout");
+		tmpStylePageLayoutOpenElement.addAttribute("style:name", "PM0");
+		tmpStylePageLayoutOpenElement.write(mpHandler);
 
-        OpenTagGraphicsElement tmpStylePageLayoutOpenElement("style:page-layout");
-        tmpStylePageLayoutOpenElement.addAttribute("style:name", "PM0");
-        tmpStylePageLayoutOpenElement.write(mpHandler);
+		TagOpenElement tmpStylePageLayoutPropertiesOpenElement("style:page-layout-properties");
+		tmpStylePageLayoutPropertiesOpenElement.addAttribute("fo:margin-top", "0in");
+		tmpStylePageLayoutPropertiesOpenElement.addAttribute("fo:margin-bottom", "0in");
+		tmpStylePageLayoutPropertiesOpenElement.addAttribute("fo:margin-left", "0in");
+		tmpStylePageLayoutPropertiesOpenElement.addAttribute("fo:margin-right", "0in");
+		WPXString sValue;
+		sValue = doubleToString(mfWidth); sValue.append("in");
+		tmpStylePageLayoutPropertiesOpenElement.addAttribute("fo:page-width", sValue);
+		sValue = doubleToString(mfHeight); sValue.append("in");
+		tmpStylePageLayoutPropertiesOpenElement.addAttribute("fo:page-height", sValue);
+		tmpStylePageLayoutPropertiesOpenElement.addAttribute("style:print-orientation", "portrait");
+		tmpStylePageLayoutPropertiesOpenElement.write(mpHandler);
 
-        OpenTagGraphicsElement tmpStylePageLayoutPropertiesOpenElement("style:page-layout-properties");
-        tmpStylePageLayoutPropertiesOpenElement.addAttribute("fo:margin-top", "0in");
-        tmpStylePageLayoutPropertiesOpenElement.addAttribute("fo:margin-bottom", "0in");
-        tmpStylePageLayoutPropertiesOpenElement.addAttribute("fo:margin-left", "0in");
-        tmpStylePageLayoutPropertiesOpenElement.addAttribute("fo:margin-right", "0in");
-        m_value.str("");
-        m_value <<  doubleToString(m_width) << "in";
-        tmpStylePageLayoutPropertiesOpenElement.addAttribute("fo:page-width", m_value.str());
-        m_value.str("");
-        m_value << doubleToString(m_height)  << "in";
-        tmpStylePageLayoutPropertiesOpenElement.addAttribute("fo:page-height", m_value.str());
-        m_value.str("");
-        tmpStylePageLayoutPropertiesOpenElement.addAttribute("style:print-orientation", "portrait");
-        tmpStylePageLayoutPropertiesOpenElement.write(mpHandler);
+		mpHandler->endElement("style:page-layout-properties");
 
-        mpHandler->endElement("style:page-layout-properties");
+		mpHandler->endElement("style:page-layout");
 
-        mpHandler->endElement("style:page-layout");
+		TagOpenElement tmpStyleStyleOpenElement("style:style");
+		tmpStyleStyleOpenElement.addAttribute("style:name", "dp1");
+		tmpStyleStyleOpenElement.addAttribute("style:family", "drawing-page");
+		tmpStyleStyleOpenElement.write(mpHandler);
 
-        OpenTagGraphicsElement tmpStyleStyleOpenElement("style:style");
-        tmpStyleStyleOpenElement.addAttribute("style:name", "dp1");
-        tmpStyleStyleOpenElement.addAttribute("style:family", "drawing-page");
-        tmpStyleStyleOpenElement.write(mpHandler);
+		TagOpenElement tmpStyleDrawingPagePropertiesOpenElement("style:drawing-page-properties");
+		// tmpStyleDrawingPagePropertiesOpenElement.addAttribute("draw:background-size", "border");
+		tmpStyleDrawingPagePropertiesOpenElement.addAttribute("draw:fill", "none");
+		tmpStyleDrawingPagePropertiesOpenElement.write(mpHandler);
 
-        OpenTagGraphicsElement tmpStyleDrawingPagePropertiesOpenElement("style:drawing-page-properties");
-        // tmpStyleDrawingPagePropertiesOpenElement.addAttribute("draw:background-size", "border");
-        tmpStyleDrawingPagePropertiesOpenElement.addAttribute("draw:fill", "none");
-        tmpStyleDrawingPagePropertiesOpenElement.write(mpHandler);
+		mpHandler->endElement("style:drawing-page-properties");
 
-        mpHandler->endElement("style:drawing-page-properties");
+		mpHandler->endElement("style:style");
+	}
+	
+	if ((mxStreamType == ODF_FLAT_XML) || (mxStreamType == ODF_CONTENT_XML) || (mxStreamType == ODF_STYLES_XML))
+	{
+		mpHandler->endElement("office:automatic-styles");
+	}
 
-        mpHandler->endElement("style:style");
+	if ((mxStreamType == ODF_FLAT_XML) || (mxStreamType == ODF_STYLES_XML))
+	{
+		TagOpenElement("office:master-styles").write(mpHandler);
 
-        mpHandler->endElement("office:automatic-styles");
+		TagOpenElement tmpStyleMasterPageOpenElement("style:master-page");
+		tmpStyleMasterPageOpenElement.addAttribute("style:name", "Default");
+		tmpStyleMasterPageOpenElement.addAttribute("style:page-layout-name", "PM0");
+		tmpStyleMasterPageOpenElement.addAttribute("draw:style-name", "dp1");
+		tmpStyleMasterPageOpenElement.write(mpHandler);
 
-        OpenTagGraphicsElement("office:master-styles").write(mpHandler);
+		mpHandler->endElement("style:master-page");
 
-        OpenTagGraphicsElement tmpStyleMasterPageOpenElement("style:master-page");
-        tmpStyleMasterPageOpenElement.addAttribute("style:name", "Default");
-        tmpStyleMasterPageOpenElement.addAttribute("style:page-layout-name", "PM0");
-        tmpStyleMasterPageOpenElement.addAttribute("draw:style-name", "dp1");
-        tmpStyleMasterPageOpenElement.write(mpHandler);
+		mpHandler->endElement("office:master-styles");
+	}
+	
+	if ((mxStreamType == ODF_FLAT_XML) || (mxStreamType == ODF_CONTENT_XML))
+	{
+		TagOpenElement("office:body").write(mpHandler);
 
-        mpHandler->endElement("style:master-page");
+		TagOpenElement("office:drawing").write(mpHandler);
 
-        mpHandler->endElement("office:master-styles");
+		TagOpenElement tmpDrawPageOpenElement("draw:page");
+		tmpDrawPageOpenElement.addAttribute("draw:name", "page1");
+		tmpDrawPageOpenElement.addAttribute("draw:style-name", "dp1");
+		tmpDrawPageOpenElement.addAttribute("draw:master-page-name", "Default");
+		tmpDrawPageOpenElement.write(mpHandler);
 
-        OpenTagGraphicsElement("office:body").write(mpHandler);
+		for (std::vector<GraphicsElement *>::const_iterator bodyIter = mBodyElements.begin();
+			bodyIter != mBodyElements.end(); ++bodyIter)
+		{
+			(*bodyIter)->write(mpHandler);
+		}	
 
-        OpenTagGraphicsElement("office:drawing").write(mpHandler);
+		mpHandler->endElement("draw:page");
+		mpHandler->endElement("office:drawing");
+		mpHandler->endElement("office:body");
+	}
 
-        OpenTagGraphicsElement tmpDrawPageOpenElement("draw:page");
-        tmpDrawPageOpenElement.addAttribute("draw:name", "page1");
-        tmpDrawPageOpenElement.addAttribute("draw:style-name", "dp1");
-        tmpDrawPageOpenElement.addAttribute("draw:master-page-name", "Default");
-        tmpDrawPageOpenElement.write(mpHandler);
+	mpHandler->endElement(
+		(mxStreamType == ODF_FLAT_XML) ? "office:document" : (
+		(mxStreamType == ODF_CONTENT_XML) ? "office:document-content" : (
+		(mxStreamType == ODF_STYLES_XML) ? "office:document-styles" : (
+		(mxStreamType == ODF_SETTINGS_XML) ? "office:document-settings" : (
+		(mxStreamType == ODF_META_XML) ? "office:document-meta" : "office:document" )))));
 
-        for (std::vector<GraphicsElement *>::const_iterator bodyIter = mBodyElements.begin();
-                bodyIter != mBodyElements.end(); bodyIter++)
-        {
-                (*bodyIter)->write(mpHandler);
-        }
-
-        mpHandler->endElement("draw:page");
-        mpHandler->endElement("office:drawing");
-        mpHandler->endElement("office:body");
-        mpHandler->endElement("office:document");
-
-        mpHandler->endDocument();
+	mpHandler->endDocument();
 }
 
-void OdgExporter::setPen(const libwpg::WPGPen& pen)
+void OdgExporter::setStyle(const ::WPXPropertyList & propList, const ::WPXPropertyListVector& gradient)
 {
-        m_pen = pen;
+	mxStyle = propList;
+	mxGradient = gradient;
 }
 
-void OdgExporter::setBrush(const libwpg::WPGBrush& brush)
-{
-        m_brush = brush;
-}
-
-void OdgExporter::setFillRule(FillRule rule)
-{
-        m_fillRule = rule;
-}
-
-void OdgExporter::startLayer(unsigned int)
+void OdgExporter::startLayer(const ::WPXPropertyList & /* propList */)
 {
 }
 
-void OdgExporter::endLayer(unsigned int)
+void OdgExporter::endLayer()
 {
 }
 
-void OdgExporter::drawRectangle(const libwpg::WPGRect& rect, double rx, double )
+void OdgExporter::drawRectangle(const ::WPXPropertyList &propList)
 {
-        writeStyle();
-        OpenTagGraphicsElement *pDrawRectElement = new OpenTagGraphicsElement("draw:rect");
-        m_value.str("");
-        m_value << "gr" << m_styleIndex-1;
-        pDrawRectElement->addAttribute("draw:style-name", m_value.str());
-        m_value.str("");
-        m_value << doubleToString(rect.x1) << "in";
-        pDrawRectElement->addAttribute("svg:x", m_value.str());
-        m_value.str("");
-        m_value << doubleToString(rect.y1) << "in";
-        pDrawRectElement->addAttribute("svg:y", m_value.str());
-        m_value.str("");
-        m_value << doubleToString(rect.x2-rect.x1) << "in";
-        pDrawRectElement->addAttribute("svg:width", m_value.str());
-        m_value.str("");
-        m_value << doubleToString(rect.y2-rect.y1) << "in";
-        pDrawRectElement->addAttribute("svg:height", m_value.str());
-        m_value.str("");
-        m_value << doubleToString(rx) << "in";
-        // FIXME: what to do when rx != ry ?
-        pDrawRectElement->addAttribute("draw:corner-radius", m_value.str());
-        m_value.str("");
-        mBodyElements.push_back(static_cast<GraphicsElement *>(pDrawRectElement));
-        mBodyElements.push_back(static_cast<GraphicsElement *>(new CloseTagGraphicsElement("draw:rect")));
+	writeGraphicsStyle();
+	TagOpenElement *pDrawRectElement = new TagOpenElement("draw:rect");
+	WPXString sValue;
+	sValue.sprintf("gr%i", miGraphicsStyleIndex-1);
+	pDrawRectElement->addAttribute("draw:style-name", sValue);
+	pDrawRectElement->addAttribute("svg:x", propList["svg:x"]->getStr());
+	pDrawRectElement->addAttribute("svg:y", propList["svg:y"]->getStr());
+	pDrawRectElement->addAttribute("svg:width", propList["svg:width"]->getStr());
+	pDrawRectElement->addAttribute("svg:height", propList["svg:height"]->getStr());
+	// FIXME: what to do when rx != ry ?
+	if (propList["svg:rx"])
+		pDrawRectElement->addAttribute("draw:corner-radius", propList["svg:rx"]->getStr());
+	else
+		pDrawRectElement->addAttribute("draw:corner-radius", "0.0000in");
+	mBodyElements.push_back(pDrawRectElement);
+	mBodyElements.push_back(new TagCloseElement("draw:rect"));	
 }
 
-void OdgExporter::drawEllipse(const libwpg::WPGPoint& center, double rx, double ry)
+void OdgExporter::drawEllipse(const ::WPXPropertyList &propList)
 {
-        writeStyle();
-        OpenTagGraphicsElement *pDrawEllipseElement = new OpenTagGraphicsElement("draw:ellipse");
-        m_value.str("");
-        m_value << "gr" << m_styleIndex-1;
-        pDrawEllipseElement->addAttribute("draw:style-name", m_value.str());
-        m_value.str("");
-        m_value << doubleToString(center.x - rx) << "in";
-        pDrawEllipseElement->addAttribute("svg:x", m_value.str());
-        m_value.str("");
-        m_value << doubleToString(center.y - ry) << "in";
-        pDrawEllipseElement->addAttribute("svg:y", m_value.str());
-        m_value.str("");
-        m_value << doubleToString(2 * rx) << "in";
-        pDrawEllipseElement->addAttribute("svg:width", m_value.str());
-        m_value.str("");
-        m_value << doubleToString(2 * ry) << "in";
-        pDrawEllipseElement->addAttribute("svg:height", m_value.str());
-        m_value.str("");
-        mBodyElements.push_back(static_cast<GraphicsElement *>(pDrawEllipseElement));
-        mBodyElements.push_back(static_cast<GraphicsElement *>(new CloseTagGraphicsElement("draw:ellipse")));
+	writeGraphicsStyle();
+	TagOpenElement *pDrawEllipseElement = new TagOpenElement("draw:ellipse");
+	WPXString sValue;
+	sValue.sprintf("gr%i", miGraphicsStyleIndex-1);
+	pDrawEllipseElement->addAttribute("draw:style-name", sValue);
+	sValue = doubleToString(2 * propList["svg:rx"]->getDouble()); sValue.append("in");
+	pDrawEllipseElement->addAttribute("svg:width", sValue);
+	sValue = doubleToString(2 * propList["svg:ry"]->getDouble()); sValue.append("in");
+	pDrawEllipseElement->addAttribute("svg:height", sValue);
+	if (propList["libwpg:rotate"] && propList["libwpg:rotate"]->getDouble() != 0.0)
+	{
+		double rotation = propList["libwpg:rotate"]->getDouble();
+		while(rotation < -180)
+			rotation += 360;
+		while(rotation > 180)
+			rotation -= 360;
+		double radrotation = rotation*M_PI/180.0;
+		double deltax = sqrt(pow(propList["svg:rx"]->getDouble(), 2.0)
+			+ pow(propList["svg:ry"]->getDouble(), 2.0))*cos(atan(propList["svg:ry"]->getDouble()/propList["svg:rx"]->getDouble())
+			- radrotation ) - propList["svg:rx"]->getDouble();
+		double deltay = sqrt(pow(propList["svg:rx"]->getDouble(), 2.0)
+			+ pow(propList["svg:ry"]->getDouble(), 2.0))*sin(atan(propList["svg:ry"]->getDouble()/propList["svg:rx"]->getDouble())
+			- radrotation ) - propList["svg:ry"]->getDouble();
+		sValue = "rotate("; sValue.append(doubleToString(radrotation)); sValue.append(") ");
+		sValue.append("translate("); sValue.append(doubleToString(propList["svg:cx"]->getDouble() - propList["svg:rx"]->getDouble() - deltax));
+		sValue.append("in, ");
+		sValue.append(doubleToString(propList["svg:cy"]->getDouble() - propList["svg:ry"]->getDouble() - deltay)); sValue.append("in)");
+		pDrawEllipseElement->addAttribute("draw:transform", sValue);
+	}
+	else
+	{
+		sValue = doubleToString(propList["svg:cx"]->getDouble()-propList["svg:rx"]->getDouble()); sValue.append("in");
+		pDrawEllipseElement->addAttribute("svg:x", sValue);
+		sValue = doubleToString(propList["svg:cy"]->getDouble()-propList["svg:ry"]->getDouble()); sValue.append("in");
+		pDrawEllipseElement->addAttribute("svg:y", sValue);
+	}
+	mBodyElements.push_back(pDrawEllipseElement);
+	mBodyElements.push_back(new TagCloseElement("draw:ellipse"));
 }
 
-void OdgExporter::drawPolygon(const libwpg::WPGPointArray& vertices)
+void OdgExporter::drawPolyline(const ::WPXPropertyListVector& vertices)
 {
-        if(vertices.count() < 2)
-                return;
-
-        if(vertices.count() == 2)
-        {
-                const libwpg::WPGPoint& p1 = vertices[0];
-                const libwpg::WPGPoint& p2 = vertices[1];
-
-                writeStyle();
-                OpenTagGraphicsElement *pDrawLineElement = new OpenTagGraphicsElement("draw:line");
-                m_value.str("");
-                m_value << "gr" << m_styleIndex-1;
-                pDrawLineElement->addAttribute("draw:style-name", m_value.str());
-                m_value.str("");
-                pDrawLineElement->addAttribute("draw:text-style-name", "P1");
-                pDrawLineElement->addAttribute("draw:layer", "layout");
-                m_value << doubleToString(p1.x)  << "in";
-                pDrawLineElement->addAttribute("svg:x1", m_value.str());
-                m_value.str("");
-                m_value << doubleToString(p1.y)  << "in";
-                pDrawLineElement->addAttribute("svg:y1", m_value.str());
-                m_value.str("");
-                m_value  << doubleToString(p2.x)  << "in";
-                pDrawLineElement->addAttribute("svg:x2", m_value.str());
-                m_value.str("");
-                m_value << doubleToString(p2.y)  << "in";
-                pDrawLineElement->addAttribute("svg:y2", m_value.str());
-                m_value.str("");
-                mBodyElements.push_back(static_cast<GraphicsElement *>(pDrawLineElement));
-                mBodyElements.push_back(static_cast<GraphicsElement *>(new CloseTagGraphicsElement("draw:line")));
-        }
-        else
-        {
-                // draw as path
-                libwpg::WPGPath path;
-                path.moveTo(vertices[0]);
-                for(unsigned long ii = 1; ii < vertices.count(); ii++)
-                        path.lineTo(vertices[ii]);
-                path.closed = true;
-                drawPath(path);
-        }
+	drawPolySomething(vertices, false);
 }
 
-void OdgExporter::drawPath(const libwpg::WPGPath& path)
+void OdgExporter::drawPolygon(const ::WPXPropertyListVector& vertices)
 {
-        if(path.count() == 0)
-                return;
-
-        // try to find the bounding box
-        // this is simple convex hull technique, the bounding box might not be
-        // accurate but that should be enough for this purpose
-        libwpg::WPGPoint p = path.element(0).point;
-        libwpg::WPGPoint q = path.element(0).point;
-        for(unsigned k = 0; k < path.count(); k++)
-        {
-                libwpg::WPGPathElement element = path.element(k);
-                p.x = (p.x > element.point.x) ? element.point.x : p.x;
-                p.y = (p.y > element.point.y) ? element.point.y : p.y;
-                q.x = (q.x < element.point.x) ? element.point.x : q.x;
-                q.y = (q.y < element.point.y) ? element.point.y : q.y;
-                if(element.type == libwpg::WPGPathElement::CurveToElement)
-                {
-                        p.x = (p.x > element.extra1.x) ? element.extra1.x : p.x;
-                        p.y = (p.y > element.extra1.y) ? element.extra1.y : p.y;
-                        q.x = (q.x < element.extra1.x) ? element.extra1.x : q.x;
-                        q.y = (q.y < element.extra1.y) ? element.extra1.y : q.y;
-                        p.x = (p.x > element.extra2.x) ? element.extra2.x : p.x;
-                        p.y = (p.y > element.extra2.y) ? element.extra2.y : p.y;
-                        q.x = (q.x < element.extra2.x) ? element.extra2.x : q.x;
-                        q.y = (q.y < element.extra2.y) ? element.extra2.y : q.y;
-                }
-        }
-        double vw = q.x - p.x;
-        double vh = q.y - p.y;
-
-        writeStyle();
-
-        OpenTagGraphicsElement *pDrawPathElement = new OpenTagGraphicsElement("draw:path");
-        m_value.str("");
-        m_value << "gr" << m_styleIndex-1;
-        pDrawPathElement->addAttribute("draw:style-name", m_value.str());
-        m_value.str("");
-        pDrawPathElement->addAttribute("draw:text-style-name", "P1");
-        pDrawPathElement->addAttribute("draw:layer", "layout");
-        m_value << doubleToString(p.x)  << "in";
-        pDrawPathElement->addAttribute("svg:x", m_value.str());
-        m_value.str("");
-        m_value << doubleToString(p.y)  << "in";
-        pDrawPathElement->addAttribute("svg:y", m_value.str());
-        m_value.str("");
-        m_value << doubleToString(vw) << "in";
-        pDrawPathElement->addAttribute("svg:width", m_value.str());
-        m_value.str("");
-        m_value << doubleToString(vh) << "in";
-        pDrawPathElement->addAttribute("svg:height", m_value.str());
-        m_value.str("");
-        m_value << "0 0 " << (int)(vw*2540) << " " << (int)(vh*2540);
-        pDrawPathElement->addAttribute("svg:viewBox", m_value.str());
-        m_value.str("");
-
-        for(unsigned i = 0; i < path.count(); i++)
-        {
-                libwpg::WPGPathElement element = path.element(i);
-                libwpg::WPGPoint point = element.point;
-                switch(element.type)
-                {
-                        // 2540 is 2.54*1000, 2.54 in = 1 in
-                        case libwpg::WPGPathElement::MoveToElement:
-                                m_value << "M" << (int)((point.x-p.x)*2540) << " ";
-                                m_value << (int)((point.y-p.y)*2540);
-                                break;
-
-                        case libwpg::WPGPathElement::LineToElement:
-                                m_value << "L" << (int)((point.x-p.x)*2540) << " ";
-                                m_value << (int)((point.y-p.y)*2540);
-                                break;
-
-                        case libwpg::WPGPathElement::CurveToElement:
-                                m_value << "C" << (int)((element.extra1.x-p.x)*2540) << " ";
-                                m_value << (int)((element.extra1.y-p.y)*2540) << " ";
-                                m_value << (int)((element.extra2.x-p.x)*2540) << " ";
-                                m_value << (int)((element.extra2.y-p.y)*2540) << " ";
-                                m_value << (int)((point.x-p.x)*2540) << " ";
-                                m_value << (int)((point.y-p.y)*2540);
-                                break;
-
-                        default:
-                                break;
-                }
-        }
-        if(path.closed)
-                m_value << " Z";
-        pDrawPathElement->addAttribute("svg:d", m_value.str());
-        m_value.str("");
-        mBodyElements.push_back(static_cast<GraphicsElement *>(pDrawPathElement));
-        mBodyElements.push_back(static_cast<GraphicsElement *>(new CloseTagGraphicsElement("draw:path")));
+	drawPolySomething(vertices, true);
 }
 
-
-void OdgExporter::drawBitmap(const libwpg::WPGBitmap& bitmap)
+void OdgExporter::drawPolySomething(const ::WPXPropertyListVector& vertices, bool isClosed)
 {
-        OpenTagGraphicsElement *pDrawFrameElement = new OpenTagGraphicsElement("draw:frame");
-        m_value.str("");
-        m_value << doubleToString(bitmap.rect.x1) << "in";
-        pDrawFrameElement->addAttribute("svg:x", m_value.str());
-        m_value.str("");
-        m_value << doubleToString(bitmap.rect.y1) << "in";
-        pDrawFrameElement->addAttribute("svg:y", m_value.str());
-        m_value.str("");
-        m_value << doubleToString(bitmap.rect.height()) << "in";
-        pDrawFrameElement->addAttribute("svg:height", m_value.str());
-        m_value.str("");
-        m_value << doubleToString(bitmap.rect.width()) << "in";
-        pDrawFrameElement->addAttribute("svg:width", m_value.str());
-        mBodyElements.push_back(static_cast<GraphicsElement *>(pDrawFrameElement));
+	if(vertices.count() < 2)
+		return;
 
-        mBodyElements.push_back(static_cast<GraphicsElement *>(new OpenTagGraphicsElement("draw:image")));
+	if(vertices.count() == 2)
+	{
+		writeGraphicsStyle();
+		TagOpenElement *pDrawLineElement = new TagOpenElement("draw:line");
+		WPXString sValue;
+		sValue.sprintf("gr%i", miGraphicsStyleIndex-1);
+		pDrawLineElement->addAttribute("draw:style-name", sValue);
+		pDrawLineElement->addAttribute("draw:text-style-name", "P1");
+		pDrawLineElement->addAttribute("draw:layer", "layout");
+		pDrawLineElement->addAttribute("svg:x1", vertices[0]["svg:x"]->getStr());
+		pDrawLineElement->addAttribute("svg:y1", vertices[0]["svg:y"]->getStr());
+		pDrawLineElement->addAttribute("svg:x2", vertices[1]["svg:x"]->getStr());
+		pDrawLineElement->addAttribute("svg:y2", vertices[1]["svg:y"]->getStr());
+		mBodyElements.push_back(pDrawLineElement);
+		mBodyElements.push_back(new TagCloseElement("draw:line"));
+	}
+	else
+	{
+		::WPXPropertyListVector path;
+		::WPXPropertyList element;
 
-        mBodyElements.push_back(static_cast<GraphicsElement *>(new OpenTagGraphicsElement("office:binary-data")));
-
-        libwpg::WPGString base64Binary;
-        bitmap.generateBase64DIB(base64Binary);
-        mBodyElements.push_back(static_cast<GraphicsElement *>(new CharDataGraphicsElement(base64Binary.cstr())));
-
-        mBodyElements.push_back(static_cast<GraphicsElement *>(new CloseTagGraphicsElement("office:binary-data")));
-
-        mBodyElements.push_back(static_cast<GraphicsElement *>(new CloseTagGraphicsElement("draw:image")));
-
-        mBodyElements.push_back(static_cast<GraphicsElement *>(new CloseTagGraphicsElement("draw:frame")));
+		for (unsigned long ii = 0; ii < vertices.count(); ++ii)
+		{
+			element = vertices[ii];
+			if (ii == 0)
+				element.insert("libwpg:path-action", "M");
+			else
+				element.insert("libwpg:path-action", "L");
+			path.append(element);
+			element.clear();
+		}
+		if (isClosed)
+		{
+			element.insert("libwpg:path-action", "Z");
+			path.append(element);
+		}
+		drawPath(path);
+	}
 }
 
-void OdgExporter::drawImageObject(const libwpg::WPGBinaryData& binaryData)
+void OdgExporter::drawPath(const WPXPropertyListVector& path)
 {
-        if (binaryData.mimeType.length() <= 0)
-                return;
-        OpenTagGraphicsElement *pDrawFrameElement = new OpenTagGraphicsElement("draw:frame");
-        m_value.str("");
-        m_value << doubleToString(binaryData.rect.x1) << "in";
-        pDrawFrameElement->addAttribute("svg:x", m_value.str());
-        m_value.str("");
-        m_value << doubleToString(binaryData.rect.y1) << "in";
-        pDrawFrameElement->addAttribute("svg:y", m_value.str());
-        m_value.str("");
-        m_value << doubleToString(binaryData.rect.height()) << "in";
-        pDrawFrameElement->addAttribute("svg:height", m_value.str());
-        m_value.str("");
-        m_value << doubleToString(binaryData.rect.width()) << "in";
-        pDrawFrameElement->addAttribute("svg:width", m_value.str());
-        mBodyElements.push_back(static_cast<GraphicsElement *>(pDrawFrameElement));
+	if(path.count() == 0)
+		return;
 
-        mBodyElements.push_back(static_cast<GraphicsElement *>(new OpenTagGraphicsElement("draw:image")));
+	// try to find the bounding box
+	// this is simple convex hull technique, the bounding box might not be
+	// accurate but that should be enough for this purpose
+	double px = path[0]["svg:x"]->getDouble();
+	double py = path[0]["svg:y"]->getDouble();
+	double qx = path[0]["svg:x"]->getDouble();
+	double qy = path[0]["svg:y"]->getDouble();
+	for(unsigned k = 0; k < path.count(); ++k)
+	{
+		if (!path[k]["svg:x"] || !path[k]["svg:y"])
+			continue;
+		px = (px > path[k]["svg:x"]->getDouble()) ? path[k]["svg:x"]->getDouble() : px; 
+		py = (py > path[k]["svg:y"]->getDouble()) ? path[k]["svg:y"]->getDouble() : py; 
+		qx = (qx < path[k]["svg:x"]->getDouble()) ? path[k]["svg:x"]->getDouble() : qx; 
+		qy = (qy < path[k]["svg:y"]->getDouble()) ? path[k]["svg:y"]->getDouble() : qy; 
+		if(path[k]["libwpg:path-action"]->getStr() == "C")
+		{
+			px = (px > path[k]["svg:x1"]->getDouble()) ? path[k]["svg:x1"]->getDouble() : px; 
+			py = (py > path[k]["svg:y1"]->getDouble()) ? path[k]["svg:y1"]->getDouble() : py; 
+			qx = (qx < path[k]["svg:x1"]->getDouble()) ? path[k]["svg:x1"]->getDouble() : qx; 
+			qy = (qy < path[k]["svg:y1"]->getDouble()) ? path[k]["svg:y1"]->getDouble() : qy; 
+			px = (px > path[k]["svg:x2"]->getDouble()) ? path[k]["svg:x2"]->getDouble() : px; 
+			py = (py > path[k]["svg:y2"]->getDouble()) ? path[k]["svg:y2"]->getDouble() : py; 
+			qx = (qx < path[k]["svg:x2"]->getDouble()) ? path[k]["svg:x2"]->getDouble() : qx; 
+			qy = (qy < path[k]["svg:y2"]->getDouble()) ? path[k]["svg:y2"]->getDouble() : qy; 
+		}
+		if(path[k]["libwpg:path-action"]->getStr() == "A")
+		{
+			px = (px > path[k]["svg:x"]->getDouble()-2*path[k]["svg:rx"]->getDouble()) ? path[k]["svg:x"]->getDouble()-2*path[k]["svg:rx"]->getDouble() : px;
+			py = (py > path[k]["svg:y"]->getDouble()-2*path[k]["svg:ry"]->getDouble()) ? path[k]["svg:y"]->getDouble()-2*path[k]["svg:ry"]->getDouble() : py;
+			qx = (qx < path[k]["svg:x"]->getDouble()+2*path[k]["svg:rx"]->getDouble()) ? path[k]["svg:x"]->getDouble()+2*path[k]["svg:rx"]->getDouble() : qx;
+			qy = (qy < path[k]["svg:y"]->getDouble()+2*path[k]["svg:ry"]->getDouble()) ? path[k]["svg:y"]->getDouble()+2*path[k]["svg:ry"]->getDouble() : qy;
+		}
+	}
+	double vw = qx - px;
+	double vh = qy - py;
+		
+	writeGraphicsStyle();
 
-        mBodyElements.push_back(static_cast<GraphicsElement *>(new OpenTagGraphicsElement("office:binary-data")));
+	TagOpenElement *pDrawPathElement = new TagOpenElement("draw:path");
+	WPXString sValue;
+	sValue.sprintf("gr%i", miGraphicsStyleIndex-1);
+	pDrawPathElement->addAttribute("draw:style-name", sValue);
+	pDrawPathElement->addAttribute("draw:text-style-name", "P1");
+	pDrawPathElement->addAttribute("draw:layer", "layout");
+	sValue = doubleToString(px); sValue.append("in");
+	pDrawPathElement->addAttribute("svg:x", sValue);
+	sValue = doubleToString(py); sValue.append("in");
+	pDrawPathElement->addAttribute("svg:y", sValue);
+	sValue = doubleToString(vw); sValue.append("in");
+	pDrawPathElement->addAttribute("svg:width", sValue);
+	sValue = doubleToString(vh); sValue.append("in");
+	pDrawPathElement->addAttribute("svg:height", sValue);
+	sValue.sprintf("%i %i %i %i", 0, 0, (unsigned)(vw*2540), (unsigned)(vh*2540));
+	pDrawPathElement->addAttribute("svg:viewBox", sValue);
 
-        libwpg::WPGString base64Binary = binaryData.getBase64Data();
-        mBodyElements.push_back(static_cast<GraphicsElement *>(new CharDataGraphicsElement(base64Binary.cstr())));
-
-        mBodyElements.push_back(static_cast<GraphicsElement *>(new CloseTagGraphicsElement("office:binary-data")));
-
-        mBodyElements.push_back(static_cast<GraphicsElement *>(new CloseTagGraphicsElement("draw:image")));
-
-        mBodyElements.push_back(static_cast<GraphicsElement *>(new CloseTagGraphicsElement("draw:frame")));
+    sValue.clear();
+	for(unsigned i = 0; i < path.count(); ++i)
+	{
+        WPXString sElement;
+		if (path[i]["libwpg:path-action"]->getStr() == "M")
+		{
+			// 2540 is 2.54*1000, 2.54 in = 1 inch
+		    sElement.sprintf("M%i %i", (unsigned)((path[i]["svg:x"]->getDouble()-px)*2540),
+				(unsigned)((path[i]["svg:y"]->getDouble()-py)*2540));
+			sValue.append(sElement);
+		}
+		else if (path[i]["libwpg:path-action"]->getStr() == "L")
+		{
+		    sElement.sprintf("L%i %i", (unsigned)((path[i]["svg:x"]->getDouble()-px)*2540),
+				(unsigned)((path[i]["svg:y"]->getDouble()-py)*2540));
+			sValue.append(sElement);
+		}
+		else if (path[i]["libwpg:path-action"]->getStr() == "C")
+		{			
+			sElement.sprintf("C%i %i %i %i %i %i", (unsigned)((path[i]["svg:x1"]->getDouble()-px)*2540),
+				(int)((path[i]["svg:y1"]->getDouble()-py)*2540), (unsigned)((path[i]["svg:x2"]->getDouble()-px)*2540),
+				(int)((path[i]["svg:y2"]->getDouble()-py)*2540), (unsigned)((path[i]["svg:x"]->getDouble()-px)*2540),
+				(unsigned)((path[i]["svg:y"]->getDouble()-py)*2540));
+			sValue.append(sElement);
+		}
+		else if (path[i]["libwpg:path-action"]->getStr() == "A")
+		{			
+			sElement.sprintf("A%i %i %i %i %i %i %i", (unsigned)((path[i]["svg:rx"]->getDouble())*2540),
+				(int)((path[i]["svg:ry"]->getDouble())*2540), (path[i]["libwpg:rotate"] ? path[i]["libwpg:rotate"]->getInt() : 0), 
+				0, 0, (unsigned)((path[i]["svg:x"]->getDouble()-px)*2540), (unsigned)((path[i]["svg:y"]->getDouble()-py)*2540));
+			sValue.append(sElement);
+		}
+		else if (path[i]["libwpg:path-action"]->getStr() == "Z" && i >= (path.count() - 1))
+			sValue.append(" Z");
+	}
+	pDrawPathElement->addAttribute("svg:d", sValue);
+	mBodyElements.push_back(pDrawPathElement);
+	mBodyElements.push_back(new TagCloseElement("draw:path"));
 }
 
-
-static std::string colorToHex(const libwpg::WPGColor& color)
+void OdgExporter::drawGraphicObject(const ::WPXPropertyList &propList, const ::WPXBinaryData& binaryData)
 {
-        char hexdigits[] = "0123456789abcdef";
-        char buffer[] = "123456";
-        buffer[0] = hexdigits[(color.red >> 4) & 15];
-        buffer[1] = hexdigits[color.red & 15];
-        buffer[2] = hexdigits[(color.green >> 4) & 15];
-        buffer[3] = hexdigits[color.green & 15];
-        buffer[4] = hexdigits[(color.blue >> 4) & 15];
-        buffer[5] = hexdigits[color.blue & 15];
-        return std::string(buffer);
+	if (!propList["libwpg:mime-type"] && propList["libwpg:mime-type"]->getStr().len() <= 0)
+		return;
+	TagOpenElement *pDrawFrameElement = new TagOpenElement("draw:frame");
+	
+	
+	WPXString sValue;
+	if (propList["svg:x"])
+		pDrawFrameElement->addAttribute("svg:x", propList["svg:x"]->getStr());
+	if (propList["svg:y"])
+		pDrawFrameElement->addAttribute("svg:y", propList["svg:y"]->getStr());
+	if (propList["svg:height"])
+		pDrawFrameElement->addAttribute("svg:height", propList["svg:height"]->getStr());
+	if (propList["svg:width"])
+		pDrawFrameElement->addAttribute("svg:width", propList["svg:width"]->getStr());
+	mBodyElements.push_back(pDrawFrameElement);
+	
+	mBodyElements.push_back(new TagOpenElement("draw:image"));
+	
+	mBodyElements.push_back(new TagOpenElement("office:binary-data"));
+	
+	::WPXString base64Binary = binaryData.getBase64Data();
+	mBodyElements.push_back(new CharDataElement(base64Binary.cstr()));
+	
+	mBodyElements.push_back(new TagCloseElement("office:binary-data"));
+	
+	mBodyElements.push_back(new TagCloseElement("draw:image"));
+	
+	mBodyElements.push_back(new TagCloseElement("draw:frame"));
 }
 
-void OdgExporter::writeStyle()
+void OdgExporter::writeGraphicsStyle()
 {
-        m_value.str("");
-        m_name.str("");
+#if 0
+	if(mxStyle["libwpg:stroke-solid"] && !mxStyle["libwpg:stroke-solid"]->getInt() && (mxDashArray.count() >=2 ) )
+	{
+		// ODG only supports dashes with the same length of spaces inbetween
+		// here we take the first space and assume everything else the same
+		// note that dash length is written in percentage ?????????????????
+		double distance = mxDashArray.at(1);
+		TagOpenElement *pDrawStrokeDashElement = new TagOpenElement("draw:stroke-dash");
+		pDrawStrokeDashElement->addAttribute("draw:style", "rect");
+		WPXString sValue;
+		sValue.sprintf("Dash_%i", miDashIndex++);
+		pDrawStrokeDashElement->addAttribute("draw:name", sValue);
+		sValue = doubleToString(distance); sValue.append("in");
+		pDrawStrokeDashElement->addAttribute("draw:distance", sValue);
+		WPXString sName;
+		// We have to find out how to do this intelligently, since the ODF is allowing only
+		// two pairs draw:dots1 draw:dots1-length and draw:dots2 draw:dots2-length
+		for(unsigned i = 0; i < mxDashArray.count()/2 && i < 2; i++)
+		{
+			sName.sprintf("draw:dots%i", i+1);
+			pDrawStrokeDashElement->addAttribute(sName.cstr(), "1");
+			sName.sprintf("draw:dots%i-length", i+1);
+			sValue = doubleToString(mxDashArray.at(i*2)); sValue.append("in");
+			pDrawStrokeDashElement->addAttribute(sName.cstr(), sValue);
+		}
+		mGraphicsStrokeDashStyles.push_back(pDrawStrokeDashElement);
+		mGraphicsStrokeDashStyles.push_back(new TagCloseElement("draw:stroke-dash"));
+	}
+#endif
+	if(mxStyle["draw:fill"] && mxStyle["draw:fill"]->getStr() == "gradient" && mxGradient.count() >= 2)
+	{
+		TagOpenElement *pDrawGradientElement = new TagOpenElement("draw:gradient");
+		pDrawGradientElement->addAttribute("draw:style", "linear");
+		WPXString sValue;
+		sValue.sprintf("Gradient_%i", miGradientIndex++);
+		pDrawGradientElement->addAttribute("draw:name", sValue);
 
-        if(!m_pen.solid && (m_pen.dashArray.count() >=2 ) )
-        {
-                // ODG only supports dashes with the same length of spaces inbetween
-                // here we take the first space and assume everything else the same
-                // note that dash length is written in percentage
-                double distance = m_pen.dashArray.at(1);
-                OpenTagGraphicsElement *tmpDrawStrokeDashElement = new OpenTagGraphicsElement("draw:stroke-dash");
-                tmpDrawStrokeDashElement->addAttribute("draw:style", "rect");
-                m_value << "Dash_" << m_dashIndex++;
-                tmpDrawStrokeDashElement->addAttribute("draw:name", m_value.str());
-                m_value.str("");
-                m_value << doubleToString(distance*100) << "%";
-                tmpDrawStrokeDashElement->addAttribute("draw:distance", m_value.str());
-                m_value.str("");
-                for(unsigned i = 0; i < m_pen.dashArray.count()/2; i++)
-                {
-                        m_name << "draw:dots" << i+1;
-                        tmpDrawStrokeDashElement->addAttribute(m_name.str(), "1");
-                        m_name.str("");
-                        m_name << "draw:dots" << i+1 << "-length";
-                        m_value << doubleToString(100*m_pen.dashArray.at(i*2)) << "%";
-                        tmpDrawStrokeDashElement->addAttribute(m_name.str(), m_value.str());
-                        m_name.str("");
-                        m_value.str("");
-                }
-                mStrokeDashElements.push_back(static_cast<GraphicsElement *>(tmpDrawStrokeDashElement));
-                mStrokeDashElements.push_back(static_cast<GraphicsElement *>(new CloseTagGraphicsElement("draw:stroke-dash")));
-        }
+		// ODG angle unit is 0.1 degree
+		double angle = mxStyle["draw:angle"] ? -mxStyle["draw:angle"]->getDouble() : 0.0;
+		while(angle < 0)
+			angle += 360;
+		while(angle > 360)
+			angle -= 360;
 
-        if(m_brush.style == libwpg::WPGBrush::Gradient)
-        {
-                OpenTagGraphicsElement *tmpDrawGradientElement = new OpenTagGraphicsElement("draw:gradient");
-                tmpDrawGradientElement->addAttribute("draw:style", "linear");
-                m_value << "Gradient_" << m_gradientIndex++;
-                tmpDrawGradientElement->addAttribute("draw:name", m_value.str());
-                m_value.str("");
+		sValue.sprintf("%i", (unsigned)(angle*10));
+		pDrawGradientElement->addAttribute("draw:angle", sValue);
 
-                // ODG angle unit is 0.1 degree
-                double angle = -m_brush.gradient.angle();
-                while(angle < 0)
-                        angle += 360;
-                while(angle > 360)
-                        angle -= 360;
+		pDrawGradientElement->addAttribute("draw:start-color", mxGradient[0]["svg:stop-color"]->getStr().cstr());
+		pDrawGradientElement->addAttribute("draw:end-color", mxGradient[1]["svg:stop-color"]->getStr().cstr());
+		pDrawGradientElement->addAttribute("draw:start-intensity", "100%");
+		pDrawGradientElement->addAttribute("draw:end-intensity", "100%");
+		pDrawGradientElement->addAttribute("draw:border", "0%");
+		mGraphicsGradientStyles.push_back(pDrawGradientElement);
+		mGraphicsGradientStyles.push_back(new TagCloseElement("draw:gradient"));
+	}
 
-                m_value << (unsigned)(angle*10);
-                tmpDrawGradientElement->addAttribute("draw:angle", m_value.str());
-                m_value.str("");
+	TagOpenElement *pStyleStyleElement = new TagOpenElement("style:style");
+	WPXString sValue;
+	sValue.sprintf("gr%i",  miGraphicsStyleIndex);
+	pStyleStyleElement->addAttribute("style:name", sValue);
+	pStyleStyleElement->addAttribute("style:family", "graphic");
+	pStyleStyleElement->addAttribute("style:parent-style-name", "standard");
+	mGraphicsAutomaticStyles.push_back(pStyleStyleElement);
 
-                libwpg::WPGColor startColor = m_brush.gradient.stopColor(0);
-                libwpg::WPGColor stopColor = m_brush.gradient.stopColor(1);
-                m_value << "#" << colorToHex(startColor);
-                tmpDrawGradientElement->addAttribute("draw:start-color", m_value.str());
-                m_value.str("");
-                m_value << "#" << colorToHex(stopColor);
-                tmpDrawGradientElement->addAttribute("draw:end-color", m_value.str());
-                m_value.str("");
-                tmpDrawGradientElement->addAttribute("draw:start-intensity", "100%");
-                tmpDrawGradientElement->addAttribute("draw:end-intensity", "100%");
-                tmpDrawGradientElement->addAttribute("draw:border", "0%");
-                mGradientElements.push_back(static_cast<GraphicsElement *>(tmpDrawGradientElement));
-                mGradientElements.push_back(static_cast<GraphicsElement *>(new CloseTagGraphicsElement("draw:gradient")));
-        }
+	TagOpenElement *pStyleGraphicsPropertiesElement = new TagOpenElement("style:graphic-properties");
 
-        OpenTagGraphicsElement *tmpStyleStyleElement = new OpenTagGraphicsElement("style:style");
-        m_value << "gr" << m_styleIndex;
-        tmpStyleStyleElement->addAttribute("style:name", m_value.str());
-        m_value.str("");
-        tmpStyleStyleElement->addAttribute("style:family", "graphic");
-        tmpStyleStyleElement->addAttribute("style:parent-style-name", "standard");
-        mAutomaticStylesElements.push_back(static_cast<GraphicsElement *>(tmpStyleStyleElement));
+	if(!(mxStyle["draw:stroke"] && mxStyle["draw:stroke"]->getStr() == "none") && mxStyle["svg:stroke-width"] && mxStyle["svg:stroke-width"]->getDouble() > 0.0)
+	{
+		if (mxStyle["svg:stroke-width"])
+			pStyleGraphicsPropertiesElement->addAttribute("svg:stroke-width", mxStyle["svg:stroke-width"]->getStr());
 
-        OpenTagGraphicsElement *tmpStyleGraphicPropertiesElement = new OpenTagGraphicsElement("style:graphic-properties");
+		if (mxStyle["svg:stroke-color"])
+			pStyleGraphicsPropertiesElement->addAttribute("svg:stroke-color", mxStyle["svg:stroke-color"]->getStr());
+		if (mxStyle["svg:stroke-opacity"] && mxStyle["svg:stroke-opacity"]->getDouble() != 1.0)
+			pStyleGraphicsPropertiesElement->addAttribute("svg:stroke-opacity", mxStyle["svg:stroke-opacity"]->getStr());
+			
 
-        if(m_pen.width > 0.0)
-        {
-                m_value << doubleToString(m_pen.width) << "in";
-                tmpStyleGraphicPropertiesElement->addAttribute("svg:stroke-width", m_value.str());
-                m_value.str("");
-                m_value << "#" << colorToHex(m_pen.foreColor);
-                tmpStyleGraphicPropertiesElement->addAttribute("svg:stroke-color", m_value.str());
-                m_value.str("");
+		if(mxStyle["libwpg:stroke-solid"] && mxStyle["libwpg:stroke-solid"]->getInt())
+			pStyleGraphicsPropertiesElement->addAttribute("draw:stroke", "solid");
+#if 0
+		else
+		{
+			pStyleGraphicsPropertiesElement->addAttribute("draw:stroke", "dash");
+			sValue.sprintf("Dash_%i", miDashIndex-1);
+			pStyleGraphicsPropertiesElement->addAttribute("draw:stroke-dash", sValue);
+		}
+#endif
+	}
+	else
+		pStyleGraphicsPropertiesElement->addAttribute("draw:stroke", "none");
 
-                if(!m_pen.solid)
-                {
-                        tmpStyleGraphicPropertiesElement->addAttribute("draw:stroke", "dash");
-                        m_value << "Dash_" << m_dashIndex-1;
-                        tmpStyleGraphicPropertiesElement->addAttribute("draw:stroke-dash", m_value.str());
-                        m_value.str("");
-                }
-        }
-        else
-                tmpStyleGraphicPropertiesElement->addAttribute("draw:stroke", "none");
+	if(mxStyle["draw:fill"] && mxStyle["draw:fill"]->getStr() == "none")
+		pStyleGraphicsPropertiesElement->addAttribute("draw:fill", "none");
 
-        if(m_brush.style == libwpg::WPGBrush::NoBrush)
-                tmpStyleGraphicPropertiesElement->addAttribute("draw:fill", "none");
+	if(mxStyle["draw:fill"] && mxStyle["draw:fill"]->getStr() == "solid")
+	{
+		pStyleGraphicsPropertiesElement->addAttribute("draw:fill", "solid");
+		if (mxStyle["draw:fill-color"])
+			pStyleGraphicsPropertiesElement->addAttribute("draw:fill-color", mxStyle["draw:fill-color"]->getStr());
+		if (mxStyle["draw:opacity"] && mxStyle["draw:opacity"]->getDouble() != 1.0)
+			pStyleGraphicsPropertiesElement->addAttribute("draw:opacity", mxStyle["draw:opacity"]->getStr());
+	}
 
-        if(m_brush.style == libwpg::WPGBrush::Solid)
-        {
-                tmpStyleGraphicPropertiesElement->addAttribute("draw:fill", "solid");
-                m_value << "#" << colorToHex(m_brush.foreColor);
-                tmpStyleGraphicPropertiesElement->addAttribute("draw:fill-color", m_value.str());
-                m_value.str("");
-        }
+	if(mxStyle["draw:fill"] && mxStyle["draw:fill"]->getStr() == "gradient")
+	{
+		if (mxGradient.count() >= 2)
+		{
+			pStyleGraphicsPropertiesElement->addAttribute("draw:fill", "gradient");
+			sValue.sprintf("Gradient_%i", miGradientIndex-1);
+			pStyleGraphicsPropertiesElement->addAttribute("draw:fill-gradient-name", sValue);
+		}
+		else
+			pStyleGraphicsPropertiesElement->addAttribute("draw:fill", "none");
+	}
 
-        if(m_brush.style == libwpg::WPGBrush::Gradient)
-        {
-                tmpStyleGraphicPropertiesElement->addAttribute("draw:fill", "gradient");
-                m_value << "Gradient_" << m_gradientIndex-1;
-                tmpStyleGraphicPropertiesElement->addAttribute("draw:fill-gradient-name", m_value.str());
-                m_value.str("");
-        }
+	mGraphicsAutomaticStyles.push_back(pStyleGraphicsPropertiesElement);
+	mGraphicsAutomaticStyles.push_back(new TagCloseElement("style:graphic-properties"));
 
-        mAutomaticStylesElements.push_back(static_cast<GraphicsElement *>(tmpStyleGraphicPropertiesElement));
-        mAutomaticStylesElements.push_back(static_cast<GraphicsElement *>(new CloseTagGraphicsElement("style:graphic-properties")));
+	mGraphicsAutomaticStyles.push_back(new TagCloseElement("style:style"));
+	++miGraphicsStyleIndex;
+}
 
-        mAutomaticStylesElements.push_back(static_cast<GraphicsElement *>(new CloseTagGraphicsElement("style:style")));
-        m_styleIndex++;
+WPXString OdgExporter::doubleToString(const double value)
+{
+	WPXString tempString;
+	tempString.sprintf("%.4f", value);
+	std::string decimalPoint(localeconv()->decimal_point);
+	if ((decimalPoint.size() == 0) || (decimalPoint == "."))
+		return tempString;
+	std::string stringValue(tempString.cstr());
+	if (!stringValue.empty())
+	{
+		std::string::size_type pos;
+		while ((pos = stringValue.find(decimalPoint)) != std::string::npos)
+			stringValue.replace(pos,decimalPoint.size(),".");
+	}
+	return WPXString(stringValue.c_str());
 }

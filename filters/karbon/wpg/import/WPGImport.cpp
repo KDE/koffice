@@ -33,7 +33,9 @@
 #include <KXmlWriter.h>
 
 #include <libwpg/libwpg.h>
-#include <libwpg/WPGStreamImplementation.h>
+#include <libwps/libwps.h>
+#include <libwpd/libwpd.h>
+#include <libwpd-stream/libwpd-stream.h>
 
 #include "FileOutputHandler.hxx"
 #include "OdgExporter.hxx"
@@ -65,7 +67,8 @@ static QByteArray createManifest()
     manifestWriter->startElement("manifest:manifest");
     manifestWriter->addAttribute("xmlns:manifest", "urn:oasis:names:tc:openoffice:xmlns:manifest:1.0");
     manifestWriter->addManifestEntry("/", "application/vnd.oasis.opendocument.graphics");
-    //manifestWriter->addManifestEntry( "styles.xml", "text/xml" );
+    manifestWriter->addManifestEntry( "styles.xml", "text/xml" );
+    manifestWriter->addManifestEntry( "settings.xml", "text/xml" );
     manifestWriter->addManifestEntry("content.xml", "text/xml");
     manifestWriter->endElement();
     manifestWriter->endDocument();
@@ -84,9 +87,9 @@ KoFilter::ConversionStatus WPGImport::convert(const QByteArray& from, const QByt
         return KoFilter::NotImplemented;
 
 
-    WPXInputStream* input = new libwpg::WPGFileStream(m_chain->inputFile().toLocal8Bit());
+    WPXInputStream* input = new WPXFileStream(m_chain->inputFile().toLocal8Bit());
     if (input->isOLEStream()) {
-        WPXInputStream* olestream = input->getDocumentOLEStream();
+        WPXInputStream* olestream = input->getDocumentOLEStream("PerfectOffice_MAIN");
         if (olestream) {
             delete input;
             input = olestream;
@@ -102,9 +105,8 @@ KoFilter::ConversionStatus WPGImport::convert(const QByteArray& from, const QByt
     // do the conversion
     std::ostringstream tmpStringStream;
     FileOutputHandler tmpHandler(tmpStringStream);
-    OdgExporter exporter(&tmpHandler);
+    OdgExporter exporter(&tmpHandler, ODF_CONTENT_XML);
     libwpg::WPGraphics::parse(input, &exporter);
-    delete input;
 
 
     // create output store
@@ -117,21 +119,38 @@ KoFilter::ConversionStatus WPGImport::convert(const QByteArray& from, const QByt
         return KoFilter::FileNotFound;
     }
 
-#if 0
-    if (!storeout->open("styles.xml")) {
-        kWarning() << "Couldn't open the file 'styles.xml'.";
-        return KoFilter::CreationError;
-    }
-    //storeout->write( createStyles() );
-    storeout->close();
-#endif
-
     if (!storeout->open("content.xml")) {
         kWarning() << "Couldn't open the file 'content.xml'.";
         return KoFilter::CreationError;
     }
     storeout->write(tmpStringStream.str().c_str());
     storeout->close();
+    
+    std::ostringstream tmpStyleStream;
+    FileOutputHandler tmpStyleHandler(tmpStyleStream);
+    OdgExporter styleExporter(&tmpStyleHandler, ODF_STYLES_XML);
+    libwpg::WPGraphics::parse(input, &styleExporter);
+
+    if (!storeout->open("styles.xml")) {
+        kWarning() << "Couldn't open the file 'styles.xml'.";
+        return KoFilter::CreationError;
+    }
+    storeout->write(tmpStyleStream.str().c_str());
+    storeout->close();
+    
+    std::ostringstream tmpSettingsStream;
+    FileOutputHandler tmpSettingsHandler(tmpSettingsStream);
+    OdgExporter settingsExporter(&tmpSettingsHandler, ODF_SETTINGS_XML);
+    libwpg::WPGraphics::parse(input, &settingsExporter);
+    delete input;
+
+    if (!storeout->open("settings.xml")) {
+        kWarning() << "Couldn't open the file 'settings.xml'.";
+        return KoFilter::CreationError;
+    }
+    storeout->write(tmpSettingsStream.str().c_str());
+    storeout->close();
+
 
     // store document manifest
     storeout->enterDirectory("META-INF");

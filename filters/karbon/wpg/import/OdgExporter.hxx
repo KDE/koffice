@@ -22,56 +22,72 @@
 /* "This product is not manufactured, approved, or supported by
  * Corel Corporation or Corel Corporation Limited."
  */
-
-#ifndef __ODGEXPORTER_H__
-#define __ODGEXPORTER_H__
+#ifndef ODGEXPORTER_HXX
+#define ODGEXPORTER_HXX
 
 #include <iostream>
 #include <sstream>
 #include <string>
 
+#include <libwpd/libwpd.h>
 #include <libwpg/libwpg.h>
 #include "GraphicsElement.hxx"
+#include "FileOutputHandler.hxx"
+
+enum OdfStreamType { ODF_FLAT_XML, ODF_CONTENT_XML, ODF_STYLES_XML, ODF_SETTINGS_XML, ODF_META_XML };
 
 class OdgExporter : public libwpg::WPGPaintInterface {
 public:
-	explicit OdgExporter(GraphicsHandler *pHandler,
-			     const bool isFlatXML = false);
+	OdgExporter(FileOutputHandler *pHandler, const OdfStreamType streamType);
 	~OdgExporter();
 
-	void startGraphics(double imageWidth, double imageHeight);
+	void startGraphics(const ::WPXPropertyList &propList);
 	void endGraphics();
-	void startLayer(unsigned int id);
-	void endLayer(unsigned int id);
+	void startLayer(const ::WPXPropertyList &propList);
+	void endLayer();
+	void startEmbeddedGraphics(const ::WPXPropertyList& /*propList*/) {}
+	void endEmbeddedGraphics() {}
 
-	void setPen(const libwpg::WPGPen& pen);
-	void setBrush(const libwpg::WPGBrush& brush);
-	void setFillRule(FillRule rule);
+	void setStyle(const ::WPXPropertyList &propList, const ::WPXPropertyListVector& gradient);
 
-	void drawRectangle(const libwpg::WPGRect& rect, double rx, double ry);
-	void drawEllipse(const libwpg::WPGPoint& center, double rx, double ry);
-	void drawPolygon(const libwpg::WPGPointArray& vertices);
-	void drawPath(const libwpg::WPGPath& path);
-	void drawBitmap(const libwpg::WPGBitmap& bitmap);
-	void drawImageObject(const libwpg::WPGBinaryData& binaryData);
+	void drawRectangle(const ::WPXPropertyList &propList);
+	void drawEllipse(const ::WPXPropertyList &propList);
+	void drawPolyline(const ::WPXPropertyListVector& vertices);
+	void drawPolygon(const ::WPXPropertyListVector& vertices);
+	void drawPath(const ::WPXPropertyListVector& path);
+	void drawGraphicObject(const ::WPXPropertyList &propList, const ::WPXBinaryData& binaryData);
+	void startTextObject(const ::WPXPropertyList &propList, const ::WPXPropertyListVector &path) {}
+	void endTextObject() {}
+	void startTextLine(const ::WPXPropertyList &propList) {}
+	void endTextLine() {}
+	void startTextSpan(const ::WPXPropertyList &propList) {}
+	void endTextSpan() {}
+	void insertText(const ::WPXString &str) {}
 
 private:
+	void writeGraphicsStyle();
+	WPXString doubleToString(const double value);
+	void drawPolySomething(const ::WPXPropertyListVector& vertices, bool isClosed);
+	
+	// body elements
 	std::vector <GraphicsElement *> mBodyElements;
-	std::vector <GraphicsElement *> mAutomaticStylesElements;
-	std::vector <GraphicsElement *> mStrokeDashElements;
-	std::vector <GraphicsElement *> mGradientElements;
-	GraphicsHandler *mpHandler;
 
-	libwpg::WPGPen m_pen;
-	libwpg::WPGBrush m_brush;
-	FillRule m_fillRule;
-	int m_gradientIndex;
-	int m_dashIndex;
-	int m_styleIndex;
-	void writeStyle();
-	std::ostringstream m_value, m_name;
-	double m_width, m_height;
-	const bool m_isFlatXML;
+	// graphics styles
+	std::vector<GraphicsElement *> mGraphicsStrokeDashStyles;
+	std::vector<GraphicsElement *> mGraphicsGradientStyles;
+	std::vector<GraphicsElement *> mGraphicsAutomaticStyles;
+
+	FileOutputHandler *mpHandler;
+
+	::WPXPropertyList mxStyle;
+	::WPXPropertyListVector mxGradient;
+	int miGradientIndex;
+	int miDashIndex;
+	int miGraphicsStyleIndex;
+	double mfWidth;
+	double mfHeight;
+
+	const OdfStreamType mxStreamType;
 };
 
-#endif // __ODGEXPORTER_H__
+#endif // ODGEXPORTER_HXX
