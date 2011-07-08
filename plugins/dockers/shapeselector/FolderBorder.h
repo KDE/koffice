@@ -34,13 +34,11 @@ public:
     /// reimplemented from KoShapeBorderModel
     virtual void saveOdf(KOdfGenericStyle &, KShapeSavingContext &) const {}
     /// reimplemented from KoShapeBorderModel
-    virtual void borderInsets(KInsets &insets) const;
+    virtual KInsets borderInsets() const;
     /// reimplemented from KoShapeBorderModel
     virtual bool hasTransparency() const;
     /// reimplemented from KoShapeBorderModel
     virtual void paint(KShape *shape, QPainter &painter, const KViewConverter &converter);
-    /// reimplemented from KoShapeBorderModel
-    virtual void paint(KShape *shape, QPainter &painter, const KViewConverter &converter, const QColor &color);
 };
 
 #endif

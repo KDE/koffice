@@ -59,7 +59,7 @@ public:
      * Return a borderInsets object filled with the size inside the shape that this border takes.
      * @param insets the insets object that will be filled and returned.
      */
-    virtual void borderInsets(KInsets &insets) const = 0;
+    virtual KInsets borderInsets() const = 0;
 
     /**
      * Returns true if there is some transparency, false if the border is fully opaque.
@@ -88,7 +88,7 @@ public:
      * @param converter to convert between internal and view coordinates.
      * @param color to use to paint the border.
      */
-    virtual void paint(KShape *shape, QPainter &painter, const KViewConverter &converter, const QColor &color) = 0;
+    void paint(KShape *shape, QPainter &painter, const KViewConverter &converter, const QColor &color);
 
     /**
      * Increments the use-value.

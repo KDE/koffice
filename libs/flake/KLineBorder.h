@@ -92,11 +92,10 @@ public:
     QBrush lineBrush() const;
 
     virtual void saveOdf(KOdfGenericStyle &style, KShapeSavingContext &context) const;
-    virtual void borderInsets(KInsets &insets) const;
+    virtual KInsets borderInsets() const;
     virtual bool hasTransparency() const;
 
     virtual void paint(KShape *shape, QPainter &painter, const KViewConverter &converter);
-    virtual void paint(KShape *shape, QPainter &painter, const KViewConverter &converter, const QColor &color);
 
 private:
     class Private;

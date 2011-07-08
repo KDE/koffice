@@ -146,8 +146,7 @@ void KShapePrivate::updateBorder()
     Q_Q(KShape);
     if (border == 0)
         return;
-    KInsets insets;
-    border->borderInsets(insets);
+    KInsets insets = border->borderInsets();
     QSizeF inner = q->size();
     // update left
     q->update(QRectF(-insets.left, -insets.top, insets.left,
@@ -370,8 +369,7 @@ bool KShape::hitTest(const QPointF &position) const
     QPointF point = absoluteTransformation(0).inverted().map(position);
     QRectF bb(QPointF(), size());
     if (d->border) {
-        KInsets insets;
-        d->border->borderInsets(insets);
+        KInsets insets = d->border->borderInsets();
         bb.adjust(-insets.left, -insets.top, insets.right, insets.bottom);
     }
     if (bb.contains(point))
@@ -395,8 +393,7 @@ QRectF KShape::boundingRect() const
     QTransform transform = absoluteTransformation(0);
     QRectF bb(QPointF(0, 0), mySize);
     if (d->border) {
-        KInsets insets;
-        d->border->borderInsets(insets);
+        KInsets insets = d->border->borderInsets();
         bb.adjust(-insets.left, -insets.top, insets.right, insets.bottom);
     }
     bb = transform.mapRect(bb);
@@ -678,13 +675,12 @@ qreal KShape::transparency(bool recursive) const
     }
 }
 
-void KShape::fetchInsets(KInsets &insets) const
+KInsets KShape::insets() const
 {
     Q_D(const KShape);
     if (d->border)
-        d->border->borderInsets(insets);
-    else
-        insets.clear();
+        return d->border->borderInsets();
+    return KInsets();
     // notice that the shadow has 'insets' that go outwards from the shape edge, so
     // they are not relevant for this method.
 }

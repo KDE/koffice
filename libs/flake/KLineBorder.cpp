@@ -85,8 +85,9 @@ void KLineBorder::saveOdf(KOdfGenericStyle &style, KShapeSavingContext &context)
     KOdf::saveOdfStrokeStyle(style, context.mainStyles(), pen);
 }
 
-void KLineBorder::borderInsets(KInsets &insets) const
+KInsets KLineBorder::borderInsets() const
 {
+    KInsets insets;
     qreal lineWidth = d->pen.widthF();
     if (lineWidth < 0)
         lineWidth = 1;
@@ -101,6 +102,7 @@ void KLineBorder::borderInsets(KInsets &insets) const
     insets.bottom = lineWidth;
     insets.left = lineWidth;
     insets.right = lineWidth;
+    return insets;
 }
 
 bool KLineBorder::hasTransparency() const
@@ -121,18 +123,6 @@ void KLineBorder::paint(KShape *shape, QPainter &painter, const KViewConverter &
 
     if (!pen.isCosmetic())
         painter.strokePath(shape->outline(), pen);
-}
-
-void KLineBorder::paint(KShape *shape, QPainter &painter, const KViewConverter &converter, const QColor &color)
-{
-    KShape::applyConversion(painter, converter);
-
-    QPen pen = d->pen;
-    pen.setColor(color);
-
-    if (!pen.isCosmetic()) {
-        painter.strokePath(shape->outline(), pen);
-    }
 }
 
 void KLineBorder::setCapStyle(Qt::PenCapStyle style)
