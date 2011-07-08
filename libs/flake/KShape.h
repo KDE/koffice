@@ -546,11 +546,11 @@ public:
      * Fills the \a insets with the padding of the shape.
      * A shape has a size which can be made smaller (the content
      * area can be deminished) by a border. This method
-     * fills the argument insets with the padding between the (square) borders
+     * returns the insets with the padding between the (square) borders
      * of the shape and the inside area where the border is sure to not overlap.
      * \see KShapeBorderBase::borderInsets()
      */
-    void fetchInsets(KInsets &insets) const;
+    KInsets insets() const;
 
     /// Sets the new shadow, removing the old one
     void setShadow(KShapeShadow *shadow);

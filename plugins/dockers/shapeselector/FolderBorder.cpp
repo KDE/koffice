@@ -30,13 +30,12 @@ FolderBorder::FolderBorder()
 {
 }
 
-void FolderBorder::borderInsets(KInsets &insets) const
+KInsets FolderBorder::borderInsets() const
 {
-    insets.left = 1;
-    insets.right = 1;
-    insets.bottom = 1;
+    KInsets insets(1, 1, 1, 1);
     QFontMetricsF fm(KGlobalSettings::windowTitleFont());
     insets.top = fm.height();
+    return insets;
 }
 
 bool FolderBorder::hasTransparency() const
@@ -64,11 +63,4 @@ void FolderBorder::paint(KShape *shape, QPainter &painter, const KViewConverter 
         painter.setPen(QPen(KGlobalSettings::activeTextColor()));
         painter.drawText(rect, shape->name());
     }
-}
-
-void FolderBorder::paint(KShape *shape, QPainter &painter, const KViewConverter &converter, const QColor &color)
-{
-    Q_UNUSED(color);
-    // FIXME
-    paint(shape, painter, converter);
 }

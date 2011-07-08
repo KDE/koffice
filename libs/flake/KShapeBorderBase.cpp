@@ -18,8 +18,13 @@
  */
 
 #include "KShapeBorderBase.h"
+#include "KShape.h"
+#include "KViewConverter.h"
 
 #include <QAtomicInt>
+#include <QRectF>
+#include <QPainter>
+#include <QImage>
 
 class KShapeBorderBase::Private
 {
@@ -53,3 +58,18 @@ int KShapeBorderBase::useCount() const
     return d->refCount;
 }
 
+void KShapeBorderBase::paint(KShape *shape, QPainter &painter, const KViewConverter &converter, const QColor &color)
+{
+    QSizeF size(converter.documentToView(shape->boundingRect()).size());
+    // using a QImage
+    QImage buffer = QImage(size.toSize(), QImage::Format_ARGB32_Premultiplied);
+    buffer.fill(0);
+    QPainter p(&buffer);
+    paint(shape, p, converter);
+
+    if (color.isValid()) {
+        p.setCompositionMode(QPainter::CompositionMode_SourceAtop);
+        p.fillRect(0, 0, buffer.width(), buffer.height(), color);
+    }
+    painter.drawImage(0, 0, buffer);
+}
