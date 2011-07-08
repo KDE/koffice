@@ -934,7 +934,7 @@ QList<KWFrame*> KWView::selectedFrames() const
 // -------------------- Actions -----------------------
 void KWView::editFrameProperties()
 {
-    KWFrameDialog *frameDialog = new KWFrameDialog(selectedFrames(), m_document, this);
+    QPointer<KWFrameDialog> frameDialog = new KWFrameDialog(selectedFrames(), m_document, this);
     frameDialog->exec();
     delete frameDialog;
 }
@@ -1123,7 +1123,7 @@ void KWView::inlineFrame()
 
 void KWView::showStatisticsDialog()
 {
-    KWStatisticsDialog *dia = new KWStatisticsDialog(this);
+    QPointer<KWStatisticsDialog> dia = new KWStatisticsDialog(this);
     dia->exec();
     delete dia;
 }

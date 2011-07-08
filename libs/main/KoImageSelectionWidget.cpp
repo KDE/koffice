@@ -35,6 +35,7 @@
 #include <QGridLayout>
 #include <QStackedWidget>
 #include <QPainter>
+#include <QPointer>
 
 class ImageFilePreview : public QWidget
 {
@@ -179,7 +180,7 @@ KImageData *KoImageSelectionWidget::imageData() const
 // static
 KImageData *KoImageSelectionWidget::selectImage(KImageCollection *collection, QWidget *parent)
 {
-    KDialog *dialog = new KDialog(parent);
+    QPointer<KDialog> dialog = new KDialog(parent);
     dialog->setButtons(KDialog::Ok | KDialog::Cancel);
     KoImageSelectionWidget *widget = new KoImageSelectionWidget(collection, dialog);
     dialog->setMainWidget(widget);
@@ -187,6 +188,7 @@ KImageData *KoImageSelectionWidget::selectImage(KImageCollection *collection, QW
 
     if (dialog->exec() == KDialog::Accepted)
         return widget->imageData();
+    delete dialog;
     return 0;
 }
 

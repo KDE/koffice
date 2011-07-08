@@ -88,37 +88,39 @@ EpsExport::convert(const QByteArray& from, const QByteArray& to)
     KoFilter::ConversionStatus status = KoFilter::OK;
 
     // Ask questions about PS level etc.
-    EpsExportDlg* dialog = new EpsExportDlg();
+    QPointer<EpsExportDlg> dialog = new EpsExportDlg();
 
     QApplication::setOverrideCursor(Qt::ArrowCursor);
 
     if (dialog->exec()) {
-        // Which PostScript level to support?
-        m_psLevel = dialog->psLevel() + 1;
+	if (dialog){
+            // Which PostScript level to support?
+            m_psLevel = dialog->psLevel() + 1;
 
-        QFile fileOut(m_chain->outputFile());
-        if (!fileOut.open(QIODevice::WriteOnly)) {
-            QApplication::restoreOverrideCursor();
-            delete(dialog);
+            QFile fileOut(m_chain->outputFile());
+            if (!fileOut.open(QIODevice::WriteOnly)) {
+                QApplication::restoreOverrideCursor();
+                delete(dialog);
 
-            return KoFilter::StupidError;
-        }
+                return KoFilter::StupidError;
+            }
 
-        QDomDocument domIn;
-        domIn.setContent(storeIn);
-        QDomElement docNode = domIn.documentElement();
+            QDomDocument domIn;
+            domIn.setContent(storeIn);
+            QDomElement docNode = domIn.documentElement();
 
-        m_stream = new QTextStream(&fileOut);
+            m_stream = new QTextStream(&fileOut);
 
-        // Load the document.
-        KarbonDocument doc;
-        doc.load(docNode);
+            // Load the document.
+            KarbonDocument doc;
+            doc.load(docNode);
 
-        // Process the document.
-        doc.accept(*this);
+            // Process the document.
+            doc.accept(*this);
 
-        delete m_stream;
-        fileOut.close();
+            delete m_stream;
+            fileOut.close();
+	}
     } else {
         // Dialog cancelled.
         status = KoFilter::UserCancelled;

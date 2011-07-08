@@ -72,9 +72,9 @@ void SCConfigureSlideShowDialog::editCustomSlideShow()
 {
     SCCustomSlideShows *finalSlideShows;
 
-    SCCustomSlideShowsDialog dialog(this, m_document->customSlideShows(), m_document, finalSlideShows);
-    dialog.setModal(true);
-    if (dialog.exec() == QDialog::Accepted) {
+    QPointer<SCCustomSlideShowsDialog> dialog = new SCCustomSlideShowsDialog(this, m_document->customSlideShows(), m_document, finalSlideShows);
+    dialog->setModal(true);
+    if (dialog->exec() == QDialog::Accepted) {
         m_document->addCommand(new SCSetCustomSlideShowsCommand(m_document, finalSlideShows));
         QString activeSlideShow = ui.slidesComboBox->currentText();
         int index = ui.slidesComboBox->currentIndex();
@@ -97,6 +97,7 @@ void SCConfigureSlideShowDialog::editCustomSlideShow()
     else {
         delete finalSlideShows;
     }
+    delete dialog;
 }
 
 #include "SCConfigureSlideShowDialog.moc"

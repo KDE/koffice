@@ -226,7 +226,7 @@ void KoTemplateCreateDia::slotSelectionChanged()
 void KoTemplateCreateDia::createTemplate( const QByteArray &templateType, const KComponentData &componentData,
                                           const QString &file, const QPixmap &pix, QWidget *parent ) {
 
-    KoTemplateCreateDia *dia = new KoTemplateCreateDia( templateType, componentData, file, pix, parent );
+    QPointer<KoTemplateCreateDia> dia = new KoTemplateCreateDia( templateType, componentData, file, pix, parent );
     dia->exec();
     delete dia;
 }

@@ -32,6 +32,7 @@
 #include <kstandarddirs.h>
 #include <kdebug.h>
 #include <QtGui/QBoxLayout>
+#include <QPointer>
 
 /******************************************************************************
  * KoScriptManagerCollection
@@ -80,9 +81,10 @@ public:
         if (itemSelection().count() == 1) {
             collection = Kross::ActionCollectionModel::collection(itemSelection().indexes().first());
         }
-        KoScriptManagerAddWizard wizard(this, collection);
-        int result = wizard.exec();
+        QPointer<KoScriptManagerAddWizard> wizard = new KoScriptManagerAddWizard(this, collection);
+        int result = wizard->exec();
         Q_UNUSED(result);
+	delete wizard;
     }
     virtual void slotRemove()
     {

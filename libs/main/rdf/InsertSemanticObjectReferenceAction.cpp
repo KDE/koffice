@@ -31,6 +31,7 @@
 
 #include <QVBoxLayout>
 #include <QLabel>
+#include <QPointer>
 
 InsertSemanticObjectReferenceAction::InsertSemanticObjectReferenceAction(
     KCanvasBase *canvas,
@@ -59,11 +60,11 @@ void InsertSemanticObjectReferenceAction::activated()
     td.update(const_cast<KoDocumentRdf*>(m_rdf));
     lay->addWidget(tree);
 
-    KPageDialog dialog(m_canvas->canvasWidget());
-    dialog.setCaption(i18n("%1 Options", text())); // TODO add comment (i18nc)
-    dialog.addPage(widget, QString());
+    QPointer<KPageDialog> dialog = new KPageDialog(m_canvas->canvasWidget());
+    dialog->setCaption(i18n("%1 Options", text())); // TODO add comment (i18nc)
+    dialog->addPage(widget, QString());
 
-    if (dialog.exec() == KPageDialog::Accepted && tree->currentItem()) {
+    if (dialog->exec() == KPageDialog::Accepted && tree->currentItem()) {
         QTreeWidgetItem *item = tree->currentItem();
         if (KoRdfSemanticTreeWidgetItem *ditem = dynamic_cast<KoRdfSemanticTreeWidgetItem*>(item)) {
 
@@ -71,4 +72,5 @@ void InsertSemanticObjectReferenceAction::activated()
             ditem->insert(m_canvas);
         }
     }
+    delete dialog;
 }

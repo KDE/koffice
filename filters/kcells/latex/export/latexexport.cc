@@ -26,6 +26,7 @@
 #include <klocale.h>
 #include <QTextCodec>
 #include <QByteArray>
+#include <QPointer>
 #include "kcellslatexexportdiaImpl.h"
 
 K_PLUGIN_FACTORY(LATEXExportFactory, registerPlugin<LATEXExport>();)
@@ -54,7 +55,7 @@ KoFilter::ConversionStatus LATEXExport::convert(const QByteArray& from, const QB
     /* input file Reading */
     in->close();
 
-    KCellsLatexExportDiaImpl* dialog = new KCellsLatexExportDiaImpl(in);
+    QPointer<KCellsLatexExportDiaImpl> dialog = new KCellsLatexExportDiaImpl(in);
     dialog->setOutputFile(m_chain->outputFile());
 
     dialog->exec();

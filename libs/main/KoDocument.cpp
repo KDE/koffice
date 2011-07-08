@@ -2491,18 +2491,19 @@ QList<KoDocument::CustomDocumentWidgetItem> KoDocument::createCustomDocumentWidg
 
 bool KoDocument::showEmbedInitDialog(QWidget *parent)
 {
-    KDialog dlg(parent);
-    dlg.setCaption(i18n("Embedding Object"));
-    KoOpenPane *pane = createOpenPane(&dlg, componentData(), templateType());
+    QPointer<KDialog> dlg = new KDialog(parent);
+    dlg->setCaption(i18n("Embedding Object"));
+    KoOpenPane *pane = createOpenPane(dlg, componentData(), templateType());
     pane->layout()->setMargin(0);
-    dlg.setMainWidget(pane);
+    dlg->setMainWidget(pane);
     KConfigGroup cfg = KSharedConfig::openConfig("EmbedInitDialog")->group(QString());
-    /*dlg.setInitialSize(*/dlg.restoreDialogSize(cfg /*)*/);
-    connect(this, SIGNAL(closeEmbedInitDialog()), &dlg, SLOT(accept()));
+    /*dlg->setInitialSize(*/dlg->restoreDialogSize(cfg /*)*/);
+    connect(this, SIGNAL(closeEmbedInitDialog()), dlg, SLOT(accept()));
 
-    bool ok = dlg.exec() == QDialog::Accepted;
+    bool ok = dlg->exec() == QDialog::Accepted;
 
-    dlg.saveDialogSize(cfg);
+    dlg->saveDialogSize(cfg);
+    delete dlg;
 
     return ok;
 }
