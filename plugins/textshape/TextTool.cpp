@@ -535,7 +535,7 @@ void TextTool::showChangeTip()
             QString date = element->date();
             //Remove the T which separates the Data and Time.
             date[10] = ' ';
-            change += element->creator() + " " + date + "</p>";
+            change += element->creator() + ' ' + date + "</p>";
 
             int toolTipWidth = QFontMetrics(QToolTip::font()).boundingRect(element->date() + ' ' + element->creator()).width();
             m_changeTipPos.setX(m_changeTipPos.x() - toolTipWidth/2);
@@ -2274,7 +2274,7 @@ void TextTool::readConfig()
             bgColor = interface.readEntry("formatChangeBgColor", defaultColor);
             m_changeTracker->setFormatChangeBgColor(bgColor);
             changeAuthor = interface.readEntry("changeAuthor", changeAuthor);
-            if (changeAuthor == "") {
+            if (changeAuthor.isEmpty()) {
                 KUser user(KUser::UseRealUserID);
                 m_changeTracker->setAuthorName(user.property(KUser::FullName).toString());
             } else {

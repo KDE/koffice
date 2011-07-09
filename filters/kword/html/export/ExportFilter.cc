@@ -403,7 +403,7 @@ bool HtmlWorker::doFullParagraph(const QString& paraText,
                 && (layout.counter.depth < 6)) {
             strTag = QString("h%1").arg(layout.counter.depth + 1); // H1 ... H6
         } else {
-            strTag = "p";
+            strTag = 'p';
         }
     }
 

@@ -38,7 +38,7 @@ public:
      * @param editor the text editor used to insert the bookmark
      * @param parent a parent widget for the purpose of centering the dialog
      */
-    CreateBookmark(KoTextEditor *editor, QWidget *parent = 0);
+    explicit CreateBookmark(KoTextEditor *editor, QWidget *parent = 0);
 
 private slots:
     void okClicked();

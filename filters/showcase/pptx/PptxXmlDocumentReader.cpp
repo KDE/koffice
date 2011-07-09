@@ -214,7 +214,7 @@ PptxSlideLayoutProperties* PptxXmlDocumentReader::slideLayoutProperties(
     context.firstReadingRound = true;
 
     KoFilter::ConversionStatus status = m_context->import->loadAndParseDocument(
-        &slideLayoutReader, slideLayoutPath + "/" + slideLayoutFile, &context);
+        &slideLayoutReader, slideLayoutPath + '/' + slideLayoutFile, &context);
     if (status != KoFilter::OK) {
         kDebug() << slideLayoutReader.errorString();
         return 0;
@@ -224,7 +224,7 @@ PptxSlideLayoutProperties* PptxXmlDocumentReader::slideLayoutProperties(
 
     context.firstReadingRound = false;
     status = m_context->import->loadAndParseDocument(
-        &slideLayoutReader, slideLayoutPath + "/" + slideLayoutFile, &context);
+        &slideLayoutReader, slideLayoutPath + '/' + slideLayoutFile, &context);
     if (status != KoFilter::OK) {
         kDebug() << slideLayoutReader.errorString();
         return 0;
@@ -465,7 +465,7 @@ KoFilter::ConversionStatus PptxXmlDocumentReader::read_sldMasterId()
     PptxXmlSlideReader slideMasterReader(this);
     context.firstReadingRound = true;
     status = m_context->import->loadAndParseDocument(
-        &slideMasterReader, slideMasterPath + "/" + slideMasterFile, &context);
+        &slideMasterReader, slideMasterPath + '/' + slideMasterFile, &context);
     if (status != KoFilter::OK) {
         kDebug() << slideMasterReader.errorString();
         return status;
@@ -477,7 +477,7 @@ KoFilter::ConversionStatus PptxXmlDocumentReader::read_sldMasterId()
     context.firstReadingRound = false;
 
     status = m_context->import->loadAndParseDocument(
-        &slideMasterReader, slideMasterPath + "/" + slideMasterFile, &context);
+        &slideMasterReader, slideMasterPath + '/' + slideMasterFile, &context);
     if (status != KoFilter::OK) {
         kDebug() << slideMasterReader.errorString();
         return status;

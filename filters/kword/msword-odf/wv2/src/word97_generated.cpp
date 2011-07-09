@@ -1655,7 +1655,7 @@ std::string TAP::toString() const
     s += uint2string( padHorz );
     s += "\npadVert=";
     s += uint2string( padVert );
-    s += "\n";
+    s += '\n';
     s += "\nTAP Done.";
     return s;
 }

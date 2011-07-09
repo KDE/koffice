@@ -217,7 +217,7 @@ KoFilter::ConversionStatus QpImport::convert(const QByteArray& from, const QByte
 
         case QpLabelCell:
             lRecLabel = (QpRecLabelCell*)lRec;
-            field = "'";
+            field = '\'';
             field += lRecLabel->label();
             if (table)
                 setText(table, lRecLabel->row() + 1, lRecLabel->column() + 1, field, false);

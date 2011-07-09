@@ -1641,7 +1641,7 @@ void ObjRecord::setData(unsigned size, const unsigned char* data, const unsigned
             const unsigned int cbKey = readU32(startPict);
             startPict += 4;
             for (uint i = 0; i < cbKey; ++i) {
-                if (key.size() > 0) key += ".";
+                if (key.size() > 0) key += '.';
                 key = readU32(startPict);
                 startPict += 4;
             }
@@ -2190,7 +2190,7 @@ static void registerAllRecordClasses()
     RecordRegistry::registerRecordClass(BkHimRecord::id, createBkHimRecord);
 }
 
-void printEntries(POLE::Storage &storage, const std::string path = "/", int level = 0)
+void printEntries(POLE::Storage &storage, const std::string path = "/", int level = 0)//krazy:exclude=doublequote_chars
 {
     std::cout << std::setw(level) << "PATH=" << path << std::endl;
     std::list<std::string> entries = storage.entries(path);

@@ -762,7 +762,7 @@ void processRecordForImplementation(QDomElement e, QTextStream& out)
         if (!f.defaultValue.isEmpty()) {
             val = f.defaultValue;
         } else if (f.type == "unsigned" || f.type == "int") {
-            val = "0";
+            val = '0';
         } else if (f.type == "bool") {
             val = "false";
         }
@@ -923,7 +923,7 @@ int main(int argc, char** argv)
     int errorCol;
     if (!doc.setContent(&f, &errorMsg, &errorLine, &errorCol)) {
         f.close();
-        errorMsg = "Error parsing file: " + errorMsg + "\n";
+        errorMsg = "Error parsing file: " + errorMsg + '\n';
         errorMsg += QString::fromAscii("In line ")  + QString::number(errorLine)
                     + QString::fromAscii(", column ") + QString::number(errorCol);
         qFatal("%s", errorMsg.toAscii().constData());

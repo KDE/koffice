@@ -345,7 +345,7 @@ QString KCConditions::saveOdfConditionValue(const KCConditional &condition, KCVa
     case KCConditional::IsTrueFormula:
         value = "is-true-formula(";
         value += KCells::Odf::encodeFormula(condition.value1.asString());
-        value += ")";
+        value += ')';
     }
     return value;
 }
@@ -464,7 +464,7 @@ void KCConditions::loadOdfConditionValue(const QString &styleCondition, KCCondit
         newCondition.cond = KCConditional::Different;
     } else if (val.startsWith("is-true-formula(")) {
         val = val.mid(16);
-        if (val.endsWith(")")) val = val.left(val.length() - 1);
+        if (val.endsWith(')')) val = val.left(val.length() - 1);
         newCondition.cond = KCConditional::IsTrueFormula;
         newCondition.value1 = KCValue(KCells::Odf::decodeFormula(val));
     }

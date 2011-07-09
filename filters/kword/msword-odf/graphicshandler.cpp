@@ -1022,13 +1022,13 @@ void KWordGraphicsHandler::parseTextBox(const MSO::OfficeArtSpContainer& o, Draw
         out.xml.addAttribute("svg:width", mm(out.vLength()));
         out.xml.addAttribute("svg:height", mm(out.hLength()));
         out.xml.addAttribute("draw:transform","matrix(0 1 -1 0 " +
-                mm(((Writer *)&out)->hOffset(out.xRight)) + " " + mm(out.vOffset()) + ")");
+                mm(((Writer *)&out)->hOffset(out.xRight)) + ' ' + mm(out.vOffset()) + ')');
         break;
     case 2: //msotxflBtoT down-up
         out.xml.addAttribute("svg:width", mm(out.vLength()));
         out.xml.addAttribute("svg:height", mm(out.hLength()));
         out.xml.addAttribute("draw:transform","matrix(0 -1 1 0 " +
-               mm(out.hOffset()) + " " + mm(((Writer *)&out)->vOffset(out.yBottom)) + ")");
+               mm(out.hOffset()) + ' ' + mm(((Writer *)&out)->vOffset(out.yBottom)) + ')');
          break;
     default : //standard text flow
         out.xml.addAttribute("svg:width", mm(out.hLength()));

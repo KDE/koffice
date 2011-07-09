@@ -363,7 +363,7 @@ const Format* GlobalsSubStreamHandler::convertedFormat(unsigned index) const
         const unsigned ifmt = xf.formatIndex();
         switch (ifmt) {
         case  0:  valueFormat = "General"; break;
-        case  1:  valueFormat = "0"; break;
+        case  1:  valueFormat = '0'; break;
         case  2:  valueFormat = "0.00"; break;
         case  3:  valueFormat = "#,##0"; break;
         case  4:  valueFormat = "#,##0.00"; break;
@@ -397,7 +397,7 @@ const Format* GlobalsSubStreamHandler::convertedFormat(unsigned index) const
         case 46:  valueFormat = "[h]:mm:ss"; break;
         case 47:  valueFormat = "mm:ss.0"; break;
         case 48:  valueFormat = "##0.0E+0"; break;
-        case 49:  valueFormat = "@"; break;
+        case 49:  valueFormat = '@'; break;
         default: {
             if (ifmt >= 164 && ifmt <= 392) {  // custom format
                 valueFormat = d->formatsTable[ifmt];

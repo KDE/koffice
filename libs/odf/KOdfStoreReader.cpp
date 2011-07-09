@@ -145,7 +145,7 @@ static QString normalizeFullPath(QString s)
 {
     if (s.startsWith("./"))
         s = s.mid(2);
-    if (s.endsWith("/"))
+    if (s.endsWith('/'))
         s = s.left(s.length()-1);
     return s;
 }

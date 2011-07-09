@@ -407,7 +407,7 @@ static bool checkTag(const KXmlElement& el, const char* expectedTag, const char*
 {
     if (el.tagName() != expectedTag) {
         kWarning()
-        << (warningPrefix ? QString::fromLatin1(warningPrefix) + ":" : QString())
+        << (warningPrefix ? QString::fromLatin1(warningPrefix) + ':' : QString())
         << "tag name=" << el.tagName() << " expected:" << expectedTag;
         return false;
     }
@@ -1474,7 +1474,7 @@ MSOOXML_EXPORT QString Utils::ParagraphBulletProperties::convertToListProperties
     }
     else {
         returnValue = QString("<text:list-level-style-bullet text:level=\"%1\" ").arg(m_level);
-        if ((m_bulletFont.startsWith("Wingdings") || m_bulletFont.startsWith("Symbol")) && m_bulletChar != "") {
+        if ((m_bulletFont.startsWith("Wingdings") || m_bulletFont.startsWith("Symbol")) && !m_bulletChar.isEmpty()) {
             // In case of wingdings we replace with 'best guess'
             returnValue += QString("text:bullet-char=\"%1\" ").arg("-");
         }
@@ -1491,7 +1491,7 @@ MSOOXML_EXPORT QString Utils::ParagraphBulletProperties::convertToListProperties
     if (m_align != "UNUSED") {
         returnValue += QString("fo:text-align=\"%1\" ").arg(m_align);
     }
-    returnValue += ">";
+    returnValue += '>';
 
     returnValue += "<style:list-level-properties ";
 

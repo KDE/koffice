@@ -1133,7 +1133,7 @@ QString extractConditional(const QString &_text)
     }
 #else
     if (text.startsWith('_')) {
-        return text.split(";").first();
+        return text.split(';').first();
     }
 #endif
     return text;
@@ -1151,7 +1151,7 @@ static bool currencyFormat(const QString& valueFormat, QString *currencyVal = 0,
     // dollar is special cause it starts with a $
     QRegExp dollarRegEx("^\"\\$\"[*\\-\\s]*([#,]*[\\d]+(|.[#0]+)).*");
     if (dollarRegEx.indexIn(vf) >= 0) {
-        if (currencyVal) *currencyVal = "$";
+        if (currencyVal) *currencyVal = '$';
         if (formatVal) *formatVal = dollarRegEx.cap(1);
         return true;
     }
@@ -1453,7 +1453,7 @@ void ExcelImport::Private::processCellForBody(KOdfWriteStore* store, Cell* cell,
         c->m_y = offset(rowHeight(sheet, rwT), dyT, 256);
 
         if (!chart->m_chart->m_cellRangeAddress.isNull() )
-            c->m_cellRangeAddress = encodeAddress(sheet->name(), chart->m_chart->m_cellRangeAddress.left(), chart->m_chart->m_cellRangeAddress.top()) + ":" +
+            c->m_cellRangeAddress = encodeAddress(sheet->name(), chart->m_chart->m_cellRangeAddress.left(), chart->m_chart->m_cellRangeAddress.top()) + ':' +
                                     encodeAddress(sheet->name(), chart->m_chart->m_cellRangeAddress.right(), chart->m_chart->m_cellRangeAddress.bottom());
 
         this->charts << c;

@@ -224,16 +224,16 @@ void CSVExportDialog::delimiterClicked(int id)
 
     switch (id) {
     case 0: // comma
-        m_delimiter = ",";
+        m_delimiter = ',';
         break;
     case 1: // semicolon
-        m_delimiter = ";";
+        m_delimiter = ';';
         break;
     case 2: // tab
-        m_delimiter = "\t";
+        m_delimiter = '\t';
         break;
     case 3: // space
-        m_delimiter = " ";
+        m_delimiter = ' ';
         break;
     case 4: // other
         enableButtonOk(! m_dialog->m_delimiterEdit->text().isEmpty());

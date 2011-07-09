@@ -318,7 +318,7 @@ void OoUtils::importUnderline(const QString& in, QString& underline, QString& st
 {
     underline = "single";
     if (in == "none")
-        underline = "0";
+        underline = '0';
     else if (in == "single")
         styleline = "solid";
     else if (in == "double") {
@@ -379,18 +379,18 @@ void OoUtils::importTextPosition(const QString& text_position, QString& value, Q
                 sub = true;
         }
         if (super)
-            value = "2";
+            value = '2';
         else if (sub)
-            value = "1";
+            value = '1';
         else
-            value = "0";
+            value = '0';
         if (!textSize.isEmpty() && textSize.endsWith('%')) {
             textSize.truncate(textSize.length() - 1);
             double textSizeValue = textSize.toDouble() / 100; // e.g. 0.58
             relativetextsize = QString::number(textSizeValue);
         }
     } else
-        value = "0";
+        value = '0';
 }
 
 void OoUtils::createDocumentInfo(KXmlDocument &_meta, QDomDocument & docinfo)

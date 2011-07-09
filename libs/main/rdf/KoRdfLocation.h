@@ -42,7 +42,7 @@ class KoRdfLocation : public KoRdfSemanticItem
     Q_OBJECT
 
 public:
-    KoRdfLocation(QObject *parent, KoDocumentRdf *m_rdf = 0);
+    explicit KoRdfLocation(QObject *parent, KoDocumentRdf *m_rdf = 0);
     KoRdfLocation(QObject *parent, KoDocumentRdf *m_rdf, Soprano::QueryResultIterator &it, bool isGeo84);
     virtual ~KoRdfLocation();
 

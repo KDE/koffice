@@ -324,10 +324,10 @@ KoFilter::ConversionStatus DocxXmlDocumentReader::read_sectPr()
     // Currently if there are 3 header/footer styles, the one with 'first' is ignored
     if (!m_headers.isEmpty()) {
         bool odd = false;
-        if (m_headers["even"] != "") {
+        if (!m_headers["even"].isEmpty()) {
             m_masterPageStyle.addChildElement("style:header-left", m_headers["even"]);
         }
-        if (m_headers["default"] != "") {
+        if (!m_headers["default"].isEmpty()) {
             odd = true;
             m_masterPageStyle.addChildElement("style:header", m_headers["default"]);
         }
@@ -338,10 +338,10 @@ KoFilter::ConversionStatus DocxXmlDocumentReader::read_sectPr()
 
     if (!m_footers.isEmpty()) {
         bool odd = false;
-        if (m_footers["even"] != "") {
+        if (!m_footers["even"].isEmpty()) {
             m_masterPageStyle.addChildElement("style:footer-left", m_footers["even"]);
         }
-        if (m_footers["default"] != "") {
+        if (!m_footers["default"].isEmpty()) {
             odd = true;
             m_masterPageStyle.addChildElement("style:footer", m_footers["default"]);
         }
@@ -434,7 +434,7 @@ KoFilter::ConversionStatus DocxXmlDocumentReader::read_textDirection()
     if (!val.isEmpty() && val.size() == 4) {
         const QString left = val.left(2).toLower();
         const QString right = val.right(2).toLower();
-        m_currentPageStyle.addProperty("style:writing-mode", left + "-" + right);
+        m_currentPageStyle.addProperty("style:writing-mode", left + '-' + right);
     }
 
     readNext();
@@ -1035,9 +1035,9 @@ void DocxXmlDocumentReader::createBorderStyle(const QString& size, const QString
 
     QString border;
     if (!size.isEmpty())
-        border += MSOOXML::Utils::ST_EighthPointMeasure_to_ODF(size) + " ";
+        border += MSOOXML::Utils::ST_EighthPointMeasure_to_ODF(size) + ' ';
 
-    border.append(odfLineStyle + " ");
+    border.append(odfLineStyle + ' ');
 
     if (!color.isEmpty()) {
         if (color == "auto") {
@@ -1900,7 +1900,7 @@ KoFilter::ConversionStatus DocxXmlDocumentReader::read_r()
                 }
                 else {
                     int spacePosition = m_complexCharValue.indexOf(' ');
-                    QString textValue = "#";
+                    QString textValue = "#";//krazy:exclude=doublequote_chars
                     textValue.append(m_complexCharValue.left(spacePosition));
                     m_complexCharValue.remove(0, textValue.length());
                     body->addAttribute("xlink:href", QUrl(textValue).toEncoded());

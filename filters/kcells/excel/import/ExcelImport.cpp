@@ -990,7 +990,7 @@ void ExcelImport::Private::processCellObjects(Cell* ic, KCCell oc)
         c->m_y = offset(rowHeight(sheet, rwT), dyT, 256);
 
         if (!chart->m_chart->m_cellRangeAddress.isNull() )
-            c->m_cellRangeAddress = encodeAddress(sheet->name(), chart->m_chart->m_cellRangeAddress.left(), chart->m_chart->m_cellRangeAddress.top()) + ":" +
+            c->m_cellRangeAddress = encodeAddress(sheet->name(), chart->m_chart->m_cellRangeAddress.left(), chart->m_chart->m_cellRangeAddress.top()) + ':' +
                                     encodeAddress(sheet->name(), chart->m_chart->m_cellRangeAddress.right(), chart->m_chart->m_cellRangeAddress.bottom());
 
         this->charts << c;
@@ -1046,7 +1046,7 @@ int ExcelImport::Private::convertStyle(const Format* format, const QString& form
             if (key.decimalCount >= 0) {
                 style.setFormatType(KCFormat::KCNumber);
                 style.setPrecision(key.decimalCount);
-                QString format = ".";
+                QString format = ".";//krazy:exclude=doublequote_chars
                 for (int i = 0; i < key.decimalCount; i++) {
                     format += '0';
                 }

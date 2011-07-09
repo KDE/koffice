@@ -33,7 +33,7 @@ class KoRdfFoaF : public KoRdfSemanticItem
     Q_OBJECT
 public:
 
-    KoRdfFoaF(QObject *parent, KoDocumentRdf *m_rdf = 0);
+    explicit KoRdfFoaF(QObject *parent, KoDocumentRdf *m_rdf = 0);
     KoRdfFoaF(QObject *parent, KoDocumentRdf *m_rdf, Soprano::QueryResultIterator &it);
     virtual ~KoRdfFoaF();
 

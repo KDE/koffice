@@ -164,7 +164,7 @@ std::string whitespaces(int number)
 {
     std::string s;
     for (int i = 0; i < number; ++i)
-        s += " ";
+        s += " ";//krazy:exclude=doublequote_chars
     return s;
 }
 

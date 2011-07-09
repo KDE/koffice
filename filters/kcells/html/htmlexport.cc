@@ -48,9 +48,9 @@ const QString html_row_tag = "tr";
 const QString html_row_options = "";
 const QString html_cell_tag = "td";
 const QString html_cell_options = "";
-const QString html_bold = "b";
-const QString html_italic = "i";
-const QString html_underline = "u";
+const QString html_bold = "b";//krazy:exclude=doublequote_chars
+const QString html_italic = "i";//krazy:exclude=doublequote_chars
+const QString html_underline = "u";//krazy:exclude=doublequote_chars
 const QString html_right = "right";
 const QString html_left = "left";
 const QString html_center = "center";
