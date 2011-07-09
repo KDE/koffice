@@ -105,7 +105,7 @@ namespace Charting
         };
         Style m_style;
         Tickness m_tickness;
-        LineFormat(const Style& style = None, const Tickness& tickness = Hairline) : KCFormat(), m_style(style), m_tickness(tickness) {} 
+        explicit LineFormat(const Style& style = None, const Tickness& tickness = Hairline) : KCFormat(), m_style(style), m_tickness(tickness) {} 
     };
     
     class PieFormat : public KCFormat
@@ -121,7 +121,7 @@ namespace Charting
         QColor m_foreground;
         QColor m_background;
         bool m_fill;
-        AreaFormat(const QColor &foreground = QColor(), const QColor &background = QColor(), bool fill = false) : KCFormat(), m_foreground(foreground), m_background(background), m_fill(fill) {}
+        explicit AreaFormat(const QColor &foreground = QColor(), const QColor &background = QColor(), bool fill = false) : KCFormat(), m_foreground(foreground), m_background(background), m_fill(fill) {}
     };
     
     class Fill
@@ -168,7 +168,7 @@ namespace Charting
     public:
         /// Size of the center hole in a doughnut chart group as a percentage of the plot area size.
         int m_pcDonut;
-        RingImpl(int anStart = 0, int pcDonut = 0) : PieImpl(anStart), m_pcDonut(pcDonut) {}
+        explicit RingImpl(int anStart = 0, int pcDonut = 0) : PieImpl(anStart), m_pcDonut(pcDonut) {}
         virtual QByteArray name() const { return "ring"; }
     };
 
@@ -227,7 +227,7 @@ namespace Charting
         unsigned int m_sizeRatio;
         /// Specifies whether data points with negative values are shown.
         bool m_showNegativeBubbles;
-        BubbleImpl(SizeType sizeType = Area, unsigned int sizeRatio = 100, bool showNegativeBubbles = true) : ChartImpl(), m_sizeType(sizeType), m_sizeRatio(sizeRatio), m_showNegativeBubbles(showNegativeBubbles) {}
+        explicit BubbleImpl(SizeType sizeType = Area, unsigned int sizeRatio = 100, bool showNegativeBubbles = true) : ChartImpl(), m_sizeType(sizeType), m_sizeRatio(sizeRatio), m_showNegativeBubbles(showNegativeBubbles) {}
         virtual QByteArray name() const { return "bubble"; }
     };
 

@@ -58,7 +58,7 @@ public:
      * @param editor the text editor used to insert the bookmark
      * @param parent a parent widget for the purpose of centering the dialog
      */
-    JumpOverview(QTextDocument *doc, QWidget *parent = 0);
+    explicit JumpOverview(QTextDocument *doc, QWidget *parent = 0);
 
 signals:
     void cursorPositionSelected(int pos);

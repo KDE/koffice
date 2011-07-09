@@ -60,7 +60,7 @@ public:
     /// Constructor
     KSectionStyle(QObject *parent = 0);
     /// Creates a KSectionStyle with the given frame format and \a parent
-    KSectionStyle(const QTextFrameFormat &frameFormat, QObject *parent = 0);
+    explicit KSectionStyle(const QTextFrameFormat &frameFormat, QObject *parent = 0);
     /// Destructor
     ~KSectionStyle();
 

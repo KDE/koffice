@@ -146,7 +146,7 @@ void StoreDropTest::showZipContents(QByteArray data, const char* mimeType, bool 
     }
     store->disallowNameExpansion();
 
-    QString txt = QString("Valid ZIP file found for format ") + mimeType + "\n";
+    QString txt = QString("Valid ZIP file found for format ") + mimeType + '\n';
 
     if (oasis) {
         txt += loadTextFile(store, "content.xml");
@@ -168,6 +168,6 @@ QString StoreDropTest::loadTextFile(KOdfStore* store, const QString& fileName)
     store->close();
     QString txt = QString("Found %1: \n").arg(fileName);
     txt += QString::fromUtf8(data.data(), data.size());
-    txt += "\n";
+    txt += '\n';
     return txt;
 }

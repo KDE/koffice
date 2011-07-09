@@ -1711,7 +1711,7 @@ void KTextWriter::Private::generateFinalXml(QTextStream &outputXmlStream, const 
         handleListItemWithParagraphMerge(outputXmlStream, element);
     } else if ((firstChild == "list") && (secondChild == "list")) {
         handleListWithListMerge(outputXmlStream, element);
-    } else if ((firstChild == "list") && (secondChild == "")) {
+    } else if ((firstChild == "list") && (secondChild.isEmpty())) {
         handleListItemWithListItemMerge(outputXmlStream, element);
     } else {
         //Not Possible

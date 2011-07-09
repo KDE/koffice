@@ -402,7 +402,7 @@ KoFilter::ConversionStatus DocxXmlStylesReader::read_style()
     }
     KOdfGenericStyles::InsertionFlags insertionFlags = KOdfGenericStyles::DontAddNumberToName;
     if (styleName.isEmpty()) {
-        styleName = m_name.replace(" ", "_");
+        styleName = m_name.replace(' ', '_');
         if (styleName.isEmpty()) {
             // allow for numbering for generated style names
             styleName = odfType;

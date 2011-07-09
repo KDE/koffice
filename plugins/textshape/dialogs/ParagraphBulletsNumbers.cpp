@@ -222,7 +222,7 @@ void ParagraphBulletsNumbers::recalcPreview()
     if (style != KListStyle::None) {
         QString suffix = widget.suffix->text();
         if (suffix.isEmpty())
-            suffix = ".";
+            suffix = '.'; 
         const int depth = widget.depth->value();
         const int displayLevels = qMin(widget.levels->value(), depth);
         for (int i = 1; i <= depth; ++i) {

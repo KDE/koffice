@@ -473,7 +473,7 @@ KoFilter::ConversionStatus XlsxXmlChartReader::read(MSOOXML::MsooXmlReaderContex
         m_context->m_chartExport->m_cellRangeAddress.clear();
         if (!c->m_sheetName.isEmpty())
             m_context->m_chartExport->m_cellRangeAddress += c->m_sheetName + '.';
-        m_context->m_chartExport->m_cellRangeAddress += columnName(c->m_cellRangeAddress.left()) + QString::number(c->m_cellRangeAddress.top()) + ":" +
+        m_context->m_chartExport->m_cellRangeAddress += columnName(c->m_cellRangeAddress.left()) + QString::number(c->m_cellRangeAddress.top()) + ':' +
                                                         columnName(c->m_cellRangeAddress.right()) + QString::number(c->m_cellRangeAddress.bottom());
     }
 
@@ -3031,8 +3031,8 @@ QString XlsxXmlChartReader::AlocateAndWriteIntoInternalTable(QVector< QString > 
     QString range("local");
     Charting::InternalTable *internalTable = &m_context->m_chart->m_internalTable;
 
-    range += "!$" + columnName(internalTable->maxColumn()+1) +"$" + "1" + ":$" + columnName(internalTable->maxColumn()+1) +
-             "$" + QString::number(buffer.size());
+    range += "!$" + columnName(internalTable->maxColumn()+1) +'$' + '1' + ":$" + columnName(internalTable->maxColumn()+1) +
+             '$' + QString::number(buffer.size());
 
     WriteIntoInternalTable(range, buffer, format);
     return range;

@@ -60,7 +60,7 @@ public:
     /// Constructor
     KTableCellStyle(QObject *parent = 0);
     /// Creates a KTableCellStyle with the given table cell format, and \a parent
-    KTableCellStyle(const QTextTableCellFormat &tableCellFormat, QObject *parent = 0);
+    explicit KTableCellStyle(const QTextTableCellFormat &tableCellFormat, QObject *parent = 0);
     /// Destructor
     ~KTableCellStyle();
 

@@ -32,7 +32,7 @@ class FLAKE_EXPORT KShapeConnectionPolicy
 public:
     KShapeConnectionPolicy() : data(0) { }
 
-    KShapeConnectionPolicy(KoFlake::EscapeDirection escapeDir, Qt::Alignment alignmentHint = Qt::AlignCenter);
+    explicit KShapeConnectionPolicy(KoFlake::EscapeDirection escapeDir, Qt::Alignment alignmentHint = Qt::AlignCenter);
 
     KoFlake::EscapeDirection escapeDirection() const;
     void setEscapeDirection(KoFlake::EscapeDirection escapeDirection);

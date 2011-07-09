@@ -803,7 +803,7 @@ void OoWriterImport::writeCounter(QDomDocument& doc, QDomElement& layoutElement,
         counter.setAttribute("righttext", listStyle.attributeNS(ooNS::style, "num-suffix", QString()));
         QString dl = listStyle.attributeNS(ooNS::text, "display-levels", QString());
         if (dl.isEmpty())
-            dl = "1";
+            dl = '1';
         counter.setAttribute("display-levels", dl);
         if (m_restartNumbering != -1) {
             counter.setAttribute("start", m_restartNumbering);
@@ -1032,7 +1032,7 @@ void OoWriterImport::parseSpanOrSimilar(QDomDocument& doc, const KXmlElement& pa
                    ))
             // TODO in kword: printed-by, initial-creator
         {
-            textData = "#";     // field placeholder
+            textData = '#';     // field placeholder
             appendField(doc, outputFormats, ts, pos);
         } else if (isTextNS && localName == "bookmark") {
             // the number of <PARAGRAPH> tags in the frameset element is the parag id
@@ -1171,11 +1171,11 @@ void OoWriterImport::writeFormat(QDomDocument& doc, QDomElement& formats, int id
     if (m_styleStack.hasProperty(ooNS::fo, "font-family")     // 3.10.9
             || m_styleStack.hasProperty(ooNS::style, "font-name")) { // 3.10.8
         // Hmm, the remove "'" could break it's in the middle of the fontname...
-        QString fontName = m_styleStack.property(ooNS::fo, "font-family").remove("'");
+        QString fontName = m_styleStack.property(ooNS::fo, "font-family").remove('\'');
         if (fontName.isEmpty()) {
             // ##### TODO. This is wrong. style:font-name refers to a font-decl entry.
             // We have to look it up there, and retrieve _all_ font attributes from it, not just the name.
-            fontName = m_styleStack.property(ooNS::style, "font-name").remove("'");
+            fontName = m_styleStack.property(ooNS::style, "font-name").remove('\'');
         }
         // 'Thorndale' is not known outside OpenOffice so we substitute it
         // with 'Times New Roman' that looks nearly the same.

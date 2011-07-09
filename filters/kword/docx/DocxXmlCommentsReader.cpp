@@ -178,7 +178,7 @@ KoFilter::ConversionStatus DocxXmlCommentReader::read_comment()
 
     TRY_READ_ATTR(author)
     TRY_READ_ATTR(date)
-    if (date.endsWith("Z")) {
+    if (date.endsWith('Z')) {
         date.remove(date.length()-1, 1);
     }
 

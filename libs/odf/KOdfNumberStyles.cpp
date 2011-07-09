@@ -102,7 +102,7 @@ QPair<QString, NumericStyleFormat> loadOdfNumberStyle(const KXmlElement &parent)
                 if (!isExtraShort) {            // for normal month format (first 3 letters or complete name)
                     format += shortForm ? "MMM" : "MMMM";
                 } else {                        // for the extra-short month name use 'X' as a special mark
-                    format += "X";
+                    format += 'X';
                 }
             } else { // month number
                 format += shortForm ? "M" : "MM";

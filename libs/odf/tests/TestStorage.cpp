@@ -71,7 +71,7 @@ void TestStorage::storage_data()
 void TestStorage::storage()
 {
     const char* const test1 = "This test checks whether we're able to write to some arbitrary directory.\n";
-    const char* const testDir = "0";
+    const char* const testDir = "0"; //krazy:exclude="doublequote_chars"
     const char* const testDirResult = "0/";
     const char* const test2 = "This time we try to append the given relative path to the current dir.\n";
     const char* const test3 = "<xml>Hello World</xml>";

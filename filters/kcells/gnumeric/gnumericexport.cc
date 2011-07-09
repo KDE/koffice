@@ -494,11 +494,11 @@ QDomElement GNUMERICExport::GetLinkStyle(QDomDocument gnumeric_doc)
 
     path = linkUrl;
 
-    if (path.section(":", 0, 0).toLower() == "http")
+    if (path.section(':', 0, 0).toLower() == "http")
         link_style.setAttribute("type", "GnmHLinkURL");
-    else if (path.section(":", 0, 0).toLower() == "mailto")
+    else if (path.section(':', 0, 0).toLower() == "mailto")
         link_style.setAttribute("type", "GnmHLinkEMail");
-    else if (path.section(":", 0, 0).toLower() == "file")
+    else if (path.section(':', 0, 0).toLower() == "file")
         link_style.setAttribute("type", "GnmHLinkExternal");
     else if (path.left(5).toLower() == "sheet")
         link_style.setAttribute("type", "GnmHLinkCurWB");

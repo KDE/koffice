@@ -64,7 +64,7 @@ bool SCSmilValues::loadValues(QString values, QString keyTimes, QString keySplin
 {
     m_calcMode = calcMode;
 
-    QStringList valuesList = values.split(";");
+    QStringList valuesList = values.split(';');
     if (valuesList.size() < 2) {
         return false;
     }
@@ -84,7 +84,7 @@ bool SCSmilValues::loadValues(QString values, QString keyTimes, QString keySplin
         }
     }
     else {
-        QStringList keyTimesList = keyTimes.split(";");
+        QStringList keyTimesList = keyTimes.split(';');
         if (valuesList.size() != keyTimesList.size()) {
             return false;
         }
@@ -101,7 +101,7 @@ bool SCSmilValues::loadValues(QString values, QString keyTimes, QString keySplin
     // keySplines
     if (m_calcMode ==  SCAnimationValue::spline) {
         kWarning(33003) << "keySpline not yes supported";
-        QStringList keySplinesList = keySplines.split(";");
+        QStringList keySplinesList = keySplines.split(';');
     }
     return true;
 }

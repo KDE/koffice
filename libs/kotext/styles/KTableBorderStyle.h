@@ -92,7 +92,7 @@ public:
     /// Constructor
     KTableBorderStyle(QObject *parent = 0);
     /// Creates a KTableBorderStyle with the given table cell format, and \a parent
-    KTableBorderStyle(const QTextTableCellFormat &tableCellFormat, QObject *parent = 0);
+    explicit KTableBorderStyle(const QTextTableCellFormat &tableCellFormat, QObject *parent = 0);
     /// Destructor
     ~KTableBorderStyle();
 

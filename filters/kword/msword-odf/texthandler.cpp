@@ -997,7 +997,7 @@ void KWordTextHandler::fieldSeparator(const wvWare::FLD* /*fld*/, wvWare::Shared
     switch (m_fieldType) {
     case HYPERLINK:
         str->remove(" HYPERLINK ");
-        str->replace('\"', "");
+        str->remove('\"');
 
         //field-argument which specifies a location in the file, such as
         //bookmark, where this hyperlink will jump

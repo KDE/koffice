@@ -259,7 +259,7 @@ void KStyleManager::saveOdf(KOdfGenericStyles& mainStyles)
         QString name(QUrl::toPercentEncoding(QString(sectionStyle->name()).replace(' ', '_')));
         name.replace('%', '_');
         if (name.isEmpty())
-            name = "S";
+            name = 'S'; 
 
         KOdfGenericStyle style(KOdfGenericStyle::SectionStyle);
         sectionStyle->saveOdf(style);

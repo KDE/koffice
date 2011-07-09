@@ -44,7 +44,7 @@ class KoRdfCalendarEvent : public KoRdfSemanticItem
     Q_OBJECT
 
 public:
-    KoRdfCalendarEvent(QObject *parent, KoDocumentRdf *m_rdf = 0);
+    explicit KoRdfCalendarEvent(QObject *parent, KoDocumentRdf *m_rdf = 0);
     KoRdfCalendarEvent(QObject *parent, KoDocumentRdf *m_rdf, Soprano::QueryResultIterator &it);
     virtual ~KoRdfCalendarEvent();
 

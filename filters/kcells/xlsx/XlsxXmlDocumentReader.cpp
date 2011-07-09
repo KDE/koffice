@@ -251,7 +251,7 @@ KoFilter::ConversionStatus XlsxXmlDocumentReader::read_sheet()
     d->worksheetNumber++; // counted from 1
     QString path = QString("xl/worksheets");
     QString file = QString("sheet%1.xml").arg(d->worksheetNumber);
-    QString filepath = path + "/" + file;
+    QString filepath = path + '/' + file;
     kDebug() << "path:" << path << "file:" << file;
 
     // Loading potential ole replacements

@@ -617,7 +617,7 @@ bool ChartExport::saveContent(KOdfStore* store, KXmlWriter* manifestWriter)
                     markerName = "plus";
                     break;
                 case Series::SymbolX:
-                    markerName = "x";
+                    markerName = 'x';
                     break;
                 case Series::Circle:
                 default:
@@ -807,7 +807,7 @@ bool ChartExport::saveContent(KOdfStore* store, KXmlWriter* manifestWriter)
         store->close();
     }
 
-    manifestWriter->addManifestEntry(m_href+"/", "application/vnd.oasis.opendocument.chart");
+    manifestWriter->addManifestEntry(m_href+'/', "application/vnd.oasis.opendocument.chart");
     manifestWriter->addManifestEntry(QString("%1/styles.xml").arg(m_href), "text/xml");
     manifestWriter->addManifestEntry(QString("%1/content.xml").arg(m_href), "text/xml");
 

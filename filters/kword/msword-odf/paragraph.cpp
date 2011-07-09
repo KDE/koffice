@@ -214,7 +214,7 @@ void Paragraph::writeToFile(KXmlWriter* writer)
     //add paragraph style to the collection and its name to the content
     kDebug(30513) << "adding paragraphStyle";
     //add the attribute for our style in <text:p>
-    textStyleName = "P";
+    textStyleName = 'P';
     textStyleName = m_mainStyles->insert(*m_odfParagraphStyle, textStyleName);
 
     //check if the paragraph is inside of an absolutely positioned frame
@@ -333,7 +333,7 @@ void Paragraph::writeToFile(KXmlWriter* writer)
                 if (startedSpan) {
                     writer->endElement(); //text:span
                     startedSpan = false;
-                    oldStyleName = " ";
+                    oldStyleName = ' ';
                 }
                 //if style is null, we have an inner paragraph and add the
                 //complete paragraph element to writer need to get const char*
@@ -505,7 +505,7 @@ void Paragraph::applyParagraphProperties(const wvWare::ParagraphProperties& prop
     }
 
     // if there is no parent style OR the parent and child background color
-    // don't match OR parent color was invalid, childs color is valid
+    // don't match OR parent color was invalid, child's color is valid
     if (!refPap || refPap->shd.cvBack != pap.shd.cvBack ||
         (refPap->shd.shdAutoOrNill && !pap.shd.shdAutoOrNill) )
     {
@@ -633,7 +633,7 @@ void Paragraph::applyParagraphProperties(const wvWare::ParagraphProperties& prop
         if (paragraph) {
             kDebug(30513) << "Processing drop cap";
             if (paragraph->m_textStrings.size() > 0)
-                kDebug(30513) << "String = """ << paragraph->m_textStrings[0] << """";
+                kDebug(30513) << "String = \"" << paragraph->m_textStrings[0] << "\"";
             else
                 kDebug(30513) << "No drop cap string";
 
