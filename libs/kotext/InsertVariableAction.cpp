@@ -27,6 +27,7 @@
 
 #include <KLocale>
 #include <QLayout>
+#include <QPointer>
 
 InsertVariableAction::InsertVariableAction(KCanvasBase *base, KInlineObjectFactoryBase *factory, const KoInlineObjectTemplate &templ)
         : InsertInlineObjectActionBase(base, templ.name)
@@ -47,7 +48,7 @@ KInlineObject *InsertVariableAction::createInlineObject()
         if (widget->layout()) {
             widget->layout()->setMargin(0);
         }
-        KPageDialog *dialog = new KPageDialog(m_canvas->canvasWidget());
+        QPointer<KPageDialog> dialog = new KPageDialog(m_canvas->canvasWidget());
         dialog->setCaption(i18n("%1 Options", m_templateName));
         dialog->addPage(widget, QString());
         if (dialog->exec() != KPageDialog::Accepted) {

@@ -25,6 +25,7 @@
 #include <QPushButton>
 #include <QHeaderView>
 #include <QAbstractProxyModel>
+#include <QPointer>
 
 #include <kfiledialog.h>
 #include <kiconloader.h>
@@ -148,11 +149,14 @@ void KoResourceItemChooser::slotButtonClicked( int button )
 #ifdef GHNS
     else if (button == Button_GhnsDownload) {
 
-        KNS3::DownloadDialog dialog(this);
-        dialog.exec();
-        foreach (const KNS3::Entry& e, dialog.changedEntries()) {
-            qDebug() << "Changed Entry: " << e.name() << e.installedFiles();
-        }
+        QPointer<KNS3::DownloadDialog> dialog = new KNS3::DownloadDialog(this);
+        dialog->exec();
+	if (dialog){
+            foreach (const KNS3::Entry& e, dialog->changedEntries()) {
+                qDebug() << "Changed Entry: " << e.name() << e.installedFiles();
+            }
+	}
+	delete dialog;
     }
     else if (button == Button_GhnsUpload) {
 
@@ -162,10 +166,11 @@ void KoResourceItemChooser::slotButtonClicked( int button )
 
             KoResource * resource = resourceFromModelIndex(index);
             if ( resource ) {
-                KNS3::UploadDialog dialog(this);
-                dialog.setUploadFile(KUrl::fromLocalFile(resource->filename()));
-                dialog.setUploadName(resource->name());
-                dialog.exec();
+                QPointer<KNS3::UploadDialog> dialog = new KNS3::UploadDialog(this);
+                dialog->setUploadFile(KUrl::fromLocalFile(resource->filename()));
+                dialog->setUploadName(resource->name());
+                dialog->exec();
+		delete dialog;
             }
         }
     }

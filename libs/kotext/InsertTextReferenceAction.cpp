@@ -30,6 +30,7 @@
 #include <QVBoxLayout>
 #include <QListWidget>
 #include <QLabel>
+#include <QPointer>
 
 InsertTextReferenceAction::InsertTextReferenceAction(KCanvasBase *canvas, const KInlineTextObjectManager *manager)
         : InsertInlineObjectActionBase(canvas, i18n("Text Reference")),
@@ -59,15 +60,16 @@ KInlineObject *InsertTextReferenceAction::createInlineObject()
     lay->addWidget(list);
     list->addItems(selectionList);
 
-    KPageDialog dialog(m_canvas->canvasWidget());
-    dialog.setCaption(i18n("%1 Options", i18n("Text Reference"))); // reuse the text passed in the constructor
-    dialog.addPage(widget, QString());
+    QPointer<KPageDialog> dialog = new KPageDialog(m_canvas->canvasWidget());
+    dialog->setCaption(i18n("%1 Options", i18n("Text Reference"))); // reuse the text passed in the constructor
+    dialog->addPage(widget, QString());
 
     KVariable *variable = 0;
-    if (dialog.exec() == KPageDialog::Accepted && list->currentRow() >= 0) {
+    if (dialog->exec() == KPageDialog::Accepted && list->currentRow() >= 0) {
         KTextLocator *locator = textLocators[list->currentRow()];
         Q_ASSERT(locator);
         variable = new KTextReference(locator->id());
     }
+    delete dialog;
     return variable;
 }

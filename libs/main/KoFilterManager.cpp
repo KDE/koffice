@@ -97,22 +97,24 @@ QString KoFilterManager::importDocument(const QString& url,
             QByteArray nativeFormat = m_document->nativeFormatMimeType();
 
             QApplication::setOverrideCursor(Qt::ArrowCursor);
-            KoFilterChooser chooser(0,
+            QPointer<KoFilterChooser> chooser = new KoFilterChooser(0,
                     KoFilterManager::mimeFilter(nativeFormat, KoFilterManager::Import,
                     m_document->extraNativeMimeTypes(KoDocument::ForImport)), nativeFormat, u);
-            if (chooser.exec()) {
-                QByteArray f = chooser.filterSelected().toLatin1();
+            if (chooser->exec()) {
+		if (chooser){
+                    QByteArray f = chooser->filterSelected().toLatin1();
 
-                if (f == nativeFormat) {
-                    status = KoFilter::OK;
-                    QApplication::restoreOverrideCursor();
-                    return url;
-                }
-
-                m_graph.setSourceMimeType(f);
+                    if (f == nativeFormat) {
+                        status = KoFilter::OK;
+                        QApplication::restoreOverrideCursor();
+                        return url;
+                    }
+                    m_graph.setSourceMimeType(f);
+		}
             } else
                 userCancelled = true;
             QApplication::restoreOverrideCursor();
+	    delete chooser;
         }
 
         if (!m_graph.isValid()) {
@@ -209,13 +211,17 @@ KoFilter::ConversionStatus KoFilterManager::exportDocument(const QString& url, Q
             kWarning(30500) << "Can't open" << t->name() << ", trying filter chooser";
 
             QApplication::setOverrideCursor(Qt::ArrowCursor);
-            KoFilterChooser chooser(0, KoFilterManager::mimeFilter(), QString(), u);
-            if (chooser.exec())
-                m_graph.setSourceMimeType(chooser.filterSelected().toLatin1());
+            QPointer<KoFilterChooser> chooser = new KoFilterChooser(0, KoFilterManager::mimeFilter(), QString(), u);
+            if (chooser->exec()){
+		    if (chooser)
+                        m_graph.setSourceMimeType(chooser->filterSelected().toLatin1());
+	    }
             else
                 userCancelled = true;
 
             QApplication::restoreOverrideCursor();
+
+	    delete chooser;
         }
     }
 

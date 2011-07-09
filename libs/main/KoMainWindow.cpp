@@ -1249,14 +1249,16 @@ void KoMainWindow::slotDocumentInfo()
     if (!docInfo)
         return;
 
-    KoDocumentInfoDlg *dlg = new KoDocumentInfoDlg(this, docInfo, rootDocument()->documentRdf());
+    QPointer<KoDocumentInfoDlg> dlg = new KoDocumentInfoDlg(this, docInfo, rootDocument()->documentRdf());
     if (dlg->exec()) {
-        if (dlg->isDocumentSaved()) {
-            rootDocument()->setModified(false);
-        } else {
-            rootDocument()->setModified(true);
-        }
-        rootDocument()->setTitleModified();
+	if (dlg){
+            if (dlg->isDocumentSaved()) {
+                rootDocument()->setModified(false);
+            } else {
+                rootDocument()->setModified(true);
+            }
+            rootDocument()->setTitleModified();
+	}
     }
 
     delete dlg;
@@ -1338,24 +1340,31 @@ KoPrintJob* KoMainWindow::exportToPdf(const QString &pdfFileName)
 
         QStringList mimeTypes;
         mimeTypes << "application/pdf" << "application/postscript";
-        KFileDialog dialog(startUrl, QString(), this);
-        dialog.setMimeFilter(mimeTypes);
-        dialog.setObjectName("print file");
-        dialog.setMode(KFile::File);
-        dialog.setCaption(i18n("Export to PDF"));
-        if (dialog.exec() != QDialog::Accepted)
-            return 0;
-        KUrl url(dialog.selectedUrl());
-        if (KIO::NetAccess::exists(url,  KIO::NetAccess::DestinationSide, this)) {
-            bool overwrite = KMessageBox::questionYesNo(this,
+        QPointer<KFileDialog> dialog = new KFileDialog(startUrl, QString(), this);
+        dialog->setMimeFilter(mimeTypes);
+        dialog->setObjectName("print file");
+        dialog->setMode(KFile::File);
+        dialog->setCaption(i18n("Export to PDF"));
+        if (dialog->exec() == QDialog::Accepted){
+	    if (dialog){
+                KUrl url(dialog->selectedUrl());
+                if (KIO::NetAccess::exists(url,  KIO::NetAccess::DestinationSide, this)) {
+                    bool overwrite = KMessageBox::questionYesNo(this,
                                             i18n("A document with this name already exists.\n"\
                                                 "Do you want to overwrite it?"),
                                             i18n("Warning")) == KMessageBox::Yes;
-            if (!overwrite) {
-                return 0;
-            }
+                    if (!overwrite) {
+                        return 0;
+                    }
+                }
+                outputFileName = url.toLocalFile();
+	    }
+	    delete dialog;
         }
-        outputFileName = url.toLocalFile();
+	else{
+	    delete dialog;
+	    return 0;
+	}
     }
     KoPrintJob *printJob = rootView()->createPdfPrintJob();
     if (printJob == 0)
@@ -1724,7 +1733,7 @@ void KoMainWindow::slotVersionsFile()
 {
     if (!rootDocument())
         return;
-    KoVersionDialog *dlg = new KoVersionDialog(this, rootDocument());
+    QPointer<KoVersionDialog> dlg = new KoVersionDialog(this, rootDocument());
     dlg->exec();
     delete dlg;
 }

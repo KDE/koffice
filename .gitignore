@@ -26,3 +26,5 @@ ChangeSet/*
 Thumbs.db
 *autom4te.cache
 *.pro.user
+build/
+*.gdb_history

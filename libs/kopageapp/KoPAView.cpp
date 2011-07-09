@@ -523,7 +523,7 @@ void KoPAView::formatMasterPage()
 {
     KoPAPage *page = dynamic_cast<KoPAPage *>(d->activePage);
     Q_ASSERT(page);
-    KoPAMasterPageDialog *dialog = new KoPAMasterPageDialog(d->doc, page->masterPage(), d->canvas);
+    QPointer<KoPAMasterPageDialog> dialog = new KoPAMasterPageDialog(d->doc, page->masterPage(), d->canvas);
 
     if (dialog->exec() == QDialog::Accepted) {
         KoPAMasterPage *masterPage = dialog->selectedMasterPage();

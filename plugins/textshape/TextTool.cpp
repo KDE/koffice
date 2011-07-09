@@ -1856,9 +1856,10 @@ void TextTool::setStyle(KParagraphStyle *style)
 
 void TextTool::insertTable()
 {
-    TableDialog *dia = new TableDialog(0);
+    QPointer<TableDialog> dia = new TableDialog(0);
     if (dia->exec() == TableDialog::Accepted)
-        m_textEditor.data()->insertTable(dia->rows(), dia->columns());
+	if (dia)
+            m_textEditor.data()->insertTable(dia->rows(), dia->columns());
     delete dia;
 }
 
@@ -1904,7 +1905,7 @@ void TextTool::splitTableCells()
 
 void TextTool::formatParagraph()
 {
-    ParagraphSettingsDialog *dia = new ParagraphSettingsDialog(this, m_textEditor.data()->cursor());//TODO  check this with KoTextEditor
+    QPointer<ParagraphSettingsDialog> dia = new ParagraphSettingsDialog(this, m_textEditor.data()->cursor());//TODO  check this with KoTextEditor
     dia->setUnit(canvas()->unit());
     connect(dia, SIGNAL(startMacro(const QString&)), this, SLOT(startMacro(const QString&)));//TODO
     connect(dia, SIGNAL(stopMacro()), this, SLOT(stopMacro()));
@@ -1941,16 +1942,20 @@ void TextTool::configureChangeTracking()
         QString authorName = m_changeTracker->authorName();
         KChangeTracker::ChangeSaveFormat changeSaveFormat = m_changeTracker->saveFormat();
 
-        ChangeConfigureDialog changeDialog(insertionBgColor, deletionBgColor, formatChangeBgColor, authorName, changeSaveFormat, canvas()->canvasWidget());
+        QPointer<ChangeConfigureDialog> changeDialog = new ChangeConfigureDialog(insertionBgColor, 
+			deletionBgColor, formatChangeBgColor, authorName, changeSaveFormat, canvas()->canvasWidget());
 
-        if (changeDialog.exec()) {
-            m_changeTracker->setInsertionBgColor(changeDialog.insertionBgColor());
-            m_changeTracker->setDeletionBgColor(changeDialog.deletionBgColor());
-            m_changeTracker->setFormatChangeBgColor(changeDialog.formatChangeBgColor());
-            m_changeTracker->setAuthorName(changeDialog.authorName());
-            m_changeTracker->setSaveFormat(changeDialog.saveFormat());
-            writeConfig();
+        if (changeDialog->exec()) {
+	    if (changeDialog){
+                m_changeTracker->setInsertionBgColor(changeDialog->insertionBgColor());
+                m_changeTracker->setDeletionBgColor(changeDialog->deletionBgColor());
+                m_changeTracker->setFormatChangeBgColor(changeDialog->formatChangeBgColor());
+                m_changeTracker->setAuthorName(changeDialog->authorName());
+                m_changeTracker->setSaveFormat(changeDialog->saveFormat());
+                writeConfig();
+	    }
         }
+	delete changeDialog;
     }
 }
 
@@ -1959,7 +1964,7 @@ void TextTool::insertBookmark()
     KoTextEditor *textEditor = m_textEditor.data();
     if (textEditor == 0)
         return;
-    CreateBookmark *dia = new CreateBookmark(textEditor, canvas()->canvasWidget());
+    QPointer<CreateBookmark> dia = new CreateBookmark(textEditor, canvas()->canvasWidget());
     dia->exec();
     delete dia;
 }
@@ -2058,7 +2063,7 @@ void TextTool::showEditVariableDialog()
         KVariable *variable = static_cast<KVariable*>(action->data().value<void*>());
         if (variable) {
             QWidget *optionsWidget = variable->createOptionsWidget();
-            KPageDialog *dialog = new KPageDialog(canvas()->canvasWidget());
+            QPointer<KPageDialog> dialog = new KPageDialog(canvas()->canvasWidget());
             dialog->setCaption(i18n("Variable Options"));
             if (optionsWidget)
                 dialog->addPage(optionsWidget, QString());
@@ -2117,7 +2122,7 @@ void TextTool::insertString(const QString& string)
 
 void TextTool::selectFont()
 {
-    FontDia *fontDlg = new FontDia(m_textEditor.data()->cursor());//TODO check this with KoTextEditor
+    QPointer<FontDia> fontDlg = new FontDia(m_textEditor.data()->cursor());//TODO check this with KoTextEditor
     connect(fontDlg, SIGNAL(startMacro(const QString &)), this, SLOT(startMacro(const QString &)));
     connect(fontDlg, SIGNAL(stopMacro()), this, SLOT(stopMacro()));
     fontDlg->exec();
@@ -2130,7 +2135,7 @@ void TextTool::jumpToText()
     if (textEditor == 0)
         return;
     const int oldPos = textEditor->position();
-    JumpOverview *dia = new JumpOverview(textEditor->document(), canvas()->canvasWidget());
+    QPointer<JumpOverview> dia = new JumpOverview(textEditor->document(), canvas()->canvasWidget());
     connect (dia, SIGNAL(cursorPositionSelected(int)), textEditor, SLOT(setPosition(int)));
     connect (dia, SIGNAL(cursorPositionSelected(int)), this, SLOT(ensureCursorVisible()));
     if (dia->exec() == QDialog::Rejected) {
