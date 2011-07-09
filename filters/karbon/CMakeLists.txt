@@ -20,6 +20,7 @@ include_directories(
 macro_optional_find_package(WPD)
 macro_optional_find_package(WPG)
 macro_log_feature(LIBWPG_FOUND "WPG" "WordPerfect Graphics Library" "http://libwpg.sourceforge.net/" FALSE "" "Required by the Karbon WPG import filter")
+macro_log_feature(LIBWPG_STREAM_INCLUDE_DIR "WPG" "WordPerfect stream Library" "http://libwps.sourceforge.net/" FALSE "" "Required by the Karbon WPG import filter")
 macro_optional_find_package(Poppler)
 # The pdf-importer needs the not-officially-supported XPDF Headers
 # Installing these is off by default in poppler sources, so lets make
@@ -34,9 +35,9 @@ macro_log_feature( POPPLER_FOUND "poppler-qt4" "The Poppler Qt4 interface librar
 
 add_subdirectory( png )
 add_subdirectory( svg )
-if (WPD_FOUND AND LIBWPG_FOUND)
+if (WPD_FOUND AND LIBWPG_FOUND AND LIBWPG_STREAM_INCLUDE_DIR)
   add_subdirectory( wpg )
-endif (WPD_FOUND AND LIBWPG_FOUND)
+endif (WPD_FOUND AND LIBWPG_FOUND AND LIBWPG_STREAM_INCLUDE_DIR)
 add_subdirectory( wmf )
 add_subdirectory( karbon1.x )
 add_subdirectory( eps )
