@@ -43,7 +43,7 @@ namespace KoTextRdfCore
  * Save the RDF selected triples from model to the store with the
  * given RDF/XML filename
  */
-bool saveRdf(Soprano::Model *model, Soprano::StatementIterator triples,
+bool saveRdf(Soprano::StatementIterator triples,
         KOdfStore *store, KXmlWriter *manifestWriter, const QString &fileName);
 
 /**

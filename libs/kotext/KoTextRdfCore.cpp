@@ -25,7 +25,7 @@
 #include <QtCore/QFile>
 using namespace Soprano;
 
-bool KoTextRdfCore::saveRdf(Soprano::Model *model, Soprano::StatementIterator triples, KOdfStore *store, KXmlWriter *manifestWriter, const QString &fileName)
+bool KoTextRdfCore::saveRdf(Soprano::StatementIterator triples, KOdfStore *store, KXmlWriter *manifestWriter, const QString &fileName)
 {
     bool ok = false;
 
@@ -100,10 +100,8 @@ bool KoTextRdfCore::createAndSaveManifest(Soprano::Model *docmodel, const QMap<Q
     //kDebug(30015) << "exporting triples model.sz:" << tmpmodel->statementCount();
     // save tmpmodel as manifest.rdf in C+P ODF file.
     Soprano::StatementIterator triples = tmpmodel->listStatements();
-    bool ret = saveRdf(tmpmodel, triples, store, manifestWriter, "manifest.rdf");
-    if (tmpmodel) {
-        delete tmpmodel;
-    }
+    bool ret = saveRdf(triples, store, manifestWriter, "manifest.rdf");
+    delete tmpmodel;
     return ret;
 }
 
