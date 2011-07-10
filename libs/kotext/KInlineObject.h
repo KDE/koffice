@@ -74,12 +74,9 @@ public:
         AuthorInitials,
 
 
-        KarbonStart = 1000,      ///< Base number for karbon specific values.
-        KexiStart = 2000,        ///< Base number for kexi specific values.
+        ArtsStart = 1000,      ///< Base number for karbon specific values.
         KivioStart = 3000,       ///< Base number for kivio specific values.
-        KPlatoStart = 4000,      ///< Base number for kplato specific values.
-        KPresenterStart = 5000,  ///< Base number for kpresenter specific values.
-        KritaStart = 6000,       ///< Base number for krita specific values.
+        ShowcaseStart = 5000,  ///< Base number for showcase specific values.
         KWordStart = 7000,       ///< Base number for kword specific values.
         VariableManagerStart = 8000, ///< Start of numbers reserved for the KVariableManager
         User = 12000

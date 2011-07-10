@@ -143,7 +143,7 @@ public:
     bool loadFromFile(const QString& fileName);
 
     /**
-     * Load a potentially broken XPM file (for KPresenter)
+     * Load a potentially broken XPM file (for showcase)
      */
     bool loadXpm(QIODevice* io);
 

@@ -68,8 +68,7 @@ outside the libs are not allowed to use it.
 Futher names are
 KW for KWord classes
 KoPA for the libs/kopageapp library
-KPr for KPresenter
-Kis for Krita (from KImage-shop)
+SC for Showcase
 
 
 Backwards compatibility for some libs

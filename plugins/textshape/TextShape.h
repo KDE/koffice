@@ -104,7 +104,7 @@ public:
 
     void markLayoutDone();
 
-    // required for kpresenter hack
+    // required for showcase hack
     void setPageProvider(KPageProvider *provider) { m_pageProvider = provider; }
 
     /// reimplemented

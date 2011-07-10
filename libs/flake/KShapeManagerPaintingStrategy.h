@@ -32,7 +32,7 @@ class QRectF;
 /**
  * This implements the painting strategy for the KShapeManager
  *
- * This is done to make it possible to have e.g. animations in kpresenter.
+ * This is done to make it possible to have e.g. animations in showcase.
  *
  * This class implements the default strategy which is normally used.
  */

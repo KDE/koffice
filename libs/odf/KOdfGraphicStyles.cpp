@@ -164,7 +164,7 @@ QString KOdf::saveOdfHatchStyle(KOdfGenericStyles& mainStyles, const QBrush &bru
 {
     KOdfGenericStyle hatchStyle(KOdfGenericStyle::HatchStyle /*no family name*/);
     hatchStyle.addAttribute("draw:color", brush.color().name());
-    //hatchStyle.addAttribute( "draw:distance", m_distance ); not implemented into kpresenter
+    //hatchStyle.addAttribute( "draw:distance", m_distance ); not implemented into showcase
     switch (brush.style()) {
     case Qt::HorPattern:
         hatchStyle.addAttribute("draw:style", "single");
@@ -490,7 +490,7 @@ QBrush KOdf::loadOdfFillStyle(const KOdfStyleStack &styleStack, const QString & 
                 tmpBrush.setStyle(Qt::Dense7Pattern);
 
             } else
-                kDebug(30003) << " transparency is not defined into kpresenter :" << transparency;
+                kDebug(30003) << " transparency is not defined into showcase :" << transparency;
         }
     } else if (fill == "hatch") {
         QString style = styleStack.property(KOdfXmlNS::draw, "fill-hatch-name");
@@ -511,13 +511,13 @@ QBrush KOdf::loadOdfFillStyle(const KOdfStyleStack &styleStack, const QString & 
                 tmpBrush.setColor(draw->attributeNS(KOdfXmlNS::draw, "color", QString()));
             }
             if (draw->hasAttributeNS(KOdfXmlNS::draw, "distance")) {
-                //todo implemente it into kpresenter
+                //todo implemente it into showcase
             }
             if (draw->hasAttributeNS(KOdfXmlNS::draw, "display-name")) {
-                //todo implement it into kpresenter
+                //todo implement it into showcase
             }
             if (draw->hasAttributeNS(KOdfXmlNS::draw, "style")) {
-                //todo implemente it into kpresenter
+                //todo implemente it into showcase
                 QString styleHash = draw->attributeNS(KOdfXmlNS::draw, "style", QString());
                 if (styleHash == "single") {
                     switch (angle) {

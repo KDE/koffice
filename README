@@ -4,11 +4,9 @@ KOffice is a collection of office applications linked together by a
 common base.  This common base assures that all office application can
 work together and also share a common look and feel.
 
-
 KOffice is free software, mostly under LGPL 2+ but also under the GPL.
 See COPYING and COPYING.LIB for the details.  See also copyright and
 licensing notices in individual files.
-
 
 Contents
 --------
@@ -16,92 +14,22 @@ Contents
 The applications currently included in KOffice (version 2.1) are:
 
 - KWord      -  Word processor
-- KSpread    -  Spreadsheet calculator
-- KPresenter -  Presentation program
-- Karbon     -  Vector graphics
-
-The applications not yet part of the official release, but will
-be included in a next version:
-
-- Kivio      -  Flowcharting program
+- KCells     -  Spreadsheet calculator
+- Showcase   -  Presentation program
+- Arts       -  Vector graphics
 
 More information can be found at http://www.koffice.org
-
 
 Building and running
 --------------------
 
 KOffice is based on the KDE libraries ( http://www.kde.org ) which are
 needed to run KOffice.  Note that you don't have to actually run the
-KDE desktop environment in order to use KOffice.  KOffice works fine
+KDE workspace in order to use KOffice.  KOffice works fine
 on any desktop or platform.
 
-You will need kdesupport, kdelibs and kdebase/runtime
-installed if you want to compile and run KOffice. Installing kdepimlibs
-gives more functionality.
-For importing some external file formats or other plugins, you may
-also need some other dependencies.  For more details on how to build
-KOffice from the sources, see
+See for up-to-date info;
 http://wiki.koffice.org/index.php?title=Build_KOffice
-
-
-Developers
-----------
-
-KOffice is created by the KDE community, consisting of Open Source
-programmers around the world.  All developers give their time/code to
-the community for everyone to benefit.
-
-If you have found a bug or missing feature you can always contact the
-developers of KOffice (via http://www.koffice.org) or delve into the
-source code yourself.
-
-The parts that are shared between all KOffice applications can be found
-in the libs/ subdirectory.  There classes like KoDocument can be found;
-these classes are extended in the project directories.
-
-Read the .h files in the respective directories for more info or read
-the online API docs which you can find at
-http://www.koffice.org/developer/apidocmain.php
-
-
-The KOffice source tree
------------------------
-
-Here follows a short overview of the source code.
-
-cmake/       files to help cmake do it's job configuring
-doc/         user documentation.
-
-karbon/      source code of the different applications
-kpresenter/
-krita/
-kspread/
-kword/
-kivio/
-
-kounavail    a shape that is used when an application that handles a
-             certain embedded datatype is not available
-
-libs/        the common libraries
-plugins/     some plugins, both flake shapes and other types.
-
-filters/     import and export filters for foreign file formats
-
-tools/       tools used internally (e.g. for testing) and released
-             with koffice, such as the koconverter file format
-             conversion tool.
-
-interfaces/  simplified external interfaces to some advanced data types
-             such as charts.
-
-servicetypes/ desktop files for some service types provided by KOffice
-
-templates/   templates for new documents.
-             NOTE: Out of date since they use the old KOffice file formats
-
-pics/        icons
-
 
 Contact info
 ------------
