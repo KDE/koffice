@@ -633,7 +633,7 @@ void Paragraph::applyParagraphProperties(const wvWare::ParagraphProperties& prop
         if (paragraph) {
             kDebug(30513) << "Processing drop cap";
             if (paragraph->m_textStrings.size() > 0)
-                kDebug(30513) << "String = \"" << paragraph->m_textStrings[0] << "\"";
+                kDebug(30513) << "String = " << paragraph->m_textStrings[0];
             else
                 kDebug(30513) << "No drop cap string";
 
