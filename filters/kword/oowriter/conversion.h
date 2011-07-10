@@ -28,7 +28,7 @@
 // import* means OO->KWord
 // export* means KWord->OO
 // Only put here the conversions that are specific to KWord.
-// Those that can be used in KPresenter<->ooimpress should go to OoUtils.
+// Those that can be used in showcase<->ooimpress should go to OoUtils.
 
 namespace Conversion
 {

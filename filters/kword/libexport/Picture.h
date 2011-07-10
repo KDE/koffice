@@ -173,7 +173,7 @@ public:
     bool loadFromBase64(const QByteArray& str);
 
     /**
-     * Load a potentially broken XPM file (for old files of KPresenter)
+     * Load a potentially broken XPM file (for old files of showcase)
      */
     bool loadXpm(QIODevice* io);
 

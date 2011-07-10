@@ -461,7 +461,7 @@ void KoPADocument::addShape(KShape * shape)
 
     emit shapeAdded(shape);
 
-    // it can happen in kpresenter notes view that there is no page
+    // it can happen in showcase notes view that there is no page
     if (page) {
         page->shapeAdded(shape);
         postAddShape(page, shape);

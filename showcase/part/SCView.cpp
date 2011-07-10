@@ -172,7 +172,7 @@ void SCView::initActions()
     else
        setXMLFile("showcase.rc");
 
-    // do special kpresenter stuff here
+    // do special showcase stuff here
     m_actionExportHtml = new KAction(i18n("Export as HTML..."), this);
     actionCollection()->addAction("file_export_html", m_actionExportHtml);
     connect(m_actionExportHtml, SIGNAL(triggered()), this, SLOT(exportToHtml()));

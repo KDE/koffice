@@ -397,7 +397,7 @@ void Filterkpr2odf::convertObjects(KXmlWriter* content, const KXmlNode& objects)
             break;
         case 6: //clipart
             break;
-            //NOTE: 7 is undefined, never happens in a file (according to kpresenter.dtd)
+            //NOTE: 7 is undefined, never happens in a file (according to showcase.dtd)
         case 8: // pie, chord, arc
             appendPie(content, objectElement);
             exportAnimation(objectElement, content->indentLevel());

@@ -289,7 +289,7 @@ void TestKoGenStyles::testDefaultStyle()
     defaultStyle.writeStyle(&writer, coll, "style:default-style", defaultStyleName, "style:paragraph-properties");
     TEST_END_QTTEST("<r>\n <style:default-style style:family=\"paragraph\" style:master-page-name=\"Standard\">\n  <style:paragraph-properties myfont=\"isBold\"/>\n </style:default-style>\n</r>\n");
 
-    // The kspread case: not writing out all properties, only if they differ
+    // The kcells case: not writing out all properties, only if they differ
     // from the default style.
     // KOdfGenericStyles doesn't fetch info from the parent style when testing
     // for equality, so KCells uses isEmpty() to check for equality-to-parent.

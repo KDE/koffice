@@ -230,7 +230,7 @@ bool PictureShared::loadXpm(QIODevice* io)
 
     clear();
 
-    // Old KPresenter XPM files have char(1) instead of some "
+    // Old showcase XPM files have char(1) instead of some "
     // Therefore we need to treat XPM separately
 
     QByteArray array = io->readAll();

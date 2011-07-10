@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
- /* heavily based on Ariya's work (see kspread/formula) -- all errors are my own! */
+ /* heavily based on Ariya's work (see kcells/formula) -- all errors are my own! */
 
 #include "SCValueParser.h"
 
