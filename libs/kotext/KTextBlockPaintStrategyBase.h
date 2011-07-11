@@ -29,7 +29,7 @@ class QPainter;
 
 /**
  * This class is used to control aspects of textblock painting
- * Which is used when KPresenter animates text.
+ * Which is used when showcase animates text.
  */
 class KOTEXT_EXPORT KTextBlockPaintStrategyBase
 {

@@ -248,8 +248,7 @@ void TestShapeGroupCommand::testGroupStrokeShapes()
 {
     QRectF bound(0,0,0,0);
     if (strokeGroup->border()) {
-        KInsets insets;
-        strokeGroup->border()->borderInsets(insets);
+        KInsets insets = strokeGroup->border()->borderInsets();
         bound.adjust(-insets.left, -insets.top, insets.right, insets.bottom);
     }
     if (strokeGroup->shadow()) {

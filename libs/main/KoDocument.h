@@ -474,8 +474,8 @@ public:
      *  Return a correctly created QDomDocument for an old (1.3-style) %KOffice document,
      *  including processing instruction, complete DOCTYPE tag (with systemId and publicId), and root element.
      *  This static method can be used e.g. by filters.
-     *  @param appName the app's instance name, e.g. kword, kspread, kpresenter etc.
-     *  @param tagName the name of the tag for the root element, e.g. DOC for kword/kpresenter.
+     *  @param appName the app's instance name, e.g. kword, kcells, showcase etc.
+     *  @param tagName the name of the tag for the root element, e.g. DOC for kword/showcase.
      *  @param version the DTD version (usually the application's version).
      */
     static QDomDocument createDomDocument(const QString& appName, const QString& tagName, const QString& version);
@@ -491,7 +491,7 @@ public:
     /**
      *  Save the document. The default implementation is to call
      *  saveXML(). This method exists only for applications that
-     *  don't use QDomDocument for saving, i.e. kword and kpresenter.
+     *  don't use QDomDocument for saving, i.e. kword and showcase.
      */
     virtual bool saveToStream(QIODevice *dev);
 

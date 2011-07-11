@@ -51,15 +51,15 @@ public:
         return NULL;
     }
 
-    const virtual unsigned char *read(size_t numBytes, size_t &numBytesRead);
+    const virtual unsigned char *read(unsigned long numBytes, unsigned long &numBytesRead);
     virtual int seek(long offset, WPX_SEEK_TYPE seekType);
     virtual long tell();
     virtual bool atEOS();
 
 private:
     long m_offset;
-    size_t m_size;
     unsigned char *m_data;
+    size_t m_size;
     unsigned char *m_tmpBuf;
 };
 
@@ -79,7 +79,7 @@ WPXMemoryInputStream::~WPXMemoryInputStream()
     delete [] m_data;
 }
 
-const unsigned char* WPXMemoryInputStream::read(size_t numBytes, size_t &numBytesRead)
+const unsigned char* WPXMemoryInputStream::read(unsigned long numBytes, unsigned long &numBytesRead)
 {
     delete [] m_tmpBuf;
     unsigned int numBytesToRead;

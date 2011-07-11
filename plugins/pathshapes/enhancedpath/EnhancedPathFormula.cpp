@@ -26,8 +26,8 @@
 
 /*
     The formula parsing, compiling and evaluating is based on
-    kspreads formula engine written by Ariya Hidayat.
-    There is a DESIGN.html file in the kspreads directory which
+    KCells formula engine written by Ariya Hidayat.
+    There is a DESIGN.html file in the KCells directory which
     explains how the engine is working.
     The engine was stripped down a little to only support the
     operations needed for the odf enhanced path formula spec.

@@ -42,8 +42,7 @@ bool KWTextFrame::canAutoGrow()
 {
     if (!m_canGrow)
         return false;
-    KInsets textInsets;
-    shape()->fetchInsets(textInsets);
+    KInsets textInsets = shape()->insets();
     textInsets += insets();
     const qreal effectiveHeight = shape()->size().height() - textInsets.top - textInsets.bottom;
     if (effectiveHeight - m_lastHeight < -0.2) { // shape shrunk!

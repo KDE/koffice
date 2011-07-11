@@ -1387,7 +1387,7 @@ void OoWriterImport::writeLayout(QDomDocument& doc, QDomElement& layoutElement)
     // Borders
     OoUtils::importBorders(layoutElement, m_styleStack);
 
-    // Page breaking. This isn't in OoUtils since it doesn't apply to KPresenter
+    // Page breaking. This isn't in OoUtils since it doesn't apply to showcase
     if (m_styleStack.hasProperty(ooNS::fo, "break-before") ||
             m_styleStack.hasProperty(ooNS::fo, "break-after") ||
             m_styleStack.hasProperty(ooNS::style, "break-inside") ||

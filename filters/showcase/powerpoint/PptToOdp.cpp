@@ -1806,7 +1806,7 @@ void PptToOdp::createMainStyles(KOdfGenericStyles& styles)
     defineDefaultGraphicStyle(styles);
     defineDefaultPresentationStyle(styles);
 
-    //NOTE: kpresenter uses the default drawing-page style instead of that
+    //NOTE: showcase uses the default drawing-page style instead of that
     //defined by the corresponding <master-page> element.
 //     defineDefaultDrawingPageStyle(styles);
 
@@ -2346,7 +2346,7 @@ void PptToOdp::processTextLine(Writer& out,
         }
         out.xml.startElement("text:list-item");
 
-        //kpresenter requires the start-value here!
+        //showcase requires the start-value here!
         if (first && pf.fBulletHasAutoNumber()) {
             out.xml.addAttribute("text:start-value", pf.startNum());
             first = false;

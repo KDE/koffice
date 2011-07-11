@@ -24,7 +24,7 @@ CTRL Home/End
 CTRL Shift Home/End
 Shift F9 versus F9
 
-Let's try to get them working well in Kspread as well. I tried my
+Let's try to get them working well in kcells as well. I tried my
 hand at it but wasn't able to get them to be efficient.
 
 3. Familiarize yourself with the concept of array formulas and why they

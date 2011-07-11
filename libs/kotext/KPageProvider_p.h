@@ -36,7 +36,7 @@
 class KShape;
 class KTextPage;
 
-/// \internal  this is a hack for kpresenter
+/// \internal  this is a hack for showcase
 class KOTEXT_EXPORT KPageProvider
 {
 public:

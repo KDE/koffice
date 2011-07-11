@@ -284,7 +284,7 @@ public:
             }
             // kDebug() << " + section" << buttonCount;
             int rows = (int) ceilf(buttonCount / (float) maxColumns);
-            
+
             int length = 0;
             if (firstSection) {
                 firstSection = false;
@@ -309,7 +309,7 @@ public:
                     section->setSeperator(Section::SeperatorTop | Section::SeperatorLeft);
                 }
             }
-            
+
             if (actuallyPlace) {
                 if (m_orientation == Qt::Vertical) {
                     section->setGeometry(QRect(x, y, maxColumns * iconSize.width() - length,
@@ -319,7 +319,7 @@ public:
                                                maxColumns * iconSize.height() - length));
                 }
             }
-            
+
             unusedButtons -= buttonCount;
 
             if (m_orientation == Qt::Vertical) {
@@ -438,21 +438,19 @@ void KoToolBox::setButtonsVisible(const KCanvasController *canvas, const QList<Q
 {
     if (canvas->canvas() != d->canvas)
         return;
-    foreach(QToolButton *button, d->visibilityCodes.keys()) {
+    foreach (QToolButton *button, d->visibilityCodes.keys()) {
         QString code = d->visibilityCodes.value(button);
         if (code.startsWith(QLatin1String("flake/")))
             continue;
-        if (code.endsWith( QLatin1String( "/always")))
-        {
+        if (code.endsWith( QLatin1String( "/always"))) {
             button->setVisible(true);
             button->setEnabled( true );
-        }
-        else if (code.isEmpty()) {
+        } else if (code.isEmpty()) {
             button->setVisible(true);
             button->setEnabled( codes.count() != 0 );
-        }
-        else
+        } else {
             button->setVisible( codes.contains(code) );
+        }
     }
     layout()->invalidate();
     update();
@@ -479,7 +477,7 @@ void KoToolBox::paintEvent(QPaintEvent * e)
 {
     QPainter painter(this);
     painter.eraseRect(e->rect());
-    
+
     painter.setBrush(palette().shadow());
 
     const QList<Section*> sections = d->sections.values();
@@ -564,6 +562,5 @@ void KoToolBoxDocker::updateFloating(bool v)
 {
     m_toolBox->setFloating(v);
 }
-
 
 #include <KoToolBox_p.moc>
