@@ -43,7 +43,7 @@ public:
     QTransform matrix;
 };
 
-KGradientBackground::KGradientBackground(QGradient * gradient, const QTransform &matrix)
+KGradientBackground::KGradientBackground(QGradient *gradient, const QTransform &matrix)
     : KShapeBackground(*(new KGradientBackgroundPrivate()))
 {
     Q_D(KGradientBackground);
@@ -53,7 +53,7 @@ KGradientBackground::KGradientBackground(QGradient * gradient, const QTransform 
     Q_ASSERT(d->gradient->coordinateMode() == QGradient::ObjectBoundingMode);
 }
 
-KGradientBackground::KGradientBackground(const QGradient & gradient, const QTransform &matrix)
+KGradientBackground::KGradientBackground(const QGradient &gradient, const QTransform &matrix)
     : KShapeBackground(*(new KGradientBackgroundPrivate()))
 {
     Q_D(KGradientBackground);
@@ -79,13 +79,15 @@ QTransform KGradientBackground::transform() const
     return d->matrix;
 }
 
-void KGradientBackground::setGradient(QGradient * gradient)
+void KGradientBackground::setGradient(QGradient *gradient)
 {
     Q_D(KGradientBackground);
+    Q_ASSERT(gradient);
+    if (gradient == d->gradient)
+        return;
     delete d->gradient;
 
     d->gradient = gradient;
-    Q_ASSERT(d->gradient);
     Q_ASSERT(d->gradient->coordinateMode() == QGradient::ObjectBoundingMode);
 }
 
@@ -99,7 +101,7 @@ void KGradientBackground::setGradient(const QGradient &gradient)
     Q_ASSERT(d->gradient->coordinateMode() == QGradient::ObjectBoundingMode);
 }
 
-const QGradient * KGradientBackground::gradient() const
+const QGradient *KGradientBackground::gradient() const
 {
     Q_D(const KGradientBackground);
     return d->gradient;
