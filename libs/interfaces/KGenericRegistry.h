@@ -56,6 +56,73 @@ template<typename T>
 class KGenericRegistry
 {
 public:
+
+    /**
+     * This internal class acts as a wrapper to the QHash<QString, T>::const_iterator class. 
+     * This allows us to access the contents of the registry efficiently.
+     * It is not a full implementation of a const_iterator class, but provides the bare minimum number of operations
+     * required to do its job.
+     */
+    class const_iterator {
+	public:
+		/**
+		 * Conversion ctor which promotes a QHash const_iterator to a KGenericRegistr::const_iterator
+		 * @param iter The iterator to promote
+		 */
+		const_iterator(typename QHash<QString, T>::const_iterator iter){
+		    m_iter = iter;
+		}
+
+		/**
+		 * Access the value of the current item pointed to by the iterator.
+		 * @return A const reference to the current value.
+		 */
+		const T& value() const { return m_iter.value(); }
+
+		/**
+		 * A thin wrapper to the key() function.
+		 * @return A const reference to the key of the current item.
+		*/
+		const QString& key() const { return m_iter.key(); }
+
+		/**
+		 * Acts as a thin wrapper to the QHash comparison.
+		 * @return Returns true if @param other points to the same item as this iterator.  Otherwise, returns false.
+		 */
+		bool operator==(const const_iterator& other) const {
+			return m_iter == other.m_iter;
+		}
+
+		/**
+		 * Acts as a thin wrapper to the QHash comparison.
+		 * @return Returns false if @param other points to a different item than this iterator.  Otherwise, returns false.
+		 */
+		bool operator!=(const const_iterator& other) const {
+			return !const_iterator::operator==(other);
+		}
+
+		/**
+		 * Advance the iterator one position.
+		 * Acts as a wrapper to the QHash iterator increment.
+		 */
+		const_iterator& operator++(){
+			++m_iter;
+			return *this;
+		}
+		
+		/**
+		 * Rewind the iterator one position.
+		 * Acts as a wrapper to the QHash iterator decrement.
+		 */
+		const_iterator& operator--(){
+			--m_iter;
+			return *this;
+		}
+
+	private:
+		typename QHash<QString, T>::const_iterator m_iter;
+    };
+
     KGenericRegistry() { }
     virtual ~KGenericRegistry() { }
 
@@ -126,6 +193,13 @@ public:
 
     QList<T> values() const {
         return m_hash.values();
+    }
+
+    KGenericRegistry<T>::const_iterator constBegin() const {
+	    return const_iterator(m_hash.constBegin());
+    }
+    KGenericRegistry<T>::const_iterator constEnd() const {
+	    return const_iterator(m_hash.constEnd());
     }
 
 private:
