@@ -42,9 +42,9 @@ target_link_libraries(KoProgressUpdaterTest komain ${QT_QTTEST_LIBRARY} ${KDE4_T
 
 ########### next target ###############
 
-set(TestAction_test_SRCS TestAction.cpp )
-kde4_add_unit_test(TestActionTest TESTNAME libs-komain-TestActionTest ${TestAction_test_SRCS})
-target_link_libraries(TestActionTest komain ${QT_QTTEST_LIBRARY} ${KDE4_THREADWEAVER_LIBRARIES})
+#set(TestAction_test_SRCS TestAction.cpp )
+#kde4_add_unit_test(TestActionTest TESTNAME libs-komain-TestActionTest ${TestAction_test_SRCS})
+#target_link_libraries(TestActionTest komain ${QT_QTTEST_LIBRARY} ${KDE4_THREADWEAVER_LIBRARIES})
 
 ########### end ###############
 
