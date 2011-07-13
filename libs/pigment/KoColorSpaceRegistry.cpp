@@ -224,7 +224,9 @@ QList<const KoColorSpaceFactory*> KoColorSpaceRegistry::colorSpacesFor(const KoC
 {
     QReadLocker l(&d->registrylock);
     QList<const KoColorSpaceFactory*> csfs;
-    foreach(KoColorSpaceFactory* csf, d->colorsSpaceFactoryRegistry.values()) {
+    for (KGenericRegistry<KoColorSpaceFactory*>::const_iterator it = d->colorsSpaceFactoryRegistry.constBegin(); 
+		    it != d->colorsSpaceFactoryRegistry.constEnd(); ++it) {
+        KoColorSpaceFactory* csf = it.value();
         if (csf->profileIsCompatible(_profile)) {
             csfs.push_back(csf);
         }
@@ -571,7 +573,9 @@ QList<KoID> KoColorSpaceRegistry::listKeys() const
 {
     QReadLocker l(&d->registrylock);
     QList<KoID> answer;
-    foreach(const QString& key, d->colorsSpaceFactoryRegistry.keys()) {
+    for (KGenericRegistry<KoColorSpaceFactory*>::const_iterator it = d->colorsSpaceFactoryRegistry.constBegin(); 
+		    it != d->colorsSpaceFactoryRegistry.constEnd(); ++it) {
+        const QString& key = it.key();
         answer.append(KoID(key, d->colorsSpaceFactoryRegistry.get(key)->name()));
     }
 
