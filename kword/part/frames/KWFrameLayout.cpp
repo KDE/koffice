@@ -688,9 +688,9 @@ void KWFrameLayout::cleanupHeadersFooters()
         if (tfs->pageStyle().isValid())
             pageStyles.insert(tfs->pageStyle(), frameSets);
     }
-
-    foreach (const KWPageStyle &style, pageStyles.keys()) {
-        FrameSets frameSets = pageStyles[style];
+    for (QHash<KWPageStyle, FrameSets>::const_iterator it = pageStyles.constBegin(); it != pageStyles.constEnd(); ++it) {
+        const KWPageStyle &style = it.key();
+        FrameSets frameSets = it.value();
         switch (style.headerPolicy()) {
         case KWord::HFTypeEvenOdd:
             break;

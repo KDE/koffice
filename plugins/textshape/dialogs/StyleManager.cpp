@@ -114,16 +114,20 @@ void StyleManager::setStyleManager(KStyleManager *sm)
     }
 
     // now; need to redirect the parents
-    foreach (KParagraphStyle *ps, m_shadowParagraphStyles.keys()) {
+    for (QHash<KParagraphStyle*, int>::const_iterator it = m_shadowParagraphStyles.constBegin(); it != m_shadowParagraphStyles.constEnd(); ++it) {
+        KParagraphStyle *ps = it.key();
         if (ps->parentStyle() == 0)
             continue; // the default style shows up twice in our copy so the user can edit it;
         Q_ASSERT(cloneMapper.value(ps->parentStyle()));
         ps->setParentStyle(cloneMapper.value(ps->parentStyle()));
     }
-    foreach (KParagraphStyle *ps, m_shadowParagraphStyles.keys())
+    for (QHash<KParagraphStyle*, int>::const_iterator it = m_shadowParagraphStyles.constBegin(); it != m_shadowParagraphStyles.constEnd(); ++it) {
+        KParagraphStyle *ps = it.key();
         m_shadowStyleManager->add(ps);
+    }
     // last; after ids are set by the stylemanager need to redirect the 'next' (which is an int)
-    foreach (KParagraphStyle *ps, m_shadowParagraphStyles.keys()) {
+    for (QHash<KParagraphStyle*, int>::const_iterator it = m_shadowParagraphStyles.constBegin(); it != m_shadowParagraphStyles.constEnd(); ++it) {
+        KParagraphStyle *ps = it.key();
         KParagraphStyle *orig = m_styleManager->paragraphStyle(ps->nextStyle());
         if (orig) {
             KParagraphStyle *clone = cloneMapper.value(orig);
@@ -224,10 +228,14 @@ void StyleManager::save()
     widget.characterStylePage->save();
 
     QMap<int, int> cloneMapper; // orig to clone
-    foreach (KParagraphStyle *clone, m_shadowParagraphStyles.keys())
-        cloneMapper.insert(m_shadowParagraphStyles.value(clone), clone->styleId());
-    foreach (KCharacterStyle *clone, m_shadowCharacterStyles.keys())
-        cloneMapper.insert(m_shadowCharacterStyles.value(clone), clone->styleId());
+    for (QHash<KParagraphStyle*,int>::const_iterator it = m_shadowParagraphStyles.constBegin(); it != m_shadowParagraphStyles.constEnd(); ++it) {
+        KParagraphStyle *clone = it.key();
+        cloneMapper.insert(it.value(), clone->styleId());
+    }
+    for (QHash<KCharacterStyle*, int>::const_iterator it = m_shadowCharacterStyles.constBegin(); it != m_shadowCharacterStyles.constEnd(); ++it) {
+        KCharacterStyle *clone = it.key();
+        cloneMapper.insert(it.value(), clone->styleId());
+    }
 
     foreach (int styleId, m_alteredStyles) {
         KParagraphStyle *orig = m_styleManager->paragraphStyle(styleId);

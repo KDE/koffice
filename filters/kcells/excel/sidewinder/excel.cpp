@@ -1867,7 +1867,7 @@ void MsoDrawingGroupRecord::setData(unsigned size, const unsigned char* data, co
     if(d->container.blipStore.data() && m_workbook->store()) {
         m_workbook->store()->enterDirectory("Pictures");
     
-        foreach(MSO::OfficeArtBStoreContainerFileBlock fb, d->container.blipStore->rgfb) {
+        foreach(const MSO::OfficeArtBStoreContainerFileBlock &fb, d->container.blipStore->rgfb) {
             PictureReference ref = savePicture(fb, m_workbook->store());
             if (ref.name.length() == 0) {
                 std::cerr << "Empty name in picture reference for picture with uid=" << ref.uid << " mimetype=" << ref.mimetype << std::endl;

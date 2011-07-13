@@ -121,13 +121,14 @@ void KWOdfWriter::saveHeaderFooter(KOdfEmbeddedDocumentSaver &embeddedSaver, KOd
           << KWord::OddPagesFooterTextFrameSet
           << KWord::EvenPagesFooterTextFrameSet;
 
-    foreach (KWPageStyle pageStyle, data.keys()) {
+    for (QHash<KWPageStyle, QHash<int, KWTextFrameSet*> >::const_iterator it = data.constBegin(); it != data.constEnd(); ++it) {
+        const KWPageStyle &pageStyle = it.key();
         KOdfGenericStyle masterStyle(KOdfGenericStyle::MasterPageStyle);
         //masterStyle.setAutoStyleInStylesDotXml(true);
         KOdfGenericStyle layoutStyle = pageStyle.saveOdf();
         masterStyle.addProperty("style:page-layout-name", mainStyles.insert(layoutStyle, "pm"));
 
-        QHash<int, KWTextFrameSet*> headersAndFooters = data.value(pageStyle);
+        QHash<int, KWTextFrameSet*> headersAndFooters = it.value();
         int index = 0;
         foreach (int type, order) {
             if (! headersAndFooters.contains(type))
@@ -311,7 +312,7 @@ bool KWOdfWriter::save(KOdfWriteStore &odfStore, KOdfEmbeddedDocumentSaver &embe
     // if there is e.g. text:p or text:h there
     if (!mainTextFrame) {
         bodyWriter->startElement("text:page-sequence");
-        foreach (KWPage page, m_document->pageManager()->pages()) {
+        foreach (const KWPage &page, m_document->pageManager()->pages()) {
             Q_ASSERT(m_masterPages.contains(page.pageStyle()));
             bodyWriter->startElement("text:page");
             bodyWriter->addAttribute("text:master-page-name",

@@ -762,10 +762,9 @@ void KTextLoader::Private::copyRemoveLeavingContentStart(const KXmlNode &node, Q
     removeLeavingContentChangeIdMap.insert(changeEndId, changeId);
 
     xmlStream << "<" << nodeName;
-    QList<QPair<QString, QString> > attributeNSNames = element.attributeNSNames();
+    QList<KoText::StringPair> attributeNSNames = element.attributeNSNames();
 
-    QPair<QString, QString> attributeName;
-    foreach(attributeName, attributeNSNames) {
+    foreach(const KoText::StringPair &attributeName, attributeNSNames) {
         QString nameSpace = attributeName.first;
         if (nameSpace != "http://www.w3.org/XML/1998/namespace") {
             int index = nameSpacesList.indexOf(nameSpace);
@@ -878,10 +877,9 @@ void KTextLoader::Private::copyTagStart(const KXmlElement &element, QTextStream 
     QString nodeName  = QString("ns%1") + ':' + element.localName();
     nodeName = nodeName.arg(index);
     xmlStream << "<" << nodeName;
-    QList<QPair<QString, QString> > attributeNSNames = element.attributeNSNames();
+    QList<KoText::StringPair> attributeNSNames = element.attributeNSNames();
 
-    QPair<QString, QString> attributeName;
-    foreach(attributeName, attributeNSNames) {
+    foreach(const KoText::StringPair &attributeName, attributeNSNames) {
         QString nameSpace = attributeName.first;
         if (nameSpace == KOdfXmlNS::delta && ignoreChangeAttributes) {
             continue;
@@ -1139,19 +1137,19 @@ void KTextLoader::loadList(const KXmlElement &element, QTextCursor &cursor)
 
     // Iterate over list items and add them to the textlist
     bool firstTime = true;
-    foreach (e, childElementsList) {
-        if (e.localName() == "removed-content") {
-            QString changeId = e.attributeNS(KOdfXmlNS::delta, "removal-change-idref");
+    foreach (const KXmlElement &elem, childElementsList) {
+        if (elem.localName() == "removed-content") {
+            QString changeId = elem.attributeNS(KOdfXmlNS::delta, "removal-change-idref");
             int deleteStartPosition = cursor.position();
-            d->openChangeRegion(e);
+            d->openChangeRegion(elem);
             KXmlElement deletedElement;
-            forEachElement(deletedElement, e) {
+            forEachElement(deletedElement, elem) {
                 if (!firstTime && !numberedParagraph)
                     cursor.insertBlock(d->defaultBlockFormat, d->defaultCharFormat);
                 firstTime = false;
                 loadListItem(deletedElement, cursor, level);
             }
-            d->closeChangeRegion(e);
+            d->closeChangeRegion(elem);
             if(!d->checkForDeleteMerge(cursor, changeId, deleteStartPosition)) {
                 QTextCursor tempCursor(cursor);
                 tempCursor.setPosition(deleteStartPosition);
@@ -1162,7 +1160,7 @@ void KTextLoader::loadList(const KXmlElement &element, QTextCursor &cursor)
             if (!firstTime && !numberedParagraph)
                 cursor.insertBlock(d->defaultBlockFormat, d->defaultCharFormat);
             firstTime = false;
-            loadListItem(e, cursor, level);
+            loadListItem(elem, cursor, level);
         }
     }
 
@@ -1172,7 +1170,7 @@ void KTextLoader::loadList(const KXmlElement &element, QTextCursor &cursor)
     }
 }
 
-void KTextLoader::loadListItem(KXmlElement &e, QTextCursor &cursor, int level)
+void KTextLoader::loadListItem(const KXmlElement &e, QTextCursor &cursor, int level)
 {
     bool numberedParagraph = e.parentNode().toElement().localName() == "numbered-paragraph";
 

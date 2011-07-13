@@ -29,6 +29,7 @@
 #include <QtGui/QTextCharFormat>
 #include <QtCore/QMetaType>
 #include <QtGui/QTextOption>
+#include <QPair>
 #include <KCharacterStyle.h>
 
 
@@ -44,6 +45,9 @@ KOTEXT_EXPORT QString alignmentToString(Qt::Alignment align);
 KOTEXT_EXPORT Qt::Alignment valignmentFromString(const QString &align);
 KOTEXT_EXPORT QString valignmentToString(Qt::Alignment align);
 KOTEXT_EXPORT QTextDocument *loadOpenDocument(const QString &filename, QTextDocument *document = 0);
+
+//A pair of QStrings.  Used primarily by KTextLoader and KTextWriter.
+typedef QPair<QString, QString> StringPair;
 
 /// This enum contains values to be used as keys in the canvas KResourceManager
 enum CanvasResource {

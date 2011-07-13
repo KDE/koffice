@@ -247,13 +247,15 @@ QList<QPair<QString, KParagraphStyle *> > KTextSharedLoadingData::loadParagraphS
     }
 
     // second pass; resolve all the 'next-style's and parent-style's.
-    foreach (KParagraphStyle *style, nextStyles.keys()) {
-        KParagraphStyle *next = d->namedParagraphStyles.value(nextStyles.value(style));
+    for (QHash<KParagraphStyle *, QString>::const_iterator it = nextStyles.constBegin(); it != nextStyles.constEnd(); ++it) {
+        KParagraphStyle *style = it.key();
+        KParagraphStyle *next = d->namedParagraphStyles.value(it.value());
         if (next && next->styleId() >= 0)
             style->setNextStyle(next->styleId());
     }
-    foreach (KParagraphStyle *style, parentStyles.keys()) {
-        KParagraphStyle *parent = d->namedParagraphStyles.value(parentStyles.value(style));
+    for (QHash<KParagraphStyle *, QString>::const_iterator it = parentStyles.constBegin(); it != parentStyles.constEnd(); ++it) {
+        KParagraphStyle *style = it.key();
+        KParagraphStyle *parent = d->namedParagraphStyles.value(it.value());
         if (parent)
             style->setParentStyle(parent);
     }

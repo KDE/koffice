@@ -112,8 +112,9 @@ void StylesModel::recalculate()
     }
 
     // now copy our 'tree' to m_relations. Probably should refactor to use this datastructure..
-    foreach (int key, tree.keys()) {
-        foreach (int x, tree.value(key)) {
+    for (QHash<int, QList<int> >::const_iterator it = tree.constBegin(); it != tree.constEnd(); ++it) {
+    	int key = it.key();
+        foreach (int x, it.value()) {
             m_relations.insert(key, x);
         }
     }
@@ -313,8 +314,9 @@ QModelIndex StylesModel::setCurrentParagraphStyle(int styleId, bool unchanged)
 
 QModelIndex StylesModel::indexForStyle(int styleId)
 {
-    foreach (int parent, m_relations.keys()) {
-        int index = m_relations.values(parent).indexOf(styleId);
+    for (QMultiHash<int,int>::const_iterator it = m_relations.constBegin(); it != m_relations.constEnd(); ++it) {
+	int key = it.key();
+        int index = m_relations.values(key).indexOf(styleId);
         if (index >= 0)
             return createIndex(index, 0, styleId);
     }

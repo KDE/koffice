@@ -78,8 +78,9 @@ void KWPageManagerPrivate::setPageNumberForId(int pageId, int newPageNumber)
     pageNumbers.clear();
     pages.clear();
 
-    foreach (int id, oldPages.keys()) {
-        Page page = oldPages[id];
+    for (QHash<int, Page>::const_iterator it = oldPages.constBegin(); it != oldPages.constEnd(); ++it) {
+	int id = it.key();
+        Page page = it.value();
         if (diff < 0 && page.pageNumber >= from && page.pageNumber < to) {
             kWarning(32001) << "you requested to change the page number to a number that already exist, all will end soon";
             return;
@@ -393,10 +394,10 @@ QList<KWPage> KWPageManager::pages(const QString &pageStyle) const
 {
     QList<KWPage> answer;
     const bool checkForStyle = !pageStyle.isEmpty();
-    foreach (int key, d->pages.keys()) {
-        if (checkForStyle && d->pages.value(key).style.name() != pageStyle)
+    for (QHash<int, KWPageManagerPrivate::Page>::const_iterator it = d->pages.constBegin(); it != d->pages.constEnd(); ++it) {
+        if (checkForStyle && it.value().style.name() != pageStyle)
             continue;
-        answer << KWPage(d, key);
+        answer << KWPage(d, it.key());
     }
     return answer;
 }

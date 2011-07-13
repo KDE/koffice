@@ -2277,8 +2277,7 @@ void KTextWriter::Private::writeAttributes(QTextStream &outputXmlStream, KXmlEle
 {
     QList<QPair<QString, QString> > attributes = element.attributeNSNames();
 
-    QPair<QString, QString> attributeNamePair;
-    foreach (attributeNamePair, attributes) {
+    foreach (const KoText::StringPair &attributeNamePair, attributes) {
         if (attributeNamePair.first == KOdfXmlNS::text) {
             outputXmlStream << " text:" << attributeNamePair.second << "=";
             outputXmlStream << "\"" << element.attributeNS(KOdfXmlNS::text, attributeNamePair.second) << "\"";

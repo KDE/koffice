@@ -109,7 +109,7 @@ void TestRdf::basicload()
         Node());
     allStatements = it.allElements();
     QCOMPARE (allStatements.size(), 1);
-    foreach (Soprano::Statement s, allStatements) {
+    foreach (const Soprano::Statement &s, allStatements) {
         // RDEBUG << "HAVE:" << s;
         QVERIFY (s.object().toString() == "James Smith");
     }
@@ -123,7 +123,7 @@ void TestRdf::basicload()
         Node());
     allStatements = it.allElements();
     QCOMPARE (allStatements.size(), 1);
-    foreach (Soprano::Statement s, allStatements) {
+    foreach (const Soprano::Statement &s, allStatements) {
         // RDEBUG << "HAVE:" << s;
         QVERIFY (s.object().toString() == "CDC474D4-1393-11D7-9A2C-000393914268");
         QVERIFY (s.context().toString() == rdf->rdfPathContextPrefix() + "geo1.rdf");
@@ -152,7 +152,7 @@ void TestRdf::findStatements()
         Node());
     allStatements = it.allElements();
     QCOMPARE (allStatements.size(), 1);
-    foreach (Soprano::Statement s, allStatements) {
+    foreach (const Soprano::Statement &s, allStatements) {
         QVERIFY (s.object().toString() == "tel:44 2324543");
     }
 }
@@ -373,7 +373,7 @@ static Soprano::Model *loadRDFXMLFromODT(const QString &odt)
     Soprano::StatementIterator it = parser->parseString(rdfxmlData, BaseURI,
                                                         Soprano::SerializationRdfXml);
     QList<Statement> allStatements = it.allElements();
-    foreach (Soprano::Statement s, allStatements) {
+    foreach (const Soprano::Statement &s, allStatements) {
         ret->addStatement(s.subject(),s.predicate(),s.object(),context);
     }
     RDEBUG << "ret.sz:" << ret->statementCount();
@@ -426,7 +426,7 @@ void TestRdf::addAndSage()
         Node::createResourceNode(QUrl("uri:test2")), Node());
     allStatements = it.allElements();
     QCOMPARE (allStatements.size(), 1);
-    foreach (Soprano::Statement s, allStatements) {
+    foreach (const Soprano::Statement &s, allStatements) {
         RDEBUG << "HAVE:" << s;
         QVERIFY (s.object().toString() == "uri:test3");
     }
@@ -439,7 +439,7 @@ void TestRdf::addAndSage()
         Node());
     allStatements = it.allElements();
     QCOMPARE (allStatements.size(), 1);
-    foreach (Soprano::Statement s, allStatements) {
+    foreach (const Soprano::Statement &s, allStatements) {
         RDEBUG << "HAVE:" << s;
         QVERIFY (s.object().toString() == "uri:test6");
     }
@@ -506,7 +506,7 @@ void TestRdf::expandStatementsToIncludeRdfLists()
     it = m->listStatements(uuid, icaltz, Node());
     allStatements = it.allElements();
     QCOMPARE (allStatements.size(), 1);
-    foreach (Soprano::Statement s, allStatements) {
+    foreach (const Soprano::Statement &s, allStatements) {
         RDEBUG << "HAVE:" << s;
         localModel->addStatement (s);
     }
@@ -520,7 +520,7 @@ void TestRdf::expandStatementsToIncludeRdfLists()
     it = localModel->listStatements(Node(), rdfFirst, Node());
     allStatements = it.allElements();
     QVERIFY (allStatements.size() >= 2);
-    foreach (Soprano::Statement s, allStatements) {
+    foreach (const Soprano::Statement &s, allStatements) {
 //        RDEBUG << "HAVE:" << s;
         double v = s.object().toString().toDouble();
         QVERIFY (v == 40.442673 || v == -79.945815);
@@ -544,7 +544,7 @@ void TestRdf::expandStatementsToIncludeOtherPredicates()
                             Node());
     allStatements = it.allElements();
     QCOMPARE (allStatements.size(), 1);
-    foreach (Soprano::Statement s, allStatements) {
+    foreach (const Soprano::Statement &s, allStatements) {
         RDEBUG << "HAVE:" << s;
         localModel->addStatement (s);
     }
@@ -558,7 +558,7 @@ void TestRdf::expandStatementsToIncludeOtherPredicates()
                             Node());
     allStatements = it.allElements();
     QCOMPARE (allStatements.size(), 1);
-    foreach (Soprano::Statement s, allStatements) {
+    foreach (const Soprano::Statement &s, allStatements) {
         RDEBUG << "HAVE:" << s;
         QVERIFY (s.object().toString() == "Winston");
     }
@@ -581,7 +581,7 @@ void TestRdf::expandStatementsReferencingSubject()
     it = m->listStatements(Node(), rdfFirst, Node());
     allStatements = it.allElements();
     QVERIFY (allStatements.size() >= 2);
-    foreach (Soprano::Statement s, allStatements) {
+    foreach (const Soprano::Statement &s, allStatements) {
         RDEBUG << "HAVE:" << s;
         localModel->addStatement (s);
     }
@@ -597,7 +597,7 @@ void TestRdf::expandStatementsReferencingSubject()
                                      Node());
     allStatements = it.allElements();
     QCOMPARE (allStatements.size(), 1);
-    foreach (Soprano::Statement s, allStatements) {
+    foreach (const Soprano::Statement &s, allStatements) {
         //RDEBUG << "HAVE:" << s;
         QVERIFY (s.object().isBlank());
     }
@@ -620,7 +620,7 @@ void TestRdf::serailizeRDFLists()
     // Is the reloaded data the same as what we sent out?
     QList<Soprano::Statement> slist = KoTextRdfCore::loadList(m,ListHeadSubject);
     QVERIFY (slist.size() ==  dataBNodeList.size());
-    foreach (Soprano::Statement s, slist)  {
+    foreach (const Soprano::Statement &s, slist)  {
         QVERIFY (dataBNodeList.contains (s.object()));
     }
 
@@ -630,7 +630,7 @@ void TestRdf::serailizeRDFLists()
     QCOMPARE (m->statementCount(), 9);
     slist = KoTextRdfCore::loadList(m,ListHeadSubject);
     QVERIFY (slist.size() ==  dataBNodeList.size());
-    foreach (Soprano::Statement s, slist)  {
+    foreach (const Soprano::Statement &s, slist)  {
         QVERIFY (dataBNodeList.contains (s.object()));
     }
 }

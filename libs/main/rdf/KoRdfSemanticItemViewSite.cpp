@@ -63,7 +63,7 @@ Soprano::Node KoRdfSemanticItemViewSite::linkingSubject() const
     // try to find it if it already exists
     StatementIterator it = m->listStatements(Node(), pred, obj, context);
     QList<Statement> allStatements = it.allElements();
-    foreach (Soprano::Statement s, allStatements) {
+    foreach (const Soprano::Statement &s, allStatements) {
         return s.subject();
     }
     Node ret = m->createBlankNode();
@@ -80,7 +80,7 @@ QString KoRdfSemanticItemViewSite::getProperty(const QString &prop, const QStrin
     StatementIterator it = m->listStatements(ls, Node::createResourceNode(QUrl(fqprop)),
                                Node(), rdf->manifestRdfNode());
     QList<Statement> allStatements = it.allElements();
-    foreach (Soprano::Statement s, allStatements) {
+    foreach (const Soprano::Statement &s, allStatements) {
         return s.object().toString();
     }
     return defval;

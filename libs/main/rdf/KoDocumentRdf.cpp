@@ -141,7 +141,7 @@ void KoDocumentRdf::freshenBNodes(Soprano::Model *m)
     StatementIterator it = m->listStatements();
     QList<Statement> allStatements = it.allElements();
     RDEBUG << "freshening model.sz:" << allStatements.size();
-    foreach (Soprano::Statement s, allStatements) {
+    foreach (const Soprano::Statement &s, allStatements) {
         Soprano::Node subj = s.subject();
         Soprano::Node obj = s.object();
         Soprano::Statement news;
@@ -202,7 +202,7 @@ bool KoDocumentRdf::loadRdf(KOdfStore *store, const Soprano::Parser *parser, con
                                     Soprano::SerializationRdfXml);
     QList<Statement> allStatements = it.allElements();
     RDEBUG << "Found " << allStatements.size() << " triples..." << endl;
-    foreach (Soprano::Statement s, allStatements) {
+    foreach (const Soprano::Statement &s, allStatements) {
         Soprano::Node subj = s.subject();
         Soprano::Node pred = s.predicate();
         Soprano::Node obj  = s.object();
@@ -282,7 +282,7 @@ bool KoDocumentRdf::loadOasis(KOdfStore *store)
     return ok;
 }
 
-bool KoDocumentRdf::saveRdf(KOdfStore *store, KXmlWriter *manifestWriter, Soprano::Node &context)
+bool KoDocumentRdf::saveRdf(KOdfStore *store, KXmlWriter *manifestWriter, const Soprano::Node &context)
 {
     bool ok = false;
     QString fileName("manifest.rdf");
@@ -351,7 +351,7 @@ bool KoDocumentRdf::saveOasis(KOdfStore *store, KXmlWriter *manifestWriter)
     bool ok = true;
     NodeIterator contextier = d->model->listContexts();
     QList<Node> contexts = contextier.allElements();
-    foreach (Soprano::Node n, contexts) {
+    foreach (const Soprano::Node &n, contexts) {
         saveRdf(store, manifestWriter, n);
     }
     return ok;
@@ -370,7 +370,7 @@ void KoDocumentRdf::updateXmlIdReferences(const QMap<QString, QString> &m)
                                Node(),
                                Node());
     QList<Statement> allStatements = it.allElements();
-    foreach (Soprano::Statement s, allStatements) {
+    foreach (const Soprano::Statement &s, allStatements) {
         RDEBUG << "seeking obj:" << s.object();
         QMap<QString, QString>::const_iterator mi = m.find(s.object().toString());
         if (mi != m.end()) {
@@ -458,7 +458,7 @@ QList<KoRdfFoaF*> KoDocumentRdf::foaf(Soprano::Model *m)
     if (d->foafObjects.empty() && m->statementCount()) {
       RDEBUG << "foaf() have data, but no foafs!" << endl;
         QList<Statement> allStatements = m->listStatements().allElements();
-        foreach (Soprano::Statement s, allStatements) {
+        foreach (const Soprano::Statement &s, allStatements) {
           RDEBUG << s;
         }
     }
@@ -679,7 +679,7 @@ void KoDocumentRdf::dumpModel(const QString &msg, Soprano::Model *m) const
     }
     QList<Soprano::Statement> allStatements = m->listStatements().allElements();
     RDEBUG << "----- " << msg << " ----- model size:" << allStatements.size();
-    foreach (Soprano::Statement s, allStatements) {
+    foreach (const Soprano::Statement &s, allStatements) {
         RDEBUG << s;
     }
 }
@@ -754,9 +754,9 @@ void KoDocumentRdf::expandStatementsReferencingSubject(Soprano::Model *model)
     Q_ASSERT(d->model);
     QList<Statement> addList;
     QList<Statement> allStatements = model->listStatements().allElements();
-    foreach (Soprano::Statement s, allStatements) {
+    foreach (const Soprano::Statement &s, allStatements) {
         QList<Statement> all = d->model->listStatements(Node(), Node(), s.subject()).allElements();
-        foreach (Soprano::Statement e, all) {
+        foreach (const Soprano::Statement &e, all) {
             addList << e;
         }
     }
@@ -769,9 +769,9 @@ void KoDocumentRdf::expandStatementsSubjectPointsTo(Soprano::Model *model)
     Q_ASSERT(d->model);
     QList<Statement> addList;
     QList<Statement> allStatements = model->listStatements().allElements();
-    foreach (Soprano::Statement s, allStatements) {
+    foreach (const Soprano::Statement &s, allStatements) {
         QList<Statement> all = d->model->listStatements(s.object(), Node(), Node()).allElements();
-        foreach (Soprano::Statement e, all) {
+        foreach (const Soprano::Statement &e, all) {
             RDEBUG << "ADD obj:" << s.object() << " adding:" << e;
             addList << e;
         }
@@ -785,7 +785,7 @@ void KoDocumentRdf::expandStatementsSubjectPointsTo(Soprano::Model *model, const
     Q_ASSERT(d->model);
     QList<Statement> addList;
     QList<Statement> all = d->model->listStatements(n, Node(), Node()).allElements();
-    foreach (Soprano::Statement e, all) {
+    foreach (const Soprano::Statement &e, all) {
         RDEBUG << "n:" << n << " adding:" << e;
         addList << e;
     }
@@ -804,7 +804,7 @@ void KoDocumentRdf::expandStatementsToIncludeRdfListsRecurse(Soprano::Model *mod
     addList << all;
     all = d->model->listStatements(n, rdfRest, Node()).allElements();
     addList << all;
-    foreach (Soprano::Statement s, all) {
+    foreach (const Soprano::Statement &s, all) {
         expandStatementsToIncludeRdfListsRecurse(model, addList, s.object());
     }
 }
@@ -816,7 +816,7 @@ void KoDocumentRdf::expandStatementsToIncludeRdfLists(Soprano::Model *model)
     RDEBUG << "model.sz:" << model->statementCount();
     QList<Statement> addList;
     QList<Statement> allStatements = model->listStatements().allElements();
-    foreach (Soprano::Statement s, allStatements) {
+    foreach (const Soprano::Statement &s, allStatements) {
         expandStatementsToIncludeRdfListsRecurse(model, addList, s.subject());
     }
     RDEBUG << "model.sz:" << model->statementCount();
@@ -830,9 +830,9 @@ void KoDocumentRdf::expandStatementsToIncludeOtherPredicates(Soprano::Model *mod
     Q_ASSERT(d->model);
     QList<Statement> addList;
     QList<Statement> allStatements = model->listStatements().allElements();
-    foreach (Soprano::Statement s, allStatements) {
+    foreach (const Soprano::Statement &s, allStatements) {
         QList<Statement> all = d->model->listStatements(s.subject(), Node(), Node()).allElements();
-        foreach (Soprano::Statement e, all) {
+        foreach (const Soprano::Statement &e, all) {
             addList << e;
         }
     }

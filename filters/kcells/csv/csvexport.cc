@@ -220,7 +220,7 @@ KoFilter::ConversionStatus CSVExport::convert(const QByteArray & from, const QBy
         }
     } else {
         kDebug(30501) << "Export as full mode";
-        foreach(KCSheet const * const sheet, ksdoc->map()->sheetList()) {
+        foreach(const KCSheet * const sheet, ksdoc->map()->sheetList()) {
             if (expDialog && !expDialog->exportSheet(sheet->sheetName())) {
                 continue;
             }

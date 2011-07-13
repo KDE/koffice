@@ -195,8 +195,10 @@ bool KProperties::operator==(const KProperties &other) const
 {
     if (d->properties.count() != other.d->properties.count())
         return false;
-    foreach(const QString & key, d->properties.keys()) {
-        if (other.d->properties.value(key) != d->properties.value(key))
+    
+    for (QMap<QString, QVariant>::const_iterator it = d->properties.constBegin(); it != d->properties.constEnd(); ++it) {
+    	const QString & key = it.key();
+        if (other.d->properties.value(key) != it.value())
             return false;
     }
     return true;

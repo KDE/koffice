@@ -55,7 +55,7 @@ bool Object::applyDrawing(const MSO::OfficeArtDgContainer &container)
         if(spc && spc->shapePrimaryOptions) {
 
             // Extract the unique identifier for the drawing to be able to access the drawing again from outside.
-            foreach(MSO::OfficeArtFOPTEChoice c, spc->shapePrimaryOptions->fopt) {
+            foreach(const MSO::OfficeArtFOPTEChoice &c, spc->shapePrimaryOptions->fopt) {
                 if(c.anon.is<MSO::Pib>())
                     m_id = c.anon.get<MSO::Pib>()->pib;
                 else if(c.anon.is<MSO::ITxid>())

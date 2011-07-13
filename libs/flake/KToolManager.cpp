@@ -385,7 +385,8 @@ void KToolManager::Private::detachCanvas(KCanvasController *controller)
     if (canvasData && canvasData->canvas == controller) {
         KCanvasController *newCanvas = 0;
         // try to find another canvas controller beside the one we are removing
-        foreach(KCanvasController* canvas, canvasses.keys()) {
+	for (QHash<KCanvasController*, QList<CanvasData*> >::const_iterator it = canvasses.constBegin(); it != canvasses.constEnd(); ++it) {
+            KCanvasController *canvas = it.key();
             if (canvas != controller) {
                 // yay found one
                 newCanvas = canvas;
@@ -492,7 +493,8 @@ void KToolManager::Private::movedFocus(QWidget *from, QWidget *to)
 
     KCanvasController *newCanvas = 0;
     // if the 'to' is one of our canvasses, or one of its children, then switch.
-    foreach(KCanvasController* canvas, canvasses.keys()) {
+    for (QHash<KCanvasController*, QList<CanvasData*> >::const_iterator it = canvasses.constBegin(); it != canvasses.constEnd(); ++it) {
+        KCanvasController *canvas = it.key();
         if (canvasControllerWidget == to || canvas->canvas()->canvasWidget() == to) {
             newCanvas = canvas;
             break;
@@ -667,7 +669,8 @@ void KToolManager::Private::switchInputDevice(const KInputDevice &device)
 void KToolManager::Private::registerToolProxy(KToolProxy *proxy, KCanvasBase *canvas)
 {
     proxies.insert(canvas, proxy);
-    foreach(KCanvasController *controller, canvasses.keys()) {
+    for (QHash<KCanvasController*, QList<CanvasData*> >::const_iterator it = canvasses.constBegin(); it != canvasses.constEnd(); ++it) {
+        KCanvasController *controller = it.key();
         if (controller->canvas() == canvas) {
             proxy->priv()->setCanvasController(controller);
             break;
@@ -803,7 +806,8 @@ void KToolManager::switchToolRequested(const QString & id)
 KCreateShapesTool * KToolManager::shapeCreatorTool(KCanvasBase *canvas) const
 {
     Q_ASSERT(canvas);
-    foreach(KCanvasController *controller, d->canvasses.keys()) {
+    for (QHash<KCanvasController*, QList<CanvasData*> >::const_iterator it = d->canvasses.constBegin(); it != d->canvasses.constEnd(); ++it) {
+        KCanvasController *controller = it.key();
         if (controller->canvas() == canvas) {
             KCreateShapesTool *createTool = dynamic_cast<KCreateShapesTool*>
                                              (d->canvasData->allTools.value(KoCreateShapesTool_ID));
@@ -818,7 +822,8 @@ KCreateShapesTool * KToolManager::shapeCreatorTool(KCanvasBase *canvas) const
 KToolBase *KToolManager::toolById(KCanvasBase *canvas, const QString &id) const
 {
     Q_ASSERT(canvas);
-    foreach(KCanvasController *controller, d->canvasses.keys()) {
+    for (QHash<KCanvasController*, QList<CanvasData*> >::const_iterator it = d->canvasses.constBegin(); it != d->canvasses.constEnd(); ++it) {
+        KCanvasController *controller = it.key();
         if (controller->canvas() == canvas)
             return d->canvasData->allTools.value(id);
     }

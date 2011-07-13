@@ -59,6 +59,14 @@ public:
 
     static TextEditingPluginContainer *create(KResourceManager *documentResourceManager, Type init = Normal);
 
+    QHash<QString, KTextEditingPlugin*>::const_iterator constBegin() {
+	    return m_textEditingPlugins.constBegin();
+    }
+
+    QHash<QString, KTextEditingPlugin*>::const_iterator constEnd() {
+	    return m_textEditingPlugins.constEnd();
+    }
+
 private:
     QHash<QString, KTextEditingPlugin*> m_textEditingPlugins;
     KTextEditingPlugin *m_spellcheckPlugin;

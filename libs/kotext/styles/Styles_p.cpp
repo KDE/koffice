@@ -67,32 +67,36 @@ bool StylePrivate::isEmpty() const
 
 void StylePrivate::copyMissing(const StylePrivate &other)
 {
-    foreach(int key, other.m_properties.keys()) {
+    for(QMap<int, QVariant>::const_iterator prop = other.m_properties.constBegin(); prop != other.m_properties.constEnd(); ++prop) {
+        int key = prop.key();
         if (!m_properties.contains(key))
-            m_properties.insert(key, other.value(key));
+            m_properties.insert(key, prop.value());
     }
 }
 
 void StylePrivate::copyMissing(const QMap<int, QVariant> &other)
 {
-    foreach(int key, other.keys()) {
+    for(QMap<int, QVariant>::const_iterator prop = other.constBegin(); prop != other.constEnd(); ++prop) {
+	int key = prop.key();
         if (! m_properties.contains(key))
-            m_properties.insert(key, other.value(key));
+            m_properties.insert(key, prop.value());
     }
 }
 
 void StylePrivate::removeDuplicates(const StylePrivate &other)
 {
-    foreach(int key, other.m_properties.keys()) {
-        if (m_properties.value(key) == other.value(key))
+    for(QMap<int, QVariant>::const_iterator prop = other.m_properties.constBegin(); prop != other.m_properties.constEnd(); ++prop) {
+	int key = prop.key();
+        if (m_properties.value(key) == prop.value())
             m_properties.remove(key);
     }
 }
 
 void StylePrivate::removeDuplicates(const QMap<int, QVariant> &other)
 {
-    foreach(int key, other.keys()) {
-        if (m_properties.value(key) == other.value(key))
+    for(QMap<int, QVariant>::const_iterator prop = other.constBegin(); prop != other.constEnd(); ++prop) {
+	int key = prop.key();
+        if (m_properties.value(key) == prop.value())
             m_properties.remove(key);
     }
 }
@@ -106,8 +110,9 @@ bool StylePrivate::operator==(const StylePrivate &other) const
 {
     if (other.m_properties.size() != m_properties.size())
         return false;
-    foreach(int key, m_properties.keys()) {
-        if (m_properties.value(key) != other.value(key))
+    for(QMap<int, QVariant>::const_iterator prop = other.m_properties.constBegin(); prop != other.m_properties.constEnd(); ++prop) {
+	int key = prop.key();
+        if (m_properties.value(key) != prop.value())
             return false;
     }
     return true;
