@@ -435,7 +435,7 @@ void TestXmlReader::testAttributes()
     QVERIFY(list.contains("width"));
     QVERIFY(list.contains("height"));
     QVERIFY(! list.contains("border"));
-    foreach(QString a, list) {
+    foreach(const QString &a, list) {
         QCOMPARE(imgElement.hasAttribute(a), true);
         QCOMPARE(imgElement.attribute(a).isEmpty(), false);
     }

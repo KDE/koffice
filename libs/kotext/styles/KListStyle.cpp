@@ -56,13 +56,15 @@ KListStyle::~KListStyle()
 
 bool KListStyle::operator==(const KListStyle &other) const
 {
-    foreach(int level, d->levels.keys()) {
+    for(QMap<int, KListLevelProperties>::const_iterator prop = d->levels.constBegin(); prop != d->levels.constEnd(); ++prop) {
+        int level = prop.key();
         if (! other.hasLevelProperties(level))
             return false;
-        if (!(other.levelProperties(level) == d->levels[level]))
+        if (!(other.levelProperties(level) == prop.value()))
             return false;
     }
-    foreach(int level, other.d->levels.keys()) {
+    for(QMap<int, KListLevelProperties>::const_iterator prop = other.d->levels.constBegin(); prop != other.d->levels.constEnd(); ++prop) {
+        int level = prop.key();
         if (! hasLevelProperties(level))
             return false;
     }
@@ -109,7 +111,8 @@ int KListStyle::styleId() const
 void KListStyle::setStyleId(int id)
 {
     d->styleId = id;
-    foreach(int level, d->levels.keys()) {
+    for (QMap<int, KListLevelProperties>::const_iterator prop = d->levels.constBegin(); prop != d->levels.constEnd(); ++prop) {
+	int level = prop.key();
         d->levels[level].setStyleId(id);
     }
 }

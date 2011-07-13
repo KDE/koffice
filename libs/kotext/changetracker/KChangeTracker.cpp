@@ -430,7 +430,7 @@ int KChangeTracker::loadedChangeId(QString odfId)
 int KChangeTracker::deletedChanges(QVector<KChangeTrackerElement *> &deleteVector) const
 {
     int numAppendedItems = 0;
-    foreach (KChangeTrackerElement *element, d->changes.values()) {
+    foreach (KChangeTrackerElement *element, d->changes) {
         if (element->changeType() == KOdfGenericChange::DeleteChange && !element->acceptedRejected()) {
           deleteVector << element;
           numAppendedItems++;
@@ -443,8 +443,8 @@ int KChangeTracker::deletedChanges(QVector<KChangeTrackerElement *> &deleteVecto
 int KChangeTracker::allChangeIds(QVector<int> &changesVector) const
 {
     int numAppendedItems = 0;
-    foreach (int changeId, d->changes.keys()) {
-        changesVector << changeId;
+    for (QHash<int, KChangeTrackerElement *>::const_iterator change = d->changes.constBegin(); change != d->changes.constEnd(); ++change) {
+        changesVector << change.key();
         numAppendedItems++;
     }
 

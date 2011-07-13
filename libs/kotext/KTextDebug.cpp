@@ -58,41 +58,42 @@ static QString fontProperties(const QTextCharFormat &textFormat)
     QMap<int, QVariant> properties = textFormat.properties();
     QStringList fontProps;
     // add only font properties here
-    foreach(int id, properties.keys()) {
-        QString key, value;
+    for (QMap<int, QVariant>::const_iterator prop = properties.constBegin(); prop != properties.constEnd(); ++prop) {
+        int id = prop.key();
+	QVariant value = prop.value();
         switch (id) {
         case QTextFormat::FontFamily:
-            fontProps.append(properties[id].toString());
+            fontProps.append(value.toString());
             break;
         case QTextFormat::FontPointSize:
-            fontProps.append(QString("%1pt").arg(properties[id].toDouble()));
+            fontProps.append(QString("%1pt").arg(value.toDouble()));
             break;
         case QTextFormat::FontSizeAdjustment:
-            fontProps.append(QString("%1adj").arg(properties[id].toDouble()));
+            fontProps.append(QString("%1adj").arg(value.toDouble()));
             break;
         case QTextFormat::FontWeight:
-            fontProps.append(QString("weight %1").arg(properties[id].toInt()));
+            fontProps.append(QString("weight %1").arg(value.toInt()));
             break;
         case QTextFormat::FontItalic:
-            fontProps.append(properties[id].toBool() ? "italic" : "non-italic");
+            fontProps.append(value.toBool() ? "italic" : "non-italic");
             break;
         case QTextFormat::FontPixelSize:
-            fontProps.append(QString("%1px").arg(properties[id].toDouble()));
+            fontProps.append(QString("%1px").arg(value.toDouble()));
             break;
         case QTextFormat::FontFixedPitch:
-            fontProps.append(properties[id].toBool() ? "fixedpitch" : "varpitch");
+            fontProps.append(value.toBool() ? "fixedpitch" : "varpitch");
             break;
         case QTextFormat::FontCapitalization:
-            fontProps.append(QString("caps %1").arg(properties[id].toInt()));
+            fontProps.append(QString("caps %1").arg(value.toInt()));
             break;
         case KCharacterStyle::FontCharset:
-            fontProps.append(properties[id].toString());
+            fontProps.append(value.toString());
             break;
         case QTextFormat::FontStyleHint:
-            fontProps.append(QString::number(properties[id].toInt()));
+            fontProps.append(QString::number(value.toInt()));
             break;
         case QTextFormat::FontKerning:
-            fontProps.append(QString("kerning %1").arg(properties[id].toInt()));
+            fontProps.append(QString("kerning %1").arg(value.toInt()));
             break;
         default:
             break;
@@ -185,13 +186,15 @@ QString KTextDebug::textAttributes(const QTextCharFormat &textFormat)
         attrs.append(QString(" achorHref=\"%1\"").arg(textFormat.anchorHref()));
         attrs.append(QString(" achorName=\"%1\"").arg(textFormat.anchorName()));
     }
-
-    foreach(int id, properties.keys()) {
-        QString key, value;
+ 
+    for(QMap<int, QVariant>::const_iterator prop = properties.constBegin(); prop != properties.constEnd(); ++prop) {
+        int id = prop.key();
+	QString key, value;
+	QVariant prop_value = prop.value();
         switch (id) {
         case QTextFormat::TextOutline: {
             key = "outline";
-            QPen pen = qvariant_cast<QPen>(properties[id]);
+            QPen pen = qvariant_cast<QPen>(prop_value);
             if (pen.style() == Qt::NoPen)
                 value = "false";
             else
@@ -200,107 +203,107 @@ QString KTextDebug::textAttributes(const QTextCharFormat &textFormat)
         }
         case KCharacterStyle::UnderlineStyle:
             key = "underlinestyle";
-            value = QString::number(properties[id].toInt());
+            value = QString::number(prop_value.toInt());
             break;
         case QTextFormat::TextUnderlineColor:
             key = "underlinecolor";
-            value = qvariant_cast<QColor>(properties[id]).name();
+            value = qvariant_cast<QColor>(prop_value).name();
             break;
         case KCharacterStyle::UnderlineType:
             key = "underlinetype";
-            value = QString::number(properties[id].toInt());
+            value = QString::number(prop_value.toInt());
             break;
         case KCharacterStyle::UnderlineMode:
             key = "underlinemode";
-            value = QString::number(properties[id].toInt());
+            value = QString::number(prop_value.toInt());
             break;
         case KCharacterStyle::UnderlineWeight:
             key = "underlineweight";
-            value = QString::number(properties[id].toInt());
+            value = QString::number(prop_value.toInt());
             break;
         case KCharacterStyle::UnderlineWidth:
             key = "underlinewidth";
-            value = QString::number(properties[id].toDouble());
+            value = QString::number(prop_value.toDouble());
             break;
         case KCharacterStyle::StrikeOutStyle:
             key = "strikeoutstyle";
-            value = QString::number(properties[id].toInt());
+            value = QString::number(prop_value.toInt());
             break;
         case KCharacterStyle::StrikeOutColor:
             key = "strikeoutcolor";
-            value = qvariant_cast<QColor>(properties[id]).name();
+            value = qvariant_cast<QColor>(prop_value).name();
             break;
         case KCharacterStyle::StrikeOutType:
             key = "strikeouttype";
-            value = QString::number(properties[id].toInt());
+            value = QString::number(prop_value.toInt());
             break;
         case KCharacterStyle::StrikeOutMode:
             key = "strikeoutmode";
-            value = QString::number(properties[id].toInt());
+            value = QString::number(prop_value.toInt());
             break;
         case KCharacterStyle::StrikeOutWeight:
             key = "strikeoutweight";
-            value = QString::number(properties[id].toInt());
+            value = QString::number(prop_value.toInt());
             break;
         case KCharacterStyle::StrikeOutWidth:
             key = "strikeoutwidth";
-            value = QString::number(properties[id].toDouble());
+            value = QString::number(prop_value.toDouble());
             break;
         case QTextFormat::ForegroundBrush:
             key = "foreground";
-            value = qvariant_cast<QBrush>(properties[id]).color().name(); // beware!
+            value = qvariant_cast<QBrush>(prop_value).color().name(); // beware!
             break;
         case QTextFormat::BackgroundBrush:
             key = "background";
-            value = qvariant_cast<QBrush>(properties[id]).color().name(); // beware!
+            value = qvariant_cast<QBrush>(prop_value).color().name(); // beware!
             break;
         case QTextFormat::BlockAlignment:
             key = "align";
-            value = QString::number(properties[id].toInt());
+            value = QString::number(prop_value.toInt());
             break;
         case QTextFormat::TextIndent:
             key = "textindent";
-            value = QString::number(properties[id].toInt());
+            value = QString::number(prop_value.toInt());
             break;
         case QTextFormat::BlockIndent:
             key = "indent";
-            value = QString::number(properties[id].toInt());
+            value = QString::number(prop_value.toInt());
             break;
         case KCharacterStyle::Country:
             key = "country";
-            value = properties[id].toString();
+            value = prop_value.toString();
             break;
         case KCharacterStyle::Language:
             key = "language";
-            value = properties[id].toString();
+            value = prop_value.toString();
             break;
         case KCharacterStyle::HasHyphenation:
             key = "hypenation";
-            value = properties[id].toBool();
+            value = prop_value.toBool();
             break;
         case KCharacterStyle::StrikeOutText:
             key = "strikeout-text";
-            value = properties[id].toString();
+            value = prop_value.toString();
             break;
         case KCharacterStyle::FontCharset:
             key = "font-charset";
-            value = properties[id].toString();
+            value = prop_value.toString();
             break;
         case KCharacterStyle::TextRotationAngle:
             key = "rotation-angle";
-            value = QString::number(properties[id].toInt());
+            value = QString::number(prop_value.toInt());
             break;
         case KCharacterStyle::TextRotationScale:
             key = "text-rotation-scale";
-            value = properties[id].toInt() == KCharacterStyle::Fixed ? "Fixed" : "LineHeight";
+            value = prop_value.toInt() == KCharacterStyle::Fixed ? "Fixed" : "LineHeight";
             break;
         case KCharacterStyle::TextScale:
             key = "text-scale";
-            value = QString::number(properties[id].toInt());
+            value = QString::number(prop_value.toInt());
             break;
         case KCharacterStyle::InlineRdf:
             key = "inline-rdf";
-            value = QString::number(properties[id].toInt());
+            value = QString::number(prop_value.toInt());
             break;
         default:
             break;
@@ -332,7 +335,9 @@ QString KTextDebug::paraAttributes(const QTextBlockFormat &blockFormat)
     }
 
     QMap<int, QVariant> properties = blockFormat.properties();
-    foreach(int id, properties.keys()) {
+    for (QMap<int, QVariant>::const_iterator prop = properties.constBegin(); prop != properties.constEnd(); ++prop) {
+	int id = prop.key();
+	QVariant prop_value = prop.value();
         QString key, value;
         switch (id) {
         // the following are 'todo'
@@ -379,46 +384,46 @@ QString KTextDebug::paraAttributes(const QTextBlockFormat &blockFormat)
             break;
         case KParagraphStyle::AutoTextIndent:
             key = "autotextindent";
-            value = properties[id].toBool() ? "true" : "false" ;
+            value = prop_value.toBool() ? "true" : "false" ;
             break;
 #ifdef PARAGRAPH_BORDER_DEBUG // because it tends to get annoyingly long :)
         case KParagraphStyle::LeftBorderWidth:
             key = "border-width-left";
-            value = QString::number(properties[id].toDouble()) ;
+            value = QString::number(prop_value.toDouble()) ;
             break;
         case KParagraphStyle::TopBorderWidth:
             key = "border-width-top";
-            value = QString::number(properties[id].toDouble()) ;
+            value = QString::number(prop_value.toDouble()) ;
             break;
         case KParagraphStyle::RightBorderWidth:
             key = "border-width-right";
-            value = QString::number(properties[id].toDouble()) ;
+            value = QString::number(prop_value.toDouble()) ;
             break;
         case KParagraphStyle::BottomBorderWidth:
             key = "border-width-bottom";
-            value = QString::number(properties[id].toDouble()) ;
+            value = QString::number(prop_value.toDouble()) ;
             break;
         case KParagraphStyle::LeftBorderStyle:
             key = "border-style-left";
-            value = QString::number(properties[id].toDouble()) ;
+            value = QString::number(prop_value.toDouble()) ;
             break;
         case KParagraphStyle::LeftBorderSpacing:
             key = "inner-border-spacing-left";
-            value = QString::number(properties[id].toDouble()) ;
+            value = QString::number(prop_value.toDouble()) ;
             break;
         case KParagraphStyle::LeftInnerBorderWidth:
             key = "inner-border-width-left";
-            value = QString::number(properties[id].toDouble()) ;
+            value = QString::number(prop_value.toDouble()) ;
             break;
 #endif
         case KParagraphStyle::TabStopDistance:
             key = "tab-stop-distance";
-            value = QString::number(properties[id].toDouble());
+            value = QString::number(prop_value.toDouble());
             break;
         case KParagraphStyle::TabPositions:
             key = "tab-stops";
             value = "";
-            foreach(const QVariant & qvtab, qvariant_cast<QList<QVariant> >(properties[id])) {
+            foreach(const QVariant & qvtab, qvariant_cast<QList<QVariant> >(prop_value)) {
                 KoText::Tab tab = qvtab.value<KoText::Tab>();
                 value.append("{");
                 value.append(" pos:").append(QString::number(tab.position));
@@ -437,43 +442,43 @@ QString KTextDebug::paraAttributes(const QTextBlockFormat &blockFormat)
             break;
         case KParagraphStyle::DropCaps:
             key = "drop-caps";
-            value = QString::number(properties[id].toBool());
+            value = QString::number(prop_value.toBool());
             break;
         case KParagraphStyle::DropCapsLines:
             key = "drop-caps-lines";
-            value = QString::number(properties[id].toInt());
+            value = QString::number(prop_value.toInt());
             break;
         case KParagraphStyle::DropCapsLength:
             key = "drop-caps-length";
-            value = QString::number(properties[id].toInt());
+            value = QString::number(prop_value.toInt());
             break;
         case KParagraphStyle::DropCapsDistance:
             key = "drop-caps-distance";
-            value = QString::number(properties[id].toDouble());
+            value = QString::number(prop_value.toDouble());
             break;
         case QTextFormat::BlockBottomMargin:
-            value = QString::number(properties[id].toDouble());
+            value = QString::number(prop_value.toDouble());
             if (value != "0")
                 key = "block-bottom-margin";
             break;
         case QTextFormat::BlockTopMargin:
-            value = QString::number(properties[id].toDouble());
+            value = QString::number(prop_value.toDouble());
             if (value != "0")
                 key = "block-top-margin";
             break;
         case QTextFormat::BlockLeftMargin:
-            value = QString::number(properties[id].toDouble());
+            value = QString::number(prop_value.toDouble());
             if (value != "0")
                 key = "block-left-margin";
             break;
         case QTextFormat::BlockRightMargin:
-            value = QString::number(properties[id].toDouble());
+            value = QString::number(prop_value.toDouble());
             if (value != "0")
                 key = "block-right-margin";
             break;
         case KParagraphStyle::UnnumberedListItem:
             key = "unnumbered-list-item";
-            value = QString::number(properties[id].toBool());
+            value = QString::number(prop_value.toBool());
             break;
         case KParagraphStyle::IsListHeader:
             key = "list-header";
@@ -481,7 +486,7 @@ QString KTextDebug::paraAttributes(const QTextBlockFormat &blockFormat)
             break;
         case KParagraphStyle::ListLevel:
             key = "list-level";
-            value = QString::number(properties[id].toInt());
+            value = QString::number(prop_value.toInt());
             break;
         default:
             break;
@@ -506,96 +511,98 @@ QString KTextDebug::listAttributes(const QTextListFormat &listFormat)
     }
 
     QMap<int, QVariant> properties = listFormat.properties();
-    foreach(int id, properties.keys()) {
+    for(QMap<int, QVariant>::const_iterator prop = properties.constBegin(); prop != properties.constEnd(); ++prop) {
+	const int &id = prop.key();
+	const QVariant &prop_value = prop.value();
         QString key, value;
         switch (id) {
         case QTextListFormat::ListStyle:
             key = "type";
-            value = QString::number(properties[id].toInt());
+            value = QString::number(prop_value.toInt());
             break;
         case QTextListFormat::ListIndent:
             key = "indent";
-            value = QString::number(properties[id].toDouble());
+            value = QString::number(prop_value.toDouble());
             break;
         case KListStyle::ListItemPrefix:
             key = "prefix";
-            value = properties[id].toString();
+            value = prop_value.toString();
             break;
         case KListStyle::ListItemSuffix:
             key = "suffix";
-            value = properties[id].toString();
+            value = prop_value.toString();
             break;
         case KListStyle::StartValue:
             key = "start-value";
-            value = QString::number(properties[id].toInt());
+            value = QString::number(prop_value.toInt());
             break;
         case KListStyle::Level:
             key = "level";
-            value = QString::number(properties[id].toInt());
+            value = QString::number(prop_value.toInt());
             break;
         case KListStyle::DisplayLevel:
             key = "display-level";
-            value = QString::number(properties[id].toInt());
+            value = QString::number(prop_value.toInt());
             break;
         case KListStyle::CharacterStyleId:
             key = "charstyleid";
-            value = QString::number(properties[id].toInt());
+            value = QString::number(prop_value.toInt());
             break;
         case KListStyle::Alignment:
             key = "alignment";
-            value = QString::number(properties[id].toInt());
+            value = QString::number(prop_value.toInt());
             break;
         case KListStyle::BulletSize:
             key = "bullet-size";
-            value = QString::number(properties[id].toInt());
+            value = QString::number(prop_value.toInt());
             break;
         case KListStyle::BulletCharacter:
             key = "bullet-char";
-            value = properties[id].toString();
+            value = prop_value.toString();
             break;
         case KListStyle::LetterSynchronization:
             key = "letter-sync";
-            value = QString::number(properties[id].toInt());
+            value = QString::number(prop_value.toInt());
             break;
         case KListStyle::StyleId:
             key = "styleid";
-            value = QString::number(properties[id].toInt());
+            value = QString::number(prop_value.toInt());
             break;
         case KListStyle::ContinueNumbering:
             key = "continue-numbering";
-            value = QString::number(properties[id].toInt());
+            value = QString::number(prop_value.toInt());
             break;
         case KListStyle::MinimumWidth:
             key = "minimum-width";
-            value = QString::number(properties[id].toDouble());
+            value = QString::number(prop_value.toDouble());
             break;
         case KListStyle::ListId:
             key = "list-id";
-            value = QString::number(properties[id].toInt());
+            value = QString::number(prop_value.toInt());
             break;
         case KListStyle::IsOutline:
             key = "is-outline";
-            value = properties[id].toBool();
+            value = prop_value.toBool();
             break;
         case KListStyle::Indent:
             key = "indent";
-            value = QString::number(properties[id].toInt());
+            value = QString::number(prop_value.toInt());
             break;
         case KListStyle::MinimumDistance:
             key = "minimum-distance";
-            value = QString::number(properties[id].toDouble());
+            value = QString::number(prop_value.toDouble());
             break;
         case KListStyle::Width:
             key = "width";
-            value = QString::number(properties[id].toDouble());
+            value = QString::number(prop_value.toDouble());
             break;
         case KListStyle::Height:
             key = "height";
-            value = QString::number(properties[id].toDouble());
+            value = QString::number(prop_value.toDouble());
             break;
         case KListStyle::BulletImageKey:
             key = "bullet-image-key";
-            value = QString::number(properties[id].toInt());
+            value = QString::number(prop_value.toInt());
             break;
         default:
             break;
@@ -627,17 +634,19 @@ QString KTextDebug::tableAttributes(const QTextTableFormat &tableFormat)
     }
 
     QMap<int, QVariant> properties = tableFormat.properties();
-    foreach(int id, properties.keys()) {
+    for (QMap<int, QVariant>::const_iterator prop = properties.constBegin(); prop != properties.constEnd(); ++prop) {
+	const int &id = prop.key();
+	const QVariant &prop_value = prop.value();
         QString key, value;
         switch (id) {
         case QTextTableFormat::TableColumnWidthConstraints:
         case QTextFormat::BackgroundBrush:
             key = "background";
-            value = qvariant_cast<QBrush>(properties[id]).color().name(); // beware!
+            value = qvariant_cast<QBrush>(prop_value).color().name(); // beware!
             break;
         case QTextFormat::BlockAlignment:
             key = "alignment";
-            switch (properties[id].toInt()) {
+            switch (prop_value.toInt()) {
                 case Qt::AlignLeft:
                     value = "left";
                     break;
@@ -657,35 +666,35 @@ QString KTextDebug::tableAttributes(const QTextTableFormat &tableFormat)
             break;
         case KTableStyle::KeepWithNext:
             key = "keep-with-next";
-            value = properties[id].toBool() ? "true" : "false";
+            value = prop_value.toBool() ? "true" : "false";
             break;
         case KTableStyle::BreakBefore:
             key = "break-before";
-            value = properties[id].toBool() ? "true" : "false";
+            value = prop_value.toBool() ? "true" : "false";
             break;
         case KTableStyle::BreakAfter:
             key = "break-after";
-            value = properties[id].toBool() ? "true" : "false";
+            value = prop_value.toBool() ? "true" : "false";
             break;
         case KTableStyle::MayBreakBetweenRows:
             key = "may-break-between-rows";
-            value = properties[id].toBool() ? "true" : "false";
+            value = prop_value.toBool() ? "true" : "false";
             break;
         case KTableStyle::MasterPageName:
             key = "master-page-name";
-            value = properties[id].toString();
+            value = prop_value.toString();
             break;
         case QTextTableFormat::TableColumns:
             key = "columns";
-            value = QString::number(properties[id].toInt());
+            value = QString::number(prop_value.toInt());
             break;
         case QTextTableFormat::TableCellSpacing:
             key = "cell-spacing";
-            value = QString::number(properties[id].toDouble());
+            value = QString::number(prop_value.toDouble());
             break;
         case QTextTableFormat::TableHeaderRowCount:
             key = "header-row-count";
-            value = QString::number(properties[id].toInt());
+            value = QString::number(prop_value.toInt());
             break;
         default:
             break;
@@ -701,7 +710,9 @@ QString KTextDebug::frameAttributes(const QTextFrameFormat &frameFormat)
     QString attrs;
 
     QMap<int, QVariant> properties = frameFormat.properties();
-    foreach(int id, properties.keys()) {
+    for (QMap<int, QVariant>::const_iterator prop = properties.constBegin(); prop != properties.constEnd(); ++prop) {
+	int id = prop.key();
+	QVariant prop_value = prop.value();
         QString key, value;
         switch (id) {
         case QTextFrameFormat::FrameBorderBrush:
@@ -709,7 +720,7 @@ QString KTextDebug::frameAttributes(const QTextFrameFormat &frameFormat)
         case QTextFrameFormat::FrameBorderStyle:
             key = "border-style";
             // determine border style.
-            switch (properties[id].toInt()) {
+            switch (prop_value.toInt()) {
             case QTextFrameFormat::BorderStyle_None:
                 value = "None";
                 break;
@@ -750,39 +761,39 @@ QString KTextDebug::frameAttributes(const QTextFrameFormat &frameFormat)
             break;
         case QTextFrameFormat::FrameBorder:
             key = "border";
-            value = QString::number(properties[id].toDouble());
+            value = QString::number(prop_value.toDouble());
             break;
         case QTextFrameFormat::FrameMargin:
             key = "margin";
-            value = QString::number(properties[id].toDouble());
+            value = QString::number(prop_value.toDouble());
             break;
         case QTextFrameFormat::FramePadding:
             key = "padding";
-            value = QString::number(properties[id].toDouble());
+            value = QString::number(prop_value.toDouble());
             break;
         case QTextFrameFormat::FrameWidth:
             key = "width";
-            value = QString::number(properties[id].toDouble());
+            value = QString::number(prop_value.toDouble());
             break;
         case QTextFrameFormat::FrameHeight:
             key = "height";
-            value = QString::number(properties[id].toDouble());
+            value = QString::number(prop_value.toDouble());
             break;
         case QTextFrameFormat::FrameTopMargin:
             key = "top-margin";
-            value = QString::number(properties[id].toDouble());
+            value = QString::number(prop_value.toDouble());
             break;
         case QTextFrameFormat::FrameBottomMargin:
             key = "bottom-margin";
-            value = QString::number(properties[id].toDouble());
+            value = QString::number(prop_value.toDouble());
             break;
         case QTextFrameFormat::FrameLeftMargin:
             key = "left-margin";
-            value = QString::number(properties[id].toDouble());
+            value = QString::number(prop_value.toDouble());
             break;
         case QTextFrameFormat::FrameRightMargin:
             key = "right-margin";
-            value = QString::number(properties[id].toDouble());
+            value = QString::number(prop_value.toDouble());
             break;
         default:
             break;
@@ -814,36 +825,38 @@ QString KTextDebug::tableCellAttributes(const QTextTableCellFormat &tableCellFor
     }
 
     QMap<int, QVariant> properties = tableCellFormat.properties();
-    foreach(int id, properties.keys()) {
+    for (QMap<int, QVariant>::const_iterator prop = properties.constBegin(); prop != properties.constEnd(); ++prop) {
+	int id = prop.key();
+	QVariant prop_value = prop.value();
         QString key, value;
         switch (id) {
         case QTextTableCellFormat::TableCellRowSpan:
             key = "row-span";
-            value = QString::number(properties[id].toInt());
+            value = QString::number(prop_value.toInt());
             break;
         case QTextTableCellFormat::TableCellColumnSpan:
             key = "column-span";
-            value = QString::number(properties[id].toInt());
+            value = QString::number(prop_value.toInt());
             break;
         case QTextFormat::TableCellTopPadding:
             key = "top-padding";
-            value = QString::number(properties[id].toDouble());
+            value = QString::number(prop_value.toDouble());
             break;
         case QTextFormat::TableCellBottomPadding:
             key = "bottom-padding";
-            value = QString::number(properties[id].toDouble());
+            value = QString::number(prop_value.toDouble());
             break;
         case QTextFormat::TableCellLeftPadding:
             key = "left-padding";
-            value = QString::number(properties[id].toDouble());
+            value = QString::number(prop_value.toDouble());
             break;
         case QTextFormat::TableCellRightPadding:
             key = "right-padding";
-            value = QString::number(properties[id].toDouble());
+            value = QString::number(prop_value.toDouble());
             break;
         case KTableCellStyle::TopBorderOuterPen: {
             key = "top-border-outer";
-            QPen pen = qvariant_cast<QPen>(properties[id]);
+            QPen pen = qvariant_cast<QPen>(prop_value);
             if (pen.style() == Qt::NoPen) {
                 value = "none";
             } else {
@@ -877,11 +890,11 @@ QString KTextDebug::tableCellAttributes(const QTextTableCellFormat &tableCellFor
         }
         case KTableCellStyle::TopBorderSpacing:
             key = "top-border-spacing";
-            value = QString::number(properties[id].toDouble());
+            value = QString::number(prop_value.toDouble());
             break;
         case KTableCellStyle::TopBorderInnerPen: {
             key = "top-border-inner";
-            QPen pen = qvariant_cast<QPen>(properties[id]);
+            QPen pen = qvariant_cast<QPen>(prop_value);
             if (pen.style() == Qt::NoPen) {
                 value = "none";
             } else {
@@ -915,7 +928,7 @@ QString KTextDebug::tableCellAttributes(const QTextTableCellFormat &tableCellFor
         }
         case KTableCellStyle::LeftBorderOuterPen: {
             key = "left-border-outer";
-            QPen pen = qvariant_cast<QPen>(properties[id]);
+            QPen pen = qvariant_cast<QPen>(prop_value);
             if (pen.style() == Qt::NoPen) {
                 value = "none";
             } else {
@@ -949,11 +962,11 @@ QString KTextDebug::tableCellAttributes(const QTextTableCellFormat &tableCellFor
         }
         case KTableCellStyle::LeftBorderSpacing:
             key = "left-border-spacing";
-            value = QString::number(properties[id].toDouble());
+            value = QString::number(prop_value.toDouble());
             break;
         case KTableCellStyle::LeftBorderInnerPen: {
             key = "left-border-inner";
-            QPen pen = qvariant_cast<QPen>(properties[id]);
+            QPen pen = qvariant_cast<QPen>(prop_value);
             if (pen.style() == Qt::NoPen) {
                 value = "none";
             } else {
@@ -987,7 +1000,7 @@ QString KTextDebug::tableCellAttributes(const QTextTableCellFormat &tableCellFor
         }
         case KTableCellStyle::BottomBorderOuterPen: {
             key = "bottom-border-outer";
-            QPen pen = qvariant_cast<QPen>(properties[id]);
+            QPen pen = qvariant_cast<QPen>(prop_value);
             if (pen.style() == Qt::NoPen) {
                 value = "none";
             } else {
@@ -1021,11 +1034,11 @@ QString KTextDebug::tableCellAttributes(const QTextTableCellFormat &tableCellFor
         }
         case KTableCellStyle::BottomBorderSpacing:
             key = "bottom-border-spacing";
-            value = QString::number(properties[id].toDouble());
+            value = QString::number(prop_value.toDouble());
             break;
         case KTableCellStyle::BottomBorderInnerPen: {
             key = "bottom-border-inner";
-            QPen pen = qvariant_cast<QPen>(properties[id]);
+            QPen pen = qvariant_cast<QPen>(prop_value);
             if (pen.style() == Qt::NoPen) {
                 value = "none";
             } else {
@@ -1059,7 +1072,7 @@ QString KTextDebug::tableCellAttributes(const QTextTableCellFormat &tableCellFor
         }
         case KTableCellStyle::RightBorderOuterPen: {
             key = "right-border-outer";
-            QPen pen = qvariant_cast<QPen>(properties[id]);
+            QPen pen = qvariant_cast<QPen>(prop_value);
             if (pen.style() == Qt::NoPen) {
                 value = "none";
             } else {
@@ -1093,11 +1106,11 @@ QString KTextDebug::tableCellAttributes(const QTextTableCellFormat &tableCellFor
         }
         case KTableCellStyle::RightBorderSpacing:
             key = "right-border-spacing";
-            value = QString::number(properties[id].toDouble());
+            value = QString::number(prop_value.toDouble());
             break;
         case KTableCellStyle::RightBorderInnerPen: {
             key = "right-border-inner";
-            QPen pen = qvariant_cast<QPen>(properties[id]);
+            QPen pen = qvariant_cast<QPen>(prop_value);
             if (pen.style() == Qt::NoPen) {
                 value = "none";
             } else {
@@ -1131,7 +1144,7 @@ QString KTextDebug::tableCellAttributes(const QTextTableCellFormat &tableCellFor
         }
         case KTableCellStyle::MasterPageName:
             key = "master-page-name";
-            value = properties[id].toString();
+            value = prop_value.toString();
             break;
         default:
             break;

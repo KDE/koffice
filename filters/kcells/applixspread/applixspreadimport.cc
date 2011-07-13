@@ -423,7 +423,7 @@ KoFilter::ConversionStatus APPLIXSPREADImport::convert(const QByteArray& from, c
             int bottombrushstyle = 0, bottombrushcolor = 1, bottomfg_bg = 1;
 
             const QStringList typeCellList = typeCellStr.split(',', QString::SkipEmptyParts);
-            Q_FOREACH(/*can't use const QString&*/ QString typeCell, typeCellList) {
+            Q_FOREACH(/*can't use const QString&*/ QString typeCell, typeCellList) { //krazy:exclude=foreach
 
                 if (typeCell[0] == 'T') {
                     kDebug() << " = top";

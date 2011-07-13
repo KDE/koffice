@@ -191,15 +191,14 @@ public:
     void selectTriples(QModelIndexList ml,
                        QItemSelectionModel::SelectionFlags command = QItemSelectionModel::Select) {
         Q_UNUSED(command);
-        QModelIndex mi;
-        foreach (mi, ml) {
+        foreach (const QModelIndex &mi, ml) {
             selectTriples(mi);
         }
     }
 
     QModelIndexList mapFromSource(QModelIndexList mil) const {
         QModelIndexList ret;
-        foreach (QModelIndex idx, mil) {
+        foreach (const QModelIndex &idx, mil) {
             QModelIndex pidx = m_tripleProxyModel->mapFromSource(idx);
             ret << pidx;
         }
@@ -218,7 +217,7 @@ public:
 
     QModelIndexList mapToSource(const QModelIndexList proxyList) const {
         QModelIndexList ret;
-        foreach (QModelIndex idx, proxyList) {
+        foreach (const QModelIndex &idx, proxyList) {
             QModelIndex sidx = m_tripleProxyModel->mapToSource(idx);
             ret << sidx;
         }
@@ -279,7 +278,7 @@ bool KoDocumentRdfEditWidget::shouldDialogCloseBeVetoed()
             QModelIndexList invalidList = d->m_tripleModel->invalidStatementList();
             if (!invalidList.isEmpty()) {
                 d->m_ui->m_tripleView->selectionModel()->clear();
-                foreach (QModelIndex idx, invalidList) {
+                foreach (const QModelIndex &idx, invalidList) {
                     QModelIndex pidx = d->mapFromSource(idx);
                     d->m_ui->m_tripleView->selectionModel()->select(
                         pidx, QItemSelectionModel::Select);

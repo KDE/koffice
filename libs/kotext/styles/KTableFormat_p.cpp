@@ -53,9 +53,5 @@ void KTableFormatPrivate::clearProperty(int propertyId)
 
 QMap<int, QVariant> KTableFormatPrivate::properties() const
 {
-    QMap<int, QVariant> map;
-    foreach (int key, m_stylesPrivate.keys()) {
-        map.insert(key, m_stylesPrivate.value(key));
-    }
-    return map;
+    return m_stylesPrivate.properties();
 }

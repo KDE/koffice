@@ -98,7 +98,9 @@ void StylesWidget::setCurrentFormat(const QTextBlockFormat &format)
     if (m_styleManager)
         usedStyle = m_styleManager->paragraphStyle(id);
     if (usedStyle) {
-        foreach (int property, m_currentBlockFormat.properties().keys()) {
+	QMap<int, QVariant> props = m_currentBlockFormat.properties();
+	for (QMap<int, QVariant>::const_iterator it = props.constBegin(); it != props.constEnd(); ++it) {
+            int property = it.key();
             if (property == QTextFormat::ObjectIndex || property == KParagraphStyle::ListStyleId
                     || property == KParagraphStyle::MasterPageName
                     || property == QTextFormat::PageBreakPolicy)
@@ -160,7 +162,9 @@ void StylesWidget::setCurrentFormat(const QTextCharFormat &format)
     if (usedStyle) {
         QTextCharFormat defaultFormat;
         usedStyle->unapplyStyle(defaultFormat); // sets the default properties.
-        foreach(int property, m_currentCharFormat.properties().keys()) {
+	QMap<int, QVariant> props = m_currentCharFormat.properties();
+        for (QMap<int, QVariant>::const_iterator it = props.constBegin(); it != props.constEnd(); ++it) {
+            int property = it.key();
             if (property == QTextFormat::ObjectIndex || property == QTextFormat::ObjectType
                     || property == QTextFormat::ForegroundBrush
                     || property == QTextFormat::FontFamily

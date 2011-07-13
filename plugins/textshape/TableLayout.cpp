@@ -318,7 +318,7 @@ void TableLayout::drawBackground(QPainter *painter, const KTextDocumentLayout::P
     painter->save();
     // Draw table background and row backgrounds
     KTableColumnAndRowStyleManager carsManager = KTableColumnAndRowStyleManager::manager(m_table);
-    foreach (TableRect tRect, m_tableLayoutData->m_tableRects) {
+    foreach (const TableRect &tRect, m_tableLayoutData->m_tableRects) {
         painter->fillRect(tRect.rect, m_table->format().background());
         QRectF tableRect = tRect.rect;
         for (int row = tRect.fromRow; row < m_table->rows() && m_tableLayoutData->m_rowPositions[row] < tableRect.bottom(); ++row) {
@@ -482,7 +482,7 @@ void TableLayout::drawBorders(QPainter *painter, QVector<QLineF> *accuBlankBorde
 
 QTextTableCell TableLayout::hitTestTable(const QPointF &point) const
 {
-    foreach (TableRect tableRect, m_tableLayoutData->m_tableRects) {
+    foreach (const TableRect &tableRect, m_tableLayoutData->m_tableRects) {
         if (tableRect.rect.contains(point)) {
             int col;
             for (col = 1; col < m_table->columns(); ++col) {

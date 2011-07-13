@@ -276,17 +276,19 @@ bool TestLoading::compareListFormats(const QTextListFormat &actualFormat, const 
         }
     };
 
-    foreach (int key, expectedProperties.keys()) {
+    for (QMap<int, QVariant>::const_iterator prop = expectedProperties.constBegin(); prop != expectedProperties.constEnd(); ++prop) {
+	int key = prop.key();
         if (actualProperties.contains(key)) {
-            if (actualProperties.value(key) != expectedProperties.value(key)) {
+            if (actualProperties.value(key) != prop.value()) {
                 qDebug() << "properties don't match;" << Enum::resolve(key)
-                    << actualProperties.value(key) << expectedProperties.value(key);
+                    << actualProperties.value(key) << prop.value();
             }
         } else {
             qDebug() << "Expected but missing property;" << Enum::resolve(key);
         }
     }
-    foreach (int key, actualProperties.keys()) {
+    for (QMap<int, QVariant>::const_iterator prop = actualProperties.constBegin(); prop != actualProperties.constEnd(); ++prop) {
+	int key = prop.key();
         if (!expectedProperties.contains(key)) {
             qDebug() << "found extra property;" << Enum::resolve(key);
         }
@@ -740,7 +742,7 @@ static QScriptValue setFormatProperty(QScriptContext *context, QScriptEngine *en
             qvlist.clear();
             tabList.clear();
             qScriptValueToSequence(arg, tabList);
-            foreach(KoText::Tab tab, tabList) {
+            foreach(const KoText::Tab &tab, tabList) {
                 QVariant v;
                 v.setValue(tab);
                 qvlist.append(v);
@@ -775,8 +777,8 @@ static QScriptValue copyFormatProperties(QScriptContext *context, QScriptEngine 
     QTextFormat *src = qscriptvalue_cast<QTextFormat *>(context->argument(1));
     if (dest && src) {
         QMap<int, QVariant> properties = src->properties();
-        foreach(int id, properties.keys()) {
-            dest->setProperty(id, properties[id]);
+	for (QMap<int, QVariant>::const_iterator prop = properties.constBegin(); prop != properties.constEnd(); ++prop) {
+            dest->setProperty(prop.key(), prop.value());
         }
     }
 

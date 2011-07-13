@@ -94,7 +94,7 @@ QStringList KoRdfSemanticItem::xmlIdList() const
                                Node(),
                                documentRdf()->manifestRdfNode());
     QList<Statement> allStatements = it.allElements();
-    foreach (Soprano::Statement s, allStatements) {
+    foreach (const Soprano::Statement &s, allStatements) {
         QString xmlid = s.object().toString();
         ret << xmlid;
     }
@@ -128,7 +128,7 @@ void KoRdfSemanticItem::updateTriple_remove(const Soprano::LiteralValue &toModif
     StatementIterator it = m->listStatements(explicitLinkingSubject, pred, Node());
     QList<Statement> removeList;
     QList<Statement> allStatements = it.allElements();
-    foreach (Soprano::Statement s, allStatements) {
+    foreach (const Soprano::Statement &s, allStatements) {
         kDebug(30015) << "typeless remove,  s:" << s.object().toString();
         kDebug(30015) << "typeless remove, tm:" << Node::createLiteralNode(toModify).toString();
 
@@ -470,7 +470,7 @@ void KoRdfSemanticItem::loadUserStylesheets(Soprano::Model *model)
     Soprano::Node ListHeadSubject = Node::createResourceNode(QUrl(nodePrefix + "list"));
     QList<Statement> listNodes = KoTextRdfCore::loadList(model, ListHeadSubject);
     kDebug(30015) << "klass:" << klass << " listNodes.sz:" << listNodes.size();
-    foreach (Soprano::Statement s, listNodes) {
+    foreach (const Soprano::Statement &s, listNodes) {
         Soprano::Node dataBNode = s.object();
 
         QString uuid = KoTextRdfCore::getObject(model, dataBNode,

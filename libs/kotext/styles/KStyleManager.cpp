@@ -73,7 +73,8 @@ void KStyleManagerPrivate::refreshUnsetStoreFor(int key)
             QTextCharFormat cf;
             charStyle->applyStyle(cf);
             // find all relevant char styles downwards (to root).
-            foreach (KParagraphStyle *ps, paragStyles.values()) {
+	    for (QHash<int, KParagraphStyle*>::const_iterator it = paragStyles.constBegin(); it != paragStyles.constEnd(); ++it) {
+                KParagraphStyle *ps = it.value();
                 if (ps->characterStyle() == charStyle) { // he uses us, lets apply all parents too
                     KParagraphStyle *parent = ps->parentStyle();
                     while (parent) {
@@ -94,7 +95,8 @@ void KStyleManagerPrivate::requestUpdateForChildren(KParagraphStyle *style)
     if (!updateQueue.contains(charId))
         updateQueue.insert(charId, unsetStore.value(charId));
 
-    foreach (KParagraphStyle *ps, paragStyles.values()) {
+    for (QHash<int, KParagraphStyle*>::const_iterator it = paragStyles.constBegin(); it != paragStyles.constEnd(); ++it) {
+        KParagraphStyle *ps = it.value();
         if (ps->parentStyle() == style)
             requestUpdateForChildren(ps);
     }
@@ -113,8 +115,8 @@ void KStyleManagerPrivate::updateAlteredStyles()
     foreach (ChangeFollower *cf, documentUpdaterProxies) {
         cf->processUpdates(updateQueue);
     }
-    foreach (int key, updateQueue.keys()) {
-        refreshUnsetStoreFor(key);
+    for (QMap<int, QMap<int, QVariant> >::const_iterator it = updateQueue.constBegin(); it != updateQueue.constEnd(); ++it) {
+        refreshUnsetStoreFor(it.key());
     }
     updateQueue.clear();
     updateTriggered = false;
@@ -463,7 +465,8 @@ void KStyleManager::alteredStyle(const KCharacterStyle *style)
     }
 
     // we also implicitly have inheritence in char-styles.
-    foreach (KParagraphStyle *ps, d->paragStyles.values()) {
+    for (QHash<int, KParagraphStyle*>::const_iterator it = d->paragStyles.constBegin(); it != d->paragStyles.constEnd(); ++it) {
+        KParagraphStyle *ps = it.value();
         if (ps->characterStyle() == style)
             d->requestUpdateForChildren(ps);
     }

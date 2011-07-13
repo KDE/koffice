@@ -676,7 +676,7 @@ void KWDocument::endOfLoading() // called by both oasis and oldxml
     //    may have to be generated at some time after loading is completed.
 
     if (m_magicCurtain) { // pages defined in the loaded-document
-        foreach (KWPage page, m_pageManager.pages())
+        foreach (const KWPage &page, m_pageManager.pages())
             m_magicCurtain->revealFramesForPage(page.pageNumber(), page.offsetInDocument());
     }
 
@@ -869,7 +869,7 @@ void KWDocument::updateHeaderFooter(KWTextFrameSet *tfs)
 void KWDocument::updatePagesForStyle(const KWPageStyle &style, bool delayed)
 {
     PageProcessingQueue *ppq = 0;
-    foreach (KWPage page, pageManager()->pages()) {
+    foreach (const KWPage &page, pageManager()->pages()) {
         if (page.pageStyle() == style) {
             if (ppq == 0)
                 ppq = new PageProcessingQueue(this);

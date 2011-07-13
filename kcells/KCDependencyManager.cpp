@@ -53,25 +53,26 @@ void KCDependencyManager::Private::dump() const
 
         kDebug(36002) << cell.name() << " consumes values of:" << debugStr.join(",");
     }
-
-    foreach(KCSheet* sheet, consumers.keys()) {
-        QList<QRectF> keys = consumers[sheet]->keys();
-        QList<KCCell> values = consumers[sheet]->values();
+    for (QHash<KCSheet*, KCRTree<KCCell>*>::const_iterator it = consumers.constBegin(); it != consumers.constEnd(); ++it) {
+        KCSheet *sheet = it.key();
+        QList<QRectF> keys = it.value()->keys();
+        QList<KCCell> values = it.value()->values();
         QHash<QString, QString> table;
         for (int i = 0; i < keys.count(); ++i) {
             KCRegion tmpRange(keys[i].toRect(), sheet);
             table.insertMulti(tmpRange.name(), values[i].name());
         }
-        foreach(QString uniqueKey, table.uniqueKeys()) {
+        foreach(const QString &uniqueKey, table.uniqueKeys()) {
             QStringList debugStr(table.values(uniqueKey));
             kDebug(36002) << uniqueKey << " provides values for:" << debugStr.join(",");
         }
     }
-
-    foreach(KCCell cell, depths.keys()) {
+    
+    for(QHash<KCCell, int>::const_iterator it = depths.constBegin(); it != depths.constEnd(); ++it) {
+        const KCCell &cell = it.key();
         QString cellName = cell.name();
         while (cellName.count() < 4) cellName.prepend(' ');
-        kDebug(36002) << "depth(" << cellName << " ) =" << depths[cell];
+        kDebug(36002) << "depth(" << cellName << " ) =" << it.value();
     }
 }
 

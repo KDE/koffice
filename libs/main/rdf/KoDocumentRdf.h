@@ -497,7 +497,7 @@ private:
      * content.xml, those Rdf statements must be saved as the
      * content.xml file is generated.
      */
-    bool saveRdf(KOdfStore *store, KXmlWriter *manifestWriter, Soprano::Node &context);
+    bool saveRdf(KOdfStore *store, KXmlWriter *manifestWriter, const Soprano::Node &context);
 
 
     /**

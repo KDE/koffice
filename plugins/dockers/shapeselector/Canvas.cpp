@@ -237,11 +237,10 @@ void  Canvas::dropEvent(QDropEvent *event)
             if (folder) break;
         }
         QByteArray urls = event->mimeData()->data("text/uri-list");
-        foreach (QString file, QString(urls).split('\n')) {
-            file = file.trimmed();
-            if (file.isEmpty())
+        foreach (const QString &file, QString(urls).split('\n')) {
+            if (file.trimmed().isEmpty())
                 break;
-            m_parent->addItems(KUrl(file), folder);
+            m_parent->addItems(KUrl(file.trimmed()), folder);
         }
         event->setDropAction(Qt::CopyAction);
         event->accept();

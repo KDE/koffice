@@ -82,8 +82,9 @@ void ParagraphBulletsNumbers::setDisplay(KParagraphStyle *style, int level)
     widget.suffix->setText(llp.listItemSuffix());
     widget.letterSynchronization->setChecked(llp.letterSynchronization());
     KListStyle::Style s = llp.style();
-    foreach(int row, m_mapping.keys()) {
-        if (m_mapping[row] == s) {
+    for (QHash<int, KListStyle::Style>::const_iterator it = m_mapping.constBegin(); it != m_mapping.constEnd(); ++it) {
+        int row = it.key();
+        if (it.value() == s) {
             widget.listTypes->setCurrentRow(row);
             break;
         }
@@ -200,8 +201,9 @@ void ParagraphBulletsNumbers::customCharButtonPressed()
         widget.customCharacter->setText(character);
 
         // also switch to the custom list style.
-        foreach(int row, m_mapping.keys()) {
-            if (m_mapping[row] == KListStyle::CustomCharItem) {
+	for (QHash<int, KListStyle::Style>::const_iterator it = m_mapping.constBegin(); it != m_mapping.constEnd(); ++it) {
+            int row = it.key();
+            if (it.value() == KListStyle::CustomCharItem) {
                 widget.listTypes->setCurrentRow(row);
                 break;
             }

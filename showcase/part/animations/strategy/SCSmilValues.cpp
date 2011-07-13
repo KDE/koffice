@@ -69,7 +69,7 @@ bool SCSmilValues::loadValues(QString values, QString keyTimes, QString keySplin
         return false;
     }
 
-    foreach (QString value, valuesList) {
+    foreach (const QString &value, valuesList) {
         SCValueParser parser(value, m_shape, m_textBlockData);
         if (!parser.valid()) {
             return false;
@@ -111,7 +111,7 @@ bool SCSmilValues::saveOdf(KoPASavingContext &paContext) const
     KXmlWriter &writer = paContext.xmlWriter();
     // values
     QString values;
-    foreach (SCValueParser valueParser, m_values) {
+    foreach (const SCValueParser &valueParser, m_values) {
         if (values.isEmpty()) {
             values = QString("%1").arg(valueParser.formula());
         } else {

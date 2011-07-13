@@ -422,7 +422,8 @@ QString KCStyleManager::openDocumentName(const QString& name) const
 void KCStyleManager::dump() const
 {
     kDebug(36006) << "Custom styles:";
-    foreach(QString name, m_styles.keys()) {
+    for (CustomStyles::const_iterator it = m_styles.constBegin(); it != m_styles.constEnd(); ++it) {
+    	const QString &name = it.key();
         kDebug(36006) << name;
     }
 }

@@ -121,7 +121,7 @@ private:
     /**
     * Load a list-item into the cursor
     */
-    void loadListItem(KXmlElement &e, QTextCursor &cursor, int level);
+    void loadListItem(const KXmlElement &e, QTextCursor &cursor, int level);
 
     /**
     * Load the section from the \p element into the \p cursor .

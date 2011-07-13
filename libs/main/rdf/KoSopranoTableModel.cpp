@@ -311,7 +311,7 @@ void KoSopranoTableModel::deleteTriples(const QModelIndexList &srclist)
     }
     qSort(rowsToRemoveDesc.begin(), rowsToRemoveDesc.end(), qGreater<int>());
     int r;
-    foreach (r, rowsToRemoveDesc) {
+    foreach (r, rowsToRemoveDesc) { //krazy:exclude=foreach (POD datatype, does not need const-ref)
         Soprano::Statement st = m_statementIndex[ r ];
         int firstRow =  r;
         int lastRow = r;

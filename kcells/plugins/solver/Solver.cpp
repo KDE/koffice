@@ -136,7 +136,7 @@ void Solver::optimize()
     /* Initialize starting point */
     int index = 0;
     gsl_vector* x = gsl_vector_alloc(dimension);
-    foreach(KCCell cell, parameters->cells) {
+    foreach(const KCCell &cell, parameters->cells) {
         gsl_vector_set(x, index++, numToDouble(cell.value().asFloat()));
     }
 

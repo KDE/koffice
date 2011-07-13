@@ -337,7 +337,8 @@ TextTool::TextTool(KCanvasBase *canvas)
         resource(TextEditingPluginContainer::ResourceId).value<TextEditingPluginContainer*>();
     Q_ASSERT(m_textEditingPlugins);
 
-    foreach (KTextEditingPlugin *plugin, m_textEditingPlugins->values()) {
+    for (QHash<QString, KTextEditingPlugin*>::const_iterator it = m_textEditingPlugins->constBegin(); it != m_textEditingPlugins->constEnd(); ++it) {
+        KTextEditingPlugin *plugin = it.value();
         connect(plugin, SIGNAL(startMacro(const QString &)),
                 this, SLOT(startMacro(const QString &)));
         connect(plugin, SIGNAL(stopMacro()), this, SLOT(stopMacro()));
@@ -735,7 +736,8 @@ void TextTool::setShapeData(KTextShapeData *data)
             }
         }
 
-        foreach (KTextEditingPlugin *plugin, m_textEditingPlugins->values()) {
+	for (QHash<QString, KTextEditingPlugin*>::const_iterator it = m_textEditingPlugins->constBegin(); it != m_textEditingPlugins->constEnd(); ++it) {
+            KTextEditingPlugin *plugin = it.value();
             plugin->setCurrentCursorPosition(m_textEditor.data()->document(),
                     m_textEditor.data()->position());
         }
@@ -2209,8 +2211,10 @@ void TextTool::finishedWord()
     KoTextEditor *textEditor = m_textEditor.data();
     if (textEditor == 0)
         return;
-    foreach (KTextEditingPlugin* plugin, m_textEditingPlugins->values())
+    for (QHash<QString, KTextEditingPlugin*>::const_iterator it = m_textEditingPlugins->constBegin(); it != m_textEditingPlugins->constEnd(); ++it) {
+        KTextEditingPlugin* plugin = it.value();
         plugin->finishedWord(textEditor->document(), m_prevCursorPosition);
+    }
 }
 
 void TextTool::finishedParagraph()
@@ -2218,8 +2222,11 @@ void TextTool::finishedParagraph()
     KoTextEditor *textEditor = m_textEditor.data();
     if (textEditor == 0)
         return;
-    foreach (KTextEditingPlugin* plugin, m_textEditingPlugins->values())
+    
+    for (QHash<QString, KTextEditingPlugin*>::const_iterator it = m_textEditingPlugins->constBegin(); it != m_textEditingPlugins->constEnd(); ++it) {
+        KTextEditingPlugin* plugin = it.value();
         plugin->finishedParagraph(textEditor->document(), m_prevCursorPosition);
+    }
 }
 
 void TextTool::setTextColor(const KoColor &color)
@@ -2390,7 +2397,7 @@ void TextTool::debugTextDocument()
         else if (block.length() == 1) { // no actual tet
             kDebug(32500) << "\\n";
         }
-        foreach (QTextCharFormat cf, inlineCharacters) {
+        foreach (const QTextCharFormat &cf, inlineCharacters) {
             KInlineObject *object= inlineManager->inlineTextObject(cf);
             kDebug(32500) << "At pos:" << cf.intProperty(CHARPOSITION) << object;
             // kDebug(32500) << "-> id:" << cf.intProperty(577297549);

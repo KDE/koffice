@@ -59,8 +59,9 @@ ScriptingPart::ScriptingPart(QObject* parent, const QVariantList& argList)
     KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
     if (args) {
         QStringList errors;
-        foreach(QString ba, args->getOptionList("scriptfile")) {
-            QUrl url(ba);
+	QStringList options = args->getOptionList("scriptfile");
+	for (QStringList::const_iterator it = options.constBegin(); it != options.constEnd(); ++it) {
+            QUrl url(*it);
             QFileInfo fi(url.path());
             const QString file = fi.absoluteFilePath();
             if (! fi.exists()) {
@@ -77,8 +78,8 @@ ScriptingPart::ScriptingPart(QObject* parent, const QVariantList& argList)
                 tmpDirs.append("/tmp/");
                 tmpDirs.append("/var/tmp/");
                 bool inTemp = false;
-                foreach(QString tmpDir, tmpDirs) {
-                    if (file.startsWith(tmpDir)) {
+		for (QStringList::const_iterator it = tmpDirs.constBegin(); it != tmpDirs.constEnd(); ++it) {
+                    if (file.startsWith(*it)) {
                         inTemp = true;
                         break;
                     }
