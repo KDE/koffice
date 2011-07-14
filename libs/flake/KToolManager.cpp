@@ -163,8 +163,9 @@ void KToolManager::Private::setup()
 
     KShapeRegistry::instance();
     KToolRegistry *registry = KToolRegistry::instance();
-    foreach(const QString & id, registry->keys()) {
-        ToolHelper *t = new ToolHelper(registry->value(id));
+    for (KGenericRegistry<KToolFactoryBase*>::const_iterator it = registry->constBegin(); 
+		    it != registry->constEnd(); ++it) {
+        ToolHelper *t = new ToolHelper(it.value());
         tools.append(t);
     }
 

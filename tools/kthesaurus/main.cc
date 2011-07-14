@@ -49,8 +49,9 @@ extern "C" KDE_EXPORT int kdemain(int argc, char **argv)
     KTextEditingPlugin *thesaurus = 0;
     KResourceManager *rm = new KResourceManager(&a);
 
-    foreach (const QString &key, KTextEditingRegistry::instance()->keys()) {
-        KTextEditingFactory *factory =  KTextEditingRegistry::instance()->value(key);
+    for (KGenericRegistry<KTextEditingFactory*>::const_iterator it = KTextEditingRegistry::instance()->constBegin(); 
+		    it != KTextEditingRegistry::instance()->constEnd(); ++it) {
+        KTextEditingFactory *factory =  it.value();
         Q_ASSERT(factory);
         if (factory->id() == "thesaurustool") {
             kDebug() <<"Thesaurus plugin found, creating...";

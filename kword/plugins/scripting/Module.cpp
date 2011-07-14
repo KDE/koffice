@@ -92,8 +92,10 @@ void Module::removePage(int pageNumber)
 QStringList Module::shapeKeys()
 {
     QStringList keys;
-    foreach(const QString &key, KShapeRegistry::instance()->keys())
-       keys.append(key);
+    for (KGenericRegistry<KShapeFactoryBase*>::const_iterator it = KShapeRegistry::instance()->constBegin();
+		    it != KShapeRegistry::instance()->constEnd(); ++it) {
+       keys.append(it.key());
+    }
     return keys;
 }
 

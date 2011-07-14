@@ -41,9 +41,10 @@ TextEditingPluginContainer *TextEditingPluginContainer::create(KResourceManager 
     TextEditingPluginContainer *answer = new TextEditingPluginContainer(documentResourceManager);
 
     if (init == Normal) {
-        foreach (const QString &key, KTextEditingRegistry::instance()->keys()) {
-            kDebug(32500) << "Loading plugin" << key;
-            KTextEditingFactory *factory =  KTextEditingRegistry::instance()->value(key);
+	for (KGenericRegistry<KTextEditingFactory*>::const_iterator it = KTextEditingRegistry::instance()->constBegin();
+			it != KTextEditingRegistry::instance()->constEnd(); ++it) {
+            kDebug(32500) << "Loading plugin" << it.key();
+            KTextEditingFactory *factory = it.value();
             Q_ASSERT(factory);
             if (answer->m_textEditingPlugins.contains(factory->id())) {
                 kWarning(32500) << "Duplicate id for textEditingPlugin, ignoring one! (" << factory->id() << ")";

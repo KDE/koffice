@@ -69,8 +69,9 @@ KCDocBase::KCDocBase(QWidget *parentWidget, QObject* parent, bool singleViewMode
     d->map->calculationSettings()->setFileName(url().prettyUrl());
 
     KShapeRegistry *registry = KShapeRegistry::instance();
-    foreach (const QString &id, registry->keys()) {
-        KShapeFactoryBase *shapeFactory = registry->value(id);
+    for (KGenericRegistry<KShapeFactoryBase*>::const_iterator it = registry->constBegin(); 
+		    it != registry->constEnd(); ++it) {
+        KShapeFactoryBase *shapeFactory = it.value();
         shapeFactory->newDocumentResourceManager(d->resourceManager);
     }
 

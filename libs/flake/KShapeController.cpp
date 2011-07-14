@@ -104,8 +104,9 @@ KResourceManager *KShapeController::resourceManager() const
         if (!d->dummyRm) {
             d->dummyRm = new KResourceManager();
             KShapeRegistry *registry = KShapeRegistry::instance();
-            foreach (const QString &id, registry->keys()) {
-                KShapeFactoryBase *shapeFactory = registry->value(id);
+	    for (KGenericRegistry<KShapeFactoryBase*>::const_iterator it = registry->constBegin(); 
+			    it != registry->constEnd(); ++it) {
+                KShapeFactoryBase *shapeFactory = it.value();
                 shapeFactory->newDocumentResourceManager(d->dummyRm);
             }
         }

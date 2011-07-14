@@ -356,8 +356,9 @@ TextTool::TextTool(KCanvasBase *canvas)
     QList<QAction*> list;
     list.append(this->action("text_default"));
     list.append(this->action("format_font"));
-    foreach (const QString &key, KTextEditingRegistry::instance()->keys()) {
-        KTextEditingFactory *factory =  KTextEditingRegistry::instance()->value(key);
+    for (KGenericRegistry<KTextEditingFactory*>::const_iterator it = KTextEditingRegistry::instance()->constBegin();
+		    it != KTextEditingRegistry::instance()->constEnd(); ++it) {
+        KTextEditingFactory *factory = it.value();
         if (factory->showInMenu()) {
             KAction *a = new KAction(i18n("Apply %1", factory->title()), this);
             connect(a, SIGNAL(triggered()), signalMapper, SLOT(map()));

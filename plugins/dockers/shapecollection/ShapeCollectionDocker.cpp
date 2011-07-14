@@ -225,8 +225,9 @@ void ShapeCollectionDocker::loadDefaultShapes()
     KConfigGroup cfg = KGlobal::config()->group("KoShapeCollection");
     quickShapes = cfg.readEntry("QuickShapes", quickShapes);
 
-    foreach(const QString & id, KShapeRegistry::instance()->keys()) {
-        KShapeFactoryBase *factory = KShapeRegistry::instance()->value(id);
+    for (KGenericRegistry<KShapeFactoryBase*>::const_iterator it = KShapeRegistry::instance()->constBegin();
+		    it != KShapeRegistry::instance()->constEnd(); ++it) {
+        KShapeFactoryBase *factory = it.value();
         // don't show hidden factories
         if (factory->isHidden()) {
             continue;

@@ -325,8 +325,9 @@ QRectF ItemStore::loadShapeTypes()
         s_itemStorePrivate()->addFolder(mainFolder);
     }
 
-    foreach (const QString &id, KShapeRegistry::instance()->keys()) {
-        KShapeFactoryBase *factory = KShapeRegistry::instance()->value(id);
+    for (KGenericRegistry<KShapeFactoryBase*>::const_iterator it = KShapeRegistry::instance()->constBegin();
+		    it != KShapeRegistry::instance()->constEnd(); ++it) {
+        KShapeFactoryBase *factory = it.value();
         if (factory->isHidden())
             continue;
         bool oneAdded=false;

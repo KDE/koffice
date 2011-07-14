@@ -47,7 +47,8 @@ void KInlineObjectRegistry::Private::init(KInlineObjectRegistry *q)
     KoPluginLoader::instance()->load(QString::fromLatin1("KOffice/Text-InlineObject"),
                                      QString::fromLatin1("[X-KoText-MinVersion] <= 0"), config);
 
-    foreach (KInlineObjectFactoryBase *factory, q->values()) {
+    for (KGenericRegistry<KInlineObjectFactoryBase*>::const_iterator it = q->constBegin(); it != q->constEnd(); ++it) {
+        KInlineObjectFactoryBase *factory = it.value();
         QString nameSpace = factory->odfNameSpace();
         if (nameSpace.isEmpty() || factory->odfElementNames().isEmpty()) {
             kDebug(32500) << "Variable factory" << factory->id() << " does not have odfNameSpace defined, ignoring";

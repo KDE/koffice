@@ -160,8 +160,9 @@ KoView::KoView(KoDocument *document, QWidget *parent)
     connect(d->scrollTimer, SIGNAL(timeout()), this, SLOT(slotAutoScroll()));
 
     // add all plugins.
-    foreach(const QString & docker, KDockRegistry::instance()->keys()) {
-        KDockFactoryBase *factory = KDockRegistry::instance()->value(docker);
+    for (KGenericRegistry<KDockFactoryBase*>::const_iterator it = KDockRegistry::instance()->constBegin();
+		    it != KDockRegistry::instance()->constEnd(); ++it ) {
+        KDockFactoryBase *factory = it.value();
         if (shell())
             shell()->createDockWidget(factory);
     }
