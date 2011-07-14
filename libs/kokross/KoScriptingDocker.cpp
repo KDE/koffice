@@ -120,7 +120,6 @@ void KoScriptingDocker::slotShowScriptManager()
     QPointer<KoScriptManagerDialog> dialog = new KoScriptManagerDialog();
     dialog->exec();
     dialog->delayedDestruct();
-    delete dialog;
 }
 
 void KoScriptingDocker::slotEnabledChanged(const QString &actionname)

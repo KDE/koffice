@@ -20,14 +20,14 @@
 #ifndef __KSPREADLATEXEXPORTDIA_H__
 #define __KSPREADLATEXEXPORTDIA_H__
 
-#include <latexexportdia.h>
+#include <ui_latexexportdia.h>
 #include <QStringList>
 #include <kurl.h>
 
 class KOdfStore;
 class KConfig;
 
-class KCellsLatexExportDiaImpl : public LatexExportDia
+class KCellsLatexExportDiaImpl : public QDialog, public Ui::LatexExportDia
 {
     Q_OBJECT
 
@@ -38,8 +38,7 @@ private:
 
 public:
     explicit KCellsLatexExportDiaImpl(KOdfStore*, QWidget* parent = 0,
-                                       const char* name = 0,
-                                       bool modal = false, Qt::WFlags fl = 0);
+		    Qt::WFlags fl = 0);
     virtual ~KCellsLatexExportDiaImpl();
 
     void setOutputFile(QString file) {

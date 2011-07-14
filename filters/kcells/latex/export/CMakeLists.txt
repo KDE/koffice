@@ -21,7 +21,7 @@ set(kcellslatexexport_PART_SRCS
    table.cc 
    xmlparser.cc )
 
-kde4_add_ui3_files(kcellslatexexport_PART_SRCS latexexportdia.ui )
+kde4_add_ui_files(kcellslatexexport_PART_SRCS latexexportdia.ui )
 
 kde4_add_plugin(kcellslatexexport ${kcellslatexexport_PART_SRCS})
 
