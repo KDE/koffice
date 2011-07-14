@@ -186,8 +186,11 @@ KImageData *KoImageSelectionWidget::selectImage(KImageCollection *collection, QW
     dialog->setMainWidget(widget);
     connect(widget, SIGNAL(imageAvailable(bool)), dialog, SLOT(enableButtonOk(bool)));
 
-    if (dialog->exec() == KDialog::Accepted)
-        return widget->imageData();
+    if (dialog->exec() == KDialog::Accepted) {
+        KImageData* returnData = widget->imageData();
+        delete dialog;
+        return returnData;
+    }
     delete dialog;
     return 0;
 }
