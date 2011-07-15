@@ -19,7 +19,10 @@
 #include "TestViewMode.h"
 
 #include <KWPageManager.h>
+#include <KWPageStyle.h>
 #include <KWPage.h>
+#include <KOdfPageFormat.h>
+#include <KOdfPageLayoutData.h>
 #include <KoZoomHandler.h>
 
 #include <kdebug.h>
@@ -45,7 +48,13 @@ void TestViewMode::testBasicConversion()
     QCOMPARE(viewMode.pageSpreadMode(), false);
     QCOMPARE(viewMode.contents(), QSizeF(0, 0));
 
-    pageManager.appendPage(); //one A4 page.
+    KOdfPageLayoutData a4Layout;
+    a4Layout.format = KOdfPageFormat::formatFromString("A4");
+    a4Layout.width = MM_TO_POINT(KOdfPageFormat::width(a4Layout.format,KOdfPageFormat::Portrait));
+    a4Layout.height = MM_TO_POINT(KOdfPageFormat::height(a4Layout.format,KOdfPageFormat::Portrait));
+    KWPageStyle a4Style("A4 Style");
+    a4Style.setPageLayout(a4Layout);
+    pageManager.appendPage(a4Style); //one A4 page.
     viewMode.pageSetupChanged();
     QCOMPARE(viewMode.pageTops().count(), 1);
     QCOMPARE(viewMode.pageSpreadMode(), false);
