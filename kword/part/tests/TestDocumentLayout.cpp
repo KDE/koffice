@@ -48,13 +48,11 @@ public:
         layout = m_currentBlock.layout();
         layout->beginLayout();
         m_y = 0;
+        reset();
         return true;
     }
     void end() {}
-    void reset() {}
-    bool isInterrupted() const {
-        return false;
-    }
+    void reset() { interrupted = false; }
     int numColumns() {
         return 0;
     }
