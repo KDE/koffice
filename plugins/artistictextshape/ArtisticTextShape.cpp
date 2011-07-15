@@ -335,7 +335,7 @@ void ArtisticTextShape::setFont( const QFont & font )
     cacheGlyphOutlines();
     updateSizeAndPosition();
     update();
-    notifyChanged();
+    updateGeometry();
 }
 
 QFont ArtisticTextShape::font() const
@@ -354,7 +354,7 @@ void ArtisticTextShape::setStartOffset( qreal offset )
     m_startOffset = qMax( qreal(0.0), m_startOffset );
     updateSizeAndPosition();
     update();
-    notifyChanged();
+    updateGeometry();
 }
 
 qreal ArtisticTextShape::startOffset() const
@@ -398,7 +398,7 @@ void ArtisticTextShape::setTextAnchor( TextAnchor anchor )
         setTransformation( transformation() * m );
     }
     update();
-    notifyChanged();
+    updateGeometry();
 }
 
 ArtisticTextShape::TextAnchor ArtisticTextShape::textAnchor() const
@@ -500,7 +500,7 @@ QString ArtisticTextShape::removeRange( unsigned int from, unsigned int nr )
     cacheGlyphOutlines();
     updateSizeAndPosition();
     update();
-    notifyChanged();
+    updateGeometry();
     return ret;
 }
 
@@ -511,7 +511,7 @@ void ArtisticTextShape::addRange( unsigned int index, const QString &str )
     cacheGlyphOutlines();
     updateSizeAndPosition();
     update();
-    notifyChanged();
+    updateGeometry();
 }
 
 void ArtisticTextShape::getCharAngleAt( unsigned int charNum, qreal &angle ) const

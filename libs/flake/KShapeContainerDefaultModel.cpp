@@ -107,7 +107,7 @@ void KShapeContainerDefaultModel::setClipped(const KShape *child, bool clipping)
         return;
     relation->child()->update(); // mark old canvas-location as in need of repaint (aggregated)
     relation->inside = clipping;
-    relation->child()->notifyChanged();
+    relation->child()->updateGeometry();
     relation->child()->update(); // mark new area as in need of repaint
 }
 
@@ -157,7 +157,7 @@ void KShapeContainerDefaultModel::setInheritsTransform(const KShape *shape, bool
         return;
     relation->child()->update(); // mark old canvas-location as in need of repaint (aggregated)
     relation->inheritsTransform = inherit;
-    relation->child()->notifyChanged();
+    relation->child()->updateGeometry();
     relation->child()->update(); // mark new area as in need of repaint
 }
 

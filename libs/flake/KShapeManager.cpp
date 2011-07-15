@@ -135,6 +135,25 @@ void KShapeManagerPrivate::update(const QRectF &rect, const KShape *shape, bool 
     }
 }
 
+void KShapeManagerPrivate::shapeGeometryChanged(KShape *shape)
+{
+    Q_ASSERT(shape);
+    if (aggregate4update.contains(shape) || additionalShapes.contains(shape)) {
+        return;
+    }
+    const bool wasEmpty = aggregate4update.isEmpty();
+    aggregate4update.insert(shape);
+    shapeIndexesBeforeUpdate.insert(shape, shape->zIndex());
+
+    KShapeContainer *container = dynamic_cast<KShapeContainer*>(shape);
+    if (container) {
+        foreach(KShape *child, container->shapes())
+            shapeGeometryChanged(child);
+    }
+    if (wasEmpty && !aggregate4update.isEmpty())
+        QTimer::singleShot(100, q, SLOT(updateTree()));
+}
+
 
 KShapeManager::KShapeManager(KCanvasBase *canvas, const QList<KShape *> &shapes, QObject *parent)
         : QObject(parent),
@@ -550,25 +569,6 @@ QList<KShape *> KShapeManager::shapesAt(const QRectF &rect, bool omitHiddenShape
         }
     }
     return intersectedShapes;
-}
-
-void KShapeManager::notifyShapeChanged(KShape *shape)
-{
-    Q_ASSERT(shape);
-    if (d->aggregate4update.contains(shape) || d->additionalShapes.contains(shape)) {
-        return;
-    }
-    const bool wasEmpty = d->aggregate4update.isEmpty();
-    d->aggregate4update.insert(shape);
-    d->shapeIndexesBeforeUpdate.insert(shape, shape->zIndex());
-
-    KShapeContainer *container = dynamic_cast<KShapeContainer*>(shape);
-    if (container) {
-        foreach(KShape *child, container->shapes())
-            notifyShapeChanged(child);
-    }
-    if (wasEmpty && !d->aggregate4update.isEmpty())
-        QTimer::singleShot(100, this, SLOT(updateTree()));
 }
 
 QList<KShape*> KShapeManager::shapes() const

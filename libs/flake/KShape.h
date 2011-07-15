@@ -739,7 +739,7 @@ public:
      * Notify the shape its geometry and/or position have changed which will cause the shapeManager
      * to update its internal index used for painting and user interaction.
      */
-    void notifyChanged();
+    void updateGeometry();
 
     /**
      * A shape can be in a state that it is doing processing data like loading or text layout.

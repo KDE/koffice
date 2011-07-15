@@ -37,7 +37,7 @@ void FilterRegionChangeCommand::redo()
 
     if (m_shape) {
         m_shape->update();
-        m_shape->notifyChanged();
+        m_shape->updateGeometry();
     }
 
     QUndoCommand::redo();
@@ -52,7 +52,7 @@ void FilterRegionChangeCommand::undo()
 
     if (m_shape) {
         m_shape->update();
-        m_shape->notifyChanged();
+        m_shape->updateGeometry();
     }
 
     QUndoCommand::undo();

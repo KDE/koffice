@@ -60,6 +60,16 @@ public:
      */
     void update(const QRectF &rect, const KShape *shape = 0, bool selectionHandles = false);
 
+    /**
+     * Update the tree for finding the shapes.
+     * This will remove the shape from the tree and will reinsert it again.
+     * The update to the tree will be posponed until it is needed so that successive calls
+     * will be merged into one.
+     * @param shape the shape to updated its position in the tree.
+     */
+    void shapeGeometryChanged(KShape *shape);
+
+
     QPolygonF routeConnection(KShapeConnection *connection, const QPointF &from, const QPointF &to);
 
     class DetectCollision

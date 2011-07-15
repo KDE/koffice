@@ -122,7 +122,7 @@ void KPathPoint::setPoint(const QPointF &point)
 {
     d->point = point;
     if (d->shape)
-        d->shape->notifyChanged();
+        d->shape->updateGeometry();
 }
 
 void KPathPoint::setControlPoint1(const QPointF &point)
@@ -131,7 +131,7 @@ void KPathPoint::setControlPoint1(const QPointF &point)
     d->controlPoint1 = point;
     d->activeControlPoint1 = true;
     if (d->shape)
-        d->shape->notifyChanged();
+        d->shape->updateGeometry();
 }
 
 void KPathPoint::setControlPoint2(const QPointF &point)
@@ -140,7 +140,7 @@ void KPathPoint::setControlPoint2(const QPointF &point)
     d->controlPoint2 = point;
     d->activeControlPoint2 = true;
     if (d->shape)
-        d->shape->notifyChanged();
+        d->shape->updateGeometry();
 }
 
 void KPathPoint::removeControlPoint1()
@@ -149,7 +149,7 @@ void KPathPoint::removeControlPoint1()
     d->properties &= ~IsSmooth;
     d->properties &= ~IsSymmetric;
     if (d->shape)
-        d->shape->notifyChanged();
+        d->shape->updateGeometry();
 }
 
 void KPathPoint::removeControlPoint2()
@@ -158,7 +158,7 @@ void KPathPoint::removeControlPoint2()
     d->properties &= ~IsSmooth;
     d->properties &= ~IsSymmetric;
     if (d->shape)
-        d->shape->notifyChanged();
+        d->shape->updateGeometry();
 }
 
 void KPathPoint::setProperties(PointProperties properties)
@@ -175,7 +175,7 @@ void KPathPoint::setProperties(PointProperties properties)
     }
 
     if (d->shape)
-        d->shape->notifyChanged();
+        d->shape->updateGeometry();
 }
 
 void KPathPoint::setProperty(PointProperty property)
@@ -258,7 +258,7 @@ void KPathPoint::map(const QTransform &matrix, bool mapGroup)
         d->controlPoint2 = matrix.map(d->controlPoint2);
     }
     if (d->shape)
-        d->shape->notifyChanged();
+        d->shape->updateGeometry();
 }
 
 void KPathPoint::paint(QPainter &painter, int handleRadius, PointTypes types, bool active)

@@ -149,15 +149,6 @@ public:
     QList<KShape *> shapesAt(const QRectF &rect, bool omitHiddenShapes = true);
 
     /**
-     * Update the tree for finding the shapes.
-     * This will remove the shape from the tree and will reinsert it again.
-     * The update to the tree will be posponed until it is needed so that successive calls
-     * will be merged into one.
-     * @param shape the shape to updated its position in the tree.
-     */
-    void notifyShapeChanged(KShape *shape);
-
-    /**
      * Switch to editing the shape that is at the position of the event.
      * This method will check select a shape at the event position and switch to the default tool
      * for that shape, or switch to the default tool if there is no shape at the position.

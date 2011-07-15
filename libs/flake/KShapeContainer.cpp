@@ -210,7 +210,7 @@ void KShapeContainer::shapeChanged(ChangeType type, KShape *shape)
         return;
     d->model->containerChanged(this, type);
     foreach(KShape *shape, d->model->shapes())
-        shape->notifyChanged();
+        shape->updateGeometry();
 }
 
 bool KShapeContainer::isClipped(const KShape *child) const

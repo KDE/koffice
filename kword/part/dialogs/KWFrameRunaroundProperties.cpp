@@ -132,7 +132,7 @@ void KWFrameRunaroundProperties::save()
             needRelayout = true;
         }
         if (needRelayout)
-            frame->shape()->notifyChanged();
+            frame->shape()->updateGeometry();
     }
     m_state->removeUser();
 }

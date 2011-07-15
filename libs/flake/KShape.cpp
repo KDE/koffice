@@ -1,6 +1,6 @@
 /* This file is part of the KDE project
    Copyright (C) 2006 Casper Boemann Rasmussen <cbr@boemann.dk>
-   Copyright (C) 2006-2010 Thomas Zander <zander@kde.org>
+   Copyright (C) 2006-2011 Thomas Zander <zander@kde.org>
    Copyright (C) 2006-2010 Thorsten Zachmann <zachmann@kde.org>
    Copyright (C) 2007-2009 Jan Hambrecht <jaham@gmx.net>
 
@@ -255,14 +255,14 @@ void KShapePrivate::loadOdfGluePoints(const KXmlElement &gluePoints)
 KShape::KShape()
         : d_ptr(new KShapePrivate(this))
 {
-    notifyChanged();
+    updateGeometry();
 }
 
 KShape::KShape(const QColor &color)
         : d_ptr(new KShapePrivate(this))
 {
     d_ptr->fill = new KColorBackground(color);
-    notifyChanged();
+    updateGeometry();
 }
 
 
@@ -301,7 +301,7 @@ void KShape::scale(qreal sx, qreal sy)
     scaleMatrix.translate(-pos.x(), -pos.y());
     d->localMatrix = d->localMatrix * scaleMatrix;
 
-    notifyChanged();
+    updateGeometry();
     d->shapeChanged(ScaleChanged);
 }
 
@@ -315,7 +315,7 @@ void KShape::rotate(qreal angle)
     rotateMatrix.translate(-center.x(), -center.y());
     d->localMatrix = d->localMatrix * rotateMatrix;
 
-    notifyChanged();
+    updateGeometry();
     d->shapeChanged(RotationChanged);
 }
 
@@ -329,7 +329,7 @@ void KShape::shear(qreal sx, qreal sy)
     shearMatrix.translate(-pos.x(), -pos.y());
     d->localMatrix = d->localMatrix * shearMatrix;
 
-    notifyChanged();
+    updateGeometry();
     d->shapeChanged(ShearChanged);
 }
 
@@ -342,7 +342,7 @@ void KShape::setSize(const QSizeF &newSize)
 
     d->size = newSize;
 
-    notifyChanged();
+    updateGeometry();
     d->shapeChanged(SizeChanged);
 }
 
@@ -356,7 +356,7 @@ void KShape::setPosition(const QPointF &newPosition)
     translateMatrix.translate(newPosition.x() - currentPos.x(), newPosition.y() - currentPos.y());
     d->localMatrix = d->localMatrix * translateMatrix;
 
-    notifyChanged();
+    updateGeometry();
     d->shapeChanged(PositionChanged);
 }
 
@@ -453,7 +453,7 @@ void KShape::applyTransformation(const QTransform &matrix)
 {
     Q_D(KShape);
     d->localMatrix = matrix * d->localMatrix;
-    notifyChanged();
+    updateGeometry();
     d->shapeChanged(GenericMatrixChange);
 }
 
@@ -461,7 +461,7 @@ void KShape::setTransformation(const QTransform &matrix)
 {
     Q_D(KShape);
     d->localMatrix = matrix;
-    notifyChanged();
+    updateGeometry();
     d->shapeChanged(GenericMatrixChange);
 }
 
@@ -517,7 +517,7 @@ void KShape::setParent(KShapeContainer *parent)
         d->parent = parent;
         parent->addShape(this);
     }
-    notifyChanged();
+    updateGeometry();
     d->shapeChanged(ParentChanged);
 }
 
@@ -587,7 +587,7 @@ void KShape::setAbsolutePosition(QPointF newPosition, KoFlake::Position anchor)
     QTransform translateMatrix;
     translateMatrix.translate(translate.x(), translate.y());
     applyAbsoluteTransformation(translateMatrix);
-    notifyChanged();
+    updateGeometry();
     d->shapeChanged(PositionChanged);
 }
 
@@ -614,11 +614,11 @@ void KShape::copySettings(const KShape *shape)
     d->localMatrix = shape->d_ptr->localMatrix;
 }
 
-void KShape::notifyChanged()
+void KShape::updateGeometry()
 {
     Q_D(KShape);
-    foreach(KShapeManager * manager, d->shapeManagers) {
-        manager->notifyShapeChanged(this);
+    foreach (KShapeManager *manager, d->shapeManagers) {
+        manager->priv()->shapeGeometryChanged(this);
     }
 }
 
@@ -793,7 +793,7 @@ KShapeBackground * KShape::background() const
 void KShape::setZIndex(int zIndex)
 {
     Q_D(KShape);
-    notifyChanged();
+    updateGeometry();
     d->zIndex = zIndex;
 }
 
@@ -930,7 +930,7 @@ void KShape::setBorder(KShapeBorderBase *border)
     d->border = border;
     d->updateBorder();
     d->shapeChanged(BorderChanged);
-    notifyChanged();
+    updateGeometry();
 }
 
 void KShape::setShadow(KShapeShadow *shadow)
@@ -944,7 +944,7 @@ void KShape::setShadow(KShapeShadow *shadow)
         // TODO update changed area
     }
     d->shapeChanged(ShadowChanged);
-    notifyChanged();
+    updateGeometry();
 }
 
 KShapeShadow *KShape::shadow() const
@@ -1618,7 +1618,7 @@ void KShape::setFilterEffectStack(KFilterEffectStack *filterEffectStack)
     if (d->filterEffectStack) {
         d->filterEffectStack->ref();
     }
-    notifyChanged();
+    updateGeometry();
 }
 
 QSet<KShape*> KShape::toolDelegates() const

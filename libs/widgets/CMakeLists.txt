@@ -24,12 +24,8 @@ set(kowidgets_LIB_SRCS
     KoColorPopupAction.cpp
     KoColorSetWidget.cpp
     KoColorSlider.cpp
-    KoDualColorButton.cpp
-    KoEditColorSetDialog.cpp
     KoTriangleColorSelector.cpp
-    KoUniColorChooser.cpp
-    KoUniColorDialog.cpp
-    KoXYColorSelector.cpp
+    KoEditColorSetDialog.cpp
     KoShadowConfigWidget.cpp
     KoIconToolTip.cpp
     KoResourceItemChooser.cpp
@@ -41,9 +37,6 @@ set(kowidgets_LIB_SRCS
     KoCheckerBoardPainter.cpp
     KoResourceServerAdapter.cpp
     KoResourceServerProvider.cpp
-    KoLineStyleSelector.cpp
-    KoLineStyleItemDelegate.cpp
-    KoLineStyleModel.cpp
     KoDockWidgetTitleBar.cpp
     KoDockWidgetTitleBarButton.cpp
 )
@@ -54,7 +47,6 @@ kde4_add_ui_files( kowidgets_LIB_SRCS
     KoEditColorSet.ui
     KoShadowConfigWidget.ui
 )
-
 
 kde4_add_library(kowidgets SHARED ${kowidgets_LIB_SRCS})
 
@@ -84,10 +76,8 @@ install( FILES
     KoDockWidgetTitleBarButton.h
     KoDockWidgetTitleBar.h
     KoDpi.h
-    KoDualColorButton.h
     KoEditColorSetDialog.h
     KoImageResource.h
-    KoLineStyleSelector.h
     KoPageLayoutDialog.h
     KoPageLayoutWidget.h
     KoPagePreviewWidget.h
@@ -101,11 +91,8 @@ install( FILES
     KoShadowConfigWidget.h
     KoSliderCombo.h
     KoTriangleColorSelector.h
-    KoUniColorChooser.h
-    KoUniColorDialog.h
     KoUnitDoubleSpinBox.h
     kowidgets_export.h
-    KoXYColorSelector.h
     KoZoomAction.h
     KoZoomController.h
     KoZoomHandler.h
