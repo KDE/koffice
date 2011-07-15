@@ -924,11 +924,13 @@ KShapeBorderBase *KShape::border() const
 void KShape::setBorder(KShapeBorderBase *border)
 {
     Q_D(KShape);
+    if (border == d->border)
+        return;
     if (border)
         border->ref();
     d->updateBorder();
-    if (d->border)
-        d->border->deref();
+    if (d->border && !d->border->deref())
+        delete d->border;
     d->border = border;
     d->updateBorder();
     d->shapeChanged(BorderChanged);
@@ -938,13 +940,13 @@ void KShape::setBorder(KShapeBorderBase *border)
 void KShape::setShadow(KShapeShadow *shadow)
 {
     Q_D(KShape);
-    if (d->shadow)
-        d->shadow->deref();
+    if (shadow == d->shadow)
+        return;
+    if (shadow)
+        shadow->ref();
+    if (d->shadow && !d->shadow->deref())
+        delete d->shadow;
     d->shadow = shadow;
-    if (d->shadow) {
-        d->shadow->ref();
-        // TODO update changed area
-    }
     d->shapeChanged(ShadowChanged);
     updateGeometry();
 }

@@ -133,24 +133,12 @@ bool KShapeGroup::loadOdf(const KXmlElement & element, KShapeLoadingContext &con
 void KShapeGroup::shapeChanged(ChangeType type)
 {
     switch (type) {
-    case KShape::BorderChanged: {
-        KShapeBorderBase *stroke = border();
-        if (stroke) {
-            if (!stroke->deref())
-                delete stroke;
-            setBorder(0);
-        }
+    case KShape::BorderChanged:
+        setBorder(0);
         break;
-    }
-    case KShape::ShadowChanged: {
-        KShapeShadow *shade = shadow();
-        if (shade) {
-            if (!shade->deref())
-                delete shade;
-            setShadow(0);
-        }
+    case KShape::ShadowChanged:
+        setShadow(0);
         break;
-    }
     default:
         break;
     }
