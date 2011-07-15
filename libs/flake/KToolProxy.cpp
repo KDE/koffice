@@ -28,6 +28,7 @@
 #include "KCanvasBase.h"
 #include "KCanvasController.h"
 #include "KShapeManager.h"
+#include "KShapeManager_p.h"
 #include "KSelection.h"
 #include "KShapeLayer.h"
 
@@ -197,7 +198,7 @@ void KToolProxy::mouseDoubleClickEvent(QMouseEvent *event, const QPointF &point)
     KPointerEvent ev(event, point);
     d->activeTool->mouseDoubleClickEvent(&ev);
     if (! event->isAccepted() && event->button() == Qt::LeftButton)
-        d->activeTool->canvas()->shapeManager()->suggestChangeTool(&ev);
+        d->activeTool->canvas()->shapeManager()->priv()->suggestChangeTool(&ev);
 }
 
 void KToolProxy::mouseMoveEvent(QMouseEvent *event, const QPointF &point)

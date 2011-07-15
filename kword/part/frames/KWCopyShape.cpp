@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright (C) 2006, 2009,2010 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2006-2011 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -43,13 +43,13 @@ KWCopyShape::KWCopyShape(KShape *original, const KWPageManager *pageManager)
     QSet<KShape*> delegates;
     delegates << m_original;
     setToolDelegates(delegates);
-    m_original->addDependee(this);
+    m_original->addObserver(this);
 }
 
 KWCopyShape::~KWCopyShape()
 {
     if (m_original)
-        m_original->removeDependee(this);
+        m_original->removeObserver(this);
 }
 
 void KWCopyShape::paint(QPainter &painter, const KViewConverter &converter)
@@ -140,20 +140,18 @@ bool KWCopyShape::loadOdf(const KXmlElement &element, KShapeLoadingContext &cont
 void KWCopyShape::resetOriginal()
 {
     if (m_original)
-        m_original->removeDependee(this);
+        m_original->removeObserver(this);
     m_original = 0;
 }
 
 void KWCopyShape::setShapeSeriesPlacement(KWord::ShapeSeriesPlacement placement)
 {
     m_placementPolicy = placement;
-    shapeChanged(GenericMatrixChange, m_original);
+    observedShapeChanged(m_original, GenericMatrixChange);
 }
 
-void KWCopyShape::shapeChanged(ChangeType type, KShape *shape)
+void KWCopyShape::observedShapeChanged(KShape *shape, ChangeType type)
 {
-    if (shape == 0)
-        return;
     if (m_placementPolicy == KWord::NoAutoPlacement)
         return;
     switch (type) {

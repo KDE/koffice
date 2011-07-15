@@ -84,7 +84,7 @@ public:
     KShapeBackground * fill; ///< Stands for the background color / fill etc.
     KShapeBorderBase *border; ///< points to a border, or 0 if there is no border
     KShape *q_ptr;
-    QSet<KShape*> dependees; ///< set of shapes dependent on this shape
+    QSet<KShape*> observers; ///< set of shapes observing changes of this shape
     KShapeShadow * shadow; ///< the current shape shadow
     QMap<QString, QString> additionalAttributes;
     QMap<QString, QString> additionalStyleAttributes;

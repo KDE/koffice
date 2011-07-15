@@ -193,11 +193,10 @@ QPointF TextShape::convertScreenPos(const QPointF &point)
     return p + QPointF(0.0, m_textShapeData->documentOffset());
 }
 
-void TextShape::shapeChanged(ChangeType type, KShape *shape)
+void TextShape::shapeChanged(ChangeType type)
 {
-    Q_ASSERT(shape);
     // children can be moved by the layout process, we should ignore them here.
-    KShape *parent = shape->parent();
+    KShape *parent = this->parent();
     while (parent) {
         if (parent == this)
             return;

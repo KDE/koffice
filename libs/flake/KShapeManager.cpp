@@ -154,6 +154,42 @@ void KShapeManagerPrivate::shapeGeometryChanged(KShape *shape)
         QTimer::singleShot(100, q, SLOT(updateTree()));
 }
 
+void KShapeManagerPrivate::shapeChanged(KShape *shape, KShape::ChangeType type)
+{
+    Q_ASSERT(shape);
+    emit q->notifyShapeChanged(shape, type);
+    // if type == deleted; call remove?
+}
+
+void KShapeManagerPrivate::suggestChangeTool(KPointerEvent *event)
+{
+    QList<KShape*> shapes;
+
+    KShape *clicked = q->shapeAt(event->point);
+    if (clicked) {
+        if (! selection->isSelected(clicked)) {
+            selection->deselectAll();
+            selection->select(clicked);
+        }
+        shapes.append(clicked);
+    }
+
+    QList<KShape*> shapes2;
+    foreach (KShape *shape, shapes) {
+        QSet<KShape*> delegates = shape->toolDelegates();
+        if (delegates.isEmpty()) {
+            shapes2.append(shape);
+        } else {
+            foreach (KShape *delegatedShape, delegates) {
+                shapes2.append(delegatedShape);
+            }
+        }
+    }
+    KToolManager::instance()->switchToolRequested(
+        KToolManager::instance()->preferredToolForSelection(shapes2));
+}
+
+
 
 KShapeManager::KShapeManager(KCanvasBase *canvas, const QList<KShape *> &shapes, QObject *parent)
         : QObject(parent),
@@ -591,34 +627,6 @@ QList<KShape*> KShapeManager::topLevelShapes() const
 KSelection *KShapeManager::selection() const
 {
     return d->selection;
-}
-
-void KShapeManager::suggestChangeTool(KPointerEvent *event)
-{
-    QList<KShape*> shapes;
-
-    KShape *clicked = shapeAt(event->point);
-    if (clicked) {
-        if (! selection()->isSelected(clicked)) {
-            selection()->deselectAll();
-            selection()->select(clicked);
-        }
-        shapes.append(clicked);
-    }
-
-    QList<KShape*> shapes2;
-    foreach (KShape *shape, shapes) {
-        QSet<KShape*> delegates = shape->toolDelegates();
-        if (delegates.isEmpty()) {
-            shapes2.append(shape);
-        } else {
-            foreach (KShape *delegatedShape, delegates) {
-                shapes2.append(delegatedShape);
-            }
-        }
-    }
-    KToolManager::instance()->switchToolRequested(
-        KToolManager::instance()->preferredToolForSelection(shapes2));
 }
 
 void KShapeManager::setPaintingStrategy(KShapeManagerPaintingStrategy *strategy)

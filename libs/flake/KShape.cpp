@@ -136,9 +136,11 @@ void KShapePrivate::shapeChanged(KShape::ChangeType type)
 
     if (parent)
         parent->model()->childChanged(q, type);
-    q->shapeChanged(type, q);
-    foreach (KShape * shape, dependees)
-        shape->shapeChanged(type, q);
+    q->shapeChanged(type);
+    foreach (KShape *shape, observers)
+        shape->observedShapeChanged(q, type);
+    foreach (KShapeManager *manager, shapeManagers)
+        manager->priv()->shapeChanged(q, type);
 }
 
 void KShapePrivate::updateBorder()
@@ -1534,37 +1536,42 @@ QRectF KShape::documentToShape(const QRectF &rect) const
     return absoluteTransformation(0).inverted().mapRect(rect);
 }
 
-bool KShape::addDependee(KShape *shape)
+bool KShape::addObserver(KShape *shape)
 {
     Q_D(KShape);
     if (! shape)
         return false;
 
     // refuse to establish a circular dependency
-    if (shape->hasDependee(this))
+    if (shape->isObserver(this))
         return false;
 
-    d->dependees.insert(shape);
+    d->observers.insert(shape);
 
     return true;
 }
 
-void KShape::removeDependee(KShape *shape)
+void KShape::removeObserver(KShape *shape)
 {
     Q_D(KShape);
-    d->dependees.remove(shape);
+    d->observers.remove(shape);
 }
 
-bool KShape::hasDependee(KShape *shape) const
+bool KShape::isObserver(KShape *shape) const
 {
     Q_D(const KShape);
-    return d->dependees.contains(shape);
+    return d->observers.contains(shape);
 }
 
-void KShape::shapeChanged(ChangeType type, KShape *shape)
+void KShape::shapeChanged(ChangeType type)
 {
     Q_UNUSED(type);
-    Q_UNUSED(shape);
+}
+
+void KShape::observedShapeChanged(KShape *observedShape, ChangeType type)
+{
+    Q_UNUSED(observedShape);
+    Q_UNUSED(type);
 }
 
 void KShape::setAdditionalAttribute(const QString &name, const QString &value)

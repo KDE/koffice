@@ -132,7 +132,7 @@ public:
     void getCharExtentsAt(unsigned int charNum, QRectF &extents) const;
 
     /// reimplemented from KShape
-    virtual void shapeChanged(ChangeType type, KShape * shape);
+    virtual void observedShapeChanged(KShape *observed, ChangeType type);
 
 private:
     void updateSizeAndPosition(bool global = false);

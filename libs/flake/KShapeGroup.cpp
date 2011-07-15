@@ -130,25 +130,22 @@ bool KShapeGroup::loadOdf(const KXmlElement & element, KShapeLoadingContext &con
     return true;
 }
 
-void KShapeGroup::shapeChanged(ChangeType type, KShape *shape)
+void KShapeGroup::shapeChanged(ChangeType type)
 {
-    Q_UNUSED(shape);
     switch (type) {
-    case KShape::BorderChanged:
-    {
+    case KShape::BorderChanged: {
         KShapeBorderBase *stroke = border();
         if (stroke) {
-            if (stroke->deref())
+            if (!stroke->deref())
                 delete stroke;
             setBorder(0);
         }
         break;
     }
-    case KShape::ShadowChanged:
-    {
+    case KShape::ShadowChanged: {
         KShapeShadow *shade = shadow();
         if (shade) {
-            if (shade->deref())
+            if (!shade->deref())
                 delete shade;
             setShadow(0);
         }

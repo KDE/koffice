@@ -52,8 +52,8 @@ ArtisticTextShape::ArtisticTextShape()
 
 ArtisticTextShape::~ArtisticTextShape()
 {
-    if ( m_path )
-        m_path->removeDependee( this );
+    if (m_path)
+        m_path->removeObserver(this);
 }
 
 void ArtisticTextShape::paint(QPainter &painter, const KViewConverter &converter)
@@ -414,7 +414,7 @@ bool ArtisticTextShape::putOnPath( KPathShape * path )
     if ( path->outline().isEmpty() )
         return false;
 
-    if ( ! path->addDependee( this ) )
+    if (!path->addObserver(this))
         return false;
 
     update();
@@ -441,7 +441,7 @@ bool ArtisticTextShape::putOnPath( const QPainterPath &path )
 
     update();
     if ( m_path )
-        m_path->removeDependee( this );
+        m_path->removeObserver(this);
     m_path = 0;
     m_baseline = path;
 
@@ -459,7 +459,7 @@ void ArtisticTextShape::removeFromPath()
 {
     update();
     if ( m_path )
-        m_path->removeDependee( this );
+        m_path->removeObserver(this);
     m_path = 0;
     m_baseline = QPainterPath();
     updateSizeAndPosition();
@@ -600,16 +600,12 @@ void ArtisticTextShape::cacheGlyphOutlines()
     }
 }
 
-void ArtisticTextShape::shapeChanged(ChangeType type, KShape * shape)
+void ArtisticTextShape::observedShapeChanged(KShape *shape, ChangeType type)
 {
-    if ( m_path && shape == m_path )
-    {
-        if ( type == KShape::Deleted )
-        {
+    if (m_path && shape == m_path) {
+        if (type == KShape::Deleted) {
             m_path = 0;
-        }
-        else
-        {
+        } else {
             update();
             // use the paths outline converted to document coordinates as the baseline
             m_baseline = m_path->absoluteTransformation(0).map( m_path->outline() );

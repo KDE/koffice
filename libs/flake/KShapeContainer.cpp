@@ -199,10 +199,9 @@ void KShapeContainer::paintComponent(QPainter &, const KViewConverter &)
     // empty
 }
 
-void KShapeContainer::shapeChanged(ChangeType type, KShape *shape)
+void KShapeContainer::shapeChanged(ChangeType type)
 {
     Q_D(KShapeContainer);
-    Q_UNUSED(shape);
     if (d->model == 0)
         return;
     if (!(type == RotationChanged || type == ScaleChanged || type == ShearChanged

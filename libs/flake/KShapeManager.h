@@ -27,9 +27,9 @@
 #include <QSet>
 
 #include "KoFlake.h"
+#include "KShape.h"
 #include "flake_export.h"
 
-class KShape;
 class KSelection;
 class KViewConverter;
 class KCanvasBase;
@@ -149,14 +149,6 @@ public:
     QList<KShape *> shapesAt(const QRectF &rect, bool omitHiddenShapes = true);
 
     /**
-     * Switch to editing the shape that is at the position of the event.
-     * This method will check select a shape at the event position and switch to the default tool
-     * for that shape, or switch to the default tool if there is no shape at the position.
-     * @param event the event that holds the point where to look for a shape.
-     */
-    void suggestChangeTool(KPointerEvent *event);
-
-    /**
      * Paint a shape
      *
      * @param shape the shape to paint
@@ -189,6 +181,8 @@ signals:
     void selectionChanged();
     /// emitted when an object in the selection is changed (moved/rotated etc)
     void selectionContentChanged();
+    /// emitted whenever any shape has any change.
+    void notifyShapeChanged(KShape *shape, KShape::ChangeType type);
 
 private:
     KShapeManagerPrivate * const d;

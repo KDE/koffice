@@ -784,18 +784,18 @@ public:
      *
      * @param shape the shape which depends on this shape
      * @return true if dependency could be established, otherwise false
-     * @see removeDependee(), hasDependee()
+     * @see removeObserver(), hasObserver()
      */
-    bool addDependee(KShape *shape);
+    bool addObserver(KShape *shape);
 
     /**
      * Removes as shape depending on this shape.
-     * @see addDependee(), hasDependee()
+     * @see addObserver(), hasObserver()
      */
-    void removeDependee(KShape *shape);
+    void removeObserver(KShape *shape);
 
-    /// Returns if the given shape is dependent on this shape
-    bool hasDependee(KShape *shape) const;
+    /// Returns if the given shape is observing this shape
+    bool isObserver(KShape *shape) const;
 
     /**
      * Set additional attribute
@@ -882,7 +882,7 @@ public:
     /**
      * Mark the beginning of an edit block where the user can call various times to
      * the geometry change methods without the shape telling this to listeners like
-     * the container or the dependee.
+     * the container or the observer.
      * This method is useful to avoid external listeners to act on every change to
      * position / scale and general transformations while the state of the shape
      * may not be completely sane at every step.  Consider calling this method
@@ -896,9 +896,9 @@ public:
     /**
      * End an edit block started with beginEditBlock.
      * When the total amount of endEditBlock calls is equal to the amount of beginEditBlock
-     * the shape will call shapeChanged with a single GenericMatrixChange
+     * the shape will call shapeChanged (and observedShapeChanged) with a single GenericMatrixChange
      * (providing there were changes made).
-     * @see beginEditBlock, shapeChanged
+     * @see beginEditBlock() shapeChanged() observedShapeChanged()
      */
     void endEditBlock();
 
@@ -991,7 +991,16 @@ protected:
      * This is called whenever the shape, position rotation or scale properties were altered.
      * @param type an indicator which type was changed.
      */
-    virtual void shapeChanged(ChangeType type, KShape *shape);
+    virtual void shapeChanged(ChangeType type);
+
+    /**
+     * A hook that allows following classes to do something after a KShape property changed
+     * This is called whenever the shape, position rotation or scale properties were altered.
+     * This method is called whenever an observed shape changed.
+     * @see addObserver()
+     * @param type an indicator which type was changed.
+     */
+    virtual void observedShapeChanged(KShape *observedShape, ChangeType type);
 
     /// return the current matrix that contains the rotation/scale/position of this shape
     QTransform transform() const;
