@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KPRPRESENTATIONTOOLADAPTOR_H
-#define KPRPRESENTATIONTOOLADAPTOR_H
+#ifndef SCPRESENTATIONTOOLADAPTOR_H
+#define SCPRESENTATIONTOOLADAPTOR_H
 
 #include <QtDBus/QtDBus>
 
@@ -73,4 +73,4 @@ private:
     SCViewModePresentation &m_viewModePresentation;
 };
 
-#endif /* KPRPRESENTATIONTOOLADAPTOR_H */
+#endif /* SCPRESENTATIONTOOLADAPTOR_H */

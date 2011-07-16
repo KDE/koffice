@@ -17,14 +17,14 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef _KO_COLOR_CONVERSION_LINK_H_
-#define _KO_COLOR_CONVERSION_LINK_H_
+#ifndef KO_COLOR_CONVERSION_TRANSFORMATION_FACTORY_H
+#define KO_COLOR_CONVERSION_TRANSFORMATION_FACTORY_H
 
 class KoColorSpace;
 class KoColorConversionTransformation;
 
 #include <QtCore/QString>
-#include <KoColorConversionTransformationAbstractFactory.h>
+#include "KoColorConversionTransformationAbstractFactory.h"		//krazy:exclude=includes
 
 /**
  * Factory to create a color transformation between two colorsapces.

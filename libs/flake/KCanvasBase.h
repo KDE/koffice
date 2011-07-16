@@ -20,8 +20,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KOCANVASBASE_H
-#define KOCANVASBASE_H
+#ifndef KCANVASBASE_H
+#define KCANVASBASE_H
 
 #include <KUnit.h>
 

@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KPRPAGELAYOUT_H
-#define KPRPAGELAYOUT_H
+#ifndef SCPAGELAYOUT_H
+#define SCPAGELAYOUT_H
 
 #include <QList>
 #include <QString>
@@ -96,4 +96,4 @@ private:
     Type m_layoutType;
 };
 
-#endif /* KPRPAGELAYOUT_H */
+#endif /* SCPAGELAYOUT_H */

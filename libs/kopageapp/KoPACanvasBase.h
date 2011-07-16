@@ -20,8 +20,8 @@
 #ifndef KOPACANVASBASE_H
 #define KOPACANVASBASE_H
 
-#include <QList>
-#include <KCanvasBase.h>
+#include <QtCore/QList>
+#include <KCanvasBase.h>	//krazy:exclude=includes
 
 #include "kopageapp_export.h"
 

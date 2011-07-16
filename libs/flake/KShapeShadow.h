@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOSHAPESHADOW_H
-#define KOSHAPESHADOW_H
+#ifndef KSHAPESHADOW_H
+#define KSHAPESHADOW_H
 
 #include "flake_export.h"
 #include <QtCore/QPointF>

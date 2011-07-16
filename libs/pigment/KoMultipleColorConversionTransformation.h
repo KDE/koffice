@@ -17,10 +17,10 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef _KO_MULTIPLE_COLOR_CONVERSION_TRANSFORMATION_H_
-#define _KO_MULTIPLE_COLOR_CONVERSION_TRANSFORMATION_H_
+#ifndef KO_MULTIPLE_COLOR_CONVERSION_TRANSFORMATION_H
+#define KO_MULTIPLE_COLOR_CONVERSION_TRANSFORMATION_H
 
-#include <KoColorConversionTransformation.h>
+#include "KoColorConversionTransformation.h"		//krazy:exclude=includes
 
 #include "pigment_export.h"
 

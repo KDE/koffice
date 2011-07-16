@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef _KOCOMPOSITEOPOVER_H_
-#define _KOCOMPOSITEOPOVER_H_
+#ifndef KOCOMPOSITEOPOVER_H
+#define KOCOMPOSITEOPOVER_H
 
 #include "KoCompositeOpAlphaBase.h"
 #include <klocale.h>

@@ -54,6 +54,7 @@
 #include <KPluginFactory>
 
 #include <QtGui/QTextCursor>
+#include <QtCore/QFile>
 
 #include <math.h>
 

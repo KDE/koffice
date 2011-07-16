@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOPATHPOINTINSERTCOMMAND_H
-#define KOPATHPOINTINSERTCOMMAND_H
+#ifndef KPATHPOINTINSERTCOMMAND_H
+#define KPATHPOINTINSERTCOMMAND_H
 
 #include <QUndoCommand>
 #include <QList>
@@ -60,4 +60,4 @@ private:
     KPathPointInsertCommandPrivate *d;
 };
 
-#endif // KOPATHPOINTINSERTCOMMAND_H
+#endif // KPATHPOINTINSERTCOMMAND_H

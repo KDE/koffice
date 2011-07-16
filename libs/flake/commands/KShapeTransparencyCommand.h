@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOSHAPETRANSPARENCYCOMMAND_H
-#define KOSHAPETRANSPARENCYCOMMAND_H
+#ifndef KSHAPETRANSPARENCYCOMMAND_H
+#define KSHAPETRANSPARENCYCOMMAND_H
 
 #include "flake_export.h"
 
@@ -67,4 +67,4 @@ private:
     Private * const d;
 };
 
-#endif // KOSHAPETRANSPARENCYCOMMAND_H
+#endif // KSHAPETRANSPARENCYCOMMAND_H

@@ -17,13 +17,13 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef _KO_COLOR_TRANSFORMATION_H_
-#define _KO_COLOR_TRANSFORMATION_H_
+#ifndef KO_COLOR_TRANSFORMATION_H
+#define KO_COLOR_TRANSFORMATION_H
 
 #include <QtCore/QHash>
 #include <QtCore/QString>
 #include <QtCore/QVariant>
-#include <qglobal.h>
+#include <QtCore/QtGlobal>
 
 #include "pigment_export.h"
 

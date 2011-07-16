@@ -21,9 +21,9 @@
  */
 
 #include "KImageData.h"
+#include "KImageData_p.h"
 
 #include "KImageCollection.h"
-#include "KImageData_p.h"
 
 #include <KUnit.h>
 #include <KOdfStore.h>

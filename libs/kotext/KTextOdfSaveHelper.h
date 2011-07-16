@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOTEXTODFSAVEHELPER_H
-#define KOTEXTODFSAVEHELPER_H
+#ifndef KTEXTODFSAVEHELPER_H
+#define KTEXTODFSAVEHELPER_H
 
 #include <KDragOdfSaveHelper.h>
 

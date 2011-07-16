@@ -16,8 +16,8 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#ifndef KOCHANGETRACKERELEMT_H
-#define KOCHANGETRACKERELEMT_H
+#ifndef KCHANGETRACKERELEMENT_H
+#define KCHANGETRACKERELEMENT_H
 
 #include <QObject>
 

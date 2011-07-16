@@ -17,8 +17,8 @@
    the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
 */
-#ifndef KOPATHPARAMETERCHANGESTRATEGY_H
-#define KOPATHPARAMETERCHANGESTRATEGY_H
+#ifndef KPARAMETERCHANGESTRATEGY_P_H
+#define KPARAMETERCHANGESTRATEGY_P_H
 
 //
 //  W A R N I N G
@@ -61,4 +61,4 @@ private:
     QPointF m_releasePoint;
 };
 
-#endif /* KOPATHPARAMETERCHANGESTRATEGY_H */
+#endif /* KPARAMETERCHANGESTRATEGY_P_H */

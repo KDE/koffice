@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOSNAPGUIDE_H
-#define KOSNAPGUIDE_H
+#ifndef KSNAPGUIDE_H
+#define KSNAPGUIDE_H
 
 #include "flake_export.h"
 

@@ -17,17 +17,18 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KOOASISLOADINGCONTEXT_H
-#define KOOASISLOADINGCONTEXT_H
+#ifndef KODFLOADINGCONTEXT_H
+#define KODFLOADINGCONTEXT_H
 
 class KOdfStore;
 
 #include "kodf_export.h"
-#include "KOdfStyleStack.h"
-#include "KOdfStylesReader.h"
+#include "KOdfStyleStack.h"			//krazy:exclude=includes
+#include "KOdfStylesReader.h"			//krazy:exclude=includes
 
 #include <QtCore/QString>
-#include <kcomponentdata.h>
+#include <QtCore/QFile>
+#include <KDE/KComponentData>
 
 /**
  * Used during loading of Oasis format (and discarded at the end of the loading).

@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KPRPAGESELECTSTRATEGYFIXED_H
-#define KPRPAGESELECTSTRATEGYFIXED_H
+#ifndef SCPAGESELECTSTRATEGYFIXED_H
+#define SCPAGESELECTSTRATEGYFIXED_H
 
 #include "SCPageSelectStrategyBase.h"
 
@@ -37,4 +37,4 @@ private:
     const KoPAPageBase *m_page;
 };
 
-#endif /* KPRPAGESELECTSTRATEGYFIXED_H */
+#endif /* SCPAGESELECTSTRATEGYFIXED_H */

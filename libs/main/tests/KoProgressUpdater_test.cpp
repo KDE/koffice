@@ -16,15 +16,15 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#include <qtest_kde.h>
 
 #include "KoProgressUpdater_test.h"
 
+#include <qtest_kde.h>
+
 #include "KoProgressUpdater.h"
 #include "KoUpdater.h"
-#include <QThread>
+#include <QtCore/QThread>
 
-#include <QThread>
 #include <threadweaver/ThreadWeaver.h>
 #include <threadweaver/Job.h>
 

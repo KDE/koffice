@@ -17,8 +17,8 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#ifndef KOSHAPEBORDERFACTORY_H
-#define KOSHAPEBORDERFACTORY_H
+#ifndef KSHAPEBORDERFACTORY_H
+#define KSHAPEBORDERFACTORY_H
 
 #include "flake_export.h"
 #include <QObject>

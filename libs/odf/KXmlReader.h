@@ -17,14 +17,15 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KOFFICE_XMLREADER
-#define KOFFICE_XMLREADER
+#ifndef KXMLREADER_H
+#define KXMLREADER_H
 
 #include "kodf_export.h"
 
-#include <QtXml/qxml.h>
-#include <QtXml/qdom.h>
-#include <QtCore/qpair.h>
+#include <QtCore/QPair>
+#include <QtXml/QDomNode>
+#include <QtXml/QDomElement>
+#include <QtXml/QDomDocument>
 
 class QIODevice;
 class QTextDecoder;
@@ -388,4 +389,4 @@ KODF_EXPORT bool setDocument(KXmlDocument& doc, QIODevice* device,
         if ( ( elem = _node.toElement() ).isNull() ) {} else
 
 
-#endif // KOFFICE_XMLREADER
+#endif // KXMLREADER_H

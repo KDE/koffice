@@ -20,7 +20,9 @@
 
 #include "TestShapePainting.h"
 
-#include <QtGui>
+#include <QtCore/QList>
+#include <QtGui/QImage>
+#include <QtGui/QPainter>
 #include "KShapeContainer.h"
 #include "KShapeManager.h"
 #include <MockShapes.h>

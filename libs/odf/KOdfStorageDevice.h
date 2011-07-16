@@ -17,11 +17,11 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef koStoreDevice_h
-#define koStoreDevice_h
+#ifndef KODFSTORAGEDEVICE_H
+#define KODFSTORAGEDEVICE_H
 
 #include "kodf_export.h"
-#include <KOdfStore.h>
+#include "KOdfStore.h"		//krazy:exclude=includes
 
 /**
  * This class implements a QIODevice around KOdfStore, so that

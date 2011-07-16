@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KPRMATRIXWIPESTRATEGY_H
-#define KPRMATRIXWIPESTRATEGY_H
+#ifndef SCMATRIXWIPESTRATEGY_H
+#define SCMATRIXWIPESTRATEGY_H
 
 #include <SCPageEffectStrategy.h>
 
@@ -50,4 +50,4 @@ private:
     int m_squaresPerRow, m_squaresPerCol;
 };
 
-#endif // KPRMATRIXWIPESTRATEGY_H
+#endif // SCMATRIXWIPESTRATEGY_H

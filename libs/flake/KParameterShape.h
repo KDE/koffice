@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KOPARAMETERSHAPE_H
-#define KOPARAMETERSHAPE_H
+#ifndef KPARAMETERSHAPE_H
+#define KPARAMETERSHAPE_H
 
 #include "KPathShape.h"
 #include "flake_export.h"

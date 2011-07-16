@@ -16,8 +16,8 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#ifndef KOINLINENOTE_H
-#define KOINLINENOTE_H
+#ifndef KINLINENOTE_H
+#define KINLINENOTE_H
 
 #include "KInlineObject.h"
 #include "kotext_export.h"

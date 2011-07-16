@@ -19,8 +19,8 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#ifndef _KO_TOOLBOX_H_
-#define _KO_TOOLBOX_H_
+#ifndef KO_TOOLBOX_H
+#define KO_TOOLBOX_H
 
 #include <KCanvasObserverBase.h>
 
@@ -127,4 +127,4 @@ private:
     KoToolBox *m_toolBox;
 };
 
-#endif // _KO_TOOLBOX_H_
+#endif // KO_TOOLBOX_H

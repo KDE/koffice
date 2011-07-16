@@ -18,17 +18,17 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KOCOLORSPACEFACTORYREGISTRY_H
-#define KOCOLORSPACEFACTORYREGISTRY_H
+#ifndef KOCOLORSPACEREGISTRY_H
+#define KOCOLORSPACEREGISTRY_H
 
 #include <QtCore/QObject>
 #include <QtCore/QList>
 #include <QtCore/QString>
 #include "pigment_export.h"
 
-#include <KGenericRegistry.h>
-#include <KoColorSpace.h>
-#include <KoColorSpaceFactory.h>
+#include <KGenericRegistry.h>			//krazy:exclude=includes
+#include "KoColorSpace.h"			//krazy:exclude=includes
+#include "KoColorSpaceFactory.h"		//krazy:exclude=includes
 
 class KoColorProfile;
 class KoColorConversionSystem;
@@ -330,4 +330,4 @@ private:
     Private * const d;
 };
 
-#endif // KOCOLORSPACEFACTORYREGISTRY_H
+#endif // KOCOLORSPACEREGISTRY_H

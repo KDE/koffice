@@ -18,8 +18,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KODOCKFACTORY_H
-#define KODOCKFACTORY_H
+#ifndef KDOCKFACTORY_H
+#define KDOCKFACTORY_H
 
 #include <QtCore/QString>
 #include <QtCore/QObject>

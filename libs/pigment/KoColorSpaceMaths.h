@@ -17,13 +17,14 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KOCOLORSPACEMATHS_H_
-#define KOCOLORSPACEMATHS_H_
+#ifndef KOCOLORSPACEMATHS_H
+#define KOCOLORSPACEMATHS_H
 
 #include "pigment_export.h"
-#include <KoIntegerMaths.h>
-#include "KoChannelInfo.h"
-#include "KoLut.h"
+#include "KoIntegerMaths.h" 	//krazy:exclude=includes
+#include "KoChannelInfo.h"	//krazy:exclude=includes
+#include "KoLut.h"		//krazy:exclude=includes
+#include <KoConfig.h>		//krazy:exclude=includes
 
 #undef _T
 
@@ -105,7 +106,6 @@ public:
     static const KoChannelInfo::enumChannelValueType channelValueType;
 };
 
-#include <KoConfig.h>
 #ifdef HAVE_OPENEXR
 #include <half.h>
 
@@ -191,8 +191,6 @@ inline int float2int(double x)
 }
 
 #endif
-
-#include <KoLut.h>
 
 template<typename _T_>
 struct KoIntegerToFloat {

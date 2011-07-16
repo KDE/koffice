@@ -17,8 +17,8 @@
    the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
 */
-#ifndef KPRCUSTOMSLIDESHOWS_H
-#define KPRCUSTOMSLIDESHOWS_H
+#ifndef SCCUSTOMSLIDESHOWS_H
+#define SCCUSTOMSLIDESHOWS_H
 
 #include<QMap>
 
@@ -136,4 +136,4 @@ public:
 private:
     QMap< QString, QList<KoPAPageBase*> > m_customSlideShows;
 };
-#endif /* KPRCUSTOMSLIDESHOWS_H */
+#endif /* SCCUSTOMSLIDESHOWS_H */

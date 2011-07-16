@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KPRHTMLEXPORT_H
-#define KPRHTMLEXPORT_H
+#ifndef SCHTMLEXPORT_H
+#define SCHTMLEXPORT_H
 
 #include <KUrl>
 #include <QStringList>
@@ -85,4 +85,4 @@ private:
     Parameter m_parameters;
 };
 
-#endif /* KPRHTMLEXPORT_H */
+#endif /* SCHTMLEXPORT_H */

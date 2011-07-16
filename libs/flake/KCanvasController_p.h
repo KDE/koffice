@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOCANVASCONTROLLER_P_H
-#define KOCANVASCONTROLLER_P_H
+#ifndef KCANVASCONTROLLER_P_H
+#define KCANVASCONTROLLER_P_H
 
 #include "KCanvasController.h"
 

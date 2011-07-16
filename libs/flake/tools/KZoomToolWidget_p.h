@@ -16,8 +16,8 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#ifndef KOZOOMTOOLWIDGET_H
-#define KOZOOMTOOLWIDGET_H
+#ifndef KZOOMTOOLWIDGET_H
+#define KZOOMTOOLWIDGET_H
 
 //
 //  W A R N I N G

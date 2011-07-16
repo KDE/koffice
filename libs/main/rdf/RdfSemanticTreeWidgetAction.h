@@ -17,11 +17,11 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef __rdf_RdfSemanticTreeWidgetAction_h__
-#define __rdf_RdfSemanticTreeWidgetAction_h__
+#ifndef RDF_SEMANTIC_TREE_WIDGET_ACTION_H
+#define RDF_SEMANTIC_TREE_WIDGET_ACTION_H
 
-#include <QObject>
-#include <KAction>
+#include <QtCore/QObject>
+#include <KDE/KAction>
 
 class KCanvasBase;
 class KoTextEditor;

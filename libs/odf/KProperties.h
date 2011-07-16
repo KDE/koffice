@@ -17,8 +17,8 @@
    the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
    Boston, MA 02110-1301, USA.
  */
-#ifndef _KO_PROPERTIES_H
-#define _KO_PROPERTIES_H
+#ifndef KPROPERTIES_H
+#define KPROPERTIES_H
 
 #include <QtCore/QString>
 #include <QtCore/QMap>
@@ -181,4 +181,4 @@ private:
     Private * const d;
 };
 
-#endif // _KO_PROPERTIES_H
+#endif // KPROPERTIES_H

@@ -19,8 +19,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef _KO_ID_H_
-#define _KO_ID_H_
+#ifndef KO_ID_H
+#define KO_ID_H
 
 #include <QtCore/QString>
 #include <QtCore/QMetaType>
@@ -110,4 +110,4 @@ inline QDebug operator<<(QDebug dbg, const KoID &id)
     return dbg.space();
 }
 
-#endif
+#endif //KO_ID_H

@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KO_TOOL_REGISTRY_H_
-#define KO_TOOL_REGISTRY_H_
+#ifndef K_TOOL_REGISTRY_H
+#define K_TOOL_REGISTRY_H
 
 #include <QObject>
 

@@ -21,6 +21,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
+#include "SCPresentationDrawWidget.h"
+
 #include <QtGui/QVBoxLayout>
 #include <QtGui/QPainter>
 #include <QtGui/QPaintEvent>
@@ -34,8 +36,6 @@
 
 #include <KoPACanvas.h>
 #include <KPointerEvent.h>
-
-#include "SCPresentationDrawWidget.h"
 
 SCPresentationDrawWidget::SCPresentationDrawWidget(KoPACanvasBase * canvas)
 : SCPresentationToolEventForwarder(canvas)

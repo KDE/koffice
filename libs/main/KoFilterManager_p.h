@@ -18,8 +18,8 @@ the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
 Boston, MA 02110-1301, USA.
 */
 
-#ifndef __koFilterManager_p_h__
-#define __koFilterManager_p_h__
+#ifndef KO_FILTER_MANAGER_P_H
+#define KO_FILTER_MANAGER_P_H
 
 #include <QString>
 #include <QStringList>
@@ -28,6 +28,7 @@ Boston, MA 02110-1301, USA.
 #include <KDialog>
 
 #include <KoProgressUpdater.h>
+#include "KoFilterManager.h"
 
 class QListWidget;
 
@@ -61,4 +62,4 @@ private:
     QListWidget *m_filterList;
 };
 
-#endif
+#endif //KO_FILTER_MANAGER_P_H

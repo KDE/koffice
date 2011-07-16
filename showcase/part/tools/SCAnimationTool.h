@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KPRANIMATIONTOOL_H
-#define KPRANIMATIONTOOL_H
+#ifndef SCANIMATIONTOOL_H
+#define SCANIMATIONTOOL_H
 
 #include <KToolBase.h>
 

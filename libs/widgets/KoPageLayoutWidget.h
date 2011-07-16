@@ -17,15 +17,15 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOFFICE_PAGE_LAYOUT_WIDGET
-#define KOFFICE_PAGE_LAYOUT_WIDGET
+#ifndef KO_PAGE_LAYOUT_WIDGET
+#define KO_PAGE_LAYOUT_WIDGET
 
 #include "kowidgets_export.h"
 
-#include <KoText.h>
-#include <KUnit.h>
-#include <KOdfPageLayoutData.h>
-#include <QWidget>
+#include <KoText.h>				//krazy:exclude=includes
+#include <KUnit.h>				//krazy:exclude=includes
+#include <KOdfPageLayoutData.h>			//krazy:exclude=includes
+#include <QtGui/QWidget>
 
 /// the widget that shows the size/margins and other page settings.
 class KOWIDGETS_EXPORT KoPageLayoutWidget : public QWidget

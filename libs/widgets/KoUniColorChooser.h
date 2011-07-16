@@ -19,9 +19,9 @@
 #ifndef KOUNICOLORCHOOSER_H
 #define KOUNICOLORCHOOSER_H
 
-#include <QWidget>
+#include <QtGui/QWidget>
 
-#include "KoColor.h"
+#include "KoColor.h"				//krazy:exclude=includes
 
 #include "kowidgets_export.h"
 

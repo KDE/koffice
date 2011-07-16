@@ -19,8 +19,8 @@
    Based on code from Wolfgang Baer - WBaer@gmx.de
 */
 
-#ifndef KORTREE_H
-#define KORTREE_H
+#ifndef KRTREE_H
+#define KRTREE_H
 
 #include <KDebug>
 
@@ -32,7 +32,7 @@
 #include <QtCore/QRectF>
 #include <QtCore/QVarLengthArray>
 
-// #define KOFFICE_RTREE_DEBUG
+// #define KFFICE_RTREE_DEBUG
 #ifdef KOFFICE_RTREE_DEBUG
 #include <QtGui/QPainter>
 #endif

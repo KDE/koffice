@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef __rdf_KoRdfPrefixMapping_h__
-#define __rdf_KoRdfPrefixMapping_h__
+#ifndef KO_RDF_PREFIX_MAPPING_H
+#define KO_RDF_PREFIX_MAPPING_H
 
 #include "komain_export.h"
 #include "RdfForward.h"

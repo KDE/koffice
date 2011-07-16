@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOTEXTWRITER_H
-#define KOTEXTWRITER_H
+#ifndef KTEXTWRITER_H
+#define KTEXTWRITER_H
 
 #include "kotext_export.h"
 

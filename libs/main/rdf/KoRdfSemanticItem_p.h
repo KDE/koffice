@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef __rdf_KoRdfSemanticItem_p_h__
-#define __rdf_KoRdfSemanticItem_p_h__
+#ifndef KO_RDF_SEMANTIC_ITEM_P_H
+#define KO_RDF_SEMANTIC_ITEM_P_H
 
 class KoRdfSemanticItemPrivate
 {

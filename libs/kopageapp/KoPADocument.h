@@ -20,12 +20,12 @@
 #ifndef KOPADOCUMENT_H
 #define KOPADOCUMENT_H
 
-#include <QObject>
+#include <QtCore/QObject>
 
-#include <KOdf.h>
-#include <KoDocument.h>
-#include <KShapeControllerBase.h>
-#include "KoPageApp.h"
+#include <KOdf.h>			//krazy:exclude=includes
+#include <KoDocument.h>			//krazy:exclude=includes
+#include <KShapeControllerBase.h>	//krazy:exclude=includes
+#include "KoPageApp.h"			//krazy:exclude=includes
 #include "kopageapp_export.h"
 
 class KShapeSavingContext;

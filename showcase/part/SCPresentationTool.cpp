@@ -47,8 +47,6 @@
 #include "SCPresentationBlackStrategy.h"
 #include "ui/SCPresentationToolWidget.h"
 #include "SCPresentationToolAdaptor.h"
-#include "SCViewModePresentation.h"
-
 
 SCPresentationTool::SCPresentationTool(SCViewModePresentation &viewMode)
 : KToolBase(viewMode.canvas())

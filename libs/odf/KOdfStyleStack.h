@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KOSTYLESTACK_H
-#define KOSTYLESTACK_H
+#ifndef KODFSTYLESTACK_H
+#define KODFSTYLESTACK_H
 
 
 #include <QtCore/QList>
@@ -28,7 +28,7 @@
 #include <kdemacros.h>
 
 #include "kodf_export.h"
-#include <KXmlReader.h>
+#include <KXmlReader.h>				//krazy:exclude=includes
 
 /**
  *  @brief This class implements a stack for the different styles of an object.

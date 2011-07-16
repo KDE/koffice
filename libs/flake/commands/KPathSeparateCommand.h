@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOPATHSEPARATECOMMAND_H
-#define KOPATHSEPARATECOMMAND_H
+#ifndef KPATHSEPARATECOMMAND_H
+#define KPATHSEPARATECOMMAND_H
 
 #include <QUndoCommand>
 #include <QList>
@@ -50,4 +50,4 @@ private:
     Private * const d;
 };
 
-#endif // KOPATHSEPARATECOMMAND_H
+#endif // KPATHSEPARATECOMMAND_H

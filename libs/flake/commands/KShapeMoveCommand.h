@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOSHAPEMOVECOMMAND_H
-#define KOSHAPEMOVECOMMAND_H
+#ifndef KSHAPEMOVECOMMAND_H
+#define KSHAPEMOVECOMMAND_H
 
 #include "KSelection.h"
 

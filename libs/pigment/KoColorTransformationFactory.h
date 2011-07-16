@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef _KO_COLOR_TRANSFORMATION_FACTORY_H_
-#define _KO_COLOR_TRANSFORMATION_FACTORY_H_
+#ifndef KO_COLOR_TRANSFORMATION_FACTORY_H
+#define KO_COLOR_TRANSFORMATION_FACTORY_H
 
 #include <QtCore/QList>
 #include <QtCore/QPair>
@@ -53,4 +53,4 @@ private:
     Private* const d;
 };
 
-#endif
+#endif //KO_COLOR_TRANSFORMATION_FACTORY_H

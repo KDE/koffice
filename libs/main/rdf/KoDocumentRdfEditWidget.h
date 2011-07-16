@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef __koDocumentRdfEditWidget_h__
-#define __koDocumentRdfEditWidget_h__
+#ifndef KO_DOCUMENT_RDF_EDIT_WIDGET_H
+#define KO_DOCUMENT_RDF_EDIT_WIDGET_H
 
 #include "RdfForward.h"
 #include "KoDocumentRdfEditWidgetBase.h"

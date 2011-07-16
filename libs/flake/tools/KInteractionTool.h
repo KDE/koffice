@@ -19,8 +19,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KOINTERACTIONTOOL_H
-#define KOINTERACTIONTOOL_H
+#ifndef KINTERACTIONTOOL_H
+#define KINTERACTIONTOOL_H
 
 #include "KToolBase.h"
 #include "flake_export.h"

@@ -28,10 +28,10 @@
 
 #include <kdebug.h>
 
-#include "KoResourceServer.h"
-#include "KoPattern.h"
-#include "KoAbstractGradient.h"
-#include "KoColorSet.h"
+#include "KoResourceServer.h"			//krazy:exclude=includes
+#include "KoPattern.h"				//krazy:exclude=includes
+#include "KoAbstractGradient.h"			//krazy:exclude=includes
+#include "KoColorSet.h"				//krazy:exclude=includes
 
 /**
  * KoResourceLoaderThread allows threaded loading of the resources of a resource server

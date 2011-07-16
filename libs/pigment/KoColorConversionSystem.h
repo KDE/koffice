@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef _KO_COLOR_CONVERSION_SYSTEM_H_
-#define _KO_COLOR_CONVERSION_SYSTEM_H_
+#ifndef KO_COLOR_CONVERSION_SYSTEM_H
+#define KO_COLOR_CONVERSION_SYSTEM_H
 
 class KoColorProfile;
 class KoColorSpace;
@@ -26,10 +26,10 @@ class KoColorSpaceFactory;
 class KoColorSpaceEngine;
 class KoID;
 
-#include "KoColorConversionTransformation.h"
+#include "KoColorConversionTransformation.h"		//krazy:exclude=includes
 
-#include <QList>
-#include <QPair>
+#include <QtCore/QList>
+#include <QtCore/QPair>
 
 #include "pigment_export.h"
 

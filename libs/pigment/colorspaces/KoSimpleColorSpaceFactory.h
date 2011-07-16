@@ -19,8 +19,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOSIMPLECOLORSPACEFACTORY_H_
-#define KOSIMPLECOLORSPACEFACTORY_H_
+#ifndef KOSIMPLECOLORSPACEFACTORY_H
+#define KOSIMPLECOLORSPACEFACTORY_H
 
 #include <KoColorSpaceAbstract.h>
 #include <KoColorSpaceRegistry.h>

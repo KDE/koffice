@@ -25,19 +25,19 @@
 
 #include <QtCore/QDateTime>
 #include <QtGui/QTransform>
-#include <QList>
+#include <QtCore/QList>
 
 #include <kparts/part.h>
 #include <kservice.h>
 #include <kcomponentdata.h>
 
-#include <KUnit.h>
-#include <KOdfPageLayoutData.h>
+#include <KUnit.h>			//krazy:exclude=includes
+#include <KOdfPageLayoutData.h>		//krazy:exclude=includes
 #include "komain_export.h"
-#include "KoGridData.h"
-#include "KGuidesData.h"
-#include <KXmlReader.h>
-#include <KOdfDocumentBase.h>
+#include "KoGridData.h"			//krazy:exclude=includes
+#include <KGuidesData.h>		//krazy:exclude=includes
+#include <KXmlReader.h>			//krazy:exclude=includes
+#include <KOdfDocumentBase.h>		//krazy:exclude=includes
 
 class QUndoCommand;
 

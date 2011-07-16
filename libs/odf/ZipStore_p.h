@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef koZipStore_h
-#define koZipStore_h
+#ifndef ZIP_STORE_H
+#define ZIP_STORE_H
 
 //
 //  W A R N I N G

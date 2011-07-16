@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOSHAPEBORDERBASE_H
-#define KOSHAPEBORDERBASE_H
+#ifndef KSHAPEBORDERBASE_H
+#define KSHAPEBORDERBASE_H
 
 #include "flake_export.h"
 

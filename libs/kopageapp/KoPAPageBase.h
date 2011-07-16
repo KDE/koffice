@@ -20,14 +20,13 @@
 #ifndef KOPAPAGEBASE_H
 #define KOPAPAGEBASE_H
 
-#include <QList>
-#include <QString>
-#include <QPixmap>
+#include <QtCore/QList>
+#include <QtCore/QString>
+#include <QtGui/QPixmap>
 
-#include <KShapeContainer.h>
-// #include <KXmlReader.h>
+#include <KShapeContainer.h>		//krazy:exclude=includes
 
-#include "KoPageApp.h"
+#include "KoPageApp.h"			//krazy:exclude=includes
 #include "kopageapp_export.h"
 
 #define CACHE_PAGE_THUMBNAILS

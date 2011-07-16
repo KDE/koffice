@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KPRCLOCKWIPESUBPATHHELPER_H
-#define KPRCLOCKWIPESUBPATHHELPER_H
+#ifndef SCCLOCKWIPESUBPATHHELPER_H
+#define SCCLOCKWIPESUBPATHHELPER_H
 
 #include <QRect>
 
@@ -33,4 +33,4 @@ public:
     static void addSubpathForCircularArc(QPainterPath* clipPath, QRect& boundingRect, double startAngle, double endAngle);
 };
 
-#endif // KPRCLOCKWIPESUBPATHHELPER_H
+#endif // SCCLOCKWIPESUBPATHHELPER_H

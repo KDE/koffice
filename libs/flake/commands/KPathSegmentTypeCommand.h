@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOPATHSEGMENTTYPECOMMAND_H
-#define KOPATHSEGMENTTYPECOMMAND_H
+#ifndef KPATHSEGMENTTYPECOMMAND_H
+#define KPATHSEGMENTTYPECOMMAND_H
 
 #include <QUndoCommand>
 #include <QList>
@@ -77,4 +77,4 @@ private:
     SegmentType m_segmentType;
 };
 
-#endif // KOPATHSEGMENTTYPECOMMAND_H
+#endif // KPATHSEGMENTTYPECOMMAND_H

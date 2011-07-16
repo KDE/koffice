@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KPRPAGELAYOUTS_H
-#define KPRPAGELAYOUTS_H
+#ifndef SCPAGELAYOUTS_H
+#define SCPAGELAYOUTS_H
 
 #include <QMap>
 #include <QObject>
@@ -57,4 +57,4 @@ private:
 };
 
 Q_DECLARE_METATYPE(SCPageLayouts*)
-#endif /* KPRPAGELAYOUTS_H */
+#endif /* SCPAGELAYOUTS_H */

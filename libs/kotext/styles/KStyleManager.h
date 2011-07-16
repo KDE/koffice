@@ -21,8 +21,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOSTYLEMANAGER_H
-#define KOSTYLEMANAGER_H
+#ifndef KSTYLEMANAGER_H
+#define KSTYLEMANAGER_H
 
 #include "kotext_export.h"
 

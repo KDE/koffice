@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KPRPAGEEFFECT_H
-#define KPRPAGEEFFECT_H
+#ifndef SCPAGEEFFECT_H
+#define SCPAGEEFFECT_H
 
 #include <QPixmap>
 #include <QTimeLine>
@@ -170,5 +170,5 @@ protected:
     SCPageEffectStrategy * m_strategy;
 };
 
-#endif // KPRPAGEEFFECT2_H
+#endif // SCPAGEEFFECT2_H
 

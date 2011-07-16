@@ -28,10 +28,10 @@
 #include <QtCore/QList>
 #include <QtCore/QBitArray>
 
-#include "KoColorSpaceConstants.h"
-#include "KoColorConversionTransformation.h"
-#include <KoChannelInfo.h>
-#include <KoID.h>
+#include "KoColorSpaceConstants.h"			//krazy:exclude=includes
+#include "KoColorConversionTransformation.h"		//krazy:exclude=includes
+#include "KoChannelInfo.h"				//krazy:exclude=includes
+#include "KoID.h"					//krazy:exclude=includes
 #include "pigment_export.h"
 
 class QDomDocument;
@@ -56,8 +56,8 @@ enum ColorSpaceIndependence {
 };
 
 
-#include "KoMixColorsOp.h"
-#include "KoConvolutionOp.h"
+#include "KoMixColorsOp.h"			//krazy:exclude=includes
+#include "KoConvolutionOp.h"			//krazy:exclude=includes
 
 /**
  * A KoColorSpace is the definition of a certain color space.

@@ -26,7 +26,6 @@
 #include <QtGui/QTableView>
 #include <QtGui/QListView>
 #include <QtGui/QHeaderView>
-#include <QtGui/QHeaderView>
 #include <QtGui/QMouseEvent>
 #include <QtGui/QStyledItemDelegate>
 

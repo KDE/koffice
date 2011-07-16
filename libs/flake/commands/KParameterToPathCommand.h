@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOPARAMETERTOPATHCOMMAND_H
-#define KOPARAMETERTOPATHCOMMAND_H
+#ifndef KPARAMETERTOPATHCOMMAND_H
+#define KPARAMETERTOPATHCOMMAND_H
 
 #include <QUndoCommand>
 #include <QList>
@@ -57,4 +57,4 @@ private:
     KParameterToPathCommandPrivate *d;
 };
 
-#endif // KOPARAMETERTOPATHCOMMAND_H
+#endif // KPARAMETERTOPATHCOMMAND_H

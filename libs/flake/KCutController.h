@@ -16,8 +16,8 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#ifndef KOCUTCONTROLLER_H
-#define KOCUTCONTROLLER_H
+#ifndef KCUTCONTROLLER_H
+#define KCUTCONTROLLER_H
 
 #include "KCopyController.h"
 #include "flake_export.h"

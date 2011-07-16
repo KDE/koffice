@@ -20,8 +20,8 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#ifndef KPRPRESENTATIONDRAWWIDGET_H
-#define KPRPRESENTATIONDRAWWIDGET_H
+#ifndef SCPRESENTATIONDRAWWIDGET_H
+#define SCPRESENTATIONDRAWWIDGET_H
 
 #include "SCPresentationToolEventForwarder.h"
 
@@ -72,4 +72,4 @@ private :
     QList<Path> m_pointVectors;
 };
 
-#endif /* KPRPRESENTATIONDRAWWIDGET_H */
+#endif /* SCPRESENTATIONDRAWWIDGET_H */

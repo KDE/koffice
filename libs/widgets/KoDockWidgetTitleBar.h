@@ -16,8 +16,8 @@
    the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
    Boston, MA 02110-1301, USA.
 */
-#ifndef KODOCKWIDGETTITLEBAR_H_
-#define KODOCKWIDGETTITLEBAR_H_
+#ifndef KODOCKWIDGETTITLEBAR_H
+#define KODOCKWIDGETTITLEBAR_H
 
 #include "kowidgets_export.h"
 #include <QtGui/QDockWidget>
@@ -58,4 +58,4 @@ private:
     Private * const d;
 };
 
-#endif // KODOCKWIDGETTITLEBAR_H_
+#endif // KODOCKWIDGETTITLEBAR_H

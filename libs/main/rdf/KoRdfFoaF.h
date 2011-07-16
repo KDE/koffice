@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef __rdf_KoRdfFoaF_h__
-#define __rdf_KoRdfFoaF_h__
+#ifndef KO_RDF_FOAF_H
+#define KO_RDF_FOAF_H
 
 #include "KoRdfSemanticItem.h"
 

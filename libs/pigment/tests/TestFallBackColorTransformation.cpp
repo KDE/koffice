@@ -1,6 +1,6 @@
-#include <qtest_kde.h>
-
 #include "TestFallBackColorTransformation.h"
+
+#include <qtest_kde.h>
 
 #include "KoColorTransformation.h"
 #include <KoFallBackColorTransformation.h>

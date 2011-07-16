@@ -20,9 +20,9 @@
 #ifndef KOUNICOLORDIALOG_H
 #define KOUNICOLORDIALOG_H
 
-#include "KoColor.h"
+#include "KoColor.h"			//krazy:exclude=includes
 
-#include <kpagedialog.h>
+#include <KDE/KPageDialog>
 #include "kowidgets_export.h"
 
 class KoUniColorDialogPrivate;

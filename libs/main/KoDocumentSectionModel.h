@@ -20,11 +20,11 @@
 #ifndef KO_DOCUMENT_SECTION_MODEL_H
 #define KO_DOCUMENT_SECTION_MODEL_H
 
-#include <QAbstractItemModel>
-#include <QIcon>
-#include <QList>
-#include <QString>
-#include <QVariant>
+#include <QtCore/QAbstractItemModel>
+#include <QtGui/QIcon>
+#include <QtCore/QList>
+#include <QtCore/QString>
+#include <QtCore/QVariant>
 
 /**
  * Model class for use with KoDocumentSectionView. The document

@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef _KARBONBOOLEANCOMMAND_H_
-#define _KARBONBOOLEANCOMMAND_H_
+#ifndef KARBONBOOLEANCOMMAND_H
+#define KARBONBOOLEANCOMMAND_H
 
 #include <karboncommon_export.h>
 #include <QtGui/QUndoCommand>
@@ -57,4 +57,4 @@ private:
     Private * const d;
 };
 
-#endif // _KARBONBOOLEANCOMMAND_H_
+#endif //KARBONBOOLEANCOMMAND_H

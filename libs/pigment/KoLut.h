@@ -19,10 +19,10 @@
 
 // The file lut.h comes from http://bitbucket.org/cyrille/lut, keep it as much untouched as possible for easier sync
 
-#ifndef _KO_LUT_H_
-#define _KO_LUT_H_
+#ifndef KO_LUT_H
+#define KO_LUT_H
 
-#include <qglobal.h>
+#include <QtCore/QtGlobal>
 
 #define _USE_QT_TYPES_
 

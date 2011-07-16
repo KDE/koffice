@@ -19,8 +19,8 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#ifndef KPRPRESENTATIONHIGHLIGHTWIDGET_H
-#define KPRPRESENTATIONHIGHLIGHTWIDGET_H
+#ifndef SCPRESENTATIONHIGHLIGHTWIDGET_H
+#define SCPRESENTATIONHIGHLIGHTWIDGET_H
 
 #include "SCPresentationToolEventForwarder.h"
 
@@ -41,5 +41,5 @@ private:
     bool m_blackBackgroundVisibility;
 };
 
-#endif /* KPRPRESENTATIONHIGHLIGHTWIDGET_H */
+#endif /* SCPRESENTATIONHIGHLIGHTWIDGET_H */
 

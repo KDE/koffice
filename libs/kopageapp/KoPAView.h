@@ -22,11 +22,11 @@
 #ifndef KOPAVIEW_H
 #define KOPAVIEW_H
 
-#include <KoView.h>
-#include <KoPAViewBase.h>
-#include "KoPageApp.h"
-#include "KoZoomMode.h"
-#include "kopageapp_export.h"
+#include <KoView.h>			//krazy:exclude=includes
+#include "KoPAViewBase.h"		//krazy:exclude=includes
+#include "KoPageApp.h"			//krazy:exclude=includes
+#include <KoZoomMode.h>			//krazy:exclude=includes
+#include "kopageapp_export.h"		
 
 class KCanvasController;
 class KoFind;

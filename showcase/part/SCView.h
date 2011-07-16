@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KPRVIEW_H
-#define KPRVIEW_H
+#ifndef SCVIEW_H
+#define SCVIEW_H
 
 #include "showcase_export.h"
 
@@ -121,4 +121,4 @@ private:
     virtual KoPrintJob *createPdfPrintJob();
 };
 
-#endif /* KPRVIEW_H */
+#endif /* SCVIEW_H */

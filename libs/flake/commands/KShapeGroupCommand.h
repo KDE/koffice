@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOSHAPEGROUPCOMMAND_H
-#define KOSHAPEGROUPCOMMAND_H
+#ifndef KSHAPEGROUPCOMMAND_H
+#define KSHAPEGROUPCOMMAND_H
 
 #include "flake_export.h"
 

@@ -16,8 +16,8 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
 */
-#ifndef KOPATHSHAPEPRIVATE_H
-#define KOPATHSHAPEPRIVATE_H
+#ifndef KPATHSHAPEPRIVATE_H
+#define KPATHSHAPEPRIVATE_H
 
 //
 //  W A R N I N G

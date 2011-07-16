@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef TESTCHANGELOADING_H
-#define TESTCHANGELOADING_H
+#ifndef TESTCHANGETRACKING_H
+#define TESTCHANGETRACKING_H
 
 #include <QObject>
 

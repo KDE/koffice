@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOFILTEREFFECTREGISTRY_H
-#define KOFILTEREFFECTREGISTRY_H
+#ifndef KFILTEREFFECTREGISTRY_H
+#define KFILTEREFFECTREGISTRY_H
 
 #include <KGenericRegistry.h>
 #include <KFilterEffectFactoryBase.h>

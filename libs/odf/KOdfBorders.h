@@ -20,13 +20,13 @@
  */
 
 
-#ifndef KOBORDER_H
-#define KOBORDER_H
+#ifndef KODFBORDERS_H
+#define KODFBORDERS_H
 
 #include "kodf_export.h"
 
-#include <QColor>
-#include <QSharedData>
+#include <QtGui/QColor>
+#include <QtCore/QSharedData>
 
 class KOdfGenericStyle;
 class KOdfBordersPrivate;

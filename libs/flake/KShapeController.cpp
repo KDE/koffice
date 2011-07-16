@@ -31,7 +31,6 @@
 #include "KShapeConfigWidgetBase.h"
 #include "KShapeFactoryBase.h"
 #include "KShape.h"
-#include "KShapeRegistry.h"
 
 #include <kpagedialog.h>
 #include <klocale.h>

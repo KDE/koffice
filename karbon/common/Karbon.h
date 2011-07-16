@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef _KARBON_H_
-#define _KARBON_H_
+#ifndef KARBON_H
+#define KARBON_H
 
 #include "KResourceManager.h"
 
@@ -30,4 +30,4 @@ enum KarbonCanvasResource {
 };
 }
 
-#endif // _KARBON_H_
+#endif // KARBON_H

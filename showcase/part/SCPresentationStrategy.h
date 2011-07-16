@@ -18,8 +18,8 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#ifndef KPRPRESENTATIONSTRATEGY_H
-#define KPRPRESENTATIONSTRATEGY_H
+#ifndef SCPRESENTATIONSTRATEGY_H
+#define SCPRESENTATIONSTRATEGY_H
 
 #include "SCPresentationStrategyBase.h"
 
@@ -32,5 +32,5 @@ public:
     virtual bool keyPressEvent(QKeyEvent * event);
 };
 
-#endif /* KPRPRESENTATIONSTRATEGY_H */
+#endif /* SCPRESENTATIONSTRATEGY_H */
 

@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KPRPICTURESIMPORT_H
-#define KPRPICTURESIMPORT_H
+#ifndef SCPICTURESIMPORT_H
+#define SCPICTURESIMPORT_H
 
 #include <QObject>
 #include <KUrl>
@@ -53,4 +53,4 @@ private:
     QUndoCommand *m_cmd;
 };
 
-#endif /* KPRPICTURESIMPORT_H */
+#endif /* SCPICTURESIMPORT_H */

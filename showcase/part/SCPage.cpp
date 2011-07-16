@@ -174,7 +174,7 @@ void SCPage::saveOdfPageContent(KoPASavingContext &paContext) const
 {
     KXmlWriter &writer(paContext.xmlWriter());
     if (layout()) {
-        SCPageLayoutSharedSavingData * layouts = dynamic_cast<SCPageLayoutSharedSavingData *>(paContext.sharedData(KPR_PAGE_LAYOUT_SHARED_SAVING_ID));
+        SCPageLayoutSharedSavingData * layouts = dynamic_cast<SCPageLayoutSharedSavingData *>(paContext.sharedData(SC_PAGE_LAYOUT_SHARED_SAVING_ID));
         Q_ASSERT(layouts);
         if (layouts) {
             QString layoutStyle = layouts->pageLayoutStyle(layout());

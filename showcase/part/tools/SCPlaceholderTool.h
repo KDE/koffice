@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KPRPLACEHOLDERTOOL_H
-#define KPRPLACEHOLDERTOOL_H
+#ifndef SCPLACEHOLDERTOOL_H
+#define SCPLACEHOLDERTOOL_H
 
 #include <KToolBase.h>
 
@@ -39,4 +39,4 @@ public slots:
     virtual void activate(ToolActivation toolActivation, const QSet<KShape*> &shapes);
 };
 
-#endif /* KPRPLACEHOLDERTOOL_H */
+#endif /* SCPLACEHOLDERTOOL_H */

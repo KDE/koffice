@@ -18,8 +18,8 @@
    the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
    Boston, MA 02110-1301, USA.
  */
-#ifndef KO_RESOURCEMANAGER_H
-#define KO_RESOURCEMANAGER_H
+#ifndef K_RESOURCEMANAGER_H
+#define K_RESOURCEMANAGER_H
 
 #include <QObject>
 #include <QList>

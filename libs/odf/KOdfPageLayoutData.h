@@ -20,14 +20,14 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KOPAGELAYOUT_H
-#define KOPAGELAYOUT_H
+#ifndef KODFPAGELAYOUTDATA_H
+#define KODFPAGELAYOUTDATA_H
 
-#include "KOdfColumnData.h"
-#include "KOdfGenericStyles.h"
-#include "KOdfPageFormat.h"
-#include "KXmlReader.h"
-#include "KOdfBorders.h"
+#include "KOdfColumnData.h"		//krazy:exclude=includes
+#include "KOdfGenericStyles.h"		//krazy:exclude=includes
+#include "KOdfPageFormat.h"		//krazy:exclude=includes
+#include "KXmlReader.h"			//krazy:exclude=includes
+#include "KOdfBorders.h"		//krazy:exclude=includes
 
 #include "kodf_export.h"
 

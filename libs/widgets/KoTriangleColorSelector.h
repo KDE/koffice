@@ -16,10 +16,10 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-#ifndef _KO_TRIANGLE_COLOR_SELECTOR_H_
-#define _KO_TRIANGLE_COLOR_SELECTOR_H_
+#ifndef KO_TRIANGLE_COLOR_SELECTOR_H
+#define KO_TRIANGLE_COLOR_SELECTOR_H
 
-#include <QWidget>
+#include <QtGui/QWidget>
 
 #include "kowidgets_export.h"
 

@@ -19,8 +19,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOCREATESHAPESTOOL_H
-#define KOCREATESHAPESTOOL_H
+#ifndef KCREATESHAPESTOOL_H
+#define KCREATESHAPESTOOL_H
 
 #include "KInteractionTool.h"
 

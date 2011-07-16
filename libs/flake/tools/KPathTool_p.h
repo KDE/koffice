@@ -20,8 +20,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOPATHTOOL_H
-#define KOPATHTOOL_H
+#ifndef KPATHTOOL_H
+#define KPATHTOOL_H
 
 //
 //  W A R N I N G

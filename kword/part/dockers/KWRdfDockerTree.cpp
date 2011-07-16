@@ -19,13 +19,14 @@
 
 #include "KWRdfDockerTree.h"
 
-#include <klocale.h>
-#include <kdebug.h>
-#include <kmimetype.h>
+#include <KDE/KLocale>
+#include <KDE/KDebug>
+#include <KDE/KMimeType>
 
-#include <QDragEnterEvent>
-#include <QDragMoveEvent>
-#include <QMimeData>
+#include <QtGui/QDragEnterEvent>
+#include <QtGui/QDragMoveEvent>
+#include <QtCore/QMimeData>
+#include <QtCore/QFile>
 
 #include <rdf/KoDocumentRdf.h>
 

@@ -16,8 +16,8 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#ifndef KOTEXTSHAPECONTAINERMODEL_H
-#define KOTEXTSHAPECONTAINERMODEL_H
+#ifndef KTEXTSHAPECONTAINERMODEL_H
+#define KTEXTSHAPECONTAINERMODEL_H
 
 #include <KShapeContainerModel.h>
 #include <KShapeContainer.h>

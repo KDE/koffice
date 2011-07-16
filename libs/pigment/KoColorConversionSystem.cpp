@@ -18,9 +18,10 @@
 */
 
 #include "KoColorConversionSystem.h"
+#include "KoColorConversionSystem_p.h"
 
-#include <QHash>
-#include <QString>
+#include <QtCore/QHash>
+#include <QtCore/QString>
 
 #include "DebugPigment.h"
 
@@ -35,7 +36,6 @@
 #include "KoCopyColorConversionTransformation.h"
 #include "KoMultipleColorConversionTransformation.h"
 
-#include "KoColorConversionSystem_p.h"
 
 KoColorConversionSystem::KoColorConversionSystem() : d(new Private)
 {

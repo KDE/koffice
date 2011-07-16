@@ -20,7 +20,7 @@
 #ifndef KOPAGEAPP_H
 #define KOPAGEAPP_H
 
-#include <KResourceManager.h>
+#include <KResourceManager.h>	//krazy:exclude=includes
 
 /// add docs please
 namespace KoPageApp

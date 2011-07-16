@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KPRBARWIPEFROMBOTTOMSTRATEGY_H
-#define KPRBARWIPEFROMBOTTOMSTRATEGY_H
+#ifndef SCBARWIPEFROMBOTTOMSTRATEGY_H
+#define SCBARWIPEFROMBOTTOMSTRATEGY_H
 
 #include "pageeffects/SCPageEffectStrategy.h"
 
@@ -36,4 +36,4 @@ public:
     virtual void next(const SCPageEffect::Data &data);
 };
 
-#endif // KPRBARWIPEFROMBOTTOMSTRATEGY_H
+#endif // SCBARWIPEFROMBOTTOMSTRATEGY_H

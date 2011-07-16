@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KPRANIMATIONBASE_H
-#define KPRANIMATIONBASE_H
+#ifndef SCANIMATIONBASE_H
+#define SCANIMATIONBASE_H
 
 #include <QAbstractAnimation>
 #include "SCAnimationData.h"
@@ -56,4 +56,4 @@ protected:
     int m_duration; // in milliseconds
 };
 
-#endif /* KPRANIMATIONBASE_H */
+#endif /* SCANIMATIONBASE_H */

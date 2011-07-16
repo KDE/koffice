@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KPRWINDSHIELDWIPESTRATEGY_H
-#define KPRWINDSHIELDWIPESTRATEGY_H
+#ifndef SCWINDSHIELDWIPESTRATEGY_H
+#define SCWINDSHIELDWIPESTRATEGY_H
 
 #include <SCPageEffectStrategy.h>
 #include "SCSweepWipeStrategy.h"
@@ -33,4 +33,4 @@ public:
     virtual void paintStep(QPainter &p, int currPos, const SCPageEffect::Data &data);
 };
 
-#endif // KPRWINDSHIELDWIPESTRATEGY_H
+#endif // SCWINDSHIELDWIPESTRATEGY_H

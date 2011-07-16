@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KO_DOCUMENT_Rdf_Base_H
-#define KO_DOCUMENT_Rdf_Base_H
+#ifndef K_DOCUMENT_Rdf_Base_H
+#define K_DOCUMENT_Rdf_Base_H
 
 #include "kotext_export.h"
 

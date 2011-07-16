@@ -21,12 +21,12 @@
  * Boston, MA 02110-1301, USA.
  */
 #include "KTableCellStyle.h"
+#include "KTableCellStyle_p.h"
 #include "KStyleManager.h"
 #include <KOdfGenericStyle.h>
 #include <KOdfGenericStyles.h>
 #include "Styles_p.h"
 #include "KTextDocument.h"
-#include "KTableCellStyle_p.h"
 
 #include <KDebug>
 

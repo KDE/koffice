@@ -18,8 +18,8 @@
   Boston, MA 02110-1301, USA.
 */
 
-#ifndef KO_INPUT_DEVICE_H_
-#define KO_INPUT_DEVICE_H_
+#ifndef K_INPUT_DEVICE_H
+#define K_INPUT_DEVICE_H
 
 #include "flake_export.h"
 

@@ -19,8 +19,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KOINTERACTIONSTRATEGY_H
-#define KOINTERACTIONSTRATEGY_H
+#ifndef KINTERACTIONSTRATEGY_H
+#define KINTERACTIONSTRATEGY_H
 
 #include "flake_export.h"
 

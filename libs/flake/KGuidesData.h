@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KOGUIDESDATA_H
-#define KOGUIDESDATA_H
+#ifndef KGUIDESDATA_H
+#define KGUIDESDATA_H
 
 #include "flake_export.h"
 #include <QtCore/QList>

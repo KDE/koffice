@@ -20,8 +20,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KOGENSTYLES_H
-#define KOGENSTYLES_H
+#ifndef KODFGENERICSTYLES_H
+#define KODFGENERICSTYLES_H
 
 #include <QtCore/QList>
 #include <QtCore/QMap>
@@ -29,7 +29,8 @@
 #include <QtCore/QSet>
 #include <QtCore/QString>
 #include <QtCore/QFlags>
-#include <KOdfGenericStyle.h>
+
+#include "KOdfGenericStyle.h"			//krazy:exclude=includes
 
 class KOdfStore;
 class KOdfFontData;
@@ -266,4 +267,4 @@ Q_DECLARE_OPERATORS_FOR_FLAGS(KOdfGenericStyles::InsertionFlags)
 //! Debug stream operator.
 KODF_EXPORT QDebug operator<<(QDebug dbg, const KOdfGenericStyles& styles);
 
-#endif /* KOGENSTYLES_H */
+#endif /* KODFGENERICSTYLES_H */

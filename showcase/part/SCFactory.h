@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KPRFACTORY_H
-#define KPRFACTORY_H
+#ifndef SCFACTORY_H
+#define SCFACTORY_H
 
 #include <KPluginFactory>
 #include "showcase_export.h"

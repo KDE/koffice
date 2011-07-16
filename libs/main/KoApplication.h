@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef __ko_app_h__
-#define __ko_app_h__
+#ifndef KO_APPLICATION_H
+#define KO_APPLICATION_H
 
 namespace std { }
 using namespace std;

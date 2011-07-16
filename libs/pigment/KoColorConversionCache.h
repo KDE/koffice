@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef _KO_COLOR_CONVERSION_CACHE_HPP_
-#define _KO_COLOR_CONVERSION_CACHE_HPP_
+#ifndef KO_COLOR_CONVERSION_CACHE_H
+#define KO_COLOR_CONVERSION_CACHE_H
 
 class KoCachedColorConversionTransformation;
 class KoColorSpace;

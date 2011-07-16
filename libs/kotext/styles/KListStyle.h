@@ -18,8 +18,8 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#ifndef KOLISTSTYLE_H
-#define KOLISTSTYLE_H
+#ifndef KLISTSTYLE_H
+#define KLISTSTYLE_H
 
 #include "kotext_export.h"
 

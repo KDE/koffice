@@ -19,8 +19,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOSHAPEFACTORYBASE_H
-#define KOSHAPEFACTORYBASE_H
+#ifndef KSHAPEFACTORYBASE_H
+#define KSHAPEFACTORYBASE_H
 
 #include <QStringList>
 #include <QString>

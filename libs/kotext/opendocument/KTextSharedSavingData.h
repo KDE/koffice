@@ -18,8 +18,8 @@ the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
 * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KOTEXTSHAREDSAVINGDATA_H
-#define KOTEXTSHAREDSAVINGDATA_H
+#ifndef KTEXTSHAREDSAVINGDATA_H
+#define KTEXTSHAREDSAVINGDATA_H
 
 #include <KSharedSavingData.h>
 #include "kotext_export.h"
@@ -62,4 +62,4 @@ private:
     Private * const d;
 };
 
-#endif // KOTEXTSHAREDSAVINGDATA_H
+#endif // KTEXTSHAREDSAVINGDATA_H

@@ -16,8 +16,8 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#ifndef KOSHAPECONNECTION_H
-#define KOSHAPECONNECTION_H
+#ifndef KSHAPECONNECTION_H
+#define KSHAPECONNECTION_H
 
 #include "flake_export.h"
 

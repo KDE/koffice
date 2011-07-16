@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOSUBPATHREMOVECOMMAND_H
-#define KOSUBPATHREMOVECOMMAND_H
+#ifndef KSUBPATHREMOVECOMMAND_H
+#define KSUBPATHREMOVECOMMAND_H
 
 #include <QUndoCommand>
 #include "flake_export.h"
@@ -51,4 +51,4 @@ private:
     KoSubpath *m_subpath;
 };
 
-#endif // KOSUBPATHREMOVECOMMAND_H
+#endif // KSUBPATHREMOVECOMMAND_H

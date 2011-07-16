@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef __KOSHAPELAYER_H__
-#define __KOSHAPELAYER_H__
+#ifndef KSHAPELAYER_H
+#define KSHAPELAYER_H
 
 #include "KShapeContainer.h"
 #include "flake_export.h"
@@ -51,5 +51,5 @@ private:
     Q_DECLARE_PRIVATE(KShapeLayer)
 };
 
-#endif // __KOSHAPELAYER_H__
+#endif // KSHAPELAYER_H
 

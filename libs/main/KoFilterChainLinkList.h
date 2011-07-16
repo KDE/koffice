@@ -19,7 +19,7 @@ Boston, MA 02110-1301, USA.
 #ifndef KOFILTERCHAINLINKLIST_H
 #define KOFILTERCHAINLINKLIST_H
 
-#include <QList>
+#include <QtCore/QList>
 
 namespace KOfficeFilter {
 

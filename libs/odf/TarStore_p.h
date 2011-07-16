@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef koTarStore_h
-#define koTarStore_h
+#ifndef TARSTORE_P_H
+#define TARSTORE_P_H
 
 //
 //  W A R N I N G

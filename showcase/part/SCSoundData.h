@@ -18,8 +18,8 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#ifndef KPRSOUNDDATA_H
-#define KPRSOUNDDATA_H
+#ifndef SCSOUNDDATA_H
+#define SCSOUNDDATA_H
 
 #include "showcase_export.h"
 

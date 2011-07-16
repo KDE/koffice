@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KPRFADEOVERCOLORSTRATEGY_H
-#define KPRFADEOVERCOLORSTRATEGY_H
+#ifndef SCFADEOVERCOLORSTRATEGY_H
+#define SCFADEOVERCOLORSTRATEGY_H
 
 #include "pageeffects/SCPageEffectStrategy.h"
 
@@ -52,4 +52,4 @@ private:
     QColor m_fadeColor;
 };
 
-#endif /* KPRFADEOVERCOLORSTRATEGY_H */
+#endif /* SCFADEOVERCOLORSTRATEGY_H */

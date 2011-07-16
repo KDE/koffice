@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef __KoApplicationAdaptor_h__
-#define __KoApplicationAdaptor_h__
+#ifndef KO_APPLICATION_ADAPTOR_H
+#define KO_APPLICATION_ADAPTOR_H
 
 #include <QtCore/QObject>
 #include <QtDBus/QtDBus>
@@ -79,5 +79,4 @@ signals:
     void documentClosed(const QString &ref);
 };
 
-#endif
-
+#endif //KO_APPLICATION_ADAPTOR_H

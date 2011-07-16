@@ -17,19 +17,19 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef __rdf_KoRdfSemanticItem_h__
-#define __rdf_KoRdfSemanticItem_h__
+#ifndef KO_RDF_SEMANTIC_ITEM_H
+#define KO_RDF_SEMANTIC_ITEM_H
 
 #include "komain_export.h"
 
-#include <QObject>
-#include <QSharedData>
-#include <QMimeData>
-#include <KDateTime>
+#include <QtCore/QObject>
+#include <QtCore/QSharedData>
+#include <QtCore/QMimeData>
+#include <KDE/KDateTime>
 #include <Soprano/Soprano>
 
 #include "RdfForward.h"
-#include "KoSemanticStylesheet.h"
+#include "KoSemanticStylesheet.h"		//krazy:exclude=includes
 
 class KCanvasBase;
 class QTreeWidgetItem;

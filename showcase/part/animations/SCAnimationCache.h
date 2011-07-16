@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KPRANIMATIONCACHE_H
-#define KPRANIMATIONCACHE_H
+#ifndef SCANIMATIONCACHE_H
+#define SCANIMATIONCACHE_H
 
 #include <QMap>
 #include <QString>
@@ -178,4 +178,4 @@ private:
 };
 
 
-#endif /* KPRANIMATIONCACHE_H */
+#endif /* SCANIMATIONCACHE_H */

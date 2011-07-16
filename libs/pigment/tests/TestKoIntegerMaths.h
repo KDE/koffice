@@ -16,8 +16,8 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-#ifndef KO_INTEGER_MATHS_TESTER_H
-#define KO_INTEGER_MATHS_TESTER_H
+#ifndef TEST_KO_INTEGER_MATHS_H
+#define TEST_KO_INTEGER_MATHS_H
 
 #include <QtTest/QtTest>
 

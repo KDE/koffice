@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef _KARBONTOOLSPLUGIN_H_
-#define _KARBONTOOLSPLUGIN_H_
+#ifndef KARBONTOOLSPLUGIN_H
+#define KARBONTOOLSPLUGIN_H
 
 #include <QtCore/QObject>
 #include <QtCore/QVariant>
@@ -33,4 +33,4 @@ public:
 
 };
 
-#endif // _KARBONTOOLSPLUGIN_H_
+#endif // KARBONTOOLSPLUGIN_H

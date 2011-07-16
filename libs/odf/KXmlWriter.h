@@ -21,10 +21,10 @@
 #ifndef XMLWRITER_H
 #define XMLWRITER_H
 
-#include <QString>
-#include <QStack>
-#include <QMap>
-#include <QIODevice>
+#include <QtCore/QString>
+#include <QtCore/QStack>
+#include <QtCore/QMap>
+#include <QtCore/QIODevice>
 #include "kodf_export.h"
 
 

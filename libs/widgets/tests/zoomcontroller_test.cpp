@@ -16,6 +16,7 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
+#include "zoomcontroller_test.h"
 
 #include <QTest>
 #include <QCoreApplication>
@@ -29,8 +30,6 @@
 #include "KoZoomController.h"
 #include "KoDpi.h"
 #include "KUnit.h"
-
-#include "zoomcontroller_test.h"
 
 void zoomcontroller_test::testApi()
 {

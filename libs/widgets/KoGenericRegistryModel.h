@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef _KO_GENERIC_REGISTRY_MODEL_H_
-#define _KO_GENERIC_REGISTRY_MODEL_H_
+#ifndef KO_GENERIC_REGISTRY_MODEL_H
+#define KO_GENERIC_REGISTRY_MODEL_H
 
 #include <QtCore/QAbstractListModel>
 #include "KGenericRegistry.h"

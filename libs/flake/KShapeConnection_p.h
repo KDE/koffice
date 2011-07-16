@@ -16,8 +16,8 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#ifndef KOSHAPECONNECTION_P_H
-#define KOSHAPECONNECTION_P_H
+#ifndef KSHAPECONNECTION_P_H
+#define KSHAPECONNECTION_P_H
 #include "KShapeConnection.h"
 
 #include <QStringList>

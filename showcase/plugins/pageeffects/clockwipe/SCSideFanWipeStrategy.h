@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KPRSIDEFANWIPESTRATEGY_H
-#define KPRSIDEFANWIPESTRATEGY_H
+#ifndef SCSIDEFANWIPESTRATEGY_H
+#define SCSIDEFANWIPESTRATEGY_H
 
 #include <SCPageEffectStrategy.h>
 
@@ -38,4 +38,4 @@ private:
     int m_fanCount;
 };
 
-#endif // KPRSIDEFANWIPESTRATEGY_H
+#endif // SCSIDEFANWIPESTRATEGY_H

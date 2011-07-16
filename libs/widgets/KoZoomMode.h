@@ -17,11 +17,11 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef _KOZOOMMODE_H_
-#define _KOZOOMMODE_H_
+#ifndef KOZOOMMODE_H
+#define KOZOOMMODE_H
 
-#include <QString>
-#include <QFlags>
+#include <QtCore/QString>
+#include <QtCore/QFlags>
 #include "kowidgets_export.h"
 
 /**

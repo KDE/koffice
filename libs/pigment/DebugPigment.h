@@ -17,10 +17,10 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef _DEBUG_PIGMENT_H_
-#define _DEBUG_PIGMENT_H_
+#ifndef DEBUG_PIGMENT_H
+#define DEBUG_PIGMENT_H
 
-#include <kdebug.h>
+#include <KDE/KDebug>
 
 #define DBG_PIGMENT 30008
 

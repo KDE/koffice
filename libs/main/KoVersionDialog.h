@@ -18,12 +18,12 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef __VERSION_DIALOG__
-#define __VERSION_DIALOG__
+#ifndef KO_VERSION_DIALOG_H
+#define KO_VERSION_DIALOG_H
 
 #include <kdialog.h>
 
-#include "KoDocument.h"
+#include "KoDocument.h"	//krazy:exclude=includes
 
 class QPushButton;
 class QTreeWidget;

@@ -20,10 +20,10 @@
 
 #include <QtGui/QGradient>
 
-#include "KoColor.h"
-#include "KoColorSpace.h"
-#include "KoResource.h"
-#include <pigment_export.h>
+#include "KoColor.h"			//krazy:exclude=includes
+#include "KoColorSpace.h"		//krazy:exclude=includes
+#include "KoResource.h"			//krazy:exclude=includes
+#include <pigment_export.h>		
 
 /**
  * KoAbstractGradient is the base class of all gradient resources

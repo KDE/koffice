@@ -18,13 +18,19 @@
 
 #include "rtreetestapp.h"
 
-#include <QApplication>
-#include <QtGui>
-#include <QPainterPath>
-#include <QLayout>
-#include <QPoint>
-#include <QPointF>
-#include <QDebug>
+#include <QtGui/QApplication>
+#include <QtGui/QPainterPath>
+#include <QtGui/QLayout>
+#include <QtCore/QPoint>
+#include <QtCore/QPointF>
+#include <QtCore/QDebug>
+#include <QtCore/QFile>
+#include <QtCore/QTimer>
+#include <QtGui/QAction>
+#include <QtGui/QMessageBox>
+#include <QtGui/QMenuBar>
+#include <QtGui/QMenu>
+#include <QtGui/QStatusBar>
 
 #include "Tool.h"
 

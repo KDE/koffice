@@ -17,13 +17,14 @@
  * Boston, MA 02110-1301, USA.
  */
 
+#include "KDeletedColumnData_p.h"
+#include "KDeletedCellData_p.h"
+
 #include <QTextTableCellFormat>
 #include <QTextDocumentFragment>
 #include <QTextCursor>
 #include <QTextTable>
 
-#include "KDeletedColumnData_p.h"
-#include "KDeletedCellData_p.h"
 #include <KTableColumnAndRowStyleManager.h>
 
 KDeletedColumnData::KDeletedColumnData(QTextTable *table, int columnNumber)

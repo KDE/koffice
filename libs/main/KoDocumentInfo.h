@@ -29,7 +29,7 @@
 
 #include <kconfig.h>
 #include "komain_export.h"
-#include <KXmlReader.h>
+#include <KXmlReader.h>				//krazy:exclude=includes
 
 class QDomDocument;
 class QDomElement;

@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOSHAPEDELETECOMMAND_H
-#define KOSHAPEDELETECOMMAND_H
+#ifndef KSHAPEDELETECOMMAND_H
+#define KSHAPEDELETECOMMAND_H
 
 #include "flake_export.h"
 #include <QUndoCommand>

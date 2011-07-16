@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOTEXTEDITINGFACTORY_H
-#define KOTEXTEDITINGFACTORY_H
+#ifndef KTEXTEDITINGFACTORY_H
+#define KTEXTEDITINGFACTORY_H
 
 #include <QString>
 #include <QObject>

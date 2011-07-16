@@ -21,9 +21,9 @@
 #include <QtCore/QPair>
 #include <QtGui/QGradient>
 
-#include "KoColor.h"
-#include "KoAbstractGradient.h"
-#include "KoResource.h"
+#include "KoColor.h"				//krazy:exclude=includes
+#include "KoAbstractGradient.h"			//krazy:exclude=includes
+#include "KoResource.h"				//krazy:exclude=includes
 #include <pigment_export.h>
 
 class QFile;

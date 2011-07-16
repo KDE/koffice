@@ -21,8 +21,8 @@
 #ifndef KO_UPDATER_H
 #define KO_UPDATER_H
 
-#include "KoProgressProxy.h"
-#include <QPointer>
+#include "KoProgressProxy.h"		//krazy:exclude=includes
+#include <QtCore/QPointer>
 
 class KoProgressUpdater;
 class KoUpdaterPrivate;

@@ -20,8 +20,8 @@
  *  Boston, MA 02110-1301, USA.
  */
 
-#ifndef KPRDECLARATIONS_H
-#define KPRDECLARATIONS_H
+#ifndef SCDECLARATIONS_H
+#define SCDECLARATIONS_H
 
 #include <QString>
 #include <QHash>
@@ -76,4 +76,4 @@ private:
     QHash<Type, QHash<QString, QVariant> > m_declarations;
 };
 
-#endif /* KPRDECLARATIONS_H */
+#endif /* SCDECLARATIONS_H */

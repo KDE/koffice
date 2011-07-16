@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KODRAGODFSAVEHELPER_H
-#define KODRAGODFSAVEHELPER_H
+#ifndef KDRAGODFSAVEHELPER_H
+#define KDRAGODFSAVEHELPER_H
 
 #include <KShapeSavingContext.h>
 

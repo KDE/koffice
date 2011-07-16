@@ -22,8 +22,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KOGENSTYLE_H
-#define KOGENSTYLE_H
+#ifndef KODFGENERICSTYLE_H
+#define KODFGENERICSTYLE_H
 
 #include <QtCore/QList>
 #include <QtCore/QMap>
@@ -445,4 +445,4 @@ private:
     friend class KOdfGenericStyles;
 };
 
-#endif /* KOGENSTYLE_H */
+#endif /* KODFGENERICSTYLE_H */

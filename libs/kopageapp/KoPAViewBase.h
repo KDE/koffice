@@ -19,8 +19,8 @@
 #ifndef KOPAVIEWBASE_H
 #define KOPAVIEWBASE_H
 
-#include "KoPageApp.h"
-#include "KoPAViewMode.h"
+#include "KoPageApp.h"			//krazy:exclude=includes
+#include "KoPAViewMode.h"		//krazy:exclude=includes
 
 class KoPACanvasBase;
 class KViewConverter;

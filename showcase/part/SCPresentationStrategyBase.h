@@ -18,8 +18,8 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#ifndef KPRPRESENTATIONSTRATEGYBASE_H
-#define KPRPRESENTATIONSTRATEGYBASE_H
+#ifndef SCPRESENTATIONSTRATEGYBASE_H
+#define SCPRESENTATIONSTRATEGYBASE_H
 
 class QWidget;
 class QKeyEvent;
@@ -51,5 +51,5 @@ protected:
 
 };
 
-#endif /* KPRPRESENTATIONSTRATEGYBASE_H */
+#endif /* SCPRESENTATIONSTRATEGYBASE_H */
 

@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KPRANIMATIONDATA_H
-#define KPRANIMATIONDATA_H
+#ifndef SCANIMATIONDATA_H
+#define SCANIMATIONDATA_H
 
 class SCAnimationCache;
 
@@ -30,4 +30,4 @@ public:
     virtual void init(SCAnimationCache *animationCache, int step) = 0;
 };
 
-#endif // KPRANIMATIONDATA_H
+#endif // SCANIMATIONDATA_H

@@ -24,8 +24,8 @@
 
 #include "kowidgets_export.h"
 
-#include <KUnit.h>
-#include <QDoubleSpinBox>
+#include <KUnit.h>				//krazy:exclude=includes
+#include <QtGui/QDoubleSpinBox>
 
 /**
  * Spin box for double precision numbers with unit display.

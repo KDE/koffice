@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KPRSOUNDEVENTACTION_H
-#define KPRSOUNDEVENTACTION_H
+#ifndef SCSOUNDEVENTACTION_H
+#define SCSOUNDEVENTACTION_H
 
 #include <KEventAction.h>
 
@@ -56,4 +56,4 @@ private:
     SCSoundData *m_soundData;
 };
 
-#endif /* KPRSOUNDEVENTACTION_H */
+#endif /* SCSOUNDEVENTACTION_H */

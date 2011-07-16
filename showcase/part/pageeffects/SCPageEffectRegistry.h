@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KPRPAGEEFFECTREGISTRY_H
-#define KPRPAGEEFFECTREGISTRY_H
+#ifndef SCPAGEEFFECTREGISTRY_H
+#define SCPAGEEFFECTREGISTRY_H
 
 #include <KGenericRegistry.h>
 
@@ -46,4 +46,4 @@ private:
     Private * const d;
 };
 
-#endif /* KPRPAGEEFFECTREGISTRY_H */
+#endif /* SCPAGEEFFECTREGISTRY_H */

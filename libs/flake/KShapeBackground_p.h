@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KoShapeBackgroundPrivate_H
-#define KoShapeBackgroundPrivate_H
+#ifndef KSHAPEBACKGROUND_P_H
+#define KSHAPEBACKGROUND_P_H
 
 //
 //  W A R N I N G

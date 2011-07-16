@@ -19,6 +19,7 @@
  */
 
 #include "KoList.h"
+#include "KoList_p.h"
 #include "KTextDocument.h"
 #include "styles/KListLevelProperties.h"
 #include "KTextBlockData.h"
@@ -31,7 +32,6 @@
 #include <QWeakPointer>
 #include <QBitArray>
 
-#include "KoList_p.h"
 
 
 KoList::KoList(const QTextDocument *document, KListStyle *style, KoList::Type type)

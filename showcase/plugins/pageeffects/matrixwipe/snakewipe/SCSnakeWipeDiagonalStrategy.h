@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KPRSNAKEWIPEDIAGONALSTRATEGY_H
-#define KPRSNAKEWIPEDIAGONALSTRATEGY_H
+#ifndef SCSNAKEWIPEDIAGONALSTRATEGY_H
+#define SCSNAKEWIPEDIAGONALSTRATEGY_H
 
 #include "../SCMatrixWipeStrategy.h"
 #include <QtCore/QVector>
@@ -33,4 +33,4 @@ protected:
     QVector<int> m_indices;
 };
 
-#endif // KPRSNAKEWIPEDIAGONALSTRATEGY_H
+#endif // SCSNAKEWIPEDIAGONALSTRATEGY_H

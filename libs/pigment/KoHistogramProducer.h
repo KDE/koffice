@@ -16,16 +16,16 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-#ifndef _KO_HISTOGRAM_PRODUCER_
-#define _KO_HISTOGRAM_PRODUCER_
+#ifndef KO_HISTOGRAM_PRODUCER_H
+#define KO_HISTOGRAM_PRODUCER_H
 
-#include <qglobal.h>
-#include <ksharedptr.h>
+#include <QtCore/QtGlobal>
+#include <KDE/KSharedPtr>
 
 #include "pigment_export.h"
 
-#include <KGenericRegistry.h>
-#include <KoID.h>
+#include <KGenericRegistry.h>	//krazy:exclude=includes
+#include "KoID.h"		//krazy:exclude=includes
 
 class QString;
 class KoChannelInfo;
@@ -137,4 +137,4 @@ private:
     KoHistogramProducerFactoryRegistry operator=(const KoHistogramProducerFactoryRegistry&);
 };
 
-#endif // _KO_HISTOGRAM_PRODUCER
+#endif // KO_HISTOGRAM_PRODUCER_H

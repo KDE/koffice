@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KPRANIMATIONATTRIBUTE_H
-#define KPRANIMATIONATTRIBUTE_H
+#ifndef SCANIMATIONATTRIBUTE_H
+#define SCANIMATIONATTRIBUTE_H
 
 #include <QString>
 
@@ -38,4 +38,4 @@ protected:
     QString m_attributeName;
 };
 
-#endif // KPRANIMATIONATTRIBUTE_H
+#endif // SCANIMATIONATTRIBUTE_H

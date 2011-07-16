@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef _KO_CHROMATICITIES_H_
-#define _KO_CHROMATICITIES_H_
+#ifndef KO_CHROMATICITIES_H
+#define KO_CHROMATICITIES_H
 
 struct KoCIExyY {
     qreal x;

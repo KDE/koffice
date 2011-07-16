@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KPRANIMTRANSITIONFILTER_H
-#define KPRANIMTRANSITIONFILTER_H
+#ifndef SCANIMTRANSITIONFILTER_H
+#define SCANIMTRANSITIONFILTER_H
 
 #include "SCAnimationBase.h"
 
@@ -39,4 +39,4 @@ private:
     bool m_visible;
 };
 
-#endif /* KPRANIMTRANSITIONFILTER_H */
+#endif /* SCANIMTRANSITIONFILTER_H */

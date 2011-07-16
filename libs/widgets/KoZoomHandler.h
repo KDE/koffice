@@ -22,8 +22,8 @@
 #define KOZOOMHANDLER_H
 
 #include "kowidgets_export.h"
-#include <KoZoomMode.h>
-#include <KViewConverter.h>
+#include "KoZoomMode.h"				//krazy:exclude=includes
+#include <KViewConverter.h>			//krazy:exclude=includes
 
 /**
  * This class handles the zooming and DPI stuff (conversions between

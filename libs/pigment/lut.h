@@ -25,8 +25,8 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef _LUT_H_
-#define _LUT_H_
+#ifndef LUT_H
+#define LUT_H
 
 template<typename _InputT_>
 class LutKey;

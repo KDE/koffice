@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOTEXTSHAPEDATA_H
-#define KOTEXTSHAPEDATA_H
+#ifndef KTEXTSHAPEDATA_H
+#define KTEXTSHAPEDATA_H
 
 #include "KoText.h"
 #include "kotext_export.h"

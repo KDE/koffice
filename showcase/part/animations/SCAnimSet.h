@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KPRANIMSET_H
-#define KPRANIMSET_H
+#ifndef SCANIMSET_H
+#define SCANIMSET_H
 
 #include "SCAnimationBase.h"
 
@@ -40,4 +40,4 @@ private:
     bool m_visible;
 };
 
-#endif /* KPRANIMSET_H */
+#endif /* SCANIMSET_H */

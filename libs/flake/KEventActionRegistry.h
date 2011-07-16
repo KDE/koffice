@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KOEVENTACTIONREGISTRY_H
-#define KOEVENTACTIONREGISTRY_H
+#ifndef KEVENTACTIONREGISTRY_H
+#define KEVENTACTIONREGISTRY_H
 
 #include <QList>
 #include <QSet>

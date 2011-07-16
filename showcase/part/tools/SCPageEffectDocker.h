@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KPRPAGEEFFECTDOCKER_H
-#define KPRPAGEEFFECTDOCKER_H
+#ifndef SCPAGEEFFECTDOCKER_H
+#define SCPAGEEFFECTDOCKER_H
 
 #include <QWidget>
 
@@ -66,4 +66,4 @@ private:
     SCViewModePreviewPageEffect *m_previewMode;
 };
 
-#endif // KPRPAGEEFFECTDOCKER_H
+#endif // SCPAGEEFFECTDOCKER_H

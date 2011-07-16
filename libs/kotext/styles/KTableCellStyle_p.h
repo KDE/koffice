@@ -19,8 +19,8 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#ifndef KOTABLECELLSTYLE_P_H
-#define KOTABLECELLSTYLE_P_H
+#ifndef KTABLECELLSTYLE_P_H
+#define KTABLECELLSTYLE_P_H
 
 //
 //  W A R N I N G
@@ -33,6 +33,7 @@
 // We mean it.
 //
 
+#include "Styles_p.h"
 #include "KTableBorderStyle_p.h"
 
 class KTableCellStylePrivate : public KTableBorderStylePrivate

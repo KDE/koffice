@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOSNAPSTRATEGY_H
-#define KOSNAPSTRATEGY_H
+#ifndef KSNAPSTRATEGY_H
+#define KSNAPSTRATEGY_H
 
 //
 //  W A R N I N G

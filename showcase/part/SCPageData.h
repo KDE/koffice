@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KPRPAGEDATA_H
-#define KPRPAGEDATA_H
+#ifndef SCPAGEDATA_H
+#define SCPAGEDATA_H
 
 #include "SCShapeAnimations.h"
 #include "pagelayout/SCPlaceholders.h"
@@ -38,4 +38,4 @@ private:
     SCPlaceholders m_placeholders;
 };
 
-#endif /* KPRPAGEDATA_H */
+#endif /* SCPAGEDATA_H */

@@ -26,6 +26,8 @@
  */
 
 #include "KTextLoader.h"
+#include "KTextLoader_p.h"
+
 #include <KTextMeta.h>
 #include <KoBookmark.h>
 #include <KoBookmarkManager.h>
@@ -87,7 +89,6 @@
 #include <QTextStream>
 #include <QXmlStreamReader>
 
-#include "KTextLoader_p.h"
 // if defined then debugging is enabled
 // #define KOOPENDOCUMENTLOADER_DEBUG
 

@@ -17,15 +17,15 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KOGENCHANGE_H
-#define KOGENCHANGE_H
+#ifndef KODFGENERICCHANGE_H
+#define KODFGENERICCHANGE_H
 
 #include <QtCore/QList>
 #include <QtCore/QMap>
 #include <QtCore/QString>
 #include "kodf_export.h"
 
-#include <QByteArray>
+#include <QtCore/QByteArray>
 
 #include <kdebug.h>
 
@@ -170,4 +170,4 @@ private:
     QMap<QString, QString> m_literalData;
 };
 
-#endif /* KOGENCHANGE_H */
+#endif /* KODFGENERICCHANGE_H */

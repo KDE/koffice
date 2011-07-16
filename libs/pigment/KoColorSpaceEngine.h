@@ -17,11 +17,11 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef _KO_COLOR_SPACE_ENGINE_H_
-#define _KO_COLOR_SPACE_ENGINE_H_
+#ifndef KO_COLOR_SPACE_ENGINE_H
+#define KO_COLOR_SPACE_ENGINE_H
 
-#include <KoColorConversionTransformationAbstractFactory.h>
-#include <KGenericRegistry.h>
+#include "KoColorConversionTransformationAbstractFactory.h"		//krazy:exclude=includes
+#include <KGenericRegistry.h>						//krazy:exclude=includes
 
 /**
  * A KoColorSpaceEngine is a class use to create color conversion

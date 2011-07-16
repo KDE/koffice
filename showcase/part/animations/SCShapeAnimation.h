@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KPRSHAPEANIMATION_H
-#define KPRSHAPEANIMATION_H
+#ifndef SCSHAPEANIMATION_H
+#define SCSHAPEANIMATION_H
 
 #include <QParallelAnimationGroup>
 #include "SCAnimationData.h"
@@ -67,4 +67,4 @@ private:
     KTextBlockData *m_textBlockData;
 };
 
-#endif /* KPRSHAPEANIMATION_H */
+#endif /* SCSHAPEANIMATION_H */

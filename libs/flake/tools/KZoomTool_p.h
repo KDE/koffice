@@ -19,8 +19,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOZOOMTOOL_H
-#define KOZOOMTOOL_H
+#ifndef KZOOMTOOL_H
+#define KZOOMTOOL_H
 
 //
 //  W A R N I N G

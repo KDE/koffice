@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef _KARBONPENCILTOOL_H_
-#define _KARBONPENCILTOOL_H_
+#ifndef KARBONPENCILTOOL_H
+#define KARBONPENCILTOOL_H
 
 #include <KToolBase.h>
 #include <QtCore/QRectF>
@@ -82,4 +82,4 @@ private:
     KPathPoint *m_hoveredPoint; ///< an existing path end point the mouse is hovering on
 };
 
-#endif // _KARBONPENCILTOOL_H_
+#endif // KARBONPENCILTOOL_H

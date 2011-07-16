@@ -18,11 +18,11 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KOODF_H
-#define KOODF_H
+#ifndef KODF_H
+#define KODF_H
 
 #include "kodf_export.h"
-#include "KXmlReader.h"
+#include "KXmlReader.h"				//krazy:exclude=includes
 
 #include <QtCore/QString>
 #include <QtCore/QPair>
@@ -146,4 +146,4 @@ namespace KOdf
     KODF_EXPORT bool isEncryptionSupported();
 }
 
-#endif /* KOODF_H */
+#endif /* KODF_H */

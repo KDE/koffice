@@ -19,8 +19,8 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#ifndef KOSECTIONSTYLE_H
-#define KOSECTIONSTYLE_H
+#ifndef KSECTIONSTYLE_H
+#define KSECTIONSTYLE_H
 
 #include "KOdfColumnData.h"
 #include "KoText.h"

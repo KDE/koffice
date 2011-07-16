@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef __koStore_h_
-#define __koStore_h_
+#ifndef KODFSTORE_H
+#define KODFSTORE_H
 
 #include <QtCore/QString>
 #include <QtCore/QStringList>

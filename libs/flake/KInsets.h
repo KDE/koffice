@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOINSETS_H
-#define KOINSETS_H
+#ifndef KINSETS_H
+#define KINSETS_H
 
 #include "flake_export.h"
 

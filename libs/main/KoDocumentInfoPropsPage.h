@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef _koDocumentPropsPage_h_
-#define _koDocumentPropsPage_h_
+#ifndef KO_DOCUMENT_INFO_PROPS_PAGE_H
+#define KO_DOCUMENT_INFO_PROPS_PAGE_H
 
 #include <kpropertiesdialog.h>
 #include "komain_export.h"
@@ -43,4 +43,4 @@ private:
     KoDocumentInfoPropsPagePrivate * const d;
 };
 
-#endif
+#endif //KO_DOCUMENT_INFO_PROPS_PAGE_H

@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KOSHAPELOADINGCONTEXT_H
-#define KOSHAPELOADINGCONTEXT_H
+#ifndef KSHAPELOADINGCONTEXT_H
+#define KSHAPELOADINGCONTEXT_H
 
 #include <QSet>
 #include <QString>

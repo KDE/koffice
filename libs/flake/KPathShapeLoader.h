@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef _KOPATHSHAPELOADER_H_
-#define _KOPATHSHAPELOADER_H_
+#ifndef KPATHSHAPELOADER_H
+#define KPATHSHAPELOADER_H
 
 #include "flake_export.h"
 
@@ -47,4 +47,4 @@ private:
     KPathShapeLoaderPrivate* const d;
 };
 
-#endif // _KOPATHSHAPELOADER_H_
+#endif // KPATHSHAPELOADER_H

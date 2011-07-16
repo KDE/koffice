@@ -18,8 +18,8 @@
 * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KPRVIEWMODESLIDESSORTER_H
-#define KPRVIEWMODESLIDESSORTER_H
+#ifndef SCVIEWMODESLIDESSORTER_H
+#define SCVIEWMODESLIDESSORTER_H
 
 #include <QSize>
 #include <QRect>
@@ -138,4 +138,4 @@ private:
     int m_lastItemNumber;
 };
 
-#endif // KPRVIEWMODESLIDESSORTER_H
+#endif // SCVIEWMODESLIDESSORTER_H

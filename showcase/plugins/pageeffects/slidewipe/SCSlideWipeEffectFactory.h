@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KPRSLIDEWIPEEFFECTFACTORY_H
-#define KPRSLIDEWIPEEFFECTFACTORY_H
+#ifndef SCSLIDEWIPEEFFECTFACTORY_H
+#define SCSLIDEWIPEEFFECTFACTORY_H
 
 #include "pageeffects/SCPageEffectFactory.h"
 
@@ -41,4 +41,4 @@ public:
     };
 };
 
-#endif /* KPRSLIDEWIPEEFFECTFACTORY_H */
+#endif /* SCSLIDEWIPEEFFECTFACTORY_H */

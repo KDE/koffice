@@ -17,7 +17,16 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include <QList>
+#ifndef KO_COLOR_CONVERSION_SYSTEM_P_H
+#define KO_COLOR_CONVERSION_SYSTEM_P_H
+
+#include <QtCore/QList>
+
+#include "DebugPigment.h"
+#include "KoColorSpaceFactory.h"
+#include "KoColorSpaceEngine.h"
+#include "KoColorConversionTransformationFactory.h"
+#include "KoColorModelStandardIds.h"
 
 struct KoColorConversionSystem::Node {
 
@@ -280,3 +289,5 @@ struct PathQualityChecker {
 };
 
 #undef CHECK_ONE_AND_NOT_THE_OTHER
+
+#endif //KO_COLOR_CONVERSION_SYSTEM_P_H

@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KPRSWEEPWIPESTRATEGY_H
-#define KPRSWEEPWIPESTRATEGY_H
+#ifndef SCSWEEPWIPESTRATEGY_H
+#define SCSWEEPWIPESTRATEGY_H
 
 #include <SCPageEffectStrategy.h>
 
@@ -34,4 +34,4 @@ protected:
     void drawSweep(QPainter &p, double startAngle, double rotationRange, QRect boundingRect, const SCPageEffect::Data &data);
 };
 
-#endif // KPRSWEEPWIPESTRATEGY_H
+#endif // SCSWEEPWIPESTRATEGY_H

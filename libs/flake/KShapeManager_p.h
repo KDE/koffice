@@ -17,6 +17,9 @@
  * Boston, MA 02110-1301, USA.
  */
 
+#ifndef KSHAPEMANAGER_P_H
+#define KSHAPEMANAGER_P_H
+
 #include "KShape_p.h"
 #include "KShapeGroup.h"
 #include <KRTree.h>
@@ -106,3 +109,5 @@ public:
     KShapeManagerPaintingStrategy *strategy;
     KShapeManager *q;
 };
+
+#endif //KSHAPEMANAGER_P_H

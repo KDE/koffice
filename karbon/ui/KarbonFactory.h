@@ -25,8 +25,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef __KARBON_FACTORY_H__
-#define __KARBON_FACTORY_H__
+#ifndef KARBON_FACTORY_H
+#define KARBON_FACTORY_H
 
 #include <KPluginFactory>
 #include <karbonui_export.h>
@@ -52,5 +52,4 @@ private:
     static KAboutData* s_aboutData;
 };
 
-#endif
-
+#endif //KARBON_FACTORY_H

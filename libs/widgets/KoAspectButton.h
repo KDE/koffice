@@ -19,7 +19,7 @@
 #ifndef KOASPECTBUTTON_H
 #define KOASPECTBUTTON_H
 
-#include <QAbstractButton>
+#include <QtGui/QAbstractButton>
 
 #include "kowidgets_export.h"
 

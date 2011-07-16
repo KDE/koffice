@@ -21,18 +21,19 @@
 #include "KoColorSpaceRegistry.h"
 #include "PluginLoader_p.h"
 
-#include <QHash>
+#include <QtCore/QReadWriteLock>
+#include <QtCore/QHash>
 
-#include <QStringList>
-#include <QDir>
+#include <QtCore/QStringList>
+#include <QtCore/QDir>
 
-#include <kcomponentdata.h>
-#include <kstandarddirs.h>
-#include <kmessagebox.h>
-#include <klocale.h>
-#include <kservice.h>
-#include <kservicetypetrader.h>
-#include <kglobal.h>
+#include <KDE/KComponentData>
+#include <KDE/KStandardDirs>
+#include <KDE/KMessageBox>
+#include <KDE/KLocale>
+#include <KDE/KService>
+#include <KDE/KServiceTypeTrader>
+#include <KDE/KGlobal>
 
 #include "DebugPigment.h"
 #include "KoBasicHistogramProducers.h"

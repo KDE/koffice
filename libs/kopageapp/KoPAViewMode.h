@@ -22,8 +22,8 @@
 
 #include "kopageapp_export.h"
 
-#include <QObject>
-#include <QPointF>
+#include <QtCore/QObject>
+#include <QtCore/QPointF>
 
 struct KOdfPageLayoutData;
 class KoPAViewBase;

@@ -17,8 +17,8 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#ifndef __KOVARIABLE_H__
-#define __KOVARIABLE_H__
+#ifndef KVARIABLE_H
+#define KVARIABLE_H
 
 // KOffice libs
 #include "KInlineObject.h"

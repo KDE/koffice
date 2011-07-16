@@ -17,8 +17,8 @@
    the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
 */
-#ifndef KOODFREADSTORE_H
-#define KOODFREADSTORE_H
+#ifndef KODFSTOREREADER_H
+#define KODFSTOREREADER_H
 
 #include "kodf_export.h"
 
@@ -115,4 +115,4 @@ private:
     Private * const d;
 };
 
-#endif /* KOODFREADSTORE_H */
+#endif /* KODFSTOREREADER_H */

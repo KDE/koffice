@@ -20,8 +20,8 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#ifndef KOPARAGRAPHSTYLE_H
-#define KOPARAGRAPHSTYLE_H
+#ifndef KPARAGRAPHSTYLE_H
+#define KPARAGRAPHSTYLE_H
 
 #include "KoText.h"
 #include "KOdfBorders.h"

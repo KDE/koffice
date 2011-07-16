@@ -19,8 +19,8 @@
    the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
 */
-#ifndef __KoViewAdaptor_h__
-#define __KoViewAdaptor_h__
+#ifndef KO_VIEW_ADAPTOR_H
+#define KO_VIEW_ADAPTOR_H
 
 #include <QtCore/QMap>
 #include <QtCore/QObject>
@@ -50,4 +50,4 @@ protected:
 
 };
 
-#endif
+#endif //KO_VIEW_ADAPTOR_H

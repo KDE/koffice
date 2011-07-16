@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef __rdf_KoRdfCalendarEvent_h__
-#define __rdf_KoRdfCalendarEvent_h__
+#ifndef KO_RDF_CALENDAR_EVENT_H
+#define KO_RDF_CALENDAR_EVENT_H
 
 #include "KoRdfSemanticItem.h"
 

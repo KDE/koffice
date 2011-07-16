@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KPRPAGEEFFECTSETCOMMAND_H
-#define KPRPAGEEFFECTSETCOMMAND_H
+#ifndef SCPAGEEFFECTSETCOMMAND_H
+#define SCPAGEEFFECTSETCOMMAND_H
 
 #include "showcase_export.h"
 
@@ -45,4 +45,4 @@ private:
     bool m_deleteNewPageEffect;
 };
 
-#endif /* KPRPAGEEFFECTSETCOMMAND_H */
+#endif /* SCPAGEEFFECTSETCOMMAND_H */

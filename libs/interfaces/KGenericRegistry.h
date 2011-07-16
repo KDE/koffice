@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef _KO_GENERIC_REGISTRY_H_
-#define _KO_GENERIC_REGISTRY_H_
+#ifndef K_GENERIC_REGISTRY_H
+#define K_GENERIC_REGISTRY_H
 
 #include <kdemacros.h>
 #include <QtCore/QList>

@@ -17,10 +17,10 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KOSLIDERCOMBO_H_
-#define KOSLIDERCOMBO_H_
+#ifndef KOSLIDERCOMBO_H
+#define KOSLIDERCOMBO_H
 
-#include <QComboBox>
+#include <QtGui/QComboBox>
 
 #include "kowidgets_export.h"
 

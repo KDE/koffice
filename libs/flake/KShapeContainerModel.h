@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOSHAPECONTAINERMODEL_H
-#define KOSHAPECONTAINERMODEL_H
+#ifndef KSHAPECONTAINERMODEL_H
+#define KSHAPECONTAINERMODEL_H
 
 #include "flake_export.h"
 

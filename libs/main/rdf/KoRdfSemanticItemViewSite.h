@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef __rdf_KoRdfSemanticItemViewSite_h__
-#define __rdf_KoRdfSemanticItemViewSite_h__
+#ifndef KO_RDF_SEMANTIC_ITEM_VIEW_SITE_H
+#define KO_RDF_SEMANTIC_ITEM_VIEW_SITE_H
 
 #include "komain_export.h"
 #include "RdfForward.h"
@@ -145,4 +145,3 @@ private:
 };
 
 #endif
-

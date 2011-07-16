@@ -16,8 +16,8 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#ifndef KOVARIABLEMANAGER_H
-#define KOVARIABLEMANAGER_H
+#ifndef KVARIABLEMANAGER_H
+#define KVARIABLEMANAGER_H
 
 #include "kotext_export.h"
 

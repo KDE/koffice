@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KPRANIMATIONFACTORY_H
-#define KPRANIMATIONFACTORY_H
+#ifndef SCANIMATIONFACTORY_H
+#define SCANIMATIONFACTORY_H
 
 class KXmlElement;
 class KShapeLoadingContext;
@@ -32,4 +32,4 @@ public:
                                                     SCShapeAnimation *shapeAnimation);
 };
 
-#endif /* KPRANIMATIONFACTORY_H */
+#endif /* SCANIMATIONFACTORY_H */

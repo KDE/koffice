@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KPRPLACEHOLDER_H
-#define KPRPLACEHOLDER_H
+#ifndef SCPLACEHOLDER_H
+#define SCPLACEHOLDER_H
 
 #include <QString>
 #include <QRectF>
@@ -91,4 +91,4 @@ private:
     QRectF m_relativeSize;
 };
 
-#endif /* KPRPLACEHOLDER_H */
+#endif /* SCPLACEHOLDER_H */

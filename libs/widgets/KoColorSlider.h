@@ -23,7 +23,7 @@
 #include <kselector.h>
 #include "kowidgets_export.h"
 
-#include <KoColor.h>
+#include <KoColor.h>				//krazy:exclude=includes
 
 class KOWIDGETS_EXPORT KoColorSlider : public KSelector
 {

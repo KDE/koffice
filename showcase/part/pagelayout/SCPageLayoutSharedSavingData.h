@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KPRPAGELAYOUTSHAREDSAVINGDATA_H
-#define KPRPAGELAYOUTSHAREDSAVINGDATA_H
+#ifndef SCPAGELAYOUTSHAREDSAVINGDATA_H
+#define SCPAGELAYOUTSHAREDSAVINGDATA_H
 
 #include <KSharedSavingData.h>
 #include <QMap>
@@ -26,7 +26,7 @@
 
 class SCPageLayout;
 
-#define KPR_PAGE_LAYOUT_SHARED_SAVING_ID "SCPageLayoutSharedSavingId"
+#define SC_PAGE_LAYOUT_SHARED_SAVING_ID "SCPageLayoutSharedSavingId"
 
 class SCPageLayoutSharedSavingData : public KSharedSavingData
 {
@@ -54,4 +54,4 @@ private:
     QMap<SCPageLayout *, QString> m_pageLayoutToName;
 };
 
-#endif /* KPRPAGELAYOUTSHAREDSAVINGDATA_H */
+#endif /* SCPAGELAYOUTSHAREDSAVINGDATA_H */

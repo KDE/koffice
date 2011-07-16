@@ -16,8 +16,8 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#ifndef KOINLINEOBJECTBASE_H
-#define KOINLINEOBJECTBASE_H
+#ifndef KINLINEOBJECTBASE_H
+#define KINLINEOBJECTBASE_H
 
 #include "kotext_export.h"
 

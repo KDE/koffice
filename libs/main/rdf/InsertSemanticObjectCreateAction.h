@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef __rdf_InsertSemanticObjectCreateAction_h__
-#define __rdf_InsertSemanticObjectCreateAction_h__
+#ifndef INSERT_SEMANTIC_OBJECT_CREATE_ACTION_H
+#define INSERT_SEMANTIC_OBJECT_CREATE_ACTION_H
 
 #include "InsertSemanticObjectActionBase.h"
 

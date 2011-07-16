@@ -20,8 +20,8 @@
 #ifndef KOPROGRESSBAR_H
 #define KOPROGRESSBAR_H
 
-#include <QProgressBar>
-#include <KoProgressProxy.h>
+#include <QtGui/QProgressBar>
+#include <KoProgressProxy.h>		//krazy:exclude=includes
 #include "komain_export.h"
 
 /**

@@ -21,8 +21,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KOSELECTION_H
-#define KOSELECTION_H
+#ifndef KSELECTION_H
+#define KSELECTION_H
 
 #include <QObject>
 #include <QSet>

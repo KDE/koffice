@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KPRPRESENTATIONBLACKWIDGET_H
-#define KPRPRESENTATIONBLACKWIDGET_H
+#ifndef SCPRESENTATIONBLACKWIDGET_H
+#define SCPRESENTATIONBLACKWIDGET_H
 
 #include "SCPresentationToolEventForwarder.h"
 
@@ -41,4 +41,4 @@ private:
     QSize m_size;
 };
 
-#endif /* KPRPRESENTATIONBLACKWIDGET_H */
+#endif /* SCPRESENTATIONBLACKWIDGET_H */

@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KPRSOUNDEVENTACTIONWIDGET_H
-#define KPRSOUNDEVENTACTIONWIDGET_H
+#ifndef SCSOUNDEVENTACTIONWIDGET_H
+#define SCSOUNDEVENTACTIONWIDGET_H
 
 #include <SCEventActionWidget.h>
 
@@ -52,4 +52,4 @@ private:
     QComboBox * m_soundCombo;
 };
 
-#endif /* KPRSOUNDEVENTACTIONWIDGET_H */
+#endif /* SCSOUNDEVENTACTIONWIDGET_H */

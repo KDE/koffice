@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef _KO_FILTER_EFFECT_H_
-#define _KO_FILTER_EFFECT_H_
+#ifndef K_FILTER_EFFECT_H
+#define K_FILTER_EFFECT_H
 
 class QImage;
 class QString;
@@ -170,4 +170,4 @@ private:
     Private* const d;
 };
 
-#endif // _KO_FILTER_EFFECT_H_
+#endif // K_FILTER_EFFECT_H

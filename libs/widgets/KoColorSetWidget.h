@@ -18,11 +18,11 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KOCOLORSETWIDGET_H_
-#define KOCOLORSETWIDGET_H_
+#ifndef KOCOLORSETWIDGET_H
+#define KOCOLORSETWIDGET_H
 
-#include <QWidgetAction>
-#include <QFrame>
+#include <QtGui/QWidgetAction>
+#include <QtGui/QFrame>
 
 #include "kowidgets_export.h"
 

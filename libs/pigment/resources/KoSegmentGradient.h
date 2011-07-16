@@ -27,9 +27,9 @@
 
 #include <kio/job.h>
 
-#include <KoResource.h>
-#include "KoAbstractGradient.h"
-#include "KoColor.h"
+#include <KoResource.h>			//krazy:exclude=includes
+#include "KoAbstractGradient.h"		//krazy:exclude=includes
+#include "KoColor.h"			//krazy:exclude=includes
 
 #include <pigment_export.h>
 

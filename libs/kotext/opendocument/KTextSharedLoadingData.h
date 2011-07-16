@@ -19,8 +19,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOTEXTSHAREDLOADINGDATA_H
-#define KOTEXTSHAREDLOADINGDATA_H
+#ifndef KTEXTSHAREDLOADINGDATA_H
+#define KTEXTSHAREDLOADINGDATA_H
 
 #include <KSharedLoadingData.h>
 
@@ -234,4 +234,4 @@ private:
     Private * const d;
 };
 
-#endif /* KOTEXTSHAREDLOADINGDATA_H */
+#endif /* KTEXTSHAREDLOADINGDATA_H */

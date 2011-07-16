@@ -17,8 +17,8 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#ifndef KOLISTLEVELPROPERTIES_H
-#define KOLISTLEVELPROPERTIES_H
+#ifndef KLISTLEVELPROPERTIES_H
+#define KLISTLEVELPROPERTIES_H
 
 #include "KListStyle.h"
 

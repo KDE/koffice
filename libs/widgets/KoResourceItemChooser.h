@@ -23,11 +23,11 @@
 #ifndef KO_RESOURCE_ITEM_CHOOSER
 #define KO_RESOURCE_ITEM_CHOOSER
 
-#include <QWidget>
-#include <QModelIndex>
+#include <QtGui/QWidget>
+#include <QtCore/QModelIndex>
 
 #include "kowidgets_export.h"
-#include <KoConfig.h>
+#include <KoConfig.h>			//krazy:exclude=includes
 
 class QAbstractProxyModel;
 class QButtonGroup;
