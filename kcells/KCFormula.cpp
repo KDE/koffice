@@ -882,20 +882,28 @@ Tokens KCFormula::scan(const QString& expr, const KLocale* locale) const
         case InString:
 
             // consume until "
-            if (ch != '"') tokenText.append(ex[i++]);
-
+            if (ch != '"') {
+		    tokenText.append(ex[i++]);
+	    }
             else {
-                tokenText.append(ch); i++;
-                tokens.append(KCToken(KCToken::String, tokenText, tokenStart));
-                tokenText.clear();
-                state = Start;
+                tokenText.append(ch); 
+		i++;
+		//If next character is also a quotemark, it's an escape character, NOT an end of string marker.
+		if (ex[i]=='"'){
+		    i++;
+		}
+		else{
+                    tokens.append(KCToken(KCToken::String, tokenText, tokenStart));
+                    tokenText.clear();
+                    state = Start;
+		}
             }
             break;
 
         case InError:
 
-            // consume until !
-            if (ch != '!')
+            // consume until ! or ? or we've see "#N/A" (can we use lookahead for this?)
+            if (ch != '!' && ch != '?' && !(tokenText == "#N/" && ch=='A') )
                 tokenText.append(ex[i++]);
             else {
                 tokenText.append(ex[i++]);
