@@ -146,7 +146,7 @@ protected:
             const KLineBorder * line = dynamic_cast<const KLineBorder*>(m_stroke);
             if (line) {
                 painter.setPen(Qt::NoPen);
-                QBrush brush = line->lineBrush();
+                QBrush brush = line->pen().brush();
                 if (brush.gradient()) {
                     QGradient * defGradient = KarbonGradientHelper::defaultGradient(brush.gradient()->type(), brush.gradient()->spread(), brush.gradient()->stops());
                     QBrush brush(*defGradient);
@@ -157,7 +157,7 @@ protected:
                 } else if (brush.style() == Qt::TexturePattern) {
                     painter.fillRect(rect(), brush);
                 } else {
-                    painter.fillRect(rect(), QBrush(line->color()));
+                    painter.fillRect(rect(), QBrush(line->pen().color()));
                 }
             } else {
                 painter.setFont(KGlobalSettings::smallestReadableFont());

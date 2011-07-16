@@ -22,15 +22,17 @@
 #include "KViewConverter.h"
 
 #include <QAtomicInt>
-#include <QRectF>
 #include <QPainter>
 #include <QImage>
+#include <math.h>
 
 class KShapeBorderBase::Private
 {
 public:
-    Private() : refCount(0) { }
+    Private() : refCount(0), pen(QPen(QColor(Qt::black), 1)) { }
+
     QAtomicInt refCount;
+    QPen pen;
 };
 
 KShapeBorderBase::KShapeBorderBase()
@@ -72,4 +74,39 @@ void KShapeBorderBase::paint(KShape *shape, QPainter &painter, const KViewConver
         p.fillRect(0, 0, buffer.width(), buffer.height(), color);
     }
     painter.drawImage(0, 0, buffer);
+}
+
+void KShapeBorderBase::setPen(const QPen &pen)
+{
+    d->pen = pen;
+}
+
+QPen KShapeBorderBase::pen() const
+{
+    return d->pen;
+}
+
+KInsets KShapeBorderBase::borderInsets() const
+{
+    KInsets insets;
+    qreal lineWidth = pen().widthF();
+    if (lineWidth < 0)
+        lineWidth = 1;
+    lineWidth *= 0.5; // since we draw a line half inside, and half outside the object.
+
+    // if we have square cap, we need a little more space
+    // -> sqrt((0.5*penWidth)^2 + (0.5*penWidth)^2)
+    if (pen().capStyle() == Qt::SquareCap)
+        lineWidth *= M_SQRT2;
+
+    insets.top = lineWidth;
+    insets.bottom = lineWidth;
+    insets.left = lineWidth;
+    insets.right = lineWidth;
+    return insets;
+}
+
+bool KShapeBorderBase::hasTransparency() const
+{
+    return pen().color().alpha() > 0;
 }

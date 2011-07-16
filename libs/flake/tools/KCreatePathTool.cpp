@@ -162,8 +162,8 @@ void KCreatePathTool::mousePressEvent(KPointerEvent *event)
         d->shape=pathShape;
         pathShape->setShapeId(KoPathShapeId);
 
-        KLineBorder *border = new KLineBorder(); // TODO properties fill from KResourceManager ?
-        border->setColor(canvas()->resourceManager()->foregroundColor());
+        KLineBorder *border = new KLineBorder();
+        border->setPen(QPen(canvas()->resourceManager()->foregroundColor(), 1));
 
         pathShape->setBorder(border);
         canvas()->updateCanvas(canvas()->snapGuide()->boundingRect());

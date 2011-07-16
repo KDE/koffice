@@ -346,6 +346,8 @@ void KarbonView::resizeEvent(QResizeEvent* /*event*/)
 
 void KarbonView::dropEvent(QDropEvent *e)
 {
+    // TODO move this functionality to flake somehow
+
     //Accepts QColor - from Color Manager's KColorPatch
     QColor color = KColorMimeData::fromMimeData(e->mimeData());
     if (color.isValid()) {
@@ -356,7 +358,7 @@ void KarbonView::dropEvent(QDropEvent *e)
         if (! part())
             return;
 
-        if (d->canvas->resourceManager()->intResource(KoCanvasResource::ActiveStyleType) == KoFlake::Foreground) {
+        if (d->canvas->resourceManager()->intResource(KoCanvasResource::ActiveColorTarget) == KoFlake::Foreground) {
             QList<KShapeBorderBase*> borders;
             QList<KShape*> selectedShapes = selection->selectedShapes();
             foreach(KShape * shape, selectedShapes) {
@@ -364,7 +366,9 @@ void KarbonView::dropEvent(QDropEvent *e)
                 KLineBorder * newBorder = 0;
                 if (border) {
                     newBorder = new KLineBorder(*border);
-                    newBorder->setColor(color);
+                    QPen pen = border->pen();
+                    pen.setColor(color);
+                    newBorder->setPen(pen);
                 } else {
                     newBorder = new KLineBorder(1.0, color);
                 }

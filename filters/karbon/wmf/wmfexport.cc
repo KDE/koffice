@@ -124,7 +124,7 @@ void WmfExport::paintShape(KShape * shape)
 
         polygons.append(p);
     }
-    mWmf->setPen(getPen(shape->border()));
+    mWmf->setPen(shape->border()->pen());
 
     if (polygons.count() == 1 && ! shape->background())
         mWmf->drawPolyline(polygons.first());
@@ -149,25 +149,6 @@ void WmfExport::paintShape(KShape * shape)
         else
             mWmf->drawPolyPolygon(polygons);
     }
-}
-
-QPen WmfExport::getPen(const KShapeBorderBase * stroke)
-{
-    const KLineBorder * lineBorder = dynamic_cast<const KLineBorder*>(stroke);
-    if (! lineBorder)
-        return QPen(Qt::NoPen);
-
-    QPen pen(lineBorder->lineStyle());
-    if (pen.style() > Qt::SolidLine)
-        pen.setDashPattern(lineBorder->lineDashes());
-
-    pen.setColor(lineBorder->color());
-    pen.setCapStyle(lineBorder->capStyle());
-    pen.setJoinStyle(lineBorder->joinStyle());
-    pen.setWidthF(coordX(lineBorder->lineWidth()));
-    pen.setMiterLimit(lineBorder->miterLimit());
-
-    return pen;
 }
 
 int WmfExport::coordX(double left)

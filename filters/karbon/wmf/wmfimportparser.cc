@@ -524,15 +524,12 @@ void WMFImportParser::drawText(int x, int y, int , int , int flags, const QStrin
 //-----------------------------------------------------------------------------
 // Utilities
 
-void WMFImportParser::appendPen(KShape& obj)
+void WMFImportParser::appendPen(KShape &obj)
 {
-    double width = mPen.width() * mScaleX;
+    const qreal width = mPen.width() * mScaleX;
 
-    KLineBorder * border = new KLineBorder(((width < 0.99) ? 1 : width), mPen.color());
-    border->setLineStyle(mPen.style(), mPen.dashPattern());
-    border->setCapStyle(mPen.capStyle());
-    border->setJoinStyle(mPen.joinStyle());
-
+    KLineBorder *border = new KLineBorder(((width < 0.99) ? 1 : width), mPen.color());
+    border->setPen(mPen);
     obj.setBorder(border);
 }
 

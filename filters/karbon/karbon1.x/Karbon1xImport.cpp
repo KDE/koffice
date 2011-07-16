@@ -1,5 +1,6 @@
 /* This file is part of the KDE project
  * Copyright (C) 2007 Jan Hambrecht <jaham@gmx.net>
+ * Copyright (C) 2011 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -518,41 +519,43 @@ void KarbonImport::loadStroke(KShape * shape, const KXmlElement &element)
 {
     KLineBorder * border = new KLineBorder();
 
+    QPen pen;
     switch (element.attribute("lineCap", "0").toUShort()) {
     case 1:
-        border->setCapStyle(Qt::RoundCap); break;
+        pen.setCapStyle(Qt::RoundCap); break;
     case 2:
-        border->setCapStyle(Qt::SquareCap); break;
+        pen.setCapStyle(Qt::SquareCap); break;
     default:
-        border->setCapStyle(Qt::FlatCap);
+        pen.setCapStyle(Qt::FlatCap);
     }
 
     switch (element.attribute("lineJoin", "0").toUShort()) {
     case 1:
-        border->setJoinStyle(Qt::RoundJoin);; break;
+        pen.setJoinStyle(Qt::RoundJoin);; break;
     case 2:
-        border->setJoinStyle(Qt::BevelJoin); break;
+        pen.setJoinStyle(Qt::BevelJoin); break;
     default:
-        border->setJoinStyle(Qt::MiterJoin);
+        pen.setJoinStyle(Qt::MiterJoin);
     }
 
-    border->setLineWidth(qMax(0.0, element.attribute("lineWidth", "1.0").toDouble()));
-    border->setMiterLimit(qMax(0.0, element.attribute("miterLimit", "10.0").toDouble()));
+    pen.setWidth(qMax(0.0, element.attribute("lineWidth", "1.0").toDouble()));
+    pen.setMiterLimit(qMax(0.0, element.attribute("miterLimit", "10.0").toDouble()));
 
     bool hasStroke = false;
 
     KXmlElement e;
     forEachElement(e, element) {
         if (e.tagName() == "COLOR") {
-            border->setColor(loadColor(e));
+            pen.setColor(loadColor(e));
             hasStroke = true;
         } else if (e.tagName() == "DASHPATTERN") {
             double dashOffset = element.attribute("offset", "0.0").toDouble();
-            border->setLineStyle(Qt::CustomDashLine, loadDashes(e));
-            border->setDashOffset(dashOffset);
+            pen.setDashPattern(loadDashes(e));
+            pen.setStyle(Qt::CustomDashLine);
+            pen.setDashOffset(dashOffset);
             hasStroke = true;
         } else if (e.tagName() == "GRADIENT") {
-            border->setLineBrush(loadGradient(shape, e));
+            pen.setBrush(loadGradient(shape, e));
             hasStroke = true;
         }
         /* TODO gradient and pattern on stroke not yet implemented in flake
@@ -563,6 +566,7 @@ void KarbonImport::loadStroke(KShape * shape, const KXmlElement &element)
         }
         */
     }
+    border->setPen(pen);
 
     if (hasStroke)
         shape->setBorder(border);

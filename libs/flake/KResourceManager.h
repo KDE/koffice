@@ -52,14 +52,13 @@ namespace KoCanvasResource
  */
 enum CanvasResource {
     ForegroundColor,    ///< The active forground color selected for this canvas.
-    BackgroundColor,    ///< The active background color selected for this canvas.
-    ActiveBorder,       ///< The active border selected for this canvas
-    HandleRadius,       ///< The handle radius used for drawing handles of any kind
-    GrabSensitivity,    ///< The grab sensitivity used for grabbing handles of any kind
-    PageSize,           ///< The size of the (current) page in postscript points.
-    Unit,               ///< The unit of this canvas
-    CurrentPage,        ///< The current page number
-    ActiveStyleType,    ///< the actual active style type see KoFlake::StyleType for valid values
+    BackgroundColor,    ///< The active background (KShapeBackground) selected for this canvas.
+    HandleRadius,       ///< The handle radius (in pixels) used for drawing handles of any kind
+    GrabSensitivity,    ///< The grab sensitivity (in pixels) used for grabbing handles of any kind
+    PageSize,           ///< The size of the (current) page in postscript points (QSizeF).
+    Unit,               ///< The unit of this canvas (KUnit)
+    CurrentPage,        ///< The current page number (int)
+    ActiveColorTarget,    ///< the active color target type see KoFlake::StyleType for valid values
     KarbonStart = 1000,      ///< Base number for karbon specific values.
     KivioStart = 3000,       ///< Base number for kivio specific values.
     ShowcaseStart = 5000,  ///< Base number for Showcase specific values.

@@ -44,8 +44,6 @@ private:
     void paintDocument(KarbonDocument& document);
     void paintShape(KShape * shape);
 
-    QPen getPen(const KShapeBorderBase *stroke);
-
     // coordinate transformation
     // scale to wmf size
     int coordX(double left);

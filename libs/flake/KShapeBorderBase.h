@@ -23,13 +23,13 @@
 
 #include "flake_export.h"
 
+#include <QtGui/QPen>
+
 class KShape;
 class KOdfGenericStyle;
 class KShapeSavingContext;
 class KViewConverter;
 struct KInsets;
-class QColor;
-class QPainter;
 
 /**
  * A model for borders around KoShapes.
@@ -59,13 +59,26 @@ public:
      * Return a borderInsets object filled with the size inside the shape that this border takes.
      * @param insets the insets object that will be filled and returned.
      */
-    virtual KInsets borderInsets() const = 0;
+    virtual KInsets borderInsets() const;
 
     /**
      * Returns true if there is some transparency, false if the border is fully opaque.
      * @return if the border is transparent.
      */
-    virtual bool hasTransparency() const = 0;
+    virtual bool hasTransparency() const;
+
+    /**
+     * set the pen that this border should be painted with.
+     * Notice that a QPen includes not only a line width but also
+     * features like the color and gradient of the border.
+     * @see pen()
+     */
+    void setPen(const QPen &pen);
+
+    /**
+     * return the pan for this border
+     */
+    QPen pen() const;
 
     /**
      * Paint the border.

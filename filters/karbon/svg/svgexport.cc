@@ -7,7 +7,7 @@
    Copyright (C) 2004 Nicolas Goutte <nicolasg@snafu.de>
    Copyright (C) 2005 Boudewijn Rempt <boud@valdyas.org>
    Copyright (C) 2005 Raphael Langerhorst <raphael.langerhorst@kdemail.net>
-   Copyright (C) 2005 Thomas Zander <zander@kde.org>
+   Copyright (C) 2005-2011 Thomas Zander <zander@kde.org>
    Copyright (C) 2005,2007-2008 Jan Hambrecht <jaham@gmx.net>
    Copyright (C) 2006 Inge Wallin <inge@lysator.liu.se>
    Copyright (C) 2006 Martin Pfeiffer <hubipete@gmx.net>
@@ -563,47 +563,48 @@ void SvgExport::getFill(KShape * shape, QTextStream *stream)
 
 void SvgExport::getStroke(KShape *shape, QTextStream *stream)
 {
-    const KLineBorder * line = dynamic_cast<const KLineBorder*>(shape->border());
-    if (! line)
+    if (shape->border() == 0)
         return;
 
+    QPen pen = shape->border()->pen();
+
     *stream << " stroke=\"";
-    if (line->lineStyle() == Qt::NoPen)
+    if (pen.style() == Qt::NoPen)
         *stream << "none";
-    else if (line->lineBrush().gradient())
-        getGradient(line->lineBrush().gradient(), line->lineBrush().transform());
+    else if (pen.brush().gradient())
+        getGradient(pen.brush().gradient(), pen.brush().transform());
     else
-        *stream << line->color().name();
+        *stream << pen.color().name();
     *stream << "\"";
 
-    if (line->color().alphaF() < 1.0)
-        *stream << " stroke-opacity=\"" << line->color().alphaF() << "\"";
-    *stream << " stroke-width=\"" << SvgUtil::toUserSpace(line->lineWidth()) << "\"";
+    if (pen.color().alphaF() < 1.0)
+        *stream << " stroke-opacity=\"" << pen.color().alphaF() << "\"";
+    *stream << " stroke-width=\"" << SvgUtil::toUserSpace(pen.widthF()) << "\"";
 
-    if (line->capStyle() == Qt::FlatCap)
+    if (pen.capStyle() == Qt::FlatCap)
         *stream << " stroke-linecap=\"butt\"";
-    else if (line->capStyle() == Qt::RoundCap)
+    else if (pen.capStyle() == Qt::RoundCap)
         *stream << " stroke-linecap=\"round\"";
-    else if (line->capStyle() == Qt::SquareCap)
+    else if (pen.capStyle() == Qt::SquareCap)
         *stream << " stroke-linecap=\"square\"";
 
-    if (line->joinStyle() == Qt::MiterJoin) {
+    if (pen.joinStyle() == Qt::MiterJoin) {
         *stream << " stroke-linejoin=\"miter\"";
-        *stream << " stroke-miterlimit=\"" << line->miterLimit() << "\"";
-    } else if (line->joinStyle() == Qt::RoundJoin)
+        *stream << " stroke-miterlimit=\"" << pen.miterLimit() << "\"";
+    } else if (pen.joinStyle() == Qt::RoundJoin)
         *stream << " stroke-linejoin=\"round\"";
-    else if (line->joinStyle() == Qt::BevelJoin)
+    else if (pen.joinStyle() == Qt::BevelJoin)
         *stream << " stroke-linejoin=\"bevel\"";
 
     // dash
-    if (line->lineStyle() > Qt::SolidLine) {
-        qreal dashFactor = line->lineWidth();
+    if (pen.style() > Qt::SolidLine) {
+        qreal dashFactor = pen.widthF();
 
-        if (line->dashOffset() != 0)
-            *stream << " stroke-dashoffset=\"" << dashFactor * line->dashOffset() << "\"";
+        if (pen.dashOffset() != 0)
+            *stream << " stroke-dashoffset=\"" << dashFactor * pen.dashOffset() << "\"";
         *stream << " stroke-dasharray=\" ";
 
-        const QVector<qreal> dashes = line->lineDashes();
+        const QVector<qreal> dashes = pen.dashPattern();
         int dashCount = dashes.size();
         for (int i = 0; i < dashCount; ++i) {
             if (i > 0)

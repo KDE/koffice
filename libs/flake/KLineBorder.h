@@ -22,10 +22,7 @@
 #ifndef KOLINEBORDER_H
 #define KOLINEBORDER_H
 
-#include "KInsets.h"
 #include "KShapeBorderBase.h"
-
-#include <QtGui/QBrush>
 
 #include "flake_export.h"
 
@@ -52,54 +49,10 @@ public:
     virtual ~KLineBorder();
 
     /// Assignment operator
-    KLineBorder& operator = (const KLineBorder &rhs);
-
-    /// Sets the lines cap style
-    void setCapStyle(Qt::PenCapStyle style);
-    /// Returns the lines cap style
-    Qt::PenCapStyle capStyle() const;
-    /// Sets the lines join style
-    void setJoinStyle(Qt::PenJoinStyle style);
-    /// Returns the lines join style
-    Qt::PenJoinStyle joinStyle() const;
-    /// Sets the line width
-    void setLineWidth(qreal lineWidth);
-    /// Returns the line width
-    qreal lineWidth() const;
-    /// Sets the miter limit
-    void setMiterLimit(qreal miterLimit);
-    /// Returns the miter limit
-    qreal miterLimit() const;
-    /// Sets the line style
-    void setLineStyle(Qt::PenStyle style, const QVector<qreal> &dashes);
-    /// Returns the line style
-    Qt::PenStyle lineStyle() const;
-    /// Returns the line dashes
-    QVector<qreal> lineDashes() const;
-    /// Sets the dash offset
-    void setDashOffset(qreal dashOffset);
-    /// Returns the dash offset
-    qreal dashOffset() const;
-
-    /// Returns the color
-    QColor color() const;
-    /// Sets the color
-    void setColor(const QColor &color);
-
-    /// Sets the strokes brush used to fill strokes of this border
-    void setLineBrush(const QBrush & brush);
-    /// Returns the strokes brush
-    QBrush lineBrush() const;
+    KLineBorder &operator=(const KLineBorder &other);
 
     virtual void saveOdf(KOdfGenericStyle &style, KShapeSavingContext &context) const;
-    virtual KInsets borderInsets() const;
-    virtual bool hasTransparency() const;
-
     virtual void paint(KShape *shape, QPainter &painter, const KViewConverter &converter);
-
-private:
-    class Private;
-    Private * const d;
 };
 
 #endif

@@ -1250,23 +1250,16 @@ KShapeBorderBase *KShape::loadOdfStroke(const KXmlElement &element, KShapeLoadin
     if (stroke == "solid" || stroke == "dash") {
         QPen pen = KOdf::loadOdfStrokeStyle(styleStack, stroke, stylesReader);
 
-        KLineBorder *border = new KLineBorder();
+        QString gradientName = styleStack.property(KOdfXmlNS::koffice, "stroke-gradient");
+        if (!gradientName.isEmpty())
+            pen.setBrush(KOdf::loadOdfGradientStyleByName(stylesReader, gradientName, size()));
 
-        if (styleStack.hasProperty(KOdfXmlNS::koffice, "stroke-gradient")) {
-            QString gradientName = styleStack.property(KOdfXmlNS::koffice, "stroke-gradient");
-            QBrush brush = KOdf::loadOdfGradientStyleByName(stylesReader, gradientName, size());
-            border->setLineBrush(brush);
-        } else {
-            border->setColor(pen.color());
-        }
 
 #ifndef NWORKAROUND_ODF_BUGS
         KoOdfWorkaround::fixPenWidth(pen, context);
 #endif
-        border->setLineWidth(pen.widthF());
-        border->setJoinStyle(pen.joinStyle());
-        border->setLineStyle(pen.style(), pen.dashPattern());
-
+        KLineBorder *border = new KLineBorder();
+        border->setPen(pen);
         return border;
 #ifndef NWORKAROUND_ODF_BUGS
     } else if (stroke.isEmpty()) {
@@ -1276,13 +1269,8 @@ KShapeBorderBase *KShape::loadOdfStroke(const KXmlElement &element, KShapeLoadin
 
             // FIXME: (make it possible to) use a cosmetic pen
             if (pen.widthF() == 0.0)
-                border->setLineWidth(0.5);
-            else
-                border->setLineWidth(pen.widthF());
-            border->setJoinStyle(pen.joinStyle());
-            border->setLineStyle(pen.style(), pen.dashPattern());
-            border->setLineBrush(pen.brush());
-
+                pen.setWidth(0.5);
+            border->setPen(pen);
             return border;
         }
 #endif

@@ -3,7 +3,7 @@
  * Copyright (C) 2002-2004 Nicolas Goutte <nicolasg@snafu.de>
  * Copyright (C) 2005-2006 Tim Beaulen <tbscope@gmail.com>
  * Copyright (C) 2005-2009 Jan Hambrecht <jaham@gmx.net>
- * Copyright (C) 2005,2007 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2005-2011 Thomas Zander <zander@kde.org>
  * Copyright (C) 2006-2007 Inge Wallin <inge@lysator.liu.se>
  * Copyright (C) 2007-2008,2010 Thorsten Zachmann <zachmann@kde.org>
 
@@ -768,7 +768,7 @@ bool SvgParser::parseImage(const QString &attribute, QImage &image)
 void SvgParser::parsePA(SvgGraphicsContext *gc, const QString &command, const QString &params)
 {
     QColor fillcolor = gc->fillColor;
-    QColor strokecolor = gc->stroke.color();
+    QPen pen = gc->stroke.pen();
 
     if (params == "inherit")
         return;
@@ -831,34 +831,38 @@ void SvgParser::parsePA(SvgGraphicsContext *gc, const QString &command, const QS
                 // no referenced stroke found -> reset stroke id
                 gc->strokeId.clear();
                 // check if there is a fallback color
-                if (parseColor(strokecolor, params.mid(end + 1).trimmed()))
+                QColor color = pen.color();
+                if (parseColor(color, params.mid(end + 1).trimmed()))
                     gc->fillType = SvgGraphicsContext::Solid;
                 else
                     gc->fillType = SvgGraphicsContext::None;
+                pen.setColor(color);
             }
         } else {
             // great we have a solid stroke
             gc->strokeType = SvgGraphicsContext::Solid;
-            parseColor(strokecolor, params);
+            QColor color = pen.color();
+            parseColor(color, params);
+            pen.setColor(color);
         }
     } else if (command == "stroke-width") {
-        gc->stroke.setLineWidth(parseUnitXY(params));
+        pen.setWidth(parseUnitXY(params));
     } else if (command == "stroke-linejoin") {
         if (params == "miter")
-            gc->stroke.setJoinStyle(Qt::MiterJoin);
+            pen.setJoinStyle(Qt::MiterJoin);
         else if (params == "round")
-            gc->stroke.setJoinStyle(Qt::RoundJoin);
+            pen.setJoinStyle(Qt::RoundJoin);
         else if (params == "bevel")
-            gc->stroke.setJoinStyle(Qt::BevelJoin);
+            pen.setJoinStyle(Qt::BevelJoin);
     } else if (command == "stroke-linecap") {
         if (params == "butt")
-            gc->stroke.setCapStyle(Qt::FlatCap);
+            pen.setCapStyle(Qt::FlatCap);
         else if (params == "round")
-            gc->stroke.setCapStyle(Qt::RoundCap);
+            pen.setCapStyle(Qt::RoundCap);
         else if (params == "square")
-            gc->stroke.setCapStyle(Qt::SquareCap);
+            pen.setCapStyle(Qt::SquareCap);
     } else if (command == "stroke-miterlimit") {
-        gc->stroke.setMiterLimit(params.toFloat());
+        pen.setMiterLimit(params.toFloat());
     } else if (command == "stroke-dasharray") {
         QVector<qreal> array;
         if (params != "none") {
@@ -867,14 +871,15 @@ void SvgParser::parsePA(SvgGraphicsContext *gc, const QString &command, const QS
             for (QStringList::Iterator it = dashes.begin(); it != dashes.end(); ++it)
                 array.append((*it).toFloat());
         }
-        gc->stroke.setLineStyle(Qt::CustomDashLine, array);
+        pen.setStyle(Qt::CustomDashLine);
+        pen.setDashPattern(array);
     } else if (command == "stroke-dashoffset") {
-        gc->stroke.setDashOffset(params.toFloat());
-    }
-    // handle opacity
-    else if (command == "stroke-opacity")
-        strokecolor.setAlphaF(SvgUtil::fromPercentage(params));
-    else if (command == "fill-opacity") {
+        pen.setDashOffset(params.toFloat());
+    } else if (command == "stroke-opacity") { // handle opacity
+        QColor color = pen.color();
+        color.setAlphaF(SvgUtil::fromPercentage(params));
+        pen.setColor(color);
+    } else if (command == "fill-opacity") {
         float opacity = SvgUtil::fromPercentage(params);
         if (opacity < 0.0)
             opacity = 0.0;
@@ -982,7 +987,7 @@ void SvgParser::parsePA(SvgGraphicsContext *gc, const QString &command, const QS
     }
 
     gc->fillColor = fillcolor;
-    gc->stroke.setColor(strokecolor);
+    gc->stroke.setPen(pen);
 }
 
 SvgParser::SvgStyles SvgParser::collectStyles(const KXmlElement &e)
@@ -1187,22 +1192,27 @@ void SvgParser::applyStrokeStyle(KShape * shape)
 
     switch (gc->strokeType) {
     case SvgGraphicsContext::Solid: {
-        double lineWidth = gc->stroke.lineWidth();
-        QVector<qreal> dashes = gc->stroke.lineDashes();
+        const qreal lineWidth = gc->stroke.pen().widthF();
+        QVector<qreal> dashes = gc->stroke.pen().dashPattern();
 
-        KLineBorder * border = new KLineBorder(gc->stroke);
+        KLineBorder *border = new KLineBorder(gc->stroke);
+        QPen pen = border->pen();
 
         // apply line width to dashes and dash offset
-        if (dashes.count() && lineWidth > 0.0) {
-            QVector<qreal> dashes = border->lineDashes();
+        if (!dashes.isEmpty() && lineWidth > 0.0) {
+            QVector<qreal> dashes = pen.dashPattern();
             for (int i = 0; i < dashes.count(); ++i)
                 dashes[i] /= lineWidth;
-            double dashOffset = border->dashOffset();
-            border->setLineStyle(Qt::CustomDashLine, dashes);
-            border->setDashOffset(dashOffset / lineWidth);
+            qreal dashOffset = pen.dashOffset();
+            pen.setStyle(Qt::CustomDashLine);
+            pen.setDashPattern(dashes);
+            pen.setDashOffset(dashOffset / lineWidth);
+            border->setPen(pen);
         } else {
-            border->setLineStyle(Qt::SolidLine, QVector<qreal>());
+            pen.setStyle(Qt::SolidLine);
+            pen.setDashPattern(QVector<qreal>());
         }
+        border->setPen(pen);
         shape->setBorder(border);
     }
     break;
@@ -1219,9 +1229,12 @@ void SvgParser::applyStrokeStyle(KShape * shape)
                 delete convertedGradient;
                 brush.setTransform(gradient->transform() * gc->matrix * shape->transformation().inverted());
             }
-            KLineBorder * border = new KLineBorder(gc->stroke);
-            border->setLineBrush(brush);
-            border->setLineStyle(Qt::SolidLine, QVector<qreal>());
+            KLineBorder *border = new KLineBorder(gc->stroke);
+            QPen pen = border->pen();
+            pen.setBrush(brush);
+            pen.setStyle(Qt::SolidLine);
+            pen.setDashPattern(QVector<qreal>());
+            border->setPen(pen);
             shape->setBorder(border);
         }
     }
