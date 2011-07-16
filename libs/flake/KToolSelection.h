@@ -16,8 +16,8 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#ifndef KOTOOLSELECTION_H
-#define KOTOOLSELECTION_H
+#ifndef KTOOLSELECTION_H
+#define KTOOLSELECTION_H
 
 #include "flake_export.h"
 #include <QObject>

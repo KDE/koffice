@@ -20,8 +20,8 @@
 #ifndef KOPOSITIONSELECTOR_H
 #define KOPOSITIONSELECTOR_H
 
-#include <QWidget>
-#include <KoFlake.h>
+#include <QtGui/QWidget>
+#include <KoFlake.h>				//krazy:exclude=includes
 #include "kowidgets_export.h"
 
 /**

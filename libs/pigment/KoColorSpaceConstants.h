@@ -17,11 +17,11 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef _KO_COLOR_SPACE_CONSTANTS_H_
-#define _KO_COLOR_SPACE_CONSTANTS_H_
+#ifndef KO_COLOR_SPACE_CONSTANTS_H
+#define KO_COLOR_SPACE_CONSTANTS_H
 
 #include <climits>
-#include <qglobal.h>
+#include <QtCore/QtGlobal>
 
 // TODO: find a better place or way to define those stuff
 const quint8 OPACITY_TRANSPARENT_U8 = 0;

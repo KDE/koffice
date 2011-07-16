@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KPRPREVIEWWIDGET_H
-#define KPRPREVIEWWIDGET_H
+#ifndef SCPREVIEWWIDGET_H
+#define SCPREVIEWWIDGET_H
 
 #include "showcase_export.h"
 
@@ -75,4 +75,4 @@ private:
     QPixmap m_newPage;
 };
 
-#endif /* KPRPREVIEWWIDGET_H */
+#endif /* SCPREVIEWWIDGET_H */

@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOSHAPEUNGROUPCOMMAND_H
-#define KOSHAPEUNGROUPCOMMAND_H
+#ifndef KSHAPEUNGROUPCOMMAND_H
+#define KSHAPEUNGROUPCOMMAND_H
 
 #include "KShapeGroupCommand.h"
 

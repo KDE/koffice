@@ -16,14 +16,14 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef RTREE_TEST_APP_H
+#define RTREE_TEST_APP_H
 
 #define KOFFICE_RTREE_DEBUG
 
-#include <QMainWindow>
-#include <QtGui>
-#include <QLinkedList>
+#include <QtGui/QMainWindow>
+#include <QtCore/QLinkedList>
+#include <QtCore/QFile>
 
 #include "KRTree.h"
 #include "Tool.h"

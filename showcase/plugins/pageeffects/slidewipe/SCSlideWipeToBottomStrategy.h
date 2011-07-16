@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KPRSLIDEWIPETOBOTTOMSTRATEGY_H
-#define KPRSLIDEWIPETOBOTTOMSTRATEGY_H
+#ifndef SCSLIDEWIPETOBOTTOMSTRATEGY_H
+#define SCSLIDEWIPETOBOTTOMSTRATEGY_H
 
 #include "pageeffects/SCPageEffectStrategy.h"
 
@@ -35,4 +35,4 @@ public:
     virtual void next(const SCPageEffect::Data &data);
 };
 
-#endif // KPRSLIDEWIPETOBOTTOMSTRATEGY_H
+#endif // SCSLIDEWIPETOBOTTOMSTRATEGY_H

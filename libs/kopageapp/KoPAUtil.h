@@ -20,7 +20,7 @@
 #ifndef KOPAUTIL_H
 #define KOPAUTIL_H
 
-#include <QRect>
+#include <QtCore/QRect>
 
 #include "kopageapp_export.h"
 

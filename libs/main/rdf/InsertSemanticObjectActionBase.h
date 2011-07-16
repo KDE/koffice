@@ -17,11 +17,11 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef __rdf_InsertSemanticObjectActionBase_h__
-#define __rdf_InsertSemanticObjectActionBase_h__
+#ifndef INSERT_SEMANTIC_OBJECT_ACTION_BASE_H
+#define INSERT_SEMANTIC_OBJECT_ACTION_BASE_H
 
 #include "RdfForward.h"
-#include <KAction>
+#include <KDE/KAction>
 
 class KCanvasBase;
 class KoTextEditor;

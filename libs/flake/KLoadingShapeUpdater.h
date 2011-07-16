@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KOLOADINGSHAPEUPDATER_H
-#define KOLOADINGSHAPEUPDATER_H
+#ifndef KLOADINGSHAPEUPDATER_H
+#define KLOADINGSHAPEUPDATER_H
 
 #include "flake_export.h"
 

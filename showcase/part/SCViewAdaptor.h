@@ -17,8 +17,8 @@
     Boston, MA  02110-1301  USA
 */
 
-#ifndef KPRVIEWADAPTOR_H
-#define KPRVIEWADAPTOR_H
+#ifndef SCVIEWADAPTOR_H
+#define SCVIEWADAPTOR_H
 
 #include <KoViewAdaptor.h>
 

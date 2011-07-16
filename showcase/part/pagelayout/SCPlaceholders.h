@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KPRPLACEHOLDERS_H
-#define KPRPLACEHOLDERS_H
+#ifndef SCPLACEHOLDERS_H
+#define SCPLACEHOLDERS_H
 
 #define BOOST_MULTI_INDEX_DISABLE_SERIALIZATION
 
@@ -121,4 +121,4 @@ private:
     friend class SCPageLayoutCommand;
 };
 
-#endif /* KPRPLACEHOLDERS_H */
+#endif /* SCPLACEHOLDERS_H */

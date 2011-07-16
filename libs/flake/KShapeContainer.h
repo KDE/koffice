@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOSHAPECONTAINER_H
-#define KOSHAPECONTAINER_H
+#ifndef KSHAPECONTAINER_H
+#define KSHAPECONTAINER_H
 
 #include "KShape.h"
 #include "KViewConverter.h"

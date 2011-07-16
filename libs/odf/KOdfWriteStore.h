@@ -17,8 +17,8 @@
    the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
 */
-#ifndef KOODFWRITESTORE_H
-#define KOODFWRITESTORE_H
+#ifndef KODFWRITESTORE_H
+#define KODFWRITESTORE_H
 
 class QIODevice;
 class KXmlWriter;

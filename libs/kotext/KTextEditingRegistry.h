@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOTEXTEDITINGREGISTRY_H
-#define KOTEXTEDITINGREGISTRY_H
+#ifndef KTEXTEDITINGREGISTRY_H
+#define KTEXTEDITINGREGISTRY_H
 
 #include <KGenericRegistry.h>
 #include <KTextEditingFactory.h>

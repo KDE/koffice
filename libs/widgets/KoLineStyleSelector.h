@@ -17,11 +17,11 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef _KOLINESTYLESELECTOR_H_
-#define _KOLINESTYLESELECTOR_H_
+#ifndef KOLINESTYLESELECTOR_H
+#define KOLINESTYLESELECTOR_H
 
 #include "kowidgets_export.h"
-#include <QComboBox>
+#include <QtGui/QComboBox>
 
 /**
  * A custom combobox widget for selecting line styles.

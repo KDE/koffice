@@ -21,11 +21,11 @@
 #ifndef KOZOOMCONTROLLER_H
 #define KOZOOMCONTROLLER_H
 
-#include "KoZoomAction.h"
+#include "KoZoomAction.h"				//krazy:exclude=includes
 #include "kowidgets_export.h"
-#include <KoZoomMode.h>
-#include <QObject>
-#include <QSizeF>
+#include "KoZoomMode.h"					//krazy:exclude=includes
+#include <QtCore/QObject>
+#include <QtCore/QSizeF>
 
 class KCanvasController;
 class KoZoomAction;

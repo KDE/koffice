@@ -25,8 +25,8 @@
 
 #include <kparts/mainwindow.h>
 
-#include <KCanvasObserverBase.h>
-#include <KCanvasSupervisor.h>
+#include <KCanvasObserverBase.h>	//krazy:exclude=includes
+#include <KCanvasSupervisor.h>		//krazy:exclude=includes
 
 class KoMainWindowPrivate;
 class KoDocument;

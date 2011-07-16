@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KPRVIEWMODEPRESENTATION_H
-#define KPRVIEWMODEPRESENTATION_H
+#ifndef SCVIEWMODEPRESENTATION_H
+#define SCVIEWMODEPRESENTATION_H
 
 #include <KoPAViewMode.h>
 #include "SCAnimationDirector.h"
@@ -161,4 +161,4 @@ protected:
     SCView *m_view;
 };
 
-#endif /* KPRVIEWMODEPRESENTATION_H */
+#endif /* SCVIEWMODEPRESENTATION_H */

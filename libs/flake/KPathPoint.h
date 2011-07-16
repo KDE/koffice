@@ -19,8 +19,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KOPATHPOINT_H
-#define KOPATHPOINT_H
+#ifndef KPATHPOINT_H
+#define KPATHPOINT_H
 
 #include "flake_export.h"
 

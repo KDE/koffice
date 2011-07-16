@@ -22,7 +22,7 @@
 
 #include <kxyselector.h>
 
-#include "KoColor.h"
+#include <KoColor.h>				//krazy:exclude=includes
 #include "kowidgets_export.h"
 
 class QPainter;

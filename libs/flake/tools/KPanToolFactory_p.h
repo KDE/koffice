@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOPANTOOLFACTORY_H
-#define KOPANTOOLFACTORY_H
+#ifndef KPANTOOLFACTORY_H
+#define KPANTOOLFACTORY_H
 
 //
 //  W A R N I N G

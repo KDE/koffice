@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KPRDOCUMENT_H
-#define KPRDOCUMENT_H
+#ifndef SCDOCUMENT_H
+#define SCDOCUMENT_H
 
 #include <KoPADocument.h>
 
@@ -212,4 +212,4 @@ private:
     SCDeclarations *m_declarations;
 };
 
-#endif /* KPRDOCUMENT_H */
+#endif /* SCDOCUMENT_H */

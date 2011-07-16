@@ -20,7 +20,7 @@
 #ifndef KOPAPAGECONTAINERMODEL_H
 #define KOPAPAGECONTAINERMODEL_H
 
-#include <KShapeContainerDefaultModel.h>
+#include <KShapeContainerDefaultModel.h>	//krazy:exclude=includes
 
 class KoPAPageContainerModel : public KShapeContainerDefaultModel
 {

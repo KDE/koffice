@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KoEncryptedStore_h
-#define KoEncryptedStore_h
+#ifndef ENCRYPTED_STORE_P_H
+#define ENCRYPTED_STORE_P_H
 
 //
 //  W A R N I N G

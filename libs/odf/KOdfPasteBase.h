@@ -17,10 +17,10 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KOODFPASTE_H
-#define KOODFPASTE_H
+#ifndef KODFPASTEBASE_H
+#define KODFPASTEBASE_H
 
-#include "KOdf.h"
+#include "KOdf.h"			//krazy:exclude=includes
 #include "kodf_export.h"
 
 class QMimeData;
@@ -47,4 +47,4 @@ protected:
     virtual bool process(const KXmlElement &body, KOdfStoreReader &odfStore) = 0;
 };
 
-#endif /* KOODFPASTE_H */
+#endif /* KODFPASTEBASE_H */

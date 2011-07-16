@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KPRANIMATIONDIRECTOR_H
-#define KPRANIMATIONDIRECTOR_H
+#ifndef SCANIMATIONDIRECTOR_H
+#define SCANIMATIONDIRECTOR_H
 
 #include <QObject>
 #include <QTimeLine>
@@ -176,4 +176,4 @@ private:
     SCAnimationCache * m_animationCache;
 };
 
-#endif /* KPRANIMATIONDIRECTOR_H */
+#endif /* SCANIMATIONDIRECTOR_H */

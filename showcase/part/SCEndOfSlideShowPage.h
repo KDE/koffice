@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KPRENDOFSLIDESHOWPAGE_H
-#define KPRENDOFSLIDESHOWPAGE_H
+#ifndef SCENDOFSLIDESHOWPAGE_H
+#define SCENDOFSLIDESHOWPAGE_H
 
 class SCDocument;
 
@@ -38,4 +38,4 @@ public:
     ~SCEndOfSlideShowPage();
 };
 
-#endif /* KPRENDOFSLIDESHOWPAGE_H */
+#endif /* SCENDOFSLIDESHOWPAGE_H */

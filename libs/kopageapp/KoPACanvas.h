@@ -20,9 +20,9 @@
 #ifndef KOPACANVAS_H
 #define KOPACANVAS_H
 
-#include <QWidget>
-#include <QList>
-#include <KoPACanvasBase.h>
+#include <QtGui/QWidget>
+#include <QtCore/QList>
+#include "KoPACanvasBase.h" 	//krazy:exclude=includes
 
 #include "kopageapp_export.h"
 

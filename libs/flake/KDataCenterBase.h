@@ -21,8 +21,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KODATACENTER_H
-#define KODATACENTER_H
+#ifndef KDATACENTER_H
+#define KDATACENTER_H
 
 #include <QtGlobal>
 #include "flake_export.h"

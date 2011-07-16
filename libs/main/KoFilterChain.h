@@ -17,19 +17,19 @@ the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
 Boston, MA 02110-1301, USA.
 */
 
-#ifndef __koffice_filter_chain_h__
-#define __koffice_filter_chain_h__
+#ifndef KO_FILTER_CHAIN_H
+#define KO_FILTER_CHAIN_H
 
-#include <QHash>
-#include <QList>
+#include <QtCore/QHash>
+#include <QtCore/QList>
 #include <QtCore/QStringList>
 
-#include "KoFilter.h"
-#include "KoEmbeddingFilter.h"
-#include "KoFilterEntry.h"
-#include <KOdfStorageDevice.h>
+#include "KoFilter.h"			//krazy:exclude=includes
+#include "KoEmbeddingFilter.h"		//krazy:exclude=includes
+#include "KoFilterEntry.h"		//krazy:exclude=includes
+#include <KOdfStorageDevice.h>		//krazy:exclude=includes
 #include "komain_export.h"
-#include "KoFilterChainLinkList.h"
+#include "KoFilterChainLinkList.h"	//krazy:exclude=includes
 
 class KTemporaryFile;
 class KoFilterManager;
@@ -229,4 +229,4 @@ private:
     Private * const d;
 };
 
-#endif // __koffice_filter_chain_h__
+#endif // KO_FILTER_CHAIN_H

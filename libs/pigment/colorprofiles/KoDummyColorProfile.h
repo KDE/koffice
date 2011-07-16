@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef _KO_DUMMY_COLOR_PROFILE_H_
-#define _KO_DUMMY_COLOR_PROFILE_H_
+#ifndef KO_DUMMY_COLOR_PROFILE_H
+#define KO_DUMMY_COLOR_PROFILE_H
 
 #include "KoColorProfile.h"
 

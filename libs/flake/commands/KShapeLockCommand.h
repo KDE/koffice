@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOSHAPELOCKCOMMAND_H
-#define KOSHAPELOCKCOMMAND_H
+#ifndef KSHAPELOCKCOMMAND_H
+#define KSHAPELOCKCOMMAND_H
 
 #include <QUndoCommand>
 #include <QList>

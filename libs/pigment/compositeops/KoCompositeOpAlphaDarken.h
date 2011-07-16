@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOCOMPOSITEOPALPHADARKEN_H_
-#define KOCOMPOSITEOPALPHADARKEN_H_
+#ifndef KOCOMPOSITEOPALPHADARKEN_H
+#define KOCOMPOSITEOPALPHADARKEN_H
 
 #include "KoColorSpaceMaths.h"
 #include "KoCompositeOpOver.h"

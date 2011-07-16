@@ -38,7 +38,6 @@
 #include <kicon.h>
 
 #include <KoColor.h>
-#include <KoColorSpaceRegistry.h>
 
 class KoColorPopupAction::KoColorPopupActionPrivate
 {

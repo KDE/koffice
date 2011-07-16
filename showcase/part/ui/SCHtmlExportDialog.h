@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KPRHTMLEXPORTDIALOG_H
-#define KPRHTMLEXPORTDIALOG_H
+#ifndef SCHTMLEXPORTDIALOG_H
+#define SCHTMLEXPORTDIALOG_H
 
 #include <ui_SCHtmlExport.h>
 
@@ -72,4 +72,4 @@ private:
 
 
 
-#endif // KPRHTMLEXPORTDIALOG_H
+#endif // SCHTMLEXPORTDIALOG_H

@@ -19,8 +19,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOTEXTDOCUMENT_H
-#define KOTEXTDOCUMENT_H
+#ifndef KTEXTDOCUMENT_H
+#define KTEXTDOCUMENT_H
 
 #include <QTextDocument>
 #include <QUrl>

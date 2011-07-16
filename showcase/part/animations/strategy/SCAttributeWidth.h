@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KPRATTRIBUTEWIDTH_H
-#define KPRATTRIBUTEWIDTH_H
+#ifndef SCATTRIBUTEWIDTH_H
+#define SCATTRIBUTEWIDTH_H
 
 #include "SCAnimationAttribute.h"
 
@@ -30,4 +30,4 @@ public:
     virtual void initCache(SCAnimationCache * cache, int step, SCShapeAnimation * shapeAnimation, qreal startValue, qreal endValue);
 };
 
-#endif // KPRATTRIBUTEWIDTH_H
+#endif // SCATTRIBUTEWIDTH_H

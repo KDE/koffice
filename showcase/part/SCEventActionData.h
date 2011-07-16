@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KPREVENTACTIONDATA_H
-#define KPREVENTACTIONDATA_H
+#ifndef SCEVENTACTIONDATA_H
+#define SCEVENTACTIONDATA_H
 
 #include "showcase_export.h"
 
@@ -54,4 +54,4 @@ private:
     Private * const d;
 };
 
-#endif /* KPREVENTACTIONDATA_H */
+#endif /* SCEVENTACTIONDATA_H */

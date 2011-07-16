@@ -19,14 +19,12 @@
  */
 #include "KoText.h"
 #include "styles/KStyleManager.h"
-#include "styles/KStyleManager.h"
 #include "changetracker/KChangeTracker.h"
 #include "KTextShapeData.h"
 #include "KTextDocumentLayout.h"
 #include "KInlineTextObjectManager.h"
 
 #include <KOdfStore.h>
-#include <KOdfStoreReader.h>
 #include <KOdfStoreReader.h>
 #include <KXmlReader.h>
 #include <KOdfXmlNS.h>

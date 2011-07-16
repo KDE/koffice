@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KPRMASTERPAGE_H
-#define KPRMASTERPAGE_H
+#ifndef SCMASTERPAGE_H
+#define SCMASTERPAGE_H
 
 #include <KoPAMasterPage.h>
 
@@ -45,4 +45,4 @@ protected:
     virtual void loadOdfPageExtra(const KXmlElement &element, KoPALoadingContext &loadingContext);
 };
 
-#endif /* KPRMASTERPAGE_H */
+#endif /* SCMASTERPAGE_H */

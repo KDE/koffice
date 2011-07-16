@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KPRBOXSNAKESWIPESTRATEGY_H
-#define KPRBOXSNAKESWIPESTRATEGY_H
+#ifndef SCBOXSNAKESWIPESTRATEGY_H
+#define SCBOXSNAKESWIPESTRATEGY_H
 
 #include "../SCMatrixWipeStrategy.h"
 
@@ -36,4 +36,4 @@ private:
     bool m_clockwise;
 };
 
-#endif // KPRBOXSNAKESWIPESTRATEGY_H
+#endif // SCBOXSNAKESWIPESTRATEGY_H

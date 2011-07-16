@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef __koDocumentInfoDlg_h__
-#define __koDocumentInfoDlg_h__
+#ifndef KO_DOCUMENT_INFO_DLG_H
+#define KO_DOCUMENT_INFO_DLG_H
 
 #include <kpagedialog.h>
 
@@ -100,4 +100,4 @@ private:
     KoDocumentInfoDlgPrivate * const d;
 };
 
-#endif
+#endif //KO_DOCUMENT_INFO_DLG_H

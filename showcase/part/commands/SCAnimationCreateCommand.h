@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KPRANIMATIONCREATECOMMAND_H
-#define KPRANIMATIONCREATECOMMAND_H
+#ifndef SCANIMATIONCREATECOMMAND_H
+#define SCANIMATIONCREATECOMMAND_H
 
 #include <QUndoCommand>
 
@@ -43,4 +43,4 @@ private:
     bool m_deleteAnimation;
 };
 
-#endif /* KPRANIMATIONCREATECOMMAND_H */
+#endif /* SCANIMATIONCREATECOMMAND_H */

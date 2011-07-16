@@ -17,10 +17,10 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KOEMBEDDEDDOCUMENTSAVER_H
-#define KOEMBEDDEDDOCUMENTSAVER_H
+#ifndef KODFEMBEDDEDDOCUMENTSAVER_H
+#define KODFEMBEDDEDDOCUMENTSAVER_H
 
-#include "KOdfDocumentBase.h"
+#include "KOdfDocumentBase.h"				//krazy:exclude=includes
 #include "kodf_export.h"
 
 class KXmlWriter;

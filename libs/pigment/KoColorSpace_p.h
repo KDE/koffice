@@ -17,10 +17,15 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef _KOCOLORSPACE_P_H_
-#define _KOCOLORSPACE_P_H_
+#ifndef KOCOLORSPACE_P_H
+#define KOCOLORSPACE_P_H
 
 #include "KoColorSpace.h"
+
+#include <QtCore/QThreadStorage>
+
+class QReadWriteLock;
+class QWriteLocker;
 
 struct KoColorSpace::Private {
 

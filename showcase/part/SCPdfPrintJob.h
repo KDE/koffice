@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KPRPDFPRINTJOB_H
-#define KPRPDFPRINTJOB_H
+#ifndef SCPDFPRINTJOB_H
+#define SCPDFPRINTJOB_H
 
 #include <KoPAPrintJob.h>
 
@@ -35,4 +35,4 @@ public slots:
     virtual void startPrinting(RemovePolicy removePolicy = DoNotDelete);
 };
 
-#endif // KPRPDFPRINTJOB_H
+#endif // SCPDFPRINTJOB_H

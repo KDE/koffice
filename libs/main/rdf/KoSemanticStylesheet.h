@@ -17,15 +17,15 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef __rdf_KoSemanticStylesheet_h__
-#define __rdf_KoSemanticStylesheet_h__
+#ifndef KO_SEMANTIC_STYLESHEET_H
+#define KO_SEMANTIC_STYLESHEET_H
 
 #include "komain_export.h"
 
-#include <QObject>
-#include <QSharedData>
-#include <QList>
-#include <QString>
+#include <QtCore/QObject>
+#include <QtCore/QSharedData>
+#include <QtCore/QList>
+#include <QtCore/QString>
 #include "RdfForward.h"
 
 class KoSemanticStylesheetPrivate;
@@ -87,6 +87,6 @@ signals:
     void nameChanging(KoSemanticStylesheet*, QString oldName, QString newName);
 };
 
-#include <QMetaType>
+#include <QtCore/QMetaType>
 Q_DECLARE_METATYPE(KoSemanticStylesheet*)
 #endif

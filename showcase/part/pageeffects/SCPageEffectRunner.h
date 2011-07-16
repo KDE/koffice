@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KPRPAGEEFFECTRUNNER_H
-#define KPRPAGEEFFECTRUNNER_H
+#ifndef SCPAGEEFFECTRUNNER_H
+#define SCPAGEEFFECTRUNNER_H
 
 #include "SCPageEffect.h"
 
@@ -104,4 +104,4 @@ protected:
     SCPageEffect::Data m_data;
 };
 
-#endif /* KPRPAGEEFFECTRUNNER_H */
+#endif /* SCPAGEEFFECTRUNNER_H */

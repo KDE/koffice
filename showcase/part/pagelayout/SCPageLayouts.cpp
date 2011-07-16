@@ -67,7 +67,7 @@ bool SCPageLayouts::saveOdf(KoPASavingContext &context)
         sharedData->addPageLayoutStyle(it.value(), style);
     }
 
-    context.addSharedData(KPR_PAGE_LAYOUT_SHARED_SAVING_ID, sharedData);
+    context.addSharedData(SC_PAGE_LAYOUT_SHARED_SAVING_ID, sharedData);
     return true;
 }
 

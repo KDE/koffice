@@ -18,8 +18,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KPRCLICKACTIONDOCKER_H
-#define KPRCLICKACTIONDOCKER_H
+#ifndef SCCLICKACTIONDOCKER_H
+#define SCCLICKACTIONDOCKER_H
 
 #include <QWidget>
 #include <QMap>
@@ -60,5 +60,5 @@ private:
     QMap<QString, QWidget *> m_eventActionWidgets;
 };
 
-#endif // KPRCLICKACTIONDOCKER_H
+#endif // SCCLICKACTIONDOCKER_H
 

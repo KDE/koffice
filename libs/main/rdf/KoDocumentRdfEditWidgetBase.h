@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef __koDocumentRdfEditWidgetBase_h__
-#define __koDocumentRdfEditWidgetBase_h__
+#ifndef KO_DOCUMENT_RDF_EDIT_WIDGET_BASE_H
+#define KO_DOCUMENT_RDF_EDIT_WIDGET_BASE_H
 
 #include <QWidget>
 

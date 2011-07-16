@@ -17,10 +17,10 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef _KO_UNIQUE_NUMBER_FOR_ID_SERVER_H_
-#define _KO_UNIQUE_NUMBER_FOR_ID_SERVER_H_
+#ifndef KO_UNIQUE_NUMBER_FOR_ID_SERVER_H
+#define KO_UNIQUE_NUMBER_FOR_ID_SERVER_H
 
-#include <QtGlobal>
+#include <QtCore/QtGlobal>
 #include "pigment_export.h"
 
 class QString;

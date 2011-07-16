@@ -19,17 +19,17 @@
 #ifndef KOALPHACOLORSPACE_H
 #define KOALPHACOLORSPACE_H
 
-#include <QColor>
-#include <QBitArray>
+#include <QtGui/QColor>
+#include <QtCore/QBitArray>
 
 #include "DebugPigment.h"
 #include "pigment_export.h"
 
-#include "KoColorSpaceAbstract.h"
-#include "KoColorSpaceTraits.h"
+#include "KoColorSpaceAbstract.h"			//krazy:exclude=includes
+#include "KoColorSpaceTraits.h"				//krazy:exclude=includes
 
-#include "KoColorModelStandardIds.h"
-#include "KoSimpleColorSpaceFactory.h"
+#include "KoColorModelStandardIds.h"			//krazy:exclude=includes
+#include "KoSimpleColorSpaceFactory.h"			//krazy:exclude=includes
 
 typedef KoColorSpaceTrait<quint8, 1, 0> AlphaU8Traits;
 

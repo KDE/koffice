@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KOEVENTACTIONWIDGET_H
-#define KOEVENTACTIONWIDGET_H
+#ifndef SCEVENTACTIONWIDGET_H
+#define SCEVENTACTIONWIDGET_H
 
 #include <QWidget>
 
@@ -51,4 +51,4 @@ signals:
     void addCommand(QUndoCommand *command);
 };
 
-#endif /* KOEVENTACTIONWIDGET_H */
+#endif /* SCEVENTACTIONWIDGET_H */

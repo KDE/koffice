@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOZOOMTOOLFACTORY_H
-#define KOZOOMTOOLFACTORY_H
+#ifndef KZOOMTOOLFACTORY_H
+#define KZOOMTOOLFACTORY_H
 
 //
 //  W A R N I N G

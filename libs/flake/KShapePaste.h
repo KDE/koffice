@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KOSHAPEPASTE_H
-#define KOSHAPEPASTE_H
+#ifndef KSHAPEPASTE_H
+#define KSHAPEPASTE_H
 
 #include <KOdfPasteBase.h>
 #include "flake_export.h"

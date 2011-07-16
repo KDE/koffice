@@ -17,14 +17,14 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef __rdf_KoSopranoTableModelDelegate_h__
-#define __rdf_KoSopranoTableModelDelegate_h__
+#ifndef KO_SOPRANO_TABLE_MODEL_DELEGATE_H
+#define KO_SOPRANO_TABLE_MODEL_DELEGATE_H
 
 
-#include <QItemDelegate>
-#include <QStyledItemDelegate>
-#include <QWidget>
-#include <QModelIndex>
+#include <QtGui/QItemDelegate>
+#include <QtGui/QStyledItemDelegate>
+#include <QtGui/QWidget>
+#include <QtCore/QModelIndex>
 
 /**
  * @short The Object-Type column really needs to be restricted to only URI, Literal etc.

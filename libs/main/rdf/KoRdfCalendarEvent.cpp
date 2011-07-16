@@ -23,20 +23,19 @@
 #include "KoRdfSemanticItem_p.h"
 #include "KoTextRdfCore.h"
 
-#include <QUuid>
-#include <QTemporaryFile>
+#include <QtCore/QUuid>
+#include <QtCore/QTemporaryFile>
 #include <kdebug.h>
-#include <kfiledialog.h>
-#include <KMessageBox>
-#include "ksystemtimezone.h"
+#include <KDE/KFileDialog>
+#include <KDE/KMessageBox>
+#include "KDE/KSystemTimeZone"
 
 // calendars
 #ifdef KDEPIMLIBS_FOUND
-#include <kcal/calendarresources.h>
-#include <kcal/calendarlocal.h>
-#include <kcal/vcalformat.h>
-#include <ksystemtimezone.h>
-#include <KConfigGroup>
+#include <KDE/KCal/CalendarResources>
+#include <KDE/KCal/CalendarLocal>
+#include <KDE/KCal/VCalFormat>
+#include <KDE/KConfigGroup>
 #endif
 
 #include <ui_KoRdfCalendarEventEditWidget.h>

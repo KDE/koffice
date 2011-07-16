@@ -19,8 +19,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KODEFRUBBERSELECT_H
-#define KODEFRUBBERSELECT_H
+#ifndef K_SHAPE_RUBBER_SELECT_STRATEGY_H
+#define K_SHAPE_RUBBER_SELECT_STRATEGY_H
 
 #include "KInteractionStrategy.h"
 
@@ -61,4 +61,4 @@ private:
     Q_DECLARE_PRIVATE(KShapeRubberSelectStrategy)
 };
 
-#endif /* KODEFRUBBERSELECT_H */
+#endif /* K_SHAPE_RUBBER_SELECT_STRATEGY_H */

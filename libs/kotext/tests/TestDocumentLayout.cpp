@@ -20,7 +20,10 @@
  */
 #include "TestDocumentLayout.h"
 #include "MockTextShape.h"
-#include <QtGui>
+#include <QtCore/QPointF>
+#include <QtGui/QTextBlock>
+#include <QtGui/QTextLine>
+#include <QtGui/QTextLayout>
 
 #include <kdebug.h>
 #include <kcomponentdata.h>

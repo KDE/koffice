@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KOSHAREDSAVINGDATA_H
-#define KOSHAREDSAVINGDATA_H
+#ifndef KSHAREDSAVINGDATA_H
+#define KSHAREDSAVINGDATA_H
 
 #include "flake_export.h"
 

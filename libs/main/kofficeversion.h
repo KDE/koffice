@@ -19,8 +19,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef _KOFFICE_VERSION_H_
-#define _KOFFICE_VERSION_H_
+#ifndef KOFFICE_VERSION_H
+#define KOFFICE_VERSION_H
 
 #include "komain_export.h"
 

@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KOCOMPOSITEOPERASE_H_
-#define KOCOMPOSITEOPERASE_H_
+#ifndef KOCOMPOSITEOPERASE_H
+#define KOCOMPOSITEOPERASE_H
 
 #include "KoColorSpaceMaths.h"
 #include "KoCompositeOp.h"

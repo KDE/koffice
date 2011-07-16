@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOPATHPOINTTYPECOMMAND_H
-#define KOPATHPOINTTYPECOMMAND_H
+#ifndef KPATHPOINTTYPECOMMAND_H
+#define KPATHPOINTTYPECOMMAND_H
 
 //
 //  W A R N I N G
@@ -89,4 +89,4 @@ private:
     QList<PointData> m_additionalPointData;
 };
 
-#endif // KOPATHPOINTTYPECOMMAND_H
+#endif // KPATHPOINTTYPECOMMAND_H

@@ -19,8 +19,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOLINEBORDER_H
-#define KOLINEBORDER_H
+#ifndef KLINEBORDER_H
+#define KLINEBORDER_H
 
 #include "KShapeBorderBase.h"
 

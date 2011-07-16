@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KPRPAGE_H
-#define KPRPAGE_H
+#ifndef SCPAGE_H
+#define SCPAGE_H
 
 #include <KoPAPage.h>
 
@@ -119,4 +119,4 @@ private:
     Private * const d;
 };
 
-#endif /* KPRPAGE_H */
+#endif /* SCPAGE_H */

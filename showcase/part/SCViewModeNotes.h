@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KPRVIEWMODENOTES_H
-#define KPRVIEWMODENOTES_H
+#ifndef SCVIEWMODENOTES_H
+#define SCVIEWMODENOTES_H
 
 #include <KoPAViewMode.h>
 
@@ -51,5 +51,5 @@ public:
     void removeShape(KShape *shape);
 };
 
-#endif // KPRVIEWMODENOTES_H
+#endif // SCVIEWMODENOTES_H
 

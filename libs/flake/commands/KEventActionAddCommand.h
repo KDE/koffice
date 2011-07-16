@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOEVENTACTIONADDCOMMAND_H
-#define KOEVENTACTIONADDCOMMAND_H
+#ifndef KEVENTACTIONADDCOMMAND_H
+#define KEVENTACTIONADDCOMMAND_H
 
 #include <QUndoCommand>
 #include "flake_export.h"
@@ -43,4 +43,4 @@ private:
     KEventActionAddCommandPrivate *d;
 };
 
-#endif /* KOEVENTACTIONADDCOMMAND_H */
+#endif /* KEVENTACTIONADDCOMMAND_H */

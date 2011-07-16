@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KOFRAMESHAPE_H
-#define KOFRAMESHAPE_H
+#ifndef KFRAMESHAPE_H
+#define KFRAMESHAPE_H
 
 #include "flake_export.h"
 

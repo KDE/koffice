@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KPRSHAPEANIMATIONS_H
-#define KPRSHAPEANIMATIONS_H
+#ifndef SCSHAPEANIMATIONS_H
+#define SCSHAPEANIMATIONS_H
 
 #include <QList>
 
@@ -66,4 +66,4 @@ private:
     QList<SCAnimationStep *> m_shapeAnimations;
 };
 
-#endif /* KPRSHAPEANIMATIONS_H */
+#endif /* SCSHAPEANIMATIONS_H */

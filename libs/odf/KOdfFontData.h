@@ -19,8 +19,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KOFONTFACE_H
-#define KOFONTFACE_H
+#ifndef KODFFONTDATA_H
+#define KODFFONTDATA_H
 
 #include <QtCore/QString>
 #include <QtCore/QSharedData>
@@ -92,4 +92,4 @@ private:
     QSharedDataPointer<KOdfFontDataPrivate> d;
 };
 
-#endif /* KOFONTFACE_H */
+#endif /* KODFFONTDATA_H */

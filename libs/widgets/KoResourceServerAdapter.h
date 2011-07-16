@@ -18,10 +18,10 @@
  */
 
 
-#ifndef KO_RESOURCESERVER_ADAPTER_H_
-#define KO_RESOURCESERVER_ADAPTER_H_
+#ifndef KO_RESOURCESERVER_ADAPTER_H
+#define KO_RESOURCESERVER_ADAPTER_H
 
-#include "KoResourceServer.h"
+#include "KoResourceServer.h"			//krazy:exclude=includes
 
 #include "kowidgets_export.h"
 
@@ -154,4 +154,4 @@ private:
     KoResourceServer<T>* m_resourceServer;
 };
 
-#endif // KO_RESOURCESERVER_ADAPTER_H_
+#endif // KO_RESOURCESERVER_ADAPTER_H

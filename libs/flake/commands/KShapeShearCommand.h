@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOSHAPESHEARCOMMAND_H
-#define KOSHAPESHEARCOMMAND_H
+#ifndef KSHAPESHEARCOMMAND_H
+#define KSHAPESHEARCOMMAND_H
 
 #include "flake_export.h"
 

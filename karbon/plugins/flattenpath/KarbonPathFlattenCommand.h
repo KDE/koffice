@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef _KARBONPATHFLATTENCOMMAND_H_
-#define _KARBONPATHFLATTENCOMMAND_H_
+#ifndef KARBONPATHFLATTENCOMMAND_H
+#define KARBONPATHFLATTENCOMMAND_H
 
 #include <QtGui/QUndoCommand>
 
@@ -51,4 +51,4 @@ private:
     Private * const d;
 };
 
-#endif // _KARBONPATHFLATTENCOMMAND_H_
+#endif // KARBONPATHFLATTENCOMMAND_H

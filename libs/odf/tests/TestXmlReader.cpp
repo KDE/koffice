@@ -28,9 +28,6 @@
 
 #include <KXmlReader.h>
 
-#include <QtXml>
-
-
 class TestXmlReader : public QObject
 {
     Q_OBJECT

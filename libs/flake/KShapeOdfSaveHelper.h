@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOSHAPEODFSAVEHELPER_H
-#define KOSHAPEODFSAVEHELPER_H
+#ifndef KSHAPEODFSAVEHELPER_H
+#define KSHAPEODFSAVEHELPER_H
 
 #include "KDragOdfSaveHelper.h"
 #include "flake_export.h"

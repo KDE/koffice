@@ -20,8 +20,8 @@ the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
 Boston, MA 02110-1301, USA.
 */
 
-#include "KoFilterManager.h"
 #include "KoFilterManager_p.h"
+#include "KoFilterManager.h"
 
 #include <QVBoxLayout>
 #include <QListWidget>

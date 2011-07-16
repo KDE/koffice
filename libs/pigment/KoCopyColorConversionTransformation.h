@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef _KO_COPY_COLOR_CONVERSION_TRANSFORMATION_H_
-#define _KO_COPY_COLOR_CONVERSION_TRANSFORMATION_H_
+#ifndef KO_COPY_COLOR_CONVERSION_TRANSFORMATION_H
+#define KO_COPY_COLOR_CONVERSION_TRANSFORMATION_H
 
 #include "KoColorConversionTransformation.h"
 #include "KoColorConversionTransformationFactory.h"

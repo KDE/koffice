@@ -17,9 +17,9 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include <klocale.h>
-
 #include "KoCompositeOp.h"
+#include <KDE/KLocale>
+
 #include "KoColorSpace.h"
 
 QString KoCompositeOp::categoryMix()

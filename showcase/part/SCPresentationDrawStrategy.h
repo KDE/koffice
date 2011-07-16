@@ -19,8 +19,8 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#ifndef KPRPRESENTATIONDRAWSTRATEGY_H
-#define KPRPRESENTATIONDRAWSTRATEGY_H
+#ifndef SCPRESENTATIONDRAWSTRATEGY_H
+#define SCPRESENTATIONDRAWSTRATEGY_H
 
 #include "SCPresentationStrategyBase.h"
 
@@ -34,5 +34,5 @@ public:
 };
 
 
-#endif /* KPRPRESENTATIONDRAWSTRATEGY_H */
+#endif /* SCPRESENTATIONDRAWSTRATEGY_H */
 

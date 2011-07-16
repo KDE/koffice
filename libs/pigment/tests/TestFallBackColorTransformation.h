@@ -16,8 +16,8 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-#ifndef TEST_FALL_BACK_COLOR_TRANSFORMATION_H_
-#define TEST_FALL_BACK_COLOR_TRANSFORMATION_H_
+#ifndef TEST_FALL_BACK_COLOR_TRANSFORMATION_H
+#define TEST_FALL_BACK_COLOR_TRANSFORMATION_H
 
 #include <QtTest/QtTest>
 

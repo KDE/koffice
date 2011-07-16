@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOPATHSEGMENT_H
-#define KOPATHSEGMENT_H
+#ifndef KPATHSEGMENT_H
+#define KPATHSEGMENT_H
 
 #include "flake_export.h"
 #include <QtCore/QPointF>

@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef TESTPAPAGEDELETECOMMAND_H
-#define TESTPAPAGEDELETECOMMAND_H
+#ifndef TESTSHAPEANIMATION_H
+#define TESTSHAPEANIMATION_H
 
 #include <QtTest/QtTest>
 
@@ -43,5 +43,5 @@ private:
     MockDisappearAnimation * m_animation3_3;
 };
 
-#endif // TESTPAPAGEDELETECOMMAND_H
+#endif // TESTSHAPEANIMATION_H
 

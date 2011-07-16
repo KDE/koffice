@@ -25,8 +25,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOTEXTLOADER_H
-#define KOTEXTLOADER_H
+#ifndef KTEXTLOADER_H
+#define KTEXTLOADER_H
 
 #include <QObject>
 

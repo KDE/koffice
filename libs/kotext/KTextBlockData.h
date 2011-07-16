@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOTEXTBLOCKDATA_H
-#define KOTEXTBLOCKDATA_H
+#ifndef KTEXTBLOCKDATA_H
+#define KTEXTBLOCKDATA_H
 
 #include <QTextBlockUserData>
 

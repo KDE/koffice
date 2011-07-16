@@ -30,16 +30,16 @@
 #include <QtCore/QList>
 #include <QtCore/QFileInfo>
 
-#include <kglobal.h>
-#include <kstandarddirs.h>
-#include <kcomponentdata.h>
+#include <KDE/KGlobal>
+#include <KDE/KStandardDirs>
+#include <KDE/KComponentData>
 
-#include "KoResource.h"
-#include "KoResourceServerObserver.h"
+#include <KoResource.h>				//krazy:exclude=includes
+#include "KoResourceServerObserver.h"		//krazy:exclude=includes
 
 #include "kowidgets_export.h"
 
-#include <KDebug>
+#include <KDE/KDebug>
 
 class KoResource;
 

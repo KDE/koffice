@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KPRCLOCKWIPESTRATEGY_H
-#define KPRCLOCKWIPESTRATEGY_H
+#ifndef SCCLOCKWIPESTRATEGY_H
+#define SCCLOCKWIPESTRATEGY_H
 
 #include <SCPageEffectStrategy.h>
 
@@ -37,4 +37,4 @@ private:
     int m_bladeCount;
 };
 
-#endif // KPRCLOCKWIPESTRATEGY_H
+#endif // SCCLOCKWIPESTRATEGY_H

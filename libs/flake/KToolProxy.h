@@ -18,8 +18,8 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#ifndef _KO_TOOL_PROXY_H_
-#define _KO_TOOL_PROXY_H_
+#ifndef K_TOOL_PROXY_H
+#define K_TOOL_PROXY_H
 
 #include <KViewConverter.h>
 #include <KToolManager.h>
@@ -142,4 +142,4 @@ private:
     KToolProxyPrivate * const d;
 };
 
-#endif // _KO_TOOL_PROXY_H_
+#endif // K_TOOL_PROXY_H

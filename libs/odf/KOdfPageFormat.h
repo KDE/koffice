@@ -20,8 +20,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KOPAGEFORMAT_H
-#define KOPAGEFORMAT_H
+#ifndef KODFPAGEFORMAT_H
+#define KODFPAGEFORMAT_H
 
 #include "kodf_export.h"
 

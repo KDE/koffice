@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KODELETECHANGEMARKER_H
-#define KODELETECHANGEMARKER_H
+#ifndef KDELETECHANGEMARKER_H
+#define KDELETECHANGEMARKER_H
 
 #include "kotext_export.h"
 
@@ -98,4 +98,4 @@ private:
     Private * const d;
 };
 
-#endif // KODELETECHANGEMARKER_H
+#endif // KDELETECHANGEMARKER_H

@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KO_TOOL_FACTORY_H
-#define KO_TOOL_FACTORY_H
+#ifndef K_TOOL_FACTORY_H
+#define K_TOOL_FACTORY_H
 
 #include "KToolBase.h"
 #include "flake_export.h"

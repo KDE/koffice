@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KPRANIMATIONLOADER_H
-#define KPRANIMATIONLOADER_H
+#ifndef SCANIMATIONLOADER_H
+#define SCANIMATIONLOADER_H
 
 #include <QList>
 
@@ -48,4 +48,4 @@ private:
     SCAnimationStep *m_animationStep;
 };
 
-#endif /* KPRANIMATIONLOADER_H */
+#endif /* SCANIMATIONLOADER_H */

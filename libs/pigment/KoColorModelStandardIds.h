@@ -17,10 +17,10 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef _KO_COLOR_MODEL_STANDARD_IDS_H_
-#define _KO_COLOR_MODEL_STANDARD_IDS_H_
+#ifndef KO_COLOR_MODEL_STANDARD_IDS_H
+#define KO_COLOR_MODEL_STANDARD_IDS_H
 
-#include <KoID.h>
+#include "KoID.h"	//krazy:exclude=includes
 
 #include "pigment_export.h"
 

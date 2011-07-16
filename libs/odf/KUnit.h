@@ -20,8 +20,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KOUNIT_H
-#define KOUNIT_H
+#ifndef KUNIT_H
+#define KUNIT_H
 #include <QtCore/QString>
 #include <QtCore/QStringList>
 #include <QtCore/QVariant>

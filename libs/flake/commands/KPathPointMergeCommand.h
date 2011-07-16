@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOPATHPOINTMERGECOMMAND_H
-#define KOPATHPOINTMERGECOMMAND_H
+#ifndef KPATHPOINTMERGECOMMAND_H
+#define KPATHPOINTMERGECOMMAND_H
 
 #include <QUndoCommand>
 
@@ -53,4 +53,4 @@ private:
     Private * const d;
 };
 
-#endif // KOPATHPOINTMERGECOMMAND_H
+#endif // KPATHPOINTMERGECOMMAND_H

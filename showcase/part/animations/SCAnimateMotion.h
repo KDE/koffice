@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KPRANIMATEMOTION_H
-#define KPRANIMATEMOTION_H
+#ifndef SCANIMATEMOTION_H
+#define SCANIMATEMOTION_H
 
 #include "SCAnimationBase.h"
 
@@ -36,5 +36,5 @@ protected:
     virtual void next(int currentTime);
 };
 
-#endif // KPRANIMATEMOTION_H
+#endif // SCANIMATEMOTION_H
 

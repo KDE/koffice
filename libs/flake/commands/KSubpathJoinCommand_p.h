@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOSUBPATHJOINCOMMAND_H
-#define KOSUBPATHJOINCOMMAND_H
+#ifndef KSUBPATHJOINCOMMAND_H
+#define KSUBPATHJOINCOMMAND_H
 
 //
 //  W A R N I N G
@@ -74,4 +74,4 @@ private:
     int m_reverse;
 };
 
-#endif // KOSUBPATHJOINCOMMAND_H
+#endif // KSUBPATHJOINCOMMAND_H

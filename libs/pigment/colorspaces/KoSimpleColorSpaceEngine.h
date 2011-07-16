@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef _KO_SIMPLE_COLOR_SPACE_ENGINE_H_
-#define _KO_SIMPLE_COLOR_SPACE_ENGINE_H_
+#ifndef KO_SIMPLE_COLOR_SPACE_ENGINE_H
+#define KO_SIMPLE_COLOR_SPACE_ENGINE_H
 
 #include <KoColorSpaceEngine.h>
 

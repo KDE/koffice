@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef _KARBONPATHREFINECOMMAND_H_
-#define _KARBONPATHREFINECOMMAND_H_
+#ifndef KARBONPATHREFINECOMMAND_H
+#define KARBONPATHREFINECOMMAND_H
 
 #include <QtGui/QUndoCommand>
 
@@ -51,4 +51,4 @@ private:
     Private * const d;
 };
 
-#endif // _KARBONPATHREFINECOMMAND_H_
+#endif // KARBONPATHREFINECOMMAND_H

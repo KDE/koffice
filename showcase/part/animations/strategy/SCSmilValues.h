@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KPRSMILVALUES_H
-#define KPRSMILVALUES_H
+#ifndef SCSMILVALUES_H
+#define SCSMILVALUES_H
 
 #include "SCAnimationValue.h"
 #include "SCValueParser.h"
@@ -43,4 +43,4 @@ protected:
     QList<qreal> m_splines;
 };
 
-#endif // KPRSMILVALUES_H
+#endif // SCSMILVALUES_H

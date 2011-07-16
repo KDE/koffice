@@ -19,8 +19,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOSHAPECONTROLLER_H
-#define KOSHAPECONTROLLER_H
+#ifndef KSHAPECONTROLLER_H
+#define KSHAPECONTROLLER_H
 
 #include "flake_export.h"
 

@@ -20,8 +20,8 @@
 #ifndef KOZOOMACTION_H
 #define KOZOOMACTION_H
 
-#include <kselectaction.h>
-#include <KoZoomMode.h>
+#include <KDE/KSelectAction>
+#include "KoZoomMode.h"				//krazy:exclude=includes
 
 #include "kowidgets_export.h"
 

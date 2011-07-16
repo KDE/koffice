@@ -19,12 +19,11 @@
 */
 
 
-#ifndef KOOASISSETTINGS_H
-#define KOOASISSETTINGS_H
+#ifndef KODFSETTINGS_H
+#define KODFSETTINGS_H
 
-#include <qdom.h>
 #include "kodf_export.h"
-#include <KXmlReader.h>
+#include "KXmlReader.h"			//krazy:exclude=includes
 
 /**
  * @brief Parse settings.xml file.

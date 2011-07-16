@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOSHAPERENAMECOMMAND_H
-#define KOSHAPERENAMECOMMAND_H
+#ifndef KSHAPERENAMECOMMAND_H
+#define KSHAPERENAMECOMMAND_H
 
 #include "flake_export.h"
 #include <QUndoCommand>
@@ -43,4 +43,4 @@ private:
     Private * const d;
 };
 
-#endif /* KOSHAPERENAMECOMMAND_H */
+#endif /* KSHAPERENAMECOMMAND_H */

@@ -17,10 +17,10 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef __rdf_KoSopranoTableModel_h__
-#define __rdf_KoSopranoTableModel_h__
+#ifndef KO_SOPRANO_TABLE_MODEL_H
+#define KO_SOPRANO_TABLE_MODEL_H 
 
-#include <QAbstractTableModel>
+#include <QtCore/QAbstractTableModel>
 #include <Soprano/Soprano>
 
 class KoDocumentRdf;

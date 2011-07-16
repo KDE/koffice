@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KODRAG_H
-#define KODRAG_H
+#ifndef KDRAG_H
+#define KDRAG_H
 
 #include "flake_export.h"
 

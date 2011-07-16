@@ -16,8 +16,8 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#ifndef __KODELETEDCELLDATA_H__
-#define __KODELETEDCELLDATA_H__
+#ifndef KDELETEDCELLDATA_H
+#define KDELETEDCELLDATA_H
 
 //
 //  W A R N I N G
@@ -30,8 +30,8 @@
 // We mean it.
 //
 
-class QTextTableCellFormat;
-class QTextDocumentFragment;
+#include <QtGui/QTextDocumentFragment>
+#include <QtGui/QTextTableCellFormat>
 
 class KDeletedCellData
 {

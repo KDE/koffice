@@ -19,8 +19,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KO_COMPOSITE_COPY_OP2_H
-#define KO_COMPOSITE_COPY_OP2_H
+#ifndef KO_COMPOSITE_OP_COPY2_H
+#define KO_COMPOSITE_OP_COPY2_H
 
 #include <KoColorSpaceMaths.h>
 

@@ -19,8 +19,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef __ko_imageresource__
-#define __ko_imageresource__
+#ifndef KO_IMAGERESOURCE_H
+#define KO_IMAGERESOURCE_H
 #include "kowidgets_export.h"
 
 /**
@@ -36,5 +36,4 @@ public:
     /// returns a 24 pixels xpm-format image of a broken chain.
     KDE_DEPRECATED const char** chainBroken();
 };
-#endif // __ko_imageresource__
-
+#endif // KO_IMAGERESOURCE_H

@@ -16,8 +16,8 @@
    the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
 */
-#ifndef KPRPAGEAPPLICATIONDATA_H
-#define KPRPAGEAPPLICATIONDATA_H
+#ifndef SCPAGEAPPLICATIONDATA_H
+#define SCPAGEAPPLICATIONDATA_H
 
 #include "showcase_export.h"
 
@@ -45,4 +45,4 @@ private:
    SCPageEffect * m_pageEffect;
 };
 
-#endif // KPRPAGEAPPLICATIONDATA_H
+#endif // SCPAGEAPPLICATIONDATA_H

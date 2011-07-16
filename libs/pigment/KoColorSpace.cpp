@@ -18,6 +18,7 @@
 */
 
 #include "KoColorSpace.h"
+#include "KoColorSpace_p.h"
 
 #include <QThreadStorage>
 #include <QByteArray>
@@ -37,7 +38,6 @@
 #include "KoFallBackColorTransformation.h"
 #include "KoUniqueNumberForIdServer.h"
 
-#include "KoColorSpace_p.h"
 
 KoColorSpace::KoColorSpace()
         : d(new Private())

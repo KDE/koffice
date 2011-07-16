@@ -19,8 +19,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KOSHAPEMANAGER_H
-#define KOSHAPEMANAGER_H
+#ifndef KSHAPEMANAGER_H
+#define KSHAPEMANAGER_H
 
 #include <QList>
 #include <QObject>

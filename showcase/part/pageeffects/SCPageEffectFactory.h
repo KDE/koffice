@@ -16,8 +16,8 @@
    the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
 */
-#ifndef KPRPAGEEFFECTFACTORY_H
-#define KPRPAGEEFFECTFACTORY_H
+#ifndef SCPAGEEFFECTFACTORY_H
+#define SCPAGEEFFECTFACTORY_H
 
 #include <QList>
 #include <QPair>
@@ -116,4 +116,4 @@ private:
     Private * const d;
 };
 
-#endif /* KPRPAGEEFFECTFACTORY_H */
+#endif /* SCPAGEEFFECTFACTORY_H */

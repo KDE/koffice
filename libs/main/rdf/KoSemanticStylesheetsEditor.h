@@ -17,14 +17,14 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef __rdf_KoSemanticStylesheetsEditor_h__
-#define __rdf_KoSemanticStylesheetsEditor_h__
+#ifndef KO_SEMANTIC_STYLE_SHEETS_EDITOR_H
+#define KO_SEMANTIC_STYLE_SHEETS_EDITOR_H
 
 #include "komain_export.h"
 
 #include "RdfForward.h"
-#include <KDialog>
-#include <QSharedPointer>
+#include <KDE/KDialog>
+#include <QtCore/QSharedPointer>
 
 class QTreeWidgetItem;
 class QTableWidgetItem;

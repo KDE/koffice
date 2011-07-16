@@ -17,14 +17,14 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef __KO_EMBEDDING_FILTER_H__
-#define __KO_EMBEDDING_FILTER_H__
+#ifndef KO_EMBEDDING_FILTER_H
+#define KO_EMBEDDING_FILTER_H
 
 #include <QtCore/QObject>
 #include <QtCore/QMap>
 #include "komain_export.h"
 
-#include "KoFilter.h"
+#include "KoFilter.h"			//krazy:exclude=includes
 
 class QIODevice;
 class KoFilterChain;

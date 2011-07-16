@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOPATHFILLRULECOMMAND_H
-#define KOPATHFILLRULECOMMAND_H
+#ifndef KPATHFILLRULECOMMAND_H
+#define KPATHFILLRULECOMMAND_H
 
 #include "flake_export.h"
 
@@ -48,4 +48,4 @@ private:
     Private * const d;
 };
 
-#endif // KOPATHFILLRULECOMMAND_H
+#endif // KPATHFILLRULECOMMAND_H

@@ -18,8 +18,8 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#ifndef KO_TOOL_MANAGER
-#define KO_TOOL_MANAGER
+#ifndef K_TOOL_MANAGER
+#define K_TOOL_MANAGER
 
 #include "KInputDevice.h"
 #include "flake_export.h"

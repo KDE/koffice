@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KPRHTMLEXPORTUIDELEGATE_H
-#define KPRHTMLEXPORTUIDELEGATE_H
+#ifndef SCHTMLEXPORTUIDELEGATE_H
+#define SCHTMLEXPORTUIDELEGATE_H
 
 #include <kio/jobuidelegate.h>
 
@@ -36,4 +36,4 @@ public:
                                               time_t mtimeSrc = (time_t) -1, time_t mtimeDest = (time_t) -1);
 };
 
-#endif /* KPRHTMLEXPORTUIDELEGATE_H */
+#endif /* SCHTMLEXPORTUIDELEGATE_H */

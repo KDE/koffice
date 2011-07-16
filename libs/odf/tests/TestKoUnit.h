@@ -18,8 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-#ifndef TESTSHAPEPAINT_H
-#define TESTSHAPEPAINT_H
+#ifndef TESTKOUNIT_H
+#define TESTKOUNIT_H
 
 #include <QtTest/QtTest>
 

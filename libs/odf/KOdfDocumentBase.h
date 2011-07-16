@@ -20,10 +20,10 @@
    the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
   Boston, MA 02110-1301, USA.
 */
-#ifndef KOODFDOCUMENT_H
-#define KOODFDOCUMENT_H
+#ifndef KODFDOCUMENTBASE_H
+#define KODFDOCUMENTBASE_H
 
-#include <kurl.h>
+#include <KDE/KUrl>
 
 class KOdfStore;
 class KOdfStoreReader;

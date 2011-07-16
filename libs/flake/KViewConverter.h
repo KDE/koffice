@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOVIEWCONVERTER_H
-#define KOVIEWCONVERTER_H
+#ifndef KVIEWCONVERTER_H
+#define KVIEWCONVERTER_H
 
 #include <QtCore/QPointF>
 #include <QtCore/QRectF>

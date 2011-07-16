@@ -16,8 +16,8 @@
    the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
    Boston, MA 02110-1301, USA.
 */
-#ifndef KODOCKWIDGETTITLEBARBUTTON_H_
-#define KODOCKWIDGETTITLEBARBUTTON_H_
+#ifndef KODOCKWIDGETTITLEBARBUTTON_H
+#define KODOCKWIDGETTITLEBARBUTTON_H
 
 #include "kowidgets_export.h"
 #include <QtGui/QAbstractButton>

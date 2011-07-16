@@ -1,7 +1,6 @@
+#include "TestKoColorSpaceAbstract.h"
 
 #include <cfloat>
-
-#include "TestKoColorSpaceAbstract.h"
 
 #include "KoColorSpaceAbstract.h"
 #include "KoColorSpaceTraits.h"

@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KPRNOTES_H
-#define KPRNOTES_H
+#ifndef SCNOTES_H
+#define SCNOTES_H
 
 #include <KOdfPageLayoutData.h>
 #include <KoPAPageBase.h>
@@ -82,5 +82,5 @@ private:
     KImageCollection * m_imageCollection;
 };
 
-#endif // KPRNOTES_H
+#endif // SCNOTES_H
 

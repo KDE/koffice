@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOSHAPEUSERDATA_H
-#define KOSHAPEUSERDATA_H
+#ifndef KSHAPEUSERDATA_H
+#define KSHAPEUSERDATA_H
 
 #include <QObject>
 

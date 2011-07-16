@@ -20,8 +20,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KOSHAPE_H
-#define KOSHAPE_H
+#ifndef KSHAPE_H
+#define KSHAPE_H
 
 #include "KInsets.h"
 #include "KoFlake.h"

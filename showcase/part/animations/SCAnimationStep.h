@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KPRANIMATIONSTEP_H
-#define KPRANIMATIONSTEP_H
+#ifndef SCANIMATIONSTEP_H
+#define SCANIMATIONSTEP_H
 
 #include <QSequentialAnimationGroup>
 #include "SCAnimationData.h"
@@ -36,4 +36,4 @@ public:
     virtual void deactivate();
 };
 
-#endif /* KPRANIMATIONSTEP_H */
+#endif /* SCANIMATIONSTEP_H */

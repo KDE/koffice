@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef _KO_INCOMPLETE_COLOR_SPACE_H_
-#define _KO_INCOMPLETE_COLOR_SPACE_H_
+#ifndef KO_INCOMPLETE_COLOR_SPACE_H
+#define KO_INCOMPLETE_COLOR_SPACE_H
 
 #include <KoFallBackColorTransformation.h>
 #include <KoColorSpaceAbstract.h>
@@ -112,4 +112,4 @@ private:
     mutable QByteArray m_convertionCache;
 };
 
-#endif
+#endif //KO_INCOMPLETE_COLOR_SPACE_H

@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef __rdf_RdfSemanticTreeWidgetSelectAction_h__
-#define __rdf_RdfSemanticTreeWidgetSelectAction_h__
+#ifndef RDF_SEMANTIC_TREE_WIDGET_SELECT_ACTION_H
+#define RDF_SEMANTIC_TREE_WIDGET_SELECT_ACTION_H
 
 #include "RdfForward.h"
 #include "RdfSemanticTreeWidgetAction.h"

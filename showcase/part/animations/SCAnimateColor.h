@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KPRANIMATECOLOR_H
-#define KPRANIMATECOLOR_H
+#ifndef SCANIMATECOLOR_H
+#define SCANIMATECOLOR_H
 
 #include "SCAnimationBase.h"
 
@@ -36,4 +36,4 @@ protected:
     virtual void next(int currentTime);
 };
 
-#endif /* KPRANIMATECOLOR_H */
+#endif /* SCANIMATECOLOR_H */

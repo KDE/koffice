@@ -16,8 +16,8 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-#ifndef KO_COMPOSITEOPS_BENCHMARK_H_
-#define KO_COMPOSITEOPS_BENCHMARK_H_
+#ifndef KO_COMPOSITEOPS_BENCHMARK_H
+#define KO_COMPOSITEOPS_BENCHMARK_H
 
 #include <QtTest/QtTest>
 

@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KPRPAGEEFFECTSTRATEGY_H
-#define KPRPAGEEFFECTSTRATEGY_H
+#ifndef SCPAGEEFFECTSTRATEGY_H
+#define SCPAGEEFFECTSTRATEGY_H
 
 #include "SCPageEffect.h"
 
@@ -142,4 +142,4 @@ private:
     bool m_graphicsView;
 };
 
-#endif /* KPRPAGEEFFECTSTRATEGY_H */
+#endif /* SCPAGEEFFECTSTRATEGY_H */

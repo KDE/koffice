@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KOPATHPOINTDATA_H
-#define KOPATHPOINTDATA_H
+#ifndef KPATHPOINTDATA_H
+#define KPATHPOINTDATA_H
 
 #include "KPathShape.h"
 

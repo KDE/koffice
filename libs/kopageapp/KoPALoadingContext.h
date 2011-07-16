@@ -21,9 +21,9 @@
 #ifndef KOPALOADINGCONTEXT_H
 #define KOPALOADINGCONTEXT_H
 
-#include <KShapeLoadingContext.h>
+#include <KShapeLoadingContext.h>	//krazy:exclude=includes
 
-#include <QMap>
+#include <QtCore/QMap>
 
 #include "kopageapp_export.h"
 

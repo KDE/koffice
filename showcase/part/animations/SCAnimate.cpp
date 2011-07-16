@@ -37,9 +37,6 @@
 #include <KShapeLoadingContext.h>
 #include <KShapeSavingContext.h>
 #include <KTextBlockData.h>
-#include <KShapeLoadingContext.h>
-#include <KShapeSavingContext.h>
-#include <KXmlReader.h>
 #include <KXmlWriter.h>
 #include <KoPASavingContext.h>
 

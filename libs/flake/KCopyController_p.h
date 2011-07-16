@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOCOPYCONTROLLER_P_H
-#define KOCOPYCONTROLLER_P_H
+#ifndef KCOPYCONTROLLER_P_H
+#define KCOPYCONTROLLER_P_H
 
 //
 //  W A R N I N G

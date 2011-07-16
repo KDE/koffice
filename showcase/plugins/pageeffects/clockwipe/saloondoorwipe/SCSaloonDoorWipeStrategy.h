@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KPRSALOONDOORWIPESTRATEGY_H
-#define KPRSALOONDOORWIPESTRATEGY_H
+#ifndef SCSALOONDOORWIPESTRATEGY_H
+#define SCSALOONDOORWIPESTRATEGY_H
 
 #include "SCSweepWipeStrategy.h"
 
@@ -32,4 +32,4 @@ public:
     virtual void paintStep(QPainter &p, int currPos, const SCPageEffect::Data &data);
 };
 
-#endif // KPRSALOONDOORWIPESTRATEGY_H
+#endif // SCSALOONDOORWIPESTRATEGY_H

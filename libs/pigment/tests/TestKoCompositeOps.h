@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef _KOCOMPOSITEOPS_H_
-#define _KOCOMPOSITEOPS_H_
+#ifndef KOCOMPOSITEOPS_H
+#define KOCOMPOSITEOPS_H
 
 #include <QtTest/QtTest>
 

@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef __koFactory_h__
-#define __koFactory_h__
+#ifndef KO_FACTORY_H
+#define KO_FACTORY_H
 
 #include <kparts/factory.h>
 #include "komain_export.h"
@@ -35,4 +35,4 @@ private:
     KoFactoryPrivate * const d;
 };
 
-#endif
+#endif //KO_FACTORY_H

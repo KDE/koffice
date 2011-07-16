@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KPRPAGELAYOUTDOCKER_H
-#define KPRPAGELAYOUTDOCKER_H
+#ifndef SCPAGELAYOUTDOCKER_H
+#define SCPAGELAYOUTDOCKER_H
 
 #include <QDockWidget>
 #include <QMap>
@@ -52,4 +52,4 @@ private:
     QListWidgetItem * m_previousItem;
 };
 
-#endif /* KPRPAGELAYOUTDOCKER_H */
+#endif /* SCPAGELAYOUTDOCKER_H */

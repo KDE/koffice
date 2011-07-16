@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KPRPLACEHOLDERSHAPE_H
-#define KPRPLACEHOLDERSHAPE_H
+#ifndef SCPLACEHOLDERSHAPE_H
+#define SCPLACEHOLDERSHAPE_H
 
 #include <KShape.h>
 
@@ -49,4 +49,4 @@ private:
     SCPlaceholderStrategy * m_strategy;
 };
 
-#endif /* KPRPLACEHOLDERSHAPE_H */
+#endif /* SCPLACEHOLDERSHAPE_H */

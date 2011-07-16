@@ -21,9 +21,9 @@
 
 #include "komain_export.h"
 
-#include <QString>
-#include <QObject>
-#include <QPointer>
+#include <QtCore/QString>
+#include <QtCore/QObject>
+#include <QtCore/QPointer>
 
 class KoUpdater;
 class KoProgressProxy;

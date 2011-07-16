@@ -20,16 +20,18 @@
 
 #include "TestLoading.h"
 
-#include <QtGui>
-#include <KDebug>
-#include <QTextStream>
+#include <QtGui/QTextEdit>
+#include <QtGui/QTextDocument>
+#include <QtGui/QApplication>
+#include <QtCore/QTextStream>
+#include <QtCore/QFile>
 #include <QtScript>
-#include <QtTest>
+#include <QtTest/QtTest>
 
+#include <KDE/KDebug>
 #include <KStyleManager.h>
 #include <KOdfStylesReader.h>
 #include <KOdfStore.h>
-#include <KOdfStylesReader.h>
 #include <KTextLoader.h>
 #include <KXmlReader.h>
 #include <KOdfStoreReader.h>
@@ -49,7 +51,6 @@
 #include <KTableStyle.h>
 #include <KTableCellStyle.h>
 #include <KTextDocumentLayout.h>
-#include <KStyleManager.h>
 #include <KCharacterStyle.h>
 #include <KParagraphStyle.h>
 #include <KoText.h>

@@ -19,11 +19,10 @@
 
 #include "documentstructuretest.h"
 
-#include <QDebug>
-#include <QtTest>
-#include <QtGui>
-
-
+#include <QtCore/QDebug>
+#include <QtCore/QString>
+#include <QtGui/QApplication>
+#include <QtTest/QtTest>
 
 #include <KoDocument.h>
 #include <KoDocumentInfo.h>

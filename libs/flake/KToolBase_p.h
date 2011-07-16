@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOTOOLPRIVATE_H
-#define KOTOOLPRIVATE_H
+#ifndef KTOOLBASE_P_H
+#define KTOOLBASE_P_H
 
 //
 //  W A R N I N G

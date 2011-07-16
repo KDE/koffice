@@ -19,8 +19,8 @@
 
 /* heavily based on Ariya's work (see kcells/formula) -- all errors are my own! */
 
-#ifndef KPRVALUEPARSER_H
-#define KPRVALUEPARSER_H
+#ifndef SCVALUEPARSER_H
+#define SCVALUEPARSER_H
 
 #include <QVector>
 #include <QString>
@@ -206,4 +206,4 @@ private:
     mutable QVector<QString> m_identifier;
 };
 
-#endif // KPRVALUEPARSER_H
+#endif // SCVALUEPARSER_H

@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KPRSOUNDEVENTACTIONFACTORY_H
-#define KPRSOUNDEVENTACTIONFACTORY_H
+#ifndef SCSOUNDEVENTACTIONFACTORY_H
+#define SCSOUNDEVENTACTIONFACTORY_H
 
 #include <KEventActionFactoryBase.h>
 
@@ -32,4 +32,4 @@ public:
     virtual QWidget *createOptionWidget();
 };
 
-#endif /* KPRSOUNDEVENTACTIONFACTORY_H */
+#endif /* SCSOUNDEVENTACTIONFACTORY_H */

@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KOCOMPOSITEOPSUBTRACT_H_
-#define KOCOMPOSITEOPSUBTRACT_H_
+#ifndef KOCOMPOSITEOPSUBTRACT_H
+#define KOCOMPOSITEOPSUBTRACT_H
 
 #include <QDebug>
 #include "KoCompositeOpAlphaBase.h"

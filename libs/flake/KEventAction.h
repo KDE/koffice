@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KOEVENTACTION_H
-#define KOEVENTACTION_H
+#ifndef KEVENTACTION_H
+#define KEVENTACTION_H
 
 #include "flake_export.h"
 

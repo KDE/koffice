@@ -18,7 +18,7 @@
 #ifndef KOPATTERN_H
 #define KOPATTERN_H
 
-#include "KoResource.h"
+#include "KoResource.h"				//krazy:exclude=includes
 #include <pigment_export.h>
 
 /// Write API docs here

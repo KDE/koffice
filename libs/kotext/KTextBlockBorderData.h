@@ -16,8 +16,8 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#ifndef KOTEXTBLOCKBORDERDATA_H
-#define KOTEXTBLOCKBORDERDATA_H
+#ifndef KTEXTBLOCKBORDERDATA_H
+#define KTEXTBLOCKBORDERDATA_H
 
 #include "KParagraphStyle.h"
 #include <KInsets.h>

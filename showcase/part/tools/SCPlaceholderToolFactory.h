@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KPRPLACEHOLDERTOOLFACTORY_H
-#define KPRPLACEHOLDERTOOLFACTORY_H
+#ifndef SCPLACEHOLDERTOOLFACTORY_H
+#define SCPLACEHOLDERTOOLFACTORY_H
 
 #include <KToolFactoryBase.h>
 
@@ -32,4 +32,4 @@ public:
     virtual KToolBase * createTool(KCanvasBase *canvas);
 };
 
-#endif /* KPRPLACEHOLDERTOOLFACTORY_H */
+#endif /* SCPLACEHOLDERTOOLFACTORY_H */

@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KOPOINTGROUP_H
-#define KOPOINTGROUP_H
+#ifndef KPOINTGROUP_H
+#define KPOINTGROUP_H
 
 //
 //  W A R N I N G

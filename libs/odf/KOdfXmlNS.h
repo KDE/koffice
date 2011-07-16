@@ -17,10 +17,10 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KOXMLNS_H
-#define KOXMLNS_H
+#ifndef KODFXMLNS_H
+#define KODFXMLNS_H
 
-#include <QString>
+#include <QtCore/QString>
 
 #include "kodf_export.h"
 /**

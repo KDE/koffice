@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOSHAPECREATECOMMAND_H
-#define KOSHAPECREATECOMMAND_H
+#ifndef KSHAPECREATECOMMAND_H
+#define KSHAPECREATECOMMAND_H
 
 #include "flake_export.h"
 #include <QUndoCommand>

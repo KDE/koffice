@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOPATHBASECOMMAND_H
-#define KOPATHBASECOMMAND_H
+#ifndef KPATHBASECOMMAND_H
+#define KPATHBASECOMMAND_H
 
 //
 //  W A R N I N G
@@ -62,4 +62,4 @@ protected:
     QSet<KPathShape*> m_shapes; ///< the shapes the command operates on
 };
 
-#endif // KOPATHBASECOMMAND_H
+#endif // KPATHBASECOMMAND_H

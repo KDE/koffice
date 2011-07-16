@@ -17,14 +17,14 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOFFICE_PAGE_LAYOUT_DIALOG
-#define KOFFICE_PAGE_LAYOUT_DIALOG
+#ifndef KO_PAGE_LAYOUT_DIALOG_H
+#define KO_PAGE_LAYOUT_DIALOG_H
 
 #include "kowidgets_export.h"
 
-#include <KoText.h>
+#include <KoText.h>			//krazy:exclude=includes
 
-#include <KPageDialog>
+#include <KDE/KPageDialog>
 
 struct KOdfPageLayoutData;
 

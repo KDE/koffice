@@ -16,8 +16,8 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#ifndef KOCHANGETRACKER_H
-#define KOCHANGETRACKER_H
+#ifndef KCHANGETRACKER_H
+#define KCHANGETRACKER_H
 
 //KOffice includes
 #include "kotext_export.h"

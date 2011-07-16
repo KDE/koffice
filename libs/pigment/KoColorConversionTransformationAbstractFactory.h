@@ -17,12 +17,12 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef _KO_COLOR_CONVERSION_TRANSFORMATION_ABSTRACT_FACTORY_H_
-#define _KO_COLOR_CONVERSION_TRANSFORMATION_ABSTRACT_FACTORY_H_
+#ifndef KO_COLOR_CONVERSION_TRANSFORMATION_ABSTRACT_FACTORY_H
+#define KO_COLOR_CONVERSION_TRANSFORMATION_ABSTRACT_FACTORY_H
 
 #include "pigment_export.h"
 
-#include <KoColorConversionTransformation.h>
+#include "KoColorConversionTransformation.h"			//krazy:exclude=includes
 
 class PIGMENTCMS_EXPORT KoColorConversionTransformationAbstractFactory
 {

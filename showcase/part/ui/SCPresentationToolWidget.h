@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KPRPRESENTATIONTOOLDIALOG_H
-#define KPRPRESENTATIONTOOLDIALOG_H
+#ifndef SCPRESENTATIONTOOLWIDGET_H
+#define SCPRESENTATIONTOOLWIDGET_H
 
 #include <ui_SCPresentationTool.h>
 
@@ -37,5 +37,5 @@ private:
     Ui::SCPresentationTool m_uiWidget;
 };
 
-#endif // KPRPRESENTATIONTOOLDIALOG_H
+#endif // SCPRESENTATIONTOOLWIDGET_H
 

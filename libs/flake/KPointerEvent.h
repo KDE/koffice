@@ -20,8 +20,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KOPOINTEREVENT_H
-#define KOPOINTEREVENT_H
+#ifndef KPOINTEREVENT_H
+#define KPOINTEREVENT_H
 
 #include <QInputEvent>
 

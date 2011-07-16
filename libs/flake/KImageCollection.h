@@ -16,8 +16,8 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#ifndef KOIMAGECOLLECTION_H
-#define KOIMAGECOLLECTION_H
+#ifndef KIMAGECOLLECTION_H
+#define KIMAGECOLLECTION_H
 
 #include "flake_export.h"
 

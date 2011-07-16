@@ -20,10 +20,10 @@
 #ifndef KOCOLORSPACEFACTORY_H
 #define KOCOLORSPACEFACTORY_H
 
-#include "KoColorSpaceConstants.h"
-#include "KoColorConversionTransformation.h"
-#include <KoChannelInfo.h>
-#include <KoID.h>
+#include "KoColorSpaceConstants.h"			//krazy:exclude=includes	
+#include "KoColorConversionTransformation.h"		//krazy:exclude=includes	
+#include "KoChannelInfo.h"				//krazy:exclude=includes	
+#include "KoID.h"					//krazy:exclude=includes	
 #include "pigment_export.h"
 
 class KoCompositeOp;

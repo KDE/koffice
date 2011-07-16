@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOINLINEOBJECTFACTORY_H
-#define KOINLINEOBJECTFACTORY_H
+#ifndef KINLINEOBJECTFACTORY_H
+#define KINLINEOBJECTFACTORY_H
 
 #include <QString>
 #include <QObject>

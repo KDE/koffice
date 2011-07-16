@@ -17,8 +17,8 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#ifndef KOCANVASSUPERVISOR_H
-#define KOCANVASSUPERVISOR_H
+#ifndef KCANVASSUPERVISOR_H
+#define KCANVASSUPERVISOR_H
 
 #include <QList>
 

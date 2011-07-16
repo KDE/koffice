@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef __ko_document_entry_h__
-#define __ko_document_entry_h__
+#ifndef KO_DOCUMENT_ENTRY_H
+#define KO_DOCUMENT_ENTRY_H
 
 #include <kservice.h>
 #include <ksharedptr.h>
@@ -123,4 +123,4 @@ private:
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(KoDocumentEntry::QueryFlags)
 
-#endif
+#endif // KO_DOCUMENT_ENTRY_H

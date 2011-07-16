@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KODOCKREGISTRY_
-#define KODOCKREGISTRY_
+#ifndef KDOCKREGISTRY_H
+#define KDOCKREGISTRY_H
 
 #include "KGenericRegistry.h"
 #include "KDockFactoryBase.h"

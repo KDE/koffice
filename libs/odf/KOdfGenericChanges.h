@@ -18,13 +18,12 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KOGENCHANGES_H
-#define KOGENCHANGES_H
+#ifndef KODFGENERICCHANGES_H
+#define KODFGENERICCHANGES_H
 
 #include "kodf_export.h"
-#include "KOdfGenericStyle.h"
-
-#include <KOdfGenericChange.h>
+#include "KOdfGenericStyle.h"			//krazy:exclude=includes
+#include "KOdfGenericChange.h"			//krazy:exclude=includes
 
 /**
  * @brief Repository of changes used during saving of OASIS/OOo file.
@@ -80,4 +79,4 @@ private:
     Private * const d;
 };
 
-#endif /* KOGENCHANGES_H */
+#endif /* KODFGENERICCHANGES_H */

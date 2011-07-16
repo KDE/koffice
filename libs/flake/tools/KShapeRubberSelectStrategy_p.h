@@ -17,8 +17,8 @@
    the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
 */
-#ifndef KoShapeRubberSelectStrategyPrivate_H
-#define KoShapeRubberSelectStrategyPrivate_H
+#ifndef KSHAPE_RUBBER_SELECT_STRATEGY_P_H
+#define KSHAPE_RUBBER_SELECT_STRATEGY_P_H
 
 //
 //  W A R N I N G

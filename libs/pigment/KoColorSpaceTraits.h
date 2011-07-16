@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef _KO_COLORSPACE_TRAITS_H_
-#define _KO_COLORSPACE_TRAITS_H_
+#ifndef KO_COLORSPACE_TRAITS_H
+#define KO_COLORSPACE_TRAITS_H
 
 #include <QtCore/QVector>
 

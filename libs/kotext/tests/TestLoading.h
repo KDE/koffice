@@ -20,7 +20,7 @@
 #ifndef TESTLOADING_H
 #define TESTLOADING_H
 
-#include <QObject>
+#include <QtCore/QObject>
 
 class QScriptEngine;
 class QTextDocument;

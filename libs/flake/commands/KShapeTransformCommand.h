@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOSHAPETRANSFORMCOMMAND_H
-#define KOSHAPETRANSFORMCOMMAND_H
+#ifndef KSHAPETRANSFORMCOMMAND_H
+#define KSHAPETRANSFORMCOMMAND_H
 
 #include "flake_export.h"
 #include <QtGui/QUndoCommand>
@@ -55,4 +55,4 @@ private:
     Private * const d;
 };
 
-#endif // KOSHAPETRANSFORMCOMMAND_H
+#endif // KSHAPETRANSFORMCOMMAND_H

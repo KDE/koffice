@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOPATTERNBACKGROUND_H
-#define KOPATTERNBACKGROUND_H
+#ifndef KPATTERNBACKGROUND_H
+#define KPATTERNBACKGROUND_H
 
 #include "KShapeBackground.h"
 #include "flake_export.h"

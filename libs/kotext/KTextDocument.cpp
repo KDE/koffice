@@ -19,6 +19,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
+#include "KTextDocument.h"
 #include <QTextDocument>
 #include <QTextCursor>
 #include <QUrl>
@@ -26,7 +27,6 @@
 
 #include <kdebug.h>
 
-#include "KTextDocument.h"
 #include "KoTextEditor.h"
 #include "styles/KStyleManager.h"
 #include "KInlineTextObjectManager.h"

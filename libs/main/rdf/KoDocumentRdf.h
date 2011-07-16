@@ -21,9 +21,9 @@
 #define KO_DOCUMENT_Rdf_H
 
 #include "komain_export.h"
-#include "KDocumentRdfBase.h"
+#include "KDocumentRdfBase.h"		//krazy:exclude=includes
 
-#include <KDataCenterBase.h>
+#include <KDataCenterBase.h>		//krazy:exclude=includes
 #include <kconfig.h>
 
 #include <QtCore/QObject>
@@ -31,10 +31,10 @@
 #include <QtCore/QString>
 #include <QtCore/QStringList>
 #include <Soprano/Soprano>
-#include <QTextBlockUserData>
-#include <QTreeWidgetItem>
-#include <KAction>
-#include <KDateTime>
+#include <QtGui/QTextBlockUserData>
+#include <QtGui/QTreeWidgetItem>
+#include <KDE/KAction>
+#include <KDE/KDateTime>
 
 class QDomDocument;
 class KOdfStore;
@@ -45,21 +45,21 @@ class KoTextEditor;
 class KXmlElement;
 
 #include "RdfForward.h"
-#include "KoSemanticStylesheet.h"
-#include "KoRdfSemanticItem.h"
-#include "KoRdfFoaF.h"
-#include "KoRdfCalendarEvent.h"
-#include "KoRdfLocation.h"
-#include "KoRdfSemanticItemViewSite.h"
-#include "RdfSemanticTreeWidgetAction.h"
+#include "KoSemanticStylesheet.h"		//krazy:exclude=includes
+#include "KoRdfSemanticItem.h"			//krazy:exclude=includes
+#include "KoRdfFoaF.h"				//krazy:exclude=includes
+#include "KoRdfCalendarEvent.h"			//krazy:exclude=includes
+#include "KoRdfLocation.h"			//krazy:exclude=includes
+#include "KoRdfSemanticItemViewSite.h"		//krazy:exclude=includes
+#include "RdfSemanticTreeWidgetAction.h"	//krazy:exclude=includes
 #include "InsertSemanticObjectActionBase.h"
-#include "InsertSemanticObjectCreateAction.h"
-#include "InsertSemanticObjectReferenceAction.h"
-#include "KoRdfSemanticTreeWidgetItem.h"
-#include "KoRdfFoaFTreeWidgetItem.h"
-#include "KoRdfCalendarEventTreeWidgetItem.h"
-#include "KoRdfLocationTreeWidgetItem.h"
-#include "KoRdfSemanticTree.h"
+#include "InsertSemanticObjectCreateAction.h"	
+#include "InsertSemanticObjectReferenceAction.h"	
+#include "KoRdfSemanticTreeWidgetItem.h"	//krazy:exclude=includes
+#include "KoRdfFoaFTreeWidgetItem.h"		//krazy:exclude=includes
+#include "KoRdfCalendarEventTreeWidgetItem.h"	//krazy:exclude=includes
+#include "KoRdfLocationTreeWidgetItem.h"	//krazy:exclude=includes
+#include "KoRdfSemanticTree.h"			//krazy:exclude=includes
 
 class KoDocumentRdfPrivate;
 

@@ -21,7 +21,7 @@
 #define KO_PROGRESS_PROXY
 
 #include "komain_export.h"
-#include <QString>
+#include <QtCore/QString>
 
 /**
  * A proxy interface for a real progress status reporting thing, either

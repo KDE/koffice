@@ -20,8 +20,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KOSHAPESAVINGCONTEXT_H
-#define KOSHAPESAVINGCONTEXT_H
+#ifndef KSHAPESAVINGCONTEXT_H
+#define KSHAPESAVINGCONTEXT_H
 
 #include "flake_export.h"
 

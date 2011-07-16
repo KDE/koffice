@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef _KARBONCALLIGRAPHYTOOLFACTORY_H_
-#define _KARBONCALLIGRAPHYTOOLFACTORY_H_
+#ifndef KARBONCALLIGRAPHYTOOLFACTORY_H
+#define KARBONCALLIGRAPHYTOOLFACTORY_H
 
 #include <KToolFactoryBase.h>
 
@@ -32,4 +32,4 @@ public:
     KToolBase * createTool(KCanvasBase *canvas);
 };
 
-#endif // _KARBONCALLIGRAPHYTOOLFACTORY_H_
+#endif // KARBONCALLIGRAPHYTOOLFACTORY_H

@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KPRDURATIONPARSER_H
-#define KPRDURATIONPARSER_H
+#ifndef SCDURATIONPARSER_H
+#define SCDURATIONPARSER_H
 
 class QString;
 
@@ -74,4 +74,4 @@ public:
 
 };
 
-#endif /* KPRDURATIONPARSER_H */
+#endif /* SCDURATIONPARSER_H */

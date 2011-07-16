@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KPRPAGELAYOUTCOMMAND_H
-#define KPRPAGELAYOUTCOMMAND_H
+#ifndef SCPAGELAYOUTCOMMAND_H
+#define SCPAGELAYOUTCOMMAND_H
 
 #include <QUndoCommand>
 
@@ -42,4 +42,4 @@ private:
     SCPageLayout * m_newLayout;
 };
 
-#endif /* KPRPAGELAYOUTCOMMAND_H */
+#endif /* SCPAGELAYOUTCOMMAND_H */

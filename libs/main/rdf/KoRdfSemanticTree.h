@@ -18,16 +18,16 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef __rdf_KoRdfSemanticTree_h__
-#define __rdf_KoRdfSemanticTree_h__
+#ifndef KO_RDF_SEMANTIC_TREE_H
+#define KO_RDF_SEMANTIC_TREE_H
 
 #include "komain_export.h"
-#include <QSharedPointer>
-#include <QTreeWidget>
-#include <QTreeWidgetItem>
-#include "KoRdfFoaF.h"
-#include "KoRdfCalendarEvent.h"
-#include "KoRdfLocation.h"
+#include <QtCore/QSharedPointer>
+#include <QtGui/QTreeWidget>
+#include <QtGui/QTreeWidgetItem>
+#include "KoRdfFoaF.h"			//krazy:exclude=includes
+#include "KoRdfCalendarEvent.h"		//krazy:exclude=includes
+#include "KoRdfLocation.h"		//krazy:exclude=includes
 
 class KoRdfSemanticTreePrivate;
 
@@ -66,5 +66,3 @@ private:
 };
 
 #endif
-
-

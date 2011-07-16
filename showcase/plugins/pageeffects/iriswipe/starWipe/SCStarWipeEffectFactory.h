@@ -17,8 +17,8 @@
  * sBoston, MA 02110-1301, USA.
 */
 
-#ifndef KPRSTARWIPEEFFECTFACTORY_H
-#define KPRSTARWIPEEFFECTFACTORY_H
+#ifndef SCSTARWIPEEFFECTFACTORY_H
+#define SCSTARWIPEEFFECTFACTORY_H
 
 #include <SCPageEffectFactory.h>
 
@@ -39,4 +39,4 @@ public:
     };
 };
 
-#endif /* KPRSTARWIPEEFFECTFACTORY_H */
+#endif /* SCSTARWIPEEFFECTFACTORY_H */

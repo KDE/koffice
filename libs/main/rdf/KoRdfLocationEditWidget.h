@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef __rdf_KoRdfLocationEditWidget_h__
-#define __rdf_KoRdfLocationEditWidget_h__
+#ifndef KO_RDF_LOCATION_EDIT_WIDGET_H
+#define KO_RDF_LOCATION_EDIT_WIDGET_H
 
 #include "RdfForward.h"
 #include <QObject>

@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef __KoChangeTrackerDisabledRAII_h__
-#define __KoChangeTrackerDisabledRAII_h__
+#ifndef KO_CHANGE_TRACKER_DISABLED_RAII_H
+#define KO_CHANGE_TRACKER_DISABLED_RAII_H
 
 class KChangeTracker;
 

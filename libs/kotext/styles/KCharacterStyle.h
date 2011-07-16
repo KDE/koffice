@@ -21,8 +21,8 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#ifndef KOCHARACTERSTYLE_H
-#define KOCHARACTERSTYLE_H
+#ifndef KCHARACTERSTYLE_H
+#define KCHARACTERSTYLE_H
 
 #include <QObject>
 #include <QVector>

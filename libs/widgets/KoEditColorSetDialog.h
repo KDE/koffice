@@ -22,7 +22,7 @@
 
 #include <ui_KoEditColorSet.h>
 
-#include <KDialog>
+#include <KDE/KDialog>
 
 #include "kowidgets_export.h"
 

@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOPATHPOINTREMOVECOMMAND_H
-#define KOPATHPOINTREMOVECOMMAND_H
+#ifndef KPATHPOINTREMOVECOMMAND_H
+#define KPATHPOINTREMOVECOMMAND_H
 
 #include <QUndoCommand>
 #include <QList>
@@ -67,4 +67,4 @@ private:
     KPathPointRemoveCommandPrivate *d;
 };
 
-#endif // KOPATHPOINTREMOVECOMMAND_H
+#endif // KPATHPOINTREMOVECOMMAND_H

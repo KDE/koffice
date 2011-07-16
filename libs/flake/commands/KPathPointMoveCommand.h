@@ -19,8 +19,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOPATHPOINTMOVECOMMAND_H
-#define KOPATHPOINTMOVECOMMAND_H
+#ifndef KPATHPOINTMOVECOMMAND_H
+#define KPATHPOINTMOVECOMMAND_H
 
 #include "flake_export.h"
 
@@ -63,4 +63,4 @@ private:
     KPathPointMoveCommandPrivate *d;
 };
 
-#endif // KOPATHPOINTMOVECOMMAND_H
+#endif // KPATHPOINTMOVECOMMAND_H

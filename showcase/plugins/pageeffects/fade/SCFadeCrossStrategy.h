@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KPRFADECROSSSTRATEGY_H
-#define KPRFADECROSSSTRATEGY_H
+#ifndef SCFADECROSSSTRATEGY_H
+#define SCFADECROSSSTRATEGY_H
 
 #include "pageeffects/SCPageEffectStrategy.h"
 
@@ -38,4 +38,4 @@ public:
     virtual void finish(const SCPageEffect::Data &data);
 };
 
-#endif /* KPRFADECROSSSTRATEGY_H */
+#endif /* SCFADECROSSSTRATEGY_H */

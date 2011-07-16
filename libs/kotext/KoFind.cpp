@@ -20,12 +20,12 @@
  */
 
 #include "KoFind.h"
+#include "KoFind_p.h"
 
 #include <KResourceManager.h>
 #include <KActionCollection>
 #include <KAction>
 
-#include "KoFind_p.h"
 
 KoFind::KoFind(QWidget *parent, KResourceManager *provider, KActionCollection *ac)
         : QObject(parent)

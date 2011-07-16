@@ -19,15 +19,15 @@ the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
 Boston, MA 02110-1301, USA.
 */
 
-#ifndef __koffice_filter_manager_h__
-#define __koffice_filter_manager_h__
+#ifndef KO_FILTER_MANAGER_H
+#define KO_FILTER_MANAGER_H
 
 #include <QtCore/QObject>
 #include <QtCore/QMap>
 #include <QtCore/QByteArray>
 
-#include "KoFilterChain.h"
-#include "KoFilterGraph.h"
+#include "KoFilterChain.h"		//krazy:exclude=includes
+#include "KoFilterGraph.h"		//krazy:exclude=includes
 
 #include "komain_export.h"
 class KoDocument;
@@ -196,4 +196,4 @@ private:
     Private * const d;
 };
 
-#endif  // __koffice_filter_manager_h__
+#endif  // KO_FILTER_MANAGER_H

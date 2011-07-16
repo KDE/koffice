@@ -19,8 +19,8 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#ifndef KOTABLESTYLE_H
-#define KOTABLESTYLE_H
+#ifndef KTABLESTYLE_H
+#define KTABLESTYLE_H
 
 #include "KoText.h"
 #include "kotext_export.h"

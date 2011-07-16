@@ -17,10 +17,11 @@
  * Boston, MA 02110-1301, USA.
 */
 
+#include "KOdfGenericChange.h"
+
 #include <QDateTime>
 
-#include "KOdfGenericChange.h"
-#include <KXmlWriter.h>
+#include "KXmlWriter.h"
 
 #include <kdebug.h>
 

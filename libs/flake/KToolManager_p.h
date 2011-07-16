@@ -16,8 +16,8 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#ifndef KO_TOOL_MANAGER_P
-#define KO_TOOL_MANAGER_P
+#ifndef K_TOOL_MANAGER_P
+#define K_TOOL_MANAGER_P
 
 //
 //  W A R N I N G

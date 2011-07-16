@@ -16,16 +16,13 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-#include <QList>
-
-#include <kglobal.h>
-
-#include <KoID.h>
-
 #include "KoHistogramProducer.h"
-#include "KoBasicHistogramProducers.h"
+#include <QtCore/QList>
+#include <KDE/KGlobal>
 
-#include "KoColorSpace.h"
+#include "KoID.h"				//krazy:exclude=includes
+#include "KoBasicHistogramProducers.h"		//krazy:exclude=includes
+#include "KoColorSpace.h"			//krazy:exclude=includes
 
 KoHistogramProducerFactoryRegistry::KoHistogramProducerFactoryRegistry()
 {

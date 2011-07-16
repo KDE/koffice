@@ -33,7 +33,6 @@
 #include <KListStyle.h>
 #include <KParagraphStyle.h>
 #include <KStyleManager.h>
-#include <KFormatChangeInformation_p.h>
 #include <KDeletedRowColumnDataStore_p.h>
 
 //KDE includes

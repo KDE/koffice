@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef koDirectoryStore_h
-#define koDirectoryStore_h
+#ifndef DIRECTORY_STORE_P_H
+#define DIRECTORY_STORE_P_H
 
 //
 //  W A R N I N G

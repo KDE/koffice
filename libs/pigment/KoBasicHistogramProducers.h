@@ -16,20 +16,20 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-#ifndef _Ko_BASIC_HISTOGRAM_PRODUCERS_
-#define _Ko_BASIC_HISTOGRAM_PRODUCERS_
+#ifndef KO_BASIC_HISTOGRAM_PRODUCERS_H
+#define KO_BASIC_HISTOGRAM_PRODUCERS_H
 
-#include "KoHistogramProducer.h"
+#include "KoHistogramProducer.h"	//krazy:exclude=includes
 
 #include <QtCore/QVector>
-#include <klocale.h>
+#include <KDE/KLocale>
 
-#include <KoConfig.h>
+#include <KoConfig.h>			//krazy:exclude=includes
 
-#include "KoColorSpace.h"
-#include "KoID.h"
+#include "KoColorSpace.h"		//krazy:exclude=includes
+#include "KoID.h"			//krazy:exclude=includes
 #include "pigment_export.h"
-#include "KoColorSpaceRegistry.h"
+#include "KoColorSpaceRegistry.h"	//krazy:exclude=includes
 
 class PIGMENTCMS_EXPORT KoBasicHistogramProducer : public KoHistogramProducer
 {
@@ -242,4 +242,4 @@ public:
 };
 
 
-#endif // _Ko_BASIC_HISTOGRAM_PRODUCERS_
+#endif // KO_BASIC_HISTOGRAM_PRODUCERS_H

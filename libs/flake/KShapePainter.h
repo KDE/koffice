@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOSHAPEPAINTER_H
-#define KOSHAPEPAINTER_H
+#ifndef KSHAPEPAINTER_H
+#define KSHAPEPAINTER_H
 
 #include "flake_export.h"
 

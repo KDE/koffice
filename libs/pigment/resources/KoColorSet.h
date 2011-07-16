@@ -24,8 +24,8 @@
 #include <QtCore/QVector>
 #include <QtGui/QPixmap>
 
-#include "KoResource.h"
-#include "KoColor.h"
+#include "KoResource.h"			//krazy:exclude=includes
+#include "KoColor.h"			//krazy:exclude=includes
 
 class QPixmap;
 

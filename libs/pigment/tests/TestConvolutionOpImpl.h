@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef _TEST_CONVOLUTION_OP_IMPL_H_
-#define _TEST_CONVOLUTION_OP_IMPL_H_
+#ifndef TEST_CONVOLUTION_OP_IMPL_H
+#define TEST_CONVOLUTION_OP_IMPL_H
 
 #include <QtTest/QtTest>
 

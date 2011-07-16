@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KPRPLACEHOLDERSHAPEFACTORY_H
-#define KPRPLACEHOLDERSHAPEFACTORY_H
+#ifndef SCPLACEHOLDERSHAPEFACTORY_H
+#define SCPLACEHOLDERSHAPEFACTORY_H
 
 #include "KShapeFactoryBase.h"
 
@@ -32,4 +32,4 @@ public:
     virtual bool supports(const KXmlElement &e, KShapeLoadingContext &context) const;
 };
 
-#endif /* KPRPLACEHOLDERSHAPEFACTORY_H */
+#endif /* SCPLACEHOLDERSHAPEFACTORY_H */

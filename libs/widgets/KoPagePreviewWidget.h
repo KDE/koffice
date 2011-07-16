@@ -18,14 +18,14 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOFFICE_PAGE_PREVIEW_WIDGET
-#define KOFFICE_PAGE_PREVIEW_WIDGET
+#ifndef KO_PAGE_PREVIEW_WIDGET_H
+#define KO_PAGE_PREVIEW_WIDGET_H
 
 #include "kowidgets_export.h"
 
-#include <KOdfPageLayoutData.h>
+#include <KOdfPageLayoutData.h>				//krazy:exclude=includes
 
-#include <QWidget>
+#include <QtGui/QWidget>
 
 /// A widget to preview the KOdfPageLayoutData and KOdfColumnData data structures.
 class KOWIDGETS_EXPORT KoPagePreviewWidget : public QWidget {

@@ -20,12 +20,12 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KOCOLUMNS_H
-#define KOCOLUMNS_H
+#ifndef KODFCOLUMNDATA_H
+#define KODFCOLUMNDATA_H
 
 #include "kodf_export.h"
 
-#include <QtGlobal>
+#include <QtCore/QtGlobal>
 
 /** structure for columns */
 struct KODF_EXPORT KOdfColumnData {
@@ -41,5 +41,5 @@ struct KODF_EXPORT KOdfColumnData {
     }
 };
 
-#endif /* KOCOLUMNS_H */
+#endif /* KODFCOLUMNDATA_H */
 

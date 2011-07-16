@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOSHAPEREGISTRY_H
-#define KOSHAPEREGISTRY_H
+#ifndef KSHAPEREGISTRY_H
+#define KSHAPEREGISTRY_H
 
 #include <QObject>
 

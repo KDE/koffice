@@ -16,9 +16,10 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
+#include "KoCompositeOpsBenchmark.h"
+
 #include <qtest_kde.h>
 
-#include "KoCompositeOpsBenchmark.h"
 #include "../compositeops/KoCompositeOpAlphaDarken.h"
 #include "../compositeops/KoCompositeOpOver.h"
 

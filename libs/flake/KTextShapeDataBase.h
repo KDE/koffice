@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOTEXTSHAPEDATABASE_H
-#define KOTEXTSHAPEDATABASE_H
+#ifndef KTEXTSHAPEDATABASE_H
+#define KTEXTSHAPEDATABASE_H
 
 #include "flake_export.h"
 

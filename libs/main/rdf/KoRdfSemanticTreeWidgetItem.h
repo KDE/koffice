@@ -17,14 +17,14 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef __rdf_KoRdfSemanticTreeWidgetItem_h__
-#define __rdf_KoRdfSemanticTreeWidgetItem_h__
+#ifndef KO_RDF_SEMANTIC_TREE_WIDGET_ITEM_H
+#define KO_RDF_SEMANTIC_TREE_WIDGET_ITEM_H
 
 #include "komain_export.h"
 #include "RdfForward.h"
 
-#include <QObject>
-#include <QTreeWidgetItem>
+#include <QtCore/QObject>
+#include <QtGui/QTreeWidgetItem>
 class KAction;
 class KCanvasBase;
 

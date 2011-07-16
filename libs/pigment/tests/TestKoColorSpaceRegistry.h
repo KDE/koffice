@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef _TEST_KO_COLOR_SPACE_REGISTRY_H_
-#define _TEST_KO_COLOR_SPACE_REGISTRY_H_
+#ifndef TEST_KO_COLOR_SPACE_REGISTRY_H
+#define TEST_KO_COLOR_SPACE_REGISTRY_H
 
 #include <QtTest/QtTest>
 

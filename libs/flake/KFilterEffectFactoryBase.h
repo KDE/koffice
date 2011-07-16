@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOFILTEREFFECTFACTORY_H
-#define KOFILTEREFFECTFACTORY_H
+#ifndef KFILTEREFFECTFACTORY_H
+#define KFILTEREFFECTFACTORY_H
 
 #include "flake_export.h"
 #include <QObject>

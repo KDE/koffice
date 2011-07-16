@@ -20,8 +20,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOIMAGEDATA_P_H
-#define KOIMAGEDATA_P_H
+#ifndef KIMAGEDATA_P_H
+#define KIMAGEDATA_P_H
 
 //
 //  W A R N I N G

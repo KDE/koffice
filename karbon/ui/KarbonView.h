@@ -31,8 +31,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef __KARBON_VIEW__
-#define __KARBON_VIEW__
+#ifndef KARBON_VIEW_H
+#define KARBON_VIEW_H
 
 #include <KoView.h>
 #include <QPointF>
@@ -171,5 +171,5 @@ private:
     Private * const d;
 };
 
-#endif // __KARBON_VIEW__
+#endif //KARBON_VIEW_H
 
