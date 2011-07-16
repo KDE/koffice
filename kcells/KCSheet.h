@@ -955,7 +955,7 @@ protected:
      */
     QString changeNameCellRefHelper(const QPoint& pos, bool fullRowOrColumn, ChangeRef ref,
                                     int NbCol, const QPoint& point, bool isColumnFixed,
-                                    bool isRowFixed);
+                                    bool isRowFixed, bool isRangeStart, bool isRangeEnd);
 
 private:
     /**

@@ -860,7 +860,7 @@ void KCSheet::removeRows(int row, int number)
 
 QString KCSheet::changeNameCellRefHelper(const QPoint& pos, bool fullRowOrColumn, ChangeRef ref,
                                        int nbCol, const QPoint& point, bool isColumnFixed,
-                                       bool isRowFixed)
+                                       bool isRowFixed, bool isRangeStart, bool isRangeEnd)
 {
     QString newPoint;
     int col = point.x();
@@ -874,7 +874,7 @@ QString KCSheet::changeNameCellRefHelper(const QPoint& pos, bool fullRowOrColumn
             (fullRowOrColumn || row == pos.y())) {  // All rows or just one
         newPoint += KCCell::columnName(col + nbCol);
     } else if (ref == ColumnRemove &&
-               col > pos.x() &&    // Column after the deleted one : -1
+               (col > pos.x() || (isRangeEnd && col == pos.x())) &&    // Column after the deleted one : -1
                (fullRowOrColumn || row == pos.y())) {  // All rows or just one
         newPoint += KCCell::columnName(col - nbCol);
     } else
@@ -889,13 +889,14 @@ QString KCSheet::changeNameCellRefHelper(const QPoint& pos, bool fullRowOrColumn
             (fullRowOrColumn || col == pos.x())) {  // All columns or just one
         newPoint += QString::number(row + nbCol);
     } else if (ref == RowRemove &&
-               row > pos.y() &&   // Row after the deleted one : -1
+               (row > pos.y() || (isRangeEnd && row == pos.y())) &&   // Row after the deleted one : -1
                (fullRowOrColumn || col == pos.x())) {  // All columns or just one
         newPoint += QString::number(row - nbCol);
     } else
         newPoint += QString::number(row);
 
-    if (((ref == ColumnRemove
+    if ((!isRangeStart && !isRangeEnd) && 
+	    ((ref == ColumnRemove
             && col == pos.x() // Column is the deleted one : error
             && (fullRowOrColumn || row == pos.y())) ||
             (ref == RowRemove
@@ -950,22 +951,31 @@ void KCSheet::changeNameCellRef(const QPoint& pos, bool fullRowOrColumn, ChangeR
                                            nbCol,
                                            element->rect().topLeft(),
                                            element->isColumnFixed(),
-                                           element->isRowFixed());
+                                           element->isRowFixed(), false, false);
                         newText.append(newPoint);
                     } else { // (element->type() == KCRegion::Element::Range)
                         if (element->sheet())
                             newText.append(element->sheet()->sheetName() + '!');
-                        QString newPoint;
-                        newPoint = changeNameCellRefHelper(pos, fullRowOrColumn, ref,
+                        QString firstPoint;
+                        QString secondPoint;
+                        firstPoint = changeNameCellRefHelper(pos, fullRowOrColumn, ref,
                                                            nbCol, element->rect().topLeft(),
                                                            element->isColumnFixed(),
-                                                           element->isRowFixed());
-                        newText.append(newPoint + ':');
-                        newPoint = changeNameCellRefHelper(pos, fullRowOrColumn, ref,
+                                                           element->isRowFixed(), true, false);
+                        newText.append(firstPoint + ':');
+                        secondPoint = changeNameCellRefHelper(pos, fullRowOrColumn, ref,
                                                            nbCol, element->rect().bottomRight(),
                                                            element->isColumnFixed(),
-                                                           element->isRowFixed());
-                        newText.append(newPoint);
+                                                           element->isRowFixed(), false, true);
+                        newText.append(secondPoint);
+			//If the range is "backwards", we have created a range dependency that can't be resolved.
+			if ( secondPoint < firstPoint ) {	
+				KCCell cell(this, formulaStorage()->col(c), formulaStorage()->row(c));
+				KCFormula formula(this, cell);
+				formula.setExpression("=#Dependency!");
+				cell.setFormula(formula);
+				return;
+			}
                     }
                 }
                 break;
