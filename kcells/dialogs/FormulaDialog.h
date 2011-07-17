@@ -24,8 +24,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_FORMULA_DIALOG
-#define KSPREAD_FORMULA_DIALOG
+#ifndef KCELLS_FORMULA_DIALOG
+#define KCELLS_FORMULA_DIALOG
 
 #include <QCloseEvent>
 #include <QLabel>
@@ -187,4 +187,4 @@ private:
     KCFunctionDescription* m_desc;
 };
 
-#endif // KSPREAD_FORMULA_DIALOG
+#endif // KCELLS_FORMULA_DIALOG

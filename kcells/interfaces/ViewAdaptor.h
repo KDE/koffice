@@ -23,8 +23,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_VIEW_ADAPTOR
-#define KSPREAD_VIEW_ADAPTOR
+#ifndef KCELLS_VIEW_ADAPTOR
+#define KCELLS_VIEW_ADAPTOR
 
 #include <QColor>
 #include <QRect>
@@ -252,4 +252,4 @@ private:
     CellProxy* m_proxy;
 };
 
-#endif // KSPREAD_VIEW_ADAPTOR
+#endif // KCELLS_VIEW_ADAPTOR

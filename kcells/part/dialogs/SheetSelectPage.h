@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_SHEETSELECTPAGE
-#define KSPREAD_SHEETSELECTPAGE
+#ifndef KCELLS_SHEETSELECTPAGE
+#define KCELLS_SHEETSELECTPAGE
 
 #include "ui_SheetSelectWidget.h"
 
@@ -101,4 +101,4 @@ protected slots:
     void moveBottom();
 };
 
-#endif // KSPREAD_SHEETSELECTPAGE
+#endif // KCELLS_SHEETSELECTPAGE

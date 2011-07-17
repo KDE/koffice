@@ -1,5 +1,5 @@
-#ifndef KSPREAD_TEST_RTREE
-#define KSPREAD_TEST_RTREE
+#ifndef KCELLS_TEST_RTREE
+#define KCELLS_TEST_RTREE
 
 #include <QtTest/QtTest>
 
@@ -20,4 +20,4 @@ private Q_SLOTS:
     void testPrimitive();
 };
 
-#endif // KSPREAD_TEST_RTREE
+#endif // KCELLS_TEST_RTREE

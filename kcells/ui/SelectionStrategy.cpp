@@ -47,7 +47,7 @@ SelectionStrategy::SelectionStrategy(CellToolBase *cellTool,
     KCSheet *const sheet = this->selection()->activeSheet();
     Selection *const selection = this->selection();
 
-#if 0 // KSPREAD_WIP_DRAG_REFERENCE_SELECTION
+#if 0 // KCELLS_WIP_DRAG_REFERENCE_SELECTION
     // Check, if the selected area was hit.
     bool hitSelection = false;
     const KCRegion::ConstIterator end(selection->constEnd());
@@ -62,7 +62,7 @@ SelectionStrategy::SelectionStrategy(CellToolBase *cellTool,
             break;
         }
     }
-#endif // KSPREAD_WIP_DRAG_REFERENCE_SELECTION
+#endif // KCELLS_WIP_DRAG_REFERENCE_SELECTION
 
     // In which cell did the user click?
     double xpos;
@@ -92,11 +92,11 @@ SelectionStrategy::SelectionStrategy(CellToolBase *cellTool,
             } else if (modifiers & Qt::ControlModifier) {
                 // Extend selection, if control modifier is pressed.
                 selection->extend(QPoint(col, row), sheet);
-#if 0 // KSPREAD_WIP_DRAG_REFERENCE_SELECTION
+#if 0 // KCELLS_WIP_DRAG_REFERENCE_SELECTION
             } else if (hitSelection) {
                 // start cell is already set above
                 // No change; the range will be moved
-#endif // KSPREAD_WIP_DRAG_REFERENCE_SELECTION
+#endif // KCELLS_WIP_DRAG_REFERENCE_SELECTION
             } else {
                 selection->initialize(QPoint(col, row), sheet);
             }
@@ -123,7 +123,7 @@ SelectionStrategy::~SelectionStrategy()
 void SelectionStrategy::handleMouseMove(const QPointF &documentPos,
                                         Qt::KeyboardModifiers modifiers)
 {
-#if 0 // KSPREAD_WIP_DRAG_REFERENCE_SELECTION
+#if 0 // KCELLS_WIP_DRAG_REFERENCE_SELECTION
     Q_UNUSED(modifiers);
     const KShape* shape = tool()->canvas()->shapeManager()->selection()->firstSelectedShape();
     const QPointF position = documentPos - (shape ? shape->position() : QPointF(0.0, 0.0));
@@ -146,6 +146,6 @@ void SelectionStrategy::handleMouseMove(const QPointF &documentPos,
             return;
         }
     }
-#endif // KSPREAD_WIP_DRAG_REFERENCE_SELECTION
+#endif // KCELLS_WIP_DRAG_REFERENCE_SELECTION
     AbstractSelectionStrategy::handleMouseMove(documentPos, modifiers);
 }

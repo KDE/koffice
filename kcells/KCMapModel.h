@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_MAP_MODEL
-#define KSPREAD_MAP_MODEL
+#ifndef KCELLS_MAP_MODEL
+#define KCELLS_MAP_MODEL
 
 #include <QAbstractListModel>
 
@@ -70,4 +70,4 @@ private:
     Private * const d;
 };
 
-#endif // KSPREAD_MAP_MODEL
+#endif // KCELLS_MAP_MODEL

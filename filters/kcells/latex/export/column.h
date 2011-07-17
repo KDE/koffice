@@ -18,8 +18,8 @@
 **
 */
 
-#ifndef __KSPREAD_LATEX_COLUMN_H__
-#define __KSPREAD_LATEX_COLUMN_H__
+#ifndef __KCELLS_LATEX_COLUMN_H__
+#define __KCELLS_LATEX_COLUMN_H__
 
 #include <QString>
 #include <QTextStream>
@@ -92,5 +92,5 @@ private:
 
 };
 
-#endif /* __KSPREAD_LATEX_COLUMN_H__ */
+#endif /* __KCELLS_LATEX_COLUMN_H__ */
 

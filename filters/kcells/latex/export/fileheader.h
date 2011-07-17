@@ -19,8 +19,8 @@
 **
 */
 
-#ifndef __KSPREAD_LATEX_FILEHEADER_H__
-#define __KSPREAD_LATEX_FILEHEADER_H__
+#ifndef __KCELLS_LATEX_FILEHEADER_H__
+#define __KCELLS_LATEX_FILEHEADER_H__
 
 #include <QTextStream>
 
@@ -225,4 +225,4 @@ private:
 
 };
 
-#endif /* __KSPREAD_LATEX_FILEHEADER_H__ */
+#endif /* __KCELLS_LATEX_FILEHEADER_H__ */

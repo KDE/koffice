@@ -26,8 +26,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_CELL_TOOL_BASE_P
-#define KSPREAD_CELL_TOOL_BASE_P
+#ifndef KCELLS_CELL_TOOL_BASE_P
+#define KCELLS_CELL_TOOL_BASE_P
 
 // KCells
 #include "CellToolBase.h"
@@ -164,4 +164,4 @@ private:
     CellToolBase* q;
 };
 
-#endif // KSPREAD_CELL_TOOL_BASE
+#endif // KCELLS_CELL_TOOL_BASE

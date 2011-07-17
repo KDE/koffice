@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_DATABASE_MANAGER
-#define KSPREAD_DATABASE_MANAGER
+#ifndef KCELLS_DATABASE_MANAGER
+#define KCELLS_DATABASE_MANAGER
 
 #include <QObject>
 
@@ -67,4 +67,4 @@ private:
     Private * const d;
 };
 
-#endif // KSPREAD_DATABASE_MANAGER
+#endif // KCELLS_DATABASE_MANAGER

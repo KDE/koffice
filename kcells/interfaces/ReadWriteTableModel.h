@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_READWRITE_TABLE_MODEL
-#define KSPREAD_READWRITE_TABLE_MODEL
+#ifndef KCELLS_READWRITE_TABLE_MODEL
+#define KCELLS_READWRITE_TABLE_MODEL
 
 #include "ReadOnlyTableModel.h"
 
@@ -45,4 +45,4 @@ private:
     Private * const d;
 };
 
-#endif // KSPREAD_READWRITE_TABLE_MODEL
+#endif // KCELLS_READWRITE_TABLE_MODEL

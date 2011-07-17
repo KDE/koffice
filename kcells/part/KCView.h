@@ -26,8 +26,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_VIEW
-#define KSPREAD_VIEW
+#ifndef KCELLS_VIEW
+#define KCELLS_VIEW
 
 #include <QList>
 #include <QPoint>
@@ -378,4 +378,4 @@ private:
     void setHeaderMinima();
 };
 
-#endif // KSPREAD_VIEW
+#endif // KCELLS_VIEW

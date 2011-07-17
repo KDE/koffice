@@ -17,8 +17,8 @@
    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
    MA  02110-1301  USA
 */
-#ifndef KSPREAD_RTREE_BENCHMARK_H
-#define KSPREAD_RTREE_BENCHMARK_H
+#ifndef KCELLS_RTREE_BENCHMARK_H
+#define KCELLS_RTREE_BENCHMARK_H
 
 #include <QObject>
 #include "KCRTree.h"
@@ -41,4 +41,4 @@ private:
     KCRTree<double> m_tree;
 };
 
-#endif // KSPREAD_RTREE_BENCHMARK_H
+#endif // KCELLS_RTREE_BENCHMARK_H

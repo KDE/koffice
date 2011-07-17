@@ -344,7 +344,7 @@ void TestFormula::testFunction()
 
 void TestFormula::testInlineArrays()
 {
-#ifdef KSPREAD_INLINE_ARRAYS
+#ifdef KCELLS_INLINE_ARRAYS
     // inline arrays
     CHECK_TOKENIZE("{1;2|3;4}", "oioioioio");
 

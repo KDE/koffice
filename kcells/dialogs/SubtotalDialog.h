@@ -20,8 +20,8 @@
 */
 
 
-#ifndef KSPREAD_SUBTOTAL_DIALOG
-#define KSPREAD_SUBTOTAL_DIALOG
+#ifndef KCELLS_SUBTOTAL_DIALOG
+#define KCELLS_SUBTOTAL_DIALOG
 
 #include <KDialog>
 
@@ -57,4 +57,4 @@ private:
     Private *const d;
 };
 
-#endif // KSPREAD_SUBTOTAL_DIALOG
+#endif // KCELLS_SUBTOTAL_DIALOG

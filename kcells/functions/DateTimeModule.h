@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_DATETIME_MODULE
-#define KSPREAD_DATETIME_MODULE
+#ifndef KCELLS_DATETIME_MODULE
+#define KCELLS_DATETIME_MODULE
 
 #include "KCFunctionModule.h"
 
@@ -34,4 +34,4 @@ public:
     QString descriptionFileName() const;
 };
 
-#endif // KSPREAD_DATETIME_MODULE
+#endif // KCELLS_DATETIME_MODULE

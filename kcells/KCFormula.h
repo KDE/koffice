@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_FORMULA
-#define KSPREAD_FORMULA
+#ifndef KCELLS_FORMULA
+#define KCELLS_FORMULA
 
 #include <QHash>
 #include <QSharedDataPointer>
@@ -31,7 +31,7 @@
 #include "kcells_export.h"
 #include "KCCell.h"
 
-#define KSPREAD_INLINE_ARRAYS
+#define KCELLS_INLINE_ARRAYS
 
 class KLocale;
 
@@ -445,4 +445,4 @@ inline uint qHash(const KCFormula& formula)
 Q_DECLARE_METATYPE(KCFormula)
 Q_DECLARE_TYPEINFO(KCFormula, Q_MOVABLE_TYPE);
 
-#endif // KSPREAD_FORMULA
+#endif // KCELLS_FORMULA

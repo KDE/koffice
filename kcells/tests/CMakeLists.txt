@@ -127,14 +127,14 @@ target_link_libraries(TestTrigFunctions kcellscommon ${QT_QTCORE_LIBRARY} ${QT_Q
 
 set(TestValueFormatter_SRCS TestValueFormatter.cpp)
 kde4_add_unit_test(TestValueFormatter TESTNAME kcells-KCValueFormatter  ${TestValueFormatter_SRCS})
-macro_add_compile_flags(TestValueFormatter "-DKSPREAD_UNIT_TEST")
+macro_add_compile_flags(TestValueFormatter "-DKCELLS_UNIT_TEST")
 target_link_libraries(TestValueFormatter kcellscommon ${QT_QTCORE_LIBRARY} ${QT_QTTEST_LIBRARY})
 
 ########### next target ###############
 
 set(TestSheet_SRCS TestSheet.cpp)
 kde4_add_unit_test(TestSheet TESTNAME kcells-KCSheet  ${TestSheet_SRCS})
-macro_add_compile_flags(TestSheet "-DKSPREAD_UNIT_TEST")
+macro_add_compile_flags(TestSheet "-DKCELLS_UNIT_TEST")
 target_link_libraries(TestSheet kcellscommon ${QT_QTCORE_LIBRARY} ${QT_QTTEST_LIBRARY})
 
 ########### next target ###############

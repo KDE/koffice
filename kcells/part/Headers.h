@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_HEADERS
-#define KSPREAD_HEADERS
+#ifndef KCELLS_HEADERS
+#define KCELLS_HEADERS
 
 #include <QWidget>
 

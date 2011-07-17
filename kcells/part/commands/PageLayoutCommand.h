@@ -18,8 +18,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_PAGE_LAYOUT_COMMAND
-#define KSPREAD_PAGE_LAYOUT_COMMAND
+#ifndef KCELLS_PAGE_LAYOUT_COMMAND
+#define KCELLS_PAGE_LAYOUT_COMMAND
 
 #include "KCPrintSettings.h"
 
@@ -44,4 +44,4 @@ private:
     KCPrintSettings m_settings;
 };
 
-#endif // KSPREAD_PAGE_LAYOUT_COMMAND
+#endif // KCELLS_PAGE_LAYOUT_COMMAND

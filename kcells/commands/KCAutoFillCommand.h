@@ -24,8 +24,8 @@
 */
 
 
-#ifndef KSPREAD_AUTOFILL_COMMAND
-#define KSPREAD_AUTOFILL_COMMAND
+#ifndef KCELLS_AUTOFILL_COMMAND
+#define KCELLS_AUTOFILL_COMMAND
 
 #include "DataManipulators.h"
 
@@ -84,4 +84,4 @@ private:
     QRect m_targetRange;
 };
 
-#endif // KSPREAD_AUTOFILL_COMMAND
+#endif // KCELLS_AUTOFILL_COMMAND

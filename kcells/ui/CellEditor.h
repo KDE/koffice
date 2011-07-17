@@ -19,8 +19,8 @@
 */
 
 
-#ifndef KSPREAD_CELL_EDITOR
-#define KSPREAD_CELL_EDITOR
+#ifndef KCELLS_CELL_EDITOR
+#define KCELLS_CELL_EDITOR
 
 #include <KGlobalSettings>
 #include <KTextEdit>
@@ -108,4 +108,4 @@ private:
     Private * const d;
 };
 
-#endif // KSPREAD_CELL_EDITOR
+#endif // KCELLS_CELL_EDITOR

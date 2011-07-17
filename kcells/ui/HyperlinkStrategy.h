@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_HYPERLINK_STRATEGY
-#define KSPREAD_HYPERLINK_STRATEGY
+#ifndef KCELLS_HYPERLINK_STRATEGY
+#define KCELLS_HYPERLINK_STRATEGY
 
 #include "AbstractSelectionStrategy.h"
 
@@ -56,4 +56,4 @@ private:
     Private * const d;
 };
 
-#endif // KSPREAD_HYPERLINK_STRATEGY
+#endif // KCELLS_HYPERLINK_STRATEGY

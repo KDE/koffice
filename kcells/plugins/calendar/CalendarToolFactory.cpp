@@ -32,7 +32,7 @@ K_EXPORT_PLUGIN(CalendarToolPluginFactory("CalendarTool"))
 
 
 CalendarToolFactory::CalendarToolFactory(QObject* parent, const QVariantList&)
-        : KCCellToolFactory(parent, KSPREAD_CALENDAR_TOOL_ID)
+        : KCCellToolFactory(parent, KCELLS_CALENDAR_TOOL_ID)
 {
     setToolTip(i18n("Calendar Tool"));
 }

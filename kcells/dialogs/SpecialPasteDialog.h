@@ -22,8 +22,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_SPECIAL_PASTE_DIALOG
-#define KSPREAD_SPECIAL_PASTE_DIALOG
+#ifndef KCELLS_SPECIAL_PASTE_DIALOG
+#define KCELLS_SPECIAL_PASTE_DIALOG
 
 #include <kdialog.h>
 
@@ -50,4 +50,4 @@ private:
     Selection* m_selection;
 };
 
-#endif // KSPREAD_SPECIAL_PASTE_DIALOG
+#endif // KCELLS_SPECIAL_PASTE_DIALOG

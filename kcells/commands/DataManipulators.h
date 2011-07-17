@@ -18,8 +18,8 @@
 */
 
 
-#ifndef KSPREAD_DATA_MANIPULATORS
-#define KSPREAD_DATA_MANIPULATORS
+#ifndef KCELLS_DATA_MANIPULATORS
+#define KCELLS_DATA_MANIPULATORS
 
 #include "KCAbstractRegionCommand.h"
 #include "Global.h"
@@ -242,4 +242,4 @@ private:
     Mode m_mode;
 };
 
-#endif  // KSPREAD_DATA_MANIPULATORS
+#endif  // KCELLS_DATA_MANIPULATORS

@@ -21,8 +21,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_VALIDITY_DIALOG
-#define KSPREAD_VALIDITY_DIALOG
+#ifndef KCELLS_VALIDITY_DIALOG
+#define KCELLS_VALIDITY_DIALOG
 
 #include <kpagedialog.h>
 
@@ -78,4 +78,4 @@ protected:
     QLabel *validityLabelList;
 };
 
-#endif // KSPREAD_VALIDITY_DIALOG
+#endif // KCELLS_VALIDITY_DIALOG

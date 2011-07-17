@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_TEST_DEPENDENCIES
-#define KSPREAD_TEST_DEPENDENCIES
+#ifndef KCELLS_TEST_DEPENDENCIES
+#define KCELLS_TEST_DEPENDENCIES
 
 #include <QtGui>
 #include <QtTest/QtTest>
@@ -43,4 +43,4 @@ private:
     KCSheet* m_sheet;
 };
 
-#endif // KSPREAD_TEST_DEPENDENCIES
+#endif // KCELLS_TEST_DEPENDENCIES

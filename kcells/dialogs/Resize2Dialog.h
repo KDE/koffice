@@ -23,8 +23,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_RESIZE2_DIALOG
-#define KSPREAD_RESIZE2_DIALOG
+#ifndef KCELLS_RESIZE2_DIALOG
+#define KCELLS_RESIZE2_DIALOG
 
 #include <kdialog.h>
 
@@ -74,4 +74,4 @@ protected:
     KoUnitDoubleSpinBox *m_pWidth;
 };
 
-#endif // KSPREAD_RESIZE2_DIALOG
+#endif // KCELLS_RESIZE2_DIALOG

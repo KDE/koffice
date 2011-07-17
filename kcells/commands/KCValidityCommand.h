@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_VALIDITY_COMMAND
-#define KSPREAD_VALIDITY_COMMAND
+#ifndef KCELLS_VALIDITY_COMMAND
+#define KCELLS_VALIDITY_COMMAND
 
 #include "KCValidity.h"
 
@@ -45,4 +45,4 @@ private:
     QList< QPair<QRectF, KCValidity> > m_undoData;
 };
 
-#endif // KSPREAD_VALIDITY_COMMAND
+#endif // KCELLS_VALIDITY_COMMAND

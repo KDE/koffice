@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_TEST_TEXT_FUNCTIONS
-#define KSPREAD_TEST_TEXT_FUNCTIONS
+#ifndef KCELLS_TEST_TEXT_FUNCTIONS
+#define KCELLS_TEST_TEXT_FUNCTIONS
 
 #include <QtGui>
 #include <QtTest/QtTest>

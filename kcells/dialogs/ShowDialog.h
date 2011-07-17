@@ -22,8 +22,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_SHOW_DIALOG
-#define KSPREAD_SHOW_DIALOG
+#ifndef KCELLS_SHOW_DIALOG
+#define KCELLS_SHOW_DIALOG
 
 #include <KDialog>
 
@@ -50,4 +50,4 @@ private:
     QListWidget *m_listWidget;
 };
 
-#endif // KSPREAD_SHOW_DIALOG
+#endif // KCELLS_SHOW_DIALOG

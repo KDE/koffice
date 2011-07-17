@@ -17,12 +17,12 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_CALENDAR_TOOL_FACTORY
-#define KSPREAD_CALENDAR_TOOL_FACTORY
+#ifndef KCELLS_CALENDAR_TOOL_FACTORY
+#define KCELLS_CALENDAR_TOOL_FACTORY
 
 #include <part/KCCellToolFactory.h>
 
-#define KSPREAD_CALENDAR_TOOL_ID "KCellsCalendarToolId"
+#define KCELLS_CALENDAR_TOOL_ID "KCellsCalendarToolId"
 
 class CalendarToolFactory : public KCCellToolFactory
 {
@@ -34,4 +34,4 @@ public:
     KToolBase* createTool(KCanvasBase* canvas);
 };
 
-#endif // KSPREAD_CALENDAR_TOOL_FACTORY
+#endif // KCELLS_CALENDAR_TOOL_FACTORY

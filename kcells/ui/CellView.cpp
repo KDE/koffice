@@ -666,7 +666,7 @@ void CellView::paintDefaultBorders(QPainter& painter, const QRectF& paintRect,
         int dt = 0;
         int db = 0;
 
-#if 0 // KSPREAD_WIP_STYLE_BORDER
+#if 0 // KCELLS_WIP_STYLE_BORDER
         if (cellRef.x() > 1) {
             KCCell  *cell_west = KCCell(cell.sheet(), cellRef.x() - 1,
                                     cellRef.y());
@@ -702,7 +702,7 @@ void CellView::paintDefaultBorders(QPainter& painter, const QRectF& paintRect,
         int dl = 0;
         int dr = 0;
 
-#if 0 // KSPREAD_WIP_STYLE_BORDER
+#if 0 // KCELLS_WIP_STYLE_BORDER
         if (cellRef.y() > 1) {
             KCCell  *cell_north = KCCell(cell.sheet(), cellRef.x(),
                                      cellRef.y() - 1);
@@ -739,7 +739,7 @@ void CellView::paintDefaultBorders(QPainter& painter, const QRectF& paintRect,
         int dt = 0;
         int db = 0;
 
-#if 0 // KSPREAD_WIP_STYLE_BORDER
+#if 0 // KCELLS_WIP_STYLE_BORDER
         if (cellRef.x() < KS_colMax) {
             KCCell  *cell_east = KCCell(cell.sheet(), cellRef.x() + 1,
                                     cellRef.y());
@@ -776,7 +776,7 @@ void CellView::paintDefaultBorders(QPainter& painter, const QRectF& paintRect,
     if (paintBorder & BottomBorder) {
         int dl = 0;
         int dr = 0;
-#if 0 // KSPREAD_WIP_STYLE_BORDER
+#if 0 // KCELLS_WIP_STYLE_BORDER
         if (cellRef.y() < KS_rowMax) {
             KCCell  *cell_south = KCCell(cell.sheet(), cellRef.x(),
                                      cellRef.y() + 1);

@@ -611,7 +611,7 @@ static int opPrecedence(KCToken::Op op)
     case KCToken::Greater      : prec = 1; break;
     case KCToken::LessEqual    : prec = 1; break;
     case KCToken::GreaterEqual : prec = 1; break;
-#ifdef KSPREAD_INLINE_ARRAYS
+#ifdef KCELLS_INLINE_ARRAYS
         // FIXME Stefan: I don't know whether zero is right for this case. :-(
     case KCToken::CurlyBra     : prec = 0; break;
     case KCToken::CurlyKet     : prec = 0; break;
@@ -657,7 +657,7 @@ QList<FormulaToken> ExcelExport::compileFormula(const Tokens &tokens, KCSheet* s
                 }
         }
 
-#ifdef KSPREAD_INLINE_ARRAYS
+#ifdef KCELLS_INLINE_ARRAYS
         // are we entering an inline array ?
         // if stack already has: {
         if (syntaxStack.itemCount() >= 1) {
@@ -831,7 +831,7 @@ QList<FormulaToken> ExcelExport::compileFormula(const Tokens &tokens, KCSheet* s
                                     }
                         }
 
-#ifdef KSPREAD_INLINE_ARRAYS
+#ifdef KCELLS_INLINE_ARRAYS
                     // rule for inline array elements, if token is ; or | or }
                     // { arg1 ; arg2 -> { arg
                     if (!ruleFound)

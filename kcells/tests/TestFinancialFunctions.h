@@ -18,8 +18,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_TEST_FINANCIAL_FUNCTIONS
-#define KSPREAD_TEST_FINANCIAL_FUNCTIONS
+#ifndef KCELLS_TEST_FINANCIAL_FUNCTIONS
+#define KCELLS_TEST_FINANCIAL_FUNCTIONS
 
 #include <QtGui>
 #include <qtest_kde.h>
@@ -102,4 +102,4 @@ private slots:
 //   KCValue evaluateShort(const QString&);
 };
 
-#endif // KSPREAD_TEST_FINANCIAL_FUNCTIONS
+#endif // KCELLS_TEST_FINANCIAL_FUNCTIONS

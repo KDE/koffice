@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_MERGE_STRATEGY
-#define KSPREAD_MERGE_STRATEGY
+#ifndef KCELLS_MERGE_STRATEGY
+#define KCELLS_MERGE_STRATEGY
 
 #include "AbstractSelectionStrategy.h"
 #include "kcells_export.h"
@@ -50,4 +50,4 @@ private:
     Private * const d;
 };
 
-#endif // KSPREAD_MERGE_STRATEGY
+#endif // KCELLS_MERGE_STRATEGY

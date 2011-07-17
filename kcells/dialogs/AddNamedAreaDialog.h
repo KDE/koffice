@@ -21,8 +21,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_ADD_NAMED_AREA_DIALOG
-#define KSPREAD_ADD_NAMED_AREA_DIALOG
+#ifndef KCELLS_ADD_NAMED_AREA_DIALOG
+#define KCELLS_ADD_NAMED_AREA_DIALOG
 
 #include <kdialog.h>
 
@@ -50,4 +50,4 @@ protected:
     KLineEdit*  m_areaName;
 };
 
-#endif // KSPREAD_ADD_NAMED_AREA_DIALOG
+#endif // KCELLS_ADD_NAMED_AREA_DIALOG

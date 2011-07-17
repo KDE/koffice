@@ -18,8 +18,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_LOCALIZATION
-#define KSPREAD_LOCALIZATION
+#ifndef KCELLS_LOCALIZATION
+#define KCELLS_LOCALIZATION
 
 #include <klocale.h>
 #include <KXmlReader.h>
@@ -39,4 +39,4 @@ public:
     void defaultSystemConfig();
 };
 
-#endif // KSPREAD_LOCALIZATION
+#endif // KCELLS_LOCALIZATION

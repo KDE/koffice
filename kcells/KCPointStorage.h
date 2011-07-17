@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_POINT_STORAGE
-#define KSPREAD_POINT_STORAGE
+#ifndef KCELLS_POINT_STORAGE
+#define KCELLS_POINT_STORAGE
 
 #include <QRect>
 #include <QString>
@@ -27,7 +27,7 @@
 #include "KCRegion.h"
 #include "kcells_limits.h"
 
-// #define KSPREAD_POINT_STORAGE_HASH
+// #define KCELLS_POINT_STORAGE_HASH
 
 
 /**
@@ -109,7 +109,7 @@ public:
             // insert missing rows
             m_rows.insert(m_rows.count(), row - m_rows.count(), m_data.count());
             // append the actual data
-#ifdef KSPREAD_POINT_STORAGE_HASH
+#ifdef KCELLS_POINT_STORAGE_HASH
             m_data.append(*m_usedData.insert(data));
 #else
             m_data.append(data);
@@ -127,7 +127,7 @@ public:
                 // determine the index where the data and column has to be inserted
                 const int index = m_rows.value(row - 1) + (cit - cstart);
                 // insert the actual data
-#ifdef KSPREAD_POINT_STORAGE_HASH
+#ifdef KCELLS_POINT_STORAGE_HASH
                 m_data.insert(index, *m_usedData.insert(data));
 #else
                 m_data.insert(index, data);
@@ -142,7 +142,7 @@ public:
             else {
                 const int index = m_rows.value(row - 1) + (cit - cstart);
                 const T oldData = m_data[ index ];
-#ifdef KSPREAD_POINT_STORAGE_HASH
+#ifdef KCELLS_POINT_STORAGE_HASH
                 m_data[ index ] = *m_usedData.insert(data);
 #else
                 m_data[ index ] = data;
@@ -865,9 +865,9 @@ private:
     QVector<int> m_rows;    // stores the row offsets in m_data
     QVector<T>   m_data;    // stores the actual non-default data
 
-#ifdef KSPREAD_POINT_STORAGE_HASH
+#ifdef KCELLS_POINT_STORAGE_HASH
     QSet<T> m_usedData;
 #endif
 };
 
-#endif // KSPREAD_POINT_STORAGE
+#endif // KCELLS_POINT_STORAGE

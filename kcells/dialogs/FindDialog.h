@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_FIND_DIALOG
-#define KSPREAD_FIND_DIALOG
+#ifndef KCELLS_FIND_DIALOG
+#define KCELLS_FIND_DIALOG
 
 
 #include <kfinddialog.h>
@@ -119,4 +119,4 @@ private:
     FindOption *m_findOptions;
 };
 
-#endif // KSPREAD_FIND_DIALOG
+#endif // KCELLS_FIND_DIALOG

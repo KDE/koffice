@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_CONDITION_COMMAND
-#define KSPREAD_CONDITION_COMMAND
+#ifndef KCELLS_CONDITION_COMMAND
+#define KCELLS_CONDITION_COMMAND
 
 #include <QLinkedList>
 
@@ -46,4 +46,4 @@ private:
     QList< QPair<QRectF, KCConditions> > m_undoData;
 };
 
-#endif // KSPREAD_CONDITION_COMMAND
+#endif // KCELLS_CONDITION_COMMAND

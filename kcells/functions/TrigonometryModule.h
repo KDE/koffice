@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_TRIGONOMETRY_MODULE
-#define KSPREAD_TRIGONOMETRY_MODULE
+#ifndef KCELLS_TRIGONOMETRY_MODULE
+#define KCELLS_TRIGONOMETRY_MODULE
 
 #include "KCFunctionModule.h"
 
@@ -34,4 +34,4 @@ public:
     QString descriptionFileName() const;
 };
 
-#endif // KSPREAD_TRIGONOMETRY_MODULE
+#endif // KCELLS_TRIGONOMETRY_MODULE

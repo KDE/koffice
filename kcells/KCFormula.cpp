@@ -45,7 +45,7 @@
 
 #include <klocale.h>
 
-#define KSPREAD_UNICODE_OPERATORS
+#define KCELLS_UNICODE_OPERATORS
 
 /*
   To understand how this formula engine works, please refer to the documentation
@@ -165,12 +165,12 @@ KCToken::Op KCToken::matchOperator(const QString& text)
         case '>': result = KCToken::Greater; break;
         case '%': result = KCToken::Percent; break;
         case '~': result = KCToken::Union; break;
-#ifdef KSPREAD_INLINE_ARRAYS
+#ifdef KCELLS_INLINE_ARRAYS
         case '{': result = KCToken::CurlyBra; break;
         case '}': result = KCToken::CurlyKet; break;
         case '|': result = KCToken::Pipe; break;
 #endif
-#ifdef KSPREAD_UNICODE_OPERATORS
+#ifdef KCELLS_UNICODE_OPERATORS
         case 0x2212: result = KCToken::Minus; break;
         case 0x00D7: result = KCToken::Asterisk; break;
         case 0x00F7: result = KCToken::Slash; break;
@@ -212,7 +212,7 @@ static int opPrecedence(KCToken::Op op)
     case KCToken::Greater      : prec = 1; break;
     case KCToken::LessEqual    : prec = 1; break;
     case KCToken::GreaterEqual : prec = 1; break;
-#ifdef KSPREAD_INLINE_ARRAYS
+#ifdef KCELLS_INLINE_ARRAYS
         // FIXME Stefan: I don't know whether zero is right for this case. :-(
     case KCToken::CurlyBra     : prec = 0; break;
     case KCToken::CurlyKet     : prec = 0; break;
@@ -966,7 +966,7 @@ void KCFormula::compile(const Tokens& tokens) const
                 }
         }
 
-#ifdef KSPREAD_INLINE_ARRAYS
+#ifdef KCELLS_INLINE_ARRAYS
         // are we entering an inline array ?
         // if stack already has: {
         if (syntaxStack.itemCount() >= 1) {
@@ -1110,7 +1110,7 @@ void KCFormula::compile(const Tokens& tokens) const
                                     }
                         }
 
-#ifdef KSPREAD_INLINE_ARRAYS
+#ifdef KCELLS_INLINE_ARRAYS
                     // rule for inline array elements, if token is ; or | or }
                     // { arg1 ; arg2 -> { arg
                     if (!ruleFound)
@@ -1728,7 +1728,7 @@ KCValue KCFormula::evalRecursive(CellIndirection cellIndirections, QHash<KCCell,
 
             break;
 
-#ifdef KSPREAD_INLINE_ARRAYS
+#ifdef KCELLS_INLINE_ARRAYS
             // creating an array
         case Opcode::Array: {
             const int cols = d->constants[index].asInteger();

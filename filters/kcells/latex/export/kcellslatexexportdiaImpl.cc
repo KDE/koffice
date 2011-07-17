@@ -170,7 +170,7 @@ void KCellsLatexExportDiaImpl::reject()
 void KCellsLatexExportDiaImpl::accept()
 {
     hide();
-    kDebug(30522) << "KSPREAD LATEX EXPORT FILTER --> BEGIN";
+    kDebug(30522) << "KCELLS LATEX EXPORT FILTER --> BEGIN";
     Config* config = Config::instance();
 
     /* Document tab */
@@ -216,7 +216,7 @@ void KCellsLatexExportDiaImpl::accept()
     doc.analyze();
     kDebug(30522) << "---------- generate file -------------";
     doc.generate();
-    kDebug(30522) << "KSPREAD LATEX EXPORT FILTER --> END";
+    kDebug(30522) << "KCELLS LATEX EXPORT FILTER --> END";
 }
 
 void KCellsLatexExportDiaImpl::addLanguage()

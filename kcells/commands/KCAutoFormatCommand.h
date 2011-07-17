@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_AUTO_FORMAT_COMMAND
-#define KSPREAD_AUTO_FORMAT_COMMAND
+#ifndef KCELLS_AUTO_FORMAT_COMMAND
+#define KCELLS_AUTO_FORMAT_COMMAND
 
 #include "KCAbstractRegionCommand.h"
 
@@ -54,4 +54,4 @@ private:
     QList<KCStyle> m_styles;
 };
 
-#endif // KSPREAD_AUTO_FORMAT_COMMAND
+#endif // KCELLS_AUTO_FORMAT_COMMAND

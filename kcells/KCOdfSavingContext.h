@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_ODF_SAVING_CONTEXT
-#define KSPREAD_ODF_SAVING_CONTEXT
+#ifndef KCELLS_ODF_SAVING_CONTEXT
+#define KCELLS_ODF_SAVING_CONTEXT
 
 #include "KCCell.h"
 #include "KCGenValidationStyle.h"
@@ -83,4 +83,4 @@ private:
     QHash < const KCSheet*, QHash < int /*row*/, QMultiHash < int /*col*/, KShape* > > > m_cellAnchoredShapes;
 };
 
-#endif // KSPREAD_ODF_SAVING_CONTEXT
+#endif // KCELLS_ODF_SAVING_CONTEXT

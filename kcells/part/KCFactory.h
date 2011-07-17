@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_FACTORY_H
-#define KSPREAD_FACTORY_H
+#ifndef KCELLS_FACTORY_H
+#define KCELLS_FACTORY_H
 
 #include <KPluginFactory>
 

@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_TOOL_REGISTRY
-#define KSPREAD_TOOL_REGISTRY
+#ifndef KCELLS_TOOL_REGISTRY
+#define KCELLS_TOOL_REGISTRY
 
 #include <QObject>
 
@@ -55,4 +55,4 @@ private:
     Private * const d;
 };
 
-#endif // KSPREAD_TOOL_REGISTRY
+#endif // KCELLS_TOOL_REGISTRY

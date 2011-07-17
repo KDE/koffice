@@ -24,8 +24,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_NAMED_AREA_DIALOG
-#define KSPREAD_NAMED_AREA_DIALOG
+#ifndef KCELLS_NAMED_AREA_DIALOG
+#define KCELLS_NAMED_AREA_DIALOG
 
 #include <kdialog.h>
 
@@ -92,4 +92,4 @@ private:
     QString     m_initialAreaName;
 };
 
-#endif // KSPREAD_NAMED_AREA_DIALOG
+#endif // KCELLS_NAMED_AREA_DIALOG

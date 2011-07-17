@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_PAGE_MANAGER
-#define KSPREAD_PAGE_MANAGER
+#ifndef KCELLS_PAGE_MANAGER
+#define KCELLS_PAGE_MANAGER
 
 #include "kcells_export.h"
 
@@ -95,4 +95,4 @@ private:
     Private * const d;
 };
 
-#endif // KSPREAD_PAGE_MANAGER
+#endif // KCELLS_PAGE_MANAGER

@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_FILTER_POPUP
-#define KSPREAD_FILTER_POPUP
+#ifndef KCELLS_FILTER_POPUP
+#define KCELLS_FILTER_POPUP
 
 #include <QFrame>
 
@@ -57,4 +57,4 @@ private:
     Private * const d;
 };
 
-#endif // KSPREAD_FILTER_POPUP
+#endif // KCELLS_FILTER_POPUP

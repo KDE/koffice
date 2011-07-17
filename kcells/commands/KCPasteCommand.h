@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_PASTE_COMMAND
-#define KSPREAD_PASTE_COMMAND
+#ifndef KCELLS_PASTE_COMMAND
+#define KCELLS_PASTE_COMMAND
 
 #include "KCAbstractRegionCommand.h"
 
@@ -98,4 +98,4 @@ private:
     bool                m_pasteFC;
 };
 
-#endif // KSPREAD_PASTE_COMMAND
+#endif // KCELLS_PASTE_COMMAND

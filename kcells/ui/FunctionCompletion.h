@@ -19,8 +19,8 @@
 */
 
 
-#ifndef KSPREAD_FUNCTION_COMPLETION
-#define KSPREAD_FUNCTION_COMPLETION
+#ifndef KCELLS_FUNCTION_COMPLETION
+#define KCELLS_FUNCTION_COMPLETION
 
 #include <QObject>
 
@@ -81,4 +81,4 @@ private:
     FunctionCompletion& operator=(const FunctionCompletion&);
 };
 
-#endif // KSPREAD_FUNCTION_COMPLETION
+#endif // KCELLS_FUNCTION_COMPLETION

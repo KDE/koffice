@@ -491,7 +491,7 @@ void CellEditor::slotTextChanged()
     // removed on applying the user input. If the style changes afterwards,
     // the user input is still indicating a percent value. If the digit gets
     // deleted while editing the percent char also stays. Disabling for now.
-#if 0 // KSPREAD_WIP_EDITOR_OVERHAUL
+#if 0 // KCELLS_WIP_EDITOR_OVERHAUL
     const KCCell cell(d->selection->activeSheet(), d->selection->marker());
     if ((cell.style().formatType()) == KCFormat::Percentage) {
         if ((text.length() == 1) && text[0].isDigit()) {
@@ -500,7 +500,7 @@ void CellEditor::slotTextChanged()
             return;
         }
     }
-#endif // KSPREAD_WIP_EDITOR_OVERHAUL
+#endif // KCELLS_WIP_EDITOR_OVERHAUL
 
     // update the external editor, but only if we have focus
     if (hasFocus()) {

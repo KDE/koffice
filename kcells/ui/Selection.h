@@ -18,8 +18,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_SELECTION
-#define KSPREAD_SELECTION
+#ifndef KCELLS_SELECTION
+#define KCELLS_SELECTION
 
 #include <QColor>
 #include <QList>
@@ -411,4 +411,4 @@ private:
     QColor m_color;
 };
 
-#endif // KSPREAD_SELECTION
+#endif // KCELLS_SELECTION

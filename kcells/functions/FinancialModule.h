@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_FINANCIAL_MODULE
-#define KSPREAD_FINANCIAL_MODULE
+#ifndef KCELLS_FINANCIAL_MODULE
+#define KCELLS_FINANCIAL_MODULE
 
 #include "KCFunctionModule.h"
 
@@ -34,4 +34,4 @@ public:
     QString descriptionFileName() const;
 };
 
-#endif // KSPREAD_FINANCIAL_MODULE
+#endif // KCELLS_FINANCIAL_MODULE

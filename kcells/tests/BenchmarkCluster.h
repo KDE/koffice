@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_CLUSTER_BENCHMARK
-#define KSPREAD_CLUSTER_BENCHMARK
+#ifndef KCELLS_CLUSTER_BENCHMARK
+#define KCELLS_CLUSTER_BENCHMARK
 
 #include <QtGui>
 #include <QtTest/QtTest>
@@ -40,4 +40,4 @@ private Q_SLOTS:
     void testShiftDownPerformance();
 };
 
-#endif // KSPREAD_CLUSTER_BENCHMARK
+#endif // KCELLS_CLUSTER_BENCHMARK

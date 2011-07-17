@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_ABOUTDATA
-#define KSPREAD_ABOUTDATA
+#ifndef KCELLS_ABOUTDATA
+#define KCELLS_ABOUTDATA
 
 #include <kaboutdata.h>
 #include <klocale.h>

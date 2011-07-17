@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_STYLE_MANAGER
-#define KSPREAD_STYLE_MANAGER
+#ifndef KCELLS_STYLE_MANAGER
+#define KCELLS_STYLE_MANAGER
 
 #include "kcells_export.h"
 #include <KXmlReader.h>
@@ -124,4 +124,4 @@ private:
     QHash<QString, QString>  m_oasisStyles;
 };
 
-#endif // KSPREAD_STYLE_MANAGER
+#endif // KCELLS_STYLE_MANAGER

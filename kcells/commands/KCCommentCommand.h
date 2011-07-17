@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_COMMENT_COMMAND
-#define KSPREAD_COMMENT_COMMAND
+#ifndef KCELLS_COMMENT_COMMAND
+#define KCELLS_COMMENT_COMMAND
 
 #include "KCAbstractRegionCommand.h"
 
@@ -43,4 +43,4 @@ private:
     QList< QPair<QRectF, QString> > m_undoData;
 };
 
-#endif // KSPREAD_COMMENT_COMMAND
+#endif // KCELLS_COMMENT_COMMAND

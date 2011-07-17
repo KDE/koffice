@@ -17,12 +17,12 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_NUMBER_H
-#define KSPREAD_NUMBER_H
+#ifndef KCELLS_NUMBER_H
+#define KCELLS_NUMBER_H
 
-// #define KSPREAD_HIGH_PRECISION_SUPPORT
+// #define KCELLS_HIGH_PRECISION_SUPPORT
 
-#ifndef KSPREAD_HIGH_PRECISION_SUPPORT
+#ifndef KCELLS_HIGH_PRECISION_SUPPORT
 
 #include <math.h>
 
@@ -61,7 +61,7 @@ inline KCNumber atgh(const KCNumber &n)
     return ::atanh(n);
 }
 }
-#else // KSPREAD_HIGH_PRECISION_SUPPORT
+#else // KCELLS_HIGH_PRECISION_SUPPORT
 
 #include <QSharedDataPointer>
 
@@ -221,6 +221,6 @@ KCNumber asinh(const KCNumber &n);
 KCNumber acosh(const KCNumber &n);
 KCNumber atgh(const KCNumber &n);
 
-#endif // KSPREAD_HIGH_PRECISION_SUPPORT
+#endif // KCELLS_HIGH_PRECISION_SUPPORT
 
-#endif // KSPREAD_NUMBER_H
+#endif // KCELLS_NUMBER_H

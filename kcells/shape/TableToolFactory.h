@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_TABLE_TOOL_FACTORY
-#define KSPREAD_TABLE_TOOL_FACTORY
+#ifndef KCELLS_TABLE_TOOL_FACTORY
+#define KCELLS_TABLE_TOOL_FACTORY
 
 
 #include <KToolFactoryBase.h>
@@ -34,4 +34,4 @@ public:
     KToolBase* createTool(KCanvasBase* canvas);
 };
 
-#endif // KSPREAD_TABLE_TOOL_FACTORY
+#endif // KCELLS_TABLE_TOOL_FACTORY

@@ -20,8 +20,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_CONDITIONAL_DIALOG
-#define KSPREAD_CONDITIONAL_DIALOG
+#ifndef KCELLS_CONDITIONAL_DIALOG
+#define KCELLS_CONDITIONAL_DIALOG
 
 #include <kdialog.h>
 #include <QWidget>
@@ -101,4 +101,4 @@ private:
 
 };
 
-#endif // KSPREAD_CONDITIONAL_DIALOG
+#endif // KCELLS_CONDITIONAL_DIALOG

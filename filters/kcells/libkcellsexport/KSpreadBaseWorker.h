@@ -18,8 +18,8 @@ the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_BASE_WORKER_H
-#define KSPREAD_BASE_WORKER_H
+#ifndef KCELLS_BASE_WORKER_H
+#define KCELLS_BASE_WORKER_H
 
 #include <KoFilter.h>
 #include <QMap>
@@ -42,4 +42,4 @@ public:
     virtual KoFilter::ConversionStatus startSpreadCell(KCellsFilterProperty property);
 };
 
-#endif /* KSPREAD_BASE_WORKER_H */
+#endif /* KCELLS_BASE_WORKER_H */

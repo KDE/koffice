@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_TEST_FORMULA
-#define KSPREAD_TEST_FORMULA
+#ifndef KCELLS_TEST_FORMULA
+#define KCELLS_TEST_FORMULA
 
 #include <QtGui>
 #include <QtTest/QtTest>
@@ -46,4 +46,4 @@ private:
     KCValue evaluate(const QString&, KCValue&);
 };
 
-#endif // KSPREAD_TEST_FORMULA
+#endif // KCELLS_TEST_FORMULA

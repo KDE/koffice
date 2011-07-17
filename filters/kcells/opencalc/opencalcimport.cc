@@ -793,7 +793,7 @@ bool OpenCalcImport::readRowsAndCells(KXmlElement & content, KCSheet * table)
             srcLayout->setHidden(true);
 
         for (i = 1; i < number; ++i) {
-            // FIXME KSPREAD_NEW_STYLE_STORAGE
+            // FIXME KCELLS_NEW_STYLE_STORAGE
 //       layout = table->nonDefaultRowFormat( backupRow + i );
 //
 //       table->setStyle( KCRegion(QRect(1,backupRow + i,KS_colMax,1)), srcLayout );

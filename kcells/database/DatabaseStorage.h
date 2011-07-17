@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_DATABASE_STORAGE
-#define KSPREAD_DATABASE_STORAGE
+#ifndef KCELLS_DATABASE_STORAGE
+#define KCELLS_DATABASE_STORAGE
 
 #include "Database.h"
 #include "KCRectStorage.h"
@@ -42,4 +42,4 @@ protected Q_SLOTS:
     }
 };
 
-#endif // KSPREAD_DATABASE_STORAGE
+#endif // KCELLS_DATABASE_STORAGE

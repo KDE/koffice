@@ -18,8 +18,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_VALUE_H
-#define KSPREAD_VALUE_H
+#ifndef KCELLS_VALUE_H
+#define KCELLS_VALUE_H
 
 #include <complex>
 
@@ -130,12 +130,12 @@ public:
      */
     explicit KCValue(long double f);
 
-#ifdef KSPREAD_HIGH_PRECISION_SUPPORT
+#ifdef KCELLS_HIGH_PRECISION_SUPPORT
     /**
      * Creates a floating-point value.
      */
     explicit KCValue(KCNumber f);
-#endif // KSPREAD_HIGH_PRECISION_SUPPORT
+#endif // KCELLS_HIGH_PRECISION_SUPPORT
 
     /**
      * Creates a complex number value.
@@ -523,4 +523,4 @@ KCELLS_EXPORT QTextStream& operator<<(QTextStream& ts, KCValue value);
 KCELLS_EXPORT QDebug operator<<(QDebug str, const KCValue& v);
 QDebug operator<<(QDebug stream, const KCValue::KCFormat& f);
 
-#endif // KSPREAD_VALUE_H
+#endif // KCELLS_VALUE_H

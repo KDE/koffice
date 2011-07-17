@@ -19,8 +19,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_STYLE
-#define KSPREAD_STYLE
+#ifndef KCELLS_STYLE
+#define KCELLS_STYLE
 
 #include <QFont>
 #include <QSharedDataPointer>
@@ -547,4 +547,4 @@ Q_DECLARE_TYPEINFO(KCStyle, Q_MOVABLE_TYPE);
 Q_DECLARE_TYPEINFO(KCCustomStyle, Q_MOVABLE_TYPE);
 Q_DECLARE_TYPEINFO(KCSharedSubStyle, Q_MOVABLE_TYPE);
 
-#endif // KSPREAD_STYLE
+#endif // KCELLS_STYLE

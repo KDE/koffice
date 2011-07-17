@@ -280,7 +280,7 @@ KCValue::KCValue(long double f)
 }
 
 
-#ifdef KSPREAD_HIGH_PRECISION_SUPPORT
+#ifdef KCELLS_HIGH_PRECISION_SUPPORT
 // create a floating-point value
 KCValue::KCValue(KCNumber f)
         : d(Private::null())
@@ -289,7 +289,7 @@ KCValue::KCValue(KCNumber f)
     d->f = f;
     d->format = fmt_Number;
 }
-#endif // KSPREAD_HIGH_PRECISION_SUPPORT
+#endif // KCELLS_HIGH_PRECISION_SUPPORT
 
 // create a complex number value
 KCValue::KCValue(const complex<KCNumber>& c)

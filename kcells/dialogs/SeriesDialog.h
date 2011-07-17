@@ -23,8 +23,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_SERIES_DIALOG
-#define KSPREAD_SERIES_DIALOG
+#ifndef KCELLS_SERIES_DIALOG
+#define KCELLS_SERIES_DIALOG
 
 #include <kdialog.h>
 
@@ -63,4 +63,4 @@ protected:
     QPoint  marker;
 };
 
-#endif // KSPREAD_SERIES_DIALOG
+#endif // KCELLS_SERIES_DIALOG

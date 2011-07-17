@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_DATABASE
-#define KSPREAD_DATABASE
+#ifndef KCELLS_DATABASE
+#define KCELLS_DATABASE
 
 #include <QSharedDataPointer>
 #include <QVariant>
@@ -136,4 +136,4 @@ private:
 Q_DECLARE_METATYPE(Database)
 Q_DECLARE_TYPEINFO(Database, Q_MOVABLE_TYPE);
 
-#endif // KSPREAD_DATABASE
+#endif // KCELLS_DATABASE

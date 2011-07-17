@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_TEST_VALUEFORMATTER
-#define KSPREAD_TEST_VALUEFORMATTER
+#ifndef KCELLS_TEST_VALUEFORMATTER
+#define KCELLS_TEST_VALUEFORMATTER
 
 #include <QtGui>
 #include <QtTest/QtTest>
@@ -45,4 +45,4 @@ private:
     KCValueConverter* m_converter;
 };
 
-#endif // KSPREAD_TEST_VALUEFORMATTER
+#endif // KCELLS_TEST_VALUEFORMATTER

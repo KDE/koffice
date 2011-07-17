@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_FUNCTION_MODULE
-#define KSPREAD_FUNCTION_MODULE
+#ifndef KCELLS_FUNCTION_MODULE
+#define KCELLS_FUNCTION_MODULE
 
 #include <kofficeversion.h>
 
@@ -96,4 +96,4 @@ private:
     K_EXPORT_PLUGIN(factory("kcells-functions-" #libname)) \
     K_EXPORT_PLUGIN_VERSION(KOFFICE_VERSION)
 
-#endif // KSPREAD_FUNCTION_MODULE
+#endif // KCELLS_FUNCTION_MODULE

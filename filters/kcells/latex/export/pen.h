@@ -20,8 +20,8 @@
 **
 */
 
-#ifndef __KSPREAD_LATEX_PEN_H__
-#define __KSPREAD_LATEX_PEN_H__
+#ifndef __KCELLS_LATEX_PEN_H__
+#define __KCELLS_LATEX_PEN_H__
 
 #include <QTextStream>
 #include <QString>
@@ -95,4 +95,4 @@ public:
 
 };
 
-#endif /* __KSPREAD_LATEX_PEN_H__ */
+#endif /* __KCELLS_LATEX_PEN_H__ */

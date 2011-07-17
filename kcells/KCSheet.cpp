@@ -259,7 +259,7 @@ KCSheet::KCSheet(const KCSheet &other)
     d->columns = other.d->columns;
 
     // flake
-#if 0 // KSPREAD_WIP_COPY_SHEET_(SHAPES)
+#if 0 // KCELLS_WIP_COPY_SHEET_(SHAPES)
     //FIXME This does not work as copySettings does not work. Also createDefaultShapeAndInit without the correct settings can not work
     //I think this should use saveOdf and loadOdf for copying
     KShape* shape;
@@ -269,7 +269,7 @@ KCSheet::KCSheet(const KCSheet &other)
         shape->copySettings(shapes[i]);
         addShape(shape);
     }
-#endif // KSPREAD_WIP_COPY_SHEET_(SHAPES)
+#endif // KCELLS_WIP_COPY_SHEET_(SHAPES)
 
     d->print = new KCSheetPrint(this); // FIXME = new KCSheetPrint(*other.d->print);
 
@@ -1254,7 +1254,7 @@ QDomElement KCSheet::saveXML(QDomDocument& dd)
             styleIndex = styleStorage()->nextColumnStyleIndex(styleIndex);
         }
     }
-#if 0 // KSPREAD_KOPART_EMBEDDING
+#if 0 // KCELLS_KOPART_EMBEDDING
     foreach(EmbeddedObject* object, doc()->embeddedObjects()) {
         if (object->sheet() == this) {
             QDomElement e = object->save(dd);
@@ -1264,7 +1264,7 @@ QDomElement KCSheet::saveXML(QDomDocument& dd)
             sheet.appendChild(e);
         }
     }
-#endif // KSPREAD_KOPART_EMBEDDING
+#endif // KCELLS_KOPART_EMBEDDING
     return sheet;
 }
 
@@ -3117,7 +3117,7 @@ bool KCSheet::loadXML(const KXmlElement& sheet)
                 else
                     delete cl;
             }
-#if 0 // KSPREAD_KOPART_EMBEDDING
+#if 0 // KCELLS_KOPART_EMBEDDING
             else if (tagName == "object") {
                 EmbeddedKOfficeObject *ch = new EmbeddedKOfficeObject(doc(), this);
                 if (ch->load(e))
@@ -3135,7 +3135,7 @@ bool KCSheet::loadXML(const KXmlElement& sheet)
                     delete ch;
                 }
             }
-#endif // KSPREAD_KOPART_EMBEDDING
+#endif // KCELLS_KOPART_EMBEDDING
         }
         n = n.nextSibling();
     }
@@ -3169,7 +3169,7 @@ bool KCSheet::loadXML(const KXmlElement& sheet)
 bool KCSheet::loadChildren(KOdfStore* _store)
 {
     Q_UNUSED(_store);
-#if 0 // KSPREAD_KOPART_EMBEDDING
+#if 0 // KCELLS_KOPART_EMBEDDING
     foreach(EmbeddedObject* object, doc()->embeddedObjects()) {
         if (object->sheet() == this && (object->getType() == OBJECT_KOFFICE_PART || object->getType() == OBJECT_CHART)) {
             kDebug() << "KCellsSheet::loadChildren";
@@ -3177,7 +3177,7 @@ bool KCSheet::loadChildren(KOdfStore* _store)
                 return false;
         }
     }
-#endif // KSPREAD_KOPART_EMBEDDING
+#endif // KCELLS_KOPART_EMBEDDING
     return true;
 }
 
@@ -3255,7 +3255,7 @@ bool KCSheet::saveChildren(KOdfStore* _store, const QString &_path)
 {
     Q_UNUSED(_store);
     Q_UNUSED(_path);
-#if 0 // KSPREAD_KOPART_EMBEDDING
+#if 0 // KCELLS_KOPART_EMBEDDING
     int i = 0;
     foreach(EmbeddedObject* object, doc()->embeddedObjects()) {
         if (object->sheet() == this && (object->getType() == OBJECT_KOFFICE_PART || object->getType() == OBJECT_CHART)) {
@@ -3264,7 +3264,7 @@ bool KCSheet::saveChildren(KOdfStore* _store, const QString &_path)
                 return false;
         }
     }
-#endif // KSPREAD_KOPART_EMBEDDING
+#endif // KCELLS_KOPART_EMBEDDING
     return true;
 }
 

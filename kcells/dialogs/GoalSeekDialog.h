@@ -23,8 +23,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_GOALSEEK_DIALOG
-#define KSPREAD_GOALSEEK_DIALOG
+#ifndef KCELLS_GOALSEEK_DIALOG
+#define KCELLS_GOALSEEK_DIALOG
 
 #include <kdialog.h>
 
@@ -62,4 +62,4 @@ private:
     void startCalc(double _start, double _goal);
 };
 
-#endif // KSPREAD_GOALSEEK_DIALOG
+#endif // KCELLS_GOALSEEK_DIALOG

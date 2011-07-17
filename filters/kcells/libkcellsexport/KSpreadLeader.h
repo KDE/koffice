@@ -18,8 +18,8 @@ the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_LEADER_H
-#define KSPREAD_LEADER_H
+#ifndef KCELLS_LEADER_H
+#define KCELLS_LEADER_H
 
 #include <KCellsBaseWorker.h>
 #include <KoFilterChain.h>
@@ -102,4 +102,4 @@ public:
 
 } // namespace KCells
 
-#endif /* KSPREAD_LEADER_H */
+#endif /* KCELLS_LEADER_H */

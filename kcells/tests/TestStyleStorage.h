@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_TEST_STYLESTORAGE
-#define KSPREAD_TEST_STYLESTORAGE
+#ifndef KCELLS_TEST_STYLESTORAGE
+#define KCELLS_TEST_STYLESTORAGE
 
 #include <QObject>
 
@@ -30,4 +30,4 @@ private slots:
     void testGarbageCollection();
 };
 
-#endif // KSPREAD_TEST_STYLESTORAGE
+#endif // KCELLS_TEST_STYLESTORAGE

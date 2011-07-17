@@ -24,8 +24,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_DOCUMENT_SETTINGS_DIALOG
-#define KSPREAD_DOCUMENT_SETTINGS_DIALOG
+#ifndef KCELLS_DOCUMENT_SETTINGS_DIALOG
+#define KCELLS_DOCUMENT_SETTINGS_DIALOG
 
 #include <QGroupBox>
 #include <QLabel>
@@ -96,4 +96,4 @@ private:
     Private * const d;
 };
 
-#endif // KSPREAD_DOCUMENT_SETTINGS_DIALOG
+#endif // KCELLS_DOCUMENT_SETTINGS_DIALOG

@@ -20,8 +20,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_SHOW_COL_ROW_DIALOG
-#define KSPREAD_SHOW_COL_ROW_DIALOG
+#ifndef KCELLS_SHOW_COL_ROW_DIALOG
+#define KCELLS_SHOW_COL_ROW_DIALOG
 
 #include <QList>
 
@@ -54,4 +54,4 @@ protected:
     QList<int> listInt;
 };
 
-#endif // KSPREAD_SHOW_COL_ROW_DIALOG
+#endif // KCELLS_SHOW_COL_ROW_DIALOG

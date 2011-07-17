@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_TEST_REGION
-#define KSPREAD_TEST_REGION
+#ifndef KCELLS_TEST_REGION
+#define KCELLS_TEST_REGION
 
 #include <QtGui>
 #include <QtTest/QtTest>
@@ -41,4 +41,4 @@ private:
     KCMap* m_map;
 };
 
-#endif // KSPREAD_TEST_REGION
+#endif // KCELLS_TEST_REGION

@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_CELL_STORAGE_P
-#define KSPREAD_CELL_STORAGE_P
+#ifndef KCELLS_CELL_STORAGE_P
+#define KCELLS_CELL_STORAGE_P
 
 // KCells
 #include "KCBinding.h"
@@ -79,4 +79,4 @@ public:
     QVector< QPair<QPoint, QSharedPointer<QTextDocument> > > richTexts;
 };
 
-#endif // KSPREAD_CELL_STORAGE_P
+#endif // KCELLS_CELL_STORAGE_P

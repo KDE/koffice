@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_TABLE_PAGE_MANAGER
-#define KSPREAD_TABLE_PAGE_MANAGER
+#ifndef KCELLS_TABLE_PAGE_MANAGER
+#define KCELLS_TABLE_PAGE_MANAGER
 
 #include "KCPageManager.h"
 
@@ -49,4 +49,4 @@ private:
     Private * const d;
 };
 
-#endif // KSPREAD_TABLE_PAGE_MANAGER
+#endif // KCELLS_TABLE_PAGE_MANAGER

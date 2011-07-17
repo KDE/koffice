@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_CANVAS_RESOURCES
-#define KSPREAD_CANVAS_RESOURCES
+#ifndef KCELLS_CANVAS_RESOURCES
+#define KCELLS_CANVAS_RESOURCES
 
 #include <KResourceManager.h>
 
@@ -32,4 +32,4 @@ enum {
 };
 } // namespace CanvasResource
 
-#endif // KSPREAD_CANVAS_RESOURCES
+#endif // KCELLS_CANVAS_RESOURCES

@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_BITOPS_MODULE
-#define KSPREAD_BITOPS_MODULE
+#ifndef KCELLS_BITOPS_MODULE
+#define KCELLS_BITOPS_MODULE
 
 #include "KCFunctionModule.h"
 
@@ -34,4 +34,4 @@ public:
     QString descriptionFileName() const;
 };
 
-#endif // KSPREAD_BITOPS_MODULE
+#endif // KCELLS_BITOPS_MODULE

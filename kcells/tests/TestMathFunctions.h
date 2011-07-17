@@ -18,8 +18,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_TEST_MATH_FUNCTIONS
-#define KSPREAD_TEST_MATH_FUNCTIONS
+#ifndef KCELLS_TEST_MATH_FUNCTIONS
+#define KCELLS_TEST_MATH_FUNCTIONS
 
 #include <QtGui>
 #include <QtTest/QtTest>
@@ -112,4 +112,4 @@ private:
     KCMap* m_map;
 };
 
-#endif // KSPREAD_TEST_MATH_FUNCTIONS
+#endif // KCELLS_TEST_MATH_FUNCTIONS

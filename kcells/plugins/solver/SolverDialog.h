@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_SOLVER_DIALOG
-#define KSPREAD_SOLVER_DIALOG
+#ifndef KCELLS_SOLVER_DIALOG
+#define KCELLS_SOLVER_DIALOG
 
 #include <kdialog.h>
 

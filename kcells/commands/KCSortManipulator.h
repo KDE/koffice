@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_SORT_MANIPULATOR
-#define KSPREAD_SORT_MANIPULATOR
+#ifndef KCELLS_SORT_MANIPULATOR
+#define KCELLS_SORT_MANIPULATOR
 
 #include "KCCellStorage.h"
 #include "DataManipulators.h"
@@ -96,4 +96,4 @@ protected:
     QHash<KCCell, KCStyle> m_styles; // temporary
 };
 
-#endif  // KSPREAD_SORT_MANIPULATOR
+#endif  // KCELLS_SORT_MANIPULATOR

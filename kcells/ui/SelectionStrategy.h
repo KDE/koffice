@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_SELECTION_STRATEGY
-#define KSPREAD_SELECTION_STRATEGY
+#ifndef KCELLS_SELECTION_STRATEGY
+#define KCELLS_SELECTION_STRATEGY
 
 #include "AbstractSelectionStrategy.h"
 #include "kcells_export.h"
@@ -54,4 +54,4 @@ private:
     Private * const d;
 };
 
-#endif // KSPREAD_SELECTION_STRATEGY
+#endif // KCELLS_SELECTION_STRATEGY

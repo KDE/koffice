@@ -17,8 +17,8 @@
    the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
    Boston, MA 02110-1301, USA.
 */
-#ifndef KSPREAD_CELLEDITORBASE_H
-#define KSPREAD_CELLEDITORBASE_H
+#ifndef KCELLS_CELLEDITORBASE_H
+#define KCELLS_CELLEDITORBASE_H
 #include <kcells_export.h>
 
 class QFont;
@@ -45,4 +45,4 @@ public:
     virtual void setActiveSubRegion(int index) = 0;
 };
 
-#endif // KSPREAD_CELLEDITORBASE_H
+#endif // KCELLS_CELLEDITORBASE_H

@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_DATABASE_SOURCE_QUERY
-#define KSPREAD_DATABASE_SOURCE_QUERY
+#ifndef KCELLS_DATABASE_SOURCE_QUERY
+#define KCELLS_DATABASE_SOURCE_QUERY
 
 #include "DatabaseSource.h"
 
@@ -44,4 +44,4 @@ private:
     Private * const d;
 };
 
-#endif // KSPREAD_DATABASE_SOURCE_QUERY
+#endif // KCELLS_DATABASE_SOURCE_QUERY

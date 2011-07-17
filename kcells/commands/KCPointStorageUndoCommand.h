@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_POINT_STORAGE_UNDO_COMMAND
-#define KSPREAD_POINT_STORAGE_UNDO_COMMAND
+#ifndef KCELLS_POINT_STORAGE_UNDO_COMMAND
+#define KCELLS_POINT_STORAGE_UNDO_COMMAND
 
 // Qt
 #include <QAbstractItemModel>
@@ -103,4 +103,4 @@ KCPointStorageUndoCommand<T>& KCPointStorageUndoCommand<T>::operator<<(const QVe
     return *this;
 }
 
-#endif // KSPREAD_POINT_STORAGE_UNDO_COMMAND
+#endif // KCELLS_POINT_STORAGE_UNDO_COMMAND

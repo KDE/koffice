@@ -19,8 +19,8 @@
 */
 
 
-#ifndef KSPREAD_FUNCTION_DESCRIPTION
-#define KSPREAD_FUNCTION_DESCRIPTION
+#ifndef KCELLS_FUNCTION_DESCRIPTION
+#define KCELLS_FUNCTION_DESCRIPTION
 
 #include <QList>
 #include <QStringList>
@@ -115,4 +115,4 @@ private:
     QList<KCFunctionParameter> m_params;
 };
 
-#endif // KSPREAD_FUNCTION_DESCRIPTION
+#endif // KCELLS_FUNCTION_DESCRIPTION

@@ -32,8 +32,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_CELL
-#define KSPREAD_CELL
+#ifndef KCELLS_CELL
+#define KCELLS_CELL
 
 #include <QDate>
 #include <QSharedDataPointer>
@@ -645,4 +645,4 @@ inline QDebug operator<<(QDebug str, const KCCell& cell)
     return str << qPrintable(KCCell::columnName(cell.column()) + QString::number(cell.row()));
 }
 
-#endif  // KSPREAD_CELL
+#endif  // KCELLS_CELL

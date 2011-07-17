@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_FORMULA_STORAGE
-#define KSPREAD_FORMULA_STORAGE
+#ifndef KCELLS_FORMULA_STORAGE
+#define KCELLS_FORMULA_STORAGE
 
 #include "KCFormula.h"
 #include "kcells_limits.h"
@@ -38,4 +38,4 @@ public:
     }
 };
 
-#endif // KSPREAD_FORMULA_STORAGE
+#endif // KCELLS_FORMULA_STORAGE

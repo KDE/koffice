@@ -24,8 +24,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_AUTO_FORMAT_DIALOG
-#define KSPREAD_AUTO_FORMAT_DIALOG
+#ifndef KCELLS_AUTO_FORMAT_DIALOG
+#define KCELLS_AUTO_FORMAT_DIALOG
 
 #include <kdialog.h>
 
@@ -51,4 +51,4 @@ private:
     Private * const d;
 };
 
-#endif // KSPREAD_AUTO_FORMAT_DIALOG
+#endif // KCELLS_AUTO_FORMAT_DIALOG

@@ -18,8 +18,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_SHEET_COMMANDS
-#define KSPREAD_SHEET_COMMANDS
+#ifndef KCELLS_SHEET_COMMANDS
+#define KCELLS_SHEET_COMMANDS
 
 #include <QString>
 #include <QUndoCommand>
@@ -177,4 +177,4 @@ protected:
     bool oldCapitalizeFirstLetter, newCapitalizeFirstLetter;
 };
 
-#endif // KSPREAD_SHEET_COMMANDS
+#endif // KCELLS_SHEET_COMMANDS

@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_CHARACTER_SELECT_DIALOG
-#define KSPREAD_CHARACTER_SELECT_DIALOG
+#ifndef KCELLS_CHARACTER_SELECT_DIALOG
+#define KCELLS_CHARACTER_SELECT_DIALOG
 
 #include <kdialog.h>
 
@@ -74,4 +74,4 @@ private:
     Private * const d;
 };
 
-#endif // KSPREAD_CHARACTER_SELECT_DIALOG
+#endif // KCELLS_CHARACTER_SELECT_DIALOG

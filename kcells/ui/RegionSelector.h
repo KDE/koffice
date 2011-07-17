@@ -19,8 +19,8 @@
 */
 
 
-#ifndef KSPREAD_REGION_SELECTOR
-#define KSPREAD_REGION_SELECTOR
+#ifndef KCELLS_REGION_SELECTOR
+#define KCELLS_REGION_SELECTOR
 
 #include <QWidget>
 
@@ -70,4 +70,4 @@ private:
     Private * const d;
 };
 
-#endif // KSPREAD_REGION_SELECTOR
+#endif // KCELLS_REGION_SELECTOR

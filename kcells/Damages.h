@@ -18,8 +18,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_DAMAGES
-#define KSPREAD_DAMAGES
+#ifndef KCELLS_DAMAGES
+#define KCELLS_DAMAGES
 
 
 #include "kdebug.h"
@@ -210,4 +210,4 @@ KCELLS_EXPORT QDebug operator<<(QDebug str, const KCCellDamage& d);
 KCELLS_EXPORT QDebug operator<<(QDebug str, const KCSheetDamage& d);
 KCELLS_EXPORT QDebug operator<<(QDebug str, const KCSelectionDamage& d);
 
-#endif // KSPREAD_DAMAGES
+#endif // KCELLS_DAMAGES

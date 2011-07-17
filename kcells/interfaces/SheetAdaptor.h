@@ -24,8 +24,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_SHEET_ADAPTOR
-#define KSPREAD_SHEET_ADAPTOR
+#ifndef KCELLS_SHEET_ADAPTOR
+#define KCELLS_SHEET_ADAPTOR
 
 #include <QtDBus/QtDBus>
 #include "kcells_export.h"
@@ -183,4 +183,4 @@ private:
     QByteArray ident;
 };
 
-#endif // KSPREAD_SHEET_ADAPTOR
+#endif // KCELLS_SHEET_ADAPTOR

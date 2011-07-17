@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_DRAG_AND_DROP_STRATEGY
-#define KSPREAD_DRAG_AND_DROP_STRATEGY
+#ifndef KCELLS_DRAG_AND_DROP_STRATEGY
+#define KCELLS_DRAG_AND_DROP_STRATEGY
 
 #include "AbstractSelectionStrategy.h"
 #include "kcells_export.h"
@@ -53,4 +53,4 @@ private:
     Private * const d;
 };
 
-#endif // KSPREAD_DRAG_AND_DROP_STRATEGY
+#endif // KCELLS_DRAG_AND_DROP_STRATEGY

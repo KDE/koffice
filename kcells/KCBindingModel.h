@@ -18,8 +18,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_BINDING_MODEL
-#define KSPREAD_BINDING_MODEL
+#ifndef KCELLS_BINDING_MODEL
+#define KCELLS_BINDING_MODEL
 
 #include "KCRegion.h"
 
@@ -64,4 +64,4 @@ private:
     KCBinding* m_binding;
 };
 
-#endif // KSPREAD_BINDING_MODEL
+#endif // KCELLS_BINDING_MODEL

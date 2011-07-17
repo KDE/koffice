@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_CONVERSION_MODULE
-#define KSPREAD_CONVERSION_MODULE
+#ifndef KCELLS_CONVERSION_MODULE
+#define KCELLS_CONVERSION_MODULE
 
 #include "KCFunctionModule.h"
 
@@ -34,4 +34,4 @@ public:
     QString descriptionFileName() const;
 };
 
-#endif // KSPREAD_CONVERSION_MODULE
+#endif // KCELLS_CONVERSION_MODULE

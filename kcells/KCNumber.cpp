@@ -19,7 +19,7 @@
 
 #include "KCNumber.h"
 
-#ifdef KSPREAD_HIGH_PRECISION_SUPPORT
+#ifdef KCELLS_HIGH_PRECISION_SUPPORT
 
 #include <math.h>
 
@@ -428,4 +428,4 @@ KCNumber atgh(const KCNumber &n)
     return n.atgh();
 }
 
-#endif // KSPREAD_HIGH_PRECISION_SUPPORT
+#endif // KCELLS_HIGH_PRECISION_SUPPORT

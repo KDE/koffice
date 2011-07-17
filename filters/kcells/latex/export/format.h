@@ -20,8 +20,8 @@
 **
 */
 
-#ifndef __KSPREAD_LATEX_FORMAT_H__
-#define __KSPREAD_LATEX_FORMAT_H__
+#ifndef __KCELLS_LATEX_FORMAT_H__
+#define __KCELLS_LATEX_FORMAT_H__
 
 #include <QTextStream>
 #include <QString>
@@ -251,4 +251,4 @@ public:
     void generateColor(QTextStream& out);
 };
 
-#endif /* __KSPREAD_LATEX_FORMAT_H__ */
+#endif /* __KCELLS_LATEX_FORMAT_H__ */

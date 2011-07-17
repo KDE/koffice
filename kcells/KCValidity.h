@@ -31,8 +31,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_VALIDITY
-#define KSPREAD_VALIDITY
+#ifndef KCELLS_VALIDITY
+#define KCELLS_VALIDITY
 
 // Qt
 #include <QDate>
@@ -194,4 +194,4 @@ private:
 Q_DECLARE_METATYPE(KCValidity)
 Q_DECLARE_TYPEINFO(KCValidity, Q_MOVABLE_TYPE);
 
-#endif // KSPREAD_VALIDITY
+#endif // KCELLS_VALIDITY

@@ -29,8 +29,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_CANVAS
-#define KSPREAD_CANVAS
+#ifndef KCELLS_CANVAS
+#define KCELLS_CANVAS
 
 #include "kcells_export.h"
 
@@ -215,4 +215,4 @@ private:
     KToolProxy *m_toolProxy;
 };
 
-#endif // KSPREAD_CANVAS
+#endif // KCELLS_CANVAS

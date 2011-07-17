@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_READONLY_TABLE_MODEL
-#define KSPREAD_READONLY_TABLE_MODEL
+#ifndef KCELLS_READONLY_TABLE_MODEL
+#define KCELLS_READONLY_TABLE_MODEL
 
 #include <QAbstractTableModel>
 
@@ -53,4 +53,4 @@ private:
     Private * const d;
 };
 
-#endif // KSPREAD_READONLY_TABLE_MODEL
+#endif // KCELLS_READONLY_TABLE_MODEL

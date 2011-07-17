@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_BINDING
-#define KSPREAD_BINDING
+#ifndef KCELLS_BINDING
+#define KCELLS_BINDING
 
 #include <QSharedDataPointer>
 #include <QVariant>
@@ -65,4 +65,4 @@ private:
 Q_DECLARE_METATYPE(KCBinding)
 Q_DECLARE_TYPEINFO(KCBinding, Q_MOVABLE_TYPE);
 
-#endif // KSPREAD_BINDING
+#endif // KCELLS_BINDING

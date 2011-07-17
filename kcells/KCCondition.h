@@ -19,8 +19,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_CONDITION_H
-#define KSPREAD_CONDITION_H
+#ifndef KCELLS_CONDITION_H
+#define KCELLS_CONDITION_H
 
 #include "KCStyle.h"
 #include "KCValue.h"
@@ -214,4 +214,4 @@ private:
 Q_DECLARE_METATYPE(KCConditions)
 Q_DECLARE_TYPEINFO(KCConditions, Q_MOVABLE_TYPE);
 
-#endif // KSPREAD_CONDITION_H
+#endif // KCELLS_CONDITION_H

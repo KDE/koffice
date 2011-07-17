@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_SOLVER
-#define KSPREAD_SOLVER
+#ifndef KCELLS_SOLVER
+#define KCELLS_SOLVER
 
 #include <gsl/gsl_multimin.h>
 

@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_TEST_DATETIME_FUNCTIONS
-#define KSPREAD_TEST_DATETIME_FUNCTIONS
+#ifndef KCELLS_TEST_DATETIME_FUNCTIONS
+#define KCELLS_TEST_DATETIME_FUNCTIONS
 
 #include <QtGui>
 #include <QtTest/QtTest>
@@ -68,4 +68,4 @@ private:
     KCValue evaluate(const QString&, KCValue& ex);
 };
 
-#endif // KSPREAD_TEST_DATETIME_FUNCTIONS
+#endif // KCELLS_TEST_DATETIME_FUNCTIONS

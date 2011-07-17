@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_PAGE_BREAK_COMMAND
-#define KSPREAD_PAGE_BREAK_COMMAND
+#ifndef KCELLS_PAGE_BREAK_COMMAND
+#define KCELLS_PAGE_BREAK_COMMAND
 
 #include "KCAbstractRegionCommand.h"
 
@@ -43,4 +43,4 @@ private:
     Mode m_mode;
 };
 
-#endif // KSPREAD_PAGE_BREAK_COMMAND
+#endif // KCELLS_PAGE_BREAK_COMMAND

@@ -19,8 +19,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_DATABASE_DIALOG
-#define KSPREAD_DATABASE_DIALOG
+#ifndef KCELLS_DATABASE_DIALOG
+#define KCELLS_DATABASE_DIALOG
 
 #include <QRect>
 #include <QFrame>
@@ -134,4 +134,4 @@ private:
     QString getWhereCondition(QString const &, QString const &, int);
 };
 
-#endif // KSPREAD_DATABASE_DIALOG
+#endif // KCELLS_DATABASE_DIALOG

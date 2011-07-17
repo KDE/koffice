@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_SPELLCHECK_COMMAND
-#define KSPREAD_SPELLCHECK_COMMAND
+#ifndef KCELLS_SPELLCHECK_COMMAND
+#define KCELLS_SPELLCHECK_COMMAND
 
 #include <sonnet/backgroundchecker.h>
 
@@ -56,4 +56,4 @@ private:
     Private * const d;
 };
 
-#endif // KSPREAD_SPELLCHECK_COMMAND
+#endif // KCELLS_SPELLCHECK_COMMAND

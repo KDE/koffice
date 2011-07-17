@@ -18,8 +18,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_DEFINE_PRINT_RANGE_COMMAND
-#define KSPREAD_DEFINE_PRINT_RANGE_COMMAND
+#ifndef KCELLS_DEFINE_PRINT_RANGE_COMMAND
+#define KCELLS_DEFINE_PRINT_RANGE_COMMAND
 
 #include <QRect>
 #include <QString>
@@ -44,4 +44,4 @@ private:
     KCRegion m_oldPrintRegion;
 };
 
-#endif // KSPREAD_DEFINE_PRINT_RANGE_COMMAND
+#endif // KCELLS_DEFINE_PRINT_RANGE_COMMAND

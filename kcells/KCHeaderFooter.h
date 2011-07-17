@@ -19,8 +19,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_HEADER_FOOTER
-#define KSPREAD_HEADER_FOOTER
+#ifndef KCELLS_HEADER_FOOTER
+#define KCELLS_HEADER_FOOTER
 
 #include <KOdfPageLayoutData.h>
 
@@ -153,4 +153,4 @@ private:
     QString m_footMid;
 };
 
-#endif // KSPREAD_HEADER_FOOTER
+#endif // KCELLS_HEADER_FOOTER

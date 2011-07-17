@@ -101,10 +101,10 @@ Item										Prio	Status
 * Inform the user about unreachable/unsupported document data on loading.       1       ----
 
 * Load/Save of embedded objects for the old XML format                          1       ----
-  see KSPREAD_KOPART_EMBEDDING
+  see KCELLS_KOPART_EMBEDDING
 
 * Copy shapes on copying sheet                                                  1       ----
-  see KSPREAD_WIP_COPY_SHEET_(SHAPES)
+  see KCELLS_WIP_COPY_SHEET_(SHAPES)
 
 * Loading of old document attributes.                                           1       ----
   see KOXML_USE_QDOM
@@ -120,15 +120,15 @@ Item										Prio	Status
 
 * Commands
   Undo of cell border setting does not restore the border of the adjacent cell. 2       ----
-  see KSPREAD_WIP_STYLE_BORDER
+  see KECLLS_WIP_STYLE_BORDER
 
 * User Interaction:                                                             2       ----
   Check, if the edit widget in the CellTool acts like the EditWidget before.
-  see KSPREAD_DISCARD_FORMULA_BAR
+  see KCELLS_DISCARD_FORMULA_BAR
 
 * User Interaction                                                              3       ----
   Implement a completion aware KTextEdit. (see Editors.cpp)
-  see KSPREAD_COMPLETION_MODE_SETTING
+  see KCELLS_COMPLETION_MODE_SETTING
 
 * Commands                                                                      3       ----
   CellStorage: Replace CellStorageUndoData* by a QStack<CellStorageUndoData>,
@@ -147,7 +147,7 @@ Item										Prio	Status
 * User Interaction:                                                             3       ----
   Implement a drag indicator. If possible in DragAndDropStrategy, but this
   needs KoInteractionTool/-Strategy to handle dragMove-/dropEvents.
-  see KSPREAD_WIP_DRAG_REFERENCE_SELECTION
+  see KCELLS_WIP_DRAG_REFERENCE_SELECTION
 
 * Thread support                                                                3       ----
   Move the dependency calculation and cell recalculation into a separate

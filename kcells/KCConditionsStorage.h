@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_CONDITIONS_STORAGE
-#define KSPREAD_CONDITIONS_STORAGE
+#ifndef KCELLS_CONDITIONS_STORAGE
+#define KCELLS_CONDITIONS_STORAGE
 
 #include "KCCondition.h"
 #include "KCRectStorage.h"
@@ -44,4 +44,4 @@ protected Q_SLOTS:
     }
 };
 
-#endif // KSPREAD_CONDITIONS_STORAGE
+#endif // KCELLS_CONDITIONS_STORAGE

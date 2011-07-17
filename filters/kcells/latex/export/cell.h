@@ -18,8 +18,8 @@
 **
 */
 
-#ifndef __KSPREAD_LATEX_CELL_H__
-#define __KSPREAD_LATEX_CELL_H__
+#ifndef __KCELLS_LATEX_CELL_H__
+#define __KCELLS_LATEX_CELL_H__
 
 #include <QString>
 #include <QTextStream>
@@ -127,5 +127,5 @@ private:
 
 };
 
-#endif /* __KSPREAD_LATEX_CELL_H__ */
+#endif /* __KCELLS_LATEX_CELL_H__ */
 

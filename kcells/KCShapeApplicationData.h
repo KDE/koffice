@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_SHAPE_APPLICATION_DATA
-#define KSPREAD_SHAPE_APPLICATION_DATA
+#ifndef KCELLS_SHAPE_APPLICATION_DATA
+#define KCELLS_SHAPE_APPLICATION_DATA
 
 #include <KShapeApplicationData.h>
 #include "kcells_export.h"
@@ -49,4 +49,4 @@ private:
     Private * const d;
 };
 
-#endif // KSPREAD_SHAPE_APPLICATION_DATA
+#endif // KCELLS_SHAPE_APPLICATION_DATA

@@ -22,8 +22,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_GOTO_DIALOG
-#define KSPREAD_GOTO_DIALOG
+#ifndef KCELLS_GOTO_DIALOG
+#define KCELLS_GOTO_DIALOG
 
 #include <kdialog.h>
 
@@ -51,4 +51,4 @@ protected:
     KComboBox* m_nameCell;
 };
 
-#endif // KSPREAD_GOTO_DIALOG
+#endif // KCELLS_GOTO_DIALOG

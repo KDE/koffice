@@ -27,8 +27,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_DOC
-#define KSPREAD_DOC
+#ifndef KCELLS_DOC
+#define KCELLS_DOC
 
 #include <QList>
 #include <QMap>
@@ -193,4 +193,4 @@ private:
     void loadPaper(KXmlElement const & paper);
 };
 
-#endif /* KSPREAD_DOC */
+#endif /* KCELLS_DOC */

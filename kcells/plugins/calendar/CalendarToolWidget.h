@@ -21,8 +21,8 @@
 *   OTHER DEALINGS IN THE SOFTWARE.                                       *
 ***************************************************************************/
 
-#ifndef KSPREAD_CALENDAR_TOOL_WIDGET
-#define KSPREAD_CALENDAR_TOOL_WIDGET
+#ifndef KCELLS_CALENDAR_TOOL_WIDGET
+#define KCELLS_CALENDAR_TOOL_WIDGET
 
 #include <ui_CalendarToolWidget.h>
 
@@ -141,4 +141,4 @@ signals:
     void insertCalendar(const QDate &from, const QDate &to);
 };
 
-#endif // KSPREAD_CALENDAR_TOOL_WIDGET
+#endif // KCELLS_CALENDAR_TOOL_WIDGET

@@ -31,8 +31,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_CELL_VIEW
-#define KSPREAD_CELL_VIEW
+#ifndef KCELLS_CELL_VIEW
+#define KCELLS_CELL_VIEW
 
 // Qt
 #include <QSharedDataPointer>

@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_CALENDAR_TOOL
-#define KSPREAD_CALENDAR_TOOL
+#ifndef KCELLS_CALENDAR_TOOL
+#define KCELLS_CALENDAR_TOOL
 
 #include <part/KCCellTool.h>
 
@@ -51,4 +51,4 @@ private:
     Private * const d;
 };
 
-#endif // KSPREAD_CALENDAR_TOOL
+#endif // KCELLS_CALENDAR_TOOL

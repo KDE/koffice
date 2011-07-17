@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_TEST_LOGIC_FUNCTIONS
-#define KSPREAD_TEST_LOGIC_FUNCTIONS
+#ifndef KCELLS_TEST_LOGIC_FUNCTIONS
+#define KCELLS_TEST_LOGIC_FUNCTIONS
 
 #include <QtGui>
 #include <QtTest/QtTest>

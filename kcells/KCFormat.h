@@ -27,8 +27,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_FORMAT
-#define KSPREAD_FORMAT
+#ifndef KCELLS_FORMAT
+#define KCELLS_FORMAT
 
 #include "kcells_export.h"
 
@@ -125,4 +125,4 @@ KCELLS_EXPORT bool isFraction(Type type);
 
 } // namespace KCFormat
 
-#endif // KSPREAD_FORMAT
+#endif // KCELLS_FORMAT

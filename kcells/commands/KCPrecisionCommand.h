@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_PRECISION_COMMAND
-#define KSPREAD_PRECISION_COMMAND
+#ifndef KCELLS_PRECISION_COMMAND
+#define KCELLS_PRECISION_COMMAND
 
 #include "KCAbstractRegionCommand.h"
 
@@ -38,4 +38,4 @@ protected:
     virtual bool postProcessing();
 };
 
-#endif // KSPREAD_PRECISION_COMMAND
+#endif // KCELLS_PRECISION_COMMAND

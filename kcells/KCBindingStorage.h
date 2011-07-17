@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_BINDING_STORAGE
-#define KSPREAD_BINDING_STORAGE
+#ifndef KCELLS_BINDING_STORAGE
+#define KCELLS_BINDING_STORAGE
 
 #include "KCBinding.h"
 #include "KCRectStorage.h"
@@ -44,4 +44,4 @@ protected Q_SLOTS:
     }
 };
 
-#endif // KSPREAD_BINDING_STORAGE
+#endif // KCELLS_BINDING_STORAGE

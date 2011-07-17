@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_ROW_STYLE_COMMAND
-#define KSPREAD_ROW_STYLE_COMMAND
+#ifndef KCELLS_ROW_STYLE_COMMAND
+#define KCELLS_ROW_STYLE_COMMAND
 
 #include "KCAbstractRegionCommand.h"
 
@@ -49,4 +49,4 @@ private:
     QMap<int, KCRowFormat *> m_rowFormats;
 };
 
-#endif // KSPREAD_ROW_STYLE_COMMAND
+#endif // KCELLS_ROW_STYLE_COMMAND

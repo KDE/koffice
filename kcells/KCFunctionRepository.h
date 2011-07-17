@@ -19,8 +19,8 @@
 */
 
 
-#ifndef KSPREAD_FUNCTION_REPOSITORY
-#define KSPREAD_FUNCTION_REPOSITORY
+#ifndef KCELLS_FUNCTION_REPOSITORY
+#define KCELLS_FUNCTION_REPOSITORY
 
 #include <QSharedPointer>
 #include <QStringList>
@@ -79,4 +79,4 @@ private:
     KCFunctionRepository& operator=(const KCFunctionRepository&);
 };
 
-#endif // KSPREAD_FUNCTION_REPOSITORY
+#endif // KCELLS_FUNCTION_REPOSITORY

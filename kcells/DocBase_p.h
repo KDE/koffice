@@ -28,8 +28,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_DOCBASE_P_H
-#define KSPREAD_DOCBASE_P_H
+#ifndef KCELLS_DOCBASE_P_H
+#define KCELLS_DOCBASE_P_H
 
 #include "KCDocBase.h"
 
@@ -57,4 +57,4 @@ public:
     KResourceManager *resourceManager;
 };
 
-#endif // KSPREAD_DOCBASE_P_H
+#endif // KCELLS_DOCBASE_P_H

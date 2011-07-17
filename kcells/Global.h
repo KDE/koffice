@@ -27,8 +27,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_GLOBAL_H
-#define KSPREAD_GLOBAL_H
+#ifndef KCELLS_GLOBAL_H
+#define KCELLS_GLOBAL_H
 
 #include <kdebug.h>
 #include <kiconloader.h>

@@ -19,8 +19,8 @@
 **
 */
 
-#ifndef __KSPREAD_LATEX_SPREADSHEET_H__
-#define __KSPREAD_LATEX_SPREADSHEET_H__
+#ifndef __KCELLS_LATEX_SPREADSHEET_H__
+#define __KCELLS_LATEX_SPREADSHEET_H__
 
 #include <QList>
 #include <QTextStream>
@@ -91,4 +91,4 @@ private:
     void  generateTypeFooter(QTextStream&);
 };
 
-#endif /* __KSPREAD_LATEX_SPREADSHEET_H__ */
+#endif /* __KCELLS_LATEX_SPREADSHEET_H__ */

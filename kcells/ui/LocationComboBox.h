@@ -19,8 +19,8 @@
 */
 
 
-#ifndef KSPREAD_LOCATION_COMBOBOX
-#define KSPREAD_LOCATION_COMBOBOX
+#ifndef KCELLS_LOCATION_COMBOBOX
+#define KCELLS_LOCATION_COMBOBOX
 
 #include <kcombobox.h>
 
@@ -71,4 +71,4 @@ private:
     KCompletion completionList;
 };
 
-#endif // KSPREAD_LOCATION_COMBOBOX
+#endif // KCELLS_LOCATION_COMBOBOX

@@ -20,8 +20,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_PASTE_INSERT_DIALOG
-#define KSPREAD_PASTE_INSERT_DIALOG
+#ifndef KCELLS_PASTE_INSERT_DIALOG
+#define KCELLS_PASTE_INSERT_DIALOG
 
 #include <kdialog.h>
 
@@ -48,4 +48,4 @@ private:
     QRect  rect;
 };
 
-#endif // KSPREAD_PASTE_INSERT_DIALOG
+#endif // KCELLS_PASTE_INSERT_DIALOG

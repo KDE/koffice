@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_TABLE_SHEETSEDITOR
-#define KSPREAD_TABLE_SHEETSEDITOR
+#ifndef KCELLS_TABLE_SHEETSEDITOR
+#define KCELLS_TABLE_SHEETSEDITOR
 
 #include <QWidget>
 #include <QListWidgetItem>
@@ -51,4 +51,4 @@ private:
     Private * const d;
 };
 
-#endif // KSPREAD_TABLE_TOOL
+#endif // KCELLS_TABLE_TOOL

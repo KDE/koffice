@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef __KSPREADLATEXEXPORTDIA_H__
-#define __KSPREADLATEXEXPORTDIA_H__
+#ifndef __KCELLSLATEXEXPORTDIA_H__
+#define __KCELLSLATEXEXPORTDIA_H__
 
 #include <ui_latexexportdia.h>
 #include <QStringList>
@@ -52,4 +52,4 @@ public slots:
     virtual void removeLanguage();
 };
 
-#endif /* __KSPREADLATEXEXPORTDIA_H__ */
+#endif /* __KCELLSLATEXEXPORTDIA_H__ */

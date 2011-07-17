@@ -18,8 +18,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_DEPENDENCY_MANAGER
-#define KSPREAD_DEPENDENCY_MANAGER
+#ifndef KCELLS_DEPENDENCY_MANAGER
+#define KCELLS_DEPENDENCY_MANAGER
 
 #include <QObject>
 
@@ -126,4 +126,4 @@ private:
     Private * const d;
 };
 
-#endif // KSPREAD_DEPENDENCY_MANAGER
+#endif // KCELLS_DEPENDENCY_MANAGER

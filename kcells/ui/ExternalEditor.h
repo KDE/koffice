@@ -19,8 +19,8 @@
 */
 
 
-#ifndef KSPREAD_EXTERNAL_EDITOR
-#define KSPREAD_EXTERNAL_EDITOR
+#ifndef KCELLS_EXTERNAL_EDITOR
+#define KCELLS_EXTERNAL_EDITOR
 
 #include <KTextEdit>
 
@@ -67,4 +67,4 @@ private:
     Private * const d;
 };
 
-#endif // KSPREAD_EXTERNAL_EDITOR
+#endif // KCELLS_EXTERNAL_EDITOR
