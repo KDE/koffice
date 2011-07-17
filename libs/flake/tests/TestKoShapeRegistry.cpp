@@ -18,12 +18,12 @@
  */
 #include "TestKoShapeRegistry.h"
 #include <qtest_kde.h>
-#include <QBuffer>
-#include <QFile>
-#include <QDateTime>
-#include <QProcess>
-#include <QString>
-#include <QTextStream>
+#include <QtCore/QBuffer>
+#include <QtCore/QFile>
+#include <QtCore/QDateTime>
+#include <QtCore/QProcess>
+#include <QtCore/QString>
+#include <QtCore/QTextStream>
 
 #include <KOdfLoadingContext.h>
 #include <KOdfStylesReader.h>
