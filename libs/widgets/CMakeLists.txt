@@ -6,7 +6,6 @@ include_directories(${KOTEXT_INCLUDES} ${KOODF_INCLUDES} ${PIGMENT_INCLUDES})
 set(kowidgets_LIB_SRCS
     KoAspectButton.cpp
     KoCsvImportDialog.cpp
-    KoImageResource.cpp
     KoPageLayoutDialog.cpp
     KoPageLayoutWidget.cpp
     KoPagePreviewWidget.cpp
@@ -77,7 +76,6 @@ install( FILES
     KoDockWidgetTitleBar.h
     KoDpi.h
     KoEditColorSetDialog.h
-    KoImageResource.h
     KoPageLayoutDialog.h
     KoPageLayoutWidget.h
     KoPagePreviewWidget.h

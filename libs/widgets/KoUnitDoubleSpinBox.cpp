@@ -43,11 +43,10 @@ public:
 };
 
 KoUnitDoubleSpinBox::KoUnitDoubleSpinBox( QWidget *parent)
-    : QDoubleSpinBox( parent ),
+    : QDoubleSpinBox(parent),
     d( new Private(-9999, 9999, 1))
 {
     QDoubleSpinBox::setDecimals( 2 );
-    //setAcceptLocalizedNumbers( true );
     setUnit( KUnit(KUnit::Point) );
     setAlignment( Qt::AlignRight );
 
@@ -57,30 +56,6 @@ KoUnitDoubleSpinBox::KoUnitDoubleSpinBox( QWidget *parent)
 KoUnitDoubleSpinBox::~KoUnitDoubleSpinBox()
 {
     delete d;
-}
-
-// deprecated;
-KoUnitDoubleSpinBox::KoUnitDoubleSpinBox( QWidget *parent,
-						    double lower, double upper,
-						    double step,
-						    double value,
-						    KUnit unit,
-                            unsigned int precision)
-    : QDoubleSpinBox( parent ),
-    d( new Private(lower, upper, step))
-{
-    setMinimum(lower);
-    setMaximum(upper);
-    setSingleStep(step);
-    setValue(value);
-    setDecimals(precision);
-    d->unit = KUnit(KUnit::Point);
-    //setAcceptLocalizedNumbers( true );
-    setUnit( unit );
-    changeValue( value );
-    setLineStepPt( step );
-
-    connect(this, SIGNAL(valueChanged( double )), SLOT(privateValueChanged()));
 }
 
 QValidator::State KoUnitDoubleSpinBox::validate(QString &input, int &pos) const
@@ -94,8 +69,7 @@ QValidator::State KoUnitDoubleSpinBox::validate(QString &input, int &pos) const
     QRegExp regexp ("([ a-zA-Z]+)$"); // Letters or spaces at end
     const int res = input.indexOf( regexp );
 
-    if ( res == -1 )
-    {
+    if (res == -1) {
         // Nothing like an unit? The user is probably editing the unit
 #ifdef DEBUG_VALIDATOR
         kDebug(30004) <<"Intermediate (no unit)";
