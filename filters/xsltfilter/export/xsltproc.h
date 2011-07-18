@@ -17,11 +17,11 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef __XSLTPROC_H__
-#define __XSLTPROC_H__
+#ifndef XSLTPROC_H
+#define XSLTPROC_H
 
-#include <QString>
-#include <QByteArray>
+#include <QtCore/QString>
+#include <QtCore/QByteArray>
 
 #include <libexslt/exslt.h>
 #include <libxslt/xsltconfig.h>
@@ -73,4 +73,4 @@ private:
     void xsltProcess(xmlDocPtr doc, xsltStylesheetPtr cur,
                      const char *filename);
 };
-#endif /* __XSLTPROC_H__ */
+#endif /* XSLTPROC_H */

@@ -16,6 +16,9 @@
    Boston, MA 02111-1307, USA.
 */
 
+#ifndef TEST_H
+#define TEST_H
+
 #include <cstdlib>
 #include <iostream>
 #include <string>
@@ -44,3 +47,5 @@ namespace wvWare
     }
 
 } // namespace wvWare
+
+#endif //TEST_H

@@ -17,17 +17,18 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include <QFile>
-#include <QFont>
-#include <QByteArray>
+#include "wmlimport.h"
 
-#include <kdebug.h>
+#include <QtCore/QFile>
+#include <QtGui/QFont>
+#include <QtCore/QByteArray>
+
+#include <KDE/KDebug>
 #include <KoFilterChain.h>
 #include <kpluginfactory.h>
 #include <KoGlobal.h>
 
-#include <wmlimport.h>
-#include <wmlparser.h>
+#include "wmlparser.h"
 
 K_PLUGIN_FACTORY(WMLImportFactory, registerPlugin<WMLImport>();)
 K_EXPORT_PLUGIN(WMLImportFactory("kofficefilters"))

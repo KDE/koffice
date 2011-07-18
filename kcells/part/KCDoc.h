@@ -27,8 +27,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KCELLS_DOC
-#define KCELLS_DOC
+#ifndef KC_DOC
+#define KC_DOC
 
 #include <QList>
 #include <QMap>

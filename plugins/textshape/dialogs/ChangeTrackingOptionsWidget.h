@@ -16,8 +16,8 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#ifndef __CHANGE_TRACKING_OPTIONS_WIDGET_H__
-#define __CHANGE_TRACKING_OPTIONS_WIDGET_H__
+#ifndef CHANGE_TRACKING_OPTIONS_WIDGET_H
+#define CHANGE_TRACKING_OPTIONS_WIDGET_H
 
 #include <ui_ChangeTrackingOptionsWidget.h>
 #include <TextTool.h>
@@ -46,4 +46,3 @@ class ChangeTrackingOptionsWidget : public QWidget
 };
 
 #endif
-

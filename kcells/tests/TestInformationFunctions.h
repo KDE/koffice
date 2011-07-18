@@ -18,10 +18,10 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KCELLS_TEST_INFORMATION_FUNCTIONS
-#define KCELLS_TEST_INFORMATION_FUNCTIONS
+#ifndef KCELLS_TEST_INFORMATION_FUNCTIONS_H
+#define KCELLS_TEST_INFORMATION_FUNCTIONS_H
 
-#include <QtGui>
+#include <QtCore/QObject>
 #include <QtTest/QtTest>
 
 #include <KCValue.h>

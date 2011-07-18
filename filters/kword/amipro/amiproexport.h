@@ -17,13 +17,13 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef __AMIPROEXPORT_H
-#define __AMIPROEXPORT_H
+#ifndef AMIPROEXPORT_H
+#define AMIPROEXPORT_H
 
 #include <KoFilter.h>
 #include <KOdfStore.h>
-#include <QByteArray>
-#include <QVariantList>
+#include <QtCore/QByteArray>
+#include <QtCore/QVariantList>
 
 class AmiProExport : public KoFilter
 {
@@ -39,4 +39,4 @@ public:
     virtual KoFilter::ConversionStatus convert(const QByteArray& from, const QByteArray& to);
 };
 
-#endif // __AMIPROEXPORT_H
+#endif // AMIPROEXPORT_H

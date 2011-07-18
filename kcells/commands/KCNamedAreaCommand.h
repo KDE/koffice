@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KCELLS_NAMED_AREA_COMMAND
-#define KCELLS_NAMED_AREA_COMMAND
+#ifndef KC_NAMED_AREA_COMMAND
+#define KC_NAMED_AREA_COMMAND
 
 #include "KCAbstractRegionCommand.h"
 #include "KCRegion.h"
@@ -55,4 +55,4 @@ private:
     KCRegion m_oldArea;
 };
 
-#endif // KCELLS_NAMED_AREA_COMMAND
+#endif // KC_NAMED_AREA_COMMAND

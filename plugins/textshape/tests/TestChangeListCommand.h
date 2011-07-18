@@ -1,8 +1,8 @@
 #ifndef TESTCHANGELISTCOMMAND_H
 #define TESTCHANGELISTCOMMAND_H
 
-#include <QObject>
-#include <QtTest>
+#include <QtCore/QObject>
+#include <QtTest/QtTest>
 
 class TestChangeListCommand : public QObject
 {

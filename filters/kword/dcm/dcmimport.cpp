@@ -18,6 +18,7 @@
    Boston, MA 02110-1301, USA.
 */
 
+#include "dcmimport.h"
 
 #include <sstream>
 
@@ -37,7 +38,6 @@
 #include <dcmtk/ofstd/ofstream.h>
 #include <dcmtk/dcmsr/dsrtypes.h>
 
-#include "dcmimport.h"
 #include "DCMImportDialog.h"
 
 K_PLUGIN_FACTORY(DCMImportFactory, registerPlugin<DCMImport>();)

@@ -18,7 +18,11 @@
  * Boston, MA 02110-1301, USA.
 */
 
+#ifndef KWORD13UTILS_H
+#define KWORD13UTILS_H
 
 #include <QString>
 
 QString EscapeXmlDump(const QString& strIn);
+
+#endif //KWORD13UTILS_H

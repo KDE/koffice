@@ -18,6 +18,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
+#include "kword13postparsing.h"
+
 #include <QString>
 #include <q3dict.h>
 
@@ -27,7 +29,6 @@
 
 #include "kword13picture.h"
 #include "kword13document.h"
-#include "kword13postparsing.h"
 
 KWord13PostParsing::KWord13PostParsing(void) : m_kwordDocument(0)
 {

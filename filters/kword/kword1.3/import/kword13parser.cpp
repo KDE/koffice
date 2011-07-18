@@ -17,6 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
+#include "kword13parser.h"
+
 #include <kdebug.h>
 
 #include "kword13formatone.h"
@@ -25,7 +27,6 @@
 #include "kword13frameset.h"
 #include "kword13picture.h"
 #include "kword13document.h"
-#include "kword13parser.h"
 
 KWord13StackItem::KWord13StackItem() : elementType(KWord13TypeUnknown), m_currentFrameset(0)
 {

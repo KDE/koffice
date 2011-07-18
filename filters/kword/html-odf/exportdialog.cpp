@@ -17,18 +17,19 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include <QCheckBox>
-#include <QComboBox>
-#include <QListWidget>
-#include <QRadioButton>
-#include <QSpinBox>
-#include <QTextCodec>
-
-#include <kapplication.h>
-#include <kglobal.h>
-#include <klocale.h>
-#include <kurlrequester.h>
 #include <exportdialog.h>
+
+#include <QtGui/QCheckBox>
+#include <QtGui/QComboBox>
+#include <QtGui/QListWidget>
+#include <QtGui/QRadioButton>
+#include <QtGui/QSpinBox>
+#include <QtCore/QTextCodec>
+
+#include <KDE/KApplication>
+#include <KDE/KGlobal>
+#include <KDE/KLocale>
+#include <KDE/KUrlRequester>
 
 ExportDialog::ExportDialog(QWidget *parent)
         : KDialog(parent), m_mainwidget(new ExportWidget(this))

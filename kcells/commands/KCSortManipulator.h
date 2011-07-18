@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KCELLS_SORT_MANIPULATOR
-#define KCELLS_SORT_MANIPULATOR
+#ifndef KC_SORT_MANIPULATOR
+#define KC_SORT_MANIPULATOR
 
 #include "KCCellStorage.h"
 #include "DataManipulators.h"

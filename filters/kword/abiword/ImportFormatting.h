@@ -17,17 +17,18 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef _IMPORT_FORMATTING_H
-#define _IMPORT_FORMATTING_H
+#ifndef IMPORT_FORMATTING_H
+#define IMPORT_FORMATTING_H
 
-#include <QStack>
-#include <QString>
-#include <QColor>
-#include <QtXml>
-#include <qdom.h>
-#include <QVector>
+#include <QtCore/QStack>
+#include <QtCore/QString>
+#include <QtGui/QColor>
+#include <QtXml/QDomDocument>
+#include <QtCore/QVector>
 
 #include "ImportHelpers.h"
+
+class QXmlAttributes;
 
 // Tags in lower case (e.g. <c>) are AbiWord's ones.
 // Tags in upper case (e.g. <TEXT>) are KWord's ones.
@@ -130,4 +131,4 @@ void AddStyle(QDomElement& styleElement, const QString& strStyleName,
               const StyleData& styleData, QDomDocument& mainDocument);
 
 
-#endif // _IMPORT_FORMATTING_H
+#endif // IMPORT_FORMATTING_H

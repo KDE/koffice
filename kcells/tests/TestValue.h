@@ -20,7 +20,7 @@
 #ifndef KCELLS_TEST_VALUE
 #define KCELLS_TEST_VALUE
 
-#include <QtGui>
+#include <QtCore/QObject>
 #include <QtTest/QtTest>
 
 

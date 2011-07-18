@@ -17,15 +17,17 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KCELLS_FUNCTION_MODULE
-#define KCELLS_FUNCTION_MODULE
+#ifndef KC_FUNCTION_MODULE
+#define KC_FUNCTION_MODULE
 
 #include <kofficeversion.h>
 
-#include <QList>
-#include <QObject>
-#include <QSharedPointer>
-#include <QString>
+#include <QtCore/QList>
+#include <QtCore/QObject>
+#include <QtCore/QSharedPointer>
+#include <QtCore/QPointer>
+#include <QtCore/QString>
+#include <QtGui/QMenu>
 #include <KPluginFactory>
 
 #include "kcells_export.h"
@@ -96,4 +98,4 @@ private:
     K_EXPORT_PLUGIN(factory("kcells-functions-" #libname)) \
     K_EXPORT_PLUGIN_VERSION(KOFFICE_VERSION)
 
-#endif // KCELLS_FUNCTION_MODULE
+#endif // KC_FUNCTION_MODULE

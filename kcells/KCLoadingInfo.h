@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPLOADINGINFO_H
-#define KSPLOADINGINFO_H
+#ifndef KCLOADINGINFO_H
+#define KCLOADINGINFO_H
 
 #include "kcells_limits.h"
 
@@ -104,5 +104,5 @@ private:
     bool m_loadTemplate;
 };
 
-#endif /* KPRLOADINGINFO_H */
+#endif /* KCLOADINGINFO_H */
 

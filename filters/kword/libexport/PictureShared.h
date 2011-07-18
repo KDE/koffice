@@ -17,12 +17,12 @@
    the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
 */
-#ifndef __koPictureShared_h__
-#define __koPictureShared_h__
+#ifndef KO_PICTURE_SHARED_H
+#define KO_PICTURE_SHARED_H
 
-#include <QString>
-#include <QIODevice>
-#include <QPixmap>
+#include <QtCore/QString>
+#include <QtCore/QIODevice>
+#include <QtGui/QPixmap>
 
 #include "PictureKey.h"
 
@@ -209,4 +209,4 @@ protected:
     uint m_pictureId;
 };
 
-#endif /* __koPictureShared_h__ */
+#endif /* KO_PICTURE_SHARED_H */

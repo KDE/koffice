@@ -22,8 +22,8 @@
    Boston, MA 02110-1301, USA.
 
 */
-#include "generated/leinputstream.h"
 #include "document.h"
+#include "generated/leinputstream.h"
 #include "conversion.h"
 #include "texthandler.h"
 #include "graphicshandler.h"
@@ -32,7 +32,7 @@
 
 #include <KUnit.h>
 #include <KOdfPageLayoutData.h>
-#include <kdebug.h>
+#include <KDE/KDebug>
 
 #include <wv2/src/styles.h>
 #include <wv2/src/ustring.h>

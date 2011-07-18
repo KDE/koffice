@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef __LATEXEXPORT_H__
-#define __LATEXEXPORT_H__
+#ifndef LATEXEXPORT_H
+#define LATEXEXPORT_H
 
 #include <QString>
 #include <QTextStream>

@@ -61,13 +61,15 @@
 #include <QImageReader>
 #include <QPalette>
 #include <QRegExp>
-#include <QtXml>
+#include <QtCore/QFileInfo>
 
 #include <KGlobal>
 #include <KDebug>
 #include <KZip>
 
 #include <memory>
+
+class KXmlNode;
 
 // common officedocument content types
 const char* const MSOOXML::ContentTypes::coreProps =            "application/vnd.openxmlformats-package.core-properties+xml";

@@ -18,21 +18,21 @@
    Boston, MA 02110-1301, USA.
 
 */
-#include "generated/leinputstream.h"
 #include "document.h"
+
+#include "generated/leinputstream.h"
 #include "drawstyle.h"
 
 #include <KUnit.h>
 #include <KOdfPageLayoutData.h>
-#include <kdebug.h>
-
-#include <klocale.h>
+#include <KDE/KDebug>
+#include <KDE/KLocale>
 #include <KOdfStore.h>
 #include <KoFilterChain.h>
 #include <KOdfFontData.h>
 
-#include <QBuffer>
-#include <QColor>
+#include <QtCore/QBuffer>
+#include <QtGui/QColor>
 
 
 Document::Document()

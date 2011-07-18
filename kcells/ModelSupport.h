@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KCELLS_MODEL_SUPPORT
-#define KCELLS_MODEL_SUPPORT
+#ifndef KC_MODEL_SUPPORT
+#define KC_MODEL_SUPPORT
 
 #include <QAbstractItemModel>
 #include <QItemSelection>
@@ -149,4 +149,4 @@ static inline QItemSelection fromRegion(const KCRegion &region)
     return selection;
 }
 
-#endif // KCELLS_MODEL_SUPPORT
+#endif // KC_MODEL_SUPPORT

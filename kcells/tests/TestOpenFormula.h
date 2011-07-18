@@ -22,7 +22,8 @@
 #ifndef KCELLS_TEST_OPENFORMULA
 #define KCELLS_TEST_OPENFORMULA
 
-#include <QtGui>
+#include <QtCore/QString>
+#include <QtCore/QObject>
 #include <QtTest/QtTest>
 
 class KCValue;

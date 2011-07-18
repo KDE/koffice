@@ -24,11 +24,11 @@
 #ifndef MSOOXMLTHEMESREADER_H
 #define MSOOXMLTHEMESREADER_H
 
-#include <QHash>
-#include <QColor>
-#include <QMap>
+#include <QtCore/QHash>
+#include <QtCore/QMap>
+#include <QtGui/QColor>
 
-#include <KOdfGenericStyles.h>
+#include <KOdfGenericStyles.h>		//krazy:exclude=includes
 
 #include "MsooXmlCommonReader.h"
 #include "MsooXmlImport.h"

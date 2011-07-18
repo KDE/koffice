@@ -6,7 +6,10 @@
 #include <KStyleManager.h>
 #include <KTextBlockData.h>
 
-#include <QtGui>
+#include <QtGui/QTextBlock>
+#include <QtGui/QTextList>
+#include <QtGui/QTextLine>
+#include <QtCore/QString>
 
 void TestDocumentLayout::testBasicList()
 {

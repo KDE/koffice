@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef __LATEXEXPORTIFACE_H__
-#define __LATEXEXPORTIFACE_H__
+#ifndef LATEXEXPORTIFACE_H
+#define LATEXEXPORTIFACE_H
 
 #include <dcopobject.h>
 

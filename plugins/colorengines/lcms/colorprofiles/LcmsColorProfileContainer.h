@@ -20,8 +20,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef _KO_LCMS_COLORPROFILE_H
-#define _KO_LCMS_COLORPROFILE_H
+#ifndef LCMS_COLORPROFILE_CONTAINER_H
+#define LCMS_COLORPROFILE_CONTAINER_H
 
 #include "IccColorProfile.h"
 

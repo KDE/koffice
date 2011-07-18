@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef __VEPSEXPORTDLG_H__
-#define __VEPSEXPORTDLG_H__
+#ifndef EPSEXPORTDLG_H
+#define EPSEXPORTDLG_H
 
 #include <kdialog.h>
 

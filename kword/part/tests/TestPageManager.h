@@ -17,10 +17,10 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KWPAGEMANAGERTESTER_H
-#define KWPAGEMANAGERTESTER_H
+#ifndef TESTPAGEMANAGER_H
+#define TESTPAGEMANAGER_H
 
-#include <QObject>
+#include <QtCore/QObject>
 #include <QtTest/QtTest>
 #include <qtest_kde.h>
 

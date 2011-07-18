@@ -17,13 +17,13 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef __WPEXPORT_H
-#define __WPEXPORT_H
+#ifndef WPEXPORT_H
+#define WPEXPORT_H
 
 #include <KoFilter.h>
 #include <KOdfStore.h>
-#include <QByteArray>
-#include <QVariantList>
+#include <QtCore/QByteArray>
+#include <QtCore/QVariantList>
 
 class WPExport : public KoFilter
 {

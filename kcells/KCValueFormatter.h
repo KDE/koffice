@@ -18,8 +18,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KCELLS_VALUE_FORMATTER
-#define KCELLS_VALUE_FORMATTER
+#ifndef KC_VALUE_FORMATTER
+#define KC_VALUE_FORMATTER
 
 #include <QDateTime>
 
@@ -133,4 +133,4 @@ private:
     const KCValueConverter* m_converter;
 };
 
-#endif  //KCELLS_VALUE_FORMATTER
+#endif  //KC_VALUE_FORMATTER

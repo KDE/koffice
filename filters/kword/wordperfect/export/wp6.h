@@ -17,10 +17,10 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef __WP6_H
-#define __WP6_H
+#ifndef WP6_H
+#define WP6_H
 
-#include <QFile>
+#include <QtCore/QFile>
 #include <KWEFStructures.h>
 #include <KWEFBaseWorker.h>
 

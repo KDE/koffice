@@ -24,7 +24,7 @@
 #ifndef MSOOXMLCOMMONREADER_H
 #define MSOOXMLCOMMONREADER_H
 
-#include <KOdfGenericStyle.h>
+#include <KOdfGenericStyle.h>	//krazy:exclude=includes
 #include <styles/KCharacterStyle.h>
 #include <styles/KListLevelProperties.h>
 

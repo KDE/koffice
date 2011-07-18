@@ -19,8 +19,8 @@
 */
 
 
-#ifndef _KWORD13LAYOUT
-#define _KWORD13LAYOUT
+#ifndef KWORD13LAYOUT_H
+#define KWORD13LAYOUT_H
 
 class QTextStream;
 

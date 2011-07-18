@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KCELLS_SHEET_MODEL
-#define KCELLS_SHEET_MODEL
+#ifndef KC_SHEET_MODEL
+#define KC_SHEET_MODEL
 
 #include <QAbstractTableModel>
 
@@ -59,4 +59,4 @@ private:
     Private * const d;
 };
 
-#endif // KCELLS_SHEET_MODEL
+#endif // KC_SHEET_MODEL

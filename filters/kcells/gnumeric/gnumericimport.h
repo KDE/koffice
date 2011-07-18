@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef GNUMERICFILTER_H
-#define GNUMERICFILTER_H
+#ifndef GNUMERICIMPORT_H
+#define GNUMERICIMPORT_H
 
 #include <KoFilter.h>
 
@@ -63,4 +63,4 @@ private:
 
     void setText(KCSheet* sheet, int row, int column, const QString& text, bool asString = false);
 };
-#endif // GNUMERICFILTER_H
+#endif // GNUMERICIMPORT_H

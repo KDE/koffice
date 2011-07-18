@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef _IMPORT_DIALOG_H
-#define _IMPORT_DIALOG_H
+#ifndef IMPORT_DIALOG_H
+#define IMPORT_DIALOG_H
 
 #include <QtGui/QWidget>
 #include <QtGui/QButtonGroup>
@@ -41,4 +41,4 @@ private:
     QButtonGroup m_radioGroup;
 };
 
-#endif /* _IMPORT_DIALOG_H */
+#endif /* IMPORT_DIALOG_H */

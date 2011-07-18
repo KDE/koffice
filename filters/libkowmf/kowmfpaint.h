@@ -16,8 +16,8 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
 */
-#ifndef _KOWMFPAINT_H_
-#define _KOWMFPAINT_H_
+#ifndef KOWMFPAINT_H
+#define KOWMFPAINT_H
 
 #include "kowmfread.h"
 #include <kowmf_export.h>

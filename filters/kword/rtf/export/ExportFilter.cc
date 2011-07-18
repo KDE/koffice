@@ -20,27 +20,28 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include <QString>
-#include <QTextCodec>
-#include <QFile>
-#include <QFileInfo>
-#include <qfontinfo.h>
-#include <QFontDatabase>
-#include <QImage>
-#include <QRegExp>
-#include <QColor>
-#include <QDateTime>
-#include <QTextStream>
-#include <QList>
+#include "ExportFilter.h"
 
-#include <klocale.h>
-#include <kglobal.h>
-#include <kdebug.h>
+#include <QtCore/QString>
+#include <QtCore/QTextCodec>
+#include <QtCore/QFile>
+#include <QtCore/QFileInfo>
+#include <QtGui/QFontInfo>
+#include <QtGui/QFontDatabase>
+#include <QtGui/QImage>
+#include <QtCore/QRegExp>
+#include <QtGui/QColor>
+#include <QtCore/QDateTime>
+#include <QtCore/QTextStream>
+#include <QtCore/QList>
+
+#include <KDE/KLocale>
+#include <KDE/KGlobal>
+#include <KDE/KDebug>
 
 #include <KWEFUtil.h>
 #include <KWEFBaseWorker.h>
 
-#include "ExportFilter.h"
 
 // 1 twip = 1/20 pt = 1/1400 inch
 // 1 inch = 25.4 mm

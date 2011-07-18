@@ -18,8 +18,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KCELLS_VALUE_H
-#define KCELLS_VALUE_H
+#ifndef KC_VALUE_H
+#define KC_VALUE_H
 
 #include <complex>
 
@@ -523,4 +523,4 @@ KCELLS_EXPORT QTextStream& operator<<(QTextStream& ts, KCValue value);
 KCELLS_EXPORT QDebug operator<<(QDebug str, const KCValue& v);
 QDebug operator<<(QDebug stream, const KCValue::KCFormat& f);
 
-#endif // KCELLS_VALUE_H
+#endif // KC_VALUE_H

@@ -19,12 +19,12 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KCELLS_STYLE
-#define KCELLS_STYLE
+#ifndef KC_STYLE_H
+#define KC_STYLE_H
 
-#include <QFont>
-#include <QSharedDataPointer>
-#include <QTextCharFormat>
+#include <QtGui/QFont>
+#include <QtCore/QSharedDataPointer>
+#include <QtGui/QTextCharFormat>
 
 #include <KXmlReader.h>
 
@@ -547,4 +547,4 @@ Q_DECLARE_TYPEINFO(KCStyle, Q_MOVABLE_TYPE);
 Q_DECLARE_TYPEINFO(KCCustomStyle, Q_MOVABLE_TYPE);
 Q_DECLARE_TYPEINFO(KCSharedSubStyle, Q_MOVABLE_TYPE);
 
-#endif // KCELLS_STYLE
+#endif // KC_STYLE_H

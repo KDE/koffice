@@ -1,8 +1,8 @@
+#include "TestRTree.h"
+
 #include <QSharedData>
 
 #include "KCRTree.h"
-
-#include "TestRTree.h"
 
 class TestClass : public QSharedData
 {

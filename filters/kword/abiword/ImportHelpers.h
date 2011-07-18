@@ -17,11 +17,11 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef _IMPORT_HELPERS_H
-#define _IMPORT_HELPERS_H
+#ifndef IMPORT_HELPERS_H
+#define IMPORT_HELPERS_H
 
-#include <QString>
-#include <QMap>
+#include <QtCore/QString>
+#include <QtCore/QMap>
 
 /**
  * \file ImportHelpers.h

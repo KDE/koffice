@@ -23,6 +23,8 @@
  */
 
 #include "XlsxXmlWorksheetReader.h"
+#include "XlsxXmlWorksheetReader_p.h"
+
 #include "XlsxXmlCommentsReader.h"
 #include "XlsxXmlStylesReader.h"
 #include "XlsxXmlDocumentReader.h"
@@ -42,7 +44,6 @@
 #include <KUnit.h>
 #include <KXmlWriter.h>
 #include <KOdfGenericStyles.h>
-#include <KOdf.h>
 #include <KOdf.h>
 #include <styles/KCharacterStyle.h>
 
@@ -72,8 +73,6 @@
 #define NO_DRAWINGML_PIC_NS // DrawingML/Picture
 
 #include <MsooXmlCommonReaderDrawingMLImpl.h> // this adds pic, etc.
-
-#include "XlsxXmlWorksheetReader_p.h"
 
 XlsxXmlWorksheetReaderContext::XlsxXmlWorksheetReaderContext(
     uint _worksheetNumber,

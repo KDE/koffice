@@ -16,8 +16,8 @@
    the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
    Boston, MA 02110-1301, USA.
 */
-#ifndef KCELLS_SHEET_TEST
-#define KCELLS_SHEET_TEST
+#ifndef TEST_SHEET_H
+#define TEST_SHEET_H
 
 #include <QtTest/QtTest>
 
@@ -41,4 +41,4 @@ private:
     KCDoc* m_doc;
 };
 
-#endif // KCELLS_SHEET_TEST
+#endif // TEST_SHEET_H

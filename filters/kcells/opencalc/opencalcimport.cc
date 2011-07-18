@@ -18,18 +18,18 @@
  * Boston, MA 02110-1301, USA.
 */
 
+#include "opencalcimport.h"
+
 #include <float.h>
 #include <math.h>
 
-#include <QColor>
-#include <QFile>
-#include <QFont>
-#include <QPen>
-#include <QtXml>
-#include <QList>
-#include <QByteArray>
-
-#include "opencalcimport.h"
+#include <QtGui/QColor>
+#include <QtCore/QFile>
+#include <QtGui/QFont>
+#include <QtGui/QPen>
+#include <QtXml/QDomDocument>
+#include <QtCore/QList>
+#include <QtCore/QByteArray>
 
 #include <kdebug.h>
 #include <KoDocumentInfo.h>

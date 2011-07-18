@@ -1,8 +1,8 @@
 #ifndef TESTCHANGESDATABASE_H
 #define TESTCHANGESDATABASE_H
 
-#include <QObject>
-#include <QtTest>
+#include <QtCore/QObject>
+#include <QtTest/QtTest>
 
 class TestChangesDatabase : public QObject
 {

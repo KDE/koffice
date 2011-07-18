@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KCELLS_ODF_LOADING_CONTEXT
-#define KCELLS_ODF_LOADING_CONTEXT
+#ifndef KC_ODF_LOADING_CONTEXT
+#define KC_ODF_LOADING_CONTEXT
 
 #include <KOdfLoadingContext.h>
 
@@ -43,4 +43,4 @@ public:
     QHash<QString, KXmlElement> validities;
 };
 
-#endif // KCELLS_ODF_LOADING_CONTEXT
+#endif // KC_ODF_LOADING_CONTEXT

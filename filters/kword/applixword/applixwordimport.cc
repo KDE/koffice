@@ -17,17 +17,20 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include <QMessageBox>
-#include <QList>
-#include <QDateTime>
-#include <QTextStream>
-#include <QByteArray>
-#include <QColor>
-#include <applixwordimport.h>
-#include <applixwordimport.moc>
-#include <kdebug.h>
+#include "applixwordimport.h"
+
+#include <QtGui/QMessageBox>
+#include <QtCore/QList>
+#include <QtCore/QDateTime>
+#include <QtCore/QTextStream>
+#include <QtCore/QByteArray>
+#include <QtGui/QColor>
+#include "applixwordimport.moc"
+
+#include <KDE/KDebug>
+#include <KDE/KPluginFactory>
+
 #include <KoFilterChain.h>
-#include <kpluginfactory.h>
 #include <KOdfWriteStore.h>
 #include <KOdfGenericStyles.h>
 #include <KXmlWriter.h>

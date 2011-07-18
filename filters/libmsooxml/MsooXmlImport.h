@@ -28,12 +28,12 @@
 
 #include "msooxml_export.h"
 
-#include <QByteArray>
-#include <QHash>
-#include <QVariant>
+#include <QtCore/QByteArray>
+#include <QtCore/QHash>
+#include <QtCore/QVariant>
 
-#include <KoOdfExporter.h>
-#include <KXmlReader.h>
+#include <KoOdfExporter.h>	//krazy:exclude=includes
+#include <KXmlReader.h>		//krazy:exclude=includes
 
 class QSize;
 class KZip;

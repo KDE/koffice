@@ -20,8 +20,8 @@
 **
 */
 
-#ifndef __LATEX_XMLPARSER_H__
-#define __LATEX_XMLPARSER_H__
+#ifndef LATEX_XMLPARSER_H
+#define LATEX_XMLPARSER_H
 
 #include "qstring.h"
 #include "qdom.h"

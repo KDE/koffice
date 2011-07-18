@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KCELLS_MERGE_COMMAND
-#define KCELLS_MERGE_COMMAND
+#ifndef KC_MERGE_COMMAND
+#define KC_MERGE_COMMAND
 
 #include "KCAbstractRegionCommand.h"
 
@@ -65,4 +65,4 @@ private:
     Selection *m_selection;
 };
 
-#endif // KCELLS_MERGE_COMMAND
+#endif // KC_MERGE_COMMAND

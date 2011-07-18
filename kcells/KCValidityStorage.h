@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KCELLS_VALIDITY_STORAGE
-#define KCELLS_VALIDITY_STORAGE
+#ifndef KC_VALIDITY_STORAGE
+#define KC_VALIDITY_STORAGE
 
 #include "KCRectStorage.h"
 #include "KCValidity.h"
@@ -46,4 +46,4 @@ protected Q_SLOTS:
     }
 };
 
-#endif // KCELLS_VALIDITY_STORAGE
+#endif // KC_VALIDITY_STORAGE

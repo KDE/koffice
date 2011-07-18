@@ -17,17 +17,17 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include <QTextCodec>
-#include <QFile>
-#include <QFileInfo>
-#include <QTextStream>
-#include <QByteArray>
+#include "wp5.h"
+
+#include <QtCore/QTextCodec>
+#include <QtCore/QFile>
+#include <QtCore/QFileInfo>
+#include <QtCore/QTextStream>
+#include <QtCore/QByteArray>
 
 #include <KWEFBaseWorker.h>
 #include <KWEFKWordLeader.h>
 #include <KWEFUtil.h>
-
-#include <wp5.h>
 
 bool WPFiveWorker::doOpenFile(const QString& filenameOut, const QString& /*to*/)
 {

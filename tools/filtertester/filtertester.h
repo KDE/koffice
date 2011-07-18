@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef koconverter_h
-#define koconverter_h
+#ifndef FILTERTESTER_H
+#define FILTERTESTER_H
 
 #include <QObject>
 
@@ -31,4 +31,4 @@ public slots:
     void slotProgress(int);
 };
 
-#endif
+#endif //FILTERTESTER_H

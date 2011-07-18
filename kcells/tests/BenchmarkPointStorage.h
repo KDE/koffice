@@ -17,10 +17,10 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KCELLS_POINT_STORAGE_BENCHMARK
-#define KCELLS_POINT_STORAGE_BENCHMARK
+#ifndef BENCHMARK_POINT_STORAGE_H
+#define BENCHMARK_POINT_STORAGE_H
 
-#include <QtGui>
+#include <QtCore/QObject>
 #include <QtTest/QtTest>
 
 
@@ -44,4 +44,4 @@ private Q_SLOTS:
     void testIterationPerformance();
 };
 
-#endif // KCELLS_POINT_STORAGE_BENCHMARK
+#endif // BENCHMARK_POINT_STORAGE_H

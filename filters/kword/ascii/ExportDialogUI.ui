@@ -136,7 +136,6 @@
   <tabstop>radioEndOfLineCR</tabstop>
  </tabstops>
  <includes>
-  <include location="local">kcombobox.h</include>
   <include location="local">klineedit.h</include>
  </includes>
  <resources/>

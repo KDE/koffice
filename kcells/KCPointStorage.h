@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KCELLS_POINT_STORAGE
-#define KCELLS_POINT_STORAGE
+#ifndef KC_POINT_STORAGE
+#define KC_POINT_STORAGE
 
 #include <QRect>
 #include <QString>
@@ -870,4 +870,4 @@ private:
 #endif
 };
 
-#endif // KCELLS_POINT_STORAGE
+#endif // KC_POINT_STORAGE

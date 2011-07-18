@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KCELLS_CELL_TOOL_FACTORY
-#define KCELLS_CELL_TOOL_FACTORY
+#ifndef KC_CELL_TOOL_FACTORY
+#define KC_CELL_TOOL_FACTORY
 
 #include <KToolFactoryBase.h>
 
@@ -42,4 +42,4 @@ public:
     void setIcon(const QString& icon);
 };
 
-#endif // KCELLS_CELL_TOOL_FACTORY
+#endif // KC_CELL_TOOL_FACTORY

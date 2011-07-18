@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef CSVFILTER_H
-#define CSVFILTER_H
+#ifndef CSVIMPORT_H
+#define CSVIMPORT_H
 
 #include <KoFilter.h>
 #include <QByteArray>
@@ -35,4 +35,4 @@ public:
 
     virtual KoFilter::ConversionStatus convert(const QByteArray& from, const QByteArray& to);
 };
-#endif // CSVFILTER_H
+#endif // CSVIMPORT_H

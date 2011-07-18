@@ -28,8 +28,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KCELLS_DOCBASE_H
-#define KCELLS_DOCBASE_H
+#ifndef KC_DOCBASE_H
+#define KC_DOCBASE_H
 
 #include <KoDocument.h>
 
@@ -156,4 +156,4 @@ private:
     void loadOdfIgnoreList(const KOdfSettings& settings);
 };
 
-#endif // KCELLS_DOCBASE_H
+#endif // KC_DOCBASE_H

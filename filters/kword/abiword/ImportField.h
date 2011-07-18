@@ -20,7 +20,9 @@
 #ifndef IMPORTFIELD_H
 #define IMPORTFIELD_H
 
-#include <QtXml>
+#include <QtCore/QString>
+#include <QtXml/QXmlAttributes>
+#include <QtXml/QDomDocument>
 
 QString getFootnoteFramesetName(const QString& id);
 bool ProcessField(QDomDocument& mainDocument,

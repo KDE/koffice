@@ -18,8 +18,8 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-#ifndef _MSOOXML_CONVERSIONS_H_
-#define _MSOOXML_CONVERSIONS_H_
+#ifndef MSOOXML_COLOR_CONVERSIONS_H
+#define MSOOXML_COLOR_CONVERSIONS_H
 
 #include <qglobal.h>
 #include "pigment_export.h"

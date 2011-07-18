@@ -19,12 +19,13 @@
 **
 */
 
+#include "fileheader.h"
+
 #include <stdlib.h>
 
 #include <kdebug.h>
 
-#include "fileheader.h"
-#include "config.h"
+#include "latex_config.h"
 #include <QTextStream>
 
 FileHeader* FileHeader::_instance = 0;

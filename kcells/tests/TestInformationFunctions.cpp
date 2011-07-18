@@ -18,14 +18,14 @@
    Boston, MA 02110-1301, USA.
 */
 
+#include "TestInformationFunctions.h"
+
 #include <KCCellStorage.h>
 #include <KCFormula.h>
 #include <KCMap.h>
 #include <KCSheet.h>
 
 #include "TestKspreadCommon.h"
-
-#include "TestInformationFunctions.h"
 
 // because we may need to promote expected value from integer to float
 #define CHECK_EVAL(x,y) { KCValue z(y); QCOMPARE(evaluate(x,z),(z)); }

@@ -17,6 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
+#include "qwmf.h"
+
 #include <KoConfig.h> // WORDS_BIGENDIAN
 
 #include <math.h>
@@ -35,7 +37,6 @@
 
 bool qwmfDebug = false;
 
-#include "qwmf.h"
 #include "wmfstruct.h"
 #include "metafuncs.h"
 

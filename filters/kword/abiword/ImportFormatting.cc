@@ -17,9 +17,12 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include <kdebug.h>
-
 #include "ImportFormatting.h"
+
+#include <KDE/KDebug>
+
+#include <QtXml/QXmlAttributes>
+
 #include "ImportStyle.h"
 
 StackItem::StackItem() : fontSize(0), /* No explicit font size */

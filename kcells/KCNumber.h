@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KCELLS_NUMBER_H
-#define KCELLS_NUMBER_H
+#ifndef KC_NUMBER_H
+#define KC_NUMBER_H
 
 // #define KCELLS_HIGH_PRECISION_SUPPORT
 
@@ -223,4 +223,4 @@ KCNumber atgh(const KCNumber &n);
 
 #endif // KCELLS_HIGH_PRECISION_SUPPORT
 
-#endif // KCELLS_NUMBER_H
+#endif // KC_NUMBER_H

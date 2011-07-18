@@ -17,13 +17,13 @@
    Boston, MA 02110-1301, USA.
 */
 
+#include "BenchmarkPointStorage.h"
+
 #include <quuid.h>
 
 #include "kcells_limits.h"
 
 #include "KCPointStorage.h"
-
-#include "BenchmarkPointStorage.h"
 
 void PointStorageBenchmark::testInsertionPerformance_loadingLike()
 {

@@ -18,6 +18,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
+#include "ExportBasic.h"
+
 #include <QString>
 #include <QTextCodec>
 #include <QFile>
@@ -28,7 +30,6 @@
 #include <KWEFBaseWorker.h>
 
 #include "ExportFilter.h"
-#include "ExportBasic.h"
 
 HtmlBasicWorker::HtmlBasicWorker(const QString &cssURL)
 {

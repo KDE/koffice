@@ -18,8 +18,8 @@
    the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
 */
-#ifndef _KOWMFREADPRIVATE_H_
-#define _KOWMFREADPRIVATE_H_
+#ifndef KOWMFREADPRIVATE_H
+#define KOWMFREADPRIVATE_H
 
 #include <QtGui/QColor>
 #include <QtCore/QRect>

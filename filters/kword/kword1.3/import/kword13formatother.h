@@ -23,6 +23,8 @@
 
 #include "kword13format.h"
 
+#include <QtCore/QString>
+
 /**
  * \brief format for variable
  *

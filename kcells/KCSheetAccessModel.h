@@ -17,6 +17,9 @@
    Boston, MA 02110-1301, USA.
 */
 
+#ifndef KCSHEETACCESSMODEL_H
+#define KCSHEETACCESSMODEL_H
+
 #include <QStandardItemModel>
 
 #include "KCSheet.h"
@@ -62,3 +65,4 @@ private:
     class Private;
     Private * const d;
 };
+#endif //KCSHEETACCESSMODEL_H

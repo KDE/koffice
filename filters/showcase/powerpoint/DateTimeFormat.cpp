@@ -22,13 +22,13 @@
 *
 */
 
+#include "DateTimeFormat.h"
+
 #include <qdatetime.h>
 #include <KXmlWriter.h>
 #include <QBuffer>
 #include <QString>
 #include <iostream>
-#include "DateTimeFormat.h"
-
 
 
 DateTimeFormat::DateTimeFormat(int dateTimeFormatId)

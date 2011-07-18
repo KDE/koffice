@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef _KOFFICECREATOR_H_
-#define _KOFFICECREATOR_H_ 
+#ifndef KOFFICECREATOR_H
+#define KOFFICECREATOR_H
 
 #include <kio/thumbcreator.h>
 #include <kparts/part.h>
@@ -46,4 +46,4 @@ private:
     bool m_completed;
 };
 
-#endif
+#endif //KOFFICE_CREATOR_H

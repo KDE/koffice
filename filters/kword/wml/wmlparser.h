@@ -17,11 +17,11 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef __WMLPARSER_H
-#define __WMLPARSER_H
+#ifndef WMLPARSER_H
+#define WMLPARSER_H
 
-#include <QList>
-#include <QString>
+#include <QtCore/QList>
+#include <QtCore/QString>
 
 class WMLFormat
 {

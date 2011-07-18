@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef _FILTER_KWORD_1_3__KWORDFRAMESET_H
-#define _FILTER_KWORD_1_3__KWORDFRAMESET_H
+#ifndef FILTER_KWORD13_FRAMESET_H
+#define FILTER_KWORD13_FRAMESET_H
 
 class QString;
 class QTextStream;

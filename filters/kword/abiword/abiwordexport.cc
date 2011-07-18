@@ -30,18 +30,20 @@
    License version 2.
 */
 
-#include <QMap>
-#include <QIODevice>
-#include <QTextStream>
-#include <qdom.h>
-#include <QList>
-#include <QByteArray>
+#include "abiwordexport.h"
 
-#include <kdebug.h>
-#include <kcodecs.h>
-#include <kfilterdev.h>
-#include <kpluginfactory.h>
-#include <kimageio.h>
+#include <QtCore/QMap>
+#include <QtCore/QIODevice>
+#include <QtCore/QTextStream>
+#include <QtXml/QDomDocument>
+#include <QtCore/QList>
+#include <QtCore/QByteArray>
+
+#include <KDE/KDebug>
+#include <KDE/KCodecs>
+#include <KDE/KFilterDev>
+#include <KDE/KPluginFactory>
+#include <KDE/KImageIO>
 
 #include <KOdfPageLayoutData.h>
 #include <KoFilterChain.h>
@@ -52,8 +54,7 @@
 #include <KWEFKWordLeader.h>
 #include <PictureKey.h>
 
-#include <abiwordexport.h>
-#include <abiwordexport.moc>
+#include "abiwordexport.moc"
 
 K_PLUGIN_FACTORY(ABIWORDExportFactory, registerPlugin<ABIWORDExport>();)
 K_EXPORT_PLUGIN(ABIWORDExportFactory("kwordabiwordexport", "kofficefilters"))

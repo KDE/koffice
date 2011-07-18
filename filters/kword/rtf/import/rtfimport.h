@@ -12,8 +12,8 @@
 
 // ### FIXME: copyright holders/date
 
-#ifndef __RTFIMPORT_H__
-#define __RTFIMPORT_H__
+#ifndef RTFIMPORT_H
+#define RTFIMPORT_H
 
 #include <KoFilter.h>
 #include <QColor>

@@ -17,12 +17,12 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef _IMPORT_STYLE_H
-#define _IMPORT_STYLE_H
+#ifndef IMPORT_STYLE_H
+#define IMPORT_STYLE_H
 
-#include <QList>
-#include <QString>
-#include <QMap>
+#include <QtCore/QList>
+#include <QtCore/QString>
+#include <QtCore/QMap>
 
 class StyleData
 {

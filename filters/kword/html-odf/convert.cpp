@@ -18,18 +18,18 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include <QFile>
-#include <QString>
+#include "convert.h"
 
-#include <QByteArray>
-#include <QFileInfo>
-#include <QDir>
+#include <QtCore/QFile>
+#include <QtCore/QString>
+
+#include <QtCore/QByteArray>
+#include <QtCore/QFileInfo>
+#include <QtCore/QDir>
 
 #include <KOdfStorageDevice.h>
-#include <KStandardDirs>
-#include <QtXmlPatterns>
-#include <convert.h>
-#include <QFile>
+#include <KDE/KStandardDirs>
+#include <QtXmlPatterns/QXmlQuery>
 
 void Conversion::convert(QFile *cont1)
 {

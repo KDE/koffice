@@ -17,18 +17,20 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include <QString>
-#include <q3dict.h>
-#include <QFile>
-#include <QBuffer>
-#include <QColor>
-#include <QImage>
-//Added by qt3to4:
-#include <Q3ValueList>
+#include "kword13oasisgenerator.h"
 
-#include <kdebug.h>
-#include <ktemporaryfile.h>
-#include <kmimetype.h>
+#include <QtCore/QString>
+#include <Qt3Support/Q3Dict>
+#include <QtCore/QFile>
+#include <QtCore/QBuffer>
+#include <QtGui/QColor>
+#include <QtGui/QImage>
+//Added by qt3to4:
+#include <Qt3Support/Q3ValueList>
+
+#include <KDE/KDebug>
+#include <KDE/KTemporaryFile>
+#include <KDE/KMimeType>
 
 #include <kofficeversion.h>
 #include <KOdfStore.h>
@@ -41,7 +43,6 @@
 #include "kword13picture.h"
 #include "kword13document.h"
 
-#include "kword13oasisgenerator.h"
 
 KWord13OasisGenerator::KWord13OasisGenerator(void) : m_kwordDocument(0),  m_store(0), m_manifestWriter(0)
 {

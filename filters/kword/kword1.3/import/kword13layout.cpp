@@ -18,10 +18,11 @@
  * Boston, MA 02110-1301, USA.
 */
 
+#include "kword13layout.h"
+
 #include <QTextStream>
 
 #include "kword13utils.h"
-#include "kword13layout.h"
 
 KWord13Layout::KWord13Layout(void) : m_outline(false)
 {

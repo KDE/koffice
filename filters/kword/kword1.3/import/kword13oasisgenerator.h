@@ -29,6 +29,9 @@ class KOdfStore;
 class KOdfGenericStyle;
 class KXmlWriter;
 class KWord13Document;
+class KWord13Layout;
+class KWordTextFrameset;
+class KWord13FormatOneData;
 
 #include <KOdfGenericStyles.h>
 #include <QTextStream>

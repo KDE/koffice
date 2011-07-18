@@ -17,14 +17,15 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef __WP5_H
-#define __WP5_H
+#ifndef WP5_H
+#define WP5_H
+
+#include <QtCore/QFile>
 
 #include <KWEFStructures.h>
 #include <KWEFBaseWorker.h>
 
 class QString;
-class QFile;
 class QDataStream;
 
 class WPFiveWorker : public KWEFBaseWorker
@@ -45,4 +46,4 @@ private:
     quint32 document_area_ptr;
 };
 
-#endif //__WP5_H
+#endif //WP5_H

@@ -19,14 +19,14 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KCELLS_SHEET_PRINT_P
-#define KCELLS_SHEET_PRINT_P
+#ifndef KC_SHEET_PRINT_P_H
+#define KC_SHEET_PRINT_P_H
 
-#include <QList>
+#include <QtCore/QList>
+#include "KCSheetPrint.h"
 
 class KCHeaderFooter;
 class KCSheet;
-class KCSheetPrint;
 
 /**
  * Page parameters for both directions, horizontal and vertical
@@ -155,4 +155,4 @@ public:
     int m_maxCheckedNewPageY;
 };
 
-#endif // KCELLS_SHEET_PRINT_P
+#endif // KC_SHEET_PRINT_P

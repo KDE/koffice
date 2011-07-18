@@ -17,10 +17,12 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include <QFileInfo>
-#include <QByteArray>
+#include "palmdocexport.h"
 
-#include <kdebug.h>
+#include <QtCore/QFileInfo>
+#include <QtCore/QByteArray>
+
+#include <KDE/KDebug>
 #include <KoFilterChain.h>
 #include <kpluginfactory.h>
 
@@ -30,7 +32,6 @@
 
 #include "palmdoc.h"
 
-#include "palmdocexport.h"
 
 K_PLUGIN_FACTORY(PalmDocExportFactory, registerPlugin<PalmDocExport>();)
 K_EXPORT_PLUGIN(PalmDocExportFactory("kofficefilters"))

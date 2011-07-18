@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KCELLS_VALUE_CONVERTER
-#define KCELLS_VALUE_CONVERTER
+#ifndef KC_VALUE_CONVERTER
+#define KC_VALUE_CONVERTER
 
 #include "KCValue.h"
 
@@ -103,4 +103,4 @@ private:
     const KCValueParser* m_parser;
 };
 
-#endif  //KCELLS_VALUE_CONVERTER
+#endif  //KC_VALUE_CONVERTER

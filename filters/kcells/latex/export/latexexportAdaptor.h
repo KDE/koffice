@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef __LATEXEXPORTADAPTOR_H__
-#define __LATEXEXPORTADAPTOR_H__
+#ifndef LATEXEXPORTADAPTOR_H
+#define LATEXEXPORTADAPTOR_H
 
 #include <QtCore/QObject>
 #include <QtDBus/QtDBus>

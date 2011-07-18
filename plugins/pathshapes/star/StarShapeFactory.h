@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KOSTARHAPEFACTORY_H
-#define KOSTARHAPEFACTORY_H
+#ifndef STARSHAPEFACTORY_H
+#define STARSHAPEFACTORY_H
 
 #include <KShapeFactoryBase.h>
 
@@ -39,4 +39,4 @@ public:
     virtual KShapeConfigWidgetBase *createConfigWidget(KCanvasBase *canvas);
 };
 
-#endif // KOSTARHAPEFACTORY_H
+#endif // STARSHAPEFACTORY_H

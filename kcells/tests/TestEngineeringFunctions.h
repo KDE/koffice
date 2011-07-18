@@ -21,7 +21,7 @@
 #ifndef KCELLS_TEST_ENGINEERING_FUNCTIONS
 #define KCELLS_TEST_ENGINEERING_FUNCTIONS
 
-#include <QtGui>
+#include <QtCore/QObject>
 #include <QtTest/QtTest>
 
 #include <KCValue.h>

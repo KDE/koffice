@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef __kolanguagetab_h__
-#define __kolanguagetab_h__
+#ifndef LANGUAGE_TAB_H
+#define LANGUAGE_TAB_H
 
 #include <ui_LanguageTab.h>
 
@@ -45,4 +45,4 @@ private:
     bool m_uniqueFormat;
 };
 
-#endif
+#endif // LANGUAGE_TAB_H

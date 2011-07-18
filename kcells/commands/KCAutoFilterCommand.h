@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KCELLS_AUTOFILTER_COMMAND
-#define KCELLS_AUTOFILTER_COMMAND
+#ifndef KC_AUTOFILTER_COMMAND
+#define KC_AUTOFILTER_COMMAND
 
 #include "KCAbstractRegionCommand.h"
 
@@ -44,4 +44,4 @@ public:
     virtual void undo();
 };
 
-#endif // KCELLS_AUTOFILTER_COMMAND
+#endif // KC_AUTOFILTER_COMMAND

@@ -15,8 +15,8 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-#ifndef KIS_STRATEGY_COLORSPACE_GRAYSCALE_U16_H_
-#define KIS_STRATEGY_COLORSPACE_GRAYSCALE_U16_H_
+#ifndef GRAY_U16_COLORSPACE_H
+#define GRAY_U16_COLORSPACE_H
 
 #include <klocale.h>
 #include "LcmsColorSpace.h"
@@ -75,4 +75,4 @@ public:
     }
 };
 
-#endif // KIS_STRATEGY_COLORSPACE_GRAYSCALE_H_
+#endif // GRAY_U16_COLORSPACE_H

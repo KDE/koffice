@@ -17,14 +17,14 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include <qfontinfo.h>
+#include "ImportStyle.h"
 
-#include <kglobalsettings.h>
-#include <kdebug.h>
+#include <QtGui/QFontInfo>
+
+#include <KDE/KGlobalSettings>
+#include <KDE/KDebug>
 
 #include <KoGlobal.h>
-
-#include "ImportStyle.h"
 
 StyleData::StyleData(void): m_level(-1)
 {

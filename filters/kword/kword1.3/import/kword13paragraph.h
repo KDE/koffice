@@ -19,13 +19,13 @@
 */
 
 
-#ifndef _FILTER_KWORD_1_3__KWORDPARAGRAPH_H
-#define _FILTER_KWORD_1_3__KWORDPARAGRAPH_H
+#ifndef FILTER_KWORD_13_PARAGRAPH_H
+#define FILTER_KWORD_13_PARAGRAPH_H
 
-#include <QString>
-#include <q3valuelist.h>
-#include <q3ptrlist.h>
-#include <QTextStream>
+#include <QtCore/QString>
+#include <QtCore/QTextStream>
+#include <Qt3Support/Q3ValueList>
+#include <Qt3Support/Q3PtrList>
 
 #include "kword13layout.h"
 
@@ -63,4 +63,4 @@ public:
     void xmldump(QTextStream& iostream);
 };
 
-#endif //  _FILTER_KWORD_1_3__KWORDPARAGRAPH_H
+#endif //  FILTER_KWORD_13_PARAGRAPH_H

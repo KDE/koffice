@@ -17,10 +17,10 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef RDFTEST_H
-#define RDFTEST_H
+#ifndef TESTRDF_H
+#define TESTRDF_H
 
-#include <QObject>
+#include <QtCore/QObject>
 #include <QtTest/QtTest>
 #include <qtest_kde.h>
 

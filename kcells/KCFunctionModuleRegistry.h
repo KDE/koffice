@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KCELLS_FUNCTION_MODULE_REGISTRY
-#define KCELLS_FUNCTION_MODULE_REGISTRY
+#ifndef KC_FUNCTION_MODULE_REGISTRY
+#define KC_FUNCTION_MODULE_REGISTRY
 
 #include <QObject>
 
@@ -64,4 +64,4 @@ private:
     Private * const d;
 };
 
-#endif // KCELLS_FUNCTION_MODULE_REGISTRY
+#endif // KC_FUNCTION_MODULE_REGISTRY

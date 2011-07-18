@@ -30,7 +30,6 @@
 #include <KShapeRegistry.h>
 #include <KOdfPasteBase.h>
 #include <KOdfStoreReader.h>
-#include <KOdfStoreReader.h>
 #include <KShapeLoadingContext.h>
 #include <KOdfLoadingContext.h>
 #include <KoGlobal.h>

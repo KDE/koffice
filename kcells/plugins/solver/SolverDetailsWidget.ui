@@ -112,7 +112,6 @@ Fifth Floor, Boston, MA 02110-1301, USA.</comment>
  <layoutfunction spacing="KDialog::spacingHint" margin="KDialog::marginHint" />
  <pixmapfunction></pixmapfunction>
  <includes>
-  <include location="global" >kdialog.h</include>
  </includes>
  <resources/>
  <connections/>

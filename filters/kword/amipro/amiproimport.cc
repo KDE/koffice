@@ -17,15 +17,17 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include <QByteArray>
+#include "amiproimport.h"
 
-#include <kdebug.h>
+#include <QtCore/QByteArray>
+
+#include <KDE/KDebug>
+#include <KDE/KPluginFactory>
+
 #include <KoFilterChain.h>
-#include <kpluginfactory.h>
 #include <KoGlobal.h>
 
-#include <amiproimport.h>
-#include <amiproparser.h>
+#include "amiproparser.h"
 
 K_PLUGIN_FACTORY(AmiProImportFactory, registerPlugin<AmiProImport>();)
 K_EXPORT_PLUGIN(AmiProImportFactory("kofficefilters"))

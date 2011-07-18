@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef OoWriter_IMPORT_H__
-#define OoWriter_IMPORT_H__
+#ifndef OOWRITER_IMPORT_H
+#define OOWRITER_IMPORT_H
 
 #include <KoFilter.h>
 
@@ -132,4 +132,3 @@ private:
 };
 
 #endif
-

@@ -20,7 +20,7 @@
 #ifndef KCELLS_TEST_DEPENDENCIES
 #define KCELLS_TEST_DEPENDENCIES
 
-#include <QtGui>
+#include <QtCore/QObject>
 #include <QtTest/QtTest>
 
 class KCCellStorage;

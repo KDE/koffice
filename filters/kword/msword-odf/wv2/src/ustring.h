@@ -19,8 +19,8 @@
  *  Boston, MA 02111-1307, USA.
  */
 
-#ifndef _KJS_USTRING_H_
-#define _KJS_USTRING_H_
+#ifndef KJS_USTRING_H
+#define KJS_USTRING_H
 
 #include "wv2_export.h"
 

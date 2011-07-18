@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KIS_XYZ_U16_COLORSPACE_H_
-#define KIS_XYZ_U16_COLORSPACE_H_
+#ifndef XYZ_U16_COLORSPACE_H
+#define XYZ_U16_COLORSPACE_H
 
 #include <LcmsColorSpace.h>
 #include <KoColorSpaceTraits.h>

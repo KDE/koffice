@@ -33,14 +33,16 @@
    License version 2.
 */
 
-#include <QFile>
-#include <qdom.h>
-#include <QList>
-#include <QByteArray>
+#include "KWEFKWordLeader.h"
 
-#include <kdebug.h>
-#include <klocale.h>
-#include <kmessagebox.h>
+#include <QtCore/QFile>
+#include <QtXml/QDomNode>
+#include <QtCore/QList>
+#include <QtCore/QByteArray>
+
+#include <KDE/KDebug>
+#include <KDE/KLocale>
+#include <KDE/KMessageBox>
 
 #include <KoGlobal.h>
 #include <KOdfStore.h>
@@ -49,7 +51,6 @@
 #include "TagProcessing.h"
 #include "ProcessDocument.h"
 #include "KWEFBaseWorker.h"
-#include "KWEFKWordLeader.h"
 
 KWEFKWordLeader::KWEFKWordLeader(void)
         : m_syntaxVersion(-1), m_oldSyntax(false), m_worker(NULL), m_chain(NULL), m_hType(0), m_fType(0)

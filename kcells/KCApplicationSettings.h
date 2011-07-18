@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KCELLSAPPLICATIONSETTINGS
-#define KCELLSAPPLICATIONSETTINGS
+#ifndef KCAPPLICATIONSETTINGS
+#define KCAPPLICATIONSETTINGS
 
 #include <KGlobalSettings>
 
@@ -172,4 +172,4 @@ private:
     Private * const d;
 };
 
-#endif // KCELLSAPPLICATIONSETTINGS
+#endif // KCAPPLICATIONSETTINGS

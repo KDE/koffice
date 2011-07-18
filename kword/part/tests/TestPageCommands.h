@@ -18,10 +18,10 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-#ifndef KWPAGECOMMANDS_H
-#define KWPAGECOMMANDS_H
+#ifndef TESTPAGECOMMANDS_H
+#define TESTPAGECOMMANDS_H
 
-#include <QObject>
+#include <QtCore/QObject>
 #include <QtTest/QtTest>
 #include <qtest_kde.h>
 class TestPageCommands : public QObject

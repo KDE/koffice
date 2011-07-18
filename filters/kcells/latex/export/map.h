@@ -19,8 +19,8 @@
 **
 */
 
-#ifndef __KCELLS_LATEX_MAP_H__
-#define __KCELLS_LATEX_MAP_H__
+#ifndef KCELLS_LATEX_MAP_H
+#define KCELLS_LATEX_MAP_H
 
 #include <QString>
 #include <QStack>  /* historic list */
@@ -28,7 +28,7 @@
 #include <QTextStream>
 
 #include "xmlparser.h"
-#include "config.h"
+#include "latex_config.h"
 #include "table.h"
 
 /***********************************************************************/
@@ -86,4 +86,4 @@ private:
 
 };
 
-#endif /* __KCELLS_LATEX_MAP_H__ */
+#endif /* KCELLS_LATEX_MAP_H */

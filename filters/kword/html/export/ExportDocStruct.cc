@@ -18,6 +18,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
+#include "ExportDocStruct.h"
+
 #include <QString>
 #include <QTextCodec>
 #include <QFile>
@@ -28,7 +30,6 @@
 #include <KWEFBaseWorker.h>
 
 #include "ExportFilter.h"
-#include "ExportDocStruct.h"
 
 QString HtmlDocStructWorker::getStartOfListOpeningTag(const CounterData::Style typeList, bool& ordered)
 {

@@ -18,10 +18,11 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include <QTextStream>
+#include "kword13formatone.h"
+
+#include <QtCore/QTextStream>
 
 #include "kword13utils.h"
-#include "kword13formatone.h"
 
 KWord13FormatOneData::KWord13FormatOneData(void)
 {

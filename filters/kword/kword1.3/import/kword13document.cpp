@@ -18,18 +18,19 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include <QIODevice>
-//Added by qt3to4:
-#include <Q3ValueList>
-#include <QTextStream>
+#include "kword13document.h"
 
-#include <kdebug.h>
-#include <ktemporaryfile.h>
+#include <QtCore/QIODevice>
+//Added by qt3to4:
+#include <Qt3Support/Q3ValueList>
+#include <QtCore/QTextStream>
+
+#include <KDE/KDebug>
+#include <KDE/KTemporaryFile>
 
 #include "kword13utils.h"
 #include "kword13layout.h"
 #include "kword13picture.h"
-#include "kword13document.h"
 
 KWord13Document::KWord13Document(void) : m_previewFile(0)
 {

@@ -30,15 +30,17 @@
    License version 2.
 */
 
-#include <kdebug.h>
-#include <kpluginfactory.h>
-#include <kimageio.h>
+#include "oowriterexport.h"
+
+#include <QtCore/QByteArray>
+
+#include <KDE/KDebug>
+#include <KDE/KPluginFactory>
+#include <KDE/KImageIO>
 
 #include <KoFilterChain.h>
 
 #include "ExportFilter.h"
-#include "oowriterexport.h"
-#include <QByteArray>
 
 K_PLUGIN_FACTORY(OOWRITERExportFactory, registerPlugin<OOWRITERExport>();)
 K_EXPORT_PLUGIN(OOWRITERExportFactory("kwordoowriterexport", "kofficefilters"))

@@ -21,18 +21,19 @@
  * Boston, MA 02110-1301, USA.
 */
 
+#include "asciiexport.h"
 
 #include <limits.h>
 
-#include <QFile>
-#include <QIODevice>
-#include <QString>
-#include <QTextCodec>
-#include <QTextStream>
-#include <QList>
+#include <QtCore/QFile>
+#include <QtCore/QIODevice>
+#include <QtCore/QString>
+#include <QtCore/QTextCodec>
+#include <QtCore/QTextStream>
+#include <QtCore/QList>
 
-#include <kdebug.h>
-#include <kpluginfactory.h>
+#include <KDE/KDebug>
+#include <KDE/KPluginFactory>
 
 #include <KoFilterChain.h>
 #include <KoFilterManager.h>
@@ -43,7 +44,6 @@
 #include <KWEFKWordLeader.h>
 
 #include <ExportDialog.h>
-#include <asciiexport.h>
 
 K_PLUGIN_FACTORY(ASCIIExportFactory, registerPlugin<ASCIIExport>();)
 K_EXPORT_PLUGIN(ASCIIExportFactory("kwordasciiexport", "kofficefilters"))

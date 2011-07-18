@@ -161,8 +161,6 @@
   <tabstop>hyphenate</tabstop>
  </tabstops>
  <includes>
-  <include location="global" >knuminput.h</include>
-  <include location="global" >klocale.h</include>
   <include location="local" >knuminput.h</include>
  </includes>
  <resources/>

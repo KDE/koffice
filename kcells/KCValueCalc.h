@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KCELLS_VALUECALC
-#define KCELLS_VALUECALC
+#ifndef KC_VALUECALC
+#define KC_VALUECALC
 
 #include <map>
 
@@ -344,5 +344,5 @@ inline double approxFloor(double a)
 }
 
 
-#endif // KCELLS_VALUECALC
+#endif // KC_VALUECALC
 

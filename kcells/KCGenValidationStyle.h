@@ -19,8 +19,8 @@
 */
 
 
-#ifndef KCELLS_GENVALIDATIONSTYLE
-#define KCELLS_GENVALIDATIONSTYLE
+#ifndef KC_GENVALIDATIONSTYLE
+#define KC_GENVALIDATIONSTYLE
 
 #include "kcells_export.h"
 

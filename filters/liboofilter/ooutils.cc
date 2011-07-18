@@ -20,17 +20,19 @@
 */
 
 #include "ooutils.h"
+
+#include <QtGui/QColor>
+#include <QtGui/QImage>
+#include <QtCore/QRegExp>
+#include <QtXml/QDomDocument>
+
+#include <KDE/KDebug>
+#include <KDE/KZip>
+
+#include <KUnit.h>
+#include <KXmlReader.h>
 #include <KOdfStoreReader.h>
 #include <KOdfStyleStack.h>
-#include <KXmlReader.h>
-#include <qdom.h>
-#include <QColor>
-#include <QImage>
-#include <KUnit.h>
-#include <QRegExp>
-#include <kdebug.h>
-#include <kzip.h>
-#include <QtXml>
 
 const char* const ooNS::office = "http://openoffice.org/2000/office";
 const char* const ooNS::style = "http://openoffice.org/2000/style";

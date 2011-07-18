@@ -18,18 +18,19 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include <QTextCodec>
-#include <QRadioButton>
+#include "ExportDialog.h"
 
-#include <kdebug.h>
-#include <klocale.h>
-#include <kcharsets.h>
-#include <kglobal.h>
-#include <kapplication.h>
-#include <kcombobox.h>
-#include <kmessagebox.h>
+#include <QtCore/QTextCodec>
+#include <QtGui/QRadioButton>
 
-#include <ExportDialog.h>
+#include <KDE/KDebug>
+#include <KDE/KLocale>
+#include <KDE/KCharsets>
+#include <KDE/KGlobal>
+#include <KDE/KApplication>
+#include <KDE/KComboBox>
+#include <KDE/KMessageBox>
+
 
 AsciiExportDialog :: AsciiExportDialog(QWidget* parent)
         : KDialog(parent),

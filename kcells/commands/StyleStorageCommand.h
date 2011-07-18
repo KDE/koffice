@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KCELLS_STYLE_STORAGE_UNDO_COMMAND
-#define KCELLS_STYLE_STORAGE_UNDO_COMMAND
+#ifndef STYLE_STORAGE_COMMAND_H
+#define STYLE_STORAGE_COMMAND_H
 
 // Qt
 #include <QList>
@@ -88,4 +88,4 @@ StyleStorageCommand& StyleStorageCommand::operator<<(const QList<Pair>& pairs)
     return *this;
 }
 
-#endif // KCELLS_STYLE_STORAGE_UNDO_COMMAND
+#endif // STYLE_STORAGE_COMMAND_H

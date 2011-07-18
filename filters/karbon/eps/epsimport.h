@@ -17,10 +17,10 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef __EPSIMPORT_H__
-#define __EPSIMPORT_H__
+#ifndef EPSIMPORT_H
+#define EPSIMPORT_H
 
-#include <QObject>
+#include <QtCore/QObject>
 
 #include <KoFilter.h>
 #include <QVariantList>

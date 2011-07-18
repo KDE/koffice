@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef __PALMDOC_H
-#define __PALMDOC_H
+#ifndef PALMDOC_H
+#define PALMDOC_H
 
 #include "palmdb.h"
 #include <QString>

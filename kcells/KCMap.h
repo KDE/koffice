@@ -18,8 +18,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef __MAP_H__
-#define __MAP_H__
+#ifndef KCMAP_H
+#define KCMAP_H
 
 #include <QList>
 #include <QObject>
@@ -409,4 +409,4 @@ private:
     Private * const d;
 };
 
-#endif
+#endif //KCMAP_H

@@ -21,8 +21,8 @@
 #ifndef KWORD_1_3_PARSER_H
 #define KWORD_1_3_PARSER_H
 
-#include <QtXml>
-#include <q3ptrstack.h>
+#include <QtXml/QXmlDefaultHandler>
+#include <Qt3Support/Q3PtrStack>
 
 class KWord13Paragraph;
 class KWord13Document;

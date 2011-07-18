@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KCELLS_PROTECTABLE_OBJECT
-#define KCELLS_PROTECTABLE_OBJECT
+#ifndef KC_PROTECTABLE_OBJECT
+#define KC_PROTECTABLE_OBJECT
 
 #include <KXmlReader.h>
 
@@ -87,4 +87,4 @@ private:
     QByteArray m_password;
 };
 
-#endif // KCELLS_PROTECTABLE_OBJECT
+#endif // KC_PROTECTABLE_OBJECT

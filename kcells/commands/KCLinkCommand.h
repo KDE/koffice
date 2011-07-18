@@ -18,8 +18,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KCELLS_LINK_COMMAND
-#define KCELLS_LINK_COMMAND
+#ifndef KC_LINK_COMMAND
+#define KC_LINK_COMMAND
 
 #include <QString>
 #include <QUndoCommand>
@@ -46,4 +46,4 @@ protected:
     QString newLink;
 };
 
-#endif // KCELLS_LINK_COMMAND
+#endif // KC_LINK_COMMAND

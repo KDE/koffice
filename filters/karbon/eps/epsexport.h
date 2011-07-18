@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef __EPSEXPORT_H__
-#define __EPSEXPORT_H__
+#ifndef EPSEXPORT_H
+#define EPSEXPORT_H
 
 
 #include <KoFilter.h>

@@ -20,16 +20,15 @@
 **
 */
 
-#ifndef __KCELLS_LATEX_TABLE_H__
-#define __KCELLS_LATEX_TABLE_H__
+#ifndef KCELLS_LATEX_TABLE_H
+#define KCELLS_LATEX_TABLE_H
 
 #include <QString>
 #include <QList>
 #include <QTextStream>
 
 #include "xmlparser.h"
-#include "config.h"
-//#include "cell.h"
+#include "latex_config.h"
 
 class KCCell;
 class Column;
@@ -263,5 +262,5 @@ private:
     void generateBottomLineBorder(QTextStream&, int);
 };
 
-#endif /* __KCELLS_LATEX_TABLE_H__ */
+#endif /* KCELLS_LATEX_TABLE_H */
 

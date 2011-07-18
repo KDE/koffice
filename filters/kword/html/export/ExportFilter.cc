@@ -18,6 +18,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
+#include "ExportFilter.h"
+
 #include <QString>
 #include <QTextCodec>
 #include <QPainter>
@@ -35,7 +37,6 @@
 #include <KWEFUtil.h>
 #include <KWEFBaseWorker.h>
 
-#include "ExportFilter.h"
 
 QString HtmlWorker::escapeHtmlText(const QString& strText) const
 {

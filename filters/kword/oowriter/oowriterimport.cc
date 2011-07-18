@@ -19,27 +19,26 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include <QColor>
-#include <QFile>
-#include <QFont>
-#include <QPen>
-#include <QRegExp>
-#include <QImage>
-#include <QByteArray>
-#include <QVector>
-
 #include "oowriterimport.h"
+
+#include <QtGui/QColor>
+#include <QtCore/QFile>
+#include <QtGui/QFont>
+#include <QtGui/QPen>
+#include <QtCore/QRegExp>
+#include <QtGui/QImage>
+#include <QtCore/QByteArray>
+#include <QtCore/QVector>
+
 #include <ooutils.h>
 
-
-#include <kdebug.h>
-#include <kzip.h>
+#include <KDE/KDebug>
+#include <KDE/KZip>
+#include <KDE/KPluginFactory>
+#include <KDE/KMessageBox>
 
 #include <KoDocumentInfo.h>
 #include <KoDocument.h>
-
-#include <kpluginfactory.h>
-#include <kmessagebox.h>
 #include <KoFilterChain.h>
 #include <KUnit.h>
 #include <KOdfPageLayoutData.h>

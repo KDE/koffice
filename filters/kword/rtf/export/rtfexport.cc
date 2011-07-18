@@ -33,9 +33,11 @@
    License version 2.
 */
 
-#include <kdebug.h>
-#include <kpluginfactory.h>
-#include <kimageio.h>
+#include <rtfexport.h>
+
+#include <KDE/KDebug>
+#include <KDE/KPluginFactory>
+#include <KDE/KImageIO>
 #include <KoFilterChain.h>
 
 #include <KWEFBaseWorker.h>
@@ -43,7 +45,6 @@
 
 #include "ExportFilter.h"
 
-#include <rtfexport.h>
 #include <rtfexport.moc>
 #include <QByteArray>
 

@@ -17,11 +17,11 @@
    the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
 */
-#ifndef __koPictureEps_h__
-#define __koPictureEps_h__
+#ifndef KO_PICTURE_EPS_H
+#define KO_PICTURE_EPS_H
 
-#include <QString>
-#include <QPixmap>
+#include <QtCore/QString>
+#include <QtGui/QPixmap>
 
 #include "PictureBase.h"
 
@@ -136,4 +136,4 @@ private:
     bool m_cacheIsInFastMode;
 };
 
-#endif /* __koPictureEps_h__ */
+#endif /* KO_PICTURE_EPS_H */

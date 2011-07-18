@@ -17,6 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
+#include "epsexportdlg.h"
+
 #include <q3buttongroup.h>
 #include <QRadioButton>
 #include <QString>
@@ -25,7 +27,6 @@
 #include <klocale.h>
 #include <knuminput.h>
 
-#include "epsexportdlg.h"
 
 
 EpsExportDlg::EpsExportDlg(QWidget* parent, const char* name)

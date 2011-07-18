@@ -18,8 +18,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KCELLS_RECT_STORAGE
-#define KCELLS_RECT_STORAGE
+#ifndef KC_RECT_STORAGE
+#define KC_RECT_STORAGE
 
 #include <QCache>
 #include <QRegion>
@@ -546,4 +546,4 @@ protected Q_SLOTS:
     }
 };
 
-#endif // KCELLS_RECT_STORAGE
+#endif // KC_RECT_STORAGE

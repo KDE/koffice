@@ -18,6 +18,8 @@
    Boston, MA  02110-1301  USA.
 */
 
+#include "Filterkpr2odf.h"
+
 #include <cmath>
 #include <cfloat>
 
@@ -43,8 +45,6 @@
 #include <KOdfXmlNS.h>
 #include <KOdf.h>
 #include <KOdfGenericStyle.h>
-
-#include "Filterkpr2odf.h"
 
 using std::sin;
 using std::cos;

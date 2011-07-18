@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef ABSTRACTTEXTCOMMMAND_H
-#define ABSTRACTTEXTCOMMMAND_H
+#ifndef TEXT_COMMAND_BASE_H
+#define TEXT_COMMAND_BASE_H
 
 #include <QUndoCommand>
 
@@ -76,4 +76,4 @@ protected:
     TextTool *m_tool;
 };
 
-#endif
+#endif // TEXT_COMMAND_BASE_H

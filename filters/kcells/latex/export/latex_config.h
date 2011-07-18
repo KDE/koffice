@@ -19,8 +19,8 @@
 **
 */
 
-#ifndef __LATEX_CONFIG_H__
-#define __LATEX_CONFIG_H__
+#ifndef LATEX_CONFIG_H
+#define LATEX_CONFIG_H
 
 #include <QTextStream>
 #include <QStringList>
@@ -195,4 +195,4 @@ private:
 
 };
 
-#endif /* __LATEX_CONFIG_H__ */
+#endif /* LATEX_CONFIG_H */

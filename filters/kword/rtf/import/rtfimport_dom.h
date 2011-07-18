@@ -9,8 +9,8 @@
    version 2 of the License, or (at your option) any later version.
 */
 
-#ifndef __RTFIMPORT_DOM_H__
-#define __RTFIMPORT_DOM_H__
+#ifndef RTFIMPORT_DOM_H
+#define RTFIMPORT_DOM_H
 
 #include <QString>
 #include <QByteArray>

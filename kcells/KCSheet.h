@@ -20,8 +20,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KCELLS_SHEET
-#define KCELLS_SHEET
+#ifndef KC_SHEET
+#define KC_SHEET
 
 #include <QClipboard>
 #include <QHash>
@@ -975,4 +975,4 @@ private:
     Private * const d;
 };
 
-#endif  // KCELLS_SHEET
+#endif  // KC_SHEET

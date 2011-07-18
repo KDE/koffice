@@ -19,8 +19,8 @@
 **
 */
 
-#ifndef __KCELLS_LATEX_FILEHEADER_H__
-#define __KCELLS_LATEX_FILEHEADER_H__
+#ifndef KCELLS_LATEX_FILEHEADER_H
+#define KCELLS_LATEX_FILEHEADER_H
 
 #include <QTextStream>
 

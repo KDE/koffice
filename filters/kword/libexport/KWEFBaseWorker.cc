@@ -18,16 +18,17 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include <QBuffer>
-#include <QImage>
-#include <QList>
+#include "KWEFBaseWorker.h"
 
-#include <kdebug.h>
+#include <QtCore/QBuffer>
+#include <QtCore/QList>
+#include <QtGui/QImage>
 
-#include <Picture.h>
+#include <KDE/KDebug>
+
+#include "Picture.h"
 
 #include "KWEFStructures.h"
-#include "KWEFBaseWorker.h"
 #include "KWEFKWordLeader.h"
 
 void KWEFBaseWorker::registerKWordLeader(KWEFKWordLeader* leader)

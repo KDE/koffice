@@ -22,6 +22,9 @@
 * the table starts at tbl §21.1.3.13
 */
 
+#ifndef MSOOXML_DRAWINGREADERTABLEIMPL_H
+#define MSOOXML_DRAWINGREADERTABLEIMPL_H
+
 #include <MsooXmlDrawingTableStyleReader.h>
 
 #undef CURRENT_EL
@@ -537,3 +540,5 @@ KoFilter::ConversionStatus MSOOXML_CURRENT_CLASS::read_tableStyleId()
 
     READ_EPILOGUE
 }
+
+#endif 

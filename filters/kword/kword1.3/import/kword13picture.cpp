@@ -18,6 +18,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
+#include "kword13picture.h"
+
 #include <QFile>
 
 #include <kdebug.h>
@@ -26,7 +28,6 @@
 #include <KOdfStore.h>
 #include <KOdfStorageDevice.h>
 
-#include "kword13picture.h"
 
 KWord13Picture::KWord13Picture(void) : m_tempFile(0), m_valid(false)
 {

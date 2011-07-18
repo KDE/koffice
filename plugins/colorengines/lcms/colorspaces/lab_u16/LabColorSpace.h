@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef LabColorSpace_H_
-#define LabColorSpace_H_
+#ifndef LabColorSpace_H
+#define LabColorSpace_H
 
 #include "LcmsColorSpace.h"
 #include "KoColorSpaceTraits.h"

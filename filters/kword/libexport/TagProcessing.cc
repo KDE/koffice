@@ -33,11 +33,12 @@
    License version 2.
 */
 
-#include <kdebug.h>
-#include <qdom.h>
-#include <QList>
-
 #include "TagProcessing.h"
+
+#include <KDE/KDebug>
+
+#include <QtXml/QDomNode>
+#include <QtCore/QList>
 
 #define DEBUG_KWORD_TAGS
 // #define DEBUG_KWORD_IGNORED_TAGS

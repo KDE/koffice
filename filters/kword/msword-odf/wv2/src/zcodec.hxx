@@ -33,8 +33,8 @@
  *
  ************************************************************************/
 
-#ifndef _ZCODEC_HXX
-#define _ZCODEC_HXX
+#ifndef ZCODEC_HXX
+#define ZCODEC_HXX
 
 //#ifndef INCLUDED_TOOLSDLLAPI_H
 //#include "tools/toolsdllapi.h"
@@ -148,4 +148,4 @@ public:
 	virtual void	BeginCompression( ULONG nCompressMethod = ZCODEC_DEFAULT );
 };
 
-#endif // _ZCODEC_HXX
+#endif // ZCODEC_HXX

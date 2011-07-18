@@ -19,8 +19,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KCELLS_SHEET_PRINT
-#define KCELLS_SHEET_PRINT
+#ifndef KC_SHEET_PRINT
+#define KC_SHEET_PRINT
 
 #include <QRectF>
 
@@ -152,4 +152,4 @@ private:
     Private *const d;
 };
 
-#endif // KCELLS_SHEET_PRINT
+#endif // KC_SHEET_PRINT

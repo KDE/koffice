@@ -17,14 +17,16 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef __XSLTEXPORTDIA_H__
-#define __XSLTEXPORTDIA_H__
+#ifndef XSLTEXPORTDIA_H
+#define XSLTEXPORTDIA_H
 
-#include <xsltdialog.h>
-#include <QStringList>
-#include <QByteArray>
-#include <kurl.h>
-#include <kconfiggroup.h>
+#include "xsltdialog.h"
+
+#include <QtCore/QStringList>
+#include <QtCore/QByteArray>
+
+#include <KDE/KUrl>
+#include <KDE/KConfigGroup>
 
 class KOdfStorageDevice;
 class KConfig;
@@ -64,4 +66,4 @@ public slots:
     virtual void okSlot();
 };
 
-#endif /* __XSLTEXPORTDIA_H__ */
+#endif /* XSLTEXPORTDIA_H */

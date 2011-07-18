@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef __PALMDOCIMPORT_H
-#define __PALMDOCIMPORT_H
+#ifndef PALMDOCIMPORT_H
+#define PALMDOCIMPORT_H
 
 #include <QString>
 #include <QByteArray>
@@ -47,7 +47,7 @@ private:
     QString processDocumentInfo(const QString &title);
 };
 
-#endif // __PALMDOCIMPORT_H
+#endif // PALMDOCIMPORT_H
 
 
 

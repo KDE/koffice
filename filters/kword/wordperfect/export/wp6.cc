@@ -17,13 +17,13 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include <QByteArray>
+#include "wp6.h"
+
+#include <QtCore/QByteArray>
 
 #include <KWEFBaseWorker.h>
 #include <KWEFKWordLeader.h>
 #include <KWEFUtil.h>
-
-#include <wp6.h>
 
 bool WPSixWorker::doOpenFile(const QString& filenameOut, const QString& /*to*/)
 {

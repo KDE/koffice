@@ -17,10 +17,10 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KCELLS_CLUSTER_BENCHMARK
-#define KCELLS_CLUSTER_BENCHMARK
+#ifndef BENCHMARK_CLUSTER_H
+#define BENCHMARK_CLUSTER_H
 
-#include <QtGui>
+#include <QtCore/QObject>
 #include <QtTest/QtTest>
 
 
@@ -40,4 +40,4 @@ private Q_SLOTS:
     void testShiftDownPerformance();
 };
 
-#endif // KCELLS_CLUSTER_BENCHMARK
+#endif // BENCHMARK_CLUSTER_H

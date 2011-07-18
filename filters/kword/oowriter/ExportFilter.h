@@ -30,8 +30,8 @@
    License version 2.
 */
 
-#ifndef _EXPORTFILTER_H
-#define _EXPORTFILTER_H
+#ifndef EXPORTFILTER_H
+#define EXPORTFILTER_H
 
 #include <KWEFStructures.h>
 #include <KWEFUtil.h>
@@ -173,4 +173,4 @@ private: // Variable that would need a link/glue from libexport
     QList<FrameAnchor> m_nonInlinedTableAnchors; ///< Pseudo-anchors for non-inlined tables  \todo: connection to libexport
 
 };
-#endif // _EXPORTFILTER_H
+#endif // EXPORTFILTER_H

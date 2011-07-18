@@ -30,19 +30,19 @@
    License version 2.
 */
 
-#include <QMap>
-#include <QIODevice>
-#include <QBuffer>
-#include <QTextStream>
-#include <qdom.h>
-#include <QList>
-#include <QByteArray>
-#include <QVector>
-#include <QBuffer>
+#include "ExportFilter.h"
 
-#include <kdebug.h>
-#include <klocale.h>
-#include <kzip.h>
+#include <QtCore/QMap>
+#include <QtCore/QIODevice>
+#include <QtCore/QBuffer>
+#include <QtCore/QTextStream>
+#include <QtCore/QList>
+#include <QtCore/QByteArray>
+#include <QtCore/QVector>
+
+#include <KDE/KDebug>
+#include <KDE/KLocale>
+#include <KDE/KZip>
 
 #include <KOdfPageLayoutData.h>
 #include <PictureKey.h>
@@ -52,8 +52,6 @@
 #include <KWEFUtil.h>
 #include <KWEFBaseWorker.h>
 #include <KWEFKWordLeader.h>
-
-#include "ExportFilter.h"
 
 OOWriterWorker::OOWriterWorker(void) : m_streamOut(NULL),
         m_paperBorderTop(0.0), m_paperBorderLeft(0.0),

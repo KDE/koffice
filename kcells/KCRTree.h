@@ -18,8 +18,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KCELLS_RTREE
-#define KCELLS_RTREE
+#ifndef KC_RTREE
+#define KC_RTREE
 
 #include <QRect>
 #include <QVector>
@@ -1036,4 +1036,4 @@ void KCRTree<T>::NonLeafNode::operator=(const NonLeafNode& other)
     }
 }
 
-#endif // KCELLS_RTREE
+#endif // KC_RTREE

@@ -18,9 +18,10 @@
  * Boston, MA 02110-1301, USA.
 */
 
+#include "kword13formatother.h"
+
 #include <QString>
 
-#include "kword13formatother.h"
 
 
 KWord13FormatFour::KWord13FormatFour(void)

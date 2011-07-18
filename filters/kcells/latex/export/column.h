@@ -18,13 +18,13 @@
 **
 */
 
-#ifndef __KCELLS_LATEX_COLUMN_H__
-#define __KCELLS_LATEX_COLUMN_H__
+#ifndef KCELLS_LATEX_COLUMN_H
+#define KCELLS_LATEX_COLUMN_H
 
 #include <QString>
 #include <QTextStream>
 
-#include "config.h"
+#include "latex_config.h"
 #include "format.h"
 #include "xmlparser.h"
 

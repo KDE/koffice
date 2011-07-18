@@ -19,8 +19,9 @@
 **
 */
 
+#include "latex_config.h"
+
 #include <kdebug.h>  /* for kDebug() stream */
-#include "config.h"
 #include <QTextStream>
 
 /* Static variable */

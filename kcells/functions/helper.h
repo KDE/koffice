@@ -16,8 +16,8 @@
    the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
    Boston, MA 02110-1301, USA.
 */
-#ifndef kcells_functions_helper_h_
-#define kcells_functions_helper_h_
+#ifndef FUNCTIONS_HELPER_H
+#define FUNCTIONS_HELPER_H
 // helper functions for other functions
 
 #include "kcells_export.h"
@@ -52,4 +52,4 @@ KCELLS_EXPORT long double pow1p(const long double& x, const long double& y);
 KCELLS_EXPORT long double pow1pm1(const long double& x, const long double& y);
 } //namespace KCells
 
-#endif
+#endif //FUNCTIONS_HELPER_H

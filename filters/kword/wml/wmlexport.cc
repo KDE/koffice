@@ -17,20 +17,21 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include <QFile>
-#include <QTextStream>
-#include <QByteArray>
+#include "wmlexport.h"
 
-#include <kdebug.h>
+#include <QtCore/QFile>
+#include <QtCore/QTextStream>
+#include <QtCore/QByteArray>
+
+#include <KDE/KDebug>
+#include <KDE/KPluginFactory>
+
 #include <KoFilterChain.h>
-#include <kpluginfactory.h>
 
 #include <KWEFStructures.h>
 #include <KWEFBaseWorker.h>
 #include <KWEFKWordLeader.h>
 #include <KWEFUtil.h>
-
-#include "wmlexport.h"
 
 K_PLUGIN_FACTORY(WMLExportFactory, registerPlugin<WMLExport>();)
 K_EXPORT_PLUGIN(WMLExportFactory("kofficefilters"))

@@ -18,8 +18,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KCELLS_UTIL
-#define KCELLS_UTIL
+#ifndef KC_UTIL
+#define KC_UTIL
 
 #include <QString>
 #include <QRect>
@@ -163,4 +163,4 @@ KCELLS_EXPORT QString convertRangeToRef(const QString & sheetName, const QRect &
 }
 }
 
-#endif // KCELLS_UTIL
+#endif // KC_UTIL

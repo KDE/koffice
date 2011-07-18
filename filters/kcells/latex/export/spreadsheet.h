@@ -19,14 +19,14 @@
 **
 */
 
-#ifndef __KCELLS_LATEX_SPREADSHEET_H__
-#define __KCELLS_LATEX_SPREADSHEET_H__
+#ifndef KCELLS_LATEX_SPREADSHEET_H
+#define KCELLS_LATEX_SPREADSHEET_H
 
 #include <QList>
 #include <QTextStream>
 
 #include "map.h"
-#include "config.h"
+#include "latex_config.h"
 
 enum EGenerate {
     E_LATEX,

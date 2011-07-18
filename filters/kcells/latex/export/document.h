@@ -20,15 +20,15 @@
 **
 */
 
-#ifndef __KCELLS_LATEX_DOCUMENT_H__
-#define __KCELLS_LATEX_DOCUMENT_H__
+#ifndef KCELLS_LATEX_DOCUMENT_H
+#define KCELLS_LATEX_DOCUMENT_H
 
 #include <QFile>   /* for QFile class */
 #include <QTextStream> /* for QTextStream class */
 #include <QString>  /* for QString class */
 
 #include "xmlparser.h"
-#include "config.h"
+#include "latex_config.h"
 #include "spreadsheet.h"
 
 class Document : public XmlParser, Config

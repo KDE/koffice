@@ -26,11 +26,11 @@
    Copyright 2001 Michael Johnson <mikej@xnet.com>
 */
 
-#include <kdebug.h>
-
 #include "KWEFStructures.h"
-#include <QList>
 
+#include <KDE/KDebug>
+
+#include <QtCore/QList>
 
 TableCell::~TableCell(void)
 {

@@ -22,6 +22,11 @@
 #define KWEF_UTIL_H
 
 #include <kword_libexport_export.h>
+
+#include <QtCore/QString>
+
+class QTextCodec;
+
 namespace KWEFUtil
 {
 

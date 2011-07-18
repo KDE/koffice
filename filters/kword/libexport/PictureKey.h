@@ -17,8 +17,8 @@
    the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
 */
-#ifndef __koPictureKey_h__
-#define __koPictureKey_h__
+#ifndef KO_PICTURE_KEY_H
+#define KO_PICTURE_KEY_H
 
 #include <QtCore/QString>
 #include <QtCore/QDateTime>
@@ -153,4 +153,4 @@ protected:
     QDateTime m_lastModified;
 };
 
-#endif /* __koPictureKey_h__ */
+#endif /* KO_PICTURE_KEY_H */

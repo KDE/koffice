@@ -166,7 +166,6 @@ Note that you can print it even if the cell is protected</string>
   <tabstop>m_bDontPrint</tabstop>
  </tabstops>
  <includes>
-  <include location="global" >kdialog.h</include>
  </includes>
  <resources/>
  <connections/>

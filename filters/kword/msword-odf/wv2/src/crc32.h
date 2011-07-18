@@ -3,6 +3,9 @@
    header file for crc32 checksum
 */
 
+#ifndef CRC32_H
+#define CRC32_H
+
 #define CRC32_XINIT 0xFFFFFFFFL		/* initial value */
 #define CRC32_XOROT 0xFFFFFFFFL		/* final xor value */
 
@@ -27,3 +30,5 @@ int CompareCRC32(unsigned char *, unsigned long, unsigned long, unsigned long);
 #ifdef __cplusplus
 }
 #endif
+
+#endif //CRC32_H

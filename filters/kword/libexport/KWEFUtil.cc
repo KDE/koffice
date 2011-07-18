@@ -18,12 +18,12 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include <QString>
-#include <QTextCodec>
+#include "KWEFUtil.h"
+
+#include <QtCore/QString>
+#include <QtCore/QTextCodec>
 
 #include <KOdfPageLayoutData.h>
-
-#include "KWEFUtil.h"
 
 QString KWEFUtil::EscapeSgmlText(const QTextCodec* codec,
                                  const QString& strIn,

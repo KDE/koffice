@@ -25,8 +25,8 @@
 
 class KOdfGenericStyles;
 
-#include <QPen>
-#include <QString>
+#include <QtGui/QPen>
+#include <QtCore/QString>
 
 /**
 *   The following classes deal with the table styles part, specifically

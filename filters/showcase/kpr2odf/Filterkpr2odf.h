@@ -31,9 +31,12 @@
 #include <KoFilter.h>
 #include <KOdfGenericStyles.h>
 #include <QVariantList>
+#include <KXmlReader.h>
 
 class KXmlWriter;
 class KOdfGenericStyles;
+class KXmlNode;
+class KXmlElement;
 
 class Filterkpr2odf : public KoFilter
 {

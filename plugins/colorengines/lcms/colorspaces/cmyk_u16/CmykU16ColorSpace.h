@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KIS_STRATEGY_COLORSPACE_CMYK_U16_H_
-#define KIS_STRATEGY_COLORSPACE_CMYK_U16_H_
+#ifndef CMYK_U16_COLORSPACE_H
+#define CMYK_U16_COLORSPACE_H
 
 #include <LcmsColorSpace.h>
 #include <KoColorSpaceTraits.h>

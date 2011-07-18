@@ -15,8 +15,8 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-#ifndef KIS_GRAY_COLORSPACE_H_
-#define KIS_GRAY_COLORSPACE_H_
+#ifndef GRAY_U8_NOALPHA_COLORSPACE_H
+#define GRAY_U8_NOALPHA_COLORSPACE_H
 
 #include <QColor>
 
@@ -77,4 +77,4 @@ public:
     }
 };
 
-#endif // KIS_STRATEGY_COLORSPACE_GRAYSCALE_H_
+#endif // GRAY_U8_NOALPHA_COLORSPACE_H

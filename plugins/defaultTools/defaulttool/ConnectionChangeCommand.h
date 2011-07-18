@@ -16,6 +16,8 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
+#ifndef CONNECTION_CHANGE_COMMAND_H
+#define CONNECTION_CHANGE_COMMAND_H
 
 #include <QUndoCommand>
 #include <QPointF>
@@ -58,3 +60,5 @@ private:
     KShapeConnection *m_connection;
     ConnectionHook m_previousStart, m_newStart, m_previousEnd, m_newEnd;
 };
+
+#endif //CONNECTION_CHANGE_COMMAND_H

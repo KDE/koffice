@@ -18,8 +18,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KCELLS_ROW_COLUMN_FORMAT
-#define KCELLS_ROW_COLUMN_FORMAT
+#ifndef KC_ROW_COLUMN_FORMAT
+#define KC_ROW_COLUMN_FORMAT
 
 #include <QBrush>
 
@@ -202,4 +202,4 @@ private:
     Private * const d;
 };
 
-#endif // KCELLS_ROW_COLUMN_FORMAT
+#endif // KC_ROW_COLUMN_FORMAT

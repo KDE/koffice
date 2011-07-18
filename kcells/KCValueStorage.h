@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KCELLS_VALUE_STORAGE
-#define KCELLS_VALUE_STORAGE
+#ifndef KC_VALUE_STORAGE
+#define KC_VALUE_STORAGE
 
 /**
  * \class KCValueStorage
@@ -43,4 +43,4 @@ public:
     }
 };
 
-#endif // KCELLS_VALUE_STORAGE
+#endif // KC_VALUE_STORAGE

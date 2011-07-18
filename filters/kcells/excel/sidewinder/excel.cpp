@@ -2592,7 +2592,6 @@ MsoDrawingBlibItem::MsoDrawingBlibItem(const PictureReference &picture)
 
 #ifdef SWINDER_XLS2RAW
 
-#include <iostream>
 #include <QApplication>
 
 int main(int argc, char ** argv)

@@ -17,13 +17,12 @@
    Boston, MA 02110-1301, USA.
 */
 
+#include "PictureToolFactory.h"
+
 #include <klocale.h>
 
 #include "PictureShape.h"
 #include "PictureTool.h"
-
-#include "PictureToolFactory.h"
-
 
 PictureToolFactory::PictureToolFactory( QObject* parent)
     : KToolFactoryBase(parent, "PictureToolFactoryId")

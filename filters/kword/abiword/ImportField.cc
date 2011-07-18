@@ -17,12 +17,12 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include <QString>
-#include <qdom.h>
-
-#include <klocale.h>
-
 #include "ImportField.h"
+
+#include <QtCore/QString>
+#include <QtXml/QDomDocument>
+
+#include <KDE/KLocale>
 
 QString getFootnoteFramesetName(const QString& id)
 {

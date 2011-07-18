@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KARBON_IMPORT_H
-#define KARBON_IMPORT_H
+#ifndef KARBON_1X_IMPORT_H
+#define KARBON_1X_IMPORT_H
 
 #include <KarbonDocument.h>
 

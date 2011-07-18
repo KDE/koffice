@@ -17,12 +17,13 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef __XSLTEXPORT_H__
-#define __XSLTEXPORT_H__
+#ifndef XSLTEXPORT_H
+#define XSLTEXPORT_H
 
 #include <KoFilter.h>
-#include <QByteArray>
-#include <QVariantList>
+
+#include <QtCore/QByteArray>
+#include <QtCore/QVariantList>
 
 class XSLTExport : public KoFilter
 {
@@ -35,4 +36,4 @@ public:
 
     virtual KoFilter::ConversionStatus convert(const QByteArray& from, const QByteArray& to);
 };
-#endif /* __XSLTEXPORT_H__ */
+#endif /* XSLTEXPORT_H */

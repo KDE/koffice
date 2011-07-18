@@ -17,8 +17,8 @@
    the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
 */
-#ifndef __koPicture_h__
-#define __koPicture_h__
+#ifndef KO_PICTURE_H
+#define KO_PICTURE_H
 
 #include <QtCore/QString>
 #include <QtCore/QIODevice>
@@ -266,4 +266,4 @@ protected:
     QString m_uniqueName;
 };
 
-#endif /* __koPicture_h__ */
+#endif /* KO_PICTURE_H */

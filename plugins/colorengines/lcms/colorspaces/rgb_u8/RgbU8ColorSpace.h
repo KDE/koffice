@@ -15,8 +15,8 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-#ifndef KO_STRATEGY_COLORSPACE_RGB_H_
-#define KO_STRATEGY_COLORSPACE_RGB_H_
+#ifndef RGB_U8_COLORSPACE_H
+#define RGB_U8_COLORSPACE_H
 
 #include <klocale.h>
 #include <LcmsColorSpace.h>
@@ -86,4 +86,4 @@ public:
     }
 };
 
-#endif // KO_STRATEGY_COLORSPACE_RGB_H_
+#endif // RGB_U8_COLORSPACE_H

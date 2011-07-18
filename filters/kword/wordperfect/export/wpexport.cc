@@ -17,22 +17,23 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include <QTextCodec>
-#include <QFile>
-#include <QFileInfo>
-#include <QTextStream>
-#include <QByteArray>
+#include "wpexport.h"
 
-#include <kdebug.h>
+#include <QtCore/QTextCodec>
+#include <QtCore/QFile>
+#include <QtCore/QFileInfo>
+#include <QtCore/QTextStream>
+#include <QtCore/QByteArray>
+
+#include <KDE/KDebug>
+#include <KDE/KPluginFactory>
 #include <KoFilterChain.h>
-#include <kpluginfactory.h>
 
 #include <KWEFBaseWorker.h>
 #include <KWEFKWordLeader.h>
 
-#include <wpexport.h>
-#include <wp5.h>
-#include <wp6.h>
+#include "wp5.h"
+#include "wp6.h"
 
 K_PLUGIN_FACTORY(WPExportFactory, registerPlugin<WPExport>();)
 K_EXPORT_PLUGIN(WPExportFactory("kofficefilters"))

@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KCELLS_ABSTRACT_REGION_COMMAND
-#define KCELLS_ABSTRACT_REGION_COMMAND
+#ifndef KC_ABSTRACT_REGION_COMMAND
+#define KC_ABSTRACT_REGION_COMMAND
 
 #include <QUndoCommand>
 
@@ -139,4 +139,4 @@ protected:
     bool    m_checkLock : 1;
 };
 
-#endif // KCELLS_ABSTRACT_REGION_COMMAND
+#endif // KC_ABSTRACT_REGION_COMMAND

@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef __kofonttab_h__
-#define __kofonttab_h__
+#ifndef FONT_TAB_H
+#define FONT_TAB_H
 
 #include <QFont>
 #include <QWidget>
@@ -47,4 +47,4 @@ private:
     bool m_uniqueFormat;
 };
 
-#endif
+#endif //FONT_TAB_H

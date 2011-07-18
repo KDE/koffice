@@ -26,15 +26,16 @@
 
 #include "msooxml_export.h"
 
-#include <QXmlStreamReader>
-#include <QStack>
-#include <QUrl>
+#include <QtCore/QXmlStreamReader>
+#include <QtCore/QStack>
+#include <QtCore/QUrl>
 
-#include <KLocale>
-#include <KDebug>
-#include <KXmlReader.h>
-#include <KoFilter.h>
-#include <KoOdfExporter.h>
+#include <KDE/KLocale>
+#include <KDE/KDebug>
+
+#include <KXmlReader.h>		//krazy:exclude=includes
+#include <KoFilter.h>		//krazy:exclude=includes
+#include <KoOdfExporter.h>	//krazy:exclude=includes
 
 class KCharacterStyle;
 

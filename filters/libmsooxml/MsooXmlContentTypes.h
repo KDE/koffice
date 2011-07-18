@@ -21,14 +21,14 @@
  *
  */
 
-#ifndef MSOOXMLCT_H
-#define MSOOXMLCT_H
+#ifndef MSOOXMLContentTypes_H
+#define MSOOXMLContentTypes_H
 
 #include "msooxml_export.h"
 
-#include <QString>
-#include <KoFilterChain.h>
-#include <KXmlReader.h>
+#include <QtCore/QString>
+#include <KoFilterChain.h>	//krazy:exclude=includes
+#include <KXmlReader.h>		//krazy:exclude=includes
 
 class QColor;
 class QDomElement;
@@ -87,4 +87,4 @@ public:
 
 } // MSOOXML namespace
 
-#endif /* MSOOXMLCT_H */
+#endif /* MSOOXMLContentTypes_H */

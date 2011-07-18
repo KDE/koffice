@@ -10,9 +10,9 @@
    version 2 of the License, or (at your option) any later version.
 */
 
-#include <kdebug.h>
-
 #include "rtfimport_tokenizer.h"
+
+#include <KDE/KDebug>
 
 
 RTFTokenizer::RTFTokenizer()

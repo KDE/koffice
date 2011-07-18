@@ -17,6 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
+#include "epsexport.h"
+
 #include <QApplication>
 #include <QDateTime> // For creation date/time.
 #include <qdom.h>
@@ -31,7 +33,6 @@
 #include <KoFilter.h>
 #include <KoFilterChain.h>
 #include <KOdfStore.h>
-#include "epsexport.h"
 #include "epsexportdlg.h"
 #include "vcolor.h"
 #include "vcomposite.h"

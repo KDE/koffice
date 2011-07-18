@@ -15,8 +15,8 @@
    the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
 */
-#ifndef _KOWMFWRITE_H_
-#define _KOWMFWRITE_H_
+#ifndef KOWMFWRITE_H
+#define KOWMFWRITE_H
 
 #include <kowmf_export.h>
 

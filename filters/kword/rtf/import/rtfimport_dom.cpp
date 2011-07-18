@@ -9,16 +9,16 @@
    version 2 of the License, or (at your option) any later version.
 */
 
+#include "rtfimport_dom.h"
+
 #include <stdio.h>
 
-#include <QDateTime>
-#include <QTextCodec>
-#include <QColor>
-#include <QByteArray>
+#include <QtCore/QDateTime>
+#include <QtCore/QTextCodec>
+#include <QtGui/QColor>
+#include <QtCore/QByteArray>
 
-#include <kdebug.h>
-
-#include "rtfimport_dom.h"
+#include <KDE/KDebug>
 
 /**
  * Escape the special XML characters and be careful to catch any disallowed control character

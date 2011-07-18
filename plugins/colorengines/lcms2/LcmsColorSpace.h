@@ -19,8 +19,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOLCMSCOLORSPACE_H_
-#define KOLCMSCOLORSPACE_H_
+#ifndef LCMSCOLORSPACE_H
+#define LCMSCOLORSPACE_H
 
 #include <kconfig.h>
 #include <kglobal.h>
@@ -437,4 +437,4 @@ public:
     virtual KoColorProfile* createColorProfile(const QByteArray& rawData) const;
 };
 
-#endif
+#endif //LCMS_COLORSPACE_H

@@ -19,8 +19,8 @@
 */
 
 
-#ifndef KCELLS_FUNCTIONS
-#define KCELLS_FUNCTIONS
+#ifndef KC_FUNCTIONS
+#define KC_FUNCTIONS
 
 #include <QList>
 #include <QSharedPointer>
@@ -98,4 +98,4 @@ private:
     Private * const d;
 };
 
-#endif // KCELLS_FUNCTIONS
+#endif // KC_FUNCTIONS

@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef __AMIPROPARSER_H
-#define __AMIPROPARSER_H
+#ifndef AMIPROPARSER_H
+#define AMIPROPARSER_H
 
 class QString;
 class QStringList;

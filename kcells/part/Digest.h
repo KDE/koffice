@@ -40,8 +40,8 @@
  *
  ************************************************************************/
 
-#ifndef _DIGEST_
-#define _DIGEST_
+#ifndef DIGEST_H
+#define DIGEST_H
 
 #include <QByteArray>
 #include <QString>
@@ -53,4 +53,3 @@ public:
 };
 
 #endif
-

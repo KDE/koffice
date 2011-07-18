@@ -18,25 +18,25 @@
    This file use code from koTemplateOpenDia for the method chooseSlot.
 */
 
-#include <xsltexportdia.h>
-#include <xsltproc.h>
+#include "xsltexportdia.h"
+#include "xsltproc.h"
 
-#include <QDir>
-#include <QComboBox>
-#include <QByteArray>
+#include <QtCore/QDir>
+#include <QtGui/QComboBox>
+#include <QtCore/QByteArray>
 
-#include <kapplication.h>
-#include <kglobal.h>
-#include <klocale.h>
-#include <kconfig.h>
-#include <kconfiggroup.h>
-#include <kdebug.h>
+#include <KDE/KApplication>
+#include <KDE/KGlobal>
+#include <KDE/KLocale>
+#include <KDE/KConfig>
+#include <KDE/KConfigGroup>
+#include <KDE/KDebug>
 
-#include <kstandarddirs.h>
-#include <krecentdocument.h>
-#include <ktemporaryfile.h>
-#include <kfiledialog.h>
-#include <kdebug.h>
+#include <KDE/KStandardDirs>
+#include <KDE/KRecentDocument>
+#include <KDE/KTemporaryFile>
+#include <KDE/KFileDialog>
+
 #include <KoFilterManager.h>
 #include <KOdfStorageDevice.h>
 

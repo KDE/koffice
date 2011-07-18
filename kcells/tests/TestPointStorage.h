@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KCELLS_POINT_STORAGE_TEST
-#define KCELLS_POINT_STORAGE_TEST
+#ifndef TEST_POINT_STORAGE_H
+#define TEST_POINT_STORAGE_H
 
 #include <QtTest/QtTest>
 
@@ -54,4 +54,4 @@ private Q_SLOTS:
     void testSubStorage();
 };
 
-#endif // KCELLS_POINT_STORAGE_TEST
+#endif // TEST_POINT_STORAGE_H

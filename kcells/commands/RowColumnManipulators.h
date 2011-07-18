@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KCELLS_ROW_COLUMN_MANIPULATORS
-#define KCELLS_ROW_COLUMN_MANIPULATORS
+#ifndef KC_ROW_COLUMN_MANIPULATORS
+#define KC_ROW_COLUMN_MANIPULATORS
 
 #include <QSizeF>
 
@@ -203,4 +203,4 @@ private:
     KCRowFormat *m_template;
 };
 
-#endif // KCELLS_ROW_COLUMN_MANIPULATORS
+#endif // KC_ROW_COLUMN_MANIPULATORS

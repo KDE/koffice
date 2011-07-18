@@ -17,18 +17,18 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef __XSLTIMPORT_H__
-#define __XSLTIMPORT_H__
+#ifndef XSLTIMPORT_H
+#define XSLTIMPORT_H
 
-#include <QString>
-#include <QTextStream>
-#include <QFile>
-#include <QObject>
-#include <QByteArray>
+#include <QtCore/QString>
+#include <QtCore/QTextStream>
+#include <QtCore/QFile>
+#include <QtCore/QObject>
+#include <QtCore/QByteArray>
+#include <QtCore/QVariantList>
 
 #include <KoFilter.h>
 #include <KOdfStore.h>
-#include <QVariantList>
 
 class XSLTImport : public KoFilter
 {
@@ -43,4 +43,4 @@ public:
             const QByteArray& to);
 };
 
-#endif /* __XSLTIMPORT_H__ */
+#endif /* XSLTIMPORT_H */

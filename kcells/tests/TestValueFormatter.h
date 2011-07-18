@@ -20,7 +20,7 @@
 #ifndef KCELLS_TEST_VALUEFORMATTER
 #define KCELLS_TEST_VALUEFORMATTER
 
-#include <QtGui>
+#include <QtCore/QObject>
 #include <QtTest/QtTest>
 
 

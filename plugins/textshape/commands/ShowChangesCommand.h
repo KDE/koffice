@@ -18,8 +18,8 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.*/
 
-#ifndef SHOWCHANGECOMMAND_H
-#define SHOWCHANGECOMMAND_H
+#ifndef SHOWCHANGESCOMMAND_H
+#define SHOWCHANGESCOMMAND_H
 
 #include "TextCommandBase.h"
 #include <QObject>
@@ -66,4 +66,4 @@ private:
     QList<QUndoCommand *> m_shapeCommands;
 };
 
-#endif // SHOWCHANGECOMMAND_H
+#endif // SHOWCHANGESCOMMAND_H

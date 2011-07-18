@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KORGBU16COLORSPACE_H_
-#define KORGBU16COLORSPACE_H_
+#ifndef RGBU16COLORSPACE_H
+#define RGBU16COLORSPACE_H
 
 #include "LcmsColorSpace.h"
 #include "KoColorSpaceTraits.h"

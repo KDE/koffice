@@ -33,8 +33,7 @@
  */
 #include "TestRdf.h"
 
-#include <QDebug>
-#include <QtGui>
+#include <QtCore/QDebug>
 
 #include <KWDocument.h>
 #include <frames/KWTextFrameSet.h>

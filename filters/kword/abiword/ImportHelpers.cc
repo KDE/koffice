@@ -17,12 +17,12 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include <QStringList>
-#include <QRegExp>
-
-#include <kdebug.h>
-
 #include "ImportHelpers.h"
+
+#include <QtCore/QStringList>
+#include <QtCore/QRegExp>
+
+#include <KDE/KDebug>
 
 bool AbiPropsMap::setProperty(const QString& newName, const QString& newValue)
 {

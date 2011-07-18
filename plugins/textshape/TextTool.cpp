@@ -89,6 +89,10 @@
 
 #include <KDocumentRdfBase.h>
 
+#include <QtCore/QPointer>
+#include <QtCore/QSignalMapper>
+#include <QtGui/QMenu>
+
 static bool hit(const QKeySequence &input, KStandardShortcut::StandardShortcut shortcut)
 {
     foreach (const QKeySequence & ks, KStandardShortcut::shortcut(shortcut).toList()) {

@@ -18,8 +18,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KCELLS_DEPENDENCY_MANAGER_P
-#define KCELLS_DEPENDENCY_MANAGER_P
+#ifndef KC_DEPENDENCY_MANAGER_P
+#define KC_DEPENDENCY_MANAGER_P
 
 // Local
 #include "KCDependencyManager.h"
@@ -157,4 +157,4 @@ public:
     QHash<KCCell, int> depths;
 };
 
-#endif // KCELLS_DEPENDENCY_MANAGER_P
+#endif // KC_DEPENDENCY_MANAGER_P

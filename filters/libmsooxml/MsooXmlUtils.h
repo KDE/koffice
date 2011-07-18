@@ -28,13 +28,13 @@
 
 #include "msooxml_export.h"
 
-#include <QSize>
-#include <QColor>
-#include <QBuffer>
-#include <KoFilterChain.h>
-#include <KXmlReader.h>
-#include <KDebug>
-#include <KOdfGenericStyle.h>
+#include <QtCore/QSize>
+#include <QtGui/QColor>
+#include <QtCore/QBuffer>
+#include <KoFilterChain.h>	//krazy:exclude=includes
+#include <KXmlReader.h>		//krazy:exclude=includes
+#include <KDE/KDebug>
+#include <KOdfGenericStyle.h>	//krazy:exclude=includes
 
 class QLocale;
 class QDomElement;

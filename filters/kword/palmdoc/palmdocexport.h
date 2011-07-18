@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef __PALMDOCEXPORT_H
-#define __PALMDOCEXPORT_H
+#ifndef PALMDOCEXPORT_H
+#define PALMDOCEXPORT_H
 
 #include <KoFilter.h>
 #include <KOdfStore.h>
@@ -39,7 +39,7 @@ public:
     virtual KoFilter::ConversionStatus convert(const QByteArray& from, const QByteArray& to);
 };
 
-#endif // __PALMDOCEXPORT_H
+#endif // PALMDOCEXPORT_H
 
 
 

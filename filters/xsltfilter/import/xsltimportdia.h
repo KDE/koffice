@@ -17,15 +17,18 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef __XSLTIMPORTDIA_H__
-#define __XSLTIMPORTDIA_H__
+#ifndef XSLTIMPORTDIA_H
+#define XSLTIMPORTDIA_H
 
-#include "kapplication.h"
-#include <kfiledialog.h>
-#include <kconfiggroup.h>
+#include <QtCore/QByteArray>
+
+#include <KDE/KApplication>
+#include <KDE/KFileDialog>
+#include <KDE/KConfigGroup>
+
 #include <KOdfStore.h>
+
 #include "xsltdialog.h"
-#include <QByteArray>
 
 class XSLTImportDia : public XSLTDialog
 {
@@ -68,4 +71,4 @@ public slots:
 
 };
 
-#endif /* __XSLTIMPORTDIA_H__ */
+#endif /* XSLTIMPORTDIA_H */

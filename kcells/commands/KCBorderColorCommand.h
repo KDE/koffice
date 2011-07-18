@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KCELLS_BORDER_COLOR_COMMAND
-#define KCELLS_BORDER_COLOR_COMMAND
+#ifndef KC_BORDER_COLOR_COMMAND
+#define KC_BORDER_COLOR_COMMAND
 
 #include <QPair>
 #include <QColor>
@@ -48,4 +48,4 @@ private:
     QList< QPair<QRectF, KCSharedSubStyle> > m_undoData;
 };
 
-#endif // KCELLS_BORDER_COLOR_COMMAND
+#endif // KC_BORDER_COLOR_COMMAND

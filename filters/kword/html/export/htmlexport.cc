@@ -31,6 +31,8 @@
    License version 2.
 */
 
+#include <htmlexport.h>
+
 #include <QTextCodec>
 #include <QByteArray>
 
@@ -48,7 +50,6 @@
 #include "ExportBasic.h"
 #include "ExportDocStruct.h"
 
-#include <htmlexport.h>
 #include <htmlexport.moc>
 
 K_PLUGIN_FACTORY(HTMLExportFactory, registerPlugin<HTMLExport>();)

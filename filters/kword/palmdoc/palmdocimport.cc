@@ -17,6 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
+#include "palmdocimport.h"
+
 #include <QFileInfo>
 #include <QStringList>
 #include <QFont>
@@ -29,9 +31,6 @@
 
 #include <palmdb.h>
 #include <palmdoc.h>
-
-#include "palmdocimport.h"
-#include "palmdoc.h"
 
 K_PLUGIN_FACTORY(PalmDocImportFactory, registerPlugin<PalmDocImport>();)
 K_EXPORT_PLUGIN(PalmDocImportFactory("kofficefilters"))

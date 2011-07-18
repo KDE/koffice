@@ -21,7 +21,7 @@
 #ifndef KCELLS_TEST_FINANCIAL_FUNCTIONS
 #define KCELLS_TEST_FINANCIAL_FUNCTIONS
 
-#include <QtGui>
+#include <QtCore/QObject>
 #include <qtest_kde.h>
 
 #include <KCValue.h>

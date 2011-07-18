@@ -16,12 +16,12 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#ifndef SELECTICONSTRATEGY_H
-#define SELECTICONSTRATEGY_H
+#ifndef SELECTSTRATEGY_H
+#define SELECTSTRATEGY_H
 
 #include "InteractionStrategy.h"
 
-#include <QObject>
+#include <QtCore/QObject>
 
 class Canvas;
 class KShape;

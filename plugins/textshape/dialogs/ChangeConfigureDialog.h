@@ -16,10 +16,11 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#ifndef __CHANGE_CONFIGURE_DIALOG_H__
-#define __CHANGE_CONFIGURE_DIALOG_H__
+#ifndef CHANGE_CONFIGURE_DIALOG_H
+#define CHANGE_CONFIGURE_DIALOG_H
 
-#include <QtGui>
+#include <QtGui/QLabel>
+#include <QtGui/QDialog>
 #include <KChangeTracker.h>
 
 class ColorDisplayLabel : public QLabel

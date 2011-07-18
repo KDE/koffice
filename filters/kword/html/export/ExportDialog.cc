@@ -18,6 +18,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
+#include <ExportDialog.h>
+
 #include <QTextCodec>
 
 #include <klocale.h>
@@ -34,7 +36,6 @@
 #include <kurlrequester.h>
 
 #include <ExportDialogUI.h>
-#include <ExportDialog.h>
 
 HtmlExportDialog :: HtmlExportDialog(QWidget* parent)
         : KDialog(parent),

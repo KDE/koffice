@@ -19,11 +19,12 @@
 **
 */
 
+#include "pen.h"
+
 #include <stdlib.h>
 
 #include <kdebug.h>
 
-#include "pen.h"
 #include <QTextStream>
 
 Pen::Pen()

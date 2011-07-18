@@ -7,7 +7,7 @@ include_directories(${CMAKE_SOURCE_DIR}/kcells ${KOMAIN_INCLUDES})
 set(kcellslatexexport_PART_SRCS 
    cell.cc 
    column.cc 
-   config.cc 
+   latex_config.cc 
    document.cc 
    fileheader.cc 
    format.cc 

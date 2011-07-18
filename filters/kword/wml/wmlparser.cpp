@@ -17,12 +17,12 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include <QString>
-#include <QtXml>
-#include <QFile>
-#include <q3valuestack.h>
+#include "wmlparser.h"
 
-#include <wmlparser.h>
+#include <QtCore/QString>
+#include <QtXml/QXmlDefaultHandler>
+#include <QtCore/QFile>
+#include <Qt3Support/Q3ValueStack>
 
 class WMLParseState
 {

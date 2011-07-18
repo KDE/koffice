@@ -17,10 +17,12 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
+
+#include "PathShapesPlugin.h"
+
 #include <KShapeRegistry.h>
 #include <KShapeFactoryBase.h>
 
-#include "PathShapesPlugin.h"
 #include "star/StarShapeFactory.h"
 #include "rectangle/RectangleShapeFactory.h"
 #include "ellipse/EllipseShapeFactory.h"

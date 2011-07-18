@@ -18,8 +18,8 @@
 */
 
 
-#ifndef KCELLS_REGION
-#define KCELLS_REGION
+#ifndef KC_REGION
+#define KC_REGION
 
 #include <QList>
 #include <QRect>
@@ -659,4 +659,4 @@ inline QDebug operator<<(QDebug str, const KCRegion& r)
     return str << qPrintable(r.name());
 }
 
-#endif // KCELLS_REGION
+#endif // KC_REGION

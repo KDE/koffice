@@ -17,8 +17,8 @@
    the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
 */
-#ifndef __koPictureClipart_h__
-#define __koPictureClipart_h__
+#ifndef KO_PICTURE_CLIPART_H
+#define KO_PICTURE_CLIPART_H
 
 #include <QString>
 #include <qpicture.h>
@@ -100,4 +100,4 @@ protected:
     QByteArray m_rawData; ///< Copy of the loaded image file
 };
 
-#endif /* __koPictureClipart_h__ */
+#endif /* KO_PICTURE_CLIPART_H */

@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KCELLS_STYLE_COMMAND
-#define KCELLS_STYLE_COMMAND
+#ifndef KC_STYLE_COMMAND
+#define KC_STYLE_COMMAND
 
 #include <QPair>
 #include <QPen>
@@ -177,4 +177,4 @@ private:
     QList< QPair<QRectF, KCSharedSubStyle> > m_undoData;
 };
 
-#endif // KCELLS_STYLE_COMMAND
+#endif // KC_STYLE_COMMAND

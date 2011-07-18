@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef _KO_ICC_COLOR_PROFILE_H_
-#define _KO_ICC_COLOR_PROFILE_H_
+#ifndef ICC_COLOR_PROFILE_H
+#define ICC_COLOR_PROFILE_H
 
 #include "KoColorProfile.h"
 
@@ -100,4 +100,4 @@ private:
     Private* const d;
 };
 
-#endif
+#endif //ICC_COLOR_PROFILE_H

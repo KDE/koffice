@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef __DBASEIMPORT_H
-#define __DBASEIMPORT_H
+#ifndef DBASEIMPORT_H
+#define DBASEIMPORT_H
 
 #include <KoFilter.h>
 #include <KOdfStore.h>
@@ -38,4 +38,4 @@ public:
     virtual KoFilter::ConversionStatus convert(const QByteArray& from, const QByteArray& to);
 };
 
-#endif // __DBASEIMPORT_H
+#endif // DBASEIMPORT_H

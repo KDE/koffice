@@ -18,6 +18,7 @@
  * Boston, MA 02110-1301, USA.
 */
 
+#include "dbase.h"
 
 #include <QDateTime>
 #include <QDataStream>
@@ -25,7 +26,6 @@
 #include <QString>
 #include <QStringList>
 
-#include <dbase.h>
 
 DBase::DBase(): m_recordCount(0)
 {

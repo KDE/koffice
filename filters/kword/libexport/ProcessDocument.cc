@@ -39,14 +39,15 @@
    Copyright 2001 Michael Johnson <mikej@xnet.com>
 */
 
-#include <qdom.h>
-#include <QList>
+#include "ProcessDocument.h"
 
-#include <kdebug.h>
+#include <QtXml/QDomNode>
+#include <QtCore/QList>
+
+#include <KDE/KDebug>
 
 #include "KWEFStructures.h"
 #include "TagProcessing.h"
-#include "ProcessDocument.h"
 #include "KWEFKWordLeader.h"
 
 

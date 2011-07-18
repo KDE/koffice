@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef __WMLEXPORT_H
-#define __WMLEXPORT_H
+#ifndef WMLEXPORT_H
+#define WMLEXPORT_H
 
 #include <KoFilter.h>
 #include <KOdfStore.h>
@@ -39,14 +39,4 @@ public:
     virtual KoFilter::ConversionStatus convert(const QByteArray& from, const QByteArray& to);
 };
 
-#endif // __WMLEXPORT_H
-
-
-
-
-
-
-
-
-
-
+#endif // WMLEXPORT_H

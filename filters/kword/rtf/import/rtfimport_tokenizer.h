@@ -9,8 +9,8 @@
    version 2 of the License, or (at your option) any later version.
 */
 
-#ifndef __RTFIMPORT_TOKENIZER_H__
-#define __RTFIMPORT_TOKENIZER_H__
+#ifndef RTFIMPORT_TOKENIZER_H
+#define RTFIMPORT_TOKENIZER_H
 
 #include <QFile>
 

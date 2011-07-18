@@ -18,8 +18,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KCELLS_CURRENCY
-#define KCELLS_CURRENCY
+#ifndef KC_CURRENCY
+#define KC_CURRENCY
 
 #include <QHash>
 #include <QMetaType>

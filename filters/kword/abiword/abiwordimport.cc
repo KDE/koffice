@@ -17,16 +17,18 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include <QMap>
-#include <QtXml>
-#include <QDateTime>
-#include <QByteArray>
+#include "abiwordimport.h"
 
-#include <kdebug.h>
-#include <kcodecs.h>
-#include <kfilterdev.h>
-#include <kpluginfactory.h>
-#include <kmessagebox.h>
+#include <QtCore/QMap>
+#include <QtXml/QDomDocument>
+#include <QtCore/QDateTime>
+#include <QtCore/QByteArray>
+
+#include <KDE/KDebug>
+#include <KDE/KCodecs>
+#include <KDE/KFilterDev>
+#include <KDE/KPluginFactory>
+#include <KDE/KMessageBox>
 
 #include <KOdfPageLayoutData.h>
 #include <KOdfStore.h>
@@ -36,8 +38,6 @@
 #include "ImportFormatting.h"
 #include "ImportStyle.h"
 #include "ImportField.h"
-
-#include "abiwordimport.h"
 
 K_PLUGIN_FACTORY(ABIWORDImportFactory, registerPlugin<ABIWORDImport>();)
 K_EXPORT_PLUGIN(ABIWORDImportFactory("kwordabiwordimport", "kofficefilters"))

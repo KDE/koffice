@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KCELLS_INDENTATION_COMMAND
-#define KCELLS_INDENTATION_COMMAND
+#ifndef KC_INDENTATION_COMMAND
+#define KC_INDENTATION_COMMAND
 
 
 #include "KCAbstractRegionCommand.h"
@@ -40,4 +40,4 @@ protected:
     virtual bool postProcessing();
 };
 
-#endif // KCELLS_INDENTATION_COMMAND
+#endif // KC_INDENTATION_COMMAND

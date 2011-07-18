@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KCELLS_APPLYFILTER_COMMAND
-#define KCELLS_APPLYFILTER_COMMAND
+#ifndef KC_APPLYFILTER_COMMAND
+#define KC_APPLYFILTER_COMMAND
 
 #include "KCAbstractRegionCommand.h"
 
@@ -55,4 +55,4 @@ private:
     QHash<int, bool> m_undoData;
 };
 
-#endif // KCELLS_APPLYFILTER_COMMAND
+#endif // KC_APPLYFILTER_COMMAND

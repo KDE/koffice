@@ -17,8 +17,9 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include <QtXml>
-#include <qdom.h>
+#include "kword13import.h"
+
+#include <QtXml/QDomDocument>
 #include <QByteArray>
 
 #include <kdebug.h>
@@ -33,7 +34,6 @@
 #include "kword13document.h"
 #include "kword13oasisgenerator.h"
 #include "kword13postparsing.h"
-#include "kword13import.h"
 
 K_PLUGIN_FACTORY(KWord13ImportFactory, registerPlugin<KWord13Import>();)
 K_EXPORT_PLUGIN(KWord13ImportFactory("kofficefilters"))

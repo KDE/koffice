@@ -18,10 +18,11 @@
  * Boston, MA 02110-1301, USA.
 */
 
+#include "kword13frameset.h"
+
 #include <kdebug.h>
 
 #include "kword13utils.h"
-#include "kword13frameset.h"
 #include <QTextStream>
 
 KWord13Frameset::KWord13Frameset(int frameType, int frameInfo, const QString& name)

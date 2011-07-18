@@ -17,8 +17,8 @@
    the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
 */
-#ifndef __koPictureImage_h__
-#define __koPictureImage_h__
+#ifndef KOPICTUREIMAGE_H
+#define KOPICTUREIMAGE_H
 
 #include "PictureBase.h"
 #include <QString>
@@ -129,4 +129,4 @@ private:
     Private * const d;
 };
 
-#endif /* __koPictureImage_h__ */
+#endif /* KOPICTUREIMAGE_H */

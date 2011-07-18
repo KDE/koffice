@@ -17,15 +17,15 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef __WMLIMPORT_H
-#define __WMLIMPORT_H
+#ifndef WMLIMPORT_H
+#define WMLIMPORT_H
 
-#include <QString>
-#include <QByteArray>
+#include <QtCore/QString>
+#include <QtCore/QByteArray>
+#include <QtCore/QVariantList>
 
 #include <KoFilter.h>
 #include <KOdfStore.h>
-#include <QVariantList>
 
 class WMLImport : public KoFilter
 {
@@ -41,14 +41,4 @@ public:
     virtual KoFilter::ConversionStatus convert(const QByteArray& from, const QByteArray& to);
 };
 
-#endif // __WMLIMPORT_H
-
-
-
-
-
-
-
-
-
-
+#endif // WMLIMPORT_H

@@ -27,7 +27,11 @@
 #include <KTextBlockBorderData.h>
 #include <KTextDocument.h>
 
-#include <QtGui>
+#include <QtCore/QString>
+#include <QtGui/QTextBlock>
+#include <QtGui/QTextLine>
+#include <QtGui/QTextCursor>
+#include <QtGui/QTextLayout>
 
 #include <kdebug.h>
 #include <kcomponentdata.h>

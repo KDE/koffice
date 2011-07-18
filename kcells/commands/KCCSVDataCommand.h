@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KCELLS_CSV_DATA_COMMAND
-#define KCELLS_CSV_DATA_COMMAND
+#ifndef KC_CSV_DATA_COMMAND
+#define KC_CSV_DATA_COMMAND
 
 #include "DataManipulators.h"
 
@@ -62,4 +62,4 @@ private:
     QString m_documentThousandsSeparator;
 };
 
-#endif // KCELLS_CSV_DATA_COMMAND
+#endif // KC_CSV_DATA_COMMAND

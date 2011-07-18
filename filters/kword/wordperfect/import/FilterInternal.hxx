@@ -20,6 +20,9 @@
  * For further information visit http://libwpd.sourceforge.net
  *
  */
+#ifndef FilterInternal_HXX
+#define FilterInternal_HXX
+
 #include <stdio.h>
 #ifdef DEBUG
 #define WRITER_DEBUG_MSG(M) printf M
@@ -34,3 +37,5 @@ inline rtl::OString utf8_itoa(int i)
 	return rtl::OString::valueOf( (sal_Int32) i );
 }
 #endif
+
+#endif //FilterInternal_HXX

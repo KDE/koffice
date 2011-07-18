@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KCELLS_FORMULA
-#define KCELLS_FORMULA
+#ifndef KC_FORMULA
+#define KC_FORMULA
 
 #include <QHash>
 #include <QSharedDataPointer>
@@ -445,4 +445,4 @@ inline uint qHash(const KCFormula& formula)
 Q_DECLARE_METATYPE(KCFormula)
 Q_DECLARE_TYPEINFO(KCFormula, Q_MOVABLE_TYPE);
 
-#endif // KCELLS_FORMULA
+#endif // KC_FORMULA

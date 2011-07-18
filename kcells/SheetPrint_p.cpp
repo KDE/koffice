@@ -20,8 +20,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include "KCSheetPrint.h"
 #include "SheetPrint_p.h"
+#include "KCSheetPrint.h"
 
 #include "KCPrintSettings.h"
 #include "KCRegion.h"

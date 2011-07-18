@@ -17,13 +17,13 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef KCELLS_EXPORT_H
-#define KCELLS_EXPORT_H
+#ifndef KC_EXPORT_H
+#define KC_EXPORT_H
 
 /* needed for KDE_EXPORT and KDE_IMPORT macros */
 #include <kdemacros.h>
 
-#ifndef KCELLS_EXPORT
+#ifndef KC_EXPORT
 # if defined(MAKE_KCELLSCOMMON_LIB)
 /* We are building this library */
 #  define KCELLS_EXPORT KDE_EXPORT

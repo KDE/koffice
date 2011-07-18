@@ -19,8 +19,7 @@
 #ifndef KCHART_INTERFACE
 #define KCHART_INTERFACE
 
-#include <QtPlugin>
-#include <Qt>
+#include <QtCore/QtPlugin>
 
 #define ChartShapeId "ChartShape"
 

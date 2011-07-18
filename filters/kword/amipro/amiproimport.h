@@ -17,15 +17,15 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef __AMIPROIMPORT_H
-#define __AMIPROIMPORT_H
+#ifndef AMIPROIMPORT_H
+#define AMIPROIMPORT_H
 
-#include <QString>
-#include <QByteArray>
+#include <QtCore/QString>
+#include <QtCore/QByteArray>
+#include <QtCore/QVariantList>
 
 #include <KoFilter.h>
 #include <KOdfStore.h>
-#include <QVariantList>
 
 class AmiProImport : public KoFilter
 {

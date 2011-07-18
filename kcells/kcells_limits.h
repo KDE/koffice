@@ -45,4 +45,4 @@
 #define KS_spanMax 0xFFF
 #endif
 
-#endif // KCELLS_LIMITS
+#endif // KC_LIMITS

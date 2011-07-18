@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef FONTDECORATIONS_H
-#define FONTDECORATIONS_H
+#ifndef PARAGRAPH_DECORATIONS_H
+#define PARAGRAPH_DECORATIONS_H
 
 #include <ui_ParagraphDecorations.h>
 
@@ -49,4 +49,4 @@ private:
     bool m_backgroundColorChanged, m_backgroundColorReset;
 };
 
-#endif
+#endif // PARAGRAPH_DECORATIONS_H

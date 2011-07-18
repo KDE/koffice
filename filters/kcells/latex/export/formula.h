@@ -20,8 +20,8 @@
 **
 */
 
-#ifndef __KWORD_LATEXFORMULA__
-#define __KWORD_LATEXFORMULA__
+#ifndef KWORD_LATEXFORMULA_H
+#define KWORD_LATEXFORMULA_H
 
 #include "element.h"
 #include <QString>
@@ -129,4 +129,4 @@ private:
     void analyzeParamFrame(const QDomNode);
 };
 
-#endif /* __KWORD_LATEXFORMULA_H__ */
+#endif /* KWORD_LATEXFORMULA_H */

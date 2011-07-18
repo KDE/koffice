@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KCELLS_COPY_COMMAND
-#define KCELLS_COPY_COMMAND
+#ifndef KC_COPY_COMMAND
+#define KC_COPY_COMMAND
 
 #include <QDomDocument>
 
@@ -56,4 +56,4 @@ QDomDocument saveAsHtml(const KCRegion& region);
 QString saveAsCSV(const KCRegion& region);
 }
 
-#endif // KCELLS_COPY_COMMAND
+#endif // KC_COPY_COMMAND

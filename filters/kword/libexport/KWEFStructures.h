@@ -37,8 +37,8 @@
    Copyright 2001 Michael Johnson <mikej@xnet.com>
 */
 
-#ifndef EXPORTFILTERSSTRUCTURES_H
-#define EXPORTFILTERSSTRUCTURES_H
+#ifndef KWEFSTRUCTURES_H
+#define KWEFSTRUCTURES_H
 
 #include <QList>
 #include <QString>
@@ -544,4 +544,4 @@ public:
 
 void CreateMissingFormatData(QString &paraText, ValueListFormatData &paraFormatDataList);
 
-#endif /* EXPORTFILTERSSTRUCTURES_H */
+#endif /* KWEFSTRUCTURES_H */

@@ -16,8 +16,8 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#ifndef KIVIOSHAPETEMPLATEMODEL_H
-#define KIVIOSHAPETEMPLATEMODEL_H
+#ifndef COLLECTION_ITEM_MODEL_H
+#define COLLECTION_ITEM_MODEL_H
 
 #include <KProperties.h>
 #include <KShape.h>
@@ -69,4 +69,4 @@ class CollectionItemModel : public QAbstractListModel
         QString m_family;
 };
 
-#endif //KIVIOSHAPETEMPLATEMODEL_H
+#endif //COLLECTION_ITEM_MODEL_H

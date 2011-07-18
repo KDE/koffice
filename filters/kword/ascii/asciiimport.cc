@@ -19,19 +19,21 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include <QObject>
-#include <QApplication>
-#include <QString>
-#include <QTextCodec>
-#include <QFile>
-#include <QTextStream>
-#include <qdom.h>
-#include <qfontinfo.h>
-#include <QByteArray>
+#include "asciiimport.h"
 
-#include <kdebug.h>
-#include <kglobal.h>
-#include <kpluginfactory.h>
+#include <QtCore/QObject>
+#include <QtGui/QApplication>
+#include <QtCore/QString>
+#include <QtCore/QTextCodec>
+#include <QtCore/QFile>
+#include <QtCore/QTextStream>
+#include <QtXml/QDomDocument>
+#include <QtGui/QFontInfo>
+#include <QtCore/QByteArray>
+
+#include <KDE/KDebug>
+#include <KDE/KGlobal>
+#include <KDE/KPluginFactory>
 
 #include <KoGlobal.h>
 #include <KOdfPageLayoutData.h>
@@ -39,8 +41,7 @@
 #include <KoFilterChain.h>
 #include <KoFilterManager.h>
 
-#include <asciiimport.h>
-#include <asciiimport.moc>
+#include "asciiimport.moc"
 #include "ImportDialog.h"
 
 K_PLUGIN_FACTORY(ASCIIImportFactory, registerPlugin<ASCIIImport>();)

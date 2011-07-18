@@ -17,6 +17,9 @@
    Boston, MA 02110-1301, USA.
 */
 
+#ifndef TEST_KSPREAD_COMMON_H
+#define TEST_KSPREAD_COMMON_H
+
 #include "qtest_kde.h"
 
 #include <KCFormula.h>
@@ -39,4 +42,4 @@ char *toString(const KCValue& value)
 }
 }
 
-
+#endif // TEST_KSPREAD_COMMON_H

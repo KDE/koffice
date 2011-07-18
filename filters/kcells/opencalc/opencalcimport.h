@@ -18,18 +18,21 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef OpenCalc_IMPORT_H__
-#define OpenCalc_IMPORT_H__
+#ifndef OPENCALC_IMPORT_H
+#define OPENCALC_IMPORT_H
 
 #include "KCFormat.h"
 
-#include <KoFilter.h>
+#include <KoFilter.h>		//krazy:exclude=includes
+#include <KXmlReader.h>		//krazy:exclude=includes
 
-#include <QHash>
-#include <qdom.h>
-#include <QByteArray>
-#include <KXmlReader.h>
-#include <QVariantList>
+#include <QtCore/QHash>
+#include <QtCore/QPoint>
+#include <QtXml/QDomDocument>
+#include <QtCore/QByteArray>
+#include <QtCore/QVariantList>
+#include <QtCore/QStringList>
+
 
 class KOdfStyleStack;
 class KOdfStore;

@@ -18,7 +18,8 @@
  */
 
 #include "ChangeConfigureDialog.h"
-#include <QColorDialog>
+#include <QtGui/QColorDialog>
+#include <QtGui/QPainter>
 
 ColorDisplayLabel::ColorDisplayLabel(QWidget *parent)
     : QLabel(parent),

@@ -53,7 +53,6 @@
 #include <QToolButton>
 #include <QSqlDatabase>
 #include <QSizePolicy>
-#include <QList>
 #include <QScrollBar>
 
 // KDE includes
@@ -118,7 +117,6 @@
 #include "KCLoadingInfo.h"
 #include "KCCanvas.h"
 #include "Global.h"
-#include "Headers.h"
 #include "Headers.h"
 #include "KCLocalization.h"
 #include "KCMap.h"

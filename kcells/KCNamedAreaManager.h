@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KCELLS_NAMED_AREA_MANAGER
-#define KCELLS_NAMED_AREA_MANAGER
+#ifndef KC_NAMED_AREA_MANAGER
+#define KC_NAMED_AREA_MANAGER
 
 #include <QList>
 #include <QObject>
@@ -101,4 +101,4 @@ private:
     Private * const d;
 };
 
-#endif // KCELLS_NAMED_AREA_MANAGER
+#endif // KC_NAMED_AREA_MANAGER

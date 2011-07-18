@@ -18,8 +18,8 @@
 */
 
 
-#ifndef KCELLS_DATA_MANIPULATORS
-#define KCELLS_DATA_MANIPULATORS
+#ifndef KC_DATA_MANIPULATORS
+#define KC_DATA_MANIPULATORS
 
 #include "KCAbstractRegionCommand.h"
 #include "Global.h"

@@ -51,6 +51,7 @@
 #include <QTreeView>
 #include <QVBoxLayout>
 #include <QVector>
+#include <QtCore/QPointer>
 
 ChangeTrackingTool::ChangeTrackingTool(KCanvasBase* canvas): KToolBase(canvas),
     m_disableShowChangesOnExit(false),

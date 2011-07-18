@@ -19,9 +19,10 @@
 **
 */
 
+#include "row.h"
+
 #include <kdebug.h>  /* for kDebug stream */
 
-#include "row.h"
 #include <QTextStream>
 
 /*******************************************/

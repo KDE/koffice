@@ -17,17 +17,17 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KCELLS_STYLE_STORAGE
-#define KCELLS_STYLE_STORAGE
+#ifndef KC_STYLE_STORAGE
+#define KC_STYLE_STORAGE
 
-#include <QObject>
-#include <QPair>
-#include <QPoint>
-#include <QRect>
+#include <QtCore/QObject>
+#include <QtCore/QPair>
+#include <QtCore/QPoint>
+#include <QtCore/QRect>
 
 #include "kcells_export.h"
-#include <KCRegion.h>
-#include <KCStyle.h>
+#include "KCRegion.h"
+#include "KCStyle.h"
 
 class KCMap;
 class KCOdfSavingContext;
@@ -228,4 +228,4 @@ private:
     Private * const d;
 };
 
-#endif // KCELLS_STYLE_STORAGE
+#endif // KC_STYLE_STORAGE

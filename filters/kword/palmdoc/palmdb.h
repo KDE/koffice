@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef __PALMDB_H
-#define __PALMDB_H
+#ifndef PALMDB_H
+#define PALMDB_H
 
 #include <QByteArray>
 #include <QDateTime>

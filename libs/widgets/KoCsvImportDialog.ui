@@ -579,7 +579,6 @@ Boston, MA 02110-1301, USA.
   </customwidget>
  </customwidgets>
  <includes>
-  <include location="global">kcombobox.h</include>
   <include location="global">klineedit.h</include>
  </includes>
  <resources/>

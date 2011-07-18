@@ -17,8 +17,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-#ifndef TESTBASICLAYOUT_H
-#define TESTBASICLAYOUT_H
+#ifndef TESTFRAMES_H
+#define TESTFRAMES_H
 
 #include <QObject>
 #include <QtTest/QtTest>

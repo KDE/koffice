@@ -18,11 +18,11 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
+#include "ColorConversions.h"
+
 #include <cmath>
 
 #include <qglobal.h>
-
-#include "ColorConversions.h"
 
 /**
  * A number of often-used conversions between color models

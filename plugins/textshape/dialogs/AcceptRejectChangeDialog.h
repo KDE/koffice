@@ -17,10 +17,11 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef __ACCEPT_REJECT_CHANGE_DIALOG_H__
-#define __ACCEPT_REJECT_CHANGE_DIALOG_H__
+#ifndef ACCEPT_REJECT_CHANGE_DIALOG_H
+#define ACCEPT_REJECT_CHANGE_DIALOG_H
 
-#include <QtGui>
+#include <QtCore/QObject>
+#include <QtGui/QDialog>
 #include <ui_AcceptRejectChangeDialog.h>
 
 class KChangeTracker;

@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KCELLS_RECT_STORAGE_UNDO_COMMAND
-#define KCELLS_RECT_STORAGE_UNDO_COMMAND
+#ifndef KC_RECT_STORAGE_UNDO_COMMAND
+#define KC_RECT_STORAGE_UNDO_COMMAND
 
 // Qt
 #include <QList>
@@ -100,4 +100,4 @@ KCRectStorageUndoCommand<T>& KCRectStorageUndoCommand<T>::operator<<(const QList
     return *this;
 }
 
-#endif // KCELLS_RECT_STORAGE_UNDO_COMMAND
+#endif // KC_RECT_STORAGE_UNDO_COMMAND

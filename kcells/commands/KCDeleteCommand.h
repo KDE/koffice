@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KCELLS_DELETE_COMMAND
-#define KCELLS_DELETE_COMMAND
+#ifndef KC_DELETE_COMMAND
+#define KC_DELETE_COMMAND
 
 #include "DataManipulators.h"
 
@@ -70,4 +70,4 @@ protected:
     Mode m_mode;
 };
 
-#endif // KCELLS_DELETE_COMMAND
+#endif // KC_DELETE_COMMAND

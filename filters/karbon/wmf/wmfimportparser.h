@@ -16,8 +16,8 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
 */
-#ifndef _WMFIMPORTPARSER_H_
-#define _WMFIMPORTPARSER_H_
+#ifndef WMFIMPORTPARSER_H
+#define WMFIMPORTPARSER_H
 
 #include <QPainter>
 #include <kowmfread.h>
