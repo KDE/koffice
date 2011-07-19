@@ -22,7 +22,7 @@
 
 #include <SCEventActionWidget.h>
 
-class QComboBox;
+class KComboBox;
 class QString;
 class KShape;
 class KEventAction;
@@ -49,7 +49,7 @@ private:
     KShape * m_shape;
     KEventAction * m_eventAction;
     SCSoundCollection * m_soundCollection;
-    QComboBox * m_soundCombo;
+    KComboBox * m_soundCombo;
 };
 
 #endif /* SCSOUNDEVENTACTIONWIDGET_H */

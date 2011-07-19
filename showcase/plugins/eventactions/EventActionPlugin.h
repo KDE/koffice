@@ -17,18 +17,17 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef PLUGIN_H
-#define PLUGIN_H
+#ifndef EVENT_ACTION_PLUGIN_H
+#define EVENT_ACTION_PLUGIN_H
 
 #include <QObject>
 #include <QVariantList>
 
-class Plugin : public QObject
+class EventActionPlugin : public QObject
 {
     Q_OBJECT
 public:
-    Plugin(QObject * parent,  const QVariantList &);
+    EventActionPlugin(QObject * parent,  const QVariantList &);
 };
 
-#endif // PLUGIN_H
-
+#endif // EVENT_ACTION_PLUGIN_H

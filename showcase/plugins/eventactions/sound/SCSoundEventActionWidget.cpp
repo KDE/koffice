@@ -19,11 +19,11 @@
 
 #include "SCSoundEventActionWidget.h"
 
-#include <QComboBox>
 #include <QVBoxLayout>
 #include <KFileDialog>
-#include <klocale.h>
 
+#include <KDE/KLocale>
+#include <KDE/KComboBox>
 
 #include <KEventActionAddCommand.h>
 #include <KEventActionRemoveCommand.h>
@@ -37,7 +37,7 @@ SCSoundEventActionWidget::SCSoundEventActionWidget(QWidget * parent)
 , m_shape(0)
 , m_eventAction(0)
 , m_soundCollection(0)
-, m_soundCombo(new QComboBox())
+, m_soundCombo(new KComboBox())
 {
     QVBoxLayout* layout = new QVBoxLayout(this);
     layout->addWidget(m_soundCombo);

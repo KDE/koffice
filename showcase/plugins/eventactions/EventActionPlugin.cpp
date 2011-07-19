@@ -17,16 +17,16 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "Plugin.h"
+#include "EventActionPlugin.h"
 
 #include <kpluginfactory.h>
 #include <KEventActionRegistry.h>
 #include "sound/SCSoundEventActionFactory.h"
 
-K_PLUGIN_FACTORY(PluginFactory, registerPlugin<Plugin>();)
+K_PLUGIN_FACTORY(PluginFactory, registerPlugin<EventActionPlugin>();)
 K_EXPORT_PLUGIN(PluginFactory("SCEventActions"))
 
-Plugin::Plugin( QObject * parent,  const QVariantList & )
+EventActionPlugin::EventActionPlugin( QObject * parent,  const QVariantList & )
 : QObject( parent )
 {
     KEventActionRegistry::instance()->addPresentationEventAction( new SCSoundEventActionFactory() );

@@ -9,7 +9,7 @@ set(showcaseeventactions_PART_SRCS
     sound/SCSoundEventAction.cpp
     sound/SCSoundEventActionFactory.cpp
     sound/SCSoundEventActionWidget.cpp
-    Plugin.cpp
+    EventActionPlugin.cpp
 )
 
 kde4_add_plugin(showcaseeventactions ${showcaseeventactions_PART_SRCS})
