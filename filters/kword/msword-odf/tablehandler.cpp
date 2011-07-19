@@ -765,7 +765,7 @@ int KWord::Table::columnNumber(int cellEdge) const
 double KWordTableHandler::rowHeight() const
 {
     kDebug(30513) ;
-    return qMax(m_tap->dyaRowHeight / 20.0, 20.0);
+    return qMax(m_tap->dyaRowHeight / 20.0, qreal(20.0));
 }
 
 #include "tablehandler.moc"

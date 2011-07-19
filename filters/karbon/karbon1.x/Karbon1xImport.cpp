@@ -509,7 +509,7 @@ QVector<qreal> KarbonImport::loadDashes(const KXmlElement& element)
     KXmlElement e;
     forEachElement(e, element) {
         if (e.tagName() == "DASH") {
-            double value = qMax(0.0, e.attribute("l", "0.0").toDouble());
+            double value = qMax(qreal(0.0), e.attribute("l", "0.0").toDouble());
             dashes.append(value);
         }
     }
@@ -539,8 +539,8 @@ void KarbonImport::loadStroke(KShape * shape, const KXmlElement &element)
         pen.setJoinStyle(Qt::MiterJoin);
     }
 
-    pen.setWidth(qMax(0.0, element.attribute("lineWidth", "1.0").toDouble()));
-    pen.setMiterLimit(qMax(0.0, element.attribute("miterLimit", "10.0").toDouble()));
+    pen.setWidth(qMax(qreal(0.0), element.attribute("lineWidth", "1.0").toDouble()));
+    pen.setMiterLimit(qMax(qreal(0.0), element.attribute("miterLimit", "10.0").toDouble()));
 
     bool hasStroke = false;
 

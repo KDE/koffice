@@ -281,7 +281,7 @@ void TextShape::paintDecorations(QPainter &painter, const KViewConverter &conver
                                bottom - m_textShapeData->documentOffset()));
             QPointF left(endPoint);
             if (endPoint.y() > 0) {
-                const qreal width = qMin(100., endPoint.x());
+                const qreal width = qMin(qreal(100.0), endPoint.x());
                 left.setX((left.x() - width) / 2);
                 endPoint.setX(endPoint.x() - left.x());
                 painter.drawLine(left, endPoint);

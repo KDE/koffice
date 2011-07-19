@@ -2200,7 +2200,7 @@ void CellToolBase::equalizeColumn()
         if (size != 0.0) {
             KCResizeColumnManipulator* command = new KCResizeColumnManipulator();
             command->setSheet(selection()->activeSheet());
-            command->setSize(qMax(2.0, size));
+            command->setSize(qMax(qreal(2.0), size));
             command->add(*selection());
             if (!command->execute())
                 delete command;
@@ -2304,7 +2304,7 @@ void CellToolBase::equalizeRow()
         if (size != 0.0) {
             ResizeRowManipulator* command = new ResizeRowManipulator();
             command->setSheet(selection()->activeSheet());
-            command->setSize(qMax(2.0, size));
+            command->setSize(qMax(qreal(2.0), size));
             command->add(*selection());
             if (!command->execute())
                 delete command;

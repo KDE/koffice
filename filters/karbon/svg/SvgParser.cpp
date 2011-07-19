@@ -1854,10 +1854,10 @@ KShape * SvgParser::createObject(const KXmlElement &b, const SvgStyles &style)
             rect->setSize(QSizeF(w, h));
             rect->setPosition(QPointF(x, y));
             if (rx >= 0.0)
-                rect->setCornerRadiusX(qMin(100.0, rx / (0.5 * w) * 100.0));
+                rect->setCornerRadiusX(qMin(qreal(100.0), qreal(rx / (0.5 * w) * 100.0)));
             rect->setPosition(QPointF(x, y));
             if (ry >= 0.0)
-                rect->setCornerRadiusY(qMin(100.0, ry / (0.5 * h) * 100.0));
+                rect->setCornerRadiusY(qMin(qreal(100.0), qreal(ry / (0.5 * h) * 100.0)));
             obj = rect;
             if (w == 0.0 || h == 0.0)
                 obj->setVisible(false);

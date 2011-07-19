@@ -56,7 +56,7 @@ bool KCResizeColumnManipulator::process(Element* element)
         KCColumnFormat *format = m_sheet->nonDefaultColumnFormat(col);
         if (m_firstrun)
             m_oldSizes[col] = format->width();
-        format->setWidth(qMax(2.0, m_reverse ? m_oldSizes[col] : m_newSize));
+        format->setWidth(qMax(qreal(2.0), m_reverse ? m_oldSizes[col] : m_newSize));
     }
     // Just repaint everything visible; no need to invalidate the visual cache.
     m_sheet->map()->addDamage(new KCSheetDamage(m_sheet, KCSheetDamage::ContentChanged));
@@ -88,7 +88,7 @@ bool ResizeRowManipulator::process(Element* element)
         KCRowFormat* rl = m_sheet->nonDefaultRowFormat(row);
         if (m_firstrun)
             m_oldSizes[row] = rl->height();
-        rl->setHeight(qMax(2.0, m_reverse ? m_oldSizes[row] : m_newSize));
+        rl->setHeight(qMax(qreal(2.0), m_reverse ? m_oldSizes[row] : m_newSize));
     }
     // Just repaint everything visible; no need to invalidate the visual cache.
     m_sheet->map()->addDamage(new KCSheetDamage(m_sheet, KCSheetDamage::ContentChanged));
@@ -263,7 +263,7 @@ bool AdjustColumnRowManipulator::process(Element* element)
                         if (widths.contains(col) && widths[col] != -1.0) {
                             KCColumnFormat* format = sheet->nonDefaultColumnFormat(col);
                             if (qAbs(format->width() - widths[col]) > DBL_EPSILON) {
-                                format->setWidth(qMax(2.0, widths[col]));
+                                format->setWidth(qMax(qreal(2.0), widths[col]));
                             }
                         }
                     }
@@ -275,7 +275,7 @@ bool AdjustColumnRowManipulator::process(Element* element)
                 if (widths.contains(col) && widths[col] != -1.0) {
                     KCColumnFormat* format = sheet->nonDefaultColumnFormat(col);
                     if (qAbs(format->width() - widths[col]) > DBL_EPSILON) {
-                        format->setWidth(qMax(2.0, widths[col]));
+                        format->setWidth(qMax(qreal(2.0), widths[col]));
                     }
                 }
             }
@@ -291,7 +291,7 @@ bool AdjustColumnRowManipulator::process(Element* element)
                         if (heights.contains(row) && heights[row] != -1.0) {
                             KCRowFormat* format = sheet->nonDefaultRowFormat(row);
                             if (qAbs(format->height() - heights[row]) > DBL_EPSILON) {
-                                format->setHeight(qMax(2.0, heights[row]));
+                                format->setHeight(qMax(qreal(2.0), heights[row]));
                             }
                         }
                     }
@@ -303,7 +303,7 @@ bool AdjustColumnRowManipulator::process(Element* element)
                 if (heights.contains(row) && heights[row] != -1.0) {
                     KCRowFormat* format = sheet->nonDefaultRowFormat(row);
                     if (qAbs(format->height() - heights[row]) > DBL_EPSILON) {
-                        format->setHeight(qMax(2.0, heights[row]));
+                        format->setHeight(qMax(qreal(2.0), heights[row]));
                     }
                 }
             }

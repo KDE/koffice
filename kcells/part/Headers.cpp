@@ -305,7 +305,7 @@ void KCRowHeader::equalizeRow(double resize)
     if (resize != 0.0) {
         ResizeRowManipulator* command = new ResizeRowManipulator();
         command->setSheet(m_pView->activeSheet());
-        command->setSize(qMax(2.0, resize));
+        command->setSize(qMax(qreal(2.0), resize));
         command->add(*m_pView->selection());
         if (!command->execute())
             delete command;
@@ -929,7 +929,7 @@ void KCColumnHeader::equalizeColumn(double resize)
     if (resize != 0.0) {
         KCResizeColumnManipulator* command = new KCResizeColumnManipulator();
         command->setSheet(m_pView->activeSheet());
-        command->setSize(qMax(2.0, resize));
+        command->setSize(qMax(qreal(2.0), resize));
         command->add(*m_pView->selection());
         if (!command->execute())
             delete command;

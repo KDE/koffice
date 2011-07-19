@@ -280,7 +280,7 @@ void KWTextDocumentLayout::layout()
                 }
                 qreal rightIndent = 0;
                 if (m_state->layout->textOption().textDirection() == Qt::RightToLeft) {
-                    rightIndent = qMax(m_state->shape->size().width() - width - leftIndent, 0.);
+                    rightIndent = qMax(m_state->shape->size().width() - width - leftIndent, qreal(0.0));
                 }
 
                 rect = limit(rect);
