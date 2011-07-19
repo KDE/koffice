@@ -20,9 +20,9 @@
 #ifndef SCPAGELAYOUTS_H
 #define SCPAGELAYOUTS_H
 
-#include <QMap>
-#include <QObject>
-#include <QVariant>
+#include <QtCore/QMap>
+#include <QtCore/QObject>
+#include <QtCore/QVariant>
 
 class QRectF;
 class SCPageLayout;
@@ -33,6 +33,7 @@ class QString;
 
 class SCPageLayouts : public QObject
 {
+	Q_OBJECT
 public:
     SCPageLayouts(QObject *parent = 0);
     ~SCPageLayouts();

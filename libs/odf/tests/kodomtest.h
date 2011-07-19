@@ -20,7 +20,8 @@
 #ifndef KODOMTEST_H
 #define KODOMTEST_H
 
-#include <QByteArray>
+#include <QtCore/QByteArray>
+#include <QtCore/QString>
 #include <QtTest/QtTest>
 #include "KXmlReader.h"
 
@@ -33,7 +34,13 @@ private slots:
     void testKoDom();
 private:
     KXmlDocument m_doc;
+
+    static QString const KoXmlNS_office;
+    static QString const KoXmlNS_text;
 };
+
+QString const KoDomTest::KoXmlNS_office = QString("urn:oasis:names:tc:opendocument:xmlns:office:1.0");
+QString const KoDomTest::KoXmlNS_text = QString("urn:oasis:names:tc:opendocument:xmlns:text:1.0");
 
 #endif
 

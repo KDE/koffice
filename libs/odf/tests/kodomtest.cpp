@@ -21,9 +21,6 @@
 
 #include "KXmlReader.h"
 
-static QString const KoXmlNS_office("urn:oasis:names:tc:opendocument:xmlns:office:1.0");
-static QString const KoXmlNS_text("urn:oasis:names:tc:opendocument:xmlns:text:1.0");
-
 //static void debugElemNS( const QDomElement& elem )
 //{
 //    qDebug( "nodeName=%s tagName=%s localName=%s prefix=%s namespaceURI=%s", elem.nodeName().latin1(), elem.tagName().latin1(), elem.localName().latin1(), elem.prefix().latin1(), elem.namespaceURI().latin1() );
