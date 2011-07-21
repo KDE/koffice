@@ -28,6 +28,7 @@
 
 KLineBorder::KLineBorder()
 {
+    setBorderId("LineBorder");
 }
 
 KLineBorder::KLineBorder(qreal lineWidth, const QColor &color)

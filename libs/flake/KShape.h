@@ -625,7 +625,7 @@ public:
 
     /**
      * Return the Id of this shape, identifying the type of shape by the id of the factory.
-     * @see KShapeFactoryBase::shapeId()
+     * @see KShapeFactoryBase::id()
      * @return the id of the shape-type
      */
     QString shapeId() const;
@@ -633,8 +633,8 @@ public:
     /**
      * Set the Id of this shape.  A shapeFactory is expected to set the Id at creation
      * so applications can find out what kind of shape this is.
-     * @see KShapeFactoryBase::shapeId()
-     * @param id the ID from the factory that created this shape
+     * @see KShapeFactoryBase::id()
+     * @param id the identification from the factory that created this shape
      */
     void setShapeId(const QString &id);
 

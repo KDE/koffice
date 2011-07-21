@@ -1,6 +1,6 @@
 /* This file is part of the KDE project
  * Copyright (c) 2006 Boudewijn Rempt (boud@valdyas.org)
- * Copyright (C) 2006-2007 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2006-2011 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -30,19 +30,18 @@ class FLAKE_EXPORT KShapeBorderFactoryBase : public QObject
 {
     Q_OBJECT
 public:
-
     KShapeBorderFactoryBase(QObject *parent, const QString &id);
     virtual ~KShapeBorderFactoryBase();
 
     /**
      * @param targetShape the shape the border is for
-     * @return a new shape
+     * @return a new border
      */
     virtual KShapeBorderBase *createBorder(KShape *targetShape) const = 0;
 
     /**
-     * return the id for the shape this factory creates.
-     * @return the id for the shape this factory creates.
+     * return the id for the border this factory creates.
+     * @return the id for the border this factory creates.
      */
     QString id() const;
 

@@ -33,6 +33,7 @@ public:
 
     QAtomicInt refCount;
     QPen pen;
+    QString borderId;
 };
 
 KShapeBorderBase::KShapeBorderBase()
@@ -109,4 +110,14 @@ KInsets KShapeBorderBase::borderInsets() const
 bool KShapeBorderBase::hasTransparency() const
 {
     return pen().color().alpha() > 0;
+}
+
+void KShapeBorderBase::setBorderId(const QString &id)
+{
+    d->borderId = id;
+}
+
+QString KShapeBorderBase::borderId() const
+{
+    return d->borderId;
 }
