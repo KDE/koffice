@@ -33,6 +33,7 @@ KLineBorder::KLineBorder()
 
 KLineBorder::KLineBorder(qreal lineWidth, const QColor &color)
 {
+    setBorderId("LineBorder");
     QPen pen(color, qMax(qreal(0.0), lineWidth));
     pen.setJoinStyle(Qt::MiterJoin);
     setPen(pen);

@@ -45,6 +45,21 @@ public:
      */
     QString id() const;
 
+    /// return true if the stroke properties are configurable
+    bool penStrokeConfigurable() const;
+
+protected:
+    /**
+     * Set wheater the pen stroke is relevant for our border.
+     * If true then this signifies that the border we create will use the stroke options (like line
+     * type, line-width) that come from the pen of the border.
+     * Notice that the color/pattern part of the pen is always configurable.
+     * If the border does not respond to those changes, this should be set to false.
+     * @param on the new state
+     * @see KShapeBorderBase::pen()
+     */
+    void setPenStrokeConfigurable(bool on);
+
 private:
     class Private;
     Private * const d;

@@ -24,6 +24,7 @@
 KLineBorderFactory::KLineBorderFactory(QObject *parent)
         : KShapeBorderFactoryBase(parent, "LineBorder")
 {
+    setPenStrokeConfigurable(true);
 }
 
 KShapeBorderBase *KLineBorderFactory::createBorder(KShape *) const
