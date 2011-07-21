@@ -18,113 +18,96 @@
  */
 
 #include "ShadowDocker.h"
-#include <KShapeShadow.h>
 #include <KCanvasBase.h>
 #include <KShapeManager.h>
 #include <KSelection.h>
 #include <KToolManager.h>
 #include <KCanvasController.h>
-#include <KoShadowConfigWidget.h>
 #include <KShapeShadowCommand.h>
 #include <KLocale>
-#include <QtGui/QSpacerItem>
-#include <QtGui/QGridLayout>
-
-class ShadowDocker::Private
-{
-public:
-    Private() 
-    : widget(0), canvas(0)
-    {}
-    KShapeShadow shadow;
-    KoShadowConfigWidget * widget;
-    KCanvasBase * canvas;
-    QSpacerItem *spacer;
-    QGridLayout *layout;
-};
 
 ShadowDocker::ShadowDocker()
-: d( new Private() )
+    : m_widget(0),
+    m_canvas(0)
 {
-    setWindowTitle( i18n( "Shadow Properties" ) );
+    setWindowTitle(i18n("Shadow Properties"));
 
-    QWidget * mainWidget = new QWidget(this);
-    d->layout = new QGridLayout(mainWidget);
+    QWidget *mainWidget = new QWidget(this);
+    m_layout = new QGridLayout(mainWidget);
 
-    d->widget = new KoShadowConfigWidget(mainWidget);
-    d->widget->setEnabled( false );
-    d->layout->addWidget(d->widget, 0, 0);
+    m_widget = new KoShadowConfigWidget(mainWidget);
+    m_widget->setEnabled( false );
+    m_layout->addWidget(m_widget, 0, 0);
 
-    d->spacer = new QSpacerItem(0, 0, QSizePolicy::Fixed, QSizePolicy::Fixed);
-    d->layout->addItem(d->spacer, 1, 1);
+    m_spacer = new QSpacerItem(0, 0, QSizePolicy::Fixed, QSizePolicy::Fixed);
+    m_layout->addItem(m_spacer, 1, 1);
 
-    d->layout->setSizeConstraint(QLayout::SetMinAndMaxSize);
+    m_layout->setSizeConstraint(QLayout::SetMinAndMaxSize);
 
     setWidget( mainWidget );
 
-    connect( d->widget, SIGNAL(shadowColorChanged(const KoColor&)), this, SLOT(shadowChanged()));
-    connect( d->widget, SIGNAL(shadowOffsetChanged(const QPointF&)), this, SLOT(shadowChanged()));
-    connect( d->widget, SIGNAL(shadowVisibilityChanged(bool)), this, SLOT(shadowChanged()));
+    connect( m_widget, SIGNAL(shadowColorChanged(const KoColor&)), this, SLOT(shadowChanged()));
+    connect( m_widget, SIGNAL(shadowOffsetChanged(const QPointF&)), this, SLOT(shadowChanged()));
+    connect( m_widget, SIGNAL(shadowVisibilityChanged(bool)), this, SLOT(shadowChanged()));
     connect(this, SIGNAL(dockLocationChanged(Qt::DockWidgetArea )),
              this, SLOT(locationChanged(Qt::DockWidgetArea)));
 }
 
 ShadowDocker::~ShadowDocker()
 {
-    delete d;
 }
 
 void ShadowDocker::selectionChanged()
 {
-    if ( ! d->canvas )
+    if (!m_canvas)
         return;
 
-    KSelection *selection = d->canvas->shapeManager()->selection();
+    KSelection *selection = m_canvas->shapeManager()->selection();
     KShape * shape = selection->firstSelectedShape();
-    d->widget->setEnabled( shape != 0 );
+    m_widget->setEnabled( shape != 0 );
 
     if ( ! shape )
     {
-        d->widget->setShadowVisible( false );
+        m_widget->setShadowVisible( false );
         return;
     }
     KShapeShadow * shadow = shape->shadow();
     if ( ! shadow )
     {
-        d->widget->setShadowVisible( false );
+        m_widget->setShadowVisible( false );
         return;
     }
 
-    d->widget->setShadowVisible( shadow->isVisible() );
-    d->widget->setShadowOffset( shadow->offset() );
-    d->widget->setShadowColor( shadow->color() );
+    m_widget->setShadowVisible( shadow->isVisible() );
+    m_widget->setShadowOffset( shadow->offset() );
+    m_widget->setShadowColor( shadow->color() );
 }
 
 void ShadowDocker::setCanvas( KCanvasBase *canvas )
 {
-    d->canvas = canvas;
+    m_canvas = canvas;
     if ( canvas )
     {
         connect( canvas->shapeManager(), SIGNAL( selectionChanged() ),
             this, SLOT( selectionChanged() ) );
         connect( canvas->shapeManager(), SIGNAL( selectionContentChanged() ),
             this, SLOT( selectionChanged() ) );
-        d->widget->setUnit( canvas->unit() );
+        m_widget->setUnit( canvas->unit() );
     }
 }
 
 void ShadowDocker::shadowChanged()
 {
-    KSelection *selection = d->canvas->shapeManager()->selection();
+    KSelection *selection = m_canvas->shapeManager()->selection();
     KShape * shape = selection->firstSelectedShape();
     if ( ! shape )
         return;
 
     KShapeShadow * newShadow = new KShapeShadow();
-    newShadow->setVisible(d->widget->shadowVisible());
-    newShadow->setColor( d->widget->shadowColor() );
-    newShadow->setOffset( d->widget->shadowOffset() );
-    d->canvas->addCommand( new KShapeShadowCommand( selection->selectedShapes(), newShadow ) );
+    newShadow->setVisible(m_widget->shadowVisible());
+    newShadow->setColor( m_widget->shadowColor() );
+    newShadow->setOffset( m_widget->shadowOffset() );
+    m_canvas->addCommand( new KShapeShadowCommand( selection->selectedShapes(), newShadow ) );
 }
 
 void ShadowDocker::locationChanged(Qt::DockWidgetArea area)
@@ -132,17 +115,17 @@ void ShadowDocker::locationChanged(Qt::DockWidgetArea area)
     switch(area) {
         case Qt::TopDockWidgetArea:
         case Qt::BottomDockWidgetArea:
-            d->spacer->changeSize(0, 0, QSizePolicy::Fixed, QSizePolicy::MinimumExpanding);
+            m_spacer->changeSize(0, 0, QSizePolicy::Fixed, QSizePolicy::MinimumExpanding);
             break;
         case Qt::LeftDockWidgetArea:
         case Qt::RightDockWidgetArea:
-            d->spacer->changeSize(0, 0, QSizePolicy::MinimumExpanding, QSizePolicy::Fixed);
+            m_spacer->changeSize(0, 0, QSizePolicy::MinimumExpanding, QSizePolicy::Fixed);
             break;
         default:
             break;
     }
-    d->layout->setSizeConstraint(QLayout::SetMinAndMaxSize);
-    d->layout->invalidate();
+    m_layout->setSizeConstraint(QLayout::SetMinAndMaxSize);
+    m_layout->invalidate();
 }
 
 #include <ShadowDocker.moc>
