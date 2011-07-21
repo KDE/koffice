@@ -36,7 +36,7 @@ ShadowDocker::ShadowDocker()
     m_layout = new QGridLayout(mainWidget);
 
     m_widget = new KoShadowConfigWidget(mainWidget);
-    m_widget->setEnabled( false );
+    m_widget->setEnabled(false);
     m_layout->addWidget(m_widget, 0, 0);
 
     m_spacer = new QSpacerItem(0, 0, QSizePolicy::Fixed, QSizePolicy::Fixed);
@@ -44,12 +44,12 @@ ShadowDocker::ShadowDocker()
 
     m_layout->setSizeConstraint(QLayout::SetMinAndMaxSize);
 
-    setWidget( mainWidget );
+    setWidget(mainWidget);
 
-    connect( m_widget, SIGNAL(shadowColorChanged(const KoColor&)), this, SLOT(shadowChanged()));
-    connect( m_widget, SIGNAL(shadowOffsetChanged(const QPointF&)), this, SLOT(shadowChanged()));
-    connect( m_widget, SIGNAL(shadowVisibilityChanged(bool)), this, SLOT(shadowChanged()));
-    connect(this, SIGNAL(dockLocationChanged(Qt::DockWidgetArea )),
+    connect(m_widget, SIGNAL(shadowColorChanged(const KoColor&)), this, SLOT(shadowChanged()));
+    connect(m_widget, SIGNAL(shadowOffsetChanged(const QPointF&)), this, SLOT(shadowChanged()));
+    connect(m_widget, SIGNAL(shadowVisibilityChanged(bool)), this, SLOT(shadowChanged()));
+    connect(this, SIGNAL(dockLocationChanged(Qt::DockWidgetArea)),
              this, SLOT(locationChanged(Qt::DockWidgetArea)));
 }
 
@@ -63,66 +63,63 @@ void ShadowDocker::selectionChanged()
         return;
 
     KSelection *selection = m_canvas->shapeManager()->selection();
-    KShape * shape = selection->firstSelectedShape();
-    m_widget->setEnabled( shape != 0 );
+    KShape *shape = selection->firstSelectedShape();
+    m_widget->setEnabled(shape != 0);
 
-    if ( ! shape )
-    {
-        m_widget->setShadowVisible( false );
+    if (! shape) {
+        m_widget->setShadowVisible(false);
         return;
     }
-    KShapeShadow * shadow = shape->shadow();
-    if ( ! shadow )
-    {
-        m_widget->setShadowVisible( false );
+    KShapeShadow *shadow = shape->shadow();
+    if (! shadow) {
+        m_widget->setShadowVisible(false);
         return;
     }
 
-    m_widget->setShadowVisible( shadow->isVisible() );
-    m_widget->setShadowOffset( shadow->offset() );
-    m_widget->setShadowColor( shadow->color() );
+    m_widget->setShadowVisible(shadow->isVisible());
+    m_widget->setShadowOffset(shadow->offset());
+    m_widget->setShadowColor(shadow->color());
 }
 
-void ShadowDocker::setCanvas( KCanvasBase *canvas )
+void ShadowDocker::setCanvas(KCanvasBase *canvas)
 {
     m_canvas = canvas;
-    if ( canvas )
-    {
-        connect( canvas->shapeManager(), SIGNAL( selectionChanged() ),
-            this, SLOT( selectionChanged() ) );
-        connect( canvas->shapeManager(), SIGNAL( selectionContentChanged() ),
-            this, SLOT( selectionChanged() ) );
-        m_widget->setUnit( canvas->unit() );
+    if (canvas) {
+        connect(canvas->shapeManager(), SIGNAL(selectionChanged()),
+            this, SLOT(selectionChanged()));
+        connect(canvas->shapeManager(), SIGNAL(selectionContentChanged()),
+            this, SLOT(selectionChanged()));
+        m_widget->setUnit(canvas->unit());
     }
 }
 
 void ShadowDocker::shadowChanged()
 {
     KSelection *selection = m_canvas->shapeManager()->selection();
-    KShape * shape = selection->firstSelectedShape();
-    if ( ! shape )
+    KShape *shape = selection->firstSelectedShape();
+    if (! shape)
         return;
 
-    KShapeShadow * newShadow = new KShapeShadow();
+    KShapeShadow *newShadow = new KShapeShadow();
     newShadow->setVisible(m_widget->shadowVisible());
-    newShadow->setColor( m_widget->shadowColor() );
-    newShadow->setOffset( m_widget->shadowOffset() );
-    m_canvas->addCommand( new KShapeShadowCommand( selection->selectedShapes(), newShadow ) );
+    newShadow->setColor(m_widget->shadowColor());
+    newShadow->setOffset(m_widget->shadowOffset());
+    m_canvas->addCommand(new KShapeShadowCommand(selection->selectedShapes(), newShadow));
 }
 
 void ShadowDocker::locationChanged(Qt::DockWidgetArea area)
 {
     switch(area) {
-        case Qt::TopDockWidgetArea:
-        case Qt::BottomDockWidgetArea:
-            m_spacer->changeSize(0, 0, QSizePolicy::Fixed, QSizePolicy::MinimumExpanding);
-            break;
-        case Qt::LeftDockWidgetArea:
-        case Qt::RightDockWidgetArea:
-            m_spacer->changeSize(0, 0, QSizePolicy::MinimumExpanding, QSizePolicy::Fixed);
-            break;
-        default:
-            break;
+    case Qt::TopDockWidgetArea:
+    case Qt::BottomDockWidgetArea:
+        m_spacer->changeSize(0, 0, QSizePolicy::Fixed, QSizePolicy::MinimumExpanding);
+        break;
+    case Qt::LeftDockWidgetArea:
+    case Qt::RightDockWidgetArea:
+        m_spacer->changeSize(0, 0, QSizePolicy::MinimumExpanding, QSizePolicy::Fixed);
+        break;
+    default:
+        break;
     }
     m_layout->setSizeConstraint(QLayout::SetMinAndMaxSize);
     m_layout->invalidate();
