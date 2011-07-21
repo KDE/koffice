@@ -323,9 +323,8 @@ void TableShape::setVisibleCellRange(const QRect& cellRange)
     d->sheetView->setPaintCellRange(cellRange & QRect(1, 1, d->columns, d->rows));
 }
 
-void TableShape::shapeChanged(ChangeType type, KShape *shape)
+void TableShape::shapeChanged(ChangeType type)
 {
-    Q_UNUSED(shape);
     // If this is a master table shape, the parent changed and we have no parent yet...
     if (d->isMaster && type == ParentChanged && !d->pageManager) {
         d->pageManager = new TablePageManager(this);
