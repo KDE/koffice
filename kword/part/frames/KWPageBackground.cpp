@@ -18,7 +18,7 @@
 */
 
 #include "KWPageBackground.h"
-#include <KShapeBackground.h>
+#include <KShapeBackgroundBase.h>
 
 KWPageBackground::KWPageBackground()
 {

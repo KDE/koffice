@@ -29,7 +29,7 @@
 #include "KPointerEvent.h"
 #include "KInsets.h"
 #include "KShapeBorderBase.h"
-#include "KShapeBackground.h"
+#include "KShapeBackgroundBase.h"
 #include "KColorBackground.h"
 #include "KGradientBackground.h"
 #include "KPatternBackground.h"
@@ -775,7 +775,7 @@ QSet<KEventAction *> KShape::eventActions() const
     return d->eventActions;
 }
 
-void KShape::setBackground(KShapeBackground *fill)
+void KShape::setBackground(KShapeBackgroundBase *fill)
 {
     Q_D(KShape);
     if (d->fill)
@@ -786,7 +786,7 @@ void KShape::setBackground(KShapeBackground *fill)
     d->shapeChanged(BackgroundChanged);
 }
 
-KShapeBackground * KShape::background() const
+KShapeBackgroundBase * KShape::background() const
 {
     Q_D(const KShape);
     return d->fill;
@@ -1038,7 +1038,7 @@ QString KShape::saveStyle(KOdfGenericStyle &style, KShapeSavingContext &context)
     if (s)
         s->fillStyle(style, context);
 
-    KShapeBackground *bg = background();
+    KShapeBackgroundBase *bg = background();
     if (bg) {
         bg->fillStyle(style, context);
     }
@@ -1211,11 +1211,11 @@ bool KShape::loadOdfAttributes(const KXmlElement &element, KShapeLoadingContext 
     return true;
 }
 
-KShapeBackground *KShape::loadOdfFill(KShapeLoadingContext &context) const
+KShapeBackgroundBase *KShape::loadOdfFill(KShapeLoadingContext &context) const
 {
     KOdfStyleStack &styleStack = context.odfLoadingContext().styleStack();
     QString fill = styleStack.property(KOdfXmlNS::draw, "fill");
-    KShapeBackground *bg = 0;
+    KShapeBackgroundBase *bg = 0;
     if (fill == "solid" || fill == "hatch") {
         bg = new KColorBackground();
     } else if (fill == "gradient") {

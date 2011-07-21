@@ -18,7 +18,7 @@
  */
 
 #include "KGradientBackground.h"
-#include "KShapeBackground_p.h"
+#include "KShapeBackgroundBase_p.h"
 #include "KoFlake.h"
 #include <KOdfStyleStack.h>
 #include <KOdfXmlNS.h>
@@ -31,7 +31,7 @@
 #include <QtGui/QBrush>
 #include <QtGui/QPainter>
 
-class KGradientBackgroundPrivate : public KShapeBackgroundPrivate
+class KGradientBackgroundPrivate : public KShapeBackgroundBasePrivate
 {
 public:
     KGradientBackgroundPrivate() : gradient(0) {};
@@ -44,7 +44,7 @@ public:
 };
 
 KGradientBackground::KGradientBackground(QGradient *gradient, const QTransform &matrix)
-    : KShapeBackground(*(new KGradientBackgroundPrivate()))
+    : KShapeBackgroundBase(*(new KGradientBackgroundPrivate()))
 {
     Q_D(KGradientBackground);
     d->gradient = gradient;
@@ -54,7 +54,7 @@ KGradientBackground::KGradientBackground(QGradient *gradient, const QTransform &
 }
 
 KGradientBackground::KGradientBackground(const QGradient &gradient, const QTransform &matrix)
-    : KShapeBackground(*(new KGradientBackgroundPrivate()))
+    : KShapeBackgroundBase(*(new KGradientBackgroundPrivate()))
 {
     Q_D(KGradientBackground);
     d->gradient = KoFlake::cloneGradient(&gradient);

@@ -29,7 +29,7 @@
 #include "KShapeSavingContext.h"
 #include "KShapeLoadingContext.h"
 #include "KShapeShadow.h"
-#include "KShapeBackground.h"
+#include "KShapeBackgroundBase.h"
 #include "KShapeContainer.h"
 #include "KFilterEffectStack.h"
 #include "KTextOnShapeContainer.h"

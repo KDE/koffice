@@ -34,10 +34,10 @@
 
 #include <QtCore/QAtomicInt>
 
-class KShapeBackgroundPrivate
+class KShapeBackgroundBasePrivate
 {
 public:
-    KShapeBackgroundPrivate();
+    KShapeBackgroundBasePrivate();
     QAtomicInt refCount;
 };
 

@@ -27,7 +27,7 @@
 
 class KShape;
 class QGradient;
-class KShapeBackground;
+class KShapeBackgroundBase;
 
 /**
  * Flake reference

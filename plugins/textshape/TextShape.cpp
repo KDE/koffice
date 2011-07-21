@@ -42,7 +42,6 @@ struct Finalizer {
 };
 
 #include "Layout.h"
-//#include "TextLayerShape.h"
 
 #include <KCanvasBase.h>
 #include <KResourceManager.h>
@@ -53,7 +52,7 @@ struct Finalizer {
 #include <KParagraphStyle.h>
 #include <KPostscriptPaintDevice.h>
 #include <KSelection.h>
-#include <KShapeBackground.h>
+#include <KShapeBackgroundBase.h>
 #include <KShapeLoadingContext.h>
 #include <KShapeManager.h>
 #include <KShapeSavingContext.h>

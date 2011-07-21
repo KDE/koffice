@@ -1,5 +1,6 @@
 /* This file is part of the KDE project
  * Copyright (C) 2008 Jan Hambrecht <jaham@gmx.net>
+ * Copyright (C) 2011 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -17,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KSHAPEBACKGROUND_H
-#define KSHAPEBACKGROUND_H
+#ifndef KSHAPEBACKGROUNDBASE_H
+#define KSHAPEBACKGROUNDBASE_H
 
 #include "flake_export.h"
 
@@ -28,18 +29,18 @@ class QPainterPath;
 class KOdfGenericStyle;
 class KShapeSavingContext;
 class KOdfLoadingContext;
-class KShapeBackgroundPrivate;
+class KShapeBackgroundBasePrivate;
 
 /**
  * This is the base class for shape backgrounds.
  * Derived classes are used to paint the background of
  * a shape within a given painter path.
  */
-class FLAKE_EXPORT KShapeBackground
+class FLAKE_EXPORT KShapeBackgroundBase
 {
 public:
-    KShapeBackground();
-    virtual ~KShapeBackground();
+    KShapeBackgroundBase();
+    virtual ~KShapeBackgroundBase();
 
     /// Paints the background using the given fill path
     virtual void paint(QPainter &painter, const QPainterPath &fillPath) const = 0;
@@ -71,11 +72,11 @@ public:
     int useCount() const;
 
 protected:
-    KShapeBackground(KShapeBackgroundPrivate &);
-    KShapeBackgroundPrivate *d_ptr;
+    KShapeBackgroundBase(KShapeBackgroundBasePrivate &);
+    KShapeBackgroundBasePrivate *d_ptr;
 
 private:
-    Q_DECLARE_PRIVATE(KShapeBackground)
+    Q_DECLARE_PRIVATE(KShapeBackgroundBase)
 };
 
-#endif // KOSHAPEBACKGROUND_H
+#endif

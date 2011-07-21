@@ -61,7 +61,7 @@ public:
             delete m_fill;
     }
 
-    void setFill(KShapeBackground * fill) {
+    void setFill(KShapeBackgroundBase * fill) {
         if (fill != m_fill) {
             if (m_fill && !m_fill->deref())
                 delete m_fill;
@@ -109,7 +109,7 @@ protected:
     }
 
 private:
-    KShapeBackground * m_fill; ///< the fill to preview
+    KShapeBackgroundBase * m_fill; ///< the fill to preview
     KoCheckerBoardPainter m_checkerPainter;
 };
 

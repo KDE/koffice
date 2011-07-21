@@ -52,7 +52,7 @@ namespace KoCanvasResource
  */
 enum CanvasResource {
     ForegroundColor,    ///< The active forground color selected for this canvas.
-    BackgroundColor,    ///< The active background (KShapeBackground) selected for this canvas.
+    BackgroundColor,    ///< The active background (KShapeBackgroundBase) selected for this canvas.
     HandleRadius,       ///< The handle radius (in pixels) used for drawing handles of any kind
     GrabSensitivity,    ///< The grab sensitivity (in pixels) used for grabbing handles of any kind
     PageSize,           ///< The size of the (current) page in postscript points (QSizeF).

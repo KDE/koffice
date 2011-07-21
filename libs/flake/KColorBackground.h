@@ -20,14 +20,14 @@
 #ifndef KCOLORBACKGROUND_H
 #define KCOLORBACKGROUND_H
 
-#include "KShapeBackground.h"
+#include "KShapeBackgroundBase.h"
 #include "flake_export.h"
 #include <Qt>
 
 class QColor;
 
 /// A simple solid color shape background
-class FLAKE_EXPORT KColorBackground : public KShapeBackground
+class FLAKE_EXPORT KColorBackground : public KShapeBackgroundBase
 {
 public:
     KColorBackground();
@@ -46,11 +46,11 @@ public:
     /// Returns the background style
     Qt::BrushStyle style() const;
 
-    // reimplemented from KShapeBackground
+    // reimplemented from KShapeBackgroundBase
     virtual void paint(QPainter &painter, const QPainterPath &fillPath) const;
-    // reimplemented from KShapeBackground
+    // reimplemented from KShapeBackgroundBase
     virtual void fillStyle(KOdfGenericStyle &style, KShapeSavingContext &context);
-    // reimplemented from KShapeBackground
+    // reimplemented from KShapeBackgroundBase
     virtual bool loadStyle(KOdfLoadingContext & context, const QSizeF &shapeSize);
 
 private:
