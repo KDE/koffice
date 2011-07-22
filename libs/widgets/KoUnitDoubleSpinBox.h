@@ -57,11 +57,11 @@ public:
      * @param newValue the new value
      * @see value()
      */
-    virtual void changeValue(double newValue);
+    void changeValue(double newValue);
     /**
      * This spinbox shows the internal value after a conversion to the unit set here.
      */
-    virtual void setUnit(KUnit);
+    void setUnit(const KUnit &unit);
 
     /// @return the current value, converted in points
     double value() const;
@@ -92,10 +92,10 @@ public:
     virtual QString textFromValue(double value) const;
     /**
      * Transfrom a string into a double, while taking care of locale specific symbols.
-     * @param str the string to transform into a number
+     * @param text the string to transform into a number
      * @return the value as double
      */
-    virtual double valueFromText(const QString& str) const;
+    virtual double valueFromText(const QString &text) const;
 
 
 signals:
