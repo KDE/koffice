@@ -31,7 +31,7 @@
 #include <QSharedDataPointer>
 
 class KWPageStylePrivate;
-class KShapeBackground;
+class KShapeBackgroundBase;
 class KOdfLoadingContext;
 
 /**
@@ -225,10 +225,10 @@ public:
     void setDirection(KoText::Direction direction);
 
     /// Get the background.
-    KShapeBackground *background() const;
+    KShapeBackgroundBase *background() const;
 
     /// set the background/
-    void setBackground(KShapeBackground *background);
+    void setBackground(KShapeBackgroundBase *background);
 
     /// get the next page master style/
     QString nextStyleName() const;

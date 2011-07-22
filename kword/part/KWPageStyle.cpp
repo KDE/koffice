@@ -281,12 +281,12 @@ QString KWPageStyle::name() const
     return d->name;
 }
 
-KShapeBackground *KWPageStyle::background() const
+KShapeBackgroundBase *KWPageStyle::background() const
 {
     return d->fullPageBackground;
 }
 
-void KWPageStyle::setBackground(KShapeBackground *background)
+void KWPageStyle::setBackground(KShapeBackgroundBase *background)
 {
     if (d->fullPageBackground) {
         if (!d->fullPageBackground->deref())

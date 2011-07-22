@@ -41,7 +41,7 @@ class QPainterPath;
 
 class KShapeContainer;
 class KShapeBorderBase;
-class KShapeBackground;
+class KShapeBackgroundBase;
 class KShapeManager;
 class KShapeUserData;
 class KViewConverter;
@@ -342,7 +342,7 @@ public:
      * if it is transparent or not.
      * @param background the new shape background.
      */
-    void setBackground(KShapeBackground *background);
+    void setBackground(KShapeBackgroundBase *background);
 
     /**
      * return the brush used to paint te background of this shape with.
@@ -351,7 +351,7 @@ public:
      * will be able to tell if its transparent or not.
      * @return the background-brush
      */
-    KShapeBackground *background() const;
+    KShapeBackgroundBase *background() const;
 
     /**
      * Returns true if there is some transparency, false if the shape is fully opaque.
@@ -625,7 +625,7 @@ public:
 
     /**
      * Return the Id of this shape, identifying the type of shape by the id of the factory.
-     * @see KShapeFactoryBase::shapeId()
+     * @see KShapeFactoryBase::id()
      * @return the id of the shape-type
      */
     QString shapeId() const;
@@ -633,8 +633,8 @@ public:
     /**
      * Set the Id of this shape.  A shapeFactory is expected to set the Id at creation
      * so applications can find out what kind of shape this is.
-     * @see KShapeFactoryBase::shapeId()
-     * @param id the ID from the factory that created this shape
+     * @see KShapeFactoryBase::id()
+     * @param id the identification from the factory that created this shape
      */
     void setShapeId(const QString &id);
 
@@ -982,7 +982,7 @@ protected:
     KShapeBorderBase *loadOdfStroke(const KXmlElement &element, KShapeLoadingContext &context) const;
 
     /// Loads the shadow style
-    KShapeBackground *loadOdfFill(KShapeLoadingContext &context) const;
+    KShapeBackgroundBase *loadOdfFill(KShapeLoadingContext &context) const;
 
     /* ** end loading saving */
 

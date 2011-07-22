@@ -81,7 +81,7 @@ public:
     QSet<KShape *> toolDelegates;
     KShapeUserData *userData;
     KShapeApplicationData *appData;
-    KShapeBackground * fill; ///< Stands for the background color / fill etc.
+    KShapeBackgroundBase * fill; ///< Stands for the background color / fill etc.
     KShapeBorderBase *border; ///< points to a border, or 0 if there is no border
     KShape *q_ptr;
     QSet<KShape*> observers; ///< set of shapes observing changes of this shape

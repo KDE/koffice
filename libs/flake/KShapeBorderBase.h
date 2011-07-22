@@ -56,6 +56,21 @@ public:
     virtual void saveOdf(KOdfGenericStyle &style, KShapeSavingContext &context) const = 0;
 
     /**
+     * Set the Id of this border.  A borderFactory is expected to set the Id at creation
+     * so applications can find out what kind of border this is.
+     * @see KShapeBorderFactoryBase::id()
+     * @param id the ID from the factory that created this shape
+     */
+    void setBorderId(const QString &id);
+
+    /**
+     * Return the Id of this border, identifying the type of border by the id of the factory.
+     * @see KShapeBorderFactoryBase::id()
+     * @return the id of the shape-type
+     */
+    QString borderId() const;
+
+    /**
      * Return a borderInsets object filled with the size inside the shape that this border takes.
      * @param insets the insets object that will be filled and returned.
      */

@@ -72,7 +72,7 @@ set(flake_SRCS
     KShapeBorderRegistry.cpp
     KLineBorder.cpp
     KLineBorderFactory.cpp
-    KShapeBackground.cpp
+    KShapeBackgroundBase.cpp
     KColorBackground.cpp
     KGradientBackground.cpp
     KPatternBackground.cpp
@@ -266,7 +266,7 @@ install(
     KRTree.h
     KSelection.h
     KShapeApplicationData.h
-    KShapeBackground.h
+    KShapeBackgroundBase.h
     KShapeBorderBase.h
     KShapeBorderFactoryBase.h
     KShapeBorderRegistry.h

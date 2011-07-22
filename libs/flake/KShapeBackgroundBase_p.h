@@ -1,6 +1,5 @@
-/**
- * Copyright (c) 2006 Casper Boemann (cbr@boemann.dk)
- * Copyright (c) 2009 Thomas Zander <zander@kde.org>
+/* This file is part of the KDE project
+ * Copyright (C) 2008 Jan Hambrecht <jaham@gmx.net>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -16,38 +15,30 @@
  * along with this library; see the file COPYING.LIB.  If not, write to
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
-*/
+ */
 
-#include "KoUniColorDialog.h"
-#include <KDE/KLocale>
-#include "KoUniColorChooser.h"
+#ifndef KSHAPEBACKGROUND_P_H
+#define KSHAPEBACKGROUND_P_H
 
-class KoUniColorDialogPrivate
+//
+//  W A R N I N G
+//  -------------
+//
+// This file is not part of the Flake API.  It exists purely as an
+// implementation detail.  This header file may change from version to
+// version without notice, or even be removed.
+//
+// We mean it.
+//
+
+
+#include <QtCore/QAtomicInt>
+
+class KShapeBackgroundBasePrivate
 {
 public:
-    KoUniColorDialogPrivate() : chooser(0) {}
-    KoUniColorChooser *chooser;
+    KShapeBackgroundBasePrivate();
+    QAtomicInt refCount;
 };
 
-KoUniColorDialog::KoUniColorDialog(KoColor &initialColor, QWidget *parent)
-    : KPageDialog(parent),
-    d(new KoUniColorDialogPrivate())
-{
-    setFaceType(Plain);
-
-    d->chooser = new KoUniColorChooser();
-    d->chooser->setColor(initialColor);
-    addPage(d->chooser, i18n("Color Selector"));
-}
-
-KoUniColorDialog::~KoUniColorDialog()
-{
-   delete d;
-}
-
-KoColor KoUniColorDialog::color() const
-{
-    return d->chooser->color();
-}
-
-#include <KoUniColorDialog.moc>
+#endif

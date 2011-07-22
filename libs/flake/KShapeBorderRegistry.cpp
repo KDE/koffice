@@ -17,8 +17,9 @@
  * Boston, MA 02110-1301, USA.
  */
 #include "KShapeBorderRegistry.h"
-#include <KoPluginLoader.h>
+#include "KLineBorderFactory_p.h"
 
+#include <KoPluginLoader.h>
 #include <KGlobal>
 
 KShapeBorderRegistry::KShapeBorderRegistry()
@@ -35,9 +36,8 @@ void KShapeBorderRegistry::init()
                                      config);
 
     // Also add our hard-coded basic border
-    // add(new KPathShapeFactory(this, QStringList()));  TODO
+    add(new KLineBorderFactory(this));
 }
-
 
 KShapeBorderRegistry::~KShapeBorderRegistry()
 {

@@ -593,6 +593,18 @@ void KToolManager::Private::currentLayerChanged(const KShapeLayer *layer)
 {
     kDebug(30006) << "layer changed to" << layer;
 
+    /*
+      This method implements a feature of locked layers.
+      Essentially it disables all tools from doing anything on a layer that is either not editable or
+      not visible.
+      While this is a great feature, it makes parts of koffice unuasable due to the fact that all apps
+      support layers (due to it being part of Flake and ODF) but not all apps can handle them.
+      So you can end up in a situation where showcase or kword has shapes that are uneditable and
+      there is no GUI to show why and no GUI to fix the situation.
+      So disabling this feature until we solve this usability bug.
+    */
+return;
+
     emit q->currentLayerChanged(canvasData->canvas, layer);
     layerEnabled = layer == 0 || (layer->isEditable() && layer->isVisible());
 

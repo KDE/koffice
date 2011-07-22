@@ -23,8 +23,15 @@
 class KShapeBorderFactoryBase::Private
 {
 public:
-    Private(const QString &i) : id(i) { }
+    Private(const QString &i)
+        : id(i),
+        penStrokeConfigurable(false)
+    {
+    }
+
     const QString id;
+
+    bool penStrokeConfigurable;
 };
 
 KShapeBorderFactoryBase::KShapeBorderFactoryBase(QObject *parent, const QString &id)
@@ -41,6 +48,16 @@ KShapeBorderFactoryBase::~KShapeBorderFactoryBase()
 QString KShapeBorderFactoryBase::id() const
 {
     return d->id;
+}
+
+bool KShapeBorderFactoryBase::penStrokeConfigurable() const
+{
+    return d->penStrokeConfigurable;
+}
+
+void KShapeBorderFactoryBase::setPenStrokeConfigurable(bool on)
+{
+    d->penStrokeConfigurable = on;
 }
 
 #include <KShapeBorderFactoryBase.moc>

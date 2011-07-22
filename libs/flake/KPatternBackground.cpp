@@ -18,7 +18,7 @@
  */
 
 #include "KPatternBackground.h"
-#include "KShapeBackground_p.h"
+#include "KShapeBackgroundBase_p.h"
 #include "KShapeSavingContext.h"
 #include "KImageData.h"
 #include "KImageCollection.h"
@@ -37,7 +37,7 @@
 #include <QtGui/QBrush>
 #include <QtGui/QPainter>
 
-class KPatternBackgroundPrivate : public KShapeBackgroundPrivate
+class KPatternBackgroundPrivate : public KShapeBackgroundBasePrivate
 {
 public:
     KPatternBackgroundPrivate()
@@ -131,7 +131,7 @@ public:
 
 
 KPatternBackground::KPatternBackground(KImageCollection * imageCollection)
-        : KShapeBackground(*(new KPatternBackgroundPrivate()))
+        : KShapeBackgroundBase(*(new KPatternBackgroundPrivate()))
 {
     Q_D(KPatternBackground);
     d->imageCollection = imageCollection;

@@ -22,7 +22,7 @@
 #include <QSharedData>
 #include <KInsets.h>
 #include <KoText.h>
-#include <KShapeBackground.h>
+#include <KShapeBackgroundBase.h>
 
 class KWPageStylePrivate : public QSharedData
 {
@@ -50,7 +50,7 @@ public:
 
     // See parag 16.2 for all the ODF features.
     KoText::Direction direction;
-    KShapeBackground *fullPageBackground;
+    KShapeBackgroundBase *fullPageBackground;
     QString nextStyleName;
 
     // called from the command

@@ -17,47 +17,47 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KShapeBackground.h"
-#include "KShapeBackground_p.h"
+#include "KShapeBackgroundBase.h"
+#include "KShapeBackgroundBase_p.h"
 
-KShapeBackgroundPrivate::KShapeBackgroundPrivate()
+KShapeBackgroundBasePrivate::KShapeBackgroundBasePrivate()
     : refCount(0)
 {
 }
-KShapeBackground::KShapeBackground(KShapeBackgroundPrivate &dd)
+KShapeBackgroundBase::KShapeBackgroundBase(KShapeBackgroundBasePrivate &dd)
     :d_ptr(&dd)
 {
 }
 
-KShapeBackground::KShapeBackground()
-    : d_ptr(new KShapeBackgroundPrivate())
+KShapeBackgroundBase::KShapeBackgroundBase()
+    : d_ptr(new KShapeBackgroundBasePrivate())
 {
 }
 
-KShapeBackground::~KShapeBackground()
+KShapeBackgroundBase::~KShapeBackgroundBase()
 {
     delete d_ptr;
 }
 
-bool KShapeBackground::hasTransparency() const
+bool KShapeBackgroundBase::hasTransparency() const
 {
     return false;
 }
 
-bool KShapeBackground::ref()
+bool KShapeBackgroundBase::ref()
 {
-    Q_D(KShapeBackground);
+    Q_D(KShapeBackgroundBase);
     return d->refCount.ref();
 }
 
-bool KShapeBackground::deref()
+bool KShapeBackgroundBase::deref()
 {
-    Q_D(KShapeBackground);
+    Q_D(KShapeBackgroundBase);
     return d->refCount.deref();
 }
 
-int KShapeBackground::useCount() const
+int KShapeBackgroundBase::useCount() const
 {
-    Q_D(const KShapeBackground);
+    Q_D(const KShapeBackgroundBase);
     return d->refCount;
 }

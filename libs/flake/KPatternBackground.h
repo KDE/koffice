@@ -20,7 +20,7 @@
 #ifndef KPATTERNBACKGROUND_H
 #define KPATTERNBACKGROUND_H
 
-#include "KShapeBackground.h"
+#include "KShapeBackgroundBase.h"
 #include "flake_export.h"
 #include <QtGui/QTransform>
 
@@ -30,7 +30,7 @@ class KPatternBackgroundPrivate;
 class KImageData;
 
 /// A pattern shape background
-class FLAKE_EXPORT KPatternBackground : public KShapeBackground
+class FLAKE_EXPORT KPatternBackground : public KShapeBackgroundBase
 {
 public:
     /// Pattern rendering style
@@ -108,11 +108,11 @@ public:
     /// Assignment operator
     KPatternBackground& operator=(const KPatternBackground &other);
 
-    /// reimplemented from KShapeBackground
+    /// reimplemented from KShapeBackgroundBase
     virtual void paint(QPainter &painter, const QPainterPath &fillPath) const;
-    /// reimplemented from KShapeBackground
+    /// reimplemented from KShapeBackgroundBase
     virtual void fillStyle(KOdfGenericStyle &style, KShapeSavingContext &context);
-    /// reimplemented from KShapeBackground
+    /// reimplemented from KShapeBackgroundBase
     virtual bool loadStyle(KOdfLoadingContext &context, const QSizeF &shapeSize);
 
     /// Returns the bounding rect of the pattern image based on the given fill size

@@ -21,14 +21,18 @@
 #define SHADOWDOCKER_H
 
 #include <KCanvasObserverBase.h>
+#include <KShapeShadow.h>
+#include <KoShadowConfigWidget.h>
+
 #include <QtGui/QDockWidget>
+#include <QtGui/QSpacerItem>
+#include <QtGui/QGridLayout>
 
 
 /// A docker for setting properties of a shape shadow
 class ShadowDocker : public QDockWidget, public KCanvasObserverBase
 {
     Q_OBJECT
-
 public:
     /// Creates the shadow docker
     ShadowDocker();
@@ -45,8 +49,11 @@ private slots:
     void locationChanged(Qt::DockWidgetArea area);
 
 private:
-    class Private;
-    Private * const d;
+    KShapeShadow m_shadow;
+    KoShadowConfigWidget *m_widget;
+    KCanvasBase *m_canvas;
+    QSpacerItem *m_spacer;
+    QGridLayout *m_layout;
 };
 
 #endif // SHADOWDOCKER_H
