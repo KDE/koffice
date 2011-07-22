@@ -20,7 +20,7 @@
 #define CHANGE_CONFIGURE_DIALOG_H
 
 #include <QtGui/QLabel>
-#include <QtGui/QDialog>
+#include <KDE/KDialog>
 #include <KChangeTracker.h>
 
 class ColorDisplayLabel : public QLabel
@@ -38,7 +38,7 @@ private:
 
 #include <ui_ChangeConfigureDialog.h>
 
-class ChangeConfigureDialog:public QDialog
+class ChangeConfigureDialog:public KDialog
 {
     Q_OBJECT
 

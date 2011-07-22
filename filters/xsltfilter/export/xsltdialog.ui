@@ -81,7 +81,7 @@
                 <property name="spacing">
                     <number>6</number>
                 </property>
-                <widget class="QComboBox">
+                <widget class="KComboBox">
                     <property name="name">
                         <cstring>recentBox</cstring>
                     </property>

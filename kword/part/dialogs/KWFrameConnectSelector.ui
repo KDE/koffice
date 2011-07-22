@@ -24,7 +24,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="frameSetName"/>
+      <widget class="KLineEdit" name="frameSetName"/>
      </item>
     </layout>
    </item>

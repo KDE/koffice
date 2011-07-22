@@ -21,13 +21,13 @@
 #define KCELLSLATEXEXPORTDIAIMPL_H
 
 #include <ui_latexexportdia.h>
-#include <QStringList>
-#include <kurl.h>
+#include <QtCore/QStringList>
+#include <KDE/KUrl>
 
 class KOdfStore;
 class KConfig;
 
-class KCellsLatexExportDiaImpl : public QDialog, public Ui::LatexExportDia
+class KCellsLatexExportDiaImpl : public KDialog, public Ui::LatexExportDia
 {
     Q_OBJECT
 

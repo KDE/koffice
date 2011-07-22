@@ -117,7 +117,7 @@
           <number>6</number>
          </property>
          <item>
-          <widget class="QLineEdit" name="customString" />
+          <widget class="KLineEdit" name="customString" />
          </item>
          <item>
           <widget class="QToolButton" name="formatButton" >

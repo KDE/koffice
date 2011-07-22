@@ -17,19 +17,20 @@
  *  Boston, MA 02110-1301, USA.
  */
 
-#include <kapplication.h>
-#include <kcmdlineargs.h>
-#include <KOdfStore.h>
-#include <QStringList>
-#include <QBuffer>
-#include <QClipboard>
-#include <QTextBrowser>
-#include <QDragEnterEvent>
-#include <QDragMoveEvent>
-#include <QKeyEvent>
-#include <QDropEvent>
+#include <KDE/KApplication>
+#include <KDE/KCmdLineArgs>
+#include <KDE/KTextBrowser>
 
-class StoreDropTest : public QTextBrowser
+#include <KOdfStore.h>
+#include <QtCore/QStringList>
+#include <QtCore/QBuffer>
+#include <QtGui/QClipboard>
+#include <QtGui/QDragEnterEvent>
+#include <QtGui/QDragMoveEvent>
+#include <QtGui/QKeyEvent>
+#include <QtGui/QDropEvent>
+
+class StoreDropTest : public KTextBrowser
 {
 public:
     StoreDropTest(QWidget* parent);
@@ -60,7 +61,7 @@ int main(int argc, char** argv)
 }
 
 StoreDropTest::StoreDropTest(QWidget* parent)
-        : QTextBrowser(parent)
+        : KTextBrowser(parent)
 {
     setText("KOdfStore drop/paste test\nDrop or paste a selection from a KOffice application into this widget to see the ZIP contents");
     setAcceptDrops(true);
@@ -82,7 +83,7 @@ void StoreDropTest::keyPressEvent(QKeyEvent * e)
             ((e->modifiers() & Qt::ControlModifier) && e->key() == Qt::Key_V))
         paste();
     //else
-    //    QTextBrowser::keyPressEvent( e );
+    //    KTextBrowser::keyPressEvent( e );
 }
 
 void StoreDropTest::paste()

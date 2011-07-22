@@ -27,12 +27,12 @@
 #include <KParagraphStyle.h>
 #include <KCanvasBase.h>
 
-#include <KDebug>
-#include <KInputDialog>
-#include <QHeaderView>
-#include <QFormLayout>
-#include <QRadioButton>
-#include <QPointer>
+#include <KDE/KDebug>
+#include <KDE/KInputDialog>
+#include <QtGui/QHeaderView>
+#include <QtGui/QFormLayout>
+#include <QtGui/QRadioButton>
+#include <QtCore/QPointer>
 
 #define DEBUG_CHANGED
 
@@ -204,7 +204,7 @@ void StylesWidget::newStyleClicked()
     KDialog *dialog = new KDialog(this);
     QWidget *root = new QWidget(dialog);
     QFormLayout *lay = new QFormLayout(root);
-    QLineEdit *name = new QLineEdit(root);
+    KLineEdit *name = new KLineEdit(root);
     name->setText(i18n("new style"));
     lay->addRow(i18n("Name:"), name);
     QRadioButton *pr = new QRadioButton(i18n("Paragraph style"), root);

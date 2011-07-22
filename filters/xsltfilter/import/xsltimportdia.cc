@@ -22,20 +22,21 @@
 
 //#include <stdio.h>
 
-#include <QComboBox>
-#include <QCursor>
-#include <QStringList>
-#include <QDir>
-#include <QByteArray>
+#include <QtGui/QCursor>
+#include <QtCore/QStringList>
+#include <QtCore/QDir>
+#include <QtCore/QByteArray>
 
-#include <kapplication.h>
-#include <klocale.h>
-#include <kstandarddirs.h>
-#include <kglobal.h>
-#include <krecentdocument.h>
+#include <KDE/KComboBox>
+#include <KDE/KApplication>
+#include <KDE/KLocale>
+#include <KDE/KStandardDirs>
+#include <KDE/KGlobal>
+#include <KDE/KRecentDocument>
+#include <KDE/KTemporaryFile>
+#include <KDE/KDebug>
+
 #include <KoFilterManager.h>
-#include <ktemporaryfile.h>
-#include <kdebug.h>
 
 #include <xsltproc.h>
 

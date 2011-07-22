@@ -20,25 +20,24 @@
 
 #include <csvdialog.h>
 
-#include <q3table.h>
-#include <QCheckBox>
-#include <QCursor>
-#include <QLineEdit>
-#include <QComboBox>
-#include <QSpinBox>
-#include <QTextStream>
-#include <q3buttongroup.h>
-#include <QPushButton>
-#include <QRadioButton>
-#include <QTextCodec>
-#include <QApplication>
+#include <QtCore/QTextStream>
+#include <QtCore/QTextCodec>
+#include <QtGui/QCheckBox>
+#include <QtGui/QCursor>
+#include <QtGui/QLineEdit>
+#include <QtGui/QSpinBox>
+#include <QtGui/QPushButton>
+#include <QtGui/QRadioButton>
+#include <QtGui/QApplication>
+#include <Qt3Support/Q3Table>
+#include <Qt3Support/Q3ButtonGroup>
 
-#include <kdebug.h>
-#include <kglobal.h>
-#include <klocale.h>
-#include <kcombobox.h>
-#include <kmessagebox.h>
-#include <kcharsets.h>
+#include <KDE/KDebug>
+#include <KDE/KGlobal>
+#include <KDE/KLocale>
+#include <KDE/KComboBox>
+#include <KDE/KMessageBox>
+#include <KDE/KCharsets>
 
 CSVDialog::CSVDialog(QWidget* parent, QByteArray& fileArray, const QString /*separator*/)
         : KDialog(parent),

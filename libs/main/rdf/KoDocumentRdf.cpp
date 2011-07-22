@@ -41,11 +41,11 @@
 #include <KoBookmark.h>
 #include <KTextMeta.h>
 
-#include <kconfig.h>
-#include <kdebug.h>
-#include <kglobal.h>
-#include <klocale.h>
-#include <kuser.h>
+#include <KDE/KConfig>
+#include <KDE/KDebug>
+#include <KDE/KGlobal>
+#include <KDE/KLocale>
+#include <KDE/KUser>
 
 #ifdef DEBUG_RDF
 #define RDEBUG kDebug(30015)
@@ -113,7 +113,7 @@ KoRdfPrefixMapping *KoDocumentRdf::prefixMapping() const
  */
 Soprano::Node KoDocumentRdf::inlineRdfContext() const
 {
-    return Node(QUrl("http://www.koffice.org/Rdf/inline-rdf"));
+    return Node(KUrl("http://www.koffice.org/Rdf/inline-rdf"));
 }
 
 QString KoDocumentRdf::rdfInternalMetadataWithoutSubjectURI() const
@@ -128,7 +128,7 @@ QString KoDocumentRdf::rdfPathContextPrefix() const
 
 Soprano::Node KoDocumentRdf::manifestRdfNode() const
 {
-    return Node(QUrl(rdfPathContextPrefix() + "manifest.rdf"));
+    return Node(KUrl(rdfPathContextPrefix() + "manifest.rdf"));
 }
 
 void KoDocumentRdf::freshenBNodes(Soprano::Model *m)
@@ -195,8 +195,8 @@ bool KoDocumentRdf::loadRdf(KOdfStore *store, const Soprano::Parser *parser, con
         return false;
     }
     RDEBUG << "Loading external Rdf/XML from:" << fileName;
-    Soprano::Node context(QUrl(rdfPathContextPrefix() + fileName));
-    QUrl BaseURI = QUrl(QString());
+    Soprano::Node context(KUrl(rdfPathContextPrefix() + fileName));
+    KUrl BaseURI = KUrl(QString());
     QString rdfxmlData(store->device()->readAll());
     Soprano::StatementIterator it = parser->parseString(rdfxmlData, BaseURI,
                                     Soprano::SerializationRdfXml);
@@ -366,7 +366,7 @@ void KoDocumentRdf::updateXmlIdReferences(const QMap<QString, QString> &m)
     QList<Soprano::Statement> addList;
     StatementIterator it = d->model->listStatements(
                                Node(),
-                               Node(QUrl("http://docs.oasis-open.org/opendocument/meta/package/common#idref")),
+                               Node(KUrl("http://docs.oasis-open.org/opendocument/meta/package/common#idref")),
                                Node(),
                                Node());
     QList<Statement> allStatements = it.allElements();
@@ -692,8 +692,8 @@ Soprano::Statement KoDocumentRdf::toStatement(KTextInlineRdf *inlineRdf) const
     if (inlineRdf->predicate().isEmpty())  {
         return Soprano::Statement();
     }
-    Soprano::Node subj = Soprano::Node::createResourceNode(QUrl(inlineRdf->subject()));
-    Soprano::Node pred = Soprano::Node::createResourceNode(QUrl(inlineRdf->predicate()));
+    Soprano::Node subj = Soprano::Node::createResourceNode(KUrl(inlineRdf->subject()));
+    Soprano::Node pred = Soprano::Node::createResourceNode(KUrl(inlineRdf->predicate()));
     Soprano::Node obj;
     switch (inlineRdf->sopranoObjectType()) {
     case Node::ResourceNode:
@@ -797,8 +797,8 @@ void KoDocumentRdf::expandStatementsToIncludeRdfListsRecurse(Soprano::Model *mod
 {
     Q_ASSERT(model);
     Q_ASSERT(d->model);
-    Node rdfFirst = Node::createResourceNode(QUrl("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"));
-    Node rdfRest  = Node::createResourceNode(QUrl("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"));
+    Node rdfFirst = Node::createResourceNode(KUrl("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"));
+    Node rdfRest  = Node::createResourceNode(KUrl("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"));
     QList<Statement> all;
     all = d->model->listStatements(n, rdfFirst, Node()).allElements();
     addList << all;

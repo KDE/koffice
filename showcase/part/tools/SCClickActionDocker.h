@@ -25,7 +25,7 @@
 #include <QMap>
 #include <KCanvasObserverBase.h>
 
-class QComboBox;
+class KComboBox;
 class QUndoCommand;
 class KoPAViewBase;
 class KCanvasBase;
@@ -56,7 +56,7 @@ private:
     KoPAViewBase *m_view;
     SCSoundCollection *m_soundCollection;
     KCanvasBase *m_canvas;
-    QComboBox *m_cbPlaySound; // TODO remove when the embedded widgets are ok
+    KComboBox *m_cbPlaySound; // TODO remove when the embedded widgets are ok
     QMap<QString, QWidget *> m_eventActionWidgets;
 };
 

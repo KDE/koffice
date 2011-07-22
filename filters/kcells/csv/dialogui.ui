@@ -46,7 +46,7 @@
         </widget>
       </item>
       <item row="0" column="0" >
-        <widget class="QTabWidget" name="tabWidget2" >
+        <widget class="KTabWidget" name="tabWidget2" >
           <widget class="QWidget" name="TabPage" >
             <attribute name="title" >
               <string>Encoding</string>
@@ -186,7 +186,7 @@
                       </widget>
                     </item>
                     <item row="1" column="2" >
-                      <widget class="QLineEdit" name="m_delimiterEdit" >
+                      <widget class="KLineEdit" name="m_delimiterEdit" >
                         <property name="sizePolicy" >
                           <sizepolicy>
                             <hsizetype>0</hsizetype>
@@ -251,7 +251,7 @@
                 <widget class="KComboBox" name="m_formatComboBox" />
               </item>
               <item row="1" column="2" >
-                <widget class="QComboBox" name="m_comboQuote" >
+                <widget class="KComboBox" name="m_comboQuote" >
                   <property name="sizePolicy" >
                     <sizepolicy>
                       <hsizetype>1</hsizetype>
@@ -518,7 +518,7 @@
     <customwidgets>
     <customwidget>
       <class>KComboBox</class>
-      <extends>QComboBox</extends>
+      <extends>KComboBox</extends>
       <header>kcombobox.h</header>
     </customwidget>
   </customwidgets>

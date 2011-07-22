@@ -24,7 +24,7 @@
 
 class QScriptEngine;
 class QTextDocument;
-class QTextEdit;
+class KTextEdit;
 class QTextFragment;
 class QTextFrame;
 class QTextBlock;

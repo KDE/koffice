@@ -20,7 +20,6 @@
 
 #include "TestLoading.h"
 
-#include <QtGui/QTextEdit>
 #include <QtGui/QTextDocument>
 #include <QtGui/QApplication>
 #include <QtCore/QTextStream>
@@ -29,6 +28,7 @@
 #include <QtTest/QtTest>
 
 #include <KDE/KDebug>
+#include <KDE/KTextEdit>
 #include <KStyleManager.h>
 #include <KOdfStylesReader.h>
 #include <KOdfStore.h>
@@ -69,7 +69,7 @@ typedef KoText::Tab KoTextTab;
 
 static void showDocument(QTextDocument *document)
 {
-    QTextEdit *textEdit = new QTextEdit;
+    KTextEdit *textEdit = new KTextEdit;
     textEdit->setDocument(document);
     textEdit->show();
     qApp->exec();

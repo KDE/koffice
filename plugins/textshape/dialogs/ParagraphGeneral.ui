@@ -15,7 +15,7 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="QTabWidget" name="tabs">
+    <widget class="KTabWidget" name="tabs">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
        <horstretch>99</horstretch>
@@ -48,7 +48,7 @@
         </widget>
        </item>
        <item row="1" column="2">
-        <widget class="QLineEdit" name="name"/>
+        <widget class="KLineEdit" name="name"/>
        </item>
        <item row="2" column="0" colspan="2">
         <widget class="QLabel" name="label_2">
@@ -61,7 +61,7 @@
         </widget>
        </item>
        <item row="2" column="2">
-        <widget class="QComboBox" name="nextStyle"/>
+        <widget class="KComboBox" name="nextStyle"/>
        </item>
        <item row="3" column="0" colspan="2">
         <widget class="QLabel" name="label_3">
@@ -74,7 +74,7 @@
         </widget>
        </item>
        <item row="3" column="2">
-        <widget class="QComboBox" name="inheritStyle"/>
+        <widget class="KComboBox" name="inheritStyle"/>
        </item>
        <item row="4" column="0" colspan="3">
         <widget class="QCheckBox" name="useCharacterStyle">
@@ -110,7 +110,7 @@
         </widget>
        </item>
        <item row="5" column="2">
-        <widget class="QComboBox" name="characterStyle"/>
+        <widget class="KComboBox" name="characterStyle"/>
        </item>
        <item row="6" column="0" colspan="3">
         <widget class="QCheckBox" name="inToc">

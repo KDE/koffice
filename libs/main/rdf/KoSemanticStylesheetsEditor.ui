@@ -18,7 +18,7 @@
      </property>
      <layout class="QGridLayout" name="gridLayout_2">
       <item row="0" column="0">
-       <widget class="QTextEdit" name="definition"/>
+       <widget class="KTextEdit" name="definition"/>
       </item>
      </layout>
     </widget>

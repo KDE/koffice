@@ -22,10 +22,10 @@
 #include "KTextDocument.h"
 #include <QTextDocument>
 #include <QTextCursor>
-#include <QUrl>
 #include <QVariant>
 
-#include <kdebug.h>
+#include <KDE/KDebug>
+#include <KDE/KUrl>
 
 #include "KoTextEditor.h"
 #include "styles/KStyleManager.h"
@@ -36,13 +36,13 @@
 #include "KoList.h"
 #include <KUndoStack>
 
-const QUrl KTextDocument::StyleManagerURL = QUrl("kotext://stylemanager");
-const QUrl KTextDocument::ListsURL = QUrl("kotext://lists");
-const QUrl KTextDocument::InlineObjectTextManagerURL = QUrl("kotext://inlineObjectTextManager");
-const QUrl KTextDocument::UndoStackURL = QUrl("kotext://undoStack");
-const QUrl KTextDocument::ChangeTrackerURL = QUrl("kotext://changetracker");
-const QUrl KTextDocument::TextEditorURL = QUrl("kotext://textEditor");
-const QUrl KTextDocument::HeadingListURL = QUrl("kotext://headingList");
+const KUrl KTextDocument::StyleManagerURL = KUrl("kotext://stylemanager");
+const KUrl KTextDocument::ListsURL = KUrl("kotext://lists");
+const KUrl KTextDocument::InlineObjectTextManagerURL = KUrl("kotext://inlineObjectTextManager");
+const KUrl KTextDocument::UndoStackURL = KUrl("kotext://undoStack");
+const KUrl KTextDocument::ChangeTrackerURL = KUrl("kotext://changetracker");
+const KUrl KTextDocument::TextEditorURL = KUrl("kotext://textEditor");
+const KUrl KTextDocument::HeadingListURL = KUrl("kotext://headingList");
 
 KTextDocument::KTextDocument(QTextDocument *document)
     : m_document(document)

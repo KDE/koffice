@@ -59,7 +59,7 @@ public:
 };
 
 KoResourceSelector::KoResourceSelector(QWidget * parent)
-    : QComboBox( parent ), d( new Private() )
+    : KComboBox( parent ), d( new Private() )
 {
     connect( this, SIGNAL(currentIndexChanged(int)),
              this, SLOT(indexChanged(int)) );
@@ -68,7 +68,7 @@ KoResourceSelector::KoResourceSelector(QWidget * parent)
 }
 
 KoResourceSelector::KoResourceSelector( KoAbstractResourceServerAdapter * resourceAdapter, QWidget * parent )
-    : QComboBox( parent ), d( new Private() )
+    : KComboBox( parent ), d( new Private() )
 {
     Q_ASSERT(resourceAdapter);
 
@@ -94,7 +94,7 @@ KoResourceSelector::~KoResourceSelector()
 
 void KoResourceSelector::paintEvent( QPaintEvent *pe )
 {
-    QComboBox::paintEvent( pe );
+    KComboBox::paintEvent( pe );
 
     if (d->displayMode == ImageMode) {
         QStyleOptionComboBox option;
@@ -122,7 +122,7 @@ void KoResourceSelector::mousePressEvent( QMouseEvent * event )
     // only clicking on combobox arrow shows popup,
     // otherwise the resourceApplied signal is send with the current resource
     if (sc == QStyle::SC_ComboBoxArrow)
-        QComboBox::mousePressEvent( event );
+        KComboBox::mousePressEvent( event );
     else {
         QModelIndex index = view()->currentIndex();
         if( ! index.isValid() )

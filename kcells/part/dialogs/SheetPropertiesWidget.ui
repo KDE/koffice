@@ -211,7 +211,7 @@ Fifth Floor, Boston, MA 02110-1301, USA.</comment>
   <customwidgets>
   <customwidget>
    <class>KComboBox</class>
-   <extends>QComboBox</extends>
+   <extends>KComboBox</extends>
    <header>kcombobox.h</header>
   </customwidget>
  </customwidgets>

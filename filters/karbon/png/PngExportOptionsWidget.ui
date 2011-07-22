@@ -92,7 +92,7 @@
        </widget>
       </item>
       <item row="3" column="1" >
-       <widget class="QComboBox" name="unit" />
+       <widget class="KComboBox" name="unit" />
       </item>
       <item rowspan="2" row="0" column="2" >
        <widget class="KoAspectButton" native="1" name="unitAspect" />
@@ -166,7 +166,7 @@
   </customwidget>
   <customwidget>
    <class>KoSliderCombo</class>
-   <extends>QComboBox</extends>
+   <extends>KComboBox</extends>
    <header location="global" >KoSliderCombo.h</header>
   </customwidget>
  </customwidgets>

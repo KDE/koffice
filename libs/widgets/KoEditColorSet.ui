@@ -11,7 +11,7 @@
   </property>
   <layout class="QVBoxLayout" >
    <item>
-    <widget class="QComboBox" name="selector" >
+    <widget class="KComboBox" name="selector" >
      <property name="editable" >
       <bool>true</bool>
      </property>

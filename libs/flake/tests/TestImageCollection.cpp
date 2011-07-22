@@ -23,10 +23,10 @@
 #include <KImageCollection.h>
 #include <KOdfStore.h>
 
-#include <QImage>
-#include <QPixmap>
-#include <kurl.h>
-#include <kdebug.h>
+#include <QtGui/QImage>
+#include <QtGui/QPixmap>
+#include <KDE/KUrl>
+#include <KDE/KDebug>
 
 #include <qtest_kde.h>
 
@@ -74,7 +74,7 @@ void TestImageCollection::testGetImageImage()
 void TestImageCollection::testGetExternalImage()
 {
     KImageCollection collection;
-    QUrl url = QUrl::fromUserInput(KDESRCDIR "/logo-koffice.png");
+    KUrl url = KUrl::fromUserInput(KDESRCDIR "/logo-koffice.png");
     KImageData *id1 = collection.createExternalImageData(url);
     QCOMPARE(id1->suffix(), QString("png"));
     QCOMPARE(id1->hasCachedImage(), false);

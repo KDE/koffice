@@ -20,7 +20,7 @@
 #ifndef KOSLIDERCOMBO_H
 #define KOSLIDERCOMBO_H
 
-#include <QtGui/QComboBox>
+#include <KDE/KComboBox>
 
 #include "kowidgets_export.h"
 
@@ -38,7 +38,7 @@
  * 
  * The input of the numerical line edit is constrained to numbers and decimal signs.
  */
-class KOWIDGETS_EXPORT KoSliderCombo : public QComboBox
+class KOWIDGETS_EXPORT KoSliderCombo : public KComboBox
 {
 
     Q_OBJECT
@@ -99,8 +99,8 @@ public:
      */
     qreal value() const;
 
-    virtual QSize minimumSizeHint() const; ///< reimplemented from QComboBox
-    virtual QSize sizeHint() const; ///< reimplemented from QComboBox
+    virtual QSize minimumSizeHint() const; ///< reimplemented from KComboBox
+    virtual QSize sizeHint() const; ///< reimplemented from KComboBox
 
 public slots:
 
@@ -122,12 +122,12 @@ signals:
     void valueChanged(qreal value, bool final);
 
 protected:
-    virtual void paintEvent(QPaintEvent *); ///< reimplemented from QComboBox
-    virtual void hideEvent(QHideEvent *); ///< reimplemented from QComboBox
-    virtual void changeEvent(QEvent *e); ///< reimplemented from QComboBox
-    virtual void mousePressEvent(QMouseEvent *e); ///< reimplemented from QComboBox
-    virtual void keyPressEvent(QKeyEvent *e); ///< reimplemented from QComboBox
-    virtual void wheelEvent(QWheelEvent *e); ///< reimplemented from QComboBox
+    virtual void paintEvent(QPaintEvent *); ///< reimplemented from KComboBox
+    virtual void hideEvent(QHideEvent *); ///< reimplemented from KComboBox
+    virtual void changeEvent(QEvent *e); ///< reimplemented from KComboBox
+    virtual void mousePressEvent(QMouseEvent *e); ///< reimplemented from KComboBox
+    virtual void keyPressEvent(QKeyEvent *e); ///< reimplemented from KComboBox
+    virtual void wheelEvent(QWheelEvent *e); ///< reimplemented from KComboBox
 
 private:
     Q_PRIVATE_SLOT(d, void sliderValueChanged(int value))

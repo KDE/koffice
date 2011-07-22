@@ -25,9 +25,9 @@
 #include <KoDocument.h>
 #include <KoUnitDoubleSpinBox.h>
 
-#include <kcomponentdata.h>
-#include <kcombobox.h>
-#include <knuminput.h>
+#include <KDE/KComponentData>
+#include <KDE/KComboBox>
+#include <KDE/KNumInput>
 
 #include <kdialog.h>
 #include <kconfig.h>
@@ -47,7 +47,7 @@ public:
     KSharedConfigPtr config;
 
     KUnit oldUnit;
-    QComboBox *unit;
+    KComboBox *unit;
     KIntNumInput * handleRadius;
     uint oldHandleRadius;
     KIntNumInput * grabSensitivity;

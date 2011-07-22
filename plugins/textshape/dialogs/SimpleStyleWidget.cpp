@@ -64,12 +64,12 @@ SimpleStyleWidget::SimpleStyleWidget(TextTool *tool, QWidget *parent)
     widget.decreaseIndent->setDefaultAction(tool->action("format_decreaseindent"));
     widget.increaseIndent->setDefaultAction(tool->action("format_increaseindent"));
 
-    QComboBox *family = qobject_cast<QComboBox*> (tool->action("format_fontfamily")->requestWidget(this));
+    KComboBox *family = qobject_cast<KComboBox*> (tool->action("format_fontfamily")->requestWidget(this));
     if (family) { // kdelibs 4.1 didn't return anything here.
         widget.fontsFrame->addWidget(family);
         connect(family, SIGNAL(activated(int)), this, SIGNAL(doneWithFocus()));
     }
-    QComboBox *size = qobject_cast<QComboBox*> (tool->action("format_fontsize")->requestWidget(this));
+    KComboBox *size = qobject_cast<KComboBox*> (tool->action("format_fontsize")->requestWidget(this));
     if (size) { // kdelibs 4.1 didn't return anything here.
         widget.fontsFrame->addWidget(size);
         connect(size, SIGNAL(activated(int)), this, SIGNAL(doneWithFocus()));

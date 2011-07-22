@@ -23,7 +23,7 @@
 #include "ui_DCMImportDialog.h"
 
 DCMImportDialog::DCMImportDialog(QWidget *parent) :
-        QDialog(parent),
+        KDialog(parent),
         ui(new Ui::DCMImportDialog)
 {
     ui->setupUi(this);
@@ -36,7 +36,7 @@ DCMImportDialog::~DCMImportDialog()
 
 void DCMImportDialog::changeEvent(QEvent *e)
 {
-    QDialog::changeEvent(e);
+    KDialog::changeEvent(e);
     switch (e->type()) {
     case QEvent::LanguageChange:
         ui->retranslateUi(this);

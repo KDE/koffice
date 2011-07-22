@@ -18,10 +18,11 @@
 */
 #include "oothread.h"
 #include <QtCore/QDir>
-#include <QtCore/QUrl>
 #include <QtCore/QDebug>
 #include <QtCore/QDateTime>
 #include <cstdio>
+
+#include <KDE/KUrl>
 
 #define UNX
 #define LINUX
@@ -177,8 +178,8 @@ OoThread::waitingOrBusy(const QString& path) {
 }
 void
 OoThread::convertToOdp(const Conversion& c) {
-    QByteArray fromUrl(QUrl::fromLocalFile(c.from).toEncoded());
-    QByteArray toUrl(QUrl::fromLocalFile(c.to).toEncoded());
+    QByteArray fromUrl(KUrl::fromLocalFile(c.from).toEncoded());
+    QByteArray toUrl(KUrl::fromLocalFile(c.to).toEncoded());
 
     qDebug() << "converting from '" << fromUrl << "' to '" << toUrl;
 
@@ -216,9 +217,9 @@ OoThread::convertToOdp(const Conversion& c) {
 }
 void
 OoThread::convertToPng(const Conversion& c) {
-    QByteArray fromUrl(QUrl::fromLocalFile(
+    QByteArray fromUrl(KUrl::fromLocalFile(
             QFileInfo(c.from).absoluteFilePath()).toEncoded());
-    QByteArray toUrl(QUrl::fromLocalFile(
+    QByteArray toUrl(KUrl::fromLocalFile(
             QFileInfo(c.to).absoluteFilePath()+"/index.html").toEncoded());
 
     qDebug() << "converting from '" << fromUrl << "' to '" << toUrl << " "

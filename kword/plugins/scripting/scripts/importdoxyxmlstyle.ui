@@ -11,7 +11,7 @@
   </property>
   <layout class="QHBoxLayout" >
    <item>
-    <widget class="QTextEdit" name="textEdit" >
+    <widget class="KTextEdit" name="textEdit" >
      <property name="html" >
       <string comment="KDE::DoNotExtract" >&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
 p, li { white-space: pre-wrap; }

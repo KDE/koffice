@@ -12,7 +12,7 @@
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="2">
-    <widget class="QLineEdit" name="summary"/>
+    <widget class="KLineEdit" name="summary"/>
    </item>
    <item row="0" column="0">
     <widget class="QLabel" name="label">
@@ -29,7 +29,7 @@
     </widget>
    </item>
    <item row="2" column="2">
-    <widget class="QLineEdit" name="location"/>
+    <widget class="KLineEdit" name="location"/>
    </item>
    <item row="3" column="0">
     <widget class="QLabel" name="label_3">
@@ -56,7 +56,7 @@
     </layout>
    </item>
    <item row="3" column="2">
-    <widget class="QTabWidget" name="tabWidget">
+    <widget class="KTabWidget" name="tabWidget">
      <property name="currentIndex">
       <number>0</number>
      </property>

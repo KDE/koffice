@@ -20,14 +20,14 @@
 
 #include "SCClickActionDocker.h"
 
-#include <QVBoxLayout>
-#include <QCheckBox>
-#include <QComboBox>
-#include <QLabel>
-#include <QEvent>
-#include <klocale.h>
+#include <QtGui/QVBoxLayout>
+#include <QtGui/QCheckBox>
+#include <QtGui/QLabel>
+#include <QtCore/QEvent>
 
-#include <KFileDialog>
+#include <KDE/KLocale>
+#include <KDE/KFileDialog>
+#include <KDE/KComboBox>
 
 #include <KoPACanvas.h>
 #include <SCDocument.h>
@@ -56,7 +56,7 @@ SCClickActionDocker::SCClickActionDocker(QWidget* parent, Qt::WindowFlags flags)
     setObjectName("SCClickActionDocker");
     // setup widget layout
     QVBoxLayout* layout = new QVBoxLayout;
-    m_cbPlaySound = new QComboBox();
+    m_cbPlaySound = new KComboBox();
     //layout->addWidget(m_cbPlaySound);
 
     QList<KEventActionFactoryBase *> factories = KEventActionRegistry::instance()->presentationEventActions();

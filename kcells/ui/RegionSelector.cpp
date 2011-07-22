@@ -40,7 +40,7 @@ class RegionSelector::Private
 {
 public:
     Selection* selection;
-    QDialog* parentDialog;
+    KDialog* parentDialog;
     KDialog* dialog;
     KTextEdit* textEdit;
     QToolButton* button;
@@ -107,7 +107,7 @@ void RegionSelector::setSelection(Selection* selection)
     connect(d->selection, SIGNAL(changed(const KCRegion&)), this, SLOT(choiceChanged()));
 }
 
-void RegionSelector::setDialog(QDialog* dialog)
+void RegionSelector::setDialog(KDialog* dialog)
 {
     d->parentDialog = dialog;
 }

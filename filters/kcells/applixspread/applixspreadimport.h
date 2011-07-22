@@ -20,12 +20,12 @@
 #ifndef APPLIXSPREADIMPORT_H
 #define APPLIXSPREADIMPORT_H
 
-#include <QString>
-#include <QFile>
-#include <QObject>
-#include <QTextStream>
-#include <QList>
-#include <QByteArray>
+#include <QtCore/QString>
+#include <QtCore/QFile>
+#include <QtCore/QObject>
+#include <QtCore/QTextStream>
+#include <QtCore/QList>
+#include <QtCore/QByteArray>
 
 #include <KoFilter.h>
 #include <KOdfStore.h>

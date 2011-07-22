@@ -19,7 +19,6 @@
 
 #include "applixwordimport.h"
 
-#include <QtGui/QMessageBox>
 #include <QtCore/QList>
 #include <QtCore/QDateTime>
 #include <QtCore/QTextStream>
@@ -29,6 +28,7 @@
 
 #include <KDE/KDebug>
 #include <KDE/KPluginFactory>
+#include <KDE/KMessageBox>
 
 #include <KoFilterChain.h>
 #include <KOdfWriteStore.h>
@@ -741,11 +741,10 @@ APPLIXWORDImport::readHeader(QTextStream &stream)
         printf("Header not correkt - May be it is not an applixword file\n");
         printf("Headerline: <%s>\n", (const char *) mystr.toLatin1());
 
-        QMessageBox::critical(0L, "Applixword header problem",
-                              QString("The Applixword header is not correct. "
+        KMessageBox::error(0L, QString("The Applixword header is not correct. "
                                       "May be it is not an applixword file! <BR>"
-                                      "This is the header line I did read:<BR><B>%1</B>").arg(mystr),
-                              "Okay");
+                                      "This is the header line I did read:<BR><B>%1</B>").arg(mystr), 
+			      "Applixword header problem");
 
         // i18n( "What is the separator used in this file ? First line is \n%1" ).arg(firstLine),
         return false;

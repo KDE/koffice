@@ -23,7 +23,7 @@
 #include "SCPresenterViewBaseInterface.h"
 
 class QLabel;
-class QTextEdit;
+class KTextEdit;
 
 class KoPACanvas;
 class KoPAPageBase;
@@ -50,7 +50,7 @@ private:
     QLabel *m_currentSlideLabel;
     QLabel *m_nextSlideLabel;
     QLabel *m_nextSlidePreview;
-    QTextEdit *m_notesTextEdit;
+    KTextEdit *m_notesTextEdit;
     QSize m_previewSize;
 };
 

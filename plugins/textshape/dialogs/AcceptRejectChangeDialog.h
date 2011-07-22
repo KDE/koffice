@@ -21,12 +21,12 @@
 #define ACCEPT_REJECT_CHANGE_DIALOG_H
 
 #include <QtCore/QObject>
-#include <QtGui/QDialog>
+#include <KDE/KDialog>
 #include <ui_AcceptRejectChangeDialog.h>
 
 class KChangeTracker;
 
-class AcceptRejectChangeDialog:public QDialog
+class AcceptRejectChangeDialog:public KDialog
 {
     Q_OBJECT
 

@@ -40,7 +40,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="name"/>
+      <widget class="KLineEdit" name="name"/>
      </item>
     </layout>
    </item>

@@ -26,11 +26,11 @@
 #include "KoSopranoTableModel.h"
 #include "../KoGlobal.h"
 
-#include <kdebug.h>
-#include <QComboBox>
-#include <QSortFilterProxyModel>
-#include <KMenu>
-#include <KMessageBox>
+#include <QtGui/QSortFilterProxyModel>
+#include <KDE/KDebug>
+#include <KDE/KComboBox>
+#include <KDE/KMenu>
+#include <KDE/KMessageBox>
 
 
 /**
@@ -149,7 +149,7 @@ public:
         kDebug(30015) << "format(), setting up ss page, foaf.sz:" << foaf.size();
     }
 
-    void buildComboBox(QComboBox *w, KoRdfSemanticItem *si) {
+    void buildComboBox(KComboBox *w, KoRdfSemanticItem *si) {
         if (!si) {
             return;
         }
@@ -438,7 +438,7 @@ void KoDocumentRdfEditWidget::sparqlExecute()
     tableWidget->setSortingEnabled(true);
 }
 
-KoSemanticStylesheet *KoDocumentRdfEditWidget::stylesheetFromComboBox(QComboBox *w) const
+KoSemanticStylesheet *KoDocumentRdfEditWidget::stylesheetFromComboBox(KComboBox *w) const
 {
     QAbstractItemModel *m = w->model();
     QVariant ud = m->data(m->index(w->currentIndex(), 0), Qt::UserRole);

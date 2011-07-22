@@ -26,15 +26,15 @@
 #include <KoProgressBar.h>
 #include <KoUpdater.h>
 
-#include <KDebug>
-#include <KLocale>
-#include <QPainter>
-#include <QPrinter>
-#include <QGridLayout>
-#include <QLabel>
-#include <QPushButton>
-#include <QTimer>
-#include <QDialog>
+#include <KDE/KDebug>
+#include <KDE/KLocale>
+#include <KDE/KDialog>
+#include <QtGui/QPainter>
+#include <QtGui/QPrinter>
+#include <QtGui/QGridLayout>
+#include <QtGui/QLabel>
+#include <QtGui/QPushButton>
+#include <QtCore/QTimer>
 
 class KoPrintingDialogPrivate {
 public:
@@ -186,14 +186,14 @@ public:
     QList<int> pageRange; ///< user requested list of pages
     QList<int> pages; ///< effecive list of pages
     QList< QPointer<KoUpdater> > updaters;
-    QDialog *dialog;
+    KDialog *dialog;
     KoPrintJob::RemovePolicy removePolicy;
 };
 
-class PrintDialog : public QDialog {
+class PrintDialog : public KDialog {
 public:
     PrintDialog(KoPrintingDialogPrivate *d, QWidget *parent)
-        : QDialog(parent)
+        : KDialog(parent)
     {
         setModal(true);
         QGridLayout *grid = new QGridLayout(this);

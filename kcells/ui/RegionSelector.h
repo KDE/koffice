@@ -28,7 +28,7 @@
 
 class KTextEdit;
 
-class QDialog;
+class KDialog;
 class QEvent;
 class QObject;
 
@@ -51,7 +51,7 @@ public:
 
     void setSelectionMode(SelectionMode mode);
     void setSelection(Selection* selection);
-    void setDialog(QDialog* dialog);
+    void setDialog(KDialog* dialog);
     void setLabel(const QString& text);
 
     KTextEdit* textEdit() const;

@@ -20,14 +20,15 @@
 
 #include "SCPageEffectDocker.h"
 
-#include <QVBoxLayout>
-#include <QComboBox>
-#include <QDoubleSpinBox>
-#include <QLabel>
-#include <QEvent>
-#include <QPainter>
-#include <QTimer>
-#include <klocale.h>
+#include <QtGui/QVBoxLayout>
+#include <QtGui/QDoubleSpinBox>
+#include <QtGui/QLabel>
+#include <QtCore/QEvent>
+#include <QtGui/QPainter>
+#include <QtCore/QTimer>
+
+#include <KDE/KLocale>
+#include <KDE/KComboBox>
 
 #include <KoPACanvas.h>
 #include <KoPADocument.h>
@@ -52,7 +53,7 @@ SCPageEffectDocker::SCPageEffectDocker(QWidget* parent, Qt::WindowFlags flags)
 {
     setObjectName("SCPageEffectDocker");
     QGridLayout* optionLayout = new QGridLayout();
-    m_effectCombo = new QComboBox(this);
+    m_effectCombo = new KComboBox(this);
     m_effectCombo->addItem(i18n("No Effect"), QString(""));
 
     QList<SCPageEffectFactory*> factories = SCPageEffectRegistry::instance()->values();
@@ -68,7 +69,7 @@ SCPageEffectDocker::SCPageEffectDocker(QWidget* parent, Qt::WindowFlags flags)
     connect(m_effectCombo, SIGNAL(activated(int)),
              this, SLOT(slotEffectChanged(int)));
 
-    m_subTypeCombo = new QComboBox(this);
+    m_subTypeCombo = new KComboBox(this);
 
     connect(m_subTypeCombo, SIGNAL(activated(int)),
              this, SLOT(slotSubTypeChanged(int)));

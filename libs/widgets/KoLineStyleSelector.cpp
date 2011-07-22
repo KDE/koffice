@@ -21,8 +21,8 @@
 #include "KoLineStyleModel_p.h"
 #include "KoLineStyleItemDelegate_p.h"
 
-#include <QPen>
-#include <QPainter>
+#include <QtGui/QPen>
+#include <QtGui/QPainter>
 
 class KoLineStyleSelector::Private
 {
@@ -36,7 +36,7 @@ public:
 };
 
 KoLineStyleSelector::KoLineStyleSelector(QWidget *parent)
-    : QComboBox(parent), d(new Private(this))
+    : KComboBox(parent), d(new Private(this))
 {
     setModel(d->model);
     setItemDelegate(new KoLineStyleItemDelegate(this));
@@ -49,7 +49,7 @@ KoLineStyleSelector::~KoLineStyleSelector()
 
 void KoLineStyleSelector::paintEvent(QPaintEvent *pe)
 {
-    QComboBox::paintEvent(pe);
+    KComboBox::paintEvent(pe);
 
     QStyleOptionComboBox option;
     option.initFrom(this);

@@ -29,7 +29,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QComboBox" name="slidesComboBox" />
+         <widget class="KComboBox" name="slidesComboBox" />
         </item>
        </layout>
       </item>

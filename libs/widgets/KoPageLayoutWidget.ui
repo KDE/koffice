@@ -30,7 +30,7 @@
       <number>0</number>
      </property>
      <item>
-      <widget class="QComboBox" name="units"/>
+      <widget class="KComboBox" name="units"/>
      </item>
      <item>
       <spacer>
@@ -58,7 +58,7 @@
     </widget>
    </item>
    <item row="2" column="1" colspan="2">
-    <widget class="QComboBox" name="sizes"/>
+    <widget class="KComboBox" name="sizes"/>
    </item>
    <item row="3" column="0">
     <widget class="QLabel" name="label_3">
@@ -152,7 +152,7 @@
     </widget>
    </item>
    <item row="6" column="1" colspan="2">
-    <widget class="QComboBox" name="textDirection">
+    <widget class="KComboBox" name="textDirection">
      <item>
       <property name="text">
        <string>Automatic</string>
@@ -290,7 +290,7 @@
     </widget>
    </item>
    <item row="1" column="1" colspan="2">
-    <widget class="QComboBox" name="pageStyle"/>
+    <widget class="KComboBox" name="pageStyle"/>
    </item>
   </layout>
  </widget>

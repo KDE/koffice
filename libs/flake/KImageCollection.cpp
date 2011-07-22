@@ -121,10 +121,10 @@ KImageData *KImageCollection::createImageData(const QImage &image)
 
 KImageData *KImageCollection::createExternalImageData(const QString &localPath)
 {
-    return createExternalImageData(QUrl::fromUserInput(localPath));
+    return createExternalImageData(KUrl::fromUserInput(localPath));
 }
 
-KImageData *KImageCollection::createExternalImageData(const QUrl &url)
+KImageData *KImageCollection::createExternalImageData(const KUrl &url)
 {
     Q_ASSERT(!url.isEmpty() && url.isValid());
 

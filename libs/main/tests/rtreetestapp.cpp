@@ -27,11 +27,11 @@
 #include <QtCore/QFile>
 #include <QtCore/QTimer>
 #include <QtGui/QAction>
-#include <QtGui/QMessageBox>
 #include <QtGui/QMenuBar>
 #include <QtGui/QMenu>
 #include <QtGui/QStatusBar>
 
+#include <KDE/KMessageBox>
 #include "Tool.h"
 
 int main(int argc, char *argv[])
@@ -253,7 +253,7 @@ MainWindow::MainWindow()
 
 void MainWindow::about()
 {
-    QMessageBox::about(this, tr("About test"),
+    KMessageBox::about(this, tr("About test"),
                        tr("R-Tree Library Test Application"));
 }
 

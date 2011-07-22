@@ -20,7 +20,7 @@
 #define KOPRINTINGDIALOG_H
 
 #include <KoPrintJob.h>
-#include <QList>
+#include <QtCore/QList>
 #include "komain_export.h"
 
 class KShapeManager;

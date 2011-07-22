@@ -27,11 +27,11 @@
 #include <QtGui/QWidget>
 #include <QtGui/QVBoxLayout>
 #include <QtGui/QPainter>
-#include <QKeyEvent>
-#include <qabstracttextdocumentlayout.h>
-#include <qcursor.h>
-#include <qdesktopservices.h>
-#include <qurl.h>
+#include <QtGui/QKeyEvent>
+#include <QtGui/QAbstractTextDocumentLayout>
+#include <QtGui/QCursor>
+#include <QtGui/QDesktopServices>
+#include <KDE/KUrl>
 
 #include <KShape.h>
 #include <KShapeManager.h>
@@ -314,7 +314,7 @@ bool SCPresentationTool::checkHyperlink(KPointerEvent *event, KShape *shape, QSt
 
 void SCPresentationTool::runHyperlink(QString hyperLink)
 {
-    QUrl url = QUrl::fromUserInput(hyperLink);
+    KUrl url = KUrl::fromUserInput(hyperLink);
 
     QDesktopServices::openUrl(url);
 }

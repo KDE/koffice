@@ -21,13 +21,13 @@
 #ifndef KO_VERSION_DIALOG_H
 #define KO_VERSION_DIALOG_H
 
-#include <kdialog.h>
+#include <KDE/KDialog>
 
 #include "KoDocument.h"	//krazy:exclude=includes
 
 class QPushButton;
 class QTreeWidget;
-class QTextEdit;
+class KTextEdit;
 
 class KoVersionDialog : public KDialog
 {
@@ -65,7 +65,7 @@ public:
     QString comment() const;
 
 private:
-    QTextEdit *m_textEdit;
+    KTextEdit *m_textEdit;
 };
 
 #endif

@@ -21,7 +21,7 @@
 #ifndef KO_DOCUMENT_INFO_DLG_H
 #define KO_DOCUMENT_INFO_DLG_H
 
-#include <kpagedialog.h>
+#include <KDE/KPageDialog>
 
 class KoDocumentInfo;
 class KoDocumentRdf;

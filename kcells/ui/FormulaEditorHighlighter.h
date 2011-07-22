@@ -24,7 +24,7 @@
 
 #include <QSyntaxHighlighter>
 
-class QTextEdit;
+class KTextEdit;
 
 class Selection;
 class Tokens;
@@ -37,12 +37,12 @@ class FormulaEditorHighlighter : public QSyntaxHighlighter
 {
 public:
     /**
-     * Constructs a FormulaHighlighter to color-code cell references in a QTextEdit.
+     * Constructs a FormulaHighlighter to color-code cell references in a KTextEdit.
      *
-     * @param textEdit The QTextEdit widget which the highlighter should operate on
+     * @param textEdit The KTextEdit widget which the highlighter should operate on
      * @param selection The Selection object
      */
-    FormulaEditorHighlighter(QTextEdit* textEdit, Selection* selection);
+    FormulaEditorHighlighter(KTextEdit* textEdit, Selection* selection);
     virtual ~FormulaEditorHighlighter();
 
 

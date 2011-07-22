@@ -70,28 +70,28 @@
 #include <KoBookmark.h>
 #include <KoBookmarkManager.h>
 
-#include <kdebug.h>
-#include <KRun>
-#include <KPageDialog>
-#include <KStandardShortcut>
-#include <KFontSizeAction>
-#include <KFontChooser>
-#include <KFontAction>
-#include <KAction>
-#include <KLocale>
-#include <KStandardAction>
-#include <KMimeType>
-#include <KMessageBox>
-#include <KUser>
-#include <QTabWidget>
-#include <QTextDocumentFragment>
-#include <QToolTip>
+#include <KDE/KDebug>
+#include <KDE/KRun>
+#include <KDE/KPageDialog>
+#include <KDE/KStandardShortcut>
+#include <KDE/KFontSizeAction>
+#include <KDE/KFontChooser>
+#include <KDE/KFontAction>
+#include <KDE/KAction>
+#include <KDE/KLocale>
+#include <KDE/KStandardAction>
+#include <KDE/KMimeType>
+#include <KDE/KMessageBox>
+#include <KDE/KUser>
+#include <KDE/KTabWidget>
 
 #include <KDocumentRdfBase.h>
 
 #include <QtCore/QPointer>
 #include <QtCore/QSignalMapper>
 #include <QtGui/QMenu>
+#include <QtGui/QTextDocumentFragment>
+#include <QtGui/QToolTip>
 
 static bool hit(const QKeySequence &input, KStandardShortcut::StandardShortcut shortcut)
 {
@@ -1584,7 +1584,7 @@ KToolSelection* TextTool::selection()
 
 QWidget *TextTool::createOptionWidget()
 {
-    QTabWidget *widget = new QTabWidget();
+    KTabWidget *widget = new KTabWidget();
     SimpleStyleWidget *ssw = new SimpleStyleWidget(this, widget);
     widget->addTab(ssw, i18n("Abc"));
     StylesWidget *styles = new StylesWidget(widget);

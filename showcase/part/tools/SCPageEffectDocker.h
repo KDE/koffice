@@ -22,7 +22,7 @@
 
 #include <QWidget>
 
-class QComboBox;
+class KComboBox;
 class QDoubleSpinBox;
 class SCPageEffect;
 class SCPageEffectFactory;
@@ -60,8 +60,8 @@ protected slots:
 
 private:
     KoPAViewBase* m_view;
-    QComboBox* m_effectCombo;
-    QComboBox* m_subTypeCombo;
+    KComboBox* m_effectCombo;
+    KComboBox* m_subTypeCombo;
     QDoubleSpinBox* m_durationSpinBox;
     SCViewModePreviewPageEffect *m_previewMode;
 };

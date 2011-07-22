@@ -31,27 +31,26 @@
 #include "rdf/KoDocumentRdfEditWidget.h"
 #endif
 
-#include <kmimetype.h>
-#include <klocale.h>
-#include <kglobal.h>
-#include <kiconloader.h>
-#include <kmessagebox.h>
-#include <kconfiggroup.h>
+#include <KDE/KMimeType>
+#include <KDE/KLocale>
+#include <KDE/KGlobal>
+#include <KDE/KIconLoader>
+#include <KDE/KMessageBox>
+#include <KDE/KConfigGroup>
+#include <KDE/KLineEdit>
+
 
 #ifdef KDEPIMLIBS_FOUND
-#include <kabc/addressee.h>
-#include <kabc/stdaddressbook.h>
+#include <KDE/KABC/Addressee>
+#include <KDE/KABC/StdAddressBook>
 #endif
 
 #include <KoGlobal.h>
 #include <KOdf.h>
 
-#include <QLabel>
-#include <QLineEdit>
-#include <QTextEdit>
-#include <QPixmap>
-#include <QDateTime>
-
+#include <QtGui/QLabel>
+#include <QtGui/QPixmap>
+#include <QtCore/QDateTime>
 
 class KoDocumentInfoDlg::KoDocumentInfoDlgPrivate
 {
@@ -541,7 +540,7 @@ void KoDocumentInfoDlg::setReadOnly(bool ro)
     d->m_aboutUi->meComments->setReadOnly(ro);
 
     Q_FOREACH(KPageWidgetItem* page, d->m_pages) {
-        Q_FOREACH(QLineEdit* le, page->widget()->findChildren<QLineEdit *>()) {
+        Q_FOREACH(KLineEdit* le, page->widget()->findChildren<KLineEdit *>()) {
             le->setReadOnly(ro);
         }
         Q_FOREACH(QPushButton* le, page->widget()->findChildren<QPushButton *>()) {

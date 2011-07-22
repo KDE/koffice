@@ -23,23 +23,22 @@
 #include "KoMainWindow.h"
 #include "KoDocumentEntry.h"
 
-#include <QFile>
-#include <QGridLayout>
-#include <QHBoxLayout>
-#include <QLabel>
-#include <QLayout>
-#include <QList>
-#include <QPushButton>
-#include <QToolButton>
-#include <QTreeWidget>
+#include <QtCore/QFile>
+#include <QtGui/QGridLayout>
+#include <QtGui/QHBoxLayout>
+#include <QtGui/QLabel>
+#include <QtGui/QLayout>
+#include <QtCore/QList>
+#include <QtGui/QPushButton>
+#include <QtGui/QToolButton>
+#include <QtGui/QTreeWidget>
 
-#include <kdebug.h>
-#include <kiconloader.h>
-#include <klocale.h>
-#include <kmessagebox.h>
-#include <ktemporaryfile.h>
-
-#include <QTextEdit>
+#include <KDE/KDebug>
+#include <KDE/KIconLoader>
+#include <KDE/KLocale>
+#include <KDE/KMessageBox>
+#include <KDE/KTemporaryFile>
+#include <KDE/KTextEdit>
 
 
 KoVersionDialog::KoVersionDialog(QWidget* parent, KoDocument *doc)
@@ -244,7 +243,7 @@ KoVersionModifyDialog::KoVersionModifyDialog(QWidget* parent, KoVersionInfo *inf
         l->setText(i18n("Date: %1", QDateTime::currentDateTime().toString(Qt::ISODate)));
     grid1->addWidget(l);
 
-    m_textEdit = new QTextEdit(page);
+    m_textEdit = new KTextEdit(page);
     if (info)
         m_textEdit->setText(info->comment);
     grid1->addWidget(m_textEdit);

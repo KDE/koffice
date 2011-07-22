@@ -20,7 +20,7 @@
 #ifndef KO_DOCUMENT_SECTION_DELEGATE_H
 #define KO_DOCUMENT_SECTION_DELEGATE_H
 
-#include <QAbstractItemDelegate>
+#include <QtGui/QAbstractItemDelegate>
 class KoDocumentSectionView;
 
 class KoDocumentSectionModel;

@@ -251,7 +251,7 @@
     </property>
    </widget>
   </widget>
-  <widget class="QTextEdit" name="previewTextEdit">
+  <widget class="KTextEdit" name="previewTextEdit">
    <property name="geometry">
     <rect>
      <x>190</x>
@@ -362,7 +362,7 @@ p, li { white-space: pre-wrap; }
     <string>Saving Format</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="authorNameLineEdit">
+  <widget class="KLineEdit" name="authorNameLineEdit">
    <property name="geometry">
     <rect>
      <x>190</x>

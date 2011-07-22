@@ -22,14 +22,14 @@
 #ifndef DCMIMPORTDIALOG_H
 #define DCMIMPORTDIALOG_H
 
-#include <QDialog>
+#include <KDE/KDialog>
 
 namespace Ui
 {
 class DCMImportDialog;
 }
 
-class DCMImportDialog : public QDialog
+class DCMImportDialog : public KDialog
 {
     Q_OBJECT
 public:

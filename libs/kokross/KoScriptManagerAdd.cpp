@@ -29,14 +29,13 @@
 #include <QtGui/QBoxLayout>
 #include <QtGui/QLabel>
 #include <QtGui/QRadioButton>
+#include <QtGui/QLineEdit>
 
-#include <QLineEdit>
-#include <QComboBox>
-
-#include <klocale.h>
-#include <kfilewidget.h>
-#include <kurlrequester.h>
-#include <kdebug.h>
+#include <KDE/KComboBox>
+#include <KDE/KLocale>
+#include <KDE/KFileWidget>
+#include <KDE/KUrlRequester>
+#include <KDE/KDebug>
 
 /********************************************************************
  * KoScriptManagerAddTypeWidget

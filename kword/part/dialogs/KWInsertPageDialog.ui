@@ -60,7 +60,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="pageStyle"/>
+      <widget class="KComboBox" name="pageStyle"/>
      </item>
     </layout>
    </item>

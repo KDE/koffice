@@ -24,12 +24,12 @@
 #include <QtGui/QLabel>
 #include <QtGui/QKeyEvent>
 #include <QtGui/QPainter>
-#include <QtGui/QTextEdit>
 #include <QtGui/QToolButton>
 
-#include <KDebug>
-#include <KLocale>
-#include <KIcon>
+#include <KDE/KDebug>
+#include <KDE/KLocale>
+#include <KDE/KIcon>
+#include <KDE/KTextEdit>
 
 #include <KoPACanvas.h>
 #include <KoPADocument.h>
@@ -75,7 +75,7 @@ SCPresenterViewInterface::SCPresenterViewInterface(const QList<KoPAPageBase *> &
     vLayout->addLayout(hLayout);
 
     vLayout->addWidget(new QLabel(i18n("Speaker Notes")));
-    m_notesTextEdit = new QTextEdit;
+    m_notesTextEdit = new KTextEdit;
     m_notesTextEdit->setReadOnly(true);
     vLayout->addWidget(m_notesTextEdit);
 

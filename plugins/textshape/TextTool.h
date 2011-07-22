@@ -26,12 +26,12 @@
 
 #include <KToolBase.h>
 
-#include <QClipboard>
-#include <QHash>
-#include <QTextBlock>
-#include <QTextCursor>
-#include <QTimer>
-#include <QWeakPointer>
+#include <QtGui/QClipboard>
+#include <QtCore/QHash>
+#include <QtGui/QTextBlock>
+#include <QtGui/QTextCursor>
+#include <QtCore/QTimer>
+#include <QtCore/QWeakPointer>
 
 class TextEditingPluginContainer;
 class InsertCharacter;

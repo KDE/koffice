@@ -19,14 +19,17 @@
 
 #include <applixspreadimport.h>
 
-#include <QMessageBox>
-#include <QStringList>
-#include <QRegExp>
-#include <QList>
-#include <QTextStream>
-#include <QByteArray>
-#include <kdebug.h>
+#include <QtCore/QStringList>
+#include <QtCore/QRegExp>
+#include <QtCore/QList>
+#include <QtCore/QTextStream>
+#include <QtCore/QByteArray>
+
+#include <KDE/KDebug>
+#include <KDE/KMessageBox>
+
 #include <math.h>
+
 #include <KoFilterChain.h>
 #include <kpluginfactory.h>
 #include <kcells/Util.h>
@@ -1191,11 +1194,10 @@ APPLIXSPREADImport::readHeader(QTextStream &stream)
         printf("Header not correct - May be it is not an applixspreadsheet file\n");
         printf("Headerline: <%s>\n", mystr.toLatin1().data());
 
-        QMessageBox::critical(0L, "Applix spreadsheet header problem",
-                              QString("The Applix Spreadsheet header is not correct. "
+        KMessageBox::error(0L, QString("The Applix Spreadsheet header is not correct. "
                                       "May be it is not an applix spreadsheet file! <BR>"
                                       "This is the header line I did read:<BR><B>%1</B>").arg(mystr),
-                              "Okay");
+			"Applix spreadsheet header problem");
 
 
         return false;

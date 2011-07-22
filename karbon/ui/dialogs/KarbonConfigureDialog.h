@@ -35,8 +35,8 @@ class KoConfigGridPage;
 class KoConfigDocumentPage;
 class KIntNumInput;
 class KColorButton;
+class KComboBox;
 class QCheckBox;
-class QComboBox;
 
 class KarbonConfigureDialog : public KPageDialog
 {

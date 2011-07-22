@@ -39,7 +39,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="hostEdit" >
+            <widget class="KLineEdit" name="hostEdit" >
              <property name="text" >
               <string>localhost</string>
              </property>

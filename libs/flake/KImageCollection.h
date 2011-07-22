@@ -25,7 +25,7 @@
 #include <KDataCenterBase.h>
 
 class QImage;
-class QUrl;
+class KUrl;
 class KOdfStore;
 class KImageData;
 
@@ -68,7 +68,7 @@ public:
      * @param url a valid, local url to point to an image on the filesystem.
      * @see KImageData::isValid()
      */
-    KImageData *createExternalImageData(const QUrl &url);
+    KImageData *createExternalImageData(const KUrl &url);
 
     /**
      * Create a data object for the image data.

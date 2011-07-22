@@ -21,12 +21,12 @@
 #define KOLINESTYLESELECTOR_H
 
 #include "kowidgets_export.h"
-#include <QtGui/QComboBox>
+#include <KDE/KComboBox>
 
 /**
  * A custom combobox widget for selecting line styles.
  */
-class KOWIDGETS_EXPORT KoLineStyleSelector : public QComboBox
+class KOWIDGETS_EXPORT KoLineStyleSelector : public KComboBox
 {
     Q_OBJECT
 public:

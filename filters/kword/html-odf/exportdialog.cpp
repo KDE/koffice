@@ -20,13 +20,13 @@
 #include <exportdialog.h>
 
 #include <QtGui/QCheckBox>
-#include <QtGui/QComboBox>
 #include <QtGui/QListWidget>
 #include <QtGui/QRadioButton>
 #include <QtGui/QSpinBox>
 #include <QtCore/QTextCodec>
 
 #include <KDE/KApplication>
+#include <KDE/KComboBox>
 #include <KDE/KGlobal>
 #include <KDE/KLocale>
 #include <KDE/KUrlRequester>

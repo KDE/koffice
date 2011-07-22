@@ -34,6 +34,7 @@
 #include "TestRdf.h"
 
 #include <QtCore/QDebug>
+#include <QtCore/QTemporaryFile>
 
 #include <KWDocument.h>
 #include <frames/KWTextFrameSet.h>
@@ -51,13 +52,13 @@
 #include <KOdfWriteStore.h>
 #include <KStyleManager.h>
 #include <KOdfXmlNS.h>
-#include <kcomponentdata.h>
-#include <QTemporaryFile>
 #include <KoTextRdfCore.h>
 
-#include <KFileItem>
-#include <kio/job.h>
-#include <kio/jobclasses.h>
+#include <KDE/KComponentData>
+#include <KDE/KFileItem>
+#include <KDE/KIO/Job>
+#include <KDE/KIO/JobClasses>
+
 
 using namespace Soprano;
 #define RDEBUG if (0) qDebug()
@@ -103,8 +104,8 @@ void TestRdf::basicload()
 
     // check a triple
     it = m->listStatements(
-        Node::createResourceNode(QUrl("uri:james")),
-        Node::createResourceNode(QUrl("http://xmlns.com/foaf/0.1/name")),
+        Node::createResourceNode(KUrl("uri:james")),
+        Node::createResourceNode(KUrl("http://xmlns.com/foaf/0.1/name")),
         Node());
     allStatements = it.allElements();
     QCOMPARE (allStatements.size(), 1);
@@ -117,8 +118,8 @@ void TestRdf::basicload()
     // object and context value are checked for a single found triple
     // using an ical lookup
     it = m->listStatements(
-        Node::createResourceNode(QUrl("http://www.w3.org/2002/12/cal/test/geo1#CDC474D4-1393-11D7-9A2C-000393914268")),
-        Node::createResourceNode(QUrl("http://www.w3.org/2002/12/cal/icaltzd#uid")),
+        Node::createResourceNode(KUrl("http://www.w3.org/2002/12/cal/test/geo1#CDC474D4-1393-11D7-9A2C-000393914268")),
+        Node::createResourceNode(KUrl("http://www.w3.org/2002/12/cal/icaltzd#uid")),
         Node());
     allStatements = it.allElements();
     QCOMPARE (allStatements.size(), 1);
@@ -146,8 +147,8 @@ void TestRdf::findStatements()
     QVERIFY (submodel);
     QCOMPARE (9, submodel->statementCount());
     it = submodel->listStatements(
-        Node::createResourceNode(QUrl("uri:james")),
-        Node::createResourceNode(QUrl("http://xmlns.com/foaf/0.1/phone")),
+        Node::createResourceNode(KUrl("uri:james")),
+        Node::createResourceNode(KUrl("http://xmlns.com/foaf/0.1/phone")),
         Node());
     allStatements = it.allElements();
     QCOMPARE (allStatements.size(), 1);
@@ -353,7 +354,7 @@ void TestRdf::prefixMapping()
 static Soprano::Model *loadRDFXMLFromODT(const QString &odt)
 {
     Soprano::Node context;
-    QUrl BaseURI = QUrl(QString());
+    KUrl BaseURI = KUrl(QString());
     const Soprano::Parser *parser =
         Soprano::PluginManager::instance()->discoverParserForSerialization(
             Soprano::SerializationRdfXml);
@@ -389,14 +390,14 @@ void TestRdf::addAndSage()
     QVERIFY(m);
     QCOMPARE (234, m->statementCount());
 
-    Node explicitContext = Node(QUrl(rdf->rdfPathContextPrefix() + "explicit.rdf"));
-    m->addStatement(Node::createResourceNode(QUrl("uri:test1")),
-                     Node::createResourceNode(QUrl("uri:test2")),
-                     Node::createResourceNode(QUrl("uri:test3")),
+    Node explicitContext = Node(KUrl(rdf->rdfPathContextPrefix() + "explicit.rdf"));
+    m->addStatement(Node::createResourceNode(KUrl("uri:test1")),
+                     Node::createResourceNode(KUrl("uri:test2")),
+                     Node::createResourceNode(KUrl("uri:test3")),
                      rdf->manifestRdfNode());
-    m->addStatement(Node::createResourceNode(QUrl("uri:test4")),
-                     Node::createResourceNode(QUrl("uri:test5")),
-                     Node::createResourceNode(QUrl("uri:test6")),
+    m->addStatement(Node::createResourceNode(KUrl("uri:test4")),
+                     Node::createResourceNode(KUrl("uri:test5")),
+                     Node::createResourceNode(KUrl("uri:test6")),
                      explicitContext);
     QCOMPARE (236, m->statementCount());
 
@@ -421,8 +422,8 @@ void TestRdf::addAndSage()
 
     m = loadRDFXMLFromODT("zip:" + todt + "/manifest.rdf");
     QVERIFY(m);
-    it = m->listStatements(Node::createResourceNode(QUrl("uri:test1")),
-        Node::createResourceNode(QUrl("uri:test2")), Node());
+    it = m->listStatements(Node::createResourceNode(KUrl("uri:test1")),
+        Node::createResourceNode(KUrl("uri:test2")), Node());
     allStatements = it.allElements();
     QCOMPARE (allStatements.size(), 1);
     foreach (const Soprano::Statement &s, allStatements) {
@@ -433,8 +434,8 @@ void TestRdf::addAndSage()
     m = loadRDFXMLFromODT("zip:" + todt + "/explicit.rdf");
     QCOMPARE (1, m->statementCount());
     it = m->listStatements(
-        Node::createResourceNode(QUrl("uri:test4")),
-        Node::createResourceNode(QUrl("uri:test5")),
+        Node::createResourceNode(KUrl("uri:test4")),
+        Node::createResourceNode(KUrl("uri:test5")),
         Node());
     allStatements = it.allElements();
     QCOMPARE (allStatements.size(), 1);
@@ -497,8 +498,8 @@ void TestRdf::expandStatementsToIncludeRdfLists()
     QVERIFY(m);
     Soprano::Model *localModel = Soprano::createModel();
 
-    Node uuid = Node::createResourceNode(QUrl("http://www.w3.org/2002/12/cal/test/geo1#CDC474D4-1393-11D7-9A2C-000393914268"));
-    Node icaltz = Node::createResourceNode(QUrl("http://www.w3.org/2002/12/cal/icaltzd#geo"));
+    Node uuid = Node::createResourceNode(KUrl("http://www.w3.org/2002/12/cal/test/geo1#CDC474D4-1393-11D7-9A2C-000393914268"));
+    Node icaltz = Node::createResourceNode(KUrl("http://www.w3.org/2002/12/cal/icaltzd#geo"));
 
     StatementIterator it;
     QList<Statement> allStatements;
@@ -514,8 +515,8 @@ void TestRdf::expandStatementsToIncludeRdfLists()
     rdf->expandStatementsToIncludeRdfLists(localModel);
     QCOMPARE (localModel->statementCount(),5);
 
-    Node rdfFirst = Node::createResourceNode(QUrl("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"));
-    Node rdfRest  = Node::createResourceNode(QUrl("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"));
+    Node rdfFirst = Node::createResourceNode(KUrl("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"));
+    Node rdfRest  = Node::createResourceNode(KUrl("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"));
     it = localModel->listStatements(Node(), rdfFirst, Node());
     allStatements = it.allElements();
     QVERIFY (allStatements.size() >= 2);
@@ -538,8 +539,8 @@ void TestRdf::expandStatementsToIncludeOtherPredicates()
 
     StatementIterator it;
     QList<Statement> allStatements;
-    it = m->listStatements(Node::createResourceNode(QUrl("uri:1984-winston")),
-                            Node::createResourceNode(QUrl("http://xmlns.com/foaf/0.1/name")),
+    it = m->listStatements(Node::createResourceNode(KUrl("uri:1984-winston")),
+                            Node::createResourceNode(KUrl("http://xmlns.com/foaf/0.1/name")),
                             Node());
     allStatements = it.allElements();
     QCOMPARE (allStatements.size(), 1);
@@ -552,8 +553,8 @@ void TestRdf::expandStatementsToIncludeOtherPredicates()
     rdf->expandStatementsToIncludeOtherPredicates(localModel);
     QCOMPARE (localModel->statementCount(),6);
 
-    it = m->listStatements(Node::createResourceNode(QUrl("uri:1984-winston")),
-                            Node::createResourceNode(QUrl("http://xmlns.com/foaf/0.1/nick")),
+    it = m->listStatements(Node::createResourceNode(KUrl("uri:1984-winston")),
+                            Node::createResourceNode(KUrl("http://xmlns.com/foaf/0.1/nick")),
                             Node());
     allStatements = it.allElements();
     QCOMPARE (allStatements.size(), 1);
@@ -573,8 +574,8 @@ void TestRdf::expandStatementsReferencingSubject()
     QVERIFY(m);
     Soprano::Model *localModel = Soprano::createModel();
 
-    Node rdfFirst = Node::createResourceNode(QUrl("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"));
-    Node rdfRest  = Node::createResourceNode(QUrl("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"));
+    Node rdfFirst = Node::createResourceNode(KUrl("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"));
+    Node rdfRest  = Node::createResourceNode(KUrl("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"));
     StatementIterator it;
     QList<Statement> allStatements;
     it = m->listStatements(Node(), rdfFirst, Node());
@@ -591,8 +592,8 @@ void TestRdf::expandStatementsReferencingSubject()
     QVERIFY (localModel->statementCount() >= 4);
 
     /// FIXME: check that the proper new triples are in there.
-    it = localModel->listStatements(Node::createResourceNode(QUrl("uri:campingtime")),
-                                     Node::createResourceNode(QUrl("http://www.w3.org/2002/12/cal/icaltzd#geo")),
+    it = localModel->listStatements(Node::createResourceNode(KUrl("uri:campingtime")),
+                                     Node::createResourceNode(KUrl("http://www.w3.org/2002/12/cal/icaltzd#geo")),
                                      Node());
     allStatements = it.allElements();
     QCOMPARE (allStatements.size(), 1);
@@ -612,7 +613,7 @@ void TestRdf::serailizeRDFLists()
     dataBNodeList << Node(LiteralValue::createPlainLiteral("bbq"));
     dataBNodeList << Node(LiteralValue::createPlainLiteral("bob"));
 
-    Soprano::Node ListHeadSubject = Node::createResourceNode(QUrl("uri:majou"));
+    Soprano::Node ListHeadSubject = Node::createResourceNode(KUrl("uri:majou"));
     KoTextRdfCore::saveList(m, ListHeadSubject, dataBNodeList, context);
     QCOMPARE (m->statementCount(), 7);
 
@@ -638,45 +639,45 @@ void TestRdf::removeStatementsIfTheyExist()
 {
     Soprano::Model *m = Soprano::createModel();
     Soprano::Node context = Node();
-    m->addStatement(Node::createResourceNode(QUrl("uri:test1")),
-                     Node::createResourceNode(QUrl("uri:test2")),
-                     Node::createResourceNode(QUrl("uri:test3")),
+    m->addStatement(Node::createResourceNode(KUrl("uri:test1")),
+                     Node::createResourceNode(KUrl("uri:test2")),
+                     Node::createResourceNode(KUrl("uri:test3")),
                      context);
-    m->addStatement(Node::createResourceNode(QUrl("uri:test4")),
-                     Node::createResourceNode(QUrl("uri:test5")),
-                     Node::createResourceNode(QUrl("uri:test6")),
+    m->addStatement(Node::createResourceNode(KUrl("uri:test4")),
+                     Node::createResourceNode(KUrl("uri:test5")),
+                     Node::createResourceNode(KUrl("uri:test6")),
                      context);
-    m->addStatement(Node::createResourceNode(QUrl("uri:test7")),
-                     Node::createResourceNode(QUrl("uri:test8")),
-                     Node::createResourceNode(QUrl("uri:test9")),
+    m->addStatement(Node::createResourceNode(KUrl("uri:test7")),
+                     Node::createResourceNode(KUrl("uri:test8")),
+                     Node::createResourceNode(KUrl("uri:test9")),
                      context);
 
     QList<Soprano::Statement> removeList;
-    removeList << Statement(Node::createResourceNode(QUrl("uri:test4")),
-                             Node::createResourceNode(QUrl("uri:test5")),
-                             Node::createResourceNode(QUrl("uri:test6")),
+    removeList << Statement(Node::createResourceNode(KUrl("uri:test4")),
+                             Node::createResourceNode(KUrl("uri:test5")),
+                             Node::createResourceNode(KUrl("uri:test6")),
                              context);
     KoTextRdfCore::removeStatementsIfTheyExist(m, removeList);
     QCOMPARE (m->statementCount(), 2);
-    removeList << Statement(Node::createResourceNode(QUrl("uri:testAA")),
-                             Node::createResourceNode(QUrl("uri:testBB")),
-                             Node::createResourceNode(QUrl("uri:testCC")),
+    removeList << Statement(Node::createResourceNode(KUrl("uri:testAA")),
+                             Node::createResourceNode(KUrl("uri:testBB")),
+                             Node::createResourceNode(KUrl("uri:testCC")),
                              context);
-    removeList << Statement(Node::createResourceNode(QUrl("uri:test7")),
-                             Node::createResourceNode(QUrl("uri:test8")),
-                             Node::createResourceNode(QUrl("uri:test9")),
+    removeList << Statement(Node::createResourceNode(KUrl("uri:test7")),
+                             Node::createResourceNode(KUrl("uri:test8")),
+                             Node::createResourceNode(KUrl("uri:test9")),
                              context);
-    removeList << Statement(Node::createResourceNode(QUrl("uri:testAA")),
-                             Node::createResourceNode(QUrl("uri:testBB")),
-                             Node::createResourceNode(QUrl("uri:testCCDD")),
+    removeList << Statement(Node::createResourceNode(KUrl("uri:testAA")),
+                             Node::createResourceNode(KUrl("uri:testBB")),
+                             Node::createResourceNode(KUrl("uri:testCCDD")),
                              context);
-    removeList << Statement(Node::createResourceNode(QUrl("uri:test7")),
-                             Node::createResourceNode(QUrl("uri:test8")),
-                             Node::createResourceNode(QUrl("uri:test9")),
+    removeList << Statement(Node::createResourceNode(KUrl("uri:test7")),
+                             Node::createResourceNode(KUrl("uri:test8")),
+                             Node::createResourceNode(KUrl("uri:test9")),
                              context);
-    removeList << Statement(Node::createResourceNode(QUrl("uri:test7")),
-                             Node::createResourceNode(QUrl("uri:test8")),
-                             Node::createResourceNode(QUrl("uri:test9")),
+    removeList << Statement(Node::createResourceNode(KUrl("uri:test7")),
+                             Node::createResourceNode(KUrl("uri:test8")),
+                             Node::createResourceNode(KUrl("uri:test9")),
                              context);
     KoTextRdfCore::removeStatementsIfTheyExist(m, removeList);
     QCOMPARE (m->statementCount(), 1);
@@ -687,20 +688,20 @@ void TestRdf::KoTextRdfCoreTripleFunctions()
 {
     Soprano::Model *m = Soprano::createModel();
     Soprano::Node context = Node();
-    m->addStatement(Node::createResourceNode(QUrl("uri:test1")),
-                     Node::createResourceNode(QUrl("uri:test2")),
-                     Node::createResourceNode(QUrl("uri:test3")),
+    m->addStatement(Node::createResourceNode(KUrl("uri:test1")),
+                     Node::createResourceNode(KUrl("uri:test2")),
+                     Node::createResourceNode(KUrl("uri:test3")),
                      context);
-    m->addStatement(Node::createResourceNode(QUrl("uri:test4")),
-                     Node::createResourceNode(QUrl("uri:test5")),
-                     Node::createResourceNode(QUrl("uri:test6")),
+    m->addStatement(Node::createResourceNode(KUrl("uri:test4")),
+                     Node::createResourceNode(KUrl("uri:test5")),
+                     Node::createResourceNode(KUrl("uri:test6")),
                      context);
-    m->addStatement(Node::createResourceNode(QUrl("uri:test7")),
-                     Node::createResourceNode(QUrl("uri:test8")),
+    m->addStatement(Node::createResourceNode(KUrl("uri:test7")),
+                     Node::createResourceNode(KUrl("uri:test8")),
                      Node(LiteralValue::createPlainLiteral("happy")),
                      context);
-    m->addStatement(Node::createResourceNode(QUrl("http://www.koffice.org/testB1")),
-                     Node::createResourceNode(QUrl("http://www.koffice.org/testB2")),
+    m->addStatement(Node::createResourceNode(KUrl("http://www.koffice.org/testB1")),
+                     Node::createResourceNode(KUrl("http://www.koffice.org/testB2")),
                      Node(LiteralValue::createPlainLiteral("zed")),
                      context);
 
@@ -708,18 +709,18 @@ void TestRdf::KoTextRdfCoreTripleFunctions()
     QString s;
 
     n = KoTextRdfCore::getObject(m,
-                                 Node::createResourceNode(QUrl("uri:test7")),
-                                 Node::createResourceNode(QUrl("uri:test8")));
+                                 Node::createResourceNode(KUrl("uri:test7")),
+                                 Node::createResourceNode(KUrl("uri:test8")));
     QVERIFY (n.isValid());
     QVERIFY (n.toString() == "happy");
 
     QVERIFY (KoTextRdfCore::getProperty(m,
-                                         Node::createResourceNode(QUrl("uri:test7")),
-                                         Node::createResourceNode(QUrl("uri:test8")),
+                                         Node::createResourceNode(KUrl("uri:test7")),
+                                         Node::createResourceNode(KUrl("uri:test8")),
                                          "default-value") == "happy");
     QVERIFY (KoTextRdfCore::getProperty(m,
-                                         Node::createResourceNode(QUrl("uri:test7")),
-                                         Node::createResourceNode(QUrl("uri:AAAAAAAAAAAAAA")),
+                                         Node::createResourceNode(KUrl("uri:test7")),
+                                         Node::createResourceNode(KUrl("uri:AAAAAAAAAAAAAA")),
                                          "default-value") == "default-value");
 
 

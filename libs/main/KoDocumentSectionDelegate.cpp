@@ -22,18 +22,18 @@
 #include "KoDocumentSectionToolTip.h"
 #include "KoDocumentSectionView.h"
 
-#include <QtDebug>
-#include <QApplication>
-#include <QKeyEvent>
-#include <QLineEdit>
-#include <QModelIndex>
-#include <QMouseEvent>
-#include <QPainter>
-#include <QPointer>
-#include <QStyle>
-#include <QStyleOptionViewItem>
+#include <QtCore/QtDebug>
+#include <QtGui/QApplication>
+#include <QtGui/QKeyEvent>
+#include <QtCore/QModelIndex>
+#include <QtGui/QMouseEvent>
+#include <QtGui/QPainter>
+#include <QtCore/QPointer>
+#include <QtGui/QStyle>
+#include <QtGui/QStyleOptionViewItem>
 
-#include <klocale.h>
+#include <KDE/KLocale>
+#include <KDE/KLineEdit>
 
 class KoDocumentSectionDelegate::Private
 {
@@ -141,14 +141,14 @@ bool KoDocumentSectionDelegate::editorEvent(QEvent *e, QAbstractItemModel *model
 
 QWidget *KoDocumentSectionDelegate::createEditor(QWidget *parent, const QStyleOptionViewItem&, const QModelIndex&) const
 {
-    d->edit = new QLineEdit(parent);
+    d->edit = new KLineEdit(parent);
     d->edit->installEventFilter(const_cast<KoDocumentSectionDelegate*>(this)); //hack?
     return d->edit;
 }
 
 void KoDocumentSectionDelegate::setEditorData(QWidget *widget, const QModelIndex &index) const
 {
-    QLineEdit *edit = qobject_cast<QLineEdit*>(widget);
+    KLineEdit *edit = qobject_cast<KLineEdit*>(widget);
     Q_ASSERT(edit);
 
     edit->setText(index.data(Qt::DisplayRole).toString());
@@ -156,7 +156,7 @@ void KoDocumentSectionDelegate::setEditorData(QWidget *widget, const QModelIndex
 
 void KoDocumentSectionDelegate::setModelData(QWidget *widget, QAbstractItemModel *model, const QModelIndex &index) const
 {
-    QLineEdit *edit = qobject_cast<QLineEdit*>(widget);
+    KLineEdit *edit = qobject_cast<KLineEdit*>(widget);
     Q_ASSERT(edit);
 
     model->setData(index, edit->text(), Qt::DisplayRole);
@@ -182,7 +182,7 @@ bool KoDocumentSectionDelegate::eventFilter(QObject *object, QEvent *event)
         }
     } break;
     case QEvent::KeyPress: {
-        QLineEdit *edit = qobject_cast<QLineEdit*>(object);
+        KLineEdit *edit = qobject_cast<KLineEdit*>(object);
         if (edit && edit == d->edit) {
             QKeyEvent *ke = static_cast<QKeyEvent*>(event);
             switch (ke->key()) {
@@ -207,7 +207,7 @@ bool KoDocumentSectionDelegate::eventFilter(QObject *object, QEvent *event)
         }
     } break;
     case QEvent::FocusOut : {
-        QLineEdit *edit = qobject_cast<QLineEdit*>(object);
+        KLineEdit *edit = qobject_cast<KLineEdit*>(object);
         if (edit && edit == d->edit) {
             emit commitData(edit);
             emit closeEditor(edit);

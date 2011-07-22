@@ -30,14 +30,14 @@ the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
 #include <KoConfigDocumentPage.h>
 #include <KoConfigMiscPage.h>
 
-#include <klocale.h>
-#include <knuminput.h>
-#include <kcolorbutton.h>
-#include <kcomponentdata.h>
-#include <kicon.h>
-#include <kvbox.h>
-#include <kconfig.h>
-#include <kcombobox.h>
+#include <KDE/KLocale>
+#include <KDE/KNumInput>
+#include <KDE/KColorButton>
+#include <KDE/KComponentData>
+#include <KDE/KIcon>
+#include <KDE/KVBox>
+#include <KDE/KConfig>
+#include <KDE/KComboBox>
 
 #include <QtGui/QCheckBox>
 #include <QtGui/QLabel>

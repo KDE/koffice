@@ -18,7 +18,7 @@
     </widget>
    </item>
    <item row="0" column="4" colspan="2" >
-    <widget class="QLineEdit" name="leFullName" >
+    <widget class="KLineEdit" name="leFullName" >
      <property name="sizePolicy" >
       <sizepolicy vsizetype="Fixed" hsizetype="Expanding" >
        <horstretch>1</horstretch>
@@ -45,7 +45,7 @@
     </widget>
    </item>
    <item row="2" column="4" colspan="2" >
-    <widget class="QLineEdit" name="leInitials" >
+    <widget class="KLineEdit" name="leInitials" >
      <property name="sizePolicy" >
       <sizepolicy vsizetype="Fixed" hsizetype="Expanding" >
        <horstretch>1</horstretch>
@@ -65,7 +65,7 @@
     </widget>
    </item>
    <item row="3" column="4" colspan="2" >
-    <widget class="QLineEdit" name="leTitle" />
+    <widget class="KLineEdit" name="leTitle" />
    </item>
    <item row="4" column="0" colspan="4" >
     <widget class="QLabel" name="lblPositionDesc" >
@@ -78,7 +78,7 @@
     </widget>
    </item>
    <item row="4" column="4" colspan="2" >
-    <widget class="QLineEdit" name="lePosition" />
+    <widget class="KLineEdit" name="lePosition" />
    </item>
    <item row="5" column="0" colspan="4" >
     <widget class="QLabel" name="lblCompanyDesc" >
@@ -91,7 +91,7 @@
     </widget>
    </item>
    <item row="5" column="4" colspan="2" >
-    <widget class="QLineEdit" name="leCompany" />
+    <widget class="KLineEdit" name="leCompany" />
    </item>
    <item row="6" column="0" colspan="4" >
     <widget class="QLabel" name="lblEmailDesc" >
@@ -104,7 +104,7 @@
     </widget>
    </item>
    <item row="6" column="4" colspan="2" >
-    <widget class="QLineEdit" name="leEmail" />
+    <widget class="KLineEdit" name="leEmail" />
    </item>
    <item row="7" column="0" colspan="4" >
     <widget class="QLabel" name="lblPhoneHome" >
@@ -117,7 +117,7 @@
     </widget>
    </item>
    <item row="7" column="4" colspan="2" >
-    <widget class="QLineEdit" name="lePhoneHome" />
+    <widget class="KLineEdit" name="lePhoneHome" />
    </item>
    <item row="8" column="0" colspan="4" >
     <widget class="QLabel" name="lblPhoneWork" >
@@ -130,7 +130,7 @@
     </widget>
    </item>
    <item row="8" column="4" colspan="2" >
-    <widget class="QLineEdit" name="lePhoneWork" />
+    <widget class="KLineEdit" name="lePhoneWork" />
    </item>
    <item row="9" column="0" colspan="4" >
     <widget class="QLabel" name="lblFaxDesc" >
@@ -143,7 +143,7 @@
     </widget>
    </item>
    <item row="9" column="4" colspan="2" >
-    <widget class="QLineEdit" name="leFax" />
+    <widget class="KLineEdit" name="leFax" />
    </item>
    <item row="10" column="0" colspan="4" >
     <widget class="QLabel" name="lblStreetDesc" >
@@ -156,7 +156,7 @@
     </widget>
    </item>
    <item row="10" column="4" colspan="2" >
-    <widget class="QLineEdit" name="leStreet" />
+    <widget class="KLineEdit" name="leStreet" />
    </item>
    <item row="11" column="0" colspan="4" >
     <widget class="QLabel" name="lblPostalDesc" >
@@ -169,7 +169,7 @@
     </widget>
    </item>
    <item row="11" column="4" colspan="2" >
-    <widget class="QLineEdit" name="lePostal" />
+    <widget class="KLineEdit" name="lePostal" />
    </item>
    <item row="12" column="0" colspan="4" >
     <widget class="QLabel" name="lblCityDesc" >
@@ -182,7 +182,7 @@
     </widget>
    </item>
    <item row="12" column="4" colspan="2" >
-    <widget class="QLineEdit" name="leCity" />
+    <widget class="KLineEdit" name="leCity" />
    </item>
    <item row="13" column="0" colspan="4" >
     <widget class="QLabel" name="lblCountryDesc" >
@@ -195,7 +195,7 @@
     </widget>
    </item>
    <item row="13" column="4" colspan="2" >
-    <widget class="QLineEdit" name="leCountry" />
+    <widget class="KLineEdit" name="leCountry" />
    </item>
    <item row="14" column="0" colspan="3" >
     <spacer>

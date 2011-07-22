@@ -18,25 +18,25 @@
 
 #include "KoZoomInput.h"
 
-#include <kdebug.h>
-#include <klocale.h>
+#include <KDE/KDebug>
+#include <KDE/KLocale>
+#include <KDE/KComboBox>
 
-#include <QComboBox>
-#include <QLabel>
-#include <QHBoxLayout>
-#include <QStyle>
-#include <QStyleOption>
-#include <QPainter>
-#include <QPalette>
-#include <QAbstractItemView>
-#include <QEvent>
-#include <QKeyEvent>
-#include <QLineEdit>
+#include <QtGui/QLabel>
+#include <QtGui/QHBoxLayout>
+#include <QtGui/QStyle>
+#include <QtGui/QStyleOption>
+#include <QtGui/QPainter>
+#include <QtGui/QPalette>
+#include <QtGui/QAbstractItemView>
+#include <QtCore/QEvent>
+#include <QtGui/QKeyEvent>
+#include <QtGui/QLineEdit>
 
 class KoZoomInput::Private
 {
     public:
-        QComboBox* combo;
+        KComboBox* combo;
         QLabel* label;
         bool inside;
 };
@@ -69,7 +69,7 @@ KoZoomInput::KoZoomInput(QWidget* parent)
     icon->setPixmap(pixmap);
     layout->addWidget(icon);
     addWidget(first);
-    d->combo = new QComboBox(this);
+    d->combo = new KComboBox(this);
     d->combo->setMaxVisibleItems(15);
     d->combo->setEditable(true);
     d->combo->installEventFilter(this);

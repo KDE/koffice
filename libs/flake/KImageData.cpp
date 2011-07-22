@@ -29,12 +29,12 @@
 #include <KOdfStore.h>
 #include <KOdfStorageDevice.h>
 
-#include <kdebug.h>
+#include <KDE/KDebug>
+#include <KDE/KTemporaryFile>
 
-#include <QBuffer>
-#include <QCryptographicHash>
-#include <KTemporaryFile>
-#include <QPainter>
+#include <QtCore/QBuffer>
+#include <QtCore/QCryptographicHash>
+#include <QtGui/QPainter>
 
 /// the maximum amount of bytes the image can be while we store it in memory instead of
 /// spooling it to disk in a temp-file.
@@ -203,10 +203,10 @@ void KImageData::setImage(const QImage &image, KImageCollection *collection)
 
 void KImageData::setExternalImage(const QString &location, KImageCollection *collection)
 {
-    setExternalImage(QUrl::fromUserInput(location), collection);
+    setExternalImage(KUrl::fromUserInput(location), collection);
 }
 
-void KImageData::setExternalImage(const QUrl &location, KImageCollection *collection)
+void KImageData::setExternalImage(const KUrl &location, KImageCollection *collection)
 {
     if (collection) {
         // let the collection first check if it already has one. If it doesn't it'll call this method

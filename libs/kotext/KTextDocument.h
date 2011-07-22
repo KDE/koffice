@@ -22,8 +22,9 @@
 #ifndef KTEXTDOCUMENT_H
 #define KTEXTDOCUMENT_H
 
-#include <QTextDocument>
-#include <QUrl>
+#include <QtGui/QTextDocument>
+
+#include <KDE/KUrl>
 
 #include "KoList.h"
 
@@ -154,13 +155,13 @@ public:
         TextEditor,
         HeadingList
     };
-    static const QUrl StyleManagerURL;
-    static const QUrl ListsURL;
-    static const QUrl InlineObjectTextManagerURL;
-    static const QUrl ChangeTrackerURL;
-    static const QUrl UndoStackURL;
-    static const QUrl TextEditorURL;
-    static const QUrl HeadingListURL;
+    static const KUrl StyleManagerURL;
+    static const KUrl ListsURL;
+    static const KUrl InlineObjectTextManagerURL;
+    static const KUrl ChangeTrackerURL;
+    static const KUrl UndoStackURL;
+    static const KUrl TextEditorURL;
+    static const KUrl HeadingListURL;
 
 private:
     QTextDocument *m_document;

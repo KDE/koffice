@@ -185,7 +185,7 @@
        <widget class="KoUnitDoubleSpinBox" name="minimumLineSpacing"/>
       </item>
       <item row="0" column="0" colspan="2">
-       <widget class="QComboBox" name="lineSpacing">
+       <widget class="KComboBox" name="lineSpacing">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
           <horstretch>1</horstretch>

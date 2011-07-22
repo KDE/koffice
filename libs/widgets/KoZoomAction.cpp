@@ -21,28 +21,27 @@
 #include "KoZoomMode.h"
 #include "KoZoomInput.h"
 
-#include <QString>
-#include <QLocale>
-#include <QStringList>
-#include <QRegExp>
-#include <QList>
-#include <QToolBar>
-#include <QSlider>
-#include <QLineEdit>
-#include <QToolButton>
-#include <QLabel>
-#include <QGridLayout>
-#include <QMenu>
-#include <QStatusBar>
-#include <QButtonGroup>
-#include <QComboBox>
+#include <QtCore/QString>
+#include <QtCore/QStringList>
+#include <QtCore/QRegExp>
+#include <QtCore/QList>
+#include <QtGui/QToolBar>
+#include <QtGui/QSlider>
+#include <QtGui/QLineEdit>
+#include <QtGui/QToolButton>
+#include <QtGui/QLabel>
+#include <QtGui/QGridLayout>
+#include <QtGui/QMenu>
+#include <QtGui/QStatusBar>
+#include <QtGui/QButtonGroup>
 
-#include <klocale.h>
-#include <kicon.h>
-#include <knuminput.h>
-#include <kstandardaction.h>
-#include <kactioncollection.h>
-#include <kdebug.h>
+#include <KDE/KComboBox>
+#include <KDE/KLocale>
+#include <KDE/KIcon>
+#include <KDE/KNumInput>
+#include <KDE/KStandardAction>
+#include <KDE/KActionCollection>
+#include <KDE/KDebug>
 
 #include <math.h>
 

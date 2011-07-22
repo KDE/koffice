@@ -26,7 +26,7 @@
 
 class KoDocumentRdf;
 class KoSemanticStylesheet;
-class QComboBox;
+class KComboBox;
 
 /**
  * @short A widget to let the user view and edit the Rdf for with the document
@@ -127,7 +127,7 @@ private slots:
 
 private:
 
-    KoSemanticStylesheet *stylesheetFromComboBox(QComboBox *w) const;
+    KoSemanticStylesheet *stylesheetFromComboBox(KComboBox *w) const;
 
     class KoDocumentRdfEditWidgetPrivate;
     KoDocumentRdfEditWidgetPrivate *const d;

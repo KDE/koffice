@@ -27,11 +27,11 @@
 // KOffice
 
 // KDE
-#include <kdebug.h>
+#include <KDE/KDebug>
+#include <KDE/KTextEdit>
 
 // Qt
 #include <QApplication>
-#include <QTextEdit>
 
 class FormulaEditorHighlighter::Private
 {
@@ -51,7 +51,7 @@ public:
 };
 
 
-FormulaEditorHighlighter::FormulaEditorHighlighter(QTextEdit* textEdit, Selection* selection)
+FormulaEditorHighlighter::FormulaEditorHighlighter(KTextEdit* textEdit, Selection* selection)
         : QSyntaxHighlighter(textEdit)
         , d(new Private)
 {
@@ -160,7 +160,7 @@ void FormulaEditorHighlighter::handleBrace(uint index)
 {
     const KCToken& token = d->tokens.at(index);
 
-    QTextEdit* textEdit = qobject_cast<QTextEdit*>(parent());
+    KTextEdit* textEdit = qobject_cast<KTextEdit*>(parent());
     Q_ASSERT(textEdit);
     int cursorPos = textEdit->textCursor().position();
     int distance = cursorPos - token.pos();

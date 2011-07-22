@@ -23,7 +23,7 @@
 
 #include "flake_export.h"
 
-#include <QSize>
+#include <QtCore/QSize>
 
 #include <KShapeUserData.h>
 
@@ -31,7 +31,7 @@ class QIODevice;
 class QPixmap;
 class QImage;
 class QSizeF;
-class QUrl;
+class KUrl;
 class KImageCollection;
 class KImageDataPrivate;
 class KOdfStore;
@@ -84,7 +84,7 @@ public:
 
     void setImage(const QImage &image, KImageCollection *collection = 0);
     void setImage(const QByteArray &imageData, KImageCollection *collection = 0);
-    void setExternalImage(const QUrl &location, KImageCollection *collection = 0);
+    void setExternalImage(const KUrl &location, KImageCollection *collection = 0);
     void setExternalImage(const QString &location, KImageCollection *collection = 0);
     void setImage(const QString &location, KOdfStore *store, KImageCollection *collection = 0);
 

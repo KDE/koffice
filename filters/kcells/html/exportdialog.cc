@@ -19,17 +19,17 @@
 
 #include "exportdialog.h"
 
-#include <QCheckBox>
-#include <QComboBox>
-#include <QListWidget>
-#include <QRadioButton>
-#include <QSpinBox>
-#include <QTextCodec>
+#include <QtCore/QTextCodec>
+#include <QtGui/QCheckBox>
+#include <QtGui/QListWidget>
+#include <QtGui/QRadioButton>
+#include <QtGui/QSpinBox>
 
-#include <kapplication.h>
-#include <kglobal.h>
-#include <klocale.h>
-#include <kurlrequester.h>
+#include <KDE/KApplication>
+#include <KDE/KComboBox>
+#include <KDE/KGlobal>
+#include <KDE/KLocale>
+#include <KDE/KUrlRequester>
 
 
 ExportDialog::ExportDialog(QWidget *parent)

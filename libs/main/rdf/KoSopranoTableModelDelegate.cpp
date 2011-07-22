@@ -23,8 +23,8 @@
 #include "KoDocumentRdf.h"
 #include "../KoDocument.h"
 
-#include <klocale.h>
-#include <QComboBox>
+#include <KDE/KLocale>
+#include <KDE/KComboBox>
 
 KoSopranoTableModelDelegate::KoSopranoTableModelDelegate(QObject *parent)
         : QStyledItemDelegate(parent)
@@ -35,7 +35,7 @@ QWidget *KoSopranoTableModelDelegate::createEditor(QWidget *parent,
         const QStyleOptionViewItem &option,
         const QModelIndex &index) const
 {
-    QComboBox *comboBox = new QComboBox(parent);
+    KComboBox *comboBox = new KComboBox(parent);
     if (index.column() == KoSopranoTableModel::ColObjType) {
         comboBox->addItem(i18n("URI"));
         comboBox->addItem(i18n("Literal"));
@@ -50,7 +50,7 @@ QWidget *KoSopranoTableModelDelegate::createEditor(QWidget *parent,
 void KoSopranoTableModelDelegate::setEditorData(QWidget *editor,
         const QModelIndex &index) const
 {
-    QComboBox *comboBox = qobject_cast<QComboBox *>(editor);
+    KComboBox *comboBox = qobject_cast<KComboBox *>(editor);
     if (!comboBox) {
         return QStyledItemDelegate::setEditorData(editor, index);
     }
@@ -62,7 +62,7 @@ void KoSopranoTableModelDelegate::setEditorData(QWidget *editor,
 void KoSopranoTableModelDelegate::setModelData(QWidget *editor, QAbstractItemModel *model,
         const QModelIndex &index) const
 {
-    QComboBox *comboBox = qobject_cast<QComboBox *>(editor);
+    KComboBox *comboBox = qobject_cast<KComboBox *>(editor);
     if (!comboBox) {
         return QStyledItemDelegate::setModelData(editor, model, index);
     }

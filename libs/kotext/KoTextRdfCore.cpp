@@ -19,10 +19,14 @@
 
 #include "KoTextRdfCore.h"
 #include "KoTextRdfCore_p.h"
-#include <kdebug.h>
+
+#include <QtCore/QFile>
+
+#include <KDE/KDebug>
+
 #include <KOdfStorageDevice.h>
 #include <KXmlWriter.h>
-#include <QtCore/QFile>
+
 using namespace Soprano;
 
 bool KoTextRdfCore::saveRdf(Soprano::StatementIterator triples, KOdfStore *store, KXmlWriter *manifestWriter, const QString &fileName)
@@ -113,8 +117,8 @@ bool KoTextRdfCore::loadManifest(KOdfStore *store, Soprano::Model *model)
         //kDebug(30003) << "Entry " << fileName << " not found!";
         return false;
     }
-    Soprano::Node context(QUrl("http://www.koffice.org/Rdf/path/" + fileName));
-    QUrl BaseURI = QUrl("");
+    Soprano::Node context(KUrl("http://www.koffice.org/Rdf/path/" + fileName));
+    KUrl BaseURI = KUrl("");
     //kDebug(30015) << "Loading external Rdf/XML from:" << fileName;
 
     QString rdfxmlData(store->device()->readAll());
@@ -157,9 +161,9 @@ void KoTextRdfCore::dumpModel(const QString &msg, Soprano::Model *m)
 
 QList<Soprano::Statement> KoTextRdfCore::loadList(Soprano::Model *model, Soprano::Node ListHeadSubject)
 {
-    Node rdfNil = Node::createResourceNode(QUrl("http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"));
-    Node rdfFirst = Node::createResourceNode(QUrl("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"));
-    Node rdfRest = Node::createResourceNode(QUrl("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"));
+    Node rdfNil = Node::createResourceNode(KUrl("http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"));
+    Node rdfFirst = Node::createResourceNode(KUrl("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"));
+    Node rdfRest = Node::createResourceNode(KUrl("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"));
 
     Soprano::Node listBNode = ListHeadSubject;
     QList<Statement> ret;
@@ -182,9 +186,9 @@ QList<Soprano::Statement> KoTextRdfCore::loadList(Soprano::Model *model, Soprano
 
 static void removeList(Soprano::Model *model, Soprano::Node ListHeadSubject)
 {
-    Node rdfNil = Node::createResourceNode(QUrl("http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"));
-    Node rdfFirst = Node::createResourceNode(QUrl("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"));
-    Node rdfRest = Node::createResourceNode(QUrl("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"));
+    Node rdfNil = Node::createResourceNode(KUrl("http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"));
+    Node rdfFirst = Node::createResourceNode(KUrl("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"));
+    Node rdfRest = Node::createResourceNode(KUrl("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"));
     //
     // Chain down the list recursively so we delete from
     // the list tail back to the head.
@@ -201,9 +205,9 @@ static void removeList(Soprano::Model *model, Soprano::Node ListHeadSubject)
 
 void KoTextRdfCore::saveList(Soprano::Model *model, Soprano::Node ListHeadSubject, QList<Soprano::Node> &dataBNodeList, Soprano::Node context)
 {
-    Node rdfNil = Node::createResourceNode(QUrl("http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"));
-    Node rdfFirst = Node::createResourceNode(QUrl("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"));
-    Node rdfRest = Node::createResourceNode(QUrl("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"));
+    Node rdfNil = Node::createResourceNode(KUrl("http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"));
+    Node rdfFirst = Node::createResourceNode(KUrl("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"));
+    Node rdfRest = Node::createResourceNode(KUrl("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"));
 
     //kDebug(30015) << "header:" << ListHeadSubject.toString();
     //kDebug(30015) << "list.sz:" << dataBNodeList.size();

@@ -20,24 +20,24 @@
 
 #include <kcellslatexexportdiaImpl.h>
 
-#include <QDir>
-#include <QComboBox>
-#include <q3buttongroup.h>
-#include <QRadioButton>
-#include <QCheckBox>
+#include <QtCore/QDir>
+#include <Qt3Support/Q3ButtonGroup>
+#include <QtGui/QRadioButton>
+#include <QtGui/QCheckBox>
 
-#include <kapplication.h>
-#include <kglobal.h>
-#include <klocale.h>
-#include <kconfig.h>
-#include <kstandarddirs.h>
-#include <krecentdocument.h>
-#include <kurlrequester.h>
-#include <kfiledialog.h>
-#include <kdebug.h>
+#include <KDE/KComboBox>
+#include <KDE/KApplication>
+#include <KDE/KGlobal>
+#include <KDE/KLocale>
+#include <KDE/KConfig>
+#include <KDE/KStandardDirs>
+#include <KDE/KRecentDocument>
+#include <KDE/KUrlRequester>
+#include <KDE/KFileDialog>
+#include <KDE/KDebug>
+#include <KDE/KNumInput>
+
 #include <KoFilterManager.h>
-#include <kcombobox.h>
-#include <knuminput.h>
 
 #include "latexexportAdaptor.h"
 
@@ -55,7 +55,7 @@
  *  true to construct a modal dialog.
  */
 KCellsLatexExportDiaImpl::KCellsLatexExportDiaImpl(KOdfStore* in, QWidget* parent, Qt::WFlags fl)
-        : QDialog(parent, fl), Ui::LatexExportDia(), _in(in)
+        : KDialog(parent, fl), Ui::LatexExportDia(), _in(in)
 {
     int i = 0;
 
@@ -160,7 +160,7 @@ KCellsLatexExportDiaImpl::~KCellsLatexExportDiaImpl()
 void KCellsLatexExportDiaImpl::reject()
 {
     kDebug(30522) << "Export cancelled";
-    QDialog::reject();
+    KDialog::reject();
 }
 
 /**

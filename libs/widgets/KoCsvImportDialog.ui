@@ -37,7 +37,7 @@ Boston, MA 02110-1301, USA.
   </property>
   <layout class="QVBoxLayout">
    <item>
-    <widget class="QTabWidget" name="m_tabWidget">
+    <widget class="KTabWidget" name="m_tabWidget">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
        <horstretch>0</horstretch>
@@ -198,7 +198,7 @@ Boston, MA 02110-1301, USA.
            </widget>
           </item>
           <item row="1" column="2">
-           <widget class="QLineEdit" name="m_delimiterEdit">
+           <widget class="KLineEdit" name="m_delimiterEdit">
             <property name="maximumSize">
              <size>
               <width>50</width>
@@ -246,7 +246,7 @@ Boston, MA 02110-1301, USA.
         </widget>
        </item>
        <item row="0" column="3" colspan="2">
-        <widget class="QComboBox" name="m_comboQuote">
+        <widget class="KComboBox" name="m_comboQuote">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
            <horstretch>0</horstretch>
@@ -297,7 +297,7 @@ Boston, MA 02110-1301, USA.
         </widget>
        </item>
        <item row="1" column="4">
-        <widget class="QLineEdit" name="m_decimalSymbol">
+        <widget class="KLineEdit" name="m_decimalSymbol">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
            <horstretch>0</horstretch>
@@ -326,7 +326,7 @@ Boston, MA 02110-1301, USA.
         </widget>
        </item>
        <item row="2" column="4">
-        <widget class="QLineEdit" name="m_thousandsSeparator">
+        <widget class="KLineEdit" name="m_thousandsSeparator">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
            <horstretch>0</horstretch>
@@ -574,7 +574,7 @@ Boston, MA 02110-1301, USA.
  <customwidgets>
   <customwidget>
    <class>KComboBox</class>
-   <extends>QComboBox</extends>
+   <extends>KComboBox</extends>
    <header>kcombobox.h</header>
   </customwidget>
  </customwidgets>

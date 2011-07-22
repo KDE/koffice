@@ -20,16 +20,16 @@
 
 #include "SCHtmlExportDialog.h"
 
-#include <QMessageBox>
-#include <QPainter>
-#include <QDir>
-#include <QWebFrame>
+#include <QtGui/QPainter>
+#include <QtCore/QDir>
+#include <QtWebKit/QWebFrame>
 
-#include <KLocale>
-#include <KStandardDirs>
-#include <KFileDialog>
-#include <KArchiveDirectory>
-#include <KZip>
+#include <KDE/KMessageBox>
+#include <KDE/KLocale>
+#include <KDE/KStandardDirs>
+#include <KDE/KFileDialog>
+#include <KDE/KArchiveDirectory>
+#include <KDE/KZip>
 
 #include "SCHtmlExport.h"
 
@@ -155,7 +155,7 @@ void SCHtmlExportDialog::addSelectedTemplateToFavorite()
     KUrl templatePath(ui.kcombobox->itemData(ui.kcombobox->currentIndex()).toString());
     savePath += templatePath.fileName();
     if(!(QFile::copy(templatePath.toLocalFile(), savePath))){
-        QMessageBox::information(this, i18n("Error"), i18n("There is already a favorite file with this name"));
+        KMessageBox::information(this, i18n("Error"), i18n("There is already a favorite file with this name"));
     }
     else {
         // Update list
@@ -208,7 +208,7 @@ bool SCHtmlExportDialog::verifyZipFile(const QString &zipLocalPath){
         }
     }
     if(!message.isEmpty()){
-        QMessageBox::information(this, i18n("Error"), message);
+        KMessageBox::information(this, i18n("Error"), message);
     }
     return message.isEmpty();
 }
@@ -319,10 +319,10 @@ void SCHtmlExportDialog::updateFavoriteButton()
 void SCHtmlExportDialog::favoriteAction()
 {
    if (this->selectedTemplateIsFavorite()) {
-        int button = QMessageBox::question(this, i18n("Confirm remove"), i18n("Are you sure you want to remove \"%1\"?",
-            ui.kcombobox->currentText()), QMessageBox::Yes | QMessageBox::No);
+        int button = KMessageBox::questionYesNo(this, i18n("Confirm remove"), i18n("Are you sure you want to remove \"%1\"?",
+            ui.kcombobox->currentText()));
 
-        if (button == QMessageBox::Yes){
+        if (button == KMessageBox::Yes){
             this->delSelectedTemplateFromFavorite();
         }
     }

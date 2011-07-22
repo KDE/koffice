@@ -18,7 +18,7 @@
  */
 
 #include "ChangeConfigureDialog.h"
-#include <QtGui/QColorDialog>
+#include <KDE/KColorDialog>
 #include <QtGui/QPainter>
 
 ColorDisplayLabel::ColorDisplayLabel(QWidget *parent)
@@ -50,7 +50,7 @@ void ColorDisplayLabel::setColor(const QColor &color)
 }
 
 ChangeConfigureDialog::ChangeConfigureDialog(const QColor &insertionColor, const QColor &deletionColor, const QColor &formatChangeColor, const QString &authorName, KChangeTracker::ChangeSaveFormat changeSaveFormat, QWidget *parent)
-    :QDialog(parent)
+    :KDialog(parent)
 {
     ui.setupUi(this);
     ui.insertionColorDisplayLabel->setColor(insertionColor);
@@ -118,22 +118,19 @@ void ChangeConfigureDialog::colorSelect(ChangeType type)
 
     switch (type) {
     case eInsert:
-        selectedColor = QColorDialog::getColor(ui.insertionColorDisplayLabel->color(), this);
-        if (selectedColor.isValid()) {
+	if (KColorDialog::getColor(selectedColor, ui.insertionColorDisplayLabel->color(), this) == KColorDialog::Accepted && selectedColor.isValid()) {
             ui.insertionColorDisplayLabel->setColor(selectedColor);
             ui.insertionColorDisplayLabel->update();
         }
         break;
     case eDelete:
-        selectedColor = QColorDialog::getColor(ui.deletionColorDisplayLabel->color(), this);
-        if (selectedColor.isValid()) {
+        if (KColorDialog::getColor(selectedColor, ui.deletionColorDisplayLabel->color(), this) == KColorDialog::Accepted && selectedColor.isValid()) {
             ui.deletionColorDisplayLabel->setColor(selectedColor);
             ui.deletionColorDisplayLabel->update();
         }
         break;
     case eFormatChange:
-        selectedColor = QColorDialog::getColor(ui.formatColorDisplayLabel->color(), this);
-        if (selectedColor.isValid()) {
+        if (KColorDialog::getColor(selectedColor, ui.formatColorDisplayLabel->color(), this) == KColorDialog::Accepted && selectedColor.isValid()) {
             ui.formatColorDisplayLabel->setColor(selectedColor);
             ui.formatColorDisplayLabel->update();
         }

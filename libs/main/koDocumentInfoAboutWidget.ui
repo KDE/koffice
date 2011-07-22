@@ -42,7 +42,7 @@
     </widget>
    </item>
    <item row="2" column="1" colspan="2" >
-    <widget class="QLineEdit" name="leTitle" />
+    <widget class="KLineEdit" name="leTitle" />
    </item>
    <item row="3" column="0" >
     <widget class="QLabel" name="lblSubjectDesc" >
@@ -55,7 +55,7 @@
     </widget>
    </item>
    <item row="3" column="1" colspan="2" >
-    <widget class="QLineEdit" name="leSubject" />
+    <widget class="KLineEdit" name="leSubject" />
    </item>
    <item row="4" column="0" >
     <widget class="QLabel" name="lblKeywordsDesc" >
@@ -68,7 +68,7 @@
     </widget>
    </item>
    <item row="4" column="1" colspan="2" >
-    <widget class="QLineEdit" name="leKeywords" >
+    <widget class="KLineEdit" name="leKeywords" >
      <property name="text" >
       <string/>
      </property>
@@ -88,7 +88,7 @@
     </widget>
    </item>
    <item row="5" column="1" colspan="2" >
-    <widget class="QTextEdit" name="meComments" />
+    <widget class="KTextEdit" name="meComments" />
    </item>
    <item row="6" column="0" colspan="3" >
     <widget class="Line" name="line_2" >

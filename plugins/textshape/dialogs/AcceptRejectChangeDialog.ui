@@ -70,7 +70,7 @@
     <string>Cancel</string>
    </property>
   </widget>
-  <widget class="QTextEdit" name="changeLogTextEdit">
+  <widget class="KTextEdit" name="changeLogTextEdit">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -135,7 +135,7 @@
     <string>Type</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="authorNameLineEdit">
+  <widget class="KLineEdit" name="authorNameLineEdit">
    <property name="geometry">
     <rect>
      <x>70</x>
@@ -148,7 +148,7 @@
     <bool>true</bool>
    </property>
   </widget>
-  <widget class="QLineEdit" name="dateLineEdit">
+  <widget class="KLineEdit" name="dateLineEdit">
    <property name="geometry">
     <rect>
      <x>70</x>
@@ -161,7 +161,7 @@
     <bool>true</bool>
    </property>
   </widget>
-  <widget class="QLineEdit" name="changeTypeLineEdit">
+  <widget class="KLineEdit" name="changeTypeLineEdit">
    <property name="geometry">
     <rect>
      <x>70</x>

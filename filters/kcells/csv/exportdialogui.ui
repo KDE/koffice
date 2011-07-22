@@ -12,7 +12,7 @@
   </property>
   <layout class="QGridLayout">
    <item row="1" column="0">
-    <widget class="QTabWidget" name="m_tabWidget">
+    <widget class="KTabWidget" name="m_tabWidget">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
        <horstretch>0</horstretch>
@@ -162,7 +162,7 @@
          </property>
          <layout class="QGridLayout">
           <item row="0" column="0">
-           <widget class="QLineEdit" name="m_sheetDelimiter">
+           <widget class="KLineEdit" name="m_sheetDelimiter">
             <property name="text">
              <string>********&lt;SHEETNAME&gt;********</string>
             </property>
@@ -261,7 +261,7 @@
            </widget>
           </item>
           <item row="1" column="2">
-           <widget class="QLineEdit" name="m_delimiterEdit">
+           <widget class="KLineEdit" name="m_delimiterEdit">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -314,7 +314,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QComboBox" name="m_comboQuote">
+           <widget class="KComboBox" name="m_comboQuote">
             <property name="enabled">
              <bool>true</bool>
             </property>
@@ -377,7 +377,7 @@
   </customwidget>
   <customwidget>
    <class>KComboBox</class>
-   <extends>QComboBox</extends>
+   <extends>KComboBox</extends>
    <header>kcombobox.h</header>
   </customwidget>
  </customwidgets>
