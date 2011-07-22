@@ -57,7 +57,7 @@
 #include <KDE/KComponentData>
 #include <KDE/KFileItem>
 #include <KDE/KIO/Job>
-#include <KDE/KIO/JobClasses>
+#include <kio/jobclasses.h>
 
 
 using namespace Soprano;
