@@ -20,7 +20,7 @@
 
 #include <KDE/KDebug>
 #include <KDE/KLocale>
-#include <KDE/KComboBox>
+#include <QtGui/QComboBox>
 
 #include <QtGui/QLabel>
 #include <QtGui/QHBoxLayout>
@@ -36,7 +36,7 @@
 class KoZoomInput::Private
 {
     public:
-        KComboBox* combo;
+        QComboBox* combo;
         QLabel* label;
         bool inside;
 };
@@ -69,7 +69,7 @@ KoZoomInput::KoZoomInput(QWidget* parent)
     icon->setPixmap(pixmap);
     layout->addWidget(icon);
     addWidget(first);
-    d->combo = new KComboBox(this);
+    d->combo = new QComboBox(this);
     d->combo->setMaxVisibleItems(15);
     d->combo->setEditable(true);
     d->combo->installEventFilter(this);
