@@ -91,6 +91,9 @@ KVariable *KVariableManager::createVariable(const QString &name) const
 
 void KVariableManager::saveOdf(KXmlWriter* writer) const 
 {
+	//If no user-defined variables, don't save them!
+	if (variables().size() < 1)
+		return;
 	writer->startElement("text:user-field-decls");
 	foreach (const QString &name, variables()) {
 		writer->startElement("text:user-field-decl");
