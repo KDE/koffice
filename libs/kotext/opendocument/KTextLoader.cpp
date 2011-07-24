@@ -654,8 +654,9 @@ void KTextLoader::loadBody(const KXmlElement &bodyElem, QTextCursor &cursor)
                         loadSection(tag, cursor);
                     } else if (localName == "table-of-content") {
                         loadTableOfContents(tag, cursor);
-		    } else if (localName == "user-field-decls") {
-			loadVariableDeclarations(tag, cursor);
+                    } else if (localName == "user-field-decls") {
+                        loadVariableDeclarations(tag, cursor);
+                        usedParagraph = false;
                     } else {
                         KInlineObject *obj = KInlineObjectRegistry::instance()->createFromOdf(tag, d->context);
                         if (obj) {
