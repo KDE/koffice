@@ -24,6 +24,8 @@
 #include "KWOdfWriter.h"
 #include "KWDocument.h"
 #include "KWPage.h"
+#include <KInlineTextObjectManager.h>
+#include <KVariableManager.h>
 
 #include "frames/KWTextFrameSet.h"
 #include "frames/KWTextFrame.h"
@@ -225,6 +227,10 @@ bool KWOdfWriter::save(KOdfWriteStore &odfStore, KOdfEmbeddedDocumentSaver &embe
     bodyWriter->startElement("office:text");
 
     KShapeSavingContext context(*tmpBodyWriter, mainStyles, embeddedSaver);
+
+    //Save Variable Declarations    
+    KVariableManager *variable_manager = m_document->inlineTextObjectManager()->variableManager();
+    variable_manager->saveOdf(bodyWriter);
 
     KTextSharedSavingData *sharedData = new KTextSharedSavingData;
     sharedData->setGenChanges(changes);

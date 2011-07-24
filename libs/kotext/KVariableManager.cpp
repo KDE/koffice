@@ -19,6 +19,7 @@
 #include "KVariableManager.h"
 #include "KInlineTextObjectManager.h"
 #include "KNamedVariable_p.h"
+#include <KXmlWriter.h>
 
 class KVariableManagerPrivate
 {
@@ -86,6 +87,20 @@ KVariable *KVariableManager::createVariable(const QString &name) const
     if (key == 0)
         return 0;
     return new KNamedVariable(static_cast<KInlineObject::Property>(key), name);
+}
+
+void KVariableManager::saveOdf(KXmlWriter* writer) const 
+{
+	writer->startElement("text:user-field-decls");
+	foreach (const QString &name, variables()) {
+		writer->startElement("text:user-field-decl");
+		writer->addAttribute("text:name", name);
+		// TODO : Support other value types based on the actual variable type
+		writer->addAttribute("office:value-type", "string");
+		writer->addAttribute("office:string-value", value(name));
+		writer->endElement(); //text:user-field-decl
+	}
+	writer->endElement(); //text:user-field-decls
 }
 
 QList<QString> KVariableManager::variables() const

@@ -22,6 +22,7 @@
 #include <KProperties.h>
 
 #include <KXmlReader.h> // for usage in Q_UNUSED
+#include <KXmlWriter.h> // for usage in Q_UNUSED
 #include <KShapeLoadingContext.h> // for usage in Q_UNUSED
 #include <KShapeSavingContext.h> // for usage in Q_UNUSED
 
@@ -53,6 +54,8 @@ bool KNamedVariable::loadOdf(const KXmlElement &element, KShapeLoadingContext &c
 
 void KNamedVariable::saveOdf(KShapeSavingContext &context)
 {
-    Q_UNUSED(context);
-    // TODO
+	KXmlWriter& bodyWriter = context.xmlWriter();
+	bodyWriter.startElement("text:user-field-get");
+	bodyWriter.addAttribute("text:name", m_name);
+	bodyWriter.endElement(); //text:user-field-get
 }

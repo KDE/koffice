@@ -27,6 +27,8 @@
 class KVariable;
 class KInlineTextObjectManager;
 class KVariableManagerPrivate;
+class KShapeSavingContext;
+class KXmlWriter;
 
 /**
  * A document can maintain a list of name-value pairs, which we call variables.
@@ -84,6 +86,13 @@ public:
      * @see setValue()
      */
     KVariable *createVariable(const QString &name) const;
+
+    /**
+     * Write user-field-decls to the XML writer for each named variable in the manager 
+     *
+     */
+
+    void saveOdf(KXmlWriter* writer) const;
 
     /// return a list of all variable names.
     QList<QString> variables() const;
