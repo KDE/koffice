@@ -72,6 +72,7 @@ void KVariableManager::remove(const QString &name)
         return;
     d->variableMapping.remove(name);
     d->inlineObjectManager->removeProperty(static_cast<KInlineObject::Property>(key));
+    emit valueChanged();
 }
 
 int KVariableManager::usageCount(const QString &name) const
