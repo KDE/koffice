@@ -1369,20 +1369,18 @@ void KTextLoader::loadSection(const KXmlElement &sectionElem, QTextCursor &curso
 {
     // Add a frame to the current layout
     QTextFrameFormat sectionFormat;
-    QString sectionStyleName = sectionElem.attributeNS(KOdfXmlNS::text, "style-name", "");
+    QString sectionStyleName = sectionElem.attributeNS(KOdfXmlNS::text, "style-name");
     if (!sectionStyleName.isEmpty()) {
         KSectionStyle *secStyle = d->textSharedData->sectionStyle(sectionStyleName, d->stylesDotXml);
         if (secStyle)
             secStyle->applyStyle(sectionFormat);
     }
-        cursor.insertFrame(sectionFormat);
-    // Get the cursor of the frame
-    QTextCursor cursorFrame = cursor.currentFrame()->lastCursorPosition();
+    QTextFrame *frame = cursor.insertFrame(sectionFormat);
+    cursor = frame->lastCursorPosition();
+    QTextCursor cursorFrame = cursor; // this one is in the frame.
+    cursor.movePosition(QTextCursor::NextBlock); // the one just after the frame.
 
     loadBody(sectionElem, cursorFrame);
-
-    // Get out of the frame
-    cursor.movePosition(QTextCursor::End);
 }
 
 void KTextLoader::loadNote(const KXmlElement &noteElem, QTextCursor &cursor)
