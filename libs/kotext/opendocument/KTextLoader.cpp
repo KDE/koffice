@@ -653,6 +653,8 @@ void KTextLoader::loadBody(const KXmlElement &bodyElem, QTextCursor &cursor)
                         loadSection(tag, cursor);
                     } else if (localName == "table-of-content") {
                         loadTableOfContents(tag, cursor);
+		    } else if (localName == "user-field-decls") {
+			loadVariableDeclarations(tag, cursor);
                     } else {
                         KInlineObject *obj = KInlineObjectRegistry::instance()->createFromOdf(tag, d->context);
                         if (obj) {
@@ -2217,6 +2219,24 @@ void KTextLoader::loadTableOfContents(const KXmlElement &element, QTextCursor &c
     }
     // Get out of the frame
     cursor.movePosition(QTextCursor::End);
+}
+
+void KTextLoader::loadVariableDeclarations(const KXmlElement& element, QTextCursor& cursor) {
+    KXmlElement e;
+    KTextDocumentLayout *layout = qobject_cast<KTextDocumentLayout*>(cursor.block().document()->documentLayout());
+    if (layout) {
+        KInlineTextObjectManager *textObjectManager = layout->inlineTextObjectManager();
+	if (textObjectManager) {
+            KVariableManager *variableManager = textObjectManager->variableManager();
+	    if (variableManager) {
+                forEachElement(e, element) {
+		    QString name = e.attributeNS(KOdfXmlNS::text, "name");
+		    QString value = e.attributeNS(KOdfXmlNS::office, "string-value");
+		    variableManager->setValue(name, value);
+		}
+	    }
+	}
+    }
 }
 
 void KTextLoader::startBody(int total)

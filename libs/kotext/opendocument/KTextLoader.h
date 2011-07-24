@@ -193,6 +193,11 @@ private:
     void loadTableOfContents(const KXmlElement &element, QTextCursor& cursor);
 
     /**
+     * Load user-defined variables at \p element into the variable manager of the document in \p cursor .
+     */
+    void loadVariableDeclarations(const KXmlElement &element, QTextCursor& cursor);
+
+    /**
     * This is called in loadBody before reading the body starts.
     */
     void startBody(int total);
