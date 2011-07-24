@@ -110,6 +110,7 @@ bool KWOdfLoader::load(KOdfStoreReader &odfStore)
     forEachElement(childElem, body) {
         if (childElem.namespaceURI() == KOdfXmlNS::text
                 && childElem.localName() != "page-sequence"
+                && childElem.localName() != "user-field-decls"
                 && childElem.localName() != "tracked-changes") {
             hasMainText = true;
             break;
