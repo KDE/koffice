@@ -183,6 +183,12 @@ private:
     void loadNote(const KXmlElement &element, QTextCursor& cursor);
 
     /**
+     * Load a user-defined variable \p element into the \p cursor.
+     */
+
+    void loadVariable(const KXmlElement &element, QTextCursor& cursor);
+
+    /**
     * Load the shape element \p element into the \p cursor .
     */
     void loadShape(const KXmlElement &element, QTextCursor& cursor);

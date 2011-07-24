@@ -26,6 +26,8 @@
 #include <KShapeLoadingContext.h> // for usage in Q_UNUSED
 #include <KShapeSavingContext.h> // for usage in Q_UNUSED
 
+#include <KOdfXmlNS.h>
+
 KNamedVariable::KNamedVariable(Property key, const QString &name)
         : KVariable(true),
         m_name(name),
@@ -46,9 +48,13 @@ void KNamedVariable::setup()
 
 bool KNamedVariable::loadOdf(const KXmlElement &element, KShapeLoadingContext &context)
 {
-    Q_UNUSED(element);
     Q_UNUSED(context);
-    // TODO
+    if (element.namespaceURI() == KOdfXmlNS::text && element.localName() == "user-field-get") {
+        QString name = element.attributeNS(KOdfXmlNS::text, "name");
+	QString value = element.attributeNS(KOdfXmlNS::office, "string-value");
+	manager()->variableManager()->setValue(name, value);
+        return true;
+    }
     return false;
 }
 

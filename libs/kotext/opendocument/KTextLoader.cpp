@@ -70,6 +70,7 @@
 #include "styles/KTableColumnStyle.h"
 #include "styles/KTableCellStyle.h"
 #include "styles/KSectionStyle.h"
+#include <KVariable.h>
 
 #include <klocale.h>
 #include <kdebug.h>
@@ -1399,6 +1400,32 @@ void KTextLoader::loadNote(const KXmlElement &noteElem, QTextCursor &cursor)
     }
 }
 
+void KTextLoader::loadVariable(const KXmlElement &varElem, QTextCursor &cursor)
+{
+    kDebug(32500) << "Loading a text:user-decl-get element.";
+    KTextDocumentLayout *layout = qobject_cast<KTextDocumentLayout*>(cursor.block().document()->documentLayout());
+    if (layout) {
+            KInlineTextObjectManager *textObjectManager = layout->inlineTextObjectManager();
+	    if (textObjectManager) {
+	        KVariableManager *variableManager = textObjectManager->variableManager();
+		if (variableManager) {
+		    QString name = varElem.attributeNS(KOdfXmlNS::text, "name");
+                    KVariable* namedVar = variableManager->createVariable(name);
+		    textObjectManager->insertInlineObject(cursor, namedVar, cursor.charFormat());
+		}
+		else {
+                    kDebug(32500) << "Error while loading the variable!";
+		}
+	    }
+	    else {
+                kDebug(32500) << "Error while loading the variable!";
+	    }
+    }
+    else {
+        kDebug(32500) << "Error while loading the variable!";
+    }
+}
+
 QString KTextLoader::createUniqueBookmarkName(KoBookmarkManager* bmm, QString bookmarkName, bool isEndMarker)
 {
     QString ret = bookmarkName;
@@ -1560,6 +1587,8 @@ void KTextLoader::loadSpan(const KXmlElement &element, QTextCursor &cursor, bool
             loadNote(ts, cursor);
         } else if (isTextNS && localName == "tab") { // text:tab
             cursor.insertText("\t");
+	} else if (isTextNS && localName == "user-field-get") { //text:user-field-get
+		loadVariable(ts, cursor);
         } else if (isTextNS && localName == "a") { // text:a
             if (!ts.attributeNS(KOdfXmlNS::delta, "insertion-type").isEmpty())
                 d->openChangeRegion(ts);
