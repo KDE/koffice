@@ -78,6 +78,7 @@
   <Action name="insertSeries"/>
   <Action name="insertHyperlink"/>
   <Action name="insertSpecialChar"/>
+  <Action name="insert_variable"/> <!-- menu -->
   <Separator/>
   <Action name="insertCell"/>
   <Action name="insertColumn"/>

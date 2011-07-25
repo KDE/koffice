@@ -54,6 +54,7 @@ class KOdfSettings;
 class KResourceManager;
 class KOdfStore;
 class KXmlWriter;
+class KInlineTextObjectManager;
 
 #define MIME_TYPE "application/x-kcells"
 
@@ -151,6 +152,12 @@ public:
      */
     void updateAllViews();
 
+
+    /**
+     * Obtain the inlineTextObjectManager object for this document
+     */
+
+    KInlineTextObjectManager* inlineTextObjectManager() const;
 
 public Q_SLOTS:
     virtual void initEmpty();

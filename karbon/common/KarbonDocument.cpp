@@ -51,6 +51,8 @@
 #include <KoText.h>
 #include <KStyleManager.h>
 #include <KTextSharedLoadingData.h>
+#include <KInlineTextObjectManager.h>
+#include <KVariableManager.h>
 
 #include <ktemporaryfile.h>
 #include <kdebug.h>
@@ -376,6 +378,16 @@ bool KarbonDocument::saveOdf(KoDocument::SavingContext &documentContext, const K
 
     bodyWriter->startElement("office:body");
     bodyWriter->startElement("office:drawing");
+
+    if (resourceManager()->hasResource(KoText::InlineTextObjectManager)) {
+        KInlineTextObjectManager* object_manager = (resourceManager()->resource(KoText::InlineTextObjectManager)).value<KInlineTextObjectManager*>();
+        if (object_manager) {
+            KVariableManager* variable_manager = object_manager->variableManager();
+            if (variable_manager) {
+                variable_manager->saveOdf(bodyWriter);
+            }
+        }
+    }
 
     saveOasis(shapeContext);   // Save contents
 

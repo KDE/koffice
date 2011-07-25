@@ -345,6 +345,7 @@ void KoPAView::initActions()
     foreach(QAction *action, d->doc->inlineTextObjectManager()->createInsertVariableActions(d->canvas))
         actionMenu->addAction(action);
     actionCollection()->addAction("insert_variable", actionMenu);
+    connect(d->doc->inlineTextObjectManager()->variableManager(), SIGNAL(valueChanged()), this, SLOT(variableChanged()));
 
     KAction * am = new KAction(i18n("Import Document..."), this);
     actionCollection()->addAction("import_document", am);
@@ -358,6 +359,7 @@ void KoPAView::initActions()
 
     actionCollection()->action("object_group")->setShortcut(QKeySequence("Ctrl+G"));
     actionCollection()->action("object_ungroup")->setShortcut(QKeySequence("Ctrl+Shift+G"));
+    
 }
 
 
@@ -380,6 +382,8 @@ void KoPAView::updateReadWrite(bool readwrite)
 {
     d->canvas->setReadWrite(readwrite);
     KToolManager::instance()->updateReadWrite(d->canvasController, readwrite);
+    QAction *action = actionCollection()->action("insert_variable");
+    if (action) action->setEnabled(readwrite);
 }
 
 KoRuler* KoPAView::horizontalRuler()

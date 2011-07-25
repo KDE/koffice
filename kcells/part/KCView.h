@@ -333,6 +333,8 @@ public slots:
     /** Calls KToolProxy::deleteSelection(). */
     void editDeleteSelection();
 
+    void variableChanged();
+
 public: // reimplementations
     // KoView interface
     virtual QWidget *canvas() const;

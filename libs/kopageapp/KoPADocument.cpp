@@ -309,6 +309,9 @@ bool KoPADocument::saveOdfPages(KoPASavingContext &paContext, QList<KoPAPageBase
 bool KoPADocument::saveOdfProlog(KoPASavingContext &paContext)
 {
     Q_UNUSED(paContext);
+    KVariableManager* variable_manager = inlineTextObjectManager()->variableManager();
+    KXmlWriter& writer = paContext.xmlWriter();
+    variable_manager->saveOdf(&writer);
     return true;
 }
 
