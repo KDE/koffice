@@ -74,6 +74,9 @@ KoPADocument::KoPADocument(QWidget* parentWidget, QObject* parent, bool singleVi
     d->pageProvider = new KoPAPageProvider();
     variant.setValue<void*>(d->pageProvider);
     resourceManager()->setResource(KoText::PageProvider, variant);
+    QVariant variant2;
+    variant2.setValue<KInlineTextObjectManager*>(d->inlineTextObjectManager);
+    resourceManager()->setResource(KoText::InlineTextObjectManager, variant2);
     loadConfig();
 
     if (!KToolRegistry::instance()->contains("KoPABackgroundTool")) {
