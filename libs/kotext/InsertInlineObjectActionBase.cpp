@@ -42,11 +42,11 @@ InsertInlineObjectActionBase::~InsertInlineObjectActionBase()
 void InsertInlineObjectActionBase::activated()
 {
     Q_ASSERT(m_canvas->toolProxy());
-    KoTextEditor *handler = qobject_cast<KoTextEditor*> (m_canvas->toolProxy()->selection());
-    if (handler) {
+    KoTextEditor *texthandler = qobject_cast<KoTextEditor*> (m_canvas->toolProxy()->selection());
+    if (texthandler) {
         KInlineObject *obj = createInlineObject();
         if (obj)
-            handler->insertInlineObject(obj);
+            texthandler->insertInlineObject(obj);
     } else {
         kWarning(32500) << "InsertVariableAction: No texttool selected while trying to insert variable";
     }

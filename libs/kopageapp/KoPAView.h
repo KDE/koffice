@@ -238,6 +238,10 @@ protected slots:
      */
     void configure();
 
+public slots:
+
+    void variableChanged();
+
 private:
     class Private;
     Private * const d;

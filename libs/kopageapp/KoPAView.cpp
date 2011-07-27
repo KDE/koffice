@@ -75,20 +75,20 @@
 #include "dialogs/KoPAPageLayoutDialog.h"
 #include "dialogs/KoPAConfigureDialog.h"
 
-#include <kfiledialog.h>
-#include <kdebug.h>
-#include <klocale.h>
-#include <kicon.h>
-#include <ktoggleaction.h>
-#include <kactionmenu.h>
-#include <kactioncollection.h>
-#include <kstatusbar.h>
-#include <kmessagebox.h>
-#include <kparts/event.h>
-#include <kparts/partmanager.h>
-#include <kio/netaccess.h>
-#include <ktemporaryfile.h>
-
+#include <KDE/KFileDialog>
+#include <KDE/KDebug>
+#include <KDE/KLocale>
+#include <KDE/KIcon>
+#include <KDE/KToggleAction>
+#include <KDE/KActionMenu>
+#include <KDE/KActionCollection>
+#include <KDE/KStatusBar>
+#include <KDE/KMessageBox>
+#include <KDE/KParts/Event>
+#include <KDE/KParts/PartManager>
+#include <KDE/KIO/NetAccess>
+#include <KDE/KTemporaryFile>
+#include <KDE/KMenu>
 
 class KoPAView::Private
 {
@@ -122,6 +122,8 @@ public:
     KAction *actionPageLayout;
 
     KAction *actionConfigure;
+
+    KActionMenu *variableActionMenu;
 
     KoRuler *horizontalRuler;
     KoRuler *verticalRuler;
@@ -341,11 +343,13 @@ void KoPAView::initActions()
     actionCollection()->addAction(KStandardAction::FirstPage,  "page_first", this, SLOT(goToFirstPage()));
     actionCollection()->addAction(KStandardAction::LastPage,  "page_last", this, SLOT(goToLastPage()));
 
-    KActionMenu *actionMenu = new KActionMenu(i18n("Variable"), this);
-    foreach(QAction *action, d->doc->inlineTextObjectManager()->createInsertVariableActions(d->canvas))
-        actionMenu->addAction(action);
-    actionCollection()->addAction("insert_variable", actionMenu);
-
+    d->variableActionMenu = new KActionMenu(i18n("Variable"), this);
+    KInlineTextObjectManager *manager = d->doc->inlineTextObjectManager();
+    foreach(QAction *action, manager->createInsertVariableActions(d->canvas))
+        d->variableActionMenu->addAction(action);
+    connect(manager->variableManager(), SIGNAL(valueChanged()), this, SLOT(variableChanged()));
+    actionCollection()->addAction("insert_variable", d->variableActionMenu);
+    
     KAction * am = new KAction(i18n("Import Document..."), this);
     actionCollection()->addAction("import_document", am);
     connect(am, SIGNAL(triggered()), this, SLOT(importDocument()));
@@ -358,6 +362,7 @@ void KoPAView::initActions()
 
     actionCollection()->action("object_group")->setShortcut(QKeySequence("Ctrl+G"));
     actionCollection()->action("object_ungroup")->setShortcut(QKeySequence("Ctrl+Shift+G"));
+    
 }
 
 
@@ -380,6 +385,8 @@ void KoPAView::updateReadWrite(bool readwrite)
 {
     d->canvas->setReadWrite(readwrite);
     KToolManager::instance()->updateReadWrite(d->canvasController, readwrite);
+    QAction *action = actionCollection()->action("insert_variable");
+    if (action) action->setEnabled(readwrite);
 }
 
 KoRuler* KoPAView::horizontalRuler()
@@ -1072,6 +1079,13 @@ bool KoPAView::isMasterUsed(KoPAPageBase * page)
     }
 
     return used;
+}
+
+void KoPAView::variableChanged()
+{
+    d->variableActionMenu->menu()->clear();
+    foreach (QAction *action, d->doc->inlineTextObjectManager()->createInsertVariableActions(d->canvas))
+        d->variableActionMenu->addAction(action);
 }
 
 #include <KoPAView.moc>

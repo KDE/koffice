@@ -74,6 +74,9 @@ KoPADocument::KoPADocument(QWidget* parentWidget, QObject* parent, bool singleVi
     d->pageProvider = new KoPAPageProvider();
     variant.setValue<void*>(d->pageProvider);
     resourceManager()->setResource(KoText::PageProvider, variant);
+    QVariant variant2;
+    variant2.setValue<KInlineTextObjectManager*>(d->inlineTextObjectManager);
+    resourceManager()->setResource(KoText::InlineTextObjectManager, variant2);
     loadConfig();
 
     if (!KToolRegistry::instance()->contains("KoPABackgroundTool")) {
@@ -309,6 +312,9 @@ bool KoPADocument::saveOdfPages(KoPASavingContext &paContext, QList<KoPAPageBase
 bool KoPADocument::saveOdfProlog(KoPASavingContext &paContext)
 {
     Q_UNUSED(paContext);
+    KVariableManager* variable_manager = inlineTextObjectManager()->variableManager();
+    KXmlWriter& writer = paContext.xmlWriter();
+    variable_manager->saveOdf(&writer);
     return true;
 }
 

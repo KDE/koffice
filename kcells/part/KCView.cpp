@@ -36,49 +36,51 @@
 #include <time.h>
 
 // Qt includes
-#include <QBuffer>
-#include <QByteArray>
-#include <QClipboard>
-#include <QCursor>
-#include <QEvent>
-#include <QFrame>
-#include <QGridLayout>
-#include <QHBoxLayout>
-#include <QKeyEvent>
-#include <QList>
-#include <QMenu>
-#include <QPixmap>
-#include <QResizeEvent>
-#include <QTimer>
-#include <QToolButton>
-#include <QSqlDatabase>
-#include <QSizePolicy>
-#include <QScrollBar>
+#include <QtCore/QBuffer>
+#include <QtCore/QByteArray>
+#include <QtGui/QClipboard>
+#include <QtGui/QCursor>
+#include <QtCore/QEvent>
+#include <QtGui/QFrame>
+#include <QtGui/QGridLayout>
+#include <QtGui/QHBoxLayout>
+#include <QtGui/QKeyEvent>
+#include <QtCore/QList>
+#include <QtGui/QMenu>
+#include <QtGui/QPixmap>
+#include <QtGui/QResizeEvent>
+#include <QtCore/QTimer>
+#include <QtGui/QToolButton>
+#include <QtSql/QSqlDatabase>
+#include <QtGui/QSizePolicy>
+#include <QtGui/QScrollBar>
 
 // KDE includes
-#include <kactioncollection.h>
-#include <kconfig.h>
-#include <kcomponentdata.h>
-#include <kdatatool.h>
-#include <kdebug.h>
+#include <KDE/KActionCollection>
+#include <KDE/KActionMenu>
+#include <KDE/KConfig>
+#include <KDE/KComponentData>
+#include <KDE/KDataTool>
+#include <KDE/KDebug>
+#include <KDE/KMenu>
 
-#include <KFontChooser>
-#include <kinputdialog.h>
-#include <kmessagebox.h>
-#include <kpassivepopup.h>
-#include <kreplace.h>
-#include <kreplacedialog.h>
-#include <kstatusbar.h>
-#include <kstandardaction.h>
-#include <kstandarddirs.h>
-#include <ktemporaryfile.h>
-#include <KToggleAction>
-#include <ktoolinvocation.h>
-#include <kparts/event.h>
-#include <kpushbutton.h>
-#include <kxmlguifactory.h>
-#include <kicon.h>
-#include <knotifyconfigwidget.h>
+#include <KDE/KFontChooser>
+#include <KDE/KInputDialog>
+#include <KDE/KMessageBox>
+#include <KDE/KPassivePopup>
+#include <KDE/KReplace>
+#include <KDE/KReplaceDialog>
+#include <KDE/KStatusBar>
+#include <KDE/KStandardAction>
+#include <KDE/KStandardDirs>
+#include <KDE/KTemporaryFile>
+#include <KDE/KToggleAction>
+#include <KDE/KToolInvocation>
+#include <KDE/KParts/Event>
+#include <KDE/KPushButton>
+#include <KDE/KXMLGUIFactory>
+#include <KDE/KIcon>
+#include <KDE/KNotifyConfigWidget>
 
 // KOffice includes
 #include <KoGlobal.h>
@@ -102,6 +104,8 @@
 #include <KoZoomController.h>
 #include <KoZoomHandler.h>
 #include <KToolProxy.h>
+#include <KoText.h>
+#include <KInlineTextObjectManager.h>
 
 // KCells includes
 #include "KCApplicationSettings.h"
@@ -222,6 +226,8 @@ public:
     QAction * hideSheet;
     QAction * showSheet;
 
+    KActionMenu * insertVariable;
+
     //Shape manipulation
     KAction * deleteShape;
 
@@ -285,6 +291,12 @@ void KCView::Private::initActions()
     actions->insertSheet->setToolTip(i18n("Insert a new sheet"));
     ac->addAction("insertSheet", actions->insertSheet);
     connect(actions->insertSheet, SIGNAL(triggered(bool)), view, SLOT(insertSheet()));
+
+    actions->insertVariable = new KActionMenu(i18n("Variable"), view);
+    foreach(QAction *action, doc->inlineTextObjectManager()->createInsertVariableActions(canvas))
+        actions->insertVariable->addAction(action);
+    ac->addAction("insert_variable", actions->insertVariable);
+    connect(doc->inlineTextObjectManager()->variableManager(), SIGNAL(valueChanged()), view, SLOT(variableChanged()));
 
     actions->duplicateSheet = new KAction(/*KIcon("inserttable"),*/ i18n("Duplicate Sheet"), view);
     actions->duplicateSheet->setToolTip(i18n("Duplicate the selected sheet"));
@@ -2125,6 +2137,14 @@ KoPrintJob * KCView::createPrintJob()
     // About to print; close the editor.
     selection()->emitCloseEditor(true); // save changes
     return new KCPrintJob(this);
+}
+
+void KCView::variableChanged()
+{
+   d->actions->insertVariable->menu()->clear();
+   foreach (QAction *action, d->doc->inlineTextObjectManager()->createInsertVariableActions(d->canvas)) {
+        d->actions->insertVariable->addAction(action);
+   }
 }
 
 #include "KCView.moc"

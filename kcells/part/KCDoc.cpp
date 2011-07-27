@@ -74,6 +74,8 @@
 #include <KShapeSavingContext.h>
 #include <KoUpdater.h>
 #include <KoProgressUpdater.h>
+#include <KoText.h>
+#include <KInlineTextObjectManager.h>
 
 #include "KCBindingManager.h"
 #include "KCCalculationSettings.h"
@@ -622,6 +624,13 @@ bool KCDoc::saveOdfHelper(SavingContext &documentContext, SaveFlag saveFlag, QSt
     }
 
     return KCDocBase::saveOdfHelper(documentContext, saveFlag, plainText);
+}
+
+KInlineTextObjectManager* KCDoc::inlineTextObjectManager() const 
+{
+    if (d->resourceManager->hasResource(KoText::InlineTextObjectManager))
+        return (d->resourceManager->resource(KoText::InlineTextObjectManager)).value<KInlineTextObjectManager*>();
+    return NULL;
 }
 
 #include "KCDoc.moc"
