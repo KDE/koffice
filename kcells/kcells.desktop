@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=KCells
+Name[bg]=KCells
 Name[ca]=KCells
 Name[ca@valencia]=KCells
 Name[cs]=KCells
@@ -19,7 +20,7 @@ Name[x-test]=xxKCellsxx
 Name[zh_TW]=KCells
 Exec=kcells %u
 GenericName=Spreadsheet
-GenericName[bg]=Таблици
+GenericName[bg]=Електронни таблици
 GenericName[bs]=Tabela
 GenericName[ca]=Full de càlcul
 GenericName[ca@valencia]=Full de càlcul
@@ -59,6 +60,7 @@ GenericName[x-test]=xxSpreadsheetxx
 GenericName[zh_CN]=电子表格
 GenericName[zh_TW]=工作表
 Comment=Write spreadsheet documents
+Comment[bg]=Писане на електронни таблици
 Comment[bs]=Napišite dokumente unakrsnih tabela
 Comment[ca]=Escriu documents de full de càlcul
 Comment[ca@valencia]=Escriu documents de full de càlcul

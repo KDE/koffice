@@ -1,6 +1,7 @@
 [Desktop Entry]
 Type=Service
 Name=CSV Import Filter for KCells
+Name[bg]=Филтър за внасяне от CSV в KCells
 Name[ca]=Filtre d'importació CSV per al KCells
 Name[ca@valencia]=Filtre d'importació CSV per al KCells
 Name[cs]=Importní filtr CSV pro KCells

@@ -6,6 +6,7 @@ X-KDE-Import=application/x-kcells
 X-KDE-Weight=1
 ImportDescription=KCells
 Name=KCells LATEX Export Filter
+Name[bg]=Филтър за изнасяне от KCells в LATEX
 Name[ca]=Filtre d'exportació LATEX per al KCells
 Name[ca@valencia]=Filtre d'exportació LATEX per al KCells
 Name[cs]=Rxportní filtr KCells LaTeX

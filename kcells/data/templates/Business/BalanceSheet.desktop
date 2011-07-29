@@ -2,6 +2,7 @@
 Type=Link
 URL=.source/BalanceSheet.kst
 Name=Balance KCSheet
+Name[bg]=Баланс на KCSheet
 Name[ca]=Balanç KCSheet
 Name[ca@valencia]=Balanç KCSheet
 Name[da]=Balancering-KCSheet

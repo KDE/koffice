@@ -1,6 +1,7 @@
 [Desktop Entry]
 Type=Service
 Name=GNUmeric Export Filter for KCells
+Name[bg]=Филтър за изнасяне от KCells в GNUmeric
 Name[ca]=Filtre d'exportació GNUmeric per al KCells
 Name[ca@valencia]=Filtre d'exportació GNUmeric per al KCells
 Name[cs]=Gnumeric exportní filtr pro KCells
