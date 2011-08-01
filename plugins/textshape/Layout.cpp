@@ -525,12 +525,13 @@ bool Layout::nextParag()
     // first remove any drop-caps related formatting that's already there in the layout.
     // we'll do it all afresh now.
     QList<QTextLayout::FormatRange> formatRanges = layout->additionalFormats();
-    for (QList< QTextLayout::FormatRange >::Iterator iter = formatRanges.begin();
-            iter != formatRanges.end();
-            ++iter) {
-        if (iter->format.boolProperty(DropCapsAdditionalFormattingId)) {
-            formatRanges.erase(iter);
+    QList< QTextLayout::FormatRange >::Iterator iter = formatRanges.begin();
+    while (iter != formatRanges.end()) {
+        if (iter->format.boolProperty(DropCapsAdditionalFormattingId)){
+            iter = formatRanges.erase(iter);
         }
+        else
+           ++iter;
     }
     if (formatRanges.count() != layout->additionalFormats().count())
         layout->setAdditionalFormats(formatRanges);
