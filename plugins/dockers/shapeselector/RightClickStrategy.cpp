@@ -41,7 +41,7 @@ RightClickStrategy::RightClickStrategy(Canvas *canvas, KShape *clickedShape, KPo
     m_clickedShape(clickedShape)
 {
     m_lastPosition = event.point;
-    SelectStrategy(canvas, clickedShape, event); // properly updates the selection
+    SelectStrategy::updateSelection(canvas, clickedShape, event); //Properly update the selection
 }
 
 void RightClickStrategy::handleMouseMove(const QPointF &mouseLocation, Qt::KeyboardModifiers modifiers)

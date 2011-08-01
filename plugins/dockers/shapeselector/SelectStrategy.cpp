@@ -36,6 +36,12 @@
 SelectStrategy::SelectStrategy(Canvas *canvas, KShape *clickedShape, KPointerEvent &event)
     : m_canvas(canvas), m_clickedShape(clickedShape)
 {
+    updateSelection(canvas, clickedShape, event);
+    m_emitItemSelected = clickedShape;
+}
+
+void SelectStrategy::updateSelection(Canvas *canvas, KShape *clickedShape, KPointerEvent &event)
+{
     const bool deselectAll = event.button() == Qt::LeftButton
         || (event.button() == Qt::RightButton && clickedShape);
     if (deselectAll) {
@@ -47,7 +53,6 @@ SelectStrategy::SelectStrategy(Canvas *canvas, KShape *clickedShape, KPointerEve
         canvas->shapeManager()->selection()->select(clickedShape);
         clickedShape->update();
     }
-    m_emitItemSelected = clickedShape;
 }
 
 void SelectStrategy::handleMouseMove(const QPointF &mouseLocation, Qt::KeyboardModifiers modifiers)

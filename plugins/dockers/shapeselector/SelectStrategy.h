@@ -45,6 +45,8 @@ public:
 
     virtual void handleMouseMove(const QPointF &mouseLocation, Qt::KeyboardModifiers modifiers);
     virtual void finishInteraction(Qt::KeyboardModifiers modifiers);
+    
+    static void updateSelection(Canvas *canvas, KShape *clickedShape, KPointerEvent &event);
 
 signals:
     void itemSelected();
