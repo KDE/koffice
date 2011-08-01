@@ -1478,7 +1478,7 @@ void ODrawToOdf::setEnhancedGeometry(const MSO::OfficeArtSpContainer& o, Writer&
 {
     const OfficeArtDggContainer* drawingGroup = 0;
     const OfficeArtSpContainer* master = 0;
-    const DrawStyle ds(*drawingGroup, master, &o);
+    const DrawStyle ds(*drawingGroup, master, &o);  //Not a null pointer dereference, since drawingGroup is passed by reference.
 
     IMsoArray _v = ds.pVertices_complex();
     IMsoArray _c = ds.pSegmentInfo_complex();
