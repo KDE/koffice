@@ -532,7 +532,7 @@ QpFormula::stringFuncReal(const char*)
 {
     char* lString = 0;
 
-    cFormula >> lString;
+    cFormula >> lString;    //Allocates a new C-string of length 10
 
     char* lQuoteString = new char[strlen(lString)+3];
 
