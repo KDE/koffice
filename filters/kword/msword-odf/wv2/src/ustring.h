@@ -202,6 +202,9 @@ namespace wvWare {
       int len;
       int rc;
       static Rep null;
+      ~Rep () {
+        delete[] dat;
+      }
     };
 
   public:
