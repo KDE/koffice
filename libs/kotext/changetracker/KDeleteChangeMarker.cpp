@@ -143,14 +143,14 @@ void KDeleteChangeMarker::saveOdf(KShapeSavingContext &context)
             kWarning(32500) << "There is no KTextSharedSavingData in the context. This should not be the case";
             return;
         }
-    }
-    d->changeTracker->saveInlineChange(d->id, change);
-    change.addChildElement("deleteChangeXml", d->deleteChangeXml);
-    changeName = sharedData->genChanges().insert(change);
+        d->changeTracker->saveInlineChange(d->id, change);
+        change.addChildElement("deleteChangeXml", d->deleteChangeXml);
+        changeName = sharedData->genChanges().insert(change);
 
-    context.xmlWriter().startElement("text:change", false);
-    context.xmlWriter().addAttribute("text:change-id", changeName);
-    context.xmlWriter().endElement();
+        context.xmlWriter().startElement("text:change", false);
+        context.xmlWriter().addAttribute("text:change-id", changeName);
+        context.xmlWriter().endElement();
+    }
 }
 
 void KDeleteChangeMarker::setDeleteChangeXml(QString &deleteChangeXml)
