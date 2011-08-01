@@ -1751,8 +1751,11 @@ void KoMainWindow::slotReloadFile()
     if (!bOk)
         return;
 
+    if (!pDoc)
+        return;
+
     KUrl url = pDoc->url();
-    if (pDoc && !pDoc->isEmpty()) {
+    if (!pDoc->isEmpty()) {
         setRootDocument(0);   // don't delete this shell when deleting the document
         if(d->rootDoc)
             d->rootDoc->clearUndoHistory();
