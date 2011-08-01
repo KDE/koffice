@@ -536,7 +536,7 @@ void SvgOutputDev::drawImage(GfxState *state, Object */*ref*/, Stream *str,
     }
 
     delete image;
-    delete buffer;
+    delete[] buffer;
     delete imgStr;
 }
 
