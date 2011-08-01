@@ -2038,7 +2038,12 @@ KShape * SvgParser::createShape(const QString &shapeID)
     }
 
     KShape *shape = factory->createDefaultShape(m_documentResourceManager);
-    if (shape && shape->shapeId().isEmpty())
+    if (! shape) {
+        kWarning(30514) << "Could not create default shape for SvgParser";
+        return 0;
+    }
+
+    if (shape->shapeId().isEmpty())
         shape->setShapeId(factory->id());
 
     // reset tranformation that might come from the default shape
