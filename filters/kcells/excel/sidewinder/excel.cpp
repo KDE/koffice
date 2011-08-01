@@ -2425,7 +2425,10 @@ bool ExcelReader::load(Workbook* workbook, const char* filename)
 
         // verify buffer is large enough to hold the record data
         if (size > buffer_size) {
-            buffer = (unsigned char *) realloc(buffer, size);
+            unsigned char* temp = (unsigned char *) realloc(buffer, size);
+            if (!temp)
+                free(buffer);
+            buffer = temp;
             buffer_size = size;
         }
 
