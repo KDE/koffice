@@ -65,7 +65,7 @@ public:
     /// Constructor
     explicit KTableStyle(QObject *parent = 0);
     /// Creates a KTableStyle with the given table format, and \a parent
-    KTableStyle(const QTextTableFormat &blockFormat, QObject *parent = 0);
+    explicit KTableStyle(const QTextTableFormat &blockFormat, QObject *parent = 0);
     /// Destructor
     ~KTableStyle();
 
