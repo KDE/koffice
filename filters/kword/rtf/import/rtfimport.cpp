@@ -1639,7 +1639,7 @@ void RTFImport::parseField(RTFProperty *)
                 format.replace("a/p", "ap"); // Approximation
                 format.replace("AM/PM", "AP");
                 format.replace("A/P", "AP"); // Approximation
-                format.remove("'"); // KWord 1.3 cannot protect text in date/time
+                format.remove('\''); // KWord 1.3 cannot protect text in date/time
                 addDateTime(format, (fieldName == "DATE"), fldfmt);
             } else if (fieldName == "IMPORT") {
                 addImportedPicture(list[1]);
@@ -1937,7 +1937,7 @@ void RTFImport::addFormat(DomNode &node, const KWFormat& format, const RTFFormat
             switch (format.fmt.underline) {
             case RTFFormat::UnderlineNone:
             default: {
-                st = "0";
+                st = "0";//krazy:exclude=doublequote_chars
                 underlinecolor = -1; // Reset underline color
                 break;
             }
@@ -1958,7 +1958,7 @@ void RTFImport::addFormat(DomNode &node, const KWFormat& format, const RTFFormat
             case RTFFormat::UnderlineWordByWord: {
                 st = "single";
                 styleline = "solid";
-                wordbyword = "1";
+                wordbyword = "1";//krazy:exclude=doublequote_chars
                 break;
             }
             case RTFFormat::UnderlineDash: {
