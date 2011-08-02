@@ -123,10 +123,12 @@ void SCCustomSlideShows::removeSlidesFromAll(const QList<KoPAPageBase*> &slideSh
 
 void SCCustomSlideShows::saveOdf(KoPASavingContext &context)
 {
-    foreach (const QString &name, m_customSlideShows.keys()) {
-        QList<KoPAPageBase*> slideList = m_customSlideShows.value(name);
+    QMap <QString, QList<KoPAPageBase*> >::const_iterator end = m_customSlideShows.constEnd();
+    for (QMap <QString, QList<KoPAPageBase*> >::const_iterator iter = m_customSlideShows.constBegin(); 
+            iter != end; ++iter) {
+        QList<KoPAPageBase*> slideList = iter.value();
         context.xmlWriter().startElement("presentation:show");
-        context.xmlWriter().addAttribute("presentation:name", name);
+        context.xmlWriter().addAttribute("presentation:name", iter.key());
         QString pages;
         foreach (KoPAPageBase *page, slideList) {
             KoPAPage *p = dynamic_cast<KoPAPage *>(page);
