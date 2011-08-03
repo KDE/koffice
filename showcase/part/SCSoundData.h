@@ -101,7 +101,7 @@ public:
     bool isTaggedForSaving();
 
 
-    bool operator==(const SCSoundData &other) {
+    bool operator==(const SCSoundData &other) const {
         return other.d == d;
     }
 

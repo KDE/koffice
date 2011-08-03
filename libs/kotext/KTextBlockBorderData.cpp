@@ -65,11 +65,11 @@ bool KTextBlockBorderData::hasBorders() const
     return false;
 }
 
-bool KTextBlockBorderData::operator==(const KTextBlockBorderData &border)
+bool KTextBlockBorderData::operator==(const KTextBlockBorderData &border) const
 {
     return equals(border);
 }
-bool KTextBlockBorderData::equals(const KTextBlockBorderData &border)
+bool KTextBlockBorderData::equals(const KTextBlockBorderData &border) const
 {
     for (int i = Top; i <= Right; i++) {
         if (d->edges[i].outerPen != border.d->edges[i].outerPen)

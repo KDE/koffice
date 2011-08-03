@@ -123,8 +123,8 @@ public:
     qreal inset(Side side) const;
 
     /// returns true if the borders of param border are the same as this one.
-    bool operator==(const KTextBlockBorderData &border);
-    bool equals(const KTextBlockBorderData &border);
+    bool operator==(const KTextBlockBorderData &border) const;
+    bool equals(const KTextBlockBorderData &border) const;
 
     /**
      * Paint the borders.
