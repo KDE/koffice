@@ -3026,7 +3026,7 @@ KoFilter::ConversionStatus DocxXmlDocumentReader::read_tblCellMar()
                 side = QString();
             }
         }
-        if (!(side == QString())) {
+        if ( !side.isEmpty() ) {
             const QXmlStreamAttributes attrs(attributes());
             TRY_READ_ATTR(w)
             if (!w.isEmpty()) {
