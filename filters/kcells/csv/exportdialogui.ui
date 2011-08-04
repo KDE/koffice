@@ -12,7 +12,7 @@
   </property>
   <layout class="QGridLayout">
    <item row="1" column="0">
-    <widget class="KTabWidget" name="m_tabWidget">
+    <widget class="QTabWidget" name="m_tabWidget">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
        <horstretch>0</horstretch>
