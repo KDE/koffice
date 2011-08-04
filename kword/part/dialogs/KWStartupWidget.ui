@@ -29,7 +29,7 @@ For letters and notes with one main text, possibly on several pages, you should 
     </widget>
    </item>
    <item row="1" column="0">
-    <widget class="KTabWidget" name="tabs">
+    <widget class="QTabWidget" name="tabs">
      <property name="currentIndex">
       <number>0</number>
      </property>
