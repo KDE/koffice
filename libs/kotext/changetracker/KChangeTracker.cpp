@@ -63,7 +63,8 @@ public:
         displayChanges(false),
         insertionBgColor(101,255,137),
         deletionBgColor(255,185,185),
-        formatChangeBgColor(195,195,255)
+        formatChangeBgColor(195,195,255),
+        changeSaveFormat(KChangeTracker::ODF_1_2)
     {
         deletedRowColumnData = new KDeletedRowColumnDataStore();
     }
