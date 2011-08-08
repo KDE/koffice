@@ -31,7 +31,7 @@ class QFile;
 typedef QPair<qreal, KoColor> KoGradientStop;
 
 /**
- * Resource for colorstop based gradients like Karbon gradients and SVG gradients
+ * Resource for colorstop based gradients like Artwork gradients and SVG gradients
  */
 class PIGMENTCMS_EXPORT KoStopGradient : public KoAbstractGradient
 {
@@ -67,8 +67,8 @@ protected:
 private:
     mutable KoColor buffer;
 private:
-    void loadKarbonGradient(QFile* file);
-    void parseKarbonGradient(const QDomElement& element);
+    void loadArtworkGradient(QFile* file);
+    void parseArtworkGradient(const QDomElement& element);
 
     void loadSvgGradient(QFile* file);
     void parseSvgGradient(const QDomElement& element);

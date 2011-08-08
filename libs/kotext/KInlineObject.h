@@ -74,7 +74,7 @@ public:
         AuthorInitials,
 
 
-        ArtsStart = 1000,      ///< Base number for karbon specific values.
+        ArtsStart = 1000,      ///< Base number for artwork specific values.
         KivioStart = 3000,       ///< Base number for kivio specific values.
         ShowcaseStart = 5000,  ///< Base number for showcase specific values.
         KWordStart = 7000,       ///< Base number for kword specific values.

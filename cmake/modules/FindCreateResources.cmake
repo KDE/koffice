@@ -4,7 +4,7 @@ if(CREATERESOURCES_INCLUDE_DIR)
 
 else(CREATERESOURCES_INCLUDE_DIR)
 
-    find_path( CREATERESOURCES_INCLUDE_DIR gradients/karbon14/simple.kgr
+    find_path( CREATERESOURCES_INCLUDE_DIR gradients/artwork/simple.kgr
                PATHS
                ${CMAKE_INSTALL_PREFIX}
                /usr /usr/local /usr/pkg

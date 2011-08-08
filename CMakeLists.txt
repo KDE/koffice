@@ -42,11 +42,11 @@ else (DEFINED BUILD_kcells )
     set(SHOULD_BUILD_KCELLS TRUE)
 endif (DEFINED BUILD_kcells )
 
-if (DEFINED BUILD_karbon )
-    set(SHOULD_BUILD_KARBON ${BUILD_karbon})
-else (DEFINED BUILD_karbon )
-    set(SHOULD_BUILD_KARBON TRUE)
-endif (DEFINED BUILD_karbon )
+if (DEFINED BUILD_artwork )
+    set(SHOULD_BUILD_ARTWORK ${BUILD_artwork})
+else (DEFINED BUILD_artwork )
+    set(SHOULD_BUILD_ARTWORK TRUE)
+endif (DEFINED BUILD_artwork )
 
 if (DEFINED BUILD_kivio )
     set(SHOULD_BUILD_KIVIO ${BUILD_kivio})
@@ -344,9 +344,9 @@ if(SHOULD_BUILD_KCELLS)
     add_subdirectory(kcells)
 endif(SHOULD_BUILD_KCELLS)
 
-if(SHOULD_BUILD_KARBON)
-  add_subdirectory(karbon)
-endif(SHOULD_BUILD_KARBON)
+if(SHOULD_BUILD_ARTWORK)
+  add_subdirectory(artwork)
+endif(SHOULD_BUILD_ARTWORK)
 
 macro_optional_add_subdirectory(doc)
 
@@ -373,7 +373,7 @@ macro_display_application_enabled(kword ${SHOULD_BUILD_KWORD})
 macro_display_application_enabled(kcells ${SHOULD_BUILD_KCELLS})
 macro_display_application_enabled(showcase ${SHOULD_BUILD_SHOWCASE})
 macro_display_application_enabled(kivio ${SHOULD_BUILD_KIVIO})
-macro_display_application_enabled(karbon ${SHOULD_BUILD_KARBON})
+macro_display_application_enabled(artwork ${SHOULD_BUILD_ARTWORK})
 
 message(STATUS "--------------------------------------------------------------------------" )
 

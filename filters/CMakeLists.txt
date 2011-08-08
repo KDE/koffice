@@ -50,9 +50,9 @@ if(SHOULD_BUILD_KCELLS)
     add_subdirectory(kcells)
 endif(SHOULD_BUILD_KCELLS)
 
-if(SHOULD_BUILD_KARBON)
-  add_subdirectory(karbon)
-endif(SHOULD_BUILD_KARBON)
+if(SHOULD_BUILD_ARTWORK)
+  add_subdirectory(artwork)
+endif(SHOULD_BUILD_ARTWORK)
 
 if(LIBXML2_FOUND AND LIBXSLT_FOUND AND NOT WIN32 AND NOT QT_MAC_USE_COCOA)
     add_subdirectory(xsltfilter)

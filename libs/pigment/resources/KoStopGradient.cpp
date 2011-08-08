@@ -54,7 +54,7 @@ bool KoStopGradient::load()
 
     if (f.open(QIODevice::ReadOnly)) {
         if (strExt == ".kgr") {
-            loadKarbonGradient(&f);
+            loadArtworkGradient(&f);
         } else if (strExt == ".svg") {
             loadSvgGradient(&f);
         }
@@ -255,7 +255,7 @@ void KoStopGradient::setStops(QList< KoGradientStop > stops)
     updatePreview();
 }
 
-void KoStopGradient::loadKarbonGradient(QFile* file)
+void KoStopGradient::loadArtworkGradient(QFile* file)
 {
     QDomDocument doc;
 
@@ -271,7 +271,7 @@ void KoStopGradient::loadKarbonGradient(QFile* file)
     if (!n.isNull()) {
         e = n.toElement();
         if (!e.isNull() && e.tagName() == "GRADIENT")
-            parseKarbonGradient(e);
+            parseArtworkGradient(e);
     }
 }
 
@@ -308,7 +308,7 @@ void KoStopGradient::loadSvgGradient(QFile* file)
     }
 }
 
-void KoStopGradient::parseKarbonGradient(const QDomElement& element)
+void KoStopGradient::parseArtworkGradient(const QDomElement& element)
 {
     m_start = QPointF(element.attribute("originX", "0.0").toDouble(), element.attribute("originY", "0.0").toDouble());
     m_focalPoint = QPointF(element.attribute("focalX", "0.0").toDouble(), element.attribute("focalY", "0.0").toDouble());

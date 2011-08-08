@@ -59,7 +59,7 @@ enum CanvasResource {
     Unit,               ///< The unit of this canvas (KUnit)
     CurrentPage,        ///< The current page number (int)
     ActiveColorTarget,    ///< the active color target type see KoFlake::StyleType for valid values
-    KarbonStart = 1000,      ///< Base number for karbon specific values.
+    ArtworkStart = 1000,      ///< Base number for artwork specific values.
     KivioStart = 3000,       ///< Base number for kivio specific values.
     ShowcaseStart = 5000,  ///< Base number for Showcase specific values.
     KCellsStart = 7000,     ///< Base number for kcells specific values.
@@ -85,7 +85,7 @@ enum DocumentResource {
     OdfDocument,            ///< The document this canvas shows (KOdfDocumentBase)
     TextDocuments,          ///< A list of all the QTextDocument instances of a document.
 
-    KarbonStart = 1000,      ///< Base number for karbon specific values.
+    ArtworkStart = 1000,      ///< Base number for artwork specific values.
     KivioStart = 3000,       ///< Base number for kivio specific values.
     ShowcaseStart = 5000,  ///< Base number for Showcase specific values.
     KCellsStart = 7000,     ///< Base number for kcells specific values.
