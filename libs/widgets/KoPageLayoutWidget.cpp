@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright (C) 2007, 2010 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2007-2011 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -35,8 +35,8 @@ public:
 
 
 KoPageLayoutWidget::KoPageLayoutWidget(QWidget *parent, const KOdfPageLayoutData &layout)
-    : QWidget(parent)
-    , d(new Private)
+    : QWidget(parent),
+    d(new Private)
 {
     d->widget.setupUi(this);
 
@@ -162,11 +162,11 @@ void KoPageLayoutWidget::setPageLayout(const KOdfPageLayoutData &layout)
         d->pageLayout.pageEdge = -1;
         d->pageLayout.bindingSide = -1;
     }
-    facingPagesChanged();
 
     d->widget.topMargin->changeValue(layout.topMargin);
     d->widget.bottomMargin->changeValue(layout.bottomMargin);
     d->allowSignals = true;
+    facingPagesChanged();
     d->widget.sizes->setCurrentIndex(layout.format); // calls sizeChanged()
 }
 
@@ -278,8 +278,7 @@ void KoPageLayoutWidget::setApplyToDocument(bool apply)
     if (apply) {
         d->widget.facingPageLabel->setText(i18n("Facing Pages:"));
         d->widget.facingPages->setText(i18n("Facing pages"));
-    }
-    else {
+    } else {
         d->widget.facingPageLabel->setText(i18n("Page Layout:"));
         d->widget.facingPages->setText(i18n("Page spread"));
     }

@@ -35,12 +35,12 @@ public:
 
 
 KoPagePreviewWidget::KoPagePreviewWidget(QWidget *parent)
-    : QWidget(parent)
-    , d(new Private)
+    : QWidget(parent),
+    d(new Private)
 {
     d->columns.columns = 1;
     d->columns.columnSpacing = 0;
-    setMinimumSize( 100, 100 );
+    setMinimumSize(100, 100);
 }
 
 KoPagePreviewWidget::~KoPagePreviewWidget()

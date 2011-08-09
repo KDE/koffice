@@ -22,9 +22,9 @@
 
 #include "kowidgets_export.h"
 
-#include <KoText.h>				//krazy:exclude=includes
-#include <KUnit.h>				//krazy:exclude=includes
-#include <KOdfPageLayoutData.h>			//krazy:exclude=includes
+#include <KoText.h>             //krazy:exclude=includes
+#include <KUnit.h>              //krazy:exclude=includes
+#include <KOdfPageLayoutData.h> //krazy:exclude=includes
 #include <QtGui/QWidget>
 
 /// the widget that shows the size/margins and other page settings.

@@ -28,7 +28,8 @@
 #include <QtGui/QWidget>
 
 /// A widget to preview the KOdfPageLayoutData and KOdfColumnData data structures.
-class KOWIDGETS_EXPORT KoPagePreviewWidget : public QWidget {
+class KOWIDGETS_EXPORT KoPagePreviewWidget : public QWidget
+{
     Q_OBJECT
 public:
     KoPagePreviewWidget(QWidget *parent = 0);
