@@ -119,6 +119,13 @@ void KOdfPageLayoutData::loadOdf(const KXmlElement &style)
             rightMargin  = KUnit::parseValue(properties.attributeNS(KOdfXmlNS::fo, "margin-right"), defaultValue);
             bottomMargin = KUnit::parseValue(properties.attributeNS(KOdfXmlNS::fo, "margin-bottom"), defaultValue);
         }
+        if (properties.attributeNS(KOdfXmlNS::koffice, "facing-pages", "false")
+                .compare("true", Qt::CaseInsensitive) == 0) {
+            pageEdge = leftMargin;
+            leftMargin = -1;
+            bindingSide = rightMargin;
+            rightMargin = -1;
+        }
 
         // Padding.  Same reasoning as for margins
         if (properties.hasAttributeNS(KOdfXmlNS::fo, "padding")) {
