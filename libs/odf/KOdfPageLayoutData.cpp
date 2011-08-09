@@ -36,15 +36,23 @@ KOdfGenericStyle KOdfPageLayoutData::saveOdf() const
     style.addPropertyPt("fo:page-width", width);
     style.addPropertyPt("fo:page-height", height);
 
+    qreal left = leftMargin;
+    if (left < 0)
+        left = pageEdge;
+    qreal right = rightMargin;
+    if (right < 0)
+        right = bindingSide;
+
     // Save margins. If all margins are the same, only one value needs to be saved.
-    if (leftMargin == topMargin && leftMargin == rightMargin && leftMargin == bottomMargin) {
+    if (left == topMargin && leftMargin == right && leftMargin == bottomMargin) {
         style.addPropertyPt("fo:margin", leftMargin);
-    }
-    else {
-        style.addPropertyPt("fo:margin-left", leftMargin);
-        style.addPropertyPt("fo:margin-right", rightMargin);
+    } else {
+        style.addPropertyPt("fo:margin-left", left);
+        style.addPropertyPt("fo:margin-right", right);
         style.addPropertyPt("fo:margin-top", topMargin);
         style.addPropertyPt("fo:margin-bottom", bottomMargin);
+        if (left != leftMargin || right != rightMargin)
+            style.addProperty("koffice:facing-pages", "true");
     }
 
     // Save padding. If all paddings are the same, only one value needs to be saved.
