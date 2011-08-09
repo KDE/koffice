@@ -44,8 +44,6 @@ KoPageLayoutDialog::KoPageLayoutDialog(QWidget *parent, const KOdfPageLayoutData
     : KPageDialog(parent)
     , d(new Private)
 {
-    d->layout = layout;
-
     setWindowTitle(i18n("Page Layout"));
     setFaceType(KPageDialog::Tabbed);
 
@@ -56,10 +54,12 @@ KoPageLayoutDialog::KoPageLayoutDialog(QWidget *parent, const KOdfPageLayoutData
     lay->setMargin(0);
     widget->setLayout(lay);
 
-    d->pageLayoutWidget = new KoPageLayoutWidget(widget, d->layout);
+    d->pageLayoutWidget = new KoPageLayoutWidget(widget, layout);
     d->pageLayoutWidget->showUnitchooser(false);
     d->pageLayoutWidget->layout()->setMargin(0);
     lay->addWidget(d->pageLayoutWidget);
+    d->layout = d->pageLayoutWidget->pageLayout();
+
 
     KoPagePreviewWidget *prev = new KoPagePreviewWidget(widget);
     prev->setPageLayout(d->layout);

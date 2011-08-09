@@ -46,6 +46,7 @@ public:
     void showTextDirection(bool on);
     void setTextDirection(KoText::Direction direction);
     KoText::Direction textDirection() const;
+    KOdfPageLayoutData pageLayout() const;
 
 signals:
     void layoutChanged(const KOdfPageLayoutData &layout);

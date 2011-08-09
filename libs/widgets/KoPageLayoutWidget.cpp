@@ -214,8 +214,8 @@ void KoPageLayoutWidget::marginsChanged()
         d->pageLayout.bindingSide = left;
         d->pageLayout.pageEdge = right;
     }
-    // kDebug() << "  " << d->pageLayout.left <<"|"<< d->pageLayout.bindingSide << "," <<
-    //    d->pageLayout.right << "|"<< d->pageLayout.pageEdge;
+    // kDebug() << "  " << d->pageLayout.leftMargin <<"|"<< d->pageLayout.bindingSide << "," <<
+    //    d->pageLayout.rightMargin << "|"<< d->pageLayout.pageEdge;
     emit layoutChanged(d->pageLayout);
     d->allowSignals = true;
 }
@@ -330,6 +330,11 @@ void KoPageLayoutWidget::setPageStyles(const QStringList &styles)
 {
     d->widget.pageStyle->clear();
     d->widget.pageStyle->addItems(styles);
+}
+
+KOdfPageLayoutData KoPageLayoutWidget::pageLayout() const
+{
+    return d->pageLayout;
 }
 
 QString KoPageLayoutWidget::currentPageStyle() const
