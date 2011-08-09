@@ -59,6 +59,8 @@ KoDocumentRdfPrivate::KoDocumentRdfPrivate()
         : model(Soprano::createModel())
         , prefixMapping(0)
 {
+    if (model == 0)
+        kWarning(30015) << "No soprano model cound be created";
 }
 
 KoDocumentRdfPrivate::~KoDocumentRdfPrivate()

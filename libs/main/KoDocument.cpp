@@ -359,6 +359,10 @@ KoDocument::KoDocument(QWidget *parentWidget, QObject *parent, bool singleViewMo
     d->docRdf = 0;
 #ifdef SHOULD_BUILD_RDF
     d->docRdf  = new KoDocumentRdf(this);
+    if (d->docRdf->model() == 0) {
+        delete d->docRdf;
+        d->docRdf = 0;
+    }
 #endif
 
     d->pageLayout.width = 0;
