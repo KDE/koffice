@@ -1,6 +1,9 @@
 [Desktop Entry]
 Type=Service
 Name=Artwork EPS Export Filter
+Name[sv]=Artwork EPS-exportfilter
+Name[uk]=Фільтр експорту EPS з Artwork
+Name[x-test]=xxArtwork EPS Export Filterxx
 X-KDE-Export=image/x-eps
 X-KDE-Import=application/x-artwork
 X-KDE-Weight=1

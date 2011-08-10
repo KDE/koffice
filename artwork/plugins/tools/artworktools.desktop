@@ -1,5 +1,8 @@
 [Desktop Entry]
 Name=Artwork Tools
+Name[sv]=Artwork-verktyg
+Name[uk]=Засоби Artwork
+Name[x-test]=xxArtwork Toolsxx
 X-KDE-ServiceTypes=KOffice/Tool
 Type=Service
 X-KDE-Library=artworktools

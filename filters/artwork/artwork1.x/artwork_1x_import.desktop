@@ -1,6 +1,9 @@
 [Desktop Entry]
 Type=Service
 Name=Artwork 1.x Import Filter
+Name[sv]=Artwork 1.x-importfilter
+Name[uk]=Фільтр імпорту Artwork 1.x
+Name[x-test]=xxArtwork 1.x Import Filterxx
 X-KDE-Export=application/vnd.oasis.opendocument.graphics
 X-KDE-Import=application/x-artwork
 X-KDE-Weight=1

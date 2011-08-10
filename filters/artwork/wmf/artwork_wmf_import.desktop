@@ -1,6 +1,9 @@
 [Desktop Entry]
 Type=Service
 Name=Artwork WMF Import Filter
+Name[sv]=Artwork WMF-importfilter
+Name[uk]=Фільтр імпорту WMF до Artwork
+Name[x-test]=xxArtwork WMF Import Filterxx
 X-KDE-Export=application/vnd.oasis.opendocument.graphics
 X-KDE-Import=image/x-wmf
 X-KDE-Weight=1

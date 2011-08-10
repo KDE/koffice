@@ -1,6 +1,9 @@
 [Desktop Entry]
 Icon=
 Name=Artwork SVG Export Filter
+Name[sv]=Artwork SVG-exportfilter
+Name[uk]=Фільтр експорту SVG з Artwork
+Name[x-test]=xxArtwork SVG Export Filterxx
 X-KDE-ServiceTypes=KOfficeFilter
 Type=Service
 X-KDE-Export=image/svg+xml

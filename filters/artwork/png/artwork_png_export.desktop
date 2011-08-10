@@ -1,6 +1,9 @@
 [Desktop Entry]
 Icon=
 Name=Artwork PNG Export Filter
+Name[sv]=Artwork PNG-exportfilter
+Name[uk]=Фільтр експорту PNG з Artwork
+Name[x-test]=xxArtwork PNG Export Filterxx
 X-KDE-ServiceTypes=KOfficeFilter
 Type=Service
 X-KDE-Export=image/png

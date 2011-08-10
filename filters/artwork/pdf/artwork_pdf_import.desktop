@@ -1,5 +1,8 @@
 [Desktop Entry]
 Name=Artwork PDF Import Filter
+Name[sv]=Artwork PDF-importfilter
+Name[uk]=Фільтр імпорту PDF до Artwork
+Name[x-test]=xxArtwork PDF Import Filterxx
 X-KDE-ServiceTypes=KOfficeFilter
 Type=Service
 X-KDE-Export=image/svg+xml

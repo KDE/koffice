@@ -2,3 +2,6 @@
 Type=ServiceType
 X-KDE-ServiceType=Artwork/CoreModule
 Comment=Core functionality module for Artwork
+Comment[sv]=Modul med kärnfunktioner för Artwork
+Comment[uk]=Модуль базової функціональності Artwork
+Comment[x-test]=xxCore functionality module for Artworkxx

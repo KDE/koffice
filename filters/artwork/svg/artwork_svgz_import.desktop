@@ -1,6 +1,9 @@
 [Desktop Entry]
 Type=Service
 Name=Artwork SVGZ Import Filter
+Name[sv]=Artwork SVGZ-importfilter
+Name[uk]=Фільтр імпорту SVGZ у Artwork
+Name[x-test]=xxArtwork SVGZ Import Filterxx
 X-KDE-Export=application/vnd.oasis.opendocument.graphics
 X-KDE-Import=image/svg+xml-compressed
 X-KDE-Weight=1

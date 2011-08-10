@@ -1,5 +1,8 @@
 [Desktop Entry]
 Name=Artwork
+Name[sv]=Artwork
+Name[uk]=Artwork
+Name[x-test]=xxArtworkxx
 Exec=artwork %u
 GenericName=Scalable Graphics
 GenericName[af]=Skaal veranderbare Grafieka
