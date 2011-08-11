@@ -133,9 +133,8 @@ const QWidget * ArtworkCanvas::canvasWidget() const
 
 bool ArtworkCanvas::event(QEvent *e)
 {
-    if(toolProxy()) {
-        toolProxy()->processEvent(e);
-    }
+    Q_ASSERT(d->toolProxy);
+    d->toolProxy->processEvent(e);
     return QWidget::event(e);
 }
 
