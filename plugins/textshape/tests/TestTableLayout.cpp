@@ -100,6 +100,14 @@ void TestTableLayout::initTest(int rows, int columns,
         }
     }
 
+    KParagraphStyle style;
+    style.setStyleId(101); // needed to do manually since we don't use the stylemanager
+    QTextBlock b2 = m_doc->begin();
+    while (b2.isValid()) {
+        style.applyStyle(b2);
+        b2 = b2.next();
+    }
+
     // Cell styles and texts.
     m_defaultCellStyle = new KTableCellStyle();
     Q_ASSERT(m_defaultCellStyle);
@@ -121,14 +129,6 @@ void TestTableLayout::initTest(int rows, int columns,
             }
         }
     }
-    KParagraphStyle style;
-    style.setStyleId(101); // needed to do manually since we don't use the stylemanager
-    QTextBlock b2 = m_doc->begin();
-    while (b2.isValid()) {
-        style.applyStyle(b2);
-        b2 = b2.next();
-    }
-
 }
 
 void TestTableLayout::initTestSimple(int rows, int columns, KTableStyle *tableStyle)
@@ -402,7 +402,6 @@ void TestTableLayout::testCellStyles()
      * - 7 pt double black border (4 pt inner, 2 pt spacing, 1 pt inner)
      */
     KTableCellStyle *cell1Style = new KTableCellStyle();
-    Q_ASSERT(cell1Style);
     cell1Style->setPadding(8.0);
     cell1Style->setEdge(KTableCellStyle::Left, KTableCellStyle::BorderSolid, 7.0, Qt::black);
     cell1Style->setEdgeDoubleBorderValues(KTableCellStyle::Left, 1.0, 2.0);
@@ -413,11 +412,17 @@ void TestTableLayout::testCellStyles()
     cell1Style->setEdge(KTableCellStyle::Bottom, KTableCellStyle::BorderSolid, 7.0, Qt::black);
     cell1Style->setEdgeDoubleBorderValues(KTableCellStyle::Bottom, 1.0, 2.0);
     cellStyles.insert(qMakePair(0, 0), cell1Style);
+
+    // double check KTableCellStyle functionality
+    QTextTableCellFormat testFormat;
+    cell1Style->applyStyle(testFormat);
+    QCOMPARE(testFormat.property(KTableCellStyle::LeftBorderStyle).toInt(), (int)KTableCellStyle::BorderSolid);
+    QCOMPARE(testFormat.property(KTableCellStyle::LeftBorderOuterPen).value<QPen>().widthF(), 7.0);
+    QCOMPARE(testFormat.property(KTableCellStyle::LeftBorderOuterPen).value<QPen>().color(), QColor(Qt::black));
+
     QMap<QPair<int, int>, QString> cellTexts;
 
     initTest(2, 2, 0, columnStyles, rowStyles, cellStyles, cellTexts);
-
-    m_layout->layout();
 
     /*
      * Cell 0, 0 rules:
@@ -427,7 +432,14 @@ void TestTableLayout::testCellStyles()
      *   height = 14.4 (one line)
      */
     QTextTableCell cell1 = m_table->cellAt(0, 0);
-    QTextTableCellFormat cell1Format = cell1.format().toTableCellFormat();
+    // double check initTest functionality
+    testFormat = cell1.format().toTableCellFormat();
+    QCOMPARE(testFormat.property(KTableCellStyle::LeftBorderStyle).toInt(), (int)KTableCellStyle::BorderSolid);
+    QCOMPARE(testFormat.property(KTableCellStyle::LeftBorderOuterPen).value<QPen>().widthF(), 7.0);
+    QCOMPARE(testFormat.property(KTableCellStyle::LeftBorderOuterPen).value<QPen>().color(), QColor(Qt::black));
+
+    m_layout->layout();
+
     QCOMPARE(m_textLayout->m_tableLayout.cellContentRect(cell1), QRectF(15, 15, 70, 14.4));
 
     /*
