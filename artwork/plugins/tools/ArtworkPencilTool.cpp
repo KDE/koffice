@@ -164,15 +164,6 @@ void ArtworkPencilTool::mouseReleaseEvent(KPointerEvent *event)
     m_points.clear();
 }
 
-void ArtworkPencilTool::keyPressEvent(QKeyEvent *event)
-{
-    if (m_shape) {
-        event->accept();
-    } else {
-        event->ignore();
-    }
-}
-
 void ArtworkPencilTool::activate(ToolActivation, const QSet<KShape*> &)
 {
     m_points.clear();
@@ -395,7 +386,7 @@ void ArtworkPencilTool::setDelta(double delta)
 KLineBorder * ArtworkPencilTool::currentBorder()
 {
     KLineBorder *border = new KLineBorder();
-    border->setPen(QPen(canvas()->resourceManager()->foregroundColor()));
+    border->setPen(QPen(canvas()->resourceManager()->foregroundColor(), 2));
     return border;
 }
 

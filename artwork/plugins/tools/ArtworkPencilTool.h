@@ -40,7 +40,6 @@ public:
     void mousePressEvent(KPointerEvent *event) ;
     void mouseMoveEvent(KPointerEvent *event);
     void mouseReleaseEvent(KPointerEvent *event);
-    void keyPressEvent(QKeyEvent *event);
 
     virtual void activate(ToolActivation toolActivation, const QSet<KShape*> &shapes);
     void deactivate();
