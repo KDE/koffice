@@ -273,13 +273,6 @@ public:
      */
     bool isReadWrite() const;
 
-    /**
-      * This method can be reimplemented in a subclass.
-      * @return returns true, if the tool is in text mode. that means, that there is
-      *   any kind of textual input and all single key shortcuts should be eaten.
-      */
-    bool isInTextMode() const;
-
 
     /**
      * This method is called when this tool instance is activated.
@@ -383,6 +376,10 @@ protected:
      * Sets the option widget to 0 by default.
      */
     virtual QWidget *createOptionWidget();
+
+    /**
+     * Reimplement this if your tool actually has an option widget.
+     */
     virtual QMap<QString, QWidget *> createOptionWidgets();
 
     /**
@@ -425,11 +422,7 @@ protected:
     */
     QRectF handlePaintRect(const QPointF &position) const;
 
-    /**
-      * You should set the text mode to true in subclasses, if this tool is in text input mode, eg if the users
-      * are able to type. If you don't set it, then single key shortcuts will get the key event and not this tool.
-      */
-    void setTextMode(bool value);
+    virtual void shortcutOverride(QKeyEvent *event);
 
 protected:
     KToolBase(KToolBasePrivate &dd);

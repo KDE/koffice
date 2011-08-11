@@ -21,6 +21,7 @@
 #include "KToolProxy_p.h"
 
 #include "KToolBase.h"
+#include "KToolBase_p.h"
 #include "KPointerEvent.h"
 #include "KInputDevice.h"
 #include "KToolManager_p.h"
@@ -366,11 +367,8 @@ void KToolProxy::deleteSelection()
 
 void KToolProxy::processEvent(QEvent *e) const
 {
-    if (e->type()==QEvent::ShortcutOverride
-       && d->activeTool
-       && d->activeTool->isInTextMode()
-       && static_cast<QKeyEvent*>(e)->modifiers()==Qt::NoModifier) {
-        e->accept();
+    if (e->type() == QEvent::ShortcutOverride && d->activeTool) {
+        d->activeTool->priv()->shortcutOverride(static_cast<QKeyEvent*>(e));
     }
 }
 

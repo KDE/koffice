@@ -53,7 +53,6 @@ public:
         q(qq),
         canvas(canvas_),
         readWrite(true),
-        isInTextMode(false),
         createdOptionWidgets(false)
     {
     }
@@ -63,8 +62,12 @@ public:
         qDeleteAll(optionWidgets);
     }
 
-    void emitStatusText(const QString &statusText) {
+    inline void emitStatusText(const QString &statusText) {
         q->statusTextChanged(statusText);
+    }
+
+    inline void shortcutOverride(QKeyEvent *event) {
+        q->shortcutOverride(event);
     }
 
     QMap<QString, QWidget *> optionWidgets; ///< the optionwidgets associated with this tool
@@ -76,7 +79,6 @@ public:
     KToolBase *q;
     KCanvasBase *canvas; ///< the canvas interface this tool will work for.
     bool readWrite;
-    bool isInTextMode;
     bool createdOptionWidgets;
 };
 

@@ -246,10 +246,9 @@ QRectF KToolBase::handlePaintRect(const QPointF &position) const
     return r;
 }
 
-void KToolBase::setTextMode(bool value)
+void KToolBase::shortcutOverride(QKeyEvent *event)
 {
-    Q_D(KToolBase);
-    d->isInTextMode=value;
+    event->ignore();
 }
 
 QStringList KToolBase::supportedPasteMimeTypes() const
@@ -285,12 +284,6 @@ bool KToolBase::isReadWrite() const
 {
     Q_D(const KToolBase);
     return d->readWrite;
-}
-
-bool KToolBase::isInTextMode() const
-{
-    Q_D(const KToolBase);
-    return d->isInTextMode;
 }
 
 KToolBasePrivate *KToolBase::priv()
