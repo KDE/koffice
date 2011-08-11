@@ -104,7 +104,7 @@ QColor KResourceManager::colorResource(int key) const
     if (d->lazyResources.contains(key))
         d->fetchLazy(key, this);
     if (! d->resources.contains(key))
-        return QColor();
+        return QColor(0, 0, 0); // lets have a sane default
     return resource(key).value<QColor>();
 }
 
