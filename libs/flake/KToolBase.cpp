@@ -64,6 +64,8 @@ void KToolBase::resourceChanged(int key, const QVariant & res)
 bool KToolBase::wantsAutoScroll() const
 {
     Q_D(const KToolBase);
+    if (d->flags & ToolDoesntHandleMouseEvents)
+        return false;
     return (d->flags & ToolDoesntAutoScroll) == 0;
 }
 
