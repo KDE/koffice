@@ -13,7 +13,6 @@
   <Action name="edit_copy"/>
   <Action name="edit_paste"/>
   <Action name="edit_selectall"/>
-  <Action name="edit_selectallshapes"/>
   <Action name="edit_delete"/>
   <Separator/>
   <Action name="edit_find"/>
