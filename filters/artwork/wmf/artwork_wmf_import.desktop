@@ -1,6 +1,7 @@
 [Desktop Entry]
 Type=Service
 Name=Artwork WMF Import Filter
+Name[pt_BR]=Filtro de importação de WMF para o Artwork
 Name[sv]=Artwork WMF-importfilter
 Name[uk]=Фільтр імпорту WMF до Artwork
 Name[x-test]=xxArtwork WMF Import Filterxx
