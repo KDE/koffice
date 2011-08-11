@@ -43,8 +43,6 @@ public:
     explicit SCPresentationTool(SCViewModePresentation &viewMode);
     ~SCPresentationTool();
 
-    bool wantsAutoScroll() const;
-
     void paint(QPainter &painter, const KViewConverter &converter);
 
     void mousePressEvent(KPointerEvent *event);

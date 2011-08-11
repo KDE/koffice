@@ -76,6 +76,8 @@ public:
     virtual void mouseDoubleClickEvent(KPointerEvent* event);
     virtual void keyPressEvent(QKeyEvent* event);
     virtual void inputMethodEvent(QInputMethodEvent * event);
+    virtual void shortcutOverride(QKeyEvent *event);
+
 
     virtual Selection* selection() = 0;
 

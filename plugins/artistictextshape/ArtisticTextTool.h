@@ -53,6 +53,10 @@ public:
     virtual QMap<QString, QWidget *> createOptionWidgets();
     /// reimplemented
     virtual void keyPressEvent(QKeyEvent *event);
+    /// reimplemented
+    virtual void keyReleaseEvent(QKeyEvent *event);
+    /// reimplemented
+    virtual void shortcutOverride(QKeyEvent *event);
 
 protected:
     void enableTextCursor(bool enable);

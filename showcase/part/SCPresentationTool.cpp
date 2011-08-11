@@ -75,16 +75,12 @@ SCPresentationTool::SCPresentationTool(SCViewModePresentation &viewMode)
     connect(m_presentationToolWidget->presentationToolUi().highLightButton, SIGNAL(clicked()), this, SLOT(highlightPresentation()));
     connect(m_presentationToolWidget->presentationToolUi().blackButton, SIGNAL(clicked()), this, SLOT(blackPresentation()));
 
+    setFlags(ToolDoesntAutoScroll | ToolHandleKeyEvents);
 }
 
 SCPresentationTool::~SCPresentationTool()
 {
     delete m_strategy;
-}
-
-bool SCPresentationTool::wantsAutoScroll() const
-{
-    return false;
 }
 
 void SCPresentationTool::paint(QPainter &painter, const KViewConverter &converter)
