@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright (C) 2006 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2006-2011 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -44,11 +44,16 @@ class QInputMethodEvent;
 /**
  * Abstract base class for all tools. Tools can create or manipulate
  * flake shapes, canvas state or any other thing that a user may wish
- * to do to his document or his view on a document with a pointing
- * device.
+ * to do to his document or his view on a document with user input.
+ *
+ *  [list copy paste methods]
+ *    [explain KToolSelection and the setter/getter]
+ *  [mention that a tool paints over its shapes]
+ *  [mention that keyboard input is optional and has to be enabled]
+ *  [explain read/write concept]
  *
  * There exists an instance of every tool for every pointer device.
- * These instances are managed by the toolmanager..
+ * These instances are managed by the KToolManager..
  */
 class FLAKE_EXPORT KToolBase : public QObject
 {
@@ -65,6 +70,41 @@ public:
         ReadWriteAction ///< Used to signify actions that can change document content
     };
 
+    /** This enum describes different flags that you can set on a tool to toggle different features in
+     * the tools's behavior.
+     *
+     * All flags are disabled by default.
+     */
+    enum Flag {
+        /**
+         * The tool will stop automatically scrolling the viewport when the input events
+         * coming into the tool cause the cursor to hit the edge of the visible area.
+         */
+        ToolDoesntAutoScroll = 1,
+        /**
+         * The tool will handle mouse move events even if there was no button depressed.
+         */
+        ToolMouseTracking = 2,
+        /**
+         * The tool will get key events when the user uses the keyboard.
+         */
+        ToolHandleKeyEvents = 4,
+        /**
+         * The tool does not want mouse events.
+         */
+        ToolDoesntHandleMouseEvents = 8,
+        /**
+         * The tool will get a call on shortcutOverride() which will allow the tool to steal any keyboard
+         * event including application-defined keyboard shortcuts by accepting the event.
+         */
+        ToolHandleShortcutOverride = 0x10
+
+        /*  These are ideas for expansion;
+        ToolDrawsNoContent,
+        ToolResourceChangeListener,
+        */
+    };
+    Q_DECLARE_FLAGS(Flags, Flag)
 
     /**
      * Constructor, normally only called by the factory (see KToolFactoryBase)
@@ -84,7 +124,7 @@ public:
      * canvas (default is true).
      * @return if this tool wants mouse events to cause scrolling of canvas.
      */
-    virtual bool wantsAutoScroll() const;
+    bool wantsAutoScroll() const;
 
     /**
      * Called by the canvas to paint any decorations that the tool deems needed.
@@ -108,7 +148,7 @@ public:
      * Each tool can have a selection which is private to that tool and the specified shape that it comes with.
      * The default returns 0.
      */
-    virtual KToolSelection *selection();
+    virtual KToolSelection *selection(); // TODO add setter and remove virtual
 
     /**
      * Retrieves the entire collection of actions for the tool.
@@ -117,80 +157,9 @@ public:
 
     /**
      * Retrieve an action by name.
+     * @returns the action object, or null if the name is unknown.
      */
     KAction *action(const QString &name) const;
-
-    /**
-     * Called when (one of) the mouse or stylus buttons is pressed.
-     * Implementors should call event->ignore() if they do not actually use the event.
-     * @param event state and reason of this mouse or stylus press
-     */
-    virtual void mousePressEvent(KPointerEvent *event) = 0;
-
-    /**
-     * Called when (one of) the mouse or stylus buttons is double clicked.
-     * Implementors should call event->ignore() if they do not actually use the event.
-     * Default implementation ignores this event.
-     * @param event state and reason of this mouse or stylus press
-     */
-    virtual void mouseDoubleClickEvent(KPointerEvent *event);
-
-    /**
-     * Called when the mouse or stylus moved over the canvas.
-     * Implementors should call event->ignore() if they do not actually use the event.
-     * @param event state and reason of this mouse or stylus move
-     */
-    virtual void mouseMoveEvent(KPointerEvent *event) = 0;
-
-    /**
-     * Called when (one of) the mouse or stylus buttons is released.
-     * Implementors should call event->ignore() if they do not actually use the event.
-     * @param event state and reason of this mouse or stylus release
-     */
-    virtual void mouseReleaseEvent(KPointerEvent *event) = 0;
-
-    /**
-     * Called when a key is pressed.
-     * Implementors should call event->ignore() if they do not actually use the event.
-     * Default implementation ignores this event.
-     * @param event state and reason of this key press
-     */
-    virtual void keyPressEvent(QKeyEvent *event);
-
-    /**
-     * Called when a key is released
-     * Implementors should call event->ignore() if they do not actually use the event.
-     * Default implementation ignores this event.
-     * @param event state and reason of this key release
-     */
-    virtual void keyReleaseEvent(QKeyEvent *event);
-
-    /**
-     * Called when the scrollwheel is used
-     * Implementors should call event->ignore() if they do not actually use the event
-     * @param event state of this wheel event
-     */
-    virtual void wheelEvent(KPointerEvent *event);
-
-    /**
-     * This method is used to query a set of properties of the tool to be
-     * able to support complex input method operations as support for surrounding
-     * text and reconversions.
-     * Default implementation returns simple defaults, for tools that want to provide
-     * a more responsive text entry experience for CJK languages it would be good to reimplemnt.
-     * @param query specifies which property is queried.
-     * @param converter the view converter for the current canvas.
-     */
-    virtual QVariant inputMethodQuery(Qt::InputMethodQuery query, const KViewConverter &converter) const;
-
-    /**
-     * Text entry of complex text, like CJK, can be made more interactive if a tool
-     * implements this and the InputMethodQuery() methods.
-     * Reimplementing this only provides the user with a more responsive text experience, since the
-     * default implementation forwards the typed text as key pressed events.
-     * @param event the input method event.
-     */
-    virtual void inputMethodEvent(QInputMethodEvent *event);
 
     /**
      * Set the identifier code from the KToolFactoryBase that created this tool.
@@ -244,10 +213,11 @@ public:
      * Returns the mimetypes that this tool's paste() function can handle
      * @return QStringList containing the mimetypes that's supported by paste()
      */
-    virtual QStringList supportedPasteMimeTypes() const;
+    virtual QStringList supportedPasteMimeTypes() const; // TODO make protected setter and non-virtual getter
 
     /**
      * @return A list of actions to be used for a popup.
+     * @see setPopupActionList()
      */
     QList<QAction*> popupActionList() const;
 
@@ -424,9 +394,86 @@ protected:
 
     virtual void shortcutOverride(QKeyEvent *event);
 
-protected:
+    /**
+     * Called when (one of) the mouse or stylus buttons is pressed.
+     * Implementors should call event->ignore() if they do not actually use the event.
+     * @param event state and reason of this mouse or stylus press
+     */
+    virtual void mousePressEvent(KPointerEvent *event);
+
+    /**
+     * Called when (one of) the mouse or stylus buttons is double clicked.
+     * Implementors should call event->ignore() if they do not actually use the event.
+     * Default implementation ignores this event.
+     * @param event state and reason of this mouse or stylus press
+     */
+    virtual void mouseDoubleClickEvent(KPointerEvent *event);
+
+    /**
+     * Called when the mouse or stylus moved over the canvas.
+     * Implementors should call event->ignore() if they do not actually use the event.
+     * @param event state and reason of this mouse or stylus move
+     */
+    virtual void mouseMoveEvent(KPointerEvent *event);
+
+    /**
+     * Called when (one of) the mouse or stylus buttons is released.
+     * Implementors should call event->ignore() if they do not actually use the event.
+     * @param event state and reason of this mouse or stylus release
+     */
+    virtual void mouseReleaseEvent(KPointerEvent *event);
+
+    /**
+     * Called when a key is pressed.
+     * Implementors should call event->ignore() if they do not actually use the event.
+     * Default implementation ignores this event.
+     * @param event state and reason of this key press
+     */
+    virtual void keyPressEvent(QKeyEvent *event);
+
+    /**
+     * Called when a key is released
+     * Implementors should call event->ignore() if they do not actually use the event.
+     * Default implementation ignores this event.
+     * @param event state and reason of this key release
+     */
+    virtual void keyReleaseEvent(QKeyEvent *event);
+
+    /**
+     * Called when the scrollwheel is used
+     * Implementors should call event->ignore() if they do not actually use the event
+     * @param event state of this wheel event
+     */
+    virtual void wheelEvent(KPointerEvent *event);
+
+    /**
+     * This method is used to query a set of properties of the tool to be
+     * able to support complex input method operations as support for surrounding
+     * text and reconversions.
+     * Default implementation returns simple defaults, for tools that want to provide
+     * a more responsive text entry experience for CJK languages it would be good to reimplemnt.
+     * @param query specifies which property is queried.
+     * @param converter the view converter for the current canvas.
+     */
+    virtual QVariant inputMethodQuery(Qt::InputMethodQuery query, const KViewConverter &converter) const;
+
+    /**
+     * Text entry of complex text, like CJK, can be made more interactive if a tool
+     * implements this and the InputMethodQuery() methods.
+     * Reimplementing this only provides the user with a more responsive text experience, since the
+     * default implementation forwards the typed text as key pressed events.
+     * @param event the input method event.
+     */
+    virtual void inputMethodEvent(QInputMethodEvent *event);
+
+    void setFlags(Flags flags);
+    void setFlag(Flag flag, bool on);
+    Flags flags() const;
+
+    /// \internal
     KToolBase(KToolBasePrivate &dd);
 
+    /// \internal
     KToolBasePrivate *d_ptr;
 
 private:
@@ -437,4 +484,6 @@ private:
     Q_DECLARE_PRIVATE(KToolBase)
 };
 
-#endif /* KOTOOL_H */
+Q_DECLARE_OPERATORS_FOR_FLAGS(KToolBase::Flags)
+
+#endif

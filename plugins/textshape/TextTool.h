@@ -69,6 +69,7 @@ public:
     /// reimplemented from superclass
     virtual void paint(QPainter &painter, const KViewConverter &converter);
 
+    virtual void shortcutOverride(QKeyEvent *event);
     /// reimplemented from superclass
     virtual void mousePressEvent(KPointerEvent *event) ;
     /// reimplemented from superclass

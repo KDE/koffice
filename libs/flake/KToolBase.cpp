@@ -63,7 +63,23 @@ void KToolBase::resourceChanged(int key, const QVariant & res)
 
 bool KToolBase::wantsAutoScroll() const
 {
-    return true;
+    Q_D(const KToolBase);
+    return (d->flags & ToolDoesntAutoScroll) == 0;
+}
+
+void KToolBase::mousePressEvent(KPointerEvent *event)
+{
+    event->ignore();
+}
+
+void KToolBase::mouseMoveEvent(KPointerEvent *event)
+{
+    event->ignore();
+}
+
+void KToolBase::mouseReleaseEvent(KPointerEvent *event)
+{
+    event->ignore();
 }
 
 void KToolBase::mouseDoubleClickEvent(KPointerEvent *event)
@@ -284,6 +300,27 @@ bool KToolBase::isReadWrite() const
 {
     Q_D(const KToolBase);
     return d->readWrite;
+}
+
+void KToolBase::setFlags(Flags flags)
+{
+    Q_D(KToolBase);
+    d->flags = flags;
+}
+
+void KToolBase::setFlag(Flag flag, bool on)
+{
+    Q_D(KToolBase);
+    if (on)
+        d->flags |= flag;
+    else
+        d->flags ^= flag;
+}
+
+KToolBase::Flags KToolBase::flags() const
+{
+    Q_D(const KToolBase);
+    return d->flags;
 }
 
 KToolBasePrivate *KToolBase::priv()

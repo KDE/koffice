@@ -64,7 +64,7 @@ void KToolProxyPrivate::timeout() // Auto scroll the canvas
 
     QMouseEvent event(QEvent::MouseMove, scrollEdgePoint, Qt::LeftButton, Qt::LeftButton, 0);
     KPointerEvent ev(&event, controller->canvas()->viewConverter()->viewToDocument(scrollEdgePoint));
-    activeTool->mouseMoveEvent(&ev);
+    activeTool->priv()->mouseMoveEvent(&ev);
 }
 
 void KToolProxyPrivate::checkAutoScroll(const KPointerEvent &event)
@@ -146,7 +146,7 @@ void KToolProxy::tabletEvent(QTabletEvent *event, const QPointF &point)
     case QEvent::TabletPress:
         ev.setTabletButton(Qt::LeftButton);
         if (!d->tabletPressed && d->activeTool)
-            d->activeTool->mousePressEvent(&ev);
+            d->activeTool->priv()->mousePressEvent(&ev);
         d->tabletPressed = true;
         break;
     case QEvent::TabletRelease:
@@ -154,13 +154,13 @@ void KToolProxy::tabletEvent(QTabletEvent *event, const QPointF &point)
         d->tabletPressed = false;
         d->scrollTimer.stop();
         if (d->activeTool)
-            d->activeTool->mouseReleaseEvent(&ev);
+            d->activeTool->priv()->mouseReleaseEvent(&ev);
         break;
     case QEvent::TabletMove:
         if (d->tabletPressed)
             ev.setTabletButton(Qt::LeftButton);
         if (d->activeTool)
-            d->activeTool->mouseMoveEvent(&ev);
+            d->activeTool->priv()->mouseMoveEvent(&ev);
         d->checkAutoScroll(ev);
     default:
         ; // ignore the rest.
@@ -181,7 +181,7 @@ void KToolProxy::mousePressEvent(QMouseEvent *event, const QPointF &point)
 
     KPointerEvent ev(event, point);
     if (d->activeTool)
-        d->activeTool->mousePressEvent(&ev);
+        d->activeTool->priv()->mousePressEvent(&ev);
     else
         event->ignore();
 }
@@ -197,7 +197,7 @@ void KToolProxy::mouseDoubleClickEvent(QMouseEvent *event, const QPointF &point)
     }
 
     KPointerEvent ev(event, point);
-    d->activeTool->mouseDoubleClickEvent(&ev);
+    d->activeTool->priv()->mouseDoubleClickEvent(&ev);
     if (! event->isAccepted() && event->button() == Qt::LeftButton)
         d->activeTool->canvas()->shapeManager()->priv()->suggestChangeTool(&ev);
 }
@@ -216,7 +216,7 @@ void KToolProxy::mouseMoveEvent(QMouseEvent *event, const QPointF &point)
     }
 
     KPointerEvent ev(event, point);
-    d->activeTool->mouseMoveEvent(&ev);
+    d->activeTool->priv()->mouseMoveEvent(&ev);
 
     d->checkAutoScroll(ev);
 }
@@ -230,7 +230,7 @@ void KToolProxy::mouseReleaseEvent(QMouseEvent *event, const QPointF &point)
 
     KPointerEvent ev(event, point);
     if (d->activeTool) {
-        d->activeTool->mouseReleaseEvent(&ev);
+        d->activeTool->priv()->mouseReleaseEvent(&ev);
 
         if (! event->isAccepted() && event->button() == Qt::LeftButton && event->modifiers() == 0
                 && qAbs(d->mouseDownPoint.x() - event->x()) < 5
@@ -260,7 +260,7 @@ void KToolProxy::mouseReleaseEvent(QMouseEvent *event, const QPointF &point)
 void KToolProxy::keyPressEvent(QKeyEvent *event)
 {
     if (d->activeTool)
-        d->activeTool->keyPressEvent(event);
+        d->activeTool->priv()->keyPressEvent(event);
     else
         event->ignore();
 }
@@ -268,7 +268,7 @@ void KToolProxy::keyPressEvent(QKeyEvent *event)
 void KToolProxy::keyReleaseEvent(QKeyEvent *event)
 {
     if (d->activeTool)
-        d->activeTool->keyReleaseEvent(event);
+        d->activeTool->priv()->keyReleaseEvent(event);
     else
         event->ignore();
 }
@@ -277,7 +277,7 @@ void KToolProxy::wheelEvent(QWheelEvent *event, const QPointF &point)
 {
     KPointerEvent ev(event, point);
     if (d->activeTool)
-        d->activeTool->wheelEvent(&ev);
+        d->activeTool->priv()->wheelEvent(&ev);
     else
         event->ignore();
 }
@@ -285,13 +285,13 @@ void KToolProxy::wheelEvent(QWheelEvent *event, const QPointF &point)
 QVariant KToolProxy::inputMethodQuery(Qt::InputMethodQuery query, const KViewConverter &converter) const
 {
     if (d->activeTool)
-        return d->activeTool->inputMethodQuery(query, converter);
+        return d->activeTool->priv()->inputMethodQuery(query, converter);
     return QVariant();
 }
 
 void KToolProxy::inputMethodEvent(QInputMethodEvent *event)
 {
-    if (d->activeTool) d->activeTool->inputMethodEvent(event);
+    if (d->activeTool) d->activeTool->priv()->inputMethodEvent(event);
 }
 
 KToolSelection* KToolProxy::selection()

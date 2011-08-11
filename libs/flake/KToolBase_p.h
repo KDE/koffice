@@ -1,6 +1,5 @@
 /* This file is part of the KDE project
- * Copyright (C) 2006-2010 Thomas Zander <zander@kde.org>
- * Copyright (C) 2010 KO GmbH <boud@kogmbh.com>
+ * Copyright (C) 2006-2011 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -37,8 +36,10 @@
 #include <QHash>
 #include <QWidget>
 #include <QString>
+#include <QVariant>
 #include <QSet>
-#include <string.h> // for the qt version check
+
+#include "KPointerEvent.h"
 
 class QWidget;
 class KAction;
@@ -67,7 +68,51 @@ public:
     }
 
     inline void shortcutOverride(QKeyEvent *event) {
-        q->shortcutOverride(event);
+        if (flags & KToolBase::ToolHandleShortcutOverride)
+            q->shortcutOverride(event);
+    }
+
+    inline void mousePressEvent(KPointerEvent *event) {
+        if ((flags & KToolBase::ToolDoesntHandleMouseEvents) == 0)
+            q->mousePressEvent(event);
+    }
+
+    inline void mouseDoubleClickEvent(KPointerEvent *event) {
+        if ((flags & KToolBase::ToolDoesntHandleMouseEvents) == 0)
+            q->mouseDoubleClickEvent(event);
+    }
+
+    inline void mouseMoveEvent(KPointerEvent *event) {
+        if (((flags & KToolBase::ToolDoesntHandleMouseEvents) == 0 && event->buttons() != Qt::NoButton)
+                || (flags & KToolBase::ToolMouseTracking))
+            q->mouseMoveEvent(event);
+    }
+
+    inline void mouseReleaseEvent(KPointerEvent *event) {
+        if ((flags & KToolBase::ToolDoesntHandleMouseEvents) == 0)
+            q->mouseReleaseEvent(event);
+    }
+
+    inline void keyPressEvent(QKeyEvent *event) {
+        if (flags & KToolBase::ToolHandleKeyEvents)
+            q->keyPressEvent(event);
+    }
+
+    inline void keyReleaseEvent(QKeyEvent *event) {
+        if (flags & KToolBase::ToolHandleKeyEvents)
+            q->keyReleaseEvent(event);
+    }
+
+    inline void wheelEvent(KPointerEvent *event) {
+        q->wheelEvent(event);
+    }
+
+    inline QVariant inputMethodQuery(Qt::InputMethodQuery query, const KViewConverter &converter) const {
+        return q->inputMethodQuery(query, converter);
+    }
+
+    inline void inputMethodEvent(QInputMethodEvent *event) {
+        q->inputMethodEvent(event);
     }
 
     QMap<QString, QWidget *> optionWidgets; ///< the optionwidgets associated with this tool
@@ -80,6 +125,8 @@ public:
     KCanvasBase *canvas; ///< the canvas interface this tool will work for.
     bool readWrite;
     bool createdOptionWidgets;
+
+    KToolBase::Flags flags;
 };
 
 #endif

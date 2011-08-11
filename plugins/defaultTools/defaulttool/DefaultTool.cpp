@@ -172,18 +172,14 @@ DefaultTool::DefaultTool(KCanvasBase *canvas)
 
     KShapeManager * manager = canvas->shapeManager();
     connect(manager, SIGNAL(selectionChanged()), this, SLOT(updateActions()));
+
+    setFlags(ToolDoesntAutoScroll | ToolHandleKeyEvents | ToolMouseTracking);
 }
 
 DefaultTool::~DefaultTool()
 {
     delete m_guideLine;
 }
-
-bool DefaultTool::wantsAutoScroll() const
-{
-    return true;
-}
-
 void DefaultTool::setupActions()
 {
     KAction* actionBringToFront = new KAction(KIcon("object-order-front-koffice"),

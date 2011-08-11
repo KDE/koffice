@@ -53,8 +53,6 @@ public:
     explicit KPanTool(KCanvasBase *canvas);
 
     /// reimplemented from superclass
-    virtual bool wantsAutoScroll() const;
-    /// reimplemented from superclass
     virtual void mousePressEvent(KPointerEvent *event);
     /// reimplemented from superclass
     virtual void mouseMoveEvent(KPointerEvent *event);
