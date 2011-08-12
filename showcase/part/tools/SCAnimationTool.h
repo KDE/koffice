@@ -38,26 +38,11 @@ public:
     explicit SCAnimationTool(KCanvasBase *canvas);
     virtual ~SCAnimationTool();
 
-public:
-
     virtual void paint(QPainter &painter, const KViewConverter &converter);
-
-public slots:
     virtual void activate(ToolActivation toolActivation, const QSet<KShape*> &shapes);
 
-public: // Events
-
-    virtual void mousePressEvent(KPointerEvent *event);
-    virtual void mouseMoveEvent(KPointerEvent *event);
-    virtual void mouseReleaseEvent(KPointerEvent *event);
-//    virtual void mouseDoubleClickEvent(KPointerEvent *event);
-
-//    virtual void keyPressEvent(QKeyEvent *event);
-
-protected:
-    QMap<QString, QWidget *> createOptionWidgets();
-
-private:
+protected: // Events
+    virtual QMap<QString, QWidget *> createOptionWidgets();
 };
 
 #endif

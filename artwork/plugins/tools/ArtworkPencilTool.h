@@ -37,15 +37,15 @@ public:
     void paint(QPainter &painter, const KViewConverter &converter);
     void repaintDecorations();
 
-    void mousePressEvent(KPointerEvent *event) ;
-    void mouseMoveEvent(KPointerEvent *event);
-    void mouseReleaseEvent(KPointerEvent *event);
-
     virtual void activate(ToolActivation toolActivation, const QSet<KShape*> &shapes);
     void deactivate();
 
 protected:
     virtual QWidget * createOptionWidget();
+    virtual void mousePressEvent(KPointerEvent *event) ;
+    virtual void mouseMoveEvent(KPointerEvent *event);
+    virtual void mouseReleaseEvent(KPointerEvent *event);
+
 
 private slots:
     void selectMode(int mode);

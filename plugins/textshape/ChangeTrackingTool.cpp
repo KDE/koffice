@@ -63,6 +63,7 @@ ChangeTrackingTool::ChangeTrackingTool(KCanvasBase* canvas): KToolBase(canvas),
     m_trackedChangeManager(0),
     m_changesTreeView(0)
 {
+    setFlags(ToolMouseTracking);
     KAction *action;
     action = new KAction(i18n("Tracked change manager"), this);
     action->setShortcut(Qt::ALT + Qt::CTRL + Qt::Key_T);
@@ -74,11 +75,6 @@ ChangeTrackingTool::~ChangeTrackingTool()
 {
     delete m_trackedChangeManager;
     delete m_model;
-}
-
-void ChangeTrackingTool::mouseReleaseEvent(KPointerEvent* event)
-{
-    event->ignore();
 }
 
 void ChangeTrackingTool::mouseMoveEvent(KPointerEvent* event)
@@ -282,11 +278,6 @@ QVector<QRectF> *ChangeTrackingTool::textRect ( int startPosition, int endPositi
         }
         return retVec;
     }
-}
-
-void ChangeTrackingTool::keyPressEvent(QKeyEvent* event)
-{
-    KToolBase::keyPressEvent(event);
 }
 
 void ChangeTrackingTool::activate(ToolActivation toolActivation, const QSet<KShape*> &shapes)

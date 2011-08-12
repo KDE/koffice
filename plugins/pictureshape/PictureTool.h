@@ -33,14 +33,6 @@ public:
 
     /// reimplemented from KToolBase
     virtual void paint(QPainter&, const KViewConverter&) {}
-    /// reimplemented from KToolBase
-    virtual void mousePressEvent(KPointerEvent*) {}
-    /// reimplemented from superclass
-    virtual void mouseDoubleClickEvent(KPointerEvent *event);
-    /// reimplemented from KToolBase
-    virtual void mouseMoveEvent(KPointerEvent*) {}
-    /// reimplemented from KToolBase
-    virtual void mouseReleaseEvent(KPointerEvent*) {}
 
     /// reimplemented from KToolBase
     virtual void activate(ToolActivation toolActivation, const QSet<KShape*> &shapes);
@@ -50,6 +42,8 @@ public:
 protected:
     /// reimplemented from KToolBase
     virtual QWidget *createOptionWidget();
+    /// reimplemented from superclass
+    virtual void mouseDoubleClickEvent(KPointerEvent *event);
 
 private slots:
     void changeUrlPressed();

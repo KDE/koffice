@@ -38,7 +38,7 @@ public:
 
     virtual void paint(QPainter &painter, const KViewConverter &converter);
 
-public Q_SLOTS:
+public slots:
     virtual void activate(ToolActivation toolActivation, const QSet<KShape*> &shapes);
 
 protected:
@@ -50,7 +50,7 @@ protected:
     virtual int maxRow() const;
     virtual SheetView* sheetView(const KCSheet* sheet) const;
 
-protected Q_SLOTS:
+protected slots:
     // -- misc actions --
     void definePrintRange();
 

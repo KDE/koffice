@@ -45,6 +45,7 @@ class QInputMethodEvent;
  * Abstract base class for all tools. Tools can create or manipulate
  * flake shapes, canvas state or any other thing that a user may wish
  * to do to his document or his view on a document with user input.
+ * also refer to kinteractiontool
  *
  *  [list copy paste methods]
  *    [explain KToolSelection and the setter/getter]
@@ -467,7 +468,7 @@ protected:
     virtual void inputMethodEvent(QInputMethodEvent *event);
 
     void setFlags(Flags flags);
-    void setFlag(Flag flag, bool on);
+    void setFlag(Flag flag, bool on = true);
     Flags flags() const;
 
     /// \internal

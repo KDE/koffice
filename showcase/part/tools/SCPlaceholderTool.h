@@ -30,12 +30,6 @@ public:
     virtual ~SCPlaceholderTool();
 
     virtual void paint(QPainter &painter, const KViewConverter &converter);
-
-    virtual void mousePressEvent(KPointerEvent *event);
-    virtual void mouseMoveEvent(KPointerEvent *event);
-    virtual void mouseReleaseEvent(KPointerEvent *event);
-
-public slots:
     virtual void activate(ToolActivation toolActivation, const QSet<KShape*> &shapes);
 };
 

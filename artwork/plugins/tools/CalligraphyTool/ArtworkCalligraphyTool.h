@@ -37,15 +37,10 @@ public:
     explicit ArtworkCalligraphyTool(KCanvasBase *canvas);
     ~ArtworkCalligraphyTool();
 
-    void paint(QPainter &painter, const KViewConverter &converter);
+    virtual void paint(QPainter &painter, const KViewConverter &converter);
 
-    void mousePressEvent(KPointerEvent *event) ;
-    void mouseMoveEvent(KPointerEvent *event);
-    void mouseReleaseEvent(KPointerEvent *event);
-
-    QWidget *createOptionWidget();
     virtual void activate(ToolActivation toolActivation, const QSet<KShape*> &shapes);
-    void deactivate();
+    virtual void deactivate();
 
 signals:
     void pathSelectedChanged(bool selection);
@@ -63,6 +58,12 @@ private slots:
     void setDrag(double drag);
 
     void updateSelectedPath();
+
+protected:
+    virtual void mousePressEvent(KPointerEvent *event) ;
+    virtual void mouseMoveEvent(KPointerEvent *event);
+    virtual void mouseReleaseEvent(KPointerEvent *event);
+    virtual QWidget *createOptionWidget();
 
 private:
     void addPoint(KPointerEvent *event);

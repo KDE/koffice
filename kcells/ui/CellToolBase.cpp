@@ -849,7 +849,7 @@ CellToolBase::CellToolBase(KCanvasBase* canvas)
     action->setIconText(i18n("Permute fixation"));
     action->setToolTip(i18n("Permute the fixation of the reference at the text cursor"));
 
-    setFlags(ToolHandleKeyEvents | ToolHandleShortcutOverride);
+    setFlag(ToolHandleShortcutOverride, true);
 }
 
 CellToolBase::~CellToolBase()

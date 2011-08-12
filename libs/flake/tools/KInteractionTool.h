@@ -67,6 +67,7 @@ public:
 public:
     virtual void paint(QPainter &painter, const KViewConverter &converter);
 
+protected:
     virtual void mousePressEvent(KPointerEvent *event);
     virtual void mouseMoveEvent(KPointerEvent *event);
     virtual void mouseReleaseEvent(KPointerEvent *event);
@@ -74,7 +75,6 @@ public:
     virtual void keyPressEvent(QKeyEvent *event);
     virtual void keyReleaseEvent(QKeyEvent *event);
 
-protected:
     /// \internal
     KInteractionTool(KInteractionToolPrivate &dd);
 

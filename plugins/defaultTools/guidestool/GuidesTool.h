@@ -41,6 +41,19 @@ public:
     /// reimplemented form KToolBase
     virtual void paint(QPainter &painter, const KViewConverter &converter);
     /// reimplemented form KToolBase
+    virtual void repaintDecorations();
+    /// reimplemented form KToolBase
+    virtual void activate(ToolActivation toolActivation, const QSet<KShape*> &shapes);
+    /// reimplemented form KToolBase
+    virtual void deactivate();
+
+    void moveGuideLine(Qt::Orientation orientation, int index);
+    void editGuideLine(Qt::Orientation orientation, int index);
+
+protected:
+    /// reimplemented form KToolBase
+    virtual QMap<QString, QWidget*> createOptionWidgets();
+    /// reimplemented form KToolBase
     virtual void mousePressEvent(KPointerEvent *event);
     /// reimplemented form KToolBase
     virtual void mouseMoveEvent(KPointerEvent *event);
@@ -48,16 +61,6 @@ public:
     virtual void mouseReleaseEvent(KPointerEvent *event);
     /// reimplemented form KToolBase
     virtual void mouseDoubleClickEvent(KPointerEvent *event);
-    /// reimplemented form KToolBase
-    virtual void repaintDecorations();
-    /// reimplemented form KToolBase
-    virtual void activate(ToolActivation toolActivation, const QSet<KShape*> &shapes);
-    /// reimplemented form KToolBase
-    virtual void deactivate();
-    /// reimplemented form KToolBase
-    virtual QMap<QString, QWidget*> createOptionWidgets();
-    void moveGuideLine(Qt::Orientation orientation, int index);
-    void editGuideLine(Qt::Orientation orientation, int index);
 
 public slots:
     void startGuideLineCreation(Qt::Orientation orientation, qreal position);

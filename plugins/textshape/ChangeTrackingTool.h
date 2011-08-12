@@ -47,16 +47,14 @@ public:
 
     ~ChangeTrackingTool();
 
-    virtual void mouseReleaseEvent(KPointerEvent* event);
-    virtual void mouseMoveEvent(KPointerEvent* event);
-    virtual void mousePressEvent(KPointerEvent* event);
     virtual void paint(QPainter& painter, const KViewConverter& converter);
-    virtual void keyPressEvent(QKeyEvent* event);
     virtual void activate(ToolActivation toolActivation, const QSet<KShape*> &shapes);
     virtual void deactivate();
 
 protected:
     virtual QWidget* createOptionWidget();
+    virtual void mouseMoveEvent(KPointerEvent* event);
+    virtual void mousePressEvent(KPointerEvent* event);
 
 private slots:
     void acceptChange();

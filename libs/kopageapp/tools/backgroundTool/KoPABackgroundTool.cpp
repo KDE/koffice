@@ -43,6 +43,7 @@
 KoPABackgroundTool::KoPABackgroundTool(KCanvasBase *canvas)
 : KToolBase(canvas)
 {
+    setFlags(ToolDoesntHandleMouseEvents);
     m_view = static_cast<KoPACanvasBase *>(canvas)->koPAView();
 }
 
@@ -71,21 +72,6 @@ void KoPABackgroundTool::deactivate()
 {
     disconnect(m_view->proxyObject, SIGNAL(activePageChanged()), this, SLOT(slotActivePageChanged()));
     canvas()->resourceManager()->clearResource(KoPageApp::CurrentPage);
-}
-
-void KoPABackgroundTool::mousePressEvent(KPointerEvent *event)
-{
-    event->ignore();
-}
-
-void KoPABackgroundTool::mouseMoveEvent(KPointerEvent *event)
-{
-    event->ignore();
-}
-
-void KoPABackgroundTool::mouseReleaseEvent(KPointerEvent *event)
-{
-    event->ignore();
 }
 
 void KoPABackgroundTool::slotActivePageChanged()

@@ -60,35 +60,24 @@ public:
     explicit KCreatePathTool(KCanvasBase *canvas);
     virtual ~KCreatePathTool();
 
-    /// reimplemented
     virtual void paint(QPainter &painter, const KViewConverter &converter);
-
-    /// reimplemented
-    virtual void mousePressEvent(KPointerEvent *event);
-    /// reimplemented
-    virtual void mouseDoubleClickEvent(KPointerEvent *event);
-    /// reimplemented
-    virtual void mouseMoveEvent(KPointerEvent *event);
-    /// reimplemented
-    virtual void mouseReleaseEvent(KPointerEvent *event);
-    /// reimplemented
-    virtual void keyPressEvent(QKeyEvent *event);
-
-public slots:
-    /// reimplemented
     virtual void activate(ToolActivation toolActivation, const QSet<KShape*> &shapes);
-    /// reimplemented
     virtual void deactivate();
-    /// reimplemented
     virtual void resourceChanged(int key, const QVariant &res);
 
 protected:
+    virtual void mousePressEvent(KPointerEvent *event);
+    virtual void mouseDoubleClickEvent(KPointerEvent *event);
+    virtual void mouseMoveEvent(KPointerEvent *event);
+    virtual void mouseReleaseEvent(KPointerEvent *event);
+    virtual void keyPressEvent(QKeyEvent *event);
+
     /**
      * Add path shape to document.
      * This method can be overridden and change the behaviour of the tool. In that case the subclass takes ownership of pathShape.
      * It gets only called, if there are two or more points in the path.
      */
-    virtual void addPathShape(KPathShape* pathShape);
+    void addPathShape(KPathShape* pathShape);
 
 protected:
     /**

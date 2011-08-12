@@ -111,7 +111,7 @@ private slots:
     /// Update actions on selection change
     void updateActions();
 
-public: // Events
+protected: // Events
 
     virtual void mousePressEvent(KPointerEvent *event);
     virtual void mouseMoveEvent(KPointerEvent *event);
@@ -120,7 +120,6 @@ public: // Events
 
     virtual void keyPressEvent(QKeyEvent *event);
 
-protected:
     QMap<QString, QWidget *> createOptionWidgets();
 
     virtual KInteractionStrategy *createStrategy(KPointerEvent *event);
