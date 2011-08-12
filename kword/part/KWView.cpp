@@ -1198,6 +1198,13 @@ void KWView::setShowFormattingChars(bool on)
 
 void KWView::editSelectAllFrames()
 {
+    KoTextEditor *handler = qobject_cast<KoTextEditor*> (m_canvas->toolProxy()->selection());
+    if (handler) { // that means the text tool is active; select all text instead.
+        handler->select(QTextCursor::Document);
+        update();
+        return;
+    }
+
     KSelection *selection = m_canvas->shapeManager()->selection();
     foreach (KWFrameSet *fs, m_document->frameSets()) {
         foreach (KWFrame *frame, fs->frames()) {
