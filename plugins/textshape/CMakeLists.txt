@@ -109,10 +109,7 @@ if( Soprano_FOUND )
     target_link_libraries(textshape ${SOPRANO_LIBRARIES})
 endif( Soprano_FOUND )
 
-
-install(TARGETS textshape DESTINATION ${PLUGIN_INSTALL_DIR})
-
 ########### install files ###############
 
-install( FILES textshape.desktop DESTINATION ${SERVICES_INSTALL_DIR})
-#kde4_install_icons( ${DATA_INSTALL_DIR}/koffice/icons )
+install(TARGETS textshape DESTINATION ${PLUGIN_INSTALL_DIR})
+install(FILES textshape.desktop DESTINATION ${SERVICES_INSTALL_DIR})
