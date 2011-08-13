@@ -82,8 +82,6 @@ public:
     /// reimplemented from superclass
     virtual bool paste();
     /// reimplemented from superclass
-    virtual QStringList supportedPasteMimeTypes() const;
-    /// reimplemented from superclass
     virtual void repaintDecorations();
 
     /// reimplemented from superclass

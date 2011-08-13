@@ -75,8 +75,6 @@ public:
     ///reimplemented
     virtual bool paste();
     ///reimplemented
-    virtual QStringList supportedPasteMimeTypes() const;
-    ///reimplemented
     virtual KToolSelection* selection();
 
     /**

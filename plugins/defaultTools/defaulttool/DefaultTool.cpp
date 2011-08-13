@@ -174,6 +174,10 @@ DefaultTool::DefaultTool(KCanvasBase *canvas)
     connect(manager, SIGNAL(selectionChanged()), this, SLOT(updateActions()));
 
     setFlags(ToolDoesntAutoScroll | ToolHandleKeyEvents | ToolMouseTracking);
+
+    QStringList list;
+    list << KOdf::mimeType(KOdf::TextDocument);
+    setSupportedPasteMimeTypes(list);
 }
 
 DefaultTool::~DefaultTool()
@@ -784,13 +788,6 @@ bool DefaultTool::paste()
         }
     }
     return success;
-}
-
-QStringList DefaultTool::supportedPasteMimeTypes() const
-{
-    QStringList list;
-    list << KOdf::mimeType(KOdf::TextDocument);
-    return list;
 }
 
 KSelection *DefaultTool::koSelection()

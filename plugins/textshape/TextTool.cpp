@@ -469,6 +469,10 @@ TextTool::TextTool(KCanvasBase *canvas)
     m_changeTipTimer.setInterval(500);
     m_changeTipTimer.setSingleShot(true);
     connect(&m_changeTipTimer, SIGNAL(timeout()), this, SLOT(showChangeTip()));
+
+    QStringList mimes;
+    mimes << "text/plain" << "text/html" << "application/vnd.oasis.opendocument.text";
+    setSupportedPasteMimeTypes(mimes);
 }
 
 #ifndef NDEBUG
@@ -819,13 +823,6 @@ bool TextTool::paste()
 void TextTool::cut()
 {
     m_textEditor.data()->addCommand(new TextCutCommand(this));
-}
-
-QStringList TextTool::supportedPasteMimeTypes() const
-{
-    QStringList list;
-    list << "text/plain" << "text/html" << "application/vnd.oasis.opendocument.text";
-    return list;
 }
 
 int TextTool::pointToPosition(const QPointF &point) const

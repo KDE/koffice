@@ -266,8 +266,9 @@ public:
     /**
      * Returns the mimetypes that this tool's paste() function can handle
      * @return QStringList containing the mimetypes that's supported by paste()
+     * @see setSupportedPasteMimeTypes()
      */
-    virtual QStringList supportedPasteMimeTypes() const; // TODO make protected setter and non-virtual getter
+    QStringList supportedPasteMimeTypes() const;
 
     /**
      * @return A list of actions to be used for a popup.
@@ -561,6 +562,14 @@ protected:
      * @see flags() and setFlags().
      */
     void setFlag(Flag flag, bool enabled = true);
+
+    /**
+     * Set the mimetypes that this tool's paste() function can handle.
+     * Only if the clipboard contains a mime type that is listed here will the paste action be enabled.
+     * @param mimes  QStringList containing the mimetypes that's supported by paste()
+     * @see supportedPasteMimeTypes()
+     */
+    void setSupportedPasteMimeTypes(const QStringList &mimes);
 
     /// \internal
     KToolBase(KToolBasePrivate &dd);

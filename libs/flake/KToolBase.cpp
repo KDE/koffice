@@ -271,7 +271,14 @@ void KToolBase::shortcutOverride(QKeyEvent *event)
 
 QStringList KToolBase::supportedPasteMimeTypes() const
 {
-    return QStringList();
+    Q_D(const KToolBase);
+    return d->supportedPasteMimeTypes;
+}
+
+void KToolBase::setSupportedPasteMimeTypes(const QStringList &mimes)
+{
+    Q_D(KToolBase);
+    d->supportedPasteMimeTypes = mimes;
 }
 
 bool KToolBase::paste()

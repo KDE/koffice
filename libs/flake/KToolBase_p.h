@@ -120,6 +120,7 @@ public:
     QHash<QString, KAction*> actionCollection;
     QString toolId;
     QList<QAction*> popupActionList;
+    QStringList supportedPasteMimeTypes;
     QSet<KAction*> readOnlyActions;
     KToolBase *q;
     KCanvasBase *canvas; ///< the canvas interface this tool will work for.
