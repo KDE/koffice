@@ -418,9 +418,8 @@ if (false) { // TODO move this to the text tool as soon as  a) the string freeze
     action->setWhatsThis(i18n("Toggle the display of non-printing characters.<br/><br/>When this is enabled, KWord shows you tabs, spaces, carriage returns and other non-printing characters."));
 }
 
-    action = KStandardAction::selectAll(this, SLOT(selectAll()), this);
+    action = KStandardAction::selectAll(this, SLOT(editSelectAllFrames()), this);
     actionCollection()->addAction("edit_selectall", action);
-    connect(action, SIGNAL(triggered()), this, SLOT(editSelectAllFrames()));
 
     action = new KAction(KIcon("edit-delete"), i18n("Delete"), this);
     action->setShortcut(QKeySequence("Del"));
