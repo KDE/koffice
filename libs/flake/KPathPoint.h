@@ -274,14 +274,6 @@ private:
     Private * const d;
 };
 
-//   /// a KoSubpath contains a path from a moveTo until a close or a new moveTo
-//   typedef QList<KPathPoint *> KoSubpath;
-//   typedef QList<KoSubpath *> KoSubpathList;
-//   /// A KPathSegment is a pair two neighboring KoPathPoints
-//   typedef QPair<KPathPoint*,KPathPoint*> KPathSegment;
-//   /// The position of a path point within a path shape
-//   typedef QPair<KoSubpath*, int> KoPointPosition;
-
 Q_DECLARE_OPERATORS_FOR_FLAGS(KPathPoint::PointProperties)
 Q_DECLARE_OPERATORS_FOR_FLAGS(KPathPoint::PointTypes)
 

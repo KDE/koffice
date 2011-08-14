@@ -184,7 +184,7 @@ public:
      *
      * \param name The \a KWPageStyle instance that should be added. The
      * document will take over ownership and takes care of deleting the instance
-     * one the document itself got deleted.
+     * once the document itself got deleted.
      */
     KWPageStyle addPageStyle(const QString &name);
 
