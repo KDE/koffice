@@ -65,7 +65,6 @@ TestFrameLayout::TestFrameLayout()
 void TestFrameLayout::testGetOrCreateFrameSet()
 {
     Helper helper;
-    m_frames.clear();
     KWPage page = helper.pageManager->page(1);
     KWFrameLayout bfl(helper.pageManager, m_frames);
     connect(&bfl, SIGNAL(newFrameSet(KWFrameSet*)), this, SLOT(addFS(KWFrameSet*)));
@@ -91,7 +90,6 @@ void TestFrameLayout::testGetOrCreateFrameSet()
 void TestFrameLayout::testCreateNewFramesForPage()
 {
     Helper helper;
-    m_frames.clear();
     QVERIFY(m_frames.count() == 0);
     KWFrameLayout bfl(helper.pageManager, m_frames);
     KWPage page = helper.pageManager->page(1);
@@ -114,7 +112,6 @@ void TestFrameLayout::testCreateNewFramesForPage()
 void TestFrameLayout::testShouldHaveHeaderOrFooter()
 {
     Helper helper;
-    m_frames.clear();
     KWFrameLayout bfl(helper.pageManager, m_frames);
     connect(&bfl, SIGNAL(newFrameSet(KWFrameSet*)), this, SLOT(addFS(KWFrameSet*)));
 
@@ -183,7 +180,6 @@ void TestFrameLayout::testShouldHaveHeaderOrFooter()
 void TestFrameLayout::headerPerPage()
 {
     Helper helper;
-    m_frames.clear();
     KWPage page = helper.pageManager->begin();
     KWFrameLayout bfl(helper.pageManager, m_frames);
     connect(&bfl, SIGNAL(newFrameSet(KWFrameSet*)), this, SLOT(addFS(KWFrameSet*)));
@@ -233,7 +229,6 @@ void TestFrameLayout::headerPerPage()
 void TestFrameLayout::testFrameCreation()
 {
     Helper helper;
-    m_frames.clear();
     KWFrameLayout bfl(helper.pageManager, m_frames);
     connect(&bfl, SIGNAL(newFrameSet(KWFrameSet*)), this, SLOT(addFS(KWFrameSet*)));
 
@@ -392,7 +387,6 @@ void TestFrameLayout::testCreateNewFrameForPage()
 void TestFrameLayout::testCopyFramesForPage()
 {
     Helper helper;
-    m_frames.clear();
     KWPage page = helper.pageManager->begin();
 
     // copyShape
@@ -545,7 +539,6 @@ void TestFrameLayout::testLargeHeaders()
     // create a header with waaaaaaay to much text and do one page layout.
     // Check if the header has been trunkated and no new page has been requested.
     Helper helper;
-    m_frames.clear();
     KWPage page = helper.pageManager->begin();
     helper.pageStyle.setHeaderPolicy(KWord::HFTypeUniform);
 
@@ -581,17 +574,7 @@ void TestFrameLayout::testLargeHeaders()
 void TestFrameLayout::testLayoutPageSpread()
 {
     Helper helper;
-    m_frames.clear();
-
-    //set up as a page spread;
-    KOdfPageLayoutData pageLayout = helper.pageStyle.pageLayout();
-    pageLayout.leftMargin = -1;
-    pageLayout.rightMargin = -1;
-    pageLayout.pageEdge = 20;
-    pageLayout.bindingSide = 25;
-    pageLayout.topMargin = 21;
-    pageLayout.bottomMargin = 22;
-    helper.pageStyle.setPageLayout(pageLayout);
+    setPageSpreadMargins(helper);
 
     KWPage spread = helper.pageManager->appendPage();
     QCOMPARE(spread.pageSide(), KWPage::PageSpread);
@@ -610,6 +593,140 @@ void TestFrameLayout::testLayoutPageSpread()
     QCOMPARE(fs->frames()[1]->shape()->size(), QSizeF(155, 157));
 }
 
+typedef QList<QRect> FrameSizes;
+Q_DECLARE_METATYPE(FrameSizes)
+
+void TestFrameLayout::testLayoutPageSpread2_data()
+{
+    // tests void KWFrameLayout::createNewFrameForPage(KWTextFrameSet *fs, int pageNumber)
+    QTest::addColumn<int>("HFType");
+    QTest::addColumn<FrameSizes>("mainFrames");
+    QTest::addColumn<FrameSizes>("oddHeader");
+    QTest::addColumn<FrameSizes>("evenHeader");
+    QTest::addColumn<FrameSizes>("oddFooter");
+    QTest::addColumn<FrameSizes>("evenFooter");
+
+    // TODO add columns?
+
+    QList<QRect> mainFrames;
+    mainFrames << QRect(25, 21, 155, 157) << QRect(20, 221, 155, 157) << QRect(225, 221, 155, 157);
+    QList<QRect> oddHeader;
+    QList<QRect> evenHeader;
+    QList<QRect> oddFooter;
+    QList<QRect> evenFooter;
+    QTest::newRow("plain") << (int) KWord::HFTypeNone << mainFrames << oddHeader << evenHeader
+        << oddFooter << evenFooter;
+
+    mainFrames.clear();
+    mainFrames << QRect(25, 64, 155, 72) << QRect(20, 264, 155, 72) << QRect(225, 264, 155, 72);
+    oddHeader << QRect(25, 21, 155, 20) << QRect(20, 21, 155, 20) << QRect(225, 21, 155, 20);
+    oddFooter << QRect(25, 21, 155, 20) << QRect(20, 21, 155, 20) << QRect(225, 21, 155, 20); // TODO
+    QTest::newRow("uniform") << (int) KWord::HFTypeUniform << mainFrames << oddHeader << evenHeader
+        << oddFooter << evenFooter;
+/*
+    mainFrames.clear();
+    oddHeader.clear();
+    oddFooter.clear();
+    QTest::newRow("evenOdd") << (int) KWord::HFTypeUniform << mainFrames << oddHeader << evenHeader
+*/
+}
+
+void TestFrameLayout::testLayoutPageSpread2()
+{
+    Helper helper;
+    KWPage one = helper.pageManager->begin();
+    QCOMPARE(one.pageNumber(), 1);
+    QCOMPARE(one.pageSide(), KWPage::Right);
+
+    // this actually converts the 'spread' style to be a page-spread type;
+    setPageSpreadMargins(helper);
+    KWPage spread = helper.pageManager->appendPage();
+    QCOMPARE(one.pageNumber(), 1);
+    QCOMPARE(one.pageSide(), KWPage::Right);
+    QCOMPARE(spread.pageSide(), KWPage::PageSpread);
+    QCOMPARE(spread.pageNumber(), 2);
+
+    KWFrameLayout bfl(helper.pageManager, m_frames);
+    connect(&bfl, SIGNAL(newFrameSet(KWFrameSet*)), this, SLOT(addFS(KWFrameSet*)));
+
+
+    QFETCH(int, HFType);
+    KWord::HeaderFooterType type = static_cast<KWord::HeaderFooterType>(HFType);
+    helper.pageStyle.setHeaderPolicy(type);
+    helper.pageStyle.setFooterPolicy(type);
+
+    for (int iteration = 1; iteration <= 2; ++iteration) {
+        // we run this whole block twice since repeated calls should not change the layout
+        bfl.createNewFramesForPage(1);
+        bfl.createNewFramesForPage(2);
+
+        KWTextFrameSet *fs = bfl.getOrCreate(KWord::MainTextFrameSet, spread);
+        QFETCH(FrameSizes , mainFrames);
+        QCOMPARE(fs->frameCount(), mainFrames.count());
+        fs = bfl.getOrCreate(KWord::OddPagesHeaderTextFrameSet, spread);
+        QFETCH(FrameSizes , oddHeader);
+        QCOMPARE(fs->frameCount(), oddHeader.count());
+        fs = bfl.getOrCreate(KWord::EvenPagesHeaderTextFrameSet, spread);
+        QFETCH(FrameSizes , evenHeader);
+        QCOMPARE(fs->frameCount(), evenHeader.count());
+        fs = bfl.getOrCreate(KWord::OddPagesFooterTextFrameSet, spread);
+        QFETCH(FrameSizes , oddFooter);
+        QCOMPARE(fs->frameCount(), oddFooter.count());
+        fs = bfl.getOrCreate(KWord::EvenPagesFooterTextFrameSet, spread);
+        QFETCH(FrameSizes , evenFooter);
+        QCOMPARE(fs->frameCount(), evenFooter.count());
+
+        // now layout and check positions
+        bfl.layoutFramesOnPage(1);
+        bfl.layoutFramesOnPage(2);
+        bfl.layoutFramesOnPage(3);
+        fs = bfl.getOrCreate(KWord::MainTextFrameSet, spread);
+        QCOMPARE(fs->frameCount(), mainFrames.count());
+        for (int i = 0; i < mainFrames.count(); ++i) {
+            qDebug() << i;
+            QCOMPARE(fs->frames()[i]->shape()->position().toPoint(), mainFrames[i].topLeft());
+            QCOMPARE(fs->frames()[i]->shape()->size().toSize(), mainFrames[i].size());
+        }
+
+        fs = bfl.getOrCreate(KWord::OddPagesHeaderTextFrameSet, spread);
+        QCOMPARE(fs->frameCount(), oddHeader.count());
+        for (int i = 0; i < oddHeader.count(); ++i) {
+            qDebug() << i;
+            QCOMPARE(fs->frames()[i]->shape()->position().toPoint(), oddHeader[i].topLeft());
+            QCOMPARE(fs->frames()[i]->shape()->size().toSize(), oddHeader[i].size());
+        }
+
+        fs = bfl.getOrCreate(KWord::EvenPagesHeaderTextFrameSet, spread);
+        QCOMPARE(fs->frameCount(), evenHeader.count());
+        for (int i = 0; i < evenHeader.count(); ++i) {
+            qDebug() << i;
+            QCOMPARE(fs->frames()[i]->shape()->position().toPoint(), evenHeader[i].topLeft());
+            QCOMPARE(fs->frames()[i]->shape()->size().toSize(), evenHeader[i].size());
+        }
+
+        fs = bfl.getOrCreate(KWord::OddPagesFooterTextFrameSet, spread);
+        QCOMPARE(fs->frameCount(), oddFooter.count());
+        for (int i = 0; i < oddFooter.count(); ++i) {
+            qDebug() << i;
+            QCOMPARE(fs->frames()[i]->shape()->position().toPoint(), oddFooter[i].topLeft());
+            QCOMPARE(fs->frames()[i]->shape()->size().toSize(), oddFooter[i].size());
+        }
+
+        fs = bfl.getOrCreate(KWord::EvenPagesFooterTextFrameSet, spread);
+        QCOMPARE(fs->frameCount(), evenFooter.count());
+        for (int i = 0; i < evenFooter.count(); ++i) {
+            qDebug() << i;
+            QCOMPARE(fs->frames()[i]->shape()->position().toPoint(), evenFooter[i].topLeft());
+            QCOMPARE(fs->frames()[i]->shape()->size().toSize(), evenFooter[i].size());
+        }
+    }
+}
+
+/*
+     TODO Test copy frames for page spread.
+        especially the shapeseriesplacement
+*/
+
 void TestFrameLayout::testPageStyle()
 {
     // on different page styles i want different framesets.
@@ -618,7 +735,6 @@ void TestFrameLayout::testPageStyle()
     // new ones to be created.
 
     Helper helper;
-    m_frames.clear();
     KWFrameLayout bfl(helper.pageManager, m_frames);
     connect(&bfl, SIGNAL(newFrameSet(KWFrameSet*)), this, SLOT(addFS(KWFrameSet*)));
 
@@ -709,7 +825,6 @@ void TestFrameLayout::testPageBackground()
     // If there is no background or its removed (in a command) that should
     // remove the frame.
     Helper helper;
-    m_frames.clear();
     KWFrameLayout bfl(helper.pageManager, m_frames);
     connect(&bfl, SIGNAL(newFrameSet(KWFrameSet*)), this, SLOT(addFS(KWFrameSet*)));
 
@@ -765,6 +880,19 @@ void TestFrameLayout::removeAllFrames()
         }
     }
 }
+
+void TestFrameLayout::setPageSpreadMargins(Helper &helper) const
+{
+    KOdfPageLayoutData pageLayout = helper.pageStyle.pageLayout();
+    pageLayout.leftMargin = -1;
+    pageLayout.rightMargin = -1;
+    pageLayout.pageEdge = 20;
+    pageLayout.bindingSide = 25;
+    pageLayout.topMargin = 21;
+    pageLayout.bottomMargin = 22;
+    helper.pageStyle.setPageLayout(pageLayout);
+}
+
 
 QTEST_KDEMAIN(TestFrameLayout, GUI)
 
