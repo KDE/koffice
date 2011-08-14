@@ -189,7 +189,7 @@ void KWFrameLayout::createNewFramesForPage(int pageNumber)
         if (page.pageStyle().hasMainTextFrame()) {
             int columns = page.pageStyle().columns().columns;
             KWTextFrameSet *fs = getOrCreate(KWord::MainTextFrameSet, page);
-            QRectF rect(QPointF(page.width(), page.offsetInDocument()),
+            QRectF rect(QPointF(page.width() / 2, page.offsetInDocument()),
                         QSizeF(page.width() / 2,  page.height()));
             foreach (KWFrame *frame, framesInPage(rect)) {
                 if (frame->frameSet() == fs) {
