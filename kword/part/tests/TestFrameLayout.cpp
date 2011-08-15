@@ -619,16 +619,19 @@ void TestFrameLayout::testLayoutPageSpread2_data()
 
     mainFrames.clear();
     mainFrames << QRect(25, 64, 155, 72) << QRect(20, 264, 155, 72) << QRect(225, 264, 155, 72);
-    oddHeader << QRect(25, 21, 155, 20) << QRect(20, 21, 155, 20) << QRect(225, 21, 155, 20);
-    oddFooter << QRect(25, 21, 155, 20) << QRect(20, 21, 155, 20) << QRect(225, 21, 155, 20); // TODO
+    oddHeader << QRect(25, 21, 155, 28) << QRect(20, 221, 155, 28) << QRect(225, 221, 155, 28);
+    oddFooter << QRect(25, 150, 155, 28) << QRect(20, 350, 155, 28) << QRect(225, 350, 155, 28);
     QTest::newRow("uniform") << (int) KWord::HFTypeUniform << mainFrames << oddHeader << evenHeader
         << oddFooter << evenFooter;
-/*
-    mainFrames.clear();
+
     oddHeader.clear();
+    oddHeader << QRect(25, 21, 155, 28) << QRect(225, 221, 155, 28);
+    evenHeader << QRect(20, 221, 155, 28);
     oddFooter.clear();
-    QTest::newRow("evenOdd") << (int) KWord::HFTypeUniform << mainFrames << oddHeader << evenHeader
-*/
+    oddFooter << QRect(25, 150, 155, 28) << QRect(225, 350, 155, 28);
+    evenFooter << QRect(20, 350, 155, 28);
+    QTest::newRow("evenOdd") << (int) KWord::HFTypeEvenOdd << mainFrames << oddHeader << evenHeader
+        << oddFooter << evenFooter;
 }
 
 void TestFrameLayout::testLayoutPageSpread2()

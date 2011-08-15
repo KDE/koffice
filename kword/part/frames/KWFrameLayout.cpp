@@ -639,7 +639,7 @@ KWFrame *KWFrameLayout::frameOn(KWFrameSet *fs, int pageNumber) const
 {
     KWPage page = m_pageManager->page(pageNumber);
     Q_ASSERT(page.isValid());
-    foreach (KWFrame *frame, framesInPage(page.rect())) {
+    foreach (KWFrame *frame, framesInPage(page.rect(pageNumber))) {
         if (frame->frameSet() == fs)
             return frame;
     }
