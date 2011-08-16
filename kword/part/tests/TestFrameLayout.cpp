@@ -1,7 +1,7 @@
 /*
  * This file is part of KOffice tests
  *
- * Copyright (C) 2005-2010 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2005-2011 Thomas Zander <zander@kde.org>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -686,7 +686,7 @@ void TestFrameLayout::testLayoutPageSpread2()
         fs = bfl.getOrCreate(KWord::MainTextFrameSet, spread);
         QCOMPARE(fs->frameCount(), mainFrames.count());
         for (int i = 0; i < mainFrames.count(); ++i) {
-            qDebug() << i;
+            // qDebug() << i;
             QCOMPARE(fs->frames()[i]->shape()->position().toPoint(), mainFrames[i].topLeft());
             QCOMPARE(fs->frames()[i]->shape()->size().toSize(), mainFrames[i].size());
         }
@@ -694,7 +694,7 @@ void TestFrameLayout::testLayoutPageSpread2()
         fs = bfl.getOrCreate(KWord::OddPagesHeaderTextFrameSet, spread);
         QCOMPARE(fs->frameCount(), oddHeader.count());
         for (int i = 0; i < oddHeader.count(); ++i) {
-            qDebug() << i;
+            // qDebug() << i;
             QCOMPARE(fs->frames()[i]->shape()->position().toPoint(), oddHeader[i].topLeft());
             QCOMPARE(fs->frames()[i]->shape()->size().toSize(), oddHeader[i].size());
         }
@@ -702,7 +702,7 @@ void TestFrameLayout::testLayoutPageSpread2()
         fs = bfl.getOrCreate(KWord::EvenPagesHeaderTextFrameSet, spread);
         QCOMPARE(fs->frameCount(), evenHeader.count());
         for (int i = 0; i < evenHeader.count(); ++i) {
-            qDebug() << i;
+            // qDebug() << i;
             QCOMPARE(fs->frames()[i]->shape()->position().toPoint(), evenHeader[i].topLeft());
             QCOMPARE(fs->frames()[i]->shape()->size().toSize(), evenHeader[i].size());
         }
@@ -710,7 +710,7 @@ void TestFrameLayout::testLayoutPageSpread2()
         fs = bfl.getOrCreate(KWord::OddPagesFooterTextFrameSet, spread);
         QCOMPARE(fs->frameCount(), oddFooter.count());
         for (int i = 0; i < oddFooter.count(); ++i) {
-            qDebug() << i;
+            // qDebug() << i;
             QCOMPARE(fs->frames()[i]->shape()->position().toPoint(), oddFooter[i].topLeft());
             QCOMPARE(fs->frames()[i]->shape()->size().toSize(), oddFooter[i].size());
         }
@@ -718,17 +718,103 @@ void TestFrameLayout::testLayoutPageSpread2()
         fs = bfl.getOrCreate(KWord::EvenPagesFooterTextFrameSet, spread);
         QCOMPARE(fs->frameCount(), evenFooter.count());
         for (int i = 0; i < evenFooter.count(); ++i) {
-            qDebug() << i;
+            // qDebug() << i;
             QCOMPARE(fs->frames()[i]->shape()->position().toPoint(), evenFooter[i].topLeft());
             QCOMPARE(fs->frames()[i]->shape()->size().toSize(), evenFooter[i].size());
         }
     }
 }
 
-/*
-     TODO Test copy frames for page spread.
-        especially the shapeseriesplacement
-*/
+void TestFrameLayout::shapeSeriesPlacement_data()
+{
+    QTest::addColumn<int>("placement"); // KWord::ShapeSeriesPlacement
+    QTest::addColumn<int>("newFrameBehavior"); // KWord::NewFrameBehavior
+    QTest::addColumn<bool>("onBothSheets");
+    QTest::addColumn<QPointF>("position");
+    QTest::addColumn<QPointF>("leftPos");
+    QTest::addColumn<QPointF>("rightPos");
+
+    QTest::newRow("plain") << (int) KWord::NoAutoPlacement << (int) KWord::NoFollowupFrame << false
+        << QPointF(30, 40) << QPointF() << QPointF();
+
+// comment out expected fails.
+//   QTest::newRow("simpleCopy") << (int) KWord::NoAutoPlacement << (int) KWord::CopyNewFrame << true
+//       << QPointF(30, 40) << QPointF(30, 240) << QPointF(230, 240);
+//
+//   QTest::newRow("evenOdd") << (int) KWord::EvenOddPlacement << (int) KWord::CopyNewFrame << false
+//       << QPointF(30, 40) << QPointF() << QPointF(230, 240);
+//
+//   QTest::newRow("evenOdd2") << (int) KWord::EvenOddPlacement << (int) KWord::CopyNewFrame << true
+//       << QPointF(30, 40) << QPointF(230, 240) << QPointF(230, 240);
+
+    QTest::newRow("noEvenOdd") << (int) KWord::EvenOddPlacement << (int) KWord::NoFollowupFrame << true
+        << QPointF(30, 40) << QPointF() << QPointF();
+
+//   QTest::newRow("flexible") << (int) KWord::FlexiblePlacement << (int) KWord::CopyNewFrame << true
+//       << QPointF(30, 40) << QPointF(30, 240) << QPointF(230, 240);
+//
+//   QTest::newRow("flexible2") << (int) KWord::FlexiblePlacement << (int) KWord::CopyNewFrame << false
+//       << QPointF(30, 40) << QPointF(30, 240) << QPointF(230, 240);
+
+
+    // todo KWord::SynchronizedPlacement
+}
+
+void TestFrameLayout::shapeSeriesPlacement()
+{
+    Helper helper;
+    setPageSpreadMargins(helper);
+    helper.pageStyle.setHasMainTextFrame(false);
+
+    KWPage one = helper.pageManager->begin();
+    QCOMPARE(one.pageNumber(), 1);
+    QCOMPARE(one.pageSide(), KWPage::Right);
+
+    KWFrameSet *fs = new KWFrameSet();
+    QFETCH(int, placement);
+    fs->setShapeSeriesPlacement(static_cast<KWord::ShapeSeriesPlacement>(placement));
+    QFETCH(int, newFrameBehavior);
+    fs->setNewFrameBehavior(static_cast<KWord::NewFrameBehavior>(newFrameBehavior));
+    KShape *shape = new MockTextShape();
+    shape->setSize(QSizeF(50, 50));
+    QFETCH(QPointF, position);
+    shape->setPosition(position);
+    KWFrame *frame = new KWFrame(shape, fs);
+    QFETCH(bool, onBothSheets);
+    frame->setFrameOnBothSheets(onBothSheets);
+    m_frames << fs;
+
+    KWFrameLayout bfl(helper.pageManager, m_frames);
+    connect(&bfl, SIGNAL(newFrameSet(KWFrameSet*)), this, SLOT(addFS(KWFrameSet*)));
+    bfl.createNewFramesForPage(1);
+    QCOMPARE(fs->frameCount(), 1);
+
+    KWPage spread = helper.pageManager->appendPage();
+    QCOMPARE(one.pageNumber(), 1);
+    QCOMPARE(one.pageSide(), KWPage::Right);
+    QCOMPARE(spread.pageSide(), KWPage::PageSpread);
+    QCOMPARE(spread.pageNumber(), 2);
+    bfl.createNewFramesForPage(2);
+    bfl.layoutFramesOnPage(2);
+
+    QFETCH(QPointF, leftPos);
+    QFETCH(QPointF, rightPos);
+    int count = 1;
+    if (!leftPos.isNull())
+        ++count;
+    if (!rightPos.isNull())
+        ++count;
+    // qDebug() << "count; " << count;
+    QCOMPARE(fs->frameCount(), count);
+    int index = 1;
+    if (!leftPos.isNull()) {
+        QCOMPARE(fs->frames()[index]->shape()->position(), leftPos);
+        ++index;
+    }
+    if (!rightPos.isNull()) {
+        QCOMPARE(fs->frames()[index]->shape()->position(), rightPos);
+    }
+}
 
 void TestFrameLayout::testPageStyle()
 {

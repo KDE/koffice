@@ -50,6 +50,8 @@ private slots:
     void testLayoutPageSpread2();
     void testPageStyle();
     void testPageBackground();
+    void shapeSeriesPlacement_data();
+    void shapeSeriesPlacement();
 
     // helper
     void addFS(KWFrameSet*);
