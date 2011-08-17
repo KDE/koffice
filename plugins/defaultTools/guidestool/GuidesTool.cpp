@@ -44,6 +44,7 @@ GuidesTool::GuidesTool(KCanvasBase *canvas)
     m_options(0),
     m_isMoving(false)
 {
+    setFlag(ToolMouseTracking);
 }
 
 GuidesTool::~GuidesTool()

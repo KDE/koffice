@@ -171,7 +171,7 @@ void KTableBorderStyle::drawVerticalWave(BorderStyle style, QPainter &painter, q
     }
 }
 
-void KTableBorderStyle::setEdge(Side side, BorderStyle style, qreal width, QColor color)
+void KTableBorderStyle::setEdge(Side side, BorderStyle style, qreal width, const QColor &color)
 {
     Q_D(KTableBorderStyle);
 

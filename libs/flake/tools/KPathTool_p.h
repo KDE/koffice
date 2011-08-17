@@ -55,41 +55,28 @@ public:
     explicit KPathTool(KCanvasBase *canvas);
     ~KPathTool();
 
-    /// reimplemented
     virtual void paint(QPainter &painter, const KViewConverter &converter);
 
-    /// reimplemented
     virtual void repaintDecorations();
 
-    /// reimplemented
-    virtual void mousePressEvent(KPointerEvent *event);
-    /// reimplemented
-    virtual void mouseMoveEvent(KPointerEvent *event);
-    /// reimplemented
-    virtual void mouseReleaseEvent(KPointerEvent *event);
-    /// reimplemented
-    virtual void keyPressEvent(QKeyEvent *event);
-    /// reimplemented
-    virtual void keyReleaseEvent(QKeyEvent *event);
-    /// reimplemented
-    virtual void mouseDoubleClickEvent(KPointerEvent *event);
-    /// reimplemented
     virtual void activate(ToolActivation toolActivation, const QSet<KShape*> &shapes);
-    /// reimplemented
     virtual void deactivate();
 
-    /// reimplemented
     virtual void deleteSelection();
 
-    /// reimplemented
     virtual KToolSelection* selection();
 
     /// repaints the specified rect
     void repaint(const QRectF &repaintRect);
 
 protected:
-    /// reimplemented
     virtual QMap<QString, QWidget *>  createOptionWidgets();
+    virtual void mousePressEvent(KPointerEvent *event);
+    virtual void mouseMoveEvent(KPointerEvent *event);
+    virtual void mouseReleaseEvent(KPointerEvent *event);
+    virtual void keyPressEvent(QKeyEvent *event);
+    virtual void keyReleaseEvent(QKeyEvent *event);
+    virtual void mouseDoubleClickEvent(KPointerEvent *event);
 
 private:
     void updateOptionsWidget();

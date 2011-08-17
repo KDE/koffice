@@ -173,6 +173,7 @@ class ArtisticTextTool::RemoveTextRangeCommand : public QUndoCommand
 ArtisticTextTool::ArtisticTextTool(KCanvasBase *canvas)
     : KToolBase(canvas), m_currentShape(0), m_path(0), m_tmpPath(0), m_textCursor( -1 ), m_showCursor( true )
 {
+    setFlags(ToolHandleKeyEvents | ToolHandleShortcutOverride);
     m_attachPath  = new QAction(KIcon("artistictext-attach-path"), i18n("Attach Path"), this);
     m_attachPath->setEnabled( false );
     connect( m_attachPath, SIGNAL(triggered()), this, SLOT(attachPath()) );
@@ -187,8 +188,6 @@ ArtisticTextTool::ArtisticTextTool(KCanvasBase *canvas)
 
     KShapeManager *manager = canvas->shapeManager();
     connect( manager, SIGNAL(selectionContentChanged()), this, SLOT(textChanged()));
-
-    setTextMode(true);
 }
 
 ArtisticTextTool::~ArtisticTextTool()
@@ -340,6 +339,19 @@ void ArtisticTextTool::keyPressEvent(QKeyEvent *event)
         }
     } else {
         event->ignore();
+    }
+}
+
+void ArtisticTextTool::keyReleaseEvent(QKeyEvent *event)
+{
+    event->setAccepted(m_currentShape && textCursor() > -1);
+}
+
+void ArtisticTextTool::shortcutOverride(QKeyEvent *event)
+{
+    if (event->modifiers() == Qt::ShiftModifier || event->modifiers() == Qt::NoModifier) {
+        // match all simple chars too to allow apps to have single-key shortcuts when I'm not active.
+        event->accept(); // its mine!
     }
 }
 

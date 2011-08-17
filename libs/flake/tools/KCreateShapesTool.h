@@ -47,7 +47,6 @@ public:
     explicit KCreateShapesTool(KCanvasBase *canvas);
     /// destructor
     virtual ~KCreateShapesTool();
-    virtual void mouseReleaseEvent(KPointerEvent *event);
     virtual void activate(ToolActivation toolActivation, const QSet<KShape*> &shapes);
 
     void paint(QPainter &painter, const KViewConverter &converter);
@@ -79,6 +78,7 @@ public:
 
 protected:
     virtual KInteractionStrategy *createStrategy(KPointerEvent *event);
+    virtual void mouseReleaseEvent(KPointerEvent *event);
 
 private:
     Q_DECLARE_PRIVATE(KCreateShapesTool)

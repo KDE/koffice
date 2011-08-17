@@ -28,6 +28,7 @@
 KInteractionTool::KInteractionTool(KCanvasBase *canvas)
     : KToolBase(*(new KInteractionToolPrivate(this, canvas)))
 {
+    setFlag(ToolHandleKeyEvents, true);
 }
 
 KInteractionTool::~KInteractionTool()

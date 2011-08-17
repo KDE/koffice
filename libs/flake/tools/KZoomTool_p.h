@@ -50,20 +50,6 @@ public:
      * @param canvas the canvas this tool works for.
      */
     explicit KZoomTool(KCanvasBase *canvas);
-    /// reimplemented method
-    virtual void wheelEvent(KPointerEvent *event);
-    /// reimplemented method
-    virtual void mouseReleaseEvent(KPointerEvent *event);
-    /// reimplemented method
-    virtual void mouseMoveEvent(KPointerEvent *event);
-    /// reimplemented method
-    virtual void keyPressEvent(QKeyEvent *event);
-    /// reimplemented method
-    virtual void keyReleaseEvent(QKeyEvent *event);
-    /// reimplemented method
-    virtual void activate(ToolActivation toolActivation, const QSet<KShape*> &shapes);
-    /// reimplemented method
-    virtual void mouseDoubleClickEvent(KPointerEvent *event);
 
     void setCanvasController(KCanvasController *controller) {
         m_controller = controller;
@@ -72,7 +58,14 @@ public:
     void setZoomInMode(bool zoomIn);
 
 protected:
-    QWidget *createOptionWidget();
+    virtual QWidget *createOptionWidget();
+    virtual void wheelEvent(KPointerEvent *event);
+    virtual void mouseReleaseEvent(KPointerEvent *event);
+    virtual void mouseMoveEvent(KPointerEvent *event);
+    virtual void keyPressEvent(QKeyEvent *event);
+    virtual void keyReleaseEvent(QKeyEvent *event);
+    virtual void activate(ToolActivation toolActivation, const QSet<KShape*> &shapes);
+    virtual void mouseDoubleClickEvent(KPointerEvent *event);
 
 private:
     virtual KInteractionStrategy *createStrategy(KPointerEvent *event);

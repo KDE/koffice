@@ -43,24 +43,34 @@ public:
     explicit SCPresentationTool(SCViewModePresentation &viewMode);
     ~SCPresentationTool();
 
-    bool wantsAutoScroll() const;
-
     void paint(QPainter &painter, const KViewConverter &converter);
-
-    void mousePressEvent(KPointerEvent *event);
-    void mouseDoubleClickEvent(KPointerEvent *event);
-    void mouseMoveEvent(KPointerEvent *event);
-    void mouseReleaseEvent(KPointerEvent *event);
-    void keyPressEvent(QKeyEvent *event);
-    void keyReleaseEvent(QKeyEvent *event);
-    void wheelEvent(KPointerEvent * event);
 
     SCPresentationStrategyBase *strategy();
     SCViewModePresentation &viewModePresentation();
 
-public slots:
     virtual void activate(ToolActivation toolActivation, const QSet<KShape*> &shapes);
-    void deactivate();
+    virtual void deactivate();
+
+
+    // TODO
+    /*  Showcase and libKoPA did something weird here; the canvas forwards all
+        events to the view mode which then calls the tool.
+        The proper way is for the canvas to use the proxy *after* having done any
+        viewmode conversions.
+
+        This bug only got in due to the following event handlers being public, while
+        flake has them protected.  Lets review the design, it would be good to make
+        these protected again and to make showcase use the toolproxy too.
+     */
+    virtual void mousePressEvent(KPointerEvent *event);
+    virtual void mouseDoubleClickEvent(KPointerEvent *event);
+    virtual void mouseMoveEvent(KPointerEvent *event);
+    virtual void mouseReleaseEvent(KPointerEvent *event);
+    virtual void keyPressEvent(QKeyEvent *event);
+    virtual void keyReleaseEvent(QKeyEvent *event);
+    virtual void wheelEvent(KPointerEvent * event);
+
+public slots:
     void highlightPresentation();
     void drawOnPresentation();
     void blackPresentation();

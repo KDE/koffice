@@ -4,9 +4,6 @@ include_directories(
         ${KOMAIN_INCLUDES}
         ${CMAKE_SOURCE_DIR}/artwork/
         ${CMAKE_SOURCE_DIR}/artwork/ui
-        ${CMAKE_SOURCE_DIR}/artwork/ui/dialogs
-        ${CMAKE_SOURCE_DIR}/artwork/ui/dockers
-        ${CMAKE_SOURCE_DIR}/artwork/ui/widgets
 )
 
 set(artworkui_SRCS
@@ -17,21 +14,20 @@ set(artworkui_SRCS
     ArtworkZoomController.cpp
     ArtworkDocumentMergeCommand.cpp
 
-    dialogs/ArtworkConfigureDialog.cpp
+    ArtworkConfigureDialog.cpp
 
-    dockers/ArtworkLayerDocker.cpp
-    dockers/ArtworkLayerModel.cpp
-    dockers/ArtworkLayerSortingModel.cpp
+    ArtworkLayerDocker.cpp
+    ArtworkLayerModel.cpp
+    ArtworkLayerSortingModel.cpp
 
-    widgets/ArtworkCanvas.cpp
-    widgets/ArtworkSmallStylePreview.cpp
-    widgets/ArtworkPatternOptionsWidget.cpp
+    ArtworkCanvas.cpp
+    ArtworkSmallStylePreview.cpp
+    ArtworkPatternOptionsWidget.cpp
 )
 
 kde4_add_ui_files(artworkui_SRCS
-    widgets/ArtworkPatternOptionsWidget.ui
+    ArtworkPatternOptionsWidget.ui
 )
-
 
 kde4_add_library( artworkui SHARED ${artworkui_SRCS} )
 

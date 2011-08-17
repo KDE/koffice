@@ -70,19 +70,6 @@ public:
     virtual void paint(QPainter &painter, const KViewConverter &converter);
 
     /// reimplemented from superclass
-    virtual void mousePressEvent(KPointerEvent *event) ;
-    /// reimplemented from superclass
-    virtual void mouseDoubleClickEvent(KPointerEvent *event);
-    /// reimplemented from superclass
-    virtual void mouseMoveEvent(KPointerEvent *event);
-    /// reimplemented from superclass
-    virtual void mouseReleaseEvent(KPointerEvent *event);
-    /// reimplemented from superclass
-    virtual void keyPressEvent(QKeyEvent *event);
-    /// reimplemented from superclass
-    virtual void keyReleaseEvent(QKeyEvent *event);
-
-    /// reimplemented from superclass
     virtual void activate(ToolActivation toolActivation, const QSet<KShape*> &shapes);
     /// reimplemented from superclass
     virtual void deactivate();
@@ -95,14 +82,10 @@ public:
     /// reimplemented from superclass
     virtual bool paste();
     /// reimplemented from superclass
-    virtual QStringList supportedPasteMimeTypes() const;
-    /// reimplemented from superclass
     virtual void repaintDecorations();
 
     /// reimplemented from superclass
     virtual KToolSelection* selection();
-    /// reimplemented from superclass
-    virtual QWidget *createOptionWidget();
     /// reimplemented from superclass
     virtual QVariant inputMethodQuery(Qt::InputMethodQuery query, const KViewConverter &converter) const;
     /// reimplemented from superclass
@@ -124,6 +107,25 @@ public:
     KoTextEditor *textEditor() { return m_textEditor.data(); }
 
     QRectF textRect(int startPosition, int endPosition) const;
+
+protected:
+    /// reimplemented from superclass
+    virtual void shortcutOverride(QKeyEvent *event);
+    /// reimplemented from superclass
+    virtual void mousePressEvent(KPointerEvent *event) ;
+    /// reimplemented from superclass
+    virtual void mouseDoubleClickEvent(KPointerEvent *event);
+    /// reimplemented from superclass
+    virtual void mouseMoveEvent(KPointerEvent *event);
+    /// reimplemented from superclass
+    virtual void mouseReleaseEvent(KPointerEvent *event);
+    /// reimplemented from superclass
+    virtual void keyPressEvent(QKeyEvent *event);
+    /// reimplemented from superclass
+    virtual void keyReleaseEvent(QKeyEvent *event);
+    /// reimplemented from superclass
+    virtual QWidget *createOptionWidget();
+
 
 public slots:
     /// start the textedit-plugin.

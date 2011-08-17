@@ -77,8 +77,7 @@ public:
     /**
      * Returns true if this factory will create a tool instance when called with the same canvas in createTool()
      * The default implementation returns true.
-     * @param canvas the canvas that the new tool will work on. Should be passed
-     *    to the constructor of the tool.
+     * @param canvas the canvas that the new tool will work on.
      */
     virtual bool canCreateTool(KCanvasBase *canvas) const;
 

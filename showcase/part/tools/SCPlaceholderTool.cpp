@@ -34,6 +34,7 @@
 SCPlaceholderTool::SCPlaceholderTool(KCanvasBase *canvas)
 : KToolBase(canvas)
 {
+    setFlags(ToolDoesntHandleMouseEvents);
 }
 
 SCPlaceholderTool::~SCPlaceholderTool()
@@ -44,21 +45,6 @@ void SCPlaceholderTool::paint(QPainter &painter, const KViewConverter &converter
 {
     Q_UNUSED(painter);
     Q_UNUSED(converter);
-}
-
-void SCPlaceholderTool::mousePressEvent(KPointerEvent *event)
-{
-    Q_UNUSED(event);
-}
-
-void SCPlaceholderTool::mouseMoveEvent(KPointerEvent *event)
-{
-    Q_UNUSED(event);
-}
-
-void SCPlaceholderTool::mouseReleaseEvent(KPointerEvent *event)
-{
-    Q_UNUSED(event);
 }
 
 void SCPlaceholderTool::activate(ToolActivation toolActivation, const QSet<KShape*> &shapes)

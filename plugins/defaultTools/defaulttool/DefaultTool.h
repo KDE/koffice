@@ -61,8 +61,6 @@ public:
 
 public:
     ///reimplemented
-    virtual bool wantsAutoScroll() const;
-    ///reimplemented
     virtual void paint(QPainter &painter, const KViewConverter &converter);
 
     ///reimplemented
@@ -76,8 +74,6 @@ public:
 
     ///reimplemented
     virtual bool paste();
-    ///reimplemented
-    virtual QStringList supportedPasteMimeTypes() const;
     ///reimplemented
     virtual KToolSelection* selection();
 
@@ -113,7 +109,7 @@ private slots:
     /// Update actions on selection change
     void updateActions();
 
-public: // Events
+protected: // Events
 
     virtual void mousePressEvent(KPointerEvent *event);
     virtual void mouseMoveEvent(KPointerEvent *event);
@@ -122,7 +118,6 @@ public: // Events
 
     virtual void keyPressEvent(QKeyEvent *event);
 
-protected:
     QMap<QString, QWidget *> createOptionWidgets();
 
     virtual KInteractionStrategy *createStrategy(KPointerEvent *event);

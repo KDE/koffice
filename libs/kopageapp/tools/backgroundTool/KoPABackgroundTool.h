@@ -38,14 +38,8 @@ public:
     virtual void activate(ToolActivation toolActivation, const QSet<KShape*> &shapes);
     ///Reimplemented from KToolBase
     virtual void deactivate();
-    ///Reimplemented from KToolBase
-    virtual void mousePressEvent(KPointerEvent *event);
-    ///Reimplemented from KToolBase
-    virtual void mouseMoveEvent(KPointerEvent *event);
-    ///Reimplemented from KToolBase
-    virtual void mouseReleaseEvent(KPointerEvent *event);
 
-    KoPAViewBase * view() const;
+    KoPAViewBase *view() const;
 
 public slots:
     void slotActivePageChanged();
@@ -58,4 +52,4 @@ private:
     KoPAViewBase * m_view;
 };
 
-#endif //KOPABACKGROUNDTOOL_H
+#endif

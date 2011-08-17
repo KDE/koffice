@@ -558,7 +558,6 @@ void UString::detach()
 void UString::release()
 {
   if (!rep->deref()) {
-    delete [] rep->dat;
     delete rep;
   }
 }

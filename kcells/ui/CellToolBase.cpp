@@ -849,7 +849,7 @@ CellToolBase::CellToolBase(KCanvasBase* canvas)
     action->setIconText(i18n("Permute fixation"));
     action->setToolTip(i18n("Permute the fixation of the reference at the text cursor"));
 
-    setTextMode(true);
+    setFlag(ToolHandleShortcutOverride, true);
 }
 
 CellToolBase::~CellToolBase()
@@ -1074,6 +1074,15 @@ void CellToolBase::inputMethodEvent(QInputMethodEvent * event)
         QApplication::sendEvent(editor()->widget(), event);
     }
 }
+
+void CellToolBase::shortcutOverride(QKeyEvent *event)
+{
+    if (event->modifiers() == Qt::ShiftModifier || event->modifiers() == Qt::NoModifier) {
+        // match all simple chars too to allow apps to have single-key shortcuts when I'm not active.
+        event->accept(); // its mine!
+    }
+}
+
 
 void CellToolBase::activate(ToolActivation toolActivation, const QSet<KShape*> &shapes)
 {

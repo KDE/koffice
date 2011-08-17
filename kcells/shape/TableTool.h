@@ -38,7 +38,7 @@ public:
 
     virtual Selection* selection();
 
-public Q_SLOTS:
+public slots:
     virtual void activate(ToolActivation toolActivation, const QSet<KShape*> &shapes);
     virtual void deactivate();
 
@@ -50,7 +50,7 @@ protected:
     virtual int maxRow() const;
     virtual SheetView* sheetView(const KCSheet* sheet) const;
 
-private Q_SLOTS:
+private slots:
     void changeColumns(int num);
     void changeRows(int num);
     void sheetActivated(const QString& sheetName);

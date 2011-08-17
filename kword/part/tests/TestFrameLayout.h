@@ -26,6 +26,7 @@
 #include <KShape.h>
 
 class KWFrameSet;
+class Helper;
 
 class TestFrameLayout : public QObject
 {
@@ -45,14 +46,24 @@ private slots:
     void testCopyFramesForPage();
     void testLargeHeaders();
     void testLayoutPageSpread();
+    void testLayoutPageSpread2_data();
+    void testLayoutPageSpread2();
     void testPageStyle();
     void testPageBackground();
+    void shapeSeriesPlacement_data();
+    void shapeSeriesPlacement();
 
     // helper
     void addFS(KWFrameSet*);
 
+    void init() { // called before each test function is executed;
+        m_frames.clear();
+    }
+
 private:
     void removeAllFrames();
+
+    void setPageSpreadMargins(Helper &helper) const;
 
     QList<KWFrameSet*> m_frames;
 };

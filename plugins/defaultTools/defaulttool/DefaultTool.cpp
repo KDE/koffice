@@ -172,18 +172,18 @@ DefaultTool::DefaultTool(KCanvasBase *canvas)
 
     KShapeManager * manager = canvas->shapeManager();
     connect(manager, SIGNAL(selectionChanged()), this, SLOT(updateActions()));
+
+    setFlags(ToolDoesntAutoScroll | ToolHandleKeyEvents | ToolMouseTracking);
+
+    QStringList list;
+    list << KOdf::mimeType(KOdf::TextDocument);
+    setSupportedPasteMimeTypes(list);
 }
 
 DefaultTool::~DefaultTool()
 {
     delete m_guideLine;
 }
-
-bool DefaultTool::wantsAutoScroll() const
-{
-    return true;
-}
-
 void DefaultTool::setupActions()
 {
     KAction* actionBringToFront = new KAction(KIcon("object-order-front-koffice"),
@@ -788,13 +788,6 @@ bool DefaultTool::paste()
         }
     }
     return success;
-}
-
-QStringList DefaultTool::supportedPasteMimeTypes() const
-{
-    QStringList list;
-    list << KOdf::mimeType(KOdf::TextDocument);
-    return list;
 }
 
 KSelection *DefaultTool::koSelection()

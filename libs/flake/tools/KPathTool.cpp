@@ -82,6 +82,7 @@ KPathTool::KPathTool(KCanvasBase *canvas)
         m_currentStrategy(0),
         m_toolOptionWidget(0)
 {
+    setFlag(ToolHandleKeyEvents);
     QActionGroup *points = new QActionGroup(this);
     // m_pointTypeGroup->setExclusive(true);
     m_actionPathPointCorner = new KAction(KIcon("pathpoint-corner"), i18n("Corner point"), this);

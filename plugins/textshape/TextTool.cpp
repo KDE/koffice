@@ -122,7 +122,7 @@ TextTool::TextTool(KCanvasBase *canvas)
         m_changeTipTimer(this),
         m_changeTipCursorPos(0)
 {
-    setTextMode(true);
+    setFlags(ToolHandleKeyEvents | ToolHandleShortcutOverride);
 
     m_actionFormatBold  = new KAction(KIcon("format-text-bold"), i18n("Bold"), this);
     addAction("format_bold", m_actionFormatBold);
@@ -442,9 +442,6 @@ TextTool::TextTool(KCanvasBase *canvas)
     addAction("format_stylist", action);
     connect(action, SIGNAL(triggered()), this, SLOT(showStyleManager()));
 
-    action = KStandardAction::selectAll(this, SLOT(selectAll()), this);
-    addAction("edit_selectall", action, KToolBase::ReadOnlyAction);
-
     action = new KAction(i18n("Special Character..."), this);
     action->setIcon(KIcon("character-set"));
     action->setShortcut(Qt::ALT + Qt::SHIFT + Qt::Key_C);
@@ -472,6 +469,10 @@ TextTool::TextTool(KCanvasBase *canvas)
     m_changeTipTimer.setInterval(500);
     m_changeTipTimer.setSingleShot(true);
     connect(&m_changeTipTimer, SIGNAL(timeout()), this, SLOT(showChangeTip()));
+
+    QStringList mimes;
+    mimes << "text/plain" << "text/html" << "application/vnd.oasis.opendocument.text";
+    setSupportedPasteMimeTypes(mimes);
 }
 
 #ifndef NDEBUG
@@ -824,13 +825,6 @@ void TextTool::cut()
     m_textEditor.data()->addCommand(new TextCutCommand(this));
 }
 
-QStringList TextTool::supportedPasteMimeTypes() const
-{
-    QStringList list;
-    list << "text/plain" << "text/html" << "application/vnd.oasis.opendocument.text";
-    return list;
-}
-
 int TextTool::pointToPosition(const QPointF &point) const
 {
     KTextShapeData *textShapeData = m_textShapeData;
@@ -863,6 +857,20 @@ int TextTool::pointToPosition(const QPointF &point) const
     }
     caretPos = qMin(caretPos, m_textShapeData->endPosition());
     return caretPos;
+}
+
+void TextTool::shortcutOverride(QKeyEvent *event)
+{
+    if (event->modifiers() == Qt::ShiftModifier || event->modifiers() == Qt::NoModifier) {
+        // match all simple chars too to allow apps to have single-key shortcuts when I'm not active.
+        event->accept(); // its mine!
+    }
+    if (event->matches(QKeySequence::SelectAll)) {
+        // match select all to avoid conflicting with apps having that too.
+        selectAll();
+        event->accept(); // its mine!
+        return;
+    }
 }
 
 void TextTool::mousePressEvent(KPointerEvent *event)

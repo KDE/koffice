@@ -40,19 +40,9 @@ public:
     virtual void paint(QPainter &painter, const KViewConverter &converter);
 
     /// reimplemented
-    virtual void mousePressEvent(KPointerEvent *event) ;
-    /// reimplemented
-    virtual void mouseMoveEvent(KPointerEvent *event);
-    /// reimplemented
-    virtual void mouseReleaseEvent(KPointerEvent *event);
-    /// reimplemented
     virtual void activate(ToolActivation toolActivation, const QSet<KShape*> &shapes);
     /// reimplemented
     virtual void deactivate();
-    /// reimplemented
-    virtual QMap<QString, QWidget *> createOptionWidgets();
-    /// reimplemented
-    virtual void keyPressEvent(QKeyEvent *event);
 
 protected:
     void enableTextCursor(bool enable);
@@ -60,6 +50,20 @@ protected:
     void setTextCursor(int textCursor);
     void removeFromTextCursor(int from, unsigned int count);
     void addToTextCursor(const QString &str);
+    /// reimplemented
+    virtual void mousePressEvent(KPointerEvent *event) ;
+    /// reimplemented
+    virtual void mouseMoveEvent(KPointerEvent *event);
+    /// reimplemented
+    virtual void mouseReleaseEvent(KPointerEvent *event);
+    /// reimplemented
+    virtual QMap<QString, QWidget *> createOptionWidgets();
+    /// reimplemented
+    virtual void keyPressEvent(QKeyEvent *event);
+    /// reimplemented
+    virtual void keyReleaseEvent(QKeyEvent *event);
+    /// reimplemented
+    virtual void shortcutOverride(QKeyEvent *event);
 
 private slots:
     void attachPath();

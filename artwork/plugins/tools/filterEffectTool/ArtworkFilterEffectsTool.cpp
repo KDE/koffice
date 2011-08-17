@@ -197,6 +197,7 @@ public:
 ArtworkFilterEffectsTool::ArtworkFilterEffectsTool(KCanvasBase *canvas)
         : KInteractionTool(canvas), d(new Private())
 {
+    setFlag(ToolMouseTracking, true);
     connect(canvas->shapeManager(), SIGNAL(selectionChanged()),
             this, SLOT(selectionChanged()));
     connect(canvas->shapeManager(), SIGNAL(selectionContentChanged()),

@@ -63,7 +63,25 @@ void KToolBase::resourceChanged(int key, const QVariant & res)
 
 bool KToolBase::wantsAutoScroll() const
 {
-    return true;
+    Q_D(const KToolBase);
+    if (d->flags & ToolDoesntHandleMouseEvents)
+        return false;
+    return (d->flags & ToolDoesntAutoScroll) == 0;
+}
+
+void KToolBase::mousePressEvent(KPointerEvent *event)
+{
+    event->ignore();
+}
+
+void KToolBase::mouseMoveEvent(KPointerEvent *event)
+{
+    event->ignore();
+}
+
+void KToolBase::mouseReleaseEvent(KPointerEvent *event)
+{
+    event->ignore();
 }
 
 void KToolBase::mouseDoubleClickEvent(KPointerEvent *event)
@@ -246,15 +264,21 @@ QRectF KToolBase::handlePaintRect(const QPointF &position) const
     return r;
 }
 
-void KToolBase::setTextMode(bool value)
+void KToolBase::shortcutOverride(QKeyEvent *event)
 {
-    Q_D(KToolBase);
-    d->isInTextMode=value;
+    event->ignore();
 }
 
 QStringList KToolBase::supportedPasteMimeTypes() const
 {
-    return QStringList();
+    Q_D(const KToolBase);
+    return d->supportedPasteMimeTypes;
+}
+
+void KToolBase::setSupportedPasteMimeTypes(const QStringList &mimes)
+{
+    Q_D(KToolBase);
+    d->supportedPasteMimeTypes = mimes;
 }
 
 bool KToolBase::paste()
@@ -287,10 +311,25 @@ bool KToolBase::isReadWrite() const
     return d->readWrite;
 }
 
-bool KToolBase::isInTextMode() const
+void KToolBase::setFlags(Flags flags)
+{
+    Q_D(KToolBase);
+    d->flags = flags;
+}
+
+void KToolBase::setFlag(Flag flag, bool on)
+{
+    Q_D(KToolBase);
+    if (on)
+        d->flags |= flag;
+    else
+        d->flags ^= flag;
+}
+
+KToolBase::Flags KToolBase::flags() const
 {
     Q_D(const KToolBase);
-    return d->isInTextMode;
+    return d->flags;
 }
 
 KToolBasePrivate *KToolBase::priv()

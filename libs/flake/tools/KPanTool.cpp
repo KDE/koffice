@@ -35,11 +35,7 @@ KPanTool::KPanTool(KCanvasBase *canvas)
         m_controller(0),
         m_temporary(false)
 {
-}
-
-bool KPanTool::wantsAutoScroll() const
-{
-    return false;
+    setFlags(ToolDoesntAutoScroll);
 }
 
 void KPanTool::mousePressEvent(KPointerEvent *event)

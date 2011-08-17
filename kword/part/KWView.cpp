@@ -418,10 +418,8 @@ if (false) { // TODO move this to the text tool as soon as  a) the string freeze
     action->setWhatsThis(i18n("Toggle the display of non-printing characters.<br/><br/>When this is enabled, KWord shows you tabs, spaces, carriage returns and other non-printing characters."));
 }
 
-    action = new KAction(i18n("Select All Shapes"), this);
-
-    actionCollection()->addAction("edit_selectallshapes", action);
-    connect(action, SIGNAL(triggered()), this, SLOT(editSelectAllFrames()));
+    action = KStandardAction::selectAll(this, SLOT(editSelectAllFrames()), this);
+    actionCollection()->addAction("edit_selectall", action);
 
     action = new KAction(KIcon("edit-delete"), i18n("Delete"), this);
     action->setShortcut(QKeySequence("Del"));
@@ -1199,11 +1197,19 @@ void KWView::setShowFormattingChars(bool on)
 
 void KWView::editSelectAllFrames()
 {
+    KoTextEditor *handler = qobject_cast<KoTextEditor*> (m_canvas->toolProxy()->selection());
+    if (handler) { // that means the text tool is active; select all text instead.
+        handler->select(QTextCursor::Document);
+        update();
+        return;
+    }
+
     KSelection *selection = m_canvas->shapeManager()->selection();
     foreach (KWFrameSet *fs, m_document->frameSets()) {
         foreach (KWFrame *frame, fs->frames()) {
             if (frame->shape()->isVisible())
                 selection->select(frame->shape());
+                frame->shape()->update();
         }
     }
 }

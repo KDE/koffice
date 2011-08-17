@@ -40,6 +40,7 @@
 KCreatePathTool::KCreatePathTool(KCanvasBase *canvas)
         : KToolBase(*(new KCreatePathToolPrivate(this, canvas)))
 {
+    setFlags(ToolHandleKeyEvents);
 }
 
 KCreatePathTool::~KCreatePathTool()

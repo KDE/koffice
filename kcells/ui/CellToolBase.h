@@ -70,13 +70,6 @@ public:
     void paintReferenceSelection(QPainter &painter, const QRectF &paintRect);
     void paintSelection(QPainter &painter, const QRectF &paintRect);
 
-    virtual void mousePressEvent(KPointerEvent* event);
-    virtual void mouseMoveEvent(KPointerEvent* event);
-    virtual void mouseReleaseEvent(KPointerEvent* event);
-    virtual void mouseDoubleClickEvent(KPointerEvent* event);
-    virtual void keyPressEvent(QKeyEvent* event);
-    virtual void inputMethodEvent(QInputMethodEvent * event);
-
     virtual Selection* selection() = 0;
 
     virtual void deleteSelection();
@@ -94,7 +87,7 @@ public:
      */
     void scrollToCell(const QPoint &location);
 
-public Q_SLOTS:
+public slots:
     virtual void activate(ToolActivation toolActivation, const QSet<KShape*> &shapes);
     virtual void deactivate();
 
@@ -120,7 +113,15 @@ protected:
     virtual int maxRow() const = 0;
     virtual SheetView* sheetView(const KCSheet* sheet) const = 0;
 
-protected Q_SLOTS:
+    virtual void mousePressEvent(KPointerEvent* event);
+    virtual void mouseMoveEvent(KPointerEvent* event);
+    virtual void mouseReleaseEvent(KPointerEvent* event);
+    virtual void mouseDoubleClickEvent(KPointerEvent* event);
+    virtual void keyPressEvent(QKeyEvent* event);
+    virtual void inputMethodEvent(QInputMethodEvent * event);
+    virtual void shortcutOverride(QKeyEvent *event);
+
+protected slots:
     void selectionChanged(const KCRegion&);
     void activeSheetChanged(KCSheet*);
     void updateEditor();

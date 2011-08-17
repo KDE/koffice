@@ -35,6 +35,7 @@
 SCAnimationTool::SCAnimationTool(KCanvasBase *canvas)
     : KToolBase(canvas)
 {
+    setFlags(ToolDoesntHandleMouseEvents);
 }
 
 SCAnimationTool::~SCAnimationTool()
@@ -48,7 +49,6 @@ void SCAnimationTool::paint(QPainter &painter, const KViewConverter &converter)
     Q_UNUSED(converter);
 }
 
-
 void SCAnimationTool::activate(ToolActivation toolActivation, const QSet<KShape*> &shapes)
 {
     setCursor(Qt::ArrowCursor);
@@ -56,22 +56,6 @@ void SCAnimationTool::activate(ToolActivation toolActivation, const QSet<KShape*
     Q_UNUSED(toolActivation);
     Q_UNUSED(shapes);
 }
-
-void SCAnimationTool::mousePressEvent(KPointerEvent *event)
-{
-    event->ignore();
-}
-
-void SCAnimationTool::mouseMoveEvent(KPointerEvent *event)
-{
-    Q_UNUSED(event);
-}
-
-void SCAnimationTool::mouseReleaseEvent(KPointerEvent *event)
-{
-    Q_UNUSED(event);
-}
-
 
 QMap<QString, QWidget *> SCAnimationTool::createOptionWidgets()
 {
