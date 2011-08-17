@@ -1415,8 +1415,11 @@ KCValue KCFormula::evalRecursive(CellIndirection cellIndirections, QHash<KCCell,
             compile(tokens);
     }
 
-    if (!d->valid)
+    if (!d->valid){
+        if (!d->sheet)
+		delete map;
         return KCValue::errorPARSE();
+    }
 
     for (int pc = 0; pc < d->codes.count(); pc++) {
         KCValue ret;   // for the function caller
