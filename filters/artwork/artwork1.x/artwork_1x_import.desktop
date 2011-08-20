@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Service
-Name=Artwork 1.x Import Filter
+Name=Karbon 1.x Import Filter
 Name[da]=Artwork 1.x-importfilter
 Name[de]=Artwork-1.x-Importfilter
 Name[pt]=Filtro de Importação do Artwork 1.x
@@ -9,7 +9,7 @@ Name[sv]=Artwork 1.x-importfilter
 Name[uk]=Фільтр імпорту Artwork 1.x
 Name[x-test]=xxArtwork 1.x Import Filterxx
 X-KDE-Export=application/vnd.oasis.opendocument.graphics
-X-KDE-Import=application/x-artwork
+X-KDE-Import=application/x-karbon
 X-KDE-Weight=1
 X-KDE-Library=artwork1ximport
 X-KDE-ServiceTypes=KOfficeFilter
