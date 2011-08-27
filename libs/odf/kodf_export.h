@@ -17,14 +17,14 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef KOODF_EXPORT_H
-#define KOODF_EXPORT_H
+#ifndef KODF_EXPORT_H
+#define KODF_EXPORT_H
 
 /* needed for KDE_EXPORT and KDE_IMPORT macros */
 #include <kdemacros.h>
 
 #ifndef KODF_EXPORT
-# if defined(MAKE_KOODF_LIB)
+# if defined(MAKE_KODF_LIB)
 /* We are building this library */
 #  define KODF_EXPORT KDE_EXPORT
 # else
@@ -33,8 +33,8 @@
 # endif
 #endif
 
-# ifndef KOODF_EXPORT_DEPRECATED
-#  define KOODF_EXPORT_DEPRECATED KDE_DEPRECATED KODF_EXPORT
+# ifndef KODF_EXPORT_DEPRECATED
+#  define KODF_EXPORT_DEPRECATED KDE_DEPRECATED KODF_EXPORT
 # endif
 
 #endif

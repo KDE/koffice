@@ -252,8 +252,8 @@ include(MacroKOfficeAddBenchmark)
 # for config.h and <toplevel/foo.h> includes (if any?)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_SOURCE_DIR}/libs/interfaces )
 
-# koodf is at the bottom of the stack
-set(KOODF_INCLUDES ${CMAKE_SOURCE_DIR}/libs/odf
+# kodf is at the bottom of the stack
+set(KODF_INCLUDES ${CMAKE_SOURCE_DIR}/libs/odf
                    ${CMAKE_BINARY_DIR}/libs/odf
                    ${KDE4_INCLUDES})
 
@@ -264,9 +264,9 @@ set(PIGMENT_INCLUDES ${CMAKE_SOURCE_DIR}/libs/pigment
                    ${QT_INCLUDES}
                    ${KDE4_INCLUDES})
 
-# flake depends on koodf and pigment
+# flake depends on kodf and pigment
 set(FLAKE_INCLUDES ${CMAKE_SOURCE_DIR}/libs/flake
-                   ${KOODF_INCLUDES}
+                   ${KODF_INCLUDES}
                    ${CMAKE_SOURCE_DIR}/libs/flake/commands
                    ${CMAKE_SOURCE_DIR}/libs/flake/tools
                    ${CMAKE_BINARY_DIR}/libs/flake)

@@ -77,9 +77,9 @@ Backwards compatibility for some libs
 For libraries that are going to have usage outside of KOffice they have some extra
 rules to make sure they are backwards compatible between releases.
 The list of libraries that this applies to is;
- * koodf
+ * kodf
  * pigment
- * flake
+ * kflake
  * kotext
 
 on top of the above list of guidelines there are some more for these that have

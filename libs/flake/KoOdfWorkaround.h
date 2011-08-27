@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KOODFWORKAROUND_H
-#define KOODFWORKAROUND_H
+#ifndef KODFWORKAROUND_H
+#define KODFWORKAROUND_H
 
 #include "flake_export.h"
 
@@ -79,4 +79,4 @@ namespace KoOdfWorkaround
     FLAKE_EXPORT void fixPresentationPlaceholder(KShape *shape);
 }
 
-#endif /* KOODFWORKAROUND_H */
+#endif /* KODFWORKAROUND_H */

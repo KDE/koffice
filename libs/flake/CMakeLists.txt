@@ -178,9 +178,9 @@ kde4_add_ui_files(flake_SRCS
 
 kde4_add_library(kflake SHARED ${flake_SRCS})
 
-target_link_libraries(kflake ${KDE4_KDEUI_LIBS} koodf)
+target_link_libraries(kflake ${KDE4_KDEUI_LIBS} kodf)
 
-target_link_libraries(kflake LINK_INTERFACE_LIBRARIES koodf)
+target_link_libraries(kflake LINK_INTERFACE_LIBRARIES kodf)
 
 set_target_properties(kflake PROPERTIES
     VERSION ${GENERIC_KOFFICE_LIB_VERSION} SOVERSION ${GENERIC_KOFFICE_LIB_SOVERSION}

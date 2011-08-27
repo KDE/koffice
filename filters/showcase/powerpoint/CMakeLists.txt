@@ -5,7 +5,7 @@ if(NOT WIN32)
 endif(NOT WIN32)
 
 kde4_add_library(ppttoodplib STATIC PptToOdp.cpp ParsedPresentation.cpp DateTimeFormat.cpp pptstyle.cpp)
-target_link_libraries(ppttoodplib koodf mso ${ZLIB_LIBRARIES})
+target_link_libraries(ppttoodplib kodf mso ${ZLIB_LIBRARIES})
 
 kde4_add_executable(ppttoodp ppttoodpmain.cpp)
 target_link_libraries(ppttoodp ppttoodplib)

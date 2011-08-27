@@ -16,8 +16,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef TESTKOODFLOADINGCONTEXT_H
-#define TESTKOODFLOADINGCONTEXT_H
+#ifndef TESTKODFLOADINGCONTEXT_H
+#define TESTKODFLOADINGCONTEXT_H
 
 #include <qtest_kde.h>
 
@@ -28,4 +28,4 @@ private slots:
     void testFillStyleStack();
 };
 
-#endif /* TESTKOODFLOADINGCONTEXT_H */
+#endif /* TESTKODFLOADINGCONTEXT_H */
