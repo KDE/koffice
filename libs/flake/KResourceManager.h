@@ -91,7 +91,7 @@ enum DocumentResource {
     KCellsStart = 7000,     ///< Base number for kcells specific values.
     KWordStart = 8000,       ///< Base number for kword specific values.
     KPageAppStart = 9000,   ///< Base number for KoPageApp specific values.
-    KoTextStart = 10000      ///< Base number for KOdfText specific values.
+    KOdfTextStart = 10000      ///< Base number for KOdfText specific values.
 };
 }
 
