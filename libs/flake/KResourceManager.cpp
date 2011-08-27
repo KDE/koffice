@@ -239,44 +239,44 @@ void KResourceManager::setLazyResourceSlot(int key, QObject *object, const char 
 
 KUndoStack *KResourceManager::undoStack() const
 {
-    if (!hasResource(KoDocumentResource::UndoStack))
+    if (!hasResource(KDocumentResource::UndoStack))
         return 0;
-    return static_cast<KUndoStack*>(resource(KoDocumentResource::UndoStack).value<void*>());
+    return static_cast<KUndoStack*>(resource(KDocumentResource::UndoStack).value<void*>());
 }
 
 void KResourceManager::setUndoStack(KUndoStack *undoStack)
 {
     QVariant variant;
     variant.setValue<void*>(undoStack);
-    setResource(KoDocumentResource::UndoStack, variant);
+    setResource(KDocumentResource::UndoStack, variant);
 }
 
 KImageCollection *KResourceManager::imageCollection() const
 {
-    if (!hasResource(KoDocumentResource::ImageCollection))
+    if (!hasResource(KDocumentResource::ImageCollection))
         return 0;
-    return static_cast<KImageCollection*>(resource(KoDocumentResource::ImageCollection).value<void*>());
+    return static_cast<KImageCollection*>(resource(KDocumentResource::ImageCollection).value<void*>());
 }
 
 void KResourceManager::setImageCollection(KImageCollection *ic)
 {
     QVariant variant;
     variant.setValue<void*>(ic);
-    setResource(KoDocumentResource::ImageCollection, variant);
+    setResource(KDocumentResource::ImageCollection, variant);
 }
 
 KOdfDocumentBase *KResourceManager::odfDocument() const
 {
-    if (!hasResource(KoDocumentResource::OdfDocument))
+    if (!hasResource(KDocumentResource::OdfDocument))
         return 0;
-    return static_cast<KOdfDocumentBase*>(resource(KoDocumentResource::OdfDocument).value<void*>());
+    return static_cast<KOdfDocumentBase*>(resource(KDocumentResource::OdfDocument).value<void*>());
 }
 
 void KResourceManager::setOdfDocument(KOdfDocumentBase *currentDocument)
 {
     QVariant variant;
     variant.setValue<void*>(currentDocument);
-    setResource(KoDocumentResource::OdfDocument, variant);
+    setResource(KDocumentResource::OdfDocument, variant);
 }
 
 void KResourceManager::setTextDocumentList(const QList<QTextDocument *> &allDocuments)
@@ -287,13 +287,13 @@ void KResourceManager::setTextDocumentList(const QList<QTextDocument *> &allDocu
         v.setValue<void*>(doc);
         list << v;
     }
-    setResource(KoDocumentResource::TextDocuments, list);
+    setResource(KDocumentResource::TextDocuments, list);
 }
 
 QList<QTextDocument *> KResourceManager::textDocumentList() const
 {
     QList<QTextDocument*> answer;
-    QVariant variant = resource(KoDocumentResource::TextDocuments);
+    QVariant variant = resource(KDocumentResource::TextDocuments);
     if (variant.isNull())
         return answer;
     QList<QVariant> list = qvariant_cast<QList<QVariant> >(variant);

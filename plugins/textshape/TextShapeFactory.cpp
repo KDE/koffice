@@ -113,13 +113,13 @@ bool TextShapeFactory::supports(const KXmlElement & e, KShapeLoadingContext &con
 
 void TextShapeFactory::newDocumentResourceManager(KResourceManager *manager)
 {
-    manager->setLazyResourceSlot(KoDocumentResource::ImageCollection,
+    manager->setLazyResourceSlot(KDocumentResource::ImageCollection,
             this, "createImageCollection");
     manager->setLazyResourceSlot(KOdfText::InlineTextObjectManager,
             this, "createTextObjectManager");
     manager->setLazyResourceSlot(KOdfText::StyleManager,
             this, "createStylemanager");
-    manager->setLazyResourceSlot(KoDocumentResource::UndoStack,
+    manager->setLazyResourceSlot(KDocumentResource::UndoStack,
             this, "createUndoStack");
     manager->setLazyResourceSlot(TextEditingPluginContainer::ResourceId,
             this, "createEditingPluginContainer");

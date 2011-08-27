@@ -29,7 +29,7 @@ namespace Showcase
 {
     /// Specifies the Showcase specific resources that you can put and get from the KResourceManager
     enum ShowcaseDocumentResources {
-        SoundCollection = KoDocumentResource::ShowcaseStart + 1,
+        SoundCollection = KDocumentResource::ShowcaseStart + 1,
         PageLayouts ///< of type SCPageLayouts
     };
 }

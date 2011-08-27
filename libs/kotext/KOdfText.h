@@ -99,7 +99,7 @@ enum Direction {
  * \sa KResourceManager KShapeController::resourceManager()
  */
 enum DocumentResource {
-    ChangeTracker = KoDocumentResource::KoTextStart + 1, ///< KChangeTracker
+    ChangeTracker = KDocumentResource::KoTextStart + 1, ///< KChangeTracker
     InlineTextObjectManager, ///< The KOdfText inline-text-object manager. KInlineTextObjectManager
     StyleManager,           ///< The KStyleManager
     PageProvider            ///< The KPageProvider
