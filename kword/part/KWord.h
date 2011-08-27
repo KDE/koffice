@@ -110,7 +110,7 @@ namespace KWord
     /// Specifies the KWord specific resources that you can put and get from the KResourceManager
     enum KWordCanvasResources {
         // lets try to put Current in front of everything for ease of reading.
-        CurrentFrame = KoCanvasResource::KWordStart,
+        CurrentFrame = KCanvasResource::KWordStart,
         CurrentFrameSet,
         CurrentFrameSetCount,
         CurrentPictureCount,

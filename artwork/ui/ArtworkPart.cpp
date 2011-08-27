@@ -170,7 +170,7 @@ KoView* ArtworkPart::createViewInstance(QWidget *parent)
     ArtworkView *result = new ArtworkView(this, parent);
 
     KResourceManager * provider = result->canvasWidget()->resourceManager();
-    provider->setResource(KoCanvasResource::PageSize, d->document.pageSize());
+    provider->setResource(KCanvasResource::PageSize, d->document.pageSize());
 
     d->applyCanvasConfiguration(result->canvasWidget(), this);
 
@@ -497,7 +497,7 @@ void ArtworkPart::setPageSize(const QSizeF &pageSize)
     d->document.setPageSize(pageSize);
     foreach(KoView *view, views()) {
         ArtworkCanvas *canvas = ((ArtworkView*)view)->canvasWidget();
-        canvas->resourceManager()->setResource(KoCanvasResource::PageSize, pageSize);
+        canvas->resourceManager()->setResource(KCanvasResource::PageSize, pageSize);
     }
 }
 

@@ -110,22 +110,22 @@ QColor KResourceManager::colorResource(int key) const
 
 void KResourceManager::setForegroundColor(const QColor &color)
 {
-    setResource(KoCanvasResource::ForegroundColor, color);
+    setResource(KCanvasResource::ForegroundColor, color);
 }
 
 QColor KResourceManager::foregroundColor() const
 {
-    return colorResource(KoCanvasResource::ForegroundColor);
+    return colorResource(KCanvasResource::ForegroundColor);
 }
 
 void KResourceManager::setBackgroundColor(const QColor &color)
 {
-    setResource(KoCanvasResource::BackgroundColor, color);
+    setResource(KCanvasResource::BackgroundColor, color);
 }
 
 QColor KResourceManager::backgroundColor() const
 {
-    return colorResource(KoCanvasResource::BackgroundColor);
+    return colorResource(KCanvasResource::BackgroundColor);
 }
 
 KShape *KResourceManager::koShapeResource(int key) const
@@ -143,13 +143,13 @@ void KResourceManager::setHandleRadius(int handleRadius)
     // do not allow arbitrary small handles
     if (handleRadius < 3)
         handleRadius = 3;
-    setResource(KoCanvasResource::HandleRadius, QVariant(handleRadius));
+    setResource(KCanvasResource::HandleRadius, QVariant(handleRadius));
 }
 
 int KResourceManager::handleRadius() const
 {
-    if (d->resources.contains(KoCanvasResource::HandleRadius))
-        return d->resources.value(KoCanvasResource::HandleRadius).toInt();
+    if (d->resources.contains(KCanvasResource::HandleRadius))
+        return d->resources.value(KCanvasResource::HandleRadius).toInt();
     return 3; // default value.
 }
 
@@ -165,12 +165,12 @@ void KResourceManager::setGrabSensitivity(int grabSensitivity)
     // do not allow arbitrary small handles
     if (grabSensitivity < 1)
         grabSensitivity = 1;
-    setResource(KoCanvasResource::GrabSensitivity, QVariant(grabSensitivity));
+    setResource(KCanvasResource::GrabSensitivity, QVariant(grabSensitivity));
 }
 
 int KResourceManager::grabSensitivity() const
 {
-    return resource(KoCanvasResource::GrabSensitivity).toInt();
+    return resource(KCanvasResource::GrabSensitivity).toInt();
 }
 
 bool KResourceManager::boolResource(int key) const

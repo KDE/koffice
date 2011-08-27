@@ -189,7 +189,7 @@ void ArtworkZoomController::setPageSize(const QSizeF &pageSize)
 
 void ArtworkZoomController::resourceChanged(int key, const QVariant &value)
 {
-    if (key == KoCanvasResource::PageSize) {
+    if (key == KCanvasResource::PageSize) {
         setPageSize(value.toSizeF());
 
         // Tell the canvasController that the document in pixels

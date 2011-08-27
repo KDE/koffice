@@ -358,7 +358,7 @@ void ArtworkView::dropEvent(QDropEvent *e)
         if (! part())
             return;
 
-        if (d->canvas->resourceManager()->intResource(KoCanvasResource::ActiveColorTarget) == KFlake::Foreground) {
+        if (d->canvas->resourceManager()->intResource(KCanvasResource::ActiveColorTarget) == KFlake::Foreground) {
             QList<KShapeBorderBase*> borders;
             QList<KShape*> selectedShapes = selection->selectedShapes();
             foreach(KShape * shape, selectedShapes) {
@@ -1170,7 +1170,7 @@ void ArtworkView::updateUnit(const KUnit &unit)
 {
     d->horizRuler->setUnit(unit);
     d->vertRuler->setUnit(unit);
-    d->canvas->resourceManager()->setResource(KoCanvasResource::Unit, unit);
+    d->canvas->resourceManager()->setResource(KCanvasResource::Unit, unit);
 }
 
 QList<KPathShape*> ArtworkView::selectedPathShapes()

@@ -371,7 +371,7 @@ GuidesTool::GuideLine GuidesTool::guideLineAtPosition(const QPointF &position)
 
 void GuidesTool::resourceChanged(int key, const QVariant &res)
 {
-    if (key == KoCanvasResource::Unit) {
+    if (key == KCanvasResource::Unit) {
         if (m_options)
             m_options->setUnit(res.value<KUnit>());
     }
@@ -405,7 +405,7 @@ void GuidesTool::insertorCreateGuidesSlot(GuidesTransaction *result)
 {
     QPoint documentStart = canvas()->documentOrigin();
     KGuidesData *guidesData = canvas()->guidesData();
-    const QSizeF pageSize = canvas()->resourceManager()->sizeResource(KoCanvasResource::PageSize);
+    const QSizeF pageSize = canvas()->resourceManager()->sizeResource(KCanvasResource::PageSize);
 
     QList< qreal > verticalLines;
     QList< qreal > horizontalLines;

@@ -39,12 +39,12 @@ class KOdfDocumentBase;
 class QTextDocument;
 
 /**
- * The KoCanvasResource contains a set of per-canvas
+ * The KCanvasResource contains a set of per-canvas
  * properties, like current foreground color, current background
  * color and more.
  * \sa KResourceManager KCanvasBase::resourceManager()
  */
-namespace KoCanvasResource
+namespace KCanvasResource
 {
 
 /**
@@ -100,7 +100,7 @@ enum DocumentResource {
  * properties, like current foreground color, current background
  * color and more. All tools belonging to the current canvas are
  * notified when a Resource changes (is set).
- * The properties come from the KoCanvasResource::CanvasResource enum or the
+ * The properties come from the KCanvasResource::CanvasResource enum or the
  * KoDocumentResource::DocumentResource depending on which manager you got.
  * See KCanvasBase::resourceManager KShapeController::resourceManager
  *
@@ -136,7 +136,7 @@ public:
      * Set a resource of any type.
      * @param key the integer key
      * @param value the new value for the key.
-     * @see KoCanvasResource::CanvasResource KoDocumentResource::DocumentResource
+     * @see KCanvasResource::CanvasResource KoDocumentResource::DocumentResource
      */
     void setResource(int key, const QVariant &value);
 
@@ -144,7 +144,7 @@ public:
      * Set a resource of type KShape*.
      * @param key the integer key
      * @param shape the new value for the key.
-     * @see KoCanvasResource::CanvasResource KoDocumentResource::DocumentResource
+     * @see KCanvasResource::CanvasResource KoDocumentResource::DocumentResource
      */
     void setResource(int key, KShape *shape);
 
@@ -152,7 +152,7 @@ public:
      * Set a resource of type KUnit
      * @param key the integer key
      * @param unit the new value for the key.
-     * @see KoCanvasResource::CanvasResource KoDocumentResource::DocumentResource
+     * @see KCanvasResource::CanvasResource KoDocumentResource::DocumentResource
      */
     void setResource(int key, const KUnit &unit);
 
@@ -160,7 +160,7 @@ public:
      * Returns a qvariant containing the specified resource or a standard one if the
      * specified resource does not exist.
      * @param key the key
-     * @see KoCanvasResource::CanvasResource KoDocumentResource::DocumentResource
+     * @see KCanvasResource::CanvasResource KoDocumentResource::DocumentResource
      */
     QVariant resource(int key) const;
 
@@ -206,56 +206,56 @@ public:
     /**
      * Return the resource determined by param key as a boolean.
      * @param key the indentifying key for the resource
-     * @see KoCanvasResource::CanvasResource KoDocumentResource::DocumentResource
+     * @see KCanvasResource::CanvasResource KoDocumentResource::DocumentResource
      */
     bool boolResource(int key) const;
 
     /**
      * Return the resource determined by param key as an integer.
      * @param key the indentifying key for the resource
-     * @see KoCanvasResource::CanvasResource KoDocumentResource::DocumentResource
+     * @see KCanvasResource::CanvasResource KoDocumentResource::DocumentResource
      */
     int intResource(int key) const;
 
     /**
      * Return the resource determined by param key as a QColor.
      * @param key the indentifying key for the resource
-     * @see KoCanvasResource::CanvasResource KoDocumentResource::DocumentResource
+     * @see KCanvasResource::CanvasResource KoDocumentResource::DocumentResource
      */
     QColor colorResource(int key) const;
 
     /**
      * Return the resource determined by param key as a pointer to a KShape.
      * @param key the indentifying key for the resource
-     * @see KoCanvasResource::CanvasResource KoDocumentResource::DocumentResource
+     * @see KCanvasResource::CanvasResource KoDocumentResource::DocumentResource
      */
     KShape *koShapeResource(int key) const;
 
     /**
      * Return the resource determined by param key as a QString .
      * @param key the indentifying key for the resource
-     * @see KoCanvasResource::CanvasResource KoDocumentResource::DocumentResource
+     * @see KCanvasResource::CanvasResource KoDocumentResource::DocumentResource
      */
     QString stringResource(int key) const;
 
     /**
      * Return the resource determined by param key as a QSizeF.
      * @param key the indentifying key for the resource
-     * @see KoCanvasResource::CanvasResource KoDocumentResource::DocumentResource
+     * @see KCanvasResource::CanvasResource KoDocumentResource::DocumentResource
      */
     QSizeF sizeResource(int key) const;
 
     /**
      * Return the resource determined by param key as a KUnit.
      * @param key the indentifying key for the resource
-     * @see KoCanvasResource::CanvasResource KoDocumentResource::DocumentResource
+     * @see KCanvasResource::CanvasResource KoDocumentResource::DocumentResource
      */
     KUnit unitResource(int key) const;
 
     /**
      * Returns true if there is a resource set with the requested key.
      * @param key the indentifying key for the resource
-     * @see KoCanvasResource::CanvasResource KoDocumentResource::DocumentResource
+     * @see KCanvasResource::CanvasResource KoDocumentResource::DocumentResource
      */
     bool hasResource(int key) const;
 
@@ -263,7 +263,7 @@ public:
      * Remove the resource with @p key from the provider.
      * @param key the key that will be used to remove the resource
      * There will be a signal emitted with a variable that will return true on QVariable::isNull();
-     * @see KoCanvasResource::CanvasResource KoDocumentResource::DocumentResource
+     * @see KCanvasResource::CanvasResource KoDocumentResource::DocumentResource
      */
     void clearResource(int key);
 
@@ -315,7 +315,7 @@ signals:
      * new or different from the previous set value.
      * @param key the indentifying key for the resource
      * @param value the variants new value.
-     * @see KoCanvasResource::CanvasResource KoDocumentResource::DocumentResource
+     * @see KCanvasResource::CanvasResource KoDocumentResource::DocumentResource
      */
     void resourceChanged(int key, const QVariant &value);
 

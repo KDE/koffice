@@ -1003,9 +1003,9 @@ void DefaultTool::selectionAlign(KShapeAlignCommand::Align align)
 
     // single selected shape is automatically aligned to document rect
     if (editableShapes.count() == 1 ) {
-        if (!canvas()->resourceManager()->hasResource(KoCanvasResource::PageSize))
+        if (!canvas()->resourceManager()->hasResource(KCanvasResource::PageSize))
             return;
-        bb = QRectF(QPointF(0,0), canvas()->resourceManager()->sizeResource(KoCanvasResource::PageSize));
+        bb = QRectF(QPointF(0,0), canvas()->resourceManager()->sizeResource(KCanvasResource::PageSize));
     } else {
         foreach( KShape * shape, editableShapes ) {
             bb |= shape->boundingRect();
@@ -1241,7 +1241,7 @@ void DefaultTool::updateActions()
     action("object_order_raise")->setEnabled(enable);
     action("object_order_lower")->setEnabled(enable);
     action("object_order_back")->setEnabled(enable);
-    enable = (editableShapes.count () > 1) || (enable && canvas()->resourceManager()->hasResource(KoCanvasResource::PageSize));
+    enable = (editableShapes.count () > 1) || (enable && canvas()->resourceManager()->hasResource(KCanvasResource::PageSize));
     action("object_align_horizontal_left")->setEnabled(enable);
     action("object_align_horizontal_center")->setEnabled(enable);
     action("object_align_horizontal_right")->setEnabled(enable);

@@ -317,7 +317,7 @@ void KCreatePathTool::resourceChanged(int key, const QVariant & res)
     Q_D(KCreatePathTool);
 
     switch (key) {
-    case KoCanvasResource::HandleRadius: {
+    case KCanvasResource::HandleRadius: {
         d->handleRadius = res.toUInt();
     }
     break;

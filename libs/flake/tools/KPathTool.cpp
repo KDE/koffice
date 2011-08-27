@@ -933,7 +933,7 @@ void KPathTool::deactivate()
 
 void KPathTool::resourceChanged(int key, const QVariant & res)
 {
-    if (key == KoCanvasResource::HandleRadius) {
+    if (key == KCanvasResource::HandleRadius) {
         int oldHandleRadius = m_handleRadius;
 
         m_handleRadius = res.toUInt();

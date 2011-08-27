@@ -1413,7 +1413,7 @@ void KWView::setCurrentPage(const KWPage &currentPage)
     Q_ASSERT(currentPage.isValid());
     if (currentPage != m_currentPage) {
         m_currentPage = currentPage;
-        m_canvas->resourceManager()->setResource(KoCanvasResource::CurrentPage, m_currentPage.pageNumber());
+        m_canvas->resourceManager()->setResource(KCanvasResource::CurrentPage, m_currentPage.pageNumber());
         m_zoomController->setPageSize(m_currentPage.rect().size());
         m_actionViewHeader->setChecked(m_currentPage.pageStyle().headerPolicy() != KWord::HFTypeNone);
         m_actionViewFooter->setChecked(m_currentPage.pageStyle().footerPolicy() != KWord::HFTypeNone);
