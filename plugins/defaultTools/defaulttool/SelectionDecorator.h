@@ -23,7 +23,7 @@
 #define SELECTIONDECORATOR_H
 
 #include <KViewConverter.h>
-#include <KoFlake.h>
+#include <KFlake.h>
 #include <QPainter>
 
 class KSelection;
@@ -39,7 +39,7 @@ public:
      * @param rotationHandles if true; the rotation handles will be drawn
      * @param shearHandles if true; the shearhandles will be drawn
      */
-    SelectionDecorator(KoFlake::SelectionHandle arrows, bool rotationHandles, bool shearHandles);
+    SelectionDecorator(KFlake::SelectionHandle arrows, bool rotationHandles, bool shearHandles);
 
     /**
      * paint the decortations.
@@ -61,16 +61,16 @@ public:
     void setHandleRadius(int radius);
 
     /// Sets the hot position to highlight
-    static void setHotPosition(KoFlake::Position hotPosition);
+    static void setHotPosition(KFlake::Position hotPosition);
 
     /// Returns the hot position
-    static KoFlake::Position hotPosition();
+    static KFlake::Position hotPosition();
 
 private:
     bool m_rotationHandles;
     bool m_shearHandles;
-    KoFlake::SelectionHandle m_arrows;
-    static KoFlake::Position m_hotPosition;
+    KFlake::SelectionHandle m_arrows;
+    static KFlake::Position m_hotPosition;
     KSelection *m_selection;
     int m_handleRadius;
 };

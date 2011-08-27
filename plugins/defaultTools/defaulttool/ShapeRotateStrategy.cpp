@@ -41,7 +41,7 @@ ShapeRotateStrategy::ShapeRotateStrategy(KToolBase *tool, const QPointF &clicked
 {
     m_initialSelectionMatrix = tool->canvas()->shapeManager()->selection()->transformation();
 
-    QList<KShape*> selectedShapes = tool->canvas()->shapeManager()->selection()->selectedShapes(KoFlake::StrippedSelection);
+    QList<KShape*> selectedShapes = tool->canvas()->shapeManager()->selection()->selectedShapes(KFlake::StrippedSelection);
     foreach(KShape *shape, selectedShapes) {
         if (! shape->isEditable())
             continue;
@@ -110,7 +110,7 @@ void ShapeRotateStrategy::rotateBy(qreal angle)
 
 void ShapeRotateStrategy::paint(QPainter &painter, const KViewConverter &converter)
 {
-    SelectionDecorator decorator(KoFlake::NoHandle, true, false);
+    SelectionDecorator decorator(KFlake::NoHandle, true, false);
     decorator.setSelection(tool()->canvas()->shapeManager()->selection());
     decorator.setHandleRadius(tool()->canvas()->resourceManager()->handleRadius());
     decorator.paint(painter, converter);

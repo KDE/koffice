@@ -38,12 +38,12 @@
 #include <kdebug.h>
 #include <klocale.h>
 
-ShapeShearStrategy::ShapeShearStrategy(KToolBase *tool, const QPointF &clicked, KoFlake::SelectionHandle direction)
+ShapeShearStrategy::ShapeShearStrategy(KToolBase *tool, const QPointF &clicked, KFlake::SelectionHandle direction)
 : KInteractionStrategy(tool)
 , m_start(clicked)
 {
     KSelection *sel = tool->canvas()->shapeManager()->selection();
-    QList<KShape*> selectedShapes = sel->selectedShapes(KoFlake::StrippedSelection);
+    QList<KShape*> selectedShapes = sel->selectedShapes(KFlake::StrippedSelection);
     foreach (KShape *shape, selectedShapes) {
         if (!shape->isEditable())
             continue;
@@ -55,21 +55,21 @@ ShapeShearStrategy::ShapeShearStrategy(KToolBase *tool, const QPointF &clicked, 
 
     // Eventhoug we aren't currently activated by the corner handles we might as well code like it
     switch (direction) {
-    case KoFlake::TopMiddleHandle:
+    case KFlake::TopMiddleHandle:
         m_top = true; m_bottom = false; m_left = false; m_right = false; break;
-    case KoFlake::TopRightHandle:
+    case KFlake::TopRightHandle:
         m_top = true; m_bottom = false; m_left = false; m_right = true; break;
-    case KoFlake::RightMiddleHandle:
+    case KFlake::RightMiddleHandle:
         m_top = false; m_bottom = false; m_left = false; m_right = true; break;
-    case KoFlake::BottomRightHandle:
+    case KFlake::BottomRightHandle:
         m_top = false; m_bottom = true; m_left = false; m_right = true; break;
-    case KoFlake::BottomMiddleHandle:
+    case KFlake::BottomMiddleHandle:
         m_top = false; m_bottom = true; m_left = false; m_right = false; break;
-    case KoFlake::BottomLeftHandle:
+    case KFlake::BottomLeftHandle:
         m_top = false; m_bottom = true; m_left = true; m_right = false; break;
-    case KoFlake::LeftMiddleHandle:
+    case KFlake::LeftMiddleHandle:
         m_top = false; m_bottom = false; m_left = true; m_right = false; break;
-    case KoFlake::TopLeftHandle:
+    case KFlake::TopLeftHandle:
         m_top = true; m_bottom = false; m_left = true; m_right = false; break;
     default:
         Q_ASSERT(0);
@@ -89,16 +89,16 @@ ShapeShearStrategy::ShapeShearStrategy(KToolBase *tool, const QPointF &clicked, 
     QPointF edge;
     qreal angle = 0.0;
     if (m_top) {
-        edge = sel->absolutePosition(KoFlake::BottomLeftCorner) - sel->absolutePosition(KoFlake::BottomRightCorner);
+        edge = sel->absolutePosition(KFlake::BottomLeftCorner) - sel->absolutePosition(KFlake::BottomRightCorner);
         angle = 180.0;
     } else if (m_bottom) {
-        edge = sel->absolutePosition(KoFlake::TopRightCorner) - sel->absolutePosition(KoFlake::TopLeftCorner);
+        edge = sel->absolutePosition(KFlake::TopRightCorner) - sel->absolutePosition(KFlake::TopLeftCorner);
         angle = 0.0;
     } else if (m_left) {
-        edge = sel->absolutePosition(KoFlake::BottomLeftCorner) - sel->absolutePosition(KoFlake::TopLeftCorner);
+        edge = sel->absolutePosition(KFlake::BottomLeftCorner) - sel->absolutePosition(KFlake::TopLeftCorner);
         angle = 90.0;
     } else if (m_right) {
-        edge = sel->absolutePosition(KoFlake::TopRightCorner) - sel->absolutePosition(KoFlake::BottomRightCorner);
+        edge = sel->absolutePosition(KFlake::TopRightCorner) - sel->absolutePosition(KFlake::BottomRightCorner);
         angle = 270.0;
     }
     qreal currentAngle = atan2(edge.y(), edge.x()) / M_PI * 180;
@@ -109,8 +109,8 @@ ShapeShearStrategy::ShapeShearStrategy(KToolBase *tool, const QPointF &clicked, 
 
     // use crossproduct of top edge and left edge of selection bounding rect
     // to determine if the selection is mirrored
-    QPointF top = sel->absolutePosition(KoFlake::TopRightCorner) - sel->absolutePosition(KoFlake::TopLeftCorner);
-    QPointF left = sel->absolutePosition(KoFlake::BottomLeftCorner) - sel->absolutePosition(KoFlake::TopLeftCorner);
+    QPointF top = sel->absolutePosition(KFlake::TopRightCorner) - sel->absolutePosition(KFlake::TopLeftCorner);
+    QPointF left = sel->absolutePosition(KFlake::BottomLeftCorner) - sel->absolutePosition(KFlake::TopLeftCorner);
     m_isMirrored = (top.x()*left.y() - top.y()*left.x()) < 0.0;
 }
 
@@ -158,7 +158,7 @@ void ShapeShearStrategy::handleMouseMove(const QPointF &point, Qt::KeyboardModif
 
 void ShapeShearStrategy::paint(QPainter &painter, const KViewConverter &converter)
 {
-    SelectionDecorator decorator(KoFlake::NoHandle, true, false);
+    SelectionDecorator decorator(KFlake::NoHandle, true, false);
     decorator.setSelection(tool()->canvas()->shapeManager()->selection());
     decorator.setHandleRadius(tool()->canvas()->resourceManager()->handleRadius());
     decorator.paint(painter, converter);

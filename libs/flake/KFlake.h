@@ -32,7 +32,7 @@ class KShapeBackgroundBase;
 /**
  * Flake reference
  */
-namespace KoFlake
+namespace KFlake
 {
     /// the selection type for KSelection::selectedObjects()
     enum SelectionType {

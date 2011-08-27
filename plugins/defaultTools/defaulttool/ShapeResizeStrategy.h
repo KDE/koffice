@@ -21,7 +21,7 @@
 #define SHAPERESIZESTRATEGY_H
 
 #include <KInteractionStrategy.h>
-#include <KoFlake.h>
+#include <KFlake.h>
 
 #include <QPointF>
 #include <QList>
@@ -41,7 +41,7 @@ public:
     /**
      * Constructor
      */
-    ShapeResizeStrategy(KToolBase *tool, const QPointF &clicked, KoFlake::SelectionHandle direction);
+    ShapeResizeStrategy(KToolBase *tool, const QPointF &clicked, KFlake::SelectionHandle direction);
     virtual ~ShapeResizeStrategy() {}
 
     void handleMouseMove(const QPointF &mouseLocation, Qt::KeyboardModifiers modifiers);

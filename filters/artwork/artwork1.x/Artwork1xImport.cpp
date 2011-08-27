@@ -394,9 +394,9 @@ QBrush ArtworkImport::loadGradient(KShape * shape, const KXmlElement &element)
 
     QSizeF shapeSize = shape->size();
     QTransform shapeMatrix = m_mirrorMatrix * shape->absoluteTransformation(0).inverted();
-    origin = KoFlake::toRelative(shapeMatrix.map(origin), shapeSize);
-    focal = KoFlake::toRelative(shapeMatrix.map(focal), shapeSize);
-    vector = KoFlake::toRelative(shapeMatrix.map(vector), shapeSize);
+    origin = KFlake::toRelative(shapeMatrix.map(origin), shapeSize);
+    focal = KFlake::toRelative(shapeMatrix.map(focal), shapeSize);
+    vector = KFlake::toRelative(shapeMatrix.map(vector), shapeSize);
 
     int type = element.attribute("type", 0).toInt();
     int spread = element.attribute("repeatMethod", 0).toInt();
@@ -698,7 +698,7 @@ KShape * ArtworkImport::loadRect(const KXmlElement &element)
 
     double x = KUnit::parseValue(element.attribute("x"));
     double y = KUnit::parseValue(element.attribute("y"));
-    rect->setAbsolutePosition(QPointF(x, y), KoFlake::BottomLeftCorner);
+    rect->setAbsolutePosition(QPointF(x, y), KFlake::BottomLeftCorner);
 
     double rx  = KUnit::parseValue(element.attribute("rx"));
     double ry  = KUnit::parseValue(element.attribute("ry"));
@@ -770,7 +770,7 @@ KShape * ArtworkImport::loadPolygon(const KXmlElement &element)
 
     double x = KUnit::parseValue(element.attribute("x"));
     double y = KUnit::parseValue(element.attribute("y"));
-    polygon->setAbsolutePosition(QPointF(x, y), KoFlake::TopLeftCorner);
+    polygon->setAbsolutePosition(QPointF(x, y), KFlake::TopLeftCorner);
 
     loadCommon(polygon, element);
     loadStyle(polygon, element);
@@ -862,7 +862,7 @@ KShape * ArtworkImport::loadSinus(const KXmlElement &element)
     double w  = KUnit::parseValue(element.attribute("width"), 10.0);
     double h = KUnit::parseValue(element.attribute("height"), 10.0);
 
-    sinus->setAbsolutePosition(QPointF(x, y - h)/*, KoFlake::TopLeftCorner*/);
+    sinus->setAbsolutePosition(QPointF(x, y - h)/*, KFlake::TopLeftCorner*/);
     sinus->setSize(QSizeF(w / periods, h));
 
     loadCommon(sinus, element);
@@ -982,7 +982,7 @@ KShape * ArtworkImport::loadStar(const KXmlElement &element)
         paramStar->setTipRoundness(roundness);
         paramStar->setConvex(type == polygon);
 
-        QPointF centerPos = paramStar->absolutePosition(KoFlake::TopLeftCorner) + paramStar->starCenter();
+        QPointF centerPos = paramStar->absolutePosition(KFlake::TopLeftCorner) + paramStar->starCenter();
         QTransform m;
         m.translate(centerPos.x(), centerPos.y());
         m.rotate((angle + ArtworkGlobal::pi) * ArtworkGlobal::one_pi_180);

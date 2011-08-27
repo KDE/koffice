@@ -358,7 +358,7 @@ void ArtworkView::dropEvent(QDropEvent *e)
         if (! part())
             return;
 
-        if (d->canvas->resourceManager()->intResource(KoCanvasResource::ActiveColorTarget) == KoFlake::Foreground) {
+        if (d->canvas->resourceManager()->intResource(KoCanvasResource::ActiveColorTarget) == KFlake::Foreground) {
             QList<KShapeBorderBase*> borders;
             QList<KShape*> selectedShapes = selection->selectedShapes();
             foreach(KShape * shape, selectedShapes) {
@@ -592,7 +592,7 @@ void ArtworkView::selectionDistribute(KShapeDistributeCommand::Distribute distri
     if (! selection)
         return;
 
-    QList<KShape*> selectedShapes = selection->selectedShapes(KoFlake::TopLevelSelection);
+    QList<KShape*> selectedShapes = selection->selectedShapes(KFlake::TopLevelSelection);
     if (selectedShapes.count() < 2) return;
 
     KShapeDistributeCommand *cmd = new KShapeDistributeCommand(selectedShapes, distribute, selection->boundingRect());
@@ -1086,7 +1086,7 @@ void ArtworkView::selectionChanged()
     if (!shell())
         return;
     KSelection *selection = d->canvas->shapeManager()->selection();
-    int count = selection->selectedShapes(KoFlake::FullSelection).count();
+    int count = selection->selectedShapes(KFlake::FullSelection).count();
 
     d->closePath->setEnabled(false);
     d->combinePath->setEnabled(false);
@@ -1102,7 +1102,7 @@ void ArtworkView::selectionChanged()
         uint selectedPaths = 0;
         uint selectedParametrics = 0;
         // check for different shape types for enabling specific actions
-        foreach(KShape* shape, selection->selectedShapes(KoFlake::FullSelection)) {
+        foreach(KShape* shape, selection->selectedShapes(KFlake::FullSelection)) {
             if (dynamic_cast<KPathShape*>(shape)) {
                 KParameterShape * ps = dynamic_cast<KParameterShape*>(shape);
                 if (ps && ps->isParametricShape())

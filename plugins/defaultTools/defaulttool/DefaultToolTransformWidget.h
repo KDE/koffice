@@ -21,7 +21,7 @@
 #define DEFAULTTOOLTRANSFORMWIDGET_H
 
 #include <ui_DefaultToolTransformWidget.h>
-#include <KoFlake.h>
+#include <KFlake.h>
 
 #include <QMenu>
 

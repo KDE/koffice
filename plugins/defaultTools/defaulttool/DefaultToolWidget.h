@@ -22,7 +22,7 @@
 #define DEFAULTTOOLWIDGET_H
 
 #include <ui_DefaultToolWidget.h>
-#include <KoFlake.h>
+#include <KFlake.h>
 
 #include <QWidget>
 
@@ -37,7 +37,7 @@ public:
     void setUnit(const KUnit &unit);
 
 private slots:
-    void positionSelected(KoFlake::Position position);
+    void positionSelected(KFlake::Position position);
     void updatePosition();
     void positionHasChanged();
     void updateSize();

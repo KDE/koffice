@@ -232,33 +232,33 @@ QLineF KShapeConnectionPrivate::calculateShapeFalloutPrivate(const QPointF &begi
     // TODO snap the line to the 'grid' (10 pt grid is hardcoded in shape manager now)
     if (shape) {
         switch (policy.escapeDirection()) {
-        case KoFlake::EscapeAny: {
+        case KFlake::EscapeAny: {
             QPointF shapeCenter = shape->absolutePosition();
             QLineF outward(shapeCenter, a);
             outward.setLength(outward.length() + 10);
             b = outward.p2();
             break;
         }
-        case KoFlake::EscapeHorizontal: {
+        case KFlake::EscapeHorizontal: {
             QPointF shapeCenter = shape->absolutePosition();
             b.setX(b.x() + (shapeCenter.x() < b.x() ? 10 : -10));
             break;
         }
-        case KoFlake::EscapeLeft:
+        case KFlake::EscapeLeft:
             b.setX(b.x() - 10);
             break;
-        case KoFlake::EscapeRight:
+        case KFlake::EscapeRight:
             b.setX(b.x() + 10);
             break;
-        case KoFlake::EscapeVertical: {
+        case KFlake::EscapeVertical: {
             QPointF shapeCenter = shape->absolutePosition();
             b.setY(b.y() + (shapeCenter.y() < b.y() ? 10 : -10));
             break;
         }
-        case KoFlake::EscapeUp:
+        case KFlake::EscapeUp:
             b.setY(b.y() - 10);
             break;
-        case KoFlake::EscapeDown:
+        case KFlake::EscapeDown:
             b.setY(b.y() + 10);
             break;
         }

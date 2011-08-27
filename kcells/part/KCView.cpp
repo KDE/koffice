@@ -1011,7 +1011,7 @@ void KCView::recalcWorkSheet()
 void KCView::shapeSelectionChanged()
 {
     const KSelection* selection = d->canvas->shapeManager()->selection();
-    const QList<KShape*> shapes = selection->selectedShapes(KoFlake::StrippedSelection);
+    const QList<KShape*> shapes = selection->selectedShapes(KFlake::StrippedSelection);
 
     if (shapes.isEmpty()) {
         d->actions->shapeAnchor->setEnabled(false);
@@ -1453,7 +1453,7 @@ void KCView::copyAsText()
 void KCView::setShapeAnchoring(const QString& mode)
 {
     const KSelection* selection = d->canvas->shapeManager()->selection();
-    const QList<KShape*> shapes = selection->selectedShapes(KoFlake::StrippedSelection);
+    const QList<KShape*> shapes = selection->selectedShapes(KFlake::StrippedSelection);
     for (int i = 0; i < shapes.count(); ++i) {
         const KShape* shape = shapes[i];
         KCShapeApplicationData* data = dynamic_cast<KCShapeApplicationData*>(shape->applicationData());

@@ -539,7 +539,7 @@ KShapeConnection *KShapeManager::connectionAt(const QPointF &position)
     return sortedConnections.first();
 }
 
-KShape *KShapeManager::shapeAt(const QPointF &position, KoFlake::ShapeSelection selection, bool omitHiddenShapes)
+KShape *KShapeManager::shapeAt(const QPointF &position, KFlake::ShapeSelection selection, bool omitHiddenShapes)
 {
     d->updateTree();
     QList<KShape*> sortedShapes(d->tree.contains(position));
@@ -553,18 +553,18 @@ KShape *KShapeManager::shapeAt(const QPointF &position, KoFlake::ShapeSelection 
             continue;
 
         switch (selection) {
-        case KoFlake::ShapeOnTop:
+        case KFlake::ShapeOnTop:
             if (shape->isSelectable())
                 return shape;
-        case KoFlake::Selected:
+        case KFlake::Selected:
             if (d->selection->isSelected(shape))
                 return shape;
             break;
-        case KoFlake::Unselected:
+        case KFlake::Unselected:
             if (! d->selection->isSelected(shape))
                 return shape;
             break;
-        case KoFlake::NextUnselected:
+        case KFlake::NextUnselected:
             // we want an unselected shape
             if (d->selection->isSelected(shape))
                 continue;
@@ -579,7 +579,7 @@ KShape *KShapeManager::shapeAt(const QPointF &position, KoFlake::ShapeSelection 
     }
     // if we want the next unselected below a selected but there was none selected,
     // return the first found unselected shape
-    if (selection == KoFlake::NextUnselected && firstUnselectedShape)
+    if (selection == KFlake::NextUnselected && firstUnselectedShape)
         return firstUnselectedShape;
 
     if (d->selection->hitTest(position))

@@ -100,7 +100,7 @@ void SelectStrategy::handleMouseMove(const QPointF &mouseLocation, Qt::KeyboardM
             }
         }
     }
-    QPointF offset(mouseLocation - m_clickedShape->absolutePosition(KoFlake::TopLeftCorner));
+    QPointF offset(mouseLocation - m_clickedShape->absolutePosition(KFlake::TopLeftCorner));
     if (addOffset)
         dataStream << offset;
 

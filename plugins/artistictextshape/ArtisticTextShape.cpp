@@ -428,7 +428,7 @@ bool ArtisticTextShape::putOnPath( KPathShape * path )
     setTransformation( QTransform() );
     updateSizeAndPosition();
     // move to correct position
-    setAbsolutePosition( m_outlineOrigin, KoFlake::TopLeftCorner );
+    setAbsolutePosition( m_outlineOrigin, KFlake::TopLeftCorner );
     update();
 
     return true;
@@ -449,7 +449,7 @@ bool ArtisticTextShape::putOnPath( const QPainterPath &path )
     setTransformation( QTransform() );
     updateSizeAndPosition();
     // move to correct position
-    setAbsolutePosition( m_outlineOrigin, KoFlake::TopLeftCorner );
+    setAbsolutePosition( m_outlineOrigin, KFlake::TopLeftCorner );
     update();
 
     return true;

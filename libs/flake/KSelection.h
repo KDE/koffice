@@ -29,7 +29,7 @@
 
 #include "KShape.h"
 #include "KViewConverter.h"
-#include "KoFlake.h"
+#include "KFlake.h"
 
 #include "flake_export.h"
 
@@ -99,14 +99,14 @@ public:
      * @param strip if StrippedSelection, the returned list will not include any children
      *    of a container shape if the container-parent is itself also in the set.
      */
-    const QList<KShape*> selectedShapes(KoFlake::SelectionType strip = KoFlake::FullSelection) const;
+    const QList<KShape*> selectedShapes(KFlake::SelectionType strip = KFlake::FullSelection) const;
 
     /**
      * Return the first selected shape, or 0 if there is nothing selected.
      * @param strip if StrippedSelection, the returned list will not include any children
      *    of a grouped shape if the group-parent is itself also in the set.
      */
-    KShape *firstSelectedShape(KoFlake::SelectionType strip = KoFlake::FullSelection) const;
+    KShape *firstSelectedShape(KFlake::SelectionType strip = KFlake::FullSelection) const;
 
     /// return true if the shape is selected
     bool isSelected(const KShape *shape) const;

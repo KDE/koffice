@@ -26,7 +26,7 @@
 #include <QObject>
 #include <QSet>
 
-#include "KoFlake.h"
+#include "KFlake.h"
 #include "KShape.h"
 #include "flake_export.h"
 
@@ -137,7 +137,7 @@ public:
      * @param selection controls which shape is returned when more than one shape is at the specific point
      * @param omitHiddenShapes if true, only visible shapes are considered
      */
-    KShape *shapeAt(const QPointF &position, KoFlake::ShapeSelection selection = KoFlake::ShapeOnTop, bool omitHiddenShapes = true);
+    KShape *shapeAt(const QPointF &position, KFlake::ShapeSelection selection = KFlake::ShapeOnTop, bool omitHiddenShapes = true);
 
     KShapeConnection *connectionAt(const QPointF &position);
 

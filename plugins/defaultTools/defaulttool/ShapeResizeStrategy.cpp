@@ -34,11 +34,11 @@
 #include <limits>
 
 ShapeResizeStrategy::ShapeResizeStrategy(KToolBase *tool,
-        const QPointF &clicked, KoFlake::SelectionHandle direction)
+        const QPointF &clicked, KFlake::SelectionHandle direction)
     : KInteractionStrategy(tool), m_lastScale(1.0,1.0)
 {
     Q_ASSERT(tool->canvas()->shapeManager()->selection()->count() > 0);
-    QList<KShape*> selectedShapes = tool->canvas()->shapeManager()->selection()->selectedShapes(KoFlake::StrippedSelection);
+    QList<KShape*> selectedShapes = tool->canvas()->shapeManager()->selection()->selectedShapes(KFlake::StrippedSelection);
     foreach(KShape *shape, selectedShapes) {
         if (! shape->isEditable())
             continue;
@@ -64,29 +64,29 @@ ShapeResizeStrategy::ShapeResizeStrategy(KToolBase *tool,
     }
 
     switch (direction) {
-    case KoFlake::TopMiddleHandle:
-        m_start = 0.5 * (shp->absolutePosition(KoFlake::TopLeftCorner) + shp->absolutePosition(KoFlake::TopRightCorner));
+    case KFlake::TopMiddleHandle:
+        m_start = 0.5 * (shp->absolutePosition(KFlake::TopLeftCorner) + shp->absolutePosition(KFlake::TopRightCorner));
         m_top = true; m_bottom = false; m_left = false; m_right = false; break;
-    case KoFlake::TopRightHandle:
-        m_start = shp->absolutePosition(KoFlake::TopRightCorner);
+    case KFlake::TopRightHandle:
+        m_start = shp->absolutePosition(KFlake::TopRightCorner);
         m_top = true; m_bottom = false; m_left = false; m_right = true; break;
-    case KoFlake::RightMiddleHandle:
-        m_start = 0.5 * (shp->absolutePosition(KoFlake::TopRightCorner) + shp->absolutePosition(KoFlake::BottomRightCorner));
+    case KFlake::RightMiddleHandle:
+        m_start = 0.5 * (shp->absolutePosition(KFlake::TopRightCorner) + shp->absolutePosition(KFlake::BottomRightCorner));
         m_top = false; m_bottom = false; m_left = false; m_right = true; break;
-    case KoFlake::BottomRightHandle:
-        m_start = shp->absolutePosition(KoFlake::BottomRightCorner);
+    case KFlake::BottomRightHandle:
+        m_start = shp->absolutePosition(KFlake::BottomRightCorner);
         m_top = false; m_bottom = true; m_left = false; m_right = true; break;
-    case KoFlake::BottomMiddleHandle:
-        m_start = 0.5 * (shp->absolutePosition(KoFlake::BottomRightCorner) + shp->absolutePosition(KoFlake::BottomLeftCorner));
+    case KFlake::BottomMiddleHandle:
+        m_start = 0.5 * (shp->absolutePosition(KFlake::BottomRightCorner) + shp->absolutePosition(KFlake::BottomLeftCorner));
         m_top = false; m_bottom = true; m_left = false; m_right = false; break;
-    case KoFlake::BottomLeftHandle:
-        m_start = shp->absolutePosition(KoFlake::BottomLeftCorner);
+    case KFlake::BottomLeftHandle:
+        m_start = shp->absolutePosition(KFlake::BottomLeftCorner);
         m_top = false; m_bottom = true; m_left = true; m_right = false; break;
-    case KoFlake::LeftMiddleHandle:
-        m_start = 0.5 * (shp->absolutePosition(KoFlake::BottomLeftCorner) + shp->absolutePosition(KoFlake::TopLeftCorner));
+    case KFlake::LeftMiddleHandle:
+        m_start = 0.5 * (shp->absolutePosition(KFlake::BottomLeftCorner) + shp->absolutePosition(KFlake::TopLeftCorner));
         m_top = false; m_bottom = false; m_left = true; m_right = false; break;
-    case KoFlake::TopLeftHandle:
-        m_start = shp->absolutePosition(KoFlake::TopLeftCorner);
+    case KFlake::TopLeftHandle:
+        m_start = shp->absolutePosition(KFlake::TopLeftCorner);
         m_top = true; m_bottom = false; m_left = true; m_right = false; break;
     default:
          Q_ASSERT(0); // illegal 'corner'
@@ -236,7 +236,7 @@ QUndoCommand *ShapeResizeStrategy::createCommand(QUndoCommand *parent)
 
 void ShapeResizeStrategy::paint(QPainter &painter, const KViewConverter &converter)
 {
-    SelectionDecorator decorator (KoFlake::NoHandle, false, false);
+    SelectionDecorator decorator (KFlake::NoHandle, false, false);
     decorator.setSelection(tool()->canvas()->shapeManager()->selection());
     decorator.setHandleRadius(tool()->canvas()->resourceManager()->handleRadius());
     decorator.paint(painter, converter);

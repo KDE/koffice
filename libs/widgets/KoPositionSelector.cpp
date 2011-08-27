@@ -32,14 +32,14 @@
 class KoPositionSelector::Private {
 public:
     Private()
-        : position(KoFlake::TopLeftCorner)
+        : position(KFlake::TopLeftCorner)
     {
-        topLeft = createButton(KoFlake::TopLeftCorner);
+        topLeft = createButton(KFlake::TopLeftCorner);
         topLeft->setChecked(true);
-        topRight = createButton(KoFlake::TopRightCorner);
-        center = createButton(KoFlake::CenteredPosition);
-        bottomRight = createButton(KoFlake::BottomRightCorner);
-        bottomLeft = createButton(KoFlake::BottomLeftCorner);
+        topRight = createButton(KFlake::TopRightCorner);
+        center = createButton(KFlake::CenteredPosition);
+        bottomRight = createButton(KFlake::BottomRightCorner);
+        bottomLeft = createButton(KFlake::BottomLeftCorner);
     }
 
     QRadioButton *createButton(int id) {
@@ -50,7 +50,7 @@ public:
 
     QRadioButton *topLeft, *topRight, *center, *bottomRight, *bottomLeft;
     QButtonGroup buttonGroup;
-    KoFlake::Position position;
+    KFlake::Position position;
 };
 
 class RadioLayout : public QLayout {
@@ -187,33 +187,33 @@ KoPositionSelector::~KoPositionSelector() {
     delete d;
 }
 
-KoFlake::Position KoPositionSelector::position() const {
+KFlake::Position KoPositionSelector::position() const {
     return d->position;
 }
 
-void KoPositionSelector::setPosition(KoFlake::Position position) {
+void KoPositionSelector::setPosition(KFlake::Position position) {
     d->position = position;
     switch(d->position) {
-        case KoFlake::TopLeftCorner:
+        case KFlake::TopLeftCorner:
             d->topLeft->setChecked(true);
             break;
-        case KoFlake::TopRightCorner:
+        case KFlake::TopRightCorner:
             d->topRight->setChecked(true);
             break;
-        case KoFlake::CenteredPosition:
+        case KFlake::CenteredPosition:
             d->center->setChecked(true);
             break;
-        case KoFlake::BottomLeftCorner:
+        case KFlake::BottomLeftCorner:
             d->bottomLeft->setChecked(true);
             break;
-        case KoFlake::BottomRightCorner:
+        case KFlake::BottomRightCorner:
             d->bottomRight->setChecked(true);
             break;
     }
 }
 
 void KoPositionSelector::positionChanged(int position) {
-    d->position = static_cast<KoFlake::Position> (position);
+    d->position = static_cast<KFlake::Position> (position);
     emit positionSelected(d->position);
 }
 

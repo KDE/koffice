@@ -21,7 +21,7 @@
 #define SHAPESHEARSTRATEGY_H
 
 #include <KInteractionStrategy.h>
-#include <KoFlake.h>
+#include <KFlake.h>
 
 #include <QPointF>
 #include <QSizeF>
@@ -45,7 +45,7 @@ public:
      * @param clicked the initial point that the user depressed (in pt).
      * @param direction the handle that was grabbed
      */
-    ShapeShearStrategy(KToolBase *tool, const QPointF &clicked, KoFlake::SelectionHandle direction);
+    ShapeShearStrategy(KToolBase *tool, const QPointF &clicked, KFlake::SelectionHandle direction);
     virtual ~ShapeShearStrategy() {}
 
     void handleMouseMove(const QPointF &mouseLocation, Qt::KeyboardModifiers modifiers);

@@ -50,7 +50,7 @@ private slots:
 
     void widthChanged(qreal value);
     void heightChanged(qreal value);
-    void setGeometryAlignment(KoFlake::Position position);
+    void setGeometryAlignment(KFlake::Position position);
     void updateAspectRatio(bool);
 
 private:

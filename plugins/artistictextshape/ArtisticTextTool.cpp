@@ -249,7 +249,7 @@ void ArtisticTextTool::mousePressEvent( KPointerEvent *event )
     }
     if ( hit ) {
         QPointF pos = event->point;
-        pos -= m_currentShape->absolutePosition( KoFlake::TopLeftCorner );
+        pos -= m_currentShape->absolutePosition( KFlake::TopLeftCorner );
         const int len = m_currentShape->text().length();
         int hit = len;
         qreal mindist = DBL_MAX;

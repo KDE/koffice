@@ -259,7 +259,7 @@ void ArtworkFilterEffectsTool::activate(ToolActivation toolActivation, const QSe
         return;
     }
 
-    d->currentShape = canvas()->shapeManager()->selection()->firstSelectedShape(KoFlake::TopLevelSelection);
+    d->currentShape = canvas()->shapeManager()->selection()->firstSelectedShape(KFlake::TopLevelSelection);
     d->fillConfigSelector(d->currentShape, this);
 }
 
@@ -356,7 +356,7 @@ void ArtworkFilterEffectsTool::filterSelected(int index)
 
 void ArtworkFilterEffectsTool::selectionChanged()
 {
-    d->currentShape = canvas()->shapeManager()->selection()->firstSelectedShape(KoFlake::TopLevelSelection);
+    d->currentShape = canvas()->shapeManager()->selection()->firstSelectedShape(KFlake::TopLevelSelection);
     d->fillConfigSelector(d->currentShape, this);
 }
 

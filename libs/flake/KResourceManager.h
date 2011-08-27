@@ -58,7 +58,7 @@ enum CanvasResource {
     PageSize,           ///< The size of the (current) page in postscript points (QSizeF).
     Unit,               ///< The unit of this canvas (KUnit)
     CurrentPage,        ///< The current page number (int)
-    ActiveColorTarget,    ///< the active color target type see KoFlake::StyleType for valid values
+    ActiveColorTarget,    ///< the active color target type see KFlake::StyleType for valid values
     ArtworkStart = 1000,      ///< Base number for artwork specific values.
     KivioStart = 3000,       ///< Base number for kivio specific values.
     ShowcaseStart = 5000,  ///< Base number for Showcase specific values.

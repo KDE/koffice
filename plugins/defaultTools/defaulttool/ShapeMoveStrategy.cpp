@@ -37,7 +37,7 @@ ShapeMoveStrategy::ShapeMoveStrategy(KToolBase *tool, const QPointF &clicked)
     : KInteractionStrategy(tool),
     m_start(clicked)
 {
-    QList<KShape*> selectedShapes = tool->canvas()->shapeManager()->selection()->selectedShapes(KoFlake::TopLevelSelection);
+    QList<KShape*> selectedShapes = tool->canvas()->shapeManager()->selection()->selectedShapes(KFlake::TopLevelSelection);
     QRectF boundingRect;
     foreach(KShape *shape, selectedShapes) {
         if (! shape->isEditable())
@@ -50,7 +50,7 @@ ShapeMoveStrategy::ShapeMoveStrategy(KToolBase *tool, const QPointF &clicked)
     KSelection * selection = tool->canvas()->shapeManager()->selection();
     m_initialOffset = selection->absolutePosition( SelectionDecorator::hotPosition() ) - m_start;
     m_initialSelectionPosition = selection->position();
-    tool->canvas()->snapGuide()->setIgnoredShapes( selection->selectedShapes( KoFlake::FullSelection ) );
+    tool->canvas()->snapGuide()->setIgnoredShapes( selection->selectedShapes( KFlake::FullSelection ) );
 
     setStatusText(i18n("Press ALT to hold x- or y-position."));
 }
@@ -110,7 +110,7 @@ QUndoCommand* ShapeMoveStrategy::createCommand(QUndoCommand *parent)
 
 void ShapeMoveStrategy::paint( QPainter &painter, const KViewConverter &converter)
 {
-    SelectionDecorator decorator (KoFlake::NoHandle, false, false);
+    SelectionDecorator decorator (KFlake::NoHandle, false, false);
     decorator.setSelection(tool()->canvas()->shapeManager()->selection());
     decorator.setHandleRadius( tool()->canvas()->resourceManager()->handleRadius() );
     decorator.paint(painter, converter);

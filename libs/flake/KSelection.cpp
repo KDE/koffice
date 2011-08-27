@@ -261,15 +261,15 @@ QRectF KSelection::boundingRect() const
     return absoluteTransformation(0).mapRect(QRectF(QPointF(), size()));
 }
 
-const QList<KShape*> KSelection::selectedShapes(KoFlake::SelectionType strip) const
+const QList<KShape*> KSelection::selectedShapes(KFlake::SelectionType strip) const
 {
     Q_D(const KSelection);
     QList<KShape*> answer;
     // strip the child objects when there is also a parent included.
-    bool doStripping = strip == KoFlake::StrippedSelection;
+    bool doStripping = strip == KFlake::StrippedSelection;
     foreach(KShape *shape, d->selectedShapes) {
         KShapeContainer *container = shape->parent();
-        if (strip != KoFlake::TopLevelSelection && dynamic_cast<KShapeGroup*>(shape))
+        if (strip != KFlake::TopLevelSelection && dynamic_cast<KShapeGroup*>(shape))
             // since a KShapeGroup
             // guarentees all its children are selected at the same time as itself
             // is selected we will only return its children.
@@ -280,7 +280,7 @@ const QList<KShape*> KSelection::selectedShapes(KoFlake::SelectionType strip) co
                 add = false;
             container = container->parent();
         }
-        if (strip == KoFlake::TopLevelSelection && container && d->selectedShapes.contains(container))
+        if (strip == KFlake::TopLevelSelection && container && d->selectedShapes.contains(container))
             add = false;
         if (add)
             answer << shape;
@@ -302,7 +302,7 @@ bool KSelection::isSelected(const KShape *shape) const
     return false;
 }
 
-KShape *KSelection::firstSelectedShape(KoFlake::SelectionType strip) const
+KShape *KSelection::firstSelectedShape(KFlake::SelectionType strip) const
 {
     QList<KShape*> set = selectedShapes(strip);
     if (set.isEmpty())

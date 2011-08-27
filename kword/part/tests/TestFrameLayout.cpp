@@ -480,7 +480,7 @@ void TestFrameLayout::testCopyFramesForPage()
     shape = textshapeRotFS->frames()[1]->shape();
     QCOMPARE(shape->position().x(), 13.);
     QCOMPARE(shape->position().y(), 107. + page2.offsetInDocument());
-    QCOMPARE(shape->absolutePosition(KoFlake::TopRightCorner), QPointF(13 + 50, 107 + 50
+    QCOMPARE(shape->absolutePosition(KFlake::TopRightCorner), QPointF(13 + 50, 107 + 50
         + page2.offsetInDocument())); // 90° around center moves the top-right down
 
     // textShapeGeometryProtected

@@ -21,7 +21,7 @@
 #include "SvgGradientHelper.h"
 
 #include <cmath>
-#include <KoFlake.h>
+#include <KFlake.h>
 
 SvgGradientHelper::SvgGradientHelper()
         : m_gradient(0), m_gradientUnits(ObjectBoundingBox)
@@ -172,7 +172,7 @@ QGradient *SvgGradientHelper::convertGradient(const QGradient *originalGradient,
             const QConicalGradient *o = static_cast<const QConicalGradient*>(originalGradient);
             QConicalGradient *g = new QConicalGradient();
             g->setAngle(o->angle());
-            g->setCenter(KoFlake::toRelative(o->center(),size));
+            g->setCenter(KFlake::toRelative(o->center(),size));
             duplicatedGradient = g;
         }
         break;
@@ -180,8 +180,8 @@ QGradient *SvgGradientHelper::convertGradient(const QGradient *originalGradient,
         {
             const QLinearGradient *o = static_cast<const QLinearGradient*>(originalGradient);
             QLinearGradient *g = new QLinearGradient();
-            g->setStart(KoFlake::toRelative(o->start(),size));
-            g->setFinalStop(KoFlake::toRelative(o->finalStop(),size));
+            g->setStart(KFlake::toRelative(o->start(),size));
+            g->setFinalStop(KFlake::toRelative(o->finalStop(),size));
             duplicatedGradient = g;
         }
         break;
@@ -189,9 +189,9 @@ QGradient *SvgGradientHelper::convertGradient(const QGradient *originalGradient,
         {
             const QRadialGradient *o = static_cast<const QRadialGradient*>(originalGradient);
             QRadialGradient *g = new QRadialGradient();
-            g->setCenter(KoFlake::toRelative(o->center(),size));
-            g->setFocalPoint(KoFlake::toRelative(o->focalPoint(),size));
-            g->setRadius(KoFlake::toRelative(QPointF(o->radius(), 0.0),
+            g->setCenter(KFlake::toRelative(o->center(),size));
+            g->setFocalPoint(KFlake::toRelative(o->focalPoint(),size));
+            g->setRadius(KFlake::toRelative(QPointF(o->radius(), 0.0),
                          QSizeF(sqrt(size.width() * size.width() + size.height() * size.height()), 0.0)).x());
             duplicatedGradient = g;
         }

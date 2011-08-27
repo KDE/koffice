@@ -11,7 +11,7 @@ add_subdirectory(tests)
 add_subdirectory(pics)
 
 set(flake_SRCS
-    KoFlake.cpp
+    KFlake.cpp
     KCanvasBase.cpp
     KResourceManager.cpp
     KCanvasObserverBase.cpp
@@ -229,7 +229,7 @@ install(
     KDockRegistry.h
     KDrag.h
     KDragOdfSaveHelper.h
-    KoFlake.h
+    KFlake.h
     KFrameShape.h
     KGradientBackground.h
     KGuidesData.h
