@@ -22,7 +22,7 @@
 #include "KInlineObject.h"
 #include "KoBookmarkManager.h"
 #include "KVariableManager.h"
-#include "kotext_export.h"
+#include "kodftext_export.h"
 
 // Qt + kde
 #include <QHash>

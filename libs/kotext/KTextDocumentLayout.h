@@ -20,7 +20,7 @@
 #ifndef KTEXTDOCUMENTLAYOUT_H
 #define KTEXTDOCUMENTLAYOUT_H
 
-#include "kotext_export.h"
+#include "kodftext_export.h"
 
 #include "KTextDocument.h"
 

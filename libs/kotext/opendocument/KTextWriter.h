@@ -20,7 +20,7 @@
 #ifndef KTEXTWRITER_H
 #define KTEXTWRITER_H
 
-#include "kotext_export.h"
+#include "kodftext_export.h"
 
 class KShapeSavingContext;
 class KXmlWriter;

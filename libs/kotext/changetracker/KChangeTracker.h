@@ -20,7 +20,7 @@
 #define KCHANGETRACKER_H
 
 //KOffice includes
-#include "kotext_export.h"
+#include "kodftext_export.h"
 
 #include <KOdfGenericChange.h>
 #include <KOdfGenericChanges.h>

@@ -24,7 +24,7 @@
 #ifndef KSTYLEMANAGER_H
 #define KSTYLEMANAGER_H
 
-#include "kotext_export.h"
+#include "kodftext_export.h"
 
 #include <QObject>
 #include <QMetaType>

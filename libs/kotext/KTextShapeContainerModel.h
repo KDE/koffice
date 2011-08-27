@@ -22,7 +22,7 @@
 #include <KShapeContainerModel.h>
 #include <KShapeContainer.h>
 
-#include "kotext_export.h"
+#include "kodftext_export.h"
 
 class KTextAnchor;
 

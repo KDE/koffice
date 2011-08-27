@@ -20,7 +20,7 @@
 #ifndef K_DOCUMENT_Rdf_Base_H
 #define K_DOCUMENT_Rdf_Base_H
 
-#include "kotext_export.h"
+#include "kodftext_export.h"
 
 #include <QtCore/QObject>
 #include <QtCore/QMap>

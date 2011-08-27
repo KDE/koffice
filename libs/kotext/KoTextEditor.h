@@ -21,7 +21,7 @@
 #ifndef KODFTEXTEDITOR_H
 #define KODFTEXTEDITOR_H
 
-#include "kotext_export.h"
+#include "kodftext_export.h"
 
 #include <KOdfGenericChange.h>
 #include "KoText.h"

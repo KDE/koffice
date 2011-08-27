@@ -19,7 +19,7 @@
 #ifndef KINLINEOBJECTBASE_H
 #define KINLINEOBJECTBASE_H
 
-#include "kotext_export.h"
+#include "kodftext_export.h"
 
 class QTextDocument;
 class QVariant;

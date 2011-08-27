@@ -21,7 +21,7 @@
 #define KTEXTPASTE_H
 
 #include <KOdfPasteBase.h>
-#include "kotext_export.h"
+#include "kodftext_export.h"
 
 class QTextCursor;
 class KTextShapeData;

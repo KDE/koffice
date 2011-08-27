@@ -20,7 +20,7 @@
 #ifndef KOFIND_H
 #define KOFIND_H
 
-#include "kotext_export.h"
+#include "kodftext_export.h"
 
 #include <QObject>
 

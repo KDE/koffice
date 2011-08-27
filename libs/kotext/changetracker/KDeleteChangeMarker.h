@@ -20,7 +20,7 @@
 #ifndef KDELETECHANGEMARKER_H
 #define KDELETECHANGEMARKER_H
 
-#include "kotext_export.h"
+#include "kodftext_export.h"
 
 #include <KInlineObject.h>
 #include <QTextFormat>

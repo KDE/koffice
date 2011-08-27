@@ -22,7 +22,7 @@ the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
 #define KTEXTSHAREDSAVINGDATA_H
 
 #include <KSharedSavingData.h>
-#include "kotext_export.h"
+#include "kodftext_export.h"
 
 #include <QMap>
 

@@ -20,7 +20,7 @@
 #ifndef KTEXTSHAPESAVINGCONTEXT_H
 #define KTEXTSHAPESAVINGCONTEXT_H
 
-#include "kotext_export.h"
+#include "kodftext_export.h"
 
 #include <KShapeSavingContext.h>
 

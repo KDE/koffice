@@ -25,7 +25,7 @@
 
 #include "KoText.h"
 #include "KOdfBorders.h"
-#include "kotext_export.h"
+#include "kodftext_export.h"
 
 #include <QObject>
 #include <QVector>

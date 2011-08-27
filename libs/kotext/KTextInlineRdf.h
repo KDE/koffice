@@ -20,7 +20,7 @@
 #ifndef K_TEXT_INLINE_RDF_H
 #define K_TEXT_INLINE_RDF_H
 
-#include "kotext_export.h"
+#include "kodftext_export.h"
 
 #include <QTextBlockUserData>
 #include <QTextTableCell>

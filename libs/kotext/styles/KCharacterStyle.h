@@ -29,7 +29,7 @@
 #include <QVariant>
 #include <QString>
 #include <QTextCharFormat>
-#include "kotext_export.h"
+#include "kodftext_export.h"
 
 
 class StylePrivate;

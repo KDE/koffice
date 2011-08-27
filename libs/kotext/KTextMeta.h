@@ -22,7 +22,7 @@
 #define KTEXTMETA_H
 
 #include "KInlineObject.h"
-#include "kotext_export.h"
+#include "kodftext_export.h"
 
 class KShape;
 class QTextDocument;

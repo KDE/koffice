@@ -26,7 +26,7 @@
 
 #include <QList>
 #include "styles/KListLevelProperties.h"
-#include "kotext_export.h"
+#include "kodftext_export.h"
 
 class QString;
 class KOdfLoadingContext;

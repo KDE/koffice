@@ -19,7 +19,7 @@
 #ifndef KTABLEFORMAT_H
 #define KTABLEFORMAT_H
 
-#include "kotext_export.h"
+#include "kodftext_export.h"
 
 #include <QSharedDataPointer>
 #include <QMap>

@@ -20,7 +20,7 @@
 #ifndef KODFTEXT_H
 #define KODFTEXT_H
 
-#include "kotext_export.h"
+#include "kodftext_export.h"
 
 #include <KResourceManager.h>
 

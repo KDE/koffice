@@ -22,7 +22,7 @@
 
 #include <KDragOdfSaveHelper.h>
 
-#include "kotext_export.h"
+#include "kodftext_export.h"
 
 class KTextShapeData;
 class KXmlWriter;

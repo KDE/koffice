@@ -20,7 +20,7 @@
 #ifndef KTEXTDRAG_H
 #define KTEXTDRAG_H
 
-#include "kotext_export.h"
+#include "kodftext_export.h"
 
 
 class QMimeData;

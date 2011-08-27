@@ -21,7 +21,7 @@
 #ifndef KTEXTBLOCKPAINTSTRATEGYBASE_H
 #define KTEXTBLOCKPAINTSTRATEGYBASE_H
 
-#include "kotext_export.h"
+#include "kodftext_export.h"
 
 #include <QBrush>
 

@@ -20,7 +20,7 @@
 #ifndef KTABLECOLUMNANDROWSTYLEMANAGER_H
 #define KTABLECOLUMNANDROWSTYLEMANAGER_H
 
-#include "kotext_export.h"
+#include "kodftext_export.h"
 
 #include <QMetaType>
 #include <QExplicitlySharedDataPointer>

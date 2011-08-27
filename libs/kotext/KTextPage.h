@@ -20,7 +20,7 @@
 #ifndef KTEXTPAGE_H
 #define KTEXTPAGE_H
 
-#include "kotext_export.h"
+#include "kodftext_export.h"
 
 /**
  * Interface for a single OpenDocumentText page.

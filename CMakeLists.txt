@@ -271,7 +271,7 @@ set(FLAKE_INCLUDES ${CMAKE_SOURCE_DIR}/libs/flake
                    ${CMAKE_SOURCE_DIR}/libs/flake/tools
                    ${CMAKE_BINARY_DIR}/libs/flake)
 
-# KoText depends on flake
+# KOdfText depends on flake
 set(KODFTEXT_INCLUDES ${CMAKE_SOURCE_DIR}/libs/kotext
                    ${CMAKE_BINARY_DIR}/libs/kotext
                    ${CMAKE_SOURCE_DIR}/libs/kotext/changetracker

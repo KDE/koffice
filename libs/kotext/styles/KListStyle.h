@@ -21,7 +21,7 @@
 #ifndef KLISTSTYLE_H
 #define KLISTSTYLE_H
 
-#include "kotext_export.h"
+#include "kodftext_export.h"
 
 #include <QTextFormat>
 #include <QMap>

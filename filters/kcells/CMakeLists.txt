@@ -1,5 +1,5 @@
 include_directories(
-    ${KOTEXT_INCLUDES}
+    ${KODFTEXT_INCLUDES}
 )
 
 add_subdirectory( applixspread )

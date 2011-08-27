@@ -21,7 +21,7 @@
 #ifndef KOBOOKMARKMANAGER_H
 #define KOBOOKMARKMANAGER_H
 
-#include "kotext_export.h"
+#include "kodftext_export.h"
 
 #include <QList>
 

@@ -23,7 +23,7 @@
 
 #include <KOdfGenericChange.h>
 
-#include "kotext_export.h"
+#include "kodftext_export.h"
 
 class QTextFormat;
 class QString;

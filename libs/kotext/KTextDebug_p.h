@@ -31,7 +31,7 @@
 // We mean it.
 //
 
-#include "kotext_export.h"
+#include "kodftext_export.h"
 
 class QTextDocument;
 class QTextFrame;

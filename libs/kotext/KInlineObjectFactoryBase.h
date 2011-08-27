@@ -23,7 +23,7 @@
 #include <QString>
 #include <QObject>
 
-#include "kotext_export.h"
+#include "kodftext_export.h"
 
 class KInlineObject;
 class InlineObjectFactoryPrivate;

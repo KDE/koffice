@@ -20,7 +20,7 @@
 #ifndef KO_TEXT_RDF_CORE_H
 #define KO_TEXT_RDF_CORE_H
 
-#include "kotext_export.h"
+#include "kodftext_export.h"
 
 // this file can only be used by code that is built
 // with soprano enabled.

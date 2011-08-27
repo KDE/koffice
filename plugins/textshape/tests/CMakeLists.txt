@@ -104,7 +104,7 @@ set(TestStylesModel_test_SRCS
     ../dialogs/StylesModel.cpp
 )
 kde4_add_unit_test(TestStylesModel TESTNAME shapes-text-TestStylesModel ${TestStylesModel_test_SRCS})
-target_link_libraries(TestStylesModel kotext ${EXTRA_LIBS} ${QT_QTTEST_LIBRARY})
+target_link_libraries(TestStylesModel kodftext ${EXTRA_LIBS} ${QT_QTTEST_LIBRARY})
 
 ########### next target ###############
 
@@ -118,7 +118,7 @@ set(TestTableLayout_test_SRCS
     ../ToCGenerator.cpp
 )
 kde4_add_unit_test(TestTableLayout TESTNAME shapes-text-TestTableLayout ${TestTableLayout_test_SRCS})
-target_link_libraries(TestTableLayout kotext komain ${QT_QTTEST_LIBRARY})
+target_link_libraries(TestTableLayout kodftext komain ${QT_QTTEST_LIBRARY})
 
 ########### next target ###############
 
@@ -132,7 +132,7 @@ set(TestSections_test_SRCS
     ../ToCGenerator.cpp
 )
 kde4_add_unit_test(TestSections TESTNAME shapes-text-TestSections ${TestSections_test_SRCS})
-target_link_libraries(TestSections kotext ${EXTRA_LIBS} ${QT_QTTEST_LIBRARY})
+target_link_libraries(TestSections kodftext ${EXTRA_LIBS} ${QT_QTTEST_LIBRARY})
 
 ########### next target ###############
 
@@ -252,5 +252,5 @@ set(TestChangeTrackedDelete_test_SRCS
     ../ToCGenerator.cpp
 )
 kde4_add_unit_test(TestChangeTrackedDelete TESTNAME shapes-text-TestChangeTrackedDelete ${TestChangeTrackedDelete_test_SRCS})
-target_link_libraries(TestChangeTrackedDelete ${EXTRA_LIBS} komain kotext ${QT_QTTEST_LIBRARY})
+target_link_libraries(TestChangeTrackedDelete ${EXTRA_LIBS} komain kodftext ${QT_QTTEST_LIBRARY})
 

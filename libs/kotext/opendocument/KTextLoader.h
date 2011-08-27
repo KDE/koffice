@@ -30,7 +30,7 @@
 
 #include <QObject>
 
-#include "kotext_export.h"
+#include "kodftext_export.h"
 
 class KShapeLoadingContext;
 class KShape;

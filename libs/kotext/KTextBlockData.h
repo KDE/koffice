@@ -22,7 +22,7 @@
 
 #include <QTextBlockUserData>
 
-#include "kotext_export.h"
+#include "kodftext_export.h"
 
 class KTextBlockBorderData;
 class KTextBlockPaintStrategyBase;

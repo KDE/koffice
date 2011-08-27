@@ -21,7 +21,7 @@
 
 #include <KGenericRegistry.h>
 #include <KInlineObjectFactoryBase.h>
-#include "kotext_export.h"
+#include "kodftext_export.h"
 #include <QObject>
 #include <QList>
 

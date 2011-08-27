@@ -19,7 +19,7 @@
 #ifndef KVARIABLEMANAGER_H
 #define KVARIABLEMANAGER_H
 
-#include "kotext_export.h"
+#include "kodftext_export.h"
 
 #include <QObject>
 #include <QString>
