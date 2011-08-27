@@ -25,12 +25,6 @@ target_link_libraries(
     kowmf
     artworkcommon
     artworkui
-    pigmentcms
-    komain
-    flake
-    ${KDE4_KDECORE_LIBS}
-    ${QT_QTGUI_LIBRARY}
-    ${QT_QT3SUPPORT_LIBRARY}
     )
 
 install(TARGETS wmfexport  DESTINATION ${PLUGIN_INSTALL_DIR})
