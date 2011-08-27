@@ -80,7 +80,7 @@ The list of libraries that this applies to is;
  * kodf
  * pigment
  * kflake
- * kotext
+ * kodftext
 
 on top of the above list of guidelines there are some more for these that have
 to be taken into account when modifying them or adding new code.
