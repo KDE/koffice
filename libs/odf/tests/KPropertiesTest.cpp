@@ -16,12 +16,12 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-#include "KoPropertiesTest.h"
+#include "KPropertiesTest.h"
 
 #include <qtest_kde.h>
 #include <KProperties.h>
 
-void KoPropertiesTest::testDeserialization()
+void KPropertiesTest::testDeserialization()
 {
     QString test = "";
     KProperties props;
@@ -43,7 +43,7 @@ void KoPropertiesTest::testDeserialization()
 
 }
 
-void KoPropertiesTest::testRoundTrip()
+void KPropertiesTest::testRoundTrip()
 {
     KProperties props;
     props.setProperty("string", "string");
@@ -54,7 +54,7 @@ void KoPropertiesTest::testRoundTrip()
     props.setProperty("bool",  false);
     props.setProperty("qreal",  1.38);
 
-    QString stored = props.store("KoPropertiesTest");
+    QString stored = props.store("KPropertiesTest");
     KProperties restored;
     restored.load(stored);
 
@@ -68,7 +68,7 @@ void KoPropertiesTest::testRoundTrip()
 
 }
 
-void KoPropertiesTest::testProperties()
+void KPropertiesTest::testProperties()
 {
     KProperties props;
     QVERIFY(props.isEmpty());
@@ -122,7 +122,7 @@ bool checkProps(const KProperties & props)
     return (props.value("bla") == 1);
 }
 
-void KoPropertiesTest::testPassAround()
+void KPropertiesTest::testPassAround()
 {
     KProperties props;
     props.setProperty("bla", 1);
@@ -141,5 +141,5 @@ void KoPropertiesTest::testPassAround()
 
 }
 
-QTEST_KDEMAIN(KoPropertiesTest, NoGUI)
-#include <KoPropertiesTest.moc>
+QTEST_KDEMAIN(KPropertiesTest, NoGUI)
+#include <KPropertiesTest.moc>
