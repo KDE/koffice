@@ -49,11 +49,11 @@ target_link_libraries(storedroptest kodf  ${QT_QTGUI_LIBRARY} ${KDE4_KDEUI_LIBS}
 
 ########### next target ###############
 
-set(kodomtest_SRCS kodomtest.cpp )
+set(kxmldomtest_SRCS KXmlDomTest.cpp )
 
-kde4_add_unit_test(kodomtest TESTNAME libs-store-kodomtest ${kodomtest_SRCS})
+kde4_add_unit_test(KXmlDomTest TESTNAME libs-store-kxmldomtest ${kxmldomtest_SRCS})
 
-target_link_libraries(kodomtest kodf ${QT_QTTEST_LIBRARY} ${QT_QTGUI_LIBRARY} ${KDE4_KDEUI_LIBS} )
+target_link_libraries(KXmlDomTest kodf ${QT_QTTEST_LIBRARY} ${QT_QTGUI_LIBRARY} ${KDE4_KDEUI_LIBS} )
 
 ########### next target ###############
 
