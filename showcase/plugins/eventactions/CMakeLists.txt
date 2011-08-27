@@ -17,10 +17,8 @@ kde4_add_plugin(showcaseeventactions ${showcaseeventactions_PART_SRCS})
 target_link_libraries(
     showcaseeventactions
     showcaseprivate
-    flake
     ${KDE4_KIO_LIBRARY}
     ${KDE4_PHONON_LIBRARY}
-    ${QT_QTGUI_LIBRARY}
     )
 
 install(TARGETS showcaseeventactions  DESTINATION ${PLUGIN_INSTALL_DIR})

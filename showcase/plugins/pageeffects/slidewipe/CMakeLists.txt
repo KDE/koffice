@@ -15,15 +15,7 @@ SCSlideWipeToTopStrategy.cpp
 
 kde4_add_plugin(showcase_pageeffect_slidewipe ${showcase_pageeffect_slidewipe_PART_SRCS})
 
-target_link_libraries(
-    showcase_pageeffect_slidewipe
-    showcaseprivate
-    flake
-    
-    ${KDE4_KDECORE_LIBS}
-    ${QT_QTCORE_LIBRARY}
-    ${QT_QTGUI_LIBRARY}    
-    )
+target_link_libraries(showcase_pageeffect_slidewipe showcaseprivate)
 
 install(TARGETS showcase_pageeffect_slidewipe  DESTINATION ${PLUGIN_INSTALL_DIR})
 
