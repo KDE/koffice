@@ -64,7 +64,7 @@ enum CanvasResource {
     ShowcaseStart = 5000,  ///< Base number for Showcase specific values.
     KCellsStart = 7000,     ///< Base number for kcells specific values.
     KWordStart = 8000,        ///< Base number for kword specific values.
-    KoPageAppStart = 9000    ///< Base number for KoPageApp specific values.
+    KPageAppStart = 9000    ///< Base number for KoPageApp specific values.
 };
 
 }
@@ -90,7 +90,7 @@ enum DocumentResource {
     ShowcaseStart = 5000,  ///< Base number for Showcase specific values.
     KCellsStart = 7000,     ///< Base number for kcells specific values.
     KWordStart = 8000,       ///< Base number for kword specific values.
-    KoPageAppStart = 9000,   ///< Base number for KoPageApp specific values.
+    KPageAppStart = 9000,   ///< Base number for KoPageApp specific values.
     KoTextStart = 10000      ///< Base number for KOdfText specific values.
 };
 }
