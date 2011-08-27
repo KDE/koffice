@@ -200,17 +200,6 @@ install( FILES
 
 install(
     FILES
-    commands/KParameterToPathCommand.h
-    commands/KPathCombineCommand.h
-    commands/KPathControlPointMoveCommand.h
-    commands/KPathFillRuleCommand.h
-    commands/KPathPointInsertCommand.h
-    commands/KPathPointMergeCommand.h
-    commands/KPathPointMoveCommand.h
-    commands/KPathPointRemoveCommand.h
-    commands/KPathReverseCommand.h
-    commands/KPathSegmentTypeCommand.h
-    commands/KPathSeparateCommand.h
     commands/KShapeAlignCommand.h
     commands/KShapeBackgroundCommand.h
     commands/KShapeBorderCommand.h
@@ -228,7 +217,6 @@ install(
     commands/KShapeTransformCommand.h
     commands/KShapeTransparencyCommand.h
     commands/KShapeUngroupCommand.h
-    commands/KSubpathRemoveCommand.h
     flake_export.h
     KCanvasBase.h
     KCanvasController.h
@@ -252,13 +240,7 @@ install(
     KLineBorder.h
     KLoadingShapeUpdater.h
     KoOdfWorkaround.h
-    KParameterShape.h
     KPasteController.h
-    KPathPointData.h
-    KPathPoint.h
-    KPathSegment.h
-    KPathShape.h
-    KPathShapeLoader.h
     KPatternBackground.h
     KPointerEvent.h
     KPostscriptPaintDevice.h
@@ -321,6 +303,12 @@ install(
     KEventActionFactoryBase.h
     KEventAction.h
     KEventActionRegistry.h
+    KParameterShape.h
+    KPathPointData.h
+    KPathPoint.h
+    KPathSegment.h
+    KPathShape.h
+    KPathShapeLoader.h
     KShapePainter.h
     KTextOnShapeContainer.h
     KoPluginLoader.h
@@ -329,7 +317,19 @@ install(
 
     commands/KEventActionAddCommand.h
     commands/KEventActionRemoveCommand.h
+    commands/KParameterToPathCommand.h
+    commands/KPathCombineCommand.h
+    commands/KPathControlPointMoveCommand.h
+    commands/KPathFillRuleCommand.h
+    commands/KPathPointInsertCommand.h
+    commands/KPathPointMergeCommand.h
+    commands/KPathPointMoveCommand.h
+    commands/KPathPointRemoveCommand.h
+    commands/KPathReverseCommand.h
+    commands/KPathSegmentTypeCommand.h
+    commands/KPathSeparateCommand.h
     commands/KShapeShadowCommand.h
+    commands/KSubpathRemoveCommand.h
 
     DESTINATION
     ${INCLUDE_INSTALL_DIR}/private COMPONENT Devel
