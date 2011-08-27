@@ -24,7 +24,7 @@
 //#include <KResourceManager.h>
 #include "Showcase.h"
 #include <KoPALoadingContext.h>
-#include <KoOdfWorkaround.h>
+#include <KOdfWorkaround.h>
 #include <kdebug.h>
 
 SCMasterPage::SCMasterPage()
@@ -43,11 +43,11 @@ KoPageApp::PageType SCMasterPage::pageType() const
 bool SCMasterPage::loadOdf(const KXmlElement &element, KShapeLoadingContext &context)
 {
 #ifndef NWORKAROUND_ODF_BUGS
-    KoOdfWorkaround::setFixPresentationPlaceholder(true, context);
+    KOdfWorkaround::setFixPresentationPlaceholder(true, context);
 #endif
     bool retval = KoPAPageBase::loadOdf(element, context);
 #ifndef NWORKAROUND_ODF_BUGS
-    KoOdfWorkaround::setFixPresentationPlaceholder(false, context);
+    KOdfWorkaround::setFixPresentationPlaceholder(false, context);
 #endif
     return retval;
 }

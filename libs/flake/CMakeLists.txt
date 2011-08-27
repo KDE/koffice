@@ -95,7 +95,7 @@ set(flake_SRCS
     KImageData.cpp
     KImageData_p.cpp
     KImageCollection.cpp
-    KoOdfWorkaround.cpp
+    KOdfWorkaround.cpp
     KFilterEffect.cpp
     KFilterEffectStack.cpp
     KFilterEffectFactoryBase.cpp
@@ -239,7 +239,7 @@ install(
     KInsets.h
     KLineBorder.h
     KLoadingShapeUpdater.h
-    KoOdfWorkaround.h
+    KOdfWorkaround.h
     KPasteController.h
     KPatternBackground.h
     KPointerEvent.h

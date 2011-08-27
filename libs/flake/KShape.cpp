@@ -45,7 +45,7 @@
 #include "KShapeShadow.h"
 #include "KEventAction.h"
 #include "KEventActionRegistry.h"
-#include "KoOdfWorkaround.h"
+#include "KOdfWorkaround.h"
 #include "KFilterEffectStack.h"
 
 #include <KXmlReader.h>
@@ -1226,7 +1226,7 @@ KShapeBackgroundBase *KShape::loadOdfFill(KShapeLoadingContext &context) const
         bg = new KPatternBackground(context.imageCollection());
 #ifndef NWORKAROUND_ODF_BUGS
     } else if (fill.isEmpty()) {
-         bg = KoOdfWorkaround::fixBackgroundColor(this, context);
+         bg = KOdfWorkaround::fixBackgroundColor(this, context);
          return bg;
 #endif
     } else {
@@ -1256,7 +1256,7 @@ KShapeBorderBase *KShape::loadOdfStroke(const KXmlElement &element, KShapeLoadin
 
 
 #ifndef NWORKAROUND_ODF_BUGS
-        KoOdfWorkaround::fixPenWidth(pen, context);
+        KOdfWorkaround::fixPenWidth(pen, context);
 #endif
         KLineBorder *border = new KLineBorder();
         border->setPen(pen);
@@ -1264,7 +1264,7 @@ KShapeBorderBase *KShape::loadOdfStroke(const KXmlElement &element, KShapeLoadin
 #ifndef NWORKAROUND_ODF_BUGS
     } else if (stroke.isEmpty()) {
         QPen pen;
-        if (KoOdfWorkaround::fixMissingStroke(pen, element, context, this)) {
+        if (KOdfWorkaround::fixMissingStroke(pen, element, context, this)) {
             KLineBorder *border = new KLineBorder();
 
             // FIXME: (make it possible to) use a cosmetic pen

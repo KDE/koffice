@@ -22,7 +22,7 @@
 
 #include <KShapeSavingContext.h>
 #include <KXmlWriter.h>
-#include <KoOdfWorkaround.h>
+#include <KOdfWorkaround.h>
 
 #include <QPainter>
 
@@ -61,7 +61,7 @@ bool SCPlaceholderShape::loadOdf(const KXmlElement &element, KShapeLoadingContex
 {
     loadOdfAttributes(element, context, OdfAllAttributes);
 #ifndef NWORKAROUND_ODF_BUGS
-    KoOdfWorkaround::fixPresentationPlaceholder(this);
+    KOdfWorkaround::fixPresentationPlaceholder(this);
 #endif
 
     delete m_strategy;

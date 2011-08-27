@@ -38,11 +38,11 @@ class KColorBackground;
  *
  * @code
  * #ifndef NWORKAROUND_ODF_BUGS
- *     KoOdfWorkaround::fixPenWidth(pen, context);
+ *     KOdfWorkaround::fixPenWidth(pen, context);
  * #endif
  * @endcode
  */
-namespace KoOdfWorkaround
+namespace KOdfWorkaround
 {
     /**
      * OpenOffice handles a line with the width of 0 as a cosmetic line but in svg it makes the line invisible.
