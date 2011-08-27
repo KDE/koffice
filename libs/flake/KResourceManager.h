@@ -72,7 +72,7 @@ enum CanvasResource {
 /**
  * The KDocumentResource contains a set of per-document
  * properties.
- * \sa KResourceManager KoShapeCollection::resourceManager()
+ * \sa KResourceManager KShapeController::resourceManager()
  */
 namespace KDocumentResource
 {
