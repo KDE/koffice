@@ -69,8 +69,8 @@ set(kopropertiestest_SRCS KoPropertiesTest.cpp )
 kde4_add_unit_test(KoPropertiesTest TESTNAME libs-kobase-KoPropertiesTest ${kopropertiestest_SRCS})
 target_link_libraries(KoPropertiesTest  ${KDE4_KDEUI_LIBS} kodf ${QT_QTTEST_LIBRARY})
 
-set(TestKoUnit_SRCS TestKoUnit.cpp)
-kde4_add_unit_test(TestKoUnit TESTNAME libs-kobase-TestKoUnit ${TestKoUnit_SRCS})
-target_link_libraries(TestKoUnit kodf ${QT_QTTEST_LIBRARY})
+set(TestKoUnit_SRCS TestKUnit.cpp)
+kde4_add_unit_test(TestKUnit TESTNAME libs-kobase-TestKUnit ${TestKoUnit_SRCS})
+target_link_libraries(TestKUnit kodf ${QT_QTTEST_LIBRARY})
 
 ########### end ###############

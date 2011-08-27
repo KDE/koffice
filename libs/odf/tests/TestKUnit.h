@@ -23,7 +23,7 @@
 
 #include <QtTest/QtTest>
 
-class TestKoUnit : public QObject
+class TestKUnit : public QObject
 {
     Q_OBJECT
 private slots:
