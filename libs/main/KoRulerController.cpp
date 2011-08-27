@@ -18,7 +18,7 @@
  */
 
 #include "KoRulerController.h"
-#include "KoText.h"
+#include "KOdfText.h"
 #include "styles/KParagraphStyle.h"
 
 #include <KResourceManager.h>
@@ -36,7 +36,7 @@
 
 #include <KoRuler.h>
 
-static int compareTabs(KoText::Tab &tab1, KoText::Tab &tab2)
+static int compareTabs(KOdfText::Tab &tab1, KOdfText::Tab &tab2)
 {
     return tab1.position < tab2.position;
 }
@@ -61,14 +61,14 @@ public:
     }
 
     void canvasResourceChanged(int key) {
-        if (key == KoText::CurrentTextDocument) {
+        if (key == KOdfText::CurrentTextDocument) {
             // so, text doc has changed, lets disconnect from prev.
             QTextDocument *doc = textDocument.data();
             if (doc) {
                 disconnect(doc, SIGNAL(contentsChange(int,int,int)),
                         q, SLOT(textChange(int,int,int)));
             }
-            QVariant docVar = resourceManager->resource(KoText::CurrentTextDocument);
+            QVariant docVar = resourceManager->resource(KOdfText::CurrentTextDocument);
             if (docVar.isNull()) {
                 textDocument.clear();
             } else {
@@ -77,7 +77,7 @@ public:
                 connect(doc, SIGNAL(contentsChange(int,int,int)),
                         q, SLOT(textChange(int,int,int)));
             }
-        } else if (key != KoText::CurrentTextPosition) {
+        } else if (key != KOdfText::CurrentTextPosition) {
             return;
         }
         updateGui();
@@ -110,7 +110,7 @@ public:
         QVariant variant = format.property(KParagraphStyle::TabPositions);
         if (! variant.isNull()) {
             foreach(const QVariant &var, qvariant_cast<QList<QVariant> >(variant)) {
-                KoText::Tab textTab = var.value<KoText::Tab>();
+                KOdfText::Tab textTab = var.value<KOdfText::Tab>();
                 KoRuler::Tab tab;
                 tab.position = textTab.position;
                 tab.type = textTab.type;
@@ -135,14 +135,14 @@ public:
     }
 
     void tabChanged(int originalIndex, KoRuler::Tab *tab) {
-        QVariant docVar = resourceManager->resource(KoText::CurrentTextDocument);
+        QVariant docVar = resourceManager->resource(KOdfText::CurrentTextDocument);
         if (docVar.isNull())
             return;
         QTextDocument *doc = static_cast<QTextDocument*>(docVar.value<void*>());
         if (doc == 0)
             return;
-        const int position = resourceManager->intResource(KoText::CurrentTextPosition);
-        const int anchor = resourceManager->intResource(KoText::CurrentTextAnchor);
+        const int position = resourceManager->intResource(KOdfText::CurrentTextPosition);
+        const int anchor = resourceManager->intResource(KOdfText::CurrentTextAnchor);
 
         QTextCursor cursor(doc);
         cursor.setPosition(anchor);
@@ -158,7 +158,7 @@ qDebug() << tabList.count();
                 currentTab = tabList[originalTabIndex];
                 currentTabIndex = originalTabIndex;
             } else if (originalTabIndex == -1 && tab) { // new tab.
-                currentTab = KoText::Tab();
+                currentTab = KOdfText::Tab();
                 currentTab.type = tab->type;
                 if (tab->type == QTextOption::DelimiterTab)
                     currentTab.delimiter = QLocale::system().decimalPoint(); // TODO check language of text
@@ -185,10 +185,10 @@ qDebug() << tabList.count();
         }
 
         QTextBlockFormat bf;
-        QList<KoText::Tab> sortedList = tabList;
+        QList<KOdfText::Tab> sortedList = tabList;
         qSort(sortedList.begin(), sortedList.end(), compareTabs);
         QList<QVariant> list;
-        foreach(const KoText::Tab &tab, sortedList) {
+        foreach(const KOdfText::Tab &tab, sortedList) {
             QVariant v;
             v.setValue(tab);
             list.append(v);
@@ -200,13 +200,13 @@ qDebug() << tabList.count();
     }
 
     QTextBlock currentBlock() {
-        QVariant docVar = resourceManager->resource(KoText::CurrentTextDocument);
+        QVariant docVar = resourceManager->resource(KOdfText::CurrentTextDocument);
         if (docVar.isNull())
             return QTextBlock();
         QTextDocument *doc = static_cast<QTextDocument*>(docVar.value<void*>());
         if (doc == 0)
             return QTextBlock();
-        return doc->findBlock(resourceManager->intResource(KoText::CurrentTextPosition));
+        return doc->findBlock(resourceManager->intResource(KOdfText::CurrentTextPosition));
     }
 
     void tabChangeInitiated() {
@@ -234,8 +234,8 @@ private:
     KoRuler *ruler;
     KResourceManager *resourceManager;
     QWeakPointer<QTextDocument> textDocument;
-    QList<KoText::Tab> tabList;
-    KoText::Tab currentTab;
+    QList<KOdfText::Tab> tabList;
+    KOdfText::Tab currentTab;
     int lastPosition; // the last position in the text document.
     int originalTabIndex, currentTabIndex;
     bool blockSignals;

@@ -128,7 +128,7 @@ bool KWOdfLoader::load(KOdfStoreReader &odfStore)
     // Load all styles before the corresponding paragraphs try to use them!
     KWOdfSharedLoadingData *sharedData = new KWOdfSharedLoadingData(this);
     sc.addSharedData(KODFTEXT_SHARED_LOADING_ID, sharedData);
-    KStyleManager *styleManager = m_document->resourceManager()->resource(KoText::StyleManager).value<KStyleManager*>();
+    KStyleManager *styleManager = m_document->resourceManager()->resource(KOdfText::StyleManager).value<KStyleManager*>();
     Q_ASSERT(styleManager);
     sharedData->loadOdfStyles(sc, styleManager);
 
@@ -304,7 +304,7 @@ void KWOdfLoader::loadHeaderFooterFrame(KOdfLoadingContext &context, const KWPag
 
     KShapeLoadingContext ctxt(context, m_document->resourceManager());
     KWOdfSharedLoadingData *sharedData = new KWOdfSharedLoadingData(this);
-    KStyleManager *styleManager = m_document->resourceManager()->resource(KoText::StyleManager).value<KStyleManager*>();
+    KStyleManager *styleManager = m_document->resourceManager()->resource(KOdfText::StyleManager).value<KStyleManager*>();
     Q_ASSERT(styleManager);
     sharedData->loadOdfStyles(ctxt, styleManager);
     ctxt.addSharedData(KODFTEXT_SHARED_LOADING_ID, sharedData);

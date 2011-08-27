@@ -23,7 +23,7 @@
 #ifndef KPARAGRAPHSTYLE_H
 #define KPARAGRAPHSTYLE_H
 
-#include "KoText.h"
+#include "KOdfText.h"
 #include "KOdfBorders.h"
 #include "kodftext_export.h"
 
@@ -363,8 +363,8 @@ public:
     void setBottomBorderColor(const QColor &color);
     QColor bottomBorderColor();
 
-    KoText::Direction textProgressionDirection() const;
-    void setTextProgressionDirection(KoText::Direction dir);
+    KOdfText::Direction textProgressionDirection() const;
+    void setTextProgressionDirection(KOdfText::Direction dir);
 
     // ************ properties from QTextBlockFormat
     /// duplicated property from QTextBlockFormat
@@ -451,9 +451,9 @@ public:
     /// return the tab stop distance for this paragraph style
     qreal tabStopDistance() const;
     /// Set the tab data for this paragraph style.
-    void setTabPositions(const QList<KoText::Tab> &tabs);
+    void setTabPositions(const QList<KOdfText::Tab> &tabs);
     /// return the tabs data for this paragraph style
-    QList<KoText::Tab> tabPositions() const;
+    QList<KOdfText::Tab> tabPositions() const;
 
     /// If this style is a list, then this sets the nested-ness (aka level) of this paragraph.  A H2 has level 2.
     void setListLevel(int value);

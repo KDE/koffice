@@ -23,7 +23,7 @@
 #define KSECTIONSTYLE_H
 
 #include "KOdfColumnData.h"
-#include "KoText.h"
+#include "KOdfText.h"
 #include "kodftext_export.h"
 
 #include <QObject>
@@ -85,9 +85,9 @@ public:
     /// duplicated property from QTextBlockFormat
     qreal rightMargin() const;
 
-    KoText::Direction textProgressionDirection() const;
+    KOdfText::Direction textProgressionDirection() const;
 
-    void setTextProgressionDirection(KoText::Direction dir);
+    void setTextProgressionDirection(KOdfText::Direction dir);
 
     /// See similar named method on QTextBlockFormat
     void setBackground(const QBrush &brush);

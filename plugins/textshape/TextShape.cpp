@@ -56,7 +56,7 @@ struct Finalizer {
 #include <KShapeLoadingContext.h>
 #include <KShapeManager.h>
 #include <KShapeSavingContext.h>
-#include <KoText.h>
+#include <KOdfText.h>
 #include <KTextDocument.h>
 #include <KTextDocumentLayout.h>
 #include <KoTextEditor.h>
@@ -212,7 +212,7 @@ void TextShape::shapeChanged(ChangeType type)
 
 void TextShape::paintDecorations(QPainter &painter, const KViewConverter &converter, const KCanvasBase *canvas)
 {
-    bool showTextFrames = canvas->resourceManager()->boolResource(KoText::ShowTextFrames);
+    bool showTextFrames = canvas->resourceManager()->boolResource(KOdfText::ShowTextFrames);
 
     if (showTextFrames) {
         painter.save();

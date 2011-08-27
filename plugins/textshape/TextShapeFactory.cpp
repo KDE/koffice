@@ -65,17 +65,17 @@ KShape *TextShapeFactory::createDefaultShape(KResourceManager *documentResources
         KTextDocument document(text->textShapeData()->document());
         document.setUndoStack(documentResources->undoStack());
 
-        KInlineTextObjectManager *itom = documentResources->resource(KoText::InlineTextObjectManager).value<KInlineTextObjectManager*>();
+        KInlineTextObjectManager *itom = documentResources->resource(KOdfText::InlineTextObjectManager).value<KInlineTextObjectManager*>();
         if (itom)
             document.setInlineTextObjectManager(itom);
 
-        KStyleManager *styleManager = documentResources->resource(KoText::StyleManager).value<KStyleManager*>();
+        KStyleManager *styleManager = documentResources->resource(KOdfText::StyleManager).value<KStyleManager*>();
         if (styleManager)
             document.setStyleManager(styleManager);
-        KPageProvider *pp = static_cast<KPageProvider *>(documentResources->resource(KoText::PageProvider).value<void*>());
+        KPageProvider *pp = static_cast<KPageProvider *>(documentResources->resource(KOdfText::PageProvider).value<void*>());
         if (pp)
             text->setPageProvider(pp);
-            KChangeTracker *changeTracker = documentResources->resource(KoText::ChangeTracker).value<KChangeTracker*>();
+            KChangeTracker *changeTracker = documentResources->resource(KOdfText::ChangeTracker).value<KChangeTracker*>();
         if (changeTracker)
             document.setChangeTracker(changeTracker);
 
@@ -115,9 +115,9 @@ void TextShapeFactory::newDocumentResourceManager(KResourceManager *manager)
 {
     manager->setLazyResourceSlot(KoDocumentResource::ImageCollection,
             this, "createImageCollection");
-    manager->setLazyResourceSlot(KoText::InlineTextObjectManager,
+    manager->setLazyResourceSlot(KOdfText::InlineTextObjectManager,
             this, "createTextObjectManager");
-    manager->setLazyResourceSlot(KoText::StyleManager,
+    manager->setLazyResourceSlot(KOdfText::StyleManager,
             this, "createStylemanager");
     manager->setLazyResourceSlot(KoDocumentResource::UndoStack,
             this, "createUndoStack");
@@ -129,14 +129,14 @@ void TextShapeFactory::createStylemanager(KResourceManager *manager)
 {
     QVariant variant;
     variant.setValue(new KStyleManager(manager));
-    manager->setResource(KoText::StyleManager, variant);
+    manager->setResource(KOdfText::StyleManager, variant);
 }
 
 void TextShapeFactory::createTextObjectManager(KResourceManager *manager)
 {
     QVariant variant;
     variant.setValue<KInlineTextObjectManager*>(new KInlineTextObjectManager(manager));
-    manager->setResource(KoText::InlineTextObjectManager, variant);
+    manager->setResource(KOdfText::InlineTextObjectManager, variant);
 }
 
 void TextShapeFactory::createImageCollection(KResourceManager *manager)

@@ -32,7 +32,7 @@
 #include <KStyleManager.h>
 #include <KCharacterStyle.h>
 #include <KParagraphStyle.h>
-#include <KoText.h>
+#include <KOdfText.h>
 #include <KInlineTextObjectManager.h>
 #include <KTextSharedLoadingData.h>
 #include <KTextDocument.h>

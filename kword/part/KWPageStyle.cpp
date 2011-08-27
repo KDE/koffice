@@ -59,7 +59,7 @@ void KWPageStylePrivate::clear()
     footers = KWord::HFTypeNone;
     columns.columns = 1;
     columns.columnSpacing = MM_TO_POINT(6);
-    direction = KoText::AutoDirection;
+    direction = KOdfText::AutoDirection;
 
     if (fullPageBackground && !fullPageBackground->deref()) {
         delete fullPageBackground;
@@ -355,7 +355,7 @@ void KWPageStyle::loadOdf(KOdfLoadingContext &context, const KXmlElement &master
     if (props.isNull())
         return;
     QString direction = props.attributeNS(KOdfXmlNS::style, "writing-mode", "lr-tb");
-    d->direction = KoText::directionFromString(direction);
+    d->direction = KOdfText::directionFromString(direction);
 
     KXmlElement columns = KoXml::namedItemNS(props, KOdfXmlNS::style, "columns");
     if (!columns.isNull()) {
@@ -460,12 +460,12 @@ void KWPageStyle::setNextStyleName(const QString &nextStyleName)
     d->nextStyleName = nextStyleName;
 }
 
-KoText::Direction KWPageStyle::direction() const
+KOdfText::Direction KWPageStyle::direction() const
 {
     return d->direction;
 }
 
-void KWPageStyle::setDirection(KoText::Direction direction)
+void KWPageStyle::setDirection(KOdfText::Direction direction)
 {
     d->direction = direction;
 }

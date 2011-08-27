@@ -24,7 +24,7 @@
 #include "kodftext_export.h"
 
 #include <KOdfGenericChange.h>
-#include "KoText.h"
+#include "KOdfText.h"
 #include <KToolSelection.h>
 
 #include <QClipboard>
@@ -61,7 +61,7 @@ QTextCursor ( const QTextBlock & block )
 QTextCursor ( const QTextCursor & cursor )
 ~QTextCursor ()
 */
-    void updateDefaultTextDirection(KoText::Direction direction);
+    void updateDefaultTextDirection(KOdfText::Direction direction);
 
     bool operator!=(const QTextCursor &other) const;
 

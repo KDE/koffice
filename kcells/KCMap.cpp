@@ -530,7 +530,7 @@ bool KCMap::loadOdf(const KXmlElement& body, KOdfLoadingContext& odfContext)
 
     QVariant variant;
     variant.setValue(textStyleManager());
-    resourceManager()->setResource(KoText::StyleManager, variant);
+    resourceManager()->setResource(KOdfText::StyleManager, variant);
 
 
     // load default column style

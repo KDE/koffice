@@ -263,7 +263,7 @@ const KWPage KWPage::next() const
     return KWPage(priv, iter.value());
 }
 
-void KWPage::setDirectionHint(KoText::Direction direction)
+void KWPage::setDirectionHint(KOdfText::Direction direction)
 {
     if (!isValid())
         return;
@@ -272,13 +272,13 @@ void KWPage::setDirectionHint(KoText::Direction direction)
     priv->pages.insert(n, page);
 }
 
-KoText::Direction KWPage::directionHint() const
+KOdfText::Direction KWPage::directionHint() const
 {
     if (! isValid())
-        return KoText::AutoDirection;
+        return KOdfText::AutoDirection;
     KWPageManagerPrivate::Page page = priv->pages[n];
-    KoText::Direction dir = page.textDirection;
-    if (dir != KoText::InheritDirection)
+    KOdfText::Direction dir = page.textDirection;
+    if (dir != KOdfText::InheritDirection)
         return dir;
     return page.style.direction();
 }

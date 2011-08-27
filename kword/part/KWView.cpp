@@ -76,7 +76,7 @@
 #include <KTextAnchor.h>
 #include <KTextDocument.h>
 #include <KoTextEditor.h>
-#include <KoText.h>
+#include <KOdfText.h>
 #include <KTextOnShapeContainer.h>
 #include <KTextShapeData.h>
 #include <KToolManager.h>
@@ -1034,7 +1034,7 @@ void KWView::adjustZOrderOfSelectedFrames(KShapeReorderCommand::MoveShapeType di
 
 void KWView::toggleViewFrameBorders(bool on)
 {
-    m_canvas->resourceManager()->setResource(KoText::ShowTextFrames, on);
+    m_canvas->resourceManager()->setResource(KOdfText::ShowTextFrames, on);
     m_canvas->update();
     m_document->config().setViewFrameBorders(on);
 }
@@ -1189,10 +1189,10 @@ void KWView::handleDeletePageAction()
 void KWView::setShowFormattingChars(bool on)
 {
     KResourceManager *rm = m_canvas->resourceManager();
-    rm->setResource(KoText::ShowSpaces, on);
-    rm->setResource(KoText::ShowTabs, on);
-    rm->setResource(KoText::ShowEnters, on);
-    rm->setResource(KoText::ShowSpecialCharacters, on);
+    rm->setResource(KOdfText::ShowSpaces, on);
+    rm->setResource(KOdfText::ShowTabs, on);
+    rm->setResource(KOdfText::ShowEnters, on);
+    rm->setResource(KOdfText::ShowSpecialCharacters, on);
 }
 
 void KWView::editSelectAllFrames()

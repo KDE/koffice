@@ -543,7 +543,7 @@ void KTableCellStyle::loadOdfProperties(KOdfStyleStack &styleStack)
     // Alignment
     const QString verticalAlign(styleStack.property(KOdfXmlNS::style, "vertical-align"));
     if (!verticalAlign.isEmpty()) {
-        setAlignment(KoText::valignmentFromString(verticalAlign));
+        setAlignment(KOdfText::valignmentFromString(verticalAlign));
     }
 }
 
@@ -592,7 +592,7 @@ void KTableCellStyle::saveOdf(KOdfGenericStyle &style)
             alignValue = d->stylesPrivate.value(key).toInt(&ok);
             if (ok) {
                 Qt::Alignment alignment = (Qt::Alignment) alignValue;
-                QString align = KoText::alignmentToString(alignment);
+                QString align = KOdfText::alignmentToString(alignment);
                 if (!align.isEmpty())
                     style.addProperty("fo:text-align", align, KOdfGenericStyle::ParagraphType);
             }
@@ -602,11 +602,11 @@ void KTableCellStyle::saveOdf(KOdfGenericStyle &style)
             directionValue = d->stylesPrivate.value(key).toInt(&ok);
             if (ok) {
                 QString direction = "";
-                if (directionValue == KoText::LeftRightTopBottom)
+                if (directionValue == KOdfText::LeftRightTopBottom)
                     direction = "lr";
-                else if (directionValue == KoText::RightLeftTopBottom)
+                else if (directionValue == KOdfText::RightLeftTopBottom)
                     direction = "rl";
-                else if (directionValue == KoText::TopBottomRightLeft)
+                else if (directionValue == KOdfText::TopBottomRightLeft)
                     direction = "tb";
                 if (!direction.isEmpty())
                     style.addProperty("style:writing-mode", direction, KOdfGenericStyle::ParagraphType);

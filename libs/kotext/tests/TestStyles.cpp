@@ -96,13 +96,13 @@ void TestStyles::testTabsStorage()
 {
     KParagraphStyle paragStyle;
 
-    QList<KoText::Tab> tabs;
+    QList<KOdfText::Tab> tabs;
     paragStyle.setTabPositions(tabs);
     QCOMPARE(paragStyle.tabPositions().count(), 0);
 
-    KoText::Tab tab;
+    KOdfText::Tab tab;
     tabs.append(tab);
-    KoText::Tab tab2;
+    KOdfText::Tab tab2;
     tab2.position = 10;
     tabs.append(tab2);
 

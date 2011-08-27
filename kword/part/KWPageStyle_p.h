@@ -21,7 +21,7 @@
 
 #include <QSharedData>
 #include <KInsets.h>
-#include <KoText.h>
+#include <KOdfText.h>
 #include <KShapeBackgroundBase.h>
 
 class KWPageStylePrivate : public QSharedData
@@ -49,7 +49,7 @@ public:
     KWord::FootNoteSeparatorLinePos footNoteSeparatorLinePos; ///< alignment in page
 
     // See parag 16.2 for all the ODF features.
-    KoText::Direction direction;
+    KOdfText::Direction direction;
     KShapeBackgroundBase *fullPageBackground;
     QString nextStyleName;
 

@@ -57,7 +57,7 @@
 #include <KOdfXmlNS.h>
 #include <KXmlWriter.h>
 #include <KOdfStore.h>
-#include <KoText.h>
+#include <KOdfText.h>
 #include <KStyleManager.h>
 #include <KTextSharedLoadingData.h>
 #include <KParagraphStyle.h>

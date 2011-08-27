@@ -216,21 +216,21 @@ void SimpleStyleWidget::directionChangeRequested()
 {
     QTextCursor cursor = m_tool->cursor();
     QTextBlockFormat format;
-    KoText::Direction dir = static_cast<KoText::Direction>(m_currentBlock.blockFormat()
+    KOdfText::Direction dir = static_cast<KOdfText::Direction>(m_currentBlock.blockFormat()
             .intProperty(KParagraphStyle::TextProgressionDirection));
     switch (dir) {
-    case KoText::PerhapsLeftRightTopBottom:
-    case KoText::LeftRightTopBottom:
-        format.setProperty(KParagraphStyle::TextProgressionDirection, KoText::RightLeftTopBottom);
+    case KOdfText::PerhapsLeftRightTopBottom:
+    case KOdfText::LeftRightTopBottom:
+        format.setProperty(KParagraphStyle::TextProgressionDirection, KOdfText::RightLeftTopBottom);
         updateDirection(RTL);
         break;
-    case KoText::InheritDirection:
-    case KoText::AutoDirection:
+    case KOdfText::InheritDirection:
+    case KOdfText::AutoDirection:
         updateDirection(LTR);
-        format.setProperty(KParagraphStyle::TextProgressionDirection, KoText::LeftRightTopBottom);
+        format.setProperty(KParagraphStyle::TextProgressionDirection, KOdfText::LeftRightTopBottom);
         break;
-    case KoText::PerhapsRightLeftTopBottom:
-    case KoText::RightLeftTopBottom: {
+    case KOdfText::PerhapsRightLeftTopBottom:
+    case KOdfText::RightLeftTopBottom: {
         updateDirection(Auto);
         // clearProperty won't have any effect on merge below.
         int start = qMin(cursor.position(), cursor.anchor());
@@ -246,7 +246,7 @@ void SimpleStyleWidget::directionChangeRequested()
         emit doneWithFocus();
         return;
     }
-    case KoText::TopBottomRightLeft: ;// Unhandled.
+    case KOdfText::TopBottomRightLeft: ;// Unhandled.
         break;
     };
     cursor.mergeBlockFormat(format);

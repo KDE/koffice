@@ -91,10 +91,10 @@ Soprano::Model *KoDocumentRdf::model() const
 KoDocumentRdf *KoDocumentRdf::fromResourceManager(KCanvasBase *host)
 {
     KResourceManager *rm = host->resourceManager();
-    if (!rm->hasResource(KoText::DocumentRdf)) {
+    if (!rm->hasResource(KOdfText::DocumentRdf)) {
         return 0;
     }
-    return static_cast<KoDocumentRdf*>(rm->resource(KoText::DocumentRdf).value<void*>());
+    return static_cast<KoDocumentRdf*>(rm->resource(KOdfText::DocumentRdf).value<void*>());
 }
 
 

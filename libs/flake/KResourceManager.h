@@ -91,7 +91,7 @@ enum DocumentResource {
     KCellsStart = 7000,     ///< Base number for kcells specific values.
     KWordStart = 8000,       ///< Base number for kword specific values.
     KoPageAppStart = 9000,   ///< Base number for KoPageApp specific values.
-    KoTextStart = 10000      ///< Base number for KoText specific values.
+    KoTextStart = 10000      ///< Base number for KOdfText specific values.
 };
 }
 
@@ -113,9 +113,9 @@ enum DocumentResource {
  * @code
  *  QVariant variant;
  *  variant.setValue<void*>(textShapeData->document());
- *  resourceManager->setResource(KoText::CurrentTextDocument, variant);
+ *  resourceManager->setResource(KOdfText::CurrentTextDocument, variant);
  *  // and get it out again.
- *  QVariant var = resourceManager->resource(KoText::CurrentTextDocument);
+ *  QVariant var = resourceManager->resource(KOdfText::CurrentTextDocument);
  *  document = static_cast<QTextDocument*>(var.value<void*>());
  * @endcode
  */

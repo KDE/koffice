@@ -52,7 +52,7 @@
 
 //already defined in KoRulerController.cpp
 #ifndef KDE_USE_FINAL
-static int compareTabs(KoText::Tab &tab1, KoText::Tab &tab2)
+static int compareTabs(KOdfText::Tab &tab1, KOdfText::Tab &tab2)
 {
     return tab1.position < tab2.position;
 }
@@ -984,12 +984,12 @@ void KParagraphStyle::setListStyle(KListStyle *style)
     d->listStyle = style;
 }
 
-KoText::Direction KParagraphStyle::textProgressionDirection() const
+KOdfText::Direction KParagraphStyle::textProgressionDirection() const
 {
-    return static_cast<KoText::Direction>(propertyInt(TextProgressionDirection));
+    return static_cast<KOdfText::Direction>(propertyInt(TextProgressionDirection));
 }
 
-void KParagraphStyle::setTextProgressionDirection(KoText::Direction dir)
+void KParagraphStyle::setTextProgressionDirection(KOdfText::Direction dir)
 {
     setProperty(TextProgressionDirection, dir);
 }
@@ -1061,13 +1061,13 @@ void KParagraphStyle::loadOdfProperties(KShapeLoadingContext &scontext)
     // in 1.6 this was defined at KoParagLayout::loadOasisParagLayout(KoParagLayout&, KoOasisContext&)
     const QString writingMode(styleStack.property(KOdfXmlNS::style, "writing-mode"));
     if (!writingMode.isEmpty()) {
-        setTextProgressionDirection(KoText::directionFromString(writingMode));
+        setTextProgressionDirection(KOdfText::directionFromString(writingMode));
     }
 
     // Alignment
     const QString textAlign(styleStack.property(KOdfXmlNS::fo, "text-align"));
     if (!textAlign.isEmpty()) {
-        setAlignment(KoText::alignmentFromString(textAlign));
+        setAlignment(KOdfText::alignmentFromString(textAlign));
     }
 
     // Spacing (padding)
@@ -1180,12 +1180,12 @@ void KParagraphStyle::loadOdfProperties(KShapeLoadingContext &scontext)
     }
     KXmlElement tabStops(styleStack.childNode(KOdfXmlNS::style, "tab-stops"));
     if (!tabStops.isNull()) {     // 3.11.10
-        QList<KoText::Tab> tabList;
+        QList<KOdfText::Tab> tabList;
         KXmlElement tabStop;
         forEachElement(tabStop, tabStops) {
             Q_ASSERT(tabStop.localName() == "tab-stop");
             // Tab position
-            KoText::Tab tab;
+            KOdfText::Tab tab;
             tab.position = KUnit::parseValue(tabStop.attributeNS(KOdfXmlNS::style, "position", QString()));
             kDebug(32500) << "tab position " << tab.position;
             // Tab stop positions in the XML are relative to the left-margin
@@ -1434,12 +1434,12 @@ void KParagraphStyle::loadOdfProperties(KShapeLoadingContext &scontext)
 
 }
 
-void KParagraphStyle::setTabPositions(const QList<KoText::Tab> &tabs)
+void KParagraphStyle::setTabPositions(const QList<KOdfText::Tab> &tabs)
 {
-    QList<KoText::Tab> newTabs = tabs;
+    QList<KOdfText::Tab> newTabs = tabs;
     qSort(newTabs.begin(), newTabs.end(), compareTabs);
     QList<QVariant> list;
-    foreach(const KoText::Tab &tab, tabs) {
+    foreach(const KOdfText::Tab &tab, tabs) {
         QVariant v;
         v.setValue(tab);
         list.append(v);
@@ -1447,14 +1447,14 @@ void KParagraphStyle::setTabPositions(const QList<KoText::Tab> &tabs)
     setProperty(TabPositions, list);
 }
 
-QList<KoText::Tab> KParagraphStyle::tabPositions() const
+QList<KOdfText::Tab> KParagraphStyle::tabPositions() const
 {
     QVariant variant = value(TabPositions);
     if (variant.isNull())
-        return QList<KoText::Tab>();
-    QList<KoText::Tab> answer;
+        return QList<KOdfText::Tab>();
+    QList<KOdfText::Tab> answer;
     foreach(const QVariant &tab, qvariant_cast<QList<QVariant> >(variant)) {
-        answer.append(tab.value<KoText::Tab>());
+        answer.append(tab.value<KOdfText::Tab>());
     }
     return answer;
 }
@@ -1547,7 +1547,7 @@ void KParagraphStyle::saveOdf(KOdfGenericStyle &style, KOdfGenericStyles &mainSt
             alignValue = d->stylesPrivate.value(key).toInt(&ok);
             if (ok) {
                 Qt::Alignment alignment = (Qt::Alignment) alignValue;
-                QString align = KoText::alignmentToString(alignment);
+                QString align = KOdfText::alignmentToString(alignment);
                 if (!align.isEmpty())
                     style.addProperty("fo:text-align", align, KOdfGenericStyle::ParagraphType);
             }
@@ -1557,13 +1557,13 @@ void KParagraphStyle::saveOdf(KOdfGenericStyle &style, KOdfGenericStyles &mainSt
             directionValue = d->stylesPrivate.value(key).toInt(&ok);
             if (ok) {
                 QString direction;
-                if (directionValue == KoText::LeftRightTopBottom)
+                if (directionValue == KOdfText::LeftRightTopBottom)
                     direction = "lr-tb";
-                else if (directionValue == KoText::RightLeftTopBottom)
+                else if (directionValue == KOdfText::RightLeftTopBottom)
                     direction = "rl-tb";
-                else if (directionValue == KoText::TopBottomRightLeft)
+                else if (directionValue == KOdfText::TopBottomRightLeft)
                     direction = "tb-lr";
-                else if (directionValue == KoText::InheritDirection)
+                else if (directionValue == KOdfText::InheritDirection)
                     direction = "page";
                 if (!direction.isEmpty())
                     style.addProperty("style:writing-mode", direction, KOdfGenericStyle::ParagraphType);
@@ -1735,7 +1735,7 @@ void KParagraphStyle::saveOdf(KOdfGenericStyle &style, KOdfGenericStyles &mainSt
         buf.open(QIODevice::WriteOnly);
         KXmlWriter elementWriter(&buf, indentation);
         elementWriter.startElement("style:tab-stops");
-        foreach(const KoText::Tab &tab, tabPositions()) {
+        foreach(const KOdfText::Tab &tab, tabPositions()) {
             elementWriter.startElement("style:tab-stop");
             elementWriter.addAttributePt("style:position", tab.position);
             if (!tabTypeMap[tab.type].isEmpty())

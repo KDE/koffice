@@ -23,7 +23,7 @@
 #define KTABLECELLSTYLE_H
 
 #include "KTableBorderStyle.h"
-#include "KoText.h"
+#include "KOdfText.h"
 #include "kodftext_export.h"
 
 #include <QColor>

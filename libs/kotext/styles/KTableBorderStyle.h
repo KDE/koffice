@@ -22,7 +22,7 @@
 #ifndef KTABLEBORDERSTYLE_H
 #define KTABLEBORDERSTYLE_H
 
-#include "KoText.h"
+#include "KOdfText.h"
 #include "kodftext_export.h"
 
 class KTableBorderStylePrivate;

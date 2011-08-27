@@ -20,7 +20,7 @@
 #ifndef KTEXTSHAPEDATA_H
 #define KTEXTSHAPEDATA_H
 
-#include "KoText.h"
+#include "KOdfText.h"
 #include "kodftext_export.h"
 
 #include <KTextShapeDataBase.h>
@@ -166,13 +166,13 @@ public:
      * The page direction will determine behavior on the insertion of new text and those
      * new paragraphs default direction.
      */
-    void setPageDirection(KoText::Direction direction);
+    void setPageDirection(KOdfText::Direction direction);
     /**
      * Return the direction set on the page.
      * The page direction will determine behavior on the insertion of new text and those
      * new paragraphs default direction.
      */
-    KoText::Direction pageDirection() const;
+    KOdfText::Direction pageDirection() const;
 
     /**
      * Return the spacing between the frame border and the content.

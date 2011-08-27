@@ -1478,7 +1478,7 @@ void KTextWriter::Private::writeBlocks(QTextDocument *document, int from, int to
         QTextFrame *cursorFrame = cursor.currentFrame();
         int blockOutlineLevel = block.blockFormat().property(KParagraphStyle::OutlineLevel).toInt();
 
-        if (cursorFrame != currentFrame && cursorFrame->format().hasProperty(KoText::TableOfContents)) {
+        if (cursorFrame != currentFrame && cursorFrame->format().hasProperty(KOdfText::TableOfContents)) {
             int frameBegin = cursorFrame->firstPosition();
             int frameEnd = cursorFrame->lastPosition();
             saveTableOfContents(document, frameBegin, frameEnd, listStyles, currentTable, cursor.currentFrame());
@@ -2277,7 +2277,7 @@ void KTextWriter::Private::writeAttributes(QTextStream &outputXmlStream, KXmlEle
 {
     QList<QPair<QString, QString> > attributes = element.attributeNSNames();
 
-    foreach (const KoText::StringPair &attributeNamePair, attributes) {
+    foreach (const KOdfText::StringPair &attributeNamePair, attributes) {
         if (attributeNamePair.first == KOdfXmlNS::text) {
             outputXmlStream << " text:" << attributeNamePair.second << "=";
             outputXmlStream << "\"" << element.attributeNS(KOdfXmlNS::text, attributeNamePair.second) << "\"";

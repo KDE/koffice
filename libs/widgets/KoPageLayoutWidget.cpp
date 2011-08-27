@@ -290,33 +290,33 @@ void KoPageLayoutWidget::showTextDirection(bool on)
     d->widget.textDirection->setVisible(on);
 }
 
-void KoPageLayoutWidget::setTextDirection(KoText::Direction direction )
+void KoPageLayoutWidget::setTextDirection(KOdfText::Direction direction )
 {
     int index = 0;
     switch(direction) {
-    case KoText::LeftRightTopBottom:
-    case KoText::PerhapsLeftRightTopBottom:
+    case KOdfText::LeftRightTopBottom:
+    case KOdfText::PerhapsLeftRightTopBottom:
         index = 1;
         break;
-    case KoText::RightLeftTopBottom:
-    case KoText::PerhapsRightLeftTopBottom:
+    case KOdfText::RightLeftTopBottom:
+    case KOdfText::PerhapsRightLeftTopBottom:
         index = 2;
         break;
-    case KoText::TopBottomRightLeft: // unused for now.
-    case KoText::InheritDirection:
-    case KoText::AutoDirection:
+    case KOdfText::TopBottomRightLeft: // unused for now.
+    case KOdfText::InheritDirection:
+    case KOdfText::AutoDirection:
         index = 0;
     }
     d->widget.textDirection->setCurrentIndex(index);
 }
 
-KoText::Direction KoPageLayoutWidget::textDirection() const
+KOdfText::Direction KoPageLayoutWidget::textDirection() const
 {
     switch(d->widget.textDirection->currentIndex()) {
-    case 1: return KoText::LeftRightTopBottom;
-    case 2: return KoText::RightLeftTopBottom;
+    case 1: return KOdfText::LeftRightTopBottom;
+    case 2: return KOdfText::RightLeftTopBottom;
     default:
-    case 0: return KoText::AutoDirection;
+    case 0: return KOdfText::AutoDirection;
     }
 }
 

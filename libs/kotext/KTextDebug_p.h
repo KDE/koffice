@@ -24,7 +24,7 @@
 //  W A R N I N G
 //  -------------
 //
-// This file is not part of the KoText API.  It exists purely as an
+// This file is not part of the KOdfText API.  It exists purely as an
 // implementation detail.  This header file may change from version to
 // version without notice, or even be removed.
 //
@@ -55,7 +55,7 @@ class KTableCellStyle;
 #include <QVariant>
 
 /**
- * @brief KoText debugging class.
+ * @brief KOdfText debugging class.
  *
  * This class provides a set of public static functions for debugging the structure of
  * QTextDocument text documents. The functions will dump the structure of the document

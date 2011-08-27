@@ -104,7 +104,7 @@
 #include <KoZoomController.h>
 #include <KoZoomHandler.h>
 #include <KToolProxy.h>
-#include <KoText.h>
+#include <KOdfText.h>
 #include <KInlineTextObjectManager.h>
 
 // KCells includes

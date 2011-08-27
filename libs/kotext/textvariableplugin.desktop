@@ -69,7 +69,7 @@ Comment[wa]=On tchôke-divins k' a des variåves di tecse
 Comment[x-test]=xxA plugin that contains text variablesxx
 Comment[zh_CN]=一个包含文本变量的插件
 Comment[zh_TW]=包含文字變數外掛程式
-[PropertyDef::X-KoText-MinVersion]
+[PropertyDef::X-KOdfText-MinVersion]
 Type=int
 [PropertyDef::X-Flake-PluginVersion]
 Type=int

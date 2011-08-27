@@ -405,7 +405,7 @@ bool Layout::nextParag()
         cleanupShapes();
         return false;
     }
-    if (m_block.userState() == KoText::BlockTextLayoutState)
+    if (m_block.userState() == KOdfText::BlockTextLayoutState)
         return false;
 
     // make sure m_tableLayout is refering to the right table
@@ -420,13 +420,13 @@ bool Layout::nextParag()
     }
     m_format = m_block.blockFormat();
     m_blockData = dynamic_cast<KTextBlockData*>(m_block.userData());
-    KoText::Direction dir = static_cast<KoText::Direction>(m_format.intProperty(KParagraphStyle::TextProgressionDirection));
-    if (dir == KoText::InheritDirection)
+    KOdfText::Direction dir = static_cast<KOdfText::Direction>(m_format.intProperty(KParagraphStyle::TextProgressionDirection));
+    if (dir == KOdfText::InheritDirection)
         dir = m_data->pageDirection();
-    if (dir == KoText::AutoDirection)
+    if (dir == KOdfText::AutoDirection)
         m_isRtl = m_block.text().isRightToLeft();
     else
-        m_isRtl =  dir == KoText::RightLeftTopBottom || dir == KoText::PerhapsRightLeftTopBottom;
+        m_isRtl =  dir == KOdfText::RightLeftTopBottom || dir == KOdfText::PerhapsRightLeftTopBottom;
 
     // initialize list item stuff for this parag.
     QTextList *textList = m_block.textList();
@@ -500,7 +500,7 @@ bool Layout::nextParag()
     if (!variant.isNull()) {
         const qreal tabOffset = x();
         foreach(const QVariant &tv, qvariant_cast<QList<QVariant> >(variant)) {
-            KoText::Tab koTab = tv.value<KoText::Tab>();
+            KOdfText::Tab koTab = tv.value<KOdfText::Tab>();
             QTextOption::Tab tab;
 
             // convertion here is required because Qt thinks in device units and we don't
@@ -930,7 +930,7 @@ void Layout::resetPrivate()
     m_dropCapsPositionAdjust = 0;
     m_dropCapsAffectedLineWidthAdjust = 0;
 
-    if (m_block.userState() == KoText::BlockTextLayoutState)
+    if (m_block.userState() == KOdfText::BlockTextLayoutState)
         return;
 
     shapeNumber = 0;
@@ -1462,9 +1462,9 @@ void Layout::decorateTabs(QPainter *painter, const QVariantList& tabList, const 
             // find a tab-stop decoration for this tab position
             // for eg., if there's a tab-stop at 1in, but the text before \t already spans 1.2in,
             // we should look at the next tab-stop
-            KoText::Tab tab;
+            KOdfText::Tab tab;
             do {
-                tab = qvariant_cast<KoText::Tab>(tabList[m_currentTabStop]);
+                tab = qvariant_cast<KOdfText::Tab>(tabList[m_currentTabStop]);
                 m_currentTabStop++;
                 // comparing with x1 should work for all of left/right/center/char tabs
             } while (tab.position <= x1 && m_currentTabStop < tabList.size());
@@ -2011,7 +2011,7 @@ void Layout::updateFrameStack()
     for (int i = changedFrameFrom ; i < m_frameStack.count(); ++i) {
         QTextFrame *frame = m_frameStack.at(i);
         QTextFrameFormat ff = frame->frameFormat();
-        if (false && ff.hasProperty(KoText::TableOfContents) && ff.property(KoText::TableOfContents).toBool() == true) {
+        if (false && ff.hasProperty(KOdfText::TableOfContents) && ff.property(KOdfText::TableOfContents).toBool() == true) {
             // this frame is a TOC
             bool found = false;
             QList<QWeakPointer<ToCGenerator> >::Iterator iter = m_tocGenerators.begin();

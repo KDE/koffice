@@ -22,7 +22,7 @@
 #ifndef KTABLESTYLE_H
 #define KTABLESTYLE_H
 
-#include "KoText.h"
+#include "KOdfText.h"
 #include "kodftext_export.h"
 
 #include <QObject>

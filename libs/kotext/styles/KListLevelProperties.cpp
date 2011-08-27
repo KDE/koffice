@@ -32,7 +32,7 @@
 #include <KShapeLoadingContext.h>
 #include <KXmlWriter.h>
 #include <KUnit.h>
-#include <KoText.h>
+#include <KOdfText.h>
 #include <KImageCollection.h>
 #include <KImageData.h>
 
@@ -523,7 +523,7 @@ void KListLevelProperties::loadOdf(KShapeLoadingContext& scontext, const KXmlEle
 
             QString textAlign(property.attributeNS(KOdfXmlNS::fo, "text-align"));
             if (!textAlign.isEmpty())
-                setAlignment(KoText::alignmentFromString(textAlign));
+                setAlignment(KOdfText::alignmentFromString(textAlign));
 
             QString minLableDistance(property.attributeNS(KOdfXmlNS::text, "min-label-distance"));
             if (!minLableDistance.isEmpty())
@@ -623,7 +623,7 @@ void KListLevelProperties::saveOdf(KXmlWriter *writer) const
         writer->addAttribute("text:min-label-width", toPoint(minimumWidth()));
 
     if (d->stylesPrivate.contains(KListStyle::Alignment))
-        writer->addAttribute("fo:text-align", KoText::alignmentToString(alignment()));
+        writer->addAttribute("fo:text-align", KOdfText::alignmentToString(alignment()));
 
     if (d->stylesPrivate.contains(KListStyle::MinimumDistance))
         writer->addAttribute("text:min-label-distance", toPoint(minimumDistance()));

@@ -374,7 +374,7 @@ QString KTableStyle::alignmentToString(Qt::Alignment alignment)
 void KTableStyle::loadOdfProperties(KOdfStyleStack &styleStack)
 {
     if (styleStack.hasProperty(KOdfXmlNS::style, "writing-mode")) {     // http://www.w3.org/TR/2004/WD-xsl11-20041216/#writing-mode
-        // KoText::directionFromString()
+        // KOdfText::directionFromString()
     }
 
     // Width
@@ -491,7 +491,7 @@ void KTableStyle::saveOdf(KOdfGenericStyle &style)
             alignValue = d->stylesPrivate.value(key).toInt(&ok);
             if (ok) {
                 Qt::Alignment alignment = (Qt::Alignment) alignValue;
-                QString align = KoText::alignmentToString(alignment);
+                QString align = KOdfText::alignmentToString(alignment);
                 if (!align.isEmpty())
                     style.addProperty("fo:text-align", align, KOdfGenericStyle::ParagraphType);
             }
@@ -501,11 +501,11 @@ void KTableStyle::saveOdf(KOdfGenericStyle &style)
             directionValue = d->stylesPrivate.value(key).toInt(&ok);
             if (ok) {
                 QString direction = "";
-                if (directionValue == KoText::LeftRightTopBottom)
+                if (directionValue == KOdfText::LeftRightTopBottom)
                     direction = "lr";
-                else if (directionValue == KoText::RightLeftTopBottom)
+                else if (directionValue == KOdfText::RightLeftTopBottom)
                     direction = "rl";
-                else if (directionValue == KoText::TopBottomRightLeft)
+                else if (directionValue == KOdfText::TopBottomRightLeft)
                     direction = "tb";
                 if (!direction.isEmpty())
                     style.addProperty("style:writing-mode", direction, KOdfGenericStyle::ParagraphType);

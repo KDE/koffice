@@ -5,7 +5,7 @@ add_subdirectory( tests )
 ########### next target ###############
 set(kodftext_LIB_SRCS
     KTextShapeData.cpp
-    KoText.cpp
+    KOdfText.cpp
     KTextBlockData.cpp
     KTextBlockBorderData.cpp
     KTextBlockPaintStrategyBase.cpp
@@ -129,7 +129,7 @@ install(
     KTextBlockBorderData.h
     KTextBlockData.h
     KTextDocument.h
-    KoText.h
+    KOdfText.h
     KoList.h
     KTextLocator.h
     KTextPage.h

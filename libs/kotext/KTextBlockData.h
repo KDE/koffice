@@ -28,7 +28,7 @@ class KTextBlockBorderData;
 class KTextBlockPaintStrategyBase;
 
 /**
- * This class is used to store properties for KoText layouting inside Qt QTextBlock
+ * This class is used to store properties for KOdfText layouting inside Qt QTextBlock
  * instances.
  */
 class KODFTEXT_EXPORT KTextBlockData : public QTextBlockUserData

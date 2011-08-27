@@ -412,17 +412,17 @@ void TestPageManager::testDirectionHint()
 {
     KWPageManager pageManager;
     KWPage page = pageManager.appendPage();
-    QCOMPARE(page.directionHint(), KoText::AutoDirection);
-    page.setDirectionHint(KoText::LeftRightTopBottom);
-    QCOMPARE(page.directionHint(), KoText::LeftRightTopBottom);
-    page.setDirectionHint(KoText::TopBottomRightLeft);
-    QCOMPARE(page.directionHint(), KoText::TopBottomRightLeft);
+    QCOMPARE(page.directionHint(), KOdfText::AutoDirection);
+    page.setDirectionHint(KOdfText::LeftRightTopBottom);
+    QCOMPARE(page.directionHint(), KOdfText::LeftRightTopBottom);
+    page.setDirectionHint(KOdfText::TopBottomRightLeft);
+    QCOMPARE(page.directionHint(), KOdfText::TopBottomRightLeft);
 
     KWPage page2 = pageManager.appendPage();
-    QCOMPARE(page2.directionHint(), KoText::TopBottomRightLeft); // inherit from last page
-    page.setDirectionHint(KoText::LeftRightTopBottom);
-    QCOMPARE(page2.directionHint(), KoText::TopBottomRightLeft); // but separate
-    QCOMPARE(page.directionHint(), KoText::LeftRightTopBottom);
+    QCOMPARE(page2.directionHint(), KOdfText::TopBottomRightLeft); // inherit from last page
+    page.setDirectionHint(KOdfText::LeftRightTopBottom);
+    QCOMPARE(page2.directionHint(), KOdfText::TopBottomRightLeft); // but separate
+    QCOMPARE(page.directionHint(), KOdfText::LeftRightTopBottom);
 }
 
 void TestPageManager::testPageNumber()
@@ -538,7 +538,7 @@ void TestPageManager::testPageSpreadLayout()
     page.pageStyle().setPageLayout(layout);
     KWPage page2 = manager.appendPage();
     QCOMPARE(page2.pageNumber(), 4);
-    page2.setDirectionHint(KoText::LeftRightTopBottom);
+    page2.setDirectionHint(KOdfText::LeftRightTopBottom);
     layout.width = 200;
     page2.pageStyle().setPageLayout(layout);
 

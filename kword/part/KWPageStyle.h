@@ -26,7 +26,7 @@
 #include "kword_export.h"
 
 #include <KOdfPageLayoutData.h>
-#include <KoText.h>
+#include <KOdfText.h>
 
 #include <QSharedDataPointer>
 
@@ -221,8 +221,8 @@ public:
     /// get the master page name for this page style.
     QString name() const;
 
-    KoText::Direction direction() const;
-    void setDirection(KoText::Direction direction);
+    KOdfText::Direction direction() const;
+    void setDirection(KOdfText::Direction direction);
 
     /// Get the background.
     KShapeBackgroundBase *background() const;

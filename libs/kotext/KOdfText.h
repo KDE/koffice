@@ -36,7 +36,7 @@
 /**
  * Generic namespace of the KOffice Text library for helper methods and data.
  */
-namespace KoText
+namespace KOdfText
 {
 KODFTEXT_EXPORT QStringList underlineTypeList();
 KODFTEXT_EXPORT QStringList underlineStyleList();
@@ -100,7 +100,7 @@ enum Direction {
  */
 enum DocumentResource {
     ChangeTracker = KoDocumentResource::KoTextStart + 1, ///< KChangeTracker
-    InlineTextObjectManager, ///< The KoText inline-text-object manager. KInlineTextObjectManager
+    InlineTextObjectManager, ///< The KOdfText inline-text-object manager. KInlineTextObjectManager
     StyleManager,           ///< The KStyleManager
     PageProvider            ///< The KPageProvider
 };
@@ -118,6 +118,6 @@ enum TextBlockUserState {
 KODFTEXT_EXPORT Direction directionFromString(const QString &direction);
 }
 
-Q_DECLARE_METATYPE(KoText::Tab)
+Q_DECLARE_METATYPE(KOdfText::Tab)
 
 #endif

@@ -22,7 +22,7 @@
 
 #include "kowidgets_export.h"
 
-#include <KoText.h>			//krazy:exclude=includes
+#include <KOdfText.h>			//krazy:exclude=includes
 
 #include <KDE/KPageDialog>
 
@@ -37,8 +37,8 @@ public:
     ~KoPageLayoutDialog();
 
     void showTextDirection(bool on);
-    KoText::Direction textDirection() const;
-    void setTextDirection(KoText::Direction direction);
+    KOdfText::Direction textDirection() const;
+    void setTextDirection(KOdfText::Direction direction);
     void showPageSpread(bool on);
     void setPageSpread(bool pageSpread);
     KOdfPageLayoutData pageLayout() const;

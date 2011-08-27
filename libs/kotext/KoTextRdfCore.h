@@ -30,7 +30,7 @@ class KOdfStore;
 class KXmlWriter;
 
 /**
- * @short Basic low level methods that are available to KoText objects
+ * @short Basic low level methods that are available to KOdfText objects
  *
  * Low level functionality such as streaming a Soprano::Model to and
  * from an ODF container is provided here so that both KoDocumentRdf

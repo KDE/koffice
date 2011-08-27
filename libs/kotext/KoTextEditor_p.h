@@ -24,7 +24,7 @@
 //  W A R N I N G
 //  -------------
 //
-// This file is not part of the KoText API.  It exists purely as an
+// This file is not part of the KOdfText API.  It exists purely as an
 // implementation detail.  This header file may change from version to
 // version without notice, or even be removed.
 //
@@ -73,7 +73,7 @@ public:
     QTextDocument *document;
     QUndoCommand *headCommand;
     QString commandTitle;
-    KoText::Direction direction;
+    KOdfText::Direction direction;
     bool isBidiDocument;
 
     State editorState;

@@ -412,7 +412,7 @@ KTextLoader::KTextLoader(KShapeLoadingContext &context, KShape *shape)
     if (!d->textSharedData) {
         d->textSharedData = new KTextSharedLoadingData();
         KResourceManager *rm = context.documentResourceManager();
-        KStyleManager *styleManager = rm->resource(KoText::StyleManager).value<KStyleManager*>();
+        KStyleManager *styleManager = rm->resource(KOdfText::StyleManager).value<KStyleManager*>();
         d->textSharedData->loadOdfStyles(context, styleManager);
         if (!sharedData) {
             context.addSharedData(KODFTEXT_SHARED_LOADING_ID, d->textSharedData);
@@ -767,9 +767,9 @@ void KTextLoader::Private::copyRemoveLeavingContentStart(const KXmlNode &node, Q
     removeLeavingContentChangeIdMap.insert(changeEndId, changeId);
 
     xmlStream << "<" << nodeName;
-    QList<KoText::StringPair> attributeNSNames = element.attributeNSNames();
+    QList<KOdfText::StringPair> attributeNSNames = element.attributeNSNames();
 
-    foreach(const KoText::StringPair &attributeName, attributeNSNames) {
+    foreach(const KOdfText::StringPair &attributeName, attributeNSNames) {
         QString nameSpace = attributeName.first;
         if (nameSpace != "http://www.w3.org/XML/1998/namespace") {
             int index = nameSpacesList.indexOf(nameSpace);
@@ -882,9 +882,9 @@ void KTextLoader::Private::copyTagStart(const KXmlElement &element, QTextStream 
     QString nodeName  = QString("ns%1") + ':' + element.localName();
     nodeName = nodeName.arg(index);
     xmlStream << "<" << nodeName;
-    QList<KoText::StringPair> attributeNSNames = element.attributeNSNames();
+    QList<KOdfText::StringPair> attributeNSNames = element.attributeNSNames();
 
-    foreach(const KoText::StringPair &attributeName, attributeNSNames) {
+    foreach(const KOdfText::StringPair &attributeName, attributeNSNames) {
         QString nameSpace = attributeName.first;
         if (nameSpace == KOdfXmlNS::delta && ignoreChangeAttributes) {
             continue;
@@ -2201,7 +2201,7 @@ void KTextLoader::loadTableOfContents(const KXmlElement &element, QTextCursor &c
 {
     // Add a frame to the current layout
     QTextFrameFormat tocFormat;
-    tocFormat.setProperty(KoText::TableOfContents, true);
+    tocFormat.setProperty(KOdfText::TableOfContents, true);
     cursor.insertFrame(tocFormat);
     // Get the cursor of the frame
     QTextCursor cursorFrame = cursor.currentFrame()->lastCursorPosition();

@@ -22,7 +22,7 @@
 
 #include "kowidgets_export.h"
 
-#include <KoText.h>             //krazy:exclude=includes
+#include <KOdfText.h>             //krazy:exclude=includes
 #include <KUnit.h>              //krazy:exclude=includes
 #include <KOdfPageLayoutData.h> //krazy:exclude=includes
 #include <QtGui/QWidget>
@@ -44,8 +44,8 @@ public:
     QString currentPageStyle() const;
     void setPageSpread(bool pageSpread);
     void showTextDirection(bool on);
-    void setTextDirection(KoText::Direction direction);
-    KoText::Direction textDirection() const;
+    void setTextDirection(KOdfText::Direction direction);
+    KOdfText::Direction textDirection() const;
     KOdfPageLayoutData pageLayout() const;
 
 signals:

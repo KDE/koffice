@@ -42,5 +42,5 @@ Name[zh_TW]=文字變數
 X-KDE-ServiceTypes=KOffice/Text-InlineObject
 Type=Service
 X-KDE-Library=textvariables
-X-KoText-MinVersion=0
+X-KOdfText-MinVersion=0
 X-Flake-PluginVersion=1

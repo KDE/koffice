@@ -178,9 +178,9 @@ void KWRdfDocker::setAutoUpdate(int state)
 
 void KWRdfDocker::resourceChanged(int key, const QVariant &value)
 {
-    if (key == KoText::CurrentTextDocument) {
+    if (key == KOdfText::CurrentTextDocument) {
         m_textDocument = static_cast<QTextDocument*>(value.value<void*>());
-    } else if (key == KoText::CurrentTextPosition) {
+    } else if (key == KOdfText::CurrentTextPosition) {
         updateData();
     }
 }
