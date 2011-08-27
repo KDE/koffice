@@ -21,7 +21,7 @@ target_link_libraries(TestOdfStore kodf ${QT_QTGUI_LIBRARY} ${QT_QTTEST_LIBRARY}
 
 ########### next target ###############
 
-set(TestKodfLoadingContext_SRCS TestKoOdfLoadingContext.cpp )
+set(TestKodfLoadingContext_SRCS TestKOdfLoadingContext.cpp )
 kde4_add_unit_test(TestKodfLoadingContext TESTNAME libs-odf-TestKodfLoadingContext ${TestKodfLoadingContext_SRCS})
 target_link_libraries(TestKodfLoadingContext kodf ${QT_QTGUI_LIBRARY} ${QT_QTTEST_LIBRARY})
 

@@ -21,7 +21,7 @@
 
 #include <qtest_kde.h>
 
-class TestKoOdfLoadingContext : public QObject
+class TestKOdfLoadingContext : public QObject
 {
     Q_OBJECT
 private slots:
