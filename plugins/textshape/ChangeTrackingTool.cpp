@@ -23,7 +23,7 @@
 #include <KCanvasBase.h>
 #include <KChangeTracker.h>
 #include <KPointerEvent.h>
-#include <KSelection.h>
+#include <KShapeSelection.h>
 #include <KShapeManager.h>
 #include <KTextDocument.h>
 #include <KTextDocumentLayout.h>

@@ -28,7 +28,7 @@
 #include "KCanvasBase.h"
 #include "KResourceManager.h"
 #include "KShapeManager.h"
-#include "KSelection.h"
+#include "KShapeSelection.h"
 #include "FilterEffectEditWidget.h"
 #include "FilterEffectResource.h"
 #include "FilterResourceServerProvider.h"

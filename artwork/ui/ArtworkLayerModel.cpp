@@ -29,7 +29,7 @@
 #include <KCanvasBase.h>
 #include <KCanvasController.h>
 #include <KShapeControllerBase.h>
-#include <KSelection.h>
+#include <KShapeSelection.h>
 #include <KoZoomHandler.h>
 #include <KShapeLayer.h>
 #include <KShapeGroup.h>
@@ -182,7 +182,7 @@ QVariant ArtworkLayerModel::data(const QModelIndex &index, int role) const
     case Qt::SizeHintRole: return shape->size();
     case ActiveRole: {
         KCanvasController * canvasController = KToolManager::instance()->activeCanvasController();
-        KSelection * selection = canvasController->canvas()->shapeManager()->selection();
+        KShapeSelection * selection = canvasController->canvas()->shapeManager()->selection();
         if (! selection)
             return false;
 
@@ -245,7 +245,7 @@ bool ArtworkLayerModel::setData(const QModelIndex &index, const QVariant &value,
         // fall through
     case ActiveRole: {
         KCanvasController * canvasController = KToolManager::instance()->activeCanvasController();
-        KSelection * selection = canvasController->canvas()->shapeManager()->selection();
+        KShapeSelection * selection = canvasController->canvas()->shapeManager()->selection();
 
         KShapeLayer *layer = dynamic_cast<KShapeLayer*>(shape);
         if (layer && selection)

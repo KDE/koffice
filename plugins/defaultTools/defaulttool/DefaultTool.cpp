@@ -76,7 +76,7 @@ public:
     }
 
 private:
-    KSelection *m_selection;
+    KShapeSelection *m_selection;
 };
 
 class DefaultTool::GuideLine
@@ -790,7 +790,7 @@ bool DefaultTool::paste()
     return success;
 }
 
-KSelection *DefaultTool::koSelection()
+KShapeSelection *DefaultTool::koSelection()
 {
     Q_ASSERT(canvas());
     Q_ASSERT(canvas()->shapeManager());
@@ -927,7 +927,7 @@ void DefaultTool::selectionAlignVerticalBottom()
 
 void DefaultTool::selectionGroup()
 {
-    KSelection* selection = koSelection();
+    KShapeSelection* selection = koSelection();
     if (! selection)
         return;
 
@@ -947,7 +947,7 @@ void DefaultTool::selectionGroup()
 
 void DefaultTool::selectionUngroup()
 {
-    KSelection* selection = canvas()->shapeManager()->selection();
+    KShapeSelection* selection = canvas()->shapeManager()->selection();
     if (! selection)
         return;
 
@@ -986,7 +986,7 @@ void DefaultTool::selectionUngroup()
 
 void DefaultTool::selectionAlign(KShapeAlignCommand::Align align)
 {
-    KSelection* selection = canvas()->shapeManager()->selection();
+    KShapeSelection* selection = canvas()->shapeManager()->selection();
     if (! selection)
         return;
 
@@ -1040,7 +1040,7 @@ void DefaultTool::selectionSendToBack()
 
 void DefaultTool::selectionReorder(KShapeReorderCommand::MoveShapeType order)
 {
-    KSelection* selection = canvas()->shapeManager()->selection();
+    KShapeSelection* selection = canvas()->shapeManager()->selection();
     if (! selection)
         return;
 
@@ -1080,7 +1080,7 @@ KInteractionStrategy *DefaultTool::createStrategy(KPointerEvent *event)
     m_moveCommand = 0;
 
     KShapeManager *shapeManager = canvas()->shapeManager();
-    KSelection *select = shapeManager->selection();
+    KShapeSelection *select = shapeManager->selection();
     bool insideSelection;
     KFlake::SelectionHandle handle = handleAt(event->point, &insideSelection);
 
@@ -1218,7 +1218,7 @@ KInteractionStrategy *DefaultTool::createStrategy(KPointerEvent *event)
 
 void DefaultTool::updateActions()
 {
-    KSelection * selection(koSelection());
+    KShapeSelection * selection(koSelection());
     if (!selection) {
         action("object_order_front")->setEnabled(false);
         action("object_order_raise")->setEnabled(false);

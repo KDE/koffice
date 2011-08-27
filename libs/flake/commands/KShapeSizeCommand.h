@@ -21,7 +21,7 @@
 #ifndef KSHAPESIZECOMMAND_H
 #define KSHAPESIZECOMMAND_H
 
-#include "KSelection.h"
+#include "KShapeSelection.h"
 
 #include "flake_export.h"
 

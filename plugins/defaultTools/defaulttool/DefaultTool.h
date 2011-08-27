@@ -32,7 +32,7 @@
 
 class KInteractionStrategy;
 class KShapeMoveCommand;
-class KSelection;
+class KShapeSelection;
 class KShapeConnection;
 
 /**
@@ -137,7 +137,7 @@ private:
     QRectF handlesSize();
 
     // convenience method;
-    KSelection * koSelection();
+    KShapeSelection * koSelection();
 
     void resourceChanged(int key, const QVariant & res);
 

@@ -34,7 +34,7 @@
 #include "flake_export.h"
 
 class KShapeLayer;
-class KSelectionPrivate;
+class KShapeSelectionPrivate;
 
 /**
  * A selection is a shape that contains a number of references
@@ -49,14 +49,14 @@ class KSelectionPrivate;
  * A selection, however, should not be selectable. We need to think
  * a little about the interaction here.
  */
-class FLAKE_EXPORT KSelection : public QObject, public KShape
+class FLAKE_EXPORT KShapeSelection : public QObject, public KShape
 {
     Q_OBJECT
 
 public:
 
-    KSelection(QObject *parent = 0);
-    virtual ~KSelection();
+    KShapeSelection(QObject *parent = 0);
+    virtual ~KShapeSelection();
 
     /**
      * Adds a shape to the selection.
@@ -143,7 +143,7 @@ signals:
 
 private:
     Q_PRIVATE_SLOT(d_func(), void selectionChangedEvent())
-    Q_DECLARE_PRIVATE_D(KShape::d_ptr, KSelection)
+    Q_DECLARE_PRIVATE_D(KShape::d_ptr, KShapeSelection)
 };
 
 #endif

@@ -30,7 +30,7 @@
 #include <KShapeManager.h>
 #include <KToolManager.h>
 #include <KCanvasController.h>
-#include <KSelection.h>
+#include <KShapeSelection.h>
 #include <KShapeOdfSaveHelper.h>
 #include <KoPAOdfPageSaveHelper.h>
 #include <KDrag.h>
@@ -229,7 +229,7 @@ void KoPADocumentStructureDocker::itemClicked(const QModelIndex &index)
     // check whether the newly selected shape is a page or shape/layer
     bool isPage = (dynamic_cast<KoPAPageBase *>(shape) != 0);
     KCanvasController* canvasController = KToolManager::instance()->activeCanvasController();
-    KSelection *selection = canvasController->canvas()->shapeManager()->selection();
+    KShapeSelection *selection = canvasController->canvas()->shapeManager()->selection();
 
     if (isPage) {
         // no shape is currently selected

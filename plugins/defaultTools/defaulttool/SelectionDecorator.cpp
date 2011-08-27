@@ -22,7 +22,7 @@
 #include "SelectionDecorator.h"
 
 #include <KShape.h>
-#include <KSelection.h>
+#include <KShapeSelection.h>
 #include <kstandarddirs.h>
 #include <kglobal.h>
 
@@ -44,7 +44,7 @@ SelectionDecorator::SelectionDecorator(KFlake::SelectionHandle arrows,
     }
 }
 
-void SelectionDecorator::setSelection(KSelection *selection)
+void SelectionDecorator::setSelection(KShapeSelection *selection)
 {
     m_selection = selection;
 }

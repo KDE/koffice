@@ -444,7 +444,7 @@ void ArtworkPart::addShape(KShape* shape)
     if (layer) {
         d->document.insertLayer(layer);
         if (canvasController) {
-            KSelection *selection = canvasController->canvas()->shapeManager()->selection();
+            KShapeSelection *selection = canvasController->canvas()->shapeManager()->selection();
             selection->setActiveLayer(layer);
         }
     } else {

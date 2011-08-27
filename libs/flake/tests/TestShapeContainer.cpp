@@ -27,7 +27,7 @@
 #include <KShapeUngroupCommand.h>
 #include <KShapeTransformCommand.h>
 #include <KShapeGroup.h>
-#include <KSelection.h>
+#include <KShapeSelection.h>
 
 
 void TestShapeContainer::testModel()
@@ -188,7 +188,7 @@ void TestShapeContainer::testScaling2()
     QUndoCommand* groupCommand = KShapeGroupCommand::createCommand(group, groupedShapes);
     groupCommand->redo();
 
-    KSelection* selection = new KSelection();
+    KShapeSelection* selection = new KShapeSelection();
     selection->select(shape1, true);
 
     QList<KShape*> transformShapes;
@@ -223,7 +223,7 @@ void TestShapeContainer::testScaling2()
 //    kDebug() << "r1 u r2=" << r1.united(r2).size();
     QSizeF shapeSize=r1.united(r2).size();
 
-    selection = new KSelection();
+    selection = new KShapeSelection();
     selection->select(shape1, true);
 //    kDebug() << "selection=" << selection->size();
     QSizeF selecSize = selection->size();

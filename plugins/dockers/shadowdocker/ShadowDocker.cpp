@@ -20,7 +20,7 @@
 #include "ShadowDocker.h"
 #include <KCanvasBase.h>
 #include <KShapeManager.h>
-#include <KSelection.h>
+#include <KShapeSelection.h>
 #include <KToolManager.h>
 #include <KCanvasController.h>
 #include <KShapeShadowCommand.h>
@@ -62,7 +62,7 @@ void ShadowDocker::selectionChanged()
     if (!m_canvas)
         return;
 
-    KSelection *selection = m_canvas->shapeManager()->selection();
+    KShapeSelection *selection = m_canvas->shapeManager()->selection();
     KShape *shape = selection->firstSelectedShape();
     m_widget->setEnabled(shape != 0);
 
@@ -95,7 +95,7 @@ void ShadowDocker::setCanvas(KCanvasBase *canvas)
 
 void ShadowDocker::shadowChanged()
 {
-    KSelection *selection = m_canvas->shapeManager()->selection();
+    KShapeSelection *selection = m_canvas->shapeManager()->selection();
     KShape *shape = selection->firstSelectedShape();
     if (! shape)
         return;

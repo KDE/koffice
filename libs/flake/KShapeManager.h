@@ -30,7 +30,7 @@
 #include "KShape.h"
 #include "flake_export.h"
 
-class KSelection;
+class KShapeSelection;
 class KViewConverter;
 class KCanvasBase;
 class KPointerEvent;
@@ -119,7 +119,7 @@ public:
     void removeAdditional(KShape *shape);
 
     /// return the selection shapes for this shapeManager
-    KSelection *selection() const;
+    KShapeSelection *selection() const;
 
     /**
      * Paint all shapes and their selection handles etc.

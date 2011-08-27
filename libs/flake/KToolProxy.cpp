@@ -30,7 +30,7 @@
 #include "KCanvasController.h"
 #include "KShapeManager.h"
 #include "KShapeManager_p.h"
-#include "KSelection.h"
+#include "KShapeSelection.h"
 #include "KShapeLayer.h"
 
 #include <kdebug.h>

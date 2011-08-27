@@ -63,7 +63,7 @@
 #include <KPasteController.h>
 #include <KPathShape.h> // for KoPathShapeId
 #include <KResourceManager.h>
-#include <KSelection.h>
+#include <KShapeSelection.h>
 #include <KShapeContainer.h>
 #include <KShapeController.h>
 #include <KShapeCreateCommand.h>
@@ -1067,7 +1067,7 @@ void KWView::editSemanticStylesheets()
 void KWView::inlineFrame()
 {
     Q_ASSERT(kwdocument()->mainFrameSet());
-    KSelection *selection = m_canvas->shapeManager()->selection();
+    KShapeSelection *selection = m_canvas->shapeManager()->selection();
 
     KShape *targetShape = 0;
     foreach (KShape *shape, selection->selectedShapes(KFlake::TopLevelSelection)) {
@@ -1134,7 +1134,7 @@ void KWView::showRulers(bool visible)
 
 void KWView::createLinkedFrame()
 {
-    KSelection *selection = m_canvas->shapeManager()->selection();
+    KShapeSelection *selection = m_canvas->shapeManager()->selection();
     QList<KShape*> oldSelection = selection->selectedShapes(KFlake::TopLevelSelection);
     if (oldSelection.count() == 0)
         return;
@@ -1204,7 +1204,7 @@ void KWView::editSelectAllFrames()
         return;
     }
 
-    KSelection *selection = m_canvas->shapeManager()->selection();
+    KShapeSelection *selection = m_canvas->shapeManager()->selection();
     foreach (KWFrameSet *fs, m_document->frameSets()) {
         foreach (KWFrame *frame, fs->frames()) {
             if (frame->shape()->isVisible())
@@ -1233,7 +1233,7 @@ void KWView::createCustomOutline()
         m_document->addCommand(cmd);
     }
 
-    KSelection *selection = m_canvas->shapeManager()->selection();
+    KShapeSelection *selection = m_canvas->shapeManager()->selection();
     selection->deselectAll();
     foreach (KWFrame *frame, frames) {
         KShapeContainer *group = frame->shape()->parent();
@@ -1300,7 +1300,7 @@ void KWView::insertImage()
         }
 
         KShapeCreateCommand *cmd = new KShapeCreateCommand(m_document, shape);
-        KSelection *selection = m_canvas->shapeManager()->selection();
+        KShapeSelection *selection = m_canvas->shapeManager()->selection();
         selection->deselectAll();
         selection->select(shape);
         m_document->addCommand(cmd);
@@ -1316,7 +1316,7 @@ void KWView::setGuideVisibility(bool on)
 void KWView::createTextOnShape()
 {
     QSet<KShape *> frameShapes;
-    KSelection *selection = m_canvas->shapeManager()->selection();
+    KShapeSelection *selection = m_canvas->shapeManager()->selection();
     foreach (KShape *shape, selection->selectedShapes(KFlake::TopLevelSelection)) {
         KWFrame *frame = frameForShape(shape);
         Q_ASSERT(frame);

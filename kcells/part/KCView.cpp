@@ -92,7 +92,7 @@
 #include <KOdfStylesReader.h>
 #include <KShapeController.h>
 #include <KShapeManager.h>
-#include <KSelection.h>
+#include <KShapeSelection.h>
 #include <KOdfStore.h>
 #include <KoToolBoxFactory.h>
 #include <KoDockerManager.h>
@@ -1010,7 +1010,7 @@ void KCView::recalcWorkSheet()
 
 void KCView::shapeSelectionChanged()
 {
-    const KSelection* selection = d->canvas->shapeManager()->selection();
+    const KShapeSelection* selection = d->canvas->shapeManager()->selection();
     const QList<KShape*> shapes = selection->selectedShapes(KFlake::StrippedSelection);
 
     if (shapes.isEmpty()) {
@@ -1452,7 +1452,7 @@ void KCView::copyAsText()
 
 void KCView::setShapeAnchoring(const QString& mode)
 {
-    const KSelection* selection = d->canvas->shapeManager()->selection();
+    const KShapeSelection* selection = d->canvas->shapeManager()->selection();
     const QList<KShape*> shapes = selection->selectedShapes(KFlake::StrippedSelection);
     for (int i = 0; i < shapes.count(); ++i) {
         const KShape* shape = shapes[i];

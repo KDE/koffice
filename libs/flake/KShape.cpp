@@ -25,7 +25,7 @@
 #include "KShapeContainer.h"
 #include "KShapeLayer.h"
 #include "KShapeContainerModel.h"
-#include "KSelection.h"
+#include "KShapeSelection.h"
 #include "KPointerEvent.h"
 #include "KInsets.h"
 #include "KShapeBorderBase.h"

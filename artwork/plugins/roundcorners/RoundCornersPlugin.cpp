@@ -32,7 +32,7 @@
 #include <KToolManager.h>
 #include <KCanvasController.h>
 #include <KCanvasBase.h>
-#include <KSelection.h>
+#include <KShapeSelection.h>
 #include <KShapeManager.h>
 #include <KPathShape.h>
 #include <KParameterShape.h>
@@ -70,7 +70,7 @@ RoundCornersPlugin::~RoundCornersPlugin()
 void RoundCornersPlugin::slotRoundCorners()
 {
     KCanvasController* canvasController = KToolManager::instance()->activeCanvasController();
-    KSelection *selection = canvasController->canvas()->shapeManager()->selection();
+    KShapeSelection *selection = canvasController->canvas()->shapeManager()->selection();
     KShape * shape = selection->firstSelectedShape();
     if (! shape)
         return;

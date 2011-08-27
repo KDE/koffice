@@ -31,7 +31,7 @@
 #include <KShapeManager.h>
 #include <KShapeRegistry.h>
 #include <KPointerEvent.h>
-#include <KSelection.h>
+#include <KShapeSelection.h>
 #include <KShapeFactoryBase.h> // for the mimetype defines etc
 
 #include <QApplication>

@@ -30,7 +30,7 @@
 #include <KShapeController.h>
 #include <KToolProxy.h>
 #include <KShapeManager.h>
-#include <KSelection.h>
+#include <KShapeSelection.h>
 
 #include <klocale.h>
 #include <kdebug.h>

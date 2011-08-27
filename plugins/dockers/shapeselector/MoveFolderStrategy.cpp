@@ -21,7 +21,7 @@
 #include "Canvas.h"
 
 #include <KShapeManager.h>
-#include <KSelection.h>
+#include <KShapeSelection.h>
 #include <KPointerEvent.h>
 
 MoveFolderStrategy::MoveFolderStrategy(Canvas *canvas, FolderShape *clickedFolder, KPointerEvent &event)

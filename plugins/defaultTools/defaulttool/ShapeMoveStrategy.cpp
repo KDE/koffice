@@ -47,7 +47,7 @@ ShapeMoveStrategy::ShapeMoveStrategy(KToolBase *tool, const QPointF &clicked)
         m_newPositions << shape->position();
         boundingRect = boundingRect.unite( shape->boundingRect() );
     }
-    KSelection * selection = tool->canvas()->shapeManager()->selection();
+    KShapeSelection * selection = tool->canvas()->shapeManager()->selection();
     m_initialOffset = selection->absolutePosition( SelectionDecorator::hotPosition() ) - m_start;
     m_initialSelectionPosition = selection->position();
     tool->canvas()->snapGuide()->setIgnoredShapes( selection->selectedShapes( KFlake::FullSelection ) );

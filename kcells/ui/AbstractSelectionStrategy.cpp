@@ -26,7 +26,7 @@
 #include "KCSheet.h"
 
 #include <KCanvasBase.h>
-#include <KSelection.h>
+#include <KShapeSelection.h>
 #include <KShapeManager.h>
 
 class AbstractSelectionStrategy::Private

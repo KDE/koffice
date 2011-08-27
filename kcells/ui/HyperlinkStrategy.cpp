@@ -24,7 +24,7 @@
 #include "Util.h"
 
 #include <KCanvasBase.h>
-#include <KSelection.h>
+#include <KShapeSelection.h>
 #include <KShapeManager.h>
 #include <KToolBase.h>
 

@@ -22,7 +22,7 @@
 
 #include <kdebug.h>
 #include <KShapeManager.h>
-#include <KSelection.h>
+#include <KShapeSelection.h>
 #include <KLineBorder.h>
 #include <KShapeShadow.h>
 

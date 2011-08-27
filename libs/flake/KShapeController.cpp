@@ -24,7 +24,7 @@
 #include "KShapeRegistry.h"
 #include "KShapeManager.h"
 #include "KShapeLayer.h"
-#include "KSelection.h"
+#include "KShapeSelection.h"
 #include "commands/KShapeCreateCommand.h"
 #include "commands/KShapeDeleteCommand.h"
 #include "KCanvasBase.h"

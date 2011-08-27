@@ -26,7 +26,7 @@
 #include <KCanvasBase.h>
 #include <KResourceManager.h>
 #include <KShapeManager.h>
-#include <KSelection.h>
+#include <KShapeSelection.h>
 #include <commands/KShapeMoveCommand.h>
 #include <commands/KShapeSizeCommand.h>
 #include <commands/KShapeTransformCommand.h>
@@ -110,7 +110,7 @@ void DefaultToolTransformWidget::rotationChanged()
 
 void DefaultToolTransformWidget::shearXChanged()
 {
-    KSelection* selection = m_tool->canvas()->shapeManager()->selection();
+    KShapeSelection* selection = m_tool->canvas()->shapeManager()->selection();
     QList<KShape*> selectedShapes = selection->selectedShapes( KFlake::TopLevelSelection );
     QList<QTransform> oldTransforms;
 
@@ -143,7 +143,7 @@ void DefaultToolTransformWidget::shearXChanged()
 
 void DefaultToolTransformWidget::shearYChanged()
 {
-    KSelection* selection = m_tool->canvas()->shapeManager()->selection();
+    KShapeSelection* selection = m_tool->canvas()->shapeManager()->selection();
     QList<KShape*> selectedShapes = selection->selectedShapes( KFlake::TopLevelSelection );
     QList<QTransform> oldTransforms;
 

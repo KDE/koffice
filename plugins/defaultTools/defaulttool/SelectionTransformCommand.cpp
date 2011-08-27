@@ -18,9 +18,9 @@
  */
 
 #include "SelectionTransformCommand.h"
-#include <KSelection.h>
+#include <KShapeSelection.h>
 
-SelectionTransformCommand::SelectionTransformCommand( KSelection * selection, const QTransform &oldTransformation, const QTransform &newTransformation, QUndoCommand * parent )
+SelectionTransformCommand::SelectionTransformCommand( KShapeSelection * selection, const QTransform &oldTransformation, const QTransform &newTransformation, QUndoCommand * parent )
 : QUndoCommand( parent )
 , m_selection( selection )
 , m_oldTransformation( oldTransformation )

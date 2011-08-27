@@ -34,7 +34,7 @@
 
 #include <KShapeLayer.h>
 #include <KoPAMasterPage.h>
-#include <KSelection.h>
+#include <KShapeSelection.h>
 
 #include <QList>
 #include <QPainter>

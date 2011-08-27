@@ -51,7 +51,7 @@ struct Finalizer {
 #include <KOdfStylesReader.h>
 #include <KParagraphStyle.h>
 #include <KPostscriptPaintDevice.h>
-#include <KSelection.h>
+#include <KShapeSelection.h>
 #include <KShapeBackgroundBase.h>
 #include <KShapeLoadingContext.h>
 #include <KShapeManager.h>

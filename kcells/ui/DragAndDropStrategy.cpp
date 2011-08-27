@@ -27,7 +27,7 @@
 #include <KCanvasBase.h>
 #include <KToolBase.h>
 #include <KShape.h>
-#include <KSelection.h>
+#include <KShapeSelection.h>
 #include <KShapeManager.h>
 
 #include <QBuffer>

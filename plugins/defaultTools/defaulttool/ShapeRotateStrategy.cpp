@@ -24,7 +24,7 @@
 
 #include <KInteractionTool.h>
 #include <KCanvasBase.h>
-#include <KSelection.h>
+#include <KShapeSelection.h>
 #include <KPointerEvent.h>
 #include <KShapeManager.h>
 #include <KResourceManager.h>
@@ -132,7 +132,7 @@ QUndoCommand* ShapeRotateStrategy::createCommand(QUndoCommand *parent)
 
     KShapeTransformCommand *cmd = new KShapeTransformCommand(m_selectedShapes, m_oldTransforms, newTransforms, parent);
     cmd->setText(i18n("Rotate"));
-    KSelection * sel = tool()->canvas()->shapeManager()->selection();
+    KShapeSelection * sel = tool()->canvas()->shapeManager()->selection();
     new SelectionTransformCommand(sel, m_initialSelectionMatrix, sel->transformation(), cmd);
     return cmd;
 }

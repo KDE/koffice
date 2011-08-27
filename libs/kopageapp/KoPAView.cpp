@@ -46,7 +46,7 @@
 #include <KoZoomAction.h>
 #include <KoZoomController.h>
 #include <KInlineTextObjectManager.h>
-#include <KSelection.h>
+#include <KShapeSelection.h>
 #include <KoMainWindow.h>
 #include <KoDockerManager.h>
 #include <KShapeLayer.h>
@@ -495,7 +495,7 @@ void KoPAView::editDeleteSelection()
 
 void KoPAView::editSelectAll()
 {
-    KSelection* selection = kopaCanvas()->shapeManager()->selection();
+    KShapeSelection* selection = kopaCanvas()->shapeManager()->selection();
     if(!selection)
         return;
 
@@ -518,7 +518,7 @@ void KoPAView::editSelectAll()
 
 void KoPAView::editDeselectAll()
 {
-    KSelection* selection = kopaCanvas()->shapeManager()->selection();
+    KShapeSelection* selection = kopaCanvas()->shapeManager()->selection();
     if(selection)
         selection->deselectAll();
 
@@ -971,7 +971,7 @@ void KoPAView::findDocumentSetNext(QTextDocument * document)
                 setActivePage(page);
                 d->canvas->update();
             }
-            KSelection* selection = kopaCanvas()->shapeManager()->selection();
+            KShapeSelection* selection = kopaCanvas()->shapeManager()->selection();
             selection->deselectAll();
             selection->select(shape);
             // TODO can this be done nicer? is there a way to get the shape id and the tool id from the shape?
@@ -1026,7 +1026,7 @@ void KoPAView::findDocumentSetPrevious(QTextDocument * document)
                 setActivePage(page);
                 d->canvas->update();
             }
-            KSelection* selection = kopaCanvas()->shapeManager()->selection();
+            KShapeSelection* selection = kopaCanvas()->shapeManager()->selection();
             selection->deselectAll();
             selection->select(shape);
             // TODO can this be done nicer? is there a way to get the shape id and the tool id from the shape?

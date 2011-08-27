@@ -29,7 +29,7 @@
 #include <KShapeManager.h>
 #include <KShape.h>
 #include <KFlake.h>
-#include <KSelection.h>
+#include <KShapeSelection.h>
 #include <KoDockerManager.h>
 #include <KoRuler.h>
 #include <KoToolBoxFactory.h>

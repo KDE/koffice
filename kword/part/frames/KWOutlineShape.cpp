@@ -20,7 +20,7 @@
 #include "KWFrame.h"
 
 #include <KCanvasBase.h>
-#include <KSelection.h>
+#include <KShapeSelection.h>
 #include <KShapeGroup.h>
 #include <KShapeManager.h>
 #include <KViewConverter.h>

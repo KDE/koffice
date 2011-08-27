@@ -39,7 +39,7 @@
 #include <KShapeManager.h>
 #include <KPathShape.h>
 #include <KParameterShape.h>
-#include <KSelection.h>
+#include <KShapeSelection.h>
 
 #include <kpluginfactory.h>
 #include <kdebug.h>
@@ -72,7 +72,7 @@ WhirlPinchPlugin::WhirlPinchPlugin(QObject *parent, const QVariantList &)
 void WhirlPinchPlugin::slotWhirlPinch()
 {
     KCanvasController* canvasController = KToolManager::instance()->activeCanvasController();
-    KSelection *selection = canvasController->canvas()->shapeManager()->selection();
+    KShapeSelection *selection = canvasController->canvas()->shapeManager()->selection();
     KShape * shape = selection->firstSelectedShape();
     if (! shape)
         return;

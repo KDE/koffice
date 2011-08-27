@@ -26,7 +26,7 @@
 
 #include <KShapeManager.h>
 #include <KToolManager.h>
-#include <KSelection.h>
+#include <KShapeSelection.h>
 #include <KCreateShapesTool.h>
 #include <KCanvasController.h>
 

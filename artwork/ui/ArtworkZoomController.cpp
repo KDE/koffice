@@ -27,7 +27,7 @@
 #include <KoZoomHandler.h>
 #include <KResourceManager.h>
 #include <KShapeManager.h>
-#include <KSelection.h>
+#include <KShapeSelection.h>
 
 #include <KActionCollection>
 #include <KLocale>
@@ -131,7 +131,7 @@ void ArtworkZoomController::setZoom(KoZoomMode::Mode mode, qreal zoom)
 
     // now calculate the preferred center in document coordinates
     QPointF docCenter = d->zoomHandler->viewToDocument(preferredCenter - documentOrigin);
-    KSelection * selection = d->canvas->shapeManager()->selection();
+    KShapeSelection * selection = d->canvas->shapeManager()->selection();
     if( selection->count()) {
         docCenter = selection->boundingRect().center();
     }

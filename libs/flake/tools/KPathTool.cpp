@@ -28,7 +28,7 @@
 #include "KShapeManager.h"
 #include "KResourceManager.h"
 #include "KViewConverter.h"
-#include "KSelection.h"
+#include "KShapeSelection.h"
 #include "KPointerEvent.h"
 #include "commands/KPathPointTypeCommand_p.h"
 #include "commands/KPathPointInsertCommand.h"

@@ -26,7 +26,7 @@
 #include "KToolRegistry.h"
 #include "KToolProxy.h"
 #include "KToolProxy_p.h"
-#include "KSelection.h"
+#include "KShapeSelection.h"
 #include "KCanvasController.h"
 #include "KCanvasController_p.h"
 #include "KShape.h"
@@ -301,7 +301,7 @@ void KToolManager::Private::postSwitchTool(bool temporary)
     if (canvasData->activeTool
             && canvasData->activeTool->canvas()
             && canvasData->activeTool->canvas()->shapeManager()) {
-        KSelection *selection = canvasData->activeTool->canvas()->shapeManager()->selection();
+        KShapeSelection *selection = canvasData->activeTool->canvas()->shapeManager()->selection();
         Q_ASSERT(selection);
 
         foreach(KShape *shape, selection->selectedShapes()) {

@@ -25,7 +25,7 @@
 #include <KShapeContainerModel.h>
 
 #include <KShapeManager.h>
-#include <KSelection.h>
+#include <KShapeSelection.h>
 #include <KPointerEvent.h>
 
 #include <QMenu>

@@ -27,7 +27,7 @@
 #include <KResourceManager.h>
 #include <KoExecutePolicy.h>
 #include <KoAction.h>
-#include <KSelection.h>
+#include <KShapeSelection.h>
 #include <KShape.h>
 
 #include <QTextLayout>
@@ -35,7 +35,7 @@
 #include <QTextBlock>
 #include <QTimer>
 
-KWStatistics::KWStatistics(KWDocument *document, KSelection *selection, QWidget *parent)
+KWStatistics::KWStatistics(KWDocument *document, KShapeSelection *selection, QWidget *parent)
         : QWidget(parent),
         m_resourceManager(document->resourceManager()),
         m_action(new KoAction(this)),
