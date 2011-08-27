@@ -176,19 +176,19 @@ kde4_add_ui_files(flake_SRCS
     tools/KZoomToolWidget.ui
 )
 
-kde4_add_library(flake SHARED ${flake_SRCS})
+kde4_add_library(kflake SHARED ${flake_SRCS})
 
-target_link_libraries(flake ${KDE4_KDEUI_LIBS} koodf)
+target_link_libraries(kflake ${KDE4_KDEUI_LIBS} koodf)
 
-target_link_libraries(flake LINK_INTERFACE_LIBRARIES koodf)
+target_link_libraries(kflake LINK_INTERFACE_LIBRARIES koodf)
 
-set_target_properties(flake PROPERTIES
+set_target_properties(kflake PROPERTIES
     VERSION ${GENERIC_KOFFICE_LIB_VERSION} SOVERSION ${GENERIC_KOFFICE_LIB_SOVERSION}
 )
 
 ########### install files ###############
 
-install(TARGETS flake  ${INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS kflake  ${INSTALL_TARGETS_DEFAULT_ARGS})
 install( FILES
     flake.desktop
     flaketool.desktop

@@ -40,7 +40,7 @@ set(artworkfiltereffects_PART_SRCS
 
 kde4_add_plugin(artworkfiltereffects ${artworkfiltereffects_PART_SRCS})
 
-target_link_libraries(artworkfiltereffects flake kowidgets)
+target_link_libraries(artworkfiltereffects kflake kowidgets)
 
 install(TARGETS artworkfiltereffects  DESTINATION ${PLUGIN_INSTALL_DIR})
 

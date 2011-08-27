@@ -51,12 +51,12 @@ kde4_add_library(kowidgets SHARED ${kowidgets_LIB_SRCS})
 
 option(GHNS "support Get Hot New Stuff" ON)
 if(GHNS)
-    target_link_libraries(kowidgets pigmentcms flake ${KDE4_KNEWSTUFF3_LIBS})
+    target_link_libraries(kowidgets pigmentcms kflake ${KDE4_KNEWSTUFF3_LIBS})
 else(GHNS)
-    target_link_libraries(kowidgets pigmentcms flake)
+    target_link_libraries(kowidgets pigmentcms kflake)
 endif (GHNS)
 
-target_link_libraries(kowidgets LINK_INTERFACE_LIBRARIES flake pigmentcms)
+target_link_libraries(kowidgets LINK_INTERFACE_LIBRARIES kflake pigmentcms)
 
 set_target_properties(kowidgets PROPERTIES
     VERSION ${GENERIC_KOFFICE_LIB_VERSION} SOVERSION ${GENERIC_KOFFICE_LIB_SOVERSION}

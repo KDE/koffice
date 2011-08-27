@@ -97,11 +97,11 @@ endif( Soprano_FOUND )
 
 kde4_add_library(kotext SHARED ${kotext_LIB_SRCS})
 
-target_link_libraries(kotext flake)
+target_link_libraries(kotext kflake)
 if( Soprano_FOUND )
     target_link_libraries(kotext ${SOPRANO_LIBRARIES})
 endif( Soprano_FOUND )
-target_link_libraries(kotext LINK_INTERFACE_LIBRARIES flake)
+target_link_libraries(kotext LINK_INTERFACE_LIBRARIES kflake)
 
 set_target_properties(kotext PROPERTIES
    VERSION ${GENERIC_KOFFICE_LIB_VERSION} SOVERSION ${GENERIC_KOFFICE_LIB_SOVERSION}
