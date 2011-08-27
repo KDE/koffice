@@ -18,8 +18,8 @@
 * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KOTEXTEDITOR_H
-#define KOTEXTEDITOR_H
+#ifndef KODFTEXTEDITOR_H
+#define KODFTEXTEDITOR_H
 
 #include "kotext_export.h"
 
@@ -44,7 +44,7 @@ class QString;
 class QUndoCommand;
 class KoTextEditorPrivate;
 
-class KOTEXT_EXPORT KoTextEditor: public KToolSelection
+class KODFTEXT_EXPORT KoTextEditor: public KToolSelection
 {
     Q_OBJECT
 public:
@@ -293,4 +293,4 @@ private:
 
 Q_DECLARE_METATYPE(KoTextEditor*)
 
-#endif // KOTEXTEDITOR_H
+#endif // KODFTEXTEDITOR_H

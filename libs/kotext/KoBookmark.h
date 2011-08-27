@@ -43,7 +43,7 @@ class KoBookmarkPrivate;
  * A bookmark should know the specific text shape where it is located since a document may
  * contain more than one text shapes. This shape can be retrieved using KoBookmark::shape()
  */
-class KOTEXT_EXPORT KoBookmark : public KInlineObject
+class KODFTEXT_EXPORT KoBookmark : public KInlineObject
 {
 public:
     /// This enum determines the type of bookmark

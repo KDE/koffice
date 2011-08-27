@@ -31,7 +31,7 @@ class KXmlElement;
 
 class QTextDocument;
 
-class KOTEXT_EXPORT KDeleteChangeMarker : public KInlineObject
+class KODFTEXT_EXPORT KDeleteChangeMarker : public KInlineObject
 {
 public:
 

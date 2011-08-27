@@ -137,8 +137,8 @@ void KDeleteChangeMarker::saveOdf(KShapeSavingContext &context)
 
     QString changeName;
     KTextSharedSavingData *sharedData = 0;
-    if (context.sharedData(KOTEXT_SHARED_SAVING_ID)) {
-        sharedData = dynamic_cast<KTextSharedSavingData*>(context.sharedData(KOTEXT_SHARED_SAVING_ID));
+    if (context.sharedData(KODFTEXT_SHARED_SAVING_ID)) {
+        sharedData = dynamic_cast<KTextSharedSavingData*>(context.sharedData(KODFTEXT_SHARED_SAVING_ID));
         if (!sharedData) {
             kWarning(32500) << "There is no KTextSharedSavingData in the context. This should not be the case";
             return;

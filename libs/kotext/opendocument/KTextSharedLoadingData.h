@@ -42,7 +42,7 @@ class KStyleManager;
 class KShape;
 class KShapeLoadingContext;
 
-#define KOTEXT_SHARED_LOADING_ID "KoTextSharedLoadingId"
+#define KODFTEXT_SHARED_LOADING_ID "KoTextSharedLoadingId"
 
 /**
  * This class is used to cache the loaded styles so that they have to be loaded only once
@@ -50,7 +50,7 @@ class KShapeLoadingContext;
  * When a text shape is loaded it checks if the KTextSharedLoadingData is already there.
  * If not it is created.
  */
-class KOTEXT_EXPORT KTextSharedLoadingData : public KSharedLoadingData
+class KODFTEXT_EXPORT KTextSharedLoadingData : public KSharedLoadingData
 {
     friend class KTextLoader;
 public:

@@ -98,7 +98,7 @@ class KTableCellStyle;
  *
  * @sa dumpDocument(), dumpFrame(), dumpBlock()
  */
-class KOTEXT_TEST_EXPORT KTextDebug
+class KODFTEXT_TEST_EXPORT KTextDebug
 {
 public:
     /**
@@ -293,4 +293,4 @@ private:
     static const int INDENT;              /**< Indentation value. */
 };
 
-#endif /* KOTEXTDEBUG_H */
+#endif /* KODFTEXTDEBUG_H */

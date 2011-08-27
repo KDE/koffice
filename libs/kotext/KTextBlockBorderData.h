@@ -35,7 +35,7 @@
  * to allow multiple paragraphs to share one border.
  *
  */
-class KOTEXT_EXPORT KTextBlockBorderData
+class KODFTEXT_EXPORT KTextBlockBorderData
 {
 public:
     /// Enum used to differentiate between the 4 types of borders this class maintains

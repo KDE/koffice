@@ -1,7 +1,7 @@
 include_directories( 
 	${CMAKE_SOURCE_DIR}/kword/part
 	${CMAKE_SOURCE_DIR}/kword/part/frames
-	${KOTEXT_INCLUDES}
+	${KODFTEXT_INCLUDES}
 	${KOKROSS_INCLUDES} )
 
 add_subdirectory( scripts )

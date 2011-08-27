@@ -1,4 +1,4 @@
-include_directories(${KOTEXT_INCLUDES})
+include_directories(${KODFTEXT_INCLUDES})
 
 add_subdirectory( tests )
 

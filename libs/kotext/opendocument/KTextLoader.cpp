@@ -402,7 +402,7 @@ KTextLoader::KTextLoader(KShapeLoadingContext &context, KShape *shape)
         : QObject()
         , d(new Private(context, shape))
 {
-    KSharedLoadingData *sharedData = context.sharedData(KOTEXT_SHARED_LOADING_ID);
+    KSharedLoadingData *sharedData = context.sharedData(KODFTEXT_SHARED_LOADING_ID);
     if (sharedData) {
         d->textSharedData = dynamic_cast<KTextSharedLoadingData *>(sharedData);
     }
@@ -415,9 +415,9 @@ KTextLoader::KTextLoader(KShapeLoadingContext &context, KShape *shape)
         KStyleManager *styleManager = rm->resource(KoText::StyleManager).value<KStyleManager*>();
         d->textSharedData->loadOdfStyles(context, styleManager);
         if (!sharedData) {
-            context.addSharedData(KOTEXT_SHARED_LOADING_ID, d->textSharedData);
+            context.addSharedData(KODFTEXT_SHARED_LOADING_ID, d->textSharedData);
         } else {
-            kWarning(32500) << "A different type of sharedData was found under the" << KOTEXT_SHARED_LOADING_ID;
+            kWarning(32500) << "A different type of sharedData was found under the" << KODFTEXT_SHARED_LOADING_ID;
             Q_ASSERT(false);
         }
     }

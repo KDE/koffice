@@ -7,7 +7,7 @@ set(SHAPES_SOURCES
 
 
 include_directories(
-        ${KOTEXT_INCLUDES}
+        ${KODFTEXT_INCLUDES}
         ${KOMAIN_INCLUDES}
         ${FLAKE_INCLUDES}
         ${CMAKE_SOURCE_DIR}/artwork

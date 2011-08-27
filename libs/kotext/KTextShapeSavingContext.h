@@ -29,7 +29,7 @@ class KOdfGenericChanges;
 /**
  * The set of data for the ODF file format used during saving of a shape.
  */
-class KOTEXT_EXPORT KTextShapeSavingContext : public KShapeSavingContext
+class KODFTEXT_EXPORT KTextShapeSavingContext : public KShapeSavingContext
 {
 public:
 

@@ -1058,7 +1058,7 @@ QString TestLoading::documentToOdt(QTextDocument *document)
     KOdfGenericChanges changes;
     KShapeSavingContext context(xmlWriter, mainStyles, embeddedSaver);
 
-    KSharedSavingData *sharedData = context.sharedData(KOTEXT_SHARED_SAVING_ID);
+    KSharedSavingData *sharedData = context.sharedData(KODFTEXT_SHARED_SAVING_ID);
     KTextSharedSavingData *textSharedData = 0;
     if (sharedData) {
         textSharedData = dynamic_cast<KTextSharedSavingData *>(sharedData);
@@ -1070,9 +1070,9 @@ QString TestLoading::documentToOdt(QTextDocument *document)
         textSharedData = new KTextSharedSavingData();
         textSharedData->setGenChanges(changes);
         if (!sharedData) {
-            context.addSharedData(KOTEXT_SHARED_SAVING_ID, textSharedData);
+            context.addSharedData(KODFTEXT_SHARED_SAVING_ID, textSharedData);
         } else {
-            kWarning(32500) << "A different type of sharedData was found under the" << KOTEXT_SHARED_SAVING_ID;
+            kWarning(32500) << "A different type of sharedData was found under the" << KODFTEXT_SHARED_SAVING_ID;
             Q_ASSERT(false);
         }
     }

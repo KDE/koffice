@@ -40,7 +40,7 @@ class KChangeTrackerElement;
 class KFormatChangeInformation;
 class KDeletedRowColumnDataStore;
 
-class KOTEXT_EXPORT KChangeTracker : public QObject
+class KODFTEXT_EXPORT KChangeTracker : public QObject
 {
     Q_OBJECT
 public:

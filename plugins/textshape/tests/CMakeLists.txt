@@ -4,7 +4,7 @@ include_directories( ${CMAKE_SOURCE_DIR}/plugins/textshape
     ${CMAKE_SOURCE_DIR}/plugins/textshape/dialogs
     ${CMAKE_BINARY_DIR}/plugins/textshape/dialogs
     ${CMAKE_BINARY_DIR}/plugins/textshape
-    ${KOTEXT_INCLUDES}
+    ${KODFTEXT_INCLUDES}
     ${PIGMENT_INCLUDES})
 
 

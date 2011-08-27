@@ -46,7 +46,7 @@ class KXmlElement;
  * @see KStyleManager
  * @see KoTableRowAndColumnStyleManager
  */
-class KOTEXT_EXPORT KTableRowStyle
+class KODFTEXT_EXPORT KTableRowStyle
 {
 public:
     enum Property {

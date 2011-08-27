@@ -553,7 +553,7 @@ KTextWriter::KTextWriter(KShapeSavingContext &context, KDocumentRdfBase *rdfData
     : d(new Private(context))
 {
     d->rdfData = rdfData;
-    KSharedSavingData *sharedData = context.sharedData(KOTEXT_SHARED_SAVING_ID);
+    KSharedSavingData *sharedData = context.sharedData(KODFTEXT_SHARED_SAVING_ID);
     if (sharedData) {
         d->sharedData = dynamic_cast<KTextSharedSavingData *>(sharedData);
     }
@@ -563,9 +563,9 @@ KTextWriter::KTextWriter(KShapeSavingContext &context, KDocumentRdfBase *rdfData
         KOdfGenericChanges *changes = new KOdfGenericChanges();
         d->sharedData->setGenChanges(*changes);
         if (!sharedData) {
-            context.addSharedData(KOTEXT_SHARED_SAVING_ID, d->sharedData);
+            context.addSharedData(KODFTEXT_SHARED_SAVING_ID, d->sharedData);
         } else {
-            kWarning(32500) << "A different type of sharedData was found under the" << KOTEXT_SHARED_SAVING_ID;
+            kWarning(32500) << "A different type of sharedData was found under the" << KODFTEXT_SHARED_SAVING_ID;
             Q_ASSERT(false);
         }
     }

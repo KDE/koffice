@@ -48,7 +48,7 @@ class KStyleManagerPrivate;
  * Manages all character, paragraph, table and table cell styles for any number
  * of documents.
  */
-class KOTEXT_EXPORT KStyleManager : public QObject
+class KODFTEXT_EXPORT KStyleManager : public QObject
 {
     Q_OBJECT
 public:

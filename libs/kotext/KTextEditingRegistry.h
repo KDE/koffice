@@ -34,7 +34,7 @@
  * @see KTextEditingFactory
  * @see KTextEditingPlugin
  */
-class KOTEXT_EXPORT KTextEditingRegistry : public QObject,  public KGenericRegistry<KTextEditingFactory*>
+class KODFTEXT_EXPORT KTextEditingRegistry : public QObject,  public KGenericRegistry<KTextEditingFactory*>
 {
     Q_OBJECT
 public:

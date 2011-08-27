@@ -2,7 +2,7 @@ project(kwordpart)
 
 add_subdirectory( tests )
 
-include_directories( ${KOTEXT_INCLUDES}  ${KDE4_INCLUDE_DIR}/threadweaver/ )
+include_directories( ${KODFTEXT_INCLUDES}  ${KDE4_INCLUDE_DIR}/threadweaver/ )
 
 ########### KWordPrivate library ###############
 

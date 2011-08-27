@@ -48,7 +48,7 @@ class KOdfGenericStyle;
  * equals styleId() of that style.
  * @see KStyleManager
  */
-class KOTEXT_EXPORT KCharacterStyle : public QObject
+class KODFTEXT_EXPORT KCharacterStyle : public QObject
 {
     Q_OBJECT
 public:

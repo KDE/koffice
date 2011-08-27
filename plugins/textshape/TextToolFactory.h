@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOTEXTTOOLFACTORY_H
-#define KOTEXTTOOLFACTORY_H
+#ifndef KODFTEXTTOOLFACTORY_H
+#define KODFTEXTTOOLFACTORY_H
 
 #include <KToolFactoryBase.h>
 

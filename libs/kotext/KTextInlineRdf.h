@@ -69,7 +69,7 @@ class KXmlElement;
  * FIXME: createXmlId() should consult with the KOffice codebase when
  * generating new xml:id values during save.
  */
-class KOTEXT_EXPORT KTextInlineRdf
+class KODFTEXT_EXPORT KTextInlineRdf
 {
 public:
     KTextInlineRdf(QTextDocument *doc, const QTextBlock &b);

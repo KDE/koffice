@@ -53,7 +53,7 @@ class KXmlElement;
  * a specific KTableCellStyle.
  * @see KStyleManager
  */
-class KOTEXT_EXPORT KTableCellStyle : public KTableBorderStyle
+class KODFTEXT_EXPORT KTableCellStyle : public KTableBorderStyle
 {
     Q_OBJECT
 public:

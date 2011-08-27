@@ -37,7 +37,7 @@ class KDocumentRdfBase;
 /**
  * KTextWriter saves the text ODF of a shape
  */
-class KOTEXT_EXPORT KTextWriter
+class KODFTEXT_EXPORT KTextWriter
 {
 public:
     /**

@@ -31,7 +31,7 @@ namespace Soprano
     class Model;
 }
 
-class KOTEXT_EXPORT KTextOdfSaveHelper : public KDragOdfSaveHelper
+class KODFTEXT_EXPORT KTextOdfSaveHelper : public KDragOdfSaveHelper
 {
 public:
     KTextOdfSaveHelper(KTextShapeData * shapeData, int from, int to);
@@ -55,4 +55,4 @@ private:
     Private * const d;
 };
 
-#endif /* KOTEXTODFSAVEHELPER_H */
+#endif /* KODFTEXTODFSAVEHELPER_H */

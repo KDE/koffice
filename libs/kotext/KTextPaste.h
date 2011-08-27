@@ -33,7 +33,7 @@ namespace Soprano
     class Model;
 }
 
-class KOTEXT_EXPORT KTextPaste : public KOdfPasteBase
+class KODFTEXT_EXPORT KTextPaste : public KOdfPasteBase
 {
 public:
     /**
@@ -53,4 +53,4 @@ private:
     Private * const d;
 };
 
-#endif /* KOTEXTPASTE_H */
+#endif /* KODFTEXTPASTE_H */

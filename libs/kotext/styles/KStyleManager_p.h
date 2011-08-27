@@ -34,7 +34,7 @@
 #include <QList>
 #include <QMap>
 
-class KOTEXT_TEST_EXPORT KStyleManagerPrivate
+class KODFTEXT_TEST_EXPORT KStyleManagerPrivate
 {
 public:
     KStyleManagerPrivate();

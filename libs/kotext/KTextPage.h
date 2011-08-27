@@ -29,7 +29,7 @@
  * application specific functionality for single pages.
  * @see KTextShapeData::setPage();
  */
-class KOTEXT_EXPORT KTextPage
+class KODFTEXT_EXPORT KTextPage
 {
 public:
 

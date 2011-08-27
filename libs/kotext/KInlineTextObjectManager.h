@@ -39,7 +39,7 @@ class QAction;
  * KTextDocumentLayout for that specific textDocument, your inline text object will get painted
  * properly.
  */
-class KOTEXT_EXPORT KInlineTextObjectManager : public QObject
+class KODFTEXT_EXPORT KInlineTextObjectManager : public QObject
 {
     Q_OBJECT
 // TODO, when to delete the inlineObject s

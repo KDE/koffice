@@ -33,7 +33,7 @@ class KoFindPrivate;
  * This controller class allows you to get the relevant find actions
  * added to your action collection and make them act similarly for all KOffice apps.
  */
-class KOTEXT_EXPORT KoFind : public QObject
+class KODFTEXT_EXPORT KoFind : public QObject
 {
     Q_OBJECT
 public:

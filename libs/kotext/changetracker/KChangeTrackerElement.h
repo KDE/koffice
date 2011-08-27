@@ -31,7 +31,7 @@ class QTextDocumentFragment;
 class KDeleteChangeMarker;
 
 
-class KOTEXT_EXPORT KChangeTrackerElement
+class KODFTEXT_EXPORT KChangeTrackerElement
 {
 public:
 

@@ -3,7 +3,7 @@ project(textvariables)
 include_directories(
     ${KDE4_INCLUDE_DIR}
     ${QT_INCLUDES}
-    ${KOTEXT_INCLUDES}
+    ${KODFTEXT_INCLUDES}
     ${KOMAIN_INCLUDES} )
 
 set(textvariables_SRCS

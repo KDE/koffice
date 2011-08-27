@@ -55,7 +55,7 @@ class KShapeLoadingContext;
  * The position of the shape relative to the anchor is called the offset. It's loaded by loadOdf().
  * @see KWAnchorStrategy for more information about the layout of anchors/shapes in KWord.
  */
-class KOTEXT_EXPORT KTextAnchor : public KInlineObject
+class KODFTEXT_EXPORT KTextAnchor : public KInlineObject
 {
 public:
     /// the vertical alignment options for the shape this anchor holds.

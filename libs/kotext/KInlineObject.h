@@ -47,7 +47,7 @@ class KTextPage;
  *
  * @see KInlineTextObjectManager
  */
-class KOTEXT_EXPORT KInlineObject
+class KODFTEXT_EXPORT KInlineObject
 {
 public:
     enum Property {
@@ -265,9 +265,9 @@ protected:
 
 private:
     Q_DECLARE_PRIVATE(KInlineObject)
-    friend KOTEXT_EXPORT QDebug operator<<(QDebug, const KInlineObject *);
+    friend KODFTEXT_EXPORT QDebug operator<<(QDebug, const KInlineObject *);
 };
 
-KOTEXT_EXPORT QDebug operator<<(QDebug dbg, const KInlineObject *o);
+KODFTEXT_EXPORT QDebug operator<<(QDebug dbg, const KInlineObject *o);
 
 #endif

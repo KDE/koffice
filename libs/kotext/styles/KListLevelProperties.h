@@ -35,7 +35,7 @@ class KImageData;
 /**
  * Properties per list level.
  */
-class KOTEXT_EXPORT KListLevelProperties
+class KODFTEXT_EXPORT KListLevelProperties
 {
 public:
     /// Constructor

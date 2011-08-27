@@ -42,7 +42,7 @@ class KXmlWriter;
  * @see KInlineTextObjectManager::createInsertVariableActions()
  * @see KInlineTextObjectManager::variableManager()
  */
-class KOTEXT_EXPORT KVariableManager : public QObject
+class KODFTEXT_EXPORT KVariableManager : public QObject
 {
     Q_OBJECT
 public:

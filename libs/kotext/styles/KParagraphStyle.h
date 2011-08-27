@@ -50,7 +50,7 @@ class KShapeLoadingContext;
  * a specific KParagraphStyle.
  * @see KStyleManager
  */
-class KOTEXT_EXPORT KParagraphStyle : public QObject
+class KODFTEXT_EXPORT KParagraphStyle : public QObject
 {
     Q_OBJECT
 public:

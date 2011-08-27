@@ -52,7 +52,7 @@ class KXmlNode;
  *
  * Don't forget to unset it if you later want to load text that needs content.xml.
  */
-class KOTEXT_EXPORT KTextLoader : public QObject
+class KODFTEXT_EXPORT KTextLoader : public QObject
 {
     Q_OBJECT
 public:

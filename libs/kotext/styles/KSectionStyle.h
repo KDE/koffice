@@ -48,7 +48,7 @@ class KXmlElement;
  * a specific KSectionStyle.
  * @see KStyleManager
  */
-class KOTEXT_EXPORT KSectionStyle : public QObject
+class KODFTEXT_EXPORT KSectionStyle : public QObject
 {
     Q_OBJECT
 public:

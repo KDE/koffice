@@ -45,7 +45,7 @@ class KXmlElement;
  * a specific KTableStyle.
  * @see KStyleManager
  */
-class KOTEXT_EXPORT KTableStyle : public QObject
+class KODFTEXT_EXPORT KTableStyle : public QObject
 {
     Q_OBJECT
 public:

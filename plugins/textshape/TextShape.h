@@ -19,8 +19,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOTEXTSHAPE_H
-#define KOTEXTSHAPE_H
+#ifndef KODFTEXTSHAPE_H
+#define KODFTEXTSHAPE_H
 
 #include <KShapeContainer.h>
 #include <KFrameShape.h>

@@ -50,7 +50,7 @@ class KVariablePrivate;
  * For variables that needs to change their value based on position in the document,
  * you should implement that hook.  Useful methods.
  */
-class KOTEXT_EXPORT KVariable : public KInlineObject
+class KODFTEXT_EXPORT KVariable : public KInlineObject
 {
 public:
     /**

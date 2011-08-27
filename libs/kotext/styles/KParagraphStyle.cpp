@@ -1390,7 +1390,7 @@ void KParagraphStyle::loadOdfProperties(KShapeLoadingContext &scontext)
 
         const QString dropstyle = dropCap.attributeNS(KOdfXmlNS::style, "style-name");
         if (! dropstyle.isEmpty()) {
-            KSharedLoadingData *sharedData = scontext.sharedData(KOTEXT_SHARED_LOADING_ID);
+            KSharedLoadingData *sharedData = scontext.sharedData(KODFTEXT_SHARED_LOADING_ID);
             KTextSharedLoadingData *textSharedData = 0;
             textSharedData = dynamic_cast<KTextSharedLoadingData *>(sharedData);
             if (textSharedData) {

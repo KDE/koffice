@@ -420,7 +420,7 @@ void ArtworkDocument::loadOdfStyles(KShapeLoadingContext & context)
         return;
 
     sharedData->loadOdfStyles(context, styleManager);
-    context.addSharedData(KOTEXT_SHARED_LOADING_ID, sharedData);
+    context.addSharedData(KODFTEXT_SHARED_LOADING_ID, sharedData);
 }
 
 void ArtworkDocument::saveOdfStyles(KShapeSavingContext & context)

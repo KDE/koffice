@@ -70,7 +70,7 @@ QByteArray KWOdfWriter::serializeHeaderFooter(KOdfEmbeddedDocumentSaver &embedde
 
     KTextSharedSavingData *sharedData = new KTextSharedSavingData;
     sharedData->setGenChanges(changes);
-    context.addSharedData(KOTEXT_SHARED_SAVING_ID, sharedData);
+    context.addSharedData(KODFTEXT_SHARED_SAVING_ID, sharedData);
 
     Q_ASSERT(!fs->frames().isEmpty());
     KTextShapeData *shapedata = qobject_cast<KTextShapeData *>(fs->frames().first()->shape()->userData());
@@ -234,7 +234,7 @@ bool KWOdfWriter::save(KOdfWriteStore &odfStore, KOdfEmbeddedDocumentSaver &embe
 
     KTextSharedSavingData *sharedData = new KTextSharedSavingData;
     sharedData->setGenChanges(changes);
-    context.addSharedData(KOTEXT_SHARED_SAVING_ID, sharedData);
+    context.addSharedData(KODFTEXT_SHARED_SAVING_ID, sharedData);
 
     calculateZindexOffsets();
 

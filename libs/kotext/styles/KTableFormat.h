@@ -40,7 +40,7 @@ class QBrush;
  *
  * \sa KoTableColumnFormat, KoTableRowFormat
  */
-class KOTEXT_EXPORT KTableFormat
+class KODFTEXT_EXPORT KTableFormat
 {
 public:
     /// Creates a new format of type \c InvalidFormat.

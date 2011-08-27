@@ -122,7 +122,7 @@ void SCPlaceholderTextStrategy::saveOdf(KShapeSavingContext &context)
 bool SCPlaceholderTextStrategy::loadOdf(const KXmlElement &element, KShapeLoadingContext &context)
 {
 kDebug();
-    if (KTextSharedLoadingData *textSharedData = dynamic_cast<KTextSharedLoadingData *>(context.sharedData(KOTEXT_SHARED_LOADING_ID))) {
+    if (KTextSharedLoadingData *textSharedData = dynamic_cast<KTextSharedLoadingData *>(context.sharedData(KODFTEXT_SHARED_LOADING_ID))) {
         KShapeFactoryBase *factory = KShapeRegistry::instance()->value("TextShapeID");
         Q_ASSERT(factory);
         m_textShape = factory->createDefaultShape(context.documentResourceManager());

@@ -526,7 +526,7 @@ bool KCMap::loadOdf(const KXmlElement& body, KOdfLoadingContext& odfContext)
     foreach (KCharacterStyle* style, sharedData->characterStyles(false)) {
         fixupStyle(style);
     }
-    shapeContext.addSharedData(KOTEXT_SHARED_LOADING_ID, sharedData);
+    shapeContext.addSharedData(KODFTEXT_SHARED_LOADING_ID, sharedData);
 
     QVariant variant;
     variant.setValue(textStyleManager());
