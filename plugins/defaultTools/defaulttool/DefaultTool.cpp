@@ -37,6 +37,7 @@
 #include <KShapeConnection.h>
 #include <KToolSelection.h>
 #include <KToolManager.h>
+#include <KToolRegistry.h>
 #include <KGuidesData.h>
 #include <KShapeController.h>
 #include <KShapeManager.h>
@@ -1207,18 +1208,39 @@ KInteractionStrategy *DefaultTool::createStrategy(KPointerEvent *event)
     }
     else if (handle == KFlake::NoHandle) { // clicked on shape which is not selected
         repaintDecorations();
-        if (! selectMultiple)
+        if (!selectMultiple)
             shapeManager->selection()->deselectAll();
         select->select(shape, selectNextInStack ? KShapeSelection::NonRecursive : KShapeSelection::Recursive);
         repaintDecorations();
-        return new ShapeMoveStrategy(this, event->point);
+        ShapeMoveStrategy *newStrategy = new ShapeMoveStrategy(this, event->point);
+        if (!selectMultiple) {
+            QList<KShape*> myShape;
+            myShape << shape;
+            QString toolName = KToolManager::instance()->preferredToolForSelection(myShape);
+            KToolFactoryBase *factory = KToolRegistry::instance()->value(toolName);
+            if (factory) {
+                const KToolFactoryBase::ShapeSelectionFlags flags = factory->autoActivateFlags();
+                bool autoActivate = !shape->isContentProtected(); // Default don't use those
+                if (flags & KToolFactoryBase::ContentProtected)
+                    autoActivate = shape->isGeometryProtected();
+                if ((flags & KToolFactoryBase::NoShapeMatch) == KToolFactoryBase::NoShapeMatch)
+                    autoActivate = false;
+                if (autoActivate && (flags & KToolFactoryBase::ShapeGeometryLocked))
+                    autoActivate = shape->isGeometryProtected();
+                if (autoActivate && (flags & KToolFactoryBase::ShapeGeometryUnLocked))
+                    autoActivate = !shape->isGeometryProtected();
+                if (autoActivate)
+                    newStrategy->setAutoActivateOnComplete();
+            }
+        }
+        return newStrategy;
     }
     return 0;
 }
 
 void DefaultTool::updateActions()
 {
-    KShapeSelection * selection(koSelection());
+    KShapeSelection *selection(koSelection());
     if (!selection) {
         action("object_order_front")->setEnabled(false);
         action("object_order_raise")->setEnabled(false);

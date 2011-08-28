@@ -46,15 +46,21 @@ public:
     ShapeMoveStrategy(KToolBase *tool, const QPointF &clicked);
     virtual ~ShapeMoveStrategy() {}
 
+    void setAutoActivateOnComplete() { m_autoActivate = true; }
+
     void handleMouseMove(const QPointF &mouseLocation, Qt::KeyboardModifiers modifiers);
     QUndoCommand* createCommand(QUndoCommand *parent = 0);
     virtual void paint(QPainter &painter, const KViewConverter &converter);
+
 private:
     void moveSelection();
     QList<QPointF> m_previousPositions;
     QList<QPointF> m_newPositions;
     QPointF m_start, m_diff, m_initialSelectionPosition, m_initialOffset;
     QList<KShape*> m_selectedShapes;
+
+    // if this move strategy didn't actually move at all on mouse release, activate the shape instead
+    bool m_autoActivate;
 };
 
 #endif

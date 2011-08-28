@@ -31,6 +31,7 @@ TextToolFactory::TextToolFactory(QObject *parent)
     setIcon("tool-text");
     setPriority(1);
     setActivationShapeId(TextShape_SHAPEID);
+    setAutoActivateFlags(ShapeGeometryLocked);
 }
 
 TextToolFactory::~TextToolFactory()

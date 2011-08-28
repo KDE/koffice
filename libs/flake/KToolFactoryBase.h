@@ -56,6 +56,14 @@ class FLAKE_EXPORT KToolFactoryBase : public QObject
     Q_OBJECT
 
 public:
+    enum ShapeSelectionFlag {
+        NoShapeMatch = 1,
+        ShapeGeometryLocked = 2,
+        ShapeGeometryUnLocked = 4,
+        ContentProtected = 8,
+    };
+    Q_DECLARE_FLAGS(ShapeSelectionFlags, ShapeSelectionFlag)
+
     /**
      * Create the new factory
      * @param parent the parent QObject for memory management usage.
@@ -214,6 +222,8 @@ public:
      */
     void setShortcut(const KShortcut & shortcut);
 
+    ShapeSelectionFlags autoActivateFlags() const;
+
 protected:
     /**
      * Set the tooltip to be used for this tool
@@ -259,6 +269,8 @@ protected:
      * @param agnostic when true the tool instance can be reused, false if a new instance needs to be created.
      */
     void setInputDeviceAgnostic(bool agnostic);
+
+    void setAutoActivateFlags(ShapeSelectionFlags flags);
 
 private:
     class Private;
