@@ -323,6 +323,14 @@ QHash<QString, KAction*> KToolProxy::actions() const
     return d->activeTool ? d->activeTool->actions() : QHash<QString, KAction*>();
 }
 
+KToolBase::Flags KToolProxy::flags() const
+{
+    if (d->activeTool)
+        return d->activeTool->flags();
+    return KToolBase::Flags();
+}
+
+
 void KToolProxy::cut()
 {
     // TODO maybe move checking the active layer to KPasteController ?
