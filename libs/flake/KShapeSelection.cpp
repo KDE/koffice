@@ -119,7 +119,7 @@ KShapeSelection::~KShapeSelection()
 {
 }
 
-void KShapeSelection::select(KShape *shape, bool recursive)
+void KShapeSelection::select(KShape *shape, Recursively recursive)
 {
     Q_D(KShapeSelection);
     Q_ASSERT(shape != this);
@@ -138,7 +138,7 @@ void KShapeSelection::select(KShape *shape, bool recursive)
     if (group)
         d->selectGroupChildren(group);
 
-    if (recursive) {
+    if (recursive == Recursive) {
         // recursively select all parents and their children upwards the hierarchy
         KShapeContainer *parent = shape->parent();
         while (parent) {
@@ -184,7 +184,7 @@ void KShapeSelection::select(KShape *shape, bool recursive)
     d->requestSelectionChangedEvent();
 }
 
-void KShapeSelection::deselect(KShape *shape, bool recursive)
+void KShapeSelection::deselect(KShape *shape, Recursively recursive)
 {
     Q_D(KShapeSelection);
     if (! d->selectedShapes.contains(shape))
@@ -193,7 +193,7 @@ void KShapeSelection::deselect(KShape *shape, bool recursive)
     d->selectedShapes.removeAll(shape);
 
     KShapeGroup *group = dynamic_cast<KShapeGroup*>(shape);
-    if (recursive) {
+    if (recursive == Recursive) {
         // recursively find the top group upwards int the hierarchy
         KShapeGroup *parentGroup = dynamic_cast<KShapeGroup*>(shape->parent());
         while (parentGroup) {

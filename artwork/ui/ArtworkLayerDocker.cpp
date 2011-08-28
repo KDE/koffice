@@ -253,14 +253,14 @@ void ArtworkLayerDocker::itemClicked(const QModelIndex &index)
     // separate selected layers and selected shapes
     extractSelectedLayersAndShapes(selectedLayers, selectedShapes);
 
-    foreach(KShape* shape, selection->selectedShapes())
-    shape->update();
+    foreach(KShape *shape, selection->selectedShapes())
+        shape->update();
 
     selection->deselectAll();
 
-    foreach(KShape* shape, selectedShapes) {
+    foreach (KShape* shape, selectedShapes) {
         if (shape) {
-            selection->select(shape, false);
+            selection->select(shape, KShapeSelection::NonRecursive);
             shape->update();
         }
     }

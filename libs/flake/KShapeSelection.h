@@ -58,6 +58,11 @@ public:
     KShapeSelection(QObject *parent = 0);
     virtual ~KShapeSelection();
 
+    enum Recursively {
+        Recursive,
+        NonRecursive
+    };
+
     /**
      * Adds a shape to the selection.
      *
@@ -72,7 +77,7 @@ public:
      * @param shape the shape to add to the selection
      * @param recursive enables recursively selecting shapes of parent groups
      */
-    void select(KShape *shape, bool recursive = true);
+    void select(KShape *shape, Recursively recursive = Recursive);
 
     /**
      * Removes a selected shape.
@@ -88,7 +93,7 @@ public:
      * @param shape the shape to remove from the selection
      * @param recursive enables recursively deselecting shapes of parent groups
      */
-    void deselect(KShape *shape, bool recursive = true);
+    void deselect(KShape *shape, Recursively recursive = Recursive);
 
     /// clear the selections list
     void deselectAll();

@@ -20,13 +20,13 @@
 #include "SelectionTransformCommand.h"
 #include <KShapeSelection.h>
 
-SelectionTransformCommand::SelectionTransformCommand( KShapeSelection * selection, const QTransform &oldTransformation, const QTransform &newTransformation, QUndoCommand * parent )
-: QUndoCommand( parent )
-, m_selection( selection )
-, m_oldTransformation( oldTransformation )
-, m_newTransformation( newTransformation )
+SelectionTransformCommand::SelectionTransformCommand(KShapeSelection *selection, const QTransform &oldTransformation, const QTransform &newTransformation, QUndoCommand *parent)
+    : QUndoCommand(parent),
+    m_selection(selection),
+    m_oldTransformation(oldTransformation),
+    m_newTransformation(newTransformation)
 {
-    Q_ASSERT( m_selection );
+    Q_ASSERT(m_selection);
     m_selectedShapes = m_selection->selectedShapes();
 }
 
@@ -34,28 +34,28 @@ void SelectionTransformCommand::redo()
 {
     QUndoCommand::redo();
 
-    m_selection->blockSignals( true );
-    
-    m_selection->deselectAll();
-    foreach( KShape * shape, m_selectedShapes )
-        m_selection->select( shape, false );
+    m_selection->blockSignals(true);
 
-    m_selection->setTransformation( m_newTransformation );
-    
-    m_selection->blockSignals( false );
+    m_selection->deselectAll();
+    foreach(KShape *shape, m_selectedShapes)
+        m_selection->select(shape, KShapeSelection::NonRecursive);
+
+    m_selection->setTransformation(m_newTransformation);
+
+    m_selection->blockSignals(false);
 }
 
 void SelectionTransformCommand::undo()
 {
-    m_selection->blockSignals( true );
+    m_selection->blockSignals(true);
 
     m_selection->deselectAll();
-    foreach( KShape * shape, m_selectedShapes )
-        m_selection->select( shape, false );
-    
-    m_selection->setTransformation( m_oldTransformation );
+    foreach(KShape * shape, m_selectedShapes)
+        m_selection->select(shape, KShapeSelection::NonRecursive);
 
-    m_selection->blockSignals( false );
+    m_selection->setTransformation(m_oldTransformation);
+
+    m_selection->blockSignals(false);
 
     QUndoCommand::undo();
 }

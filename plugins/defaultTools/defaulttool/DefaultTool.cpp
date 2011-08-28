@@ -184,6 +184,7 @@ DefaultTool::~DefaultTool()
 {
     delete m_guideLine;
 }
+
 void DefaultTool::setupActions()
 {
     KAction* actionBringToFront = new KAction(KIcon("object-order-front-koffice"),
@@ -1102,8 +1103,7 @@ KInteractionStrategy *DefaultTool::createStrategy(KPointerEvent *event)
         case KFlake::BottomRightHandle:
             newHotPosition = KFlake::BottomRightCorner;
             break;
-        default:
-        {
+        default: {
             // check if we had hit the center point
             const KViewConverter * converter = canvas()->viewConverter();
             QPointF pt = converter->documentToView(event->point-select->absolutePosition());
@@ -1209,7 +1209,7 @@ KInteractionStrategy *DefaultTool::createStrategy(KPointerEvent *event)
         repaintDecorations();
         if (! selectMultiple)
             shapeManager->selection()->deselectAll();
-        select->select(shape, selectNextInStack ? false : true);
+        select->select(shape, selectNextInStack ? KShapeSelection::NonRecursive : KShapeSelection::Recursive);
         repaintDecorations();
         return new ShapeMoveStrategy(this, event->point);
     }

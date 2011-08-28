@@ -500,11 +500,11 @@ void ArtworkView::fileImportGraphic()
     if (success) {
         QList<KShape*> importedShapes = importPart.document().shapes();
 
-        ArtworkDocumentMergeCommand * cmd = new ArtworkDocumentMergeCommand(part(), &importPart);
+        ArtworkDocumentMergeCommand *cmd = new ArtworkDocumentMergeCommand(part(), &importPart);
         d->canvas->addCommand(cmd);
 
-        foreach(KShape * shape, importedShapes) {
-            d->canvas->shapeManager()->selection()->select(shape, false);
+        foreach(KShape *shape, importedShapes) {
+            d->canvas->shapeManager()->selection()->select(shape, KShapeSelection::NonRecursive);
         }
     }
 }

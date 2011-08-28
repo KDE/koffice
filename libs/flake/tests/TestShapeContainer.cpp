@@ -189,7 +189,7 @@ void TestShapeContainer::testScaling2()
     groupCommand->redo();
 
     KShapeSelection* selection = new KShapeSelection();
-    selection->select(shape1, true);
+    selection->select(shape1, KShapeSelection::Recursive);
 
     QList<KShape*> transformShapes;
     transformShapes.append(selection->selectedShapes());
@@ -224,7 +224,7 @@ void TestShapeContainer::testScaling2()
     QSizeF shapeSize=r1.united(r2).size();
 
     selection = new KShapeSelection();
-    selection->select(shape1, true);
+    selection->select(shape1, KShapeSelection::Recursive);
 //    kDebug() << "selection=" << selection->size();
     QSizeF selecSize = selection->size();
 
