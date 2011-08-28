@@ -367,11 +367,17 @@ public:
      */
     void setTransparency(qreal transparency);
 
+
+    enum Transparancy {
+        EffectiveTransparancy,
+        ShapeTransparancy
+    };
+
     /**
      * Returns the shape level transparency.
      * @param recursive when true takes the parents transparency into account
      */
-    qreal transparency(bool recursive=false) const;
+    qreal transparency(Transparancy transparancy = ShapeTransparancy) const;
 
     /**
      * Retrieve the z-coordinate of this shape.

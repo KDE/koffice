@@ -360,7 +360,7 @@ void ConnectCurve::paint(QPainter &painter, const KViewConverter &converter)
         needsResize = false;
     }
 
-    qreal transparency = shape.transparency(true);
+    qreal transparency = shape.transparency(KShape::EffectiveTransparancy);
     if (transparency > 0.0) {
         painter.setOpacity(1.0-transparency);
     }
