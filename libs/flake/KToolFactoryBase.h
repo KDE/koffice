@@ -56,10 +56,21 @@ class FLAKE_EXPORT KToolFactoryBase : public QObject
     Q_OBJECT
 
 public:
+    /**
+     * Enum used by autoActivateFlags()
+     */
     enum ShapeSelectionFlag {
+        /// No shape will ever match. This flag is set by default.
         NoShapeMatch = 1,
+        /// Shapes that have their geometry locked will be matched if this flag is passed.
         ShapeGeometryLocked = 2,
+        /// Shapes that have their geometry unlocked will be matched if this flag is passed.
         ShapeGeometryUnLocked = 4,
+        /**
+         * Shapes that have their content marked protected will be matched.
+         * Without this flag shapes that have their content marked protected will always be excluded
+         * since typically tools can't edit them in the first place.
+         */
         ContentProtected = 8,
     };
     Q_DECLARE_FLAGS(ShapeSelectionFlags, ShapeSelectionFlag)
@@ -222,6 +233,10 @@ public:
      */
     void setShortcut(const KShortcut & shortcut);
 
+    /**
+     * Get the ShapeSelectionFlags
+     * @see setAutoActivateFlags()
+     */
     ShapeSelectionFlags autoActivateFlags() const;
 
 protected:
@@ -270,6 +285,16 @@ protected:
      */
     void setInputDeviceAgnostic(bool agnostic);
 
+    /**
+     * Tools can auto-activate on a shape getting selected based on a set of flags
+     * that can be set here.
+     * When a user single clicks on a shape to select it its primary tool will discovered and the
+     * matching factory (this class) will be checked for the ShapeSelectionFlags set.
+     * The default flags is NoShapeMatch which means by default nothing will happen.
+     * A factory that either clears all flags or uses one of the ShapeSelectionFlag options
+     * can change that behavior.
+     * @see autoActivateFlags()
+     */
     void setAutoActivateFlags(ShapeSelectionFlags flags);
 
 private:
