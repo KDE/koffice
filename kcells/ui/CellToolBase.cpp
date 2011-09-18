@@ -2636,7 +2636,7 @@ void CellToolBase::autoSum()
             } else if ((selection()->marker().x() > 1) && KCCell(selection()->activeSheet(), selection()->marker().x() - 1, selection()->marker().y()).value().isNumber()) {
                 // check cells to the left of the current one
                 start = end = selection()->marker().x() - 1;
-                for (start--; (start > 0) && KCCell(selection()->activeSheet(), start, selection()->marker().y()).value().isNumber(); start--) ;
+                for (--start; (start > 0) && KCCell(selection()->activeSheet(), start, selection()->marker().y()).value().isNumber(); --start) ;
 
                 const KCRegion region(QRect(QPoint(start + 1, selection()->marker().y()),
                                           QPoint(end, selection()->marker().y())), selection()->activeSheet());
@@ -2816,9 +2816,9 @@ void CellToolBase::subtotals()
         return;
     }
 
-    QPointer<SubtotalDialog> dialog = new SubtotalDialog(canvas()->canvasWidget(), selection());
-    dialog->exec();
-    delete dialog;
+    QPointer<SubtotalDialog> sdialog = new SubtotalDialog(canvas()->canvasWidget(), selection());
+    sdialog->exec();
+    delete sdialog;
 }
 
 void CellToolBase::setAreaName()
