@@ -41,7 +41,7 @@ class KImageCollection;
 class ToCGenerator;
 
 /**
- * The document layouter for KoText style docs.
+ * The document layouter for KOdfText style docs.
  */
 class Layout : public KTextDocumentLayout::LayoutState
 {

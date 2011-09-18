@@ -22,8 +22,8 @@
 #ifndef KTABLESTYLE_H
 #define KTABLESTYLE_H
 
-#include "KoText.h"
-#include "kotext_export.h"
+#include "KOdfText.h"
+#include "kodftext_export.h"
 
 #include <QObject>
 #include <QVector>
@@ -45,7 +45,7 @@ class KXmlElement;
  * a specific KTableStyle.
  * @see KStyleManager
  */
-class KOTEXT_EXPORT KTableStyle : public QObject
+class KODFTEXT_EXPORT KTableStyle : public QObject
 {
     Q_OBJECT
 public:

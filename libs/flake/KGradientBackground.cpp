@@ -19,7 +19,7 @@
 
 #include "KGradientBackground.h"
 #include "KShapeBackgroundBase_p.h"
-#include "KoFlake.h"
+#include "KFlake.h"
 #include <KOdfStyleStack.h>
 #include <KOdfXmlNS.h>
 #include <KOdfLoadingContext.h>
@@ -57,7 +57,7 @@ KGradientBackground::KGradientBackground(const QGradient &gradient, const QTrans
     : KShapeBackgroundBase(*(new KGradientBackgroundPrivate()))
 {
     Q_D(KGradientBackground);
-    d->gradient = KoFlake::cloneGradient(&gradient);
+    d->gradient = KFlake::cloneGradient(&gradient);
     d->matrix = matrix;
     Q_ASSERT(d->gradient);
     Q_ASSERT(d->gradient->coordinateMode() == QGradient::ObjectBoundingMode);
@@ -96,7 +96,7 @@ void KGradientBackground::setGradient(const QGradient &gradient)
     Q_D(KGradientBackground);
     delete d->gradient;
 
-    d->gradient = KoFlake::cloneGradient(&gradient);
+    d->gradient = KFlake::cloneGradient(&gradient);
     Q_ASSERT(d->gradient);
     Q_ASSERT(d->gradient->coordinateMode() == QGradient::ObjectBoundingMode);
 }
@@ -117,7 +117,7 @@ KGradientBackground &KGradientBackground::operator = (const KGradientBackground 
 
     d->matrix = other->matrix;
     delete d->gradient;
-    d->gradient = KoFlake::cloneGradient(other->gradient);
+    d->gradient = KFlake::cloneGradient(other->gradient);
     Q_ASSERT(d->gradient);
     Q_ASSERT(d->gradient->coordinateMode() == QGradient::ObjectBoundingMode);
 
@@ -154,7 +154,7 @@ bool KGradientBackground::loadStyle(KOdfLoadingContext &context, const QSizeF &s
         QBrush brush = KOdf::loadOdfGradientStyle(styleStack, context.stylesReader(), shapeSize);
         const QGradient * gradient = brush.gradient();
         if (gradient) {
-            d->gradient = KoFlake::cloneGradient(gradient);
+            d->gradient = KFlake::cloneGradient(gradient);
             d->matrix = brush.transform();
             return true;
         }

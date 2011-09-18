@@ -188,7 +188,7 @@ QObject* Module::standardPageLayout()
 
 QObject* Module::defaultParagraphStyle()
 {
-    KStyleManager *styleManager = kwDoc()->resourceManager()->resource(KoText::StyleManager).value<KStyleManager*>();
+    KStyleManager *styleManager = kwDoc()->resourceManager()->resource(KOdfText::StyleManager).value<KStyleManager*>();
 
     Q_ASSERT(styleManager);
     KParagraphStyle* s = styleManager->defaultParagraphStyle();
@@ -197,7 +197,7 @@ QObject* Module::defaultParagraphStyle()
 
 QObject* Module::paragraphStyle(const QString& name)
 {
-    KStyleManager *styleManager = kwDoc()->resourceManager()->resource(KoText::StyleManager).value<KStyleManager*>();
+    KStyleManager *styleManager = kwDoc()->resourceManager()->resource(KOdfText::StyleManager).value<KStyleManager*>();
     Q_ASSERT(styleManager);
     KParagraphStyle* s = styleManager->paragraphStyle(name);
     return s ? new ParagraphStyle(this, s) : 0;
@@ -205,7 +205,7 @@ QObject* Module::paragraphStyle(const QString& name)
 
 QObject* Module::addParagraphStyle(const QString& name)
 {
-    KStyleManager *styleManager = kwDoc()->resourceManager()->resource(KoText::StyleManager).value<KStyleManager*>();
+    KStyleManager *styleManager = kwDoc()->resourceManager()->resource(KOdfText::StyleManager).value<KStyleManager*>();
     Q_ASSERT(styleManager);
     KParagraphStyle* s = new KParagraphStyle();
     s->setName(name);
@@ -215,7 +215,7 @@ QObject* Module::addParagraphStyle(const QString& name)
 
 QObject* Module::characterStyle(const QString& name)
 {
-    KStyleManager *styleManager = kwDoc()->resourceManager()->resource(KoText::StyleManager).value<KStyleManager*>();
+    KStyleManager *styleManager = kwDoc()->resourceManager()->resource(KOdfText::StyleManager).value<KStyleManager*>();
     Q_ASSERT(styleManager);
     KCharacterStyle* s = styleManager->characterStyle(name);
     return s ? new CharacterStyle(this, s) : 0;
@@ -223,7 +223,7 @@ QObject* Module::characterStyle(const QString& name)
 
 QObject* Module::addCharacterStyle(const QString& name)
 {
-    KStyleManager *styleManager = kwDoc()->resourceManager()->resource(KoText::StyleManager).value<KStyleManager*>();
+    KStyleManager *styleManager = kwDoc()->resourceManager()->resource(KOdfText::StyleManager).value<KStyleManager*>();
     Q_ASSERT(styleManager);
     KCharacterStyle* s = new KCharacterStyle();
     s->setName(name);

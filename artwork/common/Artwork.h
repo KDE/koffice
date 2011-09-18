@@ -26,7 +26,7 @@ namespace Artwork
 {
 
 enum ArtworkCanvasResource {
-    FirstArtworkResource = KoCanvasResource::ArtworkStart,
+    FirstArtworkResource = KCanvasResource::ArtworkStart,
 };
 }
 

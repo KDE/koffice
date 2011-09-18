@@ -22,8 +22,8 @@
 #ifndef KTABLECOLUMNSTYLE_H
 #define KTABLECOLUMNSTYLE_H
 
-#include "KoText.h"
-#include "kotext_export.h"
+#include "KOdfText.h"
+#include "kodftext_export.h"
 
 #include <QObject>
 #include <QVector>
@@ -50,7 +50,7 @@ class KXmlElement;
  *
  * @see KStyleManager, KoTableRowAndColumnStyleManager
  */
-class KOTEXT_EXPORT KTableColumnStyle
+class KODFTEXT_EXPORT KTableColumnStyle
 {
 public:
     enum Property {

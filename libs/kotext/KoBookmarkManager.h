@@ -21,7 +21,7 @@
 #ifndef KOBOOKMARKMANAGER_H
 #define KOBOOKMARKMANAGER_H
 
-#include "kotext_export.h"
+#include "kodftext_export.h"
 
 #include <QList>
 
@@ -36,7 +36,7 @@ class KoBookmarkManagerPrivate;
  * This class also maintains a list of bookmark names so that it can be easily used to
  * show all available bookmark.
  */
-class KOTEXT_EXPORT KoBookmarkManager
+class KODFTEXT_EXPORT KoBookmarkManager
 {
 public:
     /// constructor

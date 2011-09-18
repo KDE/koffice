@@ -20,7 +20,7 @@
 #include "KoPAPrintJob.h"
 #include <KoZoomHandler.h>
 
-#include <KoText.h>
+#include <KOdfText.h>
 #include "KoPAView.h"
 #include "KoPADocument.h"
 #include "KoPAUtil.h"
@@ -34,7 +34,7 @@ KoPAPrintJob::KoPAPrintJob(KoPAView * view)
 : KoPrintJob(view)
 , m_pages(view->kopaDocument()->pages())
 {
-    QVariant var = view->kopaDocument()->resourceManager()->resource(KoText::PageProvider);
+    QVariant var = view->kopaDocument()->resourceManager()->resource(KOdfText::PageProvider);
     m_pageProvider = static_cast<KoPAPageProvider*>(var.value<void*>());
     // TODO this feels wrong
     printer().setFromTo(1, m_pages.size());

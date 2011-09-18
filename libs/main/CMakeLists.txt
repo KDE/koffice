@@ -140,14 +140,14 @@ target_link_libraries(komain ${extra_libs}
     ${KDE4_KCAL_LIBS}
     ${KDE4_THREADWEAVER_LIBRARIES}
     kowidgets
-    kotext
+    kodftext
 )
 if( Soprano_FOUND )
     target_link_libraries(komain ${SOPRANO_LIBRARIES})
     target_link_libraries(komain LINK_INTERFACE_LIBRARIES  ${SOPRANO_LIBRARIES})
 endif( Soprano_FOUND )
 
-target_link_libraries(komain LINK_INTERFACE_LIBRARIES kotext kowidgets ${KDE4_KPARTS_LIBS})
+target_link_libraries(komain LINK_INTERFACE_LIBRARIES kodftext kowidgets ${KDE4_KPARTS_LIBS})
 
 set_target_properties(komain PROPERTIES
     VERSION ${GENERIC_KOFFICE_LIB_VERSION} SOVERSION ${GENERIC_KOFFICE_LIB_SOVERSION}

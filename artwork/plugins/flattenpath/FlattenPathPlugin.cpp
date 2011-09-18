@@ -33,7 +33,7 @@
 #include <KCanvasController.h>
 #include <KCanvasBase.h>
 #include <KShapeManager.h>
-#include <KSelection.h>
+#include <KShapeSelection.h>
 #include <KPathShape.h>
 #include <KParameterShape.h>
 
@@ -65,7 +65,7 @@ FlattenPathPlugin::FlattenPathPlugin(QObject *parent, const QVariantList &)
 void FlattenPathPlugin::slotFlattenPath()
 {
     KCanvasController* canvasController = KToolManager::instance()->activeCanvasController();
-    KSelection *selection = canvasController->canvas()->shapeManager()->selection();
+    KShapeSelection *selection = canvasController->canvas()->shapeManager()->selection();
     KShape * shape = selection->firstSelectedShape();
     if (! shape)
         return;

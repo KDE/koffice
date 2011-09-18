@@ -22,7 +22,7 @@
 #define KTEXTMETA_H
 
 #include "KInlineObject.h"
-#include "kotext_export.h"
+#include "kodftext_export.h"
 
 class KShape;
 class QTextDocument;
@@ -34,7 +34,7 @@ class KXmlElement;
  * Used to indicate an ODF text:meta container. This is very similar to a KoBookmark
  * in that a specific start-end is marked
  */
-class KOTEXT_EXPORT KTextMeta : public KInlineObject
+class KODFTEXT_EXPORT KTextMeta : public KInlineObject
 {
 public:
     enum BookmarkType {

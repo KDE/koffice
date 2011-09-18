@@ -17,10 +17,10 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#ifndef KOTEXT_H
-#define KOTEXT_H
+#ifndef KODFTEXT_H
+#define KODFTEXT_H
 
-#include "kotext_export.h"
+#include "kodftext_export.h"
 
 #include <KResourceManager.h>
 
@@ -36,15 +36,15 @@
 /**
  * Generic namespace of the KOffice Text library for helper methods and data.
  */
-namespace KoText
+namespace KOdfText
 {
-KOTEXT_EXPORT QStringList underlineTypeList();
-KOTEXT_EXPORT QStringList underlineStyleList();
-KOTEXT_EXPORT Qt::Alignment alignmentFromString(const QString &align);
-KOTEXT_EXPORT QString alignmentToString(Qt::Alignment align);
-KOTEXT_EXPORT Qt::Alignment valignmentFromString(const QString &align);
-KOTEXT_EXPORT QString valignmentToString(Qt::Alignment align);
-KOTEXT_EXPORT QTextDocument *loadOpenDocument(const QString &filename, QTextDocument *document = 0);
+KODFTEXT_EXPORT QStringList underlineTypeList();
+KODFTEXT_EXPORT QStringList underlineStyleList();
+KODFTEXT_EXPORT Qt::Alignment alignmentFromString(const QString &align);
+KODFTEXT_EXPORT QString alignmentToString(Qt::Alignment align);
+KODFTEXT_EXPORT Qt::Alignment valignmentFromString(const QString &align);
+KODFTEXT_EXPORT QString valignmentToString(Qt::Alignment align);
+KODFTEXT_EXPORT QTextDocument *loadOpenDocument(const QString &filename, QTextDocument *document = 0);
 
 //A pair of QStrings.  Used primarily by KTextLoader and KTextWriter.
 typedef QPair<QString, QString> StringPair;
@@ -68,7 +68,7 @@ enum CanvasResource {
 };
 
 /// For paragraphs each tab definition is represented by this struct.
-struct KOTEXT_EXPORT Tab {
+struct KODFTEXT_EXPORT Tab {
     Tab();
     qreal position;    ///< distance in ps-points from the edge of the text-shape
     QTextOption::TabType type;       ///< Determine which type is used.
@@ -99,8 +99,8 @@ enum Direction {
  * \sa KResourceManager KShapeController::resourceManager()
  */
 enum DocumentResource {
-    ChangeTracker = KoDocumentResource::KoTextStart + 1, ///< KChangeTracker
-    InlineTextObjectManager, ///< The KoText inline-text-object manager. KInlineTextObjectManager
+    ChangeTracker = KDocumentResource::KOdfTextStart + 1, ///< KChangeTracker
+    InlineTextObjectManager, ///< The KOdfText inline-text-object manager. KInlineTextObjectManager
     StyleManager,           ///< The KStyleManager
     PageProvider            ///< The KPageProvider
 };
@@ -115,9 +115,9 @@ enum TextBlockUserState {
 };
 
 /// convert the string version of directions (as specified in XSL and ODF) to the Direction enum
-KOTEXT_EXPORT Direction directionFromString(const QString &direction);
+KODFTEXT_EXPORT Direction directionFromString(const QString &direction);
 }
 
-Q_DECLARE_METATYPE(KoText::Tab)
+Q_DECLARE_METATYPE(KOdfText::Tab)
 
 #endif

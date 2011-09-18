@@ -3,7 +3,7 @@ project(textvariables)
 include_directories(
     ${KDE4_INCLUDE_DIR}
     ${QT_INCLUDES}
-    ${KOTEXT_INCLUDES}
+    ${KODFTEXT_INCLUDES}
     ${KOMAIN_INCLUDES} )
 
 set(textvariables_SRCS
@@ -24,7 +24,7 @@ kde4_add_ui_files( textvariables_SRCS
 
 kde4_add_plugin(textvariables ${textvariables_SRCS})
 
-target_link_libraries(textvariables kotext)
+target_link_libraries(textvariables kodftext)
 
 install(TARGETS textvariables DESTINATION ${PLUGIN_INSTALL_DIR})
 

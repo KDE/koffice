@@ -19,7 +19,7 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#include "KoFlake.h"
+#include "KFlake.h"
 #include "KShape.h"
 #include "KLineBorder.h"
 #include "KGradientBackground.h"
@@ -27,7 +27,7 @@
 #include <QtGui/QGradient>
 #include <math.h>
 
-QGradient *KoFlake::cloneGradient(const QGradient *gradient)
+QGradient *KFlake::cloneGradient(const QGradient *gradient)
 {
     if (! gradient)
         return 0;
@@ -64,13 +64,13 @@ QGradient *KoFlake::cloneGradient(const QGradient *gradient)
     return clone;
 }
 
-QPointF KoFlake::toRelative(const QPointF &absolute, const QSizeF &size)
+QPointF KFlake::toRelative(const QPointF &absolute, const QSizeF &size)
 {
     return QPointF(size.width() == 0 ? 0: absolute.x() / size.width(),
                    size.height() == 0 ? 0: absolute.y() / size.height());
 }
 
-QPointF KoFlake::toAbsolute(const QPointF &relative, const QSizeF &size)
+QPointF KFlake::toAbsolute(const QPointF &relative, const QSizeF &size)
 {
     return QPointF(relative.x() * size.width(), relative.y() * size.height());
 }

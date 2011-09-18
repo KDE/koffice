@@ -28,7 +28,7 @@
 namespace CanvasResource
 {
 enum {
-    Selection = KoCanvasResource::KCellsStart  ///< the cell selection
+    Selection = KCanvasResource::KCellsStart  ///< the cell selection
 };
 } // namespace CanvasResource
 

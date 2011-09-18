@@ -33,7 +33,7 @@
 #include <KCanvasBase.h>
 #include <KCanvasController.h>
 #include <KShapeControllerBase.h>
-#include <KSelection.h>
+#include <KShapeSelection.h>
 #include <KShapeCreateCommand.h>
 #include <KShapeDeleteCommand.h>
 #include <KShapeReorderCommand.h>
@@ -237,7 +237,7 @@ void ArtworkLayerDocker::itemClicked(const QModelIndex &index)
     if (! canvasController)
         return;
 
-    KSelection *selection = canvasController->canvas()->shapeManager()->selection();
+    KShapeSelection *selection = canvasController->canvas()->shapeManager()->selection();
     if (! selection)
         return;
 
@@ -253,14 +253,14 @@ void ArtworkLayerDocker::itemClicked(const QModelIndex &index)
     // separate selected layers and selected shapes
     extractSelectedLayersAndShapes(selectedLayers, selectedShapes);
 
-    foreach(KShape* shape, selection->selectedShapes())
-    shape->update();
+    foreach(KShape *shape, selection->selectedShapes())
+        shape->update();
 
     selection->deselectAll();
 
-    foreach(KShape* shape, selectedShapes) {
+    foreach (KShape* shape, selectedShapes) {
         if (shape) {
-            selection->select(shape, false);
+            selection->select(shape, KShapeSelection::NonRecursive);
             shape->update();
         }
     }

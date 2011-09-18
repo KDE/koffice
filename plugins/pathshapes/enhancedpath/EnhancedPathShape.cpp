@@ -33,7 +33,7 @@
 #include <KShapeSavingContext.h>
 #include <KTextOnShapeContainer.h>
 #include <KUnit.h>
-#include <KoOdfWorkaround.h>
+#include <KOdfWorkaround.h>
 #include <KPathPoint.h>
 
 EnhancedPathShape::EnhancedPathShape(const QRectF &viewBox)
@@ -423,7 +423,7 @@ bool EnhancedPathShape::loadOdf(const KXmlElement & element, KShapeLoadingContex
         // load the enhanced path data
         QString path = enhancedGeometry.attributeNS(KOdfXmlNS::draw, "enhanced-path");
 #ifndef NWORKAROUND_ODF_BUGS
-        KoOdfWorkaround::fixEnhancedPath(path, enhancedGeometry, context);
+        KOdfWorkaround::fixEnhancedPath(path, enhancedGeometry, context);
 #endif
         if (!path.isEmpty()) {
             parsePathData(path);

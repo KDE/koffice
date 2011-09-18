@@ -7,7 +7,7 @@ macro_bool_to_01(X11_dpms_FOUND HAVE_DPMS) # showcase
 
 
 include_directories(
-    ${KOTEXT_INCLUDES}
+    ${KODFTEXT_INCLUDES}
     ${KOMAIN_INCLUDES}
 )
 

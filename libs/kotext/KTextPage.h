@@ -20,7 +20,7 @@
 #ifndef KTEXTPAGE_H
 #define KTEXTPAGE_H
 
-#include "kotext_export.h"
+#include "kodftext_export.h"
 
 /**
  * Interface for a single OpenDocumentText page.
@@ -29,7 +29,7 @@
  * application specific functionality for single pages.
  * @see KTextShapeData::setPage();
  */
-class KOTEXT_EXPORT KTextPage
+class KODFTEXT_EXPORT KTextPage
 {
 public:
 

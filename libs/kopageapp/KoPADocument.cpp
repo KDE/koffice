@@ -73,10 +73,10 @@ KoPADocument::KoPADocument(QWidget* parentWidget, QObject* parent, bool singleVi
     QVariant variant;
     d->pageProvider = new KoPAPageProvider();
     variant.setValue<void*>(d->pageProvider);
-    resourceManager()->setResource(KoText::PageProvider, variant);
+    resourceManager()->setResource(KOdfText::PageProvider, variant);
     QVariant variant2;
     variant2.setValue<KInlineTextObjectManager*>(d->inlineTextObjectManager);
-    resourceManager()->setResource(KoText::InlineTextObjectManager, variant2);
+    resourceManager()->setResource(KOdfText::InlineTextObjectManager, variant2);
     loadConfig();
 
     if (!KToolRegistry::instance()->contains("KoPABackgroundTool")) {
@@ -138,8 +138,8 @@ bool KoPADocument::loadOdf(KOdfStoreReader &odfStore)
 
     // Load text styles before the corresponding text shapes try to use them!
     KTextSharedLoadingData * sharedData = new KTextSharedLoadingData();
-    paContext.addSharedData(KOTEXT_SHARED_LOADING_ID, sharedData);
-    KStyleManager *styleManager = resourceManager()->resource(KoText::StyleManager).value<KStyleManager*>();
+    paContext.addSharedData(KODFTEXT_SHARED_LOADING_ID, sharedData);
+    KStyleManager *styleManager = resourceManager()->resource(KOdfText::StyleManager).value<KStyleManager*>();
 
     sharedData->loadOdfStyles(paContext, styleManager);
 
@@ -382,7 +382,7 @@ void KoPADocument::loadOdfSettings( const KXmlDocument &settingsDoc)
 
 void KoPADocument::saveOdfDocumentStyles(KoPASavingContext &context)
 {
-    KStyleManager *styleManager = resourceManager()->resource(KoText::StyleManager).value<KStyleManager*>();
+    KStyleManager *styleManager = resourceManager()->resource(KOdfText::StyleManager).value<KStyleManager*>();
     Q_ASSERT(styleManager);
     styleManager->saveOdf(context.mainStyles());
 }
@@ -771,8 +771,8 @@ int KoPADocument::pageCount() const
 
 void KoPADocument::updatePageCount()
 {
-    if (resourceManager()->hasResource(KoText::InlineTextObjectManager)) {
-        QVariant var = resourceManager()->resource(KoText::InlineTextObjectManager);
+    if (resourceManager()->hasResource(KOdfText::InlineTextObjectManager)) {
+        QVariant var = resourceManager()->resource(KOdfText::InlineTextObjectManager);
         KInlineTextObjectManager *om = var.value<KInlineTextObjectManager*>();
         om->setProperty(KInlineObject::PageCount, pageCount());
     }

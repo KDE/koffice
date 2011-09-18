@@ -51,7 +51,7 @@ const QTextDocument *KTextDebug::document = 0;
 #define dumpIndent(T) { for (int i=0; i<T; ++i) out << ' '; }
 #define dumpList(T) { foreach (const QString &x, T) out << x << ' '; }
 
-Q_DECLARE_METATYPE(QList<KoText::Tab>)
+Q_DECLARE_METATYPE(QList<KOdfText::Tab>)
 
 static QString fontProperties(const QTextCharFormat &textFormat)
 {
@@ -424,7 +424,7 @@ QString KTextDebug::paraAttributes(const QTextBlockFormat &blockFormat)
             key = "tab-stops";
             value = "";
             foreach(const QVariant & qvtab, qvariant_cast<QList<QVariant> >(prop_value)) {
-                KoText::Tab tab = qvtab.value<KoText::Tab>();
+                KOdfText::Tab tab = qvtab.value<KOdfText::Tab>();
                 value.append("{");
                 value.append(" pos:").append(QString::number(tab.position));
                 value.append(" type:").append(QString::number(tab.type));

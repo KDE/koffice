@@ -32,9 +32,9 @@ class KShapeBackgroundBase;
 /**
  * Flake reference
  */
-namespace KoFlake
+namespace KFlake
 {
-    /// the selection type for KSelection::selectedObjects()
+    /// the selection type for KShapeSelection::selectedObjects()
     enum SelectionType {
         FullSelection,      ///< Create a list of all user-shapes in the selection. This excludes KShapeGroup grouping objects that may be selected.
         StrippedSelection,  ///< Create a stripped list, without children if the container is also in the list.

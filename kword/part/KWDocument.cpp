@@ -159,7 +159,7 @@ KWDocument::KWDocument(QWidget *parentWidget, QObject *parent, bool singleViewMo
 
     QVariant variant;
     variant.setValue(new KChangeTracker(resourceManager()));
-    resourceManager()->setResource(KoText::ChangeTracker, variant);
+    resourceManager()->setResource(KOdfText::ChangeTracker, variant);
 
     connect(documentInfo(), SIGNAL(infoUpdated(const QString &, const QString &)),
             inlineTextObjectManager(), SLOT(documentInformationUpdated(const QString &, const QString &)));
@@ -263,7 +263,7 @@ KoView *KWDocument::createViewInstance(QWidget *parent)
             continue;
         KWTextFrameSet *tfs = dynamic_cast<KWTextFrameSet*>(fs);
         if (tfs && tfs->textFrameSetType() == KWord::MainTextFrameSet) {
-            KSelection *selection = view->kwcanvas()->shapeManager()->selection();
+            KShapeSelection *selection = view->kwcanvas()->shapeManager()->selection();
             selection->select(fs->frames().first()->shape());
 
             KToolManager::instance()->switchToolRequested(
@@ -434,7 +434,7 @@ KWTextFrameSet *KWDocument::mainFrameSet() const
 
 KInlineTextObjectManager *KWDocument::inlineTextObjectManager() const
 {
-    QVariant var = resourceManager()->resource(KoText::InlineTextObjectManager);
+    QVariant var = resourceManager()->resource(KOdfText::InlineTextObjectManager);
     return var.value<KInlineTextObjectManager*>();
 }
 
@@ -528,14 +528,14 @@ void KWDocument::initEmpty()
 
     appendPage("Standard");
 
-    Q_ASSERT(resourceManager()->hasResource(KoText::StyleManager));
-    KStyleManager *styleManager = resourceManager()->resource(KoText::StyleManager).value<KStyleManager*>();
+    Q_ASSERT(resourceManager()->hasResource(KOdfText::StyleManager));
+    KStyleManager *styleManager = resourceManager()->resource(KOdfText::StyleManager).value<KStyleManager*>();
     Q_ASSERT(styleManager);
 
     QTextDocument document;
     KTextDocument doc(&document);
     doc.setStyleManager(styleManager);
-    KoText::loadOpenDocument("/home/zander/work/kde/build-trunk/installed/share/apps/kword/templates/Normal/.source/A4.odt", &document);
+    KOdfText::loadOpenDocument("/home/zander/work/kde/build-trunk/installed/share/apps/kword/templates/Normal/.source/A4.odt", &document);
 
     KParagraphStyle *parag = new KParagraphStyle();
     parag->setName(i18n("Head 1"));
@@ -610,8 +610,8 @@ bool KWDocument::loadOdf(KOdfStoreReader &odfStore)
     bool rc = loader.load(odfStore);
     if (rc) {
         if (m_loadingTemplate) {
-            Q_ASSERT(resourceManager()->hasResource(KoText::StyleManager));
-            KStyleManager *styleManager = resourceManager()->resource(KoText::StyleManager).value<KStyleManager*>();
+            Q_ASSERT(resourceManager()->hasResource(KOdfText::StyleManager));
+            KStyleManager *styleManager = resourceManager()->resource(KOdfText::StyleManager).value<KStyleManager*>();
             Q_ASSERT(styleManager);
             foreach (KParagraphStyle *style, styleManager->paragraphStyles()) {
                 QString name = style->name();

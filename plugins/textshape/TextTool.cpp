@@ -47,7 +47,7 @@
 #include <KCanvasBase.h>
 #include <KShapeController.h>
 #include <KoColor.h>
-#include <KSelection.h>
+#include <KShapeSelection.h>
 #include <KShapeManager.h>
 #include <KPointerEvent.h>
 #include <KVariable.h>
@@ -765,15 +765,15 @@ void TextTool::updateSelectionHandler()
     KResourceManager *p = canvas()->resourceManager();
     m_allowResourceManagerUpdates = false;
     if (m_textEditor) {
-        p->setResource(KoText::CurrentTextPosition, m_textEditor.data()->position());
-        p->setResource(KoText::CurrentTextAnchor, m_textEditor.data()->anchor());
+        p->setResource(KOdfText::CurrentTextPosition, m_textEditor.data()->position());
+        p->setResource(KOdfText::CurrentTextAnchor, m_textEditor.data()->anchor());
         QVariant variant;
         variant.setValue<void*>(m_textEditor.data()->document());
-        p->setResource(KoText::CurrentTextDocument, variant);
+        p->setResource(KOdfText::CurrentTextDocument, variant);
     } else {
-        p->clearResource(KoText::CurrentTextPosition);
-        p->clearResource(KoText::CurrentTextAnchor);
-        p->clearResource(KoText::CurrentTextDocument);
+        p->clearResource(KOdfText::CurrentTextPosition);
+        p->clearResource(KOdfText::CurrentTextAnchor);
+        p->clearResource(KOdfText::CurrentTextDocument);
     }
     m_allowResourceManagerUpdates = true;
 }
@@ -879,7 +879,7 @@ void TextTool::mousePressEvent(KPointerEvent *event)
         return;
     if (event->button() != Qt::RightButton)
         updateSelectedShape(event->point);
-    KSelection *selection = canvas()->shapeManager()->selection();
+    KShapeSelection *selection = canvas()->shapeManager()->selection();
     if (!selection->isSelected(m_textShape) && m_textShape->isSelectable()) {
         selection->deselectAll();
         selection->select(m_textShape);
@@ -1197,12 +1197,12 @@ void TextTool::keyPressEvent(QKeyEvent *event)
             repaintCaret();
         QTextBlockFormat format = textEditor->blockFormat();
 
-        KoText::Direction dir = static_cast<KoText::Direction>(format.intProperty(KParagraphStyle::TextProgressionDirection));
+        KOdfText::Direction dir = static_cast<KOdfText::Direction>(format.intProperty(KParagraphStyle::TextProgressionDirection));
         bool isRtl;
-        if (dir == KoText::AutoDirection)
+        if (dir == KOdfText::AutoDirection)
             isRtl = textEditor->block().text().isRightToLeft();
         else
-            isRtl =  dir == KoText::RightLeftTopBottom;
+            isRtl =  dir == KOdfText::RightLeftTopBottom;
 
         if (isRtl) { // if RTL toggle direction of cursor movement.
             switch (moveOperation) {
@@ -2100,11 +2100,11 @@ void TextTool::resourceChanged(int key, const QVariant &var)
 {
     if (m_allowResourceManagerUpdates == false)
         return;
-    if (key == KoText::CurrentTextPosition) {
+    if (key == KOdfText::CurrentTextPosition) {
         repaintSelection();
         m_textEditor.data()->setPosition(var.toInt());
         ensureCursorVisible();
-    } else if (key == KoText::CurrentTextAnchor) {
+    } else if (key == KOdfText::CurrentTextAnchor) {
         repaintSelection();
         int pos = m_textEditor.data()->position();
         m_textEditor.data()->setPosition(var.toInt());
@@ -2163,7 +2163,7 @@ void TextTool::jumpToText()
 void TextTool::shapeAddedToCanvas()
 {
     if (m_textShape) {
-        KSelection *selection = canvas()->shapeManager()->selection();
+        KShapeSelection *selection = canvas()->shapeManager()->selection();
         KShape *shape = selection->firstSelectedShape();
         if (shape != m_textShape && canvas()->shapeManager()->shapes().contains(m_textShape)) {
             // this situation applies when someone, not us, changed the selection by selecting another

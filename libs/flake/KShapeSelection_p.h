@@ -35,10 +35,10 @@
 
 class KShapeGroup;
 
-class KSelectionPrivate : public KShapePrivate
+class KShapeSelectionPrivate : public KShapePrivate
 {
 public:
-    KSelectionPrivate(KSelection *parent)
+    KShapeSelectionPrivate(KShapeSelection *parent)
         : KShapePrivate(parent), eventTriggered(false), activeLayer(0), q(parent) {}
     QList<KShape*> selectedShapes;
     bool eventTriggered;
@@ -53,7 +53,7 @@ public:
 
     QRectF sizeRect();
 
-    KSelection *q;
+    KShapeSelection *q;
     QRectF globalBound;
 };
 

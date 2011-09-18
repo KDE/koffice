@@ -22,11 +22,11 @@ the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
 #define KTEXTSHAREDSAVINGDATA_H
 
 #include <KSharedSavingData.h>
-#include "kotext_export.h"
+#include "kodftext_export.h"
 
 #include <QMap>
 
-#define KOTEXT_SHARED_SAVING_ID "KoTextSharedSavingId"
+#define KODFTEXT_SHARED_SAVING_ID "KoTextSharedSavingId"
 
 class KOdfGenericChanges;
 
@@ -35,7 +35,7 @@ namespace Soprano
 class Model;
 }
 
-class KOTEXT_EXPORT KTextSharedSavingData : public KSharedSavingData
+class KODFTEXT_EXPORT KTextSharedSavingData : public KSharedSavingData
 {
 public:
     KTextSharedSavingData();

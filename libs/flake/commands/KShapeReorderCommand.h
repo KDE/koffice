@@ -20,7 +20,7 @@
 #ifndef KSHAPEREORDERCOMMAND_H
 #define KSHAPEREORDERCOMMAND_H
 
-#include "KSelection.h"
+#include "KShapeSelection.h"
 
 #include "flake_export.h"
 

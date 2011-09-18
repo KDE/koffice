@@ -17,7 +17,7 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#include "KoText.h"
+#include "KOdfText.h"
 #include "styles/KStyleManager.h"
 #include "changetracker/KChangeTracker.h"
 #include "KTextShapeData.h"
@@ -37,9 +37,9 @@
 #include <klocale.h>
 #include <kdebug.h>
 
-using namespace KoText;
+using namespace KOdfText;
 
-QStringList KoText::underlineTypeList()
+QStringList KOdfText::underlineTypeList()
 {
     QStringList lst;
     lst << i18nc("Underline Style", "None");
@@ -48,7 +48,7 @@ QStringList KoText::underlineTypeList()
     return lst;
 }
 
-QStringList KoText::underlineStyleList()
+QStringList KOdfText::underlineStyleList()
 {
     QStringList lst;
     lst << "_________";  // solid
@@ -60,7 +60,7 @@ QStringList KoText::underlineStyleList()
     return lst;
 }
 
-KoText::Tab::Tab()
+KOdfText::Tab::Tab()
         : position(0.),
         type(QTextOption::LeftTab),
         leaderType(KCharacterStyle::NoLineType),
@@ -70,7 +70,7 @@ KoText::Tab::Tab()
 {
 }
 
-bool KoText::Tab::operator==(const Tab &other) const
+bool KOdfText::Tab::operator==(const Tab &other) const
 {
     return other.position == position &&
            other.type == type &&
@@ -80,7 +80,7 @@ bool KoText::Tab::operator==(const Tab &other) const
            other.leaderText == leaderText ;
 }
 
-Qt::Alignment KoText::alignmentFromString(const QString &align)
+Qt::Alignment KOdfText::alignmentFromString(const QString &align)
 {
     Qt::Alignment alignment = Qt::AlignLeft;
     if (align == "left")
@@ -100,7 +100,7 @@ Qt::Alignment KoText::alignmentFromString(const QString &align)
     return alignment;
 }
 
-QString KoText::alignmentToString(Qt::Alignment alignment)
+QString KOdfText::alignmentToString(Qt::Alignment alignment)
 {
     QString align;
     if (alignment == (Qt::AlignLeft | Qt::AlignAbsolute))
@@ -118,7 +118,7 @@ QString KoText::alignmentToString(Qt::Alignment alignment)
     return align;
 }
 
-Qt::Alignment KoText::valignmentFromString(const QString &align)
+Qt::Alignment KOdfText::valignmentFromString(const QString &align)
 {
     Qt::Alignment alignment = Qt::AlignTop;
     if (align == "top")
@@ -130,7 +130,7 @@ Qt::Alignment KoText::valignmentFromString(const QString &align)
     return alignment;
 }
 
-QString KoText::valignmentToString(Qt::Alignment alignment)
+QString KOdfText::valignmentToString(Qt::Alignment alignment)
 {
     QString align;
     if (alignment == (Qt::AlignTop))
@@ -142,21 +142,21 @@ QString KoText::valignmentToString(Qt::Alignment alignment)
     return align;
 }
 
-KoText::Direction KoText::directionFromString(const QString &writingMode)
+KOdfText::Direction KOdfText::directionFromString(const QString &writingMode)
 {
     // LTR is lr-tb. RTL is rl-tb
     if (writingMode == "lr" || writingMode == "lr-tb")
-        return KoText::LeftRightTopBottom;
+        return KOdfText::LeftRightTopBottom;
     if (writingMode == "rl" || writingMode == "rl-tb")
-        return KoText::RightLeftTopBottom;
+        return KOdfText::RightLeftTopBottom;
     if (writingMode == "tb" || writingMode == "tb-rl")
-        return KoText::TopBottomRightLeft;
+        return KOdfText::TopBottomRightLeft;
     if (writingMode == "page")
-        return KoText::InheritDirection;
-    return KoText::AutoDirection;
+        return KOdfText::InheritDirection;
+    return KOdfText::AutoDirection;
 }
 
-QTextDocument *KoText::loadOpenDocument(const QString &filename, QTextDocument *document)
+QTextDocument *KOdfText::loadOpenDocument(const QString &filename, QTextDocument *document)
 {
     KOdfStore *readStore = KOdfStore::createStore(filename, KOdfStore::Read, "", KOdfStore::Zip);
     KOdfStoreReader odfReadStore(readStore);
@@ -189,7 +189,7 @@ QTextDocument *KoText::loadOpenDocument(const QString &filename, QTextDocument *
     KShapeLoadingContext shapeLoadingContext(odfLoadingContext, 0);
     KTextSharedLoadingData *textSharedLoadingData = new KTextSharedLoadingData;
     textSharedLoadingData->loadOdfStyles(shapeLoadingContext, styleManager);
-    shapeLoadingContext.addSharedData(KOTEXT_SHARED_LOADING_ID, textSharedLoadingData);
+    shapeLoadingContext.addSharedData(KODFTEXT_SHARED_LOADING_ID, textSharedLoadingData);
 
     KTextShapeData *textShapeData = new KTextShapeData;
     textShapeData->setDocument(document, false /* ownership */);

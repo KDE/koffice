@@ -20,7 +20,7 @@
 #ifndef K_TEXT_INLINE_RDF_H
 #define K_TEXT_INLINE_RDF_H
 
-#include "kotext_export.h"
+#include "kodftext_export.h"
 
 #include <QTextBlockUserData>
 #include <QTextTableCell>
@@ -69,7 +69,7 @@ class KXmlElement;
  * FIXME: createXmlId() should consult with the KOffice codebase when
  * generating new xml:id values during save.
  */
-class KOTEXT_EXPORT KTextInlineRdf
+class KODFTEXT_EXPORT KTextInlineRdf
 {
 public:
     KTextInlineRdf(QTextDocument *doc, const QTextBlock &b);

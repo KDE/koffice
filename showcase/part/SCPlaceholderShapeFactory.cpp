@@ -22,7 +22,7 @@
 #include <klocale.h>
 
 #include <KOdfXmlNS.h>
-#include <KoOdfWorkaround.h>
+#include <KOdfWorkaround.h>
 #include "SCPlaceholderShape.h"
 #include <KShapeLoadingContext.h> // for Q_UNUSED
 
@@ -59,7 +59,7 @@ bool SCPlaceholderShapeFactory::supports(const KXmlElement &e, KShapeLoadingCont
             bool supported =  element.attributeNS(KOdfXmlNS::presentation, "placeholder", "false") == "true";
             kDebug(33001) << "placeholder:" << supported;
 #ifndef NWORKAROUND_ODF_BUGS
-            if (!supported && KoOdfWorkaround::fixPresentationPlaceholder() && element.hasAttributeNS(KOdfXmlNS::presentation, "class")) {
+            if (!supported && KOdfWorkaround::fixPresentationPlaceholder() && element.hasAttributeNS(KOdfXmlNS::presentation, "class")) {
                 supported = true;
                 kDebug(33001) << "workaround OO placeholder bug" << supported;
             }

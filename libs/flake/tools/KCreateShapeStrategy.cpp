@@ -25,7 +25,7 @@
 #include "KShapeRegistry.h"
 #include "KShapeManager.h"
 #include "KCanvasBase.h"
-#include "KSelection.h"
+#include "KShapeSelection.h"
 #include "KShapeFactoryBase.h"
 #include "KShapeController.h"
 
@@ -81,7 +81,7 @@ QUndoCommand* KCreateShapeStrategy::createCommand(QUndoCommand *parentCommand)
 
     QUndoCommand * cmd = parent->canvas()->shapeController()->addShape(shape, parentCommand);
     if (cmd) {
-        KSelection *selection = parent->canvas()->shapeManager()->selection();
+        KShapeSelection *selection = parent->canvas()->shapeManager()->selection();
         selection->deselectAll();
         selection->select(shape);
     }

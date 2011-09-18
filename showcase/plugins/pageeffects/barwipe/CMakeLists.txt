@@ -10,15 +10,7 @@ set(showcase_pageeffect_barwipe_PART_SRCS Plugin.cpp
 
 kde4_add_plugin(showcase_pageeffect_barwipe ${showcase_pageeffect_barwipe_PART_SRCS})
 
-target_link_libraries(
-    showcase_pageeffect_barwipe
-    showcaseprivate
-    flake 
-    
-    ${KDE4_KDECORE_LIBS}
-    ${QT_QTCORE_LIBRARY}
-    ${QT_QTGUI_LIBRARY}
-    )
+target_link_libraries(showcase_pageeffect_barwipe showcaseprivate)
 
 install(TARGETS showcase_pageeffect_barwipe  DESTINATION ${PLUGIN_INSTALL_DIR})
 

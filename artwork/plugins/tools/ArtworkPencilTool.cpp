@@ -27,7 +27,7 @@
 #include <KCanvasBase.h>
 #include <KShapeController.h>
 #include <KShapeManager.h>
-#include <KSelection.h>
+#include <KShapeSelection.h>
 #include <KResourceManager.h>
 #include <KoColor.h>
 #include <KPathPoint.h>
@@ -286,7 +286,7 @@ void ArtworkPencilTool::finish(bool closePath)
 
     QUndoCommand * cmd = canvas()->shapeController()->addShape(path);
     if (cmd) {
-        KSelection *selection = canvas()->shapeManager()->selection();
+        KShapeSelection *selection = canvas()->shapeManager()->selection();
         selection->deselectAll();
         selection->select(path);
 

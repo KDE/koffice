@@ -53,7 +53,7 @@
 #include <KTextDocumentLayout.h>
 #include <KCharacterStyle.h>
 #include <KParagraphStyle.h>
-#include <KoText.h>
+#include <KOdfText.h>
 #include <KOdfEmbeddedDocumentSaver.h>
 #include <KInlineTextObjectManager.h>
 #include <KTextSharedLoadingData.h>
@@ -64,7 +64,7 @@
 #include <KOdfGenericChanges.h>
 #include <KChangeTracker.h>
 
-typedef KoText::Tab KoTextTab;
+typedef KOdfText::Tab KoTextTab;
 // because in a QtScript, I don't seem to be able to use a namespaced type
 
 static void showDocument(QTextDocument *document)
@@ -161,8 +161,8 @@ bool TestLoading::compareTabProperties(QVariant actualTabs, QVariant expectedTab
     if (actualTabList.count() != expectedTabList.count())
         return false;
     for (int i = 0; i < actualTabList.count(); i++) {
-        KoText::Tab actualTab = actualTabList[i].value<KoText::Tab>();
-        KoText::Tab expectedTab = expectedTabList[i].value<KoText::Tab>();
+        KOdfText::Tab actualTab = actualTabList[i].value<KOdfText::Tab>();
+        KOdfText::Tab expectedTab = expectedTabList[i].value<KOdfText::Tab>();
         if (actualTab.position != expectedTab.position
                 || actualTab.type != expectedTab.type
                 || actualTab.delimiter != expectedTab.delimiter
@@ -729,7 +729,7 @@ static QScriptValue setFormatProperty(QScriptContext *context, QScriptEngine *en
     QScriptValue arg = context->argument(2);
     QVariant value;
     QList<QVariant> qvlist;
-    QList<KoText::Tab> tabList;
+    QList<KOdfText::Tab> tabList;
     if (arg.isNumber()) {
         // ### hack to detect if the number is of type int
         if ((qsreal)arg.toInt32() == arg.toNumber())
@@ -743,7 +743,7 @@ static QScriptValue setFormatProperty(QScriptContext *context, QScriptEngine *en
             qvlist.clear();
             tabList.clear();
             qScriptValueToSequence(arg, tabList);
-            foreach(const KoText::Tab &tab, tabList) {
+            foreach(const KOdfText::Tab &tab, tabList) {
                 QVariant v;
                 v.setValue(tab);
                 qvlist.append(v);
@@ -755,8 +755,8 @@ static QScriptValue setFormatProperty(QScriptContext *context, QScriptEngine *en
             format->setProperty(id, value);
             break;
         }
-        //FIXME: Ain't able to convert KoText::Tab->QVariant>QScriptValue
-        //       in QtScript and back to QScriptValue->QVariant->KoText::Tab
+        //FIXME: Ain't able to convert KOdfText::Tab->QVariant>QScriptValue
+        //       in QtScript and back to QScriptValue->QVariant->KOdfText::Tab
         //       in C++. If one can, there's no need for a switch-case here.
     } else {
         value = arg.toVariant();
@@ -840,7 +840,7 @@ QScriptValue constructKoTextTab(QScriptContext *, QScriptEngine *engine)
 {
     return engine->toScriptValue(KoTextTab());
 }
-Q_DECLARE_METATYPE(QList<KoText::Tab>)
+Q_DECLARE_METATYPE(QList<KOdfText::Tab>)
 
 // initTestCase/cleanupTestCase are called beginning and end of test suite
 void TestLoading::initTestCase()
@@ -878,7 +878,7 @@ void TestLoading::initTestCase()
 
     globalObject.setProperty("KoTextTab", engine->newFunction(constructKoTextTab));
     qScriptRegisterMetaType(engine, KoTextTabToQScriptValue, QScriptValueToKoTextTab);
-    qScriptRegisterSequenceMetaType< QList<KoText::Tab> > (engine);
+    qScriptRegisterSequenceMetaType< QList<KOdfText::Tab> > (engine);
 }
 
 void TestLoading::cleanupTestCase()
@@ -1022,7 +1022,7 @@ QTextDocument *TestLoading::documentFromOdt(const QString &odt)
         qFatal("%s does not exist", qPrintable(odt));
         return 0;
     }
-    return KoText::loadOpenDocument(odt);
+    return KOdfText::loadOpenDocument(odt);
 }
 
 QString TestLoading::documentToOdt(QTextDocument *document)
@@ -1058,7 +1058,7 @@ QString TestLoading::documentToOdt(QTextDocument *document)
     KOdfGenericChanges changes;
     KShapeSavingContext context(xmlWriter, mainStyles, embeddedSaver);
 
-    KSharedSavingData *sharedData = context.sharedData(KOTEXT_SHARED_SAVING_ID);
+    KSharedSavingData *sharedData = context.sharedData(KODFTEXT_SHARED_SAVING_ID);
     KTextSharedSavingData *textSharedData = 0;
     if (sharedData) {
         textSharedData = dynamic_cast<KTextSharedSavingData *>(sharedData);
@@ -1070,9 +1070,9 @@ QString TestLoading::documentToOdt(QTextDocument *document)
         textSharedData = new KTextSharedSavingData();
         textSharedData->setGenChanges(changes);
         if (!sharedData) {
-            context.addSharedData(KOTEXT_SHARED_SAVING_ID, textSharedData);
+            context.addSharedData(KODFTEXT_SHARED_SAVING_ID, textSharedData);
         } else {
-            kWarning(32500) << "A different type of sharedData was found under the" << KOTEXT_SHARED_SAVING_ID;
+            kWarning(32500) << "A different type of sharedData was found under the" << KODFTEXT_SHARED_SAVING_ID;
             Q_ASSERT(false);
         }
     }

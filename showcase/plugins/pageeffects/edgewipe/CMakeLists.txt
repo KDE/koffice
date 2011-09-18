@@ -35,15 +35,7 @@ set(showcase_pageeffect_edgewipe_SRCS
 
 kde4_add_plugin(showcase_pageeffect_edgewipe ${showcase_pageeffect_edgewipe_SRCS})
 
-target_link_libraries(
-    showcase_pageeffect_edgewipe
-    showcaseprivate
-    flake
-    
-    ${KDE4_KDECORE_LIBS}
-    ${QT_QTCORE_LIBRARY}
-    ${QT_QTGUI_LIBRARY}    
-    )
+target_link_libraries(showcase_pageeffect_edgewipe showcaseprivate)
 
 install(TARGETS showcase_pageeffect_edgewipe  DESTINATION ${PLUGIN_INSTALL_DIR})
 

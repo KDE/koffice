@@ -16,11 +16,11 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#include "TestKoUnit.h"
+#include "TestKUnit.h"
 
 #include <KUnit.h>
 
-void TestKoUnit::testUnit()
+void TestKUnit::testUnit()
 {
     KUnit unit1;
     KUnit unit2(KUnit::Point);
@@ -38,5 +38,5 @@ void TestKoUnit::testUnit()
     QCOMPARE(scaled, variant.value<KUnit>());
 }
 
-QTEST_MAIN(TestKoUnit)
-#include <TestKoUnit.moc>
+QTEST_MAIN(TestKUnit)
+#include <TestKUnit.moc>

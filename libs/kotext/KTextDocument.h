@@ -41,7 +41,7 @@ class KChangeTracker;
  * using QTextDocument::resource().
  *
  */
-class KOTEXT_EXPORT KTextDocument
+class KODFTEXT_EXPORT KTextDocument
 {
 public:
     /// Constructor

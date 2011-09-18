@@ -92,7 +92,7 @@
 #include <KOdfStylesReader.h>
 #include <KShapeController.h>
 #include <KShapeManager.h>
-#include <KSelection.h>
+#include <KShapeSelection.h>
 #include <KOdfStore.h>
 #include <KoToolBoxFactory.h>
 #include <KoDockerManager.h>
@@ -104,7 +104,7 @@
 #include <KoZoomController.h>
 #include <KoZoomHandler.h>
 #include <KToolProxy.h>
-#include <KoText.h>
+#include <KOdfText.h>
 #include <KInlineTextObjectManager.h>
 
 // KCells includes
@@ -1010,8 +1010,8 @@ void KCView::recalcWorkSheet()
 
 void KCView::shapeSelectionChanged()
 {
-    const KSelection* selection = d->canvas->shapeManager()->selection();
-    const QList<KShape*> shapes = selection->selectedShapes(KoFlake::StrippedSelection);
+    const KShapeSelection* selection = d->canvas->shapeManager()->selection();
+    const QList<KShape*> shapes = selection->selectedShapes(KFlake::StrippedSelection);
 
     if (shapes.isEmpty()) {
         d->actions->shapeAnchor->setEnabled(false);
@@ -1220,7 +1220,7 @@ void KCView::setActiveSheet(KCSheet* sheet, bool updateSheet)
     }
 
     // tell the resource manager of the newly active page
-    d->canvas->resourceManager()->setResource(KoCanvasResource::CurrentPage, QVariant(sheet->map()->indexOf(sheet) + 1));
+    d->canvas->resourceManager()->setResource(KCanvasResource::CurrentPage, QVariant(sheet->map()->indexOf(sheet) + 1));
 
     // Always repaint the visible cells.
     d->canvas->update();
@@ -1452,8 +1452,8 @@ void KCView::copyAsText()
 
 void KCView::setShapeAnchoring(const QString& mode)
 {
-    const KSelection* selection = d->canvas->shapeManager()->selection();
-    const QList<KShape*> shapes = selection->selectedShapes(KoFlake::StrippedSelection);
+    const KShapeSelection* selection = d->canvas->shapeManager()->selection();
+    const QList<KShape*> shapes = selection->selectedShapes(KFlake::StrippedSelection);
     for (int i = 0; i < shapes.count(); ++i) {
         const KShape* shape = shapes[i];
         KCShapeApplicationData* data = dynamic_cast<KCShapeApplicationData*>(shape->applicationData());

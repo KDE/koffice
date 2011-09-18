@@ -54,7 +54,7 @@ private:
     KOdfPageFormat::Orientation m_orientation;
     int m_pageNumber;
     QString m_masterPageName;
-    KoText::Direction m_direction;
+    KOdfText::Direction m_direction;
 
     struct AutoGenFrameSet {
         KWTextFrameSet *frameSet;

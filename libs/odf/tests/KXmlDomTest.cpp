@@ -17,9 +17,9 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "kodomtest.h"
+#include "KXmlDomTest.h"
 
-#include "KXmlReader.h"
+#include <KXmlReader.h>
 
 //static void debugElemNS( const QDomElement& elem )
 //{
@@ -27,7 +27,7 @@
 //}
 
 
-void KoDomTest::initTestCase()
+void KXmlDomTest::initTestCase()
 {
     const QByteArray xml = QByteArray("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
                                       "<o:document-content xmlns:o=\"")
@@ -42,7 +42,7 @@ void KoDomTest::initTestCase()
 }
 
 
-void KoDomTest::testQDom()
+void KXmlDomTest::testQDom()
 {
     KXmlElement docElem = m_doc.documentElement();
     //debugElemNS( docElem );
@@ -74,7 +74,7 @@ void KoDomTest::testQDom()
 }
 
 
-void KoDomTest::testKoDom()
+void KXmlDomTest::testKoDom()
 {
     KXmlElement docElem = KoXml::namedItemNS(m_doc, KoXmlNS_office.toUtf8(), "document-content");
     QCOMPARE(docElem.isNull(), false);
@@ -115,6 +115,6 @@ void KoDomTest::testKoDom()
 }
 
 
-QTEST_MAIN(KoDomTest)
+QTEST_MAIN(KXmlDomTest)
 
-#include <kodomtest.moc>
+#include <KXmlDomTest.moc>

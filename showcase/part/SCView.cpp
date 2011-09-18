@@ -45,7 +45,7 @@
 #include <kactionmenu.h>
 #include <kfiledialog.h>
 
-#include <KSelection.h>
+#include <KShapeSelection.h>
 #include <KShapeManager.h>
 #include <KoMainWindow.h>
 #include <KoPACanvas.h>
@@ -285,7 +285,7 @@ void SCView::stopPresentation()
 void SCView::createAnimation()
 {
     static int animationcount = 0;
-    KSelection * selection = kopaCanvas()->shapeManager()->selection();
+    KShapeSelection * selection = kopaCanvas()->shapeManager()->selection();
     QList<KShape*> selectedShapes = selection->selectedShapes();
     foreach (KShape *shape, selectedShapes)
     {

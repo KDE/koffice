@@ -81,7 +81,7 @@
 #include <KShapeBorderCommand.h>
 #include <KShapeBackgroundCommand.h>
 #include <KParameterToPathCommand.h>
-#include <KSelection.h>
+#include <KShapeSelection.h>
 #include <KoZoomAction.h>
 #include <KoZoomHandler.h>
 #include <KPathShape.h>
@@ -351,14 +351,14 @@ void ArtworkView::dropEvent(QDropEvent *e)
     //Accepts QColor - from Color Manager's KColorPatch
     QColor color = KColorMimeData::fromMimeData(e->mimeData());
     if (color.isValid()) {
-        KSelection * selection = d->canvas->shapeManager()->selection();
+        KShapeSelection * selection = d->canvas->shapeManager()->selection();
         if (! selection)
             return;
 
         if (! part())
             return;
 
-        if (d->canvas->resourceManager()->intResource(KoCanvasResource::ActiveColorTarget) == KoFlake::Foreground) {
+        if (d->canvas->resourceManager()->intResource(KCanvasResource::ActiveColorTarget) == KFlake::Foreground) {
             QList<KShapeBorderBase*> borders;
             QList<KShape*> selectedShapes = selection->selectedShapes();
             foreach(KShape * shape, selectedShapes) {
@@ -500,11 +500,11 @@ void ArtworkView::fileImportGraphic()
     if (success) {
         QList<KShape*> importedShapes = importPart.document().shapes();
 
-        ArtworkDocumentMergeCommand * cmd = new ArtworkDocumentMergeCommand(part(), &importPart);
+        ArtworkDocumentMergeCommand *cmd = new ArtworkDocumentMergeCommand(part(), &importPart);
         d->canvas->addCommand(cmd);
 
-        foreach(KShape * shape, importedShapes) {
-            d->canvas->shapeManager()->selection()->select(shape, false);
+        foreach(KShape *shape, importedShapes) {
+            d->canvas->shapeManager()->selection()->select(shape, KShapeSelection::NonRecursive);
         }
     }
 }
@@ -517,7 +517,7 @@ void ArtworkView::selectionDuplicate()
 
 void ArtworkView::editSelectAll()
 {
-    KSelection* selection = d->canvas->shapeManager()->selection();
+    KShapeSelection* selection = d->canvas->shapeManager()->selection();
     if (! selection)
         return;
 
@@ -534,7 +534,7 @@ void ArtworkView::editSelectAll()
 
 void ArtworkView::editDeselectAll()
 {
-    KSelection* selection = d->canvas->shapeManager()->selection();
+    KShapeSelection* selection = d->canvas->shapeManager()->selection();
     if (selection)
         selection->deselectAll();
 
@@ -588,11 +588,11 @@ void ArtworkView::selectionDistributeVerticalTop()
 
 void ArtworkView::selectionDistribute(KShapeDistributeCommand::Distribute distribute)
 {
-    KSelection* selection = d->canvas->shapeManager()->selection();
+    KShapeSelection* selection = d->canvas->shapeManager()->selection();
     if (! selection)
         return;
 
-    QList<KShape*> selectedShapes = selection->selectedShapes(KoFlake::TopLevelSelection);
+    QList<KShape*> selectedShapes = selection->selectedShapes(KFlake::TopLevelSelection);
     if (selectedShapes.count() < 2) return;
 
     KShapeDistributeCommand *cmd = new KShapeDistributeCommand(selectedShapes, distribute, selection->boundingRect());
@@ -607,7 +607,7 @@ void ArtworkView::closePath()
 
 void ArtworkView::combinePath()
 {
-    KSelection* selection = d->canvas->shapeManager()->selection();
+    KShapeSelection* selection = d->canvas->shapeManager()->selection();
     if (! selection)
         return;
 
@@ -631,7 +631,7 @@ void ArtworkView::combinePath()
 
 void ArtworkView::separatePath()
 {
-    KSelection* selection = d->canvas->shapeManager()->selection();
+    KShapeSelection* selection = d->canvas->shapeManager()->selection();
     if (! selection)
         return;
 
@@ -679,7 +679,7 @@ void ArtworkView::excludePaths()
 
 void ArtworkView::booleanOperation(ArtworkBooleanCommand::BooleanOperation operation)
 {
-    KSelection* selection = d->canvas->shapeManager()->selection();
+    KShapeSelection* selection = d->canvas->shapeManager()->selection();
     if (! selection)
         return;
 
@@ -711,7 +711,7 @@ void ArtworkView::booleanOperation(ArtworkBooleanCommand::BooleanOperation opera
 
 void ArtworkView::pathSnapToGrid()
 {
-    KSelection* selection = d->canvas->shapeManager()->selection();
+    KShapeSelection* selection = d->canvas->shapeManager()->selection();
     if (! selection)
         return;
 
@@ -768,7 +768,7 @@ void ArtworkView::viewModeChanged(bool outlineMode)
 
 void ArtworkView::zoomSelection()
 {
-    KSelection* selection = d->canvas->shapeManager()->selection();
+    KShapeSelection* selection = d->canvas->shapeManager()->selection();
     if (! selection)
         return;
 
@@ -1085,8 +1085,8 @@ void ArtworkView::selectionChanged()
 {
     if (!shell())
         return;
-    KSelection *selection = d->canvas->shapeManager()->selection();
-    int count = selection->selectedShapes(KoFlake::FullSelection).count();
+    KShapeSelection *selection = d->canvas->shapeManager()->selection();
+    int count = selection->selectedShapes(KFlake::FullSelection).count();
 
     d->closePath->setEnabled(false);
     d->combinePath->setEnabled(false);
@@ -1102,7 +1102,7 @@ void ArtworkView::selectionChanged()
         uint selectedPaths = 0;
         uint selectedParametrics = 0;
         // check for different shape types for enabling specific actions
-        foreach(KShape* shape, selection->selectedShapes(KoFlake::FullSelection)) {
+        foreach(KShape* shape, selection->selectedShapes(KFlake::FullSelection)) {
             if (dynamic_cast<KPathShape*>(shape)) {
                 KParameterShape * ps = dynamic_cast<KParameterShape*>(shape);
                 if (ps && ps->isParametricShape())
@@ -1170,12 +1170,12 @@ void ArtworkView::updateUnit(const KUnit &unit)
 {
     d->horizRuler->setUnit(unit);
     d->vertRuler->setUnit(unit);
-    d->canvas->resourceManager()->setResource(KoCanvasResource::Unit, unit);
+    d->canvas->resourceManager()->setResource(KCanvasResource::Unit, unit);
 }
 
 QList<KPathShape*> ArtworkView::selectedPathShapes()
 {
-    KSelection* selection = d->canvas->shapeManager()->selection();
+    KShapeSelection* selection = d->canvas->shapeManager()->selection();
     if (! selection)
         return QList<KPathShape*>();
 
@@ -1200,7 +1200,7 @@ KoPrintJob * ArtworkView::createPrintJob()
 
 void ArtworkView::applyFillToSelection()
 {
-    KSelection *selection = d->canvas->shapeManager()->selection();
+    KShapeSelection *selection = d->canvas->shapeManager()->selection();
     if (! selection->count())
         return;
 
@@ -1210,7 +1210,7 @@ void ArtworkView::applyFillToSelection()
 
 void ArtworkView::applyStrokeToSelection()
 {
-    KSelection *selection = d->canvas->shapeManager()->selection();
+    KShapeSelection *selection = d->canvas->shapeManager()->selection();
     if (! selection->count())
         return;
 

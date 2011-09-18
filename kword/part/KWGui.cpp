@@ -28,8 +28,8 @@
 #include <KToolManager.h>
 #include <KShapeManager.h>
 #include <KShape.h>
-#include <KoFlake.h>
-#include <KSelection.h>
+#include <KFlake.h>
+#include <KShapeSelection.h>
 #include <KoDockerManager.h>
 #include <KoRuler.h>
 #include <KoToolBoxFactory.h>
@@ -166,7 +166,7 @@ void KWGui::shapeSelectionChanged()
 {
     QPointF start, end;
     bool first = true;
-    foreach (KShape *shape, m_canvas->shapeManager()->selection()->selectedShapes(KoFlake::TopLevelSelection)) {
+    foreach (KShape *shape, m_canvas->shapeManager()->selection()->selectedShapes(KFlake::TopLevelSelection)) {
         QRectF rect = shape->boundingRect();
         if (first) {
             start = rect.topLeft();

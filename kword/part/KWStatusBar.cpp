@@ -150,7 +150,7 @@ void KWStatusBar::updatePageCount()
 void KWStatusBar::resourceChanged(int key, const QVariant &value)
 {
     Q_UNUSED(value);
-    if (key ==  KoCanvasResource::CurrentPage)
+    if (key ==  KCanvasResource::CurrentPage)
         updatePageCount();
 }
 

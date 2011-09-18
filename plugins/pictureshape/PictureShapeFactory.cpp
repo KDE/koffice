@@ -59,7 +59,7 @@ bool PictureShapeFactory::supports(const KXmlElement &e, KShapeLoadingContext &c
 
 void PictureShapeFactory::newDocumentResourceManager(KResourceManager *manager)
 {
-    manager->setLazyResourceSlot(KoDocumentResource::ImageCollection,
+    manager->setLazyResourceSlot(KDocumentResource::ImageCollection,
             this, "createImageCollection");
 }
 

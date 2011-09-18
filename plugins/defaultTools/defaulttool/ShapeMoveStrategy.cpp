@@ -31,13 +31,16 @@
 #include <KSnapGuide.h>
 #include <KPointerEvent.h>
 #include <KToolBase.h>
+#include <KToolManager.h>
 #include <KLocale>
+#include <KDebug>
 
 ShapeMoveStrategy::ShapeMoveStrategy(KToolBase *tool, const QPointF &clicked)
     : KInteractionStrategy(tool),
-    m_start(clicked)
+    m_start(clicked),
+    m_autoActivate(false)
 {
-    QList<KShape*> selectedShapes = tool->canvas()->shapeManager()->selection()->selectedShapes(KoFlake::TopLevelSelection);
+    QList<KShape*> selectedShapes = tool->canvas()->shapeManager()->selection()->selectedShapes(KFlake::TopLevelSelection);
     QRectF boundingRect;
     foreach(KShape *shape, selectedShapes) {
         if (! shape->isEditable())
@@ -47,12 +50,13 @@ ShapeMoveStrategy::ShapeMoveStrategy(KToolBase *tool, const QPointF &clicked)
         m_newPositions << shape->position();
         boundingRect = boundingRect.unite( shape->boundingRect() );
     }
-    KSelection * selection = tool->canvas()->shapeManager()->selection();
+    KShapeSelection *selection = tool->canvas()->shapeManager()->selection();
     m_initialOffset = selection->absolutePosition( SelectionDecorator::hotPosition() ) - m_start;
     m_initialSelectionPosition = selection->position();
-    tool->canvas()->snapGuide()->setIgnoredShapes( selection->selectedShapes( KoFlake::FullSelection ) );
+    tool->canvas()->snapGuide()->setIgnoredShapes( selection->selectedShapes( KFlake::FullSelection ) );
 
-    setStatusText(i18n("Press ALT to hold x- or y-position."));
+    if (!m_selectedShapes.isEmpty())
+        setStatusText(i18n("Press ALT to hold x- or y-position."));
 }
 
 void ShapeMoveStrategy::handleMouseMove(const QPointF &point, Qt::KeyboardModifiers modifiers)
@@ -103,14 +107,22 @@ void ShapeMoveStrategy::moveSelection()
 QUndoCommand* ShapeMoveStrategy::createCommand(QUndoCommand *parent)
 {
     tool()->canvas()->snapGuide()->reset();
-    if (m_diff.x() == 0 && m_diff.y() == 0)
+    if (qFuzzyCompare(m_diff.x(), 0) && qFuzzyCompare(m_diff.y(), 0)) {
+        if (m_autoActivate) { // This means that the move was no move, it was just a select.
+            // activate the tool for our selection.
+
+            QString toolName = KToolManager::instance()->preferredToolForSelection(tool()->canvas()
+                    ->shapeManager()->selection()->selectedShapes(KFlake::TopLevelSelection));
+            KToolManager::instance()->switchToolRequested(toolName);
+        }
         return 0;
+    }
     return new KShapeMoveCommand(m_selectedShapes, m_previousPositions, m_newPositions, parent);
 }
 
 void ShapeMoveStrategy::paint( QPainter &painter, const KViewConverter &converter)
 {
-    SelectionDecorator decorator (KoFlake::NoHandle, false, false);
+    SelectionDecorator decorator (KFlake::NoHandle, false, false);
     decorator.setSelection(tool()->canvas()->shapeManager()->selection());
     decorator.setHandleRadius( tool()->canvas()->resourceManager()->handleRadius() );
     decorator.paint(painter, converter);

@@ -21,7 +21,7 @@
 #ifndef KTEXTBLOCKPAINTSTRATEGYBASE_H
 #define KTEXTBLOCKPAINTSTRATEGYBASE_H
 
-#include "kotext_export.h"
+#include "kodftext_export.h"
 
 #include <QBrush>
 
@@ -31,7 +31,7 @@ class QPainter;
  * This class is used to control aspects of textblock painting
  * Which is used when showcase animates text.
  */
-class KOTEXT_EXPORT KTextBlockPaintStrategyBase
+class KODFTEXT_EXPORT KTextBlockPaintStrategyBase
 {
 public:
     KTextBlockPaintStrategyBase();

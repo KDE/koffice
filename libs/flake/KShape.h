@@ -24,7 +24,7 @@
 #define KSHAPE_H
 
 #include "KInsets.h"
-#include "KoFlake.h"
+#include "KFlake.h"
 
 #include <QTransform>
 #include <QVector>
@@ -367,11 +367,17 @@ public:
      */
     void setTransparency(qreal transparency);
 
+
+    enum Transparancy {
+        EffectiveTransparancy,
+        ShapeTransparancy
+    };
+
     /**
      * Returns the shape level transparency.
      * @param recursive when true takes the parents transparency into account
      */
-    qreal transparency(bool recursive=false) const;
+    qreal transparency(Transparancy transparancy = ShapeTransparancy) const;
 
     /**
      * Retrieve the z-coordinate of this shape.
@@ -580,7 +586,7 @@ public:
      * @param anchor The place on the (unaltered) shape that you want the position of.
      * @return the point that is the absolute, centered position of this shape.
      */
-    QPointF absolutePosition(KoFlake::Position anchor = KoFlake::CenteredPosition) const;
+    QPointF absolutePosition(KFlake::Position anchor = KFlake::CenteredPosition) const;
 
     /**
      * Move this shape to an absolute position where the end location will be the same
@@ -596,7 +602,7 @@ public:
      * @param newPosition the new absolute center of the shape.
      * @param anchor The place on the (unaltered) shape that you set the position of.
      */
-    void setAbsolutePosition(QPointF newPosition, KoFlake::Position anchor = KoFlake::CenteredPosition);
+    void setAbsolutePosition(QPointF newPosition, KFlake::Position anchor = KFlake::CenteredPosition);
 
     /**
      * Set a data object on the shape to be used by an application.

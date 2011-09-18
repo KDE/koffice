@@ -46,7 +46,7 @@
 #include <KoZoomAction.h>
 #include <KoZoomController.h>
 #include <KInlineTextObjectManager.h>
-#include <KSelection.h>
+#include <KShapeSelection.h>
 #include <KoMainWindow.h>
 #include <KoDockerManager.h>
 #include <KShapeLayer.h>
@@ -495,7 +495,7 @@ void KoPAView::editDeleteSelection()
 
 void KoPAView::editSelectAll()
 {
-    KSelection* selection = kopaCanvas()->shapeManager()->selection();
+    KShapeSelection* selection = kopaCanvas()->shapeManager()->selection();
     if(!selection)
         return;
 
@@ -518,7 +518,7 @@ void KoPAView::editSelectAll()
 
 void KoPAView::editDeselectAll()
 {
-    KSelection* selection = kopaCanvas()->shapeManager()->selection();
+    KShapeSelection* selection = kopaCanvas()->shapeManager()->selection();
     if(selection)
         selection->deselectAll();
 
@@ -639,7 +639,7 @@ void KoPAView::doUpdateActivePage(KoPAPageBase * page)
     // the page is in the center of the canvas
     d->zoomController->setDocumentSize(pageSize * 3);
     d->zoomController->setPageSize(pageSize);
-    d->canvas->resourceManager()->setResource(KoCanvasResource::PageSize, pageSize);
+    d->canvas->resourceManager()->setResource(KCanvasResource::PageSize, pageSize);
 
     d->canvas->update();
 
@@ -693,7 +693,7 @@ void KoPAView::setActivePage(KoPAPageBase* page)
     }
 
     // Set the current page number in the canvas resource provider
-    d->canvas->resourceManager()->setResource(KoCanvasResource::CurrentPage, d->doc->pageIndex(d->activePage)+1);
+    d->canvas->resourceManager()->setResource(KCanvasResource::CurrentPage, d->doc->pageIndex(d->activePage)+1);
 }
 
 void KoPAView::navigatePage(KoPageApp::PageNavigation pageNavigation)
@@ -971,7 +971,7 @@ void KoPAView::findDocumentSetNext(QTextDocument * document)
                 setActivePage(page);
                 d->canvas->update();
             }
-            KSelection* selection = kopaCanvas()->shapeManager()->selection();
+            KShapeSelection* selection = kopaCanvas()->shapeManager()->selection();
             selection->deselectAll();
             selection->select(shape);
             // TODO can this be done nicer? is there a way to get the shape id and the tool id from the shape?
@@ -1026,7 +1026,7 @@ void KoPAView::findDocumentSetPrevious(QTextDocument * document)
                 setActivePage(page);
                 d->canvas->update();
             }
-            KSelection* selection = kopaCanvas()->shapeManager()->selection();
+            KShapeSelection* selection = kopaCanvas()->shapeManager()->selection();
             selection->deselectAll();
             selection->select(shape);
             // TODO can this be done nicer? is there a way to get the shape id and the tool id from the shape?

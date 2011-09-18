@@ -20,8 +20,8 @@
 #ifndef KTEXTSHAPEDATA_H
 #define KTEXTSHAPEDATA_H
 
-#include "KoText.h"
-#include "kotext_export.h"
+#include "KOdfText.h"
+#include "kodftext_export.h"
 
 #include <KTextShapeDataBase.h>
 #include <KInsets.h>
@@ -44,7 +44,7 @@ class KDocumentRdfBase;
  * multiple instances of this shape data) can share one QTextDocument by providing a
  * different view on (a different part of) the QTextDocument.
  */
-class KOTEXT_EXPORT KTextShapeData : public KTextShapeDataBase
+class KODFTEXT_EXPORT KTextShapeData : public KTextShapeDataBase
 {
     Q_OBJECT
 public:
@@ -166,13 +166,13 @@ public:
      * The page direction will determine behavior on the insertion of new text and those
      * new paragraphs default direction.
      */
-    void setPageDirection(KoText::Direction direction);
+    void setPageDirection(KOdfText::Direction direction);
     /**
      * Return the direction set on the page.
      * The page direction will determine behavior on the insertion of new text and those
      * new paragraphs default direction.
      */
-    KoText::Direction pageDirection() const;
+    KOdfText::Direction pageDirection() const;
 
     /**
      * Return the spacing between the frame border and the content.

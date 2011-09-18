@@ -20,7 +20,7 @@
 #ifndef KTEXTWRITER_H
 #define KTEXTWRITER_H
 
-#include "kotext_export.h"
+#include "kodftext_export.h"
 
 class KShapeSavingContext;
 class KXmlWriter;
@@ -37,7 +37,7 @@ class KDocumentRdfBase;
 /**
  * KTextWriter saves the text ODF of a shape
  */
-class KOTEXT_EXPORT KTextWriter
+class KODFTEXT_EXPORT KTextWriter
 {
 public:
     /**

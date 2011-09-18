@@ -22,7 +22,7 @@
 
 #include "KShapeManager.h"
 #include "KShapeManager_p.h"
-#include "KSelection.h"
+#include "KShapeSelection.h"
 #include "KToolManager.h"
 #include "KPointerEvent.h"
 #include "KCanvasBase.h"
@@ -46,7 +46,7 @@
 #include <kdebug.h>
 
 KShapeManagerPrivate::KShapeManagerPrivate(KShapeManager *shapeManager, KCanvasBase *c)
-    : selection(new KSelection(shapeManager)),
+    : selection(new KShapeSelection(shapeManager)),
     canvas(c),
     tree(4, 2),
     connectionTree(4, 2),
@@ -394,7 +394,7 @@ void KShapeManager::paint(QPainter &painter, const KViewConverter &converter, bo
 
 void KShapeManager::paintShape(KShape *shape, QPainter &painter, const KViewConverter &converter, bool forPrint)
 {
-    qreal transparency = shape->transparency(true);
+    qreal transparency = shape->transparency(KShape::EffectiveTransparancy);
     if (transparency > 0.0) {
         painter.setOpacity(1.0-transparency);
     }
@@ -539,7 +539,7 @@ KShapeConnection *KShapeManager::connectionAt(const QPointF &position)
     return sortedConnections.first();
 }
 
-KShape *KShapeManager::shapeAt(const QPointF &position, KoFlake::ShapeSelection selection, bool omitHiddenShapes)
+KShape *KShapeManager::shapeAt(const QPointF &position, KFlake::ShapeSelection selection, bool omitHiddenShapes)
 {
     d->updateTree();
     QList<KShape*> sortedShapes(d->tree.contains(position));
@@ -553,18 +553,18 @@ KShape *KShapeManager::shapeAt(const QPointF &position, KoFlake::ShapeSelection 
             continue;
 
         switch (selection) {
-        case KoFlake::ShapeOnTop:
+        case KFlake::ShapeOnTop:
             if (shape->isSelectable())
                 return shape;
-        case KoFlake::Selected:
+        case KFlake::Selected:
             if (d->selection->isSelected(shape))
                 return shape;
             break;
-        case KoFlake::Unselected:
+        case KFlake::Unselected:
             if (! d->selection->isSelected(shape))
                 return shape;
             break;
-        case KoFlake::NextUnselected:
+        case KFlake::NextUnselected:
             // we want an unselected shape
             if (d->selection->isSelected(shape))
                 continue;
@@ -579,7 +579,7 @@ KShape *KShapeManager::shapeAt(const QPointF &position, KoFlake::ShapeSelection 
     }
     // if we want the next unselected below a selected but there was none selected,
     // return the first found unselected shape
-    if (selection == KoFlake::NextUnselected && firstUnselectedShape)
+    if (selection == KFlake::NextUnselected && firstUnselectedShape)
         return firstUnselectedShape;
 
     if (d->selection->hitTest(position))
@@ -624,7 +624,7 @@ QList<KShape*> KShapeManager::topLevelShapes() const
     return shapes;
 }
 
-KSelection *KShapeManager::selection() const
+KShapeSelection *KShapeManager::selection() const
 {
     return d->selection;
 }

@@ -28,10 +28,10 @@
 
 #include <KResourceManager.h>
 #include <KoRuler.h>
-#include <KSelection.h>
+#include <KShapeSelection.h>
 #include <KShapeLayer.h>
 #include <KShapeManager.h>
-#include <KoText.h>
+#include <KOdfText.h>
 #include <KToolManager.h>
 #include <KToolProxy.h>
 #include <KoZoomController.h>
@@ -213,7 +213,7 @@ void SCViewModeSlidesSorter::deactivate()
 {
     m_slidesSorter->hide();
     // Give the ressources back to the canvas
-    m_canvas->resourceManager()->setResource(KoText::ShowTextFrames, 0);
+    m_canvas->resourceManager()->setResource(KOdfText::ShowTextFrames, 0);
     // Active the view as a basic but active one
     m_view->setActionEnabled(KoPAView::AllActions, true);
     m_view->doUpdateActivePage(m_view->activePage());

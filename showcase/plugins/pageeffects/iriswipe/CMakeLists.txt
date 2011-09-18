@@ -18,15 +18,7 @@ set(showcase_pageeffect_iriswipe_SRCS
 
 kde4_add_plugin(showcase_pageeffect_iriswipe ${showcase_pageeffect_iriswipe_SRCS})
 
-target_link_libraries(
-    showcase_pageeffect_iriswipe
-    showcaseprivate
-    flake
-    
-    ${KDE4_KDECORE_LIBS}
-    ${QT_QTCORE_LIBRARY}
-    ${QT_QTGUI_LIBRARY}    
-    )
+target_link_libraries(showcase_pageeffect_iriswipe showcaseprivate)
 
 install(TARGETS showcase_pageeffect_iriswipe  DESTINATION ${PLUGIN_INSTALL_DIR})
 

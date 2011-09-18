@@ -25,7 +25,7 @@
 #include <KXmlWriter.h>
 #include <KOdfXmlNS.h>
 #include <KShapeLoadingContext.h>
-#include <KoOdfWorkaround.h>
+#include <KOdfWorkaround.h>
 
 #include <math.h>
 
@@ -176,7 +176,7 @@ bool EnhancedPathHandle::loadOdf(const KXmlElement & element, KShapeLoadingConte
 
     QString position = element.attributeNS(KOdfXmlNS::draw, "handle-position");
 #ifndef NWORKAROUND_ODF_BUGS
-    KoOdfWorkaround::fixEnhancedPathPolarHandlePosition(position, element, context);
+    KOdfWorkaround::fixEnhancedPathPolarHandlePosition(position, element, context);
 #endif
     QStringList tokens = position.simplified().split(' ');
     if (tokens.count() != 2)

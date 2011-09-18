@@ -23,6 +23,7 @@
 
 #include <KViewConverter.h>
 #include <KToolManager.h>
+#include <KToolBase.h>
 #include "flake_export.h"
 
 #include <QPainter>
@@ -34,7 +35,6 @@ class QKeyEvent;
 class QWheelEvent;
 class QTabletEvent;
 class KToolSelection;
-class KToolBase;
 class KCanvasBase;
 class KCanvasController;
 class KToolProxyPrivate;
@@ -116,6 +116,8 @@ public:
     QStringList supportedPasteMimeTypes() const;
     /// Set the new active tool.
     void setActiveTool(KToolBase *tool);
+    /// return the active tools flags See KToolBase::Flag.
+    KToolBase::Flags flags() const;
 
     /// \internal
     KToolProxyPrivate *priv();

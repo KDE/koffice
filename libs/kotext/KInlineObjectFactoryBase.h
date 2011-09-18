@@ -23,14 +23,14 @@
 #include <QString>
 #include <QObject>
 
-#include "kotext_export.h"
+#include "kodftext_export.h"
 
 class KInlineObject;
 class InlineObjectFactoryPrivate;
 class KProperties;
 
 /// A template used in the KInlineObjectFactoryBase
-struct KOTEXT_EXPORT KoInlineObjectTemplate {
+struct KODFTEXT_EXPORT KoInlineObjectTemplate {
     QString id;         ///< The id of the inlineObject
     QString name;       ///< The name to be shown for this template
     /**
@@ -47,7 +47,7 @@ struct KOTEXT_EXPORT KoInlineObjectTemplate {
  * access to the object-type.
  * @see KInlineObjectRegistry
  */
-class KOTEXT_EXPORT KInlineObjectFactoryBase : public QObject
+class KODFTEXT_EXPORT KInlineObjectFactoryBase : public QObject
 {
     Q_OBJECT
 public:

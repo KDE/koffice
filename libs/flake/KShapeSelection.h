@@ -29,12 +29,12 @@
 
 #include "KShape.h"
 #include "KViewConverter.h"
-#include "KoFlake.h"
+#include "KFlake.h"
 
 #include "flake_export.h"
 
 class KShapeLayer;
-class KSelectionPrivate;
+class KShapeSelectionPrivate;
 
 /**
  * A selection is a shape that contains a number of references
@@ -49,14 +49,19 @@ class KSelectionPrivate;
  * A selection, however, should not be selectable. We need to think
  * a little about the interaction here.
  */
-class FLAKE_EXPORT KSelection : public QObject, public KShape
+class FLAKE_EXPORT KShapeSelection : public QObject, public KShape
 {
     Q_OBJECT
 
 public:
 
-    KSelection(QObject *parent = 0);
-    virtual ~KSelection();
+    KShapeSelection(QObject *parent = 0);
+    virtual ~KShapeSelection();
+
+    enum Recursively {
+        Recursive,
+        NonRecursive
+    };
 
     /**
      * Adds a shape to the selection.
@@ -72,7 +77,7 @@ public:
      * @param shape the shape to add to the selection
      * @param recursive enables recursively selecting shapes of parent groups
      */
-    void select(KShape *shape, bool recursive = true);
+    void select(KShape *shape, Recursively recursive = Recursive);
 
     /**
      * Removes a selected shape.
@@ -88,7 +93,7 @@ public:
      * @param shape the shape to remove from the selection
      * @param recursive enables recursively deselecting shapes of parent groups
      */
-    void deselect(KShape *shape, bool recursive = true);
+    void deselect(KShape *shape, Recursively recursive = Recursive);
 
     /// clear the selections list
     void deselectAll();
@@ -99,14 +104,14 @@ public:
      * @param strip if StrippedSelection, the returned list will not include any children
      *    of a container shape if the container-parent is itself also in the set.
      */
-    const QList<KShape*> selectedShapes(KoFlake::SelectionType strip = KoFlake::FullSelection) const;
+    const QList<KShape*> selectedShapes(KFlake::SelectionType strip = KFlake::FullSelection) const;
 
     /**
      * Return the first selected shape, or 0 if there is nothing selected.
      * @param strip if StrippedSelection, the returned list will not include any children
      *    of a grouped shape if the group-parent is itself also in the set.
      */
-    KShape *firstSelectedShape(KoFlake::SelectionType strip = KoFlake::FullSelection) const;
+    KShape *firstSelectedShape(KFlake::SelectionType strip = KFlake::FullSelection) const;
 
     /// return true if the shape is selected
     bool isSelected(const KShape *shape) const;
@@ -143,7 +148,7 @@ signals:
 
 private:
     Q_PRIVATE_SLOT(d_func(), void selectionChangedEvent())
-    Q_DECLARE_PRIVATE_D(KShape::d_ptr, KSelection)
+    Q_DECLARE_PRIVATE_D(KShape::d_ptr, KShapeSelection)
 };
 
 #endif

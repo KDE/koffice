@@ -11,7 +11,7 @@ add_subdirectory(tests)
 add_subdirectory(pics)
 
 set(flake_SRCS
-    KoFlake.cpp
+    KFlake.cpp
     KCanvasBase.cpp
     KResourceManager.cpp
     KCanvasObserverBase.cpp
@@ -28,7 +28,7 @@ set(flake_SRCS
     KPathPoint.cpp
     KPathPointData.cpp
     KPathSegment.cpp
-    KSelection.cpp
+    KShapeSelection.cpp
     KShape.cpp
     KShapeConnection.cpp
     KShapeConnectionPolicy.cpp
@@ -95,7 +95,7 @@ set(flake_SRCS
     KImageData.cpp
     KImageData_p.cpp
     KImageCollection.cpp
-    KoOdfWorkaround.cpp
+    KOdfWorkaround.cpp
     KFilterEffect.cpp
     KFilterEffectStack.cpp
     KFilterEffectFactoryBase.cpp
@@ -176,19 +176,19 @@ kde4_add_ui_files(flake_SRCS
     tools/KZoomToolWidget.ui
 )
 
-kde4_add_library(flake SHARED ${flake_SRCS})
+kde4_add_library(kflake SHARED ${flake_SRCS})
 
-target_link_libraries(flake ${KDE4_KDEUI_LIBS} koodf)
+target_link_libraries(kflake ${KDE4_KDEUI_LIBS} kodf)
 
-target_link_libraries(flake LINK_INTERFACE_LIBRARIES koodf)
+target_link_libraries(kflake LINK_INTERFACE_LIBRARIES kodf)
 
-set_target_properties(flake PROPERTIES
+set_target_properties(kflake PROPERTIES
     VERSION ${GENERIC_KOFFICE_LIB_VERSION} SOVERSION ${GENERIC_KOFFICE_LIB_SOVERSION}
 )
 
 ########### install files ###############
 
-install(TARGETS flake  ${INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS kflake  ${INSTALL_TARGETS_DEFAULT_ARGS})
 install( FILES
     flake.desktop
     flaketool.desktop
@@ -200,17 +200,6 @@ install( FILES
 
 install(
     FILES
-    commands/KParameterToPathCommand.h
-    commands/KPathCombineCommand.h
-    commands/KPathControlPointMoveCommand.h
-    commands/KPathFillRuleCommand.h
-    commands/KPathPointInsertCommand.h
-    commands/KPathPointMergeCommand.h
-    commands/KPathPointMoveCommand.h
-    commands/KPathPointRemoveCommand.h
-    commands/KPathReverseCommand.h
-    commands/KPathSegmentTypeCommand.h
-    commands/KPathSeparateCommand.h
     commands/KShapeAlignCommand.h
     commands/KShapeBackgroundCommand.h
     commands/KShapeBorderCommand.h
@@ -228,7 +217,6 @@ install(
     commands/KShapeTransformCommand.h
     commands/KShapeTransparencyCommand.h
     commands/KShapeUngroupCommand.h
-    commands/KSubpathRemoveCommand.h
     flake_export.h
     KCanvasBase.h
     KCanvasController.h
@@ -241,7 +229,7 @@ install(
     KDockRegistry.h
     KDrag.h
     KDragOdfSaveHelper.h
-    KoFlake.h
+    KFlake.h
     KFrameShape.h
     KGradientBackground.h
     KGuidesData.h
@@ -251,20 +239,14 @@ install(
     KInsets.h
     KLineBorder.h
     KLoadingShapeUpdater.h
-    KoOdfWorkaround.h
-    KParameterShape.h
+    KOdfWorkaround.h
     KPasteController.h
-    KPathPointData.h
-    KPathPoint.h
-    KPathSegment.h
-    KPathShape.h
-    KPathShapeLoader.h
     KPatternBackground.h
     KPointerEvent.h
     KPostscriptPaintDevice.h
     KResourceManager.h
     KRTree.h
-    KSelection.h
+    KShapeSelection.h
     KShapeApplicationData.h
     KShapeBackgroundBase.h
     KShapeBorderBase.h
@@ -321,6 +303,12 @@ install(
     KEventActionFactoryBase.h
     KEventAction.h
     KEventActionRegistry.h
+    KParameterShape.h
+    KPathPointData.h
+    KPathPoint.h
+    KPathSegment.h
+    KPathShape.h
+    KPathShapeLoader.h
     KShapePainter.h
     KTextOnShapeContainer.h
     KoPluginLoader.h
@@ -329,7 +317,19 @@ install(
 
     commands/KEventActionAddCommand.h
     commands/KEventActionRemoveCommand.h
+    commands/KParameterToPathCommand.h
+    commands/KPathCombineCommand.h
+    commands/KPathControlPointMoveCommand.h
+    commands/KPathFillRuleCommand.h
+    commands/KPathPointInsertCommand.h
+    commands/KPathPointMergeCommand.h
+    commands/KPathPointMoveCommand.h
+    commands/KPathPointRemoveCommand.h
+    commands/KPathReverseCommand.h
+    commands/KPathSegmentTypeCommand.h
+    commands/KPathSeparateCommand.h
     commands/KShapeShadowCommand.h
+    commands/KSubpathRemoveCommand.h
 
     DESTINATION
     ${INCLUDE_INSTALL_DIR}/private COMPONENT Devel

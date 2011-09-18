@@ -39,11 +39,11 @@ void TestResourceManager::testUnitChanged()
     QSignalSpy spy(&rm, SIGNAL(resourceChanged(int, const QVariant &)));
 
     KUnit a;
-    rm.setResource(KoCanvasResource::Unit, a);
+    rm.setResource(KCanvasResource::Unit, a);
     QCOMPARE(spy.count(), 1);
 
     KUnit b(KUnit::Millimeter);
-    rm.setResource(KoCanvasResource::Unit, b);
+    rm.setResource(KCanvasResource::Unit, b);
     QCOMPARE(spy.count(), 2);
 }
 

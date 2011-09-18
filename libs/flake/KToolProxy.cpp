@@ -30,7 +30,7 @@
 #include "KCanvasController.h"
 #include "KShapeManager.h"
 #include "KShapeManager_p.h"
-#include "KSelection.h"
+#include "KShapeSelection.h"
 #include "KShapeLayer.h"
 
 #include <kdebug.h>
@@ -322,6 +322,14 @@ QHash<QString, KAction*> KToolProxy::actions() const
 {
     return d->activeTool ? d->activeTool->actions() : QHash<QString, KAction*>();
 }
+
+KToolBase::Flags KToolProxy::flags() const
+{
+    if (d->activeTool)
+        return d->activeTool->flags();
+    return KToolBase::Flags();
+}
+
 
 void KToolProxy::cut()
 {

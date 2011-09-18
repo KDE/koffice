@@ -21,7 +21,7 @@
 
 #include "CharacterHighlighting.h"
 
-#include <KoText.h>
+#include <KOdfText.h>
 #include <KCharacterStyle.h>
 
 CharacterHighlighting::CharacterHighlighting(bool uniqueFormat,QWidget* parent)
@@ -30,11 +30,11 @@ CharacterHighlighting::CharacterHighlighting(bool uniqueFormat,QWidget* parent)
 {
     widget.setupUi(this);
 
-    widget.underlineStyle->addItems(KoText::underlineTypeList());
-    widget.underlineLineStyle->addItems(KoText::underlineStyleList());
+    widget.underlineStyle->addItems(KOdfText::underlineTypeList());
+    widget.underlineLineStyle->addItems(KOdfText::underlineStyleList());
 
-    widget.strikethroughStyle->addItems(KoText::underlineTypeList()); //TODO make KoText consistent: either add strikethroughTypeList, or change from underlineTypeList to lineTypeList
-    widget.strikethroughLineStyle->addItems(KoText::underlineStyleList()); //TODO idem
+    widget.strikethroughStyle->addItems(KOdfText::underlineTypeList()); //TODO make KOdfText consistent: either add strikethroughTypeList, or change from underlineTypeList to lineTypeList
+    widget.strikethroughLineStyle->addItems(KOdfText::underlineStyleList()); //TODO idem
 
     connect(widget.underlineStyle, SIGNAL(activated(int)), this, SLOT(underlineTypeChanged(int)));
     connect(widget.underlineLineStyle, SIGNAL(activated(int)), this, SLOT(underlineStyleChanged(int)));

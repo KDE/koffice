@@ -22,7 +22,7 @@
 #include <QTextCursor>
 #include <KResourceManager.h>
 
-#include "KoText.h"
+#include "KOdfText.h"
 #include "KoFind_p.h"
 
 FindDirection::FindDirection(KResourceManager *provider)
@@ -55,8 +55,8 @@ void FindForward::positionCursor(QTextCursor &currentPos)
 
 void FindForward::select(const QTextCursor &cursor)
 {
-    m_provider->setResource(KoText::CurrentTextPosition, cursor.position());
-    m_provider->setResource(KoText::CurrentTextAnchor, cursor.anchor());
+    m_provider->setResource(KOdfText::CurrentTextPosition, cursor.position());
+    m_provider->setResource(KOdfText::CurrentTextAnchor, cursor.anchor());
 }
 
 void FindForward::nextDocument(QTextDocument *document, KoFindPrivate *findPrivate)
@@ -85,8 +85,8 @@ void FindBackward::positionCursor(QTextCursor &currentPos)
 
 void FindBackward::select(const QTextCursor &cursor)
 {
-    m_provider->setResource(KoText::CurrentTextPosition, cursor.anchor());
-    m_provider->setResource(KoText::CurrentTextAnchor, cursor.position());
+    m_provider->setResource(KOdfText::CurrentTextPosition, cursor.anchor());
+    m_provider->setResource(KOdfText::CurrentTextAnchor, cursor.position());
 }
 
 void FindBackward::nextDocument(QTextDocument *document, KoFindPrivate *findPrivate)

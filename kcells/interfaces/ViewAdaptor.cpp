@@ -42,7 +42,7 @@
 #include "commands/KCStyleCommand.h"
 
 #include <KShapeManager.h>
-#include <KSelection.h>
+#include <KShapeSelection.h>
 
 /************************************************
  *

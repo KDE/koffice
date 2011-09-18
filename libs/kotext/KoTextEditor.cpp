@@ -240,19 +240,19 @@ void KoTextEditorPrivate::runDirectionUpdater()
         dirtyBlocks.removeAll(blockNumber);
         QTextBlock block = document->findBlockByNumber(blockNumber);
         if (block.isValid()) {
-            KoText::Direction newDirection = KoText::AutoDirection;
+            KOdfText::Direction newDirection = KOdfText::AutoDirection;
             QTextBlockFormat format = block.blockFormat();
-            KoText::Direction dir =
-                static_cast<KoText::Direction>(format.intProperty(KParagraphStyle::TextProgressionDirection));
+            KOdfText::Direction dir =
+                static_cast<KOdfText::Direction>(format.intProperty(KParagraphStyle::TextProgressionDirection));
 
-            if (dir == KoText::AutoDirection || dir == KoText::PerhapsLeftRightTopBottom
-                    || dir == KoText::PerhapsRightLeftTopBottom
-                    || dir == KoText::InheritDirection) {
+            if (dir == KOdfText::AutoDirection || dir == KOdfText::PerhapsLeftRightTopBottom
+                    || dir == KOdfText::PerhapsRightLeftTopBottom
+                    || dir == KOdfText::InheritDirection) {
                 bool rtl = isRightToLeft(block.text());
-                if (rtl && (dir != KoText::AutoDirection || QApplication::isLeftToRight()))
-                    newDirection = KoText::PerhapsRightLeftTopBottom;
-                else if (!rtl && (dir != KoText::AutoDirection || QApplication::isRightToLeft())) // remove previously set one if needed.
-                    newDirection = KoText::PerhapsLeftRightTopBottom;
+                if (rtl && (dir != KOdfText::AutoDirection || QApplication::isLeftToRight()))
+                    newDirection = KOdfText::PerhapsRightLeftTopBottom;
+                else if (!rtl && (dir != KOdfText::AutoDirection || QApplication::isRightToLeft())) // remove previously set one if needed.
+                    newDirection = KOdfText::PerhapsLeftRightTopBottom;
 
                 QTextCursor cursor(block);
                 if (format.property(KParagraphStyle::TextProgressionDirection).toInt() != newDirection) {
@@ -260,10 +260,10 @@ void KoTextEditorPrivate::runDirectionUpdater()
                     cursor.setBlockFormat(format); // note that setting this causes a re-layout.
                 }
                 if (!isBidiDocument) {
-                    if ((QApplication::isLeftToRight() && (newDirection == KoText::RightLeftTopBottom
-                                    || newDirection == KoText::PerhapsRightLeftTopBottom))
-                            || (QApplication::isRightToLeft() && (newDirection == KoText::LeftRightTopBottom
-                                    || newDirection == KoText::PerhapsLeftRightTopBottom))) {
+                    if ((QApplication::isLeftToRight() && (newDirection == KOdfText::RightLeftTopBottom
+                                    || newDirection == KOdfText::PerhapsRightLeftTopBottom))
+                            || (QApplication::isRightToLeft() && (newDirection == KOdfText::LeftRightTopBottom
+                                    || newDirection == KOdfText::PerhapsLeftRightTopBottom))) {
                         isBidiDocument = true;
                         emit q->isBidiUpdated();
                     }
@@ -310,7 +310,7 @@ KoTextEditor::~KoTextEditor()
     delete d;
 }
 
-void KoTextEditor::updateDefaultTextDirection(KoText::Direction direction)
+void KoTextEditor::updateDefaultTextDirection(KOdfText::Direction direction)
 {
     d->direction = direction;
 }
@@ -1223,15 +1223,15 @@ void KoTextEditor::newLine()
     }
 
     bf = d->caret.blockFormat();
-    if (d->direction != KoText::AutoDirection) { // inherit from shape
-        KoText::Direction dir;
+    if (d->direction != KOdfText::AutoDirection) { // inherit from shape
+        KOdfText::Direction dir;
         switch (d->direction) {
-        case KoText::RightLeftTopBottom:
-            dir = KoText::PerhapsRightLeftTopBottom;
+        case KOdfText::RightLeftTopBottom:
+            dir = KOdfText::PerhapsRightLeftTopBottom;
             break;
-        case KoText::LeftRightTopBottom:
+        case KOdfText::LeftRightTopBottom:
         default:
-            dir = KoText::PerhapsLeftRightTopBottom;
+            dir = KOdfText::PerhapsLeftRightTopBottom;
         }
         bf.setProperty(KParagraphStyle::TextProgressionDirection, dir);
     } else if (! direction.isNull()) { // then we inherit from the previous paragraph.

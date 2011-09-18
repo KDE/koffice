@@ -48,7 +48,7 @@
 #include <KOdfEmbeddedDocumentSaver.h>
 #include <KImageCollection.h>
 #include <KDataCenterBase.h>
-#include <KoText.h>
+#include <KOdfText.h>
 #include <KStyleManager.h>
 #include <KTextSharedLoadingData.h>
 #include <KInlineTextObjectManager.h>
@@ -379,8 +379,8 @@ bool ArtworkDocument::saveOdf(KoDocument::SavingContext &documentContext, const 
     bodyWriter->startElement("office:body");
     bodyWriter->startElement("office:drawing");
 
-    if (resourceManager()->hasResource(KoText::InlineTextObjectManager)) {
-        KInlineTextObjectManager* object_manager = (resourceManager()->resource(KoText::InlineTextObjectManager)).value<KInlineTextObjectManager*>();
+    if (resourceManager()->hasResource(KOdfText::InlineTextObjectManager)) {
+        KInlineTextObjectManager* object_manager = (resourceManager()->resource(KOdfText::InlineTextObjectManager)).value<KInlineTextObjectManager*>();
         if (object_manager) {
             KVariableManager* variable_manager = object_manager->variableManager();
             if (variable_manager) {
@@ -410,7 +410,7 @@ bool ArtworkDocument::saveOdf(KoDocument::SavingContext &documentContext, const 
 
 void ArtworkDocument::loadOdfStyles(KShapeLoadingContext & context)
 {
-    KStyleManager *styleManager = resourceManager()->resource(KoText::StyleManager).value<KStyleManager*>();
+    KStyleManager *styleManager = resourceManager()->resource(KOdfText::StyleManager).value<KStyleManager*>();
 
     if (! styleManager)
         return;
@@ -420,7 +420,7 @@ void ArtworkDocument::loadOdfStyles(KShapeLoadingContext & context)
         return;
 
     sharedData->loadOdfStyles(context, styleManager);
-    context.addSharedData(KOTEXT_SHARED_LOADING_ID, sharedData);
+    context.addSharedData(KODFTEXT_SHARED_LOADING_ID, sharedData);
 }
 
 void ArtworkDocument::saveOdfStyles(KShapeSavingContext & context)

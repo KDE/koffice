@@ -24,7 +24,7 @@
 #include "ArtisticTextShapeConfigWidget.h"
 
 #include <KCanvasBase.h>
-#include <KSelection.h>
+#include <KShapeSelection.h>
 #include <KShapeManager.h>
 #include <KPointerEvent.h>
 #include <KPathShape.h>
@@ -231,7 +231,7 @@ void ArtisticTextTool::mousePressEvent( KPointerEvent *event )
     ArtisticTextShape *hit = 0;
     QRectF roi( event->point, QSizeF(1,1) );
     QList<KShape*> shapes = canvas()->shapeManager()->shapesAt( roi );
-    KSelection *selection = canvas()->shapeManager()->selection();
+    KShapeSelection *selection = canvas()->shapeManager()->selection();
     foreach( KShape *shape, shapes ) 
     {
         hit = dynamic_cast<ArtisticTextShape*>( shape );
@@ -249,7 +249,7 @@ void ArtisticTextTool::mousePressEvent( KPointerEvent *event )
     }
     if ( hit ) {
         QPointF pos = event->point;
-        pos -= m_currentShape->absolutePosition( KoFlake::TopLeftCorner );
+        pos -= m_currentShape->absolutePosition( KFlake::TopLeftCorner );
         const int len = m_currentShape->text().length();
         int hit = len;
         qreal mindist = DBL_MAX;

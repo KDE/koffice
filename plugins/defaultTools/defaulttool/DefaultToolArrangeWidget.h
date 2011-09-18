@@ -21,7 +21,7 @@
 #define DEFAULTTOOLARRANGEWIDGET_H
 
 #include <ui_DefaultToolArrangeWidget.h>
-#include <KoFlake.h>
+#include <KFlake.h>
 
 #include <QWidget>
 

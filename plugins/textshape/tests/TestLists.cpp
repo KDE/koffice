@@ -530,7 +530,7 @@ void TestDocumentLayout::testRightToLeftList()
 {
     initForNewTest("a\nb\nc");
     KParagraphStyle h1;
-    h1.setTextProgressionDirection(KoText::RightLeftTopBottom);
+    h1.setTextProgressionDirection(KOdfText::RightLeftTopBottom);
     m_styleManager->add(&h1);
     KListStyle listStyle;
     KListLevelProperties llp = listStyle.levelProperties(1);
@@ -667,7 +667,7 @@ void TestDocumentLayout::testCenteredItems()
     block = block.next(); // centered RTL text.
     listStyle.applyStyle(block);
     cursor = QTextCursor(block);
-    fmt.setProperty(KParagraphStyle::TextProgressionDirection, KoText::RightLeftTopBottom);
+    fmt.setProperty(KParagraphStyle::TextProgressionDirection, KOdfText::RightLeftTopBottom);
     cursor.mergeBlockFormat(fmt);
 
     m_layout->layout();

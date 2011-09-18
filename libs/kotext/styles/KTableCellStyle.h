@@ -23,8 +23,8 @@
 #define KTABLECELLSTYLE_H
 
 #include "KTableBorderStyle.h"
-#include "KoText.h"
-#include "kotext_export.h"
+#include "KOdfText.h"
+#include "kodftext_export.h"
 
 #include <QColor>
 
@@ -53,7 +53,7 @@ class KXmlElement;
  * a specific KTableCellStyle.
  * @see KStyleManager
  */
-class KOTEXT_EXPORT KTableCellStyle : public KTableBorderStyle
+class KODFTEXT_EXPORT KTableCellStyle : public KTableBorderStyle
 {
     Q_OBJECT
 public:

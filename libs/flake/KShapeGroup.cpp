@@ -63,7 +63,7 @@ void KShapeGroup::shapeCountChanged()
 {
     // TODO: why is this needed here ? the group/ungroup command should take care of this
     QRectF br = boundingRect();
-    setAbsolutePosition(br.topLeft(), KoFlake::TopLeftCorner);
+    setAbsolutePosition(br.topLeft(), KFlake::TopLeftCorner);
     setSize(br.size());
 }
 

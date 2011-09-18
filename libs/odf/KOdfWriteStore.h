@@ -115,4 +115,4 @@ private:
     Private * const d;
 };
 
-#endif /* KOODFWRITESTORE_H */
+#endif /* KODFWRITESTORE_H */

@@ -9,7 +9,7 @@ add_subdirectory( functions )
 
 include_directories( ${CMAKE_SOURCE_DIR}/interfaces
                     ${KOMAIN_INCLUDES}
-                    ${KOTEXT_INCLUDES}
+                    ${KODFTEXT_INCLUDES}
                     ${EIGEN2_INCLUDE_DIR} )
 
 ########### next target ###############

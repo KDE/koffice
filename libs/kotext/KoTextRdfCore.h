@@ -20,7 +20,7 @@
 #ifndef KO_TEXT_RDF_CORE_H
 #define KO_TEXT_RDF_CORE_H
 
-#include "kotext_export.h"
+#include "kodftext_export.h"
 
 // this file can only be used by code that is built
 // with soprano enabled.
@@ -30,7 +30,7 @@ class KOdfStore;
 class KXmlWriter;
 
 /**
- * @short Basic low level methods that are available to KoText objects
+ * @short Basic low level methods that are available to KOdfText objects
  *
  * Low level functionality such as streaming a Soprano::Model to and
  * from an ODF container is provided here so that both KoDocumentRdf
@@ -48,7 +48,7 @@ namespace KoTextRdfCore
  *
  * @see saveList()
  */
-QList<Soprano::Statement> KOTEXT_EXPORT loadList(Soprano::Model *model, Soprano::Node ListHeadSubject);
+QList<Soprano::Statement> KODFTEXT_EXPORT loadList(Soprano::Model *model, Soprano::Node ListHeadSubject);
 
 /**
  * Save an Rdf List of data nodes into the model. Rdf defines a
@@ -86,7 +86,7 @@ bnodeZ          22-rdf-syntax-ns#rest  nil
 @endverbatim
  *
  */
-void KOTEXT_EXPORT saveList(Soprano::Model *model, Soprano::Node ListHeadSubject,
+void KODFTEXT_EXPORT saveList(Soprano::Model *model, Soprano::Node ListHeadSubject,
         QList<Soprano::Node> &dataBNodeList, Soprano::Node context);
 
 /**
@@ -97,7 +97,7 @@ void KOTEXT_EXPORT saveList(Soprano::Model *model, Soprano::Node ListHeadSubject
  * because you don't have to ensure that a statement is added only once
  * to the remove list.
  */
-void KOTEXT_EXPORT removeStatementsIfTheyExist(Soprano::Model *model,
+void KODFTEXT_EXPORT removeStatementsIfTheyExist(Soprano::Model *model,
         const QList<Soprano::Statement> &removeList);
 
 /**
@@ -106,16 +106,16 @@ void KOTEXT_EXPORT removeStatementsIfTheyExist(Soprano::Model *model,
  * returned. This is mainly useful when you *know* there is only zero
  * or one object.
  */
-Soprano::Node KOTEXT_EXPORT getObject(Soprano::Model *model, Soprano::Node s, Soprano::Node p);
+Soprano::Node KODFTEXT_EXPORT getObject(Soprano::Model *model, Soprano::Node s, Soprano::Node p);
 
-QString KOTEXT_EXPORT getProperty(Soprano::Model *m,
+QString KODFTEXT_EXPORT getProperty(Soprano::Model *m,
                                   Soprano::Node subj,
                                   Soprano::Node pred,
                                   const QString &defval);
-QString KOTEXT_EXPORT optionalBindingAsString(Soprano::QueryResultIterator& it,
+QString KODFTEXT_EXPORT optionalBindingAsString(Soprano::QueryResultIterator& it,
                                               const QString &bindingName,
                                               const QString &def = QString());
-QByteArray KOTEXT_EXPORT fileToByteArray(const QString &fileName);
+QByteArray KODFTEXT_EXPORT fileToByteArray(const QString &fileName);
 
 }
 #endif

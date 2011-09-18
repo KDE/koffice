@@ -20,7 +20,7 @@
 #ifndef KDELETECHANGEMARKER_H
 #define KDELETECHANGEMARKER_H
 
-#include "kotext_export.h"
+#include "kodftext_export.h"
 
 #include <KInlineObject.h>
 #include <QTextFormat>
@@ -31,7 +31,7 @@ class KXmlElement;
 
 class QTextDocument;
 
-class KOTEXT_EXPORT KDeleteChangeMarker : public KInlineObject
+class KODFTEXT_EXPORT KDeleteChangeMarker : public KInlineObject
 {
 public:
 

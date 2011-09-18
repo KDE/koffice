@@ -25,7 +25,8 @@ public:
     Private(const QString &i)
             : priority(100),
             inputDeviceAgnostic(true),
-            id(i)
+            id(i),
+            shapeSelectionFlags(NoShapeMatch)
     {
     }
     int priority;
@@ -36,6 +37,7 @@ public:
     QString icon;
     const QString id;
     KShortcut shortcut;
+    KToolFactoryBase::ShapeSelectionFlags shapeSelectionFlags;
 };
 
 
@@ -123,6 +125,16 @@ void KToolFactoryBase::setInputDeviceAgnostic(bool agnostic)
 bool KToolFactoryBase::inputDeviceAgnostic() const
 {
     return d->inputDeviceAgnostic;
+}
+
+void KToolFactoryBase::setAutoActivateFlags(ShapeSelectionFlags flags)
+{
+    d->shapeSelectionFlags = flags;
+}
+
+KToolFactoryBase::ShapeSelectionFlags KToolFactoryBase::autoActivateFlags() const
+{
+    return d->shapeSelectionFlags;
 }
 
 bool KToolFactoryBase::canCreateTool(KCanvasBase *) const

@@ -26,7 +26,7 @@
 #include <KShape.h>
 #include <KProperties.h>
 #include <KShapeManager.h>
-#include <KSelection.h>
+#include <KShapeSelection.h>
 #include <KPointerEvent.h>
 
 #include <KDebug>
@@ -100,7 +100,7 @@ void SelectStrategy::handleMouseMove(const QPointF &mouseLocation, Qt::KeyboardM
             }
         }
     }
-    QPointF offset(mouseLocation - m_clickedShape->absolutePosition(KoFlake::TopLeftCorner));
+    QPointF offset(mouseLocation - m_clickedShape->absolutePosition(KFlake::TopLeftCorner));
     if (addOffset)
         dataStream << offset;
 

@@ -28,7 +28,7 @@
 #include "KShapeManager.h"
 #include "KResourceManager.h"
 #include "KViewConverter.h"
-#include "KSelection.h"
+#include "KShapeSelection.h"
 #include "KPointerEvent.h"
 #include "commands/KPathPointTypeCommand_p.h"
 #include "commands/KPathPointInsertCommand.h"
@@ -933,7 +933,7 @@ void KPathTool::deactivate()
 
 void KPathTool::resourceChanged(int key, const QVariant & res)
 {
-    if (key == KoCanvasResource::HandleRadius) {
+    if (key == KCanvasResource::HandleRadius) {
         int oldHandleRadius = m_handleRadius;
 
         m_handleRadius = res.toUInt();

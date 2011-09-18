@@ -35,15 +35,7 @@ set(showcase_pageeffect_matrixwipe_SRCS
 
 kde4_add_plugin(showcase_pageeffect_matrixwipe ${showcase_pageeffect_matrixwipe_SRCS})
 
-target_link_libraries(
-    showcase_pageeffect_matrixwipe
-    showcaseprivate 
-    flake 
-    
-    ${KDE4_KDECORE_LIBS}
-    ${QT_QTCORE_LIBRARY}
-    ${QT_QTGUI_LIBRARY}
-    )
+target_link_libraries(showcase_pageeffect_matrixwipe showcaseprivate)
 
 install(TARGETS showcase_pageeffect_matrixwipe  DESTINATION ${PLUGIN_INSTALL_DIR})
 

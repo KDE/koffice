@@ -22,7 +22,7 @@
 #include "SelectionDecorator.h"
 
 #include <KShape.h>
-#include <KSelection.h>
+#include <KShapeSelection.h>
 #include <kstandarddirs.h>
 #include <kglobal.h>
 
@@ -30,9 +30,9 @@
 
 K_GLOBAL_STATIC(QImage, s_rotateCursor)
 
-KoFlake::Position SelectionDecorator::m_hotPosition = KoFlake::TopLeftCorner;
+KFlake::Position SelectionDecorator::m_hotPosition = KFlake::TopLeftCorner;
 
-SelectionDecorator::SelectionDecorator(KoFlake::SelectionHandle arrows,
+SelectionDecorator::SelectionDecorator(KFlake::SelectionHandle arrows,
         bool rotationHandles, bool shearHandles)
     : m_rotationHandles(rotationHandles)
     , m_shearHandles(shearHandles)
@@ -44,7 +44,7 @@ SelectionDecorator::SelectionDecorator(KoFlake::SelectionHandle arrows,
     }
 }
 
-void SelectionDecorator::setSelection(KSelection *selection)
+void SelectionDecorator::setSelection(KShapeSelection *selection)
 {
     m_selection = selection;
 }
@@ -54,12 +54,12 @@ void SelectionDecorator::setHandleRadius(int radius)
     m_handleRadius = radius;
 }
 
-void SelectionDecorator::setHotPosition(KoFlake::Position hotPosition)
+void SelectionDecorator::setHotPosition(KFlake::Position hotPosition)
 {
     m_hotPosition = hotPosition;
 }
 
-KoFlake::Position SelectionDecorator::hotPosition()
+KFlake::Position SelectionDecorator::hotPosition()
 {
     return m_hotPosition;
 }
@@ -72,7 +72,7 @@ void SelectionDecorator::paint(QPainter &painter, const KViewConverter &converte
     painter.save();
     painter.setPen(Qt::green);
     bool editable=false;
-    foreach (KShape *shape, m_selection->selectedShapes(KoFlake::StrippedSelection)) {
+    foreach (KShape *shape, m_selection->selectedShapes(KFlake::StrippedSelection)) {
         // apply the shape transformation on top of the old painter transformation
         painter.setWorldTransform(shape->absoluteTransformation(&converter) * painterMatrix);
         // apply the zoom factor
@@ -144,11 +144,11 @@ void SelectionDecorator::paint(QPainter &painter, const KViewConverter &converte
     painter.setBrush(Qt::red);
     QPointF pos;
     switch(m_hotPosition) {
-    case KoFlake::TopLeftCorner: pos = handleArea.topLeft(); break;
-    case KoFlake::TopRightCorner: pos = handleArea.topRight(); break;
-    case KoFlake::BottomLeftCorner: pos = handleArea.bottomLeft(); break;
-    case KoFlake::BottomRightCorner: pos = handleArea.bottomRight(); break;
-    case KoFlake::CenteredPosition: pos = handleArea.center(); break;
+    case KFlake::TopLeftCorner: pos = handleArea.topLeft(); break;
+    case KFlake::TopRightCorner: pos = handleArea.topRight(); break;
+    case KFlake::BottomLeftCorner: pos = handleArea.bottomLeft(); break;
+    case KFlake::BottomRightCorner: pos = handleArea.bottomRight(); break;
+    case KFlake::CenteredPosition: pos = handleArea.center(); break;
     }
     rect.moveCenter(painterMatrix.map(pos));
     painter.drawRect(rect);
@@ -157,32 +157,32 @@ void SelectionDecorator::paint(QPainter &painter, const KViewConverter &converte
 
 #if 0
     // draw the move arrow(s)
-    if (m_arrows != KoFlake::NoHandle && bounds.width() > 45 && bounds.height() > 45) {
+    if (m_arrows != KFlake::NoHandle && bounds.width() > 45 && bounds.height() > 45) {
         qreal x1,x2,y1,y2; // 2 is where the arrow head is
         switch(m_arrows) {
-            case KoFlake::TopMiddleHandle:
+            case KFlake::TopMiddleHandle:
                 x1=bounds.center().x(); x2=x1; y2=bounds.y()+8; y1=y2+20;
                 break;
-            case KoFlake::TopRightHandle:
+            case KFlake::TopRightHandle:
                 x2=bounds.right()-8; x1=x2-20; y2=bounds.y()+8; y1=y2+20;
                 break;
-            case KoFlake::RightMiddleHandle:
+            case KFlake::RightMiddleHandle:
                 x2=bounds.right()-8; x1=x2-20; y1=bounds.center().y(); y2=y1;
                 break;
-            case KoFlake::BottomRightHandle:
+            case KFlake::BottomRightHandle:
                 x2=bounds.right()-8; x1=x2-20; y2=bounds.bottom()-8; y1=y2-20;
                 break;
-            case KoFlake::BottomMiddleHandle:
+            case KFlake::BottomMiddleHandle:
                 x1=bounds.center().x(); x2=x1; y2=bounds.bottom()-8; y1=y2-20;
                 break;
-            case KoFlake::BottomLeftHandle:
+            case KFlake::BottomLeftHandle:
                 x2=bounds.left()+8; x1=x2+20; y2=bounds.bottom()-8; y1=y2-20;
                 break;
-            case KoFlake::LeftMiddleHandle:
+            case KFlake::LeftMiddleHandle:
                 x2=bounds.left()+8; x1=x2+20; y1=bounds.center().y(); y2=y1;
                 break;
             default:
-            case KoFlake::TopLeftHandle:
+            case KFlake::TopLeftHandle:
                 x2=bounds.left()+8; x1=x2+20; y2=bounds.y()+8; y1=y2+20;
                 break;
         }

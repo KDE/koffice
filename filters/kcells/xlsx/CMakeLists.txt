@@ -5,7 +5,7 @@ include_directories( ${KOMAIN_INCLUDES} ${CMAKE_SOURCE_DIR}/filters/libmsooxml )
 ########### next target ###############
 
 set(xlsximport_PART_SRCS
-    ColorConversions.cpp # TODO: only include for TINY target
+    ColorConversions.cpp
     XlsxImport.cpp
     XlsxXmlCommonReader.cpp
     XlsxXmlDocumentReader.cpp
@@ -25,7 +25,6 @@ kde4_add_plugin(xlsximport ${xlsximport_PART_SRCS})
 target_link_libraries(
     xlsximport
     msooxml
-    koodf
     komain
     kcellscommon
 )

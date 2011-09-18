@@ -152,11 +152,6 @@ public:
          * event including application-defined keyboard shortcuts by accepting the event.
          */
         ToolHandleShortcutOverride = 0x10
-
-        /*  These are ideas for expansion;
-        ToolDrawsNoContent,
-        ToolResourceChangeListener,
-        */
     };
     Q_DECLARE_FLAGS(Flags, Flag)
 

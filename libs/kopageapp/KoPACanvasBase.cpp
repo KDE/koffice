@@ -21,7 +21,7 @@
 
 #include <KShapeManager.h>
 #include <KToolProxy.h>
-#include <KoText.h>
+#include <KOdfText.h>
 
 #include "KoPADocument.h"
 #include "KoPAView.h"
@@ -178,7 +178,7 @@ void KoPACanvasBase::paint(QPainter &painter, const QRectF paintRect) {
     KoPAPageBase *activePage(d->view->activePage());
     if (d->view->activePage()) {
         int pageNumber = d->doc->pageIndex(d->view->activePage()) + 1;
-        QVariant var = d->doc->resourceManager()->resource(KoText::PageProvider);
+        QVariant var = d->doc->resourceManager()->resource(KOdfText::PageProvider);
         static_cast<KoPAPageProvider*>(var.value<void*>())->setPageData(pageNumber, activePage);
         d->view->viewMode()->paint(this, painter, paintRect);
     }

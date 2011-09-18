@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KOODFWORKAROUND_H
-#define KOODFWORKAROUND_H
+#ifndef KODFWORKAROUND_H
+#define KODFWORKAROUND_H
 
 #include "flake_export.h"
 
@@ -38,11 +38,11 @@ class KColorBackground;
  *
  * @code
  * #ifndef NWORKAROUND_ODF_BUGS
- *     KoOdfWorkaround::fixPenWidth(pen, context);
+ *     KOdfWorkaround::fixPenWidth(pen, context);
  * #endif
  * @endcode
  */
-namespace KoOdfWorkaround
+namespace KOdfWorkaround
 {
     /**
      * OpenOffice handles a line with the width of 0 as a cosmetic line but in svg it makes the line invisible.
@@ -79,4 +79,4 @@ namespace KoOdfWorkaround
     FLAKE_EXPORT void fixPresentationPlaceholder(KShape *shape);
 }
 
-#endif /* KOODFWORKAROUND_H */
+#endif /* KODFWORKAROUND_H */

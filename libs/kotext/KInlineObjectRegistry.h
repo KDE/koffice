@@ -21,7 +21,7 @@
 
 #include <KGenericRegistry.h>
 #include <KInlineObjectFactoryBase.h>
-#include "kotext_export.h"
+#include "kodftext_export.h"
 #include <QObject>
 #include <QList>
 
@@ -38,7 +38,7 @@ class KShapeLoadingContext;
  * @see KInlineObject
  * @see KVariable
  */
-class KOTEXT_EXPORT KInlineObjectRegistry : public QObject,  public KGenericRegistry<KInlineObjectFactoryBase*>
+class KODFTEXT_EXPORT KInlineObjectRegistry : public QObject,  public KGenericRegistry<KInlineObjectFactoryBase*>
 {
     Q_OBJECT
 public:

@@ -20,7 +20,7 @@
 #ifndef KTEXTDRAG_H
 #define KTEXTDRAG_H
 
-#include "kotext_export.h"
+#include "kodftext_export.h"
 
 
 class QMimeData;
@@ -36,7 +36,7 @@ class KTextOdfSaveHelper;
  * setOdf takes care of saving styles and tracked changes and all the other
  * common stuff.
  */
-class KOTEXT_EXPORT KTextDrag
+class KODFTEXT_EXPORT KTextDrag
 {
 public:
     KTextDrag();

@@ -60,8 +60,8 @@ KWFrameGeometry::KWFrameGeometry(FrameConfigSharedState *state)
     connect(m_state, SIGNAL(keepAspectRatioChanged(bool)), widget.keepAspect, SLOT(setKeepAspectRatio(bool)));
     connect(widget.keepAspect, SIGNAL(keepAspectRatioChanged(bool)), this, SLOT(updateAspectRatio(bool)));
 
-    connect(widget.positionSelector, SIGNAL(positionSelected(KoFlake::Position)),
-            this, SLOT(setGeometryAlignment(KoFlake::Position)));
+    connect(widget.positionSelector, SIGNAL(positionSelected(KFlake::Position)),
+            this, SLOT(setGeometryAlignment(KFlake::Position)));
 
 }
 
@@ -233,7 +233,7 @@ void KWFrameGeometry::setUnit(KUnit unit)
     widget.bottomMargin->setUnit(unit);
 }
 
-void KWFrameGeometry::setGeometryAlignment(KoFlake::Position position)
+void KWFrameGeometry::setGeometryAlignment(KFlake::Position position)
 {
     KWFrame *frame = m_frame;
     if (frame == 0) {

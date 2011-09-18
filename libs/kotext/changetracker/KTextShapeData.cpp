@@ -67,7 +67,7 @@ public:
             offset(0.0),
             position(-1),
             endPosition(-1),
-            direction(KoText::AutoDirection),
+            direction(KOdfText::AutoDirection),
             textpage(0),
             padding(7, 7, 7, 7)
     {
@@ -86,7 +86,7 @@ public:
     bool inRelayoutForPage;
     qreal offset;
     int position, endPosition;
-    KoText::Direction direction;
+    KOdfText::Direction direction;
     KTextPage *textpage;
     KInsets padding; // Distance between shape border and text
 };
@@ -189,13 +189,13 @@ void KTextShapeData::fireResizeEvent()
     emit relayout();
 }
 
-void KTextShapeData::setPageDirection(KoText::Direction direction)
+void KTextShapeData::setPageDirection(KOdfText::Direction direction)
 {
     Q_D(KTextShapeData);
     d->direction = direction;
 }
 
-KoText::Direction KTextShapeData::pageDirection() const
+KOdfText::Direction KTextShapeData::pageDirection() const
 {
     Q_D(const KTextShapeData);
     return d->direction;

@@ -24,7 +24,7 @@
 #include "../KWPage.h"
 
 #include <KOdfPageLayoutData.h>
-#include <KoText.h>
+#include <KOdfText.h>
 
 #include <QUndoCommand>
 

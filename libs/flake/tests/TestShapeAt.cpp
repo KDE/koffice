@@ -22,7 +22,7 @@
 
 #include <kdebug.h>
 #include <KShapeManager.h>
-#include <KSelection.h>
+#include <KShapeSelection.h>
 #include <KLineBorder.h>
 #include <KShapeShadow.h>
 
@@ -46,9 +46,9 @@ void TestShapeAt::test()
     QVERIFY(manager.shapeAt(QPointF(90, 90)) == 0);
     QVERIFY(manager.shapeAt(QPointF(110, 140)) != 0);
     QVERIFY(manager.shapeAt(QPointF(100, 100)) != 0);
-    QVERIFY(manager.shapeAt(QPointF(100, 100), KoFlake::Selected) == 0);
-    QVERIFY(manager.shapeAt(QPointF(100, 100), KoFlake::Unselected) != 0);
-    QVERIFY(manager.shapeAt(QPointF(100, 100), KoFlake::NextUnselected) != 0);
+    QVERIFY(manager.shapeAt(QPointF(100, 100), KFlake::Selected) == 0);
+    QVERIFY(manager.shapeAt(QPointF(100, 100), KFlake::Unselected) != 0);
+    QVERIFY(manager.shapeAt(QPointF(100, 100), KFlake::NextUnselected) != 0);
 
     shape2.setPosition(QPointF(80, 80));
     shape2.setSize(QSizeF(50, 50));
@@ -59,18 +59,18 @@ void TestShapeAt::test()
     QCOMPARE(manager.shapeAt(QPointF(90, 90)), &shape2);
     QCOMPARE(manager.shapeAt(QPointF(105, 105)), &shape2); // the one on top
     KShape *dummy = 0;
-    QCOMPARE(manager.shapeAt(QPointF(105, 105), KoFlake::Selected), dummy);
-    QCOMPARE(manager.shapeAt(QPointF(105, 105), KoFlake::Unselected), &shape2); // the one on top
-    QCOMPARE(manager.shapeAt(QPointF(105, 105), KoFlake::NextUnselected), &shape2);
+    QCOMPARE(manager.shapeAt(QPointF(105, 105), KFlake::Selected), dummy);
+    QCOMPARE(manager.shapeAt(QPointF(105, 105), KFlake::Unselected), &shape2); // the one on top
+    QCOMPARE(manager.shapeAt(QPointF(105, 105), KFlake::NextUnselected), &shape2);
 
     manager.selection()->select(&shape2);
 
     QVERIFY(manager.shapeAt(QPointF(200, 200)) == 0);
     QCOMPARE(manager.shapeAt(QPointF(90, 90)), &shape2);
     QCOMPARE(manager.shapeAt(QPointF(105, 105)), &shape2); // the one on top
-    QCOMPARE(manager.shapeAt(QPointF(105, 105), KoFlake::Selected), &shape2);
-    QCOMPARE(manager.shapeAt(QPointF(105, 105), KoFlake::Unselected), &shape1);
-    QCOMPARE(manager.shapeAt(QPointF(105, 105), KoFlake::NextUnselected), &shape1);
+    QCOMPARE(manager.shapeAt(QPointF(105, 105), KFlake::Selected), &shape2);
+    QCOMPARE(manager.shapeAt(QPointF(105, 105), KFlake::Unselected), &shape1);
+    QCOMPARE(manager.shapeAt(QPointF(105, 105), KFlake::NextUnselected), &shape1);
 
     shape3.setPosition(QPointF(120, 80));
     shape3.setSize(QSizeF(50, 50));
@@ -86,23 +86,23 @@ void TestShapeAt::test()
     QCOMPARE(manager.shapeAt(QPointF(165, 90)), &shape3);
 
     QCOMPARE(manager.shapeAt(QPointF(125, 105)), &shape3); // the one on top
-    QCOMPARE(manager.shapeAt(QPointF(105, 105), KoFlake::Selected), &shape2);
-    QCOMPARE(manager.shapeAt(QPointF(105, 105), KoFlake::Unselected), &shape1);
-    QCOMPARE(manager.shapeAt(QPointF(105, 105), KoFlake::NextUnselected), &shape1);
+    QCOMPARE(manager.shapeAt(QPointF(105, 105), KFlake::Selected), &shape2);
+    QCOMPARE(manager.shapeAt(QPointF(105, 105), KFlake::Unselected), &shape1);
+    QCOMPARE(manager.shapeAt(QPointF(105, 105), KFlake::NextUnselected), &shape1);
 
-    QCOMPARE(manager.shapeAt(QPointF(125, 105), KoFlake::Selected), &shape2);
-    QCOMPARE(manager.shapeAt(QPointF(125, 105), KoFlake::Unselected), &shape3);
-    QCOMPARE(manager.shapeAt(QPointF(125, 105), KoFlake::NextUnselected), &shape1);
+    QCOMPARE(manager.shapeAt(QPointF(125, 105), KFlake::Selected), &shape2);
+    QCOMPARE(manager.shapeAt(QPointF(125, 105), KFlake::Unselected), &shape3);
+    QCOMPARE(manager.shapeAt(QPointF(125, 105), KFlake::NextUnselected), &shape1);
 
     // test omitHiddenShapes
-    QCOMPARE(manager.shapeAt(QPointF(125, 105), KoFlake::Selected, true), &shape2);
-    QCOMPARE(manager.shapeAt(QPointF(125, 105), KoFlake::Unselected, true), &shape3);
-    QCOMPARE(manager.shapeAt(QPointF(125, 105), KoFlake::NextUnselected, true), &shape1);
+    QCOMPARE(manager.shapeAt(QPointF(125, 105), KFlake::Selected, true), &shape2);
+    QCOMPARE(manager.shapeAt(QPointF(125, 105), KFlake::Unselected, true), &shape3);
+    QCOMPARE(manager.shapeAt(QPointF(125, 105), KFlake::NextUnselected, true), &shape1);
 
     shape3.setVisible(false);
-    QCOMPARE(manager.shapeAt(QPointF(125, 105), KoFlake::Selected, true), &shape2);
-    QCOMPARE(manager.shapeAt(QPointF(125, 105), KoFlake::Unselected, true), &shape1);
-    QCOMPARE(manager.shapeAt(QPointF(125, 105), KoFlake::NextUnselected, true), &shape1);
+    QCOMPARE(manager.shapeAt(QPointF(125, 105), KFlake::Selected, true), &shape2);
+    QCOMPARE(manager.shapeAt(QPointF(125, 105), KFlake::Unselected, true), &shape1);
+    QCOMPARE(manager.shapeAt(QPointF(125, 105), KFlake::NextUnselected, true), &shape1);
 }
 
 void TestShapeAt::testShadow()

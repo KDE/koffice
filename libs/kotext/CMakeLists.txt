@@ -1,11 +1,11 @@
-include_directories(${KOTEXT_INCLUDES})
+include_directories(${KODFTEXT_INCLUDES})
 
 add_subdirectory( tests )
 
 ########### next target ###############
-set(kotext_LIB_SRCS
+set(kodftext_LIB_SRCS
     KTextShapeData.cpp
-    KoText.cpp
+    KOdfText.cpp
     KTextBlockData.cpp
     KTextBlockBorderData.cpp
     KTextBlockPaintStrategyBase.cpp
@@ -90,23 +90,23 @@ set(kotext_LIB_SRCS
 )
 
 if( Soprano_FOUND )
-    set(kotext_LIB_SRCS ${kotext_LIB_SRCS}
+    set(kodftext_LIB_SRCS ${kodftext_LIB_SRCS}
         KoTextRdfCore.cpp
     )
 endif( Soprano_FOUND )
 
-kde4_add_library(kotext SHARED ${kotext_LIB_SRCS})
+kde4_add_library(kodftext SHARED ${kodftext_LIB_SRCS})
 
-target_link_libraries(kotext flake)
+target_link_libraries(kodftext kflake)
 if( Soprano_FOUND )
-    target_link_libraries(kotext ${SOPRANO_LIBRARIES})
+    target_link_libraries(kodftext ${SOPRANO_LIBRARIES})
 endif( Soprano_FOUND )
-target_link_libraries(kotext LINK_INTERFACE_LIBRARIES flake)
+target_link_libraries(kodftext LINK_INTERFACE_LIBRARIES kflake)
 
-set_target_properties(kotext PROPERTIES
+set_target_properties(kodftext PROPERTIES
    VERSION ${GENERIC_KOFFICE_LIB_VERSION} SOVERSION ${GENERIC_KOFFICE_LIB_SOVERSION}
 )
-install(TARGETS kotext  ${INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS kodftext  ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 ########### install files ###############
 
@@ -114,7 +114,7 @@ install( FILES texteditingplugin.desktop inlinetextobject.desktop textvariablepl
 
 install(
     FILES
-    kotext_export.h
+    kodftext_export.h
     KInlineObject.h
     KoTextEditor.h
     KTextEditingFactory.h
@@ -129,7 +129,7 @@ install(
     KTextBlockBorderData.h
     KTextBlockData.h
     KTextDocument.h
-    KoText.h
+    KOdfText.h
     KoList.h
     KTextLocator.h
     KTextPage.h

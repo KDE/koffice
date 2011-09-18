@@ -54,10 +54,10 @@ KWTextFrameSet::KWTextFrameSet(const KWDocument *doc)
     if (m_kwordDocument) {
         KTextDocument doc(m_document);
         doc.setInlineTextObjectManager(m_kwordDocument->inlineTextObjectManager());
-        KStyleManager *styleManager = m_kwordDocument->resourceManager()->resource(KoText::StyleManager).value<KStyleManager*>();
+        KStyleManager *styleManager = m_kwordDocument->resourceManager()->resource(KOdfText::StyleManager).value<KStyleManager*>();
         Q_ASSERT(styleManager);
         doc.setStyleManager(styleManager);
-        KChangeTracker *changeTracker = m_kwordDocument->resourceManager()->resource(KoText::ChangeTracker).value<KChangeTracker*>();
+        KChangeTracker *changeTracker = m_kwordDocument->resourceManager()->resource(KOdfText::ChangeTracker).value<KChangeTracker*>();
         Q_ASSERT(changeTracker);
         doc.setChangeTracker(changeTracker);
         doc.setUndoStack(m_kwordDocument->resourceManager()->undoStack());
@@ -80,9 +80,9 @@ KWTextFrameSet::KWTextFrameSet(const KWDocument *doc, KWord::TextFrameSetType ty
     if (m_kwordDocument) {
         KTextDocument doc(m_document);
         doc.setInlineTextObjectManager(m_kwordDocument->inlineTextObjectManager());
-        KStyleManager *styleManager = m_kwordDocument->resourceManager()->resource(KoText::StyleManager).value<KStyleManager*>();
+        KStyleManager *styleManager = m_kwordDocument->resourceManager()->resource(KOdfText::StyleManager).value<KStyleManager*>();
         doc.setStyleManager(styleManager);
-        KChangeTracker *changeTracker = m_kwordDocument->resourceManager()->resource(KoText::ChangeTracker).value<KChangeTracker*>();
+        KChangeTracker *changeTracker = m_kwordDocument->resourceManager()->resource(KOdfText::ChangeTracker).value<KChangeTracker*>();
         doc.setChangeTracker(changeTracker);
         doc.setUndoStack(m_kwordDocument->resourceManager()->undoStack());
     }
@@ -150,9 +150,9 @@ void KWTextFrameSet::setupFrame(KWFrame *frame)
         m_document->setDocumentLayout(new KWTextDocumentLayout(this));
         if (m_kwordDocument) {
             KTextDocument doc(m_document);
-            KStyleManager *styleManager = m_kwordDocument->resourceManager()->resource(KoText::StyleManager).value<KStyleManager*>();
+            KStyleManager *styleManager = m_kwordDocument->resourceManager()->resource(KOdfText::StyleManager).value<KStyleManager*>();
             doc.setStyleManager(styleManager);
-            KChangeTracker *changeTracker = m_kwordDocument->resourceManager()->resource(KoText::ChangeTracker).value<KChangeTracker*>();
+            KChangeTracker *changeTracker = m_kwordDocument->resourceManager()->resource(KOdfText::ChangeTracker).value<KChangeTracker*>();
             doc.setChangeTracker(changeTracker);
             doc.setInlineTextObjectManager(m_kwordDocument->inlineTextObjectManager());
             doc.setUndoStack(m_kwordDocument->resourceManager()->undoStack());
@@ -211,9 +211,9 @@ void KWTextFrameSet::requestMoreFrames(qreal textHeight)
             return;
         }
         QSizeF size = shape->size();
-        QPointF orig = shape->absolutePosition(KoFlake::TopLeftCorner);
+        QPointF orig = shape->absolutePosition(KFlake::TopLeftCorner);
         shape->setSize(QSizeF(size.width(), size.height() + textHeight + 1E-6));
-        shape->setAbsolutePosition(orig, KoFlake::TopLeftCorner);
+        shape->setAbsolutePosition(orig, KFlake::TopLeftCorner);
         shape->update(QRectF(0.0, size.height(), size.width(), textHeight + 1E-6));
         lastFrame->allowToGrow();
     }
@@ -360,7 +360,7 @@ bool KWTextFrameSet::sortTextFrames(const KWFrame *frame1, const KWFrame *frame2
 
         // both on same page
         if (page1.isValid())
-            rtl = page1.directionHint() == KoText::RightLeftTopBottom;
+            rtl = page1.directionHint() == KOdfText::RightLeftTopBottom;
     }
     QRectF boundsF1 = frame1->shape()->boundingRect();
     QRectF boundsF2 = frame2->shape()->boundingRect();

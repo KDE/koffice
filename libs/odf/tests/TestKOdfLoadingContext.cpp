@@ -16,7 +16,7 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "TestKoOdfLoadingContext.h"
+#include "TestKOdfLoadingContext.h"
 
 #include <QByteArray>
 #include <QBuffer>
@@ -29,7 +29,7 @@
 #include <KOdfWriteStore.h>
 #include <KXmlWriter.h>
 
-void TestKoOdfLoadingContext::testFillStyleStack()
+void TestKOdfLoadingContext::testFillStyleStack()
 {
 #if 0
     QByteArray byteArray;
@@ -139,5 +139,5 @@ void TestKoOdfLoadingContext::testFillStyleStack()
     }
 }
 
-QTEST_KDEMAIN(TestKoOdfLoadingContext, NoGUI)
-#include <TestKoOdfLoadingContext.moc>
+QTEST_KDEMAIN(TestKOdfLoadingContext, NoGUI)
+#include <TestKOdfLoadingContext.moc>

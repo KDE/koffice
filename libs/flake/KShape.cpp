@@ -25,7 +25,7 @@
 #include "KShapeContainer.h"
 #include "KShapeLayer.h"
 #include "KShapeContainerModel.h"
-#include "KSelection.h"
+#include "KShapeSelection.h"
 #include "KPointerEvent.h"
 #include "KInsets.h"
 #include "KShapeBorderBase.h"
@@ -45,7 +45,7 @@
 #include "KShapeShadow.h"
 #include "KEventAction.h"
 #include "KEventActionRegistry.h"
-#include "KoOdfWorkaround.h"
+#include "KOdfWorkaround.h"
 #include "KFilterEffectStack.h"
 
 #include <KXmlReader.h>
@@ -92,13 +92,13 @@ KShapePrivate::KShapePrivate(KShape *shape)
     editBlockEndShouldEmit(false)
 {
     connectors.append(QPointF(0.5, 0.0));
-    connectorPolicies.append(KShapeConnectionPolicy(KoFlake::EscapeUp, Qt::AlignTop));
+    connectorPolicies.append(KShapeConnectionPolicy(KFlake::EscapeUp, Qt::AlignTop));
     connectors.append(QPointF(1.0, 0.5));
-    connectorPolicies.append(KShapeConnectionPolicy(KoFlake::EscapeRight, Qt::AlignRight));
+    connectorPolicies.append(KShapeConnectionPolicy(KFlake::EscapeRight, Qt::AlignRight));
     connectors.append(QPointF(0.5, 1.0));
-    connectorPolicies.append(KShapeConnectionPolicy(KoFlake::EscapeDown, Qt::AlignBottom));
+    connectorPolicies.append(KShapeConnectionPolicy(KFlake::EscapeDown, Qt::AlignBottom));
     connectors.append(QPointF(0.0, 0.5));
-    connectorPolicies.append(KShapeConnectionPolicy(KoFlake::EscapeLeft, Qt::AlignLeft));
+    connectorPolicies.append(KShapeConnectionPolicy(KFlake::EscapeLeft, Qt::AlignLeft));
 }
 
 KShapePrivate::~KShapePrivate()
@@ -207,17 +207,17 @@ void KShapePrivate::loadOdfGluePoints(const KXmlElement &gluePoints)
         const QString escape = element.attributeNS(KOdfXmlNS::draw, "escape-direction");
         if (!escape.isEmpty()) {
             if (escape == "horizontal") {
-                policy.setEscapeDirection(KoFlake::EscapeHorizontal);
+                policy.setEscapeDirection(KFlake::EscapeHorizontal);
             } else if (escape == "vertical") {
-                policy.setEscapeDirection(KoFlake::EscapeVertical);
+                policy.setEscapeDirection(KFlake::EscapeVertical);
             } else if (escape == "left") {
-                policy.setEscapeDirection(KoFlake::EscapeLeft);
+                policy.setEscapeDirection(KFlake::EscapeLeft);
             } else if (escape == "right") {
-                policy.setEscapeDirection(KoFlake::EscapeRight);
+                policy.setEscapeDirection(KFlake::EscapeRight);
             } else if (escape == "up") {
-                policy.setEscapeDirection(KoFlake::EscapeUp);
+                policy.setEscapeDirection(KFlake::EscapeUp);
             } else if (escape == "down") {
-                policy.setEscapeDirection(KoFlake::EscapeDown);
+                policy.setEscapeDirection(KFlake::EscapeDown);
             }
         }
         const QString align = element.attributeNS(KOdfXmlNS::draw, "align");
@@ -568,20 +568,20 @@ QPainterPath KShape::outline() const
     return path;
 }
 
-QPointF KShape::absolutePosition(KoFlake::Position anchor) const
+QPointF KShape::absolutePosition(KFlake::Position anchor) const
 {
     QPointF point;
     switch (anchor) {
-    case KoFlake::TopLeftCorner: break;
-    case KoFlake::TopRightCorner: point = QPointF(size().width(), 0.0); break;
-    case KoFlake::BottomLeftCorner: point = QPointF(0.0, size().height()); break;
-    case KoFlake::BottomRightCorner: point = QPointF(size().width(), size().height()); break;
-    case KoFlake::CenteredPosition: point = QPointF(size().width() / 2.0, size().height() / 2.0); break;
+    case KFlake::TopLeftCorner: break;
+    case KFlake::TopRightCorner: point = QPointF(size().width(), 0.0); break;
+    case KFlake::BottomLeftCorner: point = QPointF(0.0, size().height()); break;
+    case KFlake::BottomRightCorner: point = QPointF(size().width(), size().height()); break;
+    case KFlake::CenteredPosition: point = QPointF(size().width() / 2.0, size().height() / 2.0); break;
     }
     return absoluteTransformation(0).map(point);
 }
 
-void KShape::setAbsolutePosition(QPointF newPosition, KoFlake::Position anchor)
+void KShape::setAbsolutePosition(QPointF newPosition, KFlake::Position anchor)
 {
     Q_D(KShape);
     QPointF currentAbsPosition = absolutePosition(anchor);
@@ -665,13 +665,13 @@ void KShape::setTransparency(qreal transparency)
     d->transparency = qBound<qreal>(0.0, transparency, 1.0);
 }
 
-qreal KShape::transparency(bool recursive) const
+qreal KShape::transparency(Transparancy t) const
 {
     Q_D(const KShape);
-    if (!recursive || !parent()) {
+    if (t == ShapeTransparancy || !parent()) {
         return d->transparency;
     } else {
-        const qreal parentOpacity = 1.0-parent()->transparency(recursive);
+        const qreal parentOpacity = 1.0-parent()->transparency(t);
         const qreal childOpacity = 1.0-d->transparency;
         return 1.0-(parentOpacity*childOpacity);
     }
@@ -1226,7 +1226,7 @@ KShapeBackgroundBase *KShape::loadOdfFill(KShapeLoadingContext &context) const
         bg = new KPatternBackground(context.imageCollection());
 #ifndef NWORKAROUND_ODF_BUGS
     } else if (fill.isEmpty()) {
-         bg = KoOdfWorkaround::fixBackgroundColor(this, context);
+         bg = KOdfWorkaround::fixBackgroundColor(this, context);
          return bg;
 #endif
     } else {
@@ -1256,7 +1256,7 @@ KShapeBorderBase *KShape::loadOdfStroke(const KXmlElement &element, KShapeLoadin
 
 
 #ifndef NWORKAROUND_ODF_BUGS
-        KoOdfWorkaround::fixPenWidth(pen, context);
+        KOdfWorkaround::fixPenWidth(pen, context);
 #endif
         KLineBorder *border = new KLineBorder();
         border->setPen(pen);
@@ -1264,7 +1264,7 @@ KShapeBorderBase *KShape::loadOdfStroke(const KXmlElement &element, KShapeLoadin
 #ifndef NWORKAROUND_ODF_BUGS
     } else if (stroke.isEmpty()) {
         QPen pen;
-        if (KoOdfWorkaround::fixMissingStroke(pen, element, context, this)) {
+        if (KOdfWorkaround::fixMissingStroke(pen, element, context, this)) {
             KLineBorder *border = new KLineBorder();
 
             // FIXME: (make it possible to) use a cosmetic pen
@@ -1354,14 +1354,14 @@ QTransform KShape::parseOdfTransform(const QString &transform)
                 scaleMatrix.scale(params[0].toDouble(), params[0].toDouble());
             matrix = matrix * scaleMatrix;
         } else if (cmd == "skewx") {
-            QPointF p = absolutePosition(KoFlake::TopLeftCorner);
+            QPointF p = absolutePosition(KFlake::TopLeftCorner);
             QTransform shearMatrix;
             shearMatrix.translate(p.x(), p.y());
             shearMatrix.shear(tan(-params[0].toDouble()), 0.0F);
             shearMatrix.translate(-p.x(), -p.y());
             matrix = matrix * shearMatrix;
         } else if (cmd == "skewy") {
-            QPointF p = absolutePosition(KoFlake::TopLeftCorner);
+            QPointF p = absolutePosition(KFlake::TopLeftCorner);
             QTransform shearMatrix;
             shearMatrix.translate(p.x(), p.y());
             shearMatrix.shear(0.0F, tan(-params[0].toDouble()));

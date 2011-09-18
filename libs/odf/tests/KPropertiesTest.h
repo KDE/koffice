@@ -21,7 +21,7 @@
 
 #include <QtTest/QtTest>
 
-class KoPropertiesTest : public QObject
+class KPropertiesTest : public QObject
 {
     Q_OBJECT
 

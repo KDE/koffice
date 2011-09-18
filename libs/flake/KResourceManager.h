@@ -39,12 +39,12 @@ class KOdfDocumentBase;
 class QTextDocument;
 
 /**
- * The KoCanvasResource contains a set of per-canvas
+ * The KCanvasResource contains a set of per-canvas
  * properties, like current foreground color, current background
  * color and more.
  * \sa KResourceManager KCanvasBase::resourceManager()
  */
-namespace KoCanvasResource
+namespace KCanvasResource
 {
 
 /**
@@ -58,23 +58,23 @@ enum CanvasResource {
     PageSize,           ///< The size of the (current) page in postscript points (QSizeF).
     Unit,               ///< The unit of this canvas (KUnit)
     CurrentPage,        ///< The current page number (int)
-    ActiveColorTarget,    ///< the active color target type see KoFlake::StyleType for valid values
+    ActiveColorTarget,    ///< the active color target type see KFlake::StyleType for valid values
     ArtworkStart = 1000,      ///< Base number for artwork specific values.
     KivioStart = 3000,       ///< Base number for kivio specific values.
     ShowcaseStart = 5000,  ///< Base number for Showcase specific values.
     KCellsStart = 7000,     ///< Base number for kcells specific values.
     KWordStart = 8000,        ///< Base number for kword specific values.
-    KoPageAppStart = 9000    ///< Base number for KoPageApp specific values.
+    KPageAppStart = 9000    ///< Base number for KoPageApp specific values.
 };
 
 }
 
 /**
- * The KoDocumentResource contains a set of per-document
+ * The KDocumentResource contains a set of per-document
  * properties.
- * \sa KResourceManager KoShapeCollection::resourceManager()
+ * \sa KResourceManager KShapeController::resourceManager()
  */
-namespace KoDocumentResource
+namespace KDocumentResource
 {
 /**
  * This enum holds identifiers to the resources that can be stored in here.
@@ -90,8 +90,8 @@ enum DocumentResource {
     ShowcaseStart = 5000,  ///< Base number for Showcase specific values.
     KCellsStart = 7000,     ///< Base number for kcells specific values.
     KWordStart = 8000,       ///< Base number for kword specific values.
-    KoPageAppStart = 9000,   ///< Base number for KoPageApp specific values.
-    KoTextStart = 10000      ///< Base number for KoText specific values.
+    KPageAppStart = 9000,   ///< Base number for KoPageApp specific values.
+    KOdfTextStart = 10000      ///< Base number for KOdfText specific values.
 };
 }
 
@@ -100,8 +100,8 @@ enum DocumentResource {
  * properties, like current foreground color, current background
  * color and more. All tools belonging to the current canvas are
  * notified when a Resource changes (is set).
- * The properties come from the KoCanvasResource::CanvasResource enum or the
- * KoDocumentResource::DocumentResource depending on which manager you got.
+ * The properties come from the KCanvasResource::CanvasResource enum or the
+ * KDocumentResource::DocumentResource depending on which manager you got.
  * See KCanvasBase::resourceManager KShapeController::resourceManager
  *
  * The manager can contain all sorts of variable types and there are accessors
@@ -113,9 +113,9 @@ enum DocumentResource {
  * @code
  *  QVariant variant;
  *  variant.setValue<void*>(textShapeData->document());
- *  resourceManager->setResource(KoText::CurrentTextDocument, variant);
+ *  resourceManager->setResource(KOdfText::CurrentTextDocument, variant);
  *  // and get it out again.
- *  QVariant var = resourceManager->resource(KoText::CurrentTextDocument);
+ *  QVariant var = resourceManager->resource(KOdfText::CurrentTextDocument);
  *  document = static_cast<QTextDocument*>(var.value<void*>());
  * @endcode
  */
@@ -136,7 +136,7 @@ public:
      * Set a resource of any type.
      * @param key the integer key
      * @param value the new value for the key.
-     * @see KoCanvasResource::CanvasResource KoDocumentResource::DocumentResource
+     * @see KCanvasResource::CanvasResource KDocumentResource::DocumentResource
      */
     void setResource(int key, const QVariant &value);
 
@@ -144,7 +144,7 @@ public:
      * Set a resource of type KShape*.
      * @param key the integer key
      * @param shape the new value for the key.
-     * @see KoCanvasResource::CanvasResource KoDocumentResource::DocumentResource
+     * @see KCanvasResource::CanvasResource KDocumentResource::DocumentResource
      */
     void setResource(int key, KShape *shape);
 
@@ -152,7 +152,7 @@ public:
      * Set a resource of type KUnit
      * @param key the integer key
      * @param unit the new value for the key.
-     * @see KoCanvasResource::CanvasResource KoDocumentResource::DocumentResource
+     * @see KCanvasResource::CanvasResource KDocumentResource::DocumentResource
      */
     void setResource(int key, const KUnit &unit);
 
@@ -160,7 +160,7 @@ public:
      * Returns a qvariant containing the specified resource or a standard one if the
      * specified resource does not exist.
      * @param key the key
-     * @see KoCanvasResource::CanvasResource KoDocumentResource::DocumentResource
+     * @see KCanvasResource::CanvasResource KDocumentResource::DocumentResource
      */
     QVariant resource(int key) const;
 
@@ -206,56 +206,56 @@ public:
     /**
      * Return the resource determined by param key as a boolean.
      * @param key the indentifying key for the resource
-     * @see KoCanvasResource::CanvasResource KoDocumentResource::DocumentResource
+     * @see KCanvasResource::CanvasResource KDocumentResource::DocumentResource
      */
     bool boolResource(int key) const;
 
     /**
      * Return the resource determined by param key as an integer.
      * @param key the indentifying key for the resource
-     * @see KoCanvasResource::CanvasResource KoDocumentResource::DocumentResource
+     * @see KCanvasResource::CanvasResource KDocumentResource::DocumentResource
      */
     int intResource(int key) const;
 
     /**
      * Return the resource determined by param key as a QColor.
      * @param key the indentifying key for the resource
-     * @see KoCanvasResource::CanvasResource KoDocumentResource::DocumentResource
+     * @see KCanvasResource::CanvasResource KDocumentResource::DocumentResource
      */
     QColor colorResource(int key) const;
 
     /**
      * Return the resource determined by param key as a pointer to a KShape.
      * @param key the indentifying key for the resource
-     * @see KoCanvasResource::CanvasResource KoDocumentResource::DocumentResource
+     * @see KCanvasResource::CanvasResource KDocumentResource::DocumentResource
      */
     KShape *koShapeResource(int key) const;
 
     /**
      * Return the resource determined by param key as a QString .
      * @param key the indentifying key for the resource
-     * @see KoCanvasResource::CanvasResource KoDocumentResource::DocumentResource
+     * @see KCanvasResource::CanvasResource KDocumentResource::DocumentResource
      */
     QString stringResource(int key) const;
 
     /**
      * Return the resource determined by param key as a QSizeF.
      * @param key the indentifying key for the resource
-     * @see KoCanvasResource::CanvasResource KoDocumentResource::DocumentResource
+     * @see KCanvasResource::CanvasResource KDocumentResource::DocumentResource
      */
     QSizeF sizeResource(int key) const;
 
     /**
      * Return the resource determined by param key as a KUnit.
      * @param key the indentifying key for the resource
-     * @see KoCanvasResource::CanvasResource KoDocumentResource::DocumentResource
+     * @see KCanvasResource::CanvasResource KDocumentResource::DocumentResource
      */
     KUnit unitResource(int key) const;
 
     /**
      * Returns true if there is a resource set with the requested key.
      * @param key the indentifying key for the resource
-     * @see KoCanvasResource::CanvasResource KoDocumentResource::DocumentResource
+     * @see KCanvasResource::CanvasResource KDocumentResource::DocumentResource
      */
     bool hasResource(int key) const;
 
@@ -263,7 +263,7 @@ public:
      * Remove the resource with @p key from the provider.
      * @param key the key that will be used to remove the resource
      * There will be a signal emitted with a variable that will return true on QVariable::isNull();
-     * @see KoCanvasResource::CanvasResource KoDocumentResource::DocumentResource
+     * @see KCanvasResource::CanvasResource KDocumentResource::DocumentResource
      */
     void clearResource(int key);
 
@@ -277,7 +277,7 @@ public:
      * the first time the resource is requested.
      * A typicall implementation would be like;
      * @code
-     *    manager->setLazyResourceSlot(KoDocumentResource::ImageCollection,
+     *    manager->setLazyResourceSlot(KDocumentResource::ImageCollection,
      *        this, "createImageCollection");
      * @endcode
      * And the object would create a slot using the normal Qt concepts;
@@ -315,7 +315,7 @@ signals:
      * new or different from the previous set value.
      * @param key the indentifying key for the resource
      * @param value the variants new value.
-     * @see KoCanvasResource::CanvasResource KoDocumentResource::DocumentResource
+     * @see KCanvasResource::CanvasResource KDocumentResource::DocumentResource
      */
     void resourceChanged(int key, const QVariant &value);
 

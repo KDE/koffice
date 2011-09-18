@@ -35,7 +35,7 @@
 #include <KoPAPageBase.h> // this is needed to make setResource work correctly
 #include <KPointerEvent.h>
 #include <KShapeManager.h>
-#include <KSelection.h>
+#include <KShapeSelection.h>
 
 #include "KoPAMasterPageDocker.h"
 #include "KoPABackgroundToolWidget.h"

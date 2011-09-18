@@ -23,7 +23,7 @@
 
 #include <KOdfGenericChange.h>
 
-#include "kotext_export.h"
+#include "kodftext_export.h"
 
 class QTextFormat;
 class QString;
@@ -31,7 +31,7 @@ class QTextDocumentFragment;
 class KDeleteChangeMarker;
 
 
-class KOTEXT_EXPORT KChangeTrackerElement
+class KODFTEXT_EXPORT KChangeTrackerElement
 {
 public:
 

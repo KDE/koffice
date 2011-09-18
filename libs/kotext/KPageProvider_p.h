@@ -24,20 +24,20 @@
 //  W A R N I N G
 //  -------------
 //
-// This file is not part of the KoText API.  It exists purely as an
+// This file is not part of the KOdfText API.  It exists purely as an
 // implementation detail.  This header file may change from version to
 // version without notice, or even be removed.
 //
 // We mean it.
 //
 
-#include "kotext_export.h"
+#include "kodftext_export.h"
 
 class KShape;
 class KTextPage;
 
 /// \internal  this is a hack for showcase
-class KOTEXT_EXPORT KPageProvider
+class KODFTEXT_EXPORT KPageProvider
 {
 public:
     KPageProvider();

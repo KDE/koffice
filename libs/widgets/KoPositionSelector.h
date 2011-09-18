@@ -21,7 +21,7 @@
 #define KOPOSITIONSELECTOR_H
 
 #include <QtGui/QWidget>
-#include <KoFlake.h>				//krazy:exclude=includes
+#include <KFlake.h>				//krazy:exclude=includes
 #include "kowidgets_export.h"
 
 /**
@@ -34,11 +34,11 @@ public:
     KoPositionSelector(QWidget *parent);
     ~KoPositionSelector();
 
-    KoFlake::Position position() const;
-    void setPosition(KoFlake::Position position);
+    KFlake::Position position() const;
+    void setPosition(KFlake::Position position);
 
 signals:
-    void positionSelected(KoFlake::Position position);
+    void positionSelected(KFlake::Position position);
 
 protected:
     /// reimplemented

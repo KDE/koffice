@@ -23,7 +23,7 @@
 #define DEFAULTTOOL_H
 
 #include <KInteractionTool.h>
-#include <KoFlake.h>
+#include <KFlake.h>
 #include <commands/KShapeAlignCommand.h>
 #include <commands/KShapeReorderCommand.h>
 
@@ -32,7 +32,7 @@
 
 class KInteractionStrategy;
 class KShapeMoveCommand;
-class KSelection;
+class KShapeSelection;
 class KShapeConnection;
 
 /**
@@ -85,7 +85,7 @@ public:
      *   is inside the selection rectangle and false if it is just outside.
      *   The value of innerHandleMeaning is undefined if the handle location is NoHandle
      */
-    KoFlake::SelectionHandle handleAt(const QPointF &point, bool *innerHandleMeaning = 0);
+    KFlake::SelectionHandle handleAt(const QPointF &point, bool *innerHandleMeaning = 0);
 
 public slots:
     virtual void activate(ToolActivation toolActivation, const QSet<KShape*> &shapes);
@@ -127,7 +127,7 @@ private:
     void recalcSelectionBox();
     void updateCursor();
     /// Returns rotation angle of given handle of the current selection
-    qreal rotationOfHandle(KoFlake::SelectionHandle handle, bool useEdgeRotation);
+    qreal rotationOfHandle(KFlake::SelectionHandle handle, bool useEdgeRotation);
 
     void selectionAlign(KShapeAlignCommand::Align align);
     void selectionReorder(KShapeReorderCommand::MoveShapeType order);
@@ -137,7 +137,7 @@ private:
     QRectF handlesSize();
 
     // convenience method;
-    KSelection * koSelection();
+    KShapeSelection * koSelection();
 
     void resourceChanged(int key, const QVariant & res);
 
@@ -150,8 +150,8 @@ private:
     /// Returns the number of editable shapes from the given list of shapes
     uint editableShapesCount(const QList<KShape*> &shapes);
 
-    KoFlake::SelectionHandle m_lastHandle;
-    KoFlake::Position m_hotPosition;
+    KFlake::SelectionHandle m_lastHandle;
+    KFlake::Position m_hotPosition;
     bool m_mouseWasInsideHandles;
     QPointF m_selectionBox[8];
     QPolygonF m_selectionOutline;

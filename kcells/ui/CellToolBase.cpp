@@ -112,7 +112,7 @@
 #include <KOdfStoreReader.h>
 #include <KOdfStylesReader.h>
 #include <KPointerEvent.h>
-#include <KSelection.h>
+#include <KShapeSelection.h>
 #include <KShape.h>
 #include <KShapeManager.h>
 #include <KOdfStore.h>

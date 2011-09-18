@@ -25,7 +25,7 @@
 #include <QtTest/QtTest>
 #include "KXmlReader.h"
 
-class KoDomTest: public QObject
+class KXmlDomTest: public QObject
 {
     Q_OBJECT
 private slots:
@@ -39,8 +39,8 @@ private:
     static QString const KoXmlNS_text;
 };
 
-QString const KoDomTest::KoXmlNS_office = QString("urn:oasis:names:tc:opendocument:xmlns:office:1.0");
-QString const KoDomTest::KoXmlNS_text = QString("urn:oasis:names:tc:opendocument:xmlns:text:1.0");
+QString const KXmlDomTest::KoXmlNS_office = QString("urn:oasis:names:tc:opendocument:xmlns:office:1.0");
+QString const KXmlDomTest::KoXmlNS_text = QString("urn:oasis:names:tc:opendocument:xmlns:text:1.0");
 
 #endif
 

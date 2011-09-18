@@ -36,7 +36,7 @@
 #include <KDebug>
 
 #include "KoFind.h"
-#include "KoText.h"
+#include "KOdfText.h"
 
 class InUse
 {
@@ -75,21 +75,21 @@ KoFindPrivate::KoFindPrivate(KoFind *find, KResourceManager *crp, QWidget *w)
 
 void KoFindPrivate::resourceChanged(int key, const QVariant &variant)
 {
-    if (key == KoText::CurrentTextDocument) {
+    if (key == KOdfText::CurrentTextDocument) {
         m_document = static_cast<QTextDocument*>(variant.value<void*>());
         if (!m_inFind) {
             m_start = true;
         }
-    } else if (key == KoText::CurrentTextPosition || key == KoText::CurrentTextAnchor) {
+    } else if (key == KOdfText::CurrentTextPosition || key == KOdfText::CurrentTextAnchor) {
         if (!m_inFind) {
-            const int selectionStart = m_provider->intResource(KoText::CurrentTextPosition);
-            const int selectionEnd = m_provider->intResource(KoText::CurrentTextAnchor);
+            const int selectionStart = m_provider->intResource(KOdfText::CurrentTextPosition);
+            const int selectionEnd = m_provider->intResource(KOdfText::CurrentTextAnchor);
             m_findStrategy.dialog()->setHasSelection(selectionEnd != selectionStart);
             m_replaceStrategy.dialog()->setHasSelection(selectionEnd != selectionStart);
 
             m_start = true;
-            m_provider->clearResource(KoText::SelectedTextPosition);
-            m_provider->clearResource(KoText::SelectedTextAnchor);
+            m_provider->clearResource(KOdfText::SelectedTextPosition);
+            m_provider->clearResource(KOdfText::SelectedTextAnchor);
         }
     }
 }
@@ -192,15 +192,15 @@ void KoFindPrivate::parseSettingsAndFind()
         m_startDocument = m_document;
         m_lastKnownPosition = QTextCursor(m_document);
         if (selectedText) {
-            int selectionStart = m_provider->intResource(KoText::CurrentTextPosition);
-            int selectionEnd = m_provider->intResource(KoText::CurrentTextAnchor);
+            int selectionStart = m_provider->intResource(KOdfText::CurrentTextPosition);
+            int selectionEnd = m_provider->intResource(KOdfText::CurrentTextAnchor);
             if (selectionEnd < selectionStart) {
                 qSwap(selectionStart, selectionEnd);
             }
             // TODO the SelectedTextPosition and SelectedTextAnchor are not highlighted yet
             // it would be cool to have the highlighted ligher when searching in selected text
-            m_provider->setResource(KoText::SelectedTextPosition, selectionStart);
-            m_provider->setResource(KoText::SelectedTextAnchor, selectionEnd);
+            m_provider->setResource(KOdfText::SelectedTextPosition, selectionStart);
+            m_provider->setResource(KOdfText::SelectedTextAnchor, selectionEnd);
             if ((options & KFind::FindBackwards) != 0) {
                 m_lastKnownPosition.setPosition(selectionEnd);
                 m_endPosition.setPosition(selectionStart);
@@ -211,7 +211,7 @@ void KoFindPrivate::parseSettingsAndFind()
             m_startPosition = m_lastKnownPosition;
         } else {
             if ((options & KFind::FromCursor) != 0) {
-                m_lastKnownPosition.setPosition(m_provider->intResource(KoText::CurrentTextPosition));
+                m_lastKnownPosition.setPosition(m_provider->intResource(KOdfText::CurrentTextPosition));
             } else {
                 m_lastKnownPosition.setPosition(0);
             }

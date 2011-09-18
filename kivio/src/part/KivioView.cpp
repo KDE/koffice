@@ -24,7 +24,7 @@
 #include <kactionmenu.h>
 
 #include <KShapeManager.h>
-#include <KSelection.h>
+#include <KShapeSelection.h>
 #include <KoPACanvas.h>
 
 #include "KivioDocument.h"

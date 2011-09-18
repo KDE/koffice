@@ -553,7 +553,7 @@ KTextWriter::KTextWriter(KShapeSavingContext &context, KDocumentRdfBase *rdfData
     : d(new Private(context))
 {
     d->rdfData = rdfData;
-    KSharedSavingData *sharedData = context.sharedData(KOTEXT_SHARED_SAVING_ID);
+    KSharedSavingData *sharedData = context.sharedData(KODFTEXT_SHARED_SAVING_ID);
     if (sharedData) {
         d->sharedData = dynamic_cast<KTextSharedSavingData *>(sharedData);
     }
@@ -563,9 +563,9 @@ KTextWriter::KTextWriter(KShapeSavingContext &context, KDocumentRdfBase *rdfData
         KOdfGenericChanges *changes = new KOdfGenericChanges();
         d->sharedData->setGenChanges(*changes);
         if (!sharedData) {
-            context.addSharedData(KOTEXT_SHARED_SAVING_ID, d->sharedData);
+            context.addSharedData(KODFTEXT_SHARED_SAVING_ID, d->sharedData);
         } else {
-            kWarning(32500) << "A different type of sharedData was found under the" << KOTEXT_SHARED_SAVING_ID;
+            kWarning(32500) << "A different type of sharedData was found under the" << KODFTEXT_SHARED_SAVING_ID;
             Q_ASSERT(false);
         }
     }
@@ -1478,7 +1478,7 @@ void KTextWriter::Private::writeBlocks(QTextDocument *document, int from, int to
         QTextFrame *cursorFrame = cursor.currentFrame();
         int blockOutlineLevel = block.blockFormat().property(KParagraphStyle::OutlineLevel).toInt();
 
-        if (cursorFrame != currentFrame && cursorFrame->format().hasProperty(KoText::TableOfContents)) {
+        if (cursorFrame != currentFrame && cursorFrame->format().hasProperty(KOdfText::TableOfContents)) {
             int frameBegin = cursorFrame->firstPosition();
             int frameEnd = cursorFrame->lastPosition();
             saveTableOfContents(document, frameBegin, frameEnd, listStyles, currentTable, cursor.currentFrame());
@@ -2277,7 +2277,7 @@ void KTextWriter::Private::writeAttributes(QTextStream &outputXmlStream, KXmlEle
 {
     QList<QPair<QString, QString> > attributes = element.attributeNSNames();
 
-    foreach (const KoText::StringPair &attributeNamePair, attributes) {
+    foreach (const KOdfText::StringPair &attributeNamePair, attributes) {
         if (attributeNamePair.first == KOdfXmlNS::text) {
             outputXmlStream << " text:" << attributeNamePair.second << "=";
             outputXmlStream << "\"" << element.attributeNS(KOdfXmlNS::text, attributeNamePair.second) << "\"";

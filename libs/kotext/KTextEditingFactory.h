@@ -23,7 +23,7 @@
 #include <QString>
 #include <QObject>
 
-#include "kotext_export.h"
+#include "kodftext_export.h"
 
 class KTextEditingPlugin;
 class KResourceManager;
@@ -33,7 +33,7 @@ class KResourceManager;
  * allow the creation of the text-editing-class from that plugin.
  * @see KTextEditingRegistry
  */
-class KOTEXT_EXPORT KTextEditingFactory : public QObject
+class KODFTEXT_EXPORT KTextEditingFactory : public QObject
 {
     Q_OBJECT
 public:

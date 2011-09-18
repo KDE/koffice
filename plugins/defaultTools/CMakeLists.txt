@@ -38,7 +38,7 @@ kde4_add_ui_files(defaulttools_SRCS
 )
 
 kde4_add_plugin(defaulttools ${defaulttools_SRCS})
-target_link_libraries(defaulttools flake kowidgets)
+target_link_libraries(defaulttools kowidgets)
 
 ########### install files ###############
 

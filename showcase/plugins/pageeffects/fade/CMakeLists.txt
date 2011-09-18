@@ -8,15 +8,7 @@ set(showcase_pageeffect_fade_PART_SRCS Plugin.cpp
 
 kde4_add_plugin(showcase_pageeffect_fade ${showcase_pageeffect_fade_PART_SRCS})
 
-target_link_libraries(
-    showcase_pageeffect_fade
-    showcaseprivate
-    flake 
-    
-    ${KDE4_KDECORE_LIBS}
-    ${QT_QTCORE_LIBRARY}
-    ${QT_QTGUI_LIBRARY}
-    )
+target_link_libraries(showcase_pageeffect_fade showcaseprivate)
 
 install(TARGETS showcase_pageeffect_fade  DESTINATION ${PLUGIN_INSTALL_DIR})
 

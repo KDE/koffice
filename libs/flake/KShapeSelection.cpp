@@ -21,15 +21,15 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KSelection.h"
-#include "KSelection_p.h"
+#include "KShapeSelection.h"
+#include "KShapeSelection_p.h"
 #include "KShapeContainer.h"
 #include "KShapeGroup.h"
 #include "KPointerEvent.h"
 
 #include <QTimer>
 
-QRectF KSelectionPrivate::sizeRect()
+QRectF KShapeSelectionPrivate::sizeRect()
 {
     bool first = true;
     QRectF bb;
@@ -62,7 +62,7 @@ QRectF KSelectionPrivate::sizeRect()
     return bb;
 }
 
-void KSelectionPrivate::requestSelectionChangedEvent()
+void KShapeSelectionPrivate::requestSelectionChangedEvent()
 {
     if (eventTriggered)
         return;
@@ -70,13 +70,13 @@ void KSelectionPrivate::requestSelectionChangedEvent()
     QTimer::singleShot(0, q, SLOT(selectionChangedEvent()));
 }
 
-void KSelectionPrivate::selectionChangedEvent()
+void KShapeSelectionPrivate::selectionChangedEvent()
 {
     eventTriggered = false;
     emit q->selectionChanged();
 }
 
-void KSelectionPrivate::selectGroupChildren(KShapeGroup *group)
+void KShapeSelectionPrivate::selectGroupChildren(KShapeGroup *group)
 {
     if (! group)
         return;
@@ -92,7 +92,7 @@ void KSelectionPrivate::selectGroupChildren(KShapeGroup *group)
     }
 }
 
-void KSelectionPrivate::deselectGroupChildren(KShapeGroup *group)
+void KShapeSelectionPrivate::deselectGroupChildren(KShapeGroup *group)
 {
     if (! group)
         return;
@@ -109,19 +109,19 @@ void KSelectionPrivate::deselectGroupChildren(KShapeGroup *group)
 
 ////////////
 
-KSelection::KSelection(QObject *parent)
+KShapeSelection::KShapeSelection(QObject *parent)
     : QObject(parent),
-    KShape(*(new KSelectionPrivate(this)))
+    KShape(*(new KShapeSelectionPrivate(this)))
 {
 }
 
-KSelection::~KSelection()
+KShapeSelection::~KShapeSelection()
 {
 }
 
-void KSelection::select(KShape *shape, bool recursive)
+void KShapeSelection::select(KShape *shape, Recursively recursive)
 {
-    Q_D(KSelection);
+    Q_D(KShapeSelection);
     Q_ASSERT(shape != this);
     Q_ASSERT(shape);
     if (!shape->isSelectable() || !shape->isVisible(true))
@@ -138,7 +138,7 @@ void KSelection::select(KShape *shape, bool recursive)
     if (group)
         d->selectGroupChildren(group);
 
-    if (recursive) {
+    if (recursive == Recursive) {
         // recursively select all parents and their children upwards the hierarchy
         KShapeContainer *parent = shape->parent();
         while (parent) {
@@ -184,16 +184,16 @@ void KSelection::select(KShape *shape, bool recursive)
     d->requestSelectionChangedEvent();
 }
 
-void KSelection::deselect(KShape *shape, bool recursive)
+void KShapeSelection::deselect(KShape *shape, Recursively recursive)
 {
-    Q_D(KSelection);
+    Q_D(KShapeSelection);
     if (! d->selectedShapes.contains(shape))
         return;
 
     d->selectedShapes.removeAll(shape);
 
     KShapeGroup *group = dynamic_cast<KShapeGroup*>(shape);
-    if (recursive) {
+    if (recursive == Recursive) {
         // recursively find the top group upwards int the hierarchy
         KShapeGroup *parentGroup = dynamic_cast<KShapeGroup*>(shape->parent());
         while (parentGroup) {
@@ -212,9 +212,9 @@ void KSelection::deselect(KShape *shape, bool recursive)
     d->requestSelectionChangedEvent();
 }
 
-void KSelection::deselectAll()
+void KShapeSelection::deselectAll()
 {
-    Q_D(KSelection);
+    Q_D(KShapeSelection);
     // reset the transformation matrix of the selection
     setTransformation(QTransform());
 
@@ -224,9 +224,9 @@ void KSelection::deselectAll()
     d->requestSelectionChangedEvent();
 }
 
-int KSelection::count() const
+int KShapeSelection::count() const
 {
-    Q_D(const KSelection);
+    Q_D(const KShapeSelection);
     int count = 0;
     foreach(KShape *shape, d->selectedShapes)
         if (dynamic_cast<KShapeGroup*>(shape) == 0)
@@ -234,9 +234,9 @@ int KSelection::count() const
     return count;
 }
 
-bool KSelection::hitTest(const QPointF &position) const
+bool KShapeSelection::hitTest(const QPointF &position) const
 {
-    Q_D(const KSelection);
+    Q_D(const KShapeSelection);
     if (count() > 1) {
         QRectF bb(boundingRect());
         return bb.contains(position);
@@ -246,9 +246,9 @@ bool KSelection::hitTest(const QPointF &position) const
         return false;
     }
 }
-void KSelection::updateSizeAndPosition()
+void KShapeSelection::updateSizeAndPosition()
 {
-    Q_D(KSelection);
+    Q_D(KShapeSelection);
     QRectF bb = d->sizeRect();
     QTransform matrix = absoluteTransformation(0);
     setSize(bb.size());
@@ -256,20 +256,20 @@ void KSelection::updateSizeAndPosition()
     setPosition(p);
 }
 
-QRectF KSelection::boundingRect() const
+QRectF KShapeSelection::boundingRect() const
 {
     return absoluteTransformation(0).mapRect(QRectF(QPointF(), size()));
 }
 
-const QList<KShape*> KSelection::selectedShapes(KoFlake::SelectionType strip) const
+const QList<KShape*> KShapeSelection::selectedShapes(KFlake::SelectionType strip) const
 {
-    Q_D(const KSelection);
+    Q_D(const KShapeSelection);
     QList<KShape*> answer;
     // strip the child objects when there is also a parent included.
-    bool doStripping = strip == KoFlake::StrippedSelection;
+    bool doStripping = strip == KFlake::StrippedSelection;
     foreach(KShape *shape, d->selectedShapes) {
         KShapeContainer *container = shape->parent();
-        if (strip != KoFlake::TopLevelSelection && dynamic_cast<KShapeGroup*>(shape))
+        if (strip != KFlake::TopLevelSelection && dynamic_cast<KShapeGroup*>(shape))
             // since a KShapeGroup
             // guarentees all its children are selected at the same time as itself
             // is selected we will only return its children.
@@ -280,7 +280,7 @@ const QList<KShape*> KSelection::selectedShapes(KoFlake::SelectionType strip) co
                 add = false;
             container = container->parent();
         }
-        if (strip == KoFlake::TopLevelSelection && container && d->selectedShapes.contains(container))
+        if (strip == KFlake::TopLevelSelection && container && d->selectedShapes.contains(container))
             add = false;
         if (add)
             answer << shape;
@@ -288,9 +288,9 @@ const QList<KShape*> KSelection::selectedShapes(KoFlake::SelectionType strip) co
     return answer;
 }
 
-bool KSelection::isSelected(const KShape *shape) const
+bool KShapeSelection::isSelected(const KShape *shape) const
 {
-    Q_D(const KSelection);
+    Q_D(const KShapeSelection);
     if (shape == this)
         return true;
 
@@ -302,7 +302,7 @@ bool KSelection::isSelected(const KShape *shape) const
     return false;
 }
 
-KShape *KSelection::firstSelectedShape(KoFlake::SelectionType strip) const
+KShape *KShapeSelection::firstSelectedShape(KFlake::SelectionType strip) const
 {
     QList<KShape*> set = selectedShapes(strip);
     if (set.isEmpty())
@@ -310,17 +310,17 @@ KShape *KSelection::firstSelectedShape(KoFlake::SelectionType strip) const
     return *(set.begin());
 }
 
-void KSelection::setActiveLayer(KShapeLayer *layer)
+void KShapeSelection::setActiveLayer(KShapeLayer *layer)
 {
-    Q_D(KSelection);
+    Q_D(KShapeSelection);
     d->activeLayer = layer;
     emit currentLayerChanged(layer);
 }
 
-KShapeLayer* KSelection::activeLayer() const
+KShapeLayer* KShapeSelection::activeLayer() const
 {
-    Q_D(const KSelection);
+    Q_D(const KShapeSelection);
     return d->activeLayer;
 }
 
-#include <KSelection.moc>
+#include <KShapeSelection.moc>

@@ -18,13 +18,13 @@
 * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KOTEXTEDITOR_H
-#define KOTEXTEDITOR_H
+#ifndef KODFTEXTEDITOR_H
+#define KODFTEXTEDITOR_H
 
-#include "kotext_export.h"
+#include "kodftext_export.h"
 
 #include <KOdfGenericChange.h>
-#include "KoText.h"
+#include "KOdfText.h"
 #include <KToolSelection.h>
 
 #include <QClipboard>
@@ -44,7 +44,7 @@ class QString;
 class QUndoCommand;
 class KoTextEditorPrivate;
 
-class KOTEXT_EXPORT KoTextEditor: public KToolSelection
+class KODFTEXT_EXPORT KoTextEditor: public KToolSelection
 {
     Q_OBJECT
 public:
@@ -61,7 +61,7 @@ QTextCursor ( const QTextBlock & block )
 QTextCursor ( const QTextCursor & cursor )
 ~QTextCursor ()
 */
-    void updateDefaultTextDirection(KoText::Direction direction);
+    void updateDefaultTextDirection(KOdfText::Direction direction);
 
     bool operator!=(const QTextCursor &other) const;
 
@@ -293,4 +293,4 @@ private:
 
 Q_DECLARE_METATYPE(KoTextEditor*)
 
-#endif // KOTEXTEDITOR_H
+#endif // KODFTEXTEDITOR_H

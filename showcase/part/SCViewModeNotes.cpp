@@ -27,10 +27,10 @@
 
 #include <KResourceManager.h>
 #include <KoRuler.h>
-#include <KSelection.h>
+#include <KShapeSelection.h>
 #include <KShapeLayer.h>
 #include <KShapeManager.h>
-#include <KoText.h>
+#include <KOdfText.h>
 #include <KToolManager.h>
 #include <KToolProxy.h>
 #include <KoZoomController.h>
@@ -144,14 +144,14 @@ void SCViewModeNotes::wheelEvent(QWheelEvent *event, const QPointF &point)
 void SCViewModeNotes::activate(KoPAViewMode *previousViewMode)
 {
     Q_UNUSED(previousViewMode);
-    m_canvas->resourceManager()->setResource(KoText::ShowTextFrames, true);
+    m_canvas->resourceManager()->setResource(KOdfText::ShowTextFrames, true);
     m_view->setActionEnabled(KoPAView::AllActions, false);
     updateActivePage(m_view->activePage());
 }
 
 void SCViewModeNotes::deactivate()
 {
-    m_canvas->resourceManager()->setResource(KoText::ShowTextFrames, 0);
+    m_canvas->resourceManager()->setResource(KOdfText::ShowTextFrames, 0);
     m_view->setActionEnabled(KoPAView::AllActions, true);
     m_view->doUpdateActivePage(m_view->activePage());
 }
@@ -190,7 +190,7 @@ void SCViewModeNotes::updateActivePage(KoPAPageBase *page)
 
     m_view->updatePageNavigationActions();
 
-    KSelection *selection = m_canvas->shapeManager()->selection();
+    KShapeSelection *selection = m_canvas->shapeManager()->selection();
     selection->select(notes->textShape());
     selection->setActiveLayer(layer);
     QString tool = KToolManager::instance()->preferredToolForSelection(selection->selectedShapes());

@@ -24,15 +24,7 @@ set(showcase_pageeffect_clockwipe_SRCS
 
 kde4_add_plugin(showcase_pageeffect_clockwipe ${showcase_pageeffect_clockwipe_SRCS})
 
-target_link_libraries(
-    showcase_pageeffect_clockwipe
-    showcaseprivate
-    flake
-
-    ${KDE4_KDECORE_LIBS}
-    ${QT_QTCORE_LIBRARY}
-    ${QT_QTGUI_LIBRARY}
-    )
+target_link_libraries(showcase_pageeffect_clockwipe showcaseprivate)
 
 install(TARGETS showcase_pageeffect_clockwipe  DESTINATION ${PLUGIN_INSTALL_DIR})
 

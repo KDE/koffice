@@ -20,7 +20,7 @@
 #ifndef KTEXTDOCUMENTLAYOUT_H
 #define KTEXTDOCUMENTLAYOUT_H
 
-#include "kotext_export.h"
+#include "kodftext_export.h"
 
 #include "KTextDocument.h"
 
@@ -43,7 +43,7 @@ class KImageCollection;
  * KWords text layouter that allows text to flow in multiple frames and around
  * other KWord objects.
  */
-class KOTEXT_EXPORT KTextDocumentLayout : public QAbstractTextDocumentLayout
+class KODFTEXT_EXPORT KTextDocumentLayout : public QAbstractTextDocumentLayout
 {
     Q_OBJECT
 public:
@@ -131,7 +131,7 @@ public:
      * This inner class is an interface that allows the KTextDocumentLayout to do rough layout
      * while the LayoutState implementation can do all the boring details.
      */
-    class KOTEXT_EXPORT LayoutState
+    class KODFTEXT_EXPORT LayoutState
     {
     public:
         LayoutState() : shapeNumber(-1), shape(0), layout(0), interrupted(true) {}

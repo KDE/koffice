@@ -27,7 +27,7 @@
 #include <KShapeUngroupCommand.h>
 #include <KShapeTransformCommand.h>
 #include <KShapeGroup.h>
-#include <KSelection.h>
+#include <KShapeSelection.h>
 
 
 void TestShapeContainer::testModel()
@@ -142,8 +142,8 @@ void TestShapeContainer::testScaling()
     QList<QPointF> oldPositions;
     for (int i=0; i< transformShapes.size(); i++) {
 //        kDebug() << "abs transform=" << transformShapes.at(i)->absoluteTransformation(0);
-//        kDebug() << "absPos" << transformShapes.at(i)->absolutePosition(KoFlake::TopLeftCorner);
-        oldPositions.append(transformShapes.at(i)->absolutePosition(KoFlake::TopLeftCorner));
+//        kDebug() << "absPos" << transformShapes.at(i)->absolutePosition(KFlake::TopLeftCorner);
+        oldPositions.append(transformShapes.at(i)->absolutePosition(KFlake::TopLeftCorner));
     }
 
     KShapeTransformCommand* transformCommand;
@@ -152,8 +152,8 @@ void TestShapeContainer::testScaling()
 
     for (int i=0; i< transformShapes.size(); i++) {
 //        kDebug() << "abs transform=" << transformShapes.at(i)->absoluteTransformation(0);
-//        kDebug() << "absPos" << transformShapes.at(i)->absolutePosition(KoFlake::TopLeftCorner);
-        QCOMPARE(transformShapes.at(i)->absolutePosition(KoFlake::TopLeftCorner), oldPositions.at(i)*0.5);
+//        kDebug() << "absPos" << transformShapes.at(i)->absolutePosition(KFlake::TopLeftCorner);
+        QCOMPARE(transformShapes.at(i)->absolutePosition(KFlake::TopLeftCorner), oldPositions.at(i)*0.5);
     }
 
     transformShapes.takeLast();
@@ -162,8 +162,8 @@ void TestShapeContainer::testScaling()
 
     for (int i=0; i< transformShapes.size(); i++) {
 //        kDebug() << "abs transform=" << transformShapes.at(i)->absoluteTransformation(0);
-//        kDebug() << "absPos" << transformShapes.at(i)->absolutePosition(KoFlake::TopLeftCorner);
-        QCOMPARE(transformShapes.at(i)->absolutePosition(KoFlake::TopLeftCorner), oldPositions.at(i)*0.5);
+//        kDebug() << "absPos" << transformShapes.at(i)->absolutePosition(KFlake::TopLeftCorner);
+        QCOMPARE(transformShapes.at(i)->absolutePosition(KFlake::TopLeftCorner), oldPositions.at(i)*0.5);
     }
 
 }
@@ -188,8 +188,8 @@ void TestShapeContainer::testScaling2()
     QUndoCommand* groupCommand = KShapeGroupCommand::createCommand(group, groupedShapes);
     groupCommand->redo();
 
-    KSelection* selection = new KSelection();
-    selection->select(shape1, true);
+    KShapeSelection* selection = new KShapeSelection();
+    selection->select(shape1, KShapeSelection::Recursive);
 
     QList<KShape*> transformShapes;
     transformShapes.append(selection->selectedShapes());
@@ -209,8 +209,8 @@ void TestShapeContainer::testScaling2()
     QList<QPointF> oldPositions;
     for (int i=0; i< transformShapes.size(); i++) {
 //        kDebug() << "abs transform=" << transformShapes.at(i)->absoluteTransformation(0);
-//        kDebug() << "absPos" << transformShapes.at(i)->absolutePosition(KoFlake::TopLeftCorner);
-        oldPositions.append(transformShapes.at(i)->absolutePosition(KoFlake::TopLeftCorner));
+//        kDebug() << "absPos" << transformShapes.at(i)->absolutePosition(KFlake::TopLeftCorner);
+        oldPositions.append(transformShapes.at(i)->absolutePosition(KFlake::TopLeftCorner));
     }
 
     KShapeTransformCommand* transformCommand;
@@ -218,13 +218,13 @@ void TestShapeContainer::testScaling2()
     transformCommand->redo();
 
 
-    QRectF r1(shape1->absolutePosition(KoFlake::TopLeftCorner), shape1->absolutePosition(KoFlake::BottomRightCorner));
-    QRectF r2(shape2->absolutePosition(KoFlake::TopLeftCorner), shape2->absolutePosition(KoFlake::BottomRightCorner));
+    QRectF r1(shape1->absolutePosition(KFlake::TopLeftCorner), shape1->absolutePosition(KFlake::BottomRightCorner));
+    QRectF r2(shape2->absolutePosition(KFlake::TopLeftCorner), shape2->absolutePosition(KFlake::BottomRightCorner));
 //    kDebug() << "r1 u r2=" << r1.united(r2).size();
     QSizeF shapeSize=r1.united(r2).size();
 
-    selection = new KSelection();
-    selection->select(shape1, true);
+    selection = new KShapeSelection();
+    selection->select(shape1, KShapeSelection::Recursive);
 //    kDebug() << "selection=" << selection->size();
     QSizeF selecSize = selection->size();
 

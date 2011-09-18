@@ -23,7 +23,7 @@
 #include "KCanvasBase.h"
 #include "KToolProxy.h"
 #include "KResourceManager.h"
-#include "KoText.h"
+#include "KOdfText.h"
 #include "KoTextEditor.h"
 #include <kdebug.h>
 
@@ -154,12 +154,12 @@ void KoRdfSemanticItemViewSite::selectRange(KResourceManager *provider, int star
 {
     kDebug(30015) << " startpos:" << startpos << " endpos:" << endpos;
     if (endpos > startpos) {
-        provider->setResource(KoText::CurrentTextPosition, startpos);
-        provider->setResource(KoText::CurrentTextAnchor, endpos + 1);
-        provider->clearResource(KoText::SelectedTextPosition);
-        provider->clearResource(KoText::SelectedTextAnchor);
+        provider->setResource(KOdfText::CurrentTextPosition, startpos);
+        provider->setResource(KOdfText::CurrentTextAnchor, endpos + 1);
+        provider->clearResource(KOdfText::SelectedTextPosition);
+        provider->clearResource(KOdfText::SelectedTextAnchor);
     } else {
-        provider->setResource(KoText::CurrentTextPosition, startpos);
+        provider->setResource(KOdfText::CurrentTextPosition, startpos);
     }
 }
 

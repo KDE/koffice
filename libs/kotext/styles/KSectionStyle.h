@@ -23,8 +23,8 @@
 #define KSECTIONSTYLE_H
 
 #include "KOdfColumnData.h"
-#include "KoText.h"
-#include "kotext_export.h"
+#include "KOdfText.h"
+#include "kodftext_export.h"
 
 #include <QObject>
 #include <QVector>
@@ -48,7 +48,7 @@ class KXmlElement;
  * a specific KSectionStyle.
  * @see KStyleManager
  */
-class KOTEXT_EXPORT KSectionStyle : public QObject
+class KODFTEXT_EXPORT KSectionStyle : public QObject
 {
     Q_OBJECT
 public:
@@ -85,9 +85,9 @@ public:
     /// duplicated property from QTextBlockFormat
     qreal rightMargin() const;
 
-    KoText::Direction textProgressionDirection() const;
+    KOdfText::Direction textProgressionDirection() const;
 
-    void setTextProgressionDirection(KoText::Direction dir);
+    void setTextProgressionDirection(KOdfText::Direction dir);
 
     /// See similar named method on QTextBlockFormat
     void setBackground(const QBrush &brush);

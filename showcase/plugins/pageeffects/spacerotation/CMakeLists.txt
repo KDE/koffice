@@ -10,15 +10,7 @@ set(showcase_pageeffect_spacerotation_PART_SRCS Plugin.cpp
 
 kde4_add_plugin(showcase_pageeffect_spacerotation ${showcase_pageeffect_spacerotation_PART_SRCS})
 
-target_link_libraries(
-    showcase_pageeffect_spacerotation
-    showcaseprivate
-    flake
-
-    ${KDE4_KDECORE_LIBS}
-    ${QT_QTCORE_LIBRARY}
-    ${QT_QTGUI_LIBRARY}
-    )
+target_link_libraries(showcase_pageeffect_spacerotation showcaseprivate)
 
 install(TARGETS showcase_pageeffect_spacerotation  DESTINATION ${PLUGIN_INSTALL_DIR})
 

@@ -22,12 +22,12 @@
 #ifndef KTABLEBORDERSTYLE_H
 #define KTABLEBORDERSTYLE_H
 
-#include "KoText.h"
-#include "kotext_export.h"
+#include "KOdfText.h"
+#include "kodftext_export.h"
 
 class KTableBorderStylePrivate;
 
-class KOTEXT_EXPORT KTableBorderStyle : public QObject
+class KODFTEXT_EXPORT KTableBorderStyle : public QObject
 {
     Q_OBJECT
 public:

@@ -70,7 +70,7 @@ QByteArray KWOdfWriter::serializeHeaderFooter(KOdfEmbeddedDocumentSaver &embedde
 
     KTextSharedSavingData *sharedData = new KTextSharedSavingData;
     sharedData->setGenChanges(changes);
-    context.addSharedData(KOTEXT_SHARED_SAVING_ID, sharedData);
+    context.addSharedData(KODFTEXT_SHARED_SAVING_ID, sharedData);
 
     Q_ASSERT(!fs->frames().isEmpty());
     KTextShapeData *shapedata = qobject_cast<KTextShapeData *>(fs->frames().first()->shape()->userData());
@@ -212,7 +212,7 @@ bool KWOdfWriter::save(KOdfWriteStore &odfStore, KOdfEmbeddedDocumentSaver &embe
     KOdfGenericChanges changes;
 
     // Save the named styles
-    KStyleManager *styleManager = m_document->resourceManager()->resource(KoText::StyleManager).value<KStyleManager*>();
+    KStyleManager *styleManager = m_document->resourceManager()->resource(KOdfText::StyleManager).value<KStyleManager*>();
     styleManager->saveOdf(mainStyles);
 
     // TODO get the pagestyle for the first page and store that as 'style:default-page-layout'
@@ -234,7 +234,7 @@ bool KWOdfWriter::save(KOdfWriteStore &odfStore, KOdfEmbeddedDocumentSaver &embe
 
     KTextSharedSavingData *sharedData = new KTextSharedSavingData;
     sharedData->setGenChanges(changes);
-    context.addSharedData(KOTEXT_SHARED_SAVING_ID, sharedData);
+    context.addSharedData(KODFTEXT_SHARED_SAVING_ID, sharedData);
 
     calculateZindexOffsets();
 

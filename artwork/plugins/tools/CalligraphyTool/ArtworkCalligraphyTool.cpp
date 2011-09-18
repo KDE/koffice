@@ -29,7 +29,7 @@
 #include <KCanvasBase.h>
 #include <KShapeController.h>
 #include <KShapeManager.h>
-#include <KSelection.h>
+#include <KShapeSelection.h>
 #include <ArtworkCurveFit.h>
 #include <KColorBackground.h>
 #include <KResourceManager.h>
@@ -335,7 +335,7 @@ void ArtworkCalligraphyTool::activate(ToolActivation, const QSet<KShape*> &)
 void ArtworkCalligraphyTool::deactivate()
 {
     if (m_lastShape && canvas()->shapeManager()->shapes().contains(m_lastShape)) {
-        KSelection *selection = canvas()->shapeManager()->selection();
+        KShapeSelection *selection = canvas()->shapeManager()->selection();
         selection->deselectAll();
         selection->select(m_lastShape);
     }
@@ -461,7 +461,7 @@ void ArtworkCalligraphyTool::updateSelectedPath()
 {
     KPathShape *oldSelectedPath = m_selectedPath; // save old value
 
-    KSelection *selection = canvas()->shapeManager()->selection();
+    KShapeSelection *selection = canvas()->shapeManager()->selection();
 
     // null pointer if it the selection isn't a KPathShape
     // or if the selection is empty

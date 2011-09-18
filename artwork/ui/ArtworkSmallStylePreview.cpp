@@ -28,7 +28,7 @@
 #include <KCanvasController.h>
 #include <KShapeManager.h>
 #include <KShape.h>
-#include <KSelection.h>
+#include <KShapeSelection.h>
 #include <KLineBorder.h>
 
 #include <KLocale>

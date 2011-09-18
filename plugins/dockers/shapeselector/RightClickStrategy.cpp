@@ -25,7 +25,7 @@
 #include <KShapeContainerModel.h>
 
 #include <KShapeManager.h>
-#include <KSelection.h>
+#include <KShapeSelection.h>
 #include <KPointerEvent.h>
 
 #include <QMenu>
@@ -125,7 +125,7 @@ void RightClickStrategy::createNewFolder()
         oldFolder->setSize(size);
         if (oldFolder->model()->count()) {
             // Make sure we don't resize the folder to small for its contents.
-            QPointF bottom = oldFolder->model()->shapes().last()->absolutePosition(KoFlake::BottomRightCorner);
+            QPointF bottom = oldFolder->model()->shapes().last()->absolutePosition(KFlake::BottomRightCorner);
             if (bottom.y() > size.height())
                 oldFolder->setSize(QSizeF(size.width(), bottom.y()));
         }

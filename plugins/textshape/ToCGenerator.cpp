@@ -99,8 +99,8 @@ void ToCGenerator::generate()
 
                 currentStyle->setLeftMargin(8 * (outlineLevel-1));
 
-                QList<KoText::Tab> tabList;
-                struct KoText::Tab aTab;
+                QList<KOdfText::Tab> tabList;
+                struct KOdfText::Tab aTab;
                 aTab.type = QTextOption::RightTab;
                 aTab.leaderText = '.';
                 aTab.position = 490 - outlineLevel * 8;

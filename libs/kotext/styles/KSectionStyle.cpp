@@ -218,12 +218,12 @@ void KSectionStyle::setStyleId(int id)
 }
 
 
-KoText::Direction KSectionStyle::textProgressionDirection() const
+KOdfText::Direction KSectionStyle::textProgressionDirection() const
 {
-    return static_cast<KoText::Direction>(d->propertyInt(TextProgressionDirection));
+    return static_cast<KOdfText::Direction>(d->propertyInt(TextProgressionDirection));
 }
 
-void KSectionStyle::setTextProgressionDirection(KoText::Direction dir)
+void KSectionStyle::setTextProgressionDirection(KOdfText::Direction dir)
 {
     setProperty(TextProgressionDirection, dir);
 }
@@ -270,7 +270,7 @@ void KSectionStyle::loadOdf(const KXmlElement *element, KOdfLoadingContext &cont
 
     if (styleStack.hasProperty(KOdfXmlNS::style, "writing-mode")) {     // http://www.w3.org/TR/2004/WD-xsl11-20041216/#writing-mode
         QString writingMode = styleStack.property(KOdfXmlNS::style, "writing-mode");
-        setTextProgressionDirection(KoText::directionFromString(writingMode));
+        setTextProgressionDirection(KOdfText::directionFromString(writingMode));
     }
 
     // Indentation (margin)
@@ -339,13 +339,13 @@ void KSectionStyle::saveOdf(KOdfGenericStyle &style)
             directionValue = d->stylesPrivate.value(key).toInt(&ok);
             if (ok) {
                 QString direction;
-                if (directionValue == KoText::LeftRightTopBottom)
+                if (directionValue == KOdfText::LeftRightTopBottom)
                     direction = "lr-tb";
-                else if (directionValue == KoText::RightLeftTopBottom)
+                else if (directionValue == KOdfText::RightLeftTopBottom)
                     direction = "rl-tb";
-                else if (directionValue == KoText::TopBottomRightLeft)
+                else if (directionValue == KOdfText::TopBottomRightLeft)
                     direction = "tb-lr";
-                else if (directionValue == KoText::InheritDirection)
+                else if (directionValue == KOdfText::InheritDirection)
                     direction = "page";
                 if (!direction.isEmpty())
                     style.addProperty("style:writing-mode", direction, KOdfGenericStyle::DefaultType);

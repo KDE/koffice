@@ -19,7 +19,7 @@
 #ifndef KTABLEFORMAT_H
 #define KTABLEFORMAT_H
 
-#include "kotext_export.h"
+#include "kodftext_export.h"
 
 #include <QSharedDataPointer>
 #include <QMap>
@@ -40,7 +40,7 @@ class QBrush;
  *
  * \sa KoTableColumnFormat, KoTableRowFormat
  */
-class KOTEXT_EXPORT KTableFormat
+class KODFTEXT_EXPORT KTableFormat
 {
 public:
     /// Creates a new format of type \c InvalidFormat.

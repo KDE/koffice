@@ -2,7 +2,7 @@ include_directories(
 	${CMAKE_SOURCE_DIR}/kcells
     ${CMAKE_SOURCE_DIR}/kcells/commands
 	${CMAKE_SOURCE_DIR}/kcells/ui
-	${KOTEXT_INCLUDES} 
+	${KODFTEXT_INCLUDES} 
 	${KOMAIN_INCLUDES} 
 	${KOKROSS_INCLUDES}
 	)

@@ -16,8 +16,8 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#ifndef KOODFCOLLECTIONLOADER_H
-#define KOODFCOLLECTIONLOADER_H
+#ifndef ODFCOLLECTIONLOADER_H
+#define ODFCOLLECTIONLOADER_H
 
 #include <kurl.h>
 
@@ -77,4 +77,4 @@ class OdfCollectionLoader : public QObject
         void loadingFinished();
 };
 
-#endif //KOODFCOLLECTIONLOADER_H
+#endif

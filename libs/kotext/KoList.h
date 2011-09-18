@@ -32,7 +32,7 @@ class KoListPrivate;
  * embedded lists). There is always an associated KListStyle that holds the
  * styling information for various level of the ODF list.
  */
-class KOTEXT_EXPORT KoList : public QObject
+class KODFTEXT_EXPORT KoList : public QObject
 {
     Q_OBJECT
 public:

@@ -19,7 +19,7 @@
 #ifndef KVARIABLEMANAGER_H
 #define KVARIABLEMANAGER_H
 
-#include "kotext_export.h"
+#include "kodftext_export.h"
 
 #include <QObject>
 #include <QString>
@@ -42,7 +42,7 @@ class KXmlWriter;
  * @see KInlineTextObjectManager::createInsertVariableActions()
  * @see KInlineTextObjectManager::variableManager()
  */
-class KOTEXT_EXPORT KVariableManager : public QObject
+class KODFTEXT_EXPORT KVariableManager : public QObject
 {
     Q_OBJECT
 public:

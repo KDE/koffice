@@ -39,7 +39,7 @@
 #include <KToolProxy.h>
 #include <KShapeManagerPaintingStrategy.h>
 #include <KCanvasController.h>
-#include <KSelection.h>
+#include <KShapeSelection.h>
 
 #include <kdebug.h>
 #include <klocale.h>
@@ -308,7 +308,7 @@ void ArtworkCanvas::updateSizeAndOffset()
             // tell canvas controller the new document size in pixel
             controller->setDocumentSize(viewRect.size().toSize(), true);
             // make sure the actual selection is visible
-            KSelection * selection = d->shapeManager->selection();
+            KShapeSelection * selection = d->shapeManager->selection();
             if (selection->count())
                 controller->ensureVisible(d->zoomHandler.documentToView(selection->boundingRect()));
         }

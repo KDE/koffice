@@ -20,7 +20,7 @@
 #define KTEXTLOCATOR_H
 
 #include "KInlineObject.h"
-#include "kotext_export.h"
+#include "kodftext_export.h"
 
 #include <QString>
 
@@ -33,7 +33,7 @@ class KTextLocatorPrivate;
  * After inserting this locator you can request things like pageNumber() and chapter() for the
  * place where the locator has been positioned in the document.
  */
-class KOTEXT_EXPORT KTextLocator : public KInlineObject
+class KODFTEXT_EXPORT KTextLocator : public KInlineObject
 {
 public:
     /// constructor

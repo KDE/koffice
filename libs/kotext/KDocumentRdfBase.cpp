@@ -19,7 +19,7 @@
 
 #include "KDocumentRdfBase.h"
 #include "KoTextSopranoRdfModel_p.h"
-#include "KoText.h"
+#include "KOdfText.h"
 
 #include <KResourceManager.h>
 #include <KCanvasBase.h>
@@ -41,17 +41,17 @@ Soprano::Model *KDocumentRdfBase::model() const
 KDocumentRdfBase *KDocumentRdfBase::fromResourceManager(KCanvasBase *host)
 {
     KResourceManager *rm = host->resourceManager();
-    if (!rm->hasResource(KoText::DocumentRdf)) {
+    if (!rm->hasResource(KOdfText::DocumentRdf)) {
         return 0;
     }
-    return static_cast<KDocumentRdfBase*>(rm->resource(KoText::DocumentRdf).value<void*>());
+    return static_cast<KDocumentRdfBase*>(rm->resource(KOdfText::DocumentRdf).value<void*>());
 }
 
 void KDocumentRdfBase::linkToResourceManager(KResourceManager *rm)
 {
     QVariant variant;
     variant.setValue<void*>(this);
-    rm->setResource(KoText::DocumentRdf, variant);
+    rm->setResource(KOdfText::DocumentRdf, variant);
 }
 
 void KDocumentRdfBase::updateInlineRdfStatements(QTextDocument *qdoc)
