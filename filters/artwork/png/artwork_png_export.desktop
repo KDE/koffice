@@ -10,6 +10,7 @@ Name[pt_BR]=Filtro de Exportação PNG para o Artwork
 Name[sv]=Artwork PNG-exportfilter
 Name[uk]=Фільтр експорту PNG з Artwork
 Name[x-test]=xxArtwork PNG Export Filterxx
+Name[zh_TW]=Artwork PNG 匯出過濾程式
 X-KDE-ServiceTypes=KOfficeFilter
 Type=Service
 X-KDE-Export=image/png

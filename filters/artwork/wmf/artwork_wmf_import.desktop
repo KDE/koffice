@@ -10,6 +10,7 @@ Name[pt_BR]=Filtro de importação de WMF para o Artwork
 Name[sv]=Artwork WMF-importfilter
 Name[uk]=Фільтр імпорту WMF до Artwork
 Name[x-test]=xxArtwork WMF Import Filterxx
+Name[zh_TW]=Artwork WMF 匯入過濾程式
 X-KDE-Export=application/vnd.oasis.opendocument.graphics
 X-KDE-Import=image/x-wmf
 X-KDE-Weight=1

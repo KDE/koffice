@@ -10,6 +10,7 @@ Name[pt_BR]=Filtro de Importação WPG para o Artwork
 Name[sv]=Artwork WPG-importfilter
 Name[uk]=Фільтр імпорту WPG до Artwork
 Name[x-test]=xxArtwork WPG Import Filterxx
+Name[zh_TW]=Artwork WPG 匯入過濾程式
 X-KDE-Export=application/vnd.oasis.opendocument.graphics
 X-KDE-Import=application/x-wpg
 X-KDE-Weight=1

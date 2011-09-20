@@ -10,6 +10,7 @@ Name[sv]=Artwork
 Name[ug]=سەنئەت بۇيۇمى
 Name[uk]=Artwork
 Name[x-test]=xxArtworkxx
+Name[zh_TW]=Artwork
 Exec=artwork %u
 GenericName=Scalable Graphics
 GenericName[af]=Skaal veranderbare Grafieka

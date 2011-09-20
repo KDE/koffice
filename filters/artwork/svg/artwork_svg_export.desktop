@@ -10,6 +10,7 @@ Name[pt_BR]=Filtro de Exportação SVG para o Artwork
 Name[sv]=Artwork SVG-exportfilter
 Name[uk]=Фільтр експорту SVG з Artwork
 Name[x-test]=xxArtwork SVG Export Filterxx
+Name[zh_TW]=Artwork SVG 匯出過濾程式
 X-KDE-ServiceTypes=KOfficeFilter
 Type=Service
 X-KDE-Export=image/svg+xml

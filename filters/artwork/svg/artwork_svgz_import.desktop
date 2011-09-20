@@ -10,6 +10,7 @@ Name[pt_BR]=Filtro de Importação SVGZ para o Artwork
 Name[sv]=Artwork SVGZ-importfilter
 Name[uk]=Фільтр імпорту SVGZ у Artwork
 Name[x-test]=xxArtwork SVGZ Import Filterxx
+Name[zh_TW]=Artwork SVGZ 匯入過濾程式
 X-KDE-Export=application/vnd.oasis.opendocument.graphics
 X-KDE-Import=image/svg+xml-compressed
 X-KDE-Weight=1

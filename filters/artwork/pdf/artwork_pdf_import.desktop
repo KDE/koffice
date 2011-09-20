@@ -9,6 +9,7 @@ Name[pt_BR]=Filtro de Importação PDF para o Artwork
 Name[sv]=Artwork PDF-importfilter
 Name[uk]=Фільтр імпорту PDF до Artwork
 Name[x-test]=xxArtwork PDF Import Filterxx
+Name[zh_TW]=Artwork PDF 匯入過濾程式
 X-KDE-ServiceTypes=KOfficeFilter
 Type=Service
 X-KDE-Export=image/svg+xml
