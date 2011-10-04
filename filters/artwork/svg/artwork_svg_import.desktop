@@ -1,6 +1,7 @@
 [Desktop Entry]
 Type=Service
 Name=Artwork SVG Import Filter
+Name[cs]=Grafický importní filtr SVG
 Name[da]=Artwork SVG-importfilter
 Name[de]=Artwork-SVG-Importfilter
 Name[nb]=SVG-importfilter for Artwork
