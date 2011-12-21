@@ -23,9 +23,6 @@
 /* needed for KDE_EXPORT and KDE_IMPORT macros */
 #include <kdemacros.h>
 
-/* We use _WIN32/_WIN64 instead of Q_OS_WIN so that this header can be used from C files too */
-#if defined _WIN32 || defined _WIN64
-
 #ifndef SHOWCASE_EXPORT
 # if defined(MAKE_SHOWCASEPRIVATE_LIB)
    /* We are building this library */
@@ -35,13 +32,6 @@
 #  define SHOWCASE_EXPORT KDE_IMPORT
 # endif
 #endif
-
-#else /* UNIX */
-
-#define SHOWCASE_EXPORT KDE_EXPORT
-
-#endif
-
 
 /* Now the same for SHOWCASE_TEST_EXPORT, if compiling with unit tests enabled */
 

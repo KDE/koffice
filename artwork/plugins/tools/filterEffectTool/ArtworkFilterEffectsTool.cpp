@@ -459,7 +459,7 @@ QMap<QString, QWidget *> ArtworkFilterEffectsTool::createOptionWidgets()
     d->posX = new KDoubleNumInput(filterRegionWidget);
     d->posX->setSuffix("%");
     connect(d->posX, SIGNAL(valueChanged(double)), this, SLOT(regionXChanged(double)));
-    filterRegionLayout->addWidget(new QLabel(i18n("X:")), 0, 0);
+    filterRegionLayout->addWidget(new QLabel(i18nc("X:", "X-Coordinate")), 0, 0);
     filterRegionLayout->addWidget(d->posX, 0, 1);
 
     d->posY = new KDoubleNumInput(filterRegionWidget);
@@ -471,7 +471,7 @@ QMap<QString, QWidget *> ArtworkFilterEffectsTool::createOptionWidgets()
     d->posW = new KDoubleNumInput(filterRegionWidget);
     d->posW->setSuffix("%");
     connect(d->posW, SIGNAL(valueChanged(double)), this, SLOT(regionWidthChanged(double)));
-    filterRegionLayout->addWidget(new QLabel(i18n("W:")), 0, 2);
+    filterRegionLayout->addWidget(new QLabel(i18nc("W:", "Width")), 0, 2);
     filterRegionLayout->addWidget(d->posW, 0, 3);
 
     d->posH = new KDoubleNumInput(filterRegionWidget);
