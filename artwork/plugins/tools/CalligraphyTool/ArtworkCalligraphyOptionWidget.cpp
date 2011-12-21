@@ -196,8 +196,8 @@ void ArtworkCalligraphyOptionWidget::loadProfile(const QString &name)
     loadCurrentProfile();
 
     // don't show Current if it isn't selected
-    if (name != i18n("Current")) {
-        removeProfile(i18n("Current"));
+    if (name != i18nc("Current", "Profile selected now")) {
+        removeProfile(i18nc("Current", "Profile selected now"));
     }
 }
 
@@ -221,7 +221,7 @@ void ArtworkCalligraphyOptionWidget::saveProfileAs()
 
         if (! ok) return;
 
-        if (name.isEmpty() || name == i18n("Current")) {
+        if (name.isEmpty() || name == i18nc("Current", "Profile selected now")) {
             KMessageBox::sorry(this,
                                i18n("Sorry, the name you entered is invalid."),
                                i18nc("invalid profile name", "Invalid name."));
