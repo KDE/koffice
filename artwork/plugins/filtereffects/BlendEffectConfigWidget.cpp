@@ -34,7 +34,7 @@ BlendEffectConfigWidget::BlendEffectConfigWidget(QWidget *parent)
 
     g->addWidget(new QLabel(i18n("Blend mode"), this), 0, 0);
     m_mode = new KComboBox(this);
-    m_mode->addItem(i18n("Normal"));
+    m_mode->addItem(i18nc("Normal", "No blend effect"));
     m_mode->addItem(i18n("Multiply"));
     m_mode->addItem(i18n("Screen"));
     m_mode->addItem(i18n("Darken"));

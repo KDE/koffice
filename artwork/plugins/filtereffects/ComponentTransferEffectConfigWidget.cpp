@@ -59,8 +59,8 @@ ComponentTransferEffectConfigWidget::ComponentTransferEffectConfigWidget(QWidget
     m_function = new KComboBox(this);
     m_function->addItem(i18n("Identity"));
     m_function->addItem(i18n("Table"));
-    m_function->addItem(i18n("Discrete"));
-    m_function->addItem(i18n("Linear"));
+    m_function->addItem(i18nc("Discrete", "Discrete Function"));
+    m_function->addItem(i18nc("Linear", "Linear Function"));
     m_function->addItem(i18n("Gamma"));
     g->addWidget(m_function, 1, 2, 1, 2);
 

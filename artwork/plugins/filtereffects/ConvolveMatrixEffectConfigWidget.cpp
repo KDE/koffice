@@ -40,9 +40,9 @@ ConvolveMatrixEffectConfigWidget::ConvolveMatrixEffectConfigWidget(QWidget *pare
     QGridLayout * g = new QGridLayout(this);
 
     m_edgeMode = new KComboBox(this);
-    m_edgeMode->addItem(i18n("Duplicate"));
+    m_edgeMode->addItem(i18nc("Duplicate", "Copy edge"));
     m_edgeMode->addItem(i18n("Wrap"));
-    m_edgeMode->addItem(i18n("None"));
+    m_edgeMode->addItem(i18nc("None", "No edge effect"));
     g->addWidget(new QLabel(i18n("Edge mode:"), this), 0, 0);
     g->addWidget(m_edgeMode, 0, 1, 1, 3);
 

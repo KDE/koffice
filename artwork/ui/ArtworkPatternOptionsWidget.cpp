@@ -30,19 +30,19 @@ ArtworkPatternOptionsWidget::ArtworkPatternOptionsWidget(QWidget * parent)
 {
     d->widget.setupUi(this);
 
-    d->widget.patternRepeat->insertItem(0, i18n("Original"));
-    d->widget.patternRepeat->insertItem(1, i18n("Tiled"));
-    d->widget.patternRepeat->insertItem(2, i18n("Stretched"));
+    d->widget.patternRepeat->insertItem(0, i18nc("Original", "Original Image"));
+    d->widget.patternRepeat->insertItem(1, i18nc("Tiled", "Tiled Image"));
+    d->widget.patternRepeat->insertItem(2, i18nc("Stretched", "Stretched Image"));
 
-    d->widget.referencePoint->insertItem(0, i18n("Top Left"));
-    d->widget.referencePoint->insertItem(1, i18n("Top"));
-    d->widget.referencePoint->insertItem(2, i18n("Top Right"));
-    d->widget.referencePoint->insertItem(3, i18n("Left"));
-    d->widget.referencePoint->insertItem(4, i18n("Center"));
-    d->widget.referencePoint->insertItem(5, i18n("Right"));
-    d->widget.referencePoint->insertItem(6, i18n("Bottom Left"));
-    d->widget.referencePoint->insertItem(7, i18n("Bottom"));
-    d->widget.referencePoint->insertItem(8, i18n("Bottom Right"));
+    d->widget.referencePoint->insertItem(0, i18nc("Top Left", "Align to top-left corner"));
+    d->widget.referencePoint->insertItem(1, i18nc("Top", "Align to top side"));
+    d->widget.referencePoint->insertItem(2, i18nc("Top Right", "Align to top-right corner"));
+    d->widget.referencePoint->insertItem(3, i18nc("Left", "Align to left side"));
+    d->widget.referencePoint->insertItem(4, i18nc("Center", "Align in the center"));
+    d->widget.referencePoint->insertItem(5, i18nc("Right", "Align to right side"));
+    d->widget.referencePoint->insertItem(6, i18nc("Bottom Left", "Align to bottom-left corner"));
+    d->widget.referencePoint->insertItem(7, i18nc("Bottom", "Align to bottom side"));
+    d->widget.referencePoint->insertItem(8, i18nc("Bottom Right", "Align to bottom-right corner"));
 
     d->widget.refPointOffsetX->setRange(0.0, 100.0);
     d->widget.refPointOffsetX->setSuffix(QString('%'));
