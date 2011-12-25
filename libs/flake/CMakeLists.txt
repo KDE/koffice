@@ -7,6 +7,11 @@ if(KDE4_BUILD_TESTS)
     add_definitions(-DCOMPILING_TESTS)
 endif(KDE4_BUILD_TESTS)
 
+if( QCA2_FOUND )
+    include_directories( ${QCA2_INCLUDE_DIR} )
+    add_definitions( -DQCA2 )
+endif( QCA2_FOUND )
+
 add_subdirectory(tests)
 add_subdirectory(pics)
 
@@ -168,6 +173,37 @@ set(flake_SRCS
     tools/KCreateShapesToolFactory.cpp
     tools/KShapeRubberSelectStrategy.cpp
     tools/KPathSegmentChangeStrategy.cpp
+    odf/KOdfBorders.cpp
+    odf/DirectoryStore.cpp
+    odf/KOdfEmbeddedDocumentSaver.cpp
+    odf/EncryptedStore.cpp
+    odf/KOdfFontData.cpp
+    odf/KOdfGenericChange.cpp
+    odf/KOdfGenericChanges.cpp
+    odf/KOdfGenericStyle.cpp
+    odf/KOdfGenericStyles.cpp
+    odf/KOdfSettings.cpp
+    odf/KOdf.cpp
+    odf/KOdfDocumentBase.cpp
+    odf/KOdfGraphicStyles.cpp
+    odf/KOdfLoadingContext.cpp
+    odf/KOdfNumberStyles.cpp
+    odf/KOdfPasteBase.cpp
+    odf/KOdfStoreReader.cpp
+    odf/KOdfStylesReader.cpp
+    odf/KOdfWriteStore.cpp
+    odf/KOdfPageFormat.cpp
+    odf/KOdfPageLayoutData.cpp
+    odf/KProperties.cpp
+    odf/KOdfStore.cpp
+    odf/KOdfStorageDevice.cpp
+    odf/KOdfStyleStack.cpp
+    odf/TarStore.cpp
+    odf/KUnit.cpp
+    odf/KOdfXmlNS.cpp
+    odf/KXmlReader.cpp
+    odf/KXmlWriter.cpp
+    odf/ZipStore.cpp
 )
 
 kde4_add_ui_files(flake_SRCS
@@ -178,9 +214,12 @@ kde4_add_ui_files(flake_SRCS
 
 kde4_add_library(kflake SHARED ${flake_SRCS})
 
-target_link_libraries(kflake ${KDE4_KDEUI_LIBS} kodf)
+target_link_libraries(kflake ${KDE4_KDEUI_LIBS} ${KDE4_KIO_LIBS})
+target_link_libraries(kflake LINK_INTERFACE_LIBRARIES ${KDE4_KIO_LIBS})
 
-target_link_libraries(kflake LINK_INTERFACE_LIBRARIES kodf)
+if( QCA2_FOUND )
+    target_link_libraries(kflake ${QCA2_LIBRARIES})
+endif( QCA2_FOUND )
 
 set_target_properties(kflake PROPERTIES
     VERSION ${GENERIC_KOFFICE_LIB_VERSION} SOVERSION ${GENERIC_KOFFICE_LIB_SOVERSION}
@@ -287,6 +326,33 @@ install(
     tools/KInteractionStrategy.h
     tools/KInteractionTool.h
     tools/KShapeRubberSelectStrategy.h
+    odf/KOdf.h
+    odf/KOdfXmlNS.h
+    odf/KOdfGenericStyle.h
+    odf/KOdfGenericStyles.h
+    odf/KOdfFontData.h
+    odf/KOdfLoadingContext.h
+    odf/KOdfSettings.h
+    odf/KOdfStylesReader.h
+    odf/KOdfPasteBase.h
+    odf/KOdfStoreReader.h
+    odf/KOdfWriteStore.h
+    odf/KOdfStyleStack.h
+    odf/KOdfDocumentBase.h
+    odf/KOdfGenericChange.h
+    odf/KOdfGenericChanges.h
+    odf/KOdfEmbeddedDocumentSaver.h
+    odf/KOdfBorders.h
+    odf/KOdfPageLayoutData.h
+    odf/KOdfPageFormat.h
+    odf/KOdfColumnData.h
+    odf/KOdfStore.h
+    odf/KOdfStorageDevice.h
+    odf/KXmlReader.h
+    odf/KXmlWriter.h
+    odf/KProperties.h
+    odf/KUnit.h
+
     DESTINATION
     ${INCLUDE_INSTALL_DIR} COMPONENT Devel
 )

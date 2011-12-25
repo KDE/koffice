@@ -145,4 +145,76 @@ set(TestConnection_SRCS TestConnection.cpp )
 kde4_add_unit_test(TestConnection TESTNAME libs-flake-TestConnection  ${TestConnection_SRCS})
 target_link_libraries(TestConnection kflake ${QT_QTTEST_LIBRARY})
 
+########### next target ###############
+
+set(TestKoGenStyles_SRCS TestKoGenStyles.cpp )
+kde4_add_unit_test(TestKoGenStyles TESTNAME libs-flake-TestKoGenStyles ${TestKoGenStyles_SRCS})
+target_link_libraries(TestKoGenStyles kflake ${QT_QTTEST_LIBRARY})
+
+########### next target ###############
+
+set(TestOdfSettings_SRCS TestOdfSettings.cpp )
+kde4_add_unit_test(TestOdfSettings TESTNAME libs-flake-TestOdfSettings ${TestOdfSettings_SRCS})
+target_link_libraries(TestOdfSettings kflake ${QT_QTGUI_LIBRARY} ${QT_QTTEST_LIBRARY})
+
+########### next target ###############
+
+set(TestOdfStore_SRCS TestOdfStore.cpp )
+kde4_add_unit_test(TestOdfStore TESTNAME libs-flake-TestOdfStore ${TestOdfStore_SRCS})
+target_link_libraries(TestOdfStore kflake ${QT_QTGUI_LIBRARY} ${QT_QTTEST_LIBRARY})
+
+########### next target ###############
+
+set(TestKodfLoadingContext_SRCS TestKOdfLoadingContext.cpp )
+kde4_add_unit_test(TestKodfLoadingContext TESTNAME libs-flake-TestKodfLoadingContext ${TestKodfLoadingContext_SRCS})
+target_link_libraries(TestKodfLoadingContext kflake ${QT_QTGUI_LIBRARY} ${QT_QTTEST_LIBRARY})
+
+########### next target ###############
+
+set(xmlwritertest_SRCS TestXmlWriter.cpp )
+
+kde4_add_unit_test(TestXmlWriter TESTNAME libs-store-testxmlwriter ${xmlwritertest_SRCS})
+
+target_link_libraries(TestXmlWriter kflake ${QT_QTTEST_LIBRARY}  ${KDE4_KDEUI_LIBS})
+
+########### next target ###############
+
+set(xmlreadertest_SRCS TestXmlReader.cpp )
+kde4_add_unit_test(TestXmlReader TESTNAME libs-store-testxmlreader ${xmlreadertest_SRCS})
+target_link_libraries(TestXmlReader kflake ${QT_QTTEST_LIBRARY}  ${KDE4_KDEUI_LIBS})
+
+########### next target ###############
+
+set(storedroptest_SRCS storedroptest.cpp )
+
+kde4_add_executable(storedroptest TEST ${storedroptest_SRCS})
+
+target_link_libraries(storedroptest kflake  ${QT_QTGUI_LIBRARY} ${KDE4_KDEUI_LIBS})
+
+########### next target ###############
+
+set(kxmldomtest_SRCS KXmlDomTest.cpp )
+
+kde4_add_unit_test(KXmlDomTest TESTNAME libs-store-kxmldomtest ${kxmldomtest_SRCS})
+
+target_link_libraries(KXmlDomTest kflake ${QT_QTTEST_LIBRARY} ${QT_QTGUI_LIBRARY} ${KDE4_KDEUI_LIBS} )
+
+########### next target ###############
+
+set(storageTest_SRCS TestStorage.cpp )
+
+kde4_add_unit_test(TestStorage TESTNAME libs-store-storage ${storageTest_SRCS})
+
+target_link_libraries(TestStorage kflake ${QT_QTTEST_LIBRARY} ${QT_QTGUI_LIBRARY} ${KDE4_KDEUI_LIBS})
+
+########### next target ###############
+
+set(kopropertiestest_SRCS KPropertiesTest.cpp )
+kde4_add_unit_test(KPropertiesTest TESTNAME libs-kobase-KPropertiesTest ${kopropertiestest_SRCS})
+target_link_libraries(KPropertiesTest  ${KDE4_KDEUI_LIBS} kflake ${QT_QTTEST_LIBRARY})
+
+set(TestKoUnit_SRCS TestKUnit.cpp)
+kde4_add_unit_test(TestKUnit TESTNAME libs-kobase-TestKUnit ${TestKoUnit_SRCS})
+target_link_libraries(TestKUnit kflake ${QT_QTTEST_LIBRARY})
+
 ########### end ###############
