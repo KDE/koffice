@@ -122,7 +122,7 @@ TextTool::TextTool(KCanvasBase *canvas)
         m_changeTipTimer(this),
         m_changeTipCursorPos(0)
 {
-    setFlags(ToolHandleKeyEvents | ToolHandleShortcutOverride);
+    setFlags(ToolHandleKeyEvents | ToolHandleShortcutOverride | ToolMouseTracking);
 
     m_actionFormatBold  = new KAction(KIcon("format-text-bold"), i18n("Bold"), this);
     addAction("format_bold", m_actionFormatBold);
