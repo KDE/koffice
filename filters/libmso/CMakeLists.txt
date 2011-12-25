@@ -1,4 +1,4 @@
-include_directories( ${QT_INCLUDES} ${KDE4_INCLUDES} ../../libs/odf)
+include_directories( ${QT_INCLUDES} ${KDE4_INCLUDES} ${FLAKE_INCLUDES})
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${KDE4_ENABLE_EXCEPTIONS}")
 if(NOT MSVC)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
