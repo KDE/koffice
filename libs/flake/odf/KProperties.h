@@ -23,7 +23,7 @@
 #include <QtCore/QString>
 #include <QtCore/QMap>
 #include <QtCore/QVariant>
-#include "kodf_export.h"
+#include "flake_export.h"
 
 class QDomElement;
 
@@ -31,7 +31,7 @@ class QDomElement;
  * A KProperties is the (de-)serializable representation of
  * a key-value map. The serialisation format is XML.
  */
-class KODF_EXPORT KProperties
+class FLAKE_EXPORT KProperties
 {
 public:
 

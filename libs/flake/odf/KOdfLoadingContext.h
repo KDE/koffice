@@ -22,7 +22,7 @@
 
 class KOdfStore;
 
-#include "kodf_export.h"
+#include "flake_export.h"
 #include "KOdfStyleStack.h"			//krazy:exclude=includes
 #include "KOdfStylesReader.h"			//krazy:exclude=includes
 
@@ -35,7 +35,7 @@ class KOdfStore;
  *
  * @author David Faure <faure@kde.org>
  */
-class KODF_EXPORT KOdfLoadingContext
+class FLAKE_EXPORT KOdfLoadingContext
 {
 public:
     enum GeneratorType { Unknown, KOffice, OpenOffice, MicrosoftOffice };

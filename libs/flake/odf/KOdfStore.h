@@ -26,7 +26,7 @@
 #include <QtCore/QIODevice>
 #include <QtCore/QStack>
 #include <QtCore/QByteArray>
-#include "kodf_export.h"
+#include "flake_export.h"
 
 #include <kurl.h>
 
@@ -39,7 +39,7 @@ class KOdfStorePrivate;
  * We call a "store" the file on the hard disk (the one the users sees)
  * and call a "file" a file inside the store.
  */
-class KODF_EXPORT KOdfStore
+class FLAKE_EXPORT KOdfStore
 {
 public:
 

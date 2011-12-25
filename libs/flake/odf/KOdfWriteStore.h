@@ -24,7 +24,7 @@ class QIODevice;
 class KXmlWriter;
 class KOdfStore;
 
-#include "kodf_export.h"
+#include "flake_export.h"
 
 /**
  * Helper class around KOdfStore for writing out ODF files.
@@ -46,7 +46,7 @@ class KOdfStore;
  *
  * @author: David Faure <faure@kde.org>
  */
-class KODF_EXPORT KOdfWriteStore
+class FLAKE_EXPORT KOdfWriteStore
 {
 public:
     /// @param store recontents the property of the caller

@@ -21,14 +21,14 @@
 #define KODFEMBEDDEDDOCUMENTSAVER_H
 
 #include "KOdfDocumentBase.h"				//krazy:exclude=includes
-#include "kodf_export.h"
+#include "flake_export.h"
 
 class KXmlWriter;
 
 /**
  * This class is used to save embedded objects in ODF documents.
  */
-class KODF_EXPORT KOdfEmbeddedDocumentSaver
+class FLAKE_EXPORT KOdfEmbeddedDocumentSaver
 {
 public:
     KOdfEmbeddedDocumentSaver();

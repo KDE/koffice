@@ -22,7 +22,7 @@
 #ifndef KODFSETTINGS_H
 #define KODFSETTINGS_H
 
-#include "kodf_export.h"
+#include "flake_export.h"
 #include "KXmlReader.h"			//krazy:exclude=includes
 
 /**
@@ -67,7 +67,7 @@
  * or item-map once, and then lookup multiple items inside it.
  * It also allows "drilling down" inside the tree in case of nesting.
  */
-class KODF_EXPORT KOdfSettings
+class FLAKE_EXPORT KOdfSettings
 {
 public:
     /**
@@ -92,7 +92,7 @@ public:
     class IndexedMap;
     class NamedMap;
     /// Represents a collection of items (config-item or maps).
-    class KODF_EXPORT Items
+    class FLAKE_EXPORT Items
     {
         friend class KOdfSettings;
         friend class IndexedMap;
@@ -150,7 +150,7 @@ public:
         const KOdfSettings *m_settings;
     };
 
-    class KODF_EXPORT IndexedMap : public Map
+    class FLAKE_EXPORT IndexedMap : public Map
     {
         friend class Items;
         IndexedMap(const KXmlElement& elem, const KOdfSettings* settings)
@@ -160,7 +160,7 @@ public:
         Items entry(int entryIndex) const;
     };
 
-    class KODF_EXPORT NamedMap : public Map
+    class FLAKE_EXPORT NamedMap : public Map
     {
         friend class Items;
         NamedMap(const KXmlElement &elem, const KOdfSettings *settings)

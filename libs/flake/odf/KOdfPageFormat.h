@@ -23,7 +23,7 @@
 #ifndef KODFPAGEFORMAT_H
 #define KODFPAGEFORMAT_H
 
-#include "kodf_export.h"
+#include "flake_export.h"
 
 #include <QtGui/QPrinter>
 
@@ -85,53 +85,53 @@ enum Orientation {
  * (you may want to take care of those cases separately).
  * Usually passed to KPrinter::setPageSize().
  */
-KODF_EXPORT QPrinter::PageSize printerPageSize(Format format);
+FLAKE_EXPORT QPrinter::PageSize printerPageSize(Format format);
 
 /**
  * Returns the width (in mm) for a given page format and orientation
  * 'Custom' isn't supported by this function, obviously.
  */
-KODF_EXPORT qreal width(Format format, Orientation orientation = Landscape);
+FLAKE_EXPORT qreal width(Format format, Orientation orientation = Landscape);
 
 /**
  * Returns the height (in mm) for a given page format and orientation
  * 'Custom' isn't supported by this function, obviously.
  */
-KODF_EXPORT qreal height(Format format, Orientation orientation  = Landscape);
+FLAKE_EXPORT qreal height(Format format, Orientation orientation  = Landscape);
 
 /**
  * Returns the internal name of the given page format.
  * Use for saving.
  */
-KODF_EXPORT QString formatString(Format format);
+FLAKE_EXPORT QString formatString(Format format);
 
 /**
  * Convert a format string (internal name) to a page format value.
  * Use for loading.
  */
-KODF_EXPORT Format formatFromString(const QString &string);
+FLAKE_EXPORT Format formatFromString(const QString &string);
 
 /**
  * Returns the default format (based on the KControl settings)
  */
-KODF_EXPORT Format defaultFormat();
+FLAKE_EXPORT Format defaultFormat();
 
 /**
  * Returns the translated name of the given page format.
  * Use for showing the user.
  */
-KODF_EXPORT QString name(Format format);
+FLAKE_EXPORT QString name(Format format);
 
 /**
  * Lists the translated names of all the available formats
  */
-KODF_EXPORT QStringList allFormats();
+FLAKE_EXPORT QStringList allFormats();
 
 /**
  * Try to find the paper format for the given width and height (in mm).
  * Useful to some import filters.
  */
-KODF_EXPORT Format guessFormat(qreal width, qreal height);
+FLAKE_EXPORT Format guessFormat(qreal width, qreal height);
 }
 
 #endif

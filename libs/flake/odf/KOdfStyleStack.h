@@ -27,7 +27,7 @@
 
 #include <kdemacros.h>
 
-#include "kodf_export.h"
+#include "flake_export.h"
 #include <KXmlReader.h>				//krazy:exclude=includes
 
 /**
@@ -56,7 +56,7 @@
  *  or KOdfLoadingContext::addStyles to automatically push a style and all its
  *  parent styles onto the stack.
  */
-class KODF_EXPORT KOdfStyleStack
+class FLAKE_EXPORT KOdfStyleStack
 {
 public:
     /**

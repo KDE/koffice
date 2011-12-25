@@ -22,14 +22,14 @@
 
 #include <QtCore/QString>
 
-#include "kodf_export.h"
+#include "flake_export.h"
 /**
  * Repository of XML namespaces used for ODF documents.
  * 
  * Please make sure that you do not use the variables provided by this class in
  * the destructor of a static object.
  */
-class KODF_EXPORT KOdfXmlNS
+class FLAKE_EXPORT KOdfXmlNS
 {
 public:
     static const QString office;

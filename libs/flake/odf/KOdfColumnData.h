@@ -23,12 +23,12 @@
 #ifndef KODFCOLUMNDATA_H
 #define KODFCOLUMNDATA_H
 
-#include "kodf_export.h"
+#include "flake_export.h"
 
 #include <QtCore/QtGlobal>
 
 /** structure for columns */
-struct KODF_EXPORT KOdfColumnData {
+struct FLAKE_EXPORT KOdfColumnData {
     int columns;
     qreal columnSpacing;
     bool operator==(const KOdfColumnData& rhs) const {

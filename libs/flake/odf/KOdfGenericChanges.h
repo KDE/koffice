@@ -21,7 +21,7 @@
 #ifndef KODFGENERICCHANGES_H
 #define KODFGENERICCHANGES_H
 
-#include "kodf_export.h"
+#include "flake_export.h"
 #include "KOdfGenericStyle.h"			//krazy:exclude=includes
 #include "KOdfGenericChange.h"			//krazy:exclude=includes
 
@@ -34,7 +34,7 @@
  * We use a container outside the changeTracker, as the change tracker is linked to the document of a TextShapeData and is then not aware of the other TextShapeData.
  *
  */
-class KODF_EXPORT KOdfGenericChanges
+class FLAKE_EXPORT KOdfGenericChanges
 {
 public:
     KOdfGenericChanges();

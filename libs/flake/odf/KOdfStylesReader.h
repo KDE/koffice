@@ -24,14 +24,14 @@
 #include <QtCore/QHash>
 
 #include "KXmlReader.h"				//krazy:exclude=includes
-#include "kodf_export.h"
+#include "flake_export.h"
 #include "KOdf.h"				//krazy:exclude=includes
 
 
 /**
  * Repository of styles used during loading of OASIS/OOo file
  */
-class KODF_EXPORT KOdfStylesReader
+class FLAKE_EXPORT KOdfStylesReader
 {
 public:
     /// constructor

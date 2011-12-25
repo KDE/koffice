@@ -29,7 +29,7 @@
 #include <QtCore/QMap>
 #include <QtCore/QString>
 #include <iostream>
-#include "kodf_export.h"
+#include "flake_export.h"
 
 class KOdfGenericStyles;
 class KXmlWriter;
@@ -41,7 +41,7 @@ class KXmlWriter;
  *
  * @author David Faure <faure@kde.org>
  */
-class KODF_EXPORT KOdfGenericStyle
+class FLAKE_EXPORT KOdfGenericStyle
 {
 public:
     /**

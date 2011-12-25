@@ -21,7 +21,7 @@
 #define KODFPASTEBASE_H
 
 #include "KOdf.h"			//krazy:exclude=includes
-#include "kodf_export.h"
+#include "flake_export.h"
 
 class QMimeData;
 class KOdfStoreReader;
@@ -30,7 +30,7 @@ class KXmlElement;
 /**
  * This is a helper class to help you paste odf snippets.
  */
-class KODF_EXPORT KOdfPasteBase
+class FLAKE_EXPORT KOdfPasteBase
 {
 public:
     KOdfPasteBase();

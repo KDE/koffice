@@ -24,7 +24,7 @@
 
 #include <QtCore/QString>
 #include <QtCore/QSharedData>
-#include "kodf_export.h"
+#include "flake_export.h"
 
 class KXmlWriter;
 class KOdfFontDataPrivate;
@@ -35,7 +35,7 @@ class KOdfFontDataPrivate;
  * @todo add more parameters.
  * @todo add class KoFontFaceDeclarations instead of adding methods to KOdfGenericStyle?
  */
-class KODF_EXPORT KOdfFontData
+class FLAKE_EXPORT KOdfFontData
 {
 public:
     /**

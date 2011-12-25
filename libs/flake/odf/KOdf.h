@@ -21,7 +21,7 @@
 #ifndef KODF_H
 #define KODF_H
 
-#include "kodf_export.h"
+#include "flake_export.h"
 #include "KXmlReader.h"				//krazy:exclude=includes
 
 #include <QtCore/QString>
@@ -61,7 +61,7 @@ namespace KOdf
      * @param documentType the document type
      * @return the mime type used for the given document type
      */
-    KODF_EXPORT const char * mimeType(DocumentType documentType);
+    FLAKE_EXPORT const char * mimeType(DocumentType documentType);
 
     /**
      * Get the mime type
@@ -69,7 +69,7 @@ namespace KOdf
      * @param documentType the document type
      * @return the mime type used for templates of the given document type
      */
-    KODF_EXPORT const char * templateMimeType(DocumentType documentType);
+    FLAKE_EXPORT const char * templateMimeType(DocumentType documentType);
 
     /**
      * Get the mime type
@@ -79,7 +79,7 @@ namespace KOdf
      *                      if false only the element is returned
      * @return the body element name for the given document type
      */
-    KODF_EXPORT const char * bodyContentElement(DocumentType documentType, bool withNamespace);
+    FLAKE_EXPORT const char * bodyContentElement(DocumentType documentType, bool withNamespace);
 
     // -------------------- number styles methods.
     enum Format {
@@ -106,44 +106,44 @@ namespace KOdf
         QList<QPair<QString,QString> > styleMaps; // conditional formatting, first=condition, second=applyStyleName
     };
 
-    KODF_EXPORT QPair<QString, NumericStyleFormat> loadOdfNumberStyle(const KXmlElement &parent);
+    FLAKE_EXPORT QPair<QString, NumericStyleFormat> loadOdfNumberStyle(const KXmlElement &parent);
 
-    KODF_EXPORT QString saveOdfDateStyle(KOdfGenericStyles &mainStyles, const QString &format, bool klocaleFormat, const QString &prefix = QString(), const QString &suffix = QString());
-    KODF_EXPORT QString saveOdfTimeStyle(KOdfGenericStyles &mainStyles, const QString &format, bool klocaleFormat, const QString &prefix = QString(), const QString &suffix = QString());
-    KODF_EXPORT QString saveOdfFractionStyle(KOdfGenericStyles &mainStyles, const QString &format, const QString &prefix = QString(), const QString &suffix = QString());
-    KODF_EXPORT QString saveOdfScientificStyle(KOdfGenericStyles &mainStyles, const QString &format, const QString &prefix = QString(), const QString &suffix = QString());
-    KODF_EXPORT QString saveOdfNumberStyle(KOdfGenericStyles &mainStyles, const QString &format, const QString &prefix = QString(), const QString &suffix = QString());
-    KODF_EXPORT QString saveOdfPercentageStyle(KOdfGenericStyles &mainStyles, const QString &format, const QString &prefix = QString(), const QString &suffix = QString());
-    KODF_EXPORT QString saveOdfCurrencyStyle(KOdfGenericStyles &mainStyles, const QString &format, const QString &symbol, const QString &prefix = QString(), const QString &suffix = QString());
-    KODF_EXPORT QString saveOdfTextStyle(KOdfGenericStyles &mainStyles, const QString &format, const QString &prefix = QString(), const QString &suffix = QString());
+    FLAKE_EXPORT QString saveOdfDateStyle(KOdfGenericStyles &mainStyles, const QString &format, bool klocaleFormat, const QString &prefix = QString(), const QString &suffix = QString());
+    FLAKE_EXPORT QString saveOdfTimeStyle(KOdfGenericStyles &mainStyles, const QString &format, bool klocaleFormat, const QString &prefix = QString(), const QString &suffix = QString());
+    FLAKE_EXPORT QString saveOdfFractionStyle(KOdfGenericStyles &mainStyles, const QString &format, const QString &prefix = QString(), const QString &suffix = QString());
+    FLAKE_EXPORT QString saveOdfScientificStyle(KOdfGenericStyles &mainStyles, const QString &format, const QString &prefix = QString(), const QString &suffix = QString());
+    FLAKE_EXPORT QString saveOdfNumberStyle(KOdfGenericStyles &mainStyles, const QString &format, const QString &prefix = QString(), const QString &suffix = QString());
+    FLAKE_EXPORT QString saveOdfPercentageStyle(KOdfGenericStyles &mainStyles, const QString &format, const QString &prefix = QString(), const QString &suffix = QString());
+    FLAKE_EXPORT QString saveOdfCurrencyStyle(KOdfGenericStyles &mainStyles, const QString &format, const QString &symbol, const QString &prefix = QString(), const QString &suffix = QString());
+    FLAKE_EXPORT QString saveOdfTextStyle(KOdfGenericStyles &mainStyles, const QString &format, const QString &prefix = QString(), const QString &suffix = QString());
 
     // -------------------- Graphics Styles
-    KODF_EXPORT void saveOdfFillStyle(KOdfGenericStyle &styleFill, KOdfGenericStyles& mainStyles, const QBrush &brush);
+    FLAKE_EXPORT void saveOdfFillStyle(KOdfGenericStyle &styleFill, KOdfGenericStyles& mainStyles, const QBrush &brush);
 
-    KODF_EXPORT void saveOdfStrokeStyle(KOdfGenericStyle &styleStroke, KOdfGenericStyles &mainStyles, const QPen &pen);
+    FLAKE_EXPORT void saveOdfStrokeStyle(KOdfGenericStyle &styleStroke, KOdfGenericStyles &mainStyles, const QPen &pen);
 
-    KODF_EXPORT QString saveOdfHatchStyle(KOdfGenericStyles &mainStyles, const QBrush &brush);
+    FLAKE_EXPORT QString saveOdfHatchStyle(KOdfGenericStyles &mainStyles, const QBrush &brush);
 
     /// Saves gradient style of brush into mainStyles and returns the styles name
-    KODF_EXPORT QString saveOdfGradientStyle(KOdfGenericStyles &mainStyles, const QBrush &brush);
+    FLAKE_EXPORT QString saveOdfGradientStyle(KOdfGenericStyles &mainStyles, const QBrush &brush);
 
     /// Loads gradient style from style stack and stylesReader adapted to the given size and returns a brush
-    KODF_EXPORT QBrush loadOdfGradientStyle(const KOdfStyleStack &styleStack, const KOdfStylesReader &stylesReader, const QSizeF &size);
+    FLAKE_EXPORT QBrush loadOdfGradientStyle(const KOdfStyleStack &styleStack, const KOdfStylesReader &stylesReader, const QSizeF &size);
 
     /// Loads gradient style with the given name from style stack and stylesReader adapted to the given size and returns a brush
-    KODF_EXPORT QBrush loadOdfGradientStyleByName(const KOdfStylesReader &stylesReader, const QString &styleName, const QSizeF &size);
+    FLAKE_EXPORT QBrush loadOdfGradientStyleByName(const KOdfStylesReader &stylesReader, const QString &styleName, const QSizeF &size);
 
-    KODF_EXPORT QBrush loadOdfFillStyle(const KOdfStyleStack &styleStack, const QString &fill,  const KOdfStylesReader &stylesReader);
+    FLAKE_EXPORT QBrush loadOdfFillStyle(const KOdfStyleStack &styleStack, const QString &fill,  const KOdfStylesReader &stylesReader);
 
-    KODF_EXPORT QPen loadOdfStrokeStyle(const KOdfStyleStack &styleStack, const QString &stroke, const KOdfStylesReader &stylesReader);
+    FLAKE_EXPORT QPen loadOdfStrokeStyle(const KOdfStyleStack &styleStack, const QString &stroke, const KOdfStylesReader &stylesReader);
 
     /// Helper function to parse a transformation attribute
-    KODF_EXPORT QTransform loadTransformation(const QString &transformation);
+    FLAKE_EXPORT QTransform loadTransformation(const QString &transformation);
 
     /// Helper function to create a transformation attribute
-    KODF_EXPORT QString saveTransformation(const QTransform &transformation, bool appendTranslateUnit = true);
+    FLAKE_EXPORT QString saveTransformation(const QTransform &transformation, bool appendTranslateUnit = true);
 
-    KODF_EXPORT bool isEncryptionSupported();
+    FLAKE_EXPORT bool isEncryptionSupported();
 }
 
 #endif /* KODF_H */

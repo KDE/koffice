@@ -23,7 +23,7 @@
 #ifndef KODFBORDERS_H
 #define KODFBORDERS_H
 
-#include "kodf_export.h"
+#include "flake_export.h"
 
 #include <QtGui/QColor>
 #include <QtCore/QSharedData>
@@ -43,7 +43,7 @@ class KXmlElement;
  *
  */
 
-class KODF_EXPORT KOdfBorders
+class FLAKE_EXPORT KOdfBorders
 {
 public:
 

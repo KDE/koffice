@@ -20,7 +20,7 @@
 #ifndef KODFSTOREREADER_H
 #define KODFSTOREREADER_H
 
-#include "kodf_export.h"
+#include "flake_export.h"
 
 class QString;
 class QIODevice;
@@ -37,7 +37,7 @@ class KXmlElement;
  *
  * @author: David Faure <faure@kde.org>
  */
-class KODF_EXPORT KOdfStoreReader
+class FLAKE_EXPORT KOdfStoreReader
 {
 public:
     /// @param store recontents the property of the caller

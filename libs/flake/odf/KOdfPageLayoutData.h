@@ -29,7 +29,7 @@
 #include "KXmlReader.h"			//krazy:exclude=includes
 #include "KOdfBorders.h"		//krazy:exclude=includes
 
-#include "kodf_export.h"
+#include "flake_export.h"
 
 /**
  * This structure defines the page layout, including
@@ -88,24 +88,24 @@ struct KOdfPageLayoutData {
     /// page border definition
     KOdfBorders  border;
 
-    KODF_EXPORT bool operator==(const KOdfPageLayoutData &l) const;
-    KODF_EXPORT bool operator!=(const KOdfPageLayoutData& l) const;
+    FLAKE_EXPORT bool operator==(const KOdfPageLayoutData &l) const;
+    FLAKE_EXPORT bool operator!=(const KOdfPageLayoutData& l) const;
 
     /**
      * Save this page layout to ODF.
      */
-    KODF_EXPORT KOdfGenericStyle saveOdf() const;
+    FLAKE_EXPORT KOdfGenericStyle saveOdf() const;
 
     /**
      * Load this page layout from ODF
      */
-    KODF_EXPORT void loadOdf(const KXmlElement &style);
+    FLAKE_EXPORT void loadOdf(const KXmlElement &style);
 
     /**
      * Construct a page layout with the default page size depending on the locale settings,
      * default margins (2 cm), and portrait orientation.
      */
-    KODF_EXPORT KOdfPageLayoutData();
+    FLAKE_EXPORT KOdfPageLayoutData();
 };
 
 #endif /* KOPAGELAYOUT_H */

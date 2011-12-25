@@ -30,14 +30,14 @@ class KOdfStoreReader;
 class KOdfWriteStore;
 class KOdfEmbeddedDocumentSaver;
 
-#include "kodf_export.h"
+#include "flake_export.h"
 
 /**
  * Base class for documents that can load and save ODF. Most of the
  * implementation is still in KoDocument, though that should probably
  * change.
  */
-class KODF_EXPORT KOdfDocumentBase
+class FLAKE_EXPORT KOdfDocumentBase
 {
 public:
 

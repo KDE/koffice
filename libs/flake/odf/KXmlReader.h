@@ -20,7 +20,7 @@
 #ifndef KXMLREADER_H
 #define KXMLREADER_H
 
-#include "kodf_export.h"
+#include "flake_export.h"
 
 #include <QtCore/QPair>
 #include <QtXml/QDomNode>
@@ -56,7 +56,7 @@ class KXmlElement;
 *
 * @author Ariya Hidayat <ariya@kde.org>
 */
-class KODF_EXPORT KXmlNode
+class FLAKE_EXPORT KXmlNode
 {
 public:
 
@@ -143,7 +143,7 @@ protected:
 * @author Ariya Hidayat <ariya@kde.org>
 */
 
-class KODF_EXPORT KXmlElement: public KXmlNode
+class FLAKE_EXPORT KXmlElement: public KXmlNode
 {
 public:
     KXmlElement();
@@ -172,7 +172,7 @@ private:
 * KXmlText represents a text in a DOM tree.
 * @author Ariya Hidayat <ariya@kde.org>
 */
-class KODF_EXPORT KXmlText: public KXmlNode
+class FLAKE_EXPORT KXmlText: public KXmlNode
 {
 public:
     KXmlText();
@@ -195,7 +195,7 @@ private:
 * KXmlCDATASection represents a CDATA section in a DOM tree.
 * @author Ariya Hidayat <ariya@kde.org>
 */
-class KODF_EXPORT KXmlCDATASection: public KXmlText
+class FLAKE_EXPORT KXmlCDATASection: public KXmlText
 {
 public:
     KXmlCDATASection();
@@ -219,7 +219,7 @@ private:
 * @author Ariya Hidayat <ariya@kde.org>
 */
 
-class KODF_EXPORT KXmlDocumentType: public KXmlNode
+class FLAKE_EXPORT KXmlDocumentType: public KXmlNode
 {
 public:
     KXmlDocumentType();
@@ -248,7 +248,7 @@ private:
 * @author Ariya Hidayat <ariya@kde.org>
 */
 
-class KODF_EXPORT KXmlDocument: public KXmlNode
+class FLAKE_EXPORT KXmlDocument: public KXmlNode
 {
 public:
     KXmlDocument();
@@ -323,38 +323,38 @@ namespace KoXml
  *
  * Note: do *NOT* use getElementsByTagNameNS, it's recursive!
  */
-KODF_EXPORT KXmlElement namedItemNS(const KXmlNode& node,
+FLAKE_EXPORT KXmlElement namedItemNS(const KXmlNode& node,
                                         const QString& nsURI, const QString& localName);
 
 /**
  * Explicitly load child nodes of specified node, up to given depth.
  * This function has no effect if QDom is used.
  */
-KODF_EXPORT void load(KXmlNode& node, int depth = 1);
+FLAKE_EXPORT void load(KXmlNode& node, int depth = 1);
 
 /**
  * Unload child nodes of specified node.
  * This function has no effect if QDom is used.
  */
-KODF_EXPORT void unload(KXmlNode& node);
+FLAKE_EXPORT void unload(KXmlNode& node);
 
 /**
  * Get the number of child nodes of specified node.
  */
-KODF_EXPORT int childNodesCount(const KXmlNode& node);
+FLAKE_EXPORT int childNodesCount(const KXmlNode& node);
 
 /**
  * Return the name of all attributes of specified node.
  */
-KODF_EXPORT QStringList attributeNames(const KXmlNode& node);
+FLAKE_EXPORT QStringList attributeNames(const KXmlNode& node);
 
 /**
  * Convert KoXml classes to the corresponding QDom classes, which has
  * 'ownerDoc' as the owner document (QDomDocument instance).
  */
-KODF_EXPORT QDomNode asQDomNode(QDomDocument ownerDoc, const KXmlNode& node);
-KODF_EXPORT QDomElement asQDomElement(QDomDocument ownerDoc, const KXmlElement& element);
-KODF_EXPORT QDomDocument asQDomDocument(QDomDocument ownerDoc, const KXmlDocument& document);
+FLAKE_EXPORT QDomNode asQDomNode(QDomDocument ownerDoc, const KXmlNode& node);
+FLAKE_EXPORT QDomElement asQDomElement(QDomDocument ownerDoc, const KXmlElement& element);
+FLAKE_EXPORT QDomDocument asQDomDocument(QDomDocument ownerDoc, const KXmlDocument& document);
 
 /*
  * Load an XML document from specified device to a document. You can of
@@ -365,7 +365,7 @@ KODF_EXPORT QDomDocument asQDomDocument(QDomDocument ownerDoc, const KXmlDocumen
  *
  * Note: it is assumed that the XML uses UTF-8 encoding.
  */
-KODF_EXPORT bool setDocument(KXmlDocument& doc, QIODevice* device,
+FLAKE_EXPORT bool setDocument(KXmlDocument& doc, QIODevice* device,
                                 bool namespaceProcessing, QString* errorMsg = 0,
                                 int* errorLine = 0, int* errorColumn = 0);
 }

@@ -63,7 +63,7 @@ class KOdfFontData;
  *
  * @author David Faure <faure@kde.org>
  */
-class KODF_EXPORT KOdfGenericStyles
+class FLAKE_EXPORT KOdfGenericStyles
 {
 public:
     /// Single style with assigned name
@@ -256,7 +256,7 @@ public:
     void insertStyleRelation(const QString &source, const QString &target, const char *tagName);
 
 private:
-    friend KODF_EXPORT QDebug operator<<(QDebug dbg, const KOdfGenericStyles& styles);
+    friend FLAKE_EXPORT QDebug operator<<(QDebug dbg, const KOdfGenericStyles& styles);
 
     class Private;
     Private * const d;
@@ -265,6 +265,6 @@ private:
 Q_DECLARE_OPERATORS_FOR_FLAGS(KOdfGenericStyles::InsertionFlags)
 
 //! Debug stream operator.
-KODF_EXPORT QDebug operator<<(QDebug dbg, const KOdfGenericStyles& styles);
+FLAKE_EXPORT QDebug operator<<(QDebug dbg, const KOdfGenericStyles& styles);
 
 #endif /* KODFGENERICSTYLES_H */

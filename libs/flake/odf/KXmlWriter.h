@@ -25,7 +25,7 @@
 #include <QtCore/QStack>
 #include <QtCore/QMap>
 #include <QtCore/QIODevice>
-#include "kodf_export.h"
+#include "flake_export.h"
 
 
 /**
@@ -34,7 +34,7 @@
  * document in memory (like QDom does), and avoids using QTextStream at all
  * (which in Qt3 has major performance issues when converting to utf8).
  */
-class KODF_EXPORT KXmlWriter
+class FLAKE_EXPORT KXmlWriter
 {
 public:
     /**

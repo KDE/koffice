@@ -23,7 +23,7 @@
 #include <QtCore/QList>
 #include <QtCore/QMap>
 #include <QtCore/QString>
-#include "kodf_export.h"
+#include "flake_export.h"
 
 #include <QtCore/QByteArray>
 
@@ -39,7 +39,7 @@ class KXmlWriter;
  *
  * Derived from code from KOdfGenericStyle
  */
-class KODF_EXPORT KOdfGenericChange
+class FLAKE_EXPORT KOdfGenericChange
 {
 public:
     /**

@@ -27,7 +27,7 @@
 #include <QtCore/QVariant>
 #include <QtCore/QDebug>
 #include <math.h> // for floor
-#include "kodf_export.h"
+#include "flake_export.h"
 
 // 1 inch ^= 72 pt
 // 1 inch ^= 25.399956 mm (-pedantic ;p)
@@ -55,7 +55,7 @@
  * When displaying a value to the user, the value is converted to the user's unit
  * of choice, and rounded to a reasonable precision to avoid 0.999999
  */
-class KODF_EXPORT KUnit
+class FLAKE_EXPORT KUnit
 {
 public:
     /** Length units supported by KOffice. */
@@ -208,7 +208,7 @@ private:
 };
 
 #ifndef QT_NO_DEBUG_STREAM
-KODF_EXPORT QDebug operator<<(QDebug, const KUnit &);
+FLAKE_EXPORT QDebug operator<<(QDebug, const KUnit &);
 #endif
 
 Q_DECLARE_METATYPE(KUnit)
