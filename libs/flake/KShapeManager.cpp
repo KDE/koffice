@@ -45,6 +45,8 @@
 #include <QtCore/qmath.h>
 #include <kdebug.h>
 
+// #define DEBUG_CONNECTIONS
+
 KShapeManagerPrivate::KShapeManagerPrivate(KShapeManager *shapeManager, KCanvasBase *c)
     : selection(new KShapeSelection(shapeManager)),
     canvas(c),
@@ -660,6 +662,9 @@ struct ko_NodeIndex {
     bool operator==(const ko_NodeIndex &other) const { // qhash needs this explicitly
         return other.x == x && other.y == y;
     }
+    bool operator!=(const ko_NodeIndex &other) const { // for completeness sake
+        return !operator==(other);
+    }
 
     uint x : 16;
     uint y : 16;
@@ -709,6 +714,18 @@ struct ko_Node {
     ko_NodeIndex directionForShortedPath;
 };
 
+#ifndef QT_NO_DEBUG_STREAM
+QDebug operator<<(QDebug debug, const ko_Node &node)
+{
+#ifndef NDEBUG
+    debug.nospace() << node.x << "," << node.y << "(" << node.score << ")";
+#else
+    Q_UNUSED(node);
+#endif
+    return debug.nospace();
+}
+#endif
+
 inline ko_NodeIndex::ko_NodeIndex(const ko_Node &node)
 {
     x = node.x;
@@ -726,9 +743,13 @@ QPolygonF KShapeManagerPrivate::routeConnection(KShapeConnection *connection, co
 
     ko_Node begin(origin, from);
     begin.score = 0;
+    begin.directionForShortedPath.x = originX; // set origin too, so we can determine we have no prev dir
+    begin.directionForShortedPath.y = originY;
     nodes.insert(ko_NodeIndex(begin), begin);
     const ko_Node destination(origin, to);
-    // kDebug() << "begin" << begin.x << begin.y << "destination; " << destination.x << destination.y;
+#ifdef DEBUG_CONNECTIONS
+     kDebug() << "begin" << begin.x << begin.y << "destination; " << destination.x << destination.y;
+#endif
     QList<ko_NodeIndex> leafs;
     leafs << ko_NodeIndex(begin);
 
@@ -747,7 +768,8 @@ QPolygonF KShapeManagerPrivate::routeConnection(KShapeConnection *connection, co
                 Up = 0,
                 Down,
                 Left,
-                Right
+                Right,
+                NotMoved
             };
             Q_ASSERT(nodes.contains(index));
             if (index.x == destination.x && index.y == destination.y) {
@@ -757,15 +779,20 @@ QPolygonF KShapeManagerPrivate::routeConnection(KShapeConnection *connection, co
                 ko_NodeIndex i = index;
                 QPolygonF answer;
                 answer << to;
-                while (i.x != 0 && i.y != 0) {
+                const ko_NodeIndex beginIndex(begin);
+                while (i != beginIndex) {
                     Q_ASSERT(nodes.contains(i));
                     // TODO avoid inserting too many points on a straight line
-                    //qDebug() << "path goes via; " << nodes[i].x << "," << nodes[i].y;
+#ifdef DEBUG_CONNECTIONS
+                    qDebug() << "path goes via; " << nodes[i].x << "," << nodes[i].y << nodes[i].score;
+#endif
                     answer << nodes[i].point(origin) + roundingError;
                     i = nodes[i].directionForShortedPath;
                 }
                 answer << from;
+#ifdef DEBUG_CONNECTIONS
                 qDebug() << "took" << iterations << "iterations and" << nodes.count() << "nodes";
+#endif
                 return answer;
             }
 
@@ -777,7 +804,7 @@ QPolygonF KShapeManagerPrivate::routeConnection(KShapeConnection *connection, co
                 continue;
             }
 
-            Direction prevDirection;
+            Direction prevDirection = NotMoved;
             if (indexedNode.x > indexedNode.directionForShortedPath.x)
                 prevDirection = Right;
             else if (indexedNode.x < indexedNode.directionForShortedPath.x)
@@ -791,10 +818,14 @@ QPolygonF KShapeManagerPrivate::routeConnection(KShapeConnection *connection, co
                 ko_Node node(index.x + (direction == Left ? -1 : (direction == Right ? 1 : 0)),
                         index.y + (direction == Up ? -1 : (direction == Down ? 1 : 0)));
 
-                const QPointF orig(node.point(origin));
+                const QPointF currentLocation(node.point(origin));
                 node.score = prevScore + 10;
-                if (!tree.contains(orig).isEmpty())
-                    node.score += 50; // going through a shape is very expensive.
+                foreach (KShape *shape, tree.contains(currentLocation)) {
+                    if (shape->isVisible()) {
+                        node.score += 50; // going through a shape is very expensive.
+                        break;
+                    }
+                }
                 // punish wrong direction.
                 if (direction == Left && begin.x <= destination.x)
                     node.score += 1;
@@ -804,7 +835,7 @@ QPolygonF KShapeManagerPrivate::routeConnection(KShapeConnection *connection, co
                     node.score += 1;
                 else if (direction == Down && begin.y >= destination.y)
                     node.score += 1;
-                if (direction != prevDirection)
+                if (direction != prevDirection && prevDirection != NotMoved)
                     node.score += 1;
 
                 ko_NodeIndex nodeIndex(node);
@@ -816,6 +847,17 @@ QPolygonF KShapeManagerPrivate::routeConnection(KShapeConnection *connection, co
                 nodes[nodeIndex] = node;
                 leafs.append(nodeIndex);
                 bestScore = qMin(bestScore, node.score);
+
+#ifdef DEBUG_CONNECTIONS
+                QList<ko_Node> polygon;
+                ko_NodeIndex path = nodeIndex;
+                const ko_NodeIndex origin(begin);
+                while (path != origin) {
+                    polygon << nodes[path];
+                    path = nodes[path].directionForShortedPath;
+                }
+                qDebug() << " + " << node.score << polygon;
+#endif
             }
         }
         bestScorePrevIteration = bestScore;
