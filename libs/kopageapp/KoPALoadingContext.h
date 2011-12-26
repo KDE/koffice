@@ -28,7 +28,7 @@
 #include "kopageapp_export.h"
 
 class KoPAMasterPage;
-class KoPAPage;
+class KoPAPageBase;
 
 /// Context needed for loading the data of a pageapp
 class KOPAGEAPP_EXPORT KoPALoadingContext : public KShapeLoadingContext
@@ -68,7 +68,7 @@ public:
      *
      * @param name name of the page.
      */
-    KoPAPage* pageByName(const QString &name);
+    KoPAPageBase* pageByName(const QString &name);
 
     /**
      * Add a master page to the context.
@@ -76,7 +76,7 @@ public:
      * @param name name of the page.
      * @param page page to add.
      */
-    void addPage(const QString &name, KoPAPage* page);
+    void addPage(const QString &name, KoPAPageBase* page);
 
 private:
     class Private;

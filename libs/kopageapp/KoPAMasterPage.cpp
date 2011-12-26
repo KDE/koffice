@@ -1,5 +1,6 @@
 /* This file is part of the KDE project
    Copyright (C) 2006-2009 Thorsten Zachmann <zachmann@kde.org>
+   Copyright (C) 2011 Thomas Zander <zander@kde.org>
 
    This library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public
@@ -19,26 +20,27 @@
 
 #include "KoPAMasterPage.h"
 
-#include <QBuffer>
-#include <QPainter>
-
-#include <KShapePainter.h>
-#include <KOdfGenericStyle.h>
-#include <KXmlWriter.h>
-#include <KOdfXmlNS.h>
-#include <KOdfStylesReader.h>
-#include <KOdfLoadingContext.h>
-#include <KoZoomHandler.h>
-
 #include "KoPASavingContext.h"
 #include "KoPALoadingContext.h"
 #include "KoPAUtil.h"
 #include "KoPAPixmapCache.h"
 
+#include <QBuffer>
+#include <QPainter>
+
+#include <KOdfXmlNS.h>
+#include <KXmlWriter.h>
+#include <KShapePainter.h>
+#include <KShapeBackgroundBase.h>
+#include <KOdfStylesReader.h>
+#include <KOdfLoadingContext.h>
+#include <KoZoomHandler.h>
+
 KoPAMasterPage::KoPAMasterPage()
-: KoPAPageBase()
+    : KoPAPage(0)
 {
     setName("Standard");
+    m_pageProperties = 0;
 }
 
 KoPAMasterPage::~KoPAMasterPage()
@@ -78,7 +80,10 @@ void KoPAMasterPage::saveOdf(KShapeSavingContext &context) const
 
 void KoPAMasterPage::loadOdfPageTag(const KXmlElement &element, KoPALoadingContext &loadingContext)
 {
-    KoPAPageBase::loadOdfPageTag(element, loadingContext);
+    KOdfStyleStack &styleStack = loadingContext.odfLoadingContext().styleStack();
+    if (styleStack.hasProperty(KOdfXmlNS::draw, "fill")) {
+        setBackground(loadOdfFill(loadingContext));
+    }
     if (element.hasAttributeNS(KOdfXmlNS::style, "display-name")) {
         setName(element.attributeNS(KOdfXmlNS::style, "display-name"));
     } else {
@@ -94,32 +99,6 @@ void KoPAMasterPage::loadOdfPageTag(const KXmlElement &element, KoPALoadingConte
     }
 
     setPageLayout(pageLayout);
-}
-
-bool KoPAMasterPage::displayMasterShapes()
-{
-    return false;
-}
-
-void KoPAMasterPage::setDisplayMasterShapes(bool display)
-{
-    Q_UNUSED(display);
-}
-
-bool KoPAMasterPage::displayMasterBackground()
-{
-    return false;
-}
-
-void KoPAMasterPage::setDisplayMasterBackground(bool display)
-{
-    Q_UNUSED(display);
-}
-
-bool KoPAMasterPage::displayShape(KShape *shape) const
-{
-    Q_UNUSED(shape);
-    return true;
 }
 
 void KoPAMasterPage::pageUpdated()
@@ -154,9 +133,29 @@ QPixmap KoPAMasterPage::generateThumbnail(const QSize &size)
 
 void KoPAMasterPage::paintPage(QPainter &painter, KoZoomHandler &zoomHandler)
 {
-    paintBackground(painter, zoomHandler);
+    painter.save();
+    applyConversion(painter, zoomHandler);
+    KOdfPageLayoutData layout = pageLayout();
+    painter.setPen(Qt::black);
+
+    if(background())
+    {
+        QPainterPath p;
+        p.addRect(QRectF(0.0, 0.0, layout.width, layout.height));
+        background()->paint(painter, p);
+    }
+
+    painter.restore();
 
     KShapePainter shapePainter;
     shapePainter.setShapes(shapes());
     shapePainter.paint(painter, zoomHandler);
 }
+
+void KoPAMasterPage::saveOdfPageStyleData(KOdfGenericStyle &style, KoPASavingContext &paContext) const
+{
+    KShapeBackgroundBase * bg = background();
+    if (bg)
+        bg->fillStyle(style, paContext);
+}
+

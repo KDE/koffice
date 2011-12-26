@@ -1,5 +1,6 @@
 /* This file is part of the KDE project
    Copyright (C) 2006-2010 Thorsten Zachmann <zachmann@kde.org>
+   Copyright (C) 2011 Thomas Zander <zander@kde.org>
 
    This library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public
@@ -21,23 +22,31 @@
 #include "KoPALoadingContext.h"
 #include "KoPAPixmapCache.h"
 #include "KoPAPageContainerModel.h"
+#include "KoPAMasterPage.h"
+#include "KoPAUtil.h"
 #include "KoPASavingContext.h"
 
 #include <QPainter>
 
 #include <kdebug.h>
 
+#include <KXmlWriter.h>
 #include <KOdfXmlNS.h>
-#include <KOdfPageLayoutData.h>
+#include <KShapePainter.h>
 #include <KOdfLoadingContext.h>
 #include <KShapeLayer.h>
+#include <KoZoomHandler.h>
 #include <KShapeRegistry.h>
 #include <KOdfStyleStack.h>
 #include <KShapeBackgroundBase.h>
 
-KoPAPageBase::KoPAPageBase()
-: KShapeContainer(new KoPAPageContainerModel())
+KoPAPageBase::KoPAPageBase(KoPAMasterPage *masterPage)
+    : KShapeContainer(new KoPAPageContainerModel()),
+    m_masterPage(masterPage),
+    m_pageProperties(0)
 {
+    if (m_masterPage)
+        m_pageProperties = UseMasterBackground | DisplayMasterBackground | DisplayMasterShapes;
     // Add a default layer
     KShapeLayer* layer = new KShapeLayer;
     addShape(layer);
@@ -45,23 +54,6 @@ KoPAPageBase::KoPAPageBase()
 
 KoPAPageBase::~KoPAPageBase()
 {
-}
-
-void KoPAPageBase::paintBackground(QPainter &painter, const KViewConverter &converter)
-{
-    painter.save();
-    applyConversion(painter, converter);
-    KOdfPageLayoutData layout = pageLayout();
-    painter.setPen(Qt::black);
-
-    if(background())
-    {
-        QPainterPath p;
-        p.addRect(QRectF(0.0, 0.0, layout.width, layout.height));
-        background()->paint(painter, p);
-    }
-
-    painter.restore();
 }
 
 void KoPAPageBase::saveOdfPageContent(KoPASavingContext &paContext) const
@@ -113,13 +105,6 @@ QString KoPAPageBase::saveOdfPageStyle(KoPASavingContext &paContext) const
     saveOdfPageStyleData(style, paContext);
 
     return paContext.mainStyles().insert(style, "dp");
-}
-
-void KoPAPageBase::saveOdfPageStyleData(KOdfGenericStyle &style, KoPASavingContext &paContext) const
-{
-    KShapeBackgroundBase * bg = background();
-    if(bg)
-        bg->fillStyle(style, paContext);
 }
 
 bool KoPAPageBase::saveOdfAnimations(KoPASavingContext &paContext) const
@@ -188,17 +173,6 @@ bool KoPAPageBase::loadOdf(const KXmlElement &element, KShapeLoadingContext &loa
     loadOdfPageExtra(element, paContext);
 
     return true;
-}
-
-void KoPAPageBase::loadOdfPageTag(const KXmlElement &element,
-                                   KoPALoadingContext &loadingContext)
-{
-    Q_UNUSED(element);
-    KOdfStyleStack &styleStack = loadingContext.odfLoadingContext().styleStack();
-
-    if (styleStack.hasProperty(KOdfXmlNS::draw, "fill")) {
-        setBackground(loadOdfFill(loadingContext));
-    }
 }
 
 void KoPAPageBase::loadOdfPageExtra(const KXmlElement &element, KoPALoadingContext &loadingContext)
@@ -283,4 +257,172 @@ QString KoPAPageBase::thumbnailKey() const
 KShapeManagerPaintingStrategy * KoPAPageBase::getPaintingStrategy() const
 {
     return 0;
+}
+
+bool KoPAPageBase::displayShape(KShape *shape) const
+{
+    Q_UNUSED(shape);
+    return true;
+}
+
+void KoPAPageBase::setDisplayMasterBackground(bool display)
+{
+    if (display) {
+        m_pageProperties |= UseMasterBackground;
+    }
+    else {
+        m_pageProperties &= ~UseMasterBackground;
+    }
+}
+
+void KoPAPageBase::saveOdf(KShapeSavingContext &context) const
+{
+    KoPASavingContext &paContext = static_cast<KoPASavingContext&>(context);
+
+    paContext.xmlWriter().startElement("draw:page");
+    paContext.xmlWriter().addAttribute("draw:name", paContext.pageName(this));
+    if (!name().isEmpty() && name() != paContext.pageName(this)) {
+        paContext.xmlWriter().addAttribute("koffice:name", name());
+    }
+    paContext.xmlWriter().addAttribute("draw:id", "page" + QString::number(paContext.page()));
+    if (m_masterPage)
+        paContext.xmlWriter().addAttribute("draw:master-page-name", paContext.masterPageName(m_masterPage));
+    paContext.xmlWriter().addAttribute("draw:style-name", saveOdfPageStyle(paContext));
+
+    saveOdfPageContent(paContext);
+
+    paContext.xmlWriter().endElement();
+}
+
+KOdfPageLayoutData &KoPAPageBase::pageLayout()
+{
+    Q_ASSERT(m_masterPage);
+    return m_masterPage->pageLayout();
+}
+
+const KOdfPageLayoutData &KoPAPageBase::pageLayout() const
+{
+    Q_ASSERT(m_masterPage);
+    return m_masterPage->pageLayout();
+}
+
+void KoPAPageBase::loadOdfPageTag(const KXmlElement &element, KoPALoadingContext &loadingContext)
+{
+    QString master = element.attributeNS (KOdfXmlNS::draw, "master-page-name");
+    KoPAMasterPage *masterPage = loadingContext.masterPageByName(master);
+    if (masterPage)
+        setMasterPage(masterPage);
+#ifndef NDEBUG
+    else
+        kWarning(30010) << "Loading didn't provide a page under name; " << master;
+#endif
+    KOdfStyleStack &styleStack = loadingContext.odfLoadingContext().styleStack();
+    int pageProperties = UseMasterBackground | DisplayMasterShapes | DisplayMasterBackground;
+    if (styleStack.hasProperty(KOdfXmlNS::draw, "fill")) {
+        setBackground(loadOdfFill(loadingContext));
+        pageProperties = DisplayMasterShapes;
+    }
+    m_pageProperties = pageProperties;
+    QString name;
+    if (element.hasAttributeNS(KOdfXmlNS::draw, "name")) {
+        name = element.attributeNS(KOdfXmlNS::draw, "name");
+        loadingContext.addPage(name, this);
+    }
+    if (element.hasAttributeNS(KOdfXmlNS::koffice, "name")) {
+        name = element.attributeNS(KOdfXmlNS::koffice, "name");
+    }
+    setName(name);
+}
+
+void KoPAPageBase::setMasterPage(KoPAMasterPage * masterPage)
+{
+    Q_ASSERT(masterPage);
+    m_masterPage = masterPage;
+}
+
+void KoPAPageBase::paintBackground(QPainter &painter, const KViewConverter &converter)
+{
+    if (m_pageProperties & UseMasterBackground) {
+        if (m_pageProperties & DisplayMasterBackground) {
+            Q_ASSERT(m_masterPage);
+            m_masterPage->paintBackground(painter, converter);
+        }
+    } else {
+        KoPAPageBase::paintBackground(painter, converter);
+    }
+}
+
+bool KoPAPageBase::displayMasterShapes()
+{
+    return m_pageProperties & DisplayMasterShapes;
+}
+
+void KoPAPageBase::setDisplayMasterShapes(bool display)
+{
+    if (display) {
+        m_pageProperties |= DisplayMasterShapes;
+    }
+    else {
+        m_pageProperties &= ~DisplayMasterShapes;
+    }
+}
+
+bool KoPAPageBase::displayMasterBackground()
+{
+    return m_pageProperties & UseMasterBackground;
+}
+
+QPixmap KoPAPageBase::generateThumbnail(const QSize &size)
+{
+    // don't paint null pixmap
+    if (size.isEmpty()) // either width or height is <= 0
+        return QPixmap();
+    KoZoomHandler zoomHandler;
+    const KOdfPageLayoutData & layout = pageLayout();
+    KoPAUtil::setZoom(layout, size, zoomHandler);
+    QRect pageRect(KoPAUtil::pageRect(layout, size, zoomHandler));
+
+    QPixmap pixmap(size.width(), size.height());
+    pixmap.fill(Qt::white);
+    QPainter painter(&pixmap);
+    painter.setClipRect(pageRect);
+    painter.setRenderHint(QPainter::Antialiasing);
+    painter.translate(pageRect.topLeft());
+
+    paintPage(painter, zoomHandler);
+    return pixmap;
+}
+
+void KoPAPageBase::paintPage(QPainter &painter, KoZoomHandler &zoomHandler)
+{
+    painter.save();
+    applyConversion(painter, zoomHandler);
+    KOdfPageLayoutData layout = pageLayout();
+    painter.setPen(Qt::black);
+
+    if(background())
+    {
+        QPainterPath p;
+        p.addRect(QRectF(0.0, 0.0, layout.width, layout.height));
+        background()->paint(painter, p);
+    }
+
+    painter.restore();
+
+    KShapePainter shapePainter(getPaintingStrategy());
+    if (displayMasterShapes()) {
+        shapePainter.setShapes(masterPage()->shapes());
+        shapePainter.paint(painter, zoomHandler);
+    }
+    shapePainter.setShapes(shapes());
+    shapePainter.paint(painter, zoomHandler);
+}
+
+void KoPAPageBase::saveOdfPageStyleData(KOdfGenericStyle &style, KoPASavingContext &paContext) const
+{
+    if ((m_pageProperties & UseMasterBackground) == 0) {
+        KShapeBackgroundBase *bg = background();
+        if (bg)
+            bg->fillStyle(style, paContext);
+    }
 }

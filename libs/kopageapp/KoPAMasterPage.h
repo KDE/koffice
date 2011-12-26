@@ -1,5 +1,6 @@
 /* This file is part of the KDE project
    Copyright (C) 2006-2009 Thorsten Zachmann <zachmann@kde.org>
+   Copyright (C) 2011 Thomas Zander <zander@kde.org>
 
    This library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public
@@ -20,12 +21,12 @@
 #ifndef KOPAMASTERPAGE_H
 #define KOPAMASTERPAGE_H
 
-#include "KoPAPageBase.h"
+#include "KoPAPage.h"
 
 #include <KOdfPageLayoutData.h>
 
 /// Stores the masterpage's shapes and settings
-class KOPAGEAPP_EXPORT KoPAMasterPage : public KoPAPageBase
+class KOPAGEAPP_EXPORT KoPAMasterPage : public KoPAPage
 {
 public:
     explicit KoPAMasterPage();
@@ -34,39 +35,25 @@ public:
     /// reimplemented
     virtual void saveOdf(KShapeSavingContext &context) const;
 
-    /// @return the page layout set for this masterpage
-    KOdfPageLayoutData &pageLayout() { return m_pageLayout; }
-    const KOdfPageLayoutData &pageLayout() const { return m_pageLayout; }
-
-    /// Set the page layout to @p layout
-    void setPageLayout(const KOdfPageLayoutData &layout) { m_pageLayout = layout; }
-
-    /// reimplemented
-    virtual bool displayMasterShapes();
-
-    /// reimplemented
-    virtual void setDisplayMasterShapes(bool display);
-
-    /// reimplemented
-    virtual bool displayMasterBackground();
-
-    /// reimplemented
-    virtual void setDisplayMasterBackground(bool display);
-
-    /// reimplemented
-    virtual bool displayShape(KShape *shape) const;
-
     /// reimplemented
     virtual void pageUpdated();
 
     /// reimplemented
     virtual void paintPage(QPainter &painter, KoZoomHandler &zoomHandler);
 
+    /// @return the layout of the page
+    virtual KOdfPageLayoutData &pageLayout() { return m_pageLayout; }
+    /// @return the layout of the page
+    virtual const KOdfPageLayoutData &pageLayout() const { return m_pageLayout; }
+
+    /// Set the page layout to @p layout
+    void setPageLayout(const KOdfPageLayoutData &layout) { m_pageLayout = layout; }
+
 protected:
-    /// Reimplemented from KoPageBase
     virtual void loadOdfPageTag(const KXmlElement &element, KoPALoadingContext &loadingContext);
 
-    /// reimplemented
+    virtual void saveOdfPageStyleData(KOdfGenericStyle &style, KoPASavingContext &paContext) const;
+
     virtual QPixmap generateThumbnail(const QSize &size = QSize(512, 512));
 
     KOdfPageLayoutData m_pageLayout;

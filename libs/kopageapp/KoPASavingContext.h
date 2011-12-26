@@ -29,7 +29,7 @@
 #include "kopageapp_export.h"
 
 class KoPAMasterPage;
-class KoPAPage;
+class KoPAPageBase;
 
 /**
  * Context needed for saving the data of a kopageapp.
@@ -112,12 +112,12 @@ public:
     /**
      * @brief get the draw:name of the page to use
      */
-    QString pageName(const KoPAPage * page);
+    QString pageName(const KoPAPageBase * page);
 
 private:
     QMap<const KoPAMasterPage *, QString> m_masterPageNames;
     // TODO use a boost::multi_index_container
-    QMap<const KoPAPage *, QString> m_pageToNames;
+    QMap<const KoPAPageBase *, QString> m_pageToNames;
     QSet<QString> m_pageNames;
     int m_page;
     int m_masterPageIndex;

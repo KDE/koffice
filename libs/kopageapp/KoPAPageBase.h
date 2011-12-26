@@ -1,5 +1,6 @@
 /* This file is part of the KDE project
    Copyright (C) 2006-2009 Thorsten Zachmann <zachmann@kde.org>
+   Copyright (C) 2011 Thomas Zander <zander@kde.org>
 
    This library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public
@@ -23,31 +24,29 @@
 #include <QtCore/QString>
 #include <QtGui/QPixmap>
 
-#include <KShapeContainer.h>		//krazy:exclude=includes
-
-#include "KoPageApp.h"			//krazy:exclude=includes
+#include <KShapeContainer.h>            //krazy:exclude=includes
+#include "KoPageApp.h"                  //krazy:exclude=includes
 #include "kopageapp_export.h"
 
 #define CACHE_PAGE_THUMBNAILS
 
-struct KOdfPageLayoutData;
 class KOdfGenericStyle;
 class KShape;
 class KoPALoadingContext;
 class KShapeManagerPaintingStrategy;
 class KoZoomHandler;
 class KoPASavingContext;
+class KoPAMasterPage;
+class KOdfPageLayoutData;
 
 /**
- * Base class used for KoPAMasterPage and KoPAPage
- *
  * A Page contains KShapeLayer shapes as direct children. The layers than can
  * contain all the different shapes.
  */
 class KOPAGEAPP_EXPORT KoPAPageBase : public KShapeContainer
 {
 public:
-    explicit KoPAPageBase();
+    explicit KoPAPageBase(KoPAMasterPage *masterPage);
     virtual ~KoPAPageBase();
 
     /**
@@ -58,15 +57,16 @@ public:
      * @param context the pageapp saving context
      * @return true on success, false otherwise
      */
-    virtual void saveOdf(KShapeSavingContext &context) const = 0;
+    virtual void saveOdf(KShapeSavingContext &context) const;
 
     /// reimplemented
     virtual bool loadOdf(const KXmlElement &element, KShapeLoadingContext &context);
 
 
     /// @return the layout of the page
-    virtual KOdfPageLayoutData &pageLayout() = 0;
-    virtual const KOdfPageLayoutData &pageLayout() const = 0;
+    virtual KOdfPageLayoutData &pageLayout();
+    /// @return the layout of the page
+    virtual const KOdfPageLayoutData &pageLayout() const;
 
     /**
      * @brief Paint background
@@ -83,14 +83,14 @@ public:
      *
      * @return true if master shapes should be displayed
      */
-    virtual bool displayMasterShapes() = 0;
+    bool displayMasterShapes();
 
     /**
      * Set if the master shapes should be displayed
      *
      * For master pages this does nothing
      */
-    virtual void setDisplayMasterShapes(bool display) = 0;
+    void setDisplayMasterShapes(bool display);
 
     /**
      * Get if master page background should be used
@@ -99,9 +99,9 @@ public:
      *
      * @return true if master page background should be used
      */
-    virtual bool displayMasterBackground() = 0;
+    bool displayMasterBackground();
 
-    virtual void setDisplayMasterBackground(bool display) = 0;
+    void setDisplayMasterBackground(bool display);
 
     /**
      * Return if the shape should be displayed or not
@@ -111,7 +111,7 @@ public:
      * @param shape for which to check if it should be shown or not.
      * @return true if the shape should be shown, otherwise false. 
      */
-    virtual bool displayShape(KShape *shape) const = 0;
+    bool displayShape(KShape *shape) const;
 
     QPixmap thumbnail(const QSize &size = QSize(512, 512));
 
@@ -162,7 +162,12 @@ public:
      * @param painter The painter used to paint the page
      * @param zoomHandler The zoomHandler used to paint the page
      */
-    virtual void paintPage(QPainter &painter, KoZoomHandler &zoomHandler) = 0;
+    virtual void paintPage(QPainter &painter, KoZoomHandler &zoomHandler);
+
+    /// Set the masterpage for this page to @p masterPage
+    void setMasterPage(KoPAMasterPage * masterPage);
+    /// @return the masterpage of this page
+    KoPAMasterPage * masterPage() { return m_masterPage; }
 
 protected:
     /**
@@ -246,7 +251,7 @@ protected:
     /**
      * Create thumbnail for the page
      */
-    virtual QPixmap generateThumbnail(const QSize &size = QSize(512, 512)) = 0;
+    virtual QPixmap generateThumbnail(const QSize &size = QSize(512, 512));
 
     /**
      * Get the key used for caching the thumbnail pixmap
@@ -261,6 +266,25 @@ protected:
      * @return 0 which mean use the default strategy
      */
     virtual KShapeManagerPaintingStrategy * getPaintingStrategy() const;
+
+    /**
+     * DisplayMasterBackground and DisplayMasterShapes are only saved loaded in a presentation
+     * They are however implemented here to reduce code duplication.
+     */
+    enum PageProperty
+    {
+        UseMasterBackground = 1,        ///< Use the background of the master page. See ODF 14.13.2 Drawing Page Style
+        DisplayMasterBackground = 2,    ///< If the master page is used this indicated if its backround should be used. See ODF 15.36.13 Background Visible
+        DisplayMasterShapes = 4,         ///< Set if the shapes of the master page should be shown. See ODF 15.36.12 Background Objects Visible
+        DisplayHeader = 8,       /// set if presentation:display-header is true
+        DisplayFooter = 16,      /// set if presentation:display-footer is true
+        DisplayPageNumber = 32,  /// set if presentation:display-page-number is true
+        DisplayDateTime = 64     /// set if presentation:display-date-time is true
+    };
+
+    KoPAMasterPage *m_masterPage;
+
+    int m_pageProperties;
 };
 
 #endif /* KOPAPAGEBASE_H */
