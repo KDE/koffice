@@ -20,7 +20,6 @@
 #ifndef KOPAPAGEBASE_H
 #define KOPAPAGEBASE_H
 
-#include <QtCore/QList>
 #include <QtCore/QString>
 #include <QtGui/QPixmap>
 
@@ -32,7 +31,6 @@
 #define CACHE_PAGE_THUMBNAILS
 
 struct KOdfPageLayoutData;
-class KOdfLoadingContext;
 class KOdfGenericStyle;
 class KShape;
 class KoPALoadingContext;
@@ -106,7 +104,7 @@ public:
     virtual void setDisplayMasterBackground(bool display) = 0;
 
     /**
-     * Get if the shape should be displayed or not
+     * Return if the shape should be displayed or not
      * 
      * This is used for hiding special objects e.g. presentation:display-page-number="false"
      * 

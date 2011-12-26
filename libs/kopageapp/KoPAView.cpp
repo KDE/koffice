@@ -146,7 +146,6 @@ public:
 };
 
 
-
 KoPAView::KoPAView(KoPADocument *document, QWidget *parent)
 : KoView(document, parent)
 , d(new Private(document))

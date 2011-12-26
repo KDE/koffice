@@ -109,7 +109,7 @@ void KoPAViewMode::changePageLayout(const KOdfPageLayoutData &pageLayout, bool a
     Q_UNUSED(parent);
 }
 
-QPointF KoPAViewMode::origin()
+QPointF KoPAViewMode::origin() const
 {
     return m_origin;
 }

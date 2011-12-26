@@ -21,18 +21,14 @@
 
 #include "KoPageApp.h"			//krazy:exclude=includes
 #include "KoPAViewMode.h"		//krazy:exclude=includes
+#include "kopageapp_export.h"
 
 class KoPACanvasBase;
 class KViewConverter;
 class KoPAPageBase;
-class KoZoomHandler;
 class KoPADocument;
-class KoRuler;
 class KoZoomHandler;
 class KoZoomController;
-
-#include "kopageapp_export.h"
-
 class KoPAViewProxyObject;
 
 /**

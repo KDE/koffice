@@ -88,5 +88,4 @@ KoPAViewProxyObject::KoPAViewProxyObject(KoPAViewBase *parent)
     m_view = parent;
 }
 
-
 #include <KoPAViewBase.moc>

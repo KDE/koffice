@@ -25,7 +25,7 @@
 #include <KDockFactoryBase.h>
 #include <KCanvasObserverBase.h>
 #include <KoDocumentSectionView.h>
-#include <KoPageApp.h>
+#include "KoPageApp.h"
 
 class KShape;
 class KShapeLayer;

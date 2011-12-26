@@ -28,21 +28,15 @@
 #include <KoZoomMode.h>			//krazy:exclude=includes
 #include "kopageapp_export.h"		
 
-class KCanvasController;
-class KoFind;
 class KoPACanvasBase;
 class KoPADocument;
 class KoPAPageBase;
-class KoPAViewMode;
 class KoPADocumentStructureDocker;
 class KoRuler;
 class KShapeManager;
-class KoZoomAction;
 class KoZoomController;
-class KToggleAction;
 class KUrl;
 class QTextDocument;
-class QLabel;
 
 /// Creates a view with a KoPACanvasBase and rulers
 class KOPAGEAPP_EXPORT KoPAView : public KoView, public KoPAViewBase

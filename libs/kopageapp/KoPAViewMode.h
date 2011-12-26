@@ -149,7 +149,7 @@ public:
 
     virtual void changePageLayout(const KOdfPageLayoutData &pageLayout, bool applyToDocument, QUndoCommand *parent = 0);
 
-    QPointF origin();
+    QPointF origin() const;
 
     void setOrigin(const QPointF &origin);
 
