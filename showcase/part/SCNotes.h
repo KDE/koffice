@@ -22,14 +22,14 @@
 #define SCNOTES_H
 
 #include <KOdfPageLayoutData.h>
-#include <KoPAPageBase.h>
+#include <KoPAPage.h>
 
 class KShape;
 class KImageCollection;
 class SCDocument;
 class SCPage;
 
-class SCNotes : public KoPAPageBase
+class SCNotes : public KoPAPage
 {
 public:
     SCNotes(SCPage * page, SCDocument * document);

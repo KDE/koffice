@@ -37,7 +37,7 @@
 
 #include <KoPACanvas.h>
 #include <KoPADocument.h>
-#include <KoPAPageBase.h>
+#include <KoPAPage.h>
 #include <KoPAMasterPage.h>
 #include <KoPAView.h>
 
@@ -122,8 +122,8 @@ void SCViewModeNotes::keyPressEvent(QKeyEvent *event)
                 return;
         }
 
-        KoPAPageBase *activePage = m_view->activePage();
-        KoPAPageBase *newPage = m_view->kopaDocument()->pageByNavigation(activePage, pageNavigation);
+        KoPAPage *activePage = m_view->activePage();
+        KoPAPage *newPage = m_view->kopaDocument()->pageByNavigation(activePage, pageNavigation);
 
         if (newPage != activePage) {
             updateActivePage(newPage);
@@ -156,7 +156,7 @@ void SCViewModeNotes::deactivate()
     m_view->doUpdateActivePage(m_view->activePage());
 }
 
-void SCViewModeNotes::updateActivePage(KoPAPageBase *page)
+void SCViewModeNotes::updateActivePage(KoPAPage *page)
 {
     if (m_view->activePage() != page) {
         m_view->setActivePage(page);

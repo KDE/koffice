@@ -72,7 +72,7 @@ SCPage::~SCPage()
     delete d;
 }
 
-SCPageApplicationData * SCPage::pageData(KoPAPageBase * page)
+SCPageApplicationData * SCPage::pageData(KoPAPage * page)
 {
     SCPageApplicationData * data = dynamic_cast<SCPageApplicationData *>(page->applicationData());
     Q_ASSERT(data);
@@ -113,7 +113,7 @@ SCPageLayout * SCPage::layout() const
 
 bool SCPage::loadOdf(const KXmlElement &element, KShapeLoadingContext &context)
 {
-    if (!KoPAPageBase::loadOdf(element, context)) {
+    if (!KoPAPage::loadOdf(element, context)) {
         return false;
     }
     SCPageApplicationData * data = dynamic_cast<SCPageApplicationData *>(applicationData());
@@ -197,7 +197,7 @@ void SCPage::saveOdfPageContent(KoPASavingContext &paContext) const
             break;
         }
     }
-    KoPAPageBase::saveOdfPageContent(paContext);
+    KoPAPage::saveOdfPageContent(paContext);
 }
 
 void SCPage::saveOdfPageStyleData(KOdfGenericStyle &style, KoPASavingContext &paContext) const

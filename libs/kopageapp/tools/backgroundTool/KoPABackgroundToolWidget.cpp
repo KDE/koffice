@@ -57,7 +57,7 @@ KoPABackgroundToolWidget::~KoPABackgroundToolWidget()
 
 void KoPABackgroundToolWidget::slotActivePageChanged()
 {
-    KoPAPageBase * page = m_tool->view()->activePage();
+    KoPAPage * page = m_tool->view()->activePage();
 
     KoPAPage * normalPage = dynamic_cast<KoPAPage *>(page);
 

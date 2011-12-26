@@ -103,7 +103,7 @@ void KoPAMasterPage::loadOdfPageTag(const KXmlElement &element, KoPALoadingConte
 
 void KoPAMasterPage::pageUpdated()
 {
-    KoPAPageBase::pageUpdated();
+    KoPAPage::pageUpdated();
     // TODO that is not the best way as it removes to much from the cache
     KoPAPixmapCache::instance()->clear(false);
 }

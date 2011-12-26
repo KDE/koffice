@@ -30,7 +30,7 @@
 
 class KShapeSavingContext;
 class KoPAPage;
-class KoPAPageBase;
+class KoPAPage;
 class KoPAMasterPage;
 class KoPALoadingContext;
 class KoPASavingContext;
@@ -65,7 +65,7 @@ public:
      * @param masterStyles
      * @param context
      */
-    QList<KoPAPageBase *> loadOdfMasterPages(const QHash<QString, KXmlElement*> masterStyles, KoPALoadingContext &context);
+    QList<KoPAPage *> loadOdfMasterPages(const QHash<QString, KXmlElement*> masterStyles, KoPALoadingContext &context);
 
     /**
      * Save pages
@@ -74,7 +74,7 @@ public:
      *
      * For all pages that are specified also the master slide has to be specified.
      */
-    bool saveOdfPages(KoPASavingContext &paContext, QList<KoPAPageBase *> &pages, QList<KoPAPageBase *> &masterPages);
+    bool saveOdfPages(KoPASavingContext &paContext, QList<KoPAPage *> &pages, QList<KoPAPage *> &masterPages);
 
     /**
      * Save document styles
@@ -92,7 +92,7 @@ public:
      * @param index of the page
      * @param masterPage if true return a masterPage, if false a normal page
      */
-    KoPAPageBase* pageByIndex(int index, bool masterPage) const;
+    KoPAPage* pageByIndex(int index, bool masterPage) const;
 
     /// reimplemnted
     virtual int pageCount() const;
@@ -104,7 +104,7 @@ public:
      *
      * @return The index of the page or -1 if the page is not found
      */
-    int pageIndex(KoPAPageBase * page) const;
+    int pageIndex(KoPAPage * page) const;
 
     /**
      * Get page by navigation
@@ -114,7 +114,7 @@ public:
      *
      * @return the page which is reached by pageNavigation
      */
-    KoPAPageBase* pageByNavigation(KoPAPageBase * currentPage, KoPageApp::PageNavigation pageNavigation) const;
+    KoPAPage* pageByNavigation(KoPAPage * currentPage, KoPageApp::PageNavigation pageNavigation) const;
 
     /**
      * Insert page to the document at index
@@ -125,7 +125,7 @@ public:
      * @param page to insert to document
      * @param index where the page will be inserted.
      */
-    void insertPage(KoPAPageBase* page, int index);
+    void insertPage(KoPAPage* page, int index);
 
     /**
      * Insert @p page to the document after page @p before
@@ -136,7 +136,7 @@ public:
      * @param page to insert to document
      * @param after the page which the inserted page should come after. Set after to 0 to add at the beginning
      */
-    void insertPage(KoPAPageBase* page, KoPAPageBase* after);
+    void insertPage(KoPAPage* page, KoPAPage* after);
 
     /**
      * Take @page from the page
@@ -144,7 +144,7 @@ public:
      * @param page taken from the document
      * @return the position of the page was taken from the document, or -1 if the page was not found
      */
-    int takePage(KoPAPageBase *page);
+    int takePage(KoPAPage *page);
 
     /**
      * Remove the page from the document
@@ -153,12 +153,12 @@ public:
      *
      * @param page The page that gets removed
      */
-    virtual void removePage(KoPAPageBase * page);
+    virtual void removePage(KoPAPage * page);
 
     void addShape(KShape *shape);
     void removeShape(KShape* shape);
 
-    QList<KoPAPageBase*> pages(bool masterPages = false) const;
+    QList<KoPAPage*> pages(bool masterPages = false) const;
 
     /**
      * Get a new page for inserting into the document
@@ -196,14 +196,14 @@ public:
      * @param shape The shape for which the page should be found
      * @return The page on which the shape is located
      */
-    KoPAPageBase * pageByShape(KShape * shape) const;
+    KoPAPage * pageByShape(KShape * shape) const;
 
     /**
      * Update all views this document is displayed on
      *
      * @param page specify a page to be updated, all views with this page as active page will be updated.
      */
-    void updateViews(KoPAPageBase *page);
+    void updateViews(KoPAPage *page);
 
     /**
      * Get the page type used in the document
@@ -217,7 +217,7 @@ public:
      *
      * Use this method instead the one in the pages directly
      */
-    QPixmap pageThumbnail(KoPAPageBase* page, const QSize &size);
+    QPixmap pageThumbnail(KoPAPage* page, const QSize &size);
 
 public slots:
     /// reimplemented
@@ -226,8 +226,8 @@ public slots:
 signals:
     void shapeAdded(KShape* shape);
     void shapeRemoved(KShape* shape);
-    void pageAdded(KoPAPageBase* page);
-    void pageRemoved(KoPAPageBase* page);
+    void pageAdded(KoPAPage* page);
+    void pageRemoved(KoPAPage* page);
 
 protected:
     virtual KoView *createViewInstance(QWidget *parent) = 0;
@@ -277,7 +277,7 @@ protected:
      *
      * The default impementation does nothing
      */
-    virtual void postAddShape(KoPAPageBase * page, KShape * shape);
+    virtual void postAddShape(KoPAPage * page, KShape * shape);
 
     /**
      * This function is called by at the end of removeShape. This is used
@@ -285,7 +285,7 @@ protected:
      *
      * The default impementation does nothing
      */
-    virtual void postRemoveShape(KoPAPageBase * page, KShape * shape);
+    virtual void postRemoveShape(KoPAPage * page, KShape * shape);
 
     /**
      * This function is called with the command that will remove the page
@@ -295,7 +295,7 @@ protected:
      * @param page The page that will be removed
      * @param parent The command that will be used to delete the page
      */
-    virtual void pageRemoved(KoPAPageBase * page, QUndoCommand * parent);
+    virtual void pageRemoved(KoPAPage * page, QUndoCommand * parent);
 
     /**
      * @brief Enables/Disables the given actions in all views
@@ -324,7 +324,7 @@ private:
      * @param body
      * @param context
      */
-    QList<KoPAPageBase *> loadOdfPages(const KXmlElement &body, KoPALoadingContext &context);
+    QList<KoPAPage *> loadOdfPages(const KXmlElement &body, KoPALoadingContext &context);
 
 
 private:

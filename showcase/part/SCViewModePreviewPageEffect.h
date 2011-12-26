@@ -53,7 +53,7 @@ public:
     void deactivate();
 
     /// reimplemented
-    virtual void updateActivePage(KoPAPageBase *page);
+    virtual void updateActivePage(KoPAPage *page);
 
 
     /**

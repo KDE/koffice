@@ -18,7 +18,7 @@
 */
 #include "kpresenterslideloader.h"
 #include <KoPADocument.h>
-#include <KoPAPageBase.h>
+#include <KoPAPage.h>
 #include <KDE/KPluginFactory>
 #include <KDE/KStandardDirs>
 #include <KDE/KMimeType>
@@ -76,13 +76,13 @@ KPresenterSlideLoader::numberOfSlides() {
 }
 QSize KPresenterSlideLoader::slideSize() {
     if (!m_doc) return QSize();
-    KoPAPageBase* page = m_doc->pages().value(0);
+    KoPAPage* page = m_doc->pages().value(0);
     if (!page) return QSize();
     return page->size().toSize();
 }
 QPixmap KPresenterSlideLoader::loadSlide(int number, const QSize& maxsize) {
     if (!m_doc) return QPixmap();
-    KoPAPageBase* page = m_doc->pages().value(number);
+    KoPAPage* page = m_doc->pages().value(number);
     if (!page) return QPixmap();
     return page->thumbnail(maxsize);
 }

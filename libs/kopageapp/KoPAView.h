@@ -30,7 +30,7 @@
 
 class KoPACanvasBase;
 class KoPADocument;
-class KoPAPageBase;
+class KoPAPage;
 class KoPADocumentStructureDocker;
 class KoRuler;
 class KShapeManager;
@@ -73,10 +73,10 @@ public:
     /// @return the document for the application
     KoPADocument * kopaDocument() const;
     /// @return Page that is shown in the canvas
-    KoPAPageBase* activePage() const;
+    KoPAPage* activePage() const;
 
     /// Set page shown in the canvas to @p page
-    void setActivePage(KoPAPageBase * page);
+    void setActivePage(KoPAPage * page);
 
     void navigatePage(KoPageApp::PageNavigation pageNavigation);
 
@@ -99,7 +99,7 @@ public:
     /**
      * Set the active page and updates the UI
      */
-    void doUpdateActivePage(KoPAPageBase * page);
+    void doUpdateActivePage(KoPAPage * page);
 
     /**
      * Paste the page if everything is ok
@@ -114,7 +114,7 @@ public:
      *
      * Us this method instead the on in the pages directly
      */
-    QPixmap pageThumbnail(KoPAPageBase* page, const QSize &size);
+    QPixmap pageThumbnail(KoPAPage* page, const QSize &size);
 
     /**
      * Save thumbnail to an image file.
@@ -130,7 +130,7 @@ public:
      *
      * @returns whether the image was successfully saved
      */
-    bool exportPageThumbnail(KoPAPageBase * page, const KUrl &url, const QSize &size = QSize(512, 512),
+    bool exportPageThumbnail(KoPAPage * page, const KUrl &url, const QSize &size = QSize(512, 512),
                               const char * format = 0, int quality = -1);
 
     /// Update page navigation actions
@@ -155,7 +155,7 @@ protected:
     /// Called when receiving a PartActivateEvent
     virtual void partActivateEvent(KParts::PartActivateEvent* event);
 
-    bool isMasterUsed(KoPAPageBase * page);
+    bool isMasterUsed(KoPAPage * page);
     void editPaste();
 
 protected slots:

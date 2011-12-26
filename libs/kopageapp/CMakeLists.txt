@@ -23,7 +23,6 @@ set( kopageapp_LIB_SRCS
      KoPACanvasBase.cpp
      KoPASavingContext.cpp
      KoPAPixmapCache.cpp
-     KoPAPageBase.cpp
      KoPAMasterPage.cpp
      KoPAPage.cpp
      KoPAPageContainerModel.cpp
@@ -77,7 +76,6 @@ install(FILES
     KoPADocument.h
     KoPageApp.h
     KoPALoadingContext.h
-    KoPAPageBase.h
     KoPAPageContainerModel.h
     KoPAUtil.h
     KoPAView.h

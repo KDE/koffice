@@ -35,12 +35,12 @@
 #include <qtest_kde.h>
 #include <kdebug.h>
 
-void TestPACopyPastePage::copyAndPaste(MockDocument * doc, QList<KoPAPageBase *> &pages, KoPAPageBase * after)
+void TestPACopyPastePage::copyAndPaste(MockDocument * doc, QList<KoPAPage *> &pages, KoPAPage * after)
 {
     paste(doc, copy(doc, pages), after);
 }
 
-QMimeData * TestPACopyPastePage::copy(MockDocument * doc, QList<KoPAPageBase *> &pages)
+QMimeData * TestPACopyPastePage::copy(MockDocument * doc, QList<KoPAPage *> &pages)
 {
     KoPAOdfPageSaveHelper saveHelper(doc, pages);
     KDrag drag;
@@ -49,7 +49,7 @@ QMimeData * TestPACopyPastePage::copy(MockDocument * doc, QList<KoPAPageBase *> 
     return drag.mimeData();
 }
 
-void TestPACopyPastePage::paste(MockDocument * doc, QMimeData * data, KoPAPageBase * after)
+void TestPACopyPastePage::paste(MockDocument * doc, QMimeData * data, KoPAPage * after)
 {
     if (data->hasFormat(KOdf::mimeType(doc->documentType()))) {
         KoPAPastePage paste(doc, after);
@@ -58,7 +58,7 @@ void TestPACopyPastePage::paste(MockDocument * doc, QMimeData * data, KoPAPageBa
     delete data;
 }
 
-void TestPACopyPastePage::addShape(KoPAPageBase * page)
+void TestPACopyPastePage::addShape(KoPAPage * page)
 {
     KPathShape * path = new KPathShape();
     path->lineTo(QPointF(10, 0));
@@ -85,7 +85,7 @@ void TestPACopyPastePage::copyPasteSinglePage()
 
     addShape(page1);
 
-    QList<KoPAPageBase *> pages;
+    QList<KoPAPage *> pages;
     pages.append(page1);
     copyAndPaste(&doc, pages, page1);
 
@@ -93,7 +93,7 @@ void TestPACopyPastePage::copyPasteSinglePage()
     QCOMPARE(doc.pages(false).size(), 2);
     QVERIFY(doc.pages(false).front() == page1);
 
-    KoPAPageBase * page2 = doc.pages(false).last();
+    KoPAPage * page2 = doc.pages(false).last();
     QVERIFY(dynamic_cast<KoPAPage*>(page2)->masterPage() == master1);
 
     copyAndPaste(&doc, pages, page1);
@@ -103,7 +103,7 @@ void TestPACopyPastePage::copyPasteSinglePage()
     QVERIFY(doc.pages(false)[0] == page1);
     QVERIFY(doc.pages(false)[2] == page2);
 
-    KoPAPageBase * page3 = doc.pages(false)[1];
+    KoPAPage * page3 = doc.pages(false)[1];
     QVERIFY(dynamic_cast<KoPAPage*>(page3)->masterPage() == master1);
 
     QVERIFY(page1 != page2);
@@ -142,7 +142,7 @@ void TestPACopyPastePage::copyPasteSingleMasterPage()
 
     addShape(master1);
 
-    QList<KoPAPageBase *> pages;
+    QList<KoPAPage *> pages;
     pages.append(master1);
     copyAndPaste(&doc, pages, master1);
 
@@ -150,7 +150,7 @@ void TestPACopyPastePage::copyPasteSingleMasterPage()
     QCOMPARE(doc.pages(true).size(), 2);
     QVERIFY(doc.pages(true).front() == master1);
 
-    KoPAPageBase * master2 = doc.pages(true)[1];
+    KoPAPage * master2 = doc.pages(true)[1];
 
     copyAndPaste(&doc, pages, master1);
 
@@ -159,7 +159,7 @@ void TestPACopyPastePage::copyPasteSingleMasterPage()
     QVERIFY(doc.pages(true)[0] == master1);
     QVERIFY(doc.pages(true)[2] == master2);
 
-    KoPAPageBase * master3 = doc.pages(true)[1];
+    KoPAPage * master3 = doc.pages(true)[1];
 
     QVERIFY(master1 != master2);
     QVERIFY(master1 != master3);
@@ -195,7 +195,7 @@ void TestPACopyPastePage::copyPasteMuliplePages()
     KoPAPage * page3 = new KoPAPage(master1);
     doc.insertPage(page3, page2);
 
-    QList<KoPAPageBase *> pages;
+    QList<KoPAPage *> pages;
     pages.append(page1);
     pages.append(page2);
     copyAndPaste(&doc, pages, page2);
@@ -214,7 +214,7 @@ void TestPACopyPastePage::copyPasteMuliplePages()
     QVERIFY(page5 != 0);
     QVERIFY(page5->masterPage() == master2);
 
-    QList<KoPAPageBase *> masterPages;
+    QList<KoPAPage *> masterPages;
     masterPages.append(master1);
     copyAndPaste(&doc, masterPages, master2);
 
@@ -270,7 +270,7 @@ void TestPACopyPastePage::copyPasteMulipleMasterPages()
     KoPAMasterPage * master2 = new KoPAMasterPage();
     doc.insertPage(master2, master1);
 
-    QList<KoPAPageBase *> pages;
+    QList<KoPAPage *> pages;
     pages.append(master1);
     pages.append(master2);
     copyAndPaste(&doc, pages, master2);
@@ -299,7 +299,7 @@ void TestPACopyPastePage::copyPasteMixedPages()
     KoPAMasterPage * master2 = new KoPAMasterPage();
     doc.insertPage(master2, master1);
 
-    QList<KoPAPageBase *> pages;
+    QList<KoPAPage *> pages;
     pages.append(page1);
     pages.append(master2);
     QMimeData * data = copy(&doc, pages);

@@ -20,7 +20,7 @@
 #include "KoPAViewMode.h"
 
 #include "KoPACanvas.h"
-#include "KoPAPageBase.h"
+#include "KoPAPage.h"
 #include "KoPAView.h"
 #include <KCanvasController.h>
 #include <KOdfPageLayoutData.h>
@@ -82,7 +82,7 @@ KViewConverter * KoPAViewMode::viewConverter(KoPACanvasBase * canvas)
     return m_view->KoPAViewBase::viewConverter(canvas);
 }
 
-void KoPAViewMode::updateActivePage(KoPAPageBase *page)
+void KoPAViewMode::updateActivePage(KoPAPage *page)
 {
     m_view->doUpdateActivePage(page);
 }

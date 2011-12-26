@@ -23,9 +23,9 @@
 
 #include <KLocale>
 
-#include "KoPAPageBase.h"
+#include "KoPAPage.h"
 
-KoPAPageThumbnailModel::KoPAPageThumbnailModel(QList<KoPAPageBase *> pages, QObject *parent)
+KoPAPageThumbnailModel::KoPAPageThumbnailModel(QList<KoPAPage *> pages, QObject *parent)
     : QAbstractListModel(parent),
     m_pages(pages),
     m_iconSize(512, 512)

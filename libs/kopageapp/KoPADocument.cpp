@@ -54,8 +54,8 @@
 class KoPADocument::Private
 {
 public:
-    QList<KoPAPageBase*> pages;
-    QList<KoPAPageBase*> masterPages;
+    QList<KoPAPage*> pages;
+    QList<KoPAPage*> masterPages;
     KInlineTextObjectManager *inlineTextObjectManager;
     bool rulersVisible;
     KoPAPageProvider *pageProvider;
@@ -96,7 +96,7 @@ KoPADocument::~KoPADocument()
 
 void KoPADocument::paintContent(QPainter &painter, const QRect &rect)
 {
-    KoPAPageBase * page = pageByIndex(0, false);
+    KoPAPage * page = pageByIndex(0, false);
     Q_ASSERT(page);
     QPixmap thumbnail(pageThumbnail(page, rect.size()));
     painter.drawPixmap(rect, thumbnail);
@@ -235,10 +235,10 @@ bool KoPADocument::saveOdf(SavingContext &documentContext)
     return paContext.saveDataCenter(documentContext.odfStore.store(), documentContext.odfStore.manifestWriter());
 }
 
-QList<KoPAPageBase *> KoPADocument::loadOdfMasterPages(const QHash<QString, KXmlElement*> masterStyles, KoPALoadingContext &context)
+QList<KoPAPage *> KoPADocument::loadOdfMasterPages(const QHash<QString, KXmlElement*> masterStyles, KoPALoadingContext &context)
 {
     context.odfLoadingContext().setUseStylesAutoStyles(true);
-    QList<KoPAPageBase *> masterPages;
+    QList<KoPAPage *> masterPages;
 
     QHash<QString, KXmlElement*>::const_iterator it(masterStyles.constBegin());
     for (; it != masterStyles.constEnd(); ++it)
@@ -253,13 +253,13 @@ QList<KoPAPageBase *> KoPADocument::loadOdfMasterPages(const QHash<QString, KXml
     return masterPages;
 }
 
-QList<KoPAPageBase *> KoPADocument::loadOdfPages(const KXmlElement &body, KoPALoadingContext &context)
+QList<KoPAPage *> KoPADocument::loadOdfPages(const KXmlElement &body, KoPALoadingContext &context)
 {
     if (d->masterPages.isEmpty()) { // we require at least one master page. Auto create one if the doc was faulty.
         d->masterPages << newMasterPage();
     }
 
-    QList<KoPAPageBase *> pages;
+    QList<KoPAPage *> pages;
     KXmlElement element;
     forEachElement(element, body) {
         if (element.tagName() == "page" && element.namespaceURI() == KOdfXmlNS::draw) {
@@ -285,13 +285,13 @@ bool KoPADocument::loadOdfProlog(const KXmlElement &body, KoPALoadingContext &co
     return true;
 }
 
-bool KoPADocument::saveOdfPages(KoPASavingContext &paContext, QList<KoPAPageBase *> &pages, QList<KoPAPageBase *> &masterPages)
+bool KoPADocument::saveOdfPages(KoPASavingContext &paContext, QList<KoPAPage *> &pages, QList<KoPAPage *> &masterPages)
 {
     paContext.addOption(KoPASavingContext::DrawId);
     paContext.addOption(KoPASavingContext::AutoStyleInStyleXml);
 
     // save master pages
-    foreach(KoPAPageBase *page, masterPages) {
+    foreach(KoPAPage *page, masterPages) {
         if (paContext.isSetClearDrawIds()) {
             paContext.clearDrawIds();
         }
@@ -301,7 +301,7 @@ bool KoPADocument::saveOdfPages(KoPASavingContext &paContext, QList<KoPAPageBase
     paContext.removeOption(KoPASavingContext::AutoStyleInStyleXml);
 
     // save pages
-    foreach (KoPAPageBase *page, pages) {
+    foreach (KoPAPage *page, pages) {
         page->saveOdf(paContext);
         paContext.incrementPage();
     }
@@ -393,7 +393,7 @@ bool KoPADocument::loadOdfDocumentStyles(KoPALoadingContext &context)
     return true;
 }
 
-KoPAPageBase* KoPADocument::pageByIndex(int index, bool masterPage) const
+KoPAPage* KoPADocument::pageByIndex(int index, bool masterPage) const
 {
     if (masterPage)
     {
@@ -405,19 +405,19 @@ KoPAPageBase* KoPADocument::pageByIndex(int index, bool masterPage) const
     }
 }
 
-int KoPADocument::pageIndex(KoPAPageBase * page) const
+int KoPADocument::pageIndex(KoPAPage * page) const
 {
-    const QList<KoPAPageBase*> &pages = dynamic_cast<KoPAMasterPage *>(page) ? d->masterPages : d->pages;
+    const QList<KoPAPage*> &pages = dynamic_cast<KoPAMasterPage *>(page) ? d->masterPages : d->pages;
     return pages.indexOf(page);
 }
 
-KoPAPageBase* KoPADocument::pageByNavigation(KoPAPageBase * currentPage, KoPageApp::PageNavigation pageNavigation) const
+KoPAPage* KoPADocument::pageByNavigation(KoPAPage * currentPage, KoPageApp::PageNavigation pageNavigation) const
 {
-    const QList<KoPAPageBase*> &pages = dynamic_cast<KoPAMasterPage *>(currentPage) ? d->masterPages : d->pages;
+    const QList<KoPAPage*> &pages = dynamic_cast<KoPAMasterPage *>(currentPage) ? d->masterPages : d->pages;
 
     Q_ASSERT(! pages.isEmpty());
 
-    KoPAPageBase * newPage = currentPage;
+    KoPAPage * newPage = currentPage;
 
     switch (pageNavigation)
     {
@@ -457,7 +457,7 @@ void KoPADocument::addShape(KShape * shape)
         return;
 
     // the KShapeController sets the active layer as parent
-    KoPAPageBase * page(pageByShape(shape));
+    KoPAPage * page(pageByShape(shape));
 
     foreach(KoView *view, views())
     {
@@ -474,7 +474,7 @@ void KoPADocument::addShape(KShape * shape)
     }
 }
 
-void KoPADocument::postAddShape(KoPAPageBase * page, KShape * shape)
+void KoPADocument::postAddShape(KoPAPage * page, KShape * shape)
 {
     Q_UNUSED(page);
     Q_UNUSED(shape);
@@ -485,7 +485,7 @@ void KoPADocument::removeShape(KShape *shape)
     if(!shape)
         return;
 
-    KoPAPageBase * page(pageByShape(shape));
+    KoPAPage * page(pageByShape(shape));
 
     foreach(KoView *view, views())
     {
@@ -499,37 +499,37 @@ void KoPADocument::removeShape(KShape *shape)
     postRemoveShape(page, shape);
 }
 
-void KoPADocument::postRemoveShape(KoPAPageBase * page, KShape * shape)
+void KoPADocument::postRemoveShape(KoPAPage * page, KShape * shape)
 {
     Q_UNUSED(page);
     Q_UNUSED(shape);
 }
 
-void KoPADocument::removePage(KoPAPageBase * page)
+void KoPADocument::removePage(KoPAPage * page)
 {
     KoPAPageDeleteCommand * command = new KoPAPageDeleteCommand(this, page);
     pageRemoved(page, command);
     addCommand(command);
 }
 
-void KoPADocument::pageRemoved(KoPAPageBase * page, QUndoCommand * parent)
+void KoPADocument::pageRemoved(KoPAPage * page, QUndoCommand * parent)
 {
     Q_UNUSED(page);
     Q_UNUSED(parent);
 }
 
-KoPAPageBase * KoPADocument::pageByShape(KShape * shape) const
+KoPAPage * KoPADocument::pageByShape(KShape * shape) const
 {
     KShape * parent = shape;
-    KoPAPageBase * page = 0;
+    KoPAPage * page = 0;
     while (!page && (parent = parent->parent()))
     {
-        page = dynamic_cast<KoPAPageBase*>(parent);
+        page = dynamic_cast<KoPAPage*>(parent);
     }
     return page;
 }
 
-void KoPADocument::updateViews(KoPAPageBase *page)
+void KoPADocument::updateViews(KoPAPage *page)
 {
     if (!page) return;
 
@@ -553,7 +553,7 @@ KoPageApp::PageType KoPADocument::pageType() const
     return KoPageApp::Page;
 }
 
-QPixmap KoPADocument::pageThumbnail(KoPAPageBase* page, const QSize &size)
+QPixmap KoPADocument::pageThumbnail(KoPAPage* page, const QSize &size)
 {
     int pageNumber = pageIndex(page) + 1;
     d->pageProvider->setPageData(pageNumber, page);
@@ -580,12 +580,12 @@ void KoPADocument::setActionEnabled(int actions, bool enable)
     }
 }
 
-void KoPADocument::insertPage(KoPAPageBase* page, int index)
+void KoPADocument::insertPage(KoPAPage* page, int index)
 {
     if (!page)
         return;
 
-    QList<KoPAPageBase*> &pages = dynamic_cast<KoPAMasterPage *>(page) ? d->masterPages : d->pages;
+    QList<KoPAPage*> &pages = dynamic_cast<KoPAMasterPage *>(page) ? d->masterPages : d->pages;
 
     if (index > pages.size() || index < 0)
     {
@@ -600,12 +600,12 @@ void KoPADocument::insertPage(KoPAPageBase* page, int index)
     emit pageAdded(page);
 }
 
-void KoPADocument::insertPage(KoPAPageBase* page, KoPAPageBase* after)
+void KoPADocument::insertPage(KoPAPage* page, KoPAPage* after)
 {
     if (!page)
         return;
 
-    QList<KoPAPageBase*> &pages = dynamic_cast<KoPAMasterPage *>(page) ? d->masterPages : d->pages;
+    QList<KoPAPage*> &pages = dynamic_cast<KoPAMasterPage *>(page) ? d->masterPages : d->pages;
 
     int index = 0;
 
@@ -626,11 +626,11 @@ void KoPADocument::insertPage(KoPAPageBase* page, KoPAPageBase* after)
     emit pageAdded(page);
 }
 
-int KoPADocument::takePage(KoPAPageBase *page)
+int KoPADocument::takePage(KoPAPage *page)
 {
     Q_ASSERT(page);
 
-    QList<KoPAPageBase *> &pages = dynamic_cast<KoPAMasterPage *>(page) ? d->masterPages : d->pages;
+    QList<KoPAPage *> &pages = dynamic_cast<KoPAMasterPage *>(page) ? d->masterPages : d->pages;
 
     int index = pages.indexOf(page);
 
@@ -642,7 +642,7 @@ int KoPADocument::takePage(KoPAPageBase *page)
 
         // change to previous page when the page is the active one if the first one is delete go to the next one
         int newIndex = index == 0 ? 0 : index - 1;
-        KoPAPageBase * newActivePage = pages.at(newIndex);
+        KoPAPage * newActivePage = pages.at(newIndex);
         foreach(KoView *view, views())
         {
             KoPAView * kopaView = static_cast<KoPAView*>(view);
@@ -662,7 +662,7 @@ int KoPADocument::takePage(KoPAPageBase *page)
     return index;
 }
 
-QList<KoPAPageBase*> KoPADocument::pages(bool masterPages) const
+QList<KoPAPage*> KoPADocument::pages(bool masterPages) const
 {
     return masterPages ? d->masterPages : d->pages;
 }

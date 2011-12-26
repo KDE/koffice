@@ -33,7 +33,7 @@
 
 #include "SCHtmlExport.h"
 
-SCHtmlExportDialog::SCHtmlExportDialog(const QList<KoPAPageBase*> &slides, const QString &title, const QString &author, QWidget *parent)
+SCHtmlExportDialog::SCHtmlExportDialog(const QList<KoPAPage*> &slides, const QString &title, const QString &author, QWidget *parent)
 : KDialog(parent)
 , m_allSlides(slides)
 , m_title(title)
@@ -67,9 +67,9 @@ SCHtmlExportDialog::SCHtmlExportDialog(const QList<KoPAPageBase*> &slides, const
     this->generatePreview();
 }
 
-QList<KoPAPageBase*> SCHtmlExportDialog::checkedSlides()
+QList<KoPAPage*> SCHtmlExportDialog::checkedSlides()
 {
-    QList<KoPAPageBase*> selectedSlides;
+    QList<KoPAPage*> selectedSlides;
     int countItems = ui.kListBox_slides->count();
     for (int i = 0; i < countItems; ++i) {
         if (ui.kListBox_slides->item(i)->checkState() == Qt::Checked) {
@@ -111,7 +111,7 @@ KUrl SCHtmlExportDialog::templateUrl()
     return KUrl(ui.kcombobox->itemData(ui.kcombobox->currentIndex()).toString());
 }
 
-void SCHtmlExportDialog::generateSlidesNames(const QList<KoPAPageBase*> &slides)
+void SCHtmlExportDialog::generateSlidesNames(const QList<KoPAPage*> &slides)
 {
     QString slideName;
     for (int i = 0; i < slides.count(); ++i) {
@@ -250,7 +250,7 @@ void SCHtmlExportDialog::generatePreview(int item)
     ui.toolButton_next->setEnabled(frameToRender < (m_allSlides.size() - 1));
 
     SCHtmlExport previewGenerator;
-    QList<KoPAPageBase*> slides;
+    QList<KoPAPage*> slides;
     QStringList slidesNames;
     slides.append(this->m_allSlides.at(frameToRender));
     slidesNames.append(ui.kListBox_slides->item(frameToRender)->text());

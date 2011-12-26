@@ -31,7 +31,7 @@ SCPageSelectStrategyActive::~SCPageSelectStrategyActive()
 {
 }
 
-const KoPAPageBase *SCPageSelectStrategyActive::page() const
+const KoPAPage *SCPageSelectStrategyActive::page() const
 {
     KoPAViewBase *view = m_canvas->koPAView();
     Q_ASSERT(view);

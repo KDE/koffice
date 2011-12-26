@@ -175,7 +175,7 @@ KGuidesData * KoPACanvasBase::guidesData()
 
 void KoPACanvasBase::paint(QPainter &painter, const QRectF paintRect) {
 
-    KoPAPageBase *activePage(d->view->activePage());
+    KoPAPage *activePage(d->view->activePage());
     if (d->view->activePage()) {
         int pageNumber = d->doc->pageIndex(d->view->activePage()) + 1;
         QVariant var = d->doc->resourceManager()->resource(KOdfText::PageProvider);

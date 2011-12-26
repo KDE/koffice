@@ -25,7 +25,7 @@
 
 class KoPADocument;
 class KoPAMasterPage;
-class KoPAPageBase;
+class KoPAPage;
 
 /**
  * Command to change the master page of a page

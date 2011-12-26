@@ -157,7 +157,7 @@ void SCViewModePresentation::activate(KoPAViewMode * previousViewMode)
 
     // add end off slideshow page
     m_endOfSlideShowPage = new SCEndOfSlideShowPage(desktop.screenGeometry(presentationscreen), document);
-    QList<KoPAPageBase*> pages = document->slideShow();
+    QList<KoPAPage*> pages = document->slideShow();
     pages.append(m_endOfSlideShowPage);
 
     QRect presentationRect = desktop.screenGeometry(presentationscreen);
@@ -217,7 +217,7 @@ void SCViewModePresentation::deactivate()
     emit deactivated();
 
     m_animationDirector->deactivate();
-    KoPAPageBase * page = m_view->activePage();
+    KoPAPage * page = m_view->activePage();
     if (m_endOfSlideShowPage) {
         if (page == m_endOfSlideShowPage) {
             page = m_view->kopaDocument()->pages().last();
@@ -254,7 +254,7 @@ void SCViewModePresentation::deactivate()
     }
 }
 
-void SCViewModePresentation::updateActivePage(KoPAPageBase *page)
+void SCViewModePresentation::updateActivePage(KoPAPage *page)
 {
     m_view->setActivePage(page);
     if (m_presenterViewWidget) {

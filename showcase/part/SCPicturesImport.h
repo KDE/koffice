@@ -24,7 +24,7 @@
 #include <KUrl>
 
 class KShapeFactoryBase;
-class KoPAPageBase;
+class KoPAPage;
 class KoPAMasterPage;
 class SCDocument;
 class SCView;
@@ -47,7 +47,7 @@ private slots:
 private:
     SCDocument *m_doc;
     KUrl::List m_urls;
-    KoPAPageBase *m_currentPage;
+    KoPAPage *m_currentPage;
     KoPAMasterPage *m_masterPage;
     KShapeFactoryBase *m_factory;
     QUndoCommand *m_cmd;

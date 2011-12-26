@@ -36,8 +36,8 @@ KoPAChangePageLayoutCommand::KoPAChangePageLayoutCommand(KoPADocument *document,
         m_oldLayouts.insert(masterPage, masterPage->pageLayout());
     }
     else {
-        QList<KoPAPageBase *> masterPages = m_document->pages(true);
-        foreach(KoPAPageBase *page, masterPages) {
+        QList<KoPAPage *> masterPages = m_document->pages(true);
+        foreach(KoPAPage *page, masterPages) {
             KoPAMasterPage *masterPage = static_cast<KoPAMasterPage *>(page);
             m_oldLayouts.insert(masterPage, masterPage->pageLayout());
         }

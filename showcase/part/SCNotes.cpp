@@ -57,7 +57,7 @@ public:
 };
 
 SCNotes::SCNotes(SCPage *page, SCDocument * document)
-: KoPAPageBase()
+: KoPAPage(0)
 , m_page(page)
 , m_doc(document)
 , m_imageCollection(new KImageCollection())

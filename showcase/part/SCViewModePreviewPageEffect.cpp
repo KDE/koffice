@@ -142,7 +142,7 @@ void SCViewModePreviewPageEffect::deactivate()
 }
 
 
-void SCViewModePreviewPageEffect::updateActivePage(KoPAPageBase *page)
+void SCViewModePreviewPageEffect::updateActivePage(KoPAPage *page)
 {
     m_view->setActivePage(page);
 }

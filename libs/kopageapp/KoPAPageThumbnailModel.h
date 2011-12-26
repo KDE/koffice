@@ -26,7 +26,7 @@
 #include "kopageapp_export.h"
 
 class KoPAView;
-class KoPAPageBase;
+class KoPAPage;
 
 /**
  * Model class for the page thumbnails widget. This class is intented as a simple model to
@@ -40,7 +40,7 @@ class KOPAGEAPP_EXPORT KoPAPageThumbnailModel : public QAbstractListModel
     Q_OBJECT
 
 public:
-    explicit KoPAPageThumbnailModel(QList<KoPAPageBase *> pages, QObject *parent = 0);
+    explicit KoPAPageThumbnailModel(QList<KoPAPage *> pages, QObject *parent = 0);
     ~KoPAPageThumbnailModel();
 
     // from QAbstractItemModel
@@ -52,7 +52,7 @@ public:
 
 private:
     KoPAView *m_view;
-    QList<KoPAPageBase *> m_pages;
+    QList<KoPAPage *> m_pages;
 
     int m_iconWidth;
     QSize m_iconSize;

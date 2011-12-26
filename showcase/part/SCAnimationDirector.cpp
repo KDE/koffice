@@ -49,11 +49,11 @@
 #include <KViewConverter.h>
 #include <KoPAViewMode.h>
 #include <KoPACanvas.h>
-#include <KoPAPageBase.h>
+#include <KoPAPage.h>
 #include <KoPAView.h>
 #include <KoPAUtil.h>
 
-SCAnimationDirector::SCAnimationDirector(KoPAView * view, KoPACanvas * canvas, const QList<KoPAPageBase*> &pages, KoPAPageBase* currentPage)
+SCAnimationDirector::SCAnimationDirector(KoPAView * view, KoPACanvas * canvas, const QList<KoPAPage*> &pages, KoPAPage* currentPage)
 : m_view(view)
 , m_canvas(canvas)
 , m_pages(pages)
@@ -229,7 +229,7 @@ void SCAnimationDirector::navigateToPage(int index)
     }
 
     m_pageIndex = index;
-    KoPAPageBase *page = m_pages[m_pageIndex];
+    KoPAPage *page = m_pages[m_pageIndex];
 
     m_stepIndex = 0;
 
@@ -244,7 +244,7 @@ void SCAnimationDirector::navigateToPage(int index)
     }
 }
 
-void SCAnimationDirector::updateActivePage(KoPAPageBase * page)
+void SCAnimationDirector::updateActivePage(KoPAPage * page)
 {
     deactivate();
 

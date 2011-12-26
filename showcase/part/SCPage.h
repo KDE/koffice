@@ -47,7 +47,7 @@ public:
      * As every SCPage needs to have a SCPageApplicationData this call fails with a
      * assertion when it is not possible to retrieve.
      */
-    static SCPageApplicationData * pageData(KoPAPageBase * page);
+    static SCPageApplicationData * pageData(KoPAPage * page);
 
     /**
      * Get the presentation notes for this page

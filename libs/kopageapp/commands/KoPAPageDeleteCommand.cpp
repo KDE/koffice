@@ -22,9 +22,9 @@
 #include <klocale.h>
 
 #include "KoPADocument.h"
-#include "KoPAPageBase.h"
+#include "KoPAPage.h"
 
-KoPAPageDeleteCommand::KoPAPageDeleteCommand(KoPADocument *document, KoPAPageBase *page, QUndoCommand *parent)
+KoPAPageDeleteCommand::KoPAPageDeleteCommand(KoPADocument *document, KoPAPage *page, QUndoCommand *parent)
 : QUndoCommand(parent)
 , m_document(document)
 , m_deletePages(false)
@@ -43,7 +43,7 @@ KoPAPageDeleteCommand::KoPAPageDeleteCommand(KoPADocument *document, KoPAPageBas
     }
 }
 
-KoPAPageDeleteCommand::KoPAPageDeleteCommand(KoPADocument *document, const QList<KoPAPageBase*> &pages, QUndoCommand *parent)
+KoPAPageDeleteCommand::KoPAPageDeleteCommand(KoPADocument *document, const QList<KoPAPage*> &pages, QUndoCommand *parent)
 : QUndoCommand(parent)
 , m_document(document)
 , m_deletePages(false)
@@ -52,7 +52,7 @@ KoPAPageDeleteCommand::KoPAPageDeleteCommand(KoPADocument *document, const QList
     Q_ASSERT(m_document->pages().count() > pages.count());
     int index = -1;
 
-    foreach (KoPAPageBase *page, pages) {
+    foreach (KoPAPage *page, pages) {
         Q_ASSERT(page);
         index = m_document->pageIndex(page);
         Q_ASSERT(index != -1);
@@ -80,7 +80,7 @@ void KoPAPageDeleteCommand::redo()
     QUndoCommand::redo();
     int index = -1;
 
-    foreach (KoPAPageBase *page, m_pages) {
+    foreach (KoPAPage *page, m_pages) {
         index = m_document->takePage(page);
         Q_ASSERT(index != -1);
     }
@@ -91,7 +91,7 @@ void KoPAPageDeleteCommand::redo()
 void KoPAPageDeleteCommand::undo()
 {
     QUndoCommand::undo();
-    QMapIterator<int, KoPAPageBase*> i(m_pages);
+    QMapIterator<int, KoPAPage*> i(m_pages);
 
     while (i.hasNext()) {
         i.next();

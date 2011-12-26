@@ -31,7 +31,7 @@ class KViewConverter;
 class KShape;
 class KShapeManager;
 class KoPACanvas;
-class KoPAPageBase;
+class KoPAPage;
 class KoPAView;
 class SCPageEffect;
 class SCPageEffectRunner;
@@ -56,7 +56,7 @@ public:
         LastPage
     };
 
-    SCAnimationDirector(KoPAView * view, KoPACanvas * canvas, const QList<KoPAPageBase*> &pages, KoPAPageBase* currentPage);
+    SCAnimationDirector(KoPAView * view, KoPACanvas * canvas, const QList<KoPAPage*> &pages, KoPAPage* currentPage);
     virtual ~SCAnimationDirector();
 
     void paint(QPainter &painter, const QRectF &paintRect);
@@ -107,7 +107,7 @@ public:
     void deactivate();
 protected:
     // set the page to be shon and update the UI
-    void updateActivePage(KoPAPageBase * page);
+    void updateActivePage(KoPAPage * page);
 
     /**
      * change the page
@@ -159,7 +159,7 @@ protected slots:
 private:
     KoPAView * m_view;
     KoPACanvas * m_canvas;
-    QList<KoPAPageBase*> m_pages;
+    QList<KoPAPage*> m_pages;
 
     KoZoomHandler m_zoomHandler;
     QPoint m_offset;

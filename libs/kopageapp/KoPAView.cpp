@@ -142,7 +142,7 @@ public:
     // These used to be protected.
     KoPADocument *doc;
     KoPACanvas *canvas;
-    KoPAPageBase *activePage;
+    KoPAPage *activePage;
 };
 
 
@@ -254,7 +254,7 @@ void KoPAView::initGUI()
         d->documentStructureDocker = qobject_cast<KoPADocumentStructureDocker*>(shell()->createDockWidget(&structureDockerFactory));
         connect(shell()->partManager(), SIGNAL(activePartChanged(KParts::Part *)),
                 d->documentStructureDocker, SLOT(setPart(KParts::Part *)));
-        connect(d->documentStructureDocker, SIGNAL(pageChanged(KoPAPageBase*)), proxyObject, SLOT(updateActivePage(KoPAPageBase*)));
+        connect(d->documentStructureDocker, SIGNAL(pageChanged(KoPAPage*)), proxyObject, SLOT(updateActivePage(KoPAPage*)));
         connect(d->documentStructureDocker, SIGNAL(dockerReset()), this, SLOT(reinitDocumentDocker()));
 
         KToolManager::instance()->requestToolActivation(d->canvasController);
@@ -375,7 +375,7 @@ KoPADocument * KoPAView::kopaDocument() const
     return d->doc;
 }
 
-KoPAPageBase* KoPAView::activePage() const
+KoPAPage* KoPAView::activePage() const
 {
     return d->activePage;
 }
@@ -596,7 +596,7 @@ void KoPAView::setMasterMode(bool master)
     }
     d->actionMasterPage->setEnabled(!master);
 
-    QList<KoPAPageBase*> pages = d->doc->pages(master);
+    QList<KoPAPage*> pages = d->doc->pages(master);
     d->actionDeletePage->setEnabled(pages.size() > 1);
 }
 
@@ -618,7 +618,7 @@ void KoPAView::reinitDocumentDocker()
     }
 }
 
-void KoPAView::doUpdateActivePage(KoPAPageBase * page)
+void KoPAView::doUpdateActivePage(KoPAPage * page)
 {
     // save the old offset into the page so we can use it also on the new page
     QPoint scrollValue(d->canvasController->scrollBarValue());
@@ -652,7 +652,7 @@ void KoPAView::doUpdateActivePage(KoPAPageBase * page)
     d->canvasController->setScrollBarValue(scrollValue);
 }
 
-void KoPAView::setActivePage(KoPAPageBase* page)
+void KoPAView::setActivePage(KoPAPage* page)
 {
     if (!page)
         return;
@@ -697,7 +697,7 @@ void KoPAView::setActivePage(KoPAPageBase* page)
 
 void KoPAView::navigatePage(KoPageApp::PageNavigation pageNavigation)
 {
-    KoPAPageBase * newPage = d->doc->pageByNavigation(d->activePage, pageNavigation);
+    KoPAPage * newPage = d->doc->pageByNavigation(d->activePage, pageNavigation);
 
     if (newPage != d->activePage) {
         proxyObject->updateActivePage(newPage);
@@ -761,7 +761,7 @@ void KoPAView::setShowRulers(bool show)
 
 void KoPAView::insertPage()
 {
-    KoPAPageBase * page = 0;
+    KoPAPage * page = 0;
     if (viewMode()->masterMode()) {
         KoPAMasterPage * masterPage = d->doc->newMasterPage();
         masterPage->setBackground(new KColorBackground(Qt::white));
@@ -787,7 +787,7 @@ void KoPAView::insertPage()
 
 void KoPAView::copyPage()
 {
-    QList<KoPAPageBase *> pages;
+    QList<KoPAPage *> pages;
     pages.append(d->activePage);
     KoPAOdfPageSaveHelper saveHelper(d->doc, pages);
     KDrag drag;
@@ -826,12 +826,12 @@ void KoPAView::setActionEnabled(int actions, bool enable)
     }
 }
 
-QPixmap KoPAView::pageThumbnail(KoPAPageBase* page, const QSize &size)
+QPixmap KoPAView::pageThumbnail(KoPAPage* page, const QSize &size)
 {
     return d->doc->pageThumbnail(page, size);
 }
 
-bool KoPAView::exportPageThumbnail(KoPAPageBase * page, const KUrl &url, const QSize &size,
+bool KoPAView::exportPageThumbnail(KoPAPage * page, const KUrl &url, const QSize &size,
                                     const char * format, int quality)
 {
     bool res = false;
@@ -942,7 +942,7 @@ void KoPAView::goToLastPage()
 
 void KoPAView::findDocumentSetNext(QTextDocument * document)
 {
-    KoPAPageBase * page = 0;
+    KoPAPage * page = 0;
     KShape * startShape = 0;
     KTextDocumentLayout *lay = document ? qobject_cast<KTextDocumentLayout*>(document->documentLayout()) : 0;
     if (lay != 0) {
@@ -994,7 +994,7 @@ void KoPAView::findDocumentSetNext(QTextDocument * document)
 
 void KoPAView::findDocumentSetPrevious(QTextDocument * document)
 {
-    KoPAPageBase * page = 0;
+    KoPAPage * page = 0;
     KShape * startShape = 0;
     KTextDocumentLayout *lay = document ? qobject_cast<KTextDocumentLayout*>(document->documentLayout()) : 0;
     if (lay != 0) {
@@ -1059,15 +1059,15 @@ void KoPAView::updatePageNavigationActions()
     actionCollection()->action("page_last")->setEnabled(index < pageCount - 1);
 }
 
-bool KoPAView::isMasterUsed(KoPAPageBase * page)
+bool KoPAView::isMasterUsed(KoPAPage * page)
 {
     KoPAMasterPage * master = dynamic_cast<KoPAMasterPage *>(page);
 
     bool used = false;
 
     if (master) {
-        QList<KoPAPageBase*> pages = d->doc->pages();
-        foreach(KoPAPageBase * page, pages) {
+        QList<KoPAPage*> pages = d->doc->pages();
+        foreach(KoPAPage * page, pages) {
             KoPAPage * p = dynamic_cast<KoPAPage *>(page);
             Q_ASSERT(p);
             if (p && p->masterPage() == master) {

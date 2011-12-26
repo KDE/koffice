@@ -168,7 +168,7 @@ void TestPAPageDeleteCommand::redoUndoMultiple()
     QVERIFY(p3 != 0);
 
     // Delete the two last ones.
-    QList<KoPAPageBase*> pagesToDelete;
+    QList<KoPAPage*> pagesToDelete;
     pagesToDelete.append(p2);
     pagesToDelete.append(p3);
     KoPAPageDeleteCommand cmd(&doc, pagesToDelete);

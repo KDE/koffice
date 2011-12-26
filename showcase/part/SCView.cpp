@@ -264,7 +264,7 @@ void SCView::startPresentation()
 void SCView::startPresentationFromBeginning()
 {
     SCDocument * doc = dynamic_cast<SCDocument *>(kopaDocument());
-    QList<KoPAPageBase*> slideshow = doc->slideShow();
+    QList<KoPAPage*> slideshow = doc->slideShow();
     if (!slideshow.isEmpty()) {
         setActivePage(slideshow.first());
     }

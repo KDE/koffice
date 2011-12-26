@@ -24,7 +24,7 @@
 #include "KoPAView.h"
 #include "KoPADocument.h"
 #include "KoPAUtil.h"
-#include "KoPAPageBase.h"
+#include "KoPAPage.h"
 #include "KoPAPageProvider.h"
 
 #include <QPainter>
@@ -78,7 +78,7 @@ void KoPAPrintJob::startPrinting(RemovePolicy removePolicy)
             m_printer.newPage();
         }
 
-        KoPAPageBase * page = m_pages.at(i);
+        KoPAPage * page = m_pages.at(i);
         const KOdfPageLayoutData &layout = page->pageLayout();
         KoPAUtil::setZoom(layout, size, zoomHandler);
         QRect pageRect(KoPAUtil::pageRect(layout, size, zoomHandler));

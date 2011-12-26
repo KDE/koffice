@@ -23,18 +23,18 @@
 #include <klocale.h>
 
 #include "KoPADocument.h"
-#include "KoPAPageBase.h"
+#include "KoPAPage.h"
 
-KoPAPageMoveCommand::KoPAPageMoveCommand(KoPADocument *document, KoPAPageBase *page, KoPAPageBase *after, QUndoCommand *parent)
+KoPAPageMoveCommand::KoPAPageMoveCommand(KoPADocument *document, KoPAPage *page, KoPAPage *after, QUndoCommand *parent)
 : QUndoCommand(parent)
 , m_document(document)
 , m_after(after)
 {
     Q_ASSERT(document);
-    init(QList<KoPAPageBase *>() << page);
+    init(QList<KoPAPage *>() << page);
 }
 
-KoPAPageMoveCommand::KoPAPageMoveCommand(KoPADocument *document, const QList<KoPAPageBase *> &pages, KoPAPageBase *after, QUndoCommand *parent)
+KoPAPageMoveCommand::KoPAPageMoveCommand(KoPADocument *document, const QList<KoPAPage *> &pages, KoPAPage *after, QUndoCommand *parent)
 : QUndoCommand(parent)
 , m_document(document)
 , m_after(after)
@@ -45,11 +45,11 @@ KoPAPageMoveCommand::KoPAPageMoveCommand(KoPADocument *document, const QList<KoP
 }
 
 // Since C++ constructor can't call another constructor ...
-void KoPAPageMoveCommand::init(const QList<KoPAPageBase *> &pages)
+void KoPAPageMoveCommand::init(const QList<KoPAPage *> &pages)
 {
     Q_ASSERT(pages.size() > 0);
 
-    foreach (KoPAPageBase *page, pages) {
+    foreach (KoPAPage *page, pages) {
         int index = m_document->pageIndex(page);
         m_pageIndices.insert(index, page);
     }
@@ -68,10 +68,10 @@ KoPAPageMoveCommand::~KoPAPageMoveCommand()
 
 void KoPAPageMoveCommand::redo()
 {
-    KoPAPageBase *after = m_after;
-    QList<KoPAPageBase *> pages = m_pageIndices.values();
+    KoPAPage *after = m_after;
+    QList<KoPAPage *> pages = m_pageIndices.values();
 
-    foreach (KoPAPageBase *page, pages) {
+    foreach (KoPAPage *page, pages) {
         m_document->takePage(page);
         m_document->insertPage(page, after);
         after = page;
@@ -81,12 +81,12 @@ void KoPAPageMoveCommand::redo()
 
 void KoPAPageMoveCommand::undo()
 {
-    QList<KoPAPageBase *> pages = m_pageIndices.values();
-    foreach (KoPAPageBase *page, pages) {
+    QList<KoPAPage *> pages = m_pageIndices.values();
+    foreach (KoPAPage *page, pages) {
         m_document->takePage(page);
     }
 
-    QMap<int, KoPAPageBase *>::const_iterator it;
+    QMap<int, KoPAPage *>::const_iterator it;
     for (it = m_pageIndices.constBegin(); it != m_pageIndices.constEnd(); it++) {
         m_document->insertPage(it.value(), it.key());
     }

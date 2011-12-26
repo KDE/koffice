@@ -25,7 +25,7 @@
 #include "KOdfPageLayoutData.h"
 #include "KoPAView.h"
 #include "KoPAViewMode.h"
-#include "KoPAPageBase.h"
+#include "KoPAPage.h"
 
 #include <kxmlguifactory.h>
 

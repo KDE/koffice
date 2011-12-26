@@ -25,15 +25,15 @@
 
 #include <QWebPage>
 
-#include <KoPAPageBase.h>
+#include <KoPAPage.h>
 
 class SCHtmlExportDialog  : public KDialog
 {
     Q_OBJECT
 public:
-    SCHtmlExportDialog(const QList<KoPAPageBase*> &slides, const QString &title, const QString &author, QWidget *parent=0);
+    SCHtmlExportDialog(const QList<KoPAPage*> &slides, const QString &title, const QString &author, QWidget *parent=0);
 
-    QList<KoPAPageBase*> checkedSlides();
+    QList<KoPAPage*> checkedSlides();
     QStringList slidesNames();
     KUrl templateUrl();
     QString title();
@@ -53,7 +53,7 @@ private slots:
 
 
 private:
-    void generateSlidesNames(const QList<KoPAPageBase*> &slides);
+    void generateSlidesNames(const QList<KoPAPage*> &slides);
     void loadTemplatesList();
     bool selectedTemplateIsFavorite();
     bool selectedTemplateIsSystemFavorite();
@@ -61,7 +61,7 @@ private:
     void addSelectedTemplateToFavorite();
     void delSelectedTemplateFromFavorite();
 
-    QList<KoPAPageBase*> m_allSlides;
+    QList<KoPAPage*> m_allSlides;
     QString m_title;
     Ui::SCHtmlExport ui;
     QWebPage preview;

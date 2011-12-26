@@ -20,7 +20,7 @@
 #ifndef SCPAGESELECTSTRATEGYBASE_H
 #define SCPAGESELECTSTRATEGYBASE_H
 
-class KoPAPageBase;
+class KoPAPage;
 
 /**
  * Class for selecting the page used for painting the shapes
@@ -31,7 +31,7 @@ public:
     SCPageSelectStrategyBase();
     virtual ~SCPageSelectStrategyBase();
 
-    virtual const KoPAPageBase *page() const = 0;
+    virtual const KoPAPage *page() const = 0;
 };
 
 #endif /* SCPAGESELECTSTRATEGY_H */

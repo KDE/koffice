@@ -29,7 +29,7 @@
 
 #include <KoPACanvas.h>
 #include <KoPADocument.h>
-#include <KoPAPageBase.h>
+#include <KoPAPage.h>
 #include <KoPAPageThumbnailModel.h>
 #include <KoPAView.h>
 #include <KoPAViewMode.h>
@@ -42,7 +42,7 @@
 #include "SCPresenterViewToolWidget.h"
 #include "SCViewModePresentation.h"
 
-SCPresenterViewWidget::SCPresenterViewWidget(SCViewModePresentation *viewMode, const QList<KoPAPageBase *> &pages, KoPACanvas *canvas, QWidget *parent)
+SCPresenterViewWidget::SCPresenterViewWidget(SCViewModePresentation *viewMode, const QList<KoPAPage *> &pages, KoPACanvas *canvas, QWidget *parent)
     : QWidget(parent)
     , m_viewMode(viewMode)
     , m_pages(pages)
@@ -77,7 +77,7 @@ SCPresenterViewWidget::SCPresenterViewWidget(SCViewModePresentation *viewMode, c
     setLayout(vLayout);
 
     m_activeWidget = m_mainWidget;
-    KoPAPageBase *activePage = m_viewMode->view()->activePage();
+    KoPAPage *activePage = m_viewMode->view()->activePage();
     if (!m_pages.contains(activePage)) {
         activePage = m_pages[0];
     }
@@ -88,7 +88,7 @@ SCPresenterViewWidget::~SCPresenterViewWidget()
 {
 }
 
-void SCPresenterViewWidget::setActivePage(KoPAPageBase *page)
+void SCPresenterViewWidget::setActivePage(KoPAPage *page)
 {
     m_activeWidget->setActivePage(page);
 }

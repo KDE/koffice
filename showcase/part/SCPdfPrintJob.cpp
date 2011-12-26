@@ -22,7 +22,7 @@
 
 #include "SCView.h"
 #include "KoPADocument.h"
-#include "KoPAPageBase.h"
+#include "KoPAPage.h"
 #include "KoPAUtil.h"
 #include "KoPAPageProvider.h"
 #include <KoZoomHandler.h>
@@ -54,7 +54,7 @@ void SCPdfPrintJob::startPrinting(RemovePolicy removePolicy)
 
     for (int i = fromPage; i <= toPage; ++i) {
 
-        KoPAPageBase *page = m_pages.at(i);
+        KoPAPage *page = m_pages.at(i);
         const KOdfPageLayoutData &layout = page->pageLayout();
         m_printer.setPaperSize(QSizeF(layout.width,layout.height),QPrinter::Millimeter);
         QSize size = m_printer.pageRect().size();

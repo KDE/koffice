@@ -19,7 +19,7 @@
 
 #include "SCPageSelectStrategyFixed.h"
 
-SCPageSelectStrategyFixed::SCPageSelectStrategyFixed(const KoPAPageBase *page)
+SCPageSelectStrategyFixed::SCPageSelectStrategyFixed(const KoPAPage *page)
 : m_page(page)
 {
 }
@@ -28,7 +28,7 @@ SCPageSelectStrategyFixed::~SCPageSelectStrategyFixed()
 {
 }
 
-const KoPAPageBase *SCPageSelectStrategyFixed::page() const
+const KoPAPage *SCPageSelectStrategyFixed::page() const
 {
     return m_page;
 }

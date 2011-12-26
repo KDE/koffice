@@ -33,7 +33,7 @@
 
 #include <KoPACanvas.h>
 #include <KoPADocument.h>
-#include <KoPAPageBase.h>
+#include <KoPAPage.h>
 #include <KoPAPageThumbnailModel.h>
 #include <KoPAView.h>
 #include <KoPAViewMode.h>
@@ -44,7 +44,7 @@
 #include "SCNotes.h"
 #include "SCPage.h"
 
-SCPresenterViewInterface::SCPresenterViewInterface(const QList<KoPAPageBase *> &pages, KoPACanvas *canvas, QWidget *parent)
+SCPresenterViewInterface::SCPresenterViewInterface(const QList<KoPAPage *> &pages, KoPACanvas *canvas, QWidget *parent)
     : SCPresenterViewBaseInterface(pages, parent)
     , m_canvas(canvas)
 {
@@ -87,12 +87,12 @@ void SCPresenterViewInterface::setActivePage(int pageIndex)
     SCPresenterViewBaseInterface::setActivePage(pageIndex);
 
     Q_ASSERT(pageIndex >= 0 && pageIndex < m_pages.size());
-    KoPAPageBase *page = m_pages.at(pageIndex);
+    KoPAPage *page = m_pages.at(pageIndex);
     int pageCount = dynamic_cast<SCEndOfSlideShowPage *>(m_pages.last()) ?
             m_pages.count() - 1 : m_pages.count();
 
     // set the thumbnail for next page preview
-    KoPAPageBase *nextPage = 0;
+    KoPAPage *nextPage = 0;
     if (pageIndex != pageCount) {
         nextPage = m_pages.at(pageIndex + 1);
         m_nextSlidePreview->setPixmap(nextPage->thumbnail(m_previewSize));
@@ -126,7 +126,7 @@ void SCPresenterViewInterface::setPreviewSize(const QSize &size)
 
     // set the thumbnail for next page preview
     Q_ASSERT(m_activePage != -1);
-    KoPAPageBase *nextPage = 0;
+    KoPAPage *nextPage = 0;
     if (m_activePage != m_pages.count() - 1) {
         nextPage = m_pages.at(m_activePage + 1);
     }

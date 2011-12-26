@@ -25,7 +25,7 @@ class KoPALoadingContext::Private
 {
 public:
     QMap<QString, KoPAMasterPage*> masterPages;
-    QMap<QString, KoPAPageBase*> pages;
+    QMap<QString, KoPAPage*> pages;
 };
 
 KoPALoadingContext::KoPALoadingContext(KOdfLoadingContext &context, KResourceManager *documentResources)
@@ -54,12 +54,12 @@ const QMap<QString, KoPAMasterPage *> &KoPALoadingContext::masterPages()
     return d->masterPages;
 }
 
-KoPAPageBase* KoPALoadingContext::pageByName(const QString &name)
+KoPAPage* KoPALoadingContext::pageByName(const QString &name)
 {
     return d->pages.value(name, 0);
 }
 
-void KoPALoadingContext::addPage(const QString &name, KoPAPageBase* page)
+void KoPALoadingContext::addPage(const QString &name, KoPAPage* page)
 {
     d->pages.insert(name, page);
 }

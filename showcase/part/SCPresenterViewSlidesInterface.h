@@ -22,7 +22,7 @@
 
 #include "SCPresenterViewBaseInterface.h"
 
-class KoPAPageBase;
+class KoPAPage;
 class KoPAPageThumbnailModel;
 
 class QListView;
@@ -36,7 +36,7 @@ class SCPresenterViewSlidesInterface : public SCPresenterViewBaseInterface
 {
     Q_OBJECT
 public:
-    explicit SCPresenterViewSlidesInterface(const QList<KoPAPageBase *> &pages, QWidget *parent = 0);
+    explicit SCPresenterViewSlidesInterface(const QList<KoPAPage *> &pages, QWidget *parent = 0);
 
 signals:
     void selectedPageChanged(int index, bool doubleClicked);

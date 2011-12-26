@@ -45,7 +45,7 @@ bool SCMasterPage::loadOdf(const KXmlElement &element, KShapeLoadingContext &con
 #ifndef NWORKAROUND_ODF_BUGS
     KOdfWorkaround::setFixPresentationPlaceholder(true, context);
 #endif
-    bool retval = KoPAPageBase::loadOdf(element, context);
+    bool retval = KoPAPage::loadOdf(element, context);
 #ifndef NWORKAROUND_ODF_BUGS
     KOdfWorkaround::setFixPresentationPlaceholder(false, context);
 #endif

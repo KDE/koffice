@@ -38,7 +38,7 @@
 
 #include <KoPACanvas.h>
 #include <KoPADocument.h>
-#include <KoPAPageBase.h>
+#include <KoPAPage.h>
 #include <KoPAMasterPage.h>
 #include <KoPAView.h>
 
@@ -223,7 +223,7 @@ void SCViewModeSlidesSorter::deactivate()
     }
 }
 
-void SCViewModeSlidesSorter::updateActivePage(KoPAPageBase *page)
+void SCViewModeSlidesSorter::updateActivePage(KoPAPage *page)
 {
     Q_UNUSED(page);
 }
@@ -331,7 +331,7 @@ void SCViewModeSlidesSorter::populate()
     QListWidgetItem * item = 0;
 
     //Load the available slides
-    foreach (KoPAPageBase *page, m_view->kopaDocument()->pages())
+    foreach (KoPAPage *page, m_view->kopaDocument()->pages())
     {
         currentPage++;
         QString slideName = page->name().isEmpty() ? i18n("Slide %1", currentPage) : page->name();
@@ -345,8 +345,8 @@ void SCViewModeSlidesSorter::populate()
 
 void SCViewModeSlidesSorter::movePage(int pageNumber, int pageAfterNumber)
 {
-    KoPAPageBase * page = 0;
-    KoPAPageBase * pageAfter = 0;
+    KoPAPage * page = 0;
+    KoPAPage * pageAfter = 0;
 
     if (pageNumber >= 0) {
         page = m_view->kopaDocument()->pageByIndex(pageNumber,false);

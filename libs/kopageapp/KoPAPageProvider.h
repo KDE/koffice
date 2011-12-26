@@ -23,7 +23,7 @@
 #include <KPageProvider_p.h>
 #include "kopageapp_export.h"
 
-class KoPAPageBase;
+class KoPAPage;
 
 class KOPAGEAPP_EXPORT KoPAPageProvider : public KPageProvider
 {
@@ -33,11 +33,11 @@ public:
 
     virtual KTextPage * page(KShape * shape);
 
-    void setPageData(int pageNumber, KoPAPageBase *page);
+    void setPageData(int pageNumber, KoPAPage *page);
 
 private:
     int m_pageNumber;
-    KoPAPageBase *m_page;
+    KoPAPage *m_page;
 };
 
 #endif /* KOPAPAGEPROVIDER_H */

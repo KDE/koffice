@@ -19,13 +19,13 @@
 
 #include "SCPresenterViewSlidesInterface.h"
 
-#include <KoPAPageBase.h>
+#include <KoPAPage.h>
 #include <KoPAPageThumbnailModel.h>
 
 #include <QtGui/QVBoxLayout>
 #include <QtGui/QListView>
 
-SCPresenterViewSlidesInterface::SCPresenterViewSlidesInterface(const QList<KoPAPageBase *> &pages, QWidget *parent)
+SCPresenterViewSlidesInterface::SCPresenterViewSlidesInterface(const QList<KoPAPage *> &pages, QWidget *parent)
     : SCPresenterViewBaseInterface(pages, parent)
 {
     QVBoxLayout *vLayout = new QVBoxLayout;

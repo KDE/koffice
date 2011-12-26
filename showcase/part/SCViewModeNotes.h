@@ -24,7 +24,7 @@
 
 class KoPAView;
 class KoPACanvas;
-class KoPAPageBase;
+class KoPAPage;
 
 class SCViewModeNotes : public KoPAViewMode
 {
@@ -45,7 +45,7 @@ public:
     void activate(KoPAViewMode *previousViewMode);
     void deactivate();
 
-    void updateActivePage(KoPAPageBase *page);
+    void updateActivePage(KoPAPage *page);
 
     void addShape(KShape *shape);
     void removeShape(KShape *shape);

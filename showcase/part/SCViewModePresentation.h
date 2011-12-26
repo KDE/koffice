@@ -54,7 +54,7 @@ public:
     void deactivate();
 
     /// reimplemented
-    virtual void updateActivePage(KoPAPageBase *page);
+    virtual void updateActivePage(KoPAPage *page);
 
     /**
      * @brief Activate the saved view mode

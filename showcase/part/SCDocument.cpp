@@ -206,7 +206,7 @@ void SCDocument::removeAnimation(SCShapeAnimation * animation, bool removeFromAp
     }
 }
 
-void SCDocument::postAddShape(KoPAPageBase * page, KShape * shape)
+void SCDocument::postAddShape(KoPAPage * page, KShape * shape)
 {
     Q_UNUSED(page);
     SCShapeApplicationData * applicationData = dynamic_cast<SCShapeApplicationData*>(shape->applicationData());
@@ -219,7 +219,7 @@ void SCDocument::postAddShape(KoPAPageBase * page, KShape * shape)
     }
 }
 
-void SCDocument::postRemoveShape(KoPAPageBase * page, KShape * shape)
+void SCDocument::postRemoveShape(KoPAPage * page, KShape * shape)
 {
     Q_UNUSED(page);
     SCShapeApplicationData * applicationData = dynamic_cast<SCShapeApplicationData*>(shape->applicationData());
@@ -232,7 +232,7 @@ void SCDocument::postRemoveShape(KoPAPageBase * page, KShape * shape)
     }
 }
 
-void SCDocument::pageRemoved(KoPAPageBase * page, QUndoCommand * parent)
+void SCDocument::pageRemoved(KoPAPage * page, QUndoCommand * parent)
 {
     // only normal pages can be part of a slide show
     if (dynamic_cast<SCPage *>(page)) {
@@ -281,7 +281,7 @@ void SCDocument::initEmpty()
     resetURL();
 }
 
-SCShapeAnimations &SCDocument::animationsByPage(KoPAPageBase * page)
+SCShapeAnimations &SCDocument::animationsByPage(KoPAPage * page)
 {
     SCPageData * pageData = dynamic_cast<SCPageData *>(page);
     Q_ASSERT(pageData);
@@ -319,7 +319,7 @@ void SCDocument::setPresenterViewEnabled(bool enabled)
     m_presenterViewEnabled = enabled;
 }
 
-QList<KoPAPageBase*> SCDocument::slideShow() const
+QList<KoPAPage*> SCDocument::slideShow() const
 {
     if (!m_activeCustomSlideShow.isEmpty() &&
             m_customSlideShows->names().contains(m_activeCustomSlideShow)) {

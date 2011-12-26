@@ -25,7 +25,7 @@
 #include <ui_SCCustomSlideShowsDialog.h>
 
 class SCCustomSlideShows;
-class KoPAPageBase;
+class KoPAPage;
 class QListWidgetItem;
 class SCCustomSlideShows;
 class SCDocument;

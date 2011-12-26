@@ -82,10 +82,10 @@ bool KoPASavingContext::isSetClearDrawIds()
     return m_clearDrawIds;
 }
 
-QString KoPASavingContext::pageName(const KoPAPageBase * page)
+QString KoPASavingContext::pageName(const KoPAPage * page)
 {
     QString name;
-    QMap<const KoPAPageBase *, QString>::iterator it(m_pageToNames.find(page));
+    QMap<const KoPAPage *, QString>::iterator it(m_pageToNames.find(page));
     if (it != m_pageToNames.end()) {
         name = it.value();
     }

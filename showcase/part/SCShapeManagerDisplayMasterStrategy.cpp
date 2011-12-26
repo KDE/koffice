@@ -20,7 +20,7 @@
 #include "SCShapeManagerDisplayMasterStrategy.h"
 
 #include "SCPlaceholderShape.h"
-#include <KoPAPageBase.h>
+#include <KoPAPage.h>
 #include "SCPageSelectStrategyBase.h"
 
 SCShapeManagerDisplayMasterStrategy::SCShapeManagerDisplayMasterStrategy(KShapeManager * shapeManager, SCPageSelectStrategyBase * strategy)

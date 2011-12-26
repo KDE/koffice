@@ -33,7 +33,7 @@ public:
     SCPageSelectStrategyActive(KoPACanvasBase *canvas);
     ~SCPageSelectStrategyActive();
 
-    virtual const KoPAPageBase *page() const;
+    virtual const KoPAPage *page() const;
 
 private:
     KoPACanvasBase *m_canvas;

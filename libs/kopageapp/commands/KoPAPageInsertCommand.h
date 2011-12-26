@@ -25,7 +25,7 @@
 #include "kopageapp_export.h"
 
 class KoPADocument;
-class KoPAPageBase;
+class KoPAPage;
 
 /**
  * Command for inserting a page into a Document
@@ -33,7 +33,7 @@ class KoPAPageBase;
 class KOPAGEAPP_TEST_EXPORT KoPAPageInsertCommand : public QUndoCommand
 {
 public:
-    KoPAPageInsertCommand(KoPADocument *document, KoPAPageBase *page, KoPAPageBase *after, QUndoCommand *parent = 0);
+    KoPAPageInsertCommand(KoPADocument *document, KoPAPage *page, KoPAPage *after, QUndoCommand *parent = 0);
     virtual ~KoPAPageInsertCommand();
 
     /// redo the command
@@ -43,8 +43,8 @@ public:
 
 private:
     KoPADocument * m_document;
-    KoPAPageBase * m_page;
-    KoPAPageBase * m_after;
+    KoPAPage * m_page;
+    KoPAPage * m_after;
     bool m_deletePage;
 };
 

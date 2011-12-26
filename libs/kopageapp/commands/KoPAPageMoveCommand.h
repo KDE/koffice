@@ -26,7 +26,7 @@
 #include "kopageapp_export.h"
 
 class KoPADocument;
-class KoPAPageBase;
+class KoPAPage;
 
 /**
  * Command for moving a page in a document
@@ -34,9 +34,9 @@ class KoPAPageBase;
 class KOPAGEAPP_TEST_EXPORT KoPAPageMoveCommand : public QUndoCommand
 {
 public:
-    KoPAPageMoveCommand(KoPADocument *document, KoPAPageBase *page, KoPAPageBase *after, QUndoCommand *parent = 0);
-    KoPAPageMoveCommand(KoPADocument *document, const QList<KoPAPageBase *> &pages, KoPAPageBase *after, QUndoCommand *parent = 0);
-    void init(const QList<KoPAPageBase *> &pages);
+    KoPAPageMoveCommand(KoPADocument *document, KoPAPage *page, KoPAPage *after, QUndoCommand *parent = 0);
+    KoPAPageMoveCommand(KoPADocument *document, const QList<KoPAPage *> &pages, KoPAPage *after, QUndoCommand *parent = 0);
+    void init(const QList<KoPAPage *> &pages);
     virtual ~KoPAPageMoveCommand();
 
     /// redo the command
@@ -46,8 +46,8 @@ public:
 
 private:
     KoPADocument * m_document;
-    QMap<int, KoPAPageBase *> m_pageIndices;
-    KoPAPageBase *m_after;
+    QMap<int, KoPAPage *> m_pageIndices;
+    KoPAPage *m_after;
 };
 
 #endif // KOPAPAGEMOVECOMMAND_H

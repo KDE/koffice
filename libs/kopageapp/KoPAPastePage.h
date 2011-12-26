@@ -25,7 +25,7 @@
 #include "kopageapp_export.h"
 
 class KoPADocument;
-class KoPAPageBase;
+class KoPAPage;
 
 class KOPAGEAPP_TEST_EXPORT KoPAPastePage : public KOdfPasteBase
 {
@@ -44,13 +44,13 @@ public:
      * @param activePage The page after which the pages are pasted. If 0 at the 
      *        pages are inserted at the beginning.
      */
-    KoPAPastePage(KoPADocument * doc, KoPAPageBase * activePage);
+    KoPAPastePage(KoPADocument * doc, KoPAPage * activePage);
 
 protected:
     bool process(const KXmlElement &body, KOdfStoreReader &odfStore);
 
     KoPADocument *m_doc;
-    KoPAPageBase *m_activePage;
+    KoPAPage *m_activePage;
 };
 
 #endif /* KOPAPASTEPAGE_H */

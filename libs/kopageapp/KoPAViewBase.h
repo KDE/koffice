@@ -25,7 +25,7 @@
 
 class KoPACanvasBase;
 class KViewConverter;
-class KoPAPageBase;
+class KoPAPage;
 class KoPADocument;
 class KoZoomHandler;
 class KoZoomController;
@@ -59,13 +59,13 @@ public:
     virtual KoZoomHandler *zoomHandler() const;
 
     /// Set the active page and updates the UI
-    virtual void doUpdateActivePage(KoPAPageBase * page) = 0;
+    virtual void doUpdateActivePage(KoPAPage * page) = 0;
 
     /// Set page shown in the canvas to @p page
-    virtual void setActivePage(KoPAPageBase * page) = 0;
+    virtual void setActivePage(KoPAPage * page) = 0;
 
     /// @return Page that is shown in the canvas
-    virtual KoPAPageBase* activePage() const = 0;
+    virtual KoPAPage* activePage() const = 0;
 
     /// XXX
     virtual void navigatePage(KoPageApp::PageNavigation pageNavigation) = 0;
@@ -127,7 +127,7 @@ public:
 public slots:
 
     /// Set the active page and updates the UI
-    void updateActivePage(KoPAPageBase * page) { m_view->viewMode()->updateActivePage(page); }
+    void updateActivePage(KoPAPage * page) { m_view->viewMode()->updateActivePage(page); }
 
     /// Shows/hides the rulers
     void setShowRulers(bool show) { m_view->setShowRulers(show); }

@@ -25,7 +25,7 @@
 //Forward declarations
 class KXmlWriter;
 class KXmlElement;
-class KoPAPageBase;
+class KoPAPage;
 class KoPASavingContext;
 class KoPALoadingContext;
 class SCDocument;
@@ -44,7 +44,7 @@ public:
      * @param name The name of the new SlideShow
      * @param slideShow a list of the pages in the desired order 
      */
-    void insert(const QString &name, const QList<KoPAPageBase*> &slideShow);
+    void insert(const QString &name, const QList<KoPAPage*> &slideShow);
 
     /**
      * @brief Delete a Custom SlideShow by its name
@@ -59,7 +59,7 @@ public:
      * @param name The name of the SlideShow to be updated
      * @param slideShow slideShow to be inserted
      */
-    void update(const QString &name, const QList<KoPAPageBase*> &slideShow);
+    void update(const QString &name, const QList<KoPAPage*> &slideShow);
 
     /**
      * @brief Replaces a custom SlideShow with the given SlideShow
@@ -82,7 +82,7 @@ public:
      * @return a List of the Pages in the SlideShow if it was found
      *         a blank list if the SlideShow name was not found
      */
-    QList<KoPAPageBase*> getByName(const QString &name) const;
+    QList<KoPAPage*> getByName(const QString &name) const;
 
     /**
      * @brief Insert a slide to the right of the given position of all the known custom SlideShows.
@@ -93,7 +93,7 @@ public:
      * If it's 0 it will be prepended to the list, if it's the size it will be appended to the list.
      * Negative numbers can be used to count backwards.
      */
-    void addSlideToAll(KoPAPageBase* page, unsigned int position);
+    void addSlideToAll(KoPAPage* page, unsigned int position);
 
     /**
      * @brief Insert a  list of slides to the right of the given position of all the known custom SlideShows.
@@ -102,21 +102,21 @@ public:
      * @param slideShow list of slides to be inserted
      * @param position the position at which the slide will be inserted
      */
-    void addSlidesToAll(const QList<KoPAPageBase*> &slideShow, unsigned int position);
+    void addSlidesToAll(const QList<KoPAPage*> &slideShow, unsigned int position);
 
     /**
      * @brief Deletes all the ocurrencies of a given slide from all the known custom SlideShows
      *
      * @param slide slide to be removed
      */
-    void removeSlideFromAll(KoPAPageBase* page);
+    void removeSlideFromAll(KoPAPage* page);
 
     /**
      * @brief Deletes all the ocurrencies of a given list of slides from all the known custom SlideShows
      *
      * @param slideShow list of slides to be removed
      */
-    void removeSlidesFromAll(const QList<KoPAPageBase*> &slideShow);
+    void removeSlidesFromAll(const QList<KoPAPage*> &slideShow);
 
     /**
      * @brief Save the slide shows
@@ -134,6 +134,6 @@ public:
     void loadOdf(const KXmlElement &presentationSettings, KoPALoadingContext &context);
 
 private:
-    QMap< QString, QList<KoPAPageBase*> > m_customSlideShows;
+    QMap< QString, QList<KoPAPage*> > m_customSlideShows;
 };
 #endif /* SCCUSTOMSLIDESHOWS_H */

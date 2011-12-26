@@ -29,7 +29,7 @@ struct KOdfPageLayoutData;
 class KoPAViewBase;
 class KoPACanvas;
 class KoPACanvasBase;
-class KoPAPageBase;
+class KoPAPage;
 class KToolProxy;
 class KShape;
 class KViewConverter;
@@ -166,7 +166,7 @@ public slots:
      *
      * @param page the new page to be updated on the view mode
      */
-    virtual void updateActivePage(KoPAPageBase * page);
+    virtual void updateActivePage(KoPAPage * page);
 
 protected:
     KoPACanvasBase * m_canvas;

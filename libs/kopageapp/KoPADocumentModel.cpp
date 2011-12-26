@@ -21,7 +21,7 @@
 #include "KoPADocumentModel.h"
 
 #include "KoPADocument.h"
-#include "KoPAPageBase.h"
+#include "KoPAPage.h"
 #include <KShapePainter.h>
 #include <KShapeManager.h>
 #include <KToolManager.h>
@@ -129,7 +129,7 @@ QModelIndex KoPADocumentModel::parent(const QModelIndex &child) const
     KShapeContainer *grandParentShape = parentShape->parent();
     if(! grandParentShape)
     {
-        KoPAPageBase* page = dynamic_cast<KoPAPageBase*>(parentShape);
+        KoPAPage* page = dynamic_cast<KoPAPage*>(parentShape);
         return createIndex(m_document->pages(m_master).indexOf(page), 0, parentShape);
     }
 
@@ -153,11 +153,11 @@ QVariant KoPADocumentModel::data(const QModelIndex &index, int role) const
             QString name = shape->name();
             if(name.isEmpty())
             {
-                if (dynamic_cast<KoPAPageBase *>(shape)) {
+                if (dynamic_cast<KoPAPage *>(shape)) {
                     if(m_document->pageType() == KoPageApp::Slide) {
-                        name = i18n("Slide %1",  m_document->pageIndex(dynamic_cast<KoPAPageBase *>(shape)) + 1);
+                        name = i18n("Slide %1",  m_document->pageIndex(dynamic_cast<KoPAPage *>(shape)) + 1);
                     } else {
-                        name = i18n("Page  %1", m_document->pageIndex(dynamic_cast<KoPAPageBase *>(shape)) + 1);
+                        name = i18n("Page  %1", m_document->pageIndex(dynamic_cast<KoPAPage *>(shape)) + 1);
                     }
                 }
                 else if(dynamic_cast<KShapeLayer*>(shape)) {
@@ -176,7 +176,7 @@ QVariant KoPADocumentModel::data(const QModelIndex &index, int role) const
         case Qt::EditRole: return shape->name();
         case Qt::SizeHintRole:
         {
-            KoPAPageBase *page = dynamic_cast<KoPAPageBase*>(shape);
+            KoPAPage *page = dynamic_cast<KoPAPage*>(shape);
             if (page) { // return actual page size for page
                 KOdfPageLayoutData layout = page->pageLayout();
                 return QSize(layout.width, layout.height);
@@ -304,7 +304,7 @@ QImage KoPADocumentModel::createThumbnail(KShape* shape, const QSize &thumbSize)
 
     QList<KShape*> shapes;
 
-    KoPAPageBase *page = dynamic_cast<KoPAPageBase*>(shape);
+    KoPAPage *page = dynamic_cast<KoPAPage*>(shape);
     if (page) { // We create a thumbnail with actual width / height ratio for page
         KoZoomHandler zoomHandler;
         KOdfPageLayoutData layout = page->pageLayout();
@@ -430,14 +430,14 @@ bool KoPADocumentModel::dropMimeData(const QMimeData * data, Qt::DropAction acti
 
     QList<KShape*> toplevelShapes;
     QList<KShapeLayer*> layers;
-    QList<KoPAPageBase *> pages;
+    QList<KoPAPage *> pages;
     // remove shapes having its parent in the list
     // and separate the layers
     foreach(KShape * shape, shapes)
     {
         // check whether the selection contains page
         // by the UI rules, the selection should contains page only
-        KoPAPageBase *page = dynamic_cast<KoPAPageBase *>(shape);
+        KoPAPage *page = dynamic_cast<KoPAPage *>(shape);
         if (page) {
             pages.append(page);
             continue;
@@ -468,7 +468,7 @@ bool KoPADocumentModel::dropMimeData(const QMimeData * data, Qt::DropAction acti
             if (row < 0) {
                 return false;
             }
-            KoPAPageBase *after = (row != 0) ? m_document->pageByIndex(row - 1, false) : 0;
+            KoPAPage *after = (row != 0) ? m_document->pageByIndex(row - 1, false) : 0;
             KoPAPageMoveCommand *command = new KoPAPageMoveCommand(m_document, pages, after);
             m_document->addCommand(command);
             kDebug(30010) << "KoPADocumentModel::dropMimeData parent = root, dropping page(s) as root, moving page(s)";
@@ -584,7 +584,7 @@ QModelIndex KoPADocumentModel::parentIndexFromShape(const KShape * child)
 
 
     if(parentLayer) {
-        KoPAPageBase * page = dynamic_cast<KoPAPageBase*>(parentLayer->parent());
+        KoPAPage * page = dynamic_cast<KoPAPage*>(parentLayer->parent());
         if (page)
             return createIndex(m_document->pages(m_master).count() - 1 - m_document->pages(m_master).indexOf(page), 0, parentLayer);
     }
@@ -602,8 +602,8 @@ void KoPADocumentModel::setDocument(KoPADocument* document)
 
     if (m_document)
     {
-        connect(m_document, SIGNAL(pageAdded(KoPAPageBase*)), this, SLOT(update()));
-        connect(m_document, SIGNAL(pageRemoved(KoPAPageBase*)), this, SLOT(update()));
+        connect(m_document, SIGNAL(pageAdded(KoPAPage*)), this, SLOT(update()));
+        connect(m_document, SIGNAL(pageRemoved(KoPAPage*)), this, SLOT(update()));
         connect(m_document, SIGNAL(shapeAdded(KShape*)), this, SLOT(update()));
         connect(m_document, SIGNAL(shapeRemoved(KShape*)), this, SLOT(update()));
     }

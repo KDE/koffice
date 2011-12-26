@@ -27,7 +27,7 @@
 #include "kopageapp_export.h"
 
 class KoPAView;
-class KoPAPageBase;
+class KoPAPage;
 class KoPAPageProvider;
 
 /**
@@ -49,7 +49,7 @@ public slots:
 
 protected:
     QPrinter m_printer;
-    QList<KoPAPageBase*> m_pages;
+    QList<KoPAPage*> m_pages;
     KoPAPageProvider *m_pageProvider;
 };
 

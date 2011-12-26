@@ -32,7 +32,7 @@ class SCViewModeSlidesSorter;
 class SCViewModePresentation;
 class SCViewModePresenterView;
 class KActionMenu;
-class KoPAPageBase;
+class KoPAPage;
 
 class SHOWCASE_EXPORT SCView : public KoPAView
 {

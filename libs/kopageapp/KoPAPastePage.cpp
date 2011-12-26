@@ -35,7 +35,7 @@
 
 #include <kdebug.h>
 
-KoPAPastePage::KoPAPastePage(KoPADocument * doc, KoPAPageBase * activePage)
+KoPAPastePage::KoPAPastePage(KoPADocument * doc, KoPAPage * activePage)
 : m_doc(doc)
 , m_activePage(activePage)
 {
@@ -46,11 +46,11 @@ bool KoPAPastePage::process(const KXmlElement &body, KOdfStoreReader &odfStore)
     KOdfLoadingContext loadingContext(odfStore.styles(), odfStore.store(), m_doc->componentData());
     KoPALoadingContext paContext(loadingContext, m_doc->resourceManager());
 
-    QList<KoPAPageBase *> masterPages(m_doc->loadOdfMasterPages(odfStore.styles().masterPages(), paContext));
-    QList<KoPAPageBase *> pages(m_doc->loadOdfPages(body, paContext));
+    QList<KoPAPage *> masterPages(m_doc->loadOdfMasterPages(odfStore.styles().masterPages(), paContext));
+    QList<KoPAPage *> pages(m_doc->loadOdfPages(body, paContext));
 
-    KoPAPageBase * insertAfterPage = 0;
-    KoPAPageBase * insertAfterMasterPage = 0;
+    KoPAPage * insertAfterPage = 0;
+    KoPAPage * insertAfterMasterPage = 0;
     if (dynamic_cast<KoPAMasterPage *>(m_activePage) || (m_activePage == 0 && pages.empty())) {
         insertAfterMasterPage = m_activePage;
         insertAfterPage = m_doc->pages(false).last();
@@ -68,14 +68,14 @@ bool KoPAPastePage::process(const KXmlElement &body, KOdfStoreReader &odfStore)
         KOdfEmbeddedDocumentSaver embeddedSaver;
         KoPASavingContext savingContext(xmlWriter, mainStyles, embeddedSaver, 1);
         savingContext.addOption(KShapeSavingContext::UniqueMasterPages);
-        QList<KoPAPageBase*> emptyList;
-        QList<KoPAPageBase*> existingMasterPages = m_doc->pages(true);
+        QList<KoPAPage*> emptyList;
+        QList<KoPAPage*> existingMasterPages = m_doc->pages(true);
         savingContext.setClearDrawIds(true);
         m_doc->saveOdfPages(savingContext, emptyList, existingMasterPages);
 
         QMap<QString, KoPAMasterPage*> masterPageNames;
 
-        foreach (KoPAPageBase * page, existingMasterPages)
+        foreach (KoPAPage * page, existingMasterPages)
         {
             KoPAMasterPage * masterPage = dynamic_cast<KoPAMasterPage*>(page);
             Q_ASSERT(masterPage);
@@ -91,7 +91,7 @@ bool KoPAPastePage::process(const KXmlElement &body, KOdfStoreReader &odfStore)
         m_doc->saveOdfPages(savingContext, emptyList, masterPages);
 
         QMap<KoPAMasterPage*, KoPAMasterPage*> updateMasterPage;
-        foreach (KoPAPageBase * page, masterPages)
+        foreach (KoPAPage * page, masterPages)
         {
             KoPAMasterPage * masterPage = dynamic_cast<KoPAMasterPage*>(page);
             Q_ASSERT(masterPage);
@@ -105,7 +105,7 @@ bool KoPAPastePage::process(const KXmlElement &body, KOdfStoreReader &odfStore)
         }
 
         // update pages which have a duplicate master page
-        foreach (KoPAPageBase * page, pages)
+        foreach (KoPAPage * page, pages)
         {
             KoPAPage * p = dynamic_cast<KoPAPage*>(page);
             Q_ASSERT(p);
@@ -135,13 +135,13 @@ bool KoPAPastePage::process(const KXmlElement &body, KOdfStoreReader &odfStore)
         cmd = new QUndoCommand(i18np("Paste Page", "Paste Pages", qMax(masterPages.size(), pages.size())));
     }
 
-    foreach(KoPAPageBase * masterPage, masterPages)
+    foreach(KoPAPage * masterPage, masterPages)
     {
         new KoPAPageInsertCommand(m_doc, masterPage, insertAfterMasterPage, cmd);
         insertAfterMasterPage = masterPage;
     }
 
-    foreach(KoPAPageBase * page, pages)
+    foreach(KoPAPage * page, pages)
     {
         new KoPAPageInsertCommand(m_doc, page, insertAfterPage, cmd);
         insertAfterPage = page;

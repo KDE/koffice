@@ -83,7 +83,7 @@ KoPAMasterPageDialog::~KoPAMasterPageDialog()
 KoPAMasterPage *KoPAMasterPageDialog::selectedMasterPage()
 {
     QModelIndex index = m_listView->currentIndex();
-    KoPAPageBase *page = static_cast<KoPAPageBase *>(index.internalPointer());
+    KoPAPage *page = static_cast<KoPAPage *>(index.internalPointer());
     KoPAMasterPage *masterPage = dynamic_cast<KoPAMasterPage *>(page);
     Q_ASSERT(masterPage);
     return masterPage;
