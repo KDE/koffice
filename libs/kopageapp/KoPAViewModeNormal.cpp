@@ -53,7 +53,7 @@ void KoPAViewModeNormal::paint(KoPACanvas* canvas, QPainter &painter, const QRec
 
     painter.translate(-m_canvas->documentOffset());
     painter.setRenderHint(QPainter::Antialiasing);
-    QRect clipRect = paintRect.translated(m_canvas->documentOffset()).toRect();
+    QRectF clipRect = paintRect.translated(m_canvas->documentOffset());
     painter.setClipRect(clipRect);
 
     painter.translate(m_canvas->documentOrigin().x(), m_canvas->documentOrigin().y());
@@ -71,8 +71,8 @@ void KoPAViewModeNormal::paint(KoPACanvas* canvas, QPainter &painter, const QRec
     paintMargins(painter, *converter);
 
     painter.setRenderHint(QPainter::Antialiasing, false);
+    QRectF updateRect = converter->viewToDocument(clipRect.translated(converter->documentToView(-m_origin)));
 
-    QRectF updateRect = converter->viewToDocument(m_canvas->widgetToView(clipRect));
     m_canvas->document()->gridData().paintGrid(painter, *converter, updateRect);
     m_canvas->document()->guidesData().paintGuides(painter, *converter, updateRect);
 

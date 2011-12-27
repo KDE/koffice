@@ -37,7 +37,7 @@
 KoPACanvas::KoPACanvas(KoPAView *view, KoPADocument *doc, QWidget *parent)
     : QWidget(parent),
     KCanvasBase(doc),
-    m_view(0),
+    m_view(view),
     m_doc(doc),
     m_shapeManager(0),
     m_masterShapeManager(0),
@@ -47,7 +47,6 @@ KoPACanvas::KoPACanvas(KoPAView *view, KoPADocument *doc, QWidget *parent)
     m_masterShapeManager = new KShapeManager(this);
     m_toolProxy = new KToolProxy(this);
 
-    setView(view);
     setFocusPolicy(Qt::StrongFocus);
     // this is much faster than painting it in the paintevent
     setBackgroundRole(QPalette::Base);
@@ -61,11 +60,6 @@ KoPACanvas::~KoPACanvas()
     delete m_toolProxy;
     delete m_masterShapeManager;
     delete m_shapeManager;
-}
-
-void KoPACanvas::setView(KoPAView *view)
-{
-    m_view = view;
 }
 
 KoPADocument* KoPACanvas::document() const
@@ -129,28 +123,19 @@ KUnit KoPACanvas::unit() const
     return m_doc->unit();
 }
 
-const QPoint &KoPACanvas::documentOffset() const
+QPoint KoPACanvas::documentOffset() const
 {
     return m_documentOffset;
 }
 
-void KoPACanvas::setDocumentOffset(const QPoint &offset) {
+void KoPACanvas::setDocumentOffset(const QPoint &offset)
+{
     m_documentOffset = offset;
 }
 
 QPoint KoPACanvas::widgetToView(const QPoint&p) const
 {
     return p - viewConverter()->documentToView(m_view->viewMode()->origin()).toPoint();
-}
-
-QRect KoPACanvas::widgetToView(const QRect &r) const
-{
-    return r.translated(viewConverter()->documentToView(-m_view->viewMode()->origin()).toPoint());
-}
-
-QPoint KoPACanvas::viewToWidget(const QPoint &p) const
-{
-    return p + viewConverter()->documentToView(m_view->viewMode()->origin()).toPoint();
 }
 
 QRect KoPACanvas::viewToWidget(const QRect &r) const
@@ -163,8 +148,8 @@ KGuidesData * KoPACanvas::guidesData()
     return &m_doc->guidesData();
 }
 
-void KoPACanvas::paint(QPainter &painter, const QRectF paintRect) {
-
+void KoPACanvas::paint(QPainter &painter, const QRectF paintRect)
+{
     KoPAPage *activePage(m_view->activePage());
     if (m_view->activePage()) {
         int pageNumber = m_doc->pageIndex(m_view->activePage()) + 1;
