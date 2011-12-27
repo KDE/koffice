@@ -128,8 +128,6 @@ protected:
     virtual void resizeEvent(QResizeEvent * event);
 
 private:
-    void paint(QPainter &painter, const QRectF paintRect);
-
     /**
      * Shows the default context menu
      * @param globalPos global position to show the menu at.

@@ -39,14 +39,10 @@ KoPACanvas::KoPACanvas(KoPAView *view, KoPADocument *doc, QWidget *parent)
     KCanvasBase(doc),
     m_view(view),
     m_doc(doc),
-    m_shapeManager(0),
-    m_masterShapeManager(0),
-    m_toolProxy(0)
+    m_shapeManager(new KShapeManager(this)),
+    m_masterShapeManager(new KShapeManager(this)),
+    m_toolProxy(new KToolProxy(this))
 {
-    m_shapeManager = new KShapeManager(this);
-    m_masterShapeManager = new KShapeManager(this);
-    m_toolProxy = new KToolProxy(this);
-
     setFocusPolicy(Qt::StrongFocus);
     // this is much faster than painting it in the paintevent
     setBackgroundRole(QPalette::Base);
@@ -148,17 +144,6 @@ KGuidesData * KoPACanvas::guidesData()
     return &m_doc->guidesData();
 }
 
-void KoPACanvas::paint(QPainter &painter, const QRectF paintRect)
-{
-    KoPAPage *activePage(m_view->activePage());
-    if (m_view->activePage()) {
-        int pageNumber = m_doc->pageIndex(m_view->activePage()) + 1;
-        QVariant var = m_doc->resourceManager()->resource(KOdfText::PageProvider);
-        static_cast<KoPAPageProvider*>(var.value<void*>())->setPageData(pageNumber, activePage);
-        m_view->viewMode()->paint(this, painter, paintRect);
-    }
-}
-
 QWidget* KoPACanvas::canvasWidget()
 {
     return this;
@@ -194,16 +179,20 @@ void KoPACanvas::updateCanvas(const QRectF &rc)
 
 bool KoPACanvas::event(QEvent *e)
 {
-    if (toolProxy()) {
-        toolProxy()->processEvent(e);
-    }
+    m_toolProxy->processEvent(e);
     return QWidget::event(e);
 }
 
 void KoPACanvas::paintEvent(QPaintEvent *event)
 {
     QPainter painter(this);
-    paint(painter, event->rect());
+    KoPAPage *activePage(m_view->activePage());
+    if (m_view->activePage()) {
+        int pageNumber = m_doc->pageIndex(m_view->activePage()) + 1;
+        QVariant var = m_doc->resourceManager()->resource(KOdfText::PageProvider);
+        static_cast<KoPAPageProvider*>(var.value<void*>())->setPageData(pageNumber, activePage);
+        m_view->viewMode()->paint(this, painter, event->rect());
+    }
     painter.end();
 }
 
@@ -218,7 +207,7 @@ void KoPACanvas::mousePressEvent(QMouseEvent *event)
 
     if (!event->isAccepted() && event->button() == Qt::RightButton)
     {
-        showContextMenu(event->globalPos(), toolProxy()->popupActionList());
+        showContextMenu(event->globalPos(), m_toolProxy->popupActionList());
         event->setAccepted(true);
     }
 }
@@ -272,12 +261,12 @@ void KoPACanvas::updateInputMethodInfo()
 
 QVariant KoPACanvas::inputMethodQuery(Qt::InputMethodQuery query) const
 {
-    return toolProxy()->inputMethodQuery(query, *(viewConverter()));
+    return m_toolProxy->inputMethodQuery(query, *(viewConverter()));
 }
 
 void KoPACanvas::inputMethodEvent(QInputMethodEvent *event)
 {
-    toolProxy()->inputMethodEvent(event);
+    m_toolProxy->inputMethodEvent(event);
 }
 
 void KoPACanvas::resizeEvent(QResizeEvent * event)
