@@ -35,12 +35,19 @@
 #include <KOdfStylesReader.h>
 #include <KOdfLoadingContext.h>
 #include <KoZoomHandler.h>
+#include <KShapeContainerDefaultModel.h>
+
+class MasterPageShapeContainerModel : public KShapeContainerDefaultModel
+{
+public:
+    bool isClipped(const KShape *child) const { return true; }
+};
 
 KoPAMasterPage::KoPAMasterPage()
-    : KoPAPage(0)
+    : KoPAPage(new MasterPageShapeContainerModel())
 {
     setName("Standard");
-    m_pageProperties = 0;
+    setSize(QSize(100000, 10000));
 }
 
 KoPAMasterPage::~KoPAMasterPage()

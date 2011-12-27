@@ -1,5 +1,6 @@
 /* This file is part of the KDE project
  * Copyright (C) 2007-2009 Thorsten Zachmann <zachmann@kde.org>
+   Copyright (C) 2011 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -37,7 +38,7 @@ class SCDeclarations;
 class SHOWCASE_EXPORT SCPage : public KoPAPage, public SCPageData
 {
 public:
-    SCPage(KoPAMasterPage * masterPage, SCDocument * document);
+    SCPage(SCDocument * document);
     virtual ~SCPage();
 
     /**

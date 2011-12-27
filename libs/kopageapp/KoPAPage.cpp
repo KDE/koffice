@@ -40,13 +40,21 @@
 #include <KOdfStyleStack.h>
 #include <KShapeBackgroundBase.h>
 
-KoPAPage::KoPAPage(KoPAMasterPage *masterPage)
+KoPAPage::KoPAPage()
     : KShapeContainer(new KoPAPageContainerModel()),
-    m_masterPage(masterPage),
+    m_masterPage(0),
     m_pageProperties(0)
 {
-    if (m_masterPage)
-        m_pageProperties = UseMasterBackground | DisplayMasterBackground | DisplayMasterShapes;
+    // Add a default layer
+    KShapeLayer* layer = new KShapeLayer;
+    addShape(layer);
+}
+
+KoPAPage::KoPAPage(KShapeContainerModel *model)
+    : KShapeContainer(model),
+    m_masterPage(0),
+    m_pageProperties(0)
+{
     // Add a default layer
     KShapeLayer* layer = new KShapeLayer;
     addShape(layer);
@@ -334,9 +342,8 @@ void KoPAPage::loadOdfPageTag(const KXmlElement &element, KoPALoadingContext &lo
     setName(name);
 }
 
-void KoPAPage::setMasterPage(KoPAMasterPage * masterPage)
+void KoPAPage::setMasterPage(KoPAMasterPage *masterPage)
 {
-    Q_ASSERT(masterPage);
     m_masterPage = masterPage;
 }
 

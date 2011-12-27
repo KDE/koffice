@@ -46,7 +46,8 @@ class KOdfPageLayoutData;
 class KOPAGEAPP_EXPORT KoPAPage : public KShapeContainer
 {
 public:
-    explicit KoPAPage(KoPAMasterPage *masterPage);
+    explicit KoPAPage();
+    explicit KoPAPage(KShapeContainerModel *model);
     virtual ~KoPAPage();
 
     /**

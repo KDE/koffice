@@ -667,9 +667,11 @@ QList<KoPAPage*> KoPADocument::pages(bool masterPages) const
     return masterPages ? d->masterPages : d->pages;
 }
 
-KoPAPage * KoPADocument::newPage(KoPAMasterPage * masterPage)
+KoPAPage *KoPADocument::newPage(KoPAMasterPage *masterPage)
 {
-    return new KoPAPage(masterPage);
+    KoPAPage *page = new KoPAPage();
+    page->setMasterPage(masterPage);
+    return page;
 }
 
 KoPAMasterPage * KoPADocument::newMasterPage()

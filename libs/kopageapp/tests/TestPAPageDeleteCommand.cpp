@@ -33,7 +33,8 @@ void TestPAPageDeleteCommand::redoUndo()
     KoPAMasterPage * master1 = new KoPAMasterPage();
     doc.insertPage(master1, 0);
 
-    KoPAPage * page1 = new KoPAPage(master1);
+    KoPAPage * page1 = new KoPAPage();
+    page1->setMasterPage(master1);
     doc.insertPage(page1, 0);
 
     KoPAPage * p1 = dynamic_cast<KoPAPage *>(doc.pageByIndex(0, false));
@@ -42,8 +43,10 @@ void TestPAPageDeleteCommand::redoUndo()
     QVERIFY(p1 != 0);
     QVERIFY(m1 != 0);
 
-    KoPAPage * p2 = new KoPAPage(m1);
-    KoPAPage * p3 = new KoPAPage(m1);
+    KoPAPage * p2 = new KoPAPage();
+    p2->setMasterPage(m1);
+    KoPAPage * p3 = new KoPAPage();
+    p3->setMasterPage(m1);
     doc.insertPage(p2, 1);
     doc.insertPage(p3, 2);
 
@@ -154,9 +157,12 @@ void TestPAPageDeleteCommand::redoUndoMultiple()
     QVERIFY(m != 0);
 
     // Create three regular pages.
-    KoPAPage * page1 = new KoPAPage(master);
-    KoPAPage * page2 = new KoPAPage(master);
-    KoPAPage * page3 = new KoPAPage(master);
+    KoPAPage * page1 = new KoPAPage();
+    page1->setMasterPage(master);
+    KoPAPage * page2 = new KoPAPage();
+    page2->setMasterPage(master);
+    KoPAPage * page3 = new KoPAPage();
+    page3->setMasterPage(master);
     doc.insertPage(page1, 1);
     doc.insertPage(page2, 2);
     doc.insertPage(page3, 3);

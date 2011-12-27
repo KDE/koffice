@@ -1,6 +1,7 @@
 /* This file is part of the KDE project
  * Copyright (C) 2007-2009 Thorsten Zachmann <zachmann@kde.org>
  * Copyright (C) 2010 Benjamin Port <port.benjamin@gmail.com>
+   Copyright (C) 2011 Thomas Zander <zander@kde.org>
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
  * License as published by the Free Software Foundation; either
@@ -59,9 +60,9 @@ public:
 
 };
 
-SCPage::SCPage(KoPAMasterPage * masterPage, SCDocument * document)
-: KoPAPage(masterPage)
-, d(new Private(this, document))
+SCPage::SCPage(SCDocument *document)
+    : KoPAPage(),
+    d(new Private(this, document))
 {
     setApplicationData(new SCPageApplicationData());
     placeholders().init(0, shapes());
