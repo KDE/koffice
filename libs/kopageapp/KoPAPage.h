@@ -38,6 +38,7 @@ class KoZoomHandler;
 class KoPASavingContext;
 class KoPAMasterPage;
 class KOdfPageLayoutData;
+class KoPADocument;
 
 /**
  * A Page contains KShapeLayer shapes as direct children. The layers than can
@@ -46,8 +47,8 @@ class KOdfPageLayoutData;
 class KOPAGEAPP_EXPORT KoPAPage : public KShapeContainer
 {
 public:
-    explicit KoPAPage();
-    explicit KoPAPage(KShapeContainerModel *model);
+    explicit KoPAPage(KoPADocument *document);
+    explicit KoPAPage(KShapeContainerModel *model, KoPADocument *document);
     virtual ~KoPAPage();
 
     /**
@@ -63,7 +64,6 @@ public:
     /// reimplemented
     virtual bool loadOdf(const KXmlElement &element, KShapeLoadingContext &context);
 
-
     /// @return the layout of the page
     virtual KOdfPageLayoutData &pageLayout();
     /// @return the layout of the page
@@ -75,7 +75,7 @@ public:
      * @param painter used to paint the background
      * @param converter to convert between internal and view coordinates
      */
-    virtual void paintBackground(QPainter &painter, const KViewConverter &converter);
+    virtual void paintBackground(QPainter &painter, const KViewConverter &converter); // TODO remove
 
     /**
      * Get if master shapes should be displayed
@@ -114,14 +114,14 @@ public:
      */
     bool displayShape(KShape *shape) const;
 
-    QPixmap thumbnail(const QSize &size = QSize(512, 512));
+    QPixmap thumbnail(const QSize &size = QSize(512, 512)); // TODO remove
 
     /**
      * This function is called when the content of the page changes
      *
      * It invalidates the pages thumbnail cache.
      */
-    virtual void pageUpdated();
+    virtual void pageUpdated(); // TODO remove
 
     /// reimplemented
     virtual QSizeF size() const;
@@ -163,12 +163,16 @@ public:
      * @param painter The painter used to paint the page
      * @param zoomHandler The zoomHandler used to paint the page
      */
-    virtual void paintPage(QPainter &painter, KoZoomHandler &zoomHandler);
+    virtual void paintPage(QPainter &painter, KoZoomHandler &zoomHandler); // TODO remove
 
     /// Set the masterpage for this page to @p masterPage
-    void setMasterPage(KoPAMasterPage * masterPage);
+    void setMasterPage(KoPAMasterPage * masterPage); // TODO rename to setMaster
     /// @return the masterpage of this page
-    KoPAMasterPage * masterPage() { return m_masterPage; }
+    KoPAMasterPage * masterPage() { return m_masterPage; } // TODO remove
+
+    KShape *backgroundShape() const {
+        return m_pictureShape;
+    }
 
 protected:
     /**
@@ -286,6 +290,12 @@ protected:
     KoPAMasterPage *m_masterPage;
 
     int m_pageProperties;
+
+private:
+    void init();
+
+    KoPADocument *m_document;
+    KShape *m_pictureShape; // for the background
 };
 
-#endif /* KOPAPAGEBASE_H */
+#endif

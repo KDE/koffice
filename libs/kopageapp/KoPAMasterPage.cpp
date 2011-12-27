@@ -40,11 +40,11 @@
 class MasterPageShapeContainerModel : public KShapeContainerDefaultModel
 {
 public:
-    bool isClipped(const KShape *child) const { return true; }
+    bool isClipped(const KShape *) const { return true; }
 };
 
-KoPAMasterPage::KoPAMasterPage()
-    : KoPAPage(new MasterPageShapeContainerModel())
+KoPAMasterPage::KoPAMasterPage(KoPADocument *document)
+    : KoPAPage(new MasterPageShapeContainerModel(), document)
 {
     setName("Standard");
     setSize(QSize(100000, 10000));

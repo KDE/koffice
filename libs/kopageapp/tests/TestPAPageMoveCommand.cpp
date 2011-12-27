@@ -29,9 +29,8 @@
 
 void TestPAPageMoveCommand::initTestCase()
 {
-    for(int i = 0; i < 5; ++i)
-    {
-        m_pages.insert(i, new KoPAMasterPage());
+    for (int i = 0; i < 5; ++i) {
+        m_pages.insert(i, new KoPAMasterPage(&m_doc));
     }
     m_doc.insertPage(m_pages[0], -1);
 }

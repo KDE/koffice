@@ -166,7 +166,7 @@ KoPAPage *SCDocument::newPage(KoPAMasterPage *masterPage)
 
 KoPAMasterPage * SCDocument::newMasterPage()
 {
-    return new SCMasterPage();
+    return new SCMasterPage(this);
 }
 
 KOdf::DocumentType SCDocument::documentType() const
