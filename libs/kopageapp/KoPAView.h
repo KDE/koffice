@@ -304,6 +304,12 @@ private:
     KoPADocument *m_doc;
     KoPACanvas *m_canvas;
     KoPAPage *m_activePage;
+    /* Thomas;  having a zoomhandler here is weird.
+     * Seems that the viewmode can choose to swap out the zoomhandler for another
+     * for its own purposes. Which is just wrong;  if you want to change the zoom, set the zoom on the
+     * canvas.  The canvas should be the only one that holds the zoomhandler. Which probably should be
+     * a KViewConverter anyway...
+     */
     KoZoomHandler m_zoomHandler;
     KoPAViewMode *m_viewMode;
 };

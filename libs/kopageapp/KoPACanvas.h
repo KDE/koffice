@@ -62,6 +62,9 @@ public:
     virtual KGuidesData * guidesData();
     /// reimplemented from KCanvasBase
     virtual KToolProxy *toolProxy() const;
+
+    /* This method returns the view converter that the viewmode decides to use for now.
+     * this is by default the view converter member on KoPAView*/
     /// reimplemented from KCanvasBase
     virtual const KViewConverter *viewConverter() const;
     /// reimplemented from KCanvasBase
