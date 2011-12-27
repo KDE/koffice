@@ -44,7 +44,7 @@
 #include "SCNotes.h"
 #include "SCPage.h"
 
-SCViewModeNotes::SCViewModeNotes(KoPAViewBase *view, KoPACanvas *canvas)
+SCViewModeNotes::SCViewModeNotes(KoPAView *view, KoPACanvas *canvas)
     : KoPAViewMode(view, canvas)
 {
 }

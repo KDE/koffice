@@ -34,7 +34,7 @@ class SCViewModePresentation : public KoPAViewMode
     Q_OBJECT
 
 public:
-    SCViewModePresentation(KoPAViewBase * view, KoPACanvas * m_canvas);
+    SCViewModePresentation(KoPAView * view, KoPACanvas * m_canvas);
     ~SCViewModePresentation();
 
     KViewConverter * viewConverter(KoPACanvas * canvas);

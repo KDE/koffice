@@ -29,20 +29,20 @@
 
 #include "kopageapp_export.h"
 
-class KoPAViewBase;
+class KoPAView;
 class KoPADocument;
-class KoPAViewBase;
+class KoPAView;
 
 /// Widget that shows a KoPAPage
 class KOPAGEAPP_EXPORT KoPACanvas : public QWidget, public KCanvasBase
 {
     Q_OBJECT
 public:
-    explicit KoPACanvas(KoPAViewBase * view, KoPADocument * doc, QWidget *parent = 0);
+    explicit KoPACanvas(KoPAView * view, KoPADocument * doc, QWidget *parent = 0);
     virtual ~KoPACanvas();
 
     /// set the viewbase on the canvas; this needs to be called before the canvas can be used.
-    void setView(KoPAViewBase *view);
+    void setView(KoPAView *view);
 
     /// Returns pointer to the KoPADocument
     KoPADocument* document() const;
@@ -74,7 +74,7 @@ public:
     /// Set the origin of the page inside the canvas in document coordinates
     void setDocumentOrigin(const QPointF &origin);
 
-    KoPAViewBase* koPAView () const;
+    KoPAView* koPAView () const;
 
     /// translate widget coordinates to view coordinates
     QPoint widgetToView(const QPoint &p) const;
@@ -150,7 +150,7 @@ protected:
     void paint(QPainter &painter, const QRectF paintRect);
 
 private:
-    KoPAViewBase *m_view;
+    KoPAView *m_view;
     KoPADocument *m_doc;
     KShapeManager *m_shapeManager;
     KShapeManager *m_masterShapeManager;

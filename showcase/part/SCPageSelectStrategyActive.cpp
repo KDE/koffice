@@ -21,7 +21,7 @@
 #include "SCPageSelectStrategyActive.h"
 
 #include <KoPACanvas.h>
-#include <KoPAViewBase.h>
+#include <KoPAView.h>
 
 SCPageSelectStrategyActive::SCPageSelectStrategyActive(KoPACanvas *canvas)
 : m_canvas(canvas)
@@ -34,7 +34,7 @@ SCPageSelectStrategyActive::~SCPageSelectStrategyActive()
 
 const KoPAPage *SCPageSelectStrategyActive::page() const
 {
-    KoPAViewBase *view = m_canvas->koPAView();
+    KoPAView *view = m_canvas->koPAView();
     Q_ASSERT(view);
     return view->activePage();
 }

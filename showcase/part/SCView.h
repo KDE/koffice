@@ -41,7 +41,7 @@ public:
     explicit SCView(SCDocument * document, QWidget * parent = 0);
     ~SCView();
 
-    using KoPAViewBase::viewConverter;
+    using KoPAView::viewConverter;
     virtual KViewConverter * viewConverter(KoPACanvas * canvas);
 
     /**

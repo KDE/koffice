@@ -30,7 +30,7 @@
 #include <QPainter>
 #include <kdebug.h>
 
-KoPAPrintJob::KoPAPrintJob(KoPAView * view)
+KoPAPrintJob::KoPAPrintJob(KoPAView *view)
 : KoPrintJob(view)
 , m_pages(view->kopaDocument()->pages())
 {

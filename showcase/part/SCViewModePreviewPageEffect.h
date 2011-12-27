@@ -36,7 +36,7 @@ class SHOWCASE_EXPORT SCViewModePreviewPageEffect : public KoPAViewMode
 
     Q_OBJECT
 public:
-    SCViewModePreviewPageEffect(KoPAViewBase * view, KoPACanvas * m_canvas);
+    SCViewModePreviewPageEffect(KoPAView * view, KoPACanvas * m_canvas);
     ~SCViewModePreviewPageEffect();
 
     void paint(KoPACanvas* canvas, QPainter &painter, const QRectF &paintRect);

@@ -41,7 +41,7 @@
 #include <KoPAView.h>
 #include <KoZoomHandler.h>
 
-SCViewModePresentation::SCViewModePresentation(KoPAViewBase * view, KoPACanvas * canvas)
+SCViewModePresentation::SCViewModePresentation(KoPAView * view, KoPACanvas * canvas)
 : KoPAViewMode(view, canvas)
 , m_savedParent(0)
 , m_tool(new SCPresentationTool(*this))

@@ -29,7 +29,7 @@ class KoPAPage;
 class SCViewModeNotes : public KoPAViewMode
 {
 public:
-    SCViewModeNotes(KoPAViewBase *view, KoPACanvas *canvas);
+    SCViewModeNotes(KoPAView *view, KoPACanvas *canvas);
     ~SCViewModeNotes();
 
     void paint(KoPACanvas* canvas, QPainter &painter, const QRectF &paintRect);

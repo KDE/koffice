@@ -1,25 +1,22 @@
 /* This file is part of the KDE project
-
-   Copyright (C) 2006-2009 Thorsten Zachmann <zachmann@kde.org>
-   Copyright (C) 2007-2011 Thomas Zander <zander@kde.org>
-   Copyright (C) 2009 Inge Wallin   <inge@lysator.liu.se>
-   Copyright (C) 2010 Boudewijn Rempt <boud@kogmbh.com>
-
-   This library is free software; you can redistribute it and/or
-   modify it under the terms of the GNU Library General Public
-   License as published by the Free Software Foundation; either
-   version 2 of the License, or (at your option) any later version.
-
-   This library is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-   Library General Public License for more details.
-
-   You should have received a copy of the GNU Library General Public License
-   along with this library; see the file COPYING.LIB.  If not, write to
-   the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+ * Copyright (C) 2006-2009 Thorsten Zachmann <zachmann@kde.org>
+ * Copyright (C) 2007-2011 Thomas Zander <zander@kde.org>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public License
+ * along with this library; see the file COPYING.LIB.  If not, write to
+ * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
-*/
+ */
 
 #include "KoPAView.h"
 
@@ -90,12 +87,22 @@
 #include <KDE/KTemporaryFile>
 #include <KDE/KMenu>
 
+class KoPAView::Private {
+
+public:
+
+    KoZoomHandler zoomHandler;
+    KoPAViewMode * viewMode;
+};
+
 KoPAView::KoPAView(KoPADocument *document, QWidget *parent)
     : KoView(document, parent),
     m_doc(document),
     m_canvas(0),
-    m_activePage(0)
+    m_activePage(0),
+    d(new Private)
 {
+    d->viewMode = 0;
     initGUI();
     initActions();
 
@@ -105,6 +112,8 @@ KoPAView::KoPAView(KoPADocument *document, QWidget *parent)
 
 KoPAView::~KoPAView()
 {
+    delete d;
+
     KToolManager::instance()->removeCanvasController(m_canvasController);
 
     removeStatusBarItem(m_status);
@@ -115,6 +124,48 @@ KoPAView::~KoPAView()
     // the currently active view mode if it is not view mode normal
     delete m_viewModeNormal;
 }
+
+KViewConverter* KoPAView::viewConverter(KoPACanvas * canvas)
+{
+    Q_UNUSED(canvas);
+
+    return &d->zoomHandler;
+}
+
+KoZoomHandler* KoPAView::zoomHandler()
+{
+    return &d->zoomHandler;
+}
+
+KViewConverter* KoPAView::viewConverter() const
+{
+    return &d->zoomHandler;
+}
+
+KoZoomHandler* KoPAView::zoomHandler() const
+{
+    return &d->zoomHandler;
+}
+
+void KoPAView::setViewMode(KoPAViewMode* mode)
+{
+    Q_ASSERT(mode);
+    if (!d->viewMode) {
+        d->viewMode = mode;
+    }
+    else if (mode != d->viewMode) {
+        KoPAViewMode * previousViewMode = d->viewMode;
+        d->viewMode->deactivate();
+        d->viewMode = mode;
+        d->viewMode->activate(previousViewMode);
+    }
+}
+
+KoPAViewMode* KoPAView::viewMode() const
+{
+    return d->viewMode;
+}
+
 
 void KoPAView::initGUI()
 {
@@ -198,7 +249,7 @@ void KoPAView::initGUI()
         m_documentStructureDocker = qobject_cast<KoPADocumentStructureDocker*>(shell()->createDockWidget(&structureDockerFactory));
         connect(shell()->partManager(), SIGNAL(activePartChanged(KParts::Part *)),
                 m_documentStructureDocker, SLOT(setPart(KParts::Part *)));
-        connect(m_documentStructureDocker, SIGNAL(pageChanged(KoPAPage*)), proxyObject, SLOT(updateActivePage(KoPAPage*)));
+        connect(m_documentStructureDocker, SIGNAL(pageChanged(KoPAPage*)), this, SLOT(updateActivePage(KoPAPage*)));
         connect(m_documentStructureDocker, SIGNAL(dockerReset()), this, SLOT(reinitDocumentDocker()));
 
         KToolManager::instance()->requestToolActivation(m_canvasController);
@@ -211,7 +262,7 @@ void KoPAView::initActions()
     new KCutController(kopaCanvas(), action);
     action = actionCollection()->addAction(KStandardAction::Copy, "edit_copy", 0, 0);
     new KCopyController(kopaCanvas(), action);
-    m_editPaste = actionCollection()->addAction(KStandardAction::Paste, "edit_paste", proxyObject, SLOT(editPaste()));
+    m_editPaste = actionCollection()->addAction(KStandardAction::Paste, "edit_paste", this, SLOT(editPaste()));
     connect(QApplication::clipboard(), SIGNAL(dataChanged()), this, SLOT(clipboardDataChanged()));
     connect(m_canvas->toolProxy(), SIGNAL(toolChanged(const QString&)), this, SLOT(clipboardDataChanged()));
     clipboardDataChanged();
@@ -251,14 +302,14 @@ void KoPAView::initActions()
     m_viewRulers  = new KToggleAction(i18n("Show Rulers"), this);
     actionCollection()->addAction("view_rulers", m_viewRulers);
     m_viewRulers->setToolTip(i18n("Show/hide the view's rulers"));
-    connect(m_viewRulers, SIGNAL(triggered(bool)), proxyObject, SLOT(setShowRulers(bool)));
+    connect(m_viewRulers, SIGNAL(triggered(bool)), this, SLOT(setShowRulers(bool)));
     setShowRulers(m_doc->rulersVisible());
 
     m_actionInsertPage = new KAction(KIcon("document-new"), i18n("Insert Page"), this);
     actionCollection()->addAction("page_insertpage", m_actionInsertPage);
     m_actionInsertPage->setToolTip(i18n("Insert a new page after the current one"));
     m_actionInsertPage->setWhatsThis(i18n("Insert a new page after the current one"));
-    connect(m_actionInsertPage, SIGNAL(triggered()), proxyObject, SLOT(insertPage()));
+    connect(m_actionInsertPage, SIGNAL(triggered()), this, SLOT(insertPage()));
 
     m_actionCopyPage = new KAction(i18n("Copy Page"), this);
     actionCollection()->addAction("page_copypage", m_actionCopyPage);
@@ -306,17 +357,6 @@ void KoPAView::initActions()
     actionCollection()->action("object_group")->setShortcut(QKeySequence("Ctrl+G"));
     actionCollection()->action("object_ungroup")->setShortcut(QKeySequence("Ctrl+Shift+G"));
     
-}
-
-
-KoPACanvas * KoPAView::kopaCanvas() const
-{
-    return m_canvas;
-}
-
-KoPADocument * KoPAView::kopaDocument() const
-{
-    return m_doc;
 }
 
 KoPAPage* KoPAView::activePage() const
@@ -588,9 +628,8 @@ void KoPAView::doUpdateActivePage(KoPAPage * page)
 
     updatePageNavigationActions();
 
-    if (pageChanged) {
-        proxyObject->emitActivePageChanged();
-    }
+    if (pageChanged)
+        emit activePageChanged();
 
     pageOffsetChanged();
     m_canvasController->setScrollBarValue(scrollValue);
@@ -643,9 +682,8 @@ void KoPAView::navigatePage(KoPageApp::PageNavigation pageNavigation)
 {
     KoPAPage * newPage = m_doc->pageByNavigation(m_activePage, pageNavigation);
 
-    if (newPage != m_activePage) {
-        proxyObject->updateActivePage(newPage);
-    }
+    if (newPage != m_activePage)
+        viewMode()->updateActivePage(newPage);
 }
 
 KoPrintJob * KoPAView::createPrintJob()

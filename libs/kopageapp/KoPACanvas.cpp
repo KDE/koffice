@@ -33,7 +33,7 @@
 #include <kxmlguifactory.h>
 #include <QMenu>
 
-KoPACanvas::KoPACanvas(KoPAViewBase *view, KoPADocument *doc, QWidget *parent)
+KoPACanvas::KoPACanvas(KoPAView *view, KoPADocument *doc, QWidget *parent)
     : QWidget(parent),
     KCanvasBase(doc),
     m_view(0),
@@ -62,7 +62,7 @@ KoPACanvas::~KoPACanvas()
     delete m_shapeManager;
 }
 
-void KoPACanvas::setView(KoPAViewBase *view)
+void KoPACanvas::setView(KoPAView *view)
 {
     m_view = view;
 }
@@ -77,7 +77,7 @@ KToolProxy* KoPACanvas::toolProxy() const
     return m_toolProxy;
 }
 
-KoPAViewBase* KoPACanvas::koPAView() const
+KoPAView* KoPACanvas::koPAView() const
 {
     return m_view;
 }

@@ -26,7 +26,7 @@ class KComboBox;
 class QDoubleSpinBox;
 class SCPageEffect;
 class SCPageEffectFactory;
-class KoPAViewBase;
+class KoPAView;
 class SCViewModePreviewPageEffect;
 
 /**
@@ -39,7 +39,7 @@ class SCPageEffectDocker : public QWidget
 public:
     explicit SCPageEffectDocker(QWidget* parent = 0, Qt::WindowFlags flags = 0);
 
-    void setView(KoPAViewBase* view);
+    void setView(KoPAView* view);
 
 public slots:
     void slotActivePageChanged();
@@ -59,7 +59,7 @@ protected slots:
     void setEffectPreview();
 
 private:
-    KoPAViewBase* m_view;
+    KoPAView* m_view;
     KComboBox* m_effectCombo;
     KComboBox* m_subTypeCombo;
     QDoubleSpinBox* m_durationSpinBox;

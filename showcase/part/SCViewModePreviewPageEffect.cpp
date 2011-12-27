@@ -41,7 +41,7 @@
 #include "pageeffects/SCPageEffect.h"
 #include "pageeffects/SCPageEffectRunner.h"
 
-SCViewModePreviewPageEffect::SCViewModePreviewPageEffect(KoPAViewBase * view, KoPACanvas * canvas)
+SCViewModePreviewPageEffect::SCViewModePreviewPageEffect(KoPAView * view, KoPACanvas * canvas)
 : KoPAViewMode(view, canvas)
 , m_savedViewMode(0)
 , m_pageEffect(0)

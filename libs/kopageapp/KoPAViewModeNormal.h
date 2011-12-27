@@ -31,7 +31,7 @@ class KViewConverter;
 class KOPAGEAPP_EXPORT KoPAViewModeNormal : public KoPAViewMode
 {
 public:
-    KoPAViewModeNormal(KoPAViewBase * view, KoPACanvas * m_canvas);
+    KoPAViewModeNormal(KoPAView * view, KoPACanvas * m_canvas);
     ~KoPAViewModeNormal();
 
     void paint(KoPACanvas* canvas, QPainter &painter, const QRectF &paintRect);

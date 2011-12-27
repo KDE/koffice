@@ -27,7 +27,7 @@
 
 #include <QCloseEvent>
 
-KoPAViewMode::KoPAViewMode(KoPAViewBase * view, KoPACanvas * canvas)
+KoPAViewMode::KoPAViewMode(KoPAView * view, KoPACanvas * canvas)
 : m_canvas(canvas)
 , m_toolProxy(canvas->toolProxy())
 , m_view(view)
@@ -72,14 +72,14 @@ KoPACanvas * KoPAViewMode::canvas() const
     return m_canvas;
 }
 
-KoPAViewBase * KoPAViewMode::view() const
+KoPAView * KoPAViewMode::view() const
 {
     return m_view;
 }
 
 KViewConverter * KoPAViewMode::viewConverter(KoPACanvas * canvas)
 {
-    return m_view->KoPAViewBase::viewConverter(canvas);
+    return m_view->KoPAView::viewConverter(canvas);
 }
 
 void KoPAViewMode::updateActivePage(KoPAPage *page)

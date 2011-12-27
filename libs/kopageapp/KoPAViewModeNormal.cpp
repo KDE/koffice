@@ -32,7 +32,7 @@
 #include "KoPAView.h"
 #include "commands/KoPAChangePageLayoutCommand.h"
 
-KoPAViewModeNormal::KoPAViewModeNormal(KoPAViewBase * view, KoPACanvas * canvas)
+KoPAViewModeNormal::KoPAViewModeNormal(KoPAView * view, KoPACanvas * canvas)
 : KoPAViewMode(view, canvas)
 , m_masterMode(false)
 , m_savedPage(0)

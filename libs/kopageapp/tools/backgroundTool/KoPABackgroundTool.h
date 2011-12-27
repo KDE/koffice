@@ -23,7 +23,7 @@
 
 #include <KToolBase.h>
 
-class KoPAViewBase;
+class KoPAView;
 
 class KoPABackgroundTool : public KToolBase
 {
@@ -39,7 +39,7 @@ public:
     ///Reimplemented from KToolBase
     virtual void deactivate();
 
-    KoPAViewBase *view() const;
+    KoPAView *view() const;
 
 public slots:
     void slotActivePageChanged();
@@ -49,7 +49,7 @@ protected:
     virtual QMap<QString, QWidget *> createOptionWidgets();
 
 private:
-    KoPAViewBase * m_view;
+    KoPAView * m_view;
 };
 
 #endif

@@ -1,52 +1,50 @@
 /* This file is part of the KDE project
+ *  Copyright (C) 2006-2009 Thorsten Zachmann <zachmann@kde.org>
+ *  Copyright (C) 2007-2011 Thomas Zander <zander@kde.org>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public License
+ * along with this library; see the file COPYING.LIB.  If not, write to
+ * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+ * Boston, MA 02110-1301, USA.
+ */
+#ifndef KOPAVIEWBASE_H
+#define KOPAVIEWBASE_H
 
-   Copyright (C) 2006-2009 Thorsten Zachmann <zachmann@kde.org>
-   Copyright (C) 2009 Inge Wallin            <inge@lysator.liu.se>
-   Copyright (C) 2011 Thomas Zander <zander@kde.org>
-
-   This library is free software; you can redistribute it and/or
-   modify it under the terms of the GNU Library General Public
-   License as published by the Free Software Foundation; either
-   version 2 of the License, or (at your option) any later version.
-
-   This library is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-   Library General Public License for more details.
-
-   You should have received a copy of the GNU Library General Public License
-   along with this library; see the file COPYING.LIB.  If not, write to
-   the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
-   Boston, MA 02110-1301, USA.
-*/
-
-#ifndef KOPAVIEW_H
-#define KOPAVIEW_H
-
-#include <KoView.h>			//krazy:exclude=includes
-#include "KoPAViewBase.h"		//krazy:exclude=includes
 #include "KoPageApp.h"			//krazy:exclude=includes
-#include <KoZoomMode.h>			//krazy:exclude=includes
-#include "kopageapp_export.h"		
+#include "KoPAViewMode.h"		//krazy:exclude=includes
+#include "kopageapp_export.h"
+
+#include <KoZoomMode.h>
+#include <KoView.h>
 
 class KoPACanvas;
-class KoPADocument;
+class KViewConverter;
 class KoPAPage;
-class KoPADocumentStructureDocker;
+class KoPADocument;
+class KoZoomHandler;
+class KoZoomController;
 class KoRuler;
 class KShapeManager;
-class KoZoomController;
-class KUrl;
-class QTextDocument;
+class KoPADocumentStructureDocker;
 class KCanvasController;
 class KActionMenu;
+class KoZoomAction;
 class KoFind;
 class QLabel;
-class KoZoomAction;
 class KToggleAction;
 
-/// Creates a view with a KoPACanvas and rulers
-class KOPAGEAPP_EXPORT KoPAView : public KoView, public KoPAViewBase
+/// A view with a KoPACanvas and rulers
+class KOPAGEAPP_EXPORT KoPAView : public KoView
 {
     Q_OBJECT
 public:
@@ -68,17 +66,33 @@ public:
     explicit KoPAView(KoPADocument * document, QWidget * parent = 0);
     virtual ~KoPAView();
 
-    KoZoomController* zoomController() const;
+    /// @return the canvas for the application
+    KoPACanvas *kopaCanvas() const { return m_canvas; }
+
+    /// @return the document for the application
+    KoPADocument *kopaDocument() const { return m_doc; }
+
+    KViewConverter *viewConverter(KoPACanvas *canvas);
+    KViewConverter *viewConverter() const;
+    virtual KoZoomController *zoomController() const;
+    virtual KoZoomHandler * zoomHandler();
+    virtual KoZoomHandler *zoomHandler() const;
+
+    /**
+     * @brief Set the view mode
+     *
+     * @param mode the new view mode
+     */
+    virtual void setViewMode(KoPAViewMode* mode);
+
+    /// @return the active viewMode
+    virtual KoPAViewMode* viewMode() const;
 
     void updateReadWrite(bool readwrite);
 
     KoRuler *horizontalRuler();
     KoRuler *verticalRuler();
 
-    /// @return the canvas for the application
-    KoPACanvas * kopaCanvas() const;
-    /// @return the document for the application
-    KoPADocument * kopaDocument() const;
     /// @return Page that is shown in the canvas
     KoPAPage* activePage() const;
 
@@ -143,9 +157,8 @@ public:
     /// Update page navigation actions
     void updatePageNavigationActions();
 
-    /// Shows/hides the rulers
-    void setShowRulers(bool show);
 
+public slots:
     /// Insert a new page after the current one
     void insertPage();
 
@@ -163,10 +176,14 @@ private:
     virtual void partActivateEvent(KParts::PartActivateEvent* event);
 
     bool isMasterUsed(KoPAPage * page);
+
+private slots:
     void editPaste();
 
-protected slots:
+    /// Shows/hides the rulers
+    void setShowRulers(bool show);
 
+protected slots:
     void viewSnapToGrid(bool snap);
     void viewGuides(bool show);
     void slotZoomChanged(KoZoomMode::Mode mode, qreal zoom);
@@ -242,6 +259,11 @@ protected slots:
 public slots:
     void variableChanged();
 
+signals:
+    /// Emitted every time the active page is changed
+    void activePageChanged();
+
+
 private:
     // These were originally private in the .h file
     KoPADocumentStructureDocker *m_documentStructureDocker;
@@ -280,10 +302,12 @@ private:
     QLabel *m_status;       ///< ordinary status
     QWidget *m_zoomActionWidget;
 
-    // These used to be protected.
     KoPADocument *m_doc;
     KoPACanvas *m_canvas;
     KoPAPage *m_activePage;
+private:
+    class Private;
+    Private * const d;
 };
 
-#endif /* KOPAVIEW_H */
+#endif // KOPAVIEWBASE_H

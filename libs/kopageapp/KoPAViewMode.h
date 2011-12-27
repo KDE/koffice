@@ -26,7 +26,7 @@
 #include <QtCore/QPointF>
 
 struct KOdfPageLayoutData;
-class KoPAViewBase;
+class KoPAView;
 class KoPACanvas;
 class KoPACanvas;
 class KoPAPage;
@@ -48,7 +48,7 @@ class KOPAGEAPP_EXPORT KoPAViewMode : public QObject
 
     Q_OBJECT
 public:
-    KoPAViewMode(KoPAViewBase * view, KoPACanvas * canvas);
+    KoPAViewMode(KoPAView * view, KoPACanvas * canvas);
     virtual ~KoPAViewMode();
 
     virtual void paint(KoPACanvas* canvas, QPainter &painter, const QRectF &paintRect) = 0;
@@ -114,7 +114,7 @@ public:
      *
      * @return view view used by the view mode
      */
-    KoPAViewBase * view() const;
+    KoPAView * view() const;
 
     /**
      * @brief Get the view mode's implementation of view converter
@@ -171,7 +171,7 @@ public slots:
 protected:
     KoPACanvas * m_canvas;
     KToolProxy * m_toolProxy;
-    KoPAViewBase * m_view;
+    KoPAView * m_view;
     QPointF m_origin;
 };
 

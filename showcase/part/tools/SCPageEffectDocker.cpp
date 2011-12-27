@@ -215,14 +215,12 @@ SCPageEffect * SCPageEffectDocker::createPageEffect(const SCPageEffectFactory * 
     return factory->createPageEffect(properties);
 }
 
-void SCPageEffectDocker::setView(KoPAViewBase* view)
+void SCPageEffectDocker::setView(KoPAView* view)
 {
     Q_ASSERT(view);
     m_view = view;
-    connect(view->proxyObject, SIGNAL(activePageChanged()),
-             this, SLOT(slotActivePageChanged()));
-    connect(view->proxyObject, SIGNAL(destroyed(QObject*)),
-             this, SLOT(cleanup (QObject*)));
+    connect(view, SIGNAL(activePageChanged()), this, SLOT(slotActivePageChanged()));
+    connect(view, SIGNAL(destroyed(QObject*)), this, SLOT(cleanup (QObject*)));
 
 
     if(m_view->activePage())
@@ -249,7 +247,7 @@ void SCPageEffectDocker::setEffectPreview()
 
 void SCPageEffectDocker::cleanup(QObject* object)
 {
-    if(object != m_view->proxyObject)
+    if(object != m_view)
         return;
 
     m_view = 0;

@@ -18,7 +18,6 @@ set( kopageapp_LIB_SRCS
      KoPADocument.cpp
      KoShapeTraversal.cpp
      KoPAView.cpp
-     KoPAViewBase.cpp
      KoPACanvas.cpp
      KoPASavingContext.cpp
      KoPAPixmapCache.cpp
@@ -77,7 +76,6 @@ install(FILES
     KoPAPageContainerModel.h
     KoPAUtil.h
     KoPAView.h
-    KoPAViewBase.h
     KoPAViewMode.h
     DESTINATION
     ${INCLUDE_INSTALL_DIR}/private COMPONENT Devel
