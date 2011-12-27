@@ -65,9 +65,7 @@ public:
 
 
     /// @return the layout of the page
-    virtual KOdfPageLayoutData &pageLayout();
-    /// @return the layout of the page
-    virtual const KOdfPageLayoutData &pageLayout() const;
+    virtual KOdfPageLayoutData pageLayout() const;
 
     /**
      * @brief Paint page background

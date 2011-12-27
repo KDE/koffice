@@ -42,9 +42,7 @@ public:
     virtual void paintPage(QPainter &painter, KoZoomHandler &zoomHandler);
 
     /// @return the layout of the page
-    virtual KOdfPageLayoutData &pageLayout() { return m_pageLayout; }
-    /// @return the layout of the page
-    virtual const KOdfPageLayoutData &pageLayout() const { return m_pageLayout; }
+    virtual KOdfPageLayoutData pageLayout() const { return m_pageLayout; }
 
     /// Set the page layout to @p layout
     void setPageLayout(const KOdfPageLayoutData &layout) { m_pageLayout = layout; }

@@ -38,8 +38,7 @@ class SCEndOfSlideShowPage : public SCPage
 public:
     SCEndOfSlideShowPage(const QRectF &screenRect, SCDocument * document);
 
-    virtual KOdfPageLayoutData &pageLayout() { return m_pageLayout; }
-    virtual const KOdfPageLayoutData &pageLayout() const { return m_pageLayout; }
+    virtual KOdfPageLayoutData pageLayout() const { return m_pageLayout; }
 
 private:
     KOdfPageLayoutData m_pageLayout;

@@ -394,7 +394,7 @@ void KoPAView::importDocument()
             // set the correct mime type as otherwise it does not find the correct tag when loading
             QMimeData data;
             data.setData(KOdf::mimeType(m_doc->documentType()), ba);
-            KoPAPastePage paste(m_doc,m_activePage);
+            KoPAPastePage paste(m_doc, m_activePage);
             if (! paste.paste(m_doc->documentType(), &data)) {
                 KMessageBox::error(0, i18n("Could not import\n%1", url.pathOrUrl()));
             }
@@ -481,20 +481,16 @@ void KoPAView::editDeselectAll()
 
 void KoPAView::formatMasterPage()
 {
-    KoPAPage *page = dynamic_cast<KoPAPage *>(m_activePage);
-    Q_ASSERT(page);
-    QPointer<KoPAMasterPageDialog> dialog = new KoPAMasterPageDialog(m_doc, page->masterPage(), m_canvas);
+    QWeakPointer<KoPAMasterPageDialog> dialog = new KoPAMasterPageDialog(m_doc,
+            m_activePage->masterPage(), m_canvas);
 
-    if (dialog->exec() == QDialog::Accepted) {
-        KoPAMasterPage *masterPage = dialog->selectedMasterPage();
-        KoPAPage *page = dynamic_cast<KoPAPage *>(m_activePage);
-        if (page) {
-            KoPAChangeMasterPageCommand * command = new KoPAChangeMasterPageCommand(m_doc, page, masterPage);
-            m_canvas->addCommand(command);
-        }
+    if (dialog.data()->exec() == QDialog::Accepted) {
+        KoPAMasterPage *masterPage = dialog.data()->selectedMasterPage();
+        KoPAChangeMasterPageCommand *command = new KoPAChangeMasterPageCommand(m_doc, m_activePage, masterPage);
+        m_canvas->addCommand(command);
     }
 
-    delete dialog;
+    delete dialog.data();
 }
 
 void KoPAView::formatPageLayout()
@@ -517,12 +513,12 @@ void KoPAView::slotZoomChanged(KoZoomMode::Mode mode, qreal zoom)
     Q_UNUSED(zoom);
     if (m_activePage) {
         if (mode == KoZoomMode::ZOOM_PAGE) {
-            KOdfPageLayoutData &layout = m_activePage->pageLayout();
+            KOdfPageLayoutData layout = m_activePage->pageLayout();
             QRectF pageRect(0, 0, layout.width, layout.height);
             m_canvasController->ensureVisible(m_canvas->viewConverter()->documentToView(pageRect));
         } else if (mode == KoZoomMode::ZOOM_WIDTH) {
             // horizontally center the page
-            KOdfPageLayoutData &layout = m_activePage->pageLayout();
+            KOdfPageLayoutData layout = m_activePage->pageLayout();
             QRectF pageRect(0, 0, layout.width, layout.height);
             QRect viewRect = m_canvas->viewConverter()->documentToView(pageRect).toRect();
             viewRect.translate(m_canvas->documentOrigin());
@@ -581,7 +577,7 @@ void KoPAView::doUpdateActivePage(KoPAPage * page)
     setActivePage(page);
 
     m_canvas->updateSize();
-    KOdfPageLayoutData &layout = m_activePage->pageLayout();
+    KOdfPageLayoutData layout = m_activePage->pageLayout();
     m_horizontalRuler->setRulerLength(layout.width);
     m_verticalRuler->setRulerLength(layout.height);
     m_horizontalRuler->setActiveRange(layout.leftMargin, layout.width - layout.rightMargin);
@@ -713,25 +709,22 @@ void KoPAView::setShowRulers(bool show)
 
 void KoPAView::insertPage()
 {
-    KoPAPage * page = 0;
+    KoPAPage *page = 0;
     if (viewMode()->masterMode()) {
-        KoPAMasterPage * masterPage = m_doc->newMasterPage();
+        KoPAMasterPage *masterPage = m_doc->newMasterPage();
         masterPage->setBackground(new KColorBackground(Qt::white));
         // use the layout of the current active page for the new page
-        KOdfPageLayoutData &layout = masterPage->pageLayout();
-        KoPAMasterPage * activeMasterPage = dynamic_cast<KoPAMasterPage *>(m_activePage);
-        if (activeMasterPage) {
-            layout = activeMasterPage->pageLayout();
-        }
+        KoPAMasterPage *activeMasterPage = dynamic_cast<KoPAMasterPage *>(m_activePage);
+        Q_ASSERT(activeMasterPage);
+        if (activeMasterPage)
+            masterPage->setPageLayout(activeMasterPage->pageLayout());
         page = masterPage;
-    }
-    else {
-        KoPAPage * activePage = dynamic_cast<KoPAPage*>(m_activePage);
-        KoPAMasterPage * masterPage = activePage->masterPage();
+    } else {
+        KoPAMasterPage *masterPage = m_activePage->masterPage();
         page = m_doc->newPage(masterPage);
     }
 
-    KoPAPageInsertCommand * command = new KoPAPageInsertCommand(m_doc, page, m_activePage);
+    KoPAPageInsertCommand *command = new KoPAPageInsertCommand(m_doc, page, m_activePage);
     m_canvas->addCommand(command);
 
     doUpdateActivePage(page);

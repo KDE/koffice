@@ -48,9 +48,7 @@ public:
     virtual void paintComponent(QPainter&painter, const KViewConverter &converter);
 
     /// Get the page layout for this presentation notes
-    virtual KOdfPageLayoutData &pageLayout();
-
-    virtual const KOdfPageLayoutData &pageLayout() const;
+    virtual KOdfPageLayoutData pageLayout() const;
 
     /// update the page thumbnail to reflect current page
     void updatePageThumbnail();

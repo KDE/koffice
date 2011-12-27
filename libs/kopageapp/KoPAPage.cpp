@@ -302,13 +302,7 @@ void KoPAPage::saveOdf(KShapeSavingContext &context) const
     paContext.xmlWriter().endElement();
 }
 
-KOdfPageLayoutData &KoPAPage::pageLayout()
-{
-    Q_ASSERT(m_masterPage);
-    return m_masterPage->pageLayout();
-}
-
-const KOdfPageLayoutData &KoPAPage::pageLayout() const
+KOdfPageLayoutData KoPAPage::pageLayout() const
 {
     Q_ASSERT(m_masterPage);
     return m_masterPage->pageLayout();

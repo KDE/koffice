@@ -92,10 +92,10 @@ public:
     KoRuler *verticalRuler();
 
     /// @return Page that is shown in the canvas
-    KoPAPage* activePage() const;
+    KoPAPage *activePage() const;
 
     /// Set page shown in the canvas to @p page
-    void setActivePage(KoPAPage * page);
+    void setActivePage(KoPAPage *page);
 
     void navigatePage(KoPageApp::PageNavigation pageNavigation);
 
@@ -118,7 +118,7 @@ public:
     /**
      * Set the active page and updates the UI
      */
-    void doUpdateActivePage(KoPAPage * page);
+    void doUpdateActivePage(KoPAPage *page);
 
     /**
      * Paste the page if everything is ok
