@@ -23,6 +23,7 @@
 
 #include <QtGui/QWidget>
 #include <QtCore/QList>
+#include <QtCore/QPoint>
 
 #include <KCanvasBase.h>	//krazy:exclude=includes
 
@@ -30,6 +31,7 @@
 
 class KoPAViewBase;
 class KoPADocument;
+class KoPAViewBase;
 
 /// Widget that shows a KoPAPage
 class KOPAGEAPP_EXPORT KoPACanvas : public QWidget, public KCanvasBase
@@ -145,12 +147,15 @@ protected:
      */
     void showContextMenu(const QPoint &globalPos, const QList<QAction*> &actionList);
 
-protected:
     void paint(QPainter &painter, const QRectF paintRect);
 
 private:
-    class Private;
-    Private * const d;
+    KoPAViewBase *m_view;
+    KoPADocument *m_doc;
+    KShapeManager *m_shapeManager;
+    KShapeManager *m_masterShapeManager;
+    KToolProxy *m_toolProxy;
+    QPoint m_documentOffset;
 };
 
 #endif
