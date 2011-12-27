@@ -562,9 +562,9 @@ void KShape::update(const QRectF &section) const
 
 QPainterPath KShape::outline() const
 {
-    Q_D(const KShape);
     QPainterPath path;
-    path.addRect(QRectF(QPointF(0, 0), QSizeF(qMax(d->size.width(), qreal(0.0001)), qMax(d->size.height(), qreal(0.0001)))));
+    QSizeF mySize(size()); // make sure to use the overloaded one.
+    path.addRect(QRectF(QPointF(0, 0), QSizeF(qMax(mySize.width(), qreal(0.0001)), qMax(mySize.height(), qreal(0.0001)))));
     return path;
 }
 
