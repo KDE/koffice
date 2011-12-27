@@ -495,7 +495,7 @@ void KoPAView::formatMasterPage()
 
 void KoPAView::formatPageLayout()
 {
-    const KOdfPageLayoutData &pageLayout = viewMode()->activePageLayout();
+    KOdfPageLayoutData pageLayout = m_activePage->pageLayout();
 
     KoPAPageLayoutDialog dialog(m_doc, pageLayout, m_canvas);
 
@@ -555,12 +555,6 @@ KShapeManager* KoPAView::shapeManager() const
     return m_canvas->shapeManager();
 }
 
-
-KShapeManager* KoPAView::masterShapeManager() const
-{
-    return m_canvas->masterShapeManager();
-}
-
 void KoPAView::reinitDocumentDocker()
 {
     if (shell()) {
@@ -603,10 +597,25 @@ void KoPAView::doUpdateActivePage(KoPAPage * page)
 
 void KoPAView::setActivePage(KoPAPage* page)
 {
-    if (!page)
+    Q_ASSERT(page);
+    if (page == m_activePage)
         return;
 
-    bool pageChanged = page != m_activePage;
+    m_activePage = page;
+
+    // TODO move this method to the canvas?
+
+    KShapeManager *sm = m_canvas->shapeManager();
+    sm->setShapes(QList<KShape*>()); // aka clear.
+
+//    if (page->masterShape())
+//        sm->addShape(page->masterShape());
+    //sm->addShape(page->backgroundShape());
+    sm->addShape(page);
+    m_canvas->update();
+
+#if 0
+    //bool pageChanged = page != m_activePage;
 
     shapeManager()->removeAdditional(m_activePage);
     m_activePage = page;
@@ -636,12 +645,13 @@ void KoPAView::setActivePage(KoPAPage* page)
         masterShapeManager()->setShapes(QList<KShape*>());
     }
 
-    if (shell() && pageChanged) {
+    if (shell() /* && pageChanged*/) {
         m_documentStructureDocker->setActivePage(m_activePage);
     }
 
     // Set the current page number in the canvas resource provider
     m_canvas->resourceManager()->setResource(KCanvasResource::CurrentPage, m_doc->pageIndex(m_activePage)+1);
+#endif
 }
 
 void KoPAView::navigatePage(KoPageApp::PageNavigation pageNavigation)

@@ -144,13 +144,6 @@ void SCViewModeSlidesSorter::SCSlidesSorter::paintEvent(QPaintEvent* event)
 
 }
 
-void SCViewModeSlidesSorter::paintEvent(KoPACanvas * canvas, QPaintEvent* event)
-{
-    Q_UNUSED(canvas);
-    Q_UNUSED(event);
-    Q_ASSERT(m_canvas == canvas);
-}
-
 void SCViewModeSlidesSorter::tabletEvent(QTabletEvent *event, const QPointF &point)
 {
     Q_UNUSED(event);

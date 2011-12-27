@@ -454,14 +454,11 @@ KoPAPage* KoPADocument::pageByNavigation(KoPAPage * currentPage, KoPageApp::Page
 
 void KoPADocument::addShape(KShape * shape)
 {
-    if (!shape)
-        return;
-
+    Q_ASSERT(shape);
     // the KShapeController sets the active layer as parent
     KoPAPage * page(pageByShape(shape));
 
-    foreach(KoView *view, views())
-    {
+    foreach(KoView *view, views()) {
         KoPAView * kopaView = static_cast<KoPAView*>(view);
         kopaView->viewMode()->addShape(shape);
     }

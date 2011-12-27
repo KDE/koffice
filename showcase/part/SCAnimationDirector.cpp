@@ -82,8 +82,8 @@ SCAnimationDirector::SCAnimationDirector(KoPAView * view, KoPACanvas * canvas, c
     // set the animation strategy in the KoShapeManagers
     m_canvas->shapeManager()->setPaintingStrategy(new SCShapeManagerAnimationStrategy(m_canvas->shapeManager(), m_animationCache,
                                                        new SCPageSelectStrategyActive(m_view->kopaCanvas())));
-    m_canvas->masterShapeManager()->setPaintingStrategy(new SCShapeManagerAnimationStrategy(m_canvas->masterShapeManager(), m_animationCache,
-                                                             new SCPageSelectStrategyActive(m_view->kopaCanvas())));
+//   m_canvas->masterShapeManager()->setPaintingStrategy(new SCShapeManagerAnimationStrategy(m_canvas->masterShapeManager(), m_animationCache,
+//                                                            new SCPageSelectStrategyActive(m_view->kopaCanvas())));
 
     if (hasAnimation()) {
         startTimeLine(m_animations.at(m_stepIndex)->totalDuration());
@@ -97,8 +97,8 @@ SCAnimationDirector::~SCAnimationDirector()
     delete m_animationCache;
     //set the KShapeManagerPaintingStrategy in the KoShapeManagers
     m_canvas->shapeManager()->setPaintingStrategy(new KShapeManagerPaintingStrategy(m_canvas->shapeManager()));
-    m_canvas->masterShapeManager()->setPaintingStrategy(new SCShapeManagerDisplayMasterStrategy(m_canvas->masterShapeManager(),
-                                                             new SCPageSelectStrategyActive(m_view->kopaCanvas())));
+//   m_canvas->masterShapeManager()->setPaintingStrategy(new SCShapeManagerDisplayMasterStrategy(m_canvas->masterShapeManager(),
+//                                                            new SCPageSelectStrategyActive(m_view->kopaCanvas())));
 }
 
 
@@ -260,6 +260,7 @@ void SCAnimationDirector::updateActivePage(KoPAPage * page)
             m_canvas->shapeManager()->selection()->setActiveLayer(layer);
         }
 
+/*
         // if the page is not a master page itself set shapes of the master page
         KoPAPage * paPage = dynamic_cast<KoPAPage *>(page);
 
@@ -272,6 +273,7 @@ void SCAnimationDirector::updateActivePage(KoPAPage * page)
             KShapeLayer* layer = dynamic_cast<KShapeLayer*>(masterShapes.last());
             m_canvas->masterShapeManager()->selection()->setActiveLayer(layer);
         }
+*/
     }
 
     SCPage * kprPage = dynamic_cast<SCPage *>(page);
@@ -369,6 +371,7 @@ void SCAnimationDirector::paintStep(QPainter &painter)
     painter.translate(m_pageRect.topLeft());
     m_view->activePage()->paintComponent(painter, m_zoomHandler);
 
+/*
     if (m_view->activePage()->displayMasterShapes()) {
         foreach (KShape *shape, m_canvas->masterShapeManager()->shapes()) {
             shape->waitUntilReady(m_zoomHandler, false);
@@ -376,6 +379,7 @@ void SCAnimationDirector::paintStep(QPainter &painter)
 
         m_canvas->masterShapeManager()->paint(painter, m_zoomHandler, true);
     }
+*/
     foreach (KShape *shape, m_canvas->shapeManager()->shapes()) {
         shape->waitUntilReady(m_zoomHandler, false);
     }

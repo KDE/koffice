@@ -82,8 +82,8 @@ SCView::SCView(SCDocument *document, QWidget *parent)
     actionCollection()->action("page_last")->setText(i18n("Last Slide"));
     actionCollection()->action("configure")->setText(i18n("Configure Showcase..."));
 
-    masterShapeManager()->setPaintingStrategy(new SCShapeManagerDisplayMasterStrategy(masterShapeManager(),
-                                                   new SCPageSelectStrategyActive(kopaCanvas())));
+//   masterShapeManager()->setPaintingStrategy(new SCShapeManagerDisplayMasterStrategy(masterShapeManager(),
+//                                                  new SCPageSelectStrategyActive(kopaCanvas())));
 
     KoPACanvas * canvas = dynamic_cast<KoPACanvas*>(kopaCanvas());
     if (canvas) {

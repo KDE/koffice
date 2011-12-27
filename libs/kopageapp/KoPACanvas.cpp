@@ -40,7 +40,6 @@ KoPACanvas::KoPACanvas(KoPAView *view, KoPADocument *doc, QWidget *parent)
     m_view(view),
     m_doc(doc),
     m_shapeManager(new KShapeManager(this)),
-    m_masterShapeManager(new KShapeManager(this)),
     m_toolProxy(new KToolProxy(this))
 {
     setFocusPolicy(Qt::StrongFocus);
@@ -54,7 +53,6 @@ KoPACanvas::KoPACanvas(KoPAView *view, KoPADocument *doc, QWidget *parent)
 KoPACanvas::~KoPACanvas()
 {
     delete m_toolProxy;
-    delete m_masterShapeManager;
     delete m_shapeManager;
 }
 
@@ -102,11 +100,6 @@ void KoPACanvas::addCommand(QUndoCommand *command)
 KShapeManager * KoPACanvas::shapeManager() const
 {
     return m_shapeManager;
-}
-
-KShapeManager * KoPACanvas::masterShapeManager() const
-{
-    return m_masterShapeManager;
 }
 
 const KViewConverter * KoPACanvas::viewConverter() const
@@ -169,12 +162,10 @@ void KoPACanvas::updateSize()
 
 void KoPACanvas::updateCanvas(const QRectF &rc)
 {
-    QRect clipRect(viewToWidget(viewConverter()->documentToView(rc).toRect()));
-    clipRect.adjust(-2, -2, 2, 2); // Resize to fit anti-aliasing
-    clipRect.moveTopLeft(clipRect.topLeft() - documentOffset());
-    update(clipRect);
-
-    emit canvasUpdated();
+    QRect rect(viewToWidget(viewConverter()->documentToView(rc).toRect()));
+    rect.adjust(-2, -2, 2, 2); // Resize to fit anti-aliasing
+    rect.moveTopLeft(rect.topLeft() - documentOffset());
+    update(rect);
 }
 
 bool KoPACanvas::event(QEvent *e)
@@ -186,13 +177,7 @@ bool KoPACanvas::event(QEvent *e)
 void KoPACanvas::paintEvent(QPaintEvent *event)
 {
     QPainter painter(this);
-    KoPAPage *activePage(m_view->activePage());
-    if (m_view->activePage()) {
-        int pageNumber = m_doc->pageIndex(m_view->activePage()) + 1;
-        QVariant var = m_doc->resourceManager()->resource(KOdfText::PageProvider);
-        static_cast<KoPAPageProvider*>(var.value<void*>())->setPageData(pageNumber, activePage);
-        m_view->viewMode()->paint(this, painter, event->rect());
-    }
+    m_view->viewMode()->paint(this, painter, event->rect());
     painter.end();
 }
 

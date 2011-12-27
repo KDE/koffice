@@ -52,7 +52,6 @@ public:
     virtual ~KoPAViewMode();
 
     virtual void paint(KoPACanvas* canvas, QPainter &painter, const QRectF &paintRect) = 0;
-    //virtual void paintEvent(KoPACanvas * canvas, QPaintEvent* event) = 0;
     virtual void tabletEvent(QTabletEvent *event, const QPointF &point) = 0;
     virtual void mousePressEvent(QMouseEvent *event, const QPointF &point) = 0;
     virtual void mouseDoubleClickEvent(QMouseEvent *event, const QPointF &point) = 0;
@@ -144,8 +143,6 @@ public:
      * @param shape the shape removed from the document
      */
     virtual void removeShape(KShape *shape);
-
-    virtual const KOdfPageLayoutData &activePageLayout() const;
 
     virtual void changePageLayout(const KOdfPageLayoutData &pageLayout, bool applyToDocument, QUndoCommand *parent = 0);
 

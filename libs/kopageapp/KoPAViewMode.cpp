@@ -97,11 +97,6 @@ void KoPAViewMode::removeShape(KShape *shape)
     Q_UNUSED(shape);
 }
 
-const KOdfPageLayoutData &KoPAViewMode::activePageLayout() const
-{
-    return m_view->activePage()->pageLayout();
-}
-
 void KoPAViewMode::changePageLayout(const KOdfPageLayoutData &pageLayout, bool applyToDocument, QUndoCommand *parent)
 {
     Q_UNUSED(pageLayout);

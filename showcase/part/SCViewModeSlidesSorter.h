@@ -38,7 +38,6 @@ public:
     ~SCViewModeSlidesSorter();
 
     void paint(KoPACanvas* canvas, QPainter &painter, const QRectF &paintRect);
-    void paintEvent(KoPACanvas * canvas, QPaintEvent* event);
     void tabletEvent(QTabletEvent *event, const QPointF &point);
     void mousePressEvent(QMouseEvent *event, const QPointF &point);
     void mouseDoubleClickEvent(QMouseEvent *event, const QPointF &point);

@@ -102,9 +102,6 @@ public:
     /// @return the shape manager used for this view
     KShapeManager* shapeManager() const; // TODO remove
 
-    /// @return the master shape manager used for this view
-    KShapeManager* masterShapeManager() const; // TODO remove
-
     /**
      * @brief Enables/Disables the given actions
      *

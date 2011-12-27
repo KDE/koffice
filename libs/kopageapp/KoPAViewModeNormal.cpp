@@ -23,6 +23,8 @@
 #include <QKeyEvent>
 #include <QPainter>
 
+#include <KDebug>
+
 #include <KToolProxy.h>
 #include <KShapeManager.h>
 #include "KoPACanvas.h"
@@ -43,38 +45,32 @@ KoPAViewModeNormal::~KoPAViewModeNormal()
 {
 }
 
-void KoPAViewModeNormal::paint(KoPACanvas* canvas, QPainter &painter, const QRectF &paintRect)
+void KoPAViewModeNormal::paint(KoPACanvas *, QPainter &painter, const QRectF &paintRect)
 {
-#ifdef NDEBUG
-    Q_UNUSED(canvas)
-#else
-    Q_ASSERT(m_canvas == canvas);
-#endif
-
+    // apply origin and offset.
     painter.translate(-m_canvas->documentOffset());
-    painter.setRenderHint(QPainter::Antialiasing);
     QRectF clipRect = paintRect.translated(m_canvas->documentOffset());
     painter.setClipRect(clipRect);
-
     painter.translate(m_canvas->documentOrigin().x(), m_canvas->documentOrigin().y());
 
-    KViewConverter * converter = m_view->viewConverter(m_canvas);
+    KViewConverter *converter = m_view->viewConverter(m_canvas);
     painter.save();
-    m_view->activePage()->paintComponent(painter, *converter);
-    painter.restore();
-    if (m_view->activePage()->displayMasterShapes()) {
-        m_canvas->masterShapeManager()->paint(painter, *converter, false);
-    }
+    painter.setRenderHint(QPainter::Antialiasing);
     m_canvas->shapeManager()->paint(painter, *converter, false);
+    painter.restore();
 
     // paint the page margins
-    paintMargins(painter, *converter);
+    const KOdfPageLayoutData pl = m_view->activePage()->pageLayout();
+    const QRectF marginRect(pl.leftMargin, pl.topMargin,
+                       pl.width - pl.leftMargin - pl.rightMargin,
+                       pl.height - pl.topMargin - pl.bottomMargin);
+    painter.save();
+    painter.setPen(Qt::gray);
+    painter.drawRect(converter->documentToView(marginRect));
+    painter.restore();
 
-    painter.setRenderHint(QPainter::Antialiasing, false);
-    QRectF updateRect = converter->viewToDocument(clipRect.translated(converter->documentToView(-m_origin)));
-
-    m_canvas->document()->gridData().paintGrid(painter, *converter, updateRect);
-    m_canvas->document()->guidesData().paintGuides(painter, *converter, updateRect);
+    m_canvas->document()->gridData().paintGrid(painter, *converter, paintRect.intersected(marginRect));
+    m_canvas->document()->guidesData().paintGuides(painter, *converter, paintRect.intersected(marginRect));
 
     painter.setRenderHint(QPainter::Antialiasing);
     m_toolProxy->paint(painter, *converter);
@@ -114,21 +110,21 @@ void KoPAViewModeNormal::keyPressEvent(QKeyEvent *event)
 
         switch (event->key())
         {
-            case Qt::Key_Home:
-                m_view->navigatePage(KoPageApp::PageFirst);
-                break;
-            case Qt::Key_PageUp:
-                m_view->navigatePage(KoPageApp::PagePrevious);
-                break;
-            case Qt::Key_PageDown:
-                m_view->navigatePage(KoPageApp::PageNext);
-                break;
-            case Qt::Key_End:
-                m_view->navigatePage(KoPageApp::PageLast);
-                break;
-            default:
-                event->ignore();
-                break;
+        case Qt::Key_Home:
+            m_view->navigatePage(KoPageApp::PageFirst);
+            break;
+        case Qt::Key_PageUp:
+            m_view->navigatePage(KoPageApp::PagePrevious);
+            break;
+        case Qt::Key_PageDown:
+            m_view->navigatePage(KoPageApp::PageNext);
+            break;
+        case Qt::Key_End:
+            m_view->navigatePage(KoPageApp::PageLast);
+            break;
+        default:
+            event->ignore();
+            break;
         }
     }
 }
@@ -166,6 +162,8 @@ bool KoPAViewModeNormal::masterMode()
 
 void KoPAViewModeNormal::addShape(KShape *shape)
 {
+kDebug();
+#if 0
     // the KShapeController sets the active layer as parent
     KoPAPage * page(m_view->kopaDocument()->pageByShape(shape));
 
@@ -180,10 +178,13 @@ void KoPAViewModeNormal::addShape(KShape *shape)
             m_view->kopaCanvas()->masterShapeManager()->addShape(shape);
         }
     }
+#endif
 }
 
 void KoPAViewModeNormal::removeShape(KShape *shape)
 {
+kDebug();
+#if 0
     KoPAPage * page(m_view->kopaDocument()->pageByShape(shape));
 
     bool isMaster = dynamic_cast<KoPAMasterPage*>(page) != 0;
@@ -197,6 +198,7 @@ void KoPAViewModeNormal::removeShape(KShape *shape)
             m_view->kopaCanvas()->masterShapeManager()->remove(shape);
         }
     }
+#endif
 }
 
 void KoPAViewModeNormal::changePageLayout(const KOdfPageLayoutData &pageLayout, bool applyToDocument, QUndoCommand *parent)
@@ -212,16 +214,5 @@ void KoPAViewModeNormal::changePageLayout(const KOdfPageLayoutData &pageLayout, 
 
 void KoPAViewModeNormal::paintMargins(QPainter &painter, const KViewConverter &converter)
 {
-    KoPAPage *page = m_view->activePage();
-    KOdfPageLayoutData pl = page->pageLayout();
-
-    QSizeF pageSize = QSizeF(pl.width, pl.height);
-    QRectF marginRect(pl.leftMargin, pl.topMargin,
-                       pageSize.width() - pl.leftMargin - pl.rightMargin,
-                       pageSize.height() - pl.topMargin - pl.bottomMargin);
-
-    QPen pen(Qt::gray);
-    painter.setPen(pen);
-    painter.drawRect(converter.documentToView(marginRect));
 }
 

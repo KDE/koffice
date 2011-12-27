@@ -186,7 +186,6 @@ void SCViewModeNotes::updateActivePage(KoPAPage *page)
     m_canvas->repaint();
 
     m_canvas->shapeManager()->setShapes(layer->shapes());
-    m_canvas->masterShapeManager()->setShapes(QList<KShape*>());
 
     m_view->updatePageNavigationActions();
 

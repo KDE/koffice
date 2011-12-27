@@ -48,7 +48,6 @@ public:
 
     void setDocumentOffset(const QPoint &offset);
     QPoint documentOffset() const;
-    KShapeManager *masterShapeManager() const;
 
     /// reimplemented method
     virtual void gridSize(qreal *horizontal, qreal *vertical) const;
@@ -97,9 +96,6 @@ signals:
      */
     void sizeChanged(const QSize &size);
 
-    /// Emitted when updateCanvas has been called.
-    void canvasUpdated();
-
 protected:
     /// reimplemented method from superclass
     bool event(QEvent *);
@@ -144,7 +140,6 @@ private:
     KoPAView *m_view;
     KoPADocument *m_doc;
     KShapeManager *m_shapeManager;
-    KShapeManager *m_masterShapeManager;
     KToolProxy *m_toolProxy;
     QPoint m_documentOffset;
 };
