@@ -27,6 +27,7 @@
 
 #include "KoPADocument.h"
 #include "KoPAView.h"
+#include "KoPAViewMode.h"
 #include "KoPAPage.h"
 #include "KoPAPageProvider.h"
 

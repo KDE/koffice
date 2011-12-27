@@ -17,21 +17,20 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#ifndef KOPAVIEWBASE_H
-#define KOPAVIEWBASE_H
+#ifndef KOPAVIEW_H
+#define KOPAVIEW_H
 
-#include "KoPageApp.h"			//krazy:exclude=includes
-#include "KoPAViewMode.h"		//krazy:exclude=includes
+#include "KoPageApp.h"                  //krazy:exclude=includes
 #include "kopageapp_export.h"
 
 #include <KoZoomMode.h>
+#include <KoZoomHandler.h>
 #include <KoView.h>
 
 class KoPACanvas;
 class KViewConverter;
 class KoPAPage;
 class KoPADocument;
-class KoZoomHandler;
 class KoZoomController;
 class KoRuler;
 class KShapeManager;
@@ -42,6 +41,7 @@ class KoZoomAction;
 class KoFind;
 class QLabel;
 class KToggleAction;
+class KoPAViewMode;
 
 /// A view with a KoPACanvas and rulers
 class KOPAGEAPP_EXPORT KoPAView : public KoView
@@ -73,10 +73,8 @@ public:
     KoPADocument *kopaDocument() const { return m_doc; }
 
     KViewConverter *viewConverter(KoPACanvas *canvas);
-    KViewConverter *viewConverter() const;
     virtual KoZoomController *zoomController() const;
-    virtual KoZoomHandler * zoomHandler();
-    virtual KoZoomHandler *zoomHandler() const;
+    virtual KoZoomHandler *zoomHandler();
 
     /**
      * @brief Set the view mode
@@ -305,9 +303,8 @@ private:
     KoPADocument *m_doc;
     KoPACanvas *m_canvas;
     KoPAPage *m_activePage;
-private:
-    class Private;
-    Private * const d;
+    KoZoomHandler m_zoomHandler;
+    KoPAViewMode *m_viewMode;
 };
 
-#endif // KOPAVIEWBASE_H
+#endif

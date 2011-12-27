@@ -20,25 +20,29 @@
 
 #include "KoPAView.h"
 
-#include <QGridLayout>
-#include <QToolBar>
-#include <QScrollBar>
-#include <QTimer>
-#include <QApplication>
-#include <QClipboard>
-#include <QLabel>
+#include "KoPADocumentStructureDocker.h"
+#include "KoShapeTraversal.h"
+#include "KoPACanvas.h"
+#include "KoPADocument.h"
+#include "KoPAMasterPage.h"
+#include "KoPAViewModeNormal.h"
+#include "KoPAOdfPageSaveHelper.h"
+#include "KoPAPastePage.h"
+#include "KoPAPrintJob.h"
+#include "commands/KoPAPageInsertCommand.h"
+#include "commands/KoPAChangeMasterPageCommand.h"
+#include "dialogs/KoPAMasterPageDialog.h"
+#include "dialogs/KoPAPageLayoutDialog.h"
+#include "dialogs/KoPAConfigureDialog.h"
 
 #include <KCanvasController.h>
-#include <KResourceManager.h>
 #include <KColorBackground.h>
 #include <KoFind.h>
 #include <KTextDocumentLayout.h>
 #include <KToolManager.h>
 #include <KToolProxy.h>
-#include <KoZoomHandler.h>
 #include <KoStandardAction.h>
 #include <KoToolBoxFactory.h>
-#include <KShapeController.h>
 #include <KShapeManager.h>
 #include <KoZoomAction.h>
 #include <KoZoomController.h>
@@ -50,32 +54,10 @@
 #include <KoRuler.h>
 #include <KoRulerController.h>
 #include <KDrag.h>
-#include <KShapeDeleteCommand.h>
 #include <KCutController.h>
 #include <KCopyController.h>
-#include <KoFilterManager.h>
-
-#include "KoPADocumentStructureDocker.h"
-#include "KoShapeTraversal.h"
-#include "KoPACanvas.h"
-#include "KoPADocument.h"
-#include "KoPAPage.h"
-#include "KoPAMasterPage.h"
-#include "KoPAViewModeNormal.h"
-#include "KoPAOdfPageSaveHelper.h"
-#include "KoPAPastePage.h"
-#include "KoPAPrintJob.h"
-#include "commands/KoPAPageInsertCommand.h"
-#include "commands/KoPAChangeMasterPageCommand.h"
-#include "commands/KoPAChangePageLayoutCommand.h"
-#include "dialogs/KoPAMasterPageDialog.h"
-#include "dialogs/KoPAPageLayoutDialog.h"
-#include "dialogs/KoPAConfigureDialog.h"
 
 #include <KDE/KFileDialog>
-#include <KDE/KDebug>
-#include <KDE/KLocale>
-#include <KDE/KIcon>
 #include <KDE/KToggleAction>
 #include <KDE/KActionMenu>
 #include <KDE/KActionCollection>
@@ -87,22 +69,18 @@
 #include <KDE/KTemporaryFile>
 #include <KDE/KMenu>
 
-class KoPAView::Private {
-
-public:
-
-    KoZoomHandler zoomHandler;
-    KoPAViewMode * viewMode;
-};
+#include <QGridLayout>
+#include <QApplication>
+#include <QClipboard>
+#include <QLabel>
 
 KoPAView::KoPAView(KoPADocument *document, QWidget *parent)
     : KoView(document, parent),
     m_doc(document),
     m_canvas(0),
     m_activePage(0),
-    d(new Private)
+    m_viewMode(0)
 {
-    d->viewMode = 0;
     initGUI();
     initActions();
 
@@ -112,8 +90,6 @@ KoPAView::KoPAView(KoPADocument *document, QWidget *parent)
 
 KoPAView::~KoPAView()
 {
-    delete d;
-
     KToolManager::instance()->removeCanvasController(m_canvasController);
 
     removeStatusBarItem(m_status);
@@ -129,41 +105,31 @@ KViewConverter* KoPAView::viewConverter(KoPACanvas * canvas)
 {
     Q_UNUSED(canvas);
 
-    return &d->zoomHandler;
+    return &m_zoomHandler;
 }
 
 KoZoomHandler* KoPAView::zoomHandler()
 {
-    return &d->zoomHandler;
-}
-
-KViewConverter* KoPAView::viewConverter() const
-{
-    return &d->zoomHandler;
-}
-
-KoZoomHandler* KoPAView::zoomHandler() const
-{
-    return &d->zoomHandler;
+    return &m_zoomHandler;
 }
 
 void KoPAView::setViewMode(KoPAViewMode* mode)
 {
     Q_ASSERT(mode);
-    if (!d->viewMode) {
-        d->viewMode = mode;
+    if (!m_viewMode) {
+        m_viewMode = mode;
     }
-    else if (mode != d->viewMode) {
-        KoPAViewMode * previousViewMode = d->viewMode;
-        d->viewMode->deactivate();
-        d->viewMode = mode;
-        d->viewMode->activate(previousViewMode);
+    else if (mode != m_viewMode) {
+        KoPAViewMode * previousViewMode = m_viewMode;
+        m_viewMode->deactivate();
+        m_viewMode = mode;
+        m_viewMode->activate(previousViewMode);
     }
 }
 
 KoPAViewMode* KoPAView::viewMode() const
 {
-    return d->viewMode;
+    return m_viewMode;
 }
 
 
@@ -356,7 +322,6 @@ void KoPAView::initActions()
 
     actionCollection()->action("object_group")->setShortcut(QKeySequence("Ctrl+G"));
     actionCollection()->action("object_ungroup")->setShortcut(QKeySequence("Ctrl+Shift+G"));
-    
 }
 
 KoPAPage* KoPAView::activePage() const

@@ -40,6 +40,7 @@
 
 #include "KoPAView.h"
 #include "KoPAPage.h"
+#include "KoPAViewMode.h"
 #include "KoPAMasterPage.h"
 #include "KoPASavingContext.h"
 #include "KoPALoadingContext.h"
