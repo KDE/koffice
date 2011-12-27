@@ -347,7 +347,7 @@ void KoPAPage::setMasterPage(KoPAMasterPage *masterPage)
     m_masterPage = masterPage;
 }
 
-void KoPAPage::paintComponent(QPainter &painter, const KViewConverter &)
+void KoPAPage::paintComponent(QPainter &painter, const KViewConverter &converter)
 {
     KShapeBackgroundBase *bg = 0;
     if (m_pageProperties & UseMasterBackground) {
@@ -358,8 +358,10 @@ void KoPAPage::paintComponent(QPainter &painter, const KViewConverter &)
     } else {
         bg = background();
     }
-    if (bg)
+    if (bg) {
+        applyConversion(painter, converter);
         bg->paint(painter, outline());
+    }
 }
 
 bool KoPAPage::displayMasterShapes() const
