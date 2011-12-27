@@ -70,12 +70,9 @@ public:
     virtual const KOdfPageLayoutData &pageLayout() const;
 
     /**
-     * @brief Paint background
-     *
-     * @param painter used to paint the background
-     * @param converter to convert between internal and view coordinates
+     * @brief Paint page background
      */
-    virtual void paintBackground(QPainter &painter, const KViewConverter &converter);
+    virtual void paintComponent(QPainter &painter, const KViewConverter &converter);
 
     /**
      * Get if master shapes should be displayed
@@ -84,7 +81,7 @@ public:
      *
      * @return true if master shapes should be displayed
      */
-    bool displayMasterShapes();
+    bool displayMasterShapes() const;
 
     /**
      * Set if the master shapes should be displayed
@@ -100,7 +97,7 @@ public:
      *
      * @return true if master page background should be used
      */
-    bool displayMasterBackground();
+    bool displayMasterBackground() const;
 
     void setDisplayMasterBackground(bool display);
 

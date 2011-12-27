@@ -367,7 +367,7 @@ void SCAnimationDirector::updateZoom(const QSize &size)
 void SCAnimationDirector::paintStep(QPainter &painter)
 {
     painter.translate(m_pageRect.topLeft());
-    m_view->activePage()->paintBackground(painter, m_zoomHandler);
+    m_view->activePage()->paintComponent(painter, m_zoomHandler);
 
     if (m_view->activePage()->displayMasterShapes()) {
         foreach (KShape *shape, m_canvas->masterShapeManager()->shapes()) {

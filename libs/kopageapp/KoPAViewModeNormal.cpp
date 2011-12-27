@@ -59,7 +59,7 @@ void KoPAViewModeNormal::paint(KoPACanvasBase* canvas, QPainter &painter, const 
     painter.translate(m_canvas->documentOrigin().x(), m_canvas->documentOrigin().y());
 
     KViewConverter * converter = m_view->viewConverter(m_canvas);
-    m_view->activePage()->paintBackground(painter, *converter);
+    m_view->activePage()->paintComponent(painter, *converter);
     if (m_view->activePage()->displayMasterShapes()) {
         m_canvas->masterShapeManager()->paint(painter, *converter, false);
     }

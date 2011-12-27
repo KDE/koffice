@@ -347,17 +347,22 @@ void KoPAPage::setMasterPage(KoPAMasterPage *masterPage)
     m_masterPage = masterPage;
 }
 
-void KoPAPage::paintBackground(QPainter &painter, const KViewConverter &converter)
+void KoPAPage::paintComponent(QPainter &painter, const KViewConverter &)
 {
+    KShapeBackgroundBase *bg = 0;
     if (m_pageProperties & UseMasterBackground) {
         if (m_pageProperties & DisplayMasterBackground) {
             Q_ASSERT(m_masterPage);
-            m_masterPage->paintBackground(painter, converter);
+            bg = m_masterPage->background();
         }
+    } else {
+        bg = background();
     }
+    if (bg)
+        bg->paint(painter, outline());
 }
 
-bool KoPAPage::displayMasterShapes()
+bool KoPAPage::displayMasterShapes() const
 {
     return m_pageProperties & DisplayMasterShapes;
 }
@@ -372,7 +377,7 @@ void KoPAPage::setDisplayMasterShapes(bool display)
     }
 }
 
-bool KoPAPage::displayMasterBackground()
+bool KoPAPage::displayMasterBackground() const
 {
     return m_pageProperties & UseMasterBackground;
 }
