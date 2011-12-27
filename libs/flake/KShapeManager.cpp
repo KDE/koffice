@@ -396,7 +396,7 @@ void KShapeManager::paint(QPainter &painter, const KViewConverter &converter, bo
 
 void KShapeManager::paintShape(KShape *shape, QPainter &painter, const KViewConverter &converter, bool forPrint)
 {
-    qreal transparency = shape->transparency(KShape::EffectiveTransparancy);
+    qreal transparency = shape->transparency(KShape::EffectiveTransparency);
     if (transparency > 0.0) {
         painter.setOpacity(1.0-transparency);
     }

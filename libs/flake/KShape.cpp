@@ -665,10 +665,10 @@ void KShape::setTransparency(qreal transparency)
     d->transparency = qBound<qreal>(0.0, transparency, 1.0);
 }
 
-qreal KShape::transparency(Transparancy t) const
+qreal KShape::transparency(Transparency t) const
 {
     Q_D(const KShape);
-    if (t == ShapeTransparancy || !parent()) {
+    if (t == ShapeTransparency || !parent()) {
         return d->transparency;
     } else {
         const qreal parentOpacity = 1.0-parent()->transparency(t);
