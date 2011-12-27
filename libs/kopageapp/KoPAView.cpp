@@ -222,6 +222,11 @@ void KoPAView::initGUI()
     }
 }
 
+void KoPAView::updateActivePage(KoPAPage *page)
+{
+    viewMode()->updateActivePage(page);
+}
+
 void KoPAView::initActions()
 {
     KAction *action = actionCollection()->addAction(KStandardAction::Cut, "edit_cut", 0, 0);

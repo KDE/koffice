@@ -180,6 +180,7 @@ private slots:
 
     /// Shows/hides the rulers
     void setShowRulers(bool show);
+    void updateActivePage(KoPAPage*);
 
 protected slots:
     void viewSnapToGrid(bool snap);
