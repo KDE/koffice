@@ -453,7 +453,7 @@ KoPAPage* KoPADocument::pageByNavigation(KoPAPage * currentPage, KoPageApp::Page
 
 void KoPADocument::addShape(KShape * shape)
 {
-    if(!shape)
+    if (!shape)
         return;
 
     // the KShapeController sets the active layer as parent
@@ -482,7 +482,7 @@ void KoPADocument::postAddShape(KoPAPage * page, KShape * shape)
 
 void KoPADocument::removeShape(KShape *shape)
 {
-    if(!shape)
+    if (!shape)
         return;
 
     KoPAPage * page(pageByShape(shape));
@@ -688,7 +688,7 @@ void KoPADocument::loadConfig()
 {
     KSharedConfigPtr config = componentData().config();
 
-    if(config->hasGroup("Grid"))
+    if (config->hasGroup("Grid"))
     {
         KoGridData defGrid;
         KConfigGroup configGroup = config->group("Grid");
@@ -703,7 +703,7 @@ void KoPADocument::loadConfig()
         gridData().setGridColor(color);
     }
 
-    if(config->hasGroup("Interface"))
+    if (config->hasGroup("Interface"))
     {
         KConfigGroup configGroup = config->group("Interface");
         bool showRulers = configGroup.readEntry<bool>("ShowRulers", true);

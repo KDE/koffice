@@ -171,7 +171,7 @@ bool KoPAPage::loadOdf(const KXmlElement &element, KShapeLoadingContext &loading
 
             KShape *shape = KShapeRegistry::instance()->createShapeFromOdf(child, loadingContext);
             if (shape) {
-                if(!shape->parent()) {
+                if (!shape->parent()) {
                     layer->addShape(shape);
                 }
             }
@@ -412,7 +412,7 @@ void KoPAPage::paintPage(QPainter &painter, KoZoomHandler &zoomHandler)
     KOdfPageLayoutData layout = pageLayout();
     painter.setPen(Qt::black);
 
-    if(background())
+    if (background())
     {
         QPainterPath p;
         p.addRect(QRectF(0.0, 0.0, layout.width, layout.height));

@@ -145,7 +145,7 @@ void KoPAMasterPage::paintPage(QPainter &painter, KoZoomHandler &zoomHandler)
     KOdfPageLayoutData layout = pageLayout();
     painter.setPen(Qt::black);
 
-    if(background())
+    if (background())
     {
         QPainterPath p;
         p.addRect(QRectF(0.0, 0.0, layout.width, layout.height));

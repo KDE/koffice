@@ -439,7 +439,7 @@ void KoPAView::editDeleteSelection()
 void KoPAView::editSelectAll()
 {
     KShapeSelection* selection = kopaCanvas()->shapeManager()->selection();
-    if(!selection)
+    if (!selection)
         return;
 
     QList<KShape*> shapes = activePage()->shapes();
@@ -462,7 +462,7 @@ void KoPAView::editSelectAll()
 void KoPAView::editDeselectAll()
 {
     KShapeSelection* selection = kopaCanvas()->shapeManager()->selection();
-    if(selection)
+    if (selection)
         selection->deselectAll();
 
     selectionChanged();
@@ -672,7 +672,7 @@ void KoPAView::updateMousePosition(const QPoint &position)
     m_verticalRuler->updateMouseCoordinate(viewPos.y());
 
     // Update the selection borders in the rulers while moving with the mouse
-    if(m_canvas->shapeManager()->selection() && (m_canvas->shapeManager()->selection()->count() > 0)) {
+    if (m_canvas->shapeManager()->selection() && (m_canvas->shapeManager()->selection()->count() > 0)) {
         QRectF boundingRect = m_canvas->shapeManager()->selection()->boundingRect();
         m_horizontalRuler->updateSelectionBorders(boundingRect.x(), boundingRect.right());
         m_verticalRuler->updateSelectionBorders(boundingRect.y(), boundingRect.bottom());
@@ -682,7 +682,7 @@ void KoPAView::updateMousePosition(const QPoint &position)
 void KoPAView::selectionChanged()
 {
     // Show the borders of the selection in the rulers
-    if(m_canvas->shapeManager()->selection() && (m_canvas->shapeManager()->selection()->count() > 0)) {
+    if (m_canvas->shapeManager()->selection() && (m_canvas->shapeManager()->selection()->count() > 0)) {
         QRectF boundingRect = m_canvas->shapeManager()->selection()->boundingRect();
         m_horizontalRuler->setShowSelectionBorders(true);
         m_verticalRuler->setShowSelectionBorders(true);
@@ -797,7 +797,7 @@ bool KoPAView::exportPageThumbnail(KoPAPage * page, const KUrl &url, const QSize
         }
         const bool bLocalFile = fileUrl.isLocalFile();
         KTemporaryFile* tmpFile = bLocalFile ? 0 : new KTemporaryFile();
-        if(bLocalFile || tmpFile->open()) {
+        if (bLocalFile || tmpFile->open()) {
             QFile file(bLocalFile ? fileUrl.path() : tmpFile->fileName());
             if (file.open(QIODevice::ReadWrite)) {
                 res = pix.save(&file, format, quality);

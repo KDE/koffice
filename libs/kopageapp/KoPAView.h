@@ -88,10 +88,10 @@ public:
     void navigatePage(KoPageApp::PageNavigation pageNavigation);
 
     /// @return the shape manager used for this view
-    KShapeManager* shapeManager() const;
+    KShapeManager* shapeManager() const; // TODO remove
 
     /// @return the master shape manager used for this view
-    KShapeManager* masterShapeManager() const;
+    KShapeManager* masterShapeManager() const; // TODO remove
 
     /**
      * @brief Enables/Disables the given actions

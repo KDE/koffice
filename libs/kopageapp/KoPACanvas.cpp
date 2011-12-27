@@ -87,7 +87,7 @@ void KoPACanvas::updateCanvas(const QRectF &rc)
 
 bool KoPACanvas::event(QEvent *e)
 {
-    if(toolProxy()) {
+    if (toolProxy()) {
         toolProxy()->processEvent(e);
     }
     return QWidget::event(e);
@@ -109,7 +109,7 @@ void KoPACanvas::mousePressEvent(QMouseEvent *event)
 {
     koPAView()->viewMode()->mousePressEvent(event, viewConverter()->viewToDocument(widgetToView(event->pos() + documentOffset())));
 
-    if(!event->isAccepted() && event->button() == Qt::RightButton)
+    if (!event->isAccepted() && event->button() == Qt::RightButton)
     {
         showContextMenu(event->globalPos(), toolProxy()->popupActionList());
         event->setAccepted(true);
@@ -189,7 +189,7 @@ void KoPACanvas::showContextMenu(const QPoint &globalPos, const QList<QAction*> 
 
     QMenu *menu = dynamic_cast<QMenu*>(view->factory()->container("default_canvas_popup", view));
 
-    if(menu)
+    if (menu)
         menu->exec(globalPos);
 }
 
