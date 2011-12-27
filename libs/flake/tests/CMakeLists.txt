@@ -173,14 +173,14 @@ target_link_libraries(TestKodfLoadingContext kflake ${QT_QTGUI_LIBRARY} ${QT_QTT
 
 set(xmlwritertest_SRCS TestXmlWriter.cpp )
 
-kde4_add_unit_test(TestXmlWriter TESTNAME libs-store-testxmlwriter ${xmlwritertest_SRCS})
+kde4_add_unit_test(TestXmlWriter TESTNAME libs-flake-testxmlwriter ${xmlwritertest_SRCS})
 
 target_link_libraries(TestXmlWriter kflake ${QT_QTTEST_LIBRARY}  ${KDE4_KDEUI_LIBS})
 
 ########### next target ###############
 
 set(xmlreadertest_SRCS TestXmlReader.cpp )
-kde4_add_unit_test(TestXmlReader TESTNAME libs-store-testxmlreader ${xmlreadertest_SRCS})
+kde4_add_unit_test(TestXmlReader TESTNAME libs-flake-testxmlreader ${xmlreadertest_SRCS})
 target_link_libraries(TestXmlReader kflake ${QT_QTTEST_LIBRARY}  ${KDE4_KDEUI_LIBS})
 
 ########### next target ###############
@@ -195,7 +195,7 @@ target_link_libraries(storedroptest kflake  ${QT_QTGUI_LIBRARY} ${KDE4_KDEUI_LIB
 
 set(kxmldomtest_SRCS KXmlDomTest.cpp )
 
-kde4_add_unit_test(KXmlDomTest TESTNAME libs-store-kxmldomtest ${kxmldomtest_SRCS})
+kde4_add_unit_test(KXmlDomTest TESTNAME libs-flake-kxmldomtest ${kxmldomtest_SRCS})
 
 target_link_libraries(KXmlDomTest kflake ${QT_QTTEST_LIBRARY} ${QT_QTGUI_LIBRARY} ${KDE4_KDEUI_LIBS} )
 
@@ -203,18 +203,18 @@ target_link_libraries(KXmlDomTest kflake ${QT_QTTEST_LIBRARY} ${QT_QTGUI_LIBRARY
 
 set(storageTest_SRCS TestStorage.cpp )
 
-kde4_add_unit_test(TestStorage TESTNAME libs-store-storage ${storageTest_SRCS})
+kde4_add_unit_test(TestStorage TESTNAME libs-flake-storage ${storageTest_SRCS})
 
 target_link_libraries(TestStorage kflake ${QT_QTTEST_LIBRARY} ${QT_QTGUI_LIBRARY} ${KDE4_KDEUI_LIBS})
 
 ########### next target ###############
 
 set(kopropertiestest_SRCS KPropertiesTest.cpp )
-kde4_add_unit_test(KPropertiesTest TESTNAME libs-kobase-KPropertiesTest ${kopropertiestest_SRCS})
+kde4_add_unit_test(KPropertiesTest TESTNAME libs-flake-KPropertiesTest ${kopropertiestest_SRCS})
 target_link_libraries(KPropertiesTest  ${KDE4_KDEUI_LIBS} kflake ${QT_QTTEST_LIBRARY})
 
 set(TestKoUnit_SRCS TestKUnit.cpp)
-kde4_add_unit_test(TestKUnit TESTNAME libs-kobase-TestKUnit ${TestKoUnit_SRCS})
+kde4_add_unit_test(TestKUnit TESTNAME libs-flake-TestKUnit ${TestKoUnit_SRCS})
 target_link_libraries(TestKUnit kflake ${QT_QTTEST_LIBRARY})
 
 ########### end ###############
