@@ -29,7 +29,7 @@
 class KOPAGEAPP_EXPORT KoPAMasterPage : public KoPAPage
 {
 public:
-    explicit KoPAMasterPage(KoPADocument *document);
+    explicit KoPAMasterPage();
     ~KoPAMasterPage();
 
     /// reimplemented

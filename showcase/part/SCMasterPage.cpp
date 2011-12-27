@@ -18,7 +18,6 @@
  */
 
 #include "SCMasterPage.h"
-#include "SCDocument.h"
 
 #include "pagelayout/SCPageLayouts.h"
 #include <KOdfXmlNS.h>
@@ -28,8 +27,7 @@
 #include <KOdfWorkaround.h>
 #include <kdebug.h>
 
-SCMasterPage::SCMasterPage(SCDocument *document)
-    : KoPAMasterPage(document)
+SCMasterPage::SCMasterPage()
 {
 }
 

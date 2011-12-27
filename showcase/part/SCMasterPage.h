@@ -24,12 +24,10 @@
 
 #include "SCPageData.h"
 
-class SCDocument;
-
 class SCMasterPage : public KoPAMasterPage, public SCPageData
 {
 public:
-    explicit SCMasterPage(SCDocument *document);
+    explicit SCMasterPage();
     virtual ~SCMasterPage();
 
     /**

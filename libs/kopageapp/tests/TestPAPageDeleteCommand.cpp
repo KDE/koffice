@@ -30,10 +30,10 @@ void TestPAPageDeleteCommand::redoUndo()
 {
     MockDocument doc;
 
-    KoPAMasterPage * master1 = new KoPAMasterPage(&doc);
+    KoPAMasterPage * master1 = new KoPAMasterPage();
     doc.insertPage(master1, 0);
 
-    KoPAPage * page1 = new KoPAPage(&doc);
+    KoPAPage * page1 = new KoPAPage();
     page1->setMasterPage(master1);
     doc.insertPage(page1, 0);
 
@@ -43,9 +43,9 @@ void TestPAPageDeleteCommand::redoUndo()
     QVERIFY(p1 != 0);
     QVERIFY(m1 != 0);
 
-    KoPAPage * p2 = new KoPAPage(&doc);
+    KoPAPage * p2 = new KoPAPage();
     p2->setMasterPage(m1);
-    KoPAPage * p3 = new KoPAPage(&doc);
+    KoPAPage * p3 = new KoPAPage();
     p3->setMasterPage(m1);
     doc.insertPage(p2, 1);
     doc.insertPage(p3, 2);
@@ -93,15 +93,15 @@ void TestPAPageDeleteCommand::redoUndo()
 void TestPAPageDeleteCommand::redoUndoMaster()
 {
     MockDocument doc;
-    KoPAMasterPage * master1 = new KoPAMasterPage(&doc);
+    KoPAMasterPage * master1 = new KoPAMasterPage();
     doc.insertPage(master1, 0);
 
     KoPAMasterPage * m1 = dynamic_cast<KoPAMasterPage *>(doc.pageByIndex(0, true));
 
     QVERIFY(m1 != 0);
 
-    KoPAMasterPage * m2 = new KoPAMasterPage(&doc);
-    KoPAMasterPage * m3 = new KoPAMasterPage(&doc);
+    KoPAMasterPage * m2 = new KoPAMasterPage();
+    KoPAMasterPage * m3 = new KoPAMasterPage();
     doc.insertPage(m2, 1);
     doc.insertPage(m3, 2);
 
@@ -151,17 +151,17 @@ void TestPAPageDeleteCommand::redoUndoMultiple()
     MockDocument doc;
 
     // Create master page.
-    KoPAMasterPage * master = new KoPAMasterPage(&doc);
+    KoPAMasterPage * master = new KoPAMasterPage();
     doc.insertPage(master, 0);
     KoPAMasterPage * m = dynamic_cast<KoPAMasterPage *>(doc.pageByIndex(0, true));
     QVERIFY(m != 0);
 
     // Create three regular pages.
-    KoPAPage * page1 = new KoPAPage(&doc);
+    KoPAPage * page1 = new KoPAPage();
     page1->setMasterPage(master);
-    KoPAPage * page2 = new KoPAPage(&doc);
+    KoPAPage * page2 = new KoPAPage();
     page2->setMasterPage(master);
-    KoPAPage * page3 = new KoPAPage(&doc);
+    KoPAPage * page3 = new KoPAPage();
     page3->setMasterPage(master);
     doc.insertPage(page1, 1);
     doc.insertPage(page2, 2);

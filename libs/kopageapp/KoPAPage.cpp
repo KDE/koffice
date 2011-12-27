@@ -25,7 +25,6 @@
 #include "KoPAMasterPage.h"
 #include "KoPAUtil.h"
 #include "KoPASavingContext.h"
-#include "KoPADocument.h"
 
 #include <QPainter>
 
@@ -41,45 +40,24 @@
 #include <KOdfStyleStack.h>
 #include <KShapeBackgroundBase.h>
 
-KoPAPage::KoPAPage(KoPADocument *document)
+KoPAPage::KoPAPage()
     : KShapeContainer(new KoPAPageContainerModel()),
     m_masterPage(0),
-    m_pageProperties(0),
-    m_document(document)
-{
-    init();
-}
-
-KoPAPage::KoPAPage(KShapeContainerModel *model, KoPADocument *document)
-    : KShapeContainer(model),
-    m_masterPage(0),
-    m_pageProperties(0),
-    m_document(document)
-{
-    init();
-}
-
-void KoPAPage::init()
+    m_pageProperties(0)
 {
     // Add a default layer
     KShapeLayer* layer = new KShapeLayer;
     addShape(layer);
+}
 
-    setZIndex(0);
-    setSelectable(false);
-    setGeometryProtected(true);
-    setContentProtected(true);
-
-    KShapeFactoryBase *factory = KShapeRegistry::instance()->value("PictureShape");
-    Q_ASSERT(factory);
-    Q_ASSERT(m_document);
-    m_pictureShape = factory->createDefaultShape(m_document->resourceManager());
-    m_pictureShape->setUserData(0);
-    m_pictureShape->setSelectable(false);
-    m_pictureShape->setGeometryProtected(true);
-    m_pictureShape->setContentProtected(true);
-    m_pictureShape->setZIndex(-2);
-    m_pictureShape->setVisible(false);
+KoPAPage::KoPAPage(KShapeContainerModel *model)
+    : KShapeContainer(model),
+    m_masterPage(0),
+    m_pageProperties(0)
+{
+    // Add a default layer
+    KShapeLayer* layer = new KShapeLayer;
+    addShape(layer);
 }
 
 KoPAPage::~KoPAPage()

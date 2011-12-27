@@ -669,14 +669,14 @@ QList<KoPAPage*> KoPADocument::pages(bool masterPages) const
 
 KoPAPage *KoPADocument::newPage(KoPAMasterPage *masterPage)
 {
-    KoPAPage *page = new KoPAPage(this);
+    KoPAPage *page = new KoPAPage();
     page->setMasterPage(masterPage);
     return page;
 }
 
 KoPAMasterPage * KoPADocument::newMasterPage()
 {
-    return new KoPAMasterPage(this);
+    return new KoPAMasterPage();
 }
 
 /// return the inlineTextObjectManager for this document.
