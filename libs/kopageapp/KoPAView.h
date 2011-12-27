@@ -2,6 +2,7 @@
 
    Copyright (C) 2006-2009 Thorsten Zachmann <zachmann@kde.org>
    Copyright (C) 2009 Inge Wallin            <inge@lysator.liu.se>
+   Copyright (C) 2011 Thomas Zander <zander@kde.org>
 
    This library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public
@@ -37,6 +38,12 @@ class KShapeManager;
 class KoZoomController;
 class KUrl;
 class QTextDocument;
+class KCanvasController;
+class KActionMenu;
+class KoFind;
+class QLabel;
+class KoZoomAction;
+class KToggleAction;
 
 /// Creates a view with a KoPACanvasBase and rulers
 class KOPAGEAPP_EXPORT KoPAView : public KoView, public KoPAViewBase
@@ -142,7 +149,7 @@ public:
     /// Insert a new page after the current one
     void insertPage();
 
-protected:
+private:
 
     /// creates the widgets (called from the constructor)
     void initGUI();
@@ -233,12 +240,50 @@ protected slots:
     void configure();
 
 public slots:
-
     void variableChanged();
 
 private:
-    class Private;
-    Private * const d;
+    // These were originally private in the .h file
+    KoPADocumentStructureDocker *m_documentStructureDocker;
+
+    KCanvasController *m_canvasController;
+    KoZoomController *m_zoomController;
+
+    KAction *m_editPaste;
+    KAction *m_deleteSelectionAction;
+
+    KToggleAction *m_actionViewSnapToGrid;
+    KToggleAction *m_actionViewShowMasterPages;
+
+    KAction *m_actionInsertPage;
+    KAction *m_actionCopyPage;
+    KAction *m_actionDeletePage;
+
+    KAction *m_actionMasterPage;
+    KAction *m_actionPageLayout;
+
+    KAction *m_actionConfigure;
+
+    KActionMenu *m_variableActionMenu;
+
+    KoRuler *m_horizontalRuler;
+    KoRuler *m_verticalRuler;
+    KToggleAction *m_viewRulers;
+
+    KoZoomAction  *m_zoomAction;
+
+    KoFind *m_find;
+
+    KoPAViewMode *m_viewModeNormal;
+
+    // status bar
+    QLabel *m_status;       ///< ordinary status
+    QWidget *m_zoomActionWidget;
+
+    // These used to be protected.
+    KoPADocument *m_doc;
+    KoPACanvas *m_canvas;
+    KoPAPage *m_activePage;
 };
 
 #endif /* KOPAVIEW_H */
