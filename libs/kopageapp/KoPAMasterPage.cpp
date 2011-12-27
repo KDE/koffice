@@ -40,14 +40,14 @@
 class MasterPageShapeContainerModel : public KShapeContainerDefaultModel
 {
 public:
-    bool isClipped(const KShape *child) const { return true; }
+    bool isClipped(const KShape *) const { return true; }
 };
 
 KoPAMasterPage::KoPAMasterPage()
     : KoPAPage(new MasterPageShapeContainerModel())
 {
     setName("Standard");
-    setSize(QSize(100000, 10000));
+    m_pageProperties |= DisplayMasterBackground;
 }
 
 KoPAMasterPage::~KoPAMasterPage()
@@ -164,5 +164,13 @@ void KoPAMasterPage::saveOdfPageStyleData(KOdfGenericStyle &style, KoPASavingCon
     KShapeBackgroundBase * bg = background();
     if (bg)
         bg->fillStyle(style, paContext);
+}
+
+void KoPAMasterPage::paintComponent(QPainter &painter, const KViewConverter &converter)
+{
+    if (m_pageProperties & DisplayMasterBackground) {
+        applyConversion(painter, converter);
+        background()->paint(painter, outline());
+    }
 }
 
