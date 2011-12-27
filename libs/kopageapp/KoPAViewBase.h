@@ -23,7 +23,7 @@
 #include "KoPAViewMode.h"		//krazy:exclude=includes
 #include "kopageapp_export.h"
 
-class KoPACanvasBase;
+class KoPACanvas;
 class KViewConverter;
 class KoPAPage;
 class KoPADocument;
@@ -45,13 +45,13 @@ public:
     virtual ~KoPAViewBase();
 
     /// @return the canvas for the application
-    virtual KoPACanvasBase * kopaCanvas() const = 0;
+    virtual KoPACanvas * kopaCanvas() const = 0;
 
     /// @return the document for the application
     virtual KoPADocument * kopaDocument() const = 0;
 
     /// XXX
-    virtual KViewConverter * viewConverter(KoPACanvasBase * canvas);
+    virtual KViewConverter * viewConverter(KoPACanvas * canvas);
     virtual KViewConverter * viewConverter() const;
     virtual KoZoomController * zoomController() const = 0;
 

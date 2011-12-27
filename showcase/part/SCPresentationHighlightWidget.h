@@ -28,7 +28,7 @@ class SCPresentationHighlightWidget : public SCPresentationToolEventForwarder
 {
     Q_OBJECT
 public:
-    SCPresentationHighlightWidget(KoPACanvasBase * canvas);
+    SCPresentationHighlightWidget(KoPACanvas * canvas);
     ~SCPresentationHighlightWidget();
 
 protected:

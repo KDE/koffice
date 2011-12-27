@@ -27,7 +27,7 @@
 #include <QPainter>
 #include <QRect>
 
-SCPresentationBlackWidget::SCPresentationBlackWidget(KoPACanvasBase * canvas)
+SCPresentationBlackWidget::SCPresentationBlackWidget(KoPACanvas * canvas)
 : SCPresentationToolEventForwarder(canvas)
 , m_size(canvas->canvasWidget()->size())
 {

@@ -1,5 +1,6 @@
 /* This file is part of the KDE project
    Copyright (C) 2006-2007 Thorsten Zachmann <zachmann@kde.org>
+    Copyright (C) 2011 Thomas Zander <zander@kde.org>
 
    This library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public
@@ -19,24 +20,60 @@
 
 #include "KoPACanvas.h"
 
-#include <KToolProxy.h>
+#include <KShapeManager.h>
 #include <KoZoomHandler.h>
+#include <KToolProxy.h>
+#include <KOdfText.h>
 
-#include "KOdfPageLayoutData.h"
+#include "KoPADocument.h"
 #include "KoPAView.h"
-#include "KoPAViewMode.h"
 #include "KoPAPage.h"
+#include "KoPAPageProvider.h"
 
 #include <kxmlguifactory.h>
-
 #include <QMenu>
-#include <QMouseEvent>
-#include <QPainter>
 
-KoPACanvas::KoPACanvas(KoPAViewBase * view, KoPADocument * doc, QWidget *parent ,  Qt::WindowFlags f)
-    : QWidget(parent, f)
-    , KoPACanvasBase(doc)
+class KoPACanvas::Private
 {
+public:
+    Private(KoPADocument * doc)
+    : view(0)
+    , doc(doc)
+    , shapeManager(0)
+    , masterShapeManager(0)
+    , toolProxy(0)
+    {}
+
+    ~Private()
+    {
+        delete toolProxy;
+        delete masterShapeManager;
+        delete shapeManager;
+    }
+
+    ///< the origin of the page rect inside the canvas in document points
+    QPointF origin() const
+    {
+        return view->viewMode()->origin();
+    }
+
+    KoPAViewBase * view;
+    KoPADocument * doc;
+    KShapeManager * shapeManager;
+    KShapeManager * masterShapeManager;
+    KToolProxy * toolProxy;
+    QPoint documentOffset;
+};
+
+KoPACanvas::KoPACanvas(KoPAViewBase *view, KoPADocument *doc, QWidget *parent)
+    : QWidget(parent),
+    KCanvasBase(doc),
+    d(new Private(doc))
+{
+    d->shapeManager = new KShapeManager(this);
+    d->masterShapeManager = new KShapeManager(this);
+    d->toolProxy = new KToolProxy(this);
+
     setView(view);
     setFocusPolicy(Qt::StrongFocus);
     // this is much faster than painting it in the paintevent
@@ -46,11 +83,121 @@ KoPACanvas::KoPACanvas(KoPAViewBase * view, KoPADocument * doc, QWidget *parent 
     setAttribute(Qt::WA_InputMethodEnabled, true);
 }
 
-void KoPACanvas::repaint()
+KoPACanvas::~KoPACanvas()
 {
-    update();
+    delete d;
 }
 
+void KoPACanvas::setView(KoPAViewBase *view)
+{
+    d->view = view;
+}
+
+KoPADocument* KoPACanvas::document() const
+{
+    return d->doc;
+}
+
+KToolProxy* KoPACanvas::toolProxy() const
+{
+    return d->toolProxy;
+}
+
+KoPAViewBase* KoPACanvas::koPAView() const
+{
+    return d->view;
+}
+
+QPoint KoPACanvas::documentOrigin() const
+{
+    return viewConverter()->documentToView(d->origin()).toPoint();
+}
+
+void KoPACanvas::setDocumentOrigin(const QPointF &o)
+{
+    d->view->viewMode()->setOrigin(o);
+}
+
+void KoPACanvas::gridSize(qreal *horizontal, qreal *vertical) const
+{
+    *horizontal = d->doc->gridData().gridX();
+    *vertical = d->doc->gridData().gridY();
+}
+
+bool KoPACanvas::snapToGrid() const
+{
+    return d->doc->gridData().snapToGrid();
+}
+
+void KoPACanvas::addCommand(QUndoCommand *command)
+{
+    d->doc->addCommand(command);
+}
+
+KShapeManager * KoPACanvas::shapeManager() const
+{
+    return d->shapeManager;
+}
+
+KShapeManager * KoPACanvas::masterShapeManager() const
+{
+    return d->masterShapeManager;
+}
+
+const KViewConverter * KoPACanvas::viewConverter() const
+{
+    return d->view->viewMode()->viewConverter(const_cast<KoPACanvas *>(this));
+}
+
+KUnit KoPACanvas::unit() const
+{
+    return d->doc->unit();
+}
+
+const QPoint &KoPACanvas::documentOffset() const
+{
+    return d->documentOffset;
+}
+
+void KoPACanvas::setDocumentOffset(const QPoint &offset) {
+    d->documentOffset = offset;
+}
+
+QPoint KoPACanvas::widgetToView(const QPoint&p) const
+{
+    return p - viewConverter()->documentToView(d->origin()).toPoint();
+}
+
+QRect KoPACanvas::widgetToView(const QRect &r) const
+{
+    return r.translated(viewConverter()->documentToView(-d->origin()).toPoint());
+}
+
+QPoint KoPACanvas::viewToWidget(const QPoint &p) const
+{
+    return p + viewConverter()->documentToView(d->origin()).toPoint();
+}
+
+QRect KoPACanvas::viewToWidget(const QRect &r) const
+{
+    return r.translated(viewConverter()->documentToView(d->origin()).toPoint());
+}
+
+KGuidesData * KoPACanvas::guidesData()
+{
+    return &d->doc->guidesData();
+}
+
+void KoPACanvas::paint(QPainter &painter, const QRectF paintRect) {
+
+    KoPAPage *activePage(d->view->activePage());
+    if (d->view->activePage()) {
+        int pageNumber = d->doc->pageIndex(d->view->activePage()) + 1;
+        QVariant var = d->doc->resourceManager()->resource(KOdfText::PageProvider);
+        static_cast<KoPAPageProvider*>(var.value<void*>())->setPageData(pageNumber, activePage);
+        d->view->viewMode()->paint(this, painter, paintRect);
+    }
+}
 
 QWidget* KoPACanvas::canvasWidget()
 {
@@ -193,4 +340,3 @@ void KoPACanvas::showContextMenu(const QPoint &globalPos, const QList<QAction*> 
         menu->exec(globalPos);
 }
 
-#include <KoPACanvas.moc>

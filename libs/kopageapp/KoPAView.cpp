@@ -309,7 +309,7 @@ void KoPAView::initActions()
 }
 
 
-KoPACanvasBase * KoPAView::kopaCanvas() const
+KoPACanvas * KoPAView::kopaCanvas() const
 {
     return m_canvas;
 }

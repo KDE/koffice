@@ -20,10 +20,10 @@
 
 #include "SCPageSelectStrategyActive.h"
 
-#include <KoPACanvasBase.h>
+#include <KoPACanvas.h>
 #include <KoPAViewBase.h>
 
-SCPageSelectStrategyActive::SCPageSelectStrategyActive(KoPACanvasBase *canvas)
+SCPageSelectStrategyActive::SCPageSelectStrategyActive(KoPACanvas *canvas)
 : m_canvas(canvas)
 {
 }

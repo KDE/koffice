@@ -41,7 +41,7 @@ void SCPresentationStrategyBase::setToolWidgetParent(QWidget * widget)
     return m_tool->m_presentationToolWidget->setParent(widget);
 }
 
-KoPACanvasBase * SCPresentationStrategyBase::canvas()
+KoPACanvas * SCPresentationStrategyBase::canvas()
 {
     return m_tool->m_viewMode.canvas();
 }

@@ -29,7 +29,7 @@
 #include <KoZoomMode.h>			//krazy:exclude=includes
 #include "kopageapp_export.h"		
 
-class KoPACanvasBase;
+class KoPACanvas;
 class KoPADocument;
 class KoPAPage;
 class KoPADocumentStructureDocker;
@@ -45,7 +45,7 @@ class QLabel;
 class KoZoomAction;
 class KToggleAction;
 
-/// Creates a view with a KoPACanvasBase and rulers
+/// Creates a view with a KoPACanvas and rulers
 class KOPAGEAPP_EXPORT KoPAView : public KoView, public KoPAViewBase
 {
     Q_OBJECT
@@ -76,7 +76,7 @@ public:
     KoRuler *verticalRuler();
 
     /// @return the canvas for the application
-    KoPACanvasBase * kopaCanvas() const;
+    KoPACanvas * kopaCanvas() const;
     /// @return the document for the application
     KoPADocument * kopaDocument() const;
     /// @return Page that is shown in the canvas

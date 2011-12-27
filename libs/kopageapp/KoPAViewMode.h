@@ -28,7 +28,7 @@
 struct KOdfPageLayoutData;
 class KoPAViewBase;
 class KoPACanvas;
-class KoPACanvasBase;
+class KoPACanvas;
 class KoPAPage;
 class KToolProxy;
 class KShape;
@@ -48,10 +48,10 @@ class KOPAGEAPP_EXPORT KoPAViewMode : public QObject
 
     Q_OBJECT
 public:
-    KoPAViewMode(KoPAViewBase * view, KoPACanvasBase * canvas);
+    KoPAViewMode(KoPAViewBase * view, KoPACanvas * canvas);
     virtual ~KoPAViewMode();
 
-    virtual void paint(KoPACanvasBase* canvas, QPainter &painter, const QRectF &paintRect) = 0;
+    virtual void paint(KoPACanvas* canvas, QPainter &painter, const QRectF &paintRect) = 0;
     //virtual void paintEvent(KoPACanvas * canvas, QPaintEvent* event) = 0;
     virtual void tabletEvent(QTabletEvent *event, const QPointF &point) = 0;
     virtual void mousePressEvent(QMouseEvent *event, const QPointF &point) = 0;
@@ -107,7 +107,7 @@ public:
      *
      * @return canvas canvas used by the view mode
      */
-    KoPACanvasBase * canvas() const;
+    KoPACanvas * canvas() const;
 
     /**
      * @brief Get the view
@@ -123,7 +123,7 @@ public:
      *
      * @return the view converter used in the view mode
      */
-    virtual KViewConverter * viewConverter(KoPACanvasBase * canvas);
+    virtual KViewConverter * viewConverter(KoPACanvas * canvas);
 
     /**
      * @brief Update the view when a new shape is added to the document
@@ -169,7 +169,7 @@ public slots:
     virtual void updateActivePage(KoPAPage * page);
 
 protected:
-    KoPACanvasBase * m_canvas;
+    KoPACanvas * m_canvas;
     KToolProxy * m_toolProxy;
     KoPAViewBase * m_view;
     QPointF m_origin;

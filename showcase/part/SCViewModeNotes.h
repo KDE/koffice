@@ -29,10 +29,10 @@ class KoPAPage;
 class SCViewModeNotes : public KoPAViewMode
 {
 public:
-    SCViewModeNotes(KoPAViewBase *view, KoPACanvasBase *canvas);
+    SCViewModeNotes(KoPAViewBase *view, KoPACanvas *canvas);
     ~SCViewModeNotes();
 
-    void paint(KoPACanvasBase* canvas, QPainter &painter, const QRectF &paintRect);
+    void paint(KoPACanvas* canvas, QPainter &painter, const QRectF &paintRect);
     void tabletEvent(QTabletEvent *event, const QPointF &point);
     void mousePressEvent(QMouseEvent *event, const QPointF &point);
     void mouseDoubleClickEvent(QMouseEvent *event, const QPointF &point);

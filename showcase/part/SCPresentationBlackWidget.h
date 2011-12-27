@@ -25,13 +25,13 @@
 
 #include <QSize>
 
-class KoPACanvasBase;
+class KoPACanvas;
 
 class SCPresentationBlackWidget : public SCPresentationToolEventForwarder
 {
     Q_OBJECT
 public:
-    SCPresentationBlackWidget(KoPACanvasBase * canvas);
+    SCPresentationBlackWidget(KoPACanvas * canvas);
     virtual ~SCPresentationBlackWidget();
 
 protected:

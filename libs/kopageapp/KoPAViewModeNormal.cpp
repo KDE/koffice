@@ -32,7 +32,7 @@
 #include "KoPAView.h"
 #include "commands/KoPAChangePageLayoutCommand.h"
 
-KoPAViewModeNormal::KoPAViewModeNormal(KoPAViewBase * view, KoPACanvasBase * canvas)
+KoPAViewModeNormal::KoPAViewModeNormal(KoPAViewBase * view, KoPACanvas * canvas)
 : KoPAViewMode(view, canvas)
 , m_masterMode(false)
 , m_savedPage(0)
@@ -43,7 +43,7 @@ KoPAViewModeNormal::~KoPAViewModeNormal()
 {
 }
 
-void KoPAViewModeNormal::paint(KoPACanvasBase* canvas, QPainter &painter, const QRectF &paintRect)
+void KoPAViewModeNormal::paint(KoPACanvas* canvas, QPainter &painter, const QRectF &paintRect)
 {
 #ifdef NDEBUG
     Q_UNUSED(canvas)

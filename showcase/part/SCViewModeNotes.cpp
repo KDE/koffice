@@ -44,7 +44,7 @@
 #include "SCNotes.h"
 #include "SCPage.h"
 
-SCViewModeNotes::SCViewModeNotes(KoPAViewBase *view, KoPACanvasBase *canvas)
+SCViewModeNotes::SCViewModeNotes(KoPAViewBase *view, KoPACanvas *canvas)
     : KoPAViewMode(view, canvas)
 {
 }
@@ -53,7 +53,7 @@ SCViewModeNotes::~SCViewModeNotes()
 {
 }
 
-void SCViewModeNotes::paint(KoPACanvasBase* canvas, QPainter &painter, const QRectF &paintRect)
+void SCViewModeNotes::paint(KoPACanvas* canvas, QPainter &painter, const QRectF &paintRect)
 {
 #ifdef NDEBUG
     Q_UNUSED(canvas);

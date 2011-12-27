@@ -98,7 +98,7 @@ SCView::~SCView()
     delete m_slidesSorterMode;
 }
 
-KViewConverter * SCView::viewConverter(KoPACanvasBase * canvas)
+KViewConverter * SCView::viewConverter(KoPACanvas * canvas)
 {
     Q_ASSERT(viewMode());
     return viewMode()->viewConverter(canvas);

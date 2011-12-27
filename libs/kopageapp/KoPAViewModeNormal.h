@@ -23,7 +23,7 @@
 #include "KoPAViewMode.h"
 
 class KoPAPage;
-class KoPACanvasBase;
+class KoPACanvas;
 class QPainter;
 class QRectF;
 class KViewConverter;
@@ -31,10 +31,10 @@ class KViewConverter;
 class KOPAGEAPP_EXPORT KoPAViewModeNormal : public KoPAViewMode
 {
 public:
-    KoPAViewModeNormal(KoPAViewBase * view, KoPACanvasBase * m_canvas);
+    KoPAViewModeNormal(KoPAViewBase * view, KoPACanvas * m_canvas);
     ~KoPAViewModeNormal();
 
-    void paint(KoPACanvasBase* canvas, QPainter &painter, const QRectF &paintRect);
+    void paint(KoPACanvas* canvas, QPainter &painter, const QRectF &paintRect);
     //void paintEvent(KoPACanvas * canvas, QPaintEvent* event);
     void tabletEvent(QTabletEvent *event, const QPointF &point);
     void mousePressEvent(QMouseEvent *event, const QPointF &point);

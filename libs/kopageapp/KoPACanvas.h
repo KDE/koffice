@@ -1,5 +1,6 @@
 /* This file is part of the KDE project
    Copyright (C) 2006-2007 Thorsten Zachmann <zachmann@kde.org>
+   Copyright (C) 2011 Thomas Zander <zander@kde.org>
 
    This library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public
@@ -22,18 +23,62 @@
 
 #include <QtGui/QWidget>
 #include <QtCore/QList>
-#include "KoPACanvasBase.h" 	//krazy:exclude=includes
+
+#include <KCanvasBase.h>	//krazy:exclude=includes
 
 #include "kopageapp_export.h"
 
+class KoPAViewBase;
+class KoPADocument;
+
 /// Widget that shows a KoPAPage
-class KOPAGEAPP_EXPORT KoPACanvas : public QWidget, public KoPACanvasBase
+class KOPAGEAPP_EXPORT KoPACanvas : public QWidget, public KCanvasBase
 {
     Q_OBJECT
 public:
-    explicit KoPACanvas(KoPAViewBase * view, KoPADocument * doc, QWidget *parent = 0, Qt::WindowFlags f = 0);
+    explicit KoPACanvas(KoPAViewBase * view, KoPADocument * doc, QWidget *parent = 0);
+    virtual ~KoPACanvas();
 
-    void repaint();
+    /// set the viewbase on the canvas; this needs to be called before the canvas can be used.
+    void setView(KoPAViewBase *view);
+
+    /// Returns pointer to the KoPADocument
+    KoPADocument* document() const;
+
+    /// reimplemented method
+    virtual void gridSize(qreal *horizontal, qreal *vertical) const;
+    /// reimplemented method
+    virtual bool snapToGrid() const;
+    /// reimplemented method
+    virtual void addCommand(QUndoCommand *command);
+    /// reimplemented method
+    virtual KShapeManager * shapeManager() const;
+    KShapeManager * masterShapeManager() const;
+    /// reimplemented from KCanvasBase
+    virtual KGuidesData * guidesData();
+
+    KToolProxy * toolProxy() const;
+    const KViewConverter *viewConverter() const;
+    KUnit unit() const;
+
+    /// XXX
+    void setDocumentOffset(const QPoint &offset);
+
+    /// XXX
+    const QPoint &documentOffset() const;
+
+    /// reimplemented in view coordinates
+    virtual QPoint documentOrigin() const;
+    /// Set the origin of the page inside the canvas in document coordinates
+    void setDocumentOrigin(const QPointF &origin);
+
+    KoPAViewBase* koPAView () const;
+
+    /// translate widget coordinates to view coordinates
+    QPoint widgetToView(const QPoint &p) const;
+    QRect widgetToView(const QRect &r) const;
+    QPoint viewToWidget(const QPoint &p) const;
+    QRect viewToWidget(const QRect &r) const;
 
     QWidget* canvasWidget();
     const QWidget* canvasWidget() const;
@@ -48,7 +93,6 @@ public:
     void updateSize();
 
 public slots:
-
     void slotSetDocumentOffset(const QPoint &offset) { setDocumentOffset(offset); }
 
 signals:
@@ -100,6 +144,13 @@ protected:
      * @param actionList action list to be inserted into the menu
      */
     void showContextMenu(const QPoint &globalPos, const QList<QAction*> &actionList);
+
+protected:
+    void paint(QPainter &painter, const QRectF paintRect);
+
+private:
+    class Private;
+    Private * const d;
 };
 
-#endif /* KOPACANVAS_H */
+#endif

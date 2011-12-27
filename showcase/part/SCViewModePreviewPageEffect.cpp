@@ -41,7 +41,7 @@
 #include "pageeffects/SCPageEffect.h"
 #include "pageeffects/SCPageEffectRunner.h"
 
-SCViewModePreviewPageEffect::SCViewModePreviewPageEffect(KoPAViewBase * view, KoPACanvasBase * canvas)
+SCViewModePreviewPageEffect::SCViewModePreviewPageEffect(KoPAViewBase * view, KoPACanvas * canvas)
 : KoPAViewMode(view, canvas)
 , m_savedViewMode(0)
 , m_pageEffect(0)
@@ -58,7 +58,7 @@ SCViewModePreviewPageEffect::~SCViewModePreviewPageEffect()
 }
 
 
-void SCViewModePreviewPageEffect::paint(KoPACanvasBase* canvas, QPainter &painter, const QRectF &paintRect)
+void SCViewModePreviewPageEffect::paint(KoPACanvas* canvas, QPainter &painter, const QRectF &paintRect)
 {
     Q_UNUSED(canvas);
     Q_UNUSED(paintRect);

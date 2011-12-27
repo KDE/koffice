@@ -41,7 +41,7 @@ KoPAViewBase::~KoPAViewBase()
     delete proxyObject;
 }
 
-KViewConverter* KoPAViewBase::viewConverter(KoPACanvasBase * canvas)
+KViewConverter* KoPAViewBase::viewConverter(KoPACanvas * canvas)
 {
     Q_UNUSED(canvas);
 

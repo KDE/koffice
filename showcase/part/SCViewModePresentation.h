@@ -34,12 +34,12 @@ class SCViewModePresentation : public KoPAViewMode
     Q_OBJECT
 
 public:
-    SCViewModePresentation(KoPAViewBase * view, KoPACanvasBase * m_canvas);
+    SCViewModePresentation(KoPAViewBase * view, KoPACanvas * m_canvas);
     ~SCViewModePresentation();
 
-    KViewConverter * viewConverter(KoPACanvasBase * canvas);
+    KViewConverter * viewConverter(KoPACanvas * canvas);
 
-    void paint(KoPACanvasBase* canvas, QPainter &painter, const QRectF &paintRect);
+    void paint(KoPACanvas* canvas, QPainter &painter, const QRectF &paintRect);
     void tabletEvent(QTabletEvent *event, const QPointF &point);
     void mousePressEvent(QMouseEvent *event, const QPointF &point);
     void mouseDoubleClickEvent(QMouseEvent *event, const QPointF &point);

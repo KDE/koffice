@@ -23,7 +23,7 @@
 
 #include "SCPageSelectStrategyBase.h"
 
-class KoPACanvasBase;
+class KoPACanvas;
 
 /**
  * Get the active page for the view
@@ -31,13 +31,13 @@ class KoPACanvasBase;
 class SCPageSelectStrategyActive : public SCPageSelectStrategyBase
 {
 public:
-    SCPageSelectStrategyActive(KoPACanvasBase *canvas);
+    SCPageSelectStrategyActive(KoPACanvas *canvas);
     ~SCPageSelectStrategyActive();
 
     virtual const KoPAPage *page() const;
 
 private:
-    KoPACanvasBase *m_canvas;
+    KoPACanvas *m_canvas;
 };
 
 #endif /* SCPAGESELECTSTRATEGYACTIVE_H */

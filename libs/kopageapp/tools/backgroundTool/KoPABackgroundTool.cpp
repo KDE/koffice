@@ -44,7 +44,7 @@ KoPABackgroundTool::KoPABackgroundTool(KCanvasBase *canvas)
 : KToolBase(canvas)
 {
     setFlags(ToolDoesntHandleMouseEvents);
-    m_view = static_cast<KoPACanvasBase *>(canvas)->koPAView();
+    m_view = static_cast<KoPACanvas *>(canvas)->koPAView();
 }
 
 KoPABackgroundTool::~KoPABackgroundTool()
