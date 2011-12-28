@@ -778,6 +778,8 @@ QSet<KEventAction *> KShape::eventActions() const
 void KShape::setBackground(KShapeBackgroundBase *fill)
 {
     Q_D(KShape);
+    if (d->fill == fill)
+        return;
     if (d->fill)
         d->fill->deref();
     d->fill = fill;
