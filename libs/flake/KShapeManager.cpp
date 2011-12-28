@@ -140,7 +140,7 @@ void KShapeManagerPrivate::update(const QRectF &rect, const KShape *shape, bool 
 void KShapeManagerPrivate::shapeGeometryChanged(KShape *shape)
 {
     Q_ASSERT(shape);
-    if (aggregate4update.contains(shape) || additionalShapes.contains(shape)) {
+    if (aggregate4update.contains(shape)) {
         return;
     }
     const bool wasEmpty = aggregate4update.isEmpty();
@@ -215,9 +215,6 @@ KShapeManager::~KShapeManager()
     foreach(KShape *shape, d->shapes) {
         shape->priv()->removeShapeManager(this);
     }
-    foreach(KShape *shape, d->additionalShapes) {
-        shape->priv()->removeShapeManager(this);
-    }
     delete d;
 }
 
@@ -237,7 +234,7 @@ void KShapeManager::setShapes(const QList<KShape *> &shapes, Repaint repaint)
     }
 }
 
-void KShapeManager::addShape(KShape *shape, Repaint repaint)
+void KShapeManager::add(KShape *shape, Repaint repaint)
 {
     if (d->shapes.contains(shape))
         return;
@@ -268,17 +265,6 @@ void KShapeManager::addShape(KShape *shape, Repaint repaint)
     detector.fireSignals();
 }
 
-void KShapeManager::addAdditional(KShape *shape)
-{
-    if (shape) {
-        if (d->additionalShapes.contains(shape)) {
-            return;
-        }
-        shape->priv()->addShapeManager(this);
-        d->additionalShapes.append(shape);
-    }
-}
-
 void KShapeManager::remove(KShape *shape)
 {
     KShapeManagerPrivate::DetectCollision detector;
@@ -298,14 +284,6 @@ void KShapeManager::remove(KShape *shape)
         foreach (KShape *containerShape, container->shapes()) {
             remove(containerShape);
         }
-    }
-}
-
-void KShapeManager::removeAdditional(KShape *shape)
-{
-    if (shape) {
-        shape->priv()->removeShapeManager(this);
-        d->additionalShapes.removeAll(shape);
     }
 }
 

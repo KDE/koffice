@@ -108,7 +108,6 @@ KShapePrivate::~KShapePrivate()
         parent->removeShape(q);
     foreach(KShapeManager *manager, shapeManagers) {
         manager->remove(q);
-        manager->removeAdditional(q);
     }
     delete userData;
     delete appData;

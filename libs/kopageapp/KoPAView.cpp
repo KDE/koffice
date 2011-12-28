@@ -624,45 +624,6 @@ void KoPAView::setActivePage(KoPAPage* page)
         }
     }
     m_canvas->update();
-
-#if 0
-    //bool pageChanged = page != m_activePage;
-
-    shapeManager()->removeAdditional(m_activePage);
-    m_activePage = page;
-    shapeManager()->addAdditional(m_activePage);
-    QList<KShape*> shapes = page->shapes();
-    shapeManager()->setShapes(shapes, KShapeManager::AddWithoutRepaint);
-    //Make the top most layer active
-    if (!shapes.isEmpty()) {
-        KShapeLayer* layer = dynamic_cast<KShapeLayer*>(shapes.last());
-        shapeManager()->selection()->setActiveLayer(layer);
-    }
-
-    // if the page is not a master page itself set shapes of the master page
-    KoPAPage * paPage = dynamic_cast<KoPAPage *>(page);
-    if (paPage) {
-        KoPAMasterPage * masterPage = paPage->masterPage();
-        QList<KShape*> masterShapes = masterPage->shapes();
-        masterShapeManager()->setShapes(masterShapes, KShapeManager::AddWithoutRepaint);
-        //Make the top most layer active
-        if (!masterShapes.isEmpty()) {
-            KShapeLayer* layer = dynamic_cast<KShapeLayer*>(masterShapes.last());
-            masterShapeManager()->selection()->setActiveLayer(layer);
-        }
-    }
-    else {
-        // if the page is a master page no shapes are in the masterShapeManager
-        masterShapeManager()->setShapes(QList<KShape*>());
-    }
-
-    if (shell() /* && pageChanged*/) {
-        m_documentStructureDocker->setActivePage(m_activePage);
-    }
-
-    // Set the current page number in the canvas resource provider
-    m_canvas->resourceManager()->setResource(KCanvasResource::CurrentPage, m_doc->pageIndex(m_activePage)+1);
-#endif
 }
 
 void KoPAView::navigatePage(KoPageApp::PageNavigation pageNavigation)
