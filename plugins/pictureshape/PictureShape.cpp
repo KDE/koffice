@@ -176,7 +176,7 @@ void PictureShape::waitUntilReady(const KViewConverter &converter, bool asynchro
         m_printQualityImage = image.scaled(pixels, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
     }
     else {
-    QSize pixels = converter.documentToView(QRectF(QPointF(0,0), size())).size().toSize();
+        QSize pixels = converter.documentToView(QRectF(QPointF(0,0), size())).size().toSize();
         QString key(generate_key(imageData->key(), pixels));
         if (QPixmapCache::find(key) == 0) {
             QPixmap pixmap = imageData->pixmap(pixels);
