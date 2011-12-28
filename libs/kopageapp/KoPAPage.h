@@ -132,6 +132,7 @@ public:
     /**
      * This function is called after a shape is added to the document on this page
      * The default implementation is empty.
+     * In Showcase this method is reimplemented to allow placeholders to be treated differently.
      *
      * @param shape The shape that was added
      */
@@ -281,6 +282,9 @@ protected:
     KoPAMasterPage *m_masterPage;
 
     int m_pageProperties;
+
+private:
+    void init();
 };
 
 #endif /* KOPAPAGEBASE_H */

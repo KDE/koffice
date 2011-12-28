@@ -459,22 +459,20 @@ void KoPADocument::addShape(KShape * shape)
     KoPAPage * page(pageByShape(shape));
 
     foreach(KoView *view, views()) {
-        KoPAView * kopaView = static_cast<KoPAView*>(view);
+        KoPAView *kopaView = static_cast<KoPAView*>(view);
         kopaView->viewMode()->addShape(shape);
     }
 
     emit shapeAdded(shape);
 
     // it can happen in showcase notes view that there is no page
-    if (page) {
+    if (page)
         page->shapeAdded(shape);
-        postAddShape(page, shape);
-    }
+    postAddShape(shape);
 }
 
-void KoPADocument::postAddShape(KoPAPage * page, KShape * shape)
+void KoPADocument::postAddShape(KShape * shape)
 {
-    Q_UNUSED(page);
     Q_UNUSED(shape);
 }
 

@@ -226,11 +226,6 @@ void SCViewModeSlidesSorter::addShape(KShape *shape)
     Q_UNUSED(shape);
 }
 
-void SCViewModeSlidesSorter::removeShape(KShape *shape)
-{
-    Q_UNUSED(shape);
-}
-
 void SCViewModeSlidesSorter::SCSlidesSorter::startDrag (Qt::DropActions supportedActions)
 {
     Q_UNUSED(supportedActions);

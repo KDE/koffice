@@ -179,7 +179,7 @@ protected:
     virtual bool saveOdfEpilogue(KoPASavingContext &context);
 
     /// reimplemented
-    virtual void postAddShape(KoPAPage * page, KShape * shape);
+    virtual void postAddShape(KShape *shape);
     /// reimplemented
     virtual void postRemoveShape(KoPAPage * page, KShape * shape);
 

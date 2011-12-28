@@ -20,10 +20,15 @@
 #include "KoPAViewMode.h"
 
 #include "KoPACanvas.h"
-#include "KoPAPage.h"
+#include "KoPAMasterPage.h"
 #include "KoPAView.h"
+#include "KoPADocument.h"
+
 #include <KCanvasController.h>
 #include <KOdfPageLayoutData.h>
+#include <KShapeManager.h>
+
+#include <KDebug>
 
 #include <QCloseEvent>
 
@@ -89,12 +94,47 @@ void KoPAViewMode::updateActivePage(KoPAPage *page)
 
 void KoPAViewMode::addShape(KShape *shape)
 {
-    Q_UNUSED(shape);
+    // the KShapeController sets the active layer as parent
+    KoPAPage *page(m_view->kopaDocument()->pageByShape(shape));
+    Q_ASSERT(page); // otherwise there is a bug in our view
+    if (page == m_view->activePage() || page == m_view->activePage()->masterPage()) {
+        m_view->kopaCanvas()->shapeManager()->addShape(shape);
+    }
+
+#if 0
+    bool isMaster = dynamic_cast<KoPAMasterPage*>(page) != 0;
+
+    KoPAPage * p;
+    if (page == m_view->activePage()) {
+        m_view->kopaCanvas()->shapeManager()->addShape(shape);
+    }
+    else if (isMaster && (p = dynamic_cast<KoPAPage*>(m_view->activePage())) != 0) {
+        if (p->masterPage() == page) {
+            m_view->kopaCanvas()->masterShapeManager()->addShape(shape);
+        }
+    }
+#endif
 }
 
 void KoPAViewMode::removeShape(KShape *shape)
 {
     Q_UNUSED(shape);
+kDebug();
+#if 0
+    KoPAPage * page(m_view->kopaDocument()->pageByShape(shape));
+
+    bool isMaster = dynamic_cast<KoPAMasterPage*>(page) != 0;
+
+    KoPAPage * p;
+    if (page == m_view->activePage()) {
+        m_view->kopaCanvas()->shapeManager()->remove(shape);
+    }
+    else if (isMaster && (p = dynamic_cast<KoPAPage*>(m_view->activePage())) != 0) {
+        if (p->masterPage() == page) {
+            m_view->kopaCanvas()->masterShapeManager()->remove(shape);
+        }
+    }
+#endif
 }
 
 void KoPAViewMode::changePageLayout(const KOdfPageLayoutData &pageLayout, bool applyToDocument, QUndoCommand *parent)

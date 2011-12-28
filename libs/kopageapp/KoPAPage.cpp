@@ -45,9 +45,7 @@ KoPAPage::KoPAPage()
     m_masterPage(0),
     m_pageProperties(0)
 {
-    // Add a default layer
-    KShapeLayer* layer = new KShapeLayer;
-    addShape(layer);
+    init();
 }
 
 KoPAPage::KoPAPage(KShapeContainerModel *model)
@@ -55,8 +53,18 @@ KoPAPage::KoPAPage(KShapeContainerModel *model)
     m_masterPage(0),
     m_pageProperties(0)
 {
+    init();
+}
+
+void KoPAPage::init()
+{
+    setUserData(0);
+    setSelectable(false);
+    setGeometryProtected(true);
+    setContentProtected(true);
+    setZIndex(-2);
     // Add a default layer
-    KShapeLayer* layer = new KShapeLayer;
+    KShapeLayer *layer = new KShapeLayer;
     addShape(layer);
 }
 

@@ -277,7 +277,7 @@ protected:
      *
      * The default impementation does nothing
      */
-    virtual void postAddShape(KoPAPage * page, KShape * shape); // TODO remove the unused 'page' arg and review this design.
+    virtual void postAddShape(KShape *shape);
 
     /**
      * This function is called by at the end of removeShape. This is used

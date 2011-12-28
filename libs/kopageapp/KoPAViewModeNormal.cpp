@@ -160,47 +160,6 @@ bool KoPAViewModeNormal::masterMode()
     return m_masterMode;
 }
 
-void KoPAViewModeNormal::addShape(KShape *shape)
-{
-kDebug();
-#if 0
-    // the KShapeController sets the active layer as parent
-    KoPAPage * page(m_view->kopaDocument()->pageByShape(shape));
-
-    bool isMaster = dynamic_cast<KoPAMasterPage*>(page) != 0;
-
-    KoPAPage * p;
-    if (page == m_view->activePage()) {
-        m_view->kopaCanvas()->shapeManager()->addShape(shape);
-    }
-    else if (isMaster && (p = dynamic_cast<KoPAPage*>(m_view->activePage())) != 0) {
-        if (p->masterPage() == page) {
-            m_view->kopaCanvas()->masterShapeManager()->addShape(shape);
-        }
-    }
-#endif
-}
-
-void KoPAViewModeNormal::removeShape(KShape *shape)
-{
-kDebug();
-#if 0
-    KoPAPage * page(m_view->kopaDocument()->pageByShape(shape));
-
-    bool isMaster = dynamic_cast<KoPAMasterPage*>(page) != 0;
-
-    KoPAPage * p;
-    if (page == m_view->activePage()) {
-        m_view->kopaCanvas()->shapeManager()->remove(shape);
-    }
-    else if (isMaster && (p = dynamic_cast<KoPAPage*>(m_view->activePage())) != 0) {
-        if (p->masterPage() == page) {
-            m_view->kopaCanvas()->masterShapeManager()->remove(shape);
-        }
-    }
-#endif
-}
-
 void KoPAViewModeNormal::changePageLayout(const KOdfPageLayoutData &pageLayout, bool applyToDocument, QUndoCommand *parent)
 {
     KoPAPage *page = m_view->activePage();
@@ -210,9 +169,5 @@ void KoPAViewModeNormal::changePageLayout(const KOdfPageLayoutData &pageLayout, 
     }
 
     new KoPAChangePageLayoutCommand(m_canvas->document(), masterPage, pageLayout, applyToDocument, parent);
-}
-
-void KoPAViewModeNormal::paintMargins(QPainter &painter, const KViewConverter &converter)
-{
 }
 

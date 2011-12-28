@@ -28,7 +28,7 @@ class QPainter;
 class QRectF;
 class KViewConverter;
 
-class KOPAGEAPP_EXPORT KoPAViewModeNormal : public KoPAViewMode
+class KoPAViewModeNormal : public KoPAViewMode
 {
 public:
     KoPAViewModeNormal(KoPAView * view, KoPACanvas * m_canvas);
@@ -58,15 +58,9 @@ public:
 
     virtual bool masterMode();
 
-    void addShape(KShape *shape);
-
-    void removeShape(KShape *shape);
-
     virtual void changePageLayout(const KOdfPageLayoutData &pageLayout, bool applyToDocument, QUndoCommand *parent = 0);
 
 private:
-    void paintMargins(QPainter &painter, const KViewConverter &converter);
-
     /// if true it works on master pages, if false on normal pages
     bool m_masterMode;
     /// the page which was active before entering the master mode

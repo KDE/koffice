@@ -212,20 +212,3 @@ void SCViewModeNotes::addShape(KShape *shape)
         }
     }
 }
-
-void SCViewModeNotes::removeShape(KShape *shape)
-{
-    KShape *parent = shape;
-    SCNotes *notes = 0;
-    while (!notes && (parent = parent->parent())) {
-        notes = dynamic_cast<SCNotes *>(parent);
-    }
-
-    if (notes) {
-        SCPage *activePage = static_cast<SCPage *>(m_view->activePage());
-        if (notes == activePage->pageNotes()) {
-            m_view->kopaCanvas()->shapeManager()->remove(shape);
-        }
-    }
-}
-

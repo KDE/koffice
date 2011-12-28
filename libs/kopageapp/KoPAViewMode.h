@@ -45,7 +45,6 @@ class QUndoCommand;
 
 class KOPAGEAPP_EXPORT KoPAViewMode : public QObject
 {
-
     Q_OBJECT
 public:
     KoPAViewMode(KoPAView * view, KoPACanvas * canvas);
@@ -125,10 +124,11 @@ public:
     virtual KViewConverter * viewConverter(KoPACanvas * canvas);
 
     /**
-     * @brief Update the view when a new shape is added to the document
+     * @brief A shape added will only be visible when added to the view.
      *
-     * The default implementation does nothing. The derived class' implementation
-     * should check whether the new shape is added to currently active page.
+     * The default implementation adds it to the shapeManager only when its on the current page.
+     * Derived classes can filter the shapes added based on their view properties.
+     * For example a notes view mode may ignore shapes not in certain layers.
      *
      * @param shape the new shape added to the document
      */
@@ -137,12 +137,9 @@ public:
     /**
      * @brief Update the view when a shape is removed from the document
      *
-     * The default implementation does nothing. The derived class' implementation
-     * should check whether the shape is removed from currently active page.
-     *
      * @param shape the shape removed from the document
      */
-    virtual void removeShape(KShape *shape);
+    void removeShape(KShape *shape);
 
     virtual void changePageLayout(const KOdfPageLayoutData &pageLayout, bool applyToDocument, QUndoCommand *parent = 0);
 

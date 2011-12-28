@@ -48,7 +48,6 @@ public:
     void updateActivePage(KoPAPage *page);
 
     void addShape(KShape *shape);
-    void removeShape(KShape *shape);
 };
 
 #endif // SCVIEWMODENOTES_H

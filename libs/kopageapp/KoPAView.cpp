@@ -611,7 +611,17 @@ void KoPAView::setActivePage(KoPAPage* page)
 //    if (page->masterShape())
 //        sm->addShape(page->masterShape());
     //sm->addShape(page->backgroundShape());
-    sm->addShape(page);
+    sm->addShape(page, KShapeManager::AddWithoutRepaint);
+
+    QList<KShape*> shapes = page->shapes();
+    int prevZ = -100;
+    foreach (KShape *shape, page->shapes()) {
+        KShapeLayer *layer = dynamic_cast<KShapeLayer*>(shape);
+        if (layer && layer->zIndex() > prevZ) {
+            shapeManager()->selection()->setActiveLayer(layer);
+            prevZ = layer->zIndex();
+        }
+    }
     m_canvas->update();
 
 #if 0

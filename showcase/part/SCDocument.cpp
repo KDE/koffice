@@ -209,9 +209,8 @@ void SCDocument::removeAnimation(SCShapeAnimation * animation, bool removeFromAp
     }
 }
 
-void SCDocument::postAddShape(KoPAPage * page, KShape * shape)
+void SCDocument::postAddShape(KShape * shape)
 {
-    Q_UNUSED(page);
     SCShapeApplicationData * applicationData = dynamic_cast<SCShapeApplicationData*>(shape->applicationData());
     if (applicationData) {
         // reinsert animations. this is needed on undo of a delete shape that had a animations

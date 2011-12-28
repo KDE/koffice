@@ -53,7 +53,6 @@ public:
     void updateActivePage(KoPAPage *page);
 
     void addShape(KShape *shape);
-    void removeShape(KShape *shape);
 
 protected:
 
