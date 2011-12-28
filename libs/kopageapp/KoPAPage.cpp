@@ -426,11 +426,15 @@ void KoPAPage::paintPage(QPainter &painter, KoZoomHandler &zoomHandler)
     KOdfPageLayoutData layout = pageLayout();
     painter.setPen(Qt::black);
 
-    if (background())
-    {
+    KShapeBackgroundBase *bg = 0;
+    if ((m_pageProperties & UseMasterBackground) && m_masterPage)
+        bg = m_masterPage->background();
+    else
+        bg = background();
+    if (bg) {
         QPainterPath p;
         p.addRect(QRectF(0.0, 0.0, layout.width, layout.height));
-        background()->paint(painter, p);
+        bg->paint(painter, p);
     }
 
     painter.restore();
