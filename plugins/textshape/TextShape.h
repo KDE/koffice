@@ -104,9 +104,6 @@ public:
 
     void markLayoutDone();
 
-    // required for showcase hack
-    void setPageProvider(KPageProvider *provider) { m_pageProvider = provider; }
-
     /// reimplemented
     virtual bool loadOdfFrame(const KXmlElement &element, KShapeLoadingContext &context);
 
@@ -128,7 +125,6 @@ private:
     bool m_demoText;
     mutable QMutex m_mutex;
     mutable QWaitCondition m_waiter;
-    KPageProvider *m_pageProvider;
     KImageCollection *m_imageCollection;
 
     QRegion m_paintRegion;

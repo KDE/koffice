@@ -77,10 +77,10 @@ void TestPACopyPastePage::copyPasteSinglePage()
 {
     MockDocument doc;
 
-    KoPAMasterPage * master1 = new KoPAMasterPage();
+    KoPAMasterPage * master1 = new KoPAMasterPage(&doc);
     doc.insertPage(master1, 0);
 
-    KoPAPage * page1 = new KoPAPage();
+    KoPAPage * page1 = new KoPAPage(&doc);
     page1->setMasterPage(master1);
     doc.insertPage(page1, 0);
 
@@ -135,10 +135,10 @@ void TestPACopyPastePage::copyPasteSingleMasterPage()
 {
     MockDocument doc;
 
-    KoPAMasterPage * master1 = new KoPAMasterPage();
+    KoPAMasterPage * master1 = new KoPAMasterPage(&doc);
     doc.insertPage(master1, 0);
 
-    KoPAPage * page1 = new KoPAPage();
+    KoPAPage * page1 = new KoPAPage(&doc);
     page1->setMasterPage(master1);
     doc.insertPage(page1, 0);
 
@@ -180,23 +180,23 @@ void TestPACopyPastePage::copyPasteMuliplePages()
 {
     MockDocument doc;
 
-    KoPAMasterPage * master1 = new KoPAMasterPage();
+    KoPAMasterPage * master1 = new KoPAMasterPage(&doc);
     doc.insertPage(master1, 0);
     addShape(master1);
 
-    KoPAMasterPage * master2 = new KoPAMasterPage();
+    KoPAMasterPage * master2 = new KoPAMasterPage(&doc);
     doc.insertPage(master2, master1);
     addShape(master2);
 
-    KoPAPage * page1 = new KoPAPage();
+    KoPAPage * page1 = new KoPAPage(&doc);
     page1->setMasterPage(master1);
     doc.insertPage(page1, 0);
 
-    KoPAPage * page2 = new KoPAPage();
+    KoPAPage * page2 = new KoPAPage(&doc);
     page2->setMasterPage(master2);
     doc.insertPage(page2, page1);
 
-    KoPAPage * page3 = new KoPAPage();
+    KoPAPage * page3 = new KoPAPage(&doc);
     page3->setMasterPage(master1);
     page3->setMasterPage(master1);
     doc.insertPage(page3, page2);
@@ -231,7 +231,7 @@ void TestPACopyPastePage::copyPasteMuliplePages()
     KoPAMasterPage * master3 = dynamic_cast<KoPAMasterPage *>(doc.pages(true)[2]);
     QVERIFY(master3 != 0);
 
-    KoPAPage * page6 = new KoPAPage();
+    KoPAPage * page6 = new KoPAPage(&doc);
     page6->setMasterPage(master3);
     doc.insertPage(page6, page3);
 
@@ -268,14 +268,14 @@ void TestPACopyPastePage::copyPasteMulipleMasterPages()
 {
     MockDocument doc;
 
-    KoPAMasterPage * master1 = new KoPAMasterPage();
+    KoPAMasterPage * master1 = new KoPAMasterPage(&doc);
     doc.insertPage(master1, 0);
 
-    KoPAPage * page1 = new KoPAPage();
+    KoPAPage * page1 = new KoPAPage(&doc);
     page1->setMasterPage(master1);
     doc.insertPage(page1, 0);
 
-    KoPAMasterPage * master2 = new KoPAMasterPage();
+    KoPAMasterPage * master2 = new KoPAMasterPage(&doc);
     doc.insertPage(master2, master1);
 
     QList<KoPAPage *> pages;
@@ -298,14 +298,14 @@ void TestPACopyPastePage::copyPasteMixedPages()
 {
     MockDocument doc;
 
-    KoPAMasterPage * master1 = new KoPAMasterPage();
+    KoPAMasterPage * master1 = new KoPAMasterPage(&doc);
     doc.insertPage(master1, 0);
 
-    KoPAPage * page1 = new KoPAPage();
+    KoPAPage * page1 = new KoPAPage(&doc);
     page1->setMasterPage(master1);
     doc.insertPage(page1, 0);
 
-    KoPAMasterPage * master2 = new KoPAMasterPage();
+    KoPAMasterPage * master2 = new KoPAMasterPage(&doc);
     doc.insertPage(master2, master1);
 
     QList<KoPAPage *> pages;

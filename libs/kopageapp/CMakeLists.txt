@@ -25,7 +25,6 @@ set(kopageapp_LIB_SRCS
     KoPAOdfPageSaveHelper.cpp
     KoPAPageContainerModel.cpp
     KoPAPage.cpp
-    KoPAPageProvider.cpp
     KoPAPageThumbnailModel.cpp
     KoPAPastePage.cpp
     KoPAPixmapCache.cpp

@@ -104,7 +104,7 @@ public:
      *
      * @return The index of the page or -1 if the page is not found
      */
-    int pageIndex(KoPAPage * page) const;
+    int pageIndex(KoPAPage *page) const;
 
     /**
      * Get page by navigation

@@ -23,11 +23,13 @@
 #include <KOdfXmlNS.h>
 //#include <KResourceManager.h>
 #include "Showcase.h"
+#include "SCDocument.h"
 #include <KoPALoadingContext.h>
 #include <KOdfWorkaround.h>
 #include <kdebug.h>
 
-SCMasterPage::SCMasterPage()
+SCMasterPage::SCMasterPage(SCDocument *document)
+    : KoPAMasterPage(document)
 {
 }
 

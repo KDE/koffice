@@ -84,7 +84,6 @@ TextShape::TextShape()
     KFrameShape(KOdfXmlNS::draw, "text-box"),
     m_footnotes(0),
     m_demoText(false),
-    m_pageProvider(0),
     m_imageCollection(0)
 {
     setShapeId(TextShape_SHAPEID);
@@ -139,32 +138,8 @@ void TextShape::paintComponent(QPainter &painter, const KViewConverter &converte
         } else if (!lay->hasLayouter()) {
             lay->setLayout(new Layout(lay));
         }
-        if (!m_pageProvider) {
-            return;
-        }
     }
     Q_ASSERT(lay);
-
-    if (m_pageProvider) {
-        KTextPage *page = m_pageProvider->page(this);
-        if (page) {
-            // this is used to not trigger repaints if layout during the painting is done
-            // this enables to use the same shapes on different pages showing different page numbers
-            if (!m_textShapeData->page() || page->pageNumber() != m_textShapeData->page()->pageNumber()) {
-                m_textShapeData->setPage(page);
-                m_textShapeData->foul();
-                lay->interruptLayout();
-                m_textShapeData->fireResizeEvent();
-            }
-
-            if (lay) {
-                while (m_textShapeData->isDirty() || lay->isInterrupted()){
-                    m_textShapeData->foul();
-                    lay->layout();
-                }
-            }
-        }
-    }
 
     QAbstractTextDocumentLayout::PaintContext pc;
     KTextDocumentLayout::PaintContext context;

@@ -43,8 +43,8 @@ public:
     bool isClipped(const KShape *) const { return true; }
 };
 
-KoPAMasterPage::KoPAMasterPage()
-    : KoPAPage(new MasterPageShapeContainerModel())
+KoPAMasterPage::KoPAMasterPage(KoPADocument *document)
+    : KoPAPage(new MasterPageShapeContainerModel(), document)
 {
     setName("Standard");
     m_pageProperties |= DisplayMasterBackground;

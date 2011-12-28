@@ -44,7 +44,6 @@
 #include "KoPAMasterPage.h"
 #include "KoPASavingContext.h"
 #include "KoPALoadingContext.h"
-#include "KoPAPageProvider.h"
 #include "commands/KoPAPageDeleteCommand.h"
 
 #include <kdebug.h>
@@ -59,7 +58,6 @@ public:
     QList<KoPAPage*> masterPages;
     KInlineTextObjectManager *inlineTextObjectManager;
     bool rulersVisible;
-    KoPAPageProvider *pageProvider;
 };
 
 KoPADocument::KoPADocument(QWidget* parentWidget, QObject* parent, bool singleViewMode)
@@ -71,10 +69,6 @@ KoPADocument::KoPADocument(QWidget* parentWidget, QObject* parent, bool singleVi
 
     resourceManager()->setUndoStack(undoStack());
     resourceManager()->setOdfDocument(this);
-    QVariant variant;
-    d->pageProvider = new KoPAPageProvider();
-    variant.setValue<void*>(d->pageProvider);
-    resourceManager()->setResource(KOdfText::PageProvider, variant);
     QVariant variant2;
     variant2.setValue<KInlineTextObjectManager*>(d->inlineTextObjectManager);
     resourceManager()->setResource(KOdfText::InlineTextObjectManager, variant2);
@@ -91,7 +85,6 @@ KoPADocument::~KoPADocument()
     saveConfig();
     qDeleteAll(d->pages);
     qDeleteAll(d->masterPages);
-    delete d->pageProvider;
     delete d;
 }
 
@@ -406,7 +399,7 @@ KoPAPage* KoPADocument::pageByIndex(int index, bool masterPage) const
     }
 }
 
-int KoPADocument::pageIndex(KoPAPage * page) const
+int KoPADocument::pageIndex(KoPAPage *page) const
 {
     const QList<KoPAPage*> &pages = dynamic_cast<KoPAMasterPage *>(page) ? d->masterPages : d->pages;
     return pages.indexOf(page);
@@ -551,8 +544,6 @@ KoPageApp::PageType KoPADocument::pageType() const
 
 QPixmap KoPADocument::pageThumbnail(KoPAPage* page, const QSize &size)
 {
-    int pageNumber = pageIndex(page) + 1;
-    d->pageProvider->setPageData(pageNumber, page);
     return page->thumbnail(size);
 }
 
@@ -665,14 +656,14 @@ QList<KoPAPage*> KoPADocument::pages(bool masterPages) const
 
 KoPAPage *KoPADocument::newPage(KoPAMasterPage *masterPage)
 {
-    KoPAPage *page = new KoPAPage();
+    KoPAPage *page = new KoPAPage(this);
     page->setMasterPage(masterPage);
     return page;
 }
 
 KoPAMasterPage * KoPADocument::newMasterPage()
 {
-    return new KoPAMasterPage();
+    return new KoPAMasterPage(this);
 }
 
 /// return the inlineTextObjectManager for this document.

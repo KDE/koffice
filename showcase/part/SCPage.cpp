@@ -61,7 +61,7 @@ public:
 };
 
 SCPage::SCPage(SCDocument *document)
-    : KoPAPage(),
+    : KoPAPage(document),
     d(new Private(this, document))
 {
     setApplicationData(new SCPageApplicationData());

@@ -25,6 +25,7 @@
 #include <QtGui/QPixmap>
 
 #include <KShapeContainer.h>            //krazy:exclude=includes
+#include <KTextPage.h>
 #include "KoPageApp.h"                  //krazy:exclude=includes
 #include "kopageapp_export.h"
 
@@ -38,16 +39,17 @@ class KoZoomHandler;
 class KoPASavingContext;
 class KoPAMasterPage;
 class KOdfPageLayoutData;
+class KoPADocument;
 
 /**
  * A Page contains KShapeLayer shapes as direct children. The layers than can
  * contain all the different shapes.
  */
-class KOPAGEAPP_EXPORT KoPAPage : public KShapeContainer
+class KOPAGEAPP_EXPORT KoPAPage : public KShapeContainer, public KTextPage
 {
 public:
-    explicit KoPAPage();
-    explicit KoPAPage(KShapeContainerModel *model);
+    explicit KoPAPage(KoPADocument *document);
+    explicit KoPAPage(KShapeContainerModel *model, KoPADocument *document);
     virtual ~KoPAPage();
 
     /**
@@ -171,6 +173,9 @@ public:
     /// called just before showing.
     void polish();
 
+    /// KTextPage interface method
+    virtual int pageNumber(PageSelection select = CurrentPage, int adjustment = 0) const;
+
 protected:
     /**
      * @param paContext the pageapp saving context
@@ -292,6 +297,7 @@ private:
     KoPAMasterPage *m_masterPage;
     KShape *m_masterProxy;
     KShape *m_backgroundShape;
+    KoPADocument *m_document;
 };
 
 #endif /* KOPAPAGEBASE_H */

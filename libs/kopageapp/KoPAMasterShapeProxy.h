@@ -28,7 +28,7 @@ class KoPAMasterPage;
 class KoPAMasterShapeProxy : public KShape
 {
 public:
-    explicit KoPAMasterShapeProxy(KoPAMasterPage *original, KoPAPage *page);
+    explicit KoPAMasterShapeProxy(KoPAPage *page);
     ~KoPAMasterShapeProxy();
 
     /// reimplemented from KShape
@@ -41,8 +41,6 @@ public:
 private:
     void paintChildren(KShapeContainer *layer, QPainter &painter, const KViewConverter &converter);
 
-    KoPAMasterPage *m_original;
-    //KTextPage *m_textPage;
     KoPAPage *m_page;
 };
 

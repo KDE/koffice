@@ -29,59 +29,37 @@
 
 #include <QPainter>
 
-KoPAMasterShapeProxy::KoPAMasterShapeProxy(KoPAMasterPage *original, KoPAPage *page)
-        : m_original(original),
-        m_page(page)
+KoPAMasterShapeProxy::KoPAMasterShapeProxy(KoPAPage *page)
+    : m_page(page)
 {
-    setName("proxy: " + original->name());
-    setSize(m_original->size());
+    setName("master proxy");
 }
 
 KoPAMasterShapeProxy::~KoPAMasterShapeProxy()
 {
-    if (m_original)
-        m_original->removeObserver(this);
 }
 
 void KoPAMasterShapeProxy::paint(QPainter &painter, const KViewConverter &converter)
 {
+    KoPAMasterPage *original = m_page->masterPage();
+    if (original == 0)
+        return;
+
     painter.setClipRect(QRectF(QPointF(0, 0), converter.documentToView(size()))
             .adjusted(-2, -2, 2, 2), // adjust for anti aliassing.
             Qt::IntersectClip);
-#if 0
-    class TextVisitor {
-    public:
-        TextVisitor(KTextPage *pageData) : m_pageData(pageData) { }
-        void visit(KShape *shape) {
-            KShapeContainer *container = dynamic_cast<KShapeContainer*>(shape);
-            if (container) {
-                foreach (KShape *child, container->shapes()) {
-                    visit(child);
-                }
-                KTextShapeData *data = qobject_cast<KTextShapeData*>(container->userData());
-                if (data)
-                    data->relayoutFor(*m_pageData);
-            }
-        }
-    private:
-        KTextPage *m_pageData;
-    };
-
-    TextVisitor visitor(m_textPage);
-    visitor.visit(m_original);
-#endif
 
     painter.save();
-    m_original->paint(painter, converter);
+    original->paint(painter, converter);
     painter.restore();
-    if (m_original->border()) {
+    if (original->border()) {
         painter.save();
-        m_original->border()->paint(m_original, painter, converter);
+        original->border()->paint(original, painter, converter);
         painter.restore();
     }
 
     // paint all child shapes
-    paintChildren(m_original, painter, converter);
+    paintChildren(original, painter, converter);
 }
 
 void KoPAMasterShapeProxy::paintChildren(KShapeContainer *container, QPainter &painter, const KViewConverter &converter)
@@ -109,8 +87,11 @@ void KoPAMasterShapeProxy::paintChildren(KShapeContainer *container, QPainter &p
                 paintChildren(layer, painter, converter);
                 painter.restore();
             }
-
             shape->waitUntilReady(converter, false);
+            KTextShapeData *data = qobject_cast<KTextShapeData*>(shape->userData());
+            if (data)
+                data->relayoutFor(*m_page);
+
             painter.save();
             painter.setTransform(shape->absoluteTransformation(&converter) * baseMatrix);
             shape->paint(painter, converter);
@@ -127,11 +108,17 @@ void KoPAMasterShapeProxy::paintChildren(KShapeContainer *container, QPainter &p
 
 void KoPAMasterShapeProxy::paintDecorations(QPainter &painter, const KViewConverter &converter, const KCanvasBase *canvas)
 {
-    m_original->paintDecorations(painter, converter, canvas);
+    KoPAMasterPage *original = m_page->masterPage();
+    if (original == 0)
+        return;
+    original->paintDecorations(painter, converter, canvas);
 }
 
 QPainterPath KoPAMasterShapeProxy::outline() const
 {
-    return m_original->outline();
+    KoPAMasterPage *original = m_page->masterPage();
+    if (original == 0)
+        return QPainterPath();
+    return original->outline();
 }
 

@@ -26,6 +26,7 @@
 #include "KoPAUtil.h"
 #include "KoPASavingContext.h"
 #include "KoPAMasterShapeProxy.h"
+#include "KoPADocument.h"
 
 #include <QPainter>
 
@@ -41,22 +42,24 @@
 #include <KOdfStyleStack.h>
 #include <KShapeBackgroundBase.h>
 
-KoPAPage::KoPAPage()
+KoPAPage::KoPAPage(KoPADocument *document)
     : KShapeContainer(new KoPAPageContainerModel()),
     m_pageProperties(0),
     m_masterPage(0),
     m_masterProxy(0),
-    m_backgroundShape(0)
+    m_backgroundShape(0),
+    m_document(document)
 {
     init();
 }
 
-KoPAPage::KoPAPage(KShapeContainerModel *model)
+KoPAPage::KoPAPage(KShapeContainerModel *model, KoPADocument *document)
     : KShapeContainer(model),
     m_pageProperties(0),
     m_masterPage(0),
     m_masterProxy(0),
-    m_backgroundShape(0)
+    m_backgroundShape(0),
+    m_document(document)
 {
     init();
 }
@@ -70,6 +73,18 @@ void KoPAPage::init()
     m_backgroundShape->setGeometryProtected(true);
     m_backgroundShape->setContentProtected(true);
     m_backgroundShape->setZIndex(-2); // master proxy is at -1
+
+    /*
+        While we could, we won't put the master page in the shapeManager directly.
+        The master page should have all its properties set based on the usage of
+        editing the master page itself.
+        Instead we will paint a proxy which has the below set of interaction restrictions.
+     */
+    m_masterProxy = new KoPAMasterShapeProxy(this);
+    m_masterProxy->setSelectable(false);
+    m_masterProxy->setGeometryProtected(true);
+    m_masterProxy->setContentProtected(true);
+    m_masterProxy->setZIndex(-1);
 
     setSelectable(false);
     setGeometryProtected(true);
@@ -361,20 +376,6 @@ void KoPAPage::setMasterPage(KoPAMasterPage *masterPage)
     if (m_masterPage == masterPage)
         return;
     m_masterPage = masterPage;
-    /*
-        While we could, we won't put the master page in the shapeManager directly.
-        The master page should have all its properties set based on the usage of
-        editing the master page itself.
-        Instead we will paint a proxy which has the below set of interaction restrictions.
-     */
-    delete m_masterProxy;
-    m_masterProxy = new KoPAMasterShapeProxy(m_masterPage, this);
-    m_masterProxy->setSelectable(false);
-    m_masterProxy->setGeometryProtected(true);
-    m_masterProxy->setContentProtected(true);
-    m_masterProxy->setZIndex(-1);
-
-    m_backgroundShape->setSize(m_masterProxy->size());
 }
 
 bool KoPAPage::displayMasterShapes() const
@@ -452,6 +453,7 @@ void KoPAPage::polish()
         m_backgroundShape->setBackground(background());
     }
     m_masterProxy->setSize(size());
+    m_backgroundShape->setSize(size());
     m_masterProxy->setVisible(m_pageProperties & DisplayMasterShapes);
 }
 
@@ -462,4 +464,10 @@ void KoPAPage::saveOdfPageStyleData(KOdfGenericStyle &style, KoPASavingContext &
         if (bg)
             bg->fillStyle(style, paContext);
     }
+}
+
+int KoPAPage::pageNumber(PageSelection select, int adjustment) const
+{
+    // TODO support select
+    return m_document->pageIndex(const_cast<KoPAPage*>(this)) + adjustment + 1;
 }
