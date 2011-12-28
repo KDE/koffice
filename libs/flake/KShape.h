@@ -363,23 +363,23 @@ public:
 
     /**
      * Sets shape level transparency.
-     * Notice that a shape can inherit the parents transparancy, the transparancy set here will be
-     *   multiplied with the parants effective transparancy to get the effective transparancy for painting.
+     * Notice that a shape can inherit the parents transparency, the transparency set here will be
+     *   multiplied with the parants effective transparency to get the effective transparency for painting.
      * @param transparency the new shape level transparency
      */
     void setTransparency(qreal transparency);
 
     /// enum for transparency type
-    enum Transparancy {
-        EffectiveTransparancy, ///< The transparancy of this shape and all parent shapes multiplied.
-        ShapeTransparancy ///< The transparancy of this shape as set with setTransparency()
+    enum Transparency {
+        EffectiveTransparency, ///< The transparency of this shape and all parent shapes multiplied.
+        ShapeTransparency ///< The transparency of this shape as set with setTransparency()
     };
 
     /**
      * Returns the shape level transparency.
-     * @param transparency the type of transparancy to return.
+     * @param transparency the type of transparency to return.
      */
-    qreal transparency(Transparancy transparancy = ShapeTransparancy) const;
+    qreal transparency(Transparency transparency = ShapeTransparency) const;
 
     /**
      * Retrieve the z-coordinate of this shape.
