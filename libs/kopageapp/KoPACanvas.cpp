@@ -177,6 +177,8 @@ bool KoPACanvas::event(QEvent *e)
 void KoPACanvas::paintEvent(QPaintEvent *event)
 {
     QPainter painter(this);
+    if (m_view->activePage())
+        m_view->activePage()->polish();
     m_view->viewMode()->paint(this, painter, event->rect());
     painter.end();
 }

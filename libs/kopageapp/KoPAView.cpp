@@ -608,9 +608,10 @@ void KoPAView::setActivePage(KoPAPage* page)
     KShapeManager *sm = m_canvas->shapeManager();
     sm->setShapes(QList<KShape*>()); // aka clear.
 
-//    if (page->masterShape())
-//        sm->addShape(page->masterShape());
-    //sm->addShape(page->backgroundShape());
+    if (page->displayMasterShapes())
+        sm->addShape(page->masterShape(), KShapeManager::AddWithoutRepaint);
+    if (page->backgroundShape())
+        sm->addShape(page->backgroundShape(), KShapeManager::AddWithoutRepaint);
     sm->addShape(page, KShapeManager::AddWithoutRepaint);
 
     QList<KShape*> shapes = page->shapes();

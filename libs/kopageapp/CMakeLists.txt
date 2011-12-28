@@ -14,38 +14,39 @@ add_subdirectory(tests)
 add_subdirectory(tools)
 
 ### kopageapp ###
-set( kopageapp_LIB_SRCS
-     KoPADocument.cpp
-     KoShapeTraversal.cpp
-     KoPAView.cpp
-     KoPACanvas.cpp
-     KoPASavingContext.cpp
-     KoPAPixmapCache.cpp
-     KoPAMasterPage.cpp
-     KoPAPage.cpp
-     KoPAPageContainerModel.cpp
-     KoPAViewMode.cpp
-     KoPAViewModeNormal.cpp
-     KoPALoadingContext.cpp
-     KoPAOdfPageSaveHelper.cpp
-     KoPAPastePage.cpp
-     KoPADocumentModel.cpp
-     KoPAPageThumbnailModel.cpp
-     KoPADocumentStructureDocker.cpp
-     KoPAUtil.cpp
-     KoPAPrintJob.cpp
-     KoPATextPage.cpp
-     KoPAPageProvider.cpp
-     commands/KoPAPageInsertCommand.cpp
-     commands/KoPAPageDeleteCommand.cpp
-     commands/KoPAPageMoveCommand.cpp
-     commands/KoPAChangeMasterPageCommand.cpp
-     commands/KoPAChangePageLayoutCommand.cpp
-     commands/KoPADisplayMasterShapesCommand.cpp
-     commands/KoPADisplayMasterBackgroundCommand.cpp
-     dialogs/KoPAMasterPageDialog.cpp
-     dialogs/KoPAPageLayoutDialog.cpp
-     dialogs/KoPAConfigureDialog.cpp
+set(kopageapp_LIB_SRCS
+    KoPACanvas.cpp
+    KoPADocument.cpp
+    KoPADocumentModel.cpp
+    KoPADocumentStructureDocker.cpp
+    KoPALoadingContext.cpp
+    KoPAMasterPage.cpp
+    KoPAMasterShapeProxy.cpp
+    KoPAOdfPageSaveHelper.cpp
+    KoPAPageContainerModel.cpp
+    KoPAPage.cpp
+    KoPAPageProvider.cpp
+    KoPAPageThumbnailModel.cpp
+    KoPAPastePage.cpp
+    KoPAPixmapCache.cpp
+    KoPAPrintJob.cpp
+    KoPASavingContext.cpp
+    KoPATextPage.cpp
+    KoPAUtil.cpp
+    KoPAView.cpp
+    KoPAViewMode.cpp
+    KoPAViewModeNormal.cpp
+    KoShapeTraversal.cpp
+    commands/KoPAPageInsertCommand.cpp
+    commands/KoPAPageDeleteCommand.cpp
+    commands/KoPAPageMoveCommand.cpp
+    commands/KoPAChangeMasterPageCommand.cpp
+    commands/KoPAChangePageLayoutCommand.cpp
+    commands/KoPADisplayMasterShapesCommand.cpp
+    commands/KoPADisplayMasterBackgroundCommand.cpp
+    dialogs/KoPAMasterPageDialog.cpp
+    dialogs/KoPAPageLayoutDialog.cpp
+    dialogs/KoPAConfigureDialog.cpp
 
     tools/backgroundTool/KoPABackgroundTool.cpp
     tools/backgroundTool/KoPABackgroundToolFactory.cpp

@@ -47,8 +47,6 @@ public:
     /// Set the page layout to @p layout
     void setPageLayout(const KOdfPageLayoutData &layout) { m_pageLayout = layout; }
 
-    virtual void paintComponent(QPainter &painter, const KViewConverter &converter);
-
 protected:
     virtual void loadOdfPageTag(const KXmlElement &element, KoPALoadingContext &loadingContext);
 

@@ -68,11 +68,6 @@ public:
     virtual KOdfPageLayoutData pageLayout() const;
 
     /**
-     * @brief Paint page background
-     */
-    virtual void paintComponent(QPainter &painter, const KViewConverter &converter);
-
-    /**
      * Get if master shapes should be displayed
      *
      * For master pages this always returns false
@@ -165,6 +160,16 @@ public:
     void setMasterPage(KoPAMasterPage * masterPage);
     /// @return the masterpage of this page
     KoPAMasterPage * masterPage() { return m_masterPage; }
+
+    KShape *masterShape() const {
+        return m_masterProxy;
+    }
+    KShape *backgroundShape() const {
+        return m_backgroundShape;
+    }
+
+    /// called just before showing.
+    void polish();
 
 protected:
     /**
@@ -279,12 +284,14 @@ protected:
         DisplayDateTime = 64     /// set if presentation:display-date-time is true
     };
 
-    KoPAMasterPage *m_masterPage;
-
     int m_pageProperties;
 
 private:
     void init();
+
+    KoPAMasterPage *m_masterPage;
+    KShape *m_masterProxy;
+    KShape *m_backgroundShape;
 };
 
 #endif /* KOPAPAGEBASE_H */

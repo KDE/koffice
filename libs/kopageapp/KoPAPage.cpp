@@ -25,6 +25,7 @@
 #include "KoPAMasterPage.h"
 #include "KoPAUtil.h"
 #include "KoPASavingContext.h"
+#include "KoPAMasterShapeProxy.h"
 
 #include <QPainter>
 
@@ -42,27 +43,37 @@
 
 KoPAPage::KoPAPage()
     : KShapeContainer(new KoPAPageContainerModel()),
+    m_pageProperties(0),
     m_masterPage(0),
-    m_pageProperties(0)
+    m_masterProxy(0),
+    m_backgroundShape(0)
 {
     init();
 }
 
 KoPAPage::KoPAPage(KShapeContainerModel *model)
     : KShapeContainer(model),
+    m_pageProperties(0),
     m_masterPage(0),
-    m_pageProperties(0)
+    m_masterProxy(0),
+    m_backgroundShape(0)
 {
     init();
 }
 
 void KoPAPage::init()
 {
-    setUserData(0);
+    // create background shape
+    m_backgroundShape = new KShape();
+    m_backgroundShape->setUserData(0);
+    m_backgroundShape->setSelectable(false);
+    m_backgroundShape->setGeometryProtected(true);
+    m_backgroundShape->setContentProtected(true);
+    m_backgroundShape->setZIndex(-2); // master proxy is at -1
+
     setSelectable(false);
     setGeometryProtected(true);
     setContentProtected(true);
-    setZIndex(-2);
     // Add a default layer
     KShapeLayer *layer = new KShapeLayer;
     addShape(layer);
@@ -346,24 +357,24 @@ void KoPAPage::loadOdfPageTag(const KXmlElement &element, KoPALoadingContext &lo
 
 void KoPAPage::setMasterPage(KoPAMasterPage *masterPage)
 {
+    Q_ASSERT(masterPage);
+    if (m_masterPage == masterPage)
+        return;
     m_masterPage = masterPage;
-}
+    /*
+        While we could, we won't put the master page in the shapeManager directly.
+        The master page should have all its properties set based on the usage of
+        editing the master page itself.
+        Instead we will paint a proxy which has the below set of interaction restrictions.
+     */
+    delete m_masterProxy;
+    m_masterProxy = new KoPAMasterShapeProxy(m_masterPage, this);
+    m_masterProxy->setSelectable(false);
+    m_masterProxy->setGeometryProtected(true);
+    m_masterProxy->setContentProtected(true);
+    m_masterProxy->setZIndex(-1);
 
-void KoPAPage::paintComponent(QPainter &painter, const KViewConverter &converter)
-{
-    KShapeBackgroundBase *bg = 0;
-    if (m_pageProperties & UseMasterBackground) {
-        if (m_pageProperties & DisplayMasterBackground) {
-            Q_ASSERT(m_masterPage);
-            bg = m_masterPage->background();
-        }
-    } else {
-        bg = background();
-    }
-    if (bg) {
-        applyConversion(painter, converter);
-        bg->paint(painter, outline());
-    }
+    m_backgroundShape->setSize(m_masterProxy->size());
 }
 
 bool KoPAPage::displayMasterShapes() const
@@ -373,12 +384,12 @@ bool KoPAPage::displayMasterShapes() const
 
 void KoPAPage::setDisplayMasterShapes(bool display)
 {
-    if (display) {
+    if (display == (m_pageProperties & DisplayMasterShapes))
+        return;
+    if (display)
         m_pageProperties |= DisplayMasterShapes;
-    }
-    else {
+    else
         m_pageProperties &= ~DisplayMasterShapes;
-    }
 }
 
 bool KoPAPage::displayMasterBackground() const
@@ -430,6 +441,18 @@ void KoPAPage::paintPage(QPainter &painter, KoZoomHandler &zoomHandler)
     }
     shapePainter.setShapes(shapes());
     shapePainter.paint(painter, zoomHandler);
+}
+
+void KoPAPage::polish()
+{
+    if (m_pageProperties & UseMasterBackground) {
+        if (m_masterPage)
+            m_backgroundShape->setBackground(m_masterPage->background());
+    } else {
+        m_backgroundShape->setBackground(background());
+    }
+    m_masterProxy->setSize(size());
+    m_masterProxy->setVisible(m_pageProperties & DisplayMasterShapes);
 }
 
 void KoPAPage::saveOdfPageStyleData(KOdfGenericStyle &style, KoPASavingContext &paContext) const

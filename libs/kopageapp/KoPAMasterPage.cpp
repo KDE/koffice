@@ -165,12 +165,3 @@ void KoPAMasterPage::saveOdfPageStyleData(KOdfGenericStyle &style, KoPASavingCon
     if (bg)
         bg->fillStyle(style, paContext);
 }
-
-void KoPAMasterPage::paintComponent(QPainter &painter, const KViewConverter &converter)
-{
-    if (m_pageProperties & DisplayMasterBackground) {
-        applyConversion(painter, converter);
-        background()->paint(painter, outline());
-    }
-}
-
