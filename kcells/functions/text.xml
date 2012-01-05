@@ -286,7 +286,7 @@
 	<Text>The LEN() function returns the length of the string.</Text>
 	<Syntax>LEN(text)</Syntax>
 	<Example>LEN("hello") returns 5</Example>
-	<Example>LEN("KCells") returns 7</Example>
+	<Example>LEN("KCells") returns 6</Example>
       </Help>
     </Function>
 
