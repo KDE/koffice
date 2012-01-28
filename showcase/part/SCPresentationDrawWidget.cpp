@@ -37,7 +37,7 @@
 #include <KoPACanvas.h>
 #include <KPointerEvent.h>
 
-SCPresentationDrawWidget::SCPresentationDrawWidget(KoPACanvasBase * canvas)
+SCPresentationDrawWidget::SCPresentationDrawWidget(KoPACanvas * canvas)
 : SCPresentationToolEventForwarder(canvas)
 , m_draw(false)
 , m_penSize(10)

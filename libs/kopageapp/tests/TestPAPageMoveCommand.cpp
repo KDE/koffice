@@ -31,7 +31,7 @@ void TestPAPageMoveCommand::initTestCase()
 {
     for(int i = 0; i < 5; ++i)
     {
-        m_pages.insert(i, new KoPAMasterPage());
+        m_pages.insert(i, new KoPAMasterPage(&m_doc));
     }
     m_doc.insertPage(m_pages[0], -1);
 }
@@ -95,7 +95,7 @@ void TestPAPageMoveCommand::redoUndoAfter()
     checkOrder(pages3);
 
     // Moving multiple consecutive pages
-    QList<KoPAPageBase *> multiPages1;
+    QList<KoPAPage *> multiPages1;
     multiPages1.insert(0, m_pages[3]);
     multiPages1.insert(1, m_pages[4]);
     QList<KoPAMasterPage *> pages4;
@@ -110,7 +110,7 @@ void TestPAPageMoveCommand::redoUndoAfter()
     checkOrder(pages4);
 
     // Moving multiple non-consecutive pages
-    QList<KoPAPageBase *> multiPages2;
+    QList<KoPAPage *> multiPages2;
     multiPages2.insert(0, m_pages[4]);
     multiPages2.insert(1, m_pages[1]);
     QList<KoPAMasterPage *> pages5;
@@ -179,7 +179,7 @@ void TestPAPageMoveCommand::redoUndoBefore()
     checkOrder(pages3);
 
     // Moving multiple consecutive pages
-    QList<KoPAPageBase *> multiPages1;
+    QList<KoPAPage *> multiPages1;
     multiPages1.insert(0, m_pages[4]);
     multiPages1.insert(1, m_pages[2]);
     QList<KoPAMasterPage *> pages4;
@@ -194,7 +194,7 @@ void TestPAPageMoveCommand::redoUndoBefore()
     checkOrder(pages4);
 
     // Moving multiple non-consecutive pages
-    QList<KoPAPageBase *> multiPages2;
+    QList<KoPAPage *> multiPages2;
     multiPages2.insert(0, m_pages[1]);
     multiPages2.insert(1, m_pages[4]);
     QList<KoPAMasterPage *> pages5;
@@ -262,7 +262,7 @@ void TestPAPageMoveCommand::redoUndoStart()
     checkOrder(pages3);
 
     // Moving multiple consecutive pages
-    QList<KoPAPageBase *> multiPages1;
+    QList<KoPAPage *> multiPages1;
     multiPages1.insert(0, m_pages[1]);
     multiPages1.insert(1, m_pages[0]);
     QList<KoPAMasterPage *> pages4;
@@ -277,7 +277,7 @@ void TestPAPageMoveCommand::redoUndoStart()
     checkOrder(pages4);
 
     // Moving multiple non-consecutive pages
-    QList<KoPAPageBase *> multiPages2;
+    QList<KoPAPage *> multiPages2;
     multiPages2.insert(0, m_pages[0]);
     multiPages2.insert(1, m_pages[2]);
     QList<KoPAMasterPage *> pages5;
@@ -346,7 +346,7 @@ void TestPAPageMoveCommand::redoUndoEnd()
     checkOrder(pages3);
 
     // Moving multiple consecutive pages
-    QList<KoPAPageBase *> multiPages1;
+    QList<KoPAPage *> multiPages1;
     multiPages1.insert(0, m_pages[2]);
     multiPages1.insert(1, m_pages[4]);
     QList<KoPAMasterPage *> pages4;
@@ -361,7 +361,7 @@ void TestPAPageMoveCommand::redoUndoEnd()
     checkOrder(pages4);
 
     // Moving multiple non-consecutive pages
-    QList<KoPAPageBase *> multiPages2;
+    QList<KoPAPage *> multiPages2;
     multiPages2.insert(0, m_pages[1]);
     multiPages2.insert(1, m_pages[0]);
     QList<KoPAMasterPage *> pages5;
@@ -395,7 +395,7 @@ void TestPAPageMoveCommand::redoUndoEnd()
 // and the other set contains pages after "after"
 void TestPAPageMoveCommand::redoUndoAfterInBetween()
 {
-    QList<KoPAPageBase *> multiPages;
+    QList<KoPAPage *> multiPages;
     multiPages.insert(0, m_pages[1]);
     multiPages.insert(1, m_pages[3]);
     QList<KoPAMasterPage *> pages1;

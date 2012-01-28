@@ -21,7 +21,7 @@
 #include "KoPADocumentModel.h"
 
 #include "KoPADocument.h"
-#include "KoPAPageBase.h"
+#include "KoPAPage.h"
 #include <KShapePainter.h>
 #include <KShapeManager.h>
 #include <KToolManager.h>
@@ -58,18 +58,18 @@ void KoPADocumentModel::update()
 
 int KoPADocumentModel::rowCount(const QModelIndex &parent) const
 {
-    if(!m_document)
+    if (!m_document)
         return 0;
 
     // check if parent is root node
-    if(! parent.isValid())
+    if (! parent.isValid())
         return m_document->pages(m_master).count();
 
     Q_ASSERT(parent.model() == this);
     Q_ASSERT(parent.internalPointer());
 
     KShapeContainer *parentShape = dynamic_cast<KShapeContainer*>((KShape*)parent.internalPointer());
-    if(! parentShape)
+    if (! parentShape)
         return 0;
 
     return parentShape->shapeCount();
@@ -82,13 +82,13 @@ int KoPADocumentModel::columnCount(const QModelIndex &) const
 
 QModelIndex KoPADocumentModel::index(int row, int column, const QModelIndex &parent) const
 {
-    if(!m_document)
+    if (!m_document)
         return QModelIndex();
     
     // check if parent is root node
-    if(! parent.isValid())
+    if (! parent.isValid())
     {
-        if(row >= 0 && row < m_document->pages(m_master).count())
+        if (row >= 0 && row < m_document->pages(m_master).count())
             return createIndex(row, column, m_document->pages(m_master).at(row));
         else
             return QModelIndex();
@@ -98,10 +98,10 @@ QModelIndex KoPADocumentModel::index(int row, int column, const QModelIndex &par
     Q_ASSERT(parent.internalPointer());
 
     KShapeContainer *parentShape = dynamic_cast<KShapeContainer*>((KShape*)parent.internalPointer());
-    if(! parentShape)
+    if (! parentShape)
         return QModelIndex();
 
-    if(row < parentShape->shapeCount())
+    if (row < parentShape->shapeCount())
         return createIndex(row, column, childFromIndex(parentShape, row));
     else
         return QModelIndex();
@@ -110,26 +110,26 @@ QModelIndex KoPADocumentModel::index(int row, int column, const QModelIndex &par
 QModelIndex KoPADocumentModel::parent(const QModelIndex &child) const
 {
     // check if child is root node
-    if(! child.isValid() || !m_document)
+    if (! child.isValid() || !m_document)
         return QModelIndex();
 
     Q_ASSERT(child.model() == this);
     Q_ASSERT(child.internalPointer());
 
     KShape *childShape = static_cast<KShape*>(child.internalPointer());
-    if(! childShape)
+    if (! childShape)
         return QModelIndex();
 
     // get the children's parent shape
     KShapeContainer *parentShape = childShape->parent();
-    if(! parentShape)
+    if (! parentShape)
         return QModelIndex();
 
     // get the grandparent to determine the row of the parent shape
     KShapeContainer *grandParentShape = parentShape->parent();
-    if(! grandParentShape)
+    if (! grandParentShape)
     {
-        KoPAPageBase* page = dynamic_cast<KoPAPageBase*>(parentShape);
+        KoPAPage* page = dynamic_cast<KoPAPage*>(parentShape);
         return createIndex(m_document->pages(m_master).indexOf(page), 0, parentShape);
     }
 
@@ -138,7 +138,7 @@ QModelIndex KoPADocumentModel::parent(const QModelIndex &child) const
 
 QVariant KoPADocumentModel::data(const QModelIndex &index, int role) const
 {
-    if(! index.isValid() || !m_document)
+    if (! index.isValid() || !m_document)
         return QVariant();
 
     Q_ASSERT(index.model() == this);
@@ -151,19 +151,19 @@ QVariant KoPADocumentModel::data(const QModelIndex &index, int role) const
         case Qt::DisplayRole:
         {
             QString name = shape->name();
-            if(name.isEmpty())
+            if (name.isEmpty())
             {
-                if (dynamic_cast<KoPAPageBase *>(shape)) {
-                    if(m_document->pageType() == KoPageApp::Slide) {
-                        name = i18n("Slide %1",  m_document->pageIndex(dynamic_cast<KoPAPageBase *>(shape)) + 1);
+                if (dynamic_cast<KoPAPage *>(shape)) {
+                    if (m_document->pageType() == KoPageApp::Slide) {
+                        name = i18n("Slide %1",  m_document->pageIndex(dynamic_cast<KoPAPage *>(shape)) + 1);
                     } else {
-                        name = i18n("Page  %1", m_document->pageIndex(dynamic_cast<KoPAPageBase *>(shape)) + 1);
+                        name = i18n("Page  %1", m_document->pageIndex(dynamic_cast<KoPAPage *>(shape)) + 1);
                     }
                 }
-                else if(dynamic_cast<KShapeLayer*>(shape)) {
+                else if (dynamic_cast<KShapeLayer*>(shape)) {
                     name = i18n("Layer") + QString(" (%1)").arg(shape->zIndex());
                 }
-                else if(dynamic_cast<KShapeGroup*>(shape)) {
+                else if (dynamic_cast<KShapeGroup*>(shape)) {
                     name = i18n("Group") + QString(" (%1)").arg(shape->zIndex());
                 }
                 else {
@@ -176,7 +176,7 @@ QVariant KoPADocumentModel::data(const QModelIndex &index, int role) const
         case Qt::EditRole: return shape->name();
         case Qt::SizeHintRole:
         {
-            KoPAPageBase *page = dynamic_cast<KoPAPageBase*>(shape);
+            KoPAPage *page = dynamic_cast<KoPAPage*>(shape);
             if (page) { // return actual page size for page
                 KOdfPageLayoutData layout = page->pageLayout();
                 return QSize(layout.width, layout.height);
@@ -188,11 +188,11 @@ QVariant KoPADocumentModel::data(const QModelIndex &index, int role) const
         {
             KCanvasController * canvasController = KToolManager::instance()->activeCanvasController();
             KShapeSelection * selection = canvasController->canvas()->shapeManager()->selection();
-            if(! selection)
+            if (! selection)
                 return false;
 
             /* KShapeLayer *layer = dynamic_cast<KShapeLayer*>(shape);
-            if(layer)
+            if (layer)
                 return (layer == selection->activeLayer());
             else */
             return selection->isSelected(shape);
@@ -203,7 +203,7 @@ QVariant KoPADocumentModel::data(const QModelIndex &index, int role) const
             QTransform matrix = shape->absoluteTransformation(0);
             QRectF bbox = matrix.mapRect(shape->outline().boundingRect());
             KShapeContainer *container = dynamic_cast<KShapeContainer*>(shape);
-            if(container)
+            if (container)
             {
                 bbox = QRectF();
                 foreach(KShape* shape, container->shapes())
@@ -221,24 +221,24 @@ QVariant KoPADocumentModel::data(const QModelIndex &index, int role) const
 
 Qt::ItemFlags KoPADocumentModel::flags(const QModelIndex &index) const
 {
-    if(!m_document)
+    if (!m_document)
         return 0;
 
-    if(! index.isValid())
+    if (! index.isValid())
         return Qt::ItemIsEnabled | Qt::ItemIsDropEnabled;
 
     Q_ASSERT(index.model() == this);
     Q_ASSERT(index.internalPointer());
 
     Qt::ItemFlags flags = Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsDragEnabled | Qt::ItemIsEditable;
-    //if(dynamic_cast<KShapeContainer*>((KShape*)index.internalPointer()))
+    //if (dynamic_cast<KShapeContainer*>((KShape*)index.internalPointer()))
         flags |= Qt::ItemIsDropEnabled;
     return flags;
 }
 
 bool KoPADocumentModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
-    if(! index.isValid() || !m_document)
+    if (! index.isValid() || !m_document)
         return false;
 
     Q_ASSERT(index.model() == this);
@@ -264,7 +264,7 @@ bool KoPADocumentModel::setData(const QModelIndex &index, const QVariant &value,
                 KShapeSelection * selection = canvasController->canvas()->shapeManager()->selection();
 
                 KShapeLayer *layer = dynamic_cast<KShapeLayer*>(shape);
-                if(layer && selection) {
+                if (layer && selection) {
                     selection->setActiveLayer(layer);
                 }
             } */
@@ -293,7 +293,7 @@ void KoPADocumentModel::setProperties(KShape* shape, const PropertyList &propert
     shape->setVisible(properties.at(0).state.toBool());
     shape->setGeometryProtected(properties.at(1).state.toBool());
 
-    if((oldVisibleState != shape->isVisible()) || (oldLockedState != shape->isGeometryProtected()))
+    if ((oldVisibleState != shape->isVisible()) || (oldLockedState != shape->isGeometryProtected()))
         shape->update();
 }
 
@@ -304,7 +304,7 @@ QImage KoPADocumentModel::createThumbnail(KShape* shape, const QSize &thumbSize)
 
     QList<KShape*> shapes;
 
-    KoPAPageBase *page = dynamic_cast<KoPAPageBase*>(shape);
+    KoPAPage *page = dynamic_cast<KoPAPage*>(shape);
     if (page) { // We create a thumbnail with actual width / height ratio for page
         KoZoomHandler zoomHandler;
         KOdfPageLayoutData layout = page->pageLayout();
@@ -321,7 +321,7 @@ QImage KoPADocumentModel::createThumbnail(KShape* shape, const QSize &thumbSize)
 
     shapes.append(shape);
     KShapeContainer * container = dynamic_cast<KShapeContainer*>(shape);
-    if(container)
+    if (container)
         shapes = container->shapes();
 
     shapePainter.setShapes(shapes);
@@ -338,7 +338,7 @@ KShape * KoPADocumentModel::childFromIndex(KShapeContainer *parent, int row) con
 {
     return parent->shapes().at(row);
 
-    if(parent != m_lastContainer)
+    if (parent != m_lastContainer)
     {
         m_lastContainer = parent;
         m_childs = parent->shapes();
@@ -354,7 +354,7 @@ int KoPADocumentModel::indexFromChild(KShapeContainer *parent, KShape *child) co
 
     return parent->shapes().indexOf(child);
 
-    if(parent != m_lastContainer)
+    if (parent != m_lastContainer)
     {
         m_lastContainer = parent;
         m_childs = parent->shapes();
@@ -378,12 +378,12 @@ QStringList KoPADocumentModel::mimeTypes() const
 QMimeData * KoPADocumentModel::mimeData(const QModelIndexList &indexes) const
 {
     // check if there is data to encode
-    if(! indexes.count())
+    if (! indexes.count())
         return 0;
 
     // check if we support a format
     QStringList types = mimeTypes();
-    if(types.isEmpty())
+    if (types.isEmpty())
         return 0;
 
     QMimeData *data = new QMimeData();
@@ -406,14 +406,14 @@ bool KoPADocumentModel::dropMimeData(const QMimeData * data, Qt::DropAction acti
     Q_UNUSED(column);
 
     // check if the action is supported
-    if(! data || action != Qt::MoveAction)
+    if (! data || action != Qt::MoveAction)
         return false;
     // check if the format is supported
     QStringList types = mimeTypes();
-    if(types.isEmpty())
+    if (types.isEmpty())
         return false;
     QString format = types[0];
-    if(! data->hasFormat(format))
+    if (! data->hasFormat(format))
         return false;
 
     QByteArray encoded = data->data(format);
@@ -430,14 +430,14 @@ bool KoPADocumentModel::dropMimeData(const QMimeData * data, Qt::DropAction acti
 
     QList<KShape*> toplevelShapes;
     QList<KShapeLayer*> layers;
-    QList<KoPAPageBase *> pages;
+    QList<KoPAPage *> pages;
     // remove shapes having its parent in the list
     // and separate the layers
     foreach(KShape * shape, shapes)
     {
         // check whether the selection contains page
         // by the UI rules, the selection should contains page only
-        KoPAPageBase *page = dynamic_cast<KoPAPageBase *>(shape);
+        KoPAPage *page = dynamic_cast<KoPAPage *>(shape);
         if (page) {
             pages.append(page);
             continue;
@@ -452,11 +452,11 @@ bool KoPADocumentModel::dropMimeData(const QMimeData * data, Qt::DropAction acti
             }
             parentShape = parentShape->parent();
         }
-        if(hasParentInList)
+        if (hasParentInList)
             continue;
 
         KShapeLayer * layer = dynamic_cast<KShapeLayer*>(shape);
-        if(layer)
+        if (layer)
             layers.append(layer);
         else
             toplevelShapes.append(shape);
@@ -468,7 +468,7 @@ bool KoPADocumentModel::dropMimeData(const QMimeData * data, Qt::DropAction acti
             if (row < 0) {
                 return false;
             }
-            KoPAPageBase *after = (row != 0) ? m_document->pageByIndex(row - 1, false) : 0;
+            KoPAPage *after = (row != 0) ? m_document->pageByIndex(row - 1, false) : 0;
             KoPAPageMoveCommand *command = new KoPAPageMoveCommand(m_document, pages, after);
             m_document->addCommand(command);
             kDebug(30010) << "KoPADocumentModel::dropMimeData parent = root, dropping page(s) as root, moving page(s)";
@@ -482,12 +482,12 @@ bool KoPADocumentModel::dropMimeData(const QMimeData * data, Qt::DropAction acti
 
     KShape *shape = static_cast<KShape*>(parent.internalPointer());
     KShapeContainer * container = dynamic_cast<KShapeContainer*>(shape);
-    if(container) {
+    if (container) {
         KShapeGroup * group = dynamic_cast<KShapeGroup*>(container);
-        if(group)
+        if (group)
         {
             kDebug(30010) <<"KoPADocumentModel::dropMimeData parent = group";
-            if(! toplevelShapes.count())
+            if (! toplevelShapes.count())
                 return false;
 
             emit layoutAboutToBeChanged();
@@ -509,7 +509,7 @@ bool KoPADocumentModel::dropMimeData(const QMimeData * data, Qt::DropAction acti
         else
         {
             kDebug(30010) <<"KoPADocumentModel::dropMimeData parent = container";
-            if(toplevelShapes.count())
+            if (toplevelShapes.count())
             {
                 emit layoutAboutToBeChanged();
                 beginInsertRows(parent, container->shapeCount(), container->shapeCount()+toplevelShapes.count());
@@ -521,7 +521,7 @@ bool KoPADocumentModel::dropMimeData(const QMimeData * data, Qt::DropAction acti
                 QList<bool> inheritsTransform;
                 foreach(KShape * shape, toplevelShapes)
                 {
-                    if(! shape->parent())
+                    if (! shape->parent())
                     {
                         clipped.append(false);
                         inheritsTransform.append(false);
@@ -540,10 +540,10 @@ bool KoPADocumentModel::dropMimeData(const QMimeData * data, Qt::DropAction acti
                 endInsertRows();
                 emit layoutChanged();
             }
-            else if(layers.count())
+            else if (layers.count())
             {
                 KShapeLayer * layer = dynamic_cast<KShapeLayer*>(container);
-                if(! layer)
+                if (! layer)
                     return false;
 
                 // TODO layers are dropped on a layer, so change layer ordering
@@ -554,7 +554,7 @@ bool KoPADocumentModel::dropMimeData(const QMimeData * data, Qt::DropAction acti
     else
     {
         kDebug(30010) <<"KoPADocumentModel::dropMimeData parent = shape";
-        if(! toplevelShapes.count())
+        if (! toplevelShapes.count())
             return false;
 
         // TODO shapes are dropped on a shape, reorder them
@@ -566,31 +566,31 @@ bool KoPADocumentModel::dropMimeData(const QMimeData * data, Qt::DropAction acti
 
 QModelIndex KoPADocumentModel::parentIndexFromShape(const KShape * child)
 {
-    if(!m_document)
+    if (!m_document)
         return QModelIndex();
 
     // check if child shape is a layer, and return invalid model index if it is
     const KShapeLayer *childlayer = dynamic_cast<const KShapeLayer*>(child);
-    if(childlayer)
+    if (childlayer)
         return QModelIndex();
 
     // get the children's parent shape
     KShapeContainer *parentShape = child->parent();
-    if(! parentShape)
+    if (! parentShape)
         return QModelIndex();
 
     // check if the parent is a layer
     KShapeLayer *parentLayer = dynamic_cast<KShapeLayer*>(parentShape);
 
 
-    if(parentLayer) {
-        KoPAPageBase * page = dynamic_cast<KoPAPageBase*>(parentLayer->parent());
+    if (parentLayer) {
+        KoPAPage * page = dynamic_cast<KoPAPage*>(parentLayer->parent());
         if (page)
             return createIndex(m_document->pages(m_master).count() - 1 - m_document->pages(m_master).indexOf(page), 0, parentLayer);
     }
     // get the grandparent to determine the row of the parent shape
     KShapeContainer *grandParentShape = parentShape->parent();
-    if(! grandParentShape)
+    if (! grandParentShape)
         return QModelIndex();
 
     return createIndex(indexFromChild(grandParentShape, parentShape), 0, parentShape);
@@ -602,8 +602,8 @@ void KoPADocumentModel::setDocument(KoPADocument* document)
 
     if (m_document)
     {
-        connect(m_document, SIGNAL(pageAdded(KoPAPageBase*)), this, SLOT(update()));
-        connect(m_document, SIGNAL(pageRemoved(KoPAPageBase*)), this, SLOT(update()));
+        connect(m_document, SIGNAL(pageAdded(KoPAPage*)), this, SLOT(update()));
+        connect(m_document, SIGNAL(pageRemoved(KoPAPage*)), this, SLOT(update()));
         connect(m_document, SIGNAL(shapeAdded(KShape*)), this, SLOT(update()));
         connect(m_document, SIGNAL(shapeRemoved(KShape*)), this, SLOT(update()));
     }

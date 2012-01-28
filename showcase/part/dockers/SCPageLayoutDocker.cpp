@@ -64,8 +64,7 @@ void SCPageLayoutDocker::setView( SCView* view )
 {
     Q_ASSERT( view );
     m_view = view;
-    connect( m_view->proxyObject, SIGNAL( activePageChanged() ),
-             this, SLOT( slotActivePageChanged() ) );
+    connect(m_view, SIGNAL(activePageChanged()), this, SLOT(slotActivePageChanged()));
 
     // remove the layouts from the last view
     m_layoutsView->clear();

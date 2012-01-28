@@ -27,7 +27,7 @@
 
 class KComboBox;
 class QUndoCommand;
-class KoPAViewBase;
+class KoPAView;
 class KCanvasBase;
 class SCSoundCollection;
 
@@ -40,7 +40,7 @@ class SCClickActionDocker : public QWidget, public KCanvasObserverBase
 public:
     explicit SCClickActionDocker(QWidget* parent = 0, Qt::WindowFlags flags = 0);
 
-    void setView(KoPAViewBase* view);
+    void setView(KoPAView* view);
 
 public slots:
     void addCommand(QUndoCommand * command);
@@ -53,7 +53,7 @@ private slots:
     virtual void setCanvas(KCanvasBase *canvas);
 
 private:
-    KoPAViewBase *m_view;
+    KoPAView *m_view;
     SCSoundCollection *m_soundCollection;
     KCanvasBase *m_canvas;
     KComboBox *m_cbPlaySound; // TODO remove when the embedded widgets are ok

@@ -72,10 +72,7 @@ KShape *TextShapeFactory::createDefaultShape(KResourceManager *documentResources
         KStyleManager *styleManager = documentResources->resource(KOdfText::StyleManager).value<KStyleManager*>();
         if (styleManager)
             document.setStyleManager(styleManager);
-        KPageProvider *pp = static_cast<KPageProvider *>(documentResources->resource(KOdfText::PageProvider).value<void*>());
-        if (pp)
-            text->setPageProvider(pp);
-            KChangeTracker *changeTracker = documentResources->resource(KOdfText::ChangeTracker).value<KChangeTracker*>();
+        KChangeTracker *changeTracker = documentResources->resource(KOdfText::ChangeTracker).value<KChangeTracker*>();
         if (changeTracker)
             document.setChangeTracker(changeTracker);
 

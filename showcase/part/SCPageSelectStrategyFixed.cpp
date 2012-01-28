@@ -1,5 +1,6 @@
 /* This file is part of the KDE project
    Copyright (C) 2010 Thorsten Zachmann <zachmann@kde.org>
+   Copyright (C) 2011 Thomas Zander <zander@kde.org>
 
    This library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public
@@ -19,7 +20,7 @@
 
 #include "SCPageSelectStrategyFixed.h"
 
-SCPageSelectStrategyFixed::SCPageSelectStrategyFixed(const KoPAPageBase *page)
+SCPageSelectStrategyFixed::SCPageSelectStrategyFixed(const KoPAPage *page)
 : m_page(page)
 {
 }
@@ -28,7 +29,7 @@ SCPageSelectStrategyFixed::~SCPageSelectStrategyFixed()
 {
 }
 
-const KoPAPageBase *SCPageSelectStrategyFixed::page() const
+const KoPAPage *SCPageSelectStrategyFixed::page() const
 {
     return m_page;
 }

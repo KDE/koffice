@@ -23,18 +23,18 @@
 #include "KoPAViewMode.h"
 
 class KoPAPage;
-class KoPACanvasBase;
+class KoPACanvas;
 class QPainter;
 class QRectF;
 class KViewConverter;
 
-class KOPAGEAPP_EXPORT KoPAViewModeNormal : public KoPAViewMode
+class KoPAViewModeNormal : public KoPAViewMode
 {
 public:
-    KoPAViewModeNormal(KoPAViewBase * view, KoPACanvasBase * m_canvas);
+    KoPAViewModeNormal(KoPAView * view, KoPACanvas * m_canvas);
     ~KoPAViewModeNormal();
 
-    void paint(KoPACanvasBase* canvas, QPainter &painter, const QRectF &paintRect);
+    void paint(KoPACanvas* canvas, QPainter &painter, const QRectF &paintRect);
     //void paintEvent(KoPACanvas * canvas, QPaintEvent* event);
     void tabletEvent(QTabletEvent *event, const QPointF &point);
     void mousePressEvent(QMouseEvent *event, const QPointF &point);
@@ -58,15 +58,9 @@ public:
 
     virtual bool masterMode();
 
-    void addShape(KShape *shape);
-
-    void removeShape(KShape *shape);
-
     virtual void changePageLayout(const KOdfPageLayoutData &pageLayout, bool applyToDocument, QUndoCommand *parent = 0);
 
 private:
-    void paintMargins(QPainter &painter, const KViewConverter &converter);
-
     /// if true it works on master pages, if false on normal pages
     bool m_masterMode;
     /// the page which was active before entering the master mode

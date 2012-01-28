@@ -20,14 +20,19 @@
 #include "KoPAViewMode.h"
 
 #include "KoPACanvas.h"
-#include "KoPAPageBase.h"
+#include "KoPAMasterPage.h"
 #include "KoPAView.h"
+#include "KoPADocument.h"
+
 #include <KCanvasController.h>
 #include <KOdfPageLayoutData.h>
+#include <KShapeManager.h>
+
+#include <KDebug>
 
 #include <QCloseEvent>
 
-KoPAViewMode::KoPAViewMode(KoPAViewBase * view, KoPACanvasBase * canvas)
+KoPAViewMode::KoPAViewMode(KoPAView * view, KoPACanvas * canvas)
 : m_canvas(canvas)
 , m_toolProxy(canvas->toolProxy())
 , m_view(view)
@@ -67,39 +72,39 @@ void KoPAViewMode::deactivate()
 {
 }
 
-KoPACanvasBase * KoPAViewMode::canvas() const
+KoPACanvas * KoPAViewMode::canvas() const
 {
     return m_canvas;
 }
 
-KoPAViewBase * KoPAViewMode::view() const
+KoPAView * KoPAViewMode::view() const
 {
     return m_view;
 }
 
-KViewConverter * KoPAViewMode::viewConverter(KoPACanvasBase * canvas)
+KViewConverter * KoPAViewMode::viewConverter(KoPACanvas * canvas)
 {
-    return m_view->KoPAViewBase::viewConverter(canvas);
+    return m_view->KoPAView::viewConverter(canvas);
 }
 
-void KoPAViewMode::updateActivePage(KoPAPageBase *page)
+void KoPAViewMode::updateActivePage(KoPAPage *page)
 {
     m_view->doUpdateActivePage(page);
 }
 
 void KoPAViewMode::addShape(KShape *shape)
 {
-    Q_UNUSED(shape);
+    // the KShapeController sets the active layer as parent
+    KoPAPage *page(m_view->kopaDocument()->pageByShape(shape));
+    Q_ASSERT(page); // otherwise there is a bug in our view
+    if (page == m_view->activePage() || page == m_view->activePage()->masterPage()) {
+        m_view->kopaCanvas()->shapeManager()->addShape(shape);
+    }
 }
 
 void KoPAViewMode::removeShape(KShape *shape)
 {
-    Q_UNUSED(shape);
-}
-
-const KOdfPageLayoutData &KoPAViewMode::activePageLayout() const
-{
-    return m_view->activePage()->pageLayout();
+    m_view->kopaCanvas()->shapeManager()->remove(shape);
 }
 
 void KoPAViewMode::changePageLayout(const KOdfPageLayoutData &pageLayout, bool applyToDocument, QUndoCommand *parent)
@@ -109,7 +114,7 @@ void KoPAViewMode::changePageLayout(const KOdfPageLayoutData &pageLayout, bool a
     Q_UNUSED(parent);
 }
 
-QPointF KoPAViewMode::origin()
+QPointF KoPAViewMode::origin() const
 {
     return m_origin;
 }

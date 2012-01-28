@@ -26,10 +26,10 @@
 #include <QtCore/QPointF>
 
 struct KOdfPageLayoutData;
-class KoPAViewBase;
+class KoPAView;
 class KoPACanvas;
-class KoPACanvasBase;
-class KoPAPageBase;
+class KoPACanvas;
+class KoPAPage;
 class KToolProxy;
 class KShape;
 class KViewConverter;
@@ -45,14 +45,12 @@ class QUndoCommand;
 
 class KOPAGEAPP_EXPORT KoPAViewMode : public QObject
 {
-
     Q_OBJECT
 public:
-    KoPAViewMode(KoPAViewBase * view, KoPACanvasBase * canvas);
+    KoPAViewMode(KoPAView * view, KoPACanvas * canvas);
     virtual ~KoPAViewMode();
 
-    virtual void paint(KoPACanvasBase* canvas, QPainter &painter, const QRectF &paintRect) = 0;
-    //virtual void paintEvent(KoPACanvas * canvas, QPaintEvent* event) = 0;
+    virtual void paint(KoPACanvas* canvas, QPainter &painter, const QRectF &paintRect) = 0;
     virtual void tabletEvent(QTabletEvent *event, const QPointF &point) = 0;
     virtual void mousePressEvent(QMouseEvent *event, const QPointF &point) = 0;
     virtual void mouseDoubleClickEvent(QMouseEvent *event, const QPointF &point) = 0;
@@ -107,14 +105,14 @@ public:
      *
      * @return canvas canvas used by the view mode
      */
-    KoPACanvasBase * canvas() const;
+    KoPACanvas * canvas() const;
 
     /**
      * @brief Get the view
      *
      * @return view view used by the view mode
      */
-    KoPAViewBase * view() const;
+    KoPAView * view() const;
 
     /**
      * @brief Get the view mode's implementation of view converter
@@ -123,13 +121,14 @@ public:
      *
      * @return the view converter used in the view mode
      */
-    virtual KViewConverter * viewConverter(KoPACanvasBase * canvas);
+    virtual KViewConverter * viewConverter(KoPACanvas * canvas);
 
     /**
-     * @brief Update the view when a new shape is added to the document
+     * @brief A shape added will only be visible when added to the view.
      *
-     * The default implementation does nothing. The derived class' implementation
-     * should check whether the new shape is added to currently active page.
+     * The default implementation adds it to the shapeManager only when its on the current page.
+     * Derived classes can filter the shapes added based on their view properties.
+     * For example a notes view mode may ignore shapes not in certain layers.
      *
      * @param shape the new shape added to the document
      */
@@ -138,18 +137,13 @@ public:
     /**
      * @brief Update the view when a shape is removed from the document
      *
-     * The default implementation does nothing. The derived class' implementation
-     * should check whether the shape is removed from currently active page.
-     *
      * @param shape the shape removed from the document
      */
-    virtual void removeShape(KShape *shape);
-
-    virtual const KOdfPageLayoutData &activePageLayout() const;
+    void removeShape(KShape *shape);
 
     virtual void changePageLayout(const KOdfPageLayoutData &pageLayout, bool applyToDocument, QUndoCommand *parent = 0);
 
-    QPointF origin();
+    QPointF origin() const;
 
     void setOrigin(const QPointF &origin);
 
@@ -166,12 +160,12 @@ public slots:
      *
      * @param page the new page to be updated on the view mode
      */
-    virtual void updateActivePage(KoPAPageBase * page);
+    virtual void updateActivePage(KoPAPage * page);
 
 protected:
-    KoPACanvasBase * m_canvas;
+    KoPACanvas * m_canvas;
     KToolProxy * m_toolProxy;
-    KoPAViewBase * m_view;
+    KoPAView * m_view;
     QPointF m_origin;
 };
 

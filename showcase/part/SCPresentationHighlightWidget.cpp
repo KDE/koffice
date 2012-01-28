@@ -27,7 +27,7 @@
 #include <QColor>
 #include <QPainter>
 
-SCPresentationHighlightWidget::SCPresentationHighlightWidget(KoPACanvasBase * canvas)
+SCPresentationHighlightWidget::SCPresentationHighlightWidget(KoPACanvas * canvas)
 : SCPresentationToolEventForwarder(canvas)
 , m_size(canvas->canvasWidget()->size())
 {

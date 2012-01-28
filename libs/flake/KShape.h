@@ -1,7 +1,7 @@
 /* This file is part of the KDE project
    Copyright (C) 2006-2008 Thorsten Zachmann <zachmann@kde.org>
    Copyright (C) 2006, 2008 Casper Boemann <cbr@boemann.dk>
-   Copyright (C) 2006-2010 Thomas Zander <zander@kde.org>
+   Copyright (C) 2006-2011 Thomas Zander <zander@kde.org>
    Copyright (C) 2007-2009 Jan Hambrecht <jaham@gmx.net>
 
    This library is free software; you can redistribute it and/or
@@ -363,21 +363,23 @@ public:
 
     /**
      * Sets shape level transparency.
+     * Notice that a shape can inherit the parents transparency, the transparency set here will be
+     *   multiplied with the parants effective transparency to get the effective transparency for painting.
      * @param transparency the new shape level transparency
      */
     void setTransparency(qreal transparency);
 
-
-    enum Transparancy {
-        EffectiveTransparancy,
-        ShapeTransparancy
+    /// enum for transparency type
+    enum Transparency {
+        EffectiveTransparency, ///< The transparency of this shape and all parent shapes multiplied.
+        ShapeTransparency ///< The transparency of this shape as set with setTransparency()
     };
 
     /**
      * Returns the shape level transparency.
-     * @param recursive when true takes the parents transparency into account
+     * @param transparency the type of transparency to return.
      */
-    qreal transparency(Transparancy transparancy = ShapeTransparancy) const;
+    qreal transparency(Transparency transparency = ShapeTransparency) const;
 
     /**
      * Retrieve the z-coordinate of this shape.

@@ -21,7 +21,7 @@
 
 #include <KoPACanvas.h>
 
-SCPresentationToolEventForwarder::SCPresentationToolEventForwarder(KoPACanvasBase *canvas)
+SCPresentationToolEventForwarder::SCPresentationToolEventForwarder(KoPACanvas *canvas)
 :QWidget(canvas->canvasWidget())
 {
 }

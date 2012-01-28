@@ -1,5 +1,6 @@
 /* This file is part of the KDE project
    Copyright (C) 2010 Thorsten Zachmann <zachmann@kde.org>
+   Copyright (C) 2011 Thomas Zander <zander@kde.org>
 
    This library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public
@@ -19,10 +20,10 @@
 
 #include "SCPageSelectStrategyActive.h"
 
-#include <KoPACanvasBase.h>
-#include <KoPAViewBase.h>
+#include <KoPACanvas.h>
+#include <KoPAView.h>
 
-SCPageSelectStrategyActive::SCPageSelectStrategyActive(KoPACanvasBase *canvas)
+SCPageSelectStrategyActive::SCPageSelectStrategyActive(KoPACanvas *canvas)
 : m_canvas(canvas)
 {
 }
@@ -31,9 +32,9 @@ SCPageSelectStrategyActive::~SCPageSelectStrategyActive()
 {
 }
 
-const KoPAPageBase *SCPageSelectStrategyActive::page() const
+const KoPAPage *SCPageSelectStrategyActive::page() const
 {
-    KoPAViewBase *view = m_canvas->koPAView();
+    KoPAView *view = m_canvas->koPAView();
     Q_ASSERT(view);
     return view->activePage();
 }

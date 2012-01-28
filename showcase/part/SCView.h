@@ -32,7 +32,7 @@ class SCViewModeSlidesSorter;
 class SCViewModePresentation;
 class SCViewModePresenterView;
 class KActionMenu;
-class KoPAPageBase;
+class KoPAPage;
 
 class SHOWCASE_EXPORT SCView : public KoPAView
 {
@@ -41,8 +41,8 @@ public:
     explicit SCView(SCDocument * document, QWidget * parent = 0);
     ~SCView();
 
-    using KoPAViewBase::viewConverter;
-    virtual KViewConverter * viewConverter(KoPACanvasBase * canvas);
+    using KoPAView::viewConverter;
+    virtual KViewConverter * viewConverter(KoPACanvas * canvas);
 
     /**
      * Get the document object the view was initialised with

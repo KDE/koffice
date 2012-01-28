@@ -88,7 +88,7 @@ void SCHtmlExport::exportImageToTmpDir()
     for(int i=0; i < m_parameters.slides.size(); ++i){
         fileUrl = m_tmpDirPath;
         fileUrl.addPath(QString("slide%1.png").arg(i));
-        KoPAPageBase *slide = m_parameters.slides.at(i);
+        KoPAPage *slide = m_parameters.slides.at(i);
         m_parameters.kprView->exportPageThumbnail(slide,fileUrl, slide->size().toSize(), "PNG", -1);
     }
 }

@@ -30,14 +30,14 @@
 #include <KMessageBox>
 
 //KOffice includes
-#include <KoPAPageBase.h>
+#include <KoPAPage.h>
 #include <SCDocument.h>
 
 //Showcase includes
 #include <SCCustomSlideShows.h>
 
 //so to be able to use it in a QVariant
-Q_DECLARE_METATYPE(KoPAPageBase*)
+Q_DECLARE_METATYPE(KoPAPage*)
 
 SCCustomSlideShowsDialog::SCCustomSlideShowsDialog(QWidget *parent, SCCustomSlideShows *slideShows,
                                                       SCDocument *doc, SCCustomSlideShows *&newSlideShows)
@@ -77,7 +77,7 @@ SCCustomSlideShowsDialog::SCCustomSlideShowsDialog(QWidget *parent, SCCustomSlid
     int currentPage = 1;
     QListWidgetItem * item;
 
-    foreach (KoPAPageBase *page, doc->pages())
+    foreach (KoPAPage *page, doc->pages())
     {
         item = new QListWidgetItem(QIcon(page->thumbnail(QSize(75,75))), i18n("Slide %1", currentPage++), m_uiWidget.availableSlidesList);
         item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsDragEnabled | Qt::ItemIsEnabled | Qt::ItemIsUserCheckable);
@@ -104,7 +104,7 @@ void SCCustomSlideShowsDialog::addCustomSlideShow()
     //we add it to the display and the slideShows
     m_uiWidget.customSlideShowsList->addItem(item);
 
-    m_slideShows->insert(i18n("New Slide Show %1", newSlideShowsCount), QList<KoPAPageBase*>());
+    m_slideShows->insert(i18n("New Slide Show %1", newSlideShowsCount), QList<KoPAPage*>());
 
     //Let the user choose the name
     m_uiWidget.customSlideShowsList->editItem(item);
@@ -230,15 +230,15 @@ void SCCustomSlideShowsDialog::changedSelectedSlideshow(QListWidgetItem* current
 
     //get the slideShow and its pages
     m_selectedSlideShowName = current->data(SlideShowNameData).toString();
-    QList<KoPAPageBase*> pages = m_slideShows->getByName(m_selectedSlideShowName);
+    QList<KoPAPage*> pages = m_slideShows->getByName(m_selectedSlideShowName);
 
     //insert them into the current slideShow list
     QListWidgetItem * item;
-    foreach (KoPAPageBase *page, pages)
+    foreach (KoPAPage *page, pages)
     {
         item = new QListWidgetItem(QIcon(page->thumbnail(QSize(75,75))), i18n("Slide %1", m_doc->pageIndex(page)+1), m_uiWidget.currentSlidesList);
         item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsDragEnabled | Qt::ItemIsEnabled | Qt::ItemIsUserCheckable);
-        item->setData(SlideData, QVariant::fromValue<KoPAPageBase*>(page));
+        item->setData(SlideData, QVariant::fromValue<KoPAPage*>(page));
     }
 }
 
@@ -246,17 +246,17 @@ void SCCustomSlideShowsDialog::addSlidesToCurrentSlideShow()
 {
     //get the selected items and slideshow
     QList<QListWidgetItem*> selectedPages = m_uiWidget.availableSlidesList->selectedItems();
-    QList<KoPAPageBase*> selectedSlideShow = m_slideShows->getByName(m_selectedSlideShowName);
+    QList<KoPAPage*> selectedSlideShow = m_slideShows->getByName(m_selectedSlideShowName);
 
     //insert the slides at the end and update the Widget
     foreach (QListWidgetItem *item, selectedPages)
     {
-        KoPAPageBase* page((item->data(SlideData).value<KoPAPageBase*>()));
+        KoPAPage* page((item->data(SlideData).value<KoPAPage*>()));
         selectedSlideShow.append(page);
 
         item = new QListWidgetItem(QIcon(page->thumbnail(QSize(75,75))), i18n("Slide %1", m_doc->pageIndex(page)+1), m_uiWidget.currentSlidesList);
         item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsDragEnabled | Qt::ItemIsEnabled | Qt::ItemIsUserCheckable);
-        item->setData(SlideData, QVariant::fromValue<KoPAPageBase*>(page));
+        item->setData(SlideData, QVariant::fromValue<KoPAPage*>(page));
     }
     //update the SlideShow with the resulting list
     m_slideShows->update(m_selectedSlideShowName, selectedSlideShow);
@@ -278,7 +278,7 @@ void SCCustomSlideShowsDialog::removeSlidesFromCurrentSlideShow()
     if (m_selectedSlideShowName.isEmpty())
         return;
 
-    QList<KoPAPageBase*> selectedSlideShow = m_slideShows->getByName(m_selectedSlideShowName);
+    QList<KoPAPage*> selectedSlideShow = m_slideShows->getByName(m_selectedSlideShowName);
 
     //remove the slides and update the widget
     foreach (QListWidgetItem *item, selectedPages)

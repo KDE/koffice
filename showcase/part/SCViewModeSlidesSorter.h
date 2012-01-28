@@ -28,7 +28,7 @@
 
 class KoPAView;
 class KoPACanvas;
-class KoPAPageBase;
+class KoPAPage;
 
 class SCViewModeSlidesSorter : public KoPAViewMode
 {
@@ -37,8 +37,7 @@ public:
     SCViewModeSlidesSorter(KoPAView *view, KoPACanvas *canvas);
     ~SCViewModeSlidesSorter();
 
-    void paint(KoPACanvasBase* canvas, QPainter &painter, const QRectF &paintRect);
-    void paintEvent(KoPACanvas * canvas, QPaintEvent* event);
+    void paint(KoPACanvas* canvas, QPainter &painter, const QRectF &paintRect);
     void tabletEvent(QTabletEvent *event, const QPointF &point);
     void mousePressEvent(QMouseEvent *event, const QPointF &point);
     void mouseDoubleClickEvent(QMouseEvent *event, const QPointF &point);
@@ -51,10 +50,9 @@ public:
     void activate(KoPAViewMode *previousViewMode);
     void deactivate();
 
-    void updateActivePage(KoPAPageBase *page);
+    void updateActivePage(KoPAPage *page);
 
     void addShape(KShape *shape);
-    void removeShape(KShape *shape);
 
 protected:
 

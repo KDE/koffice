@@ -24,22 +24,22 @@
 
 #include "kopageapp_export.h"
 
-class KoPAPageBase;
+class KoPAPage;
 
 class KOPAGEAPP_EXPORT KoPATextPage : public KTextPage
 {
 public:
-    KoPATextPage(int pageNumber, KoPAPageBase *page);
+    KoPATextPage(int pageNumber, KoPAPage *page);
 
     virtual ~KoPATextPage();
 
     virtual int pageNumber(PageSelection select = CurrentPage, int adjustment = 0) const;
 
-    KoPAPageBase *page() const;
+    KoPAPage *page() const;
 
 private:
     int m_pageNumber;
-    KoPAPageBase * m_page;
+    KoPAPage * m_page;
 };
 
 #endif /* KOPATEXTPAGE_H */

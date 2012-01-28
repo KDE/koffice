@@ -1,5 +1,6 @@
 /* This file is part of the KDE project
  * Copyright (C) 2008 Thorsten Zachmann <zachmann@kde.org>
+   Copyright (C) 2011 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -16,13 +17,14 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-
 #ifndef SCENDOFSLIDESHOWPAGE_H
 #define SCENDOFSLIDESHOWPAGE_H
 
-class SCDocument;
-
 #include "SCPage.h"
+
+#include <KOdfPageLayoutData.h>
+
+class SCDocument;
 
 /**
  * This is the page that is use as end of presentation slide show.
@@ -35,7 +37,11 @@ class SCEndOfSlideShowPage : public SCPage
 {
 public:
     SCEndOfSlideShowPage(const QRectF &screenRect, SCDocument * document);
-    ~SCEndOfSlideShowPage();
+
+    virtual KOdfPageLayoutData pageLayout() const { return m_pageLayout; }
+
+private:
+    KOdfPageLayoutData m_pageLayout;
 };
 
-#endif /* SCENDOFSLIDESHOWPAGE_H */
+#endif

@@ -25,13 +25,13 @@
 #include <KDockFactoryBase.h>
 #include <KCanvasObserverBase.h>
 #include <KoDocumentSectionView.h>
-#include <KoPageApp.h>
+#include "KoPageApp.h"
 
 class KShape;
 class KShapeLayer;
 class KoPADocument;
 class KoPADocumentModel;
-class KoPAPageBase;
+class KoPAPage;
 class QModelIndex;
 class QAction;
 class QButtonGroup;
@@ -62,7 +62,7 @@ public:
     virtual ~KoPADocumentStructureDocker();
 
     virtual void setCanvas(KCanvasBase* canvas);
-    void setActivePage(KoPAPageBase *page);
+    void setActivePage(KoPAPage *page);
     void setMasterMode(bool master);
 
 protected:
@@ -70,7 +70,7 @@ protected:
     void contextMenuEvent(QContextMenuEvent* event);
 
 signals:
-    void pageChanged(KoPAPageBase *page);
+    void pageChanged(KoPAPage *page);
 
     /// This signal will be emitted after the model for this docker has been reset
     void dockerReset();
@@ -99,7 +99,7 @@ private slots:
     void editPaste(); 
 
 private:
-    void extractSelectedLayersAndShapes(QList<KoPAPageBase*> &pages, QList<KShapeLayer*> &layers, QList<KShape*> &shapes);
+    void extractSelectedLayersAndShapes(QList<KoPAPage*> &pages, QList<KShapeLayer*> &layers, QList<KShape*> &shapes);
     void setViewMode(KoDocumentSectionView::DisplayMode mode);
     QModelIndex getRootIndex(const QModelIndex &index) const;
 

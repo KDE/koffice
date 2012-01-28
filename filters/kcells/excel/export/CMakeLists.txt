@@ -48,7 +48,7 @@ set(excelexport_SRCS ExcelExport.cpp CFBWriter.cpp ${sidewinder_SRCS})
 kde4_add_plugin(excelexport ${excelexport_SRCS})
 
 
-target_link_libraries(excelexport msooxml komain mso kodf ${ZLIB_LIBRARIES} kcellscommon)
+target_link_libraries(excelexport msooxml komain mso ${ZLIB_LIBRARIES} kcellscommon)
 if(QCA2_FOUND) # because sidewinder depends on it
    target_link_libraries(excelexport ${QCA2_LIBRARIES})
 endif(QCA2_FOUND)

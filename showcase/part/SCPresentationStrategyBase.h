@@ -24,7 +24,7 @@
 class QWidget;
 class QKeyEvent;
 class SCPresentationToolEventForwarder;
-class KoPACanvasBase;
+class KoPACanvas;
 class SCPresentationTool;
 
 class SCPresentationStrategyBase
@@ -44,7 +44,7 @@ public:
 protected:
     void setToolWidgetParent(QWidget * widget);
     void activateDefaultStrategy();
-    KoPACanvasBase * canvas();
+    KoPACanvas * canvas();
 
     SCPresentationTool *m_tool;
     SCPresentationToolEventForwarder *m_widget;

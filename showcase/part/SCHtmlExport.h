@@ -25,7 +25,7 @@
 #include <QStringList>
 
 class SCView;
-class KoPAPageBase;
+class KoPAPage;
 class KJob;
 
 class SCHtmlExport : public QObject
@@ -35,7 +35,7 @@ public:
     struct Parameter {
         Parameter() {}
 
-        Parameter(KUrl styleUrl, SCView *kprView, QList<KoPAPageBase*> slides, KUrl destination,
+        Parameter(KUrl styleUrl, SCView *kprView, QList<KoPAPage*> slides, KUrl destination,
                   QString author, QString title, QStringList slidesNames, bool openBrowser)
                       : styleUrl(styleUrl)
                       , kprView(kprView)
@@ -50,7 +50,7 @@ public:
 
         KUrl styleUrl;
         SCView *kprView;
-        QList<KoPAPageBase*> slides;
+        QList<KoPAPage*> slides;
         KUrl destination;
         QString author;
         QString title;

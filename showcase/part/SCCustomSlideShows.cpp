@@ -22,7 +22,7 @@
 
 #include <kdebug.h>
 //KOffice includes
-#include <KoPAPageBase.h>
+#include <KoPAPage.h>
 #include <KoPAPage.h>
 #include <KoPALoadingContext.h>
 #include <KoPASavingContext.h>
@@ -40,31 +40,31 @@ SCCustomSlideShows::~SCCustomSlideShows()
 {
 }
 
-void SCCustomSlideShows::insert(const QString &name, const QList<KoPAPageBase*> &slideShow)
+void SCCustomSlideShows::insert(const QString &name, const QList<KoPAPage*> &slideShow)
 {
-    QMap< QString, QList<KoPAPageBase*> >::iterator it = m_customSlideShows.find(name);
+    QMap< QString, QList<KoPAPage*> >::iterator it = m_customSlideShows.find(name);
     Q_ASSERT(it == m_customSlideShows.end());
     m_customSlideShows.insert(name, slideShow);
 }
 
 void SCCustomSlideShows::remove(const QString &name)
 {
-    QMap< QString, QList<KoPAPageBase*> >::iterator it = m_customSlideShows.find(name);
+    QMap< QString, QList<KoPAPage*> >::iterator it = m_customSlideShows.find(name);
     Q_ASSERT(it != m_customSlideShows.end());
     m_customSlideShows.erase(it);
 }
 
-void SCCustomSlideShows::update(const QString &name, const QList<KoPAPageBase*> &slideShow)
+void SCCustomSlideShows::update(const QString &name, const QList<KoPAPage*> &slideShow)
 {
-    QMap< QString, QList<KoPAPageBase*> >::const_iterator it = m_customSlideShows.constFind(name);
+    QMap< QString, QList<KoPAPage*> >::const_iterator it = m_customSlideShows.constFind(name);
     Q_ASSERT(it != m_customSlideShows.constEnd());
     m_customSlideShows.insert(name, slideShow);
 }
 void SCCustomSlideShows::rename(const QString &oldName, const QString &newName)
 {
-    QMap< QString, QList<KoPAPageBase*> >::const_iterator it = m_customSlideShows.constFind(oldName);
+    QMap< QString, QList<KoPAPage*> >::const_iterator it = m_customSlideShows.constFind(oldName);
     Q_ASSERT(it !=  m_customSlideShows.constEnd());
-    QList<KoPAPageBase*> value(it.value());
+    QList<KoPAPage*> value(it.value());
     remove(oldName);
     insert(newName, value);
 }
@@ -74,19 +74,19 @@ const QList<QString> SCCustomSlideShows::names() const
     return m_customSlideShows.keys();
 }
 
-QList<KoPAPageBase*> SCCustomSlideShows::getByName(const QString &name) const
+QList<KoPAPage*> SCCustomSlideShows::getByName(const QString &name) const
 {
-    QMap< QString, QList<KoPAPageBase*> >::const_iterator it = m_customSlideShows.constFind(name);
+    QMap< QString, QList<KoPAPage*> >::const_iterator it = m_customSlideShows.constFind(name);
     Q_ASSERT(it !=  m_customSlideShows.constEnd());
 //     if (it == m_customSlideShows.constEnd()) {
-//         return QList<KoPAPageBase*>();
+//         return QList<KoPAPage*>();
 //     }
     return it.value();
 }
 
-void SCCustomSlideShows::addSlideToAll(KoPAPageBase* page, unsigned int position)
+void SCCustomSlideShows::addSlideToAll(KoPAPage* page, unsigned int position)
 {
-    QMap< QString, QList<KoPAPageBase*> >::iterator it = m_customSlideShows.begin();
+    QMap< QString, QList<KoPAPage*> >::iterator it = m_customSlideShows.begin();
     //FIXME: should we allow negative index?
     //if (position < 0) return;
     while (it != m_customSlideShows.end()) {
@@ -96,7 +96,7 @@ void SCCustomSlideShows::addSlideToAll(KoPAPageBase* page, unsigned int position
     }
 }
 
-void SCCustomSlideShows::addSlidesToAll(const QList<KoPAPageBase*> &slideShow, unsigned int position)
+void SCCustomSlideShows::addSlidesToAll(const QList<KoPAPage*> &slideShow, unsigned int position)
 {
     //FIXME: should we allow negative index?
     //if (position < 0) return;;
@@ -105,16 +105,16 @@ void SCCustomSlideShows::addSlidesToAll(const QList<KoPAPageBase*> &slideShow, u
     }
 }
 
-void SCCustomSlideShows::removeSlideFromAll(KoPAPageBase* page)
+void SCCustomSlideShows::removeSlideFromAll(KoPAPage* page)
 {
-    QMap< QString, QList<KoPAPageBase*> >::iterator it = m_customSlideShows.begin();
+    QMap< QString, QList<KoPAPage*> >::iterator it = m_customSlideShows.begin();
     while (it != m_customSlideShows.end()) {
         it.value().removeAll(page);
         ++it;
     }
 }
 
-void SCCustomSlideShows::removeSlidesFromAll(const QList<KoPAPageBase*> &slideShow)
+void SCCustomSlideShows::removeSlidesFromAll(const QList<KoPAPage*> &slideShow)
 {
     for (int i=0; i < slideShow.size(); ++i) {
         removeSlideFromAll(slideShow[i]);
@@ -123,14 +123,14 @@ void SCCustomSlideShows::removeSlidesFromAll(const QList<KoPAPageBase*> &slideSh
 
 void SCCustomSlideShows::saveOdf(KoPASavingContext &context)
 {
-    QMap <QString, QList<KoPAPageBase*> >::const_iterator end = m_customSlideShows.constEnd();
-    for (QMap <QString, QList<KoPAPageBase*> >::const_iterator iter = m_customSlideShows.constBegin(); 
+    QMap <QString, QList<KoPAPage*> >::const_iterator end = m_customSlideShows.constEnd();
+    for (QMap <QString, QList<KoPAPage*> >::const_iterator iter = m_customSlideShows.constBegin(); 
             iter != end; ++iter) {
-        QList<KoPAPageBase*> slideList = iter.value();
+        QList<KoPAPage*> slideList = iter.value();
         context.xmlWriter().startElement("presentation:show");
         context.xmlWriter().addAttribute("presentation:name", iter.key());
         QString pages;
-        foreach (KoPAPageBase *page, slideList) {
+        foreach (KoPAPage *page, slideList) {
             KoPAPage *p = dynamic_cast<KoPAPage *>(page);
             if (p) {
                 pages += context.pageName(p) + ',';
@@ -156,7 +156,7 @@ void SCCustomSlideShows::loadOdf(const KXmlElement &presentationSettings, KoPALo
                 QString pages = element.attributeNS(KOdfXmlNS::presentation, "pages");
 
                 QStringList splitedPages = pages.split(',');
-                QList<KoPAPageBase*> slideShow;
+                QList<KoPAPage*> slideShow;
                 foreach (const QString &pageName, splitedPages) {
                     KoPAPage * page = context.pageByName(pageName);
                     if (page) {

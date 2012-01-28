@@ -1,51 +1,50 @@
 /* This file is part of the KDE project
-
-   Copyright (C) 2006-2009 Thorsten Zachmann <zachmann@kde.org>
-   Copyright (C) 2009 Inge Wallin            <inge@lysator.liu.se>
-
-   This library is free software; you can redistribute it and/or
-   modify it under the terms of the GNU Library General Public
-   License as published by the Free Software Foundation; either
-   version 2 of the License, or (at your option) any later version.
-
-   This library is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-   Library General Public License for more details.
-
-   You should have received a copy of the GNU Library General Public License
-   along with this library; see the file COPYING.LIB.  If not, write to
-   the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
-   Boston, MA 02110-1301, USA.
-*/
-
+ *  Copyright (C) 2006-2009 Thorsten Zachmann <zachmann@kde.org>
+ *  Copyright (C) 2007-2011 Thomas Zander <zander@kde.org>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public License
+ * along with this library; see the file COPYING.LIB.  If not, write to
+ * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+ * Boston, MA 02110-1301, USA.
+ */
 #ifndef KOPAVIEW_H
 #define KOPAVIEW_H
 
-#include <KoView.h>			//krazy:exclude=includes
-#include "KoPAViewBase.h"		//krazy:exclude=includes
-#include "KoPageApp.h"			//krazy:exclude=includes
-#include <KoZoomMode.h>			//krazy:exclude=includes
-#include "kopageapp_export.h"		
+#include "KoPageApp.h"                  //krazy:exclude=includes
+#include "kopageapp_export.h"
 
-class KCanvasController;
-class KoFind;
-class KoPACanvasBase;
+#include <KoZoomMode.h>
+#include <KoZoomHandler.h>
+#include <KoView.h>
+
+class KoPACanvas;
+class KViewConverter;
+class KoPAPage;
 class KoPADocument;
-class KoPAPageBase;
-class KoPAViewMode;
-class KoPADocumentStructureDocker;
+class KoZoomController;
 class KoRuler;
 class KShapeManager;
+class KoPADocumentStructureDocker;
+class KCanvasController;
+class KActionMenu;
 class KoZoomAction;
-class KoZoomController;
-class KToggleAction;
-class KUrl;
-class QTextDocument;
+class KoFind;
 class QLabel;
+class KToggleAction;
+class KoPAViewMode;
 
-/// Creates a view with a KoPACanvasBase and rulers
-class KOPAGEAPP_EXPORT KoPAView : public KoView, public KoPAViewBase
+/// A view with a KoPACanvas and rulers
+class KOPAGEAPP_EXPORT KoPAView : public KoView
 {
     Q_OBJECT
 public:
@@ -67,30 +66,41 @@ public:
     explicit KoPAView(KoPADocument * document, QWidget * parent = 0);
     virtual ~KoPAView();
 
-    KoZoomController* zoomController() const;
+    /// @return the canvas for the application
+    KoPACanvas *kopaCanvas() const { return m_canvas; }
+
+    /// @return the document for the application
+    KoPADocument *kopaDocument() const { return m_doc; }
+
+    KViewConverter *viewConverter(KoPACanvas *canvas);
+    virtual KoZoomController *zoomController() const;
+    virtual KoZoomHandler *zoomHandler();
+
+    /**
+     * @brief Set the view mode
+     *
+     * @param mode the new view mode
+     */
+    virtual void setViewMode(KoPAViewMode* mode);
+
+    /// @return the active viewMode
+    virtual KoPAViewMode* viewMode() const;
 
     void updateReadWrite(bool readwrite);
 
     KoRuler *horizontalRuler();
     KoRuler *verticalRuler();
 
-    /// @return the canvas for the application
-    KoPACanvasBase * kopaCanvas() const;
-    /// @return the document for the application
-    KoPADocument * kopaDocument() const;
     /// @return Page that is shown in the canvas
-    KoPAPageBase* activePage() const;
+    KoPAPage *activePage() const;
 
     /// Set page shown in the canvas to @p page
-    void setActivePage(KoPAPageBase * page);
+    void setActivePage(KoPAPage *page);
 
     void navigatePage(KoPageApp::PageNavigation pageNavigation);
 
     /// @return the shape manager used for this view
-    KShapeManager* shapeManager() const;
-
-    /// @return the master shape manager used for this view
-    KShapeManager* masterShapeManager() const;
+    KShapeManager* shapeManager() const; // TODO remove
 
     /**
      * @brief Enables/Disables the given actions
@@ -105,7 +115,7 @@ public:
     /**
      * Set the active page and updates the UI
      */
-    void doUpdateActivePage(KoPAPageBase * page);
+    void doUpdateActivePage(KoPAPage *page);
 
     /**
      * Paste the page if everything is ok
@@ -120,7 +130,7 @@ public:
      *
      * Us this method instead the on in the pages directly
      */
-    QPixmap pageThumbnail(KoPAPageBase* page, const QSize &size);
+    QPixmap pageThumbnail(KoPAPage* page, const QSize &size);
 
     /**
      * Save thumbnail to an image file.
@@ -136,19 +146,18 @@ public:
      *
      * @returns whether the image was successfully saved
      */
-    bool exportPageThumbnail(KoPAPageBase * page, const KUrl &url, const QSize &size = QSize(512, 512),
+    bool exportPageThumbnail(KoPAPage * page, const KUrl &url, const QSize &size = QSize(512, 512),
                               const char * format = 0, int quality = -1);
 
     /// Update page navigation actions
     void updatePageNavigationActions();
 
-    /// Shows/hides the rulers
-    void setShowRulers(bool show);
 
+public slots:
     /// Insert a new page after the current one
     void insertPage();
 
-protected:
+private:
 
     /// creates the widgets (called from the constructor)
     void initGUI();
@@ -161,11 +170,16 @@ protected:
     /// Called when receiving a PartActivateEvent
     virtual void partActivateEvent(KParts::PartActivateEvent* event);
 
-    bool isMasterUsed(KoPAPageBase * page);
+    bool isMasterUsed(KoPAPage * page);
+
+private slots:
     void editPaste();
 
-protected slots:
+    /// Shows/hides the rulers
+    void setShowRulers(bool show);
+    void updateActivePage(KoPAPage*);
 
+protected slots:
     void viewSnapToGrid(bool snap);
     void viewGuides(bool show);
     void slotZoomChanged(KoZoomMode::Mode mode, qreal zoom);
@@ -239,12 +253,62 @@ protected slots:
     void configure();
 
 public slots:
-
     void variableChanged();
 
+signals:
+    /// Emitted every time the active page is changed
+    void activePageChanged();
+
+
 private:
-    class Private;
-    Private * const d;
+    // These were originally private in the .h file
+    KoPADocumentStructureDocker *m_documentStructureDocker;
+
+    KCanvasController *m_canvasController;
+    KoZoomController *m_zoomController;
+
+    KAction *m_editPaste;
+    KAction *m_deleteSelectionAction;
+
+    KToggleAction *m_actionViewSnapToGrid;
+    KToggleAction *m_actionViewShowMasterPages;
+
+    KAction *m_actionInsertPage;
+    KAction *m_actionCopyPage;
+    KAction *m_actionDeletePage;
+
+    KAction *m_actionMasterPage;
+    KAction *m_actionPageLayout;
+
+    KAction *m_actionConfigure;
+
+    KActionMenu *m_variableActionMenu;
+
+    KoRuler *m_horizontalRuler;
+    KoRuler *m_verticalRuler;
+    KToggleAction *m_viewRulers;
+
+    KoZoomAction  *m_zoomAction;
+
+    KoFind *m_find;
+
+    KoPAViewMode *m_viewModeNormal;
+
+    // status bar
+    QLabel *m_status;       ///< ordinary status
+    QWidget *m_zoomActionWidget;
+
+    KoPADocument *m_doc;
+    KoPACanvas *m_canvas;
+    KoPAPage *m_activePage;
+    /* Thomas;  having a zoomhandler here is weird.
+     * Seems that the viewmode can choose to swap out the zoomhandler for another
+     * for its own purposes. Which is just wrong;  if you want to change the zoom, set the zoom on the
+     * canvas.  The canvas should be the only one that holds the zoomhandler. Which probably should be
+     * a KViewConverter anyway...
+     */
+    KoZoomHandler m_zoomHandler;
+    KoPAViewMode *m_viewMode;
 };
 
-#endif /* KOPAVIEW_H */
+#endif

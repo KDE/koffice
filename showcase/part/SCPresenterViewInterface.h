@@ -26,7 +26,7 @@ class QLabel;
 class KTextEdit;
 
 class KoPACanvas;
-class KoPAPageBase;
+class KoPAPage;
 
 /**
  * SCPresenterViewInterface
@@ -37,7 +37,7 @@ class SCPresenterViewInterface : public SCPresenterViewBaseInterface
 {
     Q_OBJECT
 public:
-    SCPresenterViewInterface(const QList<KoPAPageBase *> &pages, KoPACanvas *canvas, QWidget *parent = 0);
+    SCPresenterViewInterface(const QList<KoPAPage *> &pages, KoPACanvas *canvas, QWidget *parent = 0);
 
     void setPreviewSize(const QSize &size);
 

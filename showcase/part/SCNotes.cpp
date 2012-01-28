@@ -57,7 +57,7 @@ public:
 };
 
 SCNotes::SCNotes(SCPage *page, SCDocument * document)
-: KoPAPageBase()
+: KoPAPage(0)
 , m_page(page)
 , m_doc(document)
 , m_imageCollection(new KImageCollection())
@@ -165,12 +165,7 @@ void SCNotes::paintComponent(QPainter &painter, const KViewConverter &converter)
     Q_UNUSED(converter);
 }
 
-KOdfPageLayoutData &SCNotes::pageLayout()
-{
-    return m_pageLayout;
-}
-
-const KOdfPageLayoutData &SCNotes::pageLayout() const
+KOdfPageLayoutData SCNotes::pageLayout() const
 {
     return m_pageLayout;
 }

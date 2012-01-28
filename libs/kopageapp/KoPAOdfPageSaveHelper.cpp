@@ -27,11 +27,11 @@
 #include "KoPASavingContext.h"
 #include "KoPAMasterPage.h"
 
-KoPAOdfPageSaveHelper::KoPAOdfPageSaveHelper(KoPADocument * doc, QList<KoPAPageBase *> pages)
+KoPAOdfPageSaveHelper::KoPAOdfPageSaveHelper(KoPADocument * doc, QList<KoPAPage *> pages)
     : m_doc(doc),
     m_context(0)
 {
-    foreach(KoPAPageBase * page, pages) {
+    foreach(KoPAPage * page, pages) {
         if (dynamic_cast<KoPAPage *>(page)) {
             m_pages.append(page);
         }
@@ -44,8 +44,8 @@ KoPAOdfPageSaveHelper::KoPAOdfPageSaveHelper(KoPADocument * doc, QList<KoPAPageB
         m_masterPages.clear();
 
         // this might result in a different order of master pages when copying to a different document
-        QSet<KoPAPageBase *> masterPages;
-        foreach(KoPAPageBase * page, m_pages) {
+        QSet<KoPAPage *> masterPages;
+        foreach(KoPAPage * page, m_pages) {
             KoPAPage * p = dynamic_cast<KoPAPage *>(page);
             masterPages.insert(p->masterPage());
         }

@@ -7,6 +7,36 @@ include_directories( ${CMAKE_SOURCE_DIR}/plugins/textshape
     ${KODFTEXT_INCLUDES}
     ${PIGMENT_INCLUDES})
 
+# just all of them, we might not need all, but who cares...
+set (textShape_UI_SRCS
+    ../dialogs/CharacterGeneral.ui
+    ../dialogs/CharacterHighlighting.ui
+    ../dialogs/CreateBookmark.ui
+    ../dialogs/JumpOverview.ui
+    ../dialogs/NewStyleWidget.ui
+    ../dialogs/ParagraphBulletsNumbers.ui
+    ../dialogs/ParagraphDecorations.ui
+    ../dialogs/ParagraphGeneral.ui
+    ../dialogs/ParagraphIndentSpacing.ui
+    ../dialogs/ParagraphLayout.ui
+    ../dialogs/SimpleStyleWidget.ui
+    ../dialogs/StyleManager.ui
+    ../dialogs/StyleManagerWelcome.ui
+    ../dialogs/StylesWidget.ui
+    ../dialogs/TableDialog.ui
+
+    ../dialogs/FontDecorations.ui
+    ../dialogs/FontLayoutTab.ui
+    ../dialogs/LanguageTab.ui
+    ../dialogs/ChangeConfigureDialog.ui
+    ../dialogs/AcceptRejectChangeDialog.ui
+    ../dialogs/TrackedChangeManager.ui
+    ../dialogs/ChangeTrackingOptionsWidget.ui
+    ../dialogs/SimpleTableWidget.ui
+)
+
+
+
 
 ########### next target ###############
 
@@ -83,6 +113,9 @@ set(TestChangeListCommand_test_SRCS
     ../ToCGenerator.cpp
 )
 
+kde4_add_ui_files(TestChangeListCommand_test_SRCS
+    ${textShape_UI_SRCS}
+)
 
 kde4_add_unit_test(TestChangeListCommand TESTNAME shapes-text-TestChangeListCommand ${TestChangeListCommand_test_SRCS})
 target_link_libraries(TestChangeListCommand ${EXTRA_LIBS} komain ${QT_QTTEST_LIBRARY})
@@ -191,6 +224,11 @@ set(TestTextTool_test_SRCS
     ../TextTool.cpp
     ../ToCGenerator.cpp
 )
+
+kde4_add_ui_files(TestTextTool_test_SRCS
+    ${textShape_UI_SRCS}
+)
+
 kde4_add_unit_test(TestTextTool TESTNAME shapes-text-TestTextTool ${TestTextTool_test_SRCS})
 target_link_libraries(TestTextTool komain ${EXTRA_LIBS} ${QT_QTTEST_LIBRARY})
 
@@ -251,6 +289,11 @@ set(TestChangeTrackedDelete_test_SRCS
     ../TableLayoutData.cpp
     ../ToCGenerator.cpp
 )
+
+kde4_add_ui_files(TestChangeTrackedDelete_test_SRCS
+    ${textShape_UI_SRCS}
+)
+
 kde4_add_unit_test(TestChangeTrackedDelete TESTNAME shapes-text-TestChangeTrackedDelete ${TestChangeTrackedDelete_test_SRCS})
 target_link_libraries(TestChangeTrackedDelete ${EXTRA_LIBS} komain kodftext ${QT_QTTEST_LIBRARY})
 

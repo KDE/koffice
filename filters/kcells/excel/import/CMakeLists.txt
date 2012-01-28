@@ -48,7 +48,7 @@ set(excelimport_PART_SRCS excelimporttoods.cc ImportUtils.cpp ODrawClient.cpp ${
 kde4_add_plugin(excelimport ${excelimport_PART_SRCS})
 
 
-target_link_libraries(excelimport msooxml komain mso kodf ${ZLIB_LIBRARIES})
+target_link_libraries(excelimport msooxml komain mso ${ZLIB_LIBRARIES})
 if(QCA2_FOUND)
    target_link_libraries(excelimport ${QCA2_LIBRARIES})
 endif(QCA2_FOUND)
@@ -57,7 +57,7 @@ endif(QCA2_FOUND)
 
 set(excelimport_SRCS ExcelImport.cpp ImportUtils.cpp ODrawClient.cpp ${sidewinder_SRCS})
 kde4_add_plugin(excelimporttodoc ${excelimport_SRCS})
-target_link_libraries(excelimporttodoc kcellsodf msooxml komain mso kodf ${ZLIB_LIBRARIES})
+target_link_libraries(excelimporttodoc kcellsodf msooxml komain mso ${ZLIB_LIBRARIES})
 if(QCA2_FOUND)
    target_link_libraries(excelimporttodoc ${QCA2_LIBRARIES})
 endif(QCA2_FOUND)

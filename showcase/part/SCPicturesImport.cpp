@@ -104,7 +104,7 @@ void SCPicturesImport::pictureImported(KJob *job)
             QPointF pos(pageSize.width() / 2- imageSize.width() / 2, pageSize.height() / 2 - imageSize.height() / 2);
             shape->setPosition(pos);
 
-            KoPAPageBase *page = m_doc->newPage(m_masterPage);
+            KoPAPage *page = m_doc->newPage(m_masterPage);
             KShapeLayer *layer = dynamic_cast<KShapeLayer *>(page->shapes().first());
             if (layer) {
                 layer->addShape(shape);

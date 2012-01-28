@@ -1,5 +1,6 @@
 /* This file is part of the KDE project
    Copyright (C) 2010 Thorsten Zachmann <zachmann@kde.org>
+   Copyright (C) 2011 Thomas Zander <zander@kde.org>
 
    This library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public
@@ -20,7 +21,7 @@
 #ifndef SCPAGESELECTSTRATEGYBASE_H
 #define SCPAGESELECTSTRATEGYBASE_H
 
-class KoPAPageBase;
+class KoPAPage;
 
 /**
  * Class for selecting the page used for painting the shapes
@@ -31,7 +32,7 @@ public:
     SCPageSelectStrategyBase();
     virtual ~SCPageSelectStrategyBase();
 
-    virtual const KoPAPageBase *page() const = 0;
+    virtual const KoPAPage *page() const = 0;
 };
 
 #endif /* SCPAGESELECTSTRATEGY_H */

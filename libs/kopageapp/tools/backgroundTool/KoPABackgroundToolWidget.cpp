@@ -46,7 +46,7 @@ KoPABackgroundToolWidget::KoPABackgroundToolWidget(KoPABackgroundTool *tool, QWi
     connect(widget.useMasterBackground, SIGNAL(stateChanged(int)), this, SLOT(useMasterBackground(int)));
     connect(widget.displayMasterShapes, SIGNAL(stateChanged(int)), this, SLOT(displayMasterShapes(int)));
 
-    connect(m_tool->view()->proxyObject, SIGNAL(activePageChanged()), this, SLOT(slotActivePageChanged()));
+    connect(m_tool->view(), SIGNAL(activePageChanged()), this, SLOT(slotActivePageChanged()));
 
     slotActivePageChanged();
 }
@@ -57,7 +57,7 @@ KoPABackgroundToolWidget::~KoPABackgroundToolWidget()
 
 void KoPABackgroundToolWidget::slotActivePageChanged()
 {
-    KoPAPageBase * page = m_tool->view()->activePage();
+    KoPAPage * page = m_tool->view()->activePage();
 
     KoPAPage * normalPage = dynamic_cast<KoPAPage *>(page);
 

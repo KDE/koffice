@@ -1,6 +1,7 @@
 /* This file is part of the KDE project
    Copyright (C) 2006-2010 Thorsten Zachmann <zachmann@kde.org>
   Copyright (C) 2010 Benjamin Port <port.benjamin@gmail.com>
+   Copyright (C) 2011 Thomas Zander <zander@kde.org>
 
    This library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public
@@ -155,15 +156,17 @@ bool SCDocument::loadOdfDocumentStyles(KoPALoadingContext &context)
     return true;
 }
 
-KoPAPage * SCDocument::newPage(KoPAMasterPage * masterPage)
+KoPAPage *SCDocument::newPage(KoPAMasterPage *masterPage)
 {
     Q_ASSERT(masterPage);
-    return new SCPage(masterPage, this);
+    SCPage *page = new SCPage(this);
+    page->setMasterPage(masterPage);
+    return page;
 }
 
 KoPAMasterPage * SCDocument::newMasterPage()
 {
-    return new SCMasterPage();
+    return new SCMasterPage(this);
 }
 
 KOdf::DocumentType SCDocument::documentType() const
@@ -206,9 +209,8 @@ void SCDocument::removeAnimation(SCShapeAnimation * animation, bool removeFromAp
     }
 }
 
-void SCDocument::postAddShape(KoPAPageBase * page, KShape * shape)
+void SCDocument::postAddShape(KShape * shape)
 {
-    Q_UNUSED(page);
     SCShapeApplicationData * applicationData = dynamic_cast<SCShapeApplicationData*>(shape->applicationData());
     if (applicationData) {
         // reinsert animations. this is needed on undo of a delete shape that had a animations
@@ -219,7 +221,7 @@ void SCDocument::postAddShape(KoPAPageBase * page, KShape * shape)
     }
 }
 
-void SCDocument::postRemoveShape(KoPAPageBase * page, KShape * shape)
+void SCDocument::postRemoveShape(KoPAPage * page, KShape * shape)
 {
     Q_UNUSED(page);
     SCShapeApplicationData * applicationData = dynamic_cast<SCShapeApplicationData*>(shape->applicationData());
@@ -232,7 +234,7 @@ void SCDocument::postRemoveShape(KoPAPageBase * page, KShape * shape)
     }
 }
 
-void SCDocument::pageRemoved(KoPAPageBase * page, QUndoCommand * parent)
+void SCDocument::pageRemoved(KoPAPage * page, QUndoCommand * parent)
 {
     // only normal pages can be part of a slide show
     if (dynamic_cast<SCPage *>(page)) {
@@ -281,7 +283,7 @@ void SCDocument::initEmpty()
     resetURL();
 }
 
-SCShapeAnimations &SCDocument::animationsByPage(KoPAPageBase * page)
+SCShapeAnimations &SCDocument::animationsByPage(KoPAPage * page)
 {
     SCPageData * pageData = dynamic_cast<SCPageData *>(page);
     Q_ASSERT(pageData);
@@ -319,7 +321,7 @@ void SCDocument::setPresenterViewEnabled(bool enabled)
     m_presenterViewEnabled = enabled;
 }
 
-QList<KoPAPageBase*> SCDocument::slideShow() const
+QList<KoPAPage*> SCDocument::slideShow() const
 {
     if (!m_activeCustomSlideShow.isEmpty() &&
             m_customSlideShows->names().contains(m_activeCustomSlideShow)) {

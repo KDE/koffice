@@ -118,7 +118,6 @@ public:
     };
 
     QList<KShape *> shapes;
-    QList<KShape *> additionalShapes; // these are shapes that are only handled for updates
     KShapeSelection *selection;
     KCanvasBase *canvas;
     KRTree<KShape *> tree;

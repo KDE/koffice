@@ -37,14 +37,14 @@
 
 #include <KoPACanvas.h>
 #include <KoPADocument.h>
-#include <KoPAPageBase.h>
+#include <KoPAPage.h>
 #include <KoPAMasterPage.h>
 #include <KoPAView.h>
 
 #include "SCNotes.h"
 #include "SCPage.h"
 
-SCViewModeNotes::SCViewModeNotes(KoPAViewBase *view, KoPACanvasBase *canvas)
+SCViewModeNotes::SCViewModeNotes(KoPAView *view, KoPACanvas *canvas)
     : KoPAViewMode(view, canvas)
 {
 }
@@ -53,7 +53,7 @@ SCViewModeNotes::~SCViewModeNotes()
 {
 }
 
-void SCViewModeNotes::paint(KoPACanvasBase* canvas, QPainter &painter, const QRectF &paintRect)
+void SCViewModeNotes::paint(KoPACanvas* canvas, QPainter &painter, const QRectF &paintRect)
 {
 #ifdef NDEBUG
     Q_UNUSED(canvas);
@@ -122,8 +122,8 @@ void SCViewModeNotes::keyPressEvent(QKeyEvent *event)
                 return;
         }
 
-        KoPAPageBase *activePage = m_view->activePage();
-        KoPAPageBase *newPage = m_view->kopaDocument()->pageByNavigation(activePage, pageNavigation);
+        KoPAPage *activePage = m_view->activePage();
+        KoPAPage *newPage = m_view->kopaDocument()->pageByNavigation(activePage, pageNavigation);
 
         if (newPage != activePage) {
             updateActivePage(newPage);
@@ -156,7 +156,7 @@ void SCViewModeNotes::deactivate()
     m_view->doUpdateActivePage(m_view->activePage());
 }
 
-void SCViewModeNotes::updateActivePage(KoPAPageBase *page)
+void SCViewModeNotes::updateActivePage(KoPAPage *page)
 {
     if (m_view->activePage() != page) {
         m_view->setActivePage(page);
@@ -169,7 +169,7 @@ void SCViewModeNotes::updateActivePage(KoPAPageBase *page)
     notes->updatePageThumbnail();
     KShapeLayer* layer = dynamic_cast<KShapeLayer*>(notes->shapes().last());
 
-    KOdfPageLayoutData &layout = notes->pageLayout();
+    KOdfPageLayoutData layout = notes->pageLayout();
     QSize size(layout.width, layout.height);
 
     KoPAView *view = dynamic_cast<KoPAView*>(m_view);
@@ -186,7 +186,6 @@ void SCViewModeNotes::updateActivePage(KoPAPageBase *page)
     m_canvas->repaint();
 
     m_canvas->shapeManager()->setShapes(layer->shapes());
-    m_canvas->masterShapeManager()->setShapes(QList<KShape*>());
 
     m_view->updatePageNavigationActions();
 
@@ -213,20 +212,3 @@ void SCViewModeNotes::addShape(KShape *shape)
         }
     }
 }
-
-void SCViewModeNotes::removeShape(KShape *shape)
-{
-    KShape *parent = shape;
-    SCNotes *notes = 0;
-    while (!notes && (parent = parent->parent())) {
-        notes = dynamic_cast<SCNotes *>(parent);
-    }
-
-    if (notes) {
-        SCPage *activePage = static_cast<SCPage *>(m_view->activePage());
-        if (notes == activePage->pageNotes()) {
-            m_view->kopaCanvas()->shapeManager()->remove(shape);
-        }
-    }
-}
-

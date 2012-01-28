@@ -193,6 +193,8 @@ KShape * KShapeRegistry::createShapeFromOdf(const KXmlElement & e, KShapeLoading
             shape = new KShape();
             shape->setName("ConnectionPlaceholder");
             shape->setPosition(connection->startPoint());
+            shape->setSelectable(false);
+            shape->setVisible(false);
             connection->setStartPoint(shape, 0);
         }
     } else {

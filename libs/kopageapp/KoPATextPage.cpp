@@ -19,7 +19,7 @@
 
 #include "KoPATextPage.h"
 
-KoPATextPage::KoPATextPage(int pageNumber, KoPAPageBase * page)
+KoPATextPage::KoPATextPage(int pageNumber, KoPAPage * page)
 : m_pageNumber(pageNumber)
 , m_page(page)
 {
@@ -35,7 +35,7 @@ int KoPATextPage::pageNumber(PageSelection select, int adjustment) const
     return m_pageNumber + adjustment;
 }
 
-KoPAPageBase *KoPATextPage::page() const
+KoPAPage *KoPATextPage::page() const
 {
     return m_page;
 }

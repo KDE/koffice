@@ -24,15 +24,15 @@
 
 class KoPAView;
 class KoPACanvas;
-class KoPAPageBase;
+class KoPAPage;
 
 class SCViewModeNotes : public KoPAViewMode
 {
 public:
-    SCViewModeNotes(KoPAViewBase *view, KoPACanvasBase *canvas);
+    SCViewModeNotes(KoPAView *view, KoPACanvas *canvas);
     ~SCViewModeNotes();
 
-    void paint(KoPACanvasBase* canvas, QPainter &painter, const QRectF &paintRect);
+    void paint(KoPACanvas* canvas, QPainter &painter, const QRectF &paintRect);
     void tabletEvent(QTabletEvent *event, const QPointF &point);
     void mousePressEvent(QMouseEvent *event, const QPointF &point);
     void mouseDoubleClickEvent(QMouseEvent *event, const QPointF &point);
@@ -45,10 +45,9 @@ public:
     void activate(KoPAViewMode *previousViewMode);
     void deactivate();
 
-    void updateActivePage(KoPAPageBase *page);
+    void updateActivePage(KoPAPage *page);
 
     void addShape(KShape *shape);
-    void removeShape(KShape *shape);
 };
 
 #endif // SCVIEWMODENOTES_H

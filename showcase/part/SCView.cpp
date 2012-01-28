@@ -82,8 +82,8 @@ SCView::SCView(SCDocument *document, QWidget *parent)
     actionCollection()->action("page_last")->setText(i18n("Last Slide"));
     actionCollection()->action("configure")->setText(i18n("Configure Showcase..."));
 
-    masterShapeManager()->setPaintingStrategy(new SCShapeManagerDisplayMasterStrategy(masterShapeManager(),
-                                                   new SCPageSelectStrategyActive(kopaCanvas())));
+//   masterShapeManager()->setPaintingStrategy(new SCShapeManagerDisplayMasterStrategy(masterShapeManager(),
+//                                                  new SCPageSelectStrategyActive(kopaCanvas())));
 
     KoPACanvas * canvas = dynamic_cast<KoPACanvas*>(kopaCanvas());
     if (canvas) {
@@ -98,7 +98,7 @@ SCView::~SCView()
     delete m_slidesSorterMode;
 }
 
-KViewConverter * SCView::viewConverter(KoPACanvasBase * canvas)
+KViewConverter * SCView::viewConverter(KoPACanvas * canvas)
 {
     Q_ASSERT(viewMode());
     return viewMode()->viewConverter(canvas);
@@ -264,7 +264,7 @@ void SCView::startPresentation()
 void SCView::startPresentationFromBeginning()
 {
     SCDocument * doc = dynamic_cast<SCDocument *>(kopaDocument());
-    QList<KoPAPageBase*> slideshow = doc->slideShow();
+    QList<KoPAPage*> slideshow = doc->slideShow();
     if (!slideshow.isEmpty()) {
         setActivePage(slideshow.first());
     }

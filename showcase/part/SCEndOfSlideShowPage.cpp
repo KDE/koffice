@@ -1,5 +1,6 @@
 /* This file is part of the KDE project
  * Copyright (C) 2008 Thorsten Zachmann <zachmann@kde.org>
+   Copyright (C) 2011 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -34,24 +35,22 @@
 #include <kdebug.h>
 
 SCEndOfSlideShowPage::SCEndOfSlideShowPage(const QRectF &screenRect, SCDocument * document)
-: SCPage(new SCMasterPage(), document)
+    : SCPage(document)
 {
     qreal ratio = screenRect.width() / screenRect.height();
-    KOdfPageLayoutData pageLayout;
-    pageLayout.height = 510;
+    m_pageLayout.height = 510;
 
-    pageLayout.width = 510 * ratio;
-    pageLayout.leftMargin = 0;
-    pageLayout.rightMargin = 0;
-    pageLayout.topMargin = 0;
-    pageLayout.bottomMargin = 0;
-    pageLayout.orientation = screenRect.width() > screenRect.height() ? KOdfPageFormat::Landscape : KOdfPageFormat::Portrait;
-    pageLayout.bindingSide = 0;
-    pageLayout.pageEdge = 0;
-    pageLayout.format = KOdfPageFormat::IsoA3Size; 
+    m_pageLayout.width = 510 * ratio;
+    m_pageLayout.leftMargin = 0;
+    m_pageLayout.rightMargin = 0;
+    m_pageLayout.topMargin = 0;
+    m_pageLayout.bottomMargin = 0;
+    m_pageLayout.orientation = screenRect.width() > screenRect.height() ? KOdfPageFormat::Landscape : KOdfPageFormat::Portrait;
+    m_pageLayout.bindingSide = 0;
+    m_pageLayout.pageEdge = 0;
+    m_pageLayout.format = KOdfPageFormat::IsoA3Size;
 
-    masterPage()->setPageLayout(pageLayout);
-    masterPage()->setBackground(new KColorBackground(Qt::black));
+    setBackground(new KColorBackground(Qt::black));
 
     KShapeLayer* layer = new KShapeLayer;
     addShape(layer);
@@ -67,13 +66,7 @@ SCEndOfSlideShowPage::SCEndOfSlideShowPage(const QRectF &screenRect, SCDocument 
         cursor.mergeCharFormat(format);
         cursor.insertText(i18n("End of presentation. Click to exit."));
         textShape->setPosition(QPointF(10.0, 10.0));
-        textShape->setSize(QSizeF(pageLayout.width - 20.0, pageLayout.height - 20.0));
+        textShape->setSize(QSizeF(m_pageLayout.width - 20.0, m_pageLayout.height - 20.0));
         layer->addShape(textShape);
     }
 }
-
-SCEndOfSlideShowPage::~SCEndOfSlideShowPage()
-{
-    delete masterPage();
-}
-

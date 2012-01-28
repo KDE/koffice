@@ -25,7 +25,7 @@
 #include "SCPageApplicationData.h"
 #include "pageeffects/SCPageEffect.h"
 
-SCPageEffectSetCommand::SCPageEffectSetCommand( KoPAPageBase * page, SCPageEffect * pageEffect )
+SCPageEffectSetCommand::SCPageEffectSetCommand( KoPAPage * page, SCPageEffect * pageEffect )
 : m_page( page )
 , m_newPageEffect( pageEffect )
 , m_oldPageEffect( SCPage::pageData( m_page )->pageEffect() )

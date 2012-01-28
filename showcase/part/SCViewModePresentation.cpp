@@ -41,7 +41,7 @@
 #include <KoPAView.h>
 #include <KoZoomHandler.h>
 
-SCViewModePresentation::SCViewModePresentation(KoPAViewBase * view, KoPACanvasBase * canvas)
+SCViewModePresentation::SCViewModePresentation(KoPAView * view, KoPACanvas * canvas)
 : KoPAViewMode(view, canvas)
 , m_savedParent(0)
 , m_tool(new SCPresentationTool(*this))
@@ -62,7 +62,7 @@ SCViewModePresentation::~SCViewModePresentation()
     delete m_tool;
 }
 
-KViewConverter * SCViewModePresentation::viewConverter(KoPACanvasBase * canvas)
+KViewConverter * SCViewModePresentation::viewConverter(KoPACanvas * canvas)
 {
     if (m_baseCanvas && m_animationDirector && m_baseCanvas == canvas) {
         return m_animationDirector->viewConverter();
@@ -75,7 +75,7 @@ KViewConverter * SCViewModePresentation::viewConverter(KoPACanvasBase * canvas)
     }
 }
 
-void SCViewModePresentation::paint(KoPACanvasBase* canvas, QPainter &painter, const QRectF &paintRect)
+void SCViewModePresentation::paint(KoPACanvas* canvas, QPainter &painter, const QRectF &paintRect)
 {
     if (m_baseCanvas && m_baseCanvas == canvas && m_animationDirector) {
         m_animationDirector->paint(painter, paintRect);
@@ -157,7 +157,7 @@ void SCViewModePresentation::activate(KoPAViewMode * previousViewMode)
 
     // add end off slideshow page
     m_endOfSlideShowPage = new SCEndOfSlideShowPage(desktop.screenGeometry(presentationscreen), document);
-    QList<KoPAPageBase*> pages = document->slideShow();
+    QList<KoPAPage*> pages = document->slideShow();
     pages.append(m_endOfSlideShowPage);
 
     QRect presentationRect = desktop.screenGeometry(presentationscreen);
@@ -217,7 +217,7 @@ void SCViewModePresentation::deactivate()
     emit deactivated();
 
     m_animationDirector->deactivate();
-    KoPAPageBase * page = m_view->activePage();
+    KoPAPage * page = m_view->activePage();
     if (m_endOfSlideShowPage) {
         if (page == m_endOfSlideShowPage) {
             page = m_view->kopaDocument()->pages().last();
@@ -254,7 +254,7 @@ void SCViewModePresentation::deactivate()
     }
 }
 
-void SCViewModePresentation::updateActivePage(KoPAPageBase *page)
+void SCViewModePresentation::updateActivePage(KoPAPage *page)
 {
     m_view->setActivePage(page);
     if (m_presenterViewWidget) {

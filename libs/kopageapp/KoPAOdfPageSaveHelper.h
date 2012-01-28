@@ -27,7 +27,7 @@
 #include "kopageapp_export.h"
 
 class KoPADocument;
-class KoPAPageBase;
+class KoPAPage;
 
 class KOPAGEAPP_TEST_EXPORT KoPAOdfPageSaveHelper : public KDragOdfSaveHelper
 {
@@ -36,7 +36,7 @@ public:
      * Use only one type of pages e.g. only master pages or only normal pages
      * if you mix the master pages will only be saved if they are needed for a normal page.
      */
-    KoPAOdfPageSaveHelper(KoPADocument * doc, QList<KoPAPageBase *> pages);
+    KoPAOdfPageSaveHelper(KoPADocument * doc, QList<KoPAPage *> pages);
     virtual ~KoPAOdfPageSaveHelper();
 
     /// reimplemented
@@ -48,8 +48,8 @@ public:
 private:
     KoPADocument * m_doc;
     KShapeSavingContext  *m_context;
-    QList<KoPAPageBase *> m_pages;
-    QList<KoPAPageBase *> m_masterPages;
+    QList<KoPAPage *> m_pages;
+    QList<KoPAPage *> m_masterPages;
 };
 
 #endif /* KOPAODFPAGESAVEHELPER_H */

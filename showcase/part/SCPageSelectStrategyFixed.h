@@ -1,5 +1,6 @@
 /* This file is part of the KDE project
    Copyright (C) 2010 Thorsten Zachmann <zachmann@kde.org>
+   Copyright (C) 2011 Thomas Zander <zander@kde.org>
 
    This library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public
@@ -28,13 +29,13 @@
 class SCPageSelectStrategyFixed : public SCPageSelectStrategyBase
 {
 public:
-    SCPageSelectStrategyFixed(const KoPAPageBase *page);
+    SCPageSelectStrategyFixed(const KoPAPage *page);
     virtual ~SCPageSelectStrategyFixed();
 
-    virtual const KoPAPageBase *page() const;
+    virtual const KoPAPage *page() const;
 
 private:
-    const KoPAPageBase *m_page;
+    const KoPAPage *m_page;
 };
 
 #endif /* SCPAGESELECTSTRATEGYFIXED_H */

@@ -102,7 +102,6 @@ enum DocumentResource {
     ChangeTracker = KDocumentResource::KOdfTextStart + 1, ///< KChangeTracker
     InlineTextObjectManager, ///< The KOdfText inline-text-object manager. KInlineTextObjectManager
     StyleManager,           ///< The KStyleManager
-    PageProvider            ///< The KPageProvider
 };
 
 enum KoTextFrameProperty {

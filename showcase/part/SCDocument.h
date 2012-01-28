@@ -98,7 +98,7 @@ public:
      *
      * @return the list of pages for slide show
      */
-    QList<KoPAPageBase*> slideShow() const;
+    QList<KoPAPage*> slideShow() const;
 
     /**
      * Get the name of currently active custom slide show, or an empty string
@@ -179,12 +179,12 @@ protected:
     virtual bool saveOdfEpilogue(KoPASavingContext &context);
 
     /// reimplemented
-    virtual void postAddShape(KoPAPageBase * page, KShape * shape);
+    virtual void postAddShape(KShape *shape);
     /// reimplemented
-    virtual void postRemoveShape(KoPAPageBase * page, KShape * shape);
+    virtual void postRemoveShape(KoPAPage * page, KShape * shape);
 
     /// reimplemented
-    virtual void pageRemoved(KoPAPageBase * page, QUndoCommand * parent);
+    virtual void pageRemoved(KoPAPage * page, QUndoCommand * parent);
 
     /// load configuration specific to Showcase
     void loadKPrConfig();
@@ -195,7 +195,7 @@ protected:
     /**
      * @brief get the animations of the page
      */
-    SCShapeAnimations &animationsByPage(KoPAPageBase * page);
+    SCShapeAnimations &animationsByPage(KoPAPage * page);
 
     SCCustomSlideShows *m_customSlideShows;
 

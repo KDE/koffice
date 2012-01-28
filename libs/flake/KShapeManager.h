@@ -96,27 +96,15 @@ public:
      * @param shape the shape to add
      * @param repaint if true it will trigger a repaint of the shape
      */
-    void addShape(KShape *shape, Repaint repaint = PaintShapeOnAdd);
-
-    /**
-     * Add an additional shape to the manager.
-     *
-     * For additional shapes only updates are handled
-     */
-    void addAdditional(KShape *shape);
+    void add(KShape *shape, Repaint repaint = PaintShapeOnAdd);
+    /// \internal.  Just here for backwards compat
+    void addShape(KShape *shape, Repaint repaint = PaintShapeOnAdd) { add(shape, repaint); } // TODO remove
 
     /**
      * Remove a KShape from this manager
      * @param shape the shape to remove
      */
     void remove(KShape *shape);
-
-    /**
-     * Remove an additional shape
-     *
-     * For additional shapes only updates are handled
-     */
-    void removeAdditional(KShape *shape);
 
     /// return the selection shapes for this shapeManager
     KShapeSelection *selection() const;

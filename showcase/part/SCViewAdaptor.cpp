@@ -89,7 +89,7 @@ QString SCViewAdaptor::pageName(int page) const
 {
     SCDocument *doc = m_view->scDocument();
 
-    QList<KoPAPageBase *> slideShow = doc->slideShow();
+    QList<KoPAPage *> slideShow = doc->slideShow();
     if (page >= 0 && page < slideShow.size()) {
         return slideShow[page]->name();
     }
@@ -100,7 +100,7 @@ QString SCViewAdaptor::pageNotes(int page, const QString &format) const
 {
     SCDocument *doc = m_view->scDocument();
 
-    QList<KoPAPageBase *> slideShow = doc->slideShow();
+    QList<KoPAPage *> slideShow = doc->slideShow();
     if (page >= 0 && page < slideShow.size()) {
         SCPage *prPage = dynamic_cast<SCPage *>(slideShow[page]);
         Q_ASSERT(0 != prPage);
@@ -127,9 +127,9 @@ bool SCViewAdaptor::exportPageThumbnail(int page, int width, int height,
 {
     SCDocument *doc = m_view->scDocument();
 
-    QList<KoPAPageBase *> slideShow = doc->slideShow();
+    QList<KoPAPage *> slideShow = doc->slideShow();
     if (page >= 0 && page < slideShow.size()) {
-        KoPAPageBase *pageObject = slideShow[page];
+        KoPAPage *pageObject = slideShow[page];
         Q_ASSERT(pageObject);
         return m_view->exportPageThumbnail(pageObject, KUrl(filename),
                                             QSize(qMax(0, width), qMax(0, height)),

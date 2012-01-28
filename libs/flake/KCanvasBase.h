@@ -67,12 +67,6 @@ public:
     virtual ~KCanvasBase();
 
 public:
-
-    /**
-     * @return true if opengl can be used directly on the canvas
-     */
-    virtual bool canvasIsOpenGL() { return false; }
-
     /**
      * retrieve the grid size setting.
      * The grid spacing will be provided in pt.

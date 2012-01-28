@@ -22,7 +22,7 @@
 
 #include <QtGui/QWidget>
 
-class KoPAPageBase;
+class KoPAPage;
 
 /**
  * SCPresenterViewBaseInterface
@@ -34,20 +34,20 @@ class SCPresenterViewBaseInterface : public QWidget
 {
     Q_OBJECT
 public:
-    explicit SCPresenterViewBaseInterface(const QList<KoPAPageBase *> &pages, QWidget *parent = 0);
+    explicit SCPresenterViewBaseInterface(const QList<KoPAPage *> &pages, QWidget *parent = 0);
 
 public slots:
     /// set the active page to @p page
-    void setActivePage(KoPAPageBase *page);
+    void setActivePage(KoPAPage *page);
 
     /// set the active page number to @p pageIndex
     virtual void setActivePage(int pageIndex);
 
 signals:
-    void activeSlideChanged(KoPAPageBase *page);
+    void activeSlideChanged(KoPAPage *page);
 
 protected:
-    QList<KoPAPageBase *> m_pages;
+    QList<KoPAPage *> m_pages;
     int m_activePage;
 };
 

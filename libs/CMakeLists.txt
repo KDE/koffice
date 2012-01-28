@@ -1,5 +1,4 @@
 add_subdirectory( widgets )
-add_subdirectory( odf )
 add_subdirectory( kotext )
 add_subdirectory( flake )
 add_subdirectory( pigment )

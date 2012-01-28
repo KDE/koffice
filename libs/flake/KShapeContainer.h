@@ -212,9 +212,9 @@ protected:
     /// constructor
     KShapeContainer(KShapeContainerPrivate &);
 
-private:
     void shapeChanged(ChangeType type);
 
+private:
     Q_DECLARE_PRIVATE(KShapeContainer)
 };
 

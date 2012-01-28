@@ -119,7 +119,7 @@ void SCClickActionDocker::setCanvas(KCanvasBase *canvas)
     selectionChanged();
 }
 
-void SCClickActionDocker::setView(KoPAViewBase  *view)
+void SCClickActionDocker::setView(KoPAView  *view)
 {
     m_view = view;
     if (m_view->kopaDocument()->resourceManager()->hasResource(Showcase::SoundCollection)) {

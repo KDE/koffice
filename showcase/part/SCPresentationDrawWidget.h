@@ -40,7 +40,7 @@ class SCPresentationDrawWidget : public SCPresentationToolEventForwarder
     Q_OBJECT
 
 public :
-    SCPresentationDrawWidget(KoPACanvasBase * canvas);
+    SCPresentationDrawWidget(KoPACanvas * canvas);
     ~SCPresentationDrawWidget();
 
     /** Draw on the Presentation */

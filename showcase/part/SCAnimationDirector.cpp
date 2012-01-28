@@ -49,11 +49,11 @@
 #include <KViewConverter.h>
 #include <KoPAViewMode.h>
 #include <KoPACanvas.h>
-#include <KoPAPageBase.h>
+#include <KoPAPage.h>
 #include <KoPAView.h>
 #include <KoPAUtil.h>
 
-SCAnimationDirector::SCAnimationDirector(KoPAView * view, KoPACanvas * canvas, const QList<KoPAPageBase*> &pages, KoPAPageBase* currentPage)
+SCAnimationDirector::SCAnimationDirector(KoPAView * view, KoPACanvas * canvas, const QList<KoPAPage*> &pages, KoPAPage* currentPage)
 : m_view(view)
 , m_canvas(canvas)
 , m_pages(pages)
@@ -82,8 +82,8 @@ SCAnimationDirector::SCAnimationDirector(KoPAView * view, KoPACanvas * canvas, c
     // set the animation strategy in the KoShapeManagers
     m_canvas->shapeManager()->setPaintingStrategy(new SCShapeManagerAnimationStrategy(m_canvas->shapeManager(), m_animationCache,
                                                        new SCPageSelectStrategyActive(m_view->kopaCanvas())));
-    m_canvas->masterShapeManager()->setPaintingStrategy(new SCShapeManagerAnimationStrategy(m_canvas->masterShapeManager(), m_animationCache,
-                                                             new SCPageSelectStrategyActive(m_view->kopaCanvas())));
+//   m_canvas->masterShapeManager()->setPaintingStrategy(new SCShapeManagerAnimationStrategy(m_canvas->masterShapeManager(), m_animationCache,
+//                                                            new SCPageSelectStrategyActive(m_view->kopaCanvas())));
 
     if (hasAnimation()) {
         startTimeLine(m_animations.at(m_stepIndex)->totalDuration());
@@ -97,8 +97,8 @@ SCAnimationDirector::~SCAnimationDirector()
     delete m_animationCache;
     //set the KShapeManagerPaintingStrategy in the KoShapeManagers
     m_canvas->shapeManager()->setPaintingStrategy(new KShapeManagerPaintingStrategy(m_canvas->shapeManager()));
-    m_canvas->masterShapeManager()->setPaintingStrategy(new SCShapeManagerDisplayMasterStrategy(m_canvas->masterShapeManager(),
-                                                             new SCPageSelectStrategyActive(m_view->kopaCanvas())));
+//   m_canvas->masterShapeManager()->setPaintingStrategy(new SCShapeManagerDisplayMasterStrategy(m_canvas->masterShapeManager(),
+//                                                            new SCPageSelectStrategyActive(m_view->kopaCanvas())));
 }
 
 
@@ -229,7 +229,7 @@ void SCAnimationDirector::navigateToPage(int index)
     }
 
     m_pageIndex = index;
-    KoPAPageBase *page = m_pages[m_pageIndex];
+    KoPAPage *page = m_pages[m_pageIndex];
 
     m_stepIndex = 0;
 
@@ -244,7 +244,7 @@ void SCAnimationDirector::navigateToPage(int index)
     }
 }
 
-void SCAnimationDirector::updateActivePage(KoPAPageBase * page)
+void SCAnimationDirector::updateActivePage(KoPAPage * page)
 {
     deactivate();
 
@@ -260,6 +260,7 @@ void SCAnimationDirector::updateActivePage(KoPAPageBase * page)
             m_canvas->shapeManager()->selection()->setActiveLayer(layer);
         }
 
+/*
         // if the page is not a master page itself set shapes of the master page
         KoPAPage * paPage = dynamic_cast<KoPAPage *>(page);
 
@@ -272,6 +273,7 @@ void SCAnimationDirector::updateActivePage(KoPAPageBase * page)
             KShapeLayer* layer = dynamic_cast<KShapeLayer*>(masterShapes.last());
             m_canvas->masterShapeManager()->selection()->setActiveLayer(layer);
         }
+*/
     }
 
     SCPage * kprPage = dynamic_cast<SCPage *>(page);
@@ -367,8 +369,9 @@ void SCAnimationDirector::updateZoom(const QSize &size)
 void SCAnimationDirector::paintStep(QPainter &painter)
 {
     painter.translate(m_pageRect.topLeft());
-    m_view->activePage()->paintBackground(painter, m_zoomHandler);
+    m_view->activePage()->paintComponent(painter, m_zoomHandler);
 
+/*
     if (m_view->activePage()->displayMasterShapes()) {
         foreach (KShape *shape, m_canvas->masterShapeManager()->shapes()) {
             shape->waitUntilReady(m_zoomHandler, false);
@@ -376,6 +379,7 @@ void SCAnimationDirector::paintStep(QPainter &painter)
 
         m_canvas->masterShapeManager()->paint(painter, m_zoomHandler, true);
     }
+*/
     foreach (KShape *shape, m_canvas->shapeManager()->shapes()) {
         shape->waitUntilReady(m_zoomHandler, false);
     }

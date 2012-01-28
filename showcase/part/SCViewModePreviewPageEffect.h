@@ -36,10 +36,10 @@ class SHOWCASE_EXPORT SCViewModePreviewPageEffect : public KoPAViewMode
 
     Q_OBJECT
 public:
-    SCViewModePreviewPageEffect(KoPAViewBase * view, KoPACanvasBase * m_canvas);
+    SCViewModePreviewPageEffect(KoPAView * view, KoPACanvas * m_canvas);
     ~SCViewModePreviewPageEffect();
 
-    void paint(KoPACanvasBase* canvas, QPainter &painter, const QRectF &paintRect);
+    void paint(KoPACanvas* canvas, QPainter &painter, const QRectF &paintRect);
     void tabletEvent(QTabletEvent *event, const QPointF &point);
     void mousePressEvent(QMouseEvent *event, const QPointF &point);
     void mouseDoubleClickEvent(QMouseEvent *event, const QPointF &point);
@@ -53,7 +53,7 @@ public:
     void deactivate();
 
     /// reimplemented
-    virtual void updateActivePage(KoPAPageBase *page);
+    virtual void updateActivePage(KoPAPage *page);
 
 
     /**

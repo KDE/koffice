@@ -1,6 +1,7 @@
 /* This file is part of the KDE project
  * Copyright (C) 2007-2009 Thorsten Zachmann <zachmann@kde.org>
  * Copyright (C) 2010 Benjamin Port <port.benjamin@gmail.com>
+   Copyright (C) 2011 Thomas Zander <zander@kde.org>
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
  * License as published by the Free Software Foundation; either
@@ -59,9 +60,9 @@ public:
 
 };
 
-SCPage::SCPage(KoPAMasterPage * masterPage, SCDocument * document)
-: KoPAPage(masterPage)
-, d(new Private(this, document))
+SCPage::SCPage(SCDocument *document)
+    : KoPAPage(document),
+    d(new Private(this, document))
 {
     setApplicationData(new SCPageApplicationData());
     placeholders().init(0, shapes());
@@ -72,7 +73,7 @@ SCPage::~SCPage()
     delete d;
 }
 
-SCPageApplicationData * SCPage::pageData(KoPAPageBase * page)
+SCPageApplicationData * SCPage::pageData(KoPAPage * page)
 {
     SCPageApplicationData * data = dynamic_cast<SCPageApplicationData *>(page->applicationData());
     Q_ASSERT(data);
@@ -113,7 +114,7 @@ SCPageLayout * SCPage::layout() const
 
 bool SCPage::loadOdf(const KXmlElement &element, KShapeLoadingContext &context)
 {
-    if (!KoPAPageBase::loadOdf(element, context)) {
+    if (!KoPAPage::loadOdf(element, context)) {
         return false;
     }
     SCPageApplicationData * data = dynamic_cast<SCPageApplicationData *>(applicationData());
@@ -197,7 +198,7 @@ void SCPage::saveOdfPageContent(KoPASavingContext &paContext) const
             break;
         }
     }
-    KoPAPageBase::saveOdfPageContent(paContext);
+    KoPAPage::saveOdfPageContent(paContext);
 }
 
 void SCPage::saveOdfPageStyleData(KOdfGenericStyle &style, KoPASavingContext &paContext) const

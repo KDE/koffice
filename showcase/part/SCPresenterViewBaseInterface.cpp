@@ -19,13 +19,13 @@
 
 #include "SCPresenterViewBaseInterface.h"
 
-SCPresenterViewBaseInterface::SCPresenterViewBaseInterface(const QList<KoPAPageBase *> &pages, QWidget *parent)
+SCPresenterViewBaseInterface::SCPresenterViewBaseInterface(const QList<KoPAPage *> &pages, QWidget *parent)
     : QWidget(parent)
     , m_pages(pages)
 {
 }
 
-void SCPresenterViewBaseInterface::setActivePage(KoPAPageBase *page)
+void SCPresenterViewBaseInterface::setActivePage(KoPAPage *page)
 {
     setActivePage(m_pages.indexOf(page));
 }

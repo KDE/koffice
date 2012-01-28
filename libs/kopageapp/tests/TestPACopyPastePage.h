@@ -24,16 +24,16 @@
 
 class QMimeData;
 class MockDocument;
-class KoPAPageBase;
+class KoPAPage;
 
 class TestPACopyPastePage : public QObject
 {
     Q_OBJECT
 private:
-    void copyAndPaste(MockDocument * doc, QList<KoPAPageBase *> &pages, KoPAPageBase * after);
-    QMimeData * copy(MockDocument * doc, QList<KoPAPageBase *> &pages);
-    void paste(MockDocument * doc, QMimeData * data, KoPAPageBase * after);
-    void addShape(KoPAPageBase * page);
+    void copyAndPaste(MockDocument * doc, QList<KoPAPage *> &pages, KoPAPage * after);
+    QMimeData * copy(MockDocument * doc, QList<KoPAPage *> &pages);
+    void paste(MockDocument * doc, QMimeData * data, KoPAPage * after);
+    void addShape(KoPAPage * page);
 
     QPointF m_pos;
 private slots:

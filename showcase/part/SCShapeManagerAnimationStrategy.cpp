@@ -23,7 +23,7 @@
 #include <QPainter>
 #include <KShape.h>
 #include <KShapeManager.h>
-#include <KoPAPageBase.h>
+#include <KoPAPage.h>
 
 #include "SCShapeAnimations.h"
 #include "SCPlaceholderShape.h"
