@@ -56,7 +56,8 @@ void KWFrameSet::removeFrame(KWFrame *frame, KShape *shape)
     if (!frame->isCopy()) {
         QList<KWFrame*>::Iterator iter = m_frames.end();
         // iter over all copy frames, which are all at the end.
-        for (--iter; iter != m_frames.begin(); --iter) {
+        while (iter != m_frames.begin()) {
+            --iter;
             KWCopyShape *copy = dynamic_cast<KWCopyShape*>((*iter)->shape());
             if (copy == 0)
                 break;
