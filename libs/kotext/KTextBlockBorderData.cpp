@@ -100,7 +100,6 @@ void KTextBlockBorderData::setParagraphBottom(qreal bottom)
 
 void KTextBlockBorderData::paint(QPainter &painter) const
 {
-    QRectF bounds = d->bounds;
     QRectF innerBounds = d->bounds;
     if (d->edges[Top].outerPen.widthF() > 0) {
         QPen pen = d->edges[Top].outerPen;

@@ -752,7 +752,6 @@ void KRTree<T>::Node::remove(int index)
 template <typename T>
 void KRTree<T>::Node::updateBoundingBox()
 {
-    QRectF oldBB = m_boundingBox;
     m_boundingBox = QRectF();
     for (int i = 0; i < m_counter; ++i) {
         m_boundingBox = m_boundingBox.unite(m_childBoundingBox[i]);
