@@ -297,12 +297,9 @@ void KPathShapePrivate::debugPath() const
 
 void KPathShape::paintPoints(QPainter &painter, const KViewConverter &converter, int handleRadius)
 {
-    Q_D(KPathShape);
     applyConversion(painter, converter);
 
     KoSubpathList::const_iterator pathIt(m_subpaths.constBegin());
-
-    QRectF handle = converter.viewToDocument(d->handleRect(QPoint(0, 0), handleRadius));
 
     for (; pathIt != m_subpaths.constEnd(); ++pathIt) {
         KoSubpath::const_iterator it((*pathIt)->constBegin());
