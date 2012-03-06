@@ -53,7 +53,7 @@ XSLTImportDia::XSLTImportDia(KOdfStore* out, const QByteArray &format, QWidget* 
     int i = 0;
     _out = out;
     _format = format;
-    setCaption(i18n("Import XSLT Configuration"));
+    setWindowTitle(i18n("Import XSLT Configuration"));
 
     /* Recent files */
     _config = new KConfig("xsltdialog");
@@ -84,7 +84,7 @@ XSLTImportDia::XSLTImportDia(KOdfStore* out, const QByteArray &format, QWidget* 
     QString file;
 
     for (QStringList::Iterator it = commonFilesList.begin(); it != commonFilesList.end(); ++it) {
-        tempList = QStringList::split("/", (*it));
+        tempList = it->split("/");
         file = tempList.last();
         tempList.pop_back();
         name = tempList.last();
