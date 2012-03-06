@@ -75,7 +75,7 @@ Headers::Headers( U32 ccpHdd, U32 fcPlcfhdd, U32 lcbPlcfhdd, OLEStreamReader* ta
 
     uint n = lcbPlcfhdd / sizeof( U32 ) - 2; //num. of stories in PlcfHdd
     uint m = (n - 6) / 6; //num. of sections based on the num. of header/footer stories
-    QList<U32> sct[m];
+    QList<U32>* sct = new QList<U32>[m];
 
     //Validate CPs!
     int l = 0;
@@ -95,6 +95,8 @@ Headers::Headers( U32 ccpHdd, U32 fcPlcfhdd, U32 lcbPlcfhdd, OLEStreamReader* ta
             m_headers.append(sct[k]);
 	}
     }
+
+    delete[] sct;
 
     //append second-to-last and last CP
     m_headers.append(tmp[l]);
