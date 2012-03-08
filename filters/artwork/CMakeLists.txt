@@ -20,7 +20,7 @@ include_directories(
 macro_optional_find_package(WPD)
 macro_optional_find_package(WPG)
 macro_log_feature(LIBWPG_FOUND "WPG" "WordPerfect Graphics Library" "http://libwpg.sourceforge.net/" FALSE "" "Required by the Artwork WPG import filter")
-macro_log_feature(LIBWPG_STREAM_INCLUDE_DIR "WPG" "WordPerfect stream Library" "http://libwps.sourceforge.net/" FALSE "" "Required by the Artwork WPG import filter")
+macro_log_feature(LIBWPG_STREAM_INCLUDE_DIR "WPS" "WordPerfect Graphics Stream Library" "http://libwps.sourceforge.net/" FALSE "" "Required by the Artwork WPG import filter")
 macro_optional_find_package(Poppler)
 # The pdf-importer needs the not-officially-supported XPDF Headers
 # Installing these is off by default in poppler sources, so lets make
