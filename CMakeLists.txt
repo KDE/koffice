@@ -134,12 +134,6 @@ endif(OPENGL_FOUND)
 macro_log_feature(HAVE_OPENGL "OpenGL" "OpenGL support" "" FALSE "" "Optionally required by flake")
 
 ##
-## Test for create ressources
-##
-macro_optional_find_package(CreateResources)
-macro_log_feature(CREATERESOURCES_FOUND "Create Resources" "Create Resources (brushes, palettes etc.)" "http://create.freedesktop.org" FALSE "" "Recommended at runtime for KOffice for optional extra resources.")
-
-##
 ## Test for kdepimlibs
 ##
 macro_optional_find_package(KdepimLibs)
