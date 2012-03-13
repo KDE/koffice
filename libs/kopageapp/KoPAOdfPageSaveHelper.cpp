@@ -32,11 +32,12 @@ KoPAOdfPageSaveHelper::KoPAOdfPageSaveHelper(KoPADocument * doc, QList<KoPAPage 
     m_context(0)
 {
     foreach(KoPAPage * page, pages) {
-        if (dynamic_cast<KoPAPage *>(page)) {
+	KoPAMasterPage* mp = dynamic_cast<KoPAMasterPage *>(page);
+        if (!mp) {
             m_pages.append(page);
         }
         else {
-            m_masterPages.append(page);
+            m_masterPages.append(mp);
         }
     }
 
