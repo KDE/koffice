@@ -120,7 +120,7 @@ void TestLogicFunctions::testIF()
     CHECK_EVAL("IF(FALSE();7;)", KCValue(0));
     // Assuming A1 is an empty cell, using it in the following
     // context should be different from passing no argument at all
-    CHECK_EVAL("IF(FALSE();7;A1)", KCValue(KCValue::Empty));
+    CHECK_EVAL("IF(FALSE();7;A1)", (KCValue(KCValue::Empty)) );
     CHECK_EVAL("IF(TRUE();4;1/0)", KCValue(4));
     CHECK_EVAL("IF(FALSE();1/0;5)", KCValue(5));
 }
