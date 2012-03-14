@@ -308,7 +308,7 @@ void KWTextDocumentLayout::layout()
 
                     QRectF newLine = limit(rect);
                     if (newLine.width() <= 0 || line.textLength() == 0
-                            || line.naturalTextRect().left() > newLine.right()) {
+                            || line.cursorToX(line.textStart()+1) > newLine.right()) {
                         const int Move = 10;
                         movedDown += Move;
                         if (movedDown > m_state->shape->size().height() * 1.3) {
