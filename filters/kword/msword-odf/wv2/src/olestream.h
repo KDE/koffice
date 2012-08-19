@@ -23,7 +23,7 @@
 #include "global.h"  // U8,... typedefs
 #include <stack>
 
-#include <glib/giochannel.h> // GSeekType
+#include <glib.h> // GSeekType
 #include "wv2_export.h"
 
 namespace wvWare {
