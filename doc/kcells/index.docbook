@@ -16,9 +16,9 @@
   <!ENTITY faq SYSTEM "faq.docbook">
 ]>
 
-<book lang="&language;">
+<book id="kcells" lang="&language;">
 
-<bookinfo>
+<book id="kcells"info>
 <title>The &kcells; Handbook</title>
 
 <!-- MAINTAINED BY raphael.langerhorst@kdemail.net -->
