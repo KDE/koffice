@@ -1,7 +1,6 @@
 [Desktop Entry]
 Name=Grayscale Color Model
 Name[bg]=Цветови модел със степени на сивото
-Name[bs]=Model sivo skalirane boje
 Name[ca]=Model de color d'escala de grisos
 Name[ca@valencia]=Model de color d'escala de grisos
 Name[cs]=Model barev odstínů šedi
@@ -52,7 +51,6 @@ Name[zh_CN]=灰度色彩模型
 Name[zh_TW]=灰階色彩模型
 Comment=Color model for 8-bit grayscale images
 Comment[bg]=Цветови модел за 8 битови сиви изображения
-Comment[bs]=Model boje za 8-bitne sivo skaliranje slike
 Comment[ca]=Model de color d'escala de grisos de 8 bits
 Comment[ca@valencia]=Model de color d'escala de grisos de 8 bits
 Comment[cs]=Model barev pro obrázky v odstínech šedi s 8 bity na kanál
