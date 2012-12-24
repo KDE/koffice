@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=KOffice Spreadsheet Component
 Name[bg]=Компонент за електронна таблица за KOffice
+Name[bs]=KOffice komponente unakrsne tabele
 Name[ca]=Component de full de càlcul del KOffice
 Name[ca@valencia]=Component de full de càlcul del KOffice
 Name[cs]=Modul tabulkového procesoru Koffice
@@ -59,6 +60,7 @@ X-KDE-NativeMimeType=application/vnd.oasis.opendocument.spreadsheet
 X-KDE-ExtraNativeMimeTypes=application/vnd.oasis.opendocument.spreadsheet-template,application/x-kcells
 GenericName=Spreadsheet
 GenericName[bg]=Електронни таблици
+GenericName[bs]=Tabela
 GenericName[ca]=Full de càlcul
 GenericName[ca@valencia]=Full de càlcul
 GenericName[cs]=Sešit

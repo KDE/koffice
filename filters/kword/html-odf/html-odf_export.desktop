@@ -2,6 +2,7 @@
 Type=Service
 Name=KWord HTML-ODF Export Filter
 Name[bg]=Филтър за изнасяне от KWord в HTML-ODF
+Name[bs]=KWord izvozni filter iz HTML u ODF
 Name[ca]=Filtre d'exportació HTML-ODF per al KWord
 Name[ca@valencia]=Filtre d'exportació HTML-ODF per al KWord
 Name[cs]=Exportní filtr KWord HTML-ODF

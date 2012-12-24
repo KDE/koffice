@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Fade
 Name[bg]=Избледняване
+Name[bs]=Utišavanje
 Name[ca]=Esvaïment
 Name[ca@valencia]=Esvaïment
 Name[cs]=Blednutí
@@ -32,6 +33,7 @@ Name[x-test]=xxFadexx
 Name[zh_TW]=淡出
 Comment=Fade Effect
 Comment[bg]=Ефект на избледняване
+Comment[bs]=Efekt utišavanja
 Comment[ca]=Efecte d'esvaïment
 Comment[ca@valencia]=Efecte d'esvaïment
 Comment[cs]=Efekt mizení

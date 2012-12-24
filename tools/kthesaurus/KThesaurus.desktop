@@ -2,6 +2,7 @@
 Name=KThesaurus
 Name[bg]=KThesaurus
 Name[br]=KThesaurus
+Name[bs]=KThesaurus
 Name[ca]=KThesaurus
 Name[ca@valencia]=KThesaurus
 Name[cs]=KThesaurus
@@ -63,6 +64,7 @@ Exec=kthesaurus
 GenericName=Related Words
 GenericName[af]=Verwanter Woorde
 GenericName[bg]=Свързани думи
+GenericName[bs]=Povezane riječi
 GenericName[ca]=Paraules relacionades
 GenericName[ca@valencia]=Paraules relacionades
 GenericName[cs]=Podobná slova

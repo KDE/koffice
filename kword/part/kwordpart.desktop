@@ -2,6 +2,7 @@
 Type=Service
 Name=KOffice Word Processing Component
 Name[bg]=Компонент за текстообработка в KOffice
+Name[bs]=KOffice komponenta za obradu teksta
 Name[ca]=Component de processament de textos del KOffice
 Name[ca@valencia]=Component de processament de textos del KOffice
 Name[cs]=Komponenta zpracování textu KOffice
@@ -60,6 +61,7 @@ X-KDE-ServiceTypes=KOfficePart,KParts/ReadOnlyPart,KParts/ReadWritePart
 GenericName=Text Documents
 GenericName[bg]=Текстови документи
 GenericName[br]=Teulioù skrid
+GenericName[bs]=Tekstualni dokumenti
 GenericName[ca]=Documents de text
 GenericName[ca@valencia]=Documents de text
 GenericName[cs]=Textové dokumenty
