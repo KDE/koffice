@@ -59,6 +59,7 @@ X-KDE-ExtraNativeMimeTypes=application/vnd.oasis.opendocument.graphics,applicati
 Categories=Qt;KDE;Office;
 GenericName=Flowchart & Diagram
 GenericName[bg]=Блоксхеми и диаграми
+GenericName[bs]=Flowchart i Dijagram
 GenericName[ca]=Editor de diagrames de fluxos i diagrames
 GenericName[ca@valencia]=Editor de diagrames de fluxos i diagrames
 GenericName[cs]=Nákresy a diagramy

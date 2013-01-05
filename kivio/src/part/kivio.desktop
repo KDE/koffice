@@ -59,6 +59,7 @@ Name[zh_TW]=流程圖_Kivio
 Exec=kivio %u
 GenericName=Flowchart & Diagram Editing
 GenericName[bg]=Редактиране на блоксхеми и диаграми
+GenericName[bs]=Flowchart i Dijagram editovanje
 GenericName[ca]=Editor de diagrames de fluxos
 GenericName[ca@valencia]=Editor de diagrames de fluxos
 GenericName[cs]=Editor nákresů a diagramů

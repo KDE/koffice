@@ -3,6 +3,7 @@ Type=Link
 URL=.source/basicflow.kft
 Icon=template_basicflow
 Name=Basic Flowcharting
+Name[bs]=Osnovno crtanje dijagrama
 Name[ca]=Diagrama de flux bàsic
 Name[ca@valencia]=Diagrama de flux bàsic
 Name[cs]=Základní diagramy
