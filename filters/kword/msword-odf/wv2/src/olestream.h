@@ -26,6 +26,9 @@
 #include <glib.h> // GSeekType
 #include "wv2_export.h"
 
+#include <gsf/gsf-infile.h>
+#include <gsf/gsf-outfile.h>
+
 namespace wvWare {
 
 class WV2_EXPORT OLEStream

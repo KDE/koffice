@@ -23,6 +23,8 @@
 
 #include "wvlog.h"
 
+#include <gsf/gsf-outfile.h>
+
 using namespace wvWare;
 
 Annotations::Annotations( OLEStreamReader* tableStream, const Word97::FIB& fib ) :

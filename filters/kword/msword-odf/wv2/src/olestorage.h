@@ -23,7 +23,8 @@
 #include <list>
 #include <deque>
 
-#include <gsf/gsf.h>
+#include <gsf/gsf-infile.h>
+#include <gsf/gsf-outfile.h>
 #include "wv2_export.h"
 
 namespace wvWare
