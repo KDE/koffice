@@ -31,6 +31,7 @@ find_path(OOOSDK_DIR
 	      /usr/lib/openoffice/basis3.0
 	      /usr/lib64/openoffice.org/basis3.2
 	      /usr/lib64/openoffice.org/basis3.3
+              /usr/lib/libreoffice
 )
 if (OOOSDK_DIR)
 	find_path(CPPUHELPER_INCLUDE_DIR
@@ -76,6 +77,13 @@ else (OOOSDK_DIR)
 		or program/offapi.rdb for OOoSDK.")
 endif (OOOSDK_DIR)
 
+	
+if (EXISTS ${OOOSDK_DIR}/program/types/offapi.rdb)
+	set(OFFAPI_DIR ${OOOSDK_DIR}/program/types/)
+else(EXISTS ${OOOSDK_DIR}/program/types/offapi.rdb) 
+	set(OFFAPI_DIR ${OOOSDK_DIR/program/)
+endif (EXISTS ${OOOSDK_DIR}/program/types/offapi.rdb)
+
 if(CPPUHELPER_INCLUDE_DIR AND OOOSDK_URE_DIR AND OOOSDK_LIBRARIES)
 	set(OOOSDK_FOUND true)
 
@@ -87,7 +95,7 @@ if(CPPUHELPER_INCLUDE_DIR AND OOOSDK_URE_DIR AND OOOSDK_LIBRARIES)
 		COMMAND ${OOOSDK_DIR}/sdk/bin/cppumaker
 		ARGS -BUCR
 		     ${OOOSDK_URE_DIR}/share/misc/types.rdb
-		     ${OOOSDK_DIR}/program/offapi.rdb
+		     ${OFFAPI_DIR}/offapi.rdb
 		WORKING_DIRECTORY ${_OOOINCLUDE} 
 	)
 	add_custom_target(_oooheaders ALL
