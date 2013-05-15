@@ -1,6 +1,6 @@
 find_package(OOoSDK)
 
-if(OOOSDK_FOUND)
+if(OOOSDK_FOUND AND BUILD_showcase)
 	include_directories(
 		${OOOSDK_INCLUDE_DIRS}
 		${KOMAIN_INCLUDES}
@@ -21,4 +21,4 @@ if(OOOSDK_FOUND)
 		${QT_QTOPENGL_LIBRARY} komain kopageapp ppttoodplib)
 	# it would be nice if this explicit depencency was not needed
 	add_dependencies(slidecompare _oooheaders)
-endif(OOOSDK_FOUND)
+endif(OOOSDK_FOUND AND BUILD_showcase)
