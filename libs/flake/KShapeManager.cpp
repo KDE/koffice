@@ -617,7 +617,7 @@ void KShapeManager::setPaintingStrategy(KShapeManagerPaintingStrategy *strategy)
 
 QPolygonF KShapeManager::routeConnection(KShapeConnection *connection)
 {
-    return d->routeConnection(connection, connection->startPoint(), connection->endPoint());
+    return d->routeConnection(connection->startPoint(), connection->endPoint());
 }
 
 struct ko_Node;
@@ -710,7 +710,7 @@ inline ko_NodeIndex::ko_NodeIndex(const ko_Node &node)
     y = node.y;
 }
 
-QPolygonF KShapeManagerPrivate::routeConnection(KShapeConnection *connection, const QPointF &from, const QPointF &to)
+QPolygonF KShapeManagerPrivate::routeConnection(const QPointF &from, const QPointF &to)
 {
     QHash<ko_NodeIndex, ko_Node> nodes;
 

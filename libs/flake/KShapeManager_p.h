@@ -83,7 +83,7 @@ public:
     void suggestChangeTool(KPointerEvent *event);
 
 
-    QPolygonF routeConnection(KShapeConnection *connection, const QPointF &from, const QPointF &to);
+    QPolygonF routeConnection(const QPointF &from, const QPointF &to);
 
     class DetectCollision
     {

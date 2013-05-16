@@ -199,7 +199,7 @@ QPainterPath KShapeConnectionPrivate::createConnectionPath(const QPointF &from, 
             first = false;
             p2 = line.p1();
         }
-        QPolygonF lines((*shape->priv()->shapeManagers.begin())->priv()->routeConnection(q, p1, p2));
+        QPolygonF lines((*shape->priv()->shapeManagers.begin())->priv()->routeConnection(p1, p2));
         foreach (const QPointF &point, lines) {
             if (first)
                 path.moveTo(point);
