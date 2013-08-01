@@ -2,6 +2,7 @@
 Type=Service
 Name=KCells Applix Spreadsheet Import Filter
 Name[bg]=Филтър за внасяне от Applix Spreadsheet в KCells
+Name[bs]=KSpread Applix proračunske tabele  unosni Filter
 Name[ca]=Filtre d'importació per a fulls de càlcul Applix per al KCells
 Name[ca@valencia]=Filtre d'importació per a fulls de càlcul Applix per al KCells
 Name[cs]=Importní filtr KCells Applix Spreadsheet

@@ -3,6 +3,7 @@ Type=ServiceType
 X-KDE-ServiceType=KCells/Plugin
 Comment=Plugin for KCells
 Comment[bg]=Приставка за KCells
+Comment[bs]=Dodatak za KCells
 Comment[ca]=Connector per al KCells
 Comment[ca@valencia]=Connector per al KCells
 Comment[cs]=Modul pro KCells

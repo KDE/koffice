@@ -2,6 +2,7 @@
 Type=Service
 Name=CSV Export Filter for KCells
 Name[bg]=Филтър за изнасяне от KCells в CSV
+Name[bs]=CSV izvozni Filter za KSpread
 Name[ca]=Filtre d'exportació CSV per al KCells
 Name[ca@valencia]=Filtre d'exportació CSV per al KCells
 Name[cs]=Exportní filtr CSV pro KCells

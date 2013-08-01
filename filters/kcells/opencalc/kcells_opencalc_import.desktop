@@ -2,6 +2,7 @@
 Type=Service
 Name=OpenOffice.org Calc Import Filter for KCells
 Name[bg]=Филтър за внасяне от OpenOffice.org Calc в KCells
+Name[bs]=OpenOffice.org Calc unosni Filter za KSpread
 Name[ca]=Filtre d'importació OpenOffice.org Calc per al KCells
 Name[ca@valencia]=Filtre d'importació OpenOffice.org Calc per al KCells
 Name[cs]=Importní filtr OpenOffice.org Calc pro KCells

@@ -2,6 +2,7 @@
 Type=ServiceType
 X-KDE-ServiceType=Artwork/CoreModule
 Comment=Core functionality module for Artwork
+Comment[bs]=Modul funkcionalnosti jezgra za Karbon
 Comment[cs]=Základní modul funkcionality pro grafiku
 Comment[da]=Kernefunktionalitetsmodul for Artwork
 Comment[de]=Kernmodul für Artwork

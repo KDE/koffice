@@ -52,6 +52,7 @@ Name[wa]=Grafikes matematikes di båze
 Name[x-test]=xxBasic Flowchartingxx
 Name[zh_TW]=基本流程圖
 Comment=Creates a document with the basic stencils for flowcharting loaded.
+Comment[bs]=Kreira dokument sa osnovniom likovima za dijagrame toka
 Comment[ca]=Crea un document amb les plantilles bàsiques carregades per a diagrama de flux.
 Comment[ca@valencia]=Crea un document amb les plantilles bàsiques carregades per a diagrama de flux.
 Comment[cs]=Vytvoří dokument se základními šablonami.
