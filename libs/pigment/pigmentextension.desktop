@@ -17,6 +17,7 @@ Comment[fi]=Moduuli, joka laajentaa Pigment Color Manipulation System -väriavar
 Comment[fr]=Un module implantant une extension à un espace de couleurs d'un système de manipulation des pigment de couleurs
 Comment[fy]=In útwreiding dy't in folslein kleurgebiet ymplementearret dat brûkt kin wurde mei libkritacolor
 Comment[gl]=Um módulo que define unha extensión para os espazos de cores para o seu uso co Sistema de Manipulación dos Pigmentos de Cores
+Comment[hu]=Egy színtér kiterjesztést megvalósító modul a pigmentszín manipulációs rendszer használatához
 Comment[it]=Un modulo che implementa un'estensione a uno spazio di colori da usare con il sistema di manipolazione dei colori di Pigment
 Comment[kk]=Пигмент түсімен айналасу жүйесінің түстер кеңістігінің кеңейтуін іске асыратын модулі
 Comment[nb]=En modul som implementerer en utvidelse til et fargerom for Pigment Color Manipulation System
