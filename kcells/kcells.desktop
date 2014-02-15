@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=KCells
 Name[bg]=KCells
+Name[bs]=KCells
 Name[ca]=KCells
 Name[ca@valencia]=KCells
 Name[cs]=KCells
@@ -96,6 +97,7 @@ Comment[pt_BR]=Escrever documentos de planilha
 Comment[sk]=Písanie tabuľkových dokumentov
 Comment[sl]=Pišite dokumente s preglednicami
 Comment[sv]=Skriv kalkylarksdokument
+Comment[ug]=جەدۋەل پۈتۈكلىرى(Excel غا ئوخشاش) نى يېزىش پروگراممىسى
 Comment[uk]=Створення електронних таблиць
 Comment[wa]=Sicrire des documints tåvleas
 Comment[x-test]=xxWrite spreadsheet documentsxx

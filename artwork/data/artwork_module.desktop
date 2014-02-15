@@ -2,6 +2,7 @@
 Type=ServiceType
 X-KDE-ServiceType=Artwork/CoreModule
 Comment=Core functionality module for Artwork
+Comment[bs]=Modul funkcionalnosti jezgra za Karbon
 Comment[cs]=Základní modul funkcionality pro grafiku
 Comment[da]=Kernefunktionalitetsmodul for Artwork
 Comment[de]=Kernmodul für Artwork
@@ -10,6 +11,7 @@ Comment[et]=Artworki tuumikfunktsioonide moodul
 Comment[eu]=Artelanen nukleo-funtzionaltasunaren modulua
 Comment[fi]=Artworkin perustoiminnallisuusmoduuli
 Comment[fr]=Module de fonctionnalités centrales de Artwork
+Comment[hu]=Mag funkcionalitású modul az Artworkhöz
 Comment[ja]=Artwork の中核的な機能モジュール
 Comment[kk]=Artwork-тың негізгі функционалдық модулі
 Comment[nb]=Kjernefunksjonalitet-modul for Artwork

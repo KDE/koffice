@@ -2,6 +2,7 @@
 IconName=kcells
 Name=KCells
 Name[bg]=KCells
+Name[bs]=KCells
 Name[ca]=KCells
 Name[ca@valencia]=KCells
 Name[cs]=KCells
@@ -27,6 +28,7 @@ Name[x-test]=xxKCellsxx
 Name[zh_TW]=KCells
 Comment=KCells Spreadsheet
 Comment[bg]=Електронни таблици KCells
+Comment[bs]=KCells tablica
 Comment[ca]=Full de càlcul KCells
 Comment[ca@valencia]=Full de càlcul KCells
 Comment[cs]=Sešit KCells
