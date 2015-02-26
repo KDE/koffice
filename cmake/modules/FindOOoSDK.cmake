@@ -93,7 +93,7 @@ if(CPPUHELPER_INCLUDE_DIR AND OOOSDK_URE_DIR AND OOOSDK_LIBRARIES)
 	add_custom_command(
 		OUTPUT ${_OOOINCLUDE}/com/sun/star/uno/Exception.hpp
 		COMMAND ${OOOSDK_DIR}/sdk/bin/cppumaker
-		ARGS -BUCR
+		ARGS 
 		     ${OOOSDK_URE_DIR}/share/misc/types.rdb
 		     ${OFFAPI_DIR}/offapi.rdb
 		WORKING_DIRECTORY ${_OOOINCLUDE} 
