@@ -742,9 +742,12 @@ void KCharacterStyle::loadOdf(KShapeLoadingContext &scontext)
         // with 'Times New Roman' that looks nearly the same.
         if (fontName == "Thorndale") {
             fontName = "Times New Roman";
-        } else if (fontName.length() > 3 && fontName.endsWith("CE")
-                && fontName[fontName.length() - 3].isSpace()) {
-            fontName.chop(3);
+        } else {
+		int name_length = fontName.length() - 3;
+		if (name_length > 0 && fontName.endsWith("CE")
+                && fontName[name_length].isSpace()) {
+            		fontName.chop(3);
+		}
         }
         setFontFamily(fontName);
     }
@@ -809,9 +812,12 @@ void KCharacterStyle::loadOdfProperties(KOdfStyleStack &styleStack)
         // with 'Times New Roman' that looks nearly the same.
         if (fontName == "Thorndale") {
             fontName = "Times New Roman";
-        } else if (fontName.length() > 3 && fontName.endsWith("CE")
-                && fontName[fontName.length() - 3].isSpace()) {
-            fontName.chop(3);
+        } else {
+		int name_length = fontName.length() - 3;
+		if (name_length > 0 && fontName.endsWith("CE")
+                	&& fontName[name_length].isSpace()) {
+	            fontName.chop(3);
+	  }
         }
         setFontFamily(fontName);
     }
