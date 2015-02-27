@@ -45,10 +45,10 @@ class TagElement : public GraphicsElement
 public:
 	virtual ~TagElement() {}
 	TagElement(const char *szTagName) : msTagName(szTagName) {}
-	const WPXString & getTagName() const { return msTagName; }
+	const RVNGString & getTagName() const { return msTagName; }
 	virtual void print() const {};
 private:
-	WPXString msTagName;
+	RVNGString msTagName;
 };
 
 class TagOpenElement : public TagElement
@@ -56,11 +56,11 @@ class TagOpenElement : public TagElement
 public:
 	TagOpenElement(const char *szTagName) : TagElement(szTagName) {}
 	virtual ~TagOpenElement() {}
-	void addAttribute(const char *szAttributeName, const WPXString &sAttributeValue);
+	void addAttribute(const char *szAttributeName, const RVNGString &sAttributeValue);
 	virtual void write(FileOutputHandler *pHandler) const;
 	virtual void print () const;
 private:
-	WPXPropertyList maAttrList;
+	RVNGPropertyList maAttrList;
 };
 
 class TagCloseElement : public TagElement
@@ -78,7 +78,7 @@ public:
 	virtual ~CharDataElement() {}
 	virtual void write(FileOutputHandler *pHandler) const;
 private:
-	WPXString msData;
+	RVNGString msData;
 };
 
 #endif

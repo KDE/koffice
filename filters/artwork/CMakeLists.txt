@@ -21,6 +21,7 @@ macro_optional_find_package(WPD)
 macro_optional_find_package(WPG)
 macro_log_feature(LIBWPG_FOUND "WPG" "WordPerfect Graphics Library" "http://libwpg.sourceforge.net/" FALSE "" "Required by the Artwork WPG import filter")
 macro_log_feature(LIBWPG_STREAM_INCLUDE_DIR "WPS" "WordPerfect Graphics Stream Library" "http://libwps.sourceforge.net/" FALSE "" "Required by the Artwork WPG import filter")
+macro_log_feature(LIBREVENGE_INCLUDE_DIR "Revenge" "WordPerfect REVerse ENGineering Library" "http://libwpd.sourceforge.net/" FALSE "" "Required by the Artwork WPG import filter")
 macro_optional_find_package(Poppler)
 # The pdf-importer needs the not-officially-supported XPDF Headers
 # Installing these is off by default in poppler sources, so lets make
@@ -35,9 +36,9 @@ macro_log_feature( POPPLER_FOUND "poppler-qt4" "The Poppler Qt4 interface librar
 
 add_subdirectory( png )
 add_subdirectory( svg )
-if (WPD_FOUND AND LIBWPG_FOUND AND LIBWPG_STREAM_INCLUDE_DIR)
+if (WPD_FOUND AND LIBWPG_FOUND AND LIBWPG_STREAM_INCLUDE_DIR AND LIBREVENGE_FOUND)
   add_subdirectory( wpg )
-endif (WPD_FOUND AND LIBWPG_FOUND AND LIBWPG_STREAM_INCLUDE_DIR)
+endif (WPD_FOUND AND LIBWPG_FOUND AND LIBWPG_STREAM_INCLUDE_DIR AND LIBREVENGE_FOUND)
 add_subdirectory( wmf )
 add_subdirectory( artwork1.x )
 add_subdirectory( eps )

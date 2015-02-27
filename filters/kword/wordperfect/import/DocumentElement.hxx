@@ -29,8 +29,8 @@
 #ifndef DOCUMENTELEMENT_H
 #define DOCUMENTELEMENT_H
 #include <libwpd/libwpd.h>
-#include <libwpd/WPXProperty.h>
-#include <libwpd/WPXString.h>
+#include <libwpd/RVNGProperty.h>
+#include <libwpd/RVNGString.h>
 #include <vector>
 
 #include "DocumentHandler.hxx"
@@ -52,10 +52,10 @@ class TagElement : public DocumentElement
 {
 public:
 	explicit TagElement(const char *szTagName) : msTagName(szTagName) {}
-	const WPXString & getTagName() const { return msTagName; }
+	const RVNGString & getTagName() const { return msTagName; }
 	virtual void print() const;
 private:
-	WPXString msTagName;
+	RVNGString msTagName;
 };
 
 class TagOpenElement : public TagElement
@@ -63,11 +63,11 @@ class TagOpenElement : public TagElement
 public:
 	explicit TagOpenElement(const char *szTagName) : TagElement(szTagName) {}
 	~TagOpenElement() {}
-	void addAttribute(const char *szAttributeName, const WPXString &sAttributeValue);
+	void addAttribute(const char *szAttributeName, const RVNGString &sAttributeValue);
 	virtual void write(DocumentHandler &xHandler) const;
 	virtual void print () const;
 private:
-	WPXPropertyList maAttrList;
+	RVNGPropertyList maAttrList;
 };
 
 class TagCloseElement : public TagElement
@@ -83,17 +83,17 @@ public:
 	explicit CharDataElement(const char *sData) : DocumentElement(), msData(sData) {}
 	virtual void write(DocumentHandler &xHandler) const;
 private:
-	WPXString msData;
+	RVNGString msData;
 };
 
 class TextElement : public DocumentElement
 {
 public:
-	explicit TextElement(const WPXString & sTextBuf);
+	explicit TextElement(const RVNGString & sTextBuf);
 	virtual void write(DocumentHandler &xHandler) const;
 
 private:
-	WPXString msTextBuf;
+	RVNGString msTextBuf;
 };
 
 #endif

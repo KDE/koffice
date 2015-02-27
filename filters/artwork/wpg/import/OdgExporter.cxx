@@ -74,7 +74,7 @@ OdgExporter::~OdgExporter()
 	}
 }
 
-void OdgExporter::startGraphics(const ::WPXPropertyList &propList)
+void OdgExporter::startDocument(const ::RVNGPropertyList &propList)
 {
 	miGradientIndex = 1;
 	miDashIndex = 1;
@@ -134,14 +134,14 @@ void OdgExporter::startGraphics(const ::WPXPropertyList &propList)
 		configItemOpenElement.addAttribute("config:name", "VisibleAreaWidth");
 		configItemOpenElement.addAttribute("config:type", "int");
 		configItemOpenElement.write(mpHandler);
-		WPXString sWidth; sWidth.sprintf("%li", (unsigned long)(2540 * mfWidth));
+		RVNGString sWidth; sWidth.sprintf("%li", (unsigned long)(2540 * mfWidth));
 		mpHandler->characters(sWidth);
 		mpHandler->endElement("config:config-item");
 	
 		configItemOpenElement.addAttribute("config:name", "VisibleAreaHeight");
 		configItemOpenElement.addAttribute("config:type", "int");
 		configItemOpenElement.write(mpHandler);
-		WPXString sHeight; sHeight.sprintf("%li", (unsigned long)(2540 * mfHeight));
+		RVNGString sHeight; sHeight.sprintf("%li", (unsigned long)(2540 * mfHeight));
 		mpHandler->characters(sHeight);
 		mpHandler->endElement("config:config-item");
 	
@@ -151,7 +151,7 @@ void OdgExporter::startGraphics(const ::WPXPropertyList &propList)
 	}
 }
 
-void OdgExporter::endGraphics()
+void OdgExporter::endDocument()
 {
 	if ((mxStreamType == ODF_FLAT_XML) || (mxStreamType == ODF_STYLES_XML))
 	{
@@ -199,7 +199,7 @@ void OdgExporter::endGraphics()
 		tmpStylePageLayoutPropertiesOpenElement.addAttribute("fo:margin-bottom", "0in");
 		tmpStylePageLayoutPropertiesOpenElement.addAttribute("fo:margin-left", "0in");
 		tmpStylePageLayoutPropertiesOpenElement.addAttribute("fo:margin-right", "0in");
-		WPXString sValue;
+		RVNGString sValue;
 		sValue = doubleToString(mfWidth); sValue.append("in");
 		tmpStylePageLayoutPropertiesOpenElement.addAttribute("fo:page-width", sValue);
 		sValue = doubleToString(mfHeight); sValue.append("in");
@@ -279,13 +279,13 @@ void OdgExporter::endGraphics()
 	mpHandler->endDocument();
 }
 
-void OdgExporter::setStyle(const ::WPXPropertyList & propList, const ::WPXPropertyListVector& gradient)
+void OdgExporter::setStyle(const ::RVNGPropertyList & propList)
 {
 	mxStyle = propList;
-	mxGradient = gradient;
+	mxGradient = *propList.child("svg:linearGradient");
 }
 
-void OdgExporter::startLayer(const ::WPXPropertyList & /* propList */)
+void OdgExporter::startLayer(const ::RVNGPropertyList & /* propList */)
 {
 }
 
@@ -293,11 +293,11 @@ void OdgExporter::endLayer()
 {
 }
 
-void OdgExporter::drawRectangle(const ::WPXPropertyList &propList)
+void OdgExporter::drawRectangle(const ::RVNGPropertyList &propList)
 {
 	writeGraphicsStyle();
 	TagOpenElement *pDrawRectElement = new TagOpenElement("draw:rect");
-	WPXString sValue;
+	RVNGString sValue;
 	sValue.sprintf("gr%i", miGraphicsStyleIndex-1);
 	pDrawRectElement->addAttribute("draw:style-name", sValue);
 	pDrawRectElement->addAttribute("svg:x", propList["svg:x"]->getStr());
@@ -313,11 +313,11 @@ void OdgExporter::drawRectangle(const ::WPXPropertyList &propList)
 	mBodyElements.push_back(new TagCloseElement("draw:rect"));	
 }
 
-void OdgExporter::drawEllipse(const ::WPXPropertyList &propList)
+void OdgExporter::drawEllipse(const ::RVNGPropertyList &propList)
 {
 	writeGraphicsStyle();
 	TagOpenElement *pDrawEllipseElement = new TagOpenElement("draw:ellipse");
-	WPXString sValue;
+	RVNGString sValue;
 	sValue.sprintf("gr%i", miGraphicsStyleIndex-1);
 	pDrawEllipseElement->addAttribute("draw:style-name", sValue);
 	sValue = doubleToString(2 * propList["svg:rx"]->getDouble()); sValue.append("in");
@@ -355,17 +355,18 @@ void OdgExporter::drawEllipse(const ::WPXPropertyList &propList)
 	mBodyElements.push_back(new TagCloseElement("draw:ellipse"));
 }
 
-void OdgExporter::drawPolyline(const ::WPXPropertyListVector& vertices)
+void OdgExporter::drawPolyline(const ::RVNGPropertyList& vertices)
 {
-	drawPolySomething(vertices, false);
+	drawPolySomething(*vertices.child("svg:points"), false);
 }
 
-void OdgExporter::drawPolygon(const ::WPXPropertyListVector& vertices)
+void OdgExporter::drawPolygon(const ::RVNGPropertyList& vertices)
 {
-	drawPolySomething(vertices, true);
+	drawPolySomething(*vertices.child("svg:points"), true);
 }
 
-void OdgExporter::drawPolySomething(const ::WPXPropertyListVector& vertices, bool isClosed)
+
+void OdgExporter::drawPolySomething(const ::RVNGPropertyListVector& vertices, bool isClosed)
 {
 	if(vertices.count() < 2)
 		return;
@@ -374,7 +375,7 @@ void OdgExporter::drawPolySomething(const ::WPXPropertyListVector& vertices, boo
 	{
 		writeGraphicsStyle();
 		TagOpenElement *pDrawLineElement = new TagOpenElement("draw:line");
-		WPXString sValue;
+		RVNGString sValue;
 		sValue.sprintf("gr%i", miGraphicsStyleIndex-1);
 		pDrawLineElement->addAttribute("draw:style-name", sValue);
 		pDrawLineElement->addAttribute("draw:text-style-name", "P1");
@@ -388,8 +389,9 @@ void OdgExporter::drawPolySomething(const ::WPXPropertyListVector& vertices, boo
 	}
 	else
 	{
-		::WPXPropertyListVector path;
-		::WPXPropertyList element;
+		::RVNGPropertyList propList;
+		::RVNGPropertyListVector path;
+		::RVNGPropertyList element;
 
 		for (unsigned long ii = 0; ii < vertices.count(); ++ii)
 		{
@@ -406,12 +408,14 @@ void OdgExporter::drawPolySomething(const ::WPXPropertyListVector& vertices, boo
 			element.insert("libwpg:path-action", "Z");
 			path.append(element);
 		}
-		drawPath(path);
+		propList.insert("svg:d", path);
+		drawPath(propList);
 	}
 }
 
-void OdgExporter::drawPath(const WPXPropertyListVector& path)
+void OdgExporter::drawPath(const RVNGPropertyList& propList)
 {
+	::RVNGPropertyListVector path = *propList.child("svg:points");
 	if(path.count() == 0)
 		return;
 
@@ -455,7 +459,7 @@ void OdgExporter::drawPath(const WPXPropertyListVector& path)
 	writeGraphicsStyle();
 
 	TagOpenElement *pDrawPathElement = new TagOpenElement("draw:path");
-	WPXString sValue;
+	RVNGString sValue;
 	sValue.sprintf("gr%i", miGraphicsStyleIndex-1);
 	pDrawPathElement->addAttribute("draw:style-name", sValue);
 	pDrawPathElement->addAttribute("draw:text-style-name", "P1");
@@ -474,7 +478,7 @@ void OdgExporter::drawPath(const WPXPropertyListVector& path)
     sValue.clear();
 	for(unsigned i = 0; i < path.count(); ++i)
 	{
-        WPXString sElement;
+        RVNGString sElement;
 		if (path[i]["libwpg:path-action"]->getStr() == "M")
 		{
 			// 2540 is 2.54*1000, 2.54 in = 1 inch
@@ -511,14 +515,15 @@ void OdgExporter::drawPath(const WPXPropertyListVector& path)
 	mBodyElements.push_back(new TagCloseElement("draw:path"));
 }
 
-void OdgExporter::drawGraphicObject(const ::WPXPropertyList &propList, const ::WPXBinaryData& binaryData)
+void OdgExporter::drawGraphicObject(const ::RVNGPropertyList &propList)
 {
+	::RVNGString base64Binary = propList["office:binary-data"]->getStr();
 	if (!propList["libwpg:mime-type"] && propList["libwpg:mime-type"]->getStr().len() <= 0)
 		return;
 	TagOpenElement *pDrawFrameElement = new TagOpenElement("draw:frame");
 	
 	
-	WPXString sValue;
+	RVNGString sValue;
 	if (propList["svg:x"])
 		pDrawFrameElement->addAttribute("svg:x", propList["svg:x"]->getStr());
 	if (propList["svg:y"])
@@ -533,7 +538,6 @@ void OdgExporter::drawGraphicObject(const ::WPXPropertyList &propList, const ::W
 	
 	mBodyElements.push_back(new TagOpenElement("office:binary-data"));
 	
-	::WPXString base64Binary = binaryData.getBase64Data();
 	mBodyElements.push_back(new CharDataElement(base64Binary.cstr()));
 	
 	mBodyElements.push_back(new TagCloseElement("office:binary-data"));
@@ -554,12 +558,12 @@ void OdgExporter::writeGraphicsStyle()
 		double distance = mxDashArray.at(1);
 		TagOpenElement *pDrawStrokeDashElement = new TagOpenElement("draw:stroke-dash");
 		pDrawStrokeDashElement->addAttribute("draw:style", "rect");
-		WPXString sValue;
+		RVNGString sValue;
 		sValue.sprintf("Dash_%i", miDashIndex++);
 		pDrawStrokeDashElement->addAttribute("draw:name", sValue);
 		sValue = doubleToString(distance); sValue.append("in");
 		pDrawStrokeDashElement->addAttribute("draw:distance", sValue);
-		WPXString sName;
+		RVNGString sName;
 		// We have to find out how to do this intelligently, since the ODF is allowing only
 		// two pairs draw:dots1 draw:dots1-length and draw:dots2 draw:dots2-length
 		for(unsigned i = 0; i < mxDashArray.count()/2 && i < 2; i++)
@@ -578,7 +582,7 @@ void OdgExporter::writeGraphicsStyle()
 	{
 		TagOpenElement *pDrawGradientElement = new TagOpenElement("draw:gradient");
 		pDrawGradientElement->addAttribute("draw:style", "linear");
-		WPXString sValue;
+		RVNGString sValue;
 		sValue.sprintf("Gradient_%i", miGradientIndex++);
 		pDrawGradientElement->addAttribute("draw:name", sValue);
 
@@ -602,7 +606,7 @@ void OdgExporter::writeGraphicsStyle()
 	}
 
 	TagOpenElement *pStyleStyleElement = new TagOpenElement("style:style");
-	WPXString sValue;
+	RVNGString sValue;
 	sValue.sprintf("gr%i",  miGraphicsStyleIndex);
 	pStyleStyleElement->addAttribute("style:name", sValue);
 	pStyleStyleElement->addAttribute("style:family", "graphic");
@@ -667,9 +671,9 @@ void OdgExporter::writeGraphicsStyle()
 	++miGraphicsStyleIndex;
 }
 
-WPXString OdgExporter::doubleToString(const double value)
+RVNGString OdgExporter::doubleToString(const double value)
 {
-	WPXString tempString;
+	RVNGString tempString;
 	tempString.sprintf("%.4f", value);
 	std::string decimalPoint(localeconv()->decimal_point);
 	if ((decimalPoint.size() == 0) || (decimalPoint == "."))
@@ -681,5 +685,5 @@ WPXString OdgExporter::doubleToString(const double value)
 		while ((pos = stringValue.find(decimalPoint)) != std::string::npos)
 			stringValue.replace(pos,decimalPoint.size(),".");
 	}
-	return WPXString(stringValue.c_str());
+	return RVNGString(stringValue.c_str());
 }

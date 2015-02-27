@@ -35,7 +35,7 @@
 #include <libwpg/libwpg.h>
 #include <libwps/libwps.h>
 #include <libwpd/libwpd.h>
-#include <libwpd-stream/libwpd-stream.h>
+#include <librevenge-stream/librevenge-stream.h>
 
 #include "FileOutputHandler.hxx"
 #include "OdgExporter.hxx"
@@ -87,9 +87,9 @@ KoFilter::ConversionStatus WPGImport::convert(const QByteArray& from, const QByt
         return KoFilter::NotImplemented;
 
 
-    WPXInputStream* input = new WPXFileStream(m_chain->inputFile().toLocal8Bit());
-    if (input->isOLEStream()) {
-        WPXInputStream* olestream = input->getDocumentOLEStream("PerfectOffice_MAIN");
+    RVNGInputStream* input = new RVNGFileStream(m_chain->inputFile().toLocal8Bit());
+    if (input->isStructured()) {
+        RVNGInputStream* olestream = input->getSubStreamByName("PerfectOffice_MAIN");
         if (olestream) {
             delete input;
             input = olestream;

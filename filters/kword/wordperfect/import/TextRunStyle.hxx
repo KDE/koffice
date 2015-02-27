@@ -41,24 +41,24 @@ class DocumentHandler;
 class ParagraphStyle
 {
 public:
-	ParagraphStyle(WPXPropertyList *propList, const WPXPropertyListVector &tabStops, const WPXString &sName);
+	ParagraphStyle(RVNGPropertyList *propList, const RVNGPropertyListVector &tabStops, const RVNGString &sName);
 	virtual ~ParagraphStyle();
 	virtual void write(DocumentHandler &xHandler) const;
-	WPXString getName() const { return msName; }
+	RVNGString getName() const { return msName; }
 private:
-	WPXPropertyList *mpPropList;
-	WPXPropertyListVector mxTabStops;
-	WPXString msName;
+	RVNGPropertyList *mpPropList;
+	RVNGPropertyListVector mxTabStops;
+	RVNGString msName;
 };
 
 
 class SpanStyle : public Style
 {
 public:
-	SpanStyle(const char *psName, const WPXPropertyList &xPropList);
+	SpanStyle(const char *psName, const RVNGPropertyList &xPropList);
 	virtual void write(DocumentHandler &xHandler) const;
 
 private:
-        WPXPropertyList mPropList;
+        RVNGPropertyList mPropList;
 };
 #endif

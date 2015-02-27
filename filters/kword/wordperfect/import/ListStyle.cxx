@@ -29,12 +29,12 @@
 #include "ListStyle.hxx"
 #include "DocumentElement.hxx"
 
-OrderedListLevelStyle::OrderedListLevelStyle(const WPXPropertyList &xPropList) : 
+OrderedListLevelStyle::OrderedListLevelStyle(const RVNGPropertyList &xPropList) : 
         mPropList(xPropList)
 {
 }
 
-void OrderedListStyle::updateListLevel(const int iLevel, const WPXPropertyList &xPropList) 
+void OrderedListStyle::updateListLevel(const int iLevel, const RVNGPropertyList &xPropList) 
 { 
 	if (iLevel < 0)
 		return;
@@ -44,7 +44,7 @@ void OrderedListStyle::updateListLevel(const int iLevel, const WPXPropertyList &
 
 void OrderedListLevelStyle::write(DocumentHandler &xHandler, int iLevel) const
 {
-	WPXString sLevel;
+	RVNGString sLevel;
 	sLevel.sprintf("%i", (iLevel+1));
 
 	TagOpenElement listLevelStyleOpen("text:list-level-style-number");
@@ -73,12 +73,12 @@ void OrderedListLevelStyle::write(DocumentHandler &xHandler, int iLevel) const
 	xHandler.endElement("text:list-level-style-number");
 }
 
-UnorderedListLevelStyle::UnorderedListLevelStyle(const WPXPropertyList &xPropList)
+UnorderedListLevelStyle::UnorderedListLevelStyle(const RVNGPropertyList &xPropList)
 	: mPropList(xPropList)
 {
 }
 
-void UnorderedListStyle::updateListLevel(const int iLevel, const WPXPropertyList &xPropList) 
+void UnorderedListStyle::updateListLevel(const int iLevel, const RVNGPropertyList &xPropList) 
 { 
 	if (iLevel < 0)
 		return;
@@ -88,7 +88,7 @@ void UnorderedListStyle::updateListLevel(const int iLevel, const WPXPropertyList
 
 void UnorderedListLevelStyle::write(DocumentHandler &xHandler, int iLevel) const
 {
-	WPXString sLevel;
+	RVNGString sLevel;
 	sLevel.sprintf("%i", (iLevel+1));
 	TagOpenElement listLevelStyleOpen("text:list-level-style-bullet");
 	listLevelStyleOpen.addAttribute("text:level", sLevel);

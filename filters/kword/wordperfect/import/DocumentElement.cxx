@@ -48,7 +48,7 @@ void TagOpenElement::print() const
 	TagElement::print(); 	
 }
 
-void TagOpenElement::addAttribute(const char *szAttributeName, const WPXString &sAttributeValue)
+void TagOpenElement::addAttribute(const char *szAttributeName, const RVNGString &sAttributeValue)
 {
         maAttrList.insert(szAttributeName, sAttributeValue);
 }
@@ -66,7 +66,7 @@ void CharDataElement::write(DocumentHandler &xHandler) const
 	xHandler.characters(msData);
 }
 
-TextElement::TextElement(const WPXString & sTextBuf) :
+TextElement::TextElement(const RVNGString & sTextBuf) :
 	msTextBuf(sTextBuf, false)
 {
 }
@@ -75,12 +75,12 @@ TextElement::TextElement(const WPXString & sTextBuf) :
 // elements
 void TextElement::write(DocumentHandler &xHandler) const
 {
-	WPXPropertyList xBlankAttrList;
+	RVNGPropertyList xBlankAttrList;
         
-	WPXString sTemp;
+	RVNGString sTemp;
 
 	int iNumConsecutiveSpaces = 0;
-        WPXString::Iter i(msTextBuf);
+        RVNGString::Iter i(msTextBuf);
 	for (i.rewind(); i.next();) 
         {
 		if (*(i()) == ASCII_SPACE)

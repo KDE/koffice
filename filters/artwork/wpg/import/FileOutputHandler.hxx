@@ -32,19 +32,21 @@
 #include <libwpd/libwpd.h>
 #include "FileOutputHandler.hxx"
 
+using namespace librevenge;
+
 class FileOutputHandler
 {
   public:
         explicit FileOutputHandler(std::ostringstream &contentStream);
         void startDocument();
         void endDocument();
-        void startElement(const char *psName, const WPXPropertyList &xPropList);
+        void startElement(const char *psName, const RVNGPropertyList &xPropList);
         void endElement(const char *psName);
-        void characters(const WPXString &sCharacters);
+        void characters(const RVNGString &sCharacters);
 
   private:
 	bool mbIsTagOpened;
-	WPXString msOpenedTagName;
+	RVNGString msOpenedTagName;
 	std::ostringstream &mContentStream;
 };
 #endif

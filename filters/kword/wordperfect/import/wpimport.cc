@@ -31,30 +31,44 @@ K_PLUGIN_FACTORY(WPImportFactory, registerPlugin<WPImport>();)
 K_EXPORT_PLUGIN(WPImportFactory("kofficefilters"))
 
 #include <libwpd/libwpd.h>
-#include <libwpd-stream/WPXStream.h>
-#include <libwpd/WPXDocumentInterface.h>
+#include <librevenge-stream/RVNGStream.h>
+#include <librevenge/RVNGTextInterface.h>
 
+using namespace librevenge;
+using namespace libwpd;
 
-class WPXMemoryInputStream : public WPXInputStream
+class RVNGMemoryInputStream : public RVNGInputStream
 {
 public:
-    WPXMemoryInputStream(unsigned char *data, size_t size);
-    virtual ~WPXMemoryInputStream();
+    RVNGMemoryInputStream(unsigned char *data, size_t size);
+    virtual ~RVNGMemoryInputStream();
 
-    virtual bool isOLEStream() {
+    virtual bool isStructured() {
         return false;
     }
-    virtual WPXInputStream * getDocumentOLEStream() {
+    virtual unsigned subStreamCount() {
+        return 0;
+    }
+    virtual const char* subStreamName(unsigned id) {
+    	return NULL;    
+    }
+    virtual bool existsSubStream(const char* name) {
+	return false;
+    }
+    virtual RVNGInputStream * getDocumentOLEStream() {
         return NULL;
     }
-    virtual WPXInputStream * getDocumentOLEStream(const char* name) {
+    virtual RVNGInputStream * getSubStreamByName(const char* name) {
+        return NULL;
+    }
+    virtual RVNGInputStream * getSubStreamById(unsigned id) {
         return NULL;
     }
 
     const virtual unsigned char *read(unsigned long numBytes, unsigned long &numBytesRead);
-    virtual int seek(long offset, WPX_SEEK_TYPE seekType);
+    virtual int seek(long offset, RVNG_SEEK_TYPE seekType);
     virtual long tell();
-    virtual bool atEOS();
+    virtual bool isEnd();
 
 private:
     long m_offset;
@@ -64,8 +78,8 @@ private:
 };
 
 
-WPXMemoryInputStream::WPXMemoryInputStream(unsigned char *data, size_t size) :
-        WPXInputStream(),
+RVNGMemoryInputStream::RVNGMemoryInputStream(unsigned char *data, size_t size) :
+        RVNGInputStream(),
         m_offset(0),
         m_data(data),
         m_size(size),
@@ -73,13 +87,13 @@ WPXMemoryInputStream::WPXMemoryInputStream(unsigned char *data, size_t size) :
 {
 }
 
-WPXMemoryInputStream::~WPXMemoryInputStream()
+RVNGMemoryInputStream::~RVNGMemoryInputStream()
 {
     delete [] m_tmpBuf;
     delete [] m_data;
 }
 
-const unsigned char* WPXMemoryInputStream::read(unsigned long numBytes, unsigned long &numBytesRead)
+const unsigned char* RVNGMemoryInputStream::read(unsigned long numBytes, unsigned long &numBytesRead)
 {
     delete [] m_tmpBuf;
     unsigned int numBytesToRead;
@@ -103,11 +117,11 @@ const unsigned char* WPXMemoryInputStream::read(unsigned long numBytes, unsigned
     return m_tmpBuf;
 }
 
-int WPXMemoryInputStream::seek(long offset, WPX_SEEK_TYPE seekType)
+int RVNGMemoryInputStream::seek(long offset, RVNG_SEEK_TYPE seekType)
 {
-    if (seekType == WPX_SEEK_CUR)
+    if (seekType == RVNG_SEEK_CUR)
         m_offset += offset;
-    else if (seekType == WPX_SEEK_SET)
+    else if (seekType == RVNG_SEEK_SET)
         m_offset = offset;
 
     if (m_offset < 0)
@@ -118,12 +132,12 @@ int WPXMemoryInputStream::seek(long offset, WPX_SEEK_TYPE seekType)
     return 0;
 }
 
-long WPXMemoryInputStream::tell()
+long RVNGMemoryInputStream::tell()
 {
     return m_offset;
 }
 
-bool WPXMemoryInputStream::atEOS()
+bool RVNGMemoryInputStream::isEnd()
 {
     if (m_offset >= 0 && (unsigned long)m_offset >= m_size)
         return true;
@@ -132,71 +146,89 @@ bool WPXMemoryInputStream::atEOS()
 }
 
 
-class KWordListener : public WPXDocumentInterface
+class KWordListener : public RVNGTextInterface
 {
 public:
     KWordListener();
     virtual ~KWordListener();
 
-    virtual void setDocumentMetaData(const WPXPropertyList &propList) {}
+    virtual void setDocumentMetaData(const RVNGPropertyList &propList) {}
 
-    virtual void startDocument() ;
+    virtual void startDocument(const RVNGPropertyList &propList) ;
     virtual void endDocument() ;
 
-    virtual void openPageSpan(const WPXPropertyList &propList) {}
+    virtual void openPageSpan(const RVNGPropertyList &propList) {}
     virtual void closePageSpan() {}
-    virtual void openHeader(const WPXPropertyList &propList) {}
+    virtual void openHeader(const RVNGPropertyList &propList) {}
     virtual void closeHeader() {}
-    virtual void openFooter(const WPXPropertyList &propList) {}
+    virtual void openFooter(const RVNGPropertyList &propList) {}
     virtual void closeFooter() {}
 
-    virtual void openSection(const WPXPropertyList &propList, const WPXPropertyListVector &columns) {}
+    virtual void openSection(const RVNGPropertyList &propList) {}
     virtual void closeSection() {}
-    virtual void openParagraph(const WPXPropertyList &propList, const WPXPropertyListVector &tabStops);
+    virtual void openParagraph(const RVNGPropertyList &propList);
     virtual void closeParagraph();
-    virtual void openSpan(const WPXPropertyList &propList) ;
+    virtual void openSpan(const RVNGPropertyList &propList) ;
     virtual void closeSpan() ;
 
     virtual void insertTab();
-    virtual void insertText(const WPXString &text);
+    virtual void insertText(const RVNGString &text);
     virtual void insertLineBreak();
 
-    virtual void defineOrderedListLevel(const WPXPropertyList &propList) {}
-    virtual void defineUnorderedListLevel(const WPXPropertyList &propList) {}
-    virtual void openOrderedListLevel(const WPXPropertyList &propList) {}
-    virtual void openUnorderedListLevel(const WPXPropertyList &propList) {}
+    virtual void defineOrderedListLevel(const RVNGPropertyList &propList) {}
+    virtual void defineUnorderedListLevel(const RVNGPropertyList &propList) {}
+    virtual void openOrderedListLevel(const RVNGPropertyList &propList) {}
+    virtual void openUnorderedListLevel(const RVNGPropertyList &propList) {}
     virtual void closeOrderedListLevel() {}
     virtual void closeUnorderedListLevel() {}
-    virtual void openListElement(const WPXPropertyList &propList, const WPXPropertyListVector &tabStops) {}
+    virtual void openListElement(const RVNGPropertyList &propList) {}
     virtual void closeListElement() {}
 
-    virtual void openFootnote(const WPXPropertyList &propList) {}
+    virtual void openFootnote(const RVNGPropertyList &propList) {}
     virtual void closeFootnote() {}
-    virtual void openEndnote(const WPXPropertyList &propList) {}
+    virtual void openEndnote(const RVNGPropertyList &propList) {}
     virtual void closeEndnote() {}
 
-    virtual void openTable(const WPXPropertyList &propList, const WPXPropertyListVector &columns) {}
-    virtual void openTableRow(const WPXPropertyList &propList) {}
+    virtual void openTable(const RVNGPropertyList &propList) {}
+    virtual void openTableRow(const RVNGPropertyList &propList) {}
     virtual void closeTableRow() {}
-    virtual void openTableCell(const WPXPropertyList &propList) {}
+    virtual void openTableCell(const RVNGPropertyList &propList) {}
     virtual void closeTableCell() {}
-    virtual void insertCoveredTableCell(const WPXPropertyList &propList) {}
+    virtual void insertCoveredTableCell(const RVNGPropertyList &propList) {}
     virtual void closeTable() {}
 
-    virtual void definePageStyle(const WPXPropertyList&) {}
-    virtual void defineParagraphStyle(const WPXPropertyList&, const WPXPropertyListVector&) {}
-    virtual void defineCharacterStyle(const WPXPropertyList&) {}
-    virtual void defineSectionStyle(const WPXPropertyList&, const WPXPropertyListVector&) {}
+    virtual void definePageStyle(const RVNGPropertyList&) {}
+    virtual void defineParagraphStyle(const RVNGPropertyList&) {}
+    virtual void defineCharacterStyle(const RVNGPropertyList&) {}
+    virtual void defineSectionStyle(const RVNGPropertyList&) {}
     virtual void insertSpace() {}
-    virtual void insertField(const WPXString&, const WPXPropertyList&) {}
-    virtual void openComment(const WPXPropertyList&) {}
+    virtual void insertField(const RVNGPropertyList&) {}
+    virtual void openComment(const RVNGPropertyList&) {}
     virtual void closeComment() {}
-    virtual void openTextBox(const WPXPropertyList&) {}
+    virtual void openTextBox(const RVNGPropertyList&) {}
     virtual void closeTextBox() {}
-    virtual void openFrame(const WPXPropertyList&) {}
+    virtual void openFrame(const RVNGPropertyList&) {}
     virtual void closeFrame() {}
-    virtual void insertBinaryObject(const WPXPropertyList&, const WPXBinaryData&) {}
-    virtual void insertEquation(const WPXPropertyList&, const WPXString&) {}
+    virtual void insertBinaryObject(const RVNGPropertyList&) {}
+    virtual void insertEquation(const RVNGPropertyList&) {}
+
+    virtual void defineEmbeddedFont(const RVNGPropertyList&) {}
+
+    virtual void openLink(const RVNGPropertyList&) {}
+    virtual void closeLink() {}
+
+    virtual void openGroup(const RVNGPropertyList&) {}
+    virtual void closeGroup() {}
+
+    virtual void defineGraphicStyle(const RVNGPropertyList&) {}
+
+    virtual void drawRectangle(const RVNGPropertyList &propList) {}
+    virtual void drawEllipse(const RVNGPropertyList &propList) {}
+    virtual void drawPolygon(const RVNGPropertyList &propList) {}
+    virtual void drawPolyline(const RVNGPropertyList &propList) {}
+    virtual void drawPath(const RVNGPropertyList &propList) {}
+
+    virtual void drawConnector(const RVNGPropertyList &propList) {}
 
     QString root;
 
@@ -214,7 +246,7 @@ KWordListener::~KWordListener()
 {
 }
 
-void KWordListener::startDocument()
+void KWordListener::startDocument(const RVNGPropertyList &propList)
 {
     root = "<!DOCTYPE DOC>\n";
     root.append("<DOC mime=\"application/x-kword\" syntaxVersion=\"2\" editor=\"KWord\">\n");
@@ -239,7 +271,7 @@ void KWordListener::endDocument()
     root.append("</DOC>\n");
 }
 
-void KWordListener::openParagraph(const WPXPropertyList &propList, const WPXPropertyListVector &tabStops)
+void KWordListener::openParagraph(const RVNGPropertyList &propList)
 {
     root.append("<PARAGRAPH>\n");
     root.append("<TEXT>");
@@ -260,12 +292,12 @@ void KWordListener::insertTab()
 {
 }
 
-void KWordListener::insertText(const WPXString &text)
+void KWordListener::insertText(const RVNGString &text)
 {
     root.append(QString::fromUtf8(text.cstr()));
 }
 
-void KWordListener::openSpan(const WPXPropertyList &propList)
+void KWordListener::openSpan(const RVNGPropertyList &propList)
 {
 }
 
@@ -304,11 +336,11 @@ KoFilter::ConversionStatus WPImport::convert(const QByteArray& from, const QByte
     fclose(f);
 
     // instream now owns buf, no need to delete buf later
-    WPXMemoryInputStream* instream = new WPXMemoryInputStream(buf, fsize);
+    RVNGMemoryInputStream* instream = new RVNGMemoryInputStream(buf, fsize);
 
     // open and parse the file
     KWordListener listener;
-    WPDResult error = WPDocument::parse(instream, static_cast<WPXDocumentInterface *>(&listener), NULL);
+    WPDResult error = WPDocument::parse(instream, static_cast<RVNGTextInterface *>(&listener), NULL);
     delete instream;
 
     if (error != WPD_OK)

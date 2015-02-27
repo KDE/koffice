@@ -36,7 +36,7 @@ void FileOutputHandler::startDocument()
 {
 }
 
-void FileOutputHandler::startElement(const char *psName, const WPXPropertyList &xPropList)
+void FileOutputHandler::startElement(const char *psName, const RVNGPropertyList &xPropList)
 {
 	if (mbIsTagOpened)
 	{
@@ -45,7 +45,7 @@ void FileOutputHandler::startElement(const char *psName, const WPXPropertyList &
 	}
 	mContentStream << "<" << psName;
 
-	WPXPropertyList::Iter i(xPropList);
+	RVNGPropertyList::Iter i(xPropList);
 	for (i.rewind(); i.next(); )
 	{
 		// filter out libwpd elements
@@ -79,7 +79,7 @@ void FileOutputHandler::endElement(const char *psName)
 	}
 }
 
-void FileOutputHandler::characters(const WPXString &sCharacters)
+void FileOutputHandler::characters(const RVNGString &sCharacters)
 {
 	if (mbIsTagOpened)
 	{

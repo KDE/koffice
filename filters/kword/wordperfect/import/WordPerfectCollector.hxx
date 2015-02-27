@@ -67,95 +67,95 @@ enum WriterListType { unordered, ordered };
 
 struct ltstr
 {
-  bool operator()(const WPXString & s1, const WPXString & s2) const
+  bool operator()(const RVNGString & s1, const RVNGString & s2) const
   {
     return strcmp(s1.cstr(), s2.cstr()) < 0;
   }
 };
 
-class WordPerfectCollector : public WPXHLListenerImpl
+class WordPerfectCollector : public RVNGHLListenerImpl
 {
 public:
-	WordPerfectCollector(WPXInputStream *pInput, DocumentHandler *pHandler);
+	WordPerfectCollector(RVNGInputStream *pInput, DocumentHandler *pHandler);
 	virtual ~WordPerfectCollector();
 	bool filter();
 
- 	virtual void setDocumentMetaData(const WPXPropertyList &propList) {}
+ 	virtual void setDocumentMetaData(const RVNGPropertyList &propList) {}
 	virtual void startDocument() {}
 	virtual void endDocument() {}
 
-	virtual void openPageSpan(const WPXPropertyList &propList);
+	virtual void openPageSpan(const RVNGPropertyList &propList);
 	virtual void closePageSpan() {}
 
-	virtual void openSection(const WPXPropertyList &propList, const WPXPropertyListVector &columns);
+	virtual void openSection(const RVNGPropertyList &propList, const RVNGPropertyListVector &columns);
 	virtual void closeSection();
 
-	virtual void openHeader(const WPXPropertyList &propList);
+	virtual void openHeader(const RVNGPropertyList &propList);
 	virtual void closeHeader();
-	virtual void openFooter(const WPXPropertyList &propList);
+	virtual void openFooter(const RVNGPropertyList &propList);
 	virtual void closeFooter();
 
-	virtual void openParagraph(const WPXPropertyList &propList, const WPXPropertyListVector &tabStops);
+	virtual void openParagraph(const RVNGPropertyList &propList, const RVNGPropertyListVector &tabStops);
 	virtual void closeParagraph();
 	
-	virtual void openSpan(const WPXPropertyList &propList);
+	virtual void openSpan(const RVNGPropertyList &propList);
 	virtual void closeSpan();
 
 
 	virtual void insertTab();
-	virtual void insertText(const WPXString &text);
+	virtual void insertText(const RVNGString &text);
  	virtual void insertLineBreak();
 
-	virtual void defineOrderedListLevel(const WPXPropertyList &propList);
-	virtual void defineUnorderedListLevel(const WPXPropertyList &propList);	
-	virtual void openOrderedListLevel(const WPXPropertyList &propList);
-	virtual void openUnorderedListLevel(const WPXPropertyList &propList);
+	virtual void defineOrderedListLevel(const RVNGPropertyList &propList);
+	virtual void defineUnorderedListLevel(const RVNGPropertyList &propList);	
+	virtual void openOrderedListLevel(const RVNGPropertyList &propList);
+	virtual void openUnorderedListLevel(const RVNGPropertyList &propList);
 	virtual void closeOrderedListLevel();
 	virtual void closeUnorderedListLevel();
-	virtual void openListElement(const WPXPropertyList &propList, const WPXPropertyListVector &tabStops);
+	virtual void openListElement(const RVNGPropertyList &propList, const RVNGPropertyListVector &tabStops);
 	virtual void closeListElement();       
 
-	virtual void openFootnote(const WPXPropertyList &propList);
+	virtual void openFootnote(const RVNGPropertyList &propList);
 	virtual void closeFootnote();
-	virtual void openEndnote(const WPXPropertyList &propList);
+	virtual void openEndnote(const RVNGPropertyList &propList);
 	virtual void closeEndnote();
 
- 	virtual void openTable(const WPXPropertyList &propList, const WPXPropertyListVector &columns);
- 	virtual void openTableRow(const WPXPropertyList &propList);
+ 	virtual void openTable(const RVNGPropertyList &propList, const RVNGPropertyListVector &columns);
+ 	virtual void openTableRow(const RVNGPropertyList &propList);
 	virtual void closeTableRow();
- 	virtual void openTableCell(const WPXPropertyList &propList);
+ 	virtual void openTableCell(const RVNGPropertyList &propList);
 	virtual void closeTableCell();
-	virtual void insertCoveredTableCell(const WPXPropertyList &propList);
+	virtual void insertCoveredTableCell(const RVNGPropertyList &propList);
  	virtual void closeTable();
 
 protected:
 	void _resetDocumentState();
-	bool _parseSourceDocument(WPXInputStream &input);
+	bool _parseSourceDocument(RVNGInputStream &input);
 	bool _writeTargetDocument(DocumentHandler &xHandler);
 	void _writeBegin();
 	void _writeDefaultStyles(DocumentHandler &xHandler);
 	void _writeMasterPages(DocumentHandler &xHandler);
 	void _writePageMasters(DocumentHandler &xHandler);
-	void _allocateFontName(const WPXString &);
+	void _allocateFontName(const RVNGString &);
 
 private:
 	void _openListLevel(TagOpenElement *pListLevelOpenElement);
 	void _closeListLevel(const char *szListType);
 
-        WPXInputStream *mpInput;
+        RVNGInputStream *mpInput;
         DocumentHandler *mpHandler;
 	bool mbUsed; // whether or not it has been before (you can only use me once!)
 
 	WriterDocumentState mWriterDocumentState;
 
 	// paragraph styles
-	std::map<WPXString, ParagraphStyle *, ltstr> mTextStyleHash;
+	std::map<RVNGString, ParagraphStyle *, ltstr> mTextStyleHash;
 
         // span styles
-        std::map<WPXString, SpanStyle *, ltstr> mSpanStyleHash;
+        std::map<RVNGString, SpanStyle *, ltstr> mSpanStyleHash;
 
 	// font styles
-	std::map<WPXString, FontStyle *, ltstr> mFontHash;
+	std::map<RVNGString, FontStyle *, ltstr> mFontHash;
 
 	// section styles
 	std::vector<SectionStyle *> mSectionStyles;

@@ -36,23 +36,23 @@ class TopLevelElementStyle
 public:
 	TopLevelElementStyle() : mpsMasterPageName(NULL) { }
 	virtual ~TopLevelElementStyle() { if (mpsMasterPageName) delete mpsMasterPageName; }
-	void setMasterPageName(WPXString &sMasterPageName) { mpsMasterPageName = new WPXString(sMasterPageName); }
-	const WPXString * getMasterPageName() const { return mpsMasterPageName; }
+	void setMasterPageName(RVNGString &sMasterPageName) { mpsMasterPageName = new RVNGString(sMasterPageName); }
+	const RVNGString * getMasterPageName() const { return mpsMasterPageName; }
 
 private:
-	WPXString *mpsMasterPageName;
+	RVNGString *mpsMasterPageName;
 };
 
 class Style
 {
  public:
-	Style(const WPXString &psName) : msName(psName) {}
+	Style(const RVNGString &psName) : msName(psName) {}
 	virtual ~Style() {}
 
 	virtual void write(DocumentHandler &xHandler) const {};
-	const WPXString &getName() const { return msName; }
+	const RVNGString &getName() const { return msName; }
 
  private:
-	WPXString msName;
+	RVNGString msName;
 };
 #endif

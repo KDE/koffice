@@ -1,4 +1,4 @@
-include_directories(${WPD_INCLUDE_DIR})
+include_directories(${WPD_INCLUDE_DIR} ${LIBREVENGE_INCLUDE_DIR})
 
 ########### next target ###############
 
@@ -6,7 +6,7 @@ set(wpimport_PART_SRCS wpimport.cc )
 
 kde4_add_plugin(wpimport ${wpimport_PART_SRCS})
 
-target_link_libraries(wpimport komain ${WPD_LIBRARIES})
+target_link_libraries(wpimport komain ${WPD_LIBRARIES} ${LIBREVENGE_LIBRARIES})
 
 ########### install files ###############
 

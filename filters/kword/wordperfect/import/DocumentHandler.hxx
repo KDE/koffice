@@ -28,16 +28,16 @@
 #ifndef DOCUMENTHANDLER_H
 #define DOCUMENTHANDLER_H
 #include <libwpd/libwpd.h>
-#include <libwpd/WPXProperty.h>
-#include <libwpd/WPXString.h>
+#include <libwpd/RVNGProperty.h>
+#include <libwpd/RVNGString.h>
 
 class DocumentHandler
 {
 public:
         virtual void startDocument() = 0;
         virtual void endDocument() = 0;
-        virtual void startElement(const char *psName, const WPXPropertyList &xPropList) = 0;
+        virtual void startElement(const char *psName, const RVNGPropertyList &xPropList) = 0;
         virtual void endElement(const char *psName) = 0;
-        virtual void characters(const WPXString &sCharacters) = 0;
+        virtual void characters(const RVNGString &sCharacters) = 0;
 };
 #endif

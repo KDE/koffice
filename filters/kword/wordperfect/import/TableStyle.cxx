@@ -36,7 +36,7 @@
 #include <minmax.h>
 #endif
 
-TableCellStyle::TableCellStyle(const WPXPropertyList &xPropList, const char *psName) :
+TableCellStyle::TableCellStyle(const RVNGPropertyList &xPropList, const char *psName) :
 	Style(psName),
         mPropList(xPropList)
 {
@@ -51,8 +51,8 @@ void TableCellStyle::write(DocumentHandler &xHandler) const
 
         // WLACH_REFACTORING: Only temporary.. a much better solution is to
         // generalize this sort of thing into the "Style" superclass
-        WPXPropertyList stylePropList;
-        WPXPropertyList::Iter i(mPropList);
+        RVNGPropertyList stylePropList;
+        RVNGPropertyList::Iter i(mPropList);
         for (i.rewind(); i.next();)
         {
                 if (strlen(i.key()) > 2 && strncmp(i.key(), "fo", 2) == 0)
@@ -65,7 +65,7 @@ void TableCellStyle::write(DocumentHandler &xHandler) const
 	xHandler.endElement("style:style");	
 }
 
-TableRowStyle::TableRowStyle(const WPXPropertyList &propList, const char *psName) :
+TableRowStyle::TableRowStyle(const RVNGPropertyList &propList, const char *psName) :
 	Style(psName),
         mPropList(propList)
 {
@@ -90,7 +90,7 @@ void TableRowStyle::write(DocumentHandler &xHandler) const
 }
 	
 
-TableStyle::TableStyle(const WPXPropertyList &xPropList, const WPXPropertyListVector &columns, const char *psName) : 
+TableStyle::TableStyle(const RVNGPropertyList &xPropList, const RVNGPropertyListVector &columns, const char *psName) : 
 	Style(psName),
         mPropList(xPropList),
         mColumns(columns)
@@ -132,11 +132,11 @@ void TableStyle::write(DocumentHandler &xHandler) const
 	xHandler.endElement("style:style");
 		
 	int i=1;
-        WPXPropertyListVector::Iter j(mColumns);
+        RVNGPropertyListVector::Iter j(mColumns);
 	for (j.rewind(); j.next();)
 	{
 		TagOpenElement styleOpen("style:style");
-		WPXString sColumnName;
+		RVNGString sColumnName;
 		sColumnName.sprintf("%s.Column%i", getName().cstr(), i);
 		styleOpen.addAttribute("style:name", sColumnName);
 		styleOpen.addAttribute("style:family", "table-column");

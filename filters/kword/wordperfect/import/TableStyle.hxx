@@ -40,25 +40,25 @@ class DocumentHandler;
 class TableCellStyle : public Style
 {
 public:
-	TableCellStyle(const WPXPropertyList &xPropList, const char *psName);
+	TableCellStyle(const RVNGPropertyList &xPropList, const char *psName);
 	virtual void write(DocumentHandler &xHandler) const;
 private:
-        WPXPropertyList mPropList;
+        RVNGPropertyList mPropList;
 };
 
 class TableRowStyle : public Style
 {
 public:
-	TableRowStyle(const WPXPropertyList &propList, const char *psName);
+	TableRowStyle(const RVNGPropertyList &propList, const char *psName);
 	virtual void write(DocumentHandler &xHandler) const;
 private:
-        WPXPropertyList mPropList;
+        RVNGPropertyList mPropList;
 };
 
 class TableStyle : public Style, public TopLevelElementStyle
 {
 public:
-	TableStyle(const WPXPropertyList &xPropList, const WPXPropertyListVector &columns, const char *psName);
+	TableStyle(const RVNGPropertyList &xPropList, const RVNGPropertyListVector &columns, const char *psName);
 	~TableStyle();
 	virtual void write(DocumentHandler &xHandler) const;
 	const int getNumColumns() const { return mColumns.count(); }
@@ -67,8 +67,8 @@ public:
 	void addTableRowStyle(TableRowStyle *pTableRowStyle) { mTableRowStyles.push_back(pTableRowStyle); }
 	int getNumTableRowStyles() { return mTableRowStyles.size(); }
 private:	
-        WPXPropertyList mPropList;
-	WPXPropertyListVector mColumns;
+        RVNGPropertyList mPropList;
+	RVNGPropertyListVector mColumns;
 	std::vector<TableCellStyle *> mTableCellStyles;
 	std::vector<TableRowStyle *> mTableRowStyles;
 };

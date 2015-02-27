@@ -39,7 +39,7 @@ void TagOpenElement::print() const
 	TagElement::print(); 	
 }
 
-void TagOpenElement::addAttribute(const char *szAttributeName, const WPXString &sAttributeValue)
+void TagOpenElement::addAttribute(const char *szAttributeName, const RVNGString &sAttributeValue)
 {
         maAttrList.insert(szAttributeName, sAttributeValue);
 }

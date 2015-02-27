@@ -37,8 +37,8 @@ double rint(double x);
 #endif /* _WIN32 */
 
 
-SectionStyle::SectionStyle(const WPXPropertyList &xPropList,
-                           const WPXPropertyListVector &xColumns,
+SectionStyle::SectionStyle(const RVNGPropertyList &xPropList,
+                           const RVNGPropertyListVector &xColumns,
                            const char *psName) :
         Style(psName),
         mPropList(xPropList),
@@ -60,11 +60,11 @@ void SectionStyle::write(DocumentHandler &xHandler) const
                 xHandler.startElement("style:properties", mPropList);
 
 		// column properties
-                WPXPropertyList columnProps;
+                RVNGPropertyList columnProps;
                 columnProps.insert("fo:column-count", (int)mColumns.count());
                 xHandler.startElement("style:columns", columnProps);
 
-                WPXPropertyListVector::Iter i(mColumns);
+                RVNGPropertyListVector::Iter i(mColumns);
                 for (i.rewind(); i.next();)
 		{
                         xHandler.startElement("style:column", i());

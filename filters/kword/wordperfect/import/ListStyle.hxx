@@ -45,19 +45,19 @@ public:
 class OrderedListLevelStyle : public ListLevelStyle
 {
 public:
-	explicit OrderedListLevelStyle(const WPXPropertyList &xPropList);
+	explicit OrderedListLevelStyle(const RVNGPropertyList &xPropList);
 	virtual void write(DocumentHandler &xHandler, int iLevel) const;
 private:
-        WPXPropertyList mPropList;
+        RVNGPropertyList mPropList;
 };
 
 class UnorderedListLevelStyle : public ListLevelStyle
 {
 public:
-	explicit UnorderedListLevelStyle(const WPXPropertyList &xPropList);
+	explicit UnorderedListLevelStyle(const RVNGPropertyList &xPropList);
 	virtual void write(DocumentHandler &xHandler, int iLevel) const;
 private:
-        WPXPropertyList mPropList;
+        RVNGPropertyList mPropList;
 };
 
 class ListStyle : public Style
@@ -65,7 +65,7 @@ class ListStyle : public Style
 public:
 	ListStyle(const char *psName, const int iListID);
 	virtual ~ListStyle();
-	virtual void updateListLevel(const int iLevel, const WPXPropertyList &xPropList) = 0;
+	virtual void updateListLevel(const int iLevel, const RVNGPropertyList &xPropList) = 0;
 	virtual void write(DocumentHandler &xHandler) const;
 	const int getListID() { return miListID; }
 	const bool isListLevelDefined(int iLevel) const;
@@ -83,13 +83,13 @@ class OrderedListStyle : public ListStyle
 {
 public:
 	OrderedListStyle(const char *psName, const int iListID) : ListStyle(psName, iListID) {}
-	void updateListLevel(const int iLevel, const WPXPropertyList &xPropList);
+	void updateListLevel(const int iLevel, const RVNGPropertyList &xPropList);
 };
 
 class UnorderedListStyle : public ListStyle
 {
 public:
 	UnorderedListStyle(const char *psName, const int iListID) : ListStyle(psName, iListID) {}
-	void updateListLevel(const int iLevel, const WPXPropertyList &xPropList);
+	void updateListLevel(const int iLevel, const RVNGPropertyList &xPropList);
 };
 #endif

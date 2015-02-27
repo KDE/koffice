@@ -37,7 +37,7 @@
 #include <minmax.h>
 #endif
 
-ParagraphStyle::ParagraphStyle(WPXPropertyList *pPropList, const WPXPropertyListVector &xTabStops, const WPXString &sName) :
+ParagraphStyle::ParagraphStyle(RVNGPropertyList *pPropList, const RVNGPropertyListVector &xTabStops, const RVNGString &sName) :
 	mpPropList(pPropList),
 	mxTabStops(xTabStops),
 	msName(sName)
@@ -53,7 +53,7 @@ void ParagraphStyle::write(DocumentHandler &xHandler) const
 {
 	WRITER_DEBUG_MSG(("Writing a paragraph style..\n"));
 
-        WPXPropertyList propList;
+        RVNGPropertyList propList;
 	propList.insert("style:name", msName.cstr());
 	propList.insert("style:family", "paragraph");
 	propList.insert("style:parent-style-name", (*mpPropList)["style:parent-style-name"]->getStr());
@@ -62,7 +62,7 @@ void ParagraphStyle::write(DocumentHandler &xHandler) const
         xHandler.startElement("style:style", propList);
 
         propList.clear();
-	WPXPropertyList::Iter i((*mpPropList));
+	RVNGPropertyList::Iter i((*mpPropList));
 	for (i.rewind(); i.next(); )
 	{
                 if (strcmp(i.key(), "style:list-style-name") == 0)
@@ -94,12 +94,12 @@ void ParagraphStyle::write(DocumentHandler &xHandler) const
         {
                 TagOpenElement tabListOpen("style:tab-stops");
                 tabListOpen.write(xHandler);
-                WPXPropertyListVector::Iter i(mxTabStops);
+                RVNGPropertyListVector::Iter i(mxTabStops);
                 for (i.rewind(); i.next();)
                 {
                         TagOpenElement tabStopOpen("style:tab-stop");
                         
-                        WPXPropertyList::Iter j(i());
+                        RVNGPropertyList::Iter j(i());
                         for (j.rewind(); j.next(); )
                         {
                                 tabStopOpen.addAttribute(j.key(), j()->getStr().cstr());			
@@ -114,7 +114,7 @@ void ParagraphStyle::write(DocumentHandler &xHandler) const
 	xHandler.endElement("style:style");
 }
 
-SpanStyle::SpanStyle(const char *psName, const WPXPropertyList &xPropList) :
+SpanStyle::SpanStyle(const char *psName, const RVNGPropertyList &xPropList) :
 	Style(psName),
         mPropList(xPropList)
 {
@@ -123,12 +123,12 @@ SpanStyle::SpanStyle(const char *psName, const WPXPropertyList &xPropList) :
 void SpanStyle::write(DocumentHandler &xHandler) const 
 {
 	WRITER_DEBUG_MSG(("Writing a span style..\n"));
-        WPXPropertyList styleOpenList;    
+        RVNGPropertyList styleOpenList;    
 	styleOpenList.insert("style:name", getName());
 	styleOpenList.insert("style:family", "text");
         xHandler.startElement("style:style", styleOpenList);
 
-        WPXPropertyList propList(mPropList);    
+        RVNGPropertyList propList(mPropList);    
 
 	if (mPropList["style:font-name"])
 	{

@@ -34,40 +34,90 @@
 #include "GraphicsElement.hxx"
 #include "FileOutputHandler.hxx"
 
+using namespace libwpg;
+using namespace librevenge;
+
 enum OdfStreamType { ODF_FLAT_XML, ODF_CONTENT_XML, ODF_STYLES_XML, ODF_SETTINGS_XML, ODF_META_XML };
 
-class OdgExporter : public libwpg::WPGPaintInterface {
+class OdgExporter : public RVNGDrawingInterface {
 public:
 	OdgExporter(FileOutputHandler *pHandler, const OdfStreamType streamType);
 	~OdgExporter();
 
-	void startGraphics(const ::WPXPropertyList &propList);
-	void endGraphics();
-	void startLayer(const ::WPXPropertyList &propList);
+	void startDocument(const ::RVNGPropertyList &propList);
+	void endDocument();
+
+        void setDocumentMetaData(const ::RVNGPropertyList &propList) {}
+	void defineEmbeddedFont(const ::RVNGPropertyList &propList) {}
+	void startPage(const ::RVNGPropertyList &propList) {}
+	void endPage() {}
+	void startMasterPage(const ::RVNGPropertyList &propList) {}
+	void endMasterPage() {}
+
+	void setStyle(const ::RVNGPropertyList &propList);
+
+	void startLayer(const ::RVNGPropertyList &propList);
 	void endLayer();
-	void startEmbeddedGraphics(const ::WPXPropertyList& /*propList*/) {}
+	void startEmbeddedGraphics(const ::RVNGPropertyList& /*propList*/) {}
 	void endEmbeddedGraphics() {}
 
-	void setStyle(const ::WPXPropertyList &propList, const ::WPXPropertyListVector& gradient);
+	void openGroup(const ::RVNGPropertyList &propList) {}
+	void closeGroup() {}
 
-	void drawRectangle(const ::WPXPropertyList &propList);
-	void drawEllipse(const ::WPXPropertyList &propList);
-	void drawPolyline(const ::WPXPropertyListVector& vertices);
-	void drawPolygon(const ::WPXPropertyListVector& vertices);
-	void drawPath(const ::WPXPropertyListVector& path);
-	void drawGraphicObject(const ::WPXPropertyList &propList, const ::WPXBinaryData& binaryData);
-	void startTextObject(const ::WPXPropertyList &propList, const ::WPXPropertyListVector &path) {}
+	void drawRectangle(const ::RVNGPropertyList &propList);
+	void drawEllipse(const ::RVNGPropertyList &propList);
+	void drawPolyline(const ::RVNGPropertyList &propList);
+	void drawPolygon(const ::RVNGPropertyList &propList);
+	void drawPath(const ::RVNGPropertyList &propList);
+	void drawGraphicObject(const ::RVNGPropertyList &propList);
+
+	void drawConnector(const ::RVNGPropertyList &propList) {}
+
+	void startTextObject(const ::RVNGPropertyList &propList) {}
 	void endTextObject() {}
-	void startTextLine(const ::WPXPropertyList &propList) {}
+
+	void startTableObject(const ::RVNGPropertyList &propList) {}
+	void openTableRow(const ::RVNGPropertyList &propList) {}
+	void closeTableRow() {}
+	void openTableCell(const ::RVNGPropertyList &propList) {}
+	void closeTableCell() {}
+	void insertCoveredTableCell(const ::RVNGPropertyList &propList) {}
+	void endTableObject() {}
+
+	void insertTab() {}
+	void insertSpace() {}
+
+	void startTextLine(const ::RVNGPropertyList &propList) {}
 	void endTextLine() {}
-	void startTextSpan(const ::WPXPropertyList &propList) {}
+	void startTextSpan(const ::RVNGPropertyList &propList) {}
 	void endTextSpan() {}
-	void insertText(const ::WPXString &str) {}
+	void insertText(const ::RVNGString &str) {}
+
+	void insertLineBreak() {}
+	void insertField(const ::RVNGPropertyList &propList) {}
+	
+        void openOrderedListLevel(const ::RVNGPropertyList &propList) {}
+        void openUnorderedListLevel(const ::RVNGPropertyList &propList) {}
+	void closeOrderedListLevel() {}
+	void closeUnorderedListLevel() {}
+        void openListElement(const ::RVNGPropertyList &propList) {}
+	void closeListElement() {}
+
+	void defineParagraphStyle(const RVNGPropertyList &propList) {}
+	void openParagraph(const RVNGPropertyList &propList) {}
+	void closeParagraph() {}
+	
+	void defineCharacterStyle(const RVNGPropertyList &propList) {}
+
+	void openSpan(const RVNGPropertyList &propList) {}
+	void closeSpan() {}
+	void openLink(const RVNGPropertyList &propList) {}
+	void closeLink() {}
 
 private:
 	void writeGraphicsStyle();
-	WPXString doubleToString(const double value);
-	void drawPolySomething(const ::WPXPropertyListVector& vertices, bool isClosed);
+	RVNGString doubleToString(const double value);
+	void drawPolySomething(const ::RVNGPropertyListVector& vertices, bool isClosed);
 	
 	// body elements
 	std::vector <GraphicsElement *> mBodyElements;
@@ -79,8 +129,8 @@ private:
 
 	FileOutputHandler *mpHandler;
 
-	::WPXPropertyList mxStyle;
-	::WPXPropertyListVector mxGradient;
+	::RVNGPropertyList mxStyle;
+	::RVNGPropertyListVector mxGradient;
 	int miGradientIndex;
 	int miDashIndex;
 	int miGraphicsStyleIndex;

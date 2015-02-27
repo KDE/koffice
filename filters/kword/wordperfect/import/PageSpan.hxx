@@ -36,7 +36,7 @@ class DocumentHandler;
 class PageSpan
 {
 public:
-	explicit PageSpan(const WPXPropertyList &xPropList);
+	explicit PageSpan(const RVNGPropertyList &xPropList);
 	virtual ~PageSpan();
 	void writePageMaster(const int iNum, DocumentHandler &xHandler) const;
 	void writeMasterPages(const int iStartingNum, const int iPageMasterNum, const bool bLastPageSpan, DocumentHandler &xHandler) const;
@@ -44,7 +44,7 @@ public:
 #if 0
 	float getFormLength() { return mfFormLength; }
 	float getFormWidth() { return mfFormWidth; }
-	WPXFormOrientation getFormOrientation() { return mfFormOrientation; }
+	RVNGFormOrientation getFormOrientation() { return mfFormOrientation; }
 #endif
 	float getMarginLeft() const;
 	float getMarginRight() const;
@@ -58,7 +58,7 @@ protected:
 	void _writeHeaderFooter(const char *headerFooterTagName, const std::vector<DocumentElement *> & headerFooterContent,
 				DocumentHandler &xHandler) const;
 private:
-        WPXPropertyList mxPropList;
+        RVNGPropertyList mxPropList;
 	std::vector<DocumentElement *> * mpHeaderContent;
 	std::vector<DocumentElement *> * mpFooterContent;
 	std::vector<DocumentElement *> * mpHeaderLeftContent;

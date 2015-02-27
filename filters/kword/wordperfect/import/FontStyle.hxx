@@ -38,10 +38,10 @@ public:
 	FontStyle(const char *psName, const char *psFontFamily);
 	~FontStyle();
 	virtual void write(DocumentHandler &xHandler) const;
-	const WPXString &getFontFamily() const { return msFontFamily; }
+	const RVNGString &getFontFamily() const { return msFontFamily; }
 
 private:
-	WPXString msFontFamily;
-	WPXString msFontPitch;
+	RVNGString msFontFamily;
+	RVNGString msFontPitch;
 };
 #endif
