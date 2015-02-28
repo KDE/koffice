@@ -42,13 +42,10 @@
 
 /*
  *  Constructs a XSLTImportDia which is a child of 'parent', with the
- *  name 'name' and widget flags set to 'f'.
- *
- *  The dialog will by default be modeless, unless you set 'modal' to
- *  true to construct a modal dialog.
+ *  widget flags set to 'f'.
  */
-XSLTImportDia::XSLTImportDia(KOdfStore* out, const QByteArray &format, QWidget* parent,  const char* name_, bool modal, Qt::WFlags fl)
-        : XSLTDialog(parent, name_, modal, fl)
+XSLTImportDia::XSLTImportDia(KOdfStore* out, const QByteArray &format, QWidget* parent,  Qt::WFlags fl)
+        : QDialog(parent, fl)
 {
     int i = 0;
     _out = out;
@@ -91,14 +88,13 @@ XSLTImportDia::XSLTImportDia(KOdfStore* out, const QByteArray &format, QWidget* 
         tempList.pop_back();
         kDebug() << name << "" << file;
         if (!_namesList.contains(name) && file == "main.xsl") {
-            _filesList.append(file);
             _namesList.append(name);
-            _dirsList.append(tempList.join("/"));
+	    QListWidgetItem* item = new QListWidgetItem(name, xsltList);
+            item->setData(FILEROLE, file);
+            item->setData(DIRROLE, tempList.join("/"));
             kDebug() << file << " get";
         }
     }
-
-    xsltList->insertStringList(_namesList);
     kapp->restoreOverrideCursor();
 }
 
@@ -184,9 +180,12 @@ void XSLTImportDia::chooseRecentSlot()
  */
 void XSLTImportDia::chooseCommonSlot()
 {
-    int num = xsltList->currentItem();
-    _currentFile = QDir::separator() + _dirsList[num] + QDir::separator() +
-                   xsltList->currentText() + QDir::separator() + _filesList[num];
+    QString name = qvariant_cast<QString>(xsltList->currentItem()->data(Qt::DisplayRole));
+    QString dir = qvariant_cast<QString>(xsltList->currentItem()->data(DIRROLE));
+    QString file = qvariant_cast<QString>(xsltList->currentItem()->data(FILEROLE));
+
+    _currentFile = QDir::separator() + dir + QDir::separator() +
+                   name + QDir::separator() + file;
     kDebug() << "common slot :" << _currentFile.url();
 }
 

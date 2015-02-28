@@ -28,12 +28,15 @@
 
 #include <KOdfStore.h>
 
-#include "xsltdialog.h"
+#include "ui_xsltdialog.h"
 
-class XSLTImportDia : public XSLTDialog
+class XSLTImportDia : public QDialog, Ui::XSLTDialog
 {
     Q_OBJECT
 
+    static const Qt::ItemDataRole FILEROLE = Qt::UserRole;
+    static const Qt::ItemDataRole DIRROLE = (Qt::ItemDataRole)(Qt::UserRole+1);
+    
     QString _fileIn;
     QString _fileOut;
     QByteArray _arrayIn;
@@ -52,7 +55,7 @@ class XSLTImportDia : public XSLTDialog
     QStringList _namesList;
 
 public:
-    XSLTImportDia(KOdfStore*, const QByteArray &format, QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WFlags fl = 0);
+    XSLTImportDia(KOdfStore*, const QByteArray &format, QWidget* parent = 0, Qt::WFlags fl = 0);
     ~XSLTImportDia();
 
     void setInputFile(QString file)  {
