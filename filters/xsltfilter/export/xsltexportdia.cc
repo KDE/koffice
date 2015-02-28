@@ -46,18 +46,15 @@
 
 /*
  *  Constructs a XSLTExportDia which is a child of 'parent', with the
- *  name 'name' and widget flags set to 'f'.
- *
- *  The dialog will by default be modeless, unless you set 'modal' to
- *  true to construct a modal dialog.
+ *  widget flags set to 'f'.
  */
-XSLTExportDia::XSLTExportDia(KOdfStorageDevice* in, const QByteArray &format, QWidget* parent,  const char* name_, bool modal, Qt::WFlags fl)
-        : XSLTDialog(parent, name_, modal, fl)
+XSLTExportDia::XSLTExportDia(KOdfStorageDevice* in, const QByteArray &format, QWidget* parent, Qt::WFlags fl)
+        : QDialog(parent, fl)
 {
     int i = 0;
     _in = in;
     _format = format;
-    setCaption(i18n("Export XSLT Configuration"));
+    setWindowTitle(i18n("Export XSLT Configuration"));
 
     kapp->restoreOverrideCursor();
 
@@ -90,21 +87,20 @@ XSLTExportDia::XSLTExportDia(KOdfStorageDevice* in, const QByteArray &format, QW
     QString file;
 
     for (QStringList::Iterator it = commonFilesList.begin(); it != commonFilesList.end(); ++it) {
-        tempList = QStringList::split("/", (*it));
+        tempList = it->split('/');
         file = tempList.last();
         tempList.pop_back();
         name = tempList.last();
         tempList.pop_back();
         kDebug() << name << "" << file;
         if (!_namesList.contains(name) && file == "main.xsl") {
-            _filesList.append(file);
-            _namesList.append(name);
-            _dirsList.append(tempList.join("/"));
+		_namesList.append(name);
+		QListWidgetItem* item = new QListWidgetItem(name, xsltList);
+		item->setData(FILEROLE, file);
+                item->setData(DIRROLE, tempList.join("/"));
             kDebug() << file << " get";
         }
     }
-
-    xsltList->insertStringList(_namesList);
 }
 
 /*
@@ -173,7 +169,7 @@ void XSLTExportDia::chooseSlot()
 }
 
 /**
- * Called when the user clic on an element in the recent list.
+ * Called when the user clicks on an element in the recent list.
  * Change the value of the current file.
  */
 void XSLTExportDia::chooseRecentSlot()
@@ -183,14 +179,16 @@ void XSLTExportDia::chooseRecentSlot()
 }
 
 /**
- * Called when teh user clic on an element in the common list of xslt sheet.
+ * Called when the user clicks on an element in the common list of xslt sheet.
  * Change the value of the current file.
  */
 void XSLTExportDia::chooseCommonSlot()
 {
-    int num = xsltList->currentItem();
-    _currentFile = QDir::separator() + _dirsList[num] + QDir::separator() +
-                   xsltList->currentText() + QDir::separator() + _filesList[num];
+    QString name = qvariant_cast<QString>(xsltList->currentItem()->data(Qt::DisplayRole));
+    QString dir = qvariant_cast<QString>(xsltList->currentItem()->data(DIRROLE));
+    QString file = qvariant_cast<QString>(xsltList->currentItem()->data(FILEROLE));
+    _currentFile = QDir::separator() + dir + QDir::separator() +
+                   name + QDir::separator() + file;
     kDebug() << "common slot :" << _currentFile.url();
 }
 

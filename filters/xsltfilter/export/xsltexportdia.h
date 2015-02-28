@@ -20,7 +20,7 @@
 #ifndef XSLTEXPORTDIA_H
 #define XSLTEXPORTDIA_H
 
-#include "xsltdialog.h"
+#include "ui_xsltdialog.h"
 
 #include <QtCore/QStringList>
 #include <QtCore/QByteArray>
@@ -31,10 +31,12 @@
 class KOdfStorageDevice;
 class KConfig;
 
-class XSLTExportDia : public XSLTDialog
+class XSLTExportDia : public QDialog, public Ui::XSLTDialog
 {
     Q_OBJECT
 
+    static const Qt::ItemDataRole FILEROLE = Qt::UserRole;
+    static const Qt::ItemDataRole DIRROLE = (Qt::ItemDataRole)(Qt::UserRole+1);
     QString _fileOut;
     KOdfStorageDevice* _in;
     /** xslt file current */
@@ -42,16 +44,14 @@ class XSLTExportDia : public XSLTDialog
     QByteArray _format;
     KConfig* _config;
     KConfigGroup grp;
-    /** List of the most recent xslt file used. */
+    /** List of the most recent xslt files used. */
     QStringList _recentList;
 
-    /** Lits use for common xslt files. */
-    QStringList _dirsList;
-    QStringList _filesList;
+    /** List use of common xslt files. */
     QStringList _namesList;
 
 public:
-    XSLTExportDia(KOdfStorageDevice*, const QByteArray &format, QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WFlags fl = 0);
+    XSLTExportDia(KOdfStorageDevice*, const QByteArray &format, QWidget* parent = 0, Qt::WFlags fl = 0);
     ~XSLTExportDia();
 
     void setOutputFile(QString file) {

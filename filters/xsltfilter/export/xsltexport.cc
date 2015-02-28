@@ -59,7 +59,7 @@ KoFilter::ConversionStatus XSLTExport::convert(const QByteArray& from, const QBy
         return KoFilter::FileNotFound;
     }
 
-    QPointer<XSLTExportDia> dialog = new XSLTExportDia(in, from, 0, "Exportation", true);
+    QPointer<XSLTExportDia> dialog = new XSLTExportDia(in, from, 0);
     dialog->setOutputFile(m_chain->outputFile());
     dialog->exec();
     delete dialog;
