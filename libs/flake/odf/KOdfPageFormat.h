@@ -66,7 +66,8 @@ enum Format {
     IsoDLSize,
     UsFolioSize,
     UsLedgerSize,
-    UsTabloidSize
+    UsTabloidSize,
+    LastFormat = -1 //Not a real size, indicates end of enum so that we can loop over the values in the PageInfo[] list.
 };
 
 /**

@@ -85,7 +85,7 @@ const PageFormatInfo pageFormatInfo[] = {
     { KOdfPageFormat::UsFolioSize,     QPrinter::Folio,     "Folio",     I18N_NOOP2("Page size", "US Folio"),     210.0,  330.0 }, // should be 209.54 mm x 330.2 mm
     { KOdfPageFormat::UsLedgerSize,    QPrinter::Ledger,    "Ledger",    I18N_NOOP2("Page size", "US Ledger"),    432.0,  279.0 }, // should be 431.8 mm x 297.4 mm
     { KOdfPageFormat::UsTabloidSize,   QPrinter::Tabloid,   "Tabloid",   I18N_NOOP2("Page size", "US Tabloid"),   279.0,  432.0 },  // should be 297.4 mm x 431.8 mm
-    {(KOdfPageFormat::Format) - 1, (QPrinter::PageSize) - 1,   "",   "",   -1,  -1 }
+    { KOdfPageFormat::LastFormat, (QPrinter::PageSize) - 1,   "",   "",   -1,  -1 }
 };
 
 QPrinter::PageSize KOdfPageFormat::printerPageSize(KOdfPageFormat::Format format)
@@ -117,7 +117,7 @@ qreal KOdfPageFormat::height(Format format, Orientation orientation)
 
 KOdfPageFormat::Format KOdfPageFormat::guessFormat(qreal width, qreal height)
 {
-    for (int i = 0; pageFormatInfo[i].format != -1 ;i++) {
+    for (int i = 0; pageFormatInfo[i].format != KOdfPageFormat::LastFormat ;i++) {
         // We have some tolerance. 1pt is a third of a mm, this is
         // barely noticeable for a page size.
         if (qAbs(width - pageFormatInfo[i].width) < 1.0 && qAbs(height - pageFormatInfo[i].height) < 1.0)
@@ -133,7 +133,7 @@ QString KOdfPageFormat::formatString(Format format)
 
 KOdfPageFormat::Format KOdfPageFormat::formatFromString(const QString & string)
 {
-    for (int i = 0; pageFormatInfo[i].format != -1 ;i++) {
+    for (int i = 0; pageFormatInfo[i].format != KOdfPageFormat::LastFormat ;i++) {
         if (string == QString::fromLatin1(pageFormatInfo[ i ].shortName))
             return pageFormatInfo[ i ].format;
     }
@@ -144,7 +144,7 @@ KOdfPageFormat::Format KOdfPageFormat::formatFromString(const QString & string)
 KOdfPageFormat::Format KOdfPageFormat::defaultFormat()
 {
     int qprinter = KGlobal::locale()->pageSize();
-    for (int i = 0; pageFormatInfo[i].format != -1 ;i++) {
+    for (int i = 0; pageFormatInfo[i].format != KOdfPageFormat::LastFormat ;i++) {
         if (pageFormatInfo[ i ].qprinter == qprinter)
             return static_cast<Format>(i);
     }
@@ -159,7 +159,7 @@ QString KOdfPageFormat::name(Format format)
 QStringList KOdfPageFormat::allFormats()
 {
     QStringList lst;
-    for (int i = 0; pageFormatInfo[i].format != -1 ;i++) {
+    for (int i = 0; pageFormatInfo[i].format != KOdfPageFormat::LastFormat ;i++) {
         lst << i18nc("Page size", pageFormatInfo[ i ].descriptiveName);
     }
     return lst;
