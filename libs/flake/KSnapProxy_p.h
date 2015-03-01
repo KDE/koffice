@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 #ifndef KSNAPPROXY_H
-#define KSNAPPROXY_h
+#define KSNAPPROXY_H
 
 //
 //  W A R N I N G
