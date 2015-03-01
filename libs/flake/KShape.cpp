@@ -1270,7 +1270,7 @@ KShapeBorderBase *KShape::loadOdfStroke(const KXmlElement &element, KShapeLoadin
 
             // FIXME: (make it possible to) use a cosmetic pen
             if (pen.widthF() == 0.0)
-                pen.setWidth(0.5);
+                pen.setWidthF(0.5);
             border->setPen(pen);
             return border;
         }
