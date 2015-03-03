@@ -75,9 +75,6 @@
        </widget>
       </item>
      </layout>
-     <zorder>recentBox</zorder>
-     <zorder>Spacer2</zorder>
-     <zorder>chooseBtn</zorder>
     </widget>
    </item>
    <item>
