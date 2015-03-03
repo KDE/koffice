@@ -313,7 +313,7 @@ QTreeWidgetItem* KoOpenPane::addPane(const QString& title, const QPixmap& icon, 
             image = image.scaled(48, 48, Qt::KeepAspectRatio, Qt::SmoothTransformation);
         }
 
-        image.convertToFormat(QImage::Format_ARGB32);
+        image = image.convertToFormat(QImage::Format_ARGB32);
         image = image.copy((image.width() - 48) / 2, (image.height() - 48) / 2, 48, 48);
         listItem->setIcon(0, QIcon(QPixmap::fromImage(image)));
     }

@@ -101,7 +101,7 @@ KoRecentDocumentsPane::KoRecentDocumentsPane(QWidget* parent, const KComponentDa
                 fileList.prepend(fileItem);
                 //center all icons in 64x64 area
                 QImage icon = fileItem.pixmap(64).toImage();
-                icon.convertToFormat(QImage::Format_ARGB32);
+                icon = icon.convertToFormat(QImage::Format_ARGB32);
                 icon = icon.copy((icon.width() - 64) / 2, (icon.height() - 64) / 2, 64, 64);
                 KoFileListItem* item = new KoFileListItem(QPixmap::fromImage(icon), name);
                 item->setEditable(false);
@@ -203,7 +203,7 @@ void KoRecentDocumentsPane::updatePreview(const KFileItem& fileItem, const QPixm
             item->setData(preview, Qt::UserRole);
             QImage icon = preview.toImage();
             icon = icon.scaled(64, 64, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-            icon.convertToFormat(QImage::Format_ARGB32);
+            icon = icon.convertToFormat(QImage::Format_ARGB32);
             icon = icon.copy((icon.width() - 64) / 2, (icon.height() - 64) / 2, 64, 64);
             item->setData(QPixmap::fromImage(icon), Qt::DecorationRole);
 

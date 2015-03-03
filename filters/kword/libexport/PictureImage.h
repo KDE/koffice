@@ -99,9 +99,9 @@ public:
     // TODO: Rename to setAlphaChannel() ?
     virtual void setAlphaBuffer(bool enable) {
         if (enable) {
-            m_originalImage.convertToFormat(QImage::Format_ARGB32);
+            m_originalImage = m_originalImage.convertToFormat(QImage::Format_ARGB32);
         } else {
-            m_originalImage.convertToFormat(QImage::Format_RGB32);
+            m_originalImage = m_originalImage.convertToFormat(QImage::Format_RGB32);
         }
     }
 
