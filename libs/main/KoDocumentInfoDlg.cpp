@@ -41,8 +41,10 @@
 
 
 #ifdef KDEPIMLIBS_FOUND
-#include <KDE/KABC/Addressee>
-#include <KDE/KABC/StdAddressBook>
+//#include <KDE/KABC/Addressee>
+//#include <KDE/KABC/StdAddressBook>
+#include <KDE/KPIMIdentities/Identity>
+#include <KDE/KPIMIdentities/IdentityManager>
 #endif
 
 #include <KoGlobal.h>
@@ -399,7 +401,54 @@ void KoDocumentInfoDlg::slotDeleteAuthorInfo()
 
 void KoDocumentInfoDlg::slotLoadFromKABC()
 {
+    QVariant value;
 #ifdef KDEPIMLIBS_FOUND
+    KPIMIdentities::IdentityManager manager(true, this);
+    KPIMIdentities::Identity this_user = manager.defaultIdentity();
+    d->m_authorUi->leFullName->setText(this_user.fullName());
+    value = this_user.property(QLatin1String("Title"));
+    if (value.isValid()) {
+       d->m_authorUi->leTitle->setText(qvariant_cast<QString>(value));
+    }
+    d->m_authorUi->leCompany->setText(this_user.organization());
+    d->m_authorUi->leEmail->setText(this_user.primaryEmailAddress());
+
+    value = this_user.property(QLatin1String("Home Phone"));
+    if (value.isValid()) {
+       d->m_authorUi->lePhoneHome->setText(qvariant_cast<QString>(value));
+    }
+
+    value = this_user.property(QLatin1String("Work Phone"));
+    if (value.isValid()) {
+       d->m_authorUi->lePhoneWork->setText(qvariant_cast<QString>(value));
+    }
+
+    value = this_user.property(QLatin1String("Fax"));
+    if (value.isValid()) {
+       d->m_authorUi->leFax->setText(qvariant_cast<QString>(value));
+    }
+
+    value = this_user.property(QLatin1String("Country"));
+    if (value.isValid()) {
+       d->m_authorUi->leCountry->setText(qvariant_cast<QString>(value));
+    }
+
+    value = this_user.property(QLatin1String("Postal Code"));
+    if (value.isValid()) {
+       d->m_authorUi->lePostal->setText(qvariant_cast<QString>(value));
+    }
+
+    value = this_user.property(QLatin1String("City"));
+    if (value.isValid()) {
+       d->m_authorUi->leCity->setText(qvariant_cast<QString>(value));
+    }
+
+    value = this_user.property(QLatin1String("Street"));
+    if (value.isValid()) {
+       d->m_authorUi->leStreet->setText(qvariant_cast<QString>(value));
+    }
+    
+/*
     KABC::StdAddressBook *ab = static_cast<KABC::StdAddressBook*>
                                (KABC::StdAddressBook::self());
     if (!ab)
@@ -432,6 +481,7 @@ void KoDocumentInfoDlg::slotLoadFromKABC()
     d->m_authorUi->lePostal->setText(a.postalCode());
     d->m_authorUi->leCity->setText(a.locality());
     d->m_authorUi->leStreet->setText(a.street());
+*/
 #endif
 }
 

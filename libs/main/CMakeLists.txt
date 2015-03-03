@@ -135,7 +135,8 @@ kde4_add_library(komain SHARED ${komain_LIB_SRCS})
 
 target_link_libraries(komain ${extra_libs}
     ${KDE4_KPARTS_LIBS}
-    ${KDE4_KABC_LIBS}
+#    ${KDE4_KABC_LIBS}
+    ${KDE4_KPIMIDENTITIES_LIBS}
     ${KDE4_KFILE_LIBRARY}
     ${KDE4_KCAL_LIBS}
     ${KDE4_THREADWEAVER_LIBRARIES}

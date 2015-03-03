@@ -30,11 +30,13 @@
 
 // contacts
 #ifdef KDEPIMLIBS_FOUND
-#include <kabc/addressee.h>
-#include <kabc/stdaddressbook.h>
-#include <kabc/addressbook.h>
-#include <kabc/phonenumber.h>
-#include <kabc/vcardconverter.h>
+//#include <kabc/addressee.h>
+//#include <kabc/stdaddressbook.h>
+//#include <kabc/addressbook.h>
+//#include <kabc/phonenumber.h>
+//#include <kabc/vcardconverter.h>
+#include <KDE/KPIMIdentities/Identity>
+#include <KDE/KPIMIdentities/IdentityManager>
 #endif
 
 #include "ui_KoRdfFoaFEditWidget.h"
@@ -56,8 +58,10 @@ public:
     QString m_phone;
     Ui::KoRdfFoaFEditWidget editWidget;
 #ifdef KDEPIMLIBS_FOUND
-    KABC::Addressee toKABC() const;
-    void fromKABC(KABC::Addressee addr);
+    //KABC::Addressee toKABC() const;
+    //void fromKABC(KABC::Addressee addr);
+    KPIMIdentities::Identity toKPIM() const;
+    void fromKPIM(KPIMIdentities::Identity id);
 #endif
 
     KoRdfFoaFPrivate(KoDocumentRdf *rdf)
@@ -196,6 +200,34 @@ QString KoRdfFoaF::className() const
 }
 
 #ifdef KDEPIMLIBS_FOUND
+KPIMIdentities::Identity KoRdfFoaFPrivate::toKPIM() const
+{
+    KPIMIdentities::Identity id;
+    id.setFullName(m_name);
+    id.setProperty(QLatin1String("NickName"), m_nick);
+    id.setProperty(QLatin1String("Work Phone"), m_phone);
+    return id;
+}
+
+void KoRdfFoaFPrivate::fromKPIM(KPIMIdentities::Identity id)
+{
+    QVariant prop;
+    m_name = id.fullName();
+    prop = id.property("NickName");
+    if (prop.isValid()) {
+        m_nick = qvariant_cast<QString>(prop);
+    }
+    prop = id.property("Work Phone");
+    if (prop.isValid()) {
+        m_phone = qvariant_cast<QString>(prop);
+    }
+    prop = id.property("Home Page");
+    if (prop.isValid()) {
+        m_homePage = qvariant_cast<QString>(prop);
+    }
+}
+
+/*
 KABC::Addressee KoRdfFoaFPrivate::toKABC() const
 {
     KABC::Addressee addr;
@@ -214,6 +246,7 @@ void KoRdfFoaFPrivate::fromKABC(KABC::Addressee addr)
     m_phone = ph.number();
     m_homePage = addr.url().url();
 }
+*/
 #endif
 
 void KoRdfFoaF::saveToKABC()
@@ -221,6 +254,7 @@ void KoRdfFoaF::saveToKABC()
     Q_D (KoRdfFoaF);
     kDebug(30015) << "saving name:" << d->m_name;
 #ifdef KDEPIMLIBS_FOUND
+/*
     KABC::StdAddressBook *ab = static_cast<KABC::StdAddressBook*>
                                (KABC::StdAddressBook::self());
     if (!ab) {
@@ -231,6 +265,11 @@ void KoRdfFoaF::saveToKABC()
     ab->insertAddressee(addr);
     KABC::AddressBook* pab = ab;
     pab->save(ticket);
+*/
+    KPIMIdentities::IdentityManager manager(false, this);
+    KPIMIdentities::Identity& id = manager.newFromScratch(d->m_name);
+    id = d->toKPIM();
+    manager.commit();
 #endif
 }
 
@@ -252,6 +291,7 @@ void KoRdfFoaF::exportToFile(const QString &fileNameConst) const
             return;
         }
     }
+/*
     KABC::Addressee addr = d->toKABC();
     KABC::VCardConverter converter;
     QByteArray ba = converter.createVCard(addr);
@@ -260,6 +300,14 @@ void KoRdfFoaF::exportToFile(const QString &fileNameConst) const
     file.write(ba);
     file.close();
     kDebug(30015) << "wrote " << ba.size() << " bytes to export file:" << fileName;
+*/
+    KPIMIdentities::Identity this_user = d->toKPIM();
+    if (QFile::copy(this_user.vCardFile(), fileName) == false) {
+        kDebug(30015) << "failed to copy vCard."; 
+    }
+    else {
+        kDebug(30015) << "Copied vCard to " << fileName;
+    }
 #else
     kDebug(30015) << "KDEPIM support not built!";
 #endif
@@ -274,12 +322,15 @@ void KoRdfFoaF::importFromData(const QByteArray &ba, KoDocumentRdf *_rdf, KCanva
     if (_rdf) {
         d->m_rdf = _rdf;
     }
+/*
+    // Really no better way to handle this now that KABC::Addressee has been deprecated.
     KABC::VCardConverter converter;
     KABC::Addressee addr = converter.parseVCard(ba);
     d->fromKABC(addr);
     kDebug(30015) << "adding name:" << d->m_name;
     kDebug(30015) << "uri:" << d->m_uri;
     importFromDataComplete(ba, documentRdf(), host);
+*/
 #else
     kDebug(30015) << "KDEPIM support not built!";
 #endif
