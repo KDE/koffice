@@ -171,7 +171,7 @@ void KoRdfSemanticItemViewSite::select(KCanvasBase *host)
     KoTextEditor *editor = KoDocumentRdf::ensureTextTool(host);
     KResourceManager *provider = host->resourceManager();
     KoDocumentRdf *rdf = d->m_semItem->documentRdf();
-    QPair<int, int> p = p = rdf->findExtent(d->m_xmlid);
+    QPair<int, int> p = rdf->findExtent(d->m_xmlid);
     int startpos = p.first;
     int endpos = p.second + 1;
     if (!endpos) {
