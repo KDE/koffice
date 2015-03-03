@@ -536,7 +536,7 @@ static void showEntry(KLineEdit* edit, QLabel* label,
     label->setText(desc->param(param).helpText() + ':');
     label->show();
     ParameterType elementType = desc->param(param).type();
-    KFloatValidator *validate = 0;
+    KDoubleValidator *validate = 0;
     switch (elementType) {
     case KCells_String:
     case KCells_Boolean:
@@ -544,7 +544,7 @@ static void showEntry(KLineEdit* edit, QLabel* label,
         edit->setValidator(0);
         break;
     case KCells_Float:
-        validate = new KFloatValidator(edit);
+        validate = new KDoubleValidator(edit);
         validate->setAcceptLocalizedNumbers(true);
         edit->setValidator(validate);
         edit->setText("0");
