@@ -312,7 +312,7 @@ bool WMLHandler::characters(const QString& ch)
 bool WMLHandler::flushParagraph()
 {
     // calc length of each format tag
-    for (unsigned i = 0; i < m_state.formatList.count(); i++) {
+    for (int i = 0; i < m_state.formatList.count(); i++) {
         int nextpos;
         WMLFormat& format = m_state.formatList[i];
         if (i < m_state.formatList.count() - 1) {
