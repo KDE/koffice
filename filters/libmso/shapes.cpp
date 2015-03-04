@@ -1500,11 +1500,11 @@ void ODrawToOdf::setEnhancedGeometry(const MSO::OfficeArtSpContainer& o, Writer&
         for (int i = 0, offset = 0; i < _v.nElems; i++, offset += step) {
             // x coordinate of this point
             xArray.replace(0,step/2,_v.data.mid(offset, step/2));
-            x = *(int*)xArray.data();
+            x = *reinterpret_cast<int*>(xArray.data());
 
             // y coordinate of this point
             yArray.replace(0,step/2,_v.data.mid(offset + step/2, step/2));
-            y = *(int*)yArray.data();
+            y = *reinterpret_cast<int*>(yArray.data());
 
             verticesPoints.append(QPoint(x, y));
 
@@ -1531,7 +1531,7 @@ void ODrawToOdf::setEnhancedGeometry(const MSO::OfficeArtSpContainer& o, Writer&
         QString enhancedPath;
         for (int i = 0; i < _c.nElems; i++) {
 
-            switch ((((*(ushort *)(_c.data.data()+i*2)) >> 13) & 0x7)) { //MSOPATHINFO.type
+            switch ((((*reinterpret_cast<ushort *>(_c.data.data()+i*2)) >> 13) & 0x7)) { //MSOPATHINFO.type
             case 0: { //msopathLineTo
                 enhancedPath = enhancedPath + "L " + QString::number(verticesPoints[verticesIndex].x()) + ' '
                                + QString::number(verticesPoints[verticesIndex].y()) + ' ';

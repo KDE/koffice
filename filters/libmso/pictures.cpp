@@ -165,7 +165,7 @@ saveDecompressedPicture(PictureReference& ref, const T* a, KOdfStore* store)
         buff.prepend((char*) tmp, 4);
         buff = qUncompress(buff);
 
-        if (buff.size() != cbSize) {
+        if (buff.size() != static_cast<int>(cbSize)) {
             qDebug() << "Warning: uncompressed size of the metafile differs";
         }
     }
