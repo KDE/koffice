@@ -8982,7 +8982,7 @@ void MSO::parsePrm(LEInputStream& in, Prm& _s) {
     _m = in.setMark();
     bool _choice = in.readbit();
     in.rewind(_m);
-    if ((_choice == false)) {
+    if (_choice == false) {
         _s.prm = Prm::choice1129181155(new Prm0(&_s));
         parsePrm0(in, *(Prm0*)_s.prm.data());
     } else {
@@ -10750,10 +10750,10 @@ void MSO::parseOfficeArtFOPTEChoice(LEInputStream& in, OfficeArtFOPTEChoice& _s)
     } else if ((_choice.opid == 0x008A)&&(_choice.fBid == false)&&(_choice.fComplex == false)) {
         _s.anon = OfficeArtFOPTEChoice::choice677423557(new HspNext(&_s));
         parseHspNext(in, *(HspNext*)_s.anon.data());
-    } else if ((_choice.opid == 0x0104)) {
+    } else if (_choice.opid == 0x0104) {
         _s.anon = OfficeArtFOPTEChoice::choice677423557(new Pib(&_s));
         parsePib(in, *(Pib*)_s.anon.data());
-    } else if ((_choice.opid == 0x0105)) {
+    } else if (_choice.opid == 0x0105) {
         _s.anon = OfficeArtFOPTEChoice::choice677423557(new PibName(&_s));
         parsePibName(in, *(PibName*)_s.anon.data());
     } else if ((_choice.opid == 0x0144)&&(_choice.fBid == false)&&(_choice.fComplex == false)) {
@@ -10804,10 +10804,10 @@ void MSO::parseOfficeArtFOPTEChoice(LEInputStream& in, OfficeArtFOPTEChoice& _s)
     } else if ((_choice.opid == 0x0185)&&(_choice.fBid == false)&&(_choice.fComplex == false)) {
         _s.anon = OfficeArtFOPTEChoice::choice677423557(new FillCrMod(&_s));
         parseFillCrMod(in, *(FillCrMod*)_s.anon.data());
-    } else if ((_choice.opid == 0x0186)) {
+    } else if (_choice.opid == 0x0186) {
         _s.anon = OfficeArtFOPTEChoice::choice677423557(new FillBlip(&_s));
         parseFillBlip(in, *(FillBlip*)_s.anon.data());
-    } else if ((_choice.opid == 0x0187)) {
+    } else if (_choice.opid == 0x0187) {
         _s.anon = OfficeArtFOPTEChoice::choice677423557(new FillBlipName(&_s));
         parseFillBlipName(in, *(FillBlipName*)_s.anon.data());
     } else if ((_choice.opid == 0x0188)&&(_choice.fBid == false)&&(_choice.fComplex == false)) {
@@ -10855,7 +10855,7 @@ void MSO::parseOfficeArtFOPTEChoice(LEInputStream& in, OfficeArtFOPTEChoice& _s)
     } else if ((_choice.opid == 0x0196)&&(_choice.fBid == false)&&(_choice.fComplex == false)) {
         _s.anon = OfficeArtFOPTEChoice::choice677423557(new FillShadePreset(&_s));
         parseFillShadePreset(in, *(FillShadePreset*)_s.anon.data());
-    } else if ((_choice.opid == 0x0197)) {
+    } else if (_choice.opid == 0x0197) {
         _s.anon = OfficeArtFOPTEChoice::choice677423557(new FillShadeColors(&_s));
         parseFillShadeColors(in, *(FillShadeColors*)_s.anon.data());
     } else if ((_choice.opid == 0x0198)&&(_choice.fBid == false)&&(_choice.fComplex == false)) {
@@ -10885,10 +10885,10 @@ void MSO::parseOfficeArtFOPTEChoice(LEInputStream& in, OfficeArtFOPTEChoice& _s)
     } else if ((_choice.opid == 0x01C1)&&(_choice.fBid == false)&&(_choice.fComplex == false)) {
         _s.anon = OfficeArtFOPTEChoice::choice677423557(new LineOpacity(&_s));
         parseLineOpacity(in, *(LineOpacity*)_s.anon.data());
-    } else if ((_choice.opid == 0x01C2)) {
+    } else if (_choice.opid == 0x01C2) {
         _s.anon = OfficeArtFOPTEChoice::choice677423557(new LineBackColor(&_s));
         parseLineBackColor(in, *(LineBackColor*)_s.anon.data());
-    } else if ((_choice.opid == 0x01C5)) {
+    } else if (_choice.opid == 0x01C5) {
         _s.anon = OfficeArtFOPTEChoice::choice677423557(new LineFillBlip(&_s));
         parseLineFillBlip(in, *(LineFillBlip*)_s.anon.data());
     } else if ((_choice.opid == 0x01CB)&&(_choice.fBid == false)&&(_choice.fComplex == false)) {
@@ -10900,7 +10900,7 @@ void MSO::parseOfficeArtFOPTEChoice(LEInputStream& in, OfficeArtFOPTEChoice& _s)
     } else if ((_choice.opid == 0x01CE)&&(_choice.fBid == false)&&(_choice.fComplex == false)) {
         _s.anon = OfficeArtFOPTEChoice::choice677423557(new LineDashing(&_s));
         parseLineDashing(in, *(LineDashing*)_s.anon.data());
-    } else if ((_choice.opid == 0x0403)) {
+    } else if (_choice.opid == 0x0403) {
         _s.anon = OfficeArtFOPTEChoice::choice677423557(new WzFillId(&_s));
         parseWzFillId(in, *(WzFillId*)_s.anon.data());
     } else if ((_choice.opid == 0x01FF)&&(_choice.fBid == false)&&(_choice.fComplex == false)) {
@@ -11002,7 +11002,7 @@ void MSO::parseOfficeArtFOPTEChoice(LEInputStream& in, OfficeArtFOPTEChoice& _s)
     } else if ((_choice.opid == 0x0392)&&(_choice.fBid == false)&&(_choice.fComplex == false)) {
         _s.anon = OfficeArtFOPTEChoice::choice677423557(new PosRelV(&_s));
         parsePosRelV(in, *(PosRelV*)_s.anon.data());
-    } else if ((_choice.opid == 0x0383)) {
+    } else if (_choice.opid == 0x0383) {
         _s.anon = OfficeArtFOPTEChoice::choice677423557(new PWrapPolygonVertices(&_s));
         parsePWrapPolygonVertices(in, *(PWrapPolygonVertices*)_s.anon.data());
     } else if ((_choice.opid == 0x0384)&&(_choice.fBid == false)&&(_choice.fComplex == false)) {
@@ -11020,10 +11020,10 @@ void MSO::parseOfficeArtFOPTEChoice(LEInputStream& in, OfficeArtFOPTEChoice& _s)
     } else if ((_choice.opid == 0x03bf)&&(_choice.fBid == false)&&(_choice.fComplex == false)) {
         _s.anon = OfficeArtFOPTEChoice::choice677423557(new GroupShapeBooleanProperties(&_s));
         parseGroupShapeBooleanProperties(in, *(GroupShapeBooleanProperties*)_s.anon.data());
-    } else if ((_choice.opid == 0x0145)) {
+    } else if (_choice.opid == 0x0145) {
         _s.anon = OfficeArtFOPTEChoice::choice677423557(new PVertices(&_s));
         parsePVertices(in, *(PVertices*)_s.anon.data());
-    } else if ((_choice.opid == 0x0146)) {
+    } else if (_choice.opid == 0x0146) {
         _s.anon = OfficeArtFOPTEChoice::choice677423557(new PSegmentInfo(&_s));
         parsePSegmentInfo(in, *(PSegmentInfo*)_s.anon.data());
     } else {
@@ -11624,7 +11624,7 @@ void MSO::parseTextContainerInteractiveInfo(LEInputStream& in, TextContainerInte
     RecordHeader _choice(&_s);
     parseRecordHeader(in, _choice);
     in.rewind(_m);
-    if ((_choice.recInstance == 0)) {
+    if (_choice.recInstance == 0) {
         _s.interactive = TextContainerInteractiveInfo::choice3752530176(new MouseClickTextInfo(&_s));
         parseMouseClickTextInfo(in, *(MouseClickTextInfo*)_s.interactive.data());
     } else {
@@ -11831,7 +11831,7 @@ void MSO::parseOfficeArtClientData(LEInputStream& in, OfficeArtClientData& _s) {
     if ((_choice.recVer == 0)&&(_choice.recLen == 4)) {
         _s.anon = OfficeArtClientData::choice2520977885(new DocOfficeArtClientData(&_s));
         parseDocOfficeArtClientData(in, *(DocOfficeArtClientData*)_s.anon.data());
-    } else if ((_choice.recVer == 0xF)) {
+    } else if (_choice.recVer == 0xF) {
         _s.anon = OfficeArtClientData::choice2520977885(new PptOfficeArtClientData(&_s));
         parsePptOfficeArtClientData(in, *(PptOfficeArtClientData*)_s.anon.data());
     } else {
