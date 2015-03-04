@@ -1779,7 +1779,7 @@ KoFilter::ConversionStatus MSOOXML_CURRENT_CLASS::read_DrawingML_rPr()
 
     TRY_READ_ATTR_WITHOUT_NS(spc)
     if (!spc.isEmpty()) {
-        int spcInt;
+        int spcInt=0;
         STRING_TO_INT(spc, spcInt, "rPr@spc")
         m_currentTextStyleProperties->setFontLetterSpacing(qreal(spcInt) / 100.0);
     }
@@ -1790,7 +1790,7 @@ KoFilter::ConversionStatus MSOOXML_CURRENT_CLASS::read_DrawingML_rPr()
 
     TRY_READ_ATTR_WITHOUT_NS(sz)
     if (!sz.isEmpty()) {
-        int szInt;
+        int szInt=0;
         STRING_TO_INT(sz, szInt, "rPr@sz")
         m_currentTextStyleProperties->setFontPointSize(qreal(szInt) / 100.0);
     }
@@ -1808,7 +1808,7 @@ KoFilter::ConversionStatus MSOOXML_CURRENT_CLASS::read_DrawingML_rPr()
     // from
     TRY_READ_ATTR_WITHOUT_NS(baseline)
     if (!baseline.isEmpty()) {
-        int baselineInt;
+        int baselineInt=0;
         STRING_TO_INT(baseline, baselineInt, "rPr@baseline")
         if (baselineInt > 0)
             m_currentTextStyleProperties->setVerticalAlignment( QTextCharFormat::AlignSuperScript );
@@ -2870,7 +2870,7 @@ KoFilter::ConversionStatus MSOOXML_CURRENT_CLASS::read_latin()
     }
     TRY_READ_ATTR_WITHOUT_NS(pitchFamily)
     if (!pitchFamily.isEmpty()) {
-        int pitchFamilyInt;
+        int pitchFamilyInt=1;
         STRING_TO_INT(pitchFamily, pitchFamilyInt, "latin@pitchFamily")
         QFont::StyleHint h = QFont::AnyStyle;
         const int hv = pitchFamilyInt % 0x10;
@@ -4875,7 +4875,7 @@ KoFilter::ConversionStatus MSOOXML_CURRENT_CLASS::read_defRPr()
 
     TRY_READ_ATTR_WITHOUT_NS(sz)
     if (!sz.isEmpty()) {
-        int szInt;
+        int szInt = 0;
         STRING_TO_INT(sz, szInt, "defRPr@sz")
         m_currentTextStyleProperties->setFontPointSize(qreal(szInt) / 100.0);
     }
@@ -4896,7 +4896,7 @@ KoFilter::ConversionStatus MSOOXML_CURRENT_CLASS::read_defRPr()
 
     TRY_READ_ATTR_WITHOUT_NS(spc)
     if (!spc.isEmpty()) {
-        int spcInt;
+        int spcInt=0;
         STRING_TO_INT(spc, spcInt, "rPr@spc")
         m_currentTextStyleProperties->setFontLetterSpacing(qreal(spcInt) / 100.0);
     }
@@ -4913,7 +4913,7 @@ KoFilter::ConversionStatus MSOOXML_CURRENT_CLASS::read_defRPr()
     // from
     TRY_READ_ATTR_WITHOUT_NS(baseline)
     if (!baseline.isEmpty()) {
-        int baselineInt;
+        int baselineInt=0;
         STRING_TO_INT(baseline, baselineInt, "rPr@baseline")
         if (baselineInt > 0)
             m_currentTextStyleProperties->setVerticalAlignment( QTextCharFormat::AlignSuperScript );
