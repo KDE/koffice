@@ -2886,6 +2886,7 @@ KoFilter::ConversionStatus MSOOXML_CURRENT_CLASS::read_latin()
             //TODO
             break;
         case 4: //Script
+            h = QFont::Cursive;
             //TODO
             break;
         case 5: //Decorative
