@@ -52,7 +52,7 @@ class Style;
 class Parser;
 class FunctorBase;
 namespace Word97 {
-class PAP;
+struct PAP;
 }
 }
 

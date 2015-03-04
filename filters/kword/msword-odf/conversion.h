@@ -32,10 +32,10 @@ class QDomElement;
 namespace wvWare
 {
 namespace Word97 {
-class LSPD;
-class BRC;
+struct LSPD;
+struct BRC;
 }
-class FLD;
+struct FLD;
 }
 
 // Static methods for simple MSWord->KWord conversions
