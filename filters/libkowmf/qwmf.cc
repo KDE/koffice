@@ -1079,7 +1079,7 @@ unsigned int QWinMetaFile::toDWord(short* parm)
     unsigned int l;
 
 #if !defined( WORDS_BIGENDIAN )
-    l = *(unsigned int*)(parm);
+    l = *reinterpret_cast<unsigned int*>(parm);
 #else
     char *bytes;
     char swap[ 4 ];
@@ -1088,7 +1088,7 @@ unsigned int QWinMetaFile::toDWord(short* parm)
     swap[ 1 ] = bytes[ 3 ];
     swap[ 2 ] = bytes[ 0 ];
     swap[ 3 ] = bytes[ 1 ];
-    l = *(unsigned int*)(swap);
+    l = *reinterpret_cast<unsigned int*>(swap);
 #endif
 
     return l;
@@ -1235,8 +1235,7 @@ bool QWinMetaFile::dibToBmp(QImage& bmp, const char* dib, long size)
     pattern.insert(14, QByteArray::fromRawData(dib, size));
 
     // add BMP header
-    BMPFILEHEADER* bmpHeader;
-    bmpHeader = (BMPFILEHEADER*)((const char*)pattern);
+    BMPFILEHEADER* bmpHeader = reinterpret_cast<BMPFILEHEADER*>(pattern.data());
     bmpHeader->bmType = 0x4D42;
     bmpHeader->bmSize = sizeBmp;
 

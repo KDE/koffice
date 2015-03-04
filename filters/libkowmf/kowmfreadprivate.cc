@@ -1629,7 +1629,7 @@ bool KoWmfReadPrivate::dibToBmp(QImage& bmp, QDataStream& stream, quint32 size)
 
     // add BMP header
     BMPFILEHEADER* bmpHeader;
-    bmpHeader = (BMPFILEHEADER*)(pattern.data());
+    bmpHeader = reinterpret_cast<BMPFILEHEADER*>(pattern.data());
     bmpHeader->bmType = 0x4D42;
     bmpHeader->bmSize = sizeBmp;
 
